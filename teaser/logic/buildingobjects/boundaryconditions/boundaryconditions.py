@@ -11,7 +11,7 @@ import teaser.data.input.boundcond_input as boundcond_input
 
 
 class BoundaryConditions(UseConditions):
-    """Extended Use Conditions from DIN 18599 and SIA2024
+    """Extended Use Conditions from DIN 18599 and SIA2024.
 
     Class that contains the boundary conditions of use for non-residential
     buildings defined in DIN V 18599-10 (
@@ -104,7 +104,8 @@ class BoundaryConditions(UseConditions):
     ROOM CLIMATE
 
     set_temp_heat: float [K]
-        internal set temperature heating. This value is taken from DIN 18599-10.
+        internal set temperature heating. This value is taken from DIN
+        18599-10.
         AixLib: Used in simple Heater for set temperature
     set_temp_cool: float [K}
         internal set temperature cooling
@@ -233,12 +234,15 @@ class BoundaryConditions(UseConditions):
         AixLib: Used on Zone level for ventilation.
         Default values are
         aligned to :cite:`DINV1859910`.
+    shading_max_irr : float [W/m2]
+        Threshold when sunblind becomes active for the whole zone
+    shading_g_total : float
+        Factor representing how much of the solar irradiation goes through
+        the sunblind
     """
 
     def __init__(self, parent=None):
-        """Constructor UseConditions18599
-        """
-
+        """Constructor UseConditions18599."""
         super(BoundaryConditions, self).__init__(parent)
 
         self.usage = "Single office"
@@ -305,10 +309,13 @@ class BoundaryConditions(UseConditions):
         self.max_summer_ach = [1.0, 273.15 + 10, 273.15 + 17]
         self.winter_reduction = [0.5, 273.15, 273.15 + 10]
 
+        self.shading_max_irr = 100
+        self.shading_g_total = 1.0
+
     def load_use_conditions(self,
                             zone_usage,
                             data_class=None):
-        """Load typical use conditions from XML data base
+        """Load typical use conditions from XML data base.
 
         Loads Use conditions specified in the XML.
 
@@ -324,7 +331,6 @@ class BoundaryConditions(UseConditions):
             leads to an automatic setter to self.parent.parent.parent.data (
             which is DataClass in current project)
         """
-
         if data_class is None:
             data_class = self.parent.parent.parent.data
         else:
@@ -355,7 +361,6 @@ class BoundaryConditions(UseConditions):
             self.parent.parent.parent.data (which is data_class in current
             project)
         """
-
         if data_class is None:
             data_class = self.parent.parent.parent.data
         else:
