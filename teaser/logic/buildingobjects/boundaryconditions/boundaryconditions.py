@@ -239,6 +239,18 @@ class BoundaryConditions(UseConditions):
     shading_g_total : float
         Factor representing how much of the solar irradiation goes through
         the sunblind
+
+    v_flow_air_curtain : float [m3/s]
+        volume flow of the air curtain
+    delta_t_air_curtain : float [K]
+        temperature difference over the air curtain
+    eta_air_curtain : float
+        efficiency of the air curtain
+    t_threshold_air_curtain : float [K]
+        threshold of outer temperature when air curtain becomes active
+    air_curtain_power : float [W]
+        thermal power of air curtain
+
     """
 
     def __init__(self, parent=None):
@@ -311,6 +323,12 @@ class BoundaryConditions(UseConditions):
 
         self.shading_max_irr = 100
         self.shading_g_total = 1.0
+
+        self.v_flow_air_curtain = 0.0
+        self.delta_t_air_curtain = 0.0
+        self.eta_air_curtain = 0.0
+        self.t_threshold_air_curtain = 0.0
+        self.air_curtain_power = 0.0
 
     def load_use_conditions(self,
                             zone_usage,
