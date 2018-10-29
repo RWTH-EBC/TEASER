@@ -126,7 +126,7 @@
                 0.00 0.00 0.00 0.00 0.00
             </usecond:profile_machines>
             <usecond:lighting_power>12.5</usecond:lighting_power>
-            <usecond:profile_lighting>0.05 0.05 0.05 0.05 0.05 0.10 0.10 0.30 0.90 0.90 0.90 0.90 0.80 0.90 0.90 0.90
+                        <usecond:profile_lighting>0.05 0.05 0.05 0.05 0.05 0.10 0.10 0.30 0.90 0.90 0.90 0.90 0.80 0.90 0.90 0.90
                 0.90 0.50 0.30 0.30 0.20 0.20 0.10 0.05 0.05 0.05 0.05 0.05 0.05 0.10 0.10 0.30 0.90 0.90 0.90 0.90 0.80
                 0.90 0.90 0.90 0.90 0.50 0.30 0.30 0.20 0.20 0.10 0.05 0.05 0.05 0.05 0.05 0.05 0.10 0.10 0.30 0.90 0.90
                 0.90 0.90 0.80 0.90 0.90 0.90 0.90 0.50 0.30 0.30 0.20 0.20 0.10 0.05 0.05 0.05 0.05 0.05 0.05 0.10 0.10
@@ -358,7 +358,7 @@
             <usecond:daily_operation_heating>14</usecond:daily_operation_heating>
         </usecond:UsageOperationTime>
         <usecond:Lighting>
-            <usecond:maintained_illuminance>300.0</usecond:maintained_illuminance>
+            <usecond:maintained_illuminance>750.0</usecond:maintained_illuminance>
             <usecond:usage_level_height>0.8</usecond:usage_level_height>
             <usecond:red_factor_visual>0.93</usecond:red_factor_visual>
             <usecond:rel_absence>0.0</usecond:rel_absence>
@@ -443,7 +443,7 @@
             <usecond:daily_operation_heating>14</usecond:daily_operation_heating>
         </usecond:UsageOperationTime>
         <usecond:Lighting>
-            <usecond:maintained_illuminance>300.0</usecond:maintained_illuminance>
+            <usecond:maintained_illuminance>750.0</usecond:maintained_illuminance>
             <usecond:usage_level_height>0.8</usecond:usage_level_height>
             <usecond:red_factor_visual>0.93</usecond:red_factor_visual>
             <usecond:rel_absence>0.0</usecond:rel_absence>
@@ -976,7 +976,7 @@
             <usecond:daily_operation_heating>15</usecond:daily_operation_heating>
         </usecond:UsageOperationTime>
         <usecond:Lighting>
-            <usecond:maintained_illuminance>300.0</usecond:maintained_illuminance>
+            <usecond:maintained_illuminance>500.0</usecond:maintained_illuminance>
             <usecond:usage_level_height>0.8</usecond:usage_level_height>
             <usecond:red_factor_visual>1.0</usecond:red_factor_visual>
             <usecond:rel_absence>0.5</usecond:rel_absence>
