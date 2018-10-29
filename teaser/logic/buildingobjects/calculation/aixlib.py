@@ -78,26 +78,26 @@ class AixLib(object):
         for zone in self.parent.thermal_zones:
             if type(zone.model_attr).__name__ == "OneElement":
                 surf_area_temp += (
-                        zone.model_attr.area_ow +
-                        zone.model_attr.area_win)
+                    zone.model_attr.area_ow +
+                    zone.model_attr.area_win)
             elif type(zone.model_attr).__name__ == "TwoElement":
                 surf_area_temp += (
-                        zone.model_attr.area_ow +
-                        zone.model_attr.area_iw +
-                        zone.model_attr.area_win)
+                    zone.model_attr.area_ow +
+                    zone.model_attr.area_iw +
+                    zone.model_attr.area_win)
             elif type(zone.model_attr).__name__ == "ThreeElement":
                 surf_area_temp += (
-                        zone.model_attr.area_ow +
-                        zone.model_attr.area_iw +
-                        zone.model_attr.area_gf +
-                        zone.model_attr.area_win)
+                    zone.model_attr.area_ow +
+                    zone.model_attr.area_iw +
+                    zone.model_attr.area_gf +
+                    zone.model_attr.area_win)
             elif type(zone.model_attr).__name__ == "FourElement":
                 surf_area_temp += (
-                        zone.model_attr.area_ow +
-                        zone.model_attr.area_iw +
-                        zone.model_attr.area_gf +
-                        zone.model_attr.area_rt +
-                        zone.model_attr.area_win)
+                    zone.model_attr.area_ow +
+                    zone.model_attr.area_iw +
+                    zone.model_attr.area_gf +
+                    zone.model_attr.area_rt +
+                    zone.model_attr.area_win)
 
         self.total_surface_area = surf_area_temp
 
@@ -204,7 +204,7 @@ class AixLib(object):
                                 zone_count.use_conditions.set_temp_heat)
                         elif time_line[i][0] == \
                                 (zone_count.use_conditions.heating_time[
-                                     1] + 1) * \
+                                    1] + 1) * \
                                 3600:
                             time_line[i].append(
                                 zone_count.use_conditions.set_temp_heat)
@@ -213,7 +213,7 @@ class AixLib(object):
                                 zone_count.use_conditions.temp_set_back)
                         elif time_line[i][0] > \
                                 (zone_count.use_conditions.heating_time[
-                                     1] + 1) * \
+                                    1] + 1) * \
                                 3600:
                             time_line[i].append(
                                 zone_count.use_conditions.set_temp_heat -
@@ -291,7 +291,7 @@ class AixLib(object):
                                 zone_count.use_conditions.set_temp_cool)
                         elif time_line[i][0] == \
                                 (zone_count.use_conditions.cooling_time[
-                                     1] + 1) * \
+                                    1] + 1) * \
                                 3600:
                             time_line[i].append(
                                 zone_count.use_conditions.set_temp_cool)
@@ -300,7 +300,7 @@ class AixLib(object):
                                 zone_count.use_conditions.temp_set_back_cool)
                         elif time_line[i][0] > \
                                 (zone_count.use_conditions.cooling_time[
-                                     1] + 1) * \
+                                    1] + 1) * \
                                 3600:
                             time_line[i].append(
                                 zone_count.use_conditions.set_temp_cool +
@@ -459,8 +459,8 @@ class AixLib(object):
                 zone_count.use_conditions.profile_machines = \
                     zone_count.use_conditions.profile_machines * 7
             if time_line is None:
-                duration = len(zone_count.use_conditions.profile_persons) * \
-                           3600
+                duration = len(zone_count.use_conditions.profile_persons) *\
+                    3600
                 time_line = self.create_profile(duration_profile=duration)
 
             ass_error_1 = "time line and input have to have the same length"
