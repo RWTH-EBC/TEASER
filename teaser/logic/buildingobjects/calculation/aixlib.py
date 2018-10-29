@@ -448,7 +448,6 @@ class AixLib(object):
             # check if the given profile is only daily, if yes extend it to
             # weekly
             # todo: implement in a nicer way
-            print(len(zone_count.use_conditions.profile_persons))
             if len(zone_count.use_conditions.profile_persons) == 24:
                 zone_count.use_conditions.profile_persons = \
                     zone_count.use_conditions.profile_persons * 7
