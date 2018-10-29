@@ -186,7 +186,8 @@ class AixLib(object):
                             time_line[i + 1].append(
                                 zone_count.use_conditions.set_temp_heat)
                         elif time_line[i][0] < \
-                                zone_count.use_conditions.heating_time[0] * 3600:
+                                zone_count.use_conditions.heating_time[
+                                    0] * 3600:
                             time_line[i].append(
                                 zone_count.use_conditions.set_temp_heat -
                                 zone_count.use_conditions.temp_set_back)
@@ -194,14 +195,16 @@ class AixLib(object):
                                 zone_count.use_conditions.set_temp_heat -
                                 zone_count.use_conditions.temp_set_back)
                         elif time_line[i][0] == \
-                                zone_count.use_conditions.heating_time[0] * 3600:
+                                zone_count.use_conditions.heating_time[
+                                    0] * 3600:
                             time_line[i].append(
                                 zone_count.use_conditions.set_temp_heat -
                                 zone_count.use_conditions.temp_set_back)
                             time_line[i + 1].append(
                                 zone_count.use_conditions.set_temp_heat)
                         elif time_line[i][0] == \
-                            (zone_count.use_conditions.heating_time[1] + 1) * \
+                                (zone_count.use_conditions.heating_time[
+                                    1] + 1) * \
                                 3600:
                             time_line[i].append(
                                 zone_count.use_conditions.set_temp_heat)
@@ -209,7 +212,8 @@ class AixLib(object):
                                 zone_count.use_conditions.set_temp_heat -
                                 zone_count.use_conditions.temp_set_back)
                         elif time_line[i][0] > \
-                            (zone_count.use_conditions.heating_time[1] + 1) * \
+                                (zone_count.use_conditions.heating_time[
+                                    1] + 1) * \
                                 3600:
                             time_line[i].append(
                                 zone_count.use_conditions.set_temp_heat -
@@ -269,7 +273,8 @@ class AixLib(object):
                             time_line[i + 1].append(
                                 zone_count.use_conditions.set_temp_cool)
                         elif time_line[i][0] < \
-                                zone_count.use_conditions.cooling_time[0] * 3600:
+                                zone_count.use_conditions.cooling_time[
+                                    0] * 3600:
                             time_line[i].append(
                                 zone_count.use_conditions.set_temp_cool +
                                 zone_count.use_conditions.temp_set_back_cool)
@@ -277,14 +282,16 @@ class AixLib(object):
                                 zone_count.use_conditions.set_temp_cool +
                                 zone_count.use_conditions.temp_set_back_cool)
                         elif time_line[i][0] == \
-                                zone_count.use_conditions.cooling_time[0] * 3600:
+                                zone_count.use_conditions.cooling_time[
+                                    0] * 3600:
                             time_line[i].append(
                                 zone_count.use_conditions.set_temp_cool +
                                 zone_count.use_conditions.temp_set_back_cool)
                             time_line[i + 1].append(
                                 zone_count.use_conditions.set_temp_cool)
                         elif time_line[i][0] == \
-                            (zone_count.use_conditions.cooling_time[1] + 1) * \
+                                (zone_count.use_conditions.cooling_time[
+                                    1] + 1) * \
                                 3600:
                             time_line[i].append(
                                 zone_count.use_conditions.set_temp_cool)
@@ -292,7 +299,8 @@ class AixLib(object):
                                 zone_count.use_conditions.set_temp_cool +
                                 zone_count.use_conditions.temp_set_back_cool)
                         elif time_line[i][0] > \
-                            (zone_count.use_conditions.cooling_time[1] + 1) * \
+                                (zone_count.use_conditions.cooling_time[
+                                    1] + 1) * \
                                 3600:
                             time_line[i].append(
                                 zone_count.use_conditions.set_temp_cool +
@@ -381,13 +389,12 @@ class AixLib(object):
             (ass_error_1 + ",profile_temperature_AHU")
         assert len(time_line) == len(profile_min_relative_humidity), \
             (ass_error_1 + ",profile_min_relative_humidity")
-        assert len(time_line) == len(profile_max_relative_humidity),\
+        assert len(time_line) == len(profile_max_relative_humidity), \
             (ass_error_1 + ",profile_max_relative_humidity")
         assert len(time_line) == len(profile_v_flow), \
             (ass_error_1 + ",profile_status_AHU")
 
         for i, time in enumerate(time_line):
-
             time.append(profile_temperature[i])
             time.append(profile_min_relative_humidity[i])
             time.append(profile_max_relative_humidity[i])
@@ -437,10 +444,22 @@ class AixLib(object):
 
         utilities.create_path(path)
         path = os.path.join(path, self.file_internal_gains)
-
         for zone_count in self.parent.thermal_zones:
+            # check if the given profile is only daily, if yes extend it to
+            # weekly
+            # todo: implement in a nicer way
+            print(len(zone_count.use_conditions.profile_persons))
+            if len(zone_count.use_conditions.profile_persons) == 24:
+                zone_count.use_conditions.profile_persons = \
+                    zone_count.use_conditions.profile_persons * 7
+            if len(zone_count.use_conditions.profile_lighting) == 24:
+                zone_count.use_conditions.profile_lighting = \
+                    zone_count.use_conditions.profile_lighting * 7
+            if len(zone_count.use_conditions.profile_machines) == 24:
+                zone_count.use_conditions.profile_machines = \
+                    zone_count.use_conditions.profile_machines * 7
             if time_line is None:
-                duration = len(zone_count.use_conditions.profile_persons) * \
+                duration = len(zone_count.use_conditions.profile_persons) *\
                     3600
                 time_line = self.create_profile(duration_profile=duration)
 
