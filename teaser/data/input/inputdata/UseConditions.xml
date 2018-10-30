@@ -416,8 +416,8 @@
         </usecond:InternalGains>
         <usecond:AHU>
             <usecond:min_ahu>0.0</usecond:min_ahu>
-            <usecond:max_ahu>0.0</usecond:max_ahu>
-            <usecond:with_ahu>false</usecond:with_ahu>
+            <usecond:max_ahu>7.2</usecond:max_ahu>
+            <usecond:with_ahu>true</usecond:with_ahu>
             <usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
             <usecond:base_ach>0.2</usecond:base_ach>
             <usecond:max_user_ach>1.0</usecond:max_user_ach>
@@ -501,7 +501,7 @@
         </usecond:InternalGains>
         <usecond:AHU>
             <usecond:min_ahu>0.0</usecond:min_ahu>
-            <usecond:max_ahu>0.0</usecond:max_ahu>
+            <usecond:max_ahu>7.2</usecond:max_ahu>
             <usecond:with_ahu>false</usecond:with_ahu>
             <usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
             <usecond:base_ach>0.2</usecond:base_ach>
@@ -1034,8 +1034,8 @@
         </usecond:InternalGains>
         <usecond:AHU>
             <usecond:min_ahu>0.0</usecond:min_ahu>
-            <usecond:max_ahu>0.0</usecond:max_ahu>
-            <usecond:with_ahu>false</usecond:with_ahu>
+            <usecond:max_ahu>10.0</usecond:max_ahu>
+            <usecond:with_ahu>true</usecond:with_ahu>
             <usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
             <usecond:base_ach>0.2</usecond:base_ach>
             <usecond:max_user_ach>1.0</usecond:max_user_ach>
