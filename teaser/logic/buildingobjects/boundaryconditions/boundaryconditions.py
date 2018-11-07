@@ -256,8 +256,6 @@ class BoundaryConditions(UseConditions):
         lighting efficiency in light power / electrical power
     lighting_power_el: float [W_el/m2]
         specific electric lighting power per m2
-    lighting_power_thermal:float [W_th/m2]
-        specific thermal lighting power per m2
     """
 
     def __init__(self, parent=None):
@@ -340,7 +338,6 @@ class BoundaryConditions(UseConditions):
         self.lighting_efficiency_lumen = 100  # lighting efficiency in lm/W_el
         self.lighting_efficiency = 0.3  # [W_light/W_el]
         self.lighting_power_el = 5  # [W_el/m2]
-        self.lighting_power_thermal = 15  # [W_th/m2]
 
     def load_use_conditions(self,
                             zone_usage,
