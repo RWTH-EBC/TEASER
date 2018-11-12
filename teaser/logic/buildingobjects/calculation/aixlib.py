@@ -362,9 +362,9 @@ class AixLib(object):
 
         utilities.create_path(path)
         path = os.path.join(path, self.file_ahu)
-
+        # todo find a better way for this!
         if time_line is None:
-            time_line = self.create_profile()
+            time_line = self.create_profile(duration_profile=31536000)[:-1]
 
         if self.parent.with_ahu is True:
             profile_temperature = \
