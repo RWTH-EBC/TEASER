@@ -142,8 +142,12 @@ class BoundaryConditions(UseConditions):
     INTERNAL GAINS
 
     persons : float [W/m2]
-        Average sensible heat transmission of people at 24 C with specific
+        old: Average sensible heat transmission of people at 24 C with specific
         heat transmission of 70 W/person, taken from SIA 2024.
+        AixLib: Used in Zone record for internal gains, NrPeople
+        Annex: Used for internal gains
+        new: specific heat transmission of people per m2 area size, taken from
+        DIN V 18599-10:2018-09.
         AixLib: Used in Zone record for internal gains, NrPeople
         Annex: Used for internal gains
     activity_type_persons : float [W/person]
