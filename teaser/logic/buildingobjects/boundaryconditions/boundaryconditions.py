@@ -239,7 +239,8 @@ class BoundaryConditions(UseConditions):
         Default values are
         aligned to :cite:`DINV1859910`.
     shading_max_irr : float [W/m2]
-        Threshold when sunblind becomes active for the whole zone
+        Threshold when sunblind becomes active for the whole zone. Taken from
+        VDI 6007 testcase 5
     shading_g_total : float
         Factor representing how much of the solar irradiation goes through
         the sunblind
