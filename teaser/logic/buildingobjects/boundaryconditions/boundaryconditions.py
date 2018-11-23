@@ -256,8 +256,6 @@ class BoundaryConditions(UseConditions):
         thermal power of air curtain
     lighting_efficiency_lumen: float [lm/W_el]
         lighting efficiency in lm/W_el, in german: Lichtausbeute
-    lighting_efficiency: float [W_light/W_el]
-        lighting efficiency in light power / electrical power
     lighting_power_el: float [W_el/m2]
         specific electric lighting power per m2
     """
@@ -338,9 +336,7 @@ class BoundaryConditions(UseConditions):
         self.eta_air_curtain = 0.0
         self.t_threshold_air_curtain = 0.0
         self.air_curtain_power = 0.0
-
         self.lighting_efficiency_lumen = 100  # lighting efficiency in lm/W_el
-        self.lighting_efficiency = 0.3  # [W_light/W_el]
         self.lighting_power_el = 5  # [W_el/m2]
 
     def load_use_conditions(self,
