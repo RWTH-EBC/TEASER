@@ -39,7 +39,7 @@
             <usecond:part_load_factor_ahu>0.7</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>5.0</usecond:persons>
+            <usecond:persons>0.1</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0
                 0.0 0.0 0.0
             </usecond:profile_persons>
@@ -103,7 +103,7 @@
             <usecond:part_load_factor_ahu>0.7</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>5.0</usecond:persons>
+            <usecond:persons>0.1</usecond:persons>
             <usecond:profile_persons>0.00 0.00 0.00 0.00 0.00 0.00 0.10 0.20 0.95 0.95 0.95 0.95 0.50 0.95 0.95 0.95
                 0.95 0.30 0.10 0.10 0.10 0.10 0.05 0.05 0.00 0.00 0.00 0.00 0.00 0.00 0.10 0.20 0.95 0.95 0.95 0.95 0.50
                 0.95 0.95 0.95 0.95 0.30 0.10 0.10 0.10 0.10 0.05 0.05 0.00 0.00 0.00 0.00 0.00 0.00 0.10 0.20 0.95 0.95
@@ -188,7 +188,7 @@
             <usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>7.0</usecond:persons>
+            <usecond:persons>0.125</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0
                 0.0 0.0 0.0
             </usecond:profile_persons>
@@ -252,7 +252,7 @@
             <usecond:part_load_factor_ahu>0.5</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>24.0</usecond:persons>
+            <usecond:persons>0.5</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0
                 0.0 0.0 0.0
             </usecond:profile_persons>
@@ -316,7 +316,7 @@
             <usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>6.0</usecond:persons>
+            <usecond:persons>0.125</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0
                 0.0 0.0 0.0
             </usecond:profile_persons>
@@ -380,7 +380,7 @@
             <usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>14.0</usecond:persons>
+            <usecond:persons>0.2</usecond:persons>
             <usecond:profile_persons>0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.10 0.20 0.50 0.50 0.70 0.70 0.70 0.70 0.80
                 0.70 0.50 0.50 0.30 0.30 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.10 0.20 0.50 0.50 0.70 0.70
                 0.70 0.70 0.80 0.70 0.50 0.50 0.30 0.30 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.10 0.20 0.50
@@ -465,7 +465,7 @@
             <usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>14.0</usecond:persons>
+            <usecond:persons>0.25</usecond:persons>
             <usecond:profile_persons>0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.10 0.20 0.50 0.50 0.70 0.70 0.70 0.70 0.80
                 0.70 0.50 0.50 0.30 0.30 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.10 0.20 0.50 0.50 0.70 0.70
                 0.70 0.70 0.80 0.70 0.50 0.50 0.30 0.30 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.10 0.20 0.50
@@ -550,7 +550,7 @@
             <usecond:part_load_factor_ahu>0.9</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>20.0</usecond:persons>
+            <usecond:persons>0.4</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.8 0.8 0.4 0.2 0.4 0.8 0.8 0.2 0.0 0.0 0.0 0.0
                 0.0 0.0 0.0
             </usecond:profile_persons>
@@ -614,7 +614,7 @@
             <usecond:part_load_factor_ahu>0.6</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>70.0</usecond:persons>
+            <usecond:persons>1.25</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.0 0.0 0.0 0.0
                 0.0 0.0 0.0
             </usecond:profile_persons>
@@ -678,7 +678,7 @@
             <usecond:part_load_factor_ahu>0.8</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>5.0</usecond:persons>
+            <usecond:persons>0.1</usecond:persons>
             <usecond:profile_persons>1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0
                 1.0 1.0 1.0
             </usecond:profile_persons>
@@ -742,7 +742,7 @@
             <usecond:part_load_factor_ahu>0.5</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>7.0</usecond:persons>
+            <usecond:persons>0.125</usecond:persons>
             <usecond:profile_persons>1.0 1.0 1.0 1.0 1.0 1.0 0.8 0.4 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.4
                 0.6 0.8 1.0
             </usecond:profile_persons>
@@ -806,7 +806,7 @@
             <usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>59.0</usecond:persons>
+            <usecond:persons>1.25</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.4 0.2 0.4 1.0 0.4 0.2 0.4 0.0 0.0 0.0 0.0 0.0 0.0
                 0.0 0.0 0.0
             </usecond:profile_persons>
@@ -870,7 +870,7 @@
             <usecond:part_load_factor_ahu>0.7</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>59.0</usecond:persons>
+            <usecond:persons>1.25</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.2 0.2 0.2 0.8 0.4 0.0 0.0 0.0 0.0 0.2 0.2 0.4
                 0.8 0.2 0.2
             </usecond:profile_persons>
@@ -934,7 +934,7 @@
             <usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>8.0</usecond:persons>
+            <usecond:persons>0.1</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.4 0.4 0.8 1.0 1.0 0.6 0.4 0.2 0.2 0.0 0.0 0.0 0.0 0.0
                 0.0 0.0 0.0
             </usecond:profile_persons>
@@ -998,7 +998,7 @@
             <usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>8.0</usecond:persons>
+            <usecond:persons>0.2</usecond:persons>
             <usecond:profile_persons>0.00 0.00 0.00 0.00 0.00 0.00 0.10 0.20 0.95 0.95 0.95 0.95 0.50 0.95 0.95 0.95
                 0.95 0.30 0.10 0.10 0.10 0.10 0.05 0.05 0.00 0.00 0.00 0.00 0.00 0.00 0.10 0.20 0.95 0.95 0.95 0.95 0.50
                 0.95 0.95 0.95 0.95 0.30 0.10 0.10 0.10 0.10 0.05 0.05 0.00 0.00 0.00 0.00 0.00 0.00 0.10 0.20 0.95 0.95
@@ -1147,7 +1147,7 @@
             <usecond:part_load_factor_ahu>0.8</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>23.0</usecond:persons>
+            <usecond:persons>0.5</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0
                 0.0 0.0 0.0
             </usecond:profile_persons>
@@ -1424,7 +1424,7 @@
             <usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>3.0</usecond:persons>
+            <usecond:persons>0.05</usecond:persons>
             <usecond:profile_persons>1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0
                 1.0 1.0 1.0
             </usecond:profile_persons>
@@ -1488,7 +1488,7 @@
             <usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>5.0</usecond:persons>
+            <usecond:persons>0.067</usecond:persons>
             <usecond:profile_persons>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5
                 0.5 0.2 0.2
             </usecond:profile_persons>
@@ -1552,7 +1552,7 @@
             <usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>4.0</usecond:persons>
+            <usecond:persons>0.067</usecond:persons>
             <usecond:profile_persons>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5
                 0.5 0.2 0.2
             </usecond:profile_persons>
@@ -1616,7 +1616,7 @@
             <usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>3.0</usecond:persons>
+            <usecond:persons>0.067</usecond:persons>
             <usecond:profile_persons>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5
                 0.5 0.2 0.2
             </usecond:profile_persons>
@@ -1680,7 +1680,7 @@
             <usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>93.0</usecond:persons>
+            <usecond:persons>2.0</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 0.6 0.6 0.6 0.6 0.6 1.0 1.0
                 1.0 0.6 0.2
             </usecond:profile_persons>
@@ -1744,7 +1744,7 @@
             <usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>88.0</usecond:persons>
+            <usecond:persons>2.0</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0
                 0.0 0.0 0.0
             </usecond:profile_persons>
@@ -1872,7 +1872,7 @@
             <usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>23.0</usecond:persons>
+            <usecond:persons>0.5</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.6 0.6 0.6 1.0 1.0
                 0.6 0.2 0.0
             </usecond:profile_persons>
@@ -1936,7 +1936,7 @@
             <usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>7.0</usecond:persons>
+            <usecond:persons>0.2</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.6 0.6 0.6 1.0 1.0
                 0.6 0.2 0.0
             </usecond:profile_persons>
@@ -2000,7 +2000,7 @@
             <usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>28.0</usecond:persons>
+            <usecond:persons>0.67</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.0 0.0 0.0 0.0
                 0.0 0.0 0.0
             </usecond:profile_persons>
@@ -2064,7 +2064,7 @@
             <usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>7.0</usecond:persons>
+            <usecond:persons>0.2</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.0 0.0 0.0 0.0
                 0.0 0.0 0.0
             </usecond:profile_persons>
@@ -2192,7 +2192,7 @@
             <usecond:part_load_factor_ahu>0.9</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>6.0</usecond:persons>
+            <usecond:persons>0.1</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.4 0.8 1.0 1.0 0.8 0.0 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8
                 0.5 0.5 0.0
             </usecond:profile_persons>
@@ -2384,7 +2384,7 @@
             <usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>6.0</usecond:persons>
+            <usecond:persons>0.167</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.5 0.8 1.0 1.0 0.8 0.0 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8
                 0.5 0.5 0.0
             </usecond:profile_persons>
@@ -2448,7 +2448,7 @@
             <usecond:part_load_factor_ahu>0.9</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>22.0</usecond:persons>
+            <usecond:persons>0.25</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.5 0.8 1.0 1.0 0.8 0.0 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8
                 0.5 0.5 0.0
             </usecond:profile_persons>
@@ -2512,7 +2512,7 @@
             <usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>6.0</usecond:persons>
+            <usecond:persons>0.1</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.0 0.0 0.0 0.0
                 0.0 0.0 0.0
             </usecond:profile_persons>
@@ -2576,7 +2576,7 @@
             <usecond:part_load_factor_ahu>0.7</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>12.0</usecond:persons>
+            <usecond:persons>0.25</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0
                 0.0 0.0 0.0
             </usecond:profile_persons>
@@ -2640,7 +2640,7 @@
             <usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>6.0</usecond:persons>
+            <usecond:persons>0.0769</usecond:persons>
             <usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.0 0.0 0.0 0.0
                 0.0 0.0 0.0
             </usecond:profile_persons>
@@ -2768,7 +2768,7 @@
             <usecond:part_load_factor_ahu>0.7</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>8.0</usecond:persons>
+            <usecond:persons>0.143</usecond:persons>
             <usecond:profile_persons>0.2 0.2 0.2 0.2 0.2 0.2 0.4 1.0 0.6 0.6 0.6 0.6 1.0 0.6 0.6 0.6 0.6 1.0 0.4 0.2 0.2
                 0.2 0.2 0.2
             </usecond:profile_persons>
@@ -2896,7 +2896,7 @@
             <usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>1.5</usecond:persons>
+            <usecond:persons>0.0833</usecond:persons>
             <usecond:profile_persons>1.0 1.0 1.0 1.0 1.0 1.0 0.8 0.6 0.4 0.4 0.4 0.6 0.8 0.6 0.4 0.4 0.6 0.8 0.8 0.8 0.8
                 1.0 1.0 1.0
             </usecond:profile_persons>
