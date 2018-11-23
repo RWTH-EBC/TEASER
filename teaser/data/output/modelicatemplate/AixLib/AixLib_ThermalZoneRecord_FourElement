@@ -57,7 +57,7 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     wfWall = ${get_list(zone.model_attr.weightfactor_ow)},
     wfWin = ${get_list(zone.model_attr.weightfactor_win)},
     wfGro = ${zone.model_attr.weightfactor_ground},
-    nrPeople = ${zone.use_conditions.persons},
+    nrPeople = ${zone.use_conditions.persons*zone.area},
     ratioConvectiveHeatPeople = ${zone.use_conditions.ratio_conv_rad_persons},
     nrPeopleMachines = ${zone.use_conditions.machines},
     ratioConvectiveHeatMachines = ${zone.use_conditions.ratio_conv_rad_machines},
