@@ -11,7 +11,7 @@ import teaser.data.input.boundcond_input as boundcond_input
 
 
 class BoundaryConditions(UseConditions):
-    """Extended Use Conditions from DIN 18599 and SIA2024
+    """Extended Use Conditions from DIN 18599 and SIA2024.
 
     Class that contains the boundary conditions of use for non-residential
     buildings defined in DIN V 18599-10 (
@@ -104,7 +104,8 @@ class BoundaryConditions(UseConditions):
     ROOM CLIMATE
 
     set_temp_heat: float [K]
-        internal set temperature heating. This value is taken from DIN 18599-10.
+        internal set temperature heating. This value is taken from DIN
+        18599-10.
         AixLib: Used in simple Heater for set temperature
     set_temp_cool: float [K}
         internal set temperature cooling
@@ -141,8 +142,12 @@ class BoundaryConditions(UseConditions):
     INTERNAL GAINS
 
     persons : float [W/m2]
-        Average sensible heat transmission of people at 24 C with specific
+        old: Average sensible heat transmission of people at 24 C with specific
         heat transmission of 70 W/person, taken from SIA 2024.
+        AixLib: Used in Zone record for internal gains, NrPeople
+        Annex: Used for internal gains
+        new: specific heat transmission of people per m2 area size, taken from
+        DIN V 18599-10:2018-09.
         AixLib: Used in Zone record for internal gains, NrPeople
         Annex: Used for internal gains
     activity_type_persons : float [W/person]
@@ -233,12 +238,32 @@ class BoundaryConditions(UseConditions):
         AixLib: Used on Zone level for ventilation.
         Default values are
         aligned to :cite:`DINV1859910`.
+    shading_max_irr : float [W/m2]
+        Threshold when sunblind becomes active for the whole zone
+    shading_g_total : float
+        Factor representing how much of the solar irradiation goes through
+        the sunblind
+
+    v_flow_air_curtain : float [m3/s]
+        volume flow of the air curtain
+    delta_t_air_curtain : float [K]
+        temperature difference over the air curtain
+    eta_air_curtain : float
+        efficiency of the air curtain
+    t_threshold_air_curtain : float [K]
+        threshold of outer temperature when air curtain becomes active
+    air_curtain_power : float [W]
+        thermal power of air curtain
+    lighting_efficiency_lumen: float [lm/W_el]
+        lighting efficiency in lm/W_el, in german: Lichtausbeute
+    lighting_efficiency: float [W_light/W_el]
+        lighting efficiency in light power / electrical power
+    lighting_power_el: float [W_el/m2]
+        specific electric lighting power per m2
     """
 
     def __init__(self, parent=None):
-        """Constructor UseConditions18599
-        """
-
+        """Constructor UseConditions18599."""
         super(BoundaryConditions, self).__init__(parent)
 
         self.usage = "Single office"
@@ -268,6 +293,7 @@ class BoundaryConditions(UseConditions):
         self._set_temp_heat = 294.15
         self._set_temp_cool = 297.15
         self._temp_set_back = 4.0
+        self._temp_set_back_cool = 10.0
         self._min_temp_heat = 20.0
         self._max_temp_cool = 26.0
         self._rel_humidity = 45
@@ -304,10 +330,23 @@ class BoundaryConditions(UseConditions):
         self.max_summer_ach = [1.0, 273.15 + 10, 273.15 + 17]
         self.winter_reduction = [0.5, 273.15, 273.15 + 10]
 
+        self.shading_max_irr = 100
+        self.shading_g_total = 1.0
+
+        self.v_flow_air_curtain = 0.0
+        self.delta_t_air_curtain = 0.0
+        self.eta_air_curtain = 0.0
+        self.t_threshold_air_curtain = 0.0
+        self.air_curtain_power = 0.0
+
+        self.lighting_efficiency_lumen = 100  # lighting efficiency in lm/W_el
+        self.lighting_efficiency = 0.3  # [W_light/W_el]
+        self.lighting_power_el = 5  # [W_el/m2]
+
     def load_use_conditions(self,
                             zone_usage,
                             data_class=None):
-        """Load typical use conditions from XML data base
+        """Load typical use conditions from XML data base.
 
         Loads Use conditions specified in the XML.
 
@@ -323,7 +362,6 @@ class BoundaryConditions(UseConditions):
             leads to an automatic setter to self.parent.parent.parent.data (
             which is DataClass in current project)
         """
-
         if data_class is None:
             data_class = self.parent.parent.parent.data
         else:
@@ -354,7 +392,6 @@ class BoundaryConditions(UseConditions):
             self.parent.parent.parent.data (which is data_class in current
             project)
         """
-
         if data_class is None:
             data_class = self.parent.parent.parent.data
         else:
@@ -469,6 +506,24 @@ class BoundaryConditions(UseConditions):
             try:
                 value = float(value)
                 self._temp_set_back = value
+            except:
+                raise ValueError("Can't convert temperature to float")
+
+    @property
+    def temp_set_back_cool(self):
+        return self._temp_set_back_cool
+
+    @temp_set_back_cool.setter
+    def temp_set_back_cool(self, value):
+
+        if isinstance(value, float):
+            self._temp_set_back_cool = value
+        elif value is None:
+            self._temp_set_back_cool = value
+        else:
+            try:
+                value = float(value)
+                self._temp_set_back_cool = value
             except:
                 raise ValueError("Can't convert temperature to float")
 
