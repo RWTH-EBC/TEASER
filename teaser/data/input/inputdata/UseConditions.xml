@@ -358,7 +358,7 @@
             <usecond:daily_operation_heating>14</usecond:daily_operation_heating>
         </usecond:UsageOperationTime>
         <usecond:Lighting>
-            <usecond:maintained_illuminance>750.0</usecond:maintained_illuminance>
+            <usecond:maintained_illuminance>300.0</usecond:maintained_illuminance>
             <usecond:usage_level_height>0.8</usecond:usage_level_height>
             <usecond:red_factor_visual>0.93</usecond:red_factor_visual>
             <usecond:rel_absence>0.0</usecond:rel_absence>
@@ -443,7 +443,7 @@
             <usecond:daily_operation_heating>14</usecond:daily_operation_heating>
         </usecond:UsageOperationTime>
         <usecond:Lighting>
-            <usecond:maintained_illuminance>750.0</usecond:maintained_illuminance>
+            <usecond:maintained_illuminance>300.0</usecond:maintained_illuminance>
             <usecond:usage_level_height>0.8</usecond:usage_level_height>
             <usecond:red_factor_visual>0.93</usecond:red_factor_visual>
             <usecond:rel_absence>0.0</usecond:rel_absence>
@@ -976,7 +976,7 @@
             <usecond:daily_operation_heating>15</usecond:daily_operation_heating>
         </usecond:UsageOperationTime>
         <usecond:Lighting>
-            <usecond:maintained_illuminance>500.0</usecond:maintained_illuminance>
+            <usecond:maintained_illuminance>300.0</usecond:maintained_illuminance>
             <usecond:usage_level_height>0.8</usecond:usage_level_height>
             <usecond:red_factor_visual>1.0</usecond:red_factor_visual>
             <usecond:rel_absence>0.5</usecond:rel_absence>
@@ -2896,7 +2896,7 @@
             <usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
         </usecond:RoomClimate>
         <usecond:InternalGains>
-            <usecond:persons>0.0833</usecond:persons>
+            <usecond:persons>0.833</usecond:persons>
             <usecond:profile_persons>1.0 1.0 1.0 1.0 1.0 1.0 0.8 0.6 0.4 0.4 0.4 0.6 0.8 0.6 0.4 0.4 0.6 0.8 0.8 0.8 0.8
                 1.0 1.0 1.0
             </usecond:profile_persons>
