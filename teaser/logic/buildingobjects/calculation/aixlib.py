@@ -372,8 +372,6 @@ class AixLib(object):
                 self.parent.central_ahu.profile_max_relative_humidity
             profile_v_flow = \
                 self.parent.central_ahu.profile_v_flow
-        if time_line is None:
-            time_line = self.create_profile(duration_profile=len(profile_temperature)*3600)
         else:
             # Dummy values for Input Table
             time_line = [[0], [3600]]
@@ -382,8 +380,10 @@ class AixLib(object):
             profile_max_relative_humidity = [1, 1]
             profile_v_flow = [0, 1]
 
+        if time_line is None:
+            time_line = self.create_profile(duration_profile=len(profile_temperature)*3600)
+            
         ass_error_1 = "time line and input have to have the same length"
-
         assert len(time_line) == len(profile_temperature), \
             (ass_error_1 + ",profile_temperature_AHU")
         assert len(time_line) == len(profile_min_relative_humidity), \
