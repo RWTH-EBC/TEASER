@@ -139,11 +139,11 @@ class AixLib(object):
         time_line = []
 
         if double is True:
-            for i in range(int(duration_profile / time_step) + 1):
+            for i in range(int(duration_profile / time_step)):
                 time_line.append([i * time_step])
                 time_line.append([i * time_step])
         else:
-            for i in range(int(duration_profile / time_step) + 1):
+            for i in range(int(duration_profile / time_step)):
                 time_line.append([i * time_step])
 
         return time_line
@@ -362,9 +362,6 @@ class AixLib(object):
 
         utilities.create_path(path)
         path = os.path.join(path, self.file_ahu)
-        # todo find a better way for this!
-        if time_line is None:
-            time_line = self.create_profile(duration_profile=31536000)[:-1]
 
         if self.parent.with_ahu is True:
             profile_temperature = \
@@ -383,8 +380,10 @@ class AixLib(object):
             profile_max_relative_humidity = [1, 1]
             profile_v_flow = [0, 1]
 
+        if time_line is None:
+            time_line = self.create_profile(duration_profile=len(profile_temperature)*3600)
+            
         ass_error_1 = "time line and input have to have the same length"
-
         assert len(time_line) == len(profile_temperature), \
             (ass_error_1 + ",profile_temperature_AHU")
         assert len(time_line) == len(profile_min_relative_humidity), \
@@ -464,13 +463,13 @@ class AixLib(object):
 
             ass_error_1 = "time line and input have to have the same length"
 
-            assert len(time_line) - 1 == len(
+            assert len(time_line) == len(
                 zone_count.use_conditions.profile_persons), \
                 (ass_error_1 + ",profile_persons")
-            assert len(time_line) - 1 == len(
+            assert len(time_line) == len(
                 zone_count.use_conditions.profile_machines), \
                 (ass_error_1 + ",profile_machines")
-            assert len(time_line) - 1 == len(
+            assert len(time_line) == len(
                 zone_count.use_conditions.profile_lighting), \
                 (ass_error_1 + ",profile_lighting")
 
