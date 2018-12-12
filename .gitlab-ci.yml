@@ -72,4 +72,3 @@ test3.7:
     - pip install -e .
     - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests,.eggs --max-line-length=120
     - py.test
-
