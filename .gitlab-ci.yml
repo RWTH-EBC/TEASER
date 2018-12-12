@@ -11,7 +11,8 @@ test2.7:
     - pip install pytest
     - pip install PyGithub==1.39
     - pip install flake8==3.4.1
-    - python setup.py test
+    - pip install -e .
+    # - python setup.py test
     - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests,.eggs --max-line-length=120
     - py.test
 
