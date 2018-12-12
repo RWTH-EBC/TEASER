@@ -271,42 +271,73 @@ class AixLib(object):
         path = os.path.join(path, self.file_ahu)
 
         if time_line is None:
-            time_line = self.create_profile()
+            if self.parent.with_ahu is True:
+                profile_temperature = \
+                    self.parent.central_ahu.profile_temperature
+                profile_min_relative_humidity = \
+                    self.parent.central_ahu.profile_min_relative_humidity
+                profile_max_relative_humidity = \
+                    self.parent.central_ahu.profile_max_relative_humidity
+                profile_v_flow = \
+                    self.parent.central_ahu.profile_v_flow
+            else:
+                # Dummy values for Input Table
+                profile_temperature = [293.15, 293.15]
+                profile_min_relative_humidity = [0, 0]
+                profile_max_relative_humidity = [1, 1]
+                profile_v_flow = [0, 1]
 
-        if self.parent.with_ahu is True:
-            profile_temperature = \
-                self.parent.central_ahu.profile_temperature
-            profile_min_relative_humidity = \
-                self.parent.central_ahu.profile_min_relative_humidity
-            profile_max_relative_humidity = \
-                self.parent.central_ahu.profile_max_relative_humidity
-            profile_v_flow = \
-                self.parent.central_ahu.profile_v_flow
+            profiles = [
+                profile_temperature,
+                profile_min_relative_humidity,
+                profile_max_relative_humidity,
+                profile_v_flow,
+            ]
+
+            lengths = [len(profile) for profile in profiles]
+            length_longest, idx = max((val, idx) for (idx, val) in enumerate(lengths))
+            profile_longest = profiles[idx]
+
+            ass_error_1 = "AHU profiles have different lengths. In this case, the " \
+                          "length of the longest profile should be a multiple of " \
+                          "the shorter lengths"
+            profiles_adjusted = [[], [], [], []]
+            for i, profile in enumerate(profiles):
+                if i != idx:
+                    assert length_longest % len(profile) == 0, ass_error_1
+                    while len(profiles_adjusted[i]) < length_longest:
+                        profiles_adjusted[i] += profile
+                else:
+                    profiles_adjusted[i] = profile_longest
+
+            time_line = self.create_profile(duration_profile=3600*(length_longest-1))
+            # If merged with branch issue544_B13 use this instead:
+            # time_line = self.create_profile(duration_profile=3600*(length_longest))
+
         else:
-            # Dummy values for Input Table
-            time_line = [[0], [3600]]
-            profile_temperature = [293.15, 293.15]
-            profile_min_relative_humidity = [0, 0]
-            profile_max_relative_humidity = [1, 1]
-            profile_v_flow = [0, 1]
+            profiles_adjusted = [
+                self.parent.central_ahu.profile_temperature,
+                self.parent.central_ahu.profile_min_relative_humidity,
+                self.parent.central_ahu.profile_max_relative_humidity,
+                self.parent.central_ahu.profile_v_flow,
+            ]
 
-        ass_error_1 = "time line and input have to have the same length"
+        ass_error_2 = "time line and input have to have the same length"
 
-        assert len(time_line) == len(profile_temperature), \
-            (ass_error_1 + ",profile_temperature_AHU")
-        assert len(time_line) == len(profile_min_relative_humidity), \
-            (ass_error_1 + ",profile_min_relative_humidity")
-        assert len(time_line) == len(profile_max_relative_humidity),\
-            (ass_error_1 + ",profile_max_relative_humidity")
-        assert len(time_line) == len(profile_v_flow), \
-            (ass_error_1 + ",profile_status_AHU")
+        assert len(time_line) == len(profiles_adjusted[0]), \
+            (ass_error_2 + ",profile_temperature_AHU")
+        assert len(time_line) == len(profiles_adjusted[1]), \
+            (ass_error_2 + ",profile_min_relative_humidity")
+        assert len(time_line) == len(profiles_adjusted[2]), \
+            (ass_error_2 + ",profile_max_relative_humidity")
+        assert len(time_line) == len(profiles_adjusted[3]), \
+            (ass_error_2 + ",profile_status_AHU")
 
         for i, time in enumerate(time_line):
-
-            time.append(profile_temperature[i])
-            time.append(profile_min_relative_humidity[i])
-            time.append(profile_max_relative_humidity[i])
-            time.append(profile_v_flow[i])
+            time.append(profiles_adjusted[0][i])
+            time.append(profiles_adjusted[1][i])
+            time.append(profiles_adjusted[2][i])
+            time.append(profiles_adjusted[3][i])
 
         ahu_boundary = np.array(time_line)
 
