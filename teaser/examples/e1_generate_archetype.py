@@ -70,6 +70,15 @@ def example_generate_archetype():
         height_of_floors=4.0,
         net_leased_area=3400)
 
+    prj.add_non_residential(
+        method='bmvbs',
+        usage='grocerystore',
+        name="GroceryStore",
+        year_of_construction=1952,
+        number_of_floors=1,
+        height_of_floors=4.5,
+        net_leased_area=3000)
+
     # Besides `iwu` and `bmvbs` there is a third option for archetype
     # generation. We integrated the typology of TABULA Germany
     # (http://webtool.building-typology.eu/#bm) and other countries are about to

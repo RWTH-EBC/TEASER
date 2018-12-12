@@ -18,6 +18,10 @@ from teaser.logic.archetypebuildings.bmvbs.office import Office
 from teaser.logic.archetypebuildings.bmvbs.custom.institute import Institute
 from teaser.logic.archetypebuildings.bmvbs.custom.institute4 import Institute4
 from teaser.logic.archetypebuildings.bmvbs.custom.institute8 import Institute8
+from teaser.logic.archetypebuildings.bmvbs.custom.grocerystore import GroceryStore
+from teaser.logic.archetypebuildings.bmvbs.custom.retailmarket import RetailMarket
+from teaser.logic.archetypebuildings.bmvbs.custom.school import School
+from teaser.logic.archetypebuildings.bmvbs.custom.hotel import Hotel
 from teaser.logic.archetypebuildings.urbanrenet.est1a import EST1a
 from teaser.logic.archetypebuildings.urbanrenet.est1b import EST1b
 from teaser.logic.archetypebuildings.urbanrenet.est2 import EST2
@@ -334,11 +338,12 @@ class Project(object):
         assert method in ['bmvbs'], ass_error_method
 
         ass_error_usage = "only 'office', 'institute', 'institute4', " \
-                          "'institute8' are valid usages for archetype " \
+                          "'institute8', 'grocerystore', 'retailmarket', " \
+                          "'school', 'hotel' are valid usages for archetype " \
                           "generation"
 
         assert usage in ['office', 'institute', 'institute4',
-                         'institute8'], ass_error_usage
+                         'institute8', 'grocerystore', 'retailmarket', 'school', 'hotel'], ass_error_usage
 
         if self.data is None:
             self.data = DataClass(used_statistic='iwu')
@@ -390,6 +395,62 @@ class Project(object):
         elif usage == 'institute8':
 
             type_bldg = Institute8(
+                self,
+                name,
+                year_of_construction,
+                number_of_floors,
+                height_of_floors,
+                net_leased_area,
+                with_ahu,
+                office_layout,
+                window_layout,
+                construction_type)
+
+        elif usage == 'grocerystore':
+
+            type_bldg = GroceryStore(
+                self,
+                name,
+                year_of_construction,
+                number_of_floors,
+                height_of_floors,
+                net_leased_area,
+                with_ahu,
+                office_layout,
+                window_layout,
+                construction_type)
+
+        elif usage == 'retailmarket':
+
+            type_bldg = RetailMarket(
+                self,
+                name,
+                year_of_construction,
+                number_of_floors,
+                height_of_floors,
+                net_leased_area,
+                with_ahu,
+                office_layout,
+                window_layout,
+                construction_type)
+
+        elif usage == 'school':
+
+            type_bldg = School(
+                self,
+                name,
+                year_of_construction,
+                number_of_floors,
+                height_of_floors,
+                net_leased_area,
+                with_ahu,
+                office_layout,
+                window_layout,
+                construction_type)
+
+        elif usage == 'hotel':
+
+            type_bldg = Hotel(
                 self,
                 name,
                 year_of_construction,
