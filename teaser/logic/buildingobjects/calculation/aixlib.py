@@ -310,7 +310,7 @@ class AixLib(object):
                 else:
                     profiles_adjusted[i] = profile_longest
 
-            time_line = self.create_profile(duration_profile=3600*(length_longest-1))
+            time_line = self.create_profile(duration_profile=3600 * (length_longest - 1))
             # If merged with branch issue544_B13 use this instead:
             # time_line = self.create_profile(duration_profile=3600*(length_longest))
 
