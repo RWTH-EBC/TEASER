@@ -3159,3 +3159,71 @@ class Test_teaser(object):
             assert ideas.replace('v', '') == ibpsa.version['IDEAS']
         except IndexError:
             warnings.warn('There was an index error for IDEAS', UserWarning)
+
+    def test_ahu_profiles(self):
+        """Test setting AHU profiles of different lengths
+
+        Related to issue 553 at https://github.com/RWTH-EBC/TEASER/issues/553
+        """
+
+        prj_test = Project(load_data=True)
+        prj_test.name = "TestAHUProfiles"
+
+        prj_test.add_non_residential(
+            method="bmvbs",
+            usage="office",
+            name="OfficeBuilding",
+            year_of_construction=2015,
+            number_of_floors=4,
+            height_of_floors=3.5,
+            net_leased_area=1000.0,
+        )
+
+        prj_test.used_library_calc = "AixLib"
+        prj_test.number_of_elements_calc = 2
+
+        v_flow_workday = [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+        ]
+
+        v_flow_week = []
+        for day in range(7):
+            for val in v_flow_workday:
+                if day < 5:
+                    ratio = val
+                else:
+                    if val == 1:
+                        ratio = 0.2
+                    else:
+                        ratio = 0.0
+                v_flow_week.append(ratio)
+
+        for building in prj_test.buildings:
+            building.central_ahu.profile_v_flow = v_flow_week
+
+        prj_test.calc_all_buildings()
+        prj_test.export_aixlib()
