@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='teaser',
-      version='0.6.4',
+      version='0.6.6',
       description='Tool for Energy Analysis and Simulation for '
                   'Efficient Retrofit ',
       url='https://github.com/RWTH-EBC/TEASER',
