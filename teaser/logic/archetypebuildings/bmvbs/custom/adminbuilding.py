@@ -5,12 +5,12 @@
 from teaser.logic.archetypebuildings.bmvbs.office import Office
 
 
-class School(Office):
-    """Type School Building
+class AdminBuilding(Office):
+    """Type Administration Building (Verwaltungsgebäude)
 
-    The school module contains a multi zone building which is based
-    on an office building with additional class room, wc, traffic area,
-    storage, rooms, office, restaurant and kitchen zones.
+    The administration building module contains a multi zone building which is
+    based on an office building with additional office, group office,
+    conference room, wc, traffic area and storage.
     The zonal distribution is based on the research paper "Entwicklung einer
     Datenbank mit Modellgebäuden für energiebezogene Untersuchungen,
     insbesondere der Wirtschaftlichkeit" (Zentrum für Umweltbewusstes Bauen).
@@ -20,18 +20,15 @@ class School(Office):
     building type is by default equipped with an air handling unit.
 
     In detail the net leased area is divided into the following thermal zone
-    areas. Due to the size of the school (small/big) the ratio of the net leased
-    area differs:
+    areas. Due to the size of the administration building (small/big) the ratio
+    of the net leased area differs:
 
-    #. Class room (41-48% of net leased area)
-    #. WC (3-5% of net leased area)
-    #. Traffic area (30-33% of net leased area)
-    #. Storage (2-6% of net leased area)
-    #. Rooms (4-11% of net leased area)
-    #. Office (4-5% of net leased area)
-    #. Restaurant (5% of net leased area) [only for small schools]
-    #. Kitchen (2% of net leased area) [only for small schools]
-
+    #. Group Office (35-62% of net leased area)
+    #. Office (34% of net leased area) [only for big admin buildings]
+    #. Conference Room (13-14% of net leased area)
+    #. WC (4-6% of net leased area)
+    #. Traffic area (10-11% of net leased area)
+    #. Storage (2-9% of net leased area)
 
     Parameters
     ----------
@@ -136,62 +133,58 @@ class School(Office):
                  construction_type=None):
         """Constructor of School
 
-        Adds a additional zones "Class room", "WC", "Traffic area", "Storage",
-        "Rooms", "Office", "Restaurant" and "Kitchen"
+        Adds a additional zones "Office", "WC", "Traffic area",
+        "Storage" and for big administration buildings additionally a
+        "Group Office".
 
         """
 
-        super(School, self).__init__(parent,
-                                     name,
-                                     year_of_construction,
-                                     number_of_floors,
-                                     height_of_floors,
-                                     net_leased_area,
-                                     with_ahu,
-                                     office_layout,
-                                     window_layout,
-                                     construction_type)
+        super(AdminBuilding, self).__init__(parent,
+                                            name,
+                                            year_of_construction,
+                                            number_of_floors,
+                                            height_of_floors,
+                                            net_leased_area,
+                                            with_ahu,
+                                            office_layout,
+                                            window_layout,
+                                            construction_type)
 
-        # small school
-        if net_leased_area < 5003 * 0.89:
-            self.zone_area_factors["Class room"] = \
-                [0.41, "Class room (school), group room (kindergarden)"]
+        # small administration building
+        if net_leased_area < 1972 * 0.85:
+            self.zone_area_factors["Group Office"] = \
+                [0.62, "Open-plan Office (7 or more employees)"]
+            self.zone_area_factors["Conference room"] = \
+                [0.13, "Meeting, Conference, seminar"]
             self.zone_area_factors["WC"] = \
-                [0.05, "WC and sanitary rooms in non-residential buildings"]
+                [0.04, "WC and sanitary rooms in non-residential buildings"]
             self.zone_area_factors["Traffic area"] = \
-                [0.30, "Traffic area"]
+                [0.11, "Traffic area"]
             self.zone_area_factors["Storage"] = \
-                [0.02, "Stock, technical equipment, archives"]
-            self.zone_area_factors["Rooms"] = \
-                [0.11, "Further common rooms"]
+                [0.9, "Stock, technical equipment, archives"]
+
+            self.height_of_floors = 3.70
+            self.est_factor_wall_area = 0.59
+            self.est_factor_win_area = 0.36
+
+        # big administration building
+        else:
             self.zone_area_factors["Office"] = \
-                [0.04, "Group Office (between 2 and 6 employees)"]
-            self.zone_area_factors["Restaurant"] = \
-                [0.05, "Restaurant"]
-            self.zone_area_factors["Kitchen"] = \
-                [0.02, "Kitchen - preparations, storage"]
+                [0.34, "Group Office (between 2 and 6 employees)"]
+            self.zone_area_factors["Group Office"] = \
+                [0.35, "Open-plan Office (7 or more employees)"]
+            self.zone_area_factors["Conference room"] = \
+                [0.14, "Meeting, Conference, seminar"]
+            self.zone_area_factors["WC"] = \
+                [0.06, "WC and sanitary rooms in non-residential buildings"]
+            self.zone_area_factors["Traffic area"] = \
+                [0.10, "Traffic area"]
+            self.zone_area_factors["Storage"] = \
+                [0.2, "Stock, technical equipment, archives"]
 
             self.height_of_floors = 3.35
-            self.est_factor_wall_area = 0.351
-            self.est_factor_win_area = 0.217
-        # big school (without kitchen and restaurant)
-        else:
-            self.zone_area_factors["Class room"] = \
-                [0.48, "Class room (school), group room (kindergarden)"]
-            self.zone_area_factors["WC"] = \
-                [0.03, "WC and sanitary rooms in non-residential buildings"]
-            self.zone_area_factors["Traffic area"] = \
-                [0.33, "Traffic area"]
-            self.zone_area_factors["Storage"] = \
-                [0.06, "Stock, technical equipment, archives"]
-            self.zone_area_factors["Rooms"] = \
-                [0.04, "Further common rooms"]
-            self.zone_area_factors["Office"] = \
-                [0.05, "Group Office (between 2 and 6 employees)"]
-
-            self.height_of_floors = 4.45
-            self.est_factor_wall_area = 0.455
-            self.est_factor_win_area = 0.271
+            self.est_factor_wall_area = 0.4
+            self.est_factor_win_area = 0.32
 
         self.est_exponent_win = 1
         self.est_exponent_wall = 1.0

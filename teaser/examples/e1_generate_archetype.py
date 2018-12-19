@@ -72,8 +72,8 @@ def example_generate_archetype():
 
     prj.add_non_residential(
         method='bmvbs',
-        usage='grocerystore',
-        name="GroceryStore",
+        usage='adminbuilding',
+        name="AdminBuilding",
         year_of_construction=1952,
         number_of_floors=1,
         height_of_floors=4.5,
