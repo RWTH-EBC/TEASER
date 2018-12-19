@@ -3159,3 +3159,44 @@ class Test_teaser(object):
             assert ideas.replace('v', '') == ibpsa.version['IDEAS']
         except IndexError:
             warnings.warn('There was an index error for IDEAS', UserWarning)
+
+    def test_type_bldg_residential_profiles(self):
+        """
+        Verification of the type building generation of an office building.
+        Values are compared with TEASER3 values.
+        """
+        from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling \
+            import SingleFamilyDwelling
+
+        prj.set_default()
+        test_residential = SingleFamilyDwelling(parent=prj,
+                                                name="TestBuilding",
+                                                year_of_construction=1988,
+                                                number_of_floors=3,
+                                                height_of_floors=3,
+                                                net_leased_area=2500)
+
+        test_residential.generate_archetype()
+
+        prj.calc_all_buildings()
+
+        path_to_export = prj.export_aixlib(
+            internal_id=None,
+            path=None)
+
+        from scipy.io import loadmat
+        file = loadmat(os.path.join(
+            path_to_export,
+            "TestBuilding",
+            "InternalGains_TestBuilding.mat"))
+
+        use_cond = test_residential.thermal_zones[0].use_conditions
+
+        assert (file['Internals'].transpose()[1][1:] ==
+                use_cond.profile_persons).all()
+
+        assert (file['Internals'].transpose()[2][1:] ==
+                use_cond.profile_machines).all()
+
+        assert (file['Internals'].transpose()[3][1:] ==
+                use_cond.profile_lighting).all()
