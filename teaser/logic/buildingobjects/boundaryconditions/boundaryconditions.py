@@ -477,7 +477,7 @@ class BoundaryConditions(UseConditions):
     def temp_set_back_cool(self):
         return self._temp_set_back_cool
 
-    @temp_set_back.setter
+    @temp_set_back_cool.setter
     def temp_set_back_cool(self, value):
 
         if isinstance(value, float):
