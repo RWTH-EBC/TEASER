@@ -106,6 +106,9 @@ and then run:
 
  `pip install -e [Path/to/your/Teaser/Clone]` which will install the local version of TEASER.
 
+### Additional Explanations
+The [Institute of Energy Efficiency and Sustainable Building](https://www.e3d.rwth-aachen.de/go/id/iyld/?) published a parametric study of TEASER where all functions and  parameters used in TEASER are gathered and explained. The publication can be found [here](https://publications.rwth-aachen.de/record/749801/files/749801.pdf).
+
 ### How to contribute to the development of TEASER
 You are invited to contribute to the development of TEASER. You may report any issues by using the [Issues](https://github.com/RWTH-EBC/TEASER/issues) button.
 Furthermore, you are welcome to contribute via [Pull Requests](https://github.com/RWTH-EBC/TEASER/pulls).
