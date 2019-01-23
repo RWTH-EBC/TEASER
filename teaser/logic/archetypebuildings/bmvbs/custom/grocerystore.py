@@ -3,7 +3,7 @@
 
 
 from teaser.logic.archetypebuildings.bmvbs.office import Office
-
+import collections
 
 class GroceryStore(Office):
     """Type Grocery Store Building (e.g. Rewe, Edeka)
@@ -145,6 +145,9 @@ class GroceryStore(Office):
                                            office_layout,
                                            window_layout,
                                            construction_type)
+        
+        self.zone_area_factors = collections.OrderedDict()
+        
         # small grocery store
         if net_leased_area < 1152 * 0.89:
 
