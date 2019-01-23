@@ -3,7 +3,7 @@
 
 
 from teaser.logic.archetypebuildings.bmvbs.office import Office
-
+import collections
 
 class Hotel(Office):
     """Type Hotel Building
@@ -157,7 +157,9 @@ class Hotel(Office):
                                     office_layout,
                                     window_layout,
                                     construction_type)
-
+        
+        self.zone_area_factors = collections.OrderedDict()
+        
         # small hotel
         if net_leased_area < 2240 * 0.85:
             self.zone_area_factors["Hotel room"] = \
