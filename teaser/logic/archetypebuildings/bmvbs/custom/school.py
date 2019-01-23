@@ -3,7 +3,7 @@
 
 
 from teaser.logic.archetypebuildings.bmvbs.office import Office
-
+import collections
 
 class School(Office):
     """Type School Building
@@ -151,6 +151,9 @@ class School(Office):
                                      office_layout,
                                      window_layout,
                                      construction_type)
+
+
+        self.zone_area_factors = collections.OrderedDict()
 
         # small school
         if net_leased_area < 5003 * 0.89:

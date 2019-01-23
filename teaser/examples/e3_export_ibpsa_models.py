@@ -22,9 +22,9 @@ def example_export_ibpsa():
 
     # To make sure the export is using the desired parameters you should
     # always set model settings in the Project.
-    # Project().used_library_calc specifies the used Modelica library
-    # Project().number_of_elements_calc sets the models order
-    # Project().merge_windows_calc specifies if thermal conduction through
+    a = prj.used_library_calc #specifies the used Modelica library
+    b = prj.number_of_elements_calc #sets the models order
+    c = prj.merge_windows_calc #specifies if thermal conduction through
     # windows is lumped into outer walls or not.
     # For more information on models we'd like to refer you to the docs. By
     # default TEASER uses a weather file provided in

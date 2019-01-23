@@ -73,6 +73,7 @@ def example_create_building():
 
     from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 
+
     roof_south = Rooftop(parent=tz)
     roof_south.name = "Roof_South"
     roof_south.area = 75.0
@@ -92,6 +93,7 @@ def example_create_building():
     roof_north.outer_convection = 20.0
     roof_north.inner_radiation = 5.0
     roof_north.outer_radiation = 5.0
+
 
     # To define the wall constructions we need to instantiate Layer and
     # Material objects and set attributes. id indicates the order of wall
@@ -261,6 +263,7 @@ def example_create_building():
         win_material.thermal_conduc = 0.067
         win_material.transmittance = 0.9
 
+    return prj
 
 if __name__ == '__main__':
     example_create_building()
