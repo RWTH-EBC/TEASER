@@ -3,7 +3,7 @@
 
 
 from teaser.logic.archetypebuildings.bmvbs.office import Office
-
+import collections
 
 class RetailMarket(Office):
     """Type Retail Market Building (e.g. Deichmann, Takko, Rossmann)
@@ -144,6 +144,7 @@ class RetailMarket(Office):
                                            window_layout,
                                            construction_type)
 
+        self.zone_area_factors = collections.OrderedDict()
         self.zone_area_factors["Retail, department store"] = \
             [0.80, "Retail, department store"]
         self.zone_area_factors["Storage"] = \
