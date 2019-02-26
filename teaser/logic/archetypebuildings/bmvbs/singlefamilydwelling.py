@@ -356,8 +356,6 @@ class SingleFamilyDwelling(Residential):
 
             zone.use_conditions = use_cond
             zone.use_conditions.with_ahu = False
-            zone.use_conditions.persons *= zone.area * 0.01
-            zone.use_conditions.machines *= zone.area * 0.01
 
         for key, value in self.outer_wall_names.items():
             # North and South
