@@ -310,14 +310,15 @@ class Office(NonResidential):
         # (received from window_layout)
 
         self._facade_area = self.height_of_floors * self.number_of_floors * (
-                    2 * self._est_width + 2 * self._est_length)
+            2 * self._est_width + 2 * self._est_length
+        )
 
         if self.window_layout == 0:
             self.corr_factor_wall = self._est_outer_wall_area / (
-                    self._est_outer_wall_area + self._est_win_area
+                self._est_outer_wall_area + self._est_win_area
             )
             self.corr_factor_win = self._est_win_area / (
-                    self._est_outer_wall_area + self._est_win_area
+                self._est_outer_wall_area + self._est_win_area
             )
         self._est_outer_wall_area = self._facade_area * \
             self.corr_factor_wall
