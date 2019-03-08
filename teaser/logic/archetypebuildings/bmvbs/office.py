@@ -323,7 +323,6 @@ class Office(NonResidential):
             self.corr_factor_wall
         self._est_win_area = self._facade_area * self.corr_factor_win
 
-
         # set the facade area to the four orientations
 
         for key, value in self.outer_wall_names.items():
