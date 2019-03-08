@@ -219,7 +219,7 @@ class Office(NonResidential):
         self._est_win_area = 0
         self._est_roof_area = 0
         self._est_floor_area = 0
-        self._est_facade_area = 0
+        self._facade_area = 0
         self._est_width = 0
         self._est_length = 0
 
@@ -309,14 +309,20 @@ class Office(NonResidential):
         # manipulation of wall according to facade design
         # (received from window_layout)
 
-        self._est_facade_area = self._est_outer_wall_area + self._est_win_area
+        self._facade_area = self.height_of_floors * self.number_of_floors * (
+                    2 * self._est_width + 2 * self._est_length)
 
-        if not self.window_layout == 0:
-            self._est_outer_wall_area = self._est_facade_area * \
-                self.corr_factor_wall
-            self._est_win_area = self._est_facade_area * self.corr_factor_win
-        else:
-            pass
+        if self.window_layout == 0:
+            self.corr_factor_wall = self._est_outer_wall_area / (
+                    self._est_outer_wall_area + self._est_win_area
+            )
+            self.corr_factor_win = self._est_win_area / (
+                    self._est_outer_wall_area + self._est_win_area
+            )
+        self._est_outer_wall_area = self._facade_area * \
+            self.corr_factor_wall
+        self._est_win_area = self._facade_area * self.corr_factor_win
+
 
         # set the facade area to the four orientations
 

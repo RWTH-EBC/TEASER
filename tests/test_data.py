@@ -170,14 +170,14 @@ class Test_teaser(object):
 
         assert round(test_office.get_outer_wall_area(-2), 0) == 958
         assert round(test_office.get_outer_wall_area(-1), 0) == 958
-        assert round(test_office.get_outer_wall_area(0), 0) == 437
-        assert round(test_office.get_outer_wall_area(180), 0) == 437
-        assert round(test_office.get_outer_wall_area(90), 0) == 77
-        assert round(test_office.get_outer_wall_area(270), 0) == 77
-        assert round(test_office.get_window_area(0), 0) == 158
-        assert round(test_office.get_window_area(180), 0) == 158
-        assert round(test_office.get_window_area(90), 0) == 28
-        assert round(test_office.get_window_area(270), 0) == 28
+        assert round(test_office.get_outer_wall_area(0), 0) == 488
+        assert round(test_office.get_outer_wall_area(180), 0) == 488
+        assert round(test_office.get_outer_wall_area(90), 0) == 86
+        assert round(test_office.get_outer_wall_area(270), 0) == 86
+        assert round(test_office.get_window_area(0), 0) == 176
+        assert round(test_office.get_window_area(180), 0) == 176
+        assert round(test_office.get_window_area(90), 0) == 31
+        assert round(test_office.get_window_area(270), 0) == 31
 
         prj.set_default()
         test_office = Office(parent=prj,
@@ -196,14 +196,14 @@ class Test_teaser(object):
 
         assert round(test_office.get_outer_wall_area(-2), 0) == 958
         assert round(test_office.get_outer_wall_area(-1), 0) == 958
-        assert round(test_office.get_outer_wall_area(0), 0) == 446
-        assert round(test_office.get_outer_wall_area(180), 0) == 446
-        assert round(test_office.get_outer_wall_area(90), 0) == 79
-        assert round(test_office.get_outer_wall_area(270), 0) == 79
-        assert round(test_office.get_window_area(0), 0) == 149
-        assert round(test_office.get_window_area(180), 0) == 149
-        assert round(test_office.get_window_area(90), 0) == 26
-        assert round(test_office.get_window_area(270), 0) == 26
+        assert round(test_office.get_outer_wall_area(0), 0) == 498
+        assert round(test_office.get_outer_wall_area(180), 0) == 498
+        assert round(test_office.get_outer_wall_area(90), 0) == 88
+        assert round(test_office.get_outer_wall_area(270), 0) == 88
+        assert round(test_office.get_window_area(0), 0) == 166
+        assert round(test_office.get_window_area(180), 0) == 166
+        assert round(test_office.get_window_area(90), 0) == 29
+        assert round(test_office.get_window_area(270), 0) == 29
 
         prj.set_default()
         test_office = Office(parent=prj,
@@ -222,14 +222,14 @@ class Test_teaser(object):
 
         assert round(test_office.get_outer_wall_area(-2), 0) == 958
         assert round(test_office.get_outer_wall_area(-1), 0) == 958
-        assert round(test_office.get_outer_wall_area(0), 0) == 283
-        assert round(test_office.get_outer_wall_area(180), 0) == 283
-        assert round(test_office.get_outer_wall_area(90), 0) == 67
-        assert round(test_office.get_outer_wall_area(270), 0) == 67
-        assert round(test_office.get_window_area(0), 0) == 283
-        assert round(test_office.get_window_area(180), 0) == 283
-        assert round(test_office.get_window_area(90), 0) == 67
-        assert round(test_office.get_window_area(270), 0) == 67
+        assert round(test_office.get_outer_wall_area(0), 0) == 288
+        assert round(test_office.get_outer_wall_area(180), 0) == 288
+        assert round(test_office.get_outer_wall_area(90), 0) == 68
+        assert round(test_office.get_outer_wall_area(270), 0) == 68
+        assert round(test_office.get_window_area(0), 0) == 288
+        assert round(test_office.get_window_area(180), 0) == 288
+        assert round(test_office.get_window_area(90), 0) == 68
+        assert round(test_office.get_window_area(270), 0) == 68
 
         prj.set_default()
         test_office = Office(parent=prj,
@@ -248,14 +248,14 @@ class Test_teaser(object):
 
         assert round(test_office.get_outer_wall_area(-2), 0) == 958
         assert round(test_office.get_outer_wall_area(-1), 0) == 958
-        assert round(test_office.get_outer_wall_area(0), 0) == 35
-        assert round(test_office.get_outer_wall_area(180), 0) == 35
-        assert round(test_office.get_outer_wall_area(90), 0) == 35
-        assert round(test_office.get_outer_wall_area(270), 0) == 35
-        assert round(test_office.get_window_area(0), 0) == 315
-        assert round(test_office.get_window_area(180), 0) == 315
-        assert round(test_office.get_window_area(90), 0) == 315
-        assert round(test_office.get_window_area(270), 0) == 315
+        assert round(test_office.get_outer_wall_area(0), 0) == 28
+        assert round(test_office.get_outer_wall_area(180), 0) == 28
+        assert round(test_office.get_outer_wall_area(90), 0) == 28
+        assert round(test_office.get_outer_wall_area(270), 0) == 28
+        assert round(test_office.get_window_area(0), 0) == 251
+        assert round(test_office.get_window_area(180), 0) == 251
+        assert round(test_office.get_window_area(90), 0) == 251
+        assert round(test_office.get_window_area(270), 0) == 251
 
     def test_type_bldg_institute4_with_calc(self):
         """
@@ -304,14 +304,14 @@ class Test_teaser(object):
 
         assert round(test_institute4.get_outer_wall_area(-2), 0) == 958
         assert round(test_institute4.get_outer_wall_area(-1), 0) == 958
-        assert round(test_institute4.get_outer_wall_area(0), 0) == 742
-        assert round(test_institute4.get_outer_wall_area(180), 0) == 742
-        assert round(test_institute4.get_outer_wall_area(90), 0) == 131
-        assert round(test_institute4.get_outer_wall_area(270), 0) == 131
-        assert round(test_institute4.get_window_area(0), 0) == 158
-        assert round(test_institute4.get_window_area(180), 0) == 158
-        assert round(test_institute4.get_window_area(90), 0) == 28
-        assert round(test_institute4.get_window_area(270), 0) == 28
+        assert round(test_institute4.get_outer_wall_area(0), 0) == 547
+        assert round(test_institute4.get_outer_wall_area(180), 0) == 547
+        assert round(test_institute4.get_outer_wall_area(90), 0) == 96
+        assert round(test_institute4.get_outer_wall_area(270), 0) == 96
+        assert round(test_institute4.get_window_area(0), 0) == 116
+        assert round(test_institute4.get_window_area(180), 0) == 116
+        assert round(test_institute4.get_window_area(90), 0) == 21
+        assert round(test_institute4.get_window_area(270), 0) == 21
 
     def test_type_bldg_institute8_with_calc(self):
         """
@@ -360,14 +360,14 @@ class Test_teaser(object):
 
         assert round(test_institute8.get_outer_wall_area(-2), 0) == 958
         assert round(test_institute8.get_outer_wall_area(-1), 0) == 958
-        assert round(test_institute8.get_outer_wall_area(0), 0) == 742
-        assert round(test_institute8.get_outer_wall_area(180), 0) == 742
-        assert round(test_institute8.get_outer_wall_area(90), 0) == 131
-        assert round(test_institute8.get_outer_wall_area(270), 0) == 131
-        assert round(test_institute8.get_window_area(0), 0) == 158
-        assert round(test_institute8.get_window_area(180), 0) == 158
-        assert round(test_institute8.get_window_area(90), 0) == 28
-        assert round(test_institute8.get_window_area(270), 0) == 28
+        assert round(test_institute8.get_outer_wall_area(0), 0) == 547
+        assert round(test_institute8.get_outer_wall_area(180), 0) == 547
+        assert round(test_institute8.get_outer_wall_area(90), 0) == 96
+        assert round(test_institute8.get_outer_wall_area(270), 0) == 96
+        assert round(test_institute8.get_window_area(0), 0) == 116
+        assert round(test_institute8.get_window_area(180), 0) == 116
+        assert round(test_institute8.get_window_area(90), 0) == 21
+        assert round(test_institute8.get_window_area(270), 0) == 21
 
     def test_type_bldg_institute_with_calc(self):
         """
@@ -416,14 +416,14 @@ class Test_teaser(object):
 
         assert round(test_institute.get_outer_wall_area(-2), 0) == 958
         assert round(test_institute.get_outer_wall_area(-1), 0) == 958
-        assert round(test_institute.get_outer_wall_area(0), 0) == 836
-        assert round(test_institute.get_outer_wall_area(180), 0) == 836
-        assert round(test_institute.get_outer_wall_area(90), 0) == 147
-        assert round(test_institute.get_outer_wall_area(270), 0) == 147
-        assert round(test_institute.get_window_area(0), 0) == 158
-        assert round(test_institute.get_window_area(180), 0) == 158
-        assert round(test_institute.get_window_area(90), 0) == 28
-        assert round(test_institute.get_window_area(270), 0) == 28
+        assert round(test_institute.get_outer_wall_area(0), 0) == 558
+        assert round(test_institute.get_outer_wall_area(180), 0) == 558
+        assert round(test_institute.get_outer_wall_area(90), 0) == 98
+        assert round(test_institute.get_outer_wall_area(270), 0) == 98
+        assert round(test_institute.get_window_area(0), 0) == 105
+        assert round(test_institute.get_window_area(180), 0) == 105
+        assert round(test_institute.get_window_area(90), 0) == 19
+        assert round(test_institute.get_window_area(270), 0) == 19
 
     def test_type_bldg_residential_with_calc(self):
         """
