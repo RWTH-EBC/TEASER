@@ -1,12 +1,12 @@
 TRY12   Oberrheingraben und unteres Neckartal                              (Klimaregion 12)
 Station: Mannheim                        WMO-Nummer: 10729
-Lage: 49°31'N <- B.   8°33'O <- L.    96 Meter über NN
+Lage: 49 31'N <- B.   8 33'O <- L.    96 Meter ueber NN
 Zeitpunkt der Erstellung: November 2010
 
 Art des TRY    : mittleres Jahr
 Bezugszeitraum : 1988-2007
 Stadteffekt    : -----
-Höhenkorrektur : -----
+Hoehenkorrektur : -----
 
 Datenbasis : Beobachtungsdaten Zeitraum 1988-2007
 
@@ -19,19 +19,19 @@ MM Monat                                                                {1..12}
 DD Tag                                                                  {1..28,30,31}
 HH Stunde (MEZ)                                                         {1..24}
 N  Bedeckungsgrad                                              [Achtel] {0..8;9}
-WR Windrichtung in 10 m Höhe über Grund                        [°]      {0;10..360;999}
-WG Windgeschwindigkeit in 10 m Höhe über Grund                 [m/s]
-t  Lufttemperatur in 2m Höhe über Grund                        [°C]
-p  Luftdruck in Stationshöhe                                   [hPa]
-x  Wasserdampfgehalt, Mischungsverhältnis                      [g/kg]
-RF Relative Feuchte in 2 m Höhe über Grund                     [%]      {1..100}
+WR Windrichtung in 10 m Hoehe ueber Grund                        []      {0;10..360;999}
+WG Windgeschwindigkeit in 10 m Hoehe ueber Grund                 [m/s]
+t  Lufttemperatur in 2m Hoehe ueber Grund                        [deg C]
+p  Luftdruck in Stationshoehe                                   [hPa]
+x  Wasserdampfgehalt, Mischungsverhaeltnis                      [g/kg]
+RF Relative Feuchte in 2 m Hoehe ueber Grund                     [%]      {1..100}
 W  Wetterereignis der aktuellen Stunde                                  {0..99}
-B  Direkte Sonnenbestrahlungsstärke (horiz. Ebene)             [W/m²]   abwärts gerichtet: positiv
-D  Difuse Sonnenbetrahlungsstärke (horiz. Ebene)               [W/m²]   abwärts gerichtet: positiv
+B  Direkte Sonnenbestrahlungsstaerke (horiz. Ebene)             [W/m2]   abwaerts gerichtet: positiv
+D  Difuse Sonnenbetrahlungsstaerke (horiz. Ebene)               [W/m2]   abwaerts gerichtet: positiv
 IK Information, ob B und oder D Messwert/Rechenwert                     {1;2;3;4;9}
-A  Bestrahlungsstärke d. atm. Wärmestrahlung (horiz. Ebene)    [W/m²]   abwärts gerichtet: positiv
-E  Bestrahlungsstärke d. terr. Wärmestrahlung                  [W/m²]   aufwärts gerichtet: negativ
-IL Qualitätsbit für die langwelligen Strahlungsgrößen                   {1;2;3;4;5;6;7;8;9}
+A  Bestrahlungsstaerke d. atm. Waermestrahlung (horiz. Ebene)    [W/m2]   abwaerts gerichtet: positiv
+E  Bestrahlungsstaerke d. terr. Waermestrahlung                  [W/m2]   aufwaerts gerichtet: negativ
+IL Qualitaetsbit fuer die langwelligen Strahlungsgroessen                   {1;2;3;4;5;6;7;8;9}
 
 
 RG    IS  MM  DD  HH  N   WR      WG       t       p        x   RF   W     B     D IK    A      E IL
