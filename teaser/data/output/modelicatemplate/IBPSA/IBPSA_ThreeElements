@@ -273,7 +273,8 @@ equation
   connect(prescribedTemperatureFloor.T, TSoil.y) annotation (Line(points={{67,-19.2},
           {72.5,-19.2},{72.5,-22},{79.6,-22}}, color={0,0,127}));
   annotation (experiment(
-  StopTime=${zone.parent.parent.modelica_info.runtime_simulation},
+  StartTime=${str(zone.parent.parent.modelica_info.start_time)},
+  StopTime=${str(zone.parent.parent.modelica_info.stop_time)},
   Interval=${zone.parent.parent.modelica_info.interval_output},
   __Dymola_Algorithm="${zone.parent.parent.modelica_info.current_solver}"),
   __Dymola_experimentSetupOutput(equidistant=${get_true_false(zone.parent.parent.modelica_info.equidistant_output)},
