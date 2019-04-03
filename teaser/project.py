@@ -35,10 +35,14 @@ from teaser.logic.archetypebuildings.tabula.dk.singlefamilyhouse import \
     SingleFamilyHouse as SingleFamilyHouse_DK
 from teaser.logic.archetypebuildings.tabula.de.terracedhouse import \
     TerracedHouse
+from teaser.logic.archetypebuildings.tabula.dk.terracedhouse import \
+    TerracedHouse as TerracedHouse_DK
 from teaser.logic.archetypebuildings.tabula.de.multifamilyhouse import \
     MultiFamilyHouse
 from teaser.logic.archetypebuildings.tabula.de.apartmentblock import \
     ApartmentBlock
+from teaser.logic.archetypebuildings.tabula.dk.apartmentblock import \
+    ApartmentBlock as ApartmentBlock_DK
 from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import \
     SingleFamilyDwelling
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
@@ -526,7 +530,7 @@ class Project(object):
             "effect on archetype generation for 'iwu' or"
             "'tabula_de', see docs for more information")
 
-        if method in ['iwu', 'tabula_de'] and number_of_apartments is not None:
+        if method in ['iwu', 'tabula_de', 'tabula_dk'] and number_of_apartments is not None:
             warnings.warn(ass_error_apart)
 
         if method == 'tabula_de':
@@ -607,13 +611,43 @@ class Project(object):
             elif self.data.used_statistic != 'tabula_dk':
                 self.data = DataClass(used_statistic=method)
 
-            ass_error_usage_tabula = "only 'single_family_house'"
-            assert usage in ['single_family_house'], \
+            ass_error_usage_tabula = "only 'single_family_house',"
+            "'terraced_house', 'apartment_block' are"
+            "valid usages for iwu archetype method"
+            assert usage in ['single_family_house' ,'terraced_house','apartment_block'], \
                 ass_error_usage_tabula
 
             if usage == 'single_family_house':
 
                 type_bldg = SingleFamilyHouse_DK(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    construction_type)
+                type_bldg.generate_archetype()
+                return type_bldg
+
+            elif usage == 'terraced_house':
+
+                type_bldg = TerracedHouse_DK(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    construction_type)
+                type_bldg.generate_archetype()
+                return type_bldg
+
+            elif usage == 'apartment_block':
+
+                type_bldg = ApartmentBlock_DK(
                     self,
                     name,
                     year_of_construction,
