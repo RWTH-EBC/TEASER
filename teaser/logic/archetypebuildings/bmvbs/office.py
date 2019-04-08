@@ -290,11 +290,6 @@ class Office(NonResidential):
                                          data_class=self.parent.data)
             zone.use_conditions = use_cond
 
-            # scale up persons and machines in the zone with area of zone
-            # TODO: @mla where does 0.01 come from?
-            zone.use_conditions.persons *= zone.area * 0.01
-            zone.use_conditions.machines *= zone.area * 0.01
-
         # statistical estimation of the facade
 
         self._est_outer_wall_area = self.est_factor_wall_area * \
