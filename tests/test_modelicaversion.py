@@ -5,7 +5,7 @@ import os
 prj = Project(True)
 
 
-class Test_teaser(object):
+class TestModelicaVersions(object):
     """Unit Tests for TEASER"""
     global prj
 
@@ -49,7 +49,8 @@ class Test_teaser(object):
                 'modelica/Buildings')[0].get_tags()[0].name
             assert buildings.replace('v', '') == ibpsa.version['Buildings']
         except IndexError:
-            warnings.warn('There was an index error for Buildings', UserWarning)
+            warnings.warn(
+                'There was an index error for Buildings', UserWarning)
 
         try:
             buildingsys = git.search_repositories(
@@ -65,8 +66,3 @@ class Test_teaser(object):
             assert ideas.replace('v', '') == ibpsa.version['IDEAS']
         except IndexError:
             warnings.warn('There was an index error for IDEAS', UserWarning)
-
-
-if __name__ == "__main__":
-    testTeaser = Test_teaser()
-    testTeaser.test_modelica_export_version()
