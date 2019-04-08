@@ -23,7 +23,7 @@ master:
   - coveralls
 
 script:
-- py.test --cov=teaser --ignore=tests\test_modelicaversion.py
+- py.test --cov=teaser --ignore=tests/test_modelicaversion.py
 after_success:
 - coveralls
 
