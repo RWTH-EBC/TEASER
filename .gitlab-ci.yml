@@ -78,7 +78,7 @@ test3.6:
   image: python:3.6
   stage: test
   only:
-    master
+    - master
   script:
 
     - pip install --upgrade pip setuptools wheel
