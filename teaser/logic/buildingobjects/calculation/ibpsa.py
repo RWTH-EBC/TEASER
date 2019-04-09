@@ -44,7 +44,7 @@ class IBPSA(object):
 
         self.parent = parent
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
-        self.version = {'AixLib': '0.7.3', 'Buildings': '5.1.0',
+        self.version = {'AixLib': '0.7.4', 'Buildings': '5.1.0',
                         'BuildingSystems': '2.0.0-beta2', 'IDEAS': '2.0.0'}
         self.consider_heat_capacity = True
 
@@ -155,14 +155,17 @@ class IBPSA(object):
                 time.append(zone.use_conditions.profile_persons[i - 1] *
                             zone.use_conditions.persons *
                             zone.use_conditions.activity_type_persons * 50 *
-                            (1 - zone.use_conditions.ratio_conv_rad_persons))
+                            (1 - zone.use_conditions.ratio_conv_rad_persons) *
+                            zone.area * 0.01)
                 time.append(zone.use_conditions.profile_persons[i - 1] *
                             zone.use_conditions.persons *
                             zone.use_conditions.activity_type_persons * 50 *
-                            zone.use_conditions.ratio_conv_rad_persons)
+                            zone.use_conditions.ratio_conv_rad_persons *
+                            zone.area * 0.01)
                 time.append(zone.use_conditions.profile_machines[i - 1] *
                             zone.use_conditions.machines *
-                            zone.use_conditions.activity_type_machines * 50)
+                            zone.use_conditions.activity_type_machines * 50 *
+                            zone.area * 0.01)
 
         internal_boundary = np.array(time_line)
 

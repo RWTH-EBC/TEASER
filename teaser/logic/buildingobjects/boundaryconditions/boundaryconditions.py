@@ -141,9 +141,11 @@ class BoundaryConditions(UseConditions):
     INTERNAL GAINS
 
     persons : float [W/m2]
-        Average sensible heat transmission of people at 24 C with specific
-        heat transmission of 70 W/person, taken from SIA 2024.
-        AixLib: Used in Zone record for internal gains, NrPeople
+        Average sensible heat transmission per m2 of people with specific
+        heat transmission of 70 W/person, taken from SIA 2024 and DIN V 18599-10
+        for medium occupancy.
+        AixLib: Used in Zone record for internal gains as
+        internalGainsPeopleSpecific
         Annex: Used for internal gains
     activity_type_persons : float [W/person]
         persons activity (1: light, 2: moderate, 3: high). This value is
@@ -165,9 +167,9 @@ class BoundaryConditions(UseConditions):
         AixLib: Used for internal gains profile on top-level
         Annex: Used for internal gains
     machines: float [W/m2]
-        Specific eletrical load of machines per m2. This value is taken from
-        SIA 2024.
-        AixLib: Used in Zone record for internal gains
+        Specific eletrical load of machines per m2. This value is taken
+        from SIA 2024 and DIN V 18599-10 for medium occupancy.
+        AixLib: Used in Zone record for internal gains, internalGainsMachinesSpecific
         Annex: Used for internal gains
     activity_type_machines : float [W/machine]
         machines activity (1: light, 50W/machine, 2: moderate 100W/machine,
