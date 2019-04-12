@@ -267,7 +267,7 @@ class Office(NonResidential):
                                                     12 * [295.15] +
                                                     6 * [293.15])
             #  according to :cite:`DeutschesInstitutfurNormung.2016`
-            self.central_ahu.profile_min_relative_humidity = (25 * [0.45])   #
+            self.central_ahu.profile_min_relative_humidity = (25 * [0.45])  #
             #  according to :cite:`DeutschesInstitutfurNormung.2016b`  and
             # :cite:`DeutschesInstitutfurNormung.2016`
             self.central_ahu.profile_max_relative_humidity = (25 * [0.65])
@@ -303,13 +303,13 @@ class Office(NonResidential):
         # statistical estimation of the facade
 
         self._est_outer_wall_area = self.est_factor_wall_area * \
-                                    type_bldg_area ** self.est_exponent_wall
+            type_bldg_area ** self.est_exponent_wall
         self._est_win_area = self.est_factor_win_area * \
-                             type_bldg_area ** self.est_exponent_win
+            type_bldg_area ** self.est_exponent_win
         self._est_roof_area = (type_bldg_area / self.number_of_floors) * \
-                              self.gross_factor
+            self.gross_factor
         self._est_floor_area = (type_bldg_area / self.number_of_floors) * \
-                               self.gross_factor
+            self.gross_factor
 
         # manipulation of wall according to facade design
         # (received from window_layout)
@@ -331,7 +331,7 @@ class Office(NonResidential):
                 self._est_outer_wall_area + self._est_win_area
             )
         self._est_outer_wall_area = self._facade_area * \
-                                    self.corr_factor_wall
+            self.corr_factor_wall
         self._est_win_area = self._facade_area * self.corr_factor_win
 
         # set the facade area to the four orientations
@@ -576,7 +576,7 @@ class Office(NonResidential):
 
         for surface in self.gml_surfaces:
             if surface.surface_tilt is not None:
-                if surface.surface_tilt != 0 and surface.surface_orientation \
+                if surface.surface_tilt != 0 and surface.surface_orientation\
                         != -2 and surface.surface_orientation != -1:
                     self.set_outer_wall_area(surface.surface_area *
                                              (1 - self.est_factor_win_area),
@@ -587,7 +587,7 @@ class Office(NonResidential):
 
         for surface in self.gml_surfaces:
             if surface.surface_tilt is not None:
-                if surface.surface_tilt != 0 and surface.surface_orientation \
+                if surface.surface_tilt != 0 and surface.surface_orientation\
                         != -2 and surface.surface_orientation != -1:
                     self.set_window_area(surface.surface_area *
                                          self.est_factor_win_area,
