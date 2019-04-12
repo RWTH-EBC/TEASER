@@ -4,7 +4,6 @@
 
 import math
 import collections
-from teaser.logic.archetypebuildings.nonresidential import NonResidential
 from teaser.logic.archetypebuildings.nonresidential \
     import NonResidential
 from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
