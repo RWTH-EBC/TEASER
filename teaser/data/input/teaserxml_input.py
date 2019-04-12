@@ -101,7 +101,7 @@ def _load_building(prj, pyxb_bld, type, project_bind):
         bldg = Building(prj)
 
     elif type == "Office":
-        bldg = Office(prj)
+        bldg = Office(prj, office_layout=None)
 
     elif type == "Institute":
 
