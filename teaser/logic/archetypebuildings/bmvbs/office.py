@@ -244,9 +244,9 @@ class Office(NonResidential):
         elif self.office_layout == 2:
             self._est_width = 15.0
         elif self.office_layout == 3:
-            self._est_width = math.sqrt(
-                (self.net_leased_area / self.number_of_floors) * self.gross_factor
-            )
+            self._est_width = math.sqrt((self.net_leased_area /
+                                         self.number_of_floors) *
+                                        self.gross_factor)
         elif self.office_layout is None:
             self._est_width = 1  # This is only used for assigning areas to orientations
         else:
