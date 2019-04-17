@@ -63,7 +63,7 @@ class Test_teaser(object):
         assert round(zone_attr.area_iw, 1) == 75.5
         assert round(zone_attr.alpha_conv_inner_iw, 13) == 2.23642384105960
 
-        # paremeters outer wall Typraum S
+        # parameters outer wall Typraum S
         r_rest = zone_attr.r_rest_ow + 1 / (zone_attr.alpha_comb_outer_ow *
                                             zone_attr.area_ow)
         assert round(r_rest, 13) == 0.0427687193786
@@ -3391,7 +3391,7 @@ class Test_teaser(object):
         Run VDI 6007 test case 1
         """
 
-        tuple_res = vdi1_new_core.run_case1()
+        tuple_res = vdi1_new_core.run_case1(True)
 
         #  Check if temperature deviation is below 0.1 Kelvin
         for val in tuple_res:

@@ -63,7 +63,8 @@ class WeatherData(object):
         weather_data = np.genfromtxt(
             path,
             skip_header=38,
-            usecols=(8, 13, 14, 16, 17))
+            usecols=(8, 13, 14, 16, 17),
+            encoding="ISO 8859-1")
 
         self.air_temp = weather_data[:, 0]
         self.direct_radiation = weather_data[:, 1]
