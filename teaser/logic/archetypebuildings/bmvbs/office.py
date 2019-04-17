@@ -153,7 +153,7 @@ class Office(NonResidential):
             height_of_floors=None,
             net_leased_area=None,
             with_ahu=False,
-            office_layout=None,
+            office_layout=3,
             window_layout=None,
             construction_type=None):
         """Constructor of Office archetype
