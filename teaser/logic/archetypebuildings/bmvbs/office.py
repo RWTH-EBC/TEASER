@@ -76,11 +76,12 @@ class Office(NonResidential):
         assigned to attribute central_ahu. This instance holds information for
         central Air Handling units. Default is False.
     office_layout : int
-        Structure of the floor plan of office buildings, default is 1,
+        Structure of the floor plan of office buildings, default is 3,
         which is representative for one elongated floor.
             1: elongated 1 floor
             2: elongated 2 floors
             3: compact (e.g. for a square base building)
+            None: as 3, but the facade area is estimated, not calculated
     window_layout : int
         Structure of the window facade type, default is 0, which is a generic facade
         representing a statistical mean value of window area. This is the foundation
@@ -152,7 +153,7 @@ class Office(NonResidential):
             height_of_floors=None,
             net_leased_area=None,
             with_ahu=False,
-            office_layout=None,
+            office_layout=3,
             window_layout=None,
             construction_type=None):
         """Constructor of Office archetype
@@ -238,7 +239,7 @@ class Office(NonResidential):
         else:
             raise ValueError("window_layout value has to be between 0 - 3")
 
-        if self.office_layout == 0 or self.office_layout == 1:
+        if self.office_layout == 1:
             self._est_width = 13.0
         elif self.office_layout == 2:
             self._est_width = 15.0
@@ -246,15 +247,18 @@ class Office(NonResidential):
             self._est_width = math.sqrt((self.net_leased_area /
                                          self.number_of_floors) *
                                         self.gross_factor)
+        elif self.office_layout is None:
+            self._est_width = 1  # This is only used for assigning areas to orientations
         else:
-            raise ValueError("office_layout value has to be between 0 - 3")
-        if self.net_leased_area is not None and self.number_of_floors is not \
-                None:
-            self._est_length = ((self.net_leased_area /
-                                 self.number_of_floors) *
-                                self.gross_factor) / self._est_width
+            raise ValueError("office_layout value has to be between 1 - 3 or None")
+
+        if self.office_layout is not None:
+            if self.net_leased_area is not None and self.number_of_floors is not None:
+                self._est_length = (
+                    (self.net_leased_area / self.number_of_floors) * self.gross_factor
+                ) / self._est_width
         else:
-            pass
+            self._est_length = 1  # This is only used for assigning areas to orientations
 
         # default values for AHU
         if self.with_ahu is True:
@@ -309,9 +313,14 @@ class Office(NonResidential):
         # manipulation of wall according to facade design
         # (received from window_layout)
 
-        self._facade_area = self.height_of_floors * self.number_of_floors * (
-            2 * self._est_width + 2 * self._est_length
-        )
+        if self.office_layout is None:
+            self._facade_area = self._est_outer_wall_area + self._est_win_area
+        else:
+            self._facade_area = (
+                self.height_of_floors
+                * self.number_of_floors
+                * (2 * self._est_width + 2 * self._est_length)
+            )
 
         if self.window_layout == 0:
             self.corr_factor_wall = self._est_outer_wall_area / (
@@ -586,17 +595,6 @@ class Office(NonResidential):
         for zone in self.thermal_zones:
             zone.set_inner_wall_area()
             zone.set_volume_zone()
-
-    @property
-    def office_layout(self):
-        return self._office_layout
-
-    @office_layout.setter
-    def office_layout(self, value):
-        if value is not None:
-            self._office_layout = value
-        else:
-            self._office_layout = 0
 
     @property
     def window_layout(self):

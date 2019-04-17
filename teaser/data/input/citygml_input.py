@@ -81,7 +81,8 @@ def load_gml(path, prj):
                 elif city_object.Feature.function[0].value() == "1120":
                     bld = Office(
                         parent=prj,
-                        name=city_object.Feature.id)
+                        name=city_object.Feature.id,
+                        office_layout=None)
                 else:
                     bld = Building(
                         parent=prj,

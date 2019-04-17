@@ -264,7 +264,7 @@ class Project(object):
             height_of_floors,
             net_leased_area,
             with_ahu=True,
-            office_layout=None,
+            office_layout=3,
             window_layout=None,
             construction_type=None):
         """Add a non-residential building to the TEASER project.
