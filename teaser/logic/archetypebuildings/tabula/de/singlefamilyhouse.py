@@ -23,13 +23,14 @@ class SingleFamilyHouse(Residential):
     This is an archetype building for german single family house according to
     TABULA building typology (http://webtool.building-typology.eu/#bm). As
     TABULA defines one reference building, whereas TEASER wants to provide a
-    methodology to generate individual building informations, this archetype
+    methodology to generate individual building information, this archetype
     underlies some assumptions. The made assumptions are explained in the
     following:
 
     Each building has four orientations for outer walls and windows (north,
     east, south and west), two orientations for rooftops (south and north), with
-    tilt of 35 degree and one orientaion for ground floors and one door (default
+    tilt of 35 degree and one orientation for ground floors and one door (
+    default
     orientation is west). The area of each surface is calculated using the
     product of the given net_leased_area and specific estimation factors. These
     estimation factors where build by dividing the given 'surface area' by the
@@ -84,7 +85,7 @@ class SingleFamilyHouse(Residential):
                 construction of walls according to existing state in TABULA
             usual refurbishment:
                 construction of walls according to usual refurbishment in TABULA
-            advanced refurbishmet:
+            advanced refurbishment:
                 construction of walls according to advanced refurbishment in
                 TABULA
     """
@@ -299,7 +300,7 @@ class SingleFamilyHouse(Residential):
                 7 * [0.0] + 12 * [1.0] + 6 * [0.0])
 
     def _check_year_of_construction(self):
-        """Assignes the bldg age group according to year of construction"""
+        """Assigns the bldg age group according to year of construction"""
 
         for key in self.facade_estimation_factors:
             if self.year_of_construction in range(key[0], key[1]) or \
@@ -317,7 +318,7 @@ class SingleFamilyHouse(Residential):
         With given values, this function generates an archetype building for
         Tabula Single Family House.
         """
-
+        self.thermal_zones = None
         self._check_year_of_construction()
         # help area for the correct building area setting while using typeBldgs
         type_bldg_area = self.net_leased_area
@@ -331,6 +332,8 @@ class SingleFamilyHouse(Residential):
             use_cond.load_use_conditions(
                 zone_usage=value[1])
             zone.use_conditions = use_cond
+
+            zone.use_conditions.with_ahu = False
 
         if self.facade_estimation_factors[self.building_age_group]['ow1'] != 0:
             for key, value in self._outer_wall_names_1.items():

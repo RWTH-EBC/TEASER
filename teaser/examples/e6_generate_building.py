@@ -149,7 +149,7 @@ def example_create_building():
     material_n2.thermal_conduc = 2.5
 
     # Another option is to use the database for typical wall constructions,
-    # but set area, tilt, orientation individually. To simplifiy code,
+    # but set area, tilt, orientation individually. To simplify code,
     # we save individual information for exterior walls, interior walls into
     # dictionaries.
     # outer walls
@@ -254,7 +254,7 @@ def example_create_building():
         win_layer.id = 1
         win_layer.thickness = 0.024
 
-        # Material for Glas
+        # Material for glass
 
         win_material = Material(win_layer)
         win_material.name = "GlasWindow"

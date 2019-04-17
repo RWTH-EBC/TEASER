@@ -201,10 +201,11 @@ class Project(object):
             type_of_retrofit=None,
             window_type=None,
             material=None):
-        """Retrofits all buildings in the project
+        """Retrofits all buildings in the project.
 
         Depending on the used Archetype approach this function will retrofit
-        the building.
+        the building. If you have archetypes of both typologies (tabula and
+        iwu/BMBVS) you need to pass all keywords (see also Parameters section).
 
         If TABULA approach is used, it will replace the current construction
         with the construction specified in 'type_of_retrofit',
@@ -230,57 +231,57 @@ class Project(object):
 
         Parameters
         ----------
-
         year_of_retrofit : int
-            the year the buildings are retrofitted
+            the year the buildings are retrofitted, only 'iwu'/'bmbvs'
+            archetype approach.
         type_of_retrofit : str
             The classification of retrofit, if the archetype building
             approach of TABULA is used.
         window_type : str
-            Default: EnEv 2014, only 'iwu' archetype approach.
+            Default: EnEv 2014, only 'iwu'/'bmbvs' archetype approach.
         material : str
-            Default: EPS035, only 'iwu' archetype approach.
+            Default: EPS035, only 'iwu'/'bmbvs' archetype approach.
 
         """
-
         ass_error_type = "only 'retrofit' and 'adv_retrofit' are valid "
         assert type_of_retrofit in [None, 'adv_retrofit', 'retrofit'], \
             ass_error_type
+        tabula_buildings = []
+        iwu_buildings = []
 
         for bldg in self.buildings:
             if isinstance(bldg, SingleFamilyHouse):
-                if self.data.used_statistic != 'tabula_de':
-                    self.data = DataClass(used_statistic='tabula_de')
-                if year_of_retrofit is not None or window_type is not None or \
-                        material is not None:
-                    warnings.warn("you are retrofitting archetype building of "
-                                  "type 'tabula' and want to use attribute"
-                                  "'year_of_retrofit' 'window_type' or"
-                                  "'material', this is not "
-                                  "possible. However, this building will be "
-                                  "retrofitted as described in the docs" +
-                                  bldg.name)
-                bldg.retrofit_building(
-                    year_of_retrofit,
-                    type_of_retrofit,
-                    window_type,
-                    material)
+                if type_of_retrofit is None:
+                    raise ValueError("you need to set type_of_retrofit for "
+                                     "TABULA retrofit")
+                tabula_buildings.append(bldg)
             else:
-                if self.data.used_statistic != 'iwu':
-                    self.data = DataClass(used_statistic='iwu')
-                if type_of_retrofit is not None:
-                    warnings.warn("you are retrofitting archetype building of "
-                                  "type 'iwu' and want to use attribute "
-                                  "'type_of_retrofit', this is not possible "
-                                  "(only for TABULA). This building will be "
-                                  "retrofitted as described in the docs " +
-                                  bldg.name)
+                if year_of_retrofit is None:
+                    raise ValueError("you need to set year_of_retrofit for "
+                                     "retrofit")
+                iwu_buildings.append(bldg)
 
-                bldg.retrofit_building(
-                    year_of_retrofit,
-                    type_of_retrofit,
-                    window_type,
-                    material)
+        if self.data.used_statistic == 'iwu':
+            for bld_iwu in iwu_buildings:
+                bld_iwu.retrofit_building(
+                    year_of_retrofit=year_of_retrofit,
+                    window_type=window_type,
+                    material=material)
+            self.data = DataClass(used_statistic='tabula_de')
+            for bld_tabula in tabula_buildings:
+                bld_tabula.retrofit_building(
+                    type_of_retrofit=type_of_retrofit)
+
+        else:
+            for bld_tabula in tabula_buildings:
+                bld_tabula.retrofit_building(
+                    type_of_retrofit=type_of_retrofit)
+            self.data = DataClass(used_statistic='iwu')
+            for bld_iwu in iwu_buildings:
+                bld_iwu.retrofit_building(
+                    year_of_retrofit=year_of_retrofit,
+                    window_type=window_type,
+                    material=material)
 
     def add_non_residential(
             self,
@@ -313,7 +314,7 @@ class Project(object):
         Parameters
         ----------
         method : str
-            Used archetype method, currenlty only 'bmvbs' is supported
+            Used archetype method, currently only 'bmvbs' is supported
         usage : str
             Main usage of the obtained building, currently only 'office',
             'institute', 'institute4', institute8' are supported
@@ -362,7 +363,7 @@ class Project(object):
         assert method in ['bmvbs'], ass_error_method
 
         ass_error_usage = "only 'office', 'institute', 'institute4', " \
-                          "'institute8' are valid usagesfor archetype " \
+                          "'institute8' are valid usages for archetype " \
                           "generation"
 
         assert usage in ['office', 'institute', 'institute4',
@@ -471,10 +472,10 @@ class Project(object):
         Parameters
         ----------
         method : str
-            Used archetype method, currenlty only 'iwu' or 'urbanrenet' are
+            Used archetype method, currently only 'iwu' or 'urbanrenet' are
             supported, 'tabula_de' to follow soon
         usage : str
-            Main usage of the obtainend building, currently only
+            Main usage of the obtained building, currently only
             'single_family_dwelling' is supported for iwu and 'est1a', 'est1b',
             'est2', 'est3', 'est4a', 'est4b', 'est5' 'est6', 'est7', 'est8a',
             'est8b' for urbanrenet.
@@ -549,7 +550,7 @@ class Project(object):
         assert method in ['tabula_de', 'iwu', 'urbanrenet'], ass_error_method
 
         ass_error_apart = (
-            "The keyword number_of_apartmens does not have any "
+            "The keyword number_of_apartments does not have any "
             "effect on archetype generation for 'iwu' or"
             "'tabula_de', see docs for more information")
 
@@ -634,7 +635,7 @@ class Project(object):
             elif self.data.used_statistic != 'iwu':
                 self.data = DataClass(used_statistic=method)
 
-            ass_error_usage_iwu = "only 'single_family_dewlling' is a valid " \
+            ass_error_usage_iwu = "only 'single_family_dwelling' is a valid " \
                                   "usage for iwu archetype method"
             assert usage in ['single_family_dwelling'], ass_error_usage_iwu
 
@@ -1231,8 +1232,7 @@ class Project(object):
         if path is None:
             new_path = os.path.join(utilities.get_default_path(), name)
         else:
-            new_path = os.path.join(utilities.get_default_path(), name)
-            utilities.create_path(utilities.get_full_path(path))
+            new_path = os.path.join(path, name)
 
         txml_out.save_teaser_xml(new_path, self)
 
@@ -1364,6 +1364,7 @@ class Project(object):
                         buildings=[bldg],
                         prj=self,
                         path=path)
+        return path
 
     def export_ibpsa(
             self,
@@ -1421,6 +1422,7 @@ class Project(object):
                         buildings=[bldg],
                         prj=self,
                         path=path)
+        return path
 
     def export_parameters_txt(self, path=None):
         """Exports parameters of all buildings in a readable text file
@@ -1445,6 +1447,7 @@ class Project(object):
         text_out.export_parameters_txt(
             prj=self,
             path=path)
+        return path
 
     def set_default(self, load_data=None):
         """Sets all attributes to default
@@ -1553,6 +1556,12 @@ class Project(object):
             regex = re.compile('[^a-zA-z0-9]')
             self._name = regex.sub('', value)
         else:
-            value = str(value)
-            regex = re.compile('[^a-zA-z0-9]')
-            self._name = regex.sub('', value)
+            try:
+                value = str(value)
+                regex = re.compile('[^a-zA-z0-9]')
+                self._name = regex.sub('', value)
+            except ValueError:
+                print("Can't convert name to string")
+
+        if self._name[0].isdigit():
+            self._name = "P" + self._name

@@ -17,6 +17,8 @@ def export_parameters_txt(prj, path):
     Parameters
     ----------
 
+    prj : TEASER project
+        Project to export
     path : string
         if the Files should not be stored in OutputData, an alternative
         can be specified

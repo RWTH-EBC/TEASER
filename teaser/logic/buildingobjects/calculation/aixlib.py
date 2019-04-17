@@ -1,8 +1,7 @@
 # Created December 2016
 # TEASER 4 Development Team
 
-"""This module includes AixLib calculation class
-"""
+"""This module includes AixLib calculation class"""
 
 import scipy.io
 import teaser.logic.utilities as utilities
@@ -61,7 +60,7 @@ class AixLib(object):
         self.file_set_t = "Tset_" + self.parent.name + ".mat"
         self.file_ahu = "AHU_" + self.parent.name + ".mat"
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
-        self.version = "0.4.0"
+        self.version = "0.7.4"
         self.total_surface_area = None
         self.consider_heat_capacity = True
         self.use_set_back = True
@@ -121,6 +120,9 @@ class AixLib(object):
             duration of the profile in seconds (default one day, 86400 s)
         time_step : int
             time step used in the profile in seconds (default one hour, 3600 s)
+        double : bool
+            True if values should be taken into account twice to create
+            stepwise functions without interpolation in Modelica
 
         Returns
         ---------
@@ -128,7 +130,7 @@ class AixLib(object):
             list of time steps as preparation for the output of boundary
             conditions
         """
-        ass_error_1 = "duration musst be a multiple of time_step"
+        ass_error_1 = "duration must be a multiple of time_step"
 
         assert float(duration_profile / time_step).is_integer(), ass_error_1
 
@@ -172,7 +174,8 @@ class AixLib(object):
         for zone_count in self.parent.thermal_zones:
             for i in range(len(time_line)):
                 if self.use_set_back is False:
-                    time_line[i].append(zone_count.use_conditions.set_temp_heat)
+                    time_line[i].append(
+                        zone_count.use_conditions.set_temp_heat)
                 else:
                     i -= 1
                     if i % 2 == 0:
@@ -245,7 +248,7 @@ class AixLib(object):
         time_line :[[int]]
             list of time steps
         path : str
-            optional path, when matfile is exported seperately
+            optional path, when matfile is exported separately
 
         Attributes
         ----------
@@ -340,7 +343,7 @@ class AixLib(object):
         time_line :[[int]]
             list of time steps
         path : str
-            optional path, when matfile is exported seperately
+            optional path, when matfile is exported separately
         """
 
         if path is None:
@@ -371,13 +374,19 @@ class AixLib(object):
 
             for i, time in enumerate(time_line):
                 if i == 0:
-                    time.append(0)
-                    time.append(0)
-                    time.append(0)
+                    time.append(
+                        zone_count.use_conditions.profile_persons[i + 1])
+                    time.append(
+                        zone_count.use_conditions.profile_machines[i + 1])
+                    time.append(
+                        zone_count.use_conditions.profile_lighting[i + 1])
                 else:
-                    time.append(zone_count.use_conditions.profile_persons[i - 1])
-                    time.append(zone_count.use_conditions.profile_machines[i - 1])
-                    time.append(zone_count.use_conditions.profile_lighting[i - 1])
+                    time.append(
+                        zone_count.use_conditions.profile_persons[i - 1])
+                    time.append(
+                        zone_count.use_conditions.profile_machines[i - 1])
+                    time.append(
+                        zone_count.use_conditions.profile_lighting[i - 1])
 
         internal_boundary = np.array(time_line)
 
@@ -386,3 +395,5 @@ class AixLib(object):
             mdict={'Internals': internal_boundary},
             appendmat=False,
             format='4')
+
+        return internal_boundary

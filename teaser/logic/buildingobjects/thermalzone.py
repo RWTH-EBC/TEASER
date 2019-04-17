@@ -42,7 +42,8 @@ class ThermalZone(object):
     volume : float [m3]
         Thermal zone volume.
     infiltration_rate : float [1/h]
-        Infiltration rate of zone.
+        Infiltration rate of zone. Default value aligned to
+        :cite:`DeutschesInstitutfurNormung.2007`
     outer_walls : list
         List of OuterWall instances.
     doors : list
@@ -100,7 +101,7 @@ class ThermalZone(object):
         self.name = None
         self._area = None
         self._volume = None
-        self._infiltration_rate = 0.5
+        self._infiltration_rate = 0.4
         self._outer_walls = []
         self._doors = []
         self._rooftops = []
@@ -397,8 +398,7 @@ class ThermalZone(object):
                 if "adv_retrofit" in wall_count.construction_type:
                     warnings.warn(
                         "already highest available standard"
-                        + self.parent.name + wall_count.name + self.parent +
-                        wall_count)
+                        + self.parent.name + wall_count.name)
                 elif "standard" in wall_count.construction_type:
                     wall_count.load_type_element(
                         year=self.parent.year_of_construction,
@@ -410,6 +410,7 @@ class ThermalZone(object):
                         construction=wall_count.construction_type.replace(
                             "retrofit", type_of_retrofit))
         else:
+
             for wall_count in self.outer_walls:
                 wall_count.retrofit_wall(
                     self.parent.year_of_retrofit,
@@ -428,7 +429,7 @@ class ThermalZone(object):
                     window_type)
 
     def delete(self):
-        """Deletes the actual thermal zone savely.
+        """Deletes the actual thermal zone safely.
 
         This deletes the current thermal Zone and also refreshes the
         thermal_zones list in the parent Building.

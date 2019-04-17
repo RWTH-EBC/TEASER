@@ -20,10 +20,11 @@ class EST1a(Residential):
     """Archetype for Urban Fabric Type EST1a.
 
     Subclass from Residential for urban fabric type EST1a. Boundary values
-    for this archetype are taken from URBANRENET. The archetype calculation
+    for this archetype are taken from :cite:`Hegger.2014`. The archetype
+    calculation
     is adapted from :cite:`KurzverfahrenIWU`, with the change of using the
     facade area to volume ratio of the building. For further information see
-    Lauster BauSim.
+    :cite:`Lauster.2016`.
 
     Parameters
     ----------
@@ -184,10 +185,14 @@ class EST1a(Residential):
             self.central_ahu.profile_temperature = (7 * [293.15] +
                                                     12 * [295.15] +
                                                     6 * [293.15])
+            #  according to :cite:`DeutschesInstitutfurNormung.2016`
             self.central_ahu.profile_min_relative_humidity = (25 * [0.45])
-            self.central_ahu.profile_max_relative_humidity = (25 * [0.55])
-            self.central_ahu.profile_v_flow = \
-                (7 * [0.0] + 12 * [1.0] + 6 * [0.0])
+            #  according to :cite:`DeutschesInstitutfurNormung.2016b`  and
+            # :cite:`DeutschesInstitutfurNormung.2016`
+            self.central_ahu.profile_max_relative_humidity = (25 * [0.65])
+            self.central_ahu.profile_v_flow = (
+                7 * [0.0] + 12 * [1.0] + 6 * [0.0])  # according to user  #
+            # profile in :cite:`DeutschesInstitutfurNormung.2016`
 
     def generate_archetype(self):
         """Generates a residential building.
@@ -197,6 +202,7 @@ class EST1a(Residential):
 
         """
         # help area for the correct building area setting while using typeBldgs
+        self.thermal_zones = None
         type_bldg_area = self.net_leased_area
         self.net_leased_area = 0.0
 

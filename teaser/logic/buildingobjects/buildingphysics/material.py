@@ -37,7 +37,7 @@ class Material(object):
     ir_emissivity : float [-]
         Coefficient of longwave emissivity of material
     transmittance : float [-]
-        Coefficient of transmittanve of material
+        Coefficient of transmittance of material
     thickness_default : float [m]
         Default value for material thickness
     thickness_list : list

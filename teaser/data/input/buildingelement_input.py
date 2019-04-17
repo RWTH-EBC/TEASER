@@ -19,7 +19,10 @@ def load_type_element(element,
 
     Loads typical building elements according to their construction
     year and their construction type from a XML. The elements are created by
-    using IWU building characteristics combined with normative material data.
+    using building characteristics from
+    cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.26.07.2007` and
+    :cite:`KurzverfahrenIWU`, which is combined with normative material
+    data from :cite:`VereinDeutscherIngenieure.2012b`.
 
     This function will only work if the parents to Building are set.
 
@@ -184,7 +187,7 @@ def load_type_element(element,
 
 
 def _set_layer_data(material, layer, pyxb_class, data_class):
-    '''Helper function for load_type_element to set the layer data.
+    """Helper function for load_type_element to set the layer data.
 
     Parameters
     ----------
@@ -195,13 +198,13 @@ def _set_layer_data(material, layer, pyxb_class, data_class):
         Layer() instance of TEASER
 
     pyxb_class :
-        Pyxb class represantation of xml
+        Pyxb class representation of xml
 
     data_class : DataClass()
         DataClass containing the bindings for TypeBuildingElement and
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.
-    '''
+    """
 
     layer.thickness = pyxb_class.thickness
     layer.id = pyxb_class.id
@@ -222,13 +225,13 @@ def _set_layer_data(material, layer, pyxb_class, data_class):
 
 
 def _set_basic_data(element, pyxb_class):
-    '''Helper function for load_type_element to set the layer data.
+    """Helper function for load_type_element to set the layer data.
 
     Parameters
     ----------
     pyxb_class :
-        Pyxb class represantation of xml
-    '''
+        Pyxb class representation of xml
+    """
 
     element.building_age_group = pyxb_class.building_age_group
     element.construction_type = pyxb_class.construction_type

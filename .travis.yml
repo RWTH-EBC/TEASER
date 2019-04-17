@@ -11,15 +11,22 @@ install:
   - pip install -e .
   - pip install pytest-cov
   - pip install coveralls
-  - pip install flake8
+  - pip install PyGithub==1.39
+  - pip install flake8==3.4.1
 
 before_script:
-  # - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests --max-line-length=120
+  - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests --max-line-length=120
+master:
+  script:
+  - py.test --cov=teaser
+  after_success:
+  - coveralls
 
 script:
-- py.test --cov=teaser
+- py.test --cov=teaser --ignore=tests/test_modelicaversion.py
 after_success:
 - coveralls
+
 deploy:
   provider: pypi
   user: teaser_github

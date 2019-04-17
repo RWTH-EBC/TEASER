@@ -1,13 +1,15 @@
 # Created December 2016
 # TEASER 4 Development Team
 
-"""This module includes IBPSA calcuation class
+"""This module includes IBPSA calculation class
 """
 
-import scipy.io
-import teaser.logic.utilities as utilities
-import numpy as np
 import os
+
+import numpy as np
+import scipy.io
+
+import teaser.logic.utilities as utilities
 
 
 class IBPSA(object):
@@ -15,7 +17,7 @@ class IBPSA(object):
 
     This class holds functions to sort and partly rewrite zone and building
     attributes specific for IBPSA simulation. This includes the export of
-    boundary coniditons.
+    boundary conditions.
 
     Parameters
     ----------
@@ -30,7 +32,7 @@ class IBPSA(object):
     file_internal_gains : str
         Filename for internal gains file
     version : dict
-        Dictionary with supportes library and their version number
+        Dictionary with supported libraries and their version numbers
     consider_heat_capacity : bool
         decides whether air capacity is considered or not for all thermal
         zones in the building
@@ -42,8 +44,8 @@ class IBPSA(object):
 
         self.parent = parent
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
-        self.version = {'AixLib': '0.4.0', 'Buildings': '4.0.0',
-                        'BuildingSystems': '2.0.0-beta', 'IDEAS': '1.0.0'}
+        self.version = {'AixLib': '0.7.4', 'Buildings': '5.1.0',
+                        'BuildingSystems': '2.0.0-beta2', 'IDEAS': '2.0.0'}
         self.consider_heat_capacity = True
 
     @staticmethod
@@ -98,7 +100,7 @@ class IBPSA(object):
         direct usage in Annex models.
 
         Only person (convective and radiative) and machines (convective) are
-        used in the simple Annex 60 exmaples.
+        used in the simple Annex 60 examples.
 
         1. Column : time step
         2 Column : profile_persons, radiative
@@ -153,14 +155,17 @@ class IBPSA(object):
                 time.append(zone.use_conditions.profile_persons[i - 1] *
                             zone.use_conditions.persons *
                             zone.use_conditions.activity_type_persons * 50 *
-                            (1 - zone.use_conditions.ratio_conv_rad_persons))
+                            (1 - zone.use_conditions.ratio_conv_rad_persons) *
+                            zone.area * 0.01)
                 time.append(zone.use_conditions.profile_persons[i - 1] *
                             zone.use_conditions.persons *
                             zone.use_conditions.activity_type_persons * 50 *
-                            zone.use_conditions.ratio_conv_rad_persons)
+                            zone.use_conditions.ratio_conv_rad_persons *
+                            zone.area * 0.01)
                 time.append(zone.use_conditions.profile_machines[i - 1] *
                             zone.use_conditions.machines *
-                            zone.use_conditions.activity_type_machines * 50)
+                            zone.use_conditions.activity_type_machines * 50 *
+                            zone.area * 0.01)
 
         internal_boundary = np.array(time_line)
 
