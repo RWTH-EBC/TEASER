@@ -170,14 +170,14 @@ class Test_teaser(object):
 
         assert round(test_office.get_outer_wall_area(-2), 0) == 958
         assert round(test_office.get_outer_wall_area(-1), 0) == 958
-        assert round(test_office.get_outer_wall_area(0), 0) == 205
-        assert round(test_office.get_outer_wall_area(180), 0) == 205
-        assert round(test_office.get_outer_wall_area(90), 0) == 205
-        assert round(test_office.get_outer_wall_area(270), 0) == 205
-        assert round(test_office.get_window_area(0), 0) == 74
-        assert round(test_office.get_window_area(180), 0) == 74
-        assert round(test_office.get_window_area(90), 0) == 74
-        assert round(test_office.get_window_area(270), 0) == 74
+        assert round(test_office.get_outer_wall_area(0), 0) == 257
+        assert round(test_office.get_outer_wall_area(180), 0) == 257
+        assert round(test_office.get_outer_wall_area(90), 0) == 257
+        assert round(test_office.get_outer_wall_area(270), 0) == 257
+        assert round(test_office.get_window_area(0), 0) == 93
+        assert round(test_office.get_window_area(180), 0) == 93
+        assert round(test_office.get_window_area(90), 0) == 93
+        assert round(test_office.get_window_area(270), 0) == 93
 
         prj.set_default()
         test_office = Office(parent=prj,
