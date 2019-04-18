@@ -48,9 +48,9 @@ def run_case1(plot_res=False):
     # Definition of time horizon
     times_per_hour = 60  # 60 minutes per hour
     timesteps = 24 * 60 * times_per_hour  # 60 days (with minute timestep)
-    #  timesteps = 24 * 365 * times_per_hour  # 60 days (with minute timestep)
+
     timesteps_day = int(
-        24 * times_per_hour)  # 24 * 60 minuten timesteps per day
+        24 * times_per_hour)  # 24 * 60 minute timesteps per day
 
     # Zero inputs
     ventRate = np.zeros(timesteps)

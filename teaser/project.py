@@ -78,7 +78,7 @@ class Project(object):
         Absolute path to weather file used for Modelica simulation. Default
         weather file can be find in inputdata/weatherdata.
     weather_data : instance of WeatherData class
-        TEASER isntance of WeatherData class containing TRY weather data.
+        TEASER instance of WeatherData class containing TRY weather data.
     number_of_elements_calc : int
         Defines the number of elements, that are aggregated (1, 2, 3 or 4),
         default is 2
