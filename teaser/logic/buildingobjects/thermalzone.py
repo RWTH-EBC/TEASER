@@ -40,9 +40,6 @@ class ThermalZone(object):
         Thermal zone area.
     volume : float [m3]
         Thermal zone volume.
-    infiltration_rate : float [1/h]
-        Infiltration rate of zone. Default value aligned to
-        :cite:`DeutschesInstitutfurNormung.2007`
     outer_walls : list
         List of OuterWall instances.
     doors : list
@@ -580,8 +577,7 @@ class ThermalZone(object):
     def use_conditions(self, value):
         ass_error_1 = "Use condition has to be an instance of UseConditions()"
 
-        assert type(value).__name__ == "UseConditions" or \
-            type(value).__name__ == "BoundaryConditions", ass_error_1
+        assert type(value).__name__ == "UseConditions", ass_error_1
 
         if value is not None:
             self._use_conditions = value
@@ -633,7 +629,7 @@ class ThermalZone(object):
         else:
             try:
                 value = float(value)
-            except:
+            except ValueError:
                 raise ValueError("Can't convert zone volume to float")
 
         if self.parent is not None:
@@ -649,21 +645,15 @@ class ThermalZone(object):
 
     @property
     def infiltration_rate(self):
-        return self._infiltration_rate
+        warnings.warn(
+            "Deprecated for ThermalZone, moved to UseConditions",
+            DeprecationWarning)
 
     @infiltration_rate.setter
     def infiltration_rate(self, value):
-
-        if isinstance(value, float):
-            self._infiltration_rate = value
-        elif value is None:
-            self._infiltration_rate = value
-        else:
-            try:
-                value = float(value)
-                self._infiltration_rate = value
-            except:
-                raise ValueError("Can't convert infiltration rate to float")
+        warnings.warn(
+            "Deprecated for ThermalZone, moved to UseConditions",
+            DeprecationWarning)
 
     @property
     def t_inside(self):

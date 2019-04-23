@@ -1,13 +1,7 @@
-# Created April 2016
-# TEASER Development Team
-
-"""boundcond_input.py
-
-This module contains function to load boundary conditions classes
-"""
+"""This module contains function to load UseConditions classes."""
 
 
-def load_boundary_conditions(bound_cond, zone_usage, data_class):
+def load_use_conditions(bound_cond, zone_usage, data_class):
     """load use conditions according to DIN 18599 and SIA2024
 
     loads Use conditions specified in the XML, according to DIN 18599,
@@ -31,73 +25,41 @@ def load_boundary_conditions(bound_cond, zone_usage, data_class):
 
     conditions_bind = data_class.conditions_bind
 
-    for usage in conditions_bind.BoundaryConditions:
+    bound_cond.usage = zone_usage
 
-        if usage.usage == zone_usage:
-
-            bound_cond.typical_length = usage.typical_length
-            bound_cond.typical_width = usage.typical_width
-
-            bound_cond.usage = usage.usage
-            bound_cond.usage_time = usage.UsageOperationTime.usage_time
-            bound_cond.daily_usage_hours = \
-                usage.UsageOperationTime.daily_usage_hours
-            bound_cond.yearly_usage_days = \
-                usage.UsageOperationTime.yearly_usage_days
-            bound_cond.yearly_usage_hours_day = \
-                usage.UsageOperationTime.yearly_usage_hours_day
-            bound_cond.yearly_usage_hours_night = \
-                usage.UsageOperationTime.yearly_usage_hours_night
-            bound_cond.daily_operation_ahu_cooling = \
-                usage.UsageOperationTime.daily_operation_ahu_cooling
-            bound_cond.yearly_heating_days = \
-                usage.UsageOperationTime.yearly_heating_days
-            bound_cond.yearly_ahu_days = \
-                usage.UsageOperationTime.yearly_ahu_days
-            bound_cond.yearly_cooling_days = \
-                usage.UsageOperationTime.yearly_cooling_days
-            bound_cond.daily_operation_heating = \
-                usage.UsageOperationTime.daily_operation_heating
-            if float(data_class.conditions_bind.version) >= 0.4:
-                bound_cond.maintained_illuminance = \
-                    usage.Lighting.maintained_illuminance
-            else:
-                bound_cond.maintained_illuminance = \
-                    usage.Lighting.maintained_illuminace
-            bound_cond.usage_level_height = usage.Lighting.usage_level_height
-            bound_cond.red_factor_visual = usage.Lighting.red_factor_visual
-            bound_cond.rel_absence = usage.Lighting.rel_absence
-            bound_cond.room_index = usage.Lighting.room_index
-            bound_cond.part_load_factor_lighting = \
-                usage.Lighting.part_load_factor_lighting
-            bound_cond.ratio_conv_rad_lighting = \
-                usage.Lighting.ratio_conv_rad_lighting
-
-            bound_cond.set_temp_heat = usage.RoomClimate.set_temp_heat
-            bound_cond.set_temp_cool = usage.RoomClimate.set_temp_cool
-            bound_cond.temp_set_back = usage.RoomClimate.temp_set_back
-            bound_cond.min_temp_heat = usage.RoomClimate.min_temp_heat
-            bound_cond.max_temp_cool = usage.RoomClimate.max_temp_cool
-            bound_cond.rel_humidity = usage.RoomClimate.rel_humidity
-            bound_cond.cooling_time = usage.RoomClimate.cooling_time
-            bound_cond.heating_time = usage.RoomClimate.heating_time
-            bound_cond.min_air_exchange = usage.RoomClimate.min_air_exchange
-            bound_cond.rel_absence_ahu = usage.RoomClimate.rel_absence_ahu
-            bound_cond.part_load_factor_ahu = \
-                usage.RoomClimate.part_load_factor_ahu
-
-            bound_cond.persons = usage.InternalGains.persons
-            bound_cond.profile_persons = usage.InternalGains.profile_persons
-            bound_cond.machines = usage.InternalGains.machines
-            bound_cond.profile_machines = usage.InternalGains.profile_machines
-            bound_cond.lighting_power = usage.InternalGains.lighting_power
-            bound_cond.profile_lighting = usage.InternalGains.profile_lighting
-            bound_cond.min_ahu = usage.AHU.min_ahu
-            bound_cond.max_ahu = usage.AHU.max_ahu
-            bound_cond.with_ahu = usage.AHU.with_ahu
-            bound_cond.use_constant_ach_rate = usage.AHU.use_constant_ach_rate
-            bound_cond.base_ach = usage.AHU.base_ach
-            bound_cond.max_user_ach = usage.AHU.max_user_ach
-            bound_cond.max_overheating_ach = usage.AHU.max_overheating_ach
-            bound_cond.max_summer_ach = usage.AHU.max_summer_ach
-            bound_cond.winter_reduction = usage.AHU.winter_reduction
+    bound_cond.typical_length = conditions_bind[zone_usage]["typical_length"]
+    bound_cond.typical_width = conditions_bind[zone_usage]["typical_width"]
+    bound_cond.with_heating = conditions_bind[zone_usage]["with_heating"]
+    bound_cond.with_cooling = conditions_bind[zone_usage]["with_cooling"]
+    bound_cond.persons = conditions_bind[zone_usage]["persons"]
+    bound_cond.ratio_conv_rad_persons = conditions_bind[zone_usage][
+        "ratio_conv_rad_persons"]
+    bound_cond.machines = conditions_bind[zone_usage]["machines"]
+    bound_cond.ratio_conv_rad_machines = conditions_bind[zone_usage][
+        "ratio_conv_rad_machines"]
+    bound_cond.lighting_power = conditions_bind[
+        zone_usage][
+        "lighting_power"]
+    bound_cond.ratio_conv_rad_lighting = conditions_bind[
+        zone_usage]["ratio_conv_rad_lighting"]
+    bound_cond.use_constant_infiltration = conditions_bind[
+        zone_usage]["use_constant_infiltration"]
+    bound_cond.infiltration_rate = conditions_bind[zone_usage][
+        "infiltration_rate"]
+    bound_cond.max_user_infiltration = conditions_bind[
+        zone_usage]["max_user_infiltration"]
+    bound_cond.max_overheating_infiltration = conditions_bind[
+        zone_usage]["max_overheating_infiltration"]
+    bound_cond.max_summer_infiltration = conditions_bind[
+        zone_usage]["max_summer_infiltration"]
+    bound_cond.winter_reduction_infiltration = conditions_bind[
+        zone_usage]["winter_reduction_infiltration"]
+    bound_cond.min_ahu = conditions_bind[zone_usage]["min_ahu"]
+    bound_cond.max_ahu = conditions_bind[zone_usage]["max_ahu"]
+    bound_cond.heating_profile = conditions_bind[zone_usage]["heating_profile"]
+    bound_cond.cooling_profile = conditions_bind[zone_usage]["cooling_profile"]
+    bound_cond.persons_profile = conditions_bind[zone_usage]["persons_profile"]
+    bound_cond.machines_profile = conditions_bind[
+        zone_usage]["machines_profile"]
+    bound_cond.lighting_profile = conditions_bind[
+        zone_usage]["lighting_profile"]

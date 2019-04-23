@@ -1,12 +1,11 @@
-# Created December 2016
-# TEASER 4 Development Team
-
 """This module includes AixLib calculation class"""
 
 import scipy.io
 import teaser.logic.utilities as utilities
 import numpy as np
 import os
+import pandas as pd
+from itertools import cycle, islice
 
 
 class AixLib(object):
@@ -61,10 +60,10 @@ class AixLib(object):
 
         self.parent = parent
 
-        self.file_set_t = "Tset_" + self.parent.name + ".mat"
-        self.file_set_t_cool = "TsetCool_" + self.parent.name + ".mat"
+        self.file_set_t_heat = "TsetHeat_" + self.parent.name + ".txt"
+        self.file_set_t_cool = "TsetCool_" + self.parent.name + ".txt"
         self.file_ahu = "AHU_" + self.parent.name + ".mat"
-        self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
+        self.file_internal_gains = "InternalGains_" + self.parent.name + ".txt"
         self.version = "0.7.4"
         self.total_surface_area = None
         self.consider_heat_capacity = True
@@ -174,84 +173,29 @@ class AixLib(object):
             pass
 
         utilities.create_path(path)
-        path = os.path.join(path, self.file_set_t)
+        path = os.path.join(path, self.file_set_t_heat)
 
-        time_line = self.create_profile(double=True)
+        export = pd.DataFrame(
+            index=pd.date_range(
+                '2019-01-01 00:00:00',
+                periods=8760,
+                freq='H').to_series().dt.strftime('%m-%d %H:%M:%S'),
+            columns=[zone.name for zone in self.parent.thermal_zones])
 
         for zone_count in self.parent.thermal_zones:
-            if self.use_set_point_temperature_profile_heating is False:
-                for i in range(len(time_line)):
-                    if self.use_set_back is False:
-                        time_line[i].append(
-                            zone_count.use_conditions.set_temp_heat)
-                    else:
-                        i -= 1
-                        if i % 2 == 0:
-                            if zone_count.use_conditions.heating_time[0] == 0:
-                                time_line[i].append(
-                                    zone_count.use_conditions.set_temp_heat)
-                                time_line[i + 1].append(
-                                    zone_count.use_conditions.set_temp_heat)
-                            elif time_line[i][0] < \
-                                    zone_count.use_conditions.heating_time[
-                                        0] * 3600:
-                                time_line[i].append(
-                                    zone_count.use_conditions.set_temp_heat -
-                                    zone_count.use_conditions.temp_set_back)
-                                time_line[i + 1].append(
-                                    zone_count.use_conditions.set_temp_heat -
-                                    zone_count.use_conditions.temp_set_back)
-                            elif time_line[i][0] == \
-                                    zone_count.use_conditions.heating_time[
-                                        0] * 3600:
-                                time_line[i].append(
-                                    zone_count.use_conditions.set_temp_heat -
-                                    zone_count.use_conditions.temp_set_back)
-                                time_line[i + 1].append(
-                                    zone_count.use_conditions.set_temp_heat)
-                            elif time_line[i][0] == \
-                                (zone_count.use_conditions.heating_time[
-                                    1] + 1) * 3600:
-                                time_line[i].append(
-                                    zone_count.use_conditions.set_temp_heat)
-                                time_line[i + 1].append(
-                                    zone_count.use_conditions.set_temp_heat -
-                                    zone_count.use_conditions.temp_set_back)
-                            elif time_line[i][0] > \
-                                (zone_count.use_conditions.heating_time[
-                                    1] + 1) * 3600:
-                                time_line[i].append(
-                                    zone_count.use_conditions.set_temp_heat -
-                                    zone_count.use_conditions.temp_set_back)
-                                time_line[i + 1].append(
-                                    zone_count.use_conditions.set_temp_heat -
-                                    zone_count.use_conditions.temp_set_back)
-                            else:
-                                time_line[i].append(
-                                    zone_count.use_conditions.set_temp_heat)
-                                time_line[i + 1].append(
-                                    zone_count.use_conditions.set_temp_heat)
+            export[zone_count.name] = zone_count.use_conditions.heating_profile
 
-                        else:
-                            pass
-            # This exports the profile, currently test status
-            else:
-                for index, i in enumerate(time_line):
-                    index -= 1
-                    if index % 2 == 0:
-                        time_line[index].append(
-                            zone_count.use_conditions.profile_heating_temp[
-                                int(i[0] / 3600)])
-                        time_line[index + 1].append(
-                            zone_count.use_conditions.profile_heating_temp[
-                                int(i[0] / 3600)])
-                    else:
-                        pass
-        scipy.io.savemat(
-            path,
-            mdict={'Tset': time_line},
-            appendmat=False,
-            format='4')
+        export.index = [(i + 1) * 3600 for i in range(8760)]
+
+        with open(path, 'a') as f:
+            f.write('#1\n')
+            f.write('double Tset({}, {})\n'.format(
+                8760, len(self.parent.thermal_zones) + 1))
+            export.to_csv(
+                f,
+                sep='\t',
+                header=False,
+                index_label=False)
 
     def modelica_set_temp_cool(self, path=None):
         """creates .mat file for set temperatures
@@ -275,67 +219,27 @@ class AixLib(object):
         utilities.create_path(path)
         path = os.path.join(path, self.file_set_t_cool)
 
-        time_line = self.create_profile(double=True)
+        export = pd.DataFrame(
+            index=pd.date_range(
+                '2019-01-01 00:00:00',
+                periods=8760,
+                freq='H').to_series().dt.strftime('%m-%d %H:%M:%S'),
+            columns=[zone.name for zone in self.parent.thermal_zones])
 
         for zone_count in self.parent.thermal_zones:
-            for i in range(len(time_line)):
-                if self.use_set_back_cool is False:
-                    time_line[i].append(
-                        zone_count.use_conditions.set_temp_cool)
-                else:
-                    i -= 1
-                    if i % 2 == 0:
-                        if zone_count.use_conditions.cooling_time[0] == 0:
-                            time_line[i].append(
-                                zone_count.use_conditions.set_temp_cool)
-                            time_line[i + 1].append(
-                                zone_count.use_conditions.set_temp_cool)
-                        elif time_line[i][0] < \
-                                zone_count.use_conditions.cooling_time[0] * 3600:
-                            time_line[i].append(
-                                zone_count.use_conditions.set_temp_cool +
-                                zone_count.use_conditions.temp_set_back_cool)
-                            time_line[i + 1].append(
-                                zone_count.use_conditions.set_temp_cool +
-                                zone_count.use_conditions.temp_set_back_cool)
-                        elif time_line[i][0] == \
-                                zone_count.use_conditions.cooling_time[0] * 3600:
-                            time_line[i].append(
-                                zone_count.use_conditions.set_temp_cool +
-                                zone_count.use_conditions.temp_set_back_cool)
-                            time_line[i + 1].append(
-                                zone_count.use_conditions.set_temp_cool)
-                        elif time_line[i][0] == \
-                            (zone_count.use_conditions.cooling_time[1] + 1) * \
-                                3600:
-                            time_line[i].append(
-                                zone_count.use_conditions.set_temp_cool)
-                            time_line[i + 1].append(
-                                zone_count.use_conditions.set_temp_cool +
-                                zone_count.use_conditions.temp_set_back_cool)
-                        elif time_line[i][0] > \
-                            (zone_count.use_conditions.cooling_time[1] + 1) * \
-                                3600:
-                            time_line[i].append(
-                                zone_count.use_conditions.set_temp_cool +
-                                zone_count.use_conditions.temp_set_back_cool)
-                            time_line[i + 1].append(
-                                zone_count.use_conditions.set_temp_cool +
-                                zone_count.use_conditions.temp_set_back_cool)
-                        else:
-                            time_line[i].append(
-                                zone_count.use_conditions.set_temp_cool)
-                            time_line[i + 1].append(
-                                zone_count.use_conditions.set_temp_cool)
+            export[zone_count.name] = zone_count.use_conditions.cooling_profile
 
-                    else:
-                        pass
+        export.index = [(i + 1) * 3600 for i in range(8760)]
 
-        scipy.io.savemat(
-            path,
-            mdict={'Tset': time_line},
-            appendmat=False,
-            format='4')
+        with open(path, 'a') as f:
+            f.write('#1\n')
+            f.write('double Tset({}, {})\n'.format(
+                8760, len(self.parent.thermal_zones) + 1))
+            export.to_csv(
+                f,
+                sep='\t',
+                header=False,
+                index_label=False)
 
     def modelica_AHU_boundary(self, time_line=None, path=None):
         """creates .mat file for AHU boundary conditions (building)
@@ -451,7 +355,6 @@ class AixLib(object):
         path : str
             optional path, when matfile is exported separately
         """
-
         if path is None:
             path = utilities.get_default_path()
         else:
@@ -460,46 +363,28 @@ class AixLib(object):
         utilities.create_path(path)
         path = os.path.join(path, self.file_internal_gains)
 
+        export = pd.DataFrame(
+            index=pd.date_range(
+                '2019-01-01 00:00:00',
+                periods=8760,
+                freq='H').to_series().dt.strftime('%m-%d %H:%M:%S'))
+
         for zone_count in self.parent.thermal_zones:
-            if time_line is None:
-                duration = len(zone_count.use_conditions.profile_persons) * \
-                    3600
-                time_line = self.create_profile(duration_profile=duration)
+            export["person_{}".format(
+                zone_count.name)] = zone_count.use_conditions.persons_profile
+            export["machines_{}".format(
+                zone_count.name)] = zone_count.use_conditions.machines_profile
+            export["lighting_{}".format(
+                zone_count.name)] = zone_count.use_conditions.lighting_profile
 
-            ass_error_1 = "time line and input have to have the same length"
+        export.index = [(i + 1) * 3600 for i in range(8760)]
 
-            assert len(time_line) - 1 == len(
-                zone_count.use_conditions.profile_persons), \
-                (ass_error_1 + ",profile_persons")
-            assert len(time_line) - 1 == len(
-                zone_count.use_conditions.profile_machines), \
-                (ass_error_1 + ",profile_machines")
-            assert len(time_line) - 1 == len(
-                zone_count.use_conditions.profile_lighting), \
-                (ass_error_1 + ",profile_lighting")
-
-            for i, time in enumerate(time_line):
-                if i == 0:
-                    time.append(
-                        zone_count.use_conditions.profile_persons[i + 1])
-                    time.append(
-                        zone_count.use_conditions.profile_machines[i + 1])
-                    time.append(
-                        zone_count.use_conditions.profile_lighting[i + 1])
-                else:
-                    time.append(
-                        zone_count.use_conditions.profile_persons[i - 1])
-                    time.append(
-                        zone_count.use_conditions.profile_machines[i - 1])
-                    time.append(
-                        zone_count.use_conditions.profile_lighting[i - 1])
-
-        internal_boundary = np.array(time_line)
-
-        scipy.io.savemat(
-            path,
-            mdict={'Internals': internal_boundary},
-            appendmat=False,
-            format='4')
-
-        return internal_boundary
+        with open(path, 'a') as f:
+            f.write('#1\n')
+            f.write('double Internals({}, {})\n'.format(
+                8760, (len(self.parent.thermal_zones) * 3 + 1)))
+            export.to_csv(
+                f,
+                sep='\t',
+                header=False,
+                index_label=False)

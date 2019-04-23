@@ -1,6 +1,4 @@
-# Created March 2016
-# TEASER Development Team
-
+import ipdb
 """ibpsa_output
 
 This module contains function to call Templates for AixLib model generation
@@ -161,6 +159,8 @@ def export_multizone(buildings, prj, path=None):
             if type(zone.model_attr).__name__ == "OneElement":
                 out_file.write(zone_template_1.render_unicode(zone=zone))
             elif type(zone.model_attr).__name__ == "TwoElement":
+                ipdb.set_trace()  # Break Point ###########
+
                 out_file.write(zone_template_2.render_unicode(zone=zone))
             elif type(zone.model_attr).__name__ == "ThreeElement":
                 out_file.write(zone_template_3.render_unicode(zone=zone))
