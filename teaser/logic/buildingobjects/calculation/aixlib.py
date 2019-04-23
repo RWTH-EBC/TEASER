@@ -62,13 +62,18 @@ class AixLib(object):
         self.parent = parent
 
         self.file_set_t = "Tset_" + self.parent.name + ".mat"
+        self.file_set_t_cool = "TsetCool_" + self.parent.name + ".mat"
         self.file_ahu = "AHU_" + self.parent.name + ".mat"
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
         self.version = "0.7.4"
         self.total_surface_area = None
         self.consider_heat_capacity = True
         self.use_set_back = True
+<<<<<<< HEAD
         self.use_set_point_temperature_profile_heating = False
+=======
+        self.use_set_back_cool = False
+>>>>>>> origin/issue438_cooler
 
     def calc_auxiliary_attr(self):
         """Calls function to calculate all auxiliary attributes for AixLib"""
@@ -245,6 +250,89 @@ class AixLib(object):
                                 int(i[0] / 3600)])
                     else:
                         pass
+        scipy.io.savemat(
+            path,
+            mdict={'Tset': time_line},
+            appendmat=False,
+            format='4')
+
+    def modelica_set_temp_cool(self, path=None):
+        """creates .mat file for set temperatures
+
+        This function creates a matfile (-v4) for set temperatures for cooling
+        of each zone, that are all saved into one matrix.
+
+        1. Row: cool set temperature of all zones
+
+        Parameters
+        ----------
+        path : str
+            optional path, when matfile is exported separately
+        """
+
+        if path is None:
+            path = utilities.get_default_path()
+        else:
+            pass
+
+        utilities.create_path(path)
+        path = os.path.join(path, self.file_set_t_cool)
+
+        time_line = self.create_profile(double=True)
+
+        for zone_count in self.parent.thermal_zones:
+            for i in range(len(time_line)):
+                if self.use_set_back_cool is False:
+                    time_line[i].append(zone_count.use_conditions.set_temp_cool)
+                else:
+                    i -= 1
+                    if i % 2 == 0:
+                        if zone_count.use_conditions.cooling_time[0] == 0:
+                            time_line[i].append(
+                                zone_count.use_conditions.set_temp_cool)
+                            time_line[i + 1].append(
+                                zone_count.use_conditions.set_temp_cool)
+                        elif time_line[i][0] < \
+                                zone_count.use_conditions.cooling_time[0] * 3600:
+                            time_line[i].append(
+                                zone_count.use_conditions.set_temp_cool +
+                                zone_count.use_conditions.temp_set_back_cool)
+                            time_line[i + 1].append(
+                                zone_count.use_conditions.set_temp_cool +
+                                zone_count.use_conditions.temp_set_back_cool)
+                        elif time_line[i][0] == \
+                                zone_count.use_conditions.cooling_time[0] * 3600:
+                            time_line[i].append(
+                                zone_count.use_conditions.set_temp_cool +
+                                zone_count.use_conditions.temp_set_back_cool)
+                            time_line[i + 1].append(
+                                zone_count.use_conditions.set_temp_cool)
+                        elif time_line[i][0] == \
+                            (zone_count.use_conditions.cooling_time[1] + 1) * \
+                                3600:
+                            time_line[i].append(
+                                zone_count.use_conditions.set_temp_cool)
+                            time_line[i + 1].append(
+                                zone_count.use_conditions.set_temp_cool +
+                                zone_count.use_conditions.temp_set_back_cool)
+                        elif time_line[i][0] > \
+                            (zone_count.use_conditions.cooling_time[1] + 1) * \
+                                3600:
+                            time_line[i].append(
+                                zone_count.use_conditions.set_temp_cool +
+                                zone_count.use_conditions.temp_set_back_cool)
+                            time_line[i + 1].append(
+                                zone_count.use_conditions.set_temp_cool +
+                                zone_count.use_conditions.temp_set_back_cool)
+                        else:
+                            time_line[i].append(
+                                zone_count.use_conditions.set_temp_cool)
+                            time_line[i + 1].append(
+                                zone_count.use_conditions.set_temp_cool)
+
+                    else:
+                        pass
+
         scipy.io.savemat(
             path,
             mdict={'Tset': time_line},

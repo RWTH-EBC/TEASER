@@ -275,6 +275,7 @@ class BoundaryConditions(UseConditions):
         self._set_temp_heat = 294.15
         self._set_temp_cool = 297.15
         self._temp_set_back = 4.0
+        self._temp_set_back_cool = 10.0
         self._min_temp_heat = 20.0
         self._max_temp_cool = 26.0
         self._rel_humidity = 45
@@ -483,6 +484,24 @@ class BoundaryConditions(UseConditions):
             try:
                 value = float(value)
                 self._temp_set_back = value
+            except:
+                raise ValueError("Can't convert temperature to float")
+
+    @property
+    def temp_set_back_cool(self):
+        return self._temp_set_back_cool
+
+    @temp_set_back_cool.setter
+    def temp_set_back_cool(self, value):
+
+        if isinstance(value, float):
+            self._temp_set_back_cool = value
+        elif value is None:
+            self._temp_set_back_cool = value
+        else:
+            try:
+                value = float(value)
+                self._temp_set_back_cool = value
             except:
                 raise ValueError("Can't convert temperature to float")
 
