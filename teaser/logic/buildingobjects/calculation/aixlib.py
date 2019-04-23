@@ -69,11 +69,8 @@ class AixLib(object):
         self.total_surface_area = None
         self.consider_heat_capacity = True
         self.use_set_back = True
-<<<<<<< HEAD
         self.use_set_point_temperature_profile_heating = False
-=======
         self.use_set_back_cool = False
->>>>>>> origin/issue438_cooler
 
     def calc_auxiliary_attr(self):
         """Calls function to calculate all auxiliary attributes for AixLib"""
@@ -283,7 +280,8 @@ class AixLib(object):
         for zone_count in self.parent.thermal_zones:
             for i in range(len(time_line)):
                 if self.use_set_back_cool is False:
-                    time_line[i].append(zone_count.use_conditions.set_temp_cool)
+                    time_line[i].append(
+                        zone_count.use_conditions.set_temp_cool)
                 else:
                     i -= 1
                     if i % 2 == 0:
