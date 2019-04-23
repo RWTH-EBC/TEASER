@@ -68,7 +68,7 @@ class Project(object):
         Name of the Project (default is 'Project')
     modelica_info : instance of ModelicaInfo
         TEASER instance of ModelicaInfo to store Modelica related
-        information, like used compiler, runtime, etc.
+        information, like used compiler, start and stop time, etc.
     buildings : list
         List of all buildings in one project, instances of Building()
     data : instance of DataClass

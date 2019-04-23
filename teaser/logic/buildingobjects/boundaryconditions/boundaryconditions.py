@@ -137,6 +137,11 @@ class BoundaryConditions(UseConditions):
     heating_time : list [h]
         heating time [begin, end]. This value is taken from DIN 18599-10.
         AixLib: Used for night set-back for simple heater.
+    profile_heating_temp : list [K]
+        list of set point temperatures for heating. This value is optional and
+        needs to be activate in the export with
+        use_set_point_temperature_heating = True. It needs a list with 25
+        entries. Starting at 0:00 and ending at 24:00 o'clock
 
     INTERNAL GAINS
 
@@ -278,6 +283,13 @@ class BoundaryConditions(UseConditions):
         self.part_load_factor_ahu = 1.0
         self.cooling_time = [5, 18]
         self.heating_time = [5, 18]
+        self.profile_heating_temp = [294.15, 294.15, 294.15, 294.15,
+                                     294.15, 294.15, 294.15, 294.15,
+                                     294.15, 294.15, 294.15, 294.15,
+                                     294.15, 294.15, 294.15, 294.15,
+                                     294.15, 294.15, 294.15, 294.15,
+                                     294.15, 294.15, 294.15, 294.15,
+                                     294.15]
 
         self._persons = 5.0
         self.activity_type_persons = 3

@@ -123,7 +123,8 @@ equation
           34.6,-82},{34.6,-9}}, color={0,0,127}));
 
   annotation (experiment(
-      StopTime=${modelica_info.runtime_simulation},
+      StartTime=${str(zone.parent.parent.modelica_info.start_time)},
+      StopTime=${str(zone.parent.parent.modelica_info.stop_time)},
       Interval=${modelica_info.interval_output},
       __Dymola_Algorithm="${modelica_info.current_solver}"),
       __Dymola_experimentSetupOutput(equidistant=${get_true_false(modelica_info.equidistant_output)},
