@@ -1,3 +1,4 @@
+import ipdb
 """This module contains function to save UseConditions classes."""
 
 import collections
@@ -51,6 +52,8 @@ def save_use_conditions(use_cond, conditions_data):
             "min_ahu"] = use_cond.min_ahu
         conditions_data[use_cond.usage][
             "max_ahu"] = use_cond.max_ahu
+        conditions_data[use_cond.usage][
+            "with_ahu"] = use_cond.with_ahu
         conditions_data[use_cond.usage][
             "heating_profile"] = use_cond.heating_profile
         conditions_data[use_cond.usage][

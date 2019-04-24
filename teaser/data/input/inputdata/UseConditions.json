@@ -11,7 +11,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 15.9,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -30,6 +30,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 2.6,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -174,7 +175,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 12.5,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -193,6 +194,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 2.6,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -337,7 +339,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 12.5,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -356,6 +358,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 3.6,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -500,7 +503,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 15.9,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -519,6 +522,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 12.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -663,7 +667,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 4.4,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -682,6 +686,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 2.5,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -826,7 +831,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 9.3,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -845,6 +850,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -989,7 +995,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 9.3,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -1008,6 +1014,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -1152,7 +1159,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 14.0,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -1171,6 +1178,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -1315,7 +1323,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 12.5,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -1334,6 +1342,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 15.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -1478,7 +1487,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 4.5,
         "ratio_conv_rad_lighting": 0.5,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -1497,6 +1506,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             295.15,
             295.15,
@@ -1641,7 +1651,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 2.9,
         "ratio_conv_rad_lighting": 0.5,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -1660,6 +1670,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -1804,7 +1815,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 6.1,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -1823,6 +1834,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 18.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -1967,7 +1979,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 6.9,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -1986,6 +1998,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -2130,7 +2143,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 12.5,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -2149,6 +2162,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 70.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -2293,7 +2307,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 15.9,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -2312,6 +2326,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -2456,7 +2471,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 11.1,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -2475,6 +2490,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 8.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -2619,7 +2635,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 6.3,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -2638,6 +2654,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -2782,7 +2799,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 6.3,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -2801,6 +2818,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -2945,7 +2963,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 7.0,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -2964,6 +2982,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 2.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -3108,7 +3127,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 11.3,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -3127,6 +3146,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.5,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -3271,7 +3291,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 7.1,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -3290,6 +3310,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 130.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -3434,7 +3455,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 10.8,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -3453,6 +3474,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 10.0,
+        "with_ahu": false,
         "heating_profile": [
             288.15,
             288.15,
@@ -3597,7 +3619,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 10.8,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -3616,6 +3638,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 10.0,
+        "with_ahu": false,
         "heating_profile": [
             290.15,
             290.15,
@@ -3760,7 +3783,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 14.7,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -3779,6 +3802,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 10.0,
+        "with_ahu": false,
         "heating_profile": [
             293.15,
             293.15,
@@ -3923,7 +3947,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 10.8,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -3942,6 +3966,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -4086,7 +4111,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 4.4,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -4105,6 +4130,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -4249,7 +4275,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 10.8,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -4268,6 +4294,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -4412,7 +4439,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 10.8,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -4431,6 +4458,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -4575,7 +4603,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 10.8,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -4594,6 +4622,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -4738,7 +4767,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 6.9,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -4757,6 +4786,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -4901,7 +4931,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 6.9,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -4920,6 +4950,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -5064,7 +5095,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 6.9,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -5083,6 +5114,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -5227,7 +5259,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 10.5,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -5246,6 +5278,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -5390,7 +5423,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 2.9,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -5409,6 +5442,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -5553,7 +5587,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 2.9,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -5572,6 +5606,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,
@@ -5716,7 +5751,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 11.3,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -5735,6 +5770,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             297.15,
             297.15,
@@ -5879,7 +5915,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 9.9,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -5898,6 +5934,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             293.15,
             293.15,
@@ -6042,7 +6079,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 14.0,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -6061,6 +6098,7 @@
         ],
         "min_ahu": 24.0,
         "max_ahu": 48.0,
+        "with_ahu": true,
         "heating_profile": [
             295.15,
             295.15,
@@ -6205,7 +6243,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 15.9,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -6224,6 +6262,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             295.15,
             295.15,
@@ -6368,7 +6407,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 14.0,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -6387,6 +6426,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             297.15,
             297.15,
@@ -6531,7 +6571,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 14.1,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -6550,6 +6590,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             295.15,
             295.15,
@@ -6694,7 +6735,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 15.9,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -6713,6 +6754,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             295.15,
             295.15,
@@ -6857,7 +6899,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 11.3,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -6876,6 +6918,7 @@
         ],
         "min_ahu": 0.0,
         "max_ahu": 0.0,
+        "with_ahu": false,
         "heating_profile": [
             285.15,
             285.15,
@@ -7020,7 +7063,7 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 7.0,
         "ratio_conv_rad_lighting": 0.5,
-        "use_constant_infiltration": 0,
+        "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
@@ -7039,6 +7082,7 @@
         ],
         "min_ahu": 0.3,
         "max_ahu": 0.6,
+        "with_ahu": false,
         "heating_profile": [
             294.15,
             294.15,

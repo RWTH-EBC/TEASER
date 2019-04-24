@@ -133,8 +133,50 @@ class DataClass(object):
     def load_uc_binding(self):
         """Loads UseConditions XML into binding classes
         """
-        with open(self.path_uc) as f:
-            self.conditions_bind = json.load(f)
+        if self.path_uc.endswith("json"):
+            with open(self.path_uc) as f:
+                self.conditions_bind = json.load(f)
+        else:
+            try:
+                __xml_file_uc = open(self.path_uc, 'r+')
+                version_parse = et.parse(self.path_uc)
+            except:
+                __xml_file_uc = open(self.path_uc, 'w')
+                version_parse = False
+
+            if version_parse is False:
+                import teaser.data.bindings.v_0_6.boundaryconditions_bind \
+                    as uc_bind
+                self.conditions_bind = uc_bind.UseConditions()
+            elif bool(version_parse.getroot().attrib) is False:
+                warnings.warn(
+                    "You are using an old version of use condition data "
+                    "base XML file")
+                import teaser.data.bindings.v_0_3_9.boundaryconditions_bind \
+                    as uc_bind
+                self.conditions_bind = uc_bind.CreateFromDocument(
+                    __xml_file_uc.read())
+            elif version_parse.getroot().attrib['version'] == "0.3.9":
+                warnings.warn(
+                    "You are using an old version of use condition data "
+                    "base XML file")
+                import teaser.data.bindings.v_0_3_9.boundaryconditions_bind \
+                    as uc_bind
+                self.conditions_bind = uc_bind.CreateFromDocument(
+                    __xml_file_uc.read())
+            elif version_parse.getroot().attrib['version'] == "0.4":
+                warnings.warn(
+                    "You are using an old version of use condition data "
+                    "base XML file")
+                import teaser.data.bindings.v_0_4.boundaryconditions_bind \
+                    as uc_bind
+                self.conditions_bind = uc_bind.CreateFromDocument(
+                    __xml_file_uc.read())
+            elif version_parse.getroot().attrib['version'] == "0.6":
+                import teaser.data.bindings.v_0_6.boundaryconditions_bind \
+                    as uc_bind
+                self.conditions_bind = uc_bind.CreateFromDocument(
+                    __xml_file_uc.read())
 
     def load_mat_binding(self):
         """Loads MaterialTemplates XML into binding classes
