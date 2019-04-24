@@ -3,6 +3,12 @@
 
 This is the latest implementation of the VDI core. An older (obsolete) implementation is
 located at TEASER/teaser/logic/simulation/low_order_VDI.py
+
+The tests for this VDI core are located at
+TEASER/teaser/examples/verification/vdi6007_testcases
+
+Furthermore, there is an example simulating a demo building with this core located
+at TEASER/teaser/examples/simulation/example_vdi_core.py
 """
 
 from __future__ import division
