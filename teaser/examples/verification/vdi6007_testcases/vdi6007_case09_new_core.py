@@ -6,16 +6,11 @@
 import os
 import numpy as np
 
-from teaser.project import Project
-from teaser.logic.buildingobjects.building import Building
-from teaser.logic.buildingobjects.thermalzone import ThermalZone
-from teaser.logic.buildingobjects.calculation.two_element import TwoElement
 from teaser.logic.simulation.vdi_core import VDICore
-
-# import customized weather class
-from teaser.data.weatherdata import WeatherData
-
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case01 as vdic
+from teaser.examples.verification.vdi6007_testcases.vdi6007shared import \
+    prepare_thermal_zone
+from teaser.data.weatherdata import WeatherData
 
 
 def run_case9(plot_res=False):
@@ -83,46 +78,15 @@ def run_case9(plot_res=False):
     weather = WeatherData()
     weather.air_temp = weatherTemperature
 
-    prj = Project()
-    prj.weather_data = weather
+    tz = prepare_thermal_zone(timesteps, room="S2", weather=weather)
 
-    bldg = Building(prj)
-
-    tz = ThermalZone(bldg)
-
-    model_data = TwoElement(tz, merge_windows=True, t_bt=5)
-
-    #  Store building parameters for testcase 1
-    model_data.r1_iw = 0.000668895639141
-    model_data.c1_iw = 12391363.8631
-    model_data.area_iw = 60.5
-    model_data.r_rest_ow = 0.01913729904
-    model_data.r1_ow = 0.0017362530106
-    model_data.c1_ow = 5259932.23
-    model_data.area_ow = 25.5
-    model_data.outer_wall_areas = [10.5, 15]
-    model_data.window_areas = [0, 0]
-    model_data.transparent_areas = [7, 7]
-    tz.volume = 52.5
-    tz.density_air = 1.19
-    tz.heat_capac_air = 0
+    # Adjust settings for this test case
     tz.t_ground = 285.15
-    model_data.ratio_conv_rad_inner_win = 0.09
-    model_data.weighted_g_value = 1
-    model_data.alpha_comb_inner_iw = 2.12
-    model_data.alpha_comb_inner_ow = 2.7
-    model_data.alpha_conv_outer_ow = 20
-    model_data.alpha_rad_outer_ow = 5
-    model_data.alpha_comb_outer_ow = 25
-    model_data.alpha_rad_inner_mean = 5
-
-    model_data.solar_absorp_ow = 0.7
-    model_data.ir_emissivity_outer_ow = 0.9
-    model_data.weightfactor_ow = [0.05796831135677373, 0.13249899738691134]
-    model_data.weightfactor_win = [0.4047663456281575, 0.4047663456281575]
-    model_data.weightfactor_ground = 0
-
-    tz.model_attr = model_data
+    tz.model_attr.solar_absorp_ow = 0.7
+    tz.model_attr.ir_emissivity_outer_ow = 0.9
+    tz.model_attr.weightfactor_ow = [0.05796831135677373, 0.13249899738691134]
+    tz.model_attr.weightfactor_win = [0.4047663456281575, 0.4047663456281575]
+    tz.model_attr.weightfactor_ground = 0
 
     calc = VDICore(tz)
 
