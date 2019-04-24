@@ -75,8 +75,6 @@ def prepare_thermal_zone(timesteps, room):
     model_data.alpha_comb_outer_ow = 25
     model_data.alpha_rad_inner_mean = 5
 
-
-
     tz.model_attr = model_data
 
     return tz
