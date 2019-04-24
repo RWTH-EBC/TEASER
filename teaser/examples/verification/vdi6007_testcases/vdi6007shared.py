@@ -13,7 +13,7 @@ from teaser.logic.buildingobjects.calculation.two_element import TwoElement
 from teaser.data.weatherdata import WeatherData
 
 
-def prepare_thermal_zone(timesteps, room):
+def prepare_thermal_zone(timesteps, room, weather=None):
     """Prepare the thermal zone for running VDI test case
 
     Parameters
@@ -23,6 +23,8 @@ def prepare_thermal_zone(timesteps, room):
     room : str
         Type of room {"S1", "S2", "L"}; "S" indicates "small", "L" indicates "large";
         the numbers 1 and 2 indicate the number of exterior walls
+    weather : numpy.array
+        Optional weather input
 
     Returns
     -------
@@ -30,8 +32,9 @@ def prepare_thermal_zone(timesteps, room):
         Thermal zone object with setup for test case
     """
 
-    weather = WeatherData()
-    weather.air_temp = np.zeros(timesteps) + 295.15
+    if weather is None:
+        weather = WeatherData()
+        weather.air_temp = np.zeros(timesteps) + 295.15
 
     prj = Project()
     prj.weather_data = weather
@@ -49,7 +52,12 @@ def prepare_thermal_zone(timesteps, room):
         model_data.r1_ow = 0.00436791293674
         model_data.c1_ow = 1600848.94
     elif room == "S2":
-        raise NotImplementedError("Not implemented, yet")
+        model_data.r1_iw = 0.000668895639141
+        model_data.c1_iw = 12391363.8631
+        model_data.area_iw = 60.5
+        model_data.r_rest_ow = 0.01913729904
+        model_data.r1_ow = 0.0017362530106
+        model_data.c1_ow = 5259932.23
     elif room == "L":
         model_data.r1_iw = 0.003237138
         model_data.c1_iw = 7297100
@@ -60,10 +68,16 @@ def prepare_thermal_zone(timesteps, room):
     else:
         raise LookupError("Unknown room type selected. Choose from {'S1', 'S2', 'L'}")
 
-    model_data.area_ow = 10.5
-    model_data.outer_wall_areas = [10.5]
-    model_data.window_areas = np.zeros(1)
-    model_data.transparent_areas = np.zeros(1)
+    if room == "S2":
+        model_data.area_ow = 25.5
+        model_data.outer_wall_areas = [10.5, 15]
+        model_data.window_areas = [0, 0]
+        model_data.transparent_areas = [7, 7]
+    else:
+        model_data.area_ow = 10.5
+        model_data.outer_wall_areas = [10.5]
+        model_data.window_areas = np.zeros(1)
+        model_data.transparent_areas = np.zeros(1)
 
     tz.volume = 52.5
     tz.density_air = 1.19
@@ -71,7 +85,10 @@ def prepare_thermal_zone(timesteps, room):
 
     model_data.ratio_conv_rad_inner_win = 0.09
     model_data.weighted_g_value = 1
-    model_data.alpha_comb_inner_iw = 2.24
+    if room == "S2":
+        model_data.alpha_comb_inner_iw = 2.12
+    else:
+        model_data.alpha_comb_inner_iw = 2.24
     model_data.alpha_comb_inner_ow = 2.7
     model_data.alpha_conv_outer_ow = 20
     model_data.alpha_rad_outer_ow = 5
