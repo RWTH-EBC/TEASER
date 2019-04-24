@@ -3386,8 +3386,9 @@ class Test_teaser(object):
     #     np.testing.assert_array_almost_equal(t_air2, temp_ref2, decimal=3)
     #     np.testing.assert_array_almost_equal(q_hc2, q_hc_ref2, decimal=3)
 
-    #  VDI 6007 validation test cases
     #  ######################################################################
+    #  VDI 6007 validation test cases
+    #  To run all VDI validation tests, use `pytest -k "test_vdi_6007_validation_case"`
 
     def test_vdi_6007_validation_case1_old_core(self):
         """
