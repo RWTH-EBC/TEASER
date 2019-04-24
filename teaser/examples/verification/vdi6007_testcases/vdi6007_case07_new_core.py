@@ -34,7 +34,7 @@ def run_case7(plot_res=False):
     timesteps = 24 * 60 * times_per_hour  # 60 days
     timesteps_day = int(24 * times_per_hour)
 
-    tz = prepare_thermal_zone(timesteps, room="S")
+    tz = prepare_thermal_zone(timesteps, room="S1")
 
     calc = VDICore(tz)
     calc.equal_air_temp = np.zeros(timesteps) + 295.15

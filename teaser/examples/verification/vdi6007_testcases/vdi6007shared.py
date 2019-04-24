@@ -21,7 +21,8 @@ def prepare_thermal_zone(timesteps, room):
     timesteps : int
         Number of time steps
     room : str
-        Type of room {"S", "L"}
+        Type of room {"S1", "S2", "L"}; "S" indicates "small", "L" indicates "large";
+        the numbers 1 and 2 indicate the number of exterior walls
 
     Returns
     -------
@@ -40,13 +41,15 @@ def prepare_thermal_zone(timesteps, room):
 
     model_data = TwoElement(tz, merge_windows=False, t_bt=5)
 
-    if room == "S":
+    if room == "S1":
         model_data.r1_iw = 0.000595693407511
         model_data.c1_iw = 14836354.6282
         model_data.area_iw = 75.5
         model_data.r_rest_ow = 0.03895919557
         model_data.r1_ow = 0.00436791293674
         model_data.c1_ow = 1600848.94
+    elif room == "S2":
+        raise NotImplementedError("Not implemented, yet")
     elif room == "L":
         model_data.r1_iw = 0.003237138
         model_data.c1_iw = 7297100
@@ -55,7 +58,7 @@ def prepare_thermal_zone(timesteps, room):
         model_data.r1_ow = 0.00404935160802
         model_data.c1_ow = 47900
     else:
-        raise LookupError("Unknown room type selected. Choose from {'S', 'L'}")
+        raise LookupError("Unknown room type selected. Choose from {'S1', 'S2', 'L'}")
 
     model_data.area_ow = 10.5
     model_data.outer_wall_areas = [10.5]

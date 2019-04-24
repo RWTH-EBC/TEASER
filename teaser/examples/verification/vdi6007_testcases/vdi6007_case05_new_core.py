@@ -64,7 +64,7 @@ def run_case5(plot_res=False):
 
     equalAirTemp = weatherTemperature
 
-    tz = prepare_thermal_zone(timesteps, room="S")
+    tz = prepare_thermal_zone(timesteps, room="S1")
     tz.model_attr.transparent_areas = [7]  # Adjust setting for this test case
 
     calc = VDICore(tz)
