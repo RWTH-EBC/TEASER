@@ -8,7 +8,8 @@ import os
 import numpy as np
 
 from teaser.logic.simulation.vdi_core import VDICore
-from teaser.examples.verification.vdi6007_testcases.vdi6007shared import prepare_thermal_zone
+from teaser.examples.verification.vdi6007_testcases.vdi6007shared import \
+    prepare_thermal_zone
 
 def load_res(filename):
     res = np.loadtxt(filename, delimiter=",", skiprows=1)  # Skip time step 0
