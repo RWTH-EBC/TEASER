@@ -22,6 +22,20 @@ def run_case11(plot_res=False):
     """
     Run test case 11
 
+    Test Case 11 of the VDI 6007 Part 1:
+    Calculation of heat load excited with a given radiative heat source and a setpoint
+    profile for room version S. It is based on Test Case 7, but with a cooling ceiling
+    for cooling purposes instead of a pure convective ideal cooler.
+
+    Boundary conditions :
+      - constant outdoor air temperature 22°C
+      - no solar or short-wave radiation on the exterior wall
+      - no solar or short-wave radiation through the windows
+      - no long-wave radiation exchange between exterior wall, windows and ambient
+        environment
+
+    This test validates implementation of cooling ceiling or floor heating.
+
     Parameters
     ----------
     plot_res : bool, optional
