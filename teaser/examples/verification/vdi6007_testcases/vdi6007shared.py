@@ -4,6 +4,7 @@
 Shared code for all VDI 6007 test cases
 """
 
+import matplotlib.pyplot as plt
 import numpy as np
 
 from teaser.project import Project
@@ -123,3 +124,47 @@ def hourly_average(data, times_per_hour):
 
     return result
 
+
+def plot_result(res, ref, title, temperature_or_heat):
+    """Plot result comparison to reference values
+
+    Parameters
+    ----------
+    res : numpy.array
+        Simulation result (averaged values)
+    ref : numpy.array
+        Reference values
+    title : str
+        Title of the plot
+    temperature_or_heat : str
+        Decide between {"temperature", "heat"}
+    """
+
+    if temperature_or_heat == "temperature":
+        y_label_top = "Temperature in °C"
+        y_label_bottom = "Temperature difference in K"
+    elif temperature_or_heat == "heat":
+        y_label_top = "Heat load in W"
+        y_label_bottom = "Heat load difference in W"
+    else:
+        raise LookupError("Unknown plot type. Must be 'temperature' or 'heat'")
+
+
+    plt.figure()
+    ax_top = plt.subplot(211)
+    plt.plot(ref, label="Reference", color="black", linestyle="--")
+    plt.plot(res, label="Simulation", color="blue", linestyle="-")
+    plt.legend()
+    plt.ylabel(y_label_top)
+
+    plt.title(title)
+
+    plt.subplot(212, sharex=ax_top)
+    plt.plot(res - ref, label="Ref. - Sim.")
+    plt.legend()
+    plt.ylabel(y_label_bottom)
+    plt.xticks([4 * i for i in range(7)])
+    plt.xlim([1, 24])
+    plt.xlabel("Time in h")
+
+    plt.show()

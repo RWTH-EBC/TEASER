@@ -9,7 +9,7 @@ import numpy as np
 from teaser.logic.simulation.vdi_core import VDICore
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case01 as vdic
 from teaser.examples.verification.vdi6007_testcases.vdi6007shared import \
-    prepare_thermal_zone, hourly_average
+    prepare_thermal_zone, hourly_average, plot_result
 
 
 def run_case11(plot_res=False):
@@ -122,37 +122,18 @@ def run_case11(plot_res=False):
     T_air_ref_60 = load_res_60[:, 0]
 
     # Plot comparisons
-    def plot_result(res, ref, title="Results day 1"):
-
-        import matplotlib.pyplot as plt
-
-        plt.figure()
-        ax_top = plt.subplot(211)
-        plt.plot(ref, label="Reference", color="black", linestyle="--")
-        plt.plot(res, label="Simulation", color="blue", linestyle="-")
-        plt.legend()
-        plt.ylabel("Heat load in W")
-
-        plt.title(title)
-
-        plt.subplot(212, sharex=ax_top)
-        plt.plot(res - ref, label="Ref. - Sim.")
-        plt.legend()
-        plt.ylabel("Heat load difference in W")
-        plt.xticks([4 * i for i in range(7)])
-        plt.xlim([1, 24])
-        plt.xlabel("Time in h")
-
-        plt.show()
-
     if plot_res:
-        plot_result(T_air_1, T_air_ref_1, "Results temperatures day 1")
-        plot_result(T_air_10, T_air_ref_10, "Results temperatures day 10")
-        plot_result(T_air_60, T_air_ref_60, "Results temperatures day 60")
+        plot_result(T_air_1, T_air_ref_1, "Results temperatures day 1", "temperature")
+        plot_result(
+            T_air_10, T_air_ref_10, "Results temperatures day 10", "temperature"
+        )
+        plot_result(
+            T_air_60, T_air_ref_60, "Results temperatures day 60", "temperature"
+        )
 
-        plot_result(Q_hc_1, Q_hc_ref_1, "Results heating/cooling day 1")
-        plot_result(Q_hc_10, Q_hc_ref_10, "Results heating/cooling day 10")
-        plot_result(Q_hc_60, Q_hc_ref_60, "Results heating/cooling day 60")
+        plot_result(Q_hc_1, Q_hc_ref_1, "Results heating/cooling day 1", "heat")
+        plot_result(Q_hc_10, Q_hc_ref_10, "Results heating/cooling day 10", "heat")
+        plot_result(Q_hc_60, Q_hc_ref_60, "Results heating/cooling day 60", "heat")
 
     max_dev_1_temp = np.max(np.abs(T_air_1 - T_air_ref_1))
     max_dev_10_temp = np.max(np.abs(T_air_10 - T_air_ref_10))
