@@ -1,8 +1,6 @@
 """This module is a container for UseConditions"""
-
 import random
-import teaser.data.output.boundcond_output as boundcond_output
-import teaser.data.input.boundcond_input as boundcond_input
+import teaser.data.input.usecond_input as boundcond_input
 import pandas as pd
 from itertools import cycle, islice
 

@@ -1,5 +1,4 @@
-from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
-    import BoundaryConditions
+from teaser.logic.buildingobjects.useconditions import UseConditions
 from teaser.logic.buildingobjects.building import Building
 from teaser.logic.buildingobjects.buildingphysics.groundfloor import GroundFloor
 from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
@@ -35,7 +34,7 @@ def building_test2(prj):
     tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
     tz.infiltration_rate = 0.5
 
-    tz.use_conditions = BoundaryConditions(tz)
+    tz.use_conditions = UseConditions(tz)
     tz.use_conditions.usage = "Living"
     tz.use_conditions.cooling_time = [5, 18]
     tz.use_conditions.heating_time = [5, 18]
@@ -71,13 +70,13 @@ def building_test2(prj):
     tz.use_conditions.winter_reduction = [0.2, 273.15, 273.15 + 10]
 
     out_wall_dict = [["Outer Wall 1", [bldg.year_of_construction, 'heavy',
-                                      10.0, 90.0, 0.0]],
+                                       10.0, 90.0, 0.0]],
                      ["Outer Wall 2", [bldg.year_of_construction, 'heavy',
-                                      14.0, 90.0, 90.0]],
+                                       14.0, 90.0, 90.0]],
                      ["Outer Wall 3", [bldg.year_of_construction, 'heavy',
-                                      10.0, 90.0, 180.0]],
+                                       10.0, 90.0, 180.0]],
                      ["Outer Wall 4", [bldg.year_of_construction, 'heavy',
-                                      14.0, 90.0, 270.0]]]
+                                       14.0, 90.0, 270.0]]]
     #import collections
     #out_wall_dict = collections.OrderedDict(sorted(out_wall_dict.items(), key=lambda t: t[0]))
     for value in out_wall_dict:
@@ -149,11 +148,11 @@ def building_test2(prj):
         in_wall_material.heat_capac = 0.84
 
     win_dict = [["Window 1", [bldg.year_of_construction,
-                             5.0, 90.0, 90.0]],
+                              5.0, 90.0, 90.0]],
                 ["Window 2", [bldg.year_of_construction,
-                             8.0, 90.0, 180.0]],
+                              8.0, 90.0, 180.0]],
                 ["Window 3", [bldg.year_of_construction,
-                             5.0, 90.0, 270.0]]]
+                              5.0, 90.0, 270.0]]]
 
     for value in win_dict:
         win = Window(parent=tz)
