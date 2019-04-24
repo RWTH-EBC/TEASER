@@ -2,12 +2,14 @@
 # -*- coding: utf-8 -*-
 """
 Example script for VDI 6007 simulation usage
+
+This example is currently not working
 """
 
 import numpy as np
 
 from teaser.project import Project
-import teaser.logic.simulation.VDI_6007.vdi_core as vdi_core
+from teaser.logic.simulation.vdi_core import VDICore
 
 def gen_res_type_example_building():
     """
@@ -66,7 +68,7 @@ def vdi_example_6007(thermal_zone):
     """
 
     #  Generate vdi calculation core instance
-    vdi_calc = vdi_core.VDICore(thermal_zone=thermal_zone)
+    vdi_calc = VDICore(thermal_zone=thermal_zone)
 
     (t_indoor, q_heat_cool) = vdi_calc.simulate()
 
