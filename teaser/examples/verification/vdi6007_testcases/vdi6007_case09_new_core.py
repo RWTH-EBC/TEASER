@@ -33,12 +33,6 @@ def run_case9(plot_res=False):
     timesteps = 24 * 60 * times_per_hour  # 60 days
     timesteps_day = int(24 * times_per_hour)
 
-    # Zero inputs
-    ventRate = np.zeros(timesteps)
-
-    # Constant inputs
-    alphaRad = np.zeros(timesteps) + 5
-
     # Variable inputs
     Q_ig = np.zeros(timesteps_day)
     source_igRad = np.zeros(timesteps_day)
@@ -60,8 +54,6 @@ def run_case9(plot_res=False):
 
     sunblind_in = np.zeros_like(solarRad_win)
     sunblind_in[solarRad_win > 100] = 0.85
-    sunblind_in_adj = np.repeat(sunblind_in, times_per_hour, axis=0)
-    sunblind_in_tiled = np.tile(sunblind_in_adj.T, 60).T
 
     ref_file = 'case09_q_sol_wall.csv'
     ref_path = os.path.join(this_path, 'inputs', ref_file)
@@ -87,9 +79,6 @@ def run_case9(plot_res=False):
     t_black_sky_in = 65.99081593 * (H_sky ** 0.25)
     t_black_sky_adj = np.repeat(t_black_sky_in, times_per_hour)
     t_black_sky = np.tile(t_black_sky_adj, 60)
-
-
-    # new core
 
     weather = WeatherData()
     weather.air_temp = weatherTemperature
@@ -133,14 +122,9 @@ def run_case9(plot_res=False):
     model_data.weightfactor_win = [0.4047663456281575, 0.4047663456281575]
     model_data.weightfactor_ground = 0
 
-    # model_data.tilt_facade = []
-    # model_data.orientation_facade = [180.0, -1, 0.0, -2, 90.0, 270.0]
-    # model_data.alpha_wall = 25 * 10.5
-
     tz.model_attr = model_data
 
     calc = VDICore(tz)
-    # calc.equal_air_temp = np.zeros(timesteps) + 295.15
 
     calc.t_set_heating = np.zeros(timesteps)  # in Kelvin
     calc.t_set_cooling = np.zeros(timesteps) + 600  # in Kelvin
@@ -163,86 +147,6 @@ def run_case9(plot_res=False):
     T_air_mean = np.array(
         [np.mean(T_air_c[i * times_per_hour:(i + 1) * times_per_hour]) for i in
          range(24 * 60)])
-
-    Q_hc_mean = np.array(
-        [np.mean(q_air_hc[i * times_per_hour:(i + 1) * times_per_hour]) for i in
-         range(24 * 60)])
-
-
-    # eq_air_params = {"aExt": 0.7,
-    #                  "eExt": 0.9,
-    #                  "wfWall": [0.05796831135677373, 0.13249899738691134],
-    #                  "wfWin": [0.4047663456281575, 0.4047663456281575],
-    #                  "wfGro": 0,
-    #                  "T_Gro": 273.15 + 12,
-    #                  "alpha_wall_out": 20,
-    #                  "alpha_rad_wall": 5,
-    #                  "withLongwave": False}
-
-    # equalAirTemp = eq_air_temp.equal_air_temp(HSol=solarRad_wall_tiled,
-    #                                           TBlaSky=t_black_sky,
-    #                                           TDryBul=weatherTemperature,
-    #                                           sunblind=sunblind_in_tiled,
-    #                                           params=eq_air_params)
-
-    # # Load constant house parameters
-    # houseData = {"R1i": 0.000668895639141,
-    #              "C1i": 12391363.8631,
-    #              "Ai": 60.5,
-    #              "RRest": 0.01913729904,
-    #              "R1o": 0.0017362530106,
-    #              "C1o": 5259932.23,
-    #              "Ao": [10.5, 15],
-    #              "Aw": np.zeros(2),
-    #              "At": [7, 7],
-    #              "Vair": 52.5,
-    #              "rhoair": 1.19,
-    #              "cair": 0,
-    #              "splitfac": 0.09,
-    #              "g": 1,
-    #              "alphaiwi": 2.12,
-    #              "alphaowi": 2.7,
-    #              "alphaWall": 25 * 25.5,  # 25 * sum(Ao)
-    #              "withInnerwalls": True}
-
-    # krad = 1
-
-    # # Define set points (prevent heating or cooling!)
-    # t_set_heating = np.zeros(timesteps)  # in Kelvin
-    # t_set_cooling = np.zeros(timesteps) + 600  # in Kelvin
-
-    # heater_limit = np.zeros((timesteps, 3)) + 1e10
-    # cooler_limit = np.zeros((timesteps, 3)) - 1e10
-
-    # # Calculate indoor air temperature
-    # T_air, Q_hc, Q_iw, Q_ow = \
-    #     low_order_VDI.reducedOrderModelVDI(houseData,
-    #                                        weatherTemperature,
-    #                                        solarRad_win_in,
-    #                                        equalAirTemp,
-    #                                        alphaRad,
-    #                                        ventRate,
-    #                                        Q_ig,
-    #                                        source_igRad,
-    #                                        krad,
-    #                                        t_set_heating,
-    #                                        t_set_cooling,
-    #                                        heater_limit,
-    #                                        cooler_limit,
-    #                                        heater_order=np.array(
-    #                                            [1, 2,
-    #                                             3]),
-    #                                        cooler_order=np.array(
-    #                                            [1, 2,
-    #                                             3]),
-    #                                        dt=int(
-    #                                            3600 / times_per_hour))
-
-    # # Compute averaged results
-    # T_air_c = T_air - 273.15
-    # T_air_mean = np.array(
-    #     [np.mean(T_air_c[i * times_per_hour:(i + 1) * times_per_hour]) for i in
-    #      range(24 * 60)])
 
     T_air_1 = T_air_mean[0:24]
     T_air_10 = T_air_mean[216:240]

@@ -39,17 +39,6 @@ def run_case2(plot_res=False):
     timesteps = 24 * 60 * times_per_hour  # 60 days
     timesteps_day = int(24 * times_per_hour)
 
-    # Zero inputs
-    ventRate = np.zeros(timesteps)
-    solarRad_in = np.zeros((timesteps, 1))
-
-    # Constant inputs
-    alphaRad = np.zeros(timesteps) + 5
-    equalAirTemp = np.zeros(timesteps) + 295.15  # all temperatures in K
-    weatherTemperature = np.zeros(timesteps) + 295.15  # in K
-
-    # new core
-
     weather = WeatherData()
     weather.air_temp = np.zeros(timesteps) + 295.15
 
@@ -84,9 +73,6 @@ def run_case2(plot_res=False):
     model_data.alpha_rad_outer_ow = 5
     model_data.alpha_comb_outer_ow = 25
     model_data.alpha_rad_inner_mean = 5
-    # model_data.tilt_facade = []
-    # model_data.orientation_facade = [180.0, -1, 0.0, -2, 90.0, 270.0]
-    # model_data.alpha_wall = 25 * 10.5
 
     tz.model_attr = model_data
 
@@ -113,64 +99,6 @@ def run_case2(plot_res=False):
     T_air_mean = np.array(
         [np.mean(T_air_c[i * times_per_hour:(i + 1) * times_per_hour]) for i in
          range(24 * 60)])
-
-    # # Load constant house parameters
-    # houseData = {"R1i": 0.000595693407511,
-    #             "C1i": 14836354.6282,
-    #             "Ai": 75.5,
-    #             "RRest": 0.03895919557,
-    #             "R1o": 0.00436791293674,
-    #             "C1o": 1600848.94,
-    #             "Ao": [10.5],
-    #             "Aw": np.zeros(1),
-    #             "At": np.zeros(1),
-    #             "Vair": 52.5,
-    #             "rhoair": 1.19,
-    #             "cair": 0,
-    #             "splitfac": 0.09,
-    #             "g": 1,
-    #             "alphaiwi": 2.24,
-    #             "alphaowi": 2.7,
-    #             "alphaWall": 25 * 10.5, # 25 * sum(Ao)
-    #             "withInnerwalls": True}
-
-    # krad = 1
-
-    # # Define set points (prevent heating or cooling!)
-    # t_set_heating = np.zeros(timesteps)  # in Kelvin
-    # t_set_cooling = np.zeros(timesteps) + 600  # in Kelvin
-
-    # heater_limit = np.zeros((timesteps, 3)) + 1e10
-    # cooler_limit = np.zeros((timesteps, 3)) - 1e10
-
-    # # Calculate indoor air temperature
-    # T_air, Q_hc, Q_iw, Q_ow = low_order_VDI.reducedOrderModelVDI(houseData,
-    #                                                              weatherTemperature,
-    #                                                              solarRad_in,
-    #                                                              equalAirTemp,
-    #                                                              alphaRad,
-    #                                                              ventRate,
-    #                                                              Q_ig,
-    #                                                              source_igRad,
-    #                                                              krad,
-    #                                                              t_set_heating,
-    #                                                              t_set_cooling,
-    #                                                              heater_limit,
-    #                                                              cooler_limit,
-    #                                                              heater_order=np.array(
-    #                                                                  [1, 2,
-    #                                                                   3]),
-    #                                                              cooler_order=np.array(
-    #                                                                  [1, 2,
-    #                                                                   3]),
-    #                                                              dt=int(
-    #                                                                  3600 / times_per_hour))
-
-    # Compute averaged results
-    # T_air_c = T_air - 273.15
-    # T_air_mean = np.array(
-    #     [np.mean(T_air_c[i * times_per_hour:(i + 1) * times_per_hour]) for i in
-    #      range(24 * 60)])
 
     T_air_1 = T_air_mean[0:24]
     T_air_10 = T_air_mean[216:240]
