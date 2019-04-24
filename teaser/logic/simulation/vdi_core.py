@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-"""Module contains class to calculate a thermal zone with VDI core"""
+"""Module contains class to calculate a thermal zone with VDI core
+
+This is the latest implementation of the VDI core. An older (obsolete) implementation is
+located at TEASER/teaser/logic/simulation/low_order_VDI.py
+"""
 
 from __future__ import division
 

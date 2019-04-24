@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 """
 VDI 6007 low order model TEASER implementation
+
+This is an old implementation of the VDI core. The newer implementation is located
+at TEASER/teaser/logic/simulation/vdi_core.py
 """
 from __future__ import division
 import numpy as np
