@@ -10,7 +10,7 @@ import numpy as np
 from teaser.logic.simulation.vdi_core import VDICore
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case01 as vdic
 from teaser.examples.verification.vdi6007_testcases.vdi6007shared import \
-    prepare_thermal_zone
+    prepare_thermal_zone, hourly_average
 
 
 def run_case2(plot_res=False):
@@ -54,10 +54,7 @@ def run_case2(plot_res=False):
 
     t_air, q_air_hc = calc.simulate()
 
-    T_air_c = t_air - 273.15
-    T_air_mean = np.array(
-        [np.mean(T_air_c[i * times_per_hour:(i + 1) * times_per_hour]) for i in
-         range(24 * 60)])
+    T_air_mean = hourly_average(data=t_air-273.15, times_per_hour=times_per_hour)
 
     T_air_1 = T_air_mean[0:24]
     T_air_10 = T_air_mean[216:240]

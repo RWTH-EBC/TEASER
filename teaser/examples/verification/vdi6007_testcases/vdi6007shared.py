@@ -99,3 +99,27 @@ def prepare_thermal_zone(timesteps, room, weather=None):
 
     return tz
 
+
+def hourly_average(data, times_per_hour):
+    """Calculate the hourly average of the data in smaller time steps
+
+    Parameters
+    ----------
+    data : numpy.array
+        Input data in small time steps
+    times_per_hour : int
+        Number of time steps per hour (usually 60: 1 for each minute)
+
+    Returns
+    -------
+    result : numpy.array
+        Output data in hourly averages
+    """
+
+    result = np.array(
+        [np.mean(data[i * times_per_hour:(i + 1) * times_per_hour]) for i in
+         range(24 * 60)]
+    )
+
+    return result
+
