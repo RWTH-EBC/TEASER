@@ -52,42 +52,7 @@ def run_case1(plot_res=False):
     timesteps_day = int(
         24 * times_per_hour)  # 24 * 60 minute timesteps per day
 
-    weather = WeatherData()
-    weather.air_temp = np.zeros(timesteps) + 295.15
-
-    prj = Project()
-    prj.weather_data = weather
-
-    bldg = Building(prj)
-
-    tz = ThermalZone(bldg)
-
-    model_data = TwoElement(tz, merge_windows=False, t_bt=5)
-
-    #  Store building parameters for testcase 1
-    model_data.r1_iw = 0.000595693407511
-    model_data.c1_iw = 14836354.6282
-    model_data.area_iw = 75.5
-    model_data.r_rest_ow = 0.03895919557
-    model_data.r1_ow = 0.00436791293674
-    model_data.c1_ow = 1600848.94
-    model_data.area_ow = 10.5
-    model_data.outer_wall_areas = [10.5]
-    model_data.window_areas = np.zeros(1)
-    model_data.transparent_areas = np.zeros(1)
-    tz.volume = 52.5
-    tz.density_air = 1.19
-    tz.heat_capac_air = 0
-    model_data.ratio_conv_rad_inner_win = 0.09
-    model_data.weighted_g_value = 1
-    model_data.alpha_comb_inner_iw = 2.24
-    model_data.alpha_comb_inner_ow = 2.7
-    model_data.alpha_conv_outer_ow = 20
-    model_data.alpha_rad_outer_ow = 5
-    model_data.alpha_comb_outer_ow = 25
-    model_data.alpha_rad_inner_mean = 5
-
-    tz.model_attr = model_data
+    tz = prepare_thermal_zone(timesteps)
 
     calc = VDICore(tz)
     calc.equal_air_temp = np.zeros(timesteps) + 295.15
@@ -166,6 +131,40 @@ def run_case1(plot_res=False):
     print("Max. deviation day 60: " + str(max_dev_60))
 
     return (max_dev_1, max_dev_10, max_dev_60)
+
+
+def prepare_thermal_zone(timesteps):
+    weather = WeatherData()
+    weather.air_temp = np.zeros(timesteps) + 295.15
+    prj = Project()
+    prj.weather_data = weather
+    bldg = Building(prj)
+    tz = ThermalZone(bldg)
+    model_data = TwoElement(tz, merge_windows=False, t_bt=5)
+    #  Store building parameters for testcase 1
+    model_data.r1_iw = 0.000595693407511
+    model_data.c1_iw = 14836354.6282
+    model_data.area_iw = 75.5
+    model_data.r_rest_ow = 0.03895919557
+    model_data.r1_ow = 0.00436791293674
+    model_data.c1_ow = 1600848.94
+    model_data.area_ow = 10.5
+    model_data.outer_wall_areas = [10.5]
+    model_data.window_areas = np.zeros(1)
+    model_data.transparent_areas = np.zeros(1)
+    tz.volume = 52.5
+    tz.density_air = 1.19
+    tz.heat_capac_air = 0
+    model_data.ratio_conv_rad_inner_win = 0.09
+    model_data.weighted_g_value = 1
+    model_data.alpha_comb_inner_iw = 2.24
+    model_data.alpha_comb_inner_ow = 2.7
+    model_data.alpha_conv_outer_ow = 20
+    model_data.alpha_rad_outer_ow = 5
+    model_data.alpha_comb_outer_ow = 25
+    model_data.alpha_rad_inner_mean = 5
+    tz.model_attr = model_data
+    return tz
 
 
 if __name__ == '__main__':
