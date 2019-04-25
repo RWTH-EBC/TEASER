@@ -35,7 +35,7 @@ def run_case11(plot_res=False):
 
     This test validates implementation of cooling ceiling or floor heating.
 
-    Currently fails with:
+    Originally fails with:
     
         Deviations temperature in K:
         Max. deviation day 1: 2.6729828763453547
@@ -45,6 +45,28 @@ def run_case11(plot_res=False):
         Max. deviation day 1: 90.12261852960904
         Max. deviation day 10: 267.87214370800694
         Max. deviation day 60: 274.8160896443969
+
+    Introducing `tz.model_attr.alpha_comb_inner_iw = 3` improves the results to
+
+        Deviations temperature in K:
+        Max. deviation day 1: 2.0026798505430357
+        Max. deviation day 10: 0.8789041941994213
+        Max. deviation day 60: 0.8721490045311029
+        Deviations heating/cooling in W:
+        Max. deviation day 1: 0.7602321051261924
+        Max. deviation day 10: 242.07940042260856
+        Max. deviation day 60: 244.90145685319482
+
+    Setting `tz.model_attr.alpha_comb_outer_ow = 10.5 * 25` overall worsens results:
+
+        Deviations temperature in K:
+        Max. deviation day 1: 2.0135679444329675
+        Max. deviation day 10: 0.9308007751085441
+        Max. deviation day 60: 0.9244159549466211
+        Deviations heating/cooling in W:
+        Max. deviation day 1: 1.6933125877698672
+        Max. deviation day 10: 229.33698430247819
+        Max. deviation day 60: 232.01258145610353
 
     Parameters
     ----------
@@ -66,6 +88,11 @@ def run_case11(plot_res=False):
     timesteps_day = int(24 * times_per_hour)
 
     tz = prepare_thermal_zone(timesteps, room="S1")
+    tz.volume = 0  # Seems to have no effect on results
+    tz.model_attr.alpha_comb_inner_iw = 3  # Improvement, see doc-string
+    tz.model_attr.alpha_conv_outer_ow = 10.5 * 25  # No effect (?)
+    # tz.model_attr.alpha_comb_outer_ow = 10.5 * 25  # Partial improvement, overall worse
+
 
     calc = VDICore(tz)
     calc.equal_air_temp = np.zeros(timesteps) + 295.15

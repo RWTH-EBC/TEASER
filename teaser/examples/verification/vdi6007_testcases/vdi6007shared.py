@@ -46,12 +46,12 @@ def prepare_thermal_zone(timesteps, room, weather=None):
     model_data = TwoElement(tz, merge_windows=False, t_bt=5)
 
     if room == "S1":
-        model_data.r1_iw = 0.000595693407511
-        model_data.c1_iw = 14836354.6282
-        model_data.area_iw = 75.5
-        model_data.r_rest_ow = 0.03895919557
-        model_data.r1_ow = 0.00436791293674
-        model_data.c1_ow = 1600848.94
+        model_data.r1_iw = 0.000595693407511  # Yes
+        model_data.c1_iw = 14836354.6282  # Yes
+        model_data.area_iw = 75.5  # Yes
+        model_data.r_rest_ow = 0.03895919557  # Yes
+        model_data.r1_ow = 0.00436791293674  # Yes
+        model_data.c1_ow = 1600848.94  # Yes
     elif room == "S2":
         model_data.r1_iw = 0.000668895639141
         model_data.c1_iw = 12391363.8631
@@ -75,26 +75,26 @@ def prepare_thermal_zone(timesteps, room, weather=None):
         model_data.window_areas = [0, 0]
         model_data.transparent_areas = [7, 7]
     else:
-        model_data.area_ow = 10.5
-        model_data.outer_wall_areas = [10.5]
-        model_data.window_areas = np.zeros(1)
-        model_data.transparent_areas = np.zeros(1)
+        model_data.area_ow = 10.5  # Yes
+        model_data.outer_wall_areas = [10.5]  # Yes
+        model_data.window_areas = np.zeros(1)  # Yes
+        model_data.transparent_areas = np.zeros(1)  # Yes
 
-    tz.volume = 52.5
+    tz.volume = 52.5  # No, is 0 in case 11
     tz.density_air = 1.19
     tz.heat_capac_air = 0
 
     model_data.ratio_conv_rad_inner_win = 0.09
-    model_data.weighted_g_value = 1
+    model_data.weighted_g_value = 1  # Yes
     if room == "S2":
         model_data.alpha_comb_inner_iw = 2.12
     else:
-        model_data.alpha_comb_inner_iw = 2.24
-    model_data.alpha_comb_inner_ow = 2.7
-    model_data.alpha_conv_outer_ow = 20
-    model_data.alpha_rad_outer_ow = 5
-    model_data.alpha_comb_outer_ow = 25
-    model_data.alpha_rad_inner_mean = 5
+        model_data.alpha_comb_inner_iw = 2.24  # No, is 3 in case 11
+    model_data.alpha_comb_inner_ow = 2.7  # Yes
+    model_data.alpha_conv_outer_ow = 20  # No, is 25 * 10.5 in case 11
+    model_data.alpha_rad_outer_ow = 5  # Yes
+    model_data.alpha_comb_outer_ow = 25  # Probably not used because irradiation is 0
+    model_data.alpha_rad_inner_mean = 5  # Yes
 
     tz.model_attr = model_data
 
