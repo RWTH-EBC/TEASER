@@ -181,3 +181,24 @@ def plot_result(res, ref, title, temperature_or_heat, res_raw=None):
     plt.xlabel("Time in h")
 
     plt.show()
+
+
+def prepare_internal_gains_rad(timesteps_day):
+    """Prepare a time series of prescribed internal radiative gains
+
+    Parameters
+    ----------
+    timesteps_day : int
+        Number of time steps in a day
+
+    Returns
+    -------
+    result : numpy.array
+        Time series of prescribed internal radiative gains
+    """
+    result = np.zeros(timesteps_day)
+    for q in range(int(6 * timesteps_day / 24), int(18 * timesteps_day / 24)):
+        result[q] = 1000
+    result = np.tile(result, 60)
+
+    return result
