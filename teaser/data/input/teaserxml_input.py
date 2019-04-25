@@ -1,7 +1,4 @@
-# Created July 2015
-# TEASER Development Team
-
-"""TeaserXML_input
+"""OLD! Will be deleted in future version.
 
 This module contains function to load Projects in the proprietary
 TEASER file format .tXML
@@ -34,7 +31,9 @@ from teaser.logic.buildingobjects.buildingphysics.door import Door
 
 
 def load_teaser_xml(path, prj):
-    """This function loads a project from teaserXML
+    """Function to load old XML files into new TEASER classes.
+
+    ATTENTION: This function should only be used to load old .teaserXML files.
 
     TEASERs internal file format to store information.
 
@@ -48,6 +47,11 @@ def load_teaser_xml(path, prj):
 
 
     """
+
+    warnings.warn(
+        "This function should only be used to transform old XML files"
+        "and will be deleted within the next versions of TEASER")
+
     version_parse = element_tree.parse(path)
     xml_file = open(path, 'r')
     if bool(version_parse.getroot().attrib) is False:
@@ -176,15 +180,16 @@ def _load_building(prj, pyxb_bld, type, project_bind):
         zone.use_conditions.typical_length = pyxb_zone.typical_length
         zone.use_conditions.typical_width = pyxb_zone.typical_width
 
-        zone.use_conditions.usage = pyxb_use.usage
+        zone.use_conditions.usage = \
+            pyxb_use.usage
 
         zone.use_conditions.ratio_conv_rad_lighting = \
             pyxb_use.Lighting.ratio_conv_rad_lighting
 
         zone.use_conditions.set_temp_heat = \
-            [pyxb_use.RoomClimate.set_temp_heat] * 25
+            [pyxb_use.RoomClimate.set_temp_heat, ]
         zone.use_conditions.set_temp_cool = \
-            [pyxb_use.RoomClimate.set_temp_cool] * 25
+            [pyxb_use.RoomClimate.set_temp_cool, ]
 
         zone.use_conditions.persons = \
             pyxb_use.InternalGains.persons
@@ -194,7 +199,7 @@ def _load_building(prj, pyxb_bld, type, project_bind):
             pyxb_use.InternalGains.machines
         zone.use_conditions.machines_profile = \
             pyxb_use.InternalGains.profile_machines
-        zone.use_conditions.lighting = \
+        zone.use_conditions.lighting_power = \
             pyxb_use.InternalGains.lighting_power
         zone.use_conditions.lighting_profile = \
             pyxb_use.InternalGains.profile_lighting
@@ -215,7 +220,7 @@ def _load_building(prj, pyxb_bld, type, project_bind):
             pyxb_use.AHU.max_overheating_ach
         zone.max_summer_infiltration = \
             pyxb_use.AHU.max_summer_ach
-        zone.winter_reduction = \
+        zone.winter_reduction_infiltration = \
             pyxb_use.AHU.winter_reduction
 
         for pyxb_wall in pyxb_zone.OuterWall:

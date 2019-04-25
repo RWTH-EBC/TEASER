@@ -5,10 +5,7 @@
 """
 
 import os
-
-import numpy as np
-import scipy.io
-
+import pandas as pd
 import teaser.logic.utilities as utilities
 
 
@@ -43,48 +40,10 @@ class IBPSA(object):
     def __init__(self, parent):
 
         self.parent = parent
-        self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
+        self.file_internal_gains = "InternalGains_" + self.parent.name + ".txt"
         self.version = {'AixLib': '0.7.4', 'Buildings': '5.1.0',
                         'BuildingSystems': '2.0.0-beta2', 'IDEAS': '2.0.0'}
         self.consider_heat_capacity = True
-
-    @staticmethod
-    def create_profile(duration_profile=86400, time_step=3600):
-        """Creates a profile for building boundary conditions
-
-        This function creates a list with an equidistant profile given the
-        duration of the profile in seconds (default one day, 86400 s) and the
-        time_step in seconds (default one hour, 3600 s). Needed for boundary
-        input of the building for Modelica simulation
-
-        Note
-        -----
-        As Python starts from counting the range from zero, but Modelica needs
-        0 as start value and additional 24 entries. We add one iteration
-        step in the profile.
-
-        Parameters
-        ----------
-        duration_profile : int
-            duration of the profile in seconds (default one day, 86400 s)
-        time_step : int
-            time step used in the profile in seconds (default one hour, 3600 s)
-
-        Returns
-        ---------
-        time_line : [[int]]
-            list of time steps as preparation for the output of boundary
-            conditions
-        """
-        ass_error_1 = "duration must be a multiple of time_step"
-
-        assert float(duration_profile / time_step).is_integer(), ass_error_1
-
-        time_line = []
-
-        for i in range(int(duration_profile / time_step) + 1):
-            time_line.append([i * time_step])
-        return time_line
 
     def modelica_gains_boundary(
             self,
@@ -123,7 +82,6 @@ class IBPSA(object):
         path : str
             optional path, when matfile is exported separately
         """
-
         if path is None:
             path = utilities.get_default_path()
         else:
@@ -132,45 +90,27 @@ class IBPSA(object):
         utilities.create_path(path)
         path = os.path.join(path, self.file_internal_gains)
 
-        if time_line is None:
-            duration = len(zone.use_conditions.profile_persons) * \
-                3600
-            time_line = self.create_profile(duration_profile=duration)
+        export = pd.DataFrame(
+            index=pd.date_range(
+                '2019-01-01 00:00:00',
+                periods=8760,
+                freq='H').to_series().dt.strftime('%m-%d %H:%M:%S'))
 
-        ass_error_1 = "time line and input have to have the same length"
+        export["person_rad_{}".format(
+            zone.name)] = zone.use_conditions.persons_profile * (1 - zone.use_conditions.ratio_conv_rad_persons) * 100 * zone.use_conditions.persons
+        export["person_conv_{}".format(
+            zone.name)] = zone.use_conditions.persons_profile * zone.use_conditions.ratio_conv_rad_persons * 100 * zone.use_conditions.persons
+        export["machines_conv_{}".format(
+            zone.name)] = zone.use_conditions.machines_profile * zone.use_conditions.ratio_conv_rad_machines * 100 * zone.use_conditions.machines
 
-        assert len(time_line) - 1 == len(
-            zone.use_conditions.profile_persons), \
-            (ass_error_1 + ",profile_persons")
-        assert len(time_line) - 1 == len(
-            zone.use_conditions.profile_machines), \
-            (ass_error_1 + ",profile_machines")
+        export.index = [(i + 1) * 3600 for i in range(8760)]
 
-        for i, time in enumerate(time_line):
-            if i == 0:
-                time.append(0)
-                time.append(0)
-                time.append(0)
-            else:
-                time.append(zone.use_conditions.profile_persons[i - 1] *
-                            zone.use_conditions.persons *
-                            zone.use_conditions.activity_type_persons * 50 *
-                            (1 - zone.use_conditions.ratio_conv_rad_persons) *
-                            zone.area * 0.01)
-                time.append(zone.use_conditions.profile_persons[i - 1] *
-                            zone.use_conditions.persons *
-                            zone.use_conditions.activity_type_persons * 50 *
-                            zone.use_conditions.ratio_conv_rad_persons *
-                            zone.area * 0.01)
-                time.append(zone.use_conditions.profile_machines[i - 1] *
-                            zone.use_conditions.machines *
-                            zone.use_conditions.activity_type_machines * 50 *
-                            zone.area * 0.01)
-
-        internal_boundary = np.array(time_line)
-
-        scipy.io.savemat(
-            path,
-            mdict={'Internals': internal_boundary},
-            appendmat=False,
-            format='4')
+        with open(path, 'a') as f:
+            f.write('#1\n')
+            f.write('double Internals({}, {})\n'.format(
+                8760, (len(self.parent.thermal_zones) * 3 + 1)))
+            export.to_csv(
+                f,
+                sep='\t',
+                header=False,
+                index_label=False)

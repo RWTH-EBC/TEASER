@@ -180,6 +180,7 @@ class UseConditions(object):
             assert type(value).__name__ == "ThermalZone", ass_error_1
 
             self._parent = value
+            self._parent._use_conditions = self
 
         else:
 

@@ -5,7 +5,6 @@ import teaser.logic.utilities as utilities
 import numpy as np
 import os
 import pandas as pd
-from itertools import cycle, islice
 
 
 class AixLib(object):

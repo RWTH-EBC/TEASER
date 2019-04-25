@@ -1433,7 +1433,7 @@ class FourElement(object):
         self.heat_load = \
             ((((ua_value_ow_temp + self.ua_value_win) +
                self.thermal_zone.volume *
-               self.thermal_zone.infiltration_rate * 1 / 3600 *
+               self.thermal_zone.use_conditions.infiltration_rate * 1 / 3600 *
                self.thermal_zone.heat_capac_air *
                self.thermal_zone.density_air) * (self.thermal_zone.t_inside -
                                                  self.thermal_zone.t_outside))
