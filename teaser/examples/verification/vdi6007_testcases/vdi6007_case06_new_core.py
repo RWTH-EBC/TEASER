@@ -9,8 +9,13 @@ import numpy as np
 
 from teaser.logic.simulation.vdi_core import VDICore
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case01 as vdic
-from teaser.examples.verification.vdi6007_testcases.vdi6007shared import \
-    prepare_thermal_zone, hourly_average, plot_result, prepare_internal_gains_rad
+from teaser.examples.verification.vdi6007_testcases.vdi6007shared import (
+    prepare_thermal_zone,
+    hourly_average,
+    plot_result,
+    prepare_internal_gains_rad,
+    prepare_set_temperature,
+)
 
 
 def run_case6(plot_res=False):
@@ -40,13 +45,8 @@ def run_case6(plot_res=False):
     calc.equal_air_temp = np.zeros(timesteps) + 295.15
     calc.solar_rad_in = np.zeros((timesteps, 1))
 
-    t_set = np.zeros(timesteps_day) + 273.15 + 22
-    for q in range(int(6 * timesteps_day / 24), int(18 * timesteps_day / 24)):
-        t_set[q] = 273.15 + 27
-    t_set = np.tile(t_set, 60)
-
-    calc.t_set_heating = t_set
-    calc.t_set_cooling = t_set
+    calc.t_set_heating = prepare_set_temperature(timesteps_day)
+    calc.t_set_cooling = prepare_set_temperature(timesteps_day)
 
     calc.heater_limit = np.zeros((timesteps, 3)) + 1e10
     calc.cooler_limit = np.zeros((timesteps, 3)) - 1e10
