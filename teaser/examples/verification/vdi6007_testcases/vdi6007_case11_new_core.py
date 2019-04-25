@@ -60,12 +60,6 @@ def run_case11(plot_res=False):
     timesteps = 24 * 60 * times_per_hour  # 60 days
     timesteps_day = int(24 * times_per_hour)
 
-
-    # Variable inputs
-    source_igRad = np.zeros(timesteps_day)
-    for q in range(int(6 * timesteps_day / 24), int(18 * timesteps_day / 24)):
-        source_igRad[q] = 1000
-
     tz = prepare_thermal_zone(timesteps, room="S1")
 
     calc = VDICore(tz)
