@@ -154,6 +154,8 @@ def plot_result(res, ref, title, temperature_or_heat):
     ax_top = plt.subplot(211)
     plt.plot(ref, label="Reference", color="black", linestyle="--")
     plt.plot(res, label="Simulation", color="blue", linestyle="-")
+    plt.scatter(range(len(ref)), ref, color="black", marker="x")
+    plt.scatter(range(len(res)), res, color="blue", marker="o")
     plt.legend()
     plt.ylabel(y_label_top)
 
