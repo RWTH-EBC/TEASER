@@ -118,14 +118,16 @@ def hourly_average(data, times_per_hour):
     """
 
     result = np.array(
-        [np.mean(data[i * times_per_hour:(i + 1) * times_per_hour]) for i in
-         range(24 * 60)]
+        [
+            np.mean(data[i * times_per_hour : (i + 1) * times_per_hour])
+            for i in range(24 * 60)
+        ]
     )
 
     return result
 
 
-def plot_result(res, ref, title, temperature_or_heat):
+def plot_result(res, ref, title, temperature_or_heat, res_raw=None):
     """Plot result comparison to reference values
 
     Parameters
@@ -149,13 +151,22 @@ def plot_result(res, ref, title, temperature_or_heat):
     else:
         raise LookupError("Unknown plot type. Must be 'temperature' or 'heat'")
 
-
     plt.figure()
     ax_top = plt.subplot(211)
     plt.plot(ref, label="Reference", color="black", linestyle="--")
     plt.plot(res, label="Simulation", color="blue", linestyle="-")
     plt.scatter(range(len(ref)), ref, color="black", marker="x")
     plt.scatter(range(len(res)), res, color="blue", marker="o")
+    if res_raw is not None:
+        plt.plot(
+            [x / 60 for x in range(len(res_raw))],
+            res_raw,
+            color="red",
+            linestyle="dotted",
+            alpha=0.5,
+            label="Simulation raw output"
+        )
+
     plt.legend()
     plt.ylabel(y_label_top)
 

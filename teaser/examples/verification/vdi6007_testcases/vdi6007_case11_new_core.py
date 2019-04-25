@@ -131,7 +131,13 @@ def run_case11(plot_res=False):
             T_air_60, T_air_ref_60, "Results temperatures day 60", "temperature"
         )
 
-        plot_result(Q_hc_1, Q_hc_ref_1, "Results heating/cooling day 1", "heat")
+        plot_result(
+            Q_hc_1,
+            Q_hc_ref_1,
+            "Results heating/cooling day 1",
+            "heat",
+            res_raw=q_air_hc[:24*60]
+        )
         plot_result(Q_hc_10, Q_hc_ref_10, "Results heating/cooling day 10", "heat")
         plot_result(Q_hc_60, Q_hc_ref_60, "Results heating/cooling day 60", "heat")
 
