@@ -8,8 +8,13 @@ import numpy as np
 
 from teaser.logic.simulation.vdi_core import VDICore
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case01 as vdic
-from teaser.examples.verification.vdi6007_testcases.vdi6007shared import \
-    prepare_thermal_zone, hourly_average, plot_result, prepare_internal_gains_rad
+from teaser.examples.verification.vdi6007_testcases.vdi6007shared import (
+    prepare_thermal_zone,
+    hourly_average,
+    plot_result,
+    prepare_internal_gains_rad,
+    prepare_set_temperature,
+)
 
 
 def run_case11(plot_res=False):
@@ -66,19 +71,14 @@ def run_case11(plot_res=False):
     calc.equal_air_temp = np.zeros(timesteps) + 295.15
     calc.solar_rad_in = np.zeros((timesteps, 1))
 
-    t_set = np.zeros(timesteps_day) + 273.15 + 22
-    for q in range(int(6 * timesteps_day / 24), int(18 * timesteps_day / 24)):
-        t_set[q] = 273.15 + 27
-    t_set = np.tile(t_set, 60)
-
-    calc.t_set_heating = t_set
-    calc.t_set_cooling = t_set
+    calc.t_set_heating = prepare_set_temperature(timesteps_day)
+    calc.t_set_cooling = prepare_set_temperature(timesteps_day)
 
     calc.heater_limit = np.zeros((timesteps, 3))
     calc.heater_limit[:, 0] = 500
     calc.heater_order = np.array([1, 2, 3])
     calc.cooler_limit = np.zeros((timesteps, 3))
-    calc.cooler_limit[:, 0] = - 500
+    calc.cooler_limit[:, 0] = -500
     calc.cooler_order = [2, 1, 3]
 
     calc.internal_gains_rad = prepare_internal_gains_rad(timesteps_day)
@@ -97,8 +97,8 @@ def run_case11(plot_res=False):
     T_air_60 = T_air_mean[1416:1440]
 
     this_path = os.path.dirname(os.path.abspath(__file__))
-    ref_file = 'case11_res.csv'
-    ref_path = os.path.join(this_path, 'inputs', ref_file)
+    ref_file = "case11_res.csv"
+    ref_path = os.path.join(this_path, "inputs", ref_file)
 
     # Load reference results
     (load_res_1, load_res_10, load_res_60) = vdic.load_res(ref_path)
@@ -125,7 +125,7 @@ def run_case11(plot_res=False):
             Q_hc_ref_1,
             "Results heating/cooling day 1",
             "heat",
-            res_raw=q_air_hc[:24*60]
+            res_raw=q_air_hc[: 24 * 60],
         )
         plot_result(Q_hc_10, Q_hc_ref_10, "Results heating/cooling day 10", "heat")
         plot_result(Q_hc_60, Q_hc_ref_60, "Results heating/cooling day 60", "heat")
@@ -148,8 +148,15 @@ def run_case11(plot_res=False):
     print("Max. deviation day 10: " + str(max_dev_10))
     print("Max. deviation day 60: " + str(max_dev_60))
 
-    return (max_dev_1_temp, max_dev_10_temp, max_dev_60_temp, max_dev_1,
-            max_dev_10, max_dev_60)
+    return (
+        max_dev_1_temp,
+        max_dev_10_temp,
+        max_dev_60_temp,
+        max_dev_1,
+        max_dev_10,
+        max_dev_60,
+    )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     run_case11(plot_res=True)

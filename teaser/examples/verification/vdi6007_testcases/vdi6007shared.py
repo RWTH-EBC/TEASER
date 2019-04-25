@@ -202,3 +202,25 @@ def prepare_internal_gains_rad(timesteps_day):
     result = np.tile(result, 60)
 
     return result
+
+
+def prepare_set_temperature(timesteps_day):
+    """Prepare a time series of prescribed set temperature
+
+    Parameters
+    ----------
+    timesteps_day : int
+        Number of time steps in a day
+
+    Returns
+    -------
+    result : numpy.array
+        Time series of prescribed set temperature
+
+    """
+    result = np.zeros(timesteps_day) + 273.15 + 22
+    for q in range(int(6 * timesteps_day / 24), int(18 * timesteps_day / 24)):
+        result[q] = 273.15 + 27
+    result = np.tile(result, 60)
+
+    return result
