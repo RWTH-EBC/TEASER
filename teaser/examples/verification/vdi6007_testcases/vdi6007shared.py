@@ -164,7 +164,7 @@ def plot_result(res, ref, title, temperature_or_heat, res_raw=None):
             color="red",
             linestyle="dotted",
             alpha=0.5,
-            label="Simulation raw output"
+            label="Simulation raw output",
         )
 
     plt.legend()
@@ -179,6 +179,65 @@ def plot_result(res, ref, title, temperature_or_heat, res_raw=None):
     plt.xticks([4 * i for i in range(7)])
     plt.xlim([1, 24])
     plt.xlabel("Time in h")
+
+    plt.show()
+
+
+def plot_set_temperature(tset):
+    """Plot set temperature used in e.g. case 11
+
+    Parameters
+    ----------
+    tset : : numpy.array
+        Time series of prescribed set temperature
+    """
+
+    reference = [
+        [0, 22],
+        [3600, 22],
+        [7200, 22],
+        [10800, 22],
+        [14400, 22],
+        [18000, 22],
+        [21600, 22],
+        [21600.1, 27],
+        [28800, 27],
+        [32400, 27],
+        [36000, 27],
+        [39600, 27],
+        [43200, 27],
+        [46800, 27],
+        [50400, 27],
+        [54000, 27],
+        [57600, 27],
+        [61200, 27],
+        [64800, 27],
+        [64800.1, 22],
+        [72000, 22],
+        [75600, 22],
+        [79200, 22],
+        [82800, 22],
+    ]
+
+    reference = [[x[0] / 60, x[1]] for x in reference]
+
+    plt.figure()
+    plt.subplot(111)
+    plt.plot(tset - 273.15, color="blue", label="Simulation", linestyle="-")
+    plt.plot(
+        [x[0] for x in reference],
+        [x[1] for x in reference],
+        color="black",
+        label="Reference (Modelica)",
+        linestyle="--",
+    )
+    plt.ylabel("Temperature in °C")
+    plt.xlabel("Time in minutes")
+
+    plt.xlim([0, 60 * 24])
+
+    plt.legend()
+    plt.title("Set temperature in °C for one day")
 
     plt.show()
 

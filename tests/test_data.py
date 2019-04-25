@@ -26,6 +26,14 @@ import teaser.examples.verification.vdi6007_testcases.vdi6007_case09_new_core as
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case10_new_core as vdi10_new_core
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case11_new_core as vdi11_new_core
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case12_new_core as vdi12_new_core
+from teaser.examples.verification.vdi6007_testcases.vdi6007shared import (
+    prepare_thermal_zone,
+    hourly_average,
+    plot_result,
+    prepare_internal_gains_rad,
+    prepare_set_temperature,
+    plot_set_temperature
+)
 # import teaser.examples.verification.vdi6007_testcases.vdi6007_case02 as vdi2
 # import teaser.examples.verification.vdi6007_testcases.vdi6007_case03 as vdi3
 # import teaser.examples.verification.vdi6007_testcases.vdi6007_case04 as vdi4
@@ -3530,6 +3538,18 @@ class Test_teaser(object):
         #  Check if temperature deviation is below 0.1 Kelvin
         for val in tuple_res:
             assert val < 0.15
+
+    def test_vdi_6007_validation_case11_tset(self):
+        """
+        Verify the set temperature for case 11
+        """
+
+        times_per_hour = 60
+        timesteps = 24 * 60 * times_per_hour  # 60 days
+        timesteps_day = int(24 * times_per_hour)
+
+        plot_set_temperature(tset=prepare_set_temperature(timesteps_day=timesteps_day))
+
 
     def test_type_bldg_residential_profiles(self):
         """
