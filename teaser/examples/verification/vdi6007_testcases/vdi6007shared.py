@@ -242,6 +242,68 @@ def plot_set_temperature(tset):
     plt.show()
 
 
+def plot_internal_gains_rad(ig_rad):
+    """Plot internal radiative gains used in e.g. case 11
+
+    Parameters
+    ----------
+    ig_rad : : numpy.array
+        Time series of internal radiative gains
+    """
+
+    reference = [
+        [0, 0],
+        [3600, 0],
+        [7200, 0],
+        [10800, 0],
+        [14400, 0],
+        [18000, 0],
+        [21600, 0],
+        [21600, 1000],
+        [25200, 1000],
+        [28800, 1000],
+        [32400, 1000],
+        [36000, 1000],
+        [39600, 1000],
+        [43200, 1000],
+        [46800, 1000],
+        [50400, 1000],
+        [54000, 1000],
+        [57600, 1000],
+        [61200, 1000],
+        [64800, 1000],
+        [64800, 0],
+        [68400, 0],
+        [72000, 0],
+        [75600, 0],
+        [79200, 0],
+        [82800, 0],
+        [86400, 0],
+    ]
+
+    reference = [[x[0] / 60, x[1]] for x in reference]
+
+    plt.figure()
+    plt.subplot(111)
+    plt.plot(ig_rad, color="blue", label="Simulation", linestyle="-")
+    plt.plot(
+        [x[0] for x in reference],
+        [x[1] for x in reference],
+        color="black",
+        label="Reference (Modelica)",
+        linestyle="--",
+    )
+    plt.ylabel("Internal gains in W")
+    plt.xlabel("Time in minutes")
+
+    plt.xlim([0, 60 * 24])
+
+    plt.legend()
+    plt.title("Internal gains in W for one day")
+
+    plt.show()
+
+
 def prepare_internal_gains_rad(timesteps_day):
     """Prepare a time series of prescribed internal radiative gains
 

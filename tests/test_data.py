@@ -32,7 +32,8 @@ from teaser.examples.verification.vdi6007_testcases.vdi6007shared import (
     plot_result,
     prepare_internal_gains_rad,
     prepare_set_temperature,
-    plot_set_temperature
+    plot_set_temperature,
+    plot_internal_gains_rad,
 )
 # import teaser.examples.verification.vdi6007_testcases.vdi6007_case02 as vdi2
 # import teaser.examples.verification.vdi6007_testcases.vdi6007_case03 as vdi3
@@ -3549,6 +3550,19 @@ class Test_teaser(object):
         timesteps_day = int(24 * times_per_hour)
 
         plot_set_temperature(tset=prepare_set_temperature(timesteps_day=timesteps_day))
+
+    def test_vdi_6007_validation_case11_ig_rad(self):
+        """
+        Verify the radiative internal gains for case 11
+        """
+
+        times_per_hour = 60
+        timesteps = 24 * 60 * times_per_hour  # 60 days
+        timesteps_day = int(24 * times_per_hour)
+
+        plot_internal_gains_rad(
+            ig_rad=prepare_internal_gains_rad(timesteps_day=timesteps_day)
+        )
 
 
     def test_type_bldg_residential_profiles(self):
