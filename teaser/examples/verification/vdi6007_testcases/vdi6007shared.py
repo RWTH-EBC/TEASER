@@ -91,7 +91,7 @@ def prepare_thermal_zone(timesteps, room, weather=None):
     else:
         model_data.alpha_comb_inner_iw = 2.24  # No, is 3 in case 11
     model_data.alpha_comb_inner_ow = 2.7  # Yes
-    model_data.alpha_conv_outer_ow = 20  # No, is 25 * 10.5 in case 11
+    model_data.alpha_conv_outer_ow = 20  # No effect because only used in equalAir
     model_data.alpha_rad_outer_ow = 5  # Yes
     model_data.alpha_comb_outer_ow = 25  # Yes, in Modelica alpha_wall is 25 * 10.5
     model_data.alpha_rad_inner_mean = 5  # Yes
