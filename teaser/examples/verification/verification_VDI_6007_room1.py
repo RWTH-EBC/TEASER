@@ -1,6 +1,4 @@
-# Created July 2015
-# TEASER Development Team
-
+import ipdb
 """
 This script loads the VDI 6007 Room 1 as *.teaserXML and computes
 parameters. The parameters are then compared with the ones from Rouvel
@@ -16,7 +14,7 @@ def parameter_room1():
     prj.name = "VDI_Verification_Room1"
 
     prj.load_project(utilities.get_full_path(
-        "examples/examplefiles/VDI6007_Room1.teaserXML"))
+        "examples/examplefiles/VDI6007_Room1.json"))
 
     prj.buildings[0].calc_building_parameter(
         number_of_elements=2,
@@ -28,6 +26,7 @@ def parameter_room1():
 
 if __name__ == "__main__":
     prj = parameter_room1()
+    ipdb.set_trace()  # Break Point ###########
 
     """
     parameters inner wall Typraum S

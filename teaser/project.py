@@ -8,8 +8,8 @@ import warnings
 import os
 import re
 import teaser.logic.utilities as utilities
-import teaser.data.input.teaserxml_input as txml_in
-import teaser.data.output.teaserjson_output as txml_out
+import teaser.data.input.teaserjson_input as tjson_in
+import teaser.data.output.teaserjson_output as tjson_out
 import teaser.data.output.aixlib_output as aixlib_output
 import teaser.data.output.ibpsa_output as ibpsa_output
 from teaser.data.dataclass import DataClass
@@ -865,7 +865,7 @@ class Project(object):
         else:
             new_path = os.path.join(path, name)
 
-        txml_out.save_teaser_json(new_path, self)
+        tjson_out.save_teaser_json(new_path, self)
 
     def load_project(self, path):
         """Loads the project from a teaserXML file (new format)
@@ -879,7 +879,7 @@ class Project(object):
 
         """
 
-        txml_in.load_teaser_xml(path, self)
+        tjson_in.load_teaser_json(path, self)
 
     def load_citygml(self, path=None):
         """Loads buildings from a citygml file

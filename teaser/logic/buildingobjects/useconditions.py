@@ -20,8 +20,8 @@ class UseConditions(object):
         self.parent = parent
         self.usage = "Single office"
 
-        self.typical_length = 123.0
-        self.typical_width = 123.0
+        self.typical_length = 6.0
+        self.typical_width = 6.0
 
         self.with_heating = True
         self.with_cooling = False

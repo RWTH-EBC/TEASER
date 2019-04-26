@@ -28,9 +28,10 @@ from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.buildingphysics.door import Door
+import json
 
 
-def load_teaser_json(path, prj):
+def load_teaser_json(path, project):
     """This function loads a project from teaserJSON
 
     TEASERs internal file format to store information.
@@ -45,241 +46,253 @@ def load_teaser_json(path, prj):
 
 
     """
-    warnings.warn(
-        "This function should only be used to transform old XML files"
-        "and will be deleted within the next versions of TEASER")
+    __building_class = {
+        "Office": {
+            "method": "bmvbs",
+            "teaser_class": Office},
+        "Institute": {
+            "method": "bmvbs",
+            "teaser_class": Institute},
+        "Institute4": {
+            "method": "bmvbs",
+            "teaser_class": Institute4},
+        "Institute8": {
+            "method": "bmvbs",
+            "teaser_class": Institute8},
+        "Building": {
+            "method": "undefined",
+            "teaser_class": Building},
+        "SingleFamilyDwelling": {
+            "method": "iwu",
+            "usage": SingleFamilyDwelling},
+        # "SingleFamilyHouse": {
+        #     "method": "tabula_de",
+        #     "usage": "single_family_house"},
+        # "TerracedHouse": {
+        #     "method": "tabula_de",
+        #     "usage": "terraced_house"},
+        # "MultiFamilyHouse": {
+        #     "method": "tabula_de",
+        #     "usage": "multi_family_house"},
+        # "ApartmentBlock": {
+        #     "method": "tabula_de",
+        #     "usage": "apartment_block"},
+    }
+    with open(path, 'r+') as f:
+        prj_in = json.load(f)
 
-    version_parse = element_tree.parse(path)
-    xml_file = open(path, 'r')
-    if bool(version_parse.getroot().attrib) is False:
-        warnings.warn("You are using an old version of project XML file")
-        import teaser.data.bindings.v_0_3_9.project_bind as pb
-        project_bind = pb.CreateFromDocument(xml_file.read())
-    elif version_parse.getroot().attrib['version'] == "0.3.9":
-        warnings.warn("You are using an old version of project XML file")
-        import teaser.data.bindings.v_0_3_9.project_bind as pb
-        project_bind = pb.CreateFromDocument(xml_file.read())
-    elif version_parse.getroot().attrib['version'] == "0.4":
-        warnings.warn("You are using an old version of project XML file")
-        import teaser.data.bindings.v_0_4.project_bind as pb
-        project_bind = pb.CreateFromDocument(xml_file.read())
-    elif version_parse.getroot().attrib['version'] == "0.5":
-        warnings.warn("You are using an old version of project XML file")
-        import teaser.data.bindings.v_0_5.project_bind as pb
-        project_bind = pb.CreateFromDocument(xml_file.read())
-    elif version_parse.getroot().attrib['version'] == "0.6":
-        import teaser.data.bindings.v_0_6.project_bind as pb
-        project_bind = pb.CreateFromDocument(xml_file.read())
+    project.name = prj_in["project"]["name"]
+    project.weather_file_path = prj_in["project"]["weather_file_path"]
+    project.number_of_elements_calc = prj_in["project"][
+        "number_of_elements_calc"]
+    project.merge_windows_calc = prj_in["project"]["merge_windows_calc"]
+    project.used_library_calc = prj_in["project"]["used_library_calc"]
+    project.modelica_info.start_time = prj_in[
+        "project"]["modelica_info"]["start_time"]
+    project.modelica_info.stop_time = prj_in[
+        "project"]["modelica_info"]["stop_time"]
+    project.modelica_info.interval_output = prj_in[
+        "project"]["modelica_info"]["interval_output"]
+    project.modelica_info.current_solver = prj_in[
+        "project"]["modelica_info"]["current_solver"]
+    project.modelica_info.equidistant_output = prj_in[
+        "project"]["modelica_info"]["equidistant_output"]
+    project.modelica_info.results_at_events = prj_in[
+        "project"]["modelica_info"]["results_at_events"]
+    project.modelica_info.version = prj_in[
+        "project"]["modelica_info"]["version"]
 
-    for pyxb_bld in project_bind.Building:
-        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Building",
-                       project_bind=project_bind)
-
-    for pyxb_bld in project_bind.Office:
-        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Office",
-                       project_bind=project_bind)
-
-    for pyxb_bld in project_bind.Institute:
-        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Institute",
-                       project_bind=project_bind)
-
-    for pyxb_bld in project_bind.Institute4:
-        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Institute4",
-                       project_bind=project_bind)
-
-    for pyxb_bld in project_bind.Institute8:
-        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Institute8",
-                       project_bind=project_bind)
-
-    for pyxb_bld in project_bind.Residential:
-        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Residential",
-                       project_bind=project_bind)
-
-
-def _load_building(prj, pyxb_bld, type, project_bind):
-    if type == "Building":
-        bldg = Building(prj)
-
-    elif type == "Office":
-        bldg = Office(prj)
-
-    elif type == "Institute":
-
-        bldg = Institute(prj)
-
-    elif type == "Institute4":
-        bldg = Institute4(prj)
-
-    elif type == "Institute8":
-        bldg = Institute8(prj)
-
-    elif type == "Residential":
-        bldg = SingleFamilyDwelling(prj)
-
-    bldg.name = pyxb_bld.name
-    bldg.street_name = pyxb_bld.street_name
-    bldg.city = pyxb_bld.city
-    bldg.type_of_building = pyxb_bld.type_of_building
-    bldg.year_of_construction = pyxb_bld.year_of_construction
-    bldg.year_of_retrofit = pyxb_bld.year_of_retrofit
-    bldg.number_of_floors = pyxb_bld.number_of_floors
-    bldg.height_of_floors = pyxb_bld.height_of_floors
-
-    if not pyxb_bld.ThermalZone:
-        bldg.net_leased_area = pyxb_bld.net_leased_area
-
-    if pyxb_bld.CentralAHU:
-        pyxb_ahu = pyxb_bld.CentralAHU
-        bldg.central_ahu = BuildingAHU(bldg)
-
-        bldg.central_ahu.heating = pyxb_ahu.heating
-        bldg.central_ahu.cooling = pyxb_ahu.cooling
-        bldg.central_ahu.dehumidification = pyxb_ahu.dehumidification
-        bldg.central_ahu.humidification = pyxb_ahu.humidification
-        bldg.central_ahu.heat_recovery = pyxb_ahu.heat_recovery
-        bldg.central_ahu.by_pass_dehumidification = \
-            pyxb_ahu.by_pass_dehumidification
-        bldg.central_ahu.efficiency_recovery = pyxb_ahu.efficiency_recovery
+    for bldg_name, bldg_in in prj_in["project"]["buildings"].items():
+        bl_class = __building_class[
+            bldg_in["classification"]["class"]]["teaser_class"]
+        bldg = bl_class(parent=project)
+        bldg.name = bldg_name
+        bldg.street_name = bldg_in["street_name"]
+        bldg.city = bldg_in["city"]
+        bldg.year_of_construction = bldg_in["year_of_construction"]
+        bldg.year_of_retrofit = bldg_in["year_of_retrofit"]
+        bldg.number_of_floors = bldg_in["number_of_floors"]
+        bldg.height_of_floors = bldg_in["height_of_floors"]
+        bldg.net_leased_area = bldg_in["net_leased_area"]
+        bldg.outer_area = bldg_in["outer_area"]
+        bldg.window_area = bldg_in["window_area"]
 
         try:
-            if float(project_bind.version) >= 0.5:
-                bldg.central_ahu.efficiency_recovery_false = \
-                    pyxb_ahu.efficiency_recovery_false
-            else:
-                bldg.central_ahu.efficiency_recovery_false = \
-                    pyxb_ahu.efficiency_revocery_false
-        except AttributeError:
-            bldg.central_ahu.efficiency_recovery_false = \
-                pyxb_ahu.efficiency_revocery_false
-
-        bldg.central_ahu.profile_min_relative_humidity = \
-            pyxb_ahu.profile_min_relative_humidity
-        bldg.central_ahu.profile_max_relative_humidity = \
-            pyxb_ahu.profile_max_relative_humidity
-        bldg.central_ahu.profile_v_flow = \
-            pyxb_ahu.profile_v_flow
-        bldg.central_ahu.profile_temperature = \
-            pyxb_ahu.profile_temperature
-
-    for pyxb_zone in pyxb_bld.ThermalZone:
-
-        zone = ThermalZone(bldg)
-
-        zone.name = pyxb_zone.name
-        zone.area = pyxb_zone.area
-        zone.volume = pyxb_zone.volume
-        zone.infiltration_rate = pyxb_zone.infiltration_rate
-
-        zone.use_conditions = UseConditions(zone)
-
-        pyxb_use = pyxb_zone.UseCondition.BoundaryConditions
-
-        zone.use_conditions.typical_length = pyxb_zone.typical_length
-        zone.use_conditions.typical_width = pyxb_zone.typical_width
-
-        zone.use_conditions.usage = \
-            pyxb_use.usage
-
-        zone.use_conditions.ratio_conv_rad_lighting = \
-            pyxb_use.Lighting.ratio_conv_rad_lighting
-
-        zone.use_conditions.set_temp_heat = \
-            [pyxb_use.RoomClimate.set_temp_heat, ]
-        zone.use_conditions.set_temp_cool = \
-            [pyxb_use.RoomClimate.set_temp_cool, ]
-
-        zone.use_conditions.persons = \
-            pyxb_use.InternalGains.persons
-        zone.use_conditions.persons_profile = \
-            pyxb_use.InternalGains.profile_persons
-        zone.use_conditions.machines = \
-            pyxb_use.InternalGains.machines
-        zone.use_conditions.machines_profile = \
-            pyxb_use.InternalGains.profile_machines
-        zone.use_conditions.lighting_power = \
-            pyxb_use.InternalGains.lighting_power
-        zone.use_conditions.lighting_profile = \
-            pyxb_use.InternalGains.profile_lighting
-
-        zone.use_conditions.min_ahu = \
-            pyxb_use.AHU.min_ahu
-        zone.use_conditions.max_ahu = \
-            pyxb_use.AHU.max_ahu
-        zone.use_conditions.with_ahu = \
-            pyxb_use.AHU.with_ahu
-        zone.use_constant_infiltration = \
-            pyxb_use.AHU.use_constant_ach_rate
-        zone.base_infiltration = \
-            pyxb_use.AHU.base_ach
-        zone.max_user_infiltration = \
-            pyxb_use.AHU.max_user_ach
-        zone.max_overheating_infiltration = \
-            pyxb_use.AHU.max_overheating_ach
-        zone.max_summer_infiltration = \
-            pyxb_use.AHU.max_summer_ach
-        zone.winter_reduction_infiltration = \
-            pyxb_use.AHU.winter_reduction
-
-        for pyxb_wall in pyxb_zone.OuterWall:
-            out_wall = OuterWall(zone)
-
-            set_basic_data_teaser(pyxb_wall, out_wall)
-            set_layer_data_teaser(pyxb_wall, out_wall)
-
-        try:
-            if float(project_bind.version) >= 0.6:
-                for pyxb_wall in pyxb_zone.Door:
-                    out_wall = Door(zone)
-
-                    set_basic_data_teaser(pyxb_wall, out_wall)
-                    set_layer_data_teaser(pyxb_wall, out_wall)
-
-        except AttributeError:
+            bldg.central_ahu = BuildingAHU(parent=bldg)
+            bldg.central_ahu.heating = bldg_in["central_ahu"]["heating"]
+            bldg.central_ahu.cooling = bldg_in["central_ahu"]["cooling"]
+            bldg.central_ahu.dehumidification = bldg_in[
+                "central_ahu"]["dehumidification"]
+            bldg.central_ahu.humidification = bldg_in[
+                "central_ahu"]["humidification"]
+            bldg.central_ahu.heat_recovery = bldg_in[
+                "central_ahu"]["heat_recovery"]
+            bldg.central_ahu.by_pass_dehumidification = bldg_in["central_ahu"][
+                "by_pass_dehumidification"]
+            bldg.central_ahu.efficiency_recovery = bldg_in["central_ahu"][
+                "efficiency_recovery"]
+            bldg.central_ahu.efficiency_recovery_false = bldg_in[
+                "central_ahu"]["efficiency_recovery_false"]
+            bldg.central_ahu.profile_min_relative_humidity = bldg_in[
+                "central_ahu"]["profile_min_relative_humidity"]
+            bldg.central_ahu.profile_max_relative_humidity = bldg_in[
+                "central_ahu"]["profile_max_relative_humidity"]
+            bldg.central_ahu.profile_v_flow = bldg_in[
+                "central_ahu"]["profile_v_flow"]
+            bldg.central_ahu.profile_temperature = bldg_in[
+                "central_ahu"]["profile_temperature"]
+        except KeyError:
             pass
 
-        for pyxb_wall in pyxb_zone.Rooftop:
-            roof = Rooftop(zone)
+        for tz_name, zone_in in bldg_in["thermal_zones"].items():
+            tz = ThermalZone(parent=bldg)
+            tz.name = tz_name
+            tz.area = zone_in["area"]
+            tz.volume = zone_in["volume"]
+            tz.use_conditions = UseConditions(parent=tz)
+            tz.use_conditions.usage = zone_in["use_conditions"]["usage"]
+            tz.use_conditions.typical_length = zone_in[
+                "use_conditions"]["typical_length"]
+            tz.use_conditions.typical_width = zone_in[
+                "use_conditions"]["typical_width"]
+            tz.use_conditions.with_heating = zone_in[
+                "use_conditions"]["with_heating"]
+            tz.use_conditions.with_cooling = zone_in[
+                "use_conditions"]["with_cooling"]
+            tz.use_conditions.persons = zone_in["use_conditions"]["persons"]
+            tz.use_conditions.ratio_conv_rad_persons = zone_in[
+                "use_conditions"]["ratio_conv_rad_persons"]
+            tz.use_conditions.machines = zone_in["use_conditions"]["machines"]
+            tz.use_conditions.ratio_conv_rad_machines = zone_in[
+                "use_conditions"]["ratio_conv_rad_machines"]
+            tz.use_conditions.lighting_power = zone_in[
+                "use_conditions"]["lighting_power"]
+            tz.use_conditions.ratio_conv_rad_lighting = zone_in[
+                "use_conditions"]["ratio_conv_rad_lighting"]
+            tz.use_conditions.use_constant_infiltration = zone_in[
+                "use_conditions"]["use_constant_infiltration"]
+            tz.use_conditions.infiltration_rate = zone_in[
+                "use_conditions"]["infiltration_rate"]
+            tz.use_conditions.max_user_infiltration = zone_in[
+                "use_conditions"]["max_user_infiltration"]
+            tz.use_conditions.max_overheating_infiltration = zone_in[
+                "use_conditions"]["max_overheating_infiltration"]
+            tz.use_conditions.max_summer_infiltration = zone_in[
+                "use_conditions"]["max_summer_infiltration"]
+            tz.use_conditions.winter_reduction_infiltration = zone_in[
+                "use_conditions"]["winter_reduction_infiltration"]
+            tz.use_conditions.min_ahu = zone_in["use_conditions"]["min_ahu"]
+            tz.use_conditions.max_ahu = zone_in["use_conditions"]["max_ahu"]
+            tz.use_conditions.with_ahu = zone_in["use_conditions"]["with_ahu"]
+            tz.use_conditions.heating_profile = zone_in[
+                "use_conditions"]["heating_profile"]
+            tz.use_conditions.cooling_profile = zone_in[
+                "use_conditions"]["cooling_profile"]
+            tz.use_conditions.persons_profile = zone_in[
+                "use_conditions"]["persons_profile"]
+            tz.use_conditions.machines_profile = zone_in[
+                "use_conditions"]["machines_profile"]
+            tz.use_conditions.lighting_profile = zone_in[
+                "use_conditions"]["lighting_profile"]
 
-            set_basic_data_teaser(pyxb_wall, roof)
-            set_layer_data_teaser(pyxb_wall, roof)
+            for wall_name, wall_in in zone_in["outer_walls"].items():
+                out_wall = OuterWall(parent=tz)
+                out_wall.name = wall_name
+                set_basic_data_teaser(wall_in, out_wall)
+                set_layer_data_teaser(wall_in, out_wall)
+            for roof_name, roof_in in zone_in["rooftops"].items():
+                roof = Rooftop(parent=tz)
+                roof.name = roof_name
+                set_basic_data_teaser(roof_in, roof)
+                set_layer_data_teaser(roof_in, roof)
+            for gf_name, gf_in in zone_in["ground_floors"].items():
+                gf = GroundFloor(parent=tz)
+                gf.name = gf_name
+                set_basic_data_teaser(gf_in, gf)
+                set_layer_data_teaser(gf_in, gf)
+            for win_name, win_in in zone_in["windows"].items():
+                win = Window(parent=tz)
+                win.name = win_name
+                set_basic_data_teaser(win_in, win)
+                set_layer_data_teaser(win_in, win)
+            for iw_name, iw_in in zone_in["inner_walls"].items():
+                in_wall = InnerWall(parent=tz)
+                in_wall.name = iw_name
+                set_basic_data_teaser(iw_in, in_wall)
+                set_layer_data_teaser(iw_in, in_wall)
+            for fl_name, fl_in in zone_in["floors"].items():
+                floor = Floor(parent=tz)
+                floor.name = fl_name
+                set_basic_data_teaser(fl_in, floor)
+                set_layer_data_teaser(fl_in, floor)
+            for cl_name, cl_in in zone_in["ceilings"].items():
+                ceil = Ceiling(parent=tz)
+                ceil.name = cl_name
+                set_basic_data_teaser(cl_in, ceil)
+                set_layer_data_teaser(cl_in, ceil)
 
-            # zone.outer_walls.append(roof)
 
-        for pyxb_wall in pyxb_zone.GroundFloor:
-            gr_floor = GroundFloor(zone)
+def set_basic_data_teaser(wall_in, element):
+    """Helper function for load_teaser_xml to set the basic data
+    Parameters
+    ----------
+    wall_in : collection.OrderedDict
+        OrderedDict for walls
+    element : TEASERClass
+        teaser class representation of a building element
+    """
 
-            set_basic_data_teaser(pyxb_wall, gr_floor)
-            set_layer_data_teaser(pyxb_wall, gr_floor)
+    element.area = wall_in["area"]
+    element.tilt = wall_in["tilt"]
+    element.orientation = wall_in["orientation"]
 
-            # zone.outer_walls.append(gr_floor)
+    if type(element).__name__ == 'OuterWall' or type(element).__name__ == \
+            'Rooftop' or type(element).__name__ == 'Door':
 
-        for pyxb_wall in pyxb_zone.InnerWall:
-            in_wall = InnerWall(zone)
+        element.inner_radiation = wall_in["inner_radiation"]
+        element.inner_convection = wall_in["inner_convection"]
+        element.outer_radiation = wall_in["outer_radiation"]
+        element.outer_convection = wall_in["outer_convection"]
 
-            set_basic_data_teaser(pyxb_wall, in_wall)
-            set_layer_data_teaser(pyxb_wall, in_wall)
+    elif type(element).__name__ == 'InnerWall' or type(element).__name__ == \
+            'Ceiling' or type(element).__name__ == 'Floor' or type(
+                element).__name__ == 'GroundFloor':
 
-            # zone.inner_walls.append(in_wall)
+        element.inner_radiation = wall_in["inner_radiation"]
+        element.inner_convection = wall_in["inner_convection"]
 
-        for pyxb_wall in pyxb_zone.Ceiling:
-            ceiling = Ceiling(zone)
+    elif type(element).__name__ == 'Window':
 
-            set_basic_data_teaser(pyxb_wall, ceiling)
-            set_layer_data_teaser(pyxb_wall, ceiling)
+        element.inner_radiation = wall_in["inner_radiation"]
+        element.inner_convection = wall_in["inner_convection"]
+        element.outer_radiation = wall_in["outer_radiation"]
+        element.outer_convection = wall_in["outer_convection"]
+        element.g_value = wall_in["g_value"]
+        element.a_conv = wall_in["a_conv"]
+        element.shading_g_total = wall_in["shading_g_total"]
+        element.shading_max_irr = wall_in["shading_max_irr"]
 
-            # zone.inner_walls.append(ceiling)
 
-        for pyxb_wall in pyxb_zone.Floor:
-            floor = Floor(zone)
+def set_layer_data_teaser(wall_in, element):
+    """Helper function for load_teaser_xml to set the layer data
+    Parameters
+    ----------
+    wall_in : collection.OrderedDict
+        OrderedDict for walls
+    element : TEASERClass
+        teaser class representation of a building element
+    """
+    for lay_id, layer_in in wall_in["layer"].items():
+        layer = Layer(element)
 
-            set_basic_data_teaser(pyxb_wall, floor)
-            set_layer_data_teaser(pyxb_wall, floor)
+        layer.id = int(lay_id)
+        layer.thickness = layer_in["thickness"]
 
-            # zone.inner_walls.append(floor)
+        Material(layer)
 
-        for pyxb_win in pyxb_zone.Window:
-            win = Window(zone)
-
-            set_basic_data_teaser(pyxb_win, win)
-            set_layer_data_teaser(pyxb_win, win)
-    pass
+        layer.material.name = layer_in["material"]["name"]
+        layer.material.density = layer_in["material"]["density"]
+        layer.material.thermal_conduc = layer_in["material"]["thermal_conduc"]
+        layer.material.heat_capac = layer_in["material"]["heat_capac"]
+        layer.material.solar_absorp = layer_in["material"]["solar_absorp"]
+        layer.material.ir_emissivity = layer_in["material"]["ir_emissivity"]

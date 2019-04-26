@@ -99,8 +99,8 @@ class Test_teaser(object):
         with TEASER3 values.
         """
         prj.set_default()
-        prj.load_project(utilities.get_full_path("examples/examplefiles"
-                                                 "/new.teaserXML"))
+        prj.load_project(
+            utilities.get_full_path("examples/examplefiles/unitTestCalc.json"))
 
         prj.number_of_elements_calc = 2
         prj.merge_windows_calc = False
@@ -556,19 +556,48 @@ class Test_teaser(object):
     # methods in Project, these tests only test if the API function works,
     # not if it produces reliable results.
 
-    def test_load_save_project(self):
+    def test_load_save_project_old(self):
         """test of load_project and save_project"""
-
-        prj.load_project(utilities.get_full_path(("examples/examplefiles"
-                                                  "/new.teaserXML")))
+        import teaser.data.input.teaserxml_input as t_input_old
+        t_input_old.load_teaser_xml(
+            utilities.get_full_path(("examples/examplefiles/old.teaserXML")),
+            prj)
         therm_zone = prj.buildings[-1].thermal_zones[0]
         assert therm_zone.outer_walls[0].area == 40.0
         tz_area = sum([tz.area for tz in prj.buildings[
             -1].thermal_zones])
         assert prj.buildings[-1].net_leased_area == tz_area
-        prj.save_project(file_name="unitTest", path=None)
+        prj.save_project(file_name="unitTest.json", path=None)
         prj.save_project(file_name=None, path=utilities.get_default_path())
-        prj.set_default()
+        prj.set_default(load_data=True)
+
+        prj.add_non_residential(
+            method='bmvbs',
+            usage='office',
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=False,
+            office_layout=0,
+            window_layout=0,
+            construction_type="heavy")
+        prj.save_project(file_name="unitTest.json", path=None)
+
+    def test_load_save_project_new(self):
+        """test of load_project and save_project"""
+        prj.set_default(load_data=True)
+        prj.load_project(
+            utilities.get_full_path(
+                "examples/examplefiles/unitTest.json"))
+        # therm_zone = prj.buildings[-1].thermal_zones[0]
+        # assert therm_zone.area == 994.0
+        # tz_area = sum([tz.area for tz in prj.buildings[
+        #     -1].thermal_zones])
+        # assert prj.buildings[-1].net_leased_area == tz_area
+        prj.name = "NewUnitTest"
+        prj.save_project(file_name="unitTest_new.json", path=None)
 
     def test_load_citygml(self):
         """test of load_gml"""

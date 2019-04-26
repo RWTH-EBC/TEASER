@@ -410,8 +410,15 @@ class BuildingElement(object):
     @name.setter
     def name(self, value):
         if isinstance(value, str):
-            regex = re.compile('[^a-zA-z0-9]')
-            self._name = regex.sub('', value)
+
+            if value:
+                regex = re.compile('[^a-zA-z0-9]')
+                self._name = regex.sub('', value)
+                if self._name == "None":
+                    self._name = "BuildinElement" + str(
+                        random.randint(1, 500000))
+        elif value is None:
+            self._value = "BuildinElement" + str(random.randint(1, 500000))
         else:
             try:
                 value = str(value)

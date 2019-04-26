@@ -64,10 +64,6 @@ class ThermalZone(object):
         Instance of OneElement(), TwoElement(), ThreeElement() or
         FourElement(), that holds all calculation functions and attributes
         needed for the specific model.
-    typical_length : float [m]
-        normative typical length of the thermal zone
-    typical_width : float [m]
-        normative typical width of the thermal zone
     t_inside : float [K]
         Normative indoor temperature for static heat load calculation.
         The input of t_inside is ALWAYS in Kelvin
@@ -104,8 +100,6 @@ class ThermalZone(object):
         self._floors = []
         self._ceilings = []
         self._use_conditions = None
-        self.model_attr = None
-        self.typical_length = None
         self.typical_width = None
         self._t_inside = 293.15
         self._t_outside = 261.15
@@ -325,13 +319,14 @@ class ThermalZone(object):
                 self.parent.number_of_floors) * self.area
 
         for wall in self.inner_walls:
-            typical_area = self.typical_length * self.typical_width
+            typical_area = self.use_conditions.typical_length * \
+                self.use_conditions.typical_width
 
             avg_room_nr = self.area / typical_area
 
-            wall.area = (avg_room_nr * (self.typical_length *
+            wall.area = (avg_room_nr * (self.use_conditions.typical_length *
                                         self.parent.height_of_floors +
-                                        2 * self.typical_width *
+                                        2 * self.use_conditions.typical_width *
                                         self.parent.height_of_floors))
 
     def set_volume_zone(self):
