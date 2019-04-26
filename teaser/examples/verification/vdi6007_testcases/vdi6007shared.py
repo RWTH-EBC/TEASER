@@ -84,7 +84,7 @@ def prepare_thermal_zone(timesteps, room, weather=None):
     tz.density_air = 1.19
     tz.heat_capac_air = 0
 
-    model_data.ratio_conv_rad_inner_win = 0.09
+    model_data.ratio_conv_rad_inner_win = 0.09  # No, is 0 in case 11
     model_data.weighted_g_value = 1  # Yes
     if room == "S2":
         model_data.alpha_comb_inner_iw = 2.12
@@ -93,7 +93,7 @@ def prepare_thermal_zone(timesteps, room, weather=None):
     model_data.alpha_comb_inner_ow = 2.7  # Yes
     model_data.alpha_conv_outer_ow = 20  # No, is 25 * 10.5 in case 11
     model_data.alpha_rad_outer_ow = 5  # Yes
-    model_data.alpha_comb_outer_ow = 25  # Probably not used because irradiation is 0
+    model_data.alpha_comb_outer_ow = 25  # Yes, in Modelica alpha_wall is 25 * 10.5
     model_data.alpha_rad_inner_mean = 5  # Yes
 
     tz.model_attr = model_data
@@ -173,11 +173,12 @@ def plot_result(res, ref, title, temperature_or_heat, res_raw=None):
     plt.title(title)
 
     plt.subplot(212, sharex=ax_top)
-    plt.plot(res - ref, label="Ref. - Sim.")
+    plt.plot(res[:len(ref)] - ref, label="Ref. - Sim.")
     plt.legend()
     plt.ylabel(y_label_bottom)
     plt.xticks([4 * i for i in range(7)])
-    plt.xlim([1, 24])
+    plt.xlim([1, 48])
+    # plt.xlim([1, 24])
     plt.xlabel("Time in h")
 
     plt.show()

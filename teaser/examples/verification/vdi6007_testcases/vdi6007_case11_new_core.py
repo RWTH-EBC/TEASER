@@ -90,8 +90,10 @@ def run_case11(plot_res=False):
     tz = prepare_thermal_zone(timesteps, room="S1")
     tz.volume = 0  # Seems to have no effect on results
     tz.model_attr.alpha_comb_inner_iw = 3  # Improvement, see doc-string
-    tz.model_attr.alpha_conv_outer_ow = 10.5 * 25  # No effect (?)
+    # tz.model_attr.alpha_conv_outer_ow = 25  # No effect because only used in equalAirTemp
     # tz.model_attr.alpha_comb_outer_ow = 10.5 * 25  # Partial improvement, overall worse
+    tz.model_attr.ratio_conv_rad_inner_win = 0  # No effect
+    tz.infiltration_rate = 0  # No effect
 
 
     calc = VDICore(tz)
@@ -139,23 +141,27 @@ def run_case11(plot_res=False):
 
     # Plot comparisons
     if plot_res:
-        plot_result(T_air_1, T_air_ref_1, "Results temperatures day 1", "temperature")
-        plot_result(
-            T_air_10, T_air_ref_10, "Results temperatures day 10", "temperature"
-        )
-        plot_result(
-            T_air_60, T_air_ref_60, "Results temperatures day 60", "temperature"
-        )
-
-        plot_result(
-            Q_hc_1,
-            Q_hc_ref_1,
-            "Results heating/cooling day 1",
-            "heat",
-            res_raw=q_air_hc[: 24 * 60],
-        )
-        plot_result(Q_hc_10, Q_hc_ref_10, "Results heating/cooling day 10", "heat")
-        plot_result(Q_hc_60, Q_hc_ref_60, "Results heating/cooling day 60", "heat")
+        # plot_result(T_air_1, T_air_ref_1, "Results temperatures day 1", "temperature")
+        # plot_result(
+        #     T_air_10, T_air_ref_10, "Results temperatures day 10", "temperature"
+        # )
+        # plot_result(
+        #     T_air_60, T_air_ref_60, "Results temperatures day 60", "temperature"
+        # )
+        #
+        # plot_result(
+        #     Q_hc_1,
+        #     Q_hc_ref_1,
+        #     "Results heating/cooling day 1",
+        #     "heat",
+        #     res_raw=q_air_hc[: 24 * 60],
+        # )
+        # plot_result(Q_hc_10, Q_hc_ref_10, "Results heating/cooling day 10", "heat")
+        # plot_result(Q_hc_60, Q_hc_ref_60, "Results heating/cooling day 60", "heat")
+        #
+        days = 2
+        plot_result(Q_hc_mean[0:24*days], Q_hc_ref_1, f"Results heating/cooling {days} days", "heat")
+        plot_result(T_air_mean[0:24*days], T_air_ref_1, f"Results temperature {days} days", "temperature")
 
     max_dev_1_temp = np.max(np.abs(T_air_1 - T_air_ref_1))
     max_dev_10_temp = np.max(np.abs(T_air_10 - T_air_ref_10))
