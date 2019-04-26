@@ -15,6 +15,7 @@ from __future__ import division
 
 import math
 import numpy as np
+import pandas as pd
 
 
 class VDICore(object):
@@ -51,6 +52,8 @@ class VDICore(object):
         describes in which order the different heating devices are turned on
     cooler_order : np.array (of int)
         describes in which order the different cooling devices are turned on
+    debug : boolean
+        Set to True for additional debug output of simulation
     """
 
     def __init__(self, thermal_zone):
@@ -98,6 +101,7 @@ class VDICore(object):
             self.thermal_zone.infiltration_rate / 3600)
         # self.heater_order = np.array([1, 2, 3])
         # self.cooler_order = np.array([1, 2, 3])
+        self.debug = False
 
     def _eq_air_temp(self, h_sol, t_black_sky, with_longwave=False, i_max=100):
         """
@@ -659,6 +663,9 @@ class VDICore(object):
             q_heat_cool : np.array
                 Array with heating/cooling values in Watt (positiv: heating;
                 negative: cooling)
+            if self.debug is True, there is a third output:
+            data_debug : pandas.DataFrame
+                Additional result data that hopefully helps with debugging
         """
 
         #  Fix number of timesteps
@@ -877,10 +884,15 @@ class VDICore(object):
 
             # what is this for????
 
+        data_debug = pd.DataFrame()
+
         # self.indoor_air_temperature = np.array(t_air)
         # self.q_flow_heater_cooler = np.array(q_air_hc)
 
-        return (np.array(t_air), np.array(q_air_hc))
+        if self.debug is False:
+            return np.array(t_air), np.array(q_air_hc)
+        elif self.debug is True:
+            return np.array(t_air), np.array(q_air_hc), data_debug
 
     def calc_splitfactors(self, cols, a_array, a_ext, a_win):
         """

@@ -95,7 +95,6 @@ def run_case11(plot_res=False):
     tz.model_attr.ratio_conv_rad_inner_win = 0  # No effect
     tz.infiltration_rate = 0  # No effect
 
-
     calc = VDICore(tz)
     calc.equal_air_temp = np.zeros(timesteps) + 295.15
     calc.solar_rad_in = np.zeros((timesteps, 1))
@@ -112,7 +111,8 @@ def run_case11(plot_res=False):
 
     calc.internal_gains_rad = prepare_internal_gains_rad(timesteps_day)
 
-    t_air, q_air_hc = calc.simulate()
+    calc.debug = True
+    t_air, q_air_hc, data_debug = calc.simulate()
 
     T_air_mean = hourly_average(data=t_air - 273.15, times_per_hour=times_per_hour)
     Q_hc_mean = hourly_average(data=q_air_hc, times_per_hour=times_per_hour)
