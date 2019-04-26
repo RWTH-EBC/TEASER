@@ -1,6 +1,7 @@
 """This module is a container for UseConditions"""
 import random
-import teaser.data.input.usecond_input as boundcond_input
+import teaser.data.input.usecond_input as usecond_input
+import teaser.data.output.usecond_output as usecond_output
 import pandas as pd
 from itertools import cycle, islice
 
@@ -111,9 +112,23 @@ class UseConditions(object):
         else:
             data_class = data_class
 
-        boundcond_input.load_use_conditions(
-            bound_cond=self,
+        usecond_input.load_use_conditions(
+            use_cond=self,
             zone_usage=zone_usage,
+            data_class=data_class)
+
+    def save_use_conditions(self,
+                            data_class=None):
+        """Documentation is missing
+        """
+
+        if data_class is None:
+            data_class = self.parent.parent.parent.data
+        else:
+            data_class = data_class
+
+        usecond_output.save_use_conditions(
+            use_cond=self,
             data_class=data_class)
 
     @property

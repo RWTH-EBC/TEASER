@@ -36,38 +36,31 @@ def building_test2(prj):
 
     tz.use_conditions = UseConditions(tz)
     tz.use_conditions.usage = "Living"
-    tz.use_conditions.cooling_time = [5, 18]
-    tz.use_conditions.heating_time = [5, 18]
-    tz.use_conditions.set_temp_heat = 288.15
-    tz.use_conditions.set_temp_cool = 298.15
-    tz.use_conditions.temp_set_back = 4.0
-    tz.use_conditions.min_air_exchange = 0.0
-    tz.use_conditions.min_ahu = 0.0
-    tz.use_conditions.max_ahu = 2.6
-    tz.use_conditions.with_ahu = True
+    tz.use_conditions.set_temp_heat = [288.15, ]
+    tz.use_conditions.set_temp_cool = [298.15, ]
     tz.use_conditions.persons = 3
     tz.use_conditions.machines = 3
     tz.use_conditions.lighting_power = 3
-    tz.use_conditions.activity_type_machines = 2
     tz.use_conditions.ratio_conv_rad_machines = 0.5
-    tz.use_conditions.profile_machines = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+    tz.use_conditions.machines_profile = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
                                           0.2, 0.4, 0.6, 0.8, 0.8, 0.4, 0.6,
                                           0.8, 0.8, 0.4, 0.2, 0.0, 0.0, 0.0,
                                           0.0, 0.0, 0.0]
-    tz.use_conditions.profile_persons = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1,
+    tz.use_conditions.persons_profile = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1,
                                          0.2, 0.4, 0.6, 0.8, 0.8, 0.4, 0.6,
                                          0.8, 0.8, 0.4, 0.2, 0.1, 0.1, 0.1,
                                          0.1, 0.1, 0.1]
-    tz.use_conditions.profile_lighting = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1,
+    tz.use_conditions.lighting_profile = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1,
                                           0.2, 0.4, 0.6, 0.8, 0.8, 0.4, 0.6,
                                           0.8, 0.8, 0.4, 0.2, 0.1, 0.1, 0.1,
                                           0.1, 0.1, 0.1]
-    tz.use_conditions.use_constant_ach_rate = False
-    tz.use_conditions.base_ach = 0.2
-    tz.use_conditions.max_user_ach = 1.0
-    tz.use_conditions.max_overheating_ach = [3.0, 2.0]
-    tz.use_conditions.max_summer_ach = [1.0, 273.15 + 10, 273.15 + 17]
-    tz.use_conditions.winter_reduction = [0.2, 273.15, 273.15 + 10]
+    tz.use_conditions.use_constant_infiltration = False
+    tz.use_conditions.base_infiltration = 0.2
+    tz.use_conditions.max_user_infiltration = 1.0
+    tz.use_conditions.max_overheating_infiltration = [3.0, 2.0]
+    tz.use_conditions.max_summer_infiltration = [1.0, 273.15 + 10, 273.15 + 17]
+    tz.use_conditions.winter_reduction_infiltration = [
+        0.2, 273.15, 273.15 + 10]
 
     out_wall_dict = [["Outer Wall 1", [bldg.year_of_construction, 'heavy',
                                        10.0, 90.0, 0.0]],

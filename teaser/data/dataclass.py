@@ -10,6 +10,7 @@ import os
 import sys
 import teaser.logic.utilities as utils
 import json
+import collections
 
 v = sys.version_info
 if v >= (2, 7):
@@ -134,8 +135,17 @@ class DataClass(object):
         """Loads UseConditions XML into binding classes
         """
         if self.path_uc.endswith("json"):
-            with open(self.path_uc) as f:
-                self.conditions_bind = json.load(f)
+            if os.path.isfile(self.path_uc):
+                try:
+                    with open(self.path_uc, 'r+') as f:
+                        self.conditions_bind = json.load(f)
+                except json.decoder.JSONDecodeError:
+                    print("Your UseConditions.json file seems to be broken.")
+            else:
+                with open(self.path_uc, 'w') as f:
+                    self.conditions_bind = collections.OrderedDict()
+                    self.conditions_bind["version"] = "0.7"
+
         else:
             try:
                 __xml_file_uc = open(self.path_uc, 'r+')

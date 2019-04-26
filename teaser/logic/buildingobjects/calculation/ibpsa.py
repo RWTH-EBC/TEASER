@@ -97,11 +97,17 @@ class IBPSA(object):
                 freq='H').to_series().dt.strftime('%m-%d %H:%M:%S'))
 
         export["person_rad_{}".format(
-            zone.name)] = zone.use_conditions.persons_profile * (1 - zone.use_conditions.ratio_conv_rad_persons) * 100 * zone.use_conditions.persons
+            zone.name)] = zone.use_conditions.persons_profile * (
+            1 - zone.use_conditions.ratio_conv_rad_persons) * 100 * \
+            zone.use_conditions.persons
         export["person_conv_{}".format(
-            zone.name)] = zone.use_conditions.persons_profile * zone.use_conditions.ratio_conv_rad_persons * 100 * zone.use_conditions.persons
+            zone.name)] = zone.use_conditions.persons_profile * \
+            zone.use_conditions.ratio_conv_rad_persons * 100 * \
+            zone.use_conditions.persons
         export["machines_conv_{}".format(
-            zone.name)] = zone.use_conditions.machines_profile * zone.use_conditions.ratio_conv_rad_machines * 100 * zone.use_conditions.machines
+            zone.name)] = zone.use_conditions.machines_profile * \
+            zone.use_conditions.ratio_conv_rad_machines * 100 * \
+            zone.use_conditions.machines
 
         export.index = [(i + 1) * 3600 for i in range(8760)]
 
