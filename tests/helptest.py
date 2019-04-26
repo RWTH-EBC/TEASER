@@ -38,6 +38,8 @@ def building_test2(prj):
     tz.use_conditions.usage = "Living"
     tz.use_conditions.set_temp_heat = [288.15, ]
     tz.use_conditions.set_temp_cool = [298.15, ]
+    tz.use_conditions.typical_length = 123
+    tz.use_conditions.typical_width = 123
     tz.use_conditions.persons = 3
     tz.use_conditions.machines = 3
     tz.use_conditions.lighting_power = 3

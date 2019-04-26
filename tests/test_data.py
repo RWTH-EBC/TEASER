@@ -2326,22 +2326,26 @@ class Test_teaser(object):
         Tests the old v4 project bindings
         """
         prj.set_default()
-        prj.load_project(
+        import teaser.data.input.teaserxml_input as t_input_old
+        t_input_old.load_teaser_xml(
             os.path.join(
                 os.path.dirname(__file__),
                 'testfiles',
-                'teaser_v5.teaserXML'))
+                'teaser_v5.teaserXML'),
+            prj)
 
     def test_v4_bindings(self):
         """
         Tests the old v4 project bindings
         """
         prj.set_default(load_data=True)
-        prj.load_project(
+        import teaser.data.input.teaserxml_input as t_input_old
+        t_input_old.load_teaser_xml(
             os.path.join(
                 os.path.dirname(__file__),
                 'testfiles',
-                'teaser_v4.teaserXML'))
+                'teaser_v4.teaserXML'),
+            prj)
         prj.data.path_tb = os.path.join(
             os.path.dirname(__file__),
             'testfiles',
@@ -2363,11 +2367,13 @@ class Test_teaser(object):
         Tests the old v39 project bindings
         """
         prj.set_default()
-        prj.load_project(
+        import teaser.data.input.teaserxml_input as t_input_old
+        t_input_old.load_teaser_xml(
             os.path.join(
                 os.path.dirname(__file__),
                 'testfiles',
-                'teaser_v39.teaserXML'))
+                'teaser_v4.teaserXML'),
+            prj)
 
     def test_export_aixlib_only_iw(self):
         """

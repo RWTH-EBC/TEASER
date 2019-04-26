@@ -100,7 +100,6 @@ class ThermalZone(object):
         self._floors = []
         self._ceilings = []
         self._use_conditions = None
-        self.typical_width = None
         self._t_inside = 293.15
         self._t_outside = 261.15
         self.density_air = 1.25
