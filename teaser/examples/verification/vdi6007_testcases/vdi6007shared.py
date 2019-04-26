@@ -6,6 +6,7 @@ Shared code for all VDI 6007 test cases
 
 import matplotlib.pyplot as plt
 import numpy as np
+from pathlib import Path
 
 from teaser.project import Project
 from teaser.logic.buildingobjects.building import Building
@@ -182,6 +183,40 @@ def plot_result(res, ref, title, temperature_or_heat, res_raw=None):
     plt.xlabel("Time in h")
 
     plt.show()
+
+
+def plot_debug_data(data_debug, var, save_as):
+    """Plot debug data
+
+    Parameters
+    ----------
+    data_debug : pandas.DataFrame
+        Debug data output
+    var : str
+        Name of the variable to plot
+    save_as : pathlib.Path
+        File path to store the plot into
+    """
+
+    if var == "t_ow":
+        y_label = "Outside outer wall temperature in °C"
+    else:
+        raise LookupError("Unknown variable")
+
+    if "t_" in var:
+        data_to_plot = data_debug[var] - 273.15
+    else:
+        data_to_plot = data_debug[var]
+
+    plt.figure()
+    plt.subplot(111)
+    plt.plot(data_to_plot, label="Simulation", color="blue", linestyle="-")
+
+    plt.ylabel(y_label)
+
+    plt.xlabel("Time in h")
+
+    plt.savefig(save_as)
 
 
 def plot_set_temperature(tset):

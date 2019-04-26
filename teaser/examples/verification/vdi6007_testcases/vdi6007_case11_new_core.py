@@ -5,6 +5,7 @@
 """
 import os
 import numpy as np
+from pathlib import Path
 
 from teaser.logic.simulation.vdi_core import VDICore
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case01 as vdic
@@ -14,6 +15,7 @@ from teaser.examples.verification.vdi6007_testcases.vdi6007shared import (
     plot_result,
     prepare_internal_gains_rad,
     prepare_set_temperature,
+    plot_debug_data,
 )
 
 
@@ -160,8 +162,29 @@ def run_case11(plot_res=False):
         # plot_result(Q_hc_60, Q_hc_ref_60, "Results heating/cooling day 60", "heat")
         #
         days = 2
-        plot_result(Q_hc_mean[0:24*days], Q_hc_ref_1, f"Results heating/cooling {days} days", "heat")
-        plot_result(T_air_mean[0:24*days], T_air_ref_1, f"Results temperature {days} days", "temperature")
+        plot_result(
+            Q_hc_mean[0 : 24 * days],
+            Q_hc_ref_1,
+            f"Results heating/cooling {days} days",
+            "heat",
+        )
+        plot_result(
+            T_air_mean[0 : 24 * days],
+            T_air_ref_1,
+            f"Results temperature {days} days",
+            "temperature",
+        )
+
+        dir_img = (
+            Path(__file__).resolve().parent.parent.parent.parent.parent
+            / "teaser"
+            / "OutputData"
+            / "VDI"
+            / "case-11"
+        )
+        dir_img.mkdir(exist_ok=True, parents=True)
+        plot_debug_data(data_debug, "t_ow", dir_img / "debug-case-11-t_ow.png")
+
 
     max_dev_1_temp = np.max(np.abs(T_air_1 - T_air_ref_1))
     max_dev_10_temp = np.max(np.abs(T_air_10 - T_air_ref_10))
