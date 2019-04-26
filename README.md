@@ -64,7 +64,7 @@ models for all libraries supporting the
 
 ## Version
 
-TEASER is a ongoing research project, the current version is 0.6.6, which is
+TEASER is a ongoing research project, the current version is 0.6.8, which is
 still a pre-release.
 
 ## How to use TEASER
@@ -105,6 +105,9 @@ If you actively develop TEASER you can clone this repository by using:
 and then run:
 
  `pip install -e [Path/to/your/Teaser/Clone]` which will install the local version of TEASER.
+
+### Additional Explanations
+The [Institute of Energy Efficiency and Sustainable Building](https://www.e3d.rwth-aachen.de/go/id/iyld/?) published a parametric study of TEASER where all functions and  parameters used in TEASER are gathered and explained. The publication can be found [here](https://publications.rwth-aachen.de/record/749801/files/749801.pdf).
 
 ### How to contribute to the development of TEASER
 You are invited to contribute to the development of TEASER. You may report any issues by using the [Issues](https://github.com/RWTH-EBC/TEASER/issues) button.

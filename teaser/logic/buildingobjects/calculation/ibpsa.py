@@ -40,9 +40,9 @@ class IBPSA(object):
     def __init__(self, parent):
 
         self.parent = parent
-        self.file_internal_gains = "InternalGains_" + self.parent.name + ".txt"
+        self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
         self.version = {'AixLib': '0.7.4', 'Buildings': '5.1.0',
-                        'BuildingSystems': '2.0.0-beta2', 'IDEAS': '2.0.0'}
+                        'BuildingSystems': '2.0.0-beta2', 'IDEAS': '2.1.0'}
         self.consider_heat_capacity = True
 
     def modelica_gains_boundary(
