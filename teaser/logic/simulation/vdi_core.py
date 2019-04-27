@@ -1071,117 +1071,9 @@ class VDICore(object):
 
             # Use primary heater
             if np.argmax(heater_order == 1) == 0 and heater_limit[0] > 0:
-                x_heating_1 = self._calc_heatflow(
-                    A,
-                    rhs,
-                    t_air_set=t_set_heating,
-                    q_air_fix=None,
-                    q_iw_fix=0,
-                    q_ow_fix=0,
+                result = self.calc_timestep_primary_heater(
+                    A, heater_limit, heater_order, rhs, t_set_heating
                 )
-
-                if x_heating_1[6] > heater_limit[0]:
-                    x_maxheat_1 = self._calc_temperature(
-                        A, rhs, q_air_fix=heater_limit[0], q_iw_fix=0, q_ow_fix=0
-                    )
-
-                    if x_maxheat_1[4] < t_set_heating:
-                        if np.argmax(heater_order == 2) == 1 and heater_limit[1] > 0:
-                            x_heating_2 = self._calc_heatflow(
-                                A,
-                                rhs,
-                                t_air_set=t_set_heating,
-                                q_air_fix=heater_limit[0],
-                                q_iw_fix=None,
-                                q_ow_fix=0,
-                            )
-
-                            if x_heating_2[7] > heater_limit[1]:
-                                x_maxheat_2 = self._calc_temperature(
-                                    A,
-                                    rhs,
-                                    q_air_fix=heater_limit[0],
-                                    q_iw_fix=heater_limit[1],
-                                    q_ow_fix=0,
-                                )
-
-                                if (
-                                    x_maxheat_2[4] < t_set_heating
-                                    and heater_limit[2] > 0
-                                ):
-                                    x_heating_3 = self._calc_heatflow(
-                                        A,
-                                        rhs,
-                                        t_air_set=t_set_heating,
-                                        q_air_fix=heater_limit[0],
-                                        q_iw_fix=heater_limit[1],
-                                        q_ow_fix=None,
-                                    )
-
-                                    if x_heating_3[8] > heater_limit[2]:
-                                        result = self._calc_temperature(
-                                            A,
-                                            rhs,
-                                            q_air_fix=heater_limit[0],
-                                            q_iw_fix=heater_limit[1],
-                                            q_ow_fix=heater_limit[2],
-                                        )
-                                    else:
-                                        result = x_heating_3
-                                else:
-                                    result = x_maxheat_2
-                            else:
-                                result = x_heating_2
-                        elif np.argmax(heater_order == 2) == 2 and heater_limit[2] > 0:
-                            x_heating_2 = self._calc_heatflow(
-                                A,
-                                rhs,
-                                t_air_set=t_set_heating,
-                                q_air_fix=heater_limit[0],
-                                q_iw_fix=0,
-                                q_ow_fix=None,
-                            )
-
-                            if x_heating_2[8] > heater_limit[2]:
-                                x_maxheat_2 = self._calc_temperature(
-                                    A,
-                                    rhs,
-                                    q_air_fix=heater_limit[0],
-                                    q_iw_fix=0,
-                                    q_ow_fix=heater_limit[2],
-                                )
-
-                                if (
-                                    x_maxheat_2[4] < t_set_heating
-                                    and heater_limit[1] > 0
-                                ):
-                                    x_heating_3 = self._calc_heatflow(
-                                        A,
-                                        rhs,
-                                        t_air_set=t_set_heating,
-                                        q_air_fix=heater_limit[0],
-                                        q_iw_fix=None,
-                                        q_ow_fix=heater_limit[2],
-                                    )
-
-                                    if x_heating_3[7] > heater_limit[1]:
-                                        result = self._calc_temperature(
-                                            A,
-                                            rhs,
-                                            q_air_fix=heater_limit[0],
-                                            q_iw_fix=heater_limit[1],
-                                            q_ow_fix=heater_limit[2],
-                                        )
-                                    else:
-                                        result = x_heating_3
-                                else:
-                                    result = x_maxheat_2
-                            else:
-                                result = x_heating_2
-                        else:
-                            result = x_maxheat_1
-                else:
-                    result = x_heating_1
             elif np.argmax(heater_order == 1) == 1 and heater_limit[1] > 0:
                 x_heating_1 = self._calc_heatflow(
                     A,
@@ -1751,6 +1643,135 @@ class VDICore(object):
             # Indoor air temperature between both set temperature -> no further
             # action required
             result = x_noHeat
+
+        return result
+
+    def calc_timestep_primary_heater(
+        self, A, heater_limit, heater_order, rhs, t_set_heating
+    ):
+        """Calculate the timestep using the primary heater
+
+        This function is extracted from calc_timestep as an intermediate step during
+        refactoring
+
+        Parameters
+        ----------
+        A : 2d array of floats
+            Coefficients describing the VDI model
+        heater_limit: list (of floats)
+            List with heater limit values in Watt
+        heater_order : np.array (of int)
+            describes in which order the different heating devices are turned on
+        rhs : Array of floats
+            Right hand side of these equations
+        t_set_heating : Float
+            Temperature below which heating demand is computed (in Kelvin)
+
+        Returns
+        -------
+        result : list
+            Result list of timestep calculation
+        """
+
+        x_heating_1 = self._calc_heatflow(
+            A, rhs, t_air_set=t_set_heating, q_air_fix=None, q_iw_fix=0, q_ow_fix=0
+        )
+        if x_heating_1[6] > heater_limit[0]:
+            x_maxheat_1 = self._calc_temperature(
+                A, rhs, q_air_fix=heater_limit[0], q_iw_fix=0, q_ow_fix=0
+            )
+
+            if x_maxheat_1[4] < t_set_heating:
+                if np.argmax(heater_order == 2) == 1 and heater_limit[1] > 0:
+                    x_heating_2 = self._calc_heatflow(
+                        A,
+                        rhs,
+                        t_air_set=t_set_heating,
+                        q_air_fix=heater_limit[0],
+                        q_iw_fix=None,
+                        q_ow_fix=0,
+                    )
+
+                    if x_heating_2[7] > heater_limit[1]:
+                        x_maxheat_2 = self._calc_temperature(
+                            A,
+                            rhs,
+                            q_air_fix=heater_limit[0],
+                            q_iw_fix=heater_limit[1],
+                            q_ow_fix=0,
+                        )
+
+                        if x_maxheat_2[4] < t_set_heating and heater_limit[2] > 0:
+                            x_heating_3 = self._calc_heatflow(
+                                A,
+                                rhs,
+                                t_air_set=t_set_heating,
+                                q_air_fix=heater_limit[0],
+                                q_iw_fix=heater_limit[1],
+                                q_ow_fix=None,
+                            )
+
+                            if x_heating_3[8] > heater_limit[2]:
+                                result = self._calc_temperature(
+                                    A,
+                                    rhs,
+                                    q_air_fix=heater_limit[0],
+                                    q_iw_fix=heater_limit[1],
+                                    q_ow_fix=heater_limit[2],
+                                )
+                            else:
+                                result = x_heating_3
+                        else:
+                            result = x_maxheat_2
+                    else:
+                        result = x_heating_2
+                elif np.argmax(heater_order == 2) == 2 and heater_limit[2] > 0:
+                    x_heating_2 = self._calc_heatflow(
+                        A,
+                        rhs,
+                        t_air_set=t_set_heating,
+                        q_air_fix=heater_limit[0],
+                        q_iw_fix=0,
+                        q_ow_fix=None,
+                    )
+
+                    if x_heating_2[8] > heater_limit[2]:
+                        x_maxheat_2 = self._calc_temperature(
+                            A,
+                            rhs,
+                            q_air_fix=heater_limit[0],
+                            q_iw_fix=0,
+                            q_ow_fix=heater_limit[2],
+                        )
+
+                        if x_maxheat_2[4] < t_set_heating and heater_limit[1] > 0:
+                            x_heating_3 = self._calc_heatflow(
+                                A,
+                                rhs,
+                                t_air_set=t_set_heating,
+                                q_air_fix=heater_limit[0],
+                                q_iw_fix=None,
+                                q_ow_fix=heater_limit[2],
+                            )
+
+                            if x_heating_3[7] > heater_limit[1]:
+                                result = self._calc_temperature(
+                                    A,
+                                    rhs,
+                                    q_air_fix=heater_limit[0],
+                                    q_iw_fix=heater_limit[1],
+                                    q_ow_fix=heater_limit[2],
+                                )
+                            else:
+                                result = x_heating_3
+                        else:
+                            result = x_maxheat_2
+                    else:
+                        result = x_heating_2
+                else:
+                    result = x_maxheat_1
+        else:
+            result = x_heating_1
 
         return result
 
