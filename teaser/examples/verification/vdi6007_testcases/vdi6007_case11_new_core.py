@@ -108,8 +108,10 @@ def run_case11(plot_res=False):
     calc.heater_limit[:, 0] = 500
     calc.heater_order = np.array([1, 2, 3])
     calc.cooler_limit = np.zeros((timesteps, 3))
-    calc.cooler_limit[:, 0] = -500
-    calc.cooler_order = [2, 1, 3]
+    # calc.cooler_limit[:, 0] = -500
+    # calc.cooler_order = [2, 1, 3]
+    calc.cooler_limit[:, 1] = -500
+    calc.cooler_order = np.array([2, 1, 3])
 
     calc.internal_gains_rad = prepare_internal_gains_rad(timesteps_day)
 

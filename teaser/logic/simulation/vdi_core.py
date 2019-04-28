@@ -49,9 +49,14 @@ class VDICore(object):
     initial_outer_wall_temp : float
         Initial outer wall temperature in Kelvin
     heater_order : np.array (of int)
-        describes in which order the different heating devices are turned on
+        describes in which order the different heating devices are turned on;
+        Current assumption is that the 3 possible heaters are
+        1: Heat added to air volume
+        2: Heat added to inner walls
+        3: Heat added to outer walls
     cooler_order : np.array (of int)
         describes in which order the different cooling devices are turned on
+        For assumption on what the coolers do see heater_order doc above
     debug : boolean
         Set to True for additional debug output of simulation
     """
@@ -972,7 +977,7 @@ class VDICore(object):
         if self.debug is False:
             return np.array(t_air), np.array(q_air_hc)
         elif self.debug is True:
-            return np.array(t_air), np.array(q_air_hc), data_debug
+            return np.array(t_air), np.array(q_air_hc) + np.array(q_iw_hc), data_debug
 
     def calc_splitfactors(self, cols, a_array, a_ext, a_win):
         """
@@ -1063,7 +1068,6 @@ class VDICore(object):
 
         # Calculate without further heat inputs to determine if heating
         # or cooling is needed
-        # x = [T_ow, T_owi, T_iw, T_iwi, T_air, Q_air, Q_HC]
         x_noHeat = self._calc_temperature(A, rhs, q_air_fix=0, q_iw_fix=0, q_ow_fix=0)
 
         if x_noHeat[4] < t_set_heating:
@@ -1074,6 +1078,7 @@ class VDICore(object):
                 result = self.calc_timestep_primary_heater(
                     A, heater_limit, heater_order, rhs, t_set_heating
                 )
+            # Use secondary heater
             elif np.argmax(heater_order == 1) == 1 and heater_limit[1] > 0:
                 result = self.calc_timestep_secondary_heater(
                     A, heater_limit, heater_order, rhs, t_set_heating
@@ -1194,6 +1199,8 @@ class VDICore(object):
         elif x_noHeat[4] > t_set_cooling:
             # Indoor air temperature above cooling set temperature
 
+            verify_argmax = np.argmax(cooler_order == 1)
+
             if np.argmax(cooler_order == 1) == 0 and cooler_limit[0] < 0:
                 x_cooling_1 = self._calc_heatflow(
                     A,
@@ -1308,6 +1315,7 @@ class VDICore(object):
                     result = x_cooling_1
 
             elif np.argmax(cooler_order == 1) == 1 and cooler_limit[1] < 0:
+                print("Correct entry")
                 x_cooling_1 = self._calc_heatflow(
                     A,
                     rhs,
@@ -1807,6 +1815,19 @@ class VDICore(object):
             Right hand side of these equations
         q_hc_fix : Float
             Heating/cooling input into the zone in Watt
+
+        Returns
+        -------
+        result : numpy.array
+            NEEDS CLARIFICATION: In the calc_timestep method, the result was documented
+            as
+            x = [T_ow, T_owi, T_iw, T_iwi, T_air, Q_air, Q_HC]
+            This has length 7
+            But the result we get has length 9. My current guess is that in fact the
+            result is
+            x = [T_ow, T_owi, T_iw, T_iwi, T_air, Q_air, Q_HC_1, Q_HC_2, Q_HC_3]
+            which could possibly be the same as
+            x = [T_ow, T_owi, T_iw, T_iwi, T_air, Q_air, Q_HC_air, Q_HC_iw, Q_HC_ow]
         """
 
         # Delete all entries in the final three lines of A:
@@ -1842,6 +1863,19 @@ class VDICore(object):
             Right hand side of these equations
         t_air_set : Float
             Zone's set temperature in Kelvin
+
+        Returns
+        -------
+        result : numpy.array
+            NEEDS CLARIFICATION: In the calc_timestep method, the result was documented
+            as
+            x = [T_ow, T_owi, T_iw, T_iwi, T_air, Q_air, Q_HC]
+            This has length 7
+            But the result we get has length 9. My current guess is that in fact the
+            result is
+            x = [T_ow, T_owi, T_iw, T_iwi, T_air, Q_air, Q_HC_1, Q_HC_2, Q_HC_3]
+            which could possibly be the same as
+            x = [T_ow, T_owi, T_iw, T_iwi, T_air, Q_air, Q_HC_air, Q_HC_iw, Q_HC_ow]
         """
 
         # Delete all entries in the final three lines of A:
