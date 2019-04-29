@@ -437,7 +437,8 @@ class Project(object):
         project. You need to specify the method of the archetype generation.
         Currently TEASER supports only method according 'iwu', 'urbanrenet',
         'tabula_de' and 'tabule_dk' for residential buildings. Further the
-        type of usage needs to be specified. Currently TEASER supports one type of
+        type of usage needs to be specified. Currently TEASER supports one type
+        of
         residential building for 'iwu' and eleven types for 'urbanrenet'. For
         more information on specific archetype buildings and methods, please
         read the docs of archetype classes.
@@ -519,18 +520,21 @@ class Project(object):
         type_bldg : Instance of Archetype Building
 
         """
-        ass_error_method = "only'tabula_de', 'tabula_dk', 'iwu' and 'urbanrenet' " \
+        ass_error_method = "only'tabula_de', 'tabula_dk', 'iwu' and "\
+                           "'urbanrenet' " \
                            "are valid methods for residential archetype " \
                            "generation"
 
-        assert method in ['tabula_de', 'iwu', 'urbanrenet','tabula_dk'], ass_error_method
+        assert method in ['tabula_de', 'iwu', 'urbanrenet', 'tabula_dk'], \
+            ass_error_method
 
         ass_error_apart = (
             "The keyword number_of_apartments does not have any "
             "effect on archetype generation for 'iwu' or"
             "'tabula_de', see docs for more information")
 
-        if method in ['iwu', 'tabula_de', 'tabula_dk'] and number_of_apartments is not None:
+        if method in ['iwu', 'tabula_de', 'tabula_dk'] and \
+                number_of_apartments is not None:
             warnings.warn(ass_error_apart)
 
         if method == 'tabula_de':
@@ -614,7 +618,8 @@ class Project(object):
             ass_error_usage_tabula = "only 'single_family_house',"
             "'terraced_house', 'apartment_block' are"
             "valid usages for iwu archetype method"
-            assert usage in ['single_family_house' ,'terraced_house','apartment_block'], \
+            assert usage in [
+                'single_family_house', 'terraced_house', 'apartment_block'],\
                 ass_error_usage_tabula
 
             if usage == 'single_family_house':
@@ -658,8 +663,6 @@ class Project(object):
                     construction_type)
                 type_bldg.generate_archetype()
                 return type_bldg
-
-
 
         elif method == 'iwu':
 

@@ -220,7 +220,7 @@ class ApartmentBlock(SingleFamilyHouse):
                 'rt1': 0.5970,
                 'rt2': 0.0,
                 'ow1': 0.4501,
-                'ow2': 0.6655,              
+                'ow2': 0.6655,
                 'gf1': 0.4722,
                 'gf2': 0.0698,
                 'win1': 0.1555,
