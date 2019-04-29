@@ -165,7 +165,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.07</elements:thickness>
+				<elements:thickness>0.071</elements:thickness>
 				<elements:material material_id="94454f92-cc6c-11e8-bbca-08002700bc00">Air_layer_poor_DK</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -385,8 +385,8 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.13</elements:thickness>
-				<elements:material material_id="0c8ee3a2-cbcc-11e8-8768-08002700bc00">Insulation_036_DK</elements:material>
+				<elements:thickness>0.09</elements:thickness>
+				<elements:material material_id="451d6b10-cbcc-11e8-995a-08002700bc00">Insulation_060_DK</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
@@ -695,7 +695,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.058</elements:thickness>
+				<elements:thickness>0.2035</elements:thickness>
 				<elements:material material_id="618e4aee-cc6c-11e8-a277-08002700bc00">Leca_DK</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -720,7 +720,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.058</elements:thickness>
+				<elements:thickness>0.204</elements:thickness>
 				<elements:material material_id="618e4aee-cc6c-11e8-a277-08002700bc00">Leca_DK</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -745,7 +745,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.07</elements:thickness>
+				<elements:thickness>0.035</elements:thickness>
 				<elements:material material_id="87e8a070-cc6c-11e8-8dd8-08002700bc00">Air_layer_DK</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -785,7 +785,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.07</elements:thickness>
+				<elements:thickness>0.035</elements:thickness>
 				<elements:material material_id="87e8a070-cc6c-11e8-8dd8-08002700bc00">Air_layer_DK</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -1125,7 +1125,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.15</elements:thickness>
+				<elements:thickness>0.149</elements:thickness>
 				<elements:material material_id="1597be18-cbcc-11e8-8ace-08002700bc00">Insulation_039_DK</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -1150,7 +1150,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.13</elements:thickness>
+				<elements:thickness>0.146</elements:thickness>
 				<elements:material material_id="451d6b10-cbcc-11e8-995a-08002700bc00">Insulation_060_DK</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -1200,7 +1200,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.0578</elements:thickness>
 				<elements:material material_id="3c3b2c68-cbcc-11e8-bed0-08002700bc00">Insulation_045_DK</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -1385,7 +1385,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.052</elements:thickness>
+				<elements:thickness>0.0538</elements:thickness>
 				<elements:material material_id="3c3b2c68-cbcc-11e8-bed0-08002700bc00">Insulation_045_DK</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -1675,7 +1675,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.07</elements:thickness>
+				<elements:thickness>0.035</elements:thickness>
 				<elements:material material_id="87e8a070-cc6c-11e8-8dd8-08002700bc00">Air_layer_DK</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -1707,6 +1707,211 @@
 				<elements:id>2</elements:id>
 				<elements:thickness>0.24</elements:thickness>
 				<elements:material material_id="d8890f4a-cbcb-11e8-97f1-08002700bc00">Brick_ext_DK</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1931 1950</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_2_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.11</elements:thickness>
+				<elements:material material_id="c169bc76-cbcb-11e8-8618-08002700bc00">Brick_int_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>1</elements:id>
+				<elements:thickness>0.058</elements:thickness>
+				<elements:material material_id="451d6b10-cbcc-11e8-995a-08002700bc00">Insulation_060_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>2</elements:id>
+				<elements:thickness>0.11</elements:thickness>
+				<elements:material material_id="d8890f4a-cbcb-11e8-97f1-08002700bc00">Brick_ext_DK</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1931 1950</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_2_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.11</elements:thickness>
+				<elements:material material_id="c169bc76-cbcb-11e8-8618-08002700bc00">Brick_int_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>1</elements:id>
+				<elements:thickness>0.058</elements:thickness>
+				<elements:material material_id="451d6b10-cbcc-11e8-995a-08002700bc00">Insulation_060_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>2</elements:id>
+				<elements:thickness>0.11</elements:thickness>
+				<elements:material material_id="d8890f4a-cbcb-11e8-97f1-08002700bc00">Brick_ext_DK</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1973 1978</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_2_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="562e4b34-cbcc-11e8-93dc-08002700bc00">Gypsum_board_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>1</elements:id>
+				<elements:thickness>0.133</elements:thickness>
+				<elements:material material_id="3c3b2c68-cbcc-11e8-bed0-08002700bc00">Insulation_045_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>2</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="562e4b34-cbcc-11e8-93dc-08002700bc00">Gypsum_board_DK</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>0 1850</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_2_TH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="562e4b34-cbcc-11e8-93dc-08002700bc00">Gypsum_board_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>1</elements:id>
+				<elements:thickness>0.047</elements:thickness>
+				<elements:material material_id="3c3b2c68-cbcc-11e8-bed0-08002700bc00">Insulation_045_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>2</elements:id>
+				<elements:thickness>0.24</elements:thickness>
+				<elements:material material_id="d8890f4a-cbcb-11e8-97f1-08002700bc00">Brick_ext_DK</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>0 1850</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_2_TH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="562e4b34-cbcc-11e8-93dc-08002700bc00">Gypsum_board_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>1</elements:id>
+				<elements:thickness>0.047</elements:thickness>
+				<elements:material material_id="3c3b2c68-cbcc-11e8-bed0-08002700bc00">Insulation_045_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>2</elements:id>
+				<elements:thickness>0.24</elements:thickness>
+				<elements:material material_id="d8890f4a-cbcb-11e8-97f1-08002700bc00">Brick_ext_DK</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>0 1850</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_2_AB</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.208</elements:thickness>
+				<elements:material material_id="d8890f4a-cbcb-11e8-97f1-08002700bc00">Brick_ext_DK</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>0 1850</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_2_AB</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.208</elements:thickness>
+				<elements:material material_id="d8890f4a-cbcb-11e8-97f1-08002700bc00">Brick_ext_DK</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1961 1972</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_2_AB</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="562e4b34-cbcc-11e8-93dc-08002700bc00">Gypsum_board_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>1</elements:id>
+				<elements:thickness>0.055</elements:thickness>
+				<elements:material material_id="0c8ee3a2-cbcc-11e8-8768-08002700bc00">Insulation_036_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>2</elements:id>
+				<elements:thickness>0.19</elements:thickness>
+				<elements:material material_id="f61d6170-cbcb-11e8-bf59-08002700bc00">Light_Concrete_DK</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1961 1972</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_2_AB</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="562e4b34-cbcc-11e8-93dc-08002700bc00">Gypsum_board_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>1</elements:id>
+				<elements:thickness>0.055</elements:thickness>
+				<elements:material material_id="0c8ee3a2-cbcc-11e8-8768-08002700bc00">Insulation_036_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>2</elements:id>
+				<elements:thickness>0.19</elements:thickness>
+				<elements:material material_id="f61d6170-cbcb-11e8-bf59-08002700bc00">Light_Concrete_DK</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:OuterWall>
@@ -4365,7 +4570,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>4</elements:id>
-				<elements:thickness>0.2</elements:thickness>
+				<elements:thickness>0.228</elements:thickness>
 				<elements:material material_id="0c8ee3a2-cbcc-11e8-8768-08002700bc00">Insulation_036_DK</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -4398,7 +4603,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>4</elements:id>
-				<elements:thickness>0.2</elements:thickness>
+				<elements:thickness>0.228</elements:thickness>
 				<elements:material material_id="0c8ee3a2-cbcc-11e8-8768-08002700bc00">Insulation_036_DK</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -4556,7 +4761,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.045</elements:thickness>
+				<elements:thickness>0.044</elements:thickness>
 				<elements:material material_id="3c3b2c68-cbcc-11e8-bed0-08002700bc00">Insulation_045_DK</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -4607,7 +4812,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.08</elements:thickness>
+				<elements:thickness>0.142</elements:thickness>
 				<elements:material material_id="87e8a070-cc6c-11e8-8dd8-08002700bc00">Air_layer_DK</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -4983,7 +5188,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.08</elements:thickness>
+				<elements:thickness>0.175</elements:thickness>
 				<elements:material material_id="87e8a070-cc6c-11e8-8dd8-08002700bc00">Air_layer_DK</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -5016,7 +5221,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.01</elements:thickness>
+				<elements:thickness>0.076</elements:thickness>
 				<elements:material material_id="87e8a070-cc6c-11e8-8dd8-08002700bc00">Air_layer_DK</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -5077,7 +5282,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.3</elements:thickness>
+				<elements:thickness>0.36</elements:thickness>
 				<elements:material material_id="87e8a070-cc6c-11e8-8dd8-08002700bc00">Air_layer_DK</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -5276,7 +5481,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.115</elements:thickness>
+				<elements:thickness>0.1165</elements:thickness>
 				<elements:material material_id="87e8a070-cc6c-11e8-8dd8-08002700bc00">Air_layer_DK</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -5525,7 +5730,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
-				<elements:thickness>0.215</elements:thickness>
+				<elements:thickness>0.22</elements:thickness>
 				<elements:material material_id="0c8ee3a2-cbcc-11e8-8768-08002700bc00">Insulation_036_DK</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -5571,7 +5776,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.115</elements:thickness>
+				<elements:thickness>0.18</elements:thickness>
 				<elements:material material_id="87e8a070-cc6c-11e8-8dd8-08002700bc00">Air_layer_DK</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -5627,7 +5832,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.115</elements:thickness>
+				<elements:thickness>0.18</elements:thickness>
 				<elements:material material_id="87e8a070-cc6c-11e8-8dd8-08002700bc00">Air_layer_DK</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -5679,6 +5884,78 @@
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.2</elements:thickness>
+				<elements:material material_id="3c3b2c68-cbcc-11e8-bed0-08002700bc00">Insulation_045_DK</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>0 1850</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_2_AB</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.022</elements:thickness>
+				<elements:material material_id="9dc34e0a-cbcb-11e8-bdbb-08002700bc00">Wood_board_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>1</elements:id>
+				<elements:thickness>0.2</elements:thickness>
+				<elements:material material_id="3c3b2c68-cbcc-11e8-bed0-08002700bc00">Insulation_045_DK</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>0 1850</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_2_AB</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.022</elements:thickness>
+				<elements:material material_id="9dc34e0a-cbcb-11e8-bdbb-08002700bc00">Wood_board_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>1</elements:id>
+				<elements:thickness>0.2</elements:thickness>
+				<elements:material material_id="3c3b2c68-cbcc-11e8-bed0-08002700bc00">Insulation_045_DK</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1973 1978</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_2_AB</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.022</elements:thickness>
+				<elements:material material_id="9dc34e0a-cbcb-11e8-bdbb-08002700bc00">Wood_board_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>1</elements:id>
+				<elements:thickness>0.21</elements:thickness>
+				<elements:material material_id="3c3b2c68-cbcc-11e8-bed0-08002700bc00">Insulation_045_DK</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1973 1978</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_2_AB</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.022</elements:thickness>
+				<elements:material material_id="9dc34e0a-cbcb-11e8-bdbb-08002700bc00">Wood_board_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>1</elements:id>
+				<elements:thickness>0.21</elements:thickness>
 				<elements:material material_id="3c3b2c68-cbcc-11e8-bed0-08002700bc00">Insulation_045_DK</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -6210,7 +6487,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.142</elements:thickness>
+				<elements:thickness>0.14222</elements:thickness>
 				<elements:material material_id="0abbb19a-83ff-11e6-bacd-2cd444b2e704">glas_generic</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -6305,7 +6582,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.142</elements:thickness>
+				<elements:thickness>0.41365</elements:thickness>
 				<elements:material material_id="0abbb19a-83ff-11e6-bacd-2cd444b2e704">glas_generic</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -6324,7 +6601,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.142</elements:thickness>
+				<elements:thickness>0.41365</elements:thickness>
 				<elements:material material_id="0abbb19a-83ff-11e6-bacd-2cd444b2e704">glas_generic</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -6343,7 +6620,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.142</elements:thickness>
+				<elements:thickness>0.41365</elements:thickness>
 				<elements:material material_id="0abbb19a-83ff-11e6-bacd-2cd444b2e704">glas_generic</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -6362,7 +6639,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.142</elements:thickness>
+				<elements:thickness>0.41365</elements:thickness>
 				<elements:material material_id="0abbb19a-83ff-11e6-bacd-2cd444b2e704">glas_generic</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -6381,7 +6658,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.142</elements:thickness>
+				<elements:thickness>0.41365</elements:thickness>
 				<elements:material material_id="0abbb19a-83ff-11e6-bacd-2cd444b2e704">glas_generic</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -6400,7 +6677,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.142</elements:thickness>
+				<elements:thickness>0.41365</elements:thickness>
 				<elements:material material_id="0abbb19a-83ff-11e6-bacd-2cd444b2e704">glas_generic</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -6419,7 +6696,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.142</elements:thickness>
+				<elements:thickness>0.41365</elements:thickness>
 				<elements:material material_id="0abbb19a-83ff-11e6-bacd-2cd444b2e704">glas_generic</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -6514,7 +6791,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.715</elements:thickness>
+				<elements:thickness>0.715244</elements:thickness>
 				<elements:material material_id="0abbb19a-83ff-11e6-bacd-2cd444b2e704">glas_generic</elements:material>
 			</elements:layer>
 		</elements:Layers>
