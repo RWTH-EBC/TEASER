@@ -335,7 +335,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.0</elements:thickness>
+				<elements:thickness>0.001</elements:thickness>
 				<elements:material material_id="6c217f5c-3a43-11e7-8fc5-2cd444b2e704">steel_sheet</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -345,7 +345,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.0</elements:thickness>
+				<elements:thickness>0.001</elements:thickness>
 				<elements:material material_id="6c217f5c-3a43-11e7-8fc5-2cd444b2e704">steel_sheet</elements:material>
 			</elements:layer>
 		</elements:Layers>

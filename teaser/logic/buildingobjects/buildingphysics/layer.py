@@ -22,7 +22,7 @@ class Layer(object):
     Attributes
     ----------
     id : int
-        Position (starting from 1 and the inner side)
+        Position (starting from 0 and the inner side)
     material : Material()
         Material class of TEASER
     thickness : float [m]

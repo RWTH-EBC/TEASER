@@ -82,8 +82,10 @@ class Office(NonResidential):
             2: elongated 2 floors
             3: compact (e.g. for a square base building)
     window_layout : int
-        Structure of the window facade type, default is 1, which is
-        representative for a punctuated facade.
+        Structure of the window facade type, default is 0, which is a generic facade
+        representing a statistical mean value of window area. This is the foundation
+        for calculating the other window layouts with correction factors.
+            0: generic facade
             1: punctuated facade (individual windows)
             2: banner facade (continuous windows)
             3: full glazing
@@ -287,11 +289,6 @@ class Office(NonResidential):
             use_cond.load_use_conditions(value[1],
                                          data_class=self.parent.data)
             zone.use_conditions = use_cond
-
-            # scale up persons and machines in the zone with area of zone
-            # TODO: @mla where does 0.01 come from?
-            zone.use_conditions.persons *= zone.area * 0.01
-            zone.use_conditions.machines *= zone.area * 0.01
 
         # statistical estimation of the facade
 

@@ -1,8 +1,7 @@
 # Created December 2016
 # TEASER 4 Development Team
 
-"""This module includes AixLib calculation class
-"""
+"""This module includes AixLib calculation class"""
 
 import scipy.io
 import teaser.logic.utilities as utilities
@@ -61,7 +60,7 @@ class AixLib(object):
         self.file_set_t = "Tset_" + self.parent.name + ".mat"
         self.file_ahu = "AHU_" + self.parent.name + ".mat"
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
-        self.version = "0.5.2"
+        self.version = "0.7.4"
         self.total_surface_area = None
         self.consider_heat_capacity = True
         self.use_set_back = True
@@ -175,7 +174,8 @@ class AixLib(object):
         for zone_count in self.parent.thermal_zones:
             for i in range(len(time_line)):
                 if self.use_set_back is False:
-                    time_line[i].append(zone_count.use_conditions.set_temp_heat)
+                    time_line[i].append(
+                        zone_count.use_conditions.set_temp_heat)
                 else:
                     i -= 1
                     if i % 2 == 0:
@@ -374,13 +374,19 @@ class AixLib(object):
 
             for i, time in enumerate(time_line):
                 if i == 0:
-                    time.append(0)
-                    time.append(0)
-                    time.append(0)
+                    time.append(
+                        zone_count.use_conditions.profile_persons[i + 1])
+                    time.append(
+                        zone_count.use_conditions.profile_machines[i + 1])
+                    time.append(
+                        zone_count.use_conditions.profile_lighting[i + 1])
                 else:
-                    time.append(zone_count.use_conditions.profile_persons[i - 1])
-                    time.append(zone_count.use_conditions.profile_machines[i - 1])
-                    time.append(zone_count.use_conditions.profile_lighting[i - 1])
+                    time.append(
+                        zone_count.use_conditions.profile_persons[i - 1])
+                    time.append(
+                        zone_count.use_conditions.profile_machines[i - 1])
+                    time.append(
+                        zone_count.use_conditions.profile_lighting[i - 1])
 
         internal_boundary = np.array(time_line)
 
@@ -389,3 +395,5 @@ class AixLib(object):
             mdict={'Internals': internal_boundary},
             appendmat=False,
             format='4')
+
+        return internal_boundary

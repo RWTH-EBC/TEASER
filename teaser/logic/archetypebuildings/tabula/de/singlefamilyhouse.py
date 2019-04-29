@@ -334,8 +334,6 @@ class SingleFamilyHouse(Residential):
             zone.use_conditions = use_cond
 
             zone.use_conditions.with_ahu = False
-            zone.use_conditions.persons *= zone.area * 0.01
-            zone.use_conditions.machines *= zone.area * 0.01
 
         if self.facade_estimation_factors[self.building_age_group]['ow1'] != 0:
             for key, value in self._outer_wall_names_1.items():
