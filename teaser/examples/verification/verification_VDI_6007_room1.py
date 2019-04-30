@@ -1,4 +1,3 @@
-import ipdb
 """
 This script loads the VDI 6007 Room 1 as *.teaserXML and computes
 parameters. The parameters are then compared with the ones from Rouvel
@@ -26,7 +25,6 @@ def parameter_room1():
 
 if __name__ == "__main__":
     prj = parameter_room1()
-    ipdb.set_trace()  # Break Point ###########
 
     """
     parameters inner wall Typraum S

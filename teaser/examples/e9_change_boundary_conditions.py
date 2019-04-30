@@ -1,4 +1,3 @@
-import ipdb
 """This module contains an example how to export buildings from a TEASER
 project to ready-to-run simulation models for Modelica library AixLib. These
 models will only simulate using Dymola, the reason for this are state
