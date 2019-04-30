@@ -1,8 +1,7 @@
 """This module includes AixLib calculation class"""
 
-import scipy.io
 import teaser.logic.utilities as utilities
-import numpy as np
+from itertools import cycle, islice
 import os
 import pandas as pd
 
@@ -61,7 +60,7 @@ class AixLib(object):
 
         self.file_set_t_heat = "TsetHeat_" + self.parent.name + ".txt"
         self.file_set_t_cool = "TsetCool_" + self.parent.name + ".txt"
-        self.file_ahu = "AHU_" + self.parent.name + ".mat"
+        self.file_ahu = "AHU_" + self.parent.name + ".txt"
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".txt"
         self.version = "0.7.4"
         self.total_surface_area = None
@@ -104,53 +103,6 @@ class AixLib(object):
 
         self.total_surface_area = surf_area_temp
 
-    @staticmethod
-    def create_profile(duration_profile=86400, time_step=3600, double=False):
-        """Creates a profile for building boundary conditions
-
-        This function creates a list with an equidistant profile given the
-        duration of the profile in seconds (default one day, 86400 s) and the
-        time_step in seconds (default one hour, 3600 s). Needed for boundary
-        input of the building for Modelica simulation
-
-        Note
-        -----
-        As Python starts from counting the range from zero, but Modelica needs
-        0 as start value and additional 24 entries. We add one iteration
-        step in the profile.
-
-        Parameters
-        ----------
-        duration_profile : int
-            duration of the profile in seconds (default one day, 86400 s)
-        time_step : int
-            time step used in the profile in seconds (default one hour, 3600 s)
-        double : bool
-            True if values should be taken into account twice to create
-            stepwise functions without interpolation in Modelica
-
-        Returns
-        ---------
-        time_line : [[int]]
-            list of time steps as preparation for the output of boundary
-            conditions
-        """
-        ass_error_1 = "duration must be a multiple of time_step"
-
-        assert float(duration_profile / time_step).is_integer(), ass_error_1
-
-        time_line = []
-
-        if double is True:
-            for i in range(int(duration_profile / time_step) + 1):
-                time_line.append([i * time_step])
-                time_line.append([i * time_step])
-        else:
-            for i in range(int(duration_profile / time_step) + 1):
-                time_line.append([i * time_step])
-
-        return time_line
-
     def modelica_set_temp(self, path=None):
         """creates .mat file for set temperatures
 
@@ -182,7 +134,8 @@ class AixLib(object):
             columns=[zone.name for zone in self.parent.thermal_zones])
 
         for zone_count in self.parent.thermal_zones:
-            export[zone_count.name] = zone_count.use_conditions.heating_profile
+            export[zone_count.name] = zone_count.use_conditions.schedules[
+                "heating_profile"]
 
         export.index = [(i + 1) * 3600 for i in range(8760)]
 
@@ -226,7 +179,8 @@ class AixLib(object):
             columns=[zone.name for zone in self.parent.thermal_zones])
 
         for zone_count in self.parent.thermal_zones:
-            export[zone_count.name] = zone_count.use_conditions.cooling_profile
+            export[zone_count.name] = zone_count.use_conditions.schedules[
+                "cooling_profile"]
 
         export.index = [(i + 1) * 3600 for i in range(8760)]
 
@@ -240,7 +194,7 @@ class AixLib(object):
                 header=False,
                 index_label=False)
 
-    def modelica_AHU_boundary(self, time_line=None, path=None):
+    def modelica_AHU_boundary(self, path=None):
         """creates .mat file for AHU boundary conditions (building)
 
         This function creates a matfile (-v4) for building AHU boundary
@@ -261,17 +215,16 @@ class AixLib(object):
 
         Attributes
         ----------
-        profile_temperature : [float]
+        temperature_profile : [float]
             timeline of temperatures requirements for AHU simulation
-        profile_min_relative_humidity : [float]
+        min_relative_humidity_profile : [float]
             timeline of relative humidity requirements for AHU simulation
-        profile_max_relative_humidity : [float]
+        max_relative_humidity_profile : [float]
             timeline of relative humidity requirements for AHU simulation
-        profile_v_flow : [int]
+        v_flow_profile : [int]
             timeline of desired relative v_flow of the AHU simulation (0..1)
 
         """
-
         if path is None:
             path = utilities.get_default_path()
         else:
@@ -280,56 +233,35 @@ class AixLib(object):
         utilities.create_path(path)
         path = os.path.join(path, self.file_ahu)
 
-        if time_line is None:
-            time_line = self.create_profile()
-
         if self.parent.with_ahu is True:
-            profile_temperature = \
-                self.parent.central_ahu.profile_temperature
-            profile_min_relative_humidity = \
-                self.parent.central_ahu.profile_min_relative_humidity
-            profile_max_relative_humidity = \
-                self.parent.central_ahu.profile_max_relative_humidity
-            profile_v_flow = \
-                self.parent.central_ahu.profile_v_flow
-        else:
-            # Dummy values for Input Table
-            time_line = [[0], [3600]]
-            profile_temperature = [293.15, 293.15]
-            profile_min_relative_humidity = [0, 0]
-            profile_max_relative_humidity = [1, 1]
-            profile_v_flow = [0, 1]
+            export = self.parent.central_ahu.schedules
+        else:  # Dummy values for Input Table
+            export = pd.DataFrame(
+                index=pd.date_range(
+                    '2019-01-01 00:00:00',
+                    periods=8760,
+                    freq='H').to_series().dt.strftime('%m-%d %H:%M:%S'))
 
-        ass_error_1 = "time line and input have to have the same length"
+            export["temperature_profile"] = list(
+                islice(cycle([293.15, 293.15]), 8760))
+            export["min_relative_humidity_profile"] = list(
+                islice(cycle([0, 0]), 8760))
+            export["max_relative_humidity_profile"] = list(
+                islice(cycle([1, 1]), 8760))
+            export["v_flow_profile"] = list(
+                islice(cycle([0, 1]), 8760))
 
-        assert len(time_line) == len(profile_temperature), \
-            (ass_error_1 + ",profile_temperature_AHU")
-        assert len(time_line) == len(profile_min_relative_humidity), \
-            (ass_error_1 + ",profile_min_relative_humidity")
-        assert len(time_line) == len(profile_max_relative_humidity),\
-            (ass_error_1 + ",profile_max_relative_humidity")
-        assert len(time_line) == len(profile_v_flow), \
-            (ass_error_1 + ",profile_status_AHU")
+        with open(path, 'a') as f:
+            f.write('#1\n')
+            f.write('double AHU({}, {})\n'.format(
+                8760, 5))
+            export.to_csv(
+                f,
+                sep='\t',
+                header=False,
+                index_label=False)
 
-        for i, time in enumerate(time_line):
-
-            time.append(profile_temperature[i])
-            time.append(profile_min_relative_humidity[i])
-            time.append(profile_max_relative_humidity[i])
-            time.append(profile_v_flow[i])
-
-        ahu_boundary = np.array(time_line)
-
-        scipy.io.savemat(
-            path,
-            mdict={'AHU': ahu_boundary},
-            appendmat=False,
-            format='4')
-
-    def modelica_gains_boundary(
-            self,
-            time_line=None,
-            path=None):
+    def modelica_gains_boundary(self, path=None):
         """creates .mat file for internal gains boundary conditions
 
         This function creates a matfile (-v4) for building internal gains
@@ -370,11 +302,14 @@ class AixLib(object):
 
         for zone_count in self.parent.thermal_zones:
             export["person_{}".format(
-                zone_count.name)] = zone_count.use_conditions.persons_profile
+                zone_count.name)] = zone_count.use_conditions.schedules[
+                    "persons_profile"]
             export["machines_{}".format(
-                zone_count.name)] = zone_count.use_conditions.machines_profile
+                zone_count.name)] = zone_count.use_conditions.schedules[
+                    "machines_profile"]
             export["lighting_{}".format(
-                zone_count.name)] = zone_count.use_conditions.lighting_profile
+                zone_count.name)] = zone_count.use_conditions.schedules[
+                    "lighting_profile"]
 
         export.index = [(i + 1) * 3600 for i in range(8760)]
 

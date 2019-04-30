@@ -155,13 +155,13 @@ def _load_building(prj, pyxb_bld, type, project_bind):
             bldg.central_ahu.efficiency_recovery_false = \
                 pyxb_ahu.efficiency_revocery_false
 
-        bldg.central_ahu.profile_min_relative_humidity = \
+        bldg.central_ahu.min_relative_humidity_profile = \
             pyxb_ahu.profile_min_relative_humidity
-        bldg.central_ahu.profile_max_relative_humidity = \
+        bldg.central_ahu.max_relative_humidity_profile = \
             pyxb_ahu.profile_max_relative_humidity
-        bldg.central_ahu.profile_v_flow = \
+        bldg.central_ahu.v_flow_profile = \
             pyxb_ahu.profile_v_flow
-        bldg.central_ahu.profile_temperature = \
+        bldg.central_ahu.temperature_profile = \
             pyxb_ahu.profile_temperature
 
     for pyxb_zone in pyxb_bld.ThermalZone:

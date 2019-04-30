@@ -112,10 +112,8 @@ def export_multizone(buildings, prj, path=None):
         bldg.library_attr.modelica_set_temp(path=bldg_path)
         bldg.library_attr.modelica_set_temp_cool(path=bldg_path)
         bldg.library_attr.modelica_AHU_boundary(
-            time_line=None,
             path=bldg_path)
         bldg.library_attr.modelica_gains_boundary(
-            time_line=None,
             path=bldg_path)
 
         _help_package(path=bldg_path, name=bldg.name, within=bldg.parent.name)

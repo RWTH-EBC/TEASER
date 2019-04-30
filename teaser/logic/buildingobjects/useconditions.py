@@ -133,7 +133,7 @@ class UseConditions(object):
 
     @property
     def heating_profile(self):
-        return self.schedules["heating_profile"]
+        return self._heating_profile
 
     @heating_profile.setter
     def heating_profile(self, value):
@@ -143,7 +143,7 @@ class UseConditions(object):
 
     @property
     def cooling_profile(self):
-        return self.schedules["cooling_profile"]
+        return self._cooling_profile
 
     @cooling_profile.setter
     def cooling_profile(self, value):
@@ -153,7 +153,7 @@ class UseConditions(object):
 
     @property
     def persons_profile(self):
-        return self.schedules["persons_profile"]
+        return self._persons_profile
 
     @persons_profile.setter
     def persons_profile(self, value):
@@ -163,7 +163,7 @@ class UseConditions(object):
 
     @property
     def machines_profile(self):
-        return self.schedules["machines_profile"]
+        return self._machines_profile
 
     @machines_profile.setter
     def machines_profile(self, value):
@@ -173,7 +173,7 @@ class UseConditions(object):
 
     @property
     def lighting_profile(self):
-        return self.schedules["lighting_profile"]
+        return self._lighting_profile
 
     @lighting_profile.setter
     def lighting_profile(self, value):

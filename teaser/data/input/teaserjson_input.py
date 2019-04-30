@@ -113,7 +113,7 @@ def load_teaser_json(path, project):
         bldg.year_of_retrofit = bldg_in["year_of_retrofit"]
         bldg.number_of_floors = bldg_in["number_of_floors"]
         bldg.height_of_floors = bldg_in["height_of_floors"]
-        bldg.net_leased_area = bldg_in["net_leased_area"]
+        # bldg.net_leased_area = bldg_in["net_leased_area"]
         bldg.outer_area = bldg_in["outer_area"]
         bldg.window_area = bldg_in["window_area"]
 
@@ -133,14 +133,14 @@ def load_teaser_json(path, project):
                 "efficiency_recovery"]
             bldg.central_ahu.efficiency_recovery_false = bldg_in[
                 "central_ahu"]["efficiency_recovery_false"]
-            bldg.central_ahu.profile_min_relative_humidity = bldg_in[
-                "central_ahu"]["profile_min_relative_humidity"]
-            bldg.central_ahu.profile_max_relative_humidity = bldg_in[
-                "central_ahu"]["profile_max_relative_humidity"]
-            bldg.central_ahu.profile_v_flow = bldg_in[
-                "central_ahu"]["profile_v_flow"]
-            bldg.central_ahu.profile_temperature = bldg_in[
-                "central_ahu"]["profile_temperature"]
+            bldg.central_ahu.min_relative_humidity_profile = bldg_in[
+                "central_ahu"]["min_relative_humidity_profile"]
+            bldg.central_ahu.max_relative_humidity_profile = bldg_in[
+                "central_ahu"]["max_relative_humidity_profile"]
+            bldg.central_ahu.v_flow_profile = bldg_in[
+                "central_ahu"]["v_flow_profile"]
+            bldg.central_ahu.temperature_profile = bldg_in[
+                "central_ahu"]["temperature_profile"]
         except KeyError:
             pass
 

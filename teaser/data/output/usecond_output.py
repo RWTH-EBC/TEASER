@@ -49,12 +49,14 @@ def save_use_conditions(use_cond, data_class):
             "max_user_infiltration"] = use_cond.max_user_infiltration
         data_class.conditions_bind[
             use_cond.usage][
-            "max_overheating_infiltration"] = use_cond.max_overheating_infiltration
+            "max_overheating_infiltration"] = \
+            use_cond.max_overheating_infiltration
         data_class.conditions_bind[use_cond.usage][
             "max_summer_infiltration"] = use_cond.max_summer_infiltration
         data_class.conditions_bind[
             use_cond.usage][
-            "winter_reduction_infiltration"] = use_cond.winter_reduction_infiltration
+            "winter_reduction_infiltration"] = \
+            use_cond.winter_reduction_infiltration
         data_class.conditions_bind[use_cond.usage][
             "min_ahu"] = use_cond.min_ahu
         data_class.conditions_bind[use_cond.usage][
@@ -62,15 +64,15 @@ def save_use_conditions(use_cond, data_class):
         data_class.conditions_bind[use_cond.usage][
             "with_ahu"] = use_cond.with_ahu
         data_class.conditions_bind[use_cond.usage][
-            "heating_profile"] = use_cond.heating_profile.tolist()
+            "heating_profile"] = use_cond.heating_profile
         data_class.conditions_bind[use_cond.usage][
-            "cooling_profile"] = use_cond.cooling_profile.tolist()
+            "cooling_profile"] = use_cond.cooling_profile
         data_class.conditions_bind[use_cond.usage][
-            "persons_profile"] = use_cond.persons_profile.tolist()
+            "persons_profile"] = use_cond.persons_profile
         data_class.conditions_bind[use_cond.usage][
-            "machines_profile"] = use_cond.machines_profile.tolist()
+            "machines_profile"] = use_cond.machines_profile
         data_class.conditions_bind[use_cond.usage][
-            "lighting_profile"] = use_cond.lighting_profile.tolist()
+            "lighting_profile"] = use_cond.lighting_profile
 
     with open(utilities.get_full_path(data_class.path_uc), 'w') as file:
         file.write(json.dumps(

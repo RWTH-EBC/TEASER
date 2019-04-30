@@ -119,14 +119,14 @@ def save_teaser_json(path, project):
                 bldg.central_ahu.efficiency_recovery
             ahu_out["efficiency_recovery_false"] = \
                 bldg.central_ahu.efficiency_recovery_false
-            ahu_out["profile_min_relative_humidity"] = \
-                bldg.central_ahu.profile_min_relative_humidity
-            ahu_out["profile_max_relative_humidity"] = \
-                bldg.central_ahu.profile_max_relative_humidity
-            ahu_out["profile_v_flow"] = \
-                bldg.central_ahu.profile_v_flow
-            ahu_out["profile_temperature"] = \
-                bldg.central_ahu.profile_temperature
+            ahu_out["min_relative_humidity_profile"] = \
+                bldg.central_ahu.min_relative_humidity_profile
+            ahu_out["max_relative_humidity_profile"] = \
+                bldg.central_ahu.max_relative_humidity_profile
+            ahu_out["v_flow_profile"] = \
+                bldg.central_ahu.v_flow_profile
+            ahu_out["temperature_profile"] = \
+                bldg.central_ahu.temperature_profile
             prj_out["project"]["buildings"][bldg.name]["central_ahu"] = ahu_out
         else:
             pass
@@ -185,19 +185,19 @@ def save_teaser_json(path, project):
                 "with_ahu"] = zone.use_conditions.with_ahu
             zone_out["use_conditions"][
                 "heating_profile"] = \
-                zone.use_conditions.heating_profile.tolist()[0:25]
+                zone.use_conditions.heating_profile
             zone_out["use_conditions"][
                 "cooling_profile"] = \
-                zone.use_conditions.cooling_profile.tolist()[0:25]
+                zone.use_conditions.cooling_profile
             zone_out["use_conditions"][
                 "persons_profile"] = \
-                zone.use_conditions.persons_profile.tolist()[0:25]
+                zone.use_conditions.persons_profile
             zone_out["use_conditions"][
                 "machines_profile"] = \
-                zone.use_conditions.machines_profile.tolist()[0:25]
+                zone.use_conditions.machines_profile
             zone_out["use_conditions"][
                 "lighting_profile"] = \
-                zone.use_conditions.lighting_profile.tolist()[0:25]
+                zone.use_conditions.lighting_profile
 
             zone_out["outer_walls"] = collections.OrderedDict()
             zone_out["rooftops"] = collections.OrderedDict()

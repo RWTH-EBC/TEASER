@@ -553,8 +553,8 @@ class Test_teaser(object):
         assert round(test_residential.get_window_area(90), 0) == 125
         assert round(test_residential.get_window_area(270), 0) == 125
 
-    # methods in Project, these tests only test if the API function works,
-    # not if it produces reliable results.
+    # # methods in Project, these tests only test if the API function works,
+    # # not if it produces reliable results.
 
     def test_load_save_project_old(self):
         """test of load_project and save_project"""
@@ -573,13 +573,13 @@ class Test_teaser(object):
 
         prj.add_non_residential(
             method='bmvbs',
-            usage='office',
-            name="TestBuilding",
+            usage='institute',
+            name="TestBuilding_institute",
             year_of_construction=1988,
             number_of_floors=7,
             height_of_floors=1,
             net_leased_area=1988,
-            with_ahu=False,
+            with_ahu=True,
             office_layout=0,
             window_layout=0,
             construction_type="heavy")
@@ -589,13 +589,17 @@ class Test_teaser(object):
         """test of load_project and save_project"""
         prj.set_default(load_data=True)
         prj.load_project(
-            utilities.get_full_path(
-                "examples/examplefiles/unitTest.json"))
-        # therm_zone = prj.buildings[-1].thermal_zones[0]
-        # assert therm_zone.area == 994.0
-        # tz_area = sum([tz.area for tz in prj.buildings[
-        #     -1].thermal_zones])
-        # assert prj.buildings[-1].net_leased_area == tz_area
+            os.path.join(utilities.get_default_path(), "unitTest.json"))
+        therm_zone = prj.buildings[-1].thermal_zones[0]
+        assert therm_zone.area == 318.08
+        tz_area = sum([tz.area for tz in prj.buildings[
+            -1].thermal_zones])
+        for tz in prj.buildings[-1].thermal_zones:
+            print(tz.name, tz.area)
+        print(prj.buildings[-1].name, prj.buildings[-1].net_leased_area)
+        assert prj.buildings[-1].net_leased_area == tz_area
+        assert prj.buildings[-1].net_leased_area == 1988.0
+        assert prj.buildings[-1].name == "TestBuilding_institute"
         prj.name = "NewUnitTest"
         prj.save_project(file_name="unitTest_new.json", path=None)
 
@@ -691,80 +695,80 @@ class Test_teaser(object):
     def test_export_ibpsa(self):
         """test of export_ibpsa, no calculation verification"""
 
-        # prj.number_of_elements_calc = 1
-        # prj.merge_windows_calc = True
-        # prj.used_library_calc = 'IBPSA'
-        # prj.calc_all_buildings()
-        # prj.export_ibpsa(library='AixLib')
-        # prj.export_ibpsa(library='Buildings')
-        # prj.export_ibpsa(library='BuildingSystems')
-        # prj.export_ibpsa(library='IDEAS')
-        # prj.number_of_elements_calc = 1
-        # prj.merge_windows_calc = False
-        # prj.used_library_calc = 'IBPSA'
-        # prj.calc_all_buildings()
-        # prj.export_ibpsa(library='AixLib')
-        # prj.export_ibpsa(library='Buildings')
-        # prj.export_ibpsa(library='BuildingSystems')
-        # prj.export_ibpsa(library='IDEAS')
-        # prj.number_of_elements_calc = 2
-        # prj.merge_windows_calc = True
-        # prj.used_library_calc = 'IBPSA'
-        # prj.calc_all_buildings()
-        # prj.export_ibpsa(library='AixLib')
-        # prj.export_ibpsa(library='Buildings')
-        # prj.export_ibpsa(library='BuildingSystems')
-        # prj.export_ibpsa(library='IDEAS')
-        # prj.number_of_elements_calc = 2
-        # prj.merge_windows_calc = False
-        # prj.used_library_calc = 'IBPSA'
-        # prj.calc_all_buildings()
-        # prj.export_ibpsa(library='AixLib')
-        # prj.export_ibpsa(library='Buildings')
-        # prj.export_ibpsa(library='BuildingSystems')
-        # prj.export_ibpsa(library='IDEAS')
-        # prj.number_of_elements_calc = 3
-        # prj.merge_windows_calc = True
-        # prj.used_library_calc = 'IBPSA'
-        # prj.calc_all_buildings()
-        # prj.export_ibpsa(library='AixLib')
-        # prj.export_ibpsa(library='Buildings')
-        # prj.export_ibpsa(library='BuildingSystems')
-        # prj.export_ibpsa(library='IDEAS')
-        # prj.number_of_elements_calc = 3
-        # prj.merge_windows_calc = False
-        # prj.used_library_calc = 'IBPSA'
-        # prj.calc_all_buildings()
-        # prj.export_ibpsa(library='AixLib')
-        # prj.export_ibpsa(library='Buildings')
-        # prj.export_ibpsa(library='BuildingSystems')
-        # prj.export_ibpsa(library='IDEAS')
-        # prj.number_of_elements_calc = 4
-        # prj.merge_windows_calc = True
-        # prj.used_library_calc = 'IBPSA'
-        # prj.calc_all_buildings()
-        # prj.export_ibpsa(library='AixLib')
-        # prj.export_ibpsa(library='Buildings')
-        # prj.export_ibpsa(library='BuildingSystems')
-        # prj.export_ibpsa(library='IDEAS')
-        # prj.number_of_elements_calc = 4
-        # prj.merge_windows_calc = False
-        # prj.used_library_calc = 'IBPSA'
-        # prj.calc_all_buildings()
-        # prj.export_ibpsa(library='AixLib')
-        # prj.export_ibpsa(library='Buildings')
-        # prj.export_ibpsa(library='BuildingSystems')
-        # prj.export_ibpsa(library='IDEAS')
-        # prj.number_of_elements_calc = 4
-        # prj.merge_windows_calc = False
-        # prj.used_library_calc = 'IBPSA'
-        # prj.calc_all_buildings()
-        # prj.export_ibpsa(internal_id=prj.buildings[-1].internal_id)
-        # prj.number_of_elements_calc = 4
-        # prj.merge_windows_calc = False
-        # prj.used_library_calc = 'IBPSA'
-        # prj.calc_all_buildings()
-        # prj.export_ibpsa(path=utilities.get_default_path())
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa(internal_id=prj.buildings[-1].internal_id)
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa(path=utilities.get_default_path())
         prj.set_default()
 
     def test_instantiate_data_class(self):
@@ -2110,8 +2114,11 @@ class Test_teaser(object):
 
     def test_save_use_conditions(self):
         """test of save_use_conditions, no parameter checking"""
-        os.remove(os.path.join(
-            utilities.get_default_path(), 'UseCondUT.json'))
+        try:
+            os.remove(os.path.join(
+                utilities.get_default_path(), 'UseCondUT.json'))
+        except FileNotFoundError:
+            pass
         path = os.path.join(
             utilities.get_default_path(), 'UseCondUT.json')
         prj.data.path_uc = path
@@ -3034,3 +3041,71 @@ class Test_teaser(object):
     #
     #     assert (file['Internals'].transpose()[3][1:] ==
     #             use_cond.profile_lighting).all()
+
+    def test_ahu_profiles(self):
+        """Test setting AHU profiles of different lengths
+
+        Related to issue 553 at https://github.com/RWTH-EBC/TEASER/issues/553
+        """
+
+        prj_test = Project(load_data=True)
+        prj_test.name = "TestAHUProfiles"
+
+        prj_test.add_non_residential(
+            method="bmvbs",
+            usage="office",
+            name="OfficeBuilding",
+            year_of_construction=2015,
+            number_of_floors=4,
+            height_of_floors=3.5,
+            net_leased_area=1000.0,
+        )
+
+        prj_test.used_library_calc = "AixLib"
+        prj_test.number_of_elements_calc = 2
+
+        v_flow_workday = [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+        ]
+
+        v_flow_week = []
+        for day in range(7):
+            for val in v_flow_workday:
+                if day < 5:
+                    ratio = val
+                else:
+                    if val == 1:
+                        ratio = 0.2
+                    else:
+                        ratio = 0.0
+                v_flow_week.append(ratio)
+
+        for building in prj_test.buildings:
+            building.central_ahu.profile_v_flow = v_flow_week
+
+        prj_test.calc_all_buildings()
+        prj_test.export_aixlib()
