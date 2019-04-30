@@ -436,7 +436,7 @@ class Project(object):
         This function adds a residential archetype building to the TEASER
         project. You need to specify the method of the archetype generation.
         Currently TEASER supports only method according 'iwu', 'urbanrenet',
-        'tabula_de' and 'tabule_dk' for residential buildings. Further the
+        'tabula_de' and 'tabula_dk' for residential buildings. Further the
         type of usage needs to be specified. Currently TEASER supports one type
         of
         residential building for 'iwu' and eleven types for 'urbanrenet'. For
