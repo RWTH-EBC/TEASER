@@ -1161,7 +1161,7 @@ class Test_tabula_ab(object):
             #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
             #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             #     1) == round((1 / (1 / 3.0 - 0.17)), 1)
-    # #
+    #
     def test_tabula_uvalue_adv_retrofit_ab_dk_1997(self):
         prj.add_residential(
             method='tabula_dk',

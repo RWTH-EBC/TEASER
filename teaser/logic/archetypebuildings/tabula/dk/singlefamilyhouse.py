@@ -18,7 +18,7 @@ from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
 
 class SingleFamilyHouse(Residential):
-    """Archetype for German TABULA Single Family House.
+    """Archetype for Danish TABULA Single Family House.
 
     This is an archetype building for danish single family house according to
     TABULA building typology (http://webtool.building-typology.eu/#bm). As
@@ -45,15 +45,15 @@ class SingleFamilyHouse(Residential):
     provides a prescribed U-Value. We used the U-Value and the given material
     information to determine thickness of each layer and implemented it into
     elements XML ('teaser.data.input.inputdata.TypeElements_TABULA_DK.xml'). The
-    material properties have been assumed from MASEA Material data base
-    (http://www.masea-ensan.de/). As there might be some differences in the
-    assumptions for material properties from TABULA and MASEA the U-Value might
-    not always be exactly the same as in TABULA but is always in an acceptable
-    range. The U-Value has been calculated using combined constant values for
-    interior and exterior heat transmission, we used a resistance of 0.17
-    (m2*K)/W for outer walls, windows, flat roofs and doors; 0.34 (m2*K)/W  for
-    ground floors to unheated cellars and 0.17 (m2*K)/W  to direct ground
-    coupled floors, 0.21 (m2*K)/W  was taken for pitched roofs.
+    material properties have been assumed from the "Handbook for Energy
+    Consultants - HB2016" (http://www.hbemo.dk/). As there might be some
+    differences in the assumptions for material properties from TABULA and
+    HB2016 the U-Value might not always be exactly the same as in TABULA but is
+    always in an acceptable range. The U-Value has been calculated using
+    combined constant values for interior and exterior heat transmission, we
+    used a resistance of 0.17 (m2*K)/W for outer walls, windows, flat roofs and
+    doors; 0.34 (m2*K)/W for ground floors to unheated cellars and 0.17 (m2*K)/W
+    to direct ground coupled floors, 0.21 (m2*K)/W  was taken for pitched roofs.
 
     Parameters
     ----------
