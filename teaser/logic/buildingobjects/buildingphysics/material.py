@@ -117,7 +117,8 @@ class Material(object):
         else:
             data_class = data_class
 
-        material_output.save_material(material=self, data_class=data_class)
+        material_output.save_material(
+            material=self, data_class=data_class)
 
     def modify_material_template(self, data_class):
         """Material modifier.

@@ -66,7 +66,7 @@ class DataClass(object):
         self.element_bind = None
         if self.used_statistic == 'iwu':
             self.path_tb = utils.get_full_path(
-                "data/input/inputdata/TypeBuildingElements.xml")
+                "data/input/inputdata/TypeBuildingElements.json")
             self.load_tb_binding()
         elif self.used_statistic == 'tabula_de':
             self.path_tb = utils.get_full_path(
@@ -74,13 +74,13 @@ class DataClass(object):
                     'data',
                     'input',
                     'inputdata',
-                    'TypeElements_TABULA_DE.xml'))
+                    'TypeElements_TABULA_DE.json'))
             self.load_tb_binding()
         elif self.used_statistic is None:
             pass
         self.material_bind = None
         self.path_mat = utils.get_full_path(
-            "data/input/inputdata/MaterialTemplates.xml")
+            "data/input/inputdata/MaterialTemplates.json")
         self.conditions_bind = None
         self.path_uc = utils.get_full_path(
             "data/input/inputdata/UseConditions.json")
@@ -91,45 +91,57 @@ class DataClass(object):
     def load_tb_binding(self):
         """Loads TypeBuildingElement XML into binding classes
         """
+        if self.path_tb.endswith("json"):
+            if os.path.isfile(self.path_tb):
+                try:
+                    with open(self.path_tb, 'r+') as f:
+                        self.element_bind = json.load(f)
+                except json.decoder.JSONDecodeError:
+                    print("Your TypeElements file seems to be broken.")
+            else:
+                with open(self.path_tb, 'w') as f:
+                    self.element_bind = collections.OrderedDict()
+                    self.element_bind["version"] = "0.7"
 
-        try:
-            __xml_file_tb = open(self.path_tb, 'r+')
-            version_parse = et.parse(self.path_tb)
-        except et.ParseError:
-            __xml_file_tb = open(self.path_tb, 'w')
-            version_parse = False
-        except FileNotFoundError:
-            __xml_file_tb = open(self.path_tb, 'w+')
-            version_parse = False
+        else:
+            try:
+                __xml_file_tb = open(self.path_tb, 'r+')
+                version_parse = et.parse(self.path_tb)
+            except et.ParseError:
+                __xml_file_tb = open(self.path_tb, 'w')
+                version_parse = False
+            except FileNotFoundError:
+                __xml_file_tb = open(self.path_tb, 'w+')
+                version_parse = False
 
-        if version_parse is False:
-            import teaser.data.bindings.v_0_6.typeelement_bind as tb_bind
-            self.element_bind = tb_bind.TypeBuildingElements()
-        elif bool(version_parse.getroot().attrib) is False:
-            warnings.warn(
-                "You are using an old version of type building element data "
-                "base XML file")
-            import teaser.data.bindings.v_0_3_9.typeelement_bind as tb_bind
-            self.element_bind = tb_bind.CreateFromDocument(
-                __xml_file_tb.read())
-        elif version_parse.getroot().attrib['version'] == "0.3.9":
-            warnings.warn(
-                "You are using an old version of type building element data "
-                "base XML file")
-            import teaser.data.bindings.v_0_3_9.typeelement_bind as tb_bind
-            self.element_bind = tb_bind.CreateFromDocument(
-                __xml_file_tb.read())
-        elif version_parse.getroot().attrib['version'] == "0.4":
-            warnings.warn(
-                "You are using an old version of type building element data "
-                "base XML file")
-            import teaser.data.bindings.v_0_4.typeelement_bind as tb_bind
-            self.element_bind = tb_bind.CreateFromDocument(
-                __xml_file_tb.read())
-        elif version_parse.getroot().attrib['version'] == "0.6":
-            import teaser.data.bindings.v_0_6.typeelement_bind as tb_bind
-            self.element_bind = tb_bind.CreateFromDocument(
-                __xml_file_tb.read())
+            if version_parse is False:
+                import teaser.data.bindings.v_0_6.typeelement_bind as tb_bind
+                self.element_bind = tb_bind.TypeBuildingElements()
+            elif bool(version_parse.getroot().attrib) is False:
+                warnings.warn(
+                    "You are using an old version of type building element data "
+                    "base XML file")
+                import teaser.data.bindings.v_0_3_9.typeelement_bind as tb_bind
+                self.element_bind = tb_bind.CreateFromDocument(
+                    __xml_file_tb.read())
+            elif version_parse.getroot().attrib['version'] == "0.3.9":
+                warnings.warn(
+                    "You are using an old version of type building element data "
+                    "base XML file")
+                import teaser.data.bindings.v_0_3_9.typeelement_bind as tb_bind
+                self.element_bind = tb_bind.CreateFromDocument(
+                    __xml_file_tb.read())
+            elif version_parse.getroot().attrib['version'] == "0.4":
+                warnings.warn(
+                    "You are using an old version of type building element data "
+                    "base XML file")
+                import teaser.data.bindings.v_0_4.typeelement_bind as tb_bind
+                self.element_bind = tb_bind.CreateFromDocument(
+                    __xml_file_tb.read())
+            elif version_parse.getroot().attrib['version'] == "0.6":
+                import teaser.data.bindings.v_0_6.typeelement_bind as tb_bind
+                self.element_bind = tb_bind.CreateFromDocument(
+                    __xml_file_tb.read())
 
     def load_uc_binding(self):
         """Loads UseConditions XML into binding classes
@@ -191,35 +203,47 @@ class DataClass(object):
     def load_mat_binding(self):
         """Loads MaterialTemplates XML into binding classes
         """
-        try:
-            __xml_file_mat = open(self.path_mat, 'r+')
-            version_parse = et.parse(self.path_mat)
-        except:
-            __xml_file_mat = open(self.path_mat, 'w')
-            version_parse = False
+        if self.path_mat.endswith("json"):
+            if os.path.isfile(self.path_mat):
+                try:
+                    with open(self.path_mat, 'r+') as f:
+                        self.material_bind = json.load(f)
+                except json.decoder.JSONDecodeError:
+                    print("Your Materials file seems to be broken.")
+            else:
+                with open(self.path_mat, 'w') as f:
+                    self.material_bind = collections.OrderedDict()
+                    self.material_bind["version"] = "0.7"
+        else:
+            try:
+                __xml_file_mat = open(self.path_mat, 'r+')
+                version_parse = et.parse(self.path_mat)
+            except:
+                __xml_file_mat = open(self.path_mat, 'w')
+                version_parse = False
 
-        if version_parse is False:
-            import teaser.data.bindings.v_0_6.material_bind as mat_bind
-            self.material_bind = mat_bind.MaterialTemplates()
-        elif bool(version_parse.getroot().attrib) is False:
-            warnings.warn(
-                "You are using an old version of material data base XML file")
-            import teaser.data.bindings.v_0_3_9.material_bind as mat_bind
-            self.material_bind = mat_bind.CreateFromDocument(
-                __xml_file_mat.read())
-        elif version_parse.getroot().attrib['version'] == "0.3.9":
-            warnings.warn(
-                "You are using an old version of material data base XML file")
-            import teaser.data.bindings.v_0_3_9.material_bind as mat_bind
-            self.material_bind = mat_bind.CreateFromDocument(
-                __xml_file_mat.read())
-        elif version_parse.getroot().attrib['version'] == "0.4":
-            warnings.warn(
-                "You are using an old version of material data base XML file")
-            import teaser.data.bindings.v_0_4.material_bind as mat_bind
-            self.material_bind = mat_bind.CreateFromDocument(
-                __xml_file_mat.read())
-        elif version_parse.getroot().attrib['version'] == "0.6":
-            import teaser.data.bindings.v_0_6.material_bind as mat_bind
-            self.material_bind = mat_bind.CreateFromDocument(
-                __xml_file_mat.read())
+            if version_parse is False:
+                import teaser.data.bindings.v_0_6.material_bind as mat_bind
+                self.material_bind = mat_bind.MaterialTemplates()
+            elif bool(version_parse.getroot().attrib) is False:
+                warnings.warn(
+                    "You are using an old version of material data base XML file")
+                import teaser.data.bindings.v_0_3_9.material_bind as mat_bind
+                self.material_bind = mat_bind.CreateFromDocument(
+                    __xml_file_mat.read())
+            elif version_parse.getroot().attrib['version'] == "0.3.9":
+                warnings.warn(
+                    "You are using an old version of material data base XML file")
+                import teaser.data.bindings.v_0_3_9.material_bind as mat_bind
+                self.material_bind = mat_bind.CreateFromDocument(
+                    __xml_file_mat.read())
+            elif version_parse.getroot().attrib['version'] == "0.4":
+                warnings.warn(
+                    "You are using an old version of material data base XML file")
+                import teaser.data.bindings.v_0_4.material_bind as mat_bind
+                self.material_bind = mat_bind.CreateFromDocument(
+                    __xml_file_mat.read())
+            elif version_parse.getroot().attrib['version'] == "0.6":
+                import teaser.data.bindings.v_0_6.material_bind as mat_bind
+                self.material_bind = mat_bind.CreateFromDocument(
+                    __xml_file_mat.read())

@@ -1,6 +1,3 @@
-# Created April 2016
-# TEASER 4 Development Team
-
 """material_input.py
 
 This module contains function to load material classes
