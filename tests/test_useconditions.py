@@ -110,6 +110,18 @@ class Test_useconditions(object):
                 heating_profile_week.append(set_point)
 
         for zone in prj_test.buildings[-1].thermal_zones:
-            zone.use_conditions.heating_profile_profile = heating_profile_week
+            zone.use_conditions.heating_profile = heating_profile_week
+            zone.use_conditions.cooling_profile = heating_profile_week
+            zone.use_conditions.persons_profile = heating_profile_week
+            zone.use_conditions.machines_profile = heating_profile_week
+            zone.use_conditions.lighting_profile = heating_profile_week
         assert prj_test.buildings[
             -1].thermal_zones[-1].heating_profile == heating_profile_workday
+        assert prj_test.buildings[
+            -1].thermal_zones[-1].cooling_profile == heating_profile_workday
+        assert prj_test.buildings[
+            -1].thermal_zones[-1].persons_profile == heating_profile_workday
+        assert prj_test.buildings[
+            -1].thermal_zones[-1].machines_profile == heating_profile_workday
+        assert prj_test.buildings[
+            -1].thermal_zones[-1].lighting_profile == heating_profile_workday

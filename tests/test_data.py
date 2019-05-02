@@ -3065,6 +3065,7 @@ class Test_teaser(object):
                         ratio = 0.0
                 v_flow_week.append(ratio)
 
-        prj_test.buildings[-1].central_ahu.profile_v_flow =
+        prj_test.buildings[-1].central_ahu.profile_v_flow = v_flow_week
+
         assert prj_test.buildings[
             -1].central_ahu.profile_v_flow == v_flow_week
