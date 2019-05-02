@@ -89,6 +89,49 @@ def example_change_boundary_conditions():
 
     office.central_ahu.v_flow_profile = v_flow_week
 
+    heating_profile_workday = [
+        293,
+        293,
+        293,
+        293,
+        293,
+        293,
+        293,
+        293,
+        293,
+        293,
+        293,
+        293,
+        293,
+        293,
+        293,
+        293,
+        293,
+        293,
+        293,
+        293,
+        293,
+        293,
+        293,
+        293,
+        293,
+    ]
+
+    # We can apply this also to profiles in UseConditions (e.g. set temperature
+    # profile for heating (heating_profile)). We assume on weeksends a lower
+    # heating setpoint
+
+    heating_profile_week = []
+    for day in range(7):
+        for val in heating_profile_workday:
+            if day < 5:
+                set_point = val
+            else:
+                set_point = 290.0
+            heating_profile_week.append(set_point)
+    for zone in office.thermal_zones:
+        zone.use_conditions.heating_profile_profile = heating_profile_week
+
     # To make sure the parameters are calculated correctly we recommend to
     # run calc_all_buildings() function
 

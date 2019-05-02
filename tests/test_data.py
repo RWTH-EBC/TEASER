@@ -2090,45 +2090,6 @@ class Test_teaser(object):
         prj.buildings[-1].thermal_zones[-1].set_inner_wall_area()
         for wall in prj.buildings[-1].thermal_zones[-1].inner_walls:
             assert round(wall.area, 16) == 11.951219512195122
-
-            # methods in UseConditions18599()
-
-    def test_load_use_conditions_new(self):
-        """test of load_use_conditions, no parameter checking"""
-        use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
-        use_cond.load_use_conditions("Living",
-                                     data_class=prj.data)
-
-    def test_load_use_conditions_old(self):
-        """test of old load_boundary_conditions, no parameter checking"""
-        use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
-        import teaser.logic.utilities as utils
-        prj.data.path_uc = utils.get_full_path(
-            "data/input/inputdata/UseConditions.xml")
-        prj.data.load_uc_binding()
-        import teaser.data.input.boundcond_input as bc_in
-        bc_in.load_boundary_conditions(
-            bound_cond=use_cond,
-            zone_usage="Living",
-            data_class=prj.data)
-
-    def test_save_use_conditions(self):
-        """test of save_use_conditions, no parameter checking"""
-        try:
-            os.remove(os.path.join(
-                utilities.get_default_path(), 'UseCondUT.json'))
-        except FileNotFoundError:
-            pass
-        path = os.path.join(
-            utilities.get_default_path(), 'UseCondUT.json')
-        prj.data.path_uc = path
-        prj.data.load_uc_binding()
-        use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
-        use_cond.save_use_conditions(data_class=prj.data)
-        use_cond.save_use_conditions(data_class=prj.data)
-        use_cond.usage = "UnitTest"
-        use_cond.save_use_conditions(data_class=prj.data)
-
         # methods in BuildingElement
 
     def test_ua_value(self):
@@ -3104,8 +3065,6 @@ class Test_teaser(object):
                         ratio = 0.0
                 v_flow_week.append(ratio)
 
-        for building in prj_test.buildings:
-            building.central_ahu.profile_v_flow = v_flow_week
-
-        prj_test.calc_all_buildings()
-        prj_test.export_aixlib()
+        prj_test.buildings[-1].central_ahu.profile_v_flow =
+        assert prj_test.buildings[
+            -1].central_ahu.profile_v_flow == v_flow_week
