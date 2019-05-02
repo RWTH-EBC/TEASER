@@ -117,16 +117,16 @@ class Test_useconditions(object):
             zone.use_conditions.lighting_profile = heating_profile_week
         assert prj_test.buildings[
             -1].thermal_zones[
-                -1].use_conditions.heating_profile == heating_profile_workday
+                -1].use_conditions.heating_profile == heating_profile_week
         assert prj_test.buildings[
             -1].thermal_zones[
-                -1].use_conditions.cooling_profile == heating_profile_workday
+                -1].use_conditions.cooling_profile == heating_profile_week
         assert prj_test.buildings[
             -1].thermal_zones[
-                -1].use_conditions.persons_profile == heating_profile_workday
+                -1].use_conditions.persons_profile == heating_profile_week
         assert prj_test.buildings[
             -1].thermal_zones[
-                -1].use_conditions.machines_profile == heating_profile_workday
+                -1].use_conditions.machines_profile == heating_profile_week
         assert prj_test.buildings[
             -1].thermal_zones[
-                -1].use_conditions.lighting_profile == heating_profile_workday
+                -1].use_conditions.lighting_profile == heating_profile_week

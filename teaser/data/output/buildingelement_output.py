@@ -1,15 +1,7 @@
-# Created April 2016
-# TEASER Development Team
+"""This module contains function to save building element classes."""
 
-"""buildingelement_ouput.py
-
-This module contains function to save building element classes
-"""
-
-import teaser.data.bindings.v_0_6.typeelement_bind as tb_bind
 import teaser.logic.utilities as utilities
 import warnings
-import pyxb
 
 
 def save_type_element(element, data_class):
@@ -32,9 +24,8 @@ def save_type_element(element, data_class):
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.
     """
-
     element_binding = data_class.element_bind
-    element_binding.version = "0.6"
+    element_binding["version"] = "0.6"
     add_to_xml = True
 
     pyxb.utils.domutils.BindingDOMSupport.DeclareNamespace(

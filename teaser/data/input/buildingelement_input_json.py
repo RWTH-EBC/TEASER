@@ -51,7 +51,8 @@ def load_type_element(element,
 
     if type(element).__name__ == 'OuterWall':
 
-        for out_wall, information in element_binding.OuterWall:
+        for out_wall in element_binding["OuterWalls"].keys():
+
             if out_wall.building_age_group[0] <= year <= \
                     out_wall.building_age_group[1] and \
                     out_wall.construction_type == construction:
