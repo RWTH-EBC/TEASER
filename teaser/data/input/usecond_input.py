@@ -2,7 +2,7 @@
 
 
 def load_use_conditions(use_cond, zone_usage, data_class):
-    """load use conditions according to DIN 18599 and SIA2024
+    """Load use conditions from json.
 
     loads Use conditions specified in the XML, according to DIN 18599,
     SIA2024 in addition some AixLib specific use conditions for central AHU
@@ -10,9 +10,9 @@ def load_use_conditions(use_cond, zone_usage, data_class):
 
     Parameters
     ----------
-    use_cond : BoundaryConditions()
+    use_cond : UseConditions()
         Instance of TEASERs
-        BuildingObjects.BoundaryConditions.BoundaryConditions
+        BuildingObjects.UseConditions
 
     zone_usage : str
         code list for zone_usage according to 18599
@@ -21,8 +21,8 @@ def load_use_conditions(use_cond, zone_usage, data_class):
         DataClass containing the bindings for TypeBuildingElement and
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.
-    """
 
+    """
     conditions_bind = data_class.conditions_bind
 
     use_cond.usage = zone_usage

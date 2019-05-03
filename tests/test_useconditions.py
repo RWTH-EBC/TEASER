@@ -25,7 +25,7 @@ class Test_useconditions(object):
         try:
             os.remove(os.path.join(
                 utilities.get_default_path(), 'UseCondUT.json'))
-        except IOError:
+        except OSError:
             pass
         path = os.path.join(
             utilities.get_default_path(), 'UseCondUT.json')

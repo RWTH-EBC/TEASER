@@ -1,11 +1,14 @@
-"""TeaserXML_input
-
-This module contains function to load Projects in the proprietary
-TEASER file format .tXML
-"""
-
+"""Load Projects in the proprietary TEASER file format .json."""
 
 from teaser.logic.buildingobjects.building import Building
+from teaser.logic.archetypebuildings.tabula.de.apartmentblock import \
+    ApartmentBlock
+from teaser.logic.archetypebuildings.tabula.de.multifamilyhouse import \
+    MultiFamilyHouse
+from teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse import \
+    SingleFamilyHouse
+from teaser.logic.archetypebuildings.tabula.de.terracedhouse import \
+    TerracedHouse
 from teaser.logic.archetypebuildings.bmvbs.office import Office
 from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import \
     SingleFamilyDwelling
@@ -32,7 +35,7 @@ import collections
 
 
 def load_teaser_json(path, project):
-    """This function loads a project from teaserJSON
+    """Load a project from json.
 
     TEASERs internal file format to store information.
 
@@ -65,18 +68,18 @@ def load_teaser_json(path, project):
         "SingleFamilyDwelling": {
             "method": "iwu",
             "usage": SingleFamilyDwelling},
-        # "SingleFamilyHouse": {
-        #     "method": "tabula_de",
-        #     "usage": "single_family_house"},
-        # "TerracedHouse": {
-        #     "method": "tabula_de",
-        #     "usage": "terraced_house"},
-        # "MultiFamilyHouse": {
-        #     "method": "tabula_de",
-        #     "usage": "multi_family_house"},
-        # "ApartmentBlock": {
-        #     "method": "tabula_de",
-        #     "usage": "apartment_block"},
+        "SingleFamilyHouse": {
+            "method": "tabula_de",
+            "usage": SingleFamilyHouse},
+        "TerracedHouse": {
+            "method": "tabula_de",
+            "usage": TerracedHouse},
+        "MultiFamilyHouse": {
+            "method": "tabula_de",
+            "usage": MultiFamilyHouse},
+        "ApartmentBlock": {
+            "method": "tabula_de",
+            "usage": ApartmentBlock},
     }
     with open(path, 'r+') as f:
         prj_in = json.load(
@@ -201,6 +204,11 @@ def load_teaser_json(path, project):
                 out_wall.name = wall_name
                 set_basic_data_teaser(wall_in, out_wall)
                 set_layer_data_teaser(wall_in, out_wall)
+            for door_name, door_in in zone_in["doors"].items():
+                door = Door(parent=tz)
+                door.name = door_name
+                set_basic_data_teaser(door_in, door)
+                set_layer_data_teaser(door_in, door)
             for roof_name, roof_in in zone_in["rooftops"].items():
                 roof = Rooftop(parent=tz)
                 roof.name = roof_name
@@ -234,15 +242,18 @@ def load_teaser_json(path, project):
 
 
 def set_basic_data_teaser(wall_in, element):
-    """Helper function for load_teaser_xml to set the basic data
+    """Set basic data for a building element.
+
+    Helper function.
+
     Parameters
     ----------
     wall_in : collection.OrderedDict
         OrderedDict for walls
     element : TEASERClass
         teaser class representation of a building element
-    """
 
+    """
     element.area = wall_in["area"]
     element.tilt = wall_in["tilt"]
     element.orientation = wall_in["orientation"]
@@ -275,13 +286,17 @@ def set_basic_data_teaser(wall_in, element):
 
 
 def set_layer_data_teaser(wall_in, element):
-    """Helper function for load_teaser_xml to set the layer data
+    """Set layer data of a building element.
+
+    Helper function.
+
     Parameters
     ----------
     wall_in : collection.OrderedDict
         OrderedDict for walls
     element : TEASERClass
         teaser class representation of a building element
+
     """
     for lay_id, layer_in in wall_in["layer"].items():
         layer = Layer(element)

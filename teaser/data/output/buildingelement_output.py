@@ -7,7 +7,7 @@ import json
 
 
 def save_type_element(element, data_class):
-    """Typical element saver.
+    """Save information about building element to json.
 
     Saves typical building elements according to their construction
     year and their construction type in the XML file for type building
@@ -25,6 +25,7 @@ def save_type_element(element, data_class):
         DataClass containing the bindings for TypeBuildingElement and
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.
+
     """
     data_class.element_bind["version"] = "0.7"
     add_to_xml = True
@@ -62,7 +63,8 @@ def save_type_element(element, data_class):
 
 
 def delete_type_element(element, data_class):
-    """Deletes typical element.
+    """Delete typical element in json.
+
     Deletes typical building elements according to their construction
     year and their construction type in the the XML file for type building
     elements. If the Project parent is set, it automatically saves it to
@@ -77,6 +79,7 @@ def delete_type_element(element, data_class):
         DataClass containing the bindings for TypeBuildingElement and
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.
+
     """
     check_str = "{}_{}_{}".format(
         type(element).__name__,
@@ -93,14 +96,18 @@ def delete_type_element(element, data_class):
 
 
 def _set_basic_data_json(element, wall_out):
-    """Helper function for save_type_element to set the layer data.
+    """Set basic data of building element.
+
+    Helper function.
 
     Parameters
     ----------
-    wall_out:
-        Dictionaty
-    """
+    element : BuildingElement()
+        Instance of BuildingElement or inherited Element of TEASER
+    wall_out: dictionary
+        Dictionary with information about walls.
 
+    """
     wall_out["building_age_group"] = element.building_age_group
     wall_out["construction_type"] = element.construction_type
     wall_out["inner_radiation"] = element.inner_radiation
@@ -131,12 +138,17 @@ def _set_basic_data_json(element, wall_out):
 
 
 def _set_layer_data_json(element, wall_out):
-    """Helper function for save_type_element to set the layer data.
+    """Set layer data of building element.
+
+    Helper function.
 
     Parameters
     ----------
-    wall_out
-        Dictionaty
+    element : BuildingElement()
+        Instance of BuildingElement or inherited Element of TEASER
+    wall_out: dictionary
+        Dictionary with information about walls.
+
     """
     layer_dict = collections.OrderedDict()
     for layer in element.layer:

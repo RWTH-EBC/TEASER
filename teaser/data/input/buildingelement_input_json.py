@@ -1,7 +1,4 @@
-"""buildingelement_input.py
-
-This module contains function to load building element classes
-"""
+"""This module contains function to load building element classes."""
 
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
 from teaser.logic.buildingobjects.buildingphysics.material import Material
@@ -13,16 +10,14 @@ def load_type_element(
         year,
         construction,
         data_class):
-    """Typical element loader.
+    """Load BuildingElement from json.
 
-    Loads typical building elements according to their construction
-    year and their construction type from a JSON. The elements are created by
-    using building characteristics from
+    Loads typical building elements according to their construction year and
+    their construction type from a JSON. The elements are created by using
+    building characteristics from
     cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.26.07.2007` and
-    :cite:`KurzverfahrenIWU`, which is combined with normative material
-    data from :cite:`VereinDeutscherIngenieure.2012b`.
-
-    This function will only work if the parents to Building are set.
+    :cite:`KurzverfahrenIWU`, which is combined with normative material data
+    from :cite:`VereinDeutscherIngenieure.2012b`.
 
     Parameters
     ----------
@@ -33,13 +28,12 @@ def load_type_element(
         Year of construction
 
     construction : str
-        Construction type, code list ('heavy', 'light')
+        Construction type, code list ('heavy', 'light', tabula, ...)
 
     data_class : DataClass()
         DataClass containing the bindings for TypeBuildingElement and
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.
-
 
     """
     element_binding = data_class.element_bind
@@ -65,7 +59,9 @@ def load_type_element(
 
 
 def _set_basic_data(element, element_in):
-    """Helper function for load_type_element to set the layer data.
+    """Set basic data for building elements.
+
+    Helper function to set basic data to the BuildingElement class.
 
     Parameters
     ----------

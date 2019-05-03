@@ -2,9 +2,9 @@
 
 
 def load_material(material, mat_name, data_class):
-    """Material loader.
+    """Material loader with name as identification.
 
-    Loads Material specified in the XML. Sources are
+    Loads Material specified in the JSON. Sources are
     :cite:`DeutschesInstitutfurNormung.Juli2000`,
     DeutschesInstitutfurNormung.Februar2013, :cite:`Schramek.2009` and
     :cite:`VereinDeutscherIngenieure.2015c`.
@@ -40,9 +40,9 @@ def load_material(material, mat_name, data_class):
 
 
 def load_material_id(material, mat_id, data_class):
-    """Material loader by id.
+    """Material loader with id as identification.
 
-    Loads Material specified in the XML by given material_id.
+    Loads Material specified in the JSON by given material_id.
 
     Parameters
     ----------
@@ -50,7 +50,7 @@ def load_material_id(material, mat_id, data_class):
         instance of TEASERS Material class
 
     mat_id : name
-        id of material from XML
+        id of material from JSON
 
     data_class : DataClass()
         DataClass containing the bindings for TypeBuildingElement and
