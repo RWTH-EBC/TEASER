@@ -201,6 +201,7 @@ def save_teaser_json(path, project):
                 zone.use_conditions.lighting_profile
 
             zone_out["outer_walls"] = collections.OrderedDict()
+            zone_out["doors"] = collections.OrderedDict()
             zone_out["rooftops"] = collections.OrderedDict()
             zone_out["ground_floors"] = collections.OrderedDict()
             zone_out["windows"] = collections.OrderedDict()
