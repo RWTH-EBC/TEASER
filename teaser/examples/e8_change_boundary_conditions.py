@@ -111,4 +111,4 @@ if __name__ == '__main__':
 
     example_change_boundary_conditions()
 
-    print("Example 9: That's it! :)")
+    print("Example 8: That's it! :)")

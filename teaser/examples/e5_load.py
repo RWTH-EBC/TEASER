@@ -28,13 +28,13 @@ def example_save():
 
     load_xml = os.path.join(
         utilities.get_default_path(),
-        'ArchetypeExample.teaserXML')
+        'ArchetypeExample.json')
 
     prj.load_project(
         path=load_xml)
     prj = Project()
     prj.load_project(utilities.get_full_path(
-        "examples/examplefiles/new.teaserXML"))
+        "examples/examplefiles/new.json"))
     prj.save_project(file_name="new", path=None)
 
     # To reload data from a pickle file, we do not need to instantiate an
