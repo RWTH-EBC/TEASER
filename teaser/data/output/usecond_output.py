@@ -7,7 +7,23 @@ import teaser.logic.utilities as utilities
 
 
 def save_use_conditions(use_cond, data_class):
-    """Documentation is missing.
+    """Use conditions saver.
+
+    Saves use conditions according to their usage type in the the JSON file
+    for use conditions in InputData. If the Project parent is set, it
+    automatically saves it to the file given in Project.data. Alternatively
+    you can specify a path to a file of UseConditions. If this
+    file does not exist, a new file is created.
+    Parameters
+    ----------
+    bound_cond : UseCondtiions()
+        Instance of TEASERs
+        BuildingObjects.UseCondtiions
+    data_class : DataClass()
+        DataClass containing the bindings for TypeBuildingElement and
+        Material (typically this is the data class stored in prj.data,
+        but the user can individually change that.ile
+
     """
     if use_cond.usage in data_class.conditions_bind.keys():
         add_to_json = False

@@ -5,7 +5,7 @@ import collections
 
 
 def save_teaser_json(path, project):
-    """This function saves a project to a JSON file.
+    """Save a project to a JSON file.
 
     The function needs to be written.
 
@@ -15,6 +15,7 @@ def save_teaser_json(path, project):
         complete path to the output file
     project: Project()
         Teaser instance of Project()
+
     """
     if path.endswith("json"):
         path = path
@@ -283,7 +284,7 @@ def save_teaser_json(path, project):
 
 
 def set_basic_data(wall_out, element):
-    """Helper function for save_teaser_json to set the basic data
+    """Set basic data of building elements.
 
     Parameters
     ----------
@@ -292,7 +293,6 @@ def set_basic_data(wall_out, element):
 
     element : TEASERClass
         teaser class representation of a building element
-
 
     """
     if type(element).__name__ == 'OuterWall' or \
@@ -349,7 +349,7 @@ def set_basic_data(wall_out, element):
 
 
 def set_layer_data(wall_out, element):
-    """Helper function for save_teaser_xml to set the layer data
+    """Set layer data of building element.
 
     Parameters
     ----------
