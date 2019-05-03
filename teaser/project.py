@@ -70,7 +70,7 @@ class Project(object):
     buildings : list
         List of all buildings in one project, instances of Building()
     data : instance of DataClass
-        TEASER instance of DataClass containing XML binding classes
+        TEASER instance of DataClass containing JSON binding classes
     weather_file_path : str
         Absolute path to weather file used for Modelica simulation. Default
         weather file can be find in inputdata/weatherdata.
@@ -868,14 +868,14 @@ class Project(object):
         tjson_out.save_teaser_json(new_path, self)
 
     def load_project(self, path):
-        """Loads the project from a teaserXML file (new format)
+        """Load the project from a json file (new format).
 
-        calls the function load_teaser_xml in data.TeaserXML.py
+        Calls the function load_teaser_json.
 
         Parameters
         ----------
         path : string
-            full path to a teaserXML file
+            full path to a json file
 
         """
 

@@ -1,4 +1,4 @@
-"""This module includes AixLib calculation class"""
+"""This module includes AixLib calculation class."""
 
 import teaser.logic.utilities as utilities
 from itertools import cycle, islice
@@ -7,7 +7,7 @@ import pandas as pd
 
 
 class AixLib(object):
-    """AixLib Class
+    """Class to calculate parameters for AixLib output.
 
     This class holds functions to sort and partly rewrite zone and building
     attributes specific for AixLib MultizoneEquipped
@@ -16,7 +16,6 @@ class AixLib(object):
 
     Parameters
     ----------
-
     parent: Building()
         The parent class of this object, the Building the attributes are
         calculated for. (default: None)
@@ -24,7 +23,6 @@ class AixLib(object):
 
     Attributes
     ----------
-
     file_set_t : str
         Filename for set temperature file
     file_ahu : str
@@ -52,10 +50,11 @@ class AixLib(object):
         Standard is False. True if the set_point temperature profile heating
         should be used for the export. Then, the night set back and everything
         except the set point profile will be ignored.
+
     """
 
     def __init__(self, parent):
-
+        """Construct AixLib."""
         self.parent = parent
 
         self.file_set_t_heat = "TsetHeat_" + self.parent.name + ".txt"
@@ -70,12 +69,11 @@ class AixLib(object):
         self.use_set_back_cool = False
 
     def calc_auxiliary_attr(self):
-        """Calls function to calculate all auxiliary attributes for AixLib"""
-
+        """Call function to calculate all auxiliary attributes for AixLib."""
         self._calc_surface_area()
 
     def _calc_surface_area(self):
-        """Calculates the total surface area of all surfaces"""
+        """Calculate the total surface area of all surfaces."""
         surf_area_temp = 0.0
         for zone in self.parent.thermal_zones:
             if type(zone.model_attr).__name__ == "OneElement":
@@ -104,20 +102,17 @@ class AixLib(object):
         self.total_surface_area = surf_area_temp
 
     def modelica_set_temp(self, path=None):
-        """creates .mat file for set temperatures
+        """Create .txt file for set temperatures for heating.
 
-        This function creates a matfile (-v4) for set temperatures of each
+        This function creates a txt for set temperatures of each
         zone, that are all saved into one matrix.
-
-        1. Row: heat set temperature of all zones
-        2. Row: cool set temperature of all zones
 
         Parameters
         ----------
         path : str
             optional path, when matfile is exported separately
-        """
 
+        """
         if path is None:
             path = utilities.get_default_path()
         else:
@@ -150,19 +145,18 @@ class AixLib(object):
                 index_label=False)
 
     def modelica_set_temp_cool(self, path=None):
-        """creates .mat file for set temperatures
+        """Create .txt file for set temperatures cooling.
 
-        This function creates a matfile (-v4) for set temperatures for cooling
+        This function creates a txt for set temperatures for cooling
         of each zone, that are all saved into one matrix.
 
-        1. Row: cool set temperature of all zones
 
         Parameters
         ----------
         path : str
             optional path, when matfile is exported separately
-        """
 
+        """
         if path is None:
             path = utilities.get_default_path()
         else:
@@ -195,9 +189,9 @@ class AixLib(object):
                 index_label=False)
 
     def modelica_AHU_boundary(self, path=None):
-        """creates .mat file for AHU boundary conditions (building)
+        """Create .txt file for AHU boundary conditions (building).
 
-        This function creates a matfile (-v4) for building AHU boundary
+        This function creates a txt for building AHU boundary
         conditions
 
         1. Column : time step
@@ -262,7 +256,7 @@ class AixLib(object):
                 index_label=False)
 
     def modelica_gains_boundary(self, path=None):
-        """creates .mat file for internal gains boundary conditions
+        """Create .txt file for internal gains boundary conditions.
 
         This function creates a matfile (-v4) for building internal gains
         boundary conditions. It collects all internal gain profiles of the
@@ -285,6 +279,7 @@ class AixLib(object):
             list of time steps
         path : str
             optional path, when matfile is exported separately
+
         """
         if path is None:
             path = utilities.get_default_path()

@@ -1,8 +1,4 @@
-# Created December 2016
-# TEASER 4 Development Team
-
-"""This module includes IBPSA calculation class
-"""
+"""This module includes IBPSA calculation class."""
 
 import os
 import pandas as pd
@@ -10,7 +6,7 @@ import teaser.logic.utilities as utilities
 
 
 class IBPSA(object):
-    """IBPSA Class
+    """Class to calculate parameters for AixLib output.
 
     This class holds functions to sort and partly rewrite zone and building
     attributes specific for IBPSA simulation. This includes the export of
@@ -18,14 +14,12 @@ class IBPSA(object):
 
     Parameters
     ----------
-
     parent: Building()
         The parent class of this object, the Building the attributes are
         calculated for. (default: None)
 
     Attributes
     ----------
-
     file_internal_gains : str
         Filename for internal gains file
     version : dict
@@ -38,7 +32,7 @@ class IBPSA(object):
     """
 
     def __init__(self, parent):
-
+        """Construct IBPSA."""
         self.parent = parent
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
         self.version = {'AixLib': '0.7.4', 'Buildings': '5.1.0',
@@ -50,7 +44,7 @@ class IBPSA(object):
             zone,
             time_line=None,
             path=None):
-        """creates .mat file for internal gains boundary conditions
+        """Create .txt file for internal gains boundary conditions.
 
         This function creates a matfile (-v4) for building internal gains
         boundary conditions. It collects internal gain profiles of a specific
@@ -81,6 +75,7 @@ class IBPSA(object):
             list of time steps
         path : str
             optional path, when matfile is exported separately
+
         """
         if path is None:
             path = utilities.get_default_path()

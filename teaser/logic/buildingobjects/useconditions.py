@@ -1,4 +1,4 @@
-"""This module is a container for UseConditions"""
+"""This module contains UseConditions class."""
 import random
 import teaser.data.input.usecond_input as usecond_input
 import teaser.data.output.usecond_output as usecond_output
@@ -9,12 +9,133 @@ from itertools import cycle, islice
 class UseConditions(object):
     """UseConditions class contains all zone specific boundary conditions.
 
-    Documentation is missing and needs to be added!
+    Class that contains the boundary conditions of use for buildings defined in
+    DIN V 18599-10 ( :cite:`DeutschesInstitutfurNormung.2016`) and VDI 2078
+    (:cite:`VereinDeutscherIngenieure.2015c`). Profiles for internal gains (
+    persons, lighting, machines) are taken from SIA2024 (
+    :cite:`SwissSocietyofEngineersandArchitects.March2006`). In addition some
+    TEASER specific use conditions have been attached to this class. The
+    docstring also contains how the use conditions is used.
+
+    Note: Most attributes description are translations from DIN V 18599-10
+    standard
+    Attributes
+    ----------
+    usage: str
+        usage type
+        AixLib usage: String to distinguish usages of a zone
+    typical_length: float [m]
+        typical length of a room in a usage zone. This value is taken from
+        SIA 2024. Archetype usage: division of usage zones in rooms
+    typical width: float [m]
+        typical width of a usage zone. This value is taken from
+        SIA 2024. Archetype usage: division of usage zones in rooms
+    with_heating: boolean
+        Sets if the zone is heated or not.
+    heating_profile : list [K]
+        Heating setpoint for a day or similar. You can set a list of any
+        length, TEASER will multiplicate this list for one whole year.
+    cooling_profile : list [K]
+        Cooling setpoint for a day or similar. You can set a list of any
+        length, TEASER will multiplicate this list for one whole year.
+    with_cooling: boolean
+        Sets if the zone is cooloed or not.
+    persons: float [W/m2]
+        Average sensible heat transmission per m2 of people with specific
+        heat transmission of 70 W/person, taken from SIA 2024 and
+        DIN V 18599-10 for medium occupancy.
+        AixLib: Used in Zone record for internal gains as
+        internalGainsPeopleSpecific
+        Annex: Used for internal gains
+    ratio_conv_rad_persons: float
+        describes the ratio between convective and radiative heat transfer
+        of the persons. Default values are derived from
+        :cite:`VereinDeutscherIngenieure.2015c`.
+        AixLib: Used in Zone record for internal gains
+        Annex: Used for internal gains
+    persons_profile : list
+        Relative presence of persons 0-1 (e.g. 0.5 means that 50% of the total
+        number of persons are currently in the room). Given
+        for 24h. This value is taken from SIA 2024. You can set a list of any
+        length, TEASER will multiplicate this list for one whole year.
+        AixLib: Used for internal gains profile on top-level
+        Annex: Used for internal gains
+    machines: float [W/m2]
+        Specific eletrical load of machines per m2. This value is taken
+        from SIA 2024 and DIN V 18599-10 for medium occupancy.
+        AixLib: Used in Zone record for internal gains,
+        internalGainsMachinesSpecific
+        Annex: Used for internal gains
+    ratio_conv_rad_machines: float
+        describes the ratio between convective and radiative heat transfer
+        of the machines. Default values are derived from
+        :cite:`Davies.2004`.
+        AixLib: Used in Zone record for internal gains
+        Annex: Not used, all machines are convective (see Annex examples)
+    machines_profile: list
+        Relative presence of machines 0-1 (e.g. 0.5 means that 50% of the total
+        number of machines are currently used in the room). Given
+        for 24h. This value is taken from SIA 2024. You can set a list of any
+        length, TEASER will multiplicate this list for one whole year.
+        AixLib: Used for internal gains profile on top-level
+        Annex: Used for internal gains
+    lighting_power: float [W/m2]
+        spec. electr. Power for lighting. This value is taken from SIA 2024.
+        AixLib: Used in Zone record for internal gains
+        Annex: Not used (see Annex examples)
+    ratio_conv_rad_lighting : float
+        describes the ratio between convective and radiative heat transfer
+        of the lighting. Default values are derived from
+        :cite:`DiLaura.2011`.
+        AixLib: Used in Zone record for internal gains, lighting
+    lighting_profil : [float]
+        Relative presence of lighting 0-1 (e.g. 0.5 means that 50% of the total
+        lighting power are currently used). Typically given for 24h. This is
+        aligned to the user profile.
+        AixLib: Used for internal gains profile on top-level
+        Annex: Not used (see Annex examples)
+    min_ahu: float [m3/(m2*h)]
+        Zone specific minimum specific air flow supplied by the AHU
+        AixLib: Used on Multizone level for central AHU to determine total
+        volume flow of all zones.
+    max_ahu : float [m3/(m2*h)]
+        Zone specific maximum specific air flow supplied by the AHU
+        AixLib: Used on Multizone level for central AHU to determine total
+        volume flow of all zones.
+    with_ahu : boolean
+        Zone is connected to central air handling unit or not
+        AixLib: Used on Multizone level for central AHU.
+    use_constant_infiltration : boolean
+        choose if a constant infiltration rate should be used
+        AixLib: Used on Zone level for ventilation.
+    base_infiltration : float [1/h]
+        base value for the infiltration rate
+        AixLib: Used on Zone level for ventilation.
+    max_user_infiltration : float [1/h]
+        Additional infiltration rate for maximum persons activity
+        AixLib: Used on Zone level for ventilation.
+    max_overheating_infiltration : list [1/h]
+        Additional infiltration rate when overheating appears
+        AixLib: Used on Zone level for ventilation.
+    max_summer_infiltration : list
+        Additional infiltration rate in the summer with
+        [infiltration_rate [1/h], Tmin [K], Tmax [K]]. Default values are
+        aligned to :cite:`DINV1859910`.
+        AixLib: Used on Zone level for ventilation.
+    winter_reduction_infiltration : list
+        Reduction factor of userACH for cold weather with
+        [infiltration_rate [1/h], Tmin [K], Tmax [K]]
+        AixLib: Used on Zone level for ventilation.
+        Default values are
+        aligned to :cite:`DINV1859910`.
+    schedules: pandas.DataFrame
+        All time dependent boundary attributes in one pandas DataFrame, used
+        for export (one year in hourly timestep.)
+
     """
 
     def __init__(self, parent=None):
-        """Constructor for UseConditions
-        """
+        """Construct UseConditions."""
         self.internal_id = random.random()
 
         self.parent = parent
@@ -87,12 +208,13 @@ class UseConditions(object):
                 'machines_profile': list(
                     islice(cycle(self._machines_profile), 8760))})
 
-    def load_use_conditions(self,
-                            zone_usage,
-                            data_class=None):
-        """Load typical use conditions from XML data base
+    def load_use_conditions(
+            self,
+            zone_usage,
+            data_class=None):
+        """Load typical use conditions from JSON data base.
 
-        Loads Use conditions specified in the XML.
+        Loads Use conditions specified in the JSON.
 
         Parameters
         ----------
@@ -105,8 +227,8 @@ class UseConditions(object):
             but the user can individually change that. Default is None which
             leads to an automatic setter to self.parent.parent.parent.data (
             which is DataClass in current project)
-        """
 
+        """
         if data_class is None:
             data_class = self.parent.parent.parent.data
         else:
@@ -117,11 +239,10 @@ class UseConditions(object):
             zone_usage=zone_usage,
             data_class=data_class)
 
-    def save_use_conditions(self,
-                            data_class=None):
-        """Documentation is missing
-        """
-
+    def save_use_conditions(
+            self,
+            data_class=None):
+        """Documentation is missing."""
         if data_class is None:
             data_class = self.parent.parent.parent.data
         else:

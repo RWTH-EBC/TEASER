@@ -1,8 +1,4 @@
-# Created July 2015
-# TEASER 4 Development Team
-
-"""This module holds file paths and bindings for XML data
-"""
+"""This module holds file paths and bindings for XML data."""
 
 import warnings
 import xml.etree.ElementTree as et
@@ -133,8 +129,7 @@ class DataClass(object):
                     __xml_file_tb.read())
 
     def load_uc_binding(self):
-        """Loads UseConditions XML into binding classes
-        """
+        """Load UseConditions XML into binding classes."""
         if self.path_uc.endswith("json"):
             if os.path.isfile(self.path_uc):
                 try:
@@ -188,8 +183,7 @@ class DataClass(object):
                     __xml_file_uc.read())
 
     def load_mat_binding(self):
-        """Loads MaterialTemplates XML into binding classes
-        """
+        """Load MaterialTemplates XML into binding classes."""
         if self.path_mat.endswith("json"):
             if os.path.isfile(self.path_mat):
                 try:
@@ -215,19 +209,19 @@ class DataClass(object):
                 self.material_bind = mat_bind.MaterialTemplates()
             elif bool(version_parse.getroot().attrib) is False:
                 warnings.warn(
-                    "You are using an old version of material data base XML file")
+                    "You are using an old version of XML file")
                 import teaser.data.bindings.v_0_3_9.material_bind as mat_bind
                 self.material_bind = mat_bind.CreateFromDocument(
                     __xml_file_mat.read())
             elif version_parse.getroot().attrib['version'] == "0.3.9":
                 warnings.warn(
-                    "You are using an old version of material data base XML file")
+                    "You are using an old version of XML file")
                 import teaser.data.bindings.v_0_3_9.material_bind as mat_bind
                 self.material_bind = mat_bind.CreateFromDocument(
                     __xml_file_mat.read())
             elif version_parse.getroot().attrib['version'] == "0.4":
                 warnings.warn(
-                    "You are using an old version of material data base XML file")
+                    "You are using an old version of XML file")
                 import teaser.data.bindings.v_0_4.material_bind as mat_bind
                 self.material_bind = mat_bind.CreateFromDocument(
                     __xml_file_mat.read())
