@@ -401,6 +401,7 @@
                                 }
                             }
                         },
+                        "doors": {},
                         "rooftops": {
                             "Roof": {
                                 "year_of_construction": null,

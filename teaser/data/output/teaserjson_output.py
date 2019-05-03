@@ -217,6 +217,15 @@ def save_teaser_json(path, project):
                 set_layer_data(
                     zone_out["outer_walls"][out_wall.name],
                     out_wall)
+            for door in zone.doors:
+                zone_out[
+                    "doors"][door.name] = collections.OrderedDict()
+                set_basic_data(
+                    zone_out["doors"][door.name],
+                    door)
+                set_layer_data(
+                    zone_out["doors"][door.name],
+                    door)
             for roof in zone.rooftops:
                 zone_out[
                     "rooftops"][roof.name] = collections.OrderedDict()

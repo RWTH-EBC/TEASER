@@ -21,47 +21,39 @@ if v >= (2, 7):
 
 
 class DataClass(object):
-    """Class for XML data bindings
+    """Class for JSON data.
 
-    This class loads all XML files with statistic or template data needed
-    for statistical data enrichment. It creates the binding classes
-    automatically with instantiation. The binding needs the Python Package PyXB.
+    This class loads all JSON files with statistic or template data needed
+    for statistical data enrichment.
 
     Parameters
     ----------
-
     used_statistics : str
         This parameter indicates which statistical data about building
         elements should be used. Use 'iwu' or 'tabula_de'.
 
     Attributes
     ----------
-
-    element_bind : instance of PyXB TypeBuilding elements
-        PyXB instance of the TypeBuildingElements binding
+    element_bind : collections.OrderedDict
+        Ordered dictionary of the TypeBuildingElements binding.
     path_tb : str
-        Full path to TypeBuildingElements XML file (XML needs to be compliant
-        with XSD schema). Default is
-        teaser/data/input/inputdata/TypeBuildingElements.xml
-    material_bind : instance of PyXB Material
-        PyXB instance of the Material binding
+        Full path to TypeBuildingElements.json. Default is
+        teaser/data/input/inputdata/TypeBuildingElements.json.
+    material_bind : collections.OrderedDict
+        Ordered dictionary of the Material binding.
     path_mat : str
-        Full path to MaterialTemplates XML file (XML needs to be compliant
-        with XSD schema). Default is
-        teaser/data/input/inputdata/MaterialTemplates.xml
-    conditions_bind : instance of PyXB UseConditions
-        PyXB instance of the UseConditions binding
+        Full path to MaterialTemplates.json. Default is
+        teaser/data/input/inputdata/MaterialTemplates.json.
+    conditions_bind : collections.OrderedDict
+        Ordered dictionary of the UseConditions binding.
     path_uc : str
-        Full path to UseConditions XML file (XML needs to be compliant
-        with XSD schema). Default is
-        teaser/data/input/inputdata/UseConditions.xml
+        Full path to UseConditions.json. Default is
+        teaser/data/input/inputdata/UseConditions.json
+
     """
 
-    def __init__(
-            self,
-            used_statistic='iwu'):
-        """Constructor of DataClass
-        """
+    def __init__(self, used_statistic='iwu'):
+        """Construct DataClass."""
         self.used_statistic = used_statistic
         self.element_bind = None
         if self.used_statistic == 'iwu':
@@ -89,8 +81,7 @@ class DataClass(object):
         self.load_mat_binding()
 
     def load_tb_binding(self):
-        """Loads TypeBuildingElement XML into binding classes
-        """
+        """Load TypeBuildingElement XML into binding classes."""
         if self.path_tb.endswith("json"):
             if os.path.isfile(self.path_tb):
                 try:
@@ -120,22 +111,19 @@ class DataClass(object):
                 self.element_bind = tb_bind.TypeBuildingElements()
             elif bool(version_parse.getroot().attrib) is False:
                 warnings.warn(
-                    "You are using an old version of type building element data "
-                    "base XML file")
+                    "You are using an old version of XML file")
                 import teaser.data.bindings.v_0_3_9.typeelement_bind as tb_bind
                 self.element_bind = tb_bind.CreateFromDocument(
                     __xml_file_tb.read())
             elif version_parse.getroot().attrib['version'] == "0.3.9":
                 warnings.warn(
-                    "You are using an old version of type building element data "
-                    "base XML file")
+                    "You are using an old version of XML file")
                 import teaser.data.bindings.v_0_3_9.typeelement_bind as tb_bind
                 self.element_bind = tb_bind.CreateFromDocument(
                     __xml_file_tb.read())
             elif version_parse.getroot().attrib['version'] == "0.4":
                 warnings.warn(
-                    "You are using an old version of type building element data "
-                    "base XML file")
+                    "You are using an old version of XML file")
                 import teaser.data.bindings.v_0_4.typeelement_bind as tb_bind
                 self.element_bind = tb_bind.CreateFromDocument(
                     __xml_file_tb.read())
@@ -174,24 +162,21 @@ class DataClass(object):
                 self.conditions_bind = uc_bind.UseConditions()
             elif bool(version_parse.getroot().attrib) is False:
                 warnings.warn(
-                    "You are using an old version of use condition data "
-                    "base XML file")
+                    "You are using an old version of XML file")
                 import teaser.data.bindings.v_0_3_9.boundaryconditions_bind \
                     as uc_bind
                 self.conditions_bind = uc_bind.CreateFromDocument(
                     __xml_file_uc.read())
             elif version_parse.getroot().attrib['version'] == "0.3.9":
                 warnings.warn(
-                    "You are using an old version of use condition data "
-                    "base XML file")
+                    "You are using an old version of XML file")
                 import teaser.data.bindings.v_0_3_9.boundaryconditions_bind \
                     as uc_bind
                 self.conditions_bind = uc_bind.CreateFromDocument(
                     __xml_file_uc.read())
             elif version_parse.getroot().attrib['version'] == "0.4":
                 warnings.warn(
-                    "You are using an old version of use condition data "
-                    "base XML file")
+                    "You are using an old version of XML file")
                 import teaser.data.bindings.v_0_4.boundaryconditions_bind \
                     as uc_bind
                 self.conditions_bind = uc_bind.CreateFromDocument(

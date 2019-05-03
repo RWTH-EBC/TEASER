@@ -412,6 +412,7 @@
                                 }
                             }
                         },
+                        "doors": {},
                         "rooftops": {
                             "Rooftop": {
                                 "name": "Rooftop",
@@ -1145,6 +1146,7 @@
                                 }
                             }
                         },
+                        "doors": {},
                         "rooftops": {
                             "Rooftop": {
                                 "name": "Rooftop",
@@ -1878,6 +1880,7 @@
                                 }
                             }
                         },
+                        "doors": {},
                         "rooftops": {
                             "Rooftop": {
                                 "name": "Rooftop",
@@ -2611,6 +2614,7 @@
                                 }
                             }
                         },
+                        "doors": {},
                         "rooftops": {
                             "Rooftop": {
                                 "name": "Rooftop",
@@ -3344,6 +3348,7 @@
                                 }
                             }
                         },
+                        "doors": {},
                         "rooftops": {
                             "Rooftop": {
                                 "name": "Rooftop",
@@ -4077,6 +4082,7 @@
                                 }
                             }
                         },
+                        "doors": {},
                         "rooftops": {
                             "Rooftop": {
                                 "name": "Rooftop",

@@ -256,6 +256,7 @@
                                 }
                             }
                         },
+                        "doors": {},
                         "rooftops": {
                             "BuildinElement195105": {
                                 "year_of_construction": 1960,

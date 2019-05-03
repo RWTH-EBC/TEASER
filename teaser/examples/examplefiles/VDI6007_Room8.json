@@ -304,6 +304,7 @@
                                 }
                             }
                         },
+                        "doors": {},
                         "rooftops": {},
                         "ground_floors": {},
                         "windows": {

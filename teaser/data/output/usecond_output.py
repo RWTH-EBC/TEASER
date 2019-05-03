@@ -14,6 +14,7 @@ def save_use_conditions(use_cond, data_class):
     automatically saves it to the file given in Project.data. Alternatively
     you can specify a path to a file of UseConditions. If this
     file does not exist, a new file is created.
+
     Parameters
     ----------
     bound_cond : UseCondtiions()
