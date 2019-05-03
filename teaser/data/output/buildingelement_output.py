@@ -50,9 +50,40 @@ def save_type_element(element, data_class):
             element=element,
             wall_out=data_class.element_bind[check_str])
 
-        _set_layer_data_pyxb(
+        _set_layer_data_json(
             element=element,
             wall_out=data_class.element_bind[check_str])
+
+    with open(utilities.get_full_path(data_class.path_tb), 'w') as file:
+        file.write(json.dumps(
+            data_class.element_bind,
+            indent=4,
+            separators=(',', ': ')))
+
+
+def delete_type_element(element, data_class):
+    """Deletes typical element.
+    Deletes typical building elements according to their construction
+    year and their construction type in the the XML file for type building
+    elements. If the Project parent is set, it automatically saves it to
+    the file given in Project.data. Alternatively you can specify a path to
+    a file of TypeBuildingElements. If this file does not exist,
+    a new file is created.
+    Parameters
+    ----------
+    element : BuildingElement()
+        Instance of BuildingElement or inherited Element of TEASER
+    data_class : DataClass()
+        DataClass containing the bindings for TypeBuildingElement and
+        Material (typically this is the data class stored in prj.data,
+        but the user can individually change that.
+    """
+    check_str = "{}_{}_{}".format(
+        type(element).__name__,
+        element.building_age_group,
+        element.construction_type)
+
+    del data_class.element_bind[check_str]
 
     with open(utilities.get_full_path(data_class.path_tb), 'w') as file:
         file.write(json.dumps(
@@ -99,7 +130,7 @@ def _set_basic_data_json(element, wall_out):
         wall_out["outer_convection"] = element.outer_convection
 
 
-def _set_layer_data_pyxb(element, wall_out):
+def _set_layer_data_json(element, wall_out):
     """Helper function for save_type_element to set the layer data.
 
     Parameters

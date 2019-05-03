@@ -20,19 +20,6 @@ class Test_useconditions(object):
         use_cond.load_use_conditions("Living",
                                      data_class=prj.data)
 
-    def test_load_use_conditions_old(self):
-        """Test of old load_boundary_conditions, no parameter checking."""
-        use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
-        import teaser.logic.utilities as utils
-        prj.data.path_uc = utils.get_full_path(
-            "data/input/inputdata/UseConditions.xml")
-        prj.data.load_uc_binding()
-        import teaser.data.input.boundcond_input as bc_in
-        bc_in.load_boundary_conditions(
-            bound_cond=use_cond,
-            zone_usage="Living",
-            data_class=prj.data)
-
     def test_save_use_conditions(self):
         """Test of save_use_conditions, no parameter checking."""
         try:

@@ -1,4 +1,5 @@
 from teaser.data.dataclass import DataClass
+import teaser.data.input.buildingelement_input as be_input
 from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.door import Door
 from teaser.logic.buildingobjects.buildingphysics.window import Window
@@ -20,13 +21,14 @@ data_class_old.load_tb_binding()
 data_class_old.load_mat_binding()
 
 # os.remove(utils.get_full_path(
-#     "data/input/inputdata/TypeBuildingElements.json"))
+#     "data/input/inputdata/TypeElements_TABULA_DE.json"))
 
 data_class_new = DataClass(used_statistic='tabula_de')
 
 for out_wall in data_class_old.element_bind.OuterWall:
     wall = OuterWall()
-    wall.load_type_element(
+    be_input.load_type_element(
+        element=wall,
         year=out_wall.building_age_group[0] + 1,
         construction=out_wall.construction_type,
         data_class=data_class_old)
@@ -34,7 +36,8 @@ for out_wall in data_class_old.element_bind.OuterWall:
         data_class=data_class_new)
 for out_wall in data_class_old.element_bind.Door:
     wall = Door()
-    wall.load_type_element(
+    be_input.load_type_element(
+        element=wall,
         year=out_wall.building_age_group[0] + 1,
         construction=out_wall.construction_type,
         data_class=data_class_old)
@@ -42,7 +45,8 @@ for out_wall in data_class_old.element_bind.Door:
         data_class=data_class_new)
 for out_wall in data_class_old.element_bind.Window:
     wall = Window()
-    wall.load_type_element(
+    be_input.load_type_element(
+        element=wall,
         year=out_wall.building_age_group[0] + 1,
         construction=out_wall.construction_type,
         data_class=data_class_old)
@@ -50,7 +54,8 @@ for out_wall in data_class_old.element_bind.Window:
         data_class=data_class_new)
 for out_wall in data_class_old.element_bind.Rooftop:
     wall = Rooftop()
-    wall.load_type_element(
+    be_input.load_type_element(
+        element=wall,
         year=out_wall.building_age_group[0] + 1,
         construction=out_wall.construction_type,
         data_class=data_class_old)
@@ -58,7 +63,8 @@ for out_wall in data_class_old.element_bind.Rooftop:
         data_class=data_class_new)
 for out_wall in data_class_old.element_bind.GroundFloor:
     wall = GroundFloor()
-    wall.load_type_element(
+    be_input.load_type_element(
+        element=wall,
         year=out_wall.building_age_group[0] + 1,
         construction=out_wall.construction_type,
         data_class=data_class_old)
@@ -66,7 +72,8 @@ for out_wall in data_class_old.element_bind.GroundFloor:
         data_class=data_class_new)
 for out_wall in data_class_old.element_bind.InnerWall:
     wall = InnerWall()
-    wall.load_type_element(
+    be_input.load_type_element(
+        element=wall,
         year=out_wall.building_age_group[0] + 1,
         construction=out_wall.construction_type,
         data_class=data_class_old)
@@ -74,7 +81,8 @@ for out_wall in data_class_old.element_bind.InnerWall:
         data_class=data_class_new)
 for out_wall in data_class_old.element_bind.Ceiling:
     wall = Ceiling()
-    wall.load_type_element(
+    be_input.load_type_element(
+        element=wall,
         year=out_wall.building_age_group[0] + 1,
         construction=out_wall.construction_type,
         data_class=data_class_old)
@@ -82,7 +90,8 @@ for out_wall in data_class_old.element_bind.Ceiling:
         data_class=data_class_new)
 for out_wall in data_class_old.element_bind.Floor:
     wall = Floor()
-    wall.load_type_element(
+    be_input.load_type_element(
+        element=wall,
         year=out_wall.building_age_group[0] + 1,
         construction=out_wall.construction_type,
         data_class=data_class_old)

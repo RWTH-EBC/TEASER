@@ -2132,8 +2132,8 @@ class Test_teaser(object):
         import os
         # test load function
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        path = os.path.join(utilities.get_default_path(),
-                            'unitTestTB.xml')
+        path = os.path.join(
+            utilities.get_default_path(), 'unitTestTB.json')
         prj.data.path_tb = path
         prj.data.load_tb_binding()
         therm_zone.outer_walls[0].save_type_element(data_class=prj.data)
@@ -2145,8 +2145,8 @@ class Test_teaser(object):
         import os
         # test load function
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        path = os.path.join(utilities.get_default_path(),
-                            'unitTestTB.xml')
+        path = os.path.join(
+            utilities.get_default_path(), 'unitTestTB.json')
         prj.data.path_tb = path
         prj.data.load_tb_binding()
         therm_zone.outer_walls[0].delete_type_element(data_class=prj.data)
@@ -2228,11 +2228,12 @@ class Test_teaser(object):
             Material
 
         path = os.path.join(utilities.get_default_path(),
-                            'MatUT.xml')
+                            'MatUT.json')
 
         mat = Material(parent=None)
-        mat.load_material_template(mat_name='Tiledroof',
-                                   data_class=prj.data)
+        mat.load_material_template(
+            mat_name='Tiledroof',
+            data_class=prj.data)
 
         from teaser.data.dataclass import DataClass
 

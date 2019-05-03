@@ -11055,7 +11055,7 @@
                     "material_id": "2b23145c-3a43-11e7-ad60-2cd444b2e704"
                 }
             },
-            "3": {
+            "1": {
                 "thickness": 0.04,
                 "material": {
                     "name": "air_layer",
@@ -12173,6 +12173,13 @@
                 }
             },
             "2": {
+                "thickness": 0.14,
+                "material": {
+                    "name": "glass_fibre_batt_70",
+                    "material_id": "27a720e4-3a43-11e7-8394-2cd444b2e704"
+                }
+            },
+            "3": {
                 "thickness": 0.02,
                 "material": {
                     "name": "solid_brick_extruded",
@@ -12260,32 +12267,39 @@
         "outer_radiation": 5.0,
         "outer_convection": 20.0,
         "layer": {
-            "1": {
+            "0": {
                 "thickness": 0.02,
                 "material": {
                     "name": "hardwood",
                     "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
                 }
             },
-            "2": {
-                "thickness": 0.01,
+            "1": {
+                "thickness": 0.11,
                 "material": {
-                    "name": "bituminized_felt_2",
-                    "material_id": "24ce8040-3a43-11e7-9beb-2cd444b2e704"
+                    "name": "wood_clay",
+                    "material_id": "2b6edec8-3a43-11e7-9a49-2cd444b2e704"
                 }
             },
-            "3": {
+            "2": {
                 "thickness": 0.04,
                 "material": {
                     "name": "air_layer",
                     "material_id": "b362502c-3f99-11e7-b117-2cd444b2e704"
                 }
             },
-            "4": {
+            "3": {
                 "thickness": 0.02,
                 "material": {
                     "name": "vapourpermeable_wood_fibreboard",
                     "material_id": "258fb6be-3a43-11e7-81b6-2cd444b2e704"
+                }
+            },
+            "4": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "bituminized_felt_2",
+                    "material_id": "24ce8040-3a43-11e7-9beb-2cd444b2e704"
                 }
             }
         }
@@ -12301,42 +12315,42 @@
         "outer_radiation": 5.0,
         "outer_convection": 20.0,
         "layer": {
-            "1": {
+            "0": {
                 "thickness": 0.02,
                 "material": {
                     "name": "vapourpermeable_wood_fibreboard",
                     "material_id": "258fb6be-3a43-11e7-81b6-2cd444b2e704"
                 }
             },
-            "2": {
+            "1": {
                 "thickness": 0.02,
                 "material": {
                     "name": "hardwood",
                     "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
                 }
             },
-            "3": {
+            "2": {
                 "thickness": 0.14,
                 "material": {
                     "name": "wood_clay",
                     "material_id": "2b6edec8-3a43-11e7-9a49-2cd444b2e704"
                 }
             },
-            "4": {
+            "3": {
                 "thickness": 0.04,
                 "material": {
                     "name": "air_layer",
                     "material_id": "b362502c-3f99-11e7-b117-2cd444b2e704"
                 }
             },
-            "5": {
+            "4": {
                 "thickness": 0.02,
                 "material": {
                     "name": "vapourpermeable_wood_fibreboard",
                     "material_id": "258fb6be-3a43-11e7-81b6-2cd444b2e704"
                 }
             },
-            "6": {
+            "5": {
                 "thickness": 0.01,
                 "material": {
                     "name": "bituminized_felt_2",
@@ -12356,42 +12370,42 @@
         "outer_radiation": 5.0,
         "outer_convection": 20.0,
         "layer": {
-            "1": {
+            "0": {
                 "thickness": 0.02,
                 "material": {
                     "name": "vapourpermeable_wood_fibreboard",
                     "material_id": "258fb6be-3a43-11e7-81b6-2cd444b2e704"
                 }
             },
-            "2": {
+            "1": {
                 "thickness": 0.02,
                 "material": {
                     "name": "hardwood",
                     "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
                 }
             },
-            "3": {
+            "2": {
                 "thickness": 0.14,
                 "material": {
                     "name": "wood_clay",
                     "material_id": "2b6edec8-3a43-11e7-9a49-2cd444b2e704"
                 }
             },
-            "4": {
+            "3": {
                 "thickness": 0.04,
                 "material": {
                     "name": "air_layer",
                     "material_id": "b362502c-3f99-11e7-b117-2cd444b2e704"
                 }
             },
-            "5": {
+            "4": {
                 "thickness": 0.02,
                 "material": {
                     "name": "vapourpermeable_wood_fibreboard",
                     "material_id": "258fb6be-3a43-11e7-81b6-2cd444b2e704"
                 }
             },
-            "6": {
+            "5": {
                 "thickness": 0.01,
                 "material": {
                     "name": "bituminized_felt_2",
@@ -12425,7 +12439,7 @@
                     "material_id": "25eb5d36-3a43-11e7-a085-2cd444b2e704"
                 }
             },
-            "3": {
+            "2": {
                 "thickness": 0.01,
                 "material": {
                     "name": "bituminized_felt_2",
@@ -12630,6 +12644,13 @@
                 }
             },
             "2": {
+                "thickness": 0.05,
+                "material": {
+                    "name": "glass_fibre_batt_70",
+                    "material_id": "27a720e4-3a43-11e7-8394-2cd444b2e704"
+                }
+            },
+            "3": {
                 "thickness": 0.02,
                 "material": {
                     "name": "solid_brick_extruded",
@@ -13478,6 +13499,13 @@
                 }
             },
             "2": {
+                "thickness": 0.14,
+                "material": {
+                    "name": "glass_fibre_batt_70",
+                    "material_id": "27a720e4-3a43-11e7-8394-2cd444b2e704"
+                }
+            },
+            "3": {
                 "thickness": 0.02,
                 "material": {
                     "name": "solid_brick_extruded",
@@ -15450,13 +15478,20 @@
                 }
             },
             "1": {
-                "thickness": 0.12,
+                "thickness": 0.05,
                 "material": {
                     "name": "EPS_perimeter_insulation_top_layer",
                     "material_id": "25eb5d36-3a43-11e7-a085-2cd444b2e704"
                 }
             },
             "2": {
+                "thickness": 0.12,
+                "material": {
+                    "name": "EPS_perimeter_insulation_top_layer",
+                    "material_id": "25eb5d36-3a43-11e7-a085-2cd444b2e704"
+                }
+            },
+            "3": {
                 "thickness": 0.01,
                 "material": {
                     "name": "bituminized_felt_2",

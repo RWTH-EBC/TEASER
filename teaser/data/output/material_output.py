@@ -32,7 +32,7 @@ def save_material(material, data_class):
                     "properties")
 
     for id, check in data_class.material_bind.items():
-        if id is not "version":
+        if id != "version":
             if check["name"] == material.name:
 
                 warnings.warn(warning_text)

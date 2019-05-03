@@ -1,10 +1,4 @@
-# created June 2015
-# by TEASER4 Development Team
-
-"""BuildingElement
-
-This module contains the Base class for all building elements.
-"""
+"""This module contains the Base class for all building elements."""
 
 from __future__ import division
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
