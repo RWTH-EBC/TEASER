@@ -8,7 +8,7 @@ This module contains the Base class for all building elements.
 
 from __future__ import division
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
-import teaser.data.input.buildingelement_input as buildingelement_input
+import teaser.data.input.buildingelement_input_json as buildingelement_input
 import numpy as np
 import random
 import re

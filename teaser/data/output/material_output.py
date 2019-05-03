@@ -34,12 +34,7 @@ def save_material(material, data_class):
     for id, check in data_class.material_bind.items():
         if id is not "version":
             if check["name"] == material.name:
-                # and \
-                #         check["density"] == material.density and \
-                #         check["thermal_conduc"] == material.thermal_conduc and \
-                #         check["heat_capac"] == material.heat_capac and \
-                #         check["thickness_default"] == material.thickness_default and \
-                #         check["thickness_list"] == material.thickness_list:
+
                 warnings.warn(warning_text)
                 print(material.name)
                 add_to_xml = False

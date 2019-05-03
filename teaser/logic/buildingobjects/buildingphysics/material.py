@@ -4,7 +4,7 @@
 
 import re
 import uuid
-import teaser.data.input.material_input as material_input
+import teaser.data.input.material_input_json as material_input
 import teaser.data.output.material_output as material_output
 
 

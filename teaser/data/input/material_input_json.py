@@ -1,10 +1,4 @@
-# Created April 2016
-# TEASER 4 Development Team
-
-"""material_input.py
-
-This module contains function to load material classes
-"""
+"""This module contains function to load material classes."""
 
 
 def load_material(material, mat_name, data_class):
@@ -17,7 +11,6 @@ def load_material(material, mat_name, data_class):
 
     Parameters
     ----------
-
     material : Material()
         instance of TEASERS Material class
 
@@ -28,27 +21,22 @@ def load_material(material, mat_name, data_class):
         DataClass containing the bindings for TypeBuildingElement and
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.
-    """
 
+    """
     binding = data_class.material_bind
 
-    for mat in binding.Material:
+    for id, mat in binding.items():
+        if id != "version":
+            if mat["name"] == mat_name:
 
-        if mat.name == mat_name:
-
-            material.material_id = mat.material_id
-            material.name = mat.name
-            material.density = mat.density
-            material.thermal_conduc = float(mat.thermal_conduc)
-            material.heat_capac = mat.heat_capac
-            material.solar_absorp = mat.solar_absorp
-            material.ir_emissivity = mat.ir_emissivity
-            if float(data_class.material_bind.version) >= 0.6:
-                try:
-                    material.thickness_default = mat.thickness_default
-                    material.thickness_list = mat.thickness_list
-                except AttributeError:
-                    pass
+                material.material_id = id
+                material.name = mat["name"]
+                material.density = mat["density"]
+                material.thermal_conduc = mat["thermal_conduc"]
+                material.heat_capac = mat["heat_capac"]
+                material.solar_absorp = mat["solar_absorp"]
+                material.thickness_default = mat["thickness_default"]
+                material.thickness_list = mat["thickness_list"]
 
 
 def load_material_id(material, mat_id, data_class):
@@ -58,7 +46,6 @@ def load_material_id(material, mat_id, data_class):
 
     Parameters
     ----------
-
     material : Material()
         instance of TEASERS Material class
 
@@ -69,24 +56,19 @@ def load_material_id(material, mat_id, data_class):
         DataClass containing the bindings for TypeBuildingElement and
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.
-    """
 
+    """
     binding = data_class.material_bind
 
-    for mat in binding.Material:
+    for id, mat in binding.items():
+        if id != "version":
+            if id == mat_id:
 
-        if mat.material_id == mat_id:
-
-            material.material_id = mat.material_id
-            material.name = mat.name
-            material.density = mat.density
-            material.thermal_conduc = float(mat.thermal_conduc)
-            material.heat_capac = mat.heat_capac
-            material.solar_absorp = mat.solar_absorp
-            material.ir_emissivity = mat.ir_emissivity
-            if float(data_class.material_bind.version) >= 0.6:
-                try:
-                    material.thickness_default = mat.thickness_default
-                    material.thickness_list = mat.thickness_list
-                except AttributeError:
-                    pass
+                material.material_id = id
+                material.name = mat["name"]
+                material.density = mat["density"]
+                material.thermal_conduc = mat["thermal_conduc"]
+                material.heat_capac = mat["heat_capac"]
+                material.solar_absorp = mat["solar_absorp"]
+                material.thickness_default = mat["thickness_default"]
+                material.thickness_list = mat["thickness_list"]
