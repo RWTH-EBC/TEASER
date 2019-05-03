@@ -95,7 +95,8 @@ class DataClass(object):
             if os.path.isfile(self.path_tb):
                 try:
                     with open(self.path_tb, 'r+') as f:
-                        self.element_bind = json.load(f)
+                        self.element_bind = json.load(
+                            f, object_pairs_hook=collections.OrderedDict)
                 except json.decoder.JSONDecodeError:
                     print("Your TypeElements file seems to be broken.")
             else:
@@ -150,7 +151,8 @@ class DataClass(object):
             if os.path.isfile(self.path_uc):
                 try:
                     with open(self.path_uc, 'r+') as f:
-                        self.conditions_bind = json.load(f)
+                        self.conditions_bind = json.load(
+                            f, object_pairs_hook=collections.OrderedDict)
                 except json.decoder.JSONDecodeError:
                     print("Your UseConditions.json file seems to be broken.")
             else:
@@ -207,7 +209,8 @@ class DataClass(object):
             if os.path.isfile(self.path_mat):
                 try:
                     with open(self.path_mat, 'r+') as f:
-                        self.material_bind = json.load(f)
+                        self.material_bind = json.load(
+                            f, object_pairs_hook=collections.OrderedDict)
                 except json.decoder.JSONDecodeError:
                     print("Your Materials file seems to be broken.")
             else:

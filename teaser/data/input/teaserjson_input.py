@@ -4,8 +4,7 @@ This module contains function to load Projects in the proprietary
 TEASER file format .tXML
 """
 
-import xml.etree.ElementTree as element_tree
-import warnings
+
 from teaser.logic.buildingobjects.building import Building
 from teaser.logic.archetypebuildings.bmvbs.office import Office
 from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import \
@@ -29,6 +28,7 @@ from teaser.logic.buildingobjects.buildingphysics.floor import Floor
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.buildingphysics.door import Door
 import json
+import collections
 
 
 def load_teaser_json(path, project):
@@ -79,7 +79,8 @@ def load_teaser_json(path, project):
         #     "usage": "apartment_block"},
     }
     with open(path, 'r+') as f:
-        prj_in = json.load(f)
+        prj_in = json.load(
+            f, object_pairs_hook=collections.OrderedDict)
 
     project.name = prj_in["project"]["name"]
     project.weather_file_path = prj_in["project"]["weather_file_path"]

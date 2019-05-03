@@ -29,6 +29,7 @@ if __name__ == "__main__":
     """
     parameters inner wall Typraum S
     """
+
     print("Parameters for inner wall")
     print("r1_iw:", prj.buildings[0].thermal_zones[0].model_attr.r1_iw,
           "K/W ---", "Rouvel: 0.000595515 K/W")
