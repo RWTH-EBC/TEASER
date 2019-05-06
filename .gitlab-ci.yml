@@ -24,7 +24,7 @@ test3.4:
     - pip install pytest
     - pip install PyGithub==1.39
     - pip install flake8==3.4.1
-    - pip install -e .
+    - pip install --no-use-pep517 -e .
     - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests,.eggs --max-line-length=120
     - py.test --ignore=tests/test_modelicaversion.py
 
