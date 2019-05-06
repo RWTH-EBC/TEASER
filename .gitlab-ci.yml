@@ -19,7 +19,7 @@ test3.4:
   script:
 
     - pip install --upgrade pip setuptools wheel
-    - pip install --only-binary=numpy,scipy numpy scipy
+    - pip install --only-binary=numpy,scipy,cython numpy scipy cython
     - pip install pyxb
     - pip install pytest
     - pip install PyGithub==1.39
