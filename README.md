@@ -71,8 +71,9 @@ still a pre-release.
 
 ### Dependencies
 
-TEASER is tested against Python versions 2.7, 3.4, 3.5 and 3.6. Further
-using a Python distribution is recommended as they already contain (or easily
+TEASER is currently tested against Python 3.6. Older versions of Python may 
+still work, but are no longer actively supported.
+Using a Python distribution is recommended as they already contain (or easily
 support installation of) many Python packages (e.g. SciPy, NumPy, pip, PyQT,
 etc.) that are used in the TEASER code. Two examples of those distributions are:
 

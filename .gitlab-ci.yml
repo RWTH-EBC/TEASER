@@ -1,49 +1,4 @@
-test2.7:
-  image: python:2.7
-  stage: test
-  script:
-
-    - pip install --upgrade pip setuptools wheel
-    - pip install --only-binary=numpy,scipy numpy scipy
-    - pip install pyxb
-    - pip install pytest
-    - pip install PyGithub==1.39
-    - pip install flake8==3.4.1
-    - pip install -e .
-    - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests,.eggs --max-line-length=120
-    - py.test --ignore=tests/test_modelicaversion.py
-
-test3.4:
-  image: python:3.4
-  stage: test
-  script:
-
-    - pip install --upgrade pip setuptools wheel
-    - pip install --only-binary=numpy,scipy,cython numpy scipy cython
-    - pip install pyxb
-    - pip install pytest
-    - pip install PyGithub==1.39
-    - pip install flake8==3.4.1
-    - pip install --no-use-pep517 -e .
-    - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests,.eggs --max-line-length=120
-    - py.test --ignore=tests/test_modelicaversion.py
-
-test3.5:
-  image: python:3.5
-  stage: test
-  script:
-
-    - pip install --upgrade pip setuptools wheel
-    - pip install --only-binary=numpy,scipy numpy scipy
-    - pip install pyxb
-    - pip install pytest
-    - pip install PyGithub==1.39
-    - pip install flake8==3.4.1
-    - pip install -e .
-    - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests,.eggs --max-line-length=120
-    - py.test --ignore=tests/test_modelicaversion.py
-
-test3.6:
+test3.6-subset:
   image: python:3.6
   stage: test
   script:
@@ -58,23 +13,7 @@ test3.6:
     - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests,.eggs --max-line-length=120
     - py.test --ignore=tests/test_modelicaversion.py
 
-test3.7:
-  image: python:3.7
-  stage: test
-  script:
-
-    - pip install --upgrade pip setuptools wheel
-    - pip install --only-binary=numpy,scipy numpy scipy
-    - pip install pyxb
-    - pip install pytest
-    - pip install PyGithub==1.39
-    - pip install flake8==3.4.1
-    - pip install -e .
-    - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests,.eggs --max-line-length=120
-    - py.test --ignore=tests/test_modelicaversion.py
-
-
-test3.6:
+test3.6-full:
   image: python:3.6
   stage: test
   only:
@@ -90,3 +29,18 @@ test3.6:
     - pip install -e .
     - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests,.eggs --max-line-length=120
     - py.test
+
+test3.7:
+  image: python:3.7
+  stage: test
+  script:
+
+    - pip install --upgrade pip setuptools wheel
+    - pip install --only-binary=numpy,scipy numpy scipy
+    - pip install pyxb
+    - pip install pytest
+    - pip install PyGithub==1.39
+    - pip install flake8==3.4.1
+    - pip install -e .
+    - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests,.eggs --max-line-length=120
+    - py.test --ignore=tests/test_modelicaversion.py
