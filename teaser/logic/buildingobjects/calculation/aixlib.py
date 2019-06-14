@@ -382,7 +382,7 @@ class AixLib(object):
 
         if time_line is None:
             time_line = self.create_profile(
-                duration_profile=len(profile_temperature)*3600)
+                duration_profile=len(profile_temperature) * 3600)
         ass_error_1 = "time line and input have to have the same length"
         assert len(time_line) == len(profile_temperature), \
             (ass_error_1 + ",profile_temperature_AHU")
