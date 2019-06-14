@@ -249,6 +249,13 @@ class BoundaryConditions(UseConditions):
         volume flow of the air curtain
     delta_t_air_curtain : float [K]
         temperature difference over the air curtain
+    ideal_heater_cooler_threshold_controller: boolean
+        true if the threshold based controller for ideal heater and cooler
+        should be used
+    t_threshold_ideal_cooler: float [K]
+        threshold temperature above cooling will be used
+    t_threshold_ideal_heater: float [K]
+        threshold temperature below heating will be used
     eta_air_curtain : float
         efficiency of the air curtain
     t_threshold_air_curtain : float [K]
@@ -333,6 +340,9 @@ class BoundaryConditions(UseConditions):
         self.shading_g_total = 1.0
 
         self.v_flow_air_curtain = 0.0
+        self.t_threshold_ideal_cooler = 273.15 + 24
+        self.t_threshold_ideal_heater = 273.15 + 15
+        self.ideal_heater_cooler_threshold_controller = True
         self.delta_t_air_curtain = 0.0
         self.eta_air_curtain = 0.0
         self.t_threshold_air_curtain = 0.0
