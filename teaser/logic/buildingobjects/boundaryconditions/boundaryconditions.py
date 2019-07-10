@@ -140,17 +140,36 @@ class BoundaryConditions(UseConditions):
 
     INTERNAL GAINS
 
-    persons : float [W/m2]
-        Average sensible heat transmission per m2 of people with specific
-        heat transmission of 70 W/person, taken from SIA 2024 and DIN V 18599-10
-        for medium occupancy.
-        AixLib: Used in Zone record for internal gains as
-        internalGainsPeopleSpecific
+    internal_gains_mode: int [1, 2, 3]
+        mode for the internal gains calculation:
+        1: Temperature and activity type dependent calculation. The
+           calculation is based on  SIA 2024 (default)
+        2: Temperature and activity type independent calculation, the max.
+           heatflowrate is prescribed by the parameter
+           fixed_heat_flow_rate_persons.
+        3: Temperature and activity type dependent calculation with
+           consideration of moisture. The calculation is based on SIA 2024
+           (default)
+    fixed_heat_flow_rate_persons: float [W/person]
+        fixed heat flow rate for one person in case of temperature
+        independent calculation. Default value is 70
+        W/person and describes
+        the maximum heat flow rate depending on the schedule.
+    persons : float [Persons/m2]
+        Specific number of persons per square area.
+
+        #todo delete old:
+        Average sensible heat transmission of people at 24 C
+        with specific
+        heat transmission of 70 W/person, taken from SIA 2024.
+        AixLib: Used in Zone record for internal gains, NrPeople
+        #todo what with annex?
         Annex: Used for internal gains
     activity_type_persons : float [W/person]
         persons activity (1: light, 2: moderate, 3: high). This value is
         probably from VDI 2078.
-        AixLib: currently not used, it is always set to 100 W/person
+        AixLib: is used and resulting heat flow rate is temperature
+        depending if internal_gains_mode is set to 1 or 2.
         Annex: (1: light, 50W/person, 2: moderate 100W/person,
         3: high 150W/person) For Annex models, the heat produced is not
         dependent on zone temperature
@@ -167,7 +186,7 @@ class BoundaryConditions(UseConditions):
         AixLib: Used for internal gains profile on top-level
         Annex: Used for internal gains
     machines: float [W/m2]
-        Specific eletrical load of machines per m2. This value is taken
+        area specific eletrical load of machines per m2. This value is taken
         from SIA 2024 and DIN V 18599-10 for medium occupancy.
         AixLib: Used in Zone record for internal gains, internalGainsMachinesSpecific
         Annex: Used for internal gains
@@ -189,7 +208,8 @@ class BoundaryConditions(UseConditions):
         AixLib: Used for internal gains profile on top-level
         Annex: Used for internal gains
     lighting_power : float [W/m2]
-        spec. electr. Power for lighting. This value is taken from SIA 2024.
+        area spec. electr. Power for lighting. This value is taken from SIA
+        2024.
         AixLib: Used in Zone record for internal gains
         Annex: Not used (see Annex examples)
     profile_lighting : [float]
@@ -279,7 +299,9 @@ class BoundaryConditions(UseConditions):
         self.cooling_time = [5, 18]
         self.heating_time = [5, 18]
 
-        self._persons = 5.0
+        self.persons = 5.0
+        self.internal_gains_mode = 1
+        self.fixed_heat_flow_rate_persons = 70
         self.activity_type_persons = 3
         self.ratio_conv_rad_persons = 0.5
         self._profile_persons = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.4,
@@ -588,7 +610,7 @@ class BoundaryConditions(UseConditions):
 
     @property
     def persons(self):
-        return self._persons
+        return self.persons
 
     @persons.setter
     def persons(self, value):
@@ -603,7 +625,53 @@ class BoundaryConditions(UseConditions):
             except:
                 raise ValueError("Can't convert persons to float")
 
-        self._persons = value
+        self.persons = value
+
+    @property
+    def internal_gains_mode(self):
+        return self.internal_gains_mode
+
+    @internal_gains_mode.setter
+    def internal_gains_mode(self, value):
+
+        if isinstance(value, int) and value in [1, 2, 3]:
+            pass
+        else:
+            raise ValueError("internal gains mode has to be one of 0, "
+                             "1 or 2")
+        self.internal_gains_mode = value
+
+    @property
+    def activity_type_persons(self):
+        return self.activity_type_persons
+
+    @activity_type_persons.setter
+    def activity_type_persons(self, value):
+
+        if isinstance(value, int) and value in [1, 2, 3]:
+            pass
+        else:
+            raise ValueError("activity type persons has to be one of 1, "
+                             "2 or 3")
+        self.activity_type_persons = value
+
+    @property
+    def fixed_heat_flow_rate_persons(self):
+        return self.fixed_heat_flow_rate_persons
+
+    @fixed_heat_flow_rate_persons.setter
+    def fixed_heat_flow_rate_persons(self, value):
+        if isinstance(value, float):
+            pass
+        elif value is None:
+            pass
+        else:
+            try:
+                value = float(value)
+            except:
+                raise ValueError("Can't convert %d to float" % value)
+
+        self.fixed_heat_flow_rate_persons = value
 
     @property
     def machines(self):
