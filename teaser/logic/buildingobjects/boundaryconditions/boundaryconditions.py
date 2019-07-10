@@ -139,9 +139,27 @@ class BoundaryConditions(UseConditions):
         AixLib: Used for night set-back for simple heater.
 
     INTERNAL GAINS
+    internalgains_mode: int [1, 2]
+        mode for the internal gains calculation:
+        0: Temperature and activity type dependent calculation. The
+           calculation is based on VDI2078 (default)
+        1: Temperature and activity type independent calculation, the max.
+           heatflowrate is prescribed by the parameter
+           fixed_heat_flow_rate_persons
+    additional_gains_mode: int [1, 2]
+        mode for additional internal gains (other than thermal gains),
+        default is None
+        1: Moisture
+        2: CO2 (not implemented yet)
+    fixed_heat_flow_rate_persons: float [W/person]
+        fixed heat flow rate for one person in case of selecting
+        internalgains_mode = 1
+    _persons : float [Persons/m2]
+        Specific number of persons per square area.
 
-    persons : float [W/m2]
-        Average sensible heat transmission of people at 24 C with specific
+        #todo delete old:
+        Average sensible heat transmission of people at 24 C
+        with specific
         heat transmission of 70 W/person, taken from SIA 2024.
         AixLib: Used in Zone record for internal gains, NrPeople
         Annex: Used for internal gains
@@ -278,6 +296,13 @@ class BoundaryConditions(UseConditions):
         self.heating_time = [5, 18]
 
         self._persons = 5.0
+        self.internalgains_mode = 0
+        self.additional_gains_mode = None
+        self.internalgains_mode_temperature_independent = 2
+        self.fixed_heat_flow_rate_persons = 70
+        self.internalgains_temperature_dependent = True
+        self.internalgains_with_moisture = False
+        # todo check that only one of the three modes can be selected
         self.activity_type_persons = 3
         self.ratio_conv_rad_persons = 0.5
         self._profile_persons = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.4,
