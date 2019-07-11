@@ -299,10 +299,10 @@ class BoundaryConditions(UseConditions):
         self.cooling_time = [5, 18]
         self.heating_time = [5, 18]
 
-        self.persons = 5.0
-        self.internal_gains_mode = 1
-        self.fixed_heat_flow_rate_persons = 70
-        self.activity_type_persons = 3
+        self._persons = 5.0
+        self._internal_gains_mode = 1
+        self._fixed_heat_flow_rate_persons = 70
+        self._activity_type_persons = 3
         self.ratio_conv_rad_persons = 0.5
         self._profile_persons = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.4,
                                  0.6, 0.8, 0.8, 0.4, 0.6, 0.8, 0.8, 0.4, 0.2,
@@ -610,11 +610,10 @@ class BoundaryConditions(UseConditions):
 
     @property
     def persons(self):
-        return self.persons
+        return self._persons
 
     @persons.setter
     def persons(self, value):
-
         if isinstance(value, float):
             pass
         elif value is None:
@@ -625,25 +624,24 @@ class BoundaryConditions(UseConditions):
             except:
                 raise ValueError("Can't convert persons to float")
 
-        self.persons = value
+        self._persons = value
 
     @property
     def internal_gains_mode(self):
-        return self.internal_gains_mode
+        return self._internal_gains_mode
 
     @internal_gains_mode.setter
     def internal_gains_mode(self, value):
-
         if isinstance(value, int) and value in [1, 2, 3]:
             pass
         else:
             raise ValueError("internal gains mode has to be one of 0, "
                              "1 or 2")
-        self.internal_gains_mode = value
+        self._internal_gains_mode = value
 
     @property
     def activity_type_persons(self):
-        return self.activity_type_persons
+        return self._activity_type_persons
 
     @activity_type_persons.setter
     def activity_type_persons(self, value):
@@ -653,11 +651,11 @@ class BoundaryConditions(UseConditions):
         else:
             raise ValueError("activity type persons has to be one of 1, "
                              "2 or 3")
-        self.activity_type_persons = value
+        self._activity_type_persons = value
 
     @property
     def fixed_heat_flow_rate_persons(self):
-        return self.fixed_heat_flow_rate_persons
+        return self._fixed_heat_flow_rate_persons
 
     @fixed_heat_flow_rate_persons.setter
     def fixed_heat_flow_rate_persons(self, value):
@@ -671,7 +669,7 @@ class BoundaryConditions(UseConditions):
             except:
                 raise ValueError("Can't convert %d to float" % value)
 
-        self.fixed_heat_flow_rate_persons = value
+        self._fixed_heat_flow_rate_persons = value
 
     @property
     def machines(self):
