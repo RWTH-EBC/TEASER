@@ -457,10 +457,10 @@ class Test_teaser(object):
 
         assert round(test_residential.get_outer_wall_area(-2), 0) == 1108
         assert round(test_residential.get_outer_wall_area(-1), 0) == 1108
-        assert round(test_residential.get_outer_wall_area(0), 0) == 325
-        assert round(test_residential.get_outer_wall_area(180), 0) == 325
-        assert round(test_residential.get_outer_wall_area(90), 0) == 325
-        assert round(test_residential.get_outer_wall_area(270), 0) == 325
+        assert round(test_residential.get_outer_wall_area(0), 0) == 312
+        assert round(test_residential.get_outer_wall_area(180), 0) == 312
+        assert round(test_residential.get_outer_wall_area(90), 0) == 312
+        assert round(test_residential.get_outer_wall_area(270), 0) == 312
         assert round(test_residential.get_window_area(0), 0) == 125
         assert round(test_residential.get_window_area(180), 0) == 125
         assert round(test_residential.get_window_area(90), 0) == 125
@@ -486,10 +486,10 @@ class Test_teaser(object):
 
         assert round(test_residential.get_outer_wall_area(-2), 0) == 1108
         assert round(test_residential.get_outer_wall_area(-1), 0) == 1108
-        assert round(test_residential.get_outer_wall_area(0), 0) == 398
-        assert round(test_residential.get_outer_wall_area(180), 0) == 398
-        assert round(test_residential.get_outer_wall_area(90), 0) == 398
-        assert round(test_residential.get_outer_wall_area(270), 0) == 398
+        assert round(test_residential.get_outer_wall_area(0), 0) == 393
+        assert round(test_residential.get_outer_wall_area(180), 0) == 393
+        assert round(test_residential.get_outer_wall_area(90), 0) == 393
+        assert round(test_residential.get_outer_wall_area(270), 0) == 393
         assert round(test_residential.get_window_area(0), 0) == 125
         assert round(test_residential.get_window_area(180), 0) == 125
         assert round(test_residential.get_window_area(90), 0) == 125
@@ -515,10 +515,10 @@ class Test_teaser(object):
 
         assert round(test_residential.get_outer_wall_area(-2), 0) == 858
         assert round(test_residential.get_outer_wall_area(-1), 0) == 484
-        assert round(test_residential.get_outer_wall_area(0), 0) == 270
-        assert round(test_residential.get_outer_wall_area(180), 0) == 270
-        assert round(test_residential.get_outer_wall_area(90), 0) == 270
-        assert round(test_residential.get_outer_wall_area(270), 0) == 270
+        assert round(test_residential.get_outer_wall_area(0), 0) == 267
+        assert round(test_residential.get_outer_wall_area(180), 0) == 267
+        assert round(test_residential.get_outer_wall_area(90), 0) == 267
+        assert round(test_residential.get_outer_wall_area(270), 0) == 267
         assert round(test_residential.get_window_area(0), 0) == 125
         assert round(test_residential.get_window_area(180), 0) == 125
         assert round(test_residential.get_window_area(90), 0) == 125
@@ -544,10 +544,10 @@ class Test_teaser(object):
 
         assert round(test_residential.get_outer_wall_area(-2), 0) == 700
         assert round(test_residential.get_outer_wall_area(-1), 0) == 789
-        assert round(test_residential.get_outer_wall_area(0), 0) == 255
-        assert round(test_residential.get_outer_wall_area(180), 0) == 255
-        assert round(test_residential.get_outer_wall_area(90), 0) == 255
-        assert round(test_residential.get_outer_wall_area(270), 0) == 255
+        assert round(test_residential.get_outer_wall_area(0), 0) == 251
+        assert round(test_residential.get_outer_wall_area(180), 0) == 251
+        assert round(test_residential.get_outer_wall_area(90), 0) == 251
+        assert round(test_residential.get_outer_wall_area(270), 0) == 251
         assert round(test_residential.get_window_area(0), 0) == 125
         assert round(test_residential.get_window_area(180), 0) == 125
         assert round(test_residential.get_window_area(90), 0) == 125
