@@ -77,27 +77,28 @@ class AixLib(object):
         surf_area_temp = 0.0
         for zone in self.parent.thermal_zones:
             if type(zone.model_attr).__name__ == "OneElement":
-                surf_area_temp += (
-                    zone.model_attr.area_ow +
-                    zone.model_attr.area_win)
+                surf_area_temp += zone.model_attr.area_ow + zone.model_attr.area_win
             elif type(zone.model_attr).__name__ == "TwoElement":
                 surf_area_temp += (
-                    zone.model_attr.area_ow +
-                    zone.model_attr.area_iw +
-                    zone.model_attr.area_win)
+                    zone.model_attr.area_ow
+                    + zone.model_attr.area_iw
+                    + zone.model_attr.area_win
+                )
             elif type(zone.model_attr).__name__ == "ThreeElement":
                 surf_area_temp += (
-                    zone.model_attr.area_ow +
-                    zone.model_attr.area_iw +
-                    zone.model_attr.area_gf +
-                    zone.model_attr.area_win)
+                    zone.model_attr.area_ow
+                    + zone.model_attr.area_iw
+                    + zone.model_attr.area_gf
+                    + zone.model_attr.area_win
+                )
             elif type(zone.model_attr).__name__ == "FourElement":
                 surf_area_temp += (
-                    zone.model_attr.area_ow +
-                    zone.model_attr.area_iw +
-                    zone.model_attr.area_gf +
-                    zone.model_attr.area_rt +
-                    zone.model_attr.area_win)
+                    zone.model_attr.area_ow
+                    + zone.model_attr.area_iw
+                    + zone.model_attr.area_gf
+                    + zone.model_attr.area_rt
+                    + zone.model_attr.area_win
+                )
 
         self.total_surface_area = surf_area_temp
 
@@ -122,27 +123,25 @@ class AixLib(object):
         path = os.path.join(path, self.file_set_t_heat)
 
         export = pd.DataFrame(
-            index=pd.date_range(
-                '2019-01-01 00:00:00',
-                periods=8760,
-                freq='H').to_series().dt.strftime('%m-%d %H:%M:%S'),
-            columns=[zone.name for zone in self.parent.thermal_zones])
+            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
+            .to_series()
+            .dt.strftime("%m-%d %H:%M:%S"),
+            columns=[zone.name for zone in self.parent.thermal_zones],
+        )
 
         for zone_count in self.parent.thermal_zones:
             export[zone_count.name] = zone_count.use_conditions.schedules[
-                "heating_profile"]
+                "heating_profile"
+            ]
 
         export.index = [(i + 1) * 3600 for i in range(8760)]
-
-        with open(path, 'a') as f:
-            f.write('#1\n')
-            f.write('double Tset({}, {})\n'.format(
-                8760, len(self.parent.thermal_zones) + 1))
-            export.to_csv(
-                f,
-                sep='\t',
-                header=False,
-                index_label=False)
+        self._delete_file(path=path)
+        with open(path, "a") as f:
+            f.write("#1\n")
+            f.write(
+                "double Tset({}, {})\n".format(8760, len(self.parent.thermal_zones) + 1)
+            )
+            export.to_csv(f, sep="\t", header=False, index_label=False)
 
     def modelica_set_temp_cool(self, path=None):
         """Create .txt file for set temperatures cooling.
@@ -166,27 +165,25 @@ class AixLib(object):
         path = os.path.join(path, self.file_set_t_cool)
 
         export = pd.DataFrame(
-            index=pd.date_range(
-                '2019-01-01 00:00:00',
-                periods=8760,
-                freq='H').to_series().dt.strftime('%m-%d %H:%M:%S'),
-            columns=[zone.name for zone in self.parent.thermal_zones])
+            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
+            .to_series()
+            .dt.strftime("%m-%d %H:%M:%S"),
+            columns=[zone.name for zone in self.parent.thermal_zones],
+        )
 
         for zone_count in self.parent.thermal_zones:
             export[zone_count.name] = zone_count.use_conditions.schedules[
-                "cooling_profile"]
+                "cooling_profile"
+            ]
 
         export.index = [(i + 1) * 3600 for i in range(8760)]
-
-        with open(path, 'a') as f:
-            f.write('#1\n')
-            f.write('double Tset({}, {})\n'.format(
-                8760, len(self.parent.thermal_zones) + 1))
-            export.to_csv(
-                f,
-                sep='\t',
-                header=False,
-                index_label=False)
+        self._delete_file(path=path)
+        with open(path, "a") as f:
+            f.write("#1\n")
+            f.write(
+                "double Tset({}, {})\n".format(8760, len(self.parent.thermal_zones) + 1)
+            )
+            export.to_csv(f, sep="\t", header=False, index_label=False)
 
     def modelica_AHU_boundary(self, path=None):
         """Create .txt file for AHU boundary conditions (building).
@@ -231,29 +228,22 @@ class AixLib(object):
             export = self.parent.central_ahu.schedules
         else:  # Dummy values for Input Table
             export = pd.DataFrame(
-                index=pd.date_range(
-                    '2019-01-01 00:00:00',
-                    periods=8760,
-                    freq='H').to_series().dt.strftime('%m-%d %H:%M:%S'))
+                index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
+                .to_series()
+                .dt.strftime("%m-%d %H:%M:%S")
+            )
 
-            export["temperature_profile"] = list(
-                islice(cycle([293.15, 293.15]), 8760))
-            export["min_relative_humidity_profile"] = list(
-                islice(cycle([0, 0]), 8760))
-            export["max_relative_humidity_profile"] = list(
-                islice(cycle([1, 1]), 8760))
-            export["v_flow_profile"] = list(
-                islice(cycle([0, 1]), 8760))
+            export["temperature_profile"] = list(islice(cycle([293.15, 293.15]), 8760))
+            export["min_relative_humidity_profile"] = list(islice(cycle([0, 0]), 8760))
+            export["max_relative_humidity_profile"] = list(islice(cycle([1, 1]), 8760))
+            export["v_flow_profile"] = list(islice(cycle([0, 1]), 8760))
 
-        with open(path, 'a') as f:
-            f.write('#1\n')
-            f.write('double AHU({}, {})\n'.format(
-                8760, 5))
-            export.to_csv(
-                f,
-                sep='\t',
-                header=False,
-                index_label=False)
+        export.index = [(i + 1) * 3600 for i in range(8760)]
+        self._delete_file(path=path)
+        with open(path, "a") as f:
+            f.write("#1\n")
+            f.write("double AHU({}, {})\n".format(8760, 5))
+            export.to_csv(f, sep="\t", header=False, index_label=False)
 
     def modelica_gains_boundary(self, path=None):
         """Create .txt file for internal gains boundary conditions.
@@ -290,30 +280,45 @@ class AixLib(object):
         path = os.path.join(path, self.file_internal_gains)
 
         export = pd.DataFrame(
-            index=pd.date_range(
-                '2019-01-01 00:00:00',
-                periods=8760,
-                freq='H').to_series().dt.strftime('%m-%d %H:%M:%S'))
+            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
+            .to_series()
+            .dt.strftime("%m-%d %H:%M:%S")
+        )
 
         for zone_count in self.parent.thermal_zones:
-            export["person_{}".format(
-                zone_count.name)] = zone_count.use_conditions.schedules[
-                    "persons_profile"]
-            export["machines_{}".format(
-                zone_count.name)] = zone_count.use_conditions.schedules[
-                    "machines_profile"]
-            export["lighting_{}".format(
-                zone_count.name)] = zone_count.use_conditions.schedules[
-                    "lighting_profile"]
+            export[
+                "person_{}".format(zone_count.name)
+            ] = zone_count.use_conditions.schedules["persons_profile"]
+            export[
+                "machines_{}".format(zone_count.name)
+            ] = zone_count.use_conditions.schedules["machines_profile"]
+            export[
+                "lighting_{}".format(zone_count.name)
+            ] = zone_count.use_conditions.schedules["lighting_profile"]
 
         export.index = [(i + 1) * 3600 for i in range(8760)]
+        self._delete_file(path=path)
+        with open(path, "a") as f:
+            f.write("#1\n")
+            f.write(
+                "double Internals({}, {})\n".format(
+                    8760, (len(self.parent.thermal_zones) * 3 + 1)
+                )
+            )
+            export.to_csv(f, sep="\t", header=False, index_label=False)
 
-        with open(path, 'a') as f:
-            f.write('#1\n')
-            f.write('double Internals({}, {})\n'.format(
-                8760, (len(self.parent.thermal_zones) * 3 + 1)))
-            export.to_csv(
-                f,
-                sep='\t',
-                header=False,
-                index_label=False)
+    def _delete_file(self, path):
+        """Delete a file before new information is written to it.
+
+        If a building with the exact name and project name is generated, we need to make sure to delete the old information in the text files. This helper function is a wrapper to delete a file with given filepath.
+
+        Parameters:
+        -----------
+        path : str
+            Absolute path to the file to be deleted.
+
+        """
+        try:
+            os.remove(path)
+        except OSError:
+            pass
