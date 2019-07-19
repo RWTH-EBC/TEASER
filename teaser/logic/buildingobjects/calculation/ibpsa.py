@@ -35,16 +35,16 @@ class IBPSA(object):
         """Construct IBPSA."""
         self.parent = parent
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
-        self.version = {'AixLib': '0.7.4', 'Buildings': '5.1.0',
-                        'BuildingSystems': '2.0.0-beta2', 'IDEAS': '2.1.0'}
+        self.version = {
+            "AixLib": "0.7.9",
+            "Buildings": "6.0.0",
+            "BuildingSystems": "2.0.0-beta2",
+            "IDEAS": "2.1.0",
+        }
         self.consider_heat_capacity = True
 
-    def modelica_gains_boundary(
-            self,
-            zone,
-            time_line=None,
-            path=None):
-        """Create .txt file for internal gains boundary conditions.
+    def modelica_gains_boundary(self, zone, time_line=None, path=None):
+        """creates .mat file for internal gains boundary conditions
 
         This function creates a matfile (-v4) for building internal gains
         boundary conditions. It collects internal gain profiles of a specific
@@ -86,32 +86,55 @@ class IBPSA(object):
         path = os.path.join(path, self.file_internal_gains)
 
         export = pd.DataFrame(
-            index=pd.date_range(
-                '2019-01-01 00:00:00',
-                periods=8760,
-                freq='H').to_series().dt.strftime('%m-%d %H:%M:%S'))
+            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
+            .to_series()
+            .dt.strftime("%m-%d %H:%M:%S")
+        )
 
-        export["person_rad_{}".format(
-            zone.name)] = zone.use_conditions.schedules["persons_profile"] * (
-            1 - zone.use_conditions.ratio_conv_rad_persons) * 100 * \
-            zone.use_conditions.persons
-        export["person_conv_{}".format(
-            zone.name)] = zone.use_conditions.schedules["persons_profile"] * \
-            zone.use_conditions.ratio_conv_rad_persons * 100 * \
-            zone.use_conditions.persons
-        export["machines_conv_{}".format(
-            zone.name)] = zone.use_conditions.schedules["machines_profile"] * \
-            zone.use_conditions.ratio_conv_rad_machines * 100 * \
-            zone.use_conditions.machines
+        export["person_rad_{}".format(zone.name)] = (
+            zone.use_conditions.schedules["persons_profile"]
+            * (1 - zone.use_conditions.ratio_conv_rad_persons)
+            * 100
+            * zone.use_conditions.persons
+        )
+        export["person_conv_{}".format(zone.name)] = (
+            zone.use_conditions.schedules["persons_profile"]
+            * zone.use_conditions.ratio_conv_rad_persons
+            * 100
+            * zone.use_conditions.persons
+        )
+        export["machines_conv_{}".format(zone.name)] = (
+            zone.use_conditions.schedules["machines_profile"]
+            * zone.use_conditions.ratio_conv_rad_machines
+            * 100
+            * zone.use_conditions.machines
+        )
 
         export.index = [(i + 1) * 3600 for i in range(8760)]
+        _delete_file(path=path)
+        with open(path, "a") as f:
+            f.write("#1\n")
+            f.write(
+                "double Internals({}, {})\n".format(
+                    8760, (len(self.parent.thermal_zones) * 3 + 1)
+                )
+            )
+            export.to_csv(f, sep="\t", header=False, index_label=False)
 
-        with open(path, 'a') as f:
-            f.write('#1\n')
-            f.write('double Internals({}, {})\n'.format(
-                8760, (len(self.parent.thermal_zones) * 3 + 1)))
-            export.to_csv(
-                f,
-                sep='\t',
-                header=False,
-                index_label=False)
+    def _delete_file(self, path):
+        """Delete a file before new information is written to it.
+
+        If a building with the exact name and project name is generated, we need to make
+        sure to delete the old information in the text files. This helper function is a
+        wrapper to delete a file with given filepath.
+
+        Parameters:
+        -----------
+        path : str
+            Absolute path to the file to be deleted.
+
+        """
+        try:
+            os.remove(path)
+        except OSError:
+            pass

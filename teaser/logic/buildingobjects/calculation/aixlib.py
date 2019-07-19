@@ -61,7 +61,7 @@ class AixLib(object):
         self.file_set_t_cool = "TsetCool_" + self.parent.name + ".txt"
         self.file_ahu = "AHU_" + self.parent.name + ".txt"
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".txt"
-        self.version = "0.7.4"
+        self.version = "0.7.9"
         self.total_surface_area = None
         self.consider_heat_capacity = True
         self.use_set_back = True
@@ -310,7 +310,9 @@ class AixLib(object):
     def _delete_file(self, path):
         """Delete a file before new information is written to it.
 
-        If a building with the exact name and project name is generated, we need to make sure to delete the old information in the text files. This helper function is a wrapper to delete a file with given filepath.
+        If a building with the exact name and project name is generated, we need to make
+        sure to delete the old information in the text files. This helper function is a
+        wrapper to delete a file with given filepath.
 
         Parameters:
         -----------
