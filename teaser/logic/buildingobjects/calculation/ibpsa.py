@@ -111,7 +111,7 @@ class IBPSA(object):
         )
 
         export.index = [(i + 1) * 3600 for i in range(8760)]
-        _delete_file(path=path)
+        self._delete_file(path=path)
         with open(path, "a") as f:
             f.write("#1\n")
             f.write(
