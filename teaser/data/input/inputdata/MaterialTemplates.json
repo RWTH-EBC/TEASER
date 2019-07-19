@@ -7272,5 +7272,194 @@
             0.013
         ],
         "solar_absorp": 0.5
+    },
+    "9dc34e0a-cbcb-11e8-bdbb-08002700bc00": {
+        "name": "Wood_board_DK",
+        "density": 800.0,
+        "thermal_conduc": 0.14,
+        "heat_capac": 1.3,
+        "thickness_default": 0.0,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "c169bc76-cbcb-11e8-8618-08002700bc00": {
+        "name": "Brick_int_DK",
+        "density": 1600.0,
+        "thermal_conduc": 0.57,
+        "heat_capac": 0.88,
+        "thickness_default": 0.0,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "d8890f4a-cbcb-11e8-97f1-08002700bc00": {
+        "name": "Brick_ext_DK",
+        "density": 1800.0,
+        "thermal_conduc": 0.68,
+        "heat_capac": 0.88,
+        "thickness_default": 0.0,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "e8da9228-cbcb-11e8-8346-08002700bc00": {
+        "name": "Concrete_DK",
+        "density": 2300.0,
+        "thermal_conduc": 1.6,
+        "heat_capac": 0.8,
+        "thickness_default": 0.0,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "f61d6170-cbcb-11e8-bf59-08002700bc00": {
+        "name": "Light_Concrete_DK",
+        "density": 1100.0,
+        "thermal_conduc": 0.5,
+        "heat_capac": 1.0,
+        "thickness_default": 0.0,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "0c8ee3a2-cbcc-11e8-8768-08002700bc00": {
+        "name": "Insulation_036_DK",
+        "density": 58.0,
+        "thermal_conduc": 0.036,
+        "heat_capac": 0.84,
+        "thickness_default": 0.0,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "1597be18-cbcc-11e8-8ace-08002700bc00": {
+        "name": "Insulation_039_DK",
+        "density": 50.0,
+        "thermal_conduc": 0.039,
+        "heat_capac": 1.0,
+        "thickness_default": 0.0,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "1f480064-cbcc-11e8-8803-08002700bc00": {
+        "name": "Insulation_042_DK",
+        "density": 45.0,
+        "thermal_conduc": 0.042,
+        "heat_capac": 1.0,
+        "thickness_default": 0.0,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "3c3b2c68-cbcc-11e8-bed0-08002700bc00": {
+        "name": "Insulation_045_DK",
+        "density": 40.0,
+        "thermal_conduc": 0.045,
+        "heat_capac": 0.84,
+        "thickness_default": 0.0,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "451d6b10-cbcc-11e8-995a-08002700bc00": {
+        "name": "Insulation_060_DK",
+        "density": 50.0,
+        "thermal_conduc": 0.06,
+        "heat_capac": 0.8,
+        "thickness_default": 0.0,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "562e4b34-cbcc-11e8-93dc-08002700bc00": {
+        "name": "Gypsum_board_DK",
+        "density": 900.0,
+        "thermal_conduc": 0.2,
+        "heat_capac": 1.0,
+        "thickness_default": 0.0,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "4518b690-cc6c-11e8-aa1d-08002700bc00": {
+        "name": "Lineolum_DK",
+        "density": 1100.0,
+        "thermal_conduc": 0.2,
+        "heat_capac": 1.26,
+        "thickness_default": 0.0,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "618e4aee-cc6c-11e8-a277-08002700bc00": {
+        "name": "Leca_DK",
+        "density": 100.0,
+        "thermal_conduc": 0.21,
+        "heat_capac": 0.78,
+        "thickness_default": 0.0,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "75167ccc-cc6c-11e8-ad7e-08002700bc00": {
+        "name": "Clay_DK",
+        "density": 1400.0,
+        "thermal_conduc": 0.8,
+        "heat_capac": 0.8,
+        "thickness_default": 0.0,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "87e8a070-cc6c-11e8-8dd8-08002700bc00": {
+        "name": "Air_layer_DK",
+        "density": 1184.0,
+        "thermal_conduc": 0.35,
+        "heat_capac": 1.005,
+        "thickness_default": 0.0,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "94454f92-cc6c-11e8-bbca-08002700bc00": {
+        "name": "Air_layer_poor_DK",
+        "density": 1184.0,
+        "thermal_conduc": 0.7,
+        "heat_capac": 1.005,
+        "thickness_default": 0.0,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "a1e50e4a-cc6c-11e8-a679-08002700bc00": {
+        "name": "Soil_DK",
+        "density": 1900.0,
+        "thermal_conduc": 1.4,
+        "heat_capac": 1.2,
+        "thickness_default": 0.0,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "7fca3d1a-43f7-11e9-9c20-38baf857ce9c": {
+        "name": "test_material_DK",
+        "density": 1900.0,
+        "thermal_conduc": 1.5,
+        "heat_capac": 1.2,
+        "thickness_default": 0.0,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "4f8d4e18-4652-11e9-964e-38baf857ce9c": {
+        "name": "Carpet_DK",
+        "density": 1200.0,
+        "thermal_conduc": 0.5,
+        "heat_capac": 1.005,
+        "thickness_default": 0.0,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "8a6bfc82-495d-11e9-b3cd-38baf857ce9c": {
+        "name": "WoodenBrick_DK",
+        "density": 1700.0,
+        "thermal_conduc": 0.55,
+        "heat_capac": 0.88,
+        "thickness_default": 0.0,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "fd49b2de-4997-11e9-99f7-38baf857ce9c": {
+        "name": "Roofing_DK",
+        "density": 1700.0,
+        "thermal_conduc": 0.25,
+        "heat_capac": 0.88,
+        "thickness_default": 0.0,
+        "thickness_list": [],
+        "solar_absorp": 0.5
     }
 }
