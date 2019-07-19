@@ -7266,13 +7266,20 @@
                 }
             },
             "1": {
+                "thickness": 0.48,
+                "material": {
+                    "name": "Air_layer_DK",
+                    "material_id": "87e8a070-cc6c-11e8-8dd8-08002700bc00"
+                }
+            },
+            "2": {
                 "thickness": 0.1,
                 "material": {
                     "name": "Concrete_DK",
                     "material_id": "e8da9228-cbcb-11e8-8346-08002700bc00"
                 }
             },
-            "2": {
+            "3": {
                 "thickness": 0.2,
                 "material": {
                     "name": "Light_Concrete_DK",
