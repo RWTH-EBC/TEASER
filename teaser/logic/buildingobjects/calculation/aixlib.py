@@ -60,7 +60,7 @@ class AixLib(object):
         self.file_set_t = "Tset_" + self.parent.name + ".mat"
         self.file_ahu = "AHU_" + self.parent.name + ".mat"
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
-        self.version = "0.7.7"
+        self.version = "0.7.9"
         self.total_surface_area = None
         self.consider_heat_capacity = True
         self.use_set_back = True
