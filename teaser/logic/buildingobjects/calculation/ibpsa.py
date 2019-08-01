@@ -44,8 +44,12 @@ class IBPSA(object):
 
         self.parent = parent
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
-        self.version = {'AixLib': '0.7.4', 'Buildings': '5.1.0',
-                        'BuildingSystems': '2.0.0-beta2', 'IDEAS': '2.0.0'}
+        self.version = {
+            "AixLib": "0.7.9",
+            "Buildings": "6.0.0",
+            "BuildingSystems": "2.0.0-beta2",
+            "IDEAS": "2.1.0",
+        }
         self.consider_heat_capacity = True
 
     @staticmethod
@@ -86,11 +90,7 @@ class IBPSA(object):
             time_line.append([i * time_step])
         return time_line
 
-    def modelica_gains_boundary(
-            self,
-            zone,
-            time_line=None,
-            path=None):
+    def modelica_gains_boundary(self, zone, time_line=None, path=None):
         """creates .mat file for internal gains boundary conditions
 
         This function creates a matfile (-v4) for building internal gains
@@ -133,18 +133,17 @@ class IBPSA(object):
         path = os.path.join(path, self.file_internal_gains)
 
         if time_line is None:
-            duration = len(zone.use_conditions.profile_persons) * \
-                3600
+            duration = len(zone.use_conditions.profile_persons) * 3600
             time_line = self.create_profile(duration_profile=duration)
 
         ass_error_1 = "time line and input have to have the same length"
 
-        assert len(time_line) - 1 == len(
-            zone.use_conditions.profile_persons), \
-            (ass_error_1 + ",profile_persons")
-        assert len(time_line) - 1 == len(
-            zone.use_conditions.profile_machines), \
-            (ass_error_1 + ",profile_machines")
+        assert len(time_line) - 1 == len(zone.use_conditions.profile_persons), (
+            ass_error_1 + ",profile_persons"
+        )
+        assert len(time_line) - 1 == len(zone.use_conditions.profile_machines), (
+            ass_error_1 + ",profile_machines"
+        )
 
         for i, time in enumerate(time_line):
             if i == 0:
@@ -152,25 +151,35 @@ class IBPSA(object):
                 time.append(0)
                 time.append(0)
             else:
-                time.append(zone.use_conditions.profile_persons[i - 1] *
-                            zone.use_conditions.persons *
-                            zone.use_conditions.activity_type_persons * 50 *
-                            (1 - zone.use_conditions.ratio_conv_rad_persons) *
-                            zone.area * 0.01)
-                time.append(zone.use_conditions.profile_persons[i - 1] *
-                            zone.use_conditions.persons *
-                            zone.use_conditions.activity_type_persons * 50 *
-                            zone.use_conditions.ratio_conv_rad_persons *
-                            zone.area * 0.01)
-                time.append(zone.use_conditions.profile_machines[i - 1] *
-                            zone.use_conditions.machines *
-                            zone.use_conditions.activity_type_machines * 50 *
-                            zone.area * 0.01)
+                time.append(
+                    zone.use_conditions.profile_persons[i - 1]
+                    * zone.use_conditions.persons
+                    * zone.use_conditions.activity_type_persons
+                    * 50
+                    * (1 - zone.use_conditions.ratio_conv_rad_persons)
+                    * zone.area
+                    * 0.01
+                )
+                time.append(
+                    zone.use_conditions.profile_persons[i - 1]
+                    * zone.use_conditions.persons
+                    * zone.use_conditions.activity_type_persons
+                    * 50
+                    * zone.use_conditions.ratio_conv_rad_persons
+                    * zone.area
+                    * 0.01
+                )
+                time.append(
+                    zone.use_conditions.profile_machines[i - 1]
+                    * zone.use_conditions.machines
+                    * zone.use_conditions.activity_type_machines
+                    * 50
+                    * zone.area
+                    * 0.01
+                )
 
         internal_boundary = np.array(time_line)
 
         scipy.io.savemat(
-            path,
-            mdict={'Internals': internal_boundary},
-            appendmat=False,
-            format='4')
+            path, mdict={"Internals": internal_boundary}, appendmat=False, format="4"
+        )
