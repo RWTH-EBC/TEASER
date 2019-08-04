@@ -2209,6 +2209,14 @@ class Test_teaser(object):
         from teaser.data.dataclass import DataClass
         import teaser.logic.utilities as utils
         from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
+        from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
+        from teaser.logic.buildingobjects.buildingphysics.groundfloor import GroundFloor
+        from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
+        from teaser.logic.buildingobjects.buildingphysics.window import Window
+        from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
+        from teaser.logic.buildingobjects.buildingphysics.floor import Floor
+
+        # from teaser.logic.buildingobjects.buildingphysics.door import Door
 
         data_class = DataClass()
         data_class.path_tb = utils.get_full_path(
@@ -2221,6 +2229,33 @@ class Test_teaser(object):
         data_class.load_mat_binding()
 
         out_wall = OuterWall()
+        be_input_old.load_type_element(
+            element=out_wall, year=1988, construction="heavy", data_class=data_class
+        )
+        out_wall = Rooftop()
+        be_input_old.load_type_element(
+            element=out_wall, year=1988, construction="heavy", data_class=data_class
+        )
+        out_wall = GroundFloor()
+        be_input_old.load_type_element(
+            element=out_wall, year=1988, construction="heavy", data_class=data_class
+        )
+        out_wall = InnerWall()
+        be_input_old.load_type_element(
+            element=out_wall, year=1988, construction="heavy", data_class=data_class
+        )
+        out_wall = Window()
+        be_input_old.load_type_element(
+            element=out_wall,
+            year=1988,
+            construction="Holzfenster, zweifach",
+            data_class=data_class,
+        )
+        out_wall = Ceiling()
+        be_input_old.load_type_element(
+            element=out_wall, year=1988, construction="heavy", data_class=data_class
+        )
+        out_wall = Floor()
         be_input_old.load_type_element(
             element=out_wall, year=1988, construction="heavy", data_class=data_class
         )
@@ -2242,6 +2277,30 @@ class Test_teaser(object):
         bound_cond = UseConditions()
         bc_input_old.load_boundary_conditions(
             bound_cond=bound_cond, zone_usage="Living", data_class=data_class
+        )
+
+    def test_load_mat_old(self):
+        """test to load Material of XML, no parameter test"""
+
+        import teaser.data.input.material_input as mat_input_old
+        from teaser.data.dataclass import DataClass
+        import teaser.logic.utilities as utils
+        from teaser.logic.buildingobjects.buildingphysics.material import Material
+
+        data_class = DataClass()
+        data_class.path_mat = utils.get_full_path(
+            "data/input/inputdata/MaterialTemplates.xml"
+        )
+        data_class.load_mat_binding()
+
+        mat = Material()
+        mat_input_old.load_material(
+            material=mat, mat_name="anti_must_plaster", data_class=data_class
+        )
+        mat_input_old.load_material_id(
+            material=mat,
+            mat_id="244edc8c-3a43-11e7-8ed1-2cd444b2e704",
+            data_class=data_class,
         )
 
     def test_save_type_element(self):
