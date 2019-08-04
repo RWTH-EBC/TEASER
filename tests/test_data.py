@@ -586,8 +586,7 @@ class Test_teaser(object):
         import teaser.data.input.teaserxml_input as t_input_old
 
         t_input_old.load_teaser_xml(
-            utilities.get_full_path(
-                ("examples/examplefiles/old.teaserXML")), prj
+            utilities.get_full_path(("examples/examplefiles/old.teaserXML")), prj
         )
         therm_zone = prj.buildings[-1].thermal_zones[0]
         assert therm_zone.outer_walls[0].area == 40.0
@@ -615,8 +614,7 @@ class Test_teaser(object):
     def test_load_save_project_new(self):
         """test of load_project and save_project"""
         prj.set_default(load_data=True)
-        prj.load_project(os.path.join(
-            utilities.get_default_path(), "unitTest.json"))
+        prj.load_project(os.path.join(utilities.get_default_path(), "unitTest.json"))
         therm_zone = prj.buildings[-1].thermal_zones[0]
         assert therm_zone.area == 318.08
         tz_area = sum([tz.area for tz in prj.buildings[-1].thermal_zones])
@@ -670,8 +668,7 @@ class Test_teaser(object):
             height_of_floors=3.2,
             net_leased_area=219,
         )
-        prj.retrofit_all_buildings(
-            year_of_retrofit=2015, type_of_retrofit="retrofit")
+        prj.retrofit_all_buildings(year_of_retrofit=2015, type_of_retrofit="retrofit")
 
     def test_export_aixlib(self):
         """test of export_aixlib, no calculation verification"""
@@ -1150,8 +1147,7 @@ class Test_teaser(object):
     def test_fill_window_area_dict(self):
         """test of fill_window_area_dict"""
         prj.buildings[-1].fill_window_area_dict()
-        assert prj.buildings[-1].window_area == {
-            90.0: 1.0, 180.0: 8.0, 270.0: 5.0}
+        assert prj.buildings[-1].window_area == {90.0: 1.0, 180.0: 8.0, 270.0: 5.0}
 
     def test_calc_building_parameter(self):
         """test of calc_building_parameter"""
@@ -1948,8 +1944,7 @@ class Test_teaser(object):
         helptest.building_test2(prj)
 
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.calc_zone_parameters(
-            number_of_elements=1, merge_windows=True)
+        therm_zone.calc_zone_parameters(number_of_elements=1, merge_windows=True)
 
         zone_attr = therm_zone.model_attr
         assert round(zone_attr.area_ow, 1) == 328.0
@@ -1965,8 +1960,7 @@ class Test_teaser(object):
         assert round(zone_attr.r_rest_ow, 14) == 0.00461875570532
 
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.calc_zone_parameters(
-            number_of_elements=1, merge_windows=False)
+        therm_zone.calc_zone_parameters(number_of_elements=1, merge_windows=False)
 
         zone_attr = therm_zone.model_attr
         assert round(zone_attr.area_ow, 1) == 328.0
@@ -1988,8 +1982,7 @@ class Test_teaser(object):
         helptest.building_test2(prj)
 
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.calc_zone_parameters(
-            number_of_elements=2, merge_windows=True)
+        therm_zone.calc_zone_parameters(number_of_elements=2, merge_windows=True)
 
         zone_attr = therm_zone.model_attr
         assert round(zone_attr.area_ow, 1) == 328.0
@@ -2007,8 +2000,7 @@ class Test_teaser(object):
         assert round(zone_attr.r_rest_ow, 14) == 0.00461875570532
 
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.calc_zone_parameters(
-            number_of_elements=2, merge_windows=False)
+        therm_zone.calc_zone_parameters(number_of_elements=2, merge_windows=False)
 
         zone_attr = therm_zone.model_attr
         assert round(zone_attr.area_ow, 1) == 328.0
@@ -2030,8 +2022,7 @@ class Test_teaser(object):
         helptest.building_test2(prj)
 
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.calc_zone_parameters(
-            number_of_elements=3, merge_windows=True)
+        therm_zone.calc_zone_parameters(number_of_elements=3, merge_windows=True)
 
         zone_attr = therm_zone.model_attr
         assert round(zone_attr.area_ow, 1) == 188.0
@@ -2057,8 +2048,7 @@ class Test_teaser(object):
         assert round(zone_attr.r_rest_gf, 13) == 0.0137109637229
 
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.calc_zone_parameters(
-            number_of_elements=3, merge_windows=False)
+        therm_zone.calc_zone_parameters(number_of_elements=3, merge_windows=False)
 
         zone_attr = therm_zone.model_attr
         assert round(zone_attr.area_ow, 1) == 188.0
@@ -2090,8 +2080,7 @@ class Test_teaser(object):
         helptest.building_test2(prj)
 
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.calc_zone_parameters(
-            number_of_elements=4, merge_windows=True)
+        therm_zone.calc_zone_parameters(number_of_elements=4, merge_windows=True)
 
         zone_attr = therm_zone.model_attr
         assert round(zone_attr.area_ow, 1) == 48.0
@@ -2128,8 +2117,7 @@ class Test_teaser(object):
         assert round(zone_attr.r_rest_rt, 13) == 0.0137109637229
 
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.calc_zone_parameters(
-            number_of_elements=4, merge_windows=False)
+        therm_zone.calc_zone_parameters(number_of_elements=4, merge_windows=False)
 
         zone_attr = therm_zone.model_attr
         assert round(zone_attr.area_ow, 1) == 48.0
@@ -2189,8 +2177,7 @@ class Test_teaser(object):
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         therm_zone.outer_walls[0].calc_ua_value()
 
-        assert round(
-            therm_zone.outer_walls[0].ua_value, 15) == 4.132453174475393
+        assert round(therm_zone.outer_walls[0].ua_value, 15) == 4.132453174475393
 
     def test_gather_element_properties(self):
         """test of gather_element_properties"""
@@ -2213,6 +2200,48 @@ class Test_teaser(object):
         therm_zone.inner_walls[0].load_type_element(1988, "light", prj.data)
         therm_zone.windows[0].load_type_element(
             1988, "Kunststofffenster, Isolierverglasung", prj.data
+        )
+
+    def test_load_type_element_old(self):
+        """test to load type_element of XML, no parameter test"""
+
+        import teaser.data.input.buildingelement_input as be_input_old
+        from teaser.data.dataclass import DataClass
+        import teaser.logic.utilities as utils
+        from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
+
+        data_class = DataClass()
+        data_class.path_tb = utils.get_full_path(
+            "data/input/inputdata/TypeBuildingElements.xml"
+        )
+        data_class.load_tb_binding()
+        data_class.path_mat = utils.get_full_path(
+            "data/input/inputdata/MaterialTemplates.xml"
+        )
+        data_class.load_mat_binding()
+
+        out_wall = OuterWall()
+        be_input_old.load_type_element(
+            element=out_wall, year=1988, construction="heavy", data_class=data_class
+        )
+
+    def test_load_bound_cond_old(self):
+        """test to load UseConditions of XML, no parameter test"""
+
+        import teaser.data.input.boundcond_input as bc_input_old
+        from teaser.data.dataclass import DataClass
+        import teaser.logic.utilities as utils
+        from teaser.logic.buildingobjects.useconditions import UseConditions
+
+        data_class = DataClass()
+        data_class.path_uc = utils.get_full_path(
+            "data/input/inputdata/UseConditions.xml"
+        )
+        data_class.load_uc_binding()
+
+        bound_cond = UseConditions()
+        bc_input_old.load_boundary_conditions(
+            bound_cond=bound_cond, zone_usage="Living", data_class=data_class
         )
 
     def test_save_type_element(self):
@@ -2387,8 +2416,7 @@ class Test_teaser(object):
         import teaser.data.input.teaserxml_input as t_input_old
 
         t_input_old.load_teaser_xml(
-            os.path.join(os.path.dirname(__file__),
-                         "testfiles", "teaser_v5.teaserXML"),
+            os.path.join(os.path.dirname(__file__), "testfiles", "teaser_v5.teaserXML"),
             prj,
         )
 
@@ -2400,13 +2428,11 @@ class Test_teaser(object):
         import teaser.data.input.teaserxml_input as t_input_old
 
         t_input_old.load_teaser_xml(
-            os.path.join(os.path.dirname(__file__),
-                         "testfiles", "teaser_v4.teaserXML"),
+            os.path.join(os.path.dirname(__file__), "testfiles", "teaser_v4.teaserXML"),
             prj,
         )
         prj.data.path_tb = os.path.join(
-            os.path.dirname(
-                __file__), "testfiles", "TypeBuildingElements_v4.xml"
+            os.path.dirname(__file__), "testfiles", "TypeBuildingElements_v4.xml"
         )
         prj.data.path_mat = os.path.join(
             os.path.dirname(__file__), "testfiles", "MaterialTemplates_v4.xml"
@@ -2426,8 +2452,7 @@ class Test_teaser(object):
         import teaser.data.input.teaserxml_input as t_input_old
 
         t_input_old.load_teaser_xml(
-            os.path.join(os.path.dirname(__file__),
-                         "testfiles", "teaser_v4.teaserXML"),
+            os.path.join(os.path.dirname(__file__), "testfiles", "teaser_v4.teaserXML"),
             prj,
         )
 

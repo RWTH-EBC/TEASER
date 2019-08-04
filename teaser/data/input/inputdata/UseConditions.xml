@@ -1,0 +1,2555 @@
+<?xml version="1.0" ?>
+<usecond:UseConditions version="0.6" xmlns:usecond="http://teaser/0.6/boundary">
+	<usecond:BoundaryConditions>
+		<usecond:usage>Single office</usecond:usage>
+		<usecond:typical_length>3.0</usecond:typical_length>
+		<usecond:typical_width>6.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>7 18</usecond:usage_time>
+			<usecond:daily_usage_hours>11</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>250</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2543</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>207</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>13</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>250</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>250</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>250</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>13</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>500.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.84</usecond:red_factor_visual>
+			<usecond:rel_absence>0.3</usecond:rel_absence>
+			<usecond:room_index>0.9</usecond:room_index>
+			<usecond:part_load_factor_lighting>0.7</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>5 18</usecond:cooling_time>
+			<usecond:heating_time>5 18</usecond:heating_time>
+			<usecond:min_air_exchange>4.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.3</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.7</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>5.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>7.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>15.9</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>2.6</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Group Office (between 2 and 6 employees)</usecond:usage>
+		<usecond:typical_length>6.0</usecond:typical_length>
+		<usecond:typical_width>6.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>7 18</usecond:usage_time>
+			<usecond:daily_usage_hours>11</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>250</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2543</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>207</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>13</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>250</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>250</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>250</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>13</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>500.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.92</usecond:red_factor_visual>
+			<usecond:rel_absence>0.3</usecond:rel_absence>
+			<usecond:room_index>1.35</usecond:room_index>
+			<usecond:part_load_factor_lighting>0.7</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>5 18</usecond:cooling_time>
+			<usecond:heating_time>5 18</usecond:heating_time>
+			<usecond:min_air_exchange>4.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.3</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.7</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>5.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>7.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>12.5</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>2.6</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Open-plan Office (7 or more employees)</usecond:usage>
+		<usecond:typical_length>12.0</usecond:typical_length>
+		<usecond:typical_width>12.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>7 18</usecond:usage_time>
+			<usecond:daily_usage_hours>11</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>250</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2543</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>207</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>13</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>250</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>250</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>250</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>13</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>500.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.93</usecond:red_factor_visual>
+			<usecond:rel_absence>0.0</usecond:rel_absence>
+			<usecond:room_index>2.5</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>5 18</usecond:cooling_time>
+			<usecond:heating_time>5 18</usecond:heating_time>
+			<usecond:min_air_exchange>6.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.2</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>7.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>10.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.8 0.8 0.4 0.2 0.4 0.8 0.8 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>12.5</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>3.6</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Meeting, Conference, seminar</usecond:usage>
+		<usecond:typical_length>6.0</usecond:typical_length>
+		<usecond:typical_width>6.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>7 18</usecond:usage_time>
+			<usecond:daily_usage_hours>11</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>250</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2543</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>207</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>13</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>250</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>250</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>250</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>13</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>500.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.93</usecond:red_factor_visual>
+			<usecond:rel_absence>0.5</usecond:rel_absence>
+			<usecond:room_index>1.25</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>5 18</usecond:cooling_time>
+			<usecond:heating_time>5 18</usecond:heating_time>
+			<usecond:min_air_exchange>15.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.5</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.5</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>24.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>2.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.6 1.0 0.4 0.1 0.1 0.6 1.0 0.4 0.1 0.1 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>15.9</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>12.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Main Hall, Reception</usecond:usage>
+		<usecond:typical_length>10.0</usecond:typical_length>
+		<usecond:typical_width>10.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>7 18</usecond:usage_time>
+			<usecond:daily_usage_hours>11</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>250</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2543</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>207</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>13</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>250</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>250</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>250</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>13</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>200.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.87</usecond:red_factor_visual>
+			<usecond:rel_absence>0.0</usecond:rel_absence>
+			<usecond:room_index>1.5</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>5 18</usecond:cooling_time>
+			<usecond:heating_time>5 18</usecond:heating_time>
+			<usecond:min_air_exchange>2.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.5</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>6.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>4.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.4 0.6 0.8 0.8 0.2 0.1 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>4.4</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>2.5</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Retail, department store</usecond:usage>
+		<usecond:typical_length>20.0</usecond:typical_length>
+		<usecond:typical_width>20.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>8 20</usecond:usage_time>
+			<usecond:daily_usage_hours>12</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>300</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>3009</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>591</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>14</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>300</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>300</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>300</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>14</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>300.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.93</usecond:red_factor_visual>
+			<usecond:rel_absence>0.0</usecond:rel_absence>
+			<usecond:room_index>2.5</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>6 20</usecond:cooling_time>
+			<usecond:heating_time>6 20</usecond:heating_time>
+			<usecond:min_air_exchange>4.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.5</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>14.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.4 0.4 0.6 0.6 0.6 0.4 0.4 0.6 0.8 0.6 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>2.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>9.3</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Retail with cooling</usecond:usage>
+		<usecond:typical_length>20.0</usecond:typical_length>
+		<usecond:typical_width>20.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>8 20</usecond:usage_time>
+			<usecond:daily_usage_hours>12</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>300</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>3009</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>591</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>14</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>300</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>300</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>300</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>14</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>300.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.93</usecond:red_factor_visual>
+			<usecond:rel_absence>0.0</usecond:rel_absence>
+			<usecond:room_index>2.5</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>6 20</usecond:cooling_time>
+			<usecond:heating_time>6 20</usecond:heating_time>
+			<usecond:min_air_exchange>4.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.5</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>14.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.4 0.4 0.6 0.6 0.6 0.4 0.4 0.6 0.8 0.6 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>5.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>9.3</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Class room (school), group room (kindergarden)</usecond:usage>
+		<usecond:typical_length>10.0</usecond:typical_length>
+		<usecond:typical_width>10.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>8 15</usecond:usage_time>
+			<usecond:daily_usage_hours>7</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>200</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>1400</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>0</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>9</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>200</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>200</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>200</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>9</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>300.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.97</usecond:red_factor_visual>
+			<usecond:rel_absence>0.25</usecond:rel_absence>
+			<usecond:room_index>2.0</usecond:room_index>
+			<usecond:part_load_factor_lighting>0.9</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>6 15</usecond:cooling_time>
+			<usecond:heating_time>6 15</usecond:heating_time>
+			<usecond:min_air_exchange>10.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.25</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.9</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>20.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.8 0.8 0.4 0.2 0.4 0.8 0.8 0.2 0.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>4.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.8 0.8 0.4 0.2 0.4 0.8 0.8 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>14.0</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Lecture hall, auditorium</usecond:usage>
+		<usecond:typical_length>20.0</usecond:typical_length>
+		<usecond:typical_width>10.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>8 18</usecond:usage_time>
+			<usecond:daily_usage_hours>10</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>150</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>1408</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>92</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>12</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>150</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>150</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>150</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>12</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>500.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.92</usecond:red_factor_visual>
+			<usecond:rel_absence>0.25</usecond:rel_absence>
+			<usecond:room_index>2.5</usecond:room_index>
+			<usecond:part_load_factor_lighting>0.7</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>6 18</usecond:cooling_time>
+			<usecond:heating_time>6 18</usecond:heating_time>
+			<usecond:min_air_exchange>30.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.5</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.6</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>70.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>4.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>12.5</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>15.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Bed room</usecond:usage>
+		<usecond:typical_length>4.0</usecond:typical_length>
+		<usecond:typical_width>4.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>0 23</usecond:usage_time>
+			<usecond:daily_usage_hours>24</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>365</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>4407</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>4353</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>24</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>365</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>365</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>365</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>24</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>300.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.0</usecond:rel_absence>
+			<usecond:room_index>1.5</usecond:room_index>
+			<usecond:part_load_factor_lighting>0.5</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.5</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>295.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>0 23</usecond:cooling_time>
+			<usecond:heating_time>0 23</usecond:heating_time>
+			<usecond:min_air_exchange>5.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.0</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.8</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>5.0</usecond:persons>
+			<usecond:profile_persons>1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0</usecond:profile_persons>
+			<usecond:machines>4.0</usecond:machines>
+			<usecond:profile_machines>0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.8 0.6 0.4 0.2 0.2</usecond:profile_machines>
+			<usecond:lighting_power>4.5</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Hotel room</usecond:usage>
+		<usecond:typical_length>4.0</usecond:typical_length>
+		<usecond:typical_width>4.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>21 8</usecond:usage_time>
+			<usecond:daily_usage_hours>11</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>365</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>743</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>3272</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>24</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>365</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>365</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>365</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>24</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>200.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.25</usecond:rel_absence>
+			<usecond:room_index>1.25</usecond:room_index>
+			<usecond:part_load_factor_lighting>0.3</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.5</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>0 23</usecond:cooling_time>
+			<usecond:heating_time>0 23</usecond:heating_time>
+			<usecond:min_air_exchange>3.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.5</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.5</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>7.0</usecond:persons>
+			<usecond:profile_persons>1.0 1.0 1.0 1.0 1.0 1.0 0.8 0.4 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.4 0.6 0.8 1.0</usecond:profile_persons>
+			<usecond:machines>4.0</usecond:machines>
+			<usecond:profile_machines>1.0 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.6 0.8 1.0</usecond:profile_machines>
+			<usecond:lighting_power>2.9</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Canteen</usecond:usage>
+		<usecond:typical_length>20.0</usecond:typical_length>
+		<usecond:typical_width>20.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>8 15</usecond:usage_time>
+			<usecond:daily_usage_hours>7</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>250</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>1750</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>0</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>9</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>250</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>250</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>250</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>9</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>200.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.97</usecond:red_factor_visual>
+			<usecond:rel_absence>0.0</usecond:rel_absence>
+			<usecond:room_index>2.5</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>6 15</usecond:cooling_time>
+			<usecond:heating_time>6 15</usecond:heating_time>
+			<usecond:min_air_exchange>18.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.7</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>59.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.4 0.2 0.4 1.0 0.4 0.2 0.4 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>2.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.4 0.4 0.4 0.6 1.0 1.0 0.8 0.4 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>6.1</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>18.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Restaurant</usecond:usage>
+		<usecond:typical_length>12.0</usecond:typical_length>
+		<usecond:typical_width>12.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>10 0</usecond:usage_time>
+			<usecond:daily_usage_hours>14</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>300</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2411</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>1789</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>16</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>300</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>300</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>300</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>16</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>200.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.0</usecond:rel_absence>
+			<usecond:room_index>2.5</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>8 0</usecond:cooling_time>
+			<usecond:heating_time>8 0</usecond:heating_time>
+			<usecond:min_air_exchange>18.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.6</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.7</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>59.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.2 0.2 0.2 0.8 0.4 0.0 0.0 0.0 0.0 0.2 0.2 0.4 0.8 0.2 0.2</usecond:profile_persons>
+			<usecond:machines>2.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.4 0.4 0.4 0.4 1.0 1.0 0.1 0.1 0.1 0.1 0.4 0.4 0.4 1.0 0.8 0.4</usecond:profile_machines>
+			<usecond:lighting_power>6.9</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Kitchen in non-residential buildings</usecond:usage>
+		<usecond:typical_length>6.0</usecond:typical_length>
+		<usecond:typical_width>6.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>10 23</usecond:usage_time>
+			<usecond:daily_usage_hours>13</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>300</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2411</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>1489</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>15</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>300</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>300</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>300</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>15</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>500.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.96</usecond:red_factor_visual>
+			<usecond:rel_absence>0.0</usecond:rel_absence>
+			<usecond:room_index>1.5</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>8 23</usecond:cooling_time>
+			<usecond:heating_time>8 23</usecond:heating_time>
+			<usecond:min_air_exchange>90.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.0</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>8.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.4 0.4 0.8 1.0 1.0 0.6 0.4 0.2 0.2 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>300.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.2 0.8 1.0 1.0 0.6 0.4 0.2 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>12.5</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>70.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Kitchen - preparations, storage</usecond:usage>
+		<usecond:typical_length>6.0</usecond:typical_length>
+		<usecond:typical_width>6.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>10 23</usecond:usage_time>
+			<usecond:daily_usage_hours>13</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>300</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2411</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>1489</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>15</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>300</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>300</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>300</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>15</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>300.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.5</usecond:rel_absence>
+			<usecond:room_index>1.5</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>8 23</usecond:cooling_time>
+			<usecond:heating_time>8 23</usecond:heating_time>
+			<usecond:min_air_exchange>15.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.0</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>8.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.4 0.4 0.4 1.0 1.0 0.6 0.4 0.0 0.0 0.0 0.4 0.8 1.0 0.4 0.2 0.0</usecond:profile_persons>
+			<usecond:machines>30.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.4 0.4 0.4 1.0 1.0 0.6 0.4 0.1 0.1 0.1 0.4 0.8 1.0 0.4 0.2 0.1</usecond:profile_machines>
+			<usecond:lighting_power>15.9</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>WC and sanitary rooms in non-residential buildings</usecond:usage>
+		<usecond:typical_length>3.0</usecond:typical_length>
+		<usecond:typical_width>6.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>7 18</usecond:usage_time>
+			<usecond:daily_usage_hours>11</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>250</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2543</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>207</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>13</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>250</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>250</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>250</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>13</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>200.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.9</usecond:rel_absence>
+			<usecond:room_index>0.8</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>5 18</usecond:cooling_time>
+			<usecond:heating_time>5 18</usecond:heating_time>
+			<usecond:min_air_exchange>15.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.7</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>0.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>0.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>11.1</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>8.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Further common rooms</usecond:usage>
+		<usecond:typical_length>6.0</usecond:typical_length>
+		<usecond:typical_width>6.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>7 18</usecond:usage_time>
+			<usecond:daily_usage_hours>11</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>250</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2543</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>207</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>13</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>250</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>250</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>250</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>13</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>300.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.93</usecond:red_factor_visual>
+			<usecond:rel_absence>0.5</usecond:rel_absence>
+			<usecond:room_index>1.25</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>5 18</usecond:cooling_time>
+			<usecond:heating_time>5 18</usecond:heating_time>
+			<usecond:min_air_exchange>7.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.5</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.8</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>23.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>2.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>6.3</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Auxiliary areas (without common rooms)</usecond:usage>
+		<usecond:typical_length>3.0</usecond:typical_length>
+		<usecond:typical_width>6.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>7 18</usecond:usage_time>
+			<usecond:daily_usage_hours>11</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>250</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2543</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>207</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>13</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>250</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>250</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>250</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>13</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>100.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.9</usecond:rel_absence>
+			<usecond:room_index>1.5</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>5 18</usecond:cooling_time>
+			<usecond:heating_time>5 18</usecond:heating_time>
+			<usecond:min_air_exchange>0.15</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.0</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>0.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>0.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>6.3</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Traffic area</usecond:usage>
+		<usecond:typical_length>2.0</usecond:typical_length>
+		<usecond:typical_width>12.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>7 18</usecond:usage_time>
+			<usecond:daily_usage_hours>11</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>250</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2543</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>207</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>13</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>250</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>250</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>250</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>13</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>100.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.2</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.8</usecond:rel_absence>
+			<usecond:room_index>0.8</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>5 18</usecond:cooling_time>
+			<usecond:heating_time>5 18</usecond:heating_time>
+			<usecond:min_air_exchange>0.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.0</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>0.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>0.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>7.0</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>2.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Stock, technical equipment, archives</usecond:usage>
+		<usecond:typical_length>6.0</usecond:typical_length>
+		<usecond:typical_width>6.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>7 18</usecond:usage_time>
+			<usecond:daily_usage_hours>11</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>250</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2543</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>207</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>13</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>250</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>250</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>250</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>13</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>100.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.98</usecond:rel_absence>
+			<usecond:room_index>1.5</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>5 18</usecond:cooling_time>
+			<usecond:heating_time>5 18</usecond:heating_time>
+			<usecond:min_air_exchange>0.15</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.0</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>0.0</usecond:persons>
+			<usecond:profile_persons>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</usecond:profile_persons>
+			<usecond:machines>0.0</usecond:machines>
+			<usecond:profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</usecond:profile_machines>
+			<usecond:lighting_power>11.3</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.5</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Data center</usecond:usage>
+		<usecond:typical_length>6.0</usecond:typical_length>
+		<usecond:typical_width>6.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>7 23</usecond:usage_time>
+			<usecond:daily_usage_hours>24</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>365</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>4407</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>4353</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>24</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>365</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>365</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>365</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>24</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>500.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.96</usecond:red_factor_visual>
+			<usecond:rel_absence>0.5</usecond:rel_absence>
+			<usecond:room_index>1.5</usecond:room_index>
+			<usecond:part_load_factor_lighting>0.5</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>0 23</usecond:cooling_time>
+			<usecond:heating_time>0 23</usecond:heating_time>
+			<usecond:min_air_exchange>1.3</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.0</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>3.0</usecond:persons>
+			<usecond:profile_persons>1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0</usecond:profile_persons>
+			<usecond:machines>150.0</usecond:machines>
+			<usecond:profile_machines>1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0</usecond:profile_machines>
+			<usecond:lighting_power>7.1</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>130.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Commercial and industrial Halls - heavy work, standing activity</usecond:usage>
+		<usecond:typical_length>20.0</usecond:typical_length>
+		<usecond:typical_width>20.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>7 16</usecond:usage_time>
+			<usecond:daily_usage_hours>9</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>230</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2018</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>52</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>10</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>230</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>230</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>230</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>10</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>300.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.85</usecond:red_factor_visual>
+			<usecond:rel_absence>0.1</usecond:rel_absence>
+			<usecond:room_index>2.5</usecond:room_index>
+			<usecond:part_load_factor_lighting>0.9</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>288.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>301.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>288.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>303.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>6 16</usecond:cooling_time>
+			<usecond:heating_time>6 16</usecond:heating_time>
+			<usecond:min_air_exchange>3.5</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.0</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>5.0</usecond:persons>
+			<usecond:profile_persons>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</usecond:profile_persons>
+			<usecond:machines>35.0</usecond:machines>
+			<usecond:profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</usecond:profile_machines>
+			<usecond:lighting_power>10.8</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>10.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Commercial and industrial Halls - medium work, standing activity</usecond:usage>
+		<usecond:typical_length>20.0</usecond:typical_length>
+		<usecond:typical_width>20.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>7 16</usecond:usage_time>
+			<usecond:daily_usage_hours>9</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>230</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2018</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>52</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>10</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>230</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>230</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>230</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>10</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>400.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.85</usecond:red_factor_visual>
+			<usecond:rel_absence>0.1</usecond:rel_absence>
+			<usecond:room_index>2.5</usecond:room_index>
+			<usecond:part_load_factor_lighting>0.9</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>290.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>299.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>288.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>301.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>6 16</usecond:cooling_time>
+			<usecond:heating_time>6 16</usecond:heating_time>
+			<usecond:min_air_exchange>2.5</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.0</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>4.0</usecond:persons>
+			<usecond:profile_persons>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</usecond:profile_persons>
+			<usecond:machines>35.0</usecond:machines>
+			<usecond:profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</usecond:profile_machines>
+			<usecond:lighting_power>10.8</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>10.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Commercial and industrial Halls - light work, standing activity</usecond:usage>
+		<usecond:typical_length>20.0</usecond:typical_length>
+		<usecond:typical_width>20.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>7 16</usecond:usage_time>
+			<usecond:daily_usage_hours>9</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>230</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2018</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>52</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>10</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>230</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>230</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>230</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>10</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>500.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.85</usecond:red_factor_visual>
+			<usecond:rel_absence>0.1</usecond:rel_absence>
+			<usecond:room_index>2.5</usecond:room_index>
+			<usecond:part_load_factor_lighting>0.9</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>293.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>291.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>6 16</usecond:cooling_time>
+			<usecond:heating_time>6 16</usecond:heating_time>
+			<usecond:min_air_exchange>1.5</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.0</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>3.0</usecond:persons>
+			<usecond:profile_persons>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</usecond:profile_persons>
+			<usecond:machines>35.0</usecond:machines>
+			<usecond:profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</usecond:profile_machines>
+			<usecond:lighting_power>14.7</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>10.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Spectator area (theater and event venues)</usecond:usage>
+		<usecond:typical_length>20.0</usecond:typical_length>
+		<usecond:typical_width>10.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>19 23</usecond:usage_time>
+			<usecond:daily_usage_hours>4</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>250</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>59</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>941</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>6</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>250</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>250</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>250</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>6</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>200.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.97</usecond:red_factor_visual>
+			<usecond:rel_absence>0.0</usecond:rel_absence>
+			<usecond:room_index>4.0</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>17 23</usecond:cooling_time>
+			<usecond:heating_time>17 23</usecond:heating_time>
+			<usecond:min_air_exchange>40.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.7</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>93.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 0.6 0.6 0.6 0.6 0.6 1.0 1.0 1.0 0.6 0.2</usecond:profile_persons>
+			<usecond:machines>0.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 0.6 0.6 0.6 0.6 0.6 1.0 1.0 1.0 0.6 0.2</usecond:profile_machines>
+			<usecond:lighting_power>10.8</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Foyer (theater and event venues)</usecond:usage>
+		<usecond:typical_length>12.0</usecond:typical_length>
+		<usecond:typical_width>12.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>19 23</usecond:usage_time>
+			<usecond:daily_usage_hours>4</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>250</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>59</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>941</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>6</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>250</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>250</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>250</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>6</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>300.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.0</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.5</usecond:rel_absence>
+			<usecond:room_index>4.0</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>17 23</usecond:cooling_time>
+			<usecond:heating_time>17 23</usecond:heating_time>
+			<usecond:min_air_exchange>25.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.5</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>88.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>0.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.4 0.6 0.8 0.8 0.2 0.1 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>4.4</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Stage (theater and event venues)</usecond:usage>
+		<usecond:typical_length>10.0</usecond:typical_length>
+		<usecond:typical_width>5.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>13 23</usecond:usage_time>
+			<usecond:daily_usage_hours>10</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>250</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>1259</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>1241</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>12</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>250</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>250</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>250</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>12</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>1000.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.0</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.9</usecond:red_factor_visual>
+			<usecond:rel_absence>0.0</usecond:rel_absence>
+			<usecond:room_index>2.5</usecond:room_index>
+			<usecond:part_load_factor_lighting>0.6</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>11 23</usecond:cooling_time>
+			<usecond:heating_time>11 23</usecond:heating_time>
+			<usecond:min_air_exchange>0.3</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.0</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>0.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 0.6 0.6 0.6 0.6 0.6 1.0 1.0 1.0 0.6 0.2</usecond:profile_persons>
+			<usecond:machines>0.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 0.6 0.6 0.6 0.6 0.6 1.0 1.0 1.0 0.6 0.2</usecond:profile_machines>
+			<usecond:lighting_power>10.8</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Exhibition, congress</usecond:usage>
+		<usecond:typical_length>40.0</usecond:typical_length>
+		<usecond:typical_width>20.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>9 18</usecond:usage_time>
+			<usecond:daily_usage_hours>9</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>150</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>1258</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>92</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>11</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>150</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>150</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>150</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>11</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>300.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.93</usecond:red_factor_visual>
+			<usecond:rel_absence>0.5</usecond:rel_absence>
+			<usecond:room_index>5.0</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>7 18</usecond:cooling_time>
+			<usecond:heating_time>7 18</usecond:heating_time>
+			<usecond:min_air_exchange>7.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.7</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>23.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.6 0.6 0.6 1.0 1.0 0.6 0.2 0.0</usecond:profile_persons>
+			<usecond:machines>2.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.6 0.6 0.6 1.0 1.0 0.6 0.2 0.1</usecond:profile_machines>
+			<usecond:lighting_power>10.8</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Exhibition room and museum conservational demands</usecond:usage>
+		<usecond:typical_length>20.0</usecond:typical_length>
+		<usecond:typical_width>20.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>10 18</usecond:usage_time>
+			<usecond:daily_usage_hours>8</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>250</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>1846</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>154</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>24</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>365</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>365</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>365</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>24</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>200.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.88</usecond:red_factor_visual>
+			<usecond:rel_absence>0.0</usecond:rel_absence>
+			<usecond:room_index>2.0</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>0 23</usecond:cooling_time>
+			<usecond:heating_time>0 23</usecond:heating_time>
+			<usecond:min_air_exchange>2.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.5</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>7.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.6 0.6 0.6 1.0 1.0 0.6 0.2 0.0</usecond:profile_persons>
+			<usecond:machines>0.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.6 0.6 0.6 1.0 1.0 0.6 0.2 0.1</usecond:profile_machines>
+			<usecond:lighting_power>10.8</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Library - reading room</usecond:usage>
+		<usecond:typical_length>20.0</usecond:typical_length>
+		<usecond:typical_width>20.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>8 20</usecond:usage_time>
+			<usecond:daily_usage_hours>12</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>300</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>3009</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>591</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>14</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>300</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>300</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>300</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>14</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>500.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.88</usecond:red_factor_visual>
+			<usecond:rel_absence>0.0</usecond:rel_absence>
+			<usecond:room_index>1.5</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>6 20</usecond:cooling_time>
+			<usecond:heating_time>6 20</usecond:heating_time>
+			<usecond:min_air_exchange>8.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.5</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>28.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>0.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>6.9</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Library - open stacks</usecond:usage>
+		<usecond:typical_length>6.0</usecond:typical_length>
+		<usecond:typical_width>6.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>8 20</usecond:usage_time>
+			<usecond:daily_usage_hours>12</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>300</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>3009</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>591</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>14</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>300</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>300</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>300</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>14</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>200.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.0</usecond:rel_absence>
+			<usecond:room_index>1.5</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>6 20</usecond:cooling_time>
+			<usecond:heating_time>6 20</usecond:heating_time>
+			<usecond:min_air_exchange>2.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.0</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>7.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>0.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>6.9</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Library - magazine and depot</usecond:usage>
+		<usecond:typical_length>6.0</usecond:typical_length>
+		<usecond:typical_width>6.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>8 20</usecond:usage_time>
+			<usecond:daily_usage_hours>12</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>300</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>3009</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>591</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>14</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>300</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>300</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>300</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>14</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>100.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.9</usecond:rel_absence>
+			<usecond:room_index>1.5</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>6 20</usecond:cooling_time>
+			<usecond:heating_time>6 20</usecond:heating_time>
+			<usecond:min_air_exchange>3.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.5</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>1.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>0.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>0.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>6.9</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Gym (without spectator area)</usecond:usage>
+		<usecond:typical_length>40.0</usecond:typical_length>
+		<usecond:typical_width>20.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>8 23</usecond:usage_time>
+			<usecond:daily_usage_hours>15</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>250</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2509</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>1241</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>17</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>250</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>250</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>250</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>17</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>300.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.0</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.3</usecond:rel_absence>
+			<usecond:room_index>2.0</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>6 23</usecond:cooling_time>
+			<usecond:heating_time>6 23</usecond:heating_time>
+			<usecond:min_air_exchange>3.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.5</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.9</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>6.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.4 0.8 1.0 1.0 0.8 0.0 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8 0.5 0.5 0.0</usecond:profile_persons>
+			<usecond:machines>0.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.5 0.8 1.0 1.0 0.8 0.1 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8 0.5 0.5 0.1</usecond:profile_machines>
+			<usecond:lighting_power>10.5</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Parking garages (office and private usage)</usecond:usage>
+		<usecond:typical_length>50.0</usecond:typical_length>
+		<usecond:typical_width>50.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>7 18</usecond:usage_time>
+			<usecond:daily_usage_hours>11</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>250</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2543</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>207</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>13</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>250</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>250</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>250</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>0</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>75.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.2</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.95</usecond:rel_absence>
+			<usecond:room_index>2.0</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>5 18</usecond:cooling_time>
+			<usecond:heating_time>5 18</usecond:heating_time>
+			<usecond:min_air_exchange>8.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.0</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>0.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>0.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>2.9</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Parking garages (public usage)</usecond:usage>
+		<usecond:typical_length>100.0</usecond:typical_length>
+		<usecond:typical_width>50.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>9 0</usecond:usage_time>
+			<usecond:daily_usage_hours>15</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>365</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>3298</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>2177</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>17</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>365</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>365</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>365</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>0</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>75.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.2</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.8</usecond:rel_absence>
+			<usecond:room_index>4.0</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>7 0</usecond:cooling_time>
+			<usecond:heating_time>0 0</usecond:heating_time>
+			<usecond:min_air_exchange>16.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.0</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>0.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>0.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>2.9</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Sauna area</usecond:usage>
+		<usecond:typical_length>1.0</usecond:typical_length>
+		<usecond:typical_width>1.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>10 22</usecond:usage_time>
+			<usecond:daily_usage_hours>12</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>365</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2933</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>1447</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>14</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>365</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>365</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>365</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>14</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>200.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.0</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.0</usecond:rel_absence>
+			<usecond:room_index>1.0</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>297.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>296.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>8 22</usecond:cooling_time>
+			<usecond:heating_time>8 22</usecond:heating_time>
+			<usecond:min_air_exchange>15.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.0</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>6.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.5 0.8 1.0 1.0 0.8 0.0 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8 0.5 0.5 0.0</usecond:profile_persons>
+			<usecond:machines>50.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.5 0.8 1.0 1.0 0.8 0.0 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8 0.5 0.5 0.1</usecond:profile_machines>
+			<usecond:lighting_power>11.3</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Exercise room</usecond:usage>
+		<usecond:typical_length>10.0</usecond:typical_length>
+		<usecond:typical_width>10.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>8 23</usecond:usage_time>
+			<usecond:daily_usage_hours>15</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>365</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>3663</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>1812</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>17</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>365</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>365</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>365</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>17</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>300.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.0</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.0</usecond:rel_absence>
+			<usecond:room_index>2.0</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>293.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>291.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>6 23</usecond:cooling_time>
+			<usecond:heating_time>6 23</usecond:heating_time>
+			<usecond:min_air_exchange>12.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.5</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.9</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>22.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.5 0.8 1.0 1.0 0.8 0.0 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8 0.5 0.5 0.0</usecond:profile_persons>
+			<usecond:machines>2.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.5 0.8 1.0 1.0 0.8 0.1 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8 0.5 0.5 0.1</usecond:profile_machines>
+			<usecond:lighting_power>9.9</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Laboratory</usecond:usage>
+		<usecond:typical_length>6.0</usecond:typical_length>
+		<usecond:typical_width>6.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>7 18</usecond:usage_time>
+			<usecond:daily_usage_hours>11</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>250</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2543</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>207</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>24</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>250</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>250</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>250</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>13</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>500.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>1.0</usecond:usage_level_height>
+			<usecond:red_factor_visual>0.92</usecond:red_factor_visual>
+			<usecond:rel_absence>0.3</usecond:rel_absence>
+			<usecond:room_index>1.25</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>295.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>0 23</usecond:cooling_time>
+			<usecond:heating_time>5 18</usecond:heating_time>
+			<usecond:min_air_exchange>25.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.0</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>6.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>18.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>14.0</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>24.0</usecond:min_ahu>
+			<usecond:max_ahu>48.0</usecond:max_ahu>
+			<usecond:with_ahu>true</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Examination- or treatment room</usecond:usage>
+		<usecond:typical_length>3.0</usecond:typical_length>
+		<usecond:typical_width>6.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>7 18</usecond:usage_time>
+			<usecond:daily_usage_hours>11</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>250</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2543</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>207</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>13</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>250</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>250</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>250</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>13</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>500.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.0</usecond:rel_absence>
+			<usecond:room_index>1.2</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>295.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>5 18</usecond:cooling_time>
+			<usecond:heating_time>5 18</usecond:heating_time>
+			<usecond:min_air_exchange>10.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.3</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.7</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>12.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>7.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>15.9</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Special care area</usecond:usage>
+		<usecond:typical_length>6.0</usecond:typical_length>
+		<usecond:typical_width>6.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>0 23</usecond:usage_time>
+			<usecond:daily_usage_hours>24</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>365</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>4407</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>4353</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>24</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>365</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>365</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>365</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>24</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>300.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.0</usecond:rel_absence>
+			<usecond:room_index>1.2</usecond:room_index>
+			<usecond:part_load_factor_lighting>0.8</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>297.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>295.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>0 23</usecond:cooling_time>
+			<usecond:heating_time>0 23</usecond:heating_time>
+			<usecond:min_air_exchange>30.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.0</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>6.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>10.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>14.0</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Corridors in the general care area</usecond:usage>
+		<usecond:typical_length>2.0</usecond:typical_length>
+		<usecond:typical_width>12.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>0 23</usecond:usage_time>
+			<usecond:daily_usage_hours>24</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>365</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>4407</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>4353</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>24</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>365</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>365</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>365</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>24</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>125.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.2</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.8</usecond:rel_absence>
+			<usecond:room_index>1.0</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>295.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>0 23</usecond:cooling_time>
+			<usecond:heating_time>0 23</usecond:heating_time>
+			<usecond:min_air_exchange>10.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.0</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>0.0</usecond:persons>
+			<usecond:profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_persons>
+			<usecond:machines>0.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.1 0.1 0.1 0.1 0.1</usecond:profile_machines>
+			<usecond:lighting_power>14.1</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Medical and therapeutic practices</usecond:usage>
+		<usecond:typical_length>6.0</usecond:typical_length>
+		<usecond:typical_width>6.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>8 18</usecond:usage_time>
+			<usecond:daily_usage_hours>10</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>250</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>2346</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>154</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>12</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>250</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>250</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>250</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>12</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>500.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.8</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.0</usecond:rel_absence>
+			<usecond:room_index>1.2</usecond:room_index>
+			<usecond:part_load_factor_lighting>1.0</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>295.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>6 18</usecond:cooling_time>
+			<usecond:heating_time>6 18</usecond:heating_time>
+			<usecond:min_air_exchange>10.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.3</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.7</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>8.0</usecond:persons>
+			<usecond:profile_persons>0.2 0.2 0.2 0.2 0.2 0.2 0.4 1.0 0.6 0.6 0.6 0.6 1.0 0.6 0.6 0.6 0.6 1.0 0.4 0.2 0.2 0.2 0.2 0.2</usecond:profile_persons>
+			<usecond:machines>5.0</usecond:machines>
+			<usecond:profile_machines>0.2 0.2 0.2 0.2 0.2 0.2 0.4 1.0 0.6 0.6 0.6 0.6 1.0 0.6 0.6 0.6 0.6 1.0 0.4 0.2 0.2 0.2 0.2 0.2</usecond:profile_machines>
+			<usecond:lighting_power>15.9</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Storehouse, logistics building</usecond:usage>
+		<usecond:typical_length>20.0</usecond:typical_length>
+		<usecond:typical_width>20.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>0 23</usecond:usage_time>
+			<usecond:daily_usage_hours>24</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>365</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>4407</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>4353</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>24</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>365</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>365</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>365</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>24</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>150.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.0</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.6</usecond:rel_absence>
+			<usecond:room_index>2.4</usecond:room_index>
+			<usecond:part_load_factor_lighting>0.4</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.9</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>285.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>299.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>285.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>301.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>0 23</usecond:cooling_time>
+			<usecond:heating_time>0 23</usecond:heating_time>
+			<usecond:min_air_exchange>1.0</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.0</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>0.0</usecond:persons>
+			<usecond:profile_persons>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</usecond:profile_persons>
+			<usecond:machines>0.0</usecond:machines>
+			<usecond:profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</usecond:profile_machines>
+			<usecond:lighting_power>11.3</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.0</usecond:min_ahu>
+			<usecond:max_ahu>0.0</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+	<usecond:BoundaryConditions>
+		<usecond:usage>Living</usecond:usage>
+		<usecond:typical_length>3.0</usecond:typical_length>
+		<usecond:typical_width>6.0</usecond:typical_width>
+		<usecond:UsageOperationTime>
+			<usecond:usage_time>0 23</usecond:usage_time>
+			<usecond:daily_usage_hours>24</usecond:daily_usage_hours>
+			<usecond:yearly_usage_days>365</usecond:yearly_usage_days>
+			<usecond:yearly_usage_hours_day>4000</usecond:yearly_usage_hours_day>
+			<usecond:yearly_usage_hours_night>4000</usecond:yearly_usage_hours_night>
+			<usecond:daily_operation_ahu_cooling>24</usecond:daily_operation_ahu_cooling>
+			<usecond:yearly_heating_days>365</usecond:yearly_heating_days>
+			<usecond:yearly_ahu_days>365</usecond:yearly_ahu_days>
+			<usecond:yearly_cooling_days>365</usecond:yearly_cooling_days>
+			<usecond:daily_operation_heating>24</usecond:daily_operation_heating>
+		</usecond:UsageOperationTime>
+		<usecond:Lighting>
+			<usecond:maintained_illuminance>150.0</usecond:maintained_illuminance>
+			<usecond:usage_level_height>0.0</usecond:usage_level_height>
+			<usecond:red_factor_visual>1.0</usecond:red_factor_visual>
+			<usecond:rel_absence>0.6</usecond:rel_absence>
+			<usecond:room_index>2.4</usecond:room_index>
+			<usecond:part_load_factor_lighting>0.4</usecond:part_load_factor_lighting>
+			<usecond:ratio_conv_rad_lighting>0.5</usecond:ratio_conv_rad_lighting>
+		</usecond:Lighting>
+		<usecond:RoomClimate>
+			<usecond:set_temp_heat>294.15</usecond:set_temp_heat>
+			<usecond:set_temp_cool>297.15</usecond:set_temp_cool>
+			<usecond:temp_set_back>4.0</usecond:temp_set_back>
+			<usecond:min_temp_heat>293.15</usecond:min_temp_heat>
+			<usecond:max_temp_cool>299.15</usecond:max_temp_cool>
+			<usecond:rel_humidity>0.0</usecond:rel_humidity>
+			<usecond:cooling_time>0 23</usecond:cooling_time>
+			<usecond:heating_time>0 23</usecond:heating_time>
+			<usecond:min_air_exchange>0.5</usecond:min_air_exchange>
+			<usecond:rel_absence_ahu>0.0</usecond:rel_absence_ahu>
+			<usecond:part_load_factor_ahu>0.0</usecond:part_load_factor_ahu>
+		</usecond:RoomClimate>
+		<usecond:InternalGains>
+			<usecond:persons>1.5</usecond:persons>
+			<usecond:profile_persons>1.0 1.0 1.0 1.0 1.0 1.0 0.8 0.6 0.4 0.4 0.4 0.6 0.8 0.6 0.4 0.4 0.6 0.8 0.8 0.8 0.8 1.0 1.0 1.0</usecond:profile_persons>
+			<usecond:machines>2.0</usecond:machines>
+			<usecond:profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.5 1.0 0.5 0.5 0.5 1.0 1.0 0.5 0.5 0.5 1.0 1.0 1.0 1.0 0.5 0.5 0.5 0.1</usecond:profile_machines>
+			<usecond:lighting_power>7.0</usecond:lighting_power>
+			<usecond:profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</usecond:profile_lighting>
+		</usecond:InternalGains>
+		<usecond:AHU>
+			<usecond:min_ahu>0.3</usecond:min_ahu>
+			<usecond:max_ahu>0.6</usecond:max_ahu>
+			<usecond:with_ahu>false</usecond:with_ahu>
+			<usecond:use_constant_ach_rate>false</usecond:use_constant_ach_rate>
+			<usecond:base_ach>0.2</usecond:base_ach>
+			<usecond:max_user_ach>1.0</usecond:max_user_ach>
+			<usecond:max_overheating_ach>3.0 2.0</usecond:max_overheating_ach>
+			<usecond:max_summer_ach>1.0 283.15 290.15</usecond:max_summer_ach>
+			<usecond:winter_reduction>0.2 273.15 283.15</usecond:winter_reduction>
+		</usecond:AHU>
+	</usecond:BoundaryConditions>
+</usecond:UseConditions>
