@@ -2452,7 +2452,9 @@ class Test_teaser(object):
         import teaser.data.input.teaserxml_input as t_input_old
 
         t_input_old.load_teaser_xml(
-            os.path.join(os.path.dirname(__file__), "testfiles", "teaser_v4.teaserXML"),
+            os.path.join(
+                os.path.dirname(__file__), "testfiles", "teaser_v39.teaserXML"
+            ),
             prj,
         )
 
