@@ -47,7 +47,7 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     aExt = ${zone.model_attr.solar_absorp_ow},
     TSoil = ${zone.t_ground},
     hConWallOut = ${zone.model_attr.alpha_conv_outer_ow},
-    hConRadWall = ${zone.model_attr.alpha_rad_outer_mean},
+    hRadWall = ${zone.model_attr.alpha_rad_outer_mean},
     hConWinOut = ${zone.model_attr.alpha_conv_outer_win},
     hConRoofOut = 0.0,
     hRadRoof = 0.0,
