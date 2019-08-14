@@ -57,10 +57,10 @@ def example_create_building():
 
     # Instantiate BoundaryConditions and load conditions for `Living`.
 
-    from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
-        import BoundaryConditions
+    from teaser.logic.buildingobjects.useconditions \
+        import UseConditions
 
-    tz.use_conditions = BoundaryConditions(parent=tz)
+    tz.use_conditions = UseConditions(parent=tz)
     tz.use_conditions.load_use_conditions("Living", prj.data)
 
     # Define two building elements reflecting a pitched roof (south = 180° and
