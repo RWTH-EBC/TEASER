@@ -1116,12 +1116,6 @@ class Project(object):
 
         self.buildings = []
 
-        self.load_data = load_data
-
-        self._number_of_elements_calc = 2
-        self._merge_windows_calc = False
-        self._used_library_calc = "AixLib"
-
         if load_data is True:
             self.data = self.instantiate_data_class()
         elif not load_data:
@@ -1129,12 +1123,6 @@ class Project(object):
         else:
             self.data = None
 
-        self.name = "Project"
-
-        self.weather_file_header = "wetter"
-        self.weather_file_path = "modelica://AixLib/Resources/WeatherData/" \
-                                 "TRY2010_12_Jahr_Modelica-Library.txt"
-        self.buildings = []
         self._number_of_elements_calc = 2
         self._merge_windows_calc = False
         self._used_library_calc = "AixLib"

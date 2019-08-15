@@ -633,6 +633,12 @@ class Test_teaser(object):
         prj.load_citygml(
             utilities.get_full_path("examples/examplefiles/CityGMLSample.gml")
         )
+        prj.name = "CityGML_Test"
+        prj.calc_all_buildings()
+        path = prj.export_aixlib(
+            internal_id=None,
+            path=None)
+        prj.set_default()
 
     def test_calc_all_buildings(self):
         """test of calc_all_buildings, no calculation verification"""
