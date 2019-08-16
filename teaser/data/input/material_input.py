@@ -1,10 +1,4 @@
-# Created April 2016
-# TEASER 4 Development Team
-
-"""material_input.py
-
-This module contains function to load material classes
-"""
+"""This module contains function to load material classes."""
 
 
 def load_material(material, mat_name, data_class):
@@ -17,7 +11,6 @@ def load_material(material, mat_name, data_class):
 
     Parameters
     ----------
-
     material : Material()
         instance of TEASERS Material class
 
@@ -28,8 +21,8 @@ def load_material(material, mat_name, data_class):
         DataClass containing the bindings for TypeBuildingElement and
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.
-    """
 
+    """
     binding = data_class.material_bind
 
     for mat in binding.Material:
@@ -58,7 +51,6 @@ def load_material_id(material, mat_id, data_class):
 
     Parameters
     ----------
-
     material : Material()
         instance of TEASERS Material class
 
@@ -69,8 +61,8 @@ def load_material_id(material, mat_id, data_class):
         DataClass containing the bindings for TypeBuildingElement and
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.
-    """
 
+    """
     binding = data_class.material_bind
 
     for mat in binding.Material:

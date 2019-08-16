@@ -1,7 +1,4 @@
-# Created July 2015
-# TEASER Development Team
-
-"""TeaserXML_input
+"""OLD! Will be deleted in future version.
 
 This module contains function to load Projects in the proprietary
 TEASER file format .tXML
@@ -19,8 +16,7 @@ from teaser.logic.archetypebuildings.bmvbs.custom.institute8 import Institute8
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
 from teaser.logic.buildingobjects.buildingsystems.buildingahu import\
     BuildingAHU
-from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
-    import BoundaryConditions
+from teaser.logic.buildingobjects.useconditions import UseConditions
 from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
 from teaser.logic.buildingobjects.buildingphysics.material import Material
@@ -35,7 +31,9 @@ from teaser.logic.buildingobjects.buildingphysics.door import Door
 
 
 def load_teaser_xml(path, prj):
-    """This function loads a project from teaserXML
+    """Function to load old XML files into new TEASER classes.
+
+    ATTENTION: This function should only be used to load old .teaserXML files.
 
     TEASERs internal file format to store information.
 
@@ -49,6 +47,11 @@ def load_teaser_xml(path, prj):
 
 
     """
+
+    warnings.warn(
+        "This function should only be used to transform old XML files"
+        "and will be deleted within the next versions of TEASER")
+
     version_parse = element_tree.parse(path)
     xml_file = open(path, 'r')
     if bool(version_parse.getroot().attrib) is False:
@@ -152,13 +155,13 @@ def _load_building(prj, pyxb_bld, type, project_bind):
             bldg.central_ahu.efficiency_recovery_false = \
                 pyxb_ahu.efficiency_revocery_false
 
-        bldg.central_ahu.profile_min_relative_humidity = \
+        bldg.central_ahu.min_relative_humidity_profile = \
             pyxb_ahu.profile_min_relative_humidity
-        bldg.central_ahu.profile_max_relative_humidity = \
+        bldg.central_ahu.max_relative_humidity_profile = \
             pyxb_ahu.profile_max_relative_humidity
-        bldg.central_ahu.profile_v_flow = \
+        bldg.central_ahu.v_flow_profile = \
             pyxb_ahu.profile_v_flow
-        bldg.central_ahu.profile_temperature = \
+        bldg.central_ahu.temperature_profile = \
             pyxb_ahu.profile_temperature
 
     for pyxb_zone in pyxb_bld.ThermalZone:
@@ -170,7 +173,7 @@ def _load_building(prj, pyxb_bld, type, project_bind):
         zone.volume = pyxb_zone.volume
         zone.infiltration_rate = pyxb_zone.infiltration_rate
 
-        zone.use_conditions = BoundaryConditions(zone)
+        zone.use_conditions = UseConditions(zone)
 
         pyxb_use = pyxb_zone.UseCondition.BoundaryConditions
 
@@ -180,85 +183,25 @@ def _load_building(prj, pyxb_bld, type, project_bind):
         zone.use_conditions.usage = \
             pyxb_use.usage
 
-        zone.use_conditions.usage_time = \
-            pyxb_use.UsageOperationTime.usage_time
-        zone.use_conditions.daily_usage_hours = \
-            pyxb_use.UsageOperationTime.daily_usage_hours
-        zone.use_conditions.yearly_usage_days = \
-            pyxb_use.UsageOperationTime.yearly_usage_days
-        zone.use_conditions.yearly_usage_hours_day = \
-            pyxb_use.UsageOperationTime.yearly_usage_hours_day
-        zone.use_conditions.yearly_usage_hours_night = \
-            pyxb_use.UsageOperationTime.yearly_usage_hours_night
-        zone.use_conditions.daily_operation_ahu_cooling = \
-            pyxb_use.UsageOperationTime.daily_operation_ahu_cooling
-        zone.use_conditions.yearly_heating_days = \
-            pyxb_use.UsageOperationTime.yearly_heating_days
-        zone.use_conditions.yearly_ahu_days = \
-            pyxb_use.UsageOperationTime.yearly_ahu_days
-        zone.use_conditions.yearly_cooling_days = \
-            pyxb_use.UsageOperationTime.yearly_cooling_days
-        zone.use_conditions.daily_operation_heating = \
-            pyxb_use.UsageOperationTime.daily_operation_heating
-
-        try:
-            if float(project_bind.version) >= 0.4:
-                zone.use_conditions.maintained_illuminance = \
-                    pyxb_use.Lighting.maintained_illuminance
-            else:
-                zone.use_conditions.maintained_illuminance = \
-                    pyxb_use.Lighting.maintained_illuminace
-        except AttributeError:
-            zone.use_conditions.maintained_illuminance = \
-                pyxb_use.Lighting.maintained_illuminace
-
-        zone.use_conditions.usage_level_height = \
-            pyxb_use.Lighting.usage_level_height
-        zone.use_conditions.red_factor_visual = \
-            pyxb_use.Lighting.red_factor_visual
-        zone.use_conditions.rel_absence = \
-            pyxb_use.Lighting.rel_absence
-        zone.use_conditions.room_index = \
-            pyxb_use.Lighting.room_index
-        zone.use_conditions.part_load_factor_lighting = \
-            pyxb_use.Lighting.part_load_factor_lighting
         zone.use_conditions.ratio_conv_rad_lighting = \
             pyxb_use.Lighting.ratio_conv_rad_lighting
 
         zone.use_conditions.set_temp_heat = \
-            pyxb_use.RoomClimate.set_temp_heat
+            [pyxb_use.RoomClimate.set_temp_heat, ]
         zone.use_conditions.set_temp_cool = \
-            pyxb_use.RoomClimate.set_temp_cool
-        zone.use_conditions.temp_set_back = \
-            pyxb_use.RoomClimate.temp_set_back
-        zone.use_conditions.min_temp_heat = \
-            pyxb_use.RoomClimate.min_temp_heat
-        zone.use_conditions.max_temp_cool = \
-            pyxb_use.RoomClimate.max_temp_cool
-        zone.use_conditions.rel_humidity = \
-            pyxb_use.RoomClimate.rel_humidity
-        zone.use_conditions.cooling_time = \
-            pyxb_use.RoomClimate.cooling_time
-        zone.use_conditions.heating_time = \
-            pyxb_use.RoomClimate.heating_time
-        zone.use_conditions.min_air_exchange = \
-            pyxb_use.RoomClimate.min_air_exchange
-        zone.use_conditions.rel_absence_ahu = \
-            pyxb_use.RoomClimate.rel_absence_ahu
-        zone.use_conditions.part_load_factor_ahu = \
-            pyxb_use.RoomClimate.part_load_factor_ahu
+            [pyxb_use.RoomClimate.set_temp_cool, ]
 
         zone.use_conditions.persons = \
             pyxb_use.InternalGains.persons
-        zone.use_conditions.profile_persons = \
+        zone.use_conditions.persons_profile = \
             pyxb_use.InternalGains.profile_persons
         zone.use_conditions.machines = \
             pyxb_use.InternalGains.machines
-        zone.use_conditions.profile_machines = \
+        zone.use_conditions.machines_profile = \
             pyxb_use.InternalGains.profile_machines
         zone.use_conditions.lighting_power = \
             pyxb_use.InternalGains.lighting_power
-        zone.use_conditions.profile_lighting = \
+        zone.use_conditions.lighting_profile = \
             pyxb_use.InternalGains.profile_lighting
 
         zone.use_conditions.min_ahu = \
@@ -267,17 +210,17 @@ def _load_building(prj, pyxb_bld, type, project_bind):
             pyxb_use.AHU.max_ahu
         zone.use_conditions.with_ahu = \
             pyxb_use.AHU.with_ahu
-        zone.use_constant_ach_rate = \
+        zone.use_constant_infiltration = \
             pyxb_use.AHU.use_constant_ach_rate
-        zone.base_ach = \
+        zone.base_infiltration = \
             pyxb_use.AHU.base_ach
-        zone.max_user_ach = \
+        zone.max_user_infiltration = \
             pyxb_use.AHU.max_user_ach
-        zone.max_overheating_ach = \
+        zone.max_overheating_infiltration = \
             pyxb_use.AHU.max_overheating_ach
-        zone.max_summer_ach = \
+        zone.max_summer_infiltration = \
             pyxb_use.AHU.max_summer_ach
-        zone.winter_reduction = \
+        zone.winter_reduction_infiltration = \
             pyxb_use.AHU.winter_reduction
 
         for pyxb_wall in pyxb_zone.OuterWall:

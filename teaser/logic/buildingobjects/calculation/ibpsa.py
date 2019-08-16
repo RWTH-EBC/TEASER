@@ -1,19 +1,12 @@
-# Created December 2016
-# TEASER 4 Development Team
-
-"""This module includes IBPSA calculation class
-"""
+"""This module includes IBPSA calculation class."""
 
 import os
-
-import numpy as np
-import scipy.io
-
+import pandas as pd
 import teaser.logic.utilities as utilities
 
 
 class IBPSA(object):
-    """IBPSA Class
+    """Class to calculate parameters for AixLib output.
 
     This class holds functions to sort and partly rewrite zone and building
     attributes specific for IBPSA simulation. This includes the export of
@@ -21,14 +14,12 @@ class IBPSA(object):
 
     Parameters
     ----------
-
     parent: Building()
         The parent class of this object, the Building the attributes are
         calculated for. (default: None)
 
     Attributes
     ----------
-
     file_internal_gains : str
         Filename for internal gains file
     version : dict
@@ -41,7 +32,7 @@ class IBPSA(object):
     """
 
     def __init__(self, parent):
-
+        """Construct IBPSA."""
         self.parent = parent
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
         self.version = {
@@ -51,44 +42,6 @@ class IBPSA(object):
             "IDEAS": "2.1.0",
         }
         self.consider_heat_capacity = True
-
-    @staticmethod
-    def create_profile(duration_profile=86400, time_step=3600):
-        """Creates a profile for building boundary conditions
-
-        This function creates a list with an equidistant profile given the
-        duration of the profile in seconds (default one day, 86400 s) and the
-        time_step in seconds (default one hour, 3600 s). Needed for boundary
-        input of the building for Modelica simulation
-
-        Note
-        -----
-        As Python starts from counting the range from zero, but Modelica needs
-        0 as start value and additional 24 entries. We add one iteration
-        step in the profile.
-
-        Parameters
-        ----------
-        duration_profile : int
-            duration of the profile in seconds (default one day, 86400 s)
-        time_step : int
-            time step used in the profile in seconds (default one hour, 3600 s)
-
-        Returns
-        ---------
-        time_line : [[int]]
-            list of time steps as preparation for the output of boundary
-            conditions
-        """
-        ass_error_1 = "duration must be a multiple of time_step"
-
-        assert float(duration_profile / time_step).is_integer(), ass_error_1
-
-        time_line = []
-
-        for i in range(int(duration_profile / time_step) + 1):
-            time_line.append([i * time_step])
-        return time_line
 
     def modelica_gains_boundary(self, zone, time_line=None, path=None):
         """creates .mat file for internal gains boundary conditions
@@ -122,8 +75,8 @@ class IBPSA(object):
             list of time steps
         path : str
             optional path, when matfile is exported separately
-        """
 
+        """
         if path is None:
             path = utilities.get_default_path()
         else:
@@ -132,54 +85,56 @@ class IBPSA(object):
         utilities.create_path(path)
         path = os.path.join(path, self.file_internal_gains)
 
-        if time_line is None:
-            duration = len(zone.use_conditions.profile_persons) * 3600
-            time_line = self.create_profile(duration_profile=duration)
-
-        ass_error_1 = "time line and input have to have the same length"
-
-        assert len(time_line) - 1 == len(zone.use_conditions.profile_persons), (
-            ass_error_1 + ",profile_persons"
-        )
-        assert len(time_line) - 1 == len(zone.use_conditions.profile_machines), (
-            ass_error_1 + ",profile_machines"
+        export = pd.DataFrame(
+            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
+            .to_series()
+            .dt.strftime("%m-%d %H:%M:%S")
         )
 
-        for i, time in enumerate(time_line):
-            if i == 0:
-                time.append(0)
-                time.append(0)
-                time.append(0)
-            else:
-                time.append(
-                    zone.use_conditions.profile_persons[i - 1]
-                    * zone.use_conditions.persons
-                    * zone.use_conditions.activity_type_persons
-                    * 50
-                    * (1 - zone.use_conditions.ratio_conv_rad_persons)
-                    * zone.area
-                    * 0.01
-                )
-                time.append(
-                    zone.use_conditions.profile_persons[i - 1]
-                    * zone.use_conditions.persons
-                    * zone.use_conditions.activity_type_persons
-                    * 50
-                    * zone.use_conditions.ratio_conv_rad_persons
-                    * zone.area
-                    * 0.01
-                )
-                time.append(
-                    zone.use_conditions.profile_machines[i - 1]
-                    * zone.use_conditions.machines
-                    * zone.use_conditions.activity_type_machines
-                    * 50
-                    * zone.area
-                    * 0.01
-                )
-
-        internal_boundary = np.array(time_line)
-
-        scipy.io.savemat(
-            path, mdict={"Internals": internal_boundary}, appendmat=False, format="4"
+        export["person_rad_{}".format(zone.name)] = (
+            zone.use_conditions.schedules["persons_profile"]
+            * (1 - zone.use_conditions.ratio_conv_rad_persons)
+            * 100
+            * zone.use_conditions.persons
         )
+        export["person_conv_{}".format(zone.name)] = (
+            zone.use_conditions.schedules["persons_profile"]
+            * zone.use_conditions.ratio_conv_rad_persons
+            * 100
+            * zone.use_conditions.persons
+        )
+        export["machines_conv_{}".format(zone.name)] = (
+            zone.use_conditions.schedules["machines_profile"]
+            * zone.use_conditions.ratio_conv_rad_machines
+            * 100
+            * zone.use_conditions.machines
+        )
+
+        export.index = [(i + 1) * 3600 for i in range(8760)]
+        self._delete_file(path=path)
+        with open(path, "a") as f:
+            f.write("#1\n")
+            f.write(
+                "double Internals({}, {})\n".format(
+                    8760, (len(self.parent.thermal_zones) * 3 + 1)
+                )
+            )
+            export.to_csv(f, sep="\t", header=False, index_label=False)
+
+    def _delete_file(self, path):
+        """Delete a file before new information is written to it.
+
+        If a building with the exact name and project name is generated, we need to make
+        sure to delete the old information in the text files. This helper function is a
+        wrapper to delete a file with given filepath.
+
+        Parameters:
+        -----------
+        path : str
+            Absolute path to the file to be deleted.
+
+        """
+        try:
+            os.remove(path)
+        except OSError:
+            pass

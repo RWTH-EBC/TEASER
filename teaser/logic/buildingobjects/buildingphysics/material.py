@@ -4,7 +4,7 @@
 
 import re
 import uuid
-import teaser.data.input.material_input as material_input
+import teaser.data.input.material_input_json as material_input
 import teaser.data.output.material_output as material_output
 
 
@@ -117,7 +117,8 @@ class Material(object):
         else:
             data_class = data_class
 
-        material_output.save_material(material=self, data_class=data_class)
+        material_output.save_material(
+            material=self, data_class=data_class)
 
     def modify_material_template(self, data_class):
         """Material modifier.

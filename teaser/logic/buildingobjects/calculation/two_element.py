@@ -811,7 +811,7 @@ class TwoElement(object):
                                            self.thermal_zone.windows))
                 if len(self.thermal_zone.outer_walls) > 0:
                     conduction = (1 / sum((1 / element.r_conduc) for element in
-                                  outer_walls))
+                                          outer_walls))
 
                     self.r_rest_ow = (conduction - self.r1_ow)
 
@@ -1070,7 +1070,7 @@ class TwoElement(object):
         self.heat_load = \
             ((((ua_value_ow_temp + self.ua_value_win) +
                self.thermal_zone.volume *
-               self.thermal_zone.infiltration_rate * 1 / 3600 *
+               self.thermal_zone.use_conditions.infiltration_rate * 1 / 3600 *
                self.thermal_zone.heat_capac_air *
                self.thermal_zone.density_air) * (self.thermal_zone.t_inside -
                                                  self.thermal_zone.t_outside))

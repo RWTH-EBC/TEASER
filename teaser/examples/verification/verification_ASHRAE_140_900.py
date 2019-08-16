@@ -20,8 +20,7 @@ from teaser.logic.buildingobjects.buildingphysics.floor import Floor
 from teaser.logic.buildingobjects.buildingphysics.groundfloor import \
     GroundFloor
 from teaser.logic.buildingobjects.buildingphysics.window import Window
-from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
-    import BoundaryConditions
+from teaser.logic.buildingobjects.useconditions import UseConditions
 import teaser.logic.utilities as utilities
 
 
@@ -46,7 +45,6 @@ def main(number_of_elements=2):
         merge_windows=False,
         used_library='IBPSA')
 
-    prj.export_parameters_txt()
     prj.export_ibpsa()
 
 
@@ -86,9 +84,8 @@ def from_scratch(
     tz.name = "TestRoom900"
     tz.area = 8.0 * 6.0
     tz.volume = tz.area * 2.7
-    tz.infiltration_rate = 0.41
-
-    tz.use_conditions = BoundaryConditions(parent=tz)
+    tz.use_conditions = UseConditions(parent=tz)
+    tz.use_conditions.infiltration_rate = 0.41
 
     roof = Rooftop(parent=tz)
     roof.name = "Roof"

@@ -359,7 +359,8 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
   annotation (experiment(
-  StopTime=${zone.parent.parent.modelica_info.runtime_simulation},
+  StartTime=${str(zone.parent.parent.modelica_info.start_time)},
+  StopTime=${str(zone.parent.parent.modelica_info.stop_time)},
   Interval=${zone.parent.parent.modelica_info.interval_output},
   __Dymola_Algorithm="${zone.parent.parent.modelica_info.current_solver}"),
   __Dymola_experimentSetupOutput(equidistant=${get_true_false(zone.parent.parent.modelica_info.equidistant_output)},
