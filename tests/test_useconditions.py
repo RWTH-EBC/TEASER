@@ -17,25 +17,27 @@ class Test_useconditions(object):
         prj.set_default()
         helptest.building_test2(prj)
         use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
-        use_cond.load_use_conditions("Living",
-                                     data_class=prj.data)
+        use_cond.load_use_conditions("Living", data_class=prj.data)
 
     def test_save_use_conditions(self):
         """Test of save_use_conditions, no parameter checking."""
         try:
-            os.remove(os.path.join(
-                utilities.get_default_path(), 'UseCondUT.json'))
+            os.remove(os.path.join(utilities.get_default_path(), "UseCondUT.json"))
         except OSError:
             pass
-        path = os.path.join(
-            utilities.get_default_path(), 'UseCondUT.json')
+        path = os.path.join(utilities.get_default_path(), "UseCondUT.json")
         prj.data.path_uc = path
         prj.data.load_uc_binding()
+
+    def test_save_duplicate_use_conditions(self):
+        """Test of save_use_conditions, no parameter checking."""
+
         use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
         use_cond.save_use_conditions(data_class=prj.data)
-        use_cond.save_use_conditions(data_class=prj.data)
+        assert len(prj.data.conditions_bind.keys()) == 2
         use_cond.usage = "UnitTest"
         use_cond.save_use_conditions(data_class=prj.data)
+        assert len(prj.data.conditions_bind.keys()) == 3
 
     def test_ahu_profiles(self):
         """Test setting AHU profiles of different lengths
@@ -102,18 +104,23 @@ class Test_useconditions(object):
             zone.use_conditions.persons_profile = heating_profile_week
             zone.use_conditions.machines_profile = heating_profile_week
             zone.use_conditions.lighting_profile = heating_profile_week
-        assert prj_test.buildings[
-            -1].thermal_zones[
-                -1].use_conditions.heating_profile == heating_profile_week
-        assert prj_test.buildings[
-            -1].thermal_zones[
-                -1].use_conditions.cooling_profile == heating_profile_week
-        assert prj_test.buildings[
-            -1].thermal_zones[
-                -1].use_conditions.persons_profile == heating_profile_week
-        assert prj_test.buildings[
-            -1].thermal_zones[
-                -1].use_conditions.machines_profile == heating_profile_week
-        assert prj_test.buildings[
-            -1].thermal_zones[
-                -1].use_conditions.lighting_profile == heating_profile_week
+        assert (
+            prj_test.buildings[-1].thermal_zones[-1].use_conditions.heating_profile
+            == heating_profile_week
+        )
+        assert (
+            prj_test.buildings[-1].thermal_zones[-1].use_conditions.cooling_profile
+            == heating_profile_week
+        )
+        assert (
+            prj_test.buildings[-1].thermal_zones[-1].use_conditions.persons_profile
+            == heating_profile_week
+        )
+        assert (
+            prj_test.buildings[-1].thermal_zones[-1].use_conditions.machines_profile
+            == heating_profile_week
+        )
+        assert (
+            prj_test.buildings[-1].thermal_zones[-1].use_conditions.lighting_profile
+            == heating_profile_week
+        )
