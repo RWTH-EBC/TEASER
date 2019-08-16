@@ -28,6 +28,8 @@ class Test_useconditions(object):
         path = os.path.join(utilities.get_default_path(), "UseCondUT.json")
         prj.data.path_uc = path
         prj.data.load_uc_binding()
+        use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
+        use_cond.save_use_conditions(data_class=prj.data)
 
     def test_save_duplicate_use_conditions(self):
         """Test of save_use_conditions, no parameter checking."""
