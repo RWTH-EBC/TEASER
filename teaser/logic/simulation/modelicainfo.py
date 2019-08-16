@@ -2,7 +2,7 @@
 # by TEASER4 Development Team
 
 
-class ModelicaInfo():
+class ModelicaInfo:
     """ModelicaInfo Class
 
     This class holds information specific for Modelica Simulation. Some of
@@ -39,4 +39,4 @@ class ModelicaInfo():
         self.current_solver = "Cvode"
         self.equidistant_output = True
         self.results_at_events = False
-        self.version = "3.2.2"
+        self.version = "3.2.3"
