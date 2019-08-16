@@ -1,7 +1,7 @@
 """
-Created July 2015
+Created August 2019
 
-@author: TEASER 4 Development Team
+@author: TEASER Development Team
 """
 
 from teaser.logic import utilities
