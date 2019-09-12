@@ -85,7 +85,6 @@ class IBPSA(object):
         utilities.create_path(path)
         path = os.path.join(path, self.file_internal_gains)
 
-
         export = pd.DataFrame(
             index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
             .to_series()
