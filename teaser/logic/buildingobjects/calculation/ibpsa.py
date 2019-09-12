@@ -43,7 +43,7 @@ class IBPSA(object):
         }
         self.consider_heat_capacity = True
 
-    def modelica_gains_boundary(self, zone, time_line=None, path=None):
+    def modelica_gains_boundary(self, zone, path=None):
         """creates .mat file for internal gains boundary conditions
 
         This function creates a matfile (-v4) for building internal gains
@@ -71,8 +71,6 @@ class IBPSA(object):
             TEASER instance of ThermalZone. As IBPSA computes single models
             for single zones, we need to generate individual files for zones
             and internal gains
-        time_line :[[int]]
-            list of time steps
         path : str
             optional path, when matfile is exported separately
 
