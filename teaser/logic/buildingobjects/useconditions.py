@@ -168,7 +168,7 @@ class UseConditions(object):
         self.internal_gains_mode = 1
         self.fixed_heat_flow_rate_persons = 70
         self.activity_type_persons = 3
-        self.persons = 1/14
+        self.persons = 1 / 14
         self.ratio_conv_rad_persons = 0.5
 
         self.machines = 7.0
