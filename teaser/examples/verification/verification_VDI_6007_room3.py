@@ -16,7 +16,7 @@ def parameter_room3():
     prj.name = "VDI_Verification_Room3"
 
     prj.load_project(utilities.get_full_path(
-        "examples/examplefiles/VDI6007_Room3.teaserXML"))
+        "examples/examplefiles/VDI6007_Room3.json"))
 
     prj.buildings[0].calc_building_parameter(
         number_of_elements=2,

@@ -9,7 +9,7 @@ import teaser.logic.utilities as utilities
 import os
 
 
-def example_save():
+def example_load():
     """"This function demonstrates different loading options of TEASER"""
 
     # In example e4_save we saved two TEASER projects using *.teaserXML and
@@ -26,16 +26,17 @@ def example_save():
 
     prj = Project()
 
-    load_xml = os.path.join(
+    load_json = os.path.join(
         utilities.get_default_path(),
-        'ArchetypeExample.teaserXML')
+        'ArchetypeExample.json')
 
     prj.load_project(
-        path=load_xml)
+        path=load_json)
+
     prj = Project()
     prj.load_project(utilities.get_full_path(
-        "examples/examplefiles/new.teaserXML"))
-    prj.save_project(file_name="new", path=None)
+        "examples/examplefiles/unitTest.json"))
+    prj.save_project(file_name="unitTest", path=None)
 
     # To reload data from a pickle file, we do not need to instantiate an
     # API, as pickle will automatically instantiate all classes as they have
@@ -67,6 +68,6 @@ def example_save():
 
 
 if __name__ == '__main__':
-    example_save()
+    example_load()
 
     print("Example 5: That's it! :)")

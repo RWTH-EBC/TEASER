@@ -6,8 +6,8 @@ import math
 import collections
 from teaser.logic.archetypebuildings.nonresidential \
     import NonResidential
-from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
-    import BoundaryConditions as UseCond
+from teaser.logic.buildingobjects.useconditions \
+    import UseConditions as UseCond
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
 from teaser.logic.buildingobjects.buildingphysics.groundfloor \
@@ -258,15 +258,15 @@ class Office(NonResidential):
 
         # default values for AHU
         if self.with_ahu is True:
-            self.central_ahu.profile_temperature = (7 * [293.15] +
+            self.central_ahu.temperature_profile = (7 * [293.15] +
                                                     12 * [295.15] +
                                                     6 * [293.15])
             #  according to :cite:`DeutschesInstitutfurNormung.2016`
-            self.central_ahu.profile_min_relative_humidity = (25 * [0.45])  #
+            self.central_ahu.min_relative_humidity_profile = (25 * [0.45])  #
             #  according to :cite:`DeutschesInstitutfurNormung.2016b`  and
             # :cite:`DeutschesInstitutfurNormung.2016`
-            self.central_ahu.profile_max_relative_humidity = (25 * [0.65])
-            self.central_ahu.profile_v_flow = (
+            self.central_ahu.max_relative_humidity_profile = (25 * [0.65])
+            self.central_ahu.v_flow_profile = (
                 7 * [0.0] + 12 * [1.0] + 6 * [0.0])  # according to user
             # profile in :cite:`DeutschesInstitutfurNormung.2016`
 

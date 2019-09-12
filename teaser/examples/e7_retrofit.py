@@ -8,7 +8,7 @@ in a TEASER project with different setups
 import teaser.examples.e1_generate_archetype as e1
 
 
-def example_create_building():
+def example_retrofit_building():
     """"This function demonstrates retrofit options of TEASER API"""
 
     # In e1_generate_archetype we created a Project with three archetype
@@ -38,5 +38,5 @@ def example_create_building():
 
 
 if __name__ == '__main__':
-    example_create_building()
+    example_retrofit_building()
     print("Example 7: That's it :)")
