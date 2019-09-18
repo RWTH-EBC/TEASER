@@ -50,6 +50,8 @@ class UseConditions(object):
     persons : float [Persons/m2]
         Specific number of persons per square area.
         Annex: Used for internal gains
+    internal_gains_moisture_no_people : float [g/(h m²)]
+        internal moisture production of plants, etc. except from people.
     activity_degree_persons : float [met]
         default value is 1.2 met
         AixLib: used for heat flow rate calculation (internal_gains_mode=1)
@@ -161,6 +163,7 @@ class UseConditions(object):
         self.fixed_heat_flow_rate_persons = 70
         self.activity_degree_persons = 1.2
         self._persons = 1 / 14
+        self.internal_gains_moisture_no_people = 0.5
         self.ratio_conv_rad_persons = 0.5
 
         self.machines = 7.0

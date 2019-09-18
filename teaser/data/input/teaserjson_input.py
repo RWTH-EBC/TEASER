@@ -148,6 +148,8 @@ def load_teaser_json(path, project):
             tz.use_conditions.activity_degree_persons = zone_in[
                 "use_conditions"]["activity_degree_persons"]
             tz.use_conditions.persons = zone_in["use_conditions"]["persons"]
+            tz.use_conditions.internal_gains_moisture_no_people = zone_in[
+                "use_conditions"]["internal_gains_moisture_no_people"]
             tz.use_conditions.ratio_conv_rad_persons = zone_in[
                 "use_conditions"]["ratio_conv_rad_persons"]
             tz.use_conditions.machines = zone_in["use_conditions"]["machines"]

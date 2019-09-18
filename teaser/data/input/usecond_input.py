@@ -33,6 +33,8 @@ def load_use_conditions(use_cond, zone_usage, data_class):
     use_cond.activity_degree_persons = conditions_bind[
         zone_usage]["activity_degree_persons"]
     use_cond.persons = conditions_bind[zone_usage]["persons"]
+    use_cond.internal_gains_moisture_no_people = conditions_bind[
+        zone_usage]["internal_gains_moisture_no_people"]
     use_cond.ratio_conv_rad_persons = conditions_bind[zone_usage][
         "ratio_conv_rad_persons"]
     use_cond.machines = conditions_bind[zone_usage]["machines"]

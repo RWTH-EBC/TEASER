@@ -52,7 +52,12 @@ def save_use_conditions(use_cond, data_class):
         data_class.conditions_bind[use_cond.usage][
             "activity_degree_persons"] = use_cond.activity_degree_persons
         data_class.conditions_bind[use_cond.usage][
+            "activity_degree_persons"] = use_cond.activity_degree_persons
+        data_class.conditions_bind[use_cond.usage][
             "persons"] = use_cond.persons
+        data_class.conditions_bind[use_cond.usage][
+            "internal_gains_moisture_no_people"] = use_cond.\
+            internal_gains_moisture_no_people
         data_class.conditions_bind[use_cond.usage][
             "ratio_conv_rad_persons"] = use_cond.ratio_conv_rad_persons
         data_class.conditions_bind[use_cond.usage][

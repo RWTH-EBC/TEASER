@@ -159,6 +159,9 @@ def save_teaser_json(path, project):
             zone_out["use_conditions"][
                 "persons"] = zone.use_conditions.persons
             zone_out["use_conditions"][
+                "internal_gains_moisture_no_people"] = zone.\
+                use_conditions.internal_gains_moisture_no_people
+            zone_out["use_conditions"][
                 "ratio_conv_rad_persons"] = \
                 zone.use_conditions.ratio_conv_rad_persons
             zone_out["use_conditions"][
