@@ -47,8 +47,6 @@ def save_use_conditions(use_cond, data_class):
         data_class.conditions_bind[use_cond.usage][
             "with_cooling"] = use_cond.with_cooling
         data_class.conditions_bind[use_cond.usage][
-            "internal_gains_mode"] = use_cond.internal_gains_mode
-        data_class.conditions_bind[use_cond.usage][
             "fixed_heat_flow_rate_persons"] = \
             use_cond.fixed_heat_flow_rate_persons
         data_class.conditions_bind[use_cond.usage][

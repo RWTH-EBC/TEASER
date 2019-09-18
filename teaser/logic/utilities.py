@@ -7,7 +7,11 @@ classes
 
 import os
 import shutil
+import operator
 
+
+
+ops = {"/": operator.truediv}
 
 def celsius_to_kelvin(value):
     try:
@@ -108,3 +112,26 @@ def clear_directory(dir_path=None):
                 shutil.rmtree(file_path)
     else:
         print('The directory path does not exist.')
+
+
+def division_from_json(ordereddict):
+    """
+    function to transform the output of division in json after loading to
+    python into float values
+
+    Parameters
+    ----------
+    ordereddict : output of the json load of arguments like
+    "persons": {"/":[1,15]}
+
+    """
+
+    if len(ordereddict) == 1:
+        for operator, values in ordereddict.items():
+            if operator == '/':
+                quotient = ops[operator](values[0], values[1])
+                return quotient
+            else:
+                raise ValueError('%s not supported, only divions (/)', operator)
+    else:
+        raise ValueError('%s has len > 1', ordereddict)

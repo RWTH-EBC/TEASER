@@ -81,6 +81,10 @@ def export_multizone(buildings, prj, path=None):
         filename=utilities.get_full_path(
             "data/output/modelicatemplate/AixLib/AixLib_Multizone"),
         lookup=lookup)
+    # model_template_moisture = Template(
+    #     filename=utilities.get_full_path(
+    #         "data/output/modelicatemplate/AixLib/AixLib_Multizone_MoistAir"),
+    #     lookup=lookup)
 
     uses = [
         'Modelica(version="' + prj.modelica_info.version + '")',
