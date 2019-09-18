@@ -58,6 +58,7 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     wfWin = ${get_list(zone.model_attr.weightfactor_win)},
     wfGro = ${zone.model_attr.weightfactor_ground},
     specificPeople = ${zone.use_conditions.persons},
+    internalGainsMoistureNoPeople = ${zone.use_conditions.internal_gains_moisture_no_people},
     fixedHeatFlowRatePersons = ${zone.use_conditions.fixed_heat_flow_rate_persons},
     activityDegree = ${zone.use_conditions.activity_degree_persons},
     ratioConvectiveHeatPeople = ${zone.use_conditions.ratio_conv_rad_persons},
