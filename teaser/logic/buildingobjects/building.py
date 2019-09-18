@@ -93,6 +93,15 @@ class Building(object):
         Total heating load of all thermal zones.
     sum_cooling_load : float [W]
         Total heating load of all thermal zones. (currently not supported)
+    internal_gains_mode: int [1, 2, 3]
+        mode for the internal gains calculation by persons:
+        1: Temperature and activity degree dependent calculation. The
+           calculation is based on  SIA 2024 (default)
+        2: Temperature and activity degree independent calculation, the max.
+           heatflowrate is prescribed by the parameter
+           fixed_heat_flow_rate_persons.
+        3: Temperature and activity degree dependent calculation with
+           consideration of moisture. The calculation is based on SIA 2024
     number_of_elements_calc : int
         Number of elements that are used for thermal zone calculation in this
         building.
@@ -153,7 +162,7 @@ class Building(object):
         self.volume = 0
         self.sum_heat_load = 0
         self.sum_cooling_load = 0
-
+        self.internal_gains_mode = 1
         self._number_of_elements_calc = 2
         self._merge_windows_calc = False
         self._used_library_calc = "AixLib"

@@ -42,15 +42,6 @@ class UseConditions(object):
         length, TEASER will multiplicate this list for one whole year.
     with_cooling: boolean
         Sets if the zone is cooloed or not.
-    internal_gains_mode: int [1, 2, 3]
-        mode for the internal gains calculation:
-        1: Temperature and activity degree dependent calculation. The
-           calculation is based on  SIA 2024 (default)
-        2: Temperature and activity degree independent calculation, the max.
-           heatflowrate is prescribed by the parameter
-           fixed_heat_flow_rate_persons.
-        3: Temperature and activity degree dependent calculation with
-           consideration of moisture. The calculation is based on SIA 2024
     fixed_heat_flow_rate_persons: float [W/person]
         fixed heat flow rate for one person in case of temperature
         independent calculation. Default value is 70
@@ -167,7 +158,6 @@ class UseConditions(object):
         self.with_heating = True
         self.with_cooling = False
 
-        self.internal_gains_mode = 1
         self.fixed_heat_flow_rate_persons = 70
         self.activity_degree_persons = 1.2
         self._persons = 1 / 14
