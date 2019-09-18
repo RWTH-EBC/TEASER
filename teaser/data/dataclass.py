@@ -145,7 +145,8 @@ class DataClass(object):
                             f, object_pairs_hook=collections.OrderedDict
                         )
                 except json.decoder.JSONDecodeError:
-                    print("Your UseConditions.json file seems to be broken.")
+                    raise IOError(
+                        "Your UseConditions.json file seems to be broken.")
             else:
                 with open(self.path_uc, "w") as f:
                     self.conditions_bind = collections.OrderedDict()
