@@ -1,6 +1,4 @@
 """This module contains function to load UseConditions classes."""
-from collections import OrderedDict
-from logic.utilities import division_from_json
 
 def load_use_conditions(use_cond, zone_usage, data_class):
     """Load use conditions from JSON, according to DIN 18599,
@@ -32,10 +30,7 @@ def load_use_conditions(use_cond, zone_usage, data_class):
     use_cond.with_cooling = conditions_bind[zone_usage]["with_cooling"]
     use_cond.fixed_heat_flow_rate_persons = conditions_bind[zone_usage]["fixed_heat_flow_rate_persons"]
     use_cond.activity_degree_persons = conditions_bind[zone_usage]["activity_degree_persons"]
-    if isinstance(conditions_bind[zone_usage]["persons"], OrderedDict):
-        division_from_json(conditions_bind[zone_usage]["persons"])
-    else:
-        use_cond.persons = conditions_bind[zone_usage]["persons"]
+    use_cond.persons = conditions_bind[zone_usage]["persons"]
     use_cond.ratio_conv_rad_persons = conditions_bind[zone_usage][
         "ratio_conv_rad_persons"]
     use_cond.machines = conditions_bind[zone_usage]["machines"]

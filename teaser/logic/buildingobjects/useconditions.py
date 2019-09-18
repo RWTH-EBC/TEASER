@@ -4,6 +4,8 @@ import teaser.data.input.usecond_input as usecond_input
 import teaser.data.output.usecond_output as usecond_output
 import pandas as pd
 from itertools import cycle, islice
+from collections import OrderedDict
+from logic.utilities import division_from_json
 
 
 class UseConditions(object):
@@ -168,7 +170,7 @@ class UseConditions(object):
         self.internal_gains_mode = 1
         self.fixed_heat_flow_rate_persons = 70
         self.activity_degree_persons = 1.2
-        self.persons = 1 / 14
+        self._persons = 1 / 14
         self.ratio_conv_rad_persons = 0.5
 
         self.machines = 7.0
@@ -272,6 +274,16 @@ class UseConditions(object):
         usecond_output.save_use_conditions(
             use_cond=self,
             data_class=data_class)
+    @property
+    def persons(self):
+        return self._persons
+
+    @persons.setter
+    def persons(self, value):
+        if isinstance(value, OrderedDict):
+            self._persons = division_from_json(value)
+        else:
+            self._persons = value
 
     @property
     def heating_profile(self):
