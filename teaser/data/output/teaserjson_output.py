@@ -151,6 +151,14 @@ def save_teaser_json(path, project):
             zone_out["use_conditions"][
                 "with_cooling"] = zone.use_conditions.with_cooling
             zone_out["use_conditions"][
+                "internal_gains_mode"] = zone.use_conditions.internal_gains_mode
+            zone_out["use_conditions"][
+                "fixed_heat_flow_rate_persons"] = \
+                zone.use_conditions.fixed_heat_flow_rate_persons
+            zone_out["use_conditions"][
+                "activity_degree_persons"] = \
+                zone.use_conditions.activity_degree_persons
+            zone_out["use_conditions"][
                 "persons"] = zone.use_conditions.persons
             zone_out["use_conditions"][
                 "ratio_conv_rad_persons"] = \

@@ -42,14 +42,13 @@ class UseConditions(object):
         Sets if the zone is cooloed or not.
     internal_gains_mode: int [1, 2, 3]
         mode for the internal gains calculation:
-        1: Temperature and activity type dependent calculation. The
+        1: Temperature and activity degree dependent calculation. The
            calculation is based on  SIA 2024 (default)
-        2: Temperature and activity type independent calculation, the max.
+        2: Temperature and activity degree independent calculation, the max.
            heatflowrate is prescribed by the parameter
            fixed_heat_flow_rate_persons.
-        3: Temperature and activity type dependent calculation with
+        3: Temperature and activity degree dependent calculation with
            consideration of moisture. The calculation is based on SIA 2024
-           (default)
     fixed_heat_flow_rate_persons: float [W/person]
         fixed heat flow rate for one person in case of temperature
         independent calculation. Default value is 70
@@ -58,14 +57,14 @@ class UseConditions(object):
     persons : float [Persons/m2]
         Specific number of persons per square area.
         Annex: Used for internal gains
-    activity_type_persons : float [W/person]
-        persons activity (1: light, 2: moderate, 3: high). This value is
-        probably from VDI 2078.
-        AixLib: is used and resulting heat flow rate is temperature
-        depending if internal_gains_mode is set to 1 or 2.
-        Annex: (1: light, 50W/person, 2: moderate 100W/person,
-        3: high 150W/person) For Annex models, the heat produced is not
-        dependent on zone temperature
+    activity_degree_persons : float [met]
+        default value is 1.2 met
+        AixLib: used for heat flow rate calculation (internal_gains_mode=1)
+        or heat flow rate and moisture gains (internal_gains_mode=3). Both
+        are temperature and activity degree depending, calculation based
+        on SIA2024.
+        Annex: not used, heat flow rate is constant value
+        fixed_heat_flow_rate_persons
     ratio_conv_rad_persons: float
         describes the ratio between convective and radiative heat transfer
         of the persons. Default values are derived from
@@ -82,7 +81,8 @@ class UseConditions(object):
     machines: float [W/m2]
         area specific eletrical load of machines per m2. This value is taken
         from SIA 2024 and DIN V 18599-10 for medium occupancy.
-        AixLib: Used in Zone record for internal gains, internalGainsMachinesSpecific
+        AixLib: Used in Zone record for internal gains,
+        internalGainsMachinesSpecific
         Annex: Used for internal gains
     ratio_conv_rad_machines: float
         describes the ratio between convective and radiative heat transfer
@@ -167,7 +167,7 @@ class UseConditions(object):
 
         self.internal_gains_mode = 1
         self.fixed_heat_flow_rate_persons = 70
-        self.activity_type_persons = 3
+        self.activity_degree_persons = 1.2
         self.persons = 1 / 14
         self.ratio_conv_rad_persons = 0.5
 

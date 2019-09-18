@@ -135,62 +135,55 @@ def load_teaser_json(path, project):
             tz.volume = zone_in["volume"]
             tz.use_conditions = UseConditions(parent=tz)
             tz.use_conditions.usage = zone_in["use_conditions"]["usage"]
-            tz.use_conditions.typical_length = zone_in["use_conditions"][
-                "typical_length"
-            ]
-            tz.use_conditions.typical_width = zone_in["use_conditions"]["typical_width"]
-            tz.use_conditions.with_heating = zone_in["use_conditions"]["with_heating"]
-            tz.use_conditions.with_cooling = zone_in["use_conditions"]["with_cooling"]
+            tz.use_conditions.typical_length = zone_in[
+                "use_conditions"]["typical_length"]
+            tz.use_conditions.typical_width = zone_in[
+                "use_conditions"]["typical_width"]
+            tz.use_conditions.with_heating = zone_in[
+                "use_conditions"]["with_heating"]
+            tz.use_conditions.with_cooling = zone_in[
+                "use_conditions"]["with_cooling"]
+            tz.use_conditions.internal_gains_mode = zone_in[
+                "use_conditions"]["internal_gains_mode"]
+            tz.use_conditions.fixed_heat_flow_rate_persons = zone_in[
+                "use_conditions"]["fixed_heat_flow_rate_persons"]
+            tz.use_conditions.activity_degree_persons = zone_in[
+                "use_conditions"]["activity_degree_persons"]
             tz.use_conditions.persons = zone_in["use_conditions"]["persons"]
-            tz.use_conditions.ratio_conv_rad_persons = zone_in["use_conditions"][
-                "ratio_conv_rad_persons"
-            ]
+            tz.use_conditions.ratio_conv_rad_persons = zone_in[
+                "use_conditions"]["ratio_conv_rad_persons"]
             tz.use_conditions.machines = zone_in["use_conditions"]["machines"]
-            tz.use_conditions.ratio_conv_rad_machines = zone_in["use_conditions"][
-                "ratio_conv_rad_machines"
-            ]
+            tz.use_conditions.ratio_conv_rad_machines = zone_in[
+                "use_conditions"]["ratio_conv_rad_machines"]
             tz.use_conditions.lighting_power = zone_in["use_conditions"][
-                "lighting_power"
-            ]
-            tz.use_conditions.ratio_conv_rad_lighting = zone_in["use_conditions"][
-                "ratio_conv_rad_lighting"
-            ]
-            tz.use_conditions.use_constant_infiltration = zone_in["use_conditions"][
-                "use_constant_infiltration"
-            ]
-            tz.use_conditions.infiltration_rate = zone_in["use_conditions"][
-                "infiltration_rate"
-            ]
-            tz.use_conditions.max_user_infiltration = zone_in["use_conditions"][
-                "max_user_infiltration"
-            ]
-            tz.use_conditions.max_overheating_infiltration = zone_in["use_conditions"][
-                "max_overheating_infiltration"
-            ]
-            tz.use_conditions.max_summer_infiltration = zone_in["use_conditions"][
-                "max_summer_infiltration"
-            ]
-            tz.use_conditions.winter_reduction_infiltration = zone_in["use_conditions"][
-                "winter_reduction_infiltration"
-            ]
+                "lighting_power"]
+            tz.use_conditions.ratio_conv_rad_lighting = zone_in[
+                "use_conditions"]["ratio_conv_rad_lighting"]
+            tz.use_conditions.use_constant_infiltration = zone_in[
+                "use_conditions"]["use_constant_infiltration"]
+            tz.use_conditions.infiltration_rate = zone_in[
+                "use_conditions"]["infiltration_rate"]
+            tz.use_conditions.max_user_infiltration = zone_in[
+                "use_conditions"]["max_user_infiltration"]
+            tz.use_conditions.max_overheating_infiltration = zone_in[
+                "use_conditions"]["max_overheating_infiltration"]
+            tz.use_conditions.max_summer_infiltration = zone_in[
+                "use_conditions"]["max_summer_infiltration"]
+            tz.use_conditions.winter_reduction_infiltration = zone_in[
+                "use_conditions"]["winter_reduction_infiltration"]
             tz.use_conditions.min_ahu = zone_in["use_conditions"]["min_ahu"]
             tz.use_conditions.max_ahu = zone_in["use_conditions"]["max_ahu"]
             tz.use_conditions.with_ahu = zone_in["use_conditions"]["with_ahu"]
-            tz.use_conditions.heating_profile = zone_in["use_conditions"][
-                "heating_profile"
-            ]
-            tz.use_conditions.cooling_profile = zone_in["use_conditions"][
-                "cooling_profile"
-            ]
-            tz.use_conditions.persons_profile = zone_in["use_conditions"][
-                "persons_profile"
-            ]
-            tz.use_conditions.machines_profile = zone_in["use_conditions"][
-                "machines_profile"
-            ]
-            tz.use_conditions.lighting_profile = zone_in["use_conditions"][
-                "lighting_profile"
-            ]
+            tz.use_conditions.heating_profile = zone_in[
+                "use_conditions"]["heating_profile"]
+            tz.use_conditions.cooling_profile = zone_in[
+                "use_conditions"]["cooling_profile"]
+            tz.use_conditions.persons_profile = zone_in[
+                "use_conditions"]["persons_profile"]
+            tz.use_conditions.machines_profile = zone_in[
+                "use_conditions"]["machines_profile"]
+            tz.use_conditions.lighting_profile = zone_in[
+                "use_conditions"]["lighting_profile"]
 
             for wall_name, wall_in in zone_in["outer_walls"].items():
                 out_wall = OuterWall(parent=tz)
