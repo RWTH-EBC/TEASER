@@ -141,6 +141,12 @@ def load_teaser_json(path, project):
             tz.use_conditions.typical_width = zone_in["use_conditions"]["typical_width"]
             tz.use_conditions.with_heating = zone_in["use_conditions"]["with_heating"]
             tz.use_conditions.with_cooling = zone_in["use_conditions"]["with_cooling"]
+            tz.use_conditions.internal_gains_mode = zone_in[
+                "use_conditions"]["internal_gains_mode"]
+            tz.use_conditions.fixed_heat_flow_rate_persons = zone_in[
+                "use_conditions"]["fixed_heat_flow_rate_persons"]
+            tz.use_conditions.activity_degree_persons = zone_in[
+                "use_conditions"]["activity_degree_persons"]
             tz.use_conditions.persons = zone_in["use_conditions"]["persons"]
             tz.use_conditions.ratio_conv_rad_persons = zone_in["use_conditions"][
                 "ratio_conv_rad_persons"
