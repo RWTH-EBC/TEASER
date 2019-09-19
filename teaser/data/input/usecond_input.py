@@ -1,5 +1,6 @@
 """This module contains function to load UseConditions classes."""
 
+
 def load_use_conditions(use_cond, zone_usage, data_class):
     """Load use conditions from JSON, according to DIN 18599,
     SIA2024 in addition some AixLib specific use conditions for central AHU

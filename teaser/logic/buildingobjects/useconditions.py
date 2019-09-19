@@ -267,6 +267,7 @@ class UseConditions(object):
         usecond_output.save_use_conditions(
             use_cond=self,
             data_class=data_class)
+
     @property
     def persons(self):
         return self._persons

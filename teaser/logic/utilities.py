@@ -1,7 +1,7 @@
 # created June 2015
 # by TEASER4 Development Team
 
-"""Utilis: Collection of all utility functions that are useful in several
+"""Utilities: Collection of all utility functions that are useful in several
 classes
 """
 
@@ -9,9 +9,8 @@ import os
 import shutil
 import operator
 
-
-
 ops = {"/": operator.truediv}
+
 
 def celsius_to_kelvin(value):
     try:
