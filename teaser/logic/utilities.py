@@ -126,11 +126,11 @@ def division_from_json(ordereddict):
     """
 
     if len(ordereddict) == 1:
-        for operator, values in ordereddict.items():
-            if operator == '/':
-                quotient = ops[operator](values[0], values[1])
+        for op, values in ordereddict.items():
+            if op == '/':
+                quotient = ops[op](values[0], values[1])
                 return quotient
             else:
-                raise ValueError('%s not supported, only divions (/)', operator)
+                raise ValueError('%s not supported, only divions (/)', op)
     else:
         raise ValueError('%s has len > 1', ordereddict)
