@@ -5,7 +5,7 @@ import teaser.data.output.usecond_output as usecond_output
 import pandas as pd
 from itertools import cycle, islice
 from collections import OrderedDict
-from logic.utilities import division_from_json
+from teaser.logic.utilities import division_from_json
 
 
 class UseConditions(object):
