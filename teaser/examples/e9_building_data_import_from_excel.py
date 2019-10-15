@@ -157,11 +157,8 @@ def zoning_example(data):
     # inner wall is set
     for index, line in data.iterrows():
         if not pd.isna(line["WallAdjacentTo"]):
-            data.at[index, "InnerWallArea[m²]"] = data.at[index, "OuterWallArea[" \
-                                                                 "m²]"] + data.at[index, "WindowArea[" \
-                                                                                         "m²]"] + data.at[
-                                                      index, "InnerWallArea[" \
-                                                             "m²]"]
+            data.at[index, "InnerWallArea[m²]"] = data.at[index, "OuterWallArea[m²]"] + data.at[
+                index, "WindowArea[m²]"] + data.at[index, "InnerWallArea[m²]"]
             data.at[index, "WindowOrientation[°]"] = np.NaN
             data.at[index, "WindowArea[m²]"] = np.NaN
             data.at[index, "WindowConstruction"] = np.NaN
@@ -207,8 +204,7 @@ def zoning_example(data):
                           "Common mistakes: \n"
                           "-NetArea of a wall is not equal to 0 \n"
                           "-UsageType of a wall is not empty \n"
-                          "Explanation: Rooms may have outer walls/windows on different "
-                          "orientations.\n"
+                          "Explanation: Rooms may have outer walls/windows on different orientations.\n"
                           "Every row with an empty slot in the column UsageType, "
                           "marks another direction of an outer wall and/or"
                           "window entity of the same room.\n"
@@ -219,18 +215,16 @@ def zoning_example(data):
     # name usage types after usage types available in the json
     usage_to_json_usage = {"IsolationRoom": "Bed room", "PatientRoom": "Bed room",
                            "Aisle": "Corridors in the general care area",
-                           "Technical room": "Stock, technical equipment, "
-                                             "archives", "Washing": "WC and sanitary rooms in "
-                                                                    "non-residential buildings",
+                           "Technical room": "Stock, technical equipment, archives",
+                           "Washing": "WC and sanitary rooms in non-residential buildings",
                            "Stairway": "Corridors in the general care area",
-                           "WC": "WC and sanitary rooms in non-residential "
-                                 "buildings", "Storage": "Stock, technical equipment, archives",
-                           "Lounge": "Meeting, Conference, seminar", "Office": "Meeting, Conference, seminar",
+                           "WC": "WC and sanitary rooms in non-residential buildings",
+                           "Storage": "Stock, technical equipment, archives",
+                           "Lounge": "Meeting, Conference, seminar",
+                           "Office": "Meeting, Conference, seminar",
                            "Treatment room": "Examination- or treatment room",
-                           "StorageChemical": "Stock, technical equipment, "
-                                              "archives", "EquipmentServiceAndRinse": "WC and sanitary rooms "
-                                                                                      "in non-residential "
-                                                                                      "buildings", }
+                           "StorageChemical": "Stock, technical equipment, archives",
+                           "EquipmentServiceAndRinse": "WC and sanitary rooms in non-residential buildings"}
 
     # rename all zone names from the excel to the according zone name which
     # is in the UseConditions.json files
@@ -248,8 +242,7 @@ def zoning_example(data):
 # -------------------------------------------------------------
 def import_building_from_excel(project, building_name, construction_age, path_to_excel, sheet_names):
     """
-    Import building data from excel, convert it via the respective zoning and
-    feed it to teasers logic classes.
+    Import building data from excel, convert it via the respective zoning and feed it to teasers logic classes.
     Pay attention to hard coded parts, which are marked.
 
     :param project: Teaser project object
@@ -268,17 +261,13 @@ def import_building_from_excel(project, building_name, construction_age, path_to
 
     def warn_constructiontype(element):
         if element.construction_type is None:
-            warnings.warn("In Zone \"%s\" the %s construction \"%s\" could not be "
-                          "loaded from the "
-                          "TypeBuildingElements.json, an error will occur due to "
-                          "missing data for calculation."
-                          "Check for spelling and the correct combination of building "
-                          "age and construction type."
-                          "Here is the list of faulty entries:\n%s"
-                          "\nThese entries can easily be found checking the stated "
-                          "index in the produced "
-                          "ZonedInput.xlsx" % (
-                          group["Zone"].iloc[0], element.name, group["OuterWallConstruction"].iloc[0], group))
+            warnings.warn(
+                "In Zone \"%s\" the %s construction \"%s\" could not be loaded from the TypeBuildingElements.json, "
+                "an error will occur due to missing data for calculation."
+                "Check for spelling and the correct combination of building age and construction type."
+                "Here is the list of faulty entries:\n%s"
+                "\nThese entries can easily be found checking the stated index in the produced ZonedInput.xlsx" % (
+                group["Zone"].iloc[0], element.name, group["OuterWallConstruction"].iloc[0], group))
 
     bldg = Building(parent=project)
     bldg.name = building_name
@@ -362,8 +351,8 @@ def import_building_from_excel(project, building_name, construction_age, path_to
             # int or float
             if not isinstance(group["OuterWallOrientation[°]"].iloc[0], str):
                 out_wall = OuterWall(parent=tz)
-                out_wall.name = "outer_wall_" + str(int(group["OuterWallOrientation[°]"].iloc[0])) + "_" + str(
-                    group["OuterWallConstruction"].iloc[0])
+                out_wall.name = "outer_wall_" + str(int(group["OuterWallOrientation[°]"].iloc[0])) + "_" \
+                                + str(group["OuterWallConstruction"].iloc[0])
                 out_wall.area = group["OuterWallArea[m²]"].sum()
                 out_wall.tilt = OutWallTilt
                 out_wall.orientation = group["OuterWallOrientation[°]"].iloc[0]
@@ -417,7 +406,7 @@ def import_building_from_excel(project, building_name, construction_age, path_to
                     ground_floor.orientation = GroundFloorOrientation
                     # load wall properties from "TypeBuildingElements.json"
                     ground_floor.load_type_element(year=bldg.year_of_construction,
-                        construction=group["FloorConstruction"].iloc[0])
+                                                   construction=group["FloorConstruction"].iloc[0])
                     warn_constructiontype(ground_floor)
                 elif group["IsGroundFloor"].iloc[0] == 0:
                     floor = Floor(parent=tz)
@@ -495,10 +484,12 @@ def import_building_from_excel(project, building_name, construction_age, path_to
 
         # Block: AHU and infiltration #Attention hard coding
         # set the supply volume flow of the AHU per zone
-        ahu_dict = {"Bedroom": [15.778, 15.778], "Corridorsinthegeneralcarearea": [5.2941, 5.2941],
-                    "Examinationortreatmentroom": [15.743, 15.743], "MeetingConferenceseminar": [16.036, 16.036],
+        ahu_dict = {"Bedroom": [15.778, 15.778],
+                    "Corridorsinthegeneralcarearea": [5.2941, 5.2941],
+                    "Examinationortreatmentroom": [15.743, 15.743],
+                    "MeetingConferenceseminar": [16.036, 16.036],
                     "Stocktechnicalequipmentarchives": [20.484, 20.484],
-                    "WCandsanitaryroomsinnonresidentialbuildings": [27.692, 27.692], }
+                    "WCandsanitaryroomsinnonresidentialbuildings": [27.692, 27.692]}
         _i = 0
         for key in ahu_dict:
             if tz.name == key:
@@ -520,7 +511,7 @@ if __name__ == '__main__':
     prj.name = "BuildingGeneratedviaExcelImport"
     prj.data.load_uc_binding()
     prj.weather_file_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'input', 'inputdata',
-        'weatherdata', 'DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos')
+                                         'weatherdata', 'DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos')
     prj.modelica_info.weekday = 0  # 0-Monday, 6-Sunday
     prj.modelica_info.simulation_start = 0  # start time for simulation
 
