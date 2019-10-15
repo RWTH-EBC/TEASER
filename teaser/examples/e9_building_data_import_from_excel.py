@@ -266,8 +266,9 @@ def import_building_from_excel(project, building_name, construction_age, path_to
                 "an error will occur due to missing data for calculation."
                 "Check for spelling and the correct combination of building age and construction type."
                 "Here is the list of faulty entries:\n%s"
-                "\nThese entries can easily be found checking the stated index in the produced ZonedInput.xlsx" % (
-                group["Zone"].iloc[0], element.name, group["OuterWallConstruction"].iloc[0], group))
+                "\nThese entries can easily be found checking the stated index in the produced ZonedInput.xlsx"
+                % (group["Zone"].iloc[0], element.name, group["OuterWallConstruction"].iloc[0], group)
+            )
 
     bldg = Building(parent=project)
     bldg.name = building_name
