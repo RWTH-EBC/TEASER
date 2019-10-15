@@ -546,7 +546,8 @@ def import_building_from_excel(project, building_name, construction_age,
                     "Zone \"%s\" with inner wall construction \"%s\" has no "
                     "inner walls, since area = 0." % (group["Zone"].iloc[0],
                                                       group[
-                                                          "InnerWallConstruction"].iloc[
+                                                          "InnerWallConstructio"
+                                                          "n"].iloc[
                                                           0]))
 
         # Block: AHU and infiltration #Attention hard coding
