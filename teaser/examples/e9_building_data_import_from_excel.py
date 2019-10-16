@@ -72,7 +72,6 @@ import numpy as np
 import warnings
 import shutil
 
-
 def import_data(path=None, sheet_names=None):
     """
     Import data from the building data excel file and perform some
