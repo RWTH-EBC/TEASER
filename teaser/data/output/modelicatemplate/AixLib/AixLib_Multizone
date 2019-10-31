@@ -111,6 +111,22 @@ model ${bldg.name}
       "Set points for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
 
+% if bldg.with_dhw:
+  Modelica.Blocks.Sources.CombiTimeTable tableDHW(
+    tableOnFile=true,
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    tableName="dhw_power",
+    fileName=Modelica.Utilities.Files.loadResource(
+        "modelica://${bldg.parent.name}/${bldg.name}/dhw_profile.csv"),
+    columns=2:size(tableDHW.table, 2))
+    "Boundary conditions for air handling unit"
+    annotation (Placement(transformation(extent={{-60,-60},{-40,-40}})));
+  Modelica.Blocks.Continuous.Integrator DHWEnergy
+    annotation (Placement(transformation(extent={{-20,-60},{0,-40}})));
+% else:
+
+% endif
+
 equation
   connect(weaDat.weaBus, multizone.weaBus) annotation (Line(
       points={{-62,40},{-32,40},{-32,6},{34,6}},
@@ -128,6 +144,14 @@ equation
 
   connect(tableTSetCool.y, multizone.TSetCool) annotation (Line(points={{55.2,-58},
           {36.8,-58},{36.8,-9}}, color={0,0,127}));
+
+% if bldg.with_dhw:
+  connect(tableDHW.y[1], DHWEnergy.u)
+    annotation (Line(points={{-39,-50},{-22,-50}}, color={0,0,127}));
+% else:
+
+% endif
+
 
   annotation (experiment(
       StopTime=${modelica_info.runtime_simulation},
