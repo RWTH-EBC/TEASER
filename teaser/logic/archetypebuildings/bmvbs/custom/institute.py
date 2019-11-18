@@ -120,48 +120,54 @@ class Institute(Office):
         estimation factor exponent to calculate window area
     """
 
-    def __init__(self,
-                 parent,
-                 name=None,
-                 year_of_construction=None,
-                 number_of_floors=None,
-                 height_of_floors=None,
-                 net_leased_area=None,
-                 with_ahu=False,
-                 office_layout=None,
-                 window_layout=None,
-                 construction_type=None):
+    def __init__(
+        self,
+        parent,
+        name=None,
+        year_of_construction=None,
+        number_of_floors=None,
+        height_of_floors=None,
+        net_leased_area=None,
+        with_ahu=True,
+        office_layout=None,
+        window_layout=None,
+        construction_type=None,
+    ):
         """Constructor of Institute
 
         Adds an additional zone "Laboratory"
 
         """
 
-        super(Institute, self).__init__(parent,
-                                        name,
-                                        year_of_construction,
-                                        number_of_floors,
-                                        height_of_floors,
-                                        net_leased_area,
-                                        with_ahu,
-                                        office_layout,
-                                        window_layout,
-                                        construction_type)
+        super(Institute, self).__init__(
+            parent,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu,
+            office_layout,
+            window_layout,
+            construction_type,
+        )
 
-        self.zone_area_factors["Office"] = \
-            [0.16, "Group Office (between 2 and 6 employees)"]
-        self.zone_area_factors["Floor"] = \
-            [0.19, "Traffic area"]
-        self.zone_area_factors["Laboratory"] = \
-            [0.15, "Laboratory"]
-        self.zone_area_factors["Storage"] = \
-            [0.4, "Stock, technical equipment, archives"]
-        self.zone_area_factors["Meeting"] = \
-            [0.04, "Meeting, Conference, seminar"]
-        self.zone_area_factors["Restroom"] = \
-            [0.04, "WC and sanitary rooms in non-residential buildings"]
-        self.zone_area_factors["ICT"] = \
-            [0.02, "Data center"]
+        self.zone_area_factors["Office"] = [
+            0.16,
+            "Group Office (between 2 and 6 employees)",
+        ]
+        self.zone_area_factors["Floor"] = [0.19, "Traffic area"]
+        self.zone_area_factors["Laboratory"] = [0.15, "Laboratory"]
+        self.zone_area_factors["Storage"] = [
+            0.4,
+            "Stock, technical equipment, archives",
+        ]
+        self.zone_area_factors["Meeting"] = [0.04, "Meeting, Conference, seminar"]
+        self.zone_area_factors["Restroom"] = [
+            0.04,
+            "WC and sanitary rooms in non-residential buildings",
+        ]
+        self.zone_area_factors["ICT"] = [0.02, "Data center"]
 
         self.est_exponent_wall = 0.6601
         self.est_factor_wall_area = 11.243
