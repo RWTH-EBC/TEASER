@@ -94,6 +94,8 @@ def save_use_conditions(use_cond, data_class):
             "machines_profile"] = use_cond.machines_profile
         data_class.conditions_bind[use_cond.usage][
             "lighting_profile"] = use_cond.lighting_profile
+        data_class.conditions_bind[use_cond.usage][
+            "with_ideal_thresholds"] = use_cond.with_ideal_thresholds
 
     with open(utilities.get_full_path(data_class.path_uc), 'w') as file:
         file.write(json.dumps(
