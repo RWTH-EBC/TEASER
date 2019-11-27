@@ -77,9 +77,11 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     KRHeat = 10000,
     TNHeat = 1,
     HeaterOn = ${get_true_false(zone.use_conditions.with_heating)},
+    TThresholdHeater = ${T_threshold_heating},
     hCool = 0,
     lCool = ${zone.model_attr.cool_load},
     KRCool = 10000,
     TNCool = 1,
-    CoolerOn = ${get_true_false(zone.use_conditions.with_cooling)});
+    CoolerOn = ${get_true_false(zone.use_conditions.with_cooling)},
+    TThresholdCooler = ${T_threshold_cooling});
 end ${zone.parent.name}_${zone.name};

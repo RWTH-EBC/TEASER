@@ -45,7 +45,11 @@ def save_use_conditions(use_cond, data_class):
         data_class.conditions_bind[use_cond.usage][
             "with_heating"] = use_cond.with_heating
         data_class.conditions_bind[use_cond.usage][
+            "T_threshold_heating"] = use_cond.T_threshold_heating
+        data_class.conditions_bind[use_cond.usage][
             "with_cooling"] = use_cond.with_cooling
+        data_class.conditions_bind[use_cond.usage][
+            "T_threshold_cooling"] = use_cond.T_threshold_cooling
         data_class.conditions_bind[use_cond.usage][
             "persons"] = use_cond.persons
         data_class.conditions_bind[use_cond.usage][

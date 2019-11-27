@@ -31,7 +31,9 @@ class UseConditions(object):
         typical width of a usage zone. This value is taken from
         SIA 2024. Archetype usage: division of usage zones in rooms
     with_heating: boolean
-        Sets if the zone is heated or not.
+        Sets if the zone is heated by ideal heater or not.
+    T_threshold_heating: float [K]
+       Threshold temperature below ideal heater is used.
     heating_profile : list [K]
         Heating setpoint for a day or similar. You can set a list of any
         length, TEASER will multiplicate this list for one whole year.
@@ -39,7 +41,9 @@ class UseConditions(object):
         Cooling setpoint for a day or similar. You can set a list of any
         length, TEASER will multiplicate this list for one whole year.
     with_cooling: boolean
-        Sets if the zone is cooloed or not.
+        Sets if the zone is cooloed by ideal cooler or not.
+    T_threshold_cooling: float [K]
+        Threshold temperature above ideal cooler is used.
     persons: float [W/m2]
         Average sensible heat transmission per m2 of people with specific
         heat transmission of 70 W/person, taken from SIA 2024 and
@@ -145,7 +149,9 @@ class UseConditions(object):
         self.typical_width = 6.0
 
         self.with_heating = True
+        self.T_threshold_heating = 288.15
         self.with_cooling = False
+        self.T_threshold_cooling = 295.15
 
         self.persons = 5.0
         self.ratio_conv_rad_persons = 0.5
