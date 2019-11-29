@@ -163,9 +163,9 @@ def zoning_example(data):
     for index, line in data.iterrows():
         if not pd.isna(line["WallAdjacentTo"]):
             data.at[index, "InnerWallArea[m²]"] = (
-                    data.at[index, "OuterWallArea[m²]"]
-                    + data.at[index, "WindowArea[m²]"]
-                    + data.at[index, "InnerWallArea[m²]"]
+                data.at[index, "OuterWallArea[m²]"]
+                + data.at[index, "WindowArea[m²]"]
+                + data.at[index, "InnerWallArea[m²]"]
             )
             data.at[index, "WindowOrientation[°]"] = np.NaN
             data.at[index, "WindowArea[m²]"] = np.NaN
@@ -203,7 +203,7 @@ def zoning_example(data):
         count = 0
         for line in cluster.iterrows():
             if pd.isna(line[1]["BelongsToIdentifier"]) and not pd.isna(
-                    line[1]["UsageType"]
+                line[1]["UsageType"]
             ):
                 main_usage = line[1]["UsageType"]
                 for i, row in data.iterrows():
@@ -260,7 +260,9 @@ def zoning_example(data):
 
 
 # -------------------------------------------------------------
-def import_building_from_excel(project, building_name, construction_age, path_to_excel, sheet_names):
+def import_building_from_excel(
+    project, building_name, construction_age, path_to_excel, sheet_names
+):
     """
     Import building data from excel, convert it via the respective zoning and feed it to teasers logic classes.
     Pay attention to hard coded parts, which are marked.
@@ -364,7 +366,7 @@ def import_building_from_excel(project, building_name, construction_age, path_to
         tz.area = zone["NetArea[m²]"].sum()
         # room vice calculation of volume plus summing those
         tz.volume = (
-                np.array(zone["NetArea[m²]"]) * np.array(zone["HeatedRoomHeight[m]"])
+            np.array(zone["NetArea[m²]"]) * np.array(zone["HeatedRoomHeight[m]"])
         ).sum()
 
         # Block: Boundary Conditions
@@ -385,10 +387,10 @@ def import_building_from_excel(project, building_name, construction_age, path_to
             if not isinstance(group["OuterWallOrientation[°]"].iloc[0], str):
                 out_wall = OuterWall(parent=tz)
                 out_wall.name = (
-                        "outer_wall_"
-                        + str(int(group["OuterWallOrientation[°]"].iloc[0]))
-                        + "_"
-                        + str(group["OuterWallConstruction"].iloc[0])
+                    "outer_wall_"
+                    + str(int(group["OuterWallOrientation[°]"].iloc[0]))
+                    + "_"
+                    + str(group["OuterWallConstruction"].iloc[0])
                 )
                 out_wall.area = group["OuterWallArea[m²]"].sum()
                 out_wall.tilt = out_wall_tilt
@@ -423,10 +425,10 @@ def import_building_from_excel(project, building_name, construction_age, path_to
             if not isinstance(group["OuterWallOrientation[°]"].iloc[0], str):
                 window = Window(parent=tz)
                 window.name = (
-                        "window_"
-                        + str(int(group["WindowOrientation[°]"].iloc[0]))
-                        + "_"
-                        + str(group["WindowConstruction"].iloc[0])
+                    "window_"
+                    + str(int(group["WindowOrientation[°]"].iloc[0]))
+                    + "_"
+                    + str(group["WindowConstruction"].iloc[0])
                 )
                 window.area = group["WindowArea[m²]"].sum()
                 window.tilt = window_tilt
