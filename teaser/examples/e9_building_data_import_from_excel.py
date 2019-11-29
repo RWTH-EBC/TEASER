@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# @Author: Martin Rätz
+# @Author: Martin Raetz
 # @Date:   2019-02-19 18:41:56
 # @Last Modified by: Martin Rätz
 # @Last Modified time: 29.11.2019
@@ -279,6 +279,8 @@ def import_building_from_excel(project, building_name, construction_age, path_to
         sheet names which shall be imported
     return data: pandas.DataFrame
         zoned DataFrame which is finally used to parametrize the teaser classes
+    return project: Project()
+        TEASER instance of Project filled with the imported building data
     """
 
     def warn_constructiontype(element):
@@ -315,7 +317,7 @@ def import_building_from_excel(project, building_name, construction_age, path_to
     # if the in the useconditions stated
     #   heating_time with the respective set_back_temp should be applied.
     #   use_set_back = false -> all hours of the day
-    #   have same set_temp_heat actual value: use_set_back = Check!
+    #   have same set_temp_heat actual value: use_set_back = Check your current version!
     # 2. HeaterOn, CoolerOn, hHeat, lCool, etc. can be hard coded in the text
     # file
     #   "teaser / data / output / modelicatemplate / AixLib /
