@@ -349,13 +349,13 @@ def import_building_from_excel(project, building_name, construction_age, path_to
     data = zoning_example(data)
 
     # informative print
-    usage_types = get_list_of_present_entries(data["zone"])
+    usage_types = get_list_of_present_entries(data["Zone"])
     print("List of zones after the zoning is applied: \n%s" % usage_types)
 
     # aggregate all rooms of each zone and for each set general parameter,
     # boundary conditions
     # and parameter regarding the building physics
-    zones = data.groupby(["zone"])
+    zones = data.groupby(["Zone"])
     for name, zone in zones:
 
         # Block: Thermal zone (general parameter)
@@ -371,7 +371,7 @@ def import_building_from_excel(project, building_name, construction_age, path_to
         # load UsageOperationTime, Lighting, RoomClimate and InternalGains
         # from the "UseCondition.json"
         tz.use_conditions = UseConditions(parent=tz)
-        tz.use_conditions.load_use_conditions(zone["zone"].iloc[0], project.data)
+        tz.use_conditions.load_use_conditions(zone["Zone"].iloc[0], project.data)
 
         # Block: Building Physics
         # Grouping by orientation and construction type
@@ -408,7 +408,7 @@ def import_building_from_excel(project, building_name, construction_age, path_to
                     "\n These entries can easily be found checking the stated "
                     "index in the produced ZonedInput.xlsx"
                     % (
-                        group["zone"].iloc[0],
+                        group["Zone"].iloc[0],
                         group["OuterWallOrientation[°]"].iloc[0],
                         group,
                     )
@@ -446,7 +446,7 @@ def import_building_from_excel(project, building_name, construction_age, path_to
                     "\nThese entries can easily be found checking the stated "
                     "index in the produced ZonedInput.xlsx"
                     % (
-                        group["zone"].iloc[0],
+                        group["Zone"].iloc[0],
                         group["WindowOrientation[°]"].iloc[0],
                         group,
                     )
@@ -493,7 +493,7 @@ def import_building_from_excel(project, building_name, construction_age, path_to
                     'type "%s" '
                     "has no floor nor groundfloor, since the area equals 0."
                     % (
-                        group["zone"].iloc[0],
+                        group["Zone"].iloc[0],
                         group["IsGroundFloor"].iloc[0],
                         group["FloorConstruction"].iloc[0],
                     )
@@ -542,7 +542,7 @@ def import_building_from_excel(project, building_name, construction_age, path_to
                     '"%s" '
                     "has no ceiling nor rooftop, since the area equals 0."
                     % (
-                        group["zone"].iloc[0],
+                        group["Zone"].iloc[0],
                         group["IsRooftop"].iloc[0],
                         group["CeilingConstruction"].iloc[0],
                     )
@@ -568,7 +568,7 @@ def import_building_from_excel(project, building_name, construction_age, path_to
                 warnings.warn(
                     'zone "%s" with inner wall construction "%s" has no '
                     "inner walls, since area = 0."
-                    % (group["zone"].iloc[0], group["InnerWallConstructio" "n"].iloc[0])
+                    % (group["Zone"].iloc[0], group["InnerWallConstructio" "n"].iloc[0])
                 )
 
         # Block: AHU and infiltration #Attention hard coding
