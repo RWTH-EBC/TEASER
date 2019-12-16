@@ -40,9 +40,15 @@ class UseConditions(object):
         ideal heater and vice versa . This should only be turned on if an AHU
         exists.
     T_threshold_heating: float [K]
-       Threshold temperature below ideal heater is used.
+       Threshold temperature below ideal heater is used. Default is 15 °C
+       which corresponds to the value for all buildings that are not built
+       according to EnEV standard according to DIN EN 18599-5.
     T_threshold_cooling: float [K]
-        Threshold temperature above ideal cooler is used.
+        Threshold temperature above ideal cooler is used. Default is 22 °C ,
+        since there are no european standards for cooling degree days this value
+        is taken from the following paper: "Heating Degree Days, Cooling
+        Degree Days and Precipitation in Europe—analysis for the
+        CELECT-project" by Benestad, 2008.
     heating_profile : list [K]
         Heating setpoint for a day or similar. You can set a list of any
         length, TEASER will multiplicate this list for one whole year.
