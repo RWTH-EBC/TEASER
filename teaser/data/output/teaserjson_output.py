@@ -148,12 +148,15 @@ def save_teaser_json(path, project):
                 "typical_width"] = zone.use_conditions.typical_width
             zone_out["use_conditions"][
                 "with_heating"] = zone.use_conditions.with_heating
+
+            zone_out["use_conditions"]["with_ideal_thresholds"] = \
+                zone.use_conditions.with_ideal_thresholds
             zone_out["use_conditions"][
                 "T_threshold_heating"] = zone.use_conditions.T_threshold_heating
             zone_out["use_conditions"][
-                "with_cooling"] = zone.use_conditions.with_cooling
-            zone_out["use_conditions"][
                 "T_threshold_cooling"] = zone.use_conditions.T_threshold_cooling
+            zone_out["use_conditions"][
+                "with_cooling"] = zone.use_conditions.with_cooling
             zone_out["use_conditions"][
                 "persons"] = zone.use_conditions.persons
             zone_out["use_conditions"][
