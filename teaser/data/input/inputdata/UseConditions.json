@@ -6212,7 +6212,7 @@
         "min_ahu": 24.0,
         "max_ahu": 48.0,
         "with_ahu": true,
-        "with_ideal_thresholds": true,
+        "with_ideal_thresholds": false,
         "heating_profile": [
             295.15,
             295.15,
