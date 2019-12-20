@@ -167,51 +167,153 @@ class UseConditions(object):
         self.max_ahu = 2.6
         self.with_ahu = False
 
-        self._heating_profile = [294.15, 294.15, 294.15, 294.15,
-                                 294.15, 294.15, 294.15, 294.15,
-                                 294.15, 294.15, 294.15, 294.15,
-                                 294.15, 294.15, 294.15, 294.15,
-                                 294.15, 294.15, 294.15, 294.15,
-                                 294.15, 294.15, 294.15, 294.15,
-                                 294.15]
-        self._cooling_profile = [294.15, 294.15, 294.15, 294.15,
-                                 294.15, 294.15, 294.15, 294.15,
-                                 294.15, 294.15, 294.15, 294.15,
-                                 294.15, 294.15, 294.15, 294.15,
-                                 294.15, 294.15, 294.15, 294.15,
-                                 294.15, 294.15, 294.15, 294.15,
-                                 294.15]
-        self._persons_profile = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.4,
-                                 0.6, 0.8, 0.8, 0.4, 0.6, 0.8, 0.8, 0.4, 0.2,
-                                 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-        self._machines_profile = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.4,
-                                  0.6, 0.8, 0.8, 0.4, 0.6, 0.8, 0.8, 0.4, 0.2,
-                                  0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
-        self._lighting_profile = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0,
-                                  1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
-                                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        self._heating_profile = [
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+        ]
+        self._cooling_profile = [
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+        ]
+        self._persons_profile = [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.2,
+            0.4,
+            0.6,
+            0.8,
+            0.8,
+            0.4,
+            0.6,
+            0.8,
+            0.8,
+            0.4,
+            0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+        ]
+        self._machines_profile = [
+            0.1,
+            0.1,
+            0.1,
+            0.1,
+            0.1,
+            0.1,
+            0.1,
+            0.2,
+            0.4,
+            0.6,
+            0.8,
+            0.8,
+            0.4,
+            0.6,
+            0.8,
+            0.8,
+            0.4,
+            0.2,
+            0.1,
+            0.1,
+            0.1,
+            0.1,
+            0.1,
+            0.1,
+        ]
+        self._lighting_profile = [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+        ]
 
         self.schedules = pd.DataFrame(
-            index=pd.date_range(
-                '2019-01-01 00:00:00',
-                periods=8760,
-                freq='H').to_series().dt.strftime('%m-%d %H:%M:%S'),
+            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
+            .to_series()
+            .dt.strftime("%m-%d %H:%M:%S"),
             data={
-                'heating_profile': list(
-                    islice(cycle(self._heating_profile), 8760)),
-                'cooling_profile': list(
-                    islice(cycle(self._cooling_profile), 8760)),
-                'persons_profile': list(
-                    islice(cycle(self._persons_profile), 8760)),
-                'lighting_profile': list(
-                    islice(cycle(self._lighting_profile), 8760)),
-                'machines_profile': list(
-                    islice(cycle(self._machines_profile), 8760))})
+                "heating_profile": list(islice(cycle(self._heating_profile), 8760)),
+                "cooling_profile": list(islice(cycle(self._cooling_profile), 8760)),
+                "persons_profile": list(islice(cycle(self._persons_profile), 8760)),
+                "lighting_profile": list(islice(cycle(self._lighting_profile), 8760)),
+                "machines_profile": list(islice(cycle(self._machines_profile), 8760)),
+            },
+        )
 
-    def load_use_conditions(
-            self,
-            zone_usage,
-            data_class=None):
+    def load_use_conditions(self, zone_usage, data_class=None):
         """Load typical use conditions from JSON data base.
 
         Loads Use conditions specified in the JSON.
@@ -235,22 +337,17 @@ class UseConditions(object):
             data_class = data_class
 
         usecond_input.load_use_conditions(
-            use_cond=self,
-            zone_usage=zone_usage,
-            data_class=data_class)
+            use_cond=self, zone_usage=zone_usage, data_class=data_class
+        )
 
-    def save_use_conditions(
-            self,
-            data_class=None):
+    def save_use_conditions(self, data_class=None):
         """Documentation is missing."""
         if data_class is None:
             data_class = self.parent.parent.parent.data
         else:
             data_class = data_class
 
-        usecond_output.save_use_conditions(
-            use_cond=self,
-            data_class=data_class)
+        usecond_output.save_use_conditions(use_cond=self, data_class=data_class)
 
     @property
     def heating_profile(self):
@@ -258,9 +355,10 @@ class UseConditions(object):
 
     @heating_profile.setter
     def heating_profile(self, value):
+        if not isinstance(value, list):
+            value = [value]
         self._heating_profile = value
-        self.schedules["heating_profile"] = list(
-            islice(cycle(value), 8760))
+        self.schedules["heating_profile"] = list(islice(cycle(value), 8760))
 
     @property
     def cooling_profile(self):
@@ -268,9 +366,10 @@ class UseConditions(object):
 
     @cooling_profile.setter
     def cooling_profile(self, value):
+        if not isinstance(value, list):
+            value = [value]
         self._cooling_profile = value
-        self.schedules["cooling_profile"] = list(
-            islice(cycle(value), 8760))
+        self.schedules["cooling_profile"] = list(islice(cycle(value), 8760))
 
     @property
     def persons_profile(self):
@@ -278,9 +377,10 @@ class UseConditions(object):
 
     @persons_profile.setter
     def persons_profile(self, value):
+        if not isinstance(value, list):
+            value = [value]
         self._persons_profile = value
-        self.schedules["persons_profile"] = list(
-            islice(cycle(value), 8760))
+        self.schedules["persons_profile"] = list(islice(cycle(value), 8760))
 
     @property
     def machines_profile(self):
@@ -288,9 +388,10 @@ class UseConditions(object):
 
     @machines_profile.setter
     def machines_profile(self, value):
+        if not isinstance(value, list):
+            value = [value]
         self._machines_profile = value
-        self.schedules["machines_profile"] = list(
-            islice(cycle(value), 8760))
+        self.schedules["machines_profile"] = list(islice(cycle(value), 8760))
 
     @property
     def lighting_profile(self):
@@ -298,9 +399,10 @@ class UseConditions(object):
 
     @lighting_profile.setter
     def lighting_profile(self, value):
+        if not isinstance(value, list):
+            value = [value]
         self._lighting_profile = value
-        self.schedules["lighting_profile"] = list(
-            islice(cycle(value), 8760))
+        self.schedules["lighting_profile"] = list(islice(cycle(value), 8760))
 
     @property
     def parent(self):
