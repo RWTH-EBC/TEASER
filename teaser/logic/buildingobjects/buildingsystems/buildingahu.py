@@ -95,27 +95,28 @@ class BuildingAHU(object):
         self.pressure_drop_fan_supply = 800
         self.pressure_drop_fan_return = 800
 
-        self._temperature_profile = (
-            7 * [293.15] + 12 * [295.15] + 6 * [293.15])
-        self._min_relative_humidity_profile = (25 * [0.45])
-        self._max_relative_humidity_profile = (25 * [0.65])
-        self._v_flow_profile = (
-            7 * [0.0] + 12 * [1.0] + 6 * [0.0])
+        self._temperature_profile = 7 * [293.15] + 12 * [295.15] + 6 * [293.15]
+        self._min_relative_humidity_profile = 25 * [0.45]
+        self._max_relative_humidity_profile = 25 * [0.65]
+        self._v_flow_profile = 7 * [0.0] + 12 * [1.0] + 6 * [0.0]
 
         self.schedules = pd.DataFrame(
-            index=pd.date_range(
-                '2019-01-01 00:00:00',
-                periods=8760,
-                freq='H').to_series().dt.strftime('%m-%d %H:%M:%S'),
+            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
+            .to_series()
+            .dt.strftime("%m-%d %H:%M:%S"),
             data={
-                'temperature_profile': list(
-                    islice(cycle(self.temperature_profile), 8760)),
-                'min_relative_humidity_profile': list(
-                    islice(cycle(self.min_relative_humidity_profile), 8760)),
-                'max_relative_humidity_profile': list(
-                    islice(cycle(self.max_relative_humidity_profile), 8760)),
-                'v_flow_profile': list(
-                    islice(cycle(self.v_flow_profile), 8760))})
+                "temperature_profile": list(
+                    islice(cycle(self.temperature_profile), 8760)
+                ),
+                "min_relative_humidity_profile": list(
+                    islice(cycle(self.min_relative_humidity_profile), 8760)
+                ),
+                "max_relative_humidity_profile": list(
+                    islice(cycle(self.max_relative_humidity_profile), 8760)
+                ),
+                "v_flow_profile": list(islice(cycle(self.v_flow_profile), 8760)),
+            },
+        )
 
     @property
     def parent(self):
@@ -125,6 +126,7 @@ class BuildingAHU(object):
     def parent(self, value):
         from teaser.logic.buildingobjects.building import Building
         import inspect
+
         if inspect.isclass(Building):
             self.__parent = value
             self.__parent.central_ahu = self
@@ -135,10 +137,10 @@ class BuildingAHU(object):
 
     @temperature_profile.setter
     def temperature_profile(self, value):
-
+        if not isinstance(value, list):
+            value = [value]
         self._temperature_profile = value
-        self.schedules["temperature_profile"] = list(
-            islice(cycle(value), 8760))
+        self.schedules["temperature_profile"] = list(islice(cycle(value), 8760))
 
     @property
     def min_relative_humidity_profile(self):
@@ -146,9 +148,12 @@ class BuildingAHU(object):
 
     @min_relative_humidity_profile.setter
     def min_relative_humidity_profile(self, value):
+        if not isinstance(value, list):
+            value = [value]
         self._min_relative_humidity_profile = value
         self.schedules["min_relative_humidity_profile"] = list(
-            islice(cycle(value), 8760))
+            islice(cycle(value), 8760)
+        )
 
     @property
     def max_relative_humidity_profile(self):
@@ -156,9 +161,12 @@ class BuildingAHU(object):
 
     @max_relative_humidity_profile.setter
     def max_relative_humidity_profile(self, value):
+        if not isinstance(value, list):
+            value = [value]
         self._min_relative_humidity_profile = value
         self.schedules["max_relative_humidity_profile"] = list(
-            islice(cycle(value), 8760))
+            islice(cycle(value), 8760)
+        )
 
     @property
     def v_flow_profile(self):
@@ -166,6 +174,7 @@ class BuildingAHU(object):
 
     @v_flow_profile.setter
     def v_flow_profile(self, value):
+        if not isinstance(value, list):
+            value = [value]
         self._v_flow_profile = value
-        self.schedules["v_flow_profile"] = list(
-            islice(cycle(value), 8760))
+        self.schedules["v_flow_profile"] = list(islice(cycle(value), 8760))
