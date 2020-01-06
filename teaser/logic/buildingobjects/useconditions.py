@@ -31,15 +31,30 @@ class UseConditions(object):
         typical width of a usage zone. This value is taken from
         SIA 2024. Archetype usage: division of usage zones in rooms
     with_heating: boolean
-        Sets if the zone is heated or not.
+        Sets if the zone is heated by ideal heater or not.
+    with_cooling: boolean
+        Sets if the zone is cooloed by ideal cooler or not.
+    with_ideal_thresholds: boolean
+        Sets if the threshold temperatures for ideal heater and cooler should
+        be used to prevent simultaneous heating from AHU and cooling from
+        ideal heater and vice versa . This should only be turned on if an AHU
+        exists.
+    T_threshold_heating: float [K]
+       Threshold temperature below ideal heater is used. Default is 15 °C
+       which corresponds to the value for all buildings that are not built
+       according to EnEV standard according to DIN EN 18599-5.
+    T_threshold_cooling: float [K]
+        Threshold temperature above ideal cooler is used. Default is 22 °C ,
+        since there are no european standards for cooling degree days this value
+        is taken from the following paper: "Heating Degree Days, Cooling
+        Degree Days and Precipitation in Europe—analysis for the
+        CELECT-project" by Benestad, 2008.
     heating_profile : list [K]
         Heating setpoint for a day or similar. You can set a list of any
         length, TEASER will multiplicate this list for one whole year.
     cooling_profile : list [K]
         Cooling setpoint for a day or similar. You can set a list of any
         length, TEASER will multiplicate this list for one whole year.
-    with_cooling: boolean
-        Sets if the zone is cooloed or not.
     persons: float [W/m2]
         Average sensible heat transmission per m2 of people with specific
         heat transmission of 70 W/person, taken from SIA 2024 and
@@ -146,6 +161,8 @@ class UseConditions(object):
 
         self.with_heating = True
         self.with_cooling = False
+        self.T_threshold_heating = 288.15
+        self.T_threshold_cooling = 295.15
 
         self.persons = 5.0
         self.ratio_conv_rad_persons = 0.5
@@ -166,6 +183,8 @@ class UseConditions(object):
         self.min_ahu = 0.0
         self.max_ahu = 2.6
         self.with_ahu = False
+
+        self._with_ideal_thresholds = False
 
         self._heating_profile = [294.15, 294.15, 294.15, 294.15,
                                  294.15, 294.15, 294.15, 294.15,
@@ -251,6 +270,18 @@ class UseConditions(object):
         usecond_output.save_use_conditions(
             use_cond=self,
             data_class=data_class)
+
+    @property
+    def with_ideal_thresholds(self):
+        return self._with_ideal_thresholds
+
+    @with_ideal_thresholds.setter
+    def with_ideal_thresholds(self, value):
+        if self.with_ahu is False and value is True:
+            raise ValueError("Threshold for ideal heaters should only be used"
+                             " when AHU is used in this zone")
+        else:
+            self._with_ideal_thresholds = value
 
     @property
     def heating_profile(self):
