@@ -129,7 +129,7 @@ class Residential(Building):
             net_leased_area,
             with_ahu,
             internal_gains_mode
-            )
+        )
 
     def generate_archetype(self):
         """Generates an archetype building.

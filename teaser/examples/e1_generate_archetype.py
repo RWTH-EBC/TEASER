@@ -47,7 +47,6 @@ def example_generate_archetype():
         height_of_floors=3.2,
         net_leased_area=200)
 
-
     # To generate non-residential archetype buildings (in this case an
     # office and a laboratory (a.k.a. institute)) the function
     # Project.add_residential() is used. The meaning of compulsory parameters
@@ -125,3 +124,4 @@ if __name__ == '__main__':
     prj = example_generate_archetype()
 
     print("Example 1: That's it! :)")
+

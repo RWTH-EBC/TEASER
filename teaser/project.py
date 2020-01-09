@@ -584,8 +584,8 @@ class Project(object):
                     net_leased_area,
                     with_ahu,
                     internal_gains_mode,
-                    construction_type,
-                    )
+                    construction_type
+                )
                 type_bldg.generate_archetype()
                 return type_bldg
 
