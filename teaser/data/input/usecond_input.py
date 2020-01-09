@@ -28,14 +28,19 @@ def load_use_conditions(use_cond, zone_usage, data_class):
     use_cond.typical_length = conditions_bind[zone_usage]["typical_length"]
     use_cond.typical_width = conditions_bind[zone_usage]["typical_width"]
     use_cond.with_heating = conditions_bind[zone_usage]["with_heating"]
+    use_cond.T_threshold_heating = conditions_bind[zone_usage]["T_threshold_heating"]
+    use_cond.T_threshold_cooling = conditions_bind[zone_usage]["T_threshold_cooling"]
     use_cond.with_cooling = conditions_bind[zone_usage]["with_cooling"]
-    use_cond.fixed_heat_flow_rate_persons = conditions_bind[
-        zone_usage]["fixed_heat_flow_rate_persons"]
-    use_cond.activity_degree_persons = conditions_bind[
-        zone_usage]["activity_degree_persons"]
+    use_cond.fixed_heat_flow_rate_persons = conditions_bind[zone_usage][
+        "fixed_heat_flow_rate_persons"
+    ]
+    use_cond.activity_degree_persons = conditions_bind[zone_usage][
+        "activity_degree_persons"
+    ]
     use_cond.persons = conditions_bind[zone_usage]["persons"]
-    use_cond.internal_gains_moisture_no_people = conditions_bind[
-        zone_usage]["internal_gains_moisture_no_people"]
+    use_cond.internal_gains_moisture_no_people = conditions_bind[zone_usage][
+        "internal_gains_moisture_no_people"
+    ]
     use_cond.ratio_conv_rad_persons = conditions_bind[zone_usage][
         "ratio_conv_rad_persons"
     ]
@@ -71,3 +76,6 @@ def load_use_conditions(use_cond, zone_usage, data_class):
     use_cond.persons_profile = conditions_bind[zone_usage]["persons_profile"]
     use_cond.machines_profile = conditions_bind[zone_usage]["machines_profile"]
     use_cond.lighting_profile = conditions_bind[zone_usage]["lighting_profile"]
+    use_cond.with_ideal_thresholds = conditions_bind[zone_usage][
+        "with_ideal_thresholds"
+    ]

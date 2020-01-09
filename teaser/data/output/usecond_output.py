@@ -28,9 +28,11 @@ def save_use_conditions(use_cond, data_class):
     """
     if use_cond.usage in data_class.conditions_bind.keys():
         add_to_json = False
-        warnings.warn("Usage already exist in this JSON, consider " +
-                      "revising your inputs. The UseConditions is  " +
-                      "NOT saved into JSON")
+        warnings.warn(
+            "Usage already exist in this JSON, consider "
+            + "revising your inputs. The UseConditions is  "
+            + "NOT saved into JSON"
+        )
     else:
         add_to_json = True
 
@@ -39,70 +41,90 @@ def save_use_conditions(use_cond, data_class):
     if add_to_json is True:
         data_class.conditions_bind[use_cond.usage] = collections.OrderedDict()
         data_class.conditions_bind[use_cond.usage][
-            "typical_length"] = use_cond.typical_length
+            "typical_length"
+        ] = use_cond.typical_length
         data_class.conditions_bind[use_cond.usage][
-            "typical_width"] = use_cond.typical_width
+            "typical_width"
+        ] = use_cond.typical_width
         data_class.conditions_bind[use_cond.usage][
-            "with_heating"] = use_cond.with_heating
+            "with_heating"
+        ] = use_cond.with_heating
         data_class.conditions_bind[use_cond.usage][
-            "with_cooling"] = use_cond.with_cooling
+            "T_threshold_heating"
+        ] = use_cond.T_threshold_heating
         data_class.conditions_bind[use_cond.usage][
-            "fixed_heat_flow_rate_persons"] = \
-            use_cond.fixed_heat_flow_rate_persons
+            "T_threshold_cooling"
+        ] = use_cond.T_threshold_cooling
         data_class.conditions_bind[use_cond.usage][
-            "activity_degree_persons"] = use_cond.activity_degree_persons
+            "with_cooling"
+        ] = use_cond.with_cooling
         data_class.conditions_bind[use_cond.usage][
-            "activity_degree_persons"] = use_cond.activity_degree_persons
+            "fixed_heat_flow_rate_persons"
+        ] = use_cond.fixed_heat_flow_rate_persons
         data_class.conditions_bind[use_cond.usage][
-            "persons"] = use_cond.persons
+            "activity_degree_persons"
+        ] = use_cond.activity_degree_persons
         data_class.conditions_bind[use_cond.usage][
-            "internal_gains_moisture_no_people"] = use_cond.\
-            internal_gains_moisture_no_people
+            "activity_degree_persons"
+        ] = use_cond.activity_degree_persons
+        data_class.conditions_bind[use_cond.usage]["persons"] = use_cond.persons
         data_class.conditions_bind[use_cond.usage][
-            "ratio_conv_rad_persons"] = use_cond.ratio_conv_rad_persons
+            "internal_gains_moisture_no_people"
+        ] = use_cond.internal_gains_moisture_no_people
         data_class.conditions_bind[use_cond.usage][
-            "machines"] = use_cond.machines
+            "ratio_conv_rad_persons"
+        ] = use_cond.ratio_conv_rad_persons
+        data_class.conditions_bind[use_cond.usage]["machines"] = use_cond.machines
         data_class.conditions_bind[use_cond.usage][
-            "ratio_conv_rad_machines"] = use_cond.ratio_conv_rad_machines
+            "ratio_conv_rad_machines"
+        ] = use_cond.ratio_conv_rad_machines
         data_class.conditions_bind[use_cond.usage][
-            "lighting_power"] = use_cond.lighting_power
+            "lighting_power"
+        ] = use_cond.lighting_power
         data_class.conditions_bind[use_cond.usage][
-            "ratio_conv_rad_lighting"] = use_cond.ratio_conv_rad_lighting
+            "ratio_conv_rad_lighting"
+        ] = use_cond.ratio_conv_rad_lighting
         data_class.conditions_bind[use_cond.usage][
-            "use_constant_infiltration"] = use_cond.use_constant_infiltration
+            "use_constant_infiltration"
+        ] = use_cond.use_constant_infiltration
         data_class.conditions_bind[use_cond.usage][
-            "infiltration_rate"] = use_cond.infiltration_rate
+            "infiltration_rate"
+        ] = use_cond.infiltration_rate
         data_class.conditions_bind[use_cond.usage][
-            "max_user_infiltration"] = use_cond.max_user_infiltration
-        data_class.conditions_bind[
-            use_cond.usage][
-            "max_overheating_infiltration"] = \
-            use_cond.max_overheating_infiltration
+            "max_user_infiltration"
+        ] = use_cond.max_user_infiltration
         data_class.conditions_bind[use_cond.usage][
-            "max_summer_infiltration"] = use_cond.max_summer_infiltration
-        data_class.conditions_bind[
-            use_cond.usage][
-            "winter_reduction_infiltration"] = \
-            use_cond.winter_reduction_infiltration
+            "max_overheating_infiltration"
+        ] = use_cond.max_overheating_infiltration
         data_class.conditions_bind[use_cond.usage][
-            "min_ahu"] = use_cond.min_ahu
+            "max_summer_infiltration"
+        ] = use_cond.max_summer_infiltration
         data_class.conditions_bind[use_cond.usage][
-            "max_ahu"] = use_cond.max_ahu
+            "winter_reduction_infiltration"
+        ] = use_cond.winter_reduction_infiltration
+        data_class.conditions_bind[use_cond.usage]["min_ahu"] = use_cond.min_ahu
+        data_class.conditions_bind[use_cond.usage]["max_ahu"] = use_cond.max_ahu
+        data_class.conditions_bind[use_cond.usage]["with_ahu"] = use_cond.with_ahu
         data_class.conditions_bind[use_cond.usage][
-            "with_ahu"] = use_cond.with_ahu
+            "heating_profile"
+        ] = use_cond.heating_profile
         data_class.conditions_bind[use_cond.usage][
-            "heating_profile"] = use_cond.heating_profile
+            "cooling_profile"
+        ] = use_cond.cooling_profile
         data_class.conditions_bind[use_cond.usage][
-            "cooling_profile"] = use_cond.cooling_profile
+            "persons_profile"
+        ] = use_cond.persons_profile
         data_class.conditions_bind[use_cond.usage][
-            "persons_profile"] = use_cond.persons_profile
+            "machines_profile"
+        ] = use_cond.machines_profile
         data_class.conditions_bind[use_cond.usage][
-            "machines_profile"] = use_cond.machines_profile
+            "lighting_profile"
+        ] = use_cond.lighting_profile
         data_class.conditions_bind[use_cond.usage][
-            "lighting_profile"] = use_cond.lighting_profile
+            "with_ideal_thresholds"
+        ] = use_cond.with_ideal_thresholds
 
-    with open(utilities.get_full_path(data_class.path_uc), 'w') as file:
-        file.write(json.dumps(
-            data_class.conditions_bind,
-            indent=4,
-            separators=(',', ': ')))
+    with open(utilities.get_full_path(data_class.path_uc), "w") as file:
+        file.write(
+            json.dumps(data_class.conditions_bind, indent=4, separators=(",", ": "))
+        )

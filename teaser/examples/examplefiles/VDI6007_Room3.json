@@ -43,7 +43,9 @@
                             "typical_length": 123.0,
                             "typical_width": 123.0,
                             "with_heating": true,
+                            "T_threshold_heating": 288.15,
                             "with_cooling": false,
+                            "T_threshold_cooling": 295.15,
                             "persons": 0.0,
                             "activity_degree_persons": 1.2,
                             "fixed_heat_flow_rate_persons": 70,
@@ -73,6 +75,7 @@
                             "min_ahu": 0.0,
                             "max_ahu": 0.5,
                             "with_ahu": 0,
+                            "with_ideal_thresholds": false,
                             "heating_profile": [
                                 294.15,
                                 294.15,
