@@ -124,4 +124,3 @@ if __name__ == '__main__':
     prj = example_generate_archetype()
 
     print("Example 1: That's it! :)")
-
