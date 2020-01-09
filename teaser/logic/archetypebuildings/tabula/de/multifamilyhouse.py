@@ -46,6 +46,15 @@ class MultiFamilyHouse(SingleFamilyHouse):
         If set to True, an empty instance of BuildingAHU is instantiated and
         assigned to attribute central_ahu. This instance holds information for
         central Air Handling units. Default is False.
+    internal_gains_mode: int [1, 2, 3]
+        mode for the internal gains calculation by persons:
+        1: Temperature and activity degree dependent calculation. The
+           calculation is based on  SIA 2024 (default)
+        2: Temperature and activity degree independent calculation, the max.
+           heatflowrate is prescribed by the parameter
+           fixed_heat_flow_rate_persons.
+        3: Temperature and activity degree dependent calculation with
+           consideration of moisture. The calculation is based on SIA 2024
     construction_type : str
         Construction type of used wall constructions default is "existing
         state"
@@ -68,6 +77,7 @@ class MultiFamilyHouse(SingleFamilyHouse):
             height_of_floors=None,
             net_leased_area=None,
             with_ahu=False,
+            internal_gains_mode=1,
             construction_type=None):
 
         super(MultiFamilyHouse, self).__init__(
@@ -78,6 +88,7 @@ class MultiFamilyHouse(SingleFamilyHouse):
             height_of_floors,
             net_leased_area,
             with_ahu,
+            internal_gains_mode,
             construction_type)
 
         self.construction_type = construction_type

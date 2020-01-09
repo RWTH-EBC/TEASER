@@ -268,6 +268,7 @@ class Project(object):
             height_of_floors,
             net_leased_area,
             with_ahu=True,
+            internal_gains_mode=1,
             office_layout=None,
             window_layout=None,
             construction_type=None):
@@ -310,6 +311,15 @@ class Project(object):
             and
             assigned to attribute central_ahu. This instance holds information
             for central Air Handling units. Default is False.
+        internal_gains_mode: int [1, 2, 3]
+            mode for the internal gains calculation by persons:
+            1: Temperature and activity degree dependent calculation. The
+               calculation is based on  SIA 2024 (default)
+            2: Temperature and activity degree independent calculation, the max.
+               heatflowrate is prescribed by the parameter
+               fixed_heat_flow_rate_persons.
+            3: Temperature and activity degree dependent calculation with
+               consideration of moisture. The calculation is based on SIA 2024
         office_layout : int
             Structure of the floor plan of office buildings, default is 1,
             which is representative for one elongated floor.
@@ -359,6 +369,7 @@ class Project(object):
                 height_of_floors,
                 net_leased_area,
                 with_ahu,
+                internal_gains_mode,
                 office_layout,
                 window_layout,
                 construction_type)
@@ -373,6 +384,7 @@ class Project(object):
                 height_of_floors,
                 net_leased_area,
                 with_ahu,
+                internal_gains_mode,
                 office_layout,
                 window_layout,
                 construction_type)
@@ -387,6 +399,7 @@ class Project(object):
                 height_of_floors,
                 net_leased_area,
                 with_ahu,
+                internal_gains_mode,
                 office_layout,
                 window_layout,
                 construction_type)
@@ -401,6 +414,7 @@ class Project(object):
                 height_of_floors,
                 net_leased_area,
                 with_ahu,
+                internal_gains_mode,
                 office_layout,
                 window_layout,
                 construction_type)
@@ -422,6 +436,7 @@ class Project(object):
             height_of_floors,
             net_leased_area,
             with_ahu=False,
+            internal_gains_mode=1,
             residential_layout=None,
             neighbour_buildings=None,
             attic=None,
@@ -471,6 +486,15 @@ class Project(object):
             and
             assigned to attribute central_ahu. This instance holds information
             for central Air Handling units. Default is False.
+        internal_gains_mode: int [1, 2, 3]
+            mode for the internal gains calculation by persons:
+            1: Temperature and activity degree dependent calculation. The
+               calculation is based on  SIA 2024 (default)
+            2: Temperature and activity degree independent calculation, the max.
+               heatflowrate is prescribed by the parameter
+               fixed_heat_flow_rate_persons.
+            3: Temperature and activity degree dependent calculation with
+               consideration of moisture. The calculation is based on SIA 2024
         residential_layout : int
             Structure of floor plan (default = 0) CAUTION only used for iwu
                 0: compact
@@ -559,7 +583,9 @@ class Project(object):
                     height_of_floors,
                     net_leased_area,
                     with_ahu,
-                    construction_type)
+                    internal_gains_mode,
+                    construction_type,
+                    )
                 type_bldg.generate_archetype()
                 return type_bldg
 
@@ -573,6 +599,7 @@ class Project(object):
                     height_of_floors,
                     net_leased_area,
                     with_ahu,
+                    internal_gains_mode,
                     construction_type)
                 type_bldg.generate_archetype()
                 return type_bldg
@@ -587,6 +614,7 @@ class Project(object):
                     height_of_floors,
                     net_leased_area,
                     with_ahu,
+                    internal_gains_mode,
                     construction_type)
                 type_bldg.generate_archetype()
                 return type_bldg
@@ -601,6 +629,7 @@ class Project(object):
                     height_of_floors,
                     net_leased_area,
                     with_ahu,
+                    internal_gains_mode,
                     construction_type)
 
                 type_bldg.generate_archetype()
@@ -630,6 +659,7 @@ class Project(object):
                     height_of_floors,
                     net_leased_area,
                     with_ahu,
+                    internal_gains_mode,
                     construction_type)
                 type_bldg.generate_archetype()
                 return type_bldg
@@ -644,6 +674,7 @@ class Project(object):
                     height_of_floors,
                     net_leased_area,
                     with_ahu,
+                    internal_gains_mode,
                     construction_type)
                 type_bldg.generate_archetype()
                 return type_bldg
@@ -658,6 +689,7 @@ class Project(object):
                     height_of_floors,
                     net_leased_area,
                     with_ahu,
+                    internal_gains_mode,
                     construction_type)
                 type_bldg.generate_archetype()
                 return type_bldg
@@ -683,6 +715,7 @@ class Project(object):
                     height_of_floors,
                     net_leased_area,
                     with_ahu,
+                    internal_gains_mode,
                     residential_layout,
                     neighbour_buildings,
                     attic,
@@ -714,6 +747,7 @@ class Project(object):
                     height_of_floors,
                     net_leased_area,
                     with_ahu,
+                    internal_gains_mode,
                     neighbour_buildings,
                     construction_type)
 
@@ -727,6 +761,7 @@ class Project(object):
                     height_of_floors,
                     net_leased_area,
                     with_ahu,
+                    internal_gains_mode,
                     neighbour_buildings,
                     construction_type,
                     number_of_apartments)
@@ -741,6 +776,7 @@ class Project(object):
                     height_of_floors,
                     net_leased_area,
                     with_ahu,
+                    internal_gains_mode,
                     neighbour_buildings,
                     construction_type,
                     number_of_apartments)
@@ -755,6 +791,7 @@ class Project(object):
                     height_of_floors,
                     net_leased_area,
                     with_ahu,
+                    internal_gains_mode,
                     neighbour_buildings,
                     construction_type,
                     number_of_apartments)
@@ -769,6 +806,7 @@ class Project(object):
                     height_of_floors,
                     net_leased_area,
                     with_ahu,
+                    internal_gains_mode,
                     neighbour_buildings,
                     construction_type,
                     number_of_apartments)
@@ -783,6 +821,7 @@ class Project(object):
                     height_of_floors,
                     net_leased_area,
                     with_ahu,
+                    internal_gains_mode,
                     neighbour_buildings,
                     construction_type,
                     number_of_apartments)
@@ -797,6 +836,7 @@ class Project(object):
                     height_of_floors,
                     net_leased_area,
                     with_ahu,
+                    internal_gains_mode,
                     neighbour_buildings,
                     construction_type,
                     number_of_apartments)
@@ -811,6 +851,7 @@ class Project(object):
                     height_of_floors,
                     net_leased_area,
                     with_ahu,
+                    internal_gains_mode,
                     neighbour_buildings,
                     construction_type,
                     number_of_apartments)
@@ -825,6 +866,7 @@ class Project(object):
                     height_of_floors,
                     net_leased_area,
                     with_ahu,
+                    internal_gains_mode,
                     neighbour_buildings,
                     construction_type,
                     number_of_apartments)
@@ -839,6 +881,7 @@ class Project(object):
                     height_of_floors,
                     net_leased_area,
                     with_ahu,
+                    internal_gains_mode,
                     neighbour_buildings,
                     construction_type,
                     number_of_apartments)
@@ -853,6 +896,7 @@ class Project(object):
                     height_of_floors,
                     net_leased_area,
                     with_ahu,
+                    internal_gains_mode,
                     neighbour_buildings,
                     construction_type,
                     number_of_apartments)
@@ -872,6 +916,7 @@ class Project(object):
             height_of_floors,
             net_leased_area,
             with_ahu=True,
+            internal_gains_mode=1,
             office_layout=None,
             window_layout=None,
             construction_type=None):
@@ -895,6 +940,7 @@ class Project(object):
             height_of_floors,
             net_leased_area,
             with_ahu,
+            internal_gains_mode,
             office_layout,
             window_layout,
             construction_type)

@@ -47,6 +47,7 @@ def example_generate_archetype():
         height_of_floors=3.2,
         net_leased_area=200)
 
+
     # To generate non-residential archetype buildings (in this case an
     # office and a laboratory (a.k.a. institute)) the function
     # Project.add_residential() is used. The meaning of compulsory parameters
@@ -95,6 +96,17 @@ def example_generate_archetype():
         height_of_floors=3.2,
         net_leased_area=280,
         construction_type='tabula_standard')
+
+    # # add a second residential building with moisture calculation
+    prj.add_residential(
+        method='tabula_de',
+        usage='single_family_house',
+        name="ResidentialBuilding_moisture",
+        year_of_construction=1988,
+        number_of_floors=2,
+        height_of_floors=3.2,
+        net_leased_area=200,
+        internal_gains_mode=3)
 
     prj.add_residential(
         method='tabula_de',

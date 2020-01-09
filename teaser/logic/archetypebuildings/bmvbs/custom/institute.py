@@ -54,6 +54,15 @@ class Institute(Office):
         If set to True, an empty instance of BuildingAHU is instantiated and
         assigned to attribute central_ahu. This instance holds information for
         central Air Handling units. Default is False.
+    internal_gains_mode: int [1, 2, 3]
+        mode for the internal gains calculation by persons:
+        1: Temperature and activity degree dependent calculation. The
+           calculation is based on  SIA 2024 (default)
+        2: Temperature and activity degree independent calculation, the max.
+           heatflowrate is prescribed by the parameter
+           fixed_heat_flow_rate_persons.
+        3: Temperature and activity degree dependent calculation with
+           consideration of moisture. The calculation is based on SIA 2024
     office_layout : int
         Structure of the floor plan of office buildings, default is 1,
         which is representative for one elongated floor.
@@ -129,6 +138,7 @@ class Institute(Office):
         height_of_floors=None,
         net_leased_area=None,
         with_ahu=True,
+        internal_gains_mode=1,
         office_layout=None,
         window_layout=None,
         construction_type=None,
@@ -147,6 +157,7 @@ class Institute(Office):
             height_of_floors,
             net_leased_area,
             with_ahu,
+            internal_gains_mode,
             office_layout,
             window_layout,
             construction_type,
