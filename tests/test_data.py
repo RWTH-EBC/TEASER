@@ -3308,3 +3308,27 @@ class Test_teaser(object):
         prj_test.buildings[-1].central_ahu.profile_v_flow = v_flow_week
 
         assert prj_test.buildings[-1].central_ahu.profile_v_flow == v_flow_week
+
+    def test_export_bldg_threshold(self):
+
+        prj.set_default(load_data=True)
+
+        prj.add_non_residential(
+            method="bmvbs",
+            usage="institute",
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=True,
+            office_layout=0,
+            window_layout=0,
+            construction_type="heavy",
+        )
+        prj.buildings[-1].thermal_zones[0].use_conditions.with_ahu = True
+        prj.buildings[-1].thermal_zones[0].use_conditions.with_ideal_thresholds = True
+        prj.buildings[-1].thermal_zones[-1].use_conditions.with_ahu = True
+        prj.buildings[-1].thermal_zones[-1].use_conditions.with_ideal_thresholds = True
+        prj.calc_all_buildings()
+        prj.export_aixlib()
