@@ -25,7 +25,7 @@ def save_material(material, data_class):
 
     """
     data_class.material_bind["version"] = "0.7"
-    add_to_xml = True
+    add_to_json = True
 
     warning_text = ("Material with same name and same properties already "
                     "exists in JSON, consider this material or revising your "
@@ -43,10 +43,10 @@ def save_material(material, data_class):
 
                 warnings.warn(warning_text)
                 print(material.name)
-                add_to_xml = False
+                add_to_json = False
                 break
 
-    if add_to_xml is True:
+    if add_to_json is True:
         data_class.material_bind[
             material.material_id] = collections.OrderedDict()
         data_class.material_bind[

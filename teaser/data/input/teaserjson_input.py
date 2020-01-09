@@ -39,7 +39,7 @@ def load_teaser_json(path, project):
     Parameters
     ----------
     path: string
-        path of teaserXML file
+        path of teaserjson file
 
     project: Project()
         Teaser instance of Project()

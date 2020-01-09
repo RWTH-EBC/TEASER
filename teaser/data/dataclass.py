@@ -1,4 +1,4 @@
-"""This module holds file paths and bindings for XML data."""
+"""This module holds file paths and bindings for json data."""
 import os
 import sys
 import teaser.logic.utilities as utils
@@ -81,7 +81,7 @@ class DataClass(object):
         self.load_mat_binding()
 
     def load_tb_binding(self):
-        """Load TypeBuildingElement XML into binding classes."""
+        """Load TypeBuildingElement json into binding classes."""
         if self.path_tb.endswith("json"):
             if os.path.isfile(self.path_tb):
                 try:
@@ -97,7 +97,7 @@ class DataClass(object):
                     self.element_bind["version"] = "0.7"
 
     def load_uc_binding(self):
-        """Load UseConditions XML into binding classes."""
+        """Load UseConditions json into binding classes."""
         if self.path_uc.endswith("json"):
             if os.path.isfile(self.path_uc):
                 try:
@@ -113,7 +113,7 @@ class DataClass(object):
                     self.conditions_bind["version"] = "0.7"
 
     def load_mat_binding(self):
-        """Load MaterialTemplates XML into binding classes."""
+        """Load MaterialTemplates json into binding classes."""
         if self.path_mat.endswith("json"):
             if os.path.isfile(self.path_mat):
                 try:
