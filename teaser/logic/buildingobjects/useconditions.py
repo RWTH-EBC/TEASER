@@ -397,6 +397,7 @@ class UseConditions(object):
         else:
             self._persons = value
 
+    @property
     def with_ideal_thresholds(self):
         return self._with_ideal_thresholds
 
