@@ -3328,6 +3328,8 @@ class Test_teaser(object):
         )
         prj.buildings[-1].thermal_zones[0].use_conditions.with_ahu = True
         prj.buildings[-1].thermal_zones[0].use_conditions.with_ideal_thresholds = True
+        prj.buildings[-1].thermal_zones[1].use_conditions.with_ahu = False
+        prj.buildings[-1].thermal_zones[1].use_conditions.with_ideal_thresholds = False
         prj.buildings[-1].thermal_zones[-1].use_conditions.with_ahu = True
         prj.buildings[-1].thermal_zones[-1].use_conditions.with_ideal_thresholds = True
         prj.calc_all_buildings()
