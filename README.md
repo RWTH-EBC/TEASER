@@ -128,7 +128,7 @@ Lauster M., Mans M., Remmen P., Fuchs M., Müller D.. BauSIM2016, p.535-542, Sep
 Remmen P., Schäfer J., Müller D.. Building Simulation 2019, September 2019,
 [pdf](https://www.researchgate.net/publication/337925776_Refinement_of_Dynamic_Non-Residential_Building_Archetypes_Using_Measurement_Data_and_Bayesian_Calibration)
 
-+ Vogt, M., Remmen P., Lauster M., Fuchs M. , Müller D.. (2018) Selecting statistical indices for calibrating building energy models. Building and Environment 144, pages 94-107. [bibtex](https://github.com/RWTH-EBC/TEASER/tree/master/doc/cite_be.bib)
++ Selecting statistical indices for calibrating building energy models. Vogt, M., Remmen P., Lauster M., Fuchs M. , Müller D.. Building and Environment 144, pages 94-107, October 2018. [bibtex](https://github.com/RWTH-EBC/TEASER/tree/master/doc/cite_be.bib)
 
 + The [Institute of Energy Efficiency and Sustainable Building](https://www.e3d.rwth-aachen.de/go/id/iyld/?) published a parametric study of TEASER where all functions and  parameters used in TEASER are gathered and explained. The publication can be found [here](https://publications.rwth-aachen.de/record/749801/files/749801.pdf).
 
