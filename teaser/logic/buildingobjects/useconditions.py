@@ -39,7 +39,7 @@ class UseConditions(object):
     with_ideal_thresholds: boolean
         Sets if the threshold temperatures for ideal heater and cooler should
         be used to prevent simultaneous heating from AHU and cooling from
-        ideal heater and vice versa . This should only be turned on if an AHU
+        ideal heater and vice versa. This should only be turned on if an AHU
         exists.
     T_threshold_heating: float [K]
        Threshold temperature below ideal heater is used. Default is 15 °C
