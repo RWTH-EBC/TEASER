@@ -44,7 +44,7 @@ class Material(object):
         List of usual values for material thickness, float [m]
     material_id : str(uuid)
         UUID of material, this is used to have similar behaviour like foreign
-        key in SQL data bases for use in TypeBuildingElements and Material xml
+        key in SQL data bases for use in TypeBuildingElements and Material json
 
     """
 
@@ -71,7 +71,7 @@ class Material(object):
     def load_material_template(self, mat_name, data_class=None):
         """Material loader.
 
-        Loads Material specified in the XML.
+        Loads Material specified in the json.
 
         Parameters
         ----------
@@ -99,7 +99,7 @@ class Material(object):
     def save_material_template(self, data_class):
         """Material saver.
 
-        Saves Material specified in the XML.
+        Saves Material specified in the json.
 
         Parameters
         ----------
@@ -123,7 +123,7 @@ class Material(object):
     def modify_material_template(self, data_class):
         """Material modifier.
 
-        Modify Material specified in the XML.
+        Modify Material specified in the json.
 
         Parameters
         ----------

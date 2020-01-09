@@ -2,7 +2,7 @@
 # TEASER Development Team
 
 """This module contains an example how to save buildings from a TEASER
-project to XML and pickle in order to save information.
+project to json and pickle in order to save information.
 """
 
 import teaser.examples.e1_generate_archetype as e1
@@ -18,7 +18,7 @@ def example_save():
 
     prj = e1.example_generate_archetype()
 
-    # First option is to use TEASERs own XML format to save all relevant
+    # First option is to use TEASERs own json format to save all relevant
     # data into a more or less human readable format. The corresponding
     # function is called Project().save_project() you can specify a file name
     #  and a save path. If both are non (as in this case) it will use the
@@ -35,14 +35,12 @@ def example_save():
 
     import pickle
 
-    pickle_file = os.path.join(
-        utilities.get_default_path(),
-        'teaser_pickle.p')
+    pickle_file = os.path.join(utilities.get_default_path(), "teaser_pickle.p")
 
     pickle.dump(prj, open(pickle_file, "wb"))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     example_save()
 
     print("Example 4: That's it! :)")

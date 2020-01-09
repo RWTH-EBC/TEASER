@@ -41,7 +41,7 @@ class SingleFamilyHouse(Residential):
     always specify the exact construction of building elements, but always
     provides a prescribed U-Value. We used the U-Value and the given material
     information to determine thickness of each layer and implemented it into
-    elements XML ('teaser.data.input.inputdata.TypeElements_TABULA_DK.xml'). The
+    elements json ('teaser.data.input.inputdata.TypeElements_TABULA_DK.json'). The
     material properties have been assumed from the "Handbook for Energy
     Consultants - HB2016" (http://www.hbemo.dk/). As there might be some
     differences in the assumptions for material properties from TABULA and
