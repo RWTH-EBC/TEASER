@@ -21,7 +21,7 @@ model ${bldg.name}
       },
 %else:
   AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirEquipped multizone(
-    redeclare package Medium = Modelica.Media.Air.SimpleAir,
+    redeclare package Medium = AixLib.Media.Air,
     buildingID=${bldg.building_id},
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_start = ${bldg.thermal_zones[0].t_inside},
@@ -71,10 +71,10 @@ model ${bldg.name}
            der_T(fixed=true))))),
 % if bldg.internal_gains_mode==1 or bldg.internal_gains_mode==2:
    redeclare model thermalZone =
-        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped,
+        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneAirExchange,
 % else:
    redeclare model thermalZone =
-        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirEquipped,
+        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirExchange,
 % endif
    redeclare model corG =
         AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane,
