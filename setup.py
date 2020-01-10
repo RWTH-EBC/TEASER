@@ -83,5 +83,5 @@ setup(
         "Topic :: Scientific/Engineering",
         "Topic :: Utilities",
     ],
-    install_requires=["mako", "pytest", "pandas"],
+    install_requires=["mako", "pytest", "pandas", "numpy"],
 )
