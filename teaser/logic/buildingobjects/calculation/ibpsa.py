@@ -43,7 +43,7 @@ class IBPSA(object):
         }
         self.consider_heat_capacity = True
 
-    def modelica_gains_boundary(self, zone, time_line=None, path=None):
+    def modelica_gains_boundary(self, zone, path=None):
         """creates .mat file for internal gains boundary conditions
 
         This function creates a matfile (-v4) for building internal gains
@@ -71,8 +71,6 @@ class IBPSA(object):
             TEASER instance of ThermalZone. As IBPSA computes single models
             for single zones, we need to generate individual files for zones
             and internal gains
-        time_line :[[int]]
-            list of time steps
         path : str
             optional path, when matfile is exported separately
 
@@ -94,20 +92,22 @@ class IBPSA(object):
         export["person_rad_{}".format(zone.name)] = (
             zone.use_conditions.schedules["persons_profile"]
             * (1 - zone.use_conditions.ratio_conv_rad_persons)
-            * 100
+            * zone.use_conditions.fixed_heat_flow_rate_persons
             * zone.use_conditions.persons
+            * zone.area
         )
         export["person_conv_{}".format(zone.name)] = (
             zone.use_conditions.schedules["persons_profile"]
             * zone.use_conditions.ratio_conv_rad_persons
-            * 100
+            * zone.use_conditions.fixed_heat_flow_rate_persons
             * zone.use_conditions.persons
+            * zone.area
         )
         export["machines_conv_{}".format(zone.name)] = (
             zone.use_conditions.schedules["machines_profile"]
             * zone.use_conditions.ratio_conv_rad_machines
-            * 100
             * zone.use_conditions.machines
+            * zone.area
         )
 
         export.index = [(i + 1) * 3600 for i in range(8760)]

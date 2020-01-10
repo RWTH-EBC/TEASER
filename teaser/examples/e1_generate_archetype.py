@@ -96,6 +96,17 @@ def example_generate_archetype():
         net_leased_area=280,
         construction_type='tabula_standard')
 
+    # # add a second residential building with moisture calculation
+    prj.add_residential(
+        method='tabula_de',
+        usage='single_family_house',
+        name="ResidentialBuilding_moisture",
+        year_of_construction=1988,
+        number_of_floors=2,
+        height_of_floors=3.2,
+        net_leased_area=200,
+        internal_gains_mode=3)
+
     prj.add_residential(
         method='tabula_de',
         usage='multi_family_house',

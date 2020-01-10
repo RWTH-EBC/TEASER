@@ -41,7 +41,7 @@ def load_teaser_json(path, project):
     path: string
         path of teaserXML file
 
-    prj: Project()
+    project: Project()
         Teaser instance of Project()
 
 
@@ -83,8 +83,7 @@ def load_teaser_json(path, project):
     project.modelica_info.version = prj_in["project"]["modelica_info"]["version"]
 
     for bldg_name, bldg_in in prj_in["project"]["buildings"].items():
-        bl_class = __building_class[bldg_in["classification"]
-                                    ["class"]]["teaser_class"]
+        bl_class = __building_class[bldg_in["classification"]["class"]]["teaser_class"]
         bldg = bl_class(parent=project)
         bldg.name = bldg_name
         bldg.street_name = bldg_in["street_name"]
@@ -140,11 +139,26 @@ def load_teaser_json(path, project):
             ]
             tz.use_conditions.typical_width = zone_in["use_conditions"]["typical_width"]
             tz.use_conditions.with_heating = zone_in["use_conditions"]["with_heating"]
-            tz.use_conditions.with_ideal_thresholds = zone_in["use_conditions"]["with_ideal_thresholds"]
-            tz.use_conditions.T_threshold_heating = zone_in["use_conditions"]["T_threshold_heating"]
-            tz.use_conditions.T_threshold_cooling = zone_in["use_conditions"]["T_threshold_cooling"]
             tz.use_conditions.with_cooling = zone_in["use_conditions"]["with_cooling"]
+            tz.use_conditions.with_ideal_thresholds = zone_in["use_conditions"][
+                "with_ideal_thresholds"
+            ]
+            tz.use_conditions.T_threshold_heating = zone_in["use_conditions"][
+                "T_threshold_heating"
+            ]
+            tz.use_conditions.T_threshold_cooling = zone_in["use_conditions"][
+                "T_threshold_cooling"
+            ]
+            tz.use_conditions.fixed_heat_flow_rate_persons = zone_in["use_conditions"][
+                "fixed_heat_flow_rate_persons"
+            ]
+            tz.use_conditions.activity_degree_persons = zone_in["use_conditions"][
+                "activity_degree_persons"
+            ]
             tz.use_conditions.persons = zone_in["use_conditions"]["persons"]
+            tz.use_conditions.internal_gains_moisture_no_people = zone_in[
+                "use_conditions"
+            ]["internal_gains_moisture_no_people"]
             tz.use_conditions.ratio_conv_rad_persons = zone_in["use_conditions"][
                 "ratio_conv_rad_persons"
             ]

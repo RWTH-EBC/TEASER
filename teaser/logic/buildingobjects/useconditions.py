@@ -4,6 +4,8 @@ import teaser.data.input.usecond_input as usecond_input
 import teaser.data.output.usecond_output as usecond_output
 import pandas as pd
 from itertools import cycle, islice
+from collections import OrderedDict
+from teaser.logic.utilities import division_from_json
 
 
 class UseConditions(object):
@@ -37,7 +39,7 @@ class UseConditions(object):
     with_ideal_thresholds: boolean
         Sets if the threshold temperatures for ideal heater and cooler should
         be used to prevent simultaneous heating from AHU and cooling from
-        ideal heater and vice versa . This should only be turned on if an AHU
+        ideal heater and vice versa. This should only be turned on if an AHU
         exists.
     T_threshold_heating: float [K]
        Threshold temperature below ideal heater is used. Default is 15 °C
@@ -55,13 +57,26 @@ class UseConditions(object):
     cooling_profile : list [K]
         Cooling setpoint for a day or similar. You can set a list of any
         length, TEASER will multiplicate this list for one whole year.
-    persons: float [W/m2]
-        Average sensible heat transmission per m2 of people with specific
-        heat transmission of 70 W/person, taken from SIA 2024 and
-        DIN V 18599-10 for medium occupancy.
-        AixLib: Used in Zone record for internal gains as
-        internalGainsPeopleSpecific
+    with_cooling: boolean
+        Sets if the zone is cooloed or not.
+    fixed_heat_flow_rate_persons: float [W/person]
+        fixed heat flow rate for one person in case of temperature
+        independent calculation. Default value is 70
+        W/person and describes
+        the maximum heat flow rate depending on the schedule.
+    persons : float [Persons/m2]
+        Specific number of persons per square area.
         Annex: Used for internal gains
+    internal_gains_moisture_no_people : float [g/(h m²)]
+        internal moisture production of plants, etc. except from people.
+    activity_degree_persons : float [met]
+        default value is 1.2 met
+        AixLib: used for heat flow rate calculation (internal_gains_mode=1)
+        or heat flow rate and moisture gains (internal_gains_mode=3). Both
+        are temperature and activity degree depending, calculation based
+        on SIA2024.
+        Annex: not used, heat flow rate is constant value
+        fixed_heat_flow_rate_persons
     ratio_conv_rad_persons: float
         describes the ratio between convective and radiative heat transfer
         of the persons. Default values are derived from
@@ -76,7 +91,7 @@ class UseConditions(object):
         AixLib: Used for internal gains profile on top-level
         Annex: Used for internal gains
     machines: float [W/m2]
-        Specific eletrical load of machines per m2. This value is taken
+        area specific eletrical load of machines per m2. This value is taken
         from SIA 2024 and DIN V 18599-10 for medium occupancy.
         AixLib: Used in Zone record for internal gains,
         internalGainsMachinesSpecific
@@ -164,7 +179,10 @@ class UseConditions(object):
         self.T_threshold_heating = 288.15
         self.T_threshold_cooling = 295.15
 
-        self.persons = 5.0
+        self.fixed_heat_flow_rate_persons = 70
+        self.activity_degree_persons = 1.2
+        self._persons = 1 / 14
+        self.internal_gains_moisture_no_people = 0.5
         self.ratio_conv_rad_persons = 0.5
 
         self.machines = 7.0
@@ -183,6 +201,8 @@ class UseConditions(object):
         self.min_ahu = 0.0
         self.max_ahu = 2.6
         self.with_ahu = False
+
+        self._with_ideal_thresholds = False
 
         self._heating_profile = [
             294.15,
@@ -365,6 +385,17 @@ class UseConditions(object):
             data_class = data_class
 
         usecond_output.save_use_conditions(use_cond=self, data_class=data_class)
+
+    @property
+    def persons(self):
+        return self._persons
+
+    @persons.setter
+    def persons(self, value):
+        if isinstance(value, OrderedDict):
+            self._persons = division_from_json(value)
+        else:
+            self._persons = value
 
     @property
     def with_ideal_thresholds(self):

@@ -78,7 +78,8 @@ class DataClass(object):
             "data/input/inputdata/MaterialTemplates.json"
         )
         self.conditions_bind = None
-        self.path_uc = utils.get_full_path("data/input/inputdata/UseConditions.json")
+        self.path_uc = utils.get_full_path(
+            "data/input/inputdata/UseConditions.json")
 
         self.load_uc_binding()
         self.load_mat_binding()
@@ -144,7 +145,8 @@ class DataClass(object):
                             f, object_pairs_hook=collections.OrderedDict
                         )
                 except json.decoder.JSONDecodeError:
-                    print("Your UseConditions.json file seems to be broken.")
+                    raise IOError(
+                        "Your UseConditions.json file seems to be broken.")
             else:
                 with open(self.path_uc, "w") as f:
                     self.conditions_bind = collections.OrderedDict()

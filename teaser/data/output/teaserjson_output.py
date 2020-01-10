@@ -27,86 +27,69 @@ def save_teaser_json(path, project):
     prj_out["project"]["version"] = "0.7"
     prj_out["project"]["name"] = project.name
     prj_out["project"]["weather_file_path"] = project.weather_file_path
-    prj_out["project"][
-        "number_of_elements_calc"] = project.number_of_elements_calc
+    prj_out["project"]["number_of_elements_calc"] = project.number_of_elements_calc
     prj_out["project"]["merge_windows_calc"] = project.merge_windows_calc
     prj_out["project"]["used_library_calc"] = project.used_library_calc
     prj_out["project"]["modelica_info"] = collections.OrderedDict()
-    prj_out["project"][
-        "modelica_info"]["start_time"] = project.modelica_info.start_time
-    prj_out["project"][
-        "modelica_info"]["stop_time"] = project.modelica_info.stop_time
+    prj_out["project"]["modelica_info"]["start_time"] = project.modelica_info.start_time
+    prj_out["project"]["modelica_info"]["stop_time"] = project.modelica_info.stop_time
     prj_out["project"]["modelica_info"][
-        "interval_output"] = project.modelica_info.interval_output
+        "interval_output"
+    ] = project.modelica_info.interval_output
     prj_out["project"]["modelica_info"][
-        "current_solver"] = project.modelica_info.current_solver
+        "current_solver"
+    ] = project.modelica_info.current_solver
     prj_out["project"]["modelica_info"][
-        "equidistant_output"] = project.modelica_info.equidistant_output
+        "equidistant_output"
+    ] = project.modelica_info.equidistant_output
     prj_out["project"]["modelica_info"][
-        "results_at_events"] = project.modelica_info.results_at_events
-    prj_out["project"]["modelica_info"][
-        "version"] = project.modelica_info.version
+        "results_at_events"
+    ] = project.modelica_info.results_at_events
+    prj_out["project"]["modelica_info"]["version"] = project.modelica_info.version
     prj_out["project"]["buildings"] = collections.OrderedDict()
     __building_class = {
-        "Building": {
-            "method": "undefined",
-            "usage": "undefined"},
-        "Office": {
-            "method": "bmvbs",
-            "usage": "office"},
-        "Institute": {
-            "method": "bmvbs",
-            "usage": "institute"},
-        "Institute4": {
-            "method": "bmvbs",
-            "usage": "institute4"},
-        "Institute8": {
-            "method": "bmvbs",
-            "usage": "institute8"},
-        "SingleFamilyDwelling": {
-            "method": "iwu",
-            "usage": "single_family_dwelling"},
-        "SingleFamilyHouse": {
-            "method": "tabula_de",
-            "usage": "single_family_house"},
-        "TerracedHouse": {
-            "method": "tabula_de",
-            "usage": "terraced_house"},
-        "MultiFamilyHouse": {
-            "method": "tabula_de",
-            "usage": "multi_family_house"},
-        "ApartmentBlock": {
-            "method": "tabula_de",
-            "usage": "apartment_block"},
+        "Building": {"method": "undefined", "usage": "undefined"},
+        "Office": {"method": "bmvbs", "usage": "office"},
+        "Institute": {"method": "bmvbs", "usage": "institute"},
+        "Institute4": {"method": "bmvbs", "usage": "institute4"},
+        "Institute8": {"method": "bmvbs", "usage": "institute8"},
+        "SingleFamilyDwelling": {"method": "iwu", "usage": "single_family_dwelling"},
+        "SingleFamilyHouse": {"method": "tabula_de", "usage": "single_family_house"},
+        "TerracedHouse": {"method": "tabula_de", "usage": "terraced_house"},
+        "MultiFamilyHouse": {"method": "tabula_de", "usage": "multi_family_house"},
+        "ApartmentBlock": {"method": "tabula_de", "usage": "apartment_block"},
     }
 
     for bldg in project.buildings:
         prj_out["project"]["buildings"][bldg.name] = collections.OrderedDict()
-        prj_out["project"]["buildings"][bldg.name]["classification"] = \
-            collections.OrderedDict()
-        prj_out[
-            "project"]["buildings"][bldg.name]["classification"]["class"] = \
-            type(bldg).__name__
-        prj_out[
-            "project"]["buildings"][bldg.name]["classification"]["method"] = \
-            __building_class[type(bldg).__name__]["method"]
-        prj_out["project"]["buildings"][bldg.name]["street_name"] = \
-            bldg.street_name
+        prj_out["project"]["buildings"][bldg.name][
+            "classification"
+        ] = collections.OrderedDict()
+        prj_out["project"]["buildings"][bldg.name]["classification"]["class"] = type(
+            bldg
+        ).__name__
+        prj_out["project"]["buildings"][bldg.name]["classification"][
+            "method"
+        ] = __building_class[type(bldg).__name__]["method"]
+        prj_out["project"]["buildings"][bldg.name]["street_name"] = bldg.street_name
         prj_out["project"]["buildings"][bldg.name]["city"] = bldg.city
-        prj_out["project"]["buildings"][bldg.name]["year_of_construction"] = \
-            bldg.year_of_construction
-        prj_out["project"]["buildings"][bldg.name]["year_of_retrofit"] = \
-            bldg.year_of_retrofit
-        prj_out["project"]["buildings"][bldg.name]["number_of_floors"] = \
-            bldg.number_of_floors
-        prj_out["project"]["buildings"][bldg.name]["height_of_floors"] = \
-            bldg.height_of_floors
-        prj_out["project"]["buildings"][bldg.name]["net_leased_area"] = \
-            bldg.net_leased_area
-        prj_out["project"]["buildings"][bldg.name]["outer_area"] = \
-            bldg.outer_area
-        prj_out["project"]["buildings"][bldg.name]["window_area"] = \
-            bldg.window_area
+        prj_out["project"]["buildings"][bldg.name][
+            "year_of_construction"
+        ] = bldg.year_of_construction
+        prj_out["project"]["buildings"][bldg.name][
+            "year_of_retrofit"
+        ] = bldg.year_of_retrofit
+        prj_out["project"]["buildings"][bldg.name][
+            "number_of_floors"
+        ] = bldg.number_of_floors
+        prj_out["project"]["buildings"][bldg.name][
+            "height_of_floors"
+        ] = bldg.height_of_floors
+        prj_out["project"]["buildings"][bldg.name][
+            "net_leased_area"
+        ] = bldg.net_leased_area
+        prj_out["project"]["buildings"][bldg.name]["outer_area"] = bldg.outer_area
+        prj_out["project"]["buildings"][bldg.name]["window_area"] = bldg.window_area
         if bldg.central_ahu is not None:
             ahu_out = collections.OrderedDict()
             ahu_out["heating"] = bldg.central_ahu.heating
@@ -114,25 +97,27 @@ def save_teaser_json(path, project):
             ahu_out["dehumidification"] = bldg.central_ahu.dehumidification
             ahu_out["humidification"] = bldg.central_ahu.humidification
             ahu_out["heat_recovery"] = bldg.central_ahu.heat_recovery
-            ahu_out["by_pass_dehumidification"] = \
-                bldg.central_ahu.by_pass_dehumidification
-            ahu_out["efficiency_recovery"] = \
-                bldg.central_ahu.efficiency_recovery
-            ahu_out["efficiency_recovery_false"] = \
-                bldg.central_ahu.efficiency_recovery_false
-            ahu_out["min_relative_humidity_profile"] = \
-                bldg.central_ahu.min_relative_humidity_profile
-            ahu_out["max_relative_humidity_profile"] = \
-                bldg.central_ahu.max_relative_humidity_profile
-            ahu_out["v_flow_profile"] = \
-                bldg.central_ahu.v_flow_profile
-            ahu_out["temperature_profile"] = \
-                bldg.central_ahu.temperature_profile
+            ahu_out[
+                "by_pass_dehumidification"
+            ] = bldg.central_ahu.by_pass_dehumidification
+            ahu_out["efficiency_recovery"] = bldg.central_ahu.efficiency_recovery
+            ahu_out[
+                "efficiency_recovery_false"
+            ] = bldg.central_ahu.efficiency_recovery_false
+            ahu_out[
+                "min_relative_humidity_profile"
+            ] = bldg.central_ahu.min_relative_humidity_profile
+            ahu_out[
+                "max_relative_humidity_profile"
+            ] = bldg.central_ahu.max_relative_humidity_profile
+            ahu_out["v_flow_profile"] = bldg.central_ahu.v_flow_profile
+            ahu_out["temperature_profile"] = bldg.central_ahu.temperature_profile
             prj_out["project"]["buildings"][bldg.name]["central_ahu"] = ahu_out
         else:
             pass
-        prj_out["project"]["buildings"][bldg.name]["thermal_zones"] = \
-            collections.OrderedDict()
+        prj_out["project"]["buildings"][bldg.name][
+            "thermal_zones"
+        ] = collections.OrderedDict()
         for zone in bldg.thermal_zones:
 
             zone_out = collections.OrderedDict()
@@ -143,69 +128,85 @@ def save_teaser_json(path, project):
             zone_out["use_conditions"]["usage"] = zone.use_conditions.usage
 
             zone_out["use_conditions"][
-                "typical_length"] = zone.use_conditions.typical_length
+                "typical_length"
+            ] = zone.use_conditions.typical_length
             zone_out["use_conditions"][
-                "typical_width"] = zone.use_conditions.typical_width
+                "typical_width"
+            ] = zone.use_conditions.typical_width
             zone_out["use_conditions"][
-                "with_heating"] = zone.use_conditions.with_heating
-
-            zone_out["use_conditions"]["with_ideal_thresholds"] = \
-                zone.use_conditions.with_ideal_thresholds
+                "with_heating"
+            ] = zone.use_conditions.with_heating
             zone_out["use_conditions"][
-                "T_threshold_heating"] = zone.use_conditions.T_threshold_heating
+                "with_ideal_thresholds"
+            ] = zone.use_conditions.with_ideal_thresholds
             zone_out["use_conditions"][
-                "T_threshold_cooling"] = zone.use_conditions.T_threshold_cooling
+                "T_threshold_heating"
+            ] = zone.use_conditions.T_threshold_heating
             zone_out["use_conditions"][
-                "with_cooling"] = zone.use_conditions.with_cooling
+                "T_threshold_cooling"
+            ] = zone.use_conditions.T_threshold_cooling
             zone_out["use_conditions"][
-                "persons"] = zone.use_conditions.persons
+                "with_cooling"
+            ] = zone.use_conditions.with_cooling
             zone_out["use_conditions"][
-                "ratio_conv_rad_persons"] = \
-                zone.use_conditions.ratio_conv_rad_persons
+                "fixed_heat_flow_rate_persons"
+            ] = zone.use_conditions.fixed_heat_flow_rate_persons
             zone_out["use_conditions"][
-                "machines"] = zone.use_conditions.machines
+                "activity_degree_persons"
+            ] = zone.use_conditions.activity_degree_persons
+            zone_out["use_conditions"]["persons"] = zone.use_conditions.persons
             zone_out["use_conditions"][
-                "ratio_conv_rad_machines"] = \
-                zone.use_conditions.ratio_conv_rad_machines
+                "internal_gains_moisture_no_people"
+            ] = zone.use_conditions.internal_gains_moisture_no_people
             zone_out["use_conditions"][
-                "lighting_power"] = zone.use_conditions.lighting_power
+                "ratio_conv_rad_persons"
+            ] = zone.use_conditions.ratio_conv_rad_persons
+            zone_out["use_conditions"]["machines"] = zone.use_conditions.machines
             zone_out["use_conditions"][
-                "ratio_conv_rad_lighting"] = \
-                zone.use_conditions.ratio_conv_rad_lighting
-            zone_out["use_conditions"]["use_constant_infiltration"] = \
-                zone.use_conditions.use_constant_infiltration
+                "ratio_conv_rad_machines"
+            ] = zone.use_conditions.ratio_conv_rad_machines
             zone_out["use_conditions"][
-                "infiltration_rate"] = zone.use_conditions.infiltration_rate
+                "lighting_power"
+            ] = zone.use_conditions.lighting_power
             zone_out["use_conditions"][
-                "max_user_infiltration"] = \
-                zone.use_conditions.max_user_infiltration
-            zone_out["use_conditions"]["max_overheating_infiltration"] = \
-                zone.use_conditions.max_overheating_infiltration
-            zone_out["use_conditions"]["max_summer_infiltration"] = \
-                zone.use_conditions.max_summer_infiltration
-            zone_out["use_conditions"]["winter_reduction_infiltration"] = \
-                zone.use_conditions.winter_reduction_infiltration
+                "ratio_conv_rad_lighting"
+            ] = zone.use_conditions.ratio_conv_rad_lighting
             zone_out["use_conditions"][
-                "min_ahu"] = zone.use_conditions.min_ahu
+                "use_constant_infiltration"
+            ] = zone.use_conditions.use_constant_infiltration
             zone_out["use_conditions"][
-                "max_ahu"] = zone.use_conditions.max_ahu
+                "infiltration_rate"
+            ] = zone.use_conditions.infiltration_rate
             zone_out["use_conditions"][
-                "with_ahu"] = zone.use_conditions.with_ahu
+                "max_user_infiltration"
+            ] = zone.use_conditions.max_user_infiltration
             zone_out["use_conditions"][
-                "heating_profile"] = \
-                zone.use_conditions.heating_profile
+                "max_overheating_infiltration"
+            ] = zone.use_conditions.max_overheating_infiltration
             zone_out["use_conditions"][
-                "cooling_profile"] = \
-                zone.use_conditions.cooling_profile
+                "max_summer_infiltration"
+            ] = zone.use_conditions.max_summer_infiltration
             zone_out["use_conditions"][
-                "persons_profile"] = \
-                zone.use_conditions.persons_profile
+                "winter_reduction_infiltration"
+            ] = zone.use_conditions.winter_reduction_infiltration
+            zone_out["use_conditions"]["min_ahu"] = zone.use_conditions.min_ahu
+            zone_out["use_conditions"]["max_ahu"] = zone.use_conditions.max_ahu
+            zone_out["use_conditions"]["with_ahu"] = zone.use_conditions.with_ahu
             zone_out["use_conditions"][
-                "machines_profile"] = \
-                zone.use_conditions.machines_profile
+                "heating_profile"
+            ] = zone.use_conditions.heating_profile
             zone_out["use_conditions"][
-                "lighting_profile"] = \
-                zone.use_conditions.lighting_profile
+                "cooling_profile"
+            ] = zone.use_conditions.cooling_profile
+            zone_out["use_conditions"][
+                "persons_profile"
+            ] = zone.use_conditions.persons_profile
+            zone_out["use_conditions"][
+                "machines_profile"
+            ] = zone.use_conditions.machines_profile
+            zone_out["use_conditions"][
+                "lighting_profile"
+            ] = zone.use_conditions.lighting_profile
 
             zone_out["outer_walls"] = collections.OrderedDict()
             zone_out["doors"] = collections.OrderedDict()
@@ -217,87 +218,44 @@ def save_teaser_json(path, project):
             zone_out["ceilings"] = collections.OrderedDict()
 
             for out_wall in zone.outer_walls:
-                zone_out[
-                    "outer_walls"][out_wall.name] = collections.OrderedDict()
-                set_basic_data(
-                    zone_out["outer_walls"][out_wall.name],
-                    out_wall)
-                set_layer_data(
-                    zone_out["outer_walls"][out_wall.name],
-                    out_wall)
+                zone_out["outer_walls"][out_wall.name] = collections.OrderedDict()
+                set_basic_data(zone_out["outer_walls"][out_wall.name], out_wall)
+                set_layer_data(zone_out["outer_walls"][out_wall.name], out_wall)
             for door in zone.doors:
-                zone_out[
-                    "doors"][door.name] = collections.OrderedDict()
-                set_basic_data(
-                    zone_out["doors"][door.name],
-                    door)
-                set_layer_data(
-                    zone_out["doors"][door.name],
-                    door)
+                zone_out["doors"][door.name] = collections.OrderedDict()
+                set_basic_data(zone_out["doors"][door.name], door)
+                set_layer_data(zone_out["doors"][door.name], door)
             for roof in zone.rooftops:
-                zone_out[
-                    "rooftops"][roof.name] = collections.OrderedDict()
-                set_basic_data(
-                    zone_out["rooftops"][roof.name],
-                    roof)
-                set_layer_data(
-                    zone_out["rooftops"][roof.name],
-                    roof)
+                zone_out["rooftops"][roof.name] = collections.OrderedDict()
+                set_basic_data(zone_out["rooftops"][roof.name], roof)
+                set_layer_data(zone_out["rooftops"][roof.name], roof)
             for gf in zone.ground_floors:
-                zone_out[
-                    "ground_floors"][gf.name] = collections.OrderedDict()
-                set_basic_data(
-                    zone_out["ground_floors"][gf.name],
-                    gf)
-                set_layer_data(
-                    zone_out["ground_floors"][gf.name],
-                    gf)
+                zone_out["ground_floors"][gf.name] = collections.OrderedDict()
+                set_basic_data(zone_out["ground_floors"][gf.name], gf)
+                set_layer_data(zone_out["ground_floors"][gf.name], gf)
             for win in zone.windows:
-                zone_out[
-                    "windows"][win.name] = collections.OrderedDict()
-                set_basic_data(
-                    zone_out["windows"][win.name],
-                    win)
-                set_layer_data(
-                    zone_out["windows"][win.name],
-                    win)
+                zone_out["windows"][win.name] = collections.OrderedDict()
+                set_basic_data(zone_out["windows"][win.name], win)
+                set_layer_data(zone_out["windows"][win.name], win)
             for iw in zone.inner_walls:
-                zone_out[
-                    "inner_walls"][iw.name] = collections.OrderedDict()
-                set_basic_data(
-                    zone_out["inner_walls"][iw.name],
-                    iw)
-                set_layer_data(
-                    zone_out["inner_walls"][iw.name],
-                    iw)
+                zone_out["inner_walls"][iw.name] = collections.OrderedDict()
+                set_basic_data(zone_out["inner_walls"][iw.name], iw)
+                set_layer_data(zone_out["inner_walls"][iw.name], iw)
             for floor in zone.floors:
-                zone_out[
-                    "floors"][floor.name] = collections.OrderedDict()
-                set_basic_data(
-                    zone_out["floors"][floor.name],
-                    floor)
-                set_layer_data(
-                    zone_out["floors"][floor.name],
-                    floor)
+                zone_out["floors"][floor.name] = collections.OrderedDict()
+                set_basic_data(zone_out["floors"][floor.name], floor)
+                set_layer_data(zone_out["floors"][floor.name], floor)
             for ceil in zone.ceilings:
-                zone_out[
-                    "ceilings"][ceil.name] = collections.OrderedDict()
-                set_basic_data(
-                    zone_out["ceilings"][ceil.name],
-                    ceil)
-                set_layer_data(
-                    zone_out["ceilings"][ceil.name],
-                    ceil)
+                zone_out["ceilings"][ceil.name] = collections.OrderedDict()
+                set_basic_data(zone_out["ceilings"][ceil.name], ceil)
+                set_layer_data(zone_out["ceilings"][ceil.name], ceil)
 
-            prj_out[
-                "project"][
-                "buildings"][bldg.name]["thermal_zones"][zone.name] = zone_out
+            prj_out["project"]["buildings"][bldg.name]["thermal_zones"][
+                zone.name
+            ] = zone_out
 
-    with open(path, 'w') as file:
-        file.write(json.dumps(
-            prj_out,
-            indent=4,
-            separators=(',', ': ')))
+    with open(path, "w") as file:
+        file.write(json.dumps(prj_out, indent=4, separators=(",", ": ")))
 
 
 def set_basic_data(wall_out, element):
@@ -312,9 +270,11 @@ def set_basic_data(wall_out, element):
         teaser class representation of a building element
 
     """
-    if type(element).__name__ == 'OuterWall' or \
-            type(element).__name__ == 'Rooftop' or \
-            type(element).__name__ == 'Door':
+    if (
+        type(element).__name__ == "OuterWall"
+        or type(element).__name__ == "Rooftop"
+        or type(element).__name__ == "Door"
+    ):
 
         wall_out["year_of_construction"] = element.year_of_construction
         wall_out["year_of_retrofit"] = element.year_of_retrofit
@@ -329,10 +289,12 @@ def set_basic_data(wall_out, element):
         wall_out["outer_radiation"] = element.outer_radiation
         wall_out["outer_convection"] = element.outer_convection
 
-    elif type(element).__name__ == 'InnerWall' or \
-            type(element).__name__ == 'Ceiling' or \
-            type(element).__name__ == 'Floor' or \
-            type(element).__name__ == 'GroundFloor':
+    elif (
+        type(element).__name__ == "InnerWall"
+        or type(element).__name__ == "Ceiling"
+        or type(element).__name__ == "Floor"
+        or type(element).__name__ == "GroundFloor"
+    ):
 
         wall_out["year_of_construction"] = element.year_of_construction
         wall_out["year_of_retrofit"] = element.year_of_retrofit
@@ -345,7 +307,7 @@ def set_basic_data(wall_out, element):
         wall_out["inner_radiation"] = element.inner_radiation
         wall_out["inner_convection"] = element.inner_convection
 
-    elif type(element).__name__ == 'Window':
+    elif type(element).__name__ == "Window":
 
         wall_out["year_of_construction"] = element.year_of_construction
         wall_out["year_of_retrofit"] = element.year_of_retrofit
@@ -386,12 +348,10 @@ def set_layer_data(wall_out, element):
         layer_dict[layer.id]["material"]["name"] = layer.material.name
         layer_dict[layer.id]["material"]["density"] = layer.material.density
         layer_dict[layer.id]["material"][
-            "thermal_conduc"] = layer.material.thermal_conduc
-        layer_dict[layer.id]["material"][
-            "heat_capac"] = layer.material.heat_capac
-        layer_dict[layer.id]["material"][
-            "solar_absorp"] = layer.material.solar_absorp
-        layer_dict[layer.id]["material"][
-            "ir_emissivity"] = layer.material.ir_emissivity
+            "thermal_conduc"
+        ] = layer.material.thermal_conduc
+        layer_dict[layer.id]["material"]["heat_capac"] = layer.material.heat_capac
+        layer_dict[layer.id]["material"]["solar_absorp"] = layer.material.solar_absorp
+        layer_dict[layer.id]["material"]["ir_emissivity"] = layer.material.ir_emissivity
 
     wall_out["layer"] = layer_dict
