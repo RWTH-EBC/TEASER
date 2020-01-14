@@ -83,15 +83,6 @@ def _set_basic_data(element, element_in):
         element.outer_radiation = element_in["outer_radiation"]
         element.outer_convection = element_in["outer_convection"]
 
-    elif (
-        type(element).__name__ == "InnerWall"
-        or type(element).__name__ == "Ceiling"
-        or type(element).__name__ == "Floor"
-        or type(element).__name__ == "GroundFloor"
-    ):
-
-        pass
-
     elif type(element).__name__ == "Window":
 
         element.outer_radiation = element_in["outer_radiation"]

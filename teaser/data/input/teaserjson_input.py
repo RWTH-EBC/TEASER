@@ -267,6 +267,11 @@ def set_basic_data_teaser(wall_in, element):
     element.area = wall_in["area"]
     element.tilt = wall_in["tilt"]
     element.orientation = wall_in["orientation"]
+    element.inner_radiation = wall_in["inner_radiation"]
+    element.inner_convection = wall_in["inner_convection"]
+    element.year_of_construction = wall_in["year_of_construction"]
+    element.year_of_retrofit = wall_in["year_of_retrofit"]
+    element.construction_type = wall_in["construction_type"]
 
     if (
         type(element).__name__ == "OuterWall"
@@ -274,25 +279,11 @@ def set_basic_data_teaser(wall_in, element):
         or type(element).__name__ == "Door"
     ):
 
-        element.inner_radiation = wall_in["inner_radiation"]
-        element.inner_convection = wall_in["inner_convection"]
         element.outer_radiation = wall_in["outer_radiation"]
         element.outer_convection = wall_in["outer_convection"]
 
-    elif (
-        type(element).__name__ == "InnerWall"
-        or type(element).__name__ == "Ceiling"
-        or type(element).__name__ == "Floor"
-        or type(element).__name__ == "GroundFloor"
-    ):
-
-        element.inner_radiation = wall_in["inner_radiation"]
-        element.inner_convection = wall_in["inner_convection"]
-
     elif type(element).__name__ == "Window":
 
-        element.inner_radiation = wall_in["inner_radiation"]
-        element.inner_convection = wall_in["inner_convection"]
         element.outer_radiation = wall_in["outer_radiation"]
         element.outer_convection = wall_in["outer_convection"]
         element.g_value = wall_in["g_value"]

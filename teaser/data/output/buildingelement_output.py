@@ -111,16 +111,7 @@ def _set_basic_data_json(element, wall_out):
     wall_out["inner_radiation"] = element.inner_radiation
     wall_out["inner_convection"] = element.inner_convection
 
-    if (
-        type(element).__name__ == "InnerWall"
-        or type(element).__name__ == "Ceiling"
-        or type(element).__name__ == "Floor"
-        or type(element).__name__ == "GroundFloor"
-    ):
-
-        pass
-
-    elif type(element).__name__ == "Window":
+    if type(element).__name__ == "Window":
 
         wall_out["outer_radiation"] = element.outer_radiation
         wall_out["outer_convection"] = element.outer_convection
