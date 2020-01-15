@@ -159,7 +159,6 @@ class Building(object):
         self.volume = 0
         self.sum_heat_load = 0
         self.sum_cooling_load = 0
-        self.internal_gains_mode = 1
         self._number_of_elements_calc = 2
         self._merge_windows_calc = False
         self._used_library_calc = "AixLib"
