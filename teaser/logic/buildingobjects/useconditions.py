@@ -417,6 +417,8 @@ class UseConditions(object):
 
     @heating_profile.setter
     def heating_profile(self, value):
+        if not isinstance(value, list):
+            value = [value]
         self._heating_profile = value
         self.schedules["heating_profile"] = list(islice(cycle(value), 8760))
 
@@ -426,6 +428,8 @@ class UseConditions(object):
 
     @cooling_profile.setter
     def cooling_profile(self, value):
+        if not isinstance(value, list):
+            value = [value]
         self._cooling_profile = value
         self.schedules["cooling_profile"] = list(islice(cycle(value), 8760))
 
@@ -435,6 +439,8 @@ class UseConditions(object):
 
     @persons_profile.setter
     def persons_profile(self, value):
+        if not isinstance(value, list):
+            value = [value]
         self._persons_profile = value
         self.schedules["persons_profile"] = list(islice(cycle(value), 8760))
 
@@ -444,6 +450,8 @@ class UseConditions(object):
 
     @machines_profile.setter
     def machines_profile(self, value):
+        if not isinstance(value, list):
+            value = [value]
         self._machines_profile = value
         self.schedules["machines_profile"] = list(islice(cycle(value), 8760))
 
@@ -453,6 +461,8 @@ class UseConditions(object):
 
     @lighting_profile.setter
     def lighting_profile(self, value):
+        if not isinstance(value, list):
+            value = [value]
         self._lighting_profile = value
         self.schedules["lighting_profile"] = list(islice(cycle(value), 8760))
 
