@@ -1,12 +1,15 @@
 # created June 2015
 # by TEASER4 Development Team
 
-"""Utilis: Collection of all utility functions that are useful in several
+"""Utilities: Collection of all utility functions that are useful in several
 classes
 """
 
 import os
 import shutil
+import operator
+
+ops = {"/": operator.truediv}
 
 
 def celsius_to_kelvin(value):
@@ -108,3 +111,26 @@ def clear_directory(dir_path=None):
                 shutil.rmtree(file_path)
     else:
         print('The directory path does not exist.')
+
+
+def division_from_json(ordereddict):
+    """
+    function to transform the output of division in json after loading to
+    python into float values
+
+    Parameters
+    ----------
+    ordereddict : output of the json load of arguments like
+    "persons": {"/":[1,15]}
+
+    """
+
+    if len(ordereddict) == 1:
+        for op, values in ordereddict.items():
+            if op == '/':
+                quotient = ops[op](values[0], values[1])
+                return quotient
+            else:
+                raise ValueError('%s not supported, only divions (/)', op)
+    else:
+        raise ValueError('%s has len > 1', ordereddict)

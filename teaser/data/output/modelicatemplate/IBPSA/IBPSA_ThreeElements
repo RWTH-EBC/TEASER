@@ -32,23 +32,23 @@ model ${zone.parent.name}_${zone.name}
 % else:
     VAir=0.0,
 % endif
-    alphaExt=${zone.model_attr.alpha_conv_inner_ow},
-    alphaWin=${zone.model_attr.alpha_conv_inner_win},
+    hConvExt=${zone.model_attr.alpha_conv_inner_ow},
+    hConvWin=${zone.model_attr.alpha_conv_inner_win},
     gWin=${zone.model_attr.weighted_g_value},
     ratioWinConRad=${zone.model_attr.ratio_conv_rad_inner_win},
     nExt=1,
     RExt={${zone.model_attr.r1_ow}},
     CExt={${zone.model_attr.c1_ow}},
-    alphaRad=${zone.model_attr.alpha_rad_inner_mean},
+    hRad=${zone.model_attr.alpha_rad_inner_mean},
     AInt=${zone.model_attr.area_iw},
-    alphaInt=${zone.model_attr.alpha_conv_inner_iw},
+    hConvInt=${zone.model_attr.alpha_conv_inner_iw},
     nInt=1,
     RInt={${zone.model_attr.r1_iw}},
     CInt={${zone.model_attr.c1_iw}},
     RWin=${zone.model_attr.r1_win},
     RExtRem=${zone.model_attr.r_rest_ow},
     AFloor=${zone.model_attr.area_gf},
-    alphaFloor=${zone.model_attr.alpha_conv_inner_gf},
+    hConvFloor=${zone.model_attr.alpha_conv_inner_gf},
     nFloor=1,
     RFloor={${zone.model_attr.r1_gf}},
     RFloorRem=${zone.model_attr.r_rest_gf},
@@ -71,8 +71,8 @@ model ${zone.parent.name}_${zone.name}
     wfWin=${get_list(zone.model_attr.weightfactor_win)},
     withLongwave=true,
     aExt=${zone.model_attr.solar_absorp_ow},
-    alphaWallOut=${zone.model_attr.alpha_conv_outer_ow},
-    alphaRad=${zone.model_attr.alpha_rad_outer_mean},
+    hConvWallOut=${zone.model_attr.alpha_conv_outer_ow},
+    hRad=${zone.model_attr.alpha_rad_outer_mean},
     TGro=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % else:
@@ -83,9 +83,9 @@ model ${zone.parent.name}_${zone.name}
     wfWin=${get_list(zone.model_attr.weightfactor_win)},
     withLongwave=true,
     aExt=${zone.model_attr.solar_absorp_ow},
-    alphaWallOut=${zone.model_attr.alpha_conv_outer_ow},
-    alphaRad=${zone.model_attr.alpha_rad_outer_mean},
-    alphaWinOut=${zone.model_attr.alpha_conv_outer_win},
+    hConvWallOut=${zone.model_attr.alpha_conv_outer_ow},
+    hRad=${zone.model_attr.alpha_rad_outer_mean},
+    hConvWinOut=${zone.model_attr.alpha_conv_outer_win},
     TGro=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % endif

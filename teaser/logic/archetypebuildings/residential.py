@@ -34,7 +34,15 @@ class Residential(Building):
         If set to True, an empty instance of BuildingAHU is instantiated and
         assigned to attribute central_ahu. This instance holds information for
         central Air Handling units. Default is False.
-
+    internal_gains_mode: int [1, 2, 3]
+        mode for the internal gains calculation by persons:
+        1: Temperature and activity degree dependent calculation. The
+           calculation is based on  SIA 2024 (default)
+        2: Temperature and activity degree independent calculation, the max.
+           heatflowrate is prescribed by the parameter
+           fixed_heat_flow_rate_persons.
+        3: Temperature and activity degree dependent calculation with
+           consideration of moisture. The calculation is based on SIA 2024
     Attributes
     ----------
     central_ahu : instance of BuildingAHU
@@ -109,7 +117,8 @@ class Residential(Building):
             name,
             year_of_construction,
             net_leased_area,
-            with_ahu=False):
+            with_ahu=False,
+            internal_gains_mode=1):
         """Constructor of Residential archetype building
         """
 
@@ -118,7 +127,9 @@ class Residential(Building):
             name,
             year_of_construction,
             net_leased_area,
-            with_ahu)
+            with_ahu,
+            internal_gains_mode
+        )
 
     def generate_archetype(self):
         """Generates an archetype building.

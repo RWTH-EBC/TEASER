@@ -138,7 +138,6 @@ def export_ibpsa(
                 'InternalGains_' + bldg.name + zone.name + '.txt'
             bldg.library_attr.modelica_gains_boundary(
                 zone=zone,
-                time_line=None,
                 path=zone_path)
 
             out_file = open(utilities.get_full_path(os.path.join(

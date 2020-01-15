@@ -45,7 +45,7 @@ def example_generate_archetype():
         year_of_construction=1988,
         number_of_floors=2,
         height_of_floors=3.2,
-        net_leased_area=200)
+        net_leased_area=200.0)
 
     # To generate non-residential archetype buildings (in this case an
     # office and a laboratory (a.k.a. institute)) the function
@@ -59,7 +59,7 @@ def example_generate_archetype():
         year_of_construction=1988,
         number_of_floors=4,
         height_of_floors=3.5,
-        net_leased_area=4500)
+        net_leased_area=4500.0)
 
     prj.add_non_residential(
         method='bmvbs',
@@ -68,7 +68,17 @@ def example_generate_archetype():
         year_of_construction=1952,
         number_of_floors=5,
         height_of_floors=4.0,
-        net_leased_area=3400)
+        net_leased_area=3400.0)
+
+    prj.add_non_residential(
+        method='bmvbs',
+        usage='institute',
+        name="InstituteBuildingMoisture",
+        year_of_construction=1980,
+        number_of_floors=3,
+        height_of_floors=4.2,
+        net_leased_area=3600.0,
+        internal_gains_mode=3)
 
     # Besides `iwu` and `bmvbs` there is a third option for archetype
     # generation. We integrated the typology of TABULA Germany
@@ -93,7 +103,7 @@ def example_generate_archetype():
         year_of_construction=1988,
         number_of_floors=3,
         height_of_floors=3.2,
-        net_leased_area=280,
+        net_leased_area=280.0,
         construction_type='tabula_standard')
 
     prj.add_residential(
@@ -103,7 +113,7 @@ def example_generate_archetype():
         year_of_construction=1960,
         number_of_floors=4,
         height_of_floors=3.2,
-        net_leased_area=600,
+        net_leased_area=600.0,
         construction_type='tabula_retrofit')
 
     return prj

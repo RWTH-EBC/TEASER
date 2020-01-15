@@ -199,8 +199,6 @@ class AixLib(object):
 
         Parameters
         ----------
-        time_line :[[int]]
-            list of time steps
         path : str
             optional path, when matfile is exported separately
 
@@ -265,8 +263,6 @@ class AixLib(object):
 
         Parameters
         ----------
-        time_line :[[int]]
-            list of time steps
         path : str
             optional path, when matfile is exported separately
 

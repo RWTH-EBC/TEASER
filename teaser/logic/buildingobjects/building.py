@@ -43,6 +43,15 @@ class Building(object):
         If set to True, an empty instance of BuildingAHU is instantiated and
         assigned to attribute central_ahu. This instance holds information for
         central Air Handling units. Default is False.
+    internal_gains_mode: int [1, 2, 3]
+        mode for the internal gains calculation by persons:
+        1: Temperature and activity degree dependent calculation. The
+           calculation is based on  SIA 2024 (default)
+        2: Temperature and activity degree independent calculation, the max.
+           heatflowrate is prescribed by the parameter
+           fixed_heat_flow_rate_persons.
+        3: Temperature and activity degree dependent calculation with
+           consideration of moisture. The calculation is based on SIA 2024
 
     Attributes
     ----------
@@ -119,7 +128,8 @@ class Building(object):
             name=None,
             year_of_construction=None,
             net_leased_area=None,
-            with_ahu=False):
+            with_ahu=False,
+            internal_gains_mode=1):
         """Constructor of Building Class
         """
 
@@ -128,11 +138,13 @@ class Building(object):
         self.year_of_construction = year_of_construction
         self.net_leased_area = net_leased_area
         self._with_ahu = with_ahu
+
         if with_ahu is True:
             self.central_ahu = BuildingAHU(self)
         else:
             self._central_ahu = None
 
+        self.internal_gains_mode = internal_gains_mode
         self.number_of_floors = None
         self.height_of_floors = None
         self.internal_id = random.random()
@@ -153,7 +165,6 @@ class Building(object):
         self.volume = 0
         self.sum_heat_load = 0
         self.sum_cooling_load = 0
-
         self._number_of_elements_calc = 2
         self._merge_windows_calc = False
         self._used_library_calc = "AixLib"
