@@ -73,11 +73,6 @@ class Residential(Building):
         Latitude of building location.
     thermal_zones : list
         List with instances of ThermalZone(), that are located in this building.
-    gml_surfaces : list
-        List of all containing surfaces described by CityGML, the list
-        should be filled with SurfaceGML class from Data.Input.citygml_input.
-        This list is only used if this instance of a building was instantiated
-        the CityGML Loader module.
     outer_area : dict [degree: m2]
         Dictionary with orientation as key and sum of outer wall areas of
         that direction as value.
@@ -112,13 +107,14 @@ class Residential(Building):
     """
 
     def __init__(
-            self,
-            parent,
-            name,
-            year_of_construction,
-            net_leased_area,
-            with_ahu=False,
-            internal_gains_mode=1):
+        self,
+        parent,
+        name,
+        year_of_construction,
+        net_leased_area,
+        with_ahu=False,
+        internal_gains_mode=1,
+    ):
         """Constructor of Residential archetype building
         """
 
@@ -128,7 +124,7 @@ class Residential(Building):
             year_of_construction,
             net_leased_area,
             with_ahu,
-            internal_gains_mode
+            internal_gains_mode,
         )
 
     def generate_archetype(self):

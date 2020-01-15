@@ -270,55 +270,28 @@ def set_basic_data(wall_out, element):
         teaser class representation of a building element
 
     """
+    wall_out["year_of_construction"] = element.year_of_construction
+    wall_out["year_of_retrofit"] = element.year_of_retrofit
+    wall_out["construction_type"] = element.construction_type
+
+    wall_out["area"] = element.area
+    wall_out["tilt"] = element.tilt
+    wall_out["orientation"] = element.orientation
+
+    wall_out["inner_radiation"] = element.inner_radiation
+    wall_out["inner_convection"] = element.inner_convection
+
     if (
         type(element).__name__ == "OuterWall"
         or type(element).__name__ == "Rooftop"
         or type(element).__name__ == "Door"
     ):
 
-        wall_out["year_of_construction"] = element.year_of_construction
-        wall_out["year_of_retrofit"] = element.year_of_retrofit
-        wall_out["construction_type"] = element.construction_type
-
-        wall_out["area"] = element.area
-        wall_out["tilt"] = element.tilt
-        wall_out["orientation"] = element.orientation
-
-        wall_out["inner_radiation"] = element.inner_radiation
-        wall_out["inner_convection"] = element.inner_convection
         wall_out["outer_radiation"] = element.outer_radiation
         wall_out["outer_convection"] = element.outer_convection
 
-    elif (
-        type(element).__name__ == "InnerWall"
-        or type(element).__name__ == "Ceiling"
-        or type(element).__name__ == "Floor"
-        or type(element).__name__ == "GroundFloor"
-    ):
-
-        wall_out["year_of_construction"] = element.year_of_construction
-        wall_out["year_of_retrofit"] = element.year_of_retrofit
-        wall_out["construction_type"] = element.construction_type
-
-        wall_out["area"] = element.area
-        wall_out["tilt"] = element.tilt
-        wall_out["orientation"] = element.orientation
-
-        wall_out["inner_radiation"] = element.inner_radiation
-        wall_out["inner_convection"] = element.inner_convection
-
     elif type(element).__name__ == "Window":
 
-        wall_out["year_of_construction"] = element.year_of_construction
-        wall_out["year_of_retrofit"] = element.year_of_retrofit
-        wall_out["construction_type"] = element.construction_type
-
-        wall_out["area"] = element.area
-        wall_out["tilt"] = element.tilt
-        wall_out["orientation"] = element.orientation
-
-        wall_out["inner_radiation"] = element.inner_radiation
-        wall_out["inner_convection"] = element.inner_convection
         wall_out["outer_radiation"] = element.outer_radiation
         wall_out["outer_convection"] = element.outer_convection
         wall_out["g_value"] = element.g_value

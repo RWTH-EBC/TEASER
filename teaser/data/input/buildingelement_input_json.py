@@ -5,11 +5,7 @@ from teaser.logic.buildingobjects.buildingphysics.material import Material
 import teaser.data.input.material_input_json as mat_input
 
 
-def load_type_element(
-        element,
-        year,
-        construction,
-        data_class):
+def load_type_element(element, year, construction, data_class):
     """Load BuildingElement from json.
 
     Loads typical building elements according to their construction year and
@@ -40,22 +36,22 @@ def load_type_element(
 
     for key, element_in in element_binding.items():
         if key != "version":
-            if element_in["building_age_group"][0] <= year <= \
-                    element_in["building_age_group"][1] and \
-                    element_in["construction_type"] == construction and \
-                    key.startswith(type(element).__name__):
-                _set_basic_data(
-                    element=element,
-                    element_in=element_in)
+            if (
+                element_in["building_age_group"][0]
+                <= year
+                <= element_in["building_age_group"][1]
+                and element_in["construction_type"] == construction
+                and key.startswith(type(element).__name__)
+            ):
+                _set_basic_data(element=element, element_in=element_in)
                 for id, layer_in in element_in["layer"].items():
                     layer = Layer(element)
                     layer.id = id
                     layer.thickness = layer_in["thickness"]
                     material = Material(layer)
                     mat_input.load_material_id(
-                        material,
-                        layer_in["material"]["material_id"],
-                        data_class)
+                        material, layer_in["material"]["material_id"], data_class
+                    )
 
 
 def _set_basic_data(element, element_in):
@@ -65,8 +61,10 @@ def _set_basic_data(element, element_in):
 
     Parameters
     ----------
+    element : BuildingElement
+        BuildingElement
     element_in :
-        Pyxb class representation of xml
+        json string of input data
 
     """
     element.building_age_group = element_in["building_age_group"]
@@ -74,23 +72,18 @@ def _set_basic_data(element, element_in):
     element.inner_radiation = element_in["inner_radiation"]
     element.inner_convection = element_in["inner_convection"]
 
-    if type(element).__name__ == 'OuterWall' or \
-            type(element).__name__ == 'Rooftop' or \
-            type(element).__name__ == 'Door':
+    if (
+        type(element).__name__ == "OuterWall"
+        or type(element).__name__ == "Rooftop"
+        or type(element).__name__ == "Door"
+    ):
 
         element.inner_radiation = element_in["inner_radiation"]
         element.inner_convection = element_in["inner_convection"]
         element.outer_radiation = element_in["outer_radiation"]
         element.outer_convection = element_in["outer_convection"]
 
-    elif type(element).__name__ == 'InnerWall' or \
-            type(element).__name__ == 'Ceiling' or \
-            type(element).__name__ == 'Floor' or \
-            type(element).__name__ == 'GroundFloor':
-
-        pass
-
-    elif type(element).__name__ == 'Window':
+    elif type(element).__name__ == "Window":
 
         element.outer_radiation = element_in["outer_radiation"]
         element.outer_convection = element_in["outer_convection"]

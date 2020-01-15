@@ -581,62 +581,35 @@ class Test_teaser(object):
     # # methods in Project, these tests only test if the API function works,
     # # not if it produces reliable results.
 
-    def test_load_save_project_old(self):
+    def test_load_save_project(self):
         """test of load_project and save_project"""
-        import teaser.data.input.teaserxml_input as t_input_old
 
-        t_input_old.load_teaser_xml(
-            utilities.get_full_path(("examples/examplefiles/old.teaserXML")), prj
+        prj.load_project(
+            utilities.get_full_path(("examples/examplefiles" "/unitTest.json"))
         )
         therm_zone = prj.buildings[-1].thermal_zones[0]
-        assert therm_zone.outer_walls[0].area == 40.0
+        assert round(therm_zone.outer_walls[0].area, 2) == 137.23
         tz_area = sum([tz.area for tz in prj.buildings[-1].thermal_zones])
         assert prj.buildings[-1].net_leased_area == tz_area
-        prj.save_project(file_name="unitTest.json", path=None)
+        prj.save_project(file_name="unitTest", path=None)
         prj.save_project(file_name=None, path=utilities.get_default_path())
-        prj.set_default(load_data=True)
-
-        prj.add_non_residential(
-            method="bmvbs",
-            usage="institute",
-            name="TestBuilding_institute",
-            year_of_construction=1988,
-            number_of_floors=7,
-            height_of_floors=1,
-            net_leased_area=1988,
-            with_ahu=True,
-            office_layout=0,
-            window_layout=0,
-            construction_type="heavy",
-        )
-        prj.save_project(file_name="unitTest.json", path=None)
+        prj.set_default()
 
     def test_load_save_project_new(self):
         """test of load_project and save_project"""
         prj.set_default(load_data=True)
         prj.load_project(os.path.join(utilities.get_default_path(), "unitTest.json"))
         therm_zone = prj.buildings[-1].thermal_zones[0]
-        assert therm_zone.area == 318.08
+        assert therm_zone.area == 994.0
         tz_area = sum([tz.area for tz in prj.buildings[-1].thermal_zones])
         for tz in prj.buildings[-1].thermal_zones:
             print(tz.name, tz.area)
         print(prj.buildings[-1].name, prj.buildings[-1].net_leased_area)
         assert prj.buildings[-1].net_leased_area == tz_area
         assert prj.buildings[-1].net_leased_area == 1988.0
-        assert prj.buildings[-1].name == "TestBuilding_institute"
-        prj.name = "NewUnitTest"
+        assert prj.buildings[-1].name == "TestBuilding"
+        prj.name = "Project"
         prj.save_project(file_name="unitTest_new.json", path=None)
-
-    def test_load_citygml(self):
-        """test of load_gml"""
-        prj.set_default()
-        prj.load_citygml(
-            utilities.get_full_path("examples/examplefiles/CityGMLSample.gml")
-        )
-        prj.name = "CityGML_Test"
-        prj.calc_all_buildings()
-        path = prj.export_aixlib(internal_id=None, path=None)
-        prj.set_default()
 
     def test_calc_all_buildings(self):
         """test of calc_all_buildings, no calculation verification"""
@@ -2262,107 +2235,6 @@ class Test_teaser(object):
             1988, "Kunststofffenster, Isolierverglasung", prj.data
         )
 
-    def test_load_type_element_old(self):
-        """test to load type_element of XML, no parameter test"""
-
-        import teaser.data.input.buildingelement_input as be_input_old
-        from teaser.data.dataclass import DataClass
-        import teaser.logic.utilities as utils
-        from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
-        from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
-        from teaser.logic.buildingobjects.buildingphysics.groundfloor import GroundFloor
-        from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
-        from teaser.logic.buildingobjects.buildingphysics.window import Window
-        from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
-        from teaser.logic.buildingobjects.buildingphysics.floor import Floor
-
-        # from teaser.logic.buildingobjects.buildingphysics.door import Door
-
-        data_class = DataClass()
-        data_class.path_tb = utils.get_full_path(
-            "data/input/inputdata/TypeBuildingElements.xml"
-        )
-        data_class.load_tb_binding()
-        data_class.path_mat = utils.get_full_path(
-            "data/input/inputdata/MaterialTemplates.xml"
-        )
-        data_class.load_mat_binding()
-
-        out_wall = OuterWall()
-        be_input_old.load_type_element(
-            element=out_wall, year=1988, construction="heavy", data_class=data_class
-        )
-        out_wall = Rooftop()
-        be_input_old.load_type_element(
-            element=out_wall, year=1988, construction="heavy", data_class=data_class
-        )
-        out_wall = GroundFloor()
-        be_input_old.load_type_element(
-            element=out_wall, year=1988, construction="heavy", data_class=data_class
-        )
-        out_wall = InnerWall()
-        be_input_old.load_type_element(
-            element=out_wall, year=1988, construction="heavy", data_class=data_class
-        )
-        out_wall = Window()
-        be_input_old.load_type_element(
-            element=out_wall,
-            year=1988,
-            construction="Holzfenster, zweifach",
-            data_class=data_class,
-        )
-        out_wall = Ceiling()
-        be_input_old.load_type_element(
-            element=out_wall, year=1988, construction="heavy", data_class=data_class
-        )
-        out_wall = Floor()
-        be_input_old.load_type_element(
-            element=out_wall, year=1988, construction="heavy", data_class=data_class
-        )
-
-    def test_load_bound_cond_old(self):
-        """test to load UseConditions of XML, no parameter test"""
-
-        import teaser.data.input.boundcond_input as bc_input_old
-        from teaser.data.dataclass import DataClass
-        import teaser.logic.utilities as utils
-        from teaser.logic.buildingobjects.useconditions import UseConditions
-
-        data_class = DataClass()
-        data_class.path_uc = utils.get_full_path(
-            "data/input/inputdata/UseConditions.xml"
-        )
-        data_class.load_uc_binding()
-
-        bound_cond = UseConditions()
-        bc_input_old.load_boundary_conditions(
-            bound_cond=bound_cond, zone_usage="Living", data_class=data_class
-        )
-
-    def test_load_mat_old(self):
-        """test to load Material of XML, no parameter test"""
-
-        import teaser.data.input.material_input as mat_input_old
-        from teaser.data.dataclass import DataClass
-        import teaser.logic.utilities as utils
-        from teaser.logic.buildingobjects.buildingphysics.material import Material
-
-        data_class = DataClass()
-        data_class.path_mat = utils.get_full_path(
-            "data/input/inputdata/MaterialTemplates.xml"
-        )
-        data_class.load_mat_binding()
-
-        mat = Material()
-        mat_input_old.load_material(
-            material=mat, mat_name="anti_must_plaster", data_class=data_class
-        )
-        mat_input_old.load_material_id(
-            material=mat,
-            mat_id="244edc8c-3a43-11e7-8ed1-2cd444b2e704",
-            data_class=data_class,
-        )
-
     def test_save_type_element(self):
         """test of save_type_element, no parameter checking"""
         import os
@@ -2526,56 +2398,6 @@ class Test_teaser(object):
         prj.export_ibpsa(internal_id=prj.buildings[-1].internal_id)
 
         prj.set_default(load_data="Test")
-
-    def test_v5_bindings(self):
-        """
-        Tests the old v4 project bindings
-        """
-        prj.set_default()
-        import teaser.data.input.teaserxml_input as t_input_old
-
-        t_input_old.load_teaser_xml(
-            os.path.join(os.path.dirname(__file__), "testfiles", "teaser_v5.teaserXML"),
-            prj,
-        )
-
-    def test_v4_bindings(self):
-        """
-        Tests the old v4 project bindings
-        """
-        prj.set_default(load_data=True)
-        import teaser.data.input.teaserxml_input as t_input_old
-
-        t_input_old.load_teaser_xml(
-            os.path.join(os.path.dirname(__file__), "testfiles", "teaser_v4.teaserXML"),
-            prj,
-        )
-        prj.data.path_tb = os.path.join(
-            os.path.dirname(__file__), "testfiles", "TypeBuildingElements_v4.xml"
-        )
-        prj.data.path_mat = os.path.join(
-            os.path.dirname(__file__), "testfiles", "MaterialTemplates_v4.xml"
-        )
-        prj.data.path_uc = os.path.join(
-            os.path.dirname(__file__), "testfiles", "UseConditions_v4.xml"
-        )
-        prj.data.load_tb_binding()
-        prj.data.load_uc_binding()
-        prj.data.load_mat_binding()
-
-    def test_v39_bindings(self):
-        """
-        Tests the old v39 project bindings
-        """
-        prj.set_default()
-        import teaser.data.input.teaserxml_input as t_input_old
-
-        t_input_old.load_teaser_xml(
-            os.path.join(
-                os.path.dirname(__file__), "testfiles", "teaser_v39.teaserXML"
-            ),
-            prj,
-        )
 
     def test_export_aixlib_only_iw(self):
         """

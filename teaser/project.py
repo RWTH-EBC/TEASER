@@ -1,8 +1,4 @@
-# created June 2015
-# by TEASER4 Development Team
-
-"""This module includes the Project class, which is the API for TEASER.
-"""
+"""This module includes the Project class, which is the API for TEASER."""
 
 import warnings
 import os
@@ -28,24 +24,25 @@ from teaser.logic.archetypebuildings.urbanrenet.est6 import EST6
 from teaser.logic.archetypebuildings.urbanrenet.est7 import EST7
 from teaser.logic.archetypebuildings.urbanrenet.est8a import EST8a
 from teaser.logic.archetypebuildings.urbanrenet.est8b import EST8b
-from teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse import \
-    SingleFamilyHouse
-from teaser.logic.archetypebuildings.tabula.dk.singlefamilyhouse import \
-    SingleFamilyHouse as SingleFamilyHouse_DK
-from teaser.logic.archetypebuildings.tabula.de.terracedhouse import \
-    TerracedHouse
-from teaser.logic.archetypebuildings.tabula.dk.terracedhouse import \
-    TerracedHouse as TerracedHouse_DK
-from teaser.logic.archetypebuildings.tabula.de.multifamilyhouse import \
-    MultiFamilyHouse
-from teaser.logic.archetypebuildings.tabula.de.apartmentblock import \
-    ApartmentBlock
-from teaser.logic.archetypebuildings.tabula.dk.apartmentblock import \
-    ApartmentBlock as ApartmentBlock_DK
-from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import \
-    SingleFamilyDwelling
+from teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse import (
+    SingleFamilyHouse,
+)
+from teaser.logic.archetypebuildings.tabula.dk.singlefamilyhouse import (
+    SingleFamilyHouse as SingleFamilyHouse_DK,
+)
+from teaser.logic.archetypebuildings.tabula.de.terracedhouse import TerracedHouse
+from teaser.logic.archetypebuildings.tabula.dk.terracedhouse import (
+    TerracedHouse as TerracedHouse_DK,
+)
+from teaser.logic.archetypebuildings.tabula.de.multifamilyhouse import MultiFamilyHouse
+from teaser.logic.archetypebuildings.tabula.de.apartmentblock import ApartmentBlock
+from teaser.logic.archetypebuildings.tabula.dk.apartmentblock import (
+    ApartmentBlock as ApartmentBlock_DK,
+)
+from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import (
+    SingleFamilyDwelling,
+)
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
-import teaser.data.input.citygml_input as citygml_in
 
 
 class Project(object):
@@ -103,7 +100,9 @@ class Project(object):
                 "input",
                 "inputdata",
                 "weatherdata",
-                "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos"))
+                "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos",
+            )
+        )
 
         self.buildings = []
 
@@ -154,28 +153,32 @@ class Project(object):
                 bldg.calc_building_parameter(
                     number_of_elements=self._number_of_elements_calc,
                     merge_windows=self._merge_windows_calc,
-                    used_library=self._used_library_calc)
+                    used_library=self._used_library_calc,
+                )
         else:
             for bldg in reversed(self.buildings):
                 try:
                     bldg.calc_building_parameter(
                         number_of_elements=self._number_of_elements_calc,
                         merge_windows=self._merge_windows_calc,
-                        used_library=self._used_library_calc)
+                        used_library=self._used_library_calc,
+                    )
                 except (ZeroDivisionError, TypeError):
                     warnings.warn(
                         "Following building can't be calculated and is "
                         "removed from buildings list. Use raise_errors=True "
                         "to get python errors and stop TEASER from deleting "
-                        "this building:" + bldg.name)
+                        "this building:" + bldg.name
+                    )
                     self.buildings.remove(bldg)
 
     def retrofit_all_buildings(
-            self,
-            year_of_retrofit=None,
-            type_of_retrofit=None,
-            window_type=None,
-            material=None):
+        self,
+        year_of_retrofit=None,
+        type_of_retrofit=None,
+        window_type=None,
+        material=None,
+    ):
         """Retrofits all buildings in the project.
 
         Depending on the used Archetype approach this function will retrofit
@@ -219,59 +222,59 @@ class Project(object):
 
         """
         ass_error_type = "only 'retrofit' and 'adv_retrofit' are valid "
-        assert type_of_retrofit in [None, 'adv_retrofit', 'retrofit'], \
-            ass_error_type
+        assert type_of_retrofit in [None, "adv_retrofit", "retrofit"], ass_error_type
         tabula_buildings = []
         iwu_buildings = []
 
         for bldg in self.buildings:
             if isinstance(bldg, SingleFamilyHouse):
                 if type_of_retrofit is None:
-                    raise ValueError("you need to set type_of_retrofit for "
-                                     "TABULA retrofit")
+                    raise ValueError(
+                        "you need to set type_of_retrofit for " "TABULA retrofit"
+                    )
                 tabula_buildings.append(bldg)
             else:
                 if year_of_retrofit is None:
-                    raise ValueError("you need to set year_of_retrofit for "
-                                     "retrofit")
+                    raise ValueError("you need to set year_of_retrofit for " "retrofit")
                 iwu_buildings.append(bldg)
 
-        if self.data.used_statistic == 'iwu':
+        if self.data.used_statistic == "iwu":
             for bld_iwu in iwu_buildings:
                 bld_iwu.retrofit_building(
                     year_of_retrofit=year_of_retrofit,
                     window_type=window_type,
-                    material=material)
-            self.data = DataClass(used_statistic='tabula_de')
+                    material=material,
+                )
+            self.data = DataClass(used_statistic="tabula_de")
             for bld_tabula in tabula_buildings:
-                bld_tabula.retrofit_building(
-                    type_of_retrofit=type_of_retrofit)
+                bld_tabula.retrofit_building(type_of_retrofit=type_of_retrofit)
 
         else:
             for bld_tabula in tabula_buildings:
-                bld_tabula.retrofit_building(
-                    type_of_retrofit=type_of_retrofit)
-            self.data = DataClass(used_statistic='iwu')
+                bld_tabula.retrofit_building(type_of_retrofit=type_of_retrofit)
+            self.data = DataClass(used_statistic="iwu")
             for bld_iwu in iwu_buildings:
                 bld_iwu.retrofit_building(
                     year_of_retrofit=year_of_retrofit,
                     window_type=window_type,
-                    material=material)
+                    material=material,
+                )
 
     def add_non_residential(
-            self,
-            method,
-            usage,
-            name,
-            year_of_construction,
-            number_of_floors,
-            height_of_floors,
-            net_leased_area,
-            with_ahu=True,
-            internal_gains_mode=1,
-            office_layout=None,
-            window_layout=None,
-            construction_type=None):
+        self,
+        method,
+        usage,
+        name,
+        year_of_construction,
+        number_of_floors,
+        height_of_floors,
+        net_leased_area,
+        with_ahu=True,
+        internal_gains_mode=1,
+        office_layout=None,
+        window_layout=None,
+        construction_type=None,
+    ):
         """Add a non-residential building to the TEASER project.
 
         This function adds a non-residential archetype building to the TEASER
@@ -342,24 +345,31 @@ class Project(object):
         type_bldg : Instance of Office()
 
         """
-        ass_error_method = "only 'bmvbs' is a valid method for " \
-                           "non-residential archetype generation"
+        ass_error_method = (
+            "only 'bmvbs' is a valid method for " "non-residential archetype generation"
+        )
 
-        assert method in ['bmvbs'], ass_error_method
+        assert method in ["bmvbs"], ass_error_method
 
-        ass_error_usage = "only 'office', 'institute', 'institute4', " \
-                          "'institute8' are valid usages for archetype " \
-                          "generation"
+        ass_error_usage = (
+            "only 'office', 'institute', 'institute4', "
+            "'institute8' are valid usages for archetype "
+            "generation"
+        )
 
-        assert usage in ['office', 'institute', 'institute4',
-                         'institute8'], ass_error_usage
+        assert usage in [
+            "office",
+            "institute",
+            "institute4",
+            "institute8",
+        ], ass_error_usage
 
         if self.data is None:
-            self.data = DataClass(used_statistic='iwu')
-        elif self.data.used_statistic != 'iwu':
-            self.data = DataClass(used_statistic='iwu')
+            self.data = DataClass(used_statistic="iwu")
+        elif self.data.used_statistic != "iwu":
+            self.data = DataClass(used_statistic="iwu")
 
-        if usage == 'office':
+        if usage == "office":
 
             type_bldg = Office(
                 self,
@@ -372,9 +382,10 @@ class Project(object):
                 internal_gains_mode,
                 office_layout,
                 window_layout,
-                construction_type)
+                construction_type,
+            )
 
-        elif usage == 'institute':
+        elif usage == "institute":
 
             type_bldg = Institute(
                 self,
@@ -387,9 +398,10 @@ class Project(object):
                 internal_gains_mode,
                 office_layout,
                 window_layout,
-                construction_type)
+                construction_type,
+            )
 
-        elif usage == 'institute4':
+        elif usage == "institute4":
 
             type_bldg = Institute4(
                 self,
@@ -402,9 +414,10 @@ class Project(object):
                 internal_gains_mode,
                 office_layout,
                 window_layout,
-                construction_type)
+                construction_type,
+            )
 
-        elif usage == 'institute8':
+        elif usage == "institute8":
 
             type_bldg = Institute8(
                 self,
@@ -417,33 +430,36 @@ class Project(object):
                 internal_gains_mode,
                 office_layout,
                 window_layout,
-                construction_type)
+                construction_type,
+            )
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
             number_of_elements=self._number_of_elements_calc,
             merge_windows=self._merge_windows_calc,
-            used_library=self._used_library_calc)
+            used_library=self._used_library_calc,
+        )
         return type_bldg
 
     def add_residential(
-            self,
-            method,
-            usage,
-            name,
-            year_of_construction,
-            number_of_floors,
-            height_of_floors,
-            net_leased_area,
-            with_ahu=False,
-            internal_gains_mode=1,
-            residential_layout=None,
-            neighbour_buildings=None,
-            attic=None,
-            cellar=None,
-            dormer=None,
-            construction_type=None,
-            number_of_apartments=None):
+        self,
+        method,
+        usage,
+        name,
+        year_of_construction,
+        number_of_floors,
+        height_of_floors,
+        net_leased_area,
+        with_ahu=False,
+        internal_gains_mode=1,
+        residential_layout=None,
+        neighbour_buildings=None,
+        attic=None,
+        cellar=None,
+        dormer=None,
+        construction_type=None,
+        number_of_apartments=None,
+    ):
         """Add a residential building to the TEASER project.
 
         This function adds a residential archetype building to the TEASER
@@ -542,38 +558,50 @@ class Project(object):
         type_bldg : Instance of Archetype Building
 
         """
-        ass_error_method = "only'tabula_de', 'tabula_dk', 'iwu' and "\
-                           "'urbanrenet' " \
-                           "are valid methods for residential archetype " \
-                           "generation"
+        ass_error_method = (
+            "only'tabula_de', 'tabula_dk', 'iwu' and "
+            "'urbanrenet' "
+            "are valid methods for residential archetype "
+            "generation"
+        )
 
-        assert method in ['tabula_de', 'iwu', 'urbanrenet', 'tabula_dk'], \
-            ass_error_method
+        assert method in [
+            "tabula_de",
+            "iwu",
+            "urbanrenet",
+            "tabula_dk",
+        ], ass_error_method
 
         ass_error_apart = (
             "The keyword number_of_apartments does not have any "
             "effect on archetype generation for 'iwu' or"
-            "'tabula_de', see docs for more information")
+            "'tabula_de', see docs for more information"
+        )
 
-        if method in ['iwu', 'tabula_de', 'tabula_dk'] and \
-                number_of_apartments is not None:
+        if (
+            method in ["iwu", "tabula_de", "tabula_dk"]
+            and number_of_apartments is not None
+        ):
             warnings.warn(ass_error_apart)
 
-        if method == 'tabula_de':
+        if method == "tabula_de":
 
             if self.data is None:
                 self.data = DataClass(used_statistic=method)
-            elif self.data.used_statistic != 'tabula_de':
+            elif self.data.used_statistic != "tabula_de":
                 self.data = DataClass(used_statistic=method)
 
             ass_error_usage_tabula = "only 'single_family_house',"
             "'terraced_house', 'multi_family_house', 'apartment_block' are"
             "valid usages for iwu archetype method"
-            assert usage in ['single_family_house', 'terraced_house',
-                             'multi_family_house', 'apartment_block'], \
-                ass_error_usage_tabula
+            assert usage in [
+                "single_family_house",
+                "terraced_house",
+                "multi_family_house",
+                "apartment_block",
+            ], ass_error_usage_tabula
 
-            if usage == 'single_family_house':
+            if usage == "single_family_house":
 
                 type_bldg = SingleFamilyHouse(
                     self,
@@ -584,12 +612,12 @@ class Project(object):
                     net_leased_area,
                     with_ahu,
                     internal_gains_mode,
-                    construction_type
+                    construction_type,
                 )
                 type_bldg.generate_archetype()
                 return type_bldg
 
-            elif usage == 'terraced_house':
+            elif usage == "terraced_house":
 
                 type_bldg = TerracedHouse(
                     self,
@@ -600,11 +628,12 @@ class Project(object):
                     net_leased_area,
                     with_ahu,
                     internal_gains_mode,
-                    construction_type)
+                    construction_type,
+                )
                 type_bldg.generate_archetype()
                 return type_bldg
 
-            elif usage == 'multi_family_house':
+            elif usage == "multi_family_house":
 
                 type_bldg = MultiFamilyHouse(
                     self,
@@ -615,11 +644,12 @@ class Project(object):
                     net_leased_area,
                     with_ahu,
                     internal_gains_mode,
-                    construction_type)
+                    construction_type,
+                )
                 type_bldg.generate_archetype()
                 return type_bldg
 
-            elif usage == 'apartment_block':
+            elif usage == "apartment_block":
 
                 type_bldg = ApartmentBlock(
                     self,
@@ -630,26 +660,29 @@ class Project(object):
                     net_leased_area,
                     with_ahu,
                     internal_gains_mode,
-                    construction_type)
+                    construction_type,
+                )
 
                 type_bldg.generate_archetype()
                 return type_bldg
 
-        elif method == 'tabula_dk':
+        elif method == "tabula_dk":
 
             if self.data is None:
                 self.data = DataClass(used_statistic=method)
-            elif self.data.used_statistic != 'tabula_dk':
+            elif self.data.used_statistic != "tabula_dk":
                 self.data = DataClass(used_statistic=method)
 
             ass_error_usage_tabula = "only 'single_family_house',"
             "'terraced_house', 'apartment_block' are"
             "valid usages for iwu archetype method"
             assert usage in [
-                'single_family_house', 'terraced_house', 'apartment_block'],\
-                ass_error_usage_tabula
+                "single_family_house",
+                "terraced_house",
+                "apartment_block",
+            ], ass_error_usage_tabula
 
-            if usage == 'single_family_house':
+            if usage == "single_family_house":
 
                 type_bldg = SingleFamilyHouse_DK(
                     self,
@@ -660,11 +693,12 @@ class Project(object):
                     net_leased_area,
                     with_ahu,
                     internal_gains_mode,
-                    construction_type)
+                    construction_type,
+                )
                 type_bldg.generate_archetype()
                 return type_bldg
 
-            elif usage == 'terraced_house':
+            elif usage == "terraced_house":
 
                 type_bldg = TerracedHouse_DK(
                     self,
@@ -675,11 +709,12 @@ class Project(object):
                     net_leased_area,
                     with_ahu,
                     internal_gains_mode,
-                    construction_type)
+                    construction_type,
+                )
                 type_bldg.generate_archetype()
                 return type_bldg
 
-            elif usage == 'apartment_block':
+            elif usage == "apartment_block":
 
                 type_bldg = ApartmentBlock_DK(
                     self,
@@ -690,22 +725,25 @@ class Project(object):
                     net_leased_area,
                     with_ahu,
                     internal_gains_mode,
-                    construction_type)
+                    construction_type,
+                )
                 type_bldg.generate_archetype()
                 return type_bldg
 
-        elif method == 'iwu':
+        elif method == "iwu":
 
             if self.data is None:
                 self.data = DataClass(used_statistic=method)
-            elif self.data.used_statistic != 'iwu':
+            elif self.data.used_statistic != "iwu":
                 self.data = DataClass(used_statistic=method)
 
-            ass_error_usage_iwu = "only 'single_family_dwelling' is a valid " \
-                                  "usage for iwu archetype method"
-            assert usage in ['single_family_dwelling'], ass_error_usage_iwu
+            ass_error_usage_iwu = (
+                "only 'single_family_dwelling' is a valid "
+                "usage for iwu archetype method"
+            )
+            assert usage in ["single_family_dwelling"], ass_error_usage_iwu
 
-            if usage == 'single_family_dwelling':
+            if usage == "single_family_dwelling":
 
                 type_bldg = SingleFamilyDwelling(
                     self,
@@ -721,23 +759,36 @@ class Project(object):
                     attic,
                     cellar,
                     dormer,
-                    construction_type)
+                    construction_type,
+                )
 
-        elif method == 'urbanrenet':
+        elif method == "urbanrenet":
 
             if self.data is None:
-                self.data = DataClass(used_statistic='iwu')
-            elif self.data.used_statistic != 'iwu':
-                self.data = DataClass(used_statistic='iwu')
+                self.data = DataClass(used_statistic="iwu")
+            elif self.data.used_statistic != "iwu":
+                self.data = DataClass(used_statistic="iwu")
 
-            ass_error_usage_urn = "only 'est1a', 'est1b', 'est2', 'est3', " \
-                                  "'est4a', 'est4b', 'est5' 'est6', 'est7', " \
-                                  "'est8a','est8b' is are valid usages for " \
-                                  "urbanrenet archetype method"
-            assert usage in ['est1a', 'est1b', 'est2', 'est3', 'est4a',
-                             'est4b', 'est5', 'est6', 'est7', 'est8a',
-                             'est8b'], ass_error_usage_urn
-            if usage == 'est1a':
+            ass_error_usage_urn = (
+                "only 'est1a', 'est1b', 'est2', 'est3', "
+                "'est4a', 'est4b', 'est5' 'est6', 'est7', "
+                "'est8a','est8b' is are valid usages for "
+                "urbanrenet archetype method"
+            )
+            assert usage in [
+                "est1a",
+                "est1b",
+                "est2",
+                "est3",
+                "est4a",
+                "est4b",
+                "est5",
+                "est6",
+                "est7",
+                "est8a",
+                "est8b",
+            ], ass_error_usage_urn
+            if usage == "est1a":
 
                 type_bldg = EST1a(
                     self,
@@ -749,9 +800,10 @@ class Project(object):
                     with_ahu,
                     internal_gains_mode,
                     neighbour_buildings,
-                    construction_type)
+                    construction_type,
+                )
 
-            elif usage == 'est1b':
+            elif usage == "est1b":
 
                 type_bldg = EST1b(
                     self,
@@ -764,9 +816,10 @@ class Project(object):
                     internal_gains_mode,
                     neighbour_buildings,
                     construction_type,
-                    number_of_apartments)
+                    number_of_apartments,
+                )
 
-            elif usage == 'est2':
+            elif usage == "est2":
 
                 type_bldg = EST2(
                     self,
@@ -779,9 +832,10 @@ class Project(object):
                     internal_gains_mode,
                     neighbour_buildings,
                     construction_type,
-                    number_of_apartments)
+                    number_of_apartments,
+                )
 
-            elif usage == 'est3':
+            elif usage == "est3":
 
                 type_bldg = EST3(
                     self,
@@ -794,9 +848,10 @@ class Project(object):
                     internal_gains_mode,
                     neighbour_buildings,
                     construction_type,
-                    number_of_apartments)
+                    number_of_apartments,
+                )
 
-            elif usage == 'est4a':
+            elif usage == "est4a":
 
                 type_bldg = EST4a(
                     self,
@@ -809,9 +864,10 @@ class Project(object):
                     internal_gains_mode,
                     neighbour_buildings,
                     construction_type,
-                    number_of_apartments)
+                    number_of_apartments,
+                )
 
-            elif usage == 'est4b':
+            elif usage == "est4b":
 
                 type_bldg = EST4b(
                     self,
@@ -824,9 +880,10 @@ class Project(object):
                     internal_gains_mode,
                     neighbour_buildings,
                     construction_type,
-                    number_of_apartments)
+                    number_of_apartments,
+                )
 
-            elif usage == 'est5':
+            elif usage == "est5":
 
                 type_bldg = EST5(
                     self,
@@ -839,9 +896,10 @@ class Project(object):
                     internal_gains_mode,
                     neighbour_buildings,
                     construction_type,
-                    number_of_apartments)
+                    number_of_apartments,
+                )
 
-            elif usage == 'est6':
+            elif usage == "est6":
 
                 type_bldg = EST6(
                     self,
@@ -854,9 +912,10 @@ class Project(object):
                     internal_gains_mode,
                     neighbour_buildings,
                     construction_type,
-                    number_of_apartments)
+                    number_of_apartments,
+                )
 
-            elif usage == 'est7':
+            elif usage == "est7":
 
                 type_bldg = EST7(
                     self,
@@ -869,9 +928,10 @@ class Project(object):
                     internal_gains_mode,
                     neighbour_buildings,
                     construction_type,
-                    number_of_apartments)
+                    number_of_apartments,
+                )
 
-            elif usage == 'est8a':
+            elif usage == "est8a":
 
                 type_bldg = EST8a(
                     self,
@@ -884,9 +944,10 @@ class Project(object):
                     internal_gains_mode,
                     neighbour_buildings,
                     construction_type,
-                    number_of_apartments)
+                    number_of_apartments,
+                )
 
-            elif usage == 'est8b':
+            elif usage == "est8b":
 
                 type_bldg = EST8b(
                     self,
@@ -899,57 +960,15 @@ class Project(object):
                     internal_gains_mode,
                     neighbour_buildings,
                     construction_type,
-                    number_of_apartments)
+                    number_of_apartments,
+                )
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
             number_of_elements=self._number_of_elements_calc,
             merge_windows=self._merge_windows_calc,
-            used_library=self._used_library_calc)
-        return type_bldg
-
-    def type_bldg_office(
-            self,
-            name,
-            year_of_construction,
-            number_of_floors,
-            height_of_floors,
-            net_leased_area,
-            with_ahu=True,
-            internal_gains_mode=1,
-            office_layout=None,
-            window_layout=None,
-            construction_type=None):
-        """Old function, consider rewriting your code
-
-        This is an old function for archetype generation, consider rewriting
-        your code to use Project.add_non_residential(). This function will be
-        eliminated within the next versions
-        """
-
-        warnings.warn("You are using an old function for archetype "
-                      "generation, consider rewriting you code to use "
-                      "Project.add_non_residential(). This function will be "
-                      "eliminated within the next versions")
-
-        type_bldg = Office(
-            self,
-            name,
-            year_of_construction,
-            number_of_floors,
-            height_of_floors,
-            net_leased_area,
-            with_ahu,
-            internal_gains_mode,
-            office_layout,
-            window_layout,
-            construction_type)
-
-        type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter(
-            number_of_elements=self._number_of_elements_calc,
-            merge_windows=self._merge_windows_calc,
-            used_library=self._used_library_calc)
+            used_library=self._used_library_calc,
+        )
         return type_bldg
 
     def save_project(self, file_name=None, path=None):
@@ -992,37 +1011,14 @@ class Project(object):
 
         tjson_in.load_teaser_json(path, self)
 
-    def load_citygml(self, path=None):
-        """Loads buildings from a citygml file
-
-        calls the function load_gml in data.CityGML we make use of CityGML core
-        and possibly not all kinds of CityGML modelling techniques are
-        supported.
-
-        If the function of the building is given as Residential (1000) or
-        Office (1120) the importer directly converts the building to
-        archetype buildings. If not, only the citygml geometry is imported and
-        you need take care of either the material properties and zoning or you
-        may use the _convert_bldg function in citygml_input module.
-
-
-        Parameters
-        ----------
-
-        path : string
-            full path to a CityGML file
-
-        """
-
-        citygml_in.load_gml(path, self)
-
     def export_aixlib(
-            self,
-            building_model=None,
-            zone_model=None,
-            corG=None,
-            internal_id=None,
-            path=None):
+        self,
+        building_model=None,
+        zone_model=None,
+        corG=None,
+        internal_id=None,
+        path=None,
+    ):
         """Exports values to a record file for Modelica simulation
 
         Exports one (if internal_id is not None) or all buildings for
@@ -1045,44 +1041,35 @@ class Project(object):
             an alternative path can be specified as a full path
         """
 
-        if building_model is not None or zone_model is not None or corG is \
-                not None:
+        if building_model is not None or zone_model is not None or corG is not None:
 
-            warnings.warn("building_model, zone_model and corG are no longer "
-                          "supported for AixLib export and have no effect. "
-                          "The keywords will be deleted within the next "
-                          "version, consider rewriting your code.")
+            warnings.warn(
+                "building_model, zone_model and corG are no longer "
+                "supported for AixLib export and have no effect. "
+                "The keywords will be deleted within the next "
+                "version, consider rewriting your code."
+            )
 
         if path is None:
-            path = os.path.join(
-                utilities.get_default_path(),
-                self.name)
+            path = os.path.join(utilities.get_default_path(), self.name)
         else:
-            path = os.path.join(
-                path,
-                self.name)
+            path = os.path.join(path, self.name)
 
         utilities.create_path(path)
 
         if internal_id is None:
             aixlib_output.export_multizone(
-                buildings=self.buildings,
-                prj=self,
-                path=path)
+                buildings=self.buildings, prj=self, path=path
+            )
         else:
             for bldg in self.buildings:
                 if bldg.internal_id == internal_id:
                     aixlib_output.export_multizone(
-                        buildings=[bldg],
-                        prj=self,
-                        path=path)
+                        buildings=[bldg], prj=self, path=path
+                    )
         return path
 
-    def export_ibpsa(
-            self,
-            library='AixLib',
-            internal_id=None,
-            path=None):
+    def export_ibpsa(self, library="AixLib", internal_id=None, path=None):
         """Exports values to a record file for Modelica simulation
 
         For Annex 60 Library
@@ -1104,36 +1091,33 @@ class Project(object):
             an alternative path can be specified as a full path
         """
 
-        ass_error_1 = "library for IBPSA export has to be 'AixLib', " \
-                      "'Buildings', 'BuildingSystems' or 'IDEAS'"
+        ass_error_1 = (
+            "library for IBPSA export has to be 'AixLib', "
+            "'Buildings', 'BuildingSystems' or 'IDEAS'"
+        )
 
-        assert library in ['AixLib', 'Buildings', 'BuildingSystems',
-                           'IDEAS'], ass_error_1
+        assert library in [
+            "AixLib",
+            "Buildings",
+            "BuildingSystems",
+            "IDEAS",
+        ], ass_error_1
 
         if path is None:
-            path = os.path.join(
-                utilities.get_default_path(),
-                self.name)
+            path = os.path.join(utilities.get_default_path(), self.name)
         else:
-            path = os.path.join(
-                path,
-                self.name)
+            path = os.path.join(path, self.name)
 
         utilities.create_path(path)
 
         if internal_id is None:
             ibpsa_output.export_ibpsa(
-                buildings=self.buildings,
-                prj=self,
-                path=path,
-                library=library)
+                buildings=self.buildings, prj=self, path=path, library=library
+            )
         else:
             for bldg in self.buildings:
                 if bldg.internal_id == internal_id:
-                    ibpsa_output.export_ibpsa(
-                        buildings=[bldg],
-                        prj=self,
-                        path=path)
+                    ibpsa_output.export_ibpsa(buildings=[bldg], prj=self, path=path)
         return path
 
     def set_default(self, load_data=None):
@@ -1158,7 +1142,9 @@ class Project(object):
                 "input",
                 "inputdata",
                 "weatherdata",
-                "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos"))
+                "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos",
+            )
+        )
 
         self.buildings = []
 
@@ -1228,13 +1214,13 @@ class Project(object):
     @name.setter
     def name(self, value):
         if isinstance(value, str):
-            regex = re.compile('[^a-zA-z0-9]')
-            self._name = regex.sub('', value)
+            regex = re.compile("[^a-zA-z0-9]")
+            self._name = regex.sub("", value)
         else:
             try:
                 value = str(value)
-                regex = re.compile('[^a-zA-z0-9]')
-                self._name = regex.sub('', value)
+                regex = re.compile("[^a-zA-z0-9]")
+                self._name = regex.sub("", value)
             except ValueError:
                 print("Can't convert name to string")
 

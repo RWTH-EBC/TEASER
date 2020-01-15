@@ -3,7 +3,7 @@
 
 """
 This script contains of three functions. The first one loads the light-weight
-ASHRAE 140 test room 600 from a *.teaserXML file. The second one creates
+ASHRAE 140 test room 600 from a *.teaserjson file. The second one creates
 that room within the code. The third one computes parameter with the help of
 one of the aforementioned functions.
 """
@@ -17,8 +17,7 @@ from teaser.logic.buildingobjects.buildingphysics.layer import Layer
 from teaser.logic.buildingobjects.buildingphysics.material import Material
 from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
-from teaser.logic.buildingobjects.buildingphysics.groundfloor import \
-    GroundFloor
+from teaser.logic.buildingobjects.buildingphysics.groundfloor import GroundFloor
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.useconditions import UseConditions
 import teaser.logic.utilities as utilities
@@ -29,29 +28,21 @@ def main(number_of_elements=2):
     prj = from_scratch(number_of_elements=number_of_elements, save=False)
     # prj = load_file()
 
-    prj.used_library_calc = 'IBPSA'
+    prj.used_library_calc = "IBPSA"
     prj.number_of_elements_calc = number_of_elements
     prj.merge_windows_calc = False
     prj.weather_file_path = utilities.get_full_path(
-        os.path.join(
-            "data",
-            "input",
-            "inputdata",
-            "weatherdata",
-            "ASHRAE140.mos"))
+        os.path.join("data", "input", "inputdata", "weatherdata", "ASHRAE140.mos")
+    )
 
     prj.buildings[0].calc_building_parameter(
-        number_of_elements=number_of_elements,
-        merge_windows=False,
-        used_library='IBPSA')
+        number_of_elements=number_of_elements, merge_windows=False, used_library="IBPSA"
+    )
 
     prj.export_ibpsa()
 
 
-def from_scratch(
-        number_of_elements,
-        save=False,
-        path=utilities.get_default_path()):
+def from_scratch(number_of_elements, save=False, path=utilities.get_default_path()):
     """This function creates the test room from scratch.
 
     Notes: The standard defines an solar absorption coefficient for interior
@@ -63,9 +54,9 @@ def from_scratch(
     number_of_elements: int
         Number of elements of model
     path: str (optional)
-        Path where Project should be stored as .teaserXML
+        Path where Project should be stored as .teaserjson
     save: bool (optional)
-        True if Project should be stored as .teaserXML at path
+        True if Project should be stored as .teaserjson at path
 
     Returns
     -------
@@ -382,23 +373,11 @@ def from_scratch(
         material_ofgw1.thermal_conduc = 0.04
 
     if save:
-        prj.save_project(file_name='ASHRAE140_600', path=path)
+        prj.save_project(file_name="ASHRAE140_600", path=path)
 
     return prj
 
 
-def load_file():
-
-    prj = Project(load_data=True)
-
-    prj.load_project(utilities.get_full_path(os.path.join("examples",
-                                                          "examplefiles",
-                                                          "ASHRAE140_600."
-                                                          "teaserXML")))
-
-    return prj
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
     print("ASHRAE 600: That's it!")
