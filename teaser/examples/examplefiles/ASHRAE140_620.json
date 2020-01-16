@@ -1,0 +1,564 @@
+{
+    "project": {
+        "version": "0.7",
+        "name": "Project",
+        "weather_file_path": "modelica://AixLib/Resources/WeatherData/ASHRAE140.mos",
+        "number_of_elements_calc": 2,
+        "merge_windows_calc": false,
+        "used_library_calc": "AixLib",
+        "modelica_info": {
+            "start_time": 0,
+            "stop_time": 31536000,
+            "interval_output": "3600",
+            "current_solver": "Cvode",
+            "equidistant_output": true,
+            "results_at_events": false,
+            "version": "3.2.2"
+        },
+        "buildings": {
+            "TestBuilding": {
+                "classification": {
+                    "class": "Building",
+                    "method": "undefined"
+                },
+                "street_name": "",
+                "city": "",
+                "year_of_construction": 9999,
+                "year_of_retrofit": "9999",
+                "number_of_floors": null,
+                "height_of_floors": null,
+                "net_leased_area": 48.0,
+                "outer_area": {
+                    "0.0": 21.6,
+                    "90.0": 10.200000000000003,
+                    "180.0": 21.6,
+                    "270.0": 10.200000000000003,
+                    "-1.0": 48.0
+                },
+                "window_area": {
+                    "270.0": 6.0,
+                    "90.0": 6.0
+                },
+                "thermal_zones": {
+                    "TestRoom620": {
+                        "area": 48.0,
+                        "volume": 129.60000000000002,
+                        "use_conditions": {
+                            "usage": "Single office",
+                            "typical_length": 123.0,
+                            "typical_width": 123.0,
+                            "with_heating": true,
+                            "T_threshold_heating": 288.15,
+                            "with_cooling": false,
+                            "activity_degree_persons": 1.2,
+                            "fixed_heat_flow_rate_persons": 70,
+                            "internal_gains_moisture_no_people": 0.5,
+                            "T_threshold_cooling": 295.15,
+                            "persons": 5.0,
+                            "ratio_conv_rad_persons": 0.5,
+                            "machines": 7.0,
+                            "ratio_conv_rad_machines": 0.75,
+                            "lighting_power": 15.9,
+                            "ratio_conv_rad_lighting": 0.5,
+                            "use_constant_infiltration": false,
+                            "infiltration_rate": 0.2,
+                            "max_user_infiltration": 1.0,
+                            "max_overheating_infiltration": [
+                                3.0,
+                                2.0
+                            ],
+                            "max_summer_infiltration": [
+                                1.0,
+                                283.15,
+                                290.15
+                            ],
+                            "winter_reduction_infiltration": [
+                                0.5,
+                                273.15,
+                                283.15
+                            ],
+                            "min_ahu": 0.0,
+                            "max_ahu": 2.6,
+                            "with_ahu": 0,
+                            "with_ideal_thresholds": false,
+                            "heating_profile": [
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15
+                            ],
+                            "cooling_profile": [
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15
+                            ],
+                            "persons_profile": [
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.2,
+                                0.4,
+                                0.6,
+                                0.8,
+                                0.8,
+                                0.4,
+                                0.6,
+                                0.8,
+                                0.8,
+                                0.4,
+                                0.2,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0
+                            ],
+                            "machines_profile": [
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.2,
+                                0.4,
+                                0.6,
+                                0.8,
+                                0.8,
+                                0.4,
+                                0.6,
+                                0.8,
+                                0.8,
+                                0.4,
+                                0.2,
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.1
+                            ],
+                            "lighting_profile": [
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0
+                            ]
+                        },
+                        "outer_walls": {
+                            "OuterWallNorth": {
+                                "year_of_construction": null,
+                                "year_of_retrofit": null,
+                                "construction_type": null,
+                                "area": 21.6,
+                                "tilt": 90.0,
+                                "orientation": 0.0,
+                                "inner_radiation": 5.13,
+                                "inner_convection": 3.16,
+                                "outer_radiation": 4.63,
+                                "outer_convection": 24.67,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.012,
+                                        "material": {
+                                            "name": "Plasterboard",
+                                            "density": 950.0,
+                                            "thermal_conduc": 0.16,
+                                            "heat_capac": 0.84,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.066,
+                                        "material": {
+                                            "name": "Fiberglass",
+                                            "density": 12.0,
+                                            "thermal_conduc": 0.04,
+                                            "heat_capac": 0.84,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.009,
+                                        "material": {
+                                            "name": "WoodSiding",
+                                            "density": 530.0,
+                                            "thermal_conduc": 0.14,
+                                            "heat_capac": 0.9,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "OuterWallEast": {
+                                "year_of_construction": null,
+                                "year_of_retrofit": null,
+                                "construction_type": null,
+                                "area": 10.200000000000003,
+                                "tilt": 90.0,
+                                "orientation": 90.0,
+                                "inner_radiation": 5.13,
+                                "inner_convection": 3.16,
+                                "outer_radiation": 4.63,
+                                "outer_convection": 24.67,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.012,
+                                        "material": {
+                                            "name": "Plasterboard",
+                                            "density": 950.0,
+                                            "thermal_conduc": 0.16,
+                                            "heat_capac": 0.84,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.066,
+                                        "material": {
+                                            "name": "Fiberglass",
+                                            "density": 12.0,
+                                            "thermal_conduc": 0.04,
+                                            "heat_capac": 0.84,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.009,
+                                        "material": {
+                                            "name": "WoodSiding",
+                                            "density": 530.0,
+                                            "thermal_conduc": 0.14,
+                                            "heat_capac": 0.9,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "OuterWallSouth": {
+                                "year_of_construction": null,
+                                "year_of_retrofit": null,
+                                "construction_type": null,
+                                "area": 21.6,
+                                "tilt": 90.0,
+                                "orientation": 180.0,
+                                "inner_radiation": 5.13,
+                                "inner_convection": 3.16,
+                                "outer_radiation": 4.63,
+                                "outer_convection": 24.67,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.012,
+                                        "material": {
+                                            "name": "Plasterboard",
+                                            "density": 950.0,
+                                            "thermal_conduc": 0.16,
+                                            "heat_capac": 0.84,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.066,
+                                        "material": {
+                                            "name": "Fiberglass",
+                                            "density": 12.0,
+                                            "thermal_conduc": 0.04,
+                                            "heat_capac": 0.84,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.009,
+                                        "material": {
+                                            "name": "WoodSiding",
+                                            "density": 530.0,
+                                            "thermal_conduc": 0.14,
+                                            "heat_capac": 0.9,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "OuterWallWest": {
+                                "year_of_construction": null,
+                                "year_of_retrofit": null,
+                                "construction_type": null,
+                                "area": 10.200000000000003,
+                                "tilt": 90.0,
+                                "orientation": 270.0,
+                                "inner_radiation": 5.13,
+                                "inner_convection": 3.16,
+                                "outer_radiation": 4.63,
+                                "outer_convection": 24.67,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.012,
+                                        "material": {
+                                            "name": "Plasterboard",
+                                            "density": 950.0,
+                                            "thermal_conduc": 0.16,
+                                            "heat_capac": 0.84,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.066,
+                                        "material": {
+                                            "name": "Fiberglass",
+                                            "density": 12.0,
+                                            "thermal_conduc": 0.04,
+                                            "heat_capac": 0.84,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.009,
+                                        "material": {
+                                            "name": "WoodSiding",
+                                            "density": 530.0,
+                                            "thermal_conduc": 0.14,
+                                            "heat_capac": 0.9,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "doors": {},
+                        "rooftops": {
+                            "Roof": {
+                                "year_of_construction": null,
+                                "year_of_retrofit": null,
+                                "construction_type": null,
+                                "area": 48.0,
+                                "tilt": 0.0,
+                                "orientation": -1.0,
+                                "inner_radiation": 5.13,
+                                "inner_convection": 1.0,
+                                "outer_radiation": 4.63,
+                                "outer_convection": 24.67,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.01,
+                                        "material": {
+                                            "name": "Plasterboard",
+                                            "density": 950.0,
+                                            "thermal_conduc": 0.16,
+                                            "heat_capac": 0.84,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.1118,
+                                        "material": {
+                                            "name": "Fiberglass",
+                                            "density": 12.0,
+                                            "thermal_conduc": 0.04,
+                                            "heat_capac": 0.84,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.019,
+                                        "material": {
+                                            "name": "Roofdeck",
+                                            "density": 530.0,
+                                            "thermal_conduc": 0.14,
+                                            "heat_capac": 0.9,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "ground_floors": {},
+                        "windows": {
+                            "WindowWest": {
+                                "year_of_construction": null,
+                                "year_of_retrofit": null,
+                                "construction_type": null,
+                                "area": 6.0,
+                                "tilt": 90.0,
+                                "orientation": 270.0,
+                                "inner_radiation": 5.13,
+                                "inner_convection": 3.16,
+                                "outer_radiation": 4.63,
+                                "outer_convection": 16.37,
+                                "g_value": 0.0,
+                                "a_conv": 0.03,
+                                "shading_g_total": 0.0,
+                                "shading_max_irr": 0.0,
+                                "layer": {
+                                    "1": {
+                                        "thickness": 0.024,
+                                        "material": {
+                                            "name": "GlasWindow",
+                                            "density": 0.0,
+                                            "thermal_conduc": 0.15,
+                                            "heat_capac": 0.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "WindowEast": {
+                                "year_of_construction": null,
+                                "year_of_retrofit": null,
+                                "construction_type": null,
+                                "area": 6.0,
+                                "tilt": 90.0,
+                                "orientation": 90.0,
+                                "inner_radiation": 5.13,
+                                "inner_convection": 3.16,
+                                "outer_radiation": 4.63,
+                                "outer_convection": 16.37,
+                                "g_value": 0.0,
+                                "a_conv": 0.03,
+                                "shading_g_total": 0.0,
+                                "shading_max_irr": 0.0,
+                                "layer": {
+                                    "1": {
+                                        "thickness": 0.024,
+                                        "material": {
+                                            "name": "GlasWindow",
+                                            "density": 0.0,
+                                            "thermal_conduc": 0.15,
+                                            "heat_capac": 0.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "inner_walls": {},
+                        "floors": {
+                            "InnerWallFloor": {
+                                "year_of_construction": null,
+                                "year_of_retrofit": null,
+                                "construction_type": null,
+                                "area": 48.0,
+                                "tilt": 0.0,
+                                "orientation": -2.0,
+                                "inner_radiation": 5.13,
+                                "inner_convection": 4.13,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.025,
+                                        "material": {
+                                            "name": "TimberFlooring",
+                                            "density": 650.0,
+                                            "thermal_conduc": 0.14,
+                                            "heat_capac": 1.2,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 1.003,
+                                        "material": {
+                                            "name": "Insulation",
+                                            "density": 1e-12,
+                                            "thermal_conduc": 0.04,
+                                            "heat_capac": 1e-12,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "ceilings": {}
+                    }
+                }
+            }
+        }
+    }
+}

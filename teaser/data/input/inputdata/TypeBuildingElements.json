@@ -1,0 +1,3096 @@
+{
+    "version": "0.7",
+    "OuterWall_[0, 1918]_heavy": {
+        "building_age_group": [
+            0,
+            1918
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "gypsum",
+                    "material_id": "26ea0874-3a43-11e7-9488-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.3,
+                "material": {
+                    "name": "solid_brick_k",
+                    "material_id": "5e1eefa4-3a43-11e7-a5cf-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "OuterWall_[0, 1918]_light": {
+        "building_age_group": [
+            0,
+            1918
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "clay_plaster",
+                    "material_id": "33d4c37a-3a43-11e7-a293-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "fibrous_loam_1200",
+                    "material_id": "266228a4-3a43-11e7-acde-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "OuterWall_[1919, 1948]_heavy": {
+        "building_age_group": [
+            1919,
+            1948
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "gypsum",
+                    "material_id": "26ea0874-3a43-11e7-9488-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.3,
+                "material": {
+                    "name": "solid_brick_k",
+                    "material_id": "5e1eefa4-3a43-11e7-a5cf-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "OuterWall_[1919, 1948]_light": {
+        "building_age_group": [
+            1919,
+            1948
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "clay_plaster",
+                    "material_id": "33d4c37a-3a43-11e7-a293-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "fibrous_loam_1200",
+                    "material_id": "266228a4-3a43-11e7-acde-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "clay_plaster",
+                    "material_id": "33d4c37a-3a43-11e7-a293-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "OuterWall_[1949, 1968]_heavy": {
+        "building_age_group": [
+            1949,
+            1968
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "gypsum",
+                    "material_id": "26ea0874-3a43-11e7-9488-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.3,
+                "material": {
+                    "name": "hollow_CMU_Vermiculit_1200",
+                    "material_id": "5751bba2-3a43-11e7-89db-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "OuterWall_[1949, 1968]_light": {
+        "building_age_group": [
+            1949,
+            1968
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "fibreboard",
+                    "material_id": "4eb565fa-3a43-11e7-a413-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "mineral_wool_040",
+                    "material_id": "35d01e70-3a43-11e7-a6cf-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "OuterWall_[1969, 1978]_heavy": {
+        "building_age_group": [
+            1969,
+            1978
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.175,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.08,
+                "material": {
+                    "name": "concrete_wz05",
+                    "material_id": "249f131a-3a43-11e7-b4e6-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "OuterWall_[1969, 1978]_light": {
+        "building_age_group": [
+            1969,
+            1978
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "fibreboard",
+                    "material_id": "4eb565fa-3a43-11e7-a413-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "OuterWall_[1979, 1983]_heavy": {
+        "building_age_group": [
+            1979,
+            1983
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.175,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.08,
+                "material": {
+                    "name": "concrete_wz05",
+                    "material_id": "249f131a-3a43-11e7-b4e6-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "OuterWall_[1979, 1983]_light": {
+        "building_age_group": [
+            1979,
+            1983
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.005,
+                "material": {
+                    "name": "aluminium",
+                    "material_id": "6bd7d77e-3a43-11e7-8488-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.07,
+                "material": {
+                    "name": "mineral_wool_040",
+                    "material_id": "35d01e70-3a43-11e7-a6cf-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.005,
+                "material": {
+                    "name": "aluminium",
+                    "material_id": "6bd7d77e-3a43-11e7-8488-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "OuterWall_[1984, 1994]_heavy": {
+        "building_age_group": [
+            1984,
+            1994
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.175,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "concrete_wz05",
+                    "material_id": "249f131a-3a43-11e7-b4e6-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "OuterWall_[1984, 1994]_light": {
+        "building_age_group": [
+            1984,
+            1994
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.005,
+                "material": {
+                    "name": "aluminium",
+                    "material_id": "6bd7d77e-3a43-11e7-8488-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.09,
+                "material": {
+                    "name": "mineral_wool_040",
+                    "material_id": "35d01e70-3a43-11e7-a6cf-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.005,
+                "material": {
+                    "name": "aluminium",
+                    "material_id": "6bd7d77e-3a43-11e7-8488-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "OuterWall_[1995, 2015]_heavy": {
+        "building_age_group": [
+            1995,
+            2015
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.175,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.07,
+                "material": {
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "OuterWall_[1995, 2015]_light": {
+        "building_age_group": [
+            1995,
+            2015
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.0125,
+                "material": {
+                    "name": "plasterboard",
+                    "material_id": "27068cc0-3a43-11e7-bc9e-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.001,
+                "material": {
+                    "name": "steel_sheet",
+                    "material_id": "6c217f5c-3a43-11e7-8fc5-2cd444b2e704"
+                }
+            },
+            "3": {
+                "thickness": 0.1,
+                "material": {
+                    "name": "XPS_3_core_layer",
+                    "material_id": "63b7a3a4-3a43-11e7-940c-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.001,
+                "material": {
+                    "name": "steel_sheet",
+                    "material_id": "6c217f5c-3a43-11e7-8fc5-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Window_[0, 1978]_Holzfenster, einfach": {
+        "building_age_group": [
+            0,
+            1978
+        ],
+        "construction_type": "Holzfenster, einfach",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "g_value": 0.87,
+        "a_conv": 0.02,
+        "shading_g_total": 1.0,
+        "shading_max_irr": 100.0,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "Glas0_1978Holzfenstereinfach",
+                    "material_id": "0abb8aa3-83ff-11e6-bfa4-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Window_[0, 1978]_Holzfenster, zweifach": {
+        "building_age_group": [
+            0,
+            1978
+        ],
+        "construction_type": "Holzfenster, zweifach",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "g_value": 0.78,
+        "a_conv": 0.03,
+        "shading_g_total": 1.0,
+        "shading_max_irr": 100.0,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "Glas0_1978Holzfensterzweifach",
+                    "material_id": "0abbb194-83ff-11e6-a326-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Window_[0, 1978]_Kunststofffenster, Isolierverglasung": {
+        "building_age_group": [
+            0,
+            1978
+        ],
+        "construction_type": "Kunststofffenster, Isolierverglasung",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "g_value": 0.78,
+        "a_conv": 0.03,
+        "shading_g_total": 1.0,
+        "shading_max_irr": 100.0,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "Glas0_1978KunststofffensterIsolierverglasung",
+                    "material_id": "0abbb195-83ff-11e6-9ec6-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Window_[0, 1978]_Alu- oder Stahlfenster, Isolierverglasung": {
+        "building_age_group": [
+            0,
+            1978
+        ],
+        "construction_type": "Alu- oder Stahlfenster, Isolierverglasung",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "g_value": 0.78,
+        "a_conv": 0.03,
+        "shading_g_total": 1.0,
+        "shading_max_irr": 100.0,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "Glas0_1978AluoderStahlfensterIsolierverglasung",
+                    "material_id": "0abbb196-83ff-11e6-8079-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Window_[1979, 1983]_Holzfenster, zweifach": {
+        "building_age_group": [
+            1979,
+            1983
+        ],
+        "construction_type": "Holzfenster, zweifach",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "g_value": 0.78,
+        "a_conv": 0.03,
+        "shading_g_total": 1.0,
+        "shading_max_irr": 100.0,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "Glas1979_1983Holzfensterzweifach",
+                    "material_id": "0abbb197-83ff-11e6-a5ea-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Window_[1979, 1983]_Kunststofffenster, Isolierverglasung": {
+        "building_age_group": [
+            1979,
+            1983
+        ],
+        "construction_type": "Kunststofffenster, Isolierverglasung",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "g_value": 0.78,
+        "a_conv": 0.03,
+        "shading_g_total": 1.0,
+        "shading_max_irr": 100.0,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "Glas1979_1983KunststofffensterIsolierverglasung",
+                    "material_id": "0abbb198-83ff-11e6-a1b0-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Window_[1979, 1983]_Alu- oder Stahlfenster, Isolierverglasung": {
+        "building_age_group": [
+            1979,
+            1983
+        ],
+        "construction_type": "Alu- oder Stahlfenster, Isolierverglasung",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "g_value": 0.78,
+        "a_conv": 0.03,
+        "shading_g_total": 1.0,
+        "shading_max_irr": 100.0,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "Glas1979_1983AluoderStahlfensterIsolierverglasung",
+                    "material_id": "0abbb199-83ff-11e6-96ec-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Window_[1984, 1994]_Holzfenster, zweifach": {
+        "building_age_group": [
+            1984,
+            1994
+        ],
+        "construction_type": "Holzfenster, zweifach",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "g_value": 0.78,
+        "a_conv": 0.03,
+        "shading_g_total": 1.0,
+        "shading_max_irr": 100.0,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "Glas1984_1994Holzfensterzweifach",
+                    "material_id": "0abbb19a-83ff-11e6-bace-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Window_[1984, 1994]_Kunststofffenster, Isolierverglasung": {
+        "building_age_group": [
+            1984,
+            1994
+        ],
+        "construction_type": "Kunststofffenster, Isolierverglasung",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "g_value": 0.78,
+        "a_conv": 0.03,
+        "shading_g_total": 1.0,
+        "shading_max_irr": 100.0,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "Glas1984_1994KunststofffensterIsolierverglasung",
+                    "material_id": "0abbb19b-83ff-11e6-95f9-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Window_[1984, 1994]_Alu- oder Stahlfenster, Isolierverglasung": {
+        "building_age_group": [
+            1984,
+            1994
+        ],
+        "construction_type": "Alu- oder Stahlfenster, Isolierverglasung",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "g_value": 0.78,
+        "a_conv": 0.03,
+        "shading_g_total": 1.0,
+        "shading_max_irr": 100.0,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "Glas1984_1994AluoderStahlfensterIsolierverglasung",
+                    "material_id": "0abbb19c-83ff-11e6-a925-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Window_[1995, 2015]_Holzfenster, zweifach": {
+        "building_age_group": [
+            1995,
+            2015
+        ],
+        "construction_type": "Holzfenster, zweifach",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "g_value": 0.67,
+        "a_conv": 0.03,
+        "shading_g_total": 1.0,
+        "shading_max_irr": 100.0,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "Glas1995_2015Holzfensterzweifach",
+                    "material_id": "0abbb19d-83ff-11e6-b8bb-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Window_[1995, 2015]_Kunststofffenster, Isolierverglasung": {
+        "building_age_group": [
+            1995,
+            2015
+        ],
+        "construction_type": "Kunststofffenster, Isolierverglasung",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "g_value": 0.67,
+        "a_conv": 0.03,
+        "shading_g_total": 1.0,
+        "shading_max_irr": 100.0,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "Glas1995_2015KunststofffensterIsolierverglasung",
+                    "material_id": "0abbb19e-83ff-11e6-968a-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Window_[1995, 2015]_Alu- oder Stahlfenster, Isolierverglasung": {
+        "building_age_group": [
+            1995,
+            2015
+        ],
+        "construction_type": "Alu- oder Stahlfenster, Isolierverglasung",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "g_value": 0.67,
+        "a_conv": 0.03,
+        "shading_g_total": 1.0,
+        "shading_max_irr": 100.0,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "Glas1995_2015AluoderStahlfensterIsolierverglasung",
+                    "material_id": "0abbb1a0-83ff-11e6-9986-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Window_[1995, 2015]_Alu- oder Stahlfenster, Waermeschutzverglasung, zweifach": {
+        "building_age_group": [
+            1995,
+            2015
+        ],
+        "construction_type": "Alu- oder Stahlfenster, Waermeschutzverglasung, zweifach",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "g_value": 0.65,
+        "a_conv": 0.07,
+        "shading_g_total": 1.0,
+        "shading_max_irr": 100.0,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "Glas1995_2015AluoderStahlfensterWaermeschutzverglasungzweifach",
+                    "material_id": "0abbb1a1-83ff-11e6-b229-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Window_[1995, 2015]_Waermeschutzverglasung, dreifach": {
+        "building_age_group": [
+            1995,
+            2015
+        ],
+        "construction_type": "Waermeschutzverglasung, dreifach",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "g_value": 0.5,
+        "a_conv": 0.07,
+        "shading_g_total": 1.0,
+        "shading_max_irr": 100.0,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "Glas1995_2015Waermeschutzverglasungdreifach",
+                    "material_id": "0abbb1a2-83ff-11e6-946a-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Window_[1995, 2015]_EnEv": {
+        "building_age_group": [
+            1995,
+            2015
+        ],
+        "construction_type": "EnEv",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "g_value": 0.6,
+        "a_conv": 0.03,
+        "shading_g_total": 1.0,
+        "shading_max_irr": 100.0,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "Glas1995_2015EnEV",
+                    "material_id": "36eb3906-855e-11e6-a498-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Rooftop_[0, 1918]_heavy": {
+        "building_age_group": [
+            0,
+            1918
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.000000000000004,
+        "layer": {
+            "0": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "concrete_wz05",
+                    "material_id": "249f131a-3a43-11e7-b4e6-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Rooftop_[0, 1918]_light": {
+        "building_age_group": [
+            0,
+            1918
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.000000000000004,
+        "layer": {
+            "0": {
+                "thickness": 0.025,
+                "material": {
+                    "name": "spruces_longitudinal",
+                    "material_id": "26978852-3a43-11e7-ad37-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Rooftop_[1919, 1948]_heavy": {
+        "building_age_group": [
+            1919,
+            1948
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.000000000000004,
+        "layer": {
+            "0": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "concrete_wz05",
+                    "material_id": "249f131a-3a43-11e7-b4e6-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Rooftop_[1919, 1948]_light": {
+        "building_age_group": [
+            1919,
+            1948
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.000000000000004,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.025,
+                "material": {
+                    "name": "wood_wool_board_gypsum_420",
+                    "material_id": "2be841de-3a43-11e7-9a93-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.025,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Rooftop_[1949, 1968]_heavy": {
+        "building_age_group": [
+            1949,
+            1968
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.000000000000004,
+        "layer": {
+            "0": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "concrete_wz05",
+                    "material_id": "249f131a-3a43-11e7-b4e6-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "oak_radial",
+                    "material_id": "25c7fc26-3a43-11e7-a87a-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Rooftop_[1949, 1968]_light": {
+        "building_age_group": [
+            1949,
+            1968
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.000000000000004,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.025,
+                "material": {
+                    "name": "wood_wool_board_gypsum_420",
+                    "material_id": "2be841de-3a43-11e7-9a93-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.025,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Rooftop_[1969, 1978]_heavy": {
+        "building_age_group": [
+            1969,
+            1978
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.000000000000004,
+        "layer": {
+            "0": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "foam_glass_board_130",
+                    "material_id": "48037df6-3a43-11e7-bd90-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "gravel_single_granular",
+                    "material_id": "2f36c3b6-3a43-11e7-9a7e-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Rooftop_[1969, 1978]_light": {
+        "building_age_group": [
+            1969,
+            1978
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.000000000000004,
+        "layer": {
+            "0": {
+                "thickness": 0.0125,
+                "material": {
+                    "name": "plasterboard",
+                    "material_id": "27068cc0-3a43-11e7-bc9e-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.14,
+                "material": {
+                    "name": "rafters_and_insulation",
+                    "material_id": "6cfc0654-3a43-11e7-8720-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Rooftop_[1979, 1983]_heavy": {
+        "building_age_group": [
+            1979,
+            1983
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.000000000000004,
+        "layer": {
+            "0": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.07,
+                "material": {
+                    "name": "foam_glass_board_130",
+                    "material_id": "48037df6-3a43-11e7-bd90-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "gravel_single_granular",
+                    "material_id": "2f36c3b6-3a43-11e7-9a7e-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Rooftop_[1979, 1983]_light": {
+        "building_age_group": [
+            1979,
+            1983
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.000000000000004,
+        "layer": {
+            "0": {
+                "thickness": 0.2,
+                "material": {
+                    "name": "wooden_beams_with_insulation",
+                    "material_id": "6d473498-3a43-11e7-83d8-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "gypsum",
+                    "material_id": "26ea0874-3a43-11e7-9488-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Rooftop_[1984, 1994]_heavy": {
+        "building_age_group": [
+            1984,
+            1994
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.000000000000004,
+        "layer": {
+            "0": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.09,
+                "material": {
+                    "name": "foam_glass_board_130",
+                    "material_id": "48037df6-3a43-11e7-bd90-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "gravel_single_granular",
+                    "material_id": "2f36c3b6-3a43-11e7-9a7e-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Rooftop_[1984, 1994]_light": {
+        "building_age_group": [
+            1984,
+            1994
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.000000000000004,
+        "layer": {
+            "0": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.025,
+                "material": {
+                    "name": "wood_wool_board_gypsum_420",
+                    "material_id": "2be841de-3a43-11e7-9a93-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.14,
+                "material": {
+                    "name": "wood_fibreboard_light_200",
+                    "material_id": "2b23145c-3a43-11e7-ad60-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Rooftop_[1995, 2015]_heavy": {
+        "building_age_group": [
+            1995,
+            2015
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.000000000000004,
+        "layer": {
+            "0": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.12,
+                "material": {
+                    "name": "foam_glass_board_130",
+                    "material_id": "48037df6-3a43-11e7-bd90-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "gravel_single_granular",
+                    "material_id": "2f36c3b6-3a43-11e7-9a7e-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Rooftop_[1995, 2015]_light": {
+        "building_age_group": [
+            1995,
+            2015
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.000000000000004,
+        "layer": {
+            "0": {
+                "thickness": 0.0125,
+                "material": {
+                    "name": "plasterboard",
+                    "material_id": "27068cc0-3a43-11e7-bc9e-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "mineral_wool_040",
+                    "material_id": "35d01e70-3a43-11e7-a6cf-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "gravel_single_granular",
+                    "material_id": "2f36c3b6-3a43-11e7-9a7e-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "GroundFloor_[0, 1918]_heavy": {
+        "building_age_group": [
+            0,
+            1918
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.05,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.18,
+                "material": {
+                    "name": "concrete_wz05",
+                    "material_id": "249f131a-3a43-11e7-b4e6-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "GroundFloor_[0, 1918]_light": {
+        "building_age_group": [
+            0,
+            1918
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "wooden_beams_with_air_and_clay",
+                    "material_id": "6d915192-3a43-11e7-bb75-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            },
+            "3": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "GroundFloor_[1919, 1948]_heavy": {
+        "building_age_group": [
+            1919,
+            1948
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.05,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.18,
+                "material": {
+                    "name": "concrete_wz05",
+                    "material_id": "249f131a-3a43-11e7-b4e6-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "GroundFloor_[1919, 1948]_light": {
+        "building_age_group": [
+            1919,
+            1948
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.2,
+                "material": {
+                    "name": "wooden_beams_with_air_and_clay",
+                    "material_id": "6d915192-3a43-11e7-bb75-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            },
+            "3": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "GroundFloor_[1949, 1968]_heavy": {
+        "building_age_group": [
+            1949,
+            1968
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "oak_radial",
+                    "material_id": "25c7fc26-3a43-11e7-a87a-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.18,
+                "material": {
+                    "name": "concrete_wz05",
+                    "material_id": "249f131a-3a43-11e7-b4e6-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "GroundFloor_[1949, 1968]_light": {
+        "building_age_group": [
+            1949,
+            1968
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.2,
+                "material": {
+                    "name": "wooden_beams_with_air_and_clay",
+                    "material_id": "6d915192-3a43-11e7-bb75-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            },
+            "3": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "GroundFloor_[1969, 1978]_heavy": {
+        "building_age_group": [
+            1969,
+            1978
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "cement_floating_screed_2_bottom",
+                    "material_id": "6755e6e6-3a43-11e7-adad-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "GroundFloor_[1969, 1978]_light": {
+        "building_age_group": [
+            1969,
+            1978
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "oak_radial",
+                    "material_id": "25c7fc26-3a43-11e7-a87a-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.2,
+                "material": {
+                    "name": "wooden_beams_with_insulation",
+                    "material_id": "6d473498-3a43-11e7-83d8-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "GroundFloor_[1979, 1983]_heavy": {
+        "building_age_group": [
+            1979,
+            1983
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "cement_floating_screed_2_bottom",
+                    "material_id": "6755e6e6-3a43-11e7-adad-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "GroundFloor_[1979, 1983]_light": {
+        "building_age_group": [
+            1979,
+            1983
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "oak_radial",
+                    "material_id": "25c7fc26-3a43-11e7-a87a-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.2,
+                "material": {
+                    "name": "wooden_beams_with_insulation",
+                    "material_id": "6d473498-3a43-11e7-83d8-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "GroundFloor_[1984, 1994]_heavy": {
+        "building_age_group": [
+            1984,
+            1994
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "cement_floating_screed_2_bottom",
+                    "material_id": "6755e6e6-3a43-11e7-adad-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.05,
+                "material": {
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "GroundFloor_[1984, 1994]_light": {
+        "building_age_group": [
+            1984,
+            1994
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "cement_floating_screed_2_bottom",
+                    "material_id": "6755e6e6-3a43-11e7-adad-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "footstep_sound_insulation",
+                    "material_id": "6de50a06-3a43-11e7-a3c8-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "fibreboard",
+                    "material_id": "4eb565fa-3a43-11e7-a413-2cd444b2e704"
+                }
+            },
+            "3": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "wooden_beams_with_insulation",
+                    "material_id": "6d473498-3a43-11e7-83d8-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "GroundFloor_[1995, 2015]_heavy": {
+        "building_age_group": [
+            1995,
+            2015
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "cement_floating_screed_2_bottom",
+                    "material_id": "6755e6e6-3a43-11e7-adad-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "GroundFloor_[1995, 2015]_light": {
+        "building_age_group": [
+            1995,
+            2015
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "cement_floating_screed_2_bottom",
+                    "material_id": "6755e6e6-3a43-11e7-adad-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "footstep_sound_insulation",
+                    "material_id": "6de50a06-3a43-11e7-a3c8-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "fibreboard",
+                    "material_id": "4eb565fa-3a43-11e7-a413-2cd444b2e704"
+                }
+            },
+            "3": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "wooden_beams_with_insulation",
+                    "material_id": "6d473498-3a43-11e7-83d8-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "InnerWall_[0, 1918]_heavy": {
+        "building_age_group": [
+            0,
+            1918
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "gypsum",
+                    "material_id": "26ea0874-3a43-11e7-9488-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "solid_brick_k",
+                    "material_id": "5e1eefa4-3a43-11e7-a5cf-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "gypsum",
+                    "material_id": "26ea0874-3a43-11e7-9488-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "InnerWall_[0, 1918]_light": {
+        "building_age_group": [
+            0,
+            1918
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "layer": {
+            "0": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "clay_plaster",
+                    "material_id": "33d4c37a-3a43-11e7-a293-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.1,
+                "material": {
+                    "name": "fibrous_loam_1200",
+                    "material_id": "266228a4-3a43-11e7-acde-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "clay_plaster",
+                    "material_id": "33d4c37a-3a43-11e7-a293-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "InnerWall_[1919, 1948]_heavy": {
+        "building_age_group": [
+            1919,
+            1948
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "gypsum",
+                    "material_id": "26ea0874-3a43-11e7-9488-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "solid_brick_k",
+                    "material_id": "5e1eefa4-3a43-11e7-a5cf-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "gypsum",
+                    "material_id": "26ea0874-3a43-11e7-9488-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "InnerWall_[1919, 1948]_light": {
+        "building_age_group": [
+            1919,
+            1948
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "layer": {
+            "0": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "clay_plaster",
+                    "material_id": "33d4c37a-3a43-11e7-a293-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.1,
+                "material": {
+                    "name": "fibrous_loam_1200",
+                    "material_id": "266228a4-3a43-11e7-acde-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "clay_plaster",
+                    "material_id": "33d4c37a-3a43-11e7-a293-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "InnerWall_[1949, 1968]_heavy": {
+        "building_age_group": [
+            1949,
+            1968
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "gypsum",
+                    "material_id": "26ea0874-3a43-11e7-9488-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "hollow_CMU_Vermiculit_1200",
+                    "material_id": "5751bba2-3a43-11e7-89db-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "gypsum",
+                    "material_id": "26ea0874-3a43-11e7-9488-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "InnerWall_[1949, 1968]_light": {
+        "building_age_group": [
+            1949,
+            1968
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "gypsum",
+                    "material_id": "26ea0874-3a43-11e7-9488-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "hollow_CMU_Vermiculit_1200",
+                    "material_id": "5751bba2-3a43-11e7-89db-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "gypsum",
+                    "material_id": "26ea0874-3a43-11e7-9488-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "InnerWall_[1969, 1978]_heavy": {
+        "building_age_group": [
+            1969,
+            1978
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "layer": {
+            "0": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.1,
+                "material": {
+                    "name": "concrete_wz05",
+                    "material_id": "249f131a-3a43-11e7-b4e6-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "InnerWall_[1969, 1978]_light": {
+        "building_age_group": [
+            1969,
+            1978
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "layer": {
+            "0": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "fibreboard",
+                    "material_id": "4eb565fa-3a43-11e7-a413-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.05,
+                "material": {
+                    "name": "air",
+                    "material_id": "6cb62e70-3a43-11e7-a790-2cd444b2e704"
+                }
+            },
+            "3": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "InnerWall_[1979, 1983]_heavy": {
+        "building_age_group": [
+            1979,
+            1983
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "layer": {
+            "0": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "vertical_core_brick_700",
+                    "material_id": "291e6c06-3a43-11e7-ac4a-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "InnerWall_[1979, 1983]_light": {
+        "building_age_group": [
+            1979,
+            1983
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "layer": {
+            "0": {
+                "thickness": 0.0125,
+                "material": {
+                    "name": "plasterboard",
+                    "material_id": "27068cc0-3a43-11e7-bc9e-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.07,
+                "material": {
+                    "name": "mineral_wool_040",
+                    "material_id": "35d01e70-3a43-11e7-a6cf-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.0125,
+                "material": {
+                    "name": "plasterboard",
+                    "material_id": "27068cc0-3a43-11e7-bc9e-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "InnerWall_[1984, 1994]_heavy": {
+        "building_age_group": [
+            1984,
+            1994
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "layer": {
+            "0": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "vertical_core_brick_700",
+                    "material_id": "291e6c06-3a43-11e7-ac4a-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "InnerWall_[1984, 1994]_light": {
+        "building_age_group": [
+            1984,
+            1994
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "layer": {
+            "0": {
+                "thickness": 0.0125,
+                "material": {
+                    "name": "plasterboard",
+                    "material_id": "27068cc0-3a43-11e7-bc9e-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.07,
+                "material": {
+                    "name": "mineral_wool_040",
+                    "material_id": "35d01e70-3a43-11e7-a6cf-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.0125,
+                "material": {
+                    "name": "plasterboard",
+                    "material_id": "27068cc0-3a43-11e7-bc9e-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "InnerWall_[1995, 2015]_heavy": {
+        "building_age_group": [
+            1995,
+            2015
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "layer": {
+            "0": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "vertical_core_brick_700",
+                    "material_id": "291e6c06-3a43-11e7-ac4a-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "InnerWall_[1995, 2015]_light": {
+        "building_age_group": [
+            1995,
+            2015
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "layer": {
+            "0": {
+                "thickness": 0.0125,
+                "material": {
+                    "name": "plasterboard",
+                    "material_id": "27068cc0-3a43-11e7-bc9e-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.07,
+                "material": {
+                    "name": "mineral_wool_040",
+                    "material_id": "35d01e70-3a43-11e7-a6cf-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.0125,
+                "material": {
+                    "name": "plasterboard",
+                    "material_id": "27068cc0-3a43-11e7-bc9e-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Ceiling_[0, 1918]_heavy": {
+        "building_age_group": [
+            0,
+            1918
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.18,
+                "material": {
+                    "name": "concrete_wz05",
+                    "material_id": "249f131a-3a43-11e7-b4e6-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.05,
+                "material": {
+                    "name": "oak_radial",
+                    "material_id": "25c7fc26-3a43-11e7-a87a-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Ceiling_[0, 1918]_light": {
+        "building_age_group": [
+            0,
+            1918
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "wooden_beams_with_air_and_clay",
+                    "material_id": "6d915192-3a43-11e7-bb75-2cd444b2e704"
+                }
+            },
+            "3": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Ceiling_[1919, 1948]_heavy": {
+        "building_age_group": [
+            1919,
+            1948
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.18,
+                "material": {
+                    "name": "concrete_wz05",
+                    "material_id": "249f131a-3a43-11e7-b4e6-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.05,
+                "material": {
+                    "name": "oak_radial",
+                    "material_id": "25c7fc26-3a43-11e7-a87a-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Ceiling_[1919, 1948]_light": {
+        "building_age_group": [
+            1919,
+            1948
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "wooden_beams_with_air_and_clay",
+                    "material_id": "6d915192-3a43-11e7-bb75-2cd444b2e704"
+                }
+            },
+            "3": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Ceiling_[1949, 1968]_heavy": {
+        "building_age_group": [
+            1949,
+            1968
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.18,
+                "material": {
+                    "name": "concrete_wz05",
+                    "material_id": "249f131a-3a43-11e7-b4e6-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "oak_radial",
+                    "material_id": "25c7fc26-3a43-11e7-a87a-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Ceiling_[1949, 1968]_light": {
+        "building_age_group": [
+            1949,
+            1968
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.2,
+                "material": {
+                    "name": "wooden_beams_with_air_and_clay",
+                    "material_id": "6d915192-3a43-11e7-bb75-2cd444b2e704"
+                }
+            },
+            "3": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Ceiling_[1969, 1978]_heavy": {
+        "building_age_group": [
+            1969,
+            1978
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "cement_floating_screed_2_bottom",
+                    "material_id": "6755e6e6-3a43-11e7-adad-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Ceiling_[1969, 1978]_light": {
+        "building_age_group": [
+            1969,
+            1978
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.0125,
+                "material": {
+                    "name": "plasterboard",
+                    "material_id": "27068cc0-3a43-11e7-bc9e-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.2,
+                "material": {
+                    "name": "wooden_beams_with_insulation",
+                    "material_id": "6d473498-3a43-11e7-83d8-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "oak_radial",
+                    "material_id": "25c7fc26-3a43-11e7-a87a-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Ceiling_[1979, 1983]_heavy": {
+        "building_age_group": [
+            1979,
+            1983
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "cement_floating_screed_2_bottom",
+                    "material_id": "6755e6e6-3a43-11e7-adad-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Ceiling_[1979, 1983]_light": {
+        "building_age_group": [
+            1979,
+            1983
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.2,
+                "material": {
+                    "name": "wooden_beams_with_insulation",
+                    "material_id": "6d473498-3a43-11e7-83d8-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "oak_radial",
+                    "material_id": "25c7fc26-3a43-11e7-a87a-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Ceiling_[1984, 1994]_heavy": {
+        "building_age_group": [
+            1984,
+            1994
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "cement_floating_screed_2_bottom",
+                    "material_id": "6755e6e6-3a43-11e7-adad-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Ceiling_[1984, 1994]_light": {
+        "building_age_group": [
+            1984,
+            1994
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "wooden_beams_with_insulation",
+                    "material_id": "6d473498-3a43-11e7-83d8-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "fibreboard",
+                    "material_id": "4eb565fa-3a43-11e7-a413-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "footstep_sound_insulation",
+                    "material_id": "6de50a06-3a43-11e7-a3c8-2cd444b2e704"
+                }
+            },
+            "3": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "cement_floating_screed_2_bottom",
+                    "material_id": "6755e6e6-3a43-11e7-adad-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Ceiling_[1995, 2015]_heavy": {
+        "building_age_group": [
+            1995,
+            2015
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "cement_floating_screed_2_bottom",
+                    "material_id": "6755e6e6-3a43-11e7-adad-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Ceiling_[1995, 2015]_light": {
+        "building_age_group": [
+            1995,
+            2015
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "wooden_beams_with_insulation",
+                    "material_id": "6d473498-3a43-11e7-83d8-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "fibreboard",
+                    "material_id": "4eb565fa-3a43-11e7-a413-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "footstep_sound_insulation",
+                    "material_id": "6de50a06-3a43-11e7-a3c8-2cd444b2e704"
+                }
+            },
+            "3": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "cement_floating_screed_2_bottom",
+                    "material_id": "6755e6e6-3a43-11e7-adad-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Floor_[0, 1918]_heavy": {
+        "building_age_group": [
+            0,
+            1918
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.05,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.18,
+                "material": {
+                    "name": "concrete_wz05",
+                    "material_id": "249f131a-3a43-11e7-b4e6-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Floor_[0, 1918]_light": {
+        "building_age_group": [
+            0,
+            1918
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "wooden_beams_with_air_and_clay",
+                    "material_id": "6d915192-3a43-11e7-bb75-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            },
+            "3": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Floor_[1919, 1948]_heavy": {
+        "building_age_group": [
+            1919,
+            1948
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.05,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.18,
+                "material": {
+                    "name": "concrete_wz05",
+                    "material_id": "249f131a-3a43-11e7-b4e6-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Floor_[1919, 1948]_light": {
+        "building_age_group": [
+            1919,
+            1948
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.2,
+                "material": {
+                    "name": "wooden_beams_with_air_and_clay",
+                    "material_id": "6d915192-3a43-11e7-bb75-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            },
+            "3": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Floor_[1949, 1968]_heavy": {
+        "building_age_group": [
+            1949,
+            1968
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "oak_radial",
+                    "material_id": "25c7fc26-3a43-11e7-a87a-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.18,
+                "material": {
+                    "name": "concrete_wz05",
+                    "material_id": "249f131a-3a43-11e7-b4e6-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Floor_[1949, 1968]_light": {
+        "building_age_group": [
+            1949,
+            1968
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.2,
+                "material": {
+                    "name": "wooden_beams_with_air_and_clay",
+                    "material_id": "6d915192-3a43-11e7-bb75-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.024,
+                "material": {
+                    "name": "hardwood",
+                    "material_id": "28d22c7e-3a43-11e7-9085-2cd444b2e704"
+                }
+            },
+            "3": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Floor_[1969, 1978]_heavy": {
+        "building_age_group": [
+            1969,
+            1978
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.3,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.05,
+                "material": {
+                    "name": "foam_glass_board_130",
+                    "material_id": "48037df6-3a43-11e7-bd90-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Floor_[1969, 1978]_light": {
+        "building_age_group": [
+            1969,
+            1978
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "oak_radial",
+                    "material_id": "25c7fc26-3a43-11e7-a87a-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.2,
+                "material": {
+                    "name": "wooden_beams_with_insulation",
+                    "material_id": "6d473498-3a43-11e7-83d8-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.0125,
+                "material": {
+                    "name": "plasterboard",
+                    "material_id": "27068cc0-3a43-11e7-bc9e-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Floor_[1979, 1983]_heavy": {
+        "building_age_group": [
+            1979,
+            1983
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "cement_floating_screed_2_bottom",
+                    "material_id": "6755e6e6-3a43-11e7-adad-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Floor_[1979, 1983]_light": {
+        "building_age_group": [
+            1979,
+            1983
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "oak_radial",
+                    "material_id": "25c7fc26-3a43-11e7-a87a-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.2,
+                "material": {
+                    "name": "wooden_beams_with_insulation",
+                    "material_id": "6d473498-3a43-11e7-83d8-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Floor_[1984, 1994]_heavy": {
+        "building_age_group": [
+            1984,
+            1994
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "cement_floating_screed_2_bottom",
+                    "material_id": "6755e6e6-3a43-11e7-adad-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Floor_[1984, 1994]_light": {
+        "building_age_group": [
+            1984,
+            1994
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "cement_floating_screed_2_bottom",
+                    "material_id": "6755e6e6-3a43-11e7-adad-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "footstep_sound_insulation",
+                    "material_id": "6de50a06-3a43-11e7-a3c8-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "fibreboard",
+                    "material_id": "4eb565fa-3a43-11e7-a413-2cd444b2e704"
+                }
+            },
+            "3": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "wooden_beams_with_insulation",
+                    "material_id": "6d473498-3a43-11e7-83d8-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Floor_[1995, 2015]_heavy": {
+        "building_age_group": [
+            1995,
+            2015
+        ],
+        "construction_type": "heavy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "cement_floating_screed_2_bottom",
+                    "material_id": "6755e6e6-3a43-11e7-adad-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Floor_[1995, 2015]_light": {
+        "building_age_group": [
+            1995,
+            2015
+        ],
+        "construction_type": "light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "cement_floating_screed_2_bottom",
+                    "material_id": "6755e6e6-3a43-11e7-adad-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.03,
+                "material": {
+                    "name": "footstep_sound_insulation",
+                    "material_id": "6de50a06-3a43-11e7-a3c8-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "fibreboard",
+                    "material_id": "4eb565fa-3a43-11e7-a413-2cd444b2e704"
+                }
+            },
+            "3": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "wooden_beams_with_insulation",
+                    "material_id": "6d473498-3a43-11e7-83d8-2cd444b2e704"
+                }
+            }
+        }
+    }
+}

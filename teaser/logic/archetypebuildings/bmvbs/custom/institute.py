@@ -54,6 +54,15 @@ class Institute(Office):
         If set to True, an empty instance of BuildingAHU is instantiated and
         assigned to attribute central_ahu. This instance holds information for
         central Air Handling units. Default is False.
+    internal_gains_mode: int [1, 2, 3]
+        mode for the internal gains calculation by persons:
+        1: Temperature and activity degree dependent calculation. The
+           calculation is based on  SIA 2024 (default)
+        2: Temperature and activity degree independent calculation, the max.
+           heatflowrate is prescribed by the parameter
+           fixed_heat_flow_rate_persons.
+        3: Temperature and activity degree dependent calculation with
+           consideration of moisture. The calculation is based on SIA 2024
     office_layout : int
         Structure of the floor plan of office buildings, default is 1,
         which is representative for one elongated floor.
@@ -82,7 +91,7 @@ class Institute(Office):
 
     zone_area_factors : dict
         This dictionary contains the name of the zone (str), the
-        zone area factor (float) and the zone usage from BoundaryConditions XML
+        zone area factor (float) and the zone usage from BoundaryConditions json
         (str). (Default see doc string above)
     outer_wall_names : dict
         This dictionary contains a random name for the outer walls,
@@ -120,48 +129,56 @@ class Institute(Office):
         estimation factor exponent to calculate window area
     """
 
-    def __init__(self,
-                 parent,
-                 name=None,
-                 year_of_construction=None,
-                 number_of_floors=None,
-                 height_of_floors=None,
-                 net_leased_area=None,
-                 with_ahu=False,
-                 office_layout=None,
-                 window_layout=None,
-                 construction_type=None):
+    def __init__(
+        self,
+        parent,
+        name=None,
+        year_of_construction=None,
+        number_of_floors=None,
+        height_of_floors=None,
+        net_leased_area=None,
+        with_ahu=True,
+        internal_gains_mode=1,
+        office_layout=None,
+        window_layout=None,
+        construction_type=None,
+    ):
         """Constructor of Institute
 
         Adds an additional zone "Laboratory"
 
         """
 
-        super(Institute, self).__init__(parent,
-                                        name,
-                                        year_of_construction,
-                                        number_of_floors,
-                                        height_of_floors,
-                                        net_leased_area,
-                                        with_ahu,
-                                        office_layout,
-                                        window_layout,
-                                        construction_type)
+        super(Institute, self).__init__(
+            parent,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu,
+            internal_gains_mode,
+            office_layout,
+            window_layout,
+            construction_type,
+        )
 
-        self.zone_area_factors["Office"] = \
-            [0.16, "Group Office (between 2 and 6 employees)"]
-        self.zone_area_factors["Floor"] = \
-            [0.19, "Traffic area"]
-        self.zone_area_factors["Laboratory"] = \
-            [0.15, "Laboratory"]
-        self.zone_area_factors["Storage"] = \
-            [0.4, "Stock, technical equipment, archives"]
-        self.zone_area_factors["Meeting"] = \
-            [0.04, "Meeting, Conference, seminar"]
-        self.zone_area_factors["Restroom"] = \
-            [0.04, "WC and sanitary rooms in non-residential buildings"]
-        self.zone_area_factors["ICT"] = \
-            [0.02, "Data center"]
+        self.zone_area_factors["Office"] = [
+            0.16,
+            "Group Office (between 2 and 6 employees)",
+        ]
+        self.zone_area_factors["Floor"] = [0.19, "Traffic area"]
+        self.zone_area_factors["Laboratory"] = [0.15, "Laboratory"]
+        self.zone_area_factors["Storage"] = [
+            0.4,
+            "Stock, technical equipment, archives",
+        ]
+        self.zone_area_factors["Meeting"] = [0.04, "Meeting, Conference, seminar"]
+        self.zone_area_factors["Restroom"] = [
+            0.04,
+            "WC and sanitary rooms in non-residential buildings",
+        ]
+        self.zone_area_factors["ICT"] = [0.02, "Data center"]
 
         self.est_exponent_wall = 0.6601
         self.est_factor_wall_area = 11.243
