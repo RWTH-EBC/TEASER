@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="teaser",
-    version="0.7.0",
+    version="0.7.1",
     description="Tool for Energy Analysis and Simulation for " "Efficient Retrofit ",
     url="https://github.com/RWTH-EBC/TEASER",
     author="RWTH Aachen University, E.ON Energy Research Center, "
@@ -73,11 +73,8 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: Microsoft :: Windows",
         "Operating System :: POSIX :: Linux",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3.3",
-        "Programming Language :: Python :: 3.4",
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
         "Intended Audience :: Science/Research",
         "Topic :: Software Development :: Code Generators",
         "Topic :: Scientific/Engineering",
