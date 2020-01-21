@@ -183,8 +183,11 @@ class OneElement(object):
         facing the thermal zone and the ambient.
     weighted_g_value : float
         Area-weighted g-Value of all windows.
-    g_sunblind : list of floats
-        G-Value of all sunblinds of each window in a list
+    shading_max_irr : list of float [W/m2]
+        Threshold when sunblind becomes active for the whole zone
+    shading_g_total : list of float
+        Factor representing how much of the solar irradiation goes through
+        the sunblind
 
     Misc values:
 
@@ -304,7 +307,8 @@ class OneElement(object):
         self.weightfactor_win = []
         self.window_areas = []
         self.transparent_areas = []
-        self.g_sunblind = []
+        self.shading_g_total = []
+        self.shading_max_irr = []
         self.weighted_g_value = 0.0
 
         # Misc values
@@ -913,13 +917,11 @@ class OneElement(object):
 
             if not wins:
                 self.weightfactor_win.append(0.0)
-                self.g_sunblind.append(0.0)
+                self.shading_g_total.append(0.0)
                 self.window_areas.append(0.0)
                 self.transparent_areas.append(0.0)
             else:
                 self.weightfactor_win.append(sum([win.wf_out for win in wins]))
-                self.g_sunblind.append(sum([win.shading_g_total for win in wins]))
-
                 if self.merge_windows is False:
                     self.window_areas.append(sum([win.area for win in wins]))
                     self.transparent_areas.append(sum([win.area for win in wins]))
@@ -927,6 +929,22 @@ class OneElement(object):
                 else:
                     self.window_areas.append(0)
                     self.transparent_areas.append(sum([win.area for win in wins]))
+                self.shading_g_total.append(
+                    sum(
+                        [
+                            win.shading_g_total * win.area / self.window_areas
+                            for win in wins
+                        ]
+                    )
+                )
+                self.shading_max_irr.append(
+                    sum(
+                        [
+                            win.shading_max_irr * win.area / self.window_areas
+                            for win in wins
+                        ]
+                    )
+                )
 
     def _calc_heat_load(self):
         """Static heat load calculation
@@ -1051,7 +1069,8 @@ class OneElement(object):
         self.weightfactor_win = []
         self.window_areas = []
         self.transparent_areas = []
-        self.g_sunblind = []
+        self.shading_g_total = []
+        self.shading_max_irr = []
         self.weighted_g_value = 0.0
 
         # Misc values

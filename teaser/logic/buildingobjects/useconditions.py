@@ -161,11 +161,7 @@ class UseConditions(object):
     schedules: pandas.DataFrame
         All time dependent boundary attributes in one pandas DataFrame, used
         for export (one year in hourly timestep.)
-    shading_max_irr : float [W/m2]
-        Threshold when sunblind becomes active for the whole zone
-    shading_g_total : float
-        Factor representing how much of the solar irradiation goes through
-        the sunblind
+
 
     """
 
@@ -208,8 +204,6 @@ class UseConditions(object):
         self.with_ahu = False
 
         self._with_ideal_thresholds = False
-        self.shading_max_irr = 100
-        self.shading_g_total = 1.0
 
         self._heating_profile = [
             294.15,
