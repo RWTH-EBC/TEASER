@@ -135,10 +135,9 @@ def export_ibpsa(
         for zone in bldg.thermal_zones:
 
             zone.parent.library_attr.file_internal_gains = \
-                'InternalGains_' + bldg.name + zone.name + '.mat'
+                'InternalGains_' + bldg.name + zone.name + '.txt'
             bldg.library_attr.modelica_gains_boundary(
                 zone=zone,
-                time_line=None,
                 path=zone_path)
 
             out_file = open(utilities.get_full_path(os.path.join(

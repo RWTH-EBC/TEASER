@@ -1,14 +1,11 @@
 language: python
 python:
-- 2.7
-- 3.4
-- 3.5
 - 3.6
+- 3.7
 install:
   - pip install --upgrade pip setuptools wheel
-  - pip install --only-binary=numpy,scipy numpy scipy
-  - pip install pyxb
-  - pip install -e .
+  - pip install --only-binary=numpy,scipy,cython numpy scipy cython
+  - pip install --no-use-pep517 -e .
   - pip install pytest-cov
   - pip install coveralls
   - pip install PyGithub==1.39
@@ -16,11 +13,17 @@ install:
 
 before_script:
   - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests --max-line-length=120
+master:
+  script:
+  - py.test --cov=teaser
+  after_success:
+  - coveralls
 
 script:
-- py.test --cov=teaser
+- py.test --cov=teaser --ignore=tests/test_modelicaversion.py
 after_success:
 - coveralls
+
 deploy:
   provider: pypi
   user: teaser_github
@@ -29,3 +32,4 @@ deploy:
   on:
     tags: true
     all_branches: true
+    python: "3.6"

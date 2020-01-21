@@ -46,6 +46,15 @@ class TerracedHouse(SingleFamilyHouse):
         If set to True, an empty instance of BuildingAHU is instantiated and
         assigned to attribute central_ahu. This instance holds information for
         central Air Handling units. Default is False.
+    internal_gains_mode: int [1, 2, 3]
+        mode for the internal gains calculation by persons:
+        1: Temperature and activity degree dependent calculation. The
+           calculation is based on  SIA 2024 (default)
+        2: Temperature and activity degree independent calculation, the max.
+           heatflowrate is prescribed by the parameter
+           fixed_heat_flow_rate_persons.
+        3: Temperature and activity degree dependent calculation with
+           consideration of moisture. The calculation is based on SIA 2024
     construction_type : str
         Construction type of used wall constructions default is "existing
         state"
@@ -68,6 +77,7 @@ class TerracedHouse(SingleFamilyHouse):
             height_of_floors=None,
             net_leased_area=None,
             with_ahu=False,
+            internal_gains_mode=1,
             construction_type=None):
 
         super(TerracedHouse, self).__init__(
@@ -78,6 +88,7 @@ class TerracedHouse(SingleFamilyHouse):
             height_of_floors,
             net_leased_area,
             with_ahu,
+            internal_gains_mode,
             construction_type)
 
         self.construction_type = construction_type
@@ -242,11 +253,11 @@ class TerracedHouse(SingleFamilyHouse):
         self.building_age_group = None
 
         if self.with_ahu is True:
-            self.central_ahu.profile_temperature = (
+            self.central_ahu.temperature_profile = (
                 7 * [293.15] +
                 12 * [295.15] +
                 6 * [293.15])
-            self.central_ahu.profile_min_relative_humidity = (25 * [0.45])
-            self.central_ahu.profile_max_relative_humidity = (25 * [0.55])
-            self.central_ahu.profile_v_flow = (
+            self.central_ahu.min_relative_humidity_profile = (25 * [0.45])
+            self.central_ahu.max_relative_humidity_profile = (25 * [0.55])
+            self.central_ahu.v_flow_profile = (
                 7 * [0.0] + 12 * [1.0] + 6 * [0.0])

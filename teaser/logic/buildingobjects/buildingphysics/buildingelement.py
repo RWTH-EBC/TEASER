@@ -1,14 +1,8 @@
-# created June 2015
-# by TEASER4 Development Team
-
-"""BuildingElement
-
-This module contains the Base class for all building elements.
-"""
+"""This module contains the Base class for all building elements."""
 
 from __future__ import division
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
-import teaser.data.input.buildingelement_input as buildingelement_input
+import teaser.data.input.buildingelement_input_json as buildingelement_input
 import numpy as np
 import random
 import re
@@ -282,7 +276,7 @@ class BuildingElement(object):
         """Typical element loader.
 
         Loads typical building elements according to their construction
-        year and their construction type from a XML.
+        year and their construction type from a json.
 
         This function will only work if the parents to Building are set.
 
@@ -323,7 +317,7 @@ class BuildingElement(object):
         """Typical element saver.
 
         Saves typical building elements according to their construction
-        year and their construction type in the the XML file for type building
+        year and their construction type in the the json file for type building
         elements. If the Project parent is set, it automatically saves it to
         the file given in Project.data. Alternatively you can specify a path to
         a file of TypeBuildingElements. If this file does not exist,
@@ -356,7 +350,7 @@ class BuildingElement(object):
         """Deletes typical element.
 
         Deletes typical building elements according to their construction
-        year and their construction type in the the XML file for type building
+        year and their construction type in the the json file for type building
         elements. If the Project parent is set, it automatically saves it to
         the file given in Project.data. Alternatively you can specify a path to
         a file of TypeBuildingElements. If this file does not exist,
@@ -410,8 +404,15 @@ class BuildingElement(object):
     @name.setter
     def name(self, value):
         if isinstance(value, str):
-            regex = re.compile('[^a-zA-z0-9]')
-            self._name = regex.sub('', value)
+
+            if value:
+                regex = re.compile('[^a-zA-z0-9]')
+                self._name = regex.sub('', value)
+                if self._name == "None":
+                    self._name = "BuildinElement" + str(
+                        random.randint(1, 500000))
+        elif value is None:
+            self._value = "BuildinElement" + str(random.randint(1, 500000))
         else:
             try:
                 value = str(value)

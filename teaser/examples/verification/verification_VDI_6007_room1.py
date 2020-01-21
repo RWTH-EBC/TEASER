@@ -1,8 +1,5 @@
-# Created July 2015
-# TEASER Development Team
-
 """
-This script loads the VDI 6007 Room 1 as *.teaserXML and computes
+This script loads the VDI 6007 Room 1 as *.teaserjson and computes
 parameters. The parameters are then compared with the ones from Rouvel
 """
 
@@ -16,7 +13,7 @@ def parameter_room1():
     prj.name = "VDI_Verification_Room1"
 
     prj.load_project(utilities.get_full_path(
-        "examples/examplefiles/VDI6007_Room1.teaserXML"))
+        "examples/examplefiles/VDI6007_Room1.json"))
 
     prj.buildings[0].calc_building_parameter(
         number_of_elements=2,
@@ -32,6 +29,7 @@ if __name__ == "__main__":
     """
     parameters inner wall Typraum S
     """
+
     print("Parameters for inner wall")
     print("r1_iw:", prj.buildings[0].thermal_zones[0].model_attr.r1_iw,
           "K/W ---", "Rouvel: 0.000595515 K/W")
@@ -54,7 +52,7 @@ if __name__ == "__main__":
     print("c1_ow: ", prj.buildings[0].thermal_zones[0].model_attr.c1_ow / 1000,
           "kJ/K ---", "Rouvel: 1600.8 kJ/K")
     print("area_ow+area_win: ", prj.buildings[0].thermal_zones[
-        0].model_attr.area_ow * prj.buildings[0].thermal_zones[
+        0].model_attr.area_ow + prj.buildings[0].thermal_zones[
         0].model_attr.area_win,
         "m2 ---", "Rouvel: 10.5 m2")
     print("alpha_conv_inner_ow: ",

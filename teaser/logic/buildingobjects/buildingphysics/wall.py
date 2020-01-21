@@ -1,7 +1,4 @@
-# created June 2015
-# by TEASER4 Development Team
-
-
+"""asd"""
 from teaser.logic.buildingobjects.buildingphysics.buildingelement \
     import BuildingElement
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
