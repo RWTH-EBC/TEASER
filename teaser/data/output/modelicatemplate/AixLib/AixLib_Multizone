@@ -3,8 +3,7 @@ within ${bldg.parent.name}.${bldg.name};
 model ${bldg.name}
   "This is the simulation model of ${bldg.name} with traceable ID ${bldg.building_id}"
 
-% if bldg.internal_gains_mode==1 or bldg.internal_gains_mode==2:
-  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
+  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneSimpleHRS multizoneSimpleHRS(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
     buildingID=${bldg.building_id},
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -13,76 +12,16 @@ model ${bldg.name}
     ABuilding=${bldg.net_leased_area},
     ASurTot=${bldg.library_attr.total_surface_area},
     numZones = ${len(bldg.thermal_zones)},
-    internalGainsMode = ${bldg.internal_gains_mode},
+    pinchT=2,
+    etaHRS=${bldg.efficiency_recovery},
     zoneParam = {
       %for zone in bldg.thermal_zones:
       ${bldg.name}_DataBase.${bldg.name}_${zone.name}()${',' if not loop.last else ''}
       %endfor
       },
-%else:
-  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirEquipped multizone(
-    redeclare package Medium = AixLib.Media.Air,
-    buildingID=${bldg.building_id},
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_start = ${bldg.thermal_zones[0].t_inside},
-    VAir = ${bldg.volume},
-    ABuilding=${bldg.net_leased_area},
-    ASurTot=${bldg.library_attr.total_surface_area},
-    numZones = ${len(bldg.thermal_zones)},
-    internalGainsMode = ${bldg.internal_gains_mode},
-    zoneParam = {
-      %for zone in bldg.thermal_zones:
-      ${bldg.name}_DataBase.${bldg.name}_${zone.name}()${',' if not loop.last else ''}
-      %endfor
-      },
-% endif
-% if bldg.with_ahu:
-  heatAHU=${get_true_false(bldg.central_ahu.heating)},
-  coolAHU=${get_true_false(bldg.central_ahu.cooling)},
-  dehuAHU=${get_true_false(bldg.central_ahu.dehumidification)},
-  huAHU=${get_true_false(bldg.central_ahu.humidification)},
-  BPFDehuAHU=${bldg.central_ahu.by_pass_dehumidification},
-  HRS=${get_true_false(bldg.central_ahu.heat_recovery)},
-  sampleRateAHU=${bldg.central_ahu.sample_rate},
-  effFanAHU_sup=${bldg.central_ahu.efficiency_fan_supply},
-  effFanAHU_eta=${bldg.central_ahu.efficiency_fan_return},
-  effHRSAHU_enabled=${bldg.central_ahu.efficiency_recovery},
-  effHRSAHU_disabled=${bldg.central_ahu.efficiency_recovery_false},
-  dpAHU_sup=${bldg.central_ahu.pressure_drop_fan_supply},
-  dpAHU_eta=${bldg.central_ahu.pressure_drop_fan_return},
-% else:
-  heatAHU = false,
-  coolAHU = false,
-  dehuAHU = false,
-  huAHU = false,
-  BPFDehuAHU = 0.2,
-  HRS = false,
-  sampleRateAHU=1800,
-  effFanAHU_sup=0.7,
-  effFanAHU_eta=0.7,
-  effHRSAHU_enabled = 0.8,
-  effHRSAHU_disabled = 0.2,
-  dpAHU_sup=800,
-  dpAHU_eta=800,
-% endif
-  zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
-           intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
-           (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
-           der_T(fixed=true))))),
-% if bldg.internal_gains_mode==1 or bldg.internal_gains_mode==2:
-   redeclare model thermalZone =
-        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneAirExchange,
-% else:
-   redeclare model thermalZone =
-        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirExchange,
-% endif
-   redeclare model corG =
-        AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane,
-% if bldg.central_ahu:
-  redeclare model AHUMod = AixLib.Airflow.AirHandlingUnit.AHU)
-% else:
-  redeclare model AHUMod = AixLib.Airflow.AirHandlingUnit.NoAHU)
-% endif
+    zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
+            thermCapInt(each der_T(fixed=true))))),
+    internalGainsMode=1)
     "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
 
@@ -93,7 +32,16 @@ model ${bldg.name}
       "${weather.replace("\\", "/")}")
     "Weather data reader"
     annotation (Placement(transformation(extent={{-82,30},{-62,50}})));
-
+AixLib.BoundaryConditions.WeatherData.Bus weaBus
+  "Weather data bus"
+  annotation (Placement(transformation(extent={{-68,-10},{-34,22}}),
+  iconTransformation(extent={{-70,-12},{-50,8}})));
+  Modelica.Blocks.Routing.Replicator replicatorTemperatureVentilation(nout=${len(bldg.thermal_zones)})
+    "Replicates dry bulb air temperature for numZones"
+    annotation (Placement(transformation(
+    extent={{-5,-5},{5,5}},
+    rotation=0,
+    origin={-31,-13})));
   Modelica.Blocks.Sources.CombiTimeTable tableInternalGains(
     tableOnFile=true,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
@@ -104,15 +52,22 @@ model ${bldg.name}
     "Profiles for internal gains"
     annotation (Placement(transformation(extent={{72,-42},{56,-26}})));
 
-  Modelica.Blocks.Sources.CombiTimeTable tableAHU(
-    tableOnFile=true,
-    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    tableName="AHU",
-    columns=2:5,
-    fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://${bldg.parent.name}/${bldg.name}/${bldg.library_attr.file_ahu}"))
-    "Boundary conditions for air handling unit"
-    annotation (Placement(transformation(extent={{-64,-6},{-48,10}})));
+    Modelica.Blocks.Sources.CombiTimeTable ventilationHRS(
+      tableOnFile=true,
+      extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+      tableName="ventilationHRS",
+      fileName=Modelica.Utilities.Files.loadResource(
+          "modelica://${bldg.parent.name}/${bldg.name}/${bldg.library_attr.file_ventilation_hrs}"),
+      columns=2:${len(bldg.thermal_zones)+1})
+      annotation (Placement(transformation(extent={{-22,26},{-2,46}})));
+    Modelica.Blocks.Sources.CombiTimeTable ventilationUser(
+      tableOnFile=true,
+      extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+      tableName="ventilationUser",
+      fileName=Modelica.Utilities.Files.loadResource(
+          "modelica://${bldg.parent.name}/${bldg.name}/${bldg.library_attr.file_ventilation_user}"),
+      columns=2:${len(bldg.thermal_zones)+1})
+      annotation (Placement(transformation(extent={{-22,-46},{-2,-26}})));
 
   Modelica.Blocks.Sources.CombiTimeTable tableTSet(
     tableOnFile=true,
@@ -135,23 +90,38 @@ model ${bldg.name}
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
 
 equation
-  connect(weaDat.weaBus, multizone.weaBus) annotation (Line(
-      points={{-62,40},{-32,40},{-32,6},{34,6}},
-      color={255,204,51},
-      thickness=0.5));
+connect(weaDat.weaBus,weaBus)  annotation (Line(
+     points={{-62,40},{-51,40},{-51,6}},
+     color={255,204,51},
+     thickness=0.5), Text(
+     string="%second",
+     index=1,
+     extent={{6,3},{6,3}}));
+ connect(weaDat.weaBus, multizoneSimpleHRS.weaBus) annotation (Line(
+     points={{-62,40},{-32,40},{-32,6},{34,6}},
+     color={255,204,51},
+     thickness=0.5));
+ connect(weaBus.TDryBul, replicatorTemperatureVentilation.u) annotation (Line(
+     points={{-51,6},{-44,6},{-44,-12},{-37,-12},{-37,-13}},
+     color={255,204,51},
+     thickness=0.5), Text(
+     string="%first",
+     index=-1,
+     extent={{-6,3},{-6,3}}));
 
-  connect(tableInternalGains.y, multizone.intGains)
+  connect(tableInternalGains.y, multizoneSimpleHRS.intGains)
     annotation (Line(points={{55.2,-34},{48,-34},{48,-9}}, color={0,0,127}));
 
-  connect(tableAHU.y, multizone.AHU)
-    annotation (Line(points={{-47.2,2},{14,2},{33,2}}, color={0,0,127}));
-
-  connect(tableTSet.y, multizone.TSetHeat) annotation (Line(points={{55.2,-58},
+  connect(tableTSet.y, multizoneSimpleHRS.TSetHeat) annotation (Line(points={{55.2,-58},
           {36.8,-58},{36.8,-9}}, color={0,0,127}));
 
-  connect(tableTSetCool.y, multizone.TSetCool) annotation (Line(points={{55.2,-58},
-          {36.8,-58},{36.8,-9}}, color={0,0,127}));
-
+  connect(replicatorTemperatureVentilation.y, multizoneSimpleHRS.ventTemp)
+    annotation (Line(points={{-25.5,-13},{8,-13},{8,2},{33,2}}, color={0,0,127}));
+  connect(tableTSetCool.y, multizoneSimpleHRS.TSetCool) annotation (Line(points={{55.2,-58}, {36.8,-58},{36.8,-9}}, color={0,0,127}));
+  connect(ventilationHRS.y, multizoneSimpleHRS.ventHRS) annotation (Line(points
+        ={{-1,36},{18,36},{18,4.4},{33,4.4}}, color={0,0,127}));
+  connect(ventilationUser.y, multizoneSimpleHRS.ventRate) annotation (Line(
+        points={{1,-38},{18,-38},{18,-0.6},{33,-0.6}}, color={0,0,127}));
   annotation (experiment(
       StartTime=${str(zone.parent.parent.modelica_info.start_time)},
       StopTime=${str(zone.parent.parent.modelica_info.stop_time)},

@@ -61,6 +61,8 @@ class AixLib(object):
         self.file_set_t_cool = "TsetCool_" + self.parent.name + ".txt"
         self.file_ahu = "AHU_" + self.parent.name + ".txt"
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".txt"
+        self.file_ventilation_hrs = "VentialationHRS_" + self.parent.name + ".txt"
+        self.file_ventilation_user = "VentilationUser_" + self.parent.name + ".txt"
         self.version = "0.9.1"
         self.total_surface_area = None
         self.consider_heat_capacity = True
@@ -140,6 +142,92 @@ class AixLib(object):
             f.write("#1\n")
             f.write(
                 "double Tset({}, {})\n".format(8760, len(self.parent.thermal_zones) + 1)
+            )
+            export.to_csv(f, sep="\t", header=False, index_label=False)
+
+    def modelica_ventilation_hrs(self, path=None):
+        """Create .txt file for set temperatures for heating.
+
+        This function creates a txt for set temperatures of each
+        zone, that are all saved into one matrix.
+
+        Parameters
+        ----------
+        path : str
+            optional path, when matfile is exported separately
+
+        """
+        if path is None:
+            path = utilities.get_default_path()
+        else:
+            pass
+
+        utilities.create_path(path)
+        path = os.path.join(path, self.file_ventilation_hrs)
+
+        export = pd.DataFrame(
+            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
+            .to_series()
+            .dt.strftime("%m-%d %H:%M:%S"),
+            columns=[zone.name for zone in self.parent.thermal_zones],
+        )
+
+        for zone_count in self.parent.thermal_zones:
+            export[zone_count.name] = zone_count.use_conditions.ventilation[
+                "ventilation_hrs_profile"
+            ]
+
+        export.index = [(i + 1) * 3600 for i in range(8760)]
+        self._delete_file(path=path)
+        with open(path, "a") as f:
+            f.write("#1\n")
+            f.write(
+                "double ventilationHRS({}, {})\n".format(
+                    8760, len(self.parent.thermal_zones) + 1
+                )
+            )
+            export.to_csv(f, sep="\t", header=False, index_label=False)
+
+    def modelica_ventilation_user(self, path=None):
+        """Create .txt file for set temperatures for heating.
+
+        This function creates a txt for set temperatures of each
+        zone, that are all saved into one matrix.
+
+        Parameters
+        ----------
+        path : str
+            optional path, when matfile is exported separately
+
+        """
+        if path is None:
+            path = utilities.get_default_path()
+        else:
+            pass
+
+        utilities.create_path(path)
+        path = os.path.join(path, self.file_ventilation_user)
+
+        export = pd.DataFrame(
+            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
+            .to_series()
+            .dt.strftime("%m-%d %H:%M:%S"),
+            columns=[zone.name for zone in self.parent.thermal_zones],
+        )
+
+        for zone_count in self.parent.thermal_zones:
+            export[zone_count.name] = zone_count.use_conditions.ventilation[
+                "ventilation_user_profile"
+            ]
+
+        export.index = [(i + 1) * 3600 for i in range(8760)]
+        self._delete_file(path=path)
+        with open(path, "a") as f:
+            f.write("#1\n")
+            f.write(
+                "double ventilationUser({}, {})\n".format(
+                    8760, len(self.parent.thermal_zones) + 1
+                )
             )
             export.to_csv(f, sep="\t", header=False, index_label=False)
 

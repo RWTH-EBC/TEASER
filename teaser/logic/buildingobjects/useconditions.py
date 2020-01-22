@@ -338,6 +338,61 @@ class UseConditions(object):
             0.0,
         ]
 
+        self._ventilation_hrs_profile = [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            2.4,
+            2.4,
+            2.4,
+            2.4,
+            2.4,
+            2.4,
+            2.4,
+            2.4,
+            2.4,
+            2.4,
+            2.4,
+            2.4,
+            2.4,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+        ]
+        self._ventilation_user_profile = [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+        ]
+
         self.schedules = pd.DataFrame(
             index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
             .to_series()
@@ -348,6 +403,19 @@ class UseConditions(object):
                 "persons_profile": list(islice(cycle(self._persons_profile), 8760)),
                 "lighting_profile": list(islice(cycle(self._lighting_profile), 8760)),
                 "machines_profile": list(islice(cycle(self._machines_profile), 8760)),
+            },
+        )
+        self.ventilation = pd.DataFrame(
+            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
+            .to_series()
+            .dt.strftime("%m-%d %H:%M:%S"),
+            data={
+                "ventilation_hrs_profile": list(
+                    islice(cycle(self._ventilation_hrs_profile), 8760)
+                ),
+                "ventilation_user_profile": list(
+                    islice(cycle(self._ventilation_user_profile), 8760)
+                ),
             },
         )
 
@@ -411,6 +479,28 @@ class UseConditions(object):
             )
         else:
             self._with_ideal_thresholds = value
+
+    @property
+    def ventilation_hrs_profile(self):
+        return self._ventilation_hrs_profile
+
+    @ventilation_hrs_profile.setter
+    def ventilation_hrs_profile(self, value):
+        if not isinstance(value, list):
+            value = [value]
+        self._ventilation_hrs_profile = value
+        self.ventilation["ventilation_hrs_profile"] = list(islice(cycle(value), 8760))
+
+    @property
+    def ventilation_user_profile(self):
+        return self._ventilation_user_profile
+
+    @ventilation_user_profile.setter
+    def ventilation_user_profile(self, value):
+        if not isinstance(value, list):
+            value = [value]
+        self._ventilation_user_profile = value
+        self.ventilation["ventilation_user_profile"] = list(islice(cycle(value), 8760))
 
     @property
     def heating_profile(self):

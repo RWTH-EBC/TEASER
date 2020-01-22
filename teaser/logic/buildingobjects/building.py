@@ -132,6 +132,7 @@ class Building(object):
         self.name = name
         self.year_of_construction = year_of_construction
         self.net_leased_area = net_leased_area
+        self.efficiency_recovery = 0.8
         self._with_ahu = with_ahu
 
         if with_ahu is True:
