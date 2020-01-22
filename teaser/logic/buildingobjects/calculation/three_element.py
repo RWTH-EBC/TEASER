@@ -1231,7 +1231,7 @@ class ThreeElement(object):
                 self.shading_g_total.append(
                     sum(
                         [
-                            win.shading_g_total * win.area / self.window_areas
+                            win.shading_g_total * win.area / sum([w.area for w in wins])
                             for win in wins
                         ]
                     )
@@ -1239,7 +1239,7 @@ class ThreeElement(object):
                 self.shading_max_irr.append(
                     sum(
                         [
-                            win.shading_max_irr * win.area / self.window_areas
+                            win.shading_max_irr * win.area / sum([w.area for w in wins])
                             for win in wins
                         ]
                     )
