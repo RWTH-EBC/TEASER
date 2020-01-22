@@ -168,6 +168,9 @@ net leased area is divided in the following thermal zone areas:
 Residential
 ------------
 
+IWU
+----
+
 SingleFamilyDwelling
 --------------------
 
@@ -178,10 +181,60 @@ SingleFamilyDwelling
 
   #. Living (100% of net leased area)
 
+Tabula
+-------
 
+    This is an archetype building for german single family house according to
+    TABULA building typology (http://webtool.building-typology.eu/#bm). As
+    TABULA defines one reference building, whereas TEASER wants to provide a
+    methodology to generate individual building information, this archetype
+    underlies some assumptions. The made assumptions are explained in the
+    following:
+
+    Each building has four orientations for outer walls and windows (north,
+    east, south and west), two orientations for rooftops (south and north), with
+    tilt of 35 degree and one orientation for ground floors and one door (
+    default
+    orientation is west). The area of each surface is calculated using the
+    product of the given net_leased_area and specific estimation factors. These
+    estimation factors where build by dividing the given 'surface area' by the
+    'reference floor area' in TABULA. The estimation factors are calculated for
+    each building period ('construction year class'). Please note that the
+    number and height of the floors given in TEASER does not have any effect on
+    the surface area for heat transmission, but is only used to calculate the
+    interior wall area, which is not specified in TABULA at all. Further, TABULA
+    does not specify any specific user profile, by default the SingleFamilyHouse
+    class has exactly one usage zone, which is 'Living'. TABULA also does not
+    always specify the exact construction of building elements, but always
+    provides a prescribed U-Value. We used the U-Value and the given material
+    information to determine thickness of each layer and implemented it into
+    elements XML ('teaser.data.input.inputdata.TypeElements_TABULA_DE.xml'). The
+    material properties have been taken from MASEA Material data base
+    (http://www.masea-ensan.de/). As there might be some differences in the
+    assumptions for material properties from TABULA and MASEA the U-Value might
+    not always be exactly the same as in TABULA but is always in an acceptable
+    range. The U-Value has been calculated using combined constant values for
+    interior and exterior heat transmission, we used a resistance of 0.17
+    (m2*K)/W for outer walls, windows, flat roofs and doors; 0.34 (m2*K)/W  for
+    ground floors to unheated cellars and 0.17 (m2*K)/W  to direct ground
+    coupled floors, 0.21 (m2*K)/W  was taken for pitched roofs.
+
+singlefamilyhouse
+-----------------
+
+apartmentblock
+-----------------
+
+multifamilyhouse
+-----------------
+
+terracedhouse
+-----------------
+
+  
 Literature
 -----------
 
   .. bibliography:: Literatur.bib
   	:style: unsrt
-  	:encoding: latex+latin
+  	:encoding: latin

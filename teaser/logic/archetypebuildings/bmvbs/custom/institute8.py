@@ -9,22 +9,28 @@ class Institute8(Office):
     """Type Institute Building (type 8)
 
     The institute type 8 module contains a multi zone building which is based
-    on an office building with an additional laboratory zone. The area of the
-    laboratory zone is based on data from the Forschungszentrum Juelich
-    :cite:`Abschlussbericht`. According to the dataset from Juelich,
+    on an
+    office building with an additional laboratory zone. The zonal
+    distribution is based on investigations of the Forschungszentrum Juelich
+    :cite:`Lauster.2018`. According to the dataset from Juelich,
     the typebuilding institute type 8 is based on the buildingsclass of BWZK
-    with the number 2240 :cite:`Bauministerkonferenz.Dezember2010`.
-    Laboratory zones are verntialed using a central AHU system with
-    humidification and de-humidification. In detail the net leased area is
-    divided in the following thermal zone areas:
+    with
+    the number 2280
+    :cite:`Bauministerkonferenz.Dezember2010`. The estimation of exterior
+    wall surfaces follows the approach for office buildings, but with adapted
+    parameters :cite:`Lauster.2018`. This building type is by default
+    equipped with an air handling unit.
 
-    #. Office (10% of net leased area)
-    #. Floor (18% of net leased area)
-    #. Storage (2% of net leased area)
+    In detail the net leased area is divided into the following thermal zone
+    areas:
+
+    #. Office (4% of net leased area)
+    #. Floor (6% of net leased area)
+    #. Storage (30% of net leased area)
     #. Meeting (4% of net leased area)
     #. Restroom (4% of net leased area)
     #. ICT (2% of net leased area)
-    #. Laboratory (60% of the net leased area)
+    #. Laboratory (50% of the net leased area)
 
     Parameters
     ----------
@@ -49,6 +55,15 @@ class Institute8(Office):
         If set to True, an empty instance of BuildingAHU is instantiated and
         assigned to attribute central_ahu. This instance holds information for
         central Air Handling units. Default is False.
+    internal_gains_mode: int [1, 2, 3]
+        mode for the internal gains calculation by persons:
+        1: Temperature and activity degree dependent calculation. The
+           calculation is based on  SIA 2024 (default)
+        2: Temperature and activity degree independent calculation, the max.
+           heatflowrate is prescribed by the parameter
+           fixed_heat_flow_rate_persons.
+        3: Temperature and activity degree dependent calculation with
+           consideration of moisture. The calculation is based on SIA 2024
     office_layout : int
         Structure of the floor plan of office buildings, default is 1,
         which is representative for one elongated floor.
@@ -77,7 +92,7 @@ class Institute8(Office):
 
     zone_area_factors : dict
         This dictionary contains the name of the zone (str), the
-        zone area factor (float) and the zone usage from BoundaryConditions XML
+        zone area factor (float) and the zone usage from BoundaryConditions json
         (str). (Default see doc string above)
     outer_wall_names : dict
         This dictionary contains a random name for the outer walls,
@@ -124,10 +139,10 @@ class Institute8(Office):
                  height_of_floors=None,
                  net_leased_area=None,
                  with_ahu=True,
+                 internal_gains_mode=1,
                  office_layout=None,
                  window_layout=None,
                  construction_type=None):
-
         """Constructor of Institute8
 
         Adds an additional zone "Laboratory"
@@ -141,21 +156,24 @@ class Institute8(Office):
                                          height_of_floors,
                                          net_leased_area,
                                          with_ahu,
+                                         internal_gains_mode,
                                          office_layout,
                                          window_layout,
                                          construction_type)
 
         self.zone_area_factors["Office"] = \
-            [0.1, "Group Office (between 2 and 6 employees)"]
+            [0.04, "Group Office (between 2 and 6 employees)"]
         self.zone_area_factors["Floor"] = \
-            [0.18, "Traffic area"]
+            [0.06, "Traffic area"]
         self.zone_area_factors["Laboratory"] = \
-            [0.6, "Laboratory"]
+            [0.5, "Laboratory"]
         self.zone_area_factors["Storage"] = \
-            [0.02, "Stock, technical equipment, archives"]
+            [0.3, "Stock, technical equipment, archives"]
         self.zone_area_factors["Meeting"] = \
             [0.04, "Meeting, Conference, seminar"]
         self.zone_area_factors["Restroom"] = \
             [0.04, "WC and sanitary rooms in non-residential buildings"]
         self.zone_area_factors["ICT"] = \
             [0.02, "Data center"]
+        self.est_exponent_wall = 0.6177
+        self.est_factor_wall_area = 13.895

@@ -3,32 +3,28 @@ within ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_Models
 model ${zone.parent.name}_${zone.name}
   "This is the simulation model of ${zone.name} within building ${zone.parent.name} with traceable ID ${zone.parent.building_id}"
 
-  IBPSA.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
-    calTSky=IBPSA.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
+  ${library}.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
+    calTSky=${library}.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
     filNam="${zone.parent.parent.weather_file_path.replace("\\", "/")}")
     "Weather data reader"
     annotation (Placement(transformation(extent={{-98,52},{-78,72}})));
-  IBPSA.BoundaryConditions.SolarIrradiation.DiffusePerez
-  HDifTil[${min_orientations(zone.model_attr.n_outer)}](
-    each outSkyCon=true,
+  ${library}.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${min_orientations(zone.model_attr.n_outer)}](    each outSkyCon=true,
     each outGroCon=true,
     til=${get_list(deg_to_rad(zone.model_attr.tilt_facade))},
     each lat = ${deg_to_rad(zone.parent.latitude)},
     azi = ${get_list(azmiut_conv(zone.model_attr.orientation_facade))})
     "Calculates diffuse solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,20},{-48,40}})));
-  IBPSA.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${min_orientations(zone.model_attr.n_outer)}](
-    til=${get_list(deg_to_rad(zone.model_attr.tilt_facade))},
+  ${library}.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${min_orientations(zone.model_attr.n_outer)}](    til=${get_list(deg_to_rad(zone.model_attr.tilt_facade))},
     each lat =  ${deg_to_rad(zone.parent.latitude)},
     azi=${get_list(azmiut_conv(zone.model_attr.orientation_facade))})
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,52},{-48,72}})));
-  IBPSA.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane(n=${min_orientations(zone.model_attr.n_outer)},
-  UWin=${zone.model_attr.u_value_win})
+  ${library}.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane(n=${min_orientations(zone.model_attr.n_outer)},  UWin=${zone.model_attr.u_value_win})
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,54},{26,74}})));
-  IBPSA.ThermalZones.ReducedOrder.RC.TwoElements
+  ${library}.ThermalZones.ReducedOrder.RC.TwoElements
   thermalZoneTwoElements(
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
 % if zone.parent.library_attr.consider_heat_capacity is True:
@@ -36,16 +32,16 @@ model ${zone.parent.name}_${zone.name}
 % else:
     VAir=0.0,
 % endif
-    alphaExt=${zone.model_attr.alpha_conv_inner_ow},
-    alphaWin=${zone.model_attr.alpha_conv_inner_win},
+    hConvExt=${zone.model_attr.alpha_conv_inner_ow},
+    hConvWin=${zone.model_attr.alpha_conv_inner_win},
     gWin=${zone.model_attr.weighted_g_value},
     ratioWinConRad=${zone.model_attr.ratio_conv_rad_inner_win},
     nExt=1,
     RExt={${zone.model_attr.r1_ow}},
     CExt={${zone.model_attr.c1_ow}},
-    alphaRad=${zone.model_attr.alpha_rad_inner_mean},
+    hRad=${zone.model_attr.alpha_rad_inner_mean},
     AInt=${zone.model_attr.area_iw},
-    alphaInt=${zone.model_attr.alpha_conv_inner_iw},
+    hConvInt=${zone.model_attr.alpha_conv_inner_iw},
     nInt=1,
     RInt={${zone.model_attr.r1_iw}},
     CInt={${zone.model_attr.c1_iw}},
@@ -61,28 +57,28 @@ model ${zone.parent.name}_${zone.name}
     "Thermal zone"
     annotation (Placement(transformation(extent={{44,-2},{92,34}})));
 % if zone.model_attr.merge_windows is True:
-  IBPSA.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTemp(
+  ${library}.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTemp(
     n=${min_orientations(zone.model_attr.n_outer)},
     wfGro=${zone.model_attr.weightfactor_ground},
     wfWall=${get_list(zone.model_attr.weightfactor_ow)},
     wfWin=${get_list(zone.model_attr.weightfactor_win)},
     withLongwave=true,
     aExt=${zone.model_attr.solar_absorp_ow},
-    alphaWallOut=${zone.model_attr.alpha_conv_outer_ow},
-    alphaRad=${zone.model_attr.alpha_rad_outer_mean},
+    hConvWallOut=${zone.model_attr.alpha_conv_outer_ow},
+    hRad=${zone.model_attr.alpha_rad_outer_mean},
     TGro=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % else:
-  IBPSA.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
+  ${library}.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
     n=${min_orientations(zone.model_attr.n_outer)},
     wfGro=${zone.model_attr.weightfactor_ground},
     wfWall=${get_list(zone.model_attr.weightfactor_ow)},
     wfWin=${get_list(zone.model_attr.weightfactor_win)},
     withLongwave=true,
     aExt=${zone.model_attr.solar_absorp_ow},
-    alphaWallOut=${zone.model_attr.alpha_conv_outer_ow},
-    alphaRad=${zone.model_attr.alpha_rad_outer_mean},
-    alphaWinOut=${zone.model_attr.alpha_conv_outer_win},
+    hConvWallOut=${zone.model_attr.alpha_conv_outer_ow},
+    hRad=${zone.model_attr.alpha_rad_outer_mean},
+    hConvWinOut=${zone.model_attr.alpha_conv_outer_win},
     TGro=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % endif
@@ -106,7 +102,7 @@ model ${zone.parent.name}_${zone.name}
   Modelica.Blocks.Sources.Constant const[${min_orientations(zone.model_attr.n_outer)}](each k=0)
     "Sets sunblind signal to zero (open)"
     annotation (Placement(transformation(extent={{-20,14},{-14,20}})));
-  IBPSA.BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
+  ${library}.BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
     annotation (Placement(
     transformation(extent={{-100,-10},{-66,22}}),iconTransformation(
     extent={{-70,-12},{-50,8}})));
@@ -118,7 +114,7 @@ model ${zone.parent.name}_${zone.name}
     rotation=90,
     origin={30,-16})));
 % if zone.model_attr.merge_windows is False:
-  Modelica.Blocks.Sources.Constant alphaWin(k=${zone.model_attr.alpha_comb_outer_win}*${zone.model_attr.area_win})
+  Modelica.Blocks.Sources.Constant hConvWin(k=${zone.model_attr.alpha_comb_outer_win}*${zone.model_attr.area_win})
     "Outdoor coefficient of heat transfer for windows"
     annotation (Placement(
     transformation(
@@ -231,7 +227,7 @@ equation
   connect(alphaWall.y, thermalConductorWall.Gc)
     annotation (Line(points={{30,-11.6},{30,-4},{31,-4}}, color={0,0,127}));
 % if zone.model_attr.merge_windows is False:
-  connect(alphaWin.y, thermalConductorWin.Gc)
+  connect(hConvWin.y, thermalConductorWin.Gc)
     annotation (Line(points={{32,33.6},{32,26},{33,26}}, color={0,0,127}));
 % endif
   connect(weaBus.TBlaSky, eqAirTemp.TBlaSky)
@@ -253,7 +249,8 @@ equation
     annotation (Line(points={{27,64},{34,64},{40,64},{40,31},{43,31}}, color={0,
     0,127}));
   annotation (experiment(
-  StopTime=${zone.parent.parent.modelica_info.runtime_simulation},
+  StartTime=${str(zone.parent.parent.modelica_info.start_time)},
+  StopTime=${str(zone.parent.parent.modelica_info.stop_time)},
   Interval=${zone.parent.parent.modelica_info.interval_output},
   __Dymola_Algorithm="${zone.parent.parent.modelica_info.current_solver}"),
   __Dymola_experimentSetupOutput(equidistant=${get_true_false(zone.parent.parent.modelica_info.equidistant_output)},

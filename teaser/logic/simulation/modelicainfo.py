@@ -2,7 +2,7 @@
 # by TEASER4 Development Team
 
 
-class ModelicaInfo():
+class ModelicaInfo:
     """ModelicaInfo Class
 
     This class holds information specific for Modelica Simulation. Some of
@@ -12,8 +12,10 @@ class ModelicaInfo():
     Attributes
     ----------
 
-    runtime_simulation : str [s]
-        Total duration of simulation, default 31536000 for one year
+    start_time : int [s]
+        Start time for the simulation, default 0
+    stop_time : int [s]
+        Stop time for the simulation, default 31536000
     interval_output : str [s]
         Interval for one time step, default 3600 for one hour
     solver : list
@@ -33,10 +35,11 @@ class ModelicaInfo():
         """
 
         # Base-Values for the simulation tab
-        self.runtime_simulation = "31536000"
+        self.start_time = 0
+        self.stop_time = 31536000
         self.interval_output = "3600"
-        self.solver = ["Lsodar", "dassl", "Radau"]
-        self.current_solver = "Radau"
+        self.solver = ["Lsodar", "dassl", "Radau", "Cvode"]
+        self.current_solver = "Cvode"
         self.equidistant_output = True
         self.results_at_events = False
-        self.version = "3.2.2"
+        self.version = "3.2.3"

@@ -3,6 +3,8 @@
 
 """This module includes a class for central AHU
 """
+import pandas as pd
+from itertools import cycle, islice
 
 
 class BuildingAHU(object):
@@ -41,14 +43,17 @@ class BuildingAHU(object):
          By-pass factor of cooling coil during dehumidification. Necessary to
          calculate the real outgoing enthalpy flow of heat exchanger in
          dehumidification mode taking the surface enthalpy of the cooling
-         coil into account. In AixLib called "BPF_DeHu" (default = 0.2)
+         coil into account. In AixLib called "BPF_DeHu" (default = 0.2,
+         according to :cite:`Lindeburg.2013`)
     efficiency_recovery : float
         efficiency of HRS in the AHU modes if HRS is enabled.
-        AixLib: "efficiencyHRS_enabled" (default = 0.8)
-    efficiency_revocery_false : float
+        AixLib: "efficiencyHRS_enabled" (default = 0.65, according to
+        :cite:`.20012001`)
+    efficiency_recovery_false : float
         taking a little heat transfer into account although HRS is disabled
         (in case that a HRS is physically installed in the AHU) in AixLib:
-        "efficiencyHRS_disabled" (default = 0.2)
+        "efficiencyHRS_disabled" (default = 0.2, according to
+        :cite:`Mehrfeld.2014`)
     sample_rate : int
         sample rate of state machines in AHU model. Default is set to half
         an hour as typical input is hourly (default = 1800)
@@ -60,13 +65,13 @@ class BuildingAHU(object):
         Pressure drop assigned to supply fan in Pascal
     pressure_drop_fan_return: float (default 800)
         Pressure drop assigned to return fan in Pascal
-    profile_temperature : [float]
+    temperature_profile : [float]
         timeline of temperatures requirements for AHU simulation
-    profile_min_relative_humidity : [float]
+    min_relative_humidity_profile : [float]
         timeline of relative humidity requirements for AHU simulation
-    profile_max_relative_humidity : [float]
+    max_relative_humidity_profile : [float]
         timeline of relative humidity requirements for AHU simulation
-    profile_v_flow : [int]
+    v_flow_profile : [int]
         timeline of desired relative v_flow of the AHU simulation (0..1)
 
     """
@@ -82,7 +87,7 @@ class BuildingAHU(object):
         self.humidification = True
         self.heat_recovery = True
         self.by_pass_dehumidification = 0.2
-        self.efficiency_recovery = 0.8
+        self.efficiency_recovery = 0.65
         self.efficiency_recovery_false = 0.2
         self.sample_rate = 1800
         self.efficiency_fan_supply = 0.7
@@ -90,10 +95,28 @@ class BuildingAHU(object):
         self.pressure_drop_fan_supply = 800
         self.pressure_drop_fan_return = 800
 
-        self._profile_min_relative_humidity = None
-        self._profile_max_relative_humidity = None
-        self._profile_v_flow = None
-        self._profile_temperature = None
+        self._temperature_profile = 7 * [293.15] + 12 * [295.15] + 6 * [293.15]
+        self._min_relative_humidity_profile = 25 * [0.45]
+        self._max_relative_humidity_profile = 25 * [0.65]
+        self._v_flow_profile = 7 * [0.0] + 12 * [1.0] + 6 * [0.0]
+
+        self.schedules = pd.DataFrame(
+            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
+            .to_series()
+            .dt.strftime("%m-%d %H:%M:%S"),
+            data={
+                "temperature_profile": list(
+                    islice(cycle(self.temperature_profile), 8760)
+                ),
+                "min_relative_humidity_profile": list(
+                    islice(cycle(self.min_relative_humidity_profile), 8760)
+                ),
+                "max_relative_humidity_profile": list(
+                    islice(cycle(self.max_relative_humidity_profile), 8760)
+                ),
+                "v_flow_profile": list(islice(cycle(self.v_flow_profile), 8760)),
+            },
+        )
 
     @property
     def parent(self):
@@ -103,64 +126,55 @@ class BuildingAHU(object):
     def parent(self, value):
         from teaser.logic.buildingobjects.building import Building
         import inspect
+
         if inspect.isclass(Building):
             self.__parent = value
             self.__parent.central_ahu = self
 
     @property
-    def profile_min_relative_humidity(self):
-        return self._profile_min_relative_humidity
+    def temperature_profile(self):
+        return self._temperature_profile
 
-    @profile_min_relative_humidity.setter
-    def profile_min_relative_humidity(self, value):
-
-        if self._profile_min_relative_humidity is None:
-            pass
-        else:
-            self.parent.file_ahu = (
-                "/AHU_" + self.parent.name + ".mat")
-
-        self._profile_min_relative_humidity = value
+    @temperature_profile.setter
+    def temperature_profile(self, value):
+        if not isinstance(value, list):
+            value = [value]
+        self._temperature_profile = value
+        self.schedules["temperature_profile"] = list(islice(cycle(value), 8760))
 
     @property
-    def profile_max_relative_humidity(self):
-        return self._profile_max_relative_humidity
+    def min_relative_humidity_profile(self):
+        return self._min_relative_humidity_profile
 
-    @profile_max_relative_humidity.setter
-    def profile_max_relative_humidity(self, value):
-
-        if self._profile_max_relative_humidity is None:
-            pass
-        else:
-            self.parent.file_ahu = (
-                "/AHU_" + self.parent.name + ".mat")
-        self._profile_max_relative_humidity = value
-
-    @property
-    def profile_v_flow(self):
-        return self._profile_v_flow
-
-    @profile_v_flow.setter
-    def profile_v_flow(self, value):
-
-        if self._profile_v_flow is None:
-            pass
-        else:
-            self.parent.file_ahu = (
-                "/AHU_" + self.parent.name + ".mat")
-
-        self._profile_v_flow = value
+    @min_relative_humidity_profile.setter
+    def min_relative_humidity_profile(self, value):
+        if not isinstance(value, list):
+            value = [value]
+        self._min_relative_humidity_profile = value
+        self.schedules["min_relative_humidity_profile"] = list(
+            islice(cycle(value), 8760)
+        )
 
     @property
-    def profile_temperature(self):
-        return self._profile_temperature
+    def max_relative_humidity_profile(self):
+        return self._max_relative_humidity_profile
 
-    @profile_temperature.setter
-    def profile_temperature(self, value):
+    @max_relative_humidity_profile.setter
+    def max_relative_humidity_profile(self, value):
+        if not isinstance(value, list):
+            value = [value]
+        self._min_relative_humidity_profile = value
+        self.schedules["max_relative_humidity_profile"] = list(
+            islice(cycle(value), 8760)
+        )
 
-        if self._profile_temperature is None:
-            pass
-        else:
-            self.parent.file_ahu = (
-                "/AHU_" + self.parent.name + ".mat")
-        self._profile_temperature = value
+    @property
+    def v_flow_profile(self):
+        return self._v_flow_profile
+
+    @v_flow_profile.setter
+    def v_flow_profile(self, value):
+        if not isinstance(value, list):
+            value = [value]
+        self._v_flow_profile = value
+        self.schedules["v_flow_profile"] = list(islice(cycle(value), 8760))

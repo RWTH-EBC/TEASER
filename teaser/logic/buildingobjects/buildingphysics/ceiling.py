@@ -79,7 +79,7 @@ class Ceiling(InnerWall):
         corrected capacity C1,korr for building elements in the case of
         asymmetrical thermal load given in VDI 6007
     ua_value : float [W/K]
-        UA-Value of building elment (Area times U-Value)
+        UA-Value of building element (Area times U-Value)
     r_inner_conv : float [K/W]
         Convective resistance of building element on inner side (facing the
         zone)
@@ -110,8 +110,6 @@ class Ceiling(InnerWall):
 
         """
         super(Ceiling, self).__init__(parent)
-        
+
         self._tilt = 0.0
         self._orientation = -1.0
-
-

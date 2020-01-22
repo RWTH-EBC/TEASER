@@ -92,7 +92,7 @@ class Window(BuildingElement):
         corrected capacity C1,korr for building elements in the case of
         asymmetrical thermal load given in VDI 6007
     ua_value : float [W/K]
-        UA-Value of building elment (Area times U-Value)
+        UA-Value of building element (Area times U-Value)
     r_inner_conv : float [K/W]
         Convective resistance of building element on inner side (facing the
         zone)
@@ -160,15 +160,12 @@ class Window(BuildingElement):
         """Replace a window, with a newer one.
 
         Replaces all attributes from the window and replaces it with a high
-        insultaed one.
+        insulated one.
 
         Parameters
         ----------
         year_of_retrofit: int
             The year, the building was refurbished
-
-        construction: str
-            Default: EnEv 2014
         """
 
         if window_type is None:

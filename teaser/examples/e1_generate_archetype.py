@@ -16,12 +16,11 @@ def example_generate_archetype():
     from teaser.project import Project
 
     # To use the API instantiate the Project class and rename the Project. The
-    # parameter load_data=True indicates that we load archetype data into our
-    # Project (e.g. for Material properties and typical wall constructions.
-    # This can take a few seconds, depending on the size of the used data base.
-    # Be careful: Dymola does not like whitespaces in names and filenames,
-    # thus we will delete them anyway in TEASER.
-
+    # parameter load_data=True indicates that we load `iwu` typology archetype
+    # data into our Project (e.g. for Material properties and typical wall
+    # constructions. This can take a few seconds, depending on the size of the
+    # used data base). Be careful: Dymola does not like whitespaces in names and
+    # filenames, thus we will delete them anyway in TEASER.
 
     prj = Project(load_data=True)
     prj.name = "ArchetypeExample"
@@ -46,7 +45,7 @@ def example_generate_archetype():
         year_of_construction=1988,
         number_of_floors=2,
         height_of_floors=3.2,
-        net_leased_area=200)
+        net_leased_area=200.0)
 
     # To generate non-residential archetype buildings (in this case an
     # office and a laboratory (a.k.a. institute)) the function
@@ -60,7 +59,7 @@ def example_generate_archetype():
         year_of_construction=1988,
         number_of_floors=4,
         height_of_floors=3.5,
-        net_leased_area=4500)
+        net_leased_area=4500.0)
 
     prj.add_non_residential(
         method='bmvbs',
@@ -69,9 +68,56 @@ def example_generate_archetype():
         year_of_construction=1952,
         number_of_floors=5,
         height_of_floors=4.0,
-        net_leased_area=3400)
+        net_leased_area=3400.0)
+
+    prj.add_non_residential(
+        method='bmvbs',
+        usage='institute',
+        name="InstituteBuildingMoisture",
+        year_of_construction=1980,
+        number_of_floors=3,
+        height_of_floors=4.2,
+        net_leased_area=3600.0,
+        internal_gains_mode=3)
+
+    # Besides `iwu` and `bmvbs` there is a third option for archetype
+    # generation. We integrated the typology of TABULA Germany
+    # (http://webtool.building-typology.eu/#bm) and other countries are about to
+    # follow. To use TABULA archetype simple choose `tabula_de` as the method
+    # and `single_family_house`, `multi_family_house`, `terraced_house` or
+    # `apartment_block` as the usage. In addition you can specify the
+    # construction type of TABULA, chose between `tabula_standard` (default),
+    # `tabula_retrofit` or `tabula_adv_retrofit`. In this case we generate one
+    # single and one multi family house with TABULA typology.
+
+    # Please not: as we need to load the construction information which are
+    # rather big for TABULA, switching from one typology to another in the same
+    # Project takes some seconds. If you know from beginning you will only use
+    # TABULA typology you should instantiate you Project class without loading
+    # data. Project(load_data=False).
+
+    prj.add_residential(
+        method='tabula_de',
+        usage='single_family_house',
+        name="ResidentialBuildingTabula",
+        year_of_construction=1988,
+        number_of_floors=3,
+        height_of_floors=3.2,
+        net_leased_area=280.0,
+        construction_type='tabula_standard')
+
+    prj.add_residential(
+        method='tabula_de',
+        usage='multi_family_house',
+        name="ResidentialBuildingTabulaMulti",
+        year_of_construction=1960,
+        number_of_floors=4,
+        height_of_floors=3.2,
+        net_leased_area=600.0,
+        construction_type='tabula_retrofit')
 
     return prj
+
 
 if __name__ == '__main__':
     prj = example_generate_archetype()

@@ -57,10 +57,10 @@ def example_create_building():
 
     # Instantiate BoundaryConditions and load conditions for `Living`.
 
-    from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
-        import BoundaryConditions
+    from teaser.logic.buildingobjects.useconditions \
+        import UseConditions
 
-    tz.use_conditions = BoundaryConditions(parent=tz)
+    tz.use_conditions = UseConditions(parent=tz)
     tz.use_conditions.load_use_conditions("Living", prj.data)
 
     # Define two building elements reflecting a pitched roof (south = 180° and
@@ -149,7 +149,7 @@ def example_create_building():
     material_n2.thermal_conduc = 2.5
 
     # Another option is to use the database for typical wall constructions,
-    # but set area, tilt, orientation individually. To simplifiy code,
+    # but set area, tilt, orientation individually. To simplify code,
     # we save individual information for exterior walls, interior walls into
     # dictionaries.
     # outer walls
@@ -225,7 +225,7 @@ def example_create_building():
 
     for key, value in win_dict.items():
 
-        win = Window(parent = tz)
+        win = Window(parent=tz)
         win.name = key
         win.area = value[0]
         win.tilt = value[1]
@@ -254,12 +254,13 @@ def example_create_building():
         win_layer.id = 1
         win_layer.thickness = 0.024
 
-        # Material for Glas
+        # Material for glass
 
         win_material = Material(win_layer)
         win_material.name = "GlasWindow"
         win_material.thermal_conduc = 0.067
         win_material.transmittance = 0.9
+
 
 if __name__ == '__main__':
     example_create_building()
