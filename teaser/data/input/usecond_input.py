@@ -76,6 +76,12 @@ def load_use_conditions(use_cond, zone_usage, data_class):
     use_cond.persons_profile = conditions_bind[zone_usage]["persons_profile"]
     use_cond.machines_profile = conditions_bind[zone_usage]["machines_profile"]
     use_cond.lighting_profile = conditions_bind[zone_usage]["lighting_profile"]
+    use_cond.ventilation_hrs_profile = conditions_bind[zone_usage][
+        "ventilation_hrs_profile"
+    ]
+    use_cond.ventilation_user_profile = conditions_bind[zone_usage][
+        "ventilation_user_profile"
+    ]
     use_cond.with_ideal_thresholds = conditions_bind[zone_usage][
         "with_ideal_thresholds"
     ]
