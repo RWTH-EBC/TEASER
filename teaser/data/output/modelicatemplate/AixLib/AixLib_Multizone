@@ -20,7 +20,7 @@ model ${bldg.name}
       %endfor
       },
 %else:
-  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirEquipped multizone(
+  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirEquipped multizone( #Todo: rename aixlib multizone here! ithink nothing else needs to be done
     redeclare package Medium = AixLib.Media.Air,
     buildingID=${bldg.building_id},
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -74,7 +74,7 @@ model ${bldg.name}
         AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneAirExchange,
 % else:
    redeclare model thermalZone =
-        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirExchange,
+        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirExchange,  #Todo: rename aixlib multizone here! ithink nothing else needs to be done
 % endif
    redeclare model corG =
         AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane,
