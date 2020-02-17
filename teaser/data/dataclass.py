@@ -75,7 +75,7 @@ class DataClass(object):
             "data/input/inputdata/MaterialTemplates.json"
         )
         self.conditions_bind = None
-        self.path_uc = utils.get_full_path("data/input/inputdata/UseConditions.json")
+        self.path_uc = utils.get_full_path("data/input/inputdata/UseConditionsBWN.json")
 
         self.load_uc_binding()
         self.load_mat_binding()
