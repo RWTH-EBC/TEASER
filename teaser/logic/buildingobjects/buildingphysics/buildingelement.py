@@ -456,7 +456,8 @@ class BuildingElement(object):
                     self.area is not None):
                 self.parent.parent.fill_outer_area_dict()
         elif type(self).__name__ == "Window":
-            if self.parent.parent is not None and self.area is not None:
+            if (self.parent is not None and self.parent.parent is not None and
+                    self.area is not None):
                 self.parent.parent.fill_window_area_dict()
 
     @property
