@@ -5,7 +5,7 @@
         "typical_width": 40.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -1238,7 +1238,7 @@
         "typical_width": 6.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -2471,7 +2471,7 @@
         "typical_width": 6.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -3704,7 +3704,7 @@
         "typical_width": 6.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -4937,7 +4937,7 @@
         "typical_width": 6.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 0,
@@ -6170,7 +6170,7 @@
         "typical_width": 4.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -7403,7 +7403,7 @@
         "typical_width": 4.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -8636,7 +8636,7 @@
         "typical_width": 8.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -9869,7 +9869,7 @@
         "typical_width": 20.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -11102,7 +11102,7 @@
         "typical_width": 6.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -12335,7 +12335,7 @@
         "typical_width": 6.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -13568,7 +13568,7 @@
         "typical_width": 6.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -14801,7 +14801,7 @@
         "typical_width": 13.5,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -16034,7 +16034,7 @@
         "typical_width": 6.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -17267,7 +17267,7 @@
         "typical_width": 6.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 0,
@@ -18500,7 +18500,7 @@
         "typical_width": 6.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -19733,7 +19733,7 @@
         "typical_width": 19.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -20966,7 +20966,7 @@
         "typical_width": 19.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -22199,7 +22199,7 @@
         "typical_width": 19.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -23432,7 +23432,7 @@
         "typical_width": 19.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -24665,7 +24665,7 @@
         "typical_width": 8.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -25898,7 +25898,7 @@
         "typical_width": 40.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -27131,7 +27131,7 @@
         "typical_width": 6.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -28364,7 +28364,7 @@
         "typical_width": 6.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 0,
@@ -29597,7 +29597,7 @@
         "typical_width": 19.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -30830,7 +30830,7 @@
         "typical_width": 19.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -32063,7 +32063,7 @@
         "typical_width": 19.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -33296,7 +33296,7 @@
         "typical_width": 19.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -34529,7 +34529,7 @@
         "typical_width": 8.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -35762,7 +35762,7 @@
         "typical_width": 40.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -36995,7 +36995,7 @@
         "typical_width": 6.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -38228,7 +38228,7 @@
         "typical_width": 6.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 0,
@@ -39461,7 +39461,7 @@
         "typical_width": 8.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -40694,7 +40694,7 @@
         "typical_width": 6.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -41927,7 +41927,7 @@
         "typical_width": 40.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -43160,7 +43160,7 @@
         "typical_width": 6.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
@@ -44393,7 +44393,7 @@
         "typical_width": 6.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
-        "with_cooling": false,
+        "with_cooling": true,
         "persons": {
             "/": [
                 1,
