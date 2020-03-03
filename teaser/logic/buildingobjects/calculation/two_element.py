@@ -1174,7 +1174,7 @@ class TwoElement(object):
             ua_value_gf_temp * (self.thermal_zone.t_inside - self.thermal_zone.t_ground)
         )
         self.heat_load = self.heat_load * 1.5
-        self.cool_load = self.heat_load
+        self.cool_load = -self.heat_load
 
     def set_calc_default(self):
         """sets default calculation parameters
