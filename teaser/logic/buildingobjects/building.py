@@ -370,13 +370,15 @@ class Building(object):
         self._merge_windows_calc = merge_windows
         self._used_library_calc = used_library
         self.shareVolume = []
+        self.totalVolume = []
         for zone in self.thermal_zones:
             zone.calc_zone_parameters(
                 number_of_elements=number_of_elements,
                 merge_windows=merge_windows,
                 t_bt=5,
             )
-            self.shareVolume.append(zone.volume / self.volume)
+            self.shareVolume.append(zone.volume)
+            self.totalVolume.append(self.volume)
             self.sum_heat_load += zone.model_attr.heat_load
 
         if self.used_library_calc == self.library_attr.__class__.__name__:
