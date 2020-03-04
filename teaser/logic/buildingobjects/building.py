@@ -376,7 +376,7 @@ class Building(object):
                 merge_windows=merge_windows,
                 t_bt=5,
             )
-            self.shareVolume = [zone.volume / self.volume]
+            self.shareVolume.append(zone.volume / self.volume)
             self.sum_heat_load += zone.model_attr.heat_load
 
         if self.used_library_calc == self.library_attr.__class__.__name__:

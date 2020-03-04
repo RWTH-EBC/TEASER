@@ -14,7 +14,7 @@ model ${bldg.name}
     numZones = ${len(bldg.thermal_zones)},
     pinchT=0,
     etaHRS=${bldg.efficiency_recovery},
-    shareVolume=${bldg.shareVolume},
+    shareVolume=get_list(${bldg.shareVolume}),
     zoneParam = {
       %for zone in bldg.thermal_zones:
       ${bldg.name}_DataBase.${bldg.name}_${zone.name}()${',' if not loop.last else ''}
