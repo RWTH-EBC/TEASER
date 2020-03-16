@@ -106,6 +106,10 @@ class ThermalZone(object):
         self.heat_capac_air = 1002
         self.t_ground = 286.15
 
+        if parent is None:
+            self._infiltration_rate_nzs = None
+            self._
+
     def calc_zone_parameters(
             self,
             number_of_elements=2,
