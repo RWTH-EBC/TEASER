@@ -13,7 +13,7 @@ model ${bldg.name}
     ASurTot=${bldg.library_attr.total_surface_area},
     numZones = ${len(bldg.thermal_zones)},
     pinchT=3,
-    etaHRS=${bldg.central_ahu.efficiency_recovery},
+    etaHRS=${bldg.efficiency_recovery},
     shareVolume=${get_list(bldg.shareVolume)},
     totalVolume=${get_list(bldg.totalVolume)},
     zoneParam = {
