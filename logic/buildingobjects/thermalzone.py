@@ -78,6 +78,12 @@ class ThermalZone(object):
         average density of the air in the thermal zone
     heat_capac_air : float [J/K]
         average heat capacity of the air in the thermal zone
+    number_of_floors : int
+        number of floors of the zone. If None, parent's number_of_floors is used
+    height_of_floors : int
+        average height of floors of the zone. If None, parent's height_of_floors
+        is used
+
     """
 
     def __init__(self, parent=None):
@@ -99,6 +105,7 @@ class ThermalZone(object):
         self._inner_walls = []
         self._floors = []
         self._ceilings = []
+        self._nz_borders = []
         self._use_conditions = None
         self._t_inside = 293.15
         self._t_outside = 261.15
@@ -106,9 +113,10 @@ class ThermalZone(object):
         self.heat_capac_air = 1002
         self.t_ground = 286.15
 
-        if parent is None:
-            self._infiltration_rate_nzs = None
-            self._
+        self.number_of_floors = None
+        self.height_of_floors = None
+
+        self._infiltration_rate_nzs = None
 
     def calc_zone_parameters(
             self,
@@ -301,25 +309,48 @@ class ThermalZone(object):
                 pass
         return elements
 
-    def set_inner_wall_area(self):
+    def set_inner_wall_area(self, calc_approach='teaser_default'):
         """Sets the inner wall area according to zone area
 
         Sets the inner wall area according to zone area size if type building
         approach is used. This function covers Floors, Ceilings and InnerWalls.
+
+        Parameters
+        ----------
+
+        calc_approach : str
+            'teaser_default' (default) sets length of inner walls = typical
+            length * height of floors + 2 * typical width * height of floors
+            'typical_minus_outer' sets length of inner walls = max(2 * typical
+            length * height of floors + 2 * typical width * height of floors
+            - length of outer walls of the zone, 0)
         """
 
         ass_error_1 = "You need to specify parent for thermal zone"
 
         assert self.parent is not None, ass_error_1
 
+        try:
+            if self.number_of_floors is None:
+                number_of_floors = self.parent.number_of_floors
+            else:
+                number_of_floors = self.number_of_floors
+        except AttributeError:
+            number_of_floors = self.parent.number_of_floors
+
+        try:
+            if self.height_of_floors is None:
+                height_of_floors = self.parent.height_of_floors
+            else:
+                height_of_floors = self.height_of_floors
+        except AttributeError:
+            height_of_floors = self.parent.height_of_floors
+
         for floor in self.floors:
-            floor.area = (
-                (self.parent.number_of_floors - 1) /
-                self.parent.number_of_floors) * self.area
+            floor.area = ((number_of_floors - 1) / number_of_floors) * self.area
         for ceiling in self.ceilings:
-            ceiling.area = (
-                (self.parent.number_of_floors - 1) /
-                self.parent.number_of_floors) * self.area
+            ceiling.area = ((number_of_floors - 1)
+                            / number_of_floors) * self.area
 
         for wall in self.inner_walls:
             typical_area = self.use_conditions.typical_length * \
@@ -327,10 +358,21 @@ class ThermalZone(object):
 
             avg_room_nr = self.area / typical_area
 
-            wall.area = (avg_room_nr * (self.use_conditions.typical_length *
-                                        self.parent.height_of_floors +
-                                        2 * self.use_conditions.typical_width *
-                                        self.parent.height_of_floors))
+            if calc_approach is 'typical_minus_outer':
+                wall.area = (avg_room_nr
+                             * (2 * self.use_conditions.typical_length
+                                * height_of_floors
+                                + 2 * self.use_conditions.typical_width
+                                * height_of_floors))
+                for outer_wall in self.outer_walls:
+                    wall.area -= outer_wall.area
+                wall.area = max(0.0, wall.area)
+            else:
+                wall.area = (avg_room_nr
+                             * (self.use_conditions.typical_length
+                                * height_of_floors
+                                + 2 * self.use_conditions.typical_width
+                                * height_of_floors))
 
     def set_volume_zone(self):
         """Sets the zone volume according to area and height of floors
@@ -454,10 +496,16 @@ class ThermalZone(object):
         elif type(building_element).__name__ == "Rooftop":
             self._rooftops.append(building_element)
         elif type(building_element).__name__ == "InnerWall":
+            if (building_element).outside is not None:
+                self._nz_borders.append(building_element)
             self._inner_walls.append(building_element)
         elif type(building_element).__name__ == "Ceiling":
+            if (building_element).outside is not None:
+                self._nz_borders.append(building_element)
             self._ceilings.append(building_element)
         elif type(building_element).__name__ == "Floor":
+            if (building_element).outside is not None:
+                self._nz_borders.append(building_element)
             self._floors.append(building_element)
         elif type(building_element).__name__ == "Window":
             self._windows.append(building_element)
@@ -556,6 +604,16 @@ class ThermalZone(object):
 
         if value is None:
             self._inner_walls = []
+
+    @property
+    def nz_borders(self):
+        return self._nz_borders
+
+    @nz_borders.setter
+    def nz_borders(self, value):
+
+        if value is None:
+            self._nz_borders = []
 
     @property
     def windows(self):

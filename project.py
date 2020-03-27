@@ -593,7 +593,7 @@ class Project(object):
 
             ass_error_usage_tabula = "only 'single_family_house',"
             "'terraced_house', 'multi_family_house', 'apartment_block' are"
-            "valid usages for iwu archetype method"
+            "valid usages for tabula_de archetype method"
             assert usage in [
                 "single_family_house",
                 "terraced_house",

@@ -61,9 +61,6 @@ class OuterWall(Wall):
         List of all layers of a building element (to be filled with Layer
         objects). Use element.layer = None to delete all layers of the building
         element
-    outside : ThermalZone()
-        the thermal zone to the outside of the wall. If None, outside is on the
-        outside.
 
     Calculated Attributes
 
@@ -117,7 +114,6 @@ class OuterWall(Wall):
         self._inner_radiation = 5.0
         self._outer_convection = 20.0
         self._outer_radiation = 5.0
-        self.outside = None
 
     @property
     def parent(self):
@@ -150,16 +146,3 @@ class OuterWall(Wall):
         else:
 
             self.__parent = None
-
-    @property
-    def outside(self):
-        return self.__outside
-
-    @outside.setter
-    def outside(self, value):
-        if value is not None:
-            ass_error_1 = "Outside has to be an instance of ThermalZone()"
-            assert type(value).__name__ == "ThermalZone", ass_error_1
-            self.__outside = value
-        else:
-            self.__outside = None

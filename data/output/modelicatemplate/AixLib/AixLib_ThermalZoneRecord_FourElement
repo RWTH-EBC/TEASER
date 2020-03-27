@@ -87,5 +87,14 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     CoolerOn = ${get_true_false(zone.use_conditions.with_cooling)},
     withIdealThresholds = ${get_true_false(zone.use_conditions.with_ideal_thresholds)},
     TThresholdHeater = ${zone.use_conditions.T_threshold_heating},
-    TThresholdCooler = ${zone.use_conditions.T_threshold_cooling});
+    TThresholdCooler = ${zone.use_conditions.T_threshold_cooling},
+    nNZ = ${len(zone.parent.thermal_zones)},
+    wfSoil = ${zone.model_attr.weightfactor_ground},
+    wfNZ = ${get_list(zone.model_attr.weightfactor_nz)},
+    hConNZThere = ${get_list(zone.model_attr.alpha_conv_outer_nz)},
+    ACHNZ = ${get_list(zone.use_conditions.infiltration_rate_nz)},
+    hConFNZOut = ${zone.model_attr.alpha_conv_outer_gf},
+    hRadFNZOut = ${zone.alpha_rad_outer_gf},
+    AFNZ = ${zone.model_attr.area_gf});
+
 end ${zone.parent.name}_${zone.name};

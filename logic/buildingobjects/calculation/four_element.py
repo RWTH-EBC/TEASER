@@ -363,7 +363,7 @@ class FourElement(object):
     """
 
     def __init__(self, thermal_zone, merge_windows, t_bt):
-        """Constructor for TwoElement"""
+        """Constructor for FourElement"""
 
         self.internal_id = random.random()
 
@@ -559,6 +559,11 @@ class FourElement(object):
         self.g_sunblind = []
         self.weighted_g_value = 0.0
 
+        # values related to neighboured zones
+        self.n_nz = 0
+        self.weightfactor_nz = []
+        self.alpha_conv_outer_nz = []
+
         # Misc values
 
         self.alpha_rad_inner_mean = 0.0
@@ -583,6 +588,9 @@ class FourElement(object):
         for gf in self.thermal_zone.ground_floors:
             gf.calc_equivalent_res()
             gf.calc_ua_value()
+        for nzb in self.thermal_zone.nz_borders:
+            nzb.calc_equivalent_res()
+            nzb.calc_ua_value()
         for win in self.thermal_zone.windows:
             win.calc_equivalent_res()
             win.calc_ua_value()
@@ -615,10 +623,12 @@ class FourElement(object):
                           ', no windows have been defined.')
         else:
             self._sum_window_elements()
-        if len(self.thermal_zone.ground_floors) < 1:
+        if len(self.thermal_zone.ground_floors
+               + self.thermal_zone.nz_borders) < 1:
             warnings.warn('For thermal zone ' + self.thermal_zone.name +
                           ' in building ' + self.thermal_zone.parent.name +
-                          ', no ground floors have been defined.')
+                          ', no ground floors/neighboured zone borders have been'
+                          ' defined.')
         else:
             self._sum_ground_floor_elements()
             self._calc_ground_floor_elements()
@@ -802,7 +812,7 @@ class FourElement(object):
             1 / (self.r_comb_outer_ow * self.area_ow))
 
     def _sum_ground_floor_elements(self):
-        """Sum attributes for ground floor elements
+        """Sum attributes for ground floor and zone border elements
 
         This function sums and computes the area-weighted values,
         where necessary (the class doc string) for coefficients of heat
@@ -810,32 +820,45 @@ class FourElement(object):
 
         """
 
-        self.area_gf = sum(ground.area for ground in
-                           self.thermal_zone.ground_floors)
+        self.area_gf = \
+            (sum(ground.area for ground in
+                 self.thermal_zone.ground_floors)
+             + sum(nz_border.area for nz_border in
+                   self.thermal_zone.nz_borders))
 
         self.ua_value_gf = \
             (sum(ground.ua_value for ground in
-                 self.thermal_zone.ground_floors))
+                 self.thermal_zone.ground_floors)
+             + sum(nz_border.ua_value for nz_border in
+                   self.thermal_zone.nz_borders))
 
         self.r_total_gf = 1 / self.ua_value_gf
 
         # values facing the inside of the thermal zone
 
         self.r_conv_inner_gf = (1 /
-                                sum(1 / ground.r_inner_conv for ground in
-                                    self.thermal_zone.ground_floors))
+                                (sum(1 / ground.r_inner_conv for ground in
+                                     self.thermal_zone.ground_floors)
+                                 + sum(1 / nz_border.r_inner_conv for nz_border
+                                       in self.thermal_zone.nz_borders)))
 
         self.r_rad_inner_gf = (1 /
-                               sum(1 / ground.r_inner_rad for ground in
-                                   self.thermal_zone.ground_floors))
+                               (sum(1 / ground.r_inner_rad for ground in
+                                    self.thermal_zone.ground_floors)
+                                + sum(1 / nz_border.r_inner_rad for nz_border in
+                                      self._thermal_zone.nz_borders)))
 
         self.r_comb_inner_gf = (1 /
-                                sum(1 / ground.r_inner_comb for ground in
-                                    self.thermal_zone.ground_floors))
+                                (sum(1 / ground.r_inner_comb for ground in
+                                     self.thermal_zone.ground_floors)
+                                 + sum(1 / nz_border.r_inner_comb for nz_border
+                                       in self._thermal_zone.nz_borders)))
 
         self.ir_emissivity_inner_gf = sum(
             ground.layer[0].material.ir_emissivity * ground.area for ground
-            in self.thermal_zone.ground_floors)
+            in self.thermal_zone.ground_floors) + sum(
+            nz_border.layer[0].material.ir_emissivity * nz_border.area
+            for nz_border in self.thermal_zone.nz_borders)
 
         self.alpha_conv_inner_gf = (
             1 / (self.r_conv_inner_gf * self.area_gf))
@@ -843,6 +866,43 @@ class FourElement(object):
             1 / (self.r_rad_inner_gf * self.area_gf))
         self.alpha_comb_inner_gf = (
             1 / (self.r_comb_inner_gf * self.area_gf))
+
+        # values facing the ambient
+        # ground floor does not have any coefficients on ambient side
+
+        _area_ow_gf = sum(nz_border.area for nz_border in
+                          self.thermal_zone.nz_borders)
+
+        self.r_conv_outer_gf = (1 /
+                                sum(1 / nz_border.r_outer_conv for nz_border in
+                                    self.thermal_zone.nz_borders))
+        self.r_rad_outer_gf = (1 /
+                               sum(1 / nz_border.r_outer_rad for nz_border in
+                                   self.thermal_zone.nz_borders))
+        self.r_comb_outer_gf = (1 /
+                                sum(1 / nz_border.r_outer_comb for nz_border in
+                                    self.thermal_zone.nz_borders))
+
+        self.alpha_conv_outer_nz = []
+        for nz in self.thermal_zone.parent.thermal_zones:
+            _area_nz = sum([nz_border.area if nz_border.outside is nz else 0
+                            for nz_border in self.thermal_zone.nz_borders])
+            r_conv_outer_nz = 0
+            for nz_border in self.thermal_zone.nz_borders:
+                if nz_border.outside is nz:
+                    r_conv_outer_nz += 1 / nz_border.r_outer_conv
+            if r_conv_outer_nz:
+                self.alpha_conv_outer_nz.append(1 /
+                                                (r_conv_outer_nz * _area_nz))
+            else:
+                self.alpha_conv_outer_nz.append(0.0)
+
+        self.alpha_conv_outer_gf = (
+            1 / (self.r_conv_outer_gf * _area_ow_gf))
+        self.alpha_rad_outer_gf = (
+            1 / (self.r_rad_outer_gf * _area_ow_gf))
+        self.alpha_comb_outer_gf = (
+            1 / (self.r_comb_outer_gf * _area_ow_gf))
 
     def _sum_rooftop_elements(self):
         """Sum attributes for rooftop elements
@@ -1141,10 +1201,10 @@ class FourElement(object):
                       "parameter cannot be calculated")
 
     def _calc_ground_floor_elements(self):
-        """Lumped parameter for ground floor elements
+        """Lumped parameter for ground floor and neighbour zone border elements
 
-        Calculates lumped parameters for ground floors. No windows in ground
-        floor allowed.
+        Calculates lumped parameters for ground floors and borders to
+        neighboured zones. No windows in ground floor allowed.
 
         Attributes
         ----------
@@ -1153,22 +1213,33 @@ class FourElement(object):
         """
 
         omega = 2 * math.pi / 86400 / self.t_bt
+        
+        ground_floors_nzs = list(self.thermal_zone.ground_floors)
+        
+        for nz_border in self.thermal_zone.nz_borders:
+            if nz_border.outside is not None:
+                ground_floors_nzs.append(nz_border)
+                nz_border.calc_equivalent_res()
+                nz_border.calc_ua_value()
+            else:
+                warnings.warn("nz border has no outside")
 
-        if 0 < len(self.thermal_zone.ground_floors) <= 1:
+        if 0 < len(ground_floors_nzs) <= 1:
             # only one outer wall, no need to calculate chain matrix
-            self.r1_gf = self.thermal_zone.ground_floors[0].r1
-            self.c1_gf = self.thermal_zone.ground_floors[0].c1_korr
-        elif len(self.thermal_zone.ground_floors) > 1:
+            self.r1_gf = ground_floors_nzs[0].r1
+            self.c1_gf = ground_floors_nzs[0].c1_korr
+        elif len(ground_floors_nzs) > 1:
             # more than one outer wall, calculate chain matrix
             self.r1_gf, self.c1_gf = self._calc_parallel_connection(
-                self.thermal_zone.ground_floors, omega)
+                ground_floors_nzs, omega)
         else:
-            warnings.warn("No walls are defined as ground floors, please be "
+            warnings.warn("No walls are defined as ground floors/nzs borders, "
+                          "please be "
                           "careful with results. In addition this might lead "
                           "to RunTimeErrors")
         try:
             conduction = (1 / sum((1 / element.r_conduc) for element in
-                                  self.thermal_zone.ground_floors))
+                                  ground_floors_nzs))
 
             self.r_rest_gf = (conduction - self.r1_gf)
         except RuntimeError:
@@ -1212,7 +1283,7 @@ class FourElement(object):
                   "parameter cannot be calculated")
 
     def _calc_inner_elements(self):
-        """Lumped parameter for outer wall elements
+        """Lumped parameter for inner wall elements
 
         Calculates all necessary parameters for inner walls. This includes
         InnerWalls, Ceilings and Floors.
@@ -1229,25 +1300,29 @@ class FourElement(object):
 
         omega = 2 * math.pi / 86400 / self.t_bt
 
-        inner_walls = (self.thermal_zone.inner_walls +
-                       self.thermal_zone.floors +
-                       self.thermal_zone.ceilings)
+        inner_walls = []
 
-        for in_wall in inner_walls:
-            in_wall.calc_equivalent_res()
-            in_wall.calc_ua_value()
+        for in_wall in (self.thermal_zone.inner_walls 
+                        + self.thermal_zone.floors 
+                        + self.thermal_zone.ceilings):
+            if in_wall.outside is None:
+                inner_walls.append(in_wall)
+                in_wall.calc_equivalent_res()
+                in_wall.calc_ua_value()
+            else:
+                warnings.warn("inner wall has outside")
 
         if 0 < len(inner_walls) <= 1:
-            # only one outer wall, no need to calculate chain matrix
+            # only one inner wall, no need to calculate chain matrix
             self.r1_iw = inner_walls[0].r1
             self.c1_iw = inner_walls[0].c1_korr
         elif len(inner_walls) > 1:
-            # more than one outer wall, calculate chain matrix
+            # more than one inner wall, calculate chain matrix
             self.r1_iw, self.c1_iw = self._calc_parallel_connection(
                 inner_walls,
                 omega)
         else:
-            warnings.warn("No walls are defined as outer walls, please be "
+            warnings.warn("No walls are defined as inner walls, please be "
                           "careful with results. In addition this might lead "
                           "to RunTimeErrors")
 
@@ -1274,6 +1349,13 @@ class FourElement(object):
             for rt in self.thermal_zone.rooftops:
                 rt.wf_out = rt.ua_value / self.ua_value_rt
 
+            for nzb in self.thermal_zone.nz_borders:
+                nzb.wf_out = nzb.ua_value / self.ua_value_gf
+
+            for gf in self.thermal_zone.ground_floors:
+                gf.wf_out = gf.ua_value / self.ua_value_gf
+                self.weightfactor_ground += gf.wf_out
+
         elif self.merge_windows is False:
 
             for wall in self.thermal_zone.outer_walls:
@@ -1284,6 +1366,13 @@ class FourElement(object):
 
             for rt in self.thermal_zone.rooftops:
                 rt.wf_out = rt.ua_value / self.ua_value_rt
+
+            for nzb in self.thermal_zone.nz_borders:
+                nzb.wf_out = nzb.ua_value / self.ua_value_gf
+
+            for gf in self.thermal_zone.ground_floors:
+                gf.wf_out = gf.ua_value / self.ua_value_gf
+                self.weightfactor_ground += gf.wf_out
 
         else:
             raise ValueError("specify merge window method correctly")
@@ -1412,6 +1501,14 @@ class FourElement(object):
                     sum([rt.wf_out for rt in rts]))
                 self.rooftop_areas.append(sum([rt.area for rt in rts]))
 
+        self.weightfactor_nz = []
+        for nz in self.thermal_zone.parent.thermal_zones:
+            wf_nz = 0.0
+            for nz_border in self.thermal_zone.nz_borders:
+                if nz_border.outside is nz:
+                    wf_nz += nz_border.wf_out
+            self.weightfactor_nz.append(wf_nz)
+
     def _calc_heat_load(self):
         """Static heat load calculation
 
@@ -1439,6 +1536,7 @@ class FourElement(object):
                                                  self.thermal_zone.t_outside))
              + (self.ua_value_gf * (self.thermal_zone.t_inside -
                                     self.thermal_zone.t_ground)))
+        # todo add heat load to other zones
 
     def set_calc_default(self):
         """sets default calculation parameters
@@ -1629,6 +1727,11 @@ class FourElement(object):
         self.transparent_areas = []
         self.g_sunblind = []
         self.weighted_g_value = 0.0
+
+        # values related to neighboured zones
+        self.n_nz = 0
+        self.weightfactor_nz = []
+        self.alpha_conv_outer_nz = []
 
         # Misc values
 

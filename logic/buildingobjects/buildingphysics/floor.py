@@ -52,16 +52,19 @@ class Floor(InnerWall):
         the zone), default is 5.0
     outer_convection : float [W/(m2*K)]
         Constant heat transfer coefficient of convection outer side (facing
-        the ambient or adjacent zone). Currently for all InnerWalls and
-        GroundFloors this value is set to 0.0
+        the ambient or adjacent zone). Default 0.0 - if unchanged, 1.7 when
+        adding an outside
     outer_radiation : float [W/(m2*K)]
         Constant heat transfer coefficient of radiation outer side (facing
-        the ambient or adjacent zone). Currently for all InnerWalls and
-        GroundFloors this value is set to 0.0
+        the ambient or adjacent zone). Default 0.0 - if unchanged, 5.0 when
+        adding an outside
     layer : list
         List of all layers of a building element (to be filled with Layer
         objects). Use element.layer = None to delete all layers of the building
         element
+    outside : ThermalZone()
+        the thermal zone to the outside of the wall. If None, outside is on the
+        outside.
 
     Calculated Attributes
 
@@ -106,10 +109,10 @@ class Floor(InnerWall):
 
     """
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, outside=None):
         """
         """
-        super(Floor, self).__init__(parent)
+        super(Floor, self).__init__(parent, outside)
 
         self._tilt = 0.0
         self._orientation = -2.0

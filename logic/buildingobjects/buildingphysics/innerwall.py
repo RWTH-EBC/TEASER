@@ -53,16 +53,19 @@ class InnerWall(Wall):
         the zone), default 5.0
     outer_convection : float [W/(m2*K)]
         Constant heat transfer coefficient of convection outer side (facing
-        the ambient or adjacent zone). Currently for all InnerWalls and
-        GroundFloors this value is set to 0.0
+        the ambient or adjacent zone). Default 0.0 - if unchanged, 1.7 when
+        adding an outside
     outer_radiation : float [W/(m2*K)]
         Constant heat transfer coefficient of radiation outer side (facing
-        the ambient or adjacent zone). Currently for all InnerWalls and
-        GroundFloors this value is set to 0.0
+        the ambient or adjacent zone). Default 0.0 - if unchanged, 5.0 when
+        adding an outside
     layer : list
         List of all layers of a building element (to be filled with Layer
         objects). Use element.layer = None to delete all layers of the building
         element
+    outside : ThermalZone()
+        the thermal zone to the outside of the wall. If None, outside is on the
+        outside.
 
     Calculated Attributes
 
@@ -106,9 +109,10 @@ class InnerWall(Wall):
         Weightfactor of building element ua_value/ua_value_zone
     """
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, outside=None):
         """
         """
+        self._outside = outside
         super(InnerWall, self).__init__(parent)
 
         self._tilt = 90.0
@@ -131,7 +135,9 @@ class InnerWall(Wall):
 
             self.__parent = value
 
-            if type(self).__name__ == "InnerWall":
+            if self.outside is not None:
+                self.__parent.nz_borders.append(self)
+            elif type(self).__name__ == "InnerWall":
                 self.__parent.inner_walls.append(self)
             elif type(self).__name__ == "Ceiling":
                 self.__parent.ceilings.append(self)
@@ -148,3 +154,20 @@ class InnerWall(Wall):
         else:
 
             self.__parent = None
+
+    @property
+    def outside(self):
+        return self._outside
+
+    @outside.setter
+    def outside(self, value):
+        if value is not None:
+            ass_error_1 = "Outside has to be an instance of ThermalZone()"
+            assert type(value).__name__ == "ThermalZone", ass_error_1
+            self._outside = value
+            if self._outer_convection == 0.:
+                self._outer_convection = 1.7
+            if self._outer_radiation == 5.:
+                self._outer_radiation = 5.
+        else:
+            self.__outside = None
