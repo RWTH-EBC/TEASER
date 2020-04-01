@@ -65,8 +65,8 @@ model ${bldg.name}
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam=
-      "${weather.replace("\\", "/")}")
+    filNam=ModelicaServices.ExternalReferences.loadResource(
+      "${weather.replace("\\", "/")}"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-82,30},{-62,50}})));
 
@@ -127,6 +127,27 @@ model ${bldg.name}
 
 % endif
 
+  Modelica.Blocks.Interfaces.RealOutput TAirOut[size(multizone.zone, 1)]
+    annotation (Placement(transformation(extent={{96,10},{116,30}})));
+
+  Modelica.Blocks.Interfaces.RealOutput TRadOut[size(multizone.zone, 1)]
+    annotation (Placement(transformation(extent={{96,10},{116,30}})));
+
+  Modelica.Blocks.Interfaces.RealOutput PelOut
+    annotation (Placement(transformation(extent={{96,10},{116,30}})));
+
+  Modelica.Blocks.Interfaces.RealOutput PHeatAHUOut
+    annotation (Placement(transformation(extent={{96,10},{116,30}})));
+
+  Modelica.Blocks.Interfaces.RealOutput PCoolAHUOut
+    annotation (Placement(transformation(extent={{96,10},{116,30}})));
+
+  Modelica.Blocks.Interfaces.RealOutput PHeaterOut[size(multizone.zone, 1)]
+    annotation (Placement(transformation(extent={{96,10},{116,30}})));
+
+  Modelica.Blocks.Interfaces.RealOutput PCoolerOut[size(multizone.zone, 1)]
+    annotation (Placement(transformation(extent={{96,10},{116,30}})));
+
 equation
   connect(weaDat.weaBus, multizone.weaBus) annotation (Line(
       points={{-62,40},{-32,40},{-32,6},{34,6}},
@@ -152,12 +173,37 @@ equation
 
 % endif
 
+  connect(multizone.TAir, TAirOut) annotation (Line(points={{51,5.85},{74.5,
+          5.85},{74.5,20},{106,20}}, color={0,0,127}));
+
+  connect(multizone.TRad, TRadOut) annotation (Line(points={{51,5.85},{74.5,
+          5.85},{74.5,20},{106,20}}, color={0,0,127}));
+
+  connect(multizone.Pel, PelOut) annotation (Line(points={{51,5.85},{74.5,
+          5.85},{74.5,20},{106,20}}, color={0,0,127}));
+
+  connect(multizone.PHeatAHU, PHeatAHUOut) annotation (Line(points={{51,5.85},{74.5,
+          5.85},{74.5,20},{106,20}}, color={0,0,127}));
+
+  connect(multizone.PCoolAHU, PCoolAHUOut) annotation (Line(points={{51,5.85},{74.5,
+          5.85},{74.5,20},{106,20}}, color={0,0,127}));
+
+  connect(multizone.PHeater, PHeaterOut) annotation (Line(points={{51,5.85},{74.5,
+          5.85},{74.5,20},{106,20}}, color={0,0,127}));
+
+  connect(multizone.PCooler, PCoolerOut) annotation (Line(points={{51,5.85},{74.5,
+          5.85},{74.5,20},{106,20}}, color={0,0,127}));
+
 
   annotation (experiment(
       StopTime=${modelica_info.runtime_simulation},
       Interval=${modelica_info.interval_output},
       __Dymola_Algorithm="${modelica_info.current_solver}"),
       __Dymola_experimentSetupOutput(equidistant=${get_true_false(modelica_info.equidistant_output)},
+      states=false,
+      derivatives=false,
+      inputs=false,
+      auxiliaries=false,
       events=${get_true_false(modelica_info.results_at_events)}),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
         graphics={
