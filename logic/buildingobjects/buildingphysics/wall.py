@@ -65,6 +65,9 @@ class Wall(BuildingElement):
         List of all layers of a building element (to be filled with Layer
         objects). Use element.layer = None to delete all layers of the building
         element
+    outside : ThermalZone()
+        the thermal zone to the outside of the wall. If None, outside is on the
+        outside.
 
     Calculated Attributes
 
@@ -108,9 +111,10 @@ class Wall(BuildingElement):
         Weightfactor of building element ua_value/ua_value_zone
     """
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, outside=None):
         """Constructor of Wall
         """
+        self.outside = outside
         super(Wall, self).__init__(parent)
 
     def calc_equivalent_res(self, t_bt=7):
@@ -374,3 +378,17 @@ class Wall(BuildingElement):
                     self.layer[-1].material.thermal_conduc
 
                 self.layer[-1].id = len(self.layer)
+
+
+    @property
+    def outside(self):
+        return self._outside
+
+    @outside.setter
+    def outside(self, value):
+        if value is not None:
+            ass_error_1 = "Outside has to be an instance of ThermalZone()"
+            assert type(value).__name__ == "ThermalZone", ass_error_1
+            self._outside = value
+        else:
+            self._outside = None

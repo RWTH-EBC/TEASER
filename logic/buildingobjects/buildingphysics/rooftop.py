@@ -104,14 +104,18 @@ class Rooftop(OuterWall):
         Weightfactor of building element ua_value/ua_value_zone
     """
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, outside=None):
         """
         """
-        super(Rooftop, self).__init__(parent)
+        super(Rooftop, self).__init__(parent, outside)
 
         self._tilt = 0.0
         self._orientation = -1.0
         self._inner_convection = 1.7
         self._inner_radiation = 5.0
-        self._outer_convection = 20.0
-        self._outer_radiation = 5.0
+        if self._outside is None:
+            self._outer_convection = 20.0
+            self._outer_radiation = 5.0
+        else:
+            self._outer_convection = 1.7
+            self._outer_radiation = 5.0

@@ -56,7 +56,7 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     aziExtWalls = ${get_list(azmiut_conv(zone.model_attr.orientation_facade))},
     wfWall = ${get_list(zone.model_attr.weightfactor_ow)},
     wfWin = ${get_list(zone.model_attr.weightfactor_win)},
-    wfGro = ${zone.model_attr.weightfactor_ground},
+    wfGro = 0,
     specificPeople = ${zone.use_conditions.persons},
     internalGainsMoistureNoPeople = ${zone.use_conditions.internal_gains_moisture_no_people},
     fixedHeatFlowRatePersons = ${zone.use_conditions.fixed_heat_flow_rate_persons},
@@ -94,7 +94,7 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     hConNZThere = ${get_list(zone.model_attr.alpha_conv_outer_nz)},
     ACHNZ = ${get_list(zone.use_conditions.infiltration_rate_nz)},
     hConFNZOut = ${zone.model_attr.alpha_conv_outer_gf},
-    hRadFNZOut = ${zone.alpha_rad_outer_gf},
-    AFNZ = ${zone.model_attr.area_gf});
+    hRadFNZOut = ${zone.model_attr.alpha_rad_outer_gf},
+    factorNZFloor = ${zone.model_attr.factor_nz_gf});
 
 end ${zone.parent.name}_${zone.name};

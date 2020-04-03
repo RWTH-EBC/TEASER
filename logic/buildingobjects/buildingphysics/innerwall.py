@@ -112,14 +112,17 @@ class InnerWall(Wall):
     def __init__(self, parent=None, outside=None):
         """
         """
-        self._outside = outside
-        super(InnerWall, self).__init__(parent)
+        super(InnerWall, self).__init__(parent, outside)
 
         self._tilt = 90.0
         self._inner_convection = 1.7
         self._inner_radiation = 5.0
-        self._outer_convection = None
-        self._outer_radiation = None
+        if self._outside is None:
+            self._outer_convection = None
+            self._outer_radiation = None
+        else:
+            self._outer_convection = 1.7
+            self._outer_radiation = 5.0
 
     @property
     def parent(self):
@@ -154,20 +157,3 @@ class InnerWall(Wall):
         else:
 
             self.__parent = None
-
-    @property
-    def outside(self):
-        return self._outside
-
-    @outside.setter
-    def outside(self, value):
-        if value is not None:
-            ass_error_1 = "Outside has to be an instance of ThermalZone()"
-            assert type(value).__name__ == "ThermalZone", ass_error_1
-            self._outside = value
-            if self._outer_convection == 0.:
-                self._outer_convection = 1.7
-            if self._outer_radiation == 5.:
-                self._outer_radiation = 5.
-        else:
-            self.__outside = None

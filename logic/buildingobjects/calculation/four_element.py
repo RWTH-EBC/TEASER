@@ -442,6 +442,7 @@ class FourElement(object):
 
         # Attributes for GroundFloor
         self.area_gf = 0.0
+        self.factor_nz_gf = 0.0
 
         # coefficient of heat transfer facing the inside of this thermal zone
         self.alpha_conv_inner_gf = 0.0
@@ -826,6 +827,10 @@ class FourElement(object):
              + sum(nz_border.area for nz_border in
                    self.thermal_zone.nz_borders))
 
+        if self.area_gf:
+            self.factor_nz_gf = sum(nz_border.area for nz_border in
+                                    self.thermal_zone.nz_borders) / self.area_gf
+
         self.ua_value_gf = \
             (sum(ground.ua_value for ground in
                  self.thermal_zone.ground_floors)
@@ -846,13 +851,13 @@ class FourElement(object):
                                (sum(1 / ground.r_inner_rad for ground in
                                     self.thermal_zone.ground_floors)
                                 + sum(1 / nz_border.r_inner_rad for nz_border in
-                                      self._thermal_zone.nz_borders)))
+                                      self.thermal_zone.nz_borders)))
 
         self.r_comb_inner_gf = (1 /
                                 (sum(1 / ground.r_inner_comb for ground in
                                      self.thermal_zone.ground_floors)
                                  + sum(1 / nz_border.r_inner_comb for nz_border
-                                       in self._thermal_zone.nz_borders)))
+                                       in self.thermal_zone.nz_borders)))
 
         self.ir_emissivity_inner_gf = sum(
             ground.layer[0].material.ir_emissivity * ground.area for ground
@@ -887,15 +892,14 @@ class FourElement(object):
         for nz in self.thermal_zone.parent.thermal_zones:
             _area_nz = sum([nz_border.area if nz_border.outside is nz else 0
                             for nz_border in self.thermal_zone.nz_borders])
-            r_conv_outer_nz = 0
+            r_conv_outer_nz_rec = 0
             for nz_border in self.thermal_zone.nz_borders:
                 if nz_border.outside is nz:
-                    r_conv_outer_nz += 1 / nz_border.r_outer_conv
-            if r_conv_outer_nz:
-                self.alpha_conv_outer_nz.append(1 /
-                                                (r_conv_outer_nz * _area_nz))
+                    r_conv_outer_nz_rec += 1 / nz_border.r_outer_conv
+            if r_conv_outer_nz_rec:
+                self.alpha_conv_outer_nz.append(r_conv_outer_nz_rec / _area_nz)
             else:
-                self.alpha_conv_outer_nz.append(0.0)
+                self.alpha_conv_outer_nz.append(1000.0)
 
         self.alpha_conv_outer_gf = (
             1 / (self.r_conv_outer_gf * _area_ow_gf))

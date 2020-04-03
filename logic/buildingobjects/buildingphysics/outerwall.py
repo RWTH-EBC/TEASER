@@ -104,10 +104,10 @@ class OuterWall(Wall):
         Weightfactor of building element ua_value/ua_value_zone
     """
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, outside=None):
         """
         """
-        super(OuterWall, self).__init__(parent)
+        super(OuterWall, self).__init__(parent, outside)
 
         self._tilt = 90.0
         self._inner_convection = 2.7

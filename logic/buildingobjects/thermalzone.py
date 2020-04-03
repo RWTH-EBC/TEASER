@@ -323,7 +323,7 @@ class ThermalZone(object):
             length * height of floors + 2 * typical width * height of floors
             'typical_minus_outer' sets length of inner walls = max(2 * typical
             length * height of floors + 2 * typical width * height of floors
-            - length of outer walls of the zone, 0)
+            - length of outer walls / inner walls to neighbours of the zone, 0)
         """
 
         ass_error_1 = "You need to specify parent for thermal zone"
@@ -366,6 +366,9 @@ class ThermalZone(object):
                                 * height_of_floors))
                 for outer_wall in self.outer_walls:
                     wall.area -= outer_wall.area
+                for nz_border in self.nz_borders:
+                    if type(nz_border).__name__ == "InnerWall":
+                        wall.area -= nz_border.area
                 wall.area = max(0.0, wall.area)
             else:
                 wall.area = (avg_room_nr
