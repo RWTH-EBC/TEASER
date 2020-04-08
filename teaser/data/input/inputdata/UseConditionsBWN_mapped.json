@@ -16007,11 +16007,7 @@
         "internal_gains_moisture_no_people": 0.5,
         "T_threshold_cooling": 295.15,
         "ratio_conv_rad_persons": 0.5,
-<<<<<<< HEAD
-        "machines": 11.0,
-=======
         "machines": 20.0,
->>>>>>> merge
         "ratio_conv_rad_machines": 0.5,
         "lighting_power": 7.0,
         "ratio_conv_rad_lighting": 0.5,
@@ -17244,11 +17240,7 @@
         "internal_gains_moisture_no_people": 0.5,
         "T_threshold_cooling": 295.15,
         "ratio_conv_rad_persons": 0.5,
-<<<<<<< HEAD
-        "machines": 11.0,
-=======
         "machines": 20.0,
->>>>>>> merge
         "ratio_conv_rad_machines": 0.5,
         "lighting_power": 7.0,
         "ratio_conv_rad_lighting": 0.5,
@@ -29570,11 +29562,7 @@
         "persons": {
             "/": [
                 1,
-<<<<<<< HEAD
-                13.84
-=======
                 11.84
->>>>>>> merge
             ]
         },
         "activity_degree_persons": 1.2,
@@ -29582,11 +29570,7 @@
         "internal_gains_moisture_no_people": 0.5,
         "T_threshold_cooling": 295.15,
         "ratio_conv_rad_persons": 0.5,
-<<<<<<< HEAD
-        "machines": 11.0,
-=======
         "machines": 20.0,
->>>>>>> merge
         "ratio_conv_rad_machines": 0.5,
         "lighting_power": 7.0,
         "ratio_conv_rad_lighting": 0.5,
@@ -30811,11 +30795,7 @@
         "persons": {
             "/": [
                 1,
-<<<<<<< HEAD
-                13.84
-=======
                 11.84
->>>>>>> merge
             ]
         },
         "activity_degree_persons": 1.2,
@@ -30823,11 +30803,7 @@
         "internal_gains_moisture_no_people": 0.5,
         "T_threshold_cooling": 295.15,
         "ratio_conv_rad_persons": 0.5,
-<<<<<<< HEAD
-        "machines": 11.0,
-=======
         "machines": 20.0,
->>>>>>> merge
         "ratio_conv_rad_machines": 0.5,
         "lighting_power": 7.0,
         "ratio_conv_rad_lighting": 0.5,
@@ -32052,11 +32028,7 @@
         "persons": {
             "/": [
                 1,
-<<<<<<< HEAD
-                13.84
-=======
                 11.84
->>>>>>> merge
             ]
         },
         "activity_degree_persons": 1.2,
@@ -32064,11 +32036,7 @@
         "internal_gains_moisture_no_people": 0.5,
         "T_threshold_cooling": 295.15,
         "ratio_conv_rad_persons": 0.5,
-<<<<<<< HEAD
-        "machines": 11.0,
-=======
         "machines": 20.0,
->>>>>>> merge
         "ratio_conv_rad_machines": 0.5,
         "lighting_power": 7.0,
         "ratio_conv_rad_lighting": 0.5,
@@ -33293,11 +33261,7 @@
         "persons": {
             "/": [
                 1,
-<<<<<<< HEAD
-                13.84
-=======
                 11.84
->>>>>>> merge
             ]
         },
         "activity_degree_persons": 1.2,
@@ -33305,11 +33269,7 @@
         "internal_gains_moisture_no_people": 0.5,
         "T_threshold_cooling": 295.15,
         "ratio_conv_rad_persons": 0.5,
-<<<<<<< HEAD
-        "machines": 11.0,
-=======
         "machines": 20.0,
->>>>>>> merge
         "ratio_conv_rad_machines": 0.5,
         "lighting_power": 7.0,
         "ratio_conv_rad_lighting": 0.5,
@@ -39466,11 +39426,7 @@
         "persons": {
             "/": [
                 1,
-<<<<<<< HEAD
-                13.84
-=======
                 11.84
->>>>>>> merge
             ]
         },
         "activity_degree_persons": 1.2,
@@ -39478,11 +39434,7 @@
         "internal_gains_moisture_no_people": 0.5,
         "T_threshold_cooling": 295.15,
         "ratio_conv_rad_persons": 0.5,
-<<<<<<< HEAD
-        "machines": 11.0,
-=======
         "machines": 20.0,
->>>>>>> merge
         "ratio_conv_rad_machines": 0.5,
         "lighting_power": 7.0,
         "ratio_conv_rad_lighting": 0.5,
@@ -40707,11 +40659,7 @@
         "persons": {
             "/": [
                 1,
-<<<<<<< HEAD
-                13.84
-=======
                 11.84
->>>>>>> merge
             ]
         },
         "activity_degree_persons": 1.2,
@@ -40719,11 +40667,7 @@
         "internal_gains_moisture_no_people": 0.5,
         "T_threshold_cooling": 295.15,
         "ratio_conv_rad_persons": 0.5,
-<<<<<<< HEAD
-        "machines": 11.0,
-=======
         "machines": 20.0,
->>>>>>> merge
         "ratio_conv_rad_machines": 0.5,
         "lighting_power": 7.0,
         "ratio_conv_rad_lighting": 0.5,
@@ -41948,11 +41892,7 @@
         "persons": {
             "/": [
                 1,
-<<<<<<< HEAD
-                13.84
-=======
                 11.84
->>>>>>> merge
             ]
         },
         "activity_degree_persons": 1.2,
@@ -41960,11 +41900,7 @@
         "internal_gains_moisture_no_people": 0.5,
         "T_threshold_cooling": 295.15,
         "ratio_conv_rad_persons": 0.5,
-<<<<<<< HEAD
-        "machines": 11.0,
-=======
         "machines": 20.0,
->>>>>>> merge
         "ratio_conv_rad_machines": 0.5,
         "lighting_power": 7.0,
         "ratio_conv_rad_lighting": 0.5,
@@ -43189,11 +43125,7 @@
         "persons": {
             "/": [
                 1,
-<<<<<<< HEAD
-                13.84
-=======
                 11.84
->>>>>>> merge
             ]
         },
         "activity_degree_persons": 1.2,
@@ -43201,11 +43133,7 @@
         "internal_gains_moisture_no_people": 0.5,
         "T_threshold_cooling": 295.15,
         "ratio_conv_rad_persons": 0.5,
-<<<<<<< HEAD
-        "machines": 11.0,
-=======
         "machines": 20.0,
->>>>>>> merge
         "ratio_conv_rad_machines": 0.5,
         "lighting_power": 7.0,
         "ratio_conv_rad_lighting": 0.5,
