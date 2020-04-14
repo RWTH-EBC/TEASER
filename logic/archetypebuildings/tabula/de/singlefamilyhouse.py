@@ -369,9 +369,17 @@ class SingleFamilyHouse(Residential):
         self.net_leased_area = 0.0
 
         for key, value in self.zone_area_factors.items():
-            zone = ThermalZone(parent=self)
+            zone = ThermalZone(parent=self, )
             zone.name = key
             zone.area = type_bldg_area * value[0]
+            try:
+                zone.number_of_floors = value[2]['number_of_floors']
+            except (KeyError, IndexError):
+                pass
+            try:
+                zone.height_of_floors = value[2]['height_of_floors']
+            except (KeyError, IndexError):
+                pass
             use_cond = UseCond(parent=zone)
             use_cond.load_use_conditions(zone_usage=value[1])
             zone.use_conditions = use_cond
@@ -385,21 +393,30 @@ class SingleFamilyHouse(Residential):
 
             for key, value in self._outer_wall_names_1.items():
                 try:
-                    area = value[2][zone_index] \
+                    area = value[2]['areas'][zone_index] \
                            * facade_estimation_factors["ow1"] / \
                            (facade_estimation_factors["ow1"]
                             + facade_estimation_factors["ow2"])
                     if area is None:
-                        raise IndexError
-                except IndexError:
+                        raise KeyError
+                except (KeyError, IndexError):
                     area = (facade_estimation_factors["ow1"]
                             * type_bldg_area) / len(self._outer_wall_names_1)
+                try:
+                    element_type = value[2]['element_type']
+                except (KeyError, IndexError):
+                    element_type = None
+                try:
+                    year = value[3]['year']
+                except (KeyError, IndexError):
+                    year = self.year_of_construction
                 if area:
                     outer_wall = OuterWall(zone)
                     outer_wall.load_type_element(
-                        year=self.year_of_construction,
+                        year=year,
                         construction=self._construction_type_1,
                         data_class=self.parent.data,
+                        element_type=element_type
                     )
                     outer_wall.name = key
                     outer_wall.tilt = value[0]

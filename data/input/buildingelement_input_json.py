@@ -5,7 +5,8 @@ from teaser.logic.buildingobjects.buildingphysics.material import Material
 import teaser.data.input.material_input_json as mat_input
 
 
-def load_type_element(element, year, construction, data_class):
+def load_type_element(element, year, construction, data_class,
+                      element_type=None):
     """Load BuildingElement from json.
 
     Loads typical building elements according to their construction year and
@@ -30,6 +31,11 @@ def load_type_element(element, year, construction, data_class):
         DataClass containing the bindings for TypeBuildingElement and
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.
+
+    element_type : str
+        Element type to load - only to specify if the data_class entry for a
+        different type than type(element) is to be loaded, e.g. InnerWall
+        instead of OuterWall
 
     """
     element_binding = data_class.element_bind

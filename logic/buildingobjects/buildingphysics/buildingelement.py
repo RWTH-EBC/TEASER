@@ -272,7 +272,8 @@ class BuildingElement(object):
             self,
             year,
             construction,
-            data_class=None):
+            data_class=None,
+            element_type=None):
         """Typical element loader.
 
         Loads typical building elements according to their construction
@@ -295,6 +296,12 @@ class BuildingElement(object):
             self.parent.parent.parent.data (which is data_class in current
             project)
 
+        element_type : str
+            Element type to load - only to specify if the data_class entry for a
+            different type than type(element) is to be loaded, e.g. InnerWall
+            instead of OuterWall
+
+
         """
 
         if data_class is None:
@@ -311,7 +318,8 @@ class BuildingElement(object):
         buildingelement_input.load_type_element(element=self,
                                                 year=year,
                                                 construction=construction,
-                                                data_class=data_class)
+                                                data_class=data_class,
+                                                element_type=element_type)
 
     def save_type_element(self, data_class=None):
         """Typical element saver.
