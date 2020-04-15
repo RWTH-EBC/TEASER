@@ -77,7 +77,7 @@ class UseConditions(object):
         fixed_heat_flow_rate_persons
     ratio_conv_rad_persons: float
         describes the ratio between convective and radiative heat transfer
-        of the persons. Default values are derived from
+        of the persons [convective/radiative]. Default values are derived from
         :cite:`VereinDeutscherIngenieure.2015c`.
         AixLib: Used in Zone record for internal gains
         Annex: Used for internal gains
@@ -96,7 +96,7 @@ class UseConditions(object):
         Annex: Used for internal gains
     ratio_conv_rad_machines: float
         describes the ratio between convective and radiative heat transfer
-        of the machines. Default values are derived from
+        of the machines [convective/radiative]. Default values are derived from
         :cite:`Davies.2004`.
         AixLib: Used in Zone record for internal gains
         Annex: Not used, all machines are convective (see Annex examples)
@@ -113,7 +113,7 @@ class UseConditions(object):
         Annex: Not used (see Annex examples)
     ratio_conv_rad_lighting : float
         describes the ratio between convective and radiative heat transfer
-        of the lighting. Default values are derived from
+        of the lighting [convective/radiative]. Default values are derived from
         :cite:`DiLaura.2011`.
         AixLib: Used in Zone record for internal gains, lighting
     lighting_profil : [float]
