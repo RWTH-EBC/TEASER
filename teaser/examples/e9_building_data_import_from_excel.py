@@ -192,7 +192,9 @@ def zoning_example(data):
     # UsageType which is wrong
     # and should be changed in the file
     for i, row in data.iterrows():
-        if (row["NetArea[m²]"] == 0 or row["NetArea[m²]"] == np.nan) and not pd.isna(row["UsageType"]):
+        if (row["NetArea[m²]"] == 0 or row["NetArea[m²]"] == np.nan) and not pd.isna(
+            row["UsageType"]
+        ):
             warnings.warn(
                 "In line %s the net area is zero, marking an second wall or "
                 "window element for the respective room, "
@@ -259,7 +261,6 @@ def zoning_example(data):
 
     # name the column where the zones are defined "Zone"
     data["Zone"] = data["UsageType_Teaser"]
-
 
     return data
 
@@ -378,8 +379,9 @@ def import_building_from_excel(
         # load UsageOperationTime, Lighting, RoomClimate and InternalGains
         # from the "UseCondition.json"
         tz.use_conditions = UseConditions(parent=tz)
-        tz.use_conditions.load_use_conditions(zone["UsageType_Teaser"].iloc[0], project.data)
-
+        tz.use_conditions.load_use_conditions(
+            zone["UsageType_Teaser"].iloc[0], project.data
+        )
 
         # Block: Building Physics
         # Grouping by orientation and construction type
@@ -391,7 +393,9 @@ def import_building_from_excel(
             # additionally check for strings, since the value must be of type
             # int or float
             if not isinstance(group["OuterWallOrientation[°]"].iloc[0], str):
-                if np.nansum(group["OuterWallArea[m²]"]) > 0: # only create element if it has an area
+                if (
+                    np.nansum(group["OuterWallArea[m²]"]) > 0
+                ):  # only create element if it has an area
                     out_wall = OuterWall(parent=tz)
                     out_wall.name = (
                         "outer_wall_"
@@ -430,7 +434,9 @@ def import_building_from_excel(
             # additionally check for strings, since the value must be of type
             # int or float
             if not isinstance(group["OuterWallOrientation[°]"].iloc[0], str):
-                if np.nansum(group["WindowArea[m²]"]) > 0:  # only create element if it has an area
+                if (
+                    np.nansum(group["WindowArea[m²]"]) > 0
+                ):  # only create element if it has an area
                     window = Window(parent=tz)
                     window.name = (
                         "window_"
@@ -515,9 +521,9 @@ def import_building_from_excel(
                 if group["IsRooftop"].iloc[0] == 1:
                     rooftop = Rooftop(parent=tz)
                     rooftop.name = "rooftop" + str(group["CeilingConstruction"].iloc[0])
-                    rooftop.area = np.nansum(group[
-                        "NetArea[m²]"
-                    ])  # sum up area of respective
+                    rooftop.area = np.nansum(
+                        group["NetArea[m²]"]
+                    )  # sum up area of respective
                     # rooftop parts
                     rooftop.tilt = rooftop_tilt
                     rooftop.orientation = rooftop_orientation
