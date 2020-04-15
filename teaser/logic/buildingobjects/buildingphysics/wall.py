@@ -133,29 +133,29 @@ class Wall(BuildingElement):
         r_layer = thickness / thermal_conduc
         c_layer = heat_capac * density * thickness * 1000
 
-        re11 = np.cosh(np.sqrt(0.5 * omega * r_layer * c_layer)) * \
+        re11 = np.nan_to_num(np.cosh(np.sqrt(0.5 * omega * r_layer * c_layer))) * \
             np.cos(np.sqrt(0.5 * omega * r_layer * c_layer))
-        im11 = np.sinh(np.sqrt(0.5 * omega * r_layer * c_layer)) * \
+        im11 = np.nan_to_num(np.sinh(np.sqrt(0.5 * omega * r_layer * c_layer))) * \
             np.sin(np.sqrt(0.5 * omega * r_layer * c_layer))
         re12 = r_layer * np.sqrt(1 / (2 * omega * r_layer * c_layer)) * \
-            (np.cosh(np.sqrt(0.5 * omega * r_layer * c_layer)) *
+            (np.nan_to_num(np.cosh(np.sqrt(0.5 * omega * r_layer * c_layer))) *
                 np.sin(np.sqrt(0.5 * omega * r_layer * c_layer)) +
-                np.sinh(np.sqrt(0.5 * omega * r_layer * c_layer)) *
+                np.nan_to_num(np.sinh(np.sqrt(0.5 * omega * r_layer * c_layer))) *
                 np.cos(np.sqrt(0.5 * omega * r_layer * c_layer)))
         im12 = r_layer * np.sqrt(1 / (2 * omega * r_layer * c_layer)) * \
-            (np.cosh(np.sqrt(0.5 * omega * r_layer * c_layer)) *
+            (np.nan_to_num(np.cosh(np.sqrt(0.5 * omega * r_layer * c_layer))) *
                 np.sin(np.sqrt(0.5 * omega * r_layer * c_layer)) -
-                np.sinh(np.sqrt(0.5 * omega * r_layer * c_layer)) *
+             (np.sinh(np.sqrt(0.5 * omega * r_layer * c_layer))) *
                 np.cos(np.sqrt(0.5 * omega * r_layer * c_layer)))
         re21 = (-1 / r_layer) * (np.sqrt(0.5 * omega * r_layer * c_layer)) * \
-            (np.cosh(np.sqrt(0.5 * omega * r_layer * c_layer)) *
+            (np.nan_to_num(np.cosh(np.sqrt(0.5 * omega * r_layer * c_layer))) *
                 np.sin(np.sqrt(0.5 * omega * r_layer * c_layer)) -
-                np.sinh(np.sqrt(0.5 * omega * r_layer * c_layer)) *
+                np.nan_to_num(np.sinh(np.sqrt(0.5 * omega * r_layer * c_layer))) *
                 np.cos(np.sqrt(0.5 * omega * r_layer * c_layer)))
         im21 = (1 / r_layer) * (np.sqrt(0.5 * omega * r_layer * c_layer)) * \
-            (np.cosh(np.sqrt(0.5 * omega * r_layer * c_layer)) *
+            (np.nan_to_num(np.cosh(np.sqrt(0.5 * omega * r_layer * c_layer))) *
                 np.sin(np.sqrt(0.5 * omega * r_layer * c_layer)) +
-                np.sinh(np.sqrt(0.5 * omega * r_layer * c_layer)) *
+                np.nan_to_num(np.sinh(np.sqrt(0.5 * omega * r_layer * c_layer))) *
                 np.cos(np.sqrt(0.5 * omega * r_layer * c_layer)))
         re22 = re11
         im22 = im11
@@ -164,28 +164,28 @@ class Wall(BuildingElement):
         a_layer = np.zeros((nr_of_layer, 4, 4))
 
         for i, r in enumerate(re11):
-            a_layer[i][0][0] = r
-            a_layer[i][0][1] = im11[i]
-            a_layer[i][0][2] = re12[i]
-            a_layer[i][0][3] = im12[i]
-            a_layer[i][1][0] = -im11[i]
-            a_layer[i][1][1] = re11[i]
-            a_layer[i][1][2] = -im12[i]
-            a_layer[i][1][3] = re12[i]
-            a_layer[i][2][0] = re21[i]
-            a_layer[i][2][1] = im21[i]
-            a_layer[i][2][2] = re22[i]
-            a_layer[i][2][3] = im22[i]
-            a_layer[i][3][0] = -im21[i]
-            a_layer[i][3][1] = re21[i]
-            a_layer[i][3][2] = -im22[i]
-            a_layer[i][3][3] = re22[i]
+            a_layer[i][0][0] = np.nan_to_num(r)
+            a_layer[i][0][1] = np.nan_to_num(im11[i])
+            a_layer[i][0][2] = np.nan_to_num(re12[i])
+            a_layer[i][0][3] = np.nan_to_num(im12[i])
+            a_layer[i][1][0] = np.nan_to_num(-im11[i])
+            a_layer[i][1][1] = np.nan_to_num(re11[i])
+            a_layer[i][1][2] = np.nan_to_num(-im12[i])
+            a_layer[i][1][3] = np.nan_to_num(re12[i])
+            a_layer[i][2][0] = np.nan_to_num(re21[i])
+            a_layer[i][2][1] = np.nan_to_num(im21[i])
+            a_layer[i][2][2] = np.nan_to_num(re22[i])
+            a_layer[i][2][3] = np.nan_to_num(im22[i])
+            a_layer[i][3][0] = np.nan_to_num(-im21[i])
+            a_layer[i][3][1] = np.nan_to_num(re21[i])
+            a_layer[i][3][2] = np.nan_to_num(-im22[i])
+            a_layer[i][3][3] = np.nan_to_num(re22[i])
 
         # -----multiplication of the matrix
         new_mat = np.diag(np.ones(4))
 
         for count_layer in a_layer:
-            new_mat = np.dot(new_mat, count_layer)
+            new_mat = np.nan_to_num(np.dot(new_mat, count_layer))
 
         # calculation of equivalent Resistance and capacities of each element
         self.r1 = (1 / self.area) * ((new_mat[3][3] - 1) *

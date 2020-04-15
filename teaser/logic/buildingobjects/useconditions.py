@@ -35,7 +35,7 @@ class UseConditions(object):
     with_heating: boolean
         Sets if the zone is heated by ideal heater or not.
     with_cooling: boolean
-        Sets if the zone is cooloed by ideal cooler or not.
+        Sets if the zone is cooled by ideal cooler or not.
     with_ideal_thresholds: boolean
         Sets if the threshold temperatures for ideal heater and cooler should
         be used to prevent simultaneous heating from AHU and cooling from
@@ -52,13 +52,11 @@ class UseConditions(object):
         Degree Days and Precipitation in Europe—analysis for the
         CELECT-project" by Benestad, 2008.
     heating_profile : list [K]
-        Heating setpoint for a day or similar. You can set a list of any
+        Heating setpoint of AHU for a day or similar. You can set a list of any
         length, TEASER will multiplicate this list for one whole year.
     cooling_profile : list [K]
-        Cooling setpoint for a day or similar. You can set a list of any
+        Cooling setpoint of AHU for a day or similar. You can set a list of any
         length, TEASER will multiplicate this list for one whole year.
-    with_cooling: boolean
-        Sets if the zone is cooloed or not.
     fixed_heat_flow_rate_persons: float [W/person]
         fixed heat flow rate for one person in case of temperature
         independent calculation. Default value is 70

@@ -92,7 +92,7 @@ class BuildingElement(object):
     r_inner_rad : float [K/W]
         Radiative resistance of building element on inner side (facing the
         zone)
-    r_inner_conv : float [K/W]
+    r_inner_comb : float [K/W]
         Combined convective and radiative resistance of building element on
         inner side (facing the zone)
     r_outer_conv : float [K/W]
@@ -103,7 +103,7 @@ class BuildingElement(object):
         Radiative resistance of building element on outer side (facing
         the ambient or adjacent zone). Currently for all InnerWalls and
         GroundFloors this value is set to 0.0
-    r_outer_conv : float [K/W]
+    r_outer_comb : float [K/W]
         Combined convective and radiative resistance of building element on
         outer side (facing the ambient or adjacent zone). Currently for all
         InnerWalls and GroundFloors this value is set to 0.0
