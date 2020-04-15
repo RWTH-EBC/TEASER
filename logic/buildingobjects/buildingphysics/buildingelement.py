@@ -1,8 +1,11 @@
 """This module contains the Base class for all building elements."""
 
 from __future__ import division
+import warnings
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
+from teaser.logic.buildingobjects.buildingphysics.material import Material
 import teaser.data.input.buildingelement_input_json as buildingelement_input
+import teaser.data.input.material_input_json as material_input
 import numpy as np
 import random
 import re
@@ -386,6 +389,112 @@ class BuildingElement(object):
 
         buildingelement_output.delete_type_element(element=self,
                                                    data_class=data_class)
+
+    def use_layer_properties(self, layers, year=1960, data_class=None,
+                             element_type=None):
+        """use custom properties from layer specification
+
+        Parameters
+        ----------
+        layers : list
+            list of thickness - material pairs. thickness are floats. materials
+            have attributes id, name, density, thermalConductivity,
+            heatCapacity, solarAbsorptance, irEmissivity, transmittance which
+            all may be None, but in the end density and thermal conductivity
+            must be specified either by their own values or by material values
+            loaded from data_class via id or name. All others are set to default
+            values (heat capacity: 1 kJ/kgK, rest: default values in Material())
+
+        year : int
+            dummy value (?) because it is required to set basic values
+
+        data_class : DataClass()
+            DataClass containing the bindings for TypeBuildingElement and
+            Material (typically this is the data class stored in prj.data,
+            but the user can individually change that. Default is
+            self.parent.parent.parent.data (which is data_class in current
+            project)
+
+        element_type : str
+            Element type to load - only to specify if the data_class entry for a
+            different type than type(element) is to be loaded, e.g. InnerWall
+            instead of OuterWall
+
+
+        Returns
+        -------
+
+        Raises
+        ------
+        KeyError
+            if material is not sufficiently specified (density and/or thermal
+            conductivity remain 0)
+
+        """
+
+        if data_class is None:
+            data_class = self.parent.parent.parent.data
+        else:
+            data_class = data_class
+
+        self.layer = None
+        self._inner_convection = None
+        self._inner_radiation = None
+        self._outer_convection = None
+        self._outer_radiation = None
+
+        element_binding = data_class.element_bind
+
+        if element_type is None:
+            element_type = type(self).__name__
+
+        for key, element_in in element_binding.items():
+            if key != "version":
+                if (
+                        element_in["building_age_group"][0]
+                        <= year
+                        <= element_in["building_age_group"][1]
+                        and key.startswith(element_type)
+                ):
+                    element_dict = dict(element_in)
+                    element_dict["construction_type"] = "custom"
+                    buildingelement_input._set_basic_data(element=self,
+                                                          element_in=element_in)
+                    break
+
+        # increasing id from inside to outside
+        for id, (thickness, material_info) in enumerate(layers):
+            layer = Layer(parent=self, id=id)
+            layer.thickness = thickness
+            material = Material(layer)
+            # load default material values if available
+            if material_info.id is not None:
+                material_input.load_material_id(material, material_info.id,
+                                                data_class)
+            elif material_info.name is not None:
+                material_input.load_material(material, material_info.name,
+                                             data_class)
+            # use single material properties of material_info
+            if material_info.density is not None:
+                material.density = material_info.density
+            if material_info.thermalConductivity is not None:
+                material.thermal_conduc = material_info.thermalConductivity
+            if material_info.heatCapacity is not None:
+                material.heat_capac = material_info.heatCapacity
+            if material_info.solarAbsorptance is not None:
+                material.solar_absorptance = material_info.solarAbsorptance
+            if material_info.irEmissivity is not None:
+                material.ir_emissivity = material_info.irEmissivity
+            if material_info.transmittance is not None:
+                material.transmittance = material_info.transmittance
+            if material.density == 0 or material.thermal_conduc == 0:
+                warnings.warn('Material not sufficiently specified.')
+                raise KeyError
+            if material.heat_capac == 0:
+                material.heat_capac = 1.0
+                warnings.warn('Material heat capacity not specified. '
+                              '1.0 kJ/(kg*K) will be used.')
+
 
     def set_calc_default(self):
         """Sets all calculated values of the Building Element to zero

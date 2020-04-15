@@ -40,6 +40,9 @@ def load_type_element(element, year, construction, data_class,
     """
     element_binding = data_class.element_bind
 
+    if element_type is None:
+        element_type = type(element).__name__
+
     for key, element_in in element_binding.items():
         if key != "version":
             if (
@@ -47,7 +50,7 @@ def load_type_element(element, year, construction, data_class,
                 <= year
                 <= element_in["building_age_group"][1]
                 and element_in["construction_type"] == construction
-                and key.startswith(type(element).__name__)
+                and key.startswith(element_type)
             ):
                 _set_basic_data(element=element, element_in=element_in)
                 for id, layer_in in element_in["layer"].items():

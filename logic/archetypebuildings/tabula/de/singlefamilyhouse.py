@@ -7,6 +7,8 @@ from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
 from teaser.logic.buildingobjects.buildingphysics.groundfloor import GroundFloor
 from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
+from teaser.logic.buildingobjects.buildingphysics.layer import Layer
+from teaser.logic.buildingobjects.buildingphysics.material import Material
 from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
@@ -407,17 +409,23 @@ class SingleFamilyHouse(Residential):
                 except (KeyError, IndexError):
                     element_type = None
                 try:
-                    year = value[3]['year']
+                    year = value[2]['year']
                 except (KeyError, IndexError):
                     year = self.year_of_construction
                 if area:
                     outer_wall = OuterWall(zone)
-                    outer_wall.load_type_element(
-                        year=year,
-                        construction=self._construction_type_1,
-                        data_class=self.parent.data,
-                        element_type=element_type
-                    )
+                    try:
+                        layers = value[2]['layers']
+                        outer_wall.use_layer_properties(
+                            layers, year=year, element_type=element_type
+                        )
+                    except (KeyError, IndexError):
+                        outer_wall.load_type_element(
+                            year=year,
+                            construction=self._construction_type_1,
+                            data_class=self.parent.data,
+                            element_type=element_type
+                        )
                     outer_wall.name = key
                     outer_wall.tilt = value[0]
                     outer_wall.orientation = value[1]
@@ -425,22 +433,37 @@ class SingleFamilyHouse(Residential):
 
             for key, value in self._outer_wall_names_2.items():
                 try:
-                    area = value[2][zone_index] \
+                    area = value[2]['areas'][zone_index] \
                            * facade_estimation_factors["ow2"] / \
-                           (facade_estimation_factors["ow1"]
-                            + facade_estimation_factors["ow2"])
+                           (facade_estimation_factors["ow2"]
+                            + facade_estimation_factors["ow1"])
                     if area is None:
-                        raise IndexError
-                except IndexError:
+                        raise KeyError
+                except (KeyError, IndexError):
                     area = (facade_estimation_factors["ow2"]
                             * type_bldg_area) / len(self._outer_wall_names_2)
+                try:
+                    element_type = value[2]['element_type']
+                except (KeyError, IndexError):
+                    element_type = None
+                try:
+                    year = value[2]['year']
+                except (KeyError, IndexError):
+                    year = self.year_of_construction
                 if area:
                     outer_wall = OuterWall(zone)
-                    outer_wall.load_type_element(
-                        year=self.year_of_construction,
-                        construction=self._construction_type_2,
-                        data_class=self.parent.data,
-                    )
+                    try:
+                        layers = value[2]['layers']
+                        outer_wall.use_layer_properties(
+                            layers, year=year, element_type=element_type
+                        )
+                    except (KeyError, IndexError):
+                        outer_wall.load_type_element(
+                            year=year,
+                            construction=self._construction_type_2,
+                            data_class=self.parent.data,
+                            element_type=element_type
+                        )
                     outer_wall.name = key
                     outer_wall.tilt = value[0]
                     outer_wall.orientation = value[1]
@@ -460,22 +483,37 @@ class SingleFamilyHouse(Residential):
 
             for key, value in self.window_names_1.items():
                 try:
-                    area = value[2][zone_index] \
+                    area = value[2]['areas'][zone_index] \
                            * facade_estimation_factors["win1"] / \
                            (facade_estimation_factors["win1"]
                             + facade_estimation_factors["win2"])
                     if area is None:
-                        raise IndexError
-                except IndexError:
+                        raise KeyError
+                except (KeyError, IndexError):
                     area = (facade_estimation_factors["win1"]
                             * type_bldg_area) / len(self.window_names_1)
+                try:
+                    element_type = value[2]['element_type']
+                except (KeyError, IndexError):
+                    element_type = None
+                try:
+                    year = value[2]['year']
+                except (KeyError, IndexError):
+                    year = self.year_of_construction
                 if area:
                     window = Window(zone)
-                    window.load_type_element(
-                        self.year_of_construction,
-                        construction=self._construction_type_1,
-                        data_class=self.parent.data,
-                    )
+                    try:
+                        layers = value[2]['layers']
+                        window.use_layer_properties(
+                            layers, year=year, element_type=element_type
+                        )
+                    except (KeyError, IndexError):
+                        window.load_type_element(
+                            year=year,
+                            construction=self._construction_type_1,
+                            data_class=self.parent.data,
+                            element_type=element_type
+                        )
                     window.name = key
                     window.tilt = value[0]
                     window.orientation = value[1]
@@ -483,22 +521,37 @@ class SingleFamilyHouse(Residential):
 
             for key, value in self.window_names_2.items():
                 try:
-                    area = value[2][zone_index] \
+                    area = value[2]['areas'][zone_index] \
                            * facade_estimation_factors["win2"] / \
-                           (facade_estimation_factors["win1"]
-                            + facade_estimation_factors["win2"])
-                    if window.area is None:
-                        raise IndexError
-                except IndexError:
+                           (facade_estimation_factors["win2"]
+                            + facade_estimation_factors["win1"])
+                    if area is None:
+                        raise KeyError
+                except (KeyError, IndexError):
                     area = (facade_estimation_factors["win2"]
                             * type_bldg_area) / len(self.window_names_2)
+                try:
+                    element_type = value[2]['element_type']
+                except (KeyError, IndexError):
+                    element_type = None
+                try:
+                    year = value[2]['year']
+                except (KeyError, IndexError):
+                    year = self.year_of_construction
                 if area:
                     window = Window(zone)
-                    window.load_type_element(
-                        self.year_of_construction,
-                        construction=self._construction_type_2,
-                        data_class=self.parent.data,
-                    )
+                    try:
+                        layers = value[2]['layers']
+                        window.use_layer_properties(
+                            layers, year=year, element_type=element_type
+                        )
+                    except (KeyError, IndexError):
+                        window.load_type_element(
+                            year=year,
+                            construction=self._construction_type_2,
+                            data_class=self.parent.data,
+                            element_type=element_type
+                        )
                     window.name = key
                     window.tilt = value[0]
                     window.orientation = value[1]
@@ -518,22 +571,37 @@ class SingleFamilyHouse(Residential):
 
             for key, value in self.ground_floor_names_1.items():
                 try:
-                    area = value[2][zone_index] \
+                    area = value[2]['areas'][zone_index] \
                            * facade_estimation_factors["gf1"] / \
                            (facade_estimation_factors["gf1"]
                             + facade_estimation_factors["gf2"])
                     if area is None:
-                        raise IndexError
-                except IndexError:
+                        raise KeyError
+                except (KeyError, IndexError):
                     area = (facade_estimation_factors["gf1"]
                             * type_bldg_area) / len(self.ground_floor_names_1)
+                try:
+                    element_type = value[2]['element_type']
+                except (KeyError, IndexError):
+                    element_type = None
+                try:
+                    year = value[2]['year']
+                except (KeyError, IndexError):
+                    year = self.year_of_construction
                 if area:
                     gf = GroundFloor(zone)
-                    gf.load_type_element(
-                        year=self.year_of_construction,
-                        construction=self._construction_type_1,
-                        data_class=self.parent.data,
-                    )
+                    try:
+                        layers = value[2]['layers']
+                        gf.use_layer_properties(
+                            layers, year=year, element_type=element_type
+                        )
+                    except (KeyError, IndexError):
+                        gf.load_type_element(
+                            year=year,
+                            construction=self._construction_type_1,
+                            data_class=self.parent.data,
+                            element_type=element_type
+                        )
                     gf.name = key
                     gf.tilt = value[0]
                     gf.orientation = value[1]
@@ -541,22 +609,37 @@ class SingleFamilyHouse(Residential):
 
             for key, value in self.ground_floor_names_2.items():
                 try:
-                    area = value[2][zone_index] \
+                    area = value[2]['areas'][zone_index] \
                            * facade_estimation_factors["gf2"] / \
-                           (facade_estimation_factors["gf1"]
-                            + facade_estimation_factors["gf2"])
+                           (facade_estimation_factors["gf2"]
+                            + facade_estimation_factors["gf1"])
                     if area is None:
-                        raise IndexError
-                except IndexError:
+                        raise KeyError
+                except (KeyError, IndexError):
                     area = (facade_estimation_factors["gf2"]
                             * type_bldg_area) / len(self.ground_floor_names_2)
+                try:
+                    element_type = value[2]['element_type']
+                except (KeyError, IndexError):
+                    element_type = None
+                try:
+                    year = value[2]['year']
+                except (KeyError, IndexError):
+                    year = self.year_of_construction
                 if area:
                     gf = GroundFloor(zone)
-                    gf.load_type_element(
-                        year=self.year_of_construction,
-                        construction=self._construction_type_2,
-                        data_class=self.parent.data,
-                    )
+                    try:
+                        layers = value[2]['layers']
+                        gf.use_layer_properties(
+                            layers, year=year, element_type=element_type
+                        )
+                    except (KeyError, IndexError):
+                        gf.load_type_element(
+                            year=year,
+                            construction=self._construction_type_2,
+                            data_class=self.parent.data,
+                            element_type=element_type
+                        )
                     gf.name = key
                     gf.tilt = value[0]
                     gf.orientation = value[1]
@@ -576,22 +659,37 @@ class SingleFamilyHouse(Residential):
 
             for key, value in self.roof_names_1.items():
                 try:
-                    area = value[2][zone_index] \
+                    area = value[2]['areas'][zone_index] \
                            * facade_estimation_factors["rt1"] / \
-                           (facade_estimation_factors["gf1"]
+                           (facade_estimation_factors["rt1"]
                             + facade_estimation_factors["rt2"])
                     if area is None:
-                        raise IndexError
-                except IndexError:
+                        raise KeyError
+                except (KeyError, IndexError):
                     area = (facade_estimation_factors["rt1"]
                             * type_bldg_area) / len(self.roof_names_1)
+                try:
+                    element_type = value[2]['element_type']
+                except (KeyError, IndexError):
+                    element_type = None
+                try:
+                    year = value[2]['year']
+                except (KeyError, IndexError):
+                    year = self.year_of_construction
                 if area:
                     rt = Rooftop(zone)
-                    rt.load_type_element(
-                        year=self.year_of_construction,
-                        construction=self._construction_type_1,
-                        data_class=self.parent.data,
-                    )
+                    try:
+                        layers = value[2]['layers']
+                        rt.use_layer_properties(
+                            layers, year=year, element_type=element_type
+                        )
+                    except (KeyError, IndexError):
+                        rt.load_type_element(
+                            year=year,
+                            construction=self._construction_type_1,
+                            data_class=self.parent.data,
+                            element_type=element_type
+                        )
                     rt.name = key
                     rt.tilt = value[0]
                     rt.orientation = value[1]
@@ -599,22 +697,37 @@ class SingleFamilyHouse(Residential):
 
             for key, value in self.roof_names_2.items():
                 try:
-                    area = value[2][zone_index] \
+                    area = value[2]['areas'][zone_index] \
                            * facade_estimation_factors["rt2"] / \
-                           (facade_estimation_factors["gf1"]
-                            + facade_estimation_factors["rt2"])
+                           (facade_estimation_factors["rt2"]
+                            + facade_estimation_factors["rt1"])
                     if area is None:
-                        raise IndexError
-                except IndexError:
+                        raise KeyError
+                except (KeyError, IndexError):
                     area = (facade_estimation_factors["rt2"]
                             * type_bldg_area) / len(self.roof_names_2)
+                try:
+                    element_type = value[2]['element_type']
+                except (KeyError, IndexError):
+                    element_type = None
+                try:
+                    year = value[2]['year']
+                except (KeyError, IndexError):
+                    year = self.year_of_construction
                 if area:
                     rt = Rooftop(zone)
-                    rt.load_type_element(
-                        year=self.year_of_construction,
-                        construction=self._construction_type_2,
-                        data_class=self.parent.data,
-                    )
+                    try:
+                        layers = value[2]['layers']
+                        rt.use_layer_properties(
+                            layers, year=year, element_type=element_type
+                        )
+                    except (KeyError, IndexError):
+                        rt.load_type_element(
+                            year=year,
+                            construction=self._construction_type_2,
+                            data_class=self.parent.data,
+                            element_type=element_type
+                        )
                     rt.name = key
                     rt.tilt = value[0]
                     rt.orientation = value[1]
@@ -634,26 +747,41 @@ class SingleFamilyHouse(Residential):
 
             for key, value in self.door_names.items():
                 try:
-                    area = value[2][zone_index]
+                    area = value[2]['areas'][zone_index]
                     if area is None:
-                        raise IndexError
-                except IndexError:
+                        raise KeyError
+                except (KeyError, IndexError):
                     area = (facade_estimation_factors["door"]
                             * type_bldg_area) / len(self.door_names)
+                try:
+                    element_type = value[2]['element_type']
+                except (KeyError, IndexError):
+                    element_type = None
+                try:
+                    year = value[2]['year']
+                except (KeyError, IndexError):
+                    year = self.year_of_construction
                 if area:
                     door = Door(zone)
-                    door.load_type_element(
-                        year=self.year_of_construction,
-                        construction=self._construction_type_1,
-                        data_class=self.parent.data,
-                    )
+                    try:
+                        layers = value[2]['layers']
+                        door.use_layer_properties(
+                            layers, year=year, element_type=element_type
+                        )
+                    except (KeyError, IndexError):
+                        door.load_type_element(
+                            year=year,
+                            construction=self._construction_type_1,
+                            data_class=self.parent.data,
+                            element_type=element_type
+                        )
                     door.name = key
                     door.tilt = value[0]
                     door.orientation = value[1]
                     door.area = area
 
             for key, value in self.nz_border_names.items():
-                zone_idcs = np.where(np.array(value[2]) != 0)[0]
+                zone_idcs = np.where(np.array(value[2]['areas']) != 0)[0]
                 if zone_index in zone_idcs:
 
                     ass_error_nz_number = "zone borders need to have two zones"
@@ -663,14 +791,29 @@ class SingleFamilyHouse(Residential):
                         outside = self.thermal_zones[zone_idcs[0]]
                     else:
                         outside = self.thermal_zones[zone_idcs[1]]
+                    try:
+                        element_type = value[2]['element_type']
+                    except (KeyError, IndexError):
+                        element_type = None
+                    try:
+                        year = value[2]['year']
+                    except (KeyError, IndexError):
+                        year = self.year_of_construction
 
-                    if value[2][zone_index] and value[1] != -1:
+                    if value[2]['areas'][zone_index] and value[1] != -1:
                         nz_inner_wall = InnerWall(zone, outside=outside)
-                        nz_inner_wall.load_type_element(
-                            year=self.year_of_construction,
-                            construction="tabula_standard",
-                            data_class=self.parent.data,
-                        )
+                        try:
+                            layers = value[2]['layers']
+                            nz_inner_wall.use_layer_properties(
+                                layers, year=year, element_type=element_type
+                            )
+                        except (KeyError, IndexError):
+                            nz_inner_wall.load_type_element(
+                                year=year,
+                                construction="tabula_standard",
+                                data_class=self.parent.data,
+                                element_type=element_type
+                            )
                         nz_inner_wall.outer_convection \
                             = nz_inner_wall.inner_convection
                         nz_inner_wall.outer_radiation \
@@ -678,34 +821,48 @@ class SingleFamilyHouse(Residential):
                         nz_inner_wall.name = key
                         nz_inner_wall.tilt = value[0]
                         nz_inner_wall.orientation = value[1]
-                        nz_inner_wall.area = value[2][zone_index]
-                    elif value[2][zone_index] > 0:
+                        nz_inner_wall.area = value[2]['areas'][zone_index]
+                    elif value[2]['areas'][zone_index] > 0:
                         nz_floor = Floor(zone, outside=outside)
-                        nz_floor.load_type_element(
-                            year=self.year_of_construction,
-                            construction="tabula_standard",
-                            data_class=self.parent.data,
-                        )
+                        try:
+                            layers = value[2]['layers']
+                            nz_floor.use_layer_properties(
+                                layers, year=year, element_type=element_type
+                            )
+                        except (KeyError, IndexError):
+                            nz_floor.load_type_element(
+                                year=year,
+                                construction="tabula_standard",
+                                data_class=self.parent.data,
+                                element_type=element_type
+                            )
                         nz_floor.outer_convection = nz_floor.inner_convection
                         nz_floor.outer_radiation = nz_floor.inner_radiation
                         nz_floor.name = key
                         nz_floor.tilt = value[0]
                         nz_floor.orientation = value[1]
-                        nz_floor.area = value[2][zone_index]
-                    elif value[2][zone_index] < 0:
+                        nz_floor.area = value[2]['areas'][zone_index]
+                    elif value[2]['areas'][zone_index] < 0:
                         nz_ceiling = Ceiling(zone, outside=outside)
-                        nz_ceiling.load_type_element(
-                            year=self.year_of_construction,
-                            construction="tabula_standard",
-                            data_class=self.parent.data,
-                        )
+                        try:
+                            layers = value[2]['layers']
+                            nz_ceiling.use_layer_properties(
+                                layers, year=year, element_type=element_type
+                            )
+                        except (KeyError, IndexError):
+                            nz_ceiling.load_type_element(
+                                year=year,
+                                construction="tabula_standard",
+                                data_class=self.parent.data,
+                                element_type=element_type
+                            )
                         nz_ceiling.outer_convection \
                             = nz_ceiling.inner_convection
                         nz_ceiling.outer_radiation = nz_ceiling.inner_radiation
                         nz_ceiling.name = key
                         nz_ceiling.tilt = value[0]
                         nz_ceiling.orientation = value[1]
-                        nz_ceiling.area = value[2][zone_index] * -1
+                        nz_ceiling.area = value[2]['areas'][zone_index] * -1
 
 
             for key, value in self.inner_wall_names.items():
