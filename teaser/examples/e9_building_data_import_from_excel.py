@@ -177,14 +177,14 @@ def zoning_example(data):
             data.at[index, "OuterWallArea[m²]"] = np.NaN
             data.at[index, "OuterWallConstruction"] = np.NaN
 
-    # # make all rooms that belong to a certain room have the same room identifier
-    # _list = []
-    # for index, line in data.iterrows():
-    #     if pd.isna(line["BelongsToIdentifier"]):
-    #         _list.append(line["RoomIdentifier"])
-    #     else:
-    #         _list.append(line["BelongsToIdentifier"])
-    # data["RoomCluster"] = _list
+    # make all rooms that belong to a certain room have the same room identifier
+    _list = []
+    for index, line in data.iterrows():
+        if pd.isna(line["BelongsToIdentifier"]):
+            _list.append(line["RoomIdentifier"])
+        else:
+            _list.append(line["BelongsToIdentifier"])
+    data["RoomCluster"] = _list
 
     # check for lines in which the net area is zero, marking an second wall
     # or window
