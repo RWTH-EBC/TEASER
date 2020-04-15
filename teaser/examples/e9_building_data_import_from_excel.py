@@ -152,7 +152,10 @@ def zoning_example(data):
     return data: pandas.dataframe
         The zoning should return the imported dataset with an additional
         column called "Zone" which inhibits the
-        information to which zone the respective room shall be part of.
+        information to which zone the respective room shall be part of,
+        and also a column called "UsageType_Teaser" which stores the
+        in UsageType of each row.
+        UsageType must be available in the UseConditions.json.
     """
 
     # account all outer walls not adjacent to the ambient to the entity
@@ -174,14 +177,14 @@ def zoning_example(data):
             data.at[index, "OuterWallArea[m²]"] = np.NaN
             data.at[index, "OuterWallConstruction"] = np.NaN
 
-    # make all rooms that belong to a certain room have the same room identifier
-    _list = []
-    for index, line in data.iterrows():
-        if pd.isna(line["BelongsToIdentifier"]):
-            _list.append(line["RoomIdentifier"])
-        else:
-            _list.append(line["BelongsToIdentifier"])
-    data["RoomCluster"] = _list
+    # # make all rooms that belong to a certain room have the same room identifier
+    # _list = []
+    # for index, line in data.iterrows():
+    #     if pd.isna(line["BelongsToIdentifier"]):
+    #         _list.append(line["RoomIdentifier"])
+    #     else:
+    #         _list.append(line["BelongsToIdentifier"])
+    # data["RoomCluster"] = _list
 
     # check for lines in which the net area is zero, marking an second wall
     # or window
@@ -189,7 +192,7 @@ def zoning_example(data):
     # UsageType which is wrong
     # and should be changed in the file
     for i, row in data.iterrows():
-        if row["NetArea[m²]"] == 0 and not pd.isna(row["UsageType"]):
+        if (row["NetArea[m²]"] == 0 or row["NetArea[m²]"] == np.nan) and not pd.isna(row["UsageType"]):
             warnings.warn(
                 "In line %s the net area is zero, marking an second wall or "
                 "window element for the respective room, "
@@ -246,15 +249,17 @@ def zoning_example(data):
     # rename all zone names from the excel to the according zone name which
     # is in the UseConditions.json files
     usages = get_list_of_present_entries(data["RoomClusterUsage"])
+    data["UsageType_Teaser"] = ""
     for usage in usages:
-        data["RoomClusterUsage"] = np.where(
+        data["UsageType_Teaser"] = np.where(
             data["RoomClusterUsage"] == usage,
             usage_to_json_usage[usage],
-            data["RoomClusterUsage"],
+            data["UsageType_Teaser"],
         )
 
     # name the column where the zones are defined "Zone"
-    data["Zone"] = data["RoomClusterUsage"]
+    data["Zone"] = data["UsageType_Teaser"]
+
 
     return data
 
@@ -295,7 +300,7 @@ def import_building_from_excel(
                 "Here is the list of faulty entries:\n%s"
                 "\nThese entries can easily be found checking the stated index in the produced ZonedInput.xlsx"
                 % (
-                    group["zone"].iloc[0],
+                    group["Zone"].iloc[0],
                     element.name,
                     group["OuterWallConstruction"].iloc[0],
                     group,
@@ -363,17 +368,18 @@ def import_building_from_excel(
         # Block: Thermal zone (general parameter)
         tz = ThermalZone(parent=bldg)
         tz.name = str(name)
-        tz.area = zone["NetArea[m²]"].sum()
+        tz.area = np.nansum(zone["NetArea[m²]"])
         # room vice calculation of volume plus summing those
-        tz.volume = (
+        tz.volume = np.nansum(
             np.array(zone["NetArea[m²]"]) * np.array(zone["HeatedRoomHeight[m]"])
-        ).sum()
+        )
 
         # Block: Boundary Conditions
         # load UsageOperationTime, Lighting, RoomClimate and InternalGains
         # from the "UseCondition.json"
         tz.use_conditions = UseConditions(parent=tz)
-        tz.use_conditions.load_use_conditions(zone["Zone"].iloc[0], project.data)
+        tz.use_conditions.load_use_conditions(zone["UsageType_Teaser"].iloc[0], project.data)
+
 
         # Block: Building Physics
         # Grouping by orientation and construction type
@@ -385,22 +391,23 @@ def import_building_from_excel(
             # additionally check for strings, since the value must be of type
             # int or float
             if not isinstance(group["OuterWallOrientation[°]"].iloc[0], str):
-                out_wall = OuterWall(parent=tz)
-                out_wall.name = (
-                    "outer_wall_"
-                    + str(int(group["OuterWallOrientation[°]"].iloc[0]))
-                    + "_"
-                    + str(group["OuterWallConstruction"].iloc[0])
-                )
-                out_wall.area = group["OuterWallArea[m²]"].sum()
-                out_wall.tilt = out_wall_tilt
-                out_wall.orientation = group["OuterWallOrientation[°]"].iloc[0]
-                # load wall properties from "TypeBuildingElements.json"
-                out_wall.load_type_element(
-                    year=bldg.year_of_construction,
-                    construction=group["OuterWallConstruction"].iloc[0],
-                )
-                warn_constructiontype(out_wall)
+                if np.nansum(group["OuterWallArea[m²]"]) > 0: # only create element if it has an area
+                    out_wall = OuterWall(parent=tz)
+                    out_wall.name = (
+                        "outer_wall_"
+                        + str(int(group["OuterWallOrientation[°]"].iloc[0]))
+                        + "_"
+                        + str(group["OuterWallConstruction"].iloc[0])
+                    )
+                    out_wall.area = np.nansum(group["OuterWallArea[m²]"])
+                    out_wall.tilt = out_wall_tilt
+                    out_wall.orientation = group["OuterWallOrientation[°]"].iloc[0]
+                    # load wall properties from "TypeBuildingElements.json"
+                    out_wall.load_type_element(
+                        year=bldg.year_of_construction,
+                        construction=group["OuterWallConstruction"].iloc[0],
+                    )
+                    warn_constructiontype(out_wall)
             else:
                 warnings.warn(
                     'In zone "%s" the OuterWallOrientation "%s" is '
@@ -423,22 +430,23 @@ def import_building_from_excel(
             # additionally check for strings, since the value must be of type
             # int or float
             if not isinstance(group["OuterWallOrientation[°]"].iloc[0], str):
-                window = Window(parent=tz)
-                window.name = (
-                    "window_"
-                    + str(int(group["WindowOrientation[°]"].iloc[0]))
-                    + "_"
-                    + str(group["WindowConstruction"].iloc[0])
-                )
-                window.area = group["WindowArea[m²]"].sum()
-                window.tilt = window_tilt
-                window.orientation = group["WindowOrientation[°]"].iloc[0]
-                # load wall properties from "TypeBuildingElements.json"
-                window.load_type_element(
-                    year=bldg.year_of_construction,
-                    construction=group["WindowConstruction"].iloc[0],
-                )
-                warn_constructiontype(window)
+                if np.nansum(group["WindowArea[m²]"]) > 0:  # only create element if it has an area
+                    window = Window(parent=tz)
+                    window.name = (
+                        "window_"
+                        + str(int(group["WindowOrientation[°]"].iloc[0]))
+                        + "_"
+                        + str(group["WindowConstruction"].iloc[0])
+                    )
+                    window.area = np.nansum(group["WindowArea[m²]"])
+                    window.tilt = window_tilt
+                    window.orientation = group["WindowOrientation[°]"].iloc[0]
+                    # load wall properties from "TypeBuildingElements.json"
+                    window.load_type_element(
+                        year=bldg.year_of_construction,
+                        construction=group["WindowConstruction"].iloc[0],
+                    )
+                    warn_constructiontype(window)
             else:
                 warnings.warn(
                     'In zone "%s" the window orientation "%s" is neither '
@@ -456,13 +464,13 @@ def import_building_from_excel(
 
         grouped = zone.groupby(["IsGroundFloor", "FloorConstruction"])
         for name, group in grouped:
-            if group["NetArea[m²]"].sum() != 0:  # to avoid devision by 0
+            if np.nansum(group["NetArea[m²]"]) != 0:  # to avoid devision by 0
                 if group["IsGroundFloor"].iloc[0] == 1:
                     ground_floor = GroundFloor(parent=tz)
                     ground_floor.name = "ground_floor" + str(
                         group["FloorConstruction"].iloc[0]
                     )
-                    ground_floor.area = group["NetArea[m²]"].sum()
+                    ground_floor.area = np.nansum(group["NetArea[m²]"])
                     ground_floor.tilt = ground_floor_tilt
                     ground_floor.orientation = ground_floor_orientation
                     # load wall properties from "TypeBuildingElements.json"
@@ -474,7 +482,7 @@ def import_building_from_excel(
                 elif group["IsGroundFloor"].iloc[0] == 0:
                     floor = Floor(parent=tz)
                     floor.name = "floor" + str(group["FloorConstruction"].iloc[0])
-                    floor.area = group["NetArea[m²]"].sum() / 2  # only half of
+                    floor.area = np.nansum(group["NetArea[m²]"]) / 2  # only half of
                     # the floor belongs to this story
                     floor.tilt = floor_tilt
                     floor.orientation = floor_orientation
@@ -503,13 +511,13 @@ def import_building_from_excel(
 
         grouped = zone.groupby(["IsRooftop", "CeilingConstruction"])
         for name, group in grouped:
-            if group["NetArea[m²]"].sum() != 0:  # to avoid devision by 0
+            if np.nansum(group["NetArea[m²]"]) != 0:  # to avoid devision by 0
                 if group["IsRooftop"].iloc[0] == 1:
                     rooftop = Rooftop(parent=tz)
                     rooftop.name = "rooftop" + str(group["CeilingConstruction"].iloc[0])
-                    rooftop.area = group[
+                    rooftop.area = np.nansum(group[
                         "NetArea[m²]"
-                    ].sum()  # sum up area of respective
+                    ])  # sum up area of respective
                     # rooftop parts
                     rooftop.tilt = rooftop_tilt
                     rooftop.orientation = rooftop_orientation
@@ -522,7 +530,7 @@ def import_building_from_excel(
                 elif group["IsRooftop"].iloc[0] == 0:
                     ceiling = Ceiling(parent=tz)
                     ceiling.name = "ceiling" + str(group["CeilingConstruction"].iloc[0])
-                    ceiling.area = group["NetArea[m²]"].sum() / 2  # only half
+                    ceiling.area = np.nansum(group["NetArea[m²]"]) / 2  # only half
                     # of the ceiling belongs to a story,
                     # the other half to the above
                     ceiling.tilt = ceiling_tilt
@@ -552,12 +560,12 @@ def import_building_from_excel(
 
         grouped = zone.groupby(["InnerWallConstruction"])
         for name, group in grouped:
-            if group["InnerWallArea[m²]"].sum() != 0:  # to avoid devision by 0
+            if np.nansum(group["InnerWallArea[m²]"]) != 0:  # to avoid devision by 0
                 in_wall = InnerWall(parent=tz)
                 in_wall.name = "inner_wall" + str(
                     group["InnerWallConstruction"].iloc[0]
                 )
-                in_wall.area = group["InnerWallArea[m²]"].sum() / 2  # only
+                in_wall.area = np.nansum(group["InnerWallArea[m²]"]) / 2  # only
                 # half of the wall belongs to each room,
                 # the other half to the adjacent
                 # load wall properties from "TypeBuildingElements.json"
@@ -625,6 +633,10 @@ if __name__ == "__main__":
 
     prj.modelica_info.current_solver = "dassl"
     prj.calc_all_buildings(raise_errors=True)
+
+    # Hard coding
+    # for zones: zone.model_attr.cool_load = -5000 or -zone.model_attr.heat_load
+
     prj.export_aixlib(internal_id=None, path=result_path)
 
     # if wished, export the zoned DataFrame which is finally used to
