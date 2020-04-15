@@ -328,7 +328,6 @@ def import_building_from_excel(
     #   have same set_temp_heat actual value: use_set_back = Check your current version!
     # !This may has been resolved with the last changes in the development
 
-
     # Parameters to be set for each and every zone (#HardCodedInput)
     # -----------------------------
     out_wall_tilt = 90
