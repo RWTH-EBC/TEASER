@@ -326,11 +326,8 @@ def import_building_from_excel(
     #   heating_time with the respective set_back_temp should be applied.
     #   use_set_back = false -> all hours of the day
     #   have same set_temp_heat actual value: use_set_back = Check your current version!
-    # 2. HeaterOn, CoolerOn, hHeat, lCool, etc. can be hard coded in the text
-    # file
-    #   "teaser / data / output / modelicatemplate / AixLib /
-    #   AixLib_ThermalZoneRecord_TwoElement"
-    #   actual changes: Check your current version!
+    # !This may has been resolved with the last changes in the development
+
 
     # Parameters to be set for each and every zone (#HardCodedInput)
     # -----------------------------
