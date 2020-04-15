@@ -562,7 +562,7 @@ def import_building_from_excel(
 
         grouped = zone.groupby(["InnerWallConstruction"])
         for name, group in grouped:
-            if np.nansum(group["InnerWallArea[m²]"]) != 0:  # to avoid devision by 0
+            if np.nansum(group["InnerWallArea[m²]"]) != 0:  # avoid deviding by 0
                 in_wall = InnerWall(parent=tz)
                 in_wall.name = "inner_wall" + str(
                     group["InnerWallConstruction"].iloc[0]
