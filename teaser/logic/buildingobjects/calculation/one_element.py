@@ -920,7 +920,7 @@ class OneElement(object):
 
             if not wins:
                 self.weightfactor_win.append(0.0)
-                self.shading_g_total.append(0.0)
+                self.shading_g_total.append(1.0)
                 self.window_areas.append(0.0)
                 self.transparent_areas.append(0.0)
             else:
