@@ -330,10 +330,13 @@ class FourElement(object):
     weighted_g_value : float
         Area-weighted g-Value of all windows.
     shading_max_irr : list of float [W/m2]
-        Threshold when sunblind becomes active for the whole zone
+        Threshold value above which the sunblind becomes active for the whole zone.
+        Threshold regards to the incoming irradiation level with the window direction.
+        This value does not account for heat flux due to the outside temperature.
     shading_g_total : list of float
-        Factor representing how much of the solar irradiation goes through
-        the sunblind
+        Factor representing how much of the actual solar irradiation goes through
+        the sunblind and enters the window element, for the case, that the sunblind is
+        activated. Defaults to 1, i.e. no shading is active.
 
     Misc values:
 
