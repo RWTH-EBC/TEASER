@@ -131,16 +131,22 @@ class UseConditions(object):
         Annex: Not used (see Annex examples)
     min_ahu: float [m3/(m2*h)]
         Zone specific minimum specific air flow supplied by the AHU.
-        Air flow varies lineary with the persons_profile,
-        person=0 -> min_ahu, person=1 -> max_ahu.
         AixLib: Used on Multizone level for central AHU to determine total
-        volume flow of all zones.
+        volume flow of each zone.
+            Note: The AixLib parameter "WithProfile" determines whether the
+            (v_flow_profile combined with "min_ahu and max_ahu") or the
+            (persons_profile combined with "min_ahu and max_ahu")
+            is used for the AHU supply flow calculations.
+            Per default: (v_flow_profile combined with "min_ahu and max_ahu")
     max_ahu : float [m3/(m2*h)]
         Zone specific maximum specific air flow supplied by the AHU.
-        Air flow varies lineary with the persons_profile,
-        person=0 -> min_ahu, person=1 -> max_ahu.
         AixLib: Used on Multizone level for central AHU to determine total
-        volume flow of all zones.
+        volume flow of each zone.
+            Note: The AixLib parameter "WithProfile" determines whether the
+            (v_flow_profile combined with "min_ahu and max_ahu") or the
+            (persons_profile combined with "min_ahu and max_ahu")
+            is used for the AHU supply flow calculations.
+            Per default: (v_flow_profile combined with "min_ahu and max_ahu")
     with_ahu : boolean
         Zone is connected to central air handling unit or not
         AixLib: Used on Multizone level for central AHU.
