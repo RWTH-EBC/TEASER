@@ -52,10 +52,12 @@ class UseConditions(object):
         Degree Days and Precipitation in Europe—analysis for the
         CELECT-project" by Benestad, 2008.
     heating_profile : list [K]
-        Heating setpoint of AHU for a day or similar. You can set a list of any
+        Heating setpoint, regarding the zone temperature, of ideal static
+        heating for a day or similar. You can set a list of any
         length, TEASER will multiplicate this list for one whole year.
     cooling_profile : list [K]
-        Cooling setpoint of AHU for a day or similar. You can set a list of any
+        Cooling setpoint, regarding the zone temperature, of ideal static
+        cooling for a day or similar. You can set a list of any
         length, TEASER will multiplicate this list for one whole year.
     fixed_heat_flow_rate_persons: float [W/person]
         fixed heat flow rate for one person in case of temperature
@@ -123,21 +125,28 @@ class UseConditions(object):
         AixLib: Used for internal gains profile on top-level
         Annex: Not used (see Annex examples)
     min_ahu: float [m3/(m2*h)]
-        Zone specific minimum specific air flow supplied by the AHU
+        Zone specific minimum specific air flow supplied by the AHU.
+        Air flow varies lineary with the persons_profile,
+        person=0 -> min_ahu, person=1 -> max_ahu.
         AixLib: Used on Multizone level for central AHU to determine total
         volume flow of all zones.
     max_ahu : float [m3/(m2*h)]
-        Zone specific maximum specific air flow supplied by the AHU
+        Zone specific maximum specific air flow supplied by the AHU.
+        Air flow varies lineary with the persons_profile,
+        person=0 -> min_ahu, person=1 -> max_ahu.
         AixLib: Used on Multizone level for central AHU to determine total
         volume flow of all zones.
     with_ahu : boolean
         Zone is connected to central air handling unit or not
         AixLib: Used on Multizone level for central AHU.
     use_constant_infiltration : boolean
-        choose if a constant infiltration rate should be used
+        choose whether window opening should be regarded.
+        true = natural infiltration + ventilation due to a AHU
+        false = natural infiltration + ventilation due to a AHU
+            + window infiltration calculated by window opening model
         AixLib: Used on Zone level for ventilation.
     base_infiltration : float [1/h]
-        base value for the infiltration rate
+        base value for the natural infiltration without window openings
         AixLib: Used on Zone level for ventilation.
     max_user_infiltration : float [1/h]
         Additional infiltration rate for maximum persons activity
