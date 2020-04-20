@@ -170,6 +170,7 @@ class UseConditions(object):
     schedules: pandas.DataFrame
         All time dependent boundary attributes in one pandas DataFrame, used
         for export (one year in hourly timestep.)
+        Note: python attribute, not customizable by user (derived from Json)
 
     """
 
