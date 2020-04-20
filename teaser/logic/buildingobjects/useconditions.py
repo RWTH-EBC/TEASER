@@ -44,15 +44,18 @@ class UseConditions(object):
         Heating of AHU means supply temperature > room temperature.
         Cooling of AHU means supply temperature < room temperature.
     T_threshold_heating: float [K]
-       Threshold for the outside temperature above which the ideal heater is permanently shut down regardless the inside temperature.
-       Default is 15 °C which corresponds to the value for all buildings that are not built
+       Threshold for the outside temperature above which the ideal heater is
+       permanently shut down regardless the inside temperature.
+       Default is 15 °C which corresponds to the value for all buildings
+       that are not built
        according to EnEV standard according to DIN EN 18599-5.
     T_threshold_cooling: float [K]
-        Threshold for the outside temperature below which the ideal cooler is permanently shut down regardless the inside temperature.
-        Default is 22 °C, since there are no european standards for cooling degree days this value
-        is taken from the following paper: "Heating Degree Days, Cooling
-        Degree Days and Precipitation in Europe—analysis for the
-        CELECT-project" by Benestad, 2008.
+        Threshold for the outside temperature below which the ideal cooler is
+        permanently shut down regardless the inside temperature.
+        Default is 22 °C, since there are no european standards
+        for cooling degree days this value is taken from the following paper:
+        "Heating Degree Days, Cooling Degree Days and Precipitation in Europe
+        —analysis for the CELECT-project" by Benestad, 2008.
     heating_profile : list [K]
         Heating setpoint, regarding the zone temperature, of ideal static
         heating for a day or similar. You can set a list of any
