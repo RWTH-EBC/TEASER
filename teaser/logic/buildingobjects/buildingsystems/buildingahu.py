@@ -73,6 +73,9 @@ class BuildingAHU(object):
         timeline of relative humidity requirements for AHU simulation
     v_flow_profile : [int]
         timeline of desired relative v_flow of the AHU simulation (0..1)
+        note: regularly this is just a dummy, since modelica only uses
+        the rel. occupancy of a zone to calculate the supply flow.
+        This can be changed with the AixLib parameter "WithProfile"
 
     """
 
