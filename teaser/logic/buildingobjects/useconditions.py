@@ -41,13 +41,15 @@ class UseConditions(object):
         be used to prevent simultaneous heating from AHU and cooling from
         ideal heater and vice versa. This should only be turned on if an AHU
         exists.
+        Heating of AHU means supply temperature > room temperature.
+        Cooling of AHU means supply temperature < room temperature.
     T_threshold_heating: float [K]
-       Threshold temperature below ideal heater is used. Default is 15 °C
-       which corresponds to the value for all buildings that are not built
+       Threshold for the outside temperature above which the ideal heater is permanently shut down regardless the inside temperature.
+       Default is 15 °C which corresponds to the value for all buildings that are not built
        according to EnEV standard according to DIN EN 18599-5.
     T_threshold_cooling: float [K]
-        Threshold temperature above ideal cooler is used. Default is 22 °C ,
-        since there are no european standards for cooling degree days this value
+        Threshold for the outside temperature below which the ideal cooler is permanently shut down regardless the inside temperature.
+        Default is 22 °C, since there are no european standards for cooling degree days this value
         is taken from the following paper: "Heating Degree Days, Cooling
         Degree Days and Precipitation in Europe—analysis for the
         CELECT-project" by Benestad, 2008.
