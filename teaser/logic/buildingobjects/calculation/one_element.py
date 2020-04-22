@@ -359,6 +359,7 @@ class OneElement(object):
         self._calc_number_of_elements()
         self._fill_zone_lists()
         self._calc_heat_load()
+        self.cool_load = -self.heat_load
 
     @staticmethod
     def _calc_parallel_connection(element_list, omega):
