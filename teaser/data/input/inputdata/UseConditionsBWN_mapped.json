@@ -17,7 +17,7 @@
         "internal_gains_moisture_no_people": 0.5,
         "T_threshold_cooling": 295.15,
         "ratio_conv_rad_persons": 0.5,
-        "machines": 12.0,
+        "machines": 25.0,
         "ratio_conv_rad_machines": 0.5,
         "lighting_power": 2.0,
         "ratio_conv_rad_lighting": 0.5,
