@@ -37,12 +37,12 @@ class UseConditions(object):
     with_cooling: boolean
         Sets if the zone is cooled by ideal cooler or not.
     with_ideal_thresholds: boolean
-        Sets if the threshold temperatures for ideal heater and cooler should
-        be used to prevent simultaneous heating from AHU and cooling from
-        ideal heater and vice versa. This should only be turned on if an AHU
-        exists.
-        Heating of AHU means supply temperature > room temperature.
-        Cooling of AHU means supply temperature < room temperature.
+        Sets if the threshold temperatures for ideal heater and cooler are
+        used.
+        True = T_threshold_heating and T_threshold_cooling are used.
+        This can, in most cases, prevent simultaneous heating from AHU and
+        cooling from ideal heater and vice versa. This should only be turned
+        on if an AHU exists.
     T_threshold_heating: float [K]
        Threshold for the outside temperature above which the ideal heater is
        permanently shut down regardless the inside temperature.
