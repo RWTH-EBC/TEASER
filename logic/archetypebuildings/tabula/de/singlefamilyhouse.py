@@ -830,9 +830,15 @@ class SingleFamilyHouse(Residential):
                                 layers, year=year, element_type=element_type
                             )
                         except (KeyError, IndexError):
+                            if element_type in ('Rooftop', 'GroundFloor'):
+                                # TODO mean value of standard 1 and 2
+                                #  usually, only standard 1 exists
+                                construction = "tabula_standard_1_SFH"
+                            else:
+                                construction = 'tabula_standard'
                             nz_floor.load_type_element(
                                 year=year,
-                                construction="tabula_standard",
+                                construction=construction,
                                 data_class=self.parent.data,
                                 element_type=element_type
                             )
@@ -850,9 +856,15 @@ class SingleFamilyHouse(Residential):
                                 layers, year=year, element_type=element_type
                             )
                         except (KeyError, IndexError):
+                            if element_type in ('Rooftop', 'GroundFloor'):
+                                # TODO mean value of standard 1 and 2
+                                #  usually, only standard 1 exists
+                                construction = "tabula_standard_1_SFH"
+                            else:
+                                construction = 'tabula_standard'
                             nz_ceiling.load_type_element(
                                 year=year,
-                                construction="tabula_standard",
+                                construction=construction,
                                 data_class=self.parent.data,
                                 element_type=element_type
                             )
@@ -877,7 +889,7 @@ class SingleFamilyHouse(Residential):
                 inner_wall.tilt = value[0]
                 inner_wall.orientation = value[1]
 
-            if self.number_of_floors > 1:
+            if zone.number_of_floors > 1:
 
                 for key, value in self.ceiling_names.items():
 

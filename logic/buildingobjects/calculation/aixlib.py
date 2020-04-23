@@ -61,6 +61,7 @@ class AixLib(object):
         self.file_set_t_cool = "TsetCool_" + self.parent.name + ".txt"
         self.file_ahu = "AHU_" + self.parent.name + ".txt"
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".txt"
+        self.file_add_int_gains = "AddIntGains_" + self.parent.name + ".txt"
         self.version = "0.9.1"
         self.total_surface_area = None
         self.consider_heat_capacity = True
@@ -300,6 +301,51 @@ class AixLib(object):
                 "double Internals({}, {})\n".format(
                     8760, (len(self.parent.thermal_zones) * 3 + 1)
                 )
+            )
+            export.to_csv(f, sep="\t", header=False, index_label=False)
+
+    def modelica_add_int_gains(self, path=None):
+        """Create .txt file for additional internal gains.
+
+        This function creates a txt for additional internal gains of each
+        zone, that are all saved into one matrix.
+
+        Parameters
+        ----------
+        path : str
+            optional path, when matfile is exported separately
+
+        """
+        if path is None:
+            path = utilities.get_default_path()
+        else:
+            pass
+
+        utilities.create_path(path)
+        path = os.path.join(path, self.file_add_int_gains)
+
+        export = pd.DataFrame(
+            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
+            .to_series()
+            .dt.strftime("%m-%d %H:%M:%S")
+        )
+
+        for zone_count in self.parent.thermal_zones:
+            export[
+                "radiative_{}".format(zone_count.name)
+            ] = 0.0
+
+        for zone_count in self.parent.thermal_zones:
+            export[
+                "convective_{}".format(zone_count.name)
+            ] = 0.0
+
+        export.index = [(i + 1) * 3600 for i in range(8760)]
+        self._delete_file(path=path)
+        with open(path, "a") as f:
+            f.write("#1\n")
+            f.write(
+                "double IntGainsConvRad({}, {})\n".format(8760, len(self.parent.thermal_zones) * 2 + 1)
             )
             export.to_csv(f, sep="\t", header=False, index_label=False)
 

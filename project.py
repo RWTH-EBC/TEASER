@@ -104,6 +104,8 @@ class Project(object):
             )
         )
 
+        self.t_soil_file_path = False
+
         self.buildings = []
 
         self.load_data = load_data
@@ -1017,7 +1019,7 @@ class Project(object):
         zone_model=None,
         corG=None,
         internal_id=None,
-        path=None,
+        path=None
     ):
         """Exports values to a record file for Modelica simulation
 

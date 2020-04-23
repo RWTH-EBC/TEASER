@@ -95,6 +95,7 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     ACHNZ = ${get_list(zone.use_conditions.infiltration_rate_nz)},
     hConFNZOut = ${zone.model_attr.alpha_conv_outer_gf},
     hRadFNZOut = ${zone.model_attr.alpha_rad_outer_gf},
-    factorNZFloor = ${zone.model_attr.factor_nz_gf});
+    factorNZFloor = ${zone.model_attr.factor_nz_gf},
+    TSoilConst = ${get_true_false(not t_soil_from_file)});
 
 end ${zone.parent.name}_${zone.name};
