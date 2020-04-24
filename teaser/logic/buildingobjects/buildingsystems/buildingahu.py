@@ -168,7 +168,7 @@ class BuildingAHU(object):
     def max_relative_humidity_profile(self, value):
         if not isinstance(value, list):
             value = [value]
-        self._min_relative_humidity_profile = value
+        self._max_relative_humidity_profile = value
         self.schedules["max_relative_humidity_profile"] = list(
             islice(cycle(value), 8760)
         )
