@@ -213,7 +213,7 @@ def zoning_example(data):
                 main_usage = line[1]["UsageType"]
                 for i, row in data.iterrows():
                     if row["RoomCluster"] == line[1]["RoomCluster"]:
-                        data.at[i, "RoomClusterUsage"] = main_usage
+                        data.loc[i, "RoomClusterUsage"] = main_usage
                 count += 1
         if count != 1:
             warnings.warn(
