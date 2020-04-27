@@ -106,7 +106,7 @@ def import_data(path=None, sheet_names=None):
     # Convert every N/A, nan, empty strings and strings called N/a, n/A, NAN,
     # nan, na, Na, nA or NA to np.nan
     data = data.replace(
-        ["", "N/a", "n/A", "NAN", "nan", "na", "Na", "nA", "NA"], np.nan, regex=True
+        ["", "N/a", "n/A", "NAN", "nan", "na", "Na", "nA", "NA"], np.nan, regex=False
     )
     data = data.fillna(np.nan)
 
@@ -165,17 +165,17 @@ def zoning_example(data):
     # inner wall is set
     for index, line in data.iterrows():
         if not pd.isna(line["WallAdjacentTo"]):
-            data.at[index, "InnerWallArea[m²]"] = (
-                data.at[index, "OuterWallArea[m²]"]
-                + data.at[index, "WindowArea[m²]"]
-                + data.at[index, "InnerWallArea[m²]"]
+            data.loc[index, "InnerWallArea[m²]"] = (
+                data.loc[index, "OuterWallArea[m²]"]
+                + data.loc[index, "WindowArea[m²]"]
+                + data.loc[index, "InnerWallArea[m²]"]
             )
-            data.at[index, "WindowOrientation[°]"] = np.NaN
-            data.at[index, "WindowArea[m²]"] = np.NaN
-            data.at[index, "WindowConstruction"] = np.NaN
-            data.at[index, "OuterWallOrientation[°]"] = np.NaN
-            data.at[index, "OuterWallArea[m²]"] = np.NaN
-            data.at[index, "OuterWallConstruction"] = np.NaN
+            data.loc[index, "WindowOrientation[°]"] = np.NaN
+            data.loc[index, "WindowArea[m²]"] = np.NaN
+            data.loc[index, "WindowConstruction"] = np.NaN
+            data.loc[index, "OuterWallOrientation[°]"] = np.NaN
+            data.loc[index, "OuterWallArea[m²]"] = np.NaN
+            data.loc[index, "OuterWallConstruction"] = np.NaN
 
     # make all rooms that belong to a certain room have the same room identifier
     _list = []
@@ -429,7 +429,7 @@ def import_building_from_excel(
             # groups where one of the attributes is nan
             # additionally check for strings, since the value must be of type
             # int or float
-            if not isinstance(group["OuterWallOrientation[°]"].iloc[0], str):
+            if not isinstance(group["WindowOrientation[°]"].iloc[0], str):
                 if (
                     np.nansum(group["WindowArea[m²]"]) > 0
                 ):  # only create element if it has an area
