@@ -687,12 +687,12 @@ class TwoElement(object):
                                        self.thermal_zone.ceilings)))
 
         self.ir_emissivity_inner_iw = (
-            sum(in_wall.layer[0].material.ir_emissivity * in_wall.area for
-                in_wall in self.thermal_zone.inner_walls)
-            + sum(floor.layer[0].material.ir_emissivity * floor.area for
-                  floor in self.thermal_zone.floors)
-            + sum(ceiling.layer[0].material.ir_emissivity * ceiling.area for
-                  ceiling in self.thermal_zone.ceilings) / self.area_iw)
+            (sum(in_wall.layer[0].material.ir_emissivity * in_wall.area for
+                 in_wall in self.thermal_zone.inner_walls)
+             + sum(floor.layer[0].material.ir_emissivity * floor.area for
+                   floor in self.thermal_zone.floors)
+             + sum(ceiling.layer[0].material.ir_emissivity * ceiling.area for
+                   ceiling in self.thermal_zone.ceilings)) / self.area_iw)
 
         self.alpha_conv_inner_iw = (
             1 / (self.r_conv_inner_iw * self.area_iw))
