@@ -181,6 +181,7 @@ class UseConditions(object):
         for export (one year in hourly timestep.)
         Note: python attribute, not customizable by user (derived from Json)
 
+
     """
 
     def __init__(self, parent=None):
