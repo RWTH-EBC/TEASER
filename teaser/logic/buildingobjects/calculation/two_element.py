@@ -740,8 +740,7 @@ class TwoElement(object):
                 ceiling.layer[0].material.ir_emissivity * ceiling.area
                 for ceiling in self.thermal_zone.ceilings
             )
-            / self.area_iw
-        )
+        ) / self.area_iw
 
         self.alpha_conv_inner_iw = 1 / (self.r_conv_inner_iw * self.area_iw)
         self.alpha_rad_inner_iw = 1 / (self.r_rad_inner_iw * self.area_iw)

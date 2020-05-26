@@ -817,10 +817,12 @@ class FourElement(object):
             sum(1 / out_wall.r_inner_comb for out_wall in self.thermal_zone.outer_walls)
         )
 
-        self.ir_emissivity_inner_ow = sum(
-            out_wall.layer[0].material.ir_emissivity * out_wall.area
-            for out_wall in self.thermal_zone.outer_walls
-        )
+        self.ir_emissivity_inner_ow = (
+            sum(
+                out_wall.layer[0].material.ir_emissivity * out_wall.area
+                for out_wall in self.thermal_zone.outer_walls
+            )
+        ) / self.area_ow
 
         self.alpha_conv_inner_ow = 1 / (self.r_conv_inner_ow * self.area_ow)
         self.alpha_rad_inner_ow = 1 / (self.r_rad_inner_ow * self.area_ow)
@@ -892,9 +894,12 @@ class FourElement(object):
             1 / ground.r_inner_comb for ground in self.thermal_zone.ground_floors
         )
 
-        self.ir_emissivity_inner_gf = sum(
-            ground.layer[0].material.ir_emissivity * ground.area
-            for ground in self.thermal_zone.ground_floors
+        self.ir_emissivity_inner_gf = (
+            sum(
+                ground.layer[0].material.ir_emissivity * ground.area
+                for ground in self.thermal_zone.ground_floors
+            )
+            / self.area_gf
         )
 
         self.alpha_conv_inner_gf = 1 / (self.r_conv_inner_gf * self.area_gf)
@@ -1038,8 +1043,7 @@ class FourElement(object):
                 ceiling.layer[0].material.ir_emissivity * ceiling.area
                 for ceiling in self.thermal_zone.ceilings
             )
-            / self.area_iw
-        )
+        ) / self.area_iw
 
         self.alpha_conv_inner_iw = 1 / (self.r_conv_inner_iw * self.area_iw)
         self.alpha_rad_inner_iw = 1 / (self.r_rad_inner_iw * self.area_iw)
