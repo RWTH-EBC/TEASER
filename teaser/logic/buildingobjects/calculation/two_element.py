@@ -459,6 +459,7 @@ class TwoElement(object):
         self._calc_number_of_elements()
         self._fill_zone_lists()
         self._calc_heat_load()
+        self.cool_load = -self.heat_load
 
         return True
 
