@@ -116,9 +116,11 @@ class IBPSA(object):
             f.write("#1\n")
             f.write(
                 "double Internals({}, {})\n".format(
-                    8760, (len(self.parent.thermal_zones) * 3 + 1)
+                    8761, (len(self.parent.thermal_zones) * 3 + 1)
                 )
             )
+            # write the first row with t=0
+            f.write("0\t{}".format(export.iloc[:1, :].to_csv(sep="\t", header=False, index=False)))
             export.to_csv(f, sep="\t", header=False, index_label=False)
 
     def _delete_file(self, path):
