@@ -27,6 +27,8 @@ model ${zone.parent.name}_${zone.name}
   ${library}.ThermalZones.ReducedOrder.RC.TwoElements
   thermalZoneTwoElements(
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
+    use_moisture_balance=false,
+    nPorts=0,
 % if zone.parent.library_attr.consider_heat_capacity is True:
     VAir=${zone.volume},
 % else:
