@@ -114,11 +114,8 @@ class IBPSA(object):
         self._delete_file(path=path)
         with open(path, "a") as f:
             f.write("#1\n")
-            f.write(
-                "double Internals({}, {})\n".format(
-                    8761, (len(self.parent.thermal_zones) * 3 + 1)
-                )
-            )
+            # The size of the dataset is always 4 columns as each thermal zone has its own data file.
+            f.write("double Internals(8761, 4)\n")
             # write the first row with t=0
             f.write("0\t{}".format(export.iloc[:1, :].to_csv(sep="\t", header=False, index=False)))
             export.to_csv(f, sep="\t", header=False, index_label=False)

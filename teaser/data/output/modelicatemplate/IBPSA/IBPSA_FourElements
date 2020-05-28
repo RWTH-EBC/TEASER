@@ -28,7 +28,7 @@ model ${zone.parent.name}_${zone.name}
   thermalZoneFourElements(
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
     use_moisture_balance=use_moisture_balance,
-    nPorts=0,
+    nPorts=9999,
 % if zone.parent.library_attr.consider_heat_capacity is True:
     VAir=${zone.volume},
 % else:
