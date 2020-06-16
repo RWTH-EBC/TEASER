@@ -177,4 +177,5 @@ class Institute4(Office):
         self.est_exponent_wall = 0.6177
         self.est_factor_wall_area = 13.895
 
-        self.central_ahu.humidification = False
+        if self.central_ahu:
+            self.central_ahu.humidification = False
