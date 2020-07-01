@@ -7,7 +7,8 @@ from mako.lookup import TemplateLookup
 import teaser.logic.utilities as utilities
 
 
-def export_multizone(buildings, prj, path=None):
+def export_multizone(buildings, prj, path=None, custom_zone_template_path=None,
+                     custom_multizone_template_path=None):
     """Exports models for AixLib library
 
     Exports a building for
@@ -37,7 +38,12 @@ def export_multizone(buildings, prj, path=None):
     path : string
         if the Files should not be stored in default output path of TEASER,
         an alternative path can be specified as a full path
-
+    custom_zone_template_path : string
+        if a custom template for writing the zone base record should be used,
+        specify its full path as string
+    custom_multizone_template_path : string
+        if a custom template for writing the multizone model should be used,
+        specify its full path as string
     Attributes
     ----------
 
@@ -51,6 +57,8 @@ def export_multizone(buildings, prj, path=None):
         Template for ThermalZoneRecord using 3 element model
     zone_template_4 : Template object
         Template for ThermalZoneRecord using 4 element model
+    zone_template_custom : Template object
+        Template for custom ThermalZoneRecord
     model_template : Template object
         Template for MultiZone model
     """
@@ -77,10 +85,19 @@ def export_multizone(buildings, prj, path=None):
             "data/output/modelicatemplate/AixLib"
             "/AixLib_ThermalZoneRecord_FourElement"),
         lookup=lookup)
-    model_template = Template(
-        filename=utilities.get_full_path(
-            "data/output/modelicatemplate/AixLib/AixLib_Multizone"),
-        lookup=lookup)
+    if custom_zone_template_path:
+        zone_template_custom = Template(
+            filename=custom_zone_template_path, lookup=lookup
+        )
+    if custom_multizone_template_path:
+        model_template = Template(
+            filename=custom_multizone_template_path,
+            lookup=lookup)
+    else:
+        model_template = Template(
+            filename=utilities.get_full_path(
+                "data/output/modelicatemplate/AixLib/AixLib_Multizone"),
+            lookup=lookup)
 
     uses = [
         'Modelica(version="' + prj.modelica_info.version + '")',
@@ -152,7 +169,9 @@ def export_multizone(buildings, prj, path=None):
 
             out_file = open(utilities.get_full_path(os.path.join(
                 zone_path, bldg.name + '_' + zone.name + '.mo')), 'w')
-            if type(zone.model_attr).__name__ == "OneElement":
+            if custom_zone_template_path:
+                out_file.write(zone_template_custom.render_unicode(zone=zone))
+            elif type(zone.model_attr).__name__ == "OneElement":
                 out_file.write(zone_template_1.render_unicode(zone=zone))
             elif type(zone.model_attr).__name__ == "TwoElement":
                 out_file.write(zone_template_2.render_unicode(zone=zone))

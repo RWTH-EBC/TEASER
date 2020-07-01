@@ -96,6 +96,6 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     hConFNZOut = ${zone.model_attr.alpha_conv_outer_gf},
     hRadFNZOut = ${zone.model_attr.alpha_rad_outer_gf},
     factorNZFloor = ${zone.model_attr.factor_nz_gf},
-    TSoilConst = ${get_true_false(not t_soil_from_file)});
+    TSoilConst = ${get_true_false(zone.parent.parent.t_soil_file_path is None)});
 
 end ${zone.parent.name}_${zone.name};

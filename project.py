@@ -1019,7 +1019,9 @@ class Project(object):
         zone_model=None,
         corG=None,
         internal_id=None,
-        path=None
+        path=None,
+        custom_zone_template_path=None,
+        custom_multizone_template_path=None
     ):
         """Exports values to a record file for Modelica simulation
 
@@ -1041,6 +1043,12 @@ class Project(object):
         path : string
             if the Files should not be stored in default output path of TEASER,
             an alternative path can be specified as a full path
+        custom_zone_template_path : string
+            if a custom template for writing the zone base record should be used,
+            specify its full path as string
+        custom_multizone_template_path : string
+            if a custom template for writing the multizone model should be used,
+            specify its full path as string
         """
 
         if building_model is not None or zone_model is not None or corG is not None:
@@ -1061,13 +1069,18 @@ class Project(object):
 
         if internal_id is None:
             aixlib_output.export_multizone(
-                buildings=self.buildings, prj=self, path=path
+                buildings=self.buildings, prj=self, path=path,
+                custom_zone_template_path=custom_zone_template_path,
+                custom_multizone_template_path=custom_multizone_template_path
             )
         else:
             for bldg in self.buildings:
                 if bldg.internal_id == internal_id:
                     aixlib_output.export_multizone(
-                        buildings=[bldg], prj=self, path=path
+                        buildings=[bldg], prj=self, path=path,
+                        custom_zone_template_path=custom_zone_template_path,
+                        custom_multizone_template_path
+                        =custom_multizone_template_path
                     )
         return path
 

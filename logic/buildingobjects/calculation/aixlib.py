@@ -100,6 +100,8 @@ class AixLib(object):
                     + zone.model_attr.area_rt
                     + zone.model_attr.area_win
                 )
+            else:
+                surf_area_temp += zone.model_attr.surf_area
 
         self.total_surface_area = surf_area_temp
 

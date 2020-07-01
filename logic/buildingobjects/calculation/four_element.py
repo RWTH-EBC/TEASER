@@ -744,8 +744,8 @@ class FourElement(object):
         """
 
         self.area_ow = \
-            (sum(out_wall.area for out_wall in
-                 self.thermal_zone.outer_walls))
+            [sum(out_wall.area for out_wall in ows) for ows in
+             self.thermal_zone.outer_walls]
 
         self.ua_value_ow = \
             (sum(out_wall.ua_value for out_wall in
@@ -768,8 +768,9 @@ class FourElement(object):
                                      self.thermal_zone.outer_walls)))
 
         self.ir_emissivity_inner_ow = (
-            (sum(out_wall.layer[0].material.ir_emissivity * out_wall.area for
-                 out_wall in self.thermal_zone.outer_walls)) / self.area_ow)
+            sum(out_wall.layer[0].material.ir_emissivity * out_wall.area
+                for out_wall in self.thermal_zone.outer_walls)
+            / self.area_ow)
 
         self.alpha_conv_inner_ow = (
             1 / (self.r_conv_inner_ow * self.area_ow))
