@@ -20,8 +20,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -38,6 +38,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -51,18 +57,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -190,8 +189,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -208,6 +207,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -221,18 +226,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -360,8 +358,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -378,6 +376,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -391,18 +395,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -528,10 +525,10 @@
         "ratio_conv_rad_lighting": 0.9,
         "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
-        "max_user_infiltration": 1.0,
+        "max_user_infiltration": 1.5,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -548,6 +545,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -561,18 +564,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -700,8 +696,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -718,6 +714,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -731,18 +733,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -870,8 +865,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -888,6 +883,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -901,18 +902,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -1040,8 +1034,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -1058,6 +1052,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -1071,18 +1071,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -1210,8 +1203,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -1228,6 +1221,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -1241,18 +1240,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -1380,8 +1372,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -1398,6 +1390,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -1411,18 +1409,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -1550,8 +1541,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -1720,8 +1711,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -1738,6 +1729,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -1751,18 +1748,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -1890,8 +1880,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -1908,6 +1898,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -1921,18 +1917,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -2060,8 +2049,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -2078,6 +2067,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -2091,18 +2086,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -2230,8 +2218,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -2248,6 +2236,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -2261,18 +2255,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -2400,8 +2387,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -2418,6 +2405,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -2431,18 +2424,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -2571,8 +2557,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -2589,6 +2575,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -2602,18 +2594,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -2741,8 +2726,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -2759,6 +2744,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -2772,18 +2763,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -2912,8 +2896,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -2930,6 +2914,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -2943,18 +2933,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -3083,8 +3066,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -3101,31 +3084,30 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            290.15,
+            290.15,
+            290.15,
+            290.15,
+            290.15,
+            290.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            290.15,
+            290.15,
+            290.15,
+            290.15,
+            290.15,
         ],
         "cooling_profile": [
             294.15,
@@ -3251,10 +3233,10 @@
         "ratio_conv_rad_lighting": 0.9,
         "use_constant_infiltration": false,
         "infiltration_rate": 0.2,
-        "max_user_infiltration": 1.0,
+        "max_user_infiltration": 0.5,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -3271,31 +3253,30 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            290.15,
+            290.15,
+            290.15,
+            290.15,
+            290.15,
+            290.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            290.15,
+            290.15,
+            290.15,
+            290.15,
+            290.15,
         ],
         "cooling_profile": [
             294.15,
@@ -3423,8 +3404,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -3441,6 +3422,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -3454,18 +3441,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -3593,8 +3573,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -3763,8 +3743,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -3933,8 +3913,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -4103,8 +4083,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -4121,6 +4101,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -4134,18 +4120,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -4273,8 +4252,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -4291,6 +4270,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -4304,18 +4289,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -4443,8 +4421,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -4461,6 +4439,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -4474,18 +4458,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -4613,8 +4590,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -4631,6 +4608,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -4644,18 +4627,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -4783,8 +4759,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -4801,6 +4777,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -4814,18 +4796,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -4953,8 +4928,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -4971,6 +4946,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -4984,18 +4965,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -5123,8 +5097,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -5141,6 +5115,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -5154,18 +5134,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -5293,8 +5266,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -5311,6 +5284,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -5324,18 +5303,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -5463,8 +5435,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -5481,6 +5453,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -5494,18 +5472,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -5633,8 +5604,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -5651,6 +5622,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -5664,18 +5641,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -5804,8 +5774,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -5822,6 +5792,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -5835,18 +5811,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
@@ -5974,8 +5943,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -6144,8 +6113,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -6314,8 +6283,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -6484,8 +6453,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -6654,8 +6623,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -6825,8 +6794,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -6995,8 +6964,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -7165,8 +7134,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -7335,8 +7304,8 @@
         "infiltration_rate": 0.2,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
-            3.0,
-            2.0
+            0.0,
+            0.0
         ],
         "max_summer_infiltration": [
             1.0,
@@ -7353,6 +7322,12 @@
         "with_ahu": false,
         "with_ideal_thresholds": false,
         "heating_profile": [
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
             294.15,
             294.15,
             294.15,
@@ -7366,18 +7341,11 @@
             294.15,
             294.15,
             294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15,
-            294.15
+            292.15,
+            292.15,
+            292.15,
+            292.15,
+            292.15,
         ],
         "cooling_profile": [
             294.15,
