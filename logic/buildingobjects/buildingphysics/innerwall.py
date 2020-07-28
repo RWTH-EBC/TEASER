@@ -64,8 +64,8 @@ class InnerWall(Wall):
         objects). Use element.layer = None to delete all layers of the building
         element
     outside : ThermalZone()
-        the thermal zone to the outside of the wall. If None, outside is on the
-        outside.
+        the thermal zone to the outside of the wall. If None, same zone is on
+        the outside.
 
     Calculated Attributes
 

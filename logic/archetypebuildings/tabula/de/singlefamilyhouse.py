@@ -371,7 +371,7 @@ class SingleFamilyHouse(Residential):
         self.net_leased_area = 0.0
 
         for key, value in self.zone_area_factors.items():
-            zone = ThermalZone(parent=self, )
+            zone = ThermalZone(parent=self)
             zone.name = key
             zone.area = type_bldg_area * value[0]
             try:
@@ -417,8 +417,9 @@ class SingleFamilyHouse(Residential):
                     try:
                         layers = value[2]['layers']
                         outer_wall.use_layer_properties(
-                            layers, year=year, element_type=element_type
+                            layers[0][1], year=year, element_type=element_type
                         )
+                        multipleParts = len(layers) > 1
                     except (KeyError, IndexError):
                         outer_wall.load_type_element(
                             year=year,
@@ -426,10 +427,23 @@ class SingleFamilyHouse(Residential):
                             data_class=self.parent.data,
                             element_type=element_type
                         )
+                        multipleParts = False
                     outer_wall.name = key
                     outer_wall.tilt = value[0]
                     outer_wall.orientation = value[1]
-                    outer_wall.area = area
+                    if multipleParts:
+                        outer_wall.area = area * layers[0][0]
+                        for wallPart in layers[1:]:
+                            outer_wall = OuterWall(zone)
+                            outer_wall.use_layer_properties(
+                                wallPart[1], year=year, element_type=element_type
+                            )
+                            outer_wall.name = key
+                            outer_wall.tilt = value[0]
+                            outer_wall.orientation = value[1]
+                            outer_wall.area = area * wallPart[0]
+                    else:
+                        outer_wall.area = area
 
             for key, value in self._outer_wall_names_2.items():
                 try:
@@ -455,8 +469,9 @@ class SingleFamilyHouse(Residential):
                     try:
                         layers = value[2]['layers']
                         outer_wall.use_layer_properties(
-                            layers, year=year, element_type=element_type
+                            layers[0][1], year=year, element_type=element_type
                         )
+                        multipleParts = len(layers) > 1
                     except (KeyError, IndexError):
                         outer_wall.load_type_element(
                             year=year,
@@ -464,22 +479,36 @@ class SingleFamilyHouse(Residential):
                             data_class=self.parent.data,
                             element_type=element_type
                         )
+                        multipleParts = False
                     outer_wall.name = key
                     outer_wall.tilt = value[0]
                     outer_wall.orientation = value[1]
-                    outer_wall.area = area
+                    if multipleParts:
+                        outer_wall.area = area * layers[0][0]
+                        for wallPart in layers[1:]:
+                            outer_wall = OuterWall(zone)
+                            outer_wall.use_layer_properties(
+                                wallPart[1], year=year, element_type=element_type
+                            )
+                            outer_wall.name = key
+                            outer_wall.tilt = value[0]
+                            outer_wall.orientation = value[1]
+                            outer_wall.area = area * wallPart[0]
+                    else:
+                        outer_wall.area = area
 
-            if not zone.outer_walls:
-                outer_wall = OuterWall(zone)
-                outer_wall.load_type_element(
-                    year=self.year_of_construction,
-                    construction=self._construction_type_1,
-                    data_class=self.parent.data,
-                )
-                outer_wall.name = "dummy"
-                outer_wall.tilt = 90.
-                outer_wall.orientation = 0.
-                outer_wall.area = 1E-4
+
+            # if not zone.outer_walls:
+            #     outer_wall = OuterWall(zone)
+            #     outer_wall.load_type_element(
+            #         year=self.year_of_construction,
+            #         construction=self._construction_type_1,
+            #         data_class=self.parent.data,
+            #     )
+            #     outer_wall.name = "dummy"
+            #     outer_wall.tilt = 90.
+            #     outer_wall.orientation = 0.
+            #     outer_wall.area = 1E-4
 
             for key, value in self.window_names_1.items():
                 try:
@@ -505,8 +534,9 @@ class SingleFamilyHouse(Residential):
                     try:
                         layers = value[2]['layers']
                         window.use_layer_properties(
-                            layers, year=year, element_type=element_type
+                            layers[0][1], year=year, element_type=element_type
                         )
+                        multipleParts = len(layers) > 1
                     except (KeyError, IndexError):
                         window.load_type_element(
                             year=year,
@@ -514,10 +544,50 @@ class SingleFamilyHouse(Residential):
                             data_class=self.parent.data,
                             element_type=element_type
                         )
+                        multipleParts = False
+                    try:
+                        # use g-value and U-value from IDF file
+                        # not a nice solution, but I see no other way
+                        window.g_value= value[2]['idf_g-value']
+                        rsi = 1 / (window.inner_convection + window.inner_radiation)
+                        rse = 1 / (window.outer_convection + window.outer_radiation)
+                        r_solid = 1 / value[2]['idf_U-value'] - rsi - rse
+                        all_lambdas = sum(1 / l.material.thermal_conduc
+                                          for l in window.layer)
+                        each_thickness = r_solid / all_lambdas
+                        if (isinstance(each_thickness, float)
+                                and each_thickness is not None):
+                            if each_thickness > 0:
+                                for l in window.layer:
+                                    l._thickness = each_thickness
+                            else:
+                                print('target u-value could not be set')
+                        else:
+                            print('target u-value could not be set')
+                        idfUG = True
+                    except (KeyError, IndexError):
+                        idfUG = False
                     window.name = key
                     window.tilt = value[0]
                     window.orientation = value[1]
-                    window.area = area
+                    if multipleParts:
+                        window.area = area * layers[0][0]
+                        for windowPart in layers[1:]:
+                            window = Window(zone)
+                            window.use_layer_properties(
+                                windowPart[1], year=year, element_type=element_type
+                            )
+                            window.name = key
+                            window.tilt = value[0]
+                            window.orientation = value[1]
+                            window.area = area * windowPart[0]
+                        if idfUG:
+                            print('idf U-value and g-value used, but '
+                                  'multiple layer lists. U- and g-value'
+                                  'are only implemented for the first of '
+                                  'these window parts!')
+                    else:
+                        window.area = area
 
             for key, value in self.window_names_2.items():
                 try:
@@ -543,8 +613,9 @@ class SingleFamilyHouse(Residential):
                     try:
                         layers = value[2]['layers']
                         window.use_layer_properties(
-                            layers, year=year, element_type=element_type
+                            layers[0][1], year=year, element_type=element_type
                         )
+                        multipleParts = len(layers) > 1
                     except (KeyError, IndexError):
                         window.load_type_element(
                             year=year,
@@ -552,10 +623,50 @@ class SingleFamilyHouse(Residential):
                             data_class=self.parent.data,
                             element_type=element_type
                         )
+                        multipleParts = False
+                    try:
+                        # use g-value and U-value from IDF file
+                        # not a nice solution, but I see no other way
+                        window.g_value= value[2]['idf_g-value']
+                        rsi = 1 / (window.inner_convection + window.inner_radiation)
+                        rse = 1 / (window.outer_convection + window.outer_radiation)
+                        r_solid = 1 / value[2]['idf_U-value'] - rsi - rse
+                        all_lambdas = sum(1 / l.material.thermal_conduc
+                                          for l in window.layer)
+                        each_thickness = r_solid / all_lambdas
+                        if (isinstance(each_thickness, float)
+                                and each_thickness is not None):
+                            if each_thickness > 0:
+                                for l in window.layer:
+                                    l._thickness = each_thickness
+                            else:
+                                print('target u-value could not be set')
+                        else:
+                            print('target u-value could not be set')
+                        idfUG = True
+                    except (KeyError, IndexError):
+                        idfUG = False
                     window.name = key
                     window.tilt = value[0]
                     window.orientation = value[1]
-                    window.area = area
+                    if multipleParts:
+                        window.area = area * layers[0][0]
+                        for windowPart in layers[1:]:
+                            window = Window(zone)
+                            window.use_layer_properties(
+                                windowPart[1], year=year, element_type=element_type
+                            )
+                            window.name = key
+                            window.tilt = value[0]
+                            window.orientation = value[1]
+                            window.area = area * windowPart[0]
+                        if idfUG:
+                            print('idf U-value and g-value used, but '
+                                  'multiple layer lists. U- and g-value'
+                                  'are only implemented for the first of '
+                                  'these window parts!')
+                    else:
+                        window.area = area
 
             if not zone.windows:
                 window = Window(zone)
@@ -593,8 +704,9 @@ class SingleFamilyHouse(Residential):
                     try:
                         layers = value[2]['layers']
                         gf.use_layer_properties(
-                            layers, year=year, element_type=element_type
+                            layers[0][1], year=year, element_type=element_type
                         )
+                        multipleParts = len(layers) > 1
                     except (KeyError, IndexError):
                         gf.load_type_element(
                             year=year,
@@ -602,10 +714,23 @@ class SingleFamilyHouse(Residential):
                             data_class=self.parent.data,
                             element_type=element_type
                         )
+                        multipleParts = False
                     gf.name = key
                     gf.tilt = value[0]
                     gf.orientation = value[1]
-                    gf.area = area
+                    if multipleParts:
+                        gf.area = area * layers[0][0]
+                        for gfPart in layers[1:]:
+                            gf = GroundFloor(zone)
+                            gf.use_layer_properties(
+                                gfPart[1], year=year, element_type=element_type
+                            )
+                            gf.name = key
+                            gf.tilt = value[0]
+                            gf.orientation = value[1]
+                            gf.area = area * gfPart[0]
+                    else:
+                        gf.area = area
 
             for key, value in self.ground_floor_names_2.items():
                 try:
@@ -631,8 +756,9 @@ class SingleFamilyHouse(Residential):
                     try:
                         layers = value[2]['layers']
                         gf.use_layer_properties(
-                            layers, year=year, element_type=element_type
+                            layers[0][1], year=year, element_type=element_type
                         )
+                        multipleParts = len(layers) > 1
                     except (KeyError, IndexError):
                         gf.load_type_element(
                             year=year,
@@ -640,22 +766,35 @@ class SingleFamilyHouse(Residential):
                             data_class=self.parent.data,
                             element_type=element_type
                         )
+                        multipleParts = False
                     gf.name = key
                     gf.tilt = value[0]
                     gf.orientation = value[1]
-                    gf.area = area
+                    if multipleParts:
+                        gf.area = area * layers[0][0]
+                        for gfPart in layers[1:]:
+                            gf = GroundFloor(zone)
+                            gf.use_layer_properties(
+                                gfPart[1], year=year, element_type=element_type
+                            )
+                            gf.name = key
+                            gf.tilt = value[0]
+                            gf.orientation = value[1]
+                            gf.area = area * gfPart[0]
+                    else:
+                        gf.area = area
 
-            if not zone.ground_floors:
-                gf = GroundFloor(zone)
-                gf.load_type_element(
-                    year=self.year_of_construction,
-                    construction=self._construction_type_1,
-                    data_class=self.parent.data,
-                )
-                gf.name = "dummy"
-                gf.tilt = 0.
-                gf.orientation = -2
-                gf.area = 1E-4
+            # if not zone.ground_floors:
+            #     gf = GroundFloor(zone)
+            #     gf.load_type_element(
+            #         year=self.year_of_construction,
+            #         construction=self._construction_type_1,
+            #         data_class=self.parent.data,
+            #     )
+            #     gf.name = "dummy"
+            #     gf.tilt = 0.
+            #     gf.orientation = -2
+            #     gf.area = 1E-4
 
             for key, value in self.roof_names_1.items():
                 try:
@@ -681,8 +820,9 @@ class SingleFamilyHouse(Residential):
                     try:
                         layers = value[2]['layers']
                         rt.use_layer_properties(
-                            layers, year=year, element_type=element_type
+                            layers[0][1], year=year, element_type=element_type
                         )
+                        multipleParts = len(layers) > 1
                     except (KeyError, IndexError):
                         rt.load_type_element(
                             year=year,
@@ -690,10 +830,23 @@ class SingleFamilyHouse(Residential):
                             data_class=self.parent.data,
                             element_type=element_type
                         )
+                        multipleParts = False
                     rt.name = key
                     rt.tilt = value[0]
                     rt.orientation = value[1]
-                    rt.area = area
+                    if multipleParts:
+                        rt.area = area * layers[0][0]
+                        for roofPart in layers[1:]:
+                            rt = Rooftop(zone)
+                            rt.use_layer_properties(
+                                roofPart[1], year=year, element_type=element_type
+                            )
+                            rt.name = key
+                            rt.tilt = value[0]
+                            rt.orientation = value[1]
+                            rt.area = area * roofPart[0]
+                    else:
+                        rt.area = area
 
             for key, value in self.roof_names_2.items():
                 try:
@@ -719,8 +872,9 @@ class SingleFamilyHouse(Residential):
                     try:
                         layers = value[2]['layers']
                         rt.use_layer_properties(
-                            layers, year=year, element_type=element_type
+                            layers[0][1], year=year, element_type=element_type
                         )
+                        multipleParts = len(layers) > 1
                     except (KeyError, IndexError):
                         rt.load_type_element(
                             year=year,
@@ -728,22 +882,35 @@ class SingleFamilyHouse(Residential):
                             data_class=self.parent.data,
                             element_type=element_type
                         )
+                        multipleParts = False
                     rt.name = key
                     rt.tilt = value[0]
                     rt.orientation = value[1]
-                    rt.area = area
+                    if multipleParts:
+                        rt.area = area * layers[0][0]
+                        for roofPart in layers[1:]:
+                            rt = Rooftop(zone)
+                            rt.use_layer_properties(
+                                roofPart[1], year=year, element_type=element_type
+                            )
+                            rt.name = key
+                            rt.tilt = value[0]
+                            rt.orientation = value[1]
+                            rt.area = area * roofPart[0]
+                    else:
+                        rt.area = area
 
-            if not zone.rooftops:
-                rt = Rooftop(zone)
-                rt.load_type_element(
-                    year=self.year_of_construction,
-                    construction=self._construction_type_1,
-                    data_class=self.parent.data,
-                )
-                rt.name = "dummy"
-                rt.tilt = 0.
-                rt.orientation = -1
-                rt.area = 1E-4
+            # if not zone.rooftops:
+            #     rt = Rooftop(zone)
+            #     rt.load_type_element(
+            #         year=self.year_of_construction,
+            #         construction=self._construction_type_1,
+            #         data_class=self.parent.data,
+            #     )
+            #     rt.name = "dummy"
+            #     rt.tilt = 0.
+            #     rt.orientation = -1
+            #     rt.area = 1E-4
 
             for key, value in self.door_names.items():
                 try:
@@ -766,8 +933,9 @@ class SingleFamilyHouse(Residential):
                     try:
                         layers = value[2]['layers']
                         door.use_layer_properties(
-                            layers, year=year, element_type=element_type
+                            layers[0][1], year=year, element_type=element_type
                         )
+                        multipleParts = len(layers) > 1
                     except (KeyError, IndexError):
                         door.load_type_element(
                             year=year,
@@ -775,10 +943,23 @@ class SingleFamilyHouse(Residential):
                             data_class=self.parent.data,
                             element_type=element_type
                         )
+                        multipleParts = False
                     door.name = key
                     door.tilt = value[0]
                     door.orientation = value[1]
-                    door.area = area
+                    if multipleParts:
+                        door.area = area * layers[0][0]
+                        for doorPart in layers[1:]:
+                            door = Door(zone)
+                            door.use_layer_properties(
+                                doorPart[1], year=year, element_type=element_type
+                            )
+                            door.name = key
+                            door.tilt = value[0]
+                            door.orientation = value[1]
+                            door.area = area * doorPart[0]
+                    else:
+                        door.area = area
 
             for key, value in self.nz_border_names.items():
                 zone_idcs = np.where(np.array(value[2]['areas']) != 0)[0]
@@ -805,8 +986,9 @@ class SingleFamilyHouse(Residential):
                         try:
                             layers = value[2]['layers']
                             nz_inner_wall.use_layer_properties(
-                                layers, year=year, element_type=element_type
+                                layers[0][1], year=year, element_type=element_type
                             )
+                            multipleParts = len(layers) > 1
                         except (KeyError, IndexError):
                             nz_inner_wall.load_type_element(
                                 year=year,
@@ -814,6 +996,7 @@ class SingleFamilyHouse(Residential):
                                 data_class=self.parent.data,
                                 element_type=element_type
                             )
+                            multipleParts = False
                         nz_inner_wall.outer_convection \
                             = nz_inner_wall.inner_convection
                         nz_inner_wall.outer_radiation \
@@ -821,14 +1004,32 @@ class SingleFamilyHouse(Residential):
                         nz_inner_wall.name = key
                         nz_inner_wall.tilt = value[0]
                         nz_inner_wall.orientation = value[1]
-                        nz_inner_wall.area = value[2]['areas'][zone_index]
+                        area = value[2]['areas'][zone_index]
+                        if multipleParts:
+                            nz_inner_wall.area = area * layers[0][0]
+                            for part in layers[1:]:
+                                nz_inner_wall = InnerWall(zone, outside=outside)
+                                nz_inner_wall.use_layer_properties(
+                                    part[1], year=year, element_type=element_type
+                                )
+                                nz_inner_wall.outer_convection \
+                                    = nz_inner_wall.inner_convection
+                                nz_inner_wall.outer_radiation \
+                                    = nz_inner_wall.inner_radiation
+                                nz_inner_wall.name = key
+                                nz_inner_wall.tilt = value[0]
+                                nz_inner_wall.orientation = value[1]
+                                nz_inner_wall.area = area * part[0]
+                        else:
+                            nz_inner_wall.area = area
                     elif value[2]['areas'][zone_index] > 0:
                         nz_floor = Floor(zone, outside=outside)
                         try:
                             layers = value[2]['layers']
                             nz_floor.use_layer_properties(
-                                layers, year=year, element_type=element_type
+                                layers[0][1], year=year, element_type=element_type
                             )
+                            multipleParts = len(layers) > 1
                         except (KeyError, IndexError):
                             if element_type in ('Rooftop', 'GroundFloor'):
                                 # TODO mean value of standard 1 and 2
@@ -842,19 +1043,38 @@ class SingleFamilyHouse(Residential):
                                 data_class=self.parent.data,
                                 element_type=element_type
                             )
+                            multipleParts = False
                         nz_floor.outer_convection = nz_floor.inner_convection
                         nz_floor.outer_radiation = nz_floor.inner_radiation
                         nz_floor.name = key
                         nz_floor.tilt = value[0]
                         nz_floor.orientation = value[1]
-                        nz_floor.area = value[2]['areas'][zone_index]
+                        area = value[2]['areas'][zone_index]
+                        if multipleParts:
+                            nz_floor.area = area * layers[0][0]
+                            for part in layers[1:]:
+                                nz_floor = Floor(zone, outside=outside)
+                                nz_floor.use_layer_properties(
+                                    part[1], year=year, element_type=element_type
+                                )
+                                nz_floor.outer_convection \
+                                    = nz_floor.inner_convection
+                                nz_floor.outer_radiation \
+                                    = nz_floor.inner_radiation
+                                nz_floor.name = key
+                                nz_floor.tilt = value[0]
+                                nz_floor.orientation = value[1]
+                                nz_floor.area = area * part[0]
+                        else:
+                            nz_floor.area = area
                     elif value[2]['areas'][zone_index] < 0:
                         nz_ceiling = Ceiling(zone, outside=outside)
                         try:
                             layers = value[2]['layers']
                             nz_ceiling.use_layer_properties(
-                                layers, year=year, element_type=element_type
+                                layers[0][1], year=year, element_type=element_type
                             )
+                            multipleParts = len(layers) > 1
                         except (KeyError, IndexError):
                             if element_type in ('Rooftop', 'GroundFloor'):
                                 # TODO mean value of standard 1 and 2
@@ -868,13 +1088,31 @@ class SingleFamilyHouse(Residential):
                                 data_class=self.parent.data,
                                 element_type=element_type
                             )
+                            multipleParts = False
                         nz_ceiling.outer_convection \
                             = nz_ceiling.inner_convection
                         nz_ceiling.outer_radiation = nz_ceiling.inner_radiation
                         nz_ceiling.name = key
                         nz_ceiling.tilt = value[0]
                         nz_ceiling.orientation = value[1]
-                        nz_ceiling.area = value[2]['areas'][zone_index] * -1
+                        area = value[2]['areas'][zone_index] * -1
+                        if multipleParts:
+                            nz_ceiling.area = area * layers[0][0]
+                            for part in layers[1:]:
+                                nz_ceiling = Ceiling(zone, outside=outside)
+                                nz_ceiling.use_layer_properties(
+                                    part[1], year=year, element_type=element_type
+                                )
+                                nz_ceiling.outer_convection \
+                                    = nz_ceiling.inner_convection
+                                nz_ceiling.outer_radiation \
+                                    = nz_ceiling.inner_radiation
+                                nz_ceiling.name = key
+                                nz_ceiling.tilt = value[0]
+                                nz_ceiling.orientation = value[1]
+                                nz_ceiling.area = area * part[0]
+                        else:
+                            nz_ceiling.area = area
 
 
             for key, value in self.inner_wall_names.items():
@@ -917,6 +1155,39 @@ class SingleFamilyHouse(Residential):
 
             zone.set_inner_wall_area(inner_wall_calc_approach)
             zone.set_volume_zone()
+
+            # # correct simplified convection coefficients
+            # for rt in zone.rooftops:
+            #     if rt.tilt > 60:
+            #         # use values like for horizontal (= outer wall) surfaces
+            #         rt.inner_convection = 2.7
+            #     else:
+            #         # R_si = 0.1 if heat flow is upwards (DIN EN ISO 6946)
+            #         rt.inner_convection = 5.0
+            # for gf in zone.ground_floors:
+            #     if gf.tilt > 60:
+            #         # use values like for horizontal (= outer wall) surfaces
+            #         gf.inner_convection = 2.7
+            #     else:
+            #         # R_si = 0.17 if heat flow is downwards (DIN EN ISO 6946)
+            #         gf.inner_convection = 0.9
+            # for nzb in zone.nz_borders:
+            #     if (zone.use_conditions.with_heating
+            #             + nzb.outside.use_conditions.with_heating) == 1:
+            #         if ((zone.use_conditions.with_heating
+            #              and type(nzb).__name__ == "Ceiling")
+            #                 or (not zone.use_conditions.with_heating
+            #                     and type(nzb).__name__ == "Floor")):
+            #             # R_si = 0.1 if heat flow is upwards (DIN EN ISO
+            #             # 6946)
+            #             nzb.inner_convection = 5.0
+            #             nzb.outer_convection = 5.0
+            #         else:
+            #             # R_si = 0.17 if heat flow is downwards (DIN EN ISO
+            #             # 6946)
+            #             nzb.inner_convection = 0.9
+            #             nzb.outer_convection = 0.9
+
 
     @property
     def construction_type(self):

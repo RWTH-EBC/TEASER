@@ -224,10 +224,10 @@ class Wall(BuildingElement):
                                                    new_mat[0][2] * new_mat[2][
                                                        3]))
 
-        if type(self).__name__ == "OuterWall" \
-                or type(self).__name__ == "Rooftop" \
-                or type(self).__name__ == "GroundFloor":
-            self.c1 = self.c1_korr
+        # if type(self).__name__ == "OuterWall" \
+        #         or type(self).__name__ == "Rooftop" \
+        #         or type(self).__name__ == "GroundFloor":
+        #     self.c1 = self.c1_korr
 
     def insulate_wall(
             self,

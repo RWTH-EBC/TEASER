@@ -459,7 +459,7 @@ class BuildingElement(object):
                     element_dict = dict(element_in)
                     element_dict["construction_type"] = "custom"
                     buildingelement_input._set_basic_data(element=self,
-                                                          element_in=element_in)
+                                                          element_in=element_dict)
                     break
 
         # increasing id from inside to outside

@@ -4,6 +4,7 @@
 """This module includes the ThermalZone class
 """
 from __future__ import division
+import math
 import random
 import re
 import warnings
@@ -370,6 +371,34 @@ class ThermalZone(object):
                     if type(nz_border).__name__ == "InnerWall":
                         wall.area -= nz_border.area
                 wall.area = max(0.0, wall.area)
+            elif calc_approach is 'typical_minus_outer_adjusted':
+                # this considers
+                # a) that a non-complete "average room" should not have the
+                #   same circumference as the others
+                # b) that rooftops, windows and ground floors (= walls with
+                #   border to soil) may have a vertical share
+                r_avg_room_nr = avg_room_nr - int(avg_room_nr)
+                rest_area = r_avg_room_nr / avg_room_nr * self.area
+                avg_room_nr = int(avg_room_nr) + math.sqrt(
+                    rest_area / self.use_conditions.typical_length
+                    / self.use_conditions.typical_width
+                )
+                wall.area = (avg_room_nr
+                             * (2 * self.use_conditions.typical_length
+                                * height_of_floors
+                                + 2 * self.use_conditions.typical_width
+                                * height_of_floors))
+                for outer_wall in self.outer_walls:
+                    wall.area -= outer_wall.area
+                for rtwin in self.rooftops + self.windows:
+                    wall.area -= rtwin.area * math.sin(rtwin.tilt * math.pi
+                                                       / 180)
+                wall.area -= max(0.0, sum(gf.area for gf in self.ground_floors)
+                                 - self.area)
+                for nz_border in self.nz_borders:
+                    if type(nz_border).__name__ == "InnerWall":
+                        wall.area -= nz_border.area
+                wall.area = max(0.0, wall.area)
             else:
                 wall.area = (avg_room_nr
                              * (self.use_conditions.typical_length
@@ -388,7 +417,15 @@ class ThermalZone(object):
 
         assert self.parent is not None, ass_error_1
 
-        self.volume = self.area * self.parent.height_of_floors
+        try:
+            if self.height_of_floors is None:
+                height_of_floors = self.parent.height_of_floors
+            else:
+                height_of_floors = self.height_of_floors
+        except AttributeError:
+            height_of_floors = self.parent.height_of_floors
+
+        self.volume = self.area * height_of_floors
 
     def retrofit_zone(
             self,
