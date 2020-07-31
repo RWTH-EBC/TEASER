@@ -17,6 +17,9 @@ def save_teaser_json(path, project):
         Teaser instance of Project()
 
     """
+    print('Caution - the json output function has not been adjusted to the DLR '
+          'parameter changes in TEASER. You will probably lose data.')
+    # todo include these adjustments
     if path.endswith("json"):
         path = path
     else:

@@ -316,6 +316,8 @@ class ThermalZone(object):
         Sets the inner wall area according to zone area size if type building
         approach is used. This function covers Floors, Ceilings and InnerWalls.
 
+        Does not overwrite existing values.
+
         Parameters
         ----------
 
@@ -348,10 +350,20 @@ class ThermalZone(object):
             height_of_floors = self.parent.height_of_floors
 
         for floor in self.floors:
-            floor.area = ((number_of_floors - 1) / number_of_floors) * self.area
+            floor_area = ((number_of_floors - 1) / number_of_floors) * self.area
+            if not floor.area:
+                floor.area = floor_area
+            elif floor.area <= 1:
+                # use share from layer definition or previously set area = 1
+                floor.area = floor.area * floor_area
         for ceiling in self.ceilings:
-            ceiling.area = ((number_of_floors - 1)
+            ceiling_area = ((number_of_floors - 1)
                             / number_of_floors) * self.area
+            if not ceiling.area:
+                ceiling.area = ceiling_area
+            elif ceiling.area <= 1:
+                # use share from layer definition or previously set area = 1
+                ceiling.area = ceiling.area * ceiling_area
 
         for wall in self.inner_walls:
             typical_area = self.use_conditions.typical_length * \
@@ -360,17 +372,17 @@ class ThermalZone(object):
             avg_room_nr = self.area / typical_area
 
             if calc_approach is 'typical_minus_outer':
-                wall.area = (avg_room_nr
+                wall_area = (avg_room_nr
                              * (2 * self.use_conditions.typical_length
                                 * height_of_floors
                                 + 2 * self.use_conditions.typical_width
                                 * height_of_floors))
                 for outer_wall in self.outer_walls:
-                    wall.area -= outer_wall.area
+                    wall_area -= outer_wall.area
                 for nz_border in self.nz_borders:
                     if type(nz_border).__name__ == "InnerWall":
-                        wall.area -= nz_border.area
-                wall.area = max(0.0, wall.area)
+                        wall_area -= nz_border.area
+                wall_area = max(0.0, wall_area)
             elif calc_approach is 'typical_minus_outer_adjusted':
                 # this considers
                 # a) that a non-complete "average room" should not have the
@@ -383,28 +395,33 @@ class ThermalZone(object):
                     rest_area / self.use_conditions.typical_length
                     / self.use_conditions.typical_width
                 )
-                wall.area = (avg_room_nr
+                wall_area = (avg_room_nr
                              * (2 * self.use_conditions.typical_length
                                 * height_of_floors
                                 + 2 * self.use_conditions.typical_width
                                 * height_of_floors))
                 for outer_wall in self.outer_walls:
-                    wall.area -= outer_wall.area
+                    wall_area -= outer_wall.area
                 for rtwin in self.rooftops + self.windows:
-                    wall.area -= rtwin.area * math.sin(rtwin.tilt * math.pi
+                    wall_area-= rtwin.area * math.sin(rtwin.tilt * math.pi
                                                        / 180)
-                wall.area -= max(0.0, sum(gf.area for gf in self.ground_floors)
+                wall_area -= max(0.0, sum(gf.area for gf in self.ground_floors)
                                  - self.area)
                 for nz_border in self.nz_borders:
                     if type(nz_border).__name__ == "InnerWall":
-                        wall.area -= nz_border.area
-                wall.area = max(0.0, wall.area)
+                        wall_area -= nz_border.area
+                wall_area = max(0.0, wall_area)
             else:
-                wall.area = (avg_room_nr
+                wall_area = (avg_room_nr
                              * (self.use_conditions.typical_length
                                 * height_of_floors
                                 + 2 * self.use_conditions.typical_width
                                 * height_of_floors))
+            if not wall.area:
+                wall.area = wall_area
+            elif wall.area <= 1:
+                # use share from layer definition or previously set area = 1
+                wall.area = wall.area * wall_area
 
     def set_volume_zone(self):
         """Sets the zone volume according to area and height of floors

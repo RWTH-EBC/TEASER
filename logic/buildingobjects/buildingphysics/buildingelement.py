@@ -131,6 +131,7 @@ class BuildingElement(object):
         self._area = None
         self._tilt = None
         self._orientation = None
+        self._idx_orientation = None
         self._inner_convection = None
         self._inner_radiation = None
         self._outer_convection = None
@@ -222,7 +223,16 @@ class BuildingElement(object):
         heat_capac = np.zeros(number_of_layer)
         thickness = np.zeros(number_of_layer)
 
-        for i in range(number_of_layer):
+        range_tuple = (0, number_of_layer, 1)
+        if self in self.parent.nz_borders:
+            if (not self.parent.use_conditions.with_heating and
+                    self.outside.use_conditions.with_heating):
+                # if inner side of nz border is unheated and outer side is
+                # heated, reverse layers for calculation (list of resistances
+                # will be re-reversed later)
+                range_tuple = (number_of_layer - 1, -1, -1)
+
+        for i in range(*range_tuple):
 
             density[i] = self.layer[i].material.density
             thermal_conduc[i] = self.layer[i].material.thermal_conduc
@@ -276,7 +286,8 @@ class BuildingElement(object):
             year,
             construction,
             data_class=None,
-            element_type=None):
+            element_type=None,
+            reverse_layers=False):
         """Typical element loader.
 
         Loads typical building elements according to their construction
@@ -304,6 +315,8 @@ class BuildingElement(object):
             different type than type(element) is to be loaded, e.g. InnerWall
             instead of OuterWall
 
+        reverse_layers : bool
+            defines if layer list should be reversed
 
         """
 
@@ -322,7 +335,8 @@ class BuildingElement(object):
                                                 year=year,
                                                 construction=construction,
                                                 data_class=data_class,
-                                                element_type=element_type)
+                                                element_type=element_type,
+                                                reverse_layers=reverse_layers)
 
     def save_type_element(self, data_class=None):
         """Typical element saver.
@@ -482,7 +496,7 @@ class BuildingElement(object):
             if material_info.heatCapacity is not None:
                 material.heat_capac = material_info.heatCapacity
             if material_info.solarAbsorptance is not None:
-                material.solar_absorptance = material_info.solarAbsorptance
+                material.solar_absorp = material_info.solarAbsorptance
             if material_info.irEmissivity is not None:
                 material.ir_emissivity = material_info.irEmissivity
             if material_info.transmittance is not None:
@@ -575,6 +589,17 @@ class BuildingElement(object):
         elif type(self).__name__ == "Window":
             if self.parent.parent is not None and self.area is not None:
                 self.parent.parent.fill_window_area_dict()
+
+    @property
+    def idx_orientation(self):
+        return self._idx_orientation
+
+    @idx_orientation.setter
+    def idx_orientation(self, value):
+        if int(value) == value:
+            self._idx_orientation = int(value)
+        else:
+            self._orientation = None
 
     @property
     def layer(self):

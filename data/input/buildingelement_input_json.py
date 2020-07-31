@@ -6,7 +6,7 @@ import teaser.data.input.material_input_json as mat_input
 
 
 def load_type_element(element, year, construction, data_class,
-                      element_type=None):
+                      element_type=None, reverse_layers=False):
     """Load BuildingElement from json.
 
     Loads typical building elements according to their construction year and
@@ -36,6 +36,9 @@ def load_type_element(element, year, construction, data_class,
         Element type to load - only to specify if the data_class entry for a
         different type than type(element) is to be loaded, e.g. InnerWall
         instead of OuterWall
+
+    reverse_layers : bool
+        defines if layer list should be reversed
 
     """
     element_binding = data_class.element_bind

@@ -224,6 +224,22 @@ class Wall(BuildingElement):
                                                    new_mat[0][2] * new_mat[2][
                                                        3]))
 
+        if self in self.parent.nz_borders:
+            if (not self.parent.use_conditions.with_heating and
+                    self.outside.use_conditions.with_heating):
+                # if inner side of nz border is unheated and outer side is
+                # heated, layers were reversed for this calculation. Therefore,
+                # list of resistances must be re-reversed now.
+                r1_orig = self.r1
+                r2_orig = self.r2
+                # r3 is central resistance and stays the same
+                c1_orig = self.c1
+                c2_orig = self.c2
+                # c1_korr stays the same
+                self.r1 = r2_orig
+                self.r2 = r1_orig
+                self.c2 = c1_orig
+                self.c1 = c2_orig
         # if type(self).__name__ == "OuterWall" \
         #         or type(self).__name__ == "Rooftop" \
         #         or type(self).__name__ == "GroundFloor":

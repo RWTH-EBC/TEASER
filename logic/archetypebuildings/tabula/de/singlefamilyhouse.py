@@ -1037,11 +1037,16 @@ class SingleFamilyHouse(Residential):
                                 construction = "tabula_standard_1_SFH"
                             else:
                                 construction = 'tabula_standard'
+                            if element_type in ('Rooftop', 'Ceiling'):
+                                reverse_layers = True
+                            else:
+                                reverse_layers = False
                             nz_floor.load_type_element(
                                 year=year,
                                 construction=construction,
                                 data_class=self.parent.data,
-                                element_type=element_type
+                                element_type=element_type,
+                                reverse_layers=reverse_layers
                             )
                             multipleParts = False
                         nz_floor.outer_convection = nz_floor.inner_convection
@@ -1082,11 +1087,16 @@ class SingleFamilyHouse(Residential):
                                 construction = "tabula_standard_1_SFH"
                             else:
                                 construction = 'tabula_standard'
+                            if element_type in ('GroundFloor', 'Floor'):
+                                reverse_layers = True
+                            else:
+                                reverse_layers = False
                             nz_ceiling.load_type_element(
                                 year=year,
                                 construction=construction,
                                 data_class=self.parent.data,
-                                element_type=element_type
+                                element_type=element_type,
+                                reverse_layers=reverse_layers
                             )
                             multipleParts = False
                         nz_ceiling.outer_convection \
@@ -1101,7 +1111,8 @@ class SingleFamilyHouse(Residential):
                             for part in layers[1:]:
                                 nz_ceiling = Ceiling(zone, outside=outside)
                                 nz_ceiling.use_layer_properties(
-                                    part[1], year=year, element_type=element_type
+                                    part[1], year=year,
+                                    element_type=element_type
                                 )
                                 nz_ceiling.outer_convection \
                                     = nz_ceiling.inner_convection
@@ -1114,44 +1125,129 @@ class SingleFamilyHouse(Residential):
                         else:
                             nz_ceiling.area = area
 
-
             for key, value in self.inner_wall_names.items():
-
-                inner_wall = InnerWall(zone)
-                inner_wall.load_type_element(
-                    year=self.year_of_construction,
-                    construction="tabula_standard",
-                    data_class=self.parent.data,
-                )
-                inner_wall.name = key
-                inner_wall.tilt = value[0]
-                inner_wall.orientation = value[1]
+                try:
+                    area = value[2]['areas'][zone_index]
+                except (KeyError, IndexError):
+                    area = 1
+                if area:
+                    inner_wall = InnerWall(zone)
+                    try:
+                        element_type = value[2]['element_type']
+                    except (KeyError, IndexError):
+                        element_type = None
+                    try:
+                        layers = value[2]['layers']
+                        inner_wall.use_layer_properties(
+                            layers[0][1], year=year, element_type=element_type
+                        )
+                        multipleParts = len(layers) > 1
+                    except (KeyError, IndexError):
+                        inner_wall.load_type_element(
+                            year=year,
+                            construction="tabula_standard",
+                            data_class=self.parent.data,
+                            element_type=element_type
+                        )
+                        multipleParts = False
+                    inner_wall.name = key
+                    inner_wall.tilt = value[0]
+                    inner_wall.orientation = value[1]
+                    if multipleParts:
+                        inner_wall.area = area * layers[0][0]
+                        for part in layers[1:]:
+                            inner_wall = InnerWall(zone, outside=outside)
+                            inner_wall.use_layer_properties(
+                                part[1], year=year, element_type=element_type
+                            )
+                            inner_wall.name = key
+                            inner_wall.tilt = value[0]
+                            inner_wall.orientation = value[1]
+                            inner_wall.area = area * part[0]
+                    else:
+                        inner_wall.area = area
 
             if zone.number_of_floors > 1:
 
                 for key, value in self.ceiling_names.items():
-
-                    ceiling = Ceiling(zone)
-                    ceiling.load_type_element(
-                        year=self.year_of_construction,
-                        construction="tabula_standard",
-                        data_class=self.parent.data,
-                    )
-                    ceiling.name = key
-                    ceiling.tilt = value[0]
-                    ceiling.orientation = value[1]
+                    try:
+                        area = value[2]['areas'][zone_index]
+                    except (KeyError, IndexError):
+                        area = 1
+                    if area:
+                        ceiling = Ceiling(zone)
+                        try:
+                            layers = value[2]['layers']
+                            ceiling.use_layer_properties(
+                                layers[0][1], year=year,
+                                element_type=element_type
+                            )
+                            multipleParts = len(layers) > 1
+                        except (KeyError, IndexError):
+                            ceiling.load_type_element(
+                                year=year,
+                                construction="tabula_standard",
+                                data_class=self.parent.data,
+                                element_type=element_type
+                            )
+                            multipleParts = False
+                        ceiling.name = key
+                        ceiling.tilt = value[0]
+                        ceiling.orientation = value[1]
+                        if multipleParts:
+                            ceiling.area = area * layers[0][0]
+                            for part in layers[1:]:
+                                ceiling = Ceiling(zone, outside=outside)
+                                ceiling.use_layer_properties(
+                                    part[1], year=year,
+                                    element_type=element_type
+                                )
+                                ceiling.name = key
+                                ceiling.tilt = value[0]
+                                ceiling.orientation = value[1]
+                                ceiling.area = area * part[0]
+                        else:
+                            ceiling.area = area
 
                 for key, value in self.floor_names.items():
-
-                    floor = Floor(zone)
-                    floor.load_type_element(
-                        year=self.year_of_construction,
-                        construction="tabula_standard",
-                        data_class=self.parent.data,
-                    )
-                    floor.name = key
-                    floor.tilt = value[0]
-                    floor.orientation = value[1]
+                    try:
+                        area = value[2]['areas'][zone_index]
+                    except (KeyError, IndexError):
+                        area = 1
+                    if area:
+                        floor = Floor(zone)
+                        try:
+                            layers = value[2]['layers']
+                            floor.use_layer_properties(
+                                layers[0][1], year=year,
+                                element_type=element_type
+                            )
+                            multipleParts = len(layers) > 1
+                        except (KeyError, IndexError):
+                            floor.load_type_element(
+                                year=year,
+                                construction="tabula_standard",
+                                data_class=self.parent.data,
+                                element_type=element_type
+                            )
+                            multipleParts = False
+                        floor.name = key
+                        floor.tilt = value[0]
+                        floor.orientation = value[1]
+                        if multipleParts:
+                            floor.area = area * layers[0][0]
+                            for part in layers[1:]:
+                                floor = Floor(zone, outside=outside)
+                                floor.use_layer_properties(
+                                    part[1], year=year,
+                                    element_type=element_type
+                                )
+                                floor.name = key
+                                floor.tilt = value[0]
+                                floor.orientation = value[1]
+                                floor.area = area * part[0]
+                        else:
+                            floor.area = area
 
             zone.set_inner_wall_area(inner_wall_calc_approach)
             zone.set_volume_zone()
