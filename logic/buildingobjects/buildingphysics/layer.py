@@ -29,12 +29,12 @@ class Layer(object):
         Thickness of the layer
     """
 
-    def __init__(self, parent=None, id=0):
+    def __init__(self, parent=None, id=0, parent_position=None):
         """Constructor of Layer.
 
 
         """
-        self.parent = parent
+        self.parent = (parent, parent_position)
         self.internal_id = random.random()
         self.id = id
         self._material = None
@@ -46,6 +46,12 @@ class Layer(object):
 
     @parent.setter
     def parent(self, value):
+
+        if type(value) == tuple:
+            value = value[0]
+            position = value[1]
+        else:
+            position = None
 
         if value is not None:
 
@@ -61,7 +67,7 @@ class Layer(object):
                 or type(value).__name__ == "Window", ass_error_1
 
             self.__parent = value
-            self.__parent.layer.append(self)
+            self.__parent.add_layer(self, None)
 
         else:
             self.__parent = None

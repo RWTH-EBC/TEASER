@@ -248,7 +248,10 @@ class Wall(BuildingElement):
     def insulate_wall(
             self,
             material=None,
-            thickness=None):
+            thickness=None,
+            add_at_position=None,
+            add_plaster_material=None,
+            add_plaster_thickness=None):
         """Retrofit the walls with an additional insulation layer
 
         Adds an additional layer on the wall, outer sight
@@ -259,6 +262,20 @@ class Wall(BuildingElement):
             Type of material, that is used for insulation, default = EPS035
         thickness : float
             thickness of the insulation layer, default = None
+        add_at_position : int
+            position at which to insert the insulation layer.
+            0 inside, None (default) outside
+        add_plaster_material : int
+            material of plaster to add, default = None. Is only applied if
+            add_plaster_thickness is not None
+            can only be applied if add_at_position is 0 or None
+        add_plaster_thickness : float
+            thickness of the plaster layer, default = None
+
+        Returns
+        -------
+        insulation_index : int
+            index of the insulation layer in the layer list
 
         """
         if material is None:
@@ -266,7 +283,7 @@ class Wall(BuildingElement):
         else:
             pass
 
-        ext_layer = Layer(self)
+        ext_layer = Layer(self, parent_position=add_at_position)
         new_material = Material(ext_layer)
         new_material.load_material_template(
             material,
@@ -278,6 +295,25 @@ class Wall(BuildingElement):
             ext_layer.thickness = thickness
 
         ext_layer.material = new_material
+
+        insulation_index = len(self.layer) if add_at_position is None \
+            else add_at_position
+
+        if add_plaster_thickness is not None:
+            ass_error_1 = "If plaster is added, insulation must be applied at inside or outside"
+
+            assert add_at_position is None or add_at_position == 0, ass_error_1
+            if add_plaster_material is None:
+                add_plaster_material = 'insulating_plaster'
+            plaster_layer = Layer(self, parent_position=add_at_position)
+            plaster_material = Material(plaster_layer)
+            plaster_material.load_material_template(
+                add_plaster_material,
+                data_class=self.parent.parent.parent.data)
+            if add_at_position == 0:
+                insulation_index = 1
+
+        return insulation_index
 
     def retrofit_wall(self, year_of_retrofit, material=None):
         """Retrofits wall to German refurbishment standards.
