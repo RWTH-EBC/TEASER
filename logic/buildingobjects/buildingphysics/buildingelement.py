@@ -232,12 +232,12 @@ class BuildingElement(object):
                 # will be re-reversed later)
                 range_tuple = (number_of_layer - 1, -1, -1)
 
-        for i in range(*range_tuple):
+        for i, l_i in enumerate(range(*range_tuple)):
 
-            density[i] = self.layer[i].material.density
-            thermal_conduc[i] = self.layer[i].material.thermal_conduc
-            heat_capac[i] = self.layer[i].material.heat_capac
-            thickness[i] = self.layer[i].thickness
+            density[i] = self.layer[l_i].material.density
+            thermal_conduc[i] = self.layer[l_i].material.thermal_conduc
+            heat_capac[i] = self.layer[l_i].material.heat_capac
+            thickness[i] = self.layer[l_i].thickness
 
         return number_of_layer, density, thermal_conduc, heat_capac, thickness
 
@@ -287,7 +287,8 @@ class BuildingElement(object):
             construction,
             data_class=None,
             element_type=None,
-            reverse_layers=False):
+            reverse_layers=False,
+            reset_basic_data=True):
         """Typical element loader.
 
         Loads typical building elements according to their construction
@@ -318,6 +319,11 @@ class BuildingElement(object):
         reverse_layers : bool
             defines if layer list should be reversed
 
+        reset_basic_data : bool
+            if True, inner_convection, outer_convection, inner_radiation, and
+            outer_radiation are set to None in advance and must be set by
+            buildingelement_input._set_basic_data() again afterwards
+
         """
 
         if data_class is None:
@@ -326,10 +332,11 @@ class BuildingElement(object):
             data_class = data_class
 
         self.layer = None
-        self._inner_convection = None
-        self._inner_radiation = None
-        self._outer_convection = None
-        self._outer_radiation = None
+        if not reset_basic_data:
+            self._inner_convection = None
+            self._inner_radiation = None
+            self._outer_convection = None
+            self._outer_radiation = None
 
         buildingelement_input.load_type_element(element=self,
                                                 year=year,
@@ -501,6 +508,8 @@ class BuildingElement(object):
                 material.ir_emissivity = material_info.irEmissivity
             if material_info.transmittance is not None:
                 material.transmittance = material_info.transmittance
+            if material_info.name is not None:
+                material.name = material_info.name
             if material.density == 0 or material.thermal_conduc == 0:
                 warnings.warn('Material not sufficiently specified.')
                 raise KeyError
@@ -764,6 +773,8 @@ class BuildingElement(object):
 
     @property
     def year_of_construction(self):
+        if self._year_of_construction is None:
+            return self.parent.parent.year_of_construction
         return self._year_of_construction
 
     @year_of_construction.setter

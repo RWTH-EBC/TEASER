@@ -48,8 +48,8 @@ class Layer(object):
     def parent(self, value):
 
         if type(value) == tuple:
-            value = value[0]
             position = value[1]
+            value = value[0]
         else:
             position = None
 
@@ -67,7 +67,7 @@ class Layer(object):
                 or type(value).__name__ == "Window", ass_error_1
 
             self.__parent = value
-            self.__parent.add_layer(self, None)
+            self.__parent.add_layer(self, position=position)
 
         else:
             self.__parent = None

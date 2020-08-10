@@ -279,7 +279,7 @@ class Wall(BuildingElement):
 
         """
         if material is None:
-            material = "EPS035"
+            material = "EPS_040_15"
         else:
             pass
 
@@ -296,7 +296,7 @@ class Wall(BuildingElement):
 
         ext_layer.material = new_material
 
-        insulation_index = len(self.layer) if add_at_position is None \
+        insulation_index = len(self.layer) - 1 if add_at_position is None \
             else add_at_position
 
         if add_plaster_thickness is not None:
@@ -310,6 +310,7 @@ class Wall(BuildingElement):
             plaster_material.load_material_template(
                 add_plaster_material,
                 data_class=self.parent.parent.parent.data)
+            plaster_layer.thickness = add_plaster_thickness
             if add_at_position == 0:
                 insulation_index = 1
 

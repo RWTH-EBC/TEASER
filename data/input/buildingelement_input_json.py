@@ -56,7 +56,10 @@ def load_type_element(element, year, construction, data_class,
                 and key.startswith(element_type)
             ):
                 _set_basic_data(element=element, element_in=element_in)
-                for id, layer_in in element_in["layer"].items():
+                for id, layer_in in (
+                        element_in["layer"].items().__reversed__()
+                        if reverse_layers else element_in["layer"].items()
+                ):
                     layer = Layer(element)
                     layer.id = id
                     layer.thickness = layer_in["thickness"]
