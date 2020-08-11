@@ -208,56 +208,18 @@ class Office(NonResidential):
             "Exterior Facade West": [90, 270],
         }
         self.outer_wall_gml = {
-            "Wall1": {
-                "length": None,
-                "height": None,
-                "area": None,
-                "orientation": None,
-                "tilt": 90,
-            },
-            "Wall2": {
-                "length": None,
-                "height": None,
-                "area": None,
-                "orientation": None,
-                "tilt": 90,
-            },
-            "Wall3": {
-                "length": None,
-                "height": None,
-                "area": None,
-                "orientation": None,
-                "tilt": 90,
-            },
-            "Wall4": {
-                "length": None,
-                "height": None,
-                "area": None,
-                "orientation": None,
-                "tilt": 90,
-            },
+            "Wall1": {"area": None, "orientation": None, "tilt": 90},
+            "Wall2": {"area": None, "orientation": None, "tilt": 90},
+            "Wall3": {"area": None, "orientation": None, "tilt": 90},
+            "Wall4": {"area": None, "orientation": None, "tilt": 90},
         }
 
         self.roof_names = {"Rooftop": [0, -1]}
-        self.roof_gml = {
-            "Roof": {
-                "length": None,
-                "height": None,
-                "area": None,
-                "orientation": -1,
-                "tilt": 0,
-            }
-        }
+        self.roof_gml = {"Roof": {"area": None, "orientation": -1, "tilt": 0}}
 
         self.ground_floor_names = {"Ground Floor": [0, -2]}
         self.ground_floor_gml = {
-            "Ground Floor": {
-                "length": None,
-                "height": None,
-                "area": None,
-                "orientation": -2,
-                "tilt": 0,
-            }
+            "Ground Floor": {"area": None, "orientation": -2, "tilt": 0}
         }
         self.window_names = {
             "Window Facade North": [90, 0],
@@ -266,34 +228,10 @@ class Office(NonResidential):
             "Window Facade West": [90, 270],
         }
         self.window_gml = {
-            "Window1": {
-                "length": None,
-                "height": None,
-                "area": None,
-                "orientation": None,
-                "tilt": 90,
-            },
-            "Window2": {
-                "length": None,
-                "height": None,
-                "area": None,
-                "orientation": None,
-                "tilt": 90,
-            },
-            "Window3": {
-                "length": None,
-                "height": None,
-                "area": None,
-                "orientation": None,
-                "tilt": 90,
-            },
-            "Window4": {
-                "length": None,
-                "height": None,
-                "area": None,
-                "orientation": None,
-                "tilt": 90,
-            },
+            "Window1": {"area": None, "orientation": None, "tilt": 90},
+            "Window2": {"area": None, "orientation": None, "tilt": 90},
+            "Window3": {"area": None, "orientation": None, "tilt": 90},
+            "Window4": {"area": None, "orientation": None, "tilt": 90},
         }
 
         self.inner_wall_names = {"InnerWall": [90, 0]}
