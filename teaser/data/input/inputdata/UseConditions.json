@@ -2951,8 +2951,8 @@
         "ratio_conv_rad_machines": 0.75,
         "lighting_power": 7.1,
         "ratio_conv_rad_lighting": 0.9,
-        "use_constant_infiltration": false,
-        "infiltration_rate": 0.2,
+        "use_constant_infiltration": true,
+        "infiltration_rate": 1.5,
         "max_user_infiltration": 1.0,
         "max_overheating_infiltration": [
             0.0,
