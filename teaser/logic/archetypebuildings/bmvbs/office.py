@@ -255,6 +255,8 @@ class Office(NonResidential):
         self._est_width = 0
         self._est_length = 0
 
+        self.factor_win_gml = 0.33
+
         if self.window_layout == 0:
             self.corr_factor_wall = 1.0
             self.corr_factor_win = 1.0
