@@ -507,69 +507,77 @@ class Office(NonResidential):
             zone.use_conditions = use_cond
 
         for key, value in self.outer_wall_gml.items():
+            if value["area"] == 0:
+                pass
+            else:
+                self.outer_area[value["orientation"]] = value["area"]
 
-            self.outer_area[value["orientation"]] = value["area"]
-
-            for zone in self.thermal_zones:
-                # create wall and set building elements
-                outer_wall = OuterWall(zone)
-                outer_wall.load_type_element(
-                    year=self.year_of_construction,
-                    construction=self.construction_type,
-                    data_class=self.parent.data,
-                )
-                outer_wall.name = key
-                outer_wall.tilt = value["tilt"]
-                outer_wall.orientation = value["orientation"]
+                for zone in self.thermal_zones:
+                    # create wall and set building elements
+                    outer_wall = OuterWall(zone)
+                    outer_wall.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self.construction_type,
+                        data_class=self.parent.data,
+                    )
+                    outer_wall.name = key
+                    outer_wall.tilt = value["tilt"]
+                    outer_wall.orientation = value["orientation"]
 
         for key, value in self.window_gml.items():
+            if value["area"] == 0:
+                pass
+            else:
+                self.window_area[value["orientation"]] = value["area"]
 
-            self.window_area[value["orientation"]] = value["area"]
-
-            """
-            There is no real classification for windows, so this is a bit hard
-            code - will be fixed sometime.
-            """
-            for zone in self.thermal_zones:
-                window = Window(zone)
-                window.load_type_element(
-                    self.year_of_construction,
-                    "Kunststofffenster, " "Isolierverglasung",
-                    data_class=self.parent.data,
-                )
-                window.name = key
-                window.tilt = value["tilt"]
-                window.orientation = value["orientation"]
+                """
+                There is no real classification for windows, so this is a bit hard
+                code - will be fixed sometime.
+                """
+                for zone in self.thermal_zones:
+                    window = Window(zone)
+                    window.load_type_element(
+                        self.year_of_construction,
+                        "Kunststofffenster, " "Isolierverglasung",
+                        data_class=self.parent.data,
+                    )
+                    window.name = key
+                    window.tilt = value["tilt"]
+                    window.orientation = value["orientation"]
 
         for key, value in self.roof_gml.items():
+            if value["area"] == 0:
+                pass
+            else:
+                self.outer_area[value["orientation"]] = value["area"]
 
-            self.outer_area[value["orientation"]] = value["area"]
-
-            for zone in self.thermal_zones:
-                roof = Rooftop(zone)
-                roof.load_type_element(
-                    year=self.year_of_construction,
-                    construction=self.construction_type,
-                    data_class=self.parent.data,
-                )
-                roof.name = key
-                roof.tilt = value["tilt"]
-                roof.orientation = value["orientation"]
+                for zone in self.thermal_zones:
+                    roof = Rooftop(zone)
+                    roof.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self.construction_type,
+                        data_class=self.parent.data,
+                    )
+                    roof.name = key
+                    roof.tilt = value["tilt"]
+                    roof.orientation = value["orientation"]
 
         for key, value in self.ground_floor_gml.items():
+            if value["area"] == 0:
+                pass
+            else:
+                self.outer_area[value["orientation"]] = value["area"]
 
-            self.outer_area[value["orientation"]] = value["area"]
-
-            for zone in self.thermal_zones:
-                ground_floor = GroundFloor(zone)
-                ground_floor.load_type_element(
-                    year=self.year_of_construction,
-                    construction=self.construction_type,
-                    data_class=self.parent.data,
-                )
-                ground_floor.name = key
-                ground_floor.tilt = value["tilt"]
-                ground_floor.orientation = value["orientation"]
+                for zone in self.thermal_zones:
+                    ground_floor = GroundFloor(zone)
+                    ground_floor.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self.construction_type,
+                        data_class=self.parent.data,
+                    )
+                    ground_floor.name = key
+                    ground_floor.tilt = value["tilt"]
+                    ground_floor.orientation = value["orientation"]
 
         for key, value in self.inner_wall_names.items():
 
