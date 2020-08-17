@@ -689,6 +689,8 @@ class Office(NonResidential):
                 window.tilt = value["tilt"]
                 window.orientation = value["orientation"]
                 window.area = value["area"] * win_factor
+                window.g_value = 0.7
+                window.a_conv = 0.03
                 layer = Layer(window)
                 layer.id = 0
                 layer.thickness = (
