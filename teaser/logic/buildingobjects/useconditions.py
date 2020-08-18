@@ -203,7 +203,33 @@ class UseConditions(object):
         self.with_ahu = False
 
         self._with_ideal_thresholds = False
-
+        self._ventilation_std = [
+            0.01,
+            0.01,
+            0.01,
+            0.01,
+            0.01,
+            0.01,
+            0.01,
+            0.01,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.01,
+            0.01,
+            0.01,
+            0.01,
+        ]
         self._heating_profile = [
             294.15,
             294.15,
@@ -349,6 +375,12 @@ class UseConditions(object):
                 "machines_profile": list(islice(cycle(self._machines_profile), 8760)),
             },
         )
+        self.ventilation = pd.DataFrame(
+            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
+            .to_series()
+            .dt.strftime("%m-%d %H:%M:%S"),
+            data={"ventilation_std": list(islice(cycle(self._ventilation_std), 8760))},
+        )
 
     def load_use_conditions(self, zone_usage, data_class=None):
         """Load typical use conditions from JSON data base.
@@ -465,6 +497,17 @@ class UseConditions(object):
             value = [value]
         self._lighting_profile = value
         self.schedules["lighting_profile"] = list(islice(cycle(value), 8760))
+
+    @property
+    def ventilation_std(self):
+        return self._ventilation_std
+
+    @ventilation_std.setter
+    def ventilation_std(self, value):
+        if not isinstance(value, list):
+            value = [value]
+        self._ventilation_std = value
+        self.ventilation["ventilation_std"] = list(islice(cycle(value), 8760))
 
     @property
     def parent(self):

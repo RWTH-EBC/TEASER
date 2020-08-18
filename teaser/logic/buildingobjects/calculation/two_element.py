@@ -384,9 +384,11 @@ class TwoElement(object):
     def calc_attributes(self):
         """Calls all necessary function to calculate model attributes"""
 
-        outer_walls = (self.thermal_zone.outer_walls +
-                       self.thermal_zone.ground_floors +
-                       self.thermal_zone.rooftops)
+        outer_walls = (
+            self.thermal_zone.outer_walls
+            + self.thermal_zone.ground_floors
+            + self.thermal_zone.rooftops
+        )
 
         for out_wall in outer_walls:
             out_wall.calc_equivalent_res()
@@ -394,34 +396,53 @@ class TwoElement(object):
         for win in self.thermal_zone.windows:
             win.calc_equivalent_res()
             win.calc_ua_value()
-        for inner_wall in (self.thermal_zone.inner_walls +
-                           self.thermal_zone.floors +
-                           self.thermal_zone.ceilings):
+        for inner_wall in (
+            self.thermal_zone.inner_walls
+            + self.thermal_zone.floors
+            + self.thermal_zone.ceilings
+        ):
             inner_wall.calc_equivalent_res()
             inner_wall.calc_ua_value()
 
         self.set_calc_default()
         if len(outer_walls) < 1:
-            warnings.warn("No walls are defined as outer walls for thermal "
-                          "zone " + str(self.thermal_zone.name) +
-                          " in building " +
-                          str(self.thermal_zone.parent.name) +
-                          ", please be careful with results. In addition " +
-                          "this might lead to RunTimeErrors")
+            warnings.warn(
+                "No walls are defined as outer walls for thermal "
+                "zone "
+                + str(self.thermal_zone.name)
+                + " in building "
+                + str(self.thermal_zone.parent.name)
+                + ", please be careful with results. In addition "
+                + "this might lead to RunTimeErrors"
+            )
         else:
             self._sum_outer_wall_elements()
-        if len(self.thermal_zone.inner_walls + self.thermal_zone.floors +
-               self.thermal_zone.ceilings) < 1:
-            warnings.warn('For thermal zone ' + self.thermal_zone.name +
-                          ' in building ' + self.thermal_zone.parent.name +
-                          ', no inner walls have been defined.')
+        if (
+            len(
+                self.thermal_zone.inner_walls
+                + self.thermal_zone.floors
+                + self.thermal_zone.ceilings
+            )
+            < 1
+        ):
+            warnings.warn(
+                "For thermal zone "
+                + self.thermal_zone.name
+                + " in building "
+                + self.thermal_zone.parent.name
+                + ", no inner walls have been defined."
+            )
         else:
             self._sum_inner_wall_elements()
             self._calc_inner_elements()
         if len(self.thermal_zone.windows) < 1:
-            warnings.warn('For thermal zone ' + self.thermal_zone.name +
-                          ' in building ' + self.thermal_zone.parent.name +
-                          ', no windows have been defined.')
+            warnings.warn(
+                "For thermal zone "
+                + self.thermal_zone.name
+                + " in building "
+                + self.thermal_zone.parent.name
+                + ", no windows have been defined."
+            )
         else:
             self._sum_window_elements()
         if len(outer_walls) >= 1 or len(self.thermal_zone.windows) >= 1:
@@ -460,58 +481,83 @@ class TwoElement(object):
 
             if wall_count == 0:
 
-                r1 = (element_list[wall_count].r1 *
-                      element_list[wall_count].c1 ** 2 +
-                      element_list[wall_count + 1].r1 *
-                      element_list[wall_count + 1].c1 ** 2 + omega ** 2 *
-                      element_list[wall_count].r1 *
-                      element_list[wall_count + 1].r1 *
-                      (element_list[wall_count].r1 +
-                       element_list[wall_count + 1].r1) *
-                      element_list[wall_count].c1 ** 2 *
-                      element_list[wall_count + 1].c1 ** 2) / \
-                     ((element_list[wall_count].c1 +
-                       element_list[wall_count + 1].c1) ** 2 + omega ** 2 *
-                      (element_list[wall_count].r1 +
-                       element_list[wall_count + 1].r1) ** 2 *
-                      element_list[wall_count].c1 ** 2 *
-                      element_list[wall_count + 1].c1 ** 2)
+                r1 = (
+                    element_list[wall_count].r1 * element_list[wall_count].c1 ** 2
+                    + element_list[wall_count + 1].r1
+                    * element_list[wall_count + 1].c1 ** 2
+                    + omega ** 2
+                    * element_list[wall_count].r1
+                    * element_list[wall_count + 1].r1
+                    * (element_list[wall_count].r1 + element_list[wall_count + 1].r1)
+                    * element_list[wall_count].c1 ** 2
+                    * element_list[wall_count + 1].c1 ** 2
+                ) / (
+                    (element_list[wall_count].c1 + element_list[wall_count + 1].c1) ** 2
+                    + omega ** 2
+                    * (element_list[wall_count].r1 + element_list[wall_count + 1].r1)
+                    ** 2
+                    * element_list[wall_count].c1 ** 2
+                    * element_list[wall_count + 1].c1 ** 2
+                )
 
-                c1 = ((element_list[wall_count].c1 +
-                       element_list[wall_count + 1].c1) ** 2 + omega ** 2 *
-                      (element_list[wall_count].r1 +
-                       element_list[wall_count + 1].r1) ** 2 *
-                      element_list[wall_count].c1 ** 2 *
-                      element_list[wall_count + 1].c1 ** 2) / \
-                     (element_list[wall_count].c1 +
-                      element_list[wall_count + 1].c1 + omega ** 2 *
-                      (element_list[wall_count].r1 ** 2 *
-                       element_list[wall_count].c1 +
-                       element_list[wall_count + 1].r1 ** 2 *
-                       element_list[wall_count + 1].c1) *
-                      element_list[wall_count].c1 *
-                      element_list[wall_count + 1].c1)
+                c1 = (
+                    (element_list[wall_count].c1 + element_list[wall_count + 1].c1) ** 2
+                    + omega ** 2
+                    * (element_list[wall_count].r1 + element_list[wall_count + 1].r1)
+                    ** 2
+                    * element_list[wall_count].c1 ** 2
+                    * element_list[wall_count + 1].c1 ** 2
+                ) / (
+                    element_list[wall_count].c1
+                    + element_list[wall_count + 1].c1
+                    + omega ** 2
+                    * (
+                        element_list[wall_count].r1 ** 2 * element_list[wall_count].c1
+                        + element_list[wall_count + 1].r1 ** 2
+                        * element_list[wall_count + 1].c1
+                    )
+                    * element_list[wall_count].c1
+                    * element_list[wall_count + 1].c1
+                )
             else:
                 r1x = r1
                 c1x = c1
-                r1 = (r1x * c1x ** 2 + element_list[wall_count + 1].r1 *
-                      element_list[wall_count + 1].c1 ** 2 +
-                      omega ** 2 * r1x * element_list[wall_count + 1].r1 *
-                      (r1x + element_list[wall_count + 1].r1) *
-                      c1x ** 2 * element_list[wall_count + 1].c1 ** 2) / \
-                     ((c1x + element_list[wall_count + 1].c1) ** 2 +
-                      omega ** 2 * (
-                          r1x + element_list[wall_count + 1].r1) ** 2 *
-                      c1x ** 2 * element_list[wall_count + 1].c1 ** 2)
+                r1 = (
+                    r1x * c1x ** 2
+                    + element_list[wall_count + 1].r1
+                    * element_list[wall_count + 1].c1 ** 2
+                    + omega ** 2
+                    * r1x
+                    * element_list[wall_count + 1].r1
+                    * (r1x + element_list[wall_count + 1].r1)
+                    * c1x ** 2
+                    * element_list[wall_count + 1].c1 ** 2
+                ) / (
+                    (c1x + element_list[wall_count + 1].c1) ** 2
+                    + omega ** 2
+                    * (r1x + element_list[wall_count + 1].r1) ** 2
+                    * c1x ** 2
+                    * element_list[wall_count + 1].c1 ** 2
+                )
 
-                c1 = ((c1x + element_list[
-                    wall_count + 1].c1) ** 2 + omega ** 2 *
-                    (r1x + element_list[wall_count + 1].r1) ** 2 * c1x ** 2 *
-                    element_list[wall_count + 1].c1 ** 2) / \
-                    (c1x + element_list[wall_count + 1].c1 + omega ** 2 *
-                     (r1x ** 2 * c1x + element_list[wall_count + 1].r1 **
-                      2 * element_list[wall_count + 1].c1) * c1x *
-                     element_list[wall_count + 1].c1)
+                c1 = (
+                    (c1x + element_list[wall_count + 1].c1) ** 2
+                    + omega ** 2
+                    * (r1x + element_list[wall_count + 1].r1) ** 2
+                    * c1x ** 2
+                    * element_list[wall_count + 1].c1 ** 2
+                ) / (
+                    c1x
+                    + element_list[wall_count + 1].c1
+                    + omega ** 2
+                    * (
+                        r1x ** 2 * c1x
+                        + element_list[wall_count + 1].r1 ** 2
+                        * element_list[wall_count + 1].c1
+                    )
+                    * c1x
+                    * element_list[wall_count + 1].c1
+                )
         return r1, c1
 
     def _sum_outer_wall_elements(self):
@@ -527,107 +573,104 @@ class TwoElement(object):
         """
         # treat all outer wall types identical
 
-        self.area_ow = \
-            (sum(out_wall.area for out_wall in
-                 self.thermal_zone.outer_walls)
-             + sum(ground.area for ground in
-                   self.thermal_zone.ground_floors)
-             + sum(roof.area for roof in
-                   self.thermal_zone.rooftops))
+        self.area_ow = (
+            sum(out_wall.area for out_wall in self.thermal_zone.outer_walls)
+            + sum(ground.area for ground in self.thermal_zone.ground_floors)
+            + sum(roof.area for roof in self.thermal_zone.rooftops)
+        )
 
-        self.ua_value_ow = \
-            (sum(out_wall.ua_value for out_wall in
-                 self.thermal_zone.outer_walls)
-             + sum(ground.ua_value for ground in
-                   self.thermal_zone.ground_floors)
-             + sum(roof.ua_value for roof in
-                   self.thermal_zone.rooftops))
+        self.ua_value_ow = (
+            sum(out_wall.ua_value for out_wall in self.thermal_zone.outer_walls)
+            + sum(ground.ua_value for ground in self.thermal_zone.ground_floors)
+            + sum(roof.ua_value for roof in self.thermal_zone.rooftops)
+        )
 
         self.r_total_ow = 1 / self.ua_value_ow
 
         # values facing the inside of the thermal zone
 
-        self.r_conv_inner_ow = (1 /
-                                (sum(1 / out_wall.r_inner_conv for out_wall in
-                                     self.thermal_zone.outer_walls)
-                                 + sum(1 / ground.r_inner_conv for ground in
-                                       self.thermal_zone.ground_floors)
-                                 + sum(1 / roof.r_inner_conv for roof in
-                                       self.thermal_zone.rooftops)))
+        self.r_conv_inner_ow = 1 / (
+            sum(1 / out_wall.r_inner_conv for out_wall in self.thermal_zone.outer_walls)
+            + sum(1 / ground.r_inner_conv for ground in self.thermal_zone.ground_floors)
+            + sum(1 / roof.r_inner_conv for roof in self.thermal_zone.rooftops)
+        )
 
-        self.r_rad_inner_ow = (1 /
-                               (sum(1 / out_wall.r_inner_rad for out_wall in
-                                    self.thermal_zone.outer_walls)
-                                + sum(1 / ground.r_inner_rad for ground in
-                                      self.thermal_zone.ground_floors)
-                                + sum(1 / roof.r_inner_rad for roof in
-                                      self.thermal_zone.rooftops)))
+        self.r_rad_inner_ow = 1 / (
+            sum(1 / out_wall.r_inner_rad for out_wall in self.thermal_zone.outer_walls)
+            + sum(1 / ground.r_inner_rad for ground in self.thermal_zone.ground_floors)
+            + sum(1 / roof.r_inner_rad for roof in self.thermal_zone.rooftops)
+        )
 
-        self.r_comb_inner_ow = (1 /
-                                (sum(1 / out_wall.r_inner_comb for out_wall in
-                                     self.thermal_zone.outer_walls)
-                                 + sum(1 / ground.r_inner_comb for ground in
-                                       self.thermal_zone.ground_floors)
-                                 + sum(1 / roof.r_inner_comb for roof in
-                                       self.thermal_zone.rooftops)))
+        self.r_comb_inner_ow = 1 / (
+            sum(1 / out_wall.r_inner_comb for out_wall in self.thermal_zone.outer_walls)
+            + sum(1 / ground.r_inner_comb for ground in self.thermal_zone.ground_floors)
+            + sum(1 / roof.r_inner_comb for roof in self.thermal_zone.rooftops)
+        )
 
         self.ir_emissivity_inner_ow = (
-            (sum(out_wall.layer[0].material.ir_emissivity * out_wall.area for
-                 out_wall in self.thermal_zone.outer_walls)
-             + sum(ground.layer[0].material.ir_emissivity * ground.area for
-                   ground in self.thermal_zone.ground_floors)
-             + sum(roof.layer[0].material.ir_emissivity * roof.area for
-                   roof in self.thermal_zone.rooftops)) / self.area_ow)
+            sum(
+                out_wall.layer[0].material.ir_emissivity * out_wall.area
+                for out_wall in self.thermal_zone.outer_walls
+            )
+            + sum(
+                ground.layer[0].material.ir_emissivity * ground.area
+                for ground in self.thermal_zone.ground_floors
+            )
+            + sum(
+                roof.layer[0].material.ir_emissivity * roof.area
+                for roof in self.thermal_zone.rooftops
+            )
+        ) / self.area_ow
 
-        self.alpha_conv_inner_ow = (
-            1 / (self.r_conv_inner_ow * self.area_ow))
-        self.alpha_rad_inner_ow = (
-            1 / (self.r_rad_inner_ow * self.area_ow))
-        self.alpha_comb_inner_ow = (
-            1 / (self.r_comb_inner_ow * self.area_ow))
+        self.alpha_conv_inner_ow = 1 / (self.r_conv_inner_ow * self.area_ow)
+        self.alpha_rad_inner_ow = 1 / (self.r_rad_inner_ow * self.area_ow)
+        self.alpha_comb_inner_ow = 1 / (self.r_comb_inner_ow * self.area_ow)
 
         # values facing the ambient
         # ground floor does not have any coefficients on ambient side
 
-        _area_ow_rt = (sum(out_wall.area for out_wall in
-                           self.thermal_zone.outer_walls)
-                       + sum(roof.area for roof in
-                             self.thermal_zone.rooftops))
+        _area_ow_rt = sum(
+            out_wall.area for out_wall in self.thermal_zone.outer_walls
+        ) + sum(roof.area for roof in self.thermal_zone.rooftops)
 
-        self.r_conv_outer_ow = (1 /
-                                (sum(1 / out_wall.r_outer_conv for out_wall in
-                                     self.thermal_zone.outer_walls)
-                                 + sum(1 / roof.r_outer_conv for roof in
-                                       self.thermal_zone.rooftops)))
-        self.r_rad_outer_ow = (1 /
-                               (sum(1 / out_wall.r_outer_rad for out_wall in
-                                    self.thermal_zone.outer_walls)
-                                + sum(1 / roof.r_outer_rad for roof in
-                                      self.thermal_zone.rooftops)))
-        self.r_comb_outer_ow = (1 /
-                                (sum(1 / out_wall.r_outer_comb for out_wall in
-                                     self.thermal_zone.outer_walls)
-                                 + sum(1 / roof.r_outer_comb for roof in
-                                       self.thermal_zone.rooftops)))
+        self.r_conv_outer_ow = 1 / (
+            sum(1 / out_wall.r_outer_conv for out_wall in self.thermal_zone.outer_walls)
+            + sum(1 / roof.r_outer_conv for roof in self.thermal_zone.rooftops)
+        )
+        self.r_rad_outer_ow = 1 / (
+            sum(1 / out_wall.r_outer_rad for out_wall in self.thermal_zone.outer_walls)
+            + sum(1 / roof.r_outer_rad for roof in self.thermal_zone.rooftops)
+        )
+        self.r_comb_outer_ow = 1 / (
+            sum(1 / out_wall.r_outer_comb for out_wall in self.thermal_zone.outer_walls)
+            + sum(1 / roof.r_outer_comb for roof in self.thermal_zone.rooftops)
+        )
 
         self.ir_emissivity_outer_ow = (
-            (sum(out_wall.layer[-1].material.ir_emissivity * out_wall.area for
-                 out_wall in self.thermal_zone.outer_walls)
-             + sum(roof.layer[-1].material.ir_emissivity * roof.area for
-                   roof in self.thermal_zone.rooftops)) / _area_ow_rt)
+            sum(
+                out_wall.layer[-1].material.ir_emissivity * out_wall.area
+                for out_wall in self.thermal_zone.outer_walls
+            )
+            + sum(
+                roof.layer[-1].material.ir_emissivity * roof.area
+                for roof in self.thermal_zone.rooftops
+            )
+        ) / _area_ow_rt
 
         self.solar_absorp_ow = (
-            (sum(out_wall.layer[-1].material.solar_absorp * out_wall.area for
-                 out_wall in self.thermal_zone.outer_walls)
-             + sum(roof.layer[-1].material.solar_absorp * roof.area for
-                   roof in self.thermal_zone.rooftops)) / _area_ow_rt)
+            sum(
+                out_wall.layer[-1].material.solar_absorp * out_wall.area
+                for out_wall in self.thermal_zone.outer_walls
+            )
+            + sum(
+                roof.layer[-1].material.solar_absorp * roof.area
+                for roof in self.thermal_zone.rooftops
+            )
+        ) / _area_ow_rt
 
-        self.alpha_conv_outer_ow = (
-            1 / (self.r_conv_outer_ow * _area_ow_rt))
-        self.alpha_rad_outer_ow = (
-            1 / (self.r_rad_outer_ow * _area_ow_rt))
-        self.alpha_comb_outer_ow = (
-            1 / (self.r_comb_outer_ow * _area_ow_rt))
+        self.alpha_conv_outer_ow = 1 / (self.r_conv_outer_ow * _area_ow_rt)
+        self.alpha_rad_outer_ow = 1 / (self.r_rad_outer_ow * _area_ow_rt)
+        self.alpha_comb_outer_ow = 1 / (self.r_comb_outer_ow * _area_ow_rt)
 
     def _sum_inner_wall_elements(self):
         """Sum attributes for interior elements
@@ -644,62 +687,56 @@ class TwoElement(object):
         currently not supported.
 
         """
-        self.area_iw = \
-            (sum(in_wall.area for in_wall in
-                 self.thermal_zone.inner_walls)
-             + sum(floor.area for floor in
-                   self.thermal_zone.floors)
-             + sum(ceiling.area for ceiling in
-                   self.thermal_zone.ceilings))
+        self.area_iw = (
+            sum(in_wall.area for in_wall in self.thermal_zone.inner_walls)
+            + sum(floor.area for floor in self.thermal_zone.floors)
+            + sum(ceiling.area for ceiling in self.thermal_zone.ceilings)
+        )
 
-        self.ua_value_iw = \
-            (sum(in_wall.ua_value for in_wall in
-                 self.thermal_zone.inner_walls)
-             + sum(floor.ua_value for floor in
-                   self.thermal_zone.floors)
-             + sum(ceiling.ua_value for ceiling in
-                   self.thermal_zone.ceilings))
+        self.ua_value_iw = (
+            sum(in_wall.ua_value for in_wall in self.thermal_zone.inner_walls)
+            + sum(floor.ua_value for floor in self.thermal_zone.floors)
+            + sum(ceiling.ua_value for ceiling in self.thermal_zone.ceilings)
+        )
 
         # values facing the inside of the thermal zone
 
-        self.r_conv_inner_iw = (1 /
-                                (sum(1 / in_wall.r_inner_conv for in_wall in
-                                     self.thermal_zone.inner_walls)
-                                 + sum(1 / floor.r_inner_conv for floor in
-                                       self.thermal_zone.floors)
-                                 + sum(1 / ceiling.r_inner_conv for ceiling in
-                                       self.thermal_zone.ceilings)))
+        self.r_conv_inner_iw = 1 / (
+            sum(1 / in_wall.r_inner_conv for in_wall in self.thermal_zone.inner_walls)
+            + sum(1 / floor.r_inner_conv for floor in self.thermal_zone.floors)
+            + sum(1 / ceiling.r_inner_conv for ceiling in self.thermal_zone.ceilings)
+        )
 
-        self.r_rad_inner_iw = (1 /
-                               (sum(1 / in_wall.r_inner_rad for in_wall in
-                                    self.thermal_zone.inner_walls)
-                                + sum(1 / floor.r_inner_rad for floor in
-                                      self.thermal_zone.floors)
-                                + sum(1 / ceiling.r_inner_rad for ceiling in
-                                      self.thermal_zone.ceilings)))
+        self.r_rad_inner_iw = 1 / (
+            sum(1 / in_wall.r_inner_rad for in_wall in self.thermal_zone.inner_walls)
+            + sum(1 / floor.r_inner_rad for floor in self.thermal_zone.floors)
+            + sum(1 / ceiling.r_inner_rad for ceiling in self.thermal_zone.ceilings)
+        )
 
-        self.r_comb_inner_iw = (1 /
-                                (sum(1 / in_wall.r_inner_comb for in_wall in
-                                     self.thermal_zone.inner_walls)
-                                 + sum(1 / floor.r_inner_comb for floor in
-                                       self.thermal_zone.floors)
-                                 + sum(1 / ceiling.r_inner_comb for ceiling in
-                                       self.thermal_zone.ceilings)))
+        self.r_comb_inner_iw = 1 / (
+            sum(1 / in_wall.r_inner_comb for in_wall in self.thermal_zone.inner_walls)
+            + sum(1 / floor.r_inner_comb for floor in self.thermal_zone.floors)
+            + sum(1 / ceiling.r_inner_comb for ceiling in self.thermal_zone.ceilings)
+        )
 
         self.ir_emissivity_inner_iw = (
-            (sum(in_wall.layer[0].material.ir_emissivity * in_wall.area for
-                 in_wall in self.thermal_zone.inner_walls)
-             + sum(floor.layer[0].material.ir_emissivity * floor.area for
-                   floor in self.thermal_zone.floors)
-             + sum(ceiling.layer[0].material.ir_emissivity * ceiling.area for
-                   ceiling in self.thermal_zone.ceilings)) / self.area_iw)
+            sum(
+                in_wall.layer[0].material.ir_emissivity * in_wall.area
+                for in_wall in self.thermal_zone.inner_walls
+            )
+            + sum(
+                floor.layer[0].material.ir_emissivity * floor.area
+                for floor in self.thermal_zone.floors
+            )
+            + sum(
+                ceiling.layer[0].material.ir_emissivity * ceiling.area
+                for ceiling in self.thermal_zone.ceilings
+            )
+        ) / self.area_iw
 
-        self.alpha_conv_inner_iw = (
-            1 / (self.r_conv_inner_iw * self.area_iw))
-        self.alpha_rad_inner_iw = (
-            1 / (self.r_rad_inner_iw * self.area_iw))
-        self.alpha_comb_inner_iw = (
-            1 / (self.r_comb_inner_iw * self.area_iw))
+        self.alpha_conv_inner_iw = 1 / (self.r_conv_inner_iw * self.area_iw)
+        self.alpha_rad_inner_iw = 1 / (self.r_rad_inner_iw * self.area_iw)
+        self.alpha_comb_inner_iw = 1 / (self.r_comb_inner_iw * self.area_iw)
 
         # adjacent thermal zones are not supported!
 
@@ -714,64 +751,78 @@ class TwoElement(object):
         """
 
         self.area_win = sum(win.area for win in self.thermal_zone.windows)
-        self.ua_value_win = sum(
-            win.ua_value for win in self.thermal_zone.windows)
+        self.ua_value_win = sum(win.ua_value for win in self.thermal_zone.windows)
         self.u_value_win = self.ua_value_win / self.area_win
 
         self.r_total_win = 1 / self.ua_value_win
         # values facing the inside of the thermal zone
 
-        self.r_conv_inner_win = (1 / (sum(1 / win.r_inner_conv for win in
-                                          self.thermal_zone.windows)))
+        self.r_conv_inner_win = 1 / (
+            sum(1 / win.r_inner_conv for win in self.thermal_zone.windows)
+        )
 
-        self.r_rad_inner_win = (1 / (sum(1 / win.r_inner_rad for win in
-                                         self.thermal_zone.windows)))
+        self.r_rad_inner_win = 1 / (
+            sum(1 / win.r_inner_rad for win in self.thermal_zone.windows)
+        )
 
-        self.r_comb_inner_win = (1 / (sum(1 / win.r_inner_comb for win in
-                                          self.thermal_zone.windows)))
+        self.r_comb_inner_win = 1 / (
+            sum(1 / win.r_inner_comb for win in self.thermal_zone.windows)
+        )
 
-        self.ir_emissivity_inner_win = sum(
-            win.layer[0].material.ir_emissivity * win.area for win in
-            self.thermal_zone.windows) / self.area_win
+        self.ir_emissivity_inner_win = (
+            sum(
+                win.layer[0].material.ir_emissivity * win.area
+                for win in self.thermal_zone.windows
+            )
+            / self.area_win
+        )
 
-        self.alpha_conv_inner_win = (
-            1 / (self.r_conv_inner_win * self.area_win))
-        self.alpha_rad_inner_win = (
-            1 / (self.r_rad_inner_win * self.area_win))
-        self.alpha_comb_inner_win = (
-            1 / (self.r_comb_inner_win * self.area_win))
-        self.ratio_conv_rad_inner_win = sum(win.a_conv * win.area for win in
-                                            self.thermal_zone.windows) / \
-            self.area_win
+        self.alpha_conv_inner_win = 1 / (self.r_conv_inner_win * self.area_win)
+        self.alpha_rad_inner_win = 1 / (self.r_rad_inner_win * self.area_win)
+        self.alpha_comb_inner_win = 1 / (self.r_comb_inner_win * self.area_win)
+        self.ratio_conv_rad_inner_win = (
+            sum(win.a_conv * win.area for win in self.thermal_zone.windows)
+            / self.area_win
+        )
 
         # values facing the ambient
 
-        self.r_conv_outer_win = (1 / (sum(1 / win.r_outer_conv for win in
-                                          self.thermal_zone.windows)))
+        self.r_conv_outer_win = 1 / (
+            sum(1 / win.r_outer_conv for win in self.thermal_zone.windows)
+        )
 
-        self.r_rad_outer_win = (1 / (sum(1 / win.r_outer_rad for win in
-                                         self.thermal_zone.windows)))
+        self.r_rad_outer_win = 1 / (
+            sum(1 / win.r_outer_rad for win in self.thermal_zone.windows)
+        )
 
-        self.r_comb_outer_win = (1 / (sum(1 / win.r_outer_comb for win in
-                                          self.thermal_zone.windows)))
+        self.r_comb_outer_win = 1 / (
+            sum(1 / win.r_outer_comb for win in self.thermal_zone.windows)
+        )
 
-        self.ir_emissivity_win = sum(win.layer[-1].material.ir_emissivity
-                                     * win.area for win in
-                                     self.thermal_zone.windows) / self.area_win
+        self.ir_emissivity_win = (
+            sum(
+                win.layer[-1].material.ir_emissivity * win.area
+                for win in self.thermal_zone.windows
+            )
+            / self.area_win
+        )
 
-        self.solar_absorp_win = sum(win.layer[-1].material.solar_absorp
-                                    * win.area for win in
-                                    self.thermal_zone.windows) / self.area_win
+        self.solar_absorp_win = (
+            sum(
+                win.layer[-1].material.solar_absorp * win.area
+                for win in self.thermal_zone.windows
+            )
+            / self.area_win
+        )
 
-        self.weighted_g_value = sum(win.g_value * win.area for win in
-                                    self.thermal_zone.windows) / self.area_win
+        self.weighted_g_value = (
+            sum(win.g_value * win.area for win in self.thermal_zone.windows)
+            / self.area_win
+        )
 
-        self.alpha_conv_outer_win = (
-            1 / (self.r_conv_outer_win * self.area_win))
-        self.alpha_rad_outer_win = (
-            1 / (self.r_rad_outer_win * self.area_win))
-        self.alpha_comb_outer_win = (
-            1 / (self.r_comb_outer_win * self.area_win))
+        self.alpha_conv_outer_win = 1 / (self.r_conv_outer_win * self.area_win)
+        self.alpha_rad_outer_win = 1 / (self.r_rad_outer_win * self.area_win)
+        self.alpha_comb_outer_win = 1 / (self.r_comb_outer_win * self.area_win)
 
     def _calc_outer_elements(self):
         """Lumped parameter for outer wall elements
@@ -790,9 +841,11 @@ class TwoElement(object):
 
         omega = 2 * math.pi / 86400 / self.t_bt
 
-        outer_walls = (self.thermal_zone.outer_walls +
-                       self.thermal_zone.ground_floors +
-                       self.thermal_zone.rooftops)
+        outer_walls = (
+            self.thermal_zone.outer_walls
+            + self.thermal_zone.ground_floors
+            + self.thermal_zone.rooftops
+        )
 
         if 0 < len(outer_walls) <= 1:
             # only one outer wall, no need to calculate chain matrix
@@ -800,63 +853,77 @@ class TwoElement(object):
             self.c1_ow = outer_walls[0].c1_korr
         elif len(outer_walls) > 1:
             # more than one outer wall, calculate chain matrix
-            self.r1_ow, self.c1_ow = self._calc_parallel_connection(outer_walls,
-                                                                    omega)
+            self.r1_ow, self.c1_ow = self._calc_parallel_connection(outer_walls, omega)
 
         if self.merge_windows is False:
             try:
 
                 if len(self.thermal_zone.windows) > 0:
-                    self.r1_win = (1 / sum((1 / win.r1) for win in
-                                           self.thermal_zone.windows))
+                    self.r1_win = 1 / sum(
+                        (1 / win.r1) for win in self.thermal_zone.windows
+                    )
                 if len(self.thermal_zone.outer_walls) > 0:
-                    conduction = (1 / sum((1 / element.r_conduc) for element in
-                                          outer_walls))
+                    conduction = 1 / sum(
+                        (1 / element.r_conduc) for element in outer_walls
+                    )
 
-                    self.r_rest_ow = (conduction - self.r1_ow)
+                    self.r_rest_ow = conduction - self.r1_ow
 
             except RuntimeError:
-                print("As no outer walls or no windows are defined lumped "
-                      "parameter cannot be calculated")
+                print(
+                    "As no outer walls or no windows are defined lumped "
+                    "parameter cannot be calculated"
+                )
 
         if self.merge_windows is True:
 
             try:
 
-                if len(self.thermal_zone.windows) > 0 and  \
-                   len(self.thermal_zone.outer_walls) > 0:
-                    self.r1_win = 1 / sum(1 / (win.r1 / 6) for win in
-                                          self.thermal_zone.windows)
+                if (
+                    len(self.thermal_zone.windows) > 0
+                    and len(self.thermal_zone.outer_walls) > 0
+                ):
+                    self.r1_win = 1 / sum(
+                        1 / (win.r1 / 6) for win in self.thermal_zone.windows
+                    )
 
                     self.r1_ow = 1 / (1 / self.r1_ow + 1 / self.r1_win)
 
-                    self.r_total_ow = 1 / (self.ua_value_ow +
-                                           self.ua_value_win)
-                    self.r_rest_ow = (self.r_total_ow - self.r1_ow - 1 / (
-                        ((1 / self.r_conv_inner_ow)
-                         + (1 / self.r_conv_inner_win)
-                         + (1 / self.r_rad_inner_ow)
-                         + (1 / self.r_rad_inner_win)))) - 1 / (
-                        self.alpha_comb_outer_ow * self.area_ow)
+                    self.r_total_ow = 1 / (self.ua_value_ow + self.ua_value_win)
+                    self.r_rest_ow = (
+                        self.r_total_ow
+                        - self.r1_ow
+                        - 1
+                        / (
+                            (
+                                (1 / self.r_conv_inner_ow)
+                                + (1 / self.r_conv_inner_win)
+                                + (1 / self.r_rad_inner_ow)
+                                + (1 / self.r_rad_inner_win)
+                            )
+                        )
+                    ) - 1 / (self.alpha_comb_outer_ow * self.area_ow)
 
                 self.ir_emissivity_inner_ow = (
-                    (self.ir_emissivity_inner_ow * self.area_ow
-                     + self.ir_emissivity_inner_win * self.area_win)
-                    / (self.area_ow + self.area_win))
+                    self.ir_emissivity_inner_ow * self.area_ow
+                    + self.ir_emissivity_inner_win * self.area_win
+                ) / (self.area_ow + self.area_win)
 
                 self.ir_emissivity_outer_ow = (
-                    (self.ir_emissivity_outer_ow * self.area_ow
-                     + self.ir_emissivity_win * self.area_win)
-                    / (self.area_ow + self.area_win))
+                    self.ir_emissivity_outer_ow * self.area_ow
+                    + self.ir_emissivity_win * self.area_win
+                ) / (self.area_ow + self.area_win)
 
                 self.solar_absorp_ow = (
-                    (self.solar_absorp_ow * self.area_ow
-                     + self.solar_absorp_win * self.area_win)
-                    / (self.area_ow + self.area_win))
+                    self.solar_absorp_ow * self.area_ow
+                    + self.solar_absorp_win * self.area_win
+                ) / (self.area_ow + self.area_win)
 
             except RuntimeError:
-                print("As no outer walls or no windows are defined lumped "
-                      "parameter cannot be calculated")
+                print(
+                    "As no outer walls or no windows are defined lumped "
+                    "parameter cannot be calculated"
+                )
 
     def _calc_inner_elements(self):
         """Lumped parameter for outer wall elements
@@ -876,9 +943,11 @@ class TwoElement(object):
 
         omega = 2 * math.pi / 86400 / self.t_bt
 
-        inner_walls = (self.thermal_zone.inner_walls +
-                       self.thermal_zone.floors +
-                       self.thermal_zone.ceilings)
+        inner_walls = (
+            self.thermal_zone.inner_walls
+            + self.thermal_zone.floors
+            + self.thermal_zone.ceilings
+        )
 
         for in_wall in inner_walls:
             in_wall.calc_equivalent_res()
@@ -890,9 +959,7 @@ class TwoElement(object):
             self.c1_iw = inner_walls[0].c1_korr
         elif len(inner_walls) > 1:
             # more than one outer wall, calculate chain matrix
-            self.r1_iw, self.c1_iw = self._calc_parallel_connection(
-                inner_walls,
-                omega)
+            self.r1_iw, self.c1_iw = self._calc_parallel_connection(inner_walls, omega)
 
     def _calc_wf(self):
         """Weightfactors for outer elements(walls, roof, ground floor, windows)
@@ -908,22 +975,23 @@ class TwoElement(object):
             GroundFloors, Rooftops
         """
 
-        outer_walls = (self.thermal_zone.outer_walls +
-                       self.thermal_zone.ground_floors +
-                       self.thermal_zone.rooftops)
+        outer_walls = (
+            self.thermal_zone.outer_walls
+            + self.thermal_zone.ground_floors
+            + self.thermal_zone.rooftops
+        )
 
         if self.merge_windows is True:
 
             for wall in outer_walls:
-                wall.wf_out = wall.ua_value / (
-                    self.ua_value_ow + self.ua_value_win)
+                wall.wf_out = wall.ua_value / (self.ua_value_ow + self.ua_value_win)
 
             for win in self.thermal_zone.windows:
-                win.wf_out = win.ua_value / (
-                    self.ua_value_ow + self.ua_value_win)
+                win.wf_out = win.ua_value / (self.ua_value_ow + self.ua_value_win)
 
-            self.weightfactor_ground = sum(gf.wf_out for gf in
-                                           self.thermal_zone.ground_floors)
+            self.weightfactor_ground = sum(
+                gf.wf_out for gf in self.thermal_zone.ground_floors
+            )
 
         elif self.merge_windows is False:
 
@@ -933,8 +1001,9 @@ class TwoElement(object):
             for win in self.thermal_zone.windows:
                 win.wf_out = win.ua_value / self.ua_value_win
 
-            self.weightfactor_ground = sum(gf.wf_out for gf in
-                                           self.thermal_zone.ground_floors)
+            self.weightfactor_ground = sum(
+                gf.wf_out for gf in self.thermal_zone.ground_floors
+            )
 
         else:
             raise ValueError("specify merge window method correctly")
@@ -947,14 +1016,15 @@ class TwoElement(object):
         inner and outer walls
         """
 
-        self.alpha_rad_inner_mean = (self.area_ow * self.alpha_rad_inner_ow +
-                                     self.area_win * self.alpha_rad_inner_win +
-                                     self.area_iw * self.alpha_rad_inner_iw) \
-            / (self.area_ow + self.area_win +
-               self.area_iw)
-        self.alpha_rad_outer_mean = (self.area_ow * self.alpha_rad_outer_ow +
-                                     self.area_win * self.alpha_rad_outer_win) \
-            / (self.area_ow + self.area_win)
+        self.alpha_rad_inner_mean = (
+            self.area_ow * self.alpha_rad_inner_ow
+            + self.area_win * self.alpha_rad_inner_win
+            + self.area_iw * self.alpha_rad_inner_iw
+        ) / (self.area_ow + self.area_win + self.area_iw)
+        self.alpha_rad_outer_mean = (
+            self.area_ow * self.alpha_rad_outer_ow
+            + self.area_win * self.alpha_rad_outer_win
+        ) / (self.area_ow + self.area_win)
 
     def _calc_number_of_elements(self):
         """Calculates the number of outer elements with different tilt/orient
@@ -965,10 +1035,11 @@ class TwoElement(object):
         """
 
         outer_elements = (
-            self.thermal_zone.outer_walls +
-            self.thermal_zone.ground_floors +
-            self.thermal_zone.rooftops +
-            self.thermal_zone.windows)
+            self.thermal_zone.outer_walls
+            + self.thermal_zone.ground_floors
+            + self.thermal_zone.rooftops
+            + self.thermal_zone.windows
+        )
 
         tilt_orient = []
         for element in outer_elements:
@@ -984,10 +1055,11 @@ class TwoElement(object):
         tilt, ares and sunblinds."""
 
         outer_elements = (
-            self.thermal_zone.outer_walls +
-            self.thermal_zone.rooftops +
-            self.thermal_zone.windows +
-            self.thermal_zone.ground_floors)
+            self.thermal_zone.outer_walls
+            + self.thermal_zone.rooftops
+            + self.thermal_zone.windows
+            + self.thermal_zone.ground_floors
+        )
 
         tilt_orient = []
         for element in outer_elements:
@@ -995,18 +1067,20 @@ class TwoElement(object):
         tilt_orient = list(set(tilt_orient))
 
         for i in tilt_orient:
-            wall_rt = \
-                self.thermal_zone.find_walls(i[0], i[1]) + \
-                self.thermal_zone.find_rts(i[0], i[1])
+            wall_rt = self.thermal_zone.find_walls(
+                i[0], i[1]
+            ) + self.thermal_zone.find_rts(i[0], i[1])
             wins = self.thermal_zone.find_wins(i[0], i[1])
             gf = self.thermal_zone.find_gfs(i[0], i[1])
 
             if self.merge_windows is True:
-                self.facade_areas.append(sum([element.area for element in (
-                    wall_rt + wins + gf)]))
+                self.facade_areas.append(
+                    sum([element.area for element in (wall_rt + wins + gf)])
+                )
             else:
-                self.facade_areas.append(sum([element.area for element in (
-                    wall_rt + gf)]))
+                self.facade_areas.append(
+                    sum([element.area for element in (wall_rt + gf)])
+                )
 
             self.orientation_facade.append(i[0])
             self.tilt_facade.append(i[1])
@@ -1018,13 +1092,12 @@ class TwoElement(object):
                     self.outer_wall_areas.append(0.0)
                 else:
                     self.weightfactor_ow.append(0.0)
-                    self.outer_wall_areas.append((sum([element.area for element
-                                                       in gf])))
+                    self.outer_wall_areas.append(
+                        (sum([element.area for element in gf]))
+                    )
             else:
-                self.weightfactor_ow.append(
-                    sum([wall.wf_out for wall in wall_rt]))
-                self.outer_wall_areas.append(sum([wall.area for wall in
-                                                  wall_rt]))
+                self.weightfactor_ow.append(sum([wall.wf_out for wall in wall_rt]))
+                self.outer_wall_areas.append(sum([wall.area for wall in wall_rt]))
 
             if not wins:
                 self.weightfactor_win.append(0.0)
@@ -1032,21 +1105,16 @@ class TwoElement(object):
                 self.window_areas.append(0.0)
                 self.transparent_areas.append(0.0)
             else:
-                self.weightfactor_win.append(
-                    sum([win.wf_out for win in wins]))
-                self.g_sunblind.append(
-                    sum([win.shading_g_total for win in wins]))
+                self.weightfactor_win.append(sum([win.wf_out for win in wins]))
+                self.g_sunblind.append(sum([win.shading_g_total for win in wins]))
 
                 if self.merge_windows is False:
-                    self.window_areas.append(
-                        sum([win.area for win in wins]))
-                    self.transparent_areas.append(
-                        sum([win.area for win in wins]))
+                    self.window_areas.append(sum([win.area for win in wins]))
+                    self.transparent_areas.append(sum([win.area for win in wins]))
 
                 else:
                     self.window_areas.append(0)
-                    self.transparent_areas.append(
-                        sum([win.area for win in wins]))
+                    self.transparent_areas.append(sum([win.area for win in wins]))
 
     def _calc_heat_load(self):
         """Static heat load calculation
@@ -1065,17 +1133,24 @@ class TwoElement(object):
         """
         self.heat_load = 0.0
         ua_value_gf_temp = sum(
-            ground.ua_value for ground in self.thermal_zone.ground_floors)
+            ground.ua_value for ground in self.thermal_zone.ground_floors
+        )
         ua_value_ow_temp = self.ua_value_ow - ua_value_gf_temp
-        self.heat_load = \
-            ((((ua_value_ow_temp + self.ua_value_win) +
-               self.thermal_zone.volume *
-               self.thermal_zone.use_conditions.infiltration_rate * 1 / 3600 *
-               self.thermal_zone.heat_capac_air *
-               self.thermal_zone.density_air) * (self.thermal_zone.t_inside -
-                                                 self.thermal_zone.t_outside))
-             + (ua_value_gf_temp * (self.thermal_zone.t_inside -
-                                    self.thermal_zone.t_ground)))
+        self.heat_load = (
+            (
+                (ua_value_ow_temp + self.ua_value_win)
+                + self.thermal_zone.volume
+                * self.thermal_zone.use_conditions.infiltration_rate
+                * 1
+                / 3600
+                * self.thermal_zone.heat_capac_air
+                * self.thermal_zone.density_air
+            )
+            * (self.thermal_zone.t_inside - self.thermal_zone.t_outside)
+        ) + (
+            ua_value_gf_temp * (self.thermal_zone.t_inside - self.thermal_zone.t_ground)
+        )
+        self.heat_load = self.cool_load * 5
 
     def set_calc_default(self):
         """sets default calculation parameters
