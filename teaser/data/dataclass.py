@@ -76,7 +76,7 @@ class DataClass(object):
         )
         self.conditions_bind = None
         self.path_uc = utils.get_full_path(
-            "data/input/inputdata/UseConditionsBWN_mapped.json"
+            "data/input/inputdata/UseConditions_CampusReference.json"
         )
 
         self.load_uc_binding()
