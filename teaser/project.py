@@ -163,7 +163,7 @@ class Project(object):
                         merge_windows=self._merge_windows_calc,
                         used_library=self._used_library_calc,
                     )
-                except (ZeroDivisionError, TypeError):
+                except (ZeroDivisionError, TypeError, IndexError):
                     warnings.warn(
                         "Following building can't be calculated and is "
                         "removed from buildings list. Use raise_errors=True "
