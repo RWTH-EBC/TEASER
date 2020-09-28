@@ -679,6 +679,53 @@ class Office(NonResidential):
                         material.thermal_conduc = layer_in["thermal_conduc"]
                         material.heat_capac = layer_in["heat_capac"]
                         material.solar_absorp = 0.5
+                r_conduc = 0
+                for count_layer in outer_wall.layer:
+                    r_conduc += (
+                        count_layer.thickness / count_layer.material.thermal_conduc
+                    )
+                if value["u_value"] / outer_wall.u_value < 0.95:
+
+                    layer = Layer(outer_wall)
+                    layer.id = len(outer_wall.layer)
+                    layer.thickness = (
+                        1 / value["u_value"]
+                        - (
+                            (
+                                outer_wall.r_outer_comb * outer_wall.area
+                                + outer_wall.r_inner_comb * outer_wall.area
+                                + r_conduc
+                            )
+                        )
+                    ) * 0.04
+
+                    material = Material(layer)
+                    material.name = "EPS_040_15"
+                    material.density = 1.0
+                    material.thermal_conduc = 0.04
+                    material.heat_capac = 1.5
+                    material.solar_absorp = 0.5
+
+                elif value["u_value"] / outer_wall.u_value > 1.05:
+
+                    layer_dict = {}
+                    for lay in outer_wall.layer:
+                        layer_dict[lay] = lay.thickness / lay.material.thermal_conduc
+
+                    list_of_layer = sorted(
+                        layer_dict.items(), reverse=True, key=lambda x: x[1]
+                    )
+                    thickness_diff = (
+                        1 / value["u_value"]
+                        - (
+                            (
+                                outer_wall.r_outer_comb * outer_wall.area
+                                + outer_wall.r_inner_comb * outer_wall.area
+                                + r_conduc
+                            )
+                        )
+                    ) * list_of_layer[0][0].material.thermal_conduc
+                    list_of_layer[0][0].thickness += thickness_diff
 
         for key, value in self.window_gml.items():
             for zone in self.thermal_zones:
@@ -729,6 +776,56 @@ class Office(NonResidential):
                         material.thermal_conduc = layer_in["thermal_conduc"]
                         material.heat_capac = layer_in["heat_capac"]
                         material.solar_absorp = 0.5
+                r_conduc = 0
+                for count_layer in roof.layer:
+                    r_conduc += (
+                        count_layer.thickness / count_layer.material.thermal_conduc
+                    )
+
+                if value["u_value"] / roof.u_value < 0.95:
+
+                    layer = Layer(roof)
+                    layer.id = len(roof.layer)
+                    layer.thickness = (
+                        1 / value["u_value"]
+                        - (
+                            (
+                                roof.r_outer_comb * roof.area
+                                + roof.r_inner_comb * roof.area
+                                + r_conduc
+                            )
+                        )
+                    ) * 0.04
+
+                    material = Material(layer)
+                    material.name = "EPS_040_15"
+                    material.density = 1.0
+                    material.thermal_conduc = 0.04
+                    material.heat_capac = 1.5
+                    material.solar_absorp = 0.5
+
+                elif value["u_value"] / roof.u_value > 1.05:
+
+                    layer_dict = {}
+
+                    for lay in roof.layer:
+                        layer_dict[lay] = lay.thickness / lay.material.thermal_conduc
+
+                    list_of_layer = sorted(
+                        layer_dict.items(), reverse=True, key=lambda x: x[1]
+                    )
+
+                    thickness_diff = (
+                        1 / value["u_value"]
+                        - (
+                            (
+                                roof.r_outer_comb * roof.area
+                                + roof.r_inner_comb * roof.area
+                                + r_conduc
+                            )
+                        )
+                    ) * list_of_layer[0][0].material.thermal_conduc
+                    list_of_layer[0][0].thickness += thickness_diff
 
         for key, value in self.ground_floor_gml.items():
             for zone in self.thermal_zones:
@@ -756,6 +853,55 @@ class Office(NonResidential):
                         material.thermal_conduc = layer_in["thermal_conduc"]
                         material.heat_capac = layer_in["heat_capac"]
                         material.solar_absorp = 0.5
+                r_conduc = 0
+                for count_layer in ground.layer:
+                    r_conduc += (
+                        count_layer.thickness / count_layer.material.thermal_conduc
+                    )
+
+                if value["u_value"] / ground.u_value < 0.95:
+                    layer = Layer(ground)
+                    layer.id = len(ground.layer)
+                    layer.thickness = (
+                        1 / value["u_value"]
+                        - (
+                            (
+                                ground.r_outer_comb * ground.area
+                                + ground.r_inner_comb * ground.area
+                                + r_conduc
+                            )
+                        )
+                    ) * 0.04
+
+                    material = Material(layer)
+                    material.name = "EPS_040_15"
+                    material.density = 1.0
+                    material.thermal_conduc = 0.04
+                    material.heat_capac = 1.5
+                    material.solar_absorp = 0.5
+
+                elif value["u_value"] / ground.u_value > 1.05:
+
+                    layer_dict = {}
+                    for lay in ground.layer:
+                        layer_dict[lay] = lay.thickness / lay.material.thermal_conduc
+
+                    list_of_layer = sorted(
+                        layer_dict.items(), reverse=True, key=lambda x: x[1]
+                    )
+
+                    thickness_diff = (
+                        1 / value["u_value"]
+                        - (
+                            (
+                                ground.r_outer_comb * ground.area
+                                + ground.r_inner_comb * ground.area
+                                + r_conduc
+                            )
+                        )
+                    ) * list_of_layer[0][0].material.thermal_conduc
+
+                    list_of_layer[0][0].thickness += thickness_diff
 
         for key, value in self.inner_wall_names.items():
 
