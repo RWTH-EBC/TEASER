@@ -291,6 +291,10 @@ class Office(NonResidential):
         else:
             pass
 
+        self.work_start = 6
+        self.work_end = 19
+        self.weekend = False
+
         # default values for AHU
         if self.with_ahu is True:
             self.central_ahu.temperature_profile = (
