@@ -148,6 +148,7 @@ class NonResidential(Building):
         self.inner_wall_names = {"InnerWall": [90, 0]}
         self.ceiling_names = {"Ceiling": [0, -1]}
         self.floor_names = {"Floor": [0, -2]}
+        self.construction_type = None
 
     def generate_archetype(self):
         """Generates an archetype building.
