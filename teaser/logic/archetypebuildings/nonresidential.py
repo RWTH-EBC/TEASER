@@ -1,8 +1,17 @@
 # created June 2015
 # by TEASER4 Development Team
-
+import collections
 
 from teaser.logic.buildingobjects.building import Building
+from teaser.logic.buildingobjects.useconditions import UseConditions as UseCond
+from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
+from teaser.logic.buildingobjects.buildingphysics.floor import Floor
+from teaser.logic.buildingobjects.buildingphysics.groundfloor import GroundFloor
+from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
+from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
+from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
+from teaser.logic.buildingobjects.buildingphysics.window import Window
+from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
 
 class NonResidential(Building):
@@ -128,6 +137,18 @@ class NonResidential(Building):
             internal_gains_mode,
         )
 
+        self.zone_area_factors = collections.OrderedDict()
+        self.outer_wall_geo = {"Wall1": {"area": None, "orientation": None, "tilt": 90}}
+        self.roof_geo = {"Roof": {"area": None, "orientation": -1, "tilt": 0}}
+        self.ground_floor_geo = {
+            "Ground Floor": {"area": None, "orientation": -2, "tilt": 0}
+        }
+        self.window_geo = {"Window1": {"area": None, "orientation": None, "tilt": 90}}
+
+        self.inner_wall_names = {"InnerWall": [90, 0]}
+        self.ceiling_names = {"Ceiling": [0, -1]}
+        self.floor_names = {"Floor": [0, -2]}
+
     def generate_archetype(self):
         """Generates an archetype building.
 
@@ -137,3 +158,155 @@ class NonResidential(Building):
         """
 
         pass
+
+    def generate_geo(self):
+        """Generates an non residential building with given detailed geometry data.
+
+        To run this function you need to specify the dictionsaries:
+        self.outer_wall_geo = {"Wall1": {"area": None, "orientation": None, "tilt": 90}}
+        self.roof_geo = {"Roof": {"area": None, "orientation": -1, "tilt": 0}}
+        self.ground_floor_geo = {
+            "Ground Floor": {"area": None, "orientation": -2, "tilt": 0}
+        }
+        self.window_geo = {"Window1": {"area": None, "orientation": None, "tilt": 90}}
+
+        With given values, this class generates an non residential archetype building
+        according to TEASER requirements.
+        """
+        # help area for the correct building area setting while using typeBldgs
+        self.thermal_zones = None
+        type_bldg_area = self.net_leased_area
+        self.net_leased_area = 0.0
+        # create zones with their corresponding area, name and usage
+        for key, value in self.zone_area_factors.items():
+            zone = ThermalZone(self)
+            zone.area = type_bldg_area * value[0]
+            zone.name = key
+            use_cond = UseCond(zone)
+            use_cond.load_use_conditions(value[1], data_class=self.parent.data)
+            zone.use_conditions = use_cond
+
+        for key, value in self.outer_wall_geo.items():
+            if value["area"] == 0:
+                pass
+            else:
+                self.outer_area[value["orientation"]] = value["area"]
+
+                for zone in self.thermal_zones:
+                    # create wall and set building elements
+                    outer_wall = OuterWall(zone)
+                    outer_wall.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self.construction_type,
+                        data_class=self.parent.data,
+                    )
+                    outer_wall.name = key
+                    outer_wall.tilt = value["tilt"]
+                    outer_wall.orientation = value["orientation"]
+
+        for key, value in self.window_geo.items():
+            if value["area"] == 0:
+                pass
+            else:
+                self.window_area[value["orientation"]] = value["area"]
+
+                """
+                There is no real classification for windows, so this is a bit hard
+                code - will be fixed sometime.
+                """
+                for zone in self.thermal_zones:
+                    window = Window(zone)
+                    window.load_type_element(
+                        self.year_of_construction,
+                        "Kunststofffenster, " "Isolierverglasung",
+                        data_class=self.parent.data,
+                    )
+                    window.name = key
+                    window.tilt = value["tilt"]
+                    window.orientation = value["orientation"]
+
+        for key, value in self.roof_geo.items():
+            if value["area"] == 0:
+                pass
+            else:
+                self.outer_area[value["orientation"]] = value["area"]
+
+                for zone in self.thermal_zones:
+                    roof = Rooftop(zone)
+                    roof.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self.construction_type,
+                        data_class=self.parent.data,
+                    )
+                    roof.name = key
+                    roof.tilt = value["tilt"]
+                    roof.orientation = value["orientation"]
+
+        for key, value in self.ground_floor_geo.items():
+            if value["area"] == 0:
+                pass
+            else:
+                self.outer_area[value["orientation"]] = value["area"]
+
+                for zone in self.thermal_zones:
+                    ground_floor = GroundFloor(zone)
+                    ground_floor.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self.construction_type,
+                        data_class=self.parent.data,
+                    )
+                    ground_floor.name = key
+                    ground_floor.tilt = value["tilt"]
+                    ground_floor.orientation = value["orientation"]
+
+        for key, value in self.inner_wall_names.items():
+
+            for zone in self.thermal_zones:
+                inner_wall = InnerWall(zone)
+                inner_wall.load_type_element(
+                    year=self.year_of_construction,
+                    construction=self.construction_type,
+                    data_class=self.parent.data,
+                )
+                inner_wall.name = key
+                inner_wall.tilt = value[0]
+                inner_wall.orientation = value[1]
+
+        if self.number_of_floors > 1:
+
+            for key, value in self.ceiling_names.items():
+
+                for zone in self.thermal_zones:
+                    ceiling = Ceiling(zone)
+                    ceiling.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self.construction_type,
+                        data_class=self.parent.data,
+                    )
+                    ceiling.name = key
+                    ceiling.tilt = value[0]
+                    ceiling.orientation = value[1]
+
+            for key, value in self.floor_names.items():
+
+                for zone in self.thermal_zones:
+                    floor = Floor(zone)
+                    floor.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self.construction_type,
+                        data_class=self.parent.data,
+                    )
+                    floor.name = key
+                    floor.tilt = value[0]
+                    floor.orientation = value[1]
+        else:
+            pass
+
+        for key, value in self.outer_area.items():
+            self.set_outer_wall_area(value, key)
+        for key, value in self.window_area.items():
+            self.set_window_area(value, key)
+
+        for zone in self.thermal_zones:
+            zone.set_inner_wall_area()
+            zone.set_volume_zone()
