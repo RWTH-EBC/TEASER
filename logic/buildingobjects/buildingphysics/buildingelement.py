@@ -69,6 +69,13 @@ class BuildingElement(object):
         List of all layers of a building element (to be filled with Layer
         objects). Use element.layer = None to delete all layers of the building
         element
+    view_factors : list
+        view factors for half-space above (outer) surface for sky/ground/other
+        buildings/surfaces with ambient temperature for use in AixLib with
+        FiveElementVectorized and calculateHeatFlow. Values must already be
+        corrected for cosine loss and possible directional dependance of
+        absorptivity. If specified, sum should be 1. If sum is 0, default
+        assumptions are used in AixLib"
 
     Calculated Attributes
 
@@ -154,6 +161,8 @@ class BuildingElement(object):
         self.r_outer_rad = 0.0
         self.r_outer_comb = 0.0
         self.wf_out = 0.0
+
+        self._view_factors = [0, 0, 0, 0]
 
     def calc_ua_value(self):
         """U*A value for building element.
@@ -288,7 +297,9 @@ class BuildingElement(object):
             data_class=None,
             element_type=None,
             reverse_layers=False,
-            reset_basic_data=True):
+            reset_basic_data=True,
+            type_element_key=None
+    ):
         """Typical element loader.
 
         Loads typical building elements according to their construction
@@ -324,6 +335,8 @@ class BuildingElement(object):
             outer_radiation are set to None in advance and must be set by
             buildingelement_input._set_basic_data() again afterwards
 
+        type_element_key : str
+
         """
 
         if data_class is None:
@@ -338,12 +351,26 @@ class BuildingElement(object):
             self._outer_convection = None
             self._outer_radiation = None
 
-        buildingelement_input.load_type_element(element=self,
-                                                year=year,
-                                                construction=construction,
-                                                data_class=data_class,
-                                                element_type=element_type,
-                                                reverse_layers=reverse_layers)
+        if type_element_key:
+            try:
+                buildingelement_input.load_type_element_by_key(
+                    element=self, key_str=type_element_key,
+                    data_class=data_class, reverse_layers=reverse_layers
+                )
+            except KeyError:
+                warnings.warn(
+                    ('Type element ' + type_element_key + ' was not found. '
+                     + 'Going back to default element for year and construction'
+                     + '...')
+                )
+                type_element_key = None
+
+        if not type_element_key:
+            buildingelement_input.load_type_element(
+                element=self, year=year, construction=construction,
+                data_class=data_class, element_type=element_type,
+                reverse_layers=reverse_layers
+            )
 
     def save_type_element(self, data_class=None):
         """Typical element saver.
@@ -770,6 +797,26 @@ class BuildingElement(object):
                 self._tilt = value
             except:
                 raise ValueError("Can't convert tilt to float")
+
+    @property
+    def view_factors(self):
+        return self._view_factors
+
+    @view_factors.setter
+    def view_factors(self, value):
+        try:
+            value = list(value)
+            view_factors = [0., 0., 0., 0.]
+            for idx in range(4):
+                view_factors[idx] += float(value[idx])
+        except:
+            raise ValueError("Can't convert view_factors to four-element list")
+        if not (np.isclose(sum(view_factors), 1)
+                or all([vf == 0 for vf in view_factors])) \
+                or any([vf < 0 for vf in view_factors]):
+            raise ValueError("view factors must be >= 0 and sum up to 1 or "
+                             "be all 0")
+        self._view_factors = view_factors
 
     @property
     def year_of_construction(self):

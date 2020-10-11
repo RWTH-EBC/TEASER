@@ -69,6 +69,51 @@ def load_type_element(element, year, construction, data_class,
                     )
 
 
+def load_type_element_by_key(element, key_str, data_class,
+                             reverse_layers=False):
+    """Load BuildingElement from json by key string.
+
+    Loads typical building elements according to their key string from a JSON.
+    The elements are created by using building characteristics from
+    cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.26.07.2007` and
+    :cite:`KurzverfahrenIWU`, which is combined with normative material data
+    from :cite:`VereinDeutscherIngenieure.2012b`.
+
+    Parameters
+    ----------
+    element : BuildingElement()
+        Instance of BuildingElement or inherited Element of TEASER
+
+    key_str : str
+        key  string to the type element of the building characteristics sources
+
+    data_class : DataClass()
+        DataClass containing the bindings for TypeBuildingElement and
+        Material (typically this is the data class stored in prj.data,
+        but the user can individually change that.
+
+    reverse_layers : bool
+        defines if layer list should be reversed
+
+    """
+    element_binding = data_class.element_bind
+
+    element_in = element_binding[key_str]
+
+    _set_basic_data(element=element, element_in=element_in)
+    for id, layer_in in (
+            element_in["layer"].items().__reversed__()
+            if reverse_layers else element_in["layer"].items()
+    ):
+        layer = Layer(element)
+        layer.id = id
+        layer.thickness = layer_in["thickness"]
+        material = Material(layer)
+        mat_input.load_material_id(
+            material, layer_in["material"]["material_id"], data_class
+        )
+
+
 def _set_basic_data(element, element_in):
     """Set basic data for building elements.
 

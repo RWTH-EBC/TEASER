@@ -415,33 +415,51 @@ class SingleFamilyHouse(Residential):
                 if area:
                     outer_wall = OuterWall(zone)
                     try:
+                        layers = None
                         layers = value[2]['layers']
                         outer_wall.use_layer_properties(
                             layers[0][1], year=year, element_type=element_type
                         )
                         multipleParts = len(layers) > 1
                     except (KeyError, IndexError):
+                        # layers is a string (referring to a wall type) or None
+                        if layers is not None:
+                            reverse_layers = layers[0] == '-'
+                            layers = layers.lstrip('-')
+                        else:
+                            reverse_layers = False
                         outer_wall.load_type_element(
                             year=year,
                             construction=self._construction_type_1,
                             data_class=self.parent.data,
-                            element_type=element_type
+                            element_type=element_type,
+                            type_element_key=layers,
+                            reverse_layers=reverse_layers
                         )
                         multipleParts = False
-                    outer_wall.name = key
+                    try:
+                        outer_wall.view_factors = value[2]['view_factors']
+                    except (KeyError, IndexError):
+                        pass
                     outer_wall.tilt = value[0]
                     outer_wall.orientation = value[1]
+                    outer_wall.name = key
                     if multipleParts:
                         outer_wall.area = area * layers[0][0]
                         for wallPart in layers[1:]:
                             outer_wall = OuterWall(zone)
                             outer_wall.use_layer_properties(
-                                wallPart[1], year=year, element_type=element_type
+                                wallPart[1], year=year,
+                                element_type=element_type
                             )
                             outer_wall.name = key
                             outer_wall.tilt = value[0]
                             outer_wall.orientation = value[1]
                             outer_wall.area = area * wallPart[0]
+                            try:
+                                outer_wall.view_factors = value[2]['view_factors']
+                            except (KeyError, IndexError):
+                                pass
                     else:
                         outer_wall.area = area
 
@@ -467,19 +485,31 @@ class SingleFamilyHouse(Residential):
                 if area:
                     outer_wall = OuterWall(zone)
                     try:
+                        layers = None
                         layers = value[2]['layers']
                         outer_wall.use_layer_properties(
                             layers[0][1], year=year, element_type=element_type
                         )
                         multipleParts = len(layers) > 1
                     except (KeyError, IndexError):
+                        if layers is not None:
+                            reverse_layers = layers[0] == '-'
+                            layers = layers.lstrip('-')
+                        else:
+                            reverse_layers = False
                         outer_wall.load_type_element(
                             year=year,
                             construction=self._construction_type_2,
                             data_class=self.parent.data,
-                            element_type=element_type
+                            element_type=element_type,
+                            type_element_key=layers,
+                            reverse_layers=reverse_layers
                         )
                         multipleParts = False
+                    try:
+                        outer_wall.view_factors = value[2]['view_factors']
+                    except (KeyError, IndexError):
+                        pass
                     outer_wall.name = key
                     outer_wall.tilt = value[0]
                     outer_wall.orientation = value[1]
@@ -488,12 +518,17 @@ class SingleFamilyHouse(Residential):
                         for wallPart in layers[1:]:
                             outer_wall = OuterWall(zone)
                             outer_wall.use_layer_properties(
-                                wallPart[1], year=year, element_type=element_type
+                                wallPart[1], year=year,
+                                element_type=element_type
                             )
                             outer_wall.name = key
                             outer_wall.tilt = value[0]
                             outer_wall.orientation = value[1]
                             outer_wall.area = area * wallPart[0]
+                            try:
+                                outer_wall.view_factors = value[2]['view_factors']
+                            except (KeyError, IndexError):
+                                pass
                     else:
                         outer_wall.area = area
 
@@ -532,25 +567,35 @@ class SingleFamilyHouse(Residential):
                 if area:
                     window = Window(zone)
                     try:
+                        layers = None
                         layers = value[2]['layers']
                         window.use_layer_properties(
                             layers[0][1], year=year, element_type=element_type
                         )
                         multipleParts = len(layers) > 1
                     except (KeyError, IndexError):
+                        if layers is not None:
+                            reverse_layers = layers[0] == '-'
+                            layers = layers.lstrip('-')
+                        else:
+                            reverse_layers = False
                         window.load_type_element(
                             year=year,
                             construction=self._construction_type_1,
                             data_class=self.parent.data,
-                            element_type=element_type
+                            element_type=element_type,
+                            type_element_key=layers,
+                            reverse_layers=reverse_layers
                         )
                         multipleParts = False
                     try:
                         # use g-value and U-value from IDF file
                         # not a nice solution, but I see no other way
                         window.g_value= value[2]['idf_g-value']
-                        rsi = 1 / (window.inner_convection + window.inner_radiation)
-                        rse = 1 / (window.outer_convection + window.outer_radiation)
+                        rsi = 1 / (window.inner_convection
+                                   + window.inner_radiation)
+                        rse = 1 / (window.outer_convection
+                                   + window.outer_radiation)
                         r_solid = 1 / value[2]['idf_U-value'] - rsi - rse
                         all_lambdas = sum(1 / l.material.thermal_conduc
                                           for l in window.layer)
@@ -575,7 +620,8 @@ class SingleFamilyHouse(Residential):
                         for windowPart in layers[1:]:
                             window = Window(zone)
                             window.use_layer_properties(
-                                windowPart[1], year=year, element_type=element_type
+                                windowPart[1], year=year,
+                                element_type=element_type
                             )
                             window.name = key
                             window.tilt = value[0]
@@ -611,25 +657,35 @@ class SingleFamilyHouse(Residential):
                 if area:
                     window = Window(zone)
                     try:
+                        layers = None
                         layers = value[2]['layers']
                         window.use_layer_properties(
                             layers[0][1], year=year, element_type=element_type
                         )
                         multipleParts = len(layers) > 1
                     except (KeyError, IndexError):
+                        if layers is not None:
+                            reverse_layers = layers[0] == '-'
+                            layers = layers.lstrip('-')
+                        else:
+                            reverse_layers = False
                         window.load_type_element(
                             year=year,
                             construction=self._construction_type_2,
                             data_class=self.parent.data,
-                            element_type=element_type
+                            element_type=element_type,
+                            type_element_key=layers,
+                            reverse_layers=reverse_layers
                         )
                         multipleParts = False
                     try:
                         # use g-value and U-value from IDF file
                         # not a nice solution, but I see no other way
                         window.g_value= value[2]['idf_g-value']
-                        rsi = 1 / (window.inner_convection + window.inner_radiation)
-                        rse = 1 / (window.outer_convection + window.outer_radiation)
+                        rsi = 1 / (window.inner_convection
+                                   + window.inner_radiation)
+                        rse = 1 / (window.outer_convection
+                                   + window.outer_radiation)
                         r_solid = 1 / value[2]['idf_U-value'] - rsi - rse
                         all_lambdas = sum(1 / l.material.thermal_conduc
                                           for l in window.layer)
@@ -654,7 +710,8 @@ class SingleFamilyHouse(Residential):
                         for windowPart in layers[1:]:
                             window = Window(zone)
                             window.use_layer_properties(
-                                windowPart[1], year=year, element_type=element_type
+                                windowPart[1], year=year,
+                                element_type=element_type
                             )
                             window.name = key
                             window.tilt = value[0]
@@ -702,17 +759,25 @@ class SingleFamilyHouse(Residential):
                 if area:
                     gf = GroundFloor(zone)
                     try:
+                        layers = None
                         layers = value[2]['layers']
                         gf.use_layer_properties(
                             layers[0][1], year=year, element_type=element_type
                         )
                         multipleParts = len(layers) > 1
                     except (KeyError, IndexError):
+                        if layers is not None:
+                            reverse_layers = layers[0] == '-'
+                            layers = layers.lstrip('-')
+                        else:
+                            reverse_layers = False
                         gf.load_type_element(
                             year=year,
                             construction=self._construction_type_1,
                             data_class=self.parent.data,
-                            element_type=element_type
+                            element_type=element_type,
+                            type_element_key=layers,
+                            reverse_layers=reverse_layers
                         )
                         multipleParts = False
                     gf.name = key
@@ -754,17 +819,25 @@ class SingleFamilyHouse(Residential):
                 if area:
                     gf = GroundFloor(zone)
                     try:
+                        layers = None
                         layers = value[2]['layers']
                         gf.use_layer_properties(
                             layers[0][1], year=year, element_type=element_type
                         )
                         multipleParts = len(layers) > 1
                     except (KeyError, IndexError):
+                        if layers is not None:
+                            reverse_layers = layers[0] == '-'
+                            layers = layers.lstrip('-')
+                        else:
+                            reverse_layers = False
                         gf.load_type_element(
                             year=year,
                             construction=self._construction_type_2,
                             data_class=self.parent.data,
-                            element_type=element_type
+                            element_type=element_type,
+                            type_element_key=layers,
+                            reverse_layers=reverse_layers
                         )
                         multipleParts = False
                     gf.name = key
@@ -818,19 +891,31 @@ class SingleFamilyHouse(Residential):
                 if area:
                     rt = Rooftop(zone)
                     try:
+                        layers = None
                         layers = value[2]['layers']
                         rt.use_layer_properties(
                             layers[0][1], year=year, element_type=element_type
                         )
                         multipleParts = len(layers) > 1
                     except (KeyError, IndexError):
+                        if layers is not None:
+                            reverse_layers = layers[0] == '-'
+                            layers = layers.lstrip('-')
+                        else:
+                            reverse_layers = False
                         rt.load_type_element(
                             year=year,
                             construction=self._construction_type_1,
                             data_class=self.parent.data,
-                            element_type=element_type
+                            element_type=element_type,
+                            type_element_key=layers,
+                            reverse_layers=reverse_layers
                         )
                         multipleParts = False
+                    try:
+                        rt.view_factors = value[2]['view_factors']
+                    except (KeyError, IndexError):
+                        pass
                     rt.name = key
                     rt.tilt = value[0]
                     rt.orientation = value[1]
@@ -839,12 +924,17 @@ class SingleFamilyHouse(Residential):
                         for roofPart in layers[1:]:
                             rt = Rooftop(zone)
                             rt.use_layer_properties(
-                                roofPart[1], year=year, element_type=element_type
+                                roofPart[1], year=year,
+                                element_type=element_type
                             )
                             rt.name = key
                             rt.tilt = value[0]
                             rt.orientation = value[1]
                             rt.area = area * roofPart[0]
+                            try:
+                                rt.view_factors = value[2]['view_factors']
+                            except (KeyError, IndexError):
+                                pass
                     else:
                         rt.area = area
 
@@ -870,19 +960,31 @@ class SingleFamilyHouse(Residential):
                 if area:
                     rt = Rooftop(zone)
                     try:
+                        layers = None
                         layers = value[2]['layers']
                         rt.use_layer_properties(
                             layers[0][1], year=year, element_type=element_type
                         )
                         multipleParts = len(layers) > 1
                     except (KeyError, IndexError):
+                        if layers is not None:
+                            reverse_layers = layers[0] == '-'
+                            layers = layers.lstrip('-')
+                        else:
+                            reverse_layers = False
                         rt.load_type_element(
                             year=year,
                             construction=self._construction_type_2,
                             data_class=self.parent.data,
-                            element_type=element_type
+                            element_type=element_type,
+                            type_element_key=layers,
+                            reverse_layers=reverse_layers
                         )
                         multipleParts = False
+                    try:
+                        rt.view_factors = value[2]['view_factors']
+                    except (KeyError, IndexError):
+                        pass
                     rt.name = key
                     rt.tilt = value[0]
                     rt.orientation = value[1]
@@ -891,12 +993,17 @@ class SingleFamilyHouse(Residential):
                         for roofPart in layers[1:]:
                             rt = Rooftop(zone)
                             rt.use_layer_properties(
-                                roofPart[1], year=year, element_type=element_type
+                                roofPart[1], year=year,
+                                element_type=element_type
                             )
                             rt.name = key
                             rt.tilt = value[0]
                             rt.orientation = value[1]
                             rt.area = area * roofPart[0]
+                            try:
+                                rt.view_factors = value[2]['view_factors']
+                            except (KeyError, IndexError):
+                                pass
                     else:
                         rt.area = area
 
@@ -931,17 +1038,25 @@ class SingleFamilyHouse(Residential):
                 if area:
                     door = Door(zone)
                     try:
+                        layers = None
                         layers = value[2]['layers']
                         door.use_layer_properties(
                             layers[0][1], year=year, element_type=element_type
                         )
                         multipleParts = len(layers) > 1
                     except (KeyError, IndexError):
+                        if layers is not None:
+                            reverse_layers = layers[0] == '-'
+                            layers = layers.lstrip('-')
+                        else:
+                            reverse_layers = False
                         door.load_type_element(
                             year=year,
                             construction=self._construction_type_1,
                             data_class=self.parent.data,
-                            element_type=element_type
+                            element_type=element_type,
+                            type_element_key=layers,
+                            reverse_layers=reverse_layers
                         )
                         multipleParts = False
                     door.name = key
@@ -952,7 +1067,8 @@ class SingleFamilyHouse(Residential):
                         for doorPart in layers[1:]:
                             door = Door(zone)
                             door.use_layer_properties(
-                                doorPart[1], year=year, element_type=element_type
+                                doorPart[1], year=year,
+                                element_type=element_type
                             )
                             door.name = key
                             door.tilt = value[0]
@@ -984,17 +1100,26 @@ class SingleFamilyHouse(Residential):
                     if value[2]['areas'][zone_index] and value[1] != -1:
                         nz_inner_wall = InnerWall(zone, outside=outside)
                         try:
+                            layers = None
                             layers = value[2]['layers']
                             nz_inner_wall.use_layer_properties(
-                                layers[0][1], year=year, element_type=element_type
+                                layers[0][1], year=year,
+                                element_type=element_type
                             )
                             multipleParts = len(layers) > 1
                         except (KeyError, IndexError):
+                            if layers is not None:
+                                reverse_layers = layers[0] == '-'
+                                layers = layers.lstrip('-')
+                            else:
+                                reverse_layers = False
                             nz_inner_wall.load_type_element(
                                 year=year,
                                 construction="tabula_standard",
                                 data_class=self.parent.data,
-                                element_type=element_type
+                                element_type=element_type,
+                                type_element_key=layers,
+                                reverse_layers=reverse_layers
                             )
                             multipleParts = False
                         nz_inner_wall.outer_convection \
@@ -1010,7 +1135,8 @@ class SingleFamilyHouse(Residential):
                             for part in layers[1:]:
                                 nz_inner_wall = InnerWall(zone, outside=outside)
                                 nz_inner_wall.use_layer_properties(
-                                    part[1], year=year, element_type=element_type
+                                    part[1], year=year,
+                                    element_type=element_type
                                 )
                                 nz_inner_wall.outer_convection \
                                     = nz_inner_wall.inner_convection
@@ -1025,9 +1151,11 @@ class SingleFamilyHouse(Residential):
                     elif value[2]['areas'][zone_index] > 0:
                         nz_floor = Floor(zone, outside=outside)
                         try:
+                            layers = None
                             layers = value[2]['layers']
                             nz_floor.use_layer_properties(
-                                layers[0][1], year=year, element_type=element_type
+                                layers[0][1][-1::-1], year=year,
+                                element_type=element_type
                             )
                             multipleParts = len(layers) > 1
                         except (KeyError, IndexError):
@@ -1037,16 +1165,21 @@ class SingleFamilyHouse(Residential):
                                 construction = "tabula_standard_1_SFH"
                             else:
                                 construction = 'tabula_standard'
-                            if element_type in ('Rooftop', 'Ceiling'):
+                            if layers is not None:
+                                reverse_layers = layers[0] != '-'
+                                layers = layers.lstrip('-')
+                            elif element_type in ('Rooftop', 'Ceiling'):
                                 reverse_layers = True
                             else:
                                 reverse_layers = False
+
                             nz_floor.load_type_element(
                                 year=year,
                                 construction=construction,
                                 data_class=self.parent.data,
                                 element_type=element_type,
-                                reverse_layers=reverse_layers
+                                reverse_layers=reverse_layers,
+                                type_element_key=layers
                             )
                             multipleParts = False
                         nz_floor.outer_convection = nz_floor.inner_convection
@@ -1060,7 +1193,8 @@ class SingleFamilyHouse(Residential):
                             for part in layers[1:]:
                                 nz_floor = Floor(zone, outside=outside)
                                 nz_floor.use_layer_properties(
-                                    part[1], year=year, element_type=element_type
+                                    part[1][-1::-1], year=year,
+                                    element_type=element_type
                                 )
                                 nz_floor.outer_convection \
                                     = nz_floor.inner_convection
@@ -1075,9 +1209,11 @@ class SingleFamilyHouse(Residential):
                     elif value[2]['areas'][zone_index] < 0:
                         nz_ceiling = Ceiling(zone, outside=outside)
                         try:
+                            layers = None
                             layers = value[2]['layers']
                             nz_ceiling.use_layer_properties(
-                                layers[0][1], year=year, element_type=element_type
+                                layers[0][1], year=year,
+                                element_type=element_type
                             )
                             multipleParts = len(layers) > 1
                         except (KeyError, IndexError):
@@ -1087,7 +1223,10 @@ class SingleFamilyHouse(Residential):
                                 construction = "tabula_standard_1_SFH"
                             else:
                                 construction = 'tabula_standard'
-                            if element_type in ('GroundFloor', 'Floor'):
+                            if layers is not None:
+                                reverse_layers = layers[0] == '-'
+                                layers = layers.lstrip('-')
+                            elif element_type in ('GroundFloor', 'Floor'):
                                 reverse_layers = True
                             else:
                                 reverse_layers = False
@@ -1096,7 +1235,8 @@ class SingleFamilyHouse(Residential):
                                 construction=construction,
                                 data_class=self.parent.data,
                                 element_type=element_type,
-                                reverse_layers=reverse_layers
+                                reverse_layers=reverse_layers,
+                                type_element_key=layers
                             )
                             multipleParts = False
                         nz_ceiling.outer_convection \
@@ -1137,17 +1277,25 @@ class SingleFamilyHouse(Residential):
                     except (KeyError, IndexError):
                         element_type = None
                     try:
+                        layers = None
                         layers = value[2]['layers']
                         inner_wall.use_layer_properties(
                             layers[0][1], year=year, element_type=element_type
                         )
                         multipleParts = len(layers) > 1
                     except (KeyError, IndexError):
+                        if layers is not None:
+                            reverse_layers = layers[0] == '-'
+                            layers = layers.lstrip('-')
+                        else:
+                            reverse_layers = False
                         inner_wall.load_type_element(
                             year=year,
                             construction="tabula_standard",
                             data_class=self.parent.data,
-                            element_type=element_type
+                            element_type=element_type,
+                            type_element_key=layers,
+                            reverse_layers=reverse_layers
                         )
                         multipleParts = False
                     inner_wall.name = key
@@ -1177,6 +1325,7 @@ class SingleFamilyHouse(Residential):
                     if area:
                         ceiling = Ceiling(zone)
                         try:
+                            layers = None
                             layers = value[2]['layers']
                             ceiling.use_layer_properties(
                                 layers[0][1], year=year,
@@ -1184,11 +1333,18 @@ class SingleFamilyHouse(Residential):
                             )
                             multipleParts = len(layers) > 1
                         except (KeyError, IndexError):
+                            if layers is not None:
+                                reverse_layers = layers[0] == '-'
+                                layers = layers.lstrip('-')
+                            else:
+                                reverse_layers = False
                             ceiling.load_type_element(
                                 year=year,
                                 construction="tabula_standard",
                                 data_class=self.parent.data,
-                                element_type=element_type
+                                element_type=element_type,
+                                type_element_key=layers,
+                                reverse_layers=reverse_layers
                             )
                             multipleParts = False
                         ceiling.name = key
@@ -1217,6 +1373,7 @@ class SingleFamilyHouse(Residential):
                     if area:
                         floor = Floor(zone)
                         try:
+                            layers = None
                             layers = value[2]['layers']
                             floor.use_layer_properties(
                                 layers[0][1], year=year,
@@ -1224,11 +1381,18 @@ class SingleFamilyHouse(Residential):
                             )
                             multipleParts = len(layers) > 1
                         except (KeyError, IndexError):
+                            if layers is not None:
+                                reverse_layers = layers[0] == '-'
+                                layers = layers.lstrip('-')
+                            else:
+                                reverse_layers = False
                             floor.load_type_element(
                                 year=year,
                                 construction="tabula_standard",
                                 data_class=self.parent.data,
-                                element_type=element_type
+                                element_type=element_type,
+                                type_element_key=layers,
+                                reverse_layers=reverse_layers
                             )
                             multipleParts = False
                         floor.name = key

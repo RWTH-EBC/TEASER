@@ -63,6 +63,13 @@ class Window(BuildingElement):
         List of all layers of a building element (to be filled with Layer
         objects). Use element.layer = None to delete all layers of the building
         element
+    view_factors : list
+        view factors for half-space above (outer) surface for sky/ground/other
+        buildings/surfaces with ambient temperature for use in AixLib with
+        FiveElementVectorized and calculateHeatFlow. Values must already be
+        corrected for cosine loss and possible directional dependance of
+        absorptivity. If specified, sum should be 1. If sum is 0, default
+        assumptions are used in AixLib"
 
     Specific Attributes for Window
 
