@@ -63,7 +63,7 @@ class AixLib(object):
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".txt"
         self.file_ventilation_hrs = "VentialationHRS_" + self.parent.name + ".txt"
         self.file_ventilation_user = "VentilationUser_" + self.parent.name + ".txt"
-        self.version = "0.10.3"
+        self.version = "0.10.6"
         self.total_surface_area = None
         self.consider_heat_capacity = True
         self.use_set_back = True

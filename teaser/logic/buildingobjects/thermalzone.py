@@ -300,14 +300,14 @@ class ThermalZone(object):
 
         assert self.parent is not None, ass_error_1
 
-        # for floor in self.floors:
-        #     floor.area = (
-        #         (self.parent.number_of_floors - 1) /
-        #         self.parent.number_of_floors) * self.area
-        # for ceiling in self.ceilings:
-        #     ceiling.area = (
-        #         (self.parent.number_of_floors - 1) /
-        #         self.parent.number_of_floors) * self.area
+        for floor in self.floors:
+            floor.area = (
+                (self.parent.number_of_floors - 1) / self.parent.number_of_floors
+            ) * self.area
+        for ceiling in self.ceilings:
+            ceiling.area = (
+                (self.parent.number_of_floors - 1) / self.parent.number_of_floors
+            ) * self.area
 
         for wall in self.inner_walls:
             typical_area = (
