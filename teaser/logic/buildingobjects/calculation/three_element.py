@@ -259,10 +259,13 @@ class ThreeElement(object):
     weighted_g_value : float
         Area-weighted g-Value of all windows.
     shading_max_irr : list of float [W/m2]
-        Threshold when sunblind becomes active for the whole zone
+        Threshold value above which the sunblind becomes active for the whole zone.
+        Threshold regards to the incoming irradiation level with the window direction.
+        This value does not account for heat flux due to the outside temperature.
     shading_g_total : list of float
-        Factor representing how much of the solar irradiation goes through
-        the sunblind
+        Factor representing how much of the actual solar irradiation goes through
+        the sunblind and enters the window element, for the case, that the sunblind is
+        activated. Defaults to 1, i.e. no shading is active.
 
     Misc values:
 
@@ -534,6 +537,7 @@ class ThreeElement(object):
         self._calc_number_of_elements()
         self._fill_zone_lists()
         self._calc_heat_load()
+        self.cool_load = -self.heat_load
 
         return True
 
@@ -770,9 +774,12 @@ class ThreeElement(object):
             1 / ground.r_inner_comb for ground in self.thermal_zone.ground_floors
         )
 
-        self.ir_emissivity_inner_gf = sum(
-            ground.layer[0].material.ir_emissivity * ground.area
-            for ground in self.thermal_zone.ground_floors
+        self.ir_emissivity_inner_gf = (
+            sum(
+                ground.layer[0].material.ir_emissivity * ground.area
+                for ground in self.thermal_zone.ground_floors
+            )
+            / self.area_gf
         )
 
         self.alpha_conv_inner_gf = 1 / (self.r_conv_inner_gf * self.area_gf)
@@ -839,8 +846,7 @@ class ThreeElement(object):
                 ceiling.layer[0].material.ir_emissivity * ceiling.area
                 for ceiling in self.thermal_zone.ceilings
             )
-            / self.area_iw
-        )
+        ) / self.area_iw
 
         self.alpha_conv_inner_iw = 1 / (self.r_conv_inner_iw * self.area_iw)
         self.alpha_rad_inner_iw = 1 / (self.r_rad_inner_iw * self.area_iw)
@@ -1215,7 +1221,7 @@ class ThreeElement(object):
 
             if not wins:
                 self.weightfactor_win.append(0.0)
-                self.shading_g_total.append(0.0)
+                self.shading_g_total.append(1.0)
                 self.window_areas.append(0.0)
                 self.transparent_areas.append(0.0)
             else:

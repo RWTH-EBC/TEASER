@@ -49,6 +49,8 @@ def save_teaser_json(path, project):
     prj_out["project"]["buildings"] = collections.OrderedDict()
     __building_class = {
         "Building": {"method": "undefined", "usage": "undefined"},
+        "NonResidential": {"method": "undefined", "usage": "undefined"},
+        "Residential": {"method": "undefined", "usage": "undefined"},
         "Office": {"method": "bmvbs", "usage": "office"},
         "Institute": {"method": "bmvbs", "usage": "institute"},
         "Institute4": {"method": "bmvbs", "usage": "institute4"},

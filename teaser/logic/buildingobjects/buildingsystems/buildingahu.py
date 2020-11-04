@@ -73,6 +73,11 @@ class BuildingAHU(object):
         timeline of relative humidity requirements for AHU simulation
     v_flow_profile : [int]
         timeline of desired relative v_flow of the AHU simulation (0..1)
+        Note: The AixLib parameter "WithProfile" determines whether the
+            (v_flow_profile combined with "min_ahu and max_ahu") or the
+            (persons_profile combined with "min_ahu and max_ahu")
+            is used for the AHU supply flow calculations.
+            Per default: (v_flow_profile combined with "min_ahu and max_ahu")
 
     """
 
@@ -163,7 +168,7 @@ class BuildingAHU(object):
     def max_relative_humidity_profile(self, value):
         if not isinstance(value, list):
             value = [value]
-        self._min_relative_humidity_profile = value
+        self._max_relative_humidity_profile = value
         self.schedules["max_relative_humidity_profile"] = list(
             islice(cycle(value), 8760)
         )

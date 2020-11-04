@@ -63,7 +63,7 @@ class AixLib(object):
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".txt"
         self.file_ventilation_hrs = "VentialationHRS_" + self.parent.name + ".txt"
         self.file_ventilation_user = "VentilationUser_" + self.parent.name + ".txt"
-        self.version = "0.9.1"
+        self.version = "0.10.3"
         self.total_surface_area = None
         self.consider_heat_capacity = True
         self.use_set_back = True
@@ -81,22 +81,16 @@ class AixLib(object):
             if type(zone.model_attr).__name__ == "OneElement":
                 surf_area_temp += zone.model_attr.area_ow + zone.model_attr.area_win
             elif type(zone.model_attr).__name__ == "TwoElement":
-                surf_area_temp += (
-                    zone.model_attr.area_ow
-                    + zone.model_attr.area_iw
-                    + zone.model_attr.area_win
-                )
+                surf_area_temp += zone.model_attr.area_ow + zone.model_attr.area_win
             elif type(zone.model_attr).__name__ == "ThreeElement":
                 surf_area_temp += (
                     zone.model_attr.area_ow
-                    + zone.model_attr.area_iw
                     + zone.model_attr.area_gf
                     + zone.model_attr.area_win
                 )
             elif type(zone.model_attr).__name__ == "FourElement":
                 surf_area_temp += (
                     zone.model_attr.area_ow
-                    + zone.model_attr.area_iw
                     + zone.model_attr.area_gf
                     + zone.model_attr.area_rt
                     + zone.model_attr.area_win
