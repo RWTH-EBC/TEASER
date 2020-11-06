@@ -7185,9 +7185,9 @@
         "solar_absorp": 0.7
     },
     "0abbb19f-83ff-11e6-986f-2cd444b2e704": {
-        "name": "Glas1995_2015EnEv",
+        "name": "Glas2015_2100EnEv",
         "density": 0.0,
-        "thermal_conduc": 0.04,
+        "thermal_conduc": 0.0222,
         "heat_capac": 0.0,
         "thickness_default": 0.0,
         "thickness_list": [],

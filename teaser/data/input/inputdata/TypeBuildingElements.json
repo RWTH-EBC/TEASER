@@ -860,6 +860,30 @@
             }
         }
     },
+    "Window_[2016, 2100]_EnEv": {
+        "building_age_group": [
+            2016,
+            2100
+        ],
+        "construction_type": "EnEv",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "g_value": 0.5,
+        "a_conv": 0.03,
+        "shading_g_total": 0.4,
+        "shading_max_irr": 250.0,
+        "layer": {
+            "0": {
+                "thickness": 0.0165,
+                "material": {
+                    "name": "Glas2015_2100EnEv",
+                    "material_id": "0abbb19f-83ff-11e6-986f-2cd444b2e704"
+                }
+            }
+        }
+    },
     "Rooftop_[0, 1918]_heavy": {
         "building_age_group": [
             0,
