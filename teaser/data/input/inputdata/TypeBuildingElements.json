@@ -432,6 +432,13 @@
                     "name": "EPS_040_15",
                     "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
                 }
+            },
+            "2": {
+                "thickness": 0.005,
+                "material": {
+                    "name": "aluminium",
+                    "material_id": "6bd7d77e-3a43-11e7-8488-2cd444b2e704"
+                }
             }
         }
     },
@@ -1271,8 +1278,8 @@
             "1": {
                 "thickness": 0.12,
                 "material": {
-                    "name": "foam_glass_board_130",
-                    "material_id": "48037df6-3a43-11e7-bd90-2cd444b2e704"
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
                 }
             },
             "2": {
