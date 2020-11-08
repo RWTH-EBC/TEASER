@@ -370,7 +370,7 @@ class Wall(BuildingElement):
                 calc_u = 0.2 * self.area
             elif year_of_retrofit >= 2016:
                 self.insulate_wall(material)
-                calc_u = 0.14 * self.area
+                calc_u = 0.2 * self.area
 
         if type(self).__name__ == "GroundFloor":
 
@@ -394,7 +394,7 @@ class Wall(BuildingElement):
                 calc_u = 0.3 * self.area
             elif year_of_retrofit >= 2016:
                 self.insulate_wall(material)
-                calc_u = 0.25 * self.area
+                calc_u = 0.3 * self.area
 
         r_conduc = 0
 
