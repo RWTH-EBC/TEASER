@@ -70,13 +70,6 @@ model ${bldg.name}
            intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
            (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
            der_T(fixed=true))))),
-% if bldg.internal_gains_mode==1 or bldg.internal_gains_mode==2:
-   redeclare model thermalZone =
-        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneAirExchange,
-% else:
-   redeclare model thermalZone =
-        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCO2AirExchange,
-% endif
    redeclare model corG =
         AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane,
 % if bldg.central_ahu:
