@@ -94,13 +94,14 @@ class Project(object):
         self._name = "Project"
         self.modelica_info = ModelicaInfo()
 
-        self.weather_file_path = os.path.realpath(utilities.get_full_path(
-            os.path.join(
-                "data",
-                "input",
-                "inputdata",
-                "weatherdata",
-                "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos",
+        self.weather_file_path = os.path.realpath(
+            utilities.get_full_path(
+                os.path.join(
+                    "data",
+                    "input",
+                    "inputdata",
+                    "weatherdata",
+                    "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos",
                 )
             )
         )
