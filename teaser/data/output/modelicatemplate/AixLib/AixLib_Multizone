@@ -3,9 +3,8 @@ within ${bldg.parent.name}.${bldg.name};
 model ${bldg.name}
   "This is the simulation model of ${bldg.name} with traceable ID ${bldg.building_id}"
 
-% if bldg.internal_gains_mode==1 or bldg.internal_gains_mode==2:
-  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
-    redeclare package Medium = Modelica.Media.Air.SimpleAir,
+
+AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     buildingID=${bldg.building_id},
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_start = ${bldg.thermal_zones[0].t_inside},
@@ -14,28 +13,20 @@ model ${bldg.name}
     ASurTot=${bldg.library_attr.total_surface_area},
     numZones = ${len(bldg.thermal_zones)},
     internalGainsMode = ${bldg.internal_gains_mode},
+    % if bldg.internal_gains_mode==3:
+        use_C_flow = true,
+        use_moisture_balance = true,
+        redeclare package Medium = AixLib.Media.Air(extraPropertiesNames={"C_flow"}),
+    % else:
+        use_C_flow = false,
+        use_moisture_balance = false,
+        redeclare package Medium = Modelica.Media.Air.SimpleAir,
+    % endif
     zoneParam = {
       %for zone in bldg.thermal_zones:
       ${bldg.name}_DataBase.${bldg.name}_${zone.name}()${',' if not loop.last else ''}
       %endfor
       },
-%else:
-  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirEquipped multizone(
-    redeclare package Medium = AixLib.Media.Air,
-    buildingID=${bldg.building_id},
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_start = ${bldg.thermal_zones[0].t_inside},
-    VAir = ${bldg.volume},
-    ABuilding=${bldg.net_leased_area},
-    ASurTot=${bldg.library_attr.total_surface_area},
-    numZones = ${len(bldg.thermal_zones)},
-    internalGainsMode = ${bldg.internal_gains_mode},
-    zoneParam = {
-      %for zone in bldg.thermal_zones:
-      ${bldg.name}_DataBase.${bldg.name}_${zone.name}()${',' if not loop.last else ''}
-      %endfor
-      },
-% endif
 % if bldg.with_ahu:
   heatAHU=${get_true_false(bldg.central_ahu.heating)},
   coolAHU=${get_true_false(bldg.central_ahu.cooling)},
@@ -69,13 +60,6 @@ model ${bldg.name}
            intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
            (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
            der_T(fixed=true))))),
-% if bldg.internal_gains_mode==1 or bldg.internal_gains_mode==2:
-   redeclare model thermalZone =
-        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneAirExchange,
-% else:
-   redeclare model thermalZone =
-        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirExchange,
-% endif
    redeclare model corG =
         AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane,
 % if bldg.central_ahu:

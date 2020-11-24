@@ -311,6 +311,7 @@ def import_building_from_excel(
     bldg = Building(parent=project)
     bldg.name = building_name
     bldg.year_of_construction = construction_age
+    bldg.internal_gains_mode = 3  # HardCodedInput
     bldg.with_ahu = True  # HardCodedInput
     if bldg.with_ahu is True:
         bldg.central_ahu.heat_recovery = True  # HardCodedInput
