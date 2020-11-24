@@ -4,6 +4,7 @@ import teaser.logic.utilities as utilities
 from itertools import cycle, islice
 import os
 import pandas as pd
+import shutil
 
 
 class AixLib(object):
@@ -57,6 +58,7 @@ class AixLib(object):
         """Construct AixLib."""
         self.parent = parent
 
+        self.file_weather_data = os.path.split(self.parent.parent.weather_file_path)[1]
         self.file_set_t_heat = "TsetHeat_" + self.parent.name + ".txt"
         self.file_set_t_cool = "TsetCool_" + self.parent.name + ".txt"
         self.file_ahu = "AHU_" + self.parent.name + ".txt"
@@ -302,6 +304,25 @@ class AixLib(object):
                 )
             )
             export.to_csv(f, sep="\t", header=False, index_label=False)
+
+    def modelica_weather_data(self, path=None):
+        """Copies the imported .mos weather file to the results folder.
+
+        Parameters
+        ----------
+        path : str
+            optional path, when matfile is exported separately
+
+        """
+        if path is None:
+            path = utilities.get_default_path()
+        else:
+            pass
+
+        utilities.create_path(path)
+        path = os.path.join(path, self.file_weather_data)
+
+        shutil.copy2(self.parent.parent.weather_file_path, path)
 
     def _delete_file(self, path):
         """Delete a file before new information is written to it.

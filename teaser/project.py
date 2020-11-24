@@ -94,6 +94,7 @@ class Project(object):
         self._name = "Project"
         self.modelica_info = ModelicaInfo()
 
+        # Todo: make sure path has only double slashes
         self.weather_file_path = utilities.get_full_path(
             os.path.join(
                 "data",
@@ -1158,6 +1159,10 @@ class Project(object):
         self._number_of_elements_calc = 2
         self._merge_windows_calc = False
         self._used_library_calc = "AixLib"
+
+    # @property
+    # def weather_file_path(self):
+    #     return os.path.abspath(self.weather_file_path)
 
     @property
     def number_of_elements_calc(self):

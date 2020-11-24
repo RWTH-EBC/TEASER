@@ -115,6 +115,7 @@ def export_multizone(buildings, prj, path=None):
             path=bldg_path)
         bldg.library_attr.modelica_gains_boundary(
             path=bldg_path)
+        bldg.library_attr.modelica_weather_data(path=bldg_path)
 
         _help_package(path=bldg_path, name=bldg.name, within=bldg.parent.name)
         _help_package_order(
@@ -138,6 +139,7 @@ def export_multizone(buildings, prj, path=None):
         out_file = open(utilities.get_full_path
                         (os.path.join(bldg_path, bldg.name + ".mo")), 'w')
 
+        # ToDo: this weather file here might be obsolete now
         out_file.write(model_template.render_unicode(
             bldg=bldg,
             weather=bldg.parent.weather_file_path,
