@@ -1171,6 +1171,7 @@ internal_gains_mode: int [1, 2, 3]
     @weather_file_path.setter
     def weather_file_path(self, value):
         self._weather_file_path = os.path.normpath(value)
+        self.weather_file_name = os.path.split(self.weather_file_path)[1]
 
     @property
     def number_of_elements_calc(self):

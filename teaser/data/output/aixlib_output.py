@@ -5,6 +5,7 @@ import warnings
 from mako.template import Template
 from mako.lookup import TemplateLookup
 import teaser.logic.utilities as utilities
+import shutil
 
 
 def export_multizone(buildings, prj, path=None):
@@ -95,6 +96,7 @@ def export_multizone(buildings, prj, path=None):
         package_list=buildings,
         addition=None,
         extra=None)
+    _help_weather_data(prj.weather_file_path, path)
 
     for i, bldg in enumerate(buildings):
 
@@ -115,7 +117,6 @@ def export_multizone(buildings, prj, path=None):
             path=bldg_path)
         bldg.library_attr.modelica_gains_boundary(
             path=bldg_path)
-        bldg.library_attr.modelica_weather_data(path=bldg_path)
 
         _help_package(path=bldg_path, name=bldg.name, within=bldg.parent.name)
         _help_package_order(
@@ -172,6 +173,7 @@ def export_multizone(buildings, prj, path=None):
             package_list=bldg.thermal_zones,
             addition=bldg.name + "_",
             extra=None)
+
 
     print("Exports can be found here:")
     print(path)
@@ -234,3 +236,16 @@ def _help_package_order(path, package_list, addition=None, extra=None):
     out_file.write(order_template.render_unicode
                    (list=package_list, addition=addition, extra=extra))
     out_file.close()
+
+def _help_weather_data(origin_path, desired_path):
+    """Copies the imported .mos weather file to the results folder.
+
+    Parameters
+    ----------
+    origin_path : str
+        path of local weather file
+    desired_path : str
+        path of where the weather file should be placed
+    """
+
+    shutil.copy2(origin_path, desired_path)
