@@ -77,9 +77,9 @@ class UseConditions(object):
     activity_degree_persons : float [met]
         default value is 1.2 met
         AixLib: used for heat flow rate calculation (internal_gains_mode=1)
-        or heat flow rate, moisture and co2 gains (internal_gains_mode=3). Both
+        or heat flow rate and moisture gains (internal_gains_mode=3). Both
         are temperature and activity degree depending, calculation based
-        on SIA2024 (2015) and Engineering ToolBox (2004).
+        on SIA2024.
         Annex: not used, heat flow rate is constant value
         fixed_heat_flow_rate_persons
     ratio_conv_rad_persons: float

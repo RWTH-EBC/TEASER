@@ -58,16 +58,14 @@ class SingleFamilyDwelling(Residential):
         assigned to attribute central_ahu. This instance holds information for
         central Air Handling units. Default is False.
     internal_gains_mode: int [1, 2, 3]
-        mode for the internal gains calculation done in AixLib:
-        1: Temperature and activity degree dependent heat flux calculation. The
+        mode for the internal gains calculation by persons:
+        1: Temperature and activity degree dependent calculation. The
            calculation is based on  SIA 2024 (default)
-        2: Temperature and activity degree independent heat flux calculation, the max.
+        2: Temperature and activity degree independent calculation, the max.
            heatflowrate is prescribed by the parameter
            fixed_heat_flow_rate_persons.
         3: Temperature and activity degree dependent calculation with
-           consideration of moisture and co2. The moisture calculation is
-           based on SIA 2024 (2015), the co2 calculation is based on
-           Engineering ToolBox (2004)
+           consideration of moisture. The calculation is based on SIA 2024
     residential_layout : int
         Structure of floor plan (default = 0)
             0: compact
