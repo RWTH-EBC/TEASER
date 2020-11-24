@@ -174,7 +174,6 @@ def export_multizone(buildings, prj, path=None):
             addition=bldg.name + "_",
             extra=None)
 
-
     print("Exports can be found here:")
     print(path)
 
@@ -236,6 +235,7 @@ def _help_package_order(path, package_list, addition=None, extra=None):
     out_file.write(order_template.render_unicode
                    (list=package_list, addition=addition, extra=extra))
     out_file.close()
+
 
 def _help_weather_data(origin_path, desired_path):
     """Copies the imported .mos weather file to the results folder.
