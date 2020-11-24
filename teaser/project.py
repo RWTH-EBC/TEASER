@@ -94,14 +94,14 @@ class Project(object):
         self._name = "Project"
         self.modelica_info = ModelicaInfo()
 
-        # Todo: make sure path has only double slashes
-        self.weather_file_path = utilities.get_full_path(
+        self.weather_file_path = os.path.realpath(utilities.get_full_path(
             os.path.join(
                 "data",
                 "input",
                 "inputdata",
                 "weatherdata",
                 "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos",
+                )
             )
         )
 
@@ -1164,9 +1164,13 @@ internal_gains_mode: int [1, 2, 3]
         self._merge_windows_calc = False
         self._used_library_calc = "AixLib"
 
-    # @property
-    # def weather_file_path(self):
-    #     return os.path.abspath(self.weather_file_path)
+    @property
+    def weather_file_path(self):
+        return self._weather_file_path
+
+    @weather_file_path.setter
+    def weather_file_path(self, value):
+        self._weather_file_path = os.path.normpath(value)
 
     @property
     def number_of_elements_calc(self):
