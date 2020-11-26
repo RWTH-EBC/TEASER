@@ -96,7 +96,7 @@ def export_multizone(buildings, prj, path=None):
         package_list=buildings,
         addition=None,
         extra=None)
-    _help_weather_data(prj.weather_file_path, path)
+    _copy_weather_data(prj.weather_file_path, path)
 
     for i, bldg in enumerate(buildings):
 
@@ -140,7 +140,7 @@ def export_multizone(buildings, prj, path=None):
         out_file = open(utilities.get_full_path
                         (os.path.join(bldg_path, bldg.name + ".mo")), 'w')
 
-        # ToDo: this weather file here might be obsolete now
+        # ToDo: this weather file here might be obsolete now(https://github.com/RWTH-EBC/TEASER/pull/664)
         out_file.write(model_template.render_unicode(
             bldg=bldg,
             weather=bldg.parent.weather_file_path,
@@ -237,15 +237,15 @@ def _help_package_order(path, package_list, addition=None, extra=None):
     out_file.close()
 
 
-def _help_weather_data(origin_path, desired_path):
+def _copy_weather_data(source_path, destination_path):
     """Copies the imported .mos weather file to the results folder.
 
     Parameters
     ----------
-    origin_path : str
+    source_path : str
         path of local weather file
-    desired_path : str
+    destination_path : str
         path of where the weather file should be placed
     """
 
-    shutil.copy2(origin_path, desired_path)
+    shutil.copy2(source_path, destination_path)
