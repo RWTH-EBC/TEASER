@@ -140,7 +140,6 @@ def export_multizone(buildings, prj, path=None):
         out_file = open(utilities.get_full_path
                         (os.path.join(bldg_path, bldg.name + ".mo")), 'w')
 
-        # ToDo: this weather file here might be obsolete now(https://github.com/RWTH-EBC/TEASER/pull/664)
         out_file.write(model_template.render_unicode(
             bldg=bldg,
             weather=bldg.parent.weather_file_path,
