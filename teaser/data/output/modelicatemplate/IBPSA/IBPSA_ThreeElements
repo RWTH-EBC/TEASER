@@ -7,7 +7,7 @@ model ${zone.parent.name}_${zone.name}
     calTSky=${library}.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
     filNam=Modelica.Utilities.Files.loadResource(
-        "modelica://${bldg.parent.name}/${bldg.parent.weather_file_name}"))
+        "modelica://${zone.parent.parent.name}/${zone.parent.parent.weather_file_name}"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-98,52},{-78,72}})));
   ${library}.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${min_orientations(zone.model_attr.n_outer)}](    each outSkyCon=true,
