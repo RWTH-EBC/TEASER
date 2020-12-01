@@ -381,7 +381,7 @@ class SingleFamilyHouse(Residential):
                     outer_wall.orientation = value[1]
                     outer_wall.area = (
                         self.facade_estimation_factors[self.building_age_group]["ow1"]
-                        * type_bldg_area
+                        * zone.area
                     ) / len(self._outer_wall_names_1)
 
         if self.facade_estimation_factors[self.building_age_group]["ow2"] != 0:
@@ -398,7 +398,7 @@ class SingleFamilyHouse(Residential):
                     outer_wall.orientation = value[1]
                     outer_wall.area = (
                         self.facade_estimation_factors[self.building_age_group]["ow2"]
-                        * type_bldg_area
+                        * zone.area
                     ) / len(self._outer_wall_names_2)
 
         if self.facade_estimation_factors[self.building_age_group]["win1"] != 0:
@@ -415,7 +415,7 @@ class SingleFamilyHouse(Residential):
                     window.orientation = value[1]
                     window.area = (
                         self.facade_estimation_factors[self.building_age_group]["win1"]
-                        * type_bldg_area
+                        * zone.area
                     ) / len(self.window_names_1)
 
         if self.facade_estimation_factors[self.building_age_group]["win2"] != 0:
@@ -432,7 +432,7 @@ class SingleFamilyHouse(Residential):
                     window.orientation = value[1]
                     window.area = (
                         self.facade_estimation_factors[self.building_age_group]["win2"]
-                        * type_bldg_area
+                        * zone.area
                     ) / len(self.window_names_2)
 
         if self.facade_estimation_factors[self.building_age_group]["gf1"] != 0:
@@ -450,7 +450,7 @@ class SingleFamilyHouse(Residential):
                     gf.orientation = value[1]
                     gf.area = (
                         self.facade_estimation_factors[self.building_age_group]["gf1"]
-                        * type_bldg_area
+                        * zone.area
                     ) / len(self.ground_floor_names_1)
 
         if self.facade_estimation_factors[self.building_age_group]["gf2"] != 0:
@@ -468,7 +468,7 @@ class SingleFamilyHouse(Residential):
                     gf.orientation = value[1]
                     gf.area = (
                         self.facade_estimation_factors[self.building_age_group]["gf2"]
-                        * type_bldg_area
+                        * zone.area
                     ) / len(self.ground_floor_names_2)
 
         if self.facade_estimation_factors[self.building_age_group]["rt1"] != 0:
@@ -486,7 +486,7 @@ class SingleFamilyHouse(Residential):
                     rt.orientation = value[1]
                     rt.area = (
                         self.facade_estimation_factors[self.building_age_group]["rt1"]
-                        * type_bldg_area
+                        * zone.area
                     ) / len(self.roof_names_1)
 
         if self.facade_estimation_factors[self.building_age_group]["rt2"] != 0:
@@ -504,7 +504,7 @@ class SingleFamilyHouse(Residential):
                     rt.orientation = value[1]
                     rt.area = (
                         self.facade_estimation_factors[self.building_age_group]["rt2"]
-                        * type_bldg_area
+                        * zone.area
                     ) / len(self.roof_names_2)
 
         if self.facade_estimation_factors[self.building_age_group]["door"] != 0:
@@ -522,7 +522,7 @@ class SingleFamilyHouse(Residential):
                     door.orientation = value[1]
                     door.area = (
                         self.facade_estimation_factors[self.building_age_group]["door"]
-                        * type_bldg_area
+                        * zone.area
                     ) / len(self.door_names)
 
         for key, value in self.inner_wall_names.items():
