@@ -1,7 +1,7 @@
 # created April 2017
 # by TEASER Development Team
 
-from teaser.logic.archetypebuildings.residential import Residential
+from teaser.logic.archetypebuildings.archetype import Archetype
 from teaser.logic.buildingobjects.useconditions import UseConditions as UseCond
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
@@ -14,7 +14,7 @@ from teaser.logic.buildingobjects.buildingphysics.door import Door
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
 
-class SingleFamilyHouse(Residential):
+class SingleFamilyHouse(Archetype):
     """Archetype for Danish TABULA Single Family House.
 
     This is an archetype building for danish single family house according to

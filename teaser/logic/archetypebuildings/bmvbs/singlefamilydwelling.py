@@ -1,7 +1,7 @@
 # created June 2015
 # by TEASER4 Development Team
 
-from teaser.logic.archetypebuildings.residential import Residential
+from teaser.logic.archetypebuildings.archetype import Archetype
 from teaser.logic.buildingobjects.useconditions import UseConditions as UseCond
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
@@ -13,7 +13,7 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
 
-class SingleFamilyDwelling(Residential):
+class SingleFamilyDwelling(Archetype):
     """Archetype Residential Building according
 
     Subclass from Residential archetype class to represent
