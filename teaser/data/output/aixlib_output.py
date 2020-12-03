@@ -5,6 +5,7 @@ import warnings
 from mako.template import Template
 from mako.lookup import TemplateLookup
 import teaser.logic.utilities as utilities
+import shutil
 
 
 def export_multizone(buildings, prj, path=None):
@@ -95,6 +96,7 @@ def export_multizone(buildings, prj, path=None):
         package_list=buildings,
         addition=None,
         extra=None)
+    _copy_weather_data(prj.weather_file_path, path)
 
     for i, bldg in enumerate(buildings):
 
@@ -232,3 +234,17 @@ def _help_package_order(path, package_list, addition=None, extra=None):
     out_file.write(order_template.render_unicode
                    (list=package_list, addition=addition, extra=extra))
     out_file.close()
+
+
+def _copy_weather_data(source_path, destination_path):
+    """Copies the imported .mos weather file to the results folder.
+
+    Parameters
+    ----------
+    source_path : str
+        path of local weather file
+    destination_path : str
+        path of where the weather file should be placed
+    """
+
+    shutil.copy2(source_path, destination_path)

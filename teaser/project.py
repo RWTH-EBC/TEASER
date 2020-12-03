@@ -1164,6 +1164,26 @@ internal_gains_mode: int [1, 2, 3]
         self._used_library_calc = "AixLib"
 
     @property
+    def weather_file_path(self):
+        return self._weather_file_path
+
+    @weather_file_path.setter
+    def weather_file_path(self, value):
+        if value is None:
+            self._weather_file_path = utilities.get_full_path(
+                os.path.join(
+                    "data",
+                    "input",
+                    "inputdata",
+                    "weatherdata",
+                    "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos",
+                )
+            )
+        else:
+            self._weather_file_path = os.path.normpath(value)
+            self.weather_file_name = os.path.split(self.weather_file_path)[1]
+
+    @property
     def number_of_elements_calc(self):
         return self._number_of_elements_calc
 
