@@ -5,11 +5,11 @@
 from teaser.logic.buildingobjects.building import Building
 
 
-class NonResidential(Building):
-    """Base class for each non-residential archetype.
+class Archetype(Building):
+    """Base class for building archetypes.
 
-    This is the base class for all non-residential archetype buildings (BMVBS,
-    UrbanReNet, Tabula, etc.). It is a subclass of Building and introduces
+    This is the base class for archetype buildings.
+    It is a subclass of Building and introduces
     several parameters to be obligatory (parent, name, year_of_construction,
     net_leased_area).
 
@@ -118,10 +118,10 @@ class NonResidential(Building):
         with_ahu=False,
         internal_gains_mode=1,
     ):
-        """Constructor of NonResidential archetype building
+        """Constructor of Archetype building
         """
 
-        super(NonResidential, self).__init__(
+        super(Archetype, self).__init__(
             parent,
             name,
             year_of_construction,
