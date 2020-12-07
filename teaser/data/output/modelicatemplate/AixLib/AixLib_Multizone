@@ -140,6 +140,7 @@ equation
       StartTime=${str(zone.parent.parent.modelica_info.start_time)},
       StopTime=${str(zone.parent.parent.modelica_info.stop_time)},
       Interval=${modelica_info.interval_output},
+      Tolerance=0.0001,
       __Dymola_Algorithm="${modelica_info.current_solver}"),
       __Dymola_experimentSetupOutput(equidistant=${get_true_false(modelica_info.equidistant_output)},
       __Dymola_Commands(file=
