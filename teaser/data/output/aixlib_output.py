@@ -82,6 +82,10 @@ def export_multizone(buildings, prj, path=None):
         filename=utilities.get_full_path(
             "data/output/modelicatemplate/AixLib/AixLib_Multizone"),
         lookup=lookup)
+    test_script_template = Template(
+        filename=utilities.get_full_path(
+            "data/output/modelicatemplate/modelica_test_script"),
+        lookup=lookup)
 
     uses = [
         'Modelica(version="' + prj.modelica_info.version + '")',
@@ -146,6 +150,8 @@ def export_multizone(buildings, prj, path=None):
             modelica_info=bldg.parent.modelica_info))
         out_file.close()
 
+        _help_test_script(bldg, path, test_script_template)
+
         zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
 
         for zone in bldg.thermal_zones:
@@ -175,6 +181,44 @@ def export_multizone(buildings, prj, path=None):
 
     print("Exports can be found here:")
     print(path)
+
+
+def _help_test_script(bldg, path, test_script_template):
+    """Create a test script for regression testing with BuildingsPy
+
+    Parameters
+    ----------
+    bldg : teaser.logic.buildingobjects.building.Building
+        Building for which test script is created
+    path : str
+        Output directory
+    test_script_template : mako.template.Template
+        Template for the test script
+    """
+
+    dir_resources = os.path.join(path, "Resources")
+    if not os.path.exists(dir_resources):
+        os.mkdir(dir_resources)
+    dir_scripts = os.path.join(dir_resources, "Scripts")
+    if not os.path.exists(dir_scripts):
+        os.mkdir(dir_scripts)
+    dir_dymola = os.path.join(dir_scripts, "Dymola")
+    if not os.path.exists(dir_dymola):
+        os.mkdir(dir_dymola)
+    out_file = open(utilities.get_full_path
+                    (os.path.join(dir_dymola, bldg.name + ".mos")), 'w')
+    names_variables = []
+    for i, zone in enumerate(bldg.thermal_zones):
+        names_variables.append(f"multizone.PHeater[{i}]")
+        names_variables.append(f"multizone.PCooler[{i}]")
+        names_variables.append(f"multizone.TAir[{i}]")
+    out_file.write(test_script_template.render_unicode(
+        project=bldg.parent,
+        bldg=bldg,
+        stop_time=3600 * 24 * 365,
+        names_variables=names_variables,
+    ))
+    out_file.close()
 
 
 def _help_package(path, name, uses=None, within=None):
