@@ -86,6 +86,10 @@ class Project(object):
         IBPSA)
     used_library_calc : str
         used library (AixLib and IBPSA are supported)
+    dir_reference_results : str
+        Path to reference results in BuildingsPy format. If not None, the results
+        will be copied into the model output directories so that the exported
+        models can be regression tested against these results with BuildingsPy.
     """
 
     def __init__(self, load_data=False):
@@ -116,6 +120,8 @@ class Project(object):
             self.data = self.instantiate_data_class()
         else:
             self.data = None
+
+        self.dir_reference_results = None
 
     @staticmethod
     def instantiate_data_class():

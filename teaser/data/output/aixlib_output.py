@@ -189,9 +189,36 @@ def export_multizone(buildings, prj, path=None):
             extra=None)
 
     _copy_script_unit_tests(os.path.join(dir_scripts, "runUnitTests.py"))
+    _copy_reference_results(dir_resources, prj)
 
     print("Exports can be found here:")
     print(path)
+
+
+def _copy_reference_results(dir_resources, prj):
+    """Copy reference results to modelica output.
+
+    Parameters
+    ----------
+    dir_resources : str
+        Resources directory of the modelica output
+    prj : teaser.project.Project
+        Project to be exported
+    """
+
+    if prj.dir_reference_results is not None:
+        dir_ref_out = os.path.join(dir_resources, "ReferenceResults")
+        if not os.path.exists(dir_ref_out):
+            os.mkdir(dir_ref_out)
+        dir_ref_out_dymola = os.path.join(dir_ref_out, "Dymola")
+        if not os.path.exists(dir_ref_out_dymola):
+            os.mkdir(dir_ref_out_dymola)
+        for filename in os.listdir(prj.dir_reference_results):
+            if filename.endswith(".txt"):
+                shutil.copy2(
+                    os.path.join(prj.dir_reference_results, filename),
+                    os.path.join(dir_ref_out_dymola, filename)
+                )
 
 
 def _help_test_script(bldg, dir_dymola, test_script_template):
