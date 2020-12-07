@@ -150,7 +150,16 @@ def export_multizone(buildings, prj, path=None):
             modelica_info=bldg.parent.modelica_info))
         out_file.close()
 
-        _help_test_script(bldg, path, test_script_template)
+        dir_resources = os.path.join(path, "Resources")
+        if not os.path.exists(dir_resources):
+            os.mkdir(dir_resources)
+        dir_scripts = os.path.join(dir_resources, "Scripts")
+        if not os.path.exists(dir_scripts):
+            os.mkdir(dir_scripts)
+        dir_dymola = os.path.join(dir_scripts, "Dymola")
+        if not os.path.exists(dir_dymola):
+            os.mkdir(dir_dymola)
+        _help_test_script(bldg, dir_dymola, test_script_template)
 
         zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
 
@@ -179,32 +188,30 @@ def export_multizone(buildings, prj, path=None):
             addition=bldg.name + "_",
             extra=None)
 
+    _copy_script_unit_tests(os.path.join(dir_scripts, "runUnitTests.py"))
+
     print("Exports can be found here:")
     print(path)
 
 
-def _help_test_script(bldg, path, test_script_template):
+def _help_test_script(bldg, dir_dymola, test_script_template):
     """Create a test script for regression testing with BuildingsPy
 
     Parameters
     ----------
     bldg : teaser.logic.buildingobjects.building.Building
         Building for which test script is created
-    path : str
-        Output directory
+    dir_dymola : str
+        Output directory for Dymola scripts
     test_script_template : mako.template.Template
         Template for the test script
+
+    Returns
+    -------
+    dir_scripts : str
+        Path to the scripts directory
     """
 
-    dir_resources = os.path.join(path, "Resources")
-    if not os.path.exists(dir_resources):
-        os.mkdir(dir_resources)
-    dir_scripts = os.path.join(dir_resources, "Scripts")
-    if not os.path.exists(dir_scripts):
-        os.mkdir(dir_scripts)
-    dir_dymola = os.path.join(dir_scripts, "Dymola")
-    if not os.path.exists(dir_dymola):
-        os.mkdir(dir_dymola)
     out_file = open(utilities.get_full_path
                     (os.path.join(dir_dymola, bldg.name + ".mos")), 'w')
     names_variables = []
@@ -219,7 +226,6 @@ def _help_test_script(bldg, path, test_script_template):
         names_variables=names_variables,
     ))
     out_file.close()
-
 
 def _help_package(path, name, uses=None, within=None):
     """creates a package.mo file
@@ -291,4 +297,17 @@ def _copy_weather_data(source_path, destination_path):
         path of where the weather file should be placed
     """
 
+    shutil.copy2(source_path, destination_path)
+
+
+def _copy_script_unit_tests(destination_path):
+    """Copies the script to run the unit tests.
+
+    Parameters
+    ----------
+    destination_path : str
+        path of where the weather file should be placed
+    """
+
+    source_path = utilities.get_full_path("data/output/runUnitTests.py")
     shutil.copy2(source_path, destination_path)
