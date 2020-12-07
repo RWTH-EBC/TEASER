@@ -20,7 +20,6 @@ def example_export_aixlib():
     # buildings to get this Project we rerun this example
 
     prj = e1.example_generate_archetype()
-    prj.dir_reference_results = utilities.get_full_path("data/output/modelicatemplate")
 
     # To make sure the export is using the desired parameters you should
     # always set model settings in the Project.
