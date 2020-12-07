@@ -143,10 +143,10 @@ equation
       Tolerance=0.0001,
       __Dymola_Algorithm="${modelica_info.current_solver}"),
       __Dymola_experimentSetupOutput(equidistant=${get_true_false(modelica_info.equidistant_output)},
+      events=${get_true_false(modelica_info.results_at_events)}),
       __Dymola_Commands(file=
         "Resources/Scripts/Dymola/${bldg.name}.mos"
       "Simulate and Plot"),
-      events=${get_true_false(modelica_info.results_at_events)}),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
         graphics={
         Line(points={{80,-82}}, color={28,108,200}),
