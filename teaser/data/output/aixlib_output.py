@@ -246,9 +246,9 @@ def _help_test_script(bldg, dir_dymola, test_script_template):
                     (os.path.join(dir_building, bldg.name + ".mos")), 'w')
     names_variables = []
     for i, zone in enumerate(bldg.thermal_zones):
-        names_variables.append(f"multizone.PHeater[{i}]")
-        names_variables.append(f"multizone.PCooler[{i}]")
-        names_variables.append(f"multizone.TAir[{i}]")
+        names_variables.append(f"multizone.PHeater[{i+1}]")
+        names_variables.append(f"multizone.PCooler[{i+1}]")
+        names_variables.append(f"multizone.TAir[{i+1}]")
     out_file.write(test_script_template.render_unicode(
         project=bldg.parent,
         bldg=bldg,
