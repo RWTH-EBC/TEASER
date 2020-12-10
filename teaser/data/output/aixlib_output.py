@@ -239,8 +239,11 @@ def _help_test_script(bldg, dir_dymola, test_script_template):
         Path to the scripts directory
     """
 
+    dir_building = os.path.join(dir_dymola, bldg.name)
+    if not os.path.exists(dir_building):
+        os.mkdir(dir_building)
     out_file = open(utilities.get_full_path
-                    (os.path.join(dir_dymola, bldg.name + ".mos")), 'w')
+                    (os.path.join(dir_building, bldg.name + ".mos")), 'w')
     names_variables = []
     for i, zone in enumerate(bldg.thermal_zones):
         names_variables.append(f"multizone.PHeater[{i}]")
