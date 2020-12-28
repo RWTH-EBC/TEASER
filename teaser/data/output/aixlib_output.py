@@ -257,6 +257,7 @@ def _help_test_script(bldg, dir_dymola, test_script_template):
     ))
     out_file.close()
 
+
 def _help_package(path, name, uses=None, within=None):
     """creates a package.mo file
 
