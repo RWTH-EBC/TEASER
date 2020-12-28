@@ -23,9 +23,3 @@ class Simulation_export(object):
         from teaser.examples import e2_export_aixlib_models as e2
 
         prj = e2.example_export_aixlib()
-
-    def export_e3_example_export_ibpsa(self):
-        """Tests the executability of example 2"""
-        from teaser.examples import e3_export_ibpsa_models as e3
-
-        prj = e3.example_export_ibpsa()
