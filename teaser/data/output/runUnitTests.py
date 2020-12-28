@@ -39,6 +39,8 @@ def _validate_experiment_setup(path):
     val = v.Validator()
     retVal = val.validateExperimentSetup(path)
 
+    return retVal
+
 
 def _validate_html(path):
     import buildingspy.development.validator as v
@@ -49,7 +51,10 @@ def _validate_html(path):
     for i in range(n_msg):
         if i == 0:
             print(
-                "The following malformed html syntax has been found:\n{}".format(errMsg[i]))
+                "The following malformed html syntax has been found:\n{}".format(
+                    errMsg[i]
+                )
+            )
         else:
             print(errMsg[i])
 
@@ -60,10 +65,11 @@ def _validate_html(path):
 
 
 def _setEnvironmentVariables(var, value):
-    ''' Add to the environment variable `var` the value `value`
-    '''
+    """ Add to the environment variable `var` the value `value`
+    """
     import os
     import platform
+
     if var in os.environ:
         if platform.system() == "Windows":
             os.environ[var] = value + ";" + os.environ[var]
@@ -86,11 +92,11 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui, skip_verification
     ut.showGUI(show_gui)
     # Below are some option that may occassionally be used.
     # These are currently not exposed as command line arguments.
-#    ut.setNumberOfThreads(1)
-#    ut.deleteTemporaryDirectories(False)
-#    ut.useExistingResults(['/tmp/tmp-Buildings-0-fagmeZ'])
+    #    ut.setNumberOfThreads(1)
+    #    ut.deleteTemporaryDirectories(False)
+    #    ut.useExistingResults(['/tmp/tmp-Buildings-0-fagmeZ'])
 
-#    ut.writeOpenModelicaResultDictionary()
+    #    ut.writeOpenModelicaResultDictionary()
     # Run the regression tests
 
     retVal = ut.run()
@@ -107,15 +113,7 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui, skip_verification
     return retVal
 
 
-def _runOpenModelicaUnitTests():
-    import buildingspy.development.regressiontest as u
-    ut = u.Tester()
-    ut.batchMode(batch)
-    ut.test_OpenModelica(cmpl=True, simulate=True,
-                         packages=['Examples'], number=-1)
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     import multiprocessing
     import platform
     import argparse
@@ -124,61 +122,79 @@ if __name__ == '__main__':
 
     # Configure the argument parser
     parser = argparse.ArgumentParser(
-        description='Run the unit tests or the html validation only.')
+        description="Run the unit tests or the html validation only."
+    )
     unit_test_group = parser.add_argument_group("arguments to run unit tests")
 
-    unit_test_group.add_argument("-b", "--batch",
-                                 action="store_true",
-                                 help="Run in batch mode without user interaction")
-    unit_test_group.add_argument('-t', "--tool",
-                                 metavar="dymola",
-                                 default="dymola",
-                                 help="Tool for the regression tests. Set to dymola or jmodelica")
-    unit_test_group.add_argument('-s', "--single-package",
-                                 metavar="Modelica.Package",
-                                 help="Test only the Modelica package Modelica.Package")
-    unit_test_group.add_argument("-p", "--path",
-                                 default=".",
-                                 help="Path where top-level package.mo of the library is located")
-    unit_test_group.add_argument("-n", "--number-of-processors",
-                                 type=int,
-                                 default=multiprocessing.cpu_count(),
-                                 help='Maximum number of processors to be used')
-    unit_test_group.add_argument("--show-gui",
-                                 help='Show the GUI of the simulator',
-                                 action="store_true")
-    unit_test_group.add_argument("--skip-verification",
-                                 help='If specified, do not verify simulation results against reference points',
-                                 action="store_true")
+    unit_test_group.add_argument(
+        "-b",
+        "--batch",
+        action="store_true",
+        help="Run in batch mode without user interaction",
+    )
+    unit_test_group.add_argument(
+        "-t",
+        "--tool",
+        metavar="dymola",
+        default="dymola",
+        help="Tool for the regression tests. Set to dymola or jmodelica",
+    )
+    unit_test_group.add_argument(
+        "-s",
+        "--single-package",
+        metavar="Modelica.Package",
+        help="Test only the Modelica package Modelica.Package",
+    )
+    unit_test_group.add_argument(
+        "-p",
+        "--path",
+        default=".",
+        help="Path where top-level package.mo of the library is located",
+    )
+    unit_test_group.add_argument(
+        "-n",
+        "--number-of-processors",
+        type=int,
+        default=multiprocessing.cpu_count(),
+        help="Maximum number of processors to be used",
+    )
+    unit_test_group.add_argument(
+        "--show-gui", help="Show the GUI of the simulator", action="store_true"
+    )
+    unit_test_group.add_argument(
+        "--skip-verification",
+        help="If specified, do not verify simulation results against reference points",
+        action="store_true",
+    )
 
-    html_group = parser.add_argument_group(
-        "arguments to check html syntax only")
-    html_group.add_argument("--validate-html-only",
-                            action="store_true")
+    html_group = parser.add_argument_group("arguments to check html syntax only")
+    html_group.add_argument("--validate-html-only", action="store_true")
 
     experiment_setup_group = parser.add_argument_group(
-        "arguments to check validity of .mos and .mo experiment setup only")
-    experiment_setup_group.add_argument("--validate-experiment-setup",
-                                        action="store_true")
+        "arguments to check validity of .mos and .mo experiment setup only"
+    )
+    experiment_setup_group.add_argument(
+        "--validate-experiment-setup", action="store_true"
+    )
 
     # Set environment variables
     if platform.system() == "Windows":
-        _setEnvironmentVariables("PATH",
-                                 os.path.join(os.path.abspath('.'),
-                                              "Resources", "Library", "win32"))
+        _setEnvironmentVariables(
+            "PATH", os.path.join(os.path.abspath("."), "Resources", "Library", "win32")
+        )
     else:
         # For https://github.com/lbl-srg/modelica-buildings/issues/559, we add
         # 32 and 64 bit resources to run the Utilities.IO.Python27 regression tests.
-        _setEnvironmentVariables("LD_LIBRARY_PATH",
-                                 os.path.join(os.path.abspath('.'),
-                                              "Resources", "Library", "linux32") + ":" +
-                                 os.path.join(os.path.abspath('.'),
-                                              "Resources", "Library", "linux64"))
+        _setEnvironmentVariables(
+            "LD_LIBRARY_PATH",
+            os.path.join(os.path.abspath("."), "Resources", "Library", "linux32")
+            + ":"
+            + os.path.join(os.path.abspath("."), "Resources", "Library", "linux64"),
+        )
 
     # The path to buildingspy must be added to sys.path to work on Linux.
     # If only added to os.environ, the Python interpreter won't find buildingspy
-    sys.path.append(os.path.join(
-        os.path.abspath('.'), "..", "..", "BuildingsPy"))
+    sys.path.append(os.path.join(os.path.abspath("."), "..", "..", "BuildingsPy"))
 
     # Parse the arguments
     args = parser.parse_args()
@@ -198,14 +214,15 @@ if __name__ == '__main__':
     else:
         single_package = None
 
-    retVal = _runUnitTests(batch=args.batch,
-                           tool=args.tool,
-                           package=single_package,
-                           path=args.path,
-                           n_pro=args.number_of_processors,
-                           show_gui=args.show_gui,
-                           skip_verification=args.skip_verification
-                           )
+    retVal = _runUnitTests(
+        batch=args.batch,
+        tool=args.tool,
+        package=single_package,
+        path=args.path,
+        n_pro=args.number_of_processors,
+        show_gui=args.show_gui,
+        skip_verification=args.skip_verification,
+    )
     exit(retVal)
 
 #   _runOpenModelicaUnitTests()
