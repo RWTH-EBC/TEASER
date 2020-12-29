@@ -33,6 +33,17 @@ def example_export_aixlib():
     # Be careful: Dymola does not like whitespaces in names and filenames,
     # thus we will delete them anyway in TEASER.
 
+    # for CI testing purpose we set the reference result folder
+
+    prj.dir_reference_results = utilities.get_full_path(
+        os.path.join(
+            "examples",
+            "examplefiles",
+            "ReferenceResults",
+            "Dymola"))
+
+    print(prj.dir_reference_results)
+
     prj.used_library_calc = 'AixLib'
     prj.number_of_elements_calc = 2
     prj.weather_file_path = utilities.get_full_path(
