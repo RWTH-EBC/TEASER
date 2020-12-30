@@ -47,6 +47,7 @@ setup(
             "package_order",
             "conversion",
             "modelica_language",
+            "modelica_test_script",
         ],
         "teaser.data.output.modelicatemplate.AixLib": [
             "AixLib_Multizone",
