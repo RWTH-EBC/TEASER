@@ -75,11 +75,15 @@ class VDICore(object):
         self.room_air_temperature = None
 
         #  Todo: Get heater limits from thermal_zone
-        self.heater_limit = [1e10, 1e10, 1e10]
-        self.cooler_limit = [-1e10, -1e10, -1e10]
 
         # time setting for simulation
-        self.timesteps = 60 * 60 * 24
+        self.timesteps = 8760
+        self.dt=3600
+
+        self.heater_limit = np.zeros((self.timesteps, 3))
+        self.heater_limit[:, 0] = 1e10
+        self.cooler_limit = np.zeros((self.timesteps, 3))
+        self.cooler_limit[:, 0] = -1e10
 
         self.initial_air_temp = 295.15
         self.initial_inner_wall_temp = 295.15
@@ -92,7 +96,7 @@ class VDICore(object):
         self.internal_gains_rad = np.zeros(self.timesteps)
 
         self.solar_rad_in = np.transpose(self._solar_radiation())
-        # self.equal_air_temp = self._eq_air_temp(h_sol=self.solar_rad_in)
+        self.equal_air_temp = self._eq_air_temp(h_sol=self.solar_rad_in, t_black_sky=np.zeros(self.timesteps) + 273.15)
 
         self.t_set_heat_day = (
             np.array(
@@ -160,11 +164,14 @@ class VDICore(object):
         """
         #  Todo: Cleanup docstring
 
-        timesteps = 60 * 60 * 24
+        timesteps = self.timesteps
 
         #  Todo: Where to store t_balck_sky?
-        # t_black_sky = np.zeros(timesteps) + 273.15
-        t_dry_bulb = self.weather_data.air_temp  # in Kelvin
+        #t_black_sky = np.zeros(timesteps) + 273.15
+        if self.weather_data.air_temp[0] > 250:
+            t_dry_bulb=self.weather_data.air_temp
+        else:
+            t_dry_bulb = self.weather_data.air_temp + 273.15  # in Kelvin
 
         list_window_areas = []
         list_sunblind = []
@@ -198,7 +205,7 @@ class VDICore(object):
         del_t_eq_lw = (t_black_sky - t_dry_bulb) * (
             e_ext
             * alpha_rad_outer_ow
-            / (alpha_rad_outer_ow + alpha_conv_outer_ow * 0.93)
+            / ((alpha_rad_outer_ow + alpha_conv_outer_ow) * 0.93)
         )
         del_t_eq_sw = h_sol * a_ext / (alpha_rad_outer_ow + alpha_conv_outer_ow)
 
@@ -214,6 +221,8 @@ class VDICore(object):
             t_eq_win = np.array([t_dry_bulb for i in range(n)]).T
             t_eq_wall = np.array([t_dry_bulb + del_t_eq_sw[:, i] for i in range(n)]).T
 
+        self.t_eq_wall = t_eq_wall
+        self.t_eq_win = t_eq_win
         # Compute equivalent air temperature
         t_eq_air = (
             np.dot(t_eq_wall, wf_wall) + np.dot(t_eq_win, wf_win) + t_ground * wf_ground
@@ -242,8 +251,8 @@ class VDICore(object):
 
         """
         #  FIXME: Deal with input values (to weather / project?)
-        timesteps = 60 * 60 * 24
-        dt = 3600
+        timesteps = self.timesteps
+        dt = self.dt
         initial_time = 0
 
         #  Get beta angle
@@ -278,8 +287,8 @@ class VDICore(object):
 
         geometry = self.get_geometry(
             initial_time=initial_time,
-            dt=dt,
-            timesteps=timesteps,
+            dt=self.dt,
+            timesteps=self.timesteps,
             time_zone=time_zone,
             location=location,
             altitude=altitude,
@@ -380,7 +389,7 @@ class VDICore(object):
         (latitude, longitude) = location
 
         # Create time array
-        time = (np.linspace(0, timesteps - 1, num=timesteps)) * dt + initial_time
+        time = (np.linspace(0, self.timesteps - 1, num=self.timesteps)) * self.dt + initial_time
 
         #  Determine the day's number and standard time
         #  (neglect daylight saving)
@@ -730,8 +739,8 @@ class VDICore(object):
         """
 
         #  Fix number of timesteps
-        timesteps = 24 * 60 * 60
-        dt = 60
+        timesteps = self.timesteps
+        dt = self.dt
 
         #  Get building parameters
         r1_iw = self.thermal_zone.model_attr.r1_iw
@@ -968,6 +977,8 @@ class VDICore(object):
                 "q_air_hc": q_air_hc,
                 "q_iw_hc": q_iw_hc,
                 "q_ow_hc": q_ow_hc,
+                "self.equal_air_temp": self.equal_air_temp,
+
             }
         )
 
