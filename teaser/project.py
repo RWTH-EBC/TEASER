@@ -10,6 +10,7 @@ import teaser.data.output.aixlib_output as aixlib_output
 import teaser.data.output.ibpsa_output as ibpsa_output
 from teaser.data.dataclass import DataClass
 from teaser.logic.archetypebuildings.bmvbs.office import Office
+from teaser.logic.archetypebuildings.eeschwimm.swimmingPool import SwimmingPool
 from teaser.logic.archetypebuildings.bmvbs.custom.institute import Institute
 from teaser.logic.archetypebuildings.bmvbs.custom.institute4 import Institute4
 from teaser.logic.archetypebuildings.bmvbs.custom.institute8 import Institute8
@@ -280,6 +281,10 @@ class Project(object):
         office_layout=None,
         window_layout=None,
         construction_type=None,
+        filePath=None, 
+        sheetNameAreas=None,
+        sheetNameElements=None,
+        swimmingPoolCategory=None
     ):
         """Add a non-residential building to the TEASER project.
 
@@ -361,12 +366,13 @@ internal_gains_mode: int [1, 2, 3]
 
         ass_error_usage = (
             "only 'office', 'institute', 'institute4', "
-            "'institute8' are valid usages for archetype "
+            "'institute8', 'swimmingPool' are valid usages for archetype "
             "generation"
         )
 
         assert usage in [
             "office",
+            "swimmingPool",
             "institute",
             "institute4",
             "institute8",
@@ -391,6 +397,25 @@ internal_gains_mode: int [1, 2, 3]
                 office_layout,
                 window_layout,
                 construction_type,
+            )
+
+        elif usage == "swimmingPool":
+
+            type_bldg = SwimmingPool(
+                self,
+                filePath,                
+                sheetNameAreas,                
+                swimmingPoolCategory,
+                name,
+                year_of_construction,
+                number_of_floors,
+                height_of_floors,
+                net_leased_area,
+                with_ahu,
+                internal_gains_mode,
+                office_layout,
+                window_layout,
+                construction_type                
             )
 
         elif usage == "institute":
@@ -441,7 +466,8 @@ internal_gains_mode: int [1, 2, 3]
                 construction_type,
             )
 
-        type_bldg.generate_archetype()
+        type_bldg.generate_archetype(filePath=filePath, sheetNameAreas=sheetNameAreas,
+                                     sheetNameElements=sheetNameElements)
         type_bldg.calc_building_parameter(
             number_of_elements=self._number_of_elements_calc,
             merge_windows=self._merge_windows_calc,
