@@ -2,7 +2,7 @@
     "project": {
         "version": "0.7",
         "name": "Project",
-        "weather_file_path": null,
+        "weather_file_path": "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt",
         "number_of_elements_calc": 2,
         "merge_windows_calc": false,
         "used_library_calc": "AixLib",

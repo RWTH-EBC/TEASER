@@ -102,7 +102,6 @@ def export_ibpsa(
         package_list=buildings,
         addition=None,
         extra=None)
-    ibpsa_output._copy_weather_data(prj.weather_file_path, path)
 
     for i, bldg in enumerate(buildings):
 

@@ -124,7 +124,7 @@ class Window(BuildingElement):
         super(Window, self).__init__(parent)
         self._g_value = 0.0
         self._a_conv = 0.0
-        self._shading_g_total = 1.0
+        self._shading_g_total = 0.0
         self._shading_max_irr = 0.0
         self._tilt = 90.0
         self._inner_convection = 2.7

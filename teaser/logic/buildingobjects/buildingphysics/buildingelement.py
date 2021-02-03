@@ -1,8 +1,12 @@
-"""This module contains the Base class for all building elements."""
+"""This module contains the Base class for all building elements.
+Last modified 2020-09-25 for Project 'Energieeffizienz in Schwimmbädern - Neubau und Bestand'
+
+"""
 
 from __future__ import division
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
 import teaser.data.input.buildingelement_input_json as buildingelement_input
+import teaser.data.input.ExcelToTeaser as bElement_excel_input
 import numpy as np
 import random
 import re
@@ -92,7 +96,7 @@ class BuildingElement(object):
     r_inner_rad : float [K/W]
         Radiative resistance of building element on inner side (facing the
         zone)
-    r_inner_comb : float [K/W]
+    r_inner_conv : float [K/W]
         Combined convective and radiative resistance of building element on
         inner side (facing the zone)
     r_outer_conv : float [K/W]
@@ -103,7 +107,7 @@ class BuildingElement(object):
         Radiative resistance of building element on outer side (facing
         the ambient or adjacent zone). Currently for all InnerWalls and
         GroundFloors this value is set to 0.0
-    r_outer_comb : float [K/W]
+    r_outer_conv : float [K/W]
         Combined convective and radiative resistance of building element on
         outer side (facing the ambient or adjacent zone). Currently for all
         InnerWalls and GroundFloors this value is set to 0.0
@@ -157,7 +161,9 @@ class BuildingElement(object):
         Calculates the U*A value and resistances for radiative and
         convective heat transfer of a building element.
         """
-
+        
+         
+        
         self.ua_value = 0.0
         self.r_conduc = 0.0
         self.r_inner_conv = 0.0
@@ -172,9 +178,23 @@ class BuildingElement(object):
                 count_layer.thickness / count_layer.material.thermal_conduc) \
 
         self.r_conduc = r_conduc * (1 / self.area)
-        self.r_inner_conv = (1 / self.inner_convection) * (1 / self.area)
-        self.r_inner_rad = (1 / self.inner_radiation) * (1 / self.area)
-        self.r_inner_comb = 1 / (1 / self.r_inner_conv + 1 / self.r_inner_rad)
+            
+        if (self.name == "PoolFloorWithEarthContact" or self.name == "PoolAreaAboveTechnicalRoom"
+            or self.name == "CeilingUnderPoolArea"):
+            #Calculation of volume flow according to DIN 19643-1:2012-11
+            k = 0.5 #Resilience factor from DIN 19643-2:2012-11
+            N = 0.296 * self.area #Nominal load from mean value swimmer and non-swimmer pools 
+            v = N/k            
+            # Calculation of heat transfer resistance for water according to
+            # H. Herr: Wärmelehre: Technische Physik Band 3. 2006
+            self.r_inner_conv = (1 / (2100 * (v**(1/2)))) * (1 / self.area)
+            self.r_inner_rad = (1 / 580) * (1 / self.area)
+            self.r_inner_comb = 1 / (1 / self.r_inner_conv + 1 / self.r_inner_rad)
+            
+        else:                      
+            self.r_inner_conv = (1 / self.inner_convection) * (1 / self.area)
+            self.r_inner_rad = (1 / self.inner_radiation) * (1 / self.area)
+            self.r_inner_comb = 1 / (1 / self.r_inner_conv + 1 / self.r_inner_rad)
 
         if self.outer_convection is not None \
                 and self.outer_radiation is not None:
@@ -187,6 +207,10 @@ class BuildingElement(object):
         self.ua_value = (1 / (
             self.r_inner_comb + self.r_conduc + self.r_outer_comb))
         self.u_value = self.ua_value / self.area
+        
+        #if (self.name == "GroundFloorPoolArea" or self.name == "PoolAreaAboveTechnicalRoom"
+           #or self.name == "CeilingUnderPoolArea"):        
+           #print("UA-Wert gleich", self.ua_value, "mit r Innen", self.r_inner_comb, "Bauteilname", self.name)
 
     def gather_element_properties(self):
         """Helper function for matrix calculation.
@@ -272,7 +296,10 @@ class BuildingElement(object):
             self,
             year,
             construction,
-            data_class=None):
+            data_class=None,
+            isSwimmingPool=False,
+            filePath=None, 
+            sheetNameElements=None):
         """Typical element loader.
 
         Loads typical building elements according to their construction
@@ -294,6 +321,13 @@ class BuildingElement(object):
             but the user can individually change that. Default is
             self.parent.parent.parent.data (which is data_class in current
             project)
+            
+        isSwimmingPool : boolean
+            Indicates that swimming pool data is used
+        filePath : str
+            Path to Excel file
+        sheetNameElements : str
+            Sheet name of sheet for building elements and respective materials
 
         """
 
@@ -307,12 +341,20 @@ class BuildingElement(object):
         self._inner_radiation = None
         self._outer_convection = None
         self._outer_radiation = None
-
-        buildingelement_input.load_type_element(element=self,
-                                                year=year,
-                                                construction=construction,
-                                                data_class=data_class)
-
+        
+        if isSwimmingPool == False:
+            buildingelement_input.load_type_element(element=self,
+                                                    year=year,
+                                                    construction=construction,
+                                                    data_class=data_class)
+        else:
+            bElement_excel_input.load_type_element(element=self,
+                                                   year=year,
+                                                   construction=construction,
+                                                   data_class=data_class, 
+                                                   filePath=filePath, 
+                                                   sheetNameElements=sheetNameElements)
+            
     def save_type_element(self, data_class=None):
         """Typical element saver.
 
@@ -453,12 +495,10 @@ class BuildingElement(object):
 
         self._orientation = value
         if type(self).__name__ == "OuterWall":
-            if (self.parent is not None and self.parent.parent is not None and
-                    self.area is not None):
+            if self.parent.parent is not None and self.area is not None:
                 self.parent.parent.fill_outer_area_dict()
         elif type(self).__name__ == "Window":
-            if (self.parent is not None and self.parent.parent is not None and
-                    self.area is not None):
+            if self.parent.parent is not None and self.area is not None:
                 self.parent.parent.fill_window_area_dict()
 
     @property
@@ -594,8 +634,7 @@ class BuildingElement(object):
         if type(self).__name__ == "OuterWall"\
                 or type(self).__name__ == "Rooftop" \
                 or type(self).__name__ == "GroundFloor":
-            if (self.parent is not None and self.parent.parent is not None and
-                    self.orientation is not None):
+            if self.parent.parent is not None and self.orientation is not None:
                 self.parent.parent.fill_outer_area_dict()
         elif type(self).__name__ == "Window":
             if self.parent is not None and self.orientation is not None:

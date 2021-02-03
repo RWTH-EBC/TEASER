@@ -1,4 +1,7 @@
-"""This module includes the Project class, which is the API for TEASER."""
+"""This module includes the Project class, which is the API for TEASER.
+Last modified 2020-09-25 for Project 'Energieeffizienz in Schwimmbädern - Neubau und Bestand'
+"""
+
 
 import warnings
 import os
@@ -10,6 +13,7 @@ import teaser.data.output.aixlib_output as aixlib_output
 import teaser.data.output.ibpsa_output as ibpsa_output
 from teaser.data.dataclass import DataClass
 from teaser.logic.archetypebuildings.bmvbs.office import Office
+from teaser.logic.archetypebuildings.eeschwimm.swimmingPool import SwimmingPool
 from teaser.logic.archetypebuildings.bmvbs.custom.institute import Institute
 from teaser.logic.archetypebuildings.bmvbs.custom.institute4 import Institute4
 from teaser.logic.archetypebuildings.bmvbs.custom.institute8 import Institute8
@@ -86,10 +90,6 @@ class Project(object):
         IBPSA)
     used_library_calc : str
         used library (AixLib and IBPSA are supported)
-    dir_reference_results : str
-        Path to reference results in BuildingsPy format. If not None, the results
-        will be copied into the model output directories so that the exported
-        models can be regression tested against these results with BuildingsPy.
     """
 
     def __init__(self, load_data=False):
@@ -120,8 +120,6 @@ class Project(object):
             self.data = self.instantiate_data_class()
         else:
             self.data = None
-
-        self.dir_reference_results = None
 
     @staticmethod
     def instantiate_data_class():
@@ -280,6 +278,10 @@ class Project(object):
         office_layout=None,
         window_layout=None,
         construction_type=None,
+        filePath=None, 
+        sheetNameAreas=None,
+        sheetNameElements=None,
+        swimmingPoolCategory=None
     ):
         """Add a non-residential building to the TEASER project.
 
@@ -320,17 +322,15 @@ class Project(object):
             and
             assigned to attribute central_ahu. This instance holds information
             for central Air Handling units. Default is False.
-internal_gains_mode: int [1, 2, 3]
-        mode for the internal gains calculation done in AixLib:
-        1: Temperature and activity degree dependent heat flux calculation for persons. The
-           calculation is based on  SIA 2024 (default)
-        2: Temperature and activity degree independent heat flux calculation for persons, the max.
-           heatflowrate is prescribed by the parameter
-           fixed_heat_flow_rate_persons.
-        3: Temperature and activity degree dependent calculation with
-           consideration of moisture and co2. The moisture calculation is
-           based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
-           Engineering ToolBox (2004) and regards only persons.
+        internal_gains_mode: int [1, 2, 3]
+            mode for the internal gains calculation by persons:
+            1: Temperature and activity degree dependent calculation. The
+               calculation is based on  SIA 2024 (default)
+            2: Temperature and activity degree independent calculation, the max.
+               heatflowrate is prescribed by the parameter
+               fixed_heat_flow_rate_persons.
+            3: Temperature and activity degree dependent calculation with
+               consideration of moisture. The calculation is based on SIA 2024
         office_layout : int
             Structure of the floor plan of office buildings, default is 1,
             which is representative for one elongated floor.
@@ -354,19 +354,20 @@ internal_gains_mode: int [1, 2, 3]
 
         """
         ass_error_method = (
-            "only 'bmvbs' is a valid method for " "non-residential archetype generation"
+            "only 'bmvbs' and 'bmwi' are valid methods for " "non-residential archetype generation"
         )
 
-        assert method in ["bmvbs"], ass_error_method
+        assert method in ["bmvbs", 'bmwi'], ass_error_method
 
         ass_error_usage = (
             "only 'office', 'institute', 'institute4', "
-            "'institute8' are valid usages for archetype "
+            "'institute8', 'swimmingPool' are valid usages for archetype "
             "generation"
         )
 
         assert usage in [
             "office",
+            "swimmingPool",
             "institute",
             "institute4",
             "institute8",
@@ -391,6 +392,24 @@ internal_gains_mode: int [1, 2, 3]
                 office_layout,
                 window_layout,
                 construction_type,
+            )
+            
+        elif usage == "swimmingPool":
+                type_bldg = SwimmingPool(
+                self,
+                filePath,                
+                sheetNameAreas,                
+                swimmingPoolCategory,
+                name,
+                year_of_construction,
+                number_of_floors,
+                height_of_floors,
+                net_leased_area,
+                with_ahu,
+                internal_gains_mode,
+                office_layout,
+                window_layout,
+                construction_type                
             )
 
         elif usage == "institute":
@@ -440,8 +459,9 @@ internal_gains_mode: int [1, 2, 3]
                 window_layout,
                 construction_type,
             )
-
-        type_bldg.generate_archetype()
+            
+        type_bldg.generate_archetype(filePath=filePath, sheetNameAreas=sheetNameAreas,
+                                     sheetNameElements=sheetNameElements)
         type_bldg.calc_building_parameter(
             number_of_elements=self._number_of_elements_calc,
             merge_windows=self._merge_windows_calc,
@@ -510,17 +530,15 @@ internal_gains_mode: int [1, 2, 3]
             and
             assigned to attribute central_ahu. This instance holds information
             for central Air Handling units. Default is False.
-internal_gains_mode: int [1, 2, 3]
-        mode for the internal gains calculation done in AixLib:
-        1: Temperature and activity degree dependent heat flux calculation for persons. The
-           calculation is based on  SIA 2024 (default)
-        2: Temperature and activity degree independent heat flux calculation for persons, the max.
-           heatflowrate is prescribed by the parameter
-           fixed_heat_flow_rate_persons.
-        3: Temperature and activity degree dependent calculation with
-           consideration of moisture and co2. The moisture calculation is
-           based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
-           Engineering ToolBox (2004) and regards only persons.
+        internal_gains_mode: int [1, 2, 3]
+            mode for the internal gains calculation by persons:
+            1: Temperature and activity degree dependent calculation. The
+               calculation is based on  SIA 2024 (default)
+            2: Temperature and activity degree independent calculation, the max.
+               heatflowrate is prescribed by the parameter
+               fixed_heat_flow_rate_persons.
+            3: Temperature and activity degree dependent calculation with
+               consideration of moisture. The calculation is based on SIA 2024
         residential_layout : int
             Structure of floor plan (default = 0) CAUTION only used for iwu
                 0: compact
@@ -1168,26 +1186,6 @@ internal_gains_mode: int [1, 2, 3]
         self._number_of_elements_calc = 2
         self._merge_windows_calc = False
         self._used_library_calc = "AixLib"
-
-    @property
-    def weather_file_path(self):
-        return self._weather_file_path
-
-    @weather_file_path.setter
-    def weather_file_path(self, value):
-        if value is None:
-            self._weather_file_path = utilities.get_full_path(
-                os.path.join(
-                    "data",
-                    "input",
-                    "inputdata",
-                    "weatherdata",
-                    "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos",
-                )
-            )
-        else:
-            self._weather_file_path = os.path.normpath(value)
-            self.weather_file_name = os.path.split(self.weather_file_path)[1]
 
     @property
     def number_of_elements_calc(self):

@@ -36,8 +36,8 @@ class IBPSA(object):
         self.parent = parent
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
         self.version = {
-            "AixLib": "0.10.7",
-            "Buildings": "7.0.0",
+            "AixLib": "0.9.1",
+            "Buildings": "6.0.0",
             "BuildingSystems": "2.0.0-beta2",
             "IDEAS": "2.1.0",
         }
@@ -114,10 +114,11 @@ class IBPSA(object):
         self._delete_file(path=path)
         with open(path, "a") as f:
             f.write("#1\n")
-            # The size of the dataset is always 4 columns as each thermal zone has its own data file.
-            f.write("double Internals(8761, 4)\n")
-            # write the first row with t=0
-            f.write("0\t{}".format(export.iloc[:1, :].to_csv(sep="\t", header=False, index=False)))
+            f.write(
+                "double Internals({}, {})\n".format(
+                    8760, (len(self.parent.thermal_zones) * 3 + 1)
+                )
+            )
             export.to_csv(f, sep="\t", header=False, index_label=False)
 
     def _delete_file(self, path):

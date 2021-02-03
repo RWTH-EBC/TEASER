@@ -32,7 +32,6 @@ def example_export_ibpsa():
     # file by setting Project().weather_file_path. However we will use default
     # weather file.
 
-    prj.name = "ArchetypeExampleIBPSA"
     prj.used_library_calc = 'IBPSA'
     prj.number_of_elements_calc = 4
     prj.merge_windows_calc = False

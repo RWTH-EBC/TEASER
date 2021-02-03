@@ -2,6 +2,7 @@
 # by TEASER4 Development Team
 
 """This module includes the ThermalZone class
+Last modified 2020-09-25 for Project 'Energieeffizienz in Schwimmbädern - Neubau und Bestand'
 """
 from __future__ import division
 import random
@@ -11,6 +12,7 @@ from teaser.logic.buildingobjects.calculation.one_element import OneElement
 from teaser.logic.buildingobjects.calculation.two_element import TwoElement
 from teaser.logic.buildingobjects.calculation.three_element import ThreeElement
 from teaser.logic.buildingobjects.calculation.four_element import FourElement
+import teaser.data.input.ExcelToTeaser as bElement_excel_input
 
 
 class ThermalZone(object):
@@ -297,7 +299,9 @@ class ThermalZone(object):
                 pass
         return elements
 
-    def set_inner_wall_area(self):
+    def set_inner_wall_area(self, zoneId=None, isSwimmingPool=False, 
+                            filePath=None, sheetNameAreas=None, zoneAreas=None,
+                            numZones=None):
         """Sets the inner wall area according to zone area
 
         Sets the inner wall area according to zone area size if type building
@@ -308,25 +312,62 @@ class ThermalZone(object):
 
         assert self.parent is not None, ass_error_1
 
-        for floor in self.floors:
-            floor.area = (
-                (self.parent.number_of_floors - 1) /
-                self.parent.number_of_floors) * self.area
+        for floor in self.floors:   
+            if(isSwimmingPool):
+                inArea = bElement_excel_input.getInnerArea(zoneId=zoneId, 
+                                                           element=floor,
+                                                           filePath=filePath,
+                                                           sheetNameAreas=sheetNameAreas,
+                                                           zoneAreas=zoneAreas,
+                                                           numZones=numZones)
+                if(inArea == None):
+                    print("Cannot find area for", self.name, floor.name)
+                    print("Using algorithm instead.")
+                    floor.area = (
+                        (self.parent.number_of_floors - 1) /
+                        self.parent.number_of_floors) * self.area
+                else:
+                    floor.area = inArea
+            else:
+                floor.area = (
+                    (self.parent.number_of_floors - 1) /
+                    self.parent.number_of_floors) * self.area
+
+
         for ceiling in self.ceilings:
-            ceiling.area = (
-                (self.parent.number_of_floors - 1) /
-                self.parent.number_of_floors) * self.area
+            
+            if(isSwimmingPool):
+                inArea = bElement_excel_input.getInnerArea(zoneId=zoneId, 
+                                                           element=ceiling,
+                                                           filePath=filePath,
+                                                           sheetNameAreas=sheetNameAreas,
+                                                           zoneAreas=zoneAreas,
+                                                           numZones=numZones)
+                if(inArea == None):
+                    print("Cannot find area for", self.name, ceiling.name)
+                    print("Using algorithm instead.")
+                    ceiling.area = (
+                        (self.parent.number_of_floors - 1) /
+                        self.parent.number_of_floors) * self.area
+                else:
+                    ceiling.area = inArea
+            else:
+                ceiling.area = (
+                    (self.parent.number_of_floors - 1) /
+                    self.parent.number_of_floors) * self.area           
 
-        for wall in self.inner_walls:
-            typical_area = self.use_conditions.typical_length * \
-                self.use_conditions.typical_width
-
-            avg_room_nr = self.area / typical_area
-
-            wall.area = (avg_room_nr * (self.use_conditions.typical_length *
-                                        self.parent.height_of_floors +
-                                        2 * self.use_conditions.typical_width *
-                                        self.parent.height_of_floors))
+  
+        if zoneId < 8:
+            for wall in self.inner_walls:
+                typical_area = self.use_conditions.typical_length * \
+                    self.use_conditions.typical_width
+    
+                avg_room_nr = self.area / typical_area
+    
+                wall.area = (avg_room_nr * (self.use_conditions.typical_length *
+                                            self.parent.height_of_floors +
+                                            2 * self.use_conditions.typical_width *
+                                            self.parent.height_of_floors))
 
     def set_volume_zone(self):
         """Sets the zone volume according to area and height of floors

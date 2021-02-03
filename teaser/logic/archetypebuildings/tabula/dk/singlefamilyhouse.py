@@ -76,16 +76,14 @@ class SingleFamilyHouse(Residential):
         assigned to attribute central_ahu. This instance holds information for
         central Air Handling units. Default is False.
     internal_gains_mode: int [1, 2, 3]
-        mode for the internal gains calculation done in AixLib:
-        1: Temperature and activity degree dependent heat flux calculation for persons. The
+        mode for the internal gains calculation by persons:
+        1: Temperature and activity degree dependent calculation. The
            calculation is based on  SIA 2024 (default)
-        2: Temperature and activity degree independent heat flux calculation for persons, the max.
+        2: Temperature and activity degree independent calculation, the max.
            heatflowrate is prescribed by the parameter
            fixed_heat_flow_rate_persons.
         3: Temperature and activity degree dependent calculation with
-           consideration of moisture and co2. The moisture calculation is
-           based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
-           Engineering ToolBox (2004) and regards only persons.
+           consideration of moisture. The calculation is based on SIA 2024
     construction_type : str
         Construction type of used wall constructions default is "existing
         state"
@@ -348,7 +346,7 @@ class SingleFamilyHouse(Residential):
                     outer_wall.orientation = value[1]
                     outer_wall.area = (
                         self.facade_estimation_factors[self.building_age_group]["ow1"]
-                        * zone.area
+                        * type_bldg_area
                     ) / len(self._outer_wall_names_1)
 
         if self.facade_estimation_factors[self.building_age_group]["ow2"] != 0:
@@ -365,7 +363,7 @@ class SingleFamilyHouse(Residential):
                     outer_wall.orientation = value[1]
                     outer_wall.area = (
                         self.facade_estimation_factors[self.building_age_group]["ow2"]
-                        * zone.area
+                        * type_bldg_area
                     ) / len(self._outer_wall_names_2)
 
         if self.facade_estimation_factors[self.building_age_group]["win1"] != 0:
@@ -382,7 +380,7 @@ class SingleFamilyHouse(Residential):
                     window.orientation = value[1]
                     window.area = (
                         self.facade_estimation_factors[self.building_age_group]["win1"]
-                        * zone.area
+                        * type_bldg_area
                     ) / len(self.window_names_1)
 
         if self.facade_estimation_factors[self.building_age_group]["win2"] != 0:
@@ -399,7 +397,7 @@ class SingleFamilyHouse(Residential):
                     window.orientation = value[1]
                     window.area = (
                         self.facade_estimation_factors[self.building_age_group]["win2"]
-                        * zone.area
+                        * type_bldg_area
                     ) / len(self.window_names_2)
 
         if self.facade_estimation_factors[self.building_age_group]["gf1"] != 0:
@@ -417,7 +415,7 @@ class SingleFamilyHouse(Residential):
                     gf.orientation = value[1]
                     gf.area = (
                         self.facade_estimation_factors[self.building_age_group]["gf1"]
-                        * zone.area
+                        * type_bldg_area
                     ) / len(self.ground_floor_names_1)
 
         if self.facade_estimation_factors[self.building_age_group]["gf2"] != 0:
@@ -435,7 +433,7 @@ class SingleFamilyHouse(Residential):
                     gf.orientation = value[1]
                     gf.area = (
                         self.facade_estimation_factors[self.building_age_group]["gf2"]
-                        * zone.area
+                        * type_bldg_area
                     ) / len(self.ground_floor_names_2)
 
         if self.facade_estimation_factors[self.building_age_group]["rt1"] != 0:
@@ -453,7 +451,7 @@ class SingleFamilyHouse(Residential):
                     rt.orientation = value[1]
                     rt.area = (
                         self.facade_estimation_factors[self.building_age_group]["rt1"]
-                        * zone.area
+                        * type_bldg_area
                     ) / len(self.roof_names_1)
 
         if self.facade_estimation_factors[self.building_age_group]["rt2"] != 0:
@@ -471,7 +469,7 @@ class SingleFamilyHouse(Residential):
                     rt.orientation = value[1]
                     rt.area = (
                         self.facade_estimation_factors[self.building_age_group]["rt2"]
-                        * zone.area
+                        * type_bldg_area
                     ) / len(self.roof_names_2)
 
         if self.facade_estimation_factors[self.building_age_group]["door"] != 0:
@@ -489,7 +487,7 @@ class SingleFamilyHouse(Residential):
                     door.orientation = value[1]
                     door.area = (
                         self.facade_estimation_factors[self.building_age_group]["door"]
-                        * zone.area
+                        * type_bldg_area
                     ) / len(self.door_names)
 
         for key, value in self.inner_wall_names.items():

@@ -7020,7 +7020,7 @@
     },
     "6cb62e70-3a43-11e7-a790-2cd444b2e704": {
         "name": "air",
-        "density": 1.184,
+        "density": 1184.0,
         "thermal_conduc": 0.0261,
         "heat_capac": 1.005,
         "thickness_default": 0.02,
@@ -7253,7 +7253,7 @@
     },
     "b362502c-3f99-11e7-b117-2cd444b2e704": {
         "name": "air_layer",
-        "density": 1.184,
+        "density": 1184.0,
         "thermal_conduc": 0.35,
         "heat_capac": 1.005,
         "thickness_default": 0.04,
@@ -7401,7 +7401,7 @@
     },
     "87e8a070-cc6c-11e8-8dd8-08002700bc00": {
         "name": "Air_layer_DK",
-        "density": 1.184,
+        "density": 1184.0,
         "thermal_conduc": 0.35,
         "heat_capac": 1.005,
         "thickness_default": 0.0,
@@ -7410,7 +7410,7 @@
     },
     "94454f92-cc6c-11e8-bbca-08002700bc00": {
         "name": "Air_layer_poor_DK",
-        "density": 1.184,
+        "density": 1184.0,
         "thermal_conduc": 0.7,
         "heat_capac": 1.005,
         "thickness_default": 0.0,

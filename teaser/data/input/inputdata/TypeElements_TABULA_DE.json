@@ -7964,8 +7964,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.5617090909090908,
@@ -7988,8 +7988,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.5617090909090908,
@@ -8012,8 +8012,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.9565142857142858,
@@ -8036,8 +8036,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -8060,8 +8060,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.5617090909090908,
@@ -8084,8 +8084,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.5617090909090908,
@@ -8108,8 +8108,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -8132,8 +8132,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.5617090909090908,
@@ -8156,8 +8156,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.5617090909090908,
@@ -8180,8 +8180,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.6308,
@@ -8204,8 +8204,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.9565142857142858,
@@ -8228,8 +8228,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.6308,
@@ -8252,8 +8252,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.5617090909090908,
@@ -8276,8 +8276,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.5617090909090908,
@@ -8300,8 +8300,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.9565142857142858,
@@ -8324,8 +8324,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.14222857142857143,
@@ -8348,8 +8348,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.3458,
@@ -8372,8 +8372,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -8396,8 +8396,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.14222857142857143,
@@ -8420,8 +8420,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.3458,
@@ -8444,8 +8444,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -8468,8 +8468,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.14222857142857143,
@@ -8492,8 +8492,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.3458,
@@ -8516,8 +8516,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -8540,8 +8540,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.15228148148148146,
@@ -8564,8 +8564,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.3458,
@@ -8588,8 +8588,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -8612,8 +8612,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.15228148148148146,
@@ -8636,8 +8636,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.3458,
@@ -8660,8 +8660,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -8684,8 +8684,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.14222857142857143,
@@ -8708,8 +8708,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.3458,
@@ -8732,8 +8732,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -8756,8 +8756,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.14222857142857143,
@@ -8780,8 +8780,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -8804,8 +8804,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -8828,8 +8828,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.14222857142857143,
@@ -8852,8 +8852,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -8876,8 +8876,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -8900,8 +8900,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.12413333333333332,
@@ -8924,8 +8924,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -8948,8 +8948,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -8972,8 +8972,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.12413333333333332,
@@ -8996,8 +8996,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -9020,8 +9020,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -9044,8 +9044,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.14222857142857143,
@@ -9068,8 +9068,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -9092,8 +9092,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -9116,8 +9116,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.14222857142857143,
@@ -9140,8 +9140,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -9164,8 +9164,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -9188,8 +9188,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.12413333333333332,
@@ -9212,8 +9212,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -9236,8 +9236,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -9260,8 +9260,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.12413333333333332,
@@ -9284,8 +9284,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -9308,8 +9308,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -9332,8 +9332,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.14222857142857143,
@@ -9356,8 +9356,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -9380,8 +9380,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -9404,8 +9404,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.14222857142857143,
@@ -9428,8 +9428,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -9452,8 +9452,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -9476,8 +9476,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.12413333333333332,
@@ -9500,8 +9500,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -9524,8 +9524,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -9548,8 +9548,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.12413333333333332,
@@ -9572,8 +9572,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -9596,8 +9596,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -9620,8 +9620,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.14222857142857143,
@@ -9644,8 +9644,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -9668,8 +9668,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -9692,8 +9692,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.14222857142857143,
@@ -9716,8 +9716,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -9740,8 +9740,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -9764,8 +9764,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.12413333333333332,
@@ -9788,8 +9788,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -9812,8 +9812,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -9836,8 +9836,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.12413333333333332,
@@ -9860,8 +9860,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -9884,8 +9884,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -9908,8 +9908,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.047544186046511616,
@@ -9932,8 +9932,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -9956,8 +9956,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -9980,8 +9980,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.14222857142857143,
@@ -10004,8 +10004,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -10028,8 +10028,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -10052,8 +10052,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.12413333333333332,
@@ -10076,8 +10076,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -10100,8 +10100,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -10124,8 +10124,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.1083,
@@ -10148,8 +10148,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -10172,8 +10172,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -10196,8 +10196,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.14222857142857143,
@@ -10220,8 +10220,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -10244,8 +10244,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -10268,8 +10268,8 @@
         "outer_convection": 20.0,
         "g_value": 0.75,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.12413333333333332,
@@ -10292,8 +10292,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -10316,8 +10316,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -10340,8 +10340,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.27079999999999993,
@@ -10364,8 +10364,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -10388,8 +10388,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -10412,8 +10412,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.3458,
@@ -10436,8 +10436,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -10460,8 +10460,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -10484,8 +10484,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.27079999999999993,
@@ -10508,8 +10508,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -10532,8 +10532,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -10556,8 +10556,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.41365714285714283,
@@ -10580,8 +10580,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -10604,8 +10604,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -10628,8 +10628,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -10652,8 +10652,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -10676,8 +10676,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -10700,8 +10700,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.41365714285714283,
@@ -10724,8 +10724,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -10748,8 +10748,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.8208000000000001,
@@ -10772,8 +10772,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -10796,8 +10796,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -10820,8 +10820,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.9565142857142858,
@@ -10844,8 +10844,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -10868,8 +10868,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -10892,8 +10892,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.9565142857142858,
@@ -10916,8 +10916,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.45541538461538456,
@@ -10940,8 +10940,8 @@
         "outer_convection": 20.0,
         "g_value": 0.6,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.9565142857142858,
@@ -10964,8 +10964,8 @@
         "outer_convection": 20.0,
         "g_value": 0.5,
         "a_conv": 0.02,
-        "shading_g_total": 1.0,
-        "shading_max_irr": 100.0,
+        "shading_g_total": 0.0,
+        "shading_max_irr": 0.0,
         "layer": {
             "0": {
                 "thickness": 0.9565142857142858,
