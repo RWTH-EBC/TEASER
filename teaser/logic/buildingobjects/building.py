@@ -187,8 +187,10 @@ class Building(object):
         """
         zoneId=0
         for idx, zone in enumerate(self.thermal_zones): 
-            while zoneId < len(zoneAreas) and zoneAreas[zoneId]==0:                   
-                zoneId+=1
+
+            if isSwimmingPool:
+                while zoneId < len(zoneAreas) and zoneAreas[zoneId]==0:                   
+                    zoneId+=1
 
             for wall in zone.outer_walls:
                 if wall.orientation == orientation:
@@ -214,18 +216,20 @@ class Building(object):
                             count.orientation == orientation for count in zone.ground_floors
                         )     
 
-            if zoneId < len(zoneAreas):                
-                for roof in zone.rooftops:
-                    if roof.orientation == orientation:
-                        if isSwimmingPool:                               
+            for roof in zone.rooftops:
+                if roof.orientation == orientation:
+                    if isSwimmingPool:    
+                        if "becken" in zone.name:
+                            continue
+                        else:                           
                             inArea = bElement_excel_input.getArea(zoneId, roof, orientation, 
-                                                                  filePath, sheetNameAreas,
-                                                                  numZones)
+                                                                    filePath, sheetNameAreas,
+                                                                    numZones)
                             roof.area = inArea
-                        else:
-                            roof.area = ((new_area / self.net_leased_area) * zone.area) / sum(
-                                count.orientation == orientation for count in zone.rooftops
-                            )
+                    else:
+                        roof.area = ((new_area / self.net_leased_area) * zone.area) / sum(
+                            count.orientation == orientation for count in zone.rooftops
+                        )
 
             for door in zone.doors:
                 if door.orientation == orientation:
@@ -251,8 +255,10 @@ class Building(object):
         """
         zoneId=0
         for idx, zone in enumerate(self.thermal_zones): 
-            while zoneId < len(zoneAreas) and zoneAreas[zoneId]==0:                   
-                zoneId+=1
+
+            if isSwimmingPool:
+                while zoneId < len(zoneAreas) and zoneAreas[zoneId]==0:                   
+                    zoneId+=1
 
             for win in zone.windows:
                 if win.orientation == orientation:

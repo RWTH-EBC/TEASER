@@ -355,18 +355,29 @@ class ThermalZone(object):
                     (self.parent.number_of_floors - 1) /
                     self.parent.number_of_floors) * self.area
 
+        if isSwimmingPool:
+            if zoneId < 8:
+                for wall in self.inner_walls:
+                    typical_area = self.use_conditions.typical_length * \
+                        self.use_conditions.typical_width
 
-        if zoneId < 8:
+                    avg_room_nr = self.area / typical_area
+
+                    wall.area = (avg_room_nr * (self.use_conditions.typical_length *
+                                                self.parent.height_of_floors +
+                                                2 * self.use_conditions.typical_width *
+                                                self.parent.height_of_floors))
+        else:
             for wall in self.inner_walls:
-                typical_area = self.use_conditions.typical_length * \
-                    self.use_conditions.typical_width
+                    typical_area = self.use_conditions.typical_length * \
+                        self.use_conditions.typical_width
 
-                avg_room_nr = self.area / typical_area
+                    avg_room_nr = self.area / typical_area
 
-                wall.area = (avg_room_nr * (self.use_conditions.typical_length *
-                                            self.parent.height_of_floors +
-                                            2 * self.use_conditions.typical_width *
-                                            self.parent.height_of_floors))
+                    wall.area = (avg_room_nr * (self.use_conditions.typical_length *
+                                                self.parent.height_of_floors +
+                                                2 * self.use_conditions.typical_width *
+                                                self.parent.height_of_floors))
 
     def set_volume_zone(self):
         """Sets the zone volume according to area and height of floors
