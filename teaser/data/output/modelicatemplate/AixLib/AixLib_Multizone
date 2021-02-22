@@ -46,10 +46,9 @@ model ${bldg.name}
   dpAHU_sup=800,
   dpAHU_eta=800,
 % endif
-  zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
-           intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
-           (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
-           der_T(fixed=true))))),
+  zone(ROM(extWallRC(thermCapExt),
+           intWallRC(thermCapIn),floorRC
+           (thermCapExt),roofRC(thermCapExt))),
    redeclare model thermalZone =
         AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped,
    redeclare model corG =
