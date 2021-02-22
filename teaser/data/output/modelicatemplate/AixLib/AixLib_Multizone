@@ -47,7 +47,7 @@ model ${bldg.name}
   dpAHU_eta=800,
 % endif
   zone(ROM(extWallRC(thermCapExt),
-           intWallRC(thermCapIn),floorRC
+           intWallRC(thermCapInt),floorRC
            (thermCapExt),roofRC(thermCapExt))),
    redeclare model thermalZone =
         AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped,
