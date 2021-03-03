@@ -708,7 +708,7 @@ class SwimmingPool(NonResidential):
         """
         The following code can be used to check the building element
         areas.       
-        """        
+                
         
         for zone in self.thermal_zones:
             print()
@@ -727,7 +727,7 @@ class SwimmingPool(NonResidential):
                 print("Rooftop with name", roof.name, "and element area", roof.area)
             for wall in zone.inner_walls:   
                 print("Inner wall with name", wall.name, "and element area", wall.area)
-        
+        """
 
     @property
     def office_layout(self):

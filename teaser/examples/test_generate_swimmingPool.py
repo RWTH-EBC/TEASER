@@ -41,7 +41,7 @@ def test_generate_swimmingPool():
     Please specify the following data.
     """
     
-    filePath='C:/GitRepos/TEASER/teaser/examples/2020-11-16_Hüllflächen_Zonen_Shells_of_Zones_tsc.xlsx'
+    filePath=os.path.join(os.path.dirname(__file__),"2020-11-16_Hüllflächen_Zonen_Shells_of_Zones_tsc.xlsx")
     sheetNameAreas='Hüllflächen, Himmelsricht.'
     sheetNameElements='Strukturen Hüllfläche-Bürodaten'
     swimmingPoolCategory='A2'
@@ -70,6 +70,9 @@ def test_generate_swimmingPool():
     print()
     print("Archetype(s) of indoor pool(s) successfully generated!")
     print()
+    print("Excel File was read out from: ")
+    print(filePath)
+    print()
 
     prj.used_library_calc = 'AixLib'
     prj.number_of_elements_calc = 2
@@ -96,7 +99,7 @@ def test_generate_swimmingPool():
 
     path = prj.export_aixlib(
         internal_id=None,
-        path='C:/')
+        path=None)
 
     return path
 
@@ -105,4 +108,4 @@ def test_generate_swimmingPool():
 if __name__ == '__main__':
     prj = test_generate_swimmingPool()
 
-    print("Done!")
+    print("Test SwimmingPool: That's it! :)")
