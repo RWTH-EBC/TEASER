@@ -42,74 +42,96 @@ def load_type_element(element, year, construction, data_class, filePath, sheetNa
                  
     """
 
-    #Loading the excel sheet
-    wb = xlrd.open_workbook(filePath);
-    sheet = wb.sheet_by_name(sheetNameElements);
-    
-    #Parameter to specify success of searching procedure. 
-    found=False
-    
-    col1=getCol("building age", filePath, sheetNameElements)
-    col2=col1+1
-    startRow=getRow("OuterWall", filePath, sheetNameElements)
-    
-    for i in range(startRow, sheet.nrows):
-        ageMin=sheet.cell_value(i, col1)
-        ageMax=sheet.cell_value(i, col2)
-        #Comparison of building age and element type with table entries to identify suitable data.
-        if (
-            ageMin != ""
-            and ageMin <= float(year) <= ageMax
-            and sheet.cell_value(i,0).startswith(type(element).__name__)
-        ):
-            found=True            
+
+# Loads the Material Data from Excel when the function is called the first time
+    if (len(data_class.swimmingpool_bind) == 0):
+        Data = dict()
+
+        #Loading the excel sheet
+        wb = xlrd.open_workbook(filePath);
+        sheet = wb.sheet_by_name(sheetNameElements);
+
+        #Get Column and Row to start
+        startCol=getCol("name", filePath, sheetNameElements)
+        nameRow=getRow("name", filePath, sheetNameElements)
+        startRow=getRow("OuterWall", filePath, sheetNameElements)
+
+        #Read out excel for each type of element
+        for i in range(startRow, sheet.nrows):
+            if (sheet.cell_value(i,0)==""):
+                continue
             
-            # print("Wähle Bauteil", type(element).__name__)
-            #Saving element data in respective element class
-            _set_basic_data(element, inSheet=sheet, inRow=i)
-            
+            element_type = sheet.cell_value(i,0)
+            Data[str(element_type)] = dict()
             #Counting material layers           
             numLayers=1   
             while (i+numLayers < sheet.nrows and sheet.cell_value(i + numLayers, 0)==""):
                 numLayers+=1
-            
-            #Loading material data. Material will be ignored if ID is missing. 
-            #Thickness will be set to 0.01 m if data is missing in Excel table.
-            colMaterialId=getCol("material id", filePath, sheetNameElements)
-            #In actual version of table there are two thicknesses given. Reading from [cm].
-            colThickness=getCol("thickness", filePath, sheetNameElements)+1
+            #Read out excel for each layer
             for k in range(numLayers):
-                if sheet.cell_value(i + k, colMaterialId) != "":
-                    layer = Layer(element)
-                    layer.id = k
+                Data[element_type][k] = dict()
+                for l in range(12):
+                    name = sheet.cell_value(1, startCol + 1 + l)
+                    value = sheet.cell_value(i + k, startCol + 1 + l)
+                    Data[element_type][k][str(name)] = value
                     
-                    if sheet.cell_value(i + k, colThickness) == "" :
-                        # print("Missing thickness for layer", k, "of", sheet.cell_value(i, 0))
-                        # print("Thickness set to 0.01")
-                        # print()
-                        layer.thickness = 0.01
-                    else:
-                        layer.thickness = sheet.cell_value(i + k, colThickness)/100
-                    
-                    material = Material(layer)
-                    mat_input.load_material_id(material, sheet.cell_value(i + k, colMaterialId), data_class)
-                    #print("For Element", type(element).__name__, "chosen structure", sheet.cell_value(i,0),
-                          #"layer", layer.id, "thickness", layer.thickness)
+        data_class.swimmingpool_bind = Data
+        
+
+
+    #Loading material data. 
+    #If thickness, Material ID and thermal cunduct is missing in excel at the first layer, layer will be created with default Teaser method. 
+    #If thickness, Material ID and thermal cunduct is missing in excel at some row no layer will be created.
+    #If Thickness data is missing in Excel table it will be set to 0.01 m.
+    #If Material ID is missing in Excel table, Excel Information will be set to layer.
+    Data = data_class.swimmingpool_bind
+    _set_basic_data(element)
+    # Read out PoolMaterial for Pool elements
+    if "Pool" in element.name:
+        element_type = "PoolMaterial"
+    else:
+        element_type = (type(element).__name__)
     
-    #The application will be aborted if no element data was found. 
-    #This would lead to calculation errors and a crash of the application.
-    if not (found):
-        print("Error: No element data found for", type(element).__name__)
-        print("Please check the Excel File, maybe the bulding age is missing",
-              "or the keyword in method getKeyword is wrong")
-        sys.exit("Program aborted")
+    # If there is no PoolMaterial Data in Excel the Data from Ground Floor from Excel should be read out. 
+    # However there is no Data for Ground Floor the default Teaser method will be used.
+    if Data[element_type][0]['thickness'] == "" and Data[element_type][0]['material_id'] == "" and Data[element_type][0]['thermal_conductivity'] == "" and element_type == "PoolMaterial":
+        element_type = "GroundFloor"
+
+    if Data[element_type][0]['thickness'] == "" and Data[element_type][0]['material_id'] == "" and Data[element_type][0]['thermal_conductivity'] == "":
+        element.load_type_element(
+            year=year,
+            construction=construction,
+            data_class=data_class,
+            isSwimmingPool=False, 
+            filePath=filePath, 
+            sheetNameElements=sheetNameElements)
+
+    # Read out Excel Data end Material Data when there is Data in Excel
+    for k in Data[element_type]:   
+        if Data[element_type][k]['thickness'] == "" and Data[element_type][k]['material_id'] == "" and Data[element_type][k]['thermal_conductivity'] == "":
+            continue
+
+        layer = Layer(element)
+        layer.id = k
+
+        if Data[element_type][k]['thickness'] == "":
+            layer.thickness = 0.01
+        else:
+            layer.thickness = Data[element_type][k]['thickness']/100
+
+        if Data[element_type][k]['material_id'] == "":
+            layer.thickness = Data[element_type][k]['thickness']/100
+            layer.thermal_conduc = Data[element_type][k]['thermal_conductivity']
+            layer.density = Data[element_type][k]['density']
+            layer.heat_capac = Data[element_type][k]['heat_capacity']
+            continue
+
+        material = Material(layer)
+        mat_input.load_material_id(material, Data[element_type][k]['material_id'], data_class)
 
 
 
-                    
-   
-
-def _set_basic_data(element, inSheet, inRow):
+def _set_basic_data(element):
     """Set basic data for building elements.
 
     Helper function to set basic data.
@@ -126,10 +148,10 @@ def _set_basic_data(element, inSheet, inRow):
     """
     
     #Setting radiation and convection according to json-database from teaser.    
-    element.building_age_group = [inSheet.cell_value(inRow, 1), inSheet.cell_value(inRow, 2)]
+    #element.building_age_group = [inSheet.cell_value(inRow, 1), inSheet.cell_value(inRow, 2)]
     element.construction_type = "heavy"
     element.inner_radiation = 5.0
-    element.inner_convection = 2.7
+    element.inner_convection = 1.7
 
     #According to the Teaser-database, the element types OuterWall and Door 
     #share the same radiation and convection.
@@ -137,6 +159,7 @@ def _set_basic_data(element, inSheet, inRow):
     if (
         type(element).__name__ == "OuterWall"
         or type(element).__name__ == "Door"
+        or type(element).__name__ == "Window"
     ):
 
         element.inner_radiation = 5.0
@@ -157,7 +180,14 @@ def _set_basic_data(element, inSheet, inRow):
         element.inner_radiation = 5.0
         element.inner_convection = 1.7000000000000002
 
+    # Different Values for Elements in Zones which are Pools
+    if ("Pool" in element.name):
+        element.outer_radiation = None
+        element.outer_convection = None
+        element.inner_radiation = 10
+        element.inner_convection = 10
   
+
     #To be changed if different window data should be used. 
     #Replacing element_in[] with inSheet.cell_value(inRow, COLUMN OF WINDOWS)
     
@@ -217,7 +247,7 @@ def getArea(zoneId, element, orientation, filePath, sheetNameAreas, numZones):
     #the table are applied, please make sure to adjust the keywords.
     if (zoneId<8 and element.name=="GroundFloor"): 
         row1 = getRow("Total area of zone", filePath, sheetNameAreas)
-        row2 = getRow("Traffic and common area", filePath, sheetNameAreas) 
+        row2 = getRow("Ground", filePath, sheetNameAreas) 
         col = startCol + 2*zoneId + 1        
 
         if (sheet.cell_value(row1, col)==""):
@@ -247,11 +277,10 @@ def getArea(zoneId, element, orientation, filePath, sheetNameAreas, numZones):
         
     elif (zoneId>=8 and element.name=="PoolFloorWithEarthContact"):
         area = data['Pool floor with earth contact']
-        if (element.name=="PoolFloorWithEarthContact"):
-            if (area == "" or area == 0):
-                return float(0.001)
-            else:
-                return area
+        if (area == "" or area == 0):
+            return float(0.001)
+        else:
+            return area
     
     #OuterWalls for pools based on 'Koordinierungskreis Bäder (KOK) -
     #Richtlinien für den Bäderbau 2013'
@@ -259,6 +288,12 @@ def getArea(zoneId, element, orientation, filePath, sheetNameAreas, numZones):
         return float(0.001)
     
     elif (zoneId>=8 and type(element).__name__=="OuterWall"):
+                area = data['Pool wall with earth contact']
+        if (area == "" or area == 0):
+            return float(0.001)
+        else:
+            return area
+        """
         area1 = data['Water surface']
         area2 = data['Water volume']
         height = area2 / area1
@@ -275,6 +310,7 @@ def getArea(zoneId, element, orientation, filePath, sheetNameAreas, numZones):
             return (width*height)
         else:
             return (length*height)
+        """
             
     else:  
         keyword = getKeyword(type(element).__name__, filePath, sheetNameAreas)
@@ -333,7 +369,7 @@ def getInnerArea(zoneId, element, filePath, sheetNameAreas, zoneAreas, numZones)
     # Gets Data from the Pools
     data = getPoolDataInDict(zoneId, filePath, sheetNameAreas)
 
-
+    """
     if(element.parent.name == "Technikraum"):
      
         if(element.name.startswith("CeilingUnderPoolArea")):
@@ -347,33 +383,54 @@ def getInnerArea(zoneId, element, filePath, sheetNameAreas, zoneAreas, numZones)
                 
                 
         elif(element.name.startswith("CeilingUnderTrafficAndCommonAreas")):
-            row = getRow("Traffic and common", filePath, sheetNameAreas)
+            row = getRow("Ceiling", filePath, sheetNameAreas)
             col = getCol("Zone 4", filePath, sheetNameAreas)+1
             if (sheet.cell_value(row, col)=="" or sheet.cell_value(row, col)==0.0):
                 return float(0.0)
             else:
                 return sheet.cell_value(row, col)
-    
+    """
     #Keywords to find the respective element in the Excel table. If changes to
     #the table are applied, please make sure to adjust the keywords.
     #Consider that the methods getCol and getRow only work without line breaks
-    elif (element.name.startswith("PoolAreaAboveTechnicalRoom")):
-        area1 = data['Water surface']
-        area2 = data['Pool floor with earth contact']
-        
-        if (area1 - area2 == 0):
+    if (element.name.startswith("PoolAreaAboveTechnicalRoom")):
+        area = data['Pool floor without earth contact']
+        if area == 0:
             return float(0.001)
         else:
-            return (area1 - area2)
+            return area
         
-    elif (element.name.startswith("TrafficAndCommonAreasAboveTechnicalRoom")):
-        row = getRow("Traffic and common", filePath, sheetNameAreas) 
+    elif (element.name.startswith("InnerPoolWall")):
+        area = data['Pool wall without earth contact']
+        if (area == 0):
+            return float(0.001)
+        else:
+            return area
+        
+    elif (element.name.startswith("Ceiling")):
+        row = getRow("Ceiling", filePath, sheetNameAreas) 
         col = startCol + 2*zoneId + 1
         if (sheet.cell_value(row, col) == 0):
             return float(0.001)
         else:
             return sheet.cell_value(row, col) 
-        
+
+    elif (element.name.startswith("Floor")):
+        row = getRow("Floor", filePath, sheetNameAreas) 
+        col = startCol + 2*zoneId + 1
+        if (sheet.cell_value(row, col) == 0):
+            return float(0.001)
+        else:
+            return sheet.cell_value(row, col) 
+    
+    elif (element.name.startswith("InnerWall")):
+        row = getRow("Inner wall", filePath, sheetNameAreas) 
+        col = startCol + 2*zoneId + 1
+        if (sheet.cell_value(row, col) == 0):
+            return float(0.001)
+        else:
+            return sheet.cell_value(row, col) 
+    """
     elif (element.name.startswith("UpperZoneLimitationOfPool")
           or element.name.startswith("ContactAreaToWaterSurface")):
         
@@ -392,6 +449,7 @@ def getInnerArea(zoneId, element, filePath, sheetNameAreas, zoneAreas, numZones)
             return float(0.001)
         else:
             return area
+    """
 
     
 
@@ -579,7 +637,7 @@ def getPoolData(filePath, sheetNameAreas):
         startRow = 2
         pools[col].append(sheet.cell_value(startRow, startCol))
         startRow = 4
-        for n in range(0,4):
+        for n in range(0,5):
             pools[col].append(sheet.cell_value(startRow, startCol))
             startRow+=1
         startCol+=1
@@ -612,23 +670,23 @@ def getPoolDataInDict(ZoneId, filePath, sheetNameAreas):
         if ZoneId < 8:
             return 0.0
     if ZoneId == 8:
-        PoolName = "SB"
+        PoolName = "Schwimmerbecken"
     elif ZoneId == 9:
-        PoolName = "MZB"
+        PoolName = "Mehrzweckbecken"
     elif ZoneId == 10:
-        PoolName = "KB"
+        PoolName = "Kleinkinderbecken"
     elif ZoneId == 11:
-        PoolName = "NSB"
+        PoolName = "Nichtschwimmerbecken"
     elif ZoneId == 12:
-        PoolName = "SPB"
+        PoolName = "Springerbecken"
     elif ZoneId == 13:
-        PoolName = "FB1"
+        PoolName = "Freiformbecken1"
     elif ZoneId == 14:
-        PoolName = "FB2"
+        PoolName = "Freiformbecken2"
     elif ZoneId == 15:
-        PoolName = "FB3"
+        PoolName = "Freiformbecken3"
     elif ZoneId == 16:
-        PoolName = "FB4"
+        PoolName = "Freiformbecken4"
     elif ZoneId == "SUM":
         PoolName = "SUM"
         
@@ -636,7 +694,7 @@ def getPoolDataInDict(ZoneId, filePath, sheetNameAreas):
     sheet = wb.sheet_by_name(sheetNameAreas)    
     numPools=countPools(filePath, sheetNameAreas)
     startCol = getCol("SUM", filePath, sheetNameAreas)
-    startRow = 2
+    startRow = 3
     
     additionalInfo = dict()
     
@@ -644,11 +702,14 @@ def getPoolDataInDict(ZoneId, filePath, sheetNameAreas):
         pool = sheet.cell_value(startRow, startCol + pools)
         additionalInfo[str(pool)] = dict()
         
-        for data in range(4):
-            colName = sheet.cell_value(startRow + 2 + data, startCol - 2)
-            additionalInfo[pool][str(colName)] = sheet.cell_value(startRow + 2 + data, startCol + pools)
-            
-    return additionalInfo[PoolName]
+        for data in range(22):
+            colName = sheet.cell_value(startRow + 1 + data, startCol - 2)
+            additionalInfo[pool][str(colName)] = sheet.cell_value(startRow + 1 + data, startCol + pools)
+    
+    if ZoneId == "ALL":
+        return additionalInfo
+    else:
+        return additionalInfo[PoolName]
         
    
 
@@ -737,14 +798,3 @@ def getKeyword(inKey, filePath, sheetName):
         print("Keyword for Key", inKey, "not found in", sheetName, "of Excel file",
               filePath)
         return inKey
- 
-"""
-ZoneId = 16
-filePath='C:/Users/schmi/.conda/envs/py37/lib/site-packages/teaser/examples/2020-11-16_Hüllflächen_Zonen_Shells_of_Zones_tsc.xlsx'
-sheetNameAreas='Hüllflächen, Himmelsricht.'
-Test = getPoolDataInDict(ZoneId ,filePath, sheetNameAreas)
-Number = countPools(filePath, sheetNameAreas)
-Volumes = getZoneVolume(filePath, sheetNameAreas)
-
-print(Volumes)
-"""

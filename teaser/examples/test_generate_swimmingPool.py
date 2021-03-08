@@ -41,9 +41,9 @@ def test_generate_swimmingPool():
     Please specify the following data.
     """
     
-    filePath=os.path.join(os.path.dirname(__file__),"2020-11-16_Hüllflächen_Zonen_Shells_of_Zones_tsc.xlsx")
+    filePath=os.path.join(os.path.dirname(__file__),"2021-03-06_Hüllflächen_Zonen_Shells_of_Zones.xlsx")
     sheetNameAreas='Hüllflächen, Himmelsricht.'
-    sheetNameElements='Strukturen Hüllfläche-Bürodaten'
+    sheetNameElements='Strukturen Hüllfläche'
     swimmingPoolCategory='A2'
 
     prj.add_non_residential(

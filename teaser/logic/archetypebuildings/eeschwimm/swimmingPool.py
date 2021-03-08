@@ -188,6 +188,7 @@ class SwimmingPool(NonResidential):
         self.zoneAreas=excel_input.getZoneArea(filePath, sheetNameAreas)
         self.zoneVolumes=excel_input.getZoneVolume(filePath, sheetNameAreas)
         self.pools=excel_input.getPoolData(filePath, sheetNameAreas)
+        self.poolsInDict=excel_input.getPoolDataInDict("ALL", filePath, sheetNameAreas)
         self.numZones=0
         for value in self.zoneAreas:
             if value>0:
@@ -221,7 +222,7 @@ class SwimmingPool(NonResidential):
                                                      "Stock, technical equipment, archives"]
         for pool in self.pools:            
             self.zone_area_factors[excel_input.getKeyword(pool[0], filePath, 
-                                          sheetNameAreas)] = [pool[1], pool[3],
+                                          sheetNameAreas)] = [pool[1], pool[4],
                                           "Gym (without spectator area)"]
             
         for key, value in self.zone_area_factors.items():
@@ -238,7 +239,7 @@ class SwimmingPool(NonResidential):
             "Exterior Facade East": [90, 90],
             "Exterior Facade South": [90, 180],
             "Exterior Facade West": [90, 270],
-        }
+            "PoolWall":[90, 0]}
 
         self.roof_names = {"Rooftop": [0, -1]}
         
@@ -246,9 +247,8 @@ class SwimmingPool(NonResidential):
         # The heat transmission varies because of the water.
          
         self.ground_floor_names = {
-            "Floor Without Earth Contact": [0, -2],
-            "Pool Floor With Earth Contact": [0, -2]
-            }
+             "Floor With Earth Contact": [0, -2],
+            "Pool Floor With Earth Contact": [0, -2]}
 
         self.window_names = {
             "Window Facade North": [90, 0],
@@ -257,7 +257,8 @@ class SwimmingPool(NonResidential):
             "Window Facade West": [90, 270],
         }
 
-        self.inner_wall_names = {"InnerWall": [90, 0]}
+        self.inner_wall_names = {"InnerWall": [90, 0],
+                                 "InnerPoolWall":[90, 0]}
 
         # Contact area to water surface is used for the zone 'Schwimmhalle' and
         # indicates the contact area to pools. 
@@ -265,15 +266,15 @@ class SwimmingPool(NonResidential):
         # for the pool zones.
         
         self.floor_names = {"Floor": [0, -2],
-                            "Pool Area Above Technical Room": [0, -2],
-                            "Traffic And Common Areas Above Technical Room": [0, -2],
-                            "Contact Area To Water Surface": [0, -2]}
+                            "Pool Area Above Technical Room": [0, -2]}
+                            #"Traffic And Common Areas Above Technical Room": [0, -2],
+                            #"Contact Area To Water Surface": [0, -2]}
         
         #"Ceiling under pool" has the same area as "Water area above technical room"
-        self.ceiling_names = {"Ceiling": [0, -1],
-                              "Ceiling Under Pool Area": [0, -1],
-                              "Ceiling Under Traffic And Common Areas": [0, -1],
-                              "Upper Zone Limitation Of Pool": [0, -1]}
+        self.ceiling_names = {"Ceiling": [0, -1]}
+                              #"Ceiling Under Pool Area": [0, -1],
+                              #"Ceiling Under Traffic And Common Areas": [0, -1],
+                              #"Upper Zone Limitation Of Pool": [0, -1]}
 
 
 
@@ -356,6 +357,8 @@ class SwimmingPool(NonResidential):
         """
         print("Generating archetype. Please wait...")
         print()
+        # Creates binding for Material data of swimming pools
+        self.parent.data.swimmingpool_bind = dict()
         # help area for the correct building area setting while using typeBldgs
         self.thermal_zones = None
         type_bldg_area = self.net_leased_area
@@ -366,9 +369,12 @@ class SwimmingPool(NonResidential):
             zone.area = value[0] 
             zone.volume = value[1]
             zone.name = key
+            #Additional Parameters for Pools 
+            zone.paramRecord = dict()
             use_cond = UseCond(zone)
             use_cond.load_use_conditions(value[2], data_class=self.parent.data)
             zone.use_conditions = use_cond
+
 
         """
         The following element calculations are part of the teaser office class and 
@@ -376,7 +382,6 @@ class SwimmingPool(NonResidential):
         are provided. 
         """
         # statistical estimation of the facade
-
         self._est_outer_wall_area = (
             self.est_factor_wall_area * type_bldg_area ** self.est_exponent_wall
         )
@@ -389,49 +394,50 @@ class SwimmingPool(NonResidential):
         self._est_floor_area = (
             type_bldg_area / self.number_of_floors
         ) * self.gross_factor
-
         # manipulation of wall according to facade design
         # (received from window_layout)
-
         self._est_facade_area = self._est_outer_wall_area + self._est_win_area
-
         if not self.window_layout == 0:
             self._est_outer_wall_area = self._est_facade_area * self.corr_factor_wall
             self._est_win_area = self._est_facade_area * self.corr_factor_win
         else:
             pass
 
+        # OUTER WALLS #
         # set the facade area to the four orientations
         for key, value in self.outer_wall_names.items():
+
             # North and South
             if value[1] == 0 or value[1] == 180:
                 self.outer_area[value[1]] = self._est_outer_wall_area * (
-                    self._est_length / (2 * self._est_width + 2 * self._est_length)
-                )
+                    self._est_length / (2 * self._est_width + 2 * self._est_length))
             # East and West
             elif value[1] == 90 or value[1] == 270:
-
                 self.outer_area[value[1]] = self._est_outer_wall_area * (
-                    self._est_width / (2 * self._est_width + 2 * self._est_length)
-                )
-            #Creates an outer wall for each zone and assigns building elements  
+                    self._est_width / (2 * self._est_width + 2 * self._est_length))
          
             
-            for zone in self.thermal_zones:
+            #Creates an outer wall for each zone and assigns building elements             
+            for idx, zone in enumerate(self.thermal_zones):
+                #Creates only for Zones which are Pools a Outer Wall as Pool Wall 
+                if (idx < self.numZones and key == "PoolWall"):
+                    continue
+                elif (idx >= self.numZones and key != "PoolWall"):
+                    continue
                 # create wall and set building elements
                 outer_wall = OuterWall(zone)
+                outer_wall.name = key
                 outer_wall.load_type_element(
                     year=self.year_of_construction,
                     construction=self.construction_type,
                     data_class=self.parent.data,
                     isSwimmingPool=True, 
                     filePath=filePath, 
-                    sheetNameElements=sheetNameElements)
-                outer_wall.name = key
+                    sheetNameElements=sheetNameElements)               
                 outer_wall.tilt = value[0]
                 outer_wall.orientation = value[1]
                 
-
+        # WINDOWS #
         for key, value in self.window_names.items():
 
             if value[1] == 0 or value[1] == 180:
@@ -454,51 +460,62 @@ class SwimmingPool(NonResidential):
             """
             Due to missing building element data for some elements in the 
             actual Excel file, the respective parameter 'isSwimmingPool' 
-            is set to 'False' to use data from the original teaser database
+            is set to 'False' in ExcelToTeaser to use data from the original teaser database
             """            
             
             for idx, zone in enumerate(self.thermal_zones):
+                 #Only created for Zones which are not Pools
+                if (idx >= self.numZones):
+                    continue
                 window = Window(zone)
+                window.name = key
                 window.load_type_element(
                     self.year_of_construction,
                     "Kunststofffenster, " "Isolierverglasung",
                     data_class=self.parent.data,
-                    isSwimmingPool=False, 
+                    isSwimmingPool=True, 
                     filePath=filePath, 
                     sheetNameElements=sheetNameElements
-                )
-                window.name = key
+                )                
                 window.tilt = value[0]
                 window.orientation = value[1]
 
-
+         # ROOFTOPS #
         for key, value in self.roof_names.items():
 
             self.outer_area[value[1]] = self._est_roof_area
 
             for idx, zone in enumerate(self.thermal_zones):
-                if idx < self.numZones:
-                    roof = Rooftop(zone)
-                    roof.load_type_element(
-                        year=self.year_of_construction,
-                        construction=self.construction_type,
-                        data_class=self.parent.data,
-                        isSwimmingPool=False, 
-                        filePath=filePath, 
-                        sheetNameElements=sheetNameElements
-                    )
-                    roof.name = key
-                    roof.tilt = value[0]
-                    roof.orientation = value[1]
+                #Only created for Zones which are not Pools
+                if (idx >= self.numZones):
+                    continue
+                roof = Rooftop(zone)
+                roof.name = key
+                roof.load_type_element(
+                    year=self.year_of_construction,
+                    construction=self.construction_type,
+                    data_class=self.parent.data,
+                    isSwimmingPool=True, 
+                    filePath=filePath, 
+                    sheetNameElements=sheetNameElements
+                )
+                roof.tilt = value[0]
+                roof.orientation = value[1]
 
-
+        # GROUNDFLOORS #
         for key, value in self.ground_floor_names.items():
 
             self.outer_area[value[1]] = self._est_floor_area    
             
             for idx, zone in enumerate(self.thermal_zones):  
-                if (key == "Floor Without Earth Contact" and idx < self.numZones):
+                #Creates only for Zones which are Pools a Ground Floor as Pool Floor
+                if (idx < self.numZones and key == "Pool Floor With Earth Contact"):
+                    continue
+                elif (idx >= self.numZones and key != "Pool Floor With Earth Contact"):
+                    continue
+                
                     ground_floor = GroundFloor(zone)
+                    ground_floor.name = key
                     ground_floor.load_type_element(
                         year=self.year_of_construction,
                         construction=self.construction_type,
@@ -507,182 +524,77 @@ class SwimmingPool(NonResidential):
                         filePath=filePath, 
                         sheetNameElements=sheetNameElements
                     )
-                    ground_floor.name = key
-                    ground_floor.tilt = value[0]
-                    ground_floor.orientation = value[1]
-                elif (key == "Pool Floor With Earth Contact"
-                      and idx >= self.numZones):                    
-                    ground_floor = GroundFloor(zone)
-                    ground_floor.load_type_element(
-                        year=self.year_of_construction,
-                        construction=self.construction_type,
-                        data_class=self.parent.data,
-                        isSwimmingPool=True, 
-                        filePath=filePath, 
-                        sheetNameElements=sheetNameElements
-                    )
-                    ground_floor.name = key
                     ground_floor.tilt = value[0]
                     ground_floor.orientation = value[1]
 
+        # INNER WALLS #
         for key, value in self.inner_wall_names.items():
 
             for idx, zone in enumerate(self.thermal_zones):
-                if idx < self.numZones:
-                    inner_wall = InnerWall(zone)
-                    inner_wall.load_type_element(
-                        year=self.year_of_construction,
-                        construction=self.construction_type,
-                        data_class=self.parent.data,
-                        isSwimmingPool=False, 
-                        filePath=filePath, 
-                        sheetNameElements=sheetNameElements
-                    )
-                    inner_wall.name = key
-                    inner_wall.tilt = value[0]
-                    inner_wall.orientation = value[1]
+                #Creates only for Zones which are Pools a Inner Wall as Wall
+                if (idx < self.numZones and key == "InnerPoolWall"):
+                    continue
+                elif (idx >= self.numZones and key != "InnerPoolWall"):
+                    continue 
+                inner_wall = InnerWall(zone)
+                inner_wall.name = key
+                inner_wall.load_type_element(
+                    year=self.year_of_construction,
+                    construction=self.construction_type,
+                    data_class=self.parent.data,
+                    isSwimmingPool=True, 
+                    filePath=filePath, 
+                    sheetNameElements=sheetNameElements
+                )
+                inner_wall.tilt = value[0]
+                inner_wall.orientation = value[1]
         
        
         # Actual Excel File does not include standard floor or ceiling areas, 
         # so these areas are calculated by the standard teaser algorithm 
         # if number of floors > 1. The special types of floors and ceilings
         # are read out from the Excel file.
+        # CEILINGS #
         for key, value in self.ceiling_names.items(): 
             for idx, zone in enumerate(self.thermal_zones):
-                if(key == "Ceiling" and self.number_of_floors>1
-                   and idx<self.numZones):
-                    ceiling = Ceiling(zone)
-                    ceiling.load_type_element(
-                        year=self.year_of_construction,
-                        construction=self.construction_type,
-                        data_class=self.parent.data,
-                        isSwimmingPool=False, 
-                        filePath=filePath, 
-                        sheetNameElements=sheetNameElements
-                    )
-                    ceiling.name = key
-                    ceiling.tilt = value[0]
-                    ceiling.orientation = value[1]
-                
-                elif(zone.name == "Technikraum"     
-                      and key == "Ceiling Under Traffic And Common Areas"):
-                    ceiling = Ceiling(zone)
-                    ceiling.load_type_element(
-                        year=self.year_of_construction,
-                        construction=self.construction_type,
-                        data_class=self.parent.data,
-                        isSwimmingPool=True, 
-                        filePath=filePath, 
-                        sheetNameElements=sheetNameElements
-                    )
-                    ceiling.name = key
-                    ceiling.tilt = value[0]
-                    ceiling.orientation = value[1] 
-                        
-                elif(zone.name == "Technikraum" and idx<self.numZones
-                     and key == "Ceiling Under Pool Area"):
-                    numElement=1
-                    for pool in self.pools:                                
-                        if (pool[1]-pool[2]!=0):
-                            ceiling = Ceiling(zone)
-                            ceiling.load_type_element(
-                                year=self.year_of_construction,
-                                construction=self.construction_type,
-                                data_class=self.parent.data,
-                                isSwimmingPool=True, 
-                                filePath=filePath, 
-                                sheetNameElements=sheetNameElements
-                            )
-                            ceiling.name = key + str(numElement)
-                            ceiling.tilt = value[0]
-                            ceiling.orientation = value[1] 
-                            numElement+=1   
-                             
-                elif(idx>=self.numZones and key == "Upper Zone Limitation Of Pool"): #for pools 
-                    ceiling = Ceiling(zone)
-                    ceiling.load_type_element(
-                        year=self.year_of_construction,
-                        construction=self.construction_type,
-                        data_class=self.parent.data,
-                        isSwimmingPool=True, 
-                        filePath=filePath, 
-                        sheetNameElements=sheetNameElements
-                    )
-                    ceiling.name = key
-                    ceiling.tilt = value[0]
-                    ceiling.orientation = value[1] 
-                         
-                        
+                #Only created for Zones which are not Pools
+                if (idx >= self.numZones):
+                    continue             
+                ceiling = Ceiling(zone)
+                ceiling.name = key
+                ceiling.load_type_element(
+                    year=self.year_of_construction,
+                    construction=self.construction_type,
+                    data_class=self.parent.data,
+                    isSwimmingPool=True, 
+                    filePath=filePath, 
+                    sheetNameElements=sheetNameElements
+                )
+                ceiling.tilt = value[0]
+                ceiling.orientation = value[1] 
+
+        # FLOORS #   
         for key, value in self.floor_names.items():
             for idx, zone in enumerate(self.thermal_zones):
-                if(key == "Floor" and self.number_of_floors>1
-                   and idx<self.numZones):
-                    floor = Floor(zone)
-                    floor.load_type_element(
-                        year=self.year_of_construction,
-                        construction=self.construction_type,
-                        data_class=self.parent.data,
-                        isSwimmingPool=False, 
-                        filePath=filePath, 
-                        sheetNameElements=sheetNameElements
-                    )
-                    floor.name = key
-                    floor.tilt = value[0]
-                    floor.orientation = value[1]
-                    
-                elif(key == "Traffic And Common Areas Above Technical Room"                      
-                     and zone.name.startswith("Schwimmhalle")):
-                        floor = Floor(zone)
-                        floor.load_type_element(
-                            year=self.year_of_construction,
-                            construction=self.construction_type,
-                            data_class=self.parent.data,
-                            isSwimmingPool=True, 
-                            filePath=filePath, 
-                            sheetNameElements=sheetNameElements
-                        )
-                        floor.name = key
-                        floor.tilt = value[0]
-                        floor.orientation = value[1] 
+                #Creates only for Zones which are Pools a Floor as Pool Floor
+                if (idx < self.numZones and key == "Pool Area Above Technical Room"):
+                    continue
+                elif (idx >= self.numZones and key != "Pool Area Above Technical Room"):
+                    continue
+                floor = Floor(zone)
+                floor.name = key
+                floor.load_type_element(
+                    year=self.year_of_construction,
+                    construction=self.construction_type,
+                    data_class=self.parent.data,
+                    isSwimmingPool=True, 
+                    filePath=filePath, 
+                    sheetNameElements=sheetNameElements
+                )
+                floor.tilt = value[0]
+                floor.orientation = value[1] 
                         
-                elif(key == "Contact Area To Water Surface"                      
-                     and zone.name.startswith("Schwimmhalle")):
-                    numElement=1
-                    for pool in self.pools:
-                        floor = Floor(zone)
-                        floor.load_type_element(
-                            year=self.year_of_construction,
-                            construction=self.construction_type,
-                            data_class=self.parent.data,
-                            isSwimmingPool=True, 
-                            filePath=filePath, 
-                            sheetNameElements=sheetNameElements
-                        )
-                        floor.name = key + str(numElement)
-                        floor.tilt = value[0]
-                        floor.orientation = value[1] 
-                        numElement+=1
-                        
-                elif(key == "Pool Area Above Technical Room" and idx>=self.numZones
-                      and self.pools[idx-self.numZones][1]-
-                      self.pools[idx-self.numZones][2]>=0): #for pools
-                        floor = Floor(zone)
-                        floor.load_type_element(
-                            year=self.year_of_construction,
-                            construction=self.construction_type,
-                            data_class=self.parent.data,
-                            isSwimmingPool=True, 
-                            filePath=filePath, 
-                            sheetNameElements=sheetNameElements
-                        )
-                        floor.name = key
-                        floor.tilt = value[0]
-                        floor.orientation = value[1]                            
-                           
 
-        # else:
-        #     pass
-               
         #Calculates building surface area and surface areas of each zone and orientation.
         for key, value in self.outer_area.items():
             self.set_outer_wall_area(value, key, isSwimmingPool=True, filePath=filePath, 
@@ -704,19 +616,58 @@ class SwimmingPool(NonResidential):
                                      sheetNameAreas=sheetNameAreas, zoneAreas=self.zoneAreas,
                                      numZones=self.numZones)
             zoneId+=1
-            
+        
+            # Calculate additional Parameters for Pools out of the input from Excel stored in "poolsInDict"
+        # Results will be stored in paramRecord Dict for each Pool Zone
+        for idx, zone in enumerate(self.thermal_zones):
+            if (idx >= self.numZones):
+                paramRecord = dict()
+                #T_pool
+                paramRecord["T_pool"] = self.poolsInDict[zone.name]["Pool temperature"]
+                #A_pool
+                paramRecord["A_pool"] = self.poolsInDict[zone.name]["Water surface"]
+                #d_pool
+                paramRecord["d_pool"] = self.poolsInDict[zone.name]["Tiefe Becken"]
+                #parialLoad
+                paramRecord["parialLoad"] = self.poolsInDict[zone.name]["Nachtabsenkung"]
+                #x_partialLoad
+                paramRecord["x_partialLoad"] = self.poolsInDict[zone.name]["Nachtabsenkungsgrad"]
+                #poolCover
+                paramRecord["poolCover"] = self.poolsInDict[zone.name]["Beckenabdeckung"]
+                #waterRecycling
+                paramRecord["waterRecycling"] = self.poolsInDict[zone.name]["Abwasseraufbereitung"]
+                #x_recycling
+                paramRecord["x_recycling"] = self.poolsInDict[zone.name]["Abwasseraufbereitungsgrad"]
+                #nextToSoil
+                paramRecord["nextToSoil"] = self.poolsInDict[zone.name]["Grenzt an Erdreich"]
+                #V_storage
+                #Q
+                #m_flow_sewer
+                #beta
+                if self.poolsInDict[zone.name]["Tiefe Becken"] > 1.35:
+                    beta_inUse = 28
+                else:
+                    beta_inUse = 40
+                if self.poolsInDict[zone.name]["Beckenabdeckung"] == "yes":
+                    beta_nonUse = 0.7
+                else:
+                    beta_nonUse = 7
+                paramRecord["beta_inUse"] = beta_inUse
+                paramRecord["beta_nonUse"] = beta_nonUse
+                
+                #Sets Data to Record
+                zone.paramRecord = paramRecord
+
         """
         The following code can be used to check the building element
-        areas.       
-                
-        
+        areas.            
         for zone in self.thermal_zones:
             print()
             print("For zone", zone.name, "with total area", zone.area)
             for wall in zone.outer_walls:   
-                print("Outer wall with orientation", wall.orientation, "and element area", wall.area)
+                print("Outer wall with orientation", wall.name, "and element area", wall.area)
             for window in zone.windows:   
-                print("Window with orientation", window.orientation, "and element area", window.area)
+                print("Window with orientation", window.name, "and element area", window.area)
             for ground_floor in zone.ground_floors:   
                 print("Groundfloor with name", ground_floor.name, "and element area", ground_floor.area)
             for floor in zone.floors:   
@@ -728,6 +679,7 @@ class SwimmingPool(NonResidential):
             for wall in zone.inner_walls:   
                 print("Inner wall with name", wall.name, "and element area", wall.area)
         """
+
 
     @property
     def office_layout(self):

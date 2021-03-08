@@ -334,7 +334,6 @@ class ThermalZone(object):
 
 
         for ceiling in self.ceilings:
-
             if(isSwimmingPool):
                 inArea = bElement_excel_input.getInnerArea(zoneId=zoneId, 
                                                            element=ceiling,
@@ -355,7 +354,25 @@ class ThermalZone(object):
                     (self.parent.number_of_floors - 1) /
                     self.parent.number_of_floors) * self.area
 
+
         if isSwimmingPool:
+            for wall in self.inner_walls:
+                if(isSwimmingPool):
+                    inArea = bElement_excel_input.getInnerArea(zoneId=zoneId, 
+                                                            element=wall,
+                                                            filePath=filePath,
+                                                            sheetNameAreas=sheetNameAreas,
+                                                            zoneAreas=zoneAreas,
+                                                            numZones=numZones)
+                    if(inArea == None):
+                        print("Cannot find area for", self.name, ceiling.name)
+                        print("Using algorithm instead.")
+                        wall.area = (
+                            (self.parent.number_of_floors - 1) /
+                            self.parent.number_of_floors) * self.area
+                    else:
+                        wall.area = inArea
+            """
             if zoneId < 8:
                 for wall in self.inner_walls:
                     typical_area = self.use_conditions.typical_length * \
@@ -367,6 +384,7 @@ class ThermalZone(object):
                                                 self.parent.height_of_floors +
                                                 2 * self.use_conditions.typical_width *
                                                 self.parent.height_of_floors))
+        """
         else:
             for wall in self.inner_walls:
                     typical_area = self.use_conditions.typical_length * \

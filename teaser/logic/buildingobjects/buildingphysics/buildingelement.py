@@ -173,7 +173,7 @@ class BuildingElement(object):
                 count_layer.thickness / count_layer.material.thermal_conduc) \
 
         self.r_conduc = r_conduc * (1 / self.area)
-
+        """
         if (self.name == "PoolFloorWithEarthContact" or self.name == "PoolAreaAboveTechnicalRoom"
             or self.name == "CeilingUnderPoolArea"):
             #Calculation of volume flow according to DIN 19643-1:2012-11
@@ -185,11 +185,10 @@ class BuildingElement(object):
             self.r_inner_conv = (1 / (2100 * (v**(1/2)))) * (1 / self.area)
             self.r_inner_rad = (1 / 580) * (1 / self.area)
             self.r_inner_comb = 1 / (1 / self.r_inner_conv + 1 / self.r_inner_rad)
-            
-        else:   
-            self.r_inner_conv = (1 / self.inner_convection) * (1 / self.area)
-            self.r_inner_rad = (1 / self.inner_radiation) * (1 / self.area)
-            self.r_inner_comb = 1 / (1 / self.r_inner_conv + 1 / self.r_inner_rad)
+        """   
+        self.r_inner_conv = (1 / self.inner_convection) * (1 / self.area)
+        self.r_inner_rad = (1 / self.inner_radiation) * (1 / self.area)
+        self.r_inner_comb = 1 / (1 / self.r_inner_conv + 1 / self.r_inner_rad)
 
         if self.outer_convection is not None \
                 and self.outer_radiation is not None:
