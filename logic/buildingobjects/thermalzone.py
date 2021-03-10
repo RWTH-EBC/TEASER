@@ -378,7 +378,7 @@ class ThermalZone(object):
                                 + 2 * self.use_conditions.typical_width
                                 * height_of_floors))
                 for outer_wall in self.outer_walls:
-                    wall_area -= outer_wall.area
+                    wall_area -= outer_wall.area # todo includes windows?
                 for nz_border in self.nz_borders:
                     if type(nz_border).__name__ == "InnerWall":
                         wall_area -= nz_border.area
@@ -405,6 +405,7 @@ class ThermalZone(object):
                 for rtwin in self.rooftops + self.windows:
                     wall_area-= rtwin.area * math.sin(rtwin.tilt * math.pi
                                                        / 180)
+                    # is this ok?
                 wall_area -= max(0.0, sum(gf.area for gf in self.ground_floors)
                                  - self.area)
                 for nz_border in self.nz_borders:

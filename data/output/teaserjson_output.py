@@ -219,6 +219,7 @@ def save_teaser_json(path, project):
             zone_out["inner_walls"] = collections.OrderedDict()
             zone_out["floors"] = collections.OrderedDict()
             zone_out["ceilings"] = collections.OrderedDict()
+            zone_out["nz_borders"] = collections.OrderedDict()
 
             for out_wall in zone.outer_walls:
                 zone_out["outer_walls"][out_wall.name] = collections.OrderedDict()
@@ -252,6 +253,11 @@ def save_teaser_json(path, project):
                 zone_out["ceilings"][ceil.name] = collections.OrderedDict()
                 set_basic_data(zone_out["ceilings"][ceil.name], ceil)
                 set_layer_data(zone_out["ceilings"][ceil.name], ceil)
+            for nzb in zone.nz_borders:
+                zone_out["nz_borders"][nzb.name] = collections.OrderedDict()
+                zone_out["nz_borders"][nzb.name]["other_side"] = nzb.outside.name
+                set_basic_data(zone_out["nz_borders"][nzb.name], nzb)
+                set_layer_data(zone_out["nz_borders"][nzb.name], nzb)
 
             prj_out["project"]["buildings"][bldg.name]["thermal_zones"][
                 zone.name
