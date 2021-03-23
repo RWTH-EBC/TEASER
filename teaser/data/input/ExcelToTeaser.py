@@ -152,16 +152,15 @@ def _set_basic_data(element):
     element.construction_type = "heavy"
     element.inner_radiation = 5.0
     element.inner_convection = 1.7
+    element.outer_radiation = None
+    element.outer_convection = None
 
     #According to the Teaser-database, the element types OuterWall and Door 
     #share the same radiation and convection.
     #Same for GroundFoor, Floor and Ceiling.
-    if (
-        type(element).__name__ == "OuterWall"
+    if (type(element).__name__ == "OuterWall"
         or type(element).__name__ == "Door"
-        or type(element).__name__ == "Window"
-    ):
-
+        or type(element).__name__ == "Window"):
         element.inner_radiation = 5.0
         element.inner_convection = 2.7
         element.outer_radiation = 5.0
@@ -175,18 +174,21 @@ def _set_basic_data(element):
     
     #Calculation for pool areas varies in method calc_ua_value of class buildingelement
     elif (type(element).__name__ == "GroundFloor"
-          or type(element).__name__ == "Floor"
-          or type(element).__name__ == "Ceiling"):
+        or type(element).__name__ == "Floor"
+        or type(element).__name__ == "Ceiling"):
         element.inner_radiation = 5.0
         element.inner_convection = 1.7000000000000002
 
     # Different Values for Elements in Zones which are Pools
     if ("Pool" in element.name):
-        element.outer_radiation = None
-        element.outer_convection = None
-        element.inner_radiation = 10
-        element.inner_convection = 10
-  
+        if (type(element).__name__ == "OuterWall"
+            or type(element).__name__ == "InnerWall"):
+            element.inner_radiation = 5.0
+            element.inner_convection = 5200.0
+        elif (type(element).__name__ == "GroundFloor"
+            or type(element).__name__ == "Floor"):
+            element.inner_radiation = 5.0
+            element.inner_convection = 50.0
 
     #To be changed if different window data should be used. 
     #Replacing element_in[] with inSheet.cell_value(inRow, COLUMN OF WINDOWS)
@@ -288,7 +290,7 @@ def getArea(zoneId, element, orientation, filePath, sheetNameAreas, numZones):
         return float(0.001)
     
     elif (zoneId>=8 and type(element).__name__=="OuterWall"):
-                area = data['Pool wall with earth contact']
+        area = data['Pool wall with earth contact']
         if (area == "" or area == 0):
             return float(0.001)
         else:
