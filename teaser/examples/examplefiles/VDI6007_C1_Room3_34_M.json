@@ -1,0 +1,659 @@
+{
+    "project": {
+        "version": "0.7",
+        "name": "Project",
+        "weather_file_path": "modelica://AixLib/Resources/WeatherData/",
+        "number_of_elements_calc": 2,
+        "merge_windows_calc": false,
+        "used_library_calc": "AixLib",
+        "modelica_info": {
+            "start_time": 0,
+            "stop_time": 31536000,
+            "interval_output": "3600",
+            "current_solver": "Cvode",
+            "equidistant_output": true,
+            "results_at_events": false,
+            "version": "3.2.2"
+        },
+        "buildings": {
+            "VDI6007_3M_TEASER_Matlab": {
+                "classification": {
+                    "class": "Building",
+                    "method": "undefined"
+                },
+                "street_name": "none",
+                "city": "none",
+                "year_of_construction": 1960,
+                "year_of_retrofit": "None",
+                "number_of_floors": 1,
+                "height_of_floors": 2.8,
+                "net_leased_area": 18.75,
+                "outer_area": {
+                    "0.0": 8.13
+                },
+                "window_area": {
+                    "0.0": 5.13
+                },
+                "thermal_zones": {
+                    "One": {
+                        "area": 18.75,
+                        "volume": 52.5,
+                        "use_conditions": {
+                            "usage": "43",
+                            "typical_length": 123.0,
+                            "typical_width": 123.0,
+                            "with_heating": true,
+                            "T_threshold_heating": 291.15,
+                            "with_cooling": true,
+                            "activity_degree_persons": 2,
+                            "fixed_heat_flow_rate_persons": 70,
+                            "internal_gains_moisture_no_people": 0.5,
+                            "T_threshold_cooling": 299.15,
+                            "persons": 0.0,
+                            "ratio_conv_rad_persons": 0.5,
+                            "machines": 0.0,
+                            "ratio_conv_rad_machines": 0.5,
+                            "lighting_power": 11.1,
+                            "ratio_conv_rad_lighting": 0.5,
+                            "use_constant_infiltration": false,
+                            "infiltration_rate": 0.2,
+                            "max_user_infiltration": 1.0,
+                            "max_overheating_infiltration": [
+                                3.0,
+                                2.0
+                            ],
+                            "max_summer_infiltration": [
+                                1.0,
+                                283.15,
+                                290.15
+                            ],
+                            "winter_reduction_infiltration": [
+                                0.5,
+                                273.15,
+                                283.15
+                            ],
+                            "min_ahu": 0.0,
+                            "max_ahu": 0.5,
+                            "with_ahu": 0,
+                            "with_ideal_thresholds": false,
+                            "heating_profile": [
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15
+                            ],
+                            "cooling_profile": [
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15
+                            ],
+                            "persons_profile": [
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.2,
+                                0.4,
+                                0.6,
+                                0.8,
+                                0.8,
+                                0.4,
+                                0.6,
+                                0.8,
+                                0.8,
+                                0.4,
+                                0.2,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0
+                            ],
+                            "machines_profile": [
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.2,
+                                0.4,
+                                0.6,
+                                0.8,
+                                0.8,
+                                0.4,
+                                0.6,
+                                0.8,
+                                0.8,
+                                0.4,
+                                0.2,
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.1
+                            ],
+                            "lighting_profile": [
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0
+                            ]
+                        },
+                        "outer_walls": {
+                            "BuildinElement253090": {
+                                "year_of_construction": 1960,
+                                "year_of_retrofit": null,
+                                "construction_type": "medium",
+                                "area": 8.13,
+                                "tilt": 90.0,
+                                "orientation": 180.0,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.08,
+                                        "material": {
+                                            "name": "Beton",
+                                            "density": 2200.0,
+                                            "thermal_conduc": 1.65,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.08,
+                                        "material": {
+                                            "name": "Waermedaemmung",
+                                            "density": 10.0,
+                                            "thermal_conduc": 0.035,
+                                            "heat_capac": 1.03,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.03,
+                                        "material": {
+                                            "name": "Luftraum",
+                                            "density": 1.2,
+                                            "thermal_conduc": 0.163,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.012,
+                                        "material": {
+                                            "name": "Fassadenplatte",
+                                            "density": 1650.0,
+                                            "thermal_conduc": 0.6,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "doors": {},
+                        "rooftops": {
+                            "BuildinElement215026": {
+                                "year_of_construction": 1960,
+                                "year_of_retrofit": null,
+                                "construction_type": "heavy",
+                                "area": 18.75,
+                                "tilt": 0,
+                                "orientation": 180,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 5.0,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                     "0": {
+                                        "thickness": 0.001,
+                                        "material": {
+                                            "name": "Metalldecke",
+                                            "density": 7800,
+                                            "thermal_conduc": 50.0,
+                                            "heat_capac": 0.45,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "Schalldaemmung",
+                                            "density": 75,
+                                            "thermal_conduc": 0.04,
+                                            "heat_capac": 1.03,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "2": {
+                                    "thickness": 0.255,
+                                        "material": {
+                                            "name": "Luftraum",
+                                            "density": 1.2,
+                                            "thermal_conduc": 1.627,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.2,
+                                        "material": {
+                                            "name": "Stahlbeton",
+                                            "density": 2300.0,
+                                            "thermal_conduc": 2.3,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "4": {
+                                        "thickness": 0.095,
+                                        "material": {
+                                            "name": "Schaumglas",
+                                            "density": 105.0,
+                                            "thermal_conduc": 0.04,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "5": {
+                                        "thickness": 0.005,
+                                        "material": {
+                                            "name": "Dachbahnen-Bitumen",
+                                            "density": 1100.0,
+                                            "thermal_conduc": 0.23,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "6": {
+                                        "thickness": 0.2,
+                                        "material": {
+                                            "name": "Kies, Sand, Split-Schuettung",
+                                            "density": 1638.0,
+                                            "thermal_conduc": 0.7,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    }
+                                }
+                            },
+                            "BuildinElement216426": {
+                                "year_of_construction": 1960,
+                                "year_of_retrofit": null,
+                                "construction_type": "heavy",
+                                "area": 0.75,
+                                "tilt": 0,
+                                "orientation": 180,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 1.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                     "0": {
+                                        "thickness": 0.001,
+                                        "material": {
+                                            "name": "Metalldecke",
+                                            "density": 7800,
+                                            "thermal_conduc": 50.0,
+                                            "heat_capac": 0.45,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "Schalldaemmung",
+                                            "density": 75,
+                                            "thermal_conduc": 0.04,
+                                            "heat_capac": 1.03,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "2": {
+                                    "thickness": 0.255,
+                                        "material": {
+                                            "name": "Luftraum",
+                                            "density": 1.2,
+                                            "thermal_conduc": 1.627,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.2,
+                                        "material": {
+                                            "name": "Stahlbeton",
+                                            "density": 2300.0,
+                                            "thermal_conduc": 2.3,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "4": {
+                                        "thickness": 0.095,
+                                        "material": {
+                                            "name": "Schaumglas",
+                                            "density": 105.0,
+                                            "thermal_conduc": 0.04,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "5": {
+                                        "thickness": 0.005,
+                                        "material": {
+                                            "name": "Dachbahnen-Bitumen",
+                                            "density": 1100.0,
+                                            "thermal_conduc": 0.23,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "6": {
+                                        "thickness": 0.2,
+                                        "material": {
+                                            "name": "Kies, Sand, Split-Schuettung",
+                                            "density": 1638.0,
+                                            "thermal_conduc": 0.7,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "ground_floors": {},
+                        "windows": {
+                            "BuildinElement431313": {
+                                "year_of_construction": 1960,
+                                "year_of_retrofit": null,
+                                "construction_type": "1",
+                                "area": 5.13,
+                                "tilt": 90.0,
+                                "orientation": 180.0,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "g_value": 0.64,
+                                "a_conv": 0.07,
+                                "shading_g_total": 0.08,
+                                "shading_max_irr": 200.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "glass",
+                                            "density": 0.0,
+                                            "thermal_conduc": 0.0367342320117556,
+                                            "heat_capac": 0.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "inner_walls": {
+                            "BuildinElement411941": {
+                                "year_of_construction": 1960,
+                                "year_of_retrofit": null,
+                                "construction_type": "ASD",
+                                "area": 36.51,
+                                "tilt": null,
+                                "orientation": null,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.015,
+                                        "material": {
+                                            "name": "Putz",
+                                            "density": 1300.0,
+                                            "thermal_conduc": 0.57,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.115,
+                                        "material": {
+                                            "name": "Hochlochziegel",
+                                            "density": 1400.0,
+                                            "thermal_conduc": 0.58,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.015,
+                                        "material": {
+                                            "name": "Putz",
+                                            "density": 1300.0,
+                                            "thermal_conduc": 0.57,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    }
+                                }
+                            },
+                            "BuildinElement298490": {
+                                "year_of_construction": 1960,
+                                "year_of_retrofit": null,
+                                "construction_type": null,
+                                "area": 2.0,
+                                "tilt": null,
+                                "orientation": null,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.025,
+                                        "material": {
+                                            "name": "Buche",
+                                            "density": 800.0,
+                                            "thermal_conduc": 0.2,
+                                            "heat_capac": 1.6,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "floors": {
+                            "BuildinElement148348": {
+                                "year_of_construction": 1919,
+                                "year_of_retrofit": null,
+                                "construction_type": "leicht",
+                                "area": 18.75,
+                                "tilt": null,
+                                "orientation": null,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 1.7,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.004,
+                                        "material": {
+                                            "name": "Fußbodenbelag",
+                                            "density": 1200.0,
+                                            "thermal_conduc": 0.17,
+                                            "heat_capac": 1.4,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.04,
+                                        "material": {
+                                            "name": "Estrich",
+                                            "density": 1000.0,
+                                            "thermal_conduc": 1.4,
+                                            "heat_capac": 2.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.08,
+                                        "material": {
+                                            "name": "Luftraum",
+                                            "density": 1.2,
+                                            "thermal_conduc": 0.434,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.2,
+                                        "material": {
+                                            "name": "Stahlbeton",
+                                            "density": 2300.0,
+                                            "thermal_conduc": 2.3,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "4": {
+                                        "thickness": 0.255,
+                                        "material": {
+                                            "name": "Luftraum",
+                                            "density": 1.2,
+                                            "thermal_conduc": 1.627,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "5": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "Schalldaemmung",
+                                            "density": 75,
+                                            "thermal_conduc": 0.04,
+                                            "heat_capac": 1.03,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    },
+                                    "6": {
+                                        "thickness": 0.001,
+                                        "material": {
+                                            "name": "Metalldecke",
+                                            "density": 7800,
+                                            "thermal_conduc": 50.0,
+                                            "heat_capac": 0.45,
+                                            "solar_absorp": 0.0,
+                                            "ir_emissivity": 0.0
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "ceilings": {}
+                    }
+                }
+            }
+        }
+    }
+}
