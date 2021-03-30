@@ -15,6 +15,11 @@ def parameter_room1():
     prj.load_project(utilities.get_full_path(
         "examples/examplefiles/VDI6007_C1_Room14.json"))
 
+    """
+    examples/examplefiles/VDI6007_C1_Room14.json
+    examples/examplefiles/VDI6007_C1_Room14_1.json
+    """
+
     prj.buildings[0].calc_building_parameter(
         number_of_elements=2,
         merge_windows=True,
