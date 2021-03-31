@@ -12,6 +12,11 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     ABuilding=${bldg.net_leased_area},
     ASurTot=${bldg.library_attr.total_surface_area},
     numZones = ${len(bldg.thermal_zones)},
+    % if bldg.type_of_building == "SwimmingPool":
+    use_swimmingPolls_MZ = true,
+    % else:
+    use_swimmingPolls_MZ = false,
+    % endif
     internalGainsMode = ${bldg.internal_gains_mode},
     % if bldg.internal_gains_mode==3:
         use_C_flow = true,

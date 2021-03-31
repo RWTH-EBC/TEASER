@@ -78,6 +78,11 @@ def export_multizone(buildings, prj, path=None):
             "data/output/modelicatemplate/AixLib"
             "/AixLib_ThermalZoneRecord_FourElement"),
         lookup=lookup)
+    zone_template_pool = Template(
+        filename=utilities.get_full_path(
+            "data/output/modelicatemplate/AixLib"
+            "/AixLib_SwimmingPoolRecord"),
+        lookup=lookup)
     model_template = Template(
         filename=utilities.get_full_path(
             "data/output/modelicatemplate/AixLib/AixLib_Multizone"),
@@ -177,6 +182,31 @@ def export_multizone(buildings, prj, path=None):
                 out_file.write(zone_template_4.render_unicode(zone=zone))
 
             out_file.close()
+
+            try:
+                if zone.pool_zones is not None:
+                    pool_path = os.path.join(zone_path, zone.name + "_DataBase")
+                    utilities.create_path(utilities.get_full_path(
+                        os.path.join(zone_path,
+                                     zone.name + "_DataBase")))
+                for poolZone in zone.pool_zones:
+                    out_file = open(utilities.get_full_path(os.path.join(
+                        pool_path, zone.name + '_' + poolZone.name + '.mo')), 'w')
+                    if type(poolZone.model_attr).__name__ == "FourElement":
+                        out_file.write(zone_template_pool.render_unicode(zone=poolZone))
+                    out_file.close()
+                _help_package(
+                    path=pool_path,
+                    name=zone.name + '_DataBase',
+                    within=prj.name + '.' + bldg.name + '.' + bldg.name + '_DataBase')
+                _help_package_order(
+                    path=pool_path,
+                    package_list=zone.pool_zones,
+                    addition=zone.name + "_",
+                    extra=None)
+            except AttributeError:
+                continue
+
 
         _help_package(
             path=zone_path,

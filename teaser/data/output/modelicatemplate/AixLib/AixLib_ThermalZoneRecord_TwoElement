@@ -88,5 +88,19 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     CoolerOn = ${get_true_false(zone.use_conditions.with_cooling)},
     withIdealThresholds = ${get_true_false(zone.use_conditions.with_ideal_thresholds)},
     TThresholdHeater = ${zone.use_conditions.T_threshold_heating},
-    TThresholdCooler = ${zone.use_conditions.T_threshold_cooling});
+    TThresholdCooler = ${zone.use_conditions.T_threshold_cooling},
+    % if zone.name == "Schwimmhalle":
+      SwimmingPools = true,
+      numPools = ${zone.parent.number_of_pools},
+      poolParam = {
+      %for pool in zone.pool_zones:
+      ${zone.name}_DataBase.${zone.name}_${pool.name}()${',' if not loop.last else ''}
+      %endfor
+      },
+    % else:
+      SwimmingPools = false,
+      numPools = 1,
+      poolParam = {AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.NoPool()},
+    % endif
+    );
 end ${zone.parent.name}_${zone.name};

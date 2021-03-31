@@ -639,7 +639,7 @@ def getPoolData(filePath, sheetNameAreas):
         startRow = 2
         pools[col].append(sheet.cell_value(startRow, startCol))
         startRow = 4
-        for n in range(0,5):
+        for n in range(0,6):
             pools[col].append(sheet.cell_value(startRow, startCol))
             startRow+=1
         startCol+=1

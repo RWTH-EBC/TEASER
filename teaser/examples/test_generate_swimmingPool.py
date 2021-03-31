@@ -5,7 +5,7 @@ This is a test module to generate swimming pools based on
 teaser example 1 - generate archetype and example 2 - export aixlib models.
 Last modified 2020-09-25 for Project 'Energieeffizienz in Schwimmbädern - Neubau und Bestand'
 """
-
+import teaser.logic.archetypebuildings.eeschwimm.swimmingPool as swimmingPool
 import teaser.logic.utilities as utilities
 import os
 
@@ -41,7 +41,7 @@ def test_generate_swimmingPool():
     Please specify the following data.
     """
     
-    filePath=os.path.join(os.path.dirname(__file__),"2021-03-06_Hüllflächen_Zonen_Shells_of_Zones.xlsx")
+    filePath=os.path.join(os.path.dirname(__file__),"2021-03-24_Hüllflächen_Zonen_Shells_of_Zones.xlsx")
     sheetNameAreas='Hüllflächen, Himmelsricht.'
     sheetNameElements='Strukturen Hüllfläche'
     swimmingPoolCategory='A2'
@@ -75,7 +75,7 @@ def test_generate_swimmingPool():
     print()
 
     prj.used_library_calc = 'AixLib'
-    prj.number_of_elements_calc = 2
+    prj.number_of_elements_calc = 4
     prj.weather_file_path = utilities.get_full_path(
         os.path.join(
             "data",
@@ -88,6 +88,13 @@ def test_generate_swimmingPool():
     # run calc_all_buildings() function
 
     prj.calc_all_buildings()
+
+    # pushs the "thermal zones" wich are Pools in the zone "Schwimmhalle" 
+    # in the parameter "pool_zones" and delets it out of the thermal zones 
+    # it should be considered that, that the function is called after all calculations 
+    # directly before the export, otherwise problems can occur when handling the thermal zones. 
+    for bldgs in prj.buildings:
+        bldgs.orderPoolZones()
 
     # To export the ready-to-run models simply call Project.export_aixlib().
     # You can specify the path, where the model files should be saved.
