@@ -327,9 +327,10 @@ def _copy_weather_data(source_path, destination_path):
     destination_path : str
         path of where the weather file should be placed
     """
-
-    shutil.copy2(source_path, destination_path)
-
+    try:
+        shutil.copy2(source_path, destination_path)
+    except shutil.SameFileError:
+        pass
 
 def _copy_script_unit_tests(destination_path):
     """Copies the script to run the unit tests.

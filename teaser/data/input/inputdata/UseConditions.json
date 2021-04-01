@@ -3,7 +3,7 @@
     "Single office": {
         "typical_length": 3.0,
         "typical_width": 6.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,14]},
@@ -173,7 +173,7 @@
     "Group Office (between 2 and 6 employees)": {
         "typical_length": 6.0,
         "typical_width": 6.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,14]},
@@ -343,7 +343,7 @@
     "Open-plan Office (7 or more employees)": {
         "typical_length": 12.0,
         "typical_width": 12.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,10]},
@@ -513,7 +513,7 @@
     "Meeting, Conference, seminar": {
         "typical_length": 6.0,
         "typical_width": 6.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,3]},
@@ -683,7 +683,7 @@
     "Main Hall, Reception": {
         "typical_length": 10.0,
         "typical_width": 10.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,12]},
@@ -853,7 +853,7 @@
     "Retail, department store": {
         "typical_length": 20.0,
         "typical_width": 20.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,8]},
@@ -1023,7 +1023,7 @@
     "Retail with cooling": {
         "typical_length": 20.0,
         "typical_width": 20.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,8]},
@@ -1193,7 +1193,7 @@
     "Class room (school), group room (kindergarden)": {
         "typical_length": 10.0,
         "typical_width": 10.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,3]},
@@ -1363,7 +1363,7 @@
     "Lecture hall, auditorium": {
         "typical_length": 20.0,
         "typical_width": 10.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,2]},
@@ -1533,7 +1533,7 @@
     "Bed room": {
         "typical_length": 4.0,
         "typical_width": 4.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,10]},
@@ -1703,7 +1703,7 @@
     "Hotel room": {
         "typical_length": 4.0,
         "typical_width": 4.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,15]},
@@ -1873,7 +1873,7 @@
     "Canteen": {
         "typical_length": 20.0,
         "typical_width": 20.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,2]},
@@ -2043,7 +2043,7 @@
     "Restaurant": {
         "typical_length": 12.0,
         "typical_width": 12.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,2]},
@@ -2213,7 +2213,7 @@
     "Kitchen in non-residential buildings": {
         "typical_length": 6.0,
         "typical_width": 6.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,2]},
@@ -2383,7 +2383,7 @@
     "Kitchen - preparations, storage": {
         "typical_length": 6.0,
         "typical_width": 6.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,5]},
@@ -2553,7 +2553,7 @@
     "WC and sanitary rooms in non-residential buildings": {
         "typical_length": 3.0,
         "typical_width": 6.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "T_threshold_cooling": 295.15,
         "with_cooling": false,
@@ -2724,7 +2724,7 @@
     "Further common rooms": {
         "typical_length": 6.0,
         "typical_width": 6.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,3]},
@@ -2894,7 +2894,7 @@
     "Auxiliary areas (without common rooms)": {
         "typical_length": 3.0,
         "typical_width": 6.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "T_threshold_cooling": 295.15,
         "with_cooling": false,
@@ -3065,7 +3065,7 @@
     "Traffic area": {
         "typical_length": 2.0,
         "typical_width": 12.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "T_threshold_cooling": 295.15,
         "with_cooling": false,
@@ -3236,7 +3236,7 @@
     "Stock, technical equipment, archives": {
         "typical_length": 6.0,
         "typical_width": 6.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,40]},
@@ -3406,7 +3406,7 @@
     "Data center": {
         "typical_length": 6.0,
         "typical_width": 6.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": 0.0,
@@ -3576,7 +3576,7 @@
     "Commercial and industrial Halls - heavy work, standing activity": {
         "typical_length": 20.0,
         "typical_width": 20.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,15]},
@@ -3746,7 +3746,7 @@
     "Commercial and industrial Halls - medium work, standing activity": {
         "typical_length": 20.0,
         "typical_width": 20.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,15]},
@@ -3916,7 +3916,7 @@
     "Commercial and industrial Halls - light work, standing activity": {
         "typical_length": 20.0,
         "typical_width": 20.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,15]},
@@ -4086,7 +4086,7 @@
     "Spectator area (theater and event venues)": {
         "typical_length": 20.0,
         "typical_width": 10.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,3]},
@@ -4256,7 +4256,7 @@
     "Foyer (theater and event venues)": {
         "typical_length": 12.0,
         "typical_width": 12.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,12]},
@@ -4426,7 +4426,7 @@
     "Stage (theater and event venues)": {
         "typical_length": 10.0,
         "typical_width": 5.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,5]},
@@ -4596,7 +4596,7 @@
     "Exhibition, congress": {
         "typical_length": 40.0,
         "typical_width": 20.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,3]},
@@ -4766,7 +4766,7 @@
     "Exhibition room and museum conservational demands": {
         "typical_length": 20.0,
         "typical_width": 20.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,3]},
@@ -4936,7 +4936,7 @@
     "Library - reading room": {
         "typical_length": 20.0,
         "typical_width": 20.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,5]},
@@ -5106,7 +5106,7 @@
     "Library - open stacks": {
         "typical_length": 6.0,
         "typical_width": 6.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,5]},
@@ -5276,7 +5276,7 @@
     "Library - magazine and depot": {
         "typical_length": 6.0,
         "typical_width": 6.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,5]},
@@ -5446,7 +5446,7 @@
     "Gym (without spectator area)": {
         "typical_length": 40.0,
         "typical_width": 20.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,20]},
@@ -5616,7 +5616,7 @@
     "Parking garages (office and private usage)": {
         "typical_length": 50.0,
         "typical_width": 50.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons":0.0,
@@ -5786,7 +5786,7 @@
     "Parking garages (public usage)": {
         "typical_length": 100.0,
         "typical_width": 50.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "T_threshold_cooling": 295.15,
         "with_cooling": false,
@@ -5957,7 +5957,7 @@
     "Sauna area": {
         "typical_length": 1.0,
         "typical_width": 1.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,10]},
@@ -6127,7 +6127,7 @@
     "Exercise room": {
         "typical_length": 10.0,
         "typical_width": 10.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,10]},
@@ -6297,7 +6297,7 @@
     "Laboratory": {
         "typical_length": 6.0,
         "typical_width": 6.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,15]},
@@ -6467,7 +6467,7 @@
     "Examination- or treatment room": {
         "typical_length": 3.0,
         "typical_width": 6.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,5]},
@@ -6637,7 +6637,7 @@
     "Special care area": {
         "typical_length": 6.0,
         "typical_width": 6.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,3]},
@@ -6807,7 +6807,7 @@
     "Corridors in the general care area": {
         "typical_length": 2.0,
         "typical_width": 12.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "T_threshold_cooling": 295.15,
         "with_cooling": false,
@@ -6978,7 +6978,7 @@
     "Medical and therapeutic practices": {
         "typical_length": 6.0,
         "typical_width": 6.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,5]},
@@ -7148,7 +7148,7 @@
     "Storehouse, logistics building": {
         "typical_length": 20.0,
         "typical_width": 20.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,40]},
@@ -7318,7 +7318,7 @@
     "Living": {
         "typical_length": 3.0,
         "typical_width": 6.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/":[1,50]},
@@ -7488,7 +7488,7 @@
 	"Classroom": {
         "typical_length": 10.0,
         "typical_width": 7.0,
-        "with_heating": true,
+        "with_heating": false,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
         "persons": {"/": [1,3]},

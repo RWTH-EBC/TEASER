@@ -50,7 +50,7 @@
                             "usage": "Living",
                             "typical_length": 123.0,
                             "typical_width": 123.0,
-                            "with_heating": true,
+                            "with_heating": false,
                             "T_threshold_heating": 288.15,
                             "with_cooling": false,
                             "activity_degree_persons": 1.2,

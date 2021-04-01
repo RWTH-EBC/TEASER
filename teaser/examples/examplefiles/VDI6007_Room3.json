@@ -42,7 +42,7 @@
                             "usage": "43",
                             "typical_length": 123.0,
                             "typical_width": 123.0,
-                            "with_heating": true,
+                            "with_heating": false,
                             "T_threshold_heating": 288.15,
                             "with_cooling": false,
                             "T_threshold_cooling": 295.15,
