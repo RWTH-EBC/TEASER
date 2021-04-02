@@ -40,8 +40,8 @@ def test_generate_swimmingPool():
     """
     Please specify the following data.
     """
-    
-    filePath=os.path.join(os.path.dirname(__file__),"2021-03-24_Hüllflächen_Zonen_Shells_of_Zones.xlsx")
+    # xlrd library will no longer read anything other than .xls files!!
+    filePath=os.path.join(os.path.dirname(__file__),"2021-03-24_Hüllflächen_Zonen_Shells_of_Zones.xls")
     sheetNameAreas='Hüllflächen, Himmelsricht.'
     sheetNameElements='Strukturen Hüllfläche'
     swimmingPoolCategory='A2'

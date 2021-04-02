@@ -242,9 +242,6 @@ class SwimmingPool(NonResidential):
             "PoolWall":[90, 0]}
 
         self.roof_names = {"Rooftop": [0, -1]}
-        
-        # Pool floor with earth contact is used for the additional pool zones.
-        # The heat transmission varies because of the water.
          
         self.ground_floor_names = {
             "Floor With Earth Contact": [0, -2],
@@ -254,27 +251,15 @@ class SwimmingPool(NonResidential):
             "Window Facade North": [90, 0],
             "Window Facade East": [90, 90],
             "Window Facade South": [90, 180],
-            "Window Facade West": [90, 270],
-        }
+            "Window Facade West": [90, 270]}
 
         self.inner_wall_names = {"InnerWall": [90, 0],
                                  "InnerPoolWall":[90, 0]}
-
-        # Contact area to water surface is used for the zone 'Schwimmhalle' and
-        # indicates the contact area to pools. 
-        # Upper zone limitation of indoor pool indicates the same contact area
-        # for the pool zones.
         
         self.floor_names = {"Floor": [0, -2],
                             "Pool Area Above Technical Room": [0, -2]}
-                            #"Traffic And Common Areas Above Technical Room": [0, -2],
-                            #"Contact Area To Water Surface": [0, -2]}
         
-        #"Ceiling under pool" has the same area as "Water area above technical room"
         self.ceiling_names = {"Ceiling": [0, -1]}
-                              #"Ceiling Under Pool Area": [0, -1],
-                              #"Ceiling Under Traffic And Common Areas": [0, -1],
-                              #"Upper Zone Limitation Of Pool": [0, -1]}
 
 
 
