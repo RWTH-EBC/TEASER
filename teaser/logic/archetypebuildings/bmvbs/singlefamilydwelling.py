@@ -380,7 +380,7 @@ class SingleFamilyDwelling(Residential):
 
             zone.use_conditions = use_cond
             zone.use_conditions.with_ahu = False
-            zone.heating_cooling_system = HeatingCooling()
+            zone.heating_cooling_system = HeatingCooling(parent=zone)
 
         for key, value in self.outer_wall_names.items():
             # North and South

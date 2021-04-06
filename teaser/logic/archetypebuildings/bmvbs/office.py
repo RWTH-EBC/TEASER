@@ -306,7 +306,7 @@ class Office(NonResidential):
             use_cond = UseCond(zone)
             use_cond.load_use_conditions(value[1], data_class=self.parent.data)
             zone.use_conditions = use_cond
-            zone.heating_cooling_system = HeatingCooling()
+            zone.heating_cooling_system = HeatingCooling(parent=zone)
 
         # statistical estimation of the facade
 

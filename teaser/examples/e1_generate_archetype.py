@@ -39,13 +39,21 @@ def example_generate_archetype():
     # read the docs.
 
     prj.add_residential(
-        method='iwu',
-        usage='single_family_dwelling',
+        method="iwu",
+        usage="single_family_dwelling",
         name="ResidentialBuilding",
         year_of_construction=1988,
         number_of_floors=2,
         height_of_floors=3.2,
-        net_leased_area=200.0)
+        net_leased_area=200.0,
+    )
+
+    # Example Radiator heating system
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.radiator_heating()
 
     # To generate non-residential archetype buildings (in this case an
     # office and a laboratory (a.k.a. institute)) the function
@@ -53,32 +61,42 @@ def example_generate_archetype():
     # does not differ from the residential archetype building.
 
     prj.add_non_residential(
-        method='bmvbs',
-        usage='office',
+        method="bmvbs",
+        usage="office",
         name="OfficeBuilding",
         year_of_construction=1988,
         number_of_floors=4,
         height_of_floors=3.5,
-        net_leased_area=4500.0)
+        net_leased_area=4500.0,
+    )
+
+    # Example underfloor heating system
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.underfloor_heating(specific_power_heat=100.0)
 
     prj.add_non_residential(
-        method='bmvbs',
-        usage='institute',
+        method="bmvbs",
+        usage="institute",
         name="InstituteBuilding",
         year_of_construction=1952,
         number_of_floors=5,
         height_of_floors=4.0,
-        net_leased_area=3400.0)
+        net_leased_area=3400.0,
+    )
 
     prj.add_non_residential(
-        method='bmvbs',
-        usage='institute',
+        method="bmvbs",
+        usage="institute",
         name="InstituteBuildingMoisture",
         year_of_construction=1980,
         number_of_floors=3,
         height_of_floors=4.2,
         net_leased_area=3600.0,
-        internal_gains_mode=3)
+        internal_gains_mode=3,
+    )
 
     # Besides `iwu` and `bmvbs` there is a third option for archetype
     # generation. We integrated the typology of TABULA Germany
@@ -97,29 +115,31 @@ def example_generate_archetype():
     # data. Project(load_data=False).
 
     prj.add_residential(
-        method='tabula_de',
-        usage='single_family_house',
+        method="tabula_de",
+        usage="single_family_house",
         name="ResidentialBuildingTabula",
         year_of_construction=1988,
         number_of_floors=3,
         height_of_floors=3.2,
         net_leased_area=280.0,
-        construction_type='tabula_standard')
+        construction_type="tabula_standard",
+    )
 
     prj.add_residential(
-        method='tabula_de',
-        usage='multi_family_house',
+        method="tabula_de",
+        usage="multi_family_house",
         name="ResidentialBuildingTabulaMulti",
         year_of_construction=1960,
         number_of_floors=4,
         height_of_floors=3.2,
         net_leased_area=600.0,
-        construction_type='tabula_retrofit')
+        construction_type="tabula_retrofit",
+    )
 
     return prj
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     prj = example_generate_archetype()
 
     print("Example 1: That's it! :)")

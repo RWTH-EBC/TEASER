@@ -365,7 +365,7 @@ class SingleFamilyHouse(Residential):
             zone.use_conditions = use_cond
             zone.use_conditions.with_ahu = False
 
-            zone.heating_cooling_system = HeatingCooling()
+            zone.heating_cooling_system = HeatingCooling(parent=zone)
 
         if self.facade_estimation_factors[self.building_age_group]["ow1"] != 0:
             for key, value in self._outer_wall_names_1.items():
