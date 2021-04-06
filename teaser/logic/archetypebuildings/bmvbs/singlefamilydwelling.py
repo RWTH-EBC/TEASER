@@ -11,6 +11,7 @@ from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
+from teaser.logic.buildingobjects.buildingsystems.heatingcooling import HeatingCooling
 
 
 class SingleFamilyDwelling(Residential):
@@ -379,6 +380,7 @@ class SingleFamilyDwelling(Residential):
 
             zone.use_conditions = use_cond
             zone.use_conditions.with_ahu = False
+            zone.heating_cooling_system = HeatingCooling()
 
         for key, value in self.outer_wall_names.items():
             # North and South

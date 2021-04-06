@@ -14,6 +14,7 @@ from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
+from teaser.logic.buildingobjects.buildingsystems.heatingcooling import HeatingCooling
 
 
 class Office(NonResidential):
@@ -305,6 +306,7 @@ class Office(NonResidential):
             use_cond = UseCond(zone)
             use_cond.load_use_conditions(value[1], data_class=self.parent.data)
             zone.use_conditions = use_cond
+            zone.heating_cooling_system = HeatingCooling()
 
         # statistical estimation of the facade
 

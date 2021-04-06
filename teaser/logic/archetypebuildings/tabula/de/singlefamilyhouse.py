@@ -12,6 +12,7 @@ from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.buildingphysics.door import Door
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
+from teaser.logic.buildingobjects.buildingsystems.heatingcooling import HeatingCooling
 
 
 class SingleFamilyHouse(Residential):
@@ -115,7 +116,7 @@ class SingleFamilyHouse(Residential):
             year_of_construction,
             net_leased_area,
             with_ahu,
-            internal_gains_mode
+            internal_gains_mode,
         )
 
         self.construction_type = construction_type
@@ -362,8 +363,9 @@ class SingleFamilyHouse(Residential):
             use_cond = UseCond(parent=zone)
             use_cond.load_use_conditions(zone_usage=value[1])
             zone.use_conditions = use_cond
-
             zone.use_conditions.with_ahu = False
+
+            zone.heating_cooling_system = HeatingCooling()
 
         if self.facade_estimation_factors[self.building_age_group]["ow1"] != 0:
             for key, value in self._outer_wall_names_1.items():

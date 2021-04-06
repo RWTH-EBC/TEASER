@@ -86,5 +86,47 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     CoolerOn = ${get_true_false(zone.use_conditions.with_cooling)},
     withIdealThresholds = ${get_true_false(zone.use_conditions.with_ideal_thresholds)},
     TThresholdHeater = ${zone.use_conditions.T_threshold_heating},
-    TThresholdCooler = ${zone.use_conditions.T_threshold_cooling});
+    TThresholdCooler = ${zone.use_conditions.T_threshold_cooling},
+    
+    KRHeatTABS = ${zone.heating_cooling_system.KRHeatTABS},
+    TNHeatTABS = ${zone.heating_cooling_system.TNHeatTABS},
+    powerHeatTABS = ${zone.heating_cooling_system.powerHeatTABS},
+    KRCoolTABS = ${zone.heating_cooling_system.KRCoolTABS},
+    TNCoolTABS = ${zone.heating_cooling_system.TNCoolTABS},
+    powerCoolTABS = ${zone.heating_cooling_system.powerCoolTABS},
+
+    KRHeatPanel = ${zone.heating_cooling_system.KRHeatPanel},
+    TNHeatPanel = ${zone.heating_cooling_system.TNHeatPanel},
+    powerHeatPanel = ${zone.heating_cooling_system.powerHeatPanel},
+
+    KRCoolPanel = ${zone.heating_cooling_system.KRCoolPanel},
+    TNCoolPanel = ${zone.heating_cooling_system.TNCoolPanel},
+    powerCoolPanel = ${zone.heating_cooling_system.powerCoolPanel},
+
+    KRHeatRem = ${zone.heating_cooling_system.KRHeatRem},
+    TNHeatRem = ${zone.heating_cooling_system.TNHeatRem},
+    powerHeatRem = ${zone.heating_cooling_system.powerHeatRem},
+
+    KRHeatVent = ${zone.heating_cooling_system.KRHeatVent},
+    TNHeatVent = ${zone.heating_cooling_system.TNHeatVent},
+    powerHeatVent = ${zone.heating_cooling_system.powerHeatVent},
+
+    KRCoolVent = ${zone.heating_cooling_system.KRCoolVent},
+    TNCoolVent = ${zone.heating_cooling_system.TNCoolVent},
+    powerCoolVent = ${zone.heating_cooling_system.powerCoolVent},
+
+    shareHeatTabsExt = ${zone.heating_cooling_system.shareHeatTabsExt},
+    shareHeatTabsInt = ${zone.heating_cooling_system.shareHeatTabsInt},
+    shareHeatPanelExt = ${zone.heating_cooling_system.shareHeatPanelExt},
+    shareHeatPanelInt = ${zone.heating_cooling_system.shareHeatPanelInt},
+    shareHeatRadExt = ${zone.heating_cooling_system.shareHeatRadExt},
+    shareHeatRadInt = ${zone.heating_cooling_system.shareHeatRadInt},
+    shareHeatConv = ${zone.heating_cooling_system.shareHeatConv},
+    shareCoolTabsExt = ${zone.heating_cooling_system.shareCoolTabsExt},
+    shareCoolTabsInt = ${zone.heating_cooling_system.shareCoolTabsInt},
+    shareCoolPanelExt = ${zone.heating_cooling_system.shareCoolPanelExt},
+    shareCoolPanelInt = ${zone.heating_cooling_system.shareCoolPanelInt},
+    shareCoolRadExt = ${zone.heating_cooling_system.shareCoolRadExt},
+    shareCoolRadInt = ${zone.heating_cooling_system.shareCoolRadInt},
+    shareCoolConv = ${zone.heating_cooling_system.shareCoolConv},);
 end ${zone.parent.name}_${zone.name};
