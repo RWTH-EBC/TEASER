@@ -168,6 +168,16 @@ def export_multizone(buildings, prj, path=None):
 
         zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
 
+        _help_package(
+            path=zone_path,
+            name=bldg.name + '_DataBase',
+            within=prj.name + '.' + bldg.name)
+        _help_package_order(
+            path=zone_path,
+            package_list=bldg.thermal_zones,
+            addition=bldg.name + "_",
+            extra=None)
+
         for zone in bldg.thermal_zones:
 
             out_file = open(utilities.get_full_path(os.path.join(
@@ -204,19 +214,16 @@ def export_multizone(buildings, prj, path=None):
                     package_list=zone.pool_zones,
                     addition=zone.name + "_",
                     extra=None)
+                _help_package_order(
+                    path=zone_path,
+                    package_list=bldg.thermal_zones,
+                    addition=bldg.name + "_",
+                    extra=zone.name + "_DataBase")
             except AttributeError:
                 continue
 
 
-        _help_package(
-            path=zone_path,
-            name=bldg.name + '_DataBase',
-            within=prj.name + '.' + bldg.name)
-        _help_package_order(
-            path=zone_path,
-            package_list=bldg.thermal_zones,
-            addition=bldg.name + "_",
-            extra=None)
+
 
     _copy_script_unit_tests(os.path.join(dir_scripts, "runUnitTests.py"))
     _copy_reference_results(dir_resources, prj)

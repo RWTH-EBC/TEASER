@@ -620,11 +620,14 @@ class SwimmingPool(NonResidential):
 
                 ## d_pool ##
                 paramRecord["d_pool"] = self.poolsInDict[zone.name]["Tiefe Becken"]
+
+                ## V_pool ##
+                paramRecord["V_pool"] = self.poolsInDict[zone.name]["Water volume"]
                 
                 ## Q ## 
                 # Hilfsparameter zur Berechnung von Q
                 # k
-                if self.poolsInDict[zone.name]["Filterkombination"] == "ohne Ozon" or "mit Brom":
+                if self.poolsInDict[zone.name]["Filterkombination"] == "ohne Ozon" or self.poolsInDict[zone.name]["Filterkombination"] == "mit Brom":
                     k = 0.5
                 elif self.poolsInDict[zone.name]["Filterkombination"] == "mit Ozon":
                     k = 0.6
@@ -635,10 +638,10 @@ class SwimmingPool(NonResidential):
                 # m, a, n
                 if zone.name == "Kleinkinderbecken":
                     m = 2
-                elif zone.name.startswith("Freiformbecken") or zone.name == "Nichtschwimmerbecken" or "Mehrzweckbecken":
+                elif zone.name.startswith("Freiformbecken") or zone.name == "Nichtschwimmerbecken" or zone.name == "Mehrzweckbecken":
                     a = 2.7
                     n = 1
-                elif zone.name == "Schwimmerbecken" or "Springerbecken":
+                elif zone.name == "Schwimmerbecken" or zone.name == "Springerbecken":
                     a = 4.5
                     n = 1
                 else:
@@ -666,27 +669,36 @@ class SwimmingPool(NonResidential):
                     Q = max(Q_B, Q_H)
                 else: 
                     Q = min(Q_H, Q_K, Q_B)
+                # Umrechnung in m³/h
+                Q = Q/3600
                 paramRecord["Q"] = Q
 
                 ## Q_night ##
                 Q_night = self.poolsInDict[zone.name]["Aufbereitungsvolumenstrom Nachts"]
                 if Q_night < Q_B:
                     Q_night = Q_B
+                Q_night = Q_night/3600
                 paramRecord["Q_night"] = Q_night
 
                 ## V_storage ##
                 # Parameter v_f
-                if self.poolsInDict[zone.name]["Filtertyp"] == "Aktivkohlefilter mit Ozon" or "Zweischichtfilter mit Ozon":
+                if self.poolsInDict[zone.name]["Filtertyp"] == "Aktivkohlefilter mit Ozon" or self.poolsInDict[zone.name]["Filtertyp"] == "Zweischichtfilter mit Ozon":
                     v_f = 50
                 elif self.poolsInDict[zone.name]["Filtertyp"] == "offener Schnellfilter":
                     v_f = 15
-                elif self.poolsInDict[zone.name]["Filtertyp"] == "geschlossener Schnellfilter" or "geschlossener Sorptionsfilter" or "offener Saugfilter" or "Quantozonfilter" or "Quarzkiesfilter" or "Zweischichtfilter":
+                elif (self.poolsInDict[zone.name]["Filtertyp"] == "geschlossener Schnellfilter" 
+                or self.poolsInDict[zone.name]["Filtertyp"] == "geschlossener Sorptionsfilter" 
+                or self.poolsInDict[zone.name]["Filtertyp"] == "offener Saugfilter" 
+                or self.poolsInDict[zone.name]["Filtertyp"] == "Quantozonfilter" 
+                or self.poolsInDict[zone.name]["Filtertyp"] == "Quarzkiesfilter" 
+                or self.poolsInDict[zone.name]["Filtertyp"] == "Zweischichtfilter"):
                     if self.poolsInDict[zone.name]["Wasserart"] == "Süßwasser":
                         v_f = 30
                     else:
                         v_f = 20
                 else:
                     v_f = None
+                v_f = v_f/3600
                 # A_Filter
                 if v_f is not None:
                     A_Filter = Q/v_f
@@ -715,11 +727,14 @@ class SwimmingPool(NonResidential):
                 paramRecord["V_storage"] = V_storage
                 
                 ## beta ##
-                if self.poolsInDict[zone.name]["Tiefe Becken"] > 1.35:
-                    beta_inUse = 28
-                else:
+                if zone.name.startswith("Freiformbecken") or zone.name == "Mehrzweckbecken":
                     beta_inUse = 40
-
+                else:
+                    if self.poolsInDict[zone.name]["Tiefe Becken"] > 1.35:
+                        beta_inUse = 28
+                    else:
+                        beta_inUse = 40
+                beta_inUse = beta_inUse/3600
                 paramRecord["beta_inUse"] = beta_inUse
                 
                 ## use_parialLoad ##

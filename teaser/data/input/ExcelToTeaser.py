@@ -48,12 +48,11 @@ def load_type_element(element, year, construction, data_class, filePath, sheetNa
         Data = dict()
 
         #Loading the excel sheet
-        wb = xlrd.open_workbook(filePath);
-        sheet = wb.sheet_by_name(sheetNameElements);
+        wb = xlrd.open_workbook(filePath)
+        sheet = wb.sheet_by_name(sheetNameElements)
 
         #Get Column and Row to start
         startCol=getCol("name", filePath, sheetNameElements)
-        nameRow=getRow("name", filePath, sheetNameElements)
         startRow=getRow("OuterWall", filePath, sheetNameElements)
 
         #Read out excel for each type of element
@@ -235,8 +234,8 @@ def getArea(zoneId, element, orientation, filePath, sheetNameAreas, numZones):
     """    
     
     #Aufruf der Excel-Datei
-    wb = xlrd.open_workbook(filePath);
-    sheet = wb.sheet_by_name(sheetNameAreas);
+    wb = xlrd.open_workbook(filePath)
+    sheet = wb.sheet_by_name(sheetNameAreas)
     #Die zu betrachtende Spalte der Excel-Datei wird ausgewählt
     startCol=getCol("Zone 1", filePath, sheetNameAreas) 
     # Gets Data from the Pool
@@ -471,8 +470,8 @@ def getZoneArea(filePath, sheetNameAreas):
                  
     """        
 
-    wb = xlrd.open_workbook(filePath);
-    sheet = wb.sheet_by_name(sheetNameAreas);
+    wb = xlrd.open_workbook(filePath)
+    sheet = wb.sheet_by_name(sheetNameAreas)
     numZones = countZones(filePath, sheetNameAreas)
     listZoneAreas=[]    
     startCol=getCol("Zone 1", filePath, sheetNameAreas)    
@@ -501,8 +500,8 @@ def getZoneVolume(filePath, sheetNameAreas):
         Name of the sheet within the Excel File that contains the element areas           
     """        
 
-    wb = xlrd.open_workbook(filePath);
-    sheet = wb.sheet_by_name(sheetNameAreas);
+    wb = xlrd.open_workbook(filePath)
+    sheet = wb.sheet_by_name(sheetNameAreas)
     numZones = countZones(filePath, sheetNameAreas)
     listZoneVolumes=[]    
     startCol=getCol("Zone 1", filePath, sheetNameAreas)    
@@ -537,8 +536,8 @@ def getCol(keyword, filePath, sheetName):
         Name of the sheet within the Excel File that contains the element areas
                  
     """   
-    wb = xlrd.open_workbook(filePath);
-    sheet = wb.sheet_by_name(sheetName);
+    wb = xlrd.open_workbook(filePath)
+    sheet = wb.sheet_by_name(sheetName)
     for i in range(0, 3):
         for k in range(0, sheet.ncols):
             if sheet.cell_value(i, k).startswith(keyword):
@@ -568,8 +567,8 @@ def getRow(keyword, filePath, sheetName):
         Name of the sheet within the Excel File that contains the element areas
                  
     """   
-    wb = xlrd.open_workbook(filePath);
-    sheet = wb.sheet_by_name(sheetName);
+    wb = xlrd.open_workbook(filePath)
+    sheet = wb.sheet_by_name(sheetName)
     for i in range(0, sheet.nrows): 
         if sheet.cell_value(i, 0).startswith(keyword):
             return i
@@ -596,8 +595,8 @@ def countZones(filePath, sheetNameAreas):
         Name of the sheet within the Excel File that contains the element areas
                  
     """   
-    wb = xlrd.open_workbook(filePath);
-    sheet = wb.sheet_by_name(sheetNameAreas);
+    wb = xlrd.open_workbook(filePath)
+    sheet = wb.sheet_by_name(sheetNameAreas)
     
     numZones=0
     for i in range(0, 3):
@@ -731,8 +730,8 @@ def countPools(filePath, sheetNameAreas):
                  
     """   
 
-    wb = xlrd.open_workbook(filePath);
-    sheet = wb.sheet_by_name(sheetNameAreas);    
+    wb = xlrd.open_workbook(filePath)
+    sheet = wb.sheet_by_name(sheetNameAreas)
     pools = 0
     startCol = getCol("SB", filePath, sheetNameAreas)
     
