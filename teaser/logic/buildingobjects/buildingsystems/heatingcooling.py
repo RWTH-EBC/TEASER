@@ -99,34 +99,34 @@ class HeatingCooling(object):
         self.radiator = True
         self.ventilation = False
 
-        self.KRHeatTABS = 0.0
-        self.TNHeatTABS = 0.0
         self.powerHeatTABS = 0.0
-        self.KRCoolTABS = 0.0
-        self.TNCoolTABS = 0.0
         self.powerCoolTABS = 0.0
+        self.TThresholdHeaterTabs = 0.0
+        self.TThresholdCoolerTabs = 0.0
 
         self.KRHeatPanel = 0.0
         self.TNHeatPanel = 0.0
-        self.powerHeatPanel = 0.0
+        self.hHeatPanel = 0.0
+        self.lHeatPanel = 0.0
+
         self.KRCoolPanel = 0.0
         self.TNCoolPanel = 0.0
-        self.powerCoolPanel = 0.0
+        self.hCoolPanel = 0.0
+        self.lCoolPanel = 0.0
 
         self.KRHeatRem = 10000.0
         self.TNHeatRem = 1.0
-        self.powerHeatRem = self.parent.model_attr.heat_load
+        self.hHeatRem = self.parent.model_attr.heat_load
+        self.lHeatRem = 0.0
 
-        self.KRHeatVent = 0.0
-        self.TNHeatVent = 0.0
-        self.powerHeatVent = 0.0
-
-        self.KRCoolVent = 0.0
-        self.TNCoolVent = 0.0
-        self.powerCoolVent = 0.0
+        self.KRCoolRem = 0.0
+        self.TNCoolRem = 0.0
+        self.hCoolRem = 0.0
+        self.lCoolRem = 0.0
 
         self.shareHeatTabsExt = 0.0
         self.shareHeatTabsInt = 0.0
+
         self.shareHeatPanelExt = 0.0
         self.shareHeatPanelInt = 0.0
 
@@ -158,32 +158,30 @@ class HeatingCooling(object):
         self.radiator = False
         self.ventilation = False
 
-        self.KRHeatTABS = 0.0
-        self.TNHeatTABS = 0.0
         self.powerHeatTABS = 0.0
-        self.KRCoolTABS = 0.0
-        self.TNCoolTABS = 0.0
         self.powerCoolTABS = 0.0
+        self.TThresholdHeaterTabs = 0.0
+        self.TThresholdCoolerTabs = 0.0
 
         self.KRHeatPanel = 1000.0
         self.TNHeatPanel = 7200.0
-        self.powerHeatPanel = self.parent.area * specific_power_heat
+        self.hHeatPanel = self.parent.area * specific_power_heat
+        self.lHeatPanel = 0.0
 
         self.KRCoolPanel = 0.0
         self.TNCoolPanel = 0.0
-        self.powerCoolPanel = 0.0
+        self.hCoolPanel = 0.0
+        self.lCoolPanel = 0.0
 
         self.KRHeatRem = 0.0
         self.TNHeatRem = 0.0
-        self.powerHeatRem = 0.0
+        self.hHeatRem = 0.0
+        self.lHeatRem = 0.0
 
-        self.KRHeatVent = 0.0
-        self.TNHeatVent = 0.0
-        self.powerHeatVent = 0.0
-
-        self.KRCoolVent = 0.0
-        self.TNCoolVent = 0.0
-        self.powerCoolVent = 0.0
+        self.KRCoolRem = 0.0
+        self.TNCoolRem = 0.0
+        self.hCoolRem = 0.0
+        self.lCoolRem = 0.0
 
         self.shareHeatTabsExt = 0.0
         self.shareHeatTabsInt = 0.0
@@ -213,38 +211,36 @@ class HeatingCooling(object):
         !!!These values are dummy values and need to be set correctly!!!
         """
         self.heating = True
-        self.cooling = False
+        self.cooling = True
         self.tabs = False
         self.floor = True
         self.radiator = False
         self.ventilation = False
 
-        self.KRHeatTABS = 0.0
-        self.TNHeatTABS = 0.0
         self.powerHeatTABS = 0.0
-        self.KRCoolTABS = 0.0
-        self.TNCoolTABS = 0.0
         self.powerCoolTABS = 0.0
+        self.TThresholdHeaterTabs = 0.0
+        self.TThresholdCoolerTabs = 0.0
 
         self.KRHeatPanel = 1000.0
         self.TNHeatPanel = 7200.0
-        self.powerHeatPanel = self.parent.area * specific_power_heat
+        self.hHeatPanel = self.parent.area * specific_power_heat
+        self.lHeatPanel = 0.0
 
         self.KRCoolPanel = 1000.0
         self.TNCoolPanel = 7200.0
-        self.powerCoolPanel = self.parent.area * specific_power_cool
+        self.hCoolPanel = 0.0
+        self.lCoolPanel = self.parent.area * specific_power_cool
 
         self.KRHeatRem = 0.0
         self.TNHeatRem = 0.0
-        self.powerHeatRem = 0.0
+        self.hHeatRem = 0.0
+        self.lHeatRem = 0.0
 
-        self.KRHeatVent = 0.0
-        self.TNHeatVent = 0.0
-        self.powerHeatVent = 0.0
-
-        self.KRCoolVent = 0.0
-        self.TNCoolVent = 0.0
-        self.powerCoolVent = 0.0
+        self.KRCoolRem = 0.0
+        self.TNCoolRem = 0.0
+        self.hCoolRem = 0.0
+        self.lCoolRem = 0.0
 
         self.shareHeatTabsExt = 0.0
         self.shareHeatTabsInt = 0.0
