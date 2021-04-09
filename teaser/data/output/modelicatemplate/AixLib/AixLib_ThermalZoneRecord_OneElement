@@ -71,6 +71,8 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     maxOverheatingACH = ${get_list(zone.use_conditions.max_overheating_infiltration)},
     maxSummerACH = ${get_list(zone.use_conditions.max_summer_infiltration)},
     winterReduction = ${get_list(zone.use_conditions.winter_reduction_infiltration)},
+    maxIrr = ${get_list(zone.model_attr.shading_max_irr)},
+    shadingFactor = ${get_list(zone.model_attr.shading_g_total)},
     withAHU = ${get_true_false(zone.use_conditions.with_ahu)},
     minAHU = ${zone.use_conditions.min_ahu},
     maxAHU = ${zone.use_conditions.max_ahu},

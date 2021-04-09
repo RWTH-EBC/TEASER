@@ -1,0 +1,5 @@
+simulateModel("${project.name}.${bldg.name}.${bldg.name}", method="Dassl", tolerance=0.0001, stopTime=${stop_time}, resultFile="${bldg.name}");
+% for name_variable in names_variables:
+createPlot(id=${loop.index + 1}, y={"${name_variable}"});
+% endfor
+

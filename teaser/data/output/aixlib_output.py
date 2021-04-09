@@ -5,6 +5,7 @@ import warnings
 from mako.template import Template
 from mako.lookup import TemplateLookup
 import teaser.logic.utilities as utilities
+import shutil
 
 
 def export_multizone(buildings, prj, path=None):
@@ -81,6 +82,10 @@ def export_multizone(buildings, prj, path=None):
         filename=utilities.get_full_path(
             "data/output/modelicatemplate/AixLib/AixLib_Multizone"),
         lookup=lookup)
+    test_script_template = Template(
+        filename=utilities.get_full_path(
+            "data/output/modelicatemplate/modelica_test_script"),
+        lookup=lookup)
 
     uses = [
         'Modelica(version="' + prj.modelica_info.version + '")',
@@ -95,6 +100,7 @@ def export_multizone(buildings, prj, path=None):
         package_list=buildings,
         addition=None,
         extra=None)
+    _copy_weather_data(prj.weather_file_path, path)
 
     for i, bldg in enumerate(buildings):
 
@@ -144,6 +150,17 @@ def export_multizone(buildings, prj, path=None):
             modelica_info=bldg.parent.modelica_info))
         out_file.close()
 
+        dir_resources = os.path.join(path, "Resources")
+        if not os.path.exists(dir_resources):
+            os.mkdir(dir_resources)
+        dir_scripts = os.path.join(dir_resources, "Scripts")
+        if not os.path.exists(dir_scripts):
+            os.mkdir(dir_scripts)
+        dir_dymola = os.path.join(dir_scripts, "Dymola")
+        if not os.path.exists(dir_dymola):
+            os.mkdir(dir_dymola)
+        _help_test_script(bldg, dir_dymola, test_script_template)
+
         zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
 
         for zone in bldg.thermal_zones:
@@ -171,8 +188,74 @@ def export_multizone(buildings, prj, path=None):
             addition=bldg.name + "_",
             extra=None)
 
+    _copy_script_unit_tests(os.path.join(dir_scripts, "runUnitTests.py"))
+    _copy_reference_results(dir_resources, prj)
+
     print("Exports can be found here:")
     print(path)
+
+
+def _copy_reference_results(dir_resources, prj):
+    """Copy reference results to modelica output.
+
+    Parameters
+    ----------
+    dir_resources : str
+        Resources directory of the modelica output
+    prj : teaser.project.Project
+        Project to be exported
+    """
+
+    if prj.dir_reference_results is not None:
+        dir_ref_out = os.path.join(dir_resources, "ReferenceResults")
+        if not os.path.exists(dir_ref_out):
+            os.mkdir(dir_ref_out)
+        dir_ref_out_dymola = os.path.join(dir_ref_out, "Dymola")
+        if not os.path.exists(dir_ref_out_dymola):
+            os.mkdir(dir_ref_out_dymola)
+        for filename in os.listdir(prj.dir_reference_results):
+            if filename.endswith(".txt"):
+                shutil.copy2(
+                    os.path.join(prj.dir_reference_results, filename),
+                    os.path.join(dir_ref_out_dymola, filename)
+                )
+
+
+def _help_test_script(bldg, dir_dymola, test_script_template):
+    """Create a test script for regression testing with BuildingsPy
+
+    Parameters
+    ----------
+    bldg : teaser.logic.buildingobjects.building.Building
+        Building for which test script is created
+    dir_dymola : str
+        Output directory for Dymola scripts
+    test_script_template : mako.template.Template
+        Template for the test script
+
+    Returns
+    -------
+    dir_scripts : str
+        Path to the scripts directory
+    """
+
+    dir_building = os.path.join(dir_dymola, bldg.name)
+    if not os.path.exists(dir_building):
+        os.mkdir(dir_building)
+    out_file = open(utilities.get_full_path
+                    (os.path.join(dir_building, bldg.name + ".mos")), 'w')
+    names_variables = []
+    for i, zone in enumerate(bldg.thermal_zones):
+        names_variables.append(f"multizone.PHeater[{i+1}]")
+        names_variables.append(f"multizone.PCooler[{i+1}]")
+        names_variables.append(f"multizone.TAir[{i+1}]")
+    out_file.write(test_script_template.render_unicode(
+        project=bldg.parent,
+        bldg=bldg,
+        stop_time=3600 * 24 * 365,
+        names_variables=names_variables,
+    ))
+    out_file.close()
 
 
 def _help_package(path, name, uses=None, within=None):
@@ -232,3 +315,30 @@ def _help_package_order(path, package_list, addition=None, extra=None):
     out_file.write(order_template.render_unicode
                    (list=package_list, addition=addition, extra=extra))
     out_file.close()
+
+
+def _copy_weather_data(source_path, destination_path):
+    """Copies the imported .mos weather file to the results folder.
+
+    Parameters
+    ----------
+    source_path : str
+        path of local weather file
+    destination_path : str
+        path of where the weather file should be placed
+    """
+
+    shutil.copy2(source_path, destination_path)
+
+
+def _copy_script_unit_tests(destination_path):
+    """Copies the script to run the unit tests.
+
+    Parameters
+    ----------
+    destination_path : str
+        path of where the weather file should be placed
+    """
+
+    source_path = utilities.get_full_path("data/output/runUnitTests.py")
+    shutil.copy2(source_path, destination_path)

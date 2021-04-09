@@ -6,7 +6,8 @@ model ${zone.parent.name}_${zone.name}
   ${library}.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=${library}.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam="${zone.parent.parent.weather_file_path.replace("\\", "/")}")
+    filNam=Modelica.Utilities.Files.loadResource(
+        "modelica://${zone.parent.parent.name}/${zone.parent.parent.weather_file_name}"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-98,52},{-78,72}})));
   ${library}.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${min_orientations(zone.model_attr.n_outer)}](    each outSkyCon=true,
@@ -32,8 +33,8 @@ model ${zone.parent.name}_${zone.name}
 % else:
     VAir=0.0,
 % endif
-    hConvExt=${zone.model_attr.alpha_conv_inner_ow},
-    hConvWin=${zone.model_attr.alpha_conv_inner_win},
+    hConExt=${zone.model_attr.alpha_conv_inner_ow},
+    hConWin=${zone.model_attr.alpha_conv_inner_win},
     gWin=${zone.model_attr.weighted_g_value},
     ratioWinConRad=${zone.model_attr.ratio_conv_rad_inner_win},
     nExt=1,
@@ -41,7 +42,7 @@ model ${zone.parent.name}_${zone.name}
     CExt={${zone.model_attr.c1_ow}},
     hRad=${zone.model_attr.alpha_rad_inner_mean},
     AInt=${zone.model_attr.area_iw},
-    hConvInt=${zone.model_attr.alpha_conv_inner_iw},
+    hConInt=${zone.model_attr.alpha_conv_inner_iw},
     nInt=1,
     RInt={${zone.model_attr.r1_iw}},
     CInt={${zone.model_attr.c1_iw}},
@@ -64,7 +65,7 @@ model ${zone.parent.name}_${zone.name}
     wfWin=${get_list(zone.model_attr.weightfactor_win)},
     withLongwave=true,
     aExt=${zone.model_attr.solar_absorp_ow},
-    hConvWallOut=${zone.model_attr.alpha_conv_outer_ow},
+    hConWallOut=${zone.model_attr.alpha_conv_outer_ow},
     hRad=${zone.model_attr.alpha_rad_outer_mean},
     TGro=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
@@ -76,9 +77,9 @@ model ${zone.parent.name}_${zone.name}
     wfWin=${get_list(zone.model_attr.weightfactor_win)},
     withLongwave=true,
     aExt=${zone.model_attr.solar_absorp_ow},
-    hConvWallOut=${zone.model_attr.alpha_conv_outer_ow},
+    hConWallOut=${zone.model_attr.alpha_conv_outer_ow},
     hRad=${zone.model_attr.alpha_rad_outer_mean},
-    hConvWinOut=${zone.model_attr.alpha_conv_outer_win},
+    hConWinOut=${zone.model_attr.alpha_conv_outer_win},
     TGro=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % endif
@@ -106,7 +107,7 @@ model ${zone.parent.name}_${zone.name}
     annotation (Placement(
     transformation(extent={{-100,-10},{-66,22}}),iconTransformation(
     extent={{-70,-12},{-50,8}})));
-  Modelica.Blocks.Sources.Constant alphaWall(k=${zone.model_attr.alpha_comb_outer_ow}*${zone.model_attr.area_ow})
+  Modelica.Blocks.Sources.Constant hConWall(k=${zone.model_attr.alpha_comb_outer_ow}*${zone.model_attr.area_ow})
     "Outdoor coefficient of heat transfer for walls"
     annotation (Placement(
     transformation(
@@ -224,7 +225,7 @@ equation
     color={191,0,0}));
   connect(thermalConductorWall.fluid, prescribedTemperature.port)
     annotation (Line(points={{26,1},{24,1},{24,0},{20,0}}, color={191,0,0}));
-  connect(alphaWall.y, thermalConductorWall.Gc)
+  connect(hConWall.y, thermalConductorWall.Gc)
     annotation (Line(points={{30,-11.6},{30,-4},{31,-4}}, color={0,0,127}));
 % if zone.model_attr.merge_windows is False:
   connect(hConvWin.y, thermalConductorWin.Gc)
