@@ -87,33 +87,31 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     withIdealThresholds = ${get_true_false(zone.use_conditions.with_ideal_thresholds)},
     TThresholdHeater = ${zone.use_conditions.T_threshold_heating},
     TThresholdCooler = ${zone.use_conditions.T_threshold_cooling},
-    
-    KRHeatTABS = ${zone.heating_cooling_system.KRHeatTABS},
-    TNHeatTABS = ${zone.heating_cooling_system.TNHeatTABS},
-    powerHeatTABS = ${zone.heating_cooling_system.powerHeatTABS},
-    KRCoolTABS = ${zone.heating_cooling_system.KRCoolTABS},
-    TNCoolTABS = ${zone.heating_cooling_system.TNCoolTABS},
-    powerCoolTABS = ${zone.heating_cooling_system.powerCoolTABS},
+
+    TThresholdHeaterTabs = ${zone.heating_cooling_system.TThresholdHeaterTabs},
+    TThresholdCoolerTabs = ${zone.heating_cooling_system.TThresholdCoolerTabs},
+    powerHeatTabs = ${zone.heating_cooling_system.powerHeatTabs},
+    powerCoolTabs = ${zone.heating_cooling_system.powerCoolTabs},
 
     KRHeatPanel = ${zone.heating_cooling_system.KRHeatPanel},
     TNHeatPanel = ${zone.heating_cooling_system.TNHeatPanel},
-    powerHeatPanel = ${zone.heating_cooling_system.powerHeatPanel},
+    hHeatPanel = ${zone.heating_cooling_system.hHeatPanel},
+    lHeatPanel = ${zone.heating_cooling_system.lHeatPanel},
 
     KRCoolPanel = ${zone.heating_cooling_system.KRCoolPanel},
     TNCoolPanel = ${zone.heating_cooling_system.TNCoolPanel},
-    powerCoolPanel = ${zone.heating_cooling_system.powerCoolPanel},
+    hCoolPanel = ${zone.heating_cooling_system.hCoolPanel},
+    lCoolPanel = ${zone.heating_cooling_system.lCoolPanel},
 
     KRHeatRem = ${zone.heating_cooling_system.KRHeatRem},
     TNHeatRem = ${zone.heating_cooling_system.TNHeatRem},
-    powerHeatRem = ${zone.heating_cooling_system.powerHeatRem},
+    hHeatRem = ${zone.heating_cooling_system.hHeatRem},
+    lHeatRem = ${zone.heating_cooling_system.lHeatRem},
 
-    KRHeatVent = ${zone.heating_cooling_system.KRHeatVent},
-    TNHeatVent = ${zone.heating_cooling_system.TNHeatVent},
-    powerHeatVent = ${zone.heating_cooling_system.powerHeatVent},
-
-    KRCoolVent = ${zone.heating_cooling_system.KRCoolVent},
-    TNCoolVent = ${zone.heating_cooling_system.TNCoolVent},
-    powerCoolVent = ${zone.heating_cooling_system.powerCoolVent},
+    KRCoolRem = ${zone.heating_cooling_system.KRCoolRem},
+    TNCoolRem = ${zone.heating_cooling_system.TNCoolRem},
+    hCoolRem = ${zone.heating_cooling_system.hCoolRem},
+    lCoolRem = ${zone.heating_cooling_system.lCoolRem},
 
     shareHeatTabsExt = ${zone.heating_cooling_system.shareHeatTabsExt},
     shareHeatTabsInt = ${zone.heating_cooling_system.shareHeatTabsInt},
