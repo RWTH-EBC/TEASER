@@ -47,8 +47,8 @@ class HeatingCooling(object):
         self.radiator = True
         self.ventilation = False
 
-        self.powerHeatTABS = 0.0
-        self.powerCoolTABS = 0.0
+        self.powerHeatTabs = 0.0
+        self.powerCoolTabs = 0.0
         self.TThresholdHeaterTabs = 0.0
         self.TThresholdCoolerTabs = 0.0
 
@@ -99,8 +99,8 @@ class HeatingCooling(object):
         self.radiator = True
         self.ventilation = False
 
-        self.powerHeatTABS = 0.0
-        self.powerCoolTABS = 0.0
+        self.powerHeatTabs = 0.0
+        self.powerCoolTabs = 0.0
         self.TThresholdHeaterTabs = 0.0
         self.TThresholdCoolerTabs = 0.0
 
@@ -158,8 +158,8 @@ class HeatingCooling(object):
         self.radiator = False
         self.ventilation = False
 
-        self.powerHeatTABS = 0.0
-        self.powerCoolTABS = 0.0
+        self.powerHeatTabs = 0.0
+        self.powerCoolTabs = 0.0
         self.TThresholdHeaterTabs = 0.0
         self.TThresholdCoolerTabs = 0.0
 
@@ -217,8 +217,8 @@ class HeatingCooling(object):
         self.radiator = False
         self.ventilation = False
 
-        self.powerHeatTABS = 0.0
-        self.powerCoolTABS = 0.0
+        self.powerHeatTabs = 0.0
+        self.powerCoolTabs = 0.0
         self.TThresholdHeaterTabs = 0.0
         self.TThresholdCoolerTabs = 0.0
 
@@ -230,7 +230,7 @@ class HeatingCooling(object):
         self.KRCoolPanel = 1000.0
         self.TNCoolPanel = 7200.0
         self.hCoolPanel = 0.0
-        self.lCoolPanel = self.parent.area * specific_power_cool
+        self.lCoolPanel = -self.parent.area * specific_power_cool
 
         self.KRHeatRem = 0.0
         self.TNHeatRem = 0.0
