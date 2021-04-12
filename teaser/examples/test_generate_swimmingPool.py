@@ -89,7 +89,7 @@ def test_generate_swimmingPool():
 
     prj.calc_all_buildings()
 
-    # pushs the "thermal zones" wich are Pools in the zone "Schwimmhalle" 
+    # Deletes empty zones and pushs the "thermal zones" wich are Pools in the zone "Schwimmhalle" 
     # in the parameter "pool_zones" and delets it out of the thermal zones 
     # it should be considered that, that the function is called after all calculations 
     # directly before the export, otherwise problems can occur when handling the thermal zones. 

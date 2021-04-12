@@ -350,9 +350,6 @@ class SwimmingPool(NonResidential):
         self.net_leased_area = 0.0
         # create zones with their corresponding area, name and usage
         for key, value in self.zone_area_factors.items():
-            # If Volume of Zone < 1m**3 then no Zone will be created
-            if value[1] < 1:
-                continue
             zone = ThermalZone(self)
             zone.area = value[0] 
             zone.volume = value[1]
@@ -789,9 +786,17 @@ class SwimmingPool(NonResidential):
 
     def orderPoolZones(self):
         """ Orders the Zones of Pools
-        pushs the zones which are actually pools into the zone "Schwimmhalle" in the parameter "pool_zones"
+        Deletes empty zones and pushs the zones which are actually pools 
+        into the zone "Schwimmhalle" in the parameter "pool_zones"
         and deletes it out of the thermal zones
         """
+        ids = list()
+        for id, zone in enumerate(self.thermal_zones):
+            if zone.area == 0.0:
+                ids.append(id)
+        ids.sort(reverse=True)
+        for id in ids:
+            del self.thermal_zones[id]
         for id, zone in enumerate(self.thermal_zones):
             if zone.name == "Schwimmhalle":
                 zone.pool_zones = list()
