@@ -164,29 +164,17 @@ def calc_report_data(prj, path):
         'UValueGroundFloor',
         'gValueWindow'
     ]
-    #
+
     prj_data_flat_sorted = [(k, prj_data_flat[k]) for k in prj_sorted_list]
     keys = ['']
     keys.extend([x[0] for x in prj_data_flat_sorted])
-    # for key in prj_data_flat_sorted.keys():
-    #     # if isinstance(prj_data[key], dict):
-    #     #     for subkey in prj_data[key].keys():
-    #     #         keys.append(str(key) + '_' + str(subkey))
-    #     # else:
-    #         keys.append(str(key))
 
     values = ['TEASER']
     values.extend([x[1] for x in prj_data_flat_sorted])
-    # for key, val in prj_data_flat_sorted.items():
-    #     # if isinstance(prj_data[key], dict):
-    #     #     for subkey in prj_data[key].keys():
-    #     #         values.append(prj_data[key][subkey])
-    #     # else:
-    #         values.append(prj_data_flat_sorted[key])
     import csv
     import os
-    with open(os.path.join(path,'teaser_data.csv'), 'w', newline='', encoding='utf-8') as f:
+    with open(os.path.join(path, 'teaser_data.csv'), 'w', newline='', encoding='utf-8') as f:
         csvwriter = csv.writer(f, delimiter=';')
         csvwriter.writerow(keys)
         csvwriter.writerow(localize_floats(values))
-    return prj_data
+    return prj_data_flat_sorted
