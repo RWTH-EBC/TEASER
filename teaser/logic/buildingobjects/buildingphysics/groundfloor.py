@@ -113,8 +113,5 @@ class GroundFloor(OuterWall):
         self._orientation = -2.0
         self._inner_convection = 1.7
         self._inner_radiation = 5.0
-        # # Todo: Hack/hotfix for zones without outerwalls or roofs
-        # self._outer_convection = 0.01
-        # self._outer_radiation = 0.01
         self._outer_convection = None
         self._outer_radiation = None
