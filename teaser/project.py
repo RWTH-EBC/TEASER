@@ -112,7 +112,7 @@ class Project(object):
 
         self.load_data = load_data
 
-        self._number_of_elements_calc = 2
+        self._number_of_elements_calc = 4
         self._merge_windows_calc = False
         self._used_library_calc = "AixLib"
 
@@ -1165,7 +1165,7 @@ internal_gains_mode: int [1, 2, 3]
         else:
             self.data = None
 
-        self._number_of_elements_calc = 2
+        self._number_of_elements_calc = 4
         self._merge_windows_calc = False
         self._used_library_calc = "AixLib"
 

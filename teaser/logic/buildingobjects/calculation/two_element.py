@@ -641,6 +641,7 @@ class TwoElement(object):
             out_wall.area for out_wall in self.thermal_zone.outer_walls
         ) + sum(roof.area for roof in self.thermal_zone.rooftops)
 
+
         self.r_conv_outer_ow = 1 / (
             sum(1 / out_wall.r_outer_conv for out_wall in self.thermal_zone.outer_walls)
             + sum(1 / roof.r_outer_conv for roof in self.thermal_zone.rooftops)
@@ -648,10 +649,16 @@ class TwoElement(object):
         self.r_rad_outer_ow = 1 / (
             sum(1 / out_wall.r_outer_rad for out_wall in self.thermal_zone.outer_walls)
             + sum(1 / roof.r_outer_rad for roof in self.thermal_zone.rooftops)
+            # # Todo: Hack/hotfix for zones without outerwalls or roofs
+            # + sum(1 / groundfloor.r_outer_rad for groundfloor in self.thermal_zone.ground_floors)
         )
         self.r_comb_outer_ow = 1 / (
             sum(1 / out_wall.r_outer_comb for out_wall in self.thermal_zone.outer_walls)
             + sum(1 / roof.r_outer_comb for roof in self.thermal_zone.rooftops)
+            # # Todo: Hack/hotfix for zones without outerwalls or roofs
+            # + sum(1 / groundfloor.r_outer_comb for groundfloor in
+            #       self.thermal_zone.ground_floors)
+
         )
 
         self.ir_emissivity_outer_ow = (
