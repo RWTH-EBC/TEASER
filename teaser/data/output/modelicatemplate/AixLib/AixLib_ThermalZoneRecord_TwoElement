@@ -128,5 +128,5 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     shareCoolPanelInt = ${zone.heating_cooling_system.shareCoolPanelInt},
     shareCoolRadExt = ${zone.heating_cooling_system.shareCoolRadExt},
     shareCoolRadInt = ${zone.heating_cooling_system.shareCoolRadInt},
-    shareCoolConv = ${zone.heating_cooling_system.shareCoolConv},);
+    shareCoolConv = ${zone.heating_cooling_system.shareCoolConv});
 end ${zone.parent.name}_${zone.name};
