@@ -322,11 +322,11 @@ class SingleFamilyHouse(Residential):
 
         if self.with_ahu is True:
             self.central_ahu.temperature_profile = (
-                7 * [293.15] + 12 * [295.15] + 6 * [293.15]
+                7 * [293.15] + 12 * [295.15] + 5 * [293.15]
             )
-            self.central_ahu.min_relative_humidity_profile = 25 * [0.45]
-            self.central_ahu.max_relative_humidity_profile = 25 * [0.55]
-            self.central_ahu.v_flow_profile = 7 * [0.0] + 12 * [1.0] + 6 * [0.0]
+            self.central_ahu.min_relative_humidity_profile = 24 * [0.45]
+            self.central_ahu.max_relative_humidity_profile = 24 * [0.55]
+            self.central_ahu.v_flow_profile = 7 * [0.0] + 12 * [1.0] + 5 * [0.0]
 
         self.internal_gains_mode = internal_gains_mode
 

@@ -249,10 +249,8 @@ class UseConditions(object):
             294.15,
             294.15,
             294.15,
-            294.15,
         ]
         self._cooling_profile = [
-            294.15,
             294.15,
             294.15,
             294.15,

@@ -238,8 +238,8 @@ class TerracedHouse(SingleFamilyHouse):
             self.central_ahu.profile_temperature = (
                 7 * [293.15] +
                 12 * [295.15] +
-                6 * [293.15])
-            self.central_ahu.profile_min_relative_humidity = (25 * [0.45])
-            self.central_ahu.profile_max_relative_humidity = (25 * [0.55])
+                5 * [293.15])
+            self.central_ahu.profile_min_relative_humidity = (24 * [0.45])
+            self.central_ahu.profile_max_relative_humidity = (24 * [0.55])
             self.central_ahu.profile_v_flow = (
-                7 * [0.0] + 12 * [1.0] + 6 * [0.0])
+                7 * [0.0] + 12 * [1.0] + 5 * [0.0])
