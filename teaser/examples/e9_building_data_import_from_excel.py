@@ -316,10 +316,10 @@ def import_building_from_excel(
     if bldg.with_ahu is True:
         bldg.central_ahu.heat_recovery = True  # HardCodedInput
         bldg.central_ahu.efficiency_recovery = 0.35  # HardCodedInput
-        bldg.central_ahu.temperature_profile = 25 * [273.15 + 18]  # HardCodedInput
-        bldg.central_ahu.min_relative_humidity_profile = 25 * [0]  # HardCodedInput
-        bldg.central_ahu.max_relative_humidity_profile = 25 * [1]  # HardCodedInput
-        bldg.central_ahu.v_flow_profile = 25 * [1]  # HardCodedInput
+        bldg.central_ahu.temperature_profile = 24 * [273.15 + 18]  # HardCodedInput
+        bldg.central_ahu.min_relative_humidity_profile = 24 * [0]  # HardCodedInput
+        bldg.central_ahu.max_relative_humidity_profile = 24 * [1]  # HardCodedInput
+        bldg.central_ahu.v_flow_profile = 24 * [1]  # HardCodedInput
 
     # Parameters that need hard coding in teasers logic classes
     # 1. "use_set_back" needs hard coding at aixlib.py in the init; defines
