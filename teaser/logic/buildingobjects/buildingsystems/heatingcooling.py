@@ -263,3 +263,122 @@ class HeatingCooling(object):
         self.shareCoolRadInt = 0.0
 
         self.shareCoolConv = 0.0
+
+    def tabs_heating_cooling(self, specific_power_heat, specific_power_cool):
+        """Set parameter to typical tabs heating and cooling system.
+
+        !!!These values are dummy values and need to be set correctly!!!
+        """
+        self.heating = True
+        self.cooling = True
+        self.tabs = True
+        self.floor = False
+        self.radiator = False
+        self.ventilation = False
+
+        self.powerHeatTabs = self.parent.area * specific_power_heat
+        self.powerCoolTabs = -self.parent.area * specific_power_cool
+        self.TThresholdHeaterTabs = 273.15 + 14
+        self.TThresholdCoolerTabs = 273.15 + 16
+
+        self.KRHeatPanel = 1000.0
+        self.TNHeatPanel = 7200.0
+        self.hHeatPanel = 0.0
+        self.lHeatPanel = 0.0
+
+        self.KRCoolPanel = 1000.0
+        self.TNCoolPanel = 7200.0
+        self.hCoolPanel = 0.0
+        self.lCoolPanel = 0.0
+
+        self.KRHeatRem = 0.0
+        self.TNHeatRem = 0.0
+        self.hHeatRem = 0.0
+        self.lHeatRem = 0.0
+
+        self.KRCoolRem = 0.0
+        self.TNCoolRem = 0.0
+        self.hCoolRem = 0.0
+        self.lCoolRem = 0.0
+
+        self.shareHeatTabsExt = 0.5
+        self.shareHeatTabsInt = 0.5
+
+        self.shareHeatPanelExt = 0.0
+        self.shareHeatPanelInt = 0.0
+
+        self.shareHeatRadExt = 0.0
+        self.shareHeatRadInt = 0.0
+
+        self.shareHeatConv = 0.0
+
+        self.shareCoolTabsExt = 0.5
+        self.shareCoolTabsInt = 0.5
+
+        self.shareCoolPanelExt = 0.0
+        self.shareCoolPanelInt = 0.0
+
+        self.shareCoolRadExt = 0.0
+        self.shareCoolRadInt = 0.0
+
+        self.shareCoolConv = 0.0
+
+    def tabs_plus_air_heating_cooling(self, specific_power_heat, specific_power_cool):
+        """Set parameter to typical tabs heating and cooling system.
+
+        !!!These values are dummy values and need to be set correctly!!!
+        """
+        self.heating = True
+        self.cooling = True
+        self.tabs = True
+        self.floor = False
+        self.radiator = False
+        self.ventilation = True
+
+        self.powerHeatTabs = self.parent.area * specific_power_heat
+        self.powerCoolTabs = -self.parent.area * specific_power_cool
+        self.TThresholdHeaterTabs = 273.15 + 14
+        self.TThresholdCoolerTabs = 273.15 + 16
+
+        self.KRHeatPanel = 1000.0
+        self.TNHeatPanel = 7200.0
+        self.hHeatPanel = 0.0
+        self.lHeatPanel = 0.0
+
+        self.KRCoolPanel = 1000.0
+        self.TNCoolPanel = 7200.0
+        self.hCoolPanel = 0.0
+        self.lCoolPanel = 0.0
+
+        self.KRHeatRem = 1000.0
+        self.TNHeatRem = 1.0
+        self.hHeatRem = self.parent.model_attr.heat_load - self.powerHeatTabs
+        "gesamte von TEASER berechnete Heizlast - self.powerHeatTabs"
+        self.lHeatRem = 0.0
+
+        self.KRCoolRem = 0.0
+        self.TNCoolRem = 0.0
+        self.hCoolRem = 0.0
+        self.lCoolRem = 0.0
+
+        self.shareHeatTabsExt = 0.5
+        self.shareHeatTabsInt = 0.5
+
+        self.shareHeatPanelExt = 0.0
+        self.shareHeatPanelInt = 0.0
+
+        self.shareHeatRadExt = 0.0
+        self.shareHeatRadInt = 0.0
+
+        self.shareHeatConv = 1.0
+
+        self.shareCoolTabsExt = 0.5
+        self.shareCoolTabsInt = 0.5
+
+        self.shareCoolPanelExt = 0.0
+        self.shareCoolPanelInt = 0.0
+
+        self.shareCoolRadExt = 0.0
+        self.shareCoolRadInt = 0.0
+
+        self.shareCoolConv = 0.0
