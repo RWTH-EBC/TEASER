@@ -90,6 +90,13 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     TThresholdHeater = ${zone.use_conditions.T_threshold_heating},
     TThresholdCooler = ${zone.use_conditions.T_threshold_cooling},
 
+    heating = ${get_true_false(zone.heating_cooling_system.heating)},
+    cooling = ${get_true_false(zone.heating_cooling_system.cooling)},
+    tabs = ${get_true_false(zone.heating_cooling_system.tabs)},
+    floor = ${get_true_false(zone.heating_cooling_system.floor)},
+    radiator = ${get_true_false(zone.heating_cooling_system.radiator)},
+    ventilation = ${get_true_false(zone.heating_cooling_system.ventilation)},
+
     TThresholdHeaterTabs = ${zone.heating_cooling_system.TThresholdHeaterTabs},
     TThresholdCoolerTabs = ${zone.heating_cooling_system.TThresholdCoolerTabs},
     powerHeatTabs = ${zone.heating_cooling_system.powerHeatTabs},
