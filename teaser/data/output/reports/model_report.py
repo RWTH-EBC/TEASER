@@ -47,6 +47,7 @@ def calc_report_data(prj, path):
         prj_data[bldg_name]['WindowArea_Total'] = window_area_total
         prj_data[bldg_name]['OuterWallArea_Total'] = outer_wall_area_total
         prj_data[bldg_name]['WindowWallRatio'] = window_area_total / outer_wall_area_total
+        prj_data[bldg_name]['nZones'] = len(bldg.thermal_zones)
         u_values_win = []
         g_values_windows = []
         u_values_ground_floor = []
@@ -62,20 +63,26 @@ def calc_report_data(prj, path):
             # u_values_roof.append(tz.model_attr.ua_value_rt/tz.model_attr.area_rt)
             # u_values_ground_floor.append(tz.model_attr.ua_value_gf/tz.model_attr.area_gf)
             for window in tz.windows:
-                u_values_win.append(window.u_value)
+                u_values_win.append(1 / (window.r_conduc * window.area))
                 g_values_windows.append(window.g_value)
             for inner_wall in tz.inner_walls:
-                u_values_inner_wall.append(inner_wall.u_value)
+                u_values_inner_wall.append(
+                    1 / (inner_wall.r_conduc * inner_wall.area))
             for outer_wall in tz.outer_walls:
-                u_values_outer_wall.append(outer_wall.u_value)
+                u_values_outer_wall.append(
+                    1 / (outer_wall.r_conduc * outer_wall.area))
             for rooftop in tz.rooftops:
-                u_values_roof.append(rooftop.u_value)
+                u_values_roof.append(
+                    1 / (rooftop.r_conduc * rooftop.area))
             for ground_floor in tz.ground_floors:
-                u_values_ground_floor.append(ground_floor.u_value)
+                u_values_ground_floor.append(
+                    1 / (ground_floor.r_conduc * ground_floor.area))
             for ceiling in tz.ceilings:
-                u_values_ceiling.append(ceiling.u_value)
+                u_values_ceiling.append(
+                    1 / (ceiling.r_conduc * ceiling.area))
             for door in tz.doors:
-                u_values_door.append(door.u_value)
+                u_values_door.append(
+                    1 / (door.r_conduc * door.area))
         if len(u_values_outer_wall) > 0:
             prj_data[bldg_name]['UValueOuterWall'] = sum(u_values_outer_wall)\
                                                  /len(u_values_outer_wall)
@@ -137,7 +144,6 @@ def calc_report_data(prj, path):
 
 
 
-
     prj_sorted_list = [
         'NetGroundArea',
         'OuterWallArea_Total',
@@ -154,7 +160,6 @@ def calc_report_data(prj, path):
         'WindowArea_West',
         'WindowArea_East',
         'WindowWallRatio',
-        'GroundFloorArea',
         'UValueOuterWall',
         'UValueInnerWall',
         'UValueWindow',
@@ -162,8 +167,11 @@ def calc_report_data(prj, path):
         'UValueRoof',
         'UValueCeiling',
         'UValueGroundFloor',
-        'gValueWindow'
+        'gValueWindow',
+        'GroundFloorArea',
+        'nZones'
     ]
+
 
     prj_data_flat_sorted = [(k, prj_data_flat[k]) for k in prj_sorted_list]
     keys = ['']
