@@ -157,7 +157,8 @@ equation
   connect(PCoolerSum.y, WCoolerSum.u) annotation (Line(points={{38.7,65},{42.35,
           65},{42.35,65},{46.6,65}}, color={0,0,127}));
 
-  annotation (experiment(
+ annotation (__Dymola_selections={Selection(name="TEASERSimReport", match= {MatchVariable(name="*weaBus.TDryBul|*weaBus.relHum**", newName="Weather.%path%"),MatchVariable(name="*.TAir*|*TAirAverage*", newName="Temperatures.%path%"),MatchVariable(name="*W*Sum*", newName="Energys.%path"),MatchVariable(name="*PHeater*|PCooler*", newName="Capacities.%path%")})},
+      experiment(
       StartTime=${str(zone.parent.parent.modelica_info.start_time)},
       StopTime=${str(zone.parent.parent.modelica_info.stop_time)},
       Interval=${modelica_info.interval_output},
