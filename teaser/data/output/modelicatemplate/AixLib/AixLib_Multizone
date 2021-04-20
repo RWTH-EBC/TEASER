@@ -118,18 +118,12 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
       "Set points for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
 
-  Modelica.Blocks.Math.Sum PHeaterSum(nin=multizone.numZones)
-    "Power consumed for heating with ideal heaters"
-    annotation (Placement(transformation(extent={{24,82},{38,96}})));
-  Modelica.Blocks.Math.Sum PCoolerSum(nin=multizone.numZones)
-    "Power consumed for cooling with ideal coolers"
-    annotation (Placement(transformation(extent={{24,58},{38,72}})));
-  Modelica.Blocks.Continuous.Integrator WCoolerSum
-    "Energy consumed for cooling with ideal coolers"
-    annotation (Placement(transformation(extent={{48,58},{62,72}})));
-  Modelica.Blocks.Continuous.Integrator WHeaterSum
-    "Energy consumed for heating with ideal heaters"
-    annotation (Placement(transformation(extent={{48,82},{62,96}})));
+  AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.MultizonePostProcessing
+    multizonePostProcessing(
+    VAir=multizone.VAir,
+    numZones=multizone.numZones,
+    zoneParam=multizone.zoneParam)
+    annotation (Placement(transformation(extent={{82,80},{102,100}})));
 
 equation
   connect(weaDat.weaBus, multizone.weaBus) annotation (Line(
@@ -148,15 +142,20 @@ equation
 
   connect(tableTSetCool.y, multizone.TSetCool) annotation (Line(points={{55.2,-58},
           {36.8,-58},{36.8,-9}}, color={0,0,127}));
-  connect(multizone.PHeater, PHeaterSum.u) annotation (Line(points={{51,-5},{54,
-          -5},{54,50},{20,50},{20,89},{22.6,89}}, color={0,0,127}));
-  connect(multizone.PCooler, PCoolerSum.u) annotation (Line(points={{51,-7},{54,
-          -7},{54,50},{20,50},{20,65},{22.6,65}}, color={0,0,127}));
-  connect(PHeaterSum.y, WHeaterSum.u) annotation (Line(points={{38.7,89},{42.35,
-          89},{42.35,89},{46.6,89}}, color={0,0,127}));
-  connect(PCoolerSum.y, WCoolerSum.u) annotation (Line(points={{38.7,65},{42.35,
-          65},{42.35,65},{46.6,65}}, color={0,0,127}));
-
+  connect(multizone.TAir, multizonePostProcessing.TAir) annotation (Line(points={{51,4.95},
+          {70,4.95},{70,99},{81.8,99}},             color={0,0,127}));
+  connect(multizone.PCooler, multizonePostProcessing.PCooler) annotation (Line(
+        points={{51,-7},{70,-7},{70,90.6},{81.8,90.6}},
+                                                      color={0,0,127}));
+  connect(multizone.PHeater, multizonePostProcessing.PHeater) annotation (Line(
+        points={{51,-5},{70,-5},{70,94.8},{81.8,94.8}},
+                                                      color={0,0,127}));
+  connect(multizone.Pel, multizonePostProcessing.PelAHU) annotation (Line(
+        points={{51,1},{70,1},{70,86.6},{81.6,86.6}}, color={0,0,127}));
+  connect(multizone.PCoolAHU, multizonePostProcessing.PCoolAHU) annotation (
+      Line(points={{51,-3},{70,-3},{70,79},{81.6,79}}, color={0,0,127}));
+  connect(multizone.PHeatAHU, multizonePostProcessing.PHeatAHU) annotation (
+      Line(points={{51,-1},{70,-1},{70,82.8},{81.6,82.8}}, color={0,0,127}));
  annotation (__Dymola_selections={Selection(name="TEASERSimReport", match= {MatchVariable(name="*weaBus.TDryBul|*weaBus.relHum**", newName="Weather.%path%"),MatchVariable(name="*.TAir*|*TAirAverage*", newName="Temperatures.%path%"),MatchVariable(name="*W*Sum*", newName="Energys.%path"),MatchVariable(name="*PHeater*|PCooler*", newName="Capacities.%path%")})},
       experiment(
       StartTime=${str(zone.parent.parent.modelica_info.start_time)},
@@ -187,11 +186,7 @@ equation
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid,
           textString="TB")}),
-    Diagram(graphics={Rectangle(
-          extent={{20,100},{100,50}},
-          lineColor={28,108,200},
-          fillColor={135,135,135},
-          fillPattern=FillPattern.Solid), Text(
+    Diagram(graphics={                    Text(
           extent={{38,110},{74,98}},
           lineColor={28,108,200},
           fillColor={135,135,135},
