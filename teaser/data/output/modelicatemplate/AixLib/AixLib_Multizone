@@ -156,7 +156,7 @@ equation
       Line(points={{51,-3},{70,-3},{70,79},{81.6,79}}, color={0,0,127}));
   connect(multizone.PHeatAHU, multizonePostProcessing.PHeatAHU) annotation (
       Line(points={{51,-1},{70,-1},{70,82.8},{81.6,82.8}}, color={0,0,127}));
- annotation (__Dymola_selections={Selection(name="TEASERSimReport", match= {MatchVariable(name="*weaBus.TDryBul|*weaBus.relHum**", newName="Weather.%path%"),MatchVariable(name="*.TAir*|*TAirAverage*", newName="Temperatures.%path%"),MatchVariable(name="*W*Sum*", newName="Energys.%path"),MatchVariable(name="*PHeater*|PCooler*", newName="Capacities.%path%")})},
+ annotation (__Dymola_selections={Selection(name="TEASERSimReport", match= {MatchVariable(name="*weaBus.TDryBul|*weaBus.relHum**", newName="Weather.%path%"),MatchVariable(name="*.TAir*|*TAirAverage*", newName="Temperatures.%path%"),MatchVariable(name="*W*Sum*", newName="Energys.%path%"),MatchVariable(name="*PHeater*|PCooler*", newName="Capacities.%path%")})},
       experiment(
       StartTime=${str(zone.parent.parent.modelica_info.start_time)},
       StopTime=${str(zone.parent.parent.modelica_info.stop_time)},
