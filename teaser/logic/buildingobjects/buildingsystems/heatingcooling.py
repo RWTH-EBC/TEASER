@@ -36,7 +36,7 @@ class HeatingCooling(object):
     """
 
     def __init__(self, parent=None):
-        """Constructor of BuildingAHU Class
+        """Constructor of HeatingCooling Class
         """
         self.parent = parent
 
@@ -76,21 +76,17 @@ class HeatingCooling(object):
         self.shareHeatTabsInt = 0.0
         self.shareHeatPanelExt = 0.0
         self.shareHeatPanelInt = 0.0
-        self.shareHeatRadExt = 0.0
-        self.shareHeatRadInt = 0.0
+        self.shareHeatRad = 0.0
         self.shareHeatConv = 0.0
         self.shareCoolTabsExt = 0.0
         self.shareCoolTabsInt = 0.0
         self.shareCoolPanelExt = 0.0
         self.shareCoolPanelInt = 0.0
-        self.shareCoolRadExt = 0.0
-        self.shareCoolRadInt = 0.0
+        self.shareCoolRad = 0.0
         self.shareCoolConv = 0.0
 
     def radiator_heating(self):
         """Set parameter to typical radiator heating system.
-
-        !!!These values are dummy values and need to be set correctly!!!
         """
         self.heating = True
         self.cooling = False
@@ -130,10 +126,8 @@ class HeatingCooling(object):
         self.shareHeatPanelExt = 0.0
         self.shareHeatPanelInt = 0.0
 
-        self.shareHeatRadExt = 0.35
-        self.shareHeatRadInt = 0.35
-
-        self.shareHeatConv = 0.3
+        self.shareHeatRad = 0.5
+        self.shareHeatConv = 0.5
 
         self.shareCoolTabsExt = 0.0
         self.shareCoolTabsInt = 0.0
@@ -141,15 +135,11 @@ class HeatingCooling(object):
         self.shareCoolPanelExt = 0.0
         self.shareCoolPanelInt = 0.0
 
-        self.shareCoolRadExt = 0.0
-        self.shareCoolRadInt = 0.0
-
+        self.shareCoolRad = 0.0
         self.shareCoolConv = 0.0
 
     def underfloor_heating(self, specific_power_heat):
         """Set parameter to typical underfloor heating system.
-
-        !!!These values are dummy values and need to be set correctly!!!
         """
         self.heating = True
         self.cooling = False
@@ -163,8 +153,8 @@ class HeatingCooling(object):
         self.TThresholdHeaterTabs = 0.0
         self.TThresholdCoolerTabs = 0.0
 
-        self.KRHeatPanel = 1000.0
-        self.TNHeatPanel = 7200.0
+        self.KRHeatPanel = 18.0
+        self.TNHeatPanel = 2300.0
         self.hHeatPanel = self.parent.area * specific_power_heat
         self.lHeatPanel = 0.0
 
@@ -186,12 +176,10 @@ class HeatingCooling(object):
         self.shareHeatTabsExt = 0.0
         self.shareHeatTabsInt = 0.0
 
-        self.shareHeatPanelExt = 0.0
-        self.shareHeatPanelInt = 1.0
+        self.shareHeatPanelExt = 0.5
+        self.shareHeatPanelInt = 0.5
 
-        self.shareHeatRadExt = 0.0
-        self.shareHeatRadInt = 0.0
-
+        self.shareHeatRad = 0.0
         self.shareHeatConv = 0.0
 
         self.shareCoolTabsExt = 0.0
@@ -200,15 +188,11 @@ class HeatingCooling(object):
         self.shareCoolPanelExt = 0.0
         self.shareCoolPanelInt = 0.0
 
-        self.shareCoolRadExt = 0.0
-        self.shareCoolRadInt = 0.0
-
+        self.shareCoolRad = 0.0
         self.shareCoolConv = 0.0
 
     def underfloor_heating_cooling(self, specific_power_heat, specific_power_cool):
         """Set parameter to typical underfloor heating and cooling system.
-
-        !!!These values are dummy values and need to be set correctly!!!
         """
         self.heating = True
         self.cooling = True
@@ -222,13 +206,13 @@ class HeatingCooling(object):
         self.TThresholdHeaterTabs = 0.0
         self.TThresholdCoolerTabs = 0.0
 
-        self.KRHeatPanel = 1000.0
-        self.TNHeatPanel = 7200.0
+        self.KRHeatPanel = 18.0
+        self.TNHeatPanel = 2300.0
         self.hHeatPanel = self.parent.area * specific_power_heat
         self.lHeatPanel = 0.0
 
-        self.KRCoolPanel = 1000.0
-        self.TNCoolPanel = 7200.0
+        self.KRCoolPanel = 18.0
+        self.TNCoolPanel = 2300.0
         self.hCoolPanel = 0.0
         self.lCoolPanel = -self.parent.area * specific_power_cool
 
@@ -245,29 +229,23 @@ class HeatingCooling(object):
         self.shareHeatTabsExt = 0.0
         self.shareHeatTabsInt = 0.0
 
-        self.shareHeatPanelExt = 0.0
-        self.shareHeatPanelInt = 1.0
+        self.shareHeatPanelExt = 0.5
+        self.shareHeatPanelInt = 0.5
 
-        self.shareHeatRadExt = 0.0
-        self.shareHeatRadInt = 0.0
-
+        self.shareHeatRad = 0.0
         self.shareHeatConv = 0.0
 
         self.shareCoolTabsExt = 0.0
         self.shareCoolTabsInt = 0.0
 
-        self.shareCoolPanelExt = 0.0
-        self.shareCoolPanelInt = 1.0
+        self.shareCoolPanelExt = 0.5
+        self.shareCoolPanelInt = 0.5
 
-        self.shareCoolRadExt = 0.0
-        self.shareCoolRadInt = 0.0
-
+        self.shareCoolRad = 0.0
         self.shareCoolConv = 0.0
 
     def tabs_heating_cooling(self, specific_power_heat, specific_power_cool):
         """Set parameter to typical tabs heating and cooling system.
-
-        !!!These values are dummy values and need to be set correctly!!!
         """
         self.heating = True
         self.cooling = True
@@ -281,13 +259,13 @@ class HeatingCooling(object):
         self.TThresholdHeaterTabs = 273.15 + 14
         self.TThresholdCoolerTabs = 273.15 + 16
 
-        self.KRHeatPanel = 1000.0
-        self.TNHeatPanel = 7200.0
+        self.KRHeatPanel = 0.0
+        self.TNHeatPanel = 0.0
         self.hHeatPanel = 0.0
         self.lHeatPanel = 0.0
 
-        self.KRCoolPanel = 1000.0
-        self.TNCoolPanel = 7200.0
+        self.KRCoolPanel = 0.0
+        self.TNCoolPanel = 0.0
         self.hCoolPanel = 0.0
         self.lCoolPanel = 0.0
 
@@ -307,9 +285,7 @@ class HeatingCooling(object):
         self.shareHeatPanelExt = 0.0
         self.shareHeatPanelInt = 0.0
 
-        self.shareHeatRadExt = 0.0
-        self.shareHeatRadInt = 0.0
-
+        self.shareHeatRad = 0.0
         self.shareHeatConv = 0.0
 
         self.shareCoolTabsExt = 0.5
@@ -318,21 +294,74 @@ class HeatingCooling(object):
         self.shareCoolPanelExt = 0.0
         self.shareCoolPanelInt = 0.0
 
-        self.shareCoolRadExt = 0.0
-        self.shareCoolRadInt = 0.0
-
+        self.shareCoolRad = 0.0
         self.shareCoolConv = 0.0
 
-    def tabs_plus_air_heating_cooling(self, specific_power_heat, specific_power_cool):
+    def tabs_heating_cooling_5(self, specific_power_heat, specific_power_cool):
         """Set parameter to typical tabs heating and cooling system.
-
-        !!!These values are dummy values and need to be set correctly!!!
         """
         self.heating = True
         self.cooling = True
         self.tabs = True
         self.floor = False
         self.radiator = False
+        self.ventilation = False
+
+        self.powerHeatTabs = self.parent.area * specific_power_heat
+        self.powerCoolTabs = -self.parent.area * specific_power_cool
+        self.TThresholdHeaterTabs = 273.15 + 14
+        self.TThresholdCoolerTabs = 273.15 + 16
+
+        self.KRHeatPanel = 0.0
+        self.TNHeatPanel = 0.0
+        self.hHeatPanel = 0.0
+        self.lHeatPanel = 0.0
+
+        self.KRCoolPanel = 0.0
+        self.TNCoolPanel = 0.0
+        self.hCoolPanel = 0.0
+        self.lCoolPanel = 0.0
+
+        self.KRHeatRem = 0.0
+        self.TNHeatRem = 0.0
+        self.hHeatRem = 0.0
+        self.lHeatRem = 0.0
+
+        self.KRCoolRem = 0.0
+        self.TNCoolRem = 0.0
+        self.hCoolRem = 0.0
+        self.lCoolRem = 0.0
+
+        self.shareHeatTabsExt = 0.2
+        self.shareHeatTabsInt = 0.8
+
+        self.shareHeatPanelExt = 0.0
+        self.shareHeatPanelInt = 0.0
+
+        self.shareHeatRad = 0.0
+        
+
+        self.shareHeatConv = 0.0
+
+        self.shareCoolTabsExt = 0.2
+        self.shareCoolTabsInt = 0.8
+
+        self.shareCoolPanelExt = 0.0
+        self.shareCoolPanelInt = 0.0
+
+        self.shareCoolRad = 0.0
+        
+
+        self.shareCoolConv = 0.0
+
+    def tabs_plus_air_heating_cooling(self, specific_power_heat, specific_power_cool):
+        """Set parameter to typical tabs heating and cooling system.
+        """
+        self.heating = True
+        self.cooling = True
+        self.tabs = True
+        self.floor = False
+        self.radiator = True
         self.ventilation = True
 
         self.powerHeatTabs = self.parent.area * specific_power_heat
@@ -340,13 +369,13 @@ class HeatingCooling(object):
         self.TThresholdHeaterTabs = 273.15 + 14
         self.TThresholdCoolerTabs = 273.15 + 16
 
-        self.KRHeatPanel = 1000.0
-        self.TNHeatPanel = 7200.0
+        self.KRHeatPanel = 0.0
+        self.TNHeatPanel = 0.0
         self.hHeatPanel = 0.0
         self.lHeatPanel = 0.0
 
-        self.KRCoolPanel = 1000.0
-        self.TNCoolPanel = 7200.0
+        self.KRCoolPanel = 0.0
+        self.TNCoolPanel = 0.0
         self.hCoolPanel = 0.0
         self.lCoolPanel = 0.0
 
@@ -367,9 +396,7 @@ class HeatingCooling(object):
         self.shareHeatPanelExt = 0.0
         self.shareHeatPanelInt = 0.0
 
-        self.shareHeatRadExt = 0.0
-        self.shareHeatRadInt = 0.0
-
+        self.shareHeatRad = 0.0
         self.shareHeatConv = 1.0
 
         self.shareCoolTabsExt = 0.5
@@ -378,7 +405,5 @@ class HeatingCooling(object):
         self.shareCoolPanelExt = 0.0
         self.shareCoolPanelInt = 0.0
 
-        self.shareCoolRadExt = 0.0
-        self.shareCoolRadInt = 0.0
-
-        self.shareCoolConv = 0.0
+        self.shareCoolRad = 0.0
+        self.shareCoolConv = 1.0

@@ -95,7 +95,6 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     tabs = ${get_true_false(zone.heating_cooling_system.tabs)},
     floor = ${get_true_false(zone.heating_cooling_system.floor)},
     radiator = ${get_true_false(zone.heating_cooling_system.radiator)},
-    ventilation = ${get_true_false(zone.heating_cooling_system.ventilation)},
 
     TThresholdHeaterTabs = ${zone.heating_cooling_system.TThresholdHeaterTabs},
     TThresholdCoolerTabs = ${zone.heating_cooling_system.TThresholdCoolerTabs},
@@ -126,14 +125,12 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     shareHeatTabsInt = ${zone.heating_cooling_system.shareHeatTabsInt},
     shareHeatPanelExt = ${zone.heating_cooling_system.shareHeatPanelExt},
     shareHeatPanelInt = ${zone.heating_cooling_system.shareHeatPanelInt},
-    shareHeatRadExt = ${zone.heating_cooling_system.shareHeatRadExt},
-    shareHeatRadInt = ${zone.heating_cooling_system.shareHeatRadInt},
+    shareHeatRad = ${zone.heating_cooling_system.shareHeatRad},
     shareHeatConv = ${zone.heating_cooling_system.shareHeatConv},
     shareCoolTabsExt = ${zone.heating_cooling_system.shareCoolTabsExt},
     shareCoolTabsInt = ${zone.heating_cooling_system.shareCoolTabsInt},
     shareCoolPanelExt = ${zone.heating_cooling_system.shareCoolPanelExt},
     shareCoolPanelInt = ${zone.heating_cooling_system.shareCoolPanelInt},
-    shareCoolRadExt = ${zone.heating_cooling_system.shareCoolRadExt},
-    shareCoolRadInt = ${zone.heating_cooling_system.shareCoolRadInt},
+    shareCoolRad = ${zone.heating_cooling_system.shareCoolRad},
     shareCoolConv = ${zone.heating_cooling_system.shareCoolConv});
 end ${zone.parent.name}_${zone.name};
