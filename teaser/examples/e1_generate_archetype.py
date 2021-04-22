@@ -23,7 +23,13 @@ def example_generate_archetype():
     # filenames, thus we will delete them anyway in TEASER.
 
     prj = Project(load_data=True)
-    prj.name = "ArchetypeExample"
+    prj.name = "ArchetypeEFH"
+
+    prj2 = Project(load_data=True)
+    prj2.name = "ArchetypeMFH"
+
+    prj3 = Project(load_data=True)
+    prj3.name = "ArchetypeOffice"
 
     # There are two different types of archetype groups: residential and
     # non-residential buildings. Two API functions offer the opportunity to
@@ -38,26 +44,85 @@ def example_generate_archetype():
     # archetype generation. For specific information on the parameters please
     # read the docs.
 
+    """Project 1 includes all buildings of the building type 'single family house'
+    """
+
     prj.add_residential(
         method="iwu",
         usage="single_family_dwelling",
-        name="ResidentialBuilding",
-        year_of_construction=1988,
+        name="EFH1",
+        year_of_construction=2010,
         number_of_floors=2,
-        height_of_floors=3.2,
+        height_of_floors=2.8,
         net_leased_area=200.0,
-    )
+        construction_type="light")
 
     # Example Radiator heating system
 
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.radiator_heating()
+        zone.heating_cooling_system.tabs_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
+
+    prj.add_residential(
+        method="iwu",
+        usage="single_family_dwelling",
+        name="EFH2",
+        year_of_construction=2010,
+        number_of_floors=2,
+        height_of_floors=2.8,
+        net_leased_area=200.0)
+
+    # Example Radiator heating system
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_plus_air_heating_cooling(specific_power_heat=40.0, specific_power_cool=40.0)
+
+    """Project 2 includes all buildings of the building type 'multi family house'
+    """
+
+    prj2.add_residential(
+        method="iwu",
+        usage="single_family_dwelling",
+        name="MFH1",
+        year_of_construction=2010,
+        number_of_floors=5,
+        height_of_floors=2.8,
+        net_leased_area=1000.0
+    )
+
+    # Example Radiator heating system
+
+    bldg = prj2.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_heating_cooling_5(specific_power_heat=100.0, specific_power_cool=40)
+
+    """Project 3 includes all buildings of the building type 'office'
+    """
+
+    prj3.add_non_residential(
+        method="bmvbs",
+        usage="office",
+        name="OfficeBuilding1",
+        year_of_construction=2010,
+        number_of_floors=5,
+        height_of_floors=3.5,
+        net_leased_area=4000.0
+    )
+
+    # Example underfloor heating system
+
+    bldg = prj3.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_heating_cooling_5(specific_power_heat=40.0, specific_power_cool=40.0)
 
     # To generate non-residential archetype buildings (in this case an
     # office and a laboratory (a.k.a. institute)) the function
-    # Project.add_residential() is used. The meaning of compulsory parameters
+    # Project.add_non_residential() is used. The meaning of compulsory parameters
     # does not differ from the residential archetype building.
     """
     prj.add_non_residential(
@@ -136,7 +201,7 @@ def example_generate_archetype():
         construction_type="tabula_retrofit",
     )
 """
-    return prj
+    return prj, prj2, prj3
 
 
 if __name__ == "__main__":
