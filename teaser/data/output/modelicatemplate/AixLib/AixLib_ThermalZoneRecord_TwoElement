@@ -95,6 +95,8 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     tabs = ${get_true_false(zone.heating_cooling_system.tabs)},
     floor = ${get_true_false(zone.heating_cooling_system.floor)},
     radiator = ${get_true_false(zone.heating_cooling_system.radiator)},
+    ventilation = ${get_true_false(zone.heating_cooling_system.ventilation)},
+    withTabsRoomTempControl = ${get_true_false(zone.heating_cooling_system.withTabsRoomTempControl)},
 
     TThresholdHeaterTabs = ${zone.heating_cooling_system.TThresholdHeaterTabs},
     TThresholdCoolerTabs = ${zone.heating_cooling_system.TThresholdCoolerTabs},
