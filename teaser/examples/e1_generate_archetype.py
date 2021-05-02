@@ -31,6 +31,9 @@ def example_generate_archetype():
     prj3 = Project(load_data=True)
     prj3.name = "ArchetypeOffice"
 
+    prj4 = Project(load_data=True)
+    prj4.name = "TestControlParameters"
+
     # There are two different types of archetype groups: residential and
     # non-residential buildings. Two API functions offer the opportunity to
     # generate specific archetypes.
@@ -46,7 +49,109 @@ def example_generate_archetype():
 
     """Project 1 includes all buildings of the building type 'single family house'
     """
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="EFHradiator",
+        year_of_construction=1988,
+        number_of_floors=2,
+        height_of_floors=3.2,
+        net_leased_area=200.0)
 
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.radiator_heating()
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="EFHpanel",
+        year_of_construction=1988,
+        number_of_floors=2,
+        height_of_floors=3.2,
+        net_leased_area=200.0)
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0)
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="EFHtabs",
+        year_of_construction=1988,
+        number_of_floors=2,
+        height_of_floors=3.2,
+        net_leased_area=200.0)
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
+                                                         room_temp_control=False)
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="EFHtabswithRT",
+        year_of_construction=1988,
+        number_of_floors=2,
+        height_of_floors=3.2,
+        net_leased_area=200.0)
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
+                                                         room_temp_control=True)
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="EFHtabsplus",
+        year_of_construction=1988,
+        number_of_floors=2,
+        height_of_floors=3.2,
+        net_leased_area=200.0)
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_plus_air_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
+                                                                  room_temp_control=False)
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="EFHtabspluswithRT",
+        year_of_construction=1988,
+        number_of_floors=2,
+        height_of_floors=3.2,
+        net_leased_area=200.0)
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_plus_air_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
+                                                                  room_temp_control=True)
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="EFHconvective",
+        year_of_construction=1988,
+        number_of_floors=2,
+        height_of_floors=3.2,
+        net_leased_area=200.0)
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.convective_heating_cooling()
+
+    """
     prj.add_residential(
         method="iwu",
         usage="single_family_dwelling",
@@ -79,7 +184,7 @@ def example_generate_archetype():
 
     for zone in bldg.thermal_zones:
         zone.heating_cooling_system.tabs_plus_air_heating_cooling(specific_power_heat=40.0, specific_power_cool=40.0)
-
+    """
     """Project 2 includes all buildings of the building type 'multi family house'
     """
 
@@ -98,7 +203,8 @@ def example_generate_archetype():
     bldg = prj2.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.tabs_heating_cooling_5(specific_power_heat=100.0, specific_power_cool=40)
+        zone.heating_cooling_system.tabs_heating_cooling(specific_power_heat=100.0, specific_power_cool=40,
+                                                         room_temp_control=False)
 
     """Project 3 includes all buildings of the building type 'office'
     """
@@ -118,7 +224,8 @@ def example_generate_archetype():
     bldg = prj3.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.tabs_heating_cooling_5(specific_power_heat=40.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.tabs_heating_cooling(specific_power_heat=40.0, specific_power_cool=40.0,
+                                                         room_temp_control=False)
 
     # To generate non-residential archetype buildings (in this case an
     # office and a laboratory (a.k.a. institute)) the function
