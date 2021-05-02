@@ -62,6 +62,8 @@ def example_generate_archetype():
 
     for zone in bldg.thermal_zones:
         zone.heating_cooling_system.radiator_heating()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [299.15]
 
     prj.add_residential(
         method='iwu',
@@ -76,6 +78,8 @@ def example_generate_archetype():
 
     for zone in bldg.thermal_zones:
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [299.15]
 
     prj.add_residential(
         method='iwu',
@@ -91,6 +95,8 @@ def example_generate_archetype():
     for zone in bldg.thermal_zones:
         zone.heating_cooling_system.tabs_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
                                                          room_temp_control=False)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [299.15]
 
     prj.add_residential(
         method='iwu',
@@ -106,6 +112,8 @@ def example_generate_archetype():
     for zone in bldg.thermal_zones:
         zone.heating_cooling_system.tabs_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
                                                          room_temp_control=True)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [299.15]
 
     prj.add_residential(
         method='iwu',
@@ -121,6 +129,8 @@ def example_generate_archetype():
     for zone in bldg.thermal_zones:
         zone.heating_cooling_system.tabs_plus_air_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
                                                                   room_temp_control=False)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [299.15]
 
     prj.add_residential(
         method='iwu',
@@ -136,6 +146,8 @@ def example_generate_archetype():
     for zone in bldg.thermal_zones:
         zone.heating_cooling_system.tabs_plus_air_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
                                                                   room_temp_control=True)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [299.15]
 
     prj.add_residential(
         method='iwu',
@@ -150,6 +162,8 @@ def example_generate_archetype():
 
     for zone in bldg.thermal_zones:
         zone.heating_cooling_system.convective_heating_cooling()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [299.15]
 
     """
     prj.add_residential(
@@ -205,6 +219,8 @@ def example_generate_archetype():
     for zone in bldg.thermal_zones:
         zone.heating_cooling_system.tabs_heating_cooling(specific_power_heat=100.0, specific_power_cool=40,
                                                          room_temp_control=False)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [299.15]
 
     """Project 3 includes all buildings of the building type 'office'
     """
@@ -226,6 +242,8 @@ def example_generate_archetype():
     for zone in bldg.thermal_zones:
         zone.heating_cooling_system.tabs_heating_cooling(specific_power_heat=40.0, specific_power_cool=40.0,
                                                          room_temp_control=False)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [299.15]
 
     # To generate non-residential archetype buildings (in this case an
     # office and a laboratory (a.k.a. institute)) the function
