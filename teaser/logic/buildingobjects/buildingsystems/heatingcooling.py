@@ -109,6 +109,7 @@ class HeatingCooling(object):
         self.powerCoolTabs = 0.0
         self.TThresholdHeaterTabs = 0.0
         self.TThresholdCoolerTabs = 0.0
+        self.withTabsRoomTempControl = False
 
         self.KRHeatPanel = 0.0
         self.TNHeatPanel = 0.0
@@ -163,6 +164,7 @@ class HeatingCooling(object):
         self.powerCoolTabs = 0.0
         self.TThresholdHeaterTabs = 0.0
         self.TThresholdCoolerTabs = 0.0
+        self.withTabsRoomTempControl = False
 
         self.KRHeatPanel = 18.0
         self.TNHeatPanel = 2300.0
@@ -217,6 +219,7 @@ class HeatingCooling(object):
         self.powerCoolTabs = 0.0
         self.TThresholdHeaterTabs = 0.0
         self.TThresholdCoolerTabs = 0.0
+        self.withTabsRoomTempControl = False
 
         self.KRHeatPanel = 18.0
         self.TNHeatPanel = 2300.0
@@ -256,7 +259,7 @@ class HeatingCooling(object):
         self.shareCoolRad = 0.0
         self.shareCoolConv = 0.0
 
-    def tabs_heating_cooling(self, specific_power_heat, specific_power_cool):
+    def tabs_heating_cooling(self, specific_power_heat, specific_power_cool, room_temp_control):
         """Set parameter to typical tabs heating and cooling system. This system is installed
         at the core of the corresponding building part.
         """
@@ -270,7 +273,8 @@ class HeatingCooling(object):
         self.powerHeatTabs = self.parent.area * specific_power_heat
         self.powerCoolTabs = -self.parent.area * specific_power_cool
         self.TThresholdHeaterTabs = 273.15 + 14
-        self.TThresholdCoolerTabs = 273.15 + 16
+        self.TThresholdCoolerTabs = 273.15 + 18
+        self.withTabsRoomTempControl = room_temp_control
 
         self.KRHeatPanel = 0.0
         self.TNHeatPanel = 0.0
@@ -310,7 +314,7 @@ class HeatingCooling(object):
         self.shareCoolRad = 0.0
         self.shareCoolConv = 0.0
 
-    def tabs_plus_air_heating_cooling(self, specific_power_heat, specific_power_cool):
+    def tabs_plus_air_heating_cooling(self, specific_power_heat, specific_power_cool, room_temp_control):
         """Set parameter to typical tabs heating and cooling system.
         """
         self.heating = True
@@ -323,7 +327,8 @@ class HeatingCooling(object):
         self.powerHeatTabs = self.parent.area * specific_power_heat
         self.powerCoolTabs = -self.parent.area * specific_power_cool
         self.TThresholdHeaterTabs = 273.15 + 14
-        self.TThresholdCoolerTabs = 273.15 + 16
+        self.TThresholdCoolerTabs = 273.15 + 18
+        self.withTabsRoomTempControl = room_temp_control
 
         self.KRHeatPanel = 0.0
         self.TNHeatPanel = 0.0
@@ -343,7 +348,7 @@ class HeatingCooling(object):
         self.KRCoolRem = 1000.0
         self.TNCoolRem = 100.0
         self.hCoolRem = 0.0
-        self.lCoolRem = -(self.parent.model_attr.cool_load - self.powerCoolTabs)
+        self.lCoolRem = (self.parent.model_attr.cool_load - self.powerCoolTabs)
 
         self.shareHeatTabsExt = 1/self.parent.parent.number_of_floors
         self.shareHeatTabsInt = 1-(1/self.parent.parent.number_of_floors)
@@ -377,6 +382,7 @@ class HeatingCooling(object):
         self.powerCoolTabs = 0.0
         self.TThresholdHeaterTabs = 0.0
         self.TThresholdCoolerTabs = 0.0
+        self.withTabsRoomTempControl = False
 
         self.KRHeatPanel = 0.0
         self.TNHeatPanel = 0.0
@@ -396,7 +402,7 @@ class HeatingCooling(object):
         self.KRCoolRem = 1000.0
         self.TNCoolRem = 1.0
         self.hCoolRem = 0.0
-        self.lCoolRem = -self.parent.model_attr.cool_load
+        self.lCoolRem = self.parent.model_attr.cool_load
 
         self.shareHeatTabsExt = 0.0
         self.shareHeatTabsInt = 0.0
