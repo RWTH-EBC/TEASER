@@ -58,7 +58,7 @@ def read_results(
     buildings,
     signals,
     index=pd.date_range(
-        datetime.datetime(2015, 1, 1), periods=35037, freq="15min", tz="Europe/Berlin"
+        datetime.datetime(2015, 1, 1), periods=8760, freq="H", tz="Europe/Berlin"
     ),
     results_path=None,
     csv_path=None,
@@ -152,7 +152,7 @@ def read_results(
                 cool.to_csv(os.path.join(csv_path, bldg.name + "_cool.csv"))
                 
                 
-                heat.index = [(i ) * 900 for i in range(35037)]
+                heat.index = [(i ) * 3600 for i in range(8760)]
                 heat.to_csv(os.path.join(csv_path, bldg.name + "_heat.txt"), header=False)
 #                heat_bldg = heat[bldg.name + " heat"]
 #                heat_bldg.to_csv(bldg.name + "_heat.txt", header=False)
@@ -169,7 +169,7 @@ def read_results(
                 f.close()    
                     
                 
-                cool.index = [(i ) * 900 for i in range(35037)]
+                cool.index = [(i ) * 3600 for i in range(8760)]
                 cool.to_csv(os.path.join(csv_path, bldg.name + "_cool.txt"), header=False)
 #                cool_bldg = cool[bldg.name + " cool"]
 #                cool_bldg.to_csv(bldg.name + "_cool.txt", header=False)
