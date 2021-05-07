@@ -216,7 +216,7 @@ def queue_simulation(
     results_path=os.path.join(os.path.expanduser("~"), "djangoteaserout"),
     start_time=0.0,
     stop_time=31532400.0,
-    output_interval=900.0,
+    output_interval=3600.0,
     method="Dassl",
     tolerance=0.0001,
 ):

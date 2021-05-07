@@ -21,12 +21,18 @@ def test_generate_archetype():
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
-        name="ResidentialBuilding",
-        year_of_construction=1990,
-        number_of_floors=1,
-        height_of_floors=3.0,
-        net_leased_area=200.0,
-        construction_type="heavy")
+        name="EFHradiator",
+        year_of_construction=1988,
+        number_of_floors=2,
+        height_of_floors=3.2,
+        net_leased_area=200.0)
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.radiator_heating()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
 
     prj.add_residential(
         method='iwu',
@@ -43,6 +49,91 @@ def test_generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="EFHtabs",
+        year_of_construction=1988,
+        number_of_floors=2,
+        height_of_floors=3.2,
+        net_leased_area=200.0)
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
+                                                         room_temp_control=False)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="EFHtabswithRT",
+        year_of_construction=1988,
+        number_of_floors=2,
+        height_of_floors=3.2,
+        net_leased_area=200.0)
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
+                                                         room_temp_control=True)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="EFHtabsplus",
+        year_of_construction=1988,
+        number_of_floors=2,
+        height_of_floors=3.2,
+        net_leased_area=200.0)
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_plus_air_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
+                                                                  room_temp_control=False)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="EFHtabspluswithRT",
+        year_of_construction=1988,
+        number_of_floors=2,
+        height_of_floors=3.2,
+        net_leased_area=200.0)
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_plus_air_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
+                                                                  room_temp_control=True)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="EFHconvective",
+        year_of_construction=1988,
+        number_of_floors=2,
+        height_of_floors=3.2,
+        net_leased_area=200.0)
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.convective_heating_cooling()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+
 
     return prj
 
