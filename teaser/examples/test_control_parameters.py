@@ -173,7 +173,7 @@ if __name__ == '__main__':
     DIR_SCRIPT = os.path.abspath(os.path.dirname(__file__))
     DIR_TOP = os.path.abspath(DIR_SCRIPT)
     #random_name = random_choice()
-    index = pd.date_range(datetime.datetime(2020, 1, 1), periods=8761, freq="H")
+    index = pd.date_range(datetime.datetime(2020, 1, 1), periods=8760, freq="H")
 
     #prj = Project(load_data=True)
     # prj.name = "Shamrock_Park_{}_{}".format("fbkk", "ref")
