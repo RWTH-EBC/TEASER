@@ -68,7 +68,7 @@ def example_generate_archetype():
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
-        name="EFHpanel",
+        name="EFHpanel7040",
         year_of_construction=1988,
         number_of_floors=2,
         height_of_floors=3.2,
@@ -77,7 +77,7 @@ def example_generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
 
