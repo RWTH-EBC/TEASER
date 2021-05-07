@@ -12,11 +12,11 @@ import multiprocessing
 import utils.simulate as sim
 import utils.read_results as res
 
-def test_generate_archetype():
+def generate_archetype():
     from teaser.project import Project
 
     prj = Project(load_data=True)
-    prj.name = "ArchetypeEFH"
+    prj.name = "Simulation_EFH_MFH_Office"
 
     prj.add_residential(
         method='iwu',
@@ -134,10 +134,9 @@ def test_generate_archetype():
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
 
-
     return prj
 
-def test_export_aixlib():
+def export_aixlib():
     prj = test_generate_archetype()
 
     prj.dir_reference_results = utilities.get_full_path(
@@ -168,7 +167,7 @@ def test_export_aixlib():
     return path
 
 if __name__ == '__main__':
-    #test_export_aixlib()
+    #export_aixlib()
 
     DIR_SCRIPT = os.path.abspath(os.path.dirname(__file__))
     DIR_TOP = os.path.abspath(DIR_SCRIPT)
@@ -180,7 +179,10 @@ if __name__ == '__main__':
     #prj.name = "Shamrock_Park_{}_{}".format(random_name, "ref")
 
     info_path = os.path.join(DIR_TOP, "shamrock_park")
-    prj = test_generate_archetype()
+    prj = generate_archetype()
+    prj.used_library_calc = 'AixLib'
+    prj.number_of_elements_calc = 2
+    prj.calc_all_buildings()
     prj.weather_file_path = utilities.get_full_path(
         os.path.join(
             "data",
@@ -199,7 +201,7 @@ if __name__ == '__main__':
         results_path=RESULTS_PATH,
         number_of_workers=multiprocessing.cpu_count() - 3,
     )
-    for bldg in prj.buildings:
+    """for bldg in prj.buildings:
         signals = [
             "multizone.PHeater[{}]".format(i + 1)
             for i in range(len(bldg.thermal_zones))
@@ -216,6 +218,7 @@ if __name__ == '__main__':
             results_path=os.path.join(RESULTS_PATH, prj.name),
             csv_path=os.path.join(RESULTS_PATH, prj.name, "demand_csv"),
         )
+        """
 
     print("That's it! :)")
 

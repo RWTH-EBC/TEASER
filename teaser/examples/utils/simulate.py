@@ -181,7 +181,7 @@ def simulate(
 
             dymola.cd(Dir=dir_temp)
 
-        print("simulate building {} in progres".format(bldg.name))
+        print("simulate building {} in progress".format(bldg.name))
         model_name = "%s.%s.%s" % (prj.name, bldg.name, bldg.name)
         dymola.translateModel(model_name)
 
