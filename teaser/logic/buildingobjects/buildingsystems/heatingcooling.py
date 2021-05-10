@@ -421,3 +421,163 @@ class HeatingCooling(object):
 
         self.shareCoolRad = 0.0
         self.shareCoolConv = 1.0
+
+    def panel_test_heating_cooling(self, specific_power_heat, specific_power_cool, KR, TN):
+        """Set parameter to typical panel heating and cooling system. This system is installed
+        close to the surface of the corresponding building part.
+        """
+        self.heating = True
+        self.cooling = True
+        self.tabs = False
+        self.floor = True
+        self.radiator = False
+        self.ventilation = False
+
+        self.powerHeatTabs = 0.0
+        self.powerCoolTabs = 0.0
+        self.TThresholdHeaterTabs = 0.0
+        self.TThresholdCoolerTabs = 0.0
+        self.withTabsRoomTempControl = False
+
+        self.KRHeatPanel = KR
+        self.TNHeatPanel = TN
+        self.hHeatPanel = self.parent.area * specific_power_heat
+        self.lHeatPanel = 0.0
+
+        self.KRCoolPanel = KR
+        self.TNCoolPanel = TN
+        self.hCoolPanel = 0.0
+        self.lCoolPanel = -self.parent.area * specific_power_cool
+
+        self.KRHeatRem = 0.0
+        self.TNHeatRem = 0.0
+        self.hHeatRem = 0.0
+        self.lHeatRem = 0.0
+
+        self.KRCoolRem = 0.0
+        self.TNCoolRem = 0.0
+        self.hCoolRem = 0.0
+        self.lCoolRem = 0.0
+
+        self.shareHeatTabsExt = 0.0
+        self.shareHeatTabsInt = 0.0
+
+        self.shareHeatPanelExt = 1/self.parent.parent.number_of_floors
+        self.shareHeatPanelInt = 1-(1/self.parent.parent.number_of_floors)
+
+        self.shareHeatRad = 0.0
+        self.shareHeatConv = 0.0
+
+        self.shareCoolTabsExt = 0.0
+        self.shareCoolTabsInt = 0.0
+
+        self.shareCoolPanelExt = 1/self.parent.parent.number_of_floors
+        self.shareCoolPanelInt = 1-(1/self.parent.parent.number_of_floors)
+
+        self.shareCoolRad = 0.0
+        self.shareCoolConv = 0.0
+
+    def test_radiator_heating(self, KR, TN):
+        """Set parameter to typical radiator heating system.
+        """
+        self.heating = True
+        self.cooling = False
+        self.tabs = False
+        self.floor = False
+        self.radiator = True
+        self.ventilation = False
+
+        self.powerHeatTabs = 0.0
+        self.powerCoolTabs = 0.0
+        self.TThresholdHeaterTabs = 0.0
+        self.TThresholdCoolerTabs = 0.0
+        self.withTabsRoomTempControl = False
+
+        self.KRHeatPanel = 0.0
+        self.TNHeatPanel = 0.0
+        self.hHeatPanel = 0.0
+        self.lHeatPanel = 0.0
+
+        self.KRCoolPanel = 0.0
+        self.TNCoolPanel = 0.0
+        self.hCoolPanel = 0.0
+        self.lCoolPanel = 0.0
+
+        self.KRHeatRem = KR
+        self.TNHeatRem = TN
+        self.hHeatRem = self.parent.model_attr.heat_load
+        self.lHeatRem = 0.0
+
+        self.KRCoolRem = 0.0
+        self.TNCoolRem = 0.0
+        self.hCoolRem = 0.0
+        self.lCoolRem = 0.0
+
+        self.shareHeatTabsExt = 0.0
+        self.shareHeatTabsInt = 0.0
+
+        self.shareHeatPanelExt = 0.0
+        self.shareHeatPanelInt = 0.0
+
+        self.shareHeatRad = 0.5
+        self.shareHeatConv = 0.5
+
+        self.shareCoolTabsExt = 0.0
+        self.shareCoolTabsInt = 0.0
+
+        self.shareCoolPanelExt = 0.0
+        self.shareCoolPanelInt = 0.0
+
+    def test_convective_heating_cooling(self, KR, TN):
+        """Set parameter to typical convective heating and cooling system.
+        """
+        self.heating = True
+        self.cooling = True
+        self.tabs = False
+        self.floor = False
+        self.radiator = True
+        self.ventilation = True
+
+        self.powerHeatTabs = 0.0
+        self.powerCoolTabs = 0.0
+        self.TThresholdHeaterTabs = 0.0
+        self.TThresholdCoolerTabs = 0.0
+        self.withTabsRoomTempControl = False
+
+        self.KRHeatPanel = 0.0
+        self.TNHeatPanel = 0.0
+        self.hHeatPanel = 0.0
+        self.lHeatPanel = 0.0
+
+        self.KRCoolPanel = 0.0
+        self.TNCoolPanel = 0.0
+        self.hCoolPanel = 0.0
+        self.lCoolPanel = 0.0
+
+        self.KRHeatRem = KR
+        self.TNHeatRem = TN
+        self.hHeatRem = self.parent.model_attr.heat_load
+        self.lHeatRem = 0.0
+
+        self.KRCoolRem = KR
+        self.TNCoolRem = TN
+        self.hCoolRem = 0.0
+        self.lCoolRem = self.parent.model_attr.cool_load
+
+        self.shareHeatTabsExt = 0.0
+        self.shareHeatTabsInt = 0.0
+
+        self.shareHeatPanelExt = 0.0
+        self.shareHeatPanelInt = 0.0
+
+        self.shareHeatRad = 0.0
+        self.shareHeatConv = 1.0
+
+        self.shareCoolTabsExt = 0.0
+        self.shareCoolTabsInt = 0.0
+
+        self.shareCoolPanelExt = 0.0
+        self.shareCoolPanelInt = 0.0
+
+        self.shareCoolRad = 0.0
+        self.shareCoolConv = 1.0
