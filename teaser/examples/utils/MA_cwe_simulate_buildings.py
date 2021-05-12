@@ -7,16 +7,17 @@ import datetime
 import json
 import collections
 import multiprocessing
+import pickle
 
 # helper scripts
-import utils.simulate as sim
-import utils.read_results as res
+import simulate as sim
+import read_results as res
 
 def generate_archetype():
     from teaser.project import Project
 
     prj = Project(load_data=True)
-    prj.name = "Building_Simulation_EFH_MFH_Office"
+    prj.name = "Building_Simulation_EFH_MFH_Office_test"
 
     heating_profile_night_reduction = [292.15,
                                        292.15,
@@ -67,8 +68,7 @@ def generate_archetype():
                                        301.15,
                                        301.15]
 
-    """Project 1 includes all buildings of the building type 'single family house'
-    """
+    # Project 1 includes all buildings of the building type 'single family house'
 
     # -----EFH radiator-----
 
@@ -88,7 +88,7 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
-
+    """    
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
@@ -530,8 +530,7 @@ def generate_archetype():
 
     # ----------------------------------------------
 
-    """Project 2 includes all buildings of the building type 'multi family house'
-    """
+    # Project 2 includes all buildings of the building type 'multi family house'
 
     # -----MFH radiator-----
 
@@ -993,9 +992,8 @@ def generate_archetype():
 
     # ----------------------------------------------
 
-    """Project 3 includes all buildings of the building type 'office'
-    """
-
+    # Project 3 includes all buildings of the building type 'office'
+    
     # -----Office radiator-----
 
     prj.add_non_residential(
@@ -1453,16 +1451,16 @@ def generate_archetype():
         zone.heating_cooling_system.convective_heating_cooling()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+    """
+    return prj
 
-return prj
-
-def export_aixlib():
-    prj = test_generate_archetype()
+def test_export_aixlib():
+    prj = generate_archetype()
 
     prj.dir_reference_results = utilities.get_full_path(
         os.path.join(
             "examples",
-            "examplefiles",
+            "../examplefiles",
             "ReferenceResults",
             "Dymola"))
 
@@ -1476,7 +1474,7 @@ def export_aixlib():
             "input",
             "inputdata",
             "weatherdata",
-            "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos"))
+            "TRY2015_507755060854_Jahr_City_Aachen.mos"))
 
     prj.calc_all_buildings()
 
@@ -1487,18 +1485,20 @@ def export_aixlib():
     return path
 
 if __name__ == '__main__':
-    #export_aixlib()
 
-    DIR_SCRIPT = os.path.abspath(os.path.dirname(__file__))
-    DIR_TOP = os.path.abspath(DIR_SCRIPT)
+    workspace = os.path.join("D:\\", "tbl-cwe", "1_Building_simulation")
+    print("Your workspace is set to: ")
+    print(workspace)
+
+    #DIR_SCRIPT = os.path.abspath(os.path.dirname(__file__))
+    #DIR_TOP = os.path.abspath(DIR_SCRIPT)
     #random_name = random_choice()
-    index = pd.date_range(datetime.datetime(2020, 1, 1), periods=8760, freq="H")
-
+    #index = pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H")
     #prj = Project(load_data=True)
-    # prj.name = "Shamrock_Park_{}_{}".format("fbkk", "ref")
+    #prj.name = "Shamrock_Park_{}_{}".format("fbkk", "ref")
     #prj.name = "Shamrock_Park_{}_{}".format(random_name, "ref")
+    #info_path = os.path.join(DIR_TOP, "shamrock_park")
 
-    info_path = os.path.join(DIR_TOP, "shamrock_park")
     prj = generate_archetype()
     prj.used_library_calc = 'AixLib'
     prj.number_of_elements_calc = 2
@@ -1511,14 +1511,13 @@ if __name__ == '__main__':
             "weatherdata",
             "TRY2015_507755060854_Jahr_City_Aachen.mos"))
 
-    RESULTS_PATH = os.path.join(
-        "D:\\",
-        "tbl-cwe",
-        "1_Building_simulation",
-        "sim_results",)
-    #os.path.join(DIR_TOP, "results")
-    prj.export_aixlib()
-    prj.save_project()
+    RESULTS_PATH = os.path.join(workspace, "sim_results")
+
+    prj.export_aixlib(path=os.path.join(workspace, "TEASEROutput"))
+    #prj.save_project() #brauche ich das hier dann?
+
+    pickle_file = os.path.join(workspace, "building_simulation_pickle.p")
+    pickle.dump(prj, open(pickle_file, "wb"))
 
     sim.queue_simulation(
         sim_function=sim.simulate,
@@ -1526,6 +1525,7 @@ if __name__ == '__main__':
         results_path=RESULTS_PATH,
         number_of_workers=multiprocessing.cpu_count() - 3,
     )
+
     """for bldg in prj.buildings:
         signals = [
             "multizone.PHeater[{}]".format(i + 1)
