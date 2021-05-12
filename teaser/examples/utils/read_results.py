@@ -58,7 +58,7 @@ def read_results(
     buildings,
     signals,
     index=pd.date_range(
-        datetime.datetime(2015, 1, 1), periods=8760, freq="H", tz="Europe/Berlin"
+        datetime.datetime(2021, 1, 1), periods=8760, freq="H", tz="Europe/Berlin"
     ),
     results_path=None,
     csv_path=None,
