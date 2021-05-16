@@ -94,12 +94,11 @@ def read_results(
         if not (bldg + "_heat.csv") in os.listdir(csv_path):
             try:
                 print(os.path.join(results_path, bldg + ".mat"))
-                #+ ".mat"
                 dym_res = dymola.readTrajectory(
-                    fileName=os.path.join(results_path, bldg),
+                    fileName=os.path.join(results_path, bldg + ".mat"),
                     signals=signals,
                     rows=dymola.readTrajectorySize(
-                        fileName=os.path.join(results_path, bldg)
+                        fileName=os.path.join(results_path, bldg + ".mat")
                         ),
                 )
                 results = pd.DataFrame().from_records(dym_res).T
@@ -139,6 +138,12 @@ def read_results(
                 heat.loc[:, bldg + " tabsHeatingPower"] = results.filter(like="tabsHeatingPower").sum(axis=1)[
                         index_res[0] : index_res[-1]
                     ]
+                heat.loc[:, bldg + " pITempHeatRem.y"] = results.filter(like="pITempHeatRem.y").sum(axis=1)[
+                        index_res[0] : index_res[-1]
+                    ]        
+                heat.loc[:, bldg + " pITempHeatPanel.y"] = results.filter(like="pITempHeatPanel.y").sum(axis=1)[
+                        index_res[0] : index_res[-1]
+                    ]        
                 """
 
                 cool = pd.DataFrame(
@@ -148,12 +153,38 @@ def read_results(
                     index=index_res,
                     columns=[bldg + " cool"],
                 )
+                """
+                cool.loc[:, bldg + " tabsCoolingPower"] = results.filter(like="tabsCoolingPower").abs().sum(axis=1)[
+                        index_res[0] : index_res[-1]
+                    ]
+                cool.loc[:, bldg + " pITempCoolRem.y"] = results.filter(like="pITempCoolRem.y").abs().sum(axis=1)[
+                        index_res[0] : index_res[-1]
+                    ]  
+                cool.loc[:, bldg + " pITempCoolPanel.y"] = results.filter(like="pITempCoolPanel.y").abs().sum(axis=1)[
+                        index_res[0] : index_res[-1]
+                    ]        
+                """
+                """
+                temp = pd.DataFrame(
+                    data=results.filter(like="TAir").sum(axis=1)[
+                         index_res[0]: index_res[-1]
+                         ],
+                    index=index_res,
+                    columns=[bldg + " TAir"],
+                )
+                temp.loc[:, bldg + " TOpe"] = results.filter(like="TOpe").sum(axis=1)[
+                        index_res[0] : index_res[-1]
+                    ] 
+                """
 
                 heat.to_csv(os.path.join(csv_path, bldg + "_heat.csv"))
                 cool.to_csv(os.path.join(csv_path, bldg + "_cool.csv"))
                 heat.to_excel(os.path.join(csv_path, bldg + "_excel_heat.xlsx"))
                 cool.to_excel(os.path.join(csv_path, bldg + "_excel_cool.xlsx"))
-
+                """
+                temp.to_csv(os.path.join(csv_path, bldg + "_temp.csv"))
+                temp.to_csv(os.path.join(csv_path, bldg + "_excel_temp.xlsx"))
+                """
     dymola.close()
 
 
