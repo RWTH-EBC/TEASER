@@ -8,7 +8,7 @@ import pickle
 
 if __name__ == '__main__':
 
-    workspace = os.path.join("D:\\", "tbl-cwe", "1_Building_simulation")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Building_simulation")
     print("Your workspace is set to: ")
     print(workspace)
 
@@ -64,8 +64,8 @@ if __name__ == '__main__':
             res.read_results(
                 buildings=[bldg.name],
                 signals=signals,
-                index=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H", tz="Europe/Berlin"),
-                index_res=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H", tz="Europe/Berlin"),
+                index=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
+                index_res=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
                 results_path=os.path.join(RESULTS_PATH),
                 csv_path=os.path.join(workspace, "csv_results",),
 
@@ -73,13 +73,13 @@ if __name__ == '__main__':
         elif "tabsplusair" in bldg.name:
             signals = ['multizone.TOpe[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.TAir[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
-            signals += ['multizone.TAir[{}].heaterCoolerWithTabs6007C1.pITempHeatPanel.y'.format(i + 1) for i in
+            signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.pITempHeatPanel.y'.format(i + 1) for i in
                         range(len(bldg.thermal_zones))]
-            signals += ['multizone.TAir[{}].heaterCoolerWithTabs6007C1.pITempCoolPanel.y'.format(i + 1) for i in
+            signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.pITempCoolPanel.y'.format(i + 1) for i in
                         range(len(bldg.thermal_zones))]
-            signals += ['multizone.TAir[{}].heaterCoolerWithTabs6007C1.pITempHeatRem.y'.format(i + 1) for i in
+            signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.pITempHeatRem.y'.format(i + 1) for i in
                         range(len(bldg.thermal_zones))]
-            signals += ['multizone.TAir[{}].heaterCoolerWithTabs6007C1.pITempCoolRem.y'.format(i + 1) for i in
+            signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.pITempCoolRem.y'.format(i + 1) for i in
                         range(len(bldg.thermal_zones))]
             signals += ['multizone.PHeater[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.PCooler[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
@@ -87,8 +87,8 @@ if __name__ == '__main__':
             res.read_results(
                 buildings=[bldg.name],
                 signals=signals,
-                index=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H", tz="Europe/Berlin"),
-                index_res=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H", tz="Europe/Berlin"),
+                index=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
+                index_res=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
                 results_path=os.path.join(RESULTS_PATH),
                 csv_path=os.path.join(workspace, "csv_results"),
 
@@ -96,18 +96,15 @@ if __name__ == '__main__':
         elif "radiator" in bldg.name:
             signals = ['multizone.TOpe[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.TAir[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
-            signals += ['multizone.TAir[{}].heaterCoolerWithTabs6007C1.pITempHeatRem.y'.format(i + 1) for i in
-                        range(len(bldg.thermal_zones))]
-            signals += ['multizone.TAir[{}].heaterCoolerWithTabs6007C1.pITempCoolRem.y'.format(i + 1) for i in
+            signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.pITempHeatRem.y'.format(i + 1) for i in
                         range(len(bldg.thermal_zones))]
             signals += ['multizone.PHeater[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
-            signals += ['multizone.PCooler[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
 
             res.read_results(
                 buildings=[bldg.name],
                 signals=signals,
-                index=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H", tz="Europe/Berlin"),
-                index_res=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H", tz="Europe/Berlin"),
+                index=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
+                index_res=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
                 results_path=os.path.join(RESULTS_PATH),
                 csv_path=os.path.join(workspace, "csv_results"),
 
@@ -115,9 +112,9 @@ if __name__ == '__main__':
         elif "convective" in bldg.name:
             signals = ['multizone.TOpe[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.TAir[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
-            signals += ['multizone.TAir[{}].heaterCoolerWithTabs6007C1.pITempHeatRem.y'.format(i + 1) for i in
+            signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.pITempHeatRem.y'.format(i + 1) for i in
                         range(len(bldg.thermal_zones))]
-            signals += ['multizone.TAir[{}].heaterCoolerWithTabs6007C1.pITempCoolRem.y'.format(i + 1) for i in
+            signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.pITempCoolRem.y'.format(i + 1) for i in
                         range(len(bldg.thermal_zones))]
             signals += ['multizone.PHeater[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.PCooler[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
@@ -125,8 +122,8 @@ if __name__ == '__main__':
             res.read_results(
                 buildings=[bldg.name],
                 signals=signals,
-                index=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H", tz="Europe/Berlin"),
-                index_res=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H", tz="Europe/Berlin"),
+                index=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
+                index_res=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
                 results_path=os.path.join(RESULTS_PATH),
                 csv_path=os.path.join(workspace, "csv_results"),
 )

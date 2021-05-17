@@ -88,7 +88,7 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
-    """    
+    """
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
@@ -105,7 +105,7 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
-
+    
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
@@ -1486,7 +1486,7 @@ def test_export_aixlib():
 
 if __name__ == '__main__':
 
-    workspace = os.path.join("D:\\", "tbl-cwe", "1_Building_simulation")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Building_simulation")
     print("Your workspace is set to: ")
     print(workspace)
 
