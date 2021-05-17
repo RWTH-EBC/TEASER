@@ -1490,6 +1490,11 @@ if __name__ == '__main__':
     print("Your workspace is set to: ")
     print(workspace)
 
+    """ für Tobias, ist das richtig??
+    if not os.path.exists(workspace):
+        os.makedirs(workspace)
+    """
+
     #DIR_SCRIPT = os.path.abspath(os.path.dirname(__file__))
     #DIR_TOP = os.path.abspath(DIR_SCRIPT)
     #random_name = random_choice()
