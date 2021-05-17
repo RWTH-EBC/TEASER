@@ -19,7 +19,8 @@ def example_export_aixlib():
     # In e1_generate_archetype we created a Project with three archetype
     # buildings to get this Project we rerun this example
 
-    prj, prj2, prj3 = e1.example_generate_archetype()
+    prj = e1.example_generate_archetype()
+    #, prj2, prj3, prj4
 
     # To make sure the export is using the desired parameters you should
     # always set model settings in the Project.
@@ -58,11 +59,13 @@ def example_export_aixlib():
     # run calc_all_buildings() function
 
     prj.calc_all_buildings()
-
+    """
     prj2.calc_all_buildings()
 
     prj3.calc_all_buildings()
 
+    prj4.calc_all_buildings()
+    """
     # To export the ready-to-run models simply call Project.export_aixlib().
     # You can specify the path, where the model files should be saved.
     # None means, that the default path in your home directory
@@ -74,7 +77,7 @@ def example_export_aixlib():
     path = prj.export_aixlib(
         internal_id=None,
         path=None)
-
+    """
     path = prj2.export_aixlib(
         internal_id=None,
         path=None)
@@ -83,6 +86,10 @@ def example_export_aixlib():
         internal_id=None,
         path=None)
 
+    path = prj4.export_aixlib(
+        internal_id=None,
+        path=None)
+    """
     return path
 
 
