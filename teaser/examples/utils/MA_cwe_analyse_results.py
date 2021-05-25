@@ -73,9 +73,9 @@ if __name__ == '__main__':
         elif "tabsplusair" in bldg.name:
             signals = ['multizone.TOpe[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.TAir[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
-            signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.pITempHeatPanel.y'.format(i + 1) for i in
+            signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.tabsHeatingPower'.format(i + 1) for i in
                         range(len(bldg.thermal_zones))]
-            signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.pITempCoolPanel.y'.format(i + 1) for i in
+            signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.tabsCoolingPower'.format(i + 1) for i in
                         range(len(bldg.thermal_zones))]
             signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.pITempHeatRem.y'.format(i + 1) for i in
                         range(len(bldg.thermal_zones))]
@@ -126,7 +126,7 @@ if __name__ == '__main__':
                 index_res=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
                 results_path=os.path.join(RESULTS_PATH),
                 csv_path=os.path.join(workspace, "csv_results"),
-)
+            )
 
     # Call read_results function
 
