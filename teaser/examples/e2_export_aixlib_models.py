@@ -61,7 +61,7 @@ def example_export_aixlib():
     prj.calc_all_buildings()
     """
     prj2.calc_all_buildings()
-
+    
     prj3.calc_all_buildings()
 
     prj4.calc_all_buildings()
@@ -81,7 +81,7 @@ def example_export_aixlib():
     path = prj2.export_aixlib(
         internal_id=None,
         path=None)
-
+    
     path = prj3.export_aixlib(
         internal_id=None,
         path=None)

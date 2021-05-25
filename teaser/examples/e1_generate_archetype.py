@@ -159,6 +159,24 @@ def example_generate_archetype():
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
+        name="EFHtabsplusair1990light100noRT",
+        year_of_construction=1990,
+        number_of_floors=2,
+        height_of_floors=2.8,
+        net_leased_area=100.0,
+        construction_type="light")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_plus_air_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
+                                                                  room_temp_control=False)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
         name="EFHtabsplusair1990light200",
         year_of_construction=1990,
         number_of_floors=2,
@@ -246,6 +264,152 @@ def example_generate_archetype():
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
 
+    ########################
+    """
+    prj.add_non_residential(
+        method="bmvbs",
+        usage="office",
+        name="Officetabsplusair1990heavy3000",
+        year_of_construction=1990,
+        number_of_floors=5,
+        height_of_floors=3.0,
+        net_leased_area=3000.0,
+        construction_type="heavy")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_plus_air_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
+                                                                  room_temp_control=True)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+
+    prj.add_non_residential(
+        method="bmvbs",
+        usage="office",
+        name="Officetabsplusair1990heavy5000",
+        year_of_construction=1990,
+        number_of_floors=5,
+        height_of_floors=3.0,
+        net_leased_area=5000.0,
+        construction_type="heavy")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_plus_air_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
+                                                                  room_temp_control=True)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+
+    prj.add_non_residential(
+        method="bmvbs",
+        usage="office",
+        name="Officetabsplusair1990light3000",
+        year_of_construction=1990,
+        number_of_floors=5,
+        height_of_floors=3.0,
+        net_leased_area=3000.0,
+        construction_type="light")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_plus_air_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
+                                                                  room_temp_control=True)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+
+    prj.add_non_residential(
+        method="bmvbs",
+        usage="office",
+        name="Officetabsplusair1990light5000",
+        year_of_construction=1990,
+        number_of_floors=5,
+        height_of_floors=3.0,
+        net_leased_area=5000.0,
+        construction_type="light")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_plus_air_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
+                                                                  room_temp_control=True)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+
+    prj.add_non_residential(
+        method="bmvbs",
+        usage="office",
+        name="Officetabsplusair2010heavy3000",
+        year_of_construction=2010,
+        number_of_floors=5,
+        height_of_floors=3.0,
+        net_leased_area=3000.0,
+        construction_type="heavy")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_plus_air_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
+                                                                  room_temp_control=True)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+
+    prj.add_non_residential(
+        method="bmvbs",
+        usage="office",
+        name="Officetabsplusair2010heavy5000",
+        year_of_construction=2010,
+        number_of_floors=5,
+        height_of_floors=3.0,
+        net_leased_area=5000.0,
+        construction_type="heavy")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_plus_air_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
+                                                                  room_temp_control=True)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+
+    prj.add_non_residential(
+        method="bmvbs",
+        usage="office",
+        name="Officetabsplusair2010light3000",
+        year_of_construction=2010,
+        number_of_floors=5,
+        height_of_floors=3.0,
+        net_leased_area=3000.0,
+        construction_type="light")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_plus_air_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
+                                                                  room_temp_control=True)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+
+    prj.add_non_residential(
+        method="bmvbs",
+        usage="office",
+        name="Officetabsplusair2010light5000",
+        year_of_construction=2010,
+        number_of_floors=5,
+        height_of_floors=3.0,
+        net_leased_area=5000.0,
+        construction_type="light")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_plus_air_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
+                                                                  room_temp_control=True)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+    """
     # Project 1 includes all buildings of the building type 'single family house'
 
     """
