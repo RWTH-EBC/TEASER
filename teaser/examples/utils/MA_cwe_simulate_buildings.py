@@ -17,7 +17,7 @@ def generate_archetype():
     from teaser.project import Project
 
     prj = Project(load_data=True)
-    prj.name = "Building_Simulation_EFH_MFH_Office_test"
+    prj.name = "Building_Simulation_EFH_MFH_Office"
 
     heating_profile_night_reduction = [292.15,
                                        292.15,
@@ -88,7 +88,7 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
-    """
+
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
@@ -1451,7 +1451,7 @@ def generate_archetype():
         zone.heating_cooling_system.convective_heating_cooling()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
-    """
+
     return prj
 
 def test_export_aixlib():
