@@ -1,14 +1,17 @@
 """Module to read results with DymolaInterface."""
-# from Peter Remmen
 
 import datetime
 import os
+import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
+#plt.style.use(os.path.join("D:\\", "tbl-cwe", "Repos", "TEASER", "teaser", "examples", "utils", "ebc.paper.mplstyle"))
 import matplotlib.dates as mdates
 import seaborn as sns
 import pandas as pd
 
 from dymola.dymola_interface import DymolaInterface
+
 
 # This module reads simulation results from Dymola simulation of TEASER buidlings and
 # saves heating, cooling and electricity demand (ventilation) into seperate *.csv files
@@ -53,13 +56,13 @@ from dymola.dymola_interface import DymolaInterface
 
 
 def read_results(
-    buildings,
-    signals,
-    index=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
-    index_res=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
-    results_path=None,
-    csv_path=None,
-    ):
+        buildings,
+        signals,
+        index=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
+        index_res=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
+        results_path=None,
+        csv_path=None,
+):
     """Read simulation data from .mat file and save them into csv.
 
     Reads Dymola result files and saves them as time series in csv.  It assumes that all
@@ -90,7 +93,7 @@ def read_results(
 
     for bldg in buildings:
         print("reading building {}".format(bldg))
-        #bldg.name
+        # bldg.name
         if not (bldg + "_heat.csv") in os.listdir(csv_path):
             try:
                 print(os.path.join(results_path, bldg + ".mat"))
@@ -99,7 +102,7 @@ def read_results(
                     signals=signals,
                     rows=dymola.readTrajectorySize(
                         fileName=os.path.join(results_path, bldg + ".mat")
-                        ),
+                    ),
                 )
                 results = pd.DataFrame().from_records(dym_res).T
                 results = results.rename(
@@ -111,7 +114,7 @@ def read_results(
                     "Reading results of building {} failed, "
                     "please check result file".format(bldg)
                 )
-                raise Exception("Results Error!")
+                # raise Exception("Results Error!")
                 continue
             try:
                 results.index = index
@@ -121,47 +124,45 @@ def read_results(
                     "faulty (series is shorter then one year), please check "
                     "result file".format(bldg)
                 )
-                raise Exception("Completion Error!")
-
+                # raise Exception("Completion Error!")
+                continue
 
             heat = pd.DataFrame(
                 data=results.filter(like="PHeat").sum(axis=1)[
-                    index_res[0] : index_res[-1]
-                ],
+                     index_res[0]: index_res[-1]
+                     ],
                 index=index_res,
-                columns=[bldg + " heat"],
+                columns=[bldg + " PHeat"],
             )
 
             heat.loc[:, bldg + " tabsHeatingPower"] = results.filter(like="tabsHeatingPower").sum(axis=1)[
-                    index_res[0] : index_res[-1]
-                ]
+                                                      index_res[0]: index_res[-1]
+                                                      ]
             heat.loc[:, bldg + " pITempHeatRem.y"] = results.filter(like="pITempHeatRem.y").sum(axis=1)[
-                    index_res[0] : index_res[-1]
-                ]        
+                                                     index_res[0]: index_res[-1]
+                                                     ]
             heat.loc[:, bldg + " pITempHeatPanel.y"] = results.filter(like="pITempHeatPanel.y").sum(axis=1)[
-                    index_res[0] : index_res[-1]
-                ]        
-
+                                                       index_res[0]: index_res[-1]
+                                                       ]
 
             cool = pd.DataFrame(
                 data=results.filter(like="PCool")
-                .abs()
-                .sum(axis=1)[index_res[0] : index_res[-1]],
+                         .abs()
+                         .sum(axis=1)[index_res[0]: index_res[-1]],
                 index=index_res,
-                columns=[bldg + " cool"],
+                columns=[bldg + " PCool"],
             )
-            """
+
             cool.loc[:, bldg + " tabsCoolingPower"] = results.filter(like="tabsCoolingPower").abs().sum(axis=1)[
-                    index_res[0] : index_res[-1]
-                ]
+                                                      index_res[0]: index_res[-1]
+                                                      ]
             cool.loc[:, bldg + " pITempCoolRem.y"] = results.filter(like="pITempCoolRem.y").abs().sum(axis=1)[
-                    index_res[0] : index_res[-1]
-                ]  
+                                                     index_res[0]: index_res[-1]
+                                                     ]
             cool.loc[:, bldg + " pITempCoolPanel.y"] = results.filter(like="pITempCoolPanel.y").abs().sum(axis=1)[
-                    index_res[0] : index_res[-1]
-                ]        
-            """
-            """
+                                                       index_res[0]: index_res[-1]
+                                                       ]
+
             temp = pd.DataFrame(
                 data=results.filter(like="TAir").sum(axis=1)[
                      index_res[0]: index_res[-1]
@@ -170,23 +171,195 @@ def read_results(
                 columns=[bldg + " TAir"],
             )
             temp.loc[:, bldg + " TOpe"] = results.filter(like="TOpe").sum(axis=1)[
-                    index_res[0] : index_res[-1]
-                ] 
-            """
+                                          index_res[0]: index_res[-1]
+                                          ]
 
             heat.to_csv(os.path.join(csv_path, bldg + "_heat.csv"))
             cool.to_csv(os.path.join(csv_path, bldg + "_cool.csv"))
-            heat.to_excel(os.path.join(csv_path, bldg + "_excel_heat.xlsx"))
-            cool.to_excel(os.path.join(csv_path, bldg + "_excel_cool.xlsx"))
-            """
-            temp.to_csv(os.path.join(csv_path, bldg + "_temp.csv"))
-            temp.to_csv(os.path.join(csv_path, bldg + "_excel_temp.xlsx"))
-            """
+            # heat.to_excel(os.path.join(csv_path, bldg + "_excel_heat.xlsx"))
+            # cool.to_excel(os.path.join(csv_path, bldg + "_excel_cool.xlsx"))
+
+            # temp.to_csv(os.path.join(csv_path, bldg + "_temp.csv"))
+            # temp.to_excel(os.path.join(csv_path, bldg + "_excel_temp.xlsx"))
+
     dymola.close()
 
 
+def calc_results(buildings, csv_path, output_path, plot_path):
+    """Create csv-file containing KPIs of buildings.
+
+    Parameters
+    ----------
+    buildings : list of TEASER bldgs
+    csv_path : str
+        Path where hourly demands created by MA_cwe_analyse_results.py are stored
+    output_path : str
+        Path where output files should be stored
+    plot_path : str
+        Path where plot files should be stored
+
+    """
+
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
+
+    results = pd.DataFrame()
+
+    for bldg in buildings:
+        #try:
+        print("reading building {}".format(bldg.name))
+        # read hourly demands
+        heat_data = pd.read_csv(os.path.join(csv_path, bldg.name + "_heat.csv"))
+        cool_data = pd.read_csv(os.path.join(csv_path, bldg.name + "_cool.csv"))
+        # temp_data = pd.read_csv(os.path.join(csv_path, bldg.name + "_temp.csv"))
+        """
+        print("plotting building {}".format(bldg.name))
+        plot_results(
+            heat=heat_data,
+            cool=cool_data,
+            title=bldg.name,
+            output_path=os.path.join(plot_path))
+        """
+        # calculate annual heating and cooling demand
+        annual_heat = heat_data.loc[:, bldg.name + " PHeat"].sum() / 1000
+        annual_cool = cool_data.loc[:, bldg.name + " PCool"].sum() / 1000
+        # calculate specific annual heating and cooling demand
+        spec_annual_heat = annual_heat / bldg.net_leased_area
+        spec_annual_cool = annual_cool / bldg.net_leased_area
+        # determine maximum values
+        max_heat = heat_data.loc[:, bldg.name + " PHeat"].max() / 1000
+        max_cool = cool_data.loc[:, bldg.name + " PCool"].max() / 1000
+        # calculate specific maximum values
+        spec_max_heat = max_heat * 1000 / bldg.net_leased_area
+        spec_max_cool = max_cool * 1000 / bldg.net_leased_area
+        #####
+
+        if "tabsplusair" in bldg.name:
+            # calculate TABS heating and cooling demand
+            annual_heat_tabs = heat_data.loc[:, bldg.name + " tabsHeatingPower"].sum() / 1000
+            annual_cool_tabs = cool_data.loc[:, bldg.name + " tabsCoolingPower"].sum() / 1000
+            # calculate specific annual heating and cooling demand
+            spec_annual_heat_tabs = annual_heat_tabs / bldg.net_leased_area
+            spec_annual_cool_tabs = annual_cool_tabs / bldg.net_leased_area
+            # calculate convective heating and cooling demand
+            annual_heat_convective = heat_data.loc[:, bldg.name + " pITempHeatRem.y"].sum() / 1000
+            annual_cool_convective = cool_data.loc[:, bldg.name + " pITempCoolRem.y"].sum() / 1000
+            # calculate specific annual heating and cooling demand
+            spec_annual_heat_convective = annual_heat_convective / bldg.net_leased_area
+            spec_annual_cool_convective = annual_cool_convective / bldg.net_leased_area
+            # calculate share of TABS heating and cooling in relation to convective system
+            share_tabs_heating_total = (annual_heat_tabs / annual_heat) * 100  # in %
+            share_tabs_cooling_total = (annual_cool_tabs / annual_cool) * 100  # in %
+        elif "panel" in bldg.name:
+            # calculate Panel heating and cooling demand
+            annual_heat_panel = heat_data.loc[:, bldg.name + " pITempHeatPanel.y"].sum() / 1000
+            annual_cool_panel = cool_data.loc[:, bldg.name + " pITempCoolPanel.y"].sum() / 1000
+            # calculate specific annual heating and cooling demand
+            spec_annual_heat_panel = annual_heat_panel / bldg.net_leased_area
+            spec_annual_cool_panel = annual_cool_panel / bldg.net_leased_area
+        elif "radiator" in bldg.name:
+            # calculate Radiator heating and cooling demand
+            annual_heat_radiator = heat_data.loc[:, bldg.name + " pITempHeatRem.y"].sum() / 1000
+            # calculate specific annual heating and cooling demand
+            spec_annual_heat_radiator = annual_heat_radiator / bldg.net_leased_area
+        elif "convective" in bldg.name:
+            # calculate convective heating and cooling demand
+            annual_heat_convective = heat_data.loc[:, bldg.name + " pITempHeatRem.y"].sum() / 1000
+            annual_cool_convective = cool_data.loc[:, bldg.name + " pITempCoolRem.y"].sum() / 1000
+            # calculate specific annual heating and cooling demand
+            spec_annual_heat_convective = annual_heat_convective / bldg.net_leased_area
+            spec_annual_cool_convective = annual_cool_convective / bldg.net_leased_area
+        elif "tabs" in bldg.name:
+            # calculate TABS heating and cooling demand
+            annual_heat_tabs = heat_data.loc[:, bldg.name + " tabsHeatingPower"].sum() / 1000
+            annual_cool_tabs = cool_data.loc[:, bldg.name + " tabsCoolingPower"].sum() / 1000
+            # calculate specific annual heating and cooling demand
+            spec_annual_heat_tabs = annual_heat_tabs / bldg.net_leased_area
+            spec_annual_cool_tabs = annual_cool_tabs / bldg.net_leased_area
+
+        results.loc[bldg.name, "Annual heating demand [kWh/a]"] = round(annual_heat, 1)
+        results.loc[bldg.name, "Specific annual heating demand [kWh/sqm*a]"] = round(spec_annual_heat, 1)
+        results.loc[bldg.name, "Maximum heating power [kW]"] = round(max_heat, 1)
+        results.loc[bldg.name, "Specific maximum heating power [W/sqm]"] = round(spec_max_heat, 1)
+        results.loc[bldg.name, "Annual cooling demand [kWh/a]"] = round(annual_cool, 1)
+        results.loc[bldg.name, "Specific annual cooling demand [kWh/sqm*a]"] = round(spec_annual_cool, 1)
+        results.loc[bldg.name, "Maximum cooling power [kW]"] = round(max_cool, 1)
+        results.loc[bldg.name, "Specific maximum cooling power [W/sqm]"] = round(spec_max_cool, 1)
+
+        if "tabsplusair" in bldg.name:
+            results.loc[bldg.name, "Annual tabs heating demand [kWh/a]"] = round(annual_heat_tabs, 1)
+            results.loc[bldg.name, "Annual tabs cooling demand [kWh/a]"] = round(annual_cool_tabs, 1)
+            results.loc[bldg.name, "Specific annual tabs heating demand [kWh/sqm*a]"] = round(spec_annual_heat_tabs, 1)
+            results.loc[bldg.name, "Specific annual tabs cooling demand [kWh/sqm*a]"] = round(spec_annual_cool_tabs, 1)
+            results.loc[bldg.name, "Annual convective heating demand [kWh/a]"] = round(annual_heat_convective, 1)
+            results.loc[bldg.name, "Annual convective cooling demand [kWh/a]"] = round(annual_cool_convective, 1)
+            results.loc[bldg.name, "Specific annual convective heating demand [kWh/sqm*a]"] = round(
+                spec_annual_heat_convective, 1)
+            results.loc[bldg.name, "Specific annual convective cooling demand [kWh/sqm*a]"] = round(
+                spec_annual_cool_convective, 1)
+            results.loc[bldg.name, "Share of TABS heating of total heating [%]"] = round(share_tabs_heating_total, 1)
+            results.loc[bldg.name, "Share of TABS cooling of total cooling [%]"] = round(share_tabs_cooling_total, 1)
+
+        """except BaseException:
+            # Dymola has strange exceptions
+            print(
+                "Reading results of building {} failed, "
+                "please check result file".format(bldg.name)
+            )
+            # raise Exception("Results Error!")
+            continue"""
+
+    results.to_csv(os.path.join(output_path, "buildings_calc.csv"))
+    results.to_excel(os.path.join(output_path, "buildings_excel_calc.xlsx"))
+
+
 def plot_results(heat, cool, title, output_path):
-    """Very simple and basic plotting of heating and cooling time series."""
+    """Create plots of heating and cooling time series from .csv
+    files with hourly demands created by MA_cwe_analyse_results.py
+
+    Parameters
+    ----------
+    heat : data frame with hourly heating demands
+    cool : data frame with hourly cooling demands
+    title : title of plots
+    output_path : str
+        Path where output files should be stored.
+
+    """
+
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
+
+    data = pd.DataFrame(
+        index=pd.date_range(
+            start=datetime.datetime(2021, 1, 1, 0, 0, 0),
+            end=datetime.datetime(2021, 12, 31, 23, 55),
+            freq="H", ),
+        columns=["Wärmeleistung", "Kälteleistung"], )
+    data["Wärmeleistung"] = heat.iloc[:, 1].values / 1000
+    data["Kälteleistung"] = -cool.iloc[:, 1].values / 1000
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    ax.set_ylabel('Leistung in kW')
+    ax.set_xlabel('Simulationszeit in h')
+    ax.plot(data["Wärmeleistung"], linewidth=0.2, label="Wärme", color='r')
+    ax.plot(data["Kälteleistung"], linewidth=0.2, label="Kälte", color='b')
+    ax.set_ylim([-5000, 5000])
+    ax.set_xlim([0, 8760])
+    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=2))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%d-%m"))
+    #ax.legend(loc=1.0, borderaxespad=0.2)
+    #ax.set_title('Bedarfe')
+    # ax.plot([0, 8760], [0, 0], linestyle='--', linewidth=0.5, color='black')
+    plt.tight_layout()
+    #plt.savefig(bldg.name + 'Bedarf.png', dpi=200, transparent=True)
+    plt.savefig(output_path + title + '_plot.pdf', dpi=200)
+    plt.close("all")
+
+
+def old_plot_results(heat, cool, title, output_path):
+    # Very simple and basic plotting of heating and cooling time series.
     data = pd.DataFrame(
         index=pd.date_range(
             start=datetime.datetime(2021, 1, 1, 0, 0, 0),
@@ -195,13 +368,13 @@ def plot_results(heat, cool, title, output_path):
         ),
         columns=["Wärmeleistung", "Kälteleistung"],
     )
-    data["Wärmeleistung"] = heat.iloc[:, 0].values / 1000
-    data["Kälteleistung"] = -cool.iloc[:, 0].values / 1000
+    data["Wärmeleistung"] = heat.iloc[:, 1].values / 1000
+    data["Kälteleistung"] = -cool.iloc[:, 1].values / 1000
     # data = data.dropna()
     fig, ax1 = plt.subplots()
     ax = sns.lineplot(
         data=data,
-        hue={"ls": ["-", "-"]},
+        hue=None,
         palette=["#407FB7", "#646567"],
         linewidth=0.5,
         ax=ax1,
@@ -217,7 +390,7 @@ def plot_results(heat, cool, title, output_path):
     plt.clf()
     ax = sns.lineplot(
         data=data.resample("D").mean(),
-        hue={"ls": ["-", "--"]},
+        hue=None,
         palette=["#407FB7", "#646567"],
         linewidth=0.5,
     )
@@ -225,4 +398,4 @@ def plot_results(heat, cool, title, output_path):
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%d-%m"))
     plt.title(title + " D")
     plt.savefig(output_path.replace("plt", "plt_D"), dpi=200)
-    plt.clf()
+    plt.close("all")
