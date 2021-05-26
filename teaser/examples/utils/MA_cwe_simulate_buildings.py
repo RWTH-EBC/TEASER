@@ -17,7 +17,7 @@ def generate_archetype():
     from teaser.project import Project
 
     prj = Project(load_data=True)
-    prj.name = "Building_Simulation_EFH_MFH_Office"
+    prj.name = "Simulationsstudie"
 
     heating_profile_night_reduction = [292.15,
                                        292.15,
@@ -1486,14 +1486,11 @@ def test_export_aixlib():
 
 if __name__ == '__main__':
 
-    workspace = os.path.join("D:\\", "tbl-cwe", "Building_simulation")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Gebaeudesimulation")
     print("Your workspace is set to: ")
     print(workspace)
-
-    """ für Tobias, ist das richtig??
-    if not os.path.exists(workspace):
-        os.makedirs(workspace)
-    """
+    sim_results_path = os.path.join(workspace, "sim_results")
+    TEASER_output_path = os.path.join(workspace, "TEASEROutput")
 
     #DIR_SCRIPT = os.path.abspath(os.path.dirname(__file__))
     #DIR_TOP = os.path.abspath(DIR_SCRIPT)
@@ -1504,6 +1501,7 @@ if __name__ == '__main__':
     #prj.name = "Shamrock_Park_{}_{}".format(random_name, "ref")
     #info_path = os.path.join(DIR_TOP, "shamrock_park")
 
+    print("Generating archetypes...")
     prj = generate_archetype()
     prj.used_library_calc = 'AixLib'
     prj.number_of_elements_calc = 2
@@ -1516,20 +1514,24 @@ if __name__ == '__main__':
             "weatherdata",
             "TRY2015_507755060854_Jahr_City_Aachen.mos"))
 
-    RESULTS_PATH = os.path.join(workspace, "sim_results")
+    print("Exporting buildings...")
+    prj.export_aixlib(path=TEASER_output_path)
 
-    prj.export_aixlib(path=os.path.join(workspace, "TEASEROutput"))
-    #prj.save_project() #brauche ich das hier dann?
-
+    # Save project in pickle file for later use
     pickle_file = os.path.join(workspace, "building_simulation_pickle.p")
     pickle.dump(prj, open(pickle_file, "wb"))
 
+    print("Starting simulation")
     sim.queue_simulation(
         sim_function=sim.simulate,
         prj=prj,
-        results_path=RESULTS_PATH,
+        model_path=TEASER_output_path,
+        results_path=sim_results_path,
         number_of_workers=multiprocessing.cpu_count() - 3,
     )
+    print("Your simulation results can be found in: ")
+    print(sim_results_path)
+    print("That's it! :)")
 
     """for bldg in prj.buildings:
         signals = [
@@ -1550,5 +1552,5 @@ if __name__ == '__main__':
         )
         """
 
-    print("That's it! :)")
+
 
