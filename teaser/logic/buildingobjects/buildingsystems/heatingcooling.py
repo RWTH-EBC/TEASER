@@ -325,8 +325,12 @@ class HeatingCooling(object):
         self.radiator = True
         self.ventilation = True
 
-        self.powerHeatTabs = max([self.parent.area * specific_power_heat, self.parent.model_attr.heat_load], key=abs)
-        self.powerCoolTabs = max([-self.parent.area * specific_power_cool, self.parent.model_attr.cool_load], key=abs)
+        a = (self.parent.area * specific_power_heat)
+        b = self.parent.model_attr.heat_load
+        c = -(self.parent.area * specific_power_cool)
+        d = self.parent.model_attr.cool_load
+        self.powerHeatTabs = a if a < b else b
+        self.powerCoolTabs = c if c > d else d
         self.TThresholdHeaterTabs = 273.15 + 14
         self.TThresholdCoolerTabs = 273.15 + 18
         self.withTabsRoomTempControl = room_temp_control
