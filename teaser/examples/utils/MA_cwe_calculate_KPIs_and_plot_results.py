@@ -8,7 +8,7 @@ import pickle
 
 if __name__ == '__main__':
 
-    workspace = os.path.join("D:\\", "tbl-cwe", "Building_simulation")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Gebaeudesimulation")
     print("Your workspace is set to: ")
     print(workspace)
 
@@ -20,10 +20,11 @@ if __name__ == '__main__':
     output_path = os.path.join(workspace, "calc_results")
     print("Your Calculation Results are stored in: ")
     print(output_path)
+
     plot_path = os.path.join(workspace, "plots")
     print("Your Plots are stored in: ")
     print(plot_path)
-
+    print("##########")
     #for bldg in pickle_prj.buildings:
     res.calc_results(
         buildings=pickle_prj.buildings,
@@ -31,8 +32,9 @@ if __name__ == '__main__':
         output_path=os.path.join(output_path),
         plot_path=os.path.join(plot_path))
 
-    """res.plot_results(
+    print("##########")
+    
+    res.plot_results(
         buildings=pickle_prj.buildings,
         csv_path=os.path.join(workspace, "csv_results",),
-        output_path=os.path.join(plot_path))"""
-    #bldg.name
+        output_path=os.path.join(plot_path))

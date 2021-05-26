@@ -8,7 +8,7 @@ import pickle
 
 if __name__ == '__main__':
 
-    workspace = os.path.join("D:\\", "tbl-cwe", "Building_simulation")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Gebaeudesimulation")
     print("Your workspace is set to: ")
     print(workspace)
 
@@ -49,6 +49,7 @@ if __name__ == '__main__':
     RESULTS_PATH = os.path.join(workspace, "sim_results", pickle_prj.name)
     print("Your Dymola Results are stored in: ")
     print(RESULTS_PATH)
+    print("##########")
 
     for bldg in pickle_prj.buildings:
         if "panel" in bldg.name:
@@ -127,6 +128,9 @@ if __name__ == '__main__':
                 results_path=os.path.join(RESULTS_PATH),
                 csv_path=os.path.join(workspace, "csv_results"),
             )
+
+    print("That's it! :)")
+
 
     # Call read_results function
 
