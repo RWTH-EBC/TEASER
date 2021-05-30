@@ -162,17 +162,37 @@ def read_results(
         cool.loc[:, bldg + " pITempCoolPanel.y"] = results.filter(like="pITempCoolPanel.y").abs().sum(axis=1)[
                                                    index_res[0]: index_res[-1]
                                                    ]
-
-        temp = pd.DataFrame(
-            data=results.filter(like="TAir").sum(axis=1)[
-                 index_res[0]: index_res[-1]
-                 ],
-            index=index_res,
-            columns=[bldg + " TAir"],
-        )
-        temp.loc[:, bldg + " TOpe"] = results.filter(like="TOpe").sum(axis=1)[
-                                      index_res[0]: index_res[-1]
-                                      ]
+        if "Office" in bldg:
+            #for i in range(len([bldg.thermal_zones])):
+            temp = pd.DataFrame(
+                data=results.filter(like="TAir[1]").sum(axis=1)[
+                     index_res[0]: index_res[-1]
+                     ],
+                index=index_res,
+                columns=[bldg + " TAir[1]"],
+            )
+            temp.loc[:, bldg + " TAir[2]"] = results.filter(like="TAir[2]").sum(axis=1)[index_res[0]: index_res[-1]]
+            temp.loc[:, bldg + " TAir[3]"] = results.filter(like="TAir[3]").sum(axis=1)[index_res[0]: index_res[-1]]
+            temp.loc[:, bldg + " TAir[4]"] = results.filter(like="TAir[4]").sum(axis=1)[index_res[0]: index_res[-1]]
+            temp.loc[:, bldg + " TAir[5]"] = results.filter(like="TAir[5]").sum(axis=1)[index_res[0]: index_res[-1]]
+            temp.loc[:, bldg + " TAir[6]"] = results.filter(like="TAir[6]").sum(axis=1)[index_res[0]: index_res[-1]]
+            temp.loc[:, bldg + " TOpe[1]"] = results.filter(like="TOpe[1]").sum(axis=1)[index_res[0]: index_res[-1]]
+            temp.loc[:, bldg + " TOpe[2]"] = results.filter(like="TOpe[2]").sum(axis=1)[index_res[0]: index_res[-1]]
+            temp.loc[:, bldg + " TOpe[3]"] = results.filter(like="TOpe[3]").sum(axis=1)[index_res[0]: index_res[-1]]
+            temp.loc[:, bldg + " TOpe[4]"] = results.filter(like="TOpe[4]").sum(axis=1)[index_res[0]: index_res[-1]]
+            temp.loc[:, bldg + " TOpe[5]"] = results.filter(like="TOpe[5]").sum(axis=1)[index_res[0]: index_res[-1]]
+            temp.loc[:, bldg + " TOpe[6]"] = results.filter(like="TOpe[6]").sum(axis=1)[index_res[0]: index_res[-1]]
+        else:
+            temp = pd.DataFrame(
+                data=results.filter(like="TAir").sum(axis=1)[
+                     index_res[0]: index_res[-1]
+                     ],
+                index=index_res,
+                columns=[bldg + " TAir"],
+            )
+            temp.loc[:, bldg + " TOpe"] = results.filter(like="TOpe").sum(axis=1)[
+                                          index_res[0]: index_res[-1]
+                                          ]
 
         heat.to_csv(os.path.join(csv_path, bldg + "_heat.csv"))
         cool.to_csv(os.path.join(csv_path, bldg + "_cool.csv"))
@@ -220,6 +240,11 @@ def calc_results(buildings, csv_path, output_path, plot_path):
                 title=bldg.name,
                 output_path=os.path.join(plot_path + '_plot.pdf'))
             """
+            # drop the first 4 days of the data
+            heat_data = heat_data.drop(heat_data.index[0:96])
+            cool_data = cool_data.drop(cool_data.index[0:96])
+            #temp_data = temp_data.drop(temp_data.index[0:96])
+
             # calculate annual heating and cooling demand
             annual_heat = heat_data.loc[:, bldg.name + " PHeat"].sum() / 1000
             annual_cool = cool_data.loc[:, bldg.name + " PCool"].sum() / 1000
@@ -276,6 +301,27 @@ def calc_results(buildings, csv_path, output_path, plot_path):
                 # calculate specific annual heating and cooling demand
                 spec_annual_heat_tabs = annual_heat_tabs / bldg.net_leased_area
                 spec_annual_cool_tabs = annual_cool_tabs / bldg.net_leased_area
+
+            if "EFH" in bldg.name:
+                results.loc[bldg.name, "Type"] = "EFH"
+            elif "MFH" in bldg.name:
+                results.loc[bldg.name, "Type"] = "MFH"
+            elif "Office" in bldg.name:
+                results.loc[bldg.name, "Type"] = "Office"
+            if "radiator" in bldg.name:
+                results.loc[bldg.name, "System"] = "Radiator"
+            elif "convective" in bldg.name:
+                results.loc[bldg.name, "System"] = "Convective"
+            elif "panel" in bldg.name:
+                results.loc[bldg.name, "System"] = "Panel"
+            elif "tabsplusair" in bldg.name:
+                results.loc[bldg.name, "System"] = "TABSplusAir"
+            results.loc[bldg.name, "Year of construction"] = bldg.year_of_construction
+            results.loc[bldg.name, "Net area"] = bldg.net_leased_area
+            #results.loc[bldg.name, "Footprint area"] = bldg.ground_floor_geo["GroundFloor"]["area"]
+            #results.loc[bldg.name, "Volume"] = bldg.volume
+            results.loc[bldg.name, "A/V"] = bldg.library_attr.total_surface_area / bldg.volume
+            results.loc[bldg.name, "Construction type"] = bldg.construction_type
 
             results.loc[bldg.name, "Annual heating demand [kWh/a]"] = round(annual_heat, 1)
             results.loc[bldg.name, "Specific annual heating demand [kWh/sqm*a]"] = round(spec_annual_heat, 1)
@@ -336,21 +382,47 @@ def plot_results(buildings, csv_path, output_path):
         try:
             print("reading building {}".format(bldg.name))
             # read hourly demands
-            heat_data = pd.read_csv(os.path.join(csv_path, bldg.name + "_heat.csv"))
-            cool_data = pd.read_csv(os.path.join(csv_path, bldg.name + "_cool.csv"))
-            temp_data = pd.read_csv(os.path.join(csv_path, bldg.name + "_temp.csv"))
+            heat_data = pd.read_csv(os.path.join(csv_path, bldg.name + "_heat.csv"), index_col=0)
+            cool_data = pd.read_csv(os.path.join(csv_path, bldg.name + "_cool.csv"), index_col=0)
+            temp_data = pd.read_csv(os.path.join(csv_path, bldg.name + "_temp.csv"), index_col=0)
 
             data = pd.DataFrame(
                 index=pd.date_range(
                     start=datetime.datetime(2021, 1, 1, 0, 0, 0),
                     end=datetime.datetime(2021, 12, 31, 23, 55),
                     freq="H", ),
-                columns=["Wärmeleistung", "Kälteleistung"], )
+                columns=["Wärmeleistung", "Kälteleistung", "Temperatur"], )
 
-            heat_demand = heat_data.loc[:, bldg.name + " PHeat"].values / 1000
-            cool_demand = -cool_data.loc[:, bldg.name + " PCool"].values / 1000
-            temp_ope = temp_data.loc[:, bldg.name + " TOpe"].values - 273.15
+            data.loc[:, "Wärmeleistung"] = heat_data.loc[:, bldg.name + " PHeat"].values / 1000
+            data.loc[:, "Kälteleistung"] = -cool_data.loc[:, bldg.name + " PCool"].values / 1000
 
+            if "Office" in bldg.name:
+                data.loc[:, "Temperatur"] = ((temp_data.loc[:, bldg.name + " TOpe[1]"].values*0.5*bldg.net_leased_area
+                                             +temp_data.loc[:, bldg.name + " TOpe[2]"].values*0.25*bldg.net_leased_area
+                                             +temp_data.loc[:, bldg.name + " TOpe[3]"].values*0.15*bldg.net_leased_area
+                                             +temp_data.loc[:, bldg.name + " TOpe[4]"].values*0.04*bldg.net_leased_area
+                                             +temp_data.loc[:, bldg.name + " TOpe[5]"].values*0.04*bldg.net_leased_area
+                                             +temp_data.loc[:, bldg.name + " TOpe[6]"].values*0.02*bldg.net_leased_area)
+                                             /bldg.net_leased_area) - 273.15
+            else:
+                data.loc[:, "Temperatur"] = temp_data.loc[:, bldg.name + " TOpe"].values - 273.15
+
+            if "tabsplusair" in bldg.name:
+                data.loc[:, "tabs_heat_demand"] = heat_data.loc[:, bldg.name + " tabsHeatingPower"].values / 1000
+                data.loc[:, "tabs_cool_demand"] = -cool_data.loc[:, bldg.name + " tabsCoolingPower"].values / 1000
+                data.loc[:, "convective_heat_demand"] = heat_data.loc[:, bldg.name + " pITempHeatRem.y"].values / 1000
+                data.loc[:, "convective_cool_demand"] = -cool_data.loc[:, bldg.name + " pITempCoolRem.y"].values / 1000
+
+            #heat_demand = heat_data.loc[:, bldg.name + " PHeat"].values / 1000
+            #cool_demand = -cool_data.loc[:, bldg.name + " PCool"].values / 1000
+            #temp_ope = temp_data.loc[:, bldg.name + " TOpe"].values - 273.15
+
+            #start_remove = pd.to_datetime('2021-1-1')
+            #end_remove = pd.to_datetime('2021-1-3')
+            #sliced_data = data.loc[data.index.difference(data.index[data.index.slice_indexer(start_remove, end_remove)])]
+
+            data = data.drop(data.index[0:96])
+            """
             #plot parameters
             sidewidth = 6.224
             fontsize = 11
@@ -364,46 +436,60 @@ def plot_results(buildings, csv_path, output_path):
                       'axes.titlesize': fontsize}
             matplotlib.rc('font', **font)
             matplotlib.rcParams.update(params)
-            #weeks = mdates.DayLocator(interval=7)
-            #months = mdates.MonthLocator(interval=2)
-            #format = mdates.DateFormatter("%d-%m")
+            """
+            days = mdates.DayLocator(interval=10)
+            weeks = mdates.DayLocator(interval=7)
+            minormonths = mdates.MonthLocator(interval=1)
+            majormonths = mdates.MonthLocator(interval=2)
+            format = mdates.DateFormatter("%d-%m")
+            format2 = mdates.DateFormatter("%d")
 
             print("plotting building {}".format(bldg.name))
             fig, (ax1, ax2) = plt.subplots(2)
-            ax1.plot(temp_ope, linewidth=0.3)
+            #ax1.plot(temp_ope, linewidth=0.3)
+            ax1.plot(data.loc[:, "Temperatur"], linewidth=0.3)
             ax1.set_title("Operative Temperatur")
             ax1.set_ylabel('Temperatur in [°C]')
             ax1.margins(0.01)
-            ax2.plot(heat_demand, linewidth=0.3, label="Wärmeleistung", color="r")
-            ax2.plot(cool_demand, linewidth=0.3, label="Kälteleistung", color="b")
+            ax1.xaxis.set_minor_locator(minormonths)
+            ax1.xaxis.set_major_locator(majormonths)
+            ax1.xaxis.set_major_formatter(format)
+            #ax2.plot(heat_demand, linewidth=0.3, label="Wärmeleistung", color="r")
+            #ax2.plot(cool_demand, linewidth=0.3, label="Kälteleistung", color="b")
+            ax2.plot(data.loc[:, "Wärmeleistung"], linewidth=0.3, label="Wärmeleistung", color="r")
+            ax2.plot(data.loc[:, "Kälteleistung"], linewidth=0.3, label="Kälteleistung", color="b")
             ax2.set_title("Heiz- und Kühllast")
             ax2.set_ylabel('Leistung in [kWh/h]')
-            ax2.set_xlabel('Simulationszeit in h')
+            #ax2.set_xlabel('Simulationszeit in h')
             #ax2.set_ylim([0, 5000])
             #ax2.set_xlim([5000, 8760])
             #ax2.autoscale()
             ax2.margins(0.01)
-            #ax2.xaxis.set_minor_locator(weeks)
-            #ax2.xaxis.set_major_locator(months)
-            #ax2.xaxis.set_major_formatter(format)
+            ax2.xaxis.set_minor_locator(minormonths)
+            ax2.xaxis.set_major_locator(majormonths)
+            ax2.xaxis.set_major_formatter(format)
 
+            #plt.grid(color='green', linestyle='--', linewidth=0.1)
             plt.tight_layout()
             plt.savefig(os.path.join(output_path, bldg.name + "_plot.pdf"), dpi=200)
             plt.close("all")
 
             if "tabsplusair" in bldg.name:
-                tabs_heat_demand = heat_data.loc[:, bldg.name + " tabsHeatingPower"].values / 1000
-                tabs_cool_demand = -cool_data.loc[:, bldg.name + " tabsCoolingPower"].values / 1000
-                convective_heat_demand = heat_data.loc[:, bldg.name + " pITempHeatRem.y"].values / 1000
-                convective_cool_demand = -cool_data.loc[:, bldg.name + " pITempCoolRem.y"].values / 1000
+                #data.loc[:, "tabs_heat_demand"] = heat_data.loc[:, bldg.name + " tabsHeatingPower"].values / 1000
+                #tabs_cool_demand = -cool_data.loc[:, bldg.name + " tabsCoolingPower"].values / 1000
+                #convective_heat_demand = heat_data.loc[:, bldg.name + " pITempHeatRem.y"].values / 1000
+                #convective_cool_demand = -cool_data.loc[:, bldg.name + " pITempCoolRem.y"].values / 1000
 
                 fig2, (ax3, ax4, ax5) = plt.subplots(3)
-                ax3.plot(temp_ope, linewidth=0.3)
+                ax3.plot(data.loc[:, "Temperatur"], linewidth=0.3)
                 ax3.set_title("Operative Temperatur")
                 ax3.set_ylabel('Temperatur in [°C]')
                 ax3.margins(0.01)
-                ax4.plot(tabs_heat_demand, linewidth=0.3, label="Wärmeleistung", color="r")
-                ax4.plot(tabs_cool_demand, linewidth=0.3, label="Kälteleistung", color="b")
+                ax3.xaxis.set_minor_locator(minormonths)
+                ax3.xaxis.set_major_locator(majormonths)
+                ax3.xaxis.set_major_formatter(format)
+                ax4.plot(data.loc[:, "tabs_heat_demand"], linewidth=0.3, label="Wärmeleistung", color="r")
+                ax4.plot(data.loc[:, "tabs_cool_demand"], linewidth=0.3, label="Kälteleistung", color="b")
                 ax4.set_title("TABS Heiz- und Kühllast")
                 ax4.set_ylabel('Leistung in [kWh/h]')
                 #ax4.set_xlabel('Simulationszeit in h')
@@ -412,16 +498,19 @@ def plot_results(buildings, csv_path, output_path):
                 # ax4.set_xlim([5000, 8760])
                 # ax4.autoscale()
                 ax4.margins(0.01)
-                # ax4.xaxis.set_minor_locator(weeks)
-                # ax4.xaxis.set_major_locator(months)
-                # ax4.xaxis.set_major_formatter(format)
-                ax5.plot(convective_heat_demand, linewidth=0.3, label="Wärmeleistung", color="r")
-                ax5.plot(convective_cool_demand, linewidth=0.3, label="Kälteleistung", color="b")
+                ax4.xaxis.set_minor_locator(minormonths)
+                ax4.xaxis.set_major_locator(majormonths)
+                ax4.xaxis.set_major_formatter(format)
+                ax5.plot(data.loc[:, "convective_heat_demand"], linewidth=0.3, label="Wärmeleistung", color="r")
+                ax5.plot(data.loc[:, "convective_cool_demand"], linewidth=0.3, label="Kälteleistung", color="b")
                 ax5.set_title("Zusatz Heiz- und Kühllast")
                 ax5.set_ylabel('Leistung in [kWh/h]')
-                ax5.set_xlabel('Simulationszeit in h')
+                #ax5.set_xlabel('Simulationszeit in h')
                 ax5.set_ylim(auto=True)
                 ax5.margins(0.01)
+                ax5.xaxis.set_minor_locator(minormonths)
+                ax5.xaxis.set_major_locator(majormonths)
+                ax5.xaxis.set_major_formatter(format)
 
                 plt.tight_layout()
                 plt.savefig(os.path.join(output_path, bldg.name + "TABS+_plot.pdf"), dpi=200)
