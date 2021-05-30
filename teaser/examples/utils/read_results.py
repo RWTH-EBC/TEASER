@@ -203,9 +203,8 @@ def read_results(
         temp.to_excel(os.path.join(csv_path, bldg + "_excel_temp.xlsx"))
 
     dymola.close()
-    #print("That's it! :)")
 
-def calc_results(buildings, csv_path, output_path, plot_path):
+def calc_results(buildings, csv_path, output_path):
     """Create csv-file containing KPIs of buildings.
 
     Parameters
@@ -215,8 +214,6 @@ def calc_results(buildings, csv_path, output_path, plot_path):
         Path where hourly demands created by MA_cwe_analyse_results.py are stored
     output_path : str
         Path where output files should be stored
-    plot_path : str
-        Path where plot files should be stored
 
     """
 
@@ -232,14 +229,7 @@ def calc_results(buildings, csv_path, output_path, plot_path):
             heat_data = pd.read_csv(os.path.join(csv_path, bldg.name + "_heat.csv"))
             cool_data = pd.read_csv(os.path.join(csv_path, bldg.name + "_cool.csv"))
             # temp_data = pd.read_csv(os.path.join(csv_path, bldg.name + "_temp.csv"))
-            """
-            print("plotting building {}".format(bldg.name))
-            plot_results(
-                heat=heat_data,
-                cool=cool_data,
-                title=bldg.name,
-                output_path=os.path.join(plot_path + '_plot.pdf'))
-            """
+
             # drop the first 4 days of the data
             heat_data = heat_data.drop(heat_data.index[0:96])
             cool_data = cool_data.drop(cool_data.index[0:96])
@@ -257,7 +247,6 @@ def calc_results(buildings, csv_path, output_path, plot_path):
             # calculate specific maximum values
             spec_max_heat = max_heat * 1000 / bldg.net_leased_area
             spec_max_cool = max_cool * 1000 / bldg.net_leased_area
-            #####
 
             if "tabsplusair" in bldg.name:
                 # calculate TABS heating and cooling demand
@@ -316,6 +305,7 @@ def calc_results(buildings, csv_path, output_path, plot_path):
                 results.loc[bldg.name, "System"] = "Panel"
             elif "tabsplusair" in bldg.name:
                 results.loc[bldg.name, "System"] = "TABSplusAir"
+
             results.loc[bldg.name, "Year of construction"] = bldg.year_of_construction
             results.loc[bldg.name, "Net area"] = bldg.net_leased_area
             #results.loc[bldg.name, "Footprint area"] = bldg.ground_floor_geo["GroundFloor"]["area"]
@@ -360,18 +350,16 @@ def calc_results(buildings, csv_path, output_path, plot_path):
     print("Calculations done! :)")
 
 def plot_results(buildings, csv_path, output_path):
-    """Create plots of heating and cooling time series from .csv
+    """Create plots of heating, cooling and temperature time series from .csv
     files with hourly demands created by MA_cwe_analyse_results.py
-
-    #heat, cool, temp, title,
 
     Parameters
     ----------
-    heat : data frame with hourly heating demands
-    cool : data frame with hourly cooling demands
-    title : title of plots
+    buildings : pickle_prj.buildings
+    csv_path : str
+        Path where .csv files are be stored.
     output_path : str
-        Path where output files should be stored.
+        Path where plots should be stored.
 
     """
 

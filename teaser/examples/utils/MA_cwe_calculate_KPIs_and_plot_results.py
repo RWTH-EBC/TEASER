@@ -4,7 +4,7 @@ import pickle
 import read_results as res
 
 if __name__ == '__main__':
-    
+
     # set path to your workspace here
     workspace = os.path.join("D:\\", "tbl-cwe", "Simulationsstudie_06_21")
     print("Your workspace is set to: " + workspace)

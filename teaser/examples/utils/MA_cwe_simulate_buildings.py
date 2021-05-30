@@ -1460,8 +1460,7 @@ if __name__ == '__main__':
 
     # set your workspace to your desired path here
     workspace = os.path.join("D:\\", "tbl-cwe", "Simulationsstudie_06_21")
-    print("Your workspace is set to: ")
-    print(workspace)
+    print("Your workspace is set to: " + workspace)
     sim_results_path = os.path.join(workspace, "sim_results")
     TEASER_output_path = os.path.join(workspace, "TEASEROutput")
 
@@ -1495,8 +1494,7 @@ if __name__ == '__main__':
         results_path=sim_results_path,
         number_of_workers=multiprocessing.cpu_count() - 3,
     )
-    print("Your simulation results can be found in: ")
-    print(sim_results_path)
+    print("Your simulation results can be found in: " + sim_results_path)
     print("That's it! :)")
 
 
