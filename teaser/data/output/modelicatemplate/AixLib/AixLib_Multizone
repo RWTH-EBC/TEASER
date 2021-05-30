@@ -7,7 +7,7 @@ model ${bldg.name}
 AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     buildingID=${bldg.building_id},
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_start = ${bldg.thermal_zones[0].t_inside},
+    T_start = 18.0,
     VAir = ${bldg.volume},
     ABuilding=${bldg.net_leased_area},
     ASurTot=${bldg.library_attr.total_surface_area},
