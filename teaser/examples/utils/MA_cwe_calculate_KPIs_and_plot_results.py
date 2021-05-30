@@ -8,7 +8,7 @@ import pickle
 
 if __name__ == '__main__':
 
-    workspace = os.path.join("D:\\", "tbl-cwe", "Gebaeudesimulation")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Simulationsstudie_06_21")
     print("Your workspace is set to: ")
     print(workspace)
 
@@ -33,7 +33,6 @@ if __name__ == '__main__':
         plot_path=os.path.join(plot_path))
 
     print("##########")
-    
     res.plot_results(
         buildings=pickle_prj.buildings,
         csv_path=os.path.join(workspace, "csv_results",),

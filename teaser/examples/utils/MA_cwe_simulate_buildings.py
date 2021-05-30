@@ -1486,7 +1486,7 @@ def test_export_aixlib():
 
 if __name__ == '__main__':
 
-    workspace = os.path.join("D:\\", "tbl-cwe", "Gebaeudesimulation")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Simulationsstudie_06_21")
     print("Your workspace is set to: ")
     print(workspace)
     sim_results_path = os.path.join(workspace, "sim_results")
