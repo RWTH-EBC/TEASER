@@ -1,39 +1,37 @@
-# Specify path to your simulation workspace
 import os
-import datetime
-import read_results as res
-import pandas as pd
-from teaser.project import Project
 import pickle
 
-if __name__ == '__main__':
+import read_results as res
 
+if __name__ == '__main__':
+    # set path to your workspace here
     workspace = os.path.join("D:\\", "tbl-cwe", "Simulationsstudie_06_21")
-    print("Your workspace is set to: ")
-    print(workspace)
+    print("Your workspace is set to: " + workspace)
+    # print(workspace)
 
     load_pickle = os.path.join(workspace, "building_simulation_pickle.p")
-
     pickle_prj = pickle.load(open(load_pickle, "rb"))
-    print(pickle_prj)
 
     output_path = os.path.join(workspace, "calc_results")
-    print("Your Calculation Results are stored in: ")
-    print(output_path)
+    print("Your Calculation Results are stored in: " + output_path)
+    # print(output_path)
 
     plot_path = os.path.join(workspace, "plots")
-    print("Your Plots are stored in: ")
-    print(plot_path)
+    print("Your Plots are stored in: " + plot_path)
+    # print(plot_path)
+
+    csv_results_path = os.path.join(workspace, "csv_results", )
+    print("Your Plots are stored in: " + csv_results_path)
+
     print("##########")
-    #for bldg in pickle_prj.buildings:
     res.calc_results(
         buildings=pickle_prj.buildings,
-        csv_path=os.path.join(workspace, "csv_results",),
-        output_path=os.path.join(output_path),
-        plot_path=os.path.join(plot_path))
+        csv_path=csv_results_path,
+        output_path=output_path,
+        plot_path=plot_path)
 
     print("##########")
     res.plot_results(
         buildings=pickle_prj.buildings,
-        csv_path=os.path.join(workspace, "csv_results",),
-        output_path=os.path.join(plot_path))
+        csv_path=csv_results_path,
+        output_path=plot_path)
