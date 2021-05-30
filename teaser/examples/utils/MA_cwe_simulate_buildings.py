@@ -1,17 +1,18 @@
-import teaser.logic.utilities as utilities
-import os
-import warnings
-
-import pandas as pd
-import datetime
-import json
-import collections
 import multiprocessing
+import os
 import pickle
 
 # helper scripts
 import simulate as sim
-import read_results as res
+import teaser.logic.utilities as utilities
+
+"""
+Use this script to generate and simulate multiple buildings at once.
+1. Define buildings in generate_archetype() similar to teaser/examples/e1_generate_archetype.py
+2. Choose a heating/cooling system setup from teaser/logic/buildingobjects/buildingsystems/heatingcooling.py
+3. Set your workspace and weather file in the main routine
+
+"""
 
 def generate_archetype():
     from teaser.project import Project
@@ -1454,58 +1455,23 @@ def generate_archetype():
 
     return prj
 
-def test_export_aixlib():
-    prj = generate_archetype()
-
-    prj.dir_reference_results = utilities.get_full_path(
-        os.path.join(
-            "examples",
-            "../examplefiles",
-            "ReferenceResults",
-            "Dymola"))
-
-    print(prj.dir_reference_results)
-
-    prj.used_library_calc = 'AixLib'
-    prj.number_of_elements_calc = 2
-    prj.weather_file_path = utilities.get_full_path(
-        os.path.join(
-            "data",
-            "input",
-            "inputdata",
-            "weatherdata",
-            "TRY2015_507755060854_Jahr_City_Aachen.mos"))
-
-    prj.calc_all_buildings()
-
-    path = prj.export_aixlib(
-        internal_id=None,
-        path=None)
-
-    return path
 
 if __name__ == '__main__':
 
+    # set your workspace to your desired path here
     workspace = os.path.join("D:\\", "tbl-cwe", "Simulationsstudie_06_21")
     print("Your workspace is set to: ")
     print(workspace)
     sim_results_path = os.path.join(workspace, "sim_results")
     TEASER_output_path = os.path.join(workspace, "TEASEROutput")
 
-    #DIR_SCRIPT = os.path.abspath(os.path.dirname(__file__))
-    #DIR_TOP = os.path.abspath(DIR_SCRIPT)
-    #random_name = random_choice()
-    #index = pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H")
-    #prj = Project(load_data=True)
-    #prj.name = "Shamrock_Park_{}_{}".format("fbkk", "ref")
-    #prj.name = "Shamrock_Park_{}_{}".format(random_name, "ref")
-    #info_path = os.path.join(DIR_TOP, "shamrock_park")
-
     print("Generating archetypes...")
     prj = generate_archetype()
     prj.used_library_calc = 'AixLib'
     prj.number_of_elements_calc = 2
     prj.calc_all_buildings()
+
+    # set your desired weather file here
     prj.weather_file_path = utilities.get_full_path(
         os.path.join(
             "data",
@@ -1532,25 +1498,5 @@ if __name__ == '__main__':
     print("Your simulation results can be found in: ")
     print(sim_results_path)
     print("That's it! :)")
-
-    """for bldg in prj.buildings:
-        signals = [
-            "multizone.PHeater[{}]".format(i + 1)
-            for i in range(len(bldg.thermal_zones))
-        ]
-        signals += [
-            "multizone.PCooler[{}]".format(i + 1)
-            for i in range(len(bldg.thermal_zones))
-        ]
-        res.read_results(
-            prj=prj,
-            signals=signals,
-            buildings=[bldg],
-            index=index,
-            results_path=os.path.join(RESULTS_PATH, prj.name),
-            csv_path=os.path.join(RESULTS_PATH, prj.name, "demand_csv"),
-        )
-        """
-
 
 
