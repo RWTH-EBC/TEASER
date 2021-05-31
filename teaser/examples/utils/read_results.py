@@ -211,7 +211,7 @@ def calc_results(buildings, csv_path, output_path):
     ----------
     buildings : list of TEASER bldgs
     csv_path : str
-        Path where hourly demands created by MA_cwe_analyse_results.py are stored
+        Path where hourly demands created by MA_cwe_2_analyse_results.py are stored
     output_path : str
         Path where output files should be stored
 
@@ -351,7 +351,7 @@ def calc_results(buildings, csv_path, output_path):
 
 def plot_results(buildings, csv_path, output_path):
     """Create plots of heating, cooling and temperature time series from .csv
-    files with hourly demands created by MA_cwe_analyse_results.py
+    files with hourly demands created by MA_cwe_2_analyse_results.py
 
     Parameters
     ----------
