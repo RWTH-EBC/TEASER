@@ -515,6 +515,40 @@ def generate_archetype():
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
+        name="EFHconvective1990light100",
+        year_of_construction=1990,
+        number_of_floors=2,
+        height_of_floors=2.8,
+        net_leased_area=100.0,
+        construction_type="light")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.convective_heating_cooling()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="EFHconvective2010heavy100",
+        year_of_construction=2010,
+        number_of_floors=2,
+        height_of_floors=2.8,
+        net_leased_area=100.0,
+        construction_type="heavy")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.convective_heating_cooling()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
         name="EFHconvective2010light100",
         year_of_construction=2010,
         number_of_floors=2,
@@ -977,6 +1011,40 @@ def generate_archetype():
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
+        name="MFHconvective1990light1000",
+        year_of_construction=1990,
+        number_of_floors=5,
+        height_of_floors=2.8,
+        net_leased_area=1000.0,
+        construction_type="light")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.convective_heating_cooling()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="MFHconvective2010heavy1000",
+        year_of_construction=2010,
+        number_of_floors=5,
+        height_of_floors=2.8,
+        net_leased_area=1000.0,
+        construction_type="heavy")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.convective_heating_cooling()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
         name="MFHconvective2010light1000",
         year_of_construction=2010,
         number_of_floors=5,
@@ -1424,6 +1492,40 @@ def generate_archetype():
         usage="office",
         name="Officeconvective1990heavy3000",
         year_of_construction=1990,
+        number_of_floors=5,
+        height_of_floors=3.0,
+        net_leased_area=3000.0,
+        construction_type="heavy")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.convective_heating_cooling()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+
+    prj.add_non_residential(
+        method="bmvbs",
+        usage="office",
+        name="Officeconvective1990light3000",
+        year_of_construction=1990,
+        number_of_floors=5,
+        height_of_floors=3.0,
+        net_leased_area=3000.0,
+        construction_type="light")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.convective_heating_cooling()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+
+    prj.add_non_residential(
+        method="bmvbs",
+        usage="office",
+        name="Officeconvective2010heavy3000",
+        year_of_construction=2010,
         number_of_floors=5,
         height_of_floors=3.0,
         net_leased_area=3000.0,
