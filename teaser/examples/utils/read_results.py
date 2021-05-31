@@ -65,18 +65,18 @@ def read_results(
 ):
     """Read simulation data from .mat file and save them into csv.
 
-    Reads Dymola result files and saves them as time series in csv.  It assumes that all
-    thermal_zones as a MultiZone (TEASER Export) in Modelica.
+    Reads Dymola result files and saves them as time series in csv. It assumes that all
+    thermal_zones are a MultiZone (TEASER Export) in Modelica.
 
     Parameters
     ----------
     buildings : list
-        List of building names (i. e. name of *.mat file) whose results should be read.
+        List of TEASER bldgs
     signals : list
-            List of signals to be read from the results file.
+        List of signals to be read from the results file.
     index : Pandas date_range
         Pandas date range of the simulation data. Must fit the length of
-        simulation data. (default: hourly for year 2019)
+        simulation data. (Beware of leap years! every 4 years, e.g. 2020) (default: hourly for year 2019)
     index_res : Pandas date_range
         Pandas date range  if slice should be picked e. g. only january of the simulation data. Must fit the length of
         simulation data. (default: hourly for year 2015)
@@ -93,7 +93,7 @@ def read_results(
 
     for bldg in buildings:
         print("reading building {}".format(bldg))
-        # bldg.name
+        # bldg.name # bldg
         #if not (bldg + "_heat.csv") in os.listdir(csv_path):
         try:
             #print(os.path.join(results_path, bldg + ".mat"))
@@ -134,7 +134,6 @@ def read_results(
             index=index_res,
             columns=[bldg + " PHeat"],
         )
-
         heat.loc[:, bldg + " tabsHeatingPower"] = results.filter(like="tabsHeatingPower").sum(axis=1)[
                                                   index_res[0]: index_res[-1]
                                                   ]
@@ -209,7 +208,8 @@ def calc_results(buildings, csv_path, output_path):
 
     Parameters
     ----------
-    buildings : list of TEASER bldgs
+    buildings : prj.buildings
+        load TEASER bldgs from a pickle project file
     csv_path : str
         Path where hourly demands created by MA_cwe_2_analyse_results.py are stored
     output_path : str
@@ -355,7 +355,8 @@ def plot_results(buildings, csv_path, output_path):
 
     Parameters
     ----------
-    buildings : pickle_prj.buildings
+    buildings : prj.buildings
+        load TEASER bldgs from a pickle project file
     csv_path : str
         Path where .csv files are be stored.
     output_path : str
@@ -381,9 +382,12 @@ def plot_results(buildings, csv_path, output_path):
                     freq="H", ),
                 columns=["Wärmeleistung", "Kälteleistung", "Temperatur"], )
 
+            # divide demands by 1000 to get kW
             data.loc[:, "Wärmeleistung"] = heat_data.loc[:, bldg.name + " PHeat"].values / 1000
             data.loc[:, "Kälteleistung"] = -cool_data.loc[:, bldg.name + " PCool"].values / 1000
 
+            # office buildings are divided in 6 zones, the temperature for each zone are multiplied with the
+            # zone area factor to calculate one indoor temperature for the whole building
             if "Office" in bldg.name:
                 data.loc[:, "Temperatur"] = ((temp_data.loc[:, bldg.name + " TOpe[1]"].values*0.5*bldg.net_leased_area
                                              +temp_data.loc[:, bldg.name + " TOpe[2]"].values*0.25*bldg.net_leased_area
@@ -409,9 +413,10 @@ def plot_results(buildings, csv_path, output_path):
             #end_remove = pd.to_datetime('2021-1-3')
             #sliced_data = data.loc[data.index.difference(data.index[data.index.slice_indexer(start_remove, end_remove)])]
 
+            # Use this to exclude the first hours of your simulation results, e.g. [0:96] to skip the first 4 days
             data = data.drop(data.index[0:96])
             """
-            #plot parameters
+            # plot parameters
             sidewidth = 6.224
             fontsize = 11
             font = {'family': 'serif',
@@ -425,6 +430,7 @@ def plot_results(buildings, csv_path, output_path):
             matplotlib.rc('font', **font)
             matplotlib.rcParams.update(params)
             """
+            # parameters for axis definition
             days = mdates.DayLocator(interval=10)
             weeks = mdates.DayLocator(interval=7)
             minormonths = mdates.MonthLocator(interval=1)
@@ -432,6 +438,7 @@ def plot_results(buildings, csv_path, output_path):
             format = mdates.DateFormatter("%d-%m")
             format2 = mdates.DateFormatter("%d")
 
+            # plot the indoor temperature and heating/cooling demand for one year in two subplots
             print("plotting building {}".format(bldg.name))
             fig, (ax1, ax2) = plt.subplots(2)
             #ax1.plot(temp_ope, linewidth=0.3)
@@ -448,7 +455,7 @@ def plot_results(buildings, csv_path, output_path):
             ax2.plot(data.loc[:, "Kälteleistung"], linewidth=0.3, label="Kälteleistung", color="b")
             ax2.set_title("Heiz- und Kühllast")
             ax2.set_ylabel('Leistung in [kWh/h]')
-            #ax2.set_xlabel('Simulationszeit in h')
+            ax2.set_xlabel('Tag Monat')
             #ax2.set_ylim([0, 5000])
             #ax2.set_xlim([5000, 8760])
             #ax2.autoscale()
@@ -462,12 +469,8 @@ def plot_results(buildings, csv_path, output_path):
             plt.savefig(os.path.join(output_path, bldg.name + "_plot.pdf"), dpi=200)
             plt.close("all")
 
+            # for TABSplusAir buildings additionally plot the TABS and convective demands in separate subplots
             if "tabsplusair" in bldg.name:
-                #data.loc[:, "tabs_heat_demand"] = heat_data.loc[:, bldg.name + " tabsHeatingPower"].values / 1000
-                #tabs_cool_demand = -cool_data.loc[:, bldg.name + " tabsCoolingPower"].values / 1000
-                #convective_heat_demand = heat_data.loc[:, bldg.name + " pITempHeatRem.y"].values / 1000
-                #convective_cool_demand = -cool_data.loc[:, bldg.name + " pITempCoolRem.y"].values / 1000
-
                 fig2, (ax3, ax4, ax5) = plt.subplots(3)
                 ax3.plot(data.loc[:, "Temperatur"], linewidth=0.3)
                 ax3.set_title("Operative Temperatur")
@@ -493,7 +496,7 @@ def plot_results(buildings, csv_path, output_path):
                 ax5.plot(data.loc[:, "convective_cool_demand"], linewidth=0.3, label="Kälteleistung", color="b")
                 ax5.set_title("Zusatz Heiz- und Kühllast")
                 ax5.set_ylabel('Leistung in [kWh/h]')
-                #ax5.set_xlabel('Simulationszeit in h')
+                ax5.set_xlabel('Tag-Monat')
                 ax5.set_ylim(auto=True)
                 ax5.margins(0.01)
                 ax5.xaxis.set_minor_locator(minormonths)
