@@ -7,7 +7,7 @@ import pickle
 if __name__ == '__main__':
 
     # set path to your workspace here
-    workspace = os.path.join("D:\\", "tbl-cwe", "Simulationsstudie_06_21")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Simulationsstudie_06_21_V2")
     print("Your workspace is set to: " + workspace)
 
     """
@@ -106,8 +106,16 @@ if __name__ == '__main__':
                 signals=signals,
                 index=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
                 index_res=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
-                results_path=sim_results_path
+                results_path=sim_results_path,
                 csv_path=csv_results_path,
             )
+        """res.read_results(
+            buildings=pickle_prj.buildings,
+            signals=signals,
+            index=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
+            index_res=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
+            results_path=sim_results_path,
+            csv_path=csv_results_path,
+        )"""
 
     print("That's it! :)")

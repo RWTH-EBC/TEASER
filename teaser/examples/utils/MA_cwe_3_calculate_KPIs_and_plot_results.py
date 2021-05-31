@@ -6,7 +6,7 @@ import read_results as res
 if __name__ == '__main__':
 
     # set path to your workspace here
-    workspace = os.path.join("D:\\", "tbl-cwe", "Simulationsstudie_06_21")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Simulationsstudie_06_21_V2")
     print("Your workspace is set to: " + workspace)
 
     load_pickle = os.path.join(workspace, "building_simulation_pickle.p")
@@ -25,8 +25,7 @@ if __name__ == '__main__':
     res.calc_results(
         buildings=pickle_prj.buildings,
         csv_path=csv_results_path,
-        output_path=output_path,
-        plot_path=plot_path)
+        output_path=output_path)
 
     print("##########")
     res.plot_results(
