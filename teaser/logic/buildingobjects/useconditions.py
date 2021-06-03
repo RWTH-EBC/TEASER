@@ -211,12 +211,19 @@ class UseConditions(object):
         self.lighting_power = 15.9
         self.ratio_conv_rad_lighting = 0.4
 
-        self.use_constant_infiltration = False
+        """self.use_constant_infiltration = False
         self.infiltration_rate = 0.2
         self.max_user_infiltration = 1.0
         self.max_overheating_infiltration = [3.0, 2.0]
         self.max_summer_infiltration = [1.0, 273.15 + 10, 273.15 + 17]
-        self.winter_reduction_infiltration = [0.5, 273.15, 273.15 + 10]
+        self.winter_reduction_infiltration = [0.5, 273.15, 273.15 + 10]"""
+
+        self.use_constant_infiltration = False
+        self.infiltration_rate = 0.5
+        self.max_user_infiltration = 0.5
+        self.max_overheating_infiltration = [0.1, 0.1]
+        self.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        self.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
 
         self.min_ahu = 0.0
         self.max_ahu = 2.6
