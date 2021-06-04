@@ -7,7 +7,7 @@ model ${bldg.name}
 AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     buildingID=${bldg.building_id},
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_start = 291.15,
+    T_start = ${bldg.thermal_zones[0].t_inside},
     VAir = ${bldg.volume},
     ABuilding=${bldg.net_leased_area},
     ASurTot=${bldg.library_attr.total_surface_area},
@@ -56,10 +56,10 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
   dpAHU_sup=800,
   dpAHU_eta=800,
 % endif
-  zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
-           intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
-           (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
-           der_T(fixed=true))))),
+  zone(ROM(extWallRC(thermCapExt(each T(fixed=true))),
+           intWallRC(thermCapInt(each T(fixed=true))),floorRC
+           (thermCapExt(each T(fixed=true))),roofRC(thermCapExt(each
+           T(fixed=true))))),
    redeclare model corG =
         AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane,
 % if bldg.central_ahu:
