@@ -196,11 +196,11 @@ def read_results(
 
         heat.to_csv(os.path.join(csv_path, bldg + "_heat.csv"))
         cool.to_csv(os.path.join(csv_path, bldg + "_cool.csv"))
-        heat.to_excel(os.path.join(csv_path, bldg + "_excel_heat.xlsx"))
-        cool.to_excel(os.path.join(csv_path, bldg + "_excel_cool.xlsx"))
+        #heat.to_excel(os.path.join(csv_path, bldg + "_excel_heat.xlsx"))
+        #cool.to_excel(os.path.join(csv_path, bldg + "_excel_cool.xlsx"))
 
         temp.to_csv(os.path.join(csv_path, bldg + "_temp.csv"))
-        temp.to_excel(os.path.join(csv_path, bldg + "_excel_temp.xlsx"))
+        #temp.to_excel(os.path.join(csv_path, bldg + "_excel_temp.xlsx"))
 
     dymola.close()
 
@@ -217,9 +217,11 @@ def calc_results(buildings, csv_path, output_path):
         Path where output files should be stored
 
     """
-
+    output_path2 = os.path.join(output_path, "temp")
     if not os.path.exists(output_path):
         os.makedirs(output_path)
+    if not os.path.exists(output_path2):
+        os.makedirs(output_path2)
 
     results = pd.DataFrame()
 
@@ -249,12 +251,34 @@ def calc_results(buildings, csv_path, output_path):
             spec_max_heat = max_heat * 1000 / bldg.net_leased_area
             spec_max_cool = max_cool * 1000 / bldg.net_leased_area
 
+            # office buildings are divided in 6 zones, the temperature for each zone are multiplied with the
+            # zone area factor to calculate one indoor temperature for the whole building
+            data = pd.DataFrame(index=pd.date_range(
+                        start=datetime.datetime(2021, 1, 5, 0, 0, 0),
+                        end=datetime.datetime(2021, 12, 31, 23, 55),
+                        freq="H", ))
+            if "Office" in bldg.name:
+                data.loc[:, "TOpe"] = ((temp_data.loc[:, bldg.name + " TOpe[1]"].values * 0.5 * bldg.net_leased_area
+                                              + temp_data.loc[:,
+                                                bldg.name + " TOpe[2]"].values * 0.25 * bldg.net_leased_area
+                                              + temp_data.loc[:,
+                                                bldg.name + " TOpe[3]"].values * 0.15 * bldg.net_leased_area
+                                              + temp_data.loc[:,
+                                                bldg.name + " TOpe[4]"].values * 0.04 * bldg.net_leased_area
+                                              + temp_data.loc[:,
+                                                bldg.name + " TOpe[5]"].values * 0.04 * bldg.net_leased_area
+                                              + temp_data.loc[:,
+                                                bldg.name + " TOpe[6]"].values * 0.02 * bldg.net_leased_area)
+                                             / bldg.net_leased_area) - 273.15
+            else:
+                data.loc[:, "TOpe"] = temp_data.loc[:, bldg.name + " TOpe"].values - 273.15
+
             # calculate mean of indoor operative air temperature during winter (01/10 - 30/04)
-            temp_winter = temp_data.drop(temp_data.index[2785:6456])
-            temp_winter_mean = mean(temp_winter)
+            temp_winter = data.drop(data.index[2784:6456])
+            temp_winter_mean = temp_winter.loc[:, "TOpe"].sum() / len(temp_winter.index)
             # calculate mean of indoor operative air temperature during summer (01/05 - 30/09)
-            temp_summer = temp_data.index[2785:6456]
-            temp_summer_mean = mean(temp_summer)
+            temp_summer = data[2784:6456]
+            temp_summer_mean = temp_summer.loc[:, "TOpe"].sum() / len(temp_summer.index)
 
             if "tabsplusair" in bldg.name:
                 # calculate TABS heating and cooling demand
@@ -355,6 +379,9 @@ def calc_results(buildings, csv_path, output_path):
             # raise Exception("Results Error!")
             continue
 
+    #temp_winter.to_excel(os.path.join(output_path, "temp", bldg.name + "_temp_winter.xlsx"))
+    #temp_summer.to_excel(os.path.join(output_path, "temp", bldg.name + "_temp_summer.xlsx"))
+
     results.to_csv(os.path.join(output_path, "buildings_calc.csv"))
     results.to_excel(os.path.join(output_path, "buildings_excel_calc.xlsx"))
     print("Calculations done! :)")
@@ -373,9 +400,11 @@ def plot_results(buildings, csv_path, output_path):
         Path where plots should be stored.
 
     """
-
+    output_path2 = os.path.join(output_path, "single")
     if not os.path.exists(output_path):
         os.makedirs(output_path)
+    if not os.path.exists(output_path2):
+        os.makedirs(output_path2)
 
     for bldg in buildings:
         try:
@@ -451,7 +480,7 @@ def plot_results(buildings, csv_path, output_path):
             # plot the indoor temperature and heating/cooling demand for one year in two subplots
             print("plotting building {}".format(bldg.name))
             fig, (ax1, ax2) = plt.subplots(2)
-            ax1.plot(data.loc[:, "Temperatur"], linewidth=0.3, color="b")
+            ax1.plot(data.loc[:, "Temperatur"], linewidth=0.3)
             ax1.set_title("Operative Temperatur")
             ax1.set_ylabel('Temperatur in [°C]')
             ax1.set_ylim([18, 28])
@@ -460,9 +489,9 @@ def plot_results(buildings, csv_path, output_path):
             ax1.xaxis.set_major_locator(majormonths)
             ax1.xaxis.set_major_formatter(format)
             #ax2.plot(heat_demand, linewidth=0.3, label="Wärmeleistung", color="r")
-            #ax2.plot(cool_demand, linewidth=0.3, label="Kälteleistung", color="b")
+            #ax2.plot(cool_demand, linewidth=0.3, label="Kälteleistung")
             ax2.plot(data.loc[:, "Wärmeleistung"], linewidth=0.3, label="Wärmeleistung", color="r")
-            ax2.plot(data.loc[:, "Kälteleistung"], linewidth=0.3, label="Kälteleistung", color="b")
+            ax2.plot(data.loc[:, "Kälteleistung"], linewidth=0.3, label="Kälteleistung")
             ax2.set_title("Heiz- und Kühllast")
             ax2.set_ylabel('Leistung in [kW]')
             ax2.set_xlabel('Zeit')
@@ -482,7 +511,7 @@ def plot_results(buildings, csv_path, output_path):
             # for TABSplusAir buildings additionally plot the TABS and convective demands in separate subplots
             if "tabsplusair" in bldg.name:
                 fig2, (ax3, ax4, ax5) = plt.subplots(3)
-                ax3.plot(data.loc[:, "Temperatur"], linewidth=0.3, color="b")
+                ax3.plot(data.loc[:, "Temperatur"], linewidth=0.3)
                 ax3.set_title("Operative Temperatur")
                 ax3.set_ylabel('Temperatur in [°C]')
                 ax3.margins(0.01)
@@ -491,7 +520,7 @@ def plot_results(buildings, csv_path, output_path):
                 ax3.xaxis.set_major_locator(majormonths)
                 ax3.xaxis.set_major_formatter(format)
                 ax4.plot(data.loc[:, "tabs_heat_demand"], linewidth=0.3, label="Wärmeleistung", color="r")
-                ax4.plot(data.loc[:, "tabs_cool_demand"], linewidth=0.3, label="Kälteleistung", color="b")
+                ax4.plot(data.loc[:, "tabs_cool_demand"], linewidth=0.3, label="Kälteleistung")
                 ax4.set_title("TABS Heiz- und Kühllast")
                 ax4.set_ylabel('Leistung in [kW]')
                 #ax4.set_xlabel('Simulationszeit in h')
@@ -504,7 +533,7 @@ def plot_results(buildings, csv_path, output_path):
                 ax4.xaxis.set_major_locator(majormonths)
                 ax4.xaxis.set_major_formatter(format)
                 ax5.plot(data.loc[:, "convective_heat_demand"], linewidth=0.3, label="Wärmeleistung", color="r")
-                ax5.plot(data.loc[:, "convective_cool_demand"], linewidth=0.3, label="Kälteleistung", color="b")
+                ax5.plot(data.loc[:, "convective_cool_demand"], linewidth=0.3, label="Kälteleistung")
                 ax5.set_title("Zusatz Heiz- und Kühllast")
                 ax5.set_ylabel('Leistung in [kW]')
                 ax5.set_xlabel('Zeit')
@@ -518,90 +547,90 @@ def plot_results(buildings, csv_path, output_path):
                 plt.savefig(os.path.join(output_path, bldg.name + "_TABS+_plot.pdf"), dpi=200)
                 plt.close("all")
 
-                # create single plots
-                fig3, (ax6) = plt.subplots()
-                ax6.plot(data.loc[:, "Temperatur"], linewidth=0.3, color="b")
-                ax6.set_title("Operative Temperatur")
-                ax6.set_ylabel('Temperatur in [°C]')
-                ax6.set_xlabel('Zeit')
-                ax6.set_ylim([18, 28])
-                ax6.margins(0.01)
-                ax6.xaxis.set_minor_locator(minormonths)
-                ax6.xaxis.set_major_locator(majormonths)
-                ax6.xaxis.set_major_formatter(format)
+            # create single plots
+            fig3, (ax6) = plt.subplots()
+            ax6.plot(data.loc[:, "Temperatur"], linewidth=0.3)
+            ax6.set_title("Operative Temperatur")
+            ax6.set_ylabel('Temperatur in [°C]')
+            ax6.set_xlabel('Zeit')
+            ax6.set_ylim([18, 28])
+            ax6.margins(0.01)
+            ax6.xaxis.set_minor_locator(minormonths)
+            ax6.xaxis.set_major_locator(majormonths)
+            ax6.xaxis.set_major_formatter(format)
+
+            plt.tight_layout()
+            plt.savefig(os.path.join(output_path, "single", bldg.name + "_temp_plot.pdf"), dpi=200)
+            plt.close("all")
+
+            fig4, (ax7) = plt.subplots()
+            ax7.plot(data.loc[:, "Wärmeleistung"], linewidth=0.3, label="Wärmeleistung", color="r")
+            ax7.plot(data.loc[:, "Kälteleistung"], linewidth=0.3, label="Kälteleistung")
+            ax7.set_title("Heiz- und Kühllast")
+            ax7.set_ylabel('Leistung in [kW]')
+            ax7.set_xlabel('Zeit')
+            # ax7.set_ylim([0, 5000])
+            # ax7.set_xlim([5000, 8760])
+            ax7.margins(0.01)
+            ax7.xaxis.set_minor_locator(minormonths)
+            ax7.xaxis.set_major_locator(majormonths)
+            ax7.xaxis.set_major_formatter(format)
+
+            plt.tight_layout()
+            plt.savefig(os.path.join(output_path, "single", bldg.name + "_demand_plot.pdf"), dpi=200)
+            plt.close("all")
+
+            # for TABSplusAir buildings additionally plot the TABS and convective demands in separate subplots
+            if "tabsplusair" in bldg.name:
+                fig5, (ax8) = plt.subplots()
+                ax8.plot(data.loc[:, "Temperatur"], linewidth=0.3)
+                ax8.set_title("Operative Temperatur")
+                ax8.set_ylabel('Temperatur in [°C]')
+                ax8.set_xlabel('Zeit')
+                ax8.set_ylim([18, 28])
+                ax8.margins(0.01)
+                ax8.xaxis.set_minor_locator(minormonths)
+                ax8.xaxis.set_major_locator(majormonths)
+                ax8.xaxis.set_major_formatter(format)
 
                 plt.tight_layout()
-                plt.savefig(os.path.join(output_path, "single", bldg.name + "_temp_plot.pdf"), dpi=200)
+                plt.savefig(os.path.join(output_path, "single", bldg.name + "_temp_TABS+_plot.pdf"), dpi=200)
                 plt.close("all")
 
-                fig4, (ax7) = plt.subplots()
-                ax7.plot(data.loc[:, "Wärmeleistung"], linewidth=0.3, label="Wärmeleistung", color="r")
-                ax7.plot(data.loc[:, "Kälteleistung"], linewidth=0.3, label="Kälteleistung", color="b")
-                ax7.set_title("Heiz- und Kühllast")
-                ax7.set_ylabel('Leistung in [kW]')
-                ax7.set_xlabel('Zeit')
-                # ax7.set_ylim([0, 5000])
-                # ax7.set_xlim([5000, 8760])
-                ax7.margins(0.01)
-                ax7.xaxis.set_minor_locator(minormonths)
-                ax7.xaxis.set_major_locator(majormonths)
-                ax7.xaxis.set_major_formatter(format)
+                fig6, (ax9) = plt.subplots()
+                ax9.plot(data.loc[:, "tabs_heat_demand"], linewidth=0.3, label="Wärmeleistung", color="r")
+                ax9.plot(data.loc[:, "tabs_cool_demand"], linewidth=0.3, label="Kälteleistung")
+                ax9.set_title("TABS Heiz- und Kühllast")
+                ax9.set_ylabel('Leistung in [kW]')
+                ax9.set_xlabel('Zeit')
+                ax9.set_ylim(auto=True)
+                # ax4.set_ylim([0, 5000])
+                # ax4.set_xlim([5000, 8760])
+                # ax4.autoscale()
+                ax9.margins(0.01)
+                ax9.xaxis.set_minor_locator(minormonths)
+                ax9.xaxis.set_major_locator(majormonths)
+                ax9.xaxis.set_major_formatter(format)
 
                 plt.tight_layout()
-                plt.savefig(os.path.join(output_path, "single", bldg.name + "_demand_plot.pdf"), dpi=200)
+                plt.savefig(os.path.join(output_path, "single", bldg.name + "_TABS_demand_TABS+_plot.pdf"), dpi=200)
                 plt.close("all")
 
-                # for TABSplusAir buildings additionally plot the TABS and convective demands in separate subplots
-                if "tabsplusair" in bldg.name:
-                    fig5, (ax8) = plt.subplots()
-                    ax8.plot(data.loc[:, "Temperatur"], linewidth=0.3, color="b")
-                    ax8.set_title("Operative Temperatur")
-                    ax8.set_ylabel('Temperatur in [°C]')
-                    ax8.set_xlabel('Zeit')
-                    ax8.set_ylim([18, 28])
-                    ax8.margins(0.01)
-                    ax8.xaxis.set_minor_locator(minormonths)
-                    ax8.xaxis.set_major_locator(majormonths)
-                    ax8.xaxis.set_major_formatter(format)
+                fig7, (ax10) = plt.subplots()
+                ax10.plot(data.loc[:, "convective_heat_demand"], linewidth=0.3, label="Wärmeleistung", color="r")
+                ax10.plot(data.loc[:, "convective_cool_demand"], linewidth=0.3, label="Kälteleistung")
+                ax10.set_title("Zusatz Heiz- und Kühllast")
+                ax10.set_ylabel('Leistung in [kW]')
+                ax10.set_xlabel('Zeit')
+                ax10.set_ylim(auto=True)
+                ax10.margins(0.01)
+                ax10.xaxis.set_minor_locator(minormonths)
+                ax10.xaxis.set_major_locator(majormonths)
+                ax10.xaxis.set_major_formatter(format)
 
-                    plt.tight_layout()
-                    plt.savefig(os.path.join(output_path, "single", bldg.name + "_temp_TABS+_plot.pdf"), dpi=200)
-                    plt.close("all")
-
-                    fig6, (ax9) = plt.subplots()
-                    ax9.plot(data.loc[:, "tabs_heat_demand"], linewidth=0.3, label="Wärmeleistung", color="r")
-                    ax9.plot(data.loc[:, "tabs_cool_demand"], linewidth=0.3, label="Kälteleistung", color="b")
-                    ax9.set_title("TABS Heiz- und Kühllast")
-                    ax9.set_ylabel('Leistung in [kW]')
-                    ax9.set_xlabel('Zeit')
-                    ax9.set_ylim(auto=True)
-                    # ax4.set_ylim([0, 5000])
-                    # ax4.set_xlim([5000, 8760])
-                    # ax4.autoscale()
-                    ax9.margins(0.01)
-                    ax9.xaxis.set_minor_locator(minormonths)
-                    ax9.xaxis.set_major_locator(majormonths)
-                    ax9.xaxis.set_major_formatter(format)
-
-                    plt.tight_layout()
-                    plt.savefig(os.path.join(output_path, "single", bldg.name + "_TABS_demand_TABS+_plot.pdf"), dpi=200)
-                    plt.close("all")
-
-                    fig7, (ax10) = plt.subplots()
-                    ax10.plot(data.loc[:, "convective_heat_demand"], linewidth=0.3, label="Wärmeleistung", color="r")
-                    ax10.plot(data.loc[:, "convective_cool_demand"], linewidth=0.3, label="Kälteleistung", color="b")
-                    ax10.set_title("Zusatz Heiz- und Kühllast")
-                    ax10.set_ylabel('Leistung in [kW]')
-                    ax10.set_xlabel('Zeit')
-                    ax10.set_ylim(auto=True)
-                    ax10.margins(0.01)
-                    ax10.xaxis.set_minor_locator(minormonths)
-                    ax10.xaxis.set_major_locator(majormonths)
-                    ax10.xaxis.set_major_formatter(format)
-
-                    plt.tight_layout()
-                    plt.savefig(os.path.join(output_path, "single", bldg.name + "_plus_demand_TABS+_plot.pdf"), dpi=200)
-                    plt.close("all")
+                plt.tight_layout()
+                plt.savefig(os.path.join(output_path, "single", bldg.name + "_plus_demand_TABS+_plot.pdf"), dpi=200)
+                plt.close("all")
 
         except BaseException:
             # Dymola has strange exceptions
