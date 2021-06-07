@@ -180,54 +180,63 @@ class SwimmingPool(NonResidential):
 
         print("Reading zone areas from Excel for:", name) 
         print()
-        # List zoneAreas stores the element areas of each zone.
-        # List zoneVolumes stores the element volume of each zone.
-        # Pools stores additional information about the respective pool.
-        # Row structure: [pool type, water area, pool floor with earth contact, 
-        # water volume, water temperature]
-        self.zoneAreas=excel_input.getZoneArea(filePath, sheetNameAreas)
-        self.zoneVolumes=excel_input.getZoneVolume(filePath, sheetNameAreas)
-        self.pools=excel_input.getPoolData(filePath, sheetNameAreas)
-        self.poolsInDict=excel_input.getPoolDataInDict("ALL", filePath, sheetNameAreas)
-        self.numZones=0
-        for value in self.zoneAreas:
-            if value>0:
-                self.numZones+=1
         
-                
-        # Zone won't be created if net leased area is 0                           
-        if (self.zoneAreas[0]!=0):
-            self.zone_area_factors["Eingangsbereich"] = [self.zoneAreas[0], self.zoneVolumes[0],
-                                                         "Foyer (theater and event venues)"]
-        if (self.zoneAreas[1]!=0):
-            self.zone_area_factors["Umkleiden"] = [self.zoneAreas[1], self.zoneVolumes[1],
-                                                   "Group Office (between 2 and 6 employees)"]
-        if (self.zoneAreas[2]!=0):
-            self.zone_area_factors[
-                "Duschen und Sanitärräume"] = [self.zoneAreas[2], self.zoneVolumes[2],
-                "WC and sanitary rooms in non-residential buildings"]      
-        if (self.zoneAreas[3]!=0): 
-            self.zone_area_factors['Schwimmhalle'] = [self.zoneAreas[3], self.zoneVolumes[3],
-                                                      "Gym (without spectator area)"]
-        if (self.zoneAreas[4]!=0):
-            self.zone_area_factors["Aufsichtsraum"] = [self.zoneAreas[4], self.zoneVolumes[4],
-                                                  "Meeting, Conference, seminar"]
-        if (self.zoneAreas[5]!=0):
-            self.zone_area_factors["Saunabereich"] = [self.zoneAreas[5], self.zoneVolumes[5], "Sauna area"]
-        if (self.zoneAreas[6]!=0):
-            self.zone_area_factors["Fitness"] = [self.zoneAreas[6], self.zoneVolumes[6],
-                                                 "Gym (without spectator area)"]
-        if (self.zoneAreas[7]!=0):
-            self.zone_area_factors["Technikraum"] = [self.zoneAreas[7], self.zoneVolumes[7],
-                                                     "Stock, technical equipment, archives"]
-        for pool in self.pools:            
-            self.zone_area_factors[excel_input.getKeyword(pool[0], filePath, 
-                                          sheetNameAreas)] = [pool[1], pool[6],
-                                          "Gym (without spectator area)"]
-            
+        # poolsInDict stores all relevant data for the zones, such as the zone area, volumes etc.
+        self.poolsInDict=excel_input.getPoolDataInDict("ALL", filePath, sheetNameAreas)
+        
+        self.numZones=0
+        for zone in self.poolsInDict.keys(): 
+            if str(zone).startswith("Zone"):
+                self.numZones+=1          
+        
+        # Creating zones with zone area, zone volume and use condition      
+        # Zone won't be created if net leased area is 0 except for water zones
+                           
+        #Used zone designations
+        self.zoneDesignation = dict()
+        self.zoneDesignation["Zone 1"] = "Eingangsbereich"
+        self.zoneDesignation["Zone 2"] = "Umkleiden"
+        self.zoneDesignation["Zone 3"] = "Duschen und Sanitärräume"
+        self.zoneDesignation["Zone 4"] = "Schwimmhalle"
+        self.zoneDesignation["Zone 5"] = "Aufsichtsraum"
+        self.zoneDesignation["Zone 6"] = "Saunabereich"
+        self.zoneDesignation["Zone 7"] = "Fitness"
+        self.zoneDesignation["Zone 8"] = "Technikraum"        
+        
+        #Use conditions for zones
+        self.zoneUseConditions = dict()
+        self.zoneUseConditions["Zone 1"] = "Foyer (theater and event venues)"          
+        self.zoneUseConditions["Zone 2"] = "Group Office (between 2 and 6 employees)"
+        self.zoneUseConditions["Zone 3"] = "WC and sanitary rooms in non-residential buildings"
+        self.zoneUseConditions["Zone 4"] = "Gym (without spectator area)"
+        self.zoneUseConditions["Zone 5"] = "Meeting, Conference, seminar"
+        self.zoneUseConditions["Zone 6"] = "Sauna area"
+        self.zoneUseConditions["Zone 7"] = "Gym (without spectator area)"
+        self.zoneUseConditions["Zone 8"] = "Stock, technical equipment, archives"
+        self.zoneUseConditions["Water"] = "Gym (without spectator area)"
+        
+        #Creating building zones
+        for zone in self.zoneDesignation.keys():
+            if zone in self.poolsInDict.keys():
+                self.zone_area_factors[self.zoneDesignation[zone]] = \
+                [self.poolsInDict[zone]["Total area of zone (including water surface) [m²]"], \
+                 self.poolsInDict[zone]["Air volume [m³]"], \
+                 self.zoneUseConditions[zone]]                                                              
+        
+        #Creating zones for water volumes                                      
+        for value in self.poolsInDict.keys():           
+            if str(value) != "Sum of pools" \
+            and str(value).startswith("Zone") == False \
+            and (self.poolsInDict[value]["Water surface"] != "" or 0):            
+                self.zone_area_factors[str(value)] = \
+                [self.poolsInDict[value]["Water surface"], 
+                 self.poolsInDict[value]["Water volume"],
+                 self.zoneUseConditions["Water"]]                                                             
+                                                              
         for key, value in self.zone_area_factors.items():
             print (key, "with zone area:", value[0], "m²")
-        print()
+        print()               
+     
 
         # Creating potential building elements
         # Warning: All the names of the building elements are saved without spaces
@@ -578,26 +587,33 @@ class SwimmingPool(NonResidential):
                 floor.tilt = value[0]
                 floor.orientation = value[1] 
                         
+        zoneAreas = []
+        for i in range(1, 9):
+            zone = "Zone " + str(i)
+            if zone in self.poolsInDict.keys():
+                zoneAreas.append(self.poolsInDict[zone]["Total area of zone (including water surface) [m²]"])
+            else:
+                zoneAreas.append(0)            
 
         #Calculates building surface area and surface areas of each zone and orientation.
         for key, value in self.outer_area.items():
             self.set_outer_wall_area(value, key, isSwimmingPool=True, filePath=filePath, 
-                                     sheetNameAreas=sheetNameAreas, zoneAreas=self.zoneAreas, 
+                                     sheetNameAreas=sheetNameAreas, zoneAreas=zoneAreas, 
                                      numZones=self.numZones)
 
         #Calculates window surface areas for each zone and orientation.
         for key, value in self.window_area.items():
             self.set_window_area(value, key, isSwimmingPool=True, filePath=filePath, 
-                                 sheetNameAreas=sheetNameAreas, zoneAreas=self.zoneAreas,
+                                 sheetNameAreas=sheetNameAreas, zoneAreas=zoneAreas,
                                  numZones=self.numZones)
 
         #Calculates inner wall area as sum of innerWalls, ceiling and floor for each zone
         zoneId=0
         for idx, zone in enumerate(self.thermal_zones):
-            while zoneId < len(self.zoneAreas) and self.zoneAreas[zoneId]==0:                    
+            while zoneId < len(zoneAreas) and zoneAreas[zoneId]==0:                    
                 zoneId+=1 
             zone.set_inner_wall_area(zoneId=zoneId, isSwimmingPool=True, filePath=filePath, 
-                                     sheetNameAreas=sheetNameAreas, zoneAreas=self.zoneAreas,
+                                     sheetNameAreas=sheetNameAreas, zoneAreas=zoneAreas,
                                      numZones=self.numZones)
             zoneId+=1
         

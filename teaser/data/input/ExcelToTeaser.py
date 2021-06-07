@@ -334,7 +334,6 @@ def getArea(zoneId, element, orientation, filePath, sheetNameAreas, numZones):
 
 
 
-
 def getInnerArea(zoneId, element, filePath, sheetNameAreas, zoneAreas, numZones):
     """Loads the inner building element areas from an Excel file.
 
@@ -452,71 +451,6 @@ def getInnerArea(zoneId, element, filePath, sheetNameAreas, zoneAreas, numZones)
             return area
     """
 
-    
-
-   
-
-def getZoneArea(filePath, sheetNameAreas):
-    """Loads the zone areas from an Excel file.
-
-
-    Parameters
-    ----------              
-    filePath: str
-        Path to Excel File
-        
-    sheetNameAreas: str
-        Name of the sheet within the Excel File that contains the element areas
-                 
-    """        
-
-    wb = xlrd.open_workbook(filePath)
-    sheet = wb.sheet_by_name(sheetNameAreas)
-    numZones = countZones(filePath, sheetNameAreas)
-    listZoneAreas=[]    
-    startCol=getCol("Zone 1", filePath, sheetNameAreas)    
-    row=getRow("Total area of zone", filePath, sheetNameAreas)
-    
-    for col in range(startCol, 2*numZones, 2):            
-        if(sheet.cell_value(row, col+1)==""):
-            listZoneAreas.append(0)
-        else:
-            listZoneAreas.append(sheet.cell_value(row, col+1))
-            
-    return listZoneAreas
-
-
-    
-def getZoneVolume(filePath, sheetNameAreas):
-    """
-    Loads the zone volume from an Excel file.
-    
-    Parameters
-    ----------              
-    filePath: str
-        Path to Excel File
-        
-    sheetNameAreas: str
-        Name of the sheet within the Excel File that contains the element areas           
-    """        
-
-    wb = xlrd.open_workbook(filePath)
-    sheet = wb.sheet_by_name(sheetNameAreas)
-    numZones = countZones(filePath, sheetNameAreas)
-    listZoneVolumes=[]    
-    startCol=getCol("Zone 1", filePath, sheetNameAreas)    
-    row=getRow("Air volume", filePath, sheetNameAreas)
-    
-    for col in range(startCol, 2*numZones, 2):            
-        if(sheet.cell_value(row, col+1)==""):
-            listZoneVolumes.append(0)
-        else:
-            listZoneVolumes.append(sheet.cell_value(row, col+1))
-            
-    return listZoneVolumes
-    
-
-
 
 
 #Searches for the column that starts with the keyword. Only works without line breaks.    
@@ -538,7 +472,7 @@ def getCol(keyword, filePath, sheetName):
     """   
     wb = xlrd.open_workbook(filePath)
     sheet = wb.sheet_by_name(sheetName)
-    for i in range(0, 3):
+    for i in range(0, 4):
         for k in range(0, sheet.ncols):
             if sheet.cell_value(i, k).startswith(keyword):
                 return k
@@ -551,7 +485,7 @@ def getCol(keyword, filePath, sheetName):
 
          
 #Searches for the row that starts with the keyword. Only works without line breaks.                 
-def getRow(keyword, filePath, sheetName):
+def getRow(keyword, filePath, sheetName, colNum = 0):
     """Loads the respective row from the Excel file for
     the given keyword.
 
@@ -570,7 +504,7 @@ def getRow(keyword, filePath, sheetName):
     wb = xlrd.open_workbook(filePath)
     sheet = wb.sheet_by_name(sheetName)
     for i in range(0, sheet.nrows): 
-        if sheet.cell_value(i, 0).startswith(keyword):
+        if sheet.cell_value(i, colNum).startswith(keyword):
             return i
     
     print("WARNING: Row starting with keyword", keyword, "not found!")
@@ -598,61 +532,24 @@ def countZones(filePath, sheetNameAreas):
     wb = xlrd.open_workbook(filePath)
     sheet = wb.sheet_by_name(sheetNameAreas)
     
-    numZones=0
-    for i in range(0, 3):
-        for k in range(0, sheet.ncols):
-            if sheet.cell_value(i, k).startswith("Zone 1"):
-                for m in range(k, sheet.ncols):
-                    if sheet.cell_value(i, m).startswith("Zone"):
-                        numZones+=1
-                return numZones                   
-            
-            
-            
-            
-            
-def getPoolData(filePath, sheetNameAreas):
-    """Loads additional data for the pools from the Excel file and safes
-    them to a list with the structure
-    [DESIGNATION, AREA, FLOOR WITH EARTH CONTACT, WATER VOLUME, WATER TEMPERATURE]
-
-    Parameters
-    ----------          
-    filePath: str
-        Path to Excel File
-        
-    sheetNameAreas: str
-        Name of the sheet within the Excel File that contains the element areas
-                 
-    """   
-    wb = xlrd.open_workbook(filePath)
-    sheet = wb.sheet_by_name(sheetNameAreas)    
-    numPools=countPools(filePath, sheetNameAreas)
-    pools=[]
-    startCol = getCol("SB", filePath, sheetNameAreas)
-
+    numZones = 0
+    zoneRow = 2
+    startCol=1
     
-    for col in range(numPools):
-        
-        pools.append([])
-        startRow = 2
-        pools[col].append(sheet.cell_value(startRow, startCol))
-        startRow = 4
-        for n in range(0,6):
-            pools[col].append(sheet.cell_value(startRow, startCol))
-            startRow+=1
-        startCol+=1
+    for col in range(startCol, sheet.ncols, 2):
+        if sheet.cell_value(zoneRow, col).startswith("Zone"):
+            numZones+=1
+        else:
+            return numZones 
+
+                      
             
-    return pools
-
-
-
-
-
+ 
 def getPoolDataInDict(ZoneId, filePath, sheetNameAreas):
     """Loads additional data for the pools from the Excel file and saves
-    them to a dictionary with the structure
-    [DESIGNATION, AREA, FLOOR WITH EARTH CONTACT, WATER VOLUME, WATER TEMPERATURE]
+    them to a dictionary.
+    Additional information are POOL TYPE, AREA, FLOOR WITH EARTH CONTACT...
+    The dictionary has the structure additionalInfo[Pool Type/Name][Parameter]
 
     Parameters
     ----------          
@@ -689,23 +586,70 @@ def getPoolDataInDict(ZoneId, filePath, sheetNameAreas):
     elif ZoneId == 16:
         PoolName = "Freiformbecken4"
     elif ZoneId == "SUM":
-        PoolName = "SUM"
+        PoolName = "SUM"        
         
     wb = xlrd.open_workbook(filePath)
     sheet = wb.sheet_by_name(sheetNameAreas)    
-    numPools=countPools(filePath, sheetNameAreas)
-    startCol = getCol("SUM", filePath, sheetNameAreas)
-    startRow = 3
     
     additionalInfo = dict()
+
+    numZones = countZones(filePath, sheetNameAreas)
+    numPools=countPools(filePath, sheetNameAreas)  
+       
+    startCol=getCol("Zone 1", filePath, sheetNameAreas)  
+    startRow = getRow("Zone designation", filePath, sheetNameAreas)
+    zoneRow = getRow("Zone 1", filePath, sheetNameAreas, startCol)
+    areaRow=getRow("Total area of zone", filePath, sheetNameAreas)    
+    
+    #data for building zones
+    for zones in range(0, 2*numZones, 2):
+        if sheet.cell_value(areaRow, startCol + zones + 1) !="" \
+        and sheet.cell_value(areaRow, startCol + zones + 1) != 0:
+            zone = sheet.cell_value(zoneRow, startCol + zones)
+            additionalInfo[str(zone)] = dict()
+            
+            for data in range(1, sheet.nrows - startRow):
+                if sheet.cell_value(startRow + data, 0) != "" \
+                or sheet.cell_value(startRow + data, 1) != "":
+                    if sheet.cell_value(startRow + data, 1) != "":
+                        
+                        back=0
+                        direction = sheet.cell_value(startRow + data, 1)
+                        if str(direction) == "E":
+                            back = 1
+                        elif str(direction) == "S":
+                            back = 2
+                        else:
+                            back = 3
+                        
+                        colName = sheet.cell_value(startRow + data - back, 0) + sheet.cell_value(startRow + data, 1)
+                        additionalInfo[zone][str(colName)] = sheet.cell_value(startRow + data, startCol + zones +1)
+                        
+                    else:
+                        
+                        colName = sheet.cell_value(startRow + data, 0) + sheet.cell_value(startRow + data, 1)
+                        additionalInfo[zone][str(colName)] = sheet.cell_value(startRow + data, startCol + zones +1) 
+                else:
+                    break
+    
+    
+    #data for water zones
+    startCol = getCol("Sum of pools", filePath, sheetNameAreas)
+    startRow = getRow("Sum of pools", filePath, sheetNameAreas, startCol) 
+    areaRow = getRow("Water surface", filePath, sheetNameAreas, startCol-2)        
     
     for pools in range(numPools + 1):
-        pool = sheet.cell_value(startRow, startCol + pools)
-        additionalInfo[str(pool)] = dict()
-        
-        for data in range(22):
-            colName = sheet.cell_value(startRow + 1 + data, startCol - 2)
-            additionalInfo[pool][str(colName)] = sheet.cell_value(startRow + 1 + data, startCol + pools)
+        #if sheet.cell_value(areaRow, startCol + pools) !="" \
+        #and sheet.cell_value(areaRow, startCol + pools) != 0:
+            pool = sheet.cell_value(startRow, startCol + pools)
+            additionalInfo[str(pool)] = dict()
+            
+            for data in range(1, sheet.nrows - startRow):
+                if sheet.cell_value(startRow + data, startCol - 2) != "":
+                    colName = sheet.cell_value(startRow + data, startCol - 2)
+                    additionalInfo[pool][str(colName)] = sheet.cell_value(startRow + data, startCol + pools)
+                else:
+                    break     
     
     if ZoneId == "ALL":
         return additionalInfo

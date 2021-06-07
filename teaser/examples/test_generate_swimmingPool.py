@@ -41,7 +41,7 @@ def test_generate_swimmingPool():
     Please specify the following data.
     """
     # xlrd library will no longer read anything other than .xls files!!
-    filePath=os.path.join(os.path.dirname(__file__),"2021-03-24_Hüllflächen_Zonen_Shells_of_Zones.xls")
+    filePath=os.path.join(os.path.dirname(__file__),"2021-04-14_Hüllflächen_Zonen_Shells_of_Zones.xls")
     sheetNameAreas='Hüllflächen, Himmelsricht.'
     sheetNameElements='Strukturen Hüllfläche'
     swimmingPoolCategory='A2'
@@ -106,7 +106,7 @@ def test_generate_swimmingPool():
 
     path = prj.export_aixlib(
         internal_id=None,
-        path=None)
+        path='E:/Testmodelle EESchwimm')
 
     return path
 
