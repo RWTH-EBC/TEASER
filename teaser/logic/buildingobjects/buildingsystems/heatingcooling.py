@@ -325,9 +325,9 @@ class HeatingCooling(object):
         self.radiator = True
         self.ventilation = True
 
-        a = (self.parent.area * specific_power_heat)
+        a = ((0.8 * self.parent.area) * specific_power_heat)
         b = self.parent.model_attr.heat_load
-        c = -(self.parent.area * specific_power_cool)
+        c = -((0.8 * self.parent.area) * specific_power_cool)
         d = self.parent.model_attr.cool_load
         self.powerHeatTabs = a if a < b else b
         self.powerCoolTabs = c if c > d else d
@@ -346,15 +346,15 @@ class HeatingCooling(object):
         self.lCoolPanel = 0.0
 
         self.KRHeatRem = 1000.0
-        self.TNHeatRem = 100.0
-        self.hHeatRem = 0.75 * self.parent.model_attr.heat_load
+        self.TNHeatRem = 1.0
+        self.hHeatRem = 0.5 * self.parent.model_attr.heat_load
         self.lHeatRem = 0.0
         # (self.parent.model_attr.heat_load - self.powerHeatTabs)
 
         self.KRCoolRem = 1000.0
-        self.TNCoolRem = 100.0
+        self.TNCoolRem = 1.0
         self.hCoolRem = 0.0
-        self.lCoolRem = 0.75 * self.parent.model_attr.cool_load
+        self.lCoolRem = 0.5 * self.parent.model_attr.cool_load
         # (self.parent.model_attr.cool_load - self.powerCoolTabs)
 
         self.shareHeatTabsExt = 1/self.parent.parent.number_of_floors
