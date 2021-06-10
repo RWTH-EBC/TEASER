@@ -18,7 +18,7 @@ def generate_archetype():
     from teaser.project import Project
 
     prj = Project(load_data=True)
-    prj.name = "Simulationsstudie_der_T"
+    prj.name = "Simulationsstudie_TABS_40"
 
     heating_profile_night_reduction = [292.15,
                                        292.15,
@@ -72,7 +72,7 @@ def generate_archetype():
     # Project 1 includes all buildings of the building type 'single family house'
 
     # -----EFH radiator-----
-
+    """
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
@@ -89,16 +89,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
-    """for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.radiator_heating()
-        zone.use_conditions.heating_profile = [294.15]
-        zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
         zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
         zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
         zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
         if "ICT" in zone.name:
-            zone.use_conditions.infiltration_rate = 6.0"""
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -116,6 +114,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -133,6 +139,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -150,6 +164,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -167,6 +189,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -184,6 +214,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -201,6 +239,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -218,6 +264,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     # ------EFH panel-----
 
@@ -237,6 +291,14 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -254,6 +316,14 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -271,6 +341,14 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -288,6 +366,14 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -305,6 +391,14 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -322,6 +416,14 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -339,6 +441,14 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -356,7 +466,15 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
-
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+    """
     # -----EFH tabs plus air-----
 
     prj.add_residential(
@@ -376,6 +494,14 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -394,6 +520,14 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -412,6 +546,14 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -430,6 +572,14 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -448,6 +598,14 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -466,6 +624,14 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -484,6 +650,14 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -502,9 +676,17 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     # -----convective-----
-
+    """
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
@@ -521,6 +703,14 @@ def generate_archetype():
         zone.heating_cooling_system.convective_heating_cooling()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -538,6 +728,14 @@ def generate_archetype():
         zone.heating_cooling_system.convective_heating_cooling()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -555,6 +753,14 @@ def generate_archetype():
         zone.heating_cooling_system.convective_heating_cooling()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -572,9 +778,17 @@ def generate_archetype():
         zone.heating_cooling_system.convective_heating_cooling()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     # ----------------------------------------------
-
+    
     # Project 2 includes all buildings of the building type 'multi family house'
 
     # -----MFH radiator-----
@@ -595,6 +809,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -612,6 +834,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -629,6 +859,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -646,6 +884,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -663,6 +909,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -680,6 +934,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -697,6 +959,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -714,6 +984,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     # ------MFH panel-----
 
@@ -733,6 +1011,14 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -750,6 +1036,14 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -767,6 +1061,14 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -784,6 +1086,14 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -801,6 +1111,14 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -818,6 +1136,14 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -835,6 +1161,14 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -852,7 +1186,15 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
-
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+    """
     # -----MFH tabs plus air-----
 
     prj.add_residential(
@@ -872,6 +1214,14 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -890,6 +1240,14 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -908,6 +1266,14 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -926,6 +1292,14 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -944,6 +1318,14 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -962,6 +1344,14 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -980,6 +1370,14 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -998,9 +1396,17 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     # -----MFH convective-----
-
+    """
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
@@ -1017,6 +1423,14 @@ def generate_archetype():
         zone.heating_cooling_system.convective_heating_cooling()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -1034,6 +1448,14 @@ def generate_archetype():
         zone.heating_cooling_system.convective_heating_cooling()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -1051,6 +1473,14 @@ def generate_archetype():
         zone.heating_cooling_system.convective_heating_cooling()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_residential(
         method='iwu',
@@ -1068,6 +1498,14 @@ def generate_archetype():
         zone.heating_cooling_system.convective_heating_cooling()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     # ----------------------------------------------
 
@@ -1091,6 +1529,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1108,6 +1554,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1125,6 +1579,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1142,6 +1604,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1159,6 +1629,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1176,6 +1654,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1193,6 +1679,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1210,6 +1704,14 @@ def generate_archetype():
         zone.heating_cooling_system.radiator_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     # ------Office panel-----
 
@@ -1229,6 +1731,14 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1246,6 +1756,14 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1263,6 +1781,14 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1280,6 +1806,14 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1297,6 +1831,14 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1314,6 +1856,14 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1331,6 +1881,14 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1348,7 +1906,15 @@ def generate_archetype():
         zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
-
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+    """
     # -----Office tabs plus air-----
 
     prj.add_non_residential(
@@ -1368,6 +1934,14 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1386,6 +1960,14 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1404,6 +1986,14 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1422,6 +2012,14 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1440,6 +2038,14 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1458,6 +2064,14 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1476,6 +2090,14 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1494,9 +2116,17 @@ def generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     # -----Office convective-----
-
+    """
     prj.add_non_residential(
         method="bmvbs",
         usage="office",
@@ -1513,6 +2143,14 @@ def generate_archetype():
         zone.heating_cooling_system.convective_heating_cooling()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1530,6 +2168,14 @@ def generate_archetype():
         zone.heating_cooling_system.convective_heating_cooling()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1547,6 +2193,14 @@ def generate_archetype():
         zone.heating_cooling_system.convective_heating_cooling()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     prj.add_non_residential(
         method="bmvbs",
@@ -1564,14 +2218,22 @@ def generate_archetype():
         zone.heating_cooling_system.convective_heating_cooling()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
-
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+    """
     return prj
 
 
 if __name__ == '__main__':
 
     # set your workspace to your desired path here
-    workspace = os.path.join("D:\\", "tbl-cwe", "Simulationsstudie_06_21_der_T_adjust")
+    workspace = os.path.join("D:\\", "tbl-cwe", "TABS_power", "Simulationsstudie_TABS_40")
     print("Your workspace is set to: " + workspace)
     sim_results_path = os.path.join(workspace, "sim_results")
     TEASER_output_path = os.path.join(workspace, "TEASEROutput")
