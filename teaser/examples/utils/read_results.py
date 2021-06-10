@@ -402,6 +402,7 @@ def plot_results(buildings, csv_path, output_path):
     """
     output_path2 = os.path.join(output_path, "single")
     output_path3 = os.path.join(output_path, "daily_single")
+    output_path4 = os.path.join(output_path, "sliced")
 
     if not os.path.exists(output_path):
         os.makedirs(output_path)
@@ -409,6 +410,8 @@ def plot_results(buildings, csv_path, output_path):
         os.makedirs(output_path2)
     if not os.path.exists(output_path3):
         os.makedirs(output_path3)
+    if not os.path.exists(output_path4):
+        os.makedirs(output_path4)
 
     for bldg in buildings:
         try:
@@ -588,7 +591,7 @@ def plot_results(buildings, csv_path, output_path):
 
             # for TABSplusAir buildings additionally plot the TABS and convective demands in separate subplots
             if "tabsplusair" in bldg.name:
-                # operative temperature
+                """# operative temperature
                 # eigentlich überflüssig
                 fig5, (ax8) = plt.subplots()
                 ax8.plot(data.loc[:, "Temperatur"], linewidth=0.3)
@@ -603,7 +606,7 @@ def plot_results(buildings, csv_path, output_path):
 
                 plt.tight_layout()
                 plt.savefig(os.path.join(output_path, "single", bldg.name + "_temp_TABS+_plot.pdf"), dpi=200)
-                plt.close("all")
+                plt.close("all")"""
 
                 # tabs demands
                 fig6, (ax9) = plt.subplots()
@@ -732,6 +735,36 @@ def plot_results(buildings, csv_path, output_path):
                 plt.tight_layout()
                 plt.savefig(os.path.join(output_path, "daily_single", bldg.name + "_plus_demand_TABS+_D_plot.pdf"), dpi=200)
                 plt.close("all")"""
+
+            """
+            # plot the indoor temperature and heating/cooling demand for day 10 to day 50 in two subplots
+            fig13, (ax17, ax18) = plt.subplots(2)
+            ax17.plot(data.loc[:, "Temperatur"], linewidth=0.3)
+            ax17.set_title("Operative Temperatur")
+            ax17.set_ylabel('Temperatur in [°C]')
+            ax17.set_ylim([18, 28])
+            ax17.set_xlim([10, 50])
+            ax17.margins(0.01)
+            ax17.xaxis.set_minor_locator(mdates.DayLocator(interval=5))
+            ax17.xaxis.set_major_locator(mdates.DayLocator(interval=10))
+            ax17.xaxis.set_major_formatter(format)
+            ax18.plot(data.loc[:, "Wärmeleistung"], linewidth=0.3, label="Wärmeleistung", color="r")
+            ax18.plot(data.loc[:, "Kälteleistung"], linewidth=0.3, label="Kälteleistung")
+            ax18.set_title("Heiz- und Kühllast")
+            ax18.set_ylabel('Leistung in [kW]')
+            ax18.set_xlabel('Zeit')
+            # ax18.set_ylim([0, 5000])
+            ax18.set_xlim([10, 50])
+            ax18.margins(0.01)
+            ax18.xaxis.set_minor_locator(mdates.DayLocator(interval=5))
+            ax18.xaxis.set_major_locator(mdates.DayLocator(interval=10))
+            ax18.xaxis.set_major_formatter(format)
+
+            # plt.grid(color='green', linestyle='--', linewidth=0.1)
+            plt.tight_layout()
+            plt.savefig(os.path.join(output_path4, bldg.name + "_day10-50_plot.pdf"), dpi=200)
+            plt.close("all")
+            """
 
         except BaseException:
             # Dymola has strange exceptions
