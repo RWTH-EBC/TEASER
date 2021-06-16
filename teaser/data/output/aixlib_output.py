@@ -2,10 +2,10 @@
 
 import os
 import warnings
+import shutil
 from mako.template import Template
 from mako.lookup import TemplateLookup
 import teaser.logic.utilities as utilities
-import shutil
 
 
 def export_multizone(buildings, prj, path=None):

@@ -61,7 +61,7 @@ class AixLib(object):
         self.file_set_t_cool = "TsetCool_" + self.parent.name + ".txt"
         self.file_ahu = "AHU_" + self.parent.name + ".txt"
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".txt"
-        self.version = "0.10.7"
+        self.version = "1.0.0"
         self.total_surface_area = None
         self.consider_heat_capacity = True
         self.use_set_back = True

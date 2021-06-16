@@ -57,6 +57,10 @@ it should be accounted with 2x the area
 """
 
 import os
+import warnings
+import shutil
+import pandas as pd
+import numpy as np
 from teaser.project import Project
 from teaser.logic.buildingobjects.building import Building
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
@@ -68,10 +72,6 @@ from teaser.logic.buildingobjects.buildingphysics.groundfloor import GroundFloor
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
-import pandas as pd
-import numpy as np
-import warnings
-import shutil
 
 
 def import_data(path=None, sheet_names=None):
