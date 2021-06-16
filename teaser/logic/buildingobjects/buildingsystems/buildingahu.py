@@ -73,6 +73,11 @@ class BuildingAHU(object):
         timeline of relative humidity requirements for AHU simulation
     v_flow_profile : [int]
         timeline of desired relative v_flow of the AHU simulation (0..1)
+        Note: The AixLib parameter "WithProfile" determines whether the
+            (v_flow_profile combined with "min_ahu and max_ahu") or the
+            (persons_profile combined with "min_ahu and max_ahu")
+            is used for the AHU supply flow calculations.
+            Per default: (v_flow_profile combined with "min_ahu and max_ahu")
 
     """
 
@@ -95,10 +100,10 @@ class BuildingAHU(object):
         self.pressure_drop_fan_supply = 800
         self.pressure_drop_fan_return = 800
 
-        self._temperature_profile = 7 * [293.15] + 12 * [295.15] + 6 * [293.15]
-        self._min_relative_humidity_profile = 25 * [0.45]
-        self._max_relative_humidity_profile = 25 * [0.65]
-        self._v_flow_profile = 7 * [0.0] + 12 * [1.0] + 6 * [0.0]
+        self._temperature_profile = 7 * [293.15] + 12 * [295.15] + 5 * [293.15]
+        self._min_relative_humidity_profile = 24 * [0.45]
+        self._max_relative_humidity_profile = 24 * [0.65]
+        self._v_flow_profile = 7 * [0.0] + 12 * [1.0] + 5 * [0.0]
 
         self.schedules = pd.DataFrame(
             index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")

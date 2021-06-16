@@ -86,6 +86,10 @@ class Project(object):
         IBPSA)
     used_library_calc : str
         used library (AixLib and IBPSA are supported)
+    dir_reference_results : str
+        Path to reference results in BuildingsPy format. If not None, the results
+        will be copied into the model output directories so that the exported
+        models can be regression tested against these results with BuildingsPy.
     """
 
     def __init__(self, load_data=False):
@@ -116,6 +120,8 @@ class Project(object):
             self.data = self.instantiate_data_class()
         else:
             self.data = None
+
+        self.dir_reference_results = None
 
     @staticmethod
     def instantiate_data_class():
@@ -314,15 +320,17 @@ class Project(object):
             and
             assigned to attribute central_ahu. This instance holds information
             for central Air Handling units. Default is False.
-        internal_gains_mode: int [1, 2, 3]
-            mode for the internal gains calculation by persons:
-            1: Temperature and activity degree dependent calculation. The
-               calculation is based on  SIA 2024 (default)
-            2: Temperature and activity degree independent calculation, the max.
-               heatflowrate is prescribed by the parameter
-               fixed_heat_flow_rate_persons.
-            3: Temperature and activity degree dependent calculation with
-               consideration of moisture. The calculation is based on SIA 2024
+internal_gains_mode: int [1, 2, 3]
+        mode for the internal gains calculation done in AixLib:
+        1: Temperature and activity degree dependent heat flux calculation for persons. The
+           calculation is based on  SIA 2024 (default)
+        2: Temperature and activity degree independent heat flux calculation for persons, the max.
+           heatflowrate is prescribed by the parameter
+           fixed_heat_flow_rate_persons.
+        3: Temperature and activity degree dependent calculation with
+           consideration of moisture and co2. The moisture calculation is
+           based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
+           Engineering ToolBox (2004) and regards only persons.
         office_layout : int
             Structure of the floor plan of office buildings, default is 1,
             which is representative for one elongated floor.
@@ -502,15 +510,17 @@ class Project(object):
             and
             assigned to attribute central_ahu. This instance holds information
             for central Air Handling units. Default is False.
-        internal_gains_mode: int [1, 2, 3]
-            mode for the internal gains calculation by persons:
-            1: Temperature and activity degree dependent calculation. The
-               calculation is based on  SIA 2024 (default)
-            2: Temperature and activity degree independent calculation, the max.
-               heatflowrate is prescribed by the parameter
-               fixed_heat_flow_rate_persons.
-            3: Temperature and activity degree dependent calculation with
-               consideration of moisture. The calculation is based on SIA 2024
+internal_gains_mode: int [1, 2, 3]
+        mode for the internal gains calculation done in AixLib:
+        1: Temperature and activity degree dependent heat flux calculation for persons. The
+           calculation is based on  SIA 2024 (default)
+        2: Temperature and activity degree independent heat flux calculation for persons, the max.
+           heatflowrate is prescribed by the parameter
+           fixed_heat_flow_rate_persons.
+        3: Temperature and activity degree dependent calculation with
+           consideration of moisture and co2. The moisture calculation is
+           based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
+           Engineering ToolBox (2004) and regards only persons.
         residential_layout : int
             Structure of floor plan (default = 0) CAUTION only used for iwu
                 0: compact
@@ -1158,6 +1168,26 @@ class Project(object):
         self._number_of_elements_calc = 2
         self._merge_windows_calc = False
         self._used_library_calc = "AixLib"
+
+    @property
+    def weather_file_path(self):
+        return self._weather_file_path
+
+    @weather_file_path.setter
+    def weather_file_path(self, value):
+        if value is None:
+            self._weather_file_path = utilities.get_full_path(
+                os.path.join(
+                    "data",
+                    "input",
+                    "inputdata",
+                    "weatherdata",
+                    "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos",
+                )
+            )
+        else:
+            self._weather_file_path = os.path.normpath(value)
+            self.weather_file_name = os.path.split(self.weather_file_path)[1]
 
     @property
     def number_of_elements_calc(self):

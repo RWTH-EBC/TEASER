@@ -92,7 +92,7 @@ class BuildingElement(object):
     r_inner_rad : float [K/W]
         Radiative resistance of building element on inner side (facing the
         zone)
-    r_inner_conv : float [K/W]
+    r_inner_comb : float [K/W]
         Combined convective and radiative resistance of building element on
         inner side (facing the zone)
     r_outer_conv : float [K/W]
@@ -103,7 +103,7 @@ class BuildingElement(object):
         Radiative resistance of building element on outer side (facing
         the ambient or adjacent zone). Currently for all InnerWalls and
         GroundFloors this value is set to 0.0
-    r_outer_conv : float [K/W]
+    r_outer_comb : float [K/W]
         Combined convective and radiative resistance of building element on
         outer side (facing the ambient or adjacent zone). Currently for all
         InnerWalls and GroundFloors this value is set to 0.0
@@ -453,10 +453,12 @@ class BuildingElement(object):
 
         self._orientation = value
         if type(self).__name__ == "OuterWall":
-            if self.parent.parent is not None and self.area is not None:
+            if (self.parent is not None and self.parent.parent is not None and
+                    self.area is not None):
                 self.parent.parent.fill_outer_area_dict()
         elif type(self).__name__ == "Window":
-            if self.parent.parent is not None and self.area is not None:
+            if (self.parent is not None and self.parent.parent is not None and
+                    self.area is not None):
                 self.parent.parent.fill_window_area_dict()
 
     @property
@@ -592,7 +594,8 @@ class BuildingElement(object):
         if type(self).__name__ == "OuterWall"\
                 or type(self).__name__ == "Rooftop" \
                 or type(self).__name__ == "GroundFloor":
-            if self.parent.parent is not None and self.orientation is not None:
+            if (self.parent is not None and self.parent.parent is not None and
+                    self.orientation is not None):
                 self.parent.parent.fill_outer_area_dict()
         elif type(self).__name__ == "Window":
             if self.parent is not None and self.orientation is not None:

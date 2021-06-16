@@ -47,14 +47,16 @@ class ApartmentBlock(SingleFamilyHouse):
         assigned to attribute central_ahu. This instance holds information for
         central Air Handling units. Default is False.
     internal_gains_mode: int [1, 2, 3]
-        mode for the internal gains calculation by persons:
-        1: Temperature and activity degree dependent calculation. The
+        mode for the internal gains calculation done in AixLib:
+        1: Temperature and activity degree dependent heat flux calculation for persons. The
            calculation is based on  SIA 2024 (default)
-        2: Temperature and activity degree independent calculation, the max.
+        2: Temperature and activity degree independent heat flux calculation for persons, the max.
            heatflowrate is prescribed by the parameter
            fixed_heat_flow_rate_persons.
         3: Temperature and activity degree dependent calculation with
-           consideration of moisture. The calculation is based on SIA 2024
+           consideration of moisture and co2. The moisture calculation is
+           based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
+           Engineering ToolBox (2004) and regards only persons.
     construction_type : str
         Construction type of used wall constructions default is "existing
         state"
@@ -204,8 +206,8 @@ class ApartmentBlock(SingleFamilyHouse):
             self.central_ahu.temperature_profile = (
                 7 * [293.15] +
                 12 * [295.15] +
-                6 * [293.15])
-            self.central_ahu.min_relative_humidity_profile = (25 * [0.45])
-            self.central_ahu.max_relative_humidity_profile = (25 * [0.55])
+                5 * [293.15])
+            self.central_ahu.min_relative_humidity_profile = (24 * [0.45])
+            self.central_ahu.max_relative_humidity_profile = (24 * [0.55])
             self.central_ahu.v_flow_profile = (
-                7 * [0.0] + 12 * [1.0] + 6 * [0.0])
+                7 * [0.0] + 12 * [1.0] + 5 * [0.0])

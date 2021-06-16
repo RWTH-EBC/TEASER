@@ -35,30 +35,35 @@ class UseConditions(object):
     with_heating: boolean
         Sets if the zone is heated by ideal heater or not.
     with_cooling: boolean
-        Sets if the zone is cooloed by ideal cooler or not.
+        Sets if the zone is cooled by ideal cooler or not.
     with_ideal_thresholds: boolean
-        Sets if the threshold temperatures for ideal heater and cooler should
-        be used to prevent simultaneous heating from AHU and cooling from
-        ideal heater and vice versa. This should only be turned on if an AHU
-        exists.
+        Sets if the threshold temperatures for ideal heater and cooler are
+        used.
+        True = T_threshold_heating and T_threshold_cooling are used.
+        This can, in most cases, prevent simultaneous heating from AHU and
+        cooling from ideal heater and vice versa. This should only be turned
+        on if an AHU exists.
     T_threshold_heating: float [K]
-       Threshold temperature below ideal heater is used. Default is 15 °C
-       which corresponds to the value for all buildings that are not built
+       Threshold for the outside temperature above which the ideal heater is
+       permanently shut down regardless the inside temperature.
+       Default is 15 °C which corresponds to the value for all buildings
+       that are not built
        according to EnEV standard according to DIN EN 18599-5.
     T_threshold_cooling: float [K]
-        Threshold temperature above ideal cooler is used. Default is 22 °C ,
-        since there are no european standards for cooling degree days this value
-        is taken from the following paper: "Heating Degree Days, Cooling
-        Degree Days and Precipitation in Europe—analysis for the
-        CELECT-project" by Benestad, 2008.
+        Threshold for the outside temperature below which the ideal cooler is
+        permanently shut down regardless the inside temperature.
+        Default is 22 °C, since there are no european standards
+        for cooling degree days this value is taken from the following paper:
+        "Heating Degree Days, Cooling Degree Days and Precipitation in Europe
+        —analysis for the CELECT-project" by Benestad, 2008.
     heating_profile : list [K]
-        Heating setpoint for a day or similar. You can set a list of any
+        Heating setpoint, regarding the zone temperature, of ideal static
+        heating for a day or similar. You can set a list of any
         length, TEASER will multiplicate this list for one whole year.
     cooling_profile : list [K]
-        Cooling setpoint for a day or similar. You can set a list of any
+        Cooling setpoint, regarding the zone temperature, of ideal static
+        cooling for a day or similar. You can set a list of any
         length, TEASER will multiplicate this list for one whole year.
-    with_cooling: boolean
-        Sets if the zone is cooloed or not.
     fixed_heat_flow_rate_persons: float [W/person]
         fixed heat flow rate for one person in case of temperature
         independent calculation. Default value is 70
@@ -72,14 +77,14 @@ class UseConditions(object):
     activity_degree_persons : float [met]
         default value is 1.2 met
         AixLib: used for heat flow rate calculation (internal_gains_mode=1)
-        or heat flow rate and moisture gains (internal_gains_mode=3). Both
+        or heat flow rate, moisture and co2 gains (internal_gains_mode=3). Both
         are temperature and activity degree depending, calculation based
-        on SIA2024.
+        on SIA2024 (2015) and Engineering ToolBox (2004).
         Annex: not used, heat flow rate is constant value
         fixed_heat_flow_rate_persons
     ratio_conv_rad_persons: float
         describes the ratio between convective and radiative heat transfer
-        of the persons. Default values are derived from
+        of the persons [convective/radiative]. Default values are derived from
         :cite:`VereinDeutscherIngenieure.2015c`.
         AixLib: Used in Zone record for internal gains
         Annex: Used for internal gains
@@ -98,7 +103,7 @@ class UseConditions(object):
         Annex: Used for internal gains
     ratio_conv_rad_machines: float
         describes the ratio between convective and radiative heat transfer
-        of the machines. Default values are derived from
+        of the machines [convective/radiative]. Default values are derived from
         :cite:`Davies.2004`.
         AixLib: Used in Zone record for internal gains
         Annex: Not used, all machines are convective (see Annex examples)
@@ -115,7 +120,7 @@ class UseConditions(object):
         Annex: Not used (see Annex examples)
     ratio_conv_rad_lighting : float
         describes the ratio between convective and radiative heat transfer
-        of the lighting. Default values are derived from
+        of the lighting [convective/radiative]. Default values are derived from
         :cite:`DiLaura.2011`.
         AixLib: Used in Zone record for internal gains, lighting
     lighting_profil : [float]
@@ -125,21 +130,34 @@ class UseConditions(object):
         AixLib: Used for internal gains profile on top-level
         Annex: Not used (see Annex examples)
     min_ahu: float [m3/(m2*h)]
-        Zone specific minimum specific air flow supplied by the AHU
+        Zone specific minimum specific air flow supplied by the AHU.
         AixLib: Used on Multizone level for central AHU to determine total
-        volume flow of all zones.
+        volume flow of each zone.
+            Note: The AixLib parameter "WithProfile" determines whether the
+            (v_flow_profile combined with "min_ahu and max_ahu") or the
+            (persons_profile combined with "min_ahu and max_ahu")
+            is used for the AHU supply flow calculations.
+            Per default: (v_flow_profile combined with "min_ahu and max_ahu")
     max_ahu : float [m3/(m2*h)]
-        Zone specific maximum specific air flow supplied by the AHU
+        Zone specific maximum specific air flow supplied by the AHU.
         AixLib: Used on Multizone level for central AHU to determine total
-        volume flow of all zones.
+        volume flow of each zone.
+            Note: The AixLib parameter "WithProfile" determines whether the
+            (v_flow_profile combined with "min_ahu and max_ahu") or the
+            (persons_profile combined with "min_ahu and max_ahu")
+            is used for the AHU supply flow calculations.
+            Per default: (v_flow_profile combined with "min_ahu and max_ahu")
     with_ahu : boolean
         Zone is connected to central air handling unit or not
         AixLib: Used on Multizone level for central AHU.
     use_constant_infiltration : boolean
-        choose if a constant infiltration rate should be used
+        choose whether window opening should be regarded.
+        true = natural infiltration + ventilation due to a AHU
+        false = natural infiltration + ventilation due to a AHU
+            + window infiltration calculated by window opening model
         AixLib: Used on Zone level for ventilation.
     base_infiltration : float [1/h]
-        base value for the infiltration rate
+        base value for the natural infiltration without window openings
         AixLib: Used on Zone level for ventilation.
     max_user_infiltration : float [1/h]
         Additional infiltration rate for maximum persons activity
@@ -161,6 +179,8 @@ class UseConditions(object):
     schedules: pandas.DataFrame
         All time dependent boundary attributes in one pandas DataFrame, used
         for export (one year in hourly timestep.)
+        Note: python attribute, not customizable by user (derived from Json)
+
 
     """
 
@@ -229,10 +249,8 @@ class UseConditions(object):
             294.15,
             294.15,
             294.15,
-            294.15,
         ]
         self._cooling_profile = [
-            294.15,
             294.15,
             294.15,
             294.15,

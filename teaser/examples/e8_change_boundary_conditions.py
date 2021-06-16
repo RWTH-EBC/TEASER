@@ -43,7 +43,6 @@ def example_change_boundary_conditions():
         0.0,
         0.0,
         0.0,
-        0.0,
     ]
 
     v_flow_week = []
@@ -64,7 +63,6 @@ def example_change_boundary_conditions():
     office.central_ahu.v_flow_profile = v_flow_week
 
     heating_profile_workday = [
-        293,
         293,
         293,
         293,

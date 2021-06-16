@@ -33,13 +33,10 @@ def create_path(path):
     path = os.path.normpath(path)
     # if directory exists change into that directory
     if(os.path.isdir(path)):
-        os.chdir(path)
         return path
     else:
         if not os.path.exists(path):
             os.makedirs(path)
-
-        os.chdir(path)
     return path
 
 
