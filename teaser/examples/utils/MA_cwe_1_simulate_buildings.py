@@ -11,6 +11,9 @@ Use this script to generate and simulate multiple buildings at once.
 1. Define buildings in generate_archetype() similar to teaser/examples/e1_generate_archetype.py
 2. Choose a heating/cooling system setup from teaser/logic/buildingobjects/buildingsystems/heatingcooling.py
 3. Set your workspace and weather file in the main routine
+4. You can choose to simulate a single year or two years in a row. If you choose one year, then you have to change the 
+   following scripts so that the first 2-3 days are left out because of special initialization conditions. If you simulate
+   two years you have to choose a different index in MA_cwe_2_analyse_results.py
 
 """
 
@@ -18,7 +21,7 @@ def generate_archetype():
     from teaser.project import Project
 
     prj = Project(load_data=True)
-    prj.name = "Simulationsstudie_TABS_40"
+    prj.name = "Simulationsstudie_TABS_Test_double_year"
 
     heating_profile_night_reduction = [292.15,
                                        292.15,
@@ -72,7 +75,7 @@ def generate_archetype():
     # Project 1 includes all buildings of the building type 'single family house'
 
     # -----EFH radiator-----
-    """
+
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
@@ -288,7 +291,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -313,7 +316,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -338,7 +341,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -363,7 +366,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -388,7 +391,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -413,7 +416,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -438,7 +441,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -463,7 +466,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -474,7 +477,7 @@ def generate_archetype():
             zone.use_conditions.infiltration_rate = 6.0
             zone.use_conditions.max_user_infiltration = 0.0
             zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
-    """
+
     # -----EFH tabs plus air-----
 
     prj.add_residential(
@@ -686,7 +689,7 @@ def generate_archetype():
             zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     # -----convective-----
-    """
+
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
@@ -1008,7 +1011,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -1033,7 +1036,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -1058,7 +1061,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -1079,11 +1082,11 @@ def generate_archetype():
         height_of_floors=2.8,
         net_leased_area=2000.0,
         construction_type="light")
-
+    
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -1108,7 +1111,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -1133,7 +1136,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -1158,7 +1161,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -1183,7 +1186,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -1194,7 +1197,7 @@ def generate_archetype():
             zone.use_conditions.infiltration_rate = 6.0
             zone.use_conditions.max_user_infiltration = 0.0
             zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
-    """
+
     # -----MFH tabs plus air-----
 
     prj.add_residential(
@@ -1406,7 +1409,7 @@ def generate_archetype():
             zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     # -----MFH convective-----
-    """
+
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
@@ -1728,7 +1731,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -1753,7 +1756,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -1778,7 +1781,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -1803,7 +1806,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -1828,7 +1831,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -1853,7 +1856,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -1878,7 +1881,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -1903,7 +1906,7 @@ def generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=70.0, specific_power_cool=40.0)
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
         zone.use_conditions.max_user_infiltration = 0.5
@@ -1914,7 +1917,7 @@ def generate_archetype():
             zone.use_conditions.infiltration_rate = 6.0
             zone.use_conditions.max_user_infiltration = 0.0
             zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
-    """
+
     # -----Office tabs plus air-----
 
     prj.add_non_residential(
@@ -2126,7 +2129,7 @@ def generate_archetype():
             zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     # -----Office convective-----
-    """
+
     prj.add_non_residential(
         method="bmvbs",
         usage="office",
@@ -2233,7 +2236,7 @@ def generate_archetype():
 if __name__ == '__main__':
 
     # set your workspace to your desired path here
-    workspace = os.path.join("D:\\", "tbl-cwe", "TABS_power", "Simulationsstudie_TABS_40")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Simulation", "Simulationsstudie_TABS_Test_double_year")
     print("Your workspace is set to: " + workspace)
     sim_results_path = os.path.join(workspace, "sim_results")
     TEASER_output_path = os.path.join(workspace, "TEASEROutput")
@@ -2260,6 +2263,9 @@ if __name__ == '__main__':
     pickle_file = os.path.join(workspace, "building_simulation_pickle.p")
     pickle.dump(prj, open(pickle_file, "wb"))
 
+    # use stop_time=63072000.0 to simulate 2 years
+    single_year = 31532400.0
+    double_year = 63068400.0
     print("Starting simulation")
     sim.queue_simulation(
         sim_function=sim.simulate,
@@ -2267,6 +2273,7 @@ if __name__ == '__main__':
         model_path=TEASER_output_path,
         results_path=sim_results_path,
         number_of_workers=multiprocessing.cpu_count() - 3,
+        stop_time=double_year,
     )
     print("Your simulation results can be found in: " + sim_results_path)
     print("That's it! :)")
