@@ -207,7 +207,6 @@ def simulate(
     except NameError:
         pass
 
-
 def queue_simulation(
     sim_function,
     prj,
