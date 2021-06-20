@@ -7,7 +7,7 @@ import pickle
 if __name__ == '__main__':
 
     # set path to your workspace here
-    workspace = os.path.join("D:\\", "tbl-cwe", "Simulationsstudie_06_21_V2")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Simulation", "Simulationsstudie_TABS_Test_double_year")
     print("Your workspace is set to: " + workspace)
 
     """
@@ -24,6 +24,10 @@ if __name__ == '__main__':
     #    for i in range(len(bldg.thermal_zones))
     #  ]
     """
+    # you have to change the index of res.read_results() according to your simulation data
+    # choose single if only one year was simulated and double if two years were simulated
+    single = 8760
+    double = 17520
 
     load_pickle = os.path.join(workspace, "building_simulation_pickle.p")
     pickle_prj = pickle.load(open(load_pickle, "rb"))
@@ -45,15 +49,15 @@ if __name__ == '__main__':
                         range(len(bldg.thermal_zones))]
             signals += ['multizone.PHeater[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.PCooler[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
-
+            """
             res.read_results(
                 buildings=[bldg.name],
                 signals=signals,
-                index=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
-                index_res=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
+                index=pd.date_range(datetime.datetime(2021, 1, 1), periods=double, freq="H"),
+                index_res=pd.date_range(datetime.datetime(2022, 1, 1), periods=8760, freq="H"),
                 results_path=sim_results_path,
                 csv_path=csv_results_path,
-            )
+            )"""
         elif "tabsplusair" in bldg.name:
             signals = ['multizone.TOpe[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.TAir[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
@@ -67,30 +71,30 @@ if __name__ == '__main__':
                         range(len(bldg.thermal_zones))]
             signals += ['multizone.PHeater[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.PCooler[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
-
+            """
             res.read_results(
                 buildings=[bldg.name],
                 signals=signals,
-                index=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
-                index_res=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
+                index=pd.date_range(datetime.datetime(2021, 1, 1), periods=double, freq="H"),
+                index_res=pd.date_range(datetime.datetime(2022, 1, 1), periods=8760, freq="H"),
                 results_path=sim_results_path,
                 csv_path=csv_results_path,
-            )
+            )"""
         elif "radiator" in bldg.name:
             signals = ['multizone.TOpe[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.TAir[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.pITempHeatRem.y'.format(i + 1) for i in
                         range(len(bldg.thermal_zones))]
             signals += ['multizone.PHeater[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
-
+            """
             res.read_results(
                 buildings=[bldg.name],
                 signals=signals,
-                index=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
-                index_res=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
+                index=pd.date_range(datetime.datetime(2021, 1, 1), periods=double, freq="H"),
+                index_res=pd.date_range(datetime.datetime(2022, 1, 1), periods=8760, freq="H"),
                 results_path=sim_results_path,
                 csv_path=csv_results_path,
-            )
+            )"""
         elif "convective" in bldg.name:
             signals = ['multizone.TOpe[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.TAir[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
@@ -100,22 +104,22 @@ if __name__ == '__main__':
                         range(len(bldg.thermal_zones))]
             signals += ['multizone.PHeater[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.PCooler[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
-
+            """
             res.read_results(
                 buildings=[bldg.name],
                 signals=signals,
-                index=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
-                index_res=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
+                index=pd.date_range(datetime.datetime(2021, 1, 1), periods=double, freq="H"),
+                index_res=pd.date_range(datetime.datetime(2022, 1, 1), periods=8760, freq="H"),
                 results_path=sim_results_path,
                 csv_path=csv_results_path,
-            )
-        """res.read_results(
-            buildings=pickle_prj.buildings,
+            )"""
+        res.read_results(
+            buildings=[bldg.name],
             signals=signals,
-            index=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
-            index_res=pd.date_range(datetime.datetime(2021, 1, 1), periods=8760, freq="H"),
+            index=pd.date_range(datetime.datetime(2021, 1, 1), periods=double, freq="H"),
+            index_res=pd.date_range(datetime.datetime(2022, 1, 1), periods=8760, freq="H"),
             results_path=sim_results_path,
             csv_path=csv_results_path,
-        )"""
+        )
 
     print("That's it! :)")
