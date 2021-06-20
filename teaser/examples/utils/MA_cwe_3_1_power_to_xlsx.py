@@ -115,7 +115,7 @@ def calc_power(buildings, csv_path, output_path):
 if __name__ == '__main__':
 
     # set path to your workspace here
-    workspace = os.path.join("D:\\", "tbl-cwe", "TABS_power", "Simulationsstudie_TABS_50")
+    workspace = os.path.join("D:\\", "tbl-cwe", "TABS_power", "Simulationsstudie_TABS_60")
     print("Your workspace is set to: " + workspace)
 
     load_pickle = os.path.join(workspace, "building_simulation_pickle.p")

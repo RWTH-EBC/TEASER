@@ -109,7 +109,7 @@ def read_results_power(
 if __name__ == '__main__':
 
     # set path to your workspace here
-    workspace = os.path.join("D:\\", "tbl-cwe", "TABS_power", "Simulationsstudie_TABS_50")
+    workspace = os.path.join("D:\\", "tbl-cwe", "TABS_power", "Simulationsstudie_TABS_60")
     print("Your workspace is set to: " + workspace)
 
     """
