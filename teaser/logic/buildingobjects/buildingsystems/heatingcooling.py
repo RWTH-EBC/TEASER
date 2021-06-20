@@ -451,15 +451,20 @@ class HeatingCooling(object):
         self.TThresholdCoolerTabs = 0.0
         self.withTabsRoomTempControl = False
 
+        d = ((0.8 * self.parent.area) * specific_power_heat)
+        e = self.parent.model_attr.heat_load
+        f = -((0.8 * self.parent.area) * specific_power_cool)
+        g = self.parent.model_attr.cool_load
+
         self.KRHeatPanel = KR
         self.TNHeatPanel = TN
-        self.hHeatPanel = self.parent.area * specific_power_heat
+        self.hHeatPanel = e if e < d else d
         self.lHeatPanel = 0.0
 
         self.KRCoolPanel = KR
         self.TNCoolPanel = TN
         self.hCoolPanel = 0.0
-        self.lCoolPanel = -self.parent.area * specific_power_cool
+        self.lCoolPanel = g if g > f else f
 
         self.KRHeatRem = 0.0
         self.TNHeatRem = 0.0
