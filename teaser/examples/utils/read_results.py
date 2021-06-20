@@ -1,4 +1,16 @@
-"""Module to read results with DymolaInterface."""
+"""
+This module contains functions to read, analyse and plot simulation results from Dymola simulations of TEASER buildings.
+
+Functions currently in use are:
+1) read_results(...)
+    Read simulation data from .mat file with Dymola Interface and save them into csv.
+2) calc_results(...)
+    Create csv-file containing KPIs of buildings.
+3) plot_results(...)
+    Create plots of heating, cooling and temperature time series from .csv
+    files with hourly demands created by MA_cwe_2_analyse_results.py
+
+"""
 
 import datetime
 import os
@@ -14,8 +26,8 @@ from statistics import mean
 from dymola.dymola_interface import DymolaInterface
 
 
-# This module reads simulation results from Dymola simulation of TEASER buidlings and
-# saves heating, cooling and electricity demand (ventilation) into seperate *.csv files
+# This module reads simulation results from Dymola simulation of TEASER buildings and
+# saves heating, cooling and electricity demand (ventilation) into separate *.csv files
 # for further usage. It needs exact same naming of the one that was simulated
 
 # To use this module: simply copy it into your folder.
@@ -97,7 +109,6 @@ def read_results(
         # bldg.name # bldg
         #if not (bldg + "_heat.csv") in os.listdir(csv_path):
         try:
-            #print(os.path.join(results_path, bldg + ".mat"))
             dym_res = dymola.readTrajectory(
                 fileName=os.path.join(results_path, bldg + ".mat"),
                 signals=signals,
@@ -217,11 +228,11 @@ def calc_results(buildings, csv_path, output_path):
         Path where output files should be stored
 
     """
-    output_path2 = os.path.join(output_path, "temp")
+    #output_path2 = os.path.join(output_path, "temp")
     if not os.path.exists(output_path):
         os.makedirs(output_path)
-    if not os.path.exists(output_path2):
-        os.makedirs(output_path2)
+    #if not os.path.exists(output_path2):
+    #    os.makedirs(output_path2)
 
     results = pd.DataFrame()
 
@@ -235,9 +246,11 @@ def calc_results(buildings, csv_path, output_path):
 
             # drop the first 4 days of the data
             # you also have to change the index of data = pd.DataFrame (!!)
+            """
             heat_data = heat_data.drop(heat_data.index[0:96])
             cool_data = cool_data.drop(cool_data.index[0:96])
             temp_data = temp_data.drop(temp_data.index[0:96])
+            """
 
             # calculate annual heating and cooling demand
             annual_heat = heat_data.loc[:, bldg.name + " PHeat"].sum() / 1000
@@ -255,7 +268,7 @@ def calc_results(buildings, csv_path, output_path):
             # office buildings are divided in 6 zones, the temperature for each zone are multiplied with the
             # zone area factor to calculate one indoor temperature for the whole building
             data = pd.DataFrame(index=pd.date_range(
-                        start=datetime.datetime(2021, 1, 5, 0, 0, 0),
+                        start=datetime.datetime(2021, 1, 1, 0, 0, 0),
                         end=datetime.datetime(2021, 12, 31, 23, 55),
                         freq="H", ))
             if "Office" in bldg.name:
@@ -382,7 +395,7 @@ def calc_results(buildings, csv_path, output_path):
     #temp_winter.to_excel(os.path.join(output_path, "temp", bldg.name + "_temp_winter.xlsx"))
     #temp_summer.to_excel(os.path.join(output_path, "temp", bldg.name + "_temp_summer.xlsx"))
 
-    results.to_csv(os.path.join(output_path, "buildings_calc.csv"))
+    #results.to_csv(os.path.join(output_path, "buildings_calc.csv"))
     results.to_excel(os.path.join(output_path, "buildings_excel_calc.xlsx"))
     print("Calculations done! :)")
 
@@ -460,7 +473,7 @@ def plot_results(buildings, csv_path, output_path):
             #sliced_data = data.loc[data.index.difference(data.index[data.index.slice_indexer(start_remove, end_remove)])]
 
             # Use this to exclude the first hours of your simulation results, e.g. [0:96] to skip the first 4 days
-            data = data.drop(data.index[0:96])
+            #data = data.drop(data.index[0:96])
 
             # plot parameters
             """sidewidth = 6.224
@@ -736,14 +749,17 @@ def plot_results(buildings, csv_path, output_path):
                 plt.savefig(os.path.join(output_path, "daily_single", bldg.name + "_plus_demand_TABS+_D_plot.pdf"), dpi=200)
                 plt.close("all")"""
 
-            """
+            # Use this to slice your simulation results, to the desired timespan
+            data = data.drop(data.index[0:240])
+            data = data.drop(data.index[1200:8760])
+
             # plot the indoor temperature and heating/cooling demand for day 10 to day 50 in two subplots
             fig13, (ax17, ax18) = plt.subplots(2)
             ax17.plot(data.loc[:, "Temperatur"], linewidth=0.3)
             ax17.set_title("Operative Temperatur")
             ax17.set_ylabel('Temperatur in [°C]')
             ax17.set_ylim([18, 28])
-            ax17.set_xlim([10, 50])
+            # ax17.set_xlim([10, 50])
             ax17.margins(0.01)
             ax17.xaxis.set_minor_locator(mdates.DayLocator(interval=5))
             ax17.xaxis.set_major_locator(mdates.DayLocator(interval=10))
@@ -754,7 +770,7 @@ def plot_results(buildings, csv_path, output_path):
             ax18.set_ylabel('Leistung in [kW]')
             ax18.set_xlabel('Zeit')
             # ax18.set_ylim([0, 5000])
-            ax18.set_xlim([10, 50])
+            # ax18.set_xlim([10, 50])
             ax18.margins(0.01)
             ax18.xaxis.set_minor_locator(mdates.DayLocator(interval=5))
             ax18.xaxis.set_major_locator(mdates.DayLocator(interval=10))
@@ -764,7 +780,6 @@ def plot_results(buildings, csv_path, output_path):
             plt.tight_layout()
             plt.savefig(os.path.join(output_path4, bldg.name + "_day10-50_plot.pdf"), dpi=200)
             plt.close("all")
-            """
 
         except BaseException:
             # Dymola has strange exceptions
@@ -788,7 +803,103 @@ def plot_results(buildings, csv_path, output_path):
 
         #plt.savefig(bldg.name + 'Bedarf.png', dpi=200, transparent=True)
 
+def excel_export(buildings, csv_path, output_path):
+    """Create xlsx-file containing temperatures and demands of buildings.
 
+    Parameters
+    ----------
+    buildings : prj.buildings
+        load TEASER bldgs from a pickle project file
+    csv_path : str
+        Path where hourly demands created by MA_cwe_2_analyse_results.py are stored
+    output_path : str
+        Path where output files should be stored
+
+    """
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
+
+    data = pd.DataFrame(index=pd.date_range(
+        start=datetime.datetime(2021, 1, 1, 0, 0, 0),
+        end=datetime.datetime(2021, 12, 31, 23, 55),
+        freq="H", ))
+
+    for bldg in buildings:
+        try:
+            print("reading building {}".format(bldg.name))
+            # read hourly demands
+            heat_data = pd.read_csv(os.path.join(csv_path, bldg.name + "_heat.csv"))
+            cool_data = pd.read_csv(os.path.join(csv_path, bldg.name + "_cool.csv"))
+            temp_data = pd.read_csv(os.path.join(csv_path, bldg.name + "_temp.csv"))
+
+            # drop the first 4 days of the data
+            # you also have to change the index of data = pd.DataFrame (!!)
+            # heat_data = heat_data.drop(heat_data.index[0:96])
+            # cool_data = cool_data.drop(cool_data.index[0:96])
+            # temp_data = temp_data.drop(temp_data.index[0:96])
+
+            # office buildings are divided in 6 zones, the temperature for each zone are multiplied with the
+            # zone area factor to calculate one indoor temperature for the whole building
+            if "Office" in bldg.name:
+                data.loc[:, bldg.name + " TOpe"] = ((temp_data.loc[:, bldg.name + " TOpe[1]"].values * 0.5 * bldg.net_leased_area
+                                              + temp_data.loc[:,
+                                                bldg.name + " TOpe[2]"].values * 0.25 * bldg.net_leased_area
+                                              + temp_data.loc[:,
+                                                bldg.name + " TOpe[3]"].values * 0.15 * bldg.net_leased_area
+                                              + temp_data.loc[:,
+                                                bldg.name + " TOpe[4]"].values * 0.04 * bldg.net_leased_area
+                                              + temp_data.loc[:,
+                                                bldg.name + " TOpe[5]"].values * 0.04 * bldg.net_leased_area
+                                              + temp_data.loc[:,
+                                                bldg.name + " TOpe[6]"].values * 0.02 * bldg.net_leased_area) / bldg.net_leased_area) - 273.15
+            else:
+                data.loc[:, bldg.name + " TOpe"] = temp_data.loc[:, bldg.name + " TOpe"].values - 273.15
+
+            data.loc[:, bldg.name + " PHeat"] = heat_data.loc[:, bldg.name + " PHeat"]
+            if "tabsplusair" in bldg.name:
+                data.loc[:, bldg.name + " TABS_H"] = heat_data.loc[:, bldg.name + " tabsHeatingPower"]
+                data.loc[:, bldg.name + " Convective_H"] = heat_data.loc[:, bldg.name + " pITempHeatRem.y"]
+            data.loc[:, bldg.name + " PCool"] = cool_data.loc[:, bldg.name + " PCool"]
+            if "tabsplusair" in bldg.name:
+                data.loc[:, bldg.name + " TABS_C"] = cool_data.loc[:, bldg.name + " tabsCoolingPower"]
+                data.loc[:, bldg.name + " Convective_C"] = cool_data.loc[:, bldg.name + " pITempCoolRem.y"]
+
+            """
+            if "EFH" in bldg.name:
+                results.loc[bldg.name, "Type"] = "EFH"
+            elif "MFH" in bldg.name:
+                results.loc[bldg.name, "Type"] = "MFH"
+            elif "Office" in bldg.name:
+                results.loc[bldg.name, "Type"] = "Office"
+            if "radiator" in bldg.name:
+                results.loc[bldg.name, "System"] = "Radiator"
+            elif "convective" in bldg.name:
+                results.loc[bldg.name, "System"] = "Convective"
+            elif "panel" in bldg.name:
+                results.loc[bldg.name, "System"] = "Panel"
+            elif "tabsplusair" in bldg.name:
+                results.loc[bldg.name, "System"] = "TABSplusAir"
+    
+            results.loc[bldg.name, "Year of construction"] = bldg.year_of_construction
+            results.loc[bldg.name, "Net area"] = bldg.net_leased_area
+            #results.loc[bldg.name, "Footprint area"] = bldg.ground_floor_geo["GroundFloor"]["area"]
+            #results.loc[bldg.name, "Volume"] = bldg.volume
+            results.loc[bldg.name, "A/V"] = bldg.library_attr.total_surface_area / bldg.volume
+            results.loc[bldg.name, "Construction type"] = bldg.construction_type
+            """
+
+        except BaseException:
+            # Dymola has strange exceptions
+            print(
+                "Reading results of building {} failed, "
+                "please check result file".format(bldg.name)
+            )
+            # raise Exception("Results Error!")
+            continue
+
+    data.to_csv(os.path.join(output_path, "buildings_temp_demands.csv"))
+    data.to_excel(os.path.join(output_path, "buildings_excel_temp_demands.xlsx"))
+    print("Export done! :)")
 
 def old_plot_results(heat, cool, title, output_path):
     # Very simple and basic plotting of heating and cooling time series.
