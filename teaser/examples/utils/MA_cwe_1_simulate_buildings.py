@@ -2229,7 +2229,7 @@ def generate_archetype():
             zone.use_conditions.infiltration_rate = 6.0
             zone.use_conditions.max_user_infiltration = 0.0
             zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
-    """
+    
     return prj
 
 
