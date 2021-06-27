@@ -495,7 +495,12 @@ def plot_results(buildings, csv_path, output_path):
             minormonths = mdates.MonthLocator(interval=1)
             majormonths = mdates.MonthLocator(interval=2)
             format = mdates.DateFormatter("%d-%m")
-            format2 = mdates.DateFormatter("%d")
+            locator = matplotlib.dates.MonthLocator(
+                bymonth=None,
+                bymonthday=15,
+                interval=1,
+                tz=None)
+            formatter = mdates.DateFormatter("%b")
 
             # plot the indoor temperature and heating/cooling demand for one year in two subplots
             print("plotting building {}".format(bldg.name))
@@ -660,16 +665,16 @@ def plot_results(buildings, csv_path, output_path):
 
             # create single resampled plots
             # operative temperature
-            """fig8, (ax12) = plt.subplots()
+            fig8, (ax12) = plt.subplots()
             ax12.plot(data.loc[:, "Temperatur"].resample("D").mean(), linewidth=0.3)
             ax12.set_title("Operative Temperatur")
             ax12.set_ylabel('Temperatur in [°C]')
-            ax12.set_xlabel('Zeit')
+            # ax12.set_xlabel('Zeit')
             ax12.set_ylim([18, 28])
             ax12.margins(0.01)
-            ax12.xaxis.set_minor_locator(minormonths)
-            ax12.xaxis.set_major_locator(majormonths)
-            ax12.xaxis.set_major_formatter(format)
+            # ax12.xaxis.set_minor_locator(minormonths)
+            ax12.xaxis.set_major_locator(locator)
+            ax12.xaxis.set_major_formatter(formatter)
 
             plt.tight_layout()
             plt.savefig(os.path.join(output_path, "daily_single", bldg.name + "_temp_D_plot.pdf"), dpi=200)
@@ -681,13 +686,13 @@ def plot_results(buildings, csv_path, output_path):
             ax13.plot(data.loc[:, "Kälteleistung"].resample("D").mean(), linewidth=0.3, label="Kälteleistung")
             ax13.set_title("Heiz- und Kühllast")
             ax13.set_ylabel('Leistung in [kW]')
-            ax13.set_xlabel('Zeit')
+            # ax13.set_xlabel('Zeit')
             # ax13.set_ylim([0, 5000])
             # ax13.set_xlim([5000, 8760])
             ax13.margins(0.01)
-            ax13.xaxis.set_minor_locator(minormonths)
-            ax13.xaxis.set_major_locator(majormonths)
-            ax13.xaxis.set_major_formatter(format)
+            # ax13.xaxis.set_minor_locator(minormonths)
+            ax13.xaxis.set_major_locator(locator)
+            ax13.xaxis.set_major_formatter(formatter)
 
             plt.tight_layout()
             plt.savefig(os.path.join(output_path, "daily_single", bldg.name + "_demand_D_plot.pdf"), dpi=200)
@@ -697,36 +702,36 @@ def plot_results(buildings, csv_path, output_path):
             if "tabsplusair" in bldg.name:
                 # operative temperature
                 # eigentlich überflüssig
-                fig10, (ax14) = plt.subplots()
+                """fig10, (ax14) = plt.subplots()
                 ax14.plot(data.loc[:, "Temperatur"].resample("D").mean(), linewidth=0.3)
                 ax14.set_title("Operative Temperatur")
                 ax14.set_ylabel('Temperatur in [°C]')
-                ax14.set_xlabel('Zeit')
+                # ax14.set_xlabel('Zeit')
                 ax14.set_ylim([18, 28])
                 ax14.margins(0.01)
-                ax14.xaxis.set_minor_locator(minormonths)
-                ax14.xaxis.set_major_locator(majormonths)
-                ax14.xaxis.set_major_formatter(format)
+                # ax14.xaxis.set_minor_locator(minormonths)
+                ax14.xaxis.set_major_locator(locator)
+                ax14.xaxis.set_major_formatter(formatter)
 
                 plt.tight_layout()
                 plt.savefig(os.path.join(output_path, "daily_single", bldg.name + "_temp_TABS+_D_plot.pdf"), dpi=200)
                 plt.close("all")
-
+                """
                 # tabs demands
                 fig11, (ax15) = plt.subplots()
                 ax15.plot(data.loc[:, "tabs_heat_demand"].resample("D").mean(), linewidth=0.3, label="Wärmeleistung", color="r")
                 ax15.plot(data.loc[:, "tabs_cool_demand"].resample("D").mean(), linewidth=0.3, label="Kälteleistung")
                 ax15.set_title("TABS Heiz- und Kühllast")
                 ax15.set_ylabel('Leistung in [kW]')
-                ax15.set_xlabel('Zeit')
+                # ax15.set_xlabel('Zeit')
                 ax15.set_ylim(auto=True)
                 # ax15.set_ylim([0, 5000])
                 # ax15.set_xlim([5000, 8760])
                 # ax15.autoscale()
                 ax15.margins(0.01)
-                ax15.xaxis.set_minor_locator(minormonths)
-                ax15.xaxis.set_major_locator(majormonths)
-                ax15.xaxis.set_major_formatter(format)
+                # ax15.xaxis.set_minor_locator(minormonths)
+                ax15.xaxis.set_major_locator(locator)
+                ax15.xaxis.set_major_formatter(formatter)
 
                 plt.tight_layout()
                 plt.savefig(os.path.join(output_path, "daily_single", bldg.name + "_TABS_demand_TABS+_D_plot.pdf"), dpi=200)
@@ -738,16 +743,16 @@ def plot_results(buildings, csv_path, output_path):
                 ax16.plot(data.loc[:, "convective_cool_demand"].resample("D").mean(), linewidth=0.3, label="Kälteleistung")
                 ax16.set_title("Zusatz Heiz- und Kühllast")
                 ax16.set_ylabel('Leistung in [kW]')
-                ax16.set_xlabel('Zeit')
+                # ax16.set_xlabel('Zeit')
                 ax16.set_ylim(auto=True)
                 ax16.margins(0.01)
-                ax16.xaxis.set_minor_locator(minormonths)
-                ax16.xaxis.set_major_locator(majormonths)
-                ax16.xaxis.set_major_formatter(format)
+                # ax16.xaxis.set_minor_locator(minormonths)
+                ax16.xaxis.set_major_locator(locator)
+                ax16.xaxis.set_major_formatter(formatter)
 
                 plt.tight_layout()
                 plt.savefig(os.path.join(output_path, "daily_single", bldg.name + "_plus_demand_TABS+_D_plot.pdf"), dpi=200)
-                plt.close("all")"""
+                plt.close("all")
 
             # Use this to slice your simulation results, to the desired timespan
             data = data.drop(data.index[0:240])
@@ -900,6 +905,222 @@ def excel_export(buildings, csv_path, output_path):
     data.to_csv(os.path.join(output_path, "buildings_temp_demands.csv"))
     data.to_excel(os.path.join(output_path, "buildings_excel_temp_demands.xlsx"))
     print("Export done! :)")
+
+def boxplot_results(buildings, csv_path, output_path):
+    """Create plots of heating, cooling and temperature time series from .csv
+    files with hourly demands created by MA_cwe_2_analyse_results.py
+
+    Parameters
+    ----------
+    buildings : prj.buildings
+        load TEASER bldgs from a pickle project file
+    csv_path : str
+        Path where .csv files are be stored.
+    output_path : str
+        Path where plots should be stored.
+
+    """
+    boxplot_path = os.path.join(output_path, "boxplot")
+
+    if not os.path.exists(boxplot_path):
+        os.makedirs(boxplot_path)
+
+    # define data frames for each building type and construction year
+    d_resample_heat_EFH_90 = pd.DataFrame()
+    d_resample_heat_MFH_90 = pd.DataFrame()
+    d_resample_heat_Office_90 = pd.DataFrame()
+    d_resample_heat_EFH_10 = pd.DataFrame()
+    d_resample_heat_MFH_10 = pd.DataFrame()
+    d_resample_heat_Office_10 = pd.DataFrame()
+    d_resample_spec_heat_EFH_90 = pd.DataFrame()
+    d_resample_spec_heat_MFH_90 = pd.DataFrame()
+    d_resample_spec_heat_Office_90 = pd.DataFrame()
+    d_resample_spec_heat_EFH_10 = pd.DataFrame()
+    d_resample_spec_heat_MFH_10 = pd.DataFrame()
+    d_resample_spec_heat_Office_10 = pd.DataFrame()
+
+    for bldg in buildings:
+
+        print("reading building {}".format(bldg.name))
+        # read hourly demands
+        heat_data = pd.read_csv(os.path.join(csv_path, bldg.name + "_heat.csv"), index_col=0)
+        cool_data = pd.read_csv(os.path.join(csv_path, bldg.name + "_cool.csv"), index_col=0)
+
+        data = pd.DataFrame(
+            index=pd.date_range(
+                start=datetime.datetime(2021, 1, 1, 0, 0, 0),
+                end=datetime.datetime(2021, 12, 31, 23, 55),
+                freq="H", ),
+            columns=["Wärmeleistung", "Kälteleistung", "Spez Wärmeleistung"], )
+
+        # divide demands by 1000 to get kW
+        data.loc[:, "Wärmeleistung"] = heat_data.loc[:, bldg.name + " PHeat"].values / 1000
+        data.loc[:, "Kälteleistung"] = -cool_data.loc[:, bldg.name + " PCool"].values / 1000
+
+        # divide demands by building net leased area to get W/m^2
+        data.loc[:, "Spez Wärmeleistung"] = heat_data.loc[:, bldg.name + " PHeat"].values / bldg.net_leased_area
+
+        # resample data to daily mean values and filter out top "x" values
+        d_resample_heat = data.loc[:, "Wärmeleistung"].resample('D').mean().nlargest(50, keep='all')
+        d_resample_spec_heat = data.loc[:, "Spez Wärmeleistung"].resample('D').mean().nlargest(50, keep='all')
+
+        # drop datetime index
+        d_resample_heat.reset_index(drop=True, inplace=True)
+        d_resample_spec_heat.reset_index(drop=True, inplace=True)
+
+        # set parameter for later use in column name
+        if "radiator" in bldg.name:
+            system = "rad"
+        elif "panel" in bldg.name:
+            system = "panel"
+        elif "convective" in bldg.name:
+            system = "conv"
+        elif "tabs" in bldg.name:
+            system = "tabs+"
+
+        if "heavy" in bldg.name:
+            type = "h"
+        elif "light" in bldg.name:
+            type = "l"
+
+        # group buildings by building types and construction year
+        if "EFH" in bldg.name:
+            if "1990" in bldg.name:
+                d_resample_heat_EFH_90.loc[:, system + "_" + type] = d_resample_heat
+                d_resample_spec_heat_EFH_90.loc[:, system + "_" + type] = d_resample_spec_heat
+            elif "2010" in bldg.name:
+                d_resample_heat_EFH_10.loc[:, system + "_" + type] = d_resample_heat
+                d_resample_spec_heat_EFH_10.loc[:, system + "_" + type] = d_resample_spec_heat
+        if "MFH" in bldg.name:
+            if "1990" in bldg.name:
+                d_resample_heat_MFH_90.loc[:, system + "_" + type] = d_resample_heat
+                d_resample_spec_heat_MFH_90.loc[:, system + "_" + type] = d_resample_spec_heat
+            elif "2010" in bldg.name:
+                d_resample_heat_MFH_10.loc[:, system + "_" + type] = d_resample_heat
+                d_resample_spec_heat_MFH_10.loc[:, system + "_" + type] = d_resample_spec_heat
+        if "Office" in bldg.name:
+            if "1990" in bldg.name:
+                d_resample_heat_Office_90.loc[:, system + "_" + type] = d_resample_heat
+                d_resample_spec_heat_Office_90.loc[:, system + "_" + type] = d_resample_spec_heat
+            elif "2010" in bldg.name:
+                d_resample_heat_Office_10.loc[:, system + "_" + type] = d_resample_heat
+                d_resample_spec_heat_Office_10.loc[:, system + "_" + type] = d_resample_spec_heat
+
+    # rearrange plots to group heavy and light buildings
+    d_resample_heat_EFH_90 = d_resample_heat_EFH_90[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_spec_heat_EFH_90 = d_resample_spec_heat_EFH_90[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_heat_EFH_10 = d_resample_heat_EFH_10[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_spec_heat_EFH_10 = d_resample_spec_heat_EFH_10[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_heat_MFH_90 = d_resample_heat_MFH_90[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_spec_heat_MFH_90 = d_resample_spec_heat_MFH_90[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_heat_MFH_10 = d_resample_heat_MFH_10[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_spec_heat_MFH_10 = d_resample_spec_heat_MFH_10[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_heat_Office_90 = d_resample_heat_Office_90[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_spec_heat_Office_90 = d_resample_spec_heat_Office_90[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_heat_Office_10 = d_resample_heat_Office_10[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_spec_heat_Office_10 = d_resample_spec_heat_Office_10[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+
+    # plot max heat per building type and construction year
+    fig, ax = plt.subplots()
+    ax.boxplot(d_resample_heat_EFH_90, labels=d_resample_heat_EFH_90.columns)
+    ax.set_title("EFH 1990")
+    ax.set_ylabel("Max Heat [kW]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "EFH_90_boxplot.pdf"), dpi=200)
+    ax.clear()
+    ax.boxplot(d_resample_heat_EFH_10, labels=d_resample_heat_EFH_10.columns)
+    ax.set_title("EFH 2010")
+    ax.set_ylabel("Max Heat [kW]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "EFH_10_boxplot.pdf"), dpi=200)
+    ax.clear()
+    ax.boxplot(d_resample_heat_MFH_90, labels=d_resample_heat_MFH_90.columns)
+    ax.set_title("MFH 1990")
+    ax.set_ylabel("Max Heat [kW]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "MFH_90_boxplot.pdf"), dpi=200)
+    ax.clear()
+    ax.boxplot(d_resample_heat_MFH_10, labels=d_resample_heat_MFH_10.columns)
+    ax.set_title("MFH 2010")
+    ax.set_ylabel("Max Heat [kW]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "MFH_10_boxplot.pdf"), dpi=200)
+    ax.clear()
+    ax.boxplot(d_resample_heat_Office_90, labels=d_resample_heat_Office_90.columns)
+    ax.set_title("Office 1990")
+    ax.set_ylabel("Max Heat [kW]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "Office_90_boxplot.pdf"), dpi=200)
+    ax.clear()
+    ax.boxplot(d_resample_heat_Office_10, labels=d_resample_heat_Office_10.columns)
+    ax.set_title("Office 2010")
+    ax.set_ylabel("Max Heat [kW]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "Office_10_boxplot.pdf"), dpi=200)
+    ax.clear()
+
+    # plot spec max heat per building type and construction year
+    fig2, ax2 = plt.subplots()
+    ax2.boxplot(d_resample_spec_heat_EFH_90, labels=d_resample_spec_heat_EFH_90.columns)
+    ax2.set_title("EFH 1990")
+    ax2.set_ylabel("Spec Max Heat [W/$m^2$]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "EFH_90_spec_boxplot.pdf"), dpi=200)
+    ax2.clear()
+    ax2.boxplot(d_resample_spec_heat_EFH_10, labels=d_resample_spec_heat_EFH_10.columns)
+    ax2.set_title("EFH 2010")
+    ax2.set_ylabel("Spec Max Heat [W/$m^2$]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "EFH_10_spec_boxplot.pdf"), dpi=200)
+    ax2.clear()
+    ax2.boxplot(d_resample_spec_heat_MFH_90, labels=d_resample_spec_heat_MFH_90.columns)
+    ax2.set_title("MFH 1990")
+    ax2.set_ylabel("Spec Max Heat [W/$m^2$]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "MFH_90_spec_boxplot.pdf"), dpi=200)
+    ax2.clear()
+    ax2.boxplot(d_resample_spec_heat_MFH_10, labels=d_resample_spec_heat_MFH_10.columns)
+    ax2.set_title("MFH 2010")
+    ax2.set_ylabel("Spec Max Heat [W/$m^2$]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "MFH_10_spec_boxplot.pdf"), dpi=200)
+    ax2.clear()
+    ax2.boxplot(d_resample_spec_heat_Office_90, labels=d_resample_spec_heat_Office_90.columns)
+    ax2.set_title("Office 1990")
+    ax2.set_ylabel("Spec Max Heat [W/$m^2$]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "Office_90_spec_boxplot.pdf"), dpi=200)
+    ax2.clear()
+    ax2.boxplot(d_resample_spec_heat_Office_10, labels=d_resample_spec_heat_Office_10.columns)
+    ax2.set_title("Office 2010")
+    ax2.set_ylabel("Spec Max Heat [W/$m^2$]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "Office_10_spec_boxplot.pdf"), dpi=200)
+    ax2.clear()
+    """
+    d_resample_heat_EFH_90.plot(kind='box')
+    set_title("Operative Temperatur")
+    set_ylabel('Temperatur in [°C]')
+    plt.savefig(os.path.join(boxplot_path, "EFH_90_boxplot.pdf"), dpi=200)
+    plt.clf()
+    d_resample_heat_MFH_90.plot(kind='box')
+    plt.savefig(os.path.join(boxplot_path, "MFH_90_boxplot.pdf"), dpi=200)
+    plt.clf()
+    d_resample_heat_Office_90.plot(kind='box')
+    plt.savefig(os.path.join(boxplot_path, "Office_90_boxplot.pdf"), dpi=200)
+    plt.clf()
+    d_resample_heat_EFH_10.plot(kind='box')
+    plt.savefig(os.path.join(boxplot_path, "EFH_10_boxplot.pdf"), dpi=200)
+    plt.clf()
+    d_resample_heat_MFH_10.plot(kind='box')
+    plt.savefig(os.path.join(boxplot_path, "MFH_10_boxplot.pdf"), dpi=200)
+    plt.clf()
+    d_resample_heat_Office_10.plot(kind='box')
+    plt.savefig(os.path.join(boxplot_path, "Office_10_boxplot.pdf"), dpi=200)
+    plt.close("all")
+    """
+    d_resample_heat_EFH_90.to_excel(os.path.join(boxplot_path, "EFH_90.xlsx"))
+    d_resample_heat_EFH_10.to_excel(os.path.join(boxplot_path, "EFH_10.xlsx"))
 
 def old_plot_results(heat, cool, title, output_path):
     # Very simple and basic plotting of heating and cooling time series.
