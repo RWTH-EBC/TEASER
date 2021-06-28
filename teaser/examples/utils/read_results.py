@@ -755,36 +755,73 @@ def plot_results(buildings, csv_path, output_path):
                 plt.close("all")
 
             # Use this to slice your simulation results, to the desired timespan
+            # data = data.drop(data.index[0:240])
+            # data = data.drop(data.index[1200:8760])
             data = data.drop(data.index[0:240])
-            data = data.drop(data.index[1200:8760])
+            data = data.drop(data.index[408:8760])
 
             # plot the indoor temperature and heating/cooling demand for day 10 to day 50 in two subplots
             fig13, (ax17, ax18) = plt.subplots(2)
             ax17.plot(data.loc[:, "Temperatur"], linewidth=0.3)
             ax17.set_title("Operative Temperatur")
             ax17.set_ylabel('Temperatur in [°C]')
-            ax17.set_ylim([18, 28])
+            ax17.set_ylim([18, 24])
             # ax17.set_xlim([10, 50])
             ax17.margins(0.01)
-            ax17.xaxis.set_minor_locator(mdates.DayLocator(interval=5))
-            ax17.xaxis.set_major_locator(mdates.DayLocator(interval=10))
+            ax17.xaxis.set_minor_locator(mdates.DayLocator(interval=1))
+            ax17.xaxis.set_major_locator(mdates.DayLocator(interval=2))
             ax17.xaxis.set_major_formatter(format)
             ax18.plot(data.loc[:, "Wärmeleistung"], linewidth=0.3, label="Wärmeleistung", color="r")
-            ax18.plot(data.loc[:, "Kälteleistung"], linewidth=0.3, label="Kälteleistung")
+            ax18.plot(-data.loc[:, "Kälteleistung"], linewidth=0.3, label="Kälteleistung")
             ax18.set_title("Heiz- und Kühllast")
             ax18.set_ylabel('Leistung in [kW]')
             ax18.set_xlabel('Zeit')
-            # ax18.set_ylim([0, 5000])
+            ax18.set_ylim([0, 45])
             # ax18.set_xlim([10, 50])
             ax18.margins(0.01)
-            ax18.xaxis.set_minor_locator(mdates.DayLocator(interval=5))
-            ax18.xaxis.set_major_locator(mdates.DayLocator(interval=10))
+            ax18.xaxis.set_minor_locator(mdates.DayLocator(interval=1))
+            ax18.xaxis.set_major_locator(mdates.DayLocator(interval=2))
             ax18.xaxis.set_major_formatter(format)
 
             # plt.grid(color='green', linestyle='--', linewidth=0.1)
             plt.tight_layout()
-            plt.savefig(os.path.join(output_path4, bldg.name + "_day10-50_plot.pdf"), dpi=200)
+            #plt.savefig(os.path.join(output_path4, bldg.name + "_day10-20_plot.pdf"), dpi=200)
+            plt.savefig(os.path.join(output_path4, bldg.name + "_day10-20_plot.png"), dpi=200)
             plt.close("all")
+
+            conlocator = mdates.AutoDateLocator(minticks=3, maxticks=7)
+            conformatter = mdates.ConciseDateFormatter(conlocator)
+            """
+            # plot the indoor temperature and heating/cooling demand for day 10 to day 50 in two subplots
+            fig14, (ax19, ax20) = plt.subplots(2)
+            ax19.plot(data.loc[:, "Temperatur"].resample("D").mean(), linewidth=0.3)
+            ax19.set_title("Operative Temperatur")
+            ax19.set_ylabel('Temperatur in [°C]')
+            ax19.set_ylim([18, 30])
+            # ax17.set_xlim([10, 50])
+            ax19.margins(0.01)
+            # ax19.xaxis.set_minor_locator(mdates.DayLocator(interval=5))
+            # ax19.xaxis.set_minor_formatter(mdates.DateFormatter("%d"))
+            ax19.xaxis.set_major_locator(conlocator)
+            ax19.xaxis.set_major_formatter(conformatter)
+            ax20.plot(data.loc[:, "Wärmeleistung"].resample("D").mean(), linewidth=0.3, label="Wärmeleistung", color="r")
+            ax20.plot(-data.loc[:, "Kälteleistung"].resample("D").mean(), linewidth=0.3, label="Kälteleistung")
+            ax20.set_title("Heiz- und Kühllast")
+            ax20.set_ylabel('Leistung in [kW]')
+            # ax20.set_xlabel('Zeit')
+            # ax18.set_ylim([0, 5000])
+            # ax18.set_xlim([10, 50])
+            ax20.margins(0.01)
+            # ax20.xaxis.set_minor_locator(mdates.DayLocator(interval=5))
+            # ax20.xaxis.set_minor_formatter(mdates.DateFormatter("%d"))
+            ax20.xaxis.set_major_locator(conlocator)
+            ax20.xaxis.set_major_formatter(conformatter)
+
+            # plt.grid(color='green', linestyle='--', linewidth=0.1)
+            plt.tight_layout()
+            plt.savefig(os.path.join(output_path4, bldg.name + "_sliced_day10-50_plot.pdf"), dpi=200)
+            plt.close("all")
+            """
 
         except BaseException:
             # Dymola has strange exceptions
@@ -926,6 +963,7 @@ def boxplot_results(buildings, csv_path, output_path):
         os.makedirs(boxplot_path)
 
     # define data frames for each building type and construction year
+    """
     d_resample_heat_EFH_90 = pd.DataFrame()
     d_resample_heat_MFH_90 = pd.DataFrame()
     d_resample_heat_Office_90 = pd.DataFrame()
@@ -938,6 +976,31 @@ def boxplot_results(buildings, csv_path, output_path):
     d_resample_spec_heat_EFH_10 = pd.DataFrame()
     d_resample_spec_heat_MFH_10 = pd.DataFrame()
     d_resample_spec_heat_Office_10 = pd.DataFrame()
+    """
+    d_resample_heat_EFH_1990_100 = pd.DataFrame()
+    d_resample_heat_MFH_1990_1000 = pd.DataFrame()
+    d_resample_heat_Office_1990_3000 = pd.DataFrame()
+    d_resample_heat_EFH_1990_200 = pd.DataFrame()
+    d_resample_heat_MFH_1990_2000 = pd.DataFrame()
+    d_resample_heat_Office_1990_5000 = pd.DataFrame()
+    d_resample_heat_EFH_2010_100 = pd.DataFrame()
+    d_resample_heat_MFH_2010_1000 = pd.DataFrame()
+    d_resample_heat_Office_2010_3000 = pd.DataFrame()
+    d_resample_heat_EFH_2010_200 = pd.DataFrame()
+    d_resample_heat_MFH_2010_2000 = pd.DataFrame()
+    d_resample_heat_Office_2010_5000 = pd.DataFrame()
+    d_resample_spec_heat_EFH_1990_100 = pd.DataFrame()
+    d_resample_spec_heat_MFH_1990_1000 = pd.DataFrame()
+    d_resample_spec_heat_Office_1990_3000 = pd.DataFrame()
+    d_resample_spec_heat_EFH_1990_200 = pd.DataFrame()
+    d_resample_spec_heat_MFH_1990_2000 = pd.DataFrame()
+    d_resample_spec_heat_Office_1990_5000 = pd.DataFrame()
+    d_resample_spec_heat_EFH_2010_100 = pd.DataFrame()
+    d_resample_spec_heat_MFH_2010_1000 = pd.DataFrame()
+    d_resample_spec_heat_Office_2010_3000 = pd.DataFrame()
+    d_resample_spec_heat_EFH_2010_200 = pd.DataFrame()
+    d_resample_spec_heat_MFH_2010_2000 = pd.DataFrame()
+    d_resample_spec_heat_Office_2010_5000 = pd.DataFrame()
 
     for bldg in buildings:
 
@@ -986,6 +1049,56 @@ def boxplot_results(buildings, csv_path, output_path):
         # group buildings by building types and construction year
         if "EFH" in bldg.name:
             if "1990" in bldg.name:
+                if "100" in bldg.name:
+                    d_resample_heat_EFH_1990_100.loc[:, system + "_" + type] = d_resample_heat
+                    d_resample_spec_heat_EFH_1990_100.loc[:, system + "_" + type] = d_resample_spec_heat
+                elif "200" in bldg.name:
+                    d_resample_heat_EFH_1990_200.loc[:, system + "_" + type] = d_resample_heat
+                    d_resample_spec_heat_EFH_1990_200.loc[:, system + "_" + type] = d_resample_spec_heat
+            elif "2010" in bldg.name:
+                if "100" in bldg.name:
+                    d_resample_heat_EFH_2010_100.loc[:, system + "_" + type] = d_resample_heat
+                    d_resample_spec_heat_EFH_2010_100.loc[:, system + "_" + type] = d_resample_spec_heat
+                elif "200" in bldg.name:
+                    d_resample_heat_EFH_2010_200.loc[:, system + "_" + type] = d_resample_heat
+                    d_resample_spec_heat_EFH_2010_200.loc[:, system + "_" + type] = d_resample_spec_heat
+
+        if "MFH" in bldg.name:
+            if "1990" in bldg.name:
+                if "1000" in bldg.name:
+                    d_resample_heat_MFH_1990_1000.loc[:, system + "_" + type] = d_resample_heat
+                    d_resample_spec_heat_MFH_1990_1000.loc[:, system + "_" + type] = d_resample_spec_heat
+                elif "2000" in bldg.name:
+                    d_resample_heat_MFH_1990_2000.loc[:, system + "_" + type] = d_resample_heat
+                    d_resample_spec_heat_MFH_1990_2000.loc[:, system + "_" + type] = d_resample_spec_heat
+            elif "2010" in bldg.name:
+                if "1000" in bldg.name:
+                    d_resample_heat_MFH_2010_1000.loc[:, system + "_" + type] = d_resample_heat
+                    d_resample_spec_heat_MFH_2010_1000.loc[:, system + "_" + type] = d_resample_spec_heat
+                elif "2000" in bldg.name:
+                    d_resample_heat_MFH_2010_2000.loc[:, system + "_" + type] = d_resample_heat
+                    d_resample_spec_heat_MFH_2010_2000.loc[:, system + "_" + type] = d_resample_spec_heat
+
+        if "Office" in bldg.name:
+            if "1990" in bldg.name:
+                if "3000" in bldg.name:
+                    d_resample_heat_Office_1990_3000.loc[:, system + "_" + type] = d_resample_heat
+                    d_resample_spec_heat_Office_1990_3000.loc[:, system + "_" + type] = d_resample_spec_heat
+                elif "5000" in bldg.name:
+                    d_resample_heat_Office_1990_5000.loc[:, system + "_" + type] = d_resample_heat
+                    d_resample_spec_heat_Office_1990_5000.loc[:, system + "_" + type] = d_resample_spec_heat
+            elif "2010" in bldg.name:
+                if "3000" in bldg.name:
+                    d_resample_heat_Office_2010_3000.loc[:, system + "_" + type] = d_resample_heat
+                    d_resample_spec_heat_Office_2010_3000.loc[:, system + "_" + type] = d_resample_spec_heat
+                elif "5000" in bldg.name:
+                    d_resample_heat_Office_2010_5000.loc[:, system + "_" + type] = d_resample_heat
+                    d_resample_spec_heat_Office_2010_5000.loc[:, system + "_" + type] = d_resample_spec_heat
+
+        """
+        # group buildings by building types and construction year
+        if "EFH" in bldg.name:
+            if "1990" in bldg.name:
                 d_resample_heat_EFH_90.loc[:, system + "_" + type] = d_resample_heat
                 d_resample_spec_heat_EFH_90.loc[:, system + "_" + type] = d_resample_spec_heat
             elif "2010" in bldg.name:
@@ -1005,12 +1118,13 @@ def boxplot_results(buildings, csv_path, output_path):
             elif "2010" in bldg.name:
                 d_resample_heat_Office_10.loc[:, system + "_" + type] = d_resample_heat
                 d_resample_spec_heat_Office_10.loc[:, system + "_" + type] = d_resample_spec_heat
-
+        """
+    """   
     # rearrange plots to group heavy and light buildings
-    d_resample_heat_EFH_90 = d_resample_heat_EFH_90[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
-    d_resample_spec_heat_EFH_90 = d_resample_spec_heat_EFH_90[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
-    d_resample_heat_EFH_10 = d_resample_heat_EFH_10[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
-    d_resample_spec_heat_EFH_10 = d_resample_spec_heat_EFH_10[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    #d_resample_heat_EFH_90 = d_resample_heat_EFH_90[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    #d_resample_spec_heat_EFH_90 = d_resample_spec_heat_EFH_90[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    #d_resample_heat_EFH_10 = d_resample_heat_EFH_10[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    #d_resample_spec_heat_EFH_10 = d_resample_spec_heat_EFH_10[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
     d_resample_heat_MFH_90 = d_resample_heat_MFH_90[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
     d_resample_spec_heat_MFH_90 = d_resample_spec_heat_MFH_90[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
     d_resample_heat_MFH_10 = d_resample_heat_MFH_10[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
@@ -1019,7 +1133,217 @@ def boxplot_results(buildings, csv_path, output_path):
     d_resample_spec_heat_Office_90 = d_resample_spec_heat_Office_90[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
     d_resample_heat_Office_10 = d_resample_heat_Office_10[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
     d_resample_spec_heat_Office_10 = d_resample_spec_heat_Office_10[["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    """
 
+    # rearrange plots to group heavy and light buildings
+    d_resample_heat_EFH_1990_100 = d_resample_heat_EFH_1990_100[
+        ["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_spec_heat_EFH_1990_100 = d_resample_spec_heat_EFH_1990_100[
+        ["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_heat_EFH_2010_100 = d_resample_heat_EFH_2010_100[
+        ["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_spec_heat_EFH_2010_100 = d_resample_spec_heat_EFH_2010_100[
+        ["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_heat_EFH_1990_200 = d_resample_heat_EFH_1990_200[
+        ["rad_h", "tabs+_h", "panel_h", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_spec_heat_EFH_1990_200 = d_resample_spec_heat_EFH_1990_200[
+        ["rad_h", "tabs+_h", "panel_h", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_heat_EFH_2010_200 = d_resample_heat_EFH_2010_200[
+        ["rad_h", "tabs+_h", "panel_h", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_spec_heat_EFH_2010_200 = d_resample_spec_heat_EFH_2010_200[
+        ["rad_h", "tabs+_h", "panel_h", "rad_l", "tabs+_l", "panel_l"]]
+
+    d_resample_heat_MFH_1990_1000 = d_resample_heat_MFH_1990_1000[
+        ["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_spec_heat_MFH_1990_1000 = d_resample_spec_heat_MFH_1990_1000[
+        ["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_heat_MFH_2010_1000 = d_resample_heat_MFH_2010_1000[
+        ["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_spec_heat_MFH_2010_1000 = d_resample_spec_heat_MFH_2010_1000[
+        ["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_heat_MFH_1990_2000 = d_resample_heat_MFH_1990_2000[
+        ["rad_h", "tabs+_h", "panel_h", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_spec_heat_MFH_1990_2000 = d_resample_spec_heat_MFH_1990_2000[
+        ["rad_h", "tabs+_h", "panel_h", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_heat_MFH_2010_2000 = d_resample_heat_MFH_2010_2000[
+        ["rad_h", "tabs+_h", "panel_h", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_spec_heat_MFH_2010_2000 = d_resample_spec_heat_MFH_2010_2000[
+        ["rad_h", "tabs+_h", "panel_h", "rad_l", "tabs+_l", "panel_l"]]
+
+    d_resample_heat_Office_1990_3000 = d_resample_heat_Office_1990_3000[
+        ["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_spec_heat_Office_1990_3000 = d_resample_spec_heat_Office_1990_3000[
+        ["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_heat_Office_2010_3000 = d_resample_heat_Office_2010_3000[
+        ["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_spec_heat_Office_2010_3000 = d_resample_spec_heat_Office_2010_3000[
+        ["conv_h", "rad_h", "tabs+_h", "panel_h", "conv_l", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_heat_Office_1990_5000 = d_resample_heat_Office_1990_5000[
+        ["rad_h", "tabs+_h", "panel_h", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_spec_heat_Office_1990_5000 = d_resample_spec_heat_Office_1990_5000[
+        ["rad_h", "tabs+_h", "panel_h", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_heat_Office_2010_5000 = d_resample_heat_Office_2010_5000[
+        ["rad_h", "tabs+_h", "panel_h", "rad_l", "tabs+_l", "panel_l"]]
+    d_resample_spec_heat_Office_2010_5000 = d_resample_spec_heat_Office_2010_5000[
+        ["rad_h", "tabs+_h", "panel_h", "rad_l", "tabs+_l", "panel_l"]]
+
+    # plot max heat per building type and construction year
+    fig, ax = plt.subplots()
+    ax.boxplot(d_resample_heat_EFH_1990_100, labels=d_resample_heat_EFH_1990_100.columns)
+    ax.set_title("EFH 1990 100 $m^2$")
+    ax.set_ylabel("Max Heat [kW]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "EFH_1990_100_boxplot.pdf"), dpi=200)
+    ax.clear()
+    ax.boxplot(d_resample_heat_EFH_1990_200, labels=d_resample_heat_EFH_1990_200.columns)
+    ax.set_title("EFH 1990 200 $m^2$")
+    ax.set_ylabel("Max Heat [kW]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "EFH_1990_200_boxplot.pdf"), dpi=200)
+    ax.clear()
+    # ax.boxplot(d_resample_heat_EFH_10, labels=d_resample_heat_EFH_10.columns)
+    ax.boxplot(d_resample_heat_EFH_2010_100, labels=d_resample_heat_EFH_2010_100.columns)
+    ax.set_title("EFH 2010 100 $m^2$")
+    ax.set_ylabel("Max Heat [kW]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "EFH_2010_100_boxplot.pdf"), dpi=200)
+    ax.clear()
+    # ax.boxplot(d_resample_heat_EFH_10, labels=d_resample_heat_EFH_10.columns)
+    ax.boxplot(d_resample_heat_EFH_2010_200, labels=d_resample_heat_EFH_2010_200.columns)
+    ax.set_title("EFH 2010 200 $m^2$")
+    ax.set_ylabel("Max Heat [kW]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "EFH_2010_200_boxplot.pdf"), dpi=200)
+    ax.clear()
+    ax.boxplot(d_resample_heat_MFH_1990_1000, labels=d_resample_heat_MFH_1990_1000.columns)
+    ax.set_title("MFH 1990 1000 $m^2$")
+    ax.set_ylabel("Max Heat [kW]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "MFH_1990_1000_boxplot.pdf"), dpi=200)
+    ax.clear()
+    ax.boxplot(d_resample_heat_MFH_1990_2000, labels=d_resample_heat_MFH_1990_2000.columns)
+    ax.set_title("MFH 1990 2000 $m^2$")
+    ax.set_ylabel("Max Heat [kW]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "MFH_1990_2000_boxplot.pdf"), dpi=200)
+    ax.clear()
+    ax.boxplot(d_resample_heat_MFH_2010_1000, labels=d_resample_heat_MFH_2010_1000.columns)
+    ax.set_title("MFH 2010 1000 $m^2$")
+    ax.set_ylabel("Max Heat [kW]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "MFH_2010_1000_boxplot.pdf"), dpi=200)
+    ax.clear()
+    ax.boxplot(d_resample_heat_MFH_2010_2000, labels=d_resample_heat_MFH_2010_2000.columns)
+    ax.set_title("MFH 2010 2000 $m^2$")
+    ax.set_ylabel("Max Heat [kW]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "MFH_2010_2000_boxplot.pdf"), dpi=200)
+    ax.clear()
+    ax.boxplot(d_resample_heat_Office_1990_3000, labels=d_resample_heat_Office_1990_3000.columns)
+    ax.set_title("Office 1990 3000 $m^2$")
+    ax.set_ylabel("Max Heat [kW]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "Office_1990_3000_boxplot.pdf"), dpi=200)
+    ax.clear()
+    ax.boxplot(d_resample_heat_Office_1990_5000, labels=d_resample_heat_Office_1990_5000.columns)
+    ax.set_title("Office 1990 5000 $m^2$")
+    ax.set_ylabel("Max Heat [kW]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "Office_1990_5000_boxplot.pdf"), dpi=200)
+    ax.clear()
+    ax.boxplot(d_resample_heat_Office_2010_3000, labels=d_resample_heat_Office_2010_3000.columns)
+    ax.set_title("Office 2010 3000 $m^2$")
+    ax.set_ylabel("Max Heat [kW]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "Office_2010_3000_boxplot.pdf"), dpi=200)
+    ax.clear()
+    ax.boxplot(d_resample_heat_Office_2010_5000, labels=d_resample_heat_Office_2010_5000.columns)
+    ax.set_title("Office 2010 5000 $m^2$")
+    ax.set_ylabel("Max Heat [kW]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "Office_2010_5000_boxplot.pdf"), dpi=200)
+    ax.clear()
+
+    # plot spec max heat per building type and construction year
+    fig2, ax2 = plt.subplots()
+    ax2.boxplot(d_resample_spec_heat_EFH_1990_100, labels=d_resample_spec_heat_EFH_1990_100.columns)
+    ax2.set_title("EFH 1990 100 $m^2$")
+    ax2.set_ylabel("Spec Max Heat [W/$m^2$]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "EFH_1990_100_spec_boxplot.pdf"), dpi=200)
+    ax2.clear()
+    ax2.boxplot(d_resample_spec_heat_EFH_1990_200, labels=d_resample_spec_heat_EFH_1990_200.columns)
+    ax2.set_title("EFH 1990 200 $m^2$")
+    ax2.set_ylabel("Spec Max Heat [W/$m^2$]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "EFH_1990_200_spec_boxplot.pdf"), dpi=200)
+    ax2.clear()
+    ax2.boxplot(d_resample_spec_heat_EFH_2010_100, labels=d_resample_spec_heat_EFH_2010_100.columns)
+    ax2.set_title("EFH 2010 100 $m^2$")
+    ax2.set_ylabel("Spec Max Heat [W/$m^2$]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "EFH_2010_100_spec_boxplot.pdf"), dpi=200)
+    ax2.clear()
+    ax2.boxplot(d_resample_spec_heat_EFH_2010_200, labels=d_resample_spec_heat_EFH_2010_200.columns)
+    ax2.set_title("EFH 2010 200 $m^2$")
+    ax2.set_ylabel("Spec Max Heat [W/$m^2$]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "EFH_2010_200_spec_boxplot.pdf"), dpi=200)
+    ax2.clear()
+    ax2.boxplot(d_resample_spec_heat_MFH_1990_1000, labels=d_resample_spec_heat_MFH_1990_1000.columns)
+    ax2.set_title("MFH 1990 1000 $m^2$")
+    ax2.set_ylabel("Spec Max Heat [W/$m^2$]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "MFH_1990_1000_spec_boxplot.pdf"), dpi=200)
+    plt.savefig(os.path.join(boxplot_path, "MFH_1990_1000_spec_boxplot.png"), dpi=200)
+    ax2.clear()
+    ax2.boxplot(d_resample_spec_heat_MFH_1990_2000, labels=d_resample_spec_heat_MFH_1990_2000.columns)
+    ax2.set_title("MFH 1990 2000 $m^2$")
+    ax2.set_ylabel("Spec Max Heat [W/$m^2$]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "MFH_1990_2000_spec_boxplot.pdf"), dpi=200)
+    plt.savefig(os.path.join(boxplot_path, "MFH_1990_2000_spec_boxplot.png"), dpi=200)
+    ax2.clear()
+    ax2.boxplot(d_resample_spec_heat_MFH_2010_1000, labels=d_resample_spec_heat_MFH_2010_1000.columns)
+    ax2.set_title("MFH 2010 1000 $m^2$")
+    ax2.set_ylabel("Spec Max Heat [W/$m^2$]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "MFH_2010_1000_spec_boxplot.pdf"), dpi=200)
+    plt.savefig(os.path.join(boxplot_path, "MFH_2010_1000_spec_boxplot.png"), dpi=200)
+    ax2.clear()
+    ax2.boxplot(d_resample_spec_heat_MFH_2010_2000, labels=d_resample_spec_heat_MFH_2010_2000.columns)
+    ax2.set_title("MFH 2010 2000 $m^2$")
+    ax2.set_ylabel("Spec Max Heat [W/$m^2$]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "MFH_2010_2000_spec_boxplot.pdf"), dpi=200)
+    plt.savefig(os.path.join(boxplot_path, "MFH_2010_2000_spec_boxplot.png"), dpi=200)
+    ax2.clear()
+    ax2.boxplot(d_resample_spec_heat_Office_1990_3000, labels=d_resample_spec_heat_Office_1990_3000.columns)
+    ax2.set_title("Office 1990 3000 $m^2$")
+    ax2.set_ylabel("Spec Max Heat [W/$m^2$]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "Office_1990_3000_spec_boxplot.pdf"), dpi=200)
+    ax2.clear()
+    ax2.boxplot(d_resample_spec_heat_Office_1990_5000, labels=d_resample_spec_heat_Office_1990_5000.columns)
+    ax2.set_title("Office 1990 5000 $m^2$")
+    ax2.set_ylabel("Spec Max Heat [W/$m^2$]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "Office_1990_5000_spec_boxplot.pdf"), dpi=200)
+    ax2.clear()
+    ax2.boxplot(d_resample_spec_heat_Office_2010_3000, labels=d_resample_spec_heat_Office_2010_3000.columns)
+    ax2.set_title("Office 2010 3000 $m^2$")
+    ax2.set_ylabel("Spec Max Heat [W/$m^2$]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "Office_2010_3000_spec_boxplot.pdf"), dpi=200)
+    ax2.clear()
+    ax2.boxplot(d_resample_spec_heat_Office_2010_5000, labels=d_resample_spec_heat_Office_2010_5000.columns)
+    ax2.set_title("Office 2010 5000 $m^2$")
+    ax2.set_ylabel("Spec Max Heat [W/$m^2$]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "Office_2010_5000_spec_boxplot.pdf"), dpi=200)
+    ax2.clear()
+
+    """
     # plot max heat per building type and construction year
     fig, ax = plt.subplots()
     ax.boxplot(d_resample_heat_EFH_90, labels=d_resample_heat_EFH_90.columns)
@@ -1027,6 +1351,18 @@ def boxplot_results(buildings, csv_path, output_path):
     ax.set_ylabel("Max Heat [kW]")
     plt.tight_layout()
     plt.savefig(os.path.join(boxplot_path, "EFH_90_boxplot.pdf"), dpi=200)
+    ax.clear()
+    ax.boxplot(d_resample_heat_EFH_90, labels=d_resample_heat_EFH_90.columns)
+    ax.set_title("EFH 1990")
+    ax.set_ylabel("Max Heat [kW]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "EFH_90_boxplot.pdf"), dpi=200)
+    ax.clear()
+    ax.boxplot(d_resample_heat_EFH_10, labels=d_resample_heat_EFH_10.columns)
+    ax.set_title("EFH 2010")
+    ax.set_ylabel("Max Heat [kW]")
+    plt.tight_layout()
+    plt.savefig(os.path.join(boxplot_path, "EFH_10_boxplot.pdf"), dpi=200)
     ax.clear()
     ax.boxplot(d_resample_heat_EFH_10, labels=d_resample_heat_EFH_10.columns)
     ax.set_title("EFH 2010")
@@ -1058,7 +1394,7 @@ def boxplot_results(buildings, csv_path, output_path):
     plt.tight_layout()
     plt.savefig(os.path.join(boxplot_path, "Office_10_boxplot.pdf"), dpi=200)
     ax.clear()
-
+    
     # plot spec max heat per building type and construction year
     fig2, ax2 = plt.subplots()
     ax2.boxplot(d_resample_spec_heat_EFH_90, labels=d_resample_spec_heat_EFH_90.columns)
@@ -1078,12 +1414,14 @@ def boxplot_results(buildings, csv_path, output_path):
     ax2.set_ylabel("Spec Max Heat [W/$m^2$]")
     plt.tight_layout()
     plt.savefig(os.path.join(boxplot_path, "MFH_90_spec_boxplot.pdf"), dpi=200)
+    plt.savefig(os.path.join(boxplot_path, "MFH_90_spec_boxplot.png"), dpi=200)
     ax2.clear()
     ax2.boxplot(d_resample_spec_heat_MFH_10, labels=d_resample_spec_heat_MFH_10.columns)
     ax2.set_title("MFH 2010")
     ax2.set_ylabel("Spec Max Heat [W/$m^2$]")
     plt.tight_layout()
     plt.savefig(os.path.join(boxplot_path, "MFH_10_spec_boxplot.pdf"), dpi=200)
+    plt.savefig(os.path.join(boxplot_path, "MFH_10_spec_boxplot.png"), dpi=200)
     ax2.clear()
     ax2.boxplot(d_resample_spec_heat_Office_90, labels=d_resample_spec_heat_Office_90.columns)
     ax2.set_title("Office 1990")
@@ -1097,7 +1435,7 @@ def boxplot_results(buildings, csv_path, output_path):
     plt.tight_layout()
     plt.savefig(os.path.join(boxplot_path, "Office_10_spec_boxplot.pdf"), dpi=200)
     ax2.clear()
-    """
+    #######
     d_resample_heat_EFH_90.plot(kind='box')
     set_title("Operative Temperatur")
     set_ylabel('Temperatur in [°C]')
@@ -1119,8 +1457,8 @@ def boxplot_results(buildings, csv_path, output_path):
     plt.savefig(os.path.join(boxplot_path, "Office_10_boxplot.pdf"), dpi=200)
     plt.close("all")
     """
-    d_resample_heat_EFH_90.to_excel(os.path.join(boxplot_path, "EFH_90.xlsx"))
-    d_resample_heat_EFH_10.to_excel(os.path.join(boxplot_path, "EFH_10.xlsx"))
+    # d_resample_heat_EFH_90.to_excel(os.path.join(boxplot_path, "EFH_90.xlsx"))
+    # d_resample_heat_EFH_10.to_excel(os.path.join(boxplot_path, "EFH_10.xlsx"))
 
 def old_plot_results(heat, cool, title, output_path):
     # Very simple and basic plotting of heating and cooling time series.
