@@ -312,7 +312,7 @@ class ThermalZone(object):
         assert self.parent is not None, ass_error_1
 
         for floor in self.floors:
-            if(isSwimmingPool):
+            if isSwimmingPool and filePath != None:
                 inArea = bElement_excel_input.getInnerArea(zoneId=zoneId, 
                                                            element=floor,
                                                            filePath=filePath,
@@ -334,7 +334,7 @@ class ThermalZone(object):
 
 
         for ceiling in self.ceilings:
-            if(isSwimmingPool):
+            if isSwimmingPool and filePath != None:
                 inArea = bElement_excel_input.getInnerArea(zoneId=zoneId, 
                                                            element=ceiling,
                                                            filePath=filePath,
@@ -355,7 +355,7 @@ class ThermalZone(object):
                     self.parent.number_of_floors) * self.area
 
 
-        if isSwimmingPool:
+        if isSwimmingPool and filePath != None:
             for wall in self.inner_walls:
                 if(isSwimmingPool):
                     inArea = bElement_excel_input.getInnerArea(zoneId=zoneId, 

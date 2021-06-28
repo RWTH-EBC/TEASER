@@ -171,7 +171,7 @@ class BuildingElement(object):
         for count_layer in self.layer:
             r_conduc += (
                 count_layer.thickness / count_layer.material.thermal_conduc) \
-
+        
         self.r_conduc = r_conduc * (1 / self.area)
         """
         if (self.name == "PoolFloorWithEarthContact" or self.name == "PoolAreaAboveTechnicalRoom"
@@ -332,7 +332,7 @@ class BuildingElement(object):
         self._outer_convection = None
         self._outer_radiation = None
 
-        if isSwimmingPool == False:
+        if isSwimmingPool == False or filePath == None:
             buildingelement_input.load_type_element(element=self,
                                                     year=year,
                                                     construction=construction,

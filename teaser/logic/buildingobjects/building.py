@@ -194,7 +194,7 @@ class Building(object):
 
             for wall in zone.outer_walls:
                 if wall.orientation == orientation:
-                    if isSwimmingPool:                            
+                    if isSwimmingPool and filePath != None:                            
                         inArea = bElement_excel_input.getArea(zoneId, wall, orientation, 
                                                               filePath, sheetNameAreas,
                                                               numZones)
@@ -206,7 +206,7 @@ class Building(object):
 
             for ground in zone.ground_floors:                
                 if ground.orientation == orientation: 
-                    if isSwimmingPool:
+                    if isSwimmingPool and filePath != None:
                         inArea = bElement_excel_input.getArea(zoneId, ground, orientation, 
                                                               filePath, sheetNameAreas,
                                                               numZones)
@@ -218,7 +218,7 @@ class Building(object):
 
             for roof in zone.rooftops:
                 if roof.orientation == orientation:
-                    if isSwimmingPool:    
+                    if isSwimmingPool and filePath != None:    
                         if "becken" in zone.name:
                             continue
                         else:                           
@@ -262,7 +262,7 @@ class Building(object):
 
             for win in zone.windows:
                 if win.orientation == orientation:
-                    if isSwimmingPool:
+                    if isSwimmingPool and filePath != None:
                         inArea = bElement_excel_input.getArea(zoneId, win, orientation, 
                                                                 filePath, sheetNameAreas,
                                                                 numZones)
