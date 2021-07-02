@@ -129,6 +129,7 @@ class BuildingElement(object):
         self._tilt = None
         self._orientation = None
         self._inner_convection = None
+        self._inner_convection_cool = None
         self._inner_radiation = None
         self._outer_convection = None
         self._outer_radiation = None
@@ -499,6 +500,26 @@ class BuildingElement(object):
                 self.inner_radiation is not None and\
                 self.area is not None:
             self.calc_ua_value()
+
+    @property
+    def inner_convection_cool(self):
+        return self._inner_convection_cool
+
+    @inner_convection_cool.setter
+    def inner_convection_cool(self, value):
+
+        if isinstance(value, float):
+            pass
+        elif value is None:
+            pass
+        else:
+            try:
+                value = float(value)
+            except:
+                raise ValueError("Can't convert inner convection cool to float")
+
+        if value is not None:
+            self._inner_convection_cool = value
 
     @property
     def inner_radiation(self):
