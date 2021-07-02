@@ -765,7 +765,7 @@ def plot_results(buildings, csv_path, output_path):
             ax17.plot(data.loc[:, "Temperatur"], linewidth=0.3)
             ax17.set_title("Operative Temperatur")
             ax17.set_ylabel('Temperatur in [°C]')
-            ax17.set_ylim([18, 24])
+            ax17.set_ylim([19, 25])
             # ax17.set_xlim([10, 50])
             ax17.margins(0.01)
             ax17.xaxis.set_minor_locator(mdates.DayLocator(interval=1))
@@ -775,7 +775,7 @@ def plot_results(buildings, csv_path, output_path):
             ax18.plot(-data.loc[:, "Kälteleistung"], linewidth=0.3, label="Kälteleistung")
             ax18.set_title("Heiz- und Kühllast")
             ax18.set_ylabel('Leistung in [kW]')
-            ax18.set_xlabel('Zeit')
+            #ax18.set_xlabel('Zeit')
             ax18.set_ylim([0, 45])
             # ax18.set_xlim([10, 50])
             ax18.margins(0.01)
@@ -1024,8 +1024,8 @@ def boxplot_results(buildings, csv_path, output_path):
         data.loc[:, "Spez Wärmeleistung"] = heat_data.loc[:, bldg.name + " PHeat"].values / bldg.net_leased_area
 
         # resample data to daily mean values and filter out top "x" values
-        d_resample_heat = data.loc[:, "Wärmeleistung"].resample('D').mean().nlargest(50, keep='all')
-        d_resample_spec_heat = data.loc[:, "Spez Wärmeleistung"].resample('D').mean().nlargest(50, keep='all')
+        d_resample_heat = data.loc[:, "Wärmeleistung"].resample('D').max().nlargest(50, keep='all')
+        d_resample_spec_heat = data.loc[:, "Spez Wärmeleistung"].resample('D').max().nlargest(50, keep='all')
 
         # drop datetime index
         d_resample_heat.reset_index(drop=True, inplace=True)
