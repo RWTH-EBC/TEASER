@@ -6,7 +6,7 @@ import read_results as res
 if __name__ == '__main__':
 
     # set path to your workspace here
-    workspace = os.path.join("D:\\", "tbl-cwe", "Simulation", "TABS_30_mit_RT_control")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Simulation", "TABS_30_Panel_TABS_alpha_neu")
     print("Your workspace is set to: " + workspace)
 
     load_pickle = os.path.join(workspace, "building_simulation_pickle.p")
@@ -20,13 +20,13 @@ if __name__ == '__main__':
 
     csv_results_path = os.path.join(workspace, "csv_results", )
     print("Your .csv  files are stored in: " + csv_results_path)
-    """
+
     print("##########")
     res.calc_results(
         buildings=pickle_prj.buildings,
         csv_path=csv_results_path,
         output_path=output_path)
-
+    
     print("##########")
     res.plot_results(
         buildings=pickle_prj.buildings,
@@ -38,7 +38,7 @@ if __name__ == '__main__':
         buildings=pickle_prj.buildings,
         csv_path=csv_results_path,
         output_path=output_path)
-    """
+
     print("##########")
     res.boxplot_results(
         buildings=pickle_prj.buildings,

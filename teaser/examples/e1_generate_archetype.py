@@ -23,7 +23,7 @@ def example_generate_archetype():
     # filenames, thus we will delete them anyway in TEASER.
 
     prj = Project(load_data=True)
-    prj.name = "tabsplusair_test"
+    prj.name = "no_heating"
 
     """
     prj = Project(load_data=True)
@@ -105,7 +105,7 @@ def example_generate_archetype():
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
-        name="EFHtabsplusair1990heavy100",
+        name="EFH1990heavy100",
         year_of_construction=1990,
         number_of_floors=2,
         height_of_floors=2.8,
@@ -115,11 +115,10 @@ def example_generate_archetype():
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
-        zone.heating_cooling_system.tabs_plus_air_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
-                                                                  room_temp_control=True)
+        zone.heating_cooling_system.no_heating()
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
-
+    """
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
@@ -263,7 +262,7 @@ def example_generate_archetype():
                                                                   room_temp_control=True)
         zone.use_conditions.heating_profile = [294.15]
         zone.use_conditions.cooling_profile = [298.15]
-
+    """
     ########################
     """
     prj.add_non_residential(

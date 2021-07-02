@@ -53,7 +53,7 @@ def example_export_aixlib():
             "input",
             "inputdata",
             "weatherdata",
-            "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos"))
+            "TRY2015_507755060854_Jahr_City_Aachen.mos"))
 
     # To make sure the parameters are calculated correctly we recommend to
     # run calc_all_buildings() function

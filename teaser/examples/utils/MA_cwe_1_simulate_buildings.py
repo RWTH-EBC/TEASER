@@ -21,7 +21,7 @@ def generate_archetype():
     from teaser.project import Project
 
     prj = Project(load_data=True)
-    prj.name = "Simulationsstudie_TABS_Test_double_year"
+    prj.name = "TABS_30_Panel_TABS_alpha_neu"
 
     heating_profile_night_reduction = [292.15,
                                        292.15,
@@ -2229,14 +2229,14 @@ def generate_archetype():
             zone.use_conditions.infiltration_rate = 6.0
             zone.use_conditions.max_user_infiltration = 0.0
             zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
-    
+
     return prj
 
 
 if __name__ == '__main__':
 
     # set your workspace to your desired path here
-    workspace = os.path.join("D:\\", "tbl-cwe", "Simulation", "Simulationsstudie_TABS_Test_double_year")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Simulation", "TABS_30_Panel_TABS_alpha_neu")
     print("Your workspace is set to: " + workspace)
     sim_results_path = os.path.join(workspace, "sim_results")
     TEASER_output_path = os.path.join(workspace, "TEASEROutput")

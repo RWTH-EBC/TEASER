@@ -7,7 +7,7 @@ import pickle
 if __name__ == '__main__':
 
     # set path to your workspace here
-    workspace = os.path.join("D:\\", "tbl-cwe", "Simulation", "Simulationsstudie_TABS_Test_double_year")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Simulation", "TABS_30_Panel_TABS_alpha_neu")
     print("Your workspace is set to: " + workspace)
 
     """
