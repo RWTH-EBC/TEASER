@@ -709,11 +709,11 @@ class HeatingCooling(object):
 
     def no_heating(self):
 
-        self.heating = False
+        self.heating = True
         self.cooling = False
         self.tabs = False
         self.floor = False
-        self.radiator = False
+        self.radiator = True
         self.ventilation = False
 
         self.powerHeatTabs = 0.0
@@ -734,7 +734,7 @@ class HeatingCooling(object):
 
         self.KRHeatRem = 1000.0
         self.TNHeatRem = 1.0
-        self.hHeatRem = 0.0
+        self.hHeatRem = 1.0
         self.lHeatRem = 0.0
 
         self.KRCoolRem = 0.0
