@@ -7,7 +7,7 @@ import pickle
 if __name__ == '__main__':
 
     # set path to your workspace here
-    workspace = os.path.join("D:\\", "tbl-cwe", "Simulation", "TABS_30_Panel_TABS_alpha_neu")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Final_Simulations", "Data_for_Network_Radiator_Convective_24_07")
     print("Your workspace is set to: " + workspace)
 
     """
@@ -43,6 +43,7 @@ if __name__ == '__main__':
         if "panel" in bldg.name:
             signals = ['multizone.TOpe[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.TAir[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
+            signals += ['multizone.TRad[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.pITempHeatPanel.y'.format(i + 1) for i in
                         range(len(bldg.thermal_zones))]
             signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.pITempCoolPanel.y'.format(i + 1) for i in
@@ -61,6 +62,7 @@ if __name__ == '__main__':
         elif "tabsplusair" in bldg.name:
             signals = ['multizone.TOpe[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.TAir[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
+            signals += ['multizone.TRad[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.tabsHeatingPower'.format(i + 1) for i in
                         range(len(bldg.thermal_zones))]
             signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.tabsCoolingPower'.format(i + 1) for i in
@@ -83,6 +85,7 @@ if __name__ == '__main__':
         elif "radiator" in bldg.name:
             signals = ['multizone.TOpe[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.TAir[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
+            signals += ['multizone.TRad[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.pITempHeatRem.y'.format(i + 1) for i in
                         range(len(bldg.thermal_zones))]
             signals += ['multizone.PHeater[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
@@ -98,6 +101,7 @@ if __name__ == '__main__':
         elif "convective" in bldg.name:
             signals = ['multizone.TOpe[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.TAir[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
+            signals += ['multizone.TRad[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.pITempHeatRem.y'.format(i + 1) for i in
                         range(len(bldg.thermal_zones))]
             signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.pITempCoolRem.y'.format(i + 1) for i in
