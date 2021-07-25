@@ -193,6 +193,12 @@ def read_results(
             temp.loc[:, bldg + " TOpe[4]"] = results.filter(like="TOpe[4]").sum(axis=1)[index_res[0]: index_res[-1]]
             temp.loc[:, bldg + " TOpe[5]"] = results.filter(like="TOpe[5]").sum(axis=1)[index_res[0]: index_res[-1]]
             temp.loc[:, bldg + " TOpe[6]"] = results.filter(like="TOpe[6]").sum(axis=1)[index_res[0]: index_res[-1]]
+            temp.loc[:, bldg + " TRad[1]"] = results.filter(like="TOpe[1]").sum(axis=1)[index_res[0]: index_res[-1]]
+            temp.loc[:, bldg + " TRad[2]"] = results.filter(like="TOpe[2]").sum(axis=1)[index_res[0]: index_res[-1]]
+            temp.loc[:, bldg + " TRad[3]"] = results.filter(like="TOpe[3]").sum(axis=1)[index_res[0]: index_res[-1]]
+            temp.loc[:, bldg + " TRad[4]"] = results.filter(like="TOpe[4]").sum(axis=1)[index_res[0]: index_res[-1]]
+            temp.loc[:, bldg + " TRad[5]"] = results.filter(like="TOpe[5]").sum(axis=1)[index_res[0]: index_res[-1]]
+            temp.loc[:, bldg + " TRad[6]"] = results.filter(like="TOpe[6]").sum(axis=1)[index_res[0]: index_res[-1]]
         else:
             temp = pd.DataFrame(
                 data=results.filter(like="TAir").sum(axis=1)[
@@ -204,6 +210,9 @@ def read_results(
             temp.loc[:, bldg + " TOpe"] = results.filter(like="TOpe").sum(axis=1)[
                                           index_res[0]: index_res[-1]
                                           ]
+            temp.loc[:, bldg + " TRad"] = results.filter(like="TRad").sum(axis=1)[
+                                         index_res[0]: index_res[-1]
+                                         ]
 
         heat.to_csv(os.path.join(csv_path, bldg + "_heat.csv"))
         cool.to_csv(os.path.join(csv_path, bldg + "_cool.csv"))
