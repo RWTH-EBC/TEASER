@@ -3,6 +3,7 @@ import datetime
 import read_results as res
 import pandas as pd
 import pickle
+import timing
 
 if __name__ == '__main__':
 

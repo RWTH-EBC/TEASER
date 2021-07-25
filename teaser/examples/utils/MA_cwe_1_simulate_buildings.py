@@ -5,6 +5,7 @@ import pickle
 # helper scripts
 import simulate as sim
 import teaser.logic.utilities as utilities
+import timing
 
 """
 Use this script to generate and simulate multiple buildings at once.
@@ -2540,7 +2541,7 @@ def generate_archetype():
 
 
 if __name__ == '__main__':
-
+    timing
     # set your workspace to your desired path here
     workspace = os.path.join("D:\\", "tbl-cwe", "Final_Simulations", "Data_for_Network_Radiator_Convective_24_07")
     print("Your workspace is set to: " + workspace)
