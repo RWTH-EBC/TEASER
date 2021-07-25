@@ -21,7 +21,7 @@ def generate_archetype():
     from teaser.project import Project
 
     prj = Project(load_data=True)
-    prj.name = "TABS_30_Panel_TABS_alpha_neu"
+    prj.name = "Data_for_Network_Radiator_Convective"
 
     heating_profile_night_reduction = [292.15,
                                        292.15,
@@ -72,7 +72,9 @@ def generate_archetype():
                                        301.15,
                                        301.15]
 
-    # Project 1 includes all buildings of the building type 'single family house'
+    ######################################################################################
+    ### This section includes all buildings of the building type 'single family house' ###
+    ######################################################################################
 
     # -----EFH radiator-----
 
@@ -718,11 +720,61 @@ def generate_archetype():
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
+        name="EFHconvective1990heavy200",
+        year_of_construction=1990,
+        number_of_floors=2,
+        height_of_floors=2.8,
+        net_leased_area=200.0,
+        construction_type="heavy")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.convective_heating_cooling()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
         name="EFHconvective1990light100",
         year_of_construction=1990,
         number_of_floors=2,
         height_of_floors=2.8,
         net_leased_area=100.0,
+        construction_type="light")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.convective_heating_cooling()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="EFHconvective1990light200",
+        year_of_construction=1990,
+        number_of_floors=2,
+        height_of_floors=2.8,
+        net_leased_area=200.0,
         construction_type="light")
 
     bldg = prj.buildings[-1]  # can be replaced with specific building
@@ -768,6 +820,31 @@ def generate_archetype():
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
+        name="EFHconvective2010heavy200",
+        year_of_construction=2010,
+        number_of_floors=2,
+        height_of_floors=2.8,
+        net_leased_area=200.0,
+        construction_type="heavy")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.convective_heating_cooling()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
         name="EFHconvective2010light100",
         year_of_construction=2010,
         number_of_floors=2,
@@ -790,9 +867,36 @@ def generate_archetype():
             zone.use_conditions.max_user_infiltration = 0.0
             zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="EFHconvective2010light200",
+        year_of_construction=2010,
+        number_of_floors=2,
+        height_of_floors=2.8,
+        net_leased_area=200.0,
+        construction_type="light")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.convective_heating_cooling()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+
     # ----------------------------------------------
-    
-    # Project 2 includes all buildings of the building type 'multi family house'
+
+    ######################################################################################
+    ### This section includes all buildings of the building type 'multi family house'  ###
+    ######################################################################################
 
     # -----MFH radiator-----
 
@@ -1438,11 +1542,61 @@ def generate_archetype():
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
+        name="MFHconvective1990heavy2000",
+        year_of_construction=1990,
+        number_of_floors=5,
+        height_of_floors=2.8,
+        net_leased_area=2000.0,
+        construction_type="heavy")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.convective_heating_cooling()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
         name="MFHconvective1990light1000",
         year_of_construction=1990,
         number_of_floors=5,
         height_of_floors=2.8,
         net_leased_area=1000.0,
+        construction_type="light")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.convective_heating_cooling()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="MFHconvective1990light2000",
+        year_of_construction=1990,
+        number_of_floors=5,
+        height_of_floors=2.8,
+        net_leased_area=2000.0,
         construction_type="light")
 
     bldg = prj.buildings[-1]  # can be replaced with specific building
@@ -1488,6 +1642,31 @@ def generate_archetype():
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
+        name="MFHconvective2010heavy2000",
+        year_of_construction=2010,
+        number_of_floors=5,
+        height_of_floors=2.8,
+        net_leased_area=2000.0,
+        construction_type="heavy")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.convective_heating_cooling()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
         name="MFHconvective2010light1000",
         year_of_construction=2010,
         number_of_floors=5,
@@ -1510,10 +1689,37 @@ def generate_archetype():
             zone.use_conditions.max_user_infiltration = 0.0
             zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="MFHconvective2010light2000",
+        year_of_construction=2010,
+        number_of_floors=5,
+        height_of_floors=2.8,
+        net_leased_area=2000.0,
+        construction_type="light")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.convective_heating_cooling()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+
     # ----------------------------------------------
 
-    # Project 3 includes all buildings of the building type 'office'
-    
+    ######################################################################################
+    ### This section includes all buildings of the building type 'office'              ###
+    ######################################################################################
+
     # -----Office radiator-----
 
     prj.add_non_residential(
@@ -2158,11 +2364,61 @@ def generate_archetype():
     prj.add_non_residential(
         method="bmvbs",
         usage="office",
+        name="Officeconvective1990heavy5000",
+        year_of_construction=1990,
+        number_of_floors=5,
+        height_of_floors=3.0,
+        net_leased_area=5000.0,
+        construction_type="heavy")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.convective_heating_cooling()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+
+    prj.add_non_residential(
+        method="bmvbs",
+        usage="office",
         name="Officeconvective1990light3000",
         year_of_construction=1990,
         number_of_floors=5,
         height_of_floors=3.0,
         net_leased_area=3000.0,
+        construction_type="light")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.convective_heating_cooling()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+
+    prj.add_non_residential(
+        method="bmvbs",
+        usage="office",
+        name="Officeconvective1990light5000",
+        year_of_construction=1990,
+        number_of_floors=5,
+        height_of_floors=3.0,
+        net_leased_area=5000.0,
         construction_type="light")
 
     bldg = prj.buildings[-1]  # can be replaced with specific building
@@ -2208,11 +2464,61 @@ def generate_archetype():
     prj.add_non_residential(
         method="bmvbs",
         usage="office",
+        name="Officeconvective2010heavy5000",
+        year_of_construction=2010,
+        number_of_floors=5,
+        height_of_floors=3.0,
+        net_leased_area=5000.0,
+        construction_type="heavy")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.convective_heating_cooling()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+
+    prj.add_non_residential(
+        method="bmvbs",
+        usage="office",
         name="Officeconvective2010light3000",
         year_of_construction=2010,
         number_of_floors=5,
         height_of_floors=3.0,
         net_leased_area=3000.0,
+        construction_type="light")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.convective_heating_cooling()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+
+    prj.add_non_residential(
+        method="bmvbs",
+        usage="office",
+        name="Officeconvective2010light5000",
+        year_of_construction=2010,
+        number_of_floors=5,
+        height_of_floors=3.0,
+        net_leased_area=5000.0,
         construction_type="light")
 
     bldg = prj.buildings[-1]  # can be replaced with specific building
@@ -2236,7 +2542,7 @@ def generate_archetype():
 if __name__ == '__main__':
 
     # set your workspace to your desired path here
-    workspace = os.path.join("D:\\", "tbl-cwe", "Simulation", "TABS_30_Panel_TABS_alpha_neu")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Final_Simulations", "Data_for_Network_Radiator_Convective_24_07")
     print("Your workspace is set to: " + workspace)
     sim_results_path = os.path.join(workspace, "sim_results")
     TEASER_output_path = os.path.join(workspace, "TEASEROutput")
