@@ -1,12 +1,14 @@
 import os
 import pickle
+import timing
 
 import read_results as res
+import plot_results as plot
 
 if __name__ == '__main__':
-
+    timing
     # set path to your workspace here
-    workspace = os.path.join("D:\\", "tbl-cwe", "Simulation", "TABS_30_Panel_TABS_alpha_neu")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Final_Simulations", "Complete_04_08")
     print("Your workspace is set to: " + workspace)
 
     load_pickle = os.path.join(workspace, "building_simulation_pickle.p")
@@ -32,7 +34,7 @@ if __name__ == '__main__':
         buildings=pickle_prj.buildings,
         csv_path=csv_results_path,
         output_path=plot_path)
-    
+
     print("##########")
     res.excel_export(
         buildings=pickle_prj.buildings,
@@ -44,3 +46,11 @@ if __name__ == '__main__':
         buildings=pickle_prj.buildings,
         csv_path=csv_results_path,
         output_path=plot_path)
+
+    """
+    print("##########")
+    plot.plot_results_Kap_3(
+        buildings=pickle_prj.buildings,
+        csv_path=csv_results_path,
+        output_path=plot_path)
+    """
