@@ -314,13 +314,13 @@ class HeatingCooling(object):
         self.radiator = False
         self.ventilation = False
 
-        b = ((0.8 * self.parent.area) * specific_power_heat)
         a = self.parent.model_attr.heat_load
-        d = -((0.8 * self.parent.area) * specific_power_cool)
+        b = ((0.8 * self.parent.area) * specific_power_heat)
         c = self.parent.model_attr.cool_load
+        d = -((0.8 * self.parent.area) * specific_power_cool)
         self.powerHeatTabs = a if a < b else b
         self.powerCoolTabs = c if c > d else d
-        self.TThresholdHeaterTabs = 273.15 + 14
+        self.TThresholdHeaterTabs = 273.15 + 15
         self.TThresholdCoolerTabs = 273.15 + 18
         self.withTabsRoomTempControl = room_temp_control
 
@@ -405,13 +405,13 @@ class HeatingCooling(object):
         self.radiator = True
         self.ventilation = True
 
-        b = ((0.8 * self.parent.area) * specific_power_heat)
         a = share_tabs * self.parent.model_attr.heat_load
-        d = -((0.8 * self.parent.area) * specific_power_cool)
+        b = ((0.8 * self.parent.area) * specific_power_heat)
         c = share_tabs * self.parent.model_attr.cool_load
+        d = -((0.8 * self.parent.area) * specific_power_cool)
         self.powerHeatTabs = a if a < b else b
         self.powerCoolTabs = c if c > d else d
-        self.TThresholdHeaterTabs = 273.15 + 14
+        self.TThresholdHeaterTabs = 273.15 + 15
         self.TThresholdCoolerTabs = 273.15 + 18
         self.withTabsRoomTempControl = room_temp_control
 
@@ -427,14 +427,14 @@ class HeatingCooling(object):
 
         self.KRHeatRem = 1000.0
         self.TNHeatRem = 1.0
-        self.hHeatRem = (1-share_tabs) * self.parent.model_attr.heat_load
+        self.hHeatRem = ((1-share_tabs) * self.parent.model_attr.heat_load) if a < b else (self.parent.model_attr.heat_load - b)
         self.lHeatRem = 0.0
         # (self.parent.model_attr.heat_load - self.powerHeatTabs)
 
         self.KRCoolRem = 1000.0
         self.TNCoolRem = 1.0
         self.hCoolRem = 0.0
-        self.lCoolRem = (1-share_tabs) * self.parent.model_attr.cool_load
+        self.lCoolRem = ((1-share_tabs) * self.parent.model_attr.cool_load) if c > d else (self.parent.model_attr.cool_load - d)
         # (self.parent.model_attr.cool_load - self.powerCoolTabs)
 
         self.shareHeatTabsExt = 1/self.parent.parent.number_of_floors
@@ -601,6 +601,39 @@ class HeatingCooling(object):
 
         self.shareCoolRad = 0.0
         self.shareCoolConv = 0.0
+
+        # for panel systems heat transfer coefficients are different for heating and cooling case
+        # set heat transfer coefficient for groundfloor (outer wall building part)
+        for groundfloor in self.parent.ground_floors:
+            groundfloor.inner_convection = 7.0
+            groundfloor.inner_convection_cool = 1.0
+        # set heat transfer coefficient for floor (inner wall building part)
+        for floor in self.parent.floors:
+            floor.inner_convection = 7.0
+            floor.inner_convection_cool = 1.0
+
+        weighted_sum_outer_wall = 0.0
+        weighted_sum_inner_wall = 0.0
+        area_sum_ow = 0.0
+        area_sum_iw = 0.0
+
+        for wall in (self.parent.outer_walls + self.parent.rooftops + self.parent.ground_floors):
+            area_sum_ow += wall.area
+            try:
+                weighted_sum_outer_wall += (wall.area * wall.inner_convection_cool)
+            except:
+                weighted_sum_outer_wall += (wall.area * wall.inner_convection)
+
+        self.weighted_convection_inner_cool_ow = weighted_sum_outer_wall / area_sum_ow
+
+        for wall in (self.parent.inner_walls + self.parent.ceilings + self.parent.floors):
+            area_sum_iw += wall.area
+            try:
+                weighted_sum_inner_wall += (wall.area * wall.inner_convection_cool)
+            except:
+                weighted_sum_inner_wall += (wall.area * wall.inner_convection)
+
+        self.weighted_convection_inner_cool_iw = weighted_sum_inner_wall / area_sum_iw
 
     def test_radiator_heating(self, KR, TN):
         """Set parameter to typical radiator heating system.
