@@ -6,9 +6,9 @@ import pickle
 import timing
 
 if __name__ == '__main__':
-
+    timing
     # set path to your workspace here
-    workspace = os.path.join("D:\\", "tbl-cwe", "Final_Simulations", "Data_for_Network_Radiator_Convective_24_07")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Final_Simulations", "Complete_04_08")
     print("Your workspace is set to: " + workspace)
 
     """
