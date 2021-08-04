@@ -19,8 +19,12 @@ import matplotlib
 import matplotlib.pyplot as plt
 #plt.style.use(os.path.join("D:\\", "tbl-cwe", "Repos", "TEASER", "teaser", "examples", "utils", "ebc.paper.mplstyle"))
 import matplotlib.dates as mdates
+import matplotlib.ticker as mticker
+from matplotlib.ticker import FormatStrFormatter
 import seaborn as sns
 import pandas as pd
+import locale
+locale.setlocale(locale.LC_TIME, 'de_DE.UTF-8')
 
 from statistics import mean
 from dymola.dymola_interface import DymolaInterface
@@ -435,6 +439,48 @@ def plot_results(buildings, csv_path, output_path):
     if not os.path.exists(output_path4):
         os.makedirs(output_path4)
 
+    # rcParams
+    sitewidth = 6.224
+    fontsize = 11
+    font = {'family': 'serif',
+            'weight': 'normal',
+            'size': fontsize}
+    params = {'legend.fontsize': fontsize,
+              'xtick.labelsize': fontsize,
+              'ytick.labelsize': fontsize,
+              'axes.labelsize': fontsize,
+              'axes.titlesize': fontsize,
+              'axes.grid.axis': 'y',
+              'axes.grid': True,
+              'grid.color': '#DDDDDD',
+              'figure.figsize': (sitewidth, sitewidth / 16 * 9),
+              'figure.subplot.hspace': 0.3
+              }
+    matplotlib.rc('font', **font)
+    matplotlib.rcParams.update(params)
+
+    # parameters for axis definition
+    months_locator = mdates.MonthLocator(
+        bymonth=None,
+        bymonthday=15,
+        interval=1,
+        tz=None)
+    allmonths = mdates.MonthLocator()
+    months_formatter = mdates.DateFormatter("%b")
+
+    # parameters for axis definition
+    days = mdates.DayLocator(interval=10)
+    weeks = mdates.DayLocator(interval=7)
+    minormonths = mdates.MonthLocator(interval=1)
+    majormonths = mdates.MonthLocator(interval=2)
+    format = mdates.DateFormatter("%d-%m")
+    locator = matplotlib.dates.MonthLocator(
+        bymonth=None,
+        bymonthday=15,
+        interval=1,
+        tz=None)
+    formatter = mdates.DateFormatter("%b")
+
     for bldg in buildings:
         try:
             print("reading building {}".format(bldg.name))
@@ -484,62 +530,57 @@ def plot_results(buildings, csv_path, output_path):
             # Use this to exclude the first hours of your simulation results, e.g. [0:96] to skip the first 4 days
             #data = data.drop(data.index[0:96])
 
-            # plot parameters
-            """sidewidth = 6.224
-            fontsize = 11
-            font = {'family': 'serif',
-                    'weight': 'normal',
-                    'size': fontsize}
-            params = {'legend.fontsize': fontsize,
-                      'xtick.labelsize': fontsize,
-                      'ytick.labelsize': fontsize,
-                      'axes.labelsize': fontsize,
-                      'axes.titlesize': fontsize}
-            matplotlib.rc('font', **font)
-            matplotlib.rcParams.update(params)"""
-
-            # parameters for axis definition
-            days = mdates.DayLocator(interval=10)
-            weeks = mdates.DayLocator(interval=7)
-            minormonths = mdates.MonthLocator(interval=1)
-            majormonths = mdates.MonthLocator(interval=2)
-            format = mdates.DateFormatter("%d-%m")
-            locator = matplotlib.dates.MonthLocator(
-                bymonth=None,
-                bymonthday=15,
-                interval=1,
-                tz=None)
-            formatter = mdates.DateFormatter("%b")
-
             # plot the indoor temperature and heating/cooling demand for one year in two subplots
             print("plotting building {}".format(bldg.name))
             fig, (ax1, ax2) = plt.subplots(2)
-            ax1.plot(data.loc[:, "Temperatur"], linewidth=0.3)
-            ax1.set_title("Operative Temperatur")
-            ax1.set_ylabel('Temperatur in [°C]')
-            ax1.set_ylim([18, 28])
-            ax1.margins(0.01)
+            ax1.plot(data.loc[:, "Temperatur"], linewidth=0.5, color="black")
+            # ax1.set_title("Operative Temperatur")
+            ax1.set_ylabel('Temperatur [°C]')
+            ax1.set_ylim([20, 30])
+            ax1.yaxis.set_major_locator(mticker.MultipleLocator(5))
+            ax1.yaxis.set_minor_locator(mticker.MultipleLocator(2.5))
+            ax1.margins(0)
+            """
             ax1.xaxis.set_minor_locator(minormonths)
             ax1.xaxis.set_major_locator(majormonths)
             ax1.xaxis.set_major_formatter(format)
+            """
+            ax1.xaxis.set_major_locator(allmonths)
+            ax1.xaxis.set_minor_locator(months_locator)
+            ax1.xaxis.set_major_formatter(mticker.NullFormatter())
+            ax1.xaxis.set_minor_formatter(months_formatter)
+            ax1.tick_params(axis="x", which="minor", length=0)
+
             #ax2.plot(heat_demand, linewidth=0.3, label="Wärmeleistung", color="r")
             #ax2.plot(cool_demand, linewidth=0.3, label="Kälteleistung")
-            ax2.plot(data.loc[:, "Wärmeleistung"], linewidth=0.3, label="Wärmeleistung", color="r")
-            ax2.plot(data.loc[:, "Kälteleistung"], linewidth=0.3, label="Kälteleistung")
-            ax2.set_title("Heiz- und Kühllast")
-            ax2.set_ylabel('Leistung in [kW]')
-            ax2.set_xlabel('Zeit')
+            ax2.plot(data.loc[:, "Wärmeleistung"], linewidth=0.5, label="Wärmeleistung", color="r")
+            ax2.plot(-data.loc[:, "Kälteleistung"], linewidth=0.5, label="Kälteleistung", color="b")
+            # ax2.set_title("Heiz- und Kühllast")
+            ax2.set_ylabel('Leistung [kW]')
+            ax2.set_ylim([0.0, 45.0])
+            # ax2.yaxis.set_major_formatter(FormatStrFormatter('%.1f'))
+            # ax2.yaxis.set_major_locator(mticker.AutoLocator())
+            # ax2.yaxis.set_minor_locator(mticker.AutoMinorLocator())
+            ax2.yaxis.set_major_locator(mticker.MultipleLocator(20))
+            ax2.yaxis.set_minor_locator(mticker.MultipleLocator(10))
+            # ax2.set_xlabel('Zeit')
             #ax2.set_ylim([0, 5000])
             #ax2.set_xlim([5000, 8760])
-            #ax2.autoscale()
-            ax2.margins(0.01)
+            ax2.margins(0)
+            """
             ax2.xaxis.set_minor_locator(minormonths)
             ax2.xaxis.set_major_locator(majormonths)
             ax2.xaxis.set_major_formatter(format)
+            """
+            ax2.xaxis.set_major_locator(allmonths)
+            ax2.xaxis.set_minor_locator(months_locator)
+            ax2.xaxis.set_major_formatter(mticker.NullFormatter())
+            ax2.xaxis.set_minor_formatter(months_formatter)
+            ax2.tick_params(axis="x", which="minor", length=0)
 
-            #plt.grid(color='green', linestyle='--', linewidth=0.1)
-            plt.tight_layout()
-            plt.savefig(os.path.join(output_path, bldg.name + "_plot.pdf"), dpi=200)
+            fig.legend(loc=9, bbox_to_anchor=(0.5, 1.06,))
+            # plt.tight_layout()
+            plt.savefig(os.path.join(output_path, bldg.name + "_plot.pdf"), dpi=200, bbox_inches="tight")
             plt.close("all")
 
             # for TABSplusAir buildings additionally plot the TABS and convective demands in separate subplots

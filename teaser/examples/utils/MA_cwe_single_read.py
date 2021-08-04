@@ -6,8 +6,11 @@ import os
 import numpy as np
 import matplotlib
 import seaborn as sns
-import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import matplotlib.ticker as mticker
+import locale
+locale.setlocale(locale.LC_TIME, 'de_DE.UTF-8')
 from dymola.dymola_interface import DymolaInterface
 
 
@@ -35,7 +38,36 @@ def read_results(signals, index, results_path):
 
 if __name__ == '__main__':
 
-    # set path to your workspace here
+    # rcParams
+    sitewidth = 6.224
+    fontsize = 11
+    font = {'family': 'serif',
+            'weight': 'normal',
+            'size': fontsize}
+    params = {'legend.fontsize': fontsize,
+              'xtick.labelsize': fontsize,
+              'ytick.labelsize': fontsize,
+              'axes.labelsize': fontsize,
+              'axes.titlesize': fontsize,
+              'axes.grid.axis': 'y',
+              'axes.grid': True,
+              'grid.color': '#DDDDDD',
+              'figure.figsize': (sitewidth, sitewidth / 16 * 9)
+              }
+    matplotlib.rc('font', **font)
+    matplotlib.rcParams.update(params)
+
+    # parameters for axis definition
+    months_locator = mdates.MonthLocator(
+        bymonth=None,
+        bymonthday=15,
+        interval=1,
+        tz=None)
+    allmonths = mdates.MonthLocator()
+    months_formatter = mdates.DateFormatter("%b")
+
+    #######################################
+    ### set path to your workspace here ###
     workspace = os.path.join("D:\\", "tbl-cwe", "Simulation", "TABS_30_mit_RT_control")
     print("Your workspace is set to: " + workspace)
 
@@ -50,10 +82,13 @@ if __name__ == '__main__':
     csv_results_path = os.path.join(workspace, "csv_results", )
     print("Your .csv  files are stored in: " + csv_results_path)
 
+    #################################################
+    ### set path to desired sim_results_file here ###
     sim_results_file_path = os.path.join(workspace, "sim_results", "Simulationsstudie_TABS_30_mit_RT_control", "EFHconvective1990heavy100.mat")
     print("Your .mat file is stored in: " + sim_results_file_path)
 
-    # set list of simulation result variables
+    ###############################################
+    ### set list of simulation result variables ###
     res_list = ['weaDat.weaBus.TDryBul',
                 'weaDat.weaBus.HGloHor'
                 ]
@@ -74,19 +109,13 @@ if __name__ == '__main__':
     T_outdoor = res.loc[:, 'weaDat.weaBus.TDryBul'] - 273.15
     SolRad = res.loc[:, 'weaDat.weaBus.HGloHor']
 
-    # parameters for axis definition
-    locator = mdates.MonthLocator(
-        bymonth=None,
-        bymonthday=15,
-        interval=1,
-        tz=None)
-    formatter = mdates.DateFormatter("%b")
+
 
     fig, ax = plt.subplots()
     ax.set_ylabel('Außentemperatur in °C')
     # ax2 = ax.twinx()
     # ax.set_xlabel('Simulationszeit in h')
-    ax.plot(T_outdoor, linewidth=0.3)
+    ax.plot(T_outdoor, linewidth=0.6)
     # ax2.plot(SolRad, linewidth=0.3, color='r')
     # ax.plot(heat_dem.values, linewidth=0.2, label="Wärme", color='r')
     # ax.plot(cool_dem.values, linewidth=0.2, label="Kälte", color='b')
@@ -96,33 +125,46 @@ if __name__ == '__main__':
     #ax.legend(loc=1.0, borderaxespad=0.2)
     #ax.set_title('Bedarfe')
     # ax.plot([0, 8760], [0, 0], linestyle='--', linewidth=0.5, color='black')
-    #ax.xaxis.set_minor_locator(minormonths)
+    #ax.grid(axis='y')
+
     ax.margins(0.01)
-    ax.xaxis.set_major_locator(locator)
-    ax.xaxis.set_major_formatter(formatter)
+    ax.xaxis.set_major_locator(allmonths)
+    ax.xaxis.set_minor_locator(months_locator)
+    ax.xaxis.set_major_formatter(mticker.NullFormatter())
+    ax.xaxis.set_minor_formatter(months_formatter)
+    ax.tick_params(axis="x", which="minor", length=0)
+
     plt.tight_layout()
     plt.savefig(os.path.join(plot_path, 'Temperatur.png'), dpi=200, transparent=True)
     plt.savefig(os.path.join(plot_path, 'Temperatur.pdf'), dpi=200)
     ax.clear()
 
-    # ax2 = ax.twinx()
+    #################################################################
+
     ax.plot(T_outdoor.resample('D').mean(), linewidth=0.3)
     # ax2.plot(SolRad.resample('D').mean(), linewidth=0.3, color='r')
     ax.set_ylabel('Außentemperatur in °C')
     ax.margins(0.01)
-    ax.xaxis.set_major_locator(locator)
-    ax.xaxis.set_major_formatter(formatter)
+    ax.xaxis.set_major_locator(allmonths)
+    ax.xaxis.set_minor_locator(months_locator)
+    ax.xaxis.set_major_formatter(mticker.NullFormatter())
+    ax.xaxis.set_minor_formatter(months_formatter)
+    ax.tick_params(axis="x", which="minor", length=0)
     plt.tight_layout()
     plt.savefig(os.path.join(plot_path, 'Temperatur_D.png'), dpi=200, transparent=True)
     plt.savefig(os.path.join(plot_path, 'Temperatur_D.pdf'), dpi=200)
     ax.clear()
 
-    ax.set_ylabel('Solarstrahlung in [W/$m^2$)')
+    ################################################################
+
+    ax.set_ylabel('Solarstrahlung in [W/$m^2$]')
     ax.plot(SolRad, linewidth=0.3)
     ax.margins(0.01)
-    ax.xaxis.set_major_locator(locator)
-    ax.xaxis.set_major_formatter(formatter)
+    ax.xaxis.set_major_locator(allmonths)
+    ax.xaxis.set_minor_locator(months_locator)
+    ax.xaxis.set_major_formatter(mticker.NullFormatter())
+    ax.xaxis.set_minor_formatter(months_formatter)
+    ax.tick_params(axis="x", which="minor", length=0)
     plt.tight_layout()
     plt.savefig(os.path.join(plot_path, 'Solarstrahlung.png'), dpi=200, transparent=True)
     plt.savefig(os.path.join(plot_path, 'Solarstrahlung.pdf'), dpi=200)
-    ax.clear()
