@@ -393,6 +393,75 @@ def plot_diagrams_Kap_1(output_path):
     plt.savefig(os.path.join(output_path, "RLT.pdf"), dpi=200, )
     # bbox_inches="tight"
 
+    # clear plot lines, keep axes
+    for artist in ax1.lines + ax1.collections + ax2.lines + ax2.collections:
+        artist.remove()
+
+    r_time = np.array([0, 6.8, 6.85, 7.5, 12, 18, 23, 24])
+    r_Trad = np.array([20.25, 19.25, 20.25, 20.35, 20.5, 20.75, 20.85, 20.3])
+    r_Tair = np.array([19.75, 18.6, 22, 21.5, 21.45, 21.4, 21.35, 19.75])
+    r_power = np.array([10, 0, 100, 70, 55, 46, 40, 10])
+
+    ax1.plot(r_time, r_Trad, linewidth=0.9, color="r", label='Strahlungstemperatur')
+    ax1.plot(r_time, r_Tair, linewidth=0.9, color="b", label='Lufttemperatur')
+    ax2.plot(r_time, r_power, linewidth=0.9, color="black")
+
+    plt.savefig(os.path.join(output_path, "Radiator.pdf"), dpi=200, )
+
+    # clear plot lines, keep axes
+    for artist in ax1.lines + ax1.collections + ax2.lines + ax2.collections:
+        artist.remove()
+
+    fhk_time = np.array([0, 6.2, 6.25, 6.3, 8, 12, 18, 23, 23.05, 24])
+    fhk_Trad = np.array([20.5, 19.5, 19.5, 21.3, 21.4, 21.5, 21.55, 21.6, 20.6, 20.5])
+    fhk_Tair = np.array([19.7, 18.7, 18.7, 20.7, 20.6, 20.5, 20.45, 20.4, 19.8, 19.7])
+    fhk_power = np.array([0, 0, 100, 97, 69, 51, 45, 43, 0, 0])
+
+    ax1.plot(fhk_time, fhk_Trad, linewidth=0.9, color="r", label='Strahlungstemperatur')
+    ax1.plot(fhk_time, fhk_Tair, linewidth=0.9, color="b", label='Lufttemperatur')
+    ax2.plot(fhk_time, fhk_power, linewidth=0.9, color="black")
+
+    plt.savefig(os.path.join(output_path, "RadFHK.pdf"), dpi=200, )
+
+    # clear plot lines, keep axes
+    for artist in ax1.lines + ax1.collections + ax2.lines + ax2.collections:
+        artist.remove()
+
+    fbh_time = np.array([0, 4, 4.05, 6, 7.5, 8.5, 12, 23, 23.05, 24])
+    fbh_Trad = np.array([21.2, 20.6, 20.6, 21.2, 21.3, 21.3, 21.3, 21.3, 21.3, 21.2])
+    fbh_Tair = np.array([20.55, 19.9, 19.9, 20.67, 20.72, 20.71, 20.7, 20.7, 20.7, 20.55])
+    fbh_power = np.array([28, 20, 20, 33, 42, 40, 38.5, 37, 37, 33])
+    fbh_power_to_floor = np.array([0, 0, 100, 70, 46, 34, 37, 37, 0, 0])
+
+    ax1.plot(fbh_time, fbh_Trad, linewidth=0.9, color="r", label='Strahlungstemperatur')
+    ax1.plot(fbh_time, fbh_Tair, linewidth=0.9, color="b", label='Lufttemperatur')
+    ax2.plot(fbh_time, fbh_power, linewidth=0.9, color="black", label='Wärmestrom \n an den Raum')
+    ax2.plot(fbh_time, fbh_power_to_floor, linewidth=0.9, color="r", label='Wärmestrom \n in den Boden')
+    ax2.legend(loc='upper right', ncol=1, borderaxespad=0., fontsize='x-small', frameon=False, bbox_to_anchor=(1.0, 0.96))
+    # ax1.set_ylim([19.5, 21.5])
+    # ax1.yaxis.set_major_locator(mticker.MultipleLocator(0.5))
+
+    plt.savefig(os.path.join(output_path, "FBH.pdf"), dpi=200, )
+
+    # clear plot lines, keep axes
+    for artist in ax1.lines + ax1.collections + ax2.lines + ax2.collections:
+        artist.remove()
+
+    bkt_time = np.array([0, 1.8, 1.85, 6, 6.05, 8, 21.5, 21.55, 24])
+    bkt_Trad = np.array([21.25, 21.2, 21.2, 21.3, 21.3, 21.3, 21.3, 21.3, 21.25])
+    bkt_Tair = np.array([20.6, 20.53, 20.53, 20.65, 20.65, 20.7, 20.7, 20.7, 20.65])
+    bkt_power = np.array([47, 46, 46, 48.5, 48.5, 50, 49, 49, 47])
+    bkt_power_to_floor = np.array([0, 0, 100, 85, 55, 55, 55, 0, 0])
+
+    ax1.plot(bkt_time, bkt_Trad, linewidth=0.9, color="r", label='Strahlungstemperatur')
+    ax1.plot(bkt_time, bkt_Tair, linewidth=0.9, color="b", label='Lufttemperatur')
+    ax2.plot(bkt_time, bkt_power, linewidth=0.9, color="black", label='Wärmestrom \n an den Raum')
+    ax2.plot(bkt_time, bkt_power_to_floor, linewidth=0.9, color="r", label='Wärmestrom \n in den Boden')
+    # ax2.legend(loc='upper right', ncol=1, borderaxespad=0., fontsize='x-small', frameon=False)
+    # ax1.set_ylim([20.5, 21.5])
+
+    plt.savefig(os.path.join(output_path, "BKT.pdf"), dpi=200, )
+
 
 if __name__ == '__main__':
     # set path to your workspace here
