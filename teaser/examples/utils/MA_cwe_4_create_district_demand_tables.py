@@ -46,14 +46,14 @@ if __name__ == '__main__':
             co = pd.read_csv(os.path.join(csv_results_path, bldg.name + "_cool.csv"))
 
             i = 0
-
+            # for comma delimiter choose sep=',' for tab delimiter choose '/t'
             for column in ma.columns[1:]:
-                ma.to_csv(os.path.join(dhc_demands_path, column + "_ma.txt"), sep ='\t')
+                ma.to_csv(os.path.join(dhc_demands_path, column + "_ma.txt"), sep='/t')
                 ma.index = [i * 3600 for i in range(8760)]
                 ma_bldg = ma[column]
 
                 # ma_bldg = ma_bldg.drop(ma_bldg.index[0:24])
-                ma_bldg.to_csv(os.path.join(dhc_demands_path, column + "_ma.txt"), header=False, sep ='\t')
+                ma_bldg.to_csv(os.path.join(dhc_demands_path, column + "_ma.txt"), header=False, sep='/t')
 
                 with open(os.path.join(dhc_demands_path, column + "_ma.txt")) as f:
                     lines = f.readlines()
@@ -68,12 +68,12 @@ if __name__ == '__main__':
                 f.close()
 
             for column in co.columns[1:]:
-                co.to_csv(os.path.join(dhc_demands_path, column + "_co.txt"), sep ='\t')
+                co.to_csv(os.path.join(dhc_demands_path, column + "_co.txt"), sep='/t')
                 co.index = [i * 3600 for i in range(8760)]
                 co_bldg = co[column]
 
                 # ma_bldg = ma_bldg.drop(ma_bldg.index[0:24])
-                co_bldg.to_csv(os.path.join(dhc_demands_path, column + "_co.txt"), header=False, sep ='\t')
+                co_bldg.to_csv(os.path.join(dhc_demands_path, column + "_co.txt"), header=False, sep='/t')
 
                 with open(os.path.join(dhc_demands_path, column + "_co.txt")) as f:
                     lines = f.readlines()
