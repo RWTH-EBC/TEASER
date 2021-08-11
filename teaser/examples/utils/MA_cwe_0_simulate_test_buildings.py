@@ -3324,16 +3324,204 @@ def generate_archetype_KAP_3():
 
     return prj
 
+def generate_archetype_Sprungantwort():
+    from teaser.project import Project
+
+    prj = Project(load_data=True)
+    prj.name = "Sprungantwort_5"
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="MFHradiator1990heavy1000",
+        year_of_construction=1990,
+        number_of_floors=5,
+        height_of_floors=2.8,
+        net_leased_area=1000.0,
+        construction_type="heavy")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.radiator_heating()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="MFHpanel1990heavy1000",
+        year_of_construction=1990,
+        number_of_floors=5,
+        height_of_floors=2.8,
+        net_leased_area=1000.0,
+        construction_type="heavy")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="MFH10panel1990heavy1000",
+        year_of_construction=1990,
+        number_of_floors=5,
+        height_of_floors=2.8,
+        net_leased_area=1000.0,
+        construction_type="heavy")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.test_panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0, KR=10, TN=1)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="MFH100panel1990heavy1000",
+        year_of_construction=1990,
+        number_of_floors=5,
+        height_of_floors=2.8,
+        net_leased_area=1000.0,
+        construction_type="heavy")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.test_panel_heating_cooling(specific_power_heat=100.0, specific_power_cool=40.0,
+                                                               KR=100, TN=1)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="MFHtabsplusair1990heavy1000",
+        year_of_construction=1990,
+        number_of_floors=5,
+        height_of_floors=2.8,
+        net_leased_area=1000.0,
+        construction_type="heavy")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_plus_air_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
+                                                                  room_temp_control=True)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="MFHconvective1990heavy1000",
+        year_of_construction=1990,
+        number_of_floors=5,
+        height_of_floors=2.8,
+        net_leased_area=1000.0,
+        construction_type="heavy")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.convective_heating_cooling()
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="MFHtabs1990heavy1000",
+        year_of_construction=1990,
+        number_of_floors=5,
+        height_of_floors=2.8,
+        net_leased_area=1000.0,
+        construction_type="heavy")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_heating_cooling(specific_power_heat=30.0, specific_power_cool=30.0,
+                                                                  room_temp_control=True)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+
+    return prj
+
 if __name__ == '__main__':
     timing
     # set your workspace to your desired path here
-    workspace = os.path.join("D:\\", "tbl-cwe", "Final_Simulations", "KAP_3_TABS_HC5")
+    workspace = os.path.join("T:\\", "tbl-cwe", "Sprungantwort_2")
     sim_results_path = os.path.join(workspace, "sim_results")
     TEASER_output_path = os.path.join(workspace, "TEASEROutput")
 
     print("Generating archetypes...")
     # prj = generate_archetype()
-    prj = generate_archetype_KAP_3()
+    # prj = generate_archetype_KAP_3()
+    prj = generate_archetype_Sprungantwort()
+
     prj.used_library_calc = 'AixLib'
     prj.number_of_elements_calc = 2
     prj.calc_all_buildings()
@@ -3353,7 +3541,7 @@ if __name__ == '__main__':
     # Save project in pickle file for later use
     pickle_file = os.path.join(workspace, "building_simulation_pickle.p")
     pickle.dump(prj, open(pickle_file, "wb"))
-
+    """
     # use stop_time=63072000.0 to simulate 2 years
     single_year = 31532400.0
     double_year = 63068400.0
@@ -3368,5 +3556,6 @@ if __name__ == '__main__':
     )
     print("Your simulation results can be found in: " + sim_results_path)
     print("That's it! :)")
+    """
 
 

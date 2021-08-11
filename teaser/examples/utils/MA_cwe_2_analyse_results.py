@@ -8,7 +8,7 @@ import timing
 if __name__ == '__main__':
     timing
     # set path to your workspace here
-    workspace = os.path.join("D:\\", "tbl-cwe", "Final_Simulations", "Complete_04_08")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Final_Simulations", "Complete_06_08_TABS_plow3")
     print("Your workspace is set to: " + workspace)
 
     """

@@ -20,6 +20,9 @@ if __name__ == '__main__':
     plot_path = os.path.join(workspace, "plots")
     print("Your plots are stored in: " + plot_path)
 
+    plot_path4 = os.path.join(workspace, "Kap_4_plots")
+    print("Your plots are stored in: " + plot_path4)
+
     csv_results_path = os.path.join(workspace, "csv_results", )
     print("Your .csv  files are stored in: " + csv_results_path)
 
@@ -46,11 +49,15 @@ if __name__ == '__main__':
         buildings=pickle_prj.buildings,
         csv_path=csv_results_path,
         output_path=plot_path)
-
     """
     print("##########")
     plot.plot_results_Kap_3(
         buildings=pickle_prj.buildings,
         csv_path=csv_results_path,
         output_path=plot_path)
+    
+    plot.plot_results_Kap_4(
+        buildings=pickle_prj.buildings,
+        csv_path=csv_results_path,
+        output_path=plot_path4)
     """
