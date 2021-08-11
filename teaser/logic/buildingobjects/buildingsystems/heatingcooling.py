@@ -82,6 +82,16 @@ class HeatingCooling(object):
         self.hCoolRem = 0.0
         self.lCoolRem = 0.0
 
+        self.KRHeatTABS = 0.0
+        self.TNHeatTABS = 0.0
+        self.hHeatTABS = 0.0
+        self.lHeatTABS = 0.0
+
+        self.KRCoolTABS = 0.0
+        self.TNCoolTABS = 0.0
+        self.hCoolTABS = 0.0
+        self.lCoolTABS = 0.0
+
         self.shareHeatTabsExt = 0.0
         self.shareHeatTabsInt = 0.0
         self.shareHeatPanelExt = 0.0
@@ -541,6 +551,111 @@ class HeatingCooling(object):
 
         self.shareCoolRad = 0.0
         self.shareCoolConv = 1.0
+
+    def tabs_PI_control(self, specific_power_heat=30.0, specific_power_cool=30.0):
+        """Set parameter to typical panel heating and cooling system. This system is installed
+        in the core of the corresponding building part. It is assumed that this system is
+        installed in the ground floor (shareHeatTABSExt) and the other floors of the building (shareHeatTABSInt).
+        The heat transfer coefficients of the building part where the system is installed have to be adjusted.
+        """
+        self.heating = True
+        self.cooling = True
+        self.tabs = True
+        self.floor = False
+        self.radiator = True
+        self.ventilation = False
+
+        self.powerHeatTabs = 0.0
+        self.powerCoolTabs = 0.0
+        self.TThresholdHeaterTabs = 0.0
+        self.TThresholdCoolerTabs = 0.0
+        self.withTabsRoomTempControl = False
+
+        self.KRHeatPanel = 0.0
+        self.TNHeatPanel = 0.0
+        self.hHeatPanel = 0.0
+        self.lHeatPanel = 0.0
+
+        self.KRCoolPanel = 0.0
+        self.TNCoolPanel = 0.0
+        self.hCoolPanel = 0.0
+        self.lCoolPanel = 0.0
+
+        self.KRHeatRem = 0.0
+        self.TNHeatRem = 0.0
+        self.hHeatRem = 0.0
+        self.lHeatRem = 0.0
+
+        self.KRCoolRem = 0.0
+        self.TNCoolRem = 0.0
+        self.hCoolRem = 0.0
+        self.lCoolRem = 0.0
+
+        d = ((0.8 * self.parent.area) * specific_power_heat)
+        e = self.parent.model_attr.heat_load
+        f = -((0.8 * self.parent.area) * specific_power_cool)
+        g = self.parent.model_attr.cool_load
+
+        self.KRHeatTABS = 1000.0
+        self.TNHeatTABS = 1.0
+        self.hHeatTABS = e if e < d else d
+        self.lHeatTABS = 0.0
+
+        self.KRCoolTABS = 1000.0
+        self.TNCoolTABS = 1.0
+        self.hCoolTABS = 0.0
+        self.lCoolTABS = g if g > f else f
+
+        self.shareHeatTabsExt = 1/self.parent.parent.number_of_floors
+        self.shareHeatTabsInt = 1-(1/self.parent.parent.number_of_floors)
+
+        self.shareHeatPanelExt = 0.0
+        self.shareHeatPanelInt = 0.0
+
+        self.shareHeatRad = 0.0
+        self.shareHeatConv = 0.0
+
+        self.shareCoolTabsExt = 1/self.parent.parent.number_of_floors
+        self.shareCoolTabsInt = 1-(1/self.parent.parent.number_of_floors)
+
+        self.shareCoolPanelExt = 0.0
+        self.shareCoolPanelInt = 0.0
+
+        self.shareCoolRad = 0.0
+        self.shareCoolConv = 0.0
+
+        # for panel systems heat transfer coefficients are different for heating and cooling case
+        # set heat transfer coefficient for groundfloor (outer wall building part)
+        for groundfloor in self.parent.ground_floors:
+            groundfloor.inner_convection = 7.0
+            groundfloor.inner_convection_cool = 1.0
+        # set heat transfer coefficient for floor (inner wall building part)
+        for floor in self.parent.floors:
+            floor.inner_convection = 7.0
+            floor.inner_convection_cool = 1.0
+
+        weighted_sum_outer_wall = 0.0
+        weighted_sum_inner_wall = 0.0
+        area_sum_ow = 0.0
+        area_sum_iw = 0.0
+
+        for wall in (self.parent.outer_walls + self.parent.rooftops + self.parent.ground_floors):
+            area_sum_ow += wall.area
+            try:
+                weighted_sum_outer_wall += (wall.area * wall.inner_convection_cool)
+            except:
+                weighted_sum_outer_wall += (wall.area * wall.inner_convection)
+
+        self.weighted_convection_inner_cool_ow = weighted_sum_outer_wall / area_sum_ow
+
+        for wall in (self.parent.inner_walls + self.parent.ceilings + self.parent.floors):
+            area_sum_iw += wall.area
+            try:
+                weighted_sum_inner_wall += (wall.area * wall.inner_convection_cool)
+            except:
+                weighted_sum_inner_wall += (wall.area * wall.inner_convection)
+
+        self.weighted_convection_inner_cool_iw = weighted_sum_inner_wall / area_sum_iw
 
     def test_panel_heating_cooling(self, specific_power_heat, specific_power_cool, KR, TN):
         """Set parameter to typical panel heating and cooling system. This system is installed

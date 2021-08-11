@@ -125,6 +125,16 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     hCoolRem = ${zone.heating_cooling_system.hCoolRem},
     lCoolRem = ${zone.heating_cooling_system.lCoolRem},
 
+    KRHeatTABS = ${zone.heating_cooling_system.KRHeatTABS},
+    TNHeatTABS = ${zone.heating_cooling_system.TNHeatTABS},
+    hHeatTABS = ${zone.heating_cooling_system.hHeatTABS},
+    lHeatTABS = ${zone.heating_cooling_system.lHeatTABS},
+
+    KRCoolTABS = ${zone.heating_cooling_system.KRCoolTABS},
+    TNCoolTABS = ${zone.heating_cooling_system.TNCoolTABS},
+    hCoolTABS = ${zone.heating_cooling_system.hCoolTABS},
+    lCoolTABS = ${zone.heating_cooling_system.lCoolTABS},
+
     shareHeatTabsExt = ${zone.heating_cooling_system.shareHeatTabsExt},
     shareHeatTabsInt = ${zone.heating_cooling_system.shareHeatTabsInt},
     shareHeatPanelExt = ${zone.heating_cooling_system.shareHeatPanelExt},
