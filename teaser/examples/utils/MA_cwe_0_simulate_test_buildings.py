@@ -3328,7 +3328,7 @@ def generate_archetype_Sprungantwort():
     from teaser.project import Project
 
     prj = Project(load_data=True)
-    prj.name = "Sprungantwort_5"
+    prj.name = "Sprungantwort_8"
 
     prj.add_residential(
         method='iwu',
@@ -3508,12 +3508,37 @@ def generate_archetype_Sprungantwort():
             zone.use_conditions.max_user_infiltration = 0.0
             zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name="MFHtabsPI1990heavy1000",
+        year_of_construction=1990,
+        number_of_floors=5,
+        height_of_floors=2.8,
+        net_leased_area=1000.0,
+        construction_type="heavy")
+
+    bldg = prj.buildings[-1]  # can be replaced with specific building
+
+    for zone in bldg.thermal_zones:
+        zone.heating_cooling_system.tabs_PI_control(specific_power_heat=30.0, specific_power_cool=30.0)
+        zone.use_conditions.heating_profile = [294.15]
+        zone.use_conditions.cooling_profile = [298.15]
+        zone.use_conditions.max_user_infiltration = 0.5
+        zone.use_conditions.max_overheating_infiltration = [0.1, 0.1]
+        zone.use_conditions.max_summer_infiltration = [0.0, 273.15 + 10, 273.15 + 17]
+        zone.use_conditions.winter_reduction_infiltration = [0.2, 273.15, 273.15 + 10]
+        if "ICT" in zone.name:
+            zone.use_conditions.infiltration_rate = 6.0
+            zone.use_conditions.max_user_infiltration = 0.0
+            zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
+
     return prj
 
 if __name__ == '__main__':
     timing
     # set your workspace to your desired path here
-    workspace = os.path.join("T:\\", "tbl-cwe", "Sprungantwort_2")
+    workspace = os.path.join("T:\\", "tbl-cwe", "Sprungantwort_3")
     sim_results_path = os.path.join(workspace, "sim_results")
     TEASER_output_path = os.path.join(workspace, "TEASEROutput")
 

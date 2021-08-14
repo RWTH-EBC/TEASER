@@ -553,6 +553,8 @@ class HeatingCooling(object):
         self.shareCoolConv = 1.0
 
     def tabs_PI_control(self, specific_power_heat=30.0, specific_power_cool=30.0):
+        """This function is not working properly"""
+
         """Set parameter to typical panel heating and cooling system. This system is installed
         in the core of the corresponding building part. It is assumed that this system is
         installed in the ground floor (shareHeatTABSExt) and the other floors of the building (shareHeatTABSInt).
