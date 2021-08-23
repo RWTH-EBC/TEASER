@@ -246,7 +246,7 @@ class HeatingCooling(object):
         self.TNHeatPanel = 1.0
         self.hHeatPanel = e if e < d else d
         self.lHeatPanel = 0.0
-
+        
         self.KRCoolPanel = 1000.0
         self.TNCoolPanel = 1.0
         self.hCoolPanel = 0.0
@@ -281,6 +281,8 @@ class HeatingCooling(object):
         self.shareCoolConv = 0.0
 
         # for panel systems heat transfer coefficients are different for heating and cooling case
+
+        # in case of floor heating/cooling use the following two loops
         # set heat transfer coefficient for groundfloor (outer wall building part)
         for groundfloor in self.parent.ground_floors:
             groundfloor.inner_convection = 7.0
@@ -289,7 +291,27 @@ class HeatingCooling(object):
         for floor in self.parent.floors:
             floor.inner_convection = 7.0
             floor.inner_convection_cool = 1.0
-
+        """
+        # in case of ceiling heating/cooling use the following two loops
+        # set heat transfer coefficient for rooftop (outer wall building part)
+        for rooftop in self.parent.rooftops:
+            rooftop.inner_convection = 1.0
+            rooftop.inner_convection_cool = 5.0
+        # set heat transfer coefficient for ceiling (inner wall building part)
+        for ceiling in self.parent.ceilings:
+            ceiling.inner_convection = 1.0
+            ceiling.inner_convection_cool = 5.0
+        
+        # in case of wall heating/cooling use the following two loops
+        # set heat transfer coefficient for outer wall (outer wall building part)
+        for outerwall in self.parent.outer_walls:
+            outerwall.inner_convection = 6.0
+            outerwall.inner_convection_cool = 6.0
+        # set heat transfer coefficient for inner wall (inner wall building part)
+        for innerwall in self.parent.inner_walls:
+            innerwall.inner_convection = 6.0
+            innerwall.inner_convection_cool = 6.0
+        """
         weighted_sum_outer_wall = 0.0
         weighted_sum_inner_wall = 0.0
         area_sum_ow = 0.0
@@ -373,6 +395,8 @@ class HeatingCooling(object):
         self.shareCoolConv = 0.0
 
         # for panel systems heat transfer coefficients are different for heating and cooling case
+
+        # in case of floor heating/cooling use the following two loops
         # set heat transfer coefficient for groundfloor (outer wall building part)
         for groundfloor in self.parent.ground_floors:
             groundfloor.inner_convection = 7.0
@@ -381,7 +405,27 @@ class HeatingCooling(object):
         for floor in self.parent.floors:
             floor.inner_convection = 7.0
             floor.inner_convection_cool = 1.0
-
+        """
+        # in case of ceiling heating/cooling use the following two loops
+        # set heat transfer coefficient for rooftop (outer wall building part)
+        for rooftop in self.parent.rooftops:
+            rooftop.inner_convection = 1.0
+            rooftop.inner_convection_cool = 5.0
+        # set heat transfer coefficient for ceiling (inner wall building part)
+        for ceiling in self.parent.ceilings:
+            ceiling.inner_convection = 1.0
+            ceiling.inner_convection_cool = 5.0
+        
+        # in case of wall heating/cooling use the following two loops
+        # set heat transfer coefficient for outer wall (outer wall building part)
+        for outerwall in self.parent.outer_walls:
+            outerwall.inner_convection = 6.0
+            outerwall.inner_convection_cool = 6.0
+        # set heat transfer coefficient for inner wall (inner wall building part)
+        for innerwall in self.parent.inner_walls:
+            innerwall.inner_convection = 6.0
+            innerwall.inner_convection_cool = 6.0
+        """
         weighted_sum_outer_wall = 0.0
         weighted_sum_inner_wall = 0.0
         area_sum_ow = 0.0
@@ -466,6 +510,8 @@ class HeatingCooling(object):
         self.shareCoolConv = 1.0
 
         # for panel systems heat transfer coefficients are different for heating and cooling case
+
+        # in case of floor heating/cooling use the following two loops
         # set heat transfer coefficient for groundfloor (outer wall building part)
         for groundfloor in self.parent.ground_floors:
             groundfloor.inner_convection = 7.0
@@ -474,7 +520,27 @@ class HeatingCooling(object):
         for floor in self.parent.floors:
             floor.inner_convection = 7.0
             floor.inner_convection_cool = 1.0
-
+        """
+        # in case of ceiling heating/cooling use the following two loops
+        # set heat transfer coefficient for rooftop (outer wall building part)
+        for rooftop in self.parent.rooftops:
+            rooftop.inner_convection = 1.0
+            rooftop.inner_convection_cool = 5.0
+        # set heat transfer coefficient for ceiling (inner wall building part)
+        for ceiling in self.parent.ceilings:
+            ceiling.inner_convection = 1.0
+            ceiling.inner_convection_cool = 5.0
+        
+        # in case of wall heating/cooling use the following two loops
+        # set heat transfer coefficient for outer wall (outer wall building part)
+        for outerwall in self.parent.outer_walls:
+            outerwall.inner_convection = 6.0
+            outerwall.inner_convection_cool = 6.0
+        # set heat transfer coefficient for inner wall (inner wall building part)
+        for innerwall in self.parent.inner_walls:
+            innerwall.inner_convection = 6.0
+            innerwall.inner_convection_cool = 6.0
+        """
         weighted_sum_outer_wall = 0.0
         weighted_sum_inner_wall = 0.0
         area_sum_ow = 0.0
