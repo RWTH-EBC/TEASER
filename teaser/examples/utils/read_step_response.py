@@ -71,20 +71,20 @@ def read_results(signals, index, results_path):
     dymola.close()
 
     results.index = pd.date_range(
-        datetime.datetime(2021, 1, 1), periods=361, freq="H")
+        datetime.datetime(2021, 1, 1), periods=21601, freq="T")
     return results
 
 
 if __name__ == '__main__':
 
     # set your file_name here
-    file_name = "MFHtabs1990heavy1000"
+    file_name = "MFHpanel1990heavy1000_alpha3"
 
     ### set path to your workspace here ###
-    workspace = os.path.join("D:\\", "tbl-cwe", "Plots_Kap_3_step_response", "Sprungantwort_final")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Plots_Kap_3_step_response", "step_response_60s_interval")
     print("Your workspace is set to: " + workspace)
 
-    plot_path = os.path.join(workspace, "chapter3_step_response")
+    plot_path = os.path.join(workspace)
     if not os.path.exists(plot_path):
         os.makedirs(plot_path)
     print("Your plots are stored in: " + plot_path)
@@ -107,8 +107,9 @@ if __name__ == '__main__':
 
     res = read_results(signals=res_list,
                        index=pd.date_range(
-                           datetime.datetime(2021, 1, 1), periods=361, freq="H",
+                           datetime.datetime(2021, 1, 1), periods=21601, freq="T",
                        ), results_path=sim_results_file_path)
+    #datetime.datetime(2021, 1, 1), periods=361, freq="H"
 
     heat_demand = res.loc[:, 'multizone.PHeater[1]'] / 1000
     T_ope = res.loc[:, 'multizone.TOpe[1]'] - 273.15
@@ -118,16 +119,16 @@ if __name__ == '__main__':
     fig, (ax, ax2) = plt.subplots(2)
     ax.set_ylabel('Temperatur in [°C]')
     # ax.set_xlabel('Simulationszeit in h')
-    ax.plot(T_ope, linewidth=0.6, color='black')
-    ax.plot(T_air, linewidth=0.6, color='blue', label='Lufttemperatur')
-    ax.plot(T_rad, linewidth=0.6, color='red', label='Strahlungstemperatur')
+    ax.plot(T_ope, linewidth=0.5, color='black', label="Operative Temperatur")
+    ax.plot(T_rad, linewidth=0.5, color='red', label='Strahlungstemperatur')
+    ax.plot(T_air, linewidth=0.5, color='blue', label='Lufttemperatur')
     # ax2.plot(SolRad, linewidth=0.3, color='r')
     # ax.plot(heat_dem.values, linewidth=0.2, label="Wärme", color='r')
     # ax.plot(cool_dem.values, linewidth=0.2, label="Kälte", color='b')
     # ax.plot(ele_dem.values, linewidth=0.2, label="Strom", color='g')
     ax.set_ylim([16, 24])
     # ax.set_xlim(datetime.datetime(2021, 1, 1, 0, 0, 0), datetime.datetime(2021, 12, 31, 23, 55))
-    # ax.legend(loc=1.0, borderaxespad=0.2)
+    #ax.legend(loc="upper left", fontsize="x-small",  frameon=True, edgecolor="white")
     #ax.set_title('Bedarfe')
     # ax.plot([0, 8760], [0, 0], linestyle='--', linewidth=0.5, color='black')
     #ax.grid(axis='y')
@@ -139,7 +140,7 @@ if __name__ == '__main__':
     ax.xaxis.set_major_formatter(format)
     ax.margins(0)
 
-    ax2.plot(heat_demand, linewidth=0.6, color="black")
+    ax2.plot(heat_demand, linewidth=0.5, color="black")
     # ax4.plot(-data.loc[:, "Kälteleistung"], linewidth=0.5, label="Kühlleistung", color="b")
     # ax4.set_title("Heiz- und Kühllast")
     ax2.set_ylabel('Leistung [kW]')
@@ -154,7 +155,7 @@ if __name__ == '__main__':
     ax2.margins(0)
     # ax4.axvspan(datetime.datetime(2021, 4, 1, 0, 0, 0), datetime.datetime(2021, 4, 30, 23, 55),facecolor='#EDEDED')
 
-    fig.legend(loc=9, bbox_to_anchor=(0.5, 1.0,), ncol=2)
+    fig.legend(loc=9, bbox_to_anchor=(0.5, 0.97,), ncol=3, fontsize='x-small')
     plt.savefig(os.path.join(plot_path, file_name + "_step_response.pdf"), dpi=200, bbox_inches="tight")
     """
     # ax.margins(0.01)
