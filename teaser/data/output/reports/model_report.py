@@ -1,11 +1,25 @@
 """holds functions to create a report for a TEASER project model"""
 
-orient_mapper = {
-    0: 'North',
-    90: 'East',
-    180: 'South',
-    270: 'West'
-}
+# orient_mapper = {
+#     0: 'North',
+#     90: 'East',
+#     180: 'South',
+#     270: 'West'
+# }
+# todo orientations not work yet correctly
+def orient_mapper(angle):
+    orient = None
+    if -45 < angle < 45:
+        orient = 'North'
+    elif 45 < angle > 135:
+        orient = 'East'
+    elif 135 < angle < 225:
+        orient = 'South'
+    elif 225 < angle < 315:
+        orient = 'West'
+    return orient
+
+
 def localize_floats(row):
     return [
         str(el).replace('.', ',') if isinstance(el, float) else el
@@ -35,13 +49,13 @@ def calc_report_data(prj, path):
             elif orient == -2:
                 prj_data[bldg_name]['GroundFloorArea'] = bldg.outer_area[orient]
             else:
-                prj_data[bldg_name]['OuterWallArea'][orient_mapper[orient]] = \
+                prj_data[bldg_name]['OuterWallArea'][orient_mapper(orient)] = \
                     bldg.outer_area[orient]
                 outer_wall_area_total += bldg.outer_area[orient]
         window_area_total = 0
         prj_data[bldg_name]['WindowArea'] = {}
         for orient in bldg.window_area:
-            prj_data[bldg_name]['WindowArea'][orient_mapper[orient]] = \
+            prj_data[bldg_name]['WindowArea'][orient_mapper(orient)] = \
                 bldg.window_area[orient]
             window_area_total += bldg.window_area[orient]
         prj_data[bldg_name]['WindowArea_Total'] = window_area_total
@@ -80,6 +94,9 @@ def calc_report_data(prj, path):
             for ceiling in tz.ceilings:
                 u_values_ceiling.append(
                     1 / (ceiling.r_conduc * ceiling.area))
+            for floor in tz.floors:
+                u_values_ceiling.append(
+                    1 / (floor.r_conduc * floor.area))
             for door in tz.doors:
                 u_values_door.append(
                     1 / (door.r_conduc * door.area))
@@ -173,7 +190,7 @@ def calc_report_data(prj, path):
     ]
 
 
-    prj_data_flat_sorted = [(k, prj_data_flat[k]) for k in prj_sorted_list]
+    prj_data_flat_sorted = [(k, prj_data_flat[k] )  for k in prj_sorted_list if k in prj_data_flat.keys()]
     keys = ['']
     keys.extend([x[0] for x in prj_data_flat_sorted])
 
