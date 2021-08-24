@@ -863,7 +863,8 @@ class SwimmingPool(NonResidential):
         #Create dict for zones and pools
         poolsInDict = dict()
         poolsInDict["Schwimmerbecken"] = dict()
-        poolsInDict["Nichtschwimmerbecken"] = dict()   
+        if ws >= 412.5:
+            poolsInDict["Nichtschwimmerbecken"] = dict()   
          
         for i in range(1,9):
             if i != 6 and i !=7:
@@ -880,42 +881,52 @@ class SwimmingPool(NonResidential):
         poolsInDict["Zone 1"]["Air volume [m³]"] = zoneArea * 2.75
         
         # Zone 2
-        # zoneArea = wardrobes + changingRooms + sanitaryObjects + cleaningRoom + corridors 
-        wardrobes = ws**0.8 * 0.165 * 2
-        changingRooms = 3.675 + math.ceil(ws**0.58 / 14) * 21.7 + math.ceil(ws**0.58 / 7) * 23.625
+        # zoneArea = changingRooms + sanitaryObjects + cleaningRoom + corridors         
+        changingRooms = 3.675 + math.ceil(ws**0.58 / (14 * 2)) * 21.7 + math.ceil(ws**0.58 / (7 * 2)) * 23.625
         sanitaryObjects = math.ceil(ws * 0.02)
         cleaningRoom = 2
         corridors = (math.ceil(ws**0.58 / 14) * 3.1 + math.ceil(ws**0.58 / 7) * 3.375) * 1.5
-        zoneArea = wardrobes + changingRooms + sanitaryObjects + cleaningRoom + corridors        
+        zoneArea = changingRooms + sanitaryObjects + cleaningRoom + corridors        
         poolsInDict["Zone 2"]["Total area of zone (including water surface) [m²]"] = round(zoneArea, 4)
         poolsInDict["Zone 2"]["Air volume [m³]"] = round(zoneArea * 2.75, 4)  
         
         # Zone 3
-        # zoneArea = showers + toilets
+        # zoneArea = sanitary blocks + additional showers         
         if ws <= 150:
-            zoneArea = 18 + 10.51
+            zoneArea = 45.24
         elif ws <= 500:
-            zoneArea = 36 + 21.02
+            zoneArea = 82.53
         else:
-            zoneArea = math.ceil(ws**0.5) * 1.8 + math.ceil(ws**0.5) * 1.051
+            numShowers = ws**0.5            
+            # (Due to the arrangement of the sanitary rooms, 4 showers will be added at once for additional capacity)
+            numShowers = math.ceil(numShowers / 4) * 4
+            numSanitaryDoubleBlocks = math.floor(numShowers/20)            
+            numAdditionalShowers = (numShowers - numSanitaryDoubleBlocks * 20) / 4
+            zoneArea = numSanitaryDoubleBlocks * 82.53 + numAdditionalShowers * 10.44 # 4 additional showers 
             
         poolsInDict["Zone 3"]["Total area of zone (including water surface) [m²]"] = round(zoneArea, 4)
         poolsInDict["Zone 3"]["Air volume [m³]"] = round(zoneArea * 2.75, 4)         
         
-        # Zone 4 and basic parameter for pools
-        if ws <= 582:
-            poolsInDict["Nichtschwimmerbecken"]["Water surface"] = 100
-            beginnerPoolWidth = 8   
-            beginnerPoolLength = 10
-        else:
-            poolsInDict["Nichtschwimmerbecken"]["Water surface"] = 166.7
-            beginnerPoolWidth = 10   
-            beginnerPoolLength = 16.66
+        # Zone 4 and basic parameter for pools        
+        if ws < 412.5:
+            poolsInDict["Schwimmerbecken"]["Water surface"] = ws
             
-        poolsInDict["Schwimmerbecken"]["Water surface"] = ws - poolsInDict["Nichtschwimmerbecken"]["Water surface"]
+        else:            
+            
+            if ws <= 582:
+                poolsInDict["Nichtschwimmerbecken"]["Water surface"] = 100
+                beginnerPoolWidth = 8   
+                beginnerPoolLength = 10
+            else:
+                poolsInDict["Nichtschwimmerbecken"]["Water surface"] = 166.7
+                beginnerPoolWidth = 10   
+                beginnerPoolLength = 16.66
+                
+            poolsInDict["Schwimmerbecken"]["Water surface"] = ws - poolsInDict["Nichtschwimmerbecken"]["Water surface"]
+            
         #Assign respective pool from basic pool areas, which defines the aspect ratio
         reference = min([312.5, 415, 830, 1050, 1250], key = lambda \
-                    x:abs(x - poolsInDict["Schwimmerbecken"]["Water surface"]))
+                x:abs(x - poolsInDict["Schwimmerbecken"]["Water surface"]))
         
         if reference < 830:
             mainPoolLength = 25
@@ -923,14 +934,21 @@ class SwimmingPool(NonResidential):
             mainPoolLength = 50
         
         mainPoolWidth = round(poolsInDict["Schwimmerbecken"]["Water surface"]/mainPoolLength, 4)
-        hallLength = mainPoolLength + beginnerPoolWidth + 8.25
-        hallWidth = mainPoolWidth + 4.5
+        
+        if ws >= 412.5:
+            hallLength = mainPoolLength + beginnerPoolWidth + 8.25            
+        else:
+            hallLength = mainPoolLength + 4.5
+            
+        hallWidth = mainPoolWidth + 4.5    
         zoneArea = hallWidth * hallLength
         
-        poolsInDict["Nichtschwimmerbecken"]["Tiefe Becken"] = 0.975
-        poolsInDict["Nichtschwimmerbecken"]["Water volume"] = poolsInDict["Nichtschwimmerbecken"]["Tiefe Becken"] * \
-            poolsInDict["Nichtschwimmerbecken"]["Water surface"]
-            
+        if ws >= 412.5:
+            poolsInDict["Nichtschwimmerbecken"]["Tiefe Becken"] = 0.975
+            poolsInDict["Nichtschwimmerbecken"]["Water volume"] = \
+                poolsInDict["Nichtschwimmerbecken"]["Tiefe Becken"] * \
+                    poolsInDict["Nichtschwimmerbecken"]["Water surface"]        
+        
         poolsInDict["Schwimmerbecken"]["Tiefe Becken"] = 3
         poolsInDict["Schwimmerbecken"]["Water volume"] = poolsInDict["Schwimmerbecken"]["Tiefe Becken"] * \
             poolsInDict["Schwimmerbecken"]["Water surface"]
@@ -949,38 +967,39 @@ class SwimmingPool(NonResidential):
         poolsInDict["Zone 8"]["Air volume [m³]"] = zoneArea * 3.5
         
         #Additional pool data
-        poolsInDict["Schwimmerbecken"]["Pool temperature"] = 299.15
-        poolsInDict["Nichtschwimmerbecken"]["Pool temperature"] = 299.15
-        poolsInDict["Schwimmerbecken"]["Umfang Becken"] = 2 * mainPoolWidth + 2 * mainPoolLength
-        poolsInDict["Nichtschwimmerbecken"]["Umfang Becken"] = 2 * beginnerPoolWidth + 2 * beginnerPoolLength
-        poolsInDict["Schwimmerbecken"]["Nachtabsenkung"] = "false"
-        poolsInDict["Nichtschwimmerbecken"]["Nachtabsenkung"] = "false"
-        poolsInDict["Schwimmerbecken"]["Aufbereitungsvolumenstrom Nachts"] = 30
-        poolsInDict["Nichtschwimmerbecken"]["Aufbereitungsvolumenstrom Nachts"] = 0
-        poolsInDict["Schwimmerbecken"]["Beckenabdeckung"] = "false"
-        poolsInDict["Nichtschwimmerbecken"]["Beckenabdeckung"] = "false"
-        poolsInDict["Schwimmerbecken"]["Wellenbetrieb"] = "false"
-        poolsInDict["Nichtschwimmerbecken"]["Wellenbetrieb"] = "false"
-        poolsInDict["Schwimmerbecken"]["Wellenhöhe"] = 0
-        poolsInDict["Nichtschwimmerbecken"]["Wellenhöhe"] = 0
-        poolsInDict["Schwimmerbecken"]["Wellenbreite"] = 0
-        poolsInDict["Nichtschwimmerbecken"]["Wellenbreite"] = 0
-        poolsInDict["Schwimmerbecken"]["Abwasseraufbereitung"] = "true"
-        poolsInDict["Nichtschwimmerbecken"]["Abwasseraufbereitung"] = "true"
-        poolsInDict["Schwimmerbecken"]["Abwasseraufbereitungsgrad"] = 0.8
-        poolsInDict["Nichtschwimmerbecken"]["Abwasseraufbereitungsgrad"] = 0.8
-        poolsInDict["Schwimmerbecken"]["Besucherzahl"] = round(ws**0.58 * 2/3, 0) #num of changing rooms
-        poolsInDict["Nichtschwimmerbecken"]["Besucherzahl"] = round(ws**0.58 * 1/3, 0)
-        poolsInDict["Schwimmerbecken"]["Filterspülungen"] = 2
-        poolsInDict["Nichtschwimmerbecken"]["Filterspülungen"] = 2
-        poolsInDict["Schwimmerbecken"]["Filterkombination"] = "ohne Ozon"
-        poolsInDict["Nichtschwimmerbecken"]["Filterkombination"] = "ohne Ozon"
-        poolsInDict["Schwimmerbecken"]["Filtertyp"] = "offener Saugfilter"
-        poolsInDict["Nichtschwimmerbecken"]["Filtertyp"] = "offener Saugfilter"
-        poolsInDict["Schwimmerbecken"]["Wasserart"] = "Süßwasser"
-        poolsInDict["Nichtschwimmerbecken"]["Wasserart"] = "Süßwasser"
+        poolsInDict["Schwimmerbecken"]["Pool temperature"] = 299.15        
+        poolsInDict["Schwimmerbecken"]["Umfang Becken"] = 2 * mainPoolWidth + 2 * mainPoolLength        
+        poolsInDict["Schwimmerbecken"]["Nachtabsenkung"] = "false"        
+        poolsInDict["Schwimmerbecken"]["Aufbereitungsvolumenstrom Nachts"] = 30        
+        poolsInDict["Schwimmerbecken"]["Beckenabdeckung"] = "false"        
+        poolsInDict["Schwimmerbecken"]["Wellenbetrieb"] = "false"        
+        poolsInDict["Schwimmerbecken"]["Wellenhöhe"] = 0        
+        poolsInDict["Schwimmerbecken"]["Wellenbreite"] = 0        
+        poolsInDict["Schwimmerbecken"]["Abwasseraufbereitung"] = "true"        
+        poolsInDict["Schwimmerbecken"]["Abwasseraufbereitungsgrad"] = 0.8        
+        poolsInDict["Schwimmerbecken"]["Besucherzahl"] = round(ws**0.58 * 2/3, 0) #num of changing rooms        
+        poolsInDict["Schwimmerbecken"]["Filterspülungen"] = 2        
+        poolsInDict["Schwimmerbecken"]["Filterkombination"] = "ohne Ozon"        
+        poolsInDict["Schwimmerbecken"]["Filtertyp"] = "offener Saugfilter"        
+        poolsInDict["Schwimmerbecken"]["Wasserart"] = "Süßwasser"        
         
-        
+        if ws >= 412.5:
+            poolsInDict["Nichtschwimmerbecken"]["Pool temperature"] = 299.15
+            poolsInDict["Nichtschwimmerbecken"]["Umfang Becken"] = 2 * beginnerPoolWidth + 2 * beginnerPoolLength
+            poolsInDict["Nichtschwimmerbecken"]["Nachtabsenkung"] = "false"
+            poolsInDict["Nichtschwimmerbecken"]["Aufbereitungsvolumenstrom Nachts"] = 0
+            poolsInDict["Nichtschwimmerbecken"]["Beckenabdeckung"] = "false"
+            poolsInDict["Nichtschwimmerbecken"]["Wellenbetrieb"] = "false"
+            poolsInDict["Nichtschwimmerbecken"]["Wellenhöhe"] = 0
+            poolsInDict["Nichtschwimmerbecken"]["Wellenbreite"] = 0
+            poolsInDict["Nichtschwimmerbecken"]["Abwasseraufbereitung"] = "true"
+            poolsInDict["Nichtschwimmerbecken"]["Abwasseraufbereitungsgrad"] = 0.8
+            poolsInDict["Nichtschwimmerbecken"]["Besucherzahl"] = round(ws**0.58 * 1/3, 0)
+            poolsInDict["Nichtschwimmerbecken"]["Filterspülungen"] = 2
+            poolsInDict["Nichtschwimmerbecken"]["Filterkombination"] = "ohne Ozon"
+            poolsInDict["Nichtschwimmerbecken"]["Filtertyp"] = "offener Saugfilter"
+            poolsInDict["Nichtschwimmerbecken"]["Wasserart"] = "Süßwasser"
+            
         return poolsInDict
         
     @property
