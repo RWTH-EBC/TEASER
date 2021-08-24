@@ -779,6 +779,13 @@ class SwimmingPool(NonResidential):
                 
                 ## use_parialLoad ##
                 paramRecord["use_partialLoad"] = self.poolsInDict[zone.name]["Nachtabsenkung"]
+                
+                ## use_idealHeatExchanger ##
+                paramRecord["use_idealHeatExchanger"] = self.poolsInDict[zone.name]["IdealerWaermetauscher"]
+                
+                ## use_HeatRecovery ##
+                paramRecord["use_HRS"] = self.poolsInDict[zone.name]["Wärmerückgewinnung Spühlabwasser"]
+                paramRecord["efficiencyHRS"] = self.poolsInDict[zone.name]["Wärmerückgewinnungsgrad Spühlabwasser"]                
 
                 ## use_poolCover ##
                 paramRecord["use_poolCover"] = self.poolsInDict[zone.name]["Beckenabdeckung"]
@@ -787,7 +794,10 @@ class SwimmingPool(NonResidential):
                 paramRecord["use_wavePool"] = self.poolsInDict[zone.name]["Wellenbetrieb"]
                 paramRecord["h_wave"] = self.poolsInDict[zone.name]["Wellenhöhe"]
                 paramRecord["w_wave"] = self.poolsInDict[zone.name]["Wellenbreite"]
-
+                paramRecord["wavePool_period"] = self.poolsInDict[zone.name]["Intervalle Wellenbetrieb"]
+                paramRecord["wavePool_startTime"] = self.poolsInDict[zone.name]["Wellenbetrieb Startzeit"]
+                paramRecord["wavePool_width"] = self.poolsInDict[zone.name]["Breite Wellenbecken"]
+                
                 ## waterRecycling ##
                 paramRecord["use_waterRecycling"] = self.poolsInDict[zone.name]["Abwasseraufbereitung"]
 
@@ -799,6 +809,16 @@ class SwimmingPool(NonResidential):
                 m_Filter = 995.65 * self.poolsInDict[zone.name]["Filterspülungen"] * V_fs * 1/(7*24*3600)
                 m_flow_out = max(m_Besucher, m_Filter)
                 paramRecord["m_flow_out"] = m_flow_out
+                
+                ## poolWalls ##
+                paramRecord["AInnerPoolWall"] = self.poolsInDict[zone.name]["Pool wall without earth contact"]
+                paramRecord["APoolWallWithEarthContact"] = self.poolsInDict[zone.name]["Pool wall with earth contact"]
+                paramRecord["APoolFloorWithEarthContact"] = self.poolsInDict[zone.name]["Pool floor with earth contact"]
+                paramRecord["AInnerPoolFloor"] = self.poolsInDict[zone.name]["Pool floor without earth contact"]
+                paramRecord["hConWaterHorizontal"] = self.poolsInDict[zone.name]["hConWaterHorizontal"]
+                paramRecord["hConWaterVertical"] = self.poolsInDict[zone.name]["hConWaterVertical"]
+                paramRecord["PoolWallParam"] = self.poolsInDict[zone.name]["PoolWallParam"]
+                                
                 
                 #Sets Data to Record
                 zone.paramRecord = paramRecord
@@ -968,40 +988,47 @@ class SwimmingPool(NonResidential):
         
         #Additional pool data
         poolsInDict["Schwimmerbecken"]["Pool temperature"] = 299.15        
-        poolsInDict["Schwimmerbecken"]["Umfang Becken"] = 2 * mainPoolWidth + 2 * mainPoolLength        
-        poolsInDict["Schwimmerbecken"]["Nachtabsenkung"] = "false"        
-        poolsInDict["Schwimmerbecken"]["Aufbereitungsvolumenstrom Nachts"] = 30        
-        poolsInDict["Schwimmerbecken"]["Beckenabdeckung"] = "false"        
-        poolsInDict["Schwimmerbecken"]["Wellenbetrieb"] = "false"        
-        poolsInDict["Schwimmerbecken"]["Wellenhöhe"] = 0        
-        poolsInDict["Schwimmerbecken"]["Wellenbreite"] = 0        
-        poolsInDict["Schwimmerbecken"]["Abwasseraufbereitung"] = "true"        
-        poolsInDict["Schwimmerbecken"]["Abwasseraufbereitungsgrad"] = 0.8        
-        poolsInDict["Schwimmerbecken"]["Besucherzahl"] = round(ws**0.58 * 2/3, 0) #num of changing rooms        
-        poolsInDict["Schwimmerbecken"]["Filterspülungen"] = 2        
-        poolsInDict["Schwimmerbecken"]["Filterkombination"] = "ohne Ozon"        
-        poolsInDict["Schwimmerbecken"]["Filtertyp"] = "offener Saugfilter"        
-        poolsInDict["Schwimmerbecken"]["Wasserart"] = "Süßwasser"        
+        poolsInDict["Schwimmerbecken"]["Umfang Becken"] = 2 * mainPoolWidth + 2 * mainPoolLength                     
+        poolsInDict["Schwimmerbecken"]["Besucherzahl"] = round(ws**0.58 * 2/3, 0) #num of changing rooms
+        poolsInDict = self.basicPoolDataRecord(poolsInDict, "Schwimmerbecken")        
+
         
         if ws >= 412.5:
             poolsInDict["Nichtschwimmerbecken"]["Pool temperature"] = 299.15
             poolsInDict["Nichtschwimmerbecken"]["Umfang Becken"] = 2 * beginnerPoolWidth + 2 * beginnerPoolLength
-            poolsInDict["Nichtschwimmerbecken"]["Nachtabsenkung"] = "false"
-            poolsInDict["Nichtschwimmerbecken"]["Aufbereitungsvolumenstrom Nachts"] = 0
-            poolsInDict["Nichtschwimmerbecken"]["Beckenabdeckung"] = "false"
-            poolsInDict["Nichtschwimmerbecken"]["Wellenbetrieb"] = "false"
-            poolsInDict["Nichtschwimmerbecken"]["Wellenhöhe"] = 0
-            poolsInDict["Nichtschwimmerbecken"]["Wellenbreite"] = 0
-            poolsInDict["Nichtschwimmerbecken"]["Abwasseraufbereitung"] = "true"
-            poolsInDict["Nichtschwimmerbecken"]["Abwasseraufbereitungsgrad"] = 0.8
-            poolsInDict["Nichtschwimmerbecken"]["Besucherzahl"] = round(ws**0.58 * 1/3, 0)
-            poolsInDict["Nichtschwimmerbecken"]["Filterspülungen"] = 2
-            poolsInDict["Nichtschwimmerbecken"]["Filterkombination"] = "ohne Ozon"
-            poolsInDict["Nichtschwimmerbecken"]["Filtertyp"] = "offener Saugfilter"
-            poolsInDict["Nichtschwimmerbecken"]["Wasserart"] = "Süßwasser"
-            
+            poolsInDict["Nichtschwimmerbecken"]["Besucherzahl"] = round(ws**0.58 * 1/3, 0) 
+            poolsInDict = self.basicPoolDataRecord(poolsInDict, "Nichtschwimmerbecken")
         return poolsInDict
         
+    def basicPoolDataRecord(self, poolsInDict, poolName):
+        poolsInDict[poolName]["Nachtabsenkung"] = "true"        
+        poolsInDict[poolName]["Aufbereitungsvolumenstrom Nachts"] = 30        
+        poolsInDict[poolName]["Beckenabdeckung"] = "false"        
+        poolsInDict[poolName]["Wellenbetrieb"] = "false"        
+        poolsInDict[poolName]["Wellenhöhe"] = 0        
+        poolsInDict[poolName]["Wellenbreite"] = 0        
+        poolsInDict[poolName]["Abwasseraufbereitung"] = "true"        
+        poolsInDict[poolName]["Abwasseraufbereitungsgrad"] = 0.8       
+        poolsInDict[poolName]["Filterspülungen"] = 2        
+        poolsInDict[poolName]["Filterkombination"] = "ohne Ozon"        
+        poolsInDict[poolName]["Filtertyp"] = "offener Saugfilter"        
+        poolsInDict[poolName]["Wasserart"] = "Süßwasser"  
+        poolsInDict[poolName]["IdealerWaermetauscher"] = "true"
+        poolsInDict[poolName]["Wärmerückgewinnung Spühlabwasser"] = "true"
+        poolsInDict[poolName]["Wärmerückgewinnungsgrad Spühlabwasser"] = 0.8
+        poolsInDict[poolName]["Intervalle Wellenbetrieb"] = 1800
+        poolsInDict[poolName]["Wellenbetrieb Startzeit"] = 0
+        poolsInDict[poolName]["Breite Wellenbecken"] = 10/30*100
+        poolsInDict[poolName]["Pool floor without earth contact"] = 0.001
+        poolsInDict[poolName]["Pool floor with earth contact"] = 559.82
+        poolsInDict[poolName]["Pool wall without earth contact"] = 21.658
+        poolsInDict[poolName]["Pool wall with earth contact"] = 143.32
+        poolsInDict[poolName]["hConWaterHorizontal"] = 50.0
+        poolsInDict[poolName]["hConWaterVertical"] = 5200.0
+        poolsInDict[poolName]["PoolWallParam"] = "AixLib.DataBase.Pools.SwimmingPoolWall.ConcreteConstruction()"
+        return poolsInDict
+        
+    
     @property
     def office_layout(self):
         return self._office_layout

@@ -99,8 +99,8 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
       },
     % else:
       SwimmingPools = false,
-      numPools = 1,
-      poolParam = {AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.NoPool()},
+      numPools = 0,
+      poolParam = {AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()},
     % endif
     );
 end ${zone.parent.name}_${zone.name};
