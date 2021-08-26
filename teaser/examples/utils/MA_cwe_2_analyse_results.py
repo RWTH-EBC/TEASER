@@ -8,7 +8,7 @@ import timing
 if __name__ == '__main__':
     timing
     # set path to your workspace here
-    workspace = os.path.join("D:\\", "tbl-cwe", "Final_Simulations", "Complete_06_08_TABS_plow3")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Final_Simulations", "Chapter4_Ref_floor2x")
     print("Your workspace is set to: " + workspace)
 
     """
@@ -51,6 +51,7 @@ if __name__ == '__main__':
                         range(len(bldg.thermal_zones))]
             signals += ['multizone.PHeater[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.PCooler[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
+            signals += ['multizone.zone[{}].ROM.extWall.Q_flow'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             """
             res.read_results(
                 buildings=[bldg.name],
@@ -74,6 +75,7 @@ if __name__ == '__main__':
                         range(len(bldg.thermal_zones))]
             signals += ['multizone.PHeater[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.PCooler[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
+            signals += ['multizone.zone[{}].ROM.extWall.Q_flow'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             """
             res.read_results(
                 buildings=[bldg.name],
@@ -83,6 +85,17 @@ if __name__ == '__main__':
                 results_path=sim_results_path,
                 csv_path=csv_results_path,
             )"""
+        elif "TABS" in bldg.name:
+            signals = ['multizone.TOpe[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
+            signals += ['multizone.TAir[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
+            signals += ['multizone.TRad[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
+            signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.tabsHeatingPower'.format(i + 1) for i in
+                        range(len(bldg.thermal_zones))]
+            signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.tabsCoolingPower'.format(i + 1) for i in
+                        range(len(bldg.thermal_zones))]
+            signals += ['multizone.PHeater[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
+            signals += ['multizone.PCooler[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
+            signals += ['multizone.zone[{}].ROM.extWall.Q_flow'.format(i + 1) for i in range(len(bldg.thermal_zones))]
         elif "radiator" in bldg.name:
             signals = ['multizone.TOpe[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.TAir[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
@@ -90,6 +103,7 @@ if __name__ == '__main__':
             signals += ['multizone.zone[{}].heaterCoolerWithTabs6007C1.pITempHeatRem.y'.format(i + 1) for i in
                         range(len(bldg.thermal_zones))]
             signals += ['multizone.PHeater[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
+            signals += ['multizone.zone[{}].ROM.extWall.Q_flow'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             """
             res.read_results(
                 buildings=[bldg.name],
@@ -109,6 +123,7 @@ if __name__ == '__main__':
                         range(len(bldg.thermal_zones))]
             signals += ['multizone.PHeater[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             signals += ['multizone.PCooler[{}]'.format(i + 1) for i in range(len(bldg.thermal_zones))]
+            signals += ['multizone.zone[{}].ROM.extWall.Q_flow'.format(i + 1) for i in range(len(bldg.thermal_zones))]
             """
             res.read_results(
                 buildings=[bldg.name],

@@ -246,7 +246,7 @@ class HeatingCooling(object):
         self.TNHeatPanel = 1.0
         self.hHeatPanel = e if e < d else d
         self.lHeatPanel = 0.0
-        
+
         self.KRCoolPanel = 1000.0
         self.TNCoolPanel = 1.0
         self.hCoolPanel = 0.0

@@ -22,7 +22,7 @@ def generate_archetype():
     from teaser.project import Project
 
     prj = Project(load_data=True)
-    prj.name = "Complete_06_08_TABS_plow3"
+    prj.name = "Chapter_4_Ref"
 
     heating_profile_night_reduction = [292.15,
                                        292.15,
@@ -78,7 +78,7 @@ def generate_archetype():
     ######################################################################################
 
     # -----EFH radiator-----
-
+    """
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
@@ -892,7 +892,7 @@ def generate_archetype():
             zone.use_conditions.infiltration_rate = 6.0
             zone.use_conditions.max_user_infiltration = 0.0
             zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
-
+    """
     # ----------------------------------------------
 
     ######################################################################################
@@ -925,7 +925,7 @@ def generate_archetype():
             zone.use_conditions.infiltration_rate = 6.0
             zone.use_conditions.max_user_infiltration = 0.0
             zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
-
+    """
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
@@ -935,7 +935,7 @@ def generate_archetype():
         height_of_floors=2.8,
         net_leased_area=2000.0,
         construction_type="heavy")
-
+    
     bldg = prj.buildings[-1]  # can be replaced with specific building
 
     for zone in bldg.thermal_zones:
@@ -1102,7 +1102,7 @@ def generate_archetype():
             zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     # ------MFH panel-----
-
+    """
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
@@ -1127,7 +1127,7 @@ def generate_archetype():
             zone.use_conditions.infiltration_rate = 6.0
             zone.use_conditions.max_user_infiltration = 0.0
             zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
-
+    """
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
@@ -1304,7 +1304,7 @@ def generate_archetype():
             zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
 
     # -----MFH tabs plus air-----
-
+    """
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
@@ -1330,7 +1330,7 @@ def generate_archetype():
             zone.use_conditions.infiltration_rate = 6.0
             zone.use_conditions.max_user_infiltration = 0.0
             zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
-
+    """
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
@@ -1512,7 +1512,7 @@ def generate_archetype():
             zone.use_conditions.infiltration_rate = 6.0
             zone.use_conditions.max_user_infiltration = 0.0
             zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
-
+    """
     # -----MFH convective-----
 
     prj.add_residential(
@@ -1539,7 +1539,7 @@ def generate_archetype():
             zone.use_conditions.infiltration_rate = 6.0
             zone.use_conditions.max_user_infiltration = 0.0
             zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
-
+    """
     prj.add_residential(
         method='iwu',
         usage='single_family_dwelling',
@@ -2536,14 +2536,14 @@ def generate_archetype():
             zone.use_conditions.infiltration_rate = 6.0
             zone.use_conditions.max_user_infiltration = 0.0
             zone.use_conditions.winter_reduction_infiltration = [1.0, 273.15, 273.15 + 10]
-
+    """
     return prj
 
 
 if __name__ == '__main__':
     timing
     # set your workspace to your desired path here
-    workspace = os.path.join("D:\\", "tbl-cwe", "Final_Simulations", "Complete_06_08_TABS_plow3")
+    workspace = os.path.join("D:\\", "tbl-cwe", "Final_Simulations", "Chapter_4_Ref")
     print("Your workspace is set to: " + workspace)
     sim_results_path = os.path.join(workspace, "sim_results")
     TEASER_output_path = os.path.join(workspace, "TEASEROutput")
