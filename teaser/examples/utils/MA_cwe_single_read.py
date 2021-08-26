@@ -52,7 +52,7 @@ if __name__ == '__main__':
               'axes.grid.axis': 'y',
               'axes.grid': True,
               'grid.color': '#DDDDDD',
-              'figure.figsize': (sitewidth, sitewidth / 16 * 9),
+              'figure.figsize': (sitewidth, sitewidth / 16 * 12),
               'figure.subplot.hspace': 0.3,
               'axes.ymargin': 0.1,
               }
@@ -121,10 +121,22 @@ if __name__ == '__main__':
     T_outdoor = res.loc[:, 'weaDat.weaBus.TDryBul'] - 273.15
     SolRad = res.loc[:, 'weaDat.weaBus.HGloHor']
 
-    fig, ax = plt.subplots()
+    fig, (ax, ax2) = plt.subplots(2)
     ax.set_ylabel('Außentemperatur in [°C]')
     # ax.set_xlabel('Simulationszeit in h')
     ax.plot(T_outdoor, linewidth=0.4, color='black')
+
+    ax2.set_ylabel('Solarstrahlung in [W/m$^2$]')
+    ax2.plot(SolRad, linewidth=0.3, color="black")
+    ax2.margins(0.01)
+    ax2.set_xlim(datetime.datetime(2021, 1, 1, 0, 0, 0), datetime.datetime(2021, 12, 31, 23, 55))
+    ax2.xaxis.set_major_locator(allmonths)
+    ax2.xaxis.set_minor_locator(months_locator)
+    ax2.xaxis.set_major_formatter(mticker.NullFormatter())
+    ax2.xaxis.set_minor_formatter(months_formatter)
+    ax2.yaxis.set_minor_locator(mticker.MultipleLocator(100))
+    ax2.tick_params(axis="x", which="minor", length=0)
+
     # ax2.plot(SolRad, linewidth=0.3, color='r')
     # ax.plot(heat_dem.values, linewidth=0.2, label="Wärme", color='r')
     # ax.plot(cool_dem.values, linewidth=0.2, label="Kälte", color='b')
@@ -144,9 +156,10 @@ if __name__ == '__main__':
     ax.yaxis.set_minor_locator(mticker.MultipleLocator(5))
     ax.tick_params(axis="x", which="minor", length=0)
 
+    fig.align_ylabels()
     plt.tight_layout()
     # plt.savefig(os.path.join(plot_path, 'Temperatur.png'), dpi=200, transparent=True)
-    plt.savefig(os.path.join(plot_path, 'Temperatur.pdf'), dpi=200)
+    plt.savefig(os.path.join(plot_path, 'Wetter.pdf'), dpi=200)
 
     # clear plot lines, keep axes
     for artist in ax.lines + ax.collections:

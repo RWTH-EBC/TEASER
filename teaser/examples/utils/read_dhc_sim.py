@@ -258,7 +258,7 @@ def plot_EFH_results(data):
     # set limits
     ax1.set_ylim([0, 15])
     ax2.set_ylim([0, 10])
-    ax3.set_ylim([0, 0.3])
+    ax3.set_ylim([-0.2, 0.3])
     ax1.set_xlim(datetime.datetime(2021, 1, 1, 0, 0, 0), datetime.datetime(2021, 12, 31, 23, 55))
     ax2.set_xlim(datetime.datetime(2021, 1, 1, 0, 0, 0), datetime.datetime(2021, 12, 31, 23, 55))
     ax3.set_xlim(datetime.datetime(2021, 1, 1, 0, 0, 0), datetime.datetime(2021, 12, 31, 23, 55))
@@ -323,7 +323,7 @@ def plot_MFH_results(data):
     # set limits
     ax1.set_ylim([0, 35])
     ax2.set_ylim([0, 30])
-    ax3.set_ylim([0, 1.2])
+    ax3.set_ylim([-0.7, 1.2])
     ax1.set_xlim(datetime.datetime(2021, 1, 1, 0, 0, 0), datetime.datetime(2021, 12, 31, 23, 55))
     ax2.set_xlim(datetime.datetime(2021, 1, 1, 0, 0, 0), datetime.datetime(2021, 12, 31, 23, 55))
     ax3.set_xlim(datetime.datetime(2021, 1, 1, 0, 0, 0), datetime.datetime(2021, 12, 31, 23, 55))
@@ -609,7 +609,7 @@ def compare_dhc_results(data1, data2, title, linestyles="dotted"):
 if __name__ == '__main__':
 
     # set your simulation variant here
-    variante = "v5"
+    variante = "v1"
 
     # set your file_name and folder here
     if variante == "v1":
@@ -693,12 +693,12 @@ if __name__ == '__main__':
 
     # plot results
 
-    plot_dhc_results(data_ref)
-    plot_EZ_results(data)
+    #plot_dhc_results(data_ref)
+    #plot_EZ_results(data)
     plot_EFH_results(data)
     plot_MFH_results(data)
-    plot_Office_results(data)
-    compare_dhc_results(data, data_ref, title="Variante 1 (gestrichelt) im Vergleich zu Variante 5", linestyles="--")
+    #plot_Office_results(data)
+    #compare_dhc_results(data, data_ref, title="Variante 1 (gestrichelt) im Vergleich zu Variante 5", linestyles="--")
 
 
     # clear plot lines, keep axes

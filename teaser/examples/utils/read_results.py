@@ -159,6 +159,9 @@ def read_results(
         heat.loc[:, bldg + " pITempHeatPanel.y"] = results.filter(like="pITempHeatPanel.y").sum(axis=1)[
                                                    index_res[0]: index_res[-1]
                                                    ]
+        heat.loc[:, bldg + " extWall.Q_flow"] = results.filter(like="extWall.Q_flow").sum(axis=1)[
+                                                   index_res[0]: index_res[-1]
+                                                   ]
 
         cool = pd.DataFrame(
             data=results.filter(like="PCool")
@@ -1087,7 +1090,7 @@ def boxplot_results(buildings, csv_path, output_path):
         elif "panel" in bldg.name:
             system = "panel"
         elif "convective" in bldg.name:
-            system = "conv"
+            system = "kon"
         elif "tabs" in bldg.name:
             system = "tabs+"
 

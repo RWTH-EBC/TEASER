@@ -304,7 +304,7 @@ def plot_TABS_curves(output_path):
 
     T = np.array([-10, 0, 15])
     power = np.array([100, 100, 30])
-    T_K = np.array([27, 22, 18])
+    T_K = np.array([27, 25, 18])
     power_K = np.array([100, 100, 30])
 
     fig, ax = plt.subplots()
@@ -853,5 +853,5 @@ if __name__ == '__main__':
 
     # plot_comfort_diagrams_Kap_1(output_path2)
 
-    plot_alpha_k_Kap_1(output_path2)
+    # plot_alpha_k_Kap_1(output_path2)
 
