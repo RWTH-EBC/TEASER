@@ -1742,6 +1742,33 @@
             }
         }
     },
+    "GroundFloor_[0, 2015]_up_half_light": {
+        "building_age_group": [
+            0,
+            2015
+        ],
+        "construction_type": "up_half_light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.000000000000004,
+        "layer": {
+            "0": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "heavy_clay_without_fibre_content_2000",
+                    "material_id": "4cd27146-3a43-11e7-a2a6-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.0045,
+                "material": {
+                    "name": "basalt_normal_fibre_150",
+                    "material_id": "246bd5f8-3a43-11e7-a2d3-2cd444b2e704"
+                }
+            }
+        }
+    },
     "InnerWall_[0, 1918]_heavy": {
         "building_age_group": [
             0,
@@ -3089,6 +3116,31 @@
                 "material": {
                     "name": "wooden_beams_with_insulation",
                     "material_id": "6d473498-3a43-11e7-83d8-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "Floor_[0, 2015]_up_half_light": {
+        "building_age_group": [
+            0,
+            2015
+        ],
+        "construction_type": "up_half_light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "heavy_clay_without_fibre_content_2000",
+                    "material_id": "4cd27146-3a43-11e7-a2a6-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.0045,
+                "material": {
+                    "name": "basalt_normal_fibre_150",
+                    "material_id": "246bd5f8-3a43-11e7-a2d3-2cd444b2e704"
                 }
             }
         }
