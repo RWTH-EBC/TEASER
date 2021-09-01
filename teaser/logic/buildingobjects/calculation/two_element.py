@@ -416,6 +416,14 @@ class TwoElement(object):
             inner_wall.calc_equivalent_res()
             inner_wall.calc_ua_value()
 
+        for inner_tabs in self.thermal_zone.inner_tabs:
+            inner_tabs.calc_equivalent_res()
+            inner_tabs.calc_ua_value()
+
+        for outer_tabs in self.thermal_zone.outer_tabs:
+            outer_tabs.calc_equivalent_res()
+            outer_tabs.calc_ua_value()
+
         self.set_calc_default()
         if len(outer_walls) < 1:
             warnings.warn(
@@ -429,6 +437,7 @@ class TwoElement(object):
             )
         else:
             self._sum_outer_wall_elements()
+
         if (
             len(
                 self.thermal_zone.inner_walls
@@ -477,15 +486,13 @@ class TwoElement(object):
             self.thermal_zone.use_conditions.ext_tabs = False
             if self.thermal_zone.inner_tabs[0].construction_type.endswith('CC'):
                 self.thermal_zone.use_conditions.cc_tabs = True
-            # self._sum_tabs_elements()
-            # self._calc_tabs()
+            self._calc_tabs()
         elif len(self.thermal_zone.outer_tabs) > 0:
             self.thermal_zone.use_conditions.with_tabs = True
             self.thermal_zone.use_conditions.ext_tabs = True
             if self.thermal_zone.outer_tabs[0].construction_type.endswith('CC'):
                 self.thermal_zone.use_conditions.cc_tabs = True
-            # self._sum_tabs_elements()
-            # self._calc_tabs()
+            self._calc_tabs()
 
         self._calc_number_of_elements()
         self._fill_zone_lists()
