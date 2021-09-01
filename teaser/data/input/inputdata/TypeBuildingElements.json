@@ -1750,8 +1750,6 @@
         "construction_type": "up_half_light",
         "inner_radiation": 5.0,
         "inner_convection": 1.7000000000000002,
-        "outer_radiation": 5.0,
-        "outer_convection": 20.000000000000004,
         "layer": {
             "0": {
                 "thickness": 0.06,
@@ -3141,6 +3139,183 @@
                 "material": {
                     "name": "basalt_normal_fibre_150",
                     "material_id": "246bd5f8-3a43-11e7-a2d3-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "InnerTABS_[0, 2015]_up_half_light": {
+        "building_age_group": [
+            0,
+            2015
+        ],
+        "construction_type": "up_half_light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "heavy_clay_without_fibre_content_2000",
+                    "material_id": "4cd27146-3a43-11e7-a2a6-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.0045,
+                "material": {
+                    "name": "basalt_normal_fibre_150",
+                    "material_id": "246bd5f8-3a43-11e7-a2d3-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "InnerTABS_[0, 2015]_up_half_heavy": {
+        "building_age_group": [
+            0,
+            2015
+        ],
+        "construction_type": "up_half_heavy_CC",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "heavy_clay_without_fibre_content_2000",
+                    "material_id": "4cd27146-3a43-11e7-a2a6-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.032,
+                "material": {
+                    "name": "Lineolum_DK",
+                    "material_id": "4518b690-cc6c-11e8-aa1d-08002700bc00"
+                }
+            }
+        }
+    },
+    "InnerTABS_[0, 2015]_lo_half": {
+        "building_age_group": [
+            0,
+            2015
+        ],
+        "construction_type": "lo_half",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.035,
+                "material": {
+                    "name": "glass_fibre_batt_120",
+                    "material_id": "2779d64a-3a43-11e7-84ab-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "concrete_CEM_I_425R_wz05",
+                    "material_id": "2551f3ec-3a43-11e7-88ac-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "PCM_plaster",
+                    "material_id": "2f6ebb0a-3a43-11e7-bd6a-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "OuterTABS_[0, 2015]_up_half_light": {
+        "building_age_group": [
+            0,
+            2015
+        ],
+        "construction_type": "up_half_light",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.000000000000004,
+        "layer": {
+            "0": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "heavy_clay_without_fibre_content_2000",
+                    "material_id": "4cd27146-3a43-11e7-a2a6-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.0045,
+                "material": {
+                    "name": "basalt_normal_fibre_150",
+                    "material_id": "246bd5f8-3a43-11e7-a2d3-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "OuterTABS_[0, 2015]_up_half_heavy_CC": {
+        "building_age_group": [
+            0,
+            2015
+        ],
+        "construction_type": "up_half_heavy_CC",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.000000000000004,
+        "layer": {
+            "0": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "heavy_clay_without_fibre_content_2000",
+                    "material_id": "4cd27146-3a43-11e7-a2a6-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.032,
+                "material": {
+                    "name": "Lineolum_DK",
+                    "material_id": "4518b690-cc6c-11e8-aa1d-08002700bc00"
+                }
+            }
+        }
+    },
+    "OuterTABS_[0, 2015]_lo_half": {
+        "building_age_group": [
+            0,
+            2015
+        ],
+        "construction_type": "lo_half",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.000000000000004,
+        "layer": {
+            "0": {
+                "thickness": 0.045,
+                "material": {
+                    "name": "glass_fibre_glass_wool_100",
+                    "material_id": "27c5c7be-3a43-11e7-a2a5-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "concrete_CEM_I_425R_wz05",
+                    "material_id": "2551f3ec-3a43-11e7-88ac-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "foam_glass_board_130",
+                    "material_id": "48037df6-3a43-11e7-bd90-2cd444b2e704"
+                }
+            },
+            "3": {
+                "thickness": 0.1,
+                "material": {
+                    "name": "gravel_mixed_granular",
+                    "material_id": "2f52f9ee-3a43-11e7-ae5e-2cd444b2e704"
                 }
             }
         }

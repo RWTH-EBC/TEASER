@@ -39,13 +39,14 @@ class ExportAll:
         self.create_instance(Floor, tz, 20, -1, bldg.year_of_construction, "light")
         self.create_instance(Window, tz, 0.001, 0, bldg.year_of_construction, "EnEv")
         # Tabs Representation
-        # self.create_instance(Floor, tz, 20, -1, bldg.year_of_construction, "up_half_light")
-        self.create_instance(GroundFloor, tz, 20, -2, bldg.year_of_construction, "up_half_light")
+        # slab = self.create_instance(Floor, tz, 20, -1, bldg.year_of_construction, "up_half_light")
+        slab = self.create_instance(GroundFloor, tz, 20, -2, bldg.year_of_construction, "up_half_light")
 
         tz.calc_zone_parameters()
         bldg.calc_building_parameter()
-        # ufh_param = self.calc_ufh_slab(tz.ground_floors)
+        ufh_param = self.calc_ufh_slab([slab])
         prj.export_aixlib(path='D:/dja-dco/Dymola_Exports')
+        pass
 
     @staticmethod
     def create_project(name):
@@ -83,6 +84,7 @@ class ExportAll:
         inst.area = area
         inst.orientation = orientation
         self.tz_instances.append(inst)
+        return inst
 
     @classmethod
     def calc_ufh_slab(cls, slabs: list, t_bt: float = 5):
