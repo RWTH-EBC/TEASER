@@ -92,8 +92,8 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     WithTabs = ${get_true_false(zone.use_conditions.with_tabs)},
     ExtTabs = ${get_true_false(zone.use_conditions.ext_tabs)},
     nTabs = 1,
-    RTabs = ${zone.model_attr.r1_t},
+    RTabs = {${zone.model_attr.r1_t}},
     RRemTabs = ${zone.model_attr.r_rest_t} ,
-    CTabs = ${zone.model_attr.c1_t},
+    CTabs = {${zone.model_attr.c1_t}},
     CCTabs = ${get_true_false(zone.use_conditions.cc_tabs)});
 end ${zone.parent.name}_${zone.name};
