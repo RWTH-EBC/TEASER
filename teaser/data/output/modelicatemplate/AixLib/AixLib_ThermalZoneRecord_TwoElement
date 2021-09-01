@@ -88,5 +88,12 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     CoolerOn = ${get_true_false(zone.use_conditions.with_cooling)},
     withIdealThresholds = ${get_true_false(zone.use_conditions.with_ideal_thresholds)},
     TThresholdHeater = ${zone.use_conditions.T_threshold_heating},
-    TThresholdCooler = ${zone.use_conditions.T_threshold_cooling});
+    TThresholdCooler = ${zone.use_conditions.T_threshold_cooling},
+    WithTabs = true,
+    ExtTabs = false,
+    nTabs = 1,
+    RTabs = {0.000712200907985606},
+    RRemTabs = 0,
+    CTabs = {2252039.04496391},
+    CCTabs = false);
 end ${zone.parent.name}_${zone.name};

@@ -222,6 +222,10 @@ class UseConditions(object):
         self.max_ahu = 2.6
         self.with_ahu = False
 
+        self.with_tabs = False
+        self.cc_tabs = False
+        self.ext_tabs = False
+
         self._with_ideal_thresholds = False
 
         self._heating_profile = [

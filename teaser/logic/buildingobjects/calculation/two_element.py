@@ -388,6 +388,11 @@ class TwoElement(object):
         self.heat_load = 0.0
         self.cool_load = 0.0
 
+        # lumped resistances/capacity TABS
+        self.r1_t = 0.0
+        self.r_rest_t = 0.0
+        self.c1_t = 0.0
+
     def calc_attributes(self):
         """Calls all necessary function to calculate model attributes"""
 
@@ -456,6 +461,32 @@ class TwoElement(object):
             self._calc_outer_elements()
             self._calc_wf()
             self._calc_mean_values()
+
+        if len(self.thermal_zone.inner_tabs) > 0 and len(self.thermal_zone.outer_tabs) > 0:
+            warnings.warn(
+                "For thermal zone "
+                + self.thermal_zone.name
+                + " in building "
+                + self.thermal_zone.parent.name
+                + ", both inner TABS and outer TABS have been defined"
+                  ", a thermal zone can only handle one type of TABS (internal or external)"
+                  ", NO TABS will be in this case considered."
+            )
+        elif len(self.thermal_zone.inner_tabs) > 0:
+            self.thermal_zone.use_conditions.with_tabs = True
+            self.thermal_zone.use_conditions.ext_tabs = False
+            if self.thermal_zone.inner_tabs[0].construction_type.endswith('CC'):
+                self.thermal_zone.use_conditions.cc_tabs = True
+            # self._sum_tabs_elements()
+            # self._calc_tabs()
+        elif len(self.thermal_zone.outer_tabs) > 0:
+            self.thermal_zone.use_conditions.with_tabs = True
+            self.thermal_zone.use_conditions.ext_tabs = True
+            if self.thermal_zone.outer_tabs[0].construction_type.endswith('CC'):
+                self.thermal_zone.use_conditions.cc_tabs = True
+            # self._sum_tabs_elements()
+            # self._calc_tabs()
+
         self._calc_number_of_elements()
         self._fill_zone_lists()
         self._calc_heat_load()
