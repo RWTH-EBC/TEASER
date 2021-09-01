@@ -3225,6 +3225,70 @@
             }
         }
     },
+    "InnerTABS_[0, 2015]_heavy_CC": {
+        "building_age_group": [
+            1995,
+            2015
+        ],
+        "construction_type": "heavy_CC",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "cement_floating_screed_2_bottom",
+                    "material_id": "6755e6e6-3a43-11e7-adad-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "OuterTABS_[0, 2015]_heavy_CC": {
+        "building_age_group": [
+            0,
+            2015
+        ],
+        "construction_type": "heavy_CC",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "cement_floating_screed_2_bottom",
+                    "material_id": "6755e6e6-3a43-11e7-adad-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
+                }
+            },
+            "2": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "concrete_CEM_II_BS325R_wz05",
+                    "material_id": "253f8030-3a43-11e7-8735-2cd444b2e704"
+                }
+            }
+        }
+    },
     "OuterTABS_[0, 2015]_up_half_light": {
         "building_age_group": [
             0,
@@ -3233,8 +3297,6 @@
         "construction_type": "up_half_light",
         "inner_radiation": 5.0,
         "inner_convection": 1.7000000000000002,
-        "outer_radiation": 5.0,
-        "outer_convection": 20.000000000000004,
         "layer": {
             "0": {
                 "thickness": 0.06,
@@ -3260,8 +3322,6 @@
         "construction_type": "up_half_heavy_CC",
         "inner_radiation": 5.0,
         "inner_convection": 1.7000000000000002,
-        "outer_radiation": 5.0,
-        "outer_convection": 20.000000000000004,
         "layer": {
             "0": {
                 "thickness": 0.06,
@@ -3287,8 +3347,6 @@
         "construction_type": "lo_half",
         "inner_radiation": 5.0,
         "inner_convection": 1.7000000000000002,
-        "outer_radiation": 5.0,
-        "outer_convection": 20.000000000000004,
         "layer": {
             "0": {
                 "thickness": 0.045,
