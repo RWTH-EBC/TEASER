@@ -623,12 +623,14 @@ class TwoElement(object):
             sum(out_wall.area for out_wall in self.thermal_zone.outer_walls)
             + sum(ground.area for ground in self.thermal_zone.ground_floors)
             + sum(roof.area for roof in self.thermal_zone.rooftops)
+            # + sum(tabs.area for tabs in self.thermal_zone.outer_tabs)
         )
 
         self.ua_value_ow = (
             sum(out_wall.ua_value for out_wall in self.thermal_zone.outer_walls)
             + sum(ground.ua_value for ground in self.thermal_zone.ground_floors)
             + sum(roof.ua_value for roof in self.thermal_zone.rooftops)
+            # + sum(tabs.ua_value for tabs in self.thermal_zone.outer_tabs)
         )
 
         self.r_total_ow = 1 / self.ua_value_ow
@@ -639,18 +641,22 @@ class TwoElement(object):
             sum(1 / out_wall.r_inner_conv for out_wall in self.thermal_zone.outer_walls)
             + sum(1 / ground.r_inner_conv for ground in self.thermal_zone.ground_floors)
             + sum(1 / roof.r_inner_conv for roof in self.thermal_zone.rooftops)
+            # + sum(1 / tabs.r_inner_conv for tabs in self.thermal_zone.outer_tabs)
         )
 
         self.r_rad_inner_ow = 1 / (
             sum(1 / out_wall.r_inner_rad for out_wall in self.thermal_zone.outer_walls)
             + sum(1 / ground.r_inner_rad for ground in self.thermal_zone.ground_floors)
             + sum(1 / roof.r_inner_rad for roof in self.thermal_zone.rooftops)
+            # + sum(1 / tabs.r_inner_rad for tabs in self.thermal_zone.outer_tabs)
+
         )
 
         self.r_comb_inner_ow = 1 / (
             sum(1 / out_wall.r_inner_comb for out_wall in self.thermal_zone.outer_walls)
             + sum(1 / ground.r_inner_comb for ground in self.thermal_zone.ground_floors)
             + sum(1 / roof.r_inner_comb for roof in self.thermal_zone.rooftops)
+            # + sum(1 / tabs.r_inner_comb for tabs in self.thermal_zone.outer_tabs)
         )
 
         self.ir_emissivity_inner_ow = (
@@ -666,7 +672,11 @@ class TwoElement(object):
                 roof.layer[0].material.ir_emissivity * roof.area
                 for roof in self.thermal_zone.rooftops
             )
-        ) / self.area_ow
+            # + sum(
+            #     tabs.layer[0].material.ir_emissivity * tabs.area
+            #     for tabs in self.thermal_zone.outer_tabs
+            # )
+          ) / self.area_ow
 
         self.alpha_conv_inner_ow = 1 / (self.r_conv_inner_ow * self.area_ow)
         self.alpha_rad_inner_ow = 1 / (self.r_rad_inner_ow * self.area_ow)
@@ -737,12 +747,14 @@ class TwoElement(object):
             sum(in_wall.area for in_wall in self.thermal_zone.inner_walls)
             + sum(floor.area for floor in self.thermal_zone.floors)
             + sum(ceiling.area for ceiling in self.thermal_zone.ceilings)
+            # + sum(tabs.area for tabs in self.thermal_zone.inner_tabs)
         )
 
         self.ua_value_iw = (
             sum(in_wall.ua_value for in_wall in self.thermal_zone.inner_walls)
             + sum(floor.ua_value for floor in self.thermal_zone.floors)
             + sum(ceiling.ua_value for ceiling in self.thermal_zone.ceilings)
+            # + sum(tabs.ua_value for tabs in self.thermal_zone.inner_tabs)
         )
 
         # values facing the inside of the thermal zone
@@ -751,18 +763,21 @@ class TwoElement(object):
             sum(1 / in_wall.r_inner_conv for in_wall in self.thermal_zone.inner_walls)
             + sum(1 / floor.r_inner_conv for floor in self.thermal_zone.floors)
             + sum(1 / ceiling.r_inner_conv for ceiling in self.thermal_zone.ceilings)
+            # + sum(1 / tabs.r_inner_conv for tabs in self.thermal_zone.inner_tabs)
         )
 
         self.r_rad_inner_iw = 1 / (
             sum(1 / in_wall.r_inner_rad for in_wall in self.thermal_zone.inner_walls)
             + sum(1 / floor.r_inner_rad for floor in self.thermal_zone.floors)
             + sum(1 / ceiling.r_inner_rad for ceiling in self.thermal_zone.ceilings)
+            # + sum(1 / tabs.r_inner_rad for tabs in self.thermal_zone.inner_tabs)
         )
 
         self.r_comb_inner_iw = 1 / (
             sum(1 / in_wall.r_inner_comb for in_wall in self.thermal_zone.inner_walls)
             + sum(1 / floor.r_inner_comb for floor in self.thermal_zone.floors)
             + sum(1 / ceiling.r_inner_comb for ceiling in self.thermal_zone.ceilings)
+            # + sum(1 / tabs.r_inner_comb for tabs in self.thermal_zone.inner_tabs)
         )
 
         self.ir_emissivity_inner_iw = (
@@ -778,6 +793,10 @@ class TwoElement(object):
                 ceiling.layer[0].material.ir_emissivity * ceiling.area
                 for ceiling in self.thermal_zone.ceilings
             )
+            # + sum(
+            #     tabs.layer[0].material.ir_emissivity * tabs.area
+            #     for tabs in self.thermal_zone.inner_tabs
+            # )
         ) / self.area_iw
 
         self.alpha_conv_inner_iw = 1 / (self.r_conv_inner_iw * self.area_iw)
