@@ -135,6 +135,8 @@ class OuterWall(Wall):
                 self.__parent.rooftops.append(self)
             elif type(self).__name__ == "GroundFloor":
                 self.__parent.ground_floors.append(self)
+            elif type(self).__name__ == "OuterTABS":
+                self.__parent.outer_tabs.append(self)
             else:
                 raise ValueError('Instance of OuterWall not known')
 

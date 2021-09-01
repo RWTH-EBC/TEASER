@@ -137,6 +137,8 @@ class InnerWall(Wall):
                 self.__parent.ceilings.append(self)
             elif type(self).__name__ == "Floor":
                 self.__parent.floors.append(self)
+            elif type(self).__name__ == "InnerTABS":
+                self.__parent.inner_tabs.append(self)
             else:
                 raise ValueError('Instance of InnerWall not known')
 
