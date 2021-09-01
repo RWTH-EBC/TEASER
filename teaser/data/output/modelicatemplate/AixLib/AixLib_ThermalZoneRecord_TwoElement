@@ -89,11 +89,11 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     withIdealThresholds = ${get_true_false(zone.use_conditions.with_ideal_thresholds)},
     TThresholdHeater = ${zone.use_conditions.T_threshold_heating},
     TThresholdCooler = ${zone.use_conditions.T_threshold_cooling},
-    WithTabs = true,
-    ExtTabs = false,
+    WithTabs = ${get_true_false(zone.use_conditions.with_tabs)},
+    ExtTabs = ${get_true_false(zone.use_conditions.ext_tabs)},
     nTabs = 1,
-    RTabs = {0.000712200907985606},
-    RRemTabs = 0,
-    CTabs = {2252039.04496391},
-    CCTabs = false);
+    RTabs = ${zone.model_attr.r1_t},
+    RRemTabs = ${zone.model_attr.r_rest_t} ,
+    CTabs = ${zone.model_attr.c1_t},
+    CCTabs = ${get_true_false(zone.use_conditions.cc_tabs)});
 end ${zone.parent.name}_${zone.name};
