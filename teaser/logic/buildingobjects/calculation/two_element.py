@@ -1000,6 +1000,36 @@ class TwoElement(object):
             # more than one outer wall, calculate chain matrix
             self.r1_iw, self.c1_iw = self._calc_parallel_connection(inner_walls, omega)
 
+    def _calc_tabs(self):
+        """Lumped parameter for tabs elements
+
+        Calculates all necessary parameters for tabs.
+        Attributes
+        ----------
+        omega : float [1/s]
+            angular frequency with given time period.
+        tabs : list
+            List containing all TEASER TABS instances that are treated as same
+            inner tabs type.
+        """
+
+        tabs_list = self.thermal_zone.inner_tabs if len(self.thermal_zone.inner_tabs) > 0 \
+            else self.thermal_zone.outer_tabs
+
+        omega = 2 * math.pi / 86400 / self.t_bt
+
+        if 0 < len(tabs_list) <= 1:
+            # only one outer wall, no need to calculate chain matrix
+            self.r1_t = tabs_list[0].r1
+            self.c1_t = tabs_list[0].c1_korr
+        elif len(tabs_list) > 1:
+            # more than one outer wall, calculate chain matrix
+            self.r1_t, self.c1_t = self._calc_parallel_connection(tabs_list, omega)
+
+        if len(self.thermal_zone.outer_tabs) > 0:
+            conduction = 1 / sum((1 / element.r_conduc) for element in tabs_list)
+            self.r_rest_t = conduction - self.r1_t
+
     def _calc_wf(self):
         """Weightfactors for outer elements(walls, roof, ground floor, windows)
 
