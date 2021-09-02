@@ -38,8 +38,8 @@ class ExportAll:
         self.create_instance(Floor, tz, 20, -1, bldg.year_of_construction, "light")
         self.create_instance(Window, tz, 0.001, 0, bldg.year_of_construction, "EnEv")
         # Tabs Representation
-        # self.create_instance(Floor, tz, 20, -1, bldg.year_of_construction, "heavy")
-        self.create_instance(GroundFloor, tz, 20, -2, bldg.year_of_construction, "heavy")
+        self.create_instance(Floor, tz, 20, -1, bldg.year_of_construction, "heavy")
+        # self.create_instance(GroundFloor, tz, 20, -2, bldg.year_of_construction, "heavy")
         tz.calc_zone_parameters()
 
         # Zone 2
@@ -51,8 +51,9 @@ class ExportAll:
         self.create_instance(Floor, tz2, 20, -1, bldg.year_of_construction, "light")
         self.create_instance(Window, tz2, 0.001, 0, bldg.year_of_construction, "EnEv")
         # Tabs Representation
+        self.create_instance(Floor, tz2, 20, -1, bldg.year_of_construction, "heavy")
         # self.create_instance(InnerTABS, tz2, 20, -1, bldg.year_of_construction, "heavy_CC")
-        self.create_instance(OuterTABS, tz2, 20, -2, bldg.year_of_construction, "heavy_CC")
+        # self.create_instance(OuterTABS, tz2, 20, -2, bldg.year_of_construction, "heavy_CC")
         tz2.calc_zone_parameters()
 
         bldg.calc_building_parameter()

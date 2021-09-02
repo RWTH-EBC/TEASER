@@ -24,25 +24,25 @@ def main(with_plot=True):
     basepath = pathlib.Path(__file__).parents[3].joinpath("Dymola")
 
     # Now a simulation result file (.mat)
-    tsd_mat = TimeSeriesData(basepath.joinpath('SimpleBuildingint_tabs_comparison_out.mat'))
+    tsd_mat = TimeSeriesData(basepath.joinpath('SimpleBuildingint_tabs_comparison.mat'))
     # print(tsd_mat)
     # for tag in tsd_mat.get_tags(variable="multizone.zone[1].ROM.intGainsConv.T")[::-1]:
     #     plt.plot(tsd_mat.loc[:, ("multizone.zone[1].ROM.intGainsConv.T", tag)], label=tag)
     # plt.show()
     # plt.legend()
 
-    # plt.figure()
-    # plt.plot(tsd_mat.loc[:, ("multizone.zone[2].ROM.intGainsConv.T", "raw")], label="Reference", color="blue")
-    # plt.plot(tsd_mat.loc[:, ("multizone.zone[1].ROM.intGainsConv.T", "raw")], label="Resampled", color="red")
-    # plt.legend()
-    # plt.show()
+    plt.figure()
+    fig, axs = plt.subplots(2)
+
+    axs[0].plot(tsd_mat.loc[:, ("multizone.zone[2].ROM.intGainsConv.T", "raw")], label="as Walls", color="blue")
+    axs[0].plot(tsd_mat.loc[:, ("multizone.zone[1].ROM.intGainsConv.T", "raw")], label="as Tabs", color="red")
+    axs[0].legend()
 
     # RMS test
     x = tsd_mat.to_df()
-    x["RMS_test"] = abs(x["multizone.zone[1].ROM.intGainsConv.T"] - x["multizone.zone[2].ROM.intGainsConv.T"])/x["multizone.zone[1].ROM.intGainsConv.T"]
-    plt.figure()
-    plt.plot(x["RMS_test"], label="Reference", color="blue")
-    plt.legend()
+    x["RMS_test"] = abs(x["multizone.zone[1].ROM.intGainsConv.T"] - x["multizone.zone[2].ROM.intGainsConv.T"])/x["multizone.zone[1].ROM.intGainsConv.T"]*100
+    axs[1].plot(x["RMS_test"], label="Percentage", color="blue")
+    axs[1].legend()
     plt.show()
     print()
     # ######################### Processing TimeSeriesData ##########################
