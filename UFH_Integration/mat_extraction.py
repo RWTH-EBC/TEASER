@@ -19,11 +19,11 @@ def main(with_plot=False):
             for variable in variables_building:
                 plt.figure()
                 fig, axs = plt.subplots(2)
-                i = 1
+                i = 0
                 for zone, color in zones.items():
+                    i += 1
                     variable_string = "multizone.zone[%d].%s" % (i, variable)
                     axs[0].plot(tsd_mat[variable_string], label=zone, color=color)
-                    i += 1
                 axs[0].legend()
                 fig.suptitle(variable)
                 #error
