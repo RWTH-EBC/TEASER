@@ -2,7 +2,7 @@
 """
 Created on Mon Jul 27 16:25:12 2020
 
-Last modified 2020-09-25 for Project 'Energieeffizienz in Schwimmbädern - Neubau und Bestand'
+Last modified 2021-09 for Project 'Energieeffizienz in Schwimmbädern - Neubau und Bestand'
 """
 
 import math
@@ -17,20 +17,16 @@ from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
-import teaser.data.input.ExcelToTeaser as excel_input
 
 
 class SwimmingPool(NonResidential):
-    """Archetype Office Building according to BMVBS
+    """
+    Archetype swimming pool based on project 'Energieeffizienz in Schwimmbädern - Neubau und Bestand'
 
-    Subclass from NonResidential archetype class based on the teaser office module.
+    Subclass from NonResidential archetype.
 
-    The model contains up to 8 zones of the swimming pool according to
-    'Erneuerbare Energien in Schwimmbädern - Neubau und Bestand' + additional zones
-    for each pool.     
-    Each of the normal zones has variable outer walls, windows, roofs and ground floors. 
-    The net zone areas as well as the building element areas are read from an individual
-    Excel file.
+    The model contains 6 zones of the swimming pool
+    Each of the zones has variable outer walls, windows, roofs and ground floors.
 
     Parameters
     ----------
@@ -82,12 +78,6 @@ class SwimmingPool(NonResidential):
         Construction type of used wall constructions default is "heavy")
             heavy: heavy construction
             light: light construction
-    filePath: str
-        Path to Excel file with stored information
-    sheetNameAreas: dict
-        Stored zone areas
-    swimmingPoolCategory: str
-        Category of the swimming pool
 
     Note
     ----------
@@ -142,10 +132,7 @@ class SwimmingPool(NonResidential):
     
     def __init__(
         self,
-        parent,
-        filePath,
-        sheetNameAreas,
-        swimmingPoolCategory,
+        parent,        
         name=None,
         year_of_construction=None,
         number_of_floors=None,
@@ -176,45 +163,36 @@ class SwimmingPool(NonResidential):
         # [area factor, volume factor, usage type(has to be set)]
         self.zone_area_factors = collections.OrderedDict()
         
-        if filePath != None:            
-            # Reading zone areas and volumes from Excel file according to filePath and sheetNameAreas
-    
-            print("Reading zone data from Excel for:", name) 
-            print()
-            
-            # poolsInDict stores all relevant data for the zones, such as the zone area, volumes etc.
-            self.poolsInDict=excel_input.getPoolDataInDict("ALL", filePath, sheetNameAreas)            
-                    
-        else:
-            """
-            Creating basic swimming pool building with one pool for beginners and one for swimmers.
-            Zone areas and volumes are calculated from the WATER SURFACE according to 'Koordinierungskreis 
-            Bäder - Richtlinien für den Bäderbau - 2013'. Therefore, the NET LEASED AREA is used as 
-            WATER SURFACE. The building contains the zones 1 - 5 and 7.
-            """
-            
-            print("Calculating zone data for basic swimming pool:", name)             
-            
-            self.poolsInDict = self.setPoolBaseParameters(self.net_leased_area) 
-            
-            self.net_leased_area = 0
-            for value in self.poolsInDict.keys():
-                if str(value).startswith("Zone"):
-                    self.net_leased_area = self.net_leased_area + self.poolsInDict[value]\
-                    ["Total area of zone (including water surface) [m²]"]
-            
-            self.net_leased_area = round(self.net_leased_area, 4)
-            print("Calculated total net leased area:", self.net_leased_area, "m²")
-            print()         
-            
+        """
+        Creating basic swimming pool building with one pool for beginners and one for swimmers or only 
+        one pool for swimmers, if the water area is not sufficient for two basic pools.
+        Zone areas and volumes are calculated from the WATER SURFACE according to 'Koordinierungskreis 
+        Bäder - Richtlinien für den Bäderbau - 2013'. Therefore, the NET LEASED AREA is used as 
+        WATER SURFACE. The building contains the zones 1 - 5 and 8.
+        """
+        
+        print("Calculating zone data for basic swimming pool:", name)             
+        
+        self.poolsInDict = self.setPoolBaseParameters(self.net_leased_area) 
+        
+        # Calculating actual net leased area
+        self.net_leased_area = 0
+        for value in self.poolsInDict.keys():
+            if str(value).startswith("Zone"):
+                self.net_leased_area = self.net_leased_area + self.poolsInDict[value]\
+                ["Total area of zone (including water surface) [m²]"]
+        
+        self.net_leased_area = round(self.net_leased_area, 2)
+        print("Calculated total net leased area:", self.net_leased_area, "m²")
+        print()         
+        
+        # Calculating number of zones
         self.numZones=0
         for zone in self.poolsInDict.keys(): 
             if str(zone).startswith("Zone"):
-                self.numZones+=1 
-        # Creating zones with zone area, zone volume and use condition      
-        # Zone won't be created if area is 0
+                self.numZones+=1                 
                            
-        #Used zone designations
+        # Zone designations
         self.zoneDesignation = dict()
         self.zoneDesignation["Zone 1"] = "Eingangsbereich"
         self.zoneDesignation["Zone 2"] = "Umkleiden"
@@ -225,7 +203,7 @@ class SwimmingPool(NonResidential):
         self.zoneDesignation["Zone 7"] = "Fitness"
         self.zoneDesignation["Zone 8"] = "Technikraum"        
         
-        #Use conditions for zones
+        # Use conditions for zones
         self.zoneUseConditions = dict()
         self.zoneUseConditions["Zone 1"] = "Foyer (theater and event venues)"          
         self.zoneUseConditions["Zone 2"] = "Group Office (between 2 and 6 employees)"
@@ -238,6 +216,7 @@ class SwimmingPool(NonResidential):
         self.zoneUseConditions["Water"] = "Gym (without spectator area)"  
         
         #Creating building zones
+        # Zone won't be created if area is 0
         for zone in self.zoneDesignation.keys():
             if zone in self.poolsInDict.keys():
                 self.zone_area_factors[self.zoneDesignation[zone]] = \
@@ -245,7 +224,8 @@ class SwimmingPool(NonResidential):
                  self.poolsInDict[zone]["Air volume [m³]"], \
                  self.zoneUseConditions[zone]]                                                              
         
-        #Creating zones for water volumes                                      
+        #Creating zones for water volumes  
+        # Zone won't be created if area is 0                                    
         for value in self.poolsInDict.keys():           
             if str(value) != "Sum of pools" \
             and str(value).startswith("Zone") == False \
@@ -366,7 +346,7 @@ class SwimmingPool(NonResidential):
             
 
 
-    def generate_archetype(self, filePath, sheetNameAreas, sheetNameElements):
+    def generate_archetype(self):
         """Generates an office building.
 
         With given values, this class generates an office archetype building
@@ -448,9 +428,7 @@ class SwimmingPool(NonResidential):
                     year=self.year_of_construction,
                     construction=self.construction_type,
                     data_class=self.parent.data,
-                    isSwimmingPool=True, 
-                    filePath=filePath, 
-                    sheetNameElements=sheetNameElements)               
+                    isSwimmingPool=True)               
                 outer_wall.tilt = value[0]
                 outer_wall.orientation = value[1]
                 
@@ -490,10 +468,7 @@ class SwimmingPool(NonResidential):
                     self.year_of_construction,
                     "Kunststofffenster, " "Isolierverglasung",
                     data_class=self.parent.data,
-                    isSwimmingPool=True, 
-                    filePath=filePath, 
-                    sheetNameElements=sheetNameElements
-                )                
+                    isSwimmingPool=True)                
                 window.tilt = value[0]
                 window.orientation = value[1]
 
@@ -512,10 +487,7 @@ class SwimmingPool(NonResidential):
                     year=self.year_of_construction,
                     construction=self.construction_type,
                     data_class=self.parent.data,
-                    isSwimmingPool=True, 
-                    filePath=filePath, 
-                    sheetNameElements=sheetNameElements
-                )
+                    isSwimmingPool=True)
                 roof.tilt = value[0]
                 roof.orientation = value[1]
 
@@ -536,10 +508,7 @@ class SwimmingPool(NonResidential):
                     year=self.year_of_construction,
                     construction=self.construction_type,
                     data_class=self.parent.data,
-                    isSwimmingPool=True, 
-                    filePath=filePath, 
-                    sheetNameElements=sheetNameElements
-                )
+                    isSwimmingPool=True)
                 ground_floor.tilt = value[0]
                 ground_floor.orientation = value[1]
 
@@ -558,18 +527,10 @@ class SwimmingPool(NonResidential):
                     year=self.year_of_construction,
                     construction=self.construction_type,
                     data_class=self.parent.data,
-                    isSwimmingPool=True, 
-                    filePath=filePath, 
-                    sheetNameElements=sheetNameElements
-                )
+                    isSwimmingPool=True)
                 inner_wall.tilt = value[0]
-                inner_wall.orientation = value[1]
-        
-       
-        # Actual Excel File does not include standard floor or ceiling areas, 
-        # so these areas are calculated by the standard teaser algorithm 
-        # if number of floors > 1. The special types of floors and ceilings
-        # are read out from the Excel file.
+                inner_wall.orientation = value[1]        
+
         # CEILINGS #
         for key, value in self.ceiling_names.items(): 
             for idx, zone in enumerate(self.thermal_zones):
@@ -584,10 +545,7 @@ class SwimmingPool(NonResidential):
                         year=self.year_of_construction,
                         construction=self.construction_type,
                         data_class=self.parent.data,
-                        isSwimmingPool=True, 
-                        filePath=filePath, 
-                        sheetNameElements=sheetNameElements
-                    )
+                        isSwimmingPool=True)
                     ceiling.tilt = value[0]
                     ceiling.orientation = value[1] 
 
@@ -607,10 +565,7 @@ class SwimmingPool(NonResidential):
                         year=self.year_of_construction,
                         construction=self.construction_type,
                         data_class=self.parent.data,
-                        isSwimmingPool=True, 
-                        filePath=filePath, 
-                        sheetNameElements=sheetNameElements
-                    )
+                        isSwimmingPool=True)
                     floor.tilt = value[0]
                     floor.orientation = value[1] 
                         
@@ -624,14 +579,12 @@ class SwimmingPool(NonResidential):
 
         #Calculates building surface area and surface areas of each zone and orientation.
         for key, value in self.outer_area.items():
-            self.set_outer_wall_area(value, key, isSwimmingPool=True, filePath=filePath, 
-                                     sheetNameAreas=sheetNameAreas, zoneAreas=zoneAreas, 
+            self.set_outer_wall_area(value, key, isSwimmingPool=True, zoneAreas=zoneAreas, 
                                      numZones=self.numZones)
 
         #Calculates window surface areas for each zone and orientation.
         for key, value in self.window_area.items():
-            self.set_window_area(value, key, isSwimmingPool=True, filePath=filePath, 
-                                 sheetNameAreas=sheetNameAreas, zoneAreas=zoneAreas,
+            self.set_window_area(value, key, isSwimmingPool=True, zoneAreas=zoneAreas,
                                  numZones=self.numZones)
 
         #Calculates inner wall area as sum of innerWalls, ceiling and floor for each zone
@@ -639,8 +592,7 @@ class SwimmingPool(NonResidential):
         for idx, zone in enumerate(self.thermal_zones):
             while zoneId < len(zoneAreas) and zoneAreas[zoneId]==0:                    
                 zoneId+=1 
-            zone.set_inner_wall_area(zoneId=zoneId, isSwimmingPool=True, filePath=filePath, 
-                                     sheetNameAreas=sheetNameAreas, zoneAreas=zoneAreas,
+            zone.set_inner_wall_area(zoneId=zoneId, isSwimmingPool=True, zoneAreas=zoneAreas,
                                      numZones=self.numZones)
             zoneId+=1
         

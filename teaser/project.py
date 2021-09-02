@@ -280,11 +280,7 @@ class Project(object):
         internal_gains_mode=1,
         office_layout=None,
         window_layout=None,
-        construction_type=None,
-        filePath=None, 
-        sheetNameAreas=None,
-        sheetNameElements=None,
-        swimmingPoolCategory=None
+        construction_type=None
     ):
         """Add a non-residential building to the TEASER project.
 
@@ -371,11 +367,11 @@ internal_gains_mode: int [1, 2, 3]
         )
 
         assert usage in [
-            "office",
-            "swimmingPool",
+            "office",            
             "institute",
             "institute4",
             "institute8",
+            "swimmingPool",
         ], ass_error_usage
 
         if self.data is None:
@@ -397,25 +393,6 @@ internal_gains_mode: int [1, 2, 3]
                 office_layout,
                 window_layout,
                 construction_type,
-            )
-
-        elif usage == "swimmingPool":
-
-            type_bldg = SwimmingPool(
-                self,
-                filePath,                
-                sheetNameAreas,                
-                swimmingPoolCategory,
-                name,
-                year_of_construction,
-                number_of_floors,
-                height_of_floors,
-                net_leased_area,
-                with_ahu,
-                internal_gains_mode,
-                office_layout,
-                window_layout,
-                construction_type                
             )
 
         elif usage == "institute":
@@ -465,12 +442,24 @@ internal_gains_mode: int [1, 2, 3]
                 window_layout,
                 construction_type,
             )
+            
+        elif usage == "swimmingPool":
 
-        if usage == "swimmingPool": 
-            type_bldg.generate_archetype(filePath=filePath, sheetNameAreas=sheetNameAreas,
-                                        sheetNameElements=sheetNameElements)
-        else:
-            type_bldg.generate_archetype()
+            type_bldg = SwimmingPool(
+                self,                
+                name,
+                year_of_construction,
+                number_of_floors,
+                height_of_floors,
+                net_leased_area,
+                with_ahu,
+                internal_gains_mode,
+                office_layout,
+                window_layout,
+                construction_type                
+            )
+
+        type_bldg.generate_archetype()
             
         type_bldg.calc_building_parameter(
             number_of_elements=self._number_of_elements_calc,
