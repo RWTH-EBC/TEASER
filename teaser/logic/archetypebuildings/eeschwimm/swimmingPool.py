@@ -427,8 +427,7 @@ class SwimmingPool(NonResidential):
                 outer_wall.load_type_element(
                     year=self.year_of_construction,
                     construction=self.construction_type,
-                    data_class=self.parent.data,
-                    isSwimmingPool=True)               
+                    data_class=self.parent.data)               
                 outer_wall.tilt = value[0]
                 outer_wall.orientation = value[1]
                 
@@ -467,8 +466,7 @@ class SwimmingPool(NonResidential):
                 window.load_type_element(
                     self.year_of_construction,
                     "Kunststofffenster, " "Isolierverglasung",
-                    data_class=self.parent.data,
-                    isSwimmingPool=True)                
+                    data_class=self.parent.data)                
                 window.tilt = value[0]
                 window.orientation = value[1]
 
@@ -486,8 +484,7 @@ class SwimmingPool(NonResidential):
                 roof.load_type_element(
                     year=self.year_of_construction,
                     construction=self.construction_type,
-                    data_class=self.parent.data,
-                    isSwimmingPool=True)
+                    data_class=self.parent.data)
                 roof.tilt = value[0]
                 roof.orientation = value[1]
 
@@ -507,8 +504,7 @@ class SwimmingPool(NonResidential):
                 ground_floor.load_type_element(
                     year=self.year_of_construction,
                     construction=self.construction_type,
-                    data_class=self.parent.data,
-                    isSwimmingPool=True)
+                    data_class=self.parent.data)
                 ground_floor.tilt = value[0]
                 ground_floor.orientation = value[1]
 
@@ -526,8 +522,7 @@ class SwimmingPool(NonResidential):
                 inner_wall.load_type_element(
                     year=self.year_of_construction,
                     construction=self.construction_type,
-                    data_class=self.parent.data,
-                    isSwimmingPool=True)
+                    data_class=self.parent.data)
                 inner_wall.tilt = value[0]
                 inner_wall.orientation = value[1]        
 
@@ -544,8 +539,7 @@ class SwimmingPool(NonResidential):
                     ceiling.load_type_element(
                         year=self.year_of_construction,
                         construction=self.construction_type,
-                        data_class=self.parent.data,
-                        isSwimmingPool=True)
+                        data_class=self.parent.data)
                     ceiling.tilt = value[0]
                     ceiling.orientation = value[1] 
 
@@ -564,8 +558,7 @@ class SwimmingPool(NonResidential):
                     floor.load_type_element(
                         year=self.year_of_construction,
                         construction=self.construction_type,
-                        data_class=self.parent.data,
-                        isSwimmingPool=True)
+                        data_class=self.parent.data)
                     floor.tilt = value[0]
                     floor.orientation = value[1] 
                         
@@ -579,21 +572,18 @@ class SwimmingPool(NonResidential):
 
         #Calculates building surface area and surface areas of each zone and orientation.
         for key, value in self.outer_area.items():
-            self.set_outer_wall_area(value, key, isSwimmingPool=True, zoneAreas=zoneAreas, 
-                                     numZones=self.numZones)
+            self.set_outer_wall_area(value, key)
 
         #Calculates window surface areas for each zone and orientation.
         for key, value in self.window_area.items():
-            self.set_window_area(value, key, isSwimmingPool=True, zoneAreas=zoneAreas,
-                                 numZones=self.numZones)
+            self.set_window_area(value, key)
 
         #Calculates inner wall area as sum of innerWalls, ceiling and floor for each zone
         zoneId=0
         for idx, zone in enumerate(self.thermal_zones):
             while zoneId < len(zoneAreas) and zoneAreas[zoneId]==0:                    
                 zoneId+=1 
-            zone.set_inner_wall_area(zoneId=zoneId, isSwimmingPool=True, zoneAreas=zoneAreas,
-                                     numZones=self.numZones)
+            zone.set_inner_wall_area()
             zoneId+=1
         
         # Calculate additional Parameters for Pools out of the input from Excel stored in "poolsInDict"

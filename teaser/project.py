@@ -459,8 +459,7 @@ internal_gains_mode: int [1, 2, 3]
                 construction_type                
             )
 
-        type_bldg.generate_archetype()
-            
+        type_bldg.generate_archetype()            
         type_bldg.calc_building_parameter(
             number_of_elements=self._number_of_elements_calc,
             merge_windows=self._merge_windows_calc,

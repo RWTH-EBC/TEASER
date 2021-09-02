@@ -9,7 +9,6 @@ import re
 import warnings
 from teaser.logic.buildingobjects.calculation.aixlib import AixLib
 from teaser.logic.buildingobjects.calculation.ibpsa import IBPSA
-import teaser.data.input.ExcelToTeaser as bElement_excel_input
 
 
 from teaser.logic.buildingobjects.buildingsystems.buildingahu import BuildingAHU
@@ -168,15 +167,12 @@ class Building(object):
 
         self.library_attr = None
 
-    def set_outer_wall_area(self, new_area, orientation, isSwimmingPool=False, 
-                            filePath=None, sheetNameAreas=None, zoneAreas=None,
-                            numZones=None):
+    def set_outer_wall_area(self, new_area, orientation):
         """Outer area wall setter
 
         sets the outer wall area of all walls of one direction and weights
         them according to zone size. This function covers OuterWalls,
-        Rooftops, GroundFloors. For swimming pools, this method reads out data from an 
-        Excel file by using the ExcelToTeaser class.
+        Rooftops, GroundFloors.
 
         Parameters
         ----------
@@ -185,51 +181,25 @@ class Building(object):
         orientation : float
             orientation of the obtained walls
         """
-        zoneId=0
-        for idx, zone in enumerate(self.thermal_zones): 
 
-            if isSwimmingPool:
-                while zoneId < len(zoneAreas) and zoneAreas[zoneId]==0:                   
-                    zoneId+=1
-
+        for zone in self.thermal_zones:
             for wall in zone.outer_walls:
                 if wall.orientation == orientation:
-                    if isSwimmingPool and filePath != None:                            
-                        inArea = bElement_excel_input.getArea(zoneId, wall, orientation, 
-                                                              filePath, sheetNameAreas,
-                                                              numZones)
-                        wall.area = inArea
-                    else:
-                        wall.area = ((new_area / self.net_leased_area) * zone.area) / sum(
-                            count.orientation == orientation for count in zone.outer_walls
-                        )
-
-            for ground in zone.ground_floors:                
-                if ground.orientation == orientation: 
-                    if isSwimmingPool and filePath != None:
-                        inArea = bElement_excel_input.getArea(zoneId, ground, orientation, 
-                                                              filePath, sheetNameAreas,
-                                                              numZones)
-                        ground.area = inArea                                
-                    else:    
-                        ground.area = ((new_area / self.net_leased_area) * zone.area) / sum(
-                            count.orientation == orientation for count in zone.ground_floors
-                        )     
+                    wall.area = ((new_area / self.net_leased_area) * zone.area) / sum(
+                        count.orientation == orientation for count in zone.outer_walls
+                    )
 
             for roof in zone.rooftops:
                 if roof.orientation == orientation:
-                    if isSwimmingPool and filePath != None:    
-                        if "becken" in zone.name:
-                            continue
-                        else:                           
-                            inArea = bElement_excel_input.getArea(zoneId, roof, orientation, 
-                                                                    filePath, sheetNameAreas,
-                                                                    numZones)
-                            roof.area = inArea
-                    else:
-                        roof.area = ((new_area / self.net_leased_area) * zone.area) / sum(
-                            count.orientation == orientation for count in zone.rooftops
-                        )
+                    roof.area = ((new_area / self.net_leased_area) * zone.area) / sum(
+                        count.orientation == orientation for count in zone.rooftops
+                    )
+
+            for ground in zone.ground_floors:
+                if ground.orientation == orientation:
+                    ground.area = ((new_area / self.net_leased_area) * zone.area) / sum(
+                        count.orientation == orientation for count in zone.ground_floors
+                    )
 
             for door in zone.doors:
                 if door.orientation == orientation:
@@ -237,10 +207,7 @@ class Building(object):
                         count.orientation == orientation for count in zone.doors
                     )
 
-            zoneId+=1
-
-    def set_window_area(self, new_area, orientation, isSwimmingPool=False, filePath=None, 
-                        sheetNameAreas=None, zoneAreas=None, numZones=None):
+    def set_window_area(self, new_area, orientation):
         """Window area setter
 
         sets the window area of all windows of one direction and weights
@@ -253,25 +220,13 @@ class Building(object):
         orientation : float
             orientation of the obtained windows
         """
-        zoneId=0
-        for idx, zone in enumerate(self.thermal_zones): 
 
-            if isSwimmingPool:
-                while zoneId < len(zoneAreas) and zoneAreas[zoneId]==0:                   
-                    zoneId+=1
-
+        for zone in self.thermal_zones:
             for win in zone.windows:
                 if win.orientation == orientation:
-                    if isSwimmingPool and filePath != None:
-                        inArea = bElement_excel_input.getArea(zoneId, win, orientation, 
-                                                                filePath, sheetNameAreas,
-                                                                numZones)
-                        win.area = inArea
-                    else:
-                        win.area = ((new_area / self.net_leased_area) * zone.area) / sum(
-                            count.orientation == orientation for count in zone.windows
-                        )
-            zoneId+=1
+                    win.area = ((new_area / self.net_leased_area) * zone.area) / sum(
+                        count.orientation == orientation for count in zone.windows
+                    )
 
     def get_outer_wall_area(self, orientation):
         """Get aggregated wall area of one orientation
