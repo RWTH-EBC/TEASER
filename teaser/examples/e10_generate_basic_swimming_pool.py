@@ -5,11 +5,10 @@ This is a test module to generate swimming pools based on
 teaser example 1 - generate archetype and example 2 - export aixlib models.
 Last modified 2020-09-25 for Project 'Energieeffizienz in Schwimmbädern - Neubau und Bestand'
 """
-import teaser.logic.archetypebuildings.eeschwimm.swimmingPool as swimmingPool
 import teaser.logic.utilities as utilities
 import os
 
-def test_generate_swimmingPool():
+def generate_basic_swimmingPool():
 
     # First step: Import the TEASER API (called Project) into your Python
     # module
@@ -57,8 +56,7 @@ def test_generate_swimmingPool():
     # Project takes some seconds. If you know from beginning you will only use
     # TABULA typology you should instantiate you Project class without loading
     # data. Project(load_data=False).
-    
-    print()
+        
     print("Archetype(s) of indoor pool(s) successfully generated!")
     print()
 
@@ -77,13 +75,6 @@ def test_generate_swimmingPool():
 
     prj.calc_all_buildings()
 
-    # Deletes empty zones and pushs the "thermal zones" wich are Pools in the zone "Schwimmhalle" 
-    # in the parameter "pool_zones" and delets it out of the thermal zones 
-    # it should be considered that, that the function is called after all calculations 
-    # directly before the export, otherwise problems can occur when handling the thermal zones. 
-    for bldgs in prj.buildings:
-        bldgs.orderPoolZones()
-
     # To export the ready-to-run models simply call Project.export_aixlib().
     # You can specify the path, where the model files should be saved.
     # None means, that the default path in your home directory
@@ -98,9 +89,7 @@ def test_generate_swimmingPool():
 
     return path
 
-
-
 if __name__ == '__main__':
-    prj = test_generate_swimmingPool()
+    prj = generate_basic_swimmingPool()
 
     print("Test SwimmingPool: That's it! :)")

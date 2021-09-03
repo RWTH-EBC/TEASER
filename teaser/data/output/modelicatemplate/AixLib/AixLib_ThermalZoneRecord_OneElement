@@ -93,8 +93,8 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
       SwimmingPools = true,
       numPools = ${zone.parent.number_of_pools},
       poolParam = {
-      %for pool in zone.pool_zones:
-      ${zone.name}_DataBase.${zone.name}_${pool.name}()${',' if not loop.last else ''}
+      %for pool in zone.paramRecord.keys():
+      ${zone.name}_DataBase.${zone.name}_${pool}()${',' if not loop.last else ''}
       %endfor
       },
     % else:

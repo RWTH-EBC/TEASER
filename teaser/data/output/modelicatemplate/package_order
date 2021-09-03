@@ -3,7 +3,11 @@ ${extra}
 %endif
 %for i in list:
 %if addition != None: 
+%if not pool is None:
+${addition}${i}
+%else:
 ${addition}${i.name.replace(" ", "")}
+%endif
 %else:
 ${i.name.replace(" ", "")}
 %endif
