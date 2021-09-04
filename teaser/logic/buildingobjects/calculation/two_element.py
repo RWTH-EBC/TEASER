@@ -393,6 +393,13 @@ class TwoElement(object):
         self.r_rest_t = 0.0
         self.c1_t = 0.0
 
+        # TABS Record
+        self.n_tabs = 0
+        self.d_tabs = []
+        self.rho_tabs = []
+        self.lambda_tabs = []
+        self.c_tabs = []
+
     def calc_attributes(self):
         """Calls all necessary function to calculate model attributes"""
 
@@ -1056,6 +1063,14 @@ class TwoElement(object):
             conduction = 1 / sum((1 / element.r_conduc) for element in tabs_list)
             self.r_rest_t = conduction - self.r1_t
 
+        for tabs in tabs_list:
+            for layer in tabs.layer:
+                self.n_tabs += 1
+                self.d_tabs.append(layer.thickness)
+                self.rho_tabs.append(layer.material.density)
+                self.lambda_tabs.append(layer.material.thermal_conduc)
+                self.c_tabs.append(layer.material.heat_capac*1000)
+
     def _calc_wf(self):
         """Weightfactors for outer elements(walls, roof, ground floor, windows)
 
@@ -1392,3 +1407,15 @@ class TwoElement(object):
         self.orientation_facade = []
         self.heat_load = 0.0
         self.cool_load = 0.0
+
+        # lumped resistances/capacity TABS
+        self.r1_t = 0.0
+        self.r_rest_t = 0.0
+        self.c1_t = 0.0
+
+        # TABS Record
+        self.n_tabs = 0
+        self.d_tabs = []
+        self.rho_tabs = []
+        self.lambda_tabs = []
+        self.c_tabs = []

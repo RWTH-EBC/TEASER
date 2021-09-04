@@ -25,7 +25,7 @@ class ExportAll:
         self.ufh_instances = []
 
     def run(self):
-        name = 'int_CC_UFH_comparison'
+        name = 'testtabs'
         prj = self.create_project(name)
         prj.modelica_info.stop_time = 604800
         bldg = self.create_building(prj, 'SimpleBuilding ' + name, 2015, 1, 20)
@@ -51,9 +51,9 @@ class ExportAll:
         self.create_instance(Floor, tz2, 20, -1, bldg.year_of_construction, "light")
         self.create_instance(Window, tz2, 0.001, 0, bldg.year_of_construction, "EnEv")
         # Tabs Representation
-        self.create_instance(Floor, tz2, 20, -1, bldg.year_of_construction, "heavy")
-        # self.create_instance(InnerTABS, tz2, 20, -1, bldg.year_of_construction, "heavy_CC")
-        # self.create_instance(OuterTABS, tz2, 20, -2, bldg.year_of_construction, "heavy_CC")
+        # self.create_instance(Floor, tz2, 20, -1, bldg.year_of_construction, "heavy")
+        # self.create_instance(InnerTABS, tz2, 20 -1, bldg.year_of_construction, "heavy_CC")
+        self.create_instance(OuterTABS, tz2, 20, -2, bldg.year_of_construction, "up_half_light")
         tz2.calc_zone_parameters()
 
         bldg.calc_building_parameter()

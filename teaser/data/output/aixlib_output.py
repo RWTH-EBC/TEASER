@@ -78,6 +78,10 @@ def export_multizone(buildings, prj, path=None):
             "data/output/modelicatemplate/AixLib"
             "/AixLib_ThermalZoneRecord_FourElement"),
         lookup=lookup)
+    tabs_template = Template(
+        filename=utilities.get_full_path(
+            "UFH_Integration/AixLib_TABS"),
+        lookup=lookup)
     model_template = Template(
         filename=utilities.get_full_path(
             "data/output/modelicatemplate/AixLib/AixLib_Multizone"),
@@ -175,8 +179,13 @@ def export_multizone(buildings, prj, path=None):
                     out_file.write(zone_template_3.render_unicode(zone=zone))
                 elif type(zone.model_attr).__name__ == "FourElement":
                     out_file.write(zone_template_4.render_unicode(zone=zone))
-
                 out_file.close()
+            if zone.use_conditions.with_tabs:
+                with open(utilities.get_full_path(os.path.join(
+                        zone_path,
+                        bldg.name + '_' + zone.name + '_upperTABS' + '.mo')), 'w') as out_file:
+                    out_file.write(tabs_template.render_unicode(zone=zone))
+                    out_file.close()
 
         _help_package(
             path=zone_path,

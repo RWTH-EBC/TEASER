@@ -3314,6 +3314,24 @@
             }
         }
     },
+    "OuterTABS_[0, 2015]_dummy": {
+        "building_age_group": [
+            0,
+            2015
+        ],
+        "construction_type": "dummy",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7000000000000002,
+        "layer": {
+            "0": {
+                "thickness": 4,
+                "material": {
+                    "name": "heavy_clay_without_fibre_content_2000",
+                    "material_id": "4cd27146-3a43-11e7-a2a6-2cd444b2e704"
+                }
+            }
+        }
+    },
     "OuterTABS_[0, 2015]_up_half_heavy_CC": {
         "building_age_group": [
             0,

@@ -6,7 +6,7 @@ from ebcpy import TimeSeriesData
 from os import walk
 
 
-def main(with_plot=False):
+def main(with_plot=True):
     variables_building = ['ROM.intGainsConv.T', 'ROM.intGainsConv.Q_flow', 'ROM.intGainsRad.T', 'ROM.intGainsRad.Q_flow']
     zones = {'as Walls': 'blue', 'as Tabs': 'red'}
     basepath = pathlib.Path(__file__).parents[3].joinpath("Dymola_results")
