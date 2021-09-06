@@ -165,6 +165,12 @@ class Building(object):
         self._merge_windows_calc = False
         self._used_library_calc = "AixLib"
 
+        self.tabs_rooms = 0
+        self.ATabs = []
+        self.tabs_connection = []
+        self.tabs_heat_load = []
+        self.tabs_record = []
+
         self.library_attr = None
 
     def set_outer_wall_area(self, new_area, orientation):
@@ -371,13 +377,22 @@ class Building(object):
         self._merge_windows_calc = merge_windows
         self._used_library_calc = used_library
 
+        zone_counter = 0
         for zone in self.thermal_zones:
+            zone_counter += 1
             zone.calc_zone_parameters(
                 number_of_elements=number_of_elements,
                 merge_windows=merge_windows,
                 t_bt=5,
             )
             self.sum_heat_load += zone.model_attr.heat_load
+            # TABS
+            if zone.model_attr.area_tabs > 0:
+                self.tabs_rooms += 1
+                self.ATabs.append(zone.model_attr.area_tabs)
+                self.tabs_connection.append(zone_counter)
+                self.tabs_heat_load.append(zone.model_attr.heat_load)
+                self.tabs_record.append(zone.name + '_upperTABS')
 
         if self.used_library_calc == self.library_attr.__class__.__name__:
             if self.used_library_calc == "AixLib":

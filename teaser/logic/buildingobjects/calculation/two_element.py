@@ -399,6 +399,7 @@ class TwoElement(object):
         self.rho_tabs = []
         self.lambda_tabs = []
         self.c_tabs = []
+        self.area_tabs = 0.0
 
     def calc_attributes(self):
         """Calls all necessary function to calculate model attributes"""
@@ -1049,6 +1050,8 @@ class TwoElement(object):
         tabs_list = self.thermal_zone.inner_tabs if len(self.thermal_zone.inner_tabs) > 0 \
             else self.thermal_zone.outer_tabs
 
+        self.area_tabs = sum(tabs.area for tabs in tabs_list)
+
         omega = 2 * math.pi / 86400 / self.t_bt
 
         if 0 < len(tabs_list) <= 1:
@@ -1419,3 +1422,4 @@ class TwoElement(object):
         self.rho_tabs = []
         self.lambda_tabs = []
         self.c_tabs = []
+        self.area_tabs = 0.0
