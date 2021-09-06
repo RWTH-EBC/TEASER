@@ -2,9 +2,17 @@
 ${extra}
 %endif
 %for i in list:
-%if addition != None: 
+% if not isinstance(i, str):
+    %if addition != None:
 ${addition}${i.name.replace(" ", "")}
-%else:
+    %else:
 ${i.name.replace(" ", "")}
+    %endif
+% else:
+    %if addition != None:
+${addition}${i.replace(" ", "")}
+    %else:
+${i.replace(" ", "")}
+    %endif
 %endif
 %endfor

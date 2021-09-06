@@ -143,7 +143,6 @@ class ThermalZone(object):
         t_bt : float
             Time constant according to VDI 6007 (default t_bt = 5)
         """
-
         if number_of_elements == 1:
             self.model_attr = OneElement(
                 thermal_zone=self,

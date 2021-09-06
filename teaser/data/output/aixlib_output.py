@@ -165,9 +165,9 @@ def export_multizone(buildings, prj, path=None):
         _help_test_script(bldg, dir_dymola, test_script_template)
 
         zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
+        tabs_package = []
 
         for zone in bldg.thermal_zones:
-
             with open(utilities.get_full_path(os.path.join(
                     zone_path,
                     bldg.name + '_' + zone.name + '.mo')), 'w') as out_file:
@@ -186,6 +186,7 @@ def export_multizone(buildings, prj, path=None):
                         bldg.name + '_' + zone.name + '_upperTABS' + '.mo')), 'w') as out_file:
                     out_file.write(tabs_template.render_unicode(zone=zone))
                     out_file.close()
+                tabs_package.append(zone.name + '_upperTABS')
 
         _help_package(
             path=zone_path,
@@ -193,7 +194,7 @@ def export_multizone(buildings, prj, path=None):
             within=prj.name + '.' + bldg.name)
         _help_package_order(
             path=zone_path,
-            package_list=bldg.thermal_zones,
+            package_list=bldg.thermal_zones + tabs_package,
             addition=bldg.name + "_",
             extra=None)
 
