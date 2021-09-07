@@ -1,4 +1,4 @@
-<%namespace file="/modelica_language/" import="get_true_false"/>
+<%namespace file="/modelica_language/" import="get_true_false, get_list, get_list_record"/>
 within ${bldg.parent.name}.${bldg.name};
 model ${bldg.name}
   "This is the simulation model of ${bldg.name} with traceable ID ${bldg.building_id}"
@@ -17,7 +17,13 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     ATabs = ${get_list(bldg.ATabs)},
     TabsConnection = ${get_list(bldg.tabs_connection)},
     TabsHeatLoad = ${get_list(bldg.tabs_heat_load)},
-    TabswallTypeFloor = ${get_list(bldg.tabs_record)},
+    % if bldg.ATabs:
+    TabswallTypeFloor = {
+        % for tabs in bldg.tabs_record:
+        ${bldg.name}_DataBase.${bldg.name}_${tabs}()${',' if not loop.last else ''}
+        % endfor
+        },
+    %endif
     % if bldg.internal_gains_mode==3:
         use_C_flow = true,
         use_moisture_balance = true,

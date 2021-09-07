@@ -393,7 +393,8 @@ class Building(object):
                 self.tabs_connection.append(zone_counter)
                 self.tabs_heat_load.append(zone.model_attr.heat_load)
                 self.tabs_record.append(zone.name + '_upperTABS')
-
+        if not self.tabs_rooms:
+            self.tabs_rooms = 1
         if self.used_library_calc == self.library_attr.__class__.__name__:
             if self.used_library_calc == "AixLib":
                 self.library_attr.calc_auxiliary_attr()
