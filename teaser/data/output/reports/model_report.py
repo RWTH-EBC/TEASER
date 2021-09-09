@@ -9,13 +9,13 @@
 # todo orientations not work yet correctly
 def orient_mapper(angle):
     orient = None
-    if -45 < angle < 45:
+    if angle <= 45 or 315 < angle <= 360:
         orient = 'North'
-    elif 45 < angle > 135:
+    elif 45 < angle <= 135:
         orient = 'East'
-    elif 135 < angle < 225:
+    elif 135 < angle <= 225:
         orient = 'South'
-    elif 225 < angle < 315:
+    elif 225 < angle <= 315:
         orient = 'West'
     return orient
 
@@ -25,6 +25,7 @@ def localize_floats(row):
         str(el).replace('.', ',') if isinstance(el, float) else el
         for el in row
     ]
+
 
 def calc_report_data(prj, path):
     prj_data = {}
