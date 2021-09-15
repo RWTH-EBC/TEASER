@@ -51,17 +51,19 @@ def calc_report_data(prj, path):
             elif orient == -2:
                 prj_data[bldg_name]['GroundFloorArea'] = bldg.outer_area[orient]
             else:
-                if orient_mapper(orient) not in prj_data[bldg_name] \
-                        ['OuterWallArea']:
-                    prj_data[bldg_name]['OuterWallArea'] \
-                        [orient_mapper(orient)] = 0
+                if orient_mapper(orient) not in \
+                        prj_data[bldg_name]['OuterWallArea']:
+                    prj_data[bldg_name]['OuterWallArea'][orient_mapper(
+                        orient)] = 0
                 prj_data[bldg_name]['OuterWallArea'][orient_mapper(orient)] += \
                     bldg.outer_area[orient]
                 outer_wall_area_total += bldg.outer_area[orient]
         window_area_total = 0
         prj_data[bldg_name]['WindowArea'] = {}
         for orient in bldg.window_area:
-            prj_data[bldg_name]['WindowArea'][orient_mapper(orient)] = \
+            if orient_mapper(orient) not in prj_data[bldg_name]['WindowArea']:
+                prj_data[bldg_name]['WindowArea'][orient_mapper(orient)] = 0
+            prj_data[bldg_name]['WindowArea'][orient_mapper(orient)] += \
                 bldg.window_area[orient]
             window_area_total += bldg.window_area[orient]
         prj_data[bldg_name]['WindowArea_Total'] = window_area_total
