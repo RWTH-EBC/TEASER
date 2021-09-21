@@ -5,11 +5,10 @@ This is a test module to generate swimming pools based on
 teaser example 1 - generate archetype and example 2 - export aixlib models.
 Last modified 2020-09-25 for Project 'Energieeffizienz in Schwimmbädern - Neubau und Bestand'
 """
-import teaser.logic.archetypebuildings.eeschwimm.swimmingPool as swimmingPool
 import teaser.logic.utilities as utilities
 import os
 
-def test_generate_swimmingPool():
+def generate_basic_swimmingPool():
 
     # First step: Import the TEASER API (called Project) into your Python
     # module
@@ -24,7 +23,7 @@ def test_generate_swimmingPool():
     # filenames, thus we will delete them anyway in TEASER.
 
     prj = Project(load_data=True)
-    prj.name = "Output_Schwimmbad_Modell"
+    prj.name = "Output_Swimming_Pool_Basic_Model"
 
 
     # To generate non-residential archetype buildings the function
@@ -38,13 +37,9 @@ def test_generate_swimmingPool():
     # swimmingPoolCategory (placeholder)
     
     """
-    Please specify the following data.
+    The basic swimming pool is calculated from the WATER SURFACE. Please enter the respective WATER SURFACE
+    for the parameter net_leased_area. 
     """
-    # xlrd library will no longer read anything other than .xls files!!
-    filePath=os.path.join(os.path.dirname(__file__),"2021-04-14_Hüllflächen_Zonen_Shells_of_Zones.xls")
-    sheetNameAreas='Hüllflächen, Himmelsricht.'
-    sheetNameElements='Strukturen Hüllfläche'
-    swimmingPoolCategory='A2'
 
     prj.add_non_residential(
         method='bmvbs',
@@ -53,25 +48,16 @@ def test_generate_swimmingPool():
         year_of_construction=1980,
         number_of_floors=1,
         height_of_floors=4.2,
-        net_leased_area=2056.9,
-        internal_gains_mode=3,
-        filePath=filePath, 
-        sheetNameAreas=sheetNameAreas,        
-        sheetNameElements=sheetNameElements,
-        swimmingPoolCategory=swimmingPoolCategory)
-
+        net_leased_area=412.5,
+        internal_gains_mode=3)
 
     # Please note: as we need to load the construction information which are
     # rather big for TABULA, switching from one typology to another in the same
     # Project takes some seconds. If you know from beginning you will only use
     # TABULA typology you should instantiate you Project class without loading
     # data. Project(load_data=False).
-    
-    print()
+        
     print("Archetype(s) of indoor pool(s) successfully generated!")
-    print()
-    print("Excel File was read out from: ")
-    print(filePath)
     print()
 
     prj.used_library_calc = 'AixLib'
@@ -89,13 +75,6 @@ def test_generate_swimmingPool():
 
     prj.calc_all_buildings()
 
-    # Deletes empty zones and pushs the "thermal zones" wich are Pools in the zone "Schwimmhalle" 
-    # in the parameter "pool_zones" and delets it out of the thermal zones 
-    # it should be considered that, that the function is called after all calculations 
-    # directly before the export, otherwise problems can occur when handling the thermal zones. 
-    for bldgs in prj.buildings:
-        bldgs.orderPoolZones()
-
     # To export the ready-to-run models simply call Project.export_aixlib().
     # You can specify the path, where the model files should be saved.
     # None means, that the default path in your home directory
@@ -106,13 +85,11 @@ def test_generate_swimmingPool():
 
     path = prj.export_aixlib(
         internal_id=None,
-        path='E:/Testmodelle EESchwimm')
+        path=None)
 
     return path
 
-
-
 if __name__ == '__main__':
-    prj = test_generate_swimmingPool()
+    prj = generate_basic_swimmingPool()
 
     print("Test SwimmingPool: That's it! :)")

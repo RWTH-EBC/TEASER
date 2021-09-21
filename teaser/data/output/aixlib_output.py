@@ -78,7 +78,7 @@ def export_multizone(buildings, prj, path=None):
             "data/output/modelicatemplate/AixLib"
             "/AixLib_ThermalZoneRecord_FourElement"),
         lookup=lookup)
-    zone_template_pool = Template(
+    template_pool = Template(
         filename=utilities.get_full_path(
             "data/output/modelicatemplate/AixLib"
             "/AixLib_SwimmingPoolRecord"),
@@ -193,34 +193,34 @@ def export_multizone(buildings, prj, path=None):
 
             out_file.close()
 
-            try:
-                if zone.pool_zones is not None:
+            if hasattr(zone, "paramRecord"):
+                try:
                     pool_path = os.path.join(zone_path, zone.name + "_DataBase")
                     utilities.create_path(utilities.get_full_path(
                         os.path.join(zone_path,
                                      zone.name + "_DataBase")))
-                for poolZone in zone.pool_zones:
-                    out_file = open(utilities.get_full_path(os.path.join(
-                        pool_path, zone.name + '_' + poolZone.name + '.mo')), 'w')
-                    if type(poolZone.model_attr).__name__ == "FourElement":
-                        out_file.write(zone_template_pool.render_unicode(zone=poolZone))
-                    out_file.close()
-                _help_package(
-                    path=pool_path,
-                    name=zone.name + '_DataBase',
-                    within=prj.name + '.' + bldg.name + '.' + bldg.name + '_DataBase')
-                _help_package_order(
-                    path=pool_path,
-                    package_list=zone.pool_zones,
-                    addition=zone.name + "_",
-                    extra=None)
-                _help_package_order(
-                    path=zone_path,
-                    package_list=bldg.thermal_zones,
-                    addition=bldg.name + "_",
-                    extra=zone.name + "_DataBase")
-            except AttributeError:
-                continue
+                    for pool in zone.paramRecord.keys():                       
+                        out_file = open(utilities.get_full_path(os.path.join(
+                            pool_path, zone.name + '_' + pool + '.mo')), 'w')                        
+                        out_file.write(template_pool.render_unicode(zone=zone, pool=pool))
+                        out_file.close()
+                    _help_package(
+                        path=pool_path,
+                        name=zone.name + '_DataBase',
+                        within=prj.name + '.' + bldg.name + '.' + bldg.name + '_DataBase')
+                    _help_package_order(
+                        path=pool_path,
+                        package_list=list(zone.paramRecord.keys()),
+                        addition=zone.name + "_",
+                        extra=None,
+                        pool=True)
+                    _help_package_order(
+                        path=zone_path,
+                        package_list=bldg.thermal_zones,
+                        addition=bldg.name + "_",
+                        extra=zone.name + "_DataBase")                    
+                except AttributeError:
+                    continue
 
 
 
@@ -323,7 +323,7 @@ def _help_package(path, name, uses=None, within=None):
     out_file.close()
 
 
-def _help_package_order(path, package_list, addition=None, extra=None):
+def _help_package_order(path, package_list, addition=None, extra=None, pool=None):
     """creates a package.order file
 
     private function, do not call
@@ -350,7 +350,7 @@ def _help_package_order(path, package_list, addition=None, extra=None):
     out_file = open(
         utilities.get_full_path(path + "/" + "package" + ".order"), 'w')
     out_file.write(order_template.render_unicode
-                   (list=package_list, addition=addition, extra=extra))
+                   (list=package_list, addition=addition, extra=extra, pool=pool))
     out_file.close()
 
 

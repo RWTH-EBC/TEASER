@@ -3,7 +3,6 @@
 from __future__ import division
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
 import teaser.data.input.buildingelement_input_json as buildingelement_input
-import teaser.data.input.ExcelToTeaser as bElement_excel_input
 import numpy as np
 import random
 import re
@@ -173,19 +172,6 @@ class BuildingElement(object):
                 count_layer.thickness / count_layer.material.thermal_conduc) \
 
         self.r_conduc = r_conduc * (1 / self.area)
-        """
-        if (self.name == "PoolFloorWithEarthContact" or self.name == "PoolAreaAboveTechnicalRoom"
-            or self.name == "CeilingUnderPoolArea"):
-            #Calculation of volume flow according to DIN 19643-1:2012-11
-            k = 0.5 #Resilience factor from DIN 19643-2:2012-11
-            N = 0.296 * self.area #Nominal load from mean value swimmer and non-swimmer pools 
-            v = N/k            
-            # Calculation of heat transfer resistance for water according to
-            # H. Herr: Wärmelehre: Technische Physik Band 3. 2006
-            self.r_inner_conv = (1 / (2100 * (v**(1/2)))) * (1 / self.area)
-            self.r_inner_rad = (1 / 580) * (1 / self.area)
-            self.r_inner_comb = 1 / (1 / self.r_inner_conv + 1 / self.r_inner_rad)
-        """   
         self.r_inner_conv = (1 / self.inner_convection) * (1 / self.area)
         self.r_inner_rad = (1 / self.inner_radiation) * (1 / self.area)
         self.r_inner_comb = 1 / (1 / self.r_inner_conv + 1 / self.r_inner_rad)
@@ -286,10 +272,7 @@ class BuildingElement(object):
             self,
             year,
             construction,
-            data_class=None,
-            isSwimmingPool=False,
-            filePath=None, 
-            sheetNameElements=None):
+            data_class=None):
         """Typical element loader.
 
         Loads typical building elements according to their construction
@@ -312,13 +295,6 @@ class BuildingElement(object):
             self.parent.parent.parent.data (which is data_class in current
             project)
 
-        isSwimmingPool : boolean
-            Indicates that swimming pool data is used
-        filePath : str
-            Path to Excel file
-        sheetNameElements : str
-            Sheet name of sheet for building elements and respective materials
-
         """
 
         if data_class is None:
@@ -332,19 +308,10 @@ class BuildingElement(object):
         self._outer_convection = None
         self._outer_radiation = None
 
-        if isSwimmingPool == False:
-            buildingelement_input.load_type_element(element=self,
-                                                    year=year,
-                                                    construction=construction,
-                                                    data_class=data_class)
-        else:
-            bElement_excel_input.load_type_element(element=self,
-                                                   year=year,
-                                                   construction=construction,
-                                                   data_class=data_class, 
-                                                   filePath=filePath, 
-                                                   sheetNameElements=sheetNameElements)
-
+        buildingelement_input.load_type_element(element=self,
+                                                year=year,
+                                                construction=construction,
+                                                data_class=data_class)
 
     def save_type_element(self, data_class=None):
         """Typical element saver.
