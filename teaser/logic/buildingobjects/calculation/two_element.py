@@ -498,7 +498,7 @@ class TwoElement(object):
         elif len(self.thermal_zone.outer_tabs) > 0:
             self.thermal_zone.use_conditions.with_tabs = True
             self.thermal_zone.use_conditions.ext_tabs = True
-            if self.thermal_zone.outer_tabs[0].construction_type.endswith('CC'):
+            if self.thermal_zone.outer_tabs[0].construction_type and self.thermal_zone.outer_tabs[0].construction_type.endswith('CC'):
                 self.thermal_zone.use_conditions.cc_tabs = True
             self._calc_tabs()
 
