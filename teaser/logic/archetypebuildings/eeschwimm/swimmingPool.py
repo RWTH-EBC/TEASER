@@ -173,7 +173,7 @@ class SwimmingPool(NonResidential):
         
         print("Calculating zone data for basic swimming pool:", name)             
         
-        self.poolsInDict = self.setPoolBaseParameters(self.net_leased_area) 
+        self.poolsInDict = self.setPoolBaseParameters(self.net_leased_area, True) 
         
         # Calculating actual net leased area
         self.net_leased_area = 0
@@ -792,7 +792,7 @@ class SwimmingPool(NonResidential):
                 print("Inner wall with name", wall.name, "and element area", wall.area)
         """
         
-    def setPoolBaseParameters(self, waterSurface):
+    def setPoolBaseParameters(self, waterSurface, areaCorrection = False):
         """
         Creating basic swimming pool building with one pool for beginners and one for swimmers.
         Zone areas and volumes are calculated from the WATER SURFACE according to 'Koordinierungskreis 
@@ -800,6 +800,7 @@ class SwimmingPool(NonResidential):
         WATER SURFACE. The building contains the zones 1 - 5 and 7.
         """
         ws = waterSurface
+        
         #Create dict for zones and pools
         poolsInDict = dict()
         poolsInDict["Schwimmerbecken"] = dict()
@@ -814,11 +815,12 @@ class SwimmingPool(NonResidential):
         # Calculate zone areas and volumes according to 'Koordinierungskreis Bäder - 
         # Richtlinien für den Bäderbau - 2013'
         
+        
+        
         # Zone 1
         # zoneArea = entrance + management room
         zoneArea = 12 + ws * 0.2
         poolsInDict["Zone 1"]["Total area of zone (including water surface) [m²]"] = zoneArea
-        poolsInDict["Zone 1"]["Air volume [m³]"] = zoneArea * 2.75
         
         # Zone 2
         # zoneArea = changingRooms + sanitaryObjects + cleaningRoom + corridors         
@@ -827,9 +829,8 @@ class SwimmingPool(NonResidential):
         cleaningRoom = 2
         corridors = (math.ceil(ws**0.58 / 14) * 3.1 + math.ceil(ws**0.58 / 7) * 3.375) * 1.5
         zoneArea = changingRooms + sanitaryObjects + cleaningRoom + corridors        
-        poolsInDict["Zone 2"]["Total area of zone (including water surface) [m²]"] = round(zoneArea, 4)
-        poolsInDict["Zone 2"]["Air volume [m³]"] = round(zoneArea * 2.75, 4)  
-        
+        poolsInDict["Zone 2"]["Total area of zone (including water surface) [m²]"] = zoneArea
+
         # Zone 3
         # zoneArea = sanitary blocks + additional showers         
         if ws <= 150:
@@ -844,8 +845,9 @@ class SwimmingPool(NonResidential):
             numAdditionalShowers = (numShowers - numSanitaryDoubleBlocks * 20) / 4
             zoneArea = numSanitaryDoubleBlocks * 82.53 + numAdditionalShowers * 10.44 # 4 additional showers 
             
-        poolsInDict["Zone 3"]["Total area of zone (including water surface) [m²]"] = round(zoneArea, 4)
-        poolsInDict["Zone 3"]["Air volume [m³]"] = round(zoneArea * 2.75, 4)         
+        poolsInDict["Zone 3"]["Total area of zone (including water surface) [m²]"] = zoneArea
+        
+        
         
         # Zone 4 and basic parameter for pools        
         if ws < 412.5:
@@ -873,7 +875,7 @@ class SwimmingPool(NonResidential):
         else:
             mainPoolLength = 50
         
-        mainPoolWidth = round(poolsInDict["Schwimmerbecken"]["Water surface"]/mainPoolLength, 4)
+        mainPoolWidth = poolsInDict["Schwimmerbecken"]["Water surface"]/mainPoolLength
         
         if ws >= 412.5:
             hallLength = mainPoolLength + beginnerPoolWidth + 8.25            
@@ -894,17 +896,39 @@ class SwimmingPool(NonResidential):
             poolsInDict["Schwimmerbecken"]["Water surface"]
         
         poolsInDict["Zone 4"]["Total area of zone (including water surface) [m²]"] = zoneArea
-        poolsInDict["Zone 4"]["Air volume [m³]"] = zoneArea * 6
         
         # Zone 5
         # zoneArea = First aid room + swimming master room + + Swimming equipment room + Cleaning equipment room
-        poolsInDict["Zone 5"]["Total area of zone (including water surface) [m²]"] = 43
-        poolsInDict["Zone 5"]["Air volume [m³]"] = 43 * 2.5
+        poolsInDict["Zone 5"]["Total area of zone (including water surface) [m²]"] = 43  
         
         # Zone 8
-        zoneArea = round(ws + ws * (1/24) + 25, 4)
+        zoneArea = ws + ws * (1/24) + 25
         poolsInDict["Zone 8"]["Total area of zone (including water surface) [m²]"] = zoneArea
-        poolsInDict["Zone 8"]["Air volume [m³]"] = zoneArea * 3.5
+        
+        # Zone area correction
+        correctionFactor=1
+        if areaCorrection == True and ws >= 250:
+            correctionFactor = (2293.6*math.log(ws)-10723)/(2.8549*ws+333.64)
+            
+        for value in poolsInDict.keys():
+            if str(value).startswith("Zone"):
+                zoneArea = poolsInDict[value]["Total area of zone (including water surface) [m²]"] = \
+                    poolsInDict[value]["Total area of zone (including water surface) [m²]"] * correctionFactor
+                poolsInDict[value]["Total area of zone (including water surface) [m²]"] = round(zoneArea, 2)
+                            
+        # Air volumes of all zones        
+        poolsInDict["Zone 1"]["Air volume [m³]"] = \
+            round(poolsInDict["Zone 1"]["Total area of zone (including water surface) [m²]"] * 2.75, 2) 
+        poolsInDict["Zone 2"]["Air volume [m³]"] = \
+            round(poolsInDict["Zone 2"]["Total area of zone (including water surface) [m²]"] * 2.75, 2)
+        poolsInDict["Zone 3"]["Air volume [m³]"] = \
+            round(poolsInDict["Zone 3"]["Total area of zone (including water surface) [m²]"] * 2.75, 2)
+        poolsInDict["Zone 4"]["Air volume [m³]"] = \
+            round(poolsInDict["Zone 4"]["Total area of zone (including water surface) [m²]"] * 6, 2)
+        poolsInDict["Zone 5"]["Air volume [m³]"] = \
+            round(poolsInDict["Zone 5"]["Total area of zone (including water surface) [m²]"] * 2.5, 2)
+        poolsInDict["Zone 8"]["Air volume [m³]"] = \
+            round(poolsInDict["Zone 8"]["Total area of zone (including water surface) [m²]"] * 3.5, 2)
         
         #Additional pool data
         poolsInDict["Schwimmerbecken"]["Pool temperature"] = 299.15        
