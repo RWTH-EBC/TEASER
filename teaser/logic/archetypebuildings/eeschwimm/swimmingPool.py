@@ -168,7 +168,7 @@ class SwimmingPool(NonResidential):
         one pool for swimmers, if the water area is not sufficient for two basic pools.
         Zone areas and volumes are calculated from the WATER SURFACE according to 'Koordinierungskreis 
         Bäder - Richtlinien für den Bäderbau - 2013'. Therefore, the NET LEASED AREA is used as 
-        WATER SURFACE. The building contains the zones 1 - 5 and 8.
+        WATER SURFACE. The basic building contains the zones 1 - 5 and 8.
         """
         
         print("Calculating zone data for basic swimming pool:", name)             
@@ -341,8 +341,6 @@ class SwimmingPool(NonResidential):
                     7 * [0.0] + 12 * [1.0] + 6 * [0.0]
                 )  # according to user
                 # profile in :cite:`DeutschesInstitutfurNormung.2016`
-               
-            
 
 
     def generate_archetype(self):
@@ -365,7 +363,7 @@ class SwimmingPool(NonResidential):
             zone.area = value[0] 
             zone.volume = value[1]
             zone.name = key
-            #Additional Parameters for Pools 
+            # Additional Parameters for Pools 
             if zone.name == "Schwimmhalle":                  
                 zone.paramRecord = dict()
                 for pool in self.poolsInDict.keys():
@@ -453,13 +451,7 @@ class SwimmingPool(NonResidential):
             There is no real classification for windows, so this is a bit hard
             code - will be fixed sometime.
             """
-            
-            """
-            Due to missing building element data for some elements in the 
-            actual Excel file, the respective parameter 'isSwimmingPool' 
-            is set to 'False' in ExcelToTeaser to use data from the original teaser database
-            """            
-            
+     
             for idx, zone in enumerate(self.thermal_zones):
                  #Only created for Zones which are not Pools
                 if (idx >= self.numZones):
@@ -605,7 +597,7 @@ class SwimmingPool(NonResidential):
                     paramRecord["A_pool"] = self.poolsInDict[pool]["Water surface"]
     
                     ## d_pool ##
-                    paramRecord["d_pool"] = self.poolsInDict[pool]["Tiefe Becken"]
+                    paramRecord["d_pool"] = self.poolsInDict[pool]["Depth pool"]
     
                     ## V_pool ##
                     paramRecord["V_pool"] = self.poolsInDict[pool]["Water volume"]
@@ -613,11 +605,11 @@ class SwimmingPool(NonResidential):
                     ## Q ## 
                     # Hilfsparameter zur Berechnung von Q
                     # k
-                    if self.poolsInDict[pool]["Filterkombination"] == "ohne Ozon" or self.poolsInDict[pool]["Filterkombination"] == "mit Brom":
+                    if self.poolsInDict[pool]["Filter kombination"] == "without ozone" or self.poolsInDict[pool]["Filter kombination"] == "with bromine":
                         k = 0.5
-                    elif self.poolsInDict[pool]["Filterkombination"] == "mit Ozon":
+                    elif self.poolsInDict[pool]["Filter kombination"] == "with ozone":
                         k = 0.6
-                    elif self.poolsInDict[pool]["Filterkombination"] == "mit Ultrafiltration":
+                    elif self.poolsInDict[pool]["Filter kombination"] == "with ultrafiltration":
                         k = 1
                     else:
                         k = None
@@ -650,8 +642,8 @@ class SwimmingPool(NonResidential):
                         Q_K = m * self.poolsInDict[pool]["Water volume"]
                     else:
                         Q_K = 0
-                    Q_B = self.poolsInDict[pool]["Umfang Becken"]
-                    if self.poolsInDict[pool]["Umfang Becken"] > 40:
+                    Q_B = self.poolsInDict[pool]["Perimeter pool"]
+                    if self.poolsInDict[pool]["Perimeter pool"] > 40:
                         Q = max(Q_B, Q_H)
                     else: 
                         Q = min(Q_H, Q_K, Q_B)
@@ -660,7 +652,7 @@ class SwimmingPool(NonResidential):
                     paramRecord["Q"] = Q
     
                     ## Q_night ##
-                    Q_night = self.poolsInDict[pool]["Aufbereitungsvolumenstrom Nachts"]
+                    Q_night = self.poolsInDict[pool]["Volume flow wastewater treatment night"]
                     if Q_night < Q_B:
                         Q_night = Q_B
                     Q_night = Q_night/3600
@@ -668,17 +660,17 @@ class SwimmingPool(NonResidential):
     
                     ## V_storage ##
                     # Parameter v_f
-                    if self.poolsInDict[pool]["Filtertyp"] == "Aktivkohlefilter mit Ozon" or self.poolsInDict[pool]["Filtertyp"] == "Zweischichtfilter mit Ozon":
+                    if self.poolsInDict[pool]["Filter type"] == "Activated carbon filter with ozone" or self.poolsInDict[pool]["Filter type"] == "Two-layer filter with ozone":
                         v_f = 50
-                    elif self.poolsInDict[pool]["Filtertyp"] == "offener Schnellfilter":
+                    elif self.poolsInDict[pool]["Filter type"] == "Open quick filter":
                         v_f = 15
-                    elif (self.poolsInDict[pool]["Filtertyp"] == "geschlossener Schnellfilter" 
-                    or self.poolsInDict[pool]["Filtertyp"] == "geschlossener Sorptionsfilter" 
-                    or self.poolsInDict[pool]["Filtertyp"] == "offener Saugfilter" 
-                    or self.poolsInDict[pool]["Filtertyp"] == "Quantozonfilter" 
-                    or self.poolsInDict[pool]["Filtertyp"] == "Quarzkiesfilter" 
-                    or self.poolsInDict[pool]["Filtertyp"] == "Zweischichtfilter"):
-                        if self.poolsInDict[pool]["Wasserart"] == "Süßwasser":
+                    elif (self.poolsInDict[pool]["Filter type"] == "Closed quick filter" 
+                    or self.poolsInDict[pool]["Filter type"] == "Closed sorption filter" 
+                    or self.poolsInDict[pool]["Filter type"] == "Open suction filter" 
+                    or self.poolsInDict[pool]["Filter type"] == "Quantozone filter" 
+                    or self.poolsInDict[pool]["Filter type"] == "Quartz gravel filter" 
+                    or self.poolsInDict[pool]["Filter type"] == "Two-layer filter"):
+                        if self.poolsInDict[pool]["Water type"] == "Freshwater":
                             v_f = 30
                         else:
                             v_f = 20
@@ -696,8 +688,8 @@ class SwimmingPool(NonResidential):
                     else:
                         V_v = None
                     # V_w
-                    if self.poolsInDict[pool]["Umfang Becken"] > 0:
-                        V_w = 0.052 * self.poolsInDict[pool]["Water surface"] * 10**(-0.144*Q/self.poolsInDict[pool]["Umfang Becken"])
+                    if self.poolsInDict[pool]["Perimeter pool"] > 0:
+                        V_w = 0.052 * self.poolsInDict[pool]["Water surface"] * 10**(-0.144*Q/self.poolsInDict[pool]["Perimeter pool"])
                     else:
                         V_w = None
                     # V_fs
@@ -716,7 +708,7 @@ class SwimmingPool(NonResidential):
                     if pool.startswith("Freiformbecken") or pool == "Mehrzweckbecken":
                         beta_inUse = 40
                     else:
-                        if self.poolsInDict[pool]["Tiefe Becken"] > 1.35:
+                        if self.poolsInDict[pool]["Depth pool"] > 1.35:
                             beta_inUse = 28
                         else:
                             beta_inUse = 40
@@ -724,35 +716,35 @@ class SwimmingPool(NonResidential):
                     paramRecord["beta_inUse"] = beta_inUse
                     
                     ## use_parialLoad ##
-                    paramRecord["use_partialLoad"] = self.poolsInDict[pool]["Nachtabsenkung"]
+                    paramRecord["use_partialLoad"] = self.poolsInDict[pool]["Night setback"]
                     
                     ## use_idealHeatExchanger ##
-                    paramRecord["use_idealHeatExchanger"] = self.poolsInDict[pool]["IdealerWaermetauscher"]
+                    paramRecord["use_idealHeatExchanger"] = self.poolsInDict[pool]["Ideal heat recovery"]
                     
                     ## use_HeatRecovery ##
-                    paramRecord["use_HRS"] = self.poolsInDict[pool]["Wärmerückgewinnung Spühlabwasser"]
-                    paramRecord["efficiencyHRS"] = self.poolsInDict[pool]["Wärmerückgewinnungsgrad Spühlabwasser"]                
+                    paramRecord["use_HRS"] = self.poolsInDict[pool]["Heat recovery rinsing wastewater"]
+                    paramRecord["efficiencyHRS"] = self.poolsInDict[pool]["Heat recovery rate rinsing wastewater"]                
     
                     ## use_poolCover ##
-                    paramRecord["use_poolCover"] = self.poolsInDict[pool]["Beckenabdeckung"]
+                    paramRecord["use_poolCover"] = self.poolsInDict[pool]["Pool covering outside operating hours"]
     
                     ## use_wavePool ##
-                    paramRecord["use_wavePool"] = self.poolsInDict[pool]["Wellenbetrieb"]
-                    paramRecord["h_wave"] = self.poolsInDict[pool]["Wellenhöhe"]
-                    paramRecord["w_wave"] = self.poolsInDict[pool]["Wellenbreite"]
-                    paramRecord["wavePool_period"] = self.poolsInDict[pool]["Intervalle Wellenbetrieb"]
-                    paramRecord["wavePool_startTime"] = self.poolsInDict[pool]["Wellenbetrieb Startzeit"]
-                    paramRecord["wavePool_width"] = self.poolsInDict[pool]["Breite Wellenbecken"]
+                    paramRecord["use_wavePool"] = self.poolsInDict[pool]["Operation of artificial waves"]
+                    paramRecord["h_wave"] = self.poolsInDict[pool]["Wave height"]
+                    paramRecord["w_wave"] = self.poolsInDict[pool]["Wave width"]
+                    paramRecord["wavePool_period"] = self.poolsInDict[pool]["Interval wave operation"]
+                    paramRecord["wavePool_startTime"] = self.poolsInDict[pool]["Wave operation starting time"]
+                    paramRecord["wavePool_width"] = self.poolsInDict[pool]["Width wave pool"]
                     
                     ## waterRecycling ##
-                    paramRecord["use_waterRecycling"] = self.poolsInDict[pool]["Abwasseraufbereitung"]
+                    paramRecord["use_waterRecycling"] = self.poolsInDict[pool]["Wastewater treatment"]
     
                     ## x_recycling ##
-                    paramRecord["x_recycling"] = self.poolsInDict[pool]["Abwasseraufbereitungsgrad"]
+                    paramRecord["x_recycling"] = self.poolsInDict[pool]["Wastewater treatment rate"]
     
                     ## m_flow_out ##
-                    m_Besucher = 0.03 * 995.65 * self.poolsInDict[pool]["Besucherzahl"] * 1/(24*3600)
-                    m_Filter = 995.65 * self.poolsInDict[pool]["Filterspülungen"] * V_fs * 1/(7*24*3600)
+                    m_Besucher = 0.03 * 995.65 * self.poolsInDict[pool]["Visitor number"] * 1/(24*3600)
+                    m_Filter = 995.65 * self.poolsInDict[pool]["Filter rinses per week"] * V_fs * 1/(7*24*3600)
                     m_flow_out = max(m_Besucher, m_Filter)
                     paramRecord["m_flow_out"] = m_flow_out
                     
@@ -770,27 +762,6 @@ class SwimmingPool(NonResidential):
 
         self.number_of_pools = numOfPools        
        
-        """
-        The following code can be used to check the building element
-        areas.            
-        for zone in self.thermal_zones:
-            print()
-            print("For zone", zone.name, "with total area", zone.area)
-            for wall in zone.outer_walls:   
-                print("Outer wall with orientation", wall.name, "and element area", wall.area)
-            for window in zone.windows:   
-                print("Window with orientation", window.name, "and element area", window.area)
-            for ground_floor in zone.ground_floors:   
-                print("Groundfloor with name", ground_floor.name, "and element area", ground_floor.area)
-            for floor in zone.floors:   
-                print("Floor with name", floor.name, "and element area", floor.area)
-            for ceiling in zone.ceilings:   
-                print("Ceiling with name", ceiling.name, "and element area", ceiling.area)
-            for roof in zone.rooftops:   
-                print("Rooftop with name", roof.name, "and element area", roof.area)
-            for wall in zone.inner_walls:   
-                print("Inner wall with name", wall.name, "and element area", wall.area)
-        """
         
     def setPoolBaseParameters(self, waterSurface, areaCorrection = False):
         """
@@ -801,7 +772,7 @@ class SwimmingPool(NonResidential):
         """
         ws = waterSurface
         
-        #Create dict for zones and pools
+        # Create dict for zones and pools
         poolsInDict = dict()
         poolsInDict["Schwimmerbecken"] = dict()
         if ws >= 412.5:
@@ -814,8 +785,6 @@ class SwimmingPool(NonResidential):
                 
         # Calculate zone areas and volumes according to 'Koordinierungskreis Bäder - 
         # Richtlinien für den Bäderbau - 2013'
-        
-        
         
         # Zone 1
         # zoneArea = entrance + management room
@@ -849,7 +818,7 @@ class SwimmingPool(NonResidential):
         
         
         
-        # Zone 4 and basic parameter for pools        
+        # Zone 4       
         if ws < 412.5:
             poolsInDict["Schwimmerbecken"]["Water surface"] = ws
             
@@ -886,13 +855,13 @@ class SwimmingPool(NonResidential):
         zoneArea = hallWidth * hallLength
         
         if ws >= 412.5:
-            poolsInDict["Nichtschwimmerbecken"]["Tiefe Becken"] = 0.975
+            poolsInDict["Nichtschwimmerbecken"]["Depth pool"] = 0.975
             poolsInDict["Nichtschwimmerbecken"]["Water volume"] = \
-                poolsInDict["Nichtschwimmerbecken"]["Tiefe Becken"] * \
+                poolsInDict["Nichtschwimmerbecken"]["Depth pool"] * \
                     poolsInDict["Nichtschwimmerbecken"]["Water surface"]        
         
-        poolsInDict["Schwimmerbecken"]["Tiefe Becken"] = 3
-        poolsInDict["Schwimmerbecken"]["Water volume"] = poolsInDict["Schwimmerbecken"]["Tiefe Becken"] * \
+        poolsInDict["Schwimmerbecken"]["Depth pool"] = 3
+        poolsInDict["Schwimmerbecken"]["Water volume"] = poolsInDict["Schwimmerbecken"]["Depth pool"] * \
             poolsInDict["Schwimmerbecken"]["Water surface"]
         
         poolsInDict["Zone 4"]["Total area of zone (including water surface) [m²]"] = zoneArea
@@ -930,39 +899,39 @@ class SwimmingPool(NonResidential):
         poolsInDict["Zone 8"]["Air volume [m³]"] = \
             round(poolsInDict["Zone 8"]["Total area of zone (including water surface) [m²]"] * 3.5, 2)
         
-        #Additional pool data
+        # Additional pool data
         poolsInDict["Schwimmerbecken"]["Pool temperature"] = 299.15        
-        poolsInDict["Schwimmerbecken"]["Umfang Becken"] = 2 * mainPoolWidth + 2 * mainPoolLength                     
-        poolsInDict["Schwimmerbecken"]["Besucherzahl"] = round(ws**0.58 * 2/3, 0) #num of changing rooms
+        poolsInDict["Schwimmerbecken"]["Perimeter pool"] = 2 * mainPoolWidth + 2 * mainPoolLength                     
+        poolsInDict["Schwimmerbecken"]["Visitor number"] = round(ws**0.58 * 2/3, 0) #num of changing rooms
         poolsInDict = self.basicPoolDataRecord(poolsInDict, "Schwimmerbecken")        
 
         
         if ws >= 412.5:
             poolsInDict["Nichtschwimmerbecken"]["Pool temperature"] = 299.15
-            poolsInDict["Nichtschwimmerbecken"]["Umfang Becken"] = 2 * beginnerPoolWidth + 2 * beginnerPoolLength
-            poolsInDict["Nichtschwimmerbecken"]["Besucherzahl"] = round(ws**0.58 * 1/3, 0) 
+            poolsInDict["Nichtschwimmerbecken"]["Perimeter pool"] = 2 * beginnerPoolWidth + 2 * beginnerPoolLength
+            poolsInDict["Nichtschwimmerbecken"]["Visitor number"] = round(ws**0.58 * 1/3, 0) 
             poolsInDict = self.basicPoolDataRecord(poolsInDict, "Nichtschwimmerbecken")
         return poolsInDict
         
     def basicPoolDataRecord(self, poolsInDict, poolName):
-        poolsInDict[poolName]["Nachtabsenkung"] = "true"        
-        poolsInDict[poolName]["Aufbereitungsvolumenstrom Nachts"] = 30        
-        poolsInDict[poolName]["Beckenabdeckung"] = "false"        
-        poolsInDict[poolName]["Wellenbetrieb"] = "false"        
-        poolsInDict[poolName]["Wellenhöhe"] = 0        
-        poolsInDict[poolName]["Wellenbreite"] = 0        
-        poolsInDict[poolName]["Abwasseraufbereitung"] = "true"        
-        poolsInDict[poolName]["Abwasseraufbereitungsgrad"] = 0.8       
-        poolsInDict[poolName]["Filterspülungen"] = 2        
-        poolsInDict[poolName]["Filterkombination"] = "ohne Ozon"        
-        poolsInDict[poolName]["Filtertyp"] = "offener Saugfilter"        
-        poolsInDict[poolName]["Wasserart"] = "Süßwasser"  
-        poolsInDict[poolName]["IdealerWaermetauscher"] = "true"
-        poolsInDict[poolName]["Wärmerückgewinnung Spühlabwasser"] = "true"
-        poolsInDict[poolName]["Wärmerückgewinnungsgrad Spühlabwasser"] = 0.8
-        poolsInDict[poolName]["Intervalle Wellenbetrieb"] = 1800
-        poolsInDict[poolName]["Wellenbetrieb Startzeit"] = 0
-        poolsInDict[poolName]["Breite Wellenbecken"] = 10/30*100
+        poolsInDict[poolName]["Night setback"] = "true"        
+        poolsInDict[poolName]["Volume flow wastewater treatment night"] = 30        
+        poolsInDict[poolName]["Pool covering outside operating hours"] = "false"        
+        poolsInDict[poolName]["Operation of artificial waves"] = "false"        
+        poolsInDict[poolName]["Wave height"] = 0        
+        poolsInDict[poolName]["Wave width"] = 0        
+        poolsInDict[poolName]["Wastewater treatment"] = "true"        
+        poolsInDict[poolName]["Wastewater treatment rate"] = 0.8       
+        poolsInDict[poolName]["Filter rinses per week"] = 2        
+        poolsInDict[poolName]["Filter kombination"] = "without ozone"        
+        poolsInDict[poolName]["Filter type"] = "Open suction filter"        
+        poolsInDict[poolName]["Water type"] = "Freshwater"  
+        poolsInDict[poolName]["Ideal heat recovery"] = "true"
+        poolsInDict[poolName]["Heat recovery rinsing wastewater"] = "true"
+        poolsInDict[poolName]["Heat recovery rate rinsing wastewater"] = 0.8
+        poolsInDict[poolName]["Interval wave operation"] = 1800
+        poolsInDict[poolName]["Wave operation starting time"] = 0
+        poolsInDict[poolName]["Width wave pool"] = 10/30*100
         poolsInDict[poolName]["Pool floor without earth contact"] = 0.001
         poolsInDict[poolName]["Pool floor with earth contact"] = 559.82
         poolsInDict[poolName]["Pool wall without earth contact"] = 21.658
