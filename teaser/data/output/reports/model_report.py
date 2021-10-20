@@ -28,7 +28,7 @@ def localize_floats(row):
     ]
 
 
-def calc_report_data(prj, path):
+def calc_report_data(prj, path, name=None):
     prj_data = {}
     for bldg in prj.buildings:
         bldg_name = bldg.name
@@ -51,19 +51,18 @@ def calc_report_data(prj, path):
             elif orient == -2:
                 prj_data[bldg_name]['GroundFloorArea'] = bldg.outer_area[orient]
             else:
-                if orient_mapper(orient) not in \
+                if orient not in \
                         prj_data[bldg_name]['OuterWallArea']:
-                    prj_data[bldg_name]['OuterWallArea'][orient_mapper(
-                        orient)] = 0
-                prj_data[bldg_name]['OuterWallArea'][orient_mapper(orient)] += \
+                    prj_data[bldg_name]['OuterWallArea'][orient] = 0
+                prj_data[bldg_name]['OuterWallArea'][orient] += \
                     bldg.outer_area[orient]
                 outer_wall_area_total += bldg.outer_area[orient]
         window_area_total = 0
         prj_data[bldg_name]['WindowArea'] = {}
         for orient in bldg.window_area:
-            if orient_mapper(orient) not in prj_data[bldg_name]['WindowArea']:
-                prj_data[bldg_name]['WindowArea'][orient_mapper(orient)] = 0
-            prj_data[bldg_name]['WindowArea'][orient_mapper(orient)] += \
+            if orient not in prj_data[bldg_name]['WindowArea']:
+                prj_data[bldg_name]['WindowArea'][orient] = 0
+            prj_data[bldg_name]['WindowArea'][orient] += \
                 bldg.window_area[orient]
             window_area_total += bldg.window_area[orient]
         prj_data[bldg_name]['WindowArea_Total'] = window_area_total
@@ -165,26 +164,27 @@ def calc_report_data(prj, path):
     for key, val in prj_data.items():
         if isinstance(prj_data[key], dict):
             for subkey in prj_data[key].keys():
-                prj_data_flat[str(key) + '_' + str(subkey)] = prj_data[key][
+                prj_data_flat[str(key) + '_' + f"{subkey:03}"] = prj_data[key][
                     subkey]
         else:
             prj_data_flat[key] = prj_data[key]
 
+    prj_add_list = {'OuterWall': [], 'Window': []}
+    for key in prj_data_flat.keys():
+        if key.startswith('OuterWallArea_'):
+            prj_add_list['OuterWall'].append(key)
+        if key.startswith('WindowArea_'):
+            prj_add_list['Window'].append(key)
+    prj_add_list['OuterWall'].sort()
+    prj_add_list['Window'].sort()
+
     prj_sorted_list = [
         'NetGroundArea',
-        'OuterWallArea_Total',
-        'OuterWallArea_South',
-        'OuterWallArea_West',
-        'OuterWallArea_North',
-        'OuterWallArea_East',
+        *prj_add_list['OuterWall'],
         'RoofArea',
         'TotalVolumeAir',
         'InnerWallArea',
-        'WindowArea_Total',
-        'WindowArea_South',
-        'WindowArea_North',
-        'WindowArea_West',
-        'WindowArea_East',
+        *prj_add_list['Window'],
         'WindowWallRatio',
         'UValueOuterWall',
         'UValueInnerWall',
@@ -207,7 +207,8 @@ def calc_report_data(prj, path):
     values.extend([x[1] for x in prj_data_flat_sorted])
     import csv
     import os
-    with open(os.path.join(path, 'teaser_data.csv'), 'w', newline='',
+    output_name = 'teaser_data' if not name else name
+    with open(os.path.join(path, '%s.csv' % output_name), 'w', newline='',
               encoding='utf-8') as f:
         csvwriter = csv.writer(f, delimiter=';')
         csvwriter.writerow(keys)
