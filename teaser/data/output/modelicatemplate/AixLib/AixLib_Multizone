@@ -143,6 +143,24 @@ equation
   connect(tableTSetCool.y, multizone.TSetCool) annotation (Line(points={{55.2,-58},
           {36.8,-58},{36.8,-9}}, color={0,0,127}));
 
+  connect(multizone.TAir, multizonePostProcessing.TAir) annotation (Line(points={{51,4.95},
+          {70,4.95},{70,99},{81.8,99}},             color={0,0,127}));
+
+  connect(multizone.PCooler, multizonePostProcessing.PCooler) annotation (Line(
+        points={{51,-7},{70,-7},{70,90.6},{81.8,90.6}},
+                                                      color={0,0,127}));
+  connect(multizone.PHeater, multizonePostProcessing.PHeater) annotation (Line(
+        points={{51,-5},{70,-5},{70,94.8},{81.8,94.8}},
+                                                      color={0,0,127}));
+  connect(multizone.Pel, multizonePostProcessing.PelAHU) annotation (Line(
+        points={{51,1},{70,1},{70,86.6},{81.6,86.6}}, color={0,0,127}));
+
+  connect(multizone.PCoolAHU, multizonePostProcessing.PCoolAHU) annotation (
+      Line(points={{51,-3},{70,-3},{70,79},{81.6,79}}, color={0,0,127}));
+
+  connect(multizone.PHeatAHU, multizonePostProcessing.PHeatAHU) annotation (
+      Line(points={{51,-1},{70,-1},{70,82.8},{81.6,82.8}}, color={0,0,127}));
+
   annotation (experiment(
       StartTime=${str(zone.parent.parent.modelica_info.start_time)},
       StopTime=${str(zone.parent.parent.modelica_info.stop_time)},
