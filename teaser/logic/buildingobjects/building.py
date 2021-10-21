@@ -65,8 +65,6 @@ class Building(object):
         Average height of the floors (default: None)
     internal_id : float
         Random id for the distinction between different buildings.
-    inner_area: float
-        sum of all inner wall areas of the building.
     year_of_retrofit : int
         Year of last retrofit.
     type_of_building : string
@@ -158,7 +156,6 @@ class Building(object):
         self._thermal_zones = []
         self._outer_area = {}
         self._window_area = {}
-        self.inner_area = 0
 
         self.bldg_height = None
         self.volume = 0
