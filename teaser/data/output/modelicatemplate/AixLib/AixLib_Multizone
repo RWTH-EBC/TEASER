@@ -118,6 +118,13 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
       "Set points for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
 
+  AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.MultizonePostProcessing
+    multizonePostProcessing(
+    VAir=multizone.VAir,
+    numZones=multizone.numZones,
+    zoneParam=multizone.zoneParam)
+    annotation (Placement(transformation(extent={{82,80},{102,100}})));
+
 equation
   connect(weaDat.weaBus, multizone.weaBus) annotation (Line(
       points={{-62,40},{-32,40},{-32,6},{34,6}},
