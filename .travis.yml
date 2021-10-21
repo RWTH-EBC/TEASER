@@ -8,7 +8,7 @@ install:
   - pip install --no-use-pep517 -e .
   - pip install pytest-cov
   - pip install coveralls
-  - pip install PyGithub==1.39
+  - pip install PyGithub==1.55
   - pip install flake8==3.4.1
 
 before_script:
