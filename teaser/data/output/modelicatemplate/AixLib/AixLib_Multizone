@@ -118,6 +118,7 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
       "Set points for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
 
+% if use_postprocessing_calc:
   AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.MultizonePostProcessing
     multizonePostProcessing(
     VAir=multizone.VAir,
@@ -125,6 +126,7 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     zoneParam=multizone.zoneParam,
     calc_rel_humidity=multizone.use_moisture_balance)
     annotation (Placement(transformation(extent={{82,80},{102,100}})));
+% endif
 
 equation
   connect(weaDat.weaBus, multizone.weaBus) annotation (Line(
@@ -144,6 +146,7 @@ equation
   connect(tableTSetCool.y, multizone.TSetCool) annotation (Line(points={{55.2,-58},
           {36.8,-58},{36.8,-9}}, color={0,0,127}));
 
+% if use_postprocessing_calc:
   connect(multizone.TAir, multizonePostProcessing.TAir) annotation (Line(points={{51,4.95},
           {70,4.95},{70,99},{81.8,99}},             color={0,0,127}));
 
@@ -167,6 +170,7 @@ equation
 
   connect(multizone.TRad, multizonePostProcessing.TRad) annotation (Line(points={{51,3},{
           70,3},{70,97.6},{80,97.6}},         color={0,0,127}));
+% endif
 
   annotation (experiment(
       StartTime=${str(zone.parent.parent.modelica_info.start_time)},
