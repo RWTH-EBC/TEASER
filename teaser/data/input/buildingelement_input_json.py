@@ -38,13 +38,13 @@ def load_type_element(element, year, construction, data_class):
 
     for key, element_in in element_binding.items():
         if key != "version":
-            if year > 2015:
+            if year > 2015 and 'tabula' not in construction.lower():
                 year = 2015
                 warnings.warn(
-                    "You selected a building year after 2015. Current"
-                    "implementations cover only building elements up to 2015."
-                    "In the following 2015 will be used as year of "
-                    "construction!")
+                    "You selected a building year after 2015 without using "
+                    "Tabula construction type. Current implementations cover "
+                    "only building elements up to 2015. In the following 2015 "
+                    "will be used as year of construction!")
             else:
                 if (
                     element_in["building_age_group"][0]
