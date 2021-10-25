@@ -1032,6 +1032,7 @@ class Project(object):
         corG=None,
         internal_id=None,
         path=None,
+        use_postprocessing_calc=False
     ):
         """Exports values to a record file for Modelica simulation
 
@@ -1073,13 +1074,15 @@ class Project(object):
 
         if internal_id is None:
             aixlib_output.export_multizone(
-                buildings=self.buildings, prj=self, path=path
+                buildings=self.buildings, prj=self, path=path,
+                use_postprocessing_calc=use_postprocessing_calc
             )
         else:
             for bldg in self.buildings:
                 if bldg.internal_id == internal_id:
                     aixlib_output.export_multizone(
-                        buildings=[bldg], prj=self, path=path
+                        buildings=[bldg], prj=self, path=path,
+                        use_postprocessing_calc=use_postprocessing_calc
                     )
         return path
 
