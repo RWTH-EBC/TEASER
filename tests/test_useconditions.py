@@ -142,3 +142,16 @@ class Test_useconditions(object):
         use_cond.with_ahu = False
         with pytest.raises(Exception):
             use_cond.with_ideal_thresholds = True
+
+    def test_profile_positive_delta_t_start(self):
+        prj.set_default()
+        helptest.building_test2(prj)
+        use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
+        # use_cond.adjusted_opening_times = [10, 15]
+        use_cond.profiles_weekend_factor = 0.4
+        schedules = use_cond.schedules
+        with pytest.raises(Exception):
+            pass
+            # todo
+            # ref: [0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.2, 0.2, 0.4, 0.6, 0.8, 0.8, 0.4, 0.6, 0.8, 0.8, 0.4, 0.2, 0.2, 0.2, 0.1, 0.1, 0.1, 0.1]
+        # use_cond.adjust_profile_by_opening_hour()
