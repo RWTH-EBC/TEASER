@@ -2,11 +2,12 @@
 import random
 from builtins import ValueError
 
-import teaser.data.input.usecond_input as usecond_input
-import teaser.data.output.usecond_output as usecond_output
 import pandas as pd
 from itertools import cycle, islice
 from collections import OrderedDict
+
+import teaser.data.input.usecond_input as usecond_input
+import teaser.data.output.usecond_output as usecond_output
 from teaser.logic.utilities import division_from_json
 
 

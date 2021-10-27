@@ -1,11 +1,12 @@
 """Module to test UseCondition functions."""
+import os
+
+import pytest
+import helptest
 import pandas as pd
 
 from teaser.logic import utilities
 from teaser.project import Project
-import os
-import helptest
-import pytest
 
 prj = Project(True)
 
