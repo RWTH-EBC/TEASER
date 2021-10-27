@@ -722,7 +722,7 @@ class UseConditions(object):
         if len(value) != 2:
             raise ValueError(f"set_back_times must be list of length 2,"
                              f" but list of length {len(value)} was provided")
-        elif value[0] < 0 or value[0] > 24 or value[1] < 0 or value[1] > 24 :
+        elif value[0] < 0 or value[0] > 24 or value[1] < 0 or value[1] > 24:
             raise ValueError(f"elements of set_back_times must be "
                              f"hours between 0 and 24. But are {value[0]} and"
                              f" {value[1]}")
@@ -736,8 +736,8 @@ class UseConditions(object):
     @first_saturday_of_year.setter
     def first_saturday_of_year(self, value):
         if value < 1 or value > 7 :
-            raise ValueError(f"first_saturday_of_year must be int between [1, 7]"
-                             f" but is {value}")
+            raise ValueError(f"first_saturday_of_year must be int between "
+                             f"[1, 7] but is {value}")
         elif not isinstance(value, int):
             raise ValueError(f"first_saturday_of_year must be int but is "
                              f"{type(value)}")
