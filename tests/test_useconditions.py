@@ -1,4 +1,6 @@
 """Module to test UseCondition functions."""
+import pandas as pd
+
 from teaser.logic import utilities
 from teaser.project import Project
 import os
@@ -143,15 +145,58 @@ class Test_useconditions(object):
         with pytest.raises(Exception):
             use_cond.with_ideal_thresholds = True
 
-    def test_profile_positive_delta_t_start(self):
+    def test_profile_adjust_opening_times(self):
         prj.set_default()
         helptest.building_test2(prj)
         use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
-        # use_cond.adjusted_opening_times = [10, 15]
+        use_cond.adjusted_opening_times = [10, 15]
+        profile_before = use_cond.machines_profile
+        schedules = use_cond.schedules  # calc schedules
+        profile_after = use_cond.machines_profile
+        assert (profile_after[8] != profile_before[8])
+        assert (profile_after[7] != profile_before[7])
+        assert (profile_after[9] == profile_before[9])
+        assert (profile_after[8] == 0.0)
+        assert (isinstance(schedules, pd.DataFrame))
+
+    def test_profile_adjust_weekend_profiles(self):
+        prj.set_default()
+        helptest.building_test2(prj)
+        use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
+        use_cond.first_saturday_of_year = 1
         use_cond.profiles_weekend_factor = 0.4
-        schedules = use_cond.schedules
-        with pytest.raises(Exception):
-            pass
-            # todo
-            # ref: [0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.2, 0.2, 0.4, 0.6, 0.8, 0.8, 0.4, 0.6, 0.8, 0.8, 0.4, 0.2, 0.2, 0.2, 0.1, 0.1, 0.1, 0.1]
-        # use_cond.adjust_profile_by_opening_hour()
+        profile_before = use_cond.machines_profile
+        schedules = use_cond.schedules  # calc schedules
+        profile_after = use_cond.machines_profile
+        assert (profile_after[105] != profile_before[9])
+        assert (
+            profile_after[105]
+            == profile_before[9] * use_cond.profiles_weekend_factor
+        )
+        assert (isinstance(schedules, pd.DataFrame))
+
+    def test_profile_setback(self):
+        prj.set_default()
+        helptest.building_test2(prj)
+        use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
+        use_cond.set_back_times = [5, 22]
+        use_cond.heating_set_back = -2
+        use_cond.cooling_set_back = 3
+        profile_heating_before = use_cond.heating_profile
+        profile_cooling_before = use_cond.cooling_profile
+        schedules = use_cond.schedules  # calc schedules
+        profile_heating_after = use_cond.heating_profile
+        profile_cooling_after = use_cond.cooling_profile
+        assert (profile_heating_after[4] != profile_heating_before[4])
+        assert (
+                profile_heating_after[4]
+                == profile_heating_before[4] + use_cond.heating_set_back
+        )
+        assert (profile_cooling_after[4] != profile_cooling_before[4])
+        assert (
+                profile_cooling_after[4]
+                == profile_cooling_before[4] + use_cond.cooling_set_back
+        )
+        assert (isinstance(schedules, pd.DataFrame))
+
+

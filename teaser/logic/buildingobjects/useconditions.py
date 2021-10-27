@@ -5,7 +5,7 @@ from builtins import ValueError
 import teaser.data.input.usecond_input as usecond_input
 import teaser.data.output.usecond_output as usecond_output
 import pandas as pd
-from itertools import cycle, islice, chain
+from itertools import cycle, islice
 from collections import OrderedDict
 from teaser.logic.utilities import division_from_json
 
@@ -98,11 +98,25 @@ class UseConditions(object):
         AixLib: Used for internal gains profile on top-level
         Annex: Used for internal gains
     adjusted_opening_times: list
-        Opening hour to which the opening times should be shifted.
-        ... # todo
-        the regular profile starting time. E.g. for -2 the first profile value
-        which is not equal to the first value (non first value) will be copied
-        for the two hours before first non first value.
+        Sets the first and last hour of opening. These will cut or extend the
+        existing profiles (machines, lights, persons).
+        [opening_hour, closing_hour]
+    first_saturday_of_year: int
+        weekday number of first saturday of the year [1:monday;7:tuesday].
+        Is needed to calc which days of profile should be reduced by
+        profiles_weekend_factor.
+    profiles_weekend_factor: float
+        Factor to scale the existing profiles on weekends. For a reduction use
+        values between [0;1]. Increase is also possible.
+    set_back_times: list
+        Sets the first and last hour outside of which the offset is applied.
+         List of two integers [first_hour, last_hour]
+    heating_set_back: float [K]
+        Set back temperature offset for heating profile. Positive (+) values
+         increase the profile, negative (-) decrease.
+    cooling_set_back: float [K]
+        Set back temperature offset for cooling profile. Positive (+) values
+        increase the profile, negative (-) decrease.
     machines: float [W/m2]
         area specific eletrical load of machines per m2. This value is taken
         from SIA 2024 and DIN V 18599-10 for medium occupancy.
@@ -230,11 +244,12 @@ class UseConditions(object):
         self.max_ahu = 2.6
         self.with_ahu = False
 
-        self.first_saturday_of_year = 1
+        self._first_saturday_of_year = 1
         self.profiles_weekend_factor = None
 
-        self.heating_set_back = None
-        self.cooling_set_back = None
+        self._set_back_times = None
+        self.heating_set_back = -2
+        self.cooling_set_back = 2
 
         self._adjusted_opening_times = None
 
@@ -371,92 +386,46 @@ class UseConditions(object):
             0.0,
         ]
 
-        # todo
         self._schedules = None
 
-    def adjust_gains_profile_by_opening_hour(
-            self, profile_name, weekend_days, weekend_profile, delta_open, delta_close,
-            specific_profile=None):
+    def adjust_profile_by_opening(self, profile):
+        """Adjusts the given profile by opening times specified for use
+        condition with the parameter self.set_back_times.
 
+        Parameters
+        ----------
+        profile : list
+            list with the given profile (lighting, machines, persons)
         """
-        Changes the profiles (lighting, machines, persons) by taking the
-        opening hours into account.
+        new_profile = []
+        # split profile into daily profiles
+        profile_len = len(profile)
+        n_sublists = profile_len // 24
+        daily_profiles = (profile[i * 24:(i + 1) * 24] for i in
+                          range(n_sublists))
+        opening_hour_index = self.adjusted_opening_times[0] - 1
+        closing_hour_index = self.adjusted_opening_times[1] - 1
 
-        profile_name: profile
-            profile that should be adjusted.
-            Valid inputs are: heating_profile, machines_profile, persons_profile
-        delta_open: int
-            offset for opening hours during week (negative means earlier start,
-            positive later start)
-        delta_close: int
-            offset for closing hours during week(negative means earlier closing,
-            positive later closing)
-        weekend_days: list of str
-            list of days where weekend profile should be applied.
-            Valid inputs are [mon, tue, wed, thu, fri, sat, sun]
-            e.g. [san, sat]
-        weekend_profile: list of float
-            24 h profile for weekend to apply. Must hold values [0;1]
-
-        """
-
-
-
-    def _adjust_profile_by_opening_hour(self, profile_day_asset, opening_hours):
-        """
-        Change the given profile by taking the opening hours into account.
-
-        profile_day_asset: profile for one day for one of the three assets (
-        lighting, persons, machines)
-        delta_open: int
-            Hours to start before(-) or after(+) the regular opening
-            time
-        delta_close: int
-            Hours to end before(-) or after(+) the regular closing time
-        """
-
-        # todo: solve -1 hour problem, doku
-        Weekdays = OrderedDict(
-            [
-                ("monday", [0, 24]),
-                ("tuesday", [24, 48]),
-                ("wednesday", [48, 72]),
-                ("thursday", [72, 96]),
-                ("friday", [96, 120]),
-                ("saturday", [120, 144]),
-                ("sunday", [144, 168]),
-            ]
-        )
-        # get first value which is used as baseload/threshold value
-        profile_week = []
-        for weekday, indexofweek in Weekdays.items():
-            # for weekly profiles split profile into single days
-            if len(profile_day_asset) == 168:
-                profile_day = profile_day_asset[indexofweek[0]: indexofweek[1]]
-            else:
-                profile_day = profile_day_asset
+        for profile_day in daily_profiles:
             baseload = profile_day[0]
-            opening_hour = int(
-                getattr(opening_hours, weekday + "_open").split(":")[0])
-            closing_hour = int(
-                getattr(opening_hours, weekday + "_close").split(":")[0])
-
             for i, value in enumerate(profile_day):
                 # check if runtime variable(time) is inside opening times
                 #  +/- delta times
-                if opening_hour <= i <= closing_hour:
+                if opening_hour_index <= i <= closing_hour_index:
                     if value == baseload:
                         # start new iteration of profile_day from beginning
                         for j, value2 in enumerate(profile_day):
                             # search first value which is > baseload
                             # if
-                            if value2 > baseload and i < (
-                                    closing_hour - opening_hour) / 2:
+                            if (
+                                    value2 > baseload and i < (
+                                    closing_hour_index - opening_hour_index) / 2
+                            ):
                                 profile_day[i] = profile_day[j]
                                 break
                             elif (
                                     value2 > baseload and i >= (
-                                    closing_hour - opening_hour) / 2
+                                    closing_hour_index - opening_hour_index) / 2
                             ):
                                 # value is overwritten every time,
                                 # so that last value that is > baseload
@@ -467,12 +436,42 @@ class UseConditions(object):
                     else:
                         pass
                 elif not (
-                        opening_hour <= i <= closing_hour) and value != baseload:
+                        opening_hour_index <= i <= closing_hour_index) and \
+                        value != baseload:
                     # if time is not inside opening times, set value to
                     # baseload
                     profile_day[i] = baseload
-            profile_week += profile_day
-        return profile_week
+            new_profile.extend(profile_day)
+            return new_profile
+
+    def adjust_profile_by_weekend(self, profile):
+        """Scales the given profile on weekends. Factor for scaling is taken
+        from self.profiles_weekend_factor.
+
+        Parameters
+        ----------
+        profile : list
+            list with the given profile (lighting, machines, persons)
+        """
+        new_profile = []
+        # check if profile is at least week profile (other cases
+        # than 24, 168,8760 are excluded already)
+        if len(profile) == 24:
+            profile = profile * 7
+        n_sublists = len(profile) // 24
+        daily_profiles = (profile[i * 24:(i + 1) * 24] for i in
+                          range(n_sublists))
+        weekend_days = []
+        for i in range(self.first_saturday_of_year, 365, 7):
+            weekend_days.append(i)
+            weekend_days.append(i + 1)
+        for day_nr, profile_day in enumerate(daily_profiles, 1):
+            if day_nr in weekend_days:
+                profile_day = \
+                    [round((x * self.profiles_weekend_factor), 3)
+                     for x in profile_day]
+            new_profile.extend(profile_day)
+        return new_profile
 
     def load_use_conditions(self, zone_usage, data_class=None):
         """Load typical use conditions from JSON data base.
@@ -563,13 +562,12 @@ class UseConditions(object):
             if not isinstance(value, list):
                 value = [value]
             self._heating_profile = value
-            # self.schedules["heating_profile"] = list(
-            #     islice(cycle(value), 8760))
         else:
             raise ValueError(
                 f"heating profile should be periodic (24h, 168h pr 8760h), "
                 "but length is {len(value)}"
             )
+
     @property
     def cooling_profile(self):
         return self._cooling_profile
@@ -580,13 +578,12 @@ class UseConditions(object):
             if not isinstance(value, list):
                 value = [value]
             self._cooling_profile = value
-            # self.schedules["cooling_profile"] = list(
-            #     islice(cycle(value), 8760))
         else:
             raise ValueError(
                 f"cooling profile should be periodic (24h, 168h pr 8760h), "
-                "but length is {len(value)}"
+                f"but length is {len(value)}"
             )
+
     @property
     def persons_profile(self):
         return self._persons_profile
@@ -597,12 +594,10 @@ class UseConditions(object):
             if not isinstance(value, list):
                 value = [value]
             self._persons_profile = value
-            # self.schedules["persons_profile"] = list(
-            #     islice(cycle(value), 8760))
         else:
             raise ValueError(
                f"persons profile should be periodic (24h, 168h pr 8760h), "
-                "but length is {len(value)}"
+               f"but length is {len(value)}"
             )
 
     @property
@@ -615,8 +610,6 @@ class UseConditions(object):
             if not isinstance(value, list):
                 value = [value]
             self._machines_profile = value
-            # self.schedules["machines_profile"] = list(
-            #     islice(cycle(value), 8760))
         else:
             raise ValueError(
                 f"machines profile should be periodic (24h, 168h pr 8760h), "
@@ -633,172 +626,76 @@ class UseConditions(object):
             if not isinstance(value, list):
                 value = [value]
             self._lighting_profile = value
-            # self.schedules["lighting_profile"] = list(
-            #     islice(cycle(value), 8760))
         else:
             raise ValueError(
                 f"lighting profile should be periodic (24h, 168h pr 8760h), "
                 "but length is {len(value)}"
             )
 
-
-
-
     @property
     def schedules(self):
-        profile = self.persons_profile
-        profile_len = len(profile)
-        n_sublists = profile_len // 24
-        new_profile = []
+        """return function for schedules property. When called the profiles get
+        adjusted due to specified conditions and afterwards moved into a
+        pandas dataframe with 8760 h.
+
+        """
         if self.adjusted_opening_times:
-            # split profile into daily profiles
-            daily_profiles = (profile[i * 24:(i + 1) * 24] for i in
-                              range(n_sublists))
-            opening_hour_index = self.adjusted_opening_times[0] - 1
-            closing_hour_index = self.adjusted_opening_times[1] - 1
+            self._machines_profile = self.adjust_profile_by_opening(
+                self._machines_profile)
+            self._lighting_profile = self.adjust_profile_by_opening(
+                self._lighting_profile)
+            self._persons_profile = self.adjust_profile_by_opening(
+                self._persons_profile)
 
-            for profile_day in daily_profiles:
-                test = profile_day.copy()
-                baseload = profile_day[0]
-                for i, value in enumerate(profile_day):
-                    # check if runtime variable(time) is inside opening times
-                    #  +/- delta times
-                    if opening_hour_index <= i <= closing_hour_index:
-                        if value == baseload:
-                            # start new iteration of profile_day from beginning
-                            for j, value2 in enumerate(profile_day):
-                                # search first value which is > baseload
-                                # if
-                                if value2 > baseload and i < (
-                                        closing_hour_index - opening_hour_index) / 2:
-                                    profile_day[i] = profile_day[j]
-                                    break
-                                elif (
-                                        value2 > baseload and i >= (
-                                        closing_hour_index - opening_hour_index) / 2
-                                ):
-                                    # value is overwritten every time,
-                                    # so that last value that is > baseload
-                                    # is used
-                                    profile_day[i] = value2
-                                else:
-                                    pass
-                        else:
-                            pass
-                    elif not (
-                            opening_hour_index <= i <= closing_hour_index) and \
-                            value != baseload:
-                        # if time is not inside opening times, set value to
-                        # baseload
-                        profile_day[i] = baseload
-                new_profile.extend(profile_day)
-        if not new_profile:
-            new_profile = profile
-        final_profil = []
         if self.profiles_weekend_factor:
-            # check if minimum week profile (other cases
-            # than 24, 168,8760 are excluded already)
-            if profile_len == 24:
-                new_profile = new_profile * 7
-            profile_len = len(new_profile)
-            # devide against in daily
-            n_sublists = profile_len // 24
-            daily_profiles = (new_profile[i * 24:(i + 1) * 24] for i in
-                              range(n_sublists))
-            weekend_days = []
-            for i in range(self.first_saturday_of_year, 365, 7):
-                weekend_days.append(i)
-                weekend_days.append(i + 1)
-            for day_nr, profile_day in enumerate(daily_profiles, 1):
-                if day_nr in weekend_days:
-                    profile_day = \
-                        [round(x * self.profiles_weekend_factor, 2)
-                         for x in profile_day]
-                final_profil.extend(profile_day)
-        print('test')
+            self._machines_profile = self.adjust_profile_by_weekend(
+                self._machines_profile)
+            self._lighting_profile = self.adjust_profile_by_weekend(
+                self._lighting_profile)
+            self._persons_profile = self.adjust_profile_by_weekend(
+                self._persons_profile)
 
+        if self.set_back_times:
+            set_back_index_morning, set_back_index_evening = \
+                self.set_back_times[0] - 1, self.set_back_times[1] - 1
+            heating_profile, cooling_profile = [], []
+            for i, value in enumerate(self._heating_profile):
+                if 0 <= i <= set_back_index_morning \
+                        or set_back_index_evening <= i <= 24:
+                    heating_profile.append(value + self.heating_set_back)
+                else:
+                    heating_profile.append(value)
+            self._heating_profile = heating_profile
+            for i, value in enumerate(self._cooling_profile):
+                if 0 <= i <= set_back_index_morning \
+                        or set_back_index_evening <= i <= 24:
+                    cooling_profile.append(value + self.cooling_set_back)
+                else:
+                    cooling_profile.append(value)
+            self._cooling_profile = cooling_profile
 
-
-
-
-
-
-
-
-            # for day_profile in daily_profiles:
-            #     daily_profile_new = []
-            #     first_daily_val = profile[0]
-            #     last_daily_val = profile[-1]
-            #     for i, val in enumerate(day_profile):
-            #         if val != first_daily_val:
-            #             start_index = i
-            #             cor_start_index = int(i + self.profiles_delta_start)
-            #             first_daily_changed_val = val
-            #             break
-            #     for i, val in enumerate(reversed(day_profile)):
-            #         if val != last_daily_val:
-            #             end_index = int( 23 - i)
-            #             cor_end_index = int(23 - i + self.profiles_delta_stop)
-            #             last_daily_changed_val = val
-            #             break
-            #     #todo continue
-            #     daily_profile_new[0:cor_start_index] = \
-            #         [first_daily_val] * (cor_start_index +1)
-            #     if cor_start_index < start_index:
-            #         daily_profile_new[cor_start_index+1:start_index] =\
-            #             [first_daily_changed_val] * \
-            #             (start_index-cor_start_index + 1)
-            #     start_index = max(cor_start_index, start_index)
-            #     # else:
-            #         # daily_profile_new[cor_start_index+1:cor_end_index] = \
-            #         #     day_profile[cor_start_index+1:cor_end_index]
-            #     if cor_end_index > end_index:
-            #         daily_profile_new[start_index + 1:end_index] = \
-            #             day_profile[start_index + 1:end_index]
-            #         daily_profile_new[end_index + 1:cor_end_index] = \
-            #             [last_daily_changed_val] * \
-            #             (cor_end_index + 1 - end_index)
-            #     else:
-            #         daily_profile_new[start_index + 1:cor_end_index] = \
-            #             day_profile[start_index + 1:cor_end_index]
-            #     daily_profile_new[cor_end_index + 1:23] = \
-            #         [last_daily_val] * (23 - cor_end_index)
-            #     new_profile.append(daily_profile_new)
-
-
-        #
-        #
-        #     print('test')
-        # pd.DataFrame(
-        #     index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
-        #         .to_series()
-        #         .dt.strftime("%m-%d %H:%M:%S"),
-        #     data={
-        #         "heating_profile": list(
-        #             islice(cycle(self._heating_profile), 8760)),
-        #         "cooling_profile": list(
-        #             islice(cycle(self._cooling_profile), 8760)),
-        #         "persons_profile": list(
-        #             islice(cycle(self._persons_profile), 8760)),
-        #         "lighting_profile": list(
-        #             islice(cycle(self._lighting_profile), 8760)),
-        #         "machines_profile": list(
-        #             islice(cycle(self._machines_profile), 8760)),
-        #     },
-        #         )
-        # return self._schedules
+        self._schedules = pd.DataFrame(
+            index=pd.date_range("2019-01-01 00:00:00", periods=8760,
+                                freq="H").to_series().dt.strftime(
+                "%m-%d %H:%M:%S"),
+            data={
+                "heating_profile": list(
+                    islice(cycle(self._heating_profile), 8760)),
+                "cooling_profile": list(
+                    islice(cycle(self._cooling_profile), 8760)),
+                "persons_profile": list(
+                    islice(cycle(self._persons_profile), 8760)),
+                "lighting_profile": list(
+                    islice(cycle(self._lighting_profile), 8760)),
+                "machines_profile": list(
+                    islice(cycle(self._machines_profile), 8760)),
+            },
+        )
+        return self._schedules
 
     @schedules.setter
     def schedules(self, value):
         self._schedules = value
-
-    # @property
-    # def profiles_delta_open(self):
-    #     return self._profiles_delta_open
-    #
-    # @profiles_delta_open.setter
-    # def profile_delta_open(self, value):
-    #     if 0 <= value <=
 
     @property
     def adjusted_opening_times(self):
@@ -809,8 +706,43 @@ class UseConditions(object):
         if len(value) != 2:
             raise ValueError(f"adjusted_opening_times must be list of length 2,"
                              f" but list of length {len(value)} was provided")
+        elif value[0] < 0 or value[0] > 24 or value[1] < 0 or value[1] > 24:
+            raise ValueError(f"elements of adjusted_opening_times must be "
+                             f"hours between 0 and 24. But are {value[0]} and"
+                             f" {value[1]}")
         else:
             self._adjusted_opening_times = value
+
+    @property
+    def set_back_times(self):
+        return self._set_back_times
+
+    @set_back_times.setter
+    def set_back_times(self, value):
+        if len(value) != 2:
+            raise ValueError(f"set_back_times must be list of length 2,"
+                             f" but list of length {len(value)} was provided")
+        elif value[0] < 0 or value[0] > 24 or value[1] < 0 or value[1] > 24 :
+            raise ValueError(f"elements of set_back_times must be "
+                             f"hours between 0 and 24. But are {value[0]} and"
+                             f" {value[1]}")
+        else:
+            self._set_back_times = value
+
+    @property
+    def first_saturday_of_year(self):
+        return self._first_saturday_of_year
+
+    @first_saturday_of_year.setter
+    def first_saturday_of_year(self, value):
+        if value < 1 or value > 7 :
+            raise ValueError(f"first_saturday_of_year must be int between [1, 7]"
+                             f" but is {value}")
+        elif not isinstance(value, int):
+            raise ValueError(f"first_saturday_of_year must be int but is "
+                             f"{type(value)}")
+        else:
+            self._first_saturday_of_year = value
 
     @property
     def parent(self):
@@ -831,5 +763,3 @@ class UseConditions(object):
         else:
 
             self._parent = None
-
-
