@@ -597,8 +597,8 @@ class UseConditions(object):
             self._persons_profile = value
         else:
             raise ValueError(
-               f"persons profile should be periodic (24h, 168h pr 8760h), "
-               f"but length is {len(value)}"
+                f"persons profile should be periodic (24h, 168h pr 8760h), "
+                f"but length is {len(value)}"
             )
 
     @property
@@ -736,7 +736,7 @@ class UseConditions(object):
 
     @first_saturday_of_year.setter
     def first_saturday_of_year(self, value):
-        if value < 1 or value > 7 :
+        if value < 1 or value > 7:
             raise ValueError(f"first_saturday_of_year must be int between "
                              f"[1, 7] but is {value}")
         elif not isinstance(value, int):
