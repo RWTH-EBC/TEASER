@@ -67,31 +67,30 @@ class Test_useconditions(object):
         prj_test.number_of_elements_calc = 2
 
         heating_profile_workday = [
-            293,
-            293,
-            293,
-            293,
-            293,
-            293,
-            293,
-            293,
-            293,
-            293,
-            293,
-            293,
-            293,
-            293,
-            293,
-            293,
-            293,
-            293,
-            293,
-            293,
-            293,
-            293,
-            293,
-            293,
-            293,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
+            294.15,
         ]
 
         heating_profile_week = []
@@ -163,11 +162,12 @@ class Test_useconditions(object):
         prj.set_default()
         helptest.building_test2(prj)
         use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
-        use_cond.first_saturday_of_year = 1
+        use_cond.first_saturday_of_year = 4
         use_cond.profiles_weekend_factor = 0.4
         profile_before = use_cond.machines_profile
         schedules = use_cond.schedules  # calc schedules
         profile_after = use_cond.machines_profile
+        assert (profile_after[81] != profile_before[9])
         assert (profile_after[105] != profile_before[9])
         assert (
             profile_after[105]

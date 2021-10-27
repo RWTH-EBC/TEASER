@@ -565,7 +565,7 @@ class UseConditions(object):
         else:
             raise ValueError(
                 f"heating profile should be periodic (24h, 168h pr 8760h), "
-                "but length is {len(value)}"
+                f"but length is {len(value)}"
             )
 
     @property
