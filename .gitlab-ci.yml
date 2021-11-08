@@ -1,13 +1,13 @@
-include:
-  - project: 'EBC/EBC_all/gitlab_ci/templates'
-    file: 'sphinxdoc/sphinxdoc.gitlab-ci.yml'
-  - project: 'EBC/EBC_all/gitlab_ci/templates'
-    file: 'pages/pages.gitlab-ci.yml'  
-
 stages:
   - test
   - doc
   - deploy
+
+include:
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file: 'python/doc/sphinxdoc.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file: 'pages/pages.gitlab-ci.yml'  
 
 test3.6-subset:
   image: python:3.6
