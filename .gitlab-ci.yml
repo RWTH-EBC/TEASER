@@ -44,3 +44,13 @@ test3.7:
     - pip install -e .
     - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests,.eggs --max-line-length=120
     - py.test --ignore=tests/test_modelicaversion.py
+
+stages:
+  - doc
+  - deploy
+
+include:
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file: 'sphinxdoc/sphinxdoc.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file: 'pages/pages.gitlab-ci.yml'
