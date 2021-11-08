@@ -50,7 +50,7 @@ stages:
   - deploy
 
 include:
-  - project: 'EBC/EBC_all/gitlab_ci/templates'
-    file: 'sphinxdoc/sphinxdoc.gitlab-ci.yml'
-  - project: 'EBC/EBC_all/gitlab_ci/templates'
+  - project: 'EBC/EBC-General/Templates/GitLab-CI'
+    file: 'python/doc/sphinxdoc.gitlab-ci.yml'
+  - project: 'EBC/EBC-General/Templates/GitLab-CI'
     file: 'pages/pages.gitlab-ci.yml'
