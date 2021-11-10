@@ -204,10 +204,10 @@ class OneElement(object):
         Static heat load of the thermal zone.
     facade_areas : list of floats [m2]
         List containing the area of each facade (with same tilt and
-        orientation) this includes also roofs and ground floors and windows.
+        orientation) this includes also roofs and ground floors and possibly windows.
     n_outer : int
         Number of total facades with different combination of tilt and
-        orientation, including Rooftops and GroundFloors
+        orientation, including outer walls, roofs, ground floors and windows.
     tilt_facade : list of floats [degree]
         Tilt of facades against the horizontal.
     orientation_facade : list of floats [degree]
