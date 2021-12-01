@@ -8,7 +8,6 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     VAir = ${zone.volume},
     AZone = ${zone.area},
     hRad = ${zone.model_attr.alpha_rad_inner_mean},
-    lat = ${deg_to_rad(zone.parent.latitude)},
     nOrientations = ${min_orientations(zone.model_attr.n_outer)},
     AWin = ${get_list(zone.model_attr.window_areas)},
     ATransparent = ${get_list(zone.model_attr.window_areas)},

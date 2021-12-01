@@ -69,10 +69,6 @@ class Residential(Building):
         Name of the street the building is located at. (optional)
     city : string
         Name of the city the building is located at. (optional)
-    longitude : float [degree]
-        Longitude of building location.
-    latitude : float [degree]
-        Latitude of building location.
     thermal_zones : list
         List with instances of ThermalZone(), that are located in this building.
     outer_area : dict [degree: m2]

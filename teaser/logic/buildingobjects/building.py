@@ -78,10 +78,6 @@ class Building(object):
         Name of the street the building is located at. (optional)
     city : string
         Name of the city the building is located at. (optional)
-    longitude : float [degree]
-        Longitude of building location.
-    latitude : float [degree]
-        Latitude of building location.
     thermal_zones : list
         List with instances of ThermalZone(), that are located in this building.
     outer_area : dict [degree: m2]
@@ -150,8 +146,6 @@ class Building(object):
         self.building_id = None
         self.street_name = ""
         self.city = ""
-        self.longitude = 6.05
-        self.latitude = 50.79
 
         self._thermal_zones = []
         self._outer_area = {}
