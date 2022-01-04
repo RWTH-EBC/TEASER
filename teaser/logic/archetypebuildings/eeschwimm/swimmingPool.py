@@ -727,7 +727,7 @@ class SwimmingPool(NonResidential):
         # Zone area correction
         correctionFactor=1
         if areaCorrection == True and ws >= 250:
-            correctionFactor = (2293.6*math.log(ws)-10723)/(2.8549*ws+333.64)
+            correctionFactor = (2247.5*math.log(ws)-10505)/(2.8582*ws+336.4)
             
         for value in poolsInDict.keys():
             if str(value).startswith("Zone"):

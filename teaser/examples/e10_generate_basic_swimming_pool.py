@@ -23,7 +23,7 @@ def generate_basic_swimmingPool():
     # filenames, thus we will delete them anyway in TEASER.
     
     prj = Project(load_data=True)
-    prj.name = "Output_Swimming_Pool_Basic_Model_211115"
+    prj.name = "Output_Swimming_Pool_Basic_Model"
 
     # To generate non-residential archetype buildings the function
     # Project.add_non_residential() is used. 
@@ -93,7 +93,7 @@ def generate_basic_swimmingPool():
     print("Exporting building(s)...")
     path = prj.export_aixlib(
         internal_id=None,
-        path="E:\Testmodelle EESchwimm")
+        path=None)
     
     return path
 
