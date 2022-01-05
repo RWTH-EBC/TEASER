@@ -480,14 +480,11 @@ class ThermalZone(object):
     @name.setter
     def name(self, value):
         regex = re.compile('[^a-zA-z0-9]')
-        # name = None
         if isinstance(value, str):
-            # self._name = regex.sub('', value)
             name = regex.sub('', value)
         else:
             try:
                 value = str(value)
-                # self._name = regex.sub('', value)
                 name = regex.sub('', value)
 
             except ValueError:
