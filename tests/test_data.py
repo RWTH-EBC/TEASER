@@ -3173,4 +3173,6 @@ class Test_teaser(object):
         tz3 = ThermalZone(parent=bld)
         tz3.name = "living"
 
+        assert tz1.name == "living"
+        assert tz2.name == "kitchen"
         assert tz3.name == "living_1"
