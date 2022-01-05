@@ -3156,3 +3156,24 @@ class Test_teaser(object):
         prj.buildings[-1].thermal_zones[-1].use_conditions.with_ideal_thresholds = True
         prj.calc_all_buildings()
         prj.export_aixlib()
+
+    def test_tz_naming(self):
+
+        from teaser.logic.buildingobjects.building import Building
+        from teaser.logic.buildingobjects.thermalzone import ThermalZone
+
+        # warnings for not calculated buildings
+        bld = Building(parent=prj)
+        tz1 = ThermalZone(parent=bld)
+        tz1.name = "living"
+
+        tz2 = ThermalZone(parent=bld)
+        tz2.name = "kitchen"
+
+        tz3 = ThermalZone(parent=bld)
+        tz3.name = "living"
+
+        assert tz3.name == "living_1"
+
+
+
