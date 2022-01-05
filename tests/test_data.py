@@ -3174,6 +3174,3 @@ class Test_teaser(object):
         tz3.name = "living"
 
         assert tz3.name == "living_1"
-
-
-
