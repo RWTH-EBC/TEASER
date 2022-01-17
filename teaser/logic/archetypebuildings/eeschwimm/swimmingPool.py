@@ -216,6 +216,8 @@ class SwimmingPool(NonResidential):
         Default is "Freshwater". Possible types are:
             - "Freshwater"
             - "Saltwater"
+    Pressure loss heat exchanger : int [Pa]
+        Default is 350.
     Heat recovery rinsing wastewater : boolean
         Default is "true".
     Heat recovery rate rinsing wastewater : float
@@ -801,14 +803,18 @@ class SwimmingPool(NonResidential):
                         k = None
                     # m, a, n
                     if pool == "Kleinkinderbecken":
-                        m = 2
+                        a = None
+                        n = None
+                        m = 2                        
                     elif pool.startswith("Freiformbecken") or pool == \
                     "Nichtschwimmerbecken" or pool == "Mehrzweckbecken":
                         a = 2.7
                         n = 1
+                        m = None
                     elif pool == "Schwimmerbecken" or pool == "Springerbecken":
                         a = 4.5
                         n = 1
+                        m = None
                     else:
                         a = None
                         n = None
@@ -976,7 +982,9 @@ class SwimmingPool(NonResidential):
                     paramRecord["hConWaterVertical"] = \
                         self.poolsInDict[pool]["hConWaterVertical"]
                     paramRecord["PoolWallParam"] = \
-                        self.poolsInDict[pool]["Construction of pool wall"]                                    
+                        self.poolsInDict[pool]["Construction of pool wall"]      
+                    paramRecord["dpHeatExchangerPool"] = \
+                        self.poolsInDict[pool]["Pressure loss heat exchanger"]                                 
                     
                     #Sets Data to Record
                     zone.paramRecord[pool] = paramRecord                                     
@@ -1045,6 +1053,7 @@ class SwimmingPool(NonResidential):
         poolsInDict[poolName]["Filter type"] = "Open suction filter"        
         poolsInDict[poolName]["Water type"] = "Freshwater"  
         poolsInDict[poolName]["Ideal heat recovery"] = "true"
+        poolsInDict[poolName]["Pressure loss heat exchanger"] = 350
         poolsInDict[poolName]["Heat recovery rinsing wastewater"] = "true"
         poolsInDict[poolName]["Heat recovery rate rinsing wastewater"] = 0.8
         poolsInDict[poolName]["Interval wave operation"] = 1800
