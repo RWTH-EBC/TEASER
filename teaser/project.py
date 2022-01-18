@@ -83,7 +83,7 @@ class Project(object):
     merge_windows_calc : bool
         True for merging the windows into the outer walls, False for
         separate resistance for window, default is False (only supported for
-        IBPSA)
+        IBPSA). AixLib models use an extra resistance for windows.
     used_library_calc : str
         used library (AixLib and IBPSA are supported)
     dir_reference_results : str
