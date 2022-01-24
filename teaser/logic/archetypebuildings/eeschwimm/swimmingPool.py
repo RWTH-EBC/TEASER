@@ -300,12 +300,11 @@ class SwimmingPool(NonResidential):
         self.poolsInDict = self.createBasicSwimmingPool(self.net_leased_area, True) 
                            
         # Zone designations
-        # Zone 4 is created first to facilitate Modelica calculation
         self.zoneDesignation = dict()
-        self.zoneDesignation["Zone 4"] = "Schwimmhalle"
         self.zoneDesignation["Zone 1"] = "Eingangsbereich"
         self.zoneDesignation["Zone 2"] = "Umkleiden"
-        self.zoneDesignation["Zone 3"] = "DuschenUndSanitaerraeume"        
+        self.zoneDesignation["Zone 3"] = "DuschenUndSanitaerraeume"
+        self.zoneDesignation["Zone 4"] = "Schwimmhalle"
         self.zoneDesignation["Zone 5"] = "Aufsichtsraum"
         self.zoneDesignation["Zone 6"] = "Saunabereich"
         self.zoneDesignation["Zone 7"] = "Fitness"
