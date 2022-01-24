@@ -96,7 +96,7 @@ class SwimmingPool(NonResidential):
     behind the pool name. The name itself can't be changed. Attributes that are
     false or true have to be written as string!
     Examples:
-    poolsInDict["Freiformbecken2"]["Night setback"] = "false",
+    poolsInDict["Freiformbecken"]["Night setback"] = "false",
     poolsInDict["Schwimmerbecken2"]["Water area"] = 450,
     poolsInDict["Zone 1"]["Air volume"] = 3000    
     The listed attributes are just the ones that are set by the user.
@@ -300,11 +300,12 @@ class SwimmingPool(NonResidential):
         self.poolsInDict = self.createBasicSwimmingPool(self.net_leased_area, True) 
                            
         # Zone designations
+        # Zone 4 is created first to facilitate Modelica calculation
         self.zoneDesignation = dict()
+        self.zoneDesignation["Zone 4"] = "Schwimmhalle"
         self.zoneDesignation["Zone 1"] = "Eingangsbereich"
         self.zoneDesignation["Zone 2"] = "Umkleiden"
-        self.zoneDesignation["Zone 3"] = "DuschenUndSanitaerraeume"
-        self.zoneDesignation["Zone 4"] = "Schwimmhalle"
+        self.zoneDesignation["Zone 3"] = "DuschenUndSanitaerraeume"        
         self.zoneDesignation["Zone 5"] = "Aufsichtsraum"
         self.zoneDesignation["Zone 6"] = "Saunabereich"
         self.zoneDesignation["Zone 7"] = "Fitness"

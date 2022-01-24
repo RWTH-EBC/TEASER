@@ -50,7 +50,7 @@ def generate_advanced_swimmingPool():
     # Further parameters are currently not supported for swimming pools.   
 
     ''' 
-    CHANGE PARAMETERS HERE:
+    --- CHANGE PARAMETERS HERE ---
     '''
     building_name = "Hallenbad" 
     water_area = 412.5
@@ -77,9 +77,12 @@ def generate_advanced_swimmingPool():
     readExcelFile(swimmingPool, excelFileName, prj)  
     
     for zone in swimmingPool.thermal_zones:   
-        #if zone.name.startswith("Zone"):
         print ("Added", zone.name, "with zone area:", \
            zone.area, "m²")
+    for pool in swimmingPool.poolsInDict.keys():
+        if not pool.startswith("Zone"):
+            print("Added pool", pool, "with water area:", swimmingPool.poolsInDict[
+                pool]["Water area"], "m²")
     
     print()
     print("Total net leased area of building:", swimmingPool.net_leased_area, "m²")
@@ -130,6 +133,7 @@ def readExcelFile(swimmingPool, fileName, prj):
     """
     
     print("Reading zone data from Excel...")
+    print()
     wb = xlrd.open_workbook(fileName)
     zoneData = wb.sheet_by_name("Zone Data")
     poolData = wb.sheet_by_name("Pool Data")
@@ -210,7 +214,6 @@ def readExcelFile(swimmingPool, fileName, prj):
                     else:
                         print()
                         print("ERROR:", paramName, "not found in poolsInDict!")
-            print("Added pool", poolName, "with water area:", poolArea, "m²")
     
     swimmingPool.calcPoolParameter()
     
