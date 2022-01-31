@@ -789,7 +789,7 @@ class SwimmingPool(NonResidential):
                     paramRecord["V_pool"] = self.poolsInDict[pool]["Water volume"]
                     
                     ## Q ## 
-                    # Hilfsparameter zur Berechnung von Q
+                    # Hilfsparameter zur Berechnung von Q (Volumenstrom)
                     # k
                     if self.poolsInDict[pool]["Filter combination"] == \
                     "without ozone" or self.poolsInDict[pool]["Filter combination"] == \
@@ -827,29 +827,33 @@ class SwimmingPool(NonResidential):
                     elif n is not None and a is not None:
                         N = (self.poolsInDict[pool]["Water area"]) * n/a
                     else:
-                        N = None
+                        N = None     
                         
                     # Berechnung von Q
                     if N is not None and k is not None:
                         Q_H = N/k
                     else:
                         Q_H = 0    
+                        
                     if pool == "Kleinkinderbecken" \
-                    and self.poolsInDict[pool]["Water area"] < 20 \
-                    and m is not None:
+                    and self.poolsInDict[pool]["Water area"] < 20:
                         Q_K = m * self.poolsInDict[pool]["Water volume"]
                     else:
-                        Q_K = 0
+                        Q_K = None
+
                     Q_B = self.poolsInDict[pool]["Perimeter pool"]
+                    
                     if self.poolsInDict[pool]["Perimeter pool"] > 40:
                         Q = max(Q_B, Q_H)
-                    else: 
+                    elif Q_K != None: 
                         Q = min(Q_H, Q_K, Q_B)
-                        
+                    else:
+                        Q = min(Q_H, Q_B)
+                    
                     # Umrechnung in m³/h
                     Q = Q/3600
-                    paramRecord["Q"] = Q
-    
+                    paramRecord["Q"] = Q                    
+                    
                     ## Q_night ##
                     Q_night = self.poolsInDict[pool][
                         "Volume flow wastewater treatment night"]
