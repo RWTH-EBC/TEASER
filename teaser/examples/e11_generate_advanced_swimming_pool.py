@@ -49,11 +49,14 @@ def generate_advanced_swimmingPool():
     # Year of construction: Building construction year without retrofitting.
     # Further parameters are currently not supported for swimming pools.   
 
-    # Change parameters here:
-    building_name = "Hallenbad"
-    water_area = 532.5
-    year_of_construction = 1985
-    excelFileName = "2021-12-06_Swimming pool_Database.xlsx"
+    ''' 
+    --- CHANGE PARAMETERS HERE ---
+    '''
+    building_name = "Hallenbad" 
+    water_area = 412.5
+    year_of_construction = 1980
+    excelFileName = "2022-01-17_Swimming pool_Database.xlsx"
+    filePathOutput = None
     
     # This should not be changed for now:
     prj.add_non_residential(
@@ -73,6 +76,14 @@ def generate_advanced_swimmingPool():
     # IMPORTANT! Excel file must be closed before compiling code!
     readExcelFile(swimmingPool, excelFileName, prj)  
     
+    for zone in swimmingPool.thermal_zones:   
+        print ("Added", zone.name, "with zone area:", \
+           zone.area, "m²")
+    for pool in swimmingPool.poolsInDict.keys():
+        if not pool.startswith("Zone"):
+            print("Added pool", pool, "with water area:", swimmingPool.poolsInDict[
+                pool]["Water area"], "m²")
+    
     print()
     print("Total net leased area of building:", swimmingPool.net_leased_area, "m²")
     print("Total air volume of building:", swimmingPool.volume, "m³")
@@ -89,9 +100,9 @@ def generate_advanced_swimmingPool():
             "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos"))
 
     # To make sure the parameters are calculated correctly we recommend to
-    # run calc_all_buildings() function
-
+    # run calc_all_buildings() function    
     prj.calc_all_buildings()
+
 
     # To export the ready-to-run models simply call Project.export_aixlib().
     # You can specify the path, where the model files should be saved.
@@ -101,7 +112,7 @@ def generate_advanced_swimmingPool():
     print("Exporting building(s)...")
     path = prj.export_aixlib(
         internal_id=None,
-        path=None)
+        path=filePathOutput)
     return path
 
 
@@ -122,6 +133,7 @@ def readExcelFile(swimmingPool, fileName, prj):
     """
     
     print("Reading zone data from Excel...")
+    print()
     wb = xlrd.open_workbook(fileName)
     zoneData = wb.sheet_by_name("Zone Data")
     poolData = wb.sheet_by_name("Pool Data")
@@ -198,11 +210,10 @@ def readExcelFile(swimmingPool, fileName, prj):
                     elif paramName == "Construction of pool wall":                    
                         if poolData.cell_value(row, col) == "Reinforced concrete":
                             swimmingPool.poolsInDict[poolName][paramName] = \
-                            "AixLib.DataBase.Pools.SwimmingPoolWall.ConcreteConstruction()"
+                            "AixLib.DataBase.Pools.SwimmingPoolWall.ConcreteInsulationConstruction()"
                     else:
                         print()
                         print("ERROR:", paramName, "not found in poolsInDict!")
-            print("Added pool", poolName, "with water area:", poolArea, "m²")
     
     swimmingPool.calcPoolParameter()
     
@@ -220,14 +231,14 @@ def readExcelFile(swimmingPool, fileName, prj):
             matDict[elementName]["Thickness"] = list()
             matDict[elementName]["Material_Id"] = list()
             matDict[elementName]["Thickness"].append(
-                matData.cell_value(row, colThickness))
+                matData.cell_value(row, colThickness)/100)
             matDict[elementName]["Material_Id"].append(
                 matData.cell_value(row, colMatId))
             
         elif matData.cell_value(row, colMatId) != "" \
         and matData.cell_value(row, colElementName) == "": 
             matDict[elementName]["Thickness"].append(
-                matData.cell_value(row, colThickness))
+                matData.cell_value(row, colThickness)/100)
             matDict[elementName]["Material_Id"].append(
                 matData.cell_value(row, colMatId)) 
         
@@ -452,28 +463,24 @@ def readZoneData(swimmingPool, zoneData, zoneName, rowZoneName, col):
          swimmingPool.poolsInDict[zoneName]["Air volume"], \
          swimmingPool.zoneUseConditions[zoneName]]  
 
-    print ("Added", swimmingPool.zoneDesignation[zoneName], "with zone area:", \
-       swimmingPool.poolsInDict[zoneName] \
-           ["Total area of zone (including water area)"], "m²")
-
 
 def overrideZoneData(swimmingPool):
     
-    # Reset building areas
-    swimmingPool.outer_area[0] = 0
-    swimmingPool.outer_area[90] = 0
-    swimmingPool.outer_area[180] = 0
-    swimmingPool.outer_area[270] = 0
-    swimmingPool.outer_area[-1] = 0
-    swimmingPool.outer_area[-2] = 0
-    swimmingPool.window_area[0] = 0
-    swimmingPool.window_area[90] = 0
-    swimmingPool.window_area[180] = 0
-    swimmingPool.window_area[270] = 0
-    swimmingPool.net_leased_area = 0
-    swimmingPool.volume = 0
+    # Note: Reseting of building element areas for the entire building not needed. 
+    # They are automatically replaced within the method "def area(self, value)" 
+    # within the classes thermalzone and buildingelement.
     
     for zone in swimmingPool.thermal_zones:
+        # General data
+        zone.area = swimmingPool.poolsInDict[
+            swimmingPool.zoneDesignation[zone.name]] \
+            ["Total area of zone (including water area)"]
+            
+        zone.volume = swimmingPool.poolsInDict[
+            swimmingPool.zoneDesignation[zone.name]] \
+            ["Air volume"]
+        
+        # building elements:
         zone.outer_walls[0].area = 0.001
         if swimmingPool.poolsInDict[
                 swimmingPool.zoneDesignation[zone.name]]["Outer wall area north"] != 0:
@@ -542,44 +549,21 @@ def overrideZoneData(swimmingPool):
             zone.inner_walls[0].area = \
             swimmingPool.poolsInDict[
                 swimmingPool.zoneDesignation[zone.name]]["Inner walls as a sum"] 
-    
-        swimmingPool.outer_area[0] += swimmingPool.poolsInDict[
-            swimmingPool.zoneDesignation[zone.name]]["Outer wall area north"]
-        swimmingPool.outer_area[90] += swimmingPool.poolsInDict[
-            swimmingPool.zoneDesignation[zone.name]]["Outer wall area east"]
-        swimmingPool.outer_area[180] += swimmingPool.poolsInDict[
-            swimmingPool.zoneDesignation[zone.name]]["Outer wall area south"]
-        swimmingPool.outer_area[270] += swimmingPool.poolsInDict[
-            swimmingPool.zoneDesignation[zone.name]]["Outer wall area west"]
-        swimmingPool.window_area[0] += swimmingPool.poolsInDict[
-            swimmingPool.zoneDesignation[zone.name]] \
-                ["Transparent element in outer wall north"]
-        swimmingPool.window_area[90] += swimmingPool.poolsInDict[
-            swimmingPool.zoneDesignation[zone.name]] \
-            ["Transparent element in outer wall east"]
-        swimmingPool.window_area[180] += swimmingPool.poolsInDict[
-            swimmingPool.zoneDesignation[zone.name]] \
-            ["Transparent element in outer wall south"]
-        swimmingPool.window_area[270] += swimmingPool.poolsInDict[
-            swimmingPool.zoneDesignation[zone.name]] \
-            ["Transparent element in outer wall west"]
-        swimmingPool.outer_area[-1] += swimmingPool.poolsInDict[
-            swimmingPool.zoneDesignation[zone.name]]["Roof area"]
-        swimmingPool.outer_area[-2] += swimmingPool.poolsInDict[
-            swimmingPool.zoneDesignation[zone.name]]["Ground floor area"]
-        swimmingPool.net_leased_area += swimmingPool.poolsInDict[
-            swimmingPool.zoneDesignation[zone.name]] \
-                ["Total area of zone (including water area)"]
-        swimmingPool.volume += swimmingPool.poolsInDict[
-            swimmingPool.zoneDesignation[zone.name]]["Air volume"]
 
 
 def convertPoolName(poolName):
+    #Removes numbers at the end of pool names
     for i in range(0, len(poolName)):
         if poolName[i] == "n" and poolName[i-1] == "e":            
             poolName = poolName[0:i+1]
             break
     return poolName
+
+def setThermalConductionWindows(swimmingPool, thermal_conduc):
+    for zone in swimmingPool.thermal_zones:
+        for win in zone.windows:
+            for layer in win.layer:
+                layer.material.thermal_conduc = thermal_conduc
 
 if __name__ == '__main__':
     prj = generate_advanced_swimmingPool()

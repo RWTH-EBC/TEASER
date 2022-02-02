@@ -34,10 +34,13 @@ def generate_basic_swimmingPool():
     # Year of construction: Building construction year without retrofitting.
     # Further parameters are currently not supported for swimming pools.    
 
-    # Change parameters here:
+    ''' 
+    CHANGE PARAMETERS HERE:
+    '''
     building_name = "Hallenbad"
     water_area = 412.5
     year_of_construction = 1980
+    filePathOutput = None
 
     # This should not be changed for now:
     prj.add_non_residential(
@@ -93,7 +96,7 @@ def generate_basic_swimmingPool():
     print("Exporting building(s)...")
     path = prj.export_aixlib(
         internal_id=None,
-        path=None)
+        path=filePathOutput)
     
     return path
 

@@ -96,7 +96,7 @@ class SwimmingPool(NonResidential):
     behind the pool name. The name itself can't be changed. Attributes that are
     false or true have to be written as string!
     Examples:
-    poolsInDict["Freiformbecken2"]["Night setback"] = "false",
+    poolsInDict["Freiformbecken"]["Night setback"] = "false",
     poolsInDict["Schwimmerbecken2"]["Water area"] = 450,
     poolsInDict["Zone 1"]["Air volume"] = 3000    
     The listed attributes are just the ones that are set by the user.
@@ -216,6 +216,8 @@ class SwimmingPool(NonResidential):
         Default is "Freshwater". Possible types are:
             - "Freshwater"
             - "Saltwater"
+    Pressure loss heat exchanger : int [Pa]
+        Default is 350.
     Heat recovery rinsing wastewater : boolean
         Default is "true".
     Heat recovery rate rinsing wastewater : float
@@ -298,11 +300,12 @@ class SwimmingPool(NonResidential):
         self.poolsInDict = self.createBasicSwimmingPool(self.net_leased_area, True) 
                            
         # Zone designations
+        # Zone 4 is created first to facilitate Modelica calculation
         self.zoneDesignation = dict()
+        self.zoneDesignation["Zone 4"] = "Schwimmhalle"
         self.zoneDesignation["Zone 1"] = "Eingangsbereich"
         self.zoneDesignation["Zone 2"] = "Umkleiden"
-        self.zoneDesignation["Zone 3"] = "DuschenUndSanitaerraeume"
-        self.zoneDesignation["Zone 4"] = "Schwimmhalle"
+        self.zoneDesignation["Zone 3"] = "DuschenUndSanitaerraeume"        
         self.zoneDesignation["Zone 5"] = "Aufsichtsraum"
         self.zoneDesignation["Zone 6"] = "Saunabereich"
         self.zoneDesignation["Zone 7"] = "Fitness"
@@ -786,7 +789,7 @@ class SwimmingPool(NonResidential):
                     paramRecord["V_pool"] = self.poolsInDict[pool]["Water volume"]
                     
                     ## Q ## 
-                    # Hilfsparameter zur Berechnung von Q
+                    # Hilfsparameter zur Berechnung von Q (Volumenstrom)
                     # k
                     if self.poolsInDict[pool]["Filter combination"] == \
                     "without ozone" or self.poolsInDict[pool]["Filter combination"] == \
@@ -801,14 +804,18 @@ class SwimmingPool(NonResidential):
                         k = None
                     # m, a, n
                     if pool == "Kleinkinderbecken":
-                        m = 2
+                        a = None
+                        n = None
+                        m = 2                        
                     elif pool.startswith("Freiformbecken") or pool == \
                     "Nichtschwimmerbecken" or pool == "Mehrzweckbecken":
                         a = 2.7
                         n = 1
+                        m = None
                     elif pool == "Schwimmerbecken" or pool == "Springerbecken":
                         a = 4.5
                         n = 1
+                        m = None
                     else:
                         a = None
                         n = None
@@ -820,29 +827,33 @@ class SwimmingPool(NonResidential):
                     elif n is not None and a is not None:
                         N = (self.poolsInDict[pool]["Water area"]) * n/a
                     else:
-                        N = None
+                        N = None     
                         
                     # Berechnung von Q
                     if N is not None and k is not None:
                         Q_H = N/k
                     else:
                         Q_H = 0    
+                        
                     if pool == "Kleinkinderbecken" \
-                    and self.poolsInDict[pool]["Water area"] < 20 \
-                    and m is not None:
+                    and self.poolsInDict[pool]["Water area"] < 20:
                         Q_K = m * self.poolsInDict[pool]["Water volume"]
                     else:
-                        Q_K = 0
+                        Q_K = None
+
                     Q_B = self.poolsInDict[pool]["Perimeter pool"]
+                    
                     if self.poolsInDict[pool]["Perimeter pool"] > 40:
                         Q = max(Q_B, Q_H)
-                    else: 
+                    elif Q_K != None: 
                         Q = min(Q_H, Q_K, Q_B)
-                        
+                    else:
+                        Q = min(Q_H, Q_B)
+                    
                     # Umrechnung in m³/h
                     Q = Q/3600
-                    paramRecord["Q"] = Q
-    
+                    paramRecord["Q"] = Q                    
+                    
                     ## Q_night ##
                     Q_night = self.poolsInDict[pool][
                         "Volume flow wastewater treatment night"]
@@ -976,7 +987,9 @@ class SwimmingPool(NonResidential):
                     paramRecord["hConWaterVertical"] = \
                         self.poolsInDict[pool]["hConWaterVertical"]
                     paramRecord["PoolWallParam"] = \
-                        self.poolsInDict[pool]["Construction of pool wall"]                                    
+                        self.poolsInDict[pool]["Construction of pool wall"]      
+                    paramRecord["dpHeatExchangerPool"] = \
+                        self.poolsInDict[pool]["Pressure loss heat exchanger"]                                 
                     
                     #Sets Data to Record
                     zone.paramRecord[pool] = paramRecord                                     
@@ -1045,6 +1058,7 @@ class SwimmingPool(NonResidential):
         poolsInDict[poolName]["Filter type"] = "Open suction filter"        
         poolsInDict[poolName]["Water type"] = "Freshwater"  
         poolsInDict[poolName]["Ideal heat recovery"] = "true"
+        poolsInDict[poolName]["Pressure loss heat exchanger"] = 350
         poolsInDict[poolName]["Heat recovery rinsing wastewater"] = "true"
         poolsInDict[poolName]["Heat recovery rate rinsing wastewater"] = 0.8
         poolsInDict[poolName]["Interval wave operation"] = 1800
