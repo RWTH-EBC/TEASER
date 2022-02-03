@@ -325,7 +325,7 @@ class SwimmingPool(NonResidential):
         self.zoneUseConditions["Zone 2"] = "Group Office (between 2 and 6 employees)"
         self.zoneUseConditions["Zone 3"] = \
             "WC and sanitary rooms in non-residential buildings"
-        self.zoneUseConditions["Zone 4"] = "Swimming hall"
+        self.zoneUseConditions["Zone 4"] = "Gym (without spectator area)"
         self.zoneUseConditions["Zone 5"] = "Meeting, Conference, seminar"
         self.zoneUseConditions["Zone 6"] = "Sauna area"
         self.zoneUseConditions["Zone 7"] = "Gym (without spectator area)"
