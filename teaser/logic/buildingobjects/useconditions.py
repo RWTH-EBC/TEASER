@@ -224,7 +224,7 @@ class UseConditions(object):
 
         self.with_tabs = False
         self.cc_tabs = False
-        self.ext_tabs = False
+        self.ext_tabs = []
 
         self._with_ideal_thresholds = False
 

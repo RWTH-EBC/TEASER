@@ -1,4 +1,5 @@
 import math
+import os
 
 from teaser.project import Project
 from teaser.logic.buildingobjects.building import Building
@@ -16,6 +17,8 @@ from teaser.logic.buildingobjects.buildingphysics.buildingelement import Buildin
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
 from teaser.logic.buildingobjects.calculation.two_element import TwoElement
 from teaser.logic.buildingobjects.buildingphysics.tabs import InnerTABS, OuterTABS
+from teaser.logic.archetypebuildings.bmvbs.office import Office
+from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import SingleFamilyDwelling
 
 
 class ExportAll:
@@ -23,59 +26,54 @@ class ExportAll:
     ufh_instances = []
 
     def run(self):
-        # name = 'testtabs1'
-        # prj = self.create_project(name)
-        # prj.modelica_info.stop_time = 604800
-        # bldg = self.create_building(prj, 'SimpleBuilding ' + name, 2015, 1, 20)
-        # # Zone 1
-        # tz = self.create_thermal_zone(bldg, "Bed room", "tz_1", 20, 3)
-        # self.create_instance(OuterWall, tz, 5, 0, bldg.year_of_construction, "light")
-        # self.create_instance(OuterWall, tz, 4, 90, bldg.year_of_construction, "light")
-        # self.create_instance(OuterWall, tz, 5, 180, bldg.year_of_construction, "light")
-        # self.create_instance(OuterWall, tz, 4, 270, bldg.year_of_construction, "light")
-        # self.create_instance(Floor, tz, 20, -1, bldg.year_of_construction, "light")
-        # self.create_instance(Window, tz, 0.001, 0, bldg.year_of_construction, "EnEv")
-        # # Tabs Representation
-        # self.create_instance(Floor, tz, 20, -1, bldg.year_of_construction, "up_half_light")
-        # # self.create_instance(GroundFloor, tz, 20, -2, bldg.year_of_construction, "heavy")
-        # tz.calc_zone_parameters()
-        #
-        # # Zone 2
-        # tz2 = self.create_thermal_zone(bldg, "Bed room", "tz_2", 20, 3)
-        # self.create_instance(OuterWall, tz2, 5, 0, bldg.year_of_construction, "light")
-        # self.create_instance(OuterWall, tz2, 4, 90, bldg.year_of_construction, "light")
-        # self.create_instance(OuterWall, tz2, 5, 180, bldg.year_of_construction, "light")
-        # self.create_instance(OuterWall, tz2, 4, 270, bldg.year_of_construction, "light")
-        # self.create_instance(Floor, tz2, 20, -1, bldg.year_of_construction, "light")
-        # self.create_instance(Window, tz2, 0.001, 0, bldg.year_of_construction, "EnEv")
-        # # Tabs Representation
-        # # self.create_instance(Floor, tz2, 20, -1, bldg.year_of_construction, "heavy")
-        # self.create_instance(InnerTABS, tz2, 20, -1, bldg.year_of_construction, "up_half_light")
-        # # self.create_instance(OuterTABS, tz2, 20, -2, bldg.year_of_construction, "up_half_light")
-        # tz2.calc_zone_parameters()
-        #
-        # bldg.calc_building_parameter()
-        # prj.export_aixlib(path='D:/dja-dco/Dymola_Exports')
-
-        name = 'TypeM'
+        name = 'testtabs_new_WT'
         prj = self.create_project(name)
         prj.modelica_info.stop_time = 604800
         bldg = self.create_building(prj, 'SimpleBuilding ' + name, 2015, 1, 20)
         # Zone 1
-        tz = self.create_thermal_zone(bldg, "Bed room", "tz_1", 20, 3, RoomTypes['TypeM'])
-        tz = self.create_thermal_zone(bldg, "Bed room", "tz_1", 20, 3)
-        self.create_instance(Floor, tz, 18.75, -2, bldg.year_of_construction, "light", RoomTypes[name]['Floor'])
-        self.create_instance(Rooftop, tz, 19.5, -1, bldg.year_of_construction, "light", RoomTypes[name]['Rooftop'])
-        self.create_instance(InnerWall, tz, 36.51, 0, bldg.year_of_construction, "light", RoomTypes[name]['InnerWall'])
-        self.create_instance(InnerWall, tz, 2, 0, bldg.year_of_construction, "light", RoomTypes[name]['InnerDoor'])
-        self.create_instance(OuterWall, tz, 8.13, 180, bldg.year_of_construction, "light", RoomTypes[name]['OuterWall'])
-        self.create_instance(OuterTABS, tz, 20, -2, bldg.year_of_construction, "up_half_light",
+
+        tz = self.create_thermal_zone(bldg, "Bed room", "tz_3", 20, 3, RoomTypes['TypeL'])
+        self.create_instance(Window, tz, 5.13, 180, 2014, "Alu- oder Stahlfenster, Waermeschutzverglasung, zweifach")
+        self.create_instance(OuterTABS, tz, 10, -2, bldg.year_of_construction, "up_half_light",
                              TABSTypes['Internal']['UpHalf']['Laminate'])
+        self.create_instance(InnerTABS, tz, 10, -1, bldg.year_of_construction, "up_half_light")
+
+        # self.create_instance(OuterTABS, tz, 20, -2, bldg.year_of_construction, "up_half_light",
+        #                      TABSTypes['Internal']['LoHalf'])
         tz.calc_zone_parameters()
 
         bldg.calc_building_parameter()
         prj.export_aixlib(path='D:/dja-dco/Dymola_Exports')
         pass
+
+    @staticmethod
+    def replaceTABS(building, cc=False):
+        for tz in building.thermal_zones:
+            areas_floor = [fa.area for fa in tz.floors]
+            areas_gfloor = [gfa.area for gfa in tz.ground_floors]
+            selected = 'ground_floors' if sum(areas_gfloor) > sum(areas_floor) else 'floors'
+            class_tabs = InnerTABS if selected == 'floors' else OuterTABS
+            for floor in getattr(tz, selected):
+                ufh = class_tabs(parent=tz)
+                ufh.area = floor.area
+                ufh.inner_convection = floor.inner_convection
+                ufh.inner_radiation = floor.inner_radiation
+                ufh.outer_convection = floor.outer_convection
+                ufh.outer_radiation = floor.outer_radiation
+                if cc:
+                    new_layers = floor.layer
+                else:
+                    new_layers = floor.layer[:-1]
+                for layer in new_layers:
+                    ufh_layer = Layer(parent=ufh)
+                    ufh_layer.thickness = layer.thickness
+                    material = Material(parent=ufh_layer)
+                    material.load_material_template(layer.material.name)
+            if selected == 'ground_floors':
+                tz.ground_floors.clear()
+            else:
+                tz.floors.clear()
+            tz.calc_zone_parameters()
 
     @staticmethod
     def create_project(name):
@@ -138,151 +136,7 @@ class ExportAll:
         inst.area = area
         inst.orientation = orientation
         cls.tz_instances.append(inst)
-
-    @classmethod
-    def calc_ufh_slab(cls, slabs: list, t_bt: float = 5):
-        external_classes = (GroundFloor, Rooftop)
-        ufh_parameters = {}
-        omega = 2 * math.pi / 86400 / t_bt
-        for element in slabs:
-            e_type = type(element).__name__
-            if e_type not in ufh_parameters:
-                ufh_parameters[e_type] = {'instances': [], 'area': 0.0,
-                                          'is_external': True if type(element) in external_classes else False}
-            ufh_parameters[e_type]['instances'].append(element)
-            ufh_parameters[e_type]['area'] += element.area
-
-        for e_type in ufh_parameters:
-            r1 = 0.0
-            c1 = 0.0
-            slabs = ufh_parameters[e_type]['instances']
-            area = ufh_parameters[e_type]['area']
-            r_conv_inner = 1 / sum(1 / element.r_inner_conv for element in slabs)
-            alpha_conv_inner = 1 / (r_conv_inner * area)
-            if len(slabs) > 0:
-                if len(slabs) == 1:
-                    # only one outer wall, no need to calculate chain matrix
-                    r1 = slabs[0].r1
-                    c1 = slabs[0].c1_korr
-                else:
-                    # more than one outer wall, calculate chain matrix
-                    r1, c1 = cls._calc_parallel_connection(slabs, omega)
-                if ufh_parameters[e_type]['is_external']:
-                    conduction = 1 / sum(
-                        (1 / element.r_conduc) for element in slabs
-                    )
-                    r_rest = conduction - r1
-                    ufh_parameters[e_type]['r_rest'] = r_rest
-            ufh_parameters[e_type]['r1'] = r1
-            ufh_parameters[e_type]['c1'] = c1
-            ufh_parameters[e_type]['alpha_conv_inner'] = alpha_conv_inner
-
-        return ufh_parameters
-
-    @staticmethod
-    def _calc_parallel_connection(element_list: list, omega):
-        """Parallel connection of walls according to VDI 6007
-
-        Calculates the parallel connection of wall elements according to VDI
-        6007, resulting in R1 and C1 (equation 23, 24).
-
-        Parameters
-        ----------
-        element_list : list
-            List of inner or outer walls
-        omega : float
-            VDI 6007 frequency
-
-        Returns
-        ----------
-        r1 : float [K/W]
-            VDI 6007 resistance for all inner or outer walls
-        c1 : float [K/W]
-            VDI 6007 capacity all for inner or outer walls
-        """
-
-        for wall_count in range(len(element_list) - 1):
-
-            if wall_count == 0:
-
-                r1 = (
-                             element_list[wall_count].r1 * element_list[wall_count].c1 ** 2
-                             + element_list[wall_count + 1].r1
-                             * element_list[wall_count + 1].c1 ** 2
-                             + omega ** 2
-                             * element_list[wall_count].r1
-                             * element_list[wall_count + 1].r1
-                             * (element_list[wall_count].r1 + element_list[wall_count + 1].r1)
-                             * element_list[wall_count].c1 ** 2
-                             * element_list[wall_count + 1].c1 ** 2
-                     ) / (
-                             (element_list[wall_count].c1 + element_list[wall_count + 1].c1) ** 2
-                             + omega ** 2
-                             * (element_list[wall_count].r1 + element_list[wall_count + 1].r1)
-                             ** 2
-                             * element_list[wall_count].c1 ** 2
-                             * element_list[wall_count + 1].c1 ** 2
-                     )
-
-                c1 = (
-                             (element_list[wall_count].c1 + element_list[wall_count + 1].c1) ** 2
-                             + omega ** 2
-                             * (element_list[wall_count].r1 + element_list[wall_count + 1].r1)
-                             ** 2
-                             * element_list[wall_count].c1 ** 2
-                             * element_list[wall_count + 1].c1 ** 2
-                     ) / (
-                             element_list[wall_count].c1
-                             + element_list[wall_count + 1].c1
-                             + omega ** 2
-                             * (
-                                     element_list[wall_count].r1 ** 2 * element_list[wall_count].c1
-                                     + element_list[wall_count + 1].r1 ** 2
-                                     * element_list[wall_count + 1].c1
-                             )
-                             * element_list[wall_count].c1
-                             * element_list[wall_count + 1].c1
-                     )
-            else:
-                r1x = r1
-                c1x = c1
-                r1 = (
-                             r1x * c1x ** 2
-                             + element_list[wall_count + 1].r1
-                             * element_list[wall_count + 1].c1 ** 2
-                             + omega ** 2
-                             * r1x
-                             * element_list[wall_count + 1].r1
-                             * (r1x + element_list[wall_count + 1].r1)
-                             * c1x ** 2
-                             * element_list[wall_count + 1].c1 ** 2
-                     ) / (
-                             (c1x + element_list[wall_count + 1].c1) ** 2
-                             + omega ** 2
-                             * (r1x + element_list[wall_count + 1].r1) ** 2
-                             * c1x ** 2
-                             * element_list[wall_count + 1].c1 ** 2
-                     )
-
-                c1 = (
-                             (c1x + element_list[wall_count + 1].c1) ** 2
-                             + omega ** 2
-                             * (r1x + element_list[wall_count + 1].r1) ** 2
-                             * c1x ** 2
-                             * element_list[wall_count + 1].c1 ** 2
-                     ) / (
-                             c1x
-                             + element_list[wall_count + 1].c1
-                             + omega ** 2
-                             * (
-                                     r1x ** 2 * c1x
-                                     + element_list[wall_count + 1].r1 ** 2
-                                     * element_list[wall_count + 1].c1
-                             )
-                             * c1x
-                             * element_list[wall_count + 1].c1
-                     )
-        return r1, c1
+        return inst
 
 
 RoomTypes = {
@@ -866,44 +720,88 @@ TABSTypes = {
         }
     },
     'External': {
-        'UpHalf': {
-            1: {
-                'thickness': 0.06,
-                'density': 2000,
-                'thermal_conduc': 1.2,
-                'heat_capac': 1
+        'Underfloor': {
+            'UpHalf': {
+                1: {
+                    'thickness': 0.06,
+                    'density': 2000,
+                    'thermal_conduc': 1.2,
+                    'heat_capac': 1
+                },
+                2: {
+                    'thickness': 0.0045,
+                    'density': 140,
+                    'thermal_conduc': 0.045,
+                    'heat_capac': 1
+                }
             },
-            2: {
-                'thickness': 0.0045,
-                'density': 140,
-                'thermal_conduc': 0.045,
-                'heat_capac': 1
+            'LoHalf': {
+                1: {
+                    'thickness': 0.045,
+                    'density': 120,
+                    'thermal_conduc': 0.035,
+                    'heat_capac': 1.03
+                },
+                2: {
+                    'thickness': 0.15,
+                    'density': 2300,
+                    'thermal_conduc': 2.3,
+                    'heat_capac': 1
+                },
+                3: {
+                    'thickness': 0.06,
+                    'density': 120,
+                    'thermal_conduc': 0.04,
+                    'heat_capac': 1
+                },
+                4: {
+                    'thickness': 0.1,
+                    'density': 2000,
+                    'thermal_conduc': 1.4,
+                    'heat_capac': 0.84
+                }
             }
         },
-        'LoHalf': {
-            1: {
-                'thickness': 0.045,
-                'density': 120,
-                'thermal_conduc': 0.035,
-                'heat_capac': 1.03
+        'ConcreteCore': {
+            'UpHalf': {
+                1: {
+                    'thickness': 0.15,
+                    'density': 2000,
+                    'thermal_conduc': 1.2,
+                    'heat_capac': 1
+                },
+                2: {
+                    'thickness': 0.0045,
+                    'density': 140,
+                    'thermal_conduc': 0.045,
+                    'heat_capac': 1
+                }
             },
-            2: {
-                'thickness': 0.15,
-                'density': 2300,
-                'thermal_conduc': 2.3,
-                'heat_capac': 1
-            },
-            3: {
-                'thickness': 0.06,
-                'density': 120,
-                'thermal_conduc': 0.04,
-                'heat_capac': 1
-            },
-            4: {
-                'thickness': 0.1,
-                'density': 2000,
-                'thermal_conduc': 1.4,
-                'heat_capac': 0.84
+            'LoHalf': {
+                1: {
+                    'thickness': 0.045,
+                    'density': 120,
+                    'thermal_conduc': 0.035,
+                    'heat_capac': 1.03
+                },
+                2: {
+                    'thickness': 0.15,
+                    'density': 2300,
+                    'thermal_conduc': 2.3,
+                    'heat_capac': 1
+                },
+                3: {
+                    'thickness': 0.06,
+                    'density': 120,
+                    'thermal_conduc': 0.04,
+                    'heat_capac': 1
+                },
+                4: {
+                    'thickness': 0.1,
+                    'density': 2000,
+                    'thermal_conduc': 1.4,
+                    'heat_capac': 0.84
+                }
             }
         }
     }

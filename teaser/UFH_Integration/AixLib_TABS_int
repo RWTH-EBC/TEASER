@@ -1,0 +1,11 @@
+<%namespace file="/modelica_language/" import="get_true_false, get_list"/>
+within ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase;
+record ${zone.parent.name}_${zone.name}_upperTABS_int "${zone.parent.name}_${zone.name}_upperTABS_int"
+  extends AixLib.DataBase.Walls.WallBaseDataDefinition(
+    n(min=1) = ${zone.model_attr.n_tabs_int},
+    d = ${get_list(zone.model_attr.d_tabs_int)},
+    rho = ${get_list(zone.model_attr.rho_tabs_int)},
+    lambda = ${get_list(zone.model_attr.lambda_tabs_int)},
+    c = ${get_list(zone.model_attr.c_tabs_int)},
+    eps = 0.95);
+end ${zone.parent.name}_${zone.name}_upperTABS_int;

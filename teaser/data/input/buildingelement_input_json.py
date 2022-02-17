@@ -36,6 +36,9 @@ def load_type_element(element, year, construction, data_class):
 
     for key, element_in in element_binding.items():
         if key != "version":
+            if type(element).__name__ == 'Floor':
+                if key.startswith('Floor'):
+                    print()
             if (
                 element_in["building_age_group"][0]
                 <= year

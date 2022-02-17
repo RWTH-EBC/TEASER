@@ -388,18 +388,31 @@ class TwoElement(object):
         self.heat_load = 0.0
         self.cool_load = 0.0
 
-        # lumped resistances/capacity TABS
-        self.r1_t = 0.0
-        self.r_rest_t = 0.0
-        self.c1_t = 0.0
+        # external TABS
+        self.r1_ot = 0.0
+        self.r_rest_ot = 0.0
+        self.c1_ot = 0.0
+        self.area_ot = 0.0
+        self.orientation_ot = []
 
-        # TABS Record
         self.n_tabs = 0
         self.d_tabs = []
         self.rho_tabs = []
         self.lambda_tabs = []
         self.c_tabs = []
-        self.area_tabs = 0.0
+
+        # internal TABS
+        self.r1_it = 0.0
+        self.r_rest_it = 0.0
+        self.c1_it = 0.0
+        self.area_it = 0.0
+        self.orientation_it = []
+
+        self.n_tabs_int = 0
+        self.d_tabs_int = []
+        self.rho_tabs_int = []
+        self.lambda_tabs_int = []
+        self.c_tabs_int = []
 
     def calc_attributes(self):
         """Calls all necessary function to calculate model attributes"""
@@ -479,28 +492,14 @@ class TwoElement(object):
             self._calc_wf()
             self._calc_mean_values()
 
-        if len(self.thermal_zone.inner_tabs) > 0 and len(self.thermal_zone.outer_tabs) > 0:
-            warnings.warn(
-                "For thermal zone "
-                + self.thermal_zone.name
-                + " in building "
-                + self.thermal_zone.parent.name
-                + ", both inner TABS and outer TABS have been defined"
-                  ", a thermal zone can only handle one type of TABS (internal or external)"
-                  ", NO TABS will be in this case considered."
-            )
-        elif len(self.thermal_zone.inner_tabs) > 0:
-            self.thermal_zone.use_conditions.with_tabs = True
-            self.thermal_zone.use_conditions.ext_tabs = False
-            if self.thermal_zone.inner_tabs[0].construction_type.endswith('CC'):
-                self.thermal_zone.use_conditions.cc_tabs = True
-            self._calc_tabs()
-        elif len(self.thermal_zone.outer_tabs) > 0:
-            self.thermal_zone.use_conditions.with_tabs = True
-            self.thermal_zone.use_conditions.ext_tabs = True
-            if self.thermal_zone.outer_tabs[0].construction_type and self.thermal_zone.outer_tabs[0].construction_type.endswith('CC'):
-                self.thermal_zone.use_conditions.cc_tabs = True
-            self._calc_tabs()
+        if len(self.thermal_zone.inner_tabs) > 0:
+            self.thermal_zone.use_conditions.ext_tabs.append(False)
+            self.thermal_zone.use_conditions.with_heating = False
+            self._calc_tabs(external=False)
+        if len(self.thermal_zone.outer_tabs) > 0:
+            self.thermal_zone.use_conditions.ext_tabs.append(True)
+            self.thermal_zone.use_conditions.with_heating = False
+            self._calc_tabs(external=True)
 
         self._calc_number_of_elements()
         self._fill_zone_lists()
@@ -1034,7 +1033,7 @@ class TwoElement(object):
             # more than one outer wall, calculate chain matrix
             self.r1_iw, self.c1_iw = self._calc_parallel_connection(inner_walls, omega)
 
-    def _calc_tabs(self):
+    def _calc_tabs(self, external: bool):
         """Lumped parameter for tabs elements
 
         Calculates all necessary parameters for tabs.
@@ -1046,33 +1045,64 @@ class TwoElement(object):
             List containing all TEASER TABS instances that are treated as same
             inner tabs type.
         """
+        if external:
+            tabs_list = self.thermal_zone.outer_tabs
+        else:
+            tabs_list = self.thermal_zone.inner_tabs
 
-        tabs_list = self.thermal_zone.inner_tabs if len(self.thermal_zone.inner_tabs) > 0 \
-            else self.thermal_zone.outer_tabs
-
-        self.area_tabs = sum(tabs.area for tabs in tabs_list)
-
-        omega = 2 * math.pi / 86400 / self.t_bt
-
+        area = sum(tabs.area for tabs in tabs_list)
+        orientation = list(set(tabs.orientation for tabs in tabs_list))
+        omega = 2 * math.pi / 86400 / 7
         if 0 < len(tabs_list) <= 1:
             # only one outer wall, no need to calculate chain matrix
-            self.r1_t = tabs_list[0].r1
-            self.c1_t = tabs_list[0].c1_korr
+            r1 = tabs_list[0].r1
+            c1 = tabs_list[0].c1_korr
         elif len(tabs_list) > 1:
             # more than one outer wall, calculate chain matrix
-            self.r1_t, self.c1_t = self._calc_parallel_connection(tabs_list, omega)
+            r1, c1 = self._calc_parallel_connection(tabs_list, omega)
+        conduction = 1 / sum(
+            (1 / element.r_conduc) for element in tabs_list
+        )
+        r_rest = conduction - r1
+        # record functions
+        tabs_layers = tabs_list[0].layer
+        # layers checkpoint
+        for tabs in tabs_list[1:]:
+            for i, j in zip(tabs.layer, tabs_layers):
+                if not (i.material.material_id == j.material.material_id and i.thickness == j.thickness):
+                    warnings.warn(
+                        "For thermal zone "
+                        + self.thermal_zone.name
+                        + " in building "
+                        + self.thermal_zone.parent.name
+                        + ", two different types of external tabs have been defined,"
+                          "only the first type is taken into account."
+                    )
 
-        if len(self.thermal_zone.outer_tabs) > 0:
-            conduction = 1 / sum((1 / element.r_conduc) for element in tabs_list)
-            self.r_rest_t = conduction - self.r1_t
-
-        for tabs in tabs_list:
-            for layer in tabs.layer:
+        if external:
+            self.area_ot = area
+            self.orientation_ot = orientation
+            self.r1_ot = r1
+            self.c1_ot = c1
+            self.r_rest_ot = r_rest
+            for layer in tabs_layers:
                 self.n_tabs += 1
                 self.d_tabs.append(layer.thickness)
                 self.rho_tabs.append(layer.material.density)
                 self.lambda_tabs.append(layer.material.thermal_conduc)
-                self.c_tabs.append(layer.material.heat_capac*1000)
+                self.c_tabs.append(layer.material.heat_capac * 1000)
+        else:
+            self.area_it = area
+            self.orientation_it = orientation
+            self.r1_it = r1
+            self.c1_it = c1
+            self.r_rest_it = r_rest
+            for layer in tabs_layers:
+                self.n_tabs_int += 1
+                self.d_tabs_int.append(layer.thickness)
+                self.rho_tabs_int.append(layer.material.density)
+                self.lambda_tabs_int.append(layer.material.thermal_conduc)
+                self.c_tabs_int.append(layer.material.heat_capac * 1000)
 
     def _calc_wf(self):
         """Weightfactors for outer elements(walls, roof, ground floor, windows)
@@ -1411,15 +1441,26 @@ class TwoElement(object):
         self.heat_load = 0.0
         self.cool_load = 0.0
 
-        # lumped resistances/capacity TABS
-        self.r1_t = 0.0
-        self.r_rest_t = 0.0
-        self.c1_t = 0.0
+        # external TABS
+        self.r1_ot = 0.0
+        self.r_rest_ot = 0.0
+        self.c1_ot = 0.0
+        self.area_ot = 0.0
 
-        # TABS Record
         self.n_tabs = 0
         self.d_tabs = []
         self.rho_tabs = []
         self.lambda_tabs = []
         self.c_tabs = []
-        self.area_tabs = 0.0
+
+        # internal TABS
+        self.r1_it = 0.0
+        self.r_rest_it = 0.0
+        self.c1_it = 0.0
+        self.area_it = 0.0
+
+        self.n_tabs_int = 0
+        self.d_tabs_int = []
+        self.rho_tabs_int = []
+        self.lambda_tabs_int = []
+        self.c_tabs_int = []

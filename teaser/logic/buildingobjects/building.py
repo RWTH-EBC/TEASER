@@ -10,7 +10,6 @@ import warnings
 from teaser.logic.buildingobjects.calculation.aixlib import AixLib
 from teaser.logic.buildingobjects.calculation.ibpsa import IBPSA
 
-
 from teaser.logic.buildingobjects.buildingsystems.buildingahu import BuildingAHU
 
 
@@ -119,13 +118,13 @@ class Building(object):
     """
 
     def __init__(
-        self,
-        parent=None,
-        name=None,
-        year_of_construction=None,
-        net_leased_area=None,
-        with_ahu=False,
-        internal_gains_mode=1,
+            self,
+            parent=None,
+            name=None,
+            year_of_construction=None,
+            net_leased_area=None,
+            with_ahu=False,
+            internal_gains_mode=1,
     ):
         """Constructor of Building Class
         """
@@ -167,9 +166,11 @@ class Building(object):
 
         self.tabs_rooms = 0
         self.ATabs = []
+        self.ExtTabs = []
         self.tabs_connection = []
         self.tabs_heat_load = []
         self.tabs_record = []
+        self.tabs_record_low = []
 
         self.library_attr = None
 
@@ -254,20 +255,20 @@ class Building(object):
         for zone_count in self.thermal_zones:
             for wall_count in zone_count.outer_walls:
                 if (
-                    wall_count.orientation == orientation
-                    and wall_count.area is not None
+                        wall_count.orientation == orientation
+                        and wall_count.area is not None
                 ):
                     sum_area += wall_count.area
             for roof_count in zone_count.rooftops:
                 if (
-                    roof_count.orientation == orientation
-                    and roof_count.area is not None
+                        roof_count.orientation == orientation
+                        and roof_count.area is not None
                 ):
                     sum_area += roof_count.area
             for ground_count in zone_count.ground_floors:
                 if (
-                    ground_count.orientation == orientation
-                    and ground_count.area is not None
+                        ground_count.orientation == orientation
+                        and ground_count.area is not None
                 ):
                     sum_area += ground_count.area
         return sum_area
@@ -353,7 +354,7 @@ class Building(object):
             self.window_area[key] = self.get_window_area(key)
 
     def calc_building_parameter(
-        self, number_of_elements=2, merge_windows=False, used_library="AixLib"
+            self, number_of_elements=2, merge_windows=False, used_library="AixLib"
     ):
         """calc all building parameters
 
@@ -387,12 +388,48 @@ class Building(object):
             )
             self.sum_heat_load += zone.model_attr.heat_load
             # TABS
-            if zone.model_attr.area_tabs > 0:
-                self.tabs_rooms += 1
-                self.ATabs.append(zone.model_attr.area_tabs)
-                self.tabs_connection.append(zone_counter)
-                self.tabs_heat_load.append(zone.model_attr.heat_load)
+            if zone.model_attr.area_ot > 0 and zone.model_attr.area_it > 0:
+                a_int = zone.model_attr.area_it
+                a_ext = zone.model_attr.area_ot
+                ext_heat_load = (a_ext / (a_int + a_ext)) * zone.model_attr.heat_load
+                int_heat_load = (a_int / (a_int + a_ext)) * zone.model_attr.heat_load
+                self.ATabs.extend([a_ext, a_int])
+                self.ExtTabs.extend([True, False])
+                self.tabs_record.extend([zone.name + '_upperTABS', zone.name + '_upperTABS_int'])
+                self.tabs_heat_load.extend([ext_heat_load, int_heat_load])
+                self.tabs_rooms += 2
+                self.tabs_connection.extend([zone_counter, zone_counter])
+                low_record = ['AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.'
+                              'FLground_EnEV2009_SML_loHalf_UFH', 'AixLib.Fluid.HeatExchangers.ActiveWalls'
+                              '.UnderfloorHeating.BaseClasses.FloorLayers.CEpartition_EnEV2009_SM_loHalf_UFH']
+                self.tabs_record_low.extend(low_record)
+                zone.model_attr.tabs_record = '%s_DataBase.%s_%s_upperTABS' % (self.name, self.name, zone.name)
+                zone.model_attr.tabs_int_record = '%s_DataBase.%s_%s_upperTABS_int' % (self.name, self.name, zone.name)
+
+            elif zone.model_attr.area_ot > 0:
+                self.ATabs.append(zone.model_attr.area_ot)
+                self.ExtTabs.append(True)
                 self.tabs_record.append(zone.name + '_upperTABS')
+                self.tabs_heat_load.append(zone.model_attr.heat_load)
+                self.tabs_rooms += 1
+                self.tabs_connection.append(zone_counter)
+                low_record = ['AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.' \
+                             'FLground_EnEV2009_SML_loHalf_UFH']
+                self.tabs_record_low.append(low_record)
+                zone.model_attr.tabs_record = '%s_DataBase.%s_%s_upperTABS' % (self.name, self.name, zone.name)
+
+            elif zone.model_attr.area_it > 0:
+                self.ATabs.append(zone.model_attr.area_it)
+                self.ExtTabs.append(False)
+                self.tabs_record.append(zone.name + '_upperTABS_int')
+                self.tabs_heat_load.append(zone.model_attr.heat_load)
+                self.tabs_rooms += 1
+                self.tabs_connection.append(zone_counter)
+                low_record = 'AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers' \
+                             '.CEpartition_EnEV2009_SM_loHalf_UFH'
+                self.tabs_record_low.append(low_record)
+                zone.model_attr.tabs_int_record = '%s_DataBase.%s_%s_upperTABS_int' % (self.name, self.name, zone.name)
+
         if not self.tabs_rooms:
             self.tabs_rooms = 1
         if self.used_library_calc == self.library_attr.__class__.__name__:
@@ -423,11 +460,11 @@ class Building(object):
                 self.library_attr = IBPSA(parent=self)
 
     def retrofit_building(
-        self,
-        year_of_retrofit=None,
-        type_of_retrofit=None,
-        window_type=None,
-        material=None,
+            self,
+            year_of_retrofit=None,
+            type_of_retrofit=None,
+            window_type=None,
+            material=None,
     ):
         """Retrofits all zones in the building
 

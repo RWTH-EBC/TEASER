@@ -23,6 +23,19 @@
   %>
 </%def>
 
+##list to modelica list boolean
+##Modelica does not allow empty lists, sets one zero entry as default for
+##such cases
+<%def name="get_boolean_list(list)", filter="trim">
+  <%
+  if list:
+    return str(list).replace('[', '{').replace(']', '}').replace('True', 'true').replace('False', 'false')
+  else:
+    ret="{false}"
+    return ret
+  %>
+</%def>
+
 ##list to modelica list for record
 ##Modelica does not allow empty lists, sets one zero entry as default for
 ##such cases

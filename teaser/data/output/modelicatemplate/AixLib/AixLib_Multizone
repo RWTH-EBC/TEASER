@@ -1,10 +1,13 @@
-<%namespace file="/modelica_language/" import="get_true_false, get_list, get_list_record"/>
+<%namespace file="/modelica_language/" import="get_boolean_list, get_true_false, get_list, get_list_record"/>
 within ${bldg.parent.name}.${bldg.name};
 model ${bldg.name}
   "This is the simulation model of ${bldg.name} with traceable ID ${bldg.building_id}"
 
-
+% if not bldg.ATabs:
 AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
+% else:
+AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped_TABS multizone(
+% endif
     buildingID=${bldg.building_id},
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_start = ${bldg.thermal_zones[0].t_inside},
@@ -13,16 +16,22 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     ASurTot=${bldg.library_attr.total_surface_area},
     numZones = ${len(bldg.thermal_zones)},
     internalGainsMode = ${bldg.internal_gains_mode},
+    % if bldg.ATabs:
     numTabs = ${bldg.tabs_rooms},
     ATabs = ${get_list(bldg.ATabs)},
+    ExtTabs = ${get_boolean_list(bldg.ExtTabs)},
     TabsConnection = ${get_list(bldg.tabs_connection)},
     TabsHeatLoad = ${get_list(bldg.tabs_heat_load)},
-    % if bldg.ATabs:
     TabswallTypeFloor = {
         % for tabs in bldg.tabs_record:
         ${bldg.name}_DataBase.${bldg.name}_${tabs}()${',' if not loop.last else ''}
         % endfor
         },
+    TabswallTypeCeiling = {
+        % for tabs in bldg.tabs_record_low:
+        ${tabs}()${',' if not loop.last else ''}
+        % endfor
+    },
     %endif
     % if bldg.internal_gains_mode==3:
         use_C_flow = true,
@@ -67,11 +76,15 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
   dpAHU_sup=800,
   dpAHU_eta=800,
 % endif
-  zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
+  zone(
+  % if bldg.ATabs:
+  redeclare model TZMod =
+          AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone_Tabs,
+  % endif
+  ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
            intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
            (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
-           der_T(fixed=true))), extTabsRC(thermCapExt(each der_T(fixed=true))),
-           intTabsRC(thermCapInt(each der_T(fixed=true))))),
+           der_T(fixed=true))))),
    redeclare model corG =
         AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane,
 % if bldg.central_ahu:

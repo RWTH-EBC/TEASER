@@ -129,7 +129,6 @@ class Wall(BuildingElement):
             self.gather_element_properties()
 
         omega = 2 * np.pi / (86400 * t_bt)
-
         r_layer = thickness / thermal_conduc
         c_layer = heat_capac * density * thickness * 1000
 
@@ -222,7 +221,8 @@ class Wall(BuildingElement):
 
         if type(self).__name__ == "OuterWall" \
                 or type(self).__name__ == "Rooftop" \
-                or type(self).__name__ == "GroundFloor":
+                or type(self).__name__ == "GroundFloor"\
+                or type(self).__name__ == "OuterTabs":
             self.c1 = self.c1_korr
 
     def insulate_wall(
