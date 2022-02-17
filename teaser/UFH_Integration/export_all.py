@@ -98,7 +98,6 @@ class ExportAll:
         tz = ThermalZone(parent=bldg)
         tz.use_conditions = UseConditions(parent=tz)
         tz.use_conditions.load_use_conditions(use_condition)
-        tz.use_conditions.with_heating = False
         tz.name = name
         tz.area = area
         tz.volume = area * height

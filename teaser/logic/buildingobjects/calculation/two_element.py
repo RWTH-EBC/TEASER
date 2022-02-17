@@ -395,11 +395,11 @@ class TwoElement(object):
         self.area_ot = 0.0
         self.orientation_ot = []
 
-        self.n_tabs = 0
-        self.d_tabs = []
-        self.rho_tabs = []
-        self.lambda_tabs = []
-        self.c_tabs = []
+        self.n_ot = 0
+        self.d_ot = []
+        self.rho_ot = []
+        self.lambda_ot = []
+        self.c_ot = []
 
         # internal TABS
         self.r1_it = 0.0
@@ -408,11 +408,11 @@ class TwoElement(object):
         self.area_it = 0.0
         self.orientation_it = []
 
-        self.n_tabs_int = 0
-        self.d_tabs_int = []
-        self.rho_tabs_int = []
-        self.lambda_tabs_int = []
-        self.c_tabs_int = []
+        self.n_it = 0
+        self.d_it = []
+        self.rho_it = []
+        self.lambda_it = []
+        self.c_it = []
 
     def calc_attributes(self):
         """Calls all necessary function to calculate model attributes"""
@@ -1078,31 +1078,29 @@ class TwoElement(object):
                         + ", two different types of external tabs have been defined,"
                           "only the first type is taken into account."
                     )
+        n = 0
+        d = []
+        rho = []
+        lambda_t = []
+        c = []
+        for layer in tabs_layers:
+            n += 1
+            d.append(layer.thickness)
+            rho.append(layer.material.density)
+            lambda_t.append(layer.material.thermal_conduc)
+            c.append(layer.material.heat_capac * 1000)
 
-        if external:
-            self.area_ot = area
-            self.orientation_ot = orientation
-            self.r1_ot = r1
-            self.c1_ot = c1
-            self.r_rest_ot = r_rest
-            for layer in tabs_layers:
-                self.n_tabs += 1
-                self.d_tabs.append(layer.thickness)
-                self.rho_tabs.append(layer.material.density)
-                self.lambda_tabs.append(layer.material.thermal_conduc)
-                self.c_tabs.append(layer.material.heat_capac * 1000)
-        else:
-            self.area_it = area
-            self.orientation_it = orientation
-            self.r1_it = r1
-            self.c1_it = c1
-            self.r_rest_it = r_rest
-            for layer in tabs_layers:
-                self.n_tabs_int += 1
-                self.d_tabs_int.append(layer.thickness)
-                self.rho_tabs_int.append(layer.material.density)
-                self.lambda_tabs_int.append(layer.material.thermal_conduc)
-                self.c_tabs_int.append(layer.material.heat_capac * 1000)
+        suffix = 'ot' if external else 'it'
+        setattr(self, 'area_%s' % suffix, area)
+        setattr(self, 'orientation_%s' % suffix, orientation)
+        setattr(self, 'r1_%s' % suffix, r1)
+        setattr(self, 'c1_%s' % suffix, c1)
+        setattr(self, 'r_rest_%s' % suffix, r_rest)
+        setattr(self, 'n_%s' % suffix, n)
+        setattr(self, 'd_%s' % suffix, d)
+        setattr(self, 'rho_%s' % suffix, rho)
+        setattr(self, 'lambda_%s' % suffix, lambda_t)
+        setattr(self, 'c_%s' % suffix, c)
 
     def _calc_wf(self):
         """Weightfactors for outer elements(walls, roof, ground floor, windows)
@@ -1447,11 +1445,11 @@ class TwoElement(object):
         self.c1_ot = 0.0
         self.area_ot = 0.0
 
-        self.n_tabs = 0
-        self.d_tabs = []
-        self.rho_tabs = []
-        self.lambda_tabs = []
-        self.c_tabs = []
+        self.n_ot = 0
+        self.d_ot = []
+        self.rho_ot = []
+        self.lambda_ot = []
+        self.c_ot = []
 
         # internal TABS
         self.r1_it = 0.0
@@ -1459,8 +1457,8 @@ class TwoElement(object):
         self.c1_it = 0.0
         self.area_it = 0.0
 
-        self.n_tabs_int = 0
-        self.d_tabs_int = []
-        self.rho_tabs_int = []
-        self.lambda_tabs_int = []
-        self.c_tabs_int = []
+        self.n_it = 0
+        self.d_it = []
+        self.rho_it = []
+        self.lambda_it = []
+        self.c_it = []

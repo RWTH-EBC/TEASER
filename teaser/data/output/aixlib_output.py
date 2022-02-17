@@ -82,10 +82,6 @@ def export_multizone(buildings, prj, path=None):
         filename=utilities.get_full_path(
             "UFH_Integration/AixLib_TABS"),
         lookup=lookup)
-    tabs_int_template = Template(
-        filename=utilities.get_full_path(
-            "UFH_Integration/AixLib_TABS_int"),
-        lookup=lookup)
     model_template = Template(
         filename=utilities.get_full_path(
             "data/output/modelicatemplate/AixLib/AixLib_Multizone"),
@@ -188,14 +184,14 @@ def export_multizone(buildings, prj, path=None):
                 with open(utilities.get_full_path(os.path.join(
                         zone_path,
                         bldg.name + '_' + zone.name + '_upperTABS' + '.mo')), 'w') as out_file:
-                    out_file.write(tabs_template.render_unicode(zone=zone))
+                    out_file.write(tabs_template.render_unicode(zone=zone, external=True))
                     out_file.close()
                 tabs_package.append(zone.name + '_upperTABS')
             if zone.model_attr.area_it > 0:
                 with open(utilities.get_full_path(os.path.join(
                         zone_path,
                         bldg.name + '_' + zone.name + '_upperTABS_int' + '.mo')), 'w') as out_file:
-                    out_file.write(tabs_int_template.render_unicode(zone=zone))
+                    out_file.write(tabs_template.render_unicode(zone=zone, external=False))
                     out_file.close()
                 tabs_package.append(zone.name + '_upperTABS_int')
 
