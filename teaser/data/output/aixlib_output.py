@@ -175,25 +175,25 @@ def export_multizone(buildings, prj, path=None):
                     out_file.write(zone_template_1.render_unicode(zone=zone))
                 elif type(zone.model_attr).__name__ == "TwoElement":
                     out_file.write(zone_template_2.render_unicode(zone=zone))
+                    if zone.model_attr.area_ot > 0:
+                        with open(utilities.get_full_path(os.path.join(
+                                zone_path,
+                                bldg.name + '_' + zone.name + '_upperTABS' + '.mo')), 'w') as out_file:
+                            out_file.write(tabs_template.render_unicode(zone=zone, external=True))
+                            out_file.close()
+                        tabs_package.append(zone.name + '_upperTABS')
+                    if zone.model_attr.area_it > 0:
+                        with open(utilities.get_full_path(os.path.join(
+                                zone_path,
+                                bldg.name + '_' + zone.name + '_upperTABS_int' + '.mo')), 'w') as out_file:
+                            out_file.write(tabs_template.render_unicode(zone=zone, external=False))
+                            out_file.close()
+                        tabs_package.append(zone.name + '_upperTABS_int')
                 elif type(zone.model_attr).__name__ == "ThreeElement":
                     out_file.write(zone_template_3.render_unicode(zone=zone))
                 elif type(zone.model_attr).__name__ == "FourElement":
                     out_file.write(zone_template_4.render_unicode(zone=zone))
                 out_file.close()
-            if zone.model_attr.area_ot > 0:
-                with open(utilities.get_full_path(os.path.join(
-                        zone_path,
-                        bldg.name + '_' + zone.name + '_upperTABS' + '.mo')), 'w') as out_file:
-                    out_file.write(tabs_template.render_unicode(zone=zone, external=True))
-                    out_file.close()
-                tabs_package.append(zone.name + '_upperTABS')
-            if zone.model_attr.area_it > 0:
-                with open(utilities.get_full_path(os.path.join(
-                        zone_path,
-                        bldg.name + '_' + zone.name + '_upperTABS_int' + '.mo')), 'w') as out_file:
-                    out_file.write(tabs_template.render_unicode(zone=zone, external=False))
-                    out_file.close()
-                tabs_package.append(zone.name + '_upperTABS_int')
 
         _help_package(
             path=zone_path,

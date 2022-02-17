@@ -387,48 +387,49 @@ class Building(object):
                 t_bt=5,
             )
             self.sum_heat_load += zone.model_attr.heat_load
-            # TABS
-            if zone.model_attr.area_ot > 0 and zone.model_attr.area_it > 0:
-                a_int = zone.model_attr.area_it
-                a_ext = zone.model_attr.area_ot
-                ext_heat_load = (a_ext / (a_int + a_ext)) * zone.model_attr.heat_load
-                int_heat_load = (a_int / (a_int + a_ext)) * zone.model_attr.heat_load
-                self.ATabs.extend([a_ext, a_int])
-                self.ExtTabs.extend([True, False])
-                self.tabs_record.extend([zone.name + '_upperTABS', zone.name + '_upperTABS_int'])
-                self.tabs_heat_load.extend([ext_heat_load, int_heat_load])
-                self.tabs_rooms += 2
-                self.tabs_connection.extend([zone_counter, zone_counter])
-                low_record = ['AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.'
-                              'FLground_EnEV2009_SML_loHalf_UFH', 'AixLib.Fluid.HeatExchangers.ActiveWalls'
-                              '.UnderfloorHeating.BaseClasses.FloorLayers.CEpartition_EnEV2009_SM_loHalf_UFH']
-                self.tabs_record_low.extend(low_record)
-                zone.model_attr.tabs_record = '%s_DataBase.%s_%s_upperTABS' % (self.name, self.name, zone.name)
-                zone.model_attr.tabs_int_record = '%s_DataBase.%s_%s_upperTABS_int' % (self.name, self.name, zone.name)
+            if type(zone.model_attr).__name__ == "TwoElement":
+                # TABS
+                if zone.model_attr.area_ot > 0 and zone.model_attr.area_it > 0:
+                    a_int = zone.model_attr.area_it
+                    a_ext = zone.model_attr.area_ot
+                    ext_heat_load = (a_ext / (a_int + a_ext)) * zone.model_attr.heat_load
+                    int_heat_load = (a_int / (a_int + a_ext)) * zone.model_attr.heat_load
+                    self.ATabs.extend([a_ext, a_int])
+                    self.ExtTabs.extend([True, False])
+                    self.tabs_record.extend([zone.name + '_upperTABS', zone.name + '_upperTABS_int'])
+                    self.tabs_heat_load.extend([ext_heat_load, int_heat_load])
+                    self.tabs_rooms += 2
+                    self.tabs_connection.extend([zone_counter, zone_counter])
+                    low_record = ['AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.'
+                                  'FLground_EnEV2009_SML_loHalf_UFH', 'AixLib.Fluid.HeatExchangers.ActiveWalls'
+                                  '.UnderfloorHeating.BaseClasses.FloorLayers.CEpartition_EnEV2009_SM_loHalf_UFH']
+                    self.tabs_record_low.extend(low_record)
+                    zone.model_attr.tabs_record = '%s_DataBase.%s_%s_upperTABS' % (self.name, self.name, zone.name)
+                    zone.model_attr.tabs_int_record = '%s_DataBase.%s_%s_upperTABS_int' % (self.name, self.name, zone.name)
 
-            elif zone.model_attr.area_ot > 0:
-                self.ATabs.append(zone.model_attr.area_ot)
-                self.ExtTabs.append(True)
-                self.tabs_record.append(zone.name + '_upperTABS')
-                self.tabs_heat_load.append(zone.model_attr.heat_load)
-                self.tabs_rooms += 1
-                self.tabs_connection.append(zone_counter)
-                low_record = ['AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.' \
-                             'FLground_EnEV2009_SML_loHalf_UFH']
-                self.tabs_record_low.append(low_record)
-                zone.model_attr.tabs_record = '%s_DataBase.%s_%s_upperTABS' % (self.name, self.name, zone.name)
+                elif zone.model_attr.area_ot > 0:
+                    self.ATabs.append(zone.model_attr.area_ot)
+                    self.ExtTabs.append(True)
+                    self.tabs_record.append(zone.name + '_upperTABS')
+                    self.tabs_heat_load.append(zone.model_attr.heat_load)
+                    self.tabs_rooms += 1
+                    self.tabs_connection.append(zone_counter)
+                    low_record = ['AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.' \
+                                 'FLground_EnEV2009_SML_loHalf_UFH']
+                    self.tabs_record_low.append(low_record)
+                    zone.model_attr.tabs_record = '%s_DataBase.%s_%s_upperTABS' % (self.name, self.name, zone.name)
 
-            elif zone.model_attr.area_it > 0:
-                self.ATabs.append(zone.model_attr.area_it)
-                self.ExtTabs.append(False)
-                self.tabs_record.append(zone.name + '_upperTABS_int')
-                self.tabs_heat_load.append(zone.model_attr.heat_load)
-                self.tabs_rooms += 1
-                self.tabs_connection.append(zone_counter)
-                low_record = 'AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers' \
-                             '.CEpartition_EnEV2009_SM_loHalf_UFH'
-                self.tabs_record_low.append(low_record)
-                zone.model_attr.tabs_int_record = '%s_DataBase.%s_%s_upperTABS_int' % (self.name, self.name, zone.name)
+                elif zone.model_attr.area_it > 0:
+                    self.ATabs.append(zone.model_attr.area_it)
+                    self.ExtTabs.append(False)
+                    self.tabs_record.append(zone.name + '_upperTABS_int')
+                    self.tabs_heat_load.append(zone.model_attr.heat_load)
+                    self.tabs_rooms += 1
+                    self.tabs_connection.append(zone_counter)
+                    low_record = 'AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers' \
+                                 '.CEpartition_EnEV2009_SM_loHalf_UFH'
+                    self.tabs_record_low.append(low_record)
+                    zone.model_attr.tabs_int_record = '%s_DataBase.%s_%s_upperTABS_int' % (self.name, self.name, zone.name)
 
         if not self.tabs_rooms:
             self.tabs_rooms = 1

@@ -1,23 +1,23 @@
 <%namespace file="/modelica_language/" import="get_true_false, get_list"/>
 within ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase;
-% if not external:
+% if external:
 record ${zone.parent.name}_${zone.name}_upperTABS "${zone.parent.name}_${zone.name}_upperTABS"
-  extends AixLib.DataBase.Walls.WallBaseDataDefinition(
-    n(min=1) = ${zone.model_attr.n_it},
-    d = ${get_list(zone.model_attr.d_it)},
-    rho = ${get_list(zone.model_attr.rho_it)},
-    lambda = ${get_list(zone.model_attr.lambda_it)},
-    c = ${get_list(zone.model_attr.c_it)},
-    eps = 0.95);
-end ${zone.parent.name}_${zone.name}_upperTABS;
-% else:
-record ${zone.parent.name}_${zone.name}_upperTABS_int "${zone.parent.name}_${zone.name}_upperTABS_int"
   extends AixLib.DataBase.Walls.WallBaseDataDefinition(
     n(min=1) = ${zone.model_attr.n_ot},
     d = ${get_list(zone.model_attr.d_ot)},
     rho = ${get_list(zone.model_attr.rho_ot)},
     lambda = ${get_list(zone.model_attr.lambda_ot)},
     c = ${get_list(zone.model_attr.c_ot)},
+    eps = 0.95);
+end ${zone.parent.name}_${zone.name}_upperTABS;
+% else:
+record ${zone.parent.name}_${zone.name}_upperTABS_int "${zone.parent.name}_${zone.name}_upperTABS_int"
+  extends AixLib.DataBase.Walls.WallBaseDataDefinition(
+    n(min=1) = ${zone.model_attr.n_it},
+    d = ${get_list(zone.model_attr.d_it)},
+    rho = ${get_list(zone.model_attr.rho_it)},
+    lambda = ${get_list(zone.model_attr.lambda_it)},
+    c = ${get_list(zone.model_attr.c_it)},
     eps = 0.95);
 end ${zone.parent.name}_${zone.name}_upperTABS_int;
 %endif
