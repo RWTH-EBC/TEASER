@@ -458,7 +458,6 @@ class TwoElement(object):
             )
         else:
             self._sum_outer_wall_elements()
-
         if (
             len(
                 self.thermal_zone.inner_walls
