@@ -1,6 +1,6 @@
 <%namespace file="/modelica_language/" import="get_true_false, get_list, min_orientations"/> <%namespace file="/conversion/" import="deg_to_rad, azmiut_conv"/>
 within ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase.Schwimmhalle_DataBase;
-record Schwimhalle_${pool} "Schwimmhalle_${pool}"
+record Schwimmhalle_${pool} "Schwimmhalle_${pool}"
   extends AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord(
     T_pool = ${zone.paramRecord[pool]["T_pool"]},
     V_pool = ${zone.paramRecord[pool]["V_pool"]},
@@ -11,7 +11,6 @@ record Schwimhalle_${pool} "Schwimmhalle_${pool}"
     V_flow_partial = ${zone.paramRecord[pool]["Q_night"]},
     beta_inUse = ${zone.paramRecord[pool]["beta_inUse"]},
     use_partialLoad = ${zone.paramRecord[pool]["use_partialLoad"]},
-    use_idealHeatExchanger = ${zone.paramRecord[pool]["use_idealHeatExchanger"]},
     dpHeatExchangerPool = ${zone.paramRecord[pool]["dpHeatExchangerPool"]},
     use_poolCover = ${zone.paramRecord[pool]["use_poolCover"]},
     use_waterRecycling = ${zone.paramRecord[pool]["use_waterRecycling"]},

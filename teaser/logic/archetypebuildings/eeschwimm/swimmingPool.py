@@ -1080,7 +1080,7 @@ class SwimmingPool(NonResidential):
         poolsInDict[poolName]["hConWaterHorizontal"] = 50.0
         poolsInDict[poolName]["hConWaterVertical"] = 5200.0
         poolsInDict[poolName]["Construction of pool wall"] = \
-            "AixLib.DataBase.Pools.SwimmingPoolWall.ConcreteConstruction()"
+            "AixLib.DataBase.Pools.SwimmingPoolWall.ConcreteInsulationConstruction()"
         
         return poolsInDict 
     
