@@ -367,6 +367,9 @@ class SwimmingPool(NonResidential):
         self.floor_names = {"Floor": [0, -2]}
         
         self.ceiling_names = {"Ceiling": [0, -1]}
+        
+        self.opening_hours = [0.0] * 7 + [1.0] * 5 + [0.5] + [1.0] * 10 + [0.0]
+        
 
         """
         The following parameters are part of the teaser office class and won't be used 

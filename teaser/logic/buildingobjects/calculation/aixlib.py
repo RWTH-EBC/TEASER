@@ -61,6 +61,7 @@ class AixLib(object):
         self.file_set_t_cool = "TsetCool_" + self.parent.name + ".txt"
         self.file_ahu = "AHU_" + self.parent.name + ".txt"
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".txt"
+        self.file_opening_hours = "OpeningHours_" + self.parent.name + ".txt"
         self.version = "0.10.7"
         self.total_surface_area = None
         self.consider_heat_capacity = True
@@ -300,6 +301,51 @@ class AixLib(object):
                 "double Internals({}, {})\n".format(
                     8760, (len(self.parent.thermal_zones) * 3 + 1)
                 )
+            )
+            export.to_csv(f, sep="\t", header=False, index_label=False)
+            
+    def modelica_opening_hours(self, path=None):
+        """Create .txt file for opening hours.
+
+        This function creates a txt for opening hours of one week. By default 
+        the building is always open.
+
+        1. Column : time step
+        2 - 8 Column : opening hours of each day from monday to sunday
+
+        Parameters
+        ----------
+        path : str
+            optional path, when matfile is exported separately
+
+        """
+        if path is None:
+            path = utilities.get_default_path()
+        else:
+            pass
+
+        utilities.create_path(path)
+        path = os.path.join(path, self.file_opening_hours)
+
+        export = pd.DataFrame(
+            index=pd.date_range("2019-01-01 00:00:00", periods=24, freq="H")
+            .to_series()
+            .dt.strftime("%m-%d %H:%M:%S")
+        )
+        
+        for i in range(1, 8):
+            for k in range(24):
+                if hasattr(self.parent, "opening_hours"):
+                    export[i] = self.parent.opening_hours
+                else:
+                    export[i] = [1.0] * 24           
+
+        export.index = [(i + 1) * 3600 for i in range(24)]
+        self._delete_file(path=path)
+        with open(path, "a") as f:
+            f.write("#1\n")
+            f.write(
+                "double opening_hours({}, {})\n".format(24, 8)
             )
             export.to_csv(f, sep="\t", header=False, index_label=False)
 
