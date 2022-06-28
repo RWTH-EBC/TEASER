@@ -52,10 +52,10 @@ def generate_advanced_swimmingPool():
     ''' 
     --- CHANGE PARAMETERS HERE ---
     '''
-    building_name = "Hallenbad" 
-    water_area = 412.5
-    year_of_construction = 1980
-    excelFileName = "2022-01-17_Swimming pool_Database.xlsx"
+    building_name = "HallenbadAhlen"
+    water_area = 550
+    year_of_construction = 2012
+    excelFileName = "2022-02-27_Swimming pool_DatabaseAhlen.xlsx"
     filePathOutput = None
     
     # This should not be changed for now:
