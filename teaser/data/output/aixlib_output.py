@@ -126,7 +126,9 @@ def export_multizone(buildings, prj, path=None):
             path=bldg_path)
         bldg.library_attr.modelica_gains_boundary(
             path=bldg_path)
-        bldg.library_attr.modelica_opening_hours(path=bldg_path)
+        
+        if hasattr(bldg.thermal_zones[0], "paramRecord"):
+            bldg.library_attr.modelica_opening_hours(path=bldg_path)
 
         _help_package(path=bldg_path, name=bldg.name, within=bldg.parent.name)
         _help_package_order(
