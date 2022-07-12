@@ -7689,7 +7689,7 @@
             283.15
         ],
         "min_ahu": 0.0,
-        "max_ahu": 174.3,
+        "max_ahu": 3.6,
         "with_ahu": true,
         "with_ideal_thresholds": false,
         "heating_profile": [
