@@ -458,7 +458,7 @@ class SwimmingPool(NonResidential):
             zone = ThermalZone(self)
             zone.area = value[0] 
             zone.volume = value[1]
-            zone.name = key
+            zone.name = key            
             # Additional Parameters for pools 
             if zone.name == "Schwimmhalle":                  
                 zone.paramRecord = dict()
@@ -468,6 +468,7 @@ class SwimmingPool(NonResidential):
             use_cond = UseCond(zone)
             use_cond.load_use_conditions(value[2], data_class=self.parent.data)
             zone.use_conditions = use_cond
+            zone.t_inside = zone.use_conditions._heating_profile[0]
 
         self.net_leased_area = round(self.net_leased_area, 2)
         self.volume = round(self.volume, 2)
