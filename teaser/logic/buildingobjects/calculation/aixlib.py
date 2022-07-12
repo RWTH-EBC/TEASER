@@ -330,7 +330,7 @@ class AixLib(object):
         path = os.path.join(path, self.file_opening_hours)
 
         export = pd.DataFrame(
-            index=pd.date_range("2019-01-01 00:00:00", periods=24, freq="H")
+            index=pd.date_range("2019-01-01 00:00:00", periods=25, freq="H")
             .to_series()
             .dt.strftime("%m-%d %H:%M:%S")
         )
@@ -340,14 +340,14 @@ class AixLib(object):
                 if hasattr(self.parent, "opening_hours"):
                     export[i] = self.parent.opening_hours
                 else:
-                    export[i] = [1.0] * 24           
+                    export[i] = [1.0] * 25
 
-        export.index = [(i + 1) * 3600 for i in range(24)]
+        export.index = [(i + 1) * 3600 for i in range(25)]
         self._delete_file(path=path)
         with open(path, "a") as f:
             f.write("#1\n")
             f.write(
-                "double opening_hours({}, {})\n".format(24, 8)
+                "double opening_hours({}, {})\n".format(25, 8)
             )
             export.to_csv(f, sep="\t", header=False, index_label=False)
 

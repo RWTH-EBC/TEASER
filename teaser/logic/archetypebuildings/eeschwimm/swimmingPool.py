@@ -367,8 +367,8 @@ class SwimmingPool(NonResidential):
         self.floor_names = {"Floor": [0, -2]}
         
         self.ceiling_names = {"Ceiling": [0, -1]}
-        
-        self.opening_hours = [0.0] * 7 + [1.0] * 5 + [0.5] + [1.0] * 10 + [0.0]
+
+        self.opening_hours = [0.0] * 7 + [1.0] * 5 + [0.5] + [1.0] * 9 + [0.0] * 3
         
 
         """
@@ -425,19 +425,20 @@ class SwimmingPool(NonResidential):
 
         
         # Default values for AHU from Teaser. Adaptation for swimming pools pending.
-            if self.with_ahu is True:
-                self.central_ahu.temperature_profile = (
-                    7 * [293.15] + 12 * [295.15] + 6 * [293.15]
+        if self.with_ahu is True:
+            self.central_ahu.temperature_profile = (
+                  #  7 * [293.15] + 12 * [295.15] + 6 * [293.15]
+                    24 * [303.15]
                 )
-                #  according to :cite:`DeutschesInstitutfurNormung.2016`
-                self.central_ahu.min_relative_humidity_profile = 25 * [0.45]  #
-                #  according to :cite:`DeutschesInstitutfurNormung.2016b`  and
-                # :cite:`DeutschesInstitutfurNormung.2016`
-                self.central_ahu.max_relative_humidity_profile = 25 * [0.65]
-                self.central_ahu.v_flow_profile = (
-                    7 * [0.0] + 12 * [1.0] + 6 * [0.0]
-                )  # according to user
-                # profile in :cite:`DeutschesInstitutfurNormung.2016`
+            #  according to :cite:`DeutschesInstitutfurNormung.2016`
+            self.central_ahu.min_relative_humidity_profile = 24 * [0.2]  #
+            #  according to :cite:`DeutschesInstitutfurNormung.2016b`  and
+            # :cite:`DeutschesInstitutfurNormung.2016`
+            self.central_ahu.max_relative_humidity_profile = 24 * [0.8]
+            self.central_ahu.v_flow_profile = (
+               7 * [0.0] + 15 * [1.0] + 2 * [0.0]
+            )  # according to user
+            # profile in :cite:`DeutschesInstitutfurNormung.2016`
 
 
     def generate_archetype(self):
