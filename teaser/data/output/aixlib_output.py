@@ -84,7 +84,7 @@ def export_multizone(buildings, prj, path=None, use_postprocessing_calc=False):
         lookup=lookup)
     tabs_template = Template(
         filename=utilities.get_full_path(
-            "UFH_Integration/AixLib_TABS"),
+            "data/output/modelicatemplate/AixLib/AixLib_TABS"),
         lookup=lookup)
     model_template = Template(
         filename=utilities.get_full_path(

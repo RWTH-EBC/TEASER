@@ -43,7 +43,7 @@ class ExportAll:
         tz.calc_zone_parameters()
 
         bldg.calc_building_parameter()
-        prj.export_aixlib(path='D:/dja-dco/Dymola_Exports')
+        prj.export_aixlib(path='D:/Dymola_Exports')
         pass
 
     @staticmethod
