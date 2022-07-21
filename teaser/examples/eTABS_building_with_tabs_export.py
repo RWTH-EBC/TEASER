@@ -26,20 +26,37 @@ class ExportAll:
     ufh_instances = []
 
     def run(self):
-        name = 'testtabs_new_WT'
+        name = 'testtabs_multiple_zones'
         prj = self.create_project(name)
         prj.modelica_info.stop_time = 604800
         bldg = self.create_building(prj, 'SimpleBuilding ' + name, 2015, 1, 20)
         # Zone 1
 
-        tz = self.create_thermal_zone(bldg, "Bed room", "tz_3", 20, 3, RoomTypes['TypeL'])
-        self.create_instance(Window, tz, 5.13, 180, 2014, "Alu- oder Stahlfenster, Waermeschutzverglasung, zweifach")
-        self.create_instance(OuterTABS, tz, 10, -2, bldg.year_of_construction, "up_half_light",
-                             TABSTypes['Internal']['UpHalf']['Laminate'])
-        self.create_instance(InnerTABS, tz, 10, -1, bldg.year_of_construction, "up_half_light")
+        tz = self.create_thermal_zone(
+            bldg, "Bed room", "tz_1", 20, 3, RoomTypes['TypeL'])
+        self.create_instance(
+            Window, tz, 5.13, 180, 2014,
+            "Alu- oder Stahlfenster, Waermeschutzverglasung, zweifach")
+        self.create_instance(
+            OuterTABS, tz, 10, -2, bldg.year_of_construction, "up_half_light",
+            TABSTypes['Internal']['UpHalf']['Laminate'])
+        self.create_instance(
+            InnerTABS, tz, 10, -1, bldg.year_of_construction, "up_half_light")
 
-        # self.create_instance(OuterTABS, tz, 20, -2, bldg.year_of_construction, "up_half_light",
-        #                      TABSTypes['Internal']['LoHalf'])
+        tz.calc_zone_parameters()
+        # Zone 2
+
+        tz = self.create_thermal_zone(
+            bldg, "Bed room", "tz_2", 20, 3, RoomTypes['TypeL'])
+        self.create_instance(
+            Window, tz, 5.13, 180, 2014,
+            "Alu- oder Stahlfenster, Waermeschutzverglasung, zweifach")
+        self.create_instance(
+            OuterTABS, tz, 10, -2, bldg.year_of_construction, "up_half_light",
+            TABSTypes['Internal']['UpHalf']['Laminate'])
+        self.create_instance(
+            InnerTABS, tz, 10, -1, bldg.year_of_construction, "up_half_light")
+
         tz.calc_zone_parameters()
 
         bldg.calc_building_parameter()
@@ -51,7 +68,8 @@ class ExportAll:
         for tz in building.thermal_zones:
             areas_floor = [fa.area for fa in tz.floors]
             areas_gfloor = [gfa.area for gfa in tz.ground_floors]
-            selected = 'ground_floors' if sum(areas_gfloor) > sum(areas_floor) else 'floors'
+            selected = 'ground_floors' if sum(areas_gfloor) > sum(areas_floor)\
+                else 'floors'
             class_tabs = InnerTABS if selected == 'floors' else OuterTABS
             for floor in getattr(tz, selected):
                 ufh = class_tabs(parent=tz)
@@ -84,7 +102,8 @@ class ExportAll:
         return prj
 
     @staticmethod
-    def create_building(project, name, year_of_construction, n_floors, net_area):
+    def create_building(
+            project, name, year_of_construction, n_floors, net_area):
         bldg = Building(parent=project)
         bldg.used_library_calc = 'AixLib'
         bldg.name = name
@@ -94,7 +113,8 @@ class ExportAll:
         return bldg
 
     @classmethod
-    def create_thermal_zone(cls, bldg, use_condition, name, area, height, template=None):
+    def create_thermal_zone(
+            cls, bldg, use_condition, name, area, height, template=None):
         tz = ThermalZone(parent=bldg)
         tz.use_conditions = UseConditions(parent=tz)
         tz.use_conditions.load_use_conditions(use_condition)
@@ -119,8 +139,8 @@ class ExportAll:
         return tz
 
     @classmethod
-    def create_instance(cls, class_instance, tz, area, orientation, year_of_construction, construction,
-                        create_layers=None):
+    def create_instance(cls, class_instance, tz, area, orientation,
+                        year_of_construction, construction, create_layers=None):
         inst = class_instance(parent=tz)
         if not create_layers:
             inst.load_type_element(year_of_construction, construction)
