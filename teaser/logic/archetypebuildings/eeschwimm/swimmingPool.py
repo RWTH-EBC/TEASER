@@ -322,7 +322,7 @@ class SwimmingPool(NonResidential):
         # Use conditions for zones
         self.zoneUseConditions = dict()
         self.zoneUseConditions["Zone 1"] = "Foyer (theater and event venues)"          
-        self.zoneUseConditions["Zone 2"] = "Group Office (between 2 and 6 employees)"
+        self.zoneUseConditions["Zone 2"] = "Dressing room, shower"
         self.zoneUseConditions["Zone 3"] = \
             "WC and sanitary rooms in non-residential buildings"
         self.zoneUseConditions["Zone 4"] = "Swimming hall"
@@ -330,15 +330,19 @@ class SwimmingPool(NonResidential):
         self.zoneUseConditions["Zone 6"] = "Sauna area"
         self.zoneUseConditions["Zone 7"] = "Gym (without spectator area)"
         self.zoneUseConditions["Zone 8"] = "Stock, technical equipment, archives"
+
         
         # Creating building zones
         # Zone won't be created if area is 0
         for zone in self.zoneDesignation.keys():
             if zone in self.poolsInDict.keys():
-                self.zone_area_factors[self.zoneDesignation[zone]] = \
+                 self.zone_area_factors[self.zoneDesignation[zone]] = \
                 [self.poolsInDict[zone]["Total area of zone (including water area)"], \
                  self.poolsInDict[zone]["Air volume"], \
-                 self.zoneUseConditions[zone]]       
+                 self.zoneUseConditions[zone]]
+
+                #self.zoneUseConditions[zone].heating_profile = 24* self.poolsInDict[zone]["Temperature"]
+
 
         # Creating potential building elements
         # Warning: All the names of the building elements are saved without spaces
@@ -442,7 +446,7 @@ class SwimmingPool(NonResidential):
 
 
     def generate_archetype(self):
-        """Generates an office building.
+        """Generates an swimming facility.
 
         With given values, this class generates an swimming pool archetype building
         according to TEASER requirements.
@@ -459,7 +463,7 @@ class SwimmingPool(NonResidential):
             zone = ThermalZone(self)
             zone.area = value[0] 
             zone.volume = value[1]
-            zone.name = key            
+            zone.name = key
             # Additional Parameters for pools 
             if zone.name == "Schwimmhalle":                  
                 zone.paramRecord = dict()
@@ -647,13 +651,14 @@ class SwimmingPool(NonResidential):
                 zoneNum = "Zone " + str(i)                
                 poolsInDict[zoneNum] = dict() 
                 
-        # Calculate zone areas and volumes according to 'Koordinierungskreis Bäder - 
+        # Set zone areas, volumes and temperatures according to 'Koordinierungskreis Bäder -
         # Richtlinien für den Bäderbau - 2013'
         
         # Zone 1
         # zoneArea = entrance + management room
         zoneArea = 12 + ws * 0.2
         poolsInDict["Zone 1"]["Total area of zone (including water area)"] = zoneArea
+        poolsInDict["Zone 1"]["Temperature"] = 294.15
         
         # Zone 2
         # zoneArea = changingRooms + sanitaryObjects + cleaningRoom + corridors         
@@ -665,6 +670,7 @@ class SwimmingPool(NonResidential):
                      math.ceil(ws**0.58 / 7) * 3.375) * 1.5
         zoneArea = changingRooms + sanitaryObjects + cleaningRoom + corridors        
         poolsInDict["Zone 2"]["Total area of zone (including water area)"] = zoneArea
+        poolsInDict["Zone 2"]["Temperature"] = 299.15
 
         # Zone 3
         # zoneArea = sanitary blocks + additional showers         
@@ -682,6 +688,7 @@ class SwimmingPool(NonResidential):
             zoneArea = numSanitaryDoubleBlocks * 82.53 + numAdditionalShowers * 10.44
             
         poolsInDict["Zone 3"]["Total area of zone (including water area)"] = zoneArea
+        poolsInDict["Zone 3"]["Temperature"] = 301.15
         
         # Zone 4  
         mainPoolSurface = ws
@@ -721,16 +728,19 @@ class SwimmingPool(NonResidential):
             
         hallWidth = mainPoolWidth + 4.5    
         zoneArea = hallWidth * hallLength          
-        poolsInDict["Zone 4"]["Total area of zone (including water area)"] = zoneArea 
+        poolsInDict["Zone 4"]["Total area of zone (including water area)"] = zoneArea
+        poolsInDict["Zone 4"]["Temperature"] = 303.15
         
         # Zone 5
         # zoneArea = First aid room + swimming master room + Swimming equipment room 
         # + Cleaning equipment room
-        poolsInDict["Zone 5"]["Total area of zone (including water area)"] = 43  
+        poolsInDict["Zone 5"]["Total area of zone (including water area)"] = 43
+        poolsInDict["Zone 5"]["Temperature"] = 297.15
         
         # Zone 8
         zoneArea = ws + ws * (1/24) + 25
         poolsInDict["Zone 8"]["Total area of zone (including water area)"] = zoneArea
+        poolsInDict["Zone 8"]["Temperature"] = 297.15
         
         # Zone area correction
         correctionFactor=1
