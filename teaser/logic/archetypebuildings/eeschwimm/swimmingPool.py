@@ -675,8 +675,8 @@ class SwimmingPool(NonResidential):
             
         hallWidth = mainPoolWidth + 4.5    
         zoneArea = hallWidth * hallLength          
-        poolsInDict["Zone 4"]["Total area of zone (including water area)"] = zoneArea
-        poolsInDict["Zone 4"]["Temperature"] = 303.15
+        poolsInDict["Zone 1"]["Total area of zone (including water area)"] = zoneArea
+        poolsInDict["Zone 1"]["Temperature"] = 303.15
         
         # Zone 2
         # zoneArea = changingRooms + sanitaryObjects + cleaningRoom + corridors         
@@ -711,8 +711,8 @@ class SwimmingPool(NonResidential):
         # Zone 4
         # zoneArea = entrance + management room
         zoneArea = 12 + ws * 0.2
-        poolsInDict["Zone 1"]["Total area of zone (including water area)"] = zoneArea
-        poolsInDict["Zone 1"]["Temperature"] = 294.15
+        poolsInDict["Zone 4"]["Total area of zone (including water area)"] = zoneArea
+        poolsInDict["Zone 4"]["Temperature"] = 294.15
         
         # Zone 5
         # zoneArea = First aid room + swimming master room + Swimming equipment room 
