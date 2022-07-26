@@ -323,8 +323,6 @@ class SwimmingPool(NonResidential):
                  self.poolsInDict[zone]["Air volume"], \
                  self.zoneUseConditions[zone]]
 
-                #self.zoneUseConditions[zone].heating_profile = 24* self.poolsInDict[zone]["Temperature"]
-
 
         # Creating potential building elements
         # Warning: All the names of the building elements are saved without spaces
@@ -432,16 +430,16 @@ class SwimmingPool(NonResidential):
             use_cond = UseCond(zone)
             use_cond.load_use_conditions(value[2], data_class=self.parent.data)
             zone.use_conditions = use_cond
-            zone.use_conditions._heating_profile = [self.poolsInDict[
-                self.zoneDesignation[zone.name]]["Temperature"]] *25 
+            zone.use_conditions.heating_profile = self.poolsInDict[
+                self.zoneDesignation[zone.name]]["Temperature"]
             
             if zone.use_conditions._cooling_profile[0] < \
                 zone.use_conditions._heating_profile[0]:
-                    zone.use_conditions._cooling_profile = \
-                    zone.use_conditions._heating_profile
-            
-            zone.t_inside = self.poolsInDict[
+                    zone.use_conditions.cooling_profile = self.poolsInDict[
                 self.zoneDesignation[zone.name]]["Temperature"]
+            
+            zone.t_inside = self.poolsInDict[self.zoneDesignation[
+                zone.name]]["Temperature"]
 
         self.net_leased_area = round(self.net_leased_area, 2)
         self.volume = round(self.volume, 2)
