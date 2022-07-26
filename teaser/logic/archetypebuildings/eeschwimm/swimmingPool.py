@@ -473,7 +473,16 @@ class SwimmingPool(NonResidential):
             use_cond = UseCond(zone)
             use_cond.load_use_conditions(value[2], data_class=self.parent.data)
             zone.use_conditions = use_cond
-            zone.t_inside = zone.use_conditions._heating_profile[0]
+            zone.use_conditions._heating_profile = [self.poolsInDict[
+                self.zoneDesignation[zone.name]]["Temperature"]] *25 
+            
+            if zone.use_conditions._cooling_profile[0] < \
+                zone.use_conditions._heating_profile[0]:
+                    zone.use_conditions._cooling_profile = \
+                    zone.use_conditions._heating_profile
+            
+            zone.t_inside = self.poolsInDict[
+                self.zoneDesignation[zone.name]]["Temperature"]
 
         self.net_leased_area = round(self.net_leased_area, 2)
         self.volume = round(self.volume, 2)
