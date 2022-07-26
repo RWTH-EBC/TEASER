@@ -454,8 +454,6 @@ internal_gains_mode: int [1, 2, 3]
                 net_leased_area,
                 with_ahu,
                 internal_gains_mode,
-                office_layout,
-                window_layout,
                 construction_type                
             )
 
