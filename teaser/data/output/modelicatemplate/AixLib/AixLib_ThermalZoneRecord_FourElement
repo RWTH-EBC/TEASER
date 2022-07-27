@@ -90,7 +90,7 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     withIdealThresholds = ${get_true_false(zone.use_conditions.with_ideal_thresholds)},
     TThresholdHeater = ${zone.use_conditions.T_threshold_heating},
     TThresholdCooler = ${zone.use_conditions.T_threshold_cooling},
-    % if zone.name == "Schwimmhalle":
+    % if zone.name == "Swimming_hall":
       use_swimmingPools = true,
       numPools = ${zone.parent.number_of_pools},
       poolParam = {
