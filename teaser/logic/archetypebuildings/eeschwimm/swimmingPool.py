@@ -145,19 +145,19 @@ class SwimmingPool(NonResidential):
     ---------
     
     Pools for poolsInDict:
-        - Swimmer pool
-        - Non-swimmer pool
-        - Multipurpose pool
-        - Toddler pool
-        - Diving pool
-        - Freeform pool     
+        - Swimmer_pool
+        - Nonswimmer_pool
+        - Multipurpose_pool
+        - Toddler_pool
+        - Diving_pool
+        - Freeform_pool
     Water area : float [m²]
         Water area of the respective pool. Default is calculated
         individually based on the total water area.
     Average pool depth : float [m]
         Average depth of the pool. 
-        Default is 3 m for "Swimmer pool" and 0.975 m for 
-        "Non-swimmer pool".
+        Default is 3 m for "Swimmer_pool" and 0.975 m for
+        "Nonswimmer_pool".
     Water volume : float [m³]
         Default is calculated individually based on the total 
         water area.
@@ -660,13 +660,13 @@ class SwimmingPool(NonResidential):
             mainPoolLength = 50
         
         mainPoolWidth = mainPoolSurface/mainPoolLength   
-        poolsInDict = self.createPool(poolsInDict, "Swimmer pool", mainPoolSurface, \
+        poolsInDict = self.createPool(poolsInDict, "Swimmer_pool", mainPoolSurface, \
                                       2 * mainPoolWidth + 2 * mainPoolLength)   
         
         if ws > 312.5:
             hallLength = mainPoolLength + beginnerPoolWidth + 8.25   
             poolsInDict = self.createPool(
-                poolsInDict, "Non-swimmer pool", beginnerPoolSurface, \
+                poolsInDict, "Nonswimmer_pool", beginnerPoolSurface, \
                 2 * beginnerPoolWidth + 2 * beginnerPoolLength)
         else:
             hallLength = mainPoolLength + 4.5
@@ -799,16 +799,16 @@ class SwimmingPool(NonResidential):
                     else:
                         k = None
                     # m, a, n
-                    if pool == "Toddler pool":
+                    if pool == "Toddler_pool":
                         a = None
                         n = None
                         m = 2                        
-                    elif pool.startswith("Freeform pool") or pool == \
-                    "Non-swimmer pool" or pool == "Multipurpose pool":
+                    elif pool.startswith("Freeform_pool") or pool == \
+                    "Nonswimmer_pool" or pool == "Multipurpose_pool":
                         a = 2.7
                         n = 1
                         m = None
-                    elif pool == "Swimmer pool" or pool == "Diving pool":
+                    elif pool == "Swimmer_pool" or pool == "Diving_pool":
                         a = 4.5
                         n = 1
                         m = None
@@ -818,7 +818,7 @@ class SwimmingPool(NonResidential):
                         m = None
                         
                     # Nennbelastung N
-                    if pool == "Toddler pool" and m is not None and k is not None:
+                    if pool == "Toddler_pool" and m is not None and k is not None:
                         N = (self.poolsInDict[pool]["Water volume"]) * m * k
                     elif n is not None and a is not None:
                         N = (self.poolsInDict[pool]["Water area"]) * n/a
@@ -831,7 +831,7 @@ class SwimmingPool(NonResidential):
                     else:
                         Q_H = 0    
                         
-                    if pool == "Toddler pool" \
+                    if pool == "Toddler_pool" \
                     and self.poolsInDict[pool]["Water area"] < 20:
                         Q_K = m * self.poolsInDict[pool]["Water volume"]
                     else:
@@ -1018,17 +1018,17 @@ class SwimmingPool(NonResidential):
         poolsInDict[poolName]["Water area"] = waterArea 
         poolsInDict[poolName]["Perimeter pool"] = perimeterPool 
         
-        if poolName.startswith("Swimmer pool"):
+        if poolName.startswith("Swimmer_pool"):
             poolsInDict[poolName]["Average pool depth"] = 2.5
-        elif poolName.startswith("Non-swimmer pool"):
+        elif poolName.startswith("Nonswimmer_pool"):
             poolsInDict[poolName]["Average pool depth"] = 0.975
-        elif poolName.startswith("Toddler pool"):
+        elif poolName.startswith("Toddler_pool"):
             poolsInDict[poolName]["Average pool depth"] = 0.6
-        elif poolName.startswith("Toddler pool"):
+        elif poolName.startswith("Toddler_pool"):
             poolsInDict[poolName]["Average pool depth"] = 1.35
-        elif poolName.startswith("Diving pool"):
+        elif poolName.startswith("Diving_pool"):
             poolsInDict[poolName]["Average pool depth"] = 3.8
-        elif poolName.startswith("Freeform pool"):
+        elif poolName.startswith("Freeform_pool"):
             poolsInDict[poolName]["Average pool depth"] = 0.75
         else:
             print("ERROR: The pool name", poolName, "is unknown!")

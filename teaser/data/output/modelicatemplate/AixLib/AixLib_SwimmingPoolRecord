@@ -1,6 +1,6 @@
 <%namespace file="/modelica_language/" import="get_true_false, get_list, min_orientations"/> <%namespace file="/conversion/" import="deg_to_rad, azmiut_conv"/>
-within ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase.Schwimmhalle_DataBase;
-record Schwimmhalle_${pool} "Schwimmhalle_${pool}"
+within ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase.Swimming_hall_DataBase;
+record Swimming_hall_${pool} "Swimming_hall_${pool}"
   extends AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord(
     T_pool = ${zone.paramRecord[pool]["T_pool"]},
     V_pool = ${zone.paramRecord[pool]["V_pool"]},
@@ -32,4 +32,4 @@ record Schwimmhalle_${pool} "Schwimmhalle_${pool}"
     hConWaterVertical = ${zone.paramRecord[pool]["hConWaterVertical"]},
     PoolWallParam = ${zone.paramRecord[pool]["PoolWallParam"]}
     );
-end Schwimmhalle_${zone.name};
+end Swimming_hall_${pool};

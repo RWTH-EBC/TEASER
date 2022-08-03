@@ -90,17 +90,17 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     TThresholdHeater = ${zone.use_conditions.T_threshold_heating},
     TThresholdCooler = ${zone.use_conditions.T_threshold_cooling},
     % if zone.name == "Swimming_hall":
-      use_swimmingPools = true,
-      numPools = ${zone.parent.number_of_pools},
-      poolParam = {
-      %for pool in zone.paramRecord.keys():
-      ${zone.name}_DataBase.${zone.name}_${pool}()${',' if not loop.last else ''}
-      %endfor
-      },
+    use_swimmingPools = true,
+    numPools = ${zone.parent.number_of_pools},
+    poolParam = {
+    %for pool in zone.paramRecord.keys():
+    ${zone.name}_DataBase.${zone.name}_${pool}()${',' if not loop.last else ''}
+    %endfor
+    }
     % else:
-      use_swimmingPools = false,
-      numPools = 0,
-      poolParam = {AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()},
+    use_swimmingPools = false,
+    numPools = 0,
+    poolParam = {AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()}
     % endif
     );
 end ${zone.parent.name}_${zone.name};

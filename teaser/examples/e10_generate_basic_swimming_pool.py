@@ -37,7 +37,7 @@ def generate_basic_swimmingPool():
     ''' 
     CHANGE PARAMETERS HERE:
     '''
-    building_name = "Hallenbad"
+    building_name = "SwimmingFacility"
     water_area = 412.5
     year_of_construction = 1980
     filePathOutput = None
