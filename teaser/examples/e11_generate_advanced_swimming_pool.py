@@ -55,7 +55,7 @@ def generate_advanced_swimmingPool():
     building_name = "Hallenbad"
     water_area = 550
     year_of_construction = 2012
-    excelFileName = "2022-07-26_Swimming pool_Database.xlsx"
+    excelFileName = "2022-08-03_Swimming pool_Database.xlsx"
     filePathOutput = None
     
     # This should not be changed for now:
@@ -176,11 +176,12 @@ def readExcelFile(swimmingPool, fileName, prj):
                 swimmingPool.poolsInDict[poolName] = dict()
                 swimmingPool.createPool(swimmingPool.poolsInDict, poolName, \
                 poolArea, poolPerimeter)
+            
 
     remList = list()
     for pool in swimmingPool.poolsInDict.keys():
         if not pool.startswith("Zone") and not pool.startswith("Total") \
-        and pool not in existingPools:            
+        and pool not in existingPools:  
             remList.append(pool)      
     for zone in swimmingPool.thermal_zones:
         if zone.name == "Swimming_hall":
@@ -335,7 +336,7 @@ def overrideMaterialData(zone, matDict, prj):
 
 def addBuildingZones(swimmingPool):
     for zoneName, value in swimmingPool.zone_area_factors.items():
-        if zoneName == "Saunabereich" or zoneName == "Fitness":
+        if zoneName == "Sauna_area" or zoneName == "Fitness":
             zone = ThermalZone(swimmingPool)
             zone.area = value[0] 
             zone.volume = value[1]
@@ -344,7 +345,7 @@ def addBuildingZones(swimmingPool):
             use_cond.load_use_conditions(value[2], data_class=swimmingPool.parent.data)
             zone.use_conditions = use_cond
             
-            if zoneName == "Saunabereich":
+            if zoneName == "Sauna_area":
                 swimmingPool.poolsInDict[
                 swimmingPool.zoneDesignation[zone.name]]["Temperature"] = 297.15
             elif zoneName == "Fitness":

@@ -62,7 +62,12 @@ def generate_basic_swimmingPool():
         if zone.startswith("Zone"):
             print ("Added", swimmingPool.zoneDesignation[zone],  "with zone area:", \
                swimmingPool.poolsInDict[zone]\
-               ["Total area of zone (including water area)"], "m²")    
+               ["Total area of zone (including water area)"], "m²")  
+                
+    for pool in swimmingPool.poolsInDict.keys():
+        if not pool.startswith("Zone"):
+            print("Added pool", pool, "with water area:", swimmingPool.poolsInDict[
+                pool]["Water area"], "m²")
   
     print()
     print("Total net leased area of building:", swimmingPool.net_leased_area, "m²")
