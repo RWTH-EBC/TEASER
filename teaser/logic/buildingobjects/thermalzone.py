@@ -4,8 +4,6 @@
 """This module includes the ThermalZone class
 """
 from __future__ import division
-
-import itertools
 import random
 import re
 import warnings
@@ -479,26 +477,17 @@ class ThermalZone(object):
 
     @name.setter
     def name(self, value):
-        regex = re.compile('[^a-zA-z0-9]')
         if isinstance(value, str):
-            name = regex.sub('', value)
+            regex = re.compile('[^a-zA-z0-9]')
+            self._name = regex.sub('', value)
         else:
             try:
                 value = str(value)
-                name = regex.sub('', value)
+                regex = re.compile('[^a-zA-z0-9]')
+                self._name = regex.sub('', value)
 
             except ValueError:
                 print("Can't convert name to string")
-
-        # check if another zone with same name exists
-        tz_names = [tz._name for tz in self.parent.thermal_zones[:-1]]
-        if name in tz_names:
-            for i in itertools.count(start=1):
-                name_add = name + "_" + str(i)
-                if name_add not in tz_names:
-                    name = name_add
-                    break
-        self._name = name
 
     @property
     def outer_walls(self):
