@@ -98,26 +98,6 @@ class UseConditions(object):
         length, TEASER will multiplicate this list for one whole year.
         AixLib: Used for internal gains profile on top-level
         Annex: Used for internal gains
-    adjusted_opening_times: list
-        Sets the first and last hour of opening. These will cut or extend the
-        existing profiles (machines, lights, persons).
-        [opening_hour, closing_hour]
-    first_saturday_of_year: int
-        weekday number of first saturday of the year [1:monday;7:tuesday].
-        Is needed to calc which days of profile should be reduced by
-        profiles_weekend_factor.
-    profiles_weekend_factor: float
-        Factor to scale the existing profiles on weekends. For a reduction use
-        values between [0;1]. Increase is also possible.
-    set_back_times: list
-        Sets the first and last hour outside of which the offset is applied.
-         List of two integers [first_hour, last_hour]
-    heating_set_back: float [K]
-        Set back temperature offset for heating profile. Positive (+) values
-         increase the profile, negative (-) decrease.
-    cooling_set_back: float [K]
-        Set back temperature offset for cooling profile. Positive (+) values
-        increase the profile, negative (-) decrease.
     machines: float [W/m2]
         area specific eletrical load of machines per m2. This value is taken
         from SIA 2024 and DIN V 18599-10 for medium occupancy.
@@ -201,9 +181,37 @@ class UseConditions(object):
         aligned to :cite:`DINV1859910`.
     schedules: pandas.DataFrame
         All time dependent boundary attributes in one pandas DataFrame, used
-        for export (one year in hourly timestep.)
+        for export (one year in hourly timestamps.) Derived from json.
+        Schedules can be adjusted by setting the following parameters:
+          - adjusted_opening_times
+          - first_saturday_of_year
+          - profiles_weekend_factor
+          - set_back_times
+          - heating_set_back
+          - cooling_set_back
+        To take adjustments into account you need to call calc_schedules()
+        function afterwards.
         Note: python attribute, not customizable by user (derived from Json)
-
+    adjusted_opening_times: list
+        Sets the first and last hour of opening. These will cut or extend the
+        existing profiles (machines, lights, persons).
+        [opening_hour, closing_hour]
+    first_saturday_of_year: int
+        weekday number of first saturday of the year [1:monday;7:tuesday].
+        Is needed to calc which days of profile should be reduced by
+        profiles_weekend_factor.
+    profiles_weekend_factor: float
+        Factor to scale the existing profiles on weekends. For a reduction use
+        values between [0;1]. Increase is also possible.
+    set_back_times: list
+        Sets the first and last hour outside of which the offset is applied.
+         List of two integers [first_hour, last_hour]
+    heating_set_back: float [K]
+        Set back temperature offset for heating profile. Positive (+) values
+         increase the profile, negative (-) decrease.
+    cooling_set_back: float [K]
+        Set back temperature offset for cooling profile. Positive (+) values
+        increase the profile, negative (-) decrease.
 
     """
 
@@ -633,10 +641,36 @@ class UseConditions(object):
                 "but length is {len(value)}"
             )
 
-    def calc_schedules(self):
-        """return function for schedules property. When called the profiles get
-        adjusted due to specified conditions and afterwards moved into a
-        pandas dataframe with 8760 h.
+    @property
+    def schedules(self):
+        self._schedules = pd.DataFrame(
+            index=pd.date_range("2019-01-01 00:00:00", periods=8760,
+                                freq="H").to_series().dt.strftime(
+                "%m-%d %H:%M:%S"),
+            data={
+                "heating_profile": list(
+                    islice(cycle(self._heating_profile), 8760)),
+                "cooling_profile": list(
+                    islice(cycle(self._cooling_profile), 8760)),
+                "persons_profile": list(
+                    islice(cycle(self._persons_profile), 8760)),
+                "lighting_profile": list(
+                    islice(cycle(self._lighting_profile), 8760)),
+                "machines_profile": list(
+                    islice(cycle(self._machines_profile), 8760)),
+            },
+        )
+        return self._schedules
+
+    @schedules.setter
+    def schedules(self, value):
+        self._schedules = value
+
+    def calc_adj_schedules(self):
+        """calculates adjusted schedules for use conditions. When called the
+        profiles get adjusted due to specified conditions. Afterwards the
+        existing schedules will be overwritten by the resulting pandas dataframe
+        with 8760 h.
 
         """
         if self.adjusted_opening_times:
@@ -673,24 +707,6 @@ class UseConditions(object):
                 else:
                     cooling_profile.append(value)
             self._cooling_profile = cooling_profile
-
-        self._schedules = pd.DataFrame(
-            index=pd.date_range("2019-01-01 00:00:00", periods=8760,
-                                freq="H").to_series().dt.strftime(
-                "%m-%d %H:%M:%S"),
-            data={
-                "heating_profile": list(
-                    islice(cycle(self._heating_profile), 8760)),
-                "cooling_profile": list(
-                    islice(cycle(self._cooling_profile), 8760)),
-                "persons_profile": list(
-                    islice(cycle(self._persons_profile), 8760)),
-                "lighting_profile": list(
-                    islice(cycle(self._lighting_profile), 8760)),
-                "machines_profile": list(
-                    islice(cycle(self._machines_profile), 8760)),
-            },
-        )
 
     @property
     def adjusted_opening_times(self):
