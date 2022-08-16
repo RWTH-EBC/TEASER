@@ -39,7 +39,9 @@ class OuterWall(Wall):
         Determines the building age period that this building
         element belongs to [begin, end], e.g. [1984, 1994]
     area : float [m2]
-        Area of building element
+        Area of building element. This is always the net area (without windows).
+        Windows will be handled separately. See also merge_windows_calc
+        documentation in project.py.
     tilt : float [degree]
         Tilt against horizontal, default is 90.0
     orientation : float [degree]
