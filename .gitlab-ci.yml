@@ -7,7 +7,7 @@ test3.6-subset:
     - pip install --only-binary=numpy,scipy numpy scipy
     - pip install pyxb
     - pip install pytest
-    - pip install PyGithub==1.39
+    - pip install PyGithub==1.55
     - pip install flake8==3.4.1
     - pip install -e .
     - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests,.eggs --max-line-length=120
@@ -24,7 +24,7 @@ test3.6-full:
     - pip install --only-binary=numpy,scipy numpy scipy
     - pip install pyxb
     - pip install pytest
-    - pip install PyGithub==1.39
+    - pip install PyGithub==1.55
     - pip install flake8==3.4.1
     - pip install -e .
     - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests,.eggs --max-line-length=120
@@ -39,7 +39,7 @@ test3.7:
     - pip install --only-binary=numpy,scipy numpy scipy
     - pip install pyxb
     - pip install pytest
-    - pip install PyGithub==1.39
+    - pip install PyGithub==1.55
     - pip install flake8==3.4.1
     - pip install -e .
     - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests,.eggs --max-line-length=120
