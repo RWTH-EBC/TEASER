@@ -149,8 +149,8 @@ class Test_useconditions(object):
         prj.set_default()
         helptest.building_test2(prj)
         use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
-        use_cond.adjusted_opening_times = [10, 15]
         profile_before = use_cond.machines_profile
+        use_cond.adjusted_opening_times = [10, 15]
         use_cond.calc_adj_schedules()
         schedules = use_cond.schedules
         profile_after = use_cond.machines_profile
@@ -164,9 +164,9 @@ class Test_useconditions(object):
         prj.set_default()
         helptest.building_test2(prj)
         use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
+        profile_before = use_cond.machines_profile
         use_cond.first_saturday_of_year = 4
         use_cond.profiles_weekend_factor = 0.4
-        profile_before = use_cond.machines_profile
         use_cond.calc_adj_schedules()
         schedules = use_cond.schedules
         profile_after = use_cond.machines_profile
@@ -182,11 +182,11 @@ class Test_useconditions(object):
         prj.set_default()
         helptest.building_test2(prj)
         use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
+        profile_heating_before = use_cond.heating_profile
+        profile_cooling_before = use_cond.cooling_profile
         use_cond.set_back_times = [5, 22]
         use_cond.heating_set_back = -2
         use_cond.cooling_set_back = 3
-        profile_heating_before = use_cond.heating_profile
-        profile_cooling_before = use_cond.cooling_profile
         use_cond.calc_adj_schedules()
         schedules = use_cond.schedules
         profile_heating_after = use_cond.heating_profile
