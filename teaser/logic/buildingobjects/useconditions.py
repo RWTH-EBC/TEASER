@@ -197,7 +197,7 @@ class UseConditions(object):
         existing profiles (machines, lights, persons).
         [opening_hour, closing_hour]
     first_saturday_of_year: int
-        weekday number of first saturday of the year [1:monday;7:tuesday].
+        Weekday number of first saturday of the year [1:monday;7:tuesday].
         Is needed to calc which days of profile should be reduced by
         profiles_weekend_factor.
     profiles_weekend_factor: float
