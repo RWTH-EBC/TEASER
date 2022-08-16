@@ -633,8 +633,7 @@ class UseConditions(object):
                 "but length is {len(value)}"
             )
 
-    @property
-    def schedules(self):
+    def calc_schedules(self):
         """return function for schedules property. When called the profiles get
         adjusted due to specified conditions and afterwards moved into a
         pandas dataframe with 8760 h.
@@ -692,11 +691,6 @@ class UseConditions(object):
                     islice(cycle(self._machines_profile), 8760)),
             },
         )
-        return self._schedules
-
-    @schedules.setter
-    def schedules(self, value):
-        self._schedules = value
 
     @property
     def adjusted_opening_times(self):

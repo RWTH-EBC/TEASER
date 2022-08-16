@@ -151,13 +151,13 @@ class Test_useconditions(object):
         use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
         use_cond.adjusted_opening_times = [10, 15]
         profile_before = use_cond.machines_profile
-        schedules = use_cond.schedules  # calc schedules
+        use_cond.calc_schedules()
         profile_after = use_cond.machines_profile
         assert (profile_after[8] != profile_before[8])
         assert (profile_after[7] != profile_before[7])
         assert (profile_after[9] == profile_before[9])
         assert (profile_after[8] == 0.0)
-        assert (isinstance(schedules, pd.DataFrame))
+        assert (isinstance(use_cond._schedules, pd.DataFrame))
 
     def test_profile_adjust_weekend_profiles(self):
         prj.set_default()
@@ -166,7 +166,7 @@ class Test_useconditions(object):
         use_cond.first_saturday_of_year = 4
         use_cond.profiles_weekend_factor = 0.4
         profile_before = use_cond.machines_profile
-        schedules = use_cond.schedules  # calc schedules
+        use_cond.calc_schedules()
         profile_after = use_cond.machines_profile
         assert (profile_after[81] != profile_before[9])
         assert (profile_after[105] != profile_before[9])
@@ -174,7 +174,7 @@ class Test_useconditions(object):
             profile_after[105]
             == profile_before[9] * use_cond.profiles_weekend_factor
         )
-        assert (isinstance(schedules, pd.DataFrame))
+        assert (isinstance(use_cond._schedules, pd.DataFrame))
 
     def test_profile_setback(self):
         prj.set_default()
@@ -185,7 +185,7 @@ class Test_useconditions(object):
         use_cond.cooling_set_back = 3
         profile_heating_before = use_cond.heating_profile
         profile_cooling_before = use_cond.cooling_profile
-        schedules = use_cond.schedules  # calc schedules
+        use_cond.calc_schedules()
         profile_heating_after = use_cond.heating_profile
         profile_cooling_after = use_cond.cooling_profile
         assert (profile_heating_after[4] != profile_heating_before[4])
@@ -198,6 +198,4 @@ class Test_useconditions(object):
                 profile_cooling_after[4]
                 == profile_cooling_before[4] + use_cond.cooling_set_back
         )
-        assert (isinstance(schedules, pd.DataFrame))
-
-
+        assert (isinstance(use_cond._schedules, pd.DataFrame))
