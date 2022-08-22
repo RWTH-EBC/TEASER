@@ -50,8 +50,8 @@ class SwimmingPool(NonResidential):
     number_of_floors : int
         Number of building's floors above ground
     net_leased_area : float [m2]
-        For the swimming pool, this parameter stores the total water area within
-        the swimming pool building, unlike other building types.
+        For the swimming pool, this parameter stores the TOTAL WATER AREA 
+        within the swimming pool building, unlike other building types.
     with_ahu : Boolean
         If set to True, an empty instance of BuildingAHU is instantiated and
         assigned to attribute central_ahu. This instance holds information for
@@ -73,28 +73,32 @@ class SwimmingPool(NonResidential):
 
     Important!
     ----------
-    All variable attributes for the swimming pool zones and its 
-    pools are stored within the dictionary "poolsInDict". This dictionary contains 
-    information on all zones and pools within swimming hall. The respective zone 
-    or pool is indicated with the first key (e.g. "Zone 4", "Swimmer pool" etc.). 
-    The second key stores the attributes like area and volume. To refer to an
-    attribute, indicate the pool name/type on the first and the respective attribute 
-    on the second position. To create several pools of the same type, add a number
-    behind the pool name. The name itself can't be changed. Attributes that are
-    false or true have to be written as string!
+    All variable attributes for the swimming pool zones and its pools are 
+    stored within the dictionary "poolsInDict". This dictionary contains 
+    information on all zones and pools within the swimming pool building. 
+    The respective zone or pool is indicated with the first key (e.g. "Zone 4", 
+    "Swimmer pool" etc.). The second key stores the attributes like the area 
+    or volume of a zone/pool. To refer to an attribute, indicate the pool 
+    name/type at the first and the respective attribute at the second position. 
+    To create several pools of the same type, add a number behind the pool 
+    name. The name itself can't be changed. Attributes that are False or True 
+    have to be written as string in small letters (convention for Modelica)!
+    
     Examples:
-    poolsInDict["Freeform pool"]["Night setback"] = "false",
-    poolsInDict["Swimmer pool 2"]["Water area"] = 450,
+    poolsInDict["Freeform_pool"]["Night setback"] = "false",
+    poolsInDict["Swimmer_pool"]["Water area"] = 450,
     poolsInDict["Zone 1"]["Air volume"] = 3000    
-    The listed attributes are just the ones that are set by the user.
-    Calculated values are not included in this list. Changing these values is
-    expert mode. Example 11 provides further information on this
+    
+    The listed attributes are just the ones that are set (optional) by 
+    the user. Example 11 provides further information on this. 
+    Calculated values are not included in this list. Changing these 
+    values is expert mode. 
     
 
     Attributes for zones
     ----------
 
-    Zones for poolsInDict:
+    Zones for poolsInDict (Designation without SPACE):
         - "Zone 1" # Swimming_hall
         - "Zone 2" # Changing_rooms
         - "Zone 3" # Shower_and_sanitary_rooms
@@ -270,20 +274,21 @@ class SwimmingPool(NonResidential):
         self.zone_area_factors = collections.OrderedDict()
         
         """
-        Creating basic swimming pool building with one pool for beginners and one 
-        for swimmers or only one pool for swimmers, if the water area is not sufficient 
-        for two basic pools. Zone areas and volumes are calculated from the WATER AREA 
-        according to 'Koordinierungskreis Bäder - Richtlinien für den Bäderbau - 2013' 
-        with further adjustments from the project 'Energieeffizienz in Schwimmbädern - 
-        Neubau und Bestand'.
+        Creating basic swimming pool building with one pool for beginners and 
+        one for swimmers or only one pool for swimmers, if the water area is 
+        not sufficient for two basic pools. Zone areas and volumes are 
+        calculated from the WATER AREA according to 'Koordinierungskreis 
+        Bäder - Richtlinien für den Bäderbau - 2013' with further adjustments 
+        from the project 'Energieeffizienz in Schwimmbädern - Neubau und 
+        Bestand'.
         """
         
         print("Calculating framework data for swimming pool:", name)   
         print()          
-        self.poolsInDict = self.createBasicSwimmingPool(self.net_leased_area, True) 
+        self.poolsInDict = self.createBasicSwimmingPool(self.net_leased_area, 
+                                                        True) 
                            
         # Zone designations
-        # Zone 4 is created first to facilitate Modelica calculation
         self.zoneDesignation = dict()        
         self.zoneDesignation["Zone 1"] = "Swimming_hall"
         self.zoneDesignation["Zone 2"] = "Changing_rooms"
@@ -312,22 +317,25 @@ class SwimmingPool(NonResidential):
         self.zoneUseConditions["Zone 5"] = "Meeting, Conference, seminar"
         self.zoneUseConditions["Zone 6"] = "Sauna area"
         self.zoneUseConditions["Zone 7"] = "Gym (without spectator area)"
-        self.zoneUseConditions["Zone 8"] = "Stock, technical equipment, archives"
+        self.zoneUseConditions["Zone 8"] = \
+            "Stock, technical equipment, archives"
 
         
-        # Creating building zones
-        # Zone won't be created if area is 0
+        # Creating dictionary for zone areas and volumes
         for zone in self.zoneDesignation.keys():
             if zone in self.poolsInDict.keys():
                  self.zone_area_factors[self.zoneDesignation[zone]] = \
-                [self.poolsInDict[zone]["Total area of zone (including water area)"], \
+                [self.poolsInDict[zone][
+                    "Total area of zone (including water area)"], \
                  self.poolsInDict[zone]["Air volume"], \
                  self.zoneUseConditions[zone]]
 
 
         # Creating potential building elements
-        # Warning: All the names of the building elements are saved without spaces
-        # in their names!            
+        """
+        Warning: All names of the building elements are saved without 
+        spaces!  
+        """
         # [tilt, orientation]
         
         self.outer_wall_names = {
@@ -353,7 +361,8 @@ class SwimmingPool(NonResidential):
         
         self.ceiling_names = {"Ceiling": [0, -1]}
 
-        self.opening_hours = [0.0] * 7 + [1.0] * 5 + [0.5] + [1.0] * 9 + [0.0] * 3
+        self.opening_hours = [0.0] * 7 + [1.0] * 5 + [0.5] + [1.0] * 9 + \
+            [0.0] * 3
         
         # Default values for AHU from Teaser. Adaptation for swimming pools pending.
         if self.with_ahu is True:
@@ -373,10 +382,9 @@ class SwimmingPool(NonResidential):
 
 
     def generate_archetype(self):
-        """Generates a swimming facility.
+        """
+        Generates a swimming pool building archetype.
 
-        With given values, this class generates an swimming pool archetype building
-        according to TEASER requirements.
         """
 
         # Creates binding for Material data of swimming pools
@@ -410,7 +418,8 @@ class SwimmingPool(NonResidential):
                     zone.use_conditions.cooling_profile = self.poolsInDict[
                         self.zoneDesignation[zone.name]]["Temperature"]
                     zone.use_conditions._cooling_profile = [self.poolsInDict[
-                            self.zoneDesignation[zone.name]]["Temperature"]] * 25
+                            self.zoneDesignation[zone.name]]["Temperature"]] \
+                            * 25
             
             zone.t_inside = self.poolsInDict[self.zoneDesignation[
                 zone.name]]["Temperature"]
@@ -419,8 +428,8 @@ class SwimmingPool(NonResidential):
         self.volume = round(self.volume, 2)
         
         """
-        The following element calculations are part of the teaser office class with
-        adjustments for pools. 
+        The following element calculations are part of the teaser office class 
+        with adjustments for pools. 
         """
  
         # statistical estimation of the facade       
@@ -641,7 +650,7 @@ class SwimmingPool(NonResidential):
         for swimmers. Zone areas and volumes are calculated from the WATER AREA 
         according to 'Koordinierungskreis Bäder - Richtlinien für den Bäderbau - 2013'. 
         Therefore, the NET LEASED AREA is used as WATER AREA. The building contains 
-        the zones 1 - 5 and 7. 
+        the zones 1 - 5 and 8. 
         A correction formular improves the accuracy of the calculation as real swimming 
         pool dimensions differ from the minimum standards. The formular was derivated 
         from data of real swimming pools.
@@ -1082,8 +1091,8 @@ class SwimmingPool(NonResidential):
             sys.exit(exception)
             
         # Default pool data
-        poolsInDict[poolName]["Water volume"] = poolsInDict[poolName]["Average pool depth"] * \
-            poolsInDict[poolName]["Water area"]   
+        poolsInDict[poolName]["Water volume"] = poolsInDict[poolName][
+            "Average pool depth"] * poolsInDict[poolName]["Water area"]   
         poolsInDict[poolName]["Pool temperature"] = 299.15
         poolsInDict[poolName]["Visitor number per hour"] = \
             round(poolsInDict[poolName]["Water area"]**0.58, 0)
