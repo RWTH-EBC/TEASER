@@ -269,6 +269,8 @@ class SwimmingPool(NonResidential):
         self.construction_type = construction_type
         self.number_of_floors = number_of_floors
         self.height_of_floors = height_of_floors
+        if self.year_of_construction > 2015:
+            self.year_of_construction = 2015
 
         # [area factor, volume factor, usage type(has to be set)]
         self.zone_area_factors = collections.OrderedDict()
