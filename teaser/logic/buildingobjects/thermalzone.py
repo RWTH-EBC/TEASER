@@ -101,6 +101,8 @@ class ThermalZone(object):
         self._inner_walls = []
         self._floors = []
         self._ceilings = []
+        self._outer_tabs = []
+        self._inner_tabs = []
         self._use_conditions = None
         self._t_inside = 293.15
         self._t_outside = 261.15
@@ -143,7 +145,6 @@ class ThermalZone(object):
         t_bt : float
             Time constant according to VDI 6007 (default t_bt = 5)
         """
-
         if number_of_elements == 1:
             self.model_attr = OneElement(
                 thermal_zone=self,
@@ -267,6 +268,29 @@ class ThermalZone(object):
         """
         elements = []
         for i in self.ground_floors:
+            if i.orientation == orientation and i.tilt == tilt:
+                elements.append(i)
+            else:
+                pass
+        return elements
+
+    def find_tabs(self, orientation, tilt):
+        """Returns all outer tabs with given orientation and tilt
+        This function returns a list of all OuterTabs elements with the
+        same orientation and tilt.
+        Parameters
+        ----------
+        orientation : float [degree]
+            Azimuth of the desired walls.
+        tilt : float [degree]
+            Tilt against the horizontal of the desired walls.
+        Returns
+        -------
+        elements : list
+            List of OuterTABS instances with desired orientation and tilt.
+        """
+        elements = []
+        for i in self.outer_tabs:
             if i.orientation == orientation and i.tilt == tilt:
                 elements.append(i)
             else:
@@ -438,12 +462,12 @@ class ThermalZone(object):
 
         ass_error_1 = ("building_element has to be an instance of OuterWall,"
                        " Rooftop, GroundFloor, Window, InnerWall, "
-                       "Ceiling or Floor")
+                       "Ceiling, Floor, OuterTABS, InnerTABS")
 
         assert type(building_element).__name__ in (
             "OuterWall", "Rooftop", "GroundFloor",
             "InnerWall", "Ceiling", "Floor",
-            "Window"), ass_error_1
+            "Window", "OuterTABS", "InnerTABS"), ass_error_1
 
         if type(building_element).__name__ == "OuterWall":
             self._outer_walls.append(building_element)
@@ -459,6 +483,10 @@ class ThermalZone(object):
             self._floors.append(building_element)
         elif type(building_element).__name__ == "Window":
             self._windows.append(building_element)
+        elif type(building_element).__name__ == "OuterTABS":
+            self._outer_tabs.append(building_element)
+        elif type(building_element).__name__ == "InnerTABS":
+            self._inner_tabs.append(building_element)
 
     @property
     def parent(self):
@@ -573,6 +601,24 @@ class ThermalZone(object):
 
         if value is None:
             self._windows = []
+
+    @property
+    def inner_tabs(self):
+        return self._inner_tabs
+
+    @inner_tabs.setter
+    def inner_tabs(self, value):
+        if value is None:
+            self._inner_tabs = []
+
+    @property
+    def outer_tabs(self):
+        return self._outer_tabs
+
+    @outer_tabs.setter
+    def outer_tabs(self, value):
+        if value is None:
+            self._outer_tabs = []
 
     @property
     def use_conditions(self):

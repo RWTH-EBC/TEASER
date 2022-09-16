@@ -3255,7 +3255,7 @@
         "name": "cork_raw_120_0deg",
         "density": 120.0,
         "thermal_conduc": 0.041,
-        "heat_capac": 0.0,
+        "heat_capac": 1.0,
         "thickness_default": 0.025,
         "thickness_list": [
             0.01,

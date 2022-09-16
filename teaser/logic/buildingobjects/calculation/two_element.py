@@ -402,6 +402,32 @@ class TwoElement(object):
         self.heat_load_outside_factor = 0.0
         self.heat_load_ground_factor = 0.0
 
+        # external TABS
+        self.r1_ot = 0.0
+        self.r_rest_ot = 0.0
+        self.c1_ot = 0.0
+        self.area_ot = 0.0
+        self.orientation_ot = []
+
+        self.n_ot = 0
+        self.d_ot = []
+        self.rho_ot = []
+        self.lambda_ot = []
+        self.c_ot = []
+
+        # internal TABS
+        self.r1_it = 0.0
+        self.r_rest_it = 0.0
+        self.c1_it = 0.0
+        self.area_it = 0.0
+        self.orientation_it = []
+
+        self.n_it = 0
+        self.d_it = []
+        self.rho_it = []
+        self.lambda_it = []
+        self.c_it = []
+
     def calc_attributes(self):
         """Calls all necessary function to calculate model attributes"""
 
@@ -424,6 +450,14 @@ class TwoElement(object):
         ):
             inner_wall.calc_equivalent_res()
             inner_wall.calc_ua_value()
+
+        for inner_tabs in self.thermal_zone.inner_tabs:
+            inner_tabs.calc_equivalent_res()
+            inner_tabs.calc_ua_value()
+
+        for outer_tabs in self.thermal_zone.outer_tabs:
+            outer_tabs.calc_equivalent_res()
+            outer_tabs.calc_ua_value()
 
         self.set_calc_default()
         if len(outer_walls) < 1:
@@ -470,6 +504,16 @@ class TwoElement(object):
             self._calc_outer_elements()
             self._calc_wf()
             self._calc_mean_values()
+
+        if len(self.thermal_zone.inner_tabs) > 0:
+            self.thermal_zone.use_conditions.ext_tabs.append(False)
+            self.thermal_zone.use_conditions.with_heating = False
+            self._calc_tabs(external=False)
+        if len(self.thermal_zone.outer_tabs) > 0:
+            self.thermal_zone.use_conditions.ext_tabs.append(True)
+            self.thermal_zone.use_conditions.with_heating = False
+            self._calc_tabs(external=True)
+
         self._calc_number_of_elements()
         self._fill_zone_lists()
         self._calc_heat_load()
@@ -599,12 +643,14 @@ class TwoElement(object):
             sum(out_wall.area for out_wall in self.thermal_zone.outer_walls)
             + sum(ground.area for ground in self.thermal_zone.ground_floors)
             + sum(roof.area for roof in self.thermal_zone.rooftops)
+            + sum(tabs.area for tabs in self.thermal_zone.outer_tabs)
         )
 
         self.ua_value_ow = (
             sum(out_wall.ua_value for out_wall in self.thermal_zone.outer_walls)
             + sum(ground.ua_value for ground in self.thermal_zone.ground_floors)
             + sum(roof.ua_value for roof in self.thermal_zone.rooftops)
+            + sum(tabs.ua_value for tabs in self.thermal_zone.outer_tabs)
         )
 
         self.r_total_ow = 1 / self.ua_value_ow
@@ -615,18 +661,22 @@ class TwoElement(object):
             sum(1 / out_wall.r_inner_conv for out_wall in self.thermal_zone.outer_walls)
             + sum(1 / ground.r_inner_conv for ground in self.thermal_zone.ground_floors)
             + sum(1 / roof.r_inner_conv for roof in self.thermal_zone.rooftops)
+            + sum(1 / tabs.r_inner_conv for tabs in self.thermal_zone.outer_tabs)
         )
 
         self.r_rad_inner_ow = 1 / (
             sum(1 / out_wall.r_inner_rad for out_wall in self.thermal_zone.outer_walls)
             + sum(1 / ground.r_inner_rad for ground in self.thermal_zone.ground_floors)
             + sum(1 / roof.r_inner_rad for roof in self.thermal_zone.rooftops)
+            + sum(1 / tabs.r_inner_rad for tabs in self.thermal_zone.outer_tabs)
+
         )
 
         self.r_comb_inner_ow = 1 / (
             sum(1 / out_wall.r_inner_comb for out_wall in self.thermal_zone.outer_walls)
             + sum(1 / ground.r_inner_comb for ground in self.thermal_zone.ground_floors)
             + sum(1 / roof.r_inner_comb for roof in self.thermal_zone.rooftops)
+            + sum(1 / tabs.r_inner_comb for tabs in self.thermal_zone.outer_tabs)
         )
 
         self.ir_emissivity_inner_ow = (
@@ -642,7 +692,11 @@ class TwoElement(object):
                 roof.layer[0].material.ir_emissivity * roof.area
                 for roof in self.thermal_zone.rooftops
             )
-        ) / self.area_ow
+            + sum(
+                tabs.layer[0].material.ir_emissivity * tabs.area
+                for tabs in self.thermal_zone.outer_tabs
+            )
+          ) / self.area_ow
 
         self.alpha_conv_inner_ow = 1 / (self.r_conv_inner_ow * self.area_ow)
         self.alpha_rad_inner_ow = 1 / (self.r_rad_inner_ow * self.area_ow)
@@ -713,12 +767,14 @@ class TwoElement(object):
             sum(in_wall.area for in_wall in self.thermal_zone.inner_walls)
             + sum(floor.area for floor in self.thermal_zone.floors)
             + sum(ceiling.area for ceiling in self.thermal_zone.ceilings)
+            + sum(tabs.area for tabs in self.thermal_zone.inner_tabs)
         )
 
         self.ua_value_iw = (
             sum(in_wall.ua_value for in_wall in self.thermal_zone.inner_walls)
             + sum(floor.ua_value for floor in self.thermal_zone.floors)
             + sum(ceiling.ua_value for ceiling in self.thermal_zone.ceilings)
+            + sum(tabs.ua_value for tabs in self.thermal_zone.inner_tabs)
         )
 
         # values facing the inside of the thermal zone
@@ -727,18 +783,21 @@ class TwoElement(object):
             sum(1 / in_wall.r_inner_conv for in_wall in self.thermal_zone.inner_walls)
             + sum(1 / floor.r_inner_conv for floor in self.thermal_zone.floors)
             + sum(1 / ceiling.r_inner_conv for ceiling in self.thermal_zone.ceilings)
+            + sum(1 / tabs.r_inner_conv for tabs in self.thermal_zone.inner_tabs)
         )
 
         self.r_rad_inner_iw = 1 / (
             sum(1 / in_wall.r_inner_rad for in_wall in self.thermal_zone.inner_walls)
             + sum(1 / floor.r_inner_rad for floor in self.thermal_zone.floors)
             + sum(1 / ceiling.r_inner_rad for ceiling in self.thermal_zone.ceilings)
+            + sum(1 / tabs.r_inner_rad for tabs in self.thermal_zone.inner_tabs)
         )
 
         self.r_comb_inner_iw = 1 / (
             sum(1 / in_wall.r_inner_comb for in_wall in self.thermal_zone.inner_walls)
             + sum(1 / floor.r_inner_comb for floor in self.thermal_zone.floors)
             + sum(1 / ceiling.r_inner_comb for ceiling in self.thermal_zone.ceilings)
+            + sum(1 / tabs.r_inner_comb for tabs in self.thermal_zone.inner_tabs)
         )
 
         self.ir_emissivity_inner_iw = (
@@ -753,6 +812,10 @@ class TwoElement(object):
             + sum(
                 ceiling.layer[0].material.ir_emissivity * ceiling.area
                 for ceiling in self.thermal_zone.ceilings
+            )
+            + sum(
+                tabs.layer[0].material.ir_emissivity * tabs.area
+                for tabs in self.thermal_zone.inner_tabs
             )
         ) / self.area_iw
 
@@ -983,6 +1046,75 @@ class TwoElement(object):
             # more than one outer wall, calculate chain matrix
             self.r1_iw, self.c1_iw = self._calc_parallel_connection(inner_walls, omega)
 
+    def _calc_tabs(self, external: bool):
+        """Lumped parameter for tabs elements
+
+        Calculates all necessary parameters for tabs.
+        Attributes
+        ----------
+        omega : float [1/s]
+            angular frequency with given time period.
+        tabs : list
+            List containing all TEASER TABS instances that are treated as same
+            inner tabs type.
+        """
+        if external:
+            tabs_list = self.thermal_zone.outer_tabs
+        else:
+            tabs_list = self.thermal_zone.inner_tabs
+
+        area = sum(tabs.area for tabs in tabs_list)
+        orientation = list(set(tabs.orientation for tabs in tabs_list))
+        omega = 2 * math.pi / 86400 / 7
+        if 0 < len(tabs_list) <= 1:
+            # only one outer wall, no need to calculate chain matrix
+            r1 = tabs_list[0].r1
+            c1 = tabs_list[0].c1_korr
+        elif len(tabs_list) > 1:
+            # more than one outer wall, calculate chain matrix
+            r1, c1 = self._calc_parallel_connection(tabs_list, omega)
+        conduction = 1 / sum(
+            (1 / element.r_conduc) for element in tabs_list
+        )
+        r_rest = conduction - r1
+        # record functions
+        tabs_layers = tabs_list[0].layer
+        # layers checkpoint
+        for tabs in tabs_list[1:]:
+            for i, j in zip(tabs.layer, tabs_layers):
+                if not (i.material.material_id == j.material.material_id and i.thickness == j.thickness):
+                    warnings.warn(
+                        "For thermal zone "
+                        + self.thermal_zone.name
+                        + " in building "
+                        + self.thermal_zone.parent.name
+                        + ", two different types of external tabs have been defined,"
+                          "only the first type is taken into account."
+                    )
+        n = 0
+        d = []
+        rho = []
+        lambda_t = []
+        c = []
+        for layer in tabs_layers:
+            n += 1
+            d.append(layer.thickness)
+            rho.append(layer.material.density)
+            lambda_t.append(layer.material.thermal_conduc)
+            c.append(layer.material.heat_capac * 1000)
+
+        suffix = 'ot' if external else 'it'
+        setattr(self, 'area_%s' % suffix, area)
+        setattr(self, 'orientation_%s' % suffix, orientation)
+        setattr(self, 'r1_%s' % suffix, r1)
+        setattr(self, 'c1_%s' % suffix, c1)
+        setattr(self, 'r_rest_%s' % suffix, r_rest)
+        setattr(self, 'n_%s' % suffix, n)
+        setattr(self, 'd_%s' % suffix, d)
+        setattr(self, 'rho_%s' % suffix, rho)
+        setattr(self, 'lambda_%s' % suffix, lambda_t)
+        setattr(self, 'c_%s' % suffix, c)
+
     def _calc_wf(self):
         """Weightfactors for outer elements(walls, roof, ground floor, windows)
 
@@ -1001,6 +1133,7 @@ class TwoElement(object):
             self.thermal_zone.outer_walls
             + self.thermal_zone.ground_floors
             + self.thermal_zone.rooftops
+            + self.thermal_zone.outer_tabs
         )
 
         if self.merge_windows is True:
@@ -1011,9 +1144,8 @@ class TwoElement(object):
             for win in self.thermal_zone.windows:
                 win.wf_out = win.ua_value / (self.ua_value_ow + self.ua_value_win)
 
-            self.weightfactor_ground = sum(
-                gf.wf_out for gf in self.thermal_zone.ground_floors
-            )
+            self.weightfactor_ground = sum(gf.wf_out for gf in self.thermal_zone.ground_floors) \
+                                        + sum(tabs.wf_out for tabs in self.thermal_zone.outer_tabs)
 
         elif self.merge_windows is False:
 
@@ -1023,9 +1155,8 @@ class TwoElement(object):
             for win in self.thermal_zone.windows:
                 win.wf_out = win.ua_value / self.ua_value_win
 
-            self.weightfactor_ground = sum(
-                gf.wf_out for gf in self.thermal_zone.ground_floors
-            )
+            self.weightfactor_ground = sum(gf.wf_out for gf in self.thermal_zone.ground_floors) \
+                                       + sum(tabs.wf_out for tabs in self.thermal_zone.outer_tabs)
 
         else:
             raise ValueError("specify merge window method correctly")
@@ -1061,6 +1192,7 @@ class TwoElement(object):
             + self.thermal_zone.ground_floors
             + self.thermal_zone.rooftops
             + self.thermal_zone.windows
+            + self.thermal_zone.outer_tabs
         )
 
         tilt_orient = []
@@ -1081,6 +1213,7 @@ class TwoElement(object):
             + self.thermal_zone.rooftops
             + self.thermal_zone.windows
             + self.thermal_zone.ground_floors
+            + self.thermal_zone.outer_tabs
         )
 
         tilt_orient = []
@@ -1094,14 +1227,15 @@ class TwoElement(object):
             ) + self.thermal_zone.find_rts(i[0], i[1])
             wins = self.thermal_zone.find_wins(i[0], i[1])
             gf = self.thermal_zone.find_gfs(i[0], i[1])
+            tabs = self.thermal_zone.find_tabs(i[0], i[1])
 
             if self.merge_windows is True:
                 self.facade_areas.append(
-                    sum([element.area for element in (wall_rt + wins + gf)])
+                    sum([element.area for element in (wall_rt + wins + gf + tabs)])
                 )
             else:
                 self.facade_areas.append(
-                    sum([element.area for element in (wall_rt + gf)])
+                    sum([element.area for element in (wall_rt + gf + tabs)])
                 )
 
             self.orientation_facade.append(i[0])
@@ -1109,13 +1243,14 @@ class TwoElement(object):
 
             if not wall_rt:
 
-                if not gf:
+                if not gf and not tabs:
                     self.weightfactor_ow.append(0.0)
                     self.outer_wall_areas.append(0.0)
                 else:
                     self.weightfactor_ow.append(0.0)
                     self.outer_wall_areas.append(
-                        (sum([element.area for element in gf]))
+                        (sum([element.area for element in gf])
+                         + sum([element.area for element in tabs]))
                     )
             else:
                 self.weightfactor_ow.append(sum([wall.wf_out for wall in wall_rt]))
@@ -1172,9 +1307,9 @@ class TwoElement(object):
             UA Value of all GroundFloors
         """
         self.heat_load = 0.0
-        ua_value_gf_temp = sum(
-            ground.ua_value for ground in self.thermal_zone.ground_floors
-        )
+        ua_value_gf_temp = sum(ground.ua_value for ground in self.thermal_zone.ground_floors) \
+                           + sum(tabs.ua_value for tabs in self.thermal_zone.outer_tabs)
+
         ua_value_ow_temp = self.ua_value_ow - ua_value_gf_temp
         self.heat_load_outside_factor = (
             (ua_value_ow_temp + self.ua_value_win)
@@ -1317,3 +1452,27 @@ class TwoElement(object):
         self.orientation_facade = []
         self.heat_load = 0.0
         self.cool_load = 0.0
+
+        # external TABS
+        self.r1_ot = 0.0
+        self.r_rest_ot = 0.0
+        self.c1_ot = 0.0
+        self.area_ot = 0.0
+
+        self.n_ot = 0
+        self.d_ot = []
+        self.rho_ot = []
+        self.lambda_ot = []
+        self.c_ot = []
+
+        # internal TABS
+        self.r1_it = 0.0
+        self.r_rest_it = 0.0
+        self.c1_it = 0.0
+        self.area_it = 0.0
+
+        self.n_it = 0
+        self.d_it = []
+        self.rho_it = []
+        self.lambda_it = []
+        self.c_it = []

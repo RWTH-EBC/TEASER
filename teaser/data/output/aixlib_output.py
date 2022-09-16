@@ -82,6 +82,10 @@ def export_multizone(buildings, prj, path=None, use_postprocessing_calc=False):
             "data/output/modelicatemplate/AixLib"
             "/AixLib_ThermalZoneRecord_FourElement"),
         lookup=lookup)
+    tabs_template = Template(
+        filename=utilities.get_full_path(
+            "data/output/modelicatemplate/AixLib/AixLib_TABS"),
+        lookup=lookup)
     model_template = Template(
         filename=utilities.get_full_path(
             "data/output/modelicatemplate/AixLib/AixLib_Multizone"),
@@ -166,9 +170,9 @@ def export_multizone(buildings, prj, path=None, use_postprocessing_calc=False):
         _help_test_script(bldg, dir_dymola, test_script_template)
 
         zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
+        tabs_package = []
 
         for zone in bldg.thermal_zones:
-
             with open(utilities.get_full_path(os.path.join(
                     zone_path,
                     bldg.name + '_' + zone.name + '.mo')), 'w') as out_file:
@@ -176,11 +180,24 @@ def export_multizone(buildings, prj, path=None, use_postprocessing_calc=False):
                     out_file.write(zone_template_1.render_unicode(zone=zone))
                 elif type(zone.model_attr).__name__ == "TwoElement":
                     out_file.write(zone_template_2.render_unicode(zone=zone))
+                    if zone.model_attr.area_ot > 0:
+                        with open(utilities.get_full_path(os.path.join(
+                                zone_path,
+                                bldg.name + '_' + zone.name + '_upperTABS' + '.mo')), 'w') as out_file:
+                            out_file.write(tabs_template.render_unicode(zone=zone, external=True))
+                            out_file.close()
+                        tabs_package.append(zone.name + '_upperTABS')
+                    if zone.model_attr.area_it > 0:
+                        with open(utilities.get_full_path(os.path.join(
+                                zone_path,
+                                bldg.name + '_' + zone.name + '_upperTABS_int' + '.mo')), 'w') as out_file:
+                            out_file.write(tabs_template.render_unicode(zone=zone, external=False))
+                            out_file.close()
+                        tabs_package.append(zone.name + '_upperTABS_int')
                 elif type(zone.model_attr).__name__ == "ThreeElement":
                     out_file.write(zone_template_3.render_unicode(zone=zone))
                 elif type(zone.model_attr).__name__ == "FourElement":
                     out_file.write(zone_template_4.render_unicode(zone=zone))
-
                 out_file.close()
 
         _help_package(
@@ -189,7 +206,7 @@ def export_multizone(buildings, prj, path=None, use_postprocessing_calc=False):
             within=prj.name + '.' + bldg.name)
         _help_package_order(
             path=zone_path,
-            package_list=bldg.thermal_zones,
+            package_list=bldg.thermal_zones + tabs_package,
             addition=bldg.name + "_",
             extra=None)
 
