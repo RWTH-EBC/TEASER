@@ -1,6 +1,6 @@
 # created June 2015
 # by TEASER4 Development Team
-
+import warnings
 
 from teaser.logic.buildingobjects.buildingphysics.wall \
     import Wall
@@ -116,6 +116,99 @@ class OuterWall(Wall):
         self._inner_radiation = 5.0
         self._outer_convection = 20.0
         self._outer_radiation = 5.0
+
+    def retrofit_wall(self, retrofit_type, material=None):
+        """Retrofits wall to German refurbishment standards.
+
+        This function adds an additional layer of insulation and sets the
+        thickness of the layer according to the retrofit standard in the
+        year of refurbishment. Refurbishment year must be newer then 1977
+
+        Note: To Calculate thickness and U-Value, the standard TEASER
+        coefficients for outer and inner heat transfer are used.
+
+        The used Standards are namely the Waermeschutzverordnung (WSVO) and
+        Energieeinsparverordnung (EnEv)
+
+        Parameters
+        ----------
+        material : string
+            Type of material, that is used for insulation
+        year_of_retrofit : int
+            Year of the retrofit of the wall/building
+
+        """
+        self.set_calc_default()
+        self.calc_ua_value()
+
+        if material is None:
+            material = "EPS_perimeter_insulation_top_layer"
+        else:
+            pass
+
+        calc_u = None
+
+        if retrofit_type == 'WSVO 1977':
+            calc_u = 1.06
+        elif retrofit_type == 'WSVO 1982':
+            calc_u = 0.6
+        elif retrofit_type == 'WSVO 1995':
+            calc_u = 0.5
+        elif retrofit_type == 'EnEV 2002':
+            calc_u = 0.45
+        elif retrofit_type == 'EnEV 2009':
+            calc_u = 0.24
+        # 70 % of GEG Reference building
+        elif retrofit_type == 'KfW Effizienzhaus 55':
+            calc_u = 0.196
+        # 55 % of GEG Reference building
+        elif retrofit_type == 'KfW Effizienzhaus 40':
+            calc_u = 0.154
+
+        self.set_insulation(material, calc_u, retrofit_type)
+
+    def set_insulation(self, material, calc_u, retrofit_type):
+        if calc_u:
+            if self.u_value < calc_u:
+                warnings.warn(f'No retrofit needed for {self.name} as u value '
+                              f'is already lower than needed.')
+            else:
+                self.insulate_wall(material)
+                self.set_ins_layer_thickness(calc_u)
+        else:
+            warnings.warn(f'No fitting retrofit type found for {retrofit_type}')
+
+
+    def set_ins_layer_thickness(self, calc_u):
+        """Sets the thickness of the fresh insulated layer from retrofit"""
+        r_conduc_rem = 0
+        for count_layer in self.layer[:-1]:
+            r_conduc_rem += (count_layer.thickness /
+                         count_layer.material.thermal_conduc)
+
+        lambda_ins = self.layer[-1].material.thermal_conduc
+
+        d_ins = (1 /
+                 calc_u - self.r_outer_comb - self.r_inner_comb - r_conduc_rem)\
+                * lambda_ins
+        self.layer[-1].thickness = d_ins
+        self.layer[-1].id = len(self.layer)
+
+            # old original (not correct)
+            # for count_layer in self.layer[:-1]:
+            #     r_conduc += (count_layer.thickness /
+            #                  count_layer.material.thermal_conduc)
+            #
+            #     self.layer[-1].thickness = \
+            #         (((
+            #                   1 - calc_u * self.r_inner_comb - calc_u *
+            #                   self.r_outer_comb) /
+            #           calc_u) * self.area - r_conduc) * \
+            #         self.layer[-1].material.thermal_conduc
+            #
+            #     self.layer[-1].id = len(self.layer)
+            #
+            # print(self.layer[-1].thickness)
 
     @property
     def parent(self):

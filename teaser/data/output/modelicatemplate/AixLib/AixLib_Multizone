@@ -56,10 +56,11 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
   dpAHU_sup=800,
   dpAHU_eta=800,
 % endif
-  zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
-           intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
-           (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
-           der_T(fixed=true))))),
+  zone(ROM(extWallRC(thermCapExt),
+           intWallRC(thermCapInt),floorRC
+           (thermCapExt),roofRC(thermCapExt))),
+   redeclare model thermalZone =
+        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped,
    redeclare model corG =
         AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane,
 % if bldg.central_ahu:
@@ -73,8 +74,8 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam=Modelica.Utilities.Files.loadResource(
-        "modelica://${bldg.parent.name}/${bldg.parent.weather_file_name}"))
+    filNam=ModelicaServices.ExternalReferences.loadResource(
+      "${weather.replace("\\", "/")}"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-82,30},{-62,50}})));
 
@@ -84,7 +85,8 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     tableName="Internals",
     fileName=Modelica.Utilities.Files.loadResource(
         "modelica://${bldg.parent.name}/${bldg.name}/${bldg.library_attr.file_internal_gains}"),
-    columns=2:${(3*len(bldg.thermal_zones))+1})
+    columns=2:${(3*len(bldg.thermal_zones))+1},
+    startTime=${modelica_info.simulation_start} - ${modelica_info.weekday}*86400)
     "Profiles for internal gains"
     annotation (Placement(transformation(extent={{72,-42},{56,-26}})));
 
@@ -118,6 +120,22 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
       "Set points for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
 
+% if bldg.with_dhw:
+  Modelica.Blocks.Sources.CombiTimeTable tableDHW(
+    tableOnFile=true,
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    tableName="dhw_power",
+    fileName=Modelica.Utilities.Files.loadResource(
+        "modelica://${bldg.parent.name}/${bldg.name}/dhw_profile.csv"),
+    columns=2:size(tableDHW.table, 2))
+    "Boundary conditions for air handling unit"
+    annotation (Placement(transformation(extent={{-60,-60},{-40,-40}})));
+  Modelica.Blocks.Continuous.Integrator DHWEnergy
+    annotation (Placement(transformation(extent={{-20,-60},{0,-40}})));
+% else:
+
+% endif
+
 % if use_postprocessing_calc:
   AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.MultizonePostProcessing
     multizonePostProcessing(
@@ -145,6 +163,14 @@ equation
 
   connect(tableTSetCool.y, multizone.TSetCool) annotation (Line(points={{55.2,-58},
           {36.8,-58},{36.8,-9}}, color={0,0,127}));
+
+% if bldg.with_dhw:
+  connect(tableDHW.y[1], DHWEnergy.u)
+    annotation (Line(points={{-39,-50},{-22,-50}}, color={0,0,127}));
+% else:
+
+% endif
+
 
 % if use_postprocessing_calc:
   connect(multizone.TAir, multizonePostProcessing.TAir) annotation (Line(points={{51,4.95},
@@ -181,7 +207,12 @@ equation
       Tolerance=0.0001,
       __Dymola_Algorithm="${modelica_info.current_solver}"),
       __Dymola_experimentSetupOutput(equidistant=${get_true_false(modelica_info.equidistant_output)},
+      states=false,
+      derivatives=false,
+      inputs=false,
+      auxiliaries=true,
       events=${get_true_false(modelica_info.results_at_events)}),
+      __Dymola_selections={Selection(name="BuildingSimulationOutputs", match= {MatchVariable(name="*multizone.TAir*|*multizone.TRad*|*multizone.Pel*|*multizone.PHeatAHU*|*multizone.PCoolAHU*|*multizone.PHeater*|*multizone.PCooler*|*.airCurtainSimplyfied.powerOut*", newName="Forces.%path%")})},
       __Dymola_Commands(file=
         "Resources/Scripts/Dymola/${bldg.name}/${bldg.name}.mos"
       "Simulate and Plot"),

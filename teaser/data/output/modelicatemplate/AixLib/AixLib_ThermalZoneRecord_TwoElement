@@ -63,7 +63,7 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     ratioConvectiveHeatPeople = ${zone.use_conditions.ratio_conv_rad_persons},
     internalGainsMachinesSpecific = ${zone.use_conditions.machines},
     ratioConvectiveHeatMachines = ${zone.use_conditions.ratio_conv_rad_machines},
-    lightingPowerSpecific = ${zone.use_conditions.lighting_power},
+    lightingPowerSpecific = ${zone.use_conditions.lighting_power_el},
     ratioConvectiveHeatLighting = ${zone.use_conditions.ratio_conv_rad_lighting},
     useConstantACHrate = ${get_true_false(zone.use_conditions.use_constant_infiltration)},
     baseACH = ${zone.use_conditions.infiltration_rate},

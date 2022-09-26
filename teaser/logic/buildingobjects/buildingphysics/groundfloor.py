@@ -115,3 +115,53 @@ class GroundFloor(OuterWall):
         self._inner_radiation = 5.0
         self._outer_convection = None
         self._outer_radiation = None
+
+    def retrofit_wall(self, retrofit_type, material=None):
+        """Retrofits wall to German refurbishment standards.
+
+        This function adds an additional layer of insulation and sets the
+        thickness of the layer according to the retrofit standard in the
+        year of refurbishment. Refurbishment year must be newer then 1977
+
+        Note: To Calculate thickness and U-Value, the standard TEASER
+        coefficients for outer and inner heat transfer are used.
+
+        The used Standards are namely the Waermeschutzverordnung (WSVO) and
+        Energieeinsparverordnung (EnEv)
+
+        Parameters
+        ----------
+        material : string
+            Type of material, that is used for insulation
+        year_of_retrofit : int
+            Year of the retrofit of the wall/building
+
+        """
+        self.set_calc_default()
+        self.calc_ua_value()
+
+        if material is None:
+            material = "EPS_perimeter_insulation_top_layer"
+        else:
+            pass
+
+        calc_u = None
+
+        if retrofit_type == 'WSVO 1977':
+            calc_u = 0.8
+        elif retrofit_type == 'WSVO 1982':
+            calc_u = 0.7
+        elif retrofit_type == 'WSVO 1995':
+            calc_u = 0.5
+        elif retrofit_type == 'EnEV 2002':
+            calc_u = 0.4
+        elif retrofit_type == 'EnEV 2009':
+            calc_u = 0.3
+        # 70 % of GEG Reference building
+        elif retrofit_type == 'KfW Effizienzhaus 55':
+            calc_u = 0.245
+        # 55 % of GEG Reference building
+        elif retrofit_type == 'KfW Effizienzhaus 40':
+            calc_u = 0.193
+
+        self.set_insulation(material, calc_u, retrofit_type)

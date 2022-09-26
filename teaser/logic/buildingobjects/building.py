@@ -116,6 +116,9 @@ class Building(object):
         Classes with specific functions and attributes for building models in
         IBPSA and AixLib. Python classes can be found in calculation package.
 
+    with_dhw : boolean
+        True for exporting and simulating dhw profiles
+
     """
 
     def __init__(
@@ -167,6 +170,8 @@ class Building(object):
 
         self.library_attr = None
 
+        self.with_dhw = False
+    
     def set_outer_wall_area(self, new_area, orientation):
         """Outer area wall setter
 
