@@ -212,12 +212,25 @@ class UseConditions(object):
     cooling_set_back: float [K]
         Set back temperature offset for cooling profile. Positive (+) values
         increase the profile, negative (-) decrease.
+    maintained_illuminance : float [Lx]
+        maintained illuminance value (lx)
+        Currently not used
     lighting_efficiency_lumen: float [lm/W_el]
         lighting efficiency in lm/W_el, in german: Lichtausbeute
     lighting_efficiency: float [W_light/W_el]
         lighting efficiency in light power / electrical power
     lighting_power_el: float [W_el/m2]
         specific electric lighting power per m2
+    v_flow_air_curtain : float [m3/s]
+        volume flow of the air curtain
+    delta_t_air_curtain : float [K]
+        temperature difference over the air curtain
+    eta_air_curtain : float
+        efficiency of the air curtain
+    t_threshold_air_curtain : float [K]
+        threshold of outer temperature when air curtain becomes active
+    air_curtain_power : float [W]
+        thermal power of air curtain
     """
 
     def __init__(self, parent=None):
@@ -269,9 +282,16 @@ class UseConditions(object):
 
         self._with_ideal_thresholds = False
 
+        self.maintained_illuminance = 500.0
         self.lighting_efficiency_lumen = 100  # lighting efficiency in lm/W_el
         self.lighting_efficiency = 0.3  # [W_light/W_el]
         self.lighting_power_el = 5  # [W_el/m2]
+
+        self.v_flow_air_curtain = 0.0
+        self.delta_t_air_curtain = 0.0
+        self.eta_air_curtain = 0.0
+        self.t_threshold_air_curtain = 0.0
+        self.air_curtain_power = 0.0
 
         self._heating_profile = [
             294.15,
@@ -703,15 +723,15 @@ class UseConditions(object):
                 self.set_back_times[0] - 1, self.set_back_times[1] - 1
             heating_profile, cooling_profile = [], []
             for i, value in enumerate(self._heating_profile):
-                if 0 <= i <= set_back_index_morning \
-                        or set_back_index_evening <= i <= 24:
+                if 0 <= i < set_back_index_morning \
+                        or set_back_index_evening < i <= 24:
                     heating_profile.append(value + self.heating_set_back)
                 else:
                     heating_profile.append(value)
             self._heating_profile = heating_profile
             for i, value in enumerate(self._cooling_profile):
-                if 0 <= i <= set_back_index_morning \
-                        or set_back_index_evening <= i <= 24:
+                if 0 <= i < set_back_index_morning \
+                        or set_back_index_evening < i <= 24:
                     cooling_profile.append(value + self.cooling_set_back)
                 else:
                     cooling_profile.append(value)

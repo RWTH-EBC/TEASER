@@ -59,8 +59,6 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
   zone(ROM(extWallRC(thermCapExt),
            intWallRC(thermCapInt),floorRC
            (thermCapExt),roofRC(thermCapExt))),
-   redeclare model thermalZone =
-        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped,
    redeclare model corG =
         AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane,
 % if bldg.central_ahu:
