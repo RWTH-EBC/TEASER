@@ -139,7 +139,7 @@ class AixLib(object):
         time_line = []
 
         if double is True:
-            for i in range(int(duration_profile / time_step)):
+            for i in range(int(duration_profile / time_step)+1):
                 time_line.append([i * time_step])
                 time_line.append([i * time_step])
         else:
@@ -229,6 +229,10 @@ class AixLib(object):
 
                     else:
                         pass
+
+        print(len(time_line))
+        print(time_line)
+        print("test")
 
         scipy.io.savemat(
             path,
@@ -398,6 +402,8 @@ class AixLib(object):
             time.append(profile_min_relative_humidity[i])
             time.append(profile_max_relative_humidity[i])
             time.append(profile_v_flow[i])
+
+        # print(time_line)
 
         ahu_boundary = np.array(time_line)
 
