@@ -13,6 +13,7 @@ from teaser.logic.archetypebuildings.bmvbs.office import Office
 from teaser.logic.archetypebuildings.bmvbs.custom.institute import Institute
 from teaser.logic.archetypebuildings.bmvbs.custom.institute4 import Institute4
 from teaser.logic.archetypebuildings.bmvbs.custom.institute8 import Institute8
+from teaser.logic.archetypebuildings.bmvbs.custom.school import School
 from teaser.logic.archetypebuildings.urbanrenet.est1a import EST1a
 from teaser.logic.archetypebuildings.urbanrenet.est1b import EST1b
 from teaser.logic.archetypebuildings.urbanrenet.est2 import EST2
@@ -287,9 +288,9 @@ class Project(object):
         project. You need to specify the method of the archetype generation.
         Currently TEASER supports only method according to Lichtmess and BMVBS
         for non-residential buildings. Further the type of usage needs to be
-        specified. Currently TEASER supports four different types of
+        specified. Currently TEASER supports five different types of
         non-residential buildings ('office', 'institute', 'institute4',
-        'institute8'). For more information on specific archetype buildings and
+        'institute8', 'school'). For more information on specific archetype buildings and
         methods, please read the docs of archetype classes.
 
         This function also calculates the parameters of the buildings directly
@@ -302,7 +303,7 @@ class Project(object):
             Used archetype method, currently only 'bmvbs' is supported
         usage : str
             Main usage of the obtained building, currently only 'office',
-            'institute', 'institute4', institute8' are supported
+            'institute', 'institute4', institute8', 'school' are supported
         name : str
             Individual name
         year_of_construction : int
@@ -361,8 +362,8 @@ internal_gains_mode: int [1, 2, 3]
 
         ass_error_usage = (
             "only 'office', 'institute', 'institute4', "
-            "'institute8' are valid usages for archetype "
-            "generation"
+            "'institute8', 'school' are valid usages for "
+            "archetype generation"
         )
 
         assert usage in [
@@ -370,6 +371,7 @@ internal_gains_mode: int [1, 2, 3]
             "institute",
             "institute4",
             "institute8",
+            "school",
         ], ass_error_usage
 
         if self.data is None:
@@ -428,6 +430,22 @@ internal_gains_mode: int [1, 2, 3]
         elif usage == "institute8":
 
             type_bldg = Institute8(
+                self,
+                name,
+                year_of_construction,
+                number_of_floors,
+                height_of_floors,
+                net_leased_area,
+                with_ahu,
+                internal_gains_mode,
+                office_layout,
+                window_layout,
+                construction_type,
+            )
+
+        elif usage == "school":
+
+            type_bldg = School(
                 self,
                 name,
                 year_of_construction,
