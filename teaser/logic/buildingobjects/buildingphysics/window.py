@@ -173,11 +173,11 @@ class Window(BuildingElement):
         else:
             pass
 
-        if year_of_retrofit < 1995:
-            year_of_retrofit = 1995
-            warnings.warn("You are using a year of retrofit not supported\
-                    by teaser. We will change your year of retrofit to 1995\
-                    for the calculation. Be careful!")
+        # if year_of_retrofit < 1995:
+        #     year_of_retrofit = 1995
+        #     warnings.warn("You are using a year of retrofit not supported\
+        #             by teaser. We will change your year of retrofit to 1995\
+        #             for the calculation. Be careful!")
 
         self.set_calc_default()
         self.layer = None
