@@ -1,7 +1,7 @@
 from teaser.logic.archetypebuildings.bmvbs.office import Office
 
 
-class School(Office):
+class Kindergarden(Office):
     """Type School Building
     The institute module contains a multi zone building which is based on an
     office building with an additional laboratory zone. The zonal
@@ -16,11 +16,11 @@ class School(Office):
     parameters :cite:`Lauster.2018`.
     In detail the net leased area is divided into the following thermal zone
     areas:
-    #. Class Room (55% of net leased area)
-    #. Corridor (20% of net leased area)
+    #. Group Rooms (40% of net leased area)
+    #. Corridor (30% of net leased area)
     #. Gym (15% of net leased area)
-    #. Library (5% of net leased area)
-    #. Restroom (5% of net leased area)
+    #. Restroom (10% of net leased area)
+    #. Office (10% of net leased area)
     :cite: 'Stuermer.2022'
     Parameters
     ----------
@@ -133,7 +133,7 @@ class School(Office):
         construction_type=None,
     ):
 
-        super(School, self).__init__(
+        super(Kindergarden, self).__init__(
             parent,
             name,
             year_of_construction,
@@ -147,11 +147,11 @@ class School(Office):
             construction_type,
         )
 
-        self.zone_area_factors["Class Room"] = [0.55, "Class room (school), group room (kindergarden)"]
-        self.zone_area_factors["Corridor"] = [0.2, "Traffic area"]
+        self.zone_area_factors["Group Rooms"] = [0.4, "Class room (school), group room (kindergarden)"]
+        self.zone_area_factors["Corridor"] = [0.3, "Traffic area"]
         self.zone_area_factors["Gym"] = [0.15, "Gym (without spectator area)"]
-        self.zone_area_factors["Library"] = [0.05, "Library - reading room"]
-        self.zone_area_factors["Restroom"] = [0.05, "WC and sanitary rooms in non-residential buildings"]
+        self.zone_area_factors["Restroom"] = [0.1, "WC and sanitary rooms in non-residential buildings"]
+        self.zone_area_factors["Office"] = [0.1, "Single office"]
 
         self.est_exponent_wall = 0.8381
         self.est_factor_wall_area = 1.8292
@@ -348,9 +348,8 @@ class School(Office):
         """Adjustment of the internal gains of the building
         This function can be used only after an archetype of the building has been created.
         """
-
-        #Adjustment of the persons profile
-        # Class Rooms
+        # Adjustment of the persons profile
+        # Group Rooms
         self.thermal_zones[0].use_conditions.persons_profile = [  # Montag
             0.0,
             0.0,
@@ -884,7 +883,7 @@ class School(Office):
             0.0
         ]
 
-        # Library
+        # Restroom
         self.thermal_zones[3].use_conditions.persons_profile = [  # Montag
             0.0,
             0.0,
@@ -894,16 +893,16 @@ class School(Office):
             0.0,
             0.0,
             0.2,
+            0.4,
             0.6,
-            1.0,
-            1.0,
-            0.2,
-            0.2,
-            1.0,
-            1.0,
+            0.8,
+            0.8,
+            0.4,
             0.6,
+            0.8,
+            0.8,
+            0.4,
             0.2,
-            0.0,
             0.0,
             0.0,
             0.0,
@@ -919,16 +918,16 @@ class School(Office):
             0.0,
             0.0,
             0.2,
+            0.4,
             0.6,
-            1.0,
-            1.0,
-            0.2,
-            0.2,
-            1.0,
-            1.0,
+            0.8,
+            0.8,
+            0.4,
             0.6,
+            0.8,
+            0.8,
+            0.4,
             0.2,
-            0.0,
             0.0,
             0.0,
             0.0,
@@ -944,16 +943,16 @@ class School(Office):
             0.0,
             0.0,
             0.2,
+            0.4,
             0.6,
-            1.0,
-            1.0,
-            0.2,
-            0.2,
-            1.0,
-            1.0,
+            0.8,
+            0.8,
+            0.4,
             0.6,
+            0.8,
+            0.8,
+            0.4,
             0.2,
-            0.0,
             0.0,
             0.0,
             0.0,
@@ -969,16 +968,16 @@ class School(Office):
             0.0,
             0.0,
             0.2,
+            0.4,
             0.6,
-            1.0,
-            1.0,
-            0.2,
-            0.2,
-            1.0,
-            1.0,
+            0.8,
+            0.8,
+            0.4,
             0.6,
+            0.8,
+            0.8,
+            0.4,
             0.2,
-            0.0,
             0.0,
             0.0,
             0.0,
@@ -994,16 +993,16 @@ class School(Office):
             0.0,
             0.0,
             0.2,
+            0.4,
             0.6,
-            1.0,
-            1.0,
-            0.2,
-            0.2,
-            1.0,
-            1.0,
+            0.8,
+            0.8,
+            0.4,
             0.6,
+            0.8,
+            0.8,
+            0.4,
             0.2,
-            0.0,
             0.0,
             0.0,
             0.0,
@@ -1062,7 +1061,7 @@ class School(Office):
             0.0
         ]
 
-        # Restroom
+        # Office
         self.thermal_zones[4].use_conditions.persons_profile = [  # Montag
             0.0,
             0.0,
@@ -1241,7 +1240,7 @@ class School(Office):
         ]
 
         #Adjustment of the machines profile
-        # Class Room
+        # Group Rooms
         self.thermal_zones[0].use_conditions.machines_profile = [  # Montag
             0.1,
             0.1,
@@ -1775,7 +1774,7 @@ class School(Office):
             0.1
         ]
 
-        # Library
+        # Restroom
         self.thermal_zones[3].use_conditions.machines_profile = [  # Montag
             0.1,
             0.1,
@@ -1785,16 +1784,16 @@ class School(Office):
             0.1,
             0.1,
             0.2,
+            0.4,
             0.6,
-            1.0,
-            1.0,
-            0.2,
-            0.2,
-            1.0,
-            1.0,
+            0.8,
+            0.8,
+            0.4,
             0.6,
+            0.8,
+            0.8,
+            0.4,
             0.2,
-            0.1,
             0.1,
             0.1,
             0.1,
@@ -1810,16 +1809,16 @@ class School(Office):
             0.1,
             0.1,
             0.2,
+            0.4,
             0.6,
-            1.0,
-            1.0,
-            0.2,
-            0.2,
-            1.0,
-            1.0,
+            0.8,
+            0.8,
+            0.4,
             0.6,
+            0.8,
+            0.8,
+            0.4,
             0.2,
-            0.1,
             0.1,
             0.1,
             0.1,
@@ -1835,16 +1834,16 @@ class School(Office):
             0.1,
             0.1,
             0.2,
+            0.4,
             0.6,
-            1.0,
-            1.0,
-            0.2,
-            0.2,
-            1.0,
-            1.0,
+            0.8,
+            0.8,
+            0.4,
             0.6,
+            0.8,
+            0.8,
+            0.4,
             0.2,
-            0.1,
             0.1,
             0.1,
             0.1,
@@ -1860,16 +1859,16 @@ class School(Office):
             0.1,
             0.1,
             0.2,
+            0.4,
             0.6,
-            1.0,
-            1.0,
-            0.2,
-            0.2,
-            1.0,
-            1.0,
+            0.8,
+            0.8,
+            0.4,
             0.6,
+            0.8,
+            0.8,
+            0.4,
             0.2,
-            0.1,
             0.1,
             0.1,
             0.1,
@@ -1885,16 +1884,16 @@ class School(Office):
             0.1,
             0.1,
             0.2,
+            0.4,
             0.6,
-            1.0,
-            1.0,
-            0.2,
-            0.2,
-            1.0,
-            1.0,
+            0.8,
+            0.8,
+            0.4,
             0.6,
+            0.8,
+            0.8,
+            0.4,
             0.2,
-            0.1,
             0.1,
             0.1,
             0.1,
@@ -1953,7 +1952,7 @@ class School(Office):
             0.1
         ]
 
-        # Restroom
+        # Office
         self.thermal_zones[4].use_conditions.machines_profile = [  # Montag
             0.1,
             0.1,
@@ -2131,8 +2130,8 @@ class School(Office):
             0.1
         ]
 
-        #Adjustment of the Lighting profile
-        # Class Room
+        # Adjustment of the Lighting profile
+        # Group Rooms
         self.thermal_zones[0].use_conditions.lighting_profile = [  # Montag
             0.0,
             0.0,
@@ -2666,7 +2665,7 @@ class School(Office):
             0.0
         ]
 
-        # Library
+        # Restroom
         self.thermal_zones[3].use_conditions.lighting_profile = [  # Montag
             0.0,
             0.0,
@@ -2844,7 +2843,7 @@ class School(Office):
             0.0
         ]
 
-        # Restroom
+        # Office
         self.thermal_zones[4].use_conditions.lighting_profile = [  # Montag
             0.0,
             0.0,
