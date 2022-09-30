@@ -371,7 +371,7 @@ class ThermalZone(object):
 
             avg_room_nr = self.area / typical_area
 
-            if calc_approach is 'typical_minus_outer':
+            if calc_approach == 'typical_minus_outer':
                 wall_area = (avg_room_nr
                              * (2 * self.use_conditions.typical_length
                                 * height_of_floors
@@ -383,7 +383,7 @@ class ThermalZone(object):
                     if type(nz_border).__name__ == "InnerWall":
                         wall_area -= nz_border.area
                 wall_area = max(0.0, wall_area)
-            elif calc_approach is 'typical_minus_outer_adjusted':
+            elif calc_approach == 'typical_minus_outer_adjusted':
                 # this considers
                 # a) that a non-complete "average room" should not have the
                 #   same circumference as the others
