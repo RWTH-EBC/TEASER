@@ -79,6 +79,7 @@ class OuterWall(Wall):
     c1_korr : float [J/K]
         corrected capacity C1,korr for building elements in the case of
         asymmetrical thermal load given in VDI 6007
+    calc_u: Required area-specific U-value in retrofit cases [W/K]
     ua_value : float [W/K]
         UA-Value of building element (Area times U-Value)
     r_inner_conv : float [K/W]
