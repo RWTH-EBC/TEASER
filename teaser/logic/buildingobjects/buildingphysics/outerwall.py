@@ -188,9 +188,8 @@ class OuterWall(Wall):
 
         lambda_ins = self.layer[-1].material.thermal_conduc
 
-        d_ins = (1 /
-                 calc_u - self.r_outer_comb - self.r_inner_comb - r_conduc_rem)\
-                * lambda_ins
+        d_ins = lambda_ins * (1 / calc_u - self.r_outer_comb * self.area -
+                              self.r_inner_comb * self.area - r_conduc_rem)
         self.layer[-1].thickness = d_ins
         self.layer[-1].id = len(self.layer)
 
