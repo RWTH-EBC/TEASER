@@ -81,6 +81,7 @@ class Wall(BuildingElement):
     c1_korr : float [J/K]
         corrected capacity C1,korr for building elements in the case of
         asymmetrical thermal load given in VDI 6007
+    calc_u: Required area-specific U-value in retrofit cases [W/K]
     ua_value : float [W/K]
         UA-Value of building element (Area times U-Value)
     r_inner_conv : float [K/W]
@@ -280,6 +281,12 @@ class Wall(BuildingElement):
             Year of the retrofit of the wall/building
 
         """
+        raise NotImplementedError("Please call this method only against"
+                                  "Outerwalls, Rooftops and Groundfloors")
+
+    def initialize_retrofit(self, material, year_of_retrofit):
+        """Checks the retrofit inputs and sets material and year of retrofit
+        if needed."""
         self.set_calc_default()
         self.calc_ua_value()
 
@@ -293,84 +300,34 @@ class Wall(BuildingElement):
             warnings.warn("You are using a year of retrofit not supported\
                     by teaser. We will change your year of retrofit to 1977\
                     for the calculation. Be careful!")
+        return material, year_of_retrofit
 
-        if type(self).__name__ == 'OuterWall':
-
-            if 1977 <= year_of_retrofit <= 1981:
+    def set_insulation(self, material, calc_u, year_of_retrofit):
+        """Sets the correct insulation thickness based on the given u-value"""
+        if calc_u:
+            if self.u_value < calc_u:
+                warnings.warn(
+                    f'No retrofit needed for {self.name} as u value '
+                    f'is already lower than needed.')
+            else:
                 self.insulate_wall(material)
-                calc_u = 1.06 * self.area
-            elif 1982 <= year_of_retrofit <= 1994:
-                self.insulate_wall(material)
-                calc_u = 0.6 * self.area
-            elif 1995 <= year_of_retrofit <= 2001:
-                self.insulate_wall(material)
-                calc_u = 0.5 * self.area
-            elif 2002 <= year_of_retrofit <= 2008:
-                self.insulate_wall(material)
-                calc_u = 0.45 * self.area
-            elif 2009 <= year_of_retrofit <= 2013:
-                self.insulate_wall(material)
-                calc_u = 0.24 * self.area
-            elif year_of_retrofit >= 2014:
-                self.insulate_wall(material)
-                calc_u = 0.24 * self.area
-
-        elif type(self).__name__ == 'Rooftop':
-
-            if 1977 <= year_of_retrofit <= 1981:
-                self.insulate_wall(material)
-                calc_u = 0.45 * self.area
-            elif 1982 <= year_of_retrofit <= 1994:
-                self.insulate_wall(material)
-                calc_u = 0.45 * self.area
-            elif 1995 <= year_of_retrofit <= 2001:
-                self.insulate_wall(material)
-                calc_u = 0.3 * self.area
-            elif 2002 <= year_of_retrofit <= 2008:
-                self.insulate_wall(material)
-                calc_u = 0.3 * self.area
-            elif 2009 <= year_of_retrofit <= 2013:
-                self.insulate_wall(material)
-                calc_u = 0.2 * self.area
-            elif year_of_retrofit >= 2014:
-                self.insulate_wall(material)
-                calc_u = 0.2 * self.area
-
-        if type(self).__name__ == 'GroundFloor':
-
-            if 1977 <= year_of_retrofit <= 1981:
-                self.insulate_wall(material)
-                calc_u = 0.8 * self.area
-            elif 1982 <= year_of_retrofit <= 1994:
-                self.insulate_wall(material)
-                calc_u = 0.7 * self.area
-            elif 1995 <= year_of_retrofit <= 2001:
-                self.insulate_wall(material)
-                calc_u = 0.5 * self.area
-            elif 2002 <= year_of_retrofit <= 2008:
-                self.insulate_wall(material)
-                calc_u = 0.4 * self.area
-            elif 2009 <= year_of_retrofit <= 2013:
-                self.insulate_wall(material)
-                calc_u = 0.3 * self.area
-            elif year_of_retrofit >= 2014:
-                self.insulate_wall(material)
-                calc_u = 0.3 * self.area
-
-        r_conduc = 0
-
-        if self.ua_value < calc_u:
-            pass
+                d_ins = self.calc_ins_layer_thickness(calc_u)
+                self.layer[-1].thickness = d_ins
+                self.layer[-1].id = len(self.layer)
         else:
-            for count_layer in self.layer[:-1]:
-                r_conduc += (count_layer.thickness /
+            warnings.warn(
+                f'No fitting retrofit type found for {year_of_retrofit}')
+
+    def calc_ins_layer_thickness(self, calc_u):
+        """Calculates the thickness of the fresh insulated layer from
+        retrofit"""
+        r_conduc_rem = 0
+        for count_layer in self.layer[:-1]:
+            r_conduc_rem += (count_layer.thickness /
                              count_layer.material.thermal_conduc)
 
-                self.layer[-1].thickness = \
-                    (((
-                      1 - calc_u * self.r_inner_comb - calc_u *
-                      self.r_outer_comb) /
-                      calc_u) * self.area - r_conduc) * \
-                    self.layer[-1].material.thermal_conduc
+        lambda_ins = self.layer[-1].material.thermal_conduc
 
-                self.layer[-1].id = len(self.layer)
+        d_ins = lambda_ins * (1 / calc_u - self.r_outer_comb * self.area -
+                              self.r_inner_comb * self.area - r_conduc_rem)
+        return d_ins

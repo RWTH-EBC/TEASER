@@ -79,6 +79,7 @@ class OuterWall(Wall):
     c1_korr : float [J/K]
         corrected capacity C1,korr for building elements in the case of
         asymmetrical thermal load given in VDI 6007
+    calc_u: Required area-specific U-value in retrofit cases [W/K]
     ua_value : float [W/K]
         UA-Value of building element (Area times U-Value)
     r_inner_conv : float [K/W]
@@ -148,3 +149,44 @@ class OuterWall(Wall):
         else:
 
             self.__parent = None
+
+    def retrofit_wall(self, year_of_retrofit, material=None):
+        """Retrofits wall to German refurbishment standards.
+
+        This function adds an additional layer of insulation and sets the
+        thickness of the layer according to the retrofit standard in the
+        year of refurbishment. Refurbishment year must be newer then 1977
+
+        Note: To Calculate thickness and U-Value, the standard TEASER
+        coefficients for outer and inner heat transfer are used.
+
+        The used Standards are namely the Waermeschutzverordnung (WSVO) and
+        Energieeinsparverordnung (EnEv)
+
+        Parameters
+        ----------
+        material : string
+            Type of material, that is used for insulation
+        year_of_retrofit : int
+            Year of the retrofit of the wall/building
+
+        """
+        material, year_of_retrofit = self.initialize_retrofit(
+            material, year_of_retrofit)
+
+        calc_u = None
+
+        if 1977 <= year_of_retrofit <= 1981:
+            calc_u = 1.06
+        elif 1982 <= year_of_retrofit <= 1994:
+            calc_u = 0.6
+        elif 1995 <= year_of_retrofit <= 2001:
+            calc_u = 0.5
+        elif 2002 <= year_of_retrofit <= 2008:
+            calc_u = 0.45
+        elif 2009 <= year_of_retrofit <= 2013:
+            calc_u = 0.24
+        elif year_of_retrofit >= 2014:
+            calc_u = 0.24
+
+        self.set_insulation(material, calc_u, year_of_retrofit)
