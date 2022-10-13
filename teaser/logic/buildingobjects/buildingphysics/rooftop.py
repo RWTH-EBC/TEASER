@@ -115,3 +115,44 @@ class Rooftop(OuterWall):
         self._inner_radiation = 5.0
         self._outer_convection = 20.0
         self._outer_radiation = 5.0
+
+    def retrofit_wall(self, year_of_retrofit, material=None):
+        """Retrofits wall to German refurbishment standards.
+
+        This function adds an additional layer of insulation and sets the
+        thickness of the layer according to the retrofit standard in the
+        year of refurbishment. Refurbishment year must be newer then 1977
+
+        Note: To Calculate thickness and U-Value, the standard TEASER
+        coefficients for outer and inner heat transfer are used.
+
+        The used Standards are namely the Waermeschutzverordnung (WSVO) and
+        Energieeinsparverordnung (EnEv)
+
+        Parameters
+        ----------
+        material : string
+            Type of material, that is used for insulation
+        year_of_retrofit : int
+            Year of the retrofit of the wall/building
+
+        """
+        material, year_of_retrofit = self.initialize_retrofit(
+            material, year_of_retrofit)
+
+        calc_u = None
+
+        if 1977 <= year_of_retrofit <= 1981:
+            calc_u = 0.45
+        elif 1982 <= year_of_retrofit <= 1994:
+            calc_u = 0.45
+        elif 1995 <= year_of_retrofit <= 2001:
+            calc_u = 0.3
+        elif 2002 <= year_of_retrofit <= 2008:
+            calc_u = 0.3
+        elif 2009 <= year_of_retrofit <= 2013:
+            calc_u = 0.2
+        elif year_of_retrofit >= 2014:
+            calc_u = 0.2
+
+        self.set_insulation(material, calc_u, year_of_retrofit)
