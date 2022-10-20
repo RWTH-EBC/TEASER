@@ -169,7 +169,7 @@ class OuterWall(Wall):
 
     def set_insulation(self, material, calc_u, retrofit_type):
         if calc_u:
-            if self.u_value < calc_u:
+            if self.u_value <= calc_u:
                 warnings.warn(f'No retrofit needed for {self.name} as u value '
                               f'is already lower than needed.')
             else:
