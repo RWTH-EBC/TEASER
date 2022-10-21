@@ -305,7 +305,7 @@ class Wall(BuildingElement):
     def set_insulation(self, material, calc_u, year_of_retrofit):
         """Sets the correct insulation thickness based on the given u-value"""
         if calc_u:
-            if self.u_value < calc_u:
+            if self.u_value <= calc_u:
                 warnings.warn(
                     f'No retrofit needed for {self.name} as u value '
                     f'is already lower than needed.')
