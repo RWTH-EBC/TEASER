@@ -157,6 +157,15 @@ class GroundFloor(OuterWall):
             calc_u = 0.4
         elif retrofit_type == 'EnEV 2009':
             calc_u = 0.3
+        # 115 % of GEG Reference building transmission loss
+        elif retrofit_type == 'KfW Effizienzhaus 100':
+            calc_u = 0.403
+        # 100 % of GEG Reference building transmission loss
+        elif retrofit_type == 'KfW Effizienzhaus 85':
+            calc_u = 0.35
+        # 85 % of GEG Reference building transmission loss
+        elif retrofit_type == 'KfW Effizienzhaus 70':
+            calc_u = 0.3
         # 70 % of GEG Reference building
         elif retrofit_type == 'KfW Effizienzhaus 55':
             calc_u = 0.245
