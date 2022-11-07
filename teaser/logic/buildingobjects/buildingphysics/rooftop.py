@@ -157,10 +157,19 @@ class Rooftop(OuterWall):
             calc_u = 0.3
         elif retrofit_type == 'EnEV 2009':
             calc_u = 0.2
-        # 70 % of GEG Reference building
+        # 115 % of GEG Reference building transmission loss
+        elif retrofit_type == 'KfW Effizienzhaus 100':
+            calc_u = 0.23
+        # 100 % of GEG Reference building transmission loss
+        elif retrofit_type == 'KfW Effizienzhaus 85':
+            calc_u = 0.2
+        # 85 % of GEG Reference building transmission loss
+        elif retrofit_type == 'KfW Effizienzhaus 70':
+            calc_u = 0.17
+        # 70 % of GEG Reference building transmission loss
         elif retrofit_type == 'KfW Effizienzhaus 55':
             calc_u = 0.14
-        # 5 % of GEG Reference building
+        # 5 % of GEG Reference building transmission loss
         elif retrofit_type == 'KfW Effizienzhaus 40':
             calc_u = 0.11
 

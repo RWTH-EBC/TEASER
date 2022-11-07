@@ -158,12 +158,22 @@ class OuterWall(Wall):
             calc_u = 0.45
         elif retrofit_type == 'EnEV 2009':
             calc_u = 0.24
-        # 70 % of GEG Reference building
+        # 115 % of GEG Reference building transmission loss
+        elif retrofit_type == 'KfW Effizienzhaus 100':
+            calc_u = 0.322
+        # 100 % of GEG Reference building transmission loss
+        elif retrofit_type == 'KfW Effizienzhaus 85':
+            calc_u = 0.28
+        # 85 % of GEG Reference building transmission loss
+        elif retrofit_type == 'KfW Effizienzhaus 70':
+            calc_u = 0.24
+        # 70 % of GEG Reference building transmission loss
         elif retrofit_type == 'KfW Effizienzhaus 55':
             calc_u = 0.196
-        # 55 % of GEG Reference building
+        # 55 % of GEG Reference building transmission loss
         elif retrofit_type == 'KfW Effizienzhaus 40':
             calc_u = 0.154
+
 
         self.set_insulation(material, calc_u, retrofit_type)
 
