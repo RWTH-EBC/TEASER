@@ -147,9 +147,13 @@ def export_multizone(buildings, prj, path=None, use_postprocessing_calc=False):
         with open(utilities.get_full_path(
                 os.path.join(bldg_path, bldg.name + ".mo")), 'w') as out_file:
 
+            weather_rel_path = os.path.join(
+                'modelica://',
+                prj.name,
+                os.path.basename(bldg.parent.weather_file_path))
             out_file.write(model_template.render_unicode(
                 bldg=bldg,
-                weather=bldg.parent.weather_file_path,
+                weather=weather_rel_path,
                 modelica_info=bldg.parent.modelica_info,
                 use_postprocessing_calc=use_postprocessing_calc))
             out_file.close()
