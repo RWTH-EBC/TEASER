@@ -16,14 +16,14 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
 
-class School(NonResidential):
-    """Archetype School Building
+class Hotel(NonResidential):
+    """Archetype Hotel Building
 
-    Subclass from NonResidential archetype class to represent school buildings.
+    Subclass from NonResidential archetype class to represent hotel buildings.
 
-    The school module contains a multi zone building according to BMVBS (see
+    The hotel module contains a multi zone building according to BMVBS (see
     :cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.December2010`).
-    This German school building contains 6 usage zones (zones with similar
+    This German hotel building contains 6 usage zones (zones with similar
     thermal behaviour). Each zone has 4 outer walls, 4 windows, a roof and a
     ground floor. Depending on zone usage (typical length and width), an
     interior
@@ -83,7 +83,7 @@ class School(NonResidential):
            consideration of moisture and co2. The moisture calculation is
            based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
            Engineering ToolBox (2004) and regards only persons.
-    school_layout : int
+    hotel_layout : int
         Structure of the floor plan of office buildings, default is 1,
         which is representative for one elongated floor.
             1: elongated 1 floor
@@ -161,13 +161,13 @@ class School(NonResidential):
         net_leased_area=None,
         with_ahu=False,
         internal_gains_mode=1,
-        school_layout=None,
+        hotel_layout=None,
         window_layout=None,
         construction_type=None,
     ):
-        """Constructor of School archetype
+        """Constructor of Hotel archetype
         """
-        super(School, self).__init__(
+        super(Hotel, self).__init__(
             parent,
             name,
             year_of_construction,
@@ -176,7 +176,7 @@ class School(NonResidential):
             internal_gains_mode,
         )
 
-        self.school_layout = school_layout
+        self.hotel_layout = hotel_layout
         self.window_layout = window_layout
         self.construction_type = construction_type
         self.number_of_floors = number_of_floors
@@ -257,16 +257,16 @@ class School(NonResidential):
         else:
             raise ValueError("window_layout value has to be between 0 - 3")
 
-        if self.school_layout == 0 or self.school_layout == 1:
+        if self.hotel_layout == 0 or self.hotel_layout == 1:
             self._est_width = 13.0
-        elif self.school_layout == 2:
+        elif self.hotel_layout == 2:
             self._est_width = 15.0
-        elif self.school_layout == 3:
+        elif self.hotel_layout == 3:
             self._est_width = math.sqrt(
                 (self.net_leased_area / self.number_of_floors) * self.gross_factor
             )
         else:
-            raise ValueError("School_layout value has to be between 0 - 3")
+            raise ValueError("Hotel_layout value has to be between 0 - 3")
         if self.net_leased_area is not None and self.number_of_floors is not None:
             self._est_length = (
                 (self.net_leased_area / self.number_of_floors) * self.gross_factor
@@ -290,9 +290,9 @@ class School(NonResidential):
             # profile in :cite:`DeutschesInstitutfurNormung.2016`
 
     def generate_archetype(self):
-        """Generates a school building.
+        """Generates a hotel building.
 
-        With given values, this class generates an school archetype building
+        With given values, this class generates an hotel archetype building
         according to TEASER requirements.
         """
         # help area for the correct building area setting while using typeBldgs
@@ -473,15 +473,15 @@ class School(NonResidential):
             zone.set_volume_zone()
 
     @property
-    def school_layout(self):
-        return self._school_layout
+    def hotel_layout(self):
+        return self._hotel_layout
 
-    @school_layout.setter
-    def school_layout(self, value):
+    @hotel_layout.setter
+    def hotel_layout(self, value):
         if value is not None:
-            self._school_layout = value
+            self._hotel_layout = value
         else:
-            self._school_layout = 0
+            self._hotel_layout = 0
 
     @property
     def window_layout(self):

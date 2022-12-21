@@ -13,6 +13,8 @@ from teaser.logic.archetypebuildings.bmvbs.office import Office
 from teaser.logic.archetypebuildings.bmvbs.custom.institute import Institute
 from teaser.logic.archetypebuildings.bmvbs.custom.institute4 import Institute4
 from teaser.logic.archetypebuildings.bmvbs.custom.institute8 import Institute8
+from teaser.logic.archetypebuildings.dataNWG.hotel import Hotel
+from teaser.logic.archetypebuildings.dataNWG.school import School
 from teaser.logic.archetypebuildings.urbanrenet.est1a import EST1a
 from teaser.logic.archetypebuildings.urbanrenet.est1b import EST1b
 from teaser.logic.archetypebuildings.urbanrenet.est2 import EST2
@@ -299,10 +301,10 @@ class Project(object):
         Parameters
         ----------
         method : str
-            Used archetype method, currently only 'bmvbs' is supported
+            Used archetype method, currently only 'bmvbs' is supported; dataNWG implemented prototypically
         usage : str
             Main usage of the obtained building, currently only 'office',
-            'institute', 'institute4', institute8' are supported
+            'institute', 'institute4', institute8','school','hotel' are supported
         name : str
             Individual name
         year_of_construction : int
@@ -320,7 +322,7 @@ class Project(object):
             and
             assigned to attribute central_ahu. This instance holds information
             for central Air Handling units. Default is False.
-internal_gains_mode: int [1, 2, 3]
+        internal_gains_mode: int [1, 2, 3]
         mode for the internal gains calculation done in AixLib:
         1: Temperature and activity degree dependent heat flux calculation for persons. The
            calculation is based on  SIA 2024 (default)
@@ -354,14 +356,14 @@ internal_gains_mode: int [1, 2, 3]
 
         """
         ass_error_method = (
-            "only 'bmvbs' is a valid method for " "non-residential archetype generation"
+            "only 'bmvbs' and 'dataNWG' are valid methods for non-residential archetype generation"
         )
 
-        assert method in ["bmvbs"], ass_error_method
+        assert method in ["bmvbs","dataNWG"], ass_error_method
 
         ass_error_usage = (
             "only 'office', 'institute', 'institute4', "
-            "'institute8' are valid usages for archetype "
+            "'institute8', 'hotel', 'school' are valid usages for archetype "
             "generation"
         )
 
@@ -370,6 +372,8 @@ internal_gains_mode: int [1, 2, 3]
             "institute",
             "institute4",
             "institute8",
+            "school",
+            "hotel"
         ], ass_error_usage
 
         if self.data is None:
@@ -439,6 +443,41 @@ internal_gains_mode: int [1, 2, 3]
                 office_layout,
                 window_layout,
                 construction_type,
+            )
+
+        elif usage == "school":
+
+            type_bldg = School(
+                self,
+                name,
+                year_of_construction,
+                number_of_floors,
+                height_of_floors,
+                net_leased_area,
+                with_ahu,
+                internal_gains_mode,
+                office_layout,
+                window_layout,
+                construction_type,
+            )
+
+        elif usage == "hotel":
+
+            type_bldg = Hotel(
+                self,
+                name,
+                year_of_construction,
+                number_of_floors,
+                height_of_floors,
+                net_leased_area,
+                with_ahu,
+                internal_gains_mode,
+                office_layout,
+                window_layout,
+                construction_type,
+
+
+
             )
 
         type_bldg.generate_archetype()
