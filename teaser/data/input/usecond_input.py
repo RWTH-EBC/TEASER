@@ -73,7 +73,12 @@ def load_use_conditions(use_cond, zone_usage, data_class):
     use_cond.with_ahu = conditions_bind[zone_usage]["with_ahu"]
     use_cond.heating_profile = conditions_bind[zone_usage]["heating_profile"]
     use_cond.cooling_profile = conditions_bind[zone_usage]["cooling_profile"]
-    use_cond.persons_profile = conditions_bind[zone_usage]["persons_profile"]
+
+    if "DIN15232" in zone_usage:
+        use_cond.persons_profile = [conditions_bind[zone_usage]["persons_profile_weekday"]*5,
+                                    conditions_bind[zone_usage]["persons_profile_weekday"]*2]
+    else:
+        use_cond.persons_profile = conditions_bind[zone_usage]["persons_profile"]
     use_cond.machines_profile = conditions_bind[zone_usage]["machines_profile"]
     use_cond.lighting_profile = conditions_bind[zone_usage]["lighting_profile"]
     use_cond.with_ideal_thresholds = conditions_bind[zone_usage][
