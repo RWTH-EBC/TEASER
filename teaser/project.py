@@ -322,7 +322,7 @@ class Project(object):
             and
             assigned to attribute central_ahu. This instance holds information
             for central Air Handling units. Default is False.
-internal_gains_mode: int [1, 2, 3]
+        internal_gains_mode: int [1, 2, 3]
         mode for the internal gains calculation done in AixLib:
         1: Temperature and activity degree dependent heat flux calculation for persons. The
            calculation is based on  SIA 2024 (default)
