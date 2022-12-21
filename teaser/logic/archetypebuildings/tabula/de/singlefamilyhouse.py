@@ -145,12 +145,12 @@ class SingleFamilyHouse(Residential):
 
         self.roof_names_1 = {
             "RooftopNorth_1": [35.0, 0.0],
-            "RooftopSouth_1": [35.0, 90.0],
+            "RooftopSouth_1": [35.0, 180.0],
         }
 
         self.roof_names_2 = {
             "RooftopNorth_2": [35.0, 0.0],
-            "RooftopSouth_2": [35.0, 90.0],
+            "RooftopSouth_2": [35.0, 180.0],
         }
 
         self.ground_floor_names_1 = {"GroundFloor_1": [0, -2]}
