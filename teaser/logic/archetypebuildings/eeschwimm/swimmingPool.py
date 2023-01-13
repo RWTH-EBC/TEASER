@@ -151,7 +151,7 @@ class SwimmingPool(NonResidential):
     
     Pools for poolsInDict:
         - Swimmer_pool
-        - Non-swimmer_pool
+        - Nonswimmer_pool
         - Multipurpose_pool
         - Toddler_pool
         - Diving_pool
@@ -162,7 +162,7 @@ class SwimmingPool(NonResidential):
     Average pool depth : float [m]
         Average depth of the pool. 
         Default is 3 m for "Swimmer_pool" and 0.975 m for
-        "Non-swimmer_pool".
+        "Nonswimmer_pool".
     Water volume : float [m³]
         Default is calculated individually based on the total 
         water area.
@@ -702,7 +702,7 @@ class SwimmingPool(NonResidential):
         if ws > 312.5:
             hallLength = mainPoolLength + beginnerPoolWidth + 8.25   
             poolsInDict = self.createPool(
-                poolsInDict, "Non-swimmer_pool", beginnerPoolSurface, \
+                poolsInDict, "Nonswimmer_pool", beginnerPoolSurface, \
                 2 * beginnerPoolWidth + 2 * beginnerPoolLength)
         else:
             hallLength = mainPoolLength + 4.5
@@ -861,7 +861,7 @@ class SwimmingPool(NonResidential):
                         n = None
                         m = 2                        
                     elif pool.startswith("Freeform_pool") or pool == \
-                    "Non-swimmer_pool" or pool == "Multipurpose_pool":
+                    "Nonswimmer_pool" or pool == "Multipurpose_pool":
                         a = 2.7
                         n = 1
                         m = None
@@ -1078,7 +1078,7 @@ class SwimmingPool(NonResidential):
         
         if poolName.startswith("Swimmer_pool"):
             poolsInDict[poolName]["Average pool depth"] = 2.5
-        elif poolName.startswith("Non-swimmer_pool"):
+        elif poolName.startswith("Nonswimmer_pool"):
             poolsInDict[poolName]["Average pool depth"] = 0.975
         elif poolName.startswith("Toddler_pool"):
             poolsInDict[poolName]["Average pool depth"] = 0.6
@@ -1130,7 +1130,7 @@ class SwimmingPool(NonResidential):
         poolsInDict[poolName]["hConWaterHorizontal"] = 50.0
         poolsInDict[poolName]["hConWaterVertical"] = 5200.0
         poolsInDict[poolName]["Construction of pool wall"] = \
-            "AixLib.DataBase.Pools.SwimmingPoolWall.ConcreteInsulationConstruction()"
+            "AixLib.DataBase.Pools.SwimmingPoolWalls.ConcreteInsulationConstruction()"
         
         return poolsInDict 
 

@@ -8,6 +8,7 @@ Neubau und Bestand'
 import teaser.logic.utilities as utilities
 import os
 import xlrd
+import pandas
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
 from teaser.logic.buildingobjects.useconditions import UseConditions as UseCond
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
@@ -135,6 +136,7 @@ def readExcelFile(swimmingPool, fileName, prj):
     print("Reading zone data from Excel...")
     print()
     wb = xlrd.open_workbook(fileName)
+    #wb = pandas.read_excel(fileName)
     zoneData = wb.sheet_by_name("Zone Data")
     poolData = wb.sheet_by_name("Pool Data")
     matData = wb.sheet_by_name("Envelope Structures")
