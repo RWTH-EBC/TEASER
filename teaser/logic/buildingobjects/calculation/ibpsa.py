@@ -36,7 +36,7 @@ class IBPSA(object):
         self.parent = parent
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
         self.version = {
-            "AixLib": "0.10.7",
+            "AixLib": "1.0.0",
             "Buildings": "7.0.0",
             "BuildingSystems": "2.0.0-beta2",
             "IDEAS": "2.1.0",

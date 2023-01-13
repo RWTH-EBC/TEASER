@@ -289,11 +289,11 @@ class SingleFamilyHouse(Residential):
 
         if self.with_ahu is True:
             self.central_ahu.profile_temperature = (
-                7 * [293.15] + 12 * [295.15] + 6 * [293.15]
+                7 * [293.15] + 12 * [295.15] + 5 * [293.15]
             )
-            self.central_ahu.profile_min_relative_humidity = 25 * [0.45]
-            self.central_ahu.profile_max_relative_humidity = 25 * [0.55]
-            self.central_ahu.profile_v_flow = 7 * [0.0] + 12 * [1.0] + 6 * [0.0]
+            self.central_ahu.profile_min_relative_humidity = 24 * [0.45]
+            self.central_ahu.profile_max_relative_humidity = 24 * [0.55]
+            self.central_ahu.profile_v_flow = 7 * [0.0] + 12 * [1.0] + 5 * [0.0]
 
     def _check_year_of_construction(self):
         """Assigns the bldg age group according to year of construction"""

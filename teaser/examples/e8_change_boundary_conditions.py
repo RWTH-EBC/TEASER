@@ -43,7 +43,6 @@ def example_change_boundary_conditions():
         0.0,
         0.0,
         0.0,
-        0.0,
     ]
 
     v_flow_week = []
@@ -88,7 +87,6 @@ def example_change_boundary_conditions():
         293,
         293,
         293,
-        293,
     ]
 
     # We can apply this also to profiles in UseConditions (e.g. set temperature
@@ -104,7 +102,7 @@ def example_change_boundary_conditions():
                 set_point = 290.0
             heating_profile_week.append(set_point)
     for zone in office.thermal_zones:
-        zone.use_conditions.heating_profile_profile = heating_profile_week
+        zone.use_conditions.heating_profile = heating_profile_week
 
 
 if __name__ == '__main__':

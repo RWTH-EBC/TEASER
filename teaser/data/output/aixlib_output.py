@@ -2,13 +2,13 @@
 
 import os
 import warnings
+import shutil
 from mako.template import Template
 from mako.lookup import TemplateLookup
 import teaser.logic.utilities as utilities
-import shutil
 
 
-def export_multizone(buildings, prj, path=None):
+def export_multizone(buildings, prj, path=None, use_postprocessing_calc=False):
     """Exports models for AixLib library
 
     Exports a building for
@@ -38,6 +38,10 @@ def export_multizone(buildings, prj, path=None):
     path : string
         if the Files should not be stored in default output path of TEASER,
         an alternative path can be specified as a full path
+    use_postprocessing_calc : bool
+        If activated the exported model will use the multizonePostProcessing
+        to calculate common outputs for simulation time like total heating
+        demands. Only supported for Aixlib. Default is False.
 
     Attributes
     ----------
@@ -148,15 +152,15 @@ def export_multizone(buildings, prj, path=None):
                                                "number of the building in "
                                                "the project list.")
                 bldg.building_id = i
+        with open(utilities.get_full_path(
+                os.path.join(bldg_path, bldg.name + ".mo")), 'w') as out_file:
 
-        out_file = open(utilities.get_full_path
-                        (os.path.join(bldg_path, bldg.name + ".mo")), 'w')
-
-        out_file.write(model_template.render_unicode(
-            bldg=bldg,
-            weather=bldg.parent.weather_file_path,
-            modelica_info=bldg.parent.modelica_info))
-        out_file.close()
+            out_file.write(model_template.render_unicode(
+                bldg=bldg,
+                weather=bldg.parent.weather_file_path,
+                modelica_info=bldg.parent.modelica_info,
+                use_postprocessing_calc=use_postprocessing_calc))
+            out_file.close()
 
         dir_resources = os.path.join(path, "Resources")
         if not os.path.exists(dir_resources):
@@ -183,18 +187,19 @@ def export_multizone(buildings, prj, path=None):
 
         for zone in bldg.thermal_zones:
 
-            out_file = open(utilities.get_full_path(os.path.join(
-                zone_path, bldg.name + '_' + zone.name + '.mo')), 'w')
-            if type(zone.model_attr).__name__ == "OneElement":
-                out_file.write(zone_template_1.render_unicode(zone=zone))
-            elif type(zone.model_attr).__name__ == "TwoElement":
-                out_file.write(zone_template_2.render_unicode(zone=zone))
-            elif type(zone.model_attr).__name__ == "ThreeElement":
-                out_file.write(zone_template_3.render_unicode(zone=zone))
-            elif type(zone.model_attr).__name__ == "FourElement":
-                out_file.write(zone_template_4.render_unicode(zone=zone))
+            with open(utilities.get_full_path(os.path.join(
+                    zone_path,
+                    bldg.name + '_' + zone.name + '.mo')), 'w') as out_file:
+                if type(zone.model_attr).__name__ == "OneElement":
+                    out_file.write(zone_template_1.render_unicode(zone=zone))
+                elif type(zone.model_attr).__name__ == "TwoElement":
+                    out_file.write(zone_template_2.render_unicode(zone=zone))
+                elif type(zone.model_attr).__name__ == "ThreeElement":
+                    out_file.write(zone_template_3.render_unicode(zone=zone))
+                elif type(zone.model_attr).__name__ == "FourElement":
+                    out_file.write(zone_template_4.render_unicode(zone=zone))
 
-            out_file.close()
+                out_file.close()
 
             if hasattr(zone, "paramRecord"):
                 try:
@@ -282,20 +287,21 @@ def _help_test_script(bldg, dir_dymola, test_script_template):
     dir_building = os.path.join(dir_dymola, bldg.name)
     if not os.path.exists(dir_building):
         os.mkdir(dir_building)
-    out_file = open(utilities.get_full_path
-                    (os.path.join(dir_building, bldg.name + ".mos")), 'w')
-    names_variables = []
-    for i, zone in enumerate(bldg.thermal_zones):
-        names_variables.append(f"multizone.PHeater[{i+1}]")
-        names_variables.append(f"multizone.PCooler[{i+1}]")
-        names_variables.append(f"multizone.TAir[{i+1}]")
-    out_file.write(test_script_template.render_unicode(
-        project=bldg.parent,
-        bldg=bldg,
-        stop_time=3600 * 24 * 365,
-        names_variables=names_variables,
-    ))
-    out_file.close()
+    with open(utilities.get_full_path(os.path.join(
+            dir_building, bldg.name + ".mos")), 'w') as out_file:
+
+        names_variables = []
+        for i, zone in enumerate(bldg.thermal_zones):
+            names_variables.append(f"multizone.PHeater[{i+1}]")
+            names_variables.append(f"multizone.PCooler[{i+1}]")
+            names_variables.append(f"multizone.TAir[{i+1}]")
+        out_file.write(test_script_template.render_unicode(
+            project=bldg.parent,
+            bldg=bldg,
+            stop_time=3600 * 24 * 365,
+            names_variables=names_variables,
+        ))
+        out_file.close()
 
 
 def _help_package(path, name, uses=None, within=None):
@@ -317,14 +323,14 @@ def _help_package(path, name, uses=None, within=None):
 
     package_template = Template(filename=utilities.get_full_path(
         "data/output/modelicatemplate/package"))
-    out_file = open(
-        utilities.get_full_path(os.path.join(path, "package.mo")), 'w')
-    out_file.write(package_template.render_unicode(
-        name=name,
-        within=within,
-        uses=uses))
-    out_file.close()
+    with open(utilities.get_full_path(os.path.join(
+            path, "package.mo")), 'w') as out_file:
 
+        out_file.write(package_template.render_unicode(
+            name=name,
+            within=within,
+            uses=uses))
+        out_file.close()
 
 def _help_package_order(path, package_list, addition=None, extra=None, pool=None):
     """creates a package.order file
@@ -349,12 +355,12 @@ def _help_package_order(path, package_list, addition=None, extra=None, pool=None
 
     order_template = Template(filename=utilities.get_full_path(
         "data/output/modelicatemplate/package_order"))
+    with open(utilities.get_full_path(
+            path + "/" + "package" + ".order"), 'w') as out_file:
 
-    out_file = open(
-        utilities.get_full_path(path + "/" + "package" + ".order"), 'w')
-    out_file.write(order_template.render_unicode
-                   (list=package_list, addition=addition, extra=extra, pool=pool))
-    out_file.close()
+        out_file.write(order_template.render_unicode
+                       (list=package_list, addition=addition, extra=extra))
+        out_file.close()
 
 
 def _copy_weather_data(source_path, destination_path):

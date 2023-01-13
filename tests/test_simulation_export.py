@@ -4,11 +4,8 @@ Created August 2019
 @author: TEASER Development Team
 """
 
-from teaser.logic import utilities
 from teaser.project import Project
-import math
-import os
-import warnings as warnings
+
 
 prj = Project(True)
 
