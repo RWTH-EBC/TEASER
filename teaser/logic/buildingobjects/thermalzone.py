@@ -58,6 +58,8 @@ class ThermalZone(object):
         List of Floor instances.
     ceilings: list
         List of Ceiling instances.
+    pools: list
+        List of Pool instances.
     use_conditions : instance of UseConditions()
         Instance of UseConditions with all relevant information for the usage
         of the thermal zone
@@ -101,6 +103,7 @@ class ThermalZone(object):
         self._inner_walls = []
         self._floors = []
         self._ceilings = []
+        self._pools = []
         self._use_conditions = None
         self._t_inside = 293.15
         self._t_outside = 261.15
@@ -694,3 +697,14 @@ class ThermalZone(object):
                 self._t_outside = value
             except:
                 raise ValueError("Can't convert temperature to float")
+
+    @property
+    def pools(self):
+        return self._pools
+
+    #@pools.setter
+    #def pools(self, value):
+    #    if value is None:
+    #        self._pools = []
+    #    else:
+    #        self.parent.pools.append(self)

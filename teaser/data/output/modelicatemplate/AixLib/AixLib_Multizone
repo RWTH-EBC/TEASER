@@ -190,7 +190,7 @@ equation
     annotation (Line(points={{51,-7},{70,-7},{70,80},{80,80}}, color={0,0,127}));
 % endif
 
-  connect(openingHours.y[1], multizone.openingHours) annotation (Line(points={{-49.2,
+  connect(openingHours.y[1], multizone.timeOpe) annotation (Line(points={{-49.2,
           -34},{45.6,-34},{45.6,-9}}, color={0,0,127}));
 
   annotation (experiment(

@@ -50,24 +50,28 @@ def generate_basic_swimmingPool():
         year_of_construction=year_of_construction,
         number_of_floors=1,
         height_of_floors=3.5,
-        net_leased_area=water_area,
-        internal_gains_mode=3)
-    
+        net_leased_area=0,
+        with_ahu=True,
+        internal_gains_mode=3,
+        construction_type='heavy',
+        water_area=412.5,
+        use_correction_factor=False
+        )
+
+
+
     # Added buildings are stored within Project.buildings. The following code is
     # optional and should provide some basic information about the calculated 
     # building within the console.   
     
     swimmingPool = prj.buildings[0]
-    for zone in swimmingPool.poolsInDict.keys():   
-        if zone.startswith("Zone"):
-            print ("Added", swimmingPool.zoneDesignation[zone],  "with zone area:", \
-               swimmingPool.poolsInDict[zone]\
-               ["Total area of zone (including water area)"], "m²")  
-                
-    for pool in swimmingPool.poolsInDict.keys():
-        if not pool.startswith("Zone"):
-            print("Added pool", pool, "with water area:", swimmingPool.poolsInDict[
-                pool]["Water area"], "m²")
+    for zone in swimmingPool.thermal_zones:
+        print ("Added zone", zone.name,  "with zone area:", \
+               zone.area, "m²")
+
+
+    for pool in swimmingPool.thermal_zones[0].pools:
+        print("Added pool a", pool.pool_type, "with water area:", pool.area, "m²")
   
     print()
     print("Total net leased area of building:", swimmingPool.net_leased_area, "m²")

@@ -10,7 +10,7 @@ import teaser.data.output.aixlib_output as aixlib_output
 import teaser.data.output.ibpsa_output as ibpsa_output
 from teaser.data.dataclass import DataClass
 from teaser.logic.archetypebuildings.bmvbs.office import Office
-from teaser.logic.archetypebuildings.eeschwimm.swimmingPool import SwimmingPool
+from teaser.logic.archetypebuildings.eeschwimm.swimmingPool import SwimmingFacility
 from teaser.logic.archetypebuildings.bmvbs.custom.institute import Institute
 from teaser.logic.archetypebuildings.bmvbs.custom.institute4 import Institute4
 from teaser.logic.archetypebuildings.bmvbs.custom.institute8 import Institute8
@@ -280,7 +280,9 @@ class Project(object):
         internal_gains_mode=1,
         office_layout=None,
         window_layout=None,
-        construction_type=None
+        construction_type=None,
+        water_area=0,
+        use_correction_factor=False,
     ):
         """Add a non-residential building to the TEASER project.
 
@@ -350,6 +352,11 @@ class Project(object):
             Construction type of used wall constructions default is "heavy")
                 heavy: heavy construction
                 light: light construction
+        water_area : float [m2]
+            Total area of all pools, only needed for archetype swimming facility.
+        use_area_correction : Boolean
+            If set to true, zone areas of swimming facility are multiplied
+            with a correction factor, which is derived from real building data
 
         Returns
         ----------
@@ -447,7 +454,7 @@ class Project(object):
             
         elif usage == "swimmingPool":
 
-            type_bldg = SwimmingPool(
+            type_bldg = SwimmingFacility(
                 self,                
                 name,
                 year_of_construction,
@@ -456,7 +463,9 @@ class Project(object):
                 net_leased_area,
                 with_ahu,
                 internal_gains_mode,
-                construction_type                
+                construction_type,
+                water_area,
+                use_correction_factor,
             )
 
         type_bldg.generate_archetype()            
