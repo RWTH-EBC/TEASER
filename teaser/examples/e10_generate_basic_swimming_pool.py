@@ -105,7 +105,8 @@ def generate_basic_swimmingPool():
     print("Exporting building(s)...")
     path = prj.export_aixlib(
         internal_id=None,
-        path=filePathOutput)
+        path=filePathOutput,
+        use_postprocessing_calc=True)
     
     return path
 
