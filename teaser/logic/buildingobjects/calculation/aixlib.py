@@ -29,6 +29,8 @@ class AixLib(object):
         Filename for AHU boundary conditions file
     file_internal_gains : str
         Filename for internal gains file
+    file_opening_hours: str
+        Filename for opening hours file
     version : str
         Used AixLib version, default should always be current master version
         of GitHub
@@ -61,15 +63,14 @@ class AixLib(object):
         self.file_set_t_cool = "TsetCool_" + self.parent.name + ".txt"
         self.file_ahu = "AHU_" + self.parent.name + ".txt"
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".txt"
+        self.file_opening_hours = "OpeningHours_" + self.parent.name + ".txt"
         self.version = "1.3.1"
         self.total_surface_area = None
         self.consider_heat_capacity = True
         self.use_set_back = True
         self.use_set_point_temperature_profile_heating = False
         self.use_set_back_cool = False
-        
-        if hasattr(self.parent.thermal_zones[0], "paramRecord"):
-            self.file_opening_hours = "OpeningHours_" + self.parent.name + ".txt"               
+
 
     def calc_auxiliary_attr(self):
         """Call function to calculate all auxiliary attributes for AixLib."""
