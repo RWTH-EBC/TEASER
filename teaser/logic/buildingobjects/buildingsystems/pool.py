@@ -4,6 +4,7 @@
 """This module includes a class for pools
 """
 import random
+import math
 
 import pandas as pd
 from itertools import cycle, islice
@@ -46,6 +47,8 @@ class Pool(object):
         Average pool depth.
     temperature : float [K]
         Pool temperature.
+    temperature_air : float [K]
+        Air temperature.
     filter_type : str
         Information on used filter type within the water treatment system.
         Possible input: '"Activated carbon filter with ozone', 'Two-layer filter with ozone',
@@ -113,6 +116,8 @@ class Pool(object):
         Mean value for the heat transfer coefficient of free convection on vertical pool walls.
     pool_wall_construction_type : str
         Construction type of pool wall, supported construction types: 'concrete_with_insulation', 'stainless_steel'
+    m_flow_evap_pool_used : float [kg/h]
+        Evaporation mass flow of used pool with maximal occupancy
     """
 
     def __init__(self, parent=None):
@@ -129,6 +134,7 @@ class Pool(object):
         self.volume = None
         self.depth = None
         self.temperature = None
+        self.temperature_air = 303.15+2
         self.filter_type = 'Open suction filter'
         self.filter_combination = 'without_ozone'
         self.water_type = 'Fresh water'
@@ -148,8 +154,8 @@ class Pool(object):
         self.wave_period = 1800
         self.wave_period_start = 600
         self.wave_share_period = 10/30*100
-        self.use_water_recycling = None
-        self.x_recycling = None
+        self.use_water_recycling = False
+        self.x_recycling = 0.8
         self.num_visitors = None
         self.num_filter_rinses = 2
         self.m_flow_waste_water = None
@@ -160,6 +166,7 @@ class Pool(object):
         self.h_con_water_horizontal = 50.0
         self.h_con_water_vertical = 5200.0
         self.pool_wall_construction_type = 'concrete_with_insulation'
+        self.m_flow_evap_pool_used = 0
 
     @property
     def parent(self):
@@ -177,7 +184,7 @@ class Pool(object):
 
 
     def calc_pool_parameters(self):
-        self.perimeter = 2 * self.length + 2 * self.width
+    #    self.perimeter = 2 * self.length + 2 * self.width
 
         if self.pool_type == 'Swimmer_pool':
             self.depth = 2.5
@@ -307,7 +314,7 @@ class Pool(object):
         # Calculation of volume_storage
         self.volume_storage = V_v + V_w + V_fs
 
-        # Calculation of beta_in_use
+        # Calculation of beta_in_use according to VDI 2089 in m/s
         if self.pool_type == 'Freeform_pool' or self.pool_type == 'Multipurpose_pool':
             self.beta_in_use = 40/3600
         else:
@@ -320,6 +327,27 @@ class Pool(object):
         m_visitors = 0.03 * 995.65 * self.num_visitors * 1/(24*3600)
         m_filter = 995.65 * self.num_filter_rinses * V_fs * 1/(7*24*3600)
         self.m_flow_waste_water = max(m_visitors, m_filter)
+
+        # Calculation of evaporation mass flow at maximal occupancy according to VDI 2089 in kg/h
+        R_D = 461.52   # specific gas constant for steam
+        aritmethic_temperature = (self.temperature + self.temperature_air) /2
+        # saturation pressure in Pa
+        p_sat_air_temp = self.calc_sat_pressure(self.temperature_air)
+        p_sat_pool_temp = self.calc_sat_pressure(self.temperature)
+
+
+        self.m_flow_evap_pool_used = -((self.beta_in_use*3600)/(R_D*aritmethic_temperature))* \
+                                     (p_sat_pool_temp-p_sat_air_temp)*self.area
+        print('self.m_flow_evap_pool_used',self.m_flow_evap_pool_used)
+
+    def calc_sat_pressure(self, temp):
+        log_pw = 10.79574 * (1.0 - 273.16 / temp) \
+                 - 5.02800 * math.log10(temp / 273.16) \
+                 + 1.50475E-4 * (1 - math.pow(10, (-8.2969 * (temp/ 273.16 - 1.0)))) + 0.42873E-3 * \
+                 (math.pow(10, (+4.76955 * (1.0 - 273.16 / temp))) - 1) + 0.78614
+        p_sat = math.pow(10, log_pw)*100
+        return p_sat
+
 
 
 
