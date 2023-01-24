@@ -12,10 +12,10 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     ABuilding=${bldg.net_leased_area},
     ASurTot=${bldg.library_attr.total_surface_area},
     numZones = ${len(bldg.thermal_zones)},
-    % if bldg.type_of_building == "SwimmingPool":
+    % if bldg.type_of_building == "SwimmingFacility":
     use_pools = true,
     % else:
-    use_swimmingPools = false,
+    use_pools = false,
     % endif
     internalGainsMode = ${bldg.internal_gains_mode},
     % if bldg.internal_gains_mode==3:
@@ -123,7 +123,7 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
       "Set points for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
 
-% if bldg.type_of_building == "SwimmingPool":
+% if bldg.type_of_building == "SwimmingFacility":
      Modelica.Blocks.Sources.CombiTimeTable openingHours(
       tableOnFile=true,
       tableName="opening_hours",
@@ -190,9 +190,10 @@ equation
     annotation (Line(points={{51,-7},{70,-7},{70,80},{80,80}}, color={0,0,127}));
 % endif
 
+% if bldg.type_of_building == "SwimmingFacility":
   connect(openingHours.y[1], multizone.timeOpe) annotation (Line(points={{-49.2,
           -34},{45.6,-34},{45.6,-9}}, color={0,0,127}));
-
+% endif
   annotation (experiment(
       StartTime=${str(zone.parent.parent.modelica_info.start_time)},
       StopTime=${str(zone.parent.parent.modelica_info.stop_time)},
