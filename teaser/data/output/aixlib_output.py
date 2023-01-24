@@ -130,9 +130,12 @@ def export_multizone(buildings, prj, path=None, use_postprocessing_calc=False):
             path=bldg_path)
         bldg.library_attr.modelica_gains_boundary(
             path=bldg_path)
-        
-        if hasattr(bldg.thermal_zones[0], "paramRecord"):
+
+        if bldg.type_of_building == "SwimmingFacility":
             bldg.library_attr.modelica_opening_hours(path=bldg_path)
+        
+        #if hasattr(bldg.thermal_zones[0], "paramRecord"):
+        #    bldg.library_attr.modelica_opening_hours(path=bldg_path)
 
         _help_package(path=bldg_path, name=bldg.name, within=bldg.parent.name)
         _help_package_order(
@@ -175,18 +178,8 @@ def export_multizone(buildings, prj, path=None, use_postprocessing_calc=False):
 
         zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
 
-        _help_package(
-            path=zone_path,
-            name=bldg.name + '_DataBase',
-            within=prj.name + '.' + bldg.name)
-        _help_package_order(
-            path=zone_path,
-            package_list=bldg.thermal_zones,
-            addition=bldg.name + "_",
-            extra=None)
 
         for zone in bldg.thermal_zones:
-
             with open(utilities.get_full_path(os.path.join(
                     zone_path,
                     bldg.name + '_' + zone.name + '.mo')), 'w') as out_file:
@@ -201,36 +194,35 @@ def export_multizone(buildings, prj, path=None, use_postprocessing_calc=False):
 
                 out_file.close()
 
-            if hasattr(zone, "paramRecord"):
-                try:
-                    pool_path = os.path.join(zone_path, zone.name + "_DataBase")
-                    utilities.create_path(utilities.get_full_path(
-                        os.path.join(zone_path,
-                                     zone.name + "_DataBase")))
-                    for pool in zone.paramRecord.keys():                       
-                        out_file = open(utilities.get_full_path(os.path.join(
-                            pool_path, zone.name + '_' + pool + '.mo')), 'w')                        
-                        out_file.write(template_pool.render_unicode(zone=zone, pool=pool))
-                        out_file.close()
-                    _help_package(
-                        path=pool_path,
-                        name=zone.name + '_DataBase',
-                        within=prj.name + '.' + bldg.name + '.' + bldg.name + '_DataBase')
-                    _help_package_order(
-                        path=pool_path,
-                        package_list=list(zone.paramRecord.keys()),
-                        addition=zone.name + "_",
-                        extra=None,
-                        pool=True)
-                    _help_package_order(
-                        path=zone_path,
-                        package_list=bldg.thermal_zones,
-                        addition=bldg.name + "_",
-                        extra=zone.name + "_DataBase")                    
-                except AttributeError:
-                    continue
+
+            if len(zone.pools) > 0:
+                pool_path = os.path.join(zone_path, zone.name + "_DataBase")
+                utilities.create_path(utilities.get_full_path(os.path.join(
+                    zone_path, zone.name + "_DataBase")))
+                for pool in zone.pools:
+                    out_file = open(utilities.get_full_path(os.path.join(
+                        pool_path, zone.name + '_' + pool.name + '.mo')), 'w')
+                    out_file.write(template_pool.render_unicode(zone=zone, pool=pool))
+                    out_file.close()
+                _help_package_order(
+                    path=pool_path,
+                    package_list=list(zone.pools),
+                    addition=zone.name + "_",
+                    extra=None,
+                    pool=True)
 
 
+
+
+        _help_package(
+            path=zone_path,
+            name=bldg.name + '_DataBase',
+            within=prj.name + '.' + bldg.name)
+        _help_package_order(
+            path=zone_path,
+            package_list=bldg.thermal_zones,
+            addition=bldg.name + "_",
+            extra=None)
 
 
     _copy_script_unit_tests(os.path.join(dir_scripts, "runUnitTests.py"))
