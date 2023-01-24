@@ -79,7 +79,7 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     maxAHU = ${zone.use_conditions.max_ahu},
     hHeat = ${zone.model_attr.heat_load},
     lHeat = 0,
-    KRHeat = 10000,
+    KRHeat = 1000,
     TNHeat = 1,
     HeaterOn = ${get_true_false(zone.use_conditions.with_heating)},
     hCool = 0,
@@ -94,10 +94,10 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     TThresholdCooler = ${zone.use_conditions.T_threshold_cooling},
     % if zone.name == "Swimming_hall":
     use_pools = true,
-    nPools = ${zone.parent.number_of_pools},
+    nPools = ${zone.nPools},
     poolParam = {
-    %for pool in zone.paramRecord.keys():
-    ${zone.name}_DataBase.${zone.name}_${pool}()${',' if not loop.last else ''}
+    %for pool in zone.pools:
+    ${zone.name}_DataBase.${zone.name}_${pool.name}()${',' if not loop.last else ''}
     %endfor
     }
     % else:
