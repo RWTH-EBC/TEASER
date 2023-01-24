@@ -1,40 +1,45 @@
 <%namespace file="/modelica_language/" import="get_true_false, get_list, min_orientations"/> <%namespace file="/conversion/" import="deg_to_rad, azmiut_conv"/>
 within ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase.Swimming_hall_DataBase;
-record Swimming_hall_${pool} "Swimming_hall_${pool}"
+record Swimming_hall_${pool.name} "Swimming_hall_${pool}"
   extends AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord(
-    TPool = ${zone.paramRecord[pool]["T_pool"]},
-    VPool = ${zone.paramRecord[pool]["V_pool"]},
-    APool = ${zone.paramRecord[pool]["A_pool"]},
-    depthPool = ${zone.paramRecord[pool]["d_pool"]},
-    VStorage = ${zone.paramRecord[pool]["V_storage"]},
-    V_flow_nominal = ${zone.paramRecord[pool]["Q"]},
-    V_flow_partial = ${zone.paramRecord[pool]["Q_night"]},
-    use_partialLoad = ${zone.paramRecord[pool]["use_partialLoad"]},
-    dpHeaExcPool = ${zone.paramRecord[pool]["dpHeatExchangerPool"]},
-    use_idealHeater = true,
+    TPool = ${pool.temperature},
+    VPool = ${pool.volume},
+    APool = ${pool.area},
+    depthPool = ${pool.depth},
+    VStorage = ${pool.volume_storage},
+    V_flow_nominal = ${pool.volume_flow},
+    V_flow_partial = ${pool.volume_flow_night},
+    use_partialLoad = ${get_true_false(pool.use_partial_load)},
+    dpHeaExcPool = ${pool.dp_heat_exchanger},
+    use_idealHeater = ${get_true_false(pool.use_ideal_heat_exchanger)},
     KHeat = 1,
     THeat = 0.1,
-    QMaxHeat = 1000,
+    QMaxHeat = 10000,
     QMinHeat = 0,
-    betaInUse = ${zone.paramRecord[pool]["beta_inUse"]},
-    use_poolCover = ${zone.paramRecord[pool]["use_poolCover"]},
-    use_waterRecycling = ${zone.paramRecord[pool]["use_waterRecycling"]},
-    x_recycling = ${zone.paramRecord[pool]["x_recycling"]},
-    m_flow_out = ${zone.paramRecord[pool]["m_flow_out"]},
-    use_HRS = ${zone.paramRecord[pool]["use_HRS"]},
-    etaHRS = ${zone.paramRecord[pool]["efficiencyHRS"]},
-    use_wavePool = ${zone.paramRecord[pool]["use_wavePool"]},
-    heightWave = ${zone.paramRecord[pool]["h_wave"]},
-    widthWave = ${zone.paramRecord[pool]["w_wave"]},
-    periodeWavePul = ${zone.paramRecord[pool]["wavePool_period"]},
-    timeWavePul_start = ${zone.paramRecord[pool]["wavePool_startTime"]},
-    widthWavePul = ${zone.paramRecord[pool]["wavePool_width"]},
-    AWalInt = ${zone.paramRecord[pool]["AInnerPoolWall"]},
-    AWalExt = ${zone.paramRecord[pool]["APoolWallWithEarthContact"]},
-    AFloInt = ${zone.paramRecord[pool]["AInnerPoolFloor"]},
-    AFloExt = ${zone.paramRecord[pool]["APoolFloorWithEarthContact"]},
-    hConWaterHorizontal = ${zone.paramRecord[pool]["hConWaterHorizontal"]},
-    hConWaterVertical = ${zone.paramRecord[pool]["hConWaterVertical"]},
-    PoolWallParam = ${zone.paramRecord[pool]["PoolWallParam"]}
-    );
+    betaInUse = ${pool.beta_in_use},
+    use_poolCover = ${get_true_false(pool.use_pool_cover)},
+    use_waterRecycling = ${get_true_false(pool.use_water_recycling)},
+    x_recycling = ${pool.x_recycling},
+    m_flow_out = ${pool.m_flow_waste_water},
+    use_HRS = ${get_true_false(pool.use_heat_recovery)},
+    etaHRS = ${pool.eta_heat_recovery},
+    use_wavePool = ${get_true_false(pool.use_wave_pool)},
+    heightWave = ${pool.wave_height},
+    widthWave = ${pool.wave_width},
+    periodeWavePul = ${pool.wave_period},
+    timeWavePul_start = ${pool.wave_period_start},
+    widthWavePul = ${pool.wave_share_period},
+    AWalInt = ${pool.area_pool_wall_inner},
+    AWalExt = ${pool.area_pool_wall_exterior},
+    AFloInt = ${pool.area_pool_floor_inner},
+    AFloExt = ${pool.area_pool_floor_exterior},
+    hConWaterHorizontal = ${pool.h_con_water_horizontal},
+    hConWaterVertical = ${pool.h_con_water_vertical},
+    %if pool.pool_wall_construction_type=="concrete_with_insulation":
+    PoolWallParam=AixLib.DataBase.Pools.SwimmingPoolWalls.ConcreteInsulationConstruction()
+    %elif pool.pool_wall_construction_type=="stainless_steel":
+    PoolWallParam=AixLib.DataBase.Pools.SwimmingPoolWalls.StainlessSteelConstruction()
+    %else:
+    PoolWallParam=AixLib.DataBase.Pools.SwimmingPoolWalls.ConcreteConstruction()
+    %endif    );
 end Swimming_hall_${pool};
