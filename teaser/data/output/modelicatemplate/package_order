@@ -1,14 +1,14 @@
-%if extra != None: 
+%if extra != None:
 ${extra}
 %endif
 %for i in list:
-%if addition != None: 
-%if not pool is None:
-${addition}${i}
-%else:
-${addition}${i.name.replace(" ", "")}
+%if i.name == "Swimming_hall":
+${i.name.replace(" ", "")}_DataBase
 %endif
+%if addition != None:
+${addition}${i.name.replace(" ", "")}
 %else:
 ${i.name.replace(" ", "")}
 %endif
 %endfor
+
