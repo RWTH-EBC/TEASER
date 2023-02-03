@@ -198,7 +198,8 @@ def simulate(
         show_window=True,
         n_restart=-1,
         equidistant_output=False,
-        extract_variables=True
+        extract_variables=True,
+        dymola_version = 'Dymola 2021'
     )
     print("Number of variables:", len(dym_api.variables))
     print("Number of outputs:", len(dym_api.outputs))
