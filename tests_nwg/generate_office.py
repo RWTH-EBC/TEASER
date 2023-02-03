@@ -198,7 +198,8 @@ def simulate(
         show_window=True,
         n_restart=-1,
         equidistant_output=False,
-        extract_variables=True
+        extract_variables=True,
+        dymola_version = 'Dymola 2021'
     )
     print("Number of variables:", len(dym_api.variables))
     print("Number of outputs:", len(dym_api.outputs))
@@ -231,12 +232,12 @@ if __name__ == "__main__":
     for index,scenario in scenarios.iterrows():
         prj = generate_bldg(prj, scenario)
 
-    model_export_path = 'D:\Sciebo\Projektbox SmartSenseIAQ\Simulation\Testsimulationen NWG'
-    export_aixlib_model(prj,model_export_path,scenario['Location'])
+    model_export_path = 'N:\Forschung\EBC0741_ZIM_SmartSenseIAQ_NK\Data\Simulationen\Referenzszenarien\Tests'
+    export_aixlib_model(prj, model_export_path, scenario['Location'])
 
     for building in prj.buildings:
         simulate(
-            aixlib_mo=r"D:\GIT\AixLib\AixLib\package.mo",
+            aixlib_mo=r"D:\pse\GIT\AixLib\AixLib\package.mo",
             teaser_mo=model_export_path+"\\"+prj.name+"\package.mo",
             building_mo=prj.name+"."+building.name+"."+building.name,
             savepath=model_export_path+prj.name+"\\sim_results",
