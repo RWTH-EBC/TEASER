@@ -1,5 +1,0 @@
-**********************************************************************
-** Visual Studio 2019 Developer Command Prompt v16.11.18
-** Copyright (c) 2021 Microsoft Corporation
-**********************************************************************
-[vcvarsall.bat] Environment initialized for: 'x64'
