@@ -67,7 +67,7 @@ def example_export_aixlib():
     # exported. In this case we want to export all buildings to our home
     # directory, thus we are passing over None for both parameters.
 
-    path = prj.exp  ort_aixlib(
+    path = prj.export_aixlib(
         internal_id=None,
         path=None)
 
