@@ -3157,7 +3157,6 @@ class Test_teaser(object):
         prj.calc_all_buildings()
         prj.export_aixlib()
 
-
     def test_tz_naming(self):
 
         from teaser.logic.buildingobjects.building import Building

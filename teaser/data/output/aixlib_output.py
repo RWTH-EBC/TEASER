@@ -42,7 +42,7 @@ def export_multizone(buildings, prj, path=None, use_postprocessing_calc=False):
         If activated the exported model will use the multizonePostProcessing
         to calculate common outputs for simulation time like total heating
         demands. Only supported for Aixlib. Default is False.
-        
+   
     Attributes
     ----------
 

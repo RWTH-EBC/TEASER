@@ -498,8 +498,8 @@ class ThermalZone(object):
                 if name_add not in tz_names:
                     name = name_add
                     break
-        self._name = name    
-    
+        self._name = name
+
     @property
     def outer_walls(self):
         return self._outer_walls
