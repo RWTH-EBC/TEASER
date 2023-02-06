@@ -212,9 +212,6 @@ class UseConditions(object):
     cooling_set_back: float [K]
         Set back temperature offset for cooling profile. Positive (+) values
         increase the profile, negative (-) decrease.
-        Note: python attribute, not customizable by user (derived from Json)
-        Note: python attribute, not customizable by user (derived from Json)
-
 
     """
 
