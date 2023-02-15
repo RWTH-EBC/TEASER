@@ -68,7 +68,7 @@ def export_aixlib_model(prj,model_path,location):
                     "München":                  "TRY2015_481308115636_Jahr_City_Muenchen.mos",
                     "Frankfurt":                "TRY2015_501260086749_Jahr_City_Frankfurt.mos",
                     "Gerolstein":               "TRY2015_502252066685_Jahr_City_Gerolstein.mos",
-                    "Greifswald":               "TRY2015_502252066685_Jahr_City_Greifswald.mos"
+                    "Greifswald":               "TRY2015_541071133759_Jahr_City_Greifswald.mos"
                     }
 
     prj.dir_reference_results = utilities.get_full_path(
@@ -98,68 +98,6 @@ def export_aixlib_model(prj,model_path,location):
 
     return path
 
-def adjust_useconditions(prj,weekend_option=False):
-    """
-    Adjust occupancy profile of useconditions to fit  DIN EN 15232-1 2017 conditions and cancel occupancy on weekends
-
-    Parameters
-    ----------
-    prj : Project()
-        instance of TEASERS Project class
-
-    weekend_option : Boolean
-        Set to true, if seperate occupancy profiles for weekends should be considered
-   """
-
-    occupancy_profile_workday = [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0.5,
-        1,
-        1,
-        1,
-        0.825,
-        0.675,
-        0.675,
-        0.825,
-        0.825,
-        0.675,
-        0.325,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-    ]
-
-    if weekend_option:
-        #set separate profile for days on weekends
-        occupancy_profile_week = []
-        for day in range(7):
-            for occupancy in occupancy_profile_workday:
-                if day < 5:
-                    val = occupancy
-                else:
-                    val = 0                                 # set occupancy to zero on weekends
-                occupancy_profile_week.append(val)
-    else:
-        occupancy_profile_week = 7 * occupancy_profile_workday;
-
-    for zone in prj.buildings[-1].thermal_zones:
-        zone.use_conditions.persons_profile = occupancy_profile_week
-
-    assert (
-            prj.buildings[-1].thermal_zones[-1].use_conditions.persons_profile
-            == occupancy_profile_week
-    )
-
-
 def simulate(
         aixlib_mo,
         teaser_mo,
@@ -188,8 +126,6 @@ def simulate(
     if cd is None:
         cd = pathlib.Path(__file__).parent.joinpath("results")
 
-    # ######################### Simulation API Instantiation ##########################
-    # %% Setup the Dymola-API:
     dym_api = DymolaAPI(
         model_name=building_mo,
         cd=cd,
@@ -198,48 +134,39 @@ def simulate(
         show_window=True,
         n_restart=-1,
         equidistant_output=False,
-        extract_variables=True
+        extract_variables=False
     )
-    print("Number of variables:", len(dym_api.variables))
-    print("Number of outputs:", len(dym_api.outputs))
-    print("Number of inputs:", len(dym_api.inputs))
-    print("Number of parameters:", len(dym_api.parameters))
-    print("Number of states:", len(dym_api.states))
 
     simulation_setup = {"start_time": 0,
                         "stop_time": 31536000,
                         "output_interval": 1000}
 
     dym_api.set_sim_setup(sim_setup=simulation_setup)
-    res = "multizone.TAir[1]"
-    dym_api.result_names = [res]
 
-
-    result_sp_2 = dym_api.simulate(
+    dym_api.simulate(
         return_option="savepath",
         savepath=savepath,
         result_file_name=result_file_name
     )
-    print(result_sp_2)
 
 if __name__ == "__main__":
 
-    project_name = "20221214_test_scenario_file"
-    prj = generate_project(name=project_name)
-    scenarios = load_scenarios('N:\Forschung\EBC0741_ZIM_SmartSenseIAQ_NK\Data\AP6_Anlagen und Gebäudebaukasten\Vorlage_import.xlsx')
+    setup_name = "20220210_efh_wettervergleich"
+    basepath = pathlib.Path('N:\Forschung\EBC0741_ZIM_SmartSenseIAQ_NK\Data\Simulationen\Referenzszenarien').joinpath(setup_name)
+    scenarios = load_scenarios(basepath.joinpath("scenarios.xlsx"))
+    model_export_path = basepath.joinpath("models")
 
     for index,scenario in scenarios.iterrows():
+        scenario_name = "S"+str(scenario['Scenario_number'])+"_"+str(scenario['Building_type'])
+        prj = generate_project(name=scenario_name)
         prj = generate_bldg(prj, scenario)
+        export_aixlib_model(prj, model_export_path.joinpath(scenario_name), scenario['Location'])
 
-    model_export_path = 'N:\Forschung\EBC0741_ZIM_SmartSenseIAQ_NK\Data\Simulationen\Referenzszenarien\Tests'
-    export_aixlib_model(prj, model_export_path, scenario['Location'])
-
-    for building in prj.buildings:
         simulate(
             aixlib_mo=r"D:\pse\GIT\AixLib\AixLib\package.mo",
-            teaser_mo=model_export_path+"\\"+prj.name+"\package.mo",
-            building_mo=prj.name+"."+building.name+"."+building.name,
-            savepath=model_export_path+prj.name+"\\sim_results",
-            result_file_name= building.name,
+            teaser_mo=model_export_path.joinpath(scenario_name,prj.name,"package.mo"),
+            building_mo=prj.name+"."+prj.buildings[0].name+"."+prj.buildings[0].name,
+            savepath=model_export_path.parent.joinpath("sim_results",scenario_name),
+            result_file_name= prj.buildings[0].name,
             n_cpu=1
         )
