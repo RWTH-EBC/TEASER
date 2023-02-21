@@ -758,6 +758,10 @@ class SwimmingFacility(NonResidential):
             beginner_pool_surface = 166.7
             beginner_pool_width = 10
             beginner_pool_length = 16.66
+        else:
+            beginner_pool_surface = 0.0
+            beginner_pool_width = 0.0
+            beginner_pool_length = 0.0
         beginner_pool_perimeter = 2*beginner_pool_width+2*beginner_pool_length
 
         main_pool_surface = water_area - beginner_pool_surface
@@ -776,7 +780,8 @@ class SwimmingFacility(NonResidential):
 
         basic_pool_dic["Swimmer_pool"] = ["Swimmer_pool",main_pool_surface, main_pool_length, main_pool_width,
                                           main_pool_perimeter]
-        basic_pool_dic["Nonswimmer_pool"] = ["Nonswimmer_pool",beginner_pool_surface, beginner_pool_length,
+        if beginner_pool_surface > 0.0:
+            basic_pool_dic["Nonswimmer_pool"] = ["Nonswimmer_pool",beginner_pool_surface, beginner_pool_length,
                                              beginner_pool_width, beginner_pool_perimeter]
 
         return basic_pool_dic
