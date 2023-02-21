@@ -204,12 +204,17 @@ def export_multizone(buildings, prj, path=None, use_postprocessing_calc=False):
                         pool_path, zone.name + '_' + pool.name + '.mo')), 'w')
                     out_file.write(template_pool.render_unicode(zone=zone, pool=pool))
                     out_file.close()
+                _help_package(
+                    path=pool_path,
+                    name=zone.name + '_DataBase',
+                    within=prj.name + '.' + bldg.name + zone.name)
                 _help_package_order(
                     path=pool_path,
                     package_list=list(zone.pools),
                     addition=zone.name + "_",
                     extra=None,
                     pool=True)
+
 
 
 
