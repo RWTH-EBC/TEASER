@@ -88,9 +88,9 @@ class BuildingAHU(object):
 
         self.heating = True
         self.cooling = True
-        self.dehumidification = True
-        self.humidification = True
-        self.heat_recovery = True
+        self.dehumidification = False
+        self.humidification = False
+        self.heat_recovery = False
         self.by_pass_dehumidification = 0.2
         self.efficiency_recovery = 0.65
         self.efficiency_recovery_false = 0.2

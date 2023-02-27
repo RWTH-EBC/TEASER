@@ -20,10 +20,10 @@ class Hotel(NonResidential):
     """Archetype Hotel Building
 
     Subclass from NonResidential archetype class to represent hotel buildings.
-
-    The hotel module contains a multi zone building according to BMVBS (see
-    :cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.December2010`).
-    This German hotel building contains 6 usage zones (zones with similar
+    :TODO: Update text
+    The hotel module contains a multi zone building based on BMVBS (see
+    :cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.December2010`) method.
+    This German hotel building contains 10 usage zones (zones with similar
     thermal behaviour). Each zone has 4 outer walls, 4 windows, a roof and a
     ground floor. Depending on zone usage (typical length and width), an
     interior
@@ -42,12 +42,16 @@ class Hotel(NonResidential):
     In detail the net leased area is divided into the following thermal zone
     areas:
 
-    #. Office (50% of net leased area)
-    #. Floor (25% of net leased area)
-    #. Storage (15% of net leased area)
-    #. Meeting (4% of net leased area)
-    #. Restroom (4% of net leased area)
-    #. ICT (2% of net leased area)
+    #. Hotel rooms (50% of net leased area)
+    #. Floor (22% of net leased area)
+    #. Storage (8% of net leased area)
+    #. Meeting (8% of net leased area)
+    #. Office (2% of net leased area)
+    #. Restaurant (4% of net leased area)
+    #. Kitchen (2 % of net leased area)
+    #. Auxiliary (2% of net leased area)
+    #. Restroom (0.5% of net leased area)
+    #. Sauna (1.5% of net leased area)
 
     Parameters
     ----------
@@ -186,21 +190,16 @@ class Hotel(NonResidential):
 
         # [area factor, usage type(has to be set)]
         self.zone_area_factors = collections.OrderedDict()
-        self.zone_area_factors["Office"] = [
-            0.5,
-            "Group Office (between 2 and 6 employees)",
-        ]
-        self.zone_area_factors["Floor"] = [0.25, "Traffic area"]
-        self.zone_area_factors["Storage"] = [
-            0.15,
-            "Stock, technical equipment, archives",
-        ]
-        self.zone_area_factors["Meeting"] = [0.04, "Meeting, Conference, seminar"]
-        self.zone_area_factors["Restroom"] = [
-            0.04,
-            "WC and sanitary rooms in non-residential buildings",
-        ]
-        self.zone_area_factors["ICT"] = [0.02, "Data center"]
+        self.zone_area_factors["Hotelrooms"] = [0.50, "Hotel room)"]
+        self.zone_area_factors["Floor"]      = [0.22, "Traffic area"]
+        self.zone_area_factors["Storage"]    = [0.08, "Stock, technical equipment, archives"]
+        self.zone_area_factors["Meeting"]    = [0.08, "Meeting, Conference, seminar"]
+        self.zone_area_factors["Office"]     = [0.02, "Group Office (between 2 and 6 employees)"]
+        self.zone_area_factors["Restaurant"] = [0.04, "Restaurant"]
+        self.zone_area_factors["Kitchen"]    = [0.02, "Kitchen in non-residential buildings"]
+        self.zone_area_factors["Auxiliary"]  = [0.02, "Auxiliary areas (without common rooms)"]
+        self.zone_area_factors["Restroom"]   = [0.005, "WC and sanitary rooms in non-residential buildings"]
+        self.zone_area_factors["Sauna"]      = [0.015, "Sauna"]
 
         # [tilt, orientation]
         self.outer_wall_names = {
