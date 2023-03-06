@@ -11,7 +11,7 @@ def import_and_process(path):
 
 def plot_T_Air(tsd, building_type,zone_map):
     plt.figure()
-    color_map = ['blue', 'red', 'green', 'orange', 'pink', 'black']
+    color_map = ['blue', 'red', 'green', 'orange', 'pink', 'black', 'yellow', 'purple', 'brown', 'grey']
 
     for idx, zone in enumerate(zone_map[building_type]):
         plot_param = "multizone.TAir[" + str(idx + 1) + "]"
@@ -26,7 +26,7 @@ def plot_T_Air(tsd, building_type,zone_map):
 
 def plot_Q_flow(tsd, building_type,zone_map):
     plt.figure()
-    color_map = ['blue', 'red', 'green', 'orange', 'pink', 'black']
+    color_map = ['blue', 'red', 'green', 'orange', 'pink', 'black', 'yellow', 'purple', 'brown', 'grey']
 
     for idx, zone in enumerate(zone_map[building_type]):
         plot_param_1 = "multizone.PHeater[" + str(idx + 1) + "]"
@@ -53,7 +53,7 @@ def get_bldg_type_from_filename(filename):
 
 
 if __name__ == '__main__':
-    setup_name = "20220209_test_setup"
+    setup_name = "hotel_test"
     basepath = Path('N:/Forschung/EBC0741_ZIM_SmartSenseIAQ_NK/Data/Simulationen/Referenzszenarien').joinpath(
         setup_name, "sim_results")
     # find all result files in given setup folder
@@ -61,8 +61,10 @@ if __name__ == '__main__':
 
     # TODO: Configure zone map
     zone_map = dict(office=['Office', 'Floor', 'Storage', 'Meeting', 'Restroom', 'ICT'],
-                    school=['Office', 'Floor', 'Storage', 'Meeting', 'Restroom', 'ICT'],
-                    hotel=['Office', 'Floor', 'Storage', 'Meeting', 'Restroom', 'ICT'],
+                    school=['Classrooms', 'Floor', 'Storage', 'Office', 'Restroom', 'Further common rooms','Canteen',
+                            'Auditorium'],
+                    hotel=['Hotelrooms', 'Floor', 'Storage', 'Meeting', 'Office', 'Restaurant','Kitchen', 'Auxiliary',
+                           'Restroom', 'Sauna'],
                     single_family_house=['Single zone'], multi_family_house=['Single zone'],
                     terraced_house=['Single zone'], apartment_block=['Single zone'])
 
