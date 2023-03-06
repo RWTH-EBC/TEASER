@@ -85,13 +85,18 @@ def generate_bldg(prj, scenario):
         else:
             ahu_usage = False
 
+        if scenario['Building_type'] in ["hotel","school"]:
+            method = "dataNWG"
+        else:
+            method = "bmvbs"
+
         prj.add_non_residential(
-            method='bmvbs',
+            method=method,
             usage=scenario['Building_type'],
             name=str(scenario['Scenario_number']) + "_" + str(scenario['Building_type']),
             year_of_construction=scenario['Year_of_construction'],
             with_ahu=ahu_usage,
-            number_of_floors=4,
+            number_of_floors=3,
             height_of_floors=3.5,
             net_leased_area=scenario['Net_Area'])
 
@@ -216,7 +221,7 @@ if __name__ == "__main__":
         export_aixlib_model(prj, model_export_path.joinpath(scenario_name), scenario['Location'])
 
         simulate(
-            aixlib_mo=r"D:\pse\GIT\AixLib\AixLib\package.mo",
+            aixlib_mo=r"D:\GIT\AixLib\AixLib\package.mo",
             teaser_mo=model_export_path.joinpath(scenario_name, prj.name, "package.mo"),
             building_mo=prj.name + "." + prj.buildings[0].name + "." + prj.buildings[0].name,
             savepath=model_export_path.parent.joinpath("sim_results", scenario_name),
