@@ -126,7 +126,7 @@ class UseConditions(object):
         of the lighting [convective/radiative]. Default values are derived from
         :cite:`DiLaura.2011`.
         AixLib: Used in Zone record for internal gains, lighting
-    lighting_profil : [float]
+    lighting_profile : [float]
         Relative presence of lighting 0-1 (e.g. 0.5 means that 50% of the total
         lighting power are currently used). Typically given for 24h. This is
         aligned to the user profile.
@@ -149,7 +149,7 @@ class UseConditions(object):
             (v_flow_profile combined with "min_ahu and max_ahu") or the
             (persons_profile combined with "min_ahu and max_ahu")
             is used for the AHU supply flow calculations.
-            Per default: (v_flow_profile combined with "min_ahu and max_ahu")
+            Per default: (v_flow_profile comöbined with "min_ahu and max_ahu")
     with_ahu : boolean
         Zone is connected to central air handling unit or not
         AixLib: Used on Multizone level for central AHU.
@@ -212,6 +212,9 @@ class UseConditions(object):
     cooling_set_back: float [K]
         Set back temperature offset for cooling profile. Positive (+) values
         increase the profile, negative (-) decrease.
+    holidays: list
+        List of days in year with reduced profiles analogue to weekend (profile_weekend
+        _factor is applied).
 
     """
 
@@ -396,6 +399,19 @@ class UseConditions(object):
         ]
 
         self._schedules = None
+        self.holidays = [
+            1,
+            105,
+            108,
+            121,
+            146,
+            157,
+            167,
+            276,
+            305,
+            359,
+            360
+        ]  # for 2022
 
     def adjust_profile_by_opening(self, profile):
         """Adjusts the given profile by opening times specified for use
@@ -454,7 +470,7 @@ class UseConditions(object):
             return new_profile
 
     def adjust_profile_by_weekend(self, profile):
-        """Scales the given profile on weekends. Factor for scaling is taken
+        """Scales the given profile on weekends and holidays. Factor for scaling is taken
         from self.profiles_weekend_factor.
 
         Parameters
@@ -474,6 +490,9 @@ class UseConditions(object):
         for i in range(self.first_saturday_of_year, 365, 7):
             weekend_days.append(i)
             weekend_days.append(i + 1)
+        weekend_days.extend(self.holidays)
+        weekend_days.sort()
+        weekend_days = list(dict.fromkeys(weekend_days)) # remove duplicates
         for day_nr, profile_day in enumerate(daily_profiles, 1):
             if day_nr in weekend_days:
                 profile_day = \
@@ -681,7 +700,7 @@ class UseConditions(object):
             self._persons_profile = self.adjust_profile_by_opening(
                 self._persons_profile)
 
-        if self.profiles_weekend_factor:
+        if self.profiles_weekend_factor is not None:
             self._machines_profile = self.adjust_profile_by_weekend(
                 self._machines_profile)
             self._lighting_profile = self.adjust_profile_by_weekend(
