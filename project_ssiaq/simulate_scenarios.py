@@ -49,8 +49,8 @@ def load_scenarios(scenario_file=None):
         ass_error_modernization = "only 'non-modernized' and 'modernized' are valid modernization states"
         assert scenarios.Modernization_state.isin(["non-modernized", "modernized"]).all(), ass_error_modernization
 
-        ass_error_equipment = "only 'natural_ventilation' and 'mechanical_ventilation' are valid equipment states"
-        assert scenarios.Equipment.isin(["natural_ventilation", "mechanical_ventilation"]).all(), ass_error_equipment
+        ass_error_equipment = "only 'natural_ventilation' and 'air_conditioned' are valid equipment states"
+        assert scenarios.Equipment.isin(["natural_ventilation", "air_conditioned"]).all(), ass_error_equipment
 
         ass_error_usage = "only 'standard' are valid usage types"
         assert scenarios.Usage_profile.isin(["standard"]).all(), ass_error_usage
@@ -80,7 +80,7 @@ def generate_bldg(prj, scenario):
     # TODO: add building type features with dict or json file
 
     if scenario['Building_class'] == "non_residential":
-        if scenario['Equipment'] == 'mechanical_ventilation':
+        if scenario['Equipment'] == 'air_conditioned':
             ahu_usage = True
         else:
             ahu_usage = False
@@ -101,6 +101,11 @@ def generate_bldg(prj, scenario):
             net_leased_area=scenario['Net_Area'])
 
     elif scenario['Building_class'] == "residential":
+        if scenario['Modernization_state'] == "modernized":
+            construction_type = 'tabula_retrofit'
+        else:
+            construction_type = 'tabula_standard'
+
         prj.add_residential(
             method='tabula_de',
             usage=scenario['Building_type'],
@@ -109,7 +114,7 @@ def generate_bldg(prj, scenario):
             number_of_floors=2,
             height_of_floors=3,
             net_leased_area=scenario['Net_Area'],
-            construction_type='tabula_standard')
+            construction_type=construction_type)
     else:
         print("Could not resolve building class")
         pass
@@ -209,7 +214,7 @@ def simulate(
 if __name__ == "__main__":
 
     setup_name = "20230216_vergleich_efh_buerogebaeude"
-    basepath = pathlib.Path('N:\Forschung\EBC0741_ZIM_SmartSenseIAQ_NK\Data\Simulationen\Referenzszenarien').joinpath(
+    basepath = pathlib.Path('N:\Forschung\EBC0741_ZIM_SmartSenseIAQ_NK\Data\Simulationen\01_Referenzszenarien').joinpath(
         setup_name)
     scenarios = load_scenarios(basepath.joinpath("scenarios_debug.xlsx"))
     model_export_path = basepath.joinpath("models")

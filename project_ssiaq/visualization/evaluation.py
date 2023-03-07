@@ -54,7 +54,7 @@ def get_bldg_type_from_filename(filename):
 
 if __name__ == '__main__':
     setup_name = "hotel_test"
-    basepath = Path('N:/Forschung/EBC0741_ZIM_SmartSenseIAQ_NK/Data/Simulationen/Referenzszenarien').joinpath(
+    basepath = Path('N:/Forschung/EBC0741_ZIM_SmartSenseIAQ_NK/Data/Simulationen/01_Referenzszenarien').joinpath(
         setup_name, "sim_results")
     # find all result files in given setup folder
     pathlist = Path(basepath).rglob('*.mat')
