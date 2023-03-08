@@ -306,6 +306,9 @@ class Office(NonResidential):
             zone.name = key
             use_cond = UseCond(zone)
             use_cond.load_use_conditions(value[1], data_class=self.parent.data)
+            use_cond.profiles_weekend_factor = 0
+            use_cond.first_saturday_of_year = 1
+            use_cond.calc_adj_schedules()
             zone.use_conditions = use_cond
 
         # statistical estimation of the facade
