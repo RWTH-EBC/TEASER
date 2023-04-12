@@ -38,7 +38,8 @@ def load_type_element(element, year, construction, data_class,
         instead of OuterWall
 
     reverse_layers : bool
-        defines if layer list should be reversed
+        defines if layer list should be reversed - this is necessary for zone
+        borders to maintain consistency
 
     """
     element_binding = data_class.element_bind
@@ -85,7 +86,7 @@ def load_type_element_by_key(element, key_str, data_class,
         Instance of BuildingElement or inherited Element of TEASER
 
     key_str : str
-        key  string to the type element of the building characteristics sources
+        key string to the type element of the building characteristics sources
 
     data_class : DataClass()
         DataClass containing the bindings for TypeBuildingElement and

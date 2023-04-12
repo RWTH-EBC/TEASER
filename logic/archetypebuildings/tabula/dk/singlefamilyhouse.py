@@ -310,11 +310,21 @@ class SingleFamilyHouse(Residential):
                 "Year of construction not supported for this archetype" "building"
             )
 
-    def generate_archetype(self):
+    def generate_archetype(self, inner_wall_calc_approach='teaser_default'):
         """Generates a SingleFamilyHouse archetype buildings
 
         With given values, this function generates an archetype building for
         Tabula Single Family House.
+
+        Parameters
+        ----------
+
+        inner_wall_calc_approach : str
+            'teaser_default' (default) sets length of inner walls = typical
+            length * height of floors + 2 * typical width * height of floors
+            'typical_minus_outer' sets length of inner walls = max(2 * typical
+            length * height of floors + 2 * typical width * height of floors
+            - length of outer walls - inner walls to neighbours of the zone, 0)
         """
         self.thermal_zones = None
         self._check_year_of_construction()
@@ -326,6 +336,14 @@ class SingleFamilyHouse(Residential):
             zone = ThermalZone(parent=self)
             zone.name = key
             zone.area = type_bldg_area * value[0]
+            try:
+                zone.number_of_floors = value[2]['number_of_floors']
+            except (KeyError, IndexError):
+                pass
+            try:
+                zone.height_of_floors = value[2]['height_of_floors']
+            except (KeyError, IndexError):
+                pass
             use_cond = UseCond(parent=zone)
             use_cond.load_use_conditions(zone_usage=value[1])
             zone.use_conditions = use_cond
@@ -534,7 +552,7 @@ class SingleFamilyHouse(Residential):
                     floor.orientation = value[1]
 
         for zone in self.thermal_zones:
-            zone.set_inner_wall_area()
+            zone.set_inner_wall_area(inner_wall_calc_approach)
             zone.set_volume_zone()
 
     @property

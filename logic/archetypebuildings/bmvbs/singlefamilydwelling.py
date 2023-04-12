@@ -118,8 +118,10 @@ class SingleFamilyDwelling(Residential):
 
     zone_area_factors : dict
         This dictionary contains the name of the zone (str), the
-        zone area factor (float) and the zone usage from BoundaryConditions json
-        (str). (Default see doc string above)
+        zone area factor (float), the zone usage from BoundaryConditions json
+        (str) (Default see doc string above), and may contain a dictionary with
+        keyword-attribute-like changes to zone parameters that are usually
+        inherited from parent: 'number_of_floors', 'height_of_floors'
     outer_wall_names : dict
         This dictionary contains a random name for the outer walls,
         their orientation and tilt. Default is a building in north-south
@@ -317,11 +319,21 @@ class SingleFamilyDwelling(Residential):
             )  # according to user  #
             # profile in :cite:`DeutschesInstitutfurNormung.2016`
 
-    def generate_archetype(self):
+    def generate_archetype(self, inner_wall_calc_approach='teaser_default'):
         """Generates a SingleFamilyDwelling building.
 
         With given values, this class generates a archetype building for
         single family dwellings according to TEASER requirements
+
+        Parameters
+        ----------
+
+        inner_wall_calc_approach : str
+            'teaser_default' (default) sets length of inner walls = typical
+            length * height of floors + 2 * typical width * height of floors
+            'typical_minus_outer' sets length of inner walls = max(2 * typical
+            length * height of floors + 2 * typical width * height of floors
+            - length of outer walls - inner walls to neighbours of the zone, 0)
         """
         # help area for the correct building area setting while using typeBldgs
         self.thermal_zones = None
@@ -376,6 +388,14 @@ class SingleFamilyDwelling(Residential):
             zone = ThermalZone(self)
             zone.name = key
             zone.area = type_bldg_area * value[0]
+            try:
+                zone.number_of_floors = value[2]['number_of_floors']
+            except (KeyError, IndexError):
+                pass
+            try:
+                zone.height_of_floors = value[2]['height_of_floors']
+            except (KeyError, IndexError):
+                pass
             use_cond = UseCond(zone)
             use_cond.load_use_conditions(value[1], data_class=self.parent.data)
 
@@ -516,7 +536,7 @@ class SingleFamilyDwelling(Residential):
             self.set_window_area(value, key)
 
         for zone in self.thermal_zones:
-            zone.set_inner_wall_area()
+            zone.set_inner_wall_area(inner_wall_calc_approach)
             zone.set_volume_zone()
 
     @property

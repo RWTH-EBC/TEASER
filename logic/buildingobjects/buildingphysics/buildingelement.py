@@ -3,9 +3,7 @@
 from __future__ import division
 import warnings
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
-from teaser.logic.buildingobjects.buildingphysics.material import Material
 import teaser.data.input.buildingelement_input_json as buildingelement_input
-import teaser.data.input.material_input_json as material_input
 import numpy as np
 import random
 import re
@@ -69,13 +67,6 @@ class BuildingElement(object):
         List of all layers of a building element (to be filled with Layer
         objects). Use element.layer = None to delete all layers of the building
         element
-    view_factors : list
-        view factors for half-space above (outer) surface for sky/ground/other
-        buildings/surfaces with ambient temperature for use in AixLib with
-        FiveElementVectorized and calculateHeatFlow. Values must already be
-        corrected for cosine loss and possible directional dependance of
-        absorptivity. If specified, sum should be 1. If sum is 0, default
-        assumptions are used in AixLib"
 
     Calculated Attributes
 
@@ -138,7 +129,6 @@ class BuildingElement(object):
         self._area = None
         self._tilt = None
         self._orientation = None
-        self._idx_orientation = None
         self._inner_convection = None
         self._inner_radiation = None
         self._outer_convection = None
@@ -161,8 +151,6 @@ class BuildingElement(object):
         self.r_outer_rad = 0.0
         self.r_outer_comb = 0.0
         self.wf_out = 0.0
-
-        self._view_factors = [0, 0, 0, 0]
 
     def calc_ua_value(self):
         """U*A value for building element.
@@ -297,7 +285,6 @@ class BuildingElement(object):
             data_class=None,
             element_type=None,
             reverse_layers=False,
-            reset_basic_data=True,
             type_element_key=None
     ):
         """Typical element loader.
@@ -323,19 +310,15 @@ class BuildingElement(object):
             project)
 
         element_type : str
-            Element type to load - only to specify if the data_class entry for a
+            Element type to load - only to specify if the json entry for a
             different type than type(element) is to be loaded, e.g. InnerWall
             instead of OuterWall
 
         reverse_layers : bool
             defines if layer list should be reversed
 
-        reset_basic_data : bool
-            if True, inner_convection, outer_convection, inner_radiation, and
-            outer_radiation are set to None in advance and must be set by
-            buildingelement_input._set_basic_data() again afterwards
-
         type_element_key : str
+            Element to load - specify the full json entry
 
         """
 
@@ -345,11 +328,10 @@ class BuildingElement(object):
             data_class = data_class
 
         self.layer = None
-        if not reset_basic_data:
-            self._inner_convection = None
-            self._inner_radiation = None
-            self._outer_convection = None
-            self._outer_radiation = None
+        self._inner_convection = None
+        self._inner_radiation = None
+        self._outer_convection = None
+        self._outer_radiation = None
 
         if type_element_key:
             try:
@@ -438,114 +420,6 @@ class BuildingElement(object):
         buildingelement_output.delete_type_element(element=self,
                                                    data_class=data_class)
 
-    def use_layer_properties(self, layers, year=1960, data_class=None,
-                             element_type=None):
-        """use custom properties from layer specification
-
-        Parameters
-        ----------
-        layers : list
-            list of thickness - material pairs. thickness are floats. materials
-            have attributes id, name, density, thermalConductivity,
-            heatCapacity, solarAbsorptance, irEmissivity, transmittance which
-            all may be None, but in the end density and thermal conductivity
-            must be specified either by their own values or by material values
-            loaded from data_class via id or name. All others are set to default
-            values (heat capacity: 1 kJ/kgK, rest: default values in Material())
-
-        year : int
-            dummy value (?) because it is required to set basic values
-
-        data_class : DataClass()
-            DataClass containing the bindings for TypeBuildingElement and
-            Material (typically this is the data class stored in prj.data,
-            but the user can individually change that. Default is
-            self.parent.parent.parent.data (which is data_class in current
-            project)
-
-        element_type : str
-            Element type to load - only to specify if the data_class entry for a
-            different type than type(element) is to be loaded, e.g. InnerWall
-            instead of OuterWall
-
-
-        Returns
-        -------
-
-        Raises
-        ------
-        KeyError
-            if material is not sufficiently specified (density and/or thermal
-            conductivity remain 0)
-
-        """
-
-        if data_class is None:
-            data_class = self.parent.parent.parent.data
-        else:
-            data_class = data_class
-
-        self.layer = None
-        self._inner_convection = None
-        self._inner_radiation = None
-        self._outer_convection = None
-        self._outer_radiation = None
-
-        element_binding = data_class.element_bind
-
-        if element_type is None:
-            element_type = type(self).__name__
-
-        for key, element_in in element_binding.items():
-            if key != "version":
-                if (
-                        element_in["building_age_group"][0]
-                        <= year
-                        <= element_in["building_age_group"][1]
-                        and key.startswith(element_type)
-                ):
-                    element_dict = dict(element_in)
-                    element_dict["construction_type"] = "custom"
-                    buildingelement_input._set_basic_data(element=self,
-                                                          element_in=element_dict)
-                    break
-
-        # increasing id from inside to outside
-        for id, (thickness, material_info) in enumerate(layers):
-            layer = Layer(parent=self, id=id)
-            layer.thickness = thickness
-            material = Material(layer)
-            # load default material values if available
-            if material_info.id is not None:
-                material_input.load_material_id(material, material_info.id,
-                                                data_class)
-            elif material_info.name is not None:
-                material_input.load_material(material, material_info.name,
-                                             data_class)
-            # use single material properties of material_info
-            if material_info.density is not None:
-                material.density = material_info.density
-            if material_info.thermalConductivity is not None:
-                material.thermal_conduc = material_info.thermalConductivity
-            if material_info.heatCapacity is not None:
-                material.heat_capac = material_info.heatCapacity
-            if material_info.solarAbsorptance is not None:
-                material.solar_absorp = material_info.solarAbsorptance
-            if material_info.irEmissivity is not None:
-                material.ir_emissivity = material_info.irEmissivity
-            if material_info.transmittance is not None:
-                material.transmittance = material_info.transmittance
-            if material_info.name is not None:
-                material.name = material_info.name
-            if material.density == 0 or material.thermal_conduc == 0:
-                warnings.warn('Material not sufficiently specified.')
-                raise KeyError
-            if material.heat_capac == 0:
-                material.heat_capac = 1.0
-                warnings.warn('Material heat capacity not specified. '
-                              '1.0 kJ/(kg*K) will be used.')
-
-
     def set_calc_default(self):
         """Sets all calculated values of the Building Element to zero
         """
@@ -627,17 +501,6 @@ class BuildingElement(object):
             if (self.parent is not None and self.parent.parent is not None and
                     self.area is not None):
                 self.parent.parent.fill_window_area_dict()
-
-    @property
-    def idx_orientation(self):
-        return self._idx_orientation
-
-    @idx_orientation.setter
-    def idx_orientation(self, value):
-        if int(value) == value:
-            self._idx_orientation = int(value)
-        else:
-            self._orientation = None
 
     @property
     def layer(self):
@@ -800,26 +663,6 @@ class BuildingElement(object):
                 self._tilt = value
             except:
                 raise ValueError("Can't convert tilt to float")
-
-    @property
-    def view_factors(self):
-        return self._view_factors
-
-    @view_factors.setter
-    def view_factors(self, value):
-        try:
-            value = list(value)
-            view_factors = [0., 0., 0., 0.]
-            for idx in range(4):
-                view_factors[idx] += float(value[idx])
-        except:
-            raise ValueError("Can't convert view_factors to four-element list")
-        if not (np.isclose(sum(view_factors), 1)
-                or all([vf == 0 for vf in view_factors])) \
-                or any([vf < 0 for vf in view_factors]):
-            raise ValueError("view factors must be >= 0 and sum up to 1 or "
-                             "be all 0")
-        self._view_factors = view_factors
 
     @property
     def year_of_construction(self):

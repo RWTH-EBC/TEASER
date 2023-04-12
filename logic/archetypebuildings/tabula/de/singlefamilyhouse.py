@@ -7,14 +7,11 @@ from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
 from teaser.logic.buildingobjects.buildingphysics.groundfloor import GroundFloor
 from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
-from teaser.logic.buildingobjects.buildingphysics.layer import Layer
-from teaser.logic.buildingobjects.buildingphysics.material import Material
 from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.buildingphysics.door import Door
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
-import numpy as np
 
 
 class SingleFamilyHouse(Residential):
@@ -79,14 +76,16 @@ class SingleFamilyHouse(Residential):
         assigned to attribute central_ahu. This instance holds information for
         central Air Handling units. Default is False.
     internal_gains_mode: int [1, 2, 3]
-        mode for the internal gains calculation by persons:
-        1: Temperature and activity degree dependent calculation. The
+        mode for the internal gains calculation done in AixLib:
+        1: Temperature and activity degree dependent heat flux calculation for persons. The
            calculation is based on  SIA 2024 (default)
-        2: Temperature and activity degree independent calculation, the max.
+        2: Temperature and activity degree independent heat flux calculation for persons, the max.
            heatflowrate is prescribed by the parameter
            fixed_heat_flow_rate_persons.
         3: Temperature and activity degree dependent calculation with
-           consideration of moisture. The calculation is based on SIA 2024
+           consideration of moisture and co2. The moisture calculation is
+           based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
+           Engineering ToolBox (2004) and regards only persons.
     construction_type : str
         Construction type of used wall constructions default is "existing
         state"
@@ -172,8 +171,6 @@ class SingleFamilyHouse(Residential):
             "WindowFacadeSouth_2": [90.0, 180.0],
             "WindowFacadeWest_2": [90.0, 270.0],
         }
-
-        self.nz_border_names = dict()
 
         # [tilt, orientation]
 
@@ -325,11 +322,11 @@ class SingleFamilyHouse(Residential):
 
         if self.with_ahu is True:
             self.central_ahu.temperature_profile = (
-                7 * [293.15] + 12 * [295.15] + 6 * [293.15]
+                7 * [293.15] + 12 * [295.15] + 5 * [293.15]
             )
-            self.central_ahu.min_relative_humidity_profile = 25 * [0.45]
-            self.central_ahu.max_relative_humidity_profile = 25 * [0.55]
-            self.central_ahu.v_flow_profile = 7 * [0.0] + 12 * [1.0] + 6 * [0.0]
+            self.central_ahu.min_relative_humidity_profile = 24 * [0.45]
+            self.central_ahu.max_relative_humidity_profile = 24 * [0.55]
+            self.central_ahu.v_flow_profile = 7 * [0.0] + 12 * [1.0] + 5 * [0.0]
 
         self.internal_gains_mode = internal_gains_mode
 
@@ -362,7 +359,7 @@ class SingleFamilyHouse(Residential):
             length * height of floors + 2 * typical width * height of floors
             'typical_minus_outer' sets length of inner walls = max(2 * typical
             length * height of floors + 2 * typical width * height of floors
-            - length of outer walls / inner walls to neighbours of the zone, 0)
+            - length of outer walls - inner walls to neighbours of the zone, 0)
         """
         self.thermal_zones = None
         self._check_year_of_construction()
@@ -388,1066 +385,208 @@ class SingleFamilyHouse(Residential):
 
             zone.use_conditions.with_ahu = False
 
-        facade_estimation_factors \
-            = self.facade_estimation_factors[self.building_age_group]
-
-        for zone_index, zone in enumerate(self.thermal_zones):
-
+        if self.facade_estimation_factors[self.building_age_group]["ow1"] != 0:
             for key, value in self._outer_wall_names_1.items():
-                try:
-                    area = value[2]['areas'][zone_index] \
-                           * facade_estimation_factors["ow1"] / \
-                           (facade_estimation_factors["ow1"]
-                            + facade_estimation_factors["ow2"])
-                    if area is None:
-                        raise KeyError
-                except (KeyError, IndexError):
-                    area = (facade_estimation_factors["ow1"]
-                            * type_bldg_area) / len(self._outer_wall_names_1)
-                try:
-                    element_type = value[2]['element_type']
-                except (KeyError, IndexError):
-                    element_type = None
-                try:
-                    year = value[2]['year']
-                except (KeyError, IndexError):
-                    year = self.year_of_construction
-                if area:
+                for zone in self.thermal_zones:
                     outer_wall = OuterWall(zone)
-                    try:
-                        layers = None
-                        layers = value[2]['layers']
-                        outer_wall.use_layer_properties(
-                            layers[0][1], year=year, element_type=element_type
-                        )
-                        multipleParts = len(layers) > 1
-                    except (KeyError, IndexError):
-                        # layers is a string (referring to a wall type) or None
-                        if layers is not None:
-                            reverse_layers = layers[0] == '-'
-                            layers = layers.lstrip('-')
-                        else:
-                            reverse_layers = False
-                        outer_wall.load_type_element(
-                            year=year,
-                            construction=self._construction_type_1,
-                            data_class=self.parent.data,
-                            element_type=element_type,
-                            type_element_key=layers,
-                            reverse_layers=reverse_layers
-                        )
-                        multipleParts = False
-                    try:
-                        outer_wall.view_factors = value[2]['view_factors']
-                    except (KeyError, IndexError):
-                        pass
+                    outer_wall.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self._construction_type_1,
+                        data_class=self.parent.data,
+                    )
+                    outer_wall.name = key
                     outer_wall.tilt = value[0]
                     outer_wall.orientation = value[1]
-                    outer_wall.name = key
-                    if multipleParts:
-                        outer_wall.area = area * layers[0][0]
-                        for wallPart in layers[1:]:
-                            outer_wall = OuterWall(zone)
-                            outer_wall.use_layer_properties(
-                                wallPart[1], year=year,
-                                element_type=element_type
-                            )
-                            outer_wall.name = key
-                            outer_wall.tilt = value[0]
-                            outer_wall.orientation = value[1]
-                            outer_wall.area = area * wallPart[0]
-                            try:
-                                outer_wall.view_factors = value[2]['view_factors']
-                            except (KeyError, IndexError):
-                                pass
-                    else:
-                        outer_wall.area = area
+                    outer_wall.area = (
+                        self.facade_estimation_factors[self.building_age_group]["ow1"]
+                        * zone.area
+                    ) / len(self._outer_wall_names_1)
 
+        if self.facade_estimation_factors[self.building_age_group]["ow2"] != 0:
             for key, value in self._outer_wall_names_2.items():
-                try:
-                    area = value[2]['areas'][zone_index] \
-                           * facade_estimation_factors["ow2"] / \
-                           (facade_estimation_factors["ow2"]
-                            + facade_estimation_factors["ow1"])
-                    if area is None:
-                        raise KeyError
-                except (KeyError, IndexError):
-                    area = (facade_estimation_factors["ow2"]
-                            * type_bldg_area) / len(self._outer_wall_names_2)
-                try:
-                    element_type = value[2]['element_type']
-                except (KeyError, IndexError):
-                    element_type = None
-                try:
-                    year = value[2]['year']
-                except (KeyError, IndexError):
-                    year = self.year_of_construction
-                if area:
+                for zone in self.thermal_zones:
                     outer_wall = OuterWall(zone)
-                    try:
-                        layers = None
-                        layers = value[2]['layers']
-                        outer_wall.use_layer_properties(
-                            layers[0][1], year=year, element_type=element_type
-                        )
-                        multipleParts = len(layers) > 1
-                    except (KeyError, IndexError):
-                        if layers is not None:
-                            reverse_layers = layers[0] == '-'
-                            layers = layers.lstrip('-')
-                        else:
-                            reverse_layers = False
-                        outer_wall.load_type_element(
-                            year=year,
-                            construction=self._construction_type_2,
-                            data_class=self.parent.data,
-                            element_type=element_type,
-                            type_element_key=layers,
-                            reverse_layers=reverse_layers
-                        )
-                        multipleParts = False
-                    try:
-                        outer_wall.view_factors = value[2]['view_factors']
-                    except (KeyError, IndexError):
-                        pass
+                    outer_wall.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self._construction_type_2,
+                        data_class=self.parent.data,
+                    )
                     outer_wall.name = key
                     outer_wall.tilt = value[0]
                     outer_wall.orientation = value[1]
-                    if multipleParts:
-                        outer_wall.area = area * layers[0][0]
-                        for wallPart in layers[1:]:
-                            outer_wall = OuterWall(zone)
-                            outer_wall.use_layer_properties(
-                                wallPart[1], year=year,
-                                element_type=element_type
-                            )
-                            outer_wall.name = key
-                            outer_wall.tilt = value[0]
-                            outer_wall.orientation = value[1]
-                            outer_wall.area = area * wallPart[0]
-                            try:
-                                outer_wall.view_factors = value[2]['view_factors']
-                            except (KeyError, IndexError):
-                                pass
-                    else:
-                        outer_wall.area = area
+                    outer_wall.area = (
+                        self.facade_estimation_factors[self.building_age_group]["ow2"]
+                        * zone.area
+                    ) / len(self._outer_wall_names_2)
 
-
-            # if not zone.outer_walls:
-            #     outer_wall = OuterWall(zone)
-            #     outer_wall.load_type_element(
-            #         year=self.year_of_construction,
-            #         construction=self._construction_type_1,
-            #         data_class=self.parent.data,
-            #     )
-            #     outer_wall.name = "dummy"
-            #     outer_wall.tilt = 90.
-            #     outer_wall.orientation = 0.
-            #     outer_wall.area = 1E-4
-
+        if self.facade_estimation_factors[self.building_age_group]["win1"] != 0:
             for key, value in self.window_names_1.items():
-                try:
-                    area = value[2]['areas'][zone_index] \
-                           * facade_estimation_factors["win1"] / \
-                           (facade_estimation_factors["win1"]
-                            + facade_estimation_factors["win2"])
-                    if area is None:
-                        raise KeyError
-                except (KeyError, IndexError):
-                    area = (facade_estimation_factors["win1"]
-                            * type_bldg_area) / len(self.window_names_1)
-                try:
-                    element_type = value[2]['element_type']
-                except (KeyError, IndexError):
-                    element_type = None
-                try:
-                    year = value[2]['year']
-                except (KeyError, IndexError):
-                    year = self.year_of_construction
-                if area:
+                for zone in self.thermal_zones:
                     window = Window(zone)
-                    try:
-                        layers = None
-                        layers = value[2]['layers']
-                        window.use_layer_properties(
-                            layers[0][1], year=year, element_type=element_type
-                        )
-                        multipleParts = len(layers) > 1
-                    except (KeyError, IndexError):
-                        if layers is not None:
-                            reverse_layers = layers[0] == '-'
-                            layers = layers.lstrip('-')
-                        else:
-                            reverse_layers = False
-                        window.load_type_element(
-                            year=year,
-                            construction=self._construction_type_1,
-                            data_class=self.parent.data,
-                            element_type=element_type,
-                            type_element_key=layers,
-                            reverse_layers=reverse_layers
-                        )
-                        multipleParts = False
-                    try:
-                        # use g-value and U-value from IDF file
-                        # not a nice solution, but I see no other way
-                        window.g_value= value[2]['idf_g-value']
-                        rsi = 1 / (window.inner_convection
-                                   + window.inner_radiation)
-                        rse = 1 / (window.outer_convection
-                                   + window.outer_radiation)
-                        r_solid = 1 / value[2]['idf_U-value'] - rsi - rse
-                        all_lambdas = sum(1 / l.material.thermal_conduc
-                                          for l in window.layer)
-                        each_thickness = r_solid / all_lambdas
-                        if (isinstance(each_thickness, float)
-                                and each_thickness is not None):
-                            if each_thickness > 0:
-                                for l in window.layer:
-                                    l._thickness = each_thickness
-                            else:
-                                print('target u-value could not be set')
-                        else:
-                            print('target u-value could not be set')
-                        idfUG = True
-                    except (KeyError, IndexError):
-                        idfUG = False
+                    window.load_type_element(
+                        self.year_of_construction,
+                        construction=self._construction_type_1,
+                        data_class=self.parent.data,
+                    )
                     window.name = key
                     window.tilt = value[0]
                     window.orientation = value[1]
-                    if multipleParts:
-                        window.area = area * layers[0][0]
-                        for windowPart in layers[1:]:
-                            window = Window(zone)
-                            window.use_layer_properties(
-                                windowPart[1], year=year,
-                                element_type=element_type
-                            )
-                            window.name = key
-                            window.tilt = value[0]
-                            window.orientation = value[1]
-                            window.area = area * windowPart[0]
-                        if idfUG:
-                            print('idf U-value and g-value used, but '
-                                  'multiple layer lists. U- and g-value'
-                                  'are only implemented for the first of '
-                                  'these window parts!')
-                    else:
-                        window.area = area
+                    window.area = (
+                        self.facade_estimation_factors[self.building_age_group]["win1"]
+                        * zone.area
+                    ) / len(self.window_names_1)
 
+        if self.facade_estimation_factors[self.building_age_group]["win2"] != 0:
             for key, value in self.window_names_2.items():
-                try:
-                    area = value[2]['areas'][zone_index] \
-                           * facade_estimation_factors["win2"] / \
-                           (facade_estimation_factors["win2"]
-                            + facade_estimation_factors["win1"])
-                    if area is None:
-                        raise KeyError
-                except (KeyError, IndexError):
-                    area = (facade_estimation_factors["win2"]
-                            * type_bldg_area) / len(self.window_names_2)
-                try:
-                    element_type = value[2]['element_type']
-                except (KeyError, IndexError):
-                    element_type = None
-                try:
-                    year = value[2]['year']
-                except (KeyError, IndexError):
-                    year = self.year_of_construction
-                if area:
+                for zone in self.thermal_zones:
                     window = Window(zone)
-                    try:
-                        layers = None
-                        layers = value[2]['layers']
-                        window.use_layer_properties(
-                            layers[0][1], year=year, element_type=element_type
-                        )
-                        multipleParts = len(layers) > 1
-                    except (KeyError, IndexError):
-                        if layers is not None:
-                            reverse_layers = layers[0] == '-'
-                            layers = layers.lstrip('-')
-                        else:
-                            reverse_layers = False
-                        window.load_type_element(
-                            year=year,
-                            construction=self._construction_type_2,
-                            data_class=self.parent.data,
-                            element_type=element_type,
-                            type_element_key=layers,
-                            reverse_layers=reverse_layers
-                        )
-                        multipleParts = False
-                    try:
-                        # use g-value and U-value from IDF file
-                        # not a nice solution, but I see no other way
-                        window.g_value= value[2]['idf_g-value']
-                        rsi = 1 / (window.inner_convection
-                                   + window.inner_radiation)
-                        rse = 1 / (window.outer_convection
-                                   + window.outer_radiation)
-                        r_solid = 1 / value[2]['idf_U-value'] - rsi - rse
-                        all_lambdas = sum(1 / l.material.thermal_conduc
-                                          for l in window.layer)
-                        each_thickness = r_solid / all_lambdas
-                        if (isinstance(each_thickness, float)
-                                and each_thickness is not None):
-                            if each_thickness > 0:
-                                for l in window.layer:
-                                    l._thickness = each_thickness
-                            else:
-                                print('target u-value could not be set')
-                        else:
-                            print('target u-value could not be set')
-                        idfUG = True
-                    except (KeyError, IndexError):
-                        idfUG = False
+                    window.load_type_element(
+                        self.year_of_construction,
+                        construction=self._construction_type_2,
+                        data_class=self.parent.data,
+                    )
                     window.name = key
                     window.tilt = value[0]
                     window.orientation = value[1]
-                    if multipleParts:
-                        window.area = area * layers[0][0]
-                        for windowPart in layers[1:]:
-                            window = Window(zone)
-                            window.use_layer_properties(
-                                windowPart[1], year=year,
-                                element_type=element_type
-                            )
-                            window.name = key
-                            window.tilt = value[0]
-                            window.orientation = value[1]
-                            window.area = area * windowPart[0]
-                        if idfUG:
-                            print('idf U-value and g-value used, but '
-                                  'multiple layer lists. U- and g-value'
-                                  'are only implemented for the first of '
-                                  'these window parts!')
-                    else:
-                        window.area = area
+                    window.area = (
+                        self.facade_estimation_factors[self.building_age_group]["win2"]
+                        * zone.area
+                    ) / len(self.window_names_2)
 
-            if not zone.windows:
-                window = Window(zone)
-                window.load_type_element(
-                    year=self.year_of_construction,
-                    construction=self._construction_type_1,
-                    data_class=self.parent.data,
-                )
-                window.name = "dummy"
-                window.tilt = zone.outer_walls[0].tilt
-                window.orientation = zone.outer_walls[0].orientation
-                window.area = 1E-4
-
+        if self.facade_estimation_factors[self.building_age_group]["gf1"] != 0:
             for key, value in self.ground_floor_names_1.items():
-                try:
-                    area = value[2]['areas'][zone_index] \
-                           * facade_estimation_factors["gf1"] / \
-                           (facade_estimation_factors["gf1"]
-                            + facade_estimation_factors["gf2"])
-                    if area is None:
-                        raise KeyError
-                except (KeyError, IndexError):
-                    area = (facade_estimation_factors["gf1"]
-                            * type_bldg_area) / len(self.ground_floor_names_1)
-                try:
-                    element_type = value[2]['element_type']
-                except (KeyError, IndexError):
-                    element_type = None
-                try:
-                    year = value[2]['year']
-                except (KeyError, IndexError):
-                    year = self.year_of_construction
-                if area:
+
+                for zone in self.thermal_zones:
                     gf = GroundFloor(zone)
-                    try:
-                        layers = None
-                        layers = value[2]['layers']
-                        gf.use_layer_properties(
-                            layers[0][1], year=year, element_type=element_type
-                        )
-                        multipleParts = len(layers) > 1
-                    except (KeyError, IndexError):
-                        if layers is not None:
-                            reverse_layers = layers[0] == '-'
-                            layers = layers.lstrip('-')
-                        else:
-                            reverse_layers = False
-                        gf.load_type_element(
-                            year=year,
-                            construction=self._construction_type_1,
-                            data_class=self.parent.data,
-                            element_type=element_type,
-                            type_element_key=layers,
-                            reverse_layers=reverse_layers
-                        )
-                        multipleParts = False
+                    gf.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self._construction_type_1,
+                        data_class=self.parent.data,
+                    )
                     gf.name = key
                     gf.tilt = value[0]
                     gf.orientation = value[1]
-                    if multipleParts:
-                        gf.area = area * layers[0][0]
-                        for gfPart in layers[1:]:
-                            gf = GroundFloor(zone)
-                            gf.use_layer_properties(
-                                gfPart[1], year=year, element_type=element_type
-                            )
-                            gf.name = key
-                            gf.tilt = value[0]
-                            gf.orientation = value[1]
-                            gf.area = area * gfPart[0]
-                    else:
-                        gf.area = area
+                    gf.area = (
+                        self.facade_estimation_factors[self.building_age_group]["gf1"]
+                        * zone.area
+                    ) / len(self.ground_floor_names_1)
 
+        if self.facade_estimation_factors[self.building_age_group]["gf2"] != 0:
             for key, value in self.ground_floor_names_2.items():
-                try:
-                    area = value[2]['areas'][zone_index] \
-                           * facade_estimation_factors["gf2"] / \
-                           (facade_estimation_factors["gf2"]
-                            + facade_estimation_factors["gf1"])
-                    if area is None:
-                        raise KeyError
-                except (KeyError, IndexError):
-                    area = (facade_estimation_factors["gf2"]
-                            * type_bldg_area) / len(self.ground_floor_names_2)
-                try:
-                    element_type = value[2]['element_type']
-                except (KeyError, IndexError):
-                    element_type = None
-                try:
-                    year = value[2]['year']
-                except (KeyError, IndexError):
-                    year = self.year_of_construction
-                if area:
+
+                for zone in self.thermal_zones:
                     gf = GroundFloor(zone)
-                    try:
-                        layers = None
-                        layers = value[2]['layers']
-                        gf.use_layer_properties(
-                            layers[0][1], year=year, element_type=element_type
-                        )
-                        multipleParts = len(layers) > 1
-                    except (KeyError, IndexError):
-                        if layers is not None:
-                            reverse_layers = layers[0] == '-'
-                            layers = layers.lstrip('-')
-                        else:
-                            reverse_layers = False
-                        gf.load_type_element(
-                            year=year,
-                            construction=self._construction_type_2,
-                            data_class=self.parent.data,
-                            element_type=element_type,
-                            type_element_key=layers,
-                            reverse_layers=reverse_layers
-                        )
-                        multipleParts = False
+                    gf.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self._construction_type_2,
+                        data_class=self.parent.data,
+                    )
                     gf.name = key
                     gf.tilt = value[0]
                     gf.orientation = value[1]
-                    if multipleParts:
-                        gf.area = area * layers[0][0]
-                        for gfPart in layers[1:]:
-                            gf = GroundFloor(zone)
-                            gf.use_layer_properties(
-                                gfPart[1], year=year, element_type=element_type
-                            )
-                            gf.name = key
-                            gf.tilt = value[0]
-                            gf.orientation = value[1]
-                            gf.area = area * gfPart[0]
-                    else:
-                        gf.area = area
+                    gf.area = (
+                        self.facade_estimation_factors[self.building_age_group]["gf2"]
+                        * zone.area
+                    ) / len(self.ground_floor_names_2)
 
-            # if not zone.ground_floors:
-            #     gf = GroundFloor(zone)
-            #     gf.load_type_element(
-            #         year=self.year_of_construction,
-            #         construction=self._construction_type_1,
-            #         data_class=self.parent.data,
-            #     )
-            #     gf.name = "dummy"
-            #     gf.tilt = 0.
-            #     gf.orientation = -2
-            #     gf.area = 1E-4
-
+        if self.facade_estimation_factors[self.building_age_group]["rt1"] != 0:
             for key, value in self.roof_names_1.items():
-                try:
-                    area = value[2]['areas'][zone_index] \
-                           * facade_estimation_factors["rt1"] / \
-                           (facade_estimation_factors["rt1"]
-                            + facade_estimation_factors["rt2"])
-                    if area is None:
-                        raise KeyError
-                except (KeyError, IndexError):
-                    area = (facade_estimation_factors["rt1"]
-                            * type_bldg_area) / len(self.roof_names_1)
-                try:
-                    element_type = value[2]['element_type']
-                except (KeyError, IndexError):
-                    element_type = None
-                try:
-                    year = value[2]['year']
-                except (KeyError, IndexError):
-                    year = self.year_of_construction
-                if area:
+
+                for zone in self.thermal_zones:
                     rt = Rooftop(zone)
-                    try:
-                        layers = None
-                        layers = value[2]['layers']
-                        rt.use_layer_properties(
-                            layers[0][1], year=year, element_type=element_type
-                        )
-                        multipleParts = len(layers) > 1
-                    except (KeyError, IndexError):
-                        if layers is not None:
-                            reverse_layers = layers[0] == '-'
-                            layers = layers.lstrip('-')
-                        else:
-                            reverse_layers = False
-                        rt.load_type_element(
-                            year=year,
-                            construction=self._construction_type_1,
-                            data_class=self.parent.data,
-                            element_type=element_type,
-                            type_element_key=layers,
-                            reverse_layers=reverse_layers
-                        )
-                        multipleParts = False
-                    try:
-                        rt.view_factors = value[2]['view_factors']
-                    except (KeyError, IndexError):
-                        pass
+                    rt.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self._construction_type_1,
+                        data_class=self.parent.data,
+                    )
                     rt.name = key
                     rt.tilt = value[0]
                     rt.orientation = value[1]
-                    if multipleParts:
-                        rt.area = area * layers[0][0]
-                        for roofPart in layers[1:]:
-                            rt = Rooftop(zone)
-                            rt.use_layer_properties(
-                                roofPart[1], year=year,
-                                element_type=element_type
-                            )
-                            rt.name = key
-                            rt.tilt = value[0]
-                            rt.orientation = value[1]
-                            rt.area = area * roofPart[0]
-                            try:
-                                rt.view_factors = value[2]['view_factors']
-                            except (KeyError, IndexError):
-                                pass
-                    else:
-                        rt.area = area
+                    rt.area = (
+                        self.facade_estimation_factors[self.building_age_group]["rt1"]
+                        * zone.area
+                    ) / len(self.roof_names_1)
 
+        if self.facade_estimation_factors[self.building_age_group]["rt2"] != 0:
             for key, value in self.roof_names_2.items():
-                try:
-                    area = value[2]['areas'][zone_index] \
-                           * facade_estimation_factors["rt2"] / \
-                           (facade_estimation_factors["rt2"]
-                            + facade_estimation_factors["rt1"])
-                    if area is None:
-                        raise KeyError
-                except (KeyError, IndexError):
-                    area = (facade_estimation_factors["rt2"]
-                            * type_bldg_area) / len(self.roof_names_2)
-                try:
-                    element_type = value[2]['element_type']
-                except (KeyError, IndexError):
-                    element_type = None
-                try:
-                    year = value[2]['year']
-                except (KeyError, IndexError):
-                    year = self.year_of_construction
-                if area:
+
+                for zone in self.thermal_zones:
                     rt = Rooftop(zone)
-                    try:
-                        layers = None
-                        layers = value[2]['layers']
-                        rt.use_layer_properties(
-                            layers[0][1], year=year, element_type=element_type
-                        )
-                        multipleParts = len(layers) > 1
-                    except (KeyError, IndexError):
-                        if layers is not None:
-                            reverse_layers = layers[0] == '-'
-                            layers = layers.lstrip('-')
-                        else:
-                            reverse_layers = False
-                        rt.load_type_element(
-                            year=year,
-                            construction=self._construction_type_2,
-                            data_class=self.parent.data,
-                            element_type=element_type,
-                            type_element_key=layers,
-                            reverse_layers=reverse_layers
-                        )
-                        multipleParts = False
-                    try:
-                        rt.view_factors = value[2]['view_factors']
-                    except (KeyError, IndexError):
-                        pass
+                    rt.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self._construction_type_2,
+                        data_class=self.parent.data,
+                    )
                     rt.name = key
                     rt.tilt = value[0]
                     rt.orientation = value[1]
-                    if multipleParts:
-                        rt.area = area * layers[0][0]
-                        for roofPart in layers[1:]:
-                            rt = Rooftop(zone)
-                            rt.use_layer_properties(
-                                roofPart[1], year=year,
-                                element_type=element_type
-                            )
-                            rt.name = key
-                            rt.tilt = value[0]
-                            rt.orientation = value[1]
-                            rt.area = area * roofPart[0]
-                            try:
-                                rt.view_factors = value[2]['view_factors']
-                            except (KeyError, IndexError):
-                                pass
-                    else:
-                        rt.area = area
+                    rt.area = (
+                        self.facade_estimation_factors[self.building_age_group]["rt2"]
+                        * zone.area
+                    ) / len(self.roof_names_2)
 
-            # if not zone.rooftops:
-            #     rt = Rooftop(zone)
-            #     rt.load_type_element(
-            #         year=self.year_of_construction,
-            #         construction=self._construction_type_1,
-            #         data_class=self.parent.data,
-            #     )
-            #     rt.name = "dummy"
-            #     rt.tilt = 0.
-            #     rt.orientation = -1
-            #     rt.area = 1E-4
-
+        if self.facade_estimation_factors[self.building_age_group]["door"] != 0:
             for key, value in self.door_names.items():
-                try:
-                    area = value[2]['areas'][zone_index]
-                    if area is None:
-                        raise KeyError
-                except (KeyError, IndexError):
-                    area = (facade_estimation_factors["door"]
-                            * type_bldg_area) / len(self.door_names)
-                try:
-                    element_type = value[2]['element_type']
-                except (KeyError, IndexError):
-                    element_type = None
-                try:
-                    year = value[2]['year']
-                except (KeyError, IndexError):
-                    year = self.year_of_construction
-                if area:
+
+                for zone in self.thermal_zones:
                     door = Door(zone)
-                    try:
-                        layers = None
-                        layers = value[2]['layers']
-                        door.use_layer_properties(
-                            layers[0][1], year=year, element_type=element_type
-                        )
-                        multipleParts = len(layers) > 1
-                    except (KeyError, IndexError):
-                        if layers is not None:
-                            reverse_layers = layers[0] == '-'
-                            layers = layers.lstrip('-')
-                        else:
-                            reverse_layers = False
-                        door.load_type_element(
-                            year=year,
-                            construction=self._construction_type_1,
-                            data_class=self.parent.data,
-                            element_type=element_type,
-                            type_element_key=layers,
-                            reverse_layers=reverse_layers
-                        )
-                        multipleParts = False
+                    door.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self._construction_type_1,
+                        data_class=self.parent.data,
+                    )
                     door.name = key
                     door.tilt = value[0]
                     door.orientation = value[1]
-                    if multipleParts:
-                        door.area = area * layers[0][0]
-                        for doorPart in layers[1:]:
-                            door = Door(zone)
-                            door.use_layer_properties(
-                                doorPart[1], year=year,
-                                element_type=element_type
-                            )
-                            door.name = key
-                            door.tilt = value[0]
-                            door.orientation = value[1]
-                            door.area = area * doorPart[0]
-                    else:
-                        door.area = area
+                    door.area = (
+                        self.facade_estimation_factors[self.building_age_group]["door"]
+                        * zone.area
+                    ) / len(self.door_names)
 
-            for key, value in self.nz_border_names.items():
-                zone_idcs = np.where(np.array(value[2]['areas']) != 0)[0]
-                if zone_index in zone_idcs:
+        for key, value in self.inner_wall_names.items():
 
-                    ass_error_nz_number = "zone borders need to have two zones"
-                    assert len(zone_idcs) == 2, ass_error_nz_number
+            for zone in self.thermal_zones:
+                inner_wall = InnerWall(zone)
+                inner_wall.load_type_element(
+                    year=self.year_of_construction,
+                    construction="tabula_standard",
+                    data_class=self.parent.data,
+                )
+                inner_wall.name = key
+                inner_wall.tilt = value[0]
+                inner_wall.orientation = value[1]
 
-                    if zone_idcs[1] == zone_index:
-                        outside = self.thermal_zones[zone_idcs[0]]
-                    else:
-                        outside = self.thermal_zones[zone_idcs[1]]
-                    try:
-                        element_type = value[2]['element_type']
-                    except (KeyError, IndexError):
-                        element_type = None
-                    try:
-                        year = value[2]['year']
-                    except (KeyError, IndexError):
-                        year = self.year_of_construction
+        if self.number_of_floors > 1:
 
-                    if value[2]['areas'][zone_index] and value[1] != -1:
-                        nz_inner_wall = InnerWall(zone, outside=outside)
-                        try:
-                            layers = None
-                            layers = value[2]['layers']
-                            nz_inner_wall.use_layer_properties(
-                                layers[0][1], year=year,
-                                element_type=element_type
-                            )
-                            multipleParts = len(layers) > 1
-                        except (KeyError, IndexError):
-                            if layers is not None:
-                                reverse_layers = layers[0] == '-'
-                                layers = layers.lstrip('-')
-                            else:
-                                reverse_layers = False
-                            nz_inner_wall.load_type_element(
-                                year=year,
-                                construction="tabula_standard",
-                                data_class=self.parent.data,
-                                element_type=element_type,
-                                type_element_key=layers,
-                                reverse_layers=reverse_layers
-                            )
-                            multipleParts = False
-                        nz_inner_wall.outer_convection \
-                            = nz_inner_wall.inner_convection
-                        nz_inner_wall.outer_radiation \
-                            = nz_inner_wall.inner_radiation
-                        nz_inner_wall.name = key
-                        nz_inner_wall.tilt = value[0]
-                        nz_inner_wall.orientation = value[1]
-                        area = value[2]['areas'][zone_index]
-                        if multipleParts:
-                            nz_inner_wall.area = area * layers[0][0]
-                            for part in layers[1:]:
-                                nz_inner_wall = InnerWall(zone, outside=outside)
-                                nz_inner_wall.use_layer_properties(
-                                    part[1], year=year,
-                                    element_type=element_type
-                                )
-                                nz_inner_wall.outer_convection \
-                                    = nz_inner_wall.inner_convection
-                                nz_inner_wall.outer_radiation \
-                                    = nz_inner_wall.inner_radiation
-                                nz_inner_wall.name = key
-                                nz_inner_wall.tilt = value[0]
-                                nz_inner_wall.orientation = value[1]
-                                nz_inner_wall.area = area * part[0]
-                        else:
-                            nz_inner_wall.area = area
-                    elif value[2]['areas'][zone_index] > 0:
-                        nz_floor = Floor(zone, outside=outside)
-                        try:
-                            layers = None
-                            layers = value[2]['layers']
-                            nz_floor.use_layer_properties(
-                                layers[0][1][-1::-1], year=year,
-                                element_type=element_type
-                            )
-                            multipleParts = len(layers) > 1
-                        except (KeyError, IndexError):
-                            if element_type in ('Rooftop', 'GroundFloor'):
-                                # TODO mean value of standard 1 and 2
-                                #  usually, only standard 1 exists
-                                construction = "tabula_standard_1_SFH"
-                            else:
-                                construction = 'tabula_standard'
-                            if layers is not None:
-                                reverse_layers = layers[0] != '-'
-                                layers = layers.lstrip('-')
-                            elif element_type in ('Rooftop', 'Ceiling'):
-                                reverse_layers = True
-                            else:
-                                reverse_layers = False
+            for key, value in self.ceiling_names.items():
 
-                            nz_floor.load_type_element(
-                                year=year,
-                                construction=construction,
-                                data_class=self.parent.data,
-                                element_type=element_type,
-                                reverse_layers=reverse_layers,
-                                type_element_key=layers
-                            )
-                            multipleParts = False
-                        nz_floor.outer_convection = nz_floor.inner_convection
-                        nz_floor.outer_radiation = nz_floor.inner_radiation
-                        nz_floor.name = key
-                        nz_floor.tilt = value[0]
-                        nz_floor.orientation = value[1]
-                        area = value[2]['areas'][zone_index]
-                        if multipleParts:
-                            nz_floor.area = area * layers[0][0]
-                            for part in layers[1:]:
-                                nz_floor = Floor(zone, outside=outside)
-                                nz_floor.use_layer_properties(
-                                    part[1][-1::-1], year=year,
-                                    element_type=element_type
-                                )
-                                nz_floor.outer_convection \
-                                    = nz_floor.inner_convection
-                                nz_floor.outer_radiation \
-                                    = nz_floor.inner_radiation
-                                nz_floor.name = key
-                                nz_floor.tilt = value[0]
-                                nz_floor.orientation = value[1]
-                                nz_floor.area = area * part[0]
-                        else:
-                            nz_floor.area = area
-                    elif value[2]['areas'][zone_index] < 0:
-                        nz_ceiling = Ceiling(zone, outside=outside)
-                        try:
-                            layers = None
-                            layers = value[2]['layers']
-                            nz_ceiling.use_layer_properties(
-                                layers[0][1], year=year,
-                                element_type=element_type
-                            )
-                            multipleParts = len(layers) > 1
-                        except (KeyError, IndexError):
-                            if element_type in ('Rooftop', 'GroundFloor'):
-                                # TODO mean value of standard 1 and 2
-                                #  usually, only standard 1 exists
-                                construction = "tabula_standard_1_SFH"
-                            else:
-                                construction = 'tabula_standard'
-                            if layers is not None:
-                                reverse_layers = layers[0] == '-'
-                                layers = layers.lstrip('-')
-                            elif element_type in ('GroundFloor', 'Floor'):
-                                reverse_layers = True
-                            else:
-                                reverse_layers = False
-                            nz_ceiling.load_type_element(
-                                year=year,
-                                construction=construction,
-                                data_class=self.parent.data,
-                                element_type=element_type,
-                                reverse_layers=reverse_layers,
-                                type_element_key=layers
-                            )
-                            multipleParts = False
-                        nz_ceiling.outer_convection \
-                            = nz_ceiling.inner_convection
-                        nz_ceiling.outer_radiation = nz_ceiling.inner_radiation
-                        nz_ceiling.name = key
-                        nz_ceiling.tilt = value[0]
-                        nz_ceiling.orientation = value[1]
-                        area = value[2]['areas'][zone_index] * -1
-                        if multipleParts:
-                            nz_ceiling.area = area * layers[0][0]
-                            for part in layers[1:]:
-                                nz_ceiling = Ceiling(zone, outside=outside)
-                                nz_ceiling.use_layer_properties(
-                                    part[1], year=year,
-                                    element_type=element_type
-                                )
-                                nz_ceiling.outer_convection \
-                                    = nz_ceiling.inner_convection
-                                nz_ceiling.outer_radiation \
-                                    = nz_ceiling.inner_radiation
-                                nz_ceiling.name = key
-                                nz_ceiling.tilt = value[0]
-                                nz_ceiling.orientation = value[1]
-                                nz_ceiling.area = area * part[0]
-                        else:
-                            nz_ceiling.area = area
+                for zone in self.thermal_zones:
+                    ceiling = Ceiling(zone)
+                    ceiling.load_type_element(
+                        year=self.year_of_construction,
+                        construction="tabula_standard",
+                        data_class=self.parent.data,
+                    )
+                    ceiling.name = key
+                    ceiling.tilt = value[0]
+                    ceiling.orientation = value[1]
 
-            for key, value in self.inner_wall_names.items():
-                try:
-                    area = value[2]['areas'][zone_index]
-                except (KeyError, IndexError):
-                    area = 1
-                if area:
-                    inner_wall = InnerWall(zone)
-                    try:
-                        element_type = value[2]['element_type']
-                    except (KeyError, IndexError):
-                        element_type = None
-                    try:
-                        layers = None
-                        layers = value[2]['layers']
-                        inner_wall.use_layer_properties(
-                            layers[0][1], year=year, element_type=element_type
-                        )
-                        multipleParts = len(layers) > 1
-                    except (KeyError, IndexError):
-                        if layers is not None:
-                            reverse_layers = layers[0] == '-'
-                            layers = layers.lstrip('-')
-                        else:
-                            reverse_layers = False
-                        inner_wall.load_type_element(
-                            year=year,
-                            construction="tabula_standard",
-                            data_class=self.parent.data,
-                            element_type=element_type,
-                            type_element_key=layers,
-                            reverse_layers=reverse_layers
-                        )
-                        multipleParts = False
-                    inner_wall.name = key
-                    inner_wall.tilt = value[0]
-                    inner_wall.orientation = value[1]
-                    if multipleParts:
-                        inner_wall.area = area * layers[0][0]
-                        for part in layers[1:]:
-                            inner_wall = InnerWall(zone, outside=outside)
-                            inner_wall.use_layer_properties(
-                                part[1], year=year, element_type=element_type
-                            )
-                            inner_wall.name = key
-                            inner_wall.tilt = value[0]
-                            inner_wall.orientation = value[1]
-                            inner_wall.area = area * part[0]
-                    else:
-                        inner_wall.area = area
+            for key, value in self.floor_names.items():
 
-            if zone.number_of_floors > 1:
+                for zone in self.thermal_zones:
+                    floor = Floor(zone)
+                    floor.load_type_element(
+                        year=self.year_of_construction,
+                        construction="tabula_standard",
+                        data_class=self.parent.data,
+                    )
+                    floor.name = key
+                    floor.tilt = value[0]
+                    floor.orientation = value[1]
 
-                for key, value in self.ceiling_names.items():
-                    try:
-                        area = value[2]['areas'][zone_index]
-                    except (KeyError, IndexError):
-                        area = 1
-                    if area:
-                        ceiling = Ceiling(zone)
-                        try:
-                            layers = None
-                            layers = value[2]['layers']
-                            ceiling.use_layer_properties(
-                                layers[0][1], year=year,
-                                element_type=element_type
-                            )
-                            multipleParts = len(layers) > 1
-                        except (KeyError, IndexError):
-                            if layers is not None:
-                                reverse_layers = layers[0] == '-'
-                                layers = layers.lstrip('-')
-                            else:
-                                reverse_layers = False
-                            ceiling.load_type_element(
-                                year=year,
-                                construction="tabula_standard",
-                                data_class=self.parent.data,
-                                element_type=element_type,
-                                type_element_key=layers,
-                                reverse_layers=reverse_layers
-                            )
-                            multipleParts = False
-                        ceiling.name = key
-                        ceiling.tilt = value[0]
-                        ceiling.orientation = value[1]
-                        if multipleParts:
-                            ceiling.area = area * layers[0][0]
-                            for part in layers[1:]:
-                                ceiling = Ceiling(zone, outside=outside)
-                                ceiling.use_layer_properties(
-                                    part[1], year=year,
-                                    element_type=element_type
-                                )
-                                ceiling.name = key
-                                ceiling.tilt = value[0]
-                                ceiling.orientation = value[1]
-                                ceiling.area = area * part[0]
-                        else:
-                            ceiling.area = area
-
-                for key, value in self.floor_names.items():
-                    try:
-                        area = value[2]['areas'][zone_index]
-                    except (KeyError, IndexError):
-                        area = 1
-                    if area:
-                        floor = Floor(zone)
-                        try:
-                            layers = None
-                            layers = value[2]['layers']
-                            floor.use_layer_properties(
-                                layers[0][1], year=year,
-                                element_type=element_type
-                            )
-                            multipleParts = len(layers) > 1
-                        except (KeyError, IndexError):
-                            if layers is not None:
-                                reverse_layers = layers[0] == '-'
-                                layers = layers.lstrip('-')
-                            else:
-                                reverse_layers = False
-                            floor.load_type_element(
-                                year=year,
-                                construction="tabula_standard",
-                                data_class=self.parent.data,
-                                element_type=element_type,
-                                type_element_key=layers,
-                                reverse_layers=reverse_layers
-                            )
-                            multipleParts = False
-                        floor.name = key
-                        floor.tilt = value[0]
-                        floor.orientation = value[1]
-                        if multipleParts:
-                            floor.area = area * layers[0][0]
-                            for part in layers[1:]:
-                                floor = Floor(zone, outside=outside)
-                                floor.use_layer_properties(
-                                    part[1], year=year,
-                                    element_type=element_type
-                                )
-                                floor.name = key
-                                floor.tilt = value[0]
-                                floor.orientation = value[1]
-                                floor.area = area * part[0]
-                        else:
-                            floor.area = area
-
+        for zone in self.thermal_zones:
             zone.set_inner_wall_area(inner_wall_calc_approach)
             zone.set_volume_zone()
-
-            # # correct simplified convection coefficients
-            # for rt in zone.rooftops:
-            #     if rt.tilt > 60:
-            #         # use values like for horizontal (= outer wall) surfaces
-            #         rt.inner_convection = 2.7
-            #     else:
-            #         # R_si = 0.1 if heat flow is upwards (DIN EN ISO 6946)
-            #         rt.inner_convection = 5.0
-            # for gf in zone.ground_floors:
-            #     if gf.tilt > 60:
-            #         # use values like for horizontal (= outer wall) surfaces
-            #         gf.inner_convection = 2.7
-            #     else:
-            #         # R_si = 0.17 if heat flow is downwards (DIN EN ISO 6946)
-            #         gf.inner_convection = 0.9
-            # for nzb in zone.nz_borders:
-            #     if (zone.use_conditions.with_heating
-            #             + nzb.outside.use_conditions.with_heating) == 1:
-            #         if ((zone.use_conditions.with_heating
-            #              and type(nzb).__name__ == "Ceiling")
-            #                 or (not zone.use_conditions.with_heating
-            #                     and type(nzb).__name__ == "Floor")):
-            #             # R_si = 0.1 if heat flow is upwards (DIN EN ISO
-            #             # 6946)
-            #             nzb.inner_convection = 5.0
-            #             nzb.outer_convection = 5.0
-            #         else:
-            #             # R_si = 0.17 if heat flow is downwards (DIN EN ISO
-            #             # 6946)
-            #             nzb.inner_convection = 0.9
-            #             nzb.outer_convection = 0.9
-
 
     @property
     def construction_type(self):

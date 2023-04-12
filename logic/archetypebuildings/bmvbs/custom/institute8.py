@@ -94,8 +94,10 @@ class Institute8(Office):
 
     zone_area_factors : dict
         This dictionary contains the name of the zone (str), the
-        zone area factor (float) and the zone usage from BoundaryConditions json
-        (str). (Default see doc string above)
+        zone area factor (float), the zone usage from BoundaryConditions json
+        (str) (Default see doc string above), and may contain a dictionary with
+        keyword-attribute-like changes to zone parameters that are usually
+        inherited from parent: 'number_of_floors', 'height_of_floors'
     outer_wall_names : dict
         This dictionary contains a random name for the outer walls,
         their orientation and tilt. Default is a building in north-south
