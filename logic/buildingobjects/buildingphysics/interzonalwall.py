@@ -1,15 +1,20 @@
-# created June 2015
+# created April 2023
 # by TEASER4 Development Team
 
 
-from teaser.logic.buildingobjects.buildingphysics.wall \
+from teaser.logic.buildingobjects.buildingphysics.wall\
     import Wall
 
 
-class OuterWall(Wall):
-    """OuterWall class
+class InterzonalWall(Wall):
+    """InterzonalWall class
 
-    This class holds information of an outer wall and is a child of Wall()
+    This class holds information for an interzonal wall and is a child of Wall()
+
+    Note that interzonal elements have to be created twice for each zone they
+    connect and are not semantically connected afterwards. For an
+    InterzonalWall of one zone, an InterzonalWall has to be created for the
+    zone on the other side.
 
     Parameters
     ----------
@@ -17,7 +22,7 @@ class OuterWall(Wall):
     parent : ThermalZone()
         The parent class of this object, the ThermalZone the BE belongs to.
         Allows for better control of hierarchical structures. If not None it
-        adds this OuterWall to ThermalZone.outer_walls.
+        adds this InterzonalWall to ThermalZone.interzonal_walls.
         Default is None.
 
     Attributes
@@ -47,13 +52,13 @@ class OuterWall(Wall):
         270: west)
     inner_convection : float [W/(m2*K)]
         Constant heat transfer coefficient of convection inner side (facing
-        the zone), default 2.7
+        the zone), default 1.7
     inner_radiation : float [W/(m2*K)]
         Constant heat transfer coefficient of radiation inner side (facing
         the zone), default 5.0
     outer_convection : float [W/(m2*K)]
         Constant heat transfer coefficient of convection outer side (facing
-        the ambient or adjacent zone), default 20.0
+        the ambient or adjacent zone), default 1.7
     outer_radiation : float [W/(m2*K)]
         Constant heat transfer coefficient of radiation outer side (facing
         the ambient or adjacent zone), default 5.0
@@ -62,8 +67,7 @@ class OuterWall(Wall):
         objects). Use element.layer = None to delete all layers of the building
         element
     other_side : ThermalZone()
-        the thermal zone on the other side of the building element (only for
-        interzonal elements)
+        the thermal zone on the other side of the interzonal wall
 
     Calculated Attributes
 
@@ -99,7 +103,7 @@ class OuterWall(Wall):
         Radiative resistance of building element on outer side (facing
         the ambient or adjacent zone). Currently for all InnerWalls and
         GroundFloors this value is set to 0.0
-    r_outer_comb : float [K/W]
+    r_outer_conv : float [K/W]
         Combined convective and radiative resistance of building element on
         outer side (facing the ambient or adjacent zone). Currently for all
         InnerWalls and GroundFloors this value is set to 0.0
@@ -107,15 +111,15 @@ class OuterWall(Wall):
         Weightfactor of building element ua_value/ua_value_zone
     """
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, outside=None):
         """
         """
-        super(OuterWall, self).__init__(parent)
+        super(InterzonalWall, self).__init__(parent, outside)
 
         self._tilt = 90.0
-        self._inner_convection = 2.7
+        self._inner_convection = 1.7
         self._inner_radiation = 5.0
-        self._outer_convection = 20.0
+        self._outer_convection = 1.7
         self._outer_radiation = 5.0
 
     @property
@@ -132,14 +136,14 @@ class OuterWall(Wall):
 
             self.__parent = value
 
-            if type(self).__name__ == "OuterWall":
-                self.__parent.outer_walls.append(self)
-            elif type(self).__name__ == "Rooftop":
-                self.__parent.rooftops.append(self)
-            elif type(self).__name__ == "GroundFloor":
-                self.__parent.ground_floors.append(self)
+            if type(self).__name__ == "InterzonalWall":
+                self.__parent.interzonal_walls.append(self)
+            elif type(self).__name__ == "InterzonalCeiling":
+                self.__parent.interzonal_ceilings.append(self)
+            elif type(self).__name__ == "InterzonalFloor":
+                self.__parent.interzonal_floors.append(self)
             else:
-                raise ValueError('Instance of OuterWall not known')
+                raise ValueError('Instance of InterzonalWall not known')
 
             if self.parent.parent is not None:
                 self.year_of_construction = \

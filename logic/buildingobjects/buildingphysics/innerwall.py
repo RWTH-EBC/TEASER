@@ -53,19 +53,19 @@ class InnerWall(Wall):
         the zone), default 5.0
     outer_convection : float [W/(m2*K)]
         Constant heat transfer coefficient of convection outer side (facing
-        the ambient or adjacent zone). Default 0.0 - if unchanged, 1.7 when
-        adding an outside
+        the ambient or adjacent zone). Currently for all InnerWalls and
+        GroundFloors this value is set to 0.0
     outer_radiation : float [W/(m2*K)]
         Constant heat transfer coefficient of radiation outer side (facing
-        the ambient or adjacent zone). Default 0.0 - if unchanged, 5.0 when
-        adding an outside
+        the ambient or adjacent zone). Currently for all InnerWalls and
+        GroundFloors this value is set to 0.0
     layer : list
         List of all layers of a building element (to be filled with Layer
         objects). Use element.layer = None to delete all layers of the building
         element
-    outside : ThermalZone()
-        the thermal zone to the outside of the wall. If None, same zone is on
-        the outside.
+    other_side : ThermalZone()
+        the thermal zone on the other side of the building element (only for
+        interzonal elements)
 
     Calculated Attributes
 
@@ -101,7 +101,7 @@ class InnerWall(Wall):
         Radiative resistance of building element on outer side (facing
         the ambient or adjacent zone). Currently for all InnerWalls and
         GroundFloors this value is set to 0.0
-    r_outer_conv : float [K/W]
+    r_outer_comb : float [K/W]
         Combined convective and radiative resistance of building element on
         outer side (facing the ambient or adjacent zone). Currently for all
         InnerWalls and GroundFloors this value is set to 0.0
@@ -109,20 +109,16 @@ class InnerWall(Wall):
         Weightfactor of building element ua_value/ua_value_zone
     """
 
-    def __init__(self, parent=None, outside=None):
+    def __init__(self, parent=None):
         """
         """
-        super(InnerWall, self).__init__(parent, outside)
+        super(InnerWall, self).__init__(parent)
 
         self._tilt = 90.0
         self._inner_convection = 1.7
         self._inner_radiation = 5.0
-        if self._outside is None:
-            self._outer_convection = None
-            self._outer_radiation = None
-        else:
-            self._outer_convection = 1.7
-            self._outer_radiation = 5.0
+        self._outer_convection = None
+        self._outer_radiation = None
 
     @property
     def parent(self):
@@ -138,9 +134,7 @@ class InnerWall(Wall):
 
             self.__parent = value
 
-            if self.outside is not None:
-                self.__parent.nz_borders.append(self)
-            elif type(self).__name__ == "InnerWall":
+            if type(self).__name__ == "InnerWall":
                 self.__parent.inner_walls.append(self)
             elif type(self).__name__ == "Ceiling":
                 self.__parent.ceilings.append(self)

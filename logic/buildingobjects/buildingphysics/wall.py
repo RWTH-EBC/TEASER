@@ -65,9 +65,9 @@ class Wall(BuildingElement):
         List of all layers of a building element (to be filled with Layer
         objects). Use element.layer = None to delete all layers of the building
         element
-    outside : ThermalZone()
-        the thermal zone to the outside of the wall. If None, outside is on the
-        outside.
+    other_side : ThermalZone()
+        the thermal zone on the other side of the building element (only for
+        interzonal elements)
 
     Calculated Attributes
 
@@ -103,7 +103,7 @@ class Wall(BuildingElement):
         Radiative resistance of building element on outer side (facing
         the ambient or adjacent zone). Currently for all InnerWalls and
         GroundFloors this value is set to 0.0
-    r_outer_conv : float [K/W]
+    r_outer_comb : float [K/W]
         Combined convective and radiative resistance of building element on
         outer side (facing the ambient or adjacent zone). Currently for all
         InnerWalls and GroundFloors this value is set to 0.0
@@ -111,10 +111,10 @@ class Wall(BuildingElement):
         Weightfactor of building element ua_value/ua_value_zone
     """
 
-    def __init__(self, parent=None, outside=None):
+    def __init__(self, parent=None, other_side=None):
         """Constructor of Wall
         """
-        self.outside = outside
+        self.other_side = other_side
         super(Wall, self).__init__(parent)
 
     def calc_equivalent_res(self, t_bt=7):
@@ -224,26 +224,28 @@ class Wall(BuildingElement):
                                                    new_mat[0][2] * new_mat[2][
                                                        3]))
 
-        if self in self.parent.nz_borders:
-            if (not self.parent.use_conditions.with_heating and
-                    self.outside.use_conditions.with_heating):
-                # if inner side of nz border is unheated and outer side is
-                # heated, layers were reversed for this calculation. Therefore,
-                # list of resistances must be re-reversed now.
-                r1_orig = self.r1
-                r2_orig = self.r2
-                # r3 is central resistance and stays the same
-                c1_orig = self.c1
-                c2_orig = self.c2
-                # c1_korr stays the same
-                self.r1 = r2_orig
-                self.r2 = r1_orig
-                self.c2 = c1_orig
-                self.c1 = c2_orig
-        # if type(self).__name__ == "OuterWall" \
-        #         or type(self).__name__ == "Rooftop" \
-        #         or type(self).__name__ == "GroundFloor":
-        #     self.c1 = self.c1_korr
+        if "Interzonal" in type(self).__name__:
+            if self.other_side is not None:
+                if (not self.parent.use_conditions.with_heating and
+                        self.other_side.use_conditions.with_heating):
+                    # if inner side of interzonal element is unheated and other
+                    # side is heated, layers were reversed for this calculation.
+                    # Therefore, list of resistances must be re-reversed now.
+                    r1_orig = self.r1
+                    r2_orig = self.r2
+                    # r3 is central resistance and stays the same
+                    c1_orig = self.c1
+                    c2_orig = self.c2
+                    # todo what about c1_korr?
+                    self.r1 = r2_orig
+                    self.r2 = r1_orig
+                    self.c2 = c1_orig
+                    self.c1 = c2_orig
+
+        if type(self).__name__ == "OuterWall" \
+                or type(self).__name__ == "Rooftop" \
+                or type(self).__name__ == "GroundFloor":
+            self.c1 = self.c1_korr
 
     def insulate_wall(
             self,
@@ -264,7 +266,7 @@ class Wall(BuildingElement):
             thickness of the insulation layer, default = None
         add_at_position : int
             position at which to insert the insulation layer.
-            0 inside, None (default) outside
+            0 inside, None (default) outside/other side
         add_plaster_material : int
             material of plaster to add, default = None. Is only applied if
             add_plaster_thickness is not None
@@ -279,7 +281,7 @@ class Wall(BuildingElement):
 
         """
         if material is None:
-            material = "EPS_040_15"
+            material = "EPS035"
         else:
             pass
 
@@ -300,7 +302,8 @@ class Wall(BuildingElement):
             else add_at_position
 
         if add_plaster_thickness is not None:
-            ass_error_1 = "If plaster is added, insulation must be applied at inside or outside"
+            ass_error_1 = "If plaster is added, insulation must be applied at" \
+                          " inside or outside"
 
             assert add_at_position is None or add_at_position == 0, ass_error_1
             if add_plaster_material is None:
@@ -434,14 +437,17 @@ class Wall(BuildingElement):
 
 
     @property
-    def outside(self):
-        return self._outside
+    def other_side(self):
+        return self._other_side
 
-    @outside.setter
-    def outside(self, value):
+    @other_side.setter
+    def other_side(self, value):
         if value is not None:
-            ass_error_1 = "Outside has to be an instance of ThermalZone()"
+            ass_error_1 = "Other side has to be an instance of ThermalZone()"
             assert type(value).__name__ == "ThermalZone", ass_error_1
-            self._outside = value
+            ass_error_2 = "Other side can only be set for interzonal elements"
+            assert type(self).__name__ in ("InterzonalWall", "InterzonalFloor",
+                                           "InterzonalCeiling"), ass_error_2
+            self._other_side = value
         else:
-            self._outside = None
+            self._other_side = None

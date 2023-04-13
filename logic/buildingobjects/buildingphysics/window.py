@@ -63,13 +63,9 @@ class Window(BuildingElement):
         List of all layers of a building element (to be filled with Layer
         objects). Use element.layer = None to delete all layers of the building
         element
-    view_factors : list
-        view factors for half-space above (outer) surface for sky/ground/other
-        buildings/surfaces with ambient temperature for use in AixLib with
-        FiveElementVectorized and calculateHeatFlow. Values must already be
-        corrected for cosine loss and possible directional dependance of
-        absorptivity. If specified, sum should be 1. If sum is 0, default
-        assumptions are used in AixLib"
+    other_side : ThermalZone()
+        the thermal zone on the other side of the building element (only for
+        interzonal elements)
 
     Specific Attributes for Window
 
@@ -117,7 +113,7 @@ class Window(BuildingElement):
         Radiative resistance of building element on outer side (facing
         the ambient or adjacent zone). Currently for all InnerWalls and
         GroundFloors this value is set to 0.0
-    r_outer_conv : float [K/W]
+    r_outer_comb : float [K/W]
         Combined convective and radiative resistance of building element on
         outer side (facing the ambient or adjacent zone). Currently for all
         InnerWalls and GroundFloors this value is set to 0.0

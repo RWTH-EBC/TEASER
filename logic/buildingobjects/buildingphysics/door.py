@@ -65,6 +65,9 @@ class Door(OuterWall):
         List of all layers of a building element (to be filled with Layer
         objects). Use element.layer = None to delete all layers of the building
         element
+    other_side : ThermalZone()
+        the thermal zone on the other side of the building element (only for
+        interzonal elements)
 
     Calculated Attributes
 
@@ -100,7 +103,7 @@ class Door(OuterWall):
         Radiative resistance of building element on outer side (facing
         the ambient or adjacent zone). Currently for all InnerWalls and
         GroundFloors this value is set to 0.0
-    r_outer_conv : float [K/W]
+    r_outer_comb : float [K/W]
         Combined convective and radiative resistance of building element on
         outer side (facing the ambient or adjacent zone). Currently for all
         InnerWalls and GroundFloors this value is set to 0.0

@@ -61,13 +61,9 @@ class Rooftop(OuterWall):
         List of all layers of a building element (to be filled with Layer
         objects). Use element.layer = None to delete all layers of the building
         element
-    view_factors : list
-        view factors for half-space above (outer) surface for sky/ground/other
-        buildings/surfaces with ambient temperature for use in AixLib with
-        FiveElementVectorized and calculateHeatFlow. Values must already be
-        corrected for cosine loss and possible directional dependance of
-        absorptivity. If specified, sum should be 1. If sum is 0, default
-        assumptions are used in AixLib"
+    other_side : ThermalZone()
+        the thermal zone on the other side of the building element (only for
+        interzonal elements)
 
     Calculated Attributes
 
@@ -103,7 +99,7 @@ class Rooftop(OuterWall):
         Radiative resistance of building element on outer side (facing
         the ambient or adjacent zone). Currently for all InnerWalls and
         GroundFloors this value is set to 0.0
-    r_outer_conv : float [K/W]
+    r_outer_comb : float [K/W]
         Combined convective and radiative resistance of building element on
         outer side (facing the ambient or adjacent zone). Currently for all
         InnerWalls and GroundFloors this value is set to 0.0
@@ -111,18 +107,14 @@ class Rooftop(OuterWall):
         Weightfactor of building element ua_value/ua_value_zone
     """
 
-    def __init__(self, parent=None, outside=None):
+    def __init__(self, parent=None):
         """
         """
-        super(Rooftop, self).__init__(parent, outside)
+        super(Rooftop, self).__init__(parent)
 
         self._tilt = 0.0
         self._orientation = -1.0
         self._inner_convection = 1.7
         self._inner_radiation = 5.0
-        if self._outside is None:
-            self._outer_convection = 20.0
-            self._outer_radiation = 5.0
-        else:
-            self._outer_convection = 1.7
-            self._outer_radiation = 5.0
+        self._outer_convection = 20.0
+        self._outer_radiation = 5.0
