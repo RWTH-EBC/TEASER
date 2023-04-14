@@ -25,6 +25,15 @@ from teaser.logic.buildingobjects.buildingphysics.groundfloor import GroundFloor
 from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
+from teaser.logic.buildingobjects.buildingphysics.interzonalwall import (
+    InterzonalWall
+)
+from teaser.logic.buildingobjects.buildingphysics.interzonalceiling import (
+    InterzonalCeiling
+)
+from teaser.logic.buildingobjects.buildingphysics.interzonalfloor import (
+    InterzonalFloor
+)
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.buildingphysics.door import Door
 import json
@@ -127,9 +136,11 @@ def load_teaser_json(path, project):
         except KeyError:
             pass
 
+        zones_created = dict()
         for tz_name, zone_in in bldg_in["thermal_zones"].items():
             tz = ThermalZone(parent=bldg)
             tz.name = tz_name
+            zones_created[tz_name] = tz
             tz.area = zone_in["area"]
             tz.volume = zone_in["volume"]
             tz.use_conditions = UseConditions(parent=tz)
@@ -249,6 +260,37 @@ def load_teaser_json(path, project):
                 ceil.name = cl_name
                 set_basic_data_teaser(cl_in, ceil)
                 set_layer_data_teaser(cl_in, ceil)
+            for izw_name, izw_in in zone_in["interzonal_walls"].items():
+                iz_wall = InterzonalWall(parent=tz)
+                iz_wall.name = izw_name
+                set_basic_data_teaser(izw_in, iz_wall)
+                set_layer_data_teaser(izw_in, iz_wall)
+            for izf_name, izf_in in zone_in["interzonal_floors"].items():
+                izf = InterzonalFloor(parent=tz)
+                izf.name = izf_name
+                set_basic_data_teaser(izf_in, izf)
+                set_layer_data_teaser(izf_in, izf)
+            for izc_name, izc_in in zone_in["interzonal_ceilings"].items():
+                izc = InterzonalCeiling(parent=tz)
+                izc.name = izc_name
+                set_basic_data_teaser(izc_in, izc)
+                set_layer_data_teaser(izc_in, izc)
+
+        for tz, (tz_name, zone_in) in zip(bldg.thermal_zones,
+                                          bldg_in["thermal_zones"].items()):
+            for iz_wall, (izw_name, izw_in) in zip(
+                    tz.interzonal_walls, zone_in["interzonal_walls"].items()
+            ):
+                iz_wall.other_side = zones_created[izw_in["other_side"]]
+            for iz_floor, (izf_name, izf_in) in zip(
+                    tz.interzonal_floors, zone_in["interzonal_floors"].items()
+            ):
+                iz_floor.other_side = zones_created[izf_in["other_side"]]
+            for iz_ceiling, (izc_name, izc_in) in zip(
+                    tz.interzonal_ceilings,
+                    zone_in["interzonal_ceilings"].items()
+            ):
+                iz_ceiling.other_side = zones_created[izc_in["other_side"]]
 
 
 def set_basic_data_teaser(wall_in, element):
@@ -277,6 +319,9 @@ def set_basic_data_teaser(wall_in, element):
         type(element).__name__ == "OuterWall"
         or type(element).__name__ == "Rooftop"
         or type(element).__name__ == "Door"
+        or type(element).__name__ == "InterzonalWall"
+        or type(element).__name__ == "InterzonalCeiling"
+        or type(element).__name__ == "InterzonalFloor"
     ):
 
         element.outer_radiation = wall_in["outer_radiation"]
