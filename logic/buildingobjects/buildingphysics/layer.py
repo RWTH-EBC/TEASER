@@ -63,6 +63,9 @@ class Layer(object):
                 or type(value).__name__ == "InnerWall" \
                 or type(value).__name__ == "Ceiling" \
                 or type(value).__name__ == "Floor" \
+                or type(value).__name__ == "InterzonalWall"\
+                or type(value).__name__ == "InterzonalCeiling"\
+                or type(value).__name__ == "InterzonalFloor"\
                 or type(value).__name__ == "Door" \
                 or type(value).__name__ == "Window", ass_error_1
 

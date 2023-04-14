@@ -1030,7 +1030,6 @@ internal_gains_mode: int [1, 2, 3]
         corG=None,
         internal_id=None,
         path=None,
-        custom_zone_template_path=None,
         custom_multizone_template_path=None
     ):
         """Exports values to a record file for Modelica simulation
@@ -1053,9 +1052,6 @@ internal_gains_mode: int [1, 2, 3]
         path : string
             if the Files should not be stored in default output path of TEASER,
             an alternative path can be specified as a full path
-        custom_zone_template_path : string
-            if a custom template for writing the zone base record should be used,
-            specify its full path as string
         custom_multizone_template_path : string
             if a custom template for writing the multizone model should be used,
             specify its full path as string
@@ -1080,7 +1076,6 @@ internal_gains_mode: int [1, 2, 3]
         if internal_id is None:
             aixlib_output.export_multizone(
                 buildings=self.buildings, prj=self, path=path,
-                custom_zone_template_path=custom_zone_template_path,
                 custom_multizone_template_path=custom_multizone_template_path
             )
         else:
@@ -1088,7 +1083,6 @@ internal_gains_mode: int [1, 2, 3]
                 if bldg.internal_id == internal_id:
                     aixlib_output.export_multizone(
                         buildings=[bldg], prj=self, path=path,
-                        custom_zone_template_path=custom_zone_template_path,
                         custom_multizone_template_path
                         =custom_multizone_template_path
                     )

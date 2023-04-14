@@ -217,7 +217,6 @@ class UseConditions(object):
         self.max_overheating_infiltration = [3.0, 2.0]
         self.max_summer_infiltration = [1.0, 273.15 + 10, 273.15 + 17]
         self.winter_reduction_infiltration = [0.5, 273.15, 273.15 + 10]
-        self.infiltration_rate_nz = None
 
         self.min_ahu = 0.0
         self.max_ahu = 2.6

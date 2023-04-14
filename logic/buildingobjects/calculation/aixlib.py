@@ -100,9 +100,15 @@ class AixLib(object):
                     + zone.model_attr.area_rt
                     + zone.model_attr.area_win
                 )
-            # todo add FiveElement here. At DLR it was:
-            # elif type(zone.model_attr).__name__ == "FiveElement":
-            #     surf_area_temp += zone.model_attr.surf_area
+            elif type(zone.model_attr).__name__ == "FiveElement":
+                surf_area_temp += (
+                    zone.model_attr.area_ow
+                    + zone.model_attr.area_iw
+                    + zone.model_attr.area_gf
+                    + zone.model_attr.area_rt
+                    + zone.model_attr.area_win
+                    + zone.model_attr.area_iz
+                )
 
         self.total_surface_area = surf_area_temp
 
