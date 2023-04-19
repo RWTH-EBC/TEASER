@@ -268,7 +268,7 @@ class Pool(object):
 
         # volume_flow_night
         if V_B > 30:
-            self.volume_flow_night = V_B
+            self.volume_flow_night = V_B/3600
         else:
             self.volume_flow_night = 30/3600
 
