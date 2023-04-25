@@ -260,8 +260,8 @@ class UseConditions(object):
         self.profiles_weekend_factor = None
 
         self._set_back_times = None
-        self.heating_set_back = -2
-        self.cooling_set_back = 2
+        self.heating_set_back = -4
+        self.cooling_set_back = 4
 
         self._adjusted_opening_times = None
 
@@ -412,6 +412,38 @@ class UseConditions(object):
             359,
             360
         ]  # for 2022
+
+    def adjust_temp_profiles_by_presence(self):
+        """Adjusts the given temperature profile by presence of people
+
+        Parameters
+        ----------
+        heating_profile : list
+            list with the given heating profile from use_conditions
+        cooling_profile : list
+            list with the cooling profile from use_conditions
+        """
+        ass_error_length = 'Heating and Cooling profile have to be same length'
+        assert len(self.heating_profile) == len (self.cooling_profile), ass_error_length
+
+        new_profile = []
+        # split profile into daily profiles
+        profile_len_people = len(self.persons_profile)
+        profile_len_temp = len(self.heating_profile)
+
+        if profile_len_temp > profile_len_people:
+            factor = profile_len_temp//profile_len_people
+            self.persons_profile *= factor
+        elif profile_len_temp < profile_len_people:
+            factor = profile_len_people//profile_len_temp
+            self.heating_profile *= factor
+            self.cooling_profile *= factor
+
+        for i, people in enumerate(self.persons_profile):
+            if people == 0:
+                self.heating_profile[i] += self.heating_set_back
+                self.cooling_profile[i] += self.cooling_set_back
+        print('test')
 
     def adjust_profile_by_opening(self, profile):
         """Adjusts the given profile by opening times specified for use
@@ -685,7 +717,7 @@ class UseConditions(object):
     def schedules(self, value):
         self._schedules = value
 
-    def calc_adj_schedules(self):
+    def calc_adj_schedules(self,control_type=None):
         """calculates adjusted schedules for use conditions. When called the
         profiles get adjusted due to specified conditions. Afterwards the
         existing schedules will be overwritten by the resulting pandas dataframe
@@ -708,23 +740,49 @@ class UseConditions(object):
             self._persons_profile = self.adjust_profile_by_weekend(
                 self._persons_profile)
 
+        if control_type == "demand_driven":
+            self.adjust_temp_profiles_by_presence()
+
         if self.set_back_times:
-            set_back_index_morning, set_back_index_evening = \
-                self.set_back_times[0] - 1, self.set_back_times[1] - 1
+            if self.set_back_times[0] > self.set_back_times[1]:
+                switched = True
+                set_back_index_start, set_back_index_end = \
+                    self.set_back_times[0] - 1, self.set_back_times[1] - 1
+            else:
+                switched = False
+                set_back_index_start, set_back_index_end = \
+                    self.set_back_times[0] - 1, self.set_back_times[1]
+
             heating_profile, cooling_profile = [], []
+
             for i, value in enumerate(self._heating_profile):
-                if 0 <= i <= set_back_index_morning \
-                        or set_back_index_evening <= i <= 24:
-                    heating_profile.append(value + self.heating_set_back)
+                if switched:
+                    if 0 <= i <= set_back_index_end \
+                            or set_back_index_start <= i <= 24:
+                        heating_profile.append(value)
+                    else:
+                        heating_profile.append(value + self.heating_set_back)
                 else:
-                    heating_profile.append(value)
+                    if 0 <= i <= set_back_index_start \
+                            or set_back_index_end <= i <= 24:
+                        heating_profile.append(value + self.heating_set_back)
+                    else:
+                        heating_profile.append(value)
             self._heating_profile = heating_profile
+
             for i, value in enumerate(self._cooling_profile):
-                if 0 <= i <= set_back_index_morning \
-                        or set_back_index_evening <= i <= 24:
-                    cooling_profile.append(value + self.cooling_set_back)
+                if switched:
+                    if 0 <= i <= set_back_index_end \
+                            or set_back_index_start <= i <= 24:
+                        cooling_profile.append(value)
+                    else:
+                        cooling_profile.append(value + self.cooling_set_back)
                 else:
-                    cooling_profile.append(value)
+                    if 0 <= i <= set_back_index_start \
+                            or set_back_index_end <= i <= 24:
+                        cooling_profile.append(value + self.cooling_set_back)
+                    else:
+                        cooling_profile.append(value)
             self._cooling_profile = cooling_profile
 
     @property
