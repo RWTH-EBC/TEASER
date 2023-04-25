@@ -2196,7 +2196,17 @@ class Test_teaser(object):
 
     def test_set_inner_wall_area(self):
         """test of set_inner_wall_area"""
-
+        prj.buildings[-1].inner_wall_approximation_approach \
+            = 'typical_minus_outer'
+        prj.buildings[-1].thermal_zones[-1].set_inner_wall_area()
+        for wall in prj.buildings[-1].thermal_zones[-1].inner_walls:
+            assert round(wall.area, 16) == 11.951219512195122
+        prj.buildings[-1].inner_wall_approximation_approach \
+            = 'typical_minus_outer_extended'
+        prj.buildings[-1].thermal_zones[-1].set_inner_wall_area()
+        for wall in prj.buildings[-1].thermal_zones[-1].inner_walls:
+            assert round(wall.area, 16) == 11.951219512195122
+        prj.buildings[-1].inner_wall_approximation_approach = 'teaser_default'
         prj.buildings[-1].thermal_zones[-1].set_inner_wall_area()
         for wall in prj.buildings[-1].thermal_zones[-1].inner_walls:
             assert round(wall.area, 16) == 11.951219512195122

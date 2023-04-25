@@ -15,9 +15,9 @@ from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
 
 class SingleFamilyHouse(Residential):
-    """Archetype for German TABULA Single Family House.
+    """Archetype for Danish TABULA Single Family House.
 
-    This is an archetype building for german single family house according to
+    This is an archetype building for danish single family house according to
     TABULA building typology (http://webtool.building-typology.eu/#bm). As
     TABULA defines one reference building, whereas TEASER wants to provide a
     methodology to generate individual building information, this archetype
@@ -41,16 +41,16 @@ class SingleFamilyHouse(Residential):
     always specify the exact construction of building elements, but always
     provides a prescribed U-Value. We used the U-Value and the given material
     information to determine thickness of each layer and implemented it into
-    elements json ('teaser.data.input.inputdata.TypeElements_TABULA_DE.json'). The
-    material properties have been taken from MASEA Material data base
-    (http://www.masea-ensan.de/). As there might be some differences in the
-    assumptions for material properties from TABULA and MASEA the U-Value might
-    not always be exactly the same as in TABULA but is always in an acceptable
-    range. The U-Value has been calculated using combined constant values for
-    interior and exterior heat transmission, we used a resistance of 0.17
-    (m2*K)/W for outer walls, windows, flat roofs and doors; 0.34 (m2*K)/W  for
-    ground floors to unheated cellars and 0.17 (m2*K)/W  to direct ground
-    coupled floors, 0.21 (m2*K)/W  was taken for pitched roofs.
+    elements json ('teaser.data.input.inputdata.TypeElements_TABULA_DK.json'). The
+    material properties have been assumed from the "Handbook for Energy
+    Consultants - HB2016" (http://www.hbemo.dk/). As there might be some
+    differences in the assumptions for material properties from TABULA and
+    HB2016 the U-Value might not always be exactly the same as in TABULA but is
+    always in an acceptable range. The U-Value has been calculated using
+    combined constant values for interior and exterior heat transmission, we
+    used a resistance of 0.17 (m2*K)/W for outer walls, windows, flat roofs and
+    doors; 0.34 (m2*K)/W for ground floors to unheated cellars and 0.17 (m2*K)/W
+    to direct ground coupled floors, 0.21 (m2*K)/W  was taken for pitched roofs.
 
     Parameters
     ----------
@@ -198,151 +198,116 @@ class SingleFamilyHouse(Residential):
         # Window1, Window2, Door
         # Area/ReferenceFloorArea
         self.facade_estimation_factors = {
-            (0, 1859): {
-                "rt1": 0.613,
+            (2007, 2010): {
+                "rt1": 1.179,
                 "rt2": 0.0,
-                "ow1": 0.7753,
+                "ow1": 1.0345,
                 "ow2": 0.0,
-                "gf1": 0.0,
-                "gf2": 0.3904,
-                "win1": 0.1315,
+                "gf1": 1.0276,
+                "gf2": 0.0,
+                "win1": 0.17,
                 "win2": 0.0,
                 "door": 0.009,
             },
-            (1860, 1918): {
-                "rt1": 0.585,
+            (1999, 2006): {
+                "rt1": 0.8054,
                 "rt2": 0.0,
-                "ow1": 1.366,
+                "ow1": 0.7852,
                 "ow2": 0.0,
-                "gf1": 0.3211,
-                "gf2": 0.2303,
-                "win1": 0.157,
-                "win2": 0.0,
-                "door": 0.014,
-            },
-            (1919, 1948): {
-                "rt1": 0.7063,
-                "rt2": 0.0,
-                "ow1": 0.7766,
-                "ow2": 0.0,
-                "gf1": 0.47822,
+                "gf1": 0.6040,
                 "gf2": 0.0,
-                "win1": 0.173,
+                "win1": 0.1839,
                 "win2": 0.0,
-                "door": 0.0066,
+                "door": 0.009,
             },
-            (1949, 1957): {
-                "rt1": 1.13,
+            (1979, 1998): {
+                "rt1": 1.1721,
                 "rt2": 0.0,
-                "ow1": 1.0613,
+                "ow1": 1.0164,
                 "ow2": 0.0,
-                "gf1": 0.559,
-                "gf2": 0.161,
-                "win1": 0.166,
-                "win2": 0.0,
-                "door": 0.018,
-            },
-            (1958, 1968): {
-                "rt1": 1.396,
-                "rt2": 0.0,
-                "ow1": 1.167,
-                "ow2": 0.072,
-                "gf1": 0.957,
+                "gf1": 1.0000,
                 "gf2": 0.0,
-                "win1": 0.224,
+                "win1": 0.2025,
                 "win2": 0.0,
-                "door": 0.017,
+                "door": 0.009,
             },
-            (1969, 1978): {
-                "rt1": 1.05838,
+            (1973, 1978): {
+                "rt1": 1.1197,
                 "rt2": 0.0,
-                "ow1": 1.0266,
-                "ow2": 0.0,
-                "gf1": 0.4526,
-                "gf2": 0.4277,
-                "win1": 0.1977,
-                "win2": 0.0,
-                "door": 0.01156,
-            },
-            (1979, 1983): {
-                "rt1": 0.46667,
-                "rt2": 0.0,
-                "ow1": 0.738,
-                "ow2": 0.0,
-                "gf1": 0.386,
+                "ow1": 0.6154,
+                "ow2": 0.2137,
+                "gf1": 1.0085,
                 "gf2": 0.0,
-                "win1": 0.125,
+                "win1": 0.1906,
                 "win2": 0.0,
-                "door": 0.00926,
+                "door": 0.009,
             },
-            (1984, 1994): {
-                "rt1": 0.8213,
+            (1961, 1972): {
+                "rt1": 1.1765,
                 "rt2": 0.0,
-                "ow1": 1.409,
+                "ow1": 0.7908,
                 "ow2": 0.0,
-                "gf1": 0.502,
+                "gf1": 1.0458,
                 "gf2": 0.0,
-                "win1": 0.198,
+                "win1": 0.2203,
                 "win2": 0.0,
-                "door": 0.01333,
+                "door": 0.009,
             },
-            (1995, 2001): {
-                "rt1": 0.947,
+            (1951, 1960): {
+                "rt1": 1.1778,
                 "rt2": 0.0,
-                "ow1": 1.038,
+                "ow1": 1.1222,
                 "ow2": 0.0,
-                "gf1": 0.691,
+                "gf1": 1.1778,
                 "gf2": 0.0,
-                "win1": 0.266,
+                "win1": 0.3133,
                 "win2": 0.0,
-                "door": 0.016,
+                "door": 0.009,
             },
-            (2002, 2009): {
-                "rt1": 0.58435,
+            (1931, 1950): {
+                "rt1": 0.7479,
                 "rt2": 0.0,
-                "ow1": 1.285,
-                "ow2": 0.0,
-                "gf1": 0.543,
+                "ow1": 0.6891,
+                "ow2": 0.2269,
+                "gf1": 0.7395,
                 "gf2": 0.0,
-                "win1": 0.1925,
+                "win1": 0.1824,
                 "win2": 0.0,
-                "door": 0.0136,
+                "door": 0.009,
             },
-            (2010, 2015): {
-                "rt1": 0.70535,
+            (1851, 1930): {
+                "rt1": 0.9895,
                 "rt2": 0.0,
-                "ow1": 1.217,
+                "ow1": 1.0316,
                 "ow2": 0.0,
-                "gf1": 0.57647,
+                "gf1": 0.6947,
                 "gf2": 0.0,
-                "win1": 0.2246,
+                "win1": 0.1589,
                 "win2": 0.0,
-                "door": 0.014,
+                "door": 0.009,
             },
-            (2016, 2100): {
-                "rt1": 0.70535,
+            (0, 1850): {
+                "rt1": 1.1742,
                 "rt2": 0.0,
-                "ow1": 1.217,
+                "ow1": 1.1061,
                 "ow2": 0.0,
-                "gf1": 0.57647,
+                "gf1": 0.9621,
                 "gf2": 0.0,
-                "win1": 0.2246,
+                "win1": 0.2045,
                 "win2": 0.0,
-                "door": 0.014,
+                "door": 0.009,
             },
         }
 
         self.building_age_group = None
 
         if self.with_ahu is True:
-            self.central_ahu.temperature_profile = (
+            self.central_ahu.profile_temperature = (
                 7 * [293.15] + 12 * [295.15] + 5 * [293.15]
             )
-            self.central_ahu.min_relative_humidity_profile = 24 * [0.45]
-            self.central_ahu.max_relative_humidity_profile = 24 * [0.55]
-            self.central_ahu.v_flow_profile = 7 * [0.0] + 12 * [1.0] + 5 * [0.0]
-
-        self.internal_gains_mode = internal_gains_mode
+            self.central_ahu.profile_min_relative_humidity = 24 * [0.45]
+            self.central_ahu.profile_max_relative_humidity = 24 * [0.55]
+            self.central_ahu.profile_v_flow = 7 * [0.0] + 12 * [1.0] + 5 * [0.0]
 
     def _check_year_of_construction(self):
         """Assigns the bldg age group according to year of construction"""
@@ -388,6 +353,8 @@ class SingleFamilyHouse(Residential):
             zone.use_conditions = use_cond
 
             zone.use_conditions.with_ahu = False
+            zone.use_conditions.persons *= zone.area * 0.01
+            zone.use_conditions.machines *= zone.area * 0.01
 
         if self.facade_estimation_factors[self.building_age_group]["ow1"] != 0:
             for key, value in self._outer_wall_names_1.items():
