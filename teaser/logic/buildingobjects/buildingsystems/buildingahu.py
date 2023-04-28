@@ -107,8 +107,8 @@ class BuildingAHU(object):
 
         self.schedules = pd.DataFrame(
             index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
-            .to_series()
-            .dt.strftime("%m-%d %H:%M:%S"),
+                .to_series()
+                .dt.strftime("%m-%d %H:%M:%S"),
             data={
                 "temperature_profile": list(
                     islice(cycle(self.temperature_profile), 8760)
@@ -122,6 +122,34 @@ class BuildingAHU(object):
                 "v_flow_profile": list(islice(cycle(self.v_flow_profile), 8760)),
             },
         )
+
+    def set_profiles_from_persons_profile(self, persons_profile, setpoints):
+        """
+        adjust temperature profile, min/max humidity profile and v_flow profile to
+        match presence of occupants (set lower setpoint, if nobody is present and higher
+        setpoint, if somebody is present
+
+        Parameters
+        ----------
+
+        persons profile: list
+            persons_profile derived from use_conditions
+        setpoints: dict
+            dictionary of setpoints for temperture, min/max humidity
+                temperature: list
+                    list with two entries for setpoints of ahu temperature profile during absence/presence of people
+                min_humidity_limits: list
+                    list with two entries for setpoints of min humidity profile during absence/presence of people
+                max_humidity_limits: list
+                    list with two entries for setpoints of max humidity profile during absence/presence of people
+        """
+        self.temperature_profile = [setpoints['temperature'][1] if num > 0 else setpoints['temperature'][0]
+                                    for num in persons_profile]
+        self.min_relative_humidity_profile = [setpoints['min_humidity'][1] if num > 0 else setpoints['min_humidity'][0]
+                                              for num in persons_profile]
+        self.max_relative_humidity_profile = [setpoints['max_humidity'][1] if num > 0 else setpoints['max_humidity'][0]
+                                              for num in persons_profile]
+        self.v_flow_profile = [1 if num > 0 else 0 for num in persons_profile]
 
     @property
     def parent(self):

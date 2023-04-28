@@ -134,6 +134,7 @@ class Hotel(NonResidential):
             office_layout=None,
             window_layout=None,
             construction_type=None,
+            control_type=None
     ):
         """Constructor of Hotel archetype
         """
@@ -149,6 +150,7 @@ class Hotel(NonResidential):
         self.construction_type = construction_type
         self.number_of_floors = number_of_floors
         self.height_of_floors = height_of_floors
+        self.control_type = control_type
 
         # [area factor, usage type(has to be set)]
         self.zone_area_factors = collections.OrderedDict()
@@ -264,7 +266,9 @@ class Hotel(NonResidential):
             zone.name = key
             use_cond = UseCond(zone)
             use_cond.load_use_conditions(value[1], data_class=self.parent.data)
+            use_cond.calc_adj_schedules(control_type=self.control_type)
             zone.use_conditions = use_cond
+
 
         # statistical estimation of the facade
 
@@ -380,6 +384,20 @@ class Hotel(NonResidential):
         for zone in self.thermal_zones:
             zone.set_inner_wall_area()
             zone.set_volume_zone()
+
+        # needs to be revised: Add presence profile as sum of persons_profiles for all zones and clip to (0,1), set
+        # temperature, min/max humidity and volume flow based on presence/absence of people in the building
+        if self.central_ahu:
+            setpoints = {"temperature":[293.15, 295.15],
+                         "min_humidity":[15,30],
+                         "max_humidity":[70,60]}
+
+            presence_profile = self.thermal_zones[0].use_conditions.schedules.persons_profile
+            for zone in self.thermal_zones:
+                if zone.use_conditions.with_ahu: #
+                    presence_profile += zone.use_conditions.schedules.persons_profile
+            presence_profile = presence_profile.clip(0, 1).tolist()
+            self.central_ahu.set_profiles_from_persons_profile(presence_profile,setpoints)
 
     @property
     def construction_type(self):

@@ -282,6 +282,7 @@ class Project(object):
         office_layout=None,
         window_layout=None,
         construction_type=None,
+        control_type=None
     ):
         """Add a non-residential building to the TEASER project.
 
@@ -351,6 +352,11 @@ class Project(object):
             Construction type of used wall constructions default is "heavy")
                 heavy: heavy construction
                 light: light construction
+        control_type : str
+            Control type of building
+                None: No demand driven control
+                Demand Driven: Demand driven control (temperature setpoints set by presence of people)
+                MPC: Model predictive control
 
         Returns
         ----------
@@ -397,6 +403,7 @@ class Project(object):
                 office_layout,
                 window_layout,
                 construction_type,
+                control_type
             )
 
         elif usage == "institute":
@@ -413,6 +420,7 @@ class Project(object):
                 office_layout,
                 window_layout,
                 construction_type,
+                control_type
             )
 
         elif usage == "institute4":
@@ -429,6 +437,7 @@ class Project(object):
                 office_layout,
                 window_layout,
                 construction_type,
+                control_type
             )
 
         elif usage == "institute8":
@@ -445,6 +454,7 @@ class Project(object):
                 office_layout,
                 window_layout,
                 construction_type,
+                control_type
             )
 
         elif usage == "school":
@@ -461,6 +471,7 @@ class Project(object):
                 office_layout,
                 window_layout,
                 construction_type,
+                control_type
             )
 
         elif usage == "hotel":
@@ -477,9 +488,7 @@ class Project(object):
                 office_layout,
                 window_layout,
                 construction_type,
-
-
-
+                control_type
             )
 
         type_bldg.generate_archetype()

@@ -98,7 +98,8 @@ def generate_bldg(prj, scenario):
             with_ahu=ahu_usage,
             number_of_floors=3,
             height_of_floors=3.5,
-            net_leased_area=scenario['Net_Area'])
+            net_leased_area=scenario['Net_Area'],
+            control_type=scenario['Control_strategy'])
 
     elif scenario['Building_class'] == "residential":
         if scenario['Modernization_state'] == "modernized":
@@ -213,8 +214,8 @@ def simulate(
 
 if __name__ == "__main__":
 
-    setup_name = "20230307_referenz_komplett"
-    basepath = pathlib.Path('N:\Forschung\EBC0741_ZIM_SmartSenseIAQ_NK\Data\Simulationen/01_Referenzszenarien').joinpath(
+    setup_name = "20230425_test"
+    basepath = pathlib.Path('N:\Forschung\EBC0741_ZIM_SmartSenseIAQ_NK\Data\Simulationen/02_Bedarfsorierntierte_Regelung').joinpath(
         setup_name)
     scenarios = load_scenarios(basepath.joinpath("scenarios.xlsx"))
     model_export_path = basepath.joinpath("models")
@@ -226,7 +227,7 @@ if __name__ == "__main__":
         export_aixlib_model(prj, model_export_path.joinpath(scenario_name), scenario['Location'])
 
         simulate(
-            aixlib_mo=r"D:\pse\GIT\AixLib\AixLib\package.mo",
+            aixlib_mo=r"D:\GIT\AixLib\AixLib\package.mo",
             teaser_mo=model_export_path.joinpath(scenario_name, prj.name, "package.mo"),
             building_mo=prj.name + "." + prj.buildings[0].name + "." + prj.buildings[0].name,
             savepath=model_export_path.parent.joinpath("sim_results", scenario_name),
