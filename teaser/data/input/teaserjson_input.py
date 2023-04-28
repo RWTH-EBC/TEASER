@@ -72,10 +72,13 @@ def load_teaser_json(path, project):
 
     project.name = prj_in["project"]["name"]
     project.weather_file_path = prj_in["project"]["weather_file_path"]
+    project.t_soil_mode = prj_in["project"]["t_soil_mode"]
+    project.t_soil_file_path = prj_in["project"]["t_soil_file_path"]
     project.number_of_elements_calc = prj_in["project"]["number_of_elements_calc"]
     project.merge_windows_calc = prj_in["project"]["merge_windows_calc"]
     project.used_library_calc = prj_in["project"]["used_library_calc"]
     project.modelica_info.start_time = prj_in["project"]["modelica_info"]["start_time"]
+    project.modelica_info.start_time = prj_in["project"]["modelica_info"]["time_to_minimal_t_ground"]
     project.modelica_info.stop_time = prj_in["project"]["modelica_info"]["stop_time"]
     project.modelica_info.interval_output = prj_in["project"]["modelica_info"][
         "interval_output"
@@ -104,6 +107,10 @@ def load_teaser_json(path, project):
         # bldg.net_leased_area = bldg_in["net_leased_area"]
         bldg.outer_area = bldg_in["outer_area"]
         bldg.window_area = bldg_in["window_area"]
+        try:
+            bldg.inner_wall_approximation_approach = bldg_in["inner_wall_approximation_approach"]
+        except KeyError:
+            pass
 
         try:
             bldg.central_ahu = BuildingAHU(parent=bldg)
@@ -143,6 +150,13 @@ def load_teaser_json(path, project):
             zones_created[tz_name] = tz
             tz.area = zone_in["area"]
             tz.volume = zone_in["volume"]
+            try:
+                tz.number_of_floors = zone_in["number_of_floors"]
+                tz.height_of_floors = zone_in["height_of_floors"]
+                tz.t_ground = zone_in["t_ground"]
+                tz.t_ground_amplitude = zone_in["t_ground_amplitude"]
+            except KeyError:
+                pass
             tz.use_conditions = UseConditions(parent=tz)
             tz.use_conditions.usage = zone_in["use_conditions"]["usage"]
             tz.use_conditions.typical_length = zone_in["use_conditions"][

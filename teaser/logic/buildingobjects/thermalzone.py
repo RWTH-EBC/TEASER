@@ -659,6 +659,11 @@ class ThermalZone(object):
             self._interzonal_floors = []
 
     @property
+    def interzonal_elements(self):
+        return self.interzonal_walls + self.interzonal_ceilings \
+            + self.interzonal_floors
+
+    @property
     def windows(self):
         return self._windows
 

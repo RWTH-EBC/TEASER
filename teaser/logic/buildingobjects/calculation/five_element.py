@@ -2,25 +2,21 @@
 
 from __future__ import division
 import math
+import numpy as np
 import random
 import warnings
 
 
-class FourElement(object):
-    """This class contains attributes and functions for four element model
+class FiveElement(object):
+    """This class contains attributes and functions for five element model
 
-    This model adds another element for the roof. Roofs commonly exhibit the
-    same excitations as exterior walls but have different coefficients of heat
-    transfer due to their orientation.  Thus the model distinguishes
-    between internal thermal masses and exterior walls divided into
-    outerwalls (vertical), rooftops and ground plates. While all exterior walls
-    contribute to heat transfer to the ambient, adiabatic
-    conditions apply to interior walls. This approach allows considering the
-    dynamic behaviour induced by internal heat storage. This class calculates
-    and holds all attributes given in documentation.
+    This model adds new elements for borders with neighboured zones. Doing so,
+    borders to the same zone are lumped, but those to different zones are not.
+    As a consequence, the final model may have more than five elements.
 
     It treats OuterWalls, Rooftops and GroundFloors separate resulting in three
-    RC-combination for these.
+    RC-combination for these, and one additional RC combination per bordered
+    neighboured zone.
     Depending on the chosen method it will consider an extra resistance for
     windows or merge all windows into the RC-Combination for outer walls.
 
@@ -566,6 +562,57 @@ class FourElement(object):
         self.shading_max_irr = []
         self.weighted_g_value = 0.0
 
+        # Attributes for neighboured zones (vectorized - one element per other
+        # zone)
+        self.area_nzb = []
+
+        # coefficient of heat transfer facing the inside of this thermal zone
+        self.alpha_conv_inner_nzb = []
+        self.alpha_rad_inner_nzb = []
+        self.alpha_comb_inner_nzb = []
+
+        # coefficient of heat transfer facing the other thermal zone
+        self.alpha_conv_outer_nzb = []
+        self.alpha_rad_outer_nzb = []
+        self.alpha_comb_outer_nzb = []
+
+        # UA-Value
+        self.ua_value_nzb = []
+
+        # resistances for heat transfer facing the inside of this thermal zone
+        self.r_conv_inner_nzb = []
+        self.r_rad_inner_nzb = []
+        self.r_comb_inner_nzb = []
+
+        # resistances for heat transfer facing the ambient
+        self.r_conv_outer_nzb = []
+        self.r_rad_outer_nzb = []
+        self.r_comb_outer_nzb = []
+
+        # lumped resistances/capacity
+        self.r1_nzb = []
+        self.r_rest_nzb = []
+        self.c1_nzb = []
+        self.r_total_nzb = []
+
+        # Optical properties
+        self.ir_emissivity_outer_nzb = []
+        self.ir_emissivity_inner_nzb = []
+
+        # Additional parameters
+        self.nz_index = []
+        self.other_nz_indexes = []
+        self.nzbs_per_nz = []
+
+        # Misc values
+        self.n_outer = 0
+        self.all_tilts = []
+        self.all_orientations = []
+        self.alpha_rad_inner_mean = 0.0
+        self.alpha_rad_outer_mean = 0.0
+        self.heat_load = 0.0
+        self.cool_load = 0.0
+
         # Misc values
 
         self.alpha_rad_inner_mean = 0.0
@@ -590,6 +637,9 @@ class FourElement(object):
         for gf in self.thermal_zone.ground_floors:
             gf.calc_equivalent_res()
             gf.calc_ua_value()
+        for nzb in self.thermal_zone.interzonal_elements:
+            nzb.calc_equivalent_res()
+            nzb.calc_ua_value()
         for win in self.thermal_zone.windows:
             win.calc_equivalent_res()
             win.calc_ua_value()
@@ -632,6 +682,20 @@ class FourElement(object):
         else:
             self._sum_inner_wall_elements()
             self._calc_inner_elements()
+        if (
+            len(self.thermal_zone.interzonal_elements)
+            < 1
+        ):
+            warnings.warn(
+                "For thermal zone "
+                + self.thermal_zone.name
+                + " in building "
+                + self.thermal_zone.parent.name
+                + ", no interzonal elements have been defined."
+            )
+        else:
+            self._sum_interzonal_elements()
+            self._calc_interzonal_elements()
         if len(self.thermal_zone.windows) < 1:
             warnings.warn(
                 "For thermal zone "
@@ -643,7 +707,6 @@ class FourElement(object):
         else:
             self._sum_window_elements()
         if len(self.thermal_zone.ground_floors) < 1:
-            # todo add warning for neighbored zones here?
             warnings.warn(
                 "For thermal zone "
                 + self.thermal_zone.name
@@ -672,22 +735,6 @@ class FourElement(object):
             self._calc_outer_elements()
             self._calc_wf()
             self._calc_mean_values()
-        if (
-            len(
-                self.thermal_zone.interzonal_walls
-                + self.thermal_zone.interzonal_floors
-                + self.thermal_zone.interzonal_ceilings
-            )
-            >= 1
-        ):
-            warnings.warn(
-                "For thermal zone "
-                + self.thermal_zone.name
-                + " in building "
-                + self.thermal_zone.parent.name
-                + ", interzonal elements have been defined, but FourElement "
-                + "export will treat them as inner elements."
-            )
         self._calc_number_of_elements()
         self._fill_zone_lists()
         self._calc_heat_load()
@@ -1151,6 +1198,89 @@ class FourElement(object):
         self.alpha_rad_outer_win = 1 / (self.r_rad_outer_win * self.area_win)
         self.alpha_comb_outer_win = 1 / (self.r_comb_outer_win * self.area_win)
 
+    def _sum_interzonal_elements(self):
+        """Sum attributes for neighboured zone border elements
+
+        This function sums and computes the area-weighted values,
+        where necessary (the class doc string) for coefficients of heat
+        transfer, resistances, areas and UA-Values.
+
+        """
+        other_nz_indexes = set()
+        for nz_border in self.thermal_zone.interzonal_elements:
+            other_nz_indexes.add(self.thermal_zone.parent.thermal_zones.index(
+                nz_border.other_side
+            ))
+        self.other_nz_indexes = list(other_nz_indexes)
+        self.nzbs_per_nz = []
+        for nz_index in self.other_nz_indexes:
+            other_nz = self.thermal_zone.parent.thermal_zones[nz_index]
+            self.nzbs_per_nz.append([])
+            for nz_border in self.thermal_zone.interzonal_elements:
+                if nz_border.other_side is other_nz:
+                    self.nzbs_per_nz[-1].append(nz_border)
+                    nz_border.idx_orientation = nz_index
+
+        self.area_nzb = _lump_sum(self.nzbs_per_nz, 'area')
+
+        self.ua_value_nzb = _lump_sum(self.nzbs_per_nz, 'ua_value')
+
+        self.r_total_nzb = [1 / ua for ua in self.ua_value_nzb]
+
+        # values facing the inside of the thermal zone
+
+        self.r_conv_inner_nzb = _lump_inverse_sum(self.nzbs_per_nz,
+                                                  'r_inner_conv')
+
+        self.r_rad_inner_nzb = _lump_inverse_sum(self.nzbs_per_nz,
+                                                 'r_inner_rad')
+
+        self.r_comb_inner_nzb = _lump_inverse_sum(self.nzbs_per_nz,
+                                                  'r_inner_comb')
+
+        self.ir_emissivity_inner_nzb = [
+            sum(el.layer[0].material.ir_emissivity * el.area for el in els) / a
+            for els, a in zip(self.nzbs_per_nz, self.area_nzb)
+        ]
+
+        self.alpha_conv_inner_nzb = [
+            1 / (rci * a)
+            for rci, a in zip(self.r_conv_inner_nzb, self.area_nzb)
+        ]
+        self.alpha_rad_inner_nzb = [
+            1 / (rri * a)
+            for rri, a in zip(self.r_rad_inner_nzb, self.area_nzb)
+        ]
+        self.alpha_comb_inner_nzb = [
+            1 / (rci * a)
+            for rci, a in zip(self.r_comb_inner_nzb, self.area_nzb)
+        ]
+
+        # values facing the other zone
+
+        self.r_conv_outer_nzb = _lump_inverse_sum(self.nzbs_per_nz,
+                                                  'r_outer_conv')
+        self.r_rad_outer_nzb = _lump_inverse_sum(self.nzbs_per_nz,
+                                                 'r_outer_rad')
+        self.r_comb_outer_nzb = _lump_inverse_sum(self.nzbs_per_nz,
+                                                  'r_outer_comb')
+
+        self.ir_emissivity_outer_nzb = [
+            sum(el.layer[-1].material.ir_emissivity * el.area for el in els) / a
+            for els, a in zip(self.nzbs_per_nz, self.area_nzb)
+        ]
+
+        self.alpha_conv_outer_nzb = [
+            1 / (rco * a)
+            for rco, a in zip(self.r_conv_outer_nzb, self.area_nzb)]
+        self.alpha_rad_outer_nzb = [
+            1 / (rro * a)
+            for rro, a in zip(self.r_rad_outer_nzb, self.area_nzb)]
+        self.alpha_comb_outer_nzb = [
+            1 / (rco * a)
+            for rco, a in zip(self.r_comb_outer_nzb, self.area_nzb)
+        ]
+
     def _calc_outer_elements(self):
         """Lumped parameter for outer wall elements
 
@@ -1294,7 +1424,7 @@ class FourElement(object):
             )
 
     def _calc_rooftop_elements(self):
-        """Lumped parameter for ground floor elements
+        """Lumped parameter for rooftop elements
 
         Calculates lumped parameters for rooftops. Windows are considered in
         outer wall calculation. This results in an error concerning the
@@ -1374,6 +1504,55 @@ class FourElement(object):
                 "to RunTimeErrors"
             )
 
+    def _calc_interzonal_elements(self):
+        """Lumped parameter for neighboured zone border elements
+
+        Calculates lumped parameters for borders to
+        neighboured zones. No windows allowed.
+
+        Attributes
+        ----------
+        omega : float [1/s]
+            angular frequency with given time period.
+        """
+
+        omega = 2 * math.pi / 86400 / self.t_bt
+
+        any_nzb = False
+        self.r1_nzb = []
+        self.c1_nzb = []
+        for nz_borders in self.nzbs_per_nz:
+            if 0 < len(nz_borders) <= 1:
+                # only one nz border, no need to calculate chain matrix
+                if (nz_borders[0].other_side.use_conditions.with_heating and
+                        not nz_borders[0].parent.use_conditions.with_heating):
+                    # rc parameters were calculated from reverse-order layers
+                    # this needs to be considered here
+                    self.r_rest_nzb.append(nz_borders[0].r2)
+                    self.c1_nzb.append(nz_borders[0].c1_korr)
+                    conduction = nz_borders[0].r_conduc
+                    self.r1_nzb.append(conduction - self.r_rest_nzb[-1])
+                else:
+                    self.r1_nzb.append(nz_borders[0].r1)
+                    self.c1_nzb.append(nz_borders[0].c1_korr)
+                    conduction = nz_borders[0].r_conduc
+                    self.r_rest_nzb.append(conduction - self.r1_nzb[-1])
+            elif len(nz_borders) > 1:
+                # more than one nz border, calculate chain matrix
+                r1_nzb, c1_nzb = self._calc_parallel_connection(nz_borders,
+                                                                omega)
+                conduction = 1 / sum(1 / nzb.r_conduc for nzb in nz_borders)
+                if (nz_borders[0].outside.use_conditions.with_heating and
+                        not nz_borders[0].parent.use_conditions.with_heating):
+                    # rc parameters were calculated from reverse-order layers
+                    # this needs to be considered here
+                    self.r_rest_nzb.append(r1_nzb)
+                    self.r1_nzb.append(conduction - self.r_rest_nzb[-1])
+                else:
+                    self.r1_nzb.append(r1_nzb)
+                    self.r_rest_nzb.append(conduction - self.r1_nzb[-1])
+                self.c1_nzb.append(c1_nzb)
+
     def _calc_wf(self):
         """Weightfactors for outer elements(walls, roof, ground floor, windows)
 
@@ -1422,6 +1601,7 @@ class FourElement(object):
             + self.area_win * self.alpha_rad_inner_win
             + self.area_gf * self.alpha_rad_inner_gf
             + self.area_rt * self.alpha_rad_inner_rt
+            + np.dot(self.area_nzb, self.alpha_rad_inner_nzb)
             + self.area_iw * self.alpha_rad_inner_iw
         ) / (self.area_ow + self.area_win + self.area_iw + self.area_gf + self.area_rt)
         self.alpha_rad_outer_mean = (
@@ -1760,6 +1940,48 @@ class FourElement(object):
         self.shading_max_irr = []
         self.weighted_g_value = 0.0
 
+        # Attributes for neighboured zones (vectorized - one element per other
+        # zone)
+        self.area_nzb = []
+
+        # coefficient of heat transfer facing the inside of this thermal zone
+        self.alpha_conv_inner_nzb = []
+        self.alpha_rad_inner_nzb = []
+        self.alpha_comb_inner_nzb = []
+
+        # coefficient of heat transfer facing the other thermal zone
+        self.alpha_conv_outer_nzb = []
+        self.alpha_rad_outer_nzb = []
+        self.alpha_comb_outer_nzb = []
+
+        # UA-Value
+        self.ua_value_nzb = []
+
+        # resistances for heat transfer facing the inside of this thermal zone
+        self.r_conv_inner_nzb = []
+        self.r_rad_inner_nzb = []
+        self.r_comb_inner_nzb = []
+
+        # resistances for heat transfer facing the ambient
+        self.r_conv_outer_nzb = []
+        self.r_rad_outer_nzb = []
+        self.r_comb_outer_nzb = []
+
+        # lumped resistances/capacity
+        self.r1_nzb = []
+        self.r_rest_nzb = []
+        self.c1_nzb = []
+        self.r_total_nzb = []
+
+        # Optical properties
+        self.ir_emissivity_outer_nzb = []
+        self.ir_emissivity_inner_nzb = []
+
+        # Additional parameters
+        self.nz_index = []
+        self.other_nz_indexes = []
+        self.nzbs_per_nz = []
+
         # Misc values
 
         self.alpha_rad_inner_mean = 0.0
@@ -1770,3 +1992,41 @@ class FourElement(object):
         self.orientation_facade = []
         self.heat_load = 0.0
         self.cool_load = 0.0
+
+
+def _lump_sum(elements, parameter):
+    """calculates sums of the parameter of 2nd-level entries in a 2-level list
+
+    Parameters
+    ----------
+    elements : list
+        list of lists with building elements
+    parameter : str
+        parameter to lump
+
+    Returns
+    -------
+    lumped_sum : list
+        list of sums for each sub-list of elements
+    """
+    return [sum(eval('el.{}'.format(parameter)) for el in els)
+            for els in elements]
+
+
+def _lump_inverse_sum(elements, parameter):
+    """inverse sums of the parameter of 2nd-level entries in a 2-level list
+
+    Parameters
+    ----------
+    elements : list
+        list of lists with building elements
+    parameter : str
+        parameter to lump
+
+    Returns
+    -------
+    lumped_sum : list
+        list of sums of inverse entries for each sub-list of elements
+    """
+    return [1 / sum(1 / eval('el.{}'.format(parameter)) for el in els)
+            for els in elements]

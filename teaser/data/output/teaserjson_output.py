@@ -30,12 +30,14 @@ def save_teaser_json(path, project):
     prj_out["project"]["version"] = "0.7"
     prj_out["project"]["name"] = project.name
     prj_out["project"]["weather_file_path"] = project.weather_file_path
-    # todo soil file path?
+    prj_out["project"]["t_soil_mode"] = project.t_soil_mode
+    prj_out["project"]["t_soil_file_path"] = project.t_soil_file_path
     prj_out["project"]["number_of_elements_calc"] = project.number_of_elements_calc
     prj_out["project"]["merge_windows_calc"] = project.merge_windows_calc
     prj_out["project"]["used_library_calc"] = project.used_library_calc
     prj_out["project"]["modelica_info"] = collections.OrderedDict()
     prj_out["project"]["modelica_info"]["start_time"] = project.modelica_info.start_time
+    prj_out["project"]["modelica_info"]["time_to_minimal_t_ground"] = project.modelica_info.start_time
     prj_out["project"]["modelica_info"]["stop_time"] = project.modelica_info.stop_time
     prj_out["project"]["modelica_info"][
         "interval_output"
@@ -94,6 +96,7 @@ def save_teaser_json(path, project):
         ] = bldg.net_leased_area
         prj_out["project"]["buildings"][bldg.name]["outer_area"] = bldg.outer_area
         prj_out["project"]["buildings"][bldg.name]["window_area"] = bldg.window_area
+        prj_out["project"]["buildings"][bldg.name]["inner_wall_approximation_approach"] = bldg.inner_wall_approximation_approach
         if bldg.central_ahu is not None:
             ahu_out = collections.OrderedDict()
             ahu_out["heating"] = bldg.central_ahu.heating
@@ -128,6 +131,10 @@ def save_teaser_json(path, project):
 
             zone_out["area"] = zone.area
             zone_out["volume"] = zone.volume
+            zone_out["number_of_floors"] = zone.number_of_floors
+            zone_out["height_of_floors"] = zone.height_of_floors
+            zone_out["t_ground"] = zone.t_ground
+            zone_out["t_ground_amplitude"] = zone.t_ground_amplitude
             zone_out["use_conditions"] = collections.OrderedDict()
             zone_out["use_conditions"]["usage"] = zone.use_conditions.usage
 

@@ -456,6 +456,22 @@ class TwoElement(object):
             self._calc_outer_elements()
             self._calc_wf()
             self._calc_mean_values()
+        if (
+            len(
+                self.thermal_zone.interzonal_walls
+                + self.thermal_zone.interzonal_floors
+                + self.thermal_zone.interzonal_ceilings
+            )
+            >= 1
+        ):
+            warnings.warn(
+                "For thermal zone "
+                + self.thermal_zone.name
+                + " in building "
+                + self.thermal_zone.parent.name
+                + ", interzonal elements have been defined, but TwoElement "
+                + "export will treat them as inner elements."
+            )
         self._calc_number_of_elements()
         self._fill_zone_lists()
         self._calc_heat_load()

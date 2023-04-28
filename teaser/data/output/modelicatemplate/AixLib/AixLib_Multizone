@@ -119,18 +119,6 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
 # todo keep the following?
 
-% if bldg.parent.t_soil_file_path:
-
-   Modelica.Blocks.Sources.CombiTimeTable tableTSoil(
-    tableOnFile=true,
-    tableName="TSoil",
-    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    fileName="${bldg.parent.t_soil_file_path.replace("\\", "/")}",
-    columns=2:2)
-    "Soil temperatures"
-    annotation (Placement(transformation(extent={{72,-20},{56,-4}})));
-% endif
-
    Modelica.Blocks.Sources.CombiTimeTable tableIntGainsRad(
     tableOnFile=true,
     tableName="IntGainsConvRad",
