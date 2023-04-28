@@ -214,10 +214,10 @@ def simulate(
 
 if __name__ == "__main__":
 
-    setup_name = "20230307_referenz_komplett"
-    basepath = pathlib.Path('N:\Forschung\EBC0741_ZIM_SmartSenseIAQ_NK\Data\Simulationen/01_Referenzszenarien').joinpath(
+    setup_name = "20230425_test"
+    basepath = pathlib.Path('N:\Forschung\EBC0741_ZIM_SmartSenseIAQ_NK\Data\Simulationen/02_Bedarfsorierntierte_Regelung').joinpath(
         setup_name)
-    scenarios = load_scenarios(basepath.joinpath("scenarios_debug.xlsx"))
+    scenarios = load_scenarios(basepath.joinpath("scenarios.xlsx"))
     model_export_path = basepath.joinpath("models")
 
     for index, scenario in scenarios.iterrows():
