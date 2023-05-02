@@ -124,7 +124,7 @@ class Project(object):
                 "input",
                 "inputdata",
                 "weatherdata",
-                "t_soil_constant.mos",
+                "t_soil_sample_constant_283_15.mos",
             )
         )
 
@@ -297,6 +297,7 @@ class Project(object):
         net_leased_area,
         with_ahu=True,
         internal_gains_mode=1,
+        inner_wall_approximation_approach='teaser_default',
         office_layout=None,
         window_layout=None,
         construction_type=None,
@@ -340,17 +341,29 @@ class Project(object):
             and
             assigned to attribute central_ahu. This instance holds information
             for central Air Handling units. Default is False.
-internal_gains_mode: int [1, 2, 3]
-        mode for the internal gains calculation done in AixLib:
-        1: Temperature and activity degree dependent heat flux calculation for persons. The
-           calculation is based on  SIA 2024 (default)
-        2: Temperature and activity degree independent heat flux calculation for persons, the max.
-           heatflowrate is prescribed by the parameter
-           fixed_heat_flow_rate_persons.
-        3: Temperature and activity degree dependent calculation with
-           consideration of moisture and co2. The moisture calculation is
-           based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
-           Engineering ToolBox (2004) and regards only persons.
+        internal_gains_mode: int [1, 2, 3]
+            mode for the internal gains calculation done in AixLib:
+            1: Temperature and activity degree dependent heat flux calculation for persons. The
+               calculation is based on  SIA 2024 (default)
+            2: Temperature and activity degree independent heat flux calculation for persons, the max.
+               heatflowrate is prescribed by the parameter
+               fixed_heat_flow_rate_persons.
+            3: Temperature and activity degree dependent calculation with
+               consideration of moisture and co2. The moisture calculation is
+               based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
+               Engineering ToolBox (2004) and regards only persons.
+        inner_wall_approximation_approach : str
+            'teaser_default' (default) sets length of inner walls = typical
+                length * height of floors + 2 * typical width * height of floors
+            'typical_minus_outer' sets length of inner walls = 2 * typical
+                length * height of floors + 2 * typical width * height of floors
+                - length of outer or interzonal walls
+            'typical_minus_outer_extended' like 'typical_minus_outer', but also
+                considers that
+                a) a non-complete "average room" reduces its circumference
+                  proportional to the square root of the area
+                b) rooftops, windows and ground floors (= walls with border to
+                    soil) may have a vertical share
         office_layout : int
             Structure of the floor plan of office buildings, default is 1,
             which is representative for one elongated floor.
@@ -400,65 +413,69 @@ internal_gains_mode: int [1, 2, 3]
         if usage == "office":
 
             type_bldg = Office(
-                self,
-                name,
-                year_of_construction,
-                number_of_floors,
-                height_of_floors,
-                net_leased_area,
-                with_ahu,
-                internal_gains_mode,
-                office_layout,
-                window_layout,
-                construction_type,
+                parent=self,
+                name=name,
+                year_of_construction=year_of_construction,
+                number_of_floors=number_of_floors,
+                height_of_floors=height_of_floors,
+                net_leased_area=net_leased_area,
+                with_ahu=with_ahu,
+                internal_gains_mode=internal_gains_mode,
+                inner_wall_approximation_approach=inner_wall_approximation_approach,
+                office_layout=office_layout,
+                window_layout=window_layout,
+                construction_type=construction_type,
             )
 
         elif usage == "institute":
 
             type_bldg = Institute(
-                self,
-                name,
-                year_of_construction,
-                number_of_floors,
-                height_of_floors,
-                net_leased_area,
-                with_ahu,
-                internal_gains_mode,
-                office_layout,
-                window_layout,
-                construction_type,
+                parent=self,
+                name=name,
+                year_of_construction=year_of_construction,
+                number_of_floors=number_of_floors,
+                height_of_floors=height_of_floors,
+                net_leased_area=net_leased_area,
+                with_ahu=with_ahu,
+                internal_gains_mode=internal_gains_mode,
+                inner_wall_approximation_approach=inner_wall_approximation_approach,
+                office_layout=office_layout,
+                window_layout=window_layout,
+                construction_type=construction_type,
             )
 
         elif usage == "institute4":
 
             type_bldg = Institute4(
-                self,
-                name,
-                year_of_construction,
-                number_of_floors,
-                height_of_floors,
-                net_leased_area,
-                with_ahu,
-                internal_gains_mode,
-                office_layout,
-                window_layout,
-                construction_type,
+                parent=self,
+                name=name,
+                year_of_construction=year_of_construction,
+                number_of_floors=number_of_floors,
+                height_of_floors=height_of_floors,
+                net_leased_area=net_leased_area,
+                with_ahu=with_ahu,
+                internal_gains_mode=internal_gains_mode,
+                inner_wall_approximation_approach=inner_wall_approximation_approach,
+                office_layout=office_layout,
+                window_layout=window_layout,
+                construction_type=construction_type,
             )
 
         elif usage == "institute8":
 
             type_bldg = Institute8(
-                self,
-                name,
-                year_of_construction,
-                number_of_floors,
-                height_of_floors,
-                net_leased_area,
-                with_ahu,
-                internal_gains_mode,
-                office_layout,
-                window_layout,
-                construction_type,
+                parent=self,
+                name=name,
+                year_of_construction=year_of_construction,
+                number_of_floors=number_of_floors,
+                height_of_floors=height_of_floors,
+                net_leased_area=net_leased_area,
+                with_ahu=with_ahu,
+                internal_gains_mode=internal_gains_mode,
+                inner_wall_approximation_approach=inner_wall_approximation_approach,
+                office_layout=office_layout,
+                window_layout=window_layout,
+                construction_type=construction_type,
             )
 
         type_bldg.generate_archetype()
@@ -647,15 +664,16 @@ internal_gains_mode: int [1, 2, 3]
             if usage == "single_family_house":
 
                 type_bldg = SingleFamilyHouse(
-                    self,
-                    name,
-                    year_of_construction,
-                    number_of_floors,
-                    height_of_floors,
-                    net_leased_area,
-                    with_ahu,
-                    internal_gains_mode,
-                    construction_type,
+                    parent=self,
+                    name=name,
+                    year_of_construction=year_of_construction,
+                    number_of_floors=number_of_floors,
+                    height_of_floors=height_of_floors,
+                    net_leased_area=net_leased_area,
+                    with_ahu=with_ahu,
+                    internal_gains_mode=internal_gains_mode,
+                    inner_wall_approximation_approach=inner_wall_approximation_approach,
+                    construction_type=construction_type,
                 )
                 type_bldg.generate_archetype()
                 return type_bldg
@@ -663,15 +681,16 @@ internal_gains_mode: int [1, 2, 3]
             elif usage == "terraced_house":
 
                 type_bldg = TerracedHouse(
-                    self,
-                    name,
-                    year_of_construction,
-                    number_of_floors,
-                    height_of_floors,
-                    net_leased_area,
-                    with_ahu,
-                    internal_gains_mode,
-                    construction_type,
+                    parent=self,
+                    name=name,
+                    year_of_construction=year_of_construction,
+                    number_of_floors=number_of_floors,
+                    height_of_floors=height_of_floors,
+                    net_leased_area=net_leased_area,
+                    with_ahu=with_ahu,
+                    internal_gains_mode=internal_gains_mode,
+                    inner_wall_approximation_approach=inner_wall_approximation_approach,
+                    construction_type=construction_type,
                 )
                 type_bldg.generate_archetype()
                 return type_bldg
@@ -679,15 +698,16 @@ internal_gains_mode: int [1, 2, 3]
             elif usage == "multi_family_house":
 
                 type_bldg = MultiFamilyHouse(
-                    self,
-                    name,
-                    year_of_construction,
-                    number_of_floors,
-                    height_of_floors,
-                    net_leased_area,
-                    with_ahu,
-                    internal_gains_mode,
-                    construction_type,
+                    parent=self,
+                    name=name,
+                    year_of_construction=year_of_construction,
+                    number_of_floors=number_of_floors,
+                    height_of_floors=height_of_floors,
+                    net_leased_area=net_leased_area,
+                    with_ahu=with_ahu,
+                    internal_gains_mode=internal_gains_mode,
+                    inner_wall_approximation_approach=inner_wall_approximation_approach,
+                    construction_type=construction_type,
                 )
                 type_bldg.generate_archetype()
                 return type_bldg
@@ -695,15 +715,16 @@ internal_gains_mode: int [1, 2, 3]
             elif usage == "apartment_block":
 
                 type_bldg = ApartmentBlock(
-                    self,
-                    name,
-                    year_of_construction,
-                    number_of_floors,
-                    height_of_floors,
-                    net_leased_area,
-                    with_ahu,
-                    internal_gains_mode,
-                    construction_type,
+                    parent=self,
+                    name=name,
+                    year_of_construction=year_of_construction,
+                    number_of_floors=number_of_floors,
+                    height_of_floors=height_of_floors,
+                    net_leased_area=net_leased_area,
+                    with_ahu=with_ahu,
+                    internal_gains_mode=internal_gains_mode,
+                    inner_wall_approximation_approach=inner_wall_approximation_approach,
+                    construction_type=construction_type,
                 )
 
                 type_bldg.generate_archetype()
@@ -728,15 +749,16 @@ internal_gains_mode: int [1, 2, 3]
             if usage == "single_family_house":
 
                 type_bldg = SingleFamilyHouse_DK(
-                    self,
-                    name,
-                    year_of_construction,
-                    number_of_floors,
-                    height_of_floors,
-                    net_leased_area,
-                    with_ahu,
-                    internal_gains_mode,
-                    construction_type,
+                    parent=self,
+                    name=name,
+                    year_of_construction=year_of_construction,
+                    number_of_floors=number_of_floors,
+                    height_of_floors=height_of_floors,
+                    net_leased_area=net_leased_area,
+                    with_ahu=with_ahu,
+                    internal_gains_mode=internal_gains_mode,
+                    inner_wall_approximation_approach=inner_wall_approximation_approach,
+                    construction_type=construction_type,
                 )
                 type_bldg.generate_archetype()
                 return type_bldg
@@ -744,15 +766,16 @@ internal_gains_mode: int [1, 2, 3]
             elif usage == "terraced_house":
 
                 type_bldg = TerracedHouse_DK(
-                    self,
-                    name,
-                    year_of_construction,
-                    number_of_floors,
-                    height_of_floors,
-                    net_leased_area,
-                    with_ahu,
-                    internal_gains_mode,
-                    construction_type,
+                    parent=self,
+                    name=name,
+                    year_of_construction=year_of_construction,
+                    number_of_floors=number_of_floors,
+                    height_of_floors=height_of_floors,
+                    net_leased_area=net_leased_area,
+                    with_ahu=with_ahu,
+                    internal_gains_mode=internal_gains_mode,
+                    inner_wall_approximation_approach=inner_wall_approximation_approach,
+                    construction_type=construction_type,
                 )
                 type_bldg.generate_archetype()
                 return type_bldg
@@ -760,15 +783,16 @@ internal_gains_mode: int [1, 2, 3]
             elif usage == "apartment_block":
 
                 type_bldg = ApartmentBlock_DK(
-                    self,
-                    name,
-                    year_of_construction,
-                    number_of_floors,
-                    height_of_floors,
-                    net_leased_area,
-                    with_ahu,
-                    internal_gains_mode,
-                    construction_type,
+                    parent=self,
+                    name=name,
+                    year_of_construction=year_of_construction,
+                    number_of_floors=number_of_floors,
+                    height_of_floors=height_of_floors,
+                    net_leased_area=net_leased_area,
+                    with_ahu=with_ahu,
+                    internal_gains_mode=internal_gains_mode,
+                    inner_wall_approximation_approach=inner_wall_approximation_approach,
+                    construction_type=construction_type,
                 )
                 type_bldg.generate_archetype()
                 return type_bldg
@@ -835,176 +859,187 @@ internal_gains_mode: int [1, 2, 3]
             if usage == "est1a":
 
                 type_bldg = EST1a(
-                    self,
-                    name,
-                    year_of_construction,
-                    number_of_floors,
-                    height_of_floors,
-                    net_leased_area,
-                    with_ahu,
-                    internal_gains_mode,
-                    neighbour_buildings,
-                    construction_type,
+                    parent=self,
+                    name=name,
+                    year_of_construction=year_of_construction,
+                    number_of_floors=number_of_floors,
+                    height_of_floors=height_of_floors,
+                    net_leased_area=net_leased_area,
+                    with_ahu=with_ahu,
+                    internal_gains_mode=internal_gains_mode,
+                    neighbour_buildings=neighbour_buildings,
+                    inner_wall_approximation_approach=inner_wall_approximation_approach,
+                    construction_type=construction_type,
                 )
 
             elif usage == "est1b":
 
                 type_bldg = EST1b(
-                    self,
-                    name,
-                    year_of_construction,
-                    number_of_floors,
-                    height_of_floors,
-                    net_leased_area,
-                    with_ahu,
-                    internal_gains_mode,
-                    neighbour_buildings,
-                    construction_type,
-                    number_of_apartments,
+                    parent=self,
+                    name=name,
+                    year_of_construction=year_of_construction,
+                    number_of_floors=number_of_floors,
+                    height_of_floors=height_of_floors,
+                    net_leased_area=net_leased_area,
+                    with_ahu=with_ahu,
+                    internal_gains_mode=internal_gains_mode,
+                    neighbour_buildings=neighbour_buildings,
+                    inner_wall_approximation_approach=inner_wall_approximation_approach,
+                    construction_type=construction_type,
+                    number_of_apartments=number_of_apartments,
                 )
 
             elif usage == "est2":
 
                 type_bldg = EST2(
-                    self,
-                    name,
-                    year_of_construction,
-                    number_of_floors,
-                    height_of_floors,
-                    net_leased_area,
-                    with_ahu,
-                    internal_gains_mode,
-                    neighbour_buildings,
-                    construction_type,
-                    number_of_apartments,
+                    parent=self,
+                    name=name,
+                    year_of_construction=year_of_construction,
+                    number_of_floors=number_of_floors,
+                    height_of_floors=height_of_floors,
+                    net_leased_area=net_leased_area,
+                    with_ahu=with_ahu,
+                    internal_gains_mode=internal_gains_mode,
+                    neighbour_buildings=neighbour_buildings,
+                    inner_wall_approximation_approach=inner_wall_approximation_approach,
+                    construction_type=construction_type,
+                    number_of_apartments=number_of_apartments,
                 )
 
             elif usage == "est3":
 
                 type_bldg = EST3(
-                    self,
-                    name,
-                    year_of_construction,
-                    number_of_floors,
-                    height_of_floors,
-                    net_leased_area,
-                    with_ahu,
-                    internal_gains_mode,
-                    neighbour_buildings,
-                    construction_type,
-                    number_of_apartments,
+                    parent=self,
+                    name=name,
+                    year_of_construction=year_of_construction,
+                    number_of_floors=number_of_floors,
+                    height_of_floors=height_of_floors,
+                    net_leased_area=net_leased_area,
+                    with_ahu=with_ahu,
+                    internal_gains_mode=internal_gains_mode,
+                    neighbour_buildings=neighbour_buildings,
+                    inner_wall_approximation_approach=inner_wall_approximation_approach,
+                    construction_type=construction_type,
+                    number_of_apartments=number_of_apartments,
                 )
 
             elif usage == "est4a":
 
                 type_bldg = EST4a(
-                    self,
-                    name,
-                    year_of_construction,
-                    number_of_floors,
-                    height_of_floors,
-                    net_leased_area,
-                    with_ahu,
-                    internal_gains_mode,
-                    neighbour_buildings,
-                    construction_type,
-                    number_of_apartments,
+                    parent=self,
+                    name=name,
+                    year_of_construction=year_of_construction,
+                    number_of_floors=number_of_floors,
+                    height_of_floors=height_of_floors,
+                    net_leased_area=net_leased_area,
+                    with_ahu=with_ahu,
+                    internal_gains_mode=internal_gains_mode,
+                    neighbour_buildings=neighbour_buildings,
+                    inner_wall_approximation_approach=inner_wall_approximation_approach,
+                    construction_type=construction_type,
+                    number_of_apartments=number_of_apartments,
                 )
 
             elif usage == "est4b":
 
                 type_bldg = EST4b(
-                    self,
-                    name,
-                    year_of_construction,
-                    number_of_floors,
-                    height_of_floors,
-                    net_leased_area,
-                    with_ahu,
-                    internal_gains_mode,
-                    neighbour_buildings,
-                    construction_type,
-                    number_of_apartments,
+                    parent=self,
+                    name=name,
+                    year_of_construction=year_of_construction,
+                    number_of_floors=number_of_floors,
+                    height_of_floors=height_of_floors,
+                    net_leased_area=net_leased_area,
+                    with_ahu=with_ahu,
+                    internal_gains_mode=internal_gains_mode,
+                    neighbour_buildings=neighbour_buildings,
+                    inner_wall_approximation_approach=inner_wall_approximation_approach,
+                    construction_type=construction_type,
+                    number_of_apartments=number_of_apartments,
                 )
 
             elif usage == "est5":
 
                 type_bldg = EST5(
-                    self,
-                    name,
-                    year_of_construction,
-                    number_of_floors,
-                    height_of_floors,
-                    net_leased_area,
-                    with_ahu,
-                    internal_gains_mode,
-                    neighbour_buildings,
-                    construction_type,
-                    number_of_apartments,
+                    parent=self,
+                    name=name,
+                    year_of_construction=year_of_construction,
+                    number_of_floors=number_of_floors,
+                    height_of_floors=height_of_floors,
+                    net_leased_area=net_leased_area,
+                    with_ahu=with_ahu,
+                    internal_gains_mode=internal_gains_mode,
+                    neighbour_buildings=neighbour_buildings,
+                    inner_wall_approximation_approach=inner_wall_approximation_approach,
+                    construction_type=construction_type,
+                    number_of_apartments=number_of_apartments,
                 )
 
             elif usage == "est6":
 
                 type_bldg = EST6(
-                    self,
-                    name,
-                    year_of_construction,
-                    number_of_floors,
-                    height_of_floors,
-                    net_leased_area,
-                    with_ahu,
-                    internal_gains_mode,
-                    neighbour_buildings,
-                    construction_type,
-                    number_of_apartments,
+                    parent=self,
+                    name=name,
+                    year_of_construction=year_of_construction,
+                    number_of_floors=number_of_floors,
+                    height_of_floors=height_of_floors,
+                    net_leased_area=net_leased_area,
+                    with_ahu=with_ahu,
+                    internal_gains_mode=internal_gains_mode,
+                    neighbour_buildings=neighbour_buildings,
+                    inner_wall_approximation_approach=inner_wall_approximation_approach,
+                    construction_type=construction_type,
+                    number_of_apartments=number_of_apartments,
                 )
 
             elif usage == "est7":
 
                 type_bldg = EST7(
-                    self,
-                    name,
-                    year_of_construction,
-                    number_of_floors,
-                    height_of_floors,
-                    net_leased_area,
-                    with_ahu,
-                    internal_gains_mode,
-                    neighbour_buildings,
-                    construction_type,
-                    number_of_apartments,
+                    parent=self,
+                    name=name,
+                    year_of_construction=year_of_construction,
+                    number_of_floors=number_of_floors,
+                    height_of_floors=height_of_floors,
+                    net_leased_area=net_leased_area,
+                    with_ahu=with_ahu,
+                    internal_gains_mode=internal_gains_mode,
+                    neighbour_buildings=neighbour_buildings,
+                    inner_wall_approximation_approach=inner_wall_approximation_approach,
+                    construction_type=construction_type,
+                    number_of_apartments=number_of_apartments,
                 )
 
             elif usage == "est8a":
 
                 type_bldg = EST8a(
-                    self,
-                    name,
-                    year_of_construction,
-                    number_of_floors,
-                    height_of_floors,
-                    net_leased_area,
-                    with_ahu,
-                    internal_gains_mode,
-                    neighbour_buildings,
-                    construction_type,
-                    number_of_apartments,
+                    parent=self,
+                    name=name,
+                    year_of_construction=year_of_construction,
+                    number_of_floors=number_of_floors,
+                    height_of_floors=height_of_floors,
+                    net_leased_area=net_leased_area,
+                    with_ahu=with_ahu,
+                    internal_gains_mode=internal_gains_mode,
+                    neighbour_buildings=neighbour_buildings,
+                    inner_wall_approximation_approach=inner_wall_approximation_approach,
+                    construction_type=construction_type,
+                    number_of_apartments=number_of_apartments,
                 )
 
             elif usage == "est8b":
 
                 type_bldg = EST8b(
-                    self,
-                    name,
-                    year_of_construction,
-                    number_of_floors,
-                    height_of_floors,
-                    net_leased_area,
-                    with_ahu,
-                    internal_gains_mode,
-                    neighbour_buildings,
-                    construction_type,
-                    number_of_apartments,
+                    parent=self,
+                    name=name,
+                    year_of_construction=year_of_construction,
+                    number_of_floors=number_of_floors,
+                    height_of_floors=height_of_floors,
+                    net_leased_area=net_leased_area,
+                    with_ahu=with_ahu,
+                    internal_gains_mode=internal_gains_mode,
+                    neighbour_buildings=neighbour_buildings,
+                    inner_wall_approximation_approach=inner_wall_approximation_approach,
+                    construction_type=construction_type,
+                    number_of_apartments=number_of_apartments,
                 )
 
         type_bldg.generate_archetype()
@@ -1229,6 +1264,26 @@ internal_gains_mode: int [1, 2, 3]
         else:
             self._weather_file_path = os.path.normpath(value)
             self.weather_file_name = os.path.split(self.weather_file_path)[1]
+
+    @property
+    def t_soil_file_path(self):
+        return self._t_soil_file_path
+
+    @t_soil_file_path.setter
+    def t_soil_file_path(self, value):
+        if value is None:
+            self._t_soil_file_path = utilities.get_full_path(
+                os.path.join(
+                    "data",
+                    "input",
+                    "inputdata",
+                    "weatherdata",
+                    "t_soil_sample_constant_283_15.mos",
+                )
+            )
+        else:
+            self._t_soil_file_path = os.path.normpath(value)
+            self.t_soil_file_name = os.path.split(self.t_soil_file_path)[1]
 
     @property
     def number_of_elements_calc(self):

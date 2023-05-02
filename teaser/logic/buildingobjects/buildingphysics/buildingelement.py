@@ -170,31 +170,38 @@ class BuildingElement(object):
         r_conduc = 0.0
         for count_layer in self.layer:
             r_conduc += (
-                count_layer.thickness / count_layer.material.thermal_conduc) \
+                count_layer.thickness / count_layer.material.thermal_conduc
+            )
 
-        self.r_conduc = r_conduc * (1 / self.area)
-        self.r_inner_conv = (1 / self.inner_convection) * (1 / self.area)
-        self.r_inner_rad = (1 / self.inner_radiation) * (1 / self.area)
-        self.r_inner_comb = 1 / (1 / self.r_inner_conv + 1 / self.r_inner_rad)
+        try:
+            self.r_conduc = r_conduc * (1 / self.area)
+            self.r_inner_conv = (1 / self.inner_convection) * (1 / self.area)
+            self.r_inner_rad = (1 / self.inner_radiation) * (1 / self.area)
+            self.r_inner_comb = 1 / (1 / self.r_inner_conv + 1 / self.r_inner_rad)
 
-        if self.outer_convection is not None \
-                and self.outer_radiation is not None:
+            if self.outer_convection is not None \
+                    and self.outer_radiation is not None:
 
-            self.r_outer_conv = (1 / self.outer_convection) * (1 / self.area)
-            self.r_outer_rad = (1 / self.outer_radiation) * (1 / self.area)
-            self.r_outer_comb = 1 / \
-                (1 / self.r_outer_conv + 1 / self.r_outer_rad)
+                self.r_outer_conv = (1 / self.outer_convection) * (1 / self.area)
+                self.r_outer_rad = (1 / self.outer_radiation) * (1 / self.area)
+                self.r_outer_comb = 1 / \
+                    (1 / self.r_outer_conv + 1 / self.r_outer_rad)
 
-        self.ua_value = (1 / (
+            self.ua_value = (1 / (
             self.r_inner_comb + self.r_conduc + self.r_outer_comb))
-        self.u_value = self.ua_value / self.area
+            self.u_value = self.ua_value / self.area
+        except ZeroDivisionError:
+            pass
 
     def gather_element_properties(self):
         """Helper function for matrix calculation.
 
         Gathers all material properties of the building element and returns
         them as a np.array. Needed for the calculation of the matrix in
-        equivalent_res(t_bt) especially for walls.
+        equivalent_res(t_bt) especially for walls. This is why for
+        interzonal elements that have a zone with heating on the other side
+        and a zone without heating on the inner side, layers are reversed
+        by this function.
 
         Returns
         ----------
@@ -221,9 +228,9 @@ class BuildingElement(object):
         thickness = np.zeros(number_of_layer)
 
         range_tuple = (0, number_of_layer, 1)
-        if self in self.parent.nz_borders:
+        if self in self.parent.interzonal_elements:
             if (not self.parent.use_conditions.with_heating and
-                    self.outside.use_conditions.with_heating):
+                    self.other_side.use_conditions.with_heating):
                 # if inner side of nz border is unheated and outer side is
                 # heated, reverse layers for calculation (list of resistances
                 # will be re-reversed later)

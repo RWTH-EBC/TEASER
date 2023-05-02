@@ -117,8 +117,8 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     columns=2:${len(bldg.thermal_zones)+1})
     "Set points for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
-# todo keep the following?
 
+% if False:
    Modelica.Blocks.Sources.CombiTimeTable tableIntGainsRad(
     tableOnFile=true,
     tableName="IntGainsConvRad",
@@ -144,7 +144,7 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowConv[${len(bldg.thermal_zones)}]
     annotation (Placement(transformation(extent={{-24,-74},{-4,-54}})));
-
+% endif
 equation
   connect(weaDat.weaBus, multizone.weaBus) annotation (Line(
       points={{-62,40},{-32,40},{-32,6},{34,6}},
@@ -162,7 +162,8 @@ equation
 
   connect(tableTSetCool.y, multizone.TSetCool) annotation (Line(points={{55.2,-58},
           {36.8,-58},{36.8,-9}}, color={0,0,127}));
-# todo keep the following?
+
+% if False:
   connect(tableIntGainsRad.y, heatFlowRad.Q_flow)
     annotation (Line(points={{-47.2,-26},{-22,-26}}, color={0,0,127}));
 
@@ -174,6 +175,7 @@ equation
 
   connect(tableIntGainsConv.y, heatFlowConv.Q_flow)
     annotation (Line(points={{-47.2,-64},{-24,-64}}, color={0,0,127}));
+%endif
 
   annotation (experiment(
       StartTime=${str(zone.parent.parent.modelica_info.start_time)},

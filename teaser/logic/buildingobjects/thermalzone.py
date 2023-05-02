@@ -339,10 +339,11 @@ class ThermalZone(object):
         for ceiling in self.ceilings:
             ceiling.area = ((self.number_of_floors - 1)
                             / self.number_of_floors) * self.area
-            typical_area = self.use_conditions.typical_length * \
-                self.use_conditions.typical_width
 
-            avg_room_nr = self.area / typical_area
+        typical_area = self.use_conditions.typical_length * \
+            self.use_conditions.typical_width
+
+        avg_room_nr = self.area / typical_area
 
         approximation_approach \
             = self.parent.inner_wall_approximation_approach
@@ -356,7 +357,8 @@ class ThermalZone(object):
                           f'Falling back to teaser_default.')
             approximation_approach = 'teaser_default'
         if approximation_approach == 'typical_minus_outer':
-            wall_area = (avg_room_nr
+            wall_area = ((int(avg_room_nr)
+                          + math.sqrt(avg_room_nr - int(avg_room_nr)))
                          * (2 * self.use_conditions.typical_length
                             * self.height_of_floors
                             + 2 * self.use_conditions.typical_width
@@ -366,13 +368,8 @@ class ThermalZone(object):
                 wall_area -= other_verticals.area
             wall_area = max(0.0, wall_area)
         elif approximation_approach == 'typical_minus_outer_extended':
-            r_avg_room_nr = avg_room_nr - int(avg_room_nr)
-            rest_area = r_avg_room_nr / avg_room_nr * self.area
-            avg_room_nr = int(avg_room_nr) + math.sqrt(
-                rest_area / self.use_conditions.typical_length
-                / self.use_conditions.typical_width
-            )
-            wall_area = (avg_room_nr
+            wall_area = ((int(avg_room_nr)
+                          + math.sqrt(avg_room_nr - int(avg_room_nr)))
                          * (2 * self.use_conditions.typical_length
                             * self.height_of_floors
                             + 2 * self.use_conditions.typical_width

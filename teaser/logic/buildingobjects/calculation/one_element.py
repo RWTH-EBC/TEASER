@@ -344,6 +344,7 @@ class OneElement(object):
             self.thermal_zone.inner_walls
             + self.thermal_zone.floors
             + self.thermal_zone.ceilings
+            + self.thermal_zone.interzonal_elements
         ):
             inner_wall.calc_equivalent_res()
             inner_wall.calc_ua_value()

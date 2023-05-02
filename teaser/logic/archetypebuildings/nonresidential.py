@@ -129,7 +129,7 @@ class NonResidential(Building):
         net_leased_area,
         with_ahu=False,
         internal_gains_mode=1,
-        inner_wall_approximation_approach=inner_wall_approximation_approach
+        inner_wall_approximation_approach='teaser_default'
     ):
         """Constructor of NonResidential archetype building
         """

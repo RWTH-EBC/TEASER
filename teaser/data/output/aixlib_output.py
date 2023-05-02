@@ -117,6 +117,7 @@ def export_multizone(buildings, prj, path=None,
         addition=None,
         extra=None)
     _copy_weather_data(prj.weather_file_path, path)
+    _copy_weather_data(prj.t_soil_file_path, path)
 
     for i, bldg in enumerate(buildings):
 
@@ -137,7 +138,6 @@ def export_multizone(buildings, prj, path=None,
             path=bldg_path)
         bldg.library_attr.modelica_gains_boundary(
             path=bldg_path)
-        # todo keep this? bldg.library_attr.modelica_add_int_gains(path=bldg_path)
 
         _help_package(path=bldg_path, name=bldg.name, within=bldg.parent.name)
         _help_package_order(

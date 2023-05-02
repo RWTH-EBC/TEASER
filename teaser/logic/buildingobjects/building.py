@@ -54,17 +54,20 @@ class Building(object):
            based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
            Engineering ToolBox (2004) and regards only persons.
     inner_wall_approximation_approach : str
-        'teaser_default' (default) sets length of inner walls = typical
+        'teaser_default' (default) assumes area of inner wall per room as equal
+            to one typical length (defined in use conditions) * height of
+            floors, where number of rooms is
+            zone area/(typical length + typical width)
+        'typical_minus_outer' sets length of inner walls per room = 2 * typical
             length * height of floors + 2 * typical width * height of floors
-        'typical_minus_outer' sets length of inner walls = 2 * typical
-            length * height of floors + 2 * typical width * height of floors
-            - length of outer or interzonal walls
+            - length of outer or interzonal walls. When calculating the number
+            of rooms, considers the square root of the share for non-complete
+            rooms in comparison to 'teaser_default'.
         'typical_minus_outer_extended' like 'typical_minus_outer', but also
-            considers that
-            a) a non-complete "average room" reduces its circumference
-              proportional to the square root of the area
-            b) rooftops, windows and ground floors (= walls with border to
-                soil) may have a vertical share
+            considers that rooftops, windows and ground floors (= walls with
+            border to soil) may have vertical and horizontal shares
+        area of floors and ceilings is not affected by this and always equal to
+        (zone number of floors - 1) * zone area
 
     Attributes
     ----------

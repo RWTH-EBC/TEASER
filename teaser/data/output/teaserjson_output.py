@@ -17,9 +17,6 @@ def save_teaser_json(path, project):
         Teaser instance of Project()
 
     """
-    print('Caution - the json output function has not been adjusted to the DLR '
-          'parameter changes in TEASER. You will probably lose data.')
-    # todo include these adjustments
     if path.endswith("json"):
         path = path
     else:
@@ -37,7 +34,7 @@ def save_teaser_json(path, project):
     prj_out["project"]["used_library_calc"] = project.used_library_calc
     prj_out["project"]["modelica_info"] = collections.OrderedDict()
     prj_out["project"]["modelica_info"]["start_time"] = project.modelica_info.start_time
-    prj_out["project"]["modelica_info"]["time_to_minimal_t_ground"] = project.modelica_info.start_time
+    prj_out["project"]["modelica_info"]["time_to_minimal_t_ground"] = project.modelica_info.time_to_minimal_t_ground
     prj_out["project"]["modelica_info"]["stop_time"] = project.modelica_info.stop_time
     prj_out["project"]["modelica_info"][
         "interval_output"

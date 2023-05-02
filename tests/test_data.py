@@ -2050,7 +2050,7 @@ class Test_teaser(object):
         assert round(zone_attr.r_rest_ow, 14) == 0.00585224061345
 
     def test_calc_three_element(self):
-        """test of calc_two_element"""
+        """test of calc_three_element"""
         prj.set_default()
         helptest.building_test2(prj)
 
@@ -2108,7 +2108,7 @@ class Test_teaser(object):
         assert round(zone_attr.r_rest_gf, 13) == 0.0137109637229
 
     def test_calc_four_element(self):
-        """test of calc_two_element"""
+        """test of calc_four_element"""
         prj.set_default()
         helptest.building_test2(prj)
 
@@ -2200,12 +2200,12 @@ class Test_teaser(object):
             = 'typical_minus_outer'
         prj.buildings[-1].thermal_zones[-1].set_inner_wall_area()
         for wall in prj.buildings[-1].thermal_zones[-1].inner_walls:
-            assert round(wall.area, 16) == 11.951219512195122
+            assert round(wall.area, 16) == 99.65023392678924
         prj.buildings[-1].inner_wall_approximation_approach \
             = 'typical_minus_outer_extended'
         prj.buildings[-1].thermal_zones[-1].set_inner_wall_area()
         for wall in prj.buildings[-1].thermal_zones[-1].inner_walls:
-            assert round(wall.area, 16) == 11.951219512195122
+            assert round(wall.area, 16) == 99.65023392678924
         prj.buildings[-1].inner_wall_approximation_approach = 'teaser_default'
         prj.buildings[-1].thermal_zones[-1].set_inner_wall_area()
         for wall in prj.buildings[-1].thermal_zones[-1].inner_walls:

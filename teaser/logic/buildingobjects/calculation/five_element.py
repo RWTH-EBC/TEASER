@@ -1542,7 +1542,7 @@ class FiveElement(object):
                 r1_nzb, c1_nzb = self._calc_parallel_connection(nz_borders,
                                                                 omega)
                 conduction = 1 / sum(1 / nzb.r_conduc for nzb in nz_borders)
-                if (nz_borders[0].outside.use_conditions.with_heating and
+                if (nz_borders[0].other_side.use_conditions.with_heating and
                         not nz_borders[0].parent.use_conditions.with_heating):
                     # rc parameters were calculated from reverse-order layers
                     # this needs to be considered here

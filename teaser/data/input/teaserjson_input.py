@@ -72,13 +72,19 @@ def load_teaser_json(path, project):
 
     project.name = prj_in["project"]["name"]
     project.weather_file_path = prj_in["project"]["weather_file_path"]
-    project.t_soil_mode = prj_in["project"]["t_soil_mode"]
-    project.t_soil_file_path = prj_in["project"]["t_soil_file_path"]
+    try:
+        project.t_soil_mode = prj_in["project"]["t_soil_mode"]
+        project.t_soil_file_path = prj_in["project"]["t_soil_file_path"]
+    except KeyError:
+        pass
     project.number_of_elements_calc = prj_in["project"]["number_of_elements_calc"]
     project.merge_windows_calc = prj_in["project"]["merge_windows_calc"]
     project.used_library_calc = prj_in["project"]["used_library_calc"]
     project.modelica_info.start_time = prj_in["project"]["modelica_info"]["start_time"]
-    project.modelica_info.start_time = prj_in["project"]["modelica_info"]["time_to_minimal_t_ground"]
+    try:
+        project.modelica_info.time_to_minimal_t_ground = prj_in["project"]["modelica_info"]["time_to_minimal_t_ground"]
+    except KeyError:
+        pass
     project.modelica_info.stop_time = prj_in["project"]["modelica_info"]["stop_time"]
     project.modelica_info.interval_output = prj_in["project"]["modelica_info"][
         "interval_output"
@@ -274,37 +280,42 @@ def load_teaser_json(path, project):
                 ceil.name = cl_name
                 set_basic_data_teaser(cl_in, ceil)
                 set_layer_data_teaser(cl_in, ceil)
-            for izw_name, izw_in in zone_in["interzonal_walls"].items():
-                iz_wall = InterzonalWall(parent=tz)
-                iz_wall.name = izw_name
-                set_basic_data_teaser(izw_in, iz_wall)
-                set_layer_data_teaser(izw_in, iz_wall)
-            for izf_name, izf_in in zone_in["interzonal_floors"].items():
-                izf = InterzonalFloor(parent=tz)
-                izf.name = izf_name
-                set_basic_data_teaser(izf_in, izf)
-                set_layer_data_teaser(izf_in, izf)
-            for izc_name, izc_in in zone_in["interzonal_ceilings"].items():
-                izc = InterzonalCeiling(parent=tz)
-                izc.name = izc_name
-                set_basic_data_teaser(izc_in, izc)
-                set_layer_data_teaser(izc_in, izc)
-
-        for tz, (tz_name, zone_in) in zip(bldg.thermal_zones,
-                                          bldg_in["thermal_zones"].items()):
-            for iz_wall, (izw_name, izw_in) in zip(
-                    tz.interzonal_walls, zone_in["interzonal_walls"].items()
-            ):
-                iz_wall.other_side = zones_created[izw_in["other_side"]]
-            for iz_floor, (izf_name, izf_in) in zip(
-                    tz.interzonal_floors, zone_in["interzonal_floors"].items()
-            ):
-                iz_floor.other_side = zones_created[izf_in["other_side"]]
-            for iz_ceiling, (izc_name, izc_in) in zip(
-                    tz.interzonal_ceilings,
-                    zone_in["interzonal_ceilings"].items()
-            ):
-                iz_ceiling.other_side = zones_created[izc_in["other_side"]]
+            try:
+                for izw_name, izw_in in zone_in["interzonal_walls"].items():
+                    iz_wall = InterzonalWall(parent=tz)
+                    iz_wall.name = izw_name
+                    set_basic_data_teaser(izw_in, iz_wall)
+                    set_layer_data_teaser(izw_in, iz_wall)
+                for izf_name, izf_in in zone_in["interzonal_floors"].items():
+                    izf = InterzonalFloor(parent=tz)
+                    izf.name = izf_name
+                    set_basic_data_teaser(izf_in, izf)
+                    set_layer_data_teaser(izf_in, izf)
+                for izc_name, izc_in in zone_in["interzonal_ceilings"].items():
+                    izc = InterzonalCeiling(parent=tz)
+                    izc.name = izc_name
+                    set_basic_data_teaser(izc_in, izc)
+                    set_layer_data_teaser(izc_in, izc)
+            except KeyError:
+                pass
+        try:
+            for tz, (tz_name, zone_in) in zip(bldg.thermal_zones,
+                                              bldg_in["thermal_zones"].items()):
+                for iz_wall, (izw_name, izw_in) in zip(
+                        tz.interzonal_walls, zone_in["interzonal_walls"].items()
+                ):
+                    iz_wall.other_side = zones_created[izw_in["other_side"]]
+                for iz_floor, (izf_name, izf_in) in zip(
+                        tz.interzonal_floors, zone_in["interzonal_floors"].items()
+                ):
+                    iz_floor.other_side = zones_created[izf_in["other_side"]]
+                for iz_ceiling, (izc_name, izc_in) in zip(
+                        tz.interzonal_ceilings,
+                        zone_in["interzonal_ceilings"].items()
+                ):
+                    iz_ceiling.other_side = zones_created[izc_in["other_side"]]
+        except KeyError:
+            pass
 
 
 def set_basic_data_teaser(wall_in, element):

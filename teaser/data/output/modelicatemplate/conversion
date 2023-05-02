@@ -45,17 +45,3 @@
 
   %>
 </%def>
-
-##convert TEASER soil temperature data source
-<%def name="get_soil_data_source(project)", filter="trim">
-  <%
-  if project.t_soil_mode is 2:
-    return_value = 'BoundaryConditions.GroundTemperature.GroundTemperatureDataSource.Sine'
-  elif project.t_soil_mode is 3:
-    return_value = 'BoundaryConditions.GroundTemperature.GroundTemperatureDataSource.File'
-  else:
-    return_value = 'BoundaryConditions.GroundTemperature.GroundTemperatureDataSource.Constant'
-
-  return return_value
-  %>
-</%def>
