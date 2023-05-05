@@ -20,7 +20,7 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     % else:
         use_C_flow = false,
         use_moisture_balance = false,
-        redeclare package Medium = ${"Modelica.Media.Air.DryAirNasa" if any([tz.use_conditions.with_heating is False for tz in bldg.thermal_zones] else "Modelica.Media.Air.SimpleAir"},
+        redeclare package Medium = ${"Modelica.Media.Air.DryAirNasa" if any([tz.use_conditions.with_heating is False for tz in bldg.thermal_zones]) else "Modelica.Media.Air.SimpleAir"},
     % endif
     zoneParam = {
       %for zone in bldg.thermal_zones:
