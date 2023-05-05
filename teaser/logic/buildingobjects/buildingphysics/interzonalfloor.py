@@ -114,10 +114,10 @@ class InterzonalFloor(InterzonalWall):
 
     """
 
-    def __init__(self, parent=None, outside=None):
+    def __init__(self, parent=None, other_side=None):
         """
         """
-        super(InterzonalFloor, self).__init__(parent, outside)
+        super(InterzonalFloor, self).__init__(parent, other_side)
 
         self._tilt = 0.0
         self._orientation = -2.0

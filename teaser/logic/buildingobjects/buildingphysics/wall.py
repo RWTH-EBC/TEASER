@@ -214,33 +214,22 @@ class Wall(BuildingElement):
 
         r_wall = self.r1 + self.r2 + self.r3
 
-        self.c1_korr = (1 / (omega * self.r1)) * ((r_wall * self.area -
-                                                   new_mat[0][2] * new_mat[3][
-                                                       3] -
-                                                   new_mat[0][3] * new_mat[2][
-                                                       3]) /
-                                                  (new_mat[3][3] * new_mat[0][
-                                                      3] -
-                                                   new_mat[0][2] * new_mat[2][
-                                                       3]))
+        if type(self).__name__.startswith("Interzonal") \
+                and self.other_side is not None:
+            if (not self.parent.use_conditions.with_heating and
+                    self.other_side.use_conditions.with_heating):
+                r_for_c1_korr = self.r2
+            else:
+                r_for_c1_korr = self.r1
+        else:
+            r_for_c1_korr = self.r1
 
-        if "Interzonal" in type(self).__name__:
-            if self.other_side is not None:
-                if (not self.parent.use_conditions.with_heating and
-                        self.other_side.use_conditions.with_heating):
-                    # if inner side of interzonal element is unheated and other
-                    # side is heated, layers were reversed for this calculation.
-                    # Therefore, list of resistances must be re-reversed now.
-                    r1_orig = self.r1
-                    r2_orig = self.r2
-                    # r3 is central resistance and stays the same
-                    c1_orig = self.c1
-                    c2_orig = self.c2
-                    # todo what about c1_korr?
-                    self.r1 = r2_orig
-                    self.r2 = r1_orig
-                    self.c2 = c1_orig
-                    self.c1 = c2_orig
+        self.c1_korr = (1 / (omega * r_for_c1_korr)) \
+                       * ((r_wall * self.area
+                           - new_mat[0][2] * new_mat[3][3]
+                           - new_mat[0][3] * new_mat[2][3])
+                          / (new_mat[3][3] * new_mat[0][3]
+                             - new_mat[0][2] * new_mat[2][3]))
 
         if type(self).__name__ == "OuterWall" \
                 or type(self).__name__ == "Rooftop" \

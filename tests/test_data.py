@@ -6,6 +6,12 @@ Created July 2015
 
 from teaser.logic import utilities
 from teaser.project import Project
+from teaser.logic.buildingobjects.buildingphysics.interzonalfloor \
+    import InterzonalFloor
+from teaser.logic.buildingobjects.buildingphysics.interzonalceiling \
+    import InterzonalCeiling
+from teaser.logic.buildingobjects.buildingphysics.interzonalwall \
+    import InterzonalWall
 import math
 import os
 import helptest
@@ -650,43 +656,67 @@ class Test_teaser(object):
     def test_export_aixlib(self):
         """test of export_aixlib, no calculation verification"""
 
-        prj.number_of_elements_calc = 1
+        # prj.number_of_elements_calc = 1
+        # prj.merge_windows_calc = False
+        # prj.used_library_calc = "AixLib"
+        # prj.calc_all_buildings()
+        # prj.export_aixlib()
+        #
+        # prj.number_of_elements_calc = 2
+        # prj.merge_windows_calc = False
+        # prj.used_library_calc = "AixLib"
+        # prj.calc_all_buildings()
+        # prj.export_aixlib()
+        #
+        # prj.number_of_elements_calc = 3
+        # prj.merge_windows_calc = False
+        # prj.used_library_calc = "AixLib"
+        # prj.calc_all_buildings()
+        # prj.export_aixlib()
+        #
+        # prj.number_of_elements_calc = 4
+        # prj.merge_windows_calc = False
+        # prj.used_library_calc = "AixLib"
+        # prj.calc_all_buildings()
+        # prj.export_aixlib()
+        #
+        # prj.number_of_elements_calc = 4
+        # prj.merge_windows_calc = False
+        # prj.used_library_calc = "AixLib"
+        # prj.calc_all_buildings()
+        # prj.export_aixlib(building_model="Test", zone_model="Test", corG="Test")
+        #
+        # prj.number_of_elements_calc = 4
+        # prj.merge_windows_calc = False
+        # prj.used_library_calc = "AixLib"
+        # prj.calc_all_buildings()
+        # prj.buildings.append(prj.buildings[-1])
+        #
+        # prj.number_of_elements_calc = 4
+        # prj.merge_windows_calc = False
+        # prj.used_library_calc = "AixLib"
+        # prj.calc_all_buildings()
+        # prj.export_aixlib(path=utilities.get_default_path())
+
+        prj.number_of_elements_calc = 5
         prj.merge_windows_calc = False
         prj.used_library_calc = "AixLib"
-        prj.calc_all_buildings()
+        prj.calc_all_buildings(raise_errors=True)
         prj.export_aixlib()
 
-        prj.number_of_elements_calc = 2
-        prj.merge_windows_calc = False
-        prj.used_library_calc = "AixLib"
-        prj.calc_all_buildings()
-        prj.export_aixlib()
-
-        prj.number_of_elements_calc = 3
-        prj.merge_windows_calc = False
-        prj.used_library_calc = "AixLib"
-        prj.calc_all_buildings()
-        prj.export_aixlib()
-
-        prj.number_of_elements_calc = 4
-        prj.merge_windows_calc = False
-        prj.used_library_calc = "AixLib"
-        prj.calc_all_buildings()
-        prj.export_aixlib()
-
-        prj.number_of_elements_calc = 4
+        prj.number_of_elements_calc = 5
         prj.merge_windows_calc = False
         prj.used_library_calc = "AixLib"
         prj.calc_all_buildings()
         prj.export_aixlib(building_model="Test", zone_model="Test", corG="Test")
 
-        prj.number_of_elements_calc = 4
+        prj.number_of_elements_calc = 5
         prj.merge_windows_calc = False
         prj.used_library_calc = "AixLib"
         prj.calc_all_buildings()
         prj.buildings.append(prj.buildings[-1])
 
-        prj.number_of_elements_calc = 4
+        prj.number_of_elements_calc = 5
         prj.merge_windows_calc = False
         prj.used_library_calc = "AixLib"
         prj.calc_all_buildings()
@@ -770,6 +800,18 @@ class Test_teaser(object):
         prj.calc_all_buildings()
         prj.export_ibpsa(path=utilities.get_default_path())
         prj.set_default()
+
+    def test_export_aixlib_five(self):
+        """test AixLib export with five elements, no calculation verification"""
+
+        prj.set_default(load_data=True)
+        helptest.building_test2(prj)
+        helptest.interzonal_test2(prj)
+        prj.number_of_elements_calc = 5
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings(raise_errors=True)
+        prj.export_aixlib(path='C:\\Users\\gorz_pi\\Desktop\\TEASEROut_2nd')
 
     def test_instantiate_data_class(self):
         """test of instantiate_data_class"""
@@ -1320,6 +1362,7 @@ class Test_teaser(object):
         """test of combine_building_elements"""
         prj.set_default()
         helptest.building_test2(prj)
+        helptest.interzonal_test2(prj)
 
         from teaser.logic.buildingobjects.calculation.two_element import TwoElement
 
@@ -1335,6 +1378,7 @@ class Test_teaser(object):
             + therm_zone.ceilings
             + therm_zone.floors
             + therm_zone.windows
+            + therm_zone.interzonal_elements
         )
 
         for element in helplist:
@@ -1346,15 +1390,14 @@ class Test_teaser(object):
         calc_attr._sum_window_elements()
 
         # innerwall
-
-        assert round(calc_attr.ua_value_iw, 16) == 14.286493860845841
-        assert round(calc_attr.area_iw, 1) == 34.0
-        assert round(calc_attr.r_conv_inner_iw, 18) == 0.010893246187363833
-        assert round(calc_attr.r_rad_inner_iw, 19) == 0.0058823529411764705
-        assert round(calc_attr.r_comb_inner_iw, 19) == 0.003819709702062643
-        assert round(calc_attr.alpha_conv_inner_iw, 1) == 2.7
+        assert round(calc_attr.ua_value_iw, 8) == 22.90190584
+        assert round(calc_attr.area_iw, 1) == 54.0
+        assert round(calc_attr.r_conv_inner_iw, 8) == 0.00736377
+        assert round(calc_attr.r_rad_inner_iw, 9) == 0.003703704
+        assert round(calc_attr.r_comb_inner_iw, 9) == 0.002464268
+        assert round(calc_attr.alpha_conv_inner_iw, 9) == 2.514814815
         assert round(calc_attr.alpha_rad_inner_iw, 1) == 5.0
-        assert round(calc_attr.alpha_comb_inner_iw, 1) == 7.7
+        assert round(calc_attr.alpha_comb_inner_iw, 9) == 7.514814815
 
         # outerwall
         assert round(calc_attr.ua_value_ow, 16) == 135.5818558809656
@@ -1402,6 +1445,7 @@ class Test_teaser(object):
             + therm_zone.ceilings
             + therm_zone.floors
             + therm_zone.windows
+            + therm_zone.interzonal_elements
         )
 
         for element in helplist:
@@ -1420,25 +1464,48 @@ class Test_teaser(object):
         )
 
         r1_ow, c1_ow = calc_attr._calc_parallel_connection(
-            element_list=helplist_outer_walls, omega=omega
+            element_list=helplist_outer_walls, omega=omega, mode='ow'
         )
         assert round(r1_ow, 14) == 0.00100751548411
         assert round(c1_ow, 5) == 3648580.59312
 
-        helplist_inner_walls = (
+        helplist_inner_elements = (
             therm_zone.inner_walls + therm_zone.ceilings + therm_zone.floors
         )
 
         r1_iw, c1_iw = calc_attr._calc_parallel_connection(
-            element_list=helplist_inner_walls, omega=omega
+            element_list=helplist_inner_elements, omega=omega,
+            mode='iw'
         )
         assert round(r1_iw, 13) == 0.0097195611408
         assert round(c1_iw, 6) == 319983.518743
+
+        therm_zone_2 = prj.buildings[-1].thermal_zones[-1]
+
+        calc_attr_2 = TwoElement(therm_zone_2, merge_windows=True, t_bt=5)
+
+        helplist_inner_and_interzonal_elements_2 = (
+            therm_zone_2.inner_walls + therm_zone_2.ceilings
+            + therm_zone_2.floors + therm_zone_2.interzonal_elements
+        )
+
+        for element in helplist_inner_and_interzonal_elements_2:
+            element.calc_equivalent_res()
+            element.calc_ua_value()
+
+        r1_iw_2, c1_iw_2 = calc_attr_2._calc_parallel_connection(
+            element_list=helplist_inner_and_interzonal_elements_2, omega=omega,
+            mode='iw'
+        )
+        assert round(r1_iw_2, 13) == 0.0033229813548
+        assert round(c1_iw_2, 6) == 1519731.017972
+
 
     def test_sum_building_elements_three(self):
         """test of combine_building_elements"""
         prj.set_default()
         helptest.building_test2(prj)
+        helptest.interzonal_test2(prj)
 
         from teaser.logic.buildingobjects.calculation.three_element import ThreeElement
 
@@ -1454,6 +1521,7 @@ class Test_teaser(object):
             + therm_zone.ceilings
             + therm_zone.floors
             + therm_zone.windows
+            + therm_zone.interzonal_elements
         )
 
         for element in helplist:
@@ -1466,15 +1534,14 @@ class Test_teaser(object):
         calc_attr._sum_window_elements()
 
         # innerwall
-
-        assert round(calc_attr.ua_value_iw, 16) == 14.286493860845841
-        assert round(calc_attr.area_iw, 1) == 34.0
-        assert round(calc_attr.r_conv_inner_iw, 18) == 0.010893246187363833
-        assert round(calc_attr.r_rad_inner_iw, 19) == 0.0058823529411764705
-        assert round(calc_attr.r_comb_inner_iw, 19) == 0.003819709702062643
-        assert round(calc_attr.alpha_conv_inner_iw, 1) == 2.7
+        assert round(calc_attr.ua_value_iw, 8) == 22.90190584
+        assert round(calc_attr.area_iw, 1) == 54.0
+        assert round(calc_attr.r_conv_inner_iw, 8) == 0.00736377
+        assert round(calc_attr.r_rad_inner_iw, 9) == 0.003703704
+        assert round(calc_attr.r_comb_inner_iw, 9) == 0.002464268
+        assert round(calc_attr.alpha_conv_inner_iw, 9) == 2.514814815
         assert round(calc_attr.alpha_rad_inner_iw, 1) == 5.0
-        assert round(calc_attr.alpha_comb_inner_iw, 1) == 7.7
+        assert round(calc_attr.alpha_comb_inner_iw, 9) == 7.514814815
 
         # outerwall
         assert round(calc_attr.ua_value_ow, 16) == 77.23037843150993
@@ -1545,7 +1612,7 @@ class Test_teaser(object):
         )
 
         r1_ow, c1_ow = calc_attr._calc_parallel_connection(
-            element_list=helplist_outer_walls, omega=omega
+            element_list=helplist_outer_walls, omega=omega, mode='ow'
         )
         assert round(r1_ow, 14) == 0.00175779297228
         assert round(c1_ow, 5) == 2091259.60825
@@ -1555,17 +1622,39 @@ class Test_teaser(object):
         )
 
         r1_iw, c1_iw = calc_attr._calc_parallel_connection(
-            element_list=helplist_inner_walls, omega=omega
+            element_list=helplist_inner_walls, omega=omega, mode='iw'
         )
         assert round(r1_iw, 13) == 0.0097195611408
         assert round(c1_iw, 6) == 319983.518743
+
+        therm_zone_2 = prj.buildings[-1].thermal_zones[-1]
+
+        calc_attr_2 = ThreeElement(therm_zone_2, merge_windows=True, t_bt=5)
+
+        helplist_inner_and_interzonal_elements_2 = (
+            therm_zone_2.inner_walls + therm_zone_2.ceilings
+            + therm_zone_2.floors + therm_zone_2.interzonal_elements
+        )
+
+        for element in helplist_inner_and_interzonal_elements_2:
+            element.calc_equivalent_res()
+            element.calc_ua_value()
+
+        r1_iw_2, c1_iw_2 = calc_attr_2._calc_parallel_connection(
+            element_list=helplist_inner_and_interzonal_elements_2, omega=omega,
+            mode='iw'
+        )
+        assert round(r1_iw_2, 13) == 0.0033229813548
+        assert round(c1_iw_2, 6) == 1519731.017972
 
     def test_sum_building_elements_four(self):
         """test of combine_building_elements"""
         prj.set_default()
         helptest.building_test2(prj)
+        helptest.interzonal_test2(prj)
 
-        from teaser.logic.buildingobjects.calculation.four_element import FourElement
+        from teaser.logic.buildingobjects.calculation.four_element \
+            import FourElement
 
         therm_zone = prj.buildings[-1].thermal_zones[-1]
 
@@ -1579,6 +1668,7 @@ class Test_teaser(object):
             + therm_zone.ceilings
             + therm_zone.floors
             + therm_zone.windows
+            + therm_zone.interzonal_elements
         )
 
         for element in helplist:
@@ -1592,15 +1682,14 @@ class Test_teaser(object):
         calc_attr._sum_window_elements()
 
         # innerwall
-
-        assert round(calc_attr.ua_value_iw, 16) == 14.286493860845841
-        assert round(calc_attr.area_iw, 1) == 34.0
-        assert round(calc_attr.r_conv_inner_iw, 18) == 0.010893246187363833
-        assert round(calc_attr.r_rad_inner_iw, 19) == 0.0058823529411764705
-        assert round(calc_attr.r_comb_inner_iw, 19) == 0.003819709702062643
-        assert round(calc_attr.alpha_conv_inner_iw, 1) == 2.7
+        assert round(calc_attr.ua_value_iw, 8) == 22.90190584
+        assert round(calc_attr.area_iw, 1) == 54.0
+        assert round(calc_attr.r_conv_inner_iw, 8) == 0.00736377
+        assert round(calc_attr.r_rad_inner_iw, 9) == 0.003703704
+        assert round(calc_attr.r_comb_inner_iw, 9) == 0.002464268
+        assert round(calc_attr.alpha_conv_inner_iw, 9) == 2.514814815
         assert round(calc_attr.alpha_rad_inner_iw, 1) == 5.0
-        assert round(calc_attr.alpha_comb_inner_iw, 1) == 7.7
+        assert round(calc_attr.alpha_comb_inner_iw, 9) == 7.514814815
 
         # outerwall
         assert round(calc_attr.ua_value_ow, 16) == 19.83577523748189
@@ -1660,7 +1749,8 @@ class Test_teaser(object):
 
     def test_calc_chain_matrix_four(self):
         """test of calc_chain_matrix"""
-        from teaser.logic.buildingobjects.calculation.four_element import FourElement
+        from teaser.logic.buildingobjects.calculation.four_element \
+            import FourElement
 
         therm_zone = prj.buildings[-1].thermal_zones[-1]
 
@@ -1685,7 +1775,7 @@ class Test_teaser(object):
         helplist_outer_walls = therm_zone.outer_walls + therm_zone.windows
 
         r1_ow, c1_ow = calc_attr._calc_parallel_connection(
-            element_list=helplist_outer_walls, omega=omega
+            element_list=helplist_outer_walls, omega=omega, mode='ow'
         )
         assert round(r1_ow, 14) == 0.00688468914141
         assert round(c1_ow, 5) == 533938.62338
@@ -1695,10 +1785,30 @@ class Test_teaser(object):
         )
 
         r1_iw, c1_iw = calc_attr._calc_parallel_connection(
-            element_list=helplist_inner_walls, omega=omega
+            element_list=helplist_inner_walls, omega=omega, mode='iw'
         )
         assert round(r1_iw, 13) == 0.0097195611408
         assert round(c1_iw, 6) == 319983.518743
+
+        therm_zone_2 = prj.buildings[-1].thermal_zones[-1]
+
+        calc_attr_2 = FourElement(therm_zone_2, merge_windows=True, t_bt=5)
+
+        helplist_inner_and_interzonal_elements_2 = (
+            therm_zone_2.inner_walls + therm_zone_2.ceilings
+            + therm_zone_2.floors + therm_zone_2.interzonal_elements
+        )
+
+        for element in helplist_inner_and_interzonal_elements_2:
+            element.calc_equivalent_res()
+            element.calc_ua_value()
+
+        r1_iw_2, c1_iw_2 = calc_attr_2._calc_parallel_connection(
+            element_list=helplist_inner_and_interzonal_elements_2, omega=omega,
+            mode='iw'
+        )
+        assert round(r1_iw_2, 13) == 0.0033229813548
+        assert round(c1_iw_2, 6) == 1519731.017972
 
     def test_calc_weightfactor_one(self):
         """test of calc_weightfactor"""
@@ -2329,6 +2439,196 @@ class Test_teaser(object):
         therm_zone.outer_walls[0].retrofit_wall(1980, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 2) == 4.13
 
+    def test_interzonal_type_element(self):
+        prj.set_default(load_data=True)
+        helptest.building_test2(prj)
+        helptest.interzonal_test2(prj)
+
+        heated_zone = prj.buildings[-1].thermal_zones[-2]
+        unheated_zone = prj.buildings[-1].thermal_zones[-1]
+        iz_ceiling = heated_zone.interzonal_ceilings[-1]
+        iz_floor = unheated_zone.interzonal_floors[-1]
+
+        assert iz_ceiling.layer[0].material.name == "lime_plaster"
+        assert len(iz_ceiling.layer) == len(iz_floor.layer)
+        for ceiling_layer, floor_layer in zip(iz_ceiling.layer,
+                                              reversed(iz_floor.layer)):
+            assert ceiling_layer.material.name == floor_layer.material.name
+            assert ceiling_layer.thickness == floor_layer.thickness
+
+        floor_properties = iz_floor.gather_element_properties()
+        ceiling_properties = iz_ceiling.gather_element_properties()
+        assert floor_properties[0] == ceiling_properties[0]
+        for (floor_layer_density,
+             floor_layer_thermal_conduc,
+             floor_layer_heat_capac,
+             floor_layer_thickness,
+             ceiling_layer_density,
+             ceiling_layer_thermal_conduc,
+             ceiling_layer_heat_capac,
+             ceiling_layer_thickness) in zip(
+                *[list(property_list).__reversed__()
+                  for property_list in floor_properties[1:]],
+                *ceiling_properties[1:]
+        ):
+            assert floor_layer_density == ceiling_layer_density
+            assert floor_layer_thermal_conduc == ceiling_layer_thermal_conduc
+            assert floor_layer_heat_capac == floor_layer_heat_capac
+            assert floor_layer_thickness == ceiling_layer_thickness
+
+        iz_wall_1 = unheated_zone.interzonal_walls[-1]
+        iz_wall_2 = heated_zone.interzonal_walls[-1]
+
+        assert iz_wall_1.layer[0].material.name == "concrete_wz05"
+        assert iz_wall_2.layer[0].material.name == "concrete_CEM_II_BS325R_wz05"
+
+    def test_save_load_building_issue679(self):
+        prj.buildings[-1].thermal_zones[-1].time_to_minimal_t_ground = 25324
+        prj.t_soil_mode = 3
+        prj.t_soil_file_path = "example_file_path"
+        prj.buildings[-1].inner_wall_approximation_approach \
+            = 'typical_minus_outer'
+        prj.buildings[-1].thermal_zones[-1].number_of_floors = 25
+        prj.buildings[-1].thermal_zones[-1].height_of_floors = 3.148
+        prj.buildings[-1].thermal_zones[-1].t_ground = 283.5
+        prj.buildings[-1].thermal_zones[-1].t_ground_amplitude = 10
+        prj.save_project(file_name="unitTestInterzonal",
+                         path=utilities.get_default_path())
+        prj.set_default(load_data=True)
+        prj.load_project(os.path.join(utilities.get_default_path(),
+                                      "unitTestInterzonal.json"))
+
+        assert prj.buildings[-1].thermal_zones[-1].time_to_minimal_t_ground == 25324
+        assert prj.t_soil_mode == 3
+        assert prj.t_soil_file_path == "example_file_path"
+        assert prj.buildings[-1].inner_wall_approximation_approach \
+               == 'typical_minus_outer'
+        assert prj.buildings[-1].thermal_zones[-2].interzonal_walls[-1].other_side \
+               is prj.buildings[-1].thermal_zones[-1]
+        assert prj.buildings[-1].thermal_zones[-1].interzonal_floors[-1].other_side \
+               is prj.buildings[-1].thermal_zones[-2]
+        assert len(prj.buildings[-1].thermal_zones[-2].interzonal_elements) == 2
+        assert len(prj.buildings[-1].thermal_zones[-1].interzonal_elements) == 2
+        assert prj.buildings[-1].thermal_zones[-1].number_of_floors == 25
+        assert prj.buildings[-1].thermal_zones[-1].height_of_floors == 3.148
+        assert prj.buildings[-1].thermal_zones[-1].t_ground == 283.5
+        assert prj.buildings[-1].thermal_zones[-1].t_ground_amplitude == 10
+
+    def test_sum_building_elements_five(self):
+        """test of FiveElement calculator"""
+        prj.set_default()
+        helptest.building_test2(prj)
+        helptest.interzonal_test2(prj)
+
+        from teaser.logic.buildingobjects.calculation.five_element import FiveElement
+
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
+
+        calc_attr = FiveElement(therm_zone, merge_windows=True, t_bt=5)
+
+        helplist = (
+            therm_zone.outer_walls
+            + therm_zone.rooftops
+            + therm_zone.ground_floors
+            + therm_zone.inner_walls
+            + therm_zone.ceilings
+            + therm_zone.floors
+            + therm_zone.windows
+            + therm_zone.interzonal_elements
+        )
+
+        for element in helplist:
+            element.calc_equivalent_res()
+            element.calc_ua_value()
+
+        calc_attr._sum_outer_wall_elements()
+        calc_attr._sum_ground_floor_elements()
+        calc_attr._sum_rooftop_elements()
+        calc_attr._sum_inner_wall_elements()
+        calc_attr._sum_window_elements()
+        calc_attr._sum_interzonal_elements()
+
+        # interzonal elements (lumping wall and floor)
+        assert len(calc_attr.nzbs_per_nz) == 1
+        assert len(calc_attr.nzbs_per_nz[-1]) == 2
+        assert round(calc_attr.ua_value_nzb[0], 16) == 8.615411975711941
+        assert round(calc_attr.area_nzb[0], 1) == 20.0
+        assert round(calc_attr.r_conv_inner_nzb[0], 19) == 0.022727272727272728
+        assert round(calc_attr.r_rad_inner_nzb[0], 4) == 0.01
+        assert round(calc_attr.r_comb_inner_nzb[0], 19) == 0.006944444444444444
+        assert round(calc_attr.r_conv_outer_nzb[0], 5) == 0.02273
+        assert round(calc_attr.r_rad_outer_nzb[0], 4) == 0.01
+        assert round(calc_attr.r_comb_outer_nzb[0], 4) == 0.0069
+        assert round(calc_attr.alpha_conv_inner_nzb[0], 1) == 2.2
+        assert round(calc_attr.alpha_comb_outer_nzb[0], 1) == 7.2
+        assert round(calc_attr.alpha_conv_outer_nzb[0], 1) == 2.2
+        assert round(calc_attr.ir_emissivity_outer_nzb[0], 3) == 0.9
+
+    def test_calc_chain_matrix_five(self):
+        """test of calc_chain_matrix"""
+        from teaser.logic.buildingobjects.calculation.five_element \
+            import FiveElement
+
+        therm_zone = prj.buildings[-1].thermal_zones[-2]
+
+        calc_attr = FiveElement(therm_zone, merge_windows=False, t_bt=5)
+
+        helplist = (
+            therm_zone.outer_walls
+            + therm_zone.rooftops
+            + therm_zone.ground_floors
+            + therm_zone.inner_walls
+            + therm_zone.ceilings
+            + therm_zone.floors
+            + therm_zone.windows
+            + therm_zone.interzonal_elements
+        )
+
+        for element in helplist:
+            element.calc_equivalent_res()
+            element.calc_ua_value()
+
+        omega = 2 * math.pi / 86400 / 5
+
+        helplist_outer_walls = therm_zone.outer_walls + therm_zone.windows
+
+        r1_ow, c1_ow = calc_attr._calc_parallel_connection(
+            element_list=helplist_outer_walls, omega=omega, mode='ow'
+        )
+        assert round(r1_ow, 14) == 0.00688468914141
+        assert round(c1_ow, 5) == 533938.62338
+
+        helplist_inner_walls = (
+            therm_zone.inner_walls + therm_zone.ceilings + therm_zone.floors
+        )
+
+        r1_iw, c1_iw = calc_attr._calc_parallel_connection(
+            element_list=helplist_inner_walls, omega=omega, mode='iw'
+        )
+        assert round(r1_iw, 13) == 0.0097195611408
+        assert round(c1_iw, 6) == 319983.518743
+
+        r1_izw, c1_izw = calc_attr._calc_parallel_connection(
+            element_list=therm_zone.interzonal_elements, omega=omega, mode='ow'
+        )
+        assert round(r1_izw, 13) == 0.0023421240754
+        assert round(c1_izw, 6) == 4782078.891281
+
+        therm_zone_2 = prj.buildings[-1].thermal_zones[-1]
+
+        calc_attr_2 = FiveElement(therm_zone_2, merge_windows=True, t_bt=5)
+
+        for element in therm_zone_2.interzonal_elements:
+            element.calc_equivalent_res()
+            element.calc_ua_value()
+
+        r1_izw_2, c1_izw_2 = calc_attr_2._calc_parallel_connection(
+            element_list=therm_zone_2.interzonal_elements, omega=omega,
+            mode='izw_backwards'
+        )
+        assert round(r1_izw_2, 13) == 0.0056673521065
+        assert round(c1_izw_2, 6) == 1855776.602032
+
     def test_calc_equivalent_res_win(self):
         """test of calc_equivalent_res, win"""
         prj.set_default()
@@ -2480,6 +2780,12 @@ class Test_teaser(object):
         prj.calc_all_buildings()
         prj.export_aixlib()
 
+        prj.number_of_elements_calc = 5
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
         prj.number_of_elements_calc = 1
         prj.merge_windows_calc = False
         prj.used_library_calc = "IBPSA"
@@ -2572,6 +2878,12 @@ class Test_teaser(object):
         prj.export_aixlib()
 
         prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 5
         prj.merge_windows_calc = False
         prj.used_library_calc = "AixLib"
         prj.calc_all_buildings()
@@ -2708,6 +3020,12 @@ class Test_teaser(object):
         prj.export_aixlib()
 
         prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 5
         prj.merge_windows_calc = False
         prj.used_library_calc = "AixLib"
         prj.calc_all_buildings()
@@ -2875,6 +3193,12 @@ class Test_teaser(object):
         prj.calc_all_buildings()
         prj.export_aixlib()
 
+        prj.number_of_elements_calc = 5
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
         prj.number_of_elements_calc = 1
         prj.merge_windows_calc = False
         prj.used_library_calc = "IBPSA"
@@ -2961,6 +3285,12 @@ class Test_teaser(object):
         prj.export_aixlib()
 
         prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 5
         prj.merge_windows_calc = False
         prj.used_library_calc = "AixLib"
         prj.calc_all_buildings()

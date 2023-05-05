@@ -138,17 +138,17 @@ def _set_basic_data(element, element_in):
         or type(element).__name__ == "Rooftop"
         or type(element).__name__ == "Door"
     ):
-
-        element.inner_radiation = element_in["inner_radiation"]
-        element.inner_convection = element_in["inner_convection"]
         element.outer_radiation = element_in["outer_radiation"]
         element.outer_convection = element_in["outer_convection"]
 
     elif type(element).__name__ == "Window":
-
         element.outer_radiation = element_in["outer_radiation"]
         element.outer_convection = element_in["outer_convection"]
         element.g_value = element_in["g_value"]
         element.a_conv = element_in["a_conv"]
         element.shading_g_total = element_in["shading_g_total"]
         element.shading_max_irr = element_in["shading_max_irr"]
+
+    if type(element).__name__.startswith("Interzonal"):
+        element.outer_radiation = element_in["inner_radiation"]
+        element.outer_convection = element_in["inner_convection"]

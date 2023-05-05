@@ -81,10 +81,6 @@ def load_teaser_json(path, project):
     project.merge_windows_calc = prj_in["project"]["merge_windows_calc"]
     project.used_library_calc = prj_in["project"]["used_library_calc"]
     project.modelica_info.start_time = prj_in["project"]["modelica_info"]["start_time"]
-    try:
-        project.modelica_info.time_to_minimal_t_ground = prj_in["project"]["modelica_info"]["time_to_minimal_t_ground"]
-    except KeyError:
-        pass
     project.modelica_info.stop_time = prj_in["project"]["modelica_info"]["stop_time"]
     project.modelica_info.interval_output = prj_in["project"]["modelica_info"][
         "interval_output"
@@ -161,6 +157,7 @@ def load_teaser_json(path, project):
                 tz.height_of_floors = zone_in["height_of_floors"]
                 tz.t_ground = zone_in["t_ground"]
                 tz.t_ground_amplitude = zone_in["t_ground_amplitude"]
+                tz.time_to_minimal_t_ground = zone_in["time_to_minimal_t_ground"]
             except KeyError:
                 pass
             tz.use_conditions = UseConditions(parent=tz)
@@ -314,7 +311,7 @@ def load_teaser_json(path, project):
                         zone_in["interzonal_ceilings"].items()
                 ):
                     iz_ceiling.other_side = zones_created[izc_in["other_side"]]
-        except KeyError:
+        except KeyError as error:
             pass
 
 

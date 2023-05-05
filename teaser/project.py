@@ -81,6 +81,7 @@ class Project(object):
         1 : constant value (stored in each zone)
         2 : sine model (mean value and amplitude stored in each zone)
         3 : from file (stored for the project)
+            heat load calculation will consider the constant zone.t_ground
     t_soil_file_path : str
         Absolute path to soil temperature file used for Modelica simulation if
         t_soil_mode 3 is chosen.
@@ -162,7 +163,7 @@ class Project(object):
 
         number_of_elements_calc : int
             defines the number of elements, that area aggregated, between 1
-            and 4, default is 2
+            and 5, default is 2
             For AixLib you should always use 2 elements!!!
 
         merge_windows_calc : bool
@@ -1229,6 +1230,17 @@ class Project(object):
                 "inputdata",
                 "weatherdata",
                 "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos",
+            )
+        )
+
+        self.t_soil_mode = 1
+        self.t_soil_file_path = utilities.get_full_path(
+            os.path.join(
+                "data",
+                "input",
+                "inputdata",
+                "weatherdata",
+                "t_soil_sample_constant_283_15.mos",
             )
         )
 

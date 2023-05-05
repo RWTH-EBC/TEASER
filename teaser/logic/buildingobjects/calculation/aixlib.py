@@ -61,7 +61,7 @@ class AixLib(object):
         self.file_set_t_cool = "TsetCool_" + self.parent.name + ".txt"
         self.file_ahu = "AHU_" + self.parent.name + ".txt"
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".txt"
-        self.version = "1.0.0"
+        self.version = "1.3.3"
         self.total_surface_area = None
         self.consider_heat_capacity = True
         self.use_set_back = True
@@ -106,7 +106,7 @@ class AixLib(object):
                     + zone.model_attr.area_gf
                     + zone.model_attr.area_rt
                     + zone.model_attr.area_win
-                    + zone.model_attr.area_iz
+                    + sum(zone.model_attr.area_nzb)
                 )
 
         self.total_surface_area = surf_area_temp

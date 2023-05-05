@@ -34,7 +34,6 @@ def save_teaser_json(path, project):
     prj_out["project"]["used_library_calc"] = project.used_library_calc
     prj_out["project"]["modelica_info"] = collections.OrderedDict()
     prj_out["project"]["modelica_info"]["start_time"] = project.modelica_info.start_time
-    prj_out["project"]["modelica_info"]["time_to_minimal_t_ground"] = project.modelica_info.time_to_minimal_t_ground
     prj_out["project"]["modelica_info"]["stop_time"] = project.modelica_info.stop_time
     prj_out["project"]["modelica_info"][
         "interval_output"
@@ -132,6 +131,7 @@ def save_teaser_json(path, project):
             zone_out["height_of_floors"] = zone.height_of_floors
             zone_out["t_ground"] = zone.t_ground
             zone_out["t_ground_amplitude"] = zone.t_ground_amplitude
+            zone_out["time_to_minimal_t_ground"] = zone.time_to_minimal_t_ground
             zone_out["use_conditions"] = collections.OrderedDict()
             zone_out["use_conditions"]["usage"] = zone.use_conditions.usage
 
@@ -265,20 +265,22 @@ def save_teaser_json(path, project):
                     = collections.OrderedDict()
                 zone_out["interzonal_walls"][izw.name]["other_side"] \
                     = izw.other_side.name
-                set_basic_data(zone_out["inner_walls"][izw.name], izw)
-                set_layer_data(zone_out["inner_walls"][izw.name], izw)
+                set_basic_data(zone_out["interzonal_walls"][izw.name], izw)
+                set_layer_data(zone_out["interzonal_walls"][izw.name], izw)
             for izf in zone.interzonal_floors:
                 zone_out["interzonal_floors"][izf.name] \
                     = collections.OrderedDict()
                 zone_out["interzonal_floors"][izf.name]["other_side"] \
                     = izf.other_side.name
-                set_basic_data(zone_out["floors"][izf.name], izf)
-                set_layer_data(zone_out["floors"][izf.name], izf)
+                set_basic_data(zone_out["interzonal_floors"][izf.name], izf)
+                set_layer_data(zone_out["interzonal_floors"][izf.name], izf)
             for izc in zone.interzonal_ceilings:
                 zone_out["interzonal_ceilings"][izc.name] \
                     = collections.OrderedDict()
-                set_basic_data(zone_out["ceilings"][izc.name], izc)
-                set_layer_data(zone_out["ceilings"][izc.name], izc)
+                zone_out["interzonal_ceilings"][izc.name]["other_side"] \
+                    = izc.other_side.name
+                set_basic_data(zone_out["interzonal_ceilings"][izc.name], izc)
+                set_layer_data(zone_out["interzonal_ceilings"][izc.name], izc)
 
             prj_out["project"]["buildings"][bldg.name]["thermal_zones"][
                 zone.name

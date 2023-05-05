@@ -4,6 +4,8 @@
 
 from teaser.logic.buildingobjects.buildingphysics.wall\
     import Wall
+from teaser.logic.buildingobjects.buildingphysics.buildingelement\
+    import BuildingElement
 
 
 class InterzonalWall(Wall):
@@ -111,16 +113,104 @@ class InterzonalWall(Wall):
         Weightfactor of building element ua_value/ua_value_zone
     """
 
-    def __init__(self, parent=None, outside=None):
+    def __init__(self, parent=None, other_side=None):
         """
         """
-        super(InterzonalWall, self).__init__(parent, outside)
+        super(InterzonalWall, self).__init__(parent, other_side)
 
         self._tilt = 90.0
         self._inner_convection = 1.7
         self._inner_radiation = 5.0
         self._outer_convection = 1.7
         self._outer_radiation = 5.0
+
+    def load_type_element(
+            self,
+            year,
+            construction,
+            data_class=None,
+            element_type=None,
+            reverse_layers=False,
+            type_element_key=None
+    ):
+        """Typical element loader.
+
+        Loads typical interzonal wall elements according to their construction
+        year and their construction type from a json.
+
+        This function will only work if the parents to Building are set.
+
+        Parameters
+        ----------
+        year : int
+            Year of construction
+
+        construction : str
+            Construction type, code list ('heavy', 'light')
+
+        data_class : DataClass()
+            DataClass containing the bindings for TypeBuildingElement and
+            Material (typically this is the data class stored in prj.data,
+            but the user can individually change that. Default is
+            self.parent.parent.parent.data (which is data_class in current
+            project)
+
+        element_type : str
+            Element type to load - only to specify if the json entry for a
+            different type than type(element) is to be loaded, e.g. InnerWall
+            instead of OuterWall. Default: For interzonal walls between two
+            heated or two unheated zones, typical inner walls will be  loaded.
+            For interzonal walls between a heated and an unheated zone,
+            typical outer wall will be loaded (if element_type is not specified)
+
+        reverse_layers : bool
+            defines if layer list should be reversed
+
+        type_element_key : str
+            Element to load - specify the full json entry
+
+        """
+        if element_type is None:
+            if (self.other_side.use_conditions.with_heating is True
+                and self.parent.use_conditions.with_heating is True) \
+                or (self.other_side.use_conditions.with_heating is False
+                    and self.parent.use_conditions.with_heating is False):
+                if type(self).__name__ == "InterzonalWall":
+                    element_type = 'InnerWall'
+                elif type(self).__name__ == "InterzonalCeiling":
+                    element_type = 'Ceiling'
+                elif type(self).__name__ == "InterzonalFloor":
+                    element_type = 'Floor'
+                else:
+                    raise ValueError('Instance of InterzonalWall not known')
+            else:
+                if type(self).__name__ == "InterzonalWall":
+                    if self.other_side.use_conditions.with_heating is True:
+                        reverse_layers = True
+                    element_type = 'OuterWall'
+                elif type(self).__name__ == "InterzonalCeiling":
+                    if self.other_side.use_conditions.with_heating is True:
+                        reverse_layers = True
+                        element_type = 'GroundFloor'
+                    else:
+                        element_type = 'Rooftop'
+                elif type(self).__name__ == "InterzonalFloor":
+                    if self.other_side.use_conditions.with_heating is True:
+                        reverse_layers = True
+                        element_type = 'Rooftop'
+                    else:
+                        element_type = 'GroundFloor'
+                else:
+                    raise ValueError('Instance of InterzonalWall not known')
+        BuildingElement.load_type_element(
+            self,
+            year=year,
+            construction=construction,
+            data_class=data_class,
+            element_type=element_type,
+            reverse_layers=reverse_layers,
+            type_element_key=type_element_key
+        )
 
     @property
     def parent(self):

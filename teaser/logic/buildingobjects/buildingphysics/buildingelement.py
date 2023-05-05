@@ -198,10 +198,7 @@ class BuildingElement(object):
 
         Gathers all material properties of the building element and returns
         them as a np.array. Needed for the calculation of the matrix in
-        equivalent_res(t_bt) especially for walls. This is why for
-        interzonal elements that have a zone with heating on the other side
-        and a zone without heating on the inner side, layers are reversed
-        by this function.
+        equivalent_res(t_bt) especially for walls.
 
         Returns
         ----------
@@ -227,21 +224,12 @@ class BuildingElement(object):
         heat_capac = np.zeros(number_of_layer)
         thickness = np.zeros(number_of_layer)
 
-        range_tuple = (0, number_of_layer, 1)
-        if self in self.parent.interzonal_elements:
-            if (not self.parent.use_conditions.with_heating and
-                    self.other_side.use_conditions.with_heating):
-                # if inner side of nz border is unheated and outer side is
-                # heated, reverse layers for calculation (list of resistances
-                # will be re-reversed later)
-                range_tuple = (number_of_layer - 1, -1, -1)
+        for i in range(number_of_layer):
 
-        for i, l_i in enumerate(range(*range_tuple)):
-
-            density[i] = self.layer[l_i].material.density
-            thermal_conduc[i] = self.layer[l_i].material.thermal_conduc
-            heat_capac[i] = self.layer[l_i].material.heat_capac
-            thickness[i] = self.layer[l_i].thickness
+            density[i] = self.layer[i].material.density
+            thermal_conduc[i] = self.layer[i].material.thermal_conduc
+            heat_capac[i] = self.layer[i].material.heat_capac
+            thickness[i] = self.layer[i].thickness
 
         return number_of_layer, density, thermal_conduc, heat_capac, thickness
 

@@ -743,7 +743,7 @@ class FiveElement(object):
         return True
 
     @staticmethod
-    def _calc_parallel_connection(element_list, omega):
+    def _calc_parallel_connection(element_list, omega, mode):
         """Parallel connection of walls according to VDI 6007
 
         Calculates the parallel connection of wall elements according to VDI
@@ -755,6 +755,12 @@ class FiveElement(object):
             List of inner or outer walls
         omega : float
             VDI 6007 frequency
+        mode : str
+            'ow' uses r1 and c1_korr
+            'iw' uses r1 and c1 (function falls back here for other strings)
+            'izw_backwards' uses r2 and c1_korr because heat flow goes towards
+                this thermalzone (instead of away from it) for interzonal
+                elements between heated and unhetaed zones
 
         Returns
         ----------
@@ -767,84 +773,42 @@ class FiveElement(object):
         for wall_count in range(len(element_list) - 1):
 
             if wall_count == 0:
-
-                r1 = (
-                    element_list[wall_count].r1 * element_list[wall_count].c1 ** 2
-                    + element_list[wall_count + 1].r1
-                    * element_list[wall_count + 1].c1 ** 2
-                    + omega ** 2
-                    * element_list[wall_count].r1
-                    * element_list[wall_count + 1].r1
-                    * (element_list[wall_count].r1 + element_list[wall_count + 1].r1)
-                    * element_list[wall_count].c1 ** 2
-                    * element_list[wall_count + 1].c1 ** 2
-                ) / (
-                    (element_list[wall_count].c1 + element_list[wall_count + 1].c1) ** 2
-                    + omega ** 2
-                    * (element_list[wall_count].r1 + element_list[wall_count + 1].r1)
-                    ** 2
-                    * element_list[wall_count].c1 ** 2
-                    * element_list[wall_count + 1].c1 ** 2
-                )
-
-                c1 = (
-                    (element_list[wall_count].c1 + element_list[wall_count + 1].c1) ** 2
-                    + omega ** 2
-                    * (element_list[wall_count].r1 + element_list[wall_count + 1].r1)
-                    ** 2
-                    * element_list[wall_count].c1 ** 2
-                    * element_list[wall_count + 1].c1 ** 2
-                ) / (
-                    element_list[wall_count].c1
-                    + element_list[wall_count + 1].c1
-                    + omega ** 2
-                    * (
-                        element_list[wall_count].r1 ** 2 * element_list[wall_count].c1
-                        + element_list[wall_count + 1].r1 ** 2
-                        * element_list[wall_count + 1].c1
-                    )
-                    * element_list[wall_count].c1
-                    * element_list[wall_count + 1].c1
-                )
+                if mode == 'izw_backwards':
+                    r1_before = element_list[wall_count].r2
+                else:
+                    r1_before = element_list[wall_count].r1
+                if mode == 'ow' or mode == 'izw_backwards':
+                    c1_before = element_list[wall_count].c1_korr
+                else:
+                    c1_before = element_list[wall_count].c1
             else:
-                r1x = r1
-                c1x = c1
-                r1 = (
-                    r1x * c1x ** 2
-                    + element_list[wall_count + 1].r1
-                    * element_list[wall_count + 1].c1 ** 2
-                    + omega ** 2
-                    * r1x
-                    * element_list[wall_count + 1].r1
-                    * (r1x + element_list[wall_count + 1].r1)
-                    * c1x ** 2
-                    * element_list[wall_count + 1].c1 ** 2
-                ) / (
-                    (c1x + element_list[wall_count + 1].c1) ** 2
-                    + omega ** 2
-                    * (r1x + element_list[wall_count + 1].r1) ** 2
-                    * c1x ** 2
-                    * element_list[wall_count + 1].c1 ** 2
-                )
+                r1_before = r1
+                c1_before = c1
+            if mode == 'izw_backwards':
+                r1_add = element_list[wall_count + 1].r2
+            else:
+                r1_add = element_list[wall_count + 1].r1
+            if mode == 'ow' or mode == 'izw_backwards':
+                c1_add = element_list[wall_count + 1].c1_korr
+            else:
+                c1_add = element_list[wall_count + 1].c1
 
-                c1 = (
-                    (c1x + element_list[wall_count + 1].c1) ** 2
+            r1 = (r1_before * c1_before ** 2 + r1_add * c1_add ** 2
+                  + omega ** 2 * r1_before * r1_add * (r1_before + r1_add)
+                  * c1_before ** 2 * c1_add ** 2) \
+                 / ((c1_before + c1_add) ** 2
+                    + omega ** 2 * (r1_before + r1_add) ** 2 * c1_before ** 2
+                    * c1_add ** 2)
+
+            c1 = ((c1_before + c1_add) ** 2
+                  + omega ** 2 * (r1_before + r1_add) ** 2 * c1_before ** 2
+                  * c1_add ** 2) \
+                 / (c1_before + c1_add
                     + omega ** 2
-                    * (r1x + element_list[wall_count + 1].r1) ** 2
-                    * c1x ** 2
-                    * element_list[wall_count + 1].c1 ** 2
-                ) / (
-                    c1x
-                    + element_list[wall_count + 1].c1
-                    + omega ** 2
-                    * (
-                        r1x ** 2 * c1x
-                        + element_list[wall_count + 1].r1 ** 2
-                        * element_list[wall_count + 1].c1
-                    )
-                    * c1x
-                    * element_list[wall_count + 1].c1
-                )
+                    * (r1_before ** 2 * c1_before + r1_add ** 2 * c1_add)
+                    * c1_before
+                    * c1_add)
+
         return r1, c1
 
     def _sum_outer_wall_elements(self):
@@ -1306,7 +1270,9 @@ class FiveElement(object):
             self.c1_ow = outer_walls[0].c1_korr
         elif len(outer_walls) > 1:
             # more than one outer wall, calculate chain matrix
-            self.r1_ow, self.c1_ow = self._calc_parallel_connection(outer_walls, omega)
+            self.r1_ow, self.c1_ow = self._calc_parallel_connection(
+                outer_walls, omega, mode='ow'
+            )
         else:
             warnings.warn(
                 "No walls are defined as outer walls, please be "
@@ -1403,7 +1369,7 @@ class FiveElement(object):
         elif len(self.thermal_zone.ground_floors) > 1:
             # more than one outer wall, calculate chain matrix
             self.r1_gf, self.c1_gf = self._calc_parallel_connection(
-                self.thermal_zone.ground_floors, omega
+                self.thermal_zone.ground_floors, omega, mode='ow'
             )
         else:
             warnings.warn(
@@ -1445,7 +1411,7 @@ class FiveElement(object):
         elif len(self.thermal_zone.rooftops) > 1:
             # more than one outer wall, calculate chain matrix
             self.r1_rt, self.c1_rt = self._calc_parallel_connection(
-                self.thermal_zone.rooftops, omega
+                self.thermal_zone.rooftops, omega, mode='ow'
             )
         else:
             warnings.warn(
@@ -1496,7 +1462,9 @@ class FiveElement(object):
             self.c1_iw = inner_walls[0].c1_korr
         elif len(inner_walls) > 1:
             # more than one inner wall, calculate chain matrix
-            self.r1_iw, self.c1_iw = self._calc_parallel_connection(inner_walls, omega)
+            self.r1_iw, self.c1_iw = self._calc_parallel_connection(
+                inner_walls, omega, mode='iw'
+            )
         else:
             warnings.warn(
                 "No walls are defined as inner walls, please be "
@@ -1526,8 +1494,6 @@ class FiveElement(object):
                 # only one nz border, no need to calculate chain matrix
                 if (nz_borders[0].other_side.use_conditions.with_heating and
                         not nz_borders[0].parent.use_conditions.with_heating):
-                    # rc parameters were calculated from reverse-order layers
-                    # this needs to be considered here
                     self.r_rest_nzb.append(nz_borders[0].r2)
                     self.c1_nzb.append(nz_borders[0].c1_korr)
                     conduction = nz_borders[0].r_conduc
@@ -1539,13 +1505,17 @@ class FiveElement(object):
                     self.r_rest_nzb.append(conduction - self.r1_nzb[-1])
             elif len(nz_borders) > 1:
                 # more than one nz border, calculate chain matrix
-                r1_nzb, c1_nzb = self._calc_parallel_connection(nz_borders,
-                                                                omega)
+                if (nz_borders[0].other_side.use_conditions.with_heating and
+                        not nz_borders[0].parent.use_conditions.with_heating):
+                    parallel_mode = 'izw_backwards'
+                else:
+                    parallel_mode = 'ow'
+                r1_nzb, c1_nzb = self._calc_parallel_connection(
+                    nz_borders, omega, mode=parallel_mode
+                )
                 conduction = 1 / sum(1 / nzb.r_conduc for nzb in nz_borders)
                 if (nz_borders[0].other_side.use_conditions.with_heating and
                         not nz_borders[0].parent.use_conditions.with_heating):
-                    # rc parameters were calculated from reverse-order layers
-                    # this needs to be considered here
                     self.r_rest_nzb.append(r1_nzb)
                     self.r1_nzb.append(conduction - self.r_rest_nzb[-1])
                 else:
@@ -1671,6 +1641,7 @@ class FiveElement(object):
                 self.shading_g_total.append(1.0)
                 self.window_areas.append(0.0)
                 self.transparent_areas.append(0.0)
+                self.shading_max_irr.append(0.0)
             else:
                 self.weightfactor_win.append(sum([win.wf_out for win in wins]))
 
@@ -1733,10 +1704,26 @@ class FiveElement(object):
         """
         self.heat_load = 0.0
 
+        if self.thermal_zone.parent.parent.t_soil_mode == 2:
+            t_ground = self.thermal_zone.t_ground \
+                       - self.thermal_zone.t_ground_amplitude
+        else:
+            t_ground = self.thermal_zone.t_ground
+
         ua_value_ow_temp = self.ua_value_rt + self.ua_value_ow
+
+        ua_value_nzb_temp = 0.0
+        if self.thermal_zone.use_conditions.with_heating:
+            for other_zone_index, ua_value_izw in zip(self.other_nz_indexes,
+                                                      self.ua_value_nzb):
+                if not self.thermal_zone.parent.thermal_zones[
+                        other_zone_index
+                ].use_conditions.with_heating:
+                    ua_value_nzb_temp += ua_value_izw
+
         self.heat_load = (
             (
-                (ua_value_ow_temp + self.ua_value_win)
+                (ua_value_ow_temp + self.ua_value_win + ua_value_nzb_temp)
                 + self.thermal_zone.volume
                 * self.thermal_zone.use_conditions.infiltration_rate
                 * 1
@@ -1746,7 +1733,7 @@ class FiveElement(object):
             )
             * (self.thermal_zone.t_inside - self.thermal_zone.t_outside)
         ) + (
-            self.ua_value_gf * (self.thermal_zone.t_inside - self.thermal_zone.t_ground)
+            self.ua_value_gf * (self.thermal_zone.t_inside - t_ground)
         )
 
     def set_calc_default(self):

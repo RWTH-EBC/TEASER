@@ -12,6 +12,8 @@ from teaser.logic.buildingobjects.calculation.one_element import OneElement
 from teaser.logic.buildingobjects.calculation.two_element import TwoElement
 from teaser.logic.buildingobjects.calculation.three_element import ThreeElement
 from teaser.logic.buildingobjects.calculation.four_element import FourElement
+from teaser.logic.buildingobjects.calculation.five_element import FiveElement
+
 
 
 class ThermalZone(object):
@@ -83,6 +85,12 @@ class ThermalZone(object):
         The input of t_ground is ALWAYS in Kelvin
     t_ground_amplitude : float [K]
         Temperature amplitude of the ground over the year
+    time_to_minimal_t_ground : int [s]
+        Time between simulation time 0 (not: start_time) and the minimum of
+        the ground temperature if the sine option for ground temperature is
+        chosen. Default: 6004800 (noon of Mar 11 as published by Virginia Tech
+        (https://www.builditsolar.com/Projects/Cooling/EarthTemperatures.htm)
+        for a depth of 5 ft)
     density_air : float [kg/m3]
         average density of the air in the thermal zone
     heat_capac_air : float [J/K]
@@ -124,6 +132,7 @@ class ThermalZone(object):
         self.heat_capac_air = 1002
         self._t_ground = 286.15
         self._t_ground_amplitude = 0
+        self.time_to_minimal_t_ground = 6004800
 
         self._number_of_floors = None
         self._height_of_floors = None
@@ -184,6 +193,12 @@ class ThermalZone(object):
             self.model_attr.calc_attributes()
         elif number_of_elements == 4:
             self.model_attr = FourElement(
+                thermal_zone=self,
+                merge_windows=merge_windows,
+                t_bt=t_bt)
+            self.model_attr.calc_attributes()
+        elif number_of_elements == 5:
+            self.model_attr = FiveElement(
                 thermal_zone=self,
                 merge_windows=merge_windows,
                 t_bt=t_bt)
@@ -315,6 +330,45 @@ class ThermalZone(object):
         for i in self.windows:
             if i.orientation == orientation and i.tilt == tilt:
                 elements.append(i)
+            else:
+                pass
+        return elements
+
+    def find_izes(self, orientation, tilt, other_side_heating=None):
+        """Returns all outer walls with given orientation and tilt
+
+        This function returns a list of all InterzonalWall, InterzonalCeiling
+        and InterzonalFloor elements with the same orientation and tilt and,
+        if desired, a certain with_heating state of the neighboured zone.
+
+        Parameters
+        ----------
+        orientation : float [degree]
+            Azimuth of the desired walls.
+        tilt : float [degree]
+            Tilt against the horizontal of the desired walls.
+        other_side_heating : Boolean
+            checks the use_conditions.with_heating parameter of the other side.
+            if None, all interzonal elements are returned
+
+        Returns
+        -------
+        elements : list
+            List of InterzonalWall, InterzonalCeiling and InterzonalFloor
+            instances with desired orientation and tilt.
+        """
+        elements = []
+        for i in self.interzonal_elements:
+            if i.orientation == orientation and i.tilt == tilt:
+                if other_side_heating is None:
+                    elements.append(i)
+                elif (
+                        i.other_side.use_conditions.with_heating
+                        == other_side_heating
+                ):
+                    elements.append(i)
+                else:
+                    pass
             else:
                 pass
         return elements

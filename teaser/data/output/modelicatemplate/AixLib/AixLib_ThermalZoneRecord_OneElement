@@ -45,15 +45,24 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     wfRoof = {0.0},
     aRoof = 0.0,
     aExt = ${zone.model_attr.solar_absorp_ow},
+    nNZs = 1,
+    ANZ = {0.0},
+    hConNZ = {0.0},
+    nNZ = 1,
+    RNZ = {{0.00001}},
+    RNZRem = {0.00001},
+    CNZ = {{0.00001}},
+    otherNZIndex = {1},
+    thisZoneIndex = ${zone.parent.thermal_zones.index(zone) + 1},
     TSoil = ${zone.t_ground},
 % if zone.parent.parent.t_soil_mode == 3:
-    TSoilDataSource = BoundaryConditions.GroundTemperature.GroundTemperatureDataSource.File,
+    TSoilDataSource = AixLib.BoundaryConditions.GroundTemperature.GroundTemperatureDataSource.File,
 % elif zone.parent.parent.t_soil_mode == 2:
-    TSoilDataSource = BoundaryConditions.GroundTemperature.GroundTemperatureDataSource.Sine,
+    TSoilDataSource = AixLib.BoundaryConditions.GroundTemperature.GroundTemperatureDataSource.Sine,
 % else:
-    TSoilDataSource = BoundaryConditions.GroundTemperature.GroundTemperatureDataSource.Constant,
+    TSoilDataSource = AixLib.BoundaryConditions.GroundTemperature.GroundTemperatureDataSource.Constant,
 % endif
-    offsetTime = ${zone.parent.parent.modelica_info.time_to_minimal_t_ground},
+    offsetTime = ${zone.time_to_minimal_t_ground},
     TSoilAmplitude = ${zone.t_ground_amplitude},
 % if zone.parent.parent.t_soil_mode == 3:
     TSoilFile = Modelica.Utilities.Files.loadResource("modelica://${zone.parent.parent.name}/${zone.parent.parent.weather_file_name}"),
@@ -97,6 +106,8 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     HeaterOn = ${get_true_false(zone.use_conditions.with_heating)},
     hCool = 0,
     lCool = ${zone.model_attr.cool_load},
+    heaLoadFacOut = 1,
+    heaLoadFacGrd = 1,
     KRCool = 10000,
     TNCool = 1,
     CoolerOn = ${get_true_false(zone.use_conditions.with_cooling)},

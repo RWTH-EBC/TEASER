@@ -18,12 +18,6 @@ class ModelicaInfo:
         Stop time for the simulation, default 31536000
     interval_output : str [s]
         Interval for one time step, default 3600 for one hour
-    time_to_minimal_t_ground : int [s]
-        Time between simulation time 0 (not: start_time) and the minimum of
-        the ground temperature if the sine option for ground temperature is
-        chosen. Default: 6004800 (noon of Mar 11 as published by Virginia Tech
-        (https://www.builditsolar.com/Projects/Cooling/EarthTemperatures.htm)
-        for a depth of 5 ft)
     solver : list
         list of available solvers for Modelica
     current_solver : str
@@ -44,7 +38,6 @@ class ModelicaInfo:
         self.start_time = 0
         self.stop_time = 31536000
         self.interval_output = "3600"
-        self.time_to_minimal_t_ground = 6004800
         self.solver = ["Lsodar", "dassl", "Radau", "Cvode"]
         self.current_solver = "Cvode"
         self.equidistant_output = True
