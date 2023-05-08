@@ -371,8 +371,6 @@ class ThreeElement(object):
         self.weightfactor_ow = []
         self.weightfactor_ground = 0.0
         self.outer_wall_areas = []
-        self.nzbs_for_ow = []
-        self.nzbs_for_iw = []
 
         # Attributes for outer walls (OuterWall, Rooftop, GroundFloor)
         self.area_gf = 0.0
@@ -402,8 +400,6 @@ class ThreeElement(object):
         # Additional attributes
 
         self.weightfactor_ground = 0.0
-        self.nzbs_for_ow = []
-        self.nzbs_for_iw = []
 
         # Attributes for windows
         self.area_win = 0.0
@@ -462,17 +458,6 @@ class ThreeElement(object):
 
     def calc_attributes(self):
         """Calls all necessary function to calculate model attributes"""
-        self.nzbs_for_ow = []
-        if self.thermal_zone.use_conditions.with_heating:
-            self.nzbs_for_iw = []
-            for nzb in self.thermal_zone.interzonal_elements:
-                if not nzb.other_side.use_conditions.with_heating:
-                    self.nzbs_for_ow.append(nzb)
-                else:
-                    self.nzbs_for_iw.append(nzb)
-        else:
-            self.nzbs_for_iw = self.thermal_zone.interzonal_elements
-
         outer_walls = (
             self.thermal_zone.outer_walls
             + self.thermal_zone.rooftops
@@ -1201,7 +1186,7 @@ class ThreeElement(object):
             ) + self.thermal_zone.find_rts(
                 i[0], i[1]
             )
-            if self.thermal_zone.with_heating:
+            if self.thermal_zone.use_conditions.with_heating:
                 wall_rt_nzb += self.thermal_zone.find_izes(
                     i[0], i[1], other_side_heating=False
                 )
@@ -1218,7 +1203,7 @@ class ThreeElement(object):
             self.orientation_facade.append(i[0])
             self.tilt_facade.append(i[1])
 
-            if not wall_rt:
+            if not wall_rt_nzb:
                 self.weightfactor_ow.append(0.0)
                 self.outer_wall_areas.append(0.0)
             else:
@@ -1454,3 +1439,41 @@ class ThreeElement(object):
         self.orientation_facade = []
         self.heat_load = 0.0
         self.cool_load = 0.0
+
+    @property
+    def nzbs_for_ow(self):
+        """returns borders to neighboured zones to be considered as outer walls
+
+        Returns
+        -------
+        value : list
+            if this zone is heated: list of those interzonal elements that have
+            an unheated zone on the other side. otherweise: empty list
+
+        """
+        value = []
+        for nzb in self.thermal_zone.interzonal_elements:
+            if not nzb.other_side.use_conditions.with_heating:
+                value.append(nzb)
+        return value
+
+    @property
+    def nzbs_for_iw(self):
+        """returns borders to neighboured zones to be considered as inner walls
+
+        Returns
+        -------
+        value : list
+            if this zone is heated: list of those interzonal elements that have
+            another heated zone on the other side. otherwise: list of all
+            interzonal elements
+
+        """
+        if self.thermal_zone.use_conditions.with_heating:
+            value = []
+            for nzb in self.thermal_zone.interzonal_elements:
+                if nzb.other_side.use_conditions.with_heating:
+                    value.append(nzb)
+        else:
+            value = self.thermal_zone.interzonal_elements
+        return value

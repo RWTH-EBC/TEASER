@@ -518,8 +518,6 @@ class FourElement(object):
         self.rooftop_areas = []
         self.tilt_rt = []
         self.orientation_rt = []
-        self.nzbs_for_ow = []
-        self.nzbs_for_iw = []
 
         # TODO: check this value
         self.r_rad_rt_iw = 0.0
@@ -582,17 +580,6 @@ class FourElement(object):
 
     def calc_attributes(self):
         """Calls all necessary function to calculate model attributes"""
-        self.nzbs_for_ow = []
-        if self.thermal_zone.use_conditions.with_heating:
-            self.nzbs_for_iw = []
-            for nzb in self.thermal_zone.interzonal_elements:
-                if not nzb.other_side.use_conditions.with_heating:
-                    self.nzbs_for_ow.append(nzb)
-                else:
-                    self.nzbs_for_iw.append(nzb)
-        else:
-            self.nzbs_for_iw = self.thermal_zone.interzonal_elements
-
         for out_wall in self.thermal_zone.outer_walls + self.nzbs_for_ow:
             out_wall.calc_equivalent_res()
             out_wall.calc_ua_value()
@@ -1464,7 +1451,7 @@ class FourElement(object):
 
         for i in tilt_orient:
             wall_nzb = self.thermal_zone.find_walls(i[0], i[1])
-            if self.thermal_zone.with_heating:
+            if self.thermal_zone.use_conditions.with_heating:
                 wall_nzb += self.thermal_zone.find_izes(
                     i[0], i[1], other_side_heating=False
                 )
@@ -1723,8 +1710,6 @@ class FourElement(object):
         self.rooftop_areas = []
         self.tilt_rt = []
         self.orientation_rt = []
-        self.nzbs_for_ow = []
-        self.nzbs_for_iw = []
 
         # TODO: check this value
         self.r_rad_rt_iw = 0.0
@@ -1782,3 +1767,41 @@ class FourElement(object):
         self.orientation_facade = []
         self.heat_load = 0.0
         self.cool_load = 0.0
+
+    @property
+    def nzbs_for_ow(self):
+        """returns borders to neighboured zones to be considered as outer walls
+
+        Returns
+        -------
+        value : list
+            if this zone is heated: list of those interzonal elements that have
+            an unheated zone on the other side. otherweise: empty list
+
+        """
+        value = []
+        for nzb in self.thermal_zone.interzonal_elements:
+            if not nzb.other_side.use_conditions.with_heating:
+                value.append(nzb)
+        return value
+
+    @property
+    def nzbs_for_iw(self):
+        """returns borders to neighboured zones to be considered as inner walls
+
+        Returns
+        -------
+        value : list
+            if this zone is heated: list of those interzonal elements that have
+            another heated zone on the other side. otherwise: list of all
+            interzonal elements
+
+        """
+        if self.thermal_zone.use_conditions.with_heating:
+            value = []
+            for nzb in self.thermal_zone.interzonal_elements:
+                if nzb.other_side.use_conditions.with_heating:
+                    value.append(nzb)
+        else:
+            value = self.thermal_zone.interzonal_elements
+        return value

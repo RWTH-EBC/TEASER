@@ -231,9 +231,9 @@ def building_test2(prj):
 
     return bldg
 
-def interzonal_test2(prj):
+def interzonal_test2(prj, connect_to_index=-2, add_heated=False):
     """
-    adds a hardcoded second zone with borders to the first
+    adds a hardcoded additional zone with borders to the one before
     """
     bldg = prj.buildings[-1]
 
@@ -248,7 +248,7 @@ def interzonal_test2(prj):
 
     tz.use_conditions = UseConditions(tz)
     tz.use_conditions.usage = "Living_unoccupied"
-    tz.use_conditions.with_heating = False
+    tz.use_conditions.with_heating = add_heated
     tz.use_conditions.with_cooling = False
     tz.use_conditions.set_temp_heat = [288.15, ]
     tz.use_conditions.set_temp_cool = [298.15, ]
@@ -428,11 +428,11 @@ def interzonal_test2(prj):
     ground_material.thermal_conduc = 2.0
     ground_material.heat_capac = 0.84
 
-    heated_zone = prj.buildings[-1].thermal_zones[-2]
-    unheated_zone = prj.buildings[-1].thermal_zones[-1]
+    previous_zone = prj.buildings[-1].thermal_zones[connect_to_index]
+    new_zone = prj.buildings[-1].thermal_zones[-1]
 
-    iz_floor = InterzonalFloor(parent=unheated_zone,
-                               other_side=heated_zone)
+    iz_floor = InterzonalFloor(parent=new_zone,
+                               other_side=previous_zone)
     iz_floor.name = "Interzonal Floor/Ceiling 1"
     iz_floor.year_of_construction = prj.buildings[-1].year_of_construction
     iz_floor.construction_type = 'light'
@@ -440,8 +440,8 @@ def interzonal_test2(prj):
     iz_floor.load_type_element(year=iz_floor.year_of_construction,
                                construction=iz_floor.construction_type)
 
-    iz_ceiling = InterzonalCeiling(parent=heated_zone,
-                                   other_side=unheated_zone)
+    iz_ceiling = InterzonalCeiling(parent=previous_zone,
+                                   other_side=new_zone)
     iz_ceiling.name = "Interzonal Floor/Ceiling 1"
     iz_ceiling.year_of_construction = prj.buildings[-1].year_of_construction
     iz_ceiling.construction_type = 'light'
@@ -449,7 +449,7 @@ def interzonal_test2(prj):
     iz_ceiling.load_type_element(year=iz_ceiling.year_of_construction,
                                  construction=iz_ceiling.construction_type)
 
-    iz_wall_1 = InterzonalWall(parent=unheated_zone, other_side=heated_zone)
+    iz_wall_1 = InterzonalWall(parent=new_zone, other_side=previous_zone)
     iz_wall_1.name = "InterzonalWall1FromHeated"
     iz_wall_1.year_of_construction = prj.buildings[-1].year_of_construction
     iz_wall_1.construction_type = 'heavy'
@@ -457,7 +457,7 @@ def interzonal_test2(prj):
     iz_wall_1.load_type_element(year=iz_wall_1.year_of_construction,
                                 construction=iz_wall_1.construction_type)
 
-    iz_wall_2 = InterzonalWall(parent=heated_zone, other_side=unheated_zone)
+    iz_wall_2 = InterzonalWall(parent=previous_zone, other_side=new_zone)
     iz_wall_2.name = "InterzonalWall1FromUnheated"
     iz_wall_2.year_of_construction = prj.buildings[-1].year_of_construction
     iz_wall_2.construction_type = 'heavy'
