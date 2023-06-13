@@ -13,6 +13,7 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     ASurTot=${bldg.library_attr.total_surface_area},
     numZones = ${len(bldg.thermal_zones)},
     internalGainsMode = ${bldg.internal_gains_mode},
+    constCoolingLoad=${bldg.constant_cooling_load},
     % if bldg.internal_gains_mode==3:
         use_C_flow = true,
         use_moisture_balance = true,
@@ -210,7 +211,7 @@ equation
       inputs=false,
       auxiliaries=true,
       events=${get_true_false(modelica_info.results_at_events)}),
-      __Dymola_selections={Selection(name="BuildingSimulationOutputs", match= {MatchVariable(name="*multizone.TAir*|*multizone.TRad*|*multizone.Pel*|*multizone.PHeatAHU*|*multizone.PCoolAHU*|*multizone.PHeater*|*multizone.PCooler*|*.airCurtainSimplyfied.powerOut*", newName="Forces.%path%")})},
+      __Dymola_selections={Selection(name="BuildingSimulationOutputs", match= {MatchVariable(name="*multizone.TAir*|*multizone.TRad*|*multizone.Pel*|*multizone.PHeatAHU*|*multizone.PCoolAHU*|*multizone.PHeater*|*multizone.PCooler*|*multizone.PConstantCooling|*.airCurtainSimplyfied.powerOut*", newName="Forces.%path%")})},
       __Dymola_Commands(file=
         "Resources/Scripts/Dymola/${bldg.name}/${bldg.name}.mos"
       "Simulate and Plot"),

@@ -118,7 +118,9 @@ class Building(object):
 
     with_dhw : boolean
         True for exporting and simulating dhw profiles
-
+    constant_cooling_load: float
+        Option to add a constant cooling load  in watt. Default is 0. Value is
+        be output of multizone.
     """
 
     def __init__(
@@ -155,6 +157,7 @@ class Building(object):
         self.city = ""
         self.longitude = 6.05
         self.latitude = 50.79
+        self.constant_cooling_load = 0
 
         self._thermal_zones = []
         self._outer_area = {}
