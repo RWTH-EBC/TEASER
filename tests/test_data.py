@@ -2461,6 +2461,35 @@ class Test_teaser(object):
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         therm_zone.outer_walls[0].retrofit_wall(1980, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 2) == 4.13
+        prj.set_default()
+        helptest.building_test2(prj)
+        helptest.interzonal_test2(prj, connect_to_index=0, add_heated=False)
+        helptest.interzonal_test2(prj, connect_to_index=0, add_heated=True)
+        therm_zone_heated = prj.buildings[-1].thermal_zones[0]
+        therm_zone_unheated = prj.buildings[-1].thermal_zones[1]
+        therm_zone_other_heated = prj.buildings[-1].thermal_zones[2]
+        for interzonal_element in therm_zone_heated.interzonal_walls:
+            interzonal_element.retrofit_wall(2015, "EPS_040_15")
+            if interzonal_element.other_side is therm_zone_unheated:
+                assert round(interzonal_element.ua_value, 2) == 0.24 * interzonal_element.area
+        for interzonal_element in therm_zone_heated.interzonal_ceilings:
+            interzonal_element.retrofit_wall(2015, "EPS_040_15")
+            if interzonal_element.other_side is therm_zone_unheated:
+                assert round(interzonal_element.ua_value, 2) == 0.3 * interzonal_element.area
+        for interzonal_element in therm_zone_heated.interzonal_floors:
+            interzonal_element.retrofit_wall(2015, "EPS_040_15")
+            if interzonal_element.other_side is therm_zone_unheated:
+                assert round(interzonal_element.ua_value, 2) == 0.2 * interzonal_element.area
+        for interzonal_element in therm_zone_unheated.interzonal_walls:
+            interzonal_element.retrofit_wall(2015, "EPS_040_15")
+            assert round(interzonal_element.ua_value, 2) == 4.13
+        for interzonal_element in therm_zone_unheated.interzonal_ceilings:
+            interzonal_element.retrofit_wall(2015, "EPS_040_15")
+            assert round(interzonal_element.ua_value, 2) == 4.13
+        for interzonal_element in therm_zone_unheated.interzonal_floors:
+            interzonal_element.retrofit_wall(2015, "EPS_040_15")
+            assert round(interzonal_element.ua_value, 2) == 4.13
+        # todo test that interzonals are correctly retrofitted (u-value, layer position, retrofitted at all)
 
     def test_interzonal_type_element(self):
         prj.set_default(load_data=True)

@@ -510,16 +510,13 @@ class ThermalZone(object):
                             "retrofit", type_of_retrofit))
         else:
 
-            for wall_count in self.outer_walls:
-                wall_count.retrofit_wall(
-                    self.parent.year_of_retrofit,
-                    material)
-            for roof_count in self.rooftops:
-                roof_count.retrofit_wall(
-                    self.parent.year_of_retrofit,
-                    material)
-            for ground_count in self.ground_floors:
-                ground_count.retrofit_wall(
+            for element_count in (
+                    self.outer_walls
+                    + self.rooftops
+                    + self.ground_floors
+                    + self.interzonal_elements
+            ):
+                element_count.retrofit_wall(
                     self.parent.year_of_retrofit,
                     material)
             for win_count in self.windows:

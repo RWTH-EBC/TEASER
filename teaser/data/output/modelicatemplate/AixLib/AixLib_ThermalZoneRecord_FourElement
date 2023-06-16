@@ -63,10 +63,10 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
 % else:
     TSoilDataSource = AixLib.BoundaryConditions.GroundTemperature.GroundTemperatureDataSource.Constant,
 % endif
-    offsetTime = ${zone.time_to_minimal_t_ground},
+    TSoilOffsetTime = ${zone.time_to_minimal_t_ground},
     TSoilAmplitude = ${zone.t_ground_amplitude},
 % if zone.parent.parent.t_soil_mode == 3:
-    TSoilFile = Modelica.Utilities.Files.loadResource("modelica://${zone.parent.parent.name}/${zone.parent.parent.weather_file_name}"),
+    TSoilFile = Modelica.Utilities.Files.loadResource("modelica://${zone.parent.parent.name}/${zone.parent.parent.t_soil_file_name}"),
 % else:
     TSoilFile = "NoName",
 % endif

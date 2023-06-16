@@ -255,7 +255,7 @@ class Wall(BuildingElement):
             thickness of the insulation layer, default = None
         add_at_position : int
             position at which to insert the insulation layer.
-            0 inside, None (default) outside/other side
+            0 inside, None (default) or -1 outside/other side
         add_plaster_material : int
             material of plaster to add, default = None. Is only applied if
             add_plaster_thickness is not None
@@ -273,6 +273,9 @@ class Wall(BuildingElement):
             material = "EPS035"
         else:
             pass
+
+        if add_at_position == -1:
+            add_at_position = None
 
         ext_layer = Layer(self, parent_position=add_at_position)
         new_material = Material(ext_layer)
@@ -308,12 +311,16 @@ class Wall(BuildingElement):
 
         return insulation_index
 
-    def retrofit_wall(self, year_of_retrofit, material=None):
+    def retrofit_wall(self, year_of_retrofit, material=None,
+                      add_at_position=None):
         """Retrofits wall to German refurbishment standards.
 
         This function adds an additional layer of insulation and sets the
         thickness of the layer according to the retrofit standard in the
-        year of refurbishment. Refurbishment year must be newer then 1977
+        year of refurbishment. Refurbishment year must be newer then 1977.
+        Refurbishment layers are added on the unheated/outside of outer walls,
+        rooftops, ground floors and interzonal elements between heated and
+        unheated zones if not otherwise specified.
 
         Note: To Calculate thickness and U-Value, the standard TEASER
         coefficients for outer and inner heat transfer are used.
@@ -327,6 +334,10 @@ class Wall(BuildingElement):
             Type of material, that is used for insulation
         year_of_retrofit : int
             Year of the retrofit of the wall/building
+        add_at_position : int
+            position at which to insert the insulation layer.
+            0 inside, None (default) or -1 outside/other side
+
 
         """
         self.set_calc_default()
@@ -343,86 +354,106 @@ class Wall(BuildingElement):
                     by teaser. We will change your year of retrofit to 1977\
                     for the calculation. Be careful!")
 
-        if type(self).__name__ == 'OuterWall':
+        if add_at_position is None:
+            insulation_layer_index = -1  # default: outside
+        else:
+            insulation_layer_index = add_at_position
+
+        use_u_value_standards_of = type(self).__name__
+        if type(self).__name__.startswith("Interzonal") \
+                and self.other_side is not None:
+            if (self.parent.use_conditions.with_heating and
+                    self.other_side.use_conditions.with_heating):
+                use_u_value_standards_of = "InnerWall"
+            elif (not self.parent.use_conditions.with_heating and
+                  self.other_side.use_conditions.with_heating):
+                if add_at_position is None:
+                    insulation_layer_index = 0
+                if (type(self)).__name__ == 'InterzonalWall':
+                    use_u_value_standards_of = 'OuterWall'
+                elif (type(self)).__name__ == 'InterzonalFloor':
+                    use_u_value_standards_of = 'Rooftop'
+                else:
+                    use_u_value_standards_of = 'GroundFloor'
+            else:
+                if (type(self)).__name__ == 'InterzonalWall':
+                    use_u_value_standards_of = 'OuterWall'
+                elif (type(self)).__name__ == 'InterzonalFloor':
+                    use_u_value_standards_of = 'GroundFloor'
+                else:
+                    use_u_value_standards_of = 'Rooftop'
+
+        if use_u_value_standards_of == "InnerWall":
+            calc_u = np.inf
+
+        elif use_u_value_standards_of == 'OuterWall':
 
             if 1977 <= year_of_retrofit <= 1981:
-                self.insulate_wall(material)
                 calc_u = 1.06 * self.area
             elif 1982 <= year_of_retrofit <= 1994:
-                self.insulate_wall(material)
                 calc_u = 0.6 * self.area
             elif 1995 <= year_of_retrofit <= 2001:
-                self.insulate_wall(material)
                 calc_u = 0.5 * self.area
             elif 2002 <= year_of_retrofit <= 2008:
-                self.insulate_wall(material)
                 calc_u = 0.45 * self.area
             elif 2009 <= year_of_retrofit <= 2013:
-                self.insulate_wall(material)
                 calc_u = 0.24 * self.area
             elif year_of_retrofit >= 2014:
-                self.insulate_wall(material)
                 calc_u = 0.24 * self.area
 
-        elif type(self).__name__ == 'Rooftop':
+        elif use_u_value_standards_of == 'Rooftop':
 
             if 1977 <= year_of_retrofit <= 1981:
-                self.insulate_wall(material)
                 calc_u = 0.45 * self.area
             elif 1982 <= year_of_retrofit <= 1994:
-                self.insulate_wall(material)
                 calc_u = 0.45 * self.area
             elif 1995 <= year_of_retrofit <= 2001:
-                self.insulate_wall(material)
                 calc_u = 0.3 * self.area
             elif 2002 <= year_of_retrofit <= 2008:
-                self.insulate_wall(material)
                 calc_u = 0.3 * self.area
             elif 2009 <= year_of_retrofit <= 2013:
-                self.insulate_wall(material)
                 calc_u = 0.2 * self.area
             elif year_of_retrofit >= 2014:
-                self.insulate_wall(material)
                 calc_u = 0.2 * self.area
 
-        if type(self).__name__ == 'GroundFloor':
+        elif use_u_value_standards_of == 'GroundFloor':
 
             if 1977 <= year_of_retrofit <= 1981:
-                self.insulate_wall(material)
                 calc_u = 0.8 * self.area
             elif 1982 <= year_of_retrofit <= 1994:
-                self.insulate_wall(material)
                 calc_u = 0.7 * self.area
             elif 1995 <= year_of_retrofit <= 2001:
-                self.insulate_wall(material)
                 calc_u = 0.5 * self.area
             elif 2002 <= year_of_retrofit <= 2008:
-                self.insulate_wall(material)
                 calc_u = 0.4 * self.area
             elif 2009 <= year_of_retrofit <= 2013:
-                self.insulate_wall(material)
                 calc_u = 0.3 * self.area
             elif year_of_retrofit >= 2014:
-                self.insulate_wall(material)
                 calc_u = 0.3 * self.area
 
-        r_conduc = 0
+        else:
+            calc_u = np.inf
 
         if self.ua_value < calc_u:
-            pass
-        else:
-            for count_layer in self.layer[:-1]:
-                r_conduc += (count_layer.thickness /
-                             count_layer.material.thermal_conduc)
+            self.insulate_wall(material, add_at_position=insulation_layer_index)
 
-                self.layer[-1].thickness = \
-                    (((
-                      1 - calc_u * self.r_inner_comb - calc_u *
-                      self.r_outer_comb) /
-                      calc_u) * self.area - r_conduc) * \
-                    self.layer[-1].material.thermal_conduc
+            r_conduc = 0
 
-                self.layer[-1].id = len(self.layer)
+            for layer_index, count_layer in enumerate(self.layer):
+                if layer_index == insulation_layer_index:
+                    pass
+                else:
+                    r_conduc += (count_layer.thickness /
+                                 count_layer.material.thermal_conduc)
+
+            self.layer[insulation_layer_index].thickness = \
+                (((
+                  1 - calc_u * self.r_inner_comb - calc_u *
+                  self.r_outer_comb) /
+                  calc_u) * self.area - r_conduc) * \
+                self.layer[insulation_layer_index].material.thermal_conduc
+
+            self.layer[insulation_layer_index].id = len(self.layer)
 
 
     @property

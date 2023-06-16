@@ -293,7 +293,7 @@ def load_teaser_json(path, project):
                     izc.name = izc_name
                     set_basic_data_teaser(izc_in, izc)
                     set_layer_data_teaser(izc_in, izc)
-            except KeyError:
+            except KeyError as error:
                 pass
         try:
             for tz, (tz_name, zone_in) in zip(bldg.thermal_zones,
