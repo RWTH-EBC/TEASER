@@ -1,0 +1,2852 @@
+{
+    "project": {
+        "version": "0.7",
+        "name": "Project",
+        "weather_file_path": "",
+        "number_of_elements_calc": 5,
+        "merge_windows_calc": false,
+        "used_library_calc": "AixLib",
+        "modelica_info": {
+            "start_time": 0,
+            "stop_time": 31536000,
+            "interval_output": "3600",
+            "current_solver": "Radau",
+            "equidistant_output": true,
+            "results_at_events": false,
+            "version": "3.2.3"
+        },
+        "buildings": {
+            "ID_1E7C6BAE21C8429FAFD9268588D73C7F": {
+                "classification": {
+                    "class": "SingleFamilyHouse",
+                    "method": "tabula_de"
+                },
+                "street_name": "",
+                "city": "",
+                "year_of_construction": 1965,
+                "year_of_retrofit": null,
+                "number_of_floors": 4,
+                "height_of_floors": 2.5801223329411926,
+                "net_leased_area": 289.33669130351973,
+                "outer_area": {
+                    "333": 50.58504856281411,
+                    "153": 48.53363211721986,
+                    "251": 59.607304287439135,
+                    "71": 59.705904427831726,
+                    "243": 40.76295666709948,
+                    "63": 39.44740093350779,
+                    "-2": 131.85521768744456
+                },
+                "window_area": {
+                    "333": 6.3669258033635545,
+                    "153": 8.143424061983696,
+                    "243": 0.0001,
+                    "63": 1.469956978567883
+                },
+                "thermal_zones": {
+                    "attic": {
+                        "area": 50.52377022336238,
+                        "volume": 75.78795696372634,
+                        "use_conditions": {
+                            "usage": "Living",
+                            "typical_length": 3.0,
+                            "typical_width": 6.0,
+                            "with_heating": false,
+                            "with_ideal_thresholds": false,
+                            "T_threshold_heating": 288.15,
+                            "T_threshold_cooling": 295.15,
+                            "with_cooling": false,
+                            "fixed_heat_flow_rate_persons": 70,
+                            "activity_degree_persons": 1.2,
+                            "persons": 0.02,
+                            "internal_gains_moisture_no_people": 0.5,
+                            "ratio_conv_rad_persons": 0.5,
+                            "machines": 2.0,
+                            "ratio_conv_rad_machines": 0.75,
+                            "lighting_power": 7.0,
+                            "ratio_conv_rad_lighting": 0.5,
+                            "use_constant_infiltration": true,
+                            "infiltration_rate": 10.0,
+                            "max_user_infiltration": 1.0,
+                            "max_overheating_infiltration": [
+                                3.0,
+                                2.0
+                            ],
+                            "max_summer_infiltration": [
+                                1.0,
+                                283.15,
+                                290.15
+                            ],
+                            "winter_reduction_infiltration": [
+                                0.2,
+                                273.15,
+                                283.15
+                            ],
+                            "min_ahu": 0.3,
+                            "max_ahu": 0.6,
+                            "with_ahu": false,
+                            "heating_profile": [
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15
+                            ],
+                            "cooling_profile": [
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15
+                            ],
+                            "persons_profile": [
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0
+                            ],
+                            "machines_profile": [
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0
+                            ],
+                            "lighting_profile": [
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0
+                            ]
+                        },
+                        "outer_walls": {
+                            "wall_ID_29E5A1CEACFE4029A7E004BB1BCEDEDC_attic_90_333_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 7.595013187197167,
+                                "tilt": 90.0,
+                                "orientation": 333,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.005,
+                                        "material": {
+                                            "name": "KalkputzGlattputz05cm",
+                                            "density": 1400.0,
+                                            "thermal_conduc": 0.7,
+                                            "heat_capac": 0.96,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.015,
+                                        "material": {
+                                            "name": "NormalmrtelDickschichtputz15cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.0,
+                                            "heat_capac": 0.8,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.29,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen29cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.2,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.11,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen11cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 0.87,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "wall_ID_92348F00CF394570AD9669B8AB944B84_attic_90_153_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 7.373346391213454,
+                                "tilt": 90.0,
+                                "orientation": 153,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.005,
+                                        "material": {
+                                            "name": "KalkputzGlattputz05cm",
+                                            "density": 1400.0,
+                                            "thermal_conduc": 0.7,
+                                            "heat_capac": 0.96,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.015,
+                                        "material": {
+                                            "name": "NormalmrtelDickschichtputz15cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.0,
+                                            "heat_capac": 0.8,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.29,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen29cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.2,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.11,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen11cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 0.87,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "wall_ID_29E5A1CEACFE4029A7E004BB1BCEDEDC_attic_90_333_2": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 0.46858693185792283,
+                                "tilt": 90.0,
+                                "orientation": 333,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.005,
+                                        "material": {
+                                            "name": "KalkputzGlattputz05cm",
+                                            "density": 1400.0,
+                                            "thermal_conduc": 0.7,
+                                            "heat_capac": 0.96,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.015,
+                                        "material": {
+                                            "name": "NormalmrtelDickschichtputz15cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.0,
+                                            "heat_capac": 0.8,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.29,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen29cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.2,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.11,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen11cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 0.87,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "wall_ID_92348F00CF394570AD9669B8AB944B84_attic_90_153_2": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 0.45491083133450616,
+                                "tilt": 90.0,
+                                "orientation": 153,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.005,
+                                        "material": {
+                                            "name": "KalkputzGlattputz05cm",
+                                            "density": 1400.0,
+                                            "thermal_conduc": 0.7,
+                                            "heat_capac": 0.96,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.015,
+                                        "material": {
+                                            "name": "NormalmrtelDickschichtputz15cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.0,
+                                            "heat_capac": 0.8,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.29,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen29cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.2,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.11,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen11cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 0.87,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "doors": {},
+                        "rooftops": {
+                            "roof_ID_99039A1669984020A103C0299EF81D2D_attic_48_251_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 38.01645838279441,
+                                "tilt": 48.0,
+                                "orientation": 251,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 5.0,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "Dachziegel_2cm",
+                                            "density": 2600.0,
+                                            "thermal_conduc": 2.3,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.4,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "roof_ID_8F350ED0BE2945ADAAE443B0DF1570ED_attic_49_71_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 37.70724932250004,
+                                "tilt": 49.0,
+                                "orientation": 71,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 5.0,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "Dachziegel_2cm",
+                                            "density": 2600.0,
+                                            "thermal_conduc": 2.3,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.4,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "ground_floors": {},
+                        "windows": {
+                            "window_F7A7FC1F7CEC42F9AB4A1D61AA5D71A6_90_333_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 0.0854780546614556,
+                                "tilt": 90.0,
+                                "orientation": 333,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "g_value": 0.6,
+                                "a_conv": 0.02,
+                                "shading_g_total": 0.0,
+                                "shading_max_irr": 0.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.27079999999999993,
+                                        "material": {
+                                            "name": "glas_generic",
+                                            "density": 0.0,
+                                            "thermal_conduc": 0.76,
+                                            "heat_capac": 0.0,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "window_41DEDD6BE979436D89CA037B45775A76_90_153_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 0.14869610304800834,
+                                "tilt": 90.0,
+                                "orientation": 153,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "g_value": 0.6,
+                                "a_conv": 0.02,
+                                "shading_g_total": 0.0,
+                                "shading_max_irr": 0.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.27079999999999993,
+                                        "material": {
+                                            "name": "glas_generic",
+                                            "density": 0.0,
+                                            "thermal_conduc": 0.76,
+                                            "heat_capac": 0.0,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "inner_walls": {},
+                        "floors": {},
+                        "ceilings": {},
+						"interzonal_ceilings": {},
+						"interzonal_walls": {},
+                        "interzonal_floors": {
+                            "floor_4C797480FF814849944536D7EDE2A122_1": {
+                                "other_side": "storey_1",
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 1.6167606471475964,
+                                "tilt": 0.0,
+                                "orientation": -2,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 5.0,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 5.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "Gipswandplatten2cm",
+                                            "density": 900.0,
+                                            "thermal_conduc": 0.25,
+                                            "heat_capac": 0.84,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "basement": {
+                        "area": 79.60430702671911,
+                        "volume": 176.72156159931643,
+                        "use_conditions": {
+                            "usage": "Living",
+                            "typical_length": 3.0,
+                            "typical_width": 6.0,
+                            "with_heating": false,
+                            "with_ideal_thresholds": false,
+                            "T_threshold_heating": 288.15,
+                            "T_threshold_cooling": 295.15,
+                            "with_cooling": false,
+                            "fixed_heat_flow_rate_persons": 70,
+                            "activity_degree_persons": 1.2,
+                            "persons": 0.02,
+                            "internal_gains_moisture_no_people": 0.5,
+                            "ratio_conv_rad_persons": 0.5,
+                            "machines": 2.0,
+                            "ratio_conv_rad_machines": 0.75,
+                            "lighting_power": 7.0,
+                            "ratio_conv_rad_lighting": 0.5,
+                            "use_constant_infiltration": true,
+                            "infiltration_rate": 1.0,
+                            "max_user_infiltration": 1.0,
+                            "max_overheating_infiltration": [
+                                3.0,
+                                2.0
+                            ],
+                            "max_summer_infiltration": [
+                                1.0,
+                                283.15,
+                                290.15
+                            ],
+                            "winter_reduction_infiltration": [
+                                0.2,
+                                273.15,
+                                283.15
+                            ],
+                            "min_ahu": 0.3,
+                            "max_ahu": 0.6,
+                            "with_ahu": false,
+                            "heating_profile": [
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15
+                            ],
+                            "cooling_profile": [
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15
+                            ],
+                            "persons_profile": [
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0
+                            ],
+                            "machines_profile": [
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0
+                            ],
+                            "lighting_profile": [
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0
+                            ]
+                        },
+                        "outer_walls": {
+                            "wall_ID_3221F79B29564630A3ED200C07339FCA_basement_90_243_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 6.669670738082091,
+                                "tilt": 90.0,
+                                "orientation": 243,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.32,
+                                        "material": {
+                                            "name": "lightweight_concrete_Vermiculit_1100",
+                                            "density": 1100.0,
+                                            "thermal_conduc": 0.488,
+                                            "heat_capac": 1.05,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "wall_ID_29E5A1CEACFE4029A7E004BB1BCEDEDC_basement_90_333_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 6.046013337403205,
+                                "tilt": 90.0,
+                                "orientation": 333,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.32,
+                                        "material": {
+                                            "name": "lightweight_concrete_Vermiculit_1100",
+                                            "density": 1100.0,
+                                            "thermal_conduc": 0.488,
+                                            "heat_capac": 1.05,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "wall_ID_92348F00CF394570AD9669B8AB944B84_basement_90_153_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 6.045838317312415,
+                                "tilt": 90.0,
+                                "orientation": 153,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.32,
+                                        "material": {
+                                            "name": "lightweight_concrete_Vermiculit_1100",
+                                            "density": 1100.0,
+                                            "thermal_conduc": 0.488,
+                                            "heat_capac": 1.05,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "wall_ID_F5586D9A9E5D410DAF42EB31C5BAD571_basement_90_63_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 6.750634865953637,
+                                "tilt": 90.0,
+                                "orientation": 63,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.32,
+                                        "material": {
+                                            "name": "lightweight_concrete_Vermiculit_1100",
+                                            "density": 1100.0,
+                                            "thermal_conduc": 0.488,
+                                            "heat_capac": 1.05,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "wall_ID_3221F79B29564630A3ED200C07339FCA_basement_90_243_2": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_2_SFH",
+                                "area": 0.4114963951515943,
+                                "tilt": 90.0,
+                                "orientation": 243,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "vapourpermeable_wood_fibreboard",
+                                            "density": 528.0,
+                                            "thermal_conduc": 0.14,
+                                            "heat_capac": 1.7,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.05,
+                                        "material": {
+                                            "name": "glass_fibre_batt_40",
+                                            "density": 40.0,
+                                            "thermal_conduc": 0.049,
+                                            "heat_capac": 0.84,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "wall_ID_29E5A1CEACFE4029A7E004BB1BCEDEDC_basement_90_333_2": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_2_SFH",
+                                "area": 0.3730188177318173,
+                                "tilt": 90.0,
+                                "orientation": 333,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "vapourpermeable_wood_fibreboard",
+                                            "density": 528.0,
+                                            "thermal_conduc": 0.14,
+                                            "heat_capac": 1.7,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.05,
+                                        "material": {
+                                            "name": "glass_fibre_batt_40",
+                                            "density": 40.0,
+                                            "thermal_conduc": 0.049,
+                                            "heat_capac": 0.84,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "wall_ID_92348F00CF394570AD9669B8AB944B84_basement_90_153_2": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_2_SFH",
+                                "area": 0.3730080195771156,
+                                "tilt": 90.0,
+                                "orientation": 153,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "vapourpermeable_wood_fibreboard",
+                                            "density": 528.0,
+                                            "thermal_conduc": 0.14,
+                                            "heat_capac": 1.7,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.05,
+                                        "material": {
+                                            "name": "glass_fibre_batt_40",
+                                            "density": 40.0,
+                                            "thermal_conduc": 0.049,
+                                            "heat_capac": 0.84,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "wall_ID_F5586D9A9E5D410DAF42EB31C5BAD571_basement_90_63_2": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_2_SFH",
+                                "area": 0.41649161126706236,
+                                "tilt": 90.0,
+                                "orientation": 63,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "vapourpermeable_wood_fibreboard",
+                                            "density": 528.0,
+                                            "thermal_conduc": 0.14,
+                                            "heat_capac": 1.7,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.05,
+                                        "material": {
+                                            "name": "glass_fibre_batt_40",
+                                            "density": 40.0,
+                                            "thermal_conduc": 0.049,
+                                            "heat_capac": 0.84,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "doors": {},
+                        "rooftops": {},
+                        "ground_floors": {
+                            "wall_ID_3221F79B29564630A3ED200C07339FCA_basement_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 13.660011826418122,
+                                "tilt": 0.0,
+                                "orientation": -2,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 0.9,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.03,
+                                        "material": {
+                                            "name": "oak_old",
+                                            "density": 740.46,
+                                            "thermal_conduc": 0.18,
+                                            "heat_capac": 1.6,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.04,
+                                        "material": {
+                                            "name": "cement_floating_screed_1_middle",
+                                            "density": 1940.0,
+                                            "thermal_conduc": 1.4,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.011,
+                                        "material": {
+                                            "name": "EPS_perimeter_insulation_top_layer",
+                                            "density": 39.5,
+                                            "thermal_conduc": 0.035,
+                                            "heat_capac": 1.45,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.16,
+                                        "material": {
+                                            "name": "concrete",
+                                            "density": 2104.2,
+                                            "thermal_conduc": 1.9375,
+                                            "heat_capac": 0.7758458,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "wall_ID_29E5A1CEACFE4029A7E004BB1BCEDEDC_basement_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 12.38271227094463,
+                                "tilt": 0.0,
+                                "orientation": -2,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 0.9,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.03,
+                                        "material": {
+                                            "name": "oak_old",
+                                            "density": 740.46,
+                                            "thermal_conduc": 0.18,
+                                            "heat_capac": 1.6,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.04,
+                                        "material": {
+                                            "name": "cement_floating_screed_1_middle",
+                                            "density": 1940.0,
+                                            "thermal_conduc": 1.4,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.011,
+                                        "material": {
+                                            "name": "EPS_perimeter_insulation_top_layer",
+                                            "density": 39.5,
+                                            "thermal_conduc": 0.035,
+                                            "heat_capac": 1.45,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.16,
+                                        "material": {
+                                            "name": "concrete",
+                                            "density": 2104.2,
+                                            "thermal_conduc": 1.9375,
+                                            "heat_capac": 0.7758458,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "wall_ID_92348F00CF394570AD9669B8AB944B84_basement_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 12.382353815991763,
+                                "tilt": 0.0,
+                                "orientation": -2,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 0.9,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.03,
+                                        "material": {
+                                            "name": "oak_old",
+                                            "density": 740.46,
+                                            "thermal_conduc": 0.18,
+                                            "heat_capac": 1.6,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.04,
+                                        "material": {
+                                            "name": "cement_floating_screed_1_middle",
+                                            "density": 1940.0,
+                                            "thermal_conduc": 1.4,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.011,
+                                        "material": {
+                                            "name": "EPS_perimeter_insulation_top_layer",
+                                            "density": 39.5,
+                                            "thermal_conduc": 0.035,
+                                            "heat_capac": 1.45,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.16,
+                                        "material": {
+                                            "name": "concrete",
+                                            "density": 2104.2,
+                                            "thermal_conduc": 1.9375,
+                                            "heat_capac": 0.7758458,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "wall_ID_F5586D9A9E5D410DAF42EB31C5BAD571_basement_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 13.825832747370944,
+                                "tilt": 0.0,
+                                "orientation": -2,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 0.9,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.03,
+                                        "material": {
+                                            "name": "oak_old",
+                                            "density": 740.46,
+                                            "thermal_conduc": 0.18,
+                                            "heat_capac": 1.6,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.04,
+                                        "material": {
+                                            "name": "cement_floating_screed_1_middle",
+                                            "density": 1940.0,
+                                            "thermal_conduc": 1.4,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.011,
+                                        "material": {
+                                            "name": "EPS_perimeter_insulation_top_layer",
+                                            "density": 39.5,
+                                            "thermal_conduc": 0.035,
+                                            "heat_capac": 1.45,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.16,
+                                        "material": {
+                                            "name": "concrete",
+                                            "density": 2104.2,
+                                            "thermal_conduc": 1.9375,
+                                            "heat_capac": 0.7758458,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "floor_ID_4DD3EC4ABB44426EADEFA15A7828D25D_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 79.60430702671911,
+                                "tilt": 0.0,
+                                "orientation": -2,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 0.9,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.03,
+                                        "material": {
+                                            "name": "oak_old",
+                                            "density": 740.46,
+                                            "thermal_conduc": 0.18,
+                                            "heat_capac": 1.6,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.04,
+                                        "material": {
+                                            "name": "cement_floating_screed_1_middle",
+                                            "density": 1940.0,
+                                            "thermal_conduc": 1.4,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.011,
+                                        "material": {
+                                            "name": "EPS_perimeter_insulation_top_layer",
+                                            "density": 39.5,
+                                            "thermal_conduc": 0.035,
+                                            "heat_capac": 1.45,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.16,
+                                        "material": {
+                                            "name": "concrete",
+                                            "density": 2104.2,
+                                            "thermal_conduc": 1.9375,
+                                            "heat_capac": 0.7758458,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "windows": {
+                            "dummy": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 0.0001,
+                                "tilt": 90.0,
+                                "orientation": 243,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "g_value": 0.75,
+                                "a_conv": 0.02,
+                                "shading_g_total": 0.0,
+                                "shading_max_irr": 0.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.14222857142857143,
+                                        "material": {
+                                            "name": "glas_generic",
+                                            "density": 0.0,
+                                            "thermal_conduc": 0.76,
+                                            "heat_capac": 0.0,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "inner_walls": {
+                            "InnerWall": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 81.6764,
+                                "tilt": 90.0,
+                                "orientation": 0.0,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.015,
+                                        "material": {
+                                            "name": "NormalmrtelDickschichtputz15cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.0,
+                                            "heat_capac": 0.8,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.09,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen_Innenwand",
+                                            "density": 1200.0,
+                                            "thermal_conduc": 0.87,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.015,
+                                        "material": {
+                                            "name": "NormalmrtelDickschichtputz15cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.0,
+                                            "heat_capac": 0.8,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "floors": {},
+                        "ceilings": {},
+						"interzonal_floors": {},
+						"interzonal_walls": {},
+                        "interzonal_ceilings": {
+                            "floor_B58E2762469D4DB88AF1AE8B139901C3": {
+                                "other_side": "storey_1",
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 79.60430702671911,
+                                "tilt": 0.0,
+                                "orientation": -1,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 0.9,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 0.9,
+                                "layer": {
+                                    "3": {
+                                        "thickness": 0.16,
+                                        "material": {
+                                            "name": "concrete",
+                                            "density": 2104.2,
+                                            "thermal_conduc": 1.9375,
+                                            "heat_capac": 0.7758458,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.011,
+                                        "material": {
+                                            "name": "EPS_perimeter_insulation_top_layer",
+                                            "density": 39.5,
+                                            "thermal_conduc": 0.035,
+                                            "heat_capac": 1.45,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.04,
+                                        "material": {
+                                            "name": "cement_floating_screed_1_middle",
+                                            "density": 1940.0,
+                                            "thermal_conduc": 1.4,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "0": {
+                                        "thickness": 0.03,
+                                        "material": {
+                                            "name": "oak_old",
+                                            "density": 740.46,
+                                            "thermal_conduc": 0.18,
+                                            "heat_capac": 1.6,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "storey_1": {
+                        "area": 159.20861405343825,
+                        "volume": 397.9080273398396,
+                        "use_conditions": {
+                            "usage": "Living",
+                            "typical_length": 3.0,
+                            "typical_width": 6.0,
+                            "with_heating": true,
+                            "with_ideal_thresholds": false,
+                            "T_threshold_heating": 288.15,
+                            "T_threshold_cooling": 295.15,
+                            "with_cooling": false,
+                            "fixed_heat_flow_rate_persons": 70,
+                            "activity_degree_persons": 1.2,
+                            "persons": 0.02,
+                            "internal_gains_moisture_no_people": 0.5,
+                            "ratio_conv_rad_persons": 0.5,
+                            "machines": 2.0,
+                            "ratio_conv_rad_machines": 0.75,
+                            "lighting_power": 7.0,
+                            "ratio_conv_rad_lighting": 0.5,
+                            "use_constant_infiltration": true,
+                            "infiltration_rate": 0.2,
+                            "max_user_infiltration": 1.0,
+                            "max_overheating_infiltration": [
+                                3.0,
+                                2.0
+                            ],
+                            "max_summer_infiltration": [
+                                1.0,
+                                283.15,
+                                290.15
+                            ],
+                            "winter_reduction_infiltration": [
+                                0.2,
+                                273.15,
+                                283.15
+                            ],
+                            "min_ahu": 0.3,
+                            "max_ahu": 0.6,
+                            "with_ahu": false,
+                            "heating_profile": [
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15
+                            ],
+                            "cooling_profile": [
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15,
+                                294.15
+                            ],
+                            "persons_profile": [
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.8,
+                                0.6,
+                                0.4,
+                                0.4,
+                                0.4,
+                                0.6,
+                                0.8,
+                                0.6,
+                                0.4,
+                                0.4,
+                                0.6,
+                                0.8,
+                                0.8,
+                                0.8,
+                                0.8,
+                                1.0,
+                                1.0,
+                                1.0
+                            ],
+                            "machines_profile": [
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.1,
+                                0.5,
+                                1.0,
+                                0.5,
+                                0.5,
+                                0.5,
+                                1.0,
+                                1.0,
+                                0.5,
+                                0.5,
+                                0.5,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.5,
+                                0.5,
+                                0.5,
+                                0.1
+                            ],
+                            "lighting_profile": [
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0
+                            ]
+                        },
+                        "outer_walls": {
+                            "wall_ID_3221F79B29564630A3ED200C07339FCA_storey_1_90_243_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 1.3958777473647628,
+                                "tilt": 90.0,
+                                "orientation": 243,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.005,
+                                        "material": {
+                                            "name": "KalkputzGlattputz05cm",
+                                            "density": 1400.0,
+                                            "thermal_conduc": 0.7,
+                                            "heat_capac": 0.96,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.015,
+                                        "material": {
+                                            "name": "NormalmrtelDickschichtputz15cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.0,
+                                            "heat_capac": 0.8,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.29,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen29cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.2,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "Luftschichttrocken2cm",
+                                            "density": 1.188,
+                                            "thermal_conduc": 0.114,
+                                            "heat_capac": 1.007,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "4": {
+                                        "thickness": 0.11,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen11cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 0.87,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "wall_ID_29E5A1CEACFE4029A7E004BB1BCEDEDC_storey_1_90_333_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 34.00445505151268,
+                                "tilt": 90.0,
+                                "orientation": 333,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.004,
+                                        "material": {
+                                            "name": "KalkputzGlattputz04cm",
+                                            "density": 1400.0,
+                                            "thermal_conduc": 0.7,
+                                            "heat_capac": 0.96,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.015,
+                                        "material": {
+                                            "name": "NormalmrtelDickschichtputz15cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.0,
+                                            "heat_capac": 0.8,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.301,
+                                        "material": {
+                                            "name": "NaturbimsHohlblock301cm",
+                                            "density": 1200.0,
+                                            "thermal_conduc": 0.66,
+                                            "heat_capac": 0.8,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.117,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen117cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 0.87,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "wall_ID_92348F00CF394570AD9669B8AB944B84_storey_1_90_153_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 32.294091062899135,
+                                "tilt": 90.0,
+                                "orientation": 153,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.005,
+                                        "material": {
+                                            "name": "KalkputzGlattputz05cm",
+                                            "density": 1400.0,
+                                            "thermal_conduc": 0.7,
+                                            "heat_capac": 0.96,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.015,
+                                        "material": {
+                                            "name": "NormalmrtelDickschichtputz15cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.0,
+                                            "heat_capac": 0.8,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.29,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen29cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.2,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "Luftschichttrocken2cm",
+                                            "density": 1.188,
+                                            "thermal_conduc": 0.114,
+                                            "heat_capac": 1.007,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "4": {
+                                        "thickness": 0.11,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen11cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 0.87,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "wall_ID_F5586D9A9E5D410DAF42EB31C5BAD571_storey_1_90_63_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 30.404423156163865,
+                                "tilt": 90.0,
+                                "orientation": 63,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.005,
+                                        "material": {
+                                            "name": "KalkputzGlattputz05cm",
+                                            "density": 1400.0,
+                                            "thermal_conduc": 0.7,
+                                            "heat_capac": 0.96,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.015,
+                                        "material": {
+                                            "name": "NormalmrtelDickschichtputz15cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.0,
+                                            "heat_capac": 0.8,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.29,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen29cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.2,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "Luftschichttrocken2cm",
+                                            "density": 1.188,
+                                            "thermal_conduc": 0.114,
+                                            "heat_capac": 1.007,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "4": {
+                                        "thickness": 0.11,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen11cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 0.87,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "wall_ID_3221F79B29564630A3ED200C07339FCA_storey_1_90_243_2": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 0.0861209921253324,
+                                "tilt": 90.0,
+                                "orientation": 243,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.005,
+                                        "material": {
+                                            "name": "KalkputzGlattputz05cm",
+                                            "density": 1400.0,
+                                            "thermal_conduc": 0.7,
+                                            "heat_capac": 0.96,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.015,
+                                        "material": {
+                                            "name": "NormalmrtelDickschichtputz15cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.0,
+                                            "heat_capac": 0.8,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.29,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen29cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.2,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "Luftschichttrocken2cm",
+                                            "density": 1.188,
+                                            "thermal_conduc": 0.114,
+                                            "heat_capac": 1.007,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "4": {
+                                        "thickness": 0.11,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen11cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 0.87,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "wall_ID_29E5A1CEACFE4029A7E004BB1BCEDEDC_storey_1_90_333_2": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 2.097961237111322,
+                                "tilt": 90.0,
+                                "orientation": 333,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.004,
+                                        "material": {
+                                            "name": "KalkputzGlattputz04cm",
+                                            "density": 1400.0,
+                                            "thermal_conduc": 0.7,
+                                            "heat_capac": 0.96,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.015,
+                                        "material": {
+                                            "name": "NormalmrtelDickschichtputz15cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.0,
+                                            "heat_capac": 0.8,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.301,
+                                        "material": {
+                                            "name": "NaturbimsHohlblock301cm",
+                                            "density": 1200.0,
+                                            "thermal_conduc": 0.66,
+                                            "heat_capac": 0.8,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.117,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen117cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 0.87,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "wall_ID_92348F00CF394570AD9669B8AB944B84_storey_1_90_153_2": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 1.9924374948832366,
+                                "tilt": 90.0,
+                                "orientation": 153,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.005,
+                                        "material": {
+                                            "name": "KalkputzGlattputz05cm",
+                                            "density": 1400.0,
+                                            "thermal_conduc": 0.7,
+                                            "heat_capac": 0.96,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.015,
+                                        "material": {
+                                            "name": "NormalmrtelDickschichtputz15cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.0,
+                                            "heat_capac": 0.8,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.29,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen29cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.2,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "Luftschichttrocken2cm",
+                                            "density": 1.188,
+                                            "thermal_conduc": 0.114,
+                                            "heat_capac": 1.007,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "4": {
+                                        "thickness": 0.11,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen11cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 0.87,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "wall_ID_F5586D9A9E5D410DAF42EB31C5BAD571_storey_1_90_63_2": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 1.8758513001232204,
+                                "tilt": 90.0,
+                                "orientation": 63,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.005,
+                                        "material": {
+                                            "name": "KalkputzGlattputz05cm",
+                                            "density": 1400.0,
+                                            "thermal_conduc": 0.7,
+                                            "heat_capac": 0.96,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.015,
+                                        "material": {
+                                            "name": "NormalmrtelDickschichtputz15cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.0,
+                                            "heat_capac": 0.8,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.29,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen29cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.2,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "Luftschichttrocken2cm",
+                                            "density": 1.188,
+                                            "thermal_conduc": 0.114,
+                                            "heat_capac": 1.007,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "4": {
+                                        "thickness": 0.11,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen11cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 0.87,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "wall_ID_3221F79B29564630A3ED200C07339FCA_storey_1_90_243_3": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 32.1997006112,
+                                "tilt": 90.0,
+                                "orientation": 243,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.005,
+                                        "material": {
+                                            "name": "KalkputzGlattputz05cm",
+                                            "density": 1400.0,
+                                            "thermal_conduc": 0.7,
+                                            "heat_capac": 0.96,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.015,
+                                        "material": {
+                                            "name": "NormalmrtelDickschichtputz15cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.0,
+                                            "heat_capac": 0.8,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.29,
+                                        "material": {
+                                            "name": "NaturbimsHohlblock29cm",
+                                            "density": 1200.0,
+                                            "thermal_conduc": 0.66,
+                                            "heat_capac": 0.8,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "Luftschichttrocken2cm",
+                                            "density": 1.188,
+                                            "thermal_conduc": 0.114,
+                                            "heat_capac": 1.007,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "4": {
+                                        "thickness": 0.11,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen11cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 0.87,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "doors": {},
+                        "rooftops": {
+                            "roof_ID_99039A1669984020A103C0299EF81D2D_storey_1_48_251_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 21.590845904644723,
+                                "tilt": 48.0,
+                                "orientation": 251,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 5.0,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "Gipswandplatten2cm",
+                                            "density": 900.0,
+                                            "thermal_conduc": 0.25,
+                                            "heat_capac": 0.84,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.13,
+                                        "material": {
+                                            "name": "Mineralwolle_XYcm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 0.06,
+                                            "heat_capac": 0.95,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "Dachziegel_2cm",
+                                            "density": 2600.0,
+                                            "thermal_conduc": 2.3,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.4,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "roof_ID_8F350ED0BE2945ADAAE443B0DF1570ED_storey_1_49_71_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 21.99865510533169,
+                                "tilt": 49.0,
+                                "orientation": 71,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 5.0,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "Gipswandplatten2cm",
+                                            "density": 900.0,
+                                            "thermal_conduc": 0.25,
+                                            "heat_capac": 0.84,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.13,
+                                        "material": {
+                                            "name": "Mineralwolle_XYcm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 0.06,
+                                            "heat_capac": 0.95,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "Dachziegel_2cm",
+                                            "density": 2600.0,
+                                            "thermal_conduc": 2.3,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.4,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "ground_floors": {},
+                        "windows": {
+                            "window_1338ED9098AD431D928DAB7D62328F18_90_333_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 2.1530912942190277,
+                                "tilt": 90.0,
+                                "orientation": 333,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "g_value": 0.6,
+                                "a_conv": 0.02,
+                                "shading_g_total": 0.0,
+                                "shading_max_irr": 0.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.27079999999999993,
+                                        "material": {
+                                            "name": "glas_generic",
+                                            "density": 0.0,
+                                            "thermal_conduc": 0.76,
+                                            "heat_capac": 0.0,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "window_34F41DFF033549859C89E53690934653_90_333_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 1.1254264071526683,
+                                "tilt": 90.0,
+                                "orientation": 333,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "g_value": 0.6,
+                                "a_conv": 0.02,
+                                "shading_g_total": 0.0,
+                                "shading_max_irr": 0.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.27079999999999993,
+                                        "material": {
+                                            "name": "glas_generic",
+                                            "density": 0.0,
+                                            "thermal_conduc": 0.76,
+                                            "heat_capac": 0.0,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "window_6C61038A30DF45FFB832D72EB6F3F603_90_333_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 1.0794756746292478,
+                                "tilt": 90.0,
+                                "orientation": 333,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "g_value": 0.6,
+                                "a_conv": 0.02,
+                                "shading_g_total": 0.0,
+                                "shading_max_irr": 0.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.27079999999999993,
+                                        "material": {
+                                            "name": "glas_generic",
+                                            "density": 0.0,
+                                            "thermal_conduc": 0.76,
+                                            "heat_capac": 0.0,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "window_FF47A1B8799040E5B14078B5213E4267_90_333_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 1.0817952033780482,
+                                "tilt": 90.0,
+                                "orientation": 333,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "g_value": 0.6,
+                                "a_conv": 0.02,
+                                "shading_g_total": 0.0,
+                                "shading_max_irr": 0.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.27079999999999993,
+                                        "material": {
+                                            "name": "glas_generic",
+                                            "density": 0.0,
+                                            "thermal_conduc": 0.76,
+                                            "heat_capac": 0.0,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "window_6A6AB28B07D8492B914AF196DD25231C_90_333_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 0.8416591693231069,
+                                "tilt": 90.0,
+                                "orientation": 333,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "g_value": 0.6,
+                                "a_conv": 0.02,
+                                "shading_g_total": 0.0,
+                                "shading_max_irr": 0.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.27079999999999993,
+                                        "material": {
+                                            "name": "glas_generic",
+                                            "density": 0.0,
+                                            "thermal_conduc": 0.76,
+                                            "heat_capac": 0.0,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "window_D9BBD9F0A379406BA159503576072D5C_90_153_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 2.952355843263607,
+                                "tilt": 90.0,
+                                "orientation": 153,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "g_value": 0.6,
+                                "a_conv": 0.02,
+                                "shading_g_total": 0.0,
+                                "shading_max_irr": 0.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.27079999999999993,
+                                        "material": {
+                                            "name": "glas_generic",
+                                            "density": 0.0,
+                                            "thermal_conduc": 0.76,
+                                            "heat_capac": 0.0,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "window_905E3C528338410DB7EC8D52F24CC86F_90_153_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 0.39957912185457434,
+                                "tilt": 90.0,
+                                "orientation": 153,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "g_value": 0.6,
+                                "a_conv": 0.02,
+                                "shading_g_total": 0.0,
+                                "shading_max_irr": 0.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.27079999999999993,
+                                        "material": {
+                                            "name": "glas_generic",
+                                            "density": 0.0,
+                                            "thermal_conduc": 0.76,
+                                            "heat_capac": 0.0,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "window_2784A81D841E4261878CEB0C16BC5166_90_153_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 2.3551941637741622,
+                                "tilt": 90.0,
+                                "orientation": 153,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "g_value": 0.6,
+                                "a_conv": 0.02,
+                                "shading_g_total": 0.0,
+                                "shading_max_irr": 0.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.27079999999999993,
+                                        "material": {
+                                            "name": "glas_generic",
+                                            "density": 0.0,
+                                            "thermal_conduc": 0.76,
+                                            "heat_capac": 0.0,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "window_04A1C9DE66584BF3B879D60CF13DF0DA_90_153_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 2.2875988300433447,
+                                "tilt": 90.0,
+                                "orientation": 153,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "g_value": 0.6,
+                                "a_conv": 0.02,
+                                "shading_g_total": 0.0,
+                                "shading_max_irr": 0.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.27079999999999993,
+                                        "material": {
+                                            "name": "glas_generic",
+                                            "density": 0.0,
+                                            "thermal_conduc": 0.76,
+                                            "heat_capac": 0.0,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            },
+                            "window_9F9A1D3F037C4D7DBC685FD627F5D92B_90_63_1": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 1.469956978567883,
+                                "tilt": 90.0,
+                                "orientation": 63,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 20.0,
+                                "g_value": 0.6,
+                                "a_conv": 0.02,
+                                "shading_g_total": 0.0,
+                                "shading_max_irr": 0.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.27079999999999993,
+                                        "material": {
+                                            "name": "glas_generic",
+                                            "density": 0.0,
+                                            "thermal_conduc": 0.76,
+                                            "heat_capac": 0.0,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "inner_walls": {
+                            "InnerWall": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 132.74215581488374,
+                                "tilt": 90.0,
+                                "orientation": 0.0,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 2.7,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.015,
+                                        "material": {
+                                            "name": "NormalmrtelDickschichtputz15cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.0,
+                                            "heat_capac": 0.8,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.09,
+                                        "material": {
+                                            "name": "ZiegelmauerwerkmitFugen_Innenwand",
+                                            "density": 1200.0,
+                                            "thermal_conduc": 0.87,
+                                            "heat_capac": 0.836,
+                                            "solar_absorp": 0.6,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.015,
+                                        "material": {
+                                            "name": "NormalmrtelDickschichtputz15cm",
+                                            "density": 1800.0,
+                                            "thermal_conduc": 1.0,
+                                            "heat_capac": 0.8,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "floors": {
+                            "Floor": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 66.15407513491138,
+                                "tilt": 0.0,
+                                "orientation": -2,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 1.7000000000000002,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.191,
+                                        "material": {
+                                            "name": "Normalbeton_191cm",
+                                            "density": 2400.0,
+                                            "thermal_conduc": 2.1,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.01,
+                                        "material": {
+                                            "name": "HolzbodenEiche_1cm",
+                                            "density": 800.0,
+                                            "thermal_conduc": 0.2,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.005,
+                                        "material": {
+                                            "name": "Teppich_05cm",
+                                            "density": 1000.0,
+                                            "thermal_conduc": 0.24,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "ceilings": {
+                            "Ceiling": {
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 66.15407513491138,
+                                "tilt": 0.0,
+                                "orientation": -1,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 1.7000000000000002,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.005,
+                                        "material": {
+                                            "name": "Teppich_05cm",
+                                            "density": 1000.0,
+                                            "thermal_conduc": 0.24,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.01,
+                                        "material": {
+                                            "name": "HolzbodenEiche_1cm",
+                                            "density": 800.0,
+                                            "thermal_conduc": 0.2,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.191,
+                                        "material": {
+                                            "name": "Normalbeton_191cm",
+                                            "density": 2400.0,
+                                            "thermal_conduc": 2.1,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+                        },
+						"interzonal_walls": {},
+                        "interzonal_floors": {
+                            "floor_B58E2762469D4DB88AF1AE8B139901C3": {
+                                "other_side": "basement",
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "tabula_standard_1_SFH",
+                                "area": 79.60430702671913,
+                                "tilt": 0.0,
+                                "orientation": -1,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 0.9,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 0.9,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.03,
+                                        "material": {
+                                            "name": "oak_old",
+                                            "density": 740.46,
+                                            "thermal_conduc": 0.18,
+                                            "heat_capac": 1.6,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "1": {
+                                        "thickness": 0.04,
+                                        "material": {
+                                            "name": "cement_floating_screed_1_middle",
+                                            "density": 1940.0,
+                                            "thermal_conduc": 1.4,
+                                            "heat_capac": 1.0,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "2": {
+                                        "thickness": 0.011,
+                                        "material": {
+                                            "name": "EPS_perimeter_insulation_top_layer",
+                                            "density": 39.5,
+                                            "thermal_conduc": 0.035,
+                                            "heat_capac": 1.45,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    },
+                                    "3": {
+                                        "thickness": 0.16,
+                                        "material": {
+                                            "name": "concrete",
+                                            "density": 2104.2,
+                                            "thermal_conduc": 1.9375,
+                                            "heat_capac": 0.7758458,
+                                            "solar_absorp": 0.5,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+						},
+                        "interzonal_ceilings": {
+                            "floor_4C797480FF814849944536D7EDE2A122_1": {
+                                "other_side": "attic",
+                                "year_of_construction": 1965,
+                                "year_of_retrofit": null,
+                                "construction_type": "custom",
+                                "area": 1.6167606471475966,
+                                "tilt": 0.0,
+                                "orientation": -1,
+                                "inner_radiation": 5.0,
+                                "inner_convection": 5.0,
+                                "outer_radiation": 5.0,
+                                "outer_convection": 5.0,
+                                "layer": {
+                                    "0": {
+                                        "thickness": 0.02,
+                                        "material": {
+                                            "name": "Gipswandplatten2cm",
+                                            "density": 900.0,
+                                            "thermal_conduc": 0.25,
+                                            "heat_capac": 0.84,
+                                            "solar_absorp": 0.7,
+                                            "ir_emissivity": 0.9
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -434,7 +434,7 @@ class Wall(BuildingElement):
         else:
             calc_u = np.inf
 
-        if self.ua_value < calc_u:
+        if self.ua_value > calc_u:
             self.insulate_wall(material, add_at_position=insulation_layer_index)
 
             r_conduc = 0
