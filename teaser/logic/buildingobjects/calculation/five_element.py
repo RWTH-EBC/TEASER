@@ -760,7 +760,7 @@ class FiveElement(object):
             'iw' uses r1 and c1 (function falls back here for other strings)
             'izw_backwards' uses r2 and c1_korr because heat flow goes towards
                 this thermalzone (instead of away from it) for interzonal
-                elements between heated and unhetaed zones
+                elements between heated and unheated zones
 
         Returns
         ----------

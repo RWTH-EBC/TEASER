@@ -132,6 +132,15 @@ class Wall(BuildingElement):
         nr_of_layer, density, thermal_conduc, heat_capac, thickness = \
             self.gather_element_properties()
 
+        if type(self).__name__.startswith("Interzonal") \
+                and self.other_side is not None:
+            if (not self.parent.use_conditions.with_heating and
+                    self.other_side.use_conditions.with_heating):
+                density = density[-1::-1]
+                thermal_conduc = thermal_conduc[-1::-1]
+                heat_capac = heat_capac[-1::-1]
+                thickness = thickness[-1::-1]
+
         omega = 2 * np.pi / (86400 * t_bt)
 
         r_layer = thickness / thermal_conduc
@@ -214,15 +223,16 @@ class Wall(BuildingElement):
 
         r_wall = self.r1 + self.r2 + self.r3
 
-        if type(self).__name__.startswith("Interzonal") \
-                and self.other_side is not None:
-            if (not self.parent.use_conditions.with_heating and
-                    self.other_side.use_conditions.with_heating):
-                r_for_c1_korr = self.r2
-            else:
-                r_for_c1_korr = self.r1
-        else:
-            r_for_c1_korr = self.r1
+        # if type(self).__name__.startswith("Interzonal") \
+        #         and self.other_side is not None:
+        #     if (not self.parent.use_conditions.with_heating and
+        #             self.other_side.use_conditions.with_heating):
+        #         r_for_c1_korr = self.r2
+        #     else:
+        #         r_for_c1_korr = self.r1
+        # else:
+        #     r_for_c1_korr = self.r1
+        r_for_c1_korr = self.r1
 
         self.c1_korr = (1 / (omega * r_for_c1_korr)) \
                        * ((r_wall * self.area
@@ -362,7 +372,7 @@ class Wall(BuildingElement):
         use_u_value_standards_of = type(self).__name__
         if type(self).__name__.startswith("Interzonal") \
                 and self.other_side is not None:
-            if (self.parent.use_conditions.with_heating and
+            if (self.parent.use_conditions.with_heating is
                     self.other_side.use_conditions.with_heating):
                 use_u_value_standards_of = "InnerWall"
             elif (not self.parent.use_conditions.with_heating and

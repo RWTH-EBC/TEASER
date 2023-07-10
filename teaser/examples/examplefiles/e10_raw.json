@@ -1,7 +1,7 @@
 {
     "project": {
         "version": "0.7",
-        "name": "TEASER_example_10",
+        "name": "Example_e10",
         "weather_file_path": "",
         "number_of_elements_calc": 5,
         "merge_windows_calc": false,

@@ -2461,35 +2461,65 @@ class Test_teaser(object):
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         therm_zone.outer_walls[0].retrofit_wall(1980, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 2) == 4.13
-        prj.set_default()
+        prj.set_default(load_data=True)
         helptest.building_test2(prj)
         helptest.interzonal_test2(prj, connect_to_index=0, add_heated=False)
         helptest.interzonal_test2(prj, connect_to_index=0, add_heated=True)
         therm_zone_heated = prj.buildings[-1].thermal_zones[0]
         therm_zone_unheated = prj.buildings[-1].thermal_zones[1]
+        second_heated_zone = prj.buildings[-1].thermal_zones[2]
+        assert therm_zone_heated.use_conditions.with_heating is True
+        assert therm_zone_unheated.use_conditions.with_heating is False
+        assert second_heated_zone.use_conditions.with_heating is True
         therm_zone_other_heated = prj.buildings[-1].thermal_zones[2]
         for interzonal_element in therm_zone_heated.interzonal_walls:
+            previous_ua_value = interzonal_element.ua_value
             interzonal_element.retrofit_wall(2015, "EPS_040_15")
             if interzonal_element.other_side is therm_zone_unheated:
-                assert round(interzonal_element.ua_value, 2) == 0.24 * interzonal_element.area
+                assert (round(interzonal_element.ua_value, 2)
+                        == 0.24 * interzonal_element.area)
+                assert (interzonal_element.layer[-1].material.name
+                        == "EPS_040_15")
+            if interzonal_element.other_side is second_heated_zone:
+                assert (round(interzonal_element.ua_value, 2)
+                        == round(previous_ua_value, 2))
         for interzonal_element in therm_zone_heated.interzonal_ceilings:
+            previous_ua_value = interzonal_element.ua_value
             interzonal_element.retrofit_wall(2015, "EPS_040_15")
             if interzonal_element.other_side is therm_zone_unheated:
-                assert round(interzonal_element.ua_value, 2) == 0.3 * interzonal_element.area
+                assert (round(interzonal_element.ua_value, 2)
+                        == 0.2 * interzonal_element.area)
+                assert (interzonal_element.layer[-1].material.name
+                        == "EPS_040_15")
+            if interzonal_element.other_side is second_heated_zone:
+                assert (round(interzonal_element.ua_value, 2)
+                        == round(previous_ua_value, 2))
         for interzonal_element in therm_zone_heated.interzonal_floors:
+            previous_ua_value = interzonal_element.ua_value
             interzonal_element.retrofit_wall(2015, "EPS_040_15")
             if interzonal_element.other_side is therm_zone_unheated:
-                assert round(interzonal_element.ua_value, 2) == 0.2 * interzonal_element.area
+                assert (round(interzonal_element.ua_value, 2)
+                        == 0.3 * interzonal_element.area)
+                assert (interzonal_element.layer[-1].material.name
+                        == "EPS_040_15")
+            if interzonal_element.other_side is second_heated_zone:
+                assert (round(interzonal_element.ua_value, 2)
+                        == round(previous_ua_value, 2))
         for interzonal_element in therm_zone_unheated.interzonal_walls:
             interzonal_element.retrofit_wall(2015, "EPS_040_15")
-            assert round(interzonal_element.ua_value, 2) == 4.13
+            assert (round(interzonal_element.ua_value, 2)
+                    == 0.24 * interzonal_element.area)
+            assert interzonal_element.layer[0].material.name == "EPS_040_15"
         for interzonal_element in therm_zone_unheated.interzonal_ceilings:
             interzonal_element.retrofit_wall(2015, "EPS_040_15")
-            assert round(interzonal_element.ua_value, 2) == 4.13
+            assert (round(interzonal_element.ua_value, 2)
+                    == 0.3 * interzonal_element.area)
+            assert interzonal_element.layer[0].material.name == "EPS_040_15"
         for interzonal_element in therm_zone_unheated.interzonal_floors:
             interzonal_element.retrofit_wall(2015, "EPS_040_15")
-            assert round(interzonal_element.ua_value, 2) == 4.13
-        # todo test that interzonals are correctly retrofitted (u-value, layer position, retrofitted at all)
+            assert (round(interzonal_element.ua_value, 2)
+                    == 0.2 * interzonal_element.area)
+            assert interzonal_element.layer[0].material.name == "EPS_040_15"
 
     def test_interzonal_type_element(self):
         prj.set_default(load_data=True)
@@ -2570,12 +2600,12 @@ class Test_teaser(object):
         """test of FiveElement calculator"""
         prj.set_default()
         helptest.building_test2(prj)
-        helptest.interzonal_test2(prj)
-        # todo add another heated zone
+        helptest.interzonal_test2(prj, connect_to_index=0, add_heated=False)
+        helptest.interzonal_test2(prj, connect_to_index=0, add_heated=True)
 
         from teaser.logic.buildingobjects.calculation.five_element import FiveElement
 
-        therm_zone = prj.buildings[-1].thermal_zones[-1]
+        therm_zone = prj.buildings[0].thermal_zones[0]
 
         calc_attr = FiveElement(therm_zone, merge_windows=True, t_bt=5)
 
@@ -2602,25 +2632,64 @@ class Test_teaser(object):
         calc_attr._sum_interzonal_elements()
 
         # interzonal elements (lumping wall and floor)
-        assert len(calc_attr.nzbs_per_nz) == 1
-        assert len(calc_attr.nzbs_per_nz[-1]) == 2
+        assert len(calc_attr.nzbs_per_nz) == 2
+        assert len(calc_attr.nzbs_per_nz[0]) == 2
         assert round(calc_attr.ua_value_nzb[0], 16) == 8.615411975711941
+        assert round(calc_attr.ua_value_nzb[1], 16) == 10.9827415998065
         assert round(calc_attr.area_nzb[0], 1) == 20.0
+        assert round(calc_attr.area_nzb[1], 1) == 20.0
         assert round(calc_attr.r_conv_inner_nzb[0], 19) == 0.022727272727272728
         assert round(calc_attr.r_rad_inner_nzb[0], 4) == 0.01
+        assert round(calc_attr.r_conv_inner_nzb[1], 19) == 0.022727272727272728
+        assert round(calc_attr.r_rad_inner_nzb[1], 4) == 0.01
         assert round(calc_attr.r_comb_inner_nzb[0], 19) == 0.006944444444444444
         assert round(calc_attr.r_conv_outer_nzb[0], 5) == 0.02273
+        assert round(calc_attr.r_comb_inner_nzb[1], 19) == 0.006944444444444444
+        assert round(calc_attr.r_conv_outer_nzb[1], 5) == 0.02273
         assert round(calc_attr.r_rad_outer_nzb[0], 4) == 0.01
         assert round(calc_attr.r_comb_outer_nzb[0], 4) == 0.0069
+        assert round(calc_attr.r_rad_outer_nzb[1], 4) == 0.01
+        assert round(calc_attr.r_comb_outer_nzb[1], 4) == 0.0069
         assert round(calc_attr.alpha_conv_inner_nzb[0], 1) == 2.2
+        assert round(calc_attr.alpha_conv_inner_nzb[1], 1) == 2.2
         assert round(calc_attr.alpha_comb_outer_nzb[0], 1) == 7.2
+        assert round(calc_attr.alpha_comb_outer_nzb[1], 1) == 7.2
         assert round(calc_attr.alpha_conv_outer_nzb[0], 1) == 2.2
+        assert round(calc_attr.alpha_conv_outer_nzb[1], 1) == 2.2
         assert round(calc_attr.ir_emissivity_outer_nzb[0], 3) == 0.9
+        assert round(calc_attr.ir_emissivity_outer_nzb[1], 3) == 0.9
+
+        prj.number_of_elements_calc = 5
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings(raise_errors=True)
+
+        therm_zone_1 = prj.buildings[0].thermal_zones[1]
+        therm_zone_2 = prj.buildings[0].thermal_zones[2]
+
+        calc_attr = therm_zone.model_attr
+        calc_attr_1 = therm_zone_1.model_attr
+        calc_attr_2 = therm_zone_2.model_attr
+
+        # check that attributes of the elements match if they represent the
+        # same physical element
+        assert calc_attr.other_nz_indexes[0] == 1
+        assert calc_attr.other_nz_indexes[1] == 2
+        assert round(calc_attr.r_total_nzb[0], 5) == round(calc_attr_1.r_total_nzb[0], 5)
+        assert round(calc_attr.r_total_nzb[1], 5) == round(calc_attr_2.r_total_nzb[0], 5)
+        assert round(calc_attr.r1_nzb[0], 5) == round(calc_attr_1.r_rest_nzb[0], 5)
+        assert round(calc_attr.r1_nzb[1], 5) == round(calc_attr_2.r_rest_nzb[0], 5)
+        assert round(calc_attr.r_rest_nzb[0], 5) == round(calc_attr_1.r1_nzb[0], 5)
+        assert round(calc_attr.r_rest_nzb[1], 5) == round(calc_attr_2.r1_nzb[0], 5)
 
     def test_calc_chain_matrix_five(self):
         """test of calc_chain_matrix"""
         from teaser.logic.buildingobjects.calculation.five_element \
             import FiveElement
+
+        prj.set_default()
+        helptest.building_test2(prj)
+        helptest.interzonal_test2(prj, connect_to_index=0, add_heated=False)
 
         therm_zone = prj.buildings[-1].thermal_zones[-2]
 
