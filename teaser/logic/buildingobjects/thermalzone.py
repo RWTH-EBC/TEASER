@@ -334,22 +334,23 @@ class ThermalZone(object):
                 pass
         return elements
 
-    def find_izes(self, orientation, tilt, other_side_heating=None):
-        """Returns all outer walls with given orientation and tilt
+    def find_izes_outer(self, orientation=None, tilt=None, add_reversed=False):
+        """Returns all interzonal elements with given orientation and tilt
 
         This function returns a list of all InterzonalWall, InterzonalCeiling
-        and InterzonalFloor elements with the same orientation and tilt and,
-        if desired, a certain with_heating state of the neighboured zone.
+        and InterzonalFloor elements that are to be lumped with outer elements
+        or exported as borders to adjacent zones, optionally reduced to those
+        with given orientation and tilt.
 
         Parameters
         ----------
         orientation : float [degree]
-            Azimuth of the desired walls.
+            Azimuth of the desired elements.
         tilt : float [degree]
-            Tilt against the horizontal of the desired walls.
-        other_side_heating : Boolean
-            checks the use_conditions.with_heating parameter of the other side.
-            if None, all interzonal elements are returned
+            Tilt against the horizontal of the desired elements.
+        add_reversed : bool
+            also consider the elements with method_interzonal_export
+            'outer_reversed' (only for lumping to borders with adjacent zones)
 
         Returns
         -------
@@ -359,16 +360,12 @@ class ThermalZone(object):
         """
         elements = []
         for i in self.interzonal_elements:
-            if i.orientation == orientation and i.tilt == tilt:
-                if other_side_heating is None:
-                    elements.append(i)
-                elif (
-                        i.other_side.use_conditions.with_heating
-                        == other_side_heating
+            if ((i.orientation == orientation or orientation is None)
+                    and (i.tilt == tilt or tilt is None)):
+                if i.interzonal_type_export == 'outer_ordered' or (
+                        add_reversed and i.interzonal_type_export == 'outer_reversed'
                 ):
                     elements.append(i)
-                else:
-                    pass
             else:
                 pass
         return elements

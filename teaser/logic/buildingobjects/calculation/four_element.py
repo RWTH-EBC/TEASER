@@ -580,7 +580,7 @@ class FourElement(object):
 
     def calc_attributes(self):
         """Calls all necessary function to calculate model attributes"""
-        for out_wall in self.thermal_zone.outer_walls + self.nzbs_for_ow:
+        for out_wall in self.thermal_zone.outer_walls + self.thermal_zone.find_izes_outer():
             out_wall.calc_equivalent_res()
             out_wall.calc_ua_value()
         for rt in self.thermal_zone.rooftops:
@@ -602,7 +602,7 @@ class FourElement(object):
             inner_wall.calc_ua_value()
 
         self.set_calc_default()
-        if len(self.thermal_zone.outer_walls + self.nzbs_for_ow) < 1:
+        if len(self.thermal_zone.outer_walls + self.thermal_zone.find_izes_outer()) < 1:
             warnings.warn(
                 "No walls are defined as outer walls for thermal "
                 + "zone "
@@ -668,20 +668,21 @@ class FourElement(object):
         if (
                 len(self.thermal_zone.outer_walls) >= 1
                 or len(self.thermal_zone.windows) >= 1
-                or len(self.nzbs_for_ow) >= 1
+                or len(self.thermal_zone.find_izes_outer()) >= 1
         ):
             self._calc_outer_elements()
             self._calc_wf()
             self._calc_mean_values()
-        if len(self.nzbs_for_ow) >= 1:
+        if len(self.thermal_zone.interzonal_elements) >= 1:
             warnings.warn(
                 "For thermal zone "
                 + self.thermal_zone.name
                 + " in building "
                 + self.thermal_zone.parent.name
-                + ", interzonal elements bordering unheated neighboured zones "
-                + "have been defined. FourElement export will treat them as "
-                + "outer walls. Consider using FiveElement instead."
+                + ", interzonal elements have been defined. FourElement export "
+                + "will treat them as outer walls or inner walls depending on "
+                + "the project parameter 'method_interzonal_export'. Consider "
+                + "using FiveElement instead."
             )
         self._calc_number_of_elements()
         self._fill_zone_lists()
@@ -768,7 +769,7 @@ class FourElement(object):
 
         """
 
-        outer_walls = self.thermal_zone.outer_walls + self.nzbs_for_ow
+        outer_walls = self.thermal_zone.outer_walls + self.thermal_zone.find_izes_outer()
 
         self.area_ow = sum(out_wall.area for out_wall in outer_walls)
 
@@ -1137,7 +1138,7 @@ class FourElement(object):
 
         omega = 2 * math.pi / 86400 / self.t_bt
 
-        outer_walls = self.thermal_zone.outer_walls + self.nzbs_for_ow
+        outer_walls = self.thermal_zone.outer_walls + self.thermal_zone.find_izes_outer()
 
         if 0 < len(outer_walls) <= 1:
             # only one outer wall, no need to calculate chain matrix
@@ -1361,7 +1362,7 @@ class FourElement(object):
 
         if self.merge_windows is True:
 
-            for wall in self.thermal_zone.outer_walls + self.nzbs_for_ow:
+            for wall in self.thermal_zone.outer_walls + self.thermal_zone.find_izes_outer():
                 wall.wf_out = wall.ua_value / (self.ua_value_ow + self.ua_value_win)
 
             for win in self.thermal_zone.windows:
@@ -1372,7 +1373,7 @@ class FourElement(object):
 
         elif self.merge_windows is False:
 
-            for wall in self.thermal_zone.outer_walls + self.nzbs_for_ow:
+            for wall in self.thermal_zone.outer_walls + self.thermal_zone.find_izes_outer():
                 wall.wf_out = wall.ua_value / self.ua_value_ow
 
             for win in self.thermal_zone.windows:
@@ -1416,7 +1417,7 @@ class FourElement(object):
 
         outer_elements = (
             self.thermal_zone.outer_walls
-            + self.nzbs_for_ow
+            + self.thermal_zone.find_izes_outer()
             + self.thermal_zone.windows
         )
 
@@ -1440,7 +1441,7 @@ class FourElement(object):
 
         outer_elements = (
             self.thermal_zone.outer_walls
-            + self.nzbs_for_ow
+            + self.thermal_zone.find_izes_outer()
             + self.thermal_zone.windows
         )
 
@@ -1450,11 +1451,11 @@ class FourElement(object):
         tilt_orient = list(set(tilt_orient))
 
         for i in tilt_orient:
-            wall_nzb = self.thermal_zone.find_walls(i[0], i[1])
-            if self.thermal_zone.use_conditions.with_heating:
-                wall_nzb += self.thermal_zone.find_izes(
-                    i[0], i[1], other_side_heating=False
-                )
+            wall_nzb = self.thermal_zone.find_walls(
+                i[0], i[1]
+            ) + self.thermal_zone.find_izes_outer(
+                i[0], i[1]
+            )
             wins = self.thermal_zone.find_wins(i[0], i[1])
 
             if self.merge_windows is True:
@@ -1769,39 +1770,21 @@ class FourElement(object):
         self.cool_load = 0.0
 
     @property
-    def nzbs_for_ow(self):
-        """returns borders to neighboured zones to be considered as outer walls
-
-        Returns
-        -------
-        value : list
-            if this zone is heated: list of those interzonal elements that have
-            an unheated zone on the other side. otherweise: empty list
-
-        """
-        value = []
-        for nzb in self.thermal_zone.interzonal_elements:
-            if not nzb.other_side.use_conditions.with_heating:
-                value.append(nzb)
-        return value
-
-    @property
     def nzbs_for_iw(self):
         """returns borders to neighboured zones to be considered as inner walls
 
         Returns
         -------
         value : list
-            if this zone is heated: list of those interzonal elements that have
-            another heated zone on the other side. otherwise: list of all
-            interzonal elements
+            list of those interzonal elements that are NOT to be treated as
+            'outer_ordered' depending on their 'interzonal_type_export' 
+            attribute
 
         """
-        if self.thermal_zone.use_conditions.with_heating:
-            value = []
-            for nzb in self.thermal_zone.interzonal_elements:
-                if nzb.other_side.use_conditions.with_heating:
-                    value.append(nzb)
-        else:
-            value = self.thermal_zone.interzonal_elements
-        return value
+        elements = []
+        for i in self.thermal_zone.interzonal_elements:
+            if not i.interzonal_type_export == 'outer_ordered':
+                elements.append(i)
+            else:
+                pass
+        return elements

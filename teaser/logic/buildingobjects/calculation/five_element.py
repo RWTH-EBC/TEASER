@@ -669,6 +669,7 @@ class FiveElement(object):
                 self.thermal_zone.inner_walls
                 + self.thermal_zone.floors
                 + self.thermal_zone.ceilings
+                + self.nzbs_for_iw
             )
             < 1
         ):
@@ -683,7 +684,7 @@ class FiveElement(object):
             self._sum_inner_wall_elements()
             self._calc_inner_elements()
         if (
-            len(self.thermal_zone.interzonal_elements)
+            len(self.thermal_zone.find_izes_outer(add_reversed=True))
             < 1
         ):
             warnings.warn(
@@ -735,6 +736,16 @@ class FiveElement(object):
             self._calc_outer_elements()
             self._calc_wf()
             self._calc_mean_values()
+        if self.nzbs_for_iw:
+            warnings.warn(
+                "For thermal zone "
+                + self.thermal_zone.name
+                + " in building "
+                + self.thermal_zone.parent.name
+                + ", interzonal elements have been defined that are treated as "
+                + "inner elements based on your settings to them or the project"
+                + " parameter 'method_interzonal_export'."
+            )
         self._calc_number_of_elements()
         self._fill_zone_lists()
         self._calc_heat_load()
@@ -759,7 +770,7 @@ class FiveElement(object):
             'ow' uses r1 and c1_korr
             'iw' uses r1 and c1 (function falls back here for other strings)
             'izw_backwards' uses r2 and c1_korr because heat flow goes towards
-                this thermalzone (instead of away from it) for interzonal
+                this thermal zone (instead of away from it) for interzonal
                 elements between heated and unheated zones
 
         Returns
@@ -1030,12 +1041,14 @@ class FiveElement(object):
             sum(in_wall.area for in_wall in self.thermal_zone.inner_walls)
             + sum(floor.area for floor in self.thermal_zone.floors)
             + sum(ceiling.area for ceiling in self.thermal_zone.ceilings)
+            + sum(nzb.area for nzb in self.nzbs_for_iw)
         )
 
         self.ua_value_iw = (
             sum(in_wall.ua_value for in_wall in self.thermal_zone.inner_walls)
             + sum(floor.ua_value for floor in self.thermal_zone.floors)
             + sum(ceiling.ua_value for ceiling in self.thermal_zone.ceilings)
+            + sum(nzb.ua_value for nzb in self.nzbs_for_iw)
         )
 
         # values facing the inside of the thermal zone
@@ -1044,18 +1057,21 @@ class FiveElement(object):
             sum(1 / in_wall.r_inner_conv for in_wall in self.thermal_zone.inner_walls)
             + sum(1 / floor.r_inner_conv for floor in self.thermal_zone.floors)
             + sum(1 / ceiling.r_inner_conv for ceiling in self.thermal_zone.ceilings)
+            + sum(1 / nzb.r_inner_conv for nzb in self.nzbs_for_iw)
         )
 
         self.r_rad_inner_iw = 1 / (
             sum(1 / in_wall.r_inner_rad for in_wall in self.thermal_zone.inner_walls)
             + sum(1 / floor.r_inner_rad for floor in self.thermal_zone.floors)
             + sum(1 / ceiling.r_inner_rad for ceiling in self.thermal_zone.ceilings)
+            + sum(1 / nzb.r_inner_rad for nzb in self.nzbs_for_iw)
         )
 
         self.r_comb_inner_iw = 1 / (
             sum(1 / in_wall.r_inner_comb for in_wall in self.thermal_zone.inner_walls)
             + sum(1 / floor.r_inner_comb for floor in self.thermal_zone.floors)
             + sum(1 / ceiling.r_inner_comb for ceiling in self.thermal_zone.ceilings)
+            + sum(1 / nzb.r_inner_comb for nzb in self.nzbs_for_iw)
         )
 
         self.ir_emissivity_inner_iw = (
@@ -1071,13 +1087,15 @@ class FiveElement(object):
                 ceiling.layer[0].material.ir_emissivity * ceiling.area
                 for ceiling in self.thermal_zone.ceilings
             )
+            + sum(
+                nzb.layer[0].material.ir_emissivity * nzb.area
+                for nzb in self.nzbs_for_iw
+            )
         ) / self.area_iw
 
         self.alpha_conv_inner_iw = 1 / (self.r_conv_inner_iw * self.area_iw)
         self.alpha_rad_inner_iw = 1 / (self.r_rad_inner_iw * self.area_iw)
         self.alpha_comb_inner_iw = 1 / (self.r_comb_inner_iw * self.area_iw)
-
-        # adjacent thermal zones are not supported!
 
     def _sum_window_elements(self):
         """Sum attributes for window elements
@@ -1086,7 +1104,8 @@ class FiveElement(object):
         where necessary (the class doc string) for coefficients of heat
         transfer, resistances, areas and UA-Values.
 
-        Function is identical for TwoElement, ThreeElement and FourElement.
+        Function is identical for TwoElement, ThreeElement, FourElement and
+        FiveElement.
         """
 
         self.area_win = sum(win.area for win in self.thermal_zone.windows)
@@ -1171,7 +1190,7 @@ class FiveElement(object):
 
         """
         other_nz_indexes = set()
-        for nz_border in self.thermal_zone.interzonal_elements:
+        for nz_border in self.thermal_zone.find_izes_outer(add_reversed=True):
             other_nz_indexes.add(self.thermal_zone.parent.thermal_zones.index(
                 nz_border.other_side
             ))
@@ -1180,7 +1199,10 @@ class FiveElement(object):
         for nz_index in self.other_nz_indexes:
             other_nz = self.thermal_zone.parent.thermal_zones[nz_index]
             self.nzbs_per_nz.append([])
-            for nz_border in self.thermal_zone.interzonal_elements:
+            for (
+                    nz_border
+                    in self.thermal_zone.find_izes_outer(add_reversed=True)
+            ):
                 if nz_border.other_side is other_nz:
                     self.nzbs_per_nz[-1].append(nz_border)
                     nz_border.idx_orientation = nz_index
@@ -1492,21 +1514,17 @@ class FiveElement(object):
         for nz_borders in self.nzbs_per_nz:
             if 0 < len(nz_borders) <= 1:
                 # only one nz border, no need to calculate chain matrix
-                if (nz_borders[0].other_side.use_conditions.with_heating and
-                        not nz_borders[0].parent.use_conditions.with_heating):
+                self.c1_nzb.append(nz_borders[0].c1_korr)
+                conduction = nz_borders[0].r_conduc
+                if nz_borders[0].interzonal_type_export == 'outer_reversed':
                     self.r_rest_nzb.append(nz_borders[0].r2)
-                    self.c1_nzb.append(nz_borders[0].c1_korr)
-                    conduction = nz_borders[0].r_conduc
                     self.r1_nzb.append(conduction - self.r_rest_nzb[-1])
                 else:
                     self.r1_nzb.append(nz_borders[0].r1)
-                    self.c1_nzb.append(nz_borders[0].c1_korr)
-                    conduction = nz_borders[0].r_conduc
                     self.r_rest_nzb.append(conduction - self.r1_nzb[-1])
             elif len(nz_borders) > 1:
                 # more than one nz border, calculate chain matrix
-                if (nz_borders[0].other_side.use_conditions.with_heating and
-                        not nz_borders[0].parent.use_conditions.with_heating):
+                if nz_borders[0].interzonal_type_export == 'outer_reversed':
                     parallel_mode = 'izw_backwards'
                 else:
                     parallel_mode = 'ow'
@@ -1514,8 +1532,7 @@ class FiveElement(object):
                     nz_borders, omega, mode=parallel_mode
                 )
                 conduction = 1 / sum(1 / nzb.r_conduc for nzb in nz_borders)
-                if (nz_borders[0].other_side.use_conditions.with_heating and
-                        not nz_borders[0].parent.use_conditions.with_heating):
+                if nz_borders[0].interzonal_type_export == 'outer_reversed':
                     self.r_rest_nzb.append(r1_nzb)
                     self.r1_nzb.append(conduction - self.r_rest_nzb[-1])
                 else:
@@ -2017,3 +2034,22 @@ def _lump_inverse_sum(elements, parameter):
     """
     return [1 / sum(1 / eval('el.{}'.format(parameter)) for el in els)
             for els in elements]
+
+    @property
+    def nzbs_for_iw(self):
+        """returns borders to neighboured zones to be considered as inner walls
+
+        Returns
+        -------
+        value : list
+            list of those interzonal elements that are to be treated as
+            'inner' depending on their 'interzonal_type_export' attribute
+
+        """
+        elements = []
+        for i in self.thermal_zone.interzonal_elements:
+            if i.interzonal_type_export == 'inner':
+                elements.append(i)
+            else:
+                pass
+        return elements

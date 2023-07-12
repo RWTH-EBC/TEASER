@@ -332,7 +332,7 @@ class OneElement(object):
             self.thermal_zone.outer_walls
             + self.thermal_zone.ground_floors
             + self.thermal_zone.rooftops
-            + self.nzbs_for_ow
+            + self.thermal_zone.find_izes_outer()
         )
 
         for out_wall in outer_walls:
@@ -369,15 +369,16 @@ class OneElement(object):
             self._calc_outer_elements()
             self._calc_wf()
             self._calc_mean_values()
-        if len(self.nzbs_for_ow) >= 1:
+        if len(self.thermal_zone.interzonal_elements) >= 1:
             warnings.warn(
                 "For thermal zone "
                 + self.thermal_zone.name
                 + " in building "
                 + self.thermal_zone.parent.name
-                + ", interzonal elements bordering unheated neighboured zones "
-                + "have been defined. OneElement export will treat them as "
-                + "outer walls. Consider using FiveElement instead."
+                + ", interzonal elements have been defined. OneElement export "
+                + "will treat them as outer walls or inner walls depending on "
+                + "the project parameter 'method_interzonal_export'. Consider "
+                + "using FiveElement instead."
             )
         self._calc_number_of_elements()
         self._fill_zone_lists()
@@ -457,7 +458,7 @@ class OneElement(object):
             self.thermal_zone.outer_walls
             + self.thermal_zone.ground_floors
             + self.thermal_zone.rooftops
-            + self.nzbs_for_ow
+            + self.thermal_zone.find_izes_outer()
         )
 
         self.area_ow = (
@@ -505,23 +506,23 @@ class OneElement(object):
         )
 
         _area_ow_rt_nzb = _area_ow_rt + sum(
-            roof.area for roof in self.nzbs_for_ow
+            roof.area for roof in self.thermal_zone.find_izes_outer()
         )
 
         self.r_conv_outer_ow = 1 / (
             sum(1 / out_wall.r_outer_conv for out_wall in self.thermal_zone.outer_walls)
             + sum(1 / roof.r_outer_conv for roof in self.thermal_zone.rooftops)
-            + sum(1 / nzb.r_outer_conv for nzb in self.nzbs_for_ow)
+            + sum(1 / nzb.r_outer_conv for nzb in self.thermal_zone.find_izes_outer())
         )
         self.r_rad_outer_ow = 1 / (
             sum(1 / out_wall.r_outer_rad for out_wall in self.thermal_zone.outer_walls)
             + sum(1 / roof.r_outer_rad for roof in self.thermal_zone.rooftops)
-            + sum(1 / nzb.r_outer_rad for nzb in self.nzbs_for_ow)
+            + sum(1 / nzb.r_outer_rad for nzb in self.thermal_zone.find_izes_outer())
         )
         self.r_comb_outer_ow = 1 / (
             sum(1 / out_wall.r_outer_comb for out_wall in self.thermal_zone.outer_walls)
             + sum(1 / roof.r_outer_comb for roof in self.thermal_zone.rooftops)
-            + sum(1 / nzb.r_outer_comb for nzb in self.nzbs_for_ow)
+            + sum(1 / nzb.r_outer_comb for nzb in self.thermal_zone.find_izes_outer())
         )
 
         self.ir_emissivity_outer_ow = (
@@ -655,7 +656,7 @@ class OneElement(object):
             self.thermal_zone.outer_walls
             + self.thermal_zone.ground_floors
             + self.thermal_zone.rooftops
-            + self.nzbs_for_ow
+            + self.thermal_zone.find_izes_outer()
         )
 
         if 0 < len(outer_walls) <= 1:
@@ -813,7 +814,7 @@ class OneElement(object):
 
         outer_elements = (
             self.thermal_zone.outer_walls
-            + self.nzbs_for_ow
+            + self.thermal_zone.find_izes_outer()
             + self.thermal_zone.ground_floors
             + self.thermal_zone.rooftops
             + self.thermal_zone.windows
@@ -834,7 +835,7 @@ class OneElement(object):
 
         outer_elements = (
             self.thermal_zone.outer_walls
-            + self.nzbs_for_ow
+            + self.thermal_zone.find_izes_outer()
             + self.thermal_zone.ground_floors
             + self.thermal_zone.rooftops
             + self.thermal_zone.windows
@@ -850,11 +851,9 @@ class OneElement(object):
                 i[0], i[1]
             ) + self.thermal_zone.find_rts(
                 i[0], i[1]
+            ) + self.thermal_zone.find_izes_outer(
+                i[0], i[1]
             )
-            if self.thermal_zone.use_conditions.with_heating:
-                wall_rt_nzb += self.thermal_zone.find_izes(
-                    i[0], i[1], other_side_heating=False
-                )
             wins = self.thermal_zone.find_wins(i[0], i[1])
             gf = self.thermal_zone.find_gfs(i[0], i[1])
 
@@ -1060,20 +1059,3 @@ class OneElement(object):
         self.orientation_facade = []
         self.heat_load = 0.0
         self.cool_load = 0.0
-
-    @property
-    def nzbs_for_ow(self):
-        """returns borders to neighboured zones to be considered as outer walls
-
-        Returns
-        -------
-        value : list
-            if this zone is heated: list of those interzonal elements that have
-            an unheated zone on the other side. otherweise: empty list
-
-        """
-        value = []
-        for nzb in self.thermal_zone.interzonal_elements:
-            if not nzb.other_side.use_conditions.with_heating:
-                value.append(nzb)
-        return value

@@ -99,6 +99,40 @@ class Project(object):
         Path to reference results in BuildingsPy format. If not None, the results
         will be copied into the model output directories so that the exported
         models can be regression tested against these results with BuildingsPy.
+    method_interzonal_material_enrichment : str
+        Method used to choose the default type element for interzonal elements.
+        'heating_difference': (default) check the difference between
+                              thermal_zone.use_conditions.with_heating.
+                              If equal, default element is inner element. If
+                              not, an outer envelope type element is loaded,
+                              with the outer layer on the non-heated side.
+        'cooling_difference': If there is no difference between heating states,
+                              check the difference between
+                              thermal_zone.use_conditions.with_cooling.
+                              If equal, default element is inner element. If
+                              not, an outer envelope type element is loaded,
+                              with the outer layer on the non-cooled side.
+        'setpoint_difference_x': For interzonal elements where
+                                 'heating_difference' and 'cooling_difference'
+                                 lead to treatment as inner element, the
+                                 setpoints are compared. The float number x is
+                                 read from the string and used as maximum
+                                 difference. If a zone can be clearly identified
+                                 as "more conditioned" (i.e., the heating
+                                 setpoint is clearly higher or, if heating
+                                 setpoints are approximately equal, the cooling
+                                 setpoint is clearly lower, an outer envelope
+                                 type element is loaded, with the outer layer on
+                                 the "less conditioned" side.
+    method_interzonal_export : str
+        Method used to choose the way to export interzonal elements. Valid
+        strings are the same as for method_interzonal_material_enrichment.
+        Inner elements will always be lumped to the InnerWall. For "outer"
+        elements, interzonal heat flow will be modelled in the FiveElement
+        export. For OneElement to FourElement export (not recommeded, because
+        not yet validated or tested), they will be lumped to the OuterWall
+        element from the heated/cooled/more conditioned side and to the
+        InnerWall from the other side.
     """
 
     def __init__(self, load_data=False):
@@ -143,6 +177,9 @@ class Project(object):
             self.data = None
 
         self.dir_reference_results = None
+
+        self.method_interzonal_material_enrichment = 'heating_difference'
+        self.method_interzonal_export = 'heating_difference'
 
     @staticmethod
     def instantiate_data_class():
@@ -1364,3 +1401,41 @@ class Project(object):
 
         if self._name[0].isdigit():
             self._name = "P" + self._name
+
+    @property
+    def method_interzonal_material_enrichment(self):
+        return self._method_interzonal_material_enrichment
+
+    @method_interzonal_material_enrichment.setter
+    def method_interzonal_material_enrichment(self, value):
+        assert type(value) is str
+        assert (value in ('heating_difference', 'cooling_difference')
+                or value.startswith('setpoint_difference_'))
+        if value.startswith('setpoint_difference_'):
+            try:
+                setpoint_diff = float(value.lstrip('setpoint_difference_'))
+                self._method_interzonal_material_enrichment = value
+            except ValueError:
+                print("setpoint for method_interzonal_material_enrichment "
+                      "could not be converted to float.")
+        else:
+            self._method_interzonal_material_enrichment = value
+
+    @property
+    def method_interzonal_export(self):
+        return self._method_interzonal_export
+
+    @method_interzonal_export.setter
+    def method_interzonal_export(self, value):
+        assert type(value) is str
+        assert (value in ('heating_difference', 'cooling_difference')
+                or value.startswith('setpoint_difference_'))
+        if value.startswith('setpoint_difference_'):
+            try:
+                setpoint_diff = float(value.lstrip('setpoint_difference_'))
+                self._method_interzonal_export = value
+            except ValueError:
+                print("setpoint for method_interzonal_export "
+                      "could not be converted to float.")
+        else:
+            self._method_interzonal_export = value

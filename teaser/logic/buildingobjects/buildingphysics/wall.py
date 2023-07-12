@@ -68,6 +68,40 @@ class Wall(BuildingElement):
     other_side : ThermalZone()
         the thermal zone on the other side of the building element (only for
         interzonal elements)
+    interzonal_type_material : str
+        one of (None (default), 'inner', 'outer_ordered', 'outer_reversed')
+        describes as which kind of element the element is treated when loading
+        type elements. Caution: Make sure that the complimentary element of
+        the other zone is also changed accordingly if this is adapted manually
+            None: treatment based on project.method_interzonal_export_enrichment
+            'inner': InterzonalWall treated as InnerWall,
+                     InterzonalFloor treated as Floor,
+                     InterzonalCeiling treated as Ceiling
+            'outer_ordered': InterzonalWall treated as Wall,
+                             InterzonalFloor treated as GroundFloor,
+                             InterzonalCeiling treated as Rooftop
+            'outer_reversed': InterzonalWall treated as Wall,
+                              InterzonalFloor treated as Rooftop,
+                              InterzonalCeiling treated as GroundFloor, but with
+                              reversed layers, resulting in the reversed
+                              sequence of layers as for the complimentary
+                              element declared as 'outer_ordered'
+    interzonal_type_export : str
+        one of (None (default), 'inner', 'outer_ordered', 'outer_reversed')
+        describes as which kind of element the element is treated when exporting
+        to Modelica. Caution: Make sure that the complimentary element of
+        the other zone is also changed accordingly if this is adapted manually
+            'inner': element will be lumped with InnerWall. No heat flow to the
+                     zone on the other side will be modelled.
+            'outer_ordered': element will be lumped with OuterWall (OneElement
+                             to FourElement export) or treated as border to an
+                             adjacent zone (FiveElement export). Borders to the
+                             same adjacent zone will be lumped.
+            'outer_reversed': like 'outer_ordered', but the lumping follows
+                              VDI 6007-1 in reversed order, resulting in the
+                              reversed order of resistances and capacitors as
+                              for the complimentary element declared as
+                              'outer_ordered'
 
     Calculated Attributes
 
@@ -115,6 +149,8 @@ class Wall(BuildingElement):
         """Constructor of Wall
         """
         self.other_side = other_side
+        self.interzonal_type_material = None
+        self.interzonal_type_export = None
         super(Wall, self).__init__(parent)
 
     def calc_equivalent_res(self, t_bt=7):
@@ -465,6 +501,80 @@ class Wall(BuildingElement):
 
             self.layer[insulation_layer_index].id = len(self.layer)
 
+    def _interzonal_type_standard_value(self, method):
+        """return the standard value for the treatment of interzonal elements
+
+        Refer to the documentation of project for details
+
+        Parameters
+        ----------
+        method : str
+            a valid value of project.method_interzonal_material_enrichment or
+            project.method_interzonal_export
+
+        Returns
+        -------
+        value : str
+            'inner', 'outer_ordered', or 'outer_reversed'
+
+        """
+        this_use = self.parent.use_conditions
+        other_use = self.other_side.use_conditions
+        if method == 'heating_difference':
+            if ((other_use.with_heating and this_use.with_heating)
+                    or (not other_use.with_heating
+                        and not this_use.with_heating)):
+                value = 'inner'
+            elif this_use.with_heating is True:
+                value = 'outer_ordered'
+            else:  # this_use.with_heating is False:
+                value = 'outer_reversed'
+        if (method == 'heating_cooling_difference'
+                or method.startswith('setpoint_difference_')):
+            # first decision: different heating conditions?
+            if this_use.with_heating and not other_use.with_heating:
+                value = 'outer_ordered'
+            elif not this_use.with_heating and other_use.with_heating:
+                value = 'outer_reversed'
+            # second decision: different cooling conditions?
+            elif this_use.with_cooling and not other_use.with_cooling:
+                value = 'outer_ordered'
+            elif not this_use.with_cooling and other_use.with_cooling:
+                value = 'outer_reversed'
+            elif not method.startswith('setpoint_difference_'):
+                value = 'inner'
+            else:
+                # third decision: compare setpoints
+                max_setpoint_diff = float(
+                    method.lstrip('setpoint_difference_')
+                )
+
+                setpoint_diff_heating = np.subtract(
+                    this_use.schedules["heating_profile"]
+                    - other_use.schedules["heating_profile"]
+                )
+                this_warmer = any(setpoint_diff_heating > max_setpoint_diff)
+                other_warmer = any(setpoint_diff_heating < -max_setpoint_diff)
+
+                setpoint_diff_cooling = np.subtract(
+                    this_use.schedules["cooling_profile"]
+                    - other_use.schedules["cooling_profile"]
+                )
+                this_colder = any(setpoint_diff_cooling < -max_setpoint_diff)
+                other_colder = any(setpoint_diff_cooling > max_setpoint_diff)
+
+                if this_warmer and not other_warmer:
+                    value = 'outer_ordered'
+                elif other_warmer and not this_warmer:
+                    value = 'outer_reversed'
+                elif this_colder and not other_colder:
+                    value = 'outer_ordered'
+                elif other_colder and not this_colder:
+                    value = 'outer_reversed'
+                else:
+                    value = 'inner'
+
+        return value
 
     @property
     def other_side(self):
@@ -481,3 +591,34 @@ class Wall(BuildingElement):
             self._other_side = value
         else:
             self._other_side = None
+
+    @property
+    def interzonal_type_material(self):
+        if self._interzonal_type_material is not None:
+            return self._interzonal_type_material
+        else:
+            return self._interzonal_type_standard_value(
+                method=self.parent.parent.method_interzonal_material_enrichment
+            )
+
+    @interzonal_type_material.setter
+    def interzonal_type_material(self, value):
+        allowed_values = (None, 'inner', 'outer_ordered', 'outer_reversed')
+        assert value in allowed_values
+        self._interzonal_type_material = value
+
+    @property
+    def interzonal_type_export(self):
+        if self._interzonal_type_export is not None:
+            return self._interzonal_type_export
+        else:
+            return self._interzonal_type_standard_value(
+                method=self.parent.parent.method_interzonal_export
+            )
+        return value
+
+    @interzonal_type_export.setter
+    def interzonal_type_export(self, value):
+        allowed_values = (None, 'inner', 'outer_ordered', 'outer_reversed')
+        assert value in allowed_values
+        self._interzonal_type_export = value

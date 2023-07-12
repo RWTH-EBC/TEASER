@@ -70,6 +70,38 @@ class InterzonalFloor(InterzonalWall):
         element
     other_side : ThermalZone()
         the thermal zone on the upper side of the interzonal floor
+    interzonal_type_material : str
+        one of (None (default), 'inner', 'outer_ordered', 'outer_reversed')
+        describes as which kind of element the element is treated when loading
+        type elements. Caution: Make sure that the complimentary element of
+        the other zone is also changed accordingly if this is adapted manually
+            None: treatment based on project.method_interzonal_export_enrichment
+            'inner': InterzonalWall treated as InnerWall,
+                     InterzonalFloor treated as Floor,
+                     InterzonalCeiling treated as Ceiling
+            'outer_ordered': InterzonalWall treated as Wall,
+                             InterzonalFloor treated as GroundFloor,
+                             InterzonalCeiling treated as Rooftop
+            'outer_reversed': like 'outer_ordered', but with reversed layers,
+                              resulting in the reversed sequence of layers as
+                              for the complimentary element declared as
+                              'outer_ordered'
+    interzonal_type_export : str
+        one of (None (default), 'inner', 'outer_ordered', 'outer_reversed')
+        describes as which kind of element the element is treated when exporting
+        to Modelica. Caution: Make sure that the complimentary element of
+        the other zone is also changed accordingly if this is adapted manually
+            'inner': element will be lumped with InnerWall. No heat flow to the
+                     zone on the other side will be modelled.
+            'outer_ordered': element will be lumped with OuterWall (OneElement
+                             to FourElement export) or treated as border to an
+                             adjacent zone (FiveElement export). Borders to the
+                             same adjacent zone will be lumped.
+            'outer_reversed': like 'outer_ordered', but the lumping follows
+                              VDI 6007-1 in reversed order, resulting in the
+                              reversed order of resistances and capacitors as
+                              for the complimentary element declared as
+                              'outer_ordered'
 
     Calculated Attributes
 
