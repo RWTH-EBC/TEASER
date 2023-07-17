@@ -1199,10 +1199,8 @@ class FiveElement(object):
         for nz_index in self.other_nz_indexes:
             other_nz = self.thermal_zone.parent.thermal_zones[nz_index]
             self.nzbs_per_nz.append([])
-            for (
-                    nz_border
-                    in self.thermal_zone.find_izes_outer(add_reversed=True)
-            ):
+            for nz_border \
+                    in self.thermal_zone.find_izes_outer(add_reversed=True):
                 if nz_border.other_side is other_nz:
                     self.nzbs_per_nz[-1].append(nz_border)
                     nz_border.idx_orientation = nz_index
