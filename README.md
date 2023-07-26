@@ -32,10 +32,6 @@ available under the
 If you have any questions regarding TEASER feel free to contact us at
 [ebc-teaser@eonerc.rwth-aachen.de](mailto:ebc-teaser@eonerc.rwth-aachen.de).
 
-If you want to use TEASER without installation, you can use out TEASER webtool, which
-will generate a Modelica model and provide this as download:
-
- * [http://teaser.eonerc.rwth-aachen.de](http://teaser.eonerc.rwth-aachen.de)
 
 ## Description
 
