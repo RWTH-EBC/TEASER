@@ -8,7 +8,7 @@ stages:
   - deploy
 
 variables:
-  COVERAGE_TYPE: "Dymola"
+  COVERAGE_TYPE: "NotDymola"
   PAGES_BRANCH: master
   PYTHON_VERSION: "registry.git.rwth-aachen.de/ebc/ebc_all/gitlab_ci/templates:python_3.9"
   TEST_ENGINE: "PYTEST"

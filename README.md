@@ -54,9 +54,15 @@ models for all libraries supporting the
 
 ## Version
 
-TEASER is a ongoing research project, the current version is still a pre-release.
+TEASER is an ongoing research project, the current version is still a pre-release.
 
 ## How to use TEASER
+
+### Examples and jupyter notebooks
+
+We provide different examples to show the usage of TEASER.
+Check out the files under teaser/examples or the jupyter-notebooks available here: docs/jupyter-notebooks.
+If you just want to read the example on github, check them here: docs/examples.
 
 ### Dependencies
 
