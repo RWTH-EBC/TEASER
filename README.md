@@ -1,4 +1,4 @@
-![E.ON EBC RWTH Aachen University](./doc/_static/EBC_Logo.png)
+![E.ON EBC RWTH Aachen University](docs/_static/EBC_Logo.png)
 
 # TEASER - Tool for Energy Analysis and Simulation for Efficient Retrofit
 
@@ -54,8 +54,7 @@ models for all libraries supporting the
 
 ## Version
 
-TEASER is a ongoing research project, the current version is 0.7.6, which is
-still a pre-release.
+TEASER is a ongoing research project, the current version is still a pre-release.
 
 ## How to use TEASER
 

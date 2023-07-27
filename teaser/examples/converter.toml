@@ -1,0 +1,41 @@
+[[ExampleFile]]
+filename = "examples/e1_generate_archetype.py"
+func_name = "example_generate_archetype"
+md_path = "examples/docs"
+ipynb_path = "examples/jupyter_notebooks"
+
+[[ExampleFile]]
+filename = "examples/e2_export_aixlib_models.py"
+func_name = "example_export_aixlib"
+md_path = "examples/docs"
+ipynb_path = "examples/jupyter_notebooks"
+
+[[ExampleFile]]
+filename = "examples/e3_export_ibpsa_models.py"
+func_name = "example_export_ibpsa"
+md_path = "examples/docs"
+ipynb_path = "examples/jupyter_notebooks"
+
+[[ExampleFile]]
+filename = "examples/e4_save.py"
+func_name = "example_save"
+md_path = "examples/docs"
+ipynb_path = "examples/jupyter_notebooks"
+
+[[ExampleFile]]
+filename = "examples/e5_load.py"
+func_name = "example_load"
+md_path = "examples/docs"
+ipynb_path = "examples/jupyter_notebooks"
+
+[[ExampleFile]]
+filename = "examples/e6_generate_buildings.py"
+func_name = "example_create_building"
+md_path = "examples/docs"
+ipynb_path = "examples/jupyter_notebooks"
+
+[[ExampleFile]]
+filename = "examples/e7_retrofit.py"
+func_name = "example_retrofit_building"
+md_path = "examples/docs"
+ipynb_path = "examples/jupyter_notebooks"

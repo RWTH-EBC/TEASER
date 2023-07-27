@@ -50,4 +50,4 @@ dist
 #ignore docs#
 #####################
 
-doc/_build
+docs/_build
