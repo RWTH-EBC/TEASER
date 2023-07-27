@@ -29,7 +29,7 @@ md_path = "docs/examples"
 ipynb_path = "docs/jupyter_notebooks"
 
 [[ExampleFile]]
-filename = "teaser/examples/e6_generate_buildings.py"
+filename = "teaser/examples/e6_generate_building.py"
 func_name = "example_create_building"
 md_path = "docs/examples"
 ipynb_path = "docs/jupyter_notebooks"
