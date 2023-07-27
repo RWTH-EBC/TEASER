@@ -1,4 +1,4 @@
-![E.ON EBC RWTH Aachen University](docs/_static/EBC_Logo.png)
+![E.ON EBC RWTH Aachen University](docs/source/_static/EBC_Logo.png)
 
 # TEASER - Tool for Energy Analysis and Simulation for Efficient Retrofit
 
