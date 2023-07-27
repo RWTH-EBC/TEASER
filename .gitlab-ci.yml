@@ -13,6 +13,7 @@ variables:
   PYTHON_VERSION: "registry.git.rwth-aachen.de/ebc/ebc_all/gitlab_ci/templates:python_3.9"
   TEST_ENGINE: "PYTEST"
   GIT_REPO: "RWTH-EBC/TEASER"
+  EXAMPLE_CONVERTER_CONFIG: teaser/examples/converter.toml
 
 include:
   - project: 'EBC/EBC_all/gitlab_ci/templates'
