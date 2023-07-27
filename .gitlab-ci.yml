@@ -11,7 +11,7 @@ variables:
   COVERAGE_TYPE: "Dymola"
   PAGES_BRANCH: master
   PYTHON_VERSION: "registry.git.rwth-aachen.de/ebc/ebc_all/gitlab_ci/templates:python_3.9"
-  TEST_ENGINE: "unittest"
+  TEST_ENGINE: "PYTEST"
   GIT_REPO: "RWTH-EBC/TEASER"
 
 include:
