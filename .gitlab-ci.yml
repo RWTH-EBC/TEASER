@@ -23,8 +23,10 @@ include:
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     file: 'python/build/build.gitlab-ci.yml'
   - project: 'EBC/EBC_all/gitlab_ci/templates'
+    ref: add_github_pages
     file: 'pages/gl-pages.gitlab-ci.yml'
   - project: 'EBC/EBC_all/gitlab_ci/templates'
+    ref: add_github_pages
     file: 'pages/gh-pages.gitlab-ci.yml'
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     file: 'python/tests/tests.gitlab-ci.yml'
