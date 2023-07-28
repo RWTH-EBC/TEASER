@@ -6,9 +6,14 @@ The following examples demonstrate how to generate a building without archetype 
 Example 7: Generate single building
 -----------------------------------
 
-.. literalinclude:: ../teaser/examples/e6_generate_building.py
+.. mdinclude::  examples/e6_generate_building.md
 
-Example 8: Generate multiple building from data base information
+Example 8: Change boundary conditions
 -----------------------------------
 
-.. literalinclude:: ../teaser/examples/e8_generate_campus.py
+.. literalinclude:: ../teaser/examples/e8_change_boundary_conditions.py
+
+Example 9: Import data from excel
+-----------------------------------
+
+.. literalinclude:: ../teaser/examples/e9_building_data_import_from_excel.py

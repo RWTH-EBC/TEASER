@@ -6,29 +6,29 @@ The following examples demonstrate how to use the main functions of TEASER using
 Example 1: Generate archetype buildings using TEASER API
 ---------------------------------------------------------------------
 
-.. literalinclude:: ../teaser/examples/e1_generate_archetype.py
+.. mdinclude::  examples/e1_generate_archetype.md
 
 Example 2: Export Modelica models for AixLib library using TEASER API
 ---------------------------------------------------------------------
 
-.. literalinclude:: ../teaser/examples/e2_export_aixlib_models.py
+.. mdinclude::  examples/e2_export_aixlib_models.md
 
 Example 3: Export Modelica models for AixLib library using TEASER API
 ---------------------------------------------------------------------
 
-.. literalinclude:: ../teaser/examples/e3_export_ibpsa_models.py
+.. mdinclude::  examples/e3_export_ibpsa_models.md
 
 Example 4: Save information
 ---------------------------
 
-.. literalinclude:: ../teaser/examples/e4_save.py
+.. mdinclude::  examples/e4_save.md
 
 Example 5: Load information
 ----------------------------
 
-.. literalinclude:: ../teaser/examples/e5_load.py
+.. mdinclude::  examples/e5_load.md
 
 Example 6: Retrofit buildings
 ----------------------------
 
-.. literalinclude:: ../teaser/examples/e7_retrofit.py
+.. mdinclude::  examples/e7_retrofit.md
