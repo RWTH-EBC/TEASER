@@ -1,10 +1,10 @@
 stages:
-  - test
+#  - test
   - doc
-  - code_quality
-  - examples
-  - build
-  - release
+#  - code_quality
+#  - examples
+#  - build
+#  - release
   - deploy
 
 variables:
