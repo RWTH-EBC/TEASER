@@ -2,3 +2,7 @@
 omit =
     # omit everything in example packages
     teaser/examples/*
+    teaser/data/output/modelicatemplate/*
+    *.json
+    *.mos
+    *.mo
