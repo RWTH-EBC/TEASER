@@ -2,6 +2,7 @@ API examples
 ===================
 
 The following examples demonstrate how to use the main functions of TEASER using the API provided by the Project() class.
+You can also run these scripts using jupyter-notebook when loading the files under docs/jupyter-notebooks
 
 Example 1: Generate archetype buildings using TEASER API
 ---------------------------------------------------------------------
