@@ -1,11 +1,11 @@
 stages:
  - test
-  - doc
-  - code_quality
+ - doc
+ - code_quality
  - examples
  - build
  - release
-  - deploy
+ - deploy
 
 variables:
   COVERAGE_TYPE: "NotDymola"
