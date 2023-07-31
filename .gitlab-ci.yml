@@ -1,10 +1,10 @@
 stages:
-#  - test
+ - test
   - doc
   - code_quality
-#  - examples
-#  - build
-#  - release
+ - examples
+ - build
+ - release
   - deploy
 
 variables:
@@ -20,21 +20,21 @@ include:
     file: 'python/code-quality/pylint.gitlab-ci.yml'
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     file: 'python/doc/sphinxdoc.gitlab-ci.yml'
-#  - project: 'EBC/EBC_all/gitlab_ci/templates'
-#    file: 'python/build/build.gitlab-ci.yml'
+ - project: 'EBC/EBC_all/gitlab_ci/templates'
+   file: 'python/build/build.gitlab-ci.yml'
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     ref: add_github_pages
     file: 'pages/gl-pages.gitlab-ci.yml'
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     ref: add_github_pages
     file: 'pages/gh-pages.gitlab-ci.yml'
-#  - project: 'EBC/EBC_all/gitlab_ci/templates'
-#    file: 'python/tests/tests.gitlab-ci.yml'
-#  - project: 'EBC/EBC_all/gitlab_ci/templates'
-#    file: 'python/tests/coverage.gitlab-ci.yml'
-#  - project: 'EBC/EBC_all/gitlab_ci/templates'
-#    file: 'python/pypi-release/release.gitlab-ci.yml'
-#  - project: 'EBC/EBC_all/gitlab_ci/templates'
-#    file: 'python/examples/examples.gitlab-ci.yml'
-#  - template: Dependency-Scanning.gitlab-ci.yml
-#  - template: SAST.gitlab-ci.yml
+ - project: 'EBC/EBC_all/gitlab_ci/templates'
+   file: 'python/tests/tests.gitlab-ci.yml'
+ - project: 'EBC/EBC_all/gitlab_ci/templates'
+   file: 'python/tests/coverage.gitlab-ci.yml'
+ - project: 'EBC/EBC_all/gitlab_ci/templates'
+   file: 'python/pypi-release/release.gitlab-ci.yml'
+ - project: 'EBC/EBC_all/gitlab_ci/templates'
+   file: 'python/examples/examples.gitlab-ci.yml'
+ - template: Dependency-Scanning.gitlab-ci.yml
+ - template: SAST.gitlab-ci.yml
