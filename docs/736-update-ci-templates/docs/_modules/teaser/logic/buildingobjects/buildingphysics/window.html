@@ -1,0 +1,370 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>teaser.logic.buildingobjects.buildingphysics.window &#8212; TEASER 0.7.7 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinxdoc.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/autodoc_pydantic.css" />
+    <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+  </head><body>
+<div class="headerStyle">
+<img src="_static/EBC_Logo.png" alt="EBC_Logo" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">TEASER 0.7.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">teaser.logic.buildingobjects.buildingphysics.window</a></li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for teaser.logic.buildingobjects.buildingphysics.window</h1><div class="highlight"><pre>
+<span></span><span class="c1"># created June 2015</span>
+<span class="c1"># by TEASER4 Development Team</span>
+
+
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.buildingelement</span> \
+    <span class="kn">import</span> <span class="nn">BuildingElement</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+
+<div class="viewcode-block" id="Window"><a class="viewcode-back" href="../../../../../teaser.Logic.BuildingObjects.BuildingPhysics.html#teaser.logic.buildingobjects.buildingphysics.window.Window">[docs]</a><span class="k">class</span> <span class="nc">Window</span><span class="p">(</span><span class="n">BuildingElement</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Window class</span>
+
+<span class="sd">    This class holds information of a window and is a child of</span>
+<span class="sd">    BuildingElement().</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    parent : ThermalZone()</span>
+<span class="sd">        The parent class of this object, the ThermalZone the BE belongs to.</span>
+<span class="sd">        Allows for better control of hierarchical structures.  If not None it</span>
+<span class="sd">        adds this Window to ThermalZone.windows.</span>
+<span class="sd">        Default is None.</span>
+
+<span class="sd">     Attributes</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    internal_id : float</span>
+<span class="sd">        Random id for the distinction between different elements.</span>
+<span class="sd">    name : str</span>
+<span class="sd">        Individual name</span>
+<span class="sd">    construction_type : str</span>
+<span class="sd">        Type of construction (e.g. &quot;heavy&quot; or &quot;light&quot;). Needed for</span>
+<span class="sd">        distinction between different constructions types in the same</span>
+<span class="sd">        building age period.</span>
+<span class="sd">    year_of_retrofit : int</span>
+<span class="sd">        Year of last retrofit</span>
+<span class="sd">    year_of_construction : int</span>
+<span class="sd">        Year of first construction</span>
+<span class="sd">    building_age_group : list</span>
+<span class="sd">        Determines the building age period that this building</span>
+<span class="sd">        element belongs to [begin, end], e.g. [1984, 1994]</span>
+<span class="sd">    area : float [m2]</span>
+<span class="sd">        Area of building element</span>
+<span class="sd">    tilt : float [degree]</span>
+<span class="sd">        Tilt against horizontal, default 90.0</span>
+<span class="sd">    orientation : float [degree]</span>
+<span class="sd">        Azimuth direction of building element (0 : north, 90: east, 180: south,</span>
+<span class="sd">        270: west)</span>
+<span class="sd">    inner_convection : float [W/(m2*K)]</span>
+<span class="sd">        Constant heat transfer coefficient of convection inner side (facing</span>
+<span class="sd">        the zone), default 2.7</span>
+<span class="sd">    inner_radiation : float [W/(m2*K)]</span>
+<span class="sd">        Constant heat transfer coefficient of radiation inner side (facing</span>
+<span class="sd">        the zone), default 5.0</span>
+<span class="sd">    outer_convection : float [W/(m2*K)]</span>
+<span class="sd">        Constant heat transfer coefficient of convection outer side (facing</span>
+<span class="sd">        the ambient or adjacent zone), default 20.0</span>
+<span class="sd">    outer_radiation : float [W/(m2*K)]</span>
+<span class="sd">        Constant heat transfer coefficient of radiation outer side (facing</span>
+<span class="sd">        the ambient or adjacent zone), default 5.0</span>
+<span class="sd">    layer : list</span>
+<span class="sd">        List of all layers of a building element (to be filled with Layer</span>
+<span class="sd">        objects). Use element.layer = None to delete all layers of the building</span>
+<span class="sd">        element</span>
+
+<span class="sd">    Specific Attributes for Window</span>
+
+<span class="sd">    g_value : float</span>
+<span class="sd">        solar heat gain coefficient of Window</span>
+<span class="sd">    a_conv : float</span>
+<span class="sd">        relative convective heat emission because of absorption of short wave</span>
+<span class="sd">        irradiation of inner side of Window according to VDI 6007</span>
+<span class="sd">    shading_g_total : float</span>
+<span class="sd">        shaded g value of the window</span>
+<span class="sd">    shading_max_irr : float</span>
+<span class="sd">        threshold for automatic shading</span>
+
+<span class="sd">    Calculated Attributes</span>
+
+<span class="sd">    r1 : float [K/W]</span>
+<span class="sd">        equivalent resistance R1 of the analogous model given in VDI 6007</span>
+<span class="sd">    r2 : float [K/W]</span>
+<span class="sd">        equivalent resistance R2 of the analogous model given in VDI 6007</span>
+<span class="sd">    r3 : float [K/W]</span>
+<span class="sd">        equivalent resistance R3 of the analogous model given in VDI 6007</span>
+<span class="sd">    c1 : float [J/K]</span>
+<span class="sd">        equivalent capacity C1 of the analogous model given in VDI 6007</span>
+<span class="sd">    c2 : float [J/K]</span>
+<span class="sd">        equivalent capacity C2 of the analogous model given in VDI 6007</span>
+<span class="sd">    c1_korr : float [J/K]</span>
+<span class="sd">        corrected capacity C1,korr for building elements in the case of</span>
+<span class="sd">        asymmetrical thermal load given in VDI 6007</span>
+<span class="sd">    ua_value : float [W/K]</span>
+<span class="sd">        UA-Value of building element (Area times U-Value)</span>
+<span class="sd">    r_inner_conv : float [K/W]</span>
+<span class="sd">        Convective resistance of building element on inner side (facing the</span>
+<span class="sd">        zone)</span>
+<span class="sd">    r_inner_rad : float [K/W]</span>
+<span class="sd">        Radiative resistance of building element on inner side (facing the</span>
+<span class="sd">        zone)</span>
+<span class="sd">    r_inner_conv : float [K/W]</span>
+<span class="sd">        Combined convective and radiative resistance of building element on</span>
+<span class="sd">        inner side (facing the zone)</span>
+<span class="sd">    r_outer_conv : float [K/W]</span>
+<span class="sd">        Convective resistance of building element on outer side (facing</span>
+<span class="sd">        the ambient or adjacent zone). Currently for all InnerWalls and</span>
+<span class="sd">        GroundFloors this value is set to 0.0</span>
+<span class="sd">    r_outer_rad : float [K/W]</span>
+<span class="sd">        Radiative resistance of building element on outer side (facing</span>
+<span class="sd">        the ambient or adjacent zone). Currently for all InnerWalls and</span>
+<span class="sd">        GroundFloors this value is set to 0.0</span>
+<span class="sd">    r_outer_conv : float [K/W]</span>
+<span class="sd">        Combined convective and radiative resistance of building element on</span>
+<span class="sd">        outer side (facing the ambient or adjacent zone). Currently for all</span>
+<span class="sd">        InnerWalls and GroundFloors this value is set to 0.0</span>
+<span class="sd">    wf_out : float</span>
+<span class="sd">        Weightfactor of building element ua_value/ua_value_zone</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">Window</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_g_value</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_a_conv</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_shading_g_total</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_shading_max_irr</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tilt</span> <span class="o">=</span> <span class="mf">90.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_inner_convection</span> <span class="o">=</span> <span class="mf">2.7</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_inner_radiation</span> <span class="o">=</span> <span class="mf">5.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_outer_convection</span> <span class="o">=</span> <span class="mf">20.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_outer_radiation</span> <span class="o">=</span> <span class="mf">5.0</span>
+
+<div class="viewcode-block" id="Window.calc_equivalent_res"><a class="viewcode-back" href="../../../../../teaser.Logic.BuildingObjects.BuildingPhysics.html#teaser.logic.buildingobjects.buildingphysics.window.Window.calc_equivalent_res">[docs]</a>    <span class="k">def</span> <span class="nf">calc_equivalent_res</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Equivalent resistance VDI 6007</span>
+
+<span class="sd">        Calculates the equivalent resistance of a wall according to  VDI</span>
+<span class="sd">        6007 guideline.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        t_bt : int</span>
+<span class="sd">            time constant according to VDI 6007 (default t_bt = 7)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_calc_default</span><span class="p">()</span>
+        <span class="n">number_of_layer</span><span class="p">,</span> <span class="n">density</span><span class="p">,</span> <span class="n">thermal_conduc</span><span class="p">,</span> <span class="n">heat_capac</span><span class="p">,</span> <span class="n">thickness</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">gather_element_properties</span><span class="p">()</span>
+
+        <span class="n">r_layer</span> <span class="o">=</span> <span class="n">thickness</span> <span class="o">/</span> <span class="n">thermal_conduc</span>
+        <span class="n">c_layer</span> <span class="o">=</span> <span class="n">heat_capac</span> <span class="o">*</span> <span class="n">density</span> <span class="o">*</span> <span class="n">thickness</span>  <span class="c1"># *1000</span>
+
+        <span class="k">for</span> <span class="n">layer_count</span> <span class="ow">in</span> <span class="n">r_layer</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">r1</span> <span class="o">+=</span> <span class="n">layer_count</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">area</span>
+
+        <span class="k">for</span> <span class="n">layer_count</span> <span class="ow">in</span> <span class="n">c_layer</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">c1</span> <span class="o">+=</span> <span class="n">layer_count</span></div>
+
+<div class="viewcode-block" id="Window.replace_window"><a class="viewcode-back" href="../../../../../teaser.Logic.BuildingObjects.BuildingPhysics.html#teaser.logic.buildingobjects.buildingphysics.window.Window.replace_window">[docs]</a>    <span class="k">def</span> <span class="nf">replace_window</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year_of_retrofit</span><span class="p">,</span> <span class="n">window_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Replace a window, with a newer one.</span>
+
+<span class="sd">        Replaces all attributes from the window and replaces it with a high</span>
+<span class="sd">        insulated one.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        year_of_retrofit: int</span>
+<span class="sd">            The year, the building was refurbished</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">window_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">window_type</span> <span class="o">=</span> <span class="s2">&quot;EnEv&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">if</span> <span class="n">year_of_retrofit</span> <span class="o">&lt;</span> <span class="mi">1995</span><span class="p">:</span>
+            <span class="n">year_of_retrofit</span> <span class="o">=</span> <span class="mi">1995</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;You are using a year of retrofit not supported</span><span class="se">\</span>
+<span class="s2">                    by teaser. We will change your year of retrofit to 1995</span><span class="se">\</span>
+<span class="s2">                    for the calculation. Be careful!&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_calc_default</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layer</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span><span class="n">year_of_retrofit</span><span class="p">,</span>
+                               <span class="n">window_type</span><span class="p">,</span>
+                               <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__parent</span>
+
+    <span class="nd">@parent</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="n">ass_error_1</span> <span class="o">=</span> <span class="s2">&quot;Parent has to be an instance of ThermalZone()&quot;</span>
+
+            <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;ThermalZone&quot;</span><span class="p">,</span> <span class="n">ass_error_1</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__parent</span> <span class="o">=</span> <span class="n">value</span>
+
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;Window&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__parent</span><span class="o">.</span><span class="n">windows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Instance of Window not known&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">year_of_construction</span> <span class="o">=</span> \
+                    <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">year_of_construction</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__parent</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">g_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_g_value</span>
+
+    <span class="nd">@g_value</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">g_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_g_value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_g_value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_g_value</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert g value to float&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">a_conv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_a_conv</span>
+
+    <span class="nd">@a_conv</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">a_conv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_a_conv</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_a_conv</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_a_conv</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert a conv to float&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">shading_g_total</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shading_g_total</span>
+
+    <span class="nd">@shading_g_total</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">shading_g_total</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_shading_g_total</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_shading_g_total</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_shading_g_total</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert shaded g value to float&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">shading_max_irr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shading_max_irr</span>
+
+    <span class="nd">@shading_max_irr</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">shading_max_irr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_shading_max_irr</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_shading_max_irr</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_shading_max_irr</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert max irradiation to float&quot;</span><span class="p">)</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">TEASER 0.7.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">teaser.logic.buildingobjects.buildingphysics.window</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+    </div>
+  </body>
+</html>

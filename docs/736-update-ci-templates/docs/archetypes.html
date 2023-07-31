@@ -1,0 +1,344 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Archetype Buildings &#8212; TEASER 0.7.7 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css" />
+    <link rel="stylesheet" type="text/css" href="_static/autodoc_pydantic.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Examples" href="teaser.Examples.html" />
+    <link rel="prev" title="TEASER API - Project class" href="teaser.Project.html" /> 
+  </head><body>
+<div class="headerStyle">
+<img src="_static/EBC_Logo.png" alt="EBC_Logo" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Examples.html" title="Examples"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Project.html" title="TEASER API - Project class"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.7.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Archetype Buildings</a></li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Archetype Buildings</a><ul>
+<li><a class="reference internal" href="#non-residential">Non-residential</a></li>
+<li><a class="reference internal" href="#office">Office</a></li>
+<li><a class="reference internal" href="#institute-module">Institute module</a></li>
+<li><a class="reference internal" href="#institute4-module">Institute4 module</a></li>
+<li><a class="reference internal" href="#institute8-module">Institute8 module</a></li>
+<li><a class="reference internal" href="#residential">Residential</a></li>
+<li><a class="reference internal" href="#iwu">IWU</a></li>
+<li><a class="reference internal" href="#singlefamilydwelling">SingleFamilyDwelling</a></li>
+<li><a class="reference internal" href="#tabula">Tabula</a></li>
+<li><a class="reference internal" href="#singlefamilyhouse">singlefamilyhouse</a></li>
+<li><a class="reference internal" href="#apartmentblock">apartmentblock</a></li>
+<li><a class="reference internal" href="#multifamilyhouse">multifamilyhouse</a></li>
+<li><a class="reference internal" href="#terracedhouse">terracedhouse</a></li>
+<li><a class="reference internal" href="#literature">Literature</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="teaser.Project.html"
+                          title="previous chapter">TEASER API - Project class</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="teaser.Examples.html"
+                          title="next chapter">Examples</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/archetypes.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="archetype-buildings">
+<h1>Archetype Buildings<a class="headerlink" href="#archetype-buildings" title="Permalink to this heading">¶</a></h1>
+<p>This section gives a short overview about archetype methodology implemented in
+TEASER. For exact meaning of all attributes and usage of archetype buildings,
+please read the docs of archetype classes and examples.</p>
+<p>TEASER provides archetypes for residential and non-residential buildings. TEASER
+is based on three different studies, investigating the German building stocks.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>non-residential buildings: <a href="#id1"><span class="problematic" id="id2">:cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.December2010`</span></a> and <a href="#id3"><span class="problematic" id="id4">:cite:`Lichtme.2010`</span></a></p></li>
+<li><p>residential buildings: <a href="#id5"><span class="problematic" id="id6">:cite:`KurzverfahrenIWU`</span></a>.</p></li>
+</ul>
+</div></blockquote>
+<p>TEASER methodology uses 5 basic parameters for data enrichment:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>main usage of building</p></li>
+<li><p>year of construction</p></li>
+<li><p>net leased/used area</p></li>
+<li><p>average height of floors</p></li>
+<li><p>number of floors</p></li>
+</ul>
+</div></blockquote>
+<p>Currently five different archetypes are implemented in TEASER. We are planing to
+integrate Tabula archetypes soon.</p>
+<section id="non-residential">
+<h2>Non-residential<a class="headerlink" href="#non-residential" title="Permalink to this heading">¶</a></h2>
+<p>The BMVBS package contains different modules for the creation and
+parametrisation of typebuildings. In TEASER these typebuildings are used to set
+up datasets for buildings out of limited building information. For this, the
+methods are based on the following principles according to Lichtmess
+<a href="#id7"><span class="problematic" id="id8">:cite:`Lichtme.2010`</span></a>:</p>
+<ol class="arabic simple">
+<li><p>The building envelope is a function based on the building’s net leased area</p></li>
+<li><p>The building envelope can automatically be assigned to the thermal zones</p></li>
+</ol>
+<p>These principles are mainly used to handle the building envelopes.
+In addition it is necessary to use statistic data for the following aspects:</p>
+<ul class="simple">
+<li><p>number of thermal zones</p></li>
+<li><p>division of net leased area into zone areas</p></li>
+<li><p>wall constructions</p></li>
+<li><p>properties of construction materials</p></li>
+</ul>
+<p>The number of zones and respective zone areas differ for different types of
+buildings. Detailed information for specific types are given below. The
+connection between the building envelope area and the building net leased area
+is based on BMVBS
+<a href="#id9"><span class="problematic" id="id10">:cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.December2010`</span></a> where
+various administrative buildings were investigated. In addition to this
+relationship, it is possible to refine the dataset with further information
+about the structure of the building using a method from Kaag
+<a href="#id11"><span class="problematic" id="id12">:cite:`Kaag.March2008`</span></a>. Wall construction is often a function of year of
+construction. Such relationships are provided by BMVBS
+<a href="#id13"><span class="problematic" id="id14">:cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.30.07.2009`</span></a> and are
+enriched by data for materials from DIN 12524 and DIN 4108-4
+<a href="#id15"><span class="problematic" id="id16">:cite:`DeutschesInstitutfurNormung.Juli2000`</span></a>
+<a href="#id17"><span class="problematic" id="id18">:cite:`DeutschesInstitutfurNormung.Februar2013`</span></a>.</p>
+</section>
+<section id="office">
+<h2>Office<a class="headerlink" href="#office" title="Permalink to this heading">¶</a></h2>
+<p>The office module contains a multi zone building according to BMVBS <a href="#id19"><span class="problematic" id="id20">:cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.December2010`</span></a>.
+In detail the net leased area is divided into the following thermal zone
+areas:</p>
+<ol class="arabic simple">
+<li><p>Office (50% of net leased area)</p></li>
+<li><p>Floor (25% of net leased area)</p></li>
+<li><p>Storage (15% of net leased area)</p></li>
+<li><p>Meeting (4% of net leased area)</p></li>
+<li><p>Restroom (4% of net leased area)</p></li>
+<li><p>ICT (2% of net leased area)</p></li>
+</ol>
+</section>
+<section id="institute-module">
+<h2>Institute module<a class="headerlink" href="#institute-module" title="Permalink to this heading">¶</a></h2>
+<p>The institute module contains a multi zone building which is based on an office
+building with an additional laboratory zone. The area of the laboratory zone is
+based on the data from the Forschungszentrum Jülich <a href="#id21"><span class="problematic" id="id22">:cite:`Abschlussbericht`</span></a>.
+According to the dataset from Jülich, the typebuilding institute is based on the
+buildingsclass of BWZK with the number 2200 which represents all institute
+buildings which are not institute type 4 or institute type 8
+<a href="#id23"><span class="problematic" id="id24">:cite:`Bauministerkonferenz.Dezember2010`</span></a>. Laboratory zones are verntialed using
+a central AHU system with humidification and de-humidification. In detail the
+net leased area is divided into the following thermal zone areas:</p>
+<ol class="arabic simple">
+<li><p>Office (40% of net leased area)</p></li>
+<li><p>Floor (25% of net leased area)</p></li>
+<li><p>Storage (10% of net leased area)</p></li>
+<li><p>Meeting (4% of net leased area)</p></li>
+<li><p>Restroom (4% of net leased area)</p></li>
+<li><p>ICT (2% of net leased area)</p></li>
+<li><p>Laboratory (15% of the net leased area)</p></li>
+</ol>
+</section>
+<section id="institute4-module">
+<h2>Institute4 module<a class="headerlink" href="#institute4-module" title="Permalink to this heading">¶</a></h2>
+<p>The institute type 4 module contains a multi zone building which is based on an
+office building with an additional laboratory zone. The area of the laboratory
+zone is based on data from the Forschungszentrum Jülich
+<a href="#id25"><span class="problematic" id="id26">:cite:`Abschlussbericht`</span></a>. According to the dataset from Jülich, the typebuilding
+institute type 4 is based on the buildingsclass of BWZK with the number 2240
+<a href="#id27"><span class="problematic" id="id28">:cite:`Bauministerkonferenz.Dezember2010`</span></a>. Laboratory zones are verntialed using
+a central AHU system with humidification and de-humidification. In detail the
+net leased area is divided in the following thermal zone areas:</p>
+<ol class="arabic simple">
+<li><p>Office (37.5% of net leased area)</p></li>
+<li><p>Floor (22.5% of net leased area)</p></li>
+<li><p>Storage (10% of net leased area)</p></li>
+<li><p>Meeting (4% of net leased area)</p></li>
+<li><p>Restroom (4% of net leased area)</p></li>
+<li><p>ICT (2% of net leased area)</p></li>
+<li><p>Laboratory (20% of the net leased area)</p></li>
+</ol>
+</section>
+<section id="institute8-module">
+<h2>Institute8 module<a class="headerlink" href="#institute8-module" title="Permalink to this heading">¶</a></h2>
+<p>The institute type 8 module contains a multi zone building which is based on an
+office building with an additional laboratory zone. The area of the laboratory
+zone is based on data from the Forschungszentrum Jülich
+<a href="#id29"><span class="problematic" id="id30">:cite:`Abschlussbericht`</span></a>. According to the dataset from Jülich, the typebuilding
+institute type 8 is based on the buildingsclass of BWZK with the number 2240
+<a href="#id31"><span class="problematic" id="id32">:cite:`Bauministerkonferenz.Dezember2010`</span></a>. Laboratory zones are verntialed using
+a central AHU system with humidification and de-humidification. In detail the
+net leased area is divided in the following thermal zone areas:</p>
+<ol class="arabic simple">
+<li><p>Office (10% of net leased area)</p></li>
+<li><p>Floor (18% of net leased area)</p></li>
+<li><p>Storage (2% of net leased area)</p></li>
+<li><p>Meeting (4% of net leased area)</p></li>
+<li><p>Restroom (4% of net leased area)</p></li>
+<li><p>ICT (2% of net leased area)</p></li>
+<li><p>Laboratory (60% of the net leased area)</p></li>
+</ol>
+</section>
+<section id="residential">
+<h2>Residential<a class="headerlink" href="#residential" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="iwu">
+<h2>IWU<a class="headerlink" href="#iwu" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="singlefamilydwelling">
+<h2>SingleFamilyDwelling<a class="headerlink" href="#singlefamilydwelling" title="Permalink to this heading">¶</a></h2>
+<blockquote>
+<div><p>The residential module contains a single zone building where the envelopes are
+computed based on a method from the IWU <a href="#id33"><span class="problematic" id="id34">:cite:`KurzverfahrenIWU`</span></a>.
+In detail the net leased area is divided into the following thermal zone
+area:</p>
+<ol class="arabic simple">
+<li><p>Living (100% of net leased area)</p></li>
+</ol>
+</div></blockquote>
+</section>
+<section id="tabula">
+<h2>Tabula<a class="headerlink" href="#tabula" title="Permalink to this heading">¶</a></h2>
+<blockquote>
+<div><p>This is an archetype building for german single family house according to
+TABULA building typology (<a class="reference external" href="http://webtool.building-typology.eu/#bm">http://webtool.building-typology.eu/#bm</a>). As
+TABULA defines one reference building, whereas TEASER wants to provide a
+methodology to generate individual building information, this archetype
+underlies some assumptions. The made assumptions are explained in the
+following:</p>
+<p>Each building has four orientations for outer walls and windows (north,
+east, south and west), two orientations for rooftops (south and north), with
+tilt of 35 degree and one orientation for ground floors and one door (
+default
+orientation is west). The area of each surface is calculated using the
+product of the given net_leased_area and specific estimation factors. These
+estimation factors where build by dividing the given ‘surface area’ by the
+‘reference floor area’ in TABULA. The estimation factors are calculated for
+each building period (‘construction year class’). Please note that the
+number and height of the floors given in TEASER does not have any effect on
+the surface area for heat transmission, but is only used to calculate the
+interior wall area, which is not specified in TABULA at all. Further, TABULA
+does not specify any specific user profile, by default the SingleFamilyHouse
+class has exactly one usage zone, which is ‘Living’. TABULA also does not
+always specify the exact construction of building elements, but always
+provides a prescribed U-Value. We used the U-Value and the given material
+information to determine thickness of each layer and implemented it into
+elements XML (‘teaser.data.input.inputdata.TypeElements_TABULA_DE.xml’). The
+material properties have been taken from MASEA Material data base
+(<a class="reference external" href="http://www.masea-ensan.de/">http://www.masea-ensan.de/</a>). As there might be some differences in the
+assumptions for material properties from TABULA and MASEA the U-Value might
+not always be exactly the same as in TABULA but is always in an acceptable
+range. The U-Value has been calculated using combined constant values for
+interior and exterior heat transmission, we used a resistance of 0.17
+(m2*K)/W for outer walls, windows, flat roofs and doors; 0.34 (m2*K)/W  for
+ground floors to unheated cellars and 0.17 (m2*K)/W  to direct ground
+coupled floors, 0.21 (m2*K)/W  was taken for pitched roofs.</p>
+</div></blockquote>
+</section>
+<section id="singlefamilyhouse">
+<h2>singlefamilyhouse<a class="headerlink" href="#singlefamilyhouse" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="apartmentblock">
+<h2>apartmentblock<a class="headerlink" href="#apartmentblock" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="multifamilyhouse">
+<h2>multifamilyhouse<a class="headerlink" href="#multifamilyhouse" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="terracedhouse">
+<h2>terracedhouse<a class="headerlink" href="#terracedhouse" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="literature">
+<h2>Literature<a class="headerlink" href="#literature" title="Permalink to this heading">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Examples.html" title="Examples"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Project.html" title="TEASER API - Project class"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.7.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Archetype Buildings</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>teaser.logic.buildingobjects.calculation.ibpsa &#8212; TEASER 0.7.7 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinxdoc.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/autodoc_pydantic.css" />
+    <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+  </head><body>
+<div class="headerStyle">
+<img src="_static/EBC_Logo.png" alt="EBC_Logo" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">TEASER 0.7.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">teaser.logic.buildingobjects.calculation.ibpsa</a></li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for teaser.logic.buildingobjects.calculation.ibpsa</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;This module includes IBPSA calculation class.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utilities</span>
+
+
+<div class="viewcode-block" id="IBPSA"><a class="viewcode-back" href="../../../../../teaser.Logic.BuildingObjects.Calculation.html#teaser.logic.buildingobjects.calculation.ibpsa.IBPSA">[docs]</a><span class="k">class</span> <span class="nc">IBPSA</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to calculate parameters for AixLib output.</span>
+
+<span class="sd">    This class holds functions to sort and partly rewrite zone and building</span>
+<span class="sd">    attributes specific for IBPSA simulation. This includes the export of</span>
+<span class="sd">    boundary conditions.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    parent: Building()</span>
+<span class="sd">        The parent class of this object, the Building the attributes are</span>
+<span class="sd">        calculated for. (default: None)</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    file_internal_gains : str</span>
+<span class="sd">        Filename for internal gains file</span>
+<span class="sd">    version : dict</span>
+<span class="sd">        Dictionary with supported libraries and their version numbers</span>
+<span class="sd">    consider_heat_capacity : bool</span>
+<span class="sd">        decides whether air capacity is considered or not for all thermal</span>
+<span class="sd">        zones in the building</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct IBPSA.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_internal_gains</span> <span class="o">=</span> <span class="s2">&quot;InternalGains_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.mat&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;AixLib&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Buildings&quot;</span><span class="p">:</span> <span class="s2">&quot;7.0.0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;BuildingSystems&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0-beta2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;IDEAS&quot;</span><span class="p">:</span> <span class="s2">&quot;2.1.0&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">consider_heat_capacity</span> <span class="o">=</span> <span class="kc">True</span>
+
+<div class="viewcode-block" id="IBPSA.modelica_gains_boundary"><a class="viewcode-back" href="../../../../../teaser.Logic.BuildingObjects.Calculation.html#teaser.logic.buildingobjects.calculation.ibpsa.IBPSA.modelica_gains_boundary">[docs]</a>    <span class="k">def</span> <span class="nf">modelica_gains_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zone</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;creates .mat file for internal gains boundary conditions</span>
+
+<span class="sd">        This function creates a matfile (-v4) for building internal gains</span>
+<span class="sd">        boundary conditions. It collects internal gain profiles of a specific</span>
+<span class="sd">        zones and stores them into one file. It also calculates the internal</span>
+<span class="sd">        gains from relative presence and values for heat output into W for</span>
+<span class="sd">        direct usage in Annex models.</span>
+
+<span class="sd">        Only person (convective and radiative) and machines (convective) are</span>
+<span class="sd">        used in the simple Annex 60 examples.</span>
+
+<span class="sd">        1. Column : time step</span>
+<span class="sd">        2 Column : profile_persons, radiative</span>
+<span class="sd">        3 Column : profile_persons, convective</span>
+<span class="sd">        4 Column : profile_machines, convective</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----------</span>
+<span class="sd">        When time line is created, we need to add a 0 to first element of</span>
+<span class="sd">        all boundaries. This is due to to expected format in Modelica.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        zone : ThermalZone()</span>
+<span class="sd">            TEASER instance of ThermalZone. As IBPSA computes single models</span>
+<span class="sd">            for single zones, we need to generate individual files for zones</span>
+<span class="sd">            and internal gains</span>
+<span class="sd">        path : str</span>
+<span class="sd">            optional path, when matfile is exported separately</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_default_path</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_internal_gains</span><span class="p">)</span>
+
+        <span class="n">export</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">&quot;2019-01-01 00:00:00&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">8760</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;H&quot;</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">to_series</span><span class="p">()</span>
+            <span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">export</span><span class="p">[</span><span class="s2">&quot;person_rad_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">schedules</span><span class="p">[</span><span class="s2">&quot;persons_profile&quot;</span><span class="p">]</span>
+            <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">ratio_conv_rad_persons</span><span class="p">)</span>
+            <span class="o">*</span> <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">fixed_heat_flow_rate_persons</span>
+            <span class="o">*</span> <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">persons</span>
+            <span class="o">*</span> <span class="n">zone</span><span class="o">.</span><span class="n">area</span>
+        <span class="p">)</span>
+        <span class="n">export</span><span class="p">[</span><span class="s2">&quot;person_conv_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">schedules</span><span class="p">[</span><span class="s2">&quot;persons_profile&quot;</span><span class="p">]</span>
+            <span class="o">*</span> <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">ratio_conv_rad_persons</span>
+            <span class="o">*</span> <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">fixed_heat_flow_rate_persons</span>
+            <span class="o">*</span> <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">persons</span>
+            <span class="o">*</span> <span class="n">zone</span><span class="o">.</span><span class="n">area</span>
+        <span class="p">)</span>
+        <span class="n">export</span><span class="p">[</span><span class="s2">&quot;machines_conv_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">schedules</span><span class="p">[</span><span class="s2">&quot;machines_profile&quot;</span><span class="p">]</span>
+            <span class="o">*</span> <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">ratio_conv_rad_machines</span>
+            <span class="o">*</span> <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">machines</span>
+            <span class="o">*</span> <span class="n">zone</span><span class="o">.</span><span class="n">area</span>
+        <span class="p">)</span>
+
+        <span class="n">export</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3600</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8760</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_delete_file</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;#1</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="c1"># The size of the dataset is always 4 columns as each thermal zone has its own data file.</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;double Internals(8761, 4)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="c1"># write the first row with t=0</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;0</span><span class="se">\t</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">export</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)))</span>
+            <span class="n">export</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index_label</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_delete_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete a file before new information is written to it.</span>
+
+<span class="sd">        If a building with the exact name and project name is generated, we need to make</span>
+<span class="sd">        sure to delete the old information in the text files. This helper function is a</span>
+<span class="sd">        wrapper to delete a file with given filepath.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">        -----------</span>
+<span class="sd">        path : str</span>
+<span class="sd">            Absolute path to the file to be deleted.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+            <span class="k">pass</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">TEASER 0.7.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">teaser.logic.buildingobjects.calculation.ibpsa</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+    </div>
+  </body>
+</html>

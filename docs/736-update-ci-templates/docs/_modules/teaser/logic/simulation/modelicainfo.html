@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>teaser.logic.simulation.modelicainfo &#8212; TEASER 0.7.7 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinxdoc.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+<div class="headerStyle">
+<img src="_static/EBC_Logo.png" alt="EBC_Logo" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">TEASER 0.7.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">teaser.logic.simulation.modelicainfo</a></li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for teaser.logic.simulation.modelicainfo</h1><div class="highlight"><pre>
+<span></span><span class="c1"># created November 2015</span>
+<span class="c1"># by TEASER4 Development Team</span>
+
+
+<div class="viewcode-block" id="ModelicaInfo"><a class="viewcode-back" href="../../../../teaser.Logic.Simulation.html#teaser.logic.simulation.modelicainfo.ModelicaInfo">[docs]</a><span class="k">class</span> <span class="nc">ModelicaInfo</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ModelicaInfo Class</span>
+
+<span class="sd">    This class holds information specific for Modelica Simulation. Some of</span>
+<span class="sd">    these solver or flags might only be applicable to Dymola.</span>
+
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    start_time : int [s]</span>
+<span class="sd">        Start time for the simulation, default 0</span>
+<span class="sd">    stop_time : int [s]</span>
+<span class="sd">        Stop time for the simulation, default 31536000</span>
+<span class="sd">    interval_output : str [s]</span>
+<span class="sd">        Interval for one time step, default 3600 for one hour</span>
+<span class="sd">    solver : list</span>
+<span class="sd">        list of available solvers for Modelica</span>
+<span class="sd">    current_solver : str</span>
+<span class="sd">        solver that should be used in simulation, default &#39;Radau&#39;</span>
+<span class="sd">    equidistant_output : bool</span>
+<span class="sd">        Use of Equidistant time grid flag in Modelica.</span>
+<span class="sd">    variables_at_events : bool</span>
+<span class="sd">        Use of events flag in Modelica.</span>
+<span class="sd">    version : str</span>
+<span class="sd">        Version of Modelica and Modelica Standard Library</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor of ModelicaInfo Class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Base-Values for the simulation tab</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop_time</span> <span class="o">=</span> <span class="mi">31536000</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interval_output</span> <span class="o">=</span> <span class="s2">&quot;3600&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">solver</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Lsodar&quot;</span><span class="p">,</span> <span class="s2">&quot;dassl&quot;</span><span class="p">,</span> <span class="s2">&quot;Radau&quot;</span><span class="p">,</span> <span class="s2">&quot;Cvode&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_solver</span> <span class="o">=</span> <span class="s2">&quot;Cvode&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">equidistant_output</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results_at_events</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;3.2.3&quot;</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">TEASER 0.7.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">teaser.logic.simulation.modelicainfo</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+    </div>
+  </body>
+</html>

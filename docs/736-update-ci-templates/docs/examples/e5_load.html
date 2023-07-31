@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>&lt;no title&gt; &#8212; TEASER 0.7.7 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+<div class="headerStyle">
+<img src="_static/EBC_Logo.png" alt="EBC_Logo" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TEASER 0.7.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">&lt;no title&gt;</a></li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/examples/e5_load.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <blockquote>
+<div><p>Created January 2017
+TEASER Development Team</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  &quot;&quot;&quot;This module contains an example how to import TEASER projects from
+  *.teaserjson and pickle in order to reuse data.
+  &quot;&quot;&quot;
+
+  import teaser.logic.utilities as utilities
+  import os
+
+In example e4_save we saved two TEASER projects using *.teaserjson and
+Python package pickle. This example shows how to import these
+information into your python environment again.
+To load data from *.teaserjson we can use a simple API function. So
+first we need to instantiate our API (similar to example
+e1_generate_archetype). The json file is called
+``ArchetypeExample.teaserjson`` and saved in the default path. You need to
+ run e4 first before you can load this example file.
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  from teaser.project import Project
+
+  prj = Project()
+
+  load_json = os.path.join(utilities.get_default_path(), &quot;ArchetypeExample.json&quot;)
+
+  prj.load_project(path=load_json)
+
+  prj = Project()
+  prj.load_project(utilities.get_full_path(&quot;examples/examplefiles/unitTest.json&quot;))
+  prj.save_project(file_name=&quot;unitTest&quot;, path=None)
+
+To reload data from a pickle file, we do not need to instantiate an
+API, as pickle will automatically instantiate all classes as they have
+been saved. The saved file from example e4 is called ´teaser_pickle.p´
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="kn">import</span> <span class="nn">pickle</span>
+
+  <span class="n">load_pickle</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_default_path</span><span class="p">(),</span> <span class="s2">&quot;teaser_pickle.p&quot;</span><span class="p">)</span>
+
+  <span class="n">pickle_prj</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">load_pickle</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">))</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">pickle_prj</span><span class="p">)</span>
+
+<span class="n">After</span> <span class="n">you</span> <span class="n">imported</span> <span class="n">your</span> <span class="n">teaser</span> <span class="n">project</span> <span class="n">one</span> <span class="ow">or</span> <span class="n">another</span> <span class="n">way</span> <span class="n">into</span> <span class="n">you</span>
+<span class="n">python</span> <span class="n">environment</span> <span class="n">you</span> <span class="n">can</span> <span class="n">access</span> <span class="n">variables</span> <span class="ow">and</span> <span class="n">functions</span><span class="o">.</span>
+</pre></div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TEASER 0.7.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">&lt;no title&gt;</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+    </div>
+  </body>
+</html>
