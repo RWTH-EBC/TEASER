@@ -30,6 +30,6 @@ Example 5: Load information
 .. mdinclude::  examples/e5_load.md
 
 Example 6: Retrofit buildings
-----------------------------
+------------------------------
 
 .. mdinclude::  examples/e7_retrofit.md
