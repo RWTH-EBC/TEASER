@@ -112,45 +112,78 @@ API for script based interface. It is highly recommended to always
 instantiate the Project class before starting to work with TEASER. It
 contains functions to generate archetype buildings, to export models and to
 save information for later use.</p>
-<section id="parameters">
-<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">¶</a></h2>
-<dl class="simple">
-<dt>load_data<span class="classifier">boolean</span></dt><dd><p>boolean if data bases for materials, type elements and use conditions
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>load_data</strong><span class="classifier">boolean</span></dt><dd><p>boolean if data bases for materials, type elements and use conditions
 should be loaded. default = False but will be automatically loaded
 once you add a archetype building. For building generation from
 scratch, set to True</p>
 </dd>
 </dl>
-</section>
-<section id="attributes">
-<h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this heading">¶</a></h2>
-<dl class="simple">
-<dt>name<span class="classifier">str</span></dt><dd><p>Name of the Project (default is ‘Project’)</p>
 </dd>
-<dt>modelica_info<span class="classifier">instance of ModelicaInfo</span></dt><dd><p>TEASER instance of ModelicaInfo to store Modelica related
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Name of the Project (default is ‘Project’)</p>
+</dd>
+<dt><strong>modelica_info</strong><span class="classifier">instance of ModelicaInfo</span></dt><dd><p>TEASER instance of ModelicaInfo to store Modelica related
 information, like used compiler, start and stop time, etc.</p>
 </dd>
-<dt>buildings<span class="classifier">list</span></dt><dd><p>List of all buildings in one project, instances of Building()</p>
+<dt><strong>buildings</strong><span class="classifier">list</span></dt><dd><p>List of all buildings in one project, instances of Building()</p>
 </dd>
-<dt>data<span class="classifier">instance of DataClass</span></dt><dd><p>TEASER instance of DataClass containing JSON binding classes</p>
+<dt><strong>data</strong><span class="classifier">instance of DataClass</span></dt><dd><p>TEASER instance of DataClass containing JSON binding classes</p>
 </dd>
-<dt>weather_file_path<span class="classifier">str</span></dt><dd><p>Absolute path to weather file used for Modelica simulation. Default
+<dt><strong>weather_file_path</strong><span class="classifier">str</span></dt><dd><p>Absolute path to weather file used for Modelica simulation. Default
 weather file can be find in inputdata/weatherdata.</p>
 </dd>
-<dt>number_of_elements_calc<span class="classifier">int</span></dt><dd><p>Defines the number of elements, that are aggregated (1, 2, 3 or 4),
+<dt><strong>number_of_elements_calc</strong><span class="classifier">int</span></dt><dd><p>Defines the number of elements, that are aggregated (1, 2, 3 or 4),
 default is 2</p>
 </dd>
-<dt>merge_windows_calc<span class="classifier">bool</span></dt><dd><p>True for merging the windows into the outer walls, False for
+<dt><strong>merge_windows_calc</strong><span class="classifier">bool</span></dt><dd><p>True for merging the windows into the outer walls, False for
 separate resistance for window, default is False (only supported for
 IBPSA)</p>
 </dd>
-<dt>used_library_calc<span class="classifier">str</span></dt><dd><p>used library (AixLib and IBPSA are supported)</p>
+<dt><strong>used_library_calc</strong><span class="classifier">str</span></dt><dd><p>used library (AixLib and IBPSA are supported)</p>
 </dd>
-<dt>dir_reference_results<span class="classifier">str</span></dt><dd><p>Path to reference results in BuildingsPy format. If not None, the results
+<dt><strong>dir_reference_results</strong><span class="classifier">str</span></dt><dd><p>Path to reference results in BuildingsPy format. If not None, the results
 will be copied into the model output directories so that the exported
 models can be regression tested against these results with BuildingsPy.</p>
 </dd>
 </dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#teaser.project.Project.add_non_residential" title="teaser.project.Project.add_non_residential"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_non_residential</span></code></a>(method, usage, name, ...)</p></td>
+<td><p>Add a non-residential building to the TEASER project.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#teaser.project.Project.add_residential" title="teaser.project.Project.add_residential"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_residential</span></code></a>(method, usage, name, ...[, ...])</p></td>
+<td><p>Add a residential building to the TEASER project.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#teaser.project.Project.calc_all_buildings" title="teaser.project.Project.calc_all_buildings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_all_buildings</span></code></a>([raise_errors])</p></td>
+<td><p>Calculates values for all project buildings</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#teaser.project.Project.export_aixlib" title="teaser.project.Project.export_aixlib"><code class="xref py py-obj docutils literal notranslate"><span class="pre">export_aixlib</span></code></a>([building_model, zone_model, ...])</p></td>
+<td><p>Exports values to a record file for Modelica simulation</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#teaser.project.Project.export_ibpsa" title="teaser.project.Project.export_ibpsa"><code class="xref py py-obj docutils literal notranslate"><span class="pre">export_ibpsa</span></code></a>([library, internal_id, path])</p></td>
+<td><p>Exports values to a record file for Modelica simulation</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#teaser.project.Project.load_project" title="teaser.project.Project.load_project"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_project</span></code></a>(path)</p></td>
+<td><p>Load the project from a json file (new format).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#teaser.project.Project.retrofit_all_buildings" title="teaser.project.Project.retrofit_all_buildings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">retrofit_all_buildings</span></code></a>([year_of_retrofit, ...])</p></td>
+<td><p>Retrofits all buildings in the project.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#teaser.project.Project.save_project" title="teaser.project.Project.save_project"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_project</span></code></a>([file_name, path])</p></td>
+<td><p>Saves the project to a JSON file</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#teaser.project.Project.set_default" title="teaser.project.Project.set_default"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_default</span></code></a>([load_data])</p></td>
+<td><p>Sets all attributes to default</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="py method">
 <dt class="sig sig-object py" id="teaser.project.Project.add_non_residential">
 <span class="sig-name descname"><span class="pre">add_non_residential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">usage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_construction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_floors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height_of_floors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_leased_area</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_ahu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_gains_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">office_layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">construction_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaser/project.html#Project.add_non_residential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.add_non_residential" title="Permalink to this definition">¶</a></dt>
@@ -167,9 +200,14 @@ methods, please read the docs of archetype classes.</p>
 <p>This function also calculates the parameters of the buildings directly
 with the settings set in the project (e.g. used_library_calc or
 number_of_elements_calc).</p>
+</div></blockquote>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>method</strong><span class="classifier">str</span></dt><dd><blockquote>
+<div><p>Used archetype method, currently only ‘bmvbs’ is supported</p>
+</div></blockquote>
 <dl class="simple">
-<dt>method<span class="classifier">str</span></dt><dd><p>Used archetype method, currently only ‘bmvbs’ is supported</p>
-</dd>
 <dt>usage<span class="classifier">str</span></dt><dd><p>Main usage of the obtained building, currently only ‘office’,
 ‘institute’, ‘institute4’, institute8’ are supported</p>
 </dd>
@@ -191,9 +229,8 @@ assigned to attribute central_ahu. This instance holds information
 for central Air Handling units. Default is False.</p>
 </dd>
 </dl>
-</div></blockquote>
-<dl>
-<dt>internal_gains_mode: int [1, 2, 3]</dt><dd><p>mode for the internal gains calculation done in AixLib:
+</dd>
+<dt><strong>internal_gains_mode: int [1, 2, 3]</strong></dt><dd><p>mode for the internal gains calculation done in AixLib:
 1: Temperature and activity degree dependent heat flux calculation for persons. The</p>
 <blockquote>
 <div><p>calculation is based on  SIA 2024 (default)</p>
@@ -229,7 +266,13 @@ light: light construction</p>
 </dl>
 </dd>
 </dl>
-<p>type_bldg : Instance of Office()</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>type_bldg</strong><span class="classifier">Instance of Office()</span></dt><dd></dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -251,10 +294,15 @@ read the docs of archetype classes.
 This function also calculates the parameters of the buildings directly
 with the settings set in the project (e.g. used_library_calc or
 number_of_elements_calc).</p>
-<dl class="simple">
-<dt>method<span class="classifier">str</span></dt><dd><p>Used archetype method, currently only ‘iwu’ or ‘urbanrenet’ are
+</div></blockquote>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>method</strong><span class="classifier">str</span></dt><dd><blockquote>
+<div><p>Used archetype method, currently only ‘iwu’ or ‘urbanrenet’ are
 supported, ‘tabula_de’ to follow soon</p>
-</dd>
+</div></blockquote>
+<dl class="simple">
 <dt>usage<span class="classifier">str</span></dt><dd><p>Main usage of the obtained building, currently only
 ‘single_family_dwelling’ is supported for iwu and ‘est1a’, ‘est1b’,
 ‘est2’, ‘est3’, ‘est4a’, ‘est4b’, ‘est5’ ‘est6’, ‘est7’, ‘est8a’,
@@ -278,9 +326,8 @@ assigned to attribute central_ahu. This instance holds information
 for central Air Handling units. Default is False.</p>
 </dd>
 </dl>
-</div></blockquote>
-<dl>
-<dt>internal_gains_mode: int [1, 2, 3]</dt><dd><p>mode for the internal gains calculation done in AixLib:
+</dd>
+<dt><strong>internal_gains_mode: int [1, 2, 3]</strong></dt><dd><p>mode for the internal gains calculation done in AixLib:
 1: Temperature and activity degree dependent heat flux calculation for persons. The</p>
 <blockquote>
 <div><p>calculation is based on  SIA 2024 (default)</p>
@@ -347,7 +394,13 @@ light: light construction</p>
 used for urbanrenet</p>
 </dd>
 </dl>
-<p>type_bldg : Instance of Archetype Building</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>type_bldg</strong><span class="classifier">Instance of Archetype Building</span></dt><dd></dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -383,17 +436,18 @@ model. In contrast to versions &lt; 0.5 TEASER now does not
 support any model options, as we observed no need, since single
 ThermalZones are identically with IBPSA models. If you miss one of
 the old options please contact us.</p>
-<section id="id1">
-<h3>Parameters<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>internal_id<span class="classifier">float</span></dt><dd><p>setter of a specific building which will be exported, if None then
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>setter of a specific building which will be exported, if None then
 all buildings will be exported</p>
 </dd>
-<dt>path<span class="classifier">string</span></dt><dd><p>if the Files should not be stored in default output path of TEASER,
+<dt><strong>path</strong><span class="classifier">string</span></dt><dd><p>if the Files should not be stored in default output path of TEASER,
 an alternative path can be specified as a full path</p>
 </dd>
 </dl>
-</section>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -401,23 +455,24 @@ an alternative path can be specified as a full path</p>
 <span class="sig-name descname"><span class="pre">export_ibpsa</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">library</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'AixLib'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaser/project.html#Project.export_ibpsa"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.export_ibpsa" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exports values to a record file for Modelica simulation</p>
 <p>For Annex 60 Library</p>
-<section id="id2">
-<h3>Parameters<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>library<span class="classifier">str</span></dt><dd><p>Used library within the framework of IBPSA library. The
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>library</strong><span class="classifier">str</span></dt><dd><p>Used library within the framework of IBPSA library. The
 models are identical in each library, but IBPSA Modelica library is
 just a core set of models and should not be used standalone.
 Valid values are ‘AixLib’ (default), ‘Buildings’,
 ‘BuildingSystems’ and ‘IDEAS’.</p>
 </dd>
-<dt>internal_id<span class="classifier">float</span></dt><dd><p>setter of a specific building which will be exported, if None then
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>setter of a specific building which will be exported, if None then
 all buildings will be exported</p>
 </dd>
-<dt>path<span class="classifier">string</span></dt><dd><p>if the Files should not be stored in default output path of TEASER,
+<dt><strong>path</strong><span class="classifier">string</span></dt><dd><p>if the Files should not be stored in default output path of TEASER,
 an alternative path can be specified as a full path</p>
 </dd>
 </dl>
-</section>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -425,13 +480,14 @@ an alternative path can be specified as a full path</p>
 <span class="sig-name descname"><span class="pre">load_project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaser/project.html#Project.load_project"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.load_project" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load the project from a json file (new format).</p>
 <p>Calls the function load_teaser_json.</p>
-<section id="id3">
-<h3>Parameters<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>path<span class="classifier">string</span></dt><dd><p>full path to a json file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>path</strong><span class="classifier">string</span></dt><dd><p>full path to a json file</p>
 </dd>
 </dl>
-</section>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -460,21 +516,22 @@ automatically, using the calculation_method specified in the
 first scenario.</p>
 <p>Note: To Calculate U-Value, the standard TEASER coefficients for outer
 and inner heat transfer are used.</p>
-<section id="id4">
-<h3>Parameters<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>year_of_retrofit<span class="classifier">int</span></dt><dd><p>the year the buildings are retrofitted, only ‘iwu’/’bmbvs’
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>the year the buildings are retrofitted, only ‘iwu’/’bmbvs’
 archetype approach.</p>
 </dd>
-<dt>type_of_retrofit<span class="classifier">str</span></dt><dd><p>The classification of retrofit, if the archetype building
+<dt><strong>type_of_retrofit</strong><span class="classifier">str</span></dt><dd><p>The classification of retrofit, if the archetype building
 approach of TABULA is used.</p>
 </dd>
-<dt>window_type<span class="classifier">str</span></dt><dd><p>Default: EnEv 2014, only ‘iwu’/’bmbvs’ archetype approach.</p>
+<dt><strong>window_type</strong><span class="classifier">str</span></dt><dd><p>Default: EnEv 2014, only ‘iwu’/’bmbvs’ archetype approach.</p>
 </dd>
-<dt>material<span class="classifier">str</span></dt><dd><p>Default: EPS035, only ‘iwu’/’bmbvs’ archetype approach.</p>
+<dt><strong>material</strong><span class="classifier">str</span></dt><dd><p>Default: EPS035, only ‘iwu’/’bmbvs’ archetype approach.</p>
 </dd>
 </dl>
-</section>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -482,16 +539,17 @@ approach of TABULA is used.</p>
 <span class="sig-name descname"><span class="pre">save_project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaser/project.html#Project.save_project"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.save_project" title="Permalink to this definition">¶</a></dt>
 <dd><p>Saves the project to a JSON file</p>
 <p>Calls the function save_teaser_json in data.output.teaserjson_output</p>
-<section id="id5">
-<h3>Parameters<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>file_name<span class="classifier">string</span></dt><dd><p>name of the new file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_name</strong><span class="classifier">string</span></dt><dd><p>name of the new file</p>
 </dd>
-<dt>path<span class="classifier">string</span></dt><dd><p>if the Files should not be stored in OutputData, an alternative
+<dt><strong>path</strong><span class="classifier">string</span></dt><dd><p>if the Files should not be stored in OutputData, an alternative
 can be specified</p>
 </dd>
 </dl>
-</section>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -499,18 +557,18 @@ can be specified</p>
 <span class="sig-name descname"><span class="pre">set_default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">load_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaser/project.html#Project.set_default"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.set_default" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets all attributes to default</p>
 <p>Caution: this will delete all buildings.</p>
-<section id="id6">
-<h3>Parameters<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>load_data<span class="classifier">boolean, None-type</span></dt><dd><p>boolean if data bindings for type elements and use conditions
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>load_data</strong><span class="classifier">boolean, None-type</span></dt><dd><p>boolean if data bindings for type elements and use conditions
 should be loaded (default = True), in addition it could be a None-
 type to use the already used data bindings</p>
 </dd>
 </dl>
-</section>
+</dd>
+</dl>
 </dd></dl>
 
-</section>
 </dd></dl>
 
 </section>

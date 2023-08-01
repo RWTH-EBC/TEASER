@@ -105,33 +105,48 @@
 <p>Class for JSON data.</p>
 <p>This class loads all JSON files with statistic or template data needed
 for statistical data enrichment.</p>
-<section id="parameters">
-<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">¶</a></h2>
-<dl class="simple">
-<dt>used_statistics<span class="classifier">str</span></dt><dd><p>This parameter indicates which statistical data about building
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>used_statistics</strong><span class="classifier">str</span></dt><dd><p>This parameter indicates which statistical data about building
 elements should be used. Use ‘iwu’ or ‘tabula_de’.</p>
 </dd>
 </dl>
-</section>
-<section id="attributes">
-<h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this heading">¶</a></h2>
-<dl class="simple">
-<dt>element_bind<span class="classifier">collections.OrderedDict</span></dt><dd><p>Ordered dictionary of the TypeBuildingElements binding.</p>
 </dd>
-<dt>path_tb<span class="classifier">str</span></dt><dd><p>Full path to TypeBuildingElements.json. Default is
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>element_bind</strong><span class="classifier">collections.OrderedDict</span></dt><dd><p>Ordered dictionary of the TypeBuildingElements binding.</p>
+</dd>
+<dt><strong>path_tb</strong><span class="classifier">str</span></dt><dd><p>Full path to TypeBuildingElements.json. Default is
 teaser/data/input/inputdata/TypeBuildingElements.json.</p>
 </dd>
-<dt>material_bind<span class="classifier">collections.OrderedDict</span></dt><dd><p>Ordered dictionary of the Material binding.</p>
+<dt><strong>material_bind</strong><span class="classifier">collections.OrderedDict</span></dt><dd><p>Ordered dictionary of the Material binding.</p>
 </dd>
-<dt>path_mat<span class="classifier">str</span></dt><dd><p>Full path to MaterialTemplates.json. Default is
+<dt><strong>path_mat</strong><span class="classifier">str</span></dt><dd><p>Full path to MaterialTemplates.json. Default is
 teaser/data/input/inputdata/MaterialTemplates.json.</p>
 </dd>
-<dt>conditions_bind<span class="classifier">collections.OrderedDict</span></dt><dd><p>Ordered dictionary of the UseConditions binding.</p>
+<dt><strong>conditions_bind</strong><span class="classifier">collections.OrderedDict</span></dt><dd><p>Ordered dictionary of the UseConditions binding.</p>
 </dd>
-<dt>path_uc<span class="classifier">str</span></dt><dd><p>Full path to UseConditions.json. Default is
+<dt><strong>path_uc</strong><span class="classifier">str</span></dt><dd><p>Full path to UseConditions.json. Default is
 teaser/data/input/inputdata/UseConditions.json</p>
 </dd>
 </dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#teaser.data.dataclass.DataClass.load_mat_binding" title="teaser.data.dataclass.DataClass.load_mat_binding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_mat_binding</span></code></a>()</p></td>
+<td><p>Load MaterialTemplates json into binding classes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#teaser.data.dataclass.DataClass.load_tb_binding" title="teaser.data.dataclass.DataClass.load_tb_binding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_tb_binding</span></code></a>()</p></td>
+<td><p>Load TypeBuildingElement json into binding classes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#teaser.data.dataclass.DataClass.load_uc_binding" title="teaser.data.dataclass.DataClass.load_uc_binding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_uc_binding</span></code></a>()</p></td>
+<td><p>Load UseConditions json into binding classes.</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="py method">
 <dt class="sig sig-object py" id="teaser.data.dataclass.DataClass.load_mat_binding">
 <span class="sig-name descname"><span class="pre">load_mat_binding</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaser/data/dataclass.html#DataClass.load_mat_binding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.dataclass.DataClass.load_mat_binding" title="Permalink to this definition">¶</a></dt>
@@ -150,7 +165,6 @@ teaser/data/input/inputdata/UseConditions.json</p>
 <dd><p>Load UseConditions json into binding classes.</p>
 </dd></dl>
 
-</section>
 </dd></dl>
 
 </section>

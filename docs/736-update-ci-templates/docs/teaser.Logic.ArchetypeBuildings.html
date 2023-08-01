@@ -126,26 +126,26 @@ UrbanReNet, Tabula, etc.). It is a subclass of Building and introduces
 several parameters to be obligatory (parent, name, year_of_construction,
 net_leased_area)</p>
 <p>Please use this class to create new archetype methodologies.</p>
-<section id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">¶</a></h3>
-<dl>
-<dt>parent: Project()</dt><dd><p>The parent class of this object, the Project the Building belongs to.
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>parent: Project()</strong></dt><dd><p>The parent class of this object, the Project the Building belongs to.
 Allows for better control of hierarchical structures. If not None it
 adds this Building instance to Project.buildings.
 (default: None)</p>
 </dd>
-<dt>name<span class="classifier">str</span></dt><dd><p>Individual name</p>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
 </dd>
-<dt>year_of_construction<span class="classifier">int</span></dt><dd><p>Year of first construction</p>
+<dt><strong>year_of_construction</strong><span class="classifier">int</span></dt><dd><p>Year of first construction</p>
 </dd>
-<dt>net_leased_area<span class="classifier">float [m2]</span></dt><dd><p>Total net leased area of building. This is area is NOT the footprint
+<dt><strong>net_leased_area</strong><span class="classifier">float [m2]</span></dt><dd><p>Total net leased area of building. This is area is NOT the footprint
 of a building</p>
 </dd>
-<dt>with_ahu<span class="classifier">Boolean</span></dt><dd><p>If set to True, an empty instance of BuildingAHU is instantiated and
+<dt><strong>with_ahu</strong><span class="classifier">Boolean</span></dt><dd><p>If set to True, an empty instance of BuildingAHU is instantiated and
 assigned to attribute central_ahu. This instance holds information for
 central Air Handling units. Default is False.</p>
 </dd>
-<dt>internal_gains_mode: int [1, 2, 3]</dt><dd><p>mode for the internal gains calculation done in AixLib:
+<dt><strong>internal_gains_mode: int [1, 2, 3]</strong></dt><dd><p>mode for the internal gains calculation done in AixLib:
 1: Temperature and activity degree dependent heat flux calculation for persons. The</p>
 <blockquote>
 <div><p>calculation is based on  SIA 2024 (default)</p>
@@ -160,70 +160,129 @@ Engineering ToolBox (2004) and regards only persons.</p>
 </dd>
 </dl>
 </dd>
-</dl>
-</section>
-<section id="attributes">
-<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>central_ahu<span class="classifier">instance of BuildingAHU</span></dt><dd><p>Teaser Instance of BuildingAHU if a central AHU is embedded into the
+<dt><strong>Attributes</strong></dt><dd></dd>
+<dt><strong>———-</strong></dt><dd></dd>
+<dt><strong>central_ahu</strong><span class="classifier">instance of BuildingAHU</span></dt><dd><p>Teaser Instance of BuildingAHU if a central AHU is embedded into the
 building (currently mostly needed for AixLib simulation).</p>
 </dd>
-<dt>number_of_floors<span class="classifier">int</span></dt><dd><p>number of floors above ground (default: None)</p>
+<dt><strong>number_of_floors</strong><span class="classifier">int</span></dt><dd><p>number of floors above ground (default: None)</p>
 </dd>
-<dt>height_of_floors<span class="classifier">float [m]</span></dt><dd><p>Average height of the floors (default: None)</p>
+<dt><strong>height_of_floors</strong><span class="classifier">float [m]</span></dt><dd><p>Average height of the floors (default: None)</p>
 </dd>
-<dt>internal_id<span class="classifier">float</span></dt><dd><p>Random id for the distinction between different buildings.</p>
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different buildings.</p>
 </dd>
-<dt>year_of_retrofit<span class="classifier">int</span></dt><dd><p>Year of last retrofit.</p>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of last retrofit.</p>
 </dd>
-<dt>type_of_building<span class="classifier">string</span></dt><dd><p>Type of a Building (e.g. Building (unspecified), Office etc.).</p>
+<dt><strong>type_of_building</strong><span class="classifier">string</span></dt><dd><p>Type of a Building (e.g. Building (unspecified), Office etc.).</p>
 </dd>
-<dt>building_id<span class="classifier">None</span></dt><dd><p>ID of building, can be set by the user to keep track of a building
+<dt><strong>building_id</strong><span class="classifier">None</span></dt><dd><p>ID of building, can be set by the user to keep track of a building
 even outside of TEASER, e.g. in a simulation or in post-processing.
 This is not the same as internal_id, as internal_id is e.g. not
 exported to Modelica models!</p>
 </dd>
-<dt>street_name<span class="classifier">string</span></dt><dd><p>Name of the street the building is located at. (optional)</p>
+<dt><strong>street_name</strong><span class="classifier">string</span></dt><dd><p>Name of the street the building is located at. (optional)</p>
 </dd>
-<dt>city<span class="classifier">string</span></dt><dd><p>Name of the city the building is located at. (optional)</p>
+<dt><strong>city</strong><span class="classifier">string</span></dt><dd><p>Name of the city the building is located at. (optional)</p>
 </dd>
-<dt>longitude<span class="classifier">float [degree]</span></dt><dd><p>Longitude of building location.</p>
+<dt><strong>longitude</strong><span class="classifier">float [degree]</span></dt><dd><p>Longitude of building location.</p>
 </dd>
-<dt>latitude<span class="classifier">float [degree]</span></dt><dd><p>Latitude of building location.</p>
+<dt><strong>latitude</strong><span class="classifier">float [degree]</span></dt><dd><p>Latitude of building location.</p>
 </dd>
-<dt>thermal_zones<span class="classifier">list</span></dt><dd><p>List with instances of ThermalZone(), that are located in this building.</p>
+<dt><strong>thermal_zones</strong><span class="classifier">list</span></dt><dd><p>List with instances of ThermalZone(), that are located in this building.</p>
 </dd>
-<dt>outer_area<span class="classifier">dict [degree: m2]</span></dt><dd><p>Dictionary with orientation as key and sum of outer wall areas of
+<dt><strong>outer_area</strong><span class="classifier">dict [degree: m2]</span></dt><dd><p>Dictionary with orientation as key and sum of outer wall areas of
 that direction as value.</p>
 </dd>
-<dt>window_area<span class="classifier">dict [degree: m2]</span></dt><dd><p>Dictionary with orientation as key and sum of window areas of
+<dt><strong>window_area</strong><span class="classifier">dict [degree: m2]</span></dt><dd><p>Dictionary with orientation as key and sum of window areas of
 that direction as value.</p>
 </dd>
-<dt>bldg_height<span class="classifier">float [m]</span></dt><dd><p>Total building height.</p>
+<dt><strong>bldg_height</strong><span class="classifier">float [m]</span></dt><dd><p>Total building height.</p>
 </dd>
-<dt>volume<span class="classifier">float [m3]</span></dt><dd><p>Total volume of all thermal zones.</p>
+<dt><strong>volume</strong><span class="classifier">float [m3]</span></dt><dd><p>Total volume of all thermal zones.</p>
 </dd>
-<dt>sum_heat_load<span class="classifier">float [W]</span></dt><dd><p>Total heating load of all thermal zones.</p>
+<dt><strong>sum_heat_load</strong><span class="classifier">float [W]</span></dt><dd><p>Total heating load of all thermal zones.</p>
 </dd>
-<dt>sum_cooling_load<span class="classifier">float [W]</span></dt><dd><p>Total heating load of all thermal zones. (currently not supported)</p>
+<dt><strong>sum_cooling_load</strong><span class="classifier">float [W]</span></dt><dd><p>Total heating load of all thermal zones. (currently not supported)</p>
 </dd>
-<dt>number_of_elements_calc<span class="classifier">int</span></dt><dd><p>Number of elements that are used for thermal zone calculation in this
+<dt><strong>number_of_elements_calc</strong><span class="classifier">int</span></dt><dd><p>Number of elements that are used for thermal zone calculation in this
 building.
 1: OneElement
 2: TwoElement
 3: ThreeElement
 4: FourElement</p>
 </dd>
-<dt>merge_windows_calc<span class="classifier">boolean</span></dt><dd><p>True for merging the windows into the outer wall’s RC-combination,
+<dt><strong>merge_windows_calc</strong><span class="classifier">boolean</span></dt><dd><p>True for merging the windows into the outer wall’s RC-combination,
 False for separate resistance for window, default is False</p>
 </dd>
-<dt>used_library_calc<span class="classifier">str</span></dt><dd><p>‘AixLib’ for <a class="reference external" href="https://github.com/RWTH-EBC/AixLib">https://github.com/RWTH-EBC/AixLib</a>
+<dt><strong>used_library_calc</strong><span class="classifier">str</span></dt><dd><p>‘AixLib’ for <a class="reference external" href="https://github.com/RWTH-EBC/AixLib">https://github.com/RWTH-EBC/AixLib</a>
 ‘IBPSA’ for <a class="reference external" href="https://github.com/ibpsa/modelica">https://github.com/ibpsa/modelica</a></p>
 </dd>
-<dt>library_attr<span class="classifier">Annex() or AixLib() instance</span></dt><dd><p>Classes with specific functions and attributes for building models in
+<dt><strong>library_attr</strong><span class="classifier">Annex() or AixLib() instance</span></dt><dd><p>Classes with specific functions and attributes for building models in
 IBPSA and AixLib. Python classes can be found in calculation package.</p>
 </dd>
 </dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>central_ahu</strong></dt><dd></dd>
+<dt><strong>height_of_floors</strong></dt><dd></dd>
+<dt><strong>merge_windows_calc</strong></dt><dd></dd>
+<dt><strong>name</strong></dt><dd></dd>
+<dt><strong>net_leased_area</strong></dt><dd></dd>
+<dt><strong>number_of_elements_calc</strong></dt><dd></dd>
+<dt><strong>number_of_floors</strong></dt><dd></dd>
+<dt><strong>outer_area</strong></dt><dd></dd>
+<dt><strong>parent</strong></dt><dd></dd>
+<dt><strong>thermal_zones</strong></dt><dd></dd>
+<dt><strong>used_library_calc</strong></dt><dd></dd>
+<dt><strong>window_area</strong></dt><dd></dd>
+<dt><strong>with_ahu</strong></dt><dd></dd>
+<dt><strong>year_of_construction</strong></dt><dd></dd>
+<dt><strong>year_of_retrofit</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_zone</span></code>(thermal_zone)</p></td>
+<td><p>Adds a thermal zone to the corresponding list</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_building_parameter</span></code>([...])</p></td>
+<td><p>calc all building parameters</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fill_outer_area_dict</span></code>()</p></td>
+<td><p>Fills the attribute outer_area</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fill_window_area_dict</span></code>()</p></td>
+<td><p>Fills the attribute</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#teaser.logic.archetypebuildings.residential.Residential.generate_archetype" title="teaser.logic.archetypebuildings.residential.Residential.generate_archetype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_archetype</span></code></a>()</p></td>
+<td><p>Generates an archetype building.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_inner_wall_area</span></code>()</p></td>
+<td><p>Get aggregated inner wall area</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_outer_wall_area</span></code>(orientation)</p></td>
+<td><p>Get aggregated wall area of one orientation</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_window_area</span></code>(orientation)</p></td>
+<td><p>Get aggregated window area of one orientation</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">retrofit_building</span></code>([year_of_retrofit, ...])</p></td>
+<td><p>Retrofits all zones in the building</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotate_building</span></code>(angle)</p></td>
+<td><p>Rotates the building to a given angle</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_outer_wall_area</span></code>(new_area, orientation)</p></td>
+<td><p>Outer area wall setter</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_window_area</span></code>(new_area, orientation)</p></td>
+<td><p>Window area setter</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="py method">
 <dt class="sig sig-object py" id="teaser.logic.archetypebuildings.residential.Residential.generate_archetype">
 <span class="sig-name descname"><span class="pre">generate_archetype</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaser/logic/archetypebuildings/residential.html#Residential.generate_archetype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.archetypebuildings.residential.Residential.generate_archetype" title="Permalink to this definition">¶</a></dt>
@@ -232,7 +291,6 @@ IBPSA and AixLib. Python classes can be found in calculation package.</p>
 function call to do so.</p>
 </dd></dl>
 
-</section>
 </dd></dl>
 
 </section>
@@ -248,26 +306,26 @@ UrbanReNet, Tabula, etc.). It is a subclass of Building and introduces
 several parameters to be obligatory (parent, name, year_of_construction,
 net_leased_area).</p>
 <p>Please use this class to create new archetype methodologies.</p>
-<section id="id1">
-<h3>Parameters<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
-<dl>
-<dt>parent: Project()</dt><dd><p>The parent class of this object, the Project the Building belongs to.
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>parent: Project()</strong></dt><dd><p>The parent class of this object, the Project the Building belongs to.
 Allows for better control of hierarchical structures. If not None it
 adds this Building instance to Project.buildings.
 (default: None)</p>
 </dd>
-<dt>name<span class="classifier">str</span></dt><dd><p>Individual name</p>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
 </dd>
-<dt>year_of_construction<span class="classifier">int</span></dt><dd><p>Year of first construction</p>
+<dt><strong>year_of_construction</strong><span class="classifier">int</span></dt><dd><p>Year of first construction</p>
 </dd>
-<dt>net_leased_area<span class="classifier">float [m2]</span></dt><dd><p>Total net leased area of building. This is area is NOT the footprint
+<dt><strong>net_leased_area</strong><span class="classifier">float [m2]</span></dt><dd><p>Total net leased area of building. This is area is NOT the footprint
 of a building</p>
 </dd>
-<dt>with_ahu<span class="classifier">Boolean</span></dt><dd><p>If set to True, an empty instance of BuildingAHU is instantiated and
+<dt><strong>with_ahu</strong><span class="classifier">Boolean</span></dt><dd><p>If set to True, an empty instance of BuildingAHU is instantiated and
 assigned to attribute central_ahu. This instance holds information for
 central Air Handling units. Default is False.</p>
 </dd>
-<dt>internal_gains_mode: int [1, 2, 3]</dt><dd><p>mode for the internal gains calculation done in AixLib:
+<dt><strong>internal_gains_mode: int [1, 2, 3]</strong></dt><dd><p>mode for the internal gains calculation done in AixLib:
 1: Temperature and activity degree dependent heat flux calculation for persons. The</p>
 <blockquote>
 <div><p>calculation is based on  SIA 2024 (default)</p>
@@ -283,69 +341,111 @@ Engineering ToolBox (2004) and regards only persons.</p>
 </dl>
 </dd>
 </dl>
-</section>
-<section id="id2">
-<h3>Attributes<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>central_ahu<span class="classifier">instance of BuildingAHU</span></dt><dd><p>Teaser Instance of BuildingAHU if a central AHU is embedded into the
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>central_ahu</strong><span class="classifier">instance of BuildingAHU</span></dt><dd><p>Teaser Instance of BuildingAHU if a central AHU is embedded into the
 building (currently mostly needed for AixLib simulation).</p>
 </dd>
-<dt>number_of_floors<span class="classifier">int</span></dt><dd><p>number of floors above ground (default: None)</p>
+<dt><strong>number_of_floors</strong><span class="classifier">int</span></dt><dd><p>number of floors above ground (default: None)</p>
 </dd>
-<dt>height_of_floors<span class="classifier">float [m]</span></dt><dd><p>Average height of the floors (default: None)</p>
+<dt><strong>height_of_floors</strong><span class="classifier">float [m]</span></dt><dd><p>Average height of the floors (default: None)</p>
 </dd>
-<dt>internal_id<span class="classifier">float</span></dt><dd><p>Random id for the distinction between different buildings.</p>
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different buildings.</p>
 </dd>
-<dt>year_of_retrofit<span class="classifier">int</span></dt><dd><p>Year of last retrofit.</p>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of last retrofit.</p>
 </dd>
-<dt>type_of_building<span class="classifier">string</span></dt><dd><p>Type of a Building (e.g. Building (unspecified), Office etc.).</p>
+<dt><strong>type_of_building</strong><span class="classifier">string</span></dt><dd><p>Type of a Building (e.g. Building (unspecified), Office etc.).</p>
 </dd>
-<dt>building_id<span class="classifier">None</span></dt><dd><p>ID of building, can be set by the user to keep track of a building
+<dt><strong>building_id</strong><span class="classifier">None</span></dt><dd><p>ID of building, can be set by the user to keep track of a building
 even outside of TEASER, e.g. in a simulation or in post-processing.
 This is not the same as internal_id, as internal_id is e.g. not
 exported to Modelica models!</p>
 </dd>
-<dt>street_name<span class="classifier">string</span></dt><dd><p>Name of the street the building is located at. (optional)</p>
+<dt><strong>street_name</strong><span class="classifier">string</span></dt><dd><p>Name of the street the building is located at. (optional)</p>
 </dd>
-<dt>city<span class="classifier">string</span></dt><dd><p>Name of the city the building is located at. (optional)</p>
+<dt><strong>city</strong><span class="classifier">string</span></dt><dd><p>Name of the city the building is located at. (optional)</p>
 </dd>
-<dt>longitude<span class="classifier">float [degree]</span></dt><dd><p>Longitude of building location.</p>
+<dt><strong>longitude</strong><span class="classifier">float [degree]</span></dt><dd><p>Longitude of building location.</p>
 </dd>
-<dt>latitude<span class="classifier">float [degree]</span></dt><dd><p>Latitude of building location.</p>
+<dt><strong>latitude</strong><span class="classifier">float [degree]</span></dt><dd><p>Latitude of building location.</p>
 </dd>
-<dt>thermal_zones<span class="classifier">list</span></dt><dd><p>List with instances of ThermalZone(), that are located in this building.</p>
+<dt><strong>thermal_zones</strong><span class="classifier">list</span></dt><dd><p>List with instances of ThermalZone(), that are located in this building.</p>
 </dd>
-<dt>outer_area<span class="classifier">dict [degree: m2]</span></dt><dd><p>Dictionary with orientation as key and sum of outer wall areas of
+<dt><strong>outer_area</strong><span class="classifier">dict [degree: m2]</span></dt><dd><p>Dictionary with orientation as key and sum of outer wall areas of
 that direction as value.</p>
 </dd>
-<dt>window_area<span class="classifier">dict [degree: m2]</span></dt><dd><p>Dictionary with orientation as key and sum of window areas of
+<dt><strong>window_area</strong><span class="classifier">dict [degree: m2]</span></dt><dd><p>Dictionary with orientation as key and sum of window areas of
 that direction as value.</p>
 </dd>
-<dt>bldg_height<span class="classifier">float [m]</span></dt><dd><p>Total building height.</p>
+<dt><strong>bldg_height</strong><span class="classifier">float [m]</span></dt><dd><p>Total building height.</p>
 </dd>
-<dt>volume<span class="classifier">float [m3]</span></dt><dd><p>Total volume of all thermal zones.</p>
+<dt><strong>volume</strong><span class="classifier">float [m3]</span></dt><dd><p>Total volume of all thermal zones.</p>
 </dd>
-<dt>sum_heat_load<span class="classifier">float [W]</span></dt><dd><p>Total heating load of all thermal zones.</p>
+<dt><strong>sum_heat_load</strong><span class="classifier">float [W]</span></dt><dd><p>Total heating load of all thermal zones.</p>
 </dd>
-<dt>sum_cooling_load<span class="classifier">float [W]</span></dt><dd><p>Total heating load of all thermal zones. (currently not supported)</p>
+<dt><strong>sum_cooling_load</strong><span class="classifier">float [W]</span></dt><dd><p>Total heating load of all thermal zones. (currently not supported)</p>
 </dd>
-<dt>number_of_elements_calc<span class="classifier">int</span></dt><dd><p>Number of elements that are used for thermal zone calculation in this
+<dt><strong>number_of_elements_calc</strong><span class="classifier">int</span></dt><dd><p>Number of elements that are used for thermal zone calculation in this
 building.
 1: OneElement
 2: TwoElement
 3: ThreeElement
 4: FourElement</p>
 </dd>
-<dt>merge_windows_calc<span class="classifier">boolean</span></dt><dd><p>True for merging the windows into the outer wall’s RC-combination,
+<dt><strong>merge_windows_calc</strong><span class="classifier">boolean</span></dt><dd><p>True for merging the windows into the outer wall’s RC-combination,
 False for separate resistance for window, default is False</p>
 </dd>
-<dt>used_library_calc<span class="classifier">str</span></dt><dd><p>‘AixLib’ for <a class="reference external" href="https://github.com/RWTH-EBC/AixLib">https://github.com/RWTH-EBC/AixLib</a>
+<dt><strong>used_library_calc</strong><span class="classifier">str</span></dt><dd><p>‘AixLib’ for <a class="reference external" href="https://github.com/RWTH-EBC/AixLib">https://github.com/RWTH-EBC/AixLib</a>
 ‘IBPSA’ for <a class="reference external" href="https://github.com/ibpsa/modelica">https://github.com/ibpsa/modelica</a></p>
 </dd>
-<dt>library_attr<span class="classifier">Annex() or AixLib() instance</span></dt><dd><p>Classes with specific functions and attributes for building models in
+<dt><strong>library_attr</strong><span class="classifier">Annex() or AixLib() instance</span></dt><dd><p>Classes with specific functions and attributes for building models in
 IBPSA and AixLib. Python classes can be found in calculation package.</p>
 </dd>
 </dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_zone</span></code>(thermal_zone)</p></td>
+<td><p>Adds a thermal zone to the corresponding list</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_building_parameter</span></code>([...])</p></td>
+<td><p>calc all building parameters</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fill_outer_area_dict</span></code>()</p></td>
+<td><p>Fills the attribute outer_area</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fill_window_area_dict</span></code>()</p></td>
+<td><p>Fills the attribute</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#teaser.logic.archetypebuildings.nonresidential.NonResidential.generate_archetype" title="teaser.logic.archetypebuildings.nonresidential.NonResidential.generate_archetype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_archetype</span></code></a>()</p></td>
+<td><p>Generates an archetype building.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_inner_wall_area</span></code>()</p></td>
+<td><p>Get aggregated inner wall area</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_outer_wall_area</span></code>(orientation)</p></td>
+<td><p>Get aggregated wall area of one orientation</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_window_area</span></code>(orientation)</p></td>
+<td><p>Get aggregated window area of one orientation</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">retrofit_building</span></code>([year_of_retrofit, ...])</p></td>
+<td><p>Retrofits all zones in the building</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotate_building</span></code>(angle)</p></td>
+<td><p>Rotates the building to a given angle</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_outer_wall_area</span></code>(new_area, orientation)</p></td>
+<td><p>Outer area wall setter</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_window_area</span></code>(new_area, orientation)</p></td>
+<td><p>Window area setter</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="py method">
 <dt class="sig sig-object py" id="teaser.logic.archetypebuildings.nonresidential.NonResidential.generate_archetype">
 <span class="sig-name descname"><span class="pre">generate_archetype</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaser/logic/archetypebuildings/nonresidential.html#NonResidential.generate_archetype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.archetypebuildings.nonresidential.NonResidential.generate_archetype" title="Permalink to this definition">¶</a></dt>
@@ -354,7 +454,6 @@ IBPSA and AixLib. Python classes can be found in calculation package.</p>
 function call to do so.</p>
 </dd></dl>
 
-</section>
 </dd></dl>
 
 </section>

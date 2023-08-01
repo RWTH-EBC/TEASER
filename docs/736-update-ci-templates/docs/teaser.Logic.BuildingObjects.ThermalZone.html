@@ -132,81 +132,121 @@
 thermal zones. Each thermal zone has one specific calculation method,
 which is specific to the used model (model_attr). For new model
 implementation this attribute can be assigned to new classes.</p>
-<section id="parameters">
-<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">¶</a></h2>
-<dl class="simple">
-<dt>parent: Building()</dt><dd><p>The parent class of this object, the Building the zone belongs to.
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parent: Building()</strong></dt><dd><p>The parent class of this object, the Building the zone belongs to.
 Allows for better control of hierarchical structures. If not None it
 adds this ThermalZone instance to Building.thermal_zones.
 Default is None</p>
 </dd>
 </dl>
-</section>
-<section id="attributes">
-<h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this heading">¶</a></h2>
-<dl>
-<dt>internal_id<span class="classifier">float</span></dt><dd><p>Random id for the distinction between different zones.</p>
 </dd>
-<dt>name<span class="classifier">str</span></dt><dd><p>Individual name.</p>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different zones.</p>
 </dd>
-<dt>area<span class="classifier">float [m2]</span></dt><dd><p>Thermal zone area.</p>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name.</p>
 </dd>
-<dt>volume<span class="classifier">float [m3]</span></dt><dd><p>Thermal zone volume.</p>
+<dt><strong>area</strong><span class="classifier">float [m2]</span></dt><dd><p>Thermal zone area.</p>
 </dd>
-<dt>outer_walls<span class="classifier">list</span></dt><dd><p>List of OuterWall instances.</p>
+<dt><strong>volume</strong><span class="classifier">float [m3]</span></dt><dd><p>Thermal zone volume.</p>
 </dd>
-<dt>doors<span class="classifier">list</span></dt><dd><p>List of Door instances.</p>
+<dt><strong>outer_walls</strong><span class="classifier">list</span></dt><dd><p>List of OuterWall instances.</p>
 </dd>
-<dt>rooftops<span class="classifier">list</span></dt><dd><p>List of Rooftop instances.</p>
+<dt><strong>doors</strong><span class="classifier">list</span></dt><dd><p>List of Door instances.</p>
 </dd>
-<dt>ground_floors<span class="classifier">list</span></dt><dd><p>List of GroundFloor instances.</p>
+<dt><strong>rooftops</strong><span class="classifier">list</span></dt><dd><p>List of Rooftop instances.</p>
 </dd>
-<dt>windows<span class="classifier">list</span></dt><dd><p>List of Window instances.</p>
+<dt><strong>ground_floors</strong><span class="classifier">list</span></dt><dd><p>List of GroundFloor instances.</p>
 </dd>
-<dt>inner_walls<span class="classifier">list</span></dt><dd><p>List of InnerWall instances.</p>
+<dt><strong>windows</strong><span class="classifier">list</span></dt><dd><p>List of Window instances.</p>
 </dd>
-<dt>floors<span class="classifier">list</span></dt><dd><p>List of Floor instances.</p>
+<dt><strong>inner_walls</strong><span class="classifier">list</span></dt><dd><p>List of InnerWall instances.</p>
 </dd>
-<dt>ceilings: list</dt><dd><p>List of Ceiling instances.</p>
+<dt><strong>floors</strong><span class="classifier">list</span></dt><dd><p>List of Floor instances.</p>
 </dd>
-<dt>use_conditions<span class="classifier">instance of UseConditions()</span></dt><dd><p>Instance of UseConditions with all relevant information for the usage
+<dt><strong>ceilings: list</strong></dt><dd><p>List of Ceiling instances.</p>
+</dd>
+<dt><strong>use_conditions</strong><span class="classifier">instance of UseConditions()</span></dt><dd><p>Instance of UseConditions with all relevant information for the usage
 of the thermal zone</p>
 </dd>
-<dt>model_attr<span class="classifier">instance of OneElement(), TwoElement(), ThreeElement() or</span></dt><dd><blockquote>
+<dt><strong>model_attr</strong><span class="classifier">instance of OneElement(), TwoElement(), ThreeElement() or</span></dt><dd><blockquote>
 <div><p>FourElement()</p>
 </div></blockquote>
 <p>Instance of OneElement(), TwoElement(), ThreeElement() or
 FourElement(), that holds all calculation functions and attributes
 needed for the specific model.</p>
 </dd>
-<dt>t_inside<span class="classifier">float [K]</span></dt><dd><p>Normative indoor temperature for static heat load calculation.
+<dt><strong>t_inside</strong><span class="classifier">float [K]</span></dt><dd><p>Normative indoor temperature for static heat load calculation.
 The input of t_inside is ALWAYS in Kelvin</p>
 </dd>
-<dt>t_outside<span class="classifier">float [K]</span></dt><dd><p>Normative outdoor temperature for static heat load calculation.
+<dt><strong>t_outside</strong><span class="classifier">float [K]</span></dt><dd><p>Normative outdoor temperature for static heat load calculation.
 The input of t_inside is ALWAYS in Kelvin</p>
 </dd>
-<dt>t_ground<span class="classifier">float [K]</span></dt><dd><p>Temperature directly at the outer side of ground floors for static
+<dt><strong>t_ground</strong><span class="classifier">float [K]</span></dt><dd><p>Temperature directly at the outer side of ground floors for static
 heat load calculation.
 The input of t_ground is ALWAYS in Kelvin</p>
 </dd>
-<dt>density_air<span class="classifier">float [kg/m3]</span></dt><dd><p>average density of the air in the thermal zone</p>
+<dt><strong>density_air</strong><span class="classifier">float [kg/m3]</span></dt><dd><p>average density of the air in the thermal zone</p>
 </dd>
-<dt>heat_capac_air<span class="classifier">float [J/K]</span></dt><dd><p>average heat capacity of the air in the thermal zone</p>
+<dt><strong>heat_capac_air</strong><span class="classifier">float [J/K]</span></dt><dd><p>average heat capacity of the air in the thermal zone</p>
 </dd>
 </dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.add_element" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.add_element"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_element</span></code></a>(building_element)</p></td>
+<td><p>Adds a building element to the corresponding list</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.calc_zone_parameters" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.calc_zone_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_zone_parameters</span></code></a>([number_of_elements, ...])</p></td>
+<td><p>RC-Calculation for the thermal zone</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.delete" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.delete"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete</span></code></a>()</p></td>
+<td><p>Deletes the actual thermal zone safely.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_doors" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.find_doors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_doors</span></code></a>(orientation, tilt)</p></td>
+<td><p>Returns all outer walls with given orientation and tilt</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_gfs" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.find_gfs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_gfs</span></code></a>(orientation, tilt)</p></td>
+<td><p>Returns all ground floors with given orientation and tilt</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_rts" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.find_rts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_rts</span></code></a>(orientation, tilt)</p></td>
+<td><p>Returns all rooftops with given orientation and tilt</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_walls" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.find_walls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_walls</span></code></a>(orientation, tilt)</p></td>
+<td><p>Returns all outer walls with given orientation and tilt</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_wins" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.find_wins"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_wins</span></code></a>(orientation, tilt)</p></td>
+<td><p>Returns all windows with given orientation and tilt</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.retrofit_zone" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.retrofit_zone"><code class="xref py py-obj docutils literal notranslate"><span class="pre">retrofit_zone</span></code></a>([type_of_retrofit, ...])</p></td>
+<td><p>Retrofits all walls and windows in the zone.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.set_inner_wall_area" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.set_inner_wall_area"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_inner_wall_area</span></code></a>()</p></td>
+<td><p>Sets the inner wall area according to zone area</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.set_volume_zone" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.set_volume_zone"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_volume_zone</span></code></a>()</p></td>
+<td><p>Sets the zone volume according to area and height of floors</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="py method">
 <dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.add_element">
 <span class="sig-name descname"><span class="pre">add_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">building_element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teaser/logic/buildingobjects/thermalzone.html#ThermalZone.add_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.add_element" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds a building element to the corresponding list</p>
 <p>This function adds a BuildingElement instance to the the list
 depending on the type of the Building Element</p>
-<section id="id1">
-<h3>Parameters<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>building_element<span class="classifier">BuildingElement()</span></dt><dd><p>inherited objects of BuildingElement() instance of TEASER</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>building_element</strong><span class="classifier">BuildingElement()</span></dt><dd><p>inherited objects of BuildingElement() instance of TEASER</p>
 </dd>
 </dl>
-</section>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
@@ -234,20 +274,21 @@ separately
 </div></blockquote>
 <p>For all four options we can chose if the thermal conduction through
 the window is considered in a separate resistance or not.</p>
-<section id="id2">
-<h3>Parameters<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>number_of_elements<span class="classifier">int</span></dt><dd><p>defines the number of elements, that area aggregated, between 1
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>number_of_elements</strong><span class="classifier">int</span></dt><dd><p>defines the number of elements, that area aggregated, between 1
 and 4, default is 2</p>
 </dd>
-<dt>merge_windows<span class="classifier">bool</span></dt><dd><p>True for merging the windows into the outer walls, False for
+<dt><strong>merge_windows</strong><span class="classifier">bool</span></dt><dd><p>True for merging the windows into the outer walls, False for
 separate resistance for window, default is False (Only
 supported for IBPSA)</p>
 </dd>
-<dt>t_bt<span class="classifier">float</span></dt><dd><p>Time constant according to VDI 6007 (default t_bt = 5)</p>
+<dt><strong>t_bt</strong><span class="classifier">float</span></dt><dd><p>Time constant according to VDI 6007 (default t_bt = 5)</p>
 </dd>
 </dl>
-</section>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
@@ -274,22 +315,22 @@ thermal_zones list in the parent Building.</p>
 <dd><p>Returns all outer walls with given orientation and tilt</p>
 <p>This function returns a list of all Doors elements with the
 same orientation and tilt.</p>
-<section id="id3">
-<h3>Parameters<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>orientation<span class="classifier">float [degree]</span></dt><dd><p>Azimuth of the desired walls.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth of the desired walls.</p>
 </dd>
-<dt>tilt<span class="classifier">float [degree]</span></dt><dd><p>Tilt against the horizontal of the desired walls.</p>
-</dd>
-</dl>
-</section>
-<section id="returns">
-<h3>Returns<a class="headerlink" href="#returns" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>elements<span class="classifier">list</span></dt><dd><p>List of Doors instances with desired orientation and tilt.</p>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against the horizontal of the desired walls.</p>
 </dd>
 </dl>
-</section>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>elements</strong><span class="classifier">list</span></dt><dd><p>List of Doors instances with desired orientation and tilt.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -298,22 +339,22 @@ same orientation and tilt.</p>
 <dd><p>Returns all ground floors with given orientation and tilt</p>
 <p>This function returns a list of all GroundFloor elements with the
 same orientation and tilt.</p>
-<section id="id4">
-<h3>Parameters<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>orientation<span class="classifier">float [degree]</span></dt><dd><p>Azimuth of the desired ground floors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth of the desired ground floors.</p>
 </dd>
-<dt>tilt<span class="classifier">float [degree]</span></dt><dd><p>Tilt against the horizontal of the desired ground floors.</p>
-</dd>
-</dl>
-</section>
-<section id="id5">
-<h3>Returns<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>elements<span class="classifier">list</span></dt><dd><p>List of GroundFloor instances with desired orientation and tilt.</p>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against the horizontal of the desired ground floors.</p>
 </dd>
 </dl>
-</section>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>elements</strong><span class="classifier">list</span></dt><dd><p>List of GroundFloor instances with desired orientation and tilt.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -322,22 +363,22 @@ same orientation and tilt.</p>
 <dd><p>Returns all rooftops with given orientation and tilt</p>
 <p>This function returns a list of all Rooftop elements with the
 same orientation and tilt.</p>
-<section id="id6">
-<h3>Parameters<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>orientation<span class="classifier">float [degree]</span></dt><dd><p>Azimuth of the desired rooftops.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth of the desired rooftops.</p>
 </dd>
-<dt>tilt<span class="classifier">float [degree]</span></dt><dd><p>Tilt against the horizontal of the desired rooftops.</p>
-</dd>
-</dl>
-</section>
-<section id="id7">
-<h3>Returns<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>elements<span class="classifier">list</span></dt><dd><p>List of Rooftop instances with desired orientation and tilt.</p>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against the horizontal of the desired rooftops.</p>
 </dd>
 </dl>
-</section>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>elements</strong><span class="classifier">list</span></dt><dd><p>List of Rooftop instances with desired orientation and tilt.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -346,22 +387,22 @@ same orientation and tilt.</p>
 <dd><p>Returns all outer walls with given orientation and tilt</p>
 <p>This function returns a list of all OuterWall elements with the
 same orientation and tilt.</p>
-<section id="id8">
-<h3>Parameters<a class="headerlink" href="#id8" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>orientation<span class="classifier">float [degree]</span></dt><dd><p>Azimuth of the desired walls.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth of the desired walls.</p>
 </dd>
-<dt>tilt<span class="classifier">float [degree]</span></dt><dd><p>Tilt against the horizontal of the desired walls.</p>
-</dd>
-</dl>
-</section>
-<section id="id9">
-<h3>Returns<a class="headerlink" href="#id9" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>elements<span class="classifier">list</span></dt><dd><p>List of OuterWalls instances with desired orientation and tilt.</p>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against the horizontal of the desired walls.</p>
 </dd>
 </dl>
-</section>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>elements</strong><span class="classifier">list</span></dt><dd><p>List of OuterWalls instances with desired orientation and tilt.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -370,22 +411,22 @@ same orientation and tilt.</p>
 <dd><p>Returns all windows with given orientation and tilt</p>
 <p>This function returns a list of all Window elements with the
 same orientation and tilt.</p>
-<section id="id10">
-<h3>Parameters<a class="headerlink" href="#id10" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>orientation<span class="classifier">float [degree]</span></dt><dd><p>Azimuth of the desired windows.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth of the desired windows.</p>
 </dd>
-<dt>tilt<span class="classifier">float [degree]</span></dt><dd><p>Tilt against the horizontal of the desired windows.</p>
-</dd>
-</dl>
-</section>
-<section id="id11">
-<h3>Returns<a class="headerlink" href="#id11" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>elements<span class="classifier">list</span></dt><dd><p>List of Window instances with desired orientation and tilt.</p>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against the horizontal of the desired windows.</p>
 </dd>
 </dl>
-</section>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>elements</strong><span class="classifier">list</span></dt><dd><p>List of Window instances with desired orientation and tilt.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
@@ -432,18 +473,19 @@ Distinguishes if the parent building is a archetype of type ‘iwu’ or
 ‘tabula_de’. If TABULA is used, it will use the pre-defined wall
 constructions of TABULA.</p>
 <p>This function covers OuterWall, Rooftop, GroundFloor and Window.</p>
-<section id="id12">
-<h3>Parameters<a class="headerlink" href="#id12" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>type_of_retrofit<span class="classifier">str</span></dt><dd><p>The classification of retrofit, if the archetype building
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>type_of_retrofit</strong><span class="classifier">str</span></dt><dd><p>The classification of retrofit, if the archetype building
 approach of TABULA is used.</p>
 </dd>
-<dt>window_type<span class="classifier">str</span></dt><dd><p>Default: EnEv 2014</p>
+<dt><strong>window_type</strong><span class="classifier">str</span></dt><dd><p>Default: EnEv 2014</p>
 </dd>
-<dt>material<span class="classifier">str</span></dt><dd><p>Default: EPS035</p>
+<dt><strong>material</strong><span class="classifier">str</span></dt><dd><p>Default: EPS035</p>
 </dd>
 </dl>
-</section>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
@@ -492,7 +534,6 @@ approach is used. This function covers Floors, Ceilings and InnerWalls.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">windows</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.windows" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</section>
 </dd></dl>
 
 </section>

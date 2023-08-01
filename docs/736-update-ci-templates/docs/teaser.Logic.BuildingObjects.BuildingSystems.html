@@ -109,65 +109,64 @@
 class is very AixLib specific and holds some parameters that are only
 applicable to AixLib Central AHU model. If you are using other models
 these values might have no effect.</p>
-<section id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>parent: Building()</dt><dd><p>The parent class of this object, the Building the AHU belongs to.
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parent: Building()</strong></dt><dd><p>The parent class of this object, the Building the AHU belongs to.
 Allows for better control of hierarchical structures.
 (default: None)</p>
 </dd>
 </dl>
-</section>
-<section id="attributes">
-<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this heading">¶</a></h3>
-<dl>
-<dt>heating<span class="classifier">boolean</span></dt><dd><p>Heating Function of AHU (default = True)</p>
 </dd>
-<dt>cooling<span class="classifier">boolean</span></dt><dd><p>Cooling Function of AHU (default = True)</p>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>heating</strong><span class="classifier">boolean</span></dt><dd><p>Heating Function of AHU (default = True)</p>
 </dd>
-<dt>dehumidification<span class="classifier">boolean</span></dt><dd><p>Dehumidification Function of AHU (Cooling and Heating must be enabled)
+<dt><strong>cooling</strong><span class="classifier">boolean</span></dt><dd><p>Cooling Function of AHU (default = True)</p>
+</dd>
+<dt><strong>dehumidification</strong><span class="classifier">boolean</span></dt><dd><p>Dehumidification Function of AHU (Cooling and Heating must be enabled)
 (default = True)</p>
 </dd>
-<dt>humidification<span class="classifier">boolean</span></dt><dd><p>Humidification Function of AHU (Cooling and Heating must be enabled)
+<dt><strong>humidification</strong><span class="classifier">boolean</span></dt><dd><p>Humidification Function of AHU (Cooling and Heating must be enabled)
 (default = True)</p>
 </dd>
-<dt>heat_recovery<span class="classifier">boolean</span></dt><dd><p>Is a HeatRecoverySystem physically integrated in the AHU
+<dt><strong>heat_recovery</strong><span class="classifier">boolean</span></dt><dd><p>Is a HeatRecoverySystem physically integrated in the AHU
 AixLib: ‘HRS’
 (default = True)</p>
 </dd>
-<dt>by_pass_dehumidification<span class="classifier">float</span></dt><dd><p>By-pass factor of cooling coil during dehumidification. Necessary to
+<dt><strong>by_pass_dehumidification</strong><span class="classifier">float</span></dt><dd><p>By-pass factor of cooling coil during dehumidification. Necessary to
 calculate the real outgoing enthalpy flow of heat exchanger in
 dehumidification mode taking the surface enthalpy of the cooling
 coil into account. In AixLib called “BPF_DeHu” (default = 0.2,
-according to <a href="#id1"><span class="problematic" id="id2">:cite:`Lindeburg.2013`</span></a>)</p>
+according to <span id="id1">[]</span>)</p>
 </dd>
-<dt>efficiency_recovery<span class="classifier">float</span></dt><dd><p>efficiency of HRS in the AHU modes if HRS is enabled.
+<dt><strong>efficiency_recovery</strong><span class="classifier">float</span></dt><dd><p>efficiency of HRS in the AHU modes if HRS is enabled.
 AixLib: “efficiencyHRS_enabled” (default = 0.65, according to
-<a href="#id3"><span class="problematic" id="id4">:cite:`.20012001`</span></a>)</p>
+<span id="id2">[]</span>)</p>
 </dd>
-<dt>efficiency_recovery_false<span class="classifier">float</span></dt><dd><p>taking a little heat transfer into account although HRS is disabled
+<dt><strong>efficiency_recovery_false</strong><span class="classifier">float</span></dt><dd><p>taking a little heat transfer into account although HRS is disabled
 (in case that a HRS is physically installed in the AHU) in AixLib:
 “efficiencyHRS_disabled” (default = 0.2, according to
-<a href="#id5"><span class="problematic" id="id6">:cite:`Mehrfeld.2014`</span></a>)</p>
+<span id="id3">[]</span>)</p>
 </dd>
-<dt>sample_rate<span class="classifier">int</span></dt><dd><p>sample rate of state machines in AHU model. Default is set to half
+<dt><strong>sample_rate</strong><span class="classifier">int</span></dt><dd><p>sample rate of state machines in AHU model. Default is set to half
 an hour as typical input is hourly (default = 1800)</p>
 </dd>
-<dt>efficiency_fan_supply<span class="classifier">float</span></dt><dd><p>Efficiency of supply fan (default = 0.7)</p>
+<dt><strong>efficiency_fan_supply</strong><span class="classifier">float</span></dt><dd><p>Efficiency of supply fan (default = 0.7)</p>
 </dd>
-<dt>efficiency_fan_return: float</dt><dd><p>Efficiency of return fan (default = 0.7)</p>
+<dt><strong>efficiency_fan_return: float</strong></dt><dd><p>Efficiency of return fan (default = 0.7)</p>
 </dd>
-<dt>pressure_drop_fan_supply: float (default 800)</dt><dd><p>Pressure drop assigned to supply fan in Pascal</p>
+<dt><strong>pressure_drop_fan_supply: float (default 800)</strong></dt><dd><p>Pressure drop assigned to supply fan in Pascal</p>
 </dd>
-<dt>pressure_drop_fan_return: float (default 800)</dt><dd><p>Pressure drop assigned to return fan in Pascal</p>
+<dt><strong>pressure_drop_fan_return: float (default 800)</strong></dt><dd><p>Pressure drop assigned to return fan in Pascal</p>
 </dd>
-<dt>temperature_profile<span class="classifier">[float]</span></dt><dd><p>timeline of temperatures requirements for AHU simulation</p>
+<dt><strong>temperature_profile</strong><span class="classifier">[float]</span></dt><dd><p>timeline of temperatures requirements for AHU simulation</p>
 </dd>
-<dt>min_relative_humidity_profile<span class="classifier">[float]</span></dt><dd><p>timeline of relative humidity requirements for AHU simulation</p>
+<dt><strong>min_relative_humidity_profile</strong><span class="classifier">[float]</span></dt><dd><p>timeline of relative humidity requirements for AHU simulation</p>
 </dd>
-<dt>max_relative_humidity_profile<span class="classifier">[float]</span></dt><dd><p>timeline of relative humidity requirements for AHU simulation</p>
+<dt><strong>max_relative_humidity_profile</strong><span class="classifier">[float]</span></dt><dd><p>timeline of relative humidity requirements for AHU simulation</p>
 </dd>
-<dt>v_flow_profile<span class="classifier">[int]</span></dt><dd><p>timeline of desired relative v_flow of the AHU simulation (0..1)
+<dt><strong>v_flow_profile</strong><span class="classifier">[int]</span></dt><dd><p>timeline of desired relative v_flow of the AHU simulation (0..1)
 Note: The AixLib parameter “WithProfile” determines whether the</p>
 <blockquote>
 <div><p>(v_flow_profile combined with “min_ahu and max_ahu”) or the
@@ -177,7 +176,8 @@ Per default: (v_flow_profile combined with “min_ahu and max_ahu”)</p>
 </div></blockquote>
 </dd>
 </dl>
-</section>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
