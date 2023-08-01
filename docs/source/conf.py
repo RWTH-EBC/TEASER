@@ -38,8 +38,12 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.githubpages',
               'sphinx.ext.coverage',
               'm2r2',  # Enable .md files
-              'sphinxcontrib.autodoc_pydantic'
+              'sphinxcontrib.autodoc_pydantic',
+              'sphinxcontrib.bibtex',
+              'numpydoc'
               ]
+
+bibtex_bibfiles = ['Literatur.bib']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
