@@ -23,14 +23,14 @@ Loading materials
     :show-inheritance:
 
 Loading *.teaserXML
-------------------
+--------------------
 
 .. automodule:: teaser.data.input.teaserxml_input
     :members:
     :show-inheritance:
 
 Loading CityGML *.gml
-------------------
+----------------------
 
 .. automodule:: teaser.data.input.citygml_input
     :members:
