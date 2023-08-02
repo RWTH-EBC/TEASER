@@ -613,7 +613,7 @@ class Wall(BuildingElement):
             return self._interzonal_type_export
         else:
             return self._interzonal_type_standard_value(
-                method=self.parent.parent.method_interzonal_export
+                method=self.parent.parent.parent.method_interzonal_export
             )
         return value
 

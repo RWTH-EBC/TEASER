@@ -417,7 +417,7 @@ class ThermalZone(object):
             for other_verticals in self.outer_walls + self.interzonal_walls\
                     + self.windows + self.doors:
                 wall_area -= other_verticals.area
-            wall_area = max(0.0, wall_area)
+            wall_area = max(0.01, wall_area)
         elif approximation_approach == 'typical_minus_outer_extended':
             wall_area = ((int(avg_room_nr)
                           + math.sqrt(avg_room_nr - int(avg_room_nr)))
@@ -431,9 +431,9 @@ class ThermalZone(object):
             for pot_vert_be in self.rooftops + self.windows:
                 wall_area -= pot_vert_be.area \
                              * math.sin(pot_vert_be.tilt * math.pi / 180)
-            wall_area -= max(0.0, sum(gf.area for gf in self.ground_floors)
+            wall_area -= max(0.01, sum(gf.area for gf in self.ground_floors)
                              - self.area)
-            wall_area = max(0.0, wall_area)
+            wall_area = max(0.01, wall_area)
         else:
             wall_area = (avg_room_nr
                          * (self.use_conditions.typical_length

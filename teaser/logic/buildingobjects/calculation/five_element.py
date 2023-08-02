@@ -1995,6 +1995,25 @@ class FiveElement(object):
         self.heat_load = 0.0
         self.cool_load = 0.0
 
+    @property
+    def nzbs_for_iw(self):
+        """returns borders to neighboured zones to be considered as inner walls
+
+        Returns
+        -------
+        value : list
+            list of those interzonal elements that are to be treated as
+            'inner' depending on their 'interzonal_type_export' attribute
+
+        """
+        elements = []
+        for i in self.thermal_zone.interzonal_elements:
+            if i.interzonal_type_export == 'inner':
+                elements.append(i)
+            else:
+                pass
+        return elements
+
 
 def _lump_sum(elements, parameter):
     """calculates sums of the parameter of 2nd-level entries in a 2-level list
@@ -2032,22 +2051,3 @@ def _lump_inverse_sum(elements, parameter):
     """
     return [1 / sum(1 / eval('el.{}'.format(parameter)) for el in els)
             for els in elements]
-
-    @property
-    def nzbs_for_iw(self):
-        """returns borders to neighboured zones to be considered as inner walls
-
-        Returns
-        -------
-        value : list
-            list of those interzonal elements that are to be treated as
-            'inner' depending on their 'interzonal_type_export' attribute
-
-        """
-        elements = []
-        for i in self.thermal_zone.interzonal_elements:
-            if i.interzonal_type_export == 'inner':
-                elements.append(i)
-            else:
-                pass
-        return elements
