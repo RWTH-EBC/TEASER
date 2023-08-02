@@ -11,6 +11,7 @@ variables:
   COVERAGE_TYPE: "NotDymola"
   PAGES_BRANCH: master
   PYTHON_VERSION: "registry.git.rwth-aachen.de/ebc/ebc_all/gitlab_ci/templates:python_3.9"
+  PYTHON_PACKAGE_NAME: "teaser"
   TEST_ENGINE: "PYTEST"
   GIT_REPO: "RWTH-EBC/TEASER"
   EXAMPLE_CONVERTER_CONFIG: teaser/examples/converter.toml
