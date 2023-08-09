@@ -115,7 +115,8 @@ def generate_bldg(prj, scenario):
             number_of_floors=2,
             height_of_floors=3,
             net_leased_area=scenario['Net_Area'],
-            construction_type=construction_type)
+            construction_type=construction_type,
+            control_type=scenario['Control_strategy'])
     else:
         print("Could not resolve building class")
         pass
@@ -214,20 +215,22 @@ def simulate(
 
 if __name__ == "__main__":
 
-    setup_name = "20230425_test"
+    setup_name = "20230803_ddc_rand"
     basepath = pathlib.Path('N:\Forschung\EBC0741_ZIM_SmartSenseIAQ_NK\Data\Simulationen/02_Bedarfsorierntierte_Regelung').joinpath(
         setup_name)
-    scenarios = load_scenarios(basepath.joinpath("scenarios.xlsx"))
+    scenarios = load_scenarios(basepath.joinpath("scenarios_full.xlsx"))
     model_export_path = basepath.joinpath("models")
-
+    start_scenario = 10
     for index, scenario in scenarios.iterrows():
+        if index+1 < start_scenario:
+            continue        # skip scenarios until start_scenario is reached
         scenario_name = "S" + str(scenario['Scenario_number']) + "_" + str(scenario['Building_type'])
         prj = generate_project(name=scenario_name)
         prj = generate_bldg(prj, scenario)
         export_aixlib_model(prj, model_export_path.joinpath(scenario_name), scenario['Location'])
 
         simulate(
-            aixlib_mo=r"D:\GIT\AixLib\AixLib\package.mo",
+            aixlib_mo=r"D:\pse\GIT\AixLib\AixLib\package.mo",
             teaser_mo=model_export_path.joinpath(scenario_name, prj.name, "package.mo"),
             building_mo=prj.name + "." + prj.buildings[0].name + "." + prj.buildings[0].name,
             savepath=model_export_path.parent.joinpath("sim_results", scenario_name),

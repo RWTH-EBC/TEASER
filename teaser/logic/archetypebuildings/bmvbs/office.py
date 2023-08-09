@@ -310,6 +310,7 @@ class Office(NonResidential):
             use_cond.load_use_conditions(value[1], data_class=self.parent.data)
             use_cond.profiles_weekend_factor = 0
             use_cond.first_saturday_of_year = 1
+            use_cond.random_profile = True
             #use_cond.set_back_times = [7, 18]
             use_cond.calc_adj_schedules(control_type=self.control_type)
             zone.use_conditions = use_cond

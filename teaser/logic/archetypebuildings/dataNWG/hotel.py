@@ -266,6 +266,7 @@ class Hotel(NonResidential):
             zone.name = key
             use_cond = UseCond(zone)
             use_cond.load_use_conditions(value[1], data_class=self.parent.data)
+            use_cond.random_profile = True
             use_cond.calc_adj_schedules(control_type=self.control_type)
             zone.use_conditions = use_cond
 

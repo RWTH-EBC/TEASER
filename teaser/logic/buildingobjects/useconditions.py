@@ -3,6 +3,7 @@ import random
 from builtins import ValueError
 
 import pandas as pd
+import json
 from itertools import cycle, islice
 from collections import OrderedDict
 
@@ -203,6 +204,10 @@ class UseConditions(object):
     profiles_weekend_factor: float
         Factor to scale the existing profiles on weekends. For a reduction use
         values between [0;1]. Increase is also possible.
+    random_profile: Boolean
+        Option to randomize profiles based on standarized normal distribtuion
+        with original value as mean of distribution. Randomization seed may
+        be altered in randomize_profile function
     set_back_times: list
         Sets the first and last hour outside of which the offset is applied.
          List of two integers [first_hour, last_hour]
@@ -258,6 +263,7 @@ class UseConditions(object):
 
         self._first_saturday_of_year = 1
         self.profiles_weekend_factor = None
+        self.random_profile = None
 
         self._set_back_times = None
         self.heating_set_back = -4
@@ -444,6 +450,27 @@ class UseConditions(object):
                 self.heating_profile[i] += self.heating_set_back
                 self.cooling_profile[i] += self.cooling_set_back
         print('test')
+
+    def randomize_profile(self,profile):
+        """Randomizes profiles by applying a randomized normal distribution
+        Seed for randomization may be altered to
+
+        Parameters
+        ----------
+        profile : list
+            list with the given profile (lighting, machines, persons)
+        """
+        new_profile = []
+        with open("random_profile_factors.json", 'r') as f:
+            random_profile_factors = json.load(f)
+
+        for profile_value,factor in zip(profile,random_profile_factors):
+            if profile_value > 0:
+                profile_value+=factor
+                clamp = lambda n, minn, maxn: max(min(maxn, n), minn)
+                profile_value = clamp(profile_value,0,1)
+            new_profile.append(profile_value)
+        return new_profile
 
     def adjust_profile_by_opening(self, profile):
         """Adjusts the given profile by opening times specified for use
@@ -742,6 +769,14 @@ class UseConditions(object):
 
         if control_type == "demand_driven":
             self.adjust_temp_profiles_by_presence()
+
+        if self.random_profile is not None:
+            self._machines_profile = self.randomize_profile(
+                list(islice(cycle(self._machines_profile), 8760)))
+            self._lighting_profile = self.randomize_profile(
+                list(islice(cycle(self._lighting_profile), 8760)))
+            self._persons_profile = self.randomize_profile(
+                list(islice(cycle(self._persons_profile), 8760)))
 
         if self.set_back_times:
             if self.set_back_times[0] > self.set_back_times[1]:

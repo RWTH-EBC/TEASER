@@ -517,6 +517,7 @@ class Project(object):
         dormer=None,
         construction_type=None,
         number_of_apartments=None,
+        control_type=None
     ):
         """Add a residential building to the TEASER project.
 
@@ -614,6 +615,11 @@ class Project(object):
         number_of_apartments : int
             number of apartments inside Building (default = 1). CAUTION only
             used for urbanrenet
+        control_type : str
+            Control type of building
+                None: No demand driven control
+                Demand Driven: Demand driven control (temperature setpoints set by presence of people)
+                MPC: Model predictive control
 
         Returns
         ----------
@@ -675,6 +681,7 @@ class Project(object):
                     with_ahu,
                     internal_gains_mode,
                     construction_type,
+                    control_type
                 )
                 type_bldg.generate_archetype()
                 return type_bldg
@@ -691,6 +698,7 @@ class Project(object):
                     with_ahu,
                     internal_gains_mode,
                     construction_type,
+                    control_type
                 )
                 type_bldg.generate_archetype()
                 return type_bldg
@@ -707,6 +715,7 @@ class Project(object):
                     with_ahu,
                     internal_gains_mode,
                     construction_type,
+                    control_type
                 )
                 type_bldg.generate_archetype()
                 return type_bldg
@@ -723,6 +732,7 @@ class Project(object):
                     with_ahu,
                     internal_gains_mode,
                     construction_type,
+                    control_type
                 )
 
                 type_bldg.generate_archetype()

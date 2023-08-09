@@ -11,7 +11,7 @@ def import_and_process(path):
     tsd.to_datetime_index(origin=datetime.datetime(2022, 1, 1, 0, 0, 0))
     return tsd
 
-def plot_T_Air(tsd, building_type, scenario, zone_map,color_map):
+def plot_T_Air(tsd, building_type, scenario, zone_map,color_map,save_flag=False):
     plt.figure(dpi=300)
 
     #start_dt = datetime.datetime.strptime("01/02/22 00:00:00",'%m/%d/%y %H:%M:%S')
@@ -24,9 +24,11 @@ def plot_T_Air(tsd, building_type, scenario, zone_map,color_map):
     plt.ylabel('Air temperature in °C')
     plt.legend(bbox_to_anchor=(1.04, 1), loc="upper left")
     #plt.show()
-    plt.savefig("T_Air"+scenario+".png",bbox_inches="tight")
+    if save_flag:
+        plt.savefig("T_Air"+scenario+".png",bbox_inches="tight")
     plt.close()
-def plot_Q_flow(tsd, building_type, scenario, zone_map,color_map):
+
+def plot_Q_flow(tsd, building_type, scenario, zone_map,color_map,save_flag=False):
     plt.figure(dpi=300)
 
     #start_dt = datetime.datetime.strptime("01/02/22 00:00:00",'%m/%d/%y %H:%M:%S')
@@ -42,7 +44,27 @@ def plot_Q_flow(tsd, building_type, scenario, zone_map,color_map):
     plt.ylabel('Power in W')
     plt.legend(bbox_to_anchor=(1.04, 1), loc="upper left")
     #plt.show()
-    plt.savefig("Q_flow" + scenario + ".png",bbox_inches="tight")
+    if save_flag:
+        plt.savefig("Q_flow" + scenario + ".png",bbox_inches="tight")
+    plt.close()
+
+
+def plot_presence(tsd, building_type, scenario, zone_map, color_map,save_flag=False):
+    plt.figure(dpi=300)
+
+    # start_dt = datetime.datetime.strptime("01/02/22 00:00:00",'%m/%d/%y %H:%M:%S')
+    for idx, zone in enumerate(zone_map[building_type]):
+        plot_param = "multizone.intGains[" + str(idx + 1) + "]"
+        label = "specific people - " + str(zone)
+        plt.plot(tsd.loc[:, (plot_param, "raw")], label=label, color=color_map[idx])
+    plt.xlim(datetime.datetime(2022, 1, 1, 0, 0, 0),datetime.datetime(2022, 1, 7, 0, 0, 0))
+    plt.xlabel('Time')
+    plt.ylabel('Specific People')
+    plt.legend(bbox_to_anchor=(1.04, 1), loc="upper left")
+    #plt.show()
+    if save_flag:
+        plt.savefig("Specific_People_" + scenario + ".png", bbox_inches="tight")
+    print("Figure saved")
     plt.close()
 def get_bldg_type_from_filename(filename):
     building_types = ['single_family_house', 'multi_family_house', 'terraced_house', 'apartment_block', 'office',
@@ -56,8 +78,8 @@ def get_bldg_type_from_filename(filename):
 
 
 if __name__ == '__main__':
-    setup_name = "20230307_referenz_komplett"
-    basepath = Path('N:/Forschung/EBC0741_ZIM_SmartSenseIAQ_NK/Data/Simulationen/01_Referenzszenarien').joinpath(
+    setup_name = "20230428_bedarfsorientiert_nwg"
+    basepath = Path('N:/Forschung/EBC0741_ZIM_SmartSenseIAQ_NK/Data/Simulationen/02_Bedarfsorierntierte_Regelung').joinpath(
         setup_name, "sim_results")
     # find all result files in given setup folder
 
@@ -71,8 +93,6 @@ if __name__ == '__main__':
                            'Restroom', 'Sauna'],
                     single_family_house=['Single zone'], multi_family_house=['Single zone'],
                     terraced_house=['Single zone'], apartment_block=['Single zone'])
-
-
     cmap = plt.get_cmap('plasma')
 
     for path in pathlist:
@@ -81,5 +101,6 @@ if __name__ == '__main__':
         tsd = import_and_process(path_in_str)
         slicedCM = cmap(np.linspace(0, 1, len(zone_map[building_type])))
         os.chdir(path.parents[0])
-        plot_T_Air(tsd, building_type, scenario, zone_map,slicedCM)
-        plot_Q_flow(tsd, building_type, scenario, zone_map,slicedCM)
+        #plot_T_Air(tsd, building_type, scenario, zone_map,slicedCM,save_flag=True)
+        #plot_Q_flow(tsd, building_type, scenario, zone_map,slicedCM,save_flag=True)
+        plot_presence(tsd, building_type, scenario, zone_map,slicedCM,save_flag=True)

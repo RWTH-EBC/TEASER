@@ -109,7 +109,7 @@ class SingleFamilyHouse(Residential):
         with_ahu=False,
         internal_gains_mode=1,
         construction_type=None,
-    ):
+        control_type=None):
 
         super(SingleFamilyHouse, self).__init__(
             parent,
@@ -117,12 +117,12 @@ class SingleFamilyHouse(Residential):
             year_of_construction,
             net_leased_area,
             with_ahu,
-            internal_gains_mode
-        )
+            internal_gains_mode)
 
         self.construction_type = construction_type
         self.number_of_floors = number_of_floors
         self.height_of_floors = height_of_floors
+        self.control_type = control_type
 
         self._construction_type_1 = self.construction_type + "_1_SFH"
         self._construction_type_2 = self.construction_type + "_2_SFH"
@@ -320,13 +320,19 @@ class SingleFamilyHouse(Residential):
 
         self.building_age_group = None
 
-        if self.with_ahu is True:
-            self.central_ahu.temperature_profile = (
-                7 * [293.15] + 12 * [295.15] + 5 * [293.15]
-            )
-            self.central_ahu.min_relative_humidity_profile = 24 * [0.45]
-            self.central_ahu.max_relative_humidity_profile = 24 * [0.55]
-            self.central_ahu.v_flow_profile = 7 * [0.0] + 12 * [1.0] + 5 * [0.0]
+        # needs to be revised: Add presence profile as sum of persons_profiles for all zones and clip to (0,1), set
+        # temperature, min/max humidity and volume flow based on presence/absence of people in the building
+        if self.central_ahu:
+            setpoints = {"temperature":[293.15, 295.15],
+                         "min_humidity":[15,30],
+                         "max_humidity":[70,60]}
+
+            presence_profile = self.thermal_zones[0].use_conditions.schedules.persons_profile
+            for zone in self.thermal_zones:
+                if zone.use_conditions.with_ahu: #
+                    presence_profile += zone.use_conditions.schedules.persons_profile
+            presence_profile = presence_profile.clip(0, 1).tolist()
+            self.central_ahu.set_profiles_from_persons_profile(presence_profile,setpoints)
 
         self.internal_gains_mode = internal_gains_mode
 
@@ -363,6 +369,8 @@ class SingleFamilyHouse(Residential):
             zone.area = type_bldg_area * value[0]
             use_cond = UseCond(parent=zone)
             use_cond.load_use_conditions(zone_usage=value[1])
+            use_cond.random_profile = True
+            use_cond.calc_adj_schedules(control_type=self.control_type)
             zone.use_conditions = use_cond
 
             zone.use_conditions.with_ahu = False
