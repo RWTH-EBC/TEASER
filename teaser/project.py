@@ -129,7 +129,7 @@ class Project(object):
         strings are the same as for method_interzonal_material_enrichment.
         Inner elements will always be lumped to the InnerWall. For "outer"
         elements, interzonal heat flow will be modelled in the FiveElement
-        export. For OneElement to FourElement export (not recommeded, because
+        export. For OneElement to FourElement export (not recommended, because
         not yet validated or tested), they will be lumped to the OuterWall
         element from the heated/cooled/more conditioned side and to the
         InnerWall from the other side.

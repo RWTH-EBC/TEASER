@@ -890,6 +890,7 @@ class OneElement(object):
                 self.shading_g_total.append(1.0)
                 self.window_areas.append(0.0)
                 self.transparent_areas.append(0.0)
+                self.shading_max_irr.append(0.0)
             else:
                 self.weightfactor_win.append(sum([win.wf_out for win in wins]))
                 if self.merge_windows is False:

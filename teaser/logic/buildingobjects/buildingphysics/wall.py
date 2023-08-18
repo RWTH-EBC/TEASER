@@ -598,7 +598,7 @@ class Wall(BuildingElement):
             return self._interzonal_type_material
         else:
             return self._interzonal_type_standard_value(
-                method=self.parent.parent.method_interzonal_material_enrichment
+                method=self.parent.parent.parent.method_interzonal_material_enrichment
             )
 
     @interzonal_type_material.setter
