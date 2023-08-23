@@ -1,3 +1,12 @@
+import html
+import os
+import csv
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+import numpy as np
+import plotly.graph_objects as go
+
+
 """holds functions to create a report for a TEASER project model"""
 
 
@@ -33,6 +42,9 @@ def calc_report_data(prj, path, name=None):
     for bldg in prj.buildings:
         bldg_name = bldg.name
         prj_data[bldg_name] = {}
+        # create keys
+        prj_data[bldg_name]['RoofArea'] = 0
+        prj_data[bldg_name]['GroundFloorArea'] = 0
         # prj_data[bldg_name]['CalculatedHeatLoad'] = bldg.sum_heat_load
         # prj_data[bldg_name]['CalculatedCoolingLoad'] = bldg.sum_cooling_load
         prj_data[bldg_name]['NetGroundArea'] = bldg.net_leased_area
@@ -42,14 +54,19 @@ def calc_report_data(prj, path, name=None):
         # if bldg.type_of_building:
         #     prj_data[bldg_name]['TypeOfBuilding'] = bldg.type_of_building
         # todo use bldg.*_names if existing
+        prj_data[bldg_name]['FloorHeight'] = bldg.height_of_floors
+        prj_data[bldg_name]['NumberOfFloors'] = bldg.number_of_floors
 
         prj_data[bldg_name]['OuterWallArea'] = {}
         outer_wall_area_total = 0
         for orient in bldg.outer_area:
+            # some archetypes use floats, some integers for orientation in
+            # TEASER
+            orient = float(orient)
             if orient == -1:
-                prj_data[bldg_name]['RoofArea'] = bldg.outer_area[orient]
+                prj_data[bldg_name]['RoofArea'] += bldg.outer_area[orient]
             elif orient == -2:
-                prj_data[bldg_name]['GroundFloorArea'] = bldg.outer_area[orient]
+                prj_data[bldg_name]['GroundFloorArea'] += bldg.outer_area[orient]
             else:
                 if orient not in \
                         prj_data[bldg_name]['OuterWallArea']:
@@ -60,6 +77,7 @@ def calc_report_data(prj, path, name=None):
         window_area_total = 0
         prj_data[bldg_name]['WindowArea'] = {}
         for orient in bldg.window_area:
+            orient = float(orient)
             if orient not in prj_data[bldg_name]['WindowArea']:
                 prj_data[bldg_name]['WindowArea'][orient] = 0
             prj_data[bldg_name]['WindowArea'][orient] += \
@@ -158,59 +176,329 @@ def calc_report_data(prj, path, name=None):
         else:
             prj_data[bldg_name]['gValueWindow'] = 0
 
-        # flat the keys
-    prj_data = prj_data[bldg_name]
-    prj_data_flat = {}
-    for key, val in prj_data.items():
-        if isinstance(prj_data[key], dict):
-            for subkey in prj_data[key].keys():
-                prj_data_flat[str(key) + '_' + f"{subkey:03}"] = prj_data[key][
-                    subkey]
-        else:
-            prj_data_flat[key] = prj_data[key]
+    # flat the keys
+        bldg_data = prj_data[bldg_name]
+        prj_data_flat = {}
+        for key, val in bldg_data.items():
+            if isinstance(bldg_data[key], dict):
+                for subkey in bldg_data[key].keys():
+                    prj_data_flat[str(key) + '_' + f"{subkey:03}"] = bldg_data[key][
+                        subkey]
+            else:
+                prj_data_flat[key] = bldg_data[key]
 
-    prj_add_list = {'OuterWall': [], 'Window': []}
-    for key in prj_data_flat.keys():
-        if key.startswith('OuterWallArea_'):
-            prj_add_list['OuterWall'].append(key)
-        if key.startswith('WindowArea_'):
-            prj_add_list['Window'].append(key)
-    prj_add_list['OuterWall'].sort()
-    prj_add_list['Window'].sort()
+        bldg_add_list = {'OuterWall': [], 'Window': []}
+        for key in prj_data_flat.keys():
+            if key.startswith('OuterWallArea_'):
+                bldg_add_list['OuterWall'].append(key)
+            if key.startswith('WindowArea_'):
+                bldg_add_list['Window'].append(key)
+        bldg_add_list['OuterWall'].sort()
+        bldg_add_list['Window'].sort()
 
-    prj_sorted_list = [
-        'NetGroundArea',
-        *prj_add_list['OuterWall'],
-        'RoofArea',
-        'TotalVolumeAir',
-        'InnerWallArea',
-        *prj_add_list['Window'],
-        'WindowWallRatio',
-        'UValueOuterWall',
-        'UValueInnerWall',
-        'UValueWindow',
-        'UValueDoor',
-        'UValueRoof',
-        'UValueCeiling',
-        'UValueGroundFloor',
-        'gValueWindow',
-        'GroundFloorArea',
-        'nZones'
+        bldg_sorted_list = [
+            'NetGroundArea',
+            'nZones'
+            'GroundFloorArea',
+            'RoofArea',
+            'FloorHeight',
+            'NumberOfFloors',
+            'TotalVolumeAir',
+            *bldg_add_list['OuterWall'],
+            *bldg_add_list['Window'],
+            'WindowWallRatio',
+            'InnerWallArea',
+            'UValueOuterWall',
+            'UValueInnerWall',
+            'UValueWindow',
+            'UValueDoor',
+            'UValueRoof',
+            'UValueCeiling',
+            'UValueGroundFloor',
+            'gValueWindow',
+
+        ]
+        # round values
+        for key, value in prj_data_flat.items():
+            prj_data_flat[key] = round(value, 2)
+
+        bldg_data_flat_sorted = [(k, prj_data_flat[k]) for k in bldg_sorted_list if
+                                k in prj_data_flat.keys()]
+
+        # Draw an abstract image of the building and save it with plotly to HTML
+        interactive_fig = create_house_wireframe(
+            area_north=prj_data_flat["OuterWallArea_0.0"],
+            area_east=prj_data_flat["OuterWallArea_90.0"],
+            area_south=prj_data_flat["OuterWallArea_180.0"],
+            area_west=prj_data_flat["OuterWallArea_270.0"],
+            height=prj_data_flat["FloorHeight"],
+            window_area_north=prj_data_flat["WindowArea_0.0"],
+            window_area_east=prj_data_flat["WindowArea_90.0"],
+            window_area_south=prj_data_flat["WindowArea_180.0"],
+            window_area_west=prj_data_flat["WindowArea_270.0"],
+            num_floors=prj_data_flat["NumberOfFloors"],
+            roof_angle=30)
+        html_filename_plotly =\
+            f"D:/10_ProgramTesting/interactive_plot_{bldg_name}.html"
+        interactive_fig.write_html(html_filename_plotly)
+
+        keys = ['']
+        keys.extend([x[0] for x in bldg_data_flat_sorted])
+
+        values = ['TEASER']
+        values.extend([x[1] for x in bldg_data_flat_sorted])
+
+        output_name = 'teaser_data' if not name else name
+
+        create_html_page(bldg_data_flat_sorted, bldg_name, html_filename_plotly)
+        with open(os.path.join(path, '%s.csv' % output_name), 'w', newline='',
+                  encoding='utf-8') as f:
+            csvwriter = csv.writer(f, delimiter=';')
+            csvwriter.writerow(keys)
+            csvwriter.writerow(localize_floats(values))
+    return bldg_data_flat_sorted
+
+
+def create_html_page(prj_data_tuples, prj_name, iframe_src):
+    html_content = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>{html.escape(prj_name)} - Project Data</title>
+        <style>
+            .container {{
+                display: flex;
+                justify-content: space-between;
+            }}
+            .table-container {{
+                width: 50%;
+            }}
+            table {{
+                border-collapse: collapse;
+                width: 100%;
+            }}
+            th, td {{
+                padding: 8px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }}
+            th {{
+                background-color: #f2f2f2;
+            }}
+            h1 {{
+                text-align: center;
+            }}
+            .section {{
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }}
+            .iframe-container {{
+                width: 50%;
+                border: 1px solid #ddd;
+            }}
+            iframe {{
+                width: 100%;
+                height: 500px;
+                border: none;
+            }}
+        </style>
+    </head>
+    <body>
+        <h1>{html.escape(prj_name)} - Project Data</h1>
+        <div class="container">
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+    """
+
+    current_category = None
+    for key, value in prj_data_tuples:
+        category = None
+
+        # Handle category names
+        if key.startswith("OuterWallArea_") or key.startswith("WindowArea_"):
+            category = "Wall and Window Areas"
+        elif key.startswith("UValue"):
+            category = "U-Values"
+        elif key == "OuterWallArea_Total":
+            category = "Total Wall Area"
+        elif key == "WindowArea_Total":
+            category = "Total Window Area"
+        elif key in ["NetGroundArea", "TotalVolumeAir"]:
+            category = key.replace("TotalVolumeAir", "Total Volume of Air").replace("NetGroundArea", "Net Ground Area")
+
+        if category and category != current_category:
+            html_content += f"""
+                <tr class="section">
+                    <td colspan="2">{html.escape(category)}</td>
+                </tr>
+            """
+            current_category = category
+
+        # Split camel case key names into human-readable strings
+        key_human_readable = ' '.join([word.capitalize() for word in key.split('_')])
+
+        html_content += f"""
+            <tr>
+                <td>{html.escape(key_human_readable)}</td>
+                <td>{html.escape(str(value))}</td>
+            </tr>
+        """
+
+    html_content += f"""
+                </table>
+            </div>
+            <div class="iframe-container">
+                <iframe src="{iframe_src}"></iframe>
+            </div>
+        </div>
+    </body>
+    </html>
+    """
+
+    with open(f"D:/10_ProgramTesting/{prj_name}_project_data.html",
+              "w") as html_file:
+        html_file.write(html_content)
+
+
+def create_house_wireframe(area_north, area_east, area_south, area_west, height, num_floors=1, roof_angle=30,
+                           window_area_north=0, window_area_east=0, window_area_south=0, window_area_west=0):
+    length_north = area_north / (num_floors * height)
+    length_east = area_east / (num_floors * height)
+    length_south = area_south / (num_floors * height)
+    length_west = area_west / (num_floors * height)
+
+    fig = go.Figure()
+
+    for floor in range(num_floors):
+        # Ecken des aktuellen Stockwerks
+        floor_height = height * floor
+        vertices = [
+            (0, 0, floor_height),
+            (length_south, 0, floor_height),
+            (length_south, length_east, floor_height),
+            (length_south - length_north, length_west, floor_height),
+            (0, 0, floor_height + height),
+            (length_south, 0, floor_height + height),
+            (length_south, length_east, floor_height + height),
+            (length_south - length_north, length_west, floor_height + height),
+        ]
+
+        edges = [
+            [vertices[0], vertices[1], vertices[2], vertices[3], vertices[0]],  # 0: bottom
+            [vertices[4], vertices[5], vertices[6], vertices[7], vertices[4]],  # 1: top
+            [vertices[0], vertices[1], vertices[5], vertices[4], vertices[0]],  # 2: south
+            [vertices[2], vertices[3], vertices[7], vertices[6], vertices[2]],  # 3: north
+            [vertices[1], vertices[2], vertices[6], vertices[5], vertices[1]],  # 4: east
+            [vertices[4], vertices[7], vertices[3], vertices[0], vertices[4]],  # 5: west
+        ]
+
+        # Add walls as 3D polygons with color fill
+        for edge in edges:
+            xs, ys, zs = zip(*edge)
+            fig.add_trace(go.Mesh3d(x=xs, y=ys, z=zs, i=[0, 0, 1, 0], j=[1, 2, 2, 3], k=[2, 3, 3, 1],
+                                    opacity=0.25, color='gray'))
+
+        # Fenster hinzufügen
+        window_gap_top_bottom = 0.5
+        for i, (window_area, wall_vertices) in enumerate(zip(
+                [window_area_north, window_area_east, window_area_south, window_area_west],
+                [edges[3], edges[4], edges[2], edges[5]])):
+            num_windows_on_side = int(window_area / num_floors)
+            window_height = height - window_gap_top_bottom
+            window_width = window_area / (num_floors * window_height)
+            window_x_center = wall_vertices[0][0] + (wall_vertices[1][0] - wall_vertices[0][0]) / 2
+            window_y_center = wall_vertices[0][1] + (wall_vertices[2][1] - wall_vertices[0][1]) / 2
+            window_z_center = floor_height + window_gap_top_bottom / 2 + window_height / 2
+
+            if i == 0 or i == 2:
+                fig.add_trace(go.Mesh3d(x=[window_x_center - window_width / 2,
+                                           window_x_center + window_width / 2,
+                                           window_x_center + window_width / 2,
+                                           window_x_center - window_width / 2],
+                                        y=[window_y_center, window_y_center,
+                                           window_y_center, window_y_center],
+                                        z=[window_z_center - window_height / 2,
+                                           window_z_center - window_height / 2,
+                                           window_z_center + window_height / 2,
+                                           window_z_center + window_height / 2],
+                                        i=[0, 0, 1, 0],
+                                        j=[1, 2, 2, 3],
+                                        k=[2, 3, 3, 1],
+                                        opacity=0.7, color='blue'))
+            else:
+                fig.add_trace(go.Mesh3d(
+                    x=[window_x_center, window_x_center, window_x_center,
+                       window_x_center],
+                    y=[window_y_center - window_width / 2,
+                       window_y_center + window_width / 2,
+                       window_y_center + window_width / 2,
+                       window_y_center - window_width / 2],
+                    z=[window_z_center - window_height / 2,
+                       window_z_center - window_height / 2,
+                       window_z_center + window_height / 2,
+                       window_z_center + window_height / 2],
+                    i=[0, 0, 1, 0],
+                    j=[1, 2, 2, 3],
+                    k=[2, 3, 3, 1],
+                    opacity=0.7, color='blue'))
+
+    return fig
+
+
+
+
+
+
+def create_3d_house_diagram(prj_data_tuples):
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    ground_floor_area = prj_data_tuples.get('GroundFloorArea', 0)
+    outer_wall_areas = {
+        angle: prj_data_tuples.get(f'OuterWallArea_{angle}', 0)
+        for angle in [0, 90, 180, 270]
+    }
+    window_areas = {
+        angle: prj_data_tuples.get(f'WindowArea_{angle}', 0)
+        for angle in [0, 90, 180, 270]
+    }
+    roof_area = prj_data_tuples.get('RoofArea', 0)
+
+    # Define vertices for the house
+    vertices = np.array([
+        [0, 0, 0],
+        [0, ground_floor_area, 0],
+        [ground_floor_area, ground_floor_area, 0],
+        [ground_floor_area, 0, 0],
+        [0, 0, roof_area],
+        [0, ground_floor_area, roof_area],
+        [ground_floor_area, ground_floor_area, roof_area],
+        [ground_floor_area, 0, roof_area]
+    ])
+
+    # Define faces for the house
+    faces = [
+        [vertices[0], vertices[1], vertices[2], vertices[3]],
+        [vertices[4], vertices[5], vertices[6], vertices[7]],
+        [vertices[0], vertices[1], vertices[5], vertices[4]],
+        [vertices[2], vertices[3], vertices[7], vertices[6]],
+        [vertices[0], vertices[3], vertices[7], vertices[4]],
+        [vertices[1], vertices[2], vertices[6], vertices[5]]
     ]
 
-    prj_data_flat_sorted = [(k, prj_data_flat[k]) for k in prj_sorted_list if
-                            k in prj_data_flat.keys()]
-    keys = ['']
-    keys.extend([x[0] for x in prj_data_flat_sorted])
+    # Draw the faces of the house
+    ax.add_collection3d(Poly3DCollection(faces, facecolors='cyan', linewidths=1, edgecolors='black', alpha=0.5))
 
-    values = ['TEASER']
-    values.extend([x[1] for x in prj_data_flat_sorted])
-    import csv
-    import os
-    output_name = 'teaser_data' if not name else name
-    with open(os.path.join(path, '%s.csv' % output_name), 'w', newline='',
-              encoding='utf-8') as f:
-        csvwriter = csv.writer(f, delimiter=';')
-        csvwriter.writerow(keys)
-        csvwriter.writerow(localize_floats(values))
-    return prj_data_flat_sorted
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
+
+    ax.set_xlim(0, ground_floor_area * 1.5)
+    ax.set_ylim(0, ground_floor_area * 1.5)
+    ax.set_zlim(0, roof_area * 1.5)
+
+    plt.show()
