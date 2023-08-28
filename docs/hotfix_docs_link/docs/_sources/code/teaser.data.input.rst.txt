@@ -1,0 +1,50 @@
+teaser.data.input package
+=========================
+
+.. automodule:: teaser.data.input
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   teaser.data.input.inputdata
+
+Submodules
+----------
+
+teaser.data.input.buildingelement\_input\_json module
+-----------------------------------------------------
+
+.. automodule:: teaser.data.input.buildingelement_input_json
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.data.input.material\_input\_json module
+----------------------------------------------
+
+.. automodule:: teaser.data.input.material_input_json
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.data.input.teaserjson\_input module
+------------------------------------------
+
+.. automodule:: teaser.data.input.teaserjson_input
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.data.input.usecond\_input module
+---------------------------------------
+
+.. automodule:: teaser.data.input.usecond_input
+   :members:
+   :undoc-members:
+   :show-inheritance:

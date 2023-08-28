@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>teaser.examples.verification.verification_VDI_6007_room8 &#8212; TEASER 0.7.7 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=db26dd79" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinxdoc.css?v=3e14c5a6" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
+    <script src="../../../../_static/documentation_options.js?v=35f4697d"></script>
+    <script src="../../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+<div class="headerStyle">
+<img src="_static/EBC_Logo.png" alt="EBC_Logo" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">TEASER 0.7.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">teaser.examples.verification.verification_VDI_6007_room8</a></li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for teaser.examples.verification.verification_VDI_6007_room8</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Created July 2015</span>
+<span class="c1"># TEASER Development Team</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This script loads the VDI 6007 Room 8 as *.teaserjson and computes</span>
+<span class="sd">parameters. The parameters are then compared with the ones from Rouvel</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">teaser.project</span> <span class="kn">import</span> <span class="n">Project</span>
+<span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utilities</span>
+
+
+<div class="viewcode-block" id="parameter_room8">
+<a class="viewcode-back" href="../../../../code/teaser.examples.verification.html#teaser.examples.verification.verification_VDI_6007_room8.parameter_room8">[docs]</a>
+<span class="k">def</span> <span class="nf">parameter_room8</span><span class="p">():</span>
+
+    <span class="n">prj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;VDI_Verification_Room8&quot;</span>
+
+    <span class="n">prj</span><span class="o">.</span><span class="n">load_project</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+        <span class="s2">&quot;examples/examplefiles/VDI6007_Room8.json&quot;</span><span class="p">))</span>
+
+    <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">calc_building_parameter</span><span class="p">(</span>
+        <span class="n">number_of_elements</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">merge_windows</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">used_library</span><span class="o">=</span><span class="s1">&#39;AixLib&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">prj</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">prj</span> <span class="o">=</span> <span class="n">parameter_room8</span><span class="p">()</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    parameters inner wall</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Parameters for inner wall&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;r1_iw:&quot;</span><span class="p">,</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">r1_iw</span><span class="p">,</span>
+          <span class="s2">&quot;K/W ---&quot;</span><span class="p">,</span> <span class="s2">&quot;Rouvel: 0.000668640 K/W&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;c1_iw: &quot;</span><span class="p">,</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">c1_iw</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span>
+          <span class="s2">&quot;kJ/K ---&quot;</span><span class="p">,</span> <span class="s2">&quot;Rouvel: 12391.2 kJ/K&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;area_iw: &quot;</span><span class="p">,</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">area_iw</span><span class="p">,</span>
+          <span class="s2">&quot;m2 ---&quot;</span><span class="p">,</span> <span class="s2">&quot;Rouvel: 60.50 m2&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;alpha_weight_conv_iw: &quot;</span><span class="p">,</span>
+          <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">alpha_conv_inner_iw</span><span class="p">,</span>
+          <span class="s2">&quot;W/(m2*K) ---&quot;</span><span class="p">,</span> <span class="s2">&quot;Rouvel: 2.121487317 W/(m2*K)&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    parameters outer wall</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Parameters for outer wall&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;r_rest_ow&quot;</span><span class="p">,</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">r_rest_ow</span><span class="p">,</span>
+          <span class="s2">&quot;K/W ---&quot;</span><span class="p">,</span> <span class="s2">&quot;Rouvel: 0.020705927 K/W&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;r1_ow:&quot;</span><span class="p">,</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">r1_ow</span><span class="p">,</span>
+          <span class="s2">&quot;K/W ---&quot;</span><span class="p">,</span> <span class="s2">&quot;Rouvel: 0.001736253 K/W&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;c1_ow: &quot;</span><span class="p">,</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">c1_ow</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span>
+          <span class="s2">&quot;kJ/K ---&quot;</span><span class="p">,</span> <span class="s2">&quot;Rouvel: 5259.9 kJ/K&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;area_ow + area_win: &quot;</span><span class="p">,</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span>
+        <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">area_ow</span> <span class="o">+</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span>
+        <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">area_win</span><span class="p">,</span>
+        <span class="s2">&quot;m2 ---&quot;</span><span class="p">,</span> <span class="s2">&quot;Rouvel: 25.5 m2&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;alpha_conv_inner_ow: &quot;</span><span class="p">,</span>
+          <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">alpha_conv_inner_ow</span><span class="p">,</span>
+          <span class="s2">&quot;W/(m2*K) ---&quot;</span><span class="p">,</span> <span class="s2">&quot;Rouvel: 2.7 W/(m2*K)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;alpha_comb_outer_ow: &quot;</span><span class="p">,</span>
+          <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">alpha_comb_outer_ow</span><span class="p">,</span>
+          <span class="s2">&quot;W/(m2*K) ---&quot;</span><span class="p">,</span> <span class="s2">&quot;Rouvel: 25.0 W/(m2*K)&quot;</span><span class="p">)</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">weightfactor_ow</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;weightfactor_ow: &quot;</span><span class="p">,</span>
+          <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">weightfactor_ow</span><span class="p">,</span>
+          <span class="s2">&quot;Rouvel: 0.057968311, 0.132498994&quot;</span><span class="p">)</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">weightfactor_win</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;weightfactor_win: &quot;</span><span class="p">,</span>
+          <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">weightfactor_win</span><span class="p">,</span>
+          <span class="s2">&quot;Rouvel: 0.404766351, 0.404766351&quot;</span><span class="p">)</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">TEASER 0.7.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">teaser.examples.verification.verification_VDI_6007_room8</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.4.
+    </div>
+  </body>
+</html>

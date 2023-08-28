@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>teaser.examples.e5_load &#8212; TEASER 0.7.7 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=db26dd79" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css?v=3e14c5a6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
+    <script src="../../../_static/documentation_options.js?v=35f4697d"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+<div class="headerStyle">
+<img src="_static/EBC_Logo.png" alt="EBC_Logo" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">TEASER 0.7.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">teaser.examples.e5_load</a></li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for teaser.examples.e5_load</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Created January 2017</span>
+<span class="c1"># TEASER Development Team</span>
+
+<span class="sd">&quot;&quot;&quot;This module contains an example how to import TEASER projects from</span>
+<span class="sd">*.teaserjson and pickle in order to reuse data.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utilities</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+
+<div class="viewcode-block" id="example_load">
+<a class="viewcode-back" href="../../../code/teaser.examples.html#teaser.examples.e5_load.example_load">[docs]</a>
+<span class="k">def</span> <span class="nf">example_load</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;&quot;This function demonstrates different loading options of TEASER&quot;&quot;&quot;</span>
+
+    <span class="c1"># In example e4_save we saved two TEASER projects using *.teaserjson and</span>
+    <span class="c1"># Python package pickle. This example shows how to import these</span>
+    <span class="c1"># information into your python environment again.</span>
+
+    <span class="c1"># To load data from *.teaserjson we can use a simple API function. So</span>
+    <span class="c1"># first we need to instantiate our API (similar to example</span>
+    <span class="c1"># e1_generate_archetype). The json file is called</span>
+    <span class="c1"># `ArchetypeExample.teaserjson` and saved in the default path. You need to</span>
+    <span class="c1">#  run e4 first before you can load this example file.</span>
+
+    <span class="kn">from</span> <span class="nn">teaser.project</span> <span class="kn">import</span> <span class="n">Project</span>
+
+    <span class="n">prj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">()</span>
+
+    <span class="n">load_json</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_default_path</span><span class="p">(),</span> <span class="s2">&quot;ArchetypeExample.json&quot;</span><span class="p">)</span>
+
+    <span class="n">prj</span><span class="o">.</span><span class="n">load_project</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">load_json</span><span class="p">)</span>
+
+    <span class="n">prj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">()</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">load_project</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span><span class="s2">&quot;examples/examplefiles/unitTest.json&quot;</span><span class="p">))</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">save_project</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;unitTest&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># To reload data from a pickle file, we do not need to instantiate an</span>
+    <span class="c1"># API, as pickle will automatically instantiate all classes as they have</span>
+    <span class="c1"># been saved. The saved file from example e4 is called ´teaser_pickle.p´</span>
+
+    <span class="kn">import</span> <span class="nn">pickle</span>
+
+    <span class="n">load_pickle</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_default_path</span><span class="p">(),</span> <span class="s2">&quot;teaser_pickle.p&quot;</span><span class="p">)</span>
+
+    <span class="n">pickle_prj</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">load_pickle</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pickle_prj</span><span class="p">)</span></div>
+
+
+    <span class="c1"># After you imported your teaser project one or another way into you</span>
+    <span class="c1"># python environment you can access variables and functions.</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">example_load</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 5: That&#39;s it! :)&quot;</span><span class="p">)</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">TEASER 0.7.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">teaser.examples.e5_load</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.4.
+    </div>
+  </body>
+</html>

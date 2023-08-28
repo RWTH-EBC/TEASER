@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>teaser.logic.buildingobjects package &#8212; TEASER 0.7.7 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=3e14c5a6" />
+    <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+    <script src="../_static/documentation_options.js?v=35f4697d"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+<div class="headerStyle">
+<img src="_static/EBC_Logo.png" alt="EBC_Logo" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TEASER 0.7.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">teaser.logic.buildingobjects package</a></li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">teaser.logic.buildingobjects package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-teaser.logic.buildingobjects.building">teaser.logic.buildingobjects.building module</a><ul>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building"><code class="docutils literal notranslate"><span class="pre">Building</span></code></a><ul>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.add_zone"><code class="docutils literal notranslate"><span class="pre">Building.add_zone()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.calc_building_parameter"><code class="docutils literal notranslate"><span class="pre">Building.calc_building_parameter()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.central_ahu"><code class="docutils literal notranslate"><span class="pre">Building.central_ahu</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.fill_outer_area_dict"><code class="docutils literal notranslate"><span class="pre">Building.fill_outer_area_dict()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.fill_window_area_dict"><code class="docutils literal notranslate"><span class="pre">Building.fill_window_area_dict()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.get_inner_wall_area"><code class="docutils literal notranslate"><span class="pre">Building.get_inner_wall_area()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.get_outer_wall_area"><code class="docutils literal notranslate"><span class="pre">Building.get_outer_wall_area()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.get_window_area"><code class="docutils literal notranslate"><span class="pre">Building.get_window_area()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.height_of_floors"><code class="docutils literal notranslate"><span class="pre">Building.height_of_floors</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.merge_windows_calc"><code class="docutils literal notranslate"><span class="pre">Building.merge_windows_calc</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.name"><code class="docutils literal notranslate"><span class="pre">Building.name</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.net_leased_area"><code class="docutils literal notranslate"><span class="pre">Building.net_leased_area</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.number_of_elements_calc"><code class="docutils literal notranslate"><span class="pre">Building.number_of_elements_calc</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.number_of_floors"><code class="docutils literal notranslate"><span class="pre">Building.number_of_floors</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.outer_area"><code class="docutils literal notranslate"><span class="pre">Building.outer_area</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.parent"><code class="docutils literal notranslate"><span class="pre">Building.parent</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.retrofit_building"><code class="docutils literal notranslate"><span class="pre">Building.retrofit_building()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.rotate_building"><code class="docutils literal notranslate"><span class="pre">Building.rotate_building()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.set_outer_wall_area"><code class="docutils literal notranslate"><span class="pre">Building.set_outer_wall_area()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.set_window_area"><code class="docutils literal notranslate"><span class="pre">Building.set_window_area()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.thermal_zones"><code class="docutils literal notranslate"><span class="pre">Building.thermal_zones</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.used_library_calc"><code class="docutils literal notranslate"><span class="pre">Building.used_library_calc</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.window_area"><code class="docutils literal notranslate"><span class="pre">Building.window_area</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.with_ahu"><code class="docutils literal notranslate"><span class="pre">Building.with_ahu</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.year_of_construction"><code class="docutils literal notranslate"><span class="pre">Building.year_of_construction</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.building.Building.year_of_retrofit"><code class="docutils literal notranslate"><span class="pre">Building.year_of_retrofit</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-teaser.logic.buildingobjects.thermalzone">teaser.logic.buildingobjects.thermalzone module</a><ul>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone"><code class="docutils literal notranslate"><span class="pre">ThermalZone</span></code></a><ul>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.add_element"><code class="docutils literal notranslate"><span class="pre">ThermalZone.add_element()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.area"><code class="docutils literal notranslate"><span class="pre">ThermalZone.area</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.calc_zone_parameters"><code class="docutils literal notranslate"><span class="pre">ThermalZone.calc_zone_parameters()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.ceilings"><code class="docutils literal notranslate"><span class="pre">ThermalZone.ceilings</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.delete"><code class="docutils literal notranslate"><span class="pre">ThermalZone.delete()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.doors"><code class="docutils literal notranslate"><span class="pre">ThermalZone.doors</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_doors"><code class="docutils literal notranslate"><span class="pre">ThermalZone.find_doors()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_gfs"><code class="docutils literal notranslate"><span class="pre">ThermalZone.find_gfs()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_rts"><code class="docutils literal notranslate"><span class="pre">ThermalZone.find_rts()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_walls"><code class="docutils literal notranslate"><span class="pre">ThermalZone.find_walls()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_wins"><code class="docutils literal notranslate"><span class="pre">ThermalZone.find_wins()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.floors"><code class="docutils literal notranslate"><span class="pre">ThermalZone.floors</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.ground_floors"><code class="docutils literal notranslate"><span class="pre">ThermalZone.ground_floors</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.infiltration_rate"><code class="docutils literal notranslate"><span class="pre">ThermalZone.infiltration_rate</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.inner_walls"><code class="docutils literal notranslate"><span class="pre">ThermalZone.inner_walls</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.name"><code class="docutils literal notranslate"><span class="pre">ThermalZone.name</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.outer_walls"><code class="docutils literal notranslate"><span class="pre">ThermalZone.outer_walls</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.parent"><code class="docutils literal notranslate"><span class="pre">ThermalZone.parent</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.retrofit_zone"><code class="docutils literal notranslate"><span class="pre">ThermalZone.retrofit_zone()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.rooftops"><code class="docutils literal notranslate"><span class="pre">ThermalZone.rooftops</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.set_inner_wall_area"><code class="docutils literal notranslate"><span class="pre">ThermalZone.set_inner_wall_area()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.set_volume_zone"><code class="docutils literal notranslate"><span class="pre">ThermalZone.set_volume_zone()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.t_inside"><code class="docutils literal notranslate"><span class="pre">ThermalZone.t_inside</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.t_outside"><code class="docutils literal notranslate"><span class="pre">ThermalZone.t_outside</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.use_conditions"><code class="docutils literal notranslate"><span class="pre">ThermalZone.use_conditions</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.volume"><code class="docutils literal notranslate"><span class="pre">ThermalZone.volume</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.windows"><code class="docutils literal notranslate"><span class="pre">ThermalZone.windows</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-teaser.logic.buildingobjects.useconditions">teaser.logic.buildingobjects.useconditions module</a><ul>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions"><code class="docutils literal notranslate"><span class="pre">UseConditions</span></code></a><ul>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.cooling_profile"><code class="docutils literal notranslate"><span class="pre">UseConditions.cooling_profile</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.heating_profile"><code class="docutils literal notranslate"><span class="pre">UseConditions.heating_profile</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.lighting_profile"><code class="docutils literal notranslate"><span class="pre">UseConditions.lighting_profile</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.load_use_conditions"><code class="docutils literal notranslate"><span class="pre">UseConditions.load_use_conditions()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.machines_profile"><code class="docutils literal notranslate"><span class="pre">UseConditions.machines_profile</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.parent"><code class="docutils literal notranslate"><span class="pre">UseConditions.parent</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.persons"><code class="docutils literal notranslate"><span class="pre">UseConditions.persons</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.persons_profile"><code class="docutils literal notranslate"><span class="pre">UseConditions.persons_profile</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.save_use_conditions"><code class="docutils literal notranslate"><span class="pre">UseConditions.save_use_conditions()</span></code></a></li>
+<li><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.with_ideal_thresholds"><code class="docutils literal notranslate"><span class="pre">UseConditions.with_ideal_thresholds</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/code/teaser.logic.buildingobjects.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-teaser.logic.buildingobjects">
+<span id="teaser-logic-buildingobjects-package"></span><h1>teaser.logic.buildingobjects package<a class="headerlink" href="#module-teaser.logic.buildingobjects" title="Link to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html">teaser.logic.buildingobjects.buildingphysics package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.buildingelement">teaser.logic.buildingobjects.buildingphysics.buildingelement module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement"><code class="docutils literal notranslate"><span class="pre">BuildingElement</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.add_layer"><code class="docutils literal notranslate"><span class="pre">BuildingElement.add_layer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.add_layer_list"><code class="docutils literal notranslate"><span class="pre">BuildingElement.add_layer_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.area"><code class="docutils literal notranslate"><span class="pre">BuildingElement.area</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.calc_ua_value"><code class="docutils literal notranslate"><span class="pre">BuildingElement.calc_ua_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.construction_type"><code class="docutils literal notranslate"><span class="pre">BuildingElement.construction_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.delete_type_element"><code class="docutils literal notranslate"><span class="pre">BuildingElement.delete_type_element()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.gather_element_properties"><code class="docutils literal notranslate"><span class="pre">BuildingElement.gather_element_properties()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.inner_convection"><code class="docutils literal notranslate"><span class="pre">BuildingElement.inner_convection</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.inner_radiation"><code class="docutils literal notranslate"><span class="pre">BuildingElement.inner_radiation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.layer"><code class="docutils literal notranslate"><span class="pre">BuildingElement.layer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.load_type_element"><code class="docutils literal notranslate"><span class="pre">BuildingElement.load_type_element()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.name"><code class="docutils literal notranslate"><span class="pre">BuildingElement.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.orientation"><code class="docutils literal notranslate"><span class="pre">BuildingElement.orientation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.outer_convection"><code class="docutils literal notranslate"><span class="pre">BuildingElement.outer_convection</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.outer_radiation"><code class="docutils literal notranslate"><span class="pre">BuildingElement.outer_radiation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.save_type_element"><code class="docutils literal notranslate"><span class="pre">BuildingElement.save_type_element()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.set_calc_default"><code class="docutils literal notranslate"><span class="pre">BuildingElement.set_calc_default()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.tilt"><code class="docutils literal notranslate"><span class="pre">BuildingElement.tilt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.year_of_construction"><code class="docutils literal notranslate"><span class="pre">BuildingElement.year_of_construction</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.year_of_retrofit"><code class="docutils literal notranslate"><span class="pre">BuildingElement.year_of_retrofit</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.ceiling">teaser.logic.buildingobjects.buildingphysics.ceiling module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.ceiling.Ceiling"><code class="docutils literal notranslate"><span class="pre">Ceiling</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.door">teaser.logic.buildingobjects.buildingphysics.door module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.door.Door"><code class="docutils literal notranslate"><span class="pre">Door</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.door.Door.parent"><code class="docutils literal notranslate"><span class="pre">Door.parent</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.floor">teaser.logic.buildingobjects.buildingphysics.floor module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.floor.Floor"><code class="docutils literal notranslate"><span class="pre">Floor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.groundfloor">teaser.logic.buildingobjects.buildingphysics.groundfloor module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.groundfloor.GroundFloor"><code class="docutils literal notranslate"><span class="pre">GroundFloor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.innerwall">teaser.logic.buildingobjects.buildingphysics.innerwall module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall"><code class="docutils literal notranslate"><span class="pre">InnerWall</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall.parent"><code class="docutils literal notranslate"><span class="pre">InnerWall.parent</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.layer">teaser.logic.buildingobjects.buildingphysics.layer module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.layer.Layer"><code class="docutils literal notranslate"><span class="pre">Layer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.layer.Layer.material"><code class="docutils literal notranslate"><span class="pre">Layer.material</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.layer.Layer.parent"><code class="docutils literal notranslate"><span class="pre">Layer.parent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.layer.Layer.thickness"><code class="docutils literal notranslate"><span class="pre">Layer.thickness</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.material">teaser.logic.buildingobjects.buildingphysics.material module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.material.Material"><code class="docutils literal notranslate"><span class="pre">Material</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.material.Material.density"><code class="docutils literal notranslate"><span class="pre">Material.density</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.material.Material.heat_capac"><code class="docutils literal notranslate"><span class="pre">Material.heat_capac</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.material.Material.ir_emissivity"><code class="docutils literal notranslate"><span class="pre">Material.ir_emissivity</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.material.Material.load_material_template"><code class="docutils literal notranslate"><span class="pre">Material.load_material_template()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.material.Material.material_id"><code class="docutils literal notranslate"><span class="pre">Material.material_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.material.Material.modify_material_template"><code class="docutils literal notranslate"><span class="pre">Material.modify_material_template()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.material.Material.name"><code class="docutils literal notranslate"><span class="pre">Material.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.material.Material.parent"><code class="docutils literal notranslate"><span class="pre">Material.parent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.material.Material.save_material_template"><code class="docutils literal notranslate"><span class="pre">Material.save_material_template()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.material.Material.solar_absorp"><code class="docutils literal notranslate"><span class="pre">Material.solar_absorp</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.material.Material.thermal_conduc"><code class="docutils literal notranslate"><span class="pre">Material.thermal_conduc</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.material.Material.thickness_default"><code class="docutils literal notranslate"><span class="pre">Material.thickness_default</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.material.Material.thickness_list"><code class="docutils literal notranslate"><span class="pre">Material.thickness_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.material.Material.transmittance"><code class="docutils literal notranslate"><span class="pre">Material.transmittance</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.outerwall">teaser.logic.buildingobjects.buildingphysics.outerwall module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall"><code class="docutils literal notranslate"><span class="pre">OuterWall</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall.parent"><code class="docutils literal notranslate"><span class="pre">OuterWall.parent</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.rooftop">teaser.logic.buildingobjects.buildingphysics.rooftop module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.rooftop.Rooftop"><code class="docutils literal notranslate"><span class="pre">Rooftop</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.wall">teaser.logic.buildingobjects.buildingphysics.wall module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.wall.Wall"><code class="docutils literal notranslate"><span class="pre">Wall</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.wall.Wall.calc_equivalent_res"><code class="docutils literal notranslate"><span class="pre">Wall.calc_equivalent_res()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.wall.Wall.insulate_wall"><code class="docutils literal notranslate"><span class="pre">Wall.insulate_wall()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.wall.Wall.retrofit_wall"><code class="docutils literal notranslate"><span class="pre">Wall.retrofit_wall()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.window">teaser.logic.buildingobjects.buildingphysics.window module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.window.Window"><code class="docutils literal notranslate"><span class="pre">Window</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.window.Window.a_conv"><code class="docutils literal notranslate"><span class="pre">Window.a_conv</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.window.Window.calc_equivalent_res"><code class="docutils literal notranslate"><span class="pre">Window.calc_equivalent_res()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.window.Window.g_value"><code class="docutils literal notranslate"><span class="pre">Window.g_value</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.window.Window.parent"><code class="docutils literal notranslate"><span class="pre">Window.parent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.window.Window.replace_window"><code class="docutils literal notranslate"><span class="pre">Window.replace_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.window.Window.shading_g_total"><code class="docutils literal notranslate"><span class="pre">Window.shading_g_total</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.window.Window.shading_max_irr"><code class="docutils literal notranslate"><span class="pre">Window.shading_max_irr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="teaser.logic.buildingobjects.buildingsystems.html">teaser.logic.buildingobjects.buildingsystems package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.buildingsystems.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.buildingsystems.html#module-teaser.logic.buildingobjects.buildingsystems.buildingahu">teaser.logic.buildingobjects.buildingsystems.buildingahu module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.buildingsystems.html#teaser.logic.buildingobjects.buildingsystems.buildingahu.BuildingAHU"><code class="docutils literal notranslate"><span class="pre">BuildingAHU</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingsystems.html#teaser.logic.buildingobjects.buildingsystems.buildingahu.BuildingAHU.max_relative_humidity_profile"><code class="docutils literal notranslate"><span class="pre">BuildingAHU.max_relative_humidity_profile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingsystems.html#teaser.logic.buildingobjects.buildingsystems.buildingahu.BuildingAHU.min_relative_humidity_profile"><code class="docutils literal notranslate"><span class="pre">BuildingAHU.min_relative_humidity_profile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingsystems.html#teaser.logic.buildingobjects.buildingsystems.buildingahu.BuildingAHU.parent"><code class="docutils literal notranslate"><span class="pre">BuildingAHU.parent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingsystems.html#teaser.logic.buildingobjects.buildingsystems.buildingahu.BuildingAHU.temperature_profile"><code class="docutils literal notranslate"><span class="pre">BuildingAHU.temperature_profile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingsystems.html#teaser.logic.buildingobjects.buildingsystems.buildingahu.BuildingAHU.v_flow_profile"><code class="docutils literal notranslate"><span class="pre">BuildingAHU.v_flow_profile</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html">teaser.logic.buildingobjects.calculation package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#module-teaser.logic.buildingobjects.calculation.aixlib">teaser.logic.buildingobjects.calculation.aixlib module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.aixlib.AixLib"><code class="docutils literal notranslate"><span class="pre">AixLib</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.aixlib.AixLib.calc_auxiliary_attr"><code class="docutils literal notranslate"><span class="pre">AixLib.calc_auxiliary_attr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.aixlib.AixLib.modelica_AHU_boundary"><code class="docutils literal notranslate"><span class="pre">AixLib.modelica_AHU_boundary()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.aixlib.AixLib.modelica_gains_boundary"><code class="docutils literal notranslate"><span class="pre">AixLib.modelica_gains_boundary()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.aixlib.AixLib.modelica_set_temp"><code class="docutils literal notranslate"><span class="pre">AixLib.modelica_set_temp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.aixlib.AixLib.modelica_set_temp_cool"><code class="docutils literal notranslate"><span class="pre">AixLib.modelica_set_temp_cool()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#module-teaser.logic.buildingobjects.calculation.four_element">teaser.logic.buildingobjects.calculation.four_element module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.four_element.FourElement"><code class="docutils literal notranslate"><span class="pre">FourElement</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.four_element.FourElement.calc_attributes"><code class="docutils literal notranslate"><span class="pre">FourElement.calc_attributes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.four_element.FourElement.set_calc_default"><code class="docutils literal notranslate"><span class="pre">FourElement.set_calc_default()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#module-teaser.logic.buildingobjects.calculation.ibpsa">teaser.logic.buildingobjects.calculation.ibpsa module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.ibpsa.IBPSA"><code class="docutils literal notranslate"><span class="pre">IBPSA</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.ibpsa.IBPSA.modelica_gains_boundary"><code class="docutils literal notranslate"><span class="pre">IBPSA.modelica_gains_boundary()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#module-teaser.logic.buildingobjects.calculation.one_element">teaser.logic.buildingobjects.calculation.one_element module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.one_element.OneElement"><code class="docutils literal notranslate"><span class="pre">OneElement</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.one_element.OneElement.calc_attributes"><code class="docutils literal notranslate"><span class="pre">OneElement.calc_attributes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.one_element.OneElement.set_calc_default"><code class="docutils literal notranslate"><span class="pre">OneElement.set_calc_default()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#module-teaser.logic.buildingobjects.calculation.three_element">teaser.logic.buildingobjects.calculation.three_element module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.three_element.ThreeElement"><code class="docutils literal notranslate"><span class="pre">ThreeElement</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.three_element.ThreeElement.calc_attributes"><code class="docutils literal notranslate"><span class="pre">ThreeElement.calc_attributes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.three_element.ThreeElement.set_calc_default"><code class="docutils literal notranslate"><span class="pre">ThreeElement.set_calc_default()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#module-teaser.logic.buildingobjects.calculation.two_element">teaser.logic.buildingobjects.calculation.two_element module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.two_element.TwoElement"><code class="docutils literal notranslate"><span class="pre">TwoElement</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.two_element.TwoElement.calc_attributes"><code class="docutils literal notranslate"><span class="pre">TwoElement.calc_attributes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.two_element.TwoElement.set_calc_default"><code class="docutils literal notranslate"><span class="pre">TwoElement.set_calc_default()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-teaser.logic.buildingobjects.building">
+<span id="teaser-logic-buildingobjects-building-module"></span><h2>teaser.logic.buildingobjects.building module<a class="headerlink" href="#module-teaser.logic.buildingobjects.building" title="Link to this heading">¶</a></h2>
+<p>This module includes the Building class</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.building.</span></span><span class="sig-name descname"><span class="pre">Building</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_construction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_leased_area</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_ahu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_gains_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/building.html#Building"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Building Class</p>
+<p>This class is used to manage information and parameter calculation for
+Buildings. It is the base class for all archetype buildings and holds a
+list containing all ThermalZones instances. In addition it can hold an
+optional attribute for CentralAHU instance, that is e.g. needed for
+AixLib Simulation models.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>parent: Project()</strong></dt><dd><p>The parent class of this object, the Project the Building belongs to.
+Allows for better control of hierarchical structures. If not None it
+adds this Building instance to Project.buildings.
+(default: None)</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name (default: None)</p>
+</dd>
+<dt><strong>year_of_construction</strong><span class="classifier">int</span></dt><dd><p>Year of first construction (default: None)</p>
+</dd>
+<dt><strong>net_leased_area</strong><span class="classifier">float [m2]</span></dt><dd><p>Total net leased area of building. This is area is NOT the footprint
+of a building (default: None)</p>
+</dd>
+<dt><strong>with_ahu</strong><span class="classifier">Boolean</span></dt><dd><p>If set to True, an empty instance of BuildingAHU is instantiated and
+assigned to attribute central_ahu. This instance holds information for
+central Air Handling units. Default is False.</p>
+</dd>
+<dt><strong>internal_gains_mode: int [1, 2, 3]</strong></dt><dd><p>mode for the internal gains calculation done in AixLib:
+1: Temperature and activity degree dependent heat flux calculation for persons. The</p>
+<blockquote>
+<div><p>calculation is based on  SIA 2024 (default)</p>
+</div></blockquote>
+<dl class="simple">
+<dt>2: Temperature and activity degree independent heat flux calculation for persons, the max.</dt><dd><p>heatflowrate is prescribed by the parameter
+fixed_heat_flow_rate_persons.</p>
+</dd>
+<dt>3: Temperature and activity degree dependent calculation with</dt><dd><p>consideration of moisture and co2. The moisture calculation is
+based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
+Engineering ToolBox (2004) and regards only persons.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>central_ahu</strong><span class="classifier">instance of BuildingAHU</span></dt><dd><p>Teaser Instance of BuildingAHU if a central AHU is embedded into the
+building (currently mostly needed for AixLib simulation).</p>
+</dd>
+<dt><strong>number_of_floors</strong><span class="classifier">int</span></dt><dd><p>number of floors above ground (default: None)</p>
+</dd>
+<dt><strong>height_of_floors</strong><span class="classifier">float [m]</span></dt><dd><p>Average height of the floors (default: None)</p>
+</dd>
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different buildings.</p>
+</dd>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of last retrofit.</p>
+</dd>
+<dt><strong>type_of_building</strong><span class="classifier">string</span></dt><dd><p>Type of a Building (e.g. Building (unspecified), Office etc.).</p>
+</dd>
+<dt><strong>building_id</strong><span class="classifier">None</span></dt><dd><p>ID of building, can be set by the user to keep track of a building
+even outside of TEASER, e.g. in a simulation or in post-processing.
+This is not the same as internal_id, as internal_id is e.g. not
+exported to Modelica models!</p>
+</dd>
+<dt><strong>street_name</strong><span class="classifier">string</span></dt><dd><p>Name of the street the building is located at. (optional)</p>
+</dd>
+<dt><strong>city</strong><span class="classifier">string</span></dt><dd><p>Name of the city the building is located at. (optional)</p>
+</dd>
+<dt><strong>longitude</strong><span class="classifier">float [degree]</span></dt><dd><p>Longitude of building location.</p>
+</dd>
+<dt><strong>latitude</strong><span class="classifier">float [degree]</span></dt><dd><p>Latitude of building location.</p>
+</dd>
+<dt><strong>thermal_zones</strong><span class="classifier">list</span></dt><dd><p>List with instances of ThermalZone(), that are located in this building.</p>
+</dd>
+<dt><strong>outer_area</strong><span class="classifier">dict [degree: m2]</span></dt><dd><p>Dictionary with orientation as key and sum of outer wall areas of
+that direction as value.</p>
+</dd>
+<dt><strong>window_area</strong><span class="classifier">dict [degree: m2]</span></dt><dd><p>Dictionary with orientation as key and sum of window areas of
+that direction as value.</p>
+</dd>
+<dt><strong>bldg_height</strong><span class="classifier">float [m]</span></dt><dd><p>Total building height.</p>
+</dd>
+<dt><strong>volume</strong><span class="classifier">float [m3]</span></dt><dd><p>Total volume of all thermal zones.</p>
+</dd>
+<dt><strong>sum_heat_load</strong><span class="classifier">float [W]</span></dt><dd><p>Total heating load of all thermal zones.</p>
+</dd>
+<dt><strong>sum_cooling_load</strong><span class="classifier">float [W]</span></dt><dd><p>Total heating load of all thermal zones. (currently not supported)</p>
+</dd>
+<dt><strong>number_of_elements_calc</strong><span class="classifier">int</span></dt><dd><p>Number of elements that are used for thermal zone calculation in this
+building.
+1: OneElement
+2: TwoElement
+3: ThreeElement
+4: FourElement</p>
+</dd>
+<dt><strong>merge_windows_calc</strong><span class="classifier">boolean</span></dt><dd><p>True for merging the windows into the outer wall’s RC-combination,
+False for separate resistance for window, default is False. (Only
+supported for IBPSA)</p>
+</dd>
+<dt><strong>used_library_calc</strong><span class="classifier">str</span></dt><dd><p>‘AixLib’ for <a class="reference external" href="https://github.com/RWTH-EBC/AixLib">https://github.com/RWTH-EBC/AixLib</a>
+‘IBPSA’ for <a class="reference external" href="https://github.com/ibpsa/modelica">https://github.com/ibpsa/modelica</a></p>
+</dd>
+<dt><strong>library_attr</strong><span class="classifier">Annex() or AixLib() instance</span></dt><dd><p>Classes with specific functions and attributes for building models in
+IBPSA and AixLib. Python classes can be found in calculation package.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.Building.html#teaser.logic.buildingobjects.building.Building.add_zone" title="teaser.logic.buildingobjects.building.Building.add_zone"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_zone</span></code></a>(thermal_zone)</p></td>
+<td><p>Adds a thermal zone to the corresponding list</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.Building.html#teaser.logic.buildingobjects.building.Building.calc_building_parameter" title="teaser.logic.buildingobjects.building.Building.calc_building_parameter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_building_parameter</span></code></a>([...])</p></td>
+<td><p>calc all building parameters</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.Building.html#teaser.logic.buildingobjects.building.Building.fill_outer_area_dict" title="teaser.logic.buildingobjects.building.Building.fill_outer_area_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fill_outer_area_dict</span></code></a>()</p></td>
+<td><p>Fills the attribute outer_area</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.Building.html#teaser.logic.buildingobjects.building.Building.fill_window_area_dict" title="teaser.logic.buildingobjects.building.Building.fill_window_area_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fill_window_area_dict</span></code></a>()</p></td>
+<td><p>Fills the attribute</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.Building.html#teaser.logic.buildingobjects.building.Building.get_inner_wall_area" title="teaser.logic.buildingobjects.building.Building.get_inner_wall_area"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_inner_wall_area</span></code></a>()</p></td>
+<td><p>Get aggregated inner wall area</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.Building.html#teaser.logic.buildingobjects.building.Building.get_outer_wall_area" title="teaser.logic.buildingobjects.building.Building.get_outer_wall_area"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_outer_wall_area</span></code></a>(orientation)</p></td>
+<td><p>Get aggregated wall area of one orientation</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.Building.html#teaser.logic.buildingobjects.building.Building.get_window_area" title="teaser.logic.buildingobjects.building.Building.get_window_area"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_window_area</span></code></a>(orientation)</p></td>
+<td><p>Get aggregated window area of one orientation</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.Building.html#teaser.logic.buildingobjects.building.Building.retrofit_building" title="teaser.logic.buildingobjects.building.Building.retrofit_building"><code class="xref py py-obj docutils literal notranslate"><span class="pre">retrofit_building</span></code></a>([year_of_retrofit, ...])</p></td>
+<td><p>Retrofits all zones in the building</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.Building.html#teaser.logic.buildingobjects.building.Building.rotate_building" title="teaser.logic.buildingobjects.building.Building.rotate_building"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotate_building</span></code></a>(angle)</p></td>
+<td><p>Rotates the building to a given angle</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.Building.html#teaser.logic.buildingobjects.building.Building.set_outer_wall_area" title="teaser.logic.buildingobjects.building.Building.set_outer_wall_area"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_outer_wall_area</span></code></a>(new_area, orientation)</p></td>
+<td><p>Outer area wall setter</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.Building.html#teaser.logic.buildingobjects.building.Building.set_window_area" title="teaser.logic.buildingobjects.building.Building.set_window_area"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_window_area</span></code></a>(new_area, orientation)</p></td>
+<td><p>Window area setter</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.add_zone">
+<span class="sig-name descname"><span class="pre">add_zone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thermal_zone</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/building.html#Building.add_zone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.add_zone" title="Link to this definition">¶</a></dt>
+<dd><p>Adds a thermal zone to the corresponding list</p>
+<p>This function adds a ThermalZone instance to the the thermal_zones list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>thermal_zone</strong><span class="classifier">ThermalZone()</span></dt><dd><p>ThermalZone() instance of TEASER</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.calc_building_parameter">
+<span class="sig-name descname"><span class="pre">calc_building_parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number_of_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_windows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">used_library</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'AixLib'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/building.html#Building.calc_building_parameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.calc_building_parameter" title="Link to this definition">¶</a></dt>
+<dd><p>calc all building parameters</p>
+<p>This functions calculates the parameters of all zones in a building
+sums norm heat load of all zones
+sums volume of all zones</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>number_of_elements</strong><span class="classifier">int</span></dt><dd><p>defines the number of elements, that area aggregated, between 1
+and 4, default is 2</p>
+</dd>
+<dt><strong>merge_windows</strong><span class="classifier">bool</span></dt><dd><p>True for merging the windows into the outer walls, False for
+separate resistance for window, default is False</p>
+</dd>
+<dt><strong>used_library</strong><span class="classifier">str</span></dt><dd><p>used library (AixLib and IBPSA are supported)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.central_ahu">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">central_ahu</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.central_ahu" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.fill_outer_area_dict">
+<span class="sig-name descname"><span class="pre">fill_outer_area_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/building.html#Building.fill_outer_area_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.fill_outer_area_dict" title="Link to this definition">¶</a></dt>
+<dd><p>Fills the attribute outer_area</p>
+<p>Fills the dictionary outer_area with the sum of outer wall area
+corresponding to the orientations of the building. This function
+covers OuterWalls, GroundFloors and Rooftops.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.fill_window_area_dict">
+<span class="sig-name descname"><span class="pre">fill_window_area_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/building.html#Building.fill_window_area_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.fill_window_area_dict" title="Link to this definition">¶</a></dt>
+<dd><p>Fills the attribute</p>
+<p>Fills the dictionary window_area with the sum of window area
+corresponding to the orientations of the building.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.get_inner_wall_area">
+<span class="sig-name descname"><span class="pre">get_inner_wall_area</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/building.html#Building.get_inner_wall_area"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.get_inner_wall_area" title="Link to this definition">¶</a></dt>
+<dd><p>Get aggregated inner wall area</p>
+<p>Returns the area of all inner walls. This function covers InnerWalls,
+Ceilings and Floors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sum_area</strong><span class="classifier">float</span></dt><dd><p>area of all inner walls</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.get_outer_wall_area">
+<span class="sig-name descname"><span class="pre">get_outer_wall_area</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orientation</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/building.html#Building.get_outer_wall_area"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.get_outer_wall_area" title="Link to this definition">¶</a></dt>
+<dd><p>Get aggregated wall area of one orientation</p>
+<p>Returns the area of all outer walls of one direction. This function
+covers OuterWalls, GroundFloors and Rooftops.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>orientation</strong><span class="classifier">float</span></dt><dd><p>orientation of the obtained wall</p>
+</dd>
+<dt><strong>Returns</strong></dt><dd></dd>
+<dt><strong>———-</strong></dt><dd></dd>
+<dt><strong>sum_area</strong><span class="classifier">float</span></dt><dd><p>area of all walls of one direction</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.get_window_area">
+<span class="sig-name descname"><span class="pre">get_window_area</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orientation</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/building.html#Building.get_window_area"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.get_window_area" title="Link to this definition">¶</a></dt>
+<dd><p>Get aggregated window area of one orientation</p>
+<p>returns the area of all windows of one direction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>orientation</strong><span class="classifier">float</span></dt><dd><p>orientation of the obtained windows</p>
+</dd>
+<dt><strong>Returns</strong></dt><dd></dd>
+<dt><strong>———-</strong></dt><dd></dd>
+<dt><strong>sum_area</strong><span class="classifier">float</span></dt><dd><p>area of all windows of one direction</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.height_of_floors">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">height_of_floors</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.height_of_floors" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.merge_windows_calc">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">merge_windows_calc</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.merge_windows_calc" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.net_leased_area">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">net_leased_area</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.net_leased_area" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.number_of_elements_calc">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">number_of_elements_calc</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.number_of_elements_calc" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.number_of_floors">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">number_of_floors</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.number_of_floors" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.outer_area">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">outer_area</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.outer_area" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.parent">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parent</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.parent" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.retrofit_building">
+<span class="sig-name descname"><span class="pre">retrofit_building</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_of_retrofit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/building.html#Building.retrofit_building"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.retrofit_building" title="Link to this definition">¶</a></dt>
+<dd><p>Retrofits all zones in the building</p>
+<p>Function call for each zone.</p>
+<p>After retrofit, all parameters are calculated directly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>year_of_retrofit</strong><span class="classifier">float</span></dt><dd><p>Year of last retrofit.</p>
+</dd>
+<dt><strong>type_of_retrofit</strong><span class="classifier">str</span></dt><dd><p>The classification of retrofit, if the archetype building
+approach of TABULA is used.</p>
+</dd>
+<dt><strong>window_type</strong><span class="classifier">str</span></dt><dd><p>Default: EnEv 2014</p>
+</dd>
+<dt><strong>material</strong><span class="classifier">str</span></dt><dd><p>Default: EPS035</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.rotate_building">
+<span class="sig-name descname"><span class="pre">rotate_building</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/building.html#Building.rotate_building"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.rotate_building" title="Link to this definition">¶</a></dt>
+<dd><p>Rotates the building to a given angle</p>
+<p>This function covers OuterWall, Rooftop (if not flat roof) and Windows.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>angle: float</strong></dt><dd><p>rotation of the building clockwise, between 0 and 360 degrees</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.set_outer_wall_area">
+<span class="sig-name descname"><span class="pre">set_outer_wall_area</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_area</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orientation</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/building.html#Building.set_outer_wall_area"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.set_outer_wall_area" title="Link to this definition">¶</a></dt>
+<dd><p>Outer area wall setter</p>
+<p>sets the outer wall area of all walls of one direction and weights
+them according to zone size. This function covers OuterWalls,
+Rooftops, GroundFloors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>new_area</strong><span class="classifier">float</span></dt><dd><p>new_area of all outer walls of one orientation</p>
+</dd>
+<dt><strong>orientation</strong><span class="classifier">float</span></dt><dd><p>orientation of the obtained walls</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.set_window_area">
+<span class="sig-name descname"><span class="pre">set_window_area</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_area</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orientation</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/building.html#Building.set_window_area"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.set_window_area" title="Link to this definition">¶</a></dt>
+<dd><p>Window area setter</p>
+<p>sets the window area of all windows of one direction and weights
+them according to zone size</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>new_area</strong><span class="classifier">float</span></dt><dd><p>new_area of all window of one orientation</p>
+</dd>
+<dt><strong>orientation</strong><span class="classifier">float</span></dt><dd><p>orientation of the obtained windows</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.thermal_zones">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">thermal_zones</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.thermal_zones" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.used_library_calc">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">used_library_calc</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.used_library_calc" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.window_area">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">window_area</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.window_area" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.with_ahu">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">with_ahu</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.with_ahu" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.year_of_construction">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">year_of_construction</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.year_of_construction" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.building.Building.year_of_retrofit">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">year_of_retrofit</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.year_of_retrofit" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-teaser.logic.buildingobjects.thermalzone">
+<span id="teaser-logic-buildingobjects-thermalzone-module"></span><h2>teaser.logic.buildingobjects.thermalzone module<a class="headerlink" href="#module-teaser.logic.buildingobjects.thermalzone" title="Link to this heading">¶</a></h2>
+<p>This module includes the ThermalZone class</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.thermalzone.</span></span><span class="sig-name descname"><span class="pre">ThermalZone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/thermalzone.html#ThermalZone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Thermal zone class.</p>
+<p>This class is used to manage information and parameter calculation for
+thermal zones. Each thermal zone has one specific calculation method,
+which is specific to the used model (model_attr). For new model
+implementation this attribute can be assigned to new classes.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parent: Building()</strong></dt><dd><p>The parent class of this object, the Building the zone belongs to.
+Allows for better control of hierarchical structures. If not None it
+adds this ThermalZone instance to Building.thermal_zones.
+Default is None</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different zones.</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name.</p>
+</dd>
+<dt><strong>area</strong><span class="classifier">float [m2]</span></dt><dd><p>Thermal zone area.</p>
+</dd>
+<dt><strong>volume</strong><span class="classifier">float [m3]</span></dt><dd><p>Thermal zone volume.</p>
+</dd>
+<dt><strong>outer_walls</strong><span class="classifier">list</span></dt><dd><p>List of OuterWall instances.</p>
+</dd>
+<dt><strong>doors</strong><span class="classifier">list</span></dt><dd><p>List of Door instances.</p>
+</dd>
+<dt><strong>rooftops</strong><span class="classifier">list</span></dt><dd><p>List of Rooftop instances.</p>
+</dd>
+<dt><strong>ground_floors</strong><span class="classifier">list</span></dt><dd><p>List of GroundFloor instances.</p>
+</dd>
+<dt><strong>windows</strong><span class="classifier">list</span></dt><dd><p>List of Window instances.</p>
+</dd>
+<dt><strong>inner_walls</strong><span class="classifier">list</span></dt><dd><p>List of InnerWall instances.</p>
+</dd>
+<dt><strong>floors</strong><span class="classifier">list</span></dt><dd><p>List of Floor instances.</p>
+</dd>
+<dt><strong>ceilings: list</strong></dt><dd><p>List of Ceiling instances.</p>
+</dd>
+<dt><strong>use_conditions</strong><span class="classifier">instance of UseConditions()</span></dt><dd><p>Instance of UseConditions with all relevant information for the usage
+of the thermal zone</p>
+</dd>
+<dt><strong>model_attr</strong><span class="classifier">instance of OneElement(), TwoElement(), ThreeElement() or</span></dt><dd><blockquote>
+<div><p>FourElement()</p>
+</div></blockquote>
+<p>Instance of OneElement(), TwoElement(), ThreeElement() or
+FourElement(), that holds all calculation functions and attributes
+needed for the specific model.</p>
+</dd>
+<dt><strong>t_inside</strong><span class="classifier">float [K]</span></dt><dd><p>Normative indoor temperature for static heat load calculation.
+The input of t_inside is ALWAYS in Kelvin</p>
+</dd>
+<dt><strong>t_outside</strong><span class="classifier">float [K]</span></dt><dd><p>Normative outdoor temperature for static heat load calculation.
+The input of t_inside is ALWAYS in Kelvin</p>
+</dd>
+<dt><strong>t_ground</strong><span class="classifier">float [K]</span></dt><dd><p>Temperature directly at the outer side of ground floors for static
+heat load calculation.
+The input of t_ground is ALWAYS in Kelvin</p>
+</dd>
+<dt><strong>density_air</strong><span class="classifier">float [kg/m3]</span></dt><dd><p>average density of the air in the thermal zone</p>
+</dd>
+<dt><strong>heat_capac_air</strong><span class="classifier">float [J/K]</span></dt><dd><p>average heat capacity of the air in the thermal zone</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.ThermalZone.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.add_element" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.add_element"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_element</span></code></a>(building_element)</p></td>
+<td><p>Adds a building element to the corresponding list</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.ThermalZone.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.calc_zone_parameters" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.calc_zone_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_zone_parameters</span></code></a>([number_of_elements, ...])</p></td>
+<td><p>RC-Calculation for the thermal zone</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.ThermalZone.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.delete" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.delete"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete</span></code></a>()</p></td>
+<td><p>Deletes the actual thermal zone safely.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.ThermalZone.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_doors" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.find_doors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_doors</span></code></a>(orientation, tilt)</p></td>
+<td><p>Returns all outer walls with given orientation and tilt</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.ThermalZone.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_gfs" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.find_gfs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_gfs</span></code></a>(orientation, tilt)</p></td>
+<td><p>Returns all ground floors with given orientation and tilt</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.ThermalZone.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_rts" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.find_rts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_rts</span></code></a>(orientation, tilt)</p></td>
+<td><p>Returns all rooftops with given orientation and tilt</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.ThermalZone.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_walls" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.find_walls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_walls</span></code></a>(orientation, tilt)</p></td>
+<td><p>Returns all outer walls with given orientation and tilt</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.ThermalZone.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_wins" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.find_wins"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_wins</span></code></a>(orientation, tilt)</p></td>
+<td><p>Returns all windows with given orientation and tilt</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.ThermalZone.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.retrofit_zone" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.retrofit_zone"><code class="xref py py-obj docutils literal notranslate"><span class="pre">retrofit_zone</span></code></a>([type_of_retrofit, ...])</p></td>
+<td><p>Retrofits all walls and windows in the zone.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.ThermalZone.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.set_inner_wall_area" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.set_inner_wall_area"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_inner_wall_area</span></code></a>()</p></td>
+<td><p>Sets the inner wall area according to zone area</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../teaser.Logic.BuildingObjects.ThermalZone.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.set_volume_zone" title="teaser.logic.buildingobjects.thermalzone.ThermalZone.set_volume_zone"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_volume_zone</span></code></a>()</p></td>
+<td><p>Sets the zone volume according to area and height of floors</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.add_element">
+<span class="sig-name descname"><span class="pre">add_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">building_element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/thermalzone.html#ThermalZone.add_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.add_element" title="Link to this definition">¶</a></dt>
+<dd><p>Adds a building element to the corresponding list</p>
+<p>This function adds a BuildingElement instance to the the list
+depending on the type of the Building Element</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>building_element</strong><span class="classifier">BuildingElement()</span></dt><dd><p>inherited objects of BuildingElement() instance of TEASER</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.area">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">area</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.area" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.calc_zone_parameters">
+<span class="sig-name descname"><span class="pre">calc_zone_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number_of_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_windows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_bt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/thermalzone.html#ThermalZone.calc_zone_parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.calc_zone_parameters" title="Link to this definition">¶</a></dt>
+<dd><p>RC-Calculation for the thermal zone</p>
+<p>Based on the input parameters (used model) this function instantiates
+the corresponding calculation Class (e.g. TwoElement) and calculates
+the zone parameters. Currently the function is able to distinguishes
+between the number of elements, we distinguish between:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>one element: all outer walls are aggregated into one element,</p></li>
+</ul>
+<p>inner wall are neglected
+- two elements: exterior and interior walls are aggregated
+- three elements: like 2, but floor or roofs are aggregated
+separately
+- four elements: roofs and floors are aggregated separately</p>
+</div></blockquote>
+<p>For all four options we can chose if the thermal conduction through
+the window is considered in a separate resistance or not.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>number_of_elements</strong><span class="classifier">int</span></dt><dd><p>defines the number of elements, that area aggregated, between 1
+and 4, default is 2</p>
+</dd>
+<dt><strong>merge_windows</strong><span class="classifier">bool</span></dt><dd><p>True for merging the windows into the outer walls, False for
+separate resistance for window, default is False (Only
+supported for IBPSA)</p>
+</dd>
+<dt><strong>t_bt</strong><span class="classifier">float</span></dt><dd><p>Time constant according to VDI 6007 (default t_bt = 5)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.ceilings">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ceilings</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.ceilings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/thermalzone.html#ThermalZone.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.delete" title="Link to this definition">¶</a></dt>
+<dd><p>Deletes the actual thermal zone safely.</p>
+<p>This deletes the current thermal Zone and also refreshes the
+thermal_zones list in the parent Building.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.doors">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">doors</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.doors" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.find_doors">
+<span class="sig-name descname"><span class="pre">find_doors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orientation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/thermalzone.html#ThermalZone.find_doors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_doors" title="Link to this definition">¶</a></dt>
+<dd><p>Returns all outer walls with given orientation and tilt</p>
+<p>This function returns a list of all Doors elements with the
+same orientation and tilt.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth of the desired walls.</p>
+</dd>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against the horizontal of the desired walls.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>elements</strong><span class="classifier">list</span></dt><dd><p>List of Doors instances with desired orientation and tilt.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.find_gfs">
+<span class="sig-name descname"><span class="pre">find_gfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orientation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/thermalzone.html#ThermalZone.find_gfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_gfs" title="Link to this definition">¶</a></dt>
+<dd><p>Returns all ground floors with given orientation and tilt</p>
+<p>This function returns a list of all GroundFloor elements with the
+same orientation and tilt.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth of the desired ground floors.</p>
+</dd>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against the horizontal of the desired ground floors.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>elements</strong><span class="classifier">list</span></dt><dd><p>List of GroundFloor instances with desired orientation and tilt.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.find_rts">
+<span class="sig-name descname"><span class="pre">find_rts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orientation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/thermalzone.html#ThermalZone.find_rts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_rts" title="Link to this definition">¶</a></dt>
+<dd><p>Returns all rooftops with given orientation and tilt</p>
+<p>This function returns a list of all Rooftop elements with the
+same orientation and tilt.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth of the desired rooftops.</p>
+</dd>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against the horizontal of the desired rooftops.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>elements</strong><span class="classifier">list</span></dt><dd><p>List of Rooftop instances with desired orientation and tilt.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.find_walls">
+<span class="sig-name descname"><span class="pre">find_walls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orientation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/thermalzone.html#ThermalZone.find_walls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_walls" title="Link to this definition">¶</a></dt>
+<dd><p>Returns all outer walls with given orientation and tilt</p>
+<p>This function returns a list of all OuterWall elements with the
+same orientation and tilt.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth of the desired walls.</p>
+</dd>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against the horizontal of the desired walls.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>elements</strong><span class="classifier">list</span></dt><dd><p>List of OuterWalls instances with desired orientation and tilt.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.find_wins">
+<span class="sig-name descname"><span class="pre">find_wins</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orientation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/thermalzone.html#ThermalZone.find_wins"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_wins" title="Link to this definition">¶</a></dt>
+<dd><p>Returns all windows with given orientation and tilt</p>
+<p>This function returns a list of all Window elements with the
+same orientation and tilt.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth of the desired windows.</p>
+</dd>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against the horizontal of the desired windows.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>elements</strong><span class="classifier">list</span></dt><dd><p>List of Window instances with desired orientation and tilt.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.floors">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">floors</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.floors" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.ground_floors">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ground_floors</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.ground_floors" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.infiltration_rate">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">infiltration_rate</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.infiltration_rate" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.inner_walls">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">inner_walls</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.inner_walls" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.outer_walls">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">outer_walls</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.outer_walls" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.parent">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parent</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.parent" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.retrofit_zone">
+<span class="sig-name descname"><span class="pre">retrofit_zone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type_of_retrofit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/thermalzone.html#ThermalZone.retrofit_zone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.retrofit_zone" title="Link to this definition">¶</a></dt>
+<dd><p>Retrofits all walls and windows in the zone.</p>
+<p>Function call for all elements facing the ambient or ground.
+Distinguishes if the parent building is a archetype of type ‘iwu’ or
+‘tabula_de’. If TABULA is used, it will use the pre-defined wall
+constructions of TABULA.</p>
+<p>This function covers OuterWall, Rooftop, GroundFloor and Window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>type_of_retrofit</strong><span class="classifier">str</span></dt><dd><p>The classification of retrofit, if the archetype building
+approach of TABULA is used.</p>
+</dd>
+<dt><strong>window_type</strong><span class="classifier">str</span></dt><dd><p>Default: EnEv 2014</p>
+</dd>
+<dt><strong>material</strong><span class="classifier">str</span></dt><dd><p>Default: EPS035</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.rooftops">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rooftops</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.rooftops" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.set_inner_wall_area">
+<span class="sig-name descname"><span class="pre">set_inner_wall_area</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/thermalzone.html#ThermalZone.set_inner_wall_area"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.set_inner_wall_area" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the inner wall area according to zone area</p>
+<p>Sets the inner wall area according to zone area size if type building
+approach is used. This function covers Floors, Ceilings and InnerWalls.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.set_volume_zone">
+<span class="sig-name descname"><span class="pre">set_volume_zone</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/thermalzone.html#ThermalZone.set_volume_zone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.set_volume_zone" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the zone volume according to area and height of floors</p>
+<p>Sets the volume of a zone according area and height of floors
+(building attribute).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.t_inside">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">t_inside</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.t_inside" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.t_outside">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">t_outside</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.t_outside" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.use_conditions">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">use_conditions</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.use_conditions" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.volume">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">volume</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.volume" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.windows">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">windows</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.windows" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-teaser.logic.buildingobjects.useconditions">
+<span id="teaser-logic-buildingobjects-useconditions-module"></span><h2>teaser.logic.buildingobjects.useconditions module<a class="headerlink" href="#module-teaser.logic.buildingobjects.useconditions" title="Link to this heading">¶</a></h2>
+<p>This module contains UseConditions class.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.useconditions.UseConditions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.useconditions.</span></span><span class="sig-name descname"><span class="pre">UseConditions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/useconditions.html#UseConditions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.useconditions.UseConditions" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>UseConditions class contains all zone specific boundary conditions.</p>
+<p>Class that contains the boundary conditions of use for buildings defined in
+DIN V 18599-10 ( <span id="id1">[]</span>) and VDI 2078
+(<span id="id2">[]</span>). Profiles for internal gains (
+persons, lighting, machines) are taken from SIA2024 (
+<span id="id3">[]</span>). In addition some
+TEASER specific use conditions have been attached to this class. The
+docstring also contains how the use conditions is used.</p>
+<p>Note: Most attributes description are translations from DIN V 18599-10
+standard
+Attributes
+———-
+usage: str</p>
+<blockquote>
+<div><p>usage type
+AixLib usage: String to distinguish usages of a zone</p>
+</div></blockquote>
+<dl>
+<dt>typical_length: float [m]</dt><dd><p>typical length of a room in a usage zone. This value is taken from
+SIA 2024. Archetype usage: division of usage zones in rooms</p>
+</dd>
+<dt>typical width: float [m]</dt><dd><p>typical width of a usage zone. This value is taken from
+SIA 2024. Archetype usage: division of usage zones in rooms</p>
+</dd>
+<dt>with_heating: boolean</dt><dd><p>Sets if the zone is heated by ideal heater or not.</p>
+</dd>
+<dt>with_cooling: boolean</dt><dd><p>Sets if the zone is cooled by ideal cooler or not.</p>
+</dd>
+<dt>with_ideal_thresholds: boolean</dt><dd><p>Sets if the threshold temperatures for ideal heater and cooler are
+used.
+True = T_threshold_heating and T_threshold_cooling are used.
+This can, in most cases, prevent simultaneous heating from AHU and
+cooling from ideal heater and vice versa. This should only be turned
+on if an AHU exists.</p>
+</dd>
+<dt>T_threshold_heating: float [K]</dt><dd><p>Threshold for the outside temperature above which the ideal heater is
+permanently shut down regardless the inside temperature.
+Default is 15 °C which corresponds to the value for all buildings
+that are not built
+according to EnEV standard according to DIN EN 18599-5.</p>
+</dd>
+<dt>T_threshold_cooling: float [K]</dt><dd><p>Threshold for the outside temperature below which the ideal cooler is
+permanently shut down regardless the inside temperature.
+Default is 22 °C, since there are no european standards
+for cooling degree days this value is taken from the following paper:
+“Heating Degree Days, Cooling Degree Days and Precipitation in Europe
+—analysis for the CELECT-project” by Benestad, 2008.</p>
+</dd>
+<dt>heating_profile<span class="classifier">list [K]</span></dt><dd><p>Heating setpoint, regarding the zone temperature, of ideal static
+heating for a day or similar. You can set a list of any
+length, TEASER will multiplicate this list for one whole year.</p>
+</dd>
+<dt>cooling_profile<span class="classifier">list [K]</span></dt><dd><p>Cooling setpoint, regarding the zone temperature, of ideal static
+cooling for a day or similar. You can set a list of any
+length, TEASER will multiplicate this list for one whole year.</p>
+</dd>
+<dt>fixed_heat_flow_rate_persons: float [W/person]</dt><dd><p>fixed heat flow rate for one person in case of temperature
+independent calculation. Default value is 70
+W/person and describes
+the maximum heat flow rate depending on the schedule.</p>
+</dd>
+<dt>persons<span class="classifier">float [Persons/m2]</span></dt><dd><p>Specific number of persons per square area.
+Annex: Used for internal gains</p>
+</dd>
+<dt>internal_gains_moisture_no_people<span class="classifier">float [g/(h m²)]</span></dt><dd><p>internal moisture production of plants, etc. except from people.</p>
+</dd>
+<dt>activity_degree_persons<span class="classifier">float [met]</span></dt><dd><p>default value is 1.2 met
+AixLib: used for heat flow rate calculation (internal_gains_mode=1)
+or heat flow rate, moisture and co2 gains (internal_gains_mode=3). Both
+are temperature and activity degree depending, calculation based
+on SIA2024 (2015) and Engineering ToolBox (2004).
+Annex: not used, heat flow rate is constant value
+fixed_heat_flow_rate_persons</p>
+</dd>
+<dt>ratio_conv_rad_persons: float</dt><dd><p>describes the ratio between convective and radiative heat transfer
+of the persons [convective/radiative]. Default values are derived from
+<span id="id4">[]</span>.
+AixLib: Used in Zone record for internal gains
+Annex: Used for internal gains</p>
+</dd>
+<dt>persons_profile<span class="classifier">list</span></dt><dd><p>Relative presence of persons 0-1 (e.g. 0.5 means that 50% of the total
+number of persons are currently in the room). Given
+for 24h. This value is taken from SIA 2024. You can set a list of any
+length, TEASER will multiplicate this list for one whole year.
+AixLib: Used for internal gains profile on top-level
+Annex: Used for internal gains</p>
+</dd>
+<dt>machines: float [W/m2]</dt><dd><p>area specific eletrical load of machines per m2. This value is taken
+from SIA 2024 and DIN V 18599-10 for medium occupancy.
+AixLib: Used in Zone record for internal gains,
+internalGainsMachinesSpecific
+Annex: Used for internal gains</p>
+</dd>
+<dt>ratio_conv_rad_machines: float</dt><dd><p>describes the ratio between convective and radiative heat transfer
+of the machines [convective/radiative]. Default values are derived from
+<span id="id5">[]</span>.
+AixLib: Used in Zone record for internal gains
+Annex: Not used, all machines are convective (see Annex examples)</p>
+</dd>
+<dt>machines_profile: list</dt><dd><p>Relative presence of machines 0-1 (e.g. 0.5 means that 50% of the total
+number of machines are currently used in the room). Given
+for 24h. This value is taken from SIA 2024. You can set a list of any
+length, TEASER will multiplicate this list for one whole year.
+AixLib: Used for internal gains profile on top-level
+Annex: Used for internal gains</p>
+</dd>
+<dt>lighting_power: float [W/m2]</dt><dd><p>spec. electr. Power for lighting. This value is taken from SIA 2024.
+AixLib: Used in Zone record for internal gains
+Annex: Not used (see Annex examples)</p>
+</dd>
+<dt>ratio_conv_rad_lighting<span class="classifier">float</span></dt><dd><p>describes the ratio between convective and radiative heat transfer
+of the lighting [convective/radiative]. Default values are derived from
+<span id="id6">[]</span>.
+AixLib: Used in Zone record for internal gains, lighting</p>
+</dd>
+<dt>lighting_profil<span class="classifier">[float]</span></dt><dd><p>Relative presence of lighting 0-1 (e.g. 0.5 means that 50% of the total
+lighting power are currently used). Typically given for 24h. This is
+aligned to the user profile.
+AixLib: Used for internal gains profile on top-level
+Annex: Not used (see Annex examples)</p>
+</dd>
+<dt>min_ahu: float [m3/(m2*h)]</dt><dd><p>Zone specific minimum specific air flow supplied by the AHU.
+AixLib: Used on Multizone level for central AHU to determine total
+volume flow of each zone.</p>
+<blockquote>
+<div><p>Note: The AixLib parameter “WithProfile” determines whether the
+(v_flow_profile combined with “min_ahu and max_ahu”) or the
+(persons_profile combined with “min_ahu and max_ahu”)
+is used for the AHU supply flow calculations.
+Per default: (v_flow_profile combined with “min_ahu and max_ahu”)</p>
+</div></blockquote>
+</dd>
+<dt>max_ahu<span class="classifier">float [m3/(m2*h)]</span></dt><dd><p>Zone specific maximum specific air flow supplied by the AHU.
+AixLib: Used on Multizone level for central AHU to determine total
+volume flow of each zone.</p>
+<blockquote>
+<div><p>Note: The AixLib parameter “WithProfile” determines whether the
+(v_flow_profile combined with “min_ahu and max_ahu”) or the
+(persons_profile combined with “min_ahu and max_ahu”)
+is used for the AHU supply flow calculations.
+Per default: (v_flow_profile combined with “min_ahu and max_ahu”)</p>
+</div></blockquote>
+</dd>
+<dt>with_ahu<span class="classifier">boolean</span></dt><dd><p>Zone is connected to central air handling unit or not
+AixLib: Used on Multizone level for central AHU.</p>
+</dd>
+<dt>use_constant_infiltration<span class="classifier">boolean</span></dt><dd><p>choose whether window opening should be regarded.
+true = natural infiltration + ventilation due to a AHU
+false = natural infiltration + ventilation due to a AHU</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>window infiltration calculated by window opening model</p></li>
+</ul>
+</div></blockquote>
+<p>AixLib: Used on Zone level for ventilation.</p>
+</dd>
+<dt>base_infiltration<span class="classifier">float [1/h]</span></dt><dd><p>base value for the natural infiltration without window openings
+AixLib: Used on Zone level for ventilation.</p>
+</dd>
+<dt>max_user_infiltration<span class="classifier">float [1/h]</span></dt><dd><p>Additional infiltration rate for maximum persons activity
+AixLib: Used on Zone level for ventilation.</p>
+</dd>
+<dt>max_overheating_infiltration<span class="classifier">list [1/h]</span></dt><dd><p>Additional infiltration rate when overheating appears
+AixLib: Used on Zone level for ventilation.</p>
+</dd>
+<dt>max_summer_infiltration<span class="classifier">list</span></dt><dd><p>Additional infiltration rate in the summer with
+[infiltration_rate [1/h], Tmin [K], Tmax [K]]. Default values are
+aligned to <span id="id7">[]</span>.
+AixLib: Used on Zone level for ventilation.</p>
+</dd>
+<dt>winter_reduction_infiltration<span class="classifier">list</span></dt><dd><p>Reduction factor of userACH for cold weather with
+[infiltration_rate [1/h], Tmin [K], Tmax [K]]
+AixLib: Used on Zone level for ventilation.
+Default values are
+aligned to <span id="id8">[]</span>.</p>
+</dd>
+<dt>schedules: pandas.DataFrame</dt><dd><p>All time dependent boundary attributes in one pandas DataFrame, used
+for export (one year in hourly timestep.)
+Note: python attribute, not customizable by user (derived from Json)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>cooling_profile</strong></dt><dd></dd>
+<dt><strong>heating_profile</strong></dt><dd></dd>
+<dt><strong>lighting_profile</strong></dt><dd></dd>
+<dt><strong>machines_profile</strong></dt><dd></dd>
+<dt><strong>parent</strong></dt><dd></dd>
+<dt><strong>persons</strong></dt><dd></dd>
+<dt><strong>persons_profile</strong></dt><dd></dd>
+<dt><strong>with_ideal_thresholds</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.load_use_conditions" title="teaser.logic.buildingobjects.useconditions.UseConditions.load_use_conditions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_use_conditions</span></code></a>(zone_usage[, data_class])</p></td>
+<td><p>Load typical use conditions from JSON data base.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.save_use_conditions" title="teaser.logic.buildingobjects.useconditions.UseConditions.save_use_conditions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_use_conditions</span></code></a>([data_class])</p></td>
+<td><p>Documentation is missing.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.useconditions.UseConditions.cooling_profile">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cooling_profile</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.useconditions.UseConditions.cooling_profile" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.useconditions.UseConditions.heating_profile">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">heating_profile</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.useconditions.UseConditions.heating_profile" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.useconditions.UseConditions.lighting_profile">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lighting_profile</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.useconditions.UseConditions.lighting_profile" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.useconditions.UseConditions.load_use_conditions">
+<span class="sig-name descname"><span class="pre">load_use_conditions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zone_usage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/useconditions.html#UseConditions.load_use_conditions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.useconditions.UseConditions.load_use_conditions" title="Link to this definition">¶</a></dt>
+<dd><p>Load typical use conditions from JSON data base.</p>
+<p>Loads Use conditions specified in the JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>zone_usage</strong><span class="classifier">str</span></dt><dd><p>code list for zone_usage according to 18599 or self defined</p>
+</dd>
+<dt><strong>data_class</strong><span class="classifier">DataClass()</span></dt><dd><p>DataClass containing the bindings for Use Conditions (typically
+this is the data class stored in prj.data,
+but the user can individually change that. Default is None which
+leads to an automatic setter to self.parent.parent.parent.data (
+which is DataClass in current project)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.useconditions.UseConditions.machines_profile">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">machines_profile</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.useconditions.UseConditions.machines_profile" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.useconditions.UseConditions.parent">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parent</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.useconditions.UseConditions.parent" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.useconditions.UseConditions.persons">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">persons</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.useconditions.UseConditions.persons" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.useconditions.UseConditions.persons_profile">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">persons_profile</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.useconditions.UseConditions.persons_profile" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.useconditions.UseConditions.save_use_conditions">
+<span class="sig-name descname"><span class="pre">save_use_conditions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/useconditions.html#UseConditions.save_use_conditions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.useconditions.UseConditions.save_use_conditions" title="Link to this definition">¶</a></dt>
+<dd><p>Documentation is missing.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.useconditions.UseConditions.with_ideal_thresholds">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">with_ideal_thresholds</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.useconditions.UseConditions.with_ideal_thresholds" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">TEASER 0.7.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">teaser.logic.buildingobjects package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.4.
+    </div>
+  </body>
+</html>

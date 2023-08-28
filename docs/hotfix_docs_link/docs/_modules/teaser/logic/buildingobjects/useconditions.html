@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>teaser.logic.buildingobjects.useconditions &#8212; TEASER 0.7.7 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=db26dd79" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinxdoc.css?v=3e14c5a6" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
+    <script src="../../../../_static/documentation_options.js?v=35f4697d"></script>
+    <script src="../../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+<div class="headerStyle">
+<img src="_static/EBC_Logo.png" alt="EBC_Logo" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">TEASER 0.7.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">teaser.logic.buildingobjects.useconditions</a></li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for teaser.logic.buildingobjects.useconditions</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;This module contains UseConditions class.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">teaser.data.input.usecond_input</span> <span class="k">as</span> <span class="nn">usecond_input</span>
+<span class="kn">import</span> <span class="nn">teaser.data.output.usecond_output</span> <span class="k">as</span> <span class="nn">usecond_output</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">cycle</span><span class="p">,</span> <span class="n">islice</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.utilities</span> <span class="kn">import</span> <span class="n">division_from_json</span>
+
+
+<div class="viewcode-block" id="UseConditions">
+<a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions">[docs]</a>
+<span class="k">class</span> <span class="nc">UseConditions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;UseConditions class contains all zone specific boundary conditions.</span>
+
+<span class="sd">    Class that contains the boundary conditions of use for buildings defined in</span>
+<span class="sd">    DIN V 18599-10 ( :cite:`DeutschesInstitutfurNormung.2016`) and VDI 2078</span>
+<span class="sd">    (:cite:`VereinDeutscherIngenieure.2015c`). Profiles for internal gains (</span>
+<span class="sd">    persons, lighting, machines) are taken from SIA2024 (</span>
+<span class="sd">    :cite:`SwissSocietyofEngineersandArchitects.March2006`). In addition some</span>
+<span class="sd">    TEASER specific use conditions have been attached to this class. The</span>
+<span class="sd">    docstring also contains how the use conditions is used.</span>
+
+<span class="sd">    Note: Most attributes description are translations from DIN V 18599-10</span>
+<span class="sd">    standard</span>
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    usage: str</span>
+<span class="sd">        usage type</span>
+<span class="sd">        AixLib usage: String to distinguish usages of a zone</span>
+<span class="sd">    typical_length: float [m]</span>
+<span class="sd">        typical length of a room in a usage zone. This value is taken from</span>
+<span class="sd">        SIA 2024. Archetype usage: division of usage zones in rooms</span>
+<span class="sd">    typical width: float [m]</span>
+<span class="sd">        typical width of a usage zone. This value is taken from</span>
+<span class="sd">        SIA 2024. Archetype usage: division of usage zones in rooms</span>
+<span class="sd">    with_heating: boolean</span>
+<span class="sd">        Sets if the zone is heated by ideal heater or not.</span>
+<span class="sd">    with_cooling: boolean</span>
+<span class="sd">        Sets if the zone is cooled by ideal cooler or not.</span>
+<span class="sd">    with_ideal_thresholds: boolean</span>
+<span class="sd">        Sets if the threshold temperatures for ideal heater and cooler are</span>
+<span class="sd">        used.</span>
+<span class="sd">        True = T_threshold_heating and T_threshold_cooling are used.</span>
+<span class="sd">        This can, in most cases, prevent simultaneous heating from AHU and</span>
+<span class="sd">        cooling from ideal heater and vice versa. This should only be turned</span>
+<span class="sd">        on if an AHU exists.</span>
+<span class="sd">    T_threshold_heating: float [K]</span>
+<span class="sd">       Threshold for the outside temperature above which the ideal heater is</span>
+<span class="sd">       permanently shut down regardless the inside temperature.</span>
+<span class="sd">       Default is 15 °C which corresponds to the value for all buildings</span>
+<span class="sd">       that are not built</span>
+<span class="sd">       according to EnEV standard according to DIN EN 18599-5.</span>
+<span class="sd">    T_threshold_cooling: float [K]</span>
+<span class="sd">        Threshold for the outside temperature below which the ideal cooler is</span>
+<span class="sd">        permanently shut down regardless the inside temperature.</span>
+<span class="sd">        Default is 22 °C, since there are no european standards</span>
+<span class="sd">        for cooling degree days this value is taken from the following paper:</span>
+<span class="sd">        &quot;Heating Degree Days, Cooling Degree Days and Precipitation in Europe</span>
+<span class="sd">        —analysis for the CELECT-project&quot; by Benestad, 2008.</span>
+<span class="sd">    heating_profile : list [K]</span>
+<span class="sd">        Heating setpoint, regarding the zone temperature, of ideal static</span>
+<span class="sd">        heating for a day or similar. You can set a list of any</span>
+<span class="sd">        length, TEASER will multiplicate this list for one whole year.</span>
+<span class="sd">    cooling_profile : list [K]</span>
+<span class="sd">        Cooling setpoint, regarding the zone temperature, of ideal static</span>
+<span class="sd">        cooling for a day or similar. You can set a list of any</span>
+<span class="sd">        length, TEASER will multiplicate this list for one whole year.</span>
+<span class="sd">    fixed_heat_flow_rate_persons: float [W/person]</span>
+<span class="sd">        fixed heat flow rate for one person in case of temperature</span>
+<span class="sd">        independent calculation. Default value is 70</span>
+<span class="sd">        W/person and describes</span>
+<span class="sd">        the maximum heat flow rate depending on the schedule.</span>
+<span class="sd">    persons : float [Persons/m2]</span>
+<span class="sd">        Specific number of persons per square area.</span>
+<span class="sd">        Annex: Used for internal gains</span>
+<span class="sd">    internal_gains_moisture_no_people : float [g/(h m²)]</span>
+<span class="sd">        internal moisture production of plants, etc. except from people.</span>
+<span class="sd">    activity_degree_persons : float [met]</span>
+<span class="sd">        default value is 1.2 met</span>
+<span class="sd">        AixLib: used for heat flow rate calculation (internal_gains_mode=1)</span>
+<span class="sd">        or heat flow rate, moisture and co2 gains (internal_gains_mode=3). Both</span>
+<span class="sd">        are temperature and activity degree depending, calculation based</span>
+<span class="sd">        on SIA2024 (2015) and Engineering ToolBox (2004).</span>
+<span class="sd">        Annex: not used, heat flow rate is constant value</span>
+<span class="sd">        fixed_heat_flow_rate_persons</span>
+<span class="sd">    ratio_conv_rad_persons: float</span>
+<span class="sd">        describes the ratio between convective and radiative heat transfer</span>
+<span class="sd">        of the persons [convective/radiative]. Default values are derived from</span>
+<span class="sd">        :cite:`VereinDeutscherIngenieure.2015c`.</span>
+<span class="sd">        AixLib: Used in Zone record for internal gains</span>
+<span class="sd">        Annex: Used for internal gains</span>
+<span class="sd">    persons_profile : list</span>
+<span class="sd">        Relative presence of persons 0-1 (e.g. 0.5 means that 50% of the total</span>
+<span class="sd">        number of persons are currently in the room). Given</span>
+<span class="sd">        for 24h. This value is taken from SIA 2024. You can set a list of any</span>
+<span class="sd">        length, TEASER will multiplicate this list for one whole year.</span>
+<span class="sd">        AixLib: Used for internal gains profile on top-level</span>
+<span class="sd">        Annex: Used for internal gains</span>
+<span class="sd">    machines: float [W/m2]</span>
+<span class="sd">        area specific eletrical load of machines per m2. This value is taken</span>
+<span class="sd">        from SIA 2024 and DIN V 18599-10 for medium occupancy.</span>
+<span class="sd">        AixLib: Used in Zone record for internal gains,</span>
+<span class="sd">        internalGainsMachinesSpecific</span>
+<span class="sd">        Annex: Used for internal gains</span>
+<span class="sd">    ratio_conv_rad_machines: float</span>
+<span class="sd">        describes the ratio between convective and radiative heat transfer</span>
+<span class="sd">        of the machines [convective/radiative]. Default values are derived from</span>
+<span class="sd">        :cite:`Davies.2004`.</span>
+<span class="sd">        AixLib: Used in Zone record for internal gains</span>
+<span class="sd">        Annex: Not used, all machines are convective (see Annex examples)</span>
+<span class="sd">    machines_profile: list</span>
+<span class="sd">        Relative presence of machines 0-1 (e.g. 0.5 means that 50% of the total</span>
+<span class="sd">        number of machines are currently used in the room). Given</span>
+<span class="sd">        for 24h. This value is taken from SIA 2024. You can set a list of any</span>
+<span class="sd">        length, TEASER will multiplicate this list for one whole year.</span>
+<span class="sd">        AixLib: Used for internal gains profile on top-level</span>
+<span class="sd">        Annex: Used for internal gains</span>
+<span class="sd">    lighting_power: float [W/m2]</span>
+<span class="sd">        spec. electr. Power for lighting. This value is taken from SIA 2024.</span>
+<span class="sd">        AixLib: Used in Zone record for internal gains</span>
+<span class="sd">        Annex: Not used (see Annex examples)</span>
+<span class="sd">    ratio_conv_rad_lighting : float</span>
+<span class="sd">        describes the ratio between convective and radiative heat transfer</span>
+<span class="sd">        of the lighting [convective/radiative]. Default values are derived from</span>
+<span class="sd">        :cite:`DiLaura.2011`.</span>
+<span class="sd">        AixLib: Used in Zone record for internal gains, lighting</span>
+<span class="sd">    lighting_profil : [float]</span>
+<span class="sd">        Relative presence of lighting 0-1 (e.g. 0.5 means that 50% of the total</span>
+<span class="sd">        lighting power are currently used). Typically given for 24h. This is</span>
+<span class="sd">        aligned to the user profile.</span>
+<span class="sd">        AixLib: Used for internal gains profile on top-level</span>
+<span class="sd">        Annex: Not used (see Annex examples)</span>
+<span class="sd">    min_ahu: float [m3/(m2*h)]</span>
+<span class="sd">        Zone specific minimum specific air flow supplied by the AHU.</span>
+<span class="sd">        AixLib: Used on Multizone level for central AHU to determine total</span>
+<span class="sd">        volume flow of each zone.</span>
+<span class="sd">            Note: The AixLib parameter &quot;WithProfile&quot; determines whether the</span>
+<span class="sd">            (v_flow_profile combined with &quot;min_ahu and max_ahu&quot;) or the</span>
+<span class="sd">            (persons_profile combined with &quot;min_ahu and max_ahu&quot;)</span>
+<span class="sd">            is used for the AHU supply flow calculations.</span>
+<span class="sd">            Per default: (v_flow_profile combined with &quot;min_ahu and max_ahu&quot;)</span>
+<span class="sd">    max_ahu : float [m3/(m2*h)]</span>
+<span class="sd">        Zone specific maximum specific air flow supplied by the AHU.</span>
+<span class="sd">        AixLib: Used on Multizone level for central AHU to determine total</span>
+<span class="sd">        volume flow of each zone.</span>
+<span class="sd">            Note: The AixLib parameter &quot;WithProfile&quot; determines whether the</span>
+<span class="sd">            (v_flow_profile combined with &quot;min_ahu and max_ahu&quot;) or the</span>
+<span class="sd">            (persons_profile combined with &quot;min_ahu and max_ahu&quot;)</span>
+<span class="sd">            is used for the AHU supply flow calculations.</span>
+<span class="sd">            Per default: (v_flow_profile combined with &quot;min_ahu and max_ahu&quot;)</span>
+<span class="sd">    with_ahu : boolean</span>
+<span class="sd">        Zone is connected to central air handling unit or not</span>
+<span class="sd">        AixLib: Used on Multizone level for central AHU.</span>
+<span class="sd">    use_constant_infiltration : boolean</span>
+<span class="sd">        choose whether window opening should be regarded.</span>
+<span class="sd">        true = natural infiltration + ventilation due to a AHU</span>
+<span class="sd">        false = natural infiltration + ventilation due to a AHU</span>
+<span class="sd">            + window infiltration calculated by window opening model</span>
+<span class="sd">        AixLib: Used on Zone level for ventilation.</span>
+<span class="sd">    base_infiltration : float [1/h]</span>
+<span class="sd">        base value for the natural infiltration without window openings</span>
+<span class="sd">        AixLib: Used on Zone level for ventilation.</span>
+<span class="sd">    max_user_infiltration : float [1/h]</span>
+<span class="sd">        Additional infiltration rate for maximum persons activity</span>
+<span class="sd">        AixLib: Used on Zone level for ventilation.</span>
+<span class="sd">    max_overheating_infiltration : list [1/h]</span>
+<span class="sd">        Additional infiltration rate when overheating appears</span>
+<span class="sd">        AixLib: Used on Zone level for ventilation.</span>
+<span class="sd">    max_summer_infiltration : list</span>
+<span class="sd">        Additional infiltration rate in the summer with</span>
+<span class="sd">        [infiltration_rate [1/h], Tmin [K], Tmax [K]]. Default values are</span>
+<span class="sd">        aligned to :cite:`DINV1859910`.</span>
+<span class="sd">        AixLib: Used on Zone level for ventilation.</span>
+<span class="sd">    winter_reduction_infiltration : list</span>
+<span class="sd">        Reduction factor of userACH for cold weather with</span>
+<span class="sd">        [infiltration_rate [1/h], Tmin [K], Tmax [K]]</span>
+<span class="sd">        AixLib: Used on Zone level for ventilation.</span>
+<span class="sd">        Default values are</span>
+<span class="sd">        aligned to :cite:`DINV1859910`.</span>
+<span class="sd">    schedules: pandas.DataFrame</span>
+<span class="sd">        All time dependent boundary attributes in one pandas DataFrame, used</span>
+<span class="sd">        for export (one year in hourly timestep.)</span>
+<span class="sd">        Note: python attribute, not customizable by user (derived from Json)</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct UseConditions.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">internal_id</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">usage</span> <span class="o">=</span> <span class="s2">&quot;Single office&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">typical_length</span> <span class="o">=</span> <span class="mf">6.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">typical_width</span> <span class="o">=</span> <span class="mf">6.0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">with_heating</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">with_cooling</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">T_threshold_heating</span> <span class="o">=</span> <span class="mf">288.15</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">T_threshold_cooling</span> <span class="o">=</span> <span class="mf">295.15</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fixed_heat_flow_rate_persons</span> <span class="o">=</span> <span class="mi">70</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">activity_degree_persons</span> <span class="o">=</span> <span class="mf">1.2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_persons</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">14</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">internal_gains_moisture_no_people</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ratio_conv_rad_persons</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">machines</span> <span class="o">=</span> <span class="mf">7.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ratio_conv_rad_machines</span> <span class="o">=</span> <span class="mf">0.75</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">lighting_power</span> <span class="o">=</span> <span class="mf">15.9</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ratio_conv_rad_lighting</span> <span class="o">=</span> <span class="mf">0.4</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_constant_infiltration</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">infiltration_rate</span> <span class="o">=</span> <span class="mf">0.2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_user_infiltration</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_overheating_infiltration</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_summer_infiltration</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">273.15</span> <span class="o">+</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">273.15</span> <span class="o">+</span> <span class="mi">17</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">winter_reduction_infiltration</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">273.15</span><span class="p">,</span> <span class="mf">273.15</span> <span class="o">+</span> <span class="mi">10</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_ahu</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_ahu</span> <span class="o">=</span> <span class="mf">2.6</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">with_ahu</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_with_ideal_thresholds</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_heating_profile</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cooling_profile</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+            <span class="mf">294.15</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_persons_profile</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.2</span><span class="p">,</span>
+            <span class="mf">0.4</span><span class="p">,</span>
+            <span class="mf">0.6</span><span class="p">,</span>
+            <span class="mf">0.8</span><span class="p">,</span>
+            <span class="mf">0.8</span><span class="p">,</span>
+            <span class="mf">0.4</span><span class="p">,</span>
+            <span class="mf">0.6</span><span class="p">,</span>
+            <span class="mf">0.8</span><span class="p">,</span>
+            <span class="mf">0.8</span><span class="p">,</span>
+            <span class="mf">0.4</span><span class="p">,</span>
+            <span class="mf">0.2</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_machines_profile</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="mf">0.1</span><span class="p">,</span>
+            <span class="mf">0.1</span><span class="p">,</span>
+            <span class="mf">0.1</span><span class="p">,</span>
+            <span class="mf">0.1</span><span class="p">,</span>
+            <span class="mf">0.1</span><span class="p">,</span>
+            <span class="mf">0.1</span><span class="p">,</span>
+            <span class="mf">0.1</span><span class="p">,</span>
+            <span class="mf">0.2</span><span class="p">,</span>
+            <span class="mf">0.4</span><span class="p">,</span>
+            <span class="mf">0.6</span><span class="p">,</span>
+            <span class="mf">0.8</span><span class="p">,</span>
+            <span class="mf">0.8</span><span class="p">,</span>
+            <span class="mf">0.4</span><span class="p">,</span>
+            <span class="mf">0.6</span><span class="p">,</span>
+            <span class="mf">0.8</span><span class="p">,</span>
+            <span class="mf">0.8</span><span class="p">,</span>
+            <span class="mf">0.4</span><span class="p">,</span>
+            <span class="mf">0.2</span><span class="p">,</span>
+            <span class="mf">0.1</span><span class="p">,</span>
+            <span class="mf">0.1</span><span class="p">,</span>
+            <span class="mf">0.1</span><span class="p">,</span>
+            <span class="mf">0.1</span><span class="p">,</span>
+            <span class="mf">0.1</span><span class="p">,</span>
+            <span class="mf">0.1</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lighting_profile</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">1.0</span><span class="p">,</span>
+            <span class="mf">1.0</span><span class="p">,</span>
+            <span class="mf">1.0</span><span class="p">,</span>
+            <span class="mf">1.0</span><span class="p">,</span>
+            <span class="mf">1.0</span><span class="p">,</span>
+            <span class="mf">1.0</span><span class="p">,</span>
+            <span class="mf">1.0</span><span class="p">,</span>
+            <span class="mf">1.0</span><span class="p">,</span>
+            <span class="mf">1.0</span><span class="p">,</span>
+            <span class="mf">1.0</span><span class="p">,</span>
+            <span class="mf">1.0</span><span class="p">,</span>
+            <span class="mf">1.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">schedules</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">&quot;2019-01-01 00:00:00&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">8760</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;H&quot;</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">to_series</span><span class="p">()</span>
+            <span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">),</span>
+            <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;heating_profile&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">cycle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_heating_profile</span><span class="p">),</span> <span class="mi">8760</span><span class="p">)),</span>
+                <span class="s2">&quot;cooling_profile&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">cycle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cooling_profile</span><span class="p">),</span> <span class="mi">8760</span><span class="p">)),</span>
+                <span class="s2">&quot;persons_profile&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">cycle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_persons_profile</span><span class="p">),</span> <span class="mi">8760</span><span class="p">)),</span>
+                <span class="s2">&quot;lighting_profile&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">cycle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lighting_profile</span><span class="p">),</span> <span class="mi">8760</span><span class="p">)),</span>
+                <span class="s2">&quot;machines_profile&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">cycle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_machines_profile</span><span class="p">),</span> <span class="mi">8760</span><span class="p">)),</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="UseConditions.load_use_conditions">
+<a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.load_use_conditions">[docs]</a>
+    <span class="k">def</span> <span class="nf">load_use_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zone_usage</span><span class="p">,</span> <span class="n">data_class</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load typical use conditions from JSON data base.</span>
+
+<span class="sd">        Loads Use conditions specified in the JSON.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        zone_usage : str</span>
+<span class="sd">            code list for zone_usage according to 18599 or self defined</span>
+
+<span class="sd">        data_class : DataClass()</span>
+<span class="sd">            DataClass containing the bindings for Use Conditions (typically</span>
+<span class="sd">            this is the data class stored in prj.data,</span>
+<span class="sd">            but the user can individually change that. Default is None which</span>
+<span class="sd">            leads to an automatic setter to self.parent.parent.parent.data (</span>
+<span class="sd">            which is DataClass in current project)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data_class</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data_class</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">data_class</span> <span class="o">=</span> <span class="n">data_class</span>
+
+        <span class="n">usecond_input</span><span class="o">.</span><span class="n">load_use_conditions</span><span class="p">(</span>
+            <span class="n">use_cond</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">zone_usage</span><span class="o">=</span><span class="n">zone_usage</span><span class="p">,</span> <span class="n">data_class</span><span class="o">=</span><span class="n">data_class</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UseConditions.save_use_conditions">
+<a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.save_use_conditions">[docs]</a>
+    <span class="k">def</span> <span class="nf">save_use_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_class</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Documentation is missing.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data_class</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data_class</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">data_class</span> <span class="o">=</span> <span class="n">data_class</span>
+
+        <span class="n">usecond_output</span><span class="o">.</span><span class="n">save_use_conditions</span><span class="p">(</span><span class="n">use_cond</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_class</span><span class="o">=</span><span class="n">data_class</span><span class="p">)</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">persons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_persons</span>
+
+    <span class="nd">@persons</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">persons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">OrderedDict</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_persons</span> <span class="o">=</span> <span class="n">division_from_json</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_persons</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">with_ideal_thresholds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_with_ideal_thresholds</span>
+
+    <span class="nd">@with_ideal_thresholds</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">with_ideal_thresholds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">with_ahu</span> <span class="ow">is</span> <span class="kc">False</span> <span class="ow">and</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Threshold for ideal heaters should only be used&quot;</span>
+                <span class="s2">&quot; when AHU is used in this zone&quot;</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_with_ideal_thresholds</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">heating_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_heating_profile</span>
+
+    <span class="nd">@heating_profile</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">heating_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_heating_profile</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">schedules</span><span class="p">[</span><span class="s2">&quot;heating_profile&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">cycle</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="mi">8760</span><span class="p">))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cooling_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cooling_profile</span>
+
+    <span class="nd">@cooling_profile</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">cooling_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cooling_profile</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">schedules</span><span class="p">[</span><span class="s2">&quot;cooling_profile&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">cycle</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="mi">8760</span><span class="p">))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">persons_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_persons_profile</span>
+
+    <span class="nd">@persons_profile</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">persons_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_persons_profile</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">schedules</span><span class="p">[</span><span class="s2">&quot;persons_profile&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">cycle</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="mi">8760</span><span class="p">))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">machines_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_machines_profile</span>
+
+    <span class="nd">@machines_profile</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">machines_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_machines_profile</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">schedules</span><span class="p">[</span><span class="s2">&quot;machines_profile&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">cycle</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="mi">8760</span><span class="p">))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">lighting_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lighting_profile</span>
+
+    <span class="nd">@lighting_profile</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">lighting_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lighting_profile</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">schedules</span><span class="p">[</span><span class="s2">&quot;lighting_profile&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">cycle</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="mi">8760</span><span class="p">))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span>
+
+    <span class="nd">@parent</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="n">ass_error_1</span> <span class="o">=</span> <span class="s2">&quot;Parent has to be an instance of ThermalZone()&quot;</span>
+
+            <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;ThermalZone&quot;</span><span class="p">,</span> <span class="n">ass_error_1</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span><span class="o">.</span><span class="n">_use_conditions</span> <span class="o">=</span> <span class="bp">self</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">TEASER 0.7.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">teaser.logic.buildingobjects.useconditions</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.4.
+    </div>
+  </body>
+</html>

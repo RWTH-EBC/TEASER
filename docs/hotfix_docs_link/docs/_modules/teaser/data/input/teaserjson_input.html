@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>teaser.data.input.teaserjson_input &#8212; TEASER 0.7.7 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=db26dd79" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinxdoc.css?v=3e14c5a6" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
+    <script src="../../../../_static/documentation_options.js?v=35f4697d"></script>
+    <script src="../../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+<div class="headerStyle">
+<img src="_static/EBC_Logo.png" alt="EBC_Logo" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">TEASER 0.7.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">teaser.data.input.teaserjson_input</a></li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for teaser.data.input.teaserjson_input</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Load Projects in the proprietary TEASER file format .json.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.building</span> <span class="kn">import</span> <span class="n">Building</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.de.apartmentblock</span> <span class="kn">import</span> <span class="n">ApartmentBlock</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.de.multifamilyhouse</span> <span class="kn">import</span> <span class="n">MultiFamilyHouse</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SingleFamilyHouse</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.de.terracedhouse</span> <span class="kn">import</span> <span class="n">TerracedHouse</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.bmvbs.office</span> <span class="kn">import</span> <span class="n">Office</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SingleFamilyDwelling</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.bmvbs.custom.institute</span> <span class="kn">import</span> <span class="n">Institute</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.bmvbs.custom.institute4</span> <span class="kn">import</span> <span class="n">Institute4</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.bmvbs.custom.institute8</span> <span class="kn">import</span> <span class="n">Institute8</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.thermalzone</span> <span class="kn">import</span> <span class="n">ThermalZone</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingsystems.buildingahu</span> <span class="kn">import</span> <span class="n">BuildingAHU</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.useconditions</span> <span class="kn">import</span> <span class="n">UseConditions</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.outerwall</span> <span class="kn">import</span> <span class="n">OuterWall</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.layer</span> <span class="kn">import</span> <span class="n">Layer</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.material</span> <span class="kn">import</span> <span class="n">Material</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.rooftop</span> <span class="kn">import</span> <span class="n">Rooftop</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.groundfloor</span> <span class="kn">import</span> <span class="n">GroundFloor</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.innerwall</span> <span class="kn">import</span> <span class="n">InnerWall</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.ceiling</span> <span class="kn">import</span> <span class="n">Ceiling</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.floor</span> <span class="kn">import</span> <span class="n">Floor</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.window</span> <span class="kn">import</span> <span class="n">Window</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.door</span> <span class="kn">import</span> <span class="n">Door</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+
+
+<div class="viewcode-block" id="load_teaser_json">
+<a class="viewcode-back" href="../../../../code/teaser.data.input.html#teaser.data.input.teaserjson_input.load_teaser_json">[docs]</a>
+<span class="k">def</span> <span class="nf">load_teaser_json</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">project</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load a project from json.</span>
+
+<span class="sd">    TEASERs internal file format to store information.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    path: string</span>
+<span class="sd">        path of teaserjson file</span>
+
+<span class="sd">    project: Project()</span>
+<span class="sd">        Teaser instance of Project()</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__building_class</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;Office&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;bmvbs&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">Office</span><span class="p">},</span>
+        <span class="s2">&quot;Institute&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;bmvbs&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">Institute</span><span class="p">},</span>
+        <span class="s2">&quot;Institute4&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;bmvbs&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">Institute4</span><span class="p">},</span>
+        <span class="s2">&quot;Institute8&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;bmvbs&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">Institute8</span><span class="p">},</span>
+        <span class="s2">&quot;Building&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;undefined&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">Building</span><span class="p">},</span>
+        <span class="s2">&quot;SingleFamilyDwelling&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;iwu&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">SingleFamilyDwelling</span><span class="p">},</span>
+        <span class="s2">&quot;SingleFamilyHouse&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;tabula_de&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">SingleFamilyHouse</span><span class="p">},</span>
+        <span class="s2">&quot;TerracedHouse&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;tabula_de&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">TerracedHouse</span><span class="p">},</span>
+        <span class="s2">&quot;MultiFamilyHouse&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;tabula_de&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">MultiFamilyHouse</span><span class="p">},</span>
+        <span class="s2">&quot;ApartmentBlock&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;tabula_de&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">ApartmentBlock</span><span class="p">},</span>
+    <span class="p">}</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">prj_in</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">object_pairs_hook</span><span class="o">=</span><span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">)</span>
+
+    <span class="n">project</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">prj_in</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+    <span class="n">project</span><span class="o">.</span><span class="n">weather_file_path</span> <span class="o">=</span> <span class="n">prj_in</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;weather_file_path&quot;</span><span class="p">]</span>
+    <span class="n">project</span><span class="o">.</span><span class="n">number_of_elements_calc</span> <span class="o">=</span> <span class="n">prj_in</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;number_of_elements_calc&quot;</span><span class="p">]</span>
+    <span class="n">project</span><span class="o">.</span><span class="n">merge_windows_calc</span> <span class="o">=</span> <span class="n">prj_in</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;merge_windows_calc&quot;</span><span class="p">]</span>
+    <span class="n">project</span><span class="o">.</span><span class="n">used_library_calc</span> <span class="o">=</span> <span class="n">prj_in</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;used_library_calc&quot;</span><span class="p">]</span>
+    <span class="n">project</span><span class="o">.</span><span class="n">modelica_info</span><span class="o">.</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">prj_in</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;modelica_info&quot;</span><span class="p">][</span><span class="s2">&quot;start_time&quot;</span><span class="p">]</span>
+    <span class="n">project</span><span class="o">.</span><span class="n">modelica_info</span><span class="o">.</span><span class="n">stop_time</span> <span class="o">=</span> <span class="n">prj_in</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;modelica_info&quot;</span><span class="p">][</span><span class="s2">&quot;stop_time&quot;</span><span class="p">]</span>
+    <span class="n">project</span><span class="o">.</span><span class="n">modelica_info</span><span class="o">.</span><span class="n">interval_output</span> <span class="o">=</span> <span class="n">prj_in</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;modelica_info&quot;</span><span class="p">][</span>
+        <span class="s2">&quot;interval_output&quot;</span>
+    <span class="p">]</span>
+    <span class="n">project</span><span class="o">.</span><span class="n">modelica_info</span><span class="o">.</span><span class="n">current_solver</span> <span class="o">=</span> <span class="n">prj_in</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;modelica_info&quot;</span><span class="p">][</span>
+        <span class="s2">&quot;current_solver&quot;</span>
+    <span class="p">]</span>
+    <span class="n">project</span><span class="o">.</span><span class="n">modelica_info</span><span class="o">.</span><span class="n">equidistant_output</span> <span class="o">=</span> <span class="n">prj_in</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;modelica_info&quot;</span><span class="p">][</span>
+        <span class="s2">&quot;equidistant_output&quot;</span>
+    <span class="p">]</span>
+    <span class="n">project</span><span class="o">.</span><span class="n">modelica_info</span><span class="o">.</span><span class="n">results_at_events</span> <span class="o">=</span> <span class="n">prj_in</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;modelica_info&quot;</span><span class="p">][</span>
+        <span class="s2">&quot;results_at_events&quot;</span>
+    <span class="p">]</span>
+    <span class="n">project</span><span class="o">.</span><span class="n">modelica_info</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">prj_in</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;modelica_info&quot;</span><span class="p">][</span><span class="s2">&quot;version&quot;</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">bldg_name</span><span class="p">,</span> <span class="n">bldg_in</span> <span class="ow">in</span> <span class="n">prj_in</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;buildings&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">bl_class</span> <span class="o">=</span> <span class="n">__building_class</span><span class="p">[</span><span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;classification&quot;</span><span class="p">][</span><span class="s2">&quot;class&quot;</span><span class="p">]][</span><span class="s2">&quot;teaser_class&quot;</span><span class="p">]</span>
+        <span class="n">bldg</span> <span class="o">=</span> <span class="n">bl_class</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">project</span><span class="p">)</span>
+        <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">bldg_name</span>
+        <span class="n">bldg</span><span class="o">.</span><span class="n">street_name</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;street_name&quot;</span><span class="p">]</span>
+        <span class="n">bldg</span><span class="o">.</span><span class="n">city</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;city&quot;</span><span class="p">]</span>
+        <span class="n">bldg</span><span class="o">.</span><span class="n">year_of_construction</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;year_of_construction&quot;</span><span class="p">]</span>
+        <span class="n">bldg</span><span class="o">.</span><span class="n">year_of_retrofit</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;year_of_retrofit&quot;</span><span class="p">]</span>
+        <span class="n">bldg</span><span class="o">.</span><span class="n">number_of_floors</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;number_of_floors&quot;</span><span class="p">]</span>
+        <span class="n">bldg</span><span class="o">.</span><span class="n">height_of_floors</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;height_of_floors&quot;</span><span class="p">]</span>
+        <span class="c1"># bldg.net_leased_area = bldg_in[&quot;net_leased_area&quot;]</span>
+        <span class="n">bldg</span><span class="o">.</span><span class="n">outer_area</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;outer_area&quot;</span><span class="p">]</span>
+        <span class="n">bldg</span><span class="o">.</span><span class="n">window_area</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;window_area&quot;</span><span class="p">]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span> <span class="o">=</span> <span class="n">BuildingAHU</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">bldg</span><span class="p">)</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">heating</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span><span class="s2">&quot;heating&quot;</span><span class="p">]</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">cooling</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span><span class="s2">&quot;cooling&quot;</span><span class="p">]</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">dehumidification</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;dehumidification&quot;</span>
+            <span class="p">]</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">humidification</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span><span class="s2">&quot;humidification&quot;</span><span class="p">]</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">heat_recovery</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span><span class="s2">&quot;heat_recovery&quot;</span><span class="p">]</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">by_pass_dehumidification</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;by_pass_dehumidification&quot;</span>
+            <span class="p">]</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">efficiency_recovery</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;efficiency_recovery&quot;</span>
+            <span class="p">]</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">efficiency_recovery_false</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;efficiency_recovery_false&quot;</span>
+            <span class="p">]</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">min_relative_humidity_profile</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;min_relative_humidity_profile&quot;</span>
+            <span class="p">]</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">max_relative_humidity_profile</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;max_relative_humidity_profile&quot;</span>
+            <span class="p">]</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">v_flow_profile</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span><span class="s2">&quot;v_flow_profile&quot;</span><span class="p">]</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">temperature_profile</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;temperature_profile&quot;</span>
+            <span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">for</span> <span class="n">tz_name</span><span class="p">,</span> <span class="n">zone_in</span> <span class="ow">in</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;thermal_zones&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">tz</span> <span class="o">=</span> <span class="n">ThermalZone</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">bldg</span><span class="p">)</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">tz_name</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;area&quot;</span><span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;volume&quot;</span><span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span> <span class="o">=</span> <span class="n">UseConditions</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">usage</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span><span class="s2">&quot;usage&quot;</span><span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">typical_length</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;typical_length&quot;</span>
+            <span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">typical_width</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span><span class="s2">&quot;typical_width&quot;</span><span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">with_heating</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span><span class="s2">&quot;with_heating&quot;</span><span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">with_cooling</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span><span class="s2">&quot;with_cooling&quot;</span><span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">with_ideal_thresholds</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;with_ideal_thresholds&quot;</span>
+            <span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">T_threshold_heating</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;T_threshold_heating&quot;</span>
+            <span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">T_threshold_cooling</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;T_threshold_cooling&quot;</span>
+            <span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">fixed_heat_flow_rate_persons</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;fixed_heat_flow_rate_persons&quot;</span>
+            <span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">activity_degree_persons</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;activity_degree_persons&quot;</span>
+            <span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">persons</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span><span class="s2">&quot;persons&quot;</span><span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">internal_gains_moisture_no_people</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span>
+                <span class="s2">&quot;use_conditions&quot;</span>
+            <span class="p">][</span><span class="s2">&quot;internal_gains_moisture_no_people&quot;</span><span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">ratio_conv_rad_persons</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;ratio_conv_rad_persons&quot;</span>
+            <span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">machines</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span><span class="s2">&quot;machines&quot;</span><span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">ratio_conv_rad_machines</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;ratio_conv_rad_machines&quot;</span>
+            <span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">lighting_power</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;lighting_power&quot;</span>
+            <span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">ratio_conv_rad_lighting</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;ratio_conv_rad_lighting&quot;</span>
+            <span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">use_constant_infiltration</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;use_constant_infiltration&quot;</span>
+            <span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">infiltration_rate</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;infiltration_rate&quot;</span>
+            <span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">max_user_infiltration</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;max_user_infiltration&quot;</span>
+            <span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">max_overheating_infiltration</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;max_overheating_infiltration&quot;</span>
+            <span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">max_summer_infiltration</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;max_summer_infiltration&quot;</span>
+            <span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">winter_reduction_infiltration</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;winter_reduction_infiltration&quot;</span>
+            <span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">min_ahu</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span><span class="s2">&quot;min_ahu&quot;</span><span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">max_ahu</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span><span class="s2">&quot;max_ahu&quot;</span><span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">with_ahu</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span><span class="s2">&quot;with_ahu&quot;</span><span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">heating_profile</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;heating_profile&quot;</span>
+            <span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">cooling_profile</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;cooling_profile&quot;</span>
+            <span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">persons_profile</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;persons_profile&quot;</span>
+            <span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">machines_profile</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;machines_profile&quot;</span>
+            <span class="p">]</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">lighting_profile</span> <span class="o">=</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;lighting_profile&quot;</span>
+            <span class="p">]</span>
+
+            <span class="k">for</span> <span class="n">wall_name</span><span class="p">,</span> <span class="n">wall_in</span> <span class="ow">in</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;outer_walls&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">out_wall</span> <span class="o">=</span> <span class="n">OuterWall</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+                <span class="n">out_wall</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">wall_name</span>
+                <span class="n">set_basic_data_teaser</span><span class="p">(</span><span class="n">wall_in</span><span class="p">,</span> <span class="n">out_wall</span><span class="p">)</span>
+                <span class="n">set_layer_data_teaser</span><span class="p">(</span><span class="n">wall_in</span><span class="p">,</span> <span class="n">out_wall</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">door_name</span><span class="p">,</span> <span class="n">door_in</span> <span class="ow">in</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;doors&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">door</span> <span class="o">=</span> <span class="n">Door</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+                <span class="n">door</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">door_name</span>
+                <span class="n">set_basic_data_teaser</span><span class="p">(</span><span class="n">door_in</span><span class="p">,</span> <span class="n">door</span><span class="p">)</span>
+                <span class="n">set_layer_data_teaser</span><span class="p">(</span><span class="n">door_in</span><span class="p">,</span> <span class="n">door</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">roof_name</span><span class="p">,</span> <span class="n">roof_in</span> <span class="ow">in</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;rooftops&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">roof</span> <span class="o">=</span> <span class="n">Rooftop</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+                <span class="n">roof</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">roof_name</span>
+                <span class="n">set_basic_data_teaser</span><span class="p">(</span><span class="n">roof_in</span><span class="p">,</span> <span class="n">roof</span><span class="p">)</span>
+                <span class="n">set_layer_data_teaser</span><span class="p">(</span><span class="n">roof_in</span><span class="p">,</span> <span class="n">roof</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">gf_name</span><span class="p">,</span> <span class="n">gf_in</span> <span class="ow">in</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;ground_floors&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">gf</span> <span class="o">=</span> <span class="n">GroundFloor</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+                <span class="n">gf</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">gf_name</span>
+                <span class="n">set_basic_data_teaser</span><span class="p">(</span><span class="n">gf_in</span><span class="p">,</span> <span class="n">gf</span><span class="p">)</span>
+                <span class="n">set_layer_data_teaser</span><span class="p">(</span><span class="n">gf_in</span><span class="p">,</span> <span class="n">gf</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">win_name</span><span class="p">,</span> <span class="n">win_in</span> <span class="ow">in</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;windows&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">win</span> <span class="o">=</span> <span class="n">Window</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+                <span class="n">win</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">win_name</span>
+                <span class="n">set_basic_data_teaser</span><span class="p">(</span><span class="n">win_in</span><span class="p">,</span> <span class="n">win</span><span class="p">)</span>
+                <span class="n">set_layer_data_teaser</span><span class="p">(</span><span class="n">win_in</span><span class="p">,</span> <span class="n">win</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">iw_name</span><span class="p">,</span> <span class="n">iw_in</span> <span class="ow">in</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;inner_walls&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">in_wall</span> <span class="o">=</span> <span class="n">InnerWall</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+                <span class="n">in_wall</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">iw_name</span>
+                <span class="n">set_basic_data_teaser</span><span class="p">(</span><span class="n">iw_in</span><span class="p">,</span> <span class="n">in_wall</span><span class="p">)</span>
+                <span class="n">set_layer_data_teaser</span><span class="p">(</span><span class="n">iw_in</span><span class="p">,</span> <span class="n">in_wall</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">fl_name</span><span class="p">,</span> <span class="n">fl_in</span> <span class="ow">in</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;floors&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">floor</span> <span class="o">=</span> <span class="n">Floor</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+                <span class="n">floor</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">fl_name</span>
+                <span class="n">set_basic_data_teaser</span><span class="p">(</span><span class="n">fl_in</span><span class="p">,</span> <span class="n">floor</span><span class="p">)</span>
+                <span class="n">set_layer_data_teaser</span><span class="p">(</span><span class="n">fl_in</span><span class="p">,</span> <span class="n">floor</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">cl_name</span><span class="p">,</span> <span class="n">cl_in</span> <span class="ow">in</span> <span class="n">zone_in</span><span class="p">[</span><span class="s2">&quot;ceilings&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">ceil</span> <span class="o">=</span> <span class="n">Ceiling</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+                <span class="n">ceil</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">cl_name</span>
+                <span class="n">set_basic_data_teaser</span><span class="p">(</span><span class="n">cl_in</span><span class="p">,</span> <span class="n">ceil</span><span class="p">)</span>
+                <span class="n">set_layer_data_teaser</span><span class="p">(</span><span class="n">cl_in</span><span class="p">,</span> <span class="n">ceil</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="set_basic_data_teaser">
+<a class="viewcode-back" href="../../../../code/teaser.data.input.html#teaser.data.input.teaserjson_input.set_basic_data_teaser">[docs]</a>
+<span class="k">def</span> <span class="nf">set_basic_data_teaser</span><span class="p">(</span><span class="n">wall_in</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set basic data for a building element.</span>
+
+<span class="sd">    Helper function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    wall_in : collection.OrderedDict</span>
+<span class="sd">        OrderedDict for walls</span>
+<span class="sd">    element : TEASERClass</span>
+<span class="sd">        teaser class representation of a building element</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">element</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;area&quot;</span><span class="p">]</span>
+    <span class="n">element</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;tilt&quot;</span><span class="p">]</span>
+    <span class="n">element</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;orientation&quot;</span><span class="p">]</span>
+    <span class="n">element</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;inner_radiation&quot;</span><span class="p">]</span>
+    <span class="n">element</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;inner_convection&quot;</span><span class="p">]</span>
+    <span class="n">element</span><span class="o">.</span><span class="n">year_of_construction</span> <span class="o">=</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;year_of_construction&quot;</span><span class="p">]</span>
+    <span class="n">element</span><span class="o">.</span><span class="n">year_of_retrofit</span> <span class="o">=</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;year_of_retrofit&quot;</span><span class="p">]</span>
+    <span class="n">element</span><span class="o">.</span><span class="n">construction_type</span> <span class="o">=</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;construction_type&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;OuterWall&quot;</span>
+        <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;Rooftop&quot;</span>
+        <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;Door&quot;</span>
+    <span class="p">):</span>
+
+        <span class="n">element</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;outer_radiation&quot;</span><span class="p">]</span>
+        <span class="n">element</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;outer_convection&quot;</span><span class="p">]</span>
+
+    <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;Window&quot;</span><span class="p">:</span>
+
+        <span class="n">element</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;outer_radiation&quot;</span><span class="p">]</span>
+        <span class="n">element</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;outer_convection&quot;</span><span class="p">]</span>
+        <span class="n">element</span><span class="o">.</span><span class="n">g_value</span> <span class="o">=</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;g_value&quot;</span><span class="p">]</span>
+        <span class="n">element</span><span class="o">.</span><span class="n">a_conv</span> <span class="o">=</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;a_conv&quot;</span><span class="p">]</span>
+        <span class="n">element</span><span class="o">.</span><span class="n">shading_g_total</span> <span class="o">=</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;shading_g_total&quot;</span><span class="p">]</span>
+        <span class="n">element</span><span class="o">.</span><span class="n">shading_max_irr</span> <span class="o">=</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;shading_max_irr&quot;</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="set_layer_data_teaser">
+<a class="viewcode-back" href="../../../../code/teaser.data.input.html#teaser.data.input.teaserjson_input.set_layer_data_teaser">[docs]</a>
+<span class="k">def</span> <span class="nf">set_layer_data_teaser</span><span class="p">(</span><span class="n">wall_in</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set layer data of a building element.</span>
+
+<span class="sd">    Helper function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    wall_in : collection.OrderedDict</span>
+<span class="sd">        OrderedDict for walls</span>
+<span class="sd">    element : TEASERClass</span>
+<span class="sd">        teaser class representation of a building element</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">lay_id</span><span class="p">,</span> <span class="n">layer_in</span> <span class="ow">in</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;layer&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">layer</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+
+        <span class="n">layer</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">lay_id</span><span class="p">)</span>
+        <span class="n">layer</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="n">layer_in</span><span class="p">[</span><span class="s2">&quot;thickness&quot;</span><span class="p">]</span>
+
+        <span class="n">Material</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+
+        <span class="n">layer</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">layer_in</span><span class="p">[</span><span class="s2">&quot;material&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+        <span class="n">layer</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="n">layer_in</span><span class="p">[</span><span class="s2">&quot;material&quot;</span><span class="p">][</span><span class="s2">&quot;density&quot;</span><span class="p">]</span>
+        <span class="n">layer</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="n">layer_in</span><span class="p">[</span><span class="s2">&quot;material&quot;</span><span class="p">][</span><span class="s2">&quot;thermal_conduc&quot;</span><span class="p">]</span>
+        <span class="n">layer</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="n">layer_in</span><span class="p">[</span><span class="s2">&quot;material&quot;</span><span class="p">][</span><span class="s2">&quot;heat_capac&quot;</span><span class="p">]</span>
+        <span class="n">layer</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">solar_absorp</span> <span class="o">=</span> <span class="n">layer_in</span><span class="p">[</span><span class="s2">&quot;material&quot;</span><span class="p">][</span><span class="s2">&quot;solar_absorp&quot;</span><span class="p">]</span>
+        <span class="n">layer</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="n">layer_in</span><span class="p">[</span><span class="s2">&quot;material&quot;</span><span class="p">][</span><span class="s2">&quot;ir_emissivity&quot;</span><span class="p">]</span></div>
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">TEASER 0.7.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">teaser.data.input.teaserjson_input</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.4.
+    </div>
+  </body>
+</html>
