@@ -21,9 +21,9 @@ Climate](https://www.ebc.eonerc.rwth-aachen.de/cms/~dmzz/E-ON-ERC-EBC/?lidx=1).
  * [IDEAS](https://github.com/open-ideas/IDEAS).
 
 The full documentation of TEASER including examples and description of modules,
-classes and functions can be found at the website:
+classes and functions can be found here:
 
- * http://rwth-ebc.github.io/TEASER/
+ * [Documentation](https://rwth-ebc.github.io/TEASER/736-update-ci-templates/docs/index.html)
 
 This GitHub page will be used to further develop the package and make it
 available under the
