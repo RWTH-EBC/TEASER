@@ -1,4 +1,3 @@
-
 from teaser.project import Project
 prj = Project(False)
 

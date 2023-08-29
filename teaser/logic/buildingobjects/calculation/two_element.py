@@ -238,6 +238,18 @@ class TwoElement(object):
         ambient (OuterWalls, Windows, ...).
     heat_load : [W]
         Static heat load of the thermal zone.
+    heat_load_outside_factor : float [W/K]
+        Factor needed for recalculation of the heat load of the thermal zone.
+        This can be used to recalculate the thermalzones heat load inside
+        Modelica export for parametric studies. This works only together with
+        heat_load_ground_factor.
+
+        heat_load = heat_load_outside_factor * (t_inside - t_outside) +
+        heat_load_ground_factor * (t_inside - t_ground).
+    heat_load_ground_factor : float [W/K]
+        Factor needed for recalculation of the heat load of the thermal zone.
+        This can be used to recalculate the thermalzones heat load inside
+        Modelica export for parametric studies. See heat_load_outside_factor.
     facade_areas : list of floats [m2]
         List containing the area of each facade (with same tilt and
         orientation) this includes also roofs and ground floors and windows.
@@ -387,6 +399,8 @@ class TwoElement(object):
         self.orientation_facade = []
         self.heat_load = 0.0
         self.cool_load = 0.0
+        self.heat_load_outside_factor = 0.0
+        self.heat_load_ground_factor = 0.0
 
     def calc_attributes(self):
         """Calls all necessary function to calculate model attributes"""
@@ -641,59 +655,44 @@ class TwoElement(object):
             out_wall.area for out_wall in self.thermal_zone.outer_walls
         ) + sum(roof.area for roof in self.thermal_zone.rooftops)
 
-        if _area_ow_rt > 0:
-            self.r_conv_outer_ow = 1 / (
-                    sum(1 / out_wall.r_outer_conv for out_wall in self.thermal_zone.outer_walls)
-                    + sum(1 / roof.r_outer_conv for roof in self.thermal_zone.rooftops)
-            )
-            self.r_rad_outer_ow = 1 / (
-                    sum(1 / out_wall.r_outer_rad for out_wall in self.thermal_zone.outer_walls)
-                    + sum(1 / roof.r_outer_rad for roof in self.thermal_zone.rooftops)
-                # # Todo: Hack/hotfix for zones without outerwalls or roofs
-                # + sum(1 / groundfloor.r_outer_rad for groundfloor in self.thermal_zone.ground_floors)
-            )
-            self.r_comb_outer_ow = 1 / (
-                    sum(1 / out_wall.r_outer_comb for out_wall in self.thermal_zone.outer_walls)
-                    + sum(1 / roof.r_outer_comb for roof in self.thermal_zone.rooftops)
-                # # Todo: Hack/hotfix for zones without outerwalls or roofs
-                # + sum(1 / groundfloor.r_outer_comb for groundfloor in
-                #       self.thermal_zone.ground_floors)
+        self.r_conv_outer_ow = 1 / (
+            sum(1 / out_wall.r_outer_conv for out_wall in self.thermal_zone.outer_walls)
+            + sum(1 / roof.r_outer_conv for roof in self.thermal_zone.rooftops)
+        )
+        self.r_rad_outer_ow = 1 / (
+            sum(1 / out_wall.r_outer_rad for out_wall in self.thermal_zone.outer_walls)
+            + sum(1 / roof.r_outer_rad for roof in self.thermal_zone.rooftops)
+        )
+        self.r_comb_outer_ow = 1 / (
+            sum(1 / out_wall.r_outer_comb for out_wall in self.thermal_zone.outer_walls)
+            + sum(1 / roof.r_outer_comb for roof in self.thermal_zone.rooftops)
+        )
 
+        self.ir_emissivity_outer_ow = (
+            sum(
+                out_wall.layer[-1].material.ir_emissivity * out_wall.area
+                for out_wall in self.thermal_zone.outer_walls
             )
-            self.ir_emissivity_outer_ow = (
-                                                  sum(
-                                                      out_wall.layer[-1].material.ir_emissivity * out_wall.area
-                                                      for out_wall in self.thermal_zone.outer_walls
-                                                  )
-                                                  + sum(
-                                              roof.layer[-1].material.ir_emissivity * roof.area
-                                              for roof in self.thermal_zone.rooftops
-                                          )
-                                          ) / _area_ow_rt
-            self.solar_absorp_ow = (
-                                           sum(
-                                               out_wall.layer[-1].material.solar_absorp * out_wall.area
-                                               for out_wall in self.thermal_zone.outer_walls
-                                           )
-                                           + sum(
-                                       roof.layer[-1].material.solar_absorp * roof.area
-                                       for roof in self.thermal_zone.rooftops
-                                   )
-                                   ) / _area_ow_rt
-            self.alpha_conv_outer_ow = 1 / (self.r_conv_outer_ow * _area_ow_rt)
-            self.alpha_rad_outer_ow = 1 / (self.r_rad_outer_ow * _area_ow_rt)
-            self.alpha_comb_outer_ow = 1 / (self.r_comb_outer_ow * _area_ow_rt)
-        else:
-            self.r_conv_outer_ow = 0
-            self.r_rad_outer_ow = 0
-            self.r_comb_outer_ow = 0
+            + sum(
+                roof.layer[-1].material.ir_emissivity * roof.area
+                for roof in self.thermal_zone.rooftops
+            )
+        ) / _area_ow_rt
 
-            self.ir_emissivity_outer_ow = 0
-            self.solar_absorp_ow = 0
+        self.solar_absorp_ow = (
+            sum(
+                out_wall.layer[-1].material.solar_absorp * out_wall.area
+                for out_wall in self.thermal_zone.outer_walls
+            )
+            + sum(
+                roof.layer[-1].material.solar_absorp * roof.area
+                for roof in self.thermal_zone.rooftops
+            )
+        ) / _area_ow_rt
 
-            self.alpha_conv_outer_ow = 0
-            self.alpha_rad_outer_ow = 0
-            self.alpha_comb_outer_ow = 0
+        self.alpha_conv_outer_ow = 1 / (self.r_conv_outer_ow * _area_ow_rt)
+        self.alpha_rad_outer_ow = 1 / (self.r_rad_outer_ow * _area_ow_rt)
+        self.alpha_comb_outer_ow = 1 / (self.r_comb_outer_ow * _area_ow_rt)
 
     def _sum_inner_wall_elements(self):
         """Sum attributes for interior elements
@@ -1177,20 +1176,21 @@ class TwoElement(object):
             ground.ua_value for ground in self.thermal_zone.ground_floors
         )
         ua_value_ow_temp = self.ua_value_ow - ua_value_gf_temp
-        self.heat_load = (
-            (
-                (ua_value_ow_temp + self.ua_value_win)
-                + self.thermal_zone.volume
-                * self.thermal_zone.use_conditions.infiltration_rate
-                * 1
-                / 3600
-                * self.thermal_zone.heat_capac_air
-                * self.thermal_zone.density_air
-            )
-            * (self.thermal_zone.t_inside - self.thermal_zone.t_outside)
-        ) + (
-            ua_value_gf_temp * (self.thermal_zone.t_inside - self.thermal_zone.t_ground)
+        self.heat_load_outside_factor = (
+            (ua_value_ow_temp + self.ua_value_win)
+            + self.thermal_zone.volume
+            * self.thermal_zone.use_conditions.infiltration_rate
+            * 1
+            / 3600
+            * self.thermal_zone.heat_capac_air
+            * self.thermal_zone.density_air
         )
+        self.heat_load_ground_factor = ua_value_gf_temp
+        self.heat_load = \
+            self.heat_load_outside_factor \
+            * (self.thermal_zone.t_inside - self.thermal_zone.t_outside) \
+            + self.heat_load_ground_factor \
+            * (self.thermal_zone.t_inside - self.thermal_zone.t_ground)
 
     def set_calc_default(self):
         """sets default calculation parameters
