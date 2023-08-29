@@ -43,7 +43,7 @@ def calc_report_data(prj, path):
         prj_data[bldg_name]['Net ground area'] = bldg.net_leased_area
         prj_data[bldg_name]['Total Air Volume'] = bldg.volume
         # prj_data[bldg_name]['YearOfConstruction'] = bldg.year_of_construction
-        prj_data[bldg_name]['Inner Wall Area'] = bldg.inner_area
+        prj_data[bldg_name]['Inner Wall Area'] = bldg.get_inner_wall_area()
         # if bldg.type_of_building:
         #     prj_data[bldg_name]['TypeOfBuilding'] = bldg.type_of_building
         # todo use bldg.*_names if existing
@@ -117,55 +117,55 @@ def calc_report_data(prj, path):
                     1 / (door.r_conduc * door.area))
         if len(u_values_outer_wall) > 0:
             prj_data[bldg_name]['UValue Outerwall'] = sum(u_values_outer_wall) \
-                                                     / len(u_values_outer_wall)
+                                                      / len(u_values_outer_wall)
         else:
             prj_data[bldg_name]['UValue Outerwall'] = 0
 
         if len(u_values_inner_wall) > 0:
             prj_data[bldg_name]['UValue Innerwall'] = sum(u_values_inner_wall) \
-                                                     / len(u_values_inner_wall)
+                                                      / len(u_values_inner_wall)
         else:
             prj_data[bldg_name]['UValue Innerwall'] = 0
 
         if len(u_values_win) > 0:
             prj_data[bldg_name]['UValue Window'] = sum(u_values_win) \
-                                                  / len(u_values_win)
+                                                   / len(u_values_win)
         else:
             prj_data[bldg_name]['UValue Window'] = 0
 
         if len(u_values_door) > 0:
             prj_data[bldg_name]['UValue Door'] = sum(u_values_door) \
-                                                / len(u_values_door)
+                                                 / len(u_values_door)
         else:
             prj_data[bldg_name]['UValue Door'] = 0
 
         if len(u_values_roof) > 0:
             prj_data[bldg_name]['UValue Roof'] = sum(u_values_roof) \
-                                                / len(u_values_roof)
+                                                 / len(u_values_roof)
         else:
             prj_data[bldg_name]['UValue Roof'] = 0
 
         if len(u_values_ceiling) > 0:
             prj_data[bldg_name]['UValue Ceiling'] = sum(u_values_ceiling) \
-                                                   / len(u_values_ceiling)
+                                                    / len(u_values_ceiling)
         else:
             prj_data[bldg_name]['UValue Ceiling'] = 0
 
         if len(u_values_ground_floor) > 0:
             prj_data[bldg_name]['UValue Groundfloor'] = sum(
                 u_values_ground_floor) \
-                                                       / len(
+                                                        / len(
                 u_values_ground_floor)
         else:
             prj_data[bldg_name]['UValue Groundfloor'] = 0
 
         if len(g_values_windows) > 0:
             prj_data[bldg_name]['gValue Window'] = sum(g_values_windows) \
-                                                  / len(g_values_windows)
+                                                   / len(g_values_windows)
         else:
             prj_data[bldg_name]['gValue Window'] = 0
 
-    # flat the keys
+        # flat the keys
         bldg_data = prj_data[bldg_name]
         prj_data_flat = {}
         for key, val in bldg_data.items():
@@ -173,7 +173,7 @@ def calc_report_data(prj, path):
                 for subkey in bldg_data[key].keys():
                     prj_data_flat[str(key) + '_' + f"{subkey:03}"] = \
                         bldg_data[key][
-                        subkey]
+                            subkey]
             else:
                 prj_data_flat[key] = bldg_data[key]
 
@@ -280,8 +280,7 @@ def create_html_page(
     <html>
     <head>
         <title>{html.escape(prj_name)} - {html.escape(bldg_name)}</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/
-        bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <style>
             body {{
                 font-family: Arial, sans-serif;
@@ -467,7 +466,7 @@ def create_simple_3d_visualization(
                     wall_vertices[1][0] - wall_vertices[0][0]) / 2
             window_y_center = wall_vertices[0][1] + (
                     wall_vertices[2][1] - wall_vertices[0][1]) / 2
-            window_z_center = floor_height + window_gap_top_bottom /\
+            window_z_center = floor_height + window_gap_top_bottom / \
                               2 + window_height / 2
 
             if i == 0 or i == 2:
