@@ -40,7 +40,7 @@ def calc_report_data(prj, path):
         prj_data[bldg_name]['Ground Floor Area'] = 0
         # prj_data[bldg_name]['CalculatedHeatLoad'] = bldg.sum_heat_load
         # prj_data[bldg_name]['CalculatedCoolingLoad'] = bldg.sum_cooling_load
-        prj_data[bldg_name]['Net ground area'] = bldg.net_leased_area
+        prj_data[bldg_name]['Net Ground Area'] = bldg.net_leased_area
         prj_data[bldg_name]['Total Air Volume'] = bldg.volume
         # prj_data[bldg_name]['YearOfConstruction'] = bldg.year_of_construction
         prj_data[bldg_name]['Inner Wall Area'] = bldg.get_inner_wall_area()
@@ -317,6 +317,10 @@ def create_html_page(
                 height: 500px;
                 border: none;
             }}
+            .legend {{
+                margin-top: 10px;
+                font-size: 14px;
+            }}
         </style>
     </head>
     <body>
@@ -336,14 +340,11 @@ def create_html_page(
         if key.startswith("Outerwall Area_") or key.startswith("Window Area_"):
             category = "Wall and Window Areas"
         elif key.startswith("UValue"):
-            category = "U-Values"
-        elif key == "Outerwall Area_Total":
-            category = "Total Wall Area"
-        elif key == "Window Area_Total":
-            category = "Total Window Area"
+            category = "U-Values (mean)"
         elif key in [
-            "Net ground area",
-            "Roof Area", "Floor Height",
+            "Net Ground Area",
+            "Roof Area",
+            "Floor Height",
             "Number of Floors",
             "Total Air Volume"
         ]:
@@ -351,10 +352,17 @@ def create_html_page(
 
         if category and category != current_category:
             html_content += f"""
-                        <tr class="table-secondary">
-                            <th colspan="2">{html.escape(category)}</th>
-                        </tr>
-                    """
+                    <tr class="table-secondary">
+                        <th colspan="2">{html.escape(category)}</th>
+                    </tr>
+                """
+            if category == "Wall and Window Areas":
+                html_content += """
+                    <tr>
+                        <td colspan="2">(0° := North, 90° := East,
+                         180° := South, 270° := West)</td>
+                    </tr>
+                """
             current_category = category
 
         key_human_readable = ' '.join(
@@ -373,6 +381,14 @@ def create_html_page(
                 <div class="col-md-6">
                     <div class="iframe-container">
                         <iframe src="{iframe_src}"></iframe>
+                        <div class="legend">
+                        <span class="badge badge-light" style="background-color:
+                         gray;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        Walls &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="badge badge-light" style="background-color:
+                         blue;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        Windows
+                </div>
                     </div>
                 </div>
             </div>
