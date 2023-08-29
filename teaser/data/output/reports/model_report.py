@@ -110,11 +110,9 @@ def calc_report_data(prj, path):
                 u_values_ceiling.append(
                     1 / (ceiling.r_conduc * ceiling.area))
             for floor in tz.floors:
-                u_values_ceiling.append(
-                    1 / (floor.r_conduc * floor.area))
+                u_values_ceiling.append(1 / (floor.r_conduc * floor.area))
             for door in tz.doors:
-                u_values_door.append(
-                    1 / (door.r_conduc * door.area))
+                u_values_door.append(1 / (door.r_conduc * door.area))
         if len(u_values_outer_wall) > 0:
             prj_data[bldg_name]['UValue Outerwall'] = sum(u_values_outer_wall) \
                 / len(u_values_outer_wall)
@@ -457,7 +455,6 @@ def create_simple_3d_visualization(
                 [window_area_north, window_area_east,
                  window_area_south, window_area_west],
                 [edges[3], edges[4], edges[2], edges[5]])):
-            num_windows_on_side = int(window_area / num_floors)
             window_height = height - window_gap_top_bottom
             window_width = window_area / (num_floors * window_height)
             window_x_center = wall_vertices[0][0] + (
