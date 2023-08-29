@@ -81,5 +81,5 @@ setup(
         "Topic :: Scientific/Engineering",
         "Topic :: Utilities",
     ],
-    install_requires=["mako", "pytest", "pandas", "numpy"],
+    install_requires=["mako", "pytest", "pandas", "numpy", "plotly"],
 )
