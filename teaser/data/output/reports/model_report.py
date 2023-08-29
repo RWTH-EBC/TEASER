@@ -117,51 +117,47 @@ def calc_report_data(prj, path):
                     1 / (door.r_conduc * door.area))
         if len(u_values_outer_wall) > 0:
             prj_data[bldg_name]['UValue Outerwall'] = sum(u_values_outer_wall) \
-                                                      / len(u_values_outer_wall)
+                / len(u_values_outer_wall)
         else:
             prj_data[bldg_name]['UValue Outerwall'] = 0
-
         if len(u_values_inner_wall) > 0:
             prj_data[bldg_name]['UValue Innerwall'] = sum(u_values_inner_wall) \
-                                                      / len(u_values_inner_wall)
+                / len(u_values_inner_wall)
         else:
             prj_data[bldg_name]['UValue Innerwall'] = 0
 
         if len(u_values_win) > 0:
             prj_data[bldg_name]['UValue Window'] = sum(u_values_win) \
-                                                   / len(u_values_win)
+                / len(u_values_win)
         else:
             prj_data[bldg_name]['UValue Window'] = 0
 
         if len(u_values_door) > 0:
             prj_data[bldg_name]['UValue Door'] = sum(u_values_door) \
-                                                 / len(u_values_door)
+                / len(u_values_door)
         else:
             prj_data[bldg_name]['UValue Door'] = 0
 
         if len(u_values_roof) > 0:
             prj_data[bldg_name]['UValue Roof'] = sum(u_values_roof) \
-                                                 / len(u_values_roof)
+                / len(u_values_roof)
         else:
             prj_data[bldg_name]['UValue Roof'] = 0
 
         if len(u_values_ceiling) > 0:
             prj_data[bldg_name]['UValue Ceiling'] = sum(u_values_ceiling) \
-                                                    / len(u_values_ceiling)
+                / len(u_values_ceiling)
         else:
             prj_data[bldg_name]['UValue Ceiling'] = 0
 
         if len(u_values_ground_floor) > 0:
             prj_data[bldg_name]['UValue Groundfloor'] = sum(
-                u_values_ground_floor) \
-                                                        / len(
-                u_values_ground_floor)
+                u_values_ground_floor) / len(u_values_ground_floor)
         else:
             prj_data[bldg_name]['UValue Groundfloor'] = 0
-
         if len(g_values_windows) > 0:
             prj_data[bldg_name]['gValue Window'] = sum(g_values_windows) \
-                                                   / len(g_values_windows)
+                / len(g_values_windows)
         else:
             prj_data[bldg_name]['gValue Window'] = 0
 
@@ -308,7 +304,7 @@ def create_html_page(
             }}
             th {{
                 background-color: #f8f9fa;
-            }}            
+            }}
             .red-bg {{
                 background-color: #f44336;
                 color: #ffffff;
@@ -349,8 +345,10 @@ def create_html_page(
             category = "Total Window Area"
         elif key in [
             "Net ground area",
-            "Roof Area", "Floor Height", "Number of Floors",
-            "Total Air Volume"]:
+            "Roof Area", "Floor Height",
+            "Number of Floors",
+            "Total Air Volume"
+        ]:
             category = "Base Values"
 
         if category and category != current_category:
@@ -463,11 +461,11 @@ def create_simple_3d_visualization(
             window_height = height - window_gap_top_bottom
             window_width = window_area / (num_floors * window_height)
             window_x_center = wall_vertices[0][0] + (
-                    wall_vertices[1][0] - wall_vertices[0][0]) / 2
+                wall_vertices[1][0] - wall_vertices[0][0]) / 2
             window_y_center = wall_vertices[0][1] + (
-                    wall_vertices[2][1] - wall_vertices[0][1]) / 2
-            window_z_center = floor_height + window_gap_top_bottom / \
-                              2 + window_height / 2
+                wall_vertices[2][1] - wall_vertices[0][1]) / 2
+            window_z_center = floor_height + window_gap_top_bottom \
+                / 2 + window_height / 2
 
             if i == 0 or i == 2:
                 fig.add_trace(go.Mesh3d(x=[window_x_center - window_width / 2,
