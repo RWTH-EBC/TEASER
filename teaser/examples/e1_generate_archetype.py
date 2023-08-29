@@ -116,11 +116,6 @@ def example_generate_archetype():
         net_leased_area=600.0,
         construction_type='tabula_retrofit')
 
-    from teaser.data.output.reports import model_report
-
-    prj_data = model_report.calc_report_data(prj, path='D:/10_ProgramTesting')
-    print('test')
-
     return prj
 
 

@@ -1,33 +1,9 @@
+"""holds functions to create a report for a TEASER project model"""
+
 import html
 import os
 import csv
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d.art3d import Poly3DCollection
-import numpy as np
 import plotly.graph_objects as go
-
-
-"""holds functions to create a report for a TEASER project model"""
-
-
-# orient_mapper = {
-#     0: 'North',
-#     90: 'East',
-#     180: 'South',
-#     270: 'West'
-# }
-# todo orientations not work yet correctly
-def orient_mapper(angle):
-    orient = None
-    if angle <= 45 or 315 < angle <= 360:
-        orient = 'North'
-    elif 45 < angle <= 135:
-        orient = 'East'
-    elif 135 < angle <= 225:
-        orient = 'South'
-    elif 225 < angle <= 315:
-        orient = 'West'
-    return orient
 
 
 def localize_floats(row):
@@ -37,56 +13,73 @@ def localize_floats(row):
     ]
 
 
-def calc_report_data(prj, path, name=None):
+def calc_report_data(prj, path):
+    """Creates model report for the project.
+
+    This creates a html and .csv model report for each building of the project
+    for easier analysis of the created buildings. Currently only the basic
+    values for areas and U-values and an abstracted 3D visualization are part of
+     the report. Wall constructions and similar things might come in the future.
+
+    Parameters
+    ----------
+
+    prj : Project
+        project that the report should be created for
+    path : string
+        path of the base project export
+
+    """
+
     prj_data = {}
     for bldg in prj.buildings:
         bldg_name = bldg.name
         prj_data[bldg_name] = {}
         # create keys
-        prj_data[bldg_name]['RoofArea'] = 0
-        prj_data[bldg_name]['GroundFloorArea'] = 0
+        prj_data[bldg_name]['Roof Area'] = 0
+        prj_data[bldg_name]['Ground Floor Area'] = 0
         # prj_data[bldg_name]['CalculatedHeatLoad'] = bldg.sum_heat_load
         # prj_data[bldg_name]['CalculatedCoolingLoad'] = bldg.sum_cooling_load
-        prj_data[bldg_name]['NetGroundArea'] = bldg.net_leased_area
-        prj_data[bldg_name]['TotalVolumeAir'] = bldg.volume
+        prj_data[bldg_name]['Net ground area'] = bldg.net_leased_area
+        prj_data[bldg_name]['Total Air Volume'] = bldg.volume
         # prj_data[bldg_name]['YearOfConstruction'] = bldg.year_of_construction
-        prj_data[bldg_name]['InnerWallArea'] = bldg.inner_area
+        prj_data[bldg_name]['Inner Wall Area'] = bldg.inner_area
         # if bldg.type_of_building:
         #     prj_data[bldg_name]['TypeOfBuilding'] = bldg.type_of_building
         # todo use bldg.*_names if existing
-        prj_data[bldg_name]['FloorHeight'] = bldg.height_of_floors
-        prj_data[bldg_name]['NumberOfFloors'] = bldg.number_of_floors
+        prj_data[bldg_name]['Floor Height'] = bldg.height_of_floors
+        prj_data[bldg_name]['Number of Floors'] = bldg.number_of_floors
 
-        prj_data[bldg_name]['OuterWallArea'] = {}
+        prj_data[bldg_name]['Outerwall Area'] = {}
         outer_wall_area_total = 0
         for orient in bldg.outer_area:
             # some archetypes use floats, some integers for orientation in
             # TEASER
             orient = float(orient)
             if orient == -1:
-                prj_data[bldg_name]['RoofArea'] += bldg.outer_area[orient]
+                prj_data[bldg_name]['Roof Area'] += bldg.outer_area[orient]
             elif orient == -2:
-                prj_data[bldg_name]['GroundFloorArea'] += bldg.outer_area[orient]
+                prj_data[bldg_name]['Ground Floor Area'] += bldg.outer_area[orient]
             else:
                 if orient not in \
-                        prj_data[bldg_name]['OuterWallArea']:
-                    prj_data[bldg_name]['OuterWallArea'][orient] = 0
-                prj_data[bldg_name]['OuterWallArea'][orient] += \
+                        prj_data[bldg_name]['Outerwall Area']:
+                    prj_data[bldg_name]['Outerwall Area'][orient] = 0
+                prj_data[bldg_name]['Outerwall Area'][orient] += \
                     bldg.outer_area[orient]
                 outer_wall_area_total += bldg.outer_area[orient]
         window_area_total = 0
-        prj_data[bldg_name]['WindowArea'] = {}
+        prj_data[bldg_name]['Window Area'] = {}
         for orient in bldg.window_area:
             orient = float(orient)
-            if orient not in prj_data[bldg_name]['WindowArea']:
-                prj_data[bldg_name]['WindowArea'][orient] = 0
-            prj_data[bldg_name]['WindowArea'][orient] += \
+            if orient not in prj_data[bldg_name]['Window Area']:
+                prj_data[bldg_name]['Window Area'][orient] = 0
+            prj_data[bldg_name]['Window Area'][orient] += \
                 bldg.window_area[orient]
             window_area_total += bldg.window_area[orient]
-        prj_data[bldg_name]['WindowArea_Total'] = window_area_total
-        prj_data[bldg_name]['OuterWallArea_Total'] = outer_wall_area_total
+        prj_data[bldg_name]['Window Area_Total'] = window_area_total
+        prj_data[bldg_name]['Outerwall Area_Total'] = outer_wall_area_total
         prj_data[bldg_name][
-            'WindowWallRatio'] = window_area_total / outer_wall_area_total
+            'Window-Wall-Ratio'] = window_area_total / outer_wall_area_total
         prj_data[bldg_name]['nZones'] = len(bldg.thermal_zones)
         u_values_win = []
         g_values_windows = []
@@ -127,54 +120,54 @@ def calc_report_data(prj, path, name=None):
                 u_values_door.append(
                     1 / (door.r_conduc * door.area))
         if len(u_values_outer_wall) > 0:
-            prj_data[bldg_name]['UValueOuterWall'] = sum(u_values_outer_wall) \
+            prj_data[bldg_name]['UValue Outerwall'] = sum(u_values_outer_wall) \
                                                      / len(u_values_outer_wall)
         else:
-            prj_data[bldg_name]['UValueOuterWall'] = 0
+            prj_data[bldg_name]['UValue Outerwall'] = 0
 
         if len(u_values_inner_wall) > 0:
-            prj_data[bldg_name]['UValueInnerWall'] = sum(u_values_inner_wall) \
+            prj_data[bldg_name]['UValue Innerwall'] = sum(u_values_inner_wall) \
                                                      / len(u_values_inner_wall)
         else:
-            prj_data[bldg_name]['UValueInnerWall'] = 0
+            prj_data[bldg_name]['UValue Innerwall'] = 0
 
         if len(u_values_win) > 0:
-            prj_data[bldg_name]['UValueWindow'] = sum(u_values_win) \
+            prj_data[bldg_name]['UValue Window'] = sum(u_values_win) \
                                                   / len(u_values_win)
         else:
-            prj_data[bldg_name]['UValueWindow'] = 0
+            prj_data[bldg_name]['UValue Window'] = 0
 
         if len(u_values_door) > 0:
-            prj_data[bldg_name]['UValueDoor'] = sum(u_values_door) \
+            prj_data[bldg_name]['UValue Door'] = sum(u_values_door) \
                                                 / len(u_values_door)
         else:
-            prj_data[bldg_name]['UValueDoor'] = 0
+            prj_data[bldg_name]['UValue Door'] = 0
 
         if len(u_values_roof) > 0:
-            prj_data[bldg_name]['UValueRoof'] = sum(u_values_roof) \
+            prj_data[bldg_name]['UValue Roof'] = sum(u_values_roof) \
                                                 / len(u_values_roof)
         else:
-            prj_data[bldg_name]['UValueRoof'] = 0
+            prj_data[bldg_name]['UValue Roof'] = 0
 
         if len(u_values_ceiling) > 0:
-            prj_data[bldg_name]['UValueCeiling'] = sum(u_values_ceiling) \
+            prj_data[bldg_name]['UValue Ceiling'] = sum(u_values_ceiling) \
                                                    / len(u_values_ceiling)
         else:
-            prj_data[bldg_name]['UValueCeiling'] = 0
+            prj_data[bldg_name]['UValue Ceiling'] = 0
 
         if len(u_values_ground_floor) > 0:
-            prj_data[bldg_name]['UValueGroundFloor'] = sum(
+            prj_data[bldg_name]['UValue Groundfloor'] = sum(
                 u_values_ground_floor) \
                                                        / len(
                 u_values_ground_floor)
         else:
-            prj_data[bldg_name]['UValueGroundFloor'] = 0
+            prj_data[bldg_name]['UValue Groundfloor'] = 0
 
         if len(g_values_windows) > 0:
-            prj_data[bldg_name]['gValueWindow'] = sum(g_values_windows) \
+            prj_data[bldg_name]['gValue Window'] = sum(g_values_windows) \
                                                   / len(g_values_windows)
         else:
-            prj_data[bldg_name]['gValueWindow'] = 0
+            prj_data[bldg_name]['gValue Window'] = 0
 
     # flat the keys
         bldg_data = prj_data[bldg_name]
@@ -189,33 +182,33 @@ def calc_report_data(prj, path, name=None):
 
         bldg_add_list = {'OuterWall': [], 'Window': []}
         for key in prj_data_flat.keys():
-            if key.startswith('OuterWallArea_'):
+            if key.startswith('Outerwall Area_'):
                 bldg_add_list['OuterWall'].append(key)
-            if key.startswith('WindowArea_'):
+            if key.startswith('Window Area_'):
                 bldg_add_list['Window'].append(key)
         bldg_add_list['OuterWall'].sort()
         bldg_add_list['Window'].sort()
 
         bldg_sorted_list = [
-            'NetGroundArea',
+            'Net Ground Area',
             'nZones'
-            'GroundFloorArea',
-            'RoofArea',
-            'FloorHeight',
-            'NumberOfFloors',
-            'TotalVolumeAir',
+            'Ground Floor Area',
+            'Roof Area',
+            'Floor Height',
+            'Number of Floors',
+            'Total Air Volume',
             *bldg_add_list['OuterWall'],
             *bldg_add_list['Window'],
-            'WindowWallRatio',
-            'InnerWallArea',
-            'UValueOuterWall',
-            'UValueInnerWall',
-            'UValueWindow',
-            'UValueDoor',
-            'UValueRoof',
-            'UValueCeiling',
-            'UValueGroundFloor',
-            'gValueWindow',
+            'Window-Wall-Ratio',
+            'Inner Wall Area',
+            'UValue Outerwall',
+            'UValue Innerwall',
+            'UValue Window',
+            'UValue Door',
+            'UValue Roof',
+            'UValue Ceiling',
+            'UValue Groundfloor',
+            'gValue Window',
 
         ]
         # round values
@@ -226,21 +219,18 @@ def calc_report_data(prj, path, name=None):
                                 k in prj_data_flat.keys()]
 
         # Draw an abstract image of the building and save it with plotly to HTML
-        interactive_fig = create_house_wireframe(
-            area_north=prj_data_flat["OuterWallArea_0.0"],
-            area_east=prj_data_flat["OuterWallArea_90.0"],
-            area_south=prj_data_flat["OuterWallArea_180.0"],
-            area_west=prj_data_flat["OuterWallArea_270.0"],
-            height=prj_data_flat["FloorHeight"],
-            window_area_north=prj_data_flat["WindowArea_0.0"],
-            window_area_east=prj_data_flat["WindowArea_90.0"],
-            window_area_south=prj_data_flat["WindowArea_180.0"],
-            window_area_west=prj_data_flat["WindowArea_270.0"],
-            num_floors=prj_data_flat["NumberOfFloors"],
+        interactive_fig = create_simple_3d_visualization(
+            area_north=prj_data_flat["Outerwall Area_0.0"],
+            area_east=prj_data_flat["Outerwall Area_90.0"],
+            area_south=prj_data_flat["Outerwall Area_180.0"],
+            area_west=prj_data_flat["Outerwall Area_270.0"],
+            height=prj_data_flat["Floor Height"],
+            window_area_north=prj_data_flat["Window Area_0.0"],
+            window_area_east=prj_data_flat["Window Area_90.0"],
+            window_area_south=prj_data_flat["Window Area_180.0"],
+            window_area_west=prj_data_flat["Window Area_270.0"],
+            num_floors=prj_data_flat["Number of Floors"],
             roof_angle=30)
-        html_filename_plotly =\
-            f"D:/10_ProgramTesting/interactive_plot_{bldg_name}.html"
-        interactive_fig.write_html(html_filename_plotly)
 
         keys = ['']
         keys.extend([x[0] for x in bldg_data_flat_sorted])
@@ -248,53 +238,79 @@ def calc_report_data(prj, path, name=None):
         values = ['TEASER']
         values.extend([x[1] for x in bldg_data_flat_sorted])
 
-        output_name = 'teaser_data' if not name else name
+        export_report(
+            bldg_data_flat_sorted,
+            bldg_name,
+            interactive_fig,
+            keys,
+            path,
+            prj,
+            values)
 
-        create_html_page(bldg_data_flat_sorted, bldg_name, html_filename_plotly)
-        with open(os.path.join(path, '%s.csv' % output_name), 'w', newline='',
-                  encoding='utf-8') as f:
-            csvwriter = csv.writer(f, delimiter=';')
-            csvwriter.writerow(keys)
-            csvwriter.writerow(localize_floats(values))
-    return bldg_data_flat_sorted
+
+def export_report(bldg_data_flat_sorted, bldg_name, interactive_fig, keys, path,
+                  prj, values):
+    if not os.path.exists(path):
+        os.mkdir(path)
+        os.mkdir(os.path.join(path, "plots"))
+    base_name = f"{prj.name}_{bldg_name}"
+    output_path_base = os.path.join(path, base_name)
+    plotly_file_name = os.path.join(path, "plots", base_name + '_plotly.html')
+    interactive_fig.write_html(plotly_file_name)
+    html_file_name = os.path.join(output_path_base + '.html')
+    create_html_page(
+        bldg_data_flat_sorted, prj.name, bldg_name, html_file_name, plotly_file_name)
+    csv_file_name = os.path.join(output_path_base + '.csv')
+    with open(csv_file_name, 'w', newline='',
+              encoding='utf-8') as f:
+        csvwriter = csv.writer(f, delimiter=';')
+        csvwriter.writerow(keys)
+        csvwriter.writerow(localize_floats(values))
 
 
-def create_html_page(prj_data_tuples, prj_name, iframe_src):
+def create_html_page(prj_data_tuples, prj_name, bldg_name, html_file_name, iframe_src):
     html_content = f"""
     <!DOCTYPE html>
     <html>
     <head>
-        <title>{html.escape(prj_name)} - Project Data</title>
+        <title>{html.escape(prj_name)} - {html.escape(bldg_name)}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <style>
+            body {{
+                font-family: Arial, sans-serif;
+                background-color: #f8f9fa;
+                padding: 20px;
+            }}
             .container {{
-                display: flex;
-                justify-content: space-between;
-            }}
-            .table-container {{
-                width: 50%;
-            }}
-            table {{
-                border-collapse: collapse;
-                width: 100%;
-            }}
-            th, td {{
-                padding: 8px;
-                text-align: left;
-                border-bottom: 1px solid #ddd;
-            }}
-            th {{
-                background-color: #f2f2f2;
+                background-color: #ffffff;
+                border: 1px solid #e2e2e2;
+                border-radius: 5px;
+                padding: 20px;
+                box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
             }}
             h1 {{
                 text-align: center;
+                margin-bottom: 20px;
             }}
-            .section {{
-                background-color: #f2f2f2;
-                font-weight: bold;
+            table {{
+                border-collapse: collapse;
+            }}
+            th, td {{
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #dee2e6;
+            }}
+            th {{
+                background-color: #f8f9fa;
+            }}            
+            .red-bg {{
+                background-color: #f44336;
+                color: #ffffff;
             }}
             .iframe-container {{
-                width: 50%;
-                border: 1px solid #ddd;
+                border: 1px solid #e2e2e2;
+                border-radius: 5px;
+                padding: 20px;
             }}
             iframe {{
                 width: 100%;
@@ -304,14 +320,11 @@ def create_html_page(prj_data_tuples, prj_name, iframe_src):
         </style>
     </head>
     <body>
-        <h1>{html.escape(prj_name)} - Project Data</h1>
+        <h1 class="red-bg py-2">{html.escape(prj_name)} - {html.escape(bldg_name)}</h1>
         <div class="container">
-            <div class="table-container">
-                <table>
-                    <tr>
-                        <th>Key</th>
-                        <th>Value</th>
-                    </tr>
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table table-bordered">
     """
 
     current_category = None
@@ -319,53 +332,72 @@ def create_html_page(prj_data_tuples, prj_name, iframe_src):
         category = None
 
         # Handle category names
-        if key.startswith("OuterWallArea_") or key.startswith("WindowArea_"):
+        if key.startswith("Outerwall Area_") or key.startswith("Window Area_"):
             category = "Wall and Window Areas"
         elif key.startswith("UValue"):
             category = "U-Values"
-        elif key == "OuterWallArea_Total":
+        elif key == "Outerwall Area_Total":
             category = "Total Wall Area"
-        elif key == "WindowArea_Total":
+        elif key == "Window Area_Total":
             category = "Total Window Area"
-        elif key in ["NetGroundArea", "TotalVolumeAir"]:
-            category = key.replace("TotalVolumeAir", "Total Volume of Air").replace("NetGroundArea", "Net Ground Area")
+        elif key in ["Net ground area", "Roof Area", "Floor Height", "Number of Floors", "Total Air Volume"]:
+            category = "Base Values"
 
         if category and category != current_category:
             html_content += f"""
-                <tr class="section">
-                    <td colspan="2">{html.escape(category)}</td>
-                </tr>
-            """
+                        <tr class="table-secondary">
+                            <th colspan="2">{html.escape(category)}</th>
+                        </tr>
+                    """
             current_category = category
 
-        # Split camel case key names into human-readable strings
-        key_human_readable = ' '.join([word.capitalize() for word in key.split('_')])
+        key_human_readable = ' '.join(
+            [word.capitalize() for word in key.split('_')])
 
         html_content += f"""
-            <tr>
-                <td>{html.escape(key_human_readable)}</td>
-                <td>{html.escape(str(value))}</td>
-            </tr>
-        """
+                <tr>
+                    <th scope="row">{html.escape(key_human_readable)}</th>
+                    <td>{html.escape(str(value))}</td>
+                </tr>
+            """
 
     html_content += f"""
-                </table>
-            </div>
-            <div class="iframe-container">
-                <iframe src="{iframe_src}"></iframe>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <div class="iframe-container">
+                        <iframe src="{iframe_src}"></iframe>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
     </html>
     """
 
-    with open(f"D:/10_ProgramTesting/{prj_name}_project_data.html",
-              "w") as html_file:
+    with open(html_file_name, 'w') as html_file:
         html_file.write(html_content)
 
 
-def create_house_wireframe(area_north, area_east, area_south, area_west, height, num_floors=1, roof_angle=30,
-                           window_area_north=0, window_area_east=0, window_area_south=0, window_area_west=0):
+def create_simple_3d_visualization(
+        area_north, area_east,
+        area_south, area_west,
+        height, num_floors=1,
+        roof_angle=30,
+        window_area_north=0,
+        window_area_east=0,
+        window_area_south=0,
+        window_area_west=0):
+    """Creates a simplified 3d plot of the building.
+
+    This is for a rough first visual analysis of the building and is mostly
+    relevant for buildings that are created "manual" and not for archetypes.
+    The simplified visualization has multiple assumptions/simplifications:
+
+    * All windows of a storey and with the same orientation are put together
+    into one big window which is placed in the middle of the storey
+    * The roof is not displayed correctly # TODO
+     """
     length_north = area_north / (num_floors * height)
     length_east = area_east / (num_floors * height)
     length_south = area_south / (num_floors * height)
@@ -447,58 +479,3 @@ def create_house_wireframe(area_north, area_east, area_south, area_west, height,
                     opacity=0.7, color='blue'))
 
     return fig
-
-
-
-
-
-
-def create_3d_house_diagram(prj_data_tuples):
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
-
-    ground_floor_area = prj_data_tuples.get('GroundFloorArea', 0)
-    outer_wall_areas = {
-        angle: prj_data_tuples.get(f'OuterWallArea_{angle}', 0)
-        for angle in [0, 90, 180, 270]
-    }
-    window_areas = {
-        angle: prj_data_tuples.get(f'WindowArea_{angle}', 0)
-        for angle in [0, 90, 180, 270]
-    }
-    roof_area = prj_data_tuples.get('RoofArea', 0)
-
-    # Define vertices for the house
-    vertices = np.array([
-        [0, 0, 0],
-        [0, ground_floor_area, 0],
-        [ground_floor_area, ground_floor_area, 0],
-        [ground_floor_area, 0, 0],
-        [0, 0, roof_area],
-        [0, ground_floor_area, roof_area],
-        [ground_floor_area, ground_floor_area, roof_area],
-        [ground_floor_area, 0, roof_area]
-    ])
-
-    # Define faces for the house
-    faces = [
-        [vertices[0], vertices[1], vertices[2], vertices[3]],
-        [vertices[4], vertices[5], vertices[6], vertices[7]],
-        [vertices[0], vertices[1], vertices[5], vertices[4]],
-        [vertices[2], vertices[3], vertices[7], vertices[6]],
-        [vertices[0], vertices[3], vertices[7], vertices[4]],
-        [vertices[1], vertices[2], vertices[6], vertices[5]]
-    ]
-
-    # Draw the faces of the house
-    ax.add_collection3d(Poly3DCollection(faces, facecolors='cyan', linewidths=1, edgecolors='black', alpha=0.5))
-
-    ax.set_xlabel('X')
-    ax.set_ylabel('Y')
-    ax.set_zlabel('Z')
-
-    ax.set_xlim(0, ground_floor_area * 1.5)
-    ax.set_ylim(0, ground_floor_area * 1.5)
-    ax.set_zlim(0, roof_area * 1.5)
-
-    plt.show()
