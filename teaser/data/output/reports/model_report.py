@@ -59,7 +59,8 @@ def calc_report_data(prj, path):
             if orient == -1:
                 prj_data[bldg_name]['Roof Area'] += bldg.outer_area[orient]
             elif orient == -2:
-                prj_data[bldg_name]['Ground Floor Area'] += bldg.outer_area[orient]
+                prj_data[bldg_name]['Ground Floor Area'] += \
+                    bldg.outer_area[orient]
             else:
                 if orient not in \
                         prj_data[bldg_name]['Outerwall Area']:
@@ -90,11 +91,6 @@ def calc_report_data(prj, path):
         u_values_roof = []
         u_values_ceiling = []
         for tz in bldg.thermal_zones:
-            # u_values_win.append(tz.model_attr.u_value_win)
-            # u_values_inner_wall.append(tz.model_attr.ua_value_iw/tz.model_attr.area_iw)
-            # u_values_outer_wall.append(tz.model_attr.ua_value_ow/tz.model_attr.area_ow)
-            # u_values_roof.append(tz.model_attr.ua_value_rt/tz.model_attr.area_rt)
-            # u_values_ground_floor.append(tz.model_attr.ua_value_gf/tz.model_attr.area_gf)
             for window in tz.windows:
                 u_values_win.append(1 / (window.r_conduc * window.area))
                 g_values_windows.append(window.g_value)
@@ -175,7 +171,8 @@ def calc_report_data(prj, path):
         for key, val in bldg_data.items():
             if isinstance(bldg_data[key], dict):
                 for subkey in bldg_data[key].keys():
-                    prj_data_flat[str(key) + '_' + f"{subkey:03}"] = bldg_data[key][
+                    prj_data_flat[str(key) + '_' + f"{subkey:03}"] = \
+                        bldg_data[key][
                         subkey]
             else:
                 prj_data_flat[key] = bldg_data[key]
@@ -215,8 +212,9 @@ def calc_report_data(prj, path):
         for key, value in prj_data_flat.items():
             prj_data_flat[key] = round(value, 2)
 
-        bldg_data_flat_sorted = [(k, prj_data_flat[k]) for k in bldg_sorted_list if
-                                k in prj_data_flat.keys()]
+        bldg_data_flat_sorted = [
+            (k, prj_data_flat[k]) for k in bldg_sorted_list if
+            k in prj_data_flat.keys()]
 
         # Draw an abstract image of the building and save it with plotly to HTML
         interactive_fig = create_simple_3d_visualization(
@@ -259,7 +257,11 @@ def export_report(bldg_data_flat_sorted, bldg_name, interactive_fig, keys, path,
     interactive_fig.write_html(plotly_file_name)
     html_file_name = os.path.join(output_path_base + '.html')
     create_html_page(
-        bldg_data_flat_sorted, prj.name, bldg_name, html_file_name, plotly_file_name)
+        bldg_data_flat_sorted,
+        prj.name,
+        bldg_name,
+        html_file_name,
+        plotly_file_name)
     csv_file_name = os.path.join(output_path_base + '.csv')
     with open(csv_file_name, 'w', newline='',
               encoding='utf-8') as f:
@@ -268,13 +270,18 @@ def export_report(bldg_data_flat_sorted, bldg_name, interactive_fig, keys, path,
         csvwriter.writerow(localize_floats(values))
 
 
-def create_html_page(prj_data_tuples, prj_name, bldg_name, html_file_name, iframe_src):
+def create_html_page(
+        prj_data_tuples,
+        prj_name, bldg_name,
+        html_file_name,
+        iframe_src):
     html_content = f"""
     <!DOCTYPE html>
     <html>
     <head>
         <title>{html.escape(prj_name)} - {html.escape(bldg_name)}</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/
+        bootstrap/4.5.2/css/bootstrap.min.css">
         <style>
             body {{
                 font-family: Arial, sans-serif;
@@ -320,7 +327,8 @@ def create_html_page(prj_data_tuples, prj_name, bldg_name, html_file_name, ifram
         </style>
     </head>
     <body>
-        <h1 class="red-bg py-2">{html.escape(prj_name)} - {html.escape(bldg_name)}</h1>
+        <h1 class="red-bg py-2">{
+    html.escape(prj_name)} - {html.escape(bldg_name)}</h1>
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -340,7 +348,10 @@ def create_html_page(prj_data_tuples, prj_name, bldg_name, html_file_name, ifram
             category = "Total Wall Area"
         elif key == "Window Area_Total":
             category = "Total Window Area"
-        elif key in ["Net ground area", "Roof Area", "Floor Height", "Number of Floors", "Total Air Volume"]:
+        elif key in [
+            "Net ground area",
+            "Roof Area", "Floor Height", "Number of Floors",
+            "Total Air Volume"]:
             category = "Base Values"
 
         if category and category != current_category:
@@ -420,31 +431,44 @@ def create_simple_3d_visualization(
         ]
 
         edges = [
-            [vertices[0], vertices[1], vertices[2], vertices[3], vertices[0]],  # 0: bottom
-            [vertices[4], vertices[5], vertices[6], vertices[7], vertices[4]],  # 1: top
-            [vertices[0], vertices[1], vertices[5], vertices[4], vertices[0]],  # 2: south
-            [vertices[2], vertices[3], vertices[7], vertices[6], vertices[2]],  # 3: north
-            [vertices[1], vertices[2], vertices[6], vertices[5], vertices[1]],  # 4: east
-            [vertices[4], vertices[7], vertices[3], vertices[0], vertices[4]],  # 5: west
+            # 0: bottom
+            [vertices[0], vertices[1], vertices[2], vertices[3], vertices[0]],
+            # 1: top
+            [vertices[4], vertices[5], vertices[6], vertices[7], vertices[4]],
+            # 2: south
+            [vertices[0], vertices[1], vertices[5], vertices[4], vertices[0]],
+            # 3: north
+            [vertices[2], vertices[3], vertices[7], vertices[6], vertices[2]],
+            # 4: east
+            [vertices[1], vertices[2], vertices[6], vertices[5], vertices[1]],
+            # 5: west
+            [vertices[4], vertices[7], vertices[3], vertices[0], vertices[4]],
         ]
 
         # Add walls as 3D polygons with color fill
         for edge in edges:
             xs, ys, zs = zip(*edge)
-            fig.add_trace(go.Mesh3d(x=xs, y=ys, z=zs, i=[0, 0, 1, 0], j=[1, 2, 2, 3], k=[2, 3, 3, 1],
+            fig.add_trace(go.Mesh3d(x=xs, y=ys, z=zs,
+                                    i=[0, 0, 1, 0],
+                                    j=[1, 2, 2, 3],
+                                    k=[2, 3, 3, 1],
                                     opacity=0.25, color='gray'))
 
         # Fenster hinzufügen
         window_gap_top_bottom = 0.5
         for i, (window_area, wall_vertices) in enumerate(zip(
-                [window_area_north, window_area_east, window_area_south, window_area_west],
+                [window_area_north, window_area_east,
+                 window_area_south, window_area_west],
                 [edges[3], edges[4], edges[2], edges[5]])):
             num_windows_on_side = int(window_area / num_floors)
             window_height = height - window_gap_top_bottom
             window_width = window_area / (num_floors * window_height)
-            window_x_center = wall_vertices[0][0] + (wall_vertices[1][0] - wall_vertices[0][0]) / 2
-            window_y_center = wall_vertices[0][1] + (wall_vertices[2][1] - wall_vertices[0][1]) / 2
-            window_z_center = floor_height + window_gap_top_bottom / 2 + window_height / 2
+            window_x_center = wall_vertices[0][0] + (
+                    wall_vertices[1][0] - wall_vertices[0][0]) / 2
+            window_y_center = wall_vertices[0][1] + (
+                    wall_vertices[2][1] - wall_vertices[0][1]) / 2
+            window_z_center = floor_height + window_gap_top_bottom /\
+                              2 + window_height / 2
 
             if i == 0 or i == 2:
                 fig.add_trace(go.Mesh3d(x=[window_x_center - window_width / 2,
