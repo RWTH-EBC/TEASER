@@ -1057,7 +1057,7 @@ class Project(object):
             if the Files should not be stored in default output path of TEASER,
             an alternative path can be specified as a full path
         report: boolean
-            if True a model report in form of an html and csv file will be
+            if True a model report in form of a html and csv file will be
             created for the exported project.
         """
 
