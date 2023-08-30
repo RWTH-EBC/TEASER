@@ -1,0 +1,90 @@
+teaser.examples package
+=======================
+
+.. automodule:: teaser.examples
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   teaser.examples.verification
+
+Submodules
+----------
+
+teaser.examples.e1\_generate\_archetype module
+----------------------------------------------
+
+.. automodule:: teaser.examples.e1_generate_archetype
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.examples.e2\_export\_aixlib\_models module
+-------------------------------------------------
+
+.. automodule:: teaser.examples.e2_export_aixlib_models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.examples.e3\_export\_ibpsa\_models module
+------------------------------------------------
+
+.. automodule:: teaser.examples.e3_export_ibpsa_models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.examples.e4\_save module
+-------------------------------
+
+.. automodule:: teaser.examples.e4_save
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.examples.e5\_load module
+-------------------------------
+
+.. automodule:: teaser.examples.e5_load
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.examples.e6\_generate\_building module
+---------------------------------------------
+
+.. automodule:: teaser.examples.e6_generate_building
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.examples.e7\_retrofit module
+-----------------------------------
+
+.. automodule:: teaser.examples.e7_retrofit
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.examples.e8\_change\_boundary\_conditions module
+-------------------------------------------------------
+
+.. automodule:: teaser.examples.e8_change_boundary_conditions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.examples.e9\_building\_data\_import\_from\_excel module
+--------------------------------------------------------------
+
+.. automodule:: teaser.examples.e9_building_data_import_from_excel
+   :members:
+   :undoc-members:
+   :show-inheritance:
