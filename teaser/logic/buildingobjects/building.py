@@ -239,7 +239,7 @@ class Building(object):
         orientation : float
             orientation of the obtained wall
         Returns
-        ----------
+        -------
         sum_area : float
             area of all walls of one direction
         """
@@ -276,7 +276,7 @@ class Building(object):
         orientation : float
             orientation of the obtained windows
         Returns
-        ----------
+        -------
         sum_area : float
             area of all windows of one direction
         """
@@ -295,7 +295,7 @@ class Building(object):
         Ceilings and Floors.
 
         Returns
-        ----------
+        -------
         sum_area : float
             area of all inner walls
 

@@ -128,7 +128,7 @@ class Project(object):
         """Initialization of DataClass
 
         Returns
-        ----------
+        -------
 
         DataClass : Instance of DataClass()
 
@@ -320,36 +320,49 @@ class Project(object):
             and
             assigned to attribute central_ahu. This instance holds information
             for central Air Handling units. Default is False.
-internal_gains_mode: int [1, 2, 3]
-        mode for the internal gains calculation done in AixLib:
-        1: Temperature and activity degree dependent heat flux calculation for persons. The
-           calculation is based on  SIA 2024 (default)
-        2: Temperature and activity degree independent heat flux calculation for persons, the max.
-           heatflowrate is prescribed by the parameter
-           fixed_heat_flow_rate_persons.
-        3: Temperature and activity degree dependent calculation with
-           consideration of moisture and co2. The moisture calculation is
-           based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
-           Engineering ToolBox (2004) and regards only persons.
+        internal_gains_mode: int [1, 2, 3]
+            mode for the internal gains calculation done in AixLib:
+
+            1. Temperature and activity degree dependent heat flux calculation for persons. The
+            calculation is based on  SIA 2024 (default)
+
+            2. Temperature and activity degree independent heat flux calculation for persons, the max.
+            heatflowrate is prescribed by the parameter
+            fixed_heat_flow_rate_persons.
+
+            3. Temperature and activity degree dependent calculation with
+            consideration of moisture and co2. The moisture calculation is
+            based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
+            Engineering ToolBox (2004) and regards only persons.
+
         office_layout : int
             Structure of the floor plan of office buildings, default is 1,
             which is representative for one elongated floor.
-                1: elongated 1 floor
-                2: elongated 2 floors
-                3: compact (e.g. for a square base building)
+
+            1. elongated 1 floor
+
+            2. elongated 2 floors
+
+            3. compact (e.g. for a square base building)
+
         window_layout : int
             Structure of the window facade type, default is 1, which is
             representative for a punctuated facade.
-                1: punctuated facade (individual windows)
-                2: banner facade (continuous windows)
-                3: full glazing
+
+            1. punctuated facade (individual windows)
+
+            2. banner facade (continuous windows)
+
+            3. full glazing
         construction_type : str
             Construction type of used wall constructions default is "heavy")
-                heavy: heavy construction
-                light: light construction
+
+            1. heavy: heavy construction
+
+            2. light: light construction
 
         Returns
-        ----------
+        -------
         type_bldg : Instance of Office()
 
         """
@@ -564,7 +577,7 @@ internal_gains_mode: int [1, 2, 3]
             used for urbanrenet
 
         Returns
-        ----------
+        -------
         type_bldg : Instance of Archetype Building
 
         """

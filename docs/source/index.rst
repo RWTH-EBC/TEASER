@@ -48,10 +48,9 @@ Contents
    :maxdepth: 2
 
    install_teaser
-   teaser.Project
    archetypes
    teaser.Examples
-   teaser
+   code/modules
    acknowledgments
    license
    faq

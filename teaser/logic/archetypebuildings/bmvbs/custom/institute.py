@@ -83,7 +83,7 @@ class Institute(Office):
             light: light construction
 
     Note
-    ----------
+    ----
     The listed attributes are just the ones that are set by the user
     calculated values are not included in this list. Changing these values is
     expert mode.

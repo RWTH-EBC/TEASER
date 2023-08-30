@@ -61,7 +61,7 @@ class IBPSA(object):
         4 Column : profile_machines, convective
 
         Note
-        ----------
+        ----
         When time line is created, we need to add a 0 to first element of
         all boundaries. This is due to to expected format in Modelica.
 

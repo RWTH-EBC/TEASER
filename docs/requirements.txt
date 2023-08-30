@@ -1,2 +1,7 @@
 sphinxcontrib.bibtex
 numpydoc
+sphinx==6.2.1
+m2r2
+sphinx-material
+autodoc_pydantic
+sphinx-rtd-theme
