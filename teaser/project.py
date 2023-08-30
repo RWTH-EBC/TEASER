@@ -1092,7 +1092,7 @@ class Project(object):
 
         if report:
             report_path = os.path.join(path, "Resources", "ModelReport")
-            model_report.calc_report_data(prj=self, path=report_path)
+            model_report.create_model_report(prj=self, path=report_path)
         return path
 
     def export_ibpsa(self, library="AixLib", internal_id=None, path=None):

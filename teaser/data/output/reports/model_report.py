@@ -3,6 +3,8 @@
 import html
 import os
 import csv
+from collections import OrderedDict
+
 import plotly.graph_objects as go
 
 
@@ -13,13 +15,13 @@ def localize_floats(row):
     ]
 
 
-def calc_report_data(prj, path):
+def create_model_report(prj, path):
     """Creates model report for the project.
 
     This creates a html and .csv model report for each building of the project
     for easier analysis of the created buildings. Currently only the basic
     values for areas and U-values and an abstracted 3D visualization are part of
-     the report. Wall constructions and similar things might come in the future.
+    the report. Wall constructions and similar things might come in the future.
 
     Parameters
     ----------
@@ -31,57 +33,71 @@ def calc_report_data(prj, path):
 
     """
 
-    prj_data = {}
+    prj_data = OrderedDict()
     for bldg in prj.buildings:
         bldg_name = bldg.name
-        prj_data[bldg_name] = {}
+        prj_data[bldg_name] = OrderedDict()
         # create keys
-        prj_data[bldg_name]['Roof Area'] = 0
+        prj_data[bldg_name]['Net Ground Area'] = bldg.net_leased_area
         prj_data[bldg_name]['Ground Floor Area'] = 0
+        prj_data[bldg_name]['Roof Area'] = 0
+        prj_data[bldg_name]['Floor Height'] = bldg.height_of_floors
+        prj_data[bldg_name]['Number of Floors'] = bldg.number_of_floors
+        prj_data[bldg_name]['Total Air Volume'] = bldg.volume
+        prj_data[bldg_name]['Number of Zones'] = len(bldg.thermal_zones)
         # prj_data[bldg_name]['CalculatedHeatLoad'] = bldg.sum_heat_load
         # prj_data[bldg_name]['CalculatedCoolingLoad'] = bldg.sum_cooling_load
-        prj_data[bldg_name]['Net Ground Area'] = bldg.net_leased_area
-        prj_data[bldg_name]['Total Air Volume'] = bldg.volume
         # prj_data[bldg_name]['YearOfConstruction'] = bldg.year_of_construction
-        prj_data[bldg_name]['Inner Wall Area'] = bldg.get_inner_wall_area()
+
         # if bldg.type_of_building:
         #     prj_data[bldg_name]['TypeOfBuilding'] = bldg.type_of_building
         # todo use bldg.*_names if existing
-        prj_data[bldg_name]['Floor Height'] = bldg.height_of_floors
-        prj_data[bldg_name]['Number of Floors'] = bldg.number_of_floors
 
         prj_data[bldg_name]['Outerwall Area'] = {}
         outer_wall_area_total = 0
-        for orient in bldg.outer_area:
+
+        outer_areas = bldg.outer_area
+        # make sure that lowest values of orient come first
+        sorted_keys = sorted(outer_areas.keys())
+        sorted_outer_areas = {key: outer_areas[key] for key in sorted_keys}
+        for orient in outer_areas:
             # some archetypes use floats, some integers for orientation in
             # TEASER
             orient = float(orient)
             if orient == -1:
-                prj_data[bldg_name]['Roof Area'] += bldg.outer_area[orient]
+                prj_data[bldg_name]['Roof Area'] += sorted_outer_areas[orient]
             elif orient == -2:
                 prj_data[bldg_name]['Ground Floor Area'] += \
-                    bldg.outer_area[orient]
+                    sorted_outer_areas[orient]
             else:
                 if orient not in \
                         prj_data[bldg_name]['Outerwall Area']:
                     prj_data[bldg_name]['Outerwall Area'][orient] = 0
                 prj_data[bldg_name]['Outerwall Area'][orient] += \
-                    bldg.outer_area[orient]
-                outer_wall_area_total += bldg.outer_area[orient]
+                    sorted_outer_areas[orient]
+                outer_wall_area_total += sorted_outer_areas[orient]
         window_area_total = 0
+        prj_data[bldg_name]['Outerwall Area Total'] = outer_wall_area_total
         prj_data[bldg_name]['Window Area'] = {}
-        for orient in bldg.window_area:
+
+        window_areas = bldg.window_area
+        # make sure that lowest values of orient come first
+        sorted_keys = sorted(window_areas.keys())
+        sorted_window_areas = {key: window_areas[key] for key in sorted_keys}
+
+        for orient in sorted_window_areas:
             orient = float(orient)
             if orient not in prj_data[bldg_name]['Window Area']:
                 prj_data[bldg_name]['Window Area'][orient] = 0
             prj_data[bldg_name]['Window Area'][orient] += \
-                bldg.window_area[orient]
-            window_area_total += bldg.window_area[orient]
-        prj_data[bldg_name]['Window Area_Total'] = window_area_total
-        prj_data[bldg_name]['Outerwall Area_Total'] = outer_wall_area_total
+                sorted_window_areas[orient]
+            window_area_total += sorted_window_areas[orient]
+
+        prj_data[bldg_name]['Window Area Total'] = window_area_total
         prj_data[bldg_name][
             'Window-Wall-Ratio'] = window_area_total / outer_wall_area_total
-        prj_data[bldg_name]['nZones'] = len(bldg.thermal_zones)
+        prj_data[bldg_name]['Inner Wall Area'] = bldg.get_inner_wall_area()
+
         u_values_win = []
         g_values_windows = []
         u_values_ground_floor = []
@@ -159,103 +175,94 @@ def calc_report_data(prj, path):
         else:
             prj_data[bldg_name]['gValue Window'] = 0
 
-        # flat the keys
         bldg_data = prj_data[bldg_name]
-        prj_data_flat = {}
-        for key, val in bldg_data.items():
-            if isinstance(bldg_data[key], dict):
-                for subkey in bldg_data[key].keys():
-                    prj_data_flat[str(key) + '_' + f"{subkey:03}"] = \
-                        bldg_data[key][
-                            subkey]
-            else:
-                prj_data_flat[key] = bldg_data[key]
 
-        bldg_add_list = {'OuterWall': [], 'Window': []}
-        for key in prj_data_flat.keys():
-            if key.startswith('Outerwall Area_'):
-                bldg_add_list['OuterWall'].append(key)
-            if key.startswith('Window Area_'):
-                bldg_add_list['Window'].append(key)
-        bldg_add_list['OuterWall'].sort()
-        bldg_add_list['Window'].sort()
-
-        bldg_sorted_list = [
-            'Net Ground Area',
-            'nZones'
-            'Ground Floor Area',
-            'Roof Area',
-            'Floor Height',
-            'Number of Floors',
-            'Total Air Volume',
-            *bldg_add_list['OuterWall'],
-            *bldg_add_list['Window'],
-            'Window-Wall-Ratio',
-            'Inner Wall Area',
-            'UValue Outerwall',
-            'UValue Innerwall',
-            'UValue Window',
-            'UValue Door',
-            'UValue Roof',
-            'UValue Ceiling',
-            'UValue Groundfloor',
-            'gValue Window',
-
-        ]
-        # round values
-        for key, value in prj_data_flat.items():
-            prj_data_flat[key] = round(value, 2)
-
-        bldg_data_flat_sorted = [
-            (k, prj_data_flat[k]) for k in bldg_sorted_list if
-            k in prj_data_flat.keys()]
-
-        # Draw an abstract image of the building and save it with plotly to HTML
-        interactive_fig = create_simple_3d_visualization(
-            area_north=prj_data_flat["Outerwall Area_0.0"],
-            area_east=prj_data_flat["Outerwall Area_90.0"],
-            area_south=prj_data_flat["Outerwall Area_180.0"],
-            area_west=prj_data_flat["Outerwall Area_270.0"],
-            height=prj_data_flat["Floor Height"],
-            window_area_north=prj_data_flat["Window Area_0.0"],
-            window_area_east=prj_data_flat["Window Area_90.0"],
-            window_area_south=prj_data_flat["Window Area_180.0"],
-            window_area_west=prj_data_flat["Window Area_270.0"],
-            num_floors=prj_data_flat["Number of Floors"],
-            roof_angle=30)
-
-        keys = ['']
-        keys.extend([x[0] for x in bldg_data_flat_sorted])
-
-        values = ['TEASER']
-        values.extend([x[1] for x in bldg_data_flat_sorted])
-
-        export_report(
-            bldg_data_flat_sorted,
+        export_reports(
+            bldg_data,
             bldg_name,
-            interactive_fig,
-            keys,
             path,
-            prj,
-            values)
+            prj
+        )
 
 
-def export_report(bldg_data_flat_sorted, bldg_name, interactive_fig, keys, path,
-                  prj, values):
+def export_reports(bldg_data, bldg_name, path, prj):
     if not os.path.exists(path):
         os.mkdir(path)
         os.mkdir(os.path.join(path, "plots"))
     base_name = f"{prj.name}_{bldg_name}"
     output_path_base = os.path.join(path, base_name)
     plotly_file_name = os.path.join(path, "plots", base_name + '_plotly.html')
+    # Draw an abstract image of the building and save it with plotly to HTML
+    interactive_fig = create_simple_3d_visualization(bldg_data,roof_angle=30)
     interactive_fig.write_html(plotly_file_name)
     html_file_name = os.path.join(output_path_base + '.html')
     create_html_page(
-        bldg_data_flat_sorted,
+        bldg_data,
         prj.name,
         bldg_name,
         html_file_name,
         plotly_file_name)
+    create_csv_report(bldg_data, output_path_base)
+
+
+def create_csv_report(bldg_data, output_path_base):
+    # flat the keys
+
+    prj_data_flat = {}
+    for key, val in bldg_data.items():
+        if isinstance(bldg_data[key], dict):
+            for subkey in bldg_data[key].keys():
+                prj_data_flat[str(key) + '_' + f"{subkey:03}"] = \
+                    bldg_data[key][
+                        subkey]
+        else:
+            prj_data_flat[key] = bldg_data[key]
+
+    bldg_add_list = {'OuterWall': [], 'Window': []}
+    for key in prj_data_flat.keys():
+        if key.startswith('Outerwall Area_'):
+            bldg_add_list['OuterWall'].append(key)
+        if key.startswith('Window Area_'):
+            bldg_add_list['Window'].append(key)
+    bldg_add_list['OuterWall'].sort()
+    bldg_add_list['Window'].sort()
+
+    bldg_sorted_list = [
+        'Net Ground Area',
+        'Number of Zones'
+        'Ground Floor Area',
+        'Roof Area',
+        'Floor Height',
+        'Number of Floors',
+        'Total Air Volume',
+        *bldg_add_list['OuterWall'],
+        *bldg_add_list['Window'],
+        'Window-Wall-Ratio',
+        'Inner Wall Area',
+        'UValue Outerwall',
+        'UValue Innerwall',
+        'UValue Window',
+        'UValue Door',
+        'UValue Roof',
+        'UValue Ceiling',
+        'UValue Groundfloor',
+        'gValue Window',
+
+    ]
+    # round values
+    for key, value in prj_data_flat.items():
+        prj_data_flat[key] = round(value, 2)
+
+    bldg_data_flat_sorted = [
+        (k, prj_data_flat[k]) for k in bldg_sorted_list if
+        k in prj_data_flat.keys()]
+
+    keys = ['']
+    keys.extend([x[0] for x in bldg_data_flat_sorted])
+
+    values = ['TEASER']
+    values.extend([x[1] for x in bldg_data_flat_sorted])
+
     csv_file_name = os.path.join(output_path_base + '.csv')
     with open(csv_file_name, 'w', newline='',
               encoding='utf-8') as f:
@@ -264,8 +271,44 @@ def export_report(bldg_data_flat_sorted, bldg_name, interactive_fig, keys, path,
         csvwriter.writerow(localize_floats(values))
 
 
+def add_compass_to_3d_plot(fig, x_y_axis_sizing):
+    lines = [
+        ((0, x_y_axis_sizing-1, 0), (0, x_y_axis_sizing, 0), '<b>N</b>'),
+        ((x_y_axis_sizing-1, 0, 0), (x_y_axis_sizing, 0, 0), '<b>E</b>'),
+        ((0, -x_y_axis_sizing + 1, 0), (0, -x_y_axis_sizing, 0), '<b>S</b>'),
+        ((-x_y_axis_sizing + 1, 0, 0), (-x_y_axis_sizing, 0, 0), '<b>W</b>')
+    ]
+
+    for start, end, label in lines:
+        fig.add_trace(go.Scatter3d(x=[start[0], end[0]], y=[start[1], end[1]],
+                                   z=[start[2], end[2]],
+                                   mode='lines+text', line=dict(color='black'),
+                                   hoverinfo='none', showlegend=False))
+        fig.add_trace(go.Scatter3d(x=[end[0]], y=[end[1]], z=[end[2]],
+                                   mode='text', text=[label],
+                                   textposition='top center',
+                                   hoverinfo='none', showlegend=False))
+
+        arrow_length = 1
+        arrow_color = 'black'
+
+        arrow = go.Cone(x=[end[0]], y=[end[1]], z=[end[2]],
+                        u=[end[0] - start[0]], v=[end[1] - start[1]],
+                        w=[end[2] - start[2]],
+                        sizemode='absolute', sizeref=arrow_length,
+                        showscale=False,
+                        colorscale=[[0, arrow_color], [1, arrow_color]],
+                        hoverinfo='none')
+        fig.add_trace(arrow)
+
+    # Set layout
+    fig.update_layout(
+        scene=dict(aspectmode="manual", aspectratio=dict(x=1, y=1, z=1)))
+    return fig
+
+
 def create_html_page(
-        prj_data_tuples,
+        bldg_data,
         prj_name, bldg_name,
         html_file_name,
         iframe_src):
@@ -310,11 +353,11 @@ def create_html_page(
             .iframe-container {{
                 border: 1px solid #e2e2e2;
                 border-radius: 5px;
-                padding: 20px;
+                padding: 0px;
             }}
             iframe {{
                 width: 100%;
-                height: 500px;
+                height: 600px;
                 border: none;
             }}
             .legend {{
@@ -333,11 +376,11 @@ def create_html_page(
     """
 
     current_category = None
-    for key, value in prj_data_tuples:
+    for key, value in bldg_data.items():
         category = None
 
         # Handle category names
-        if key.startswith("Outerwall Area_") or key.startswith("Window Area_"):
+        if key.startswith("Window") or key.startswith("Outerwall"):
             category = "Wall and Window Areas"
         elif key.startswith("UValue"):
             category = "U-Values (mean)"
@@ -347,6 +390,7 @@ def create_html_page(
             "Floor Height",
             "Number of Floors",
             "Total Air Volume"
+            "Number of Zones"
         ]:
             category = "Base Values"
 
@@ -365,15 +409,27 @@ def create_html_page(
                 """
             current_category = category
 
-        key_human_readable = ' '.join(
-            [word.capitalize() for word in key.split('_')])
 
-        html_content += f"""
-                <tr>
-                    <th scope="row">{html.escape(key_human_readable)}</th>
-                    <td>{html.escape(str(value))}</td>
-                </tr>
-            """
+        # handle subdict for outerwall and window area with directions
+        if key == "Outerwall Area" or key == "Window Area":
+            for orient, area in bldg_data[key].items():
+                html_content += f"""
+                        <tr>
+                            <th scope="row">{html.escape(str(key))} 
+                             {html.escape(str(orient))}</th>
+                            <td>{html.escape(str(round(area, 2)))}</td>
+                        </tr>
+                    """
+
+        else:
+            key_human_readable = ' '.join(
+                [word.capitalize() for word in key.split('_')])
+            html_content += f"""
+                    <tr>
+                        <th scope="row">{html.escape(key_human_readable)}</th>
+                        <td>{html.escape(str(round(value, 2)))}</td>
+                    </tr>
+                """
 
     html_content += f"""
                     </table>
@@ -401,25 +457,44 @@ def create_html_page(
         html_file.write(html_content)
 
 
-def create_simple_3d_visualization(
-        area_north, area_east,
-        area_south, area_west,
-        height, num_floors=1,
-        roof_angle=30,
-        window_area_north=0,
-        window_area_east=0,
-        window_area_south=0,
-        window_area_west=0):
+def create_simple_3d_visualization(bldg_data, roof_angle=30):
     """Creates a simplified 3d plot of the building.
 
     This is for a rough first visual analysis of the building and is mostly
     relevant for buildings that are created "manual" and not for archetypes.
     The simplified visualization has multiple assumptions/simplifications:
-
     * All windows of a storey and with the same orientation are put together
     into one big window which is placed in the middle of the storey
+    * Only works for buildings with 4 directions currently, while the smallest
+    will be interpreted as north, the next bigger one as east and so on.
+    * Orientations are
+        Positive y: North
+        Positive x: East
+        Negative y: South
+        Negative x: West
     * The roof is not displayed correctly # TODO
      """
+
+    def get_value_with_default(lst, index, default_value):
+        try:
+            return lst[index]
+        except IndexError:
+            return default_value
+
+    area_values = list(bldg_data['Outerwall Area'].values())
+    window_values = list(bldg_data['Window Area'].values())
+
+    area_north = get_value_with_default(area_values, 0, 0)
+    area_east = get_value_with_default(area_values, 1, 0)
+    area_south = get_value_with_default(area_values, 2, 0)
+    area_west = get_value_with_default(area_values, 3, 0)
+    window_area_north = get_value_with_default(window_values, 0, 0)
+    window_area_east = get_value_with_default(window_values, 1, 0)
+    window_area_south = get_value_with_default(window_values, 2, 0)
+    window_area_west = get_value_with_default(window_values, 3, 0)
+    height = bldg_data['Floor Height']
+    num_floors = bldg_data['Number of Floors']
+
     length_north = area_north / (num_floors * height)
     length_east = area_east / (num_floors * height)
     length_south = area_south / (num_floors * height)
@@ -427,18 +502,53 @@ def create_simple_3d_visualization(
 
     fig = go.Figure()
 
+    fig.update_layout(
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        margin=dict(l=5, r=5, b=5, t=0),  # Adjust margins to control padding
+        scene=dict(
+            xaxis=dict(
+                gridcolor="white",
+                showbackground=False,
+                zerolinecolor="white", ),
+            yaxis=dict(
+                gridcolor="white",
+                showbackground=False,
+                zerolinecolor="white"),
+            zaxis=dict(
+                gridcolor="white",
+                showbackground=False,
+                zerolinecolor="white"),
+            aspectmode='cube',
+            xaxis_showgrid=False,
+            yaxis_showgrid=False,
+            zaxis_showgrid=False,
+            xaxis_title='',
+            yaxis_title='',
+            zaxis_title="",
+        )
+    )
+
+    max_length = max(length_north, length_south, length_west, length_east)
+    x_y_axis_sizing = (max_length/2) * 1.1
+    fig.update_layout(scene=dict(
+        xaxis=dict(range=[-x_y_axis_sizing, x_y_axis_sizing]),
+        yaxis=dict(range=[-x_y_axis_sizing, x_y_axis_sizing]),
+        zaxis=dict(range=[0, max_length])
+    ))
+    fig = add_compass_to_3d_plot(fig, x_y_axis_sizing)
     for floor in range(num_floors):
         # Ecken des aktuellen Stockwerks
         floor_height = height * floor
         vertices = [
-            (0, 0, floor_height),
-            (length_south, 0, floor_height),
-            (length_south, length_east, floor_height),
-            (length_south - length_north, length_west, floor_height),
-            (0, 0, floor_height + height),
-            (length_south, 0, floor_height + height),
-            (length_south, length_east, floor_height + height),
-            (length_south - length_north, length_west, floor_height + height),
+            (-length_south/2, -length_east/2, floor_height),
+            (-length_south/2 + length_north, -length_east/2, floor_height),
+            (-length_south/2 + length_north, - length_east/2 + length_west, floor_height),
+            (-length_south/2,  - length_east/2 + length_west, floor_height),
+            (-length_south/2, -length_east/2, floor_height + height),
+            (-length_south/2 + length_north, -length_east/2, floor_height + height),
+            (-length_south/2 + length_north, - length_east/2 + length_west, floor_height + height),
+            (-length_south/2, - length_east/2 + length_west, floor_height + height),
         ]
 
         edges = [
@@ -463,7 +573,8 @@ def create_simple_3d_visualization(
                                     i=[0, 0, 1, 0],
                                     j=[1, 2, 2, 3],
                                     k=[2, 3, 3, 1],
-                                    opacity=0.25, color='gray'))
+                                    opacity=0.25, color='gray',
+                                    hoverinfo='none'))
 
         # Fenster hinzufügen
         window_gap_top_bottom = 0.5
@@ -494,7 +605,8 @@ def create_simple_3d_visualization(
                                         i=[0, 0, 1, 0],
                                         j=[1, 2, 2, 3],
                                         k=[2, 3, 3, 1],
-                                        opacity=0.7, color='blue'))
+                                        opacity=0.7, color='blue',
+                                        hoverinfo='none'))
             else:
                 fig.add_trace(go.Mesh3d(
                     x=[window_x_center, window_x_center, window_x_center,
@@ -510,6 +622,7 @@ def create_simple_3d_visualization(
                     i=[0, 0, 1, 0],
                     j=[1, 2, 2, 3],
                     k=[2, 3, 3, 1],
-                    opacity=0.7, color='blue'))
+                    opacity=0.7, color='blue',
+                    hoverinfo='none'))
 
     return fig
