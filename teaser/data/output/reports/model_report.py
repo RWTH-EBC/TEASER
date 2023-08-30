@@ -483,7 +483,10 @@ def create_simple_3d_visualization(bldg_data, roof_angle=30):
 
     area_values = list(bldg_data['Outerwall Area'].values())
     window_values = list(bldg_data['Window Area'].values())
-
+    # TODO: use orientations as well and "turn" the vertices based on this.
+    #  Currently the first value (which is the smallest) will be taken as north,
+    #  the next one as east and so on. Only the first 4 values are taken into
+    #  account.
     area_north = get_value_with_default(area_values, 0, 0)
     area_east = get_value_with_default(area_values, 1, 0)
     area_south = get_value_with_default(area_values, 2, 0)
