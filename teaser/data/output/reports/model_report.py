@@ -51,7 +51,6 @@ def create_model_report(prj, path):
         prj_data[bldg_name]['Calculated Heat Load'] = bldg.sum_heat_load
         prj_data[bldg_name]['Calculated Cooling Load'] = bldg.sum_cooling_load
 
-
         # todo use bldg.*_names if existing
 
         prj_data[bldg_name]['Outerwall Area'] = {}
@@ -194,11 +193,11 @@ def export_reports(bldg_data, bldg_name, path, prj):
     output_path_base = os.path.join(path, base_name)
     plotly_file_name = os.path.join(path, "plots", base_name + '_plotly.html')
     # Draw an abstract image of the building and save it with plotly to HTML
-    interactive_fig = create_simple_3d_visualization(bldg_data,roof_angle=30)
+    interactive_fig = create_simple_3d_visualization(bldg_data, roof_angle=30)
     if interactive_fig:
         interactive_fig.write_html(plotly_file_name)
     else:
-        plotly_file_name=None
+        plotly_file_name = None
     html_file_name = os.path.join(output_path_base + '.html')
     create_html_page(
         bldg_data,
@@ -279,8 +278,8 @@ def create_csv_report(bldg_data, output_path_base):
 
 def add_compass_to_3d_plot(fig, x_y_axis_sizing):
     lines = [
-        ((0, x_y_axis_sizing-1, 0), (0, x_y_axis_sizing, 0), '<b>N</b>'),
-        ((x_y_axis_sizing-1, 0, 0), (x_y_axis_sizing, 0, 0), '<b>E</b>'),
+        ((0, x_y_axis_sizing - 1, 0), (0, x_y_axis_sizing, 0), '<b>N</b>'),
+        ((x_y_axis_sizing - 1, 0, 0), (x_y_axis_sizing, 0, 0), '<b>E</b>'),
         ((0, -x_y_axis_sizing + 1, 0), (0, -x_y_axis_sizing, 0), '<b>S</b>'),
         ((-x_y_axis_sizing + 1, 0, 0), (-x_y_axis_sizing, 0, 0), '<b>W</b>')
     ]
@@ -412,7 +411,8 @@ def create_html_page(
 
         if key.lower() in [
             "number of floors", "number of zones", "year of construction",
-            "window-wall-ratio", "gvalue window", "type of building"]:
+            "window-wall-ratio", "gvalue window", "type of building"
+        ]:
             unit = "-"
         if key.lower() == "total air volume":
             unit = "m³"
@@ -439,11 +439,11 @@ def create_html_page(
             for orient, area in bldg_data[key].items():
                 value = area
                 html_content += f"""
-                        <tr>
-                            <th scope="row">{html.escape(str(key))} 
-                             {html.escape(str(orient))}</th>
+                    <tr>
+                    <th scope="row">{html.escape(str(key))} 
+                        {html.escape(str(orient))}</th>
                  <td>{html.escape(
-                str(round(value, 2)))} </td>
+                    str(round(value, 2)))} </td>
                 <td style=
                     "text-align: center; background-color: #D3D3D3;"> 
                                         {html.escape(unit)}</td>
@@ -506,11 +506,10 @@ def create_html_page(
                     orientation are put together into one big window 
                     which is placed in the middle of the storey</i></li>
                     <li><i>Only works for buildings with 4 directions 
-                    currently, while the smallest will be interpreted as
-                     north, the next bigger one as east and so 
-                     on.</i></li>
-                    <li><i>The roof is not displayed correctly 
-                    yet</i></li>
+                    currently, while the smallest will be interpreted as 
+                    north, the next bigger one as east and so 
+                    on.</i></li>
+                    <li><i>The roof is not displayed correctly yet</i></li>
                     </div>
                         </div>
                     </div>
@@ -611,17 +610,29 @@ def create_simple_3d_visualization(bldg_data, roof_angle=30):
             # Ecken des aktuellen Stockwerks
             floor_height = height * floor
             vertices = [
-                (-length_south/2, -length_east/2, floor_height),
-                (-length_south/2 + length_north, -length_east/2, floor_height),
-                (-length_south/2 + length_north, - length_east/2 + length_west,
+                (- length_south / 2,
+                 - length_east / 2,
                  floor_height),
-                (-length_south/2, - length_east/2 + length_west, floor_height),
-                (-length_south/2, -length_east/2, floor_height + height),
-                (-length_south/2 + length_north, -length_east/2,
+                (- length_south / 2 + length_north,
+                 -length_east / 2,
+                 floor_height),
+                (- length_south / 2 + length_north,
+                 - length_east / 2 + length_west,
+                 floor_height),
+                (- length_south / 2,
+                 - length_east / 2 + length_west,
+                 floor_height),
+                (- length_south / 2,
+                 -length_east / 2,
                  floor_height + height),
-                (-length_south/2 + length_north, - length_east/2 + length_west,
+                (- length_south / 2 + length_north,
+                 -length_east / 2,
                  floor_height + height),
-                (-length_south/2, - length_east/2 + length_west,
+                (- length_south / 2 + length_north,
+                 - length_east / 2 + length_west,
+                 floor_height + height),
+                (- length_south / 2,
+                 - length_east / 2 + length_west,
                  floor_height + height),
             ]
 
