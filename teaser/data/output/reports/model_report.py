@@ -38,6 +38,8 @@ def create_model_report(prj, path):
         bldg_name = bldg.name
         prj_data[bldg_name] = OrderedDict()
         # create keys
+        if bldg.type_of_building:
+            prj_data[bldg_name]['Type of Building'] = bldg.type_of_building
         prj_data[bldg_name]['Net Ground Area'] = bldg.net_leased_area
         prj_data[bldg_name]['Ground Floor Area'] = 0
         prj_data[bldg_name]['Roof Area'] = 0
@@ -45,12 +47,11 @@ def create_model_report(prj, path):
         prj_data[bldg_name]['Number of Floors'] = bldg.number_of_floors
         prj_data[bldg_name]['Total Air Volume'] = bldg.volume
         prj_data[bldg_name]['Number of Zones'] = len(bldg.thermal_zones)
-        # prj_data[bldg_name]['CalculatedHeatLoad'] = bldg.sum_heat_load
-        # prj_data[bldg_name]['CalculatedCoolingLoad'] = bldg.sum_cooling_load
-        # prj_data[bldg_name]['YearOfConstruction'] = bldg.year_of_construction
+        prj_data[bldg_name]['Year of Construction'] = bldg.year_of_construction
+        prj_data[bldg_name]['Calculated Heat Load'] = bldg.sum_heat_load
+        prj_data[bldg_name]['Calculated Cooling Load'] = bldg.sum_cooling_load
 
-        # if bldg.type_of_building:
-        #     prj_data[bldg_name]['TypeOfBuilding'] = bldg.type_of_building
+
         # todo use bldg.*_names if existing
 
         prj_data[bldg_name]['Outerwall Area'] = {}
@@ -254,8 +255,10 @@ def create_csv_report(bldg_data, output_path_base):
     ]
     # round values
     for key, value in prj_data_flat.items():
-        prj_data_flat[key] = round(value, 2)
-
+        if not isinstance(value, str):
+            prj_data_flat[key] = round(value, 2)
+        else:
+            prj_data_flat[key] = value
     bldg_data_flat_sorted = [
         (k, prj_data_flat[k]) for k in bldg_sorted_list if
         k in prj_data_flat.keys()]
@@ -380,27 +383,45 @@ def create_html_page(
 
     current_category = None
     for key, value in bldg_data.items():
+        unit = "-"
         category = None
-
+        list_item = False
         # Handle category names
-        if key.startswith("Window") or key.startswith("Outerwall"):
+        if ("window" in key.lower() or "wall" in key.lower()) \
+                and "uvalue" not in key.lower():
             category = "Wall and Window Areas"
-        elif key.startswith("UValue"):
+            unit = "m²"
+        elif key.startswith("UValue") or key.startswith("Gvalue"):
             category = "U-Values (mean)"
+            unit = ["kW", "kg K"]
         elif key in [
             "Net Ground Area",
             "Roof Area",
             "Floor Height",
             "Number of Floors",
-            "Total Air Volume"
-            "Number of Zones"
+            "Total Air Volume",
+            "Number of Zones",
+            "Year of Construction",
+            "Type of Building"
         ]:
             category = "Base Values"
+            unit = "m²"
+        elif key.startswith("Calculated"):
+            category = "Calculated Values"
+            unit = "W"
 
+        if key.lower() in [
+            "number of floors", "number of zones", "year of construction",
+            "window-wall-ratio", "gvalue window", "type of building"]:
+            unit = "-"
+        if key.lower() == "total air volume":
+            unit = "m³"
+        if key.lower() == "floor height":
+            unit = "m"
         if category and category != current_category:
             html_content += f"""
                     <tr class="table-secondary">
-                        <th colspan="2">{html.escape(category)}</th>
+                        <th colspan="3">{html.escape(category)}</th>
                     </tr>
                 """
             if category == "Wall and Window Areas":
@@ -412,25 +433,45 @@ def create_html_page(
                 """
             current_category = category
 
-
         # handle subdict for outerwall and window area with directions
         if key == "Outerwall Area" or key == "Window Area":
+            list_item = True
             for orient, area in bldg_data[key].items():
+                value = area
                 html_content += f"""
                         <tr>
                             <th scope="row">{html.escape(str(key))} 
                              {html.escape(str(orient))}</th>
-                            <td>{html.escape(str(round(area, 2)))}</td>
-                        </tr>
+                 <td>{html.escape(
+                str(round(value, 2)))} </td>
+                <td style=
+                    "text-align: center; background-color: #D3D3D3;"> 
+                                        {html.escape(unit)}</td>
+                </tr>
                     """
-
         else:
             key_human_readable = ' '.join(
                 [word.capitalize() for word in key.split('_')])
             html_content += f"""
                     <tr>
                         <th scope="row">{html.escape(key_human_readable)}</th>
-                        <td>{html.escape(str(round(value, 2)))}</td>
+                        """
+            if not isinstance(value, str):
+                value = str(round(value, 2))
+        if not list_item:
+            html_content += f"""
+                <td>{html.escape(value)} </td>
+                    <td style=
+                        "text-align: center; background-color: #D3D3D3;"> 
+                    """
+            if isinstance(unit, list):
+                html_content += f"""
+                        {html.escape(unit[0])} <frac> {html.escape(unit[1])}</td>
+                    </tr>
+                """
+            else:
+                html_content += f"""
+                        {html.escape(unit)}</td>
                     </tr>
                 """
     if iframe_src:
