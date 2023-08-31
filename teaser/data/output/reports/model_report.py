@@ -21,7 +21,14 @@ def create_model_report(prj, path):
     This creates a html and .csv model report for each building of the project
     for easier analysis of the created buildings. Currently only the basic
     values for areas and U-values and an abstracted 3D visualization are part of
-    the report. Wall constructions and similar things might come in the future.
+    the report.
+
+    Known shortcomings:
+    -Wall constructions and similar things might come in the future.
+    -No roof support yet (angle is just a dummy)
+    -Only support of buildings with 4 orientations (but it can be any orientation). But the building will not be rotated yet. 
+     Meaning that the smallest orientation value (0-359°) will be taken as north, the next as east and so on.
+
 
     Parameters
     ----------
