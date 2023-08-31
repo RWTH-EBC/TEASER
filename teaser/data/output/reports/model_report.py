@@ -441,12 +441,12 @@ def create_html_page(bldg_data, prj_name, bldg_name, html_file_name, iframe_src)
                 value = area
                 html_content += f"""
                     <tr>
-                    <th scope="row">{html.escape(str(key))} 
+                    <th scope="row">{html.escape(str(key))}
                         {html.escape(str(orient))}</th>
                  <td>{html.escape(
                     str(round(value, 2)))} </td>
                 <td style=
-                    "text-align: center; background-color: #D3D3D3;"> 
+                    "text-align: center; background-color: #D3D3D3;">
                                         {html.escape(unit)}</td>
                 </tr>
                     """
@@ -464,7 +464,7 @@ def create_html_page(bldg_data, prj_name, bldg_name, html_file_name, iframe_src)
             html_content += f"""
                 <td>{html.escape(value)} </td>
                     <td style=
-                        "text-align: center; background-color: #D3D3D3;"> 
+                        "text-align: center; background-color: #D3D3D3;">
                     """
             if isinstance(unit, list):
                 html_content += f"""
@@ -478,21 +478,19 @@ def create_html_page(bldg_data, prj_name, bldg_name, html_file_name, iframe_src)
                 """
     if iframe_src:
         html_content += f"""
-                        </table>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="iframe-container">
-                            <iframe src="{iframe_src}"></iframe>
-                            <div class="legend">
-                            <span class="badge badge-light" 
-                            style="background-color:
-                             gray;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                            Walls 
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="badge badge-light" 
-                            style="background-color:
-                             blue;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                            Windows <br>"""
+</table>
+</div>
+<div class="col-md-6">
+<div class="iframe-container">
+<iframe src="{iframe_src}"></iframe>
+<div class="legend">
+<span class="badge badge-light" 
+style="background-color: gray;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+Walls 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span class="badge badge-light" 
+style="background-color: blue;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+Windows <br>"""
     else:
         html_content += f"""
                                 </table>
@@ -503,22 +501,21 @@ def create_html_page(bldg_data, prj_name, bldg_name, html_file_name, iframe_src)
                                     available. 
                                     Error during image creation.</b> <br></p>"""
     html_content += f"""
-                        <i>Assumptions</i>: <br>
-                        <li><i>All windows of a storey and with the same 
-                        orientation are put together into one big window 
-                        which is placed in the middle of the storey</i></li>
-                        <li><i>Only works for buildings with 4 directions 
-                        currently, while the smallest will be interpreted as
-                        north, the next bigger one as east and so on.</i></li>
-                        <li><i>The roof is not displayed correctly yet</i></li>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </body>
-        </html>
-        """
+<i>Assumptions</i>: <br>
+<li><i>All windows of a storey and with the same 
+orientation are put together into one big window 
+which is placed in the middle of the storey</i></li>
+<li><i>Only works for buildings with 4 directions 
+currently, while the smallest will be interpreted as
+north, the next bigger one as east and so on.</i></li>
+<li><i>The roof is not displayed correctly yet</i></li>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+"""
 
     with open(html_file_name, "w") as html_file:
         html_file.write(html_content)
