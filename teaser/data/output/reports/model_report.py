@@ -478,42 +478,42 @@ def create_html_page(bldg_data, prj_name, bldg_name, html_file_name, iframe_src)
                 """
     if iframe_src:
         html_content += f"""
-</table>
-</div>
-<div class="col-md-6">
-<div class="iframe-container">
-<iframe src="{iframe_src}"></iframe>
-<div class="legend">
-<span class="badge badge-light" 
-style="background-color: gray;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-Walls 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<span class="badge badge-light" 
-style="background-color: blue;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-Windows <br>"""
+            </table>
+                </div>
+                <div class="col-md-6">
+                  <div class="iframe-container">
+                      <iframe src="{iframe_src}"></iframe>
+                          <div class="legend">
+                             <span class="badge badge-light"
+    style="background-color: gray;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    Walls
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span class="badge badge-light"
+    style="background-color: blue;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    Windows <br>"""
     else:
         html_content += f"""
                                 </table>
                             </div>
                             <div class="col-md-6">
                                 <div class="iframe-container">
-                                    <p style="color:Red"><b>Error: No graphic 
-                                    available. 
+                                    <p style="color:Red"><b>Error: No graphic
+                                    available.
                                     Error during image creation.</b> <br></p>"""
     html_content += f"""
-<i>Assumptions</i>: <br>
-<li><i>All windows of a storey and with the same 
-orientation are put together into one big window 
-which is placed in the middle of the storey</i></li>
-<li><i>Only works for buildings with 4 directions 
-currently, while the smallest will be interpreted as
-north, the next bigger one as east and so on.</i></li>
-<li><i>The roof is not displayed correctly yet</i></li>
-</div>
-</div>
-</div>
-</div>
-</body>
+                    <i>Assumptions</i>: <br>
+                    <li><i>All windows of a storey and with the same
+                    orientation are put together into one big window
+                    which is placed in the middle of the storey</i></li>
+                    <li><i>Only works for buildings with 4 directions currently,
+                     while the smallest will be interpreted as
+                    north, the next bigger one as east and so on.</i></li>
+                    <li><i>The roof is not displayed correctly yet</i></li>
+                </div>
+              </div>
+            </div>
+        </div>
+    </body>
 </html>
 """
 
