@@ -194,7 +194,10 @@ def export_reports(bldg_data, bldg_name, path, prj):
     plotly_file_name = os.path.join(path, "plots", base_name + '_plotly.html')
     # Draw an abstract image of the building and save it with plotly to HTML
     interactive_fig = create_simple_3d_visualization(bldg_data,roof_angle=30)
-    interactive_fig.write_html(plotly_file_name)
+    if interactive_fig:
+        interactive_fig.write_html(plotly_file_name)
+    else:
+        plotly_file_name=None
     html_file_name = os.path.join(output_path_base + '.html')
     create_html_page(
         bldg_data,
@@ -430,28 +433,51 @@ def create_html_page(
                         <td>{html.escape(str(round(value, 2)))}</td>
                     </tr>
                 """
-
+    if iframe_src:
+        html_content += f"""
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="iframe-container">
+                            <iframe src="{iframe_src}"></iframe>
+                            <div class="legend">
+                            <span class="badge badge-light" 
+                            style="background-color:
+                             gray;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            Walls 
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="badge badge-light" 
+                            style="background-color:
+                             blue;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            Windows <br>"""
+    else:
+        html_content += f"""
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="iframe-container">
+                                    <p style="color:Red"><b>Error: No graphic 
+                                    available. 
+                                    Error during image creation.</b> <br></p>"""
     html_content += f"""
-                    </table>
-                </div>
-                <div class="col-md-6">
-                    <div class="iframe-container">
-                        <iframe src="{iframe_src}"></iframe>
-                        <div class="legend">
-                        <span class="badge badge-light" style="background-color:
-                         gray;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        Walls &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="badge badge-light" style="background-color:
-                         blue;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        Windows
-                </div>
+                    <i>Assumptions</i>: <br>
+                    <li><i>All windows of a storey and with the same 
+                    orientation are put together into one big window 
+                    which is placed in the middle of the storey</i></li>
+                    <li><i>Only works for buildings with 4 directions 
+                    currently, while the smallest will be interpreted as
+                     north, the next bigger one as east and so 
+                     on.</i></li>
+                    <li><i>The roof is not displayed correctly 
+                    yet</i></li>
+                    </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </body>
-    </html>
-    """
+        </body>
+        </html>
+        """
 
     with open(html_file_name, 'w') as html_file:
         html_file.write(html_content)
@@ -472,7 +498,7 @@ def create_simple_3d_visualization(bldg_data, roof_angle=30):
         Positive x: East
         Negative y: South
         Negative x: West
-    * The roof is not displayed correctly # TODO
+    * The roof is not displayed correctly yet # TODO
      """
 
     def get_value_with_default(lst, index, default_value):
@@ -480,152 +506,168 @@ def create_simple_3d_visualization(bldg_data, roof_angle=30):
             return lst[index]
         except IndexError:
             return default_value
+    try:
+        area_values = list(bldg_data['Outerwall Area'].values())
+        window_values = list(bldg_data['Window Area'].values())
+        # TODO: use orientations as well and "turn" the vertices based on this.
+        #  Currently the first value (which is the smallest) will be taken as
+        #  north, the next one as east and so on. Only the first 4 values are
+        #  taken into account.
+        area_north = get_value_with_default(area_values, 0, 0)
+        area_east = get_value_with_default(area_values, 1, 0)
+        area_south = get_value_with_default(area_values, 2, 0)
+        area_west = get_value_with_default(area_values, 3, 0)
+        window_area_north = get_value_with_default(window_values, 0, 0)
+        window_area_east = get_value_with_default(window_values, 1, 0)
+        window_area_south = get_value_with_default(window_values, 2, 0)
+        window_area_west = get_value_with_default(window_values, 3, 0)
+        height = bldg_data['Floor Height']
+        num_floors = bldg_data['Number of Floors']
 
-    area_values = list(bldg_data['Outerwall Area'].values())
-    window_values = list(bldg_data['Window Area'].values())
-    # TODO: use orientations as well and "turn" the vertices based on this.
-    #  Currently the first value (which is the smallest) will be taken as north,
-    #  the next one as east and so on. Only the first 4 values are taken into
-    #  account.
-    area_north = get_value_with_default(area_values, 0, 0)
-    area_east = get_value_with_default(area_values, 1, 0)
-    area_south = get_value_with_default(area_values, 2, 0)
-    area_west = get_value_with_default(area_values, 3, 0)
-    window_area_north = get_value_with_default(window_values, 0, 0)
-    window_area_east = get_value_with_default(window_values, 1, 0)
-    window_area_south = get_value_with_default(window_values, 2, 0)
-    window_area_west = get_value_with_default(window_values, 3, 0)
-    height = bldg_data['Floor Height']
-    num_floors = bldg_data['Number of Floors']
+        length_north = area_north / (num_floors * height)
+        length_east = area_east / (num_floors * height)
+        length_south = area_south / (num_floors * height)
+        length_west = area_west / (num_floors * height)
 
-    length_north = area_north / (num_floors * height)
-    length_east = area_east / (num_floors * height)
-    length_south = area_south / (num_floors * height)
-    length_west = area_west / (num_floors * height)
+        fig = go.Figure()
 
-    fig = go.Figure()
-
-    fig.update_layout(
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
-        margin=dict(l=5, r=5, b=5, t=0),  # Adjust margins to control padding
-        scene=dict(
-            xaxis=dict(
-                gridcolor="white",
-                showbackground=False,
-                zerolinecolor="white", ),
-            yaxis=dict(
-                gridcolor="white",
-                showbackground=False,
-                zerolinecolor="white"),
-            zaxis=dict(
-                gridcolor="white",
-                showbackground=False,
-                zerolinecolor="white"),
-            aspectmode='cube',
-            xaxis_showgrid=False,
-            yaxis_showgrid=False,
-            zaxis_showgrid=False,
-            xaxis_title='',
-            yaxis_title='',
-            zaxis_title="",
+        fig.update_layout(
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)',
+            margin=dict(l=5, r=5, b=5, t=0),
+            scene=dict(
+                xaxis=dict(
+                    gridcolor="white",
+                    showbackground=False,
+                    zerolinecolor="white", ),
+                yaxis=dict(
+                    gridcolor="white",
+                    showbackground=False,
+                    zerolinecolor="white"),
+                zaxis=dict(
+                    gridcolor="white",
+                    showbackground=False,
+                    zerolinecolor="white"),
+                aspectmode='cube',
+                xaxis_showgrid=False,
+                yaxis_showgrid=False,
+                zaxis_showgrid=False,
+                xaxis_title='',
+                yaxis_title='',
+                zaxis_title="",
+            )
         )
-    )
 
-    max_length = max(length_north, length_south, length_west, length_east)
-    x_y_axis_sizing = (max_length/2) * 1.1
-    fig.update_layout(scene=dict(
-        xaxis=dict(range=[-x_y_axis_sizing, x_y_axis_sizing]),
-        yaxis=dict(range=[-x_y_axis_sizing, x_y_axis_sizing]),
-        zaxis=dict(range=[0, max_length])
-    ))
-    fig = add_compass_to_3d_plot(fig, x_y_axis_sizing)
-    for floor in range(num_floors):
-        # Ecken des aktuellen Stockwerks
-        floor_height = height * floor
-        vertices = [
-            (-length_south/2, -length_east/2, floor_height),
-            (-length_south/2 + length_north, -length_east/2, floor_height),
-            (-length_south/2 + length_north, - length_east/2 + length_west, floor_height),
-            (-length_south/2,  - length_east/2 + length_west, floor_height),
-            (-length_south/2, -length_east/2, floor_height + height),
-            (-length_south/2 + length_north, -length_east/2, floor_height + height),
-            (-length_south/2 + length_north, - length_east/2 + length_west, floor_height + height),
-            (-length_south/2, - length_east/2 + length_west, floor_height + height),
-        ]
+        max_length = max(length_north, length_south, length_west, length_east)
+        x_y_axis_sizing = (max_length/2) * 1.1
+        fig.update_layout(scene=dict(
+            xaxis=dict(range=[-x_y_axis_sizing, x_y_axis_sizing]),
+            yaxis=dict(range=[-x_y_axis_sizing, x_y_axis_sizing]),
+            zaxis=dict(range=[0, max_length])
+        ))
+        fig = add_compass_to_3d_plot(fig, x_y_axis_sizing)
+        for floor in range(num_floors):
+            # Ecken des aktuellen Stockwerks
+            floor_height = height * floor
+            vertices = [
+                (-length_south/2, -length_east/2, floor_height),
+                (-length_south/2 + length_north, -length_east/2, floor_height),
+                (-length_south/2 + length_north, - length_east/2 + length_west,
+                 floor_height),
+                (-length_south/2, - length_east/2 + length_west, floor_height),
+                (-length_south/2, -length_east/2, floor_height + height),
+                (-length_south/2 + length_north, -length_east/2,
+                 floor_height + height),
+                (-length_south/2 + length_north, - length_east/2 + length_west,
+                 floor_height + height),
+                (-length_south/2, - length_east/2 + length_west,
+                 floor_height + height),
+            ]
 
-        edges = [
-            # 0: bottom
-            [vertices[0], vertices[1], vertices[2], vertices[3], vertices[0]],
-            # 1: top
-            [vertices[4], vertices[5], vertices[6], vertices[7], vertices[4]],
-            # 2: south
-            [vertices[0], vertices[1], vertices[5], vertices[4], vertices[0]],
-            # 3: north
-            [vertices[2], vertices[3], vertices[7], vertices[6], vertices[2]],
-            # 4: east
-            [vertices[1], vertices[2], vertices[6], vertices[5], vertices[1]],
-            # 5: west
-            [vertices[4], vertices[7], vertices[3], vertices[0], vertices[4]],
-        ]
+            edges = [
+                # 0: bottom
+                [vertices[0], vertices[1], vertices[2], vertices[3],
+                 vertices[0]],
+                # 1: top
+                [vertices[4], vertices[5], vertices[6], vertices[7],
+                 vertices[4]],
+                # 2: south
+                [vertices[0], vertices[1], vertices[5], vertices[4],
+                 vertices[0]],
+                # 3: north
+                [vertices[2], vertices[3], vertices[7], vertices[6],
+                 vertices[2]],
+                # 4: east
+                [vertices[1], vertices[2], vertices[6], vertices[5],
+                 vertices[1]],
+                # 5: west
+                [vertices[4], vertices[7], vertices[3], vertices[0],
+                 vertices[4]],
+            ]
 
-        # Add walls as 3D polygons with color fill
-        for edge in edges:
-            xs, ys, zs = zip(*edge)
-            fig.add_trace(go.Mesh3d(x=xs, y=ys, z=zs,
-                                    i=[0, 0, 1, 0],
-                                    j=[1, 2, 2, 3],
-                                    k=[2, 3, 3, 1],
-                                    opacity=0.25, color='gray',
-                                    hoverinfo='none'))
-
-        # Fenster hinzufügen
-        window_gap_top_bottom = 0.5
-        for i, (window_area, wall_vertices) in enumerate(zip(
-                [window_area_north, window_area_east,
-                 window_area_south, window_area_west],
-                [edges[3], edges[4], edges[2], edges[5]])):
-            window_height = height - window_gap_top_bottom
-            window_width = window_area / (num_floors * window_height)
-            window_x_center = wall_vertices[0][0] + (
-                wall_vertices[1][0] - wall_vertices[0][0]) / 2
-            window_y_center = wall_vertices[0][1] + (
-                wall_vertices[2][1] - wall_vertices[0][1]) / 2
-            window_z_center = floor_height + window_gap_top_bottom \
-                / 2 + window_height / 2
-
-            if i == 0 or i == 2:
-                fig.add_trace(go.Mesh3d(x=[window_x_center - window_width / 2,
-                                           window_x_center + window_width / 2,
-                                           window_x_center + window_width / 2,
-                                           window_x_center - window_width / 2],
-                                        y=[window_y_center, window_y_center,
-                                           window_y_center, window_y_center],
-                                        z=[window_z_center - window_height / 2,
-                                           window_z_center - window_height / 2,
-                                           window_z_center + window_height / 2,
-                                           window_z_center + window_height / 2],
+            # Add walls as 3D polygons with color fill
+            for edge in edges:
+                xs, ys, zs = zip(*edge)
+                fig.add_trace(go.Mesh3d(x=xs, y=ys, z=zs,
                                         i=[0, 0, 1, 0],
                                         j=[1, 2, 2, 3],
                                         k=[2, 3, 3, 1],
-                                        opacity=0.7, color='blue',
+                                        opacity=0.25, color='gray',
                                         hoverinfo='none'))
-            else:
-                fig.add_trace(go.Mesh3d(
-                    x=[window_x_center, window_x_center, window_x_center,
-                       window_x_center],
-                    y=[window_y_center - window_width / 2,
-                       window_y_center + window_width / 2,
-                       window_y_center + window_width / 2,
-                       window_y_center - window_width / 2],
-                    z=[window_z_center - window_height / 2,
-                       window_z_center - window_height / 2,
-                       window_z_center + window_height / 2,
-                       window_z_center + window_height / 2],
-                    i=[0, 0, 1, 0],
-                    j=[1, 2, 2, 3],
-                    k=[2, 3, 3, 1],
-                    opacity=0.7, color='blue',
-                    hoverinfo='none'))
 
-    return fig
+            # Fenster hinzufügen
+            window_gap_top_bottom = 0.5
+            for i, (window_area, wall_vertices) in enumerate(zip(
+                    [window_area_north, window_area_east,
+                     window_area_south, window_area_west],
+                    [edges[3], edges[4], edges[2], edges[5]])):
+                window_height = height - window_gap_top_bottom
+                window_width = window_area / (num_floors * window_height)
+                window_x_center = wall_vertices[0][0] + (
+                    wall_vertices[1][0] - wall_vertices[0][0]) / 2
+                window_y_center = wall_vertices[0][1] + (
+                    wall_vertices[2][1] - wall_vertices[0][1]) / 2
+                window_z_center = floor_height + window_gap_top_bottom \
+                    / 2 + window_height / 2
+
+                if i == 0 or i == 2:
+                    fig.add_trace(
+                        go.Mesh3d(x=[window_x_center - window_width / 2,
+                                     window_x_center + window_width / 2,
+                                     window_x_center + window_width / 2,
+                                     window_x_center - window_width / 2],
+                                  y=[window_y_center, window_y_center,
+                                     window_y_center, window_y_center],
+                                  z=[window_z_center - window_height / 2,
+                                     window_z_center - window_height / 2,
+                                     window_z_center + window_height / 2,
+                                     window_z_center + window_height / 2],
+                                  i=[0, 0, 1, 0],
+                                  j=[1, 2, 2, 3],
+                                  k=[2, 3, 3, 1],
+                                  opacity=0.7, color='blue',
+                                  hoverinfo='none'))
+                else:
+                    fig.add_trace(go.Mesh3d(
+                        x=[window_x_center, window_x_center, window_x_center,
+                           window_x_center],
+                        y=[window_y_center - window_width / 2,
+                           window_y_center + window_width / 2,
+                           window_y_center + window_width / 2,
+                           window_y_center - window_width / 2],
+                        z=[window_z_center - window_height / 2,
+                           window_z_center - window_height / 2,
+                           window_z_center + window_height / 2,
+                           window_z_center + window_height / 2],
+                        i=[0, 0, 1, 0],
+                        j=[1, 2, 2, 3],
+                        k=[2, 3, 3, 1],
+                        opacity=0.7, color='blue',
+                        hoverinfo='none'))
+
+        return fig
+    except Exception as e:
+        message = type(e).__name__ + str(e.args)
+        print(f"An error occured during creating the simplified plot for model "
+              f"report. Will continue without plot. Error: {message}: ")
+        return None
