@@ -9,6 +9,7 @@ import teaser.data.output.teaserjson_output as tjson_out
 import teaser.data.output.aixlib_output as aixlib_output
 import teaser.data.output.ibpsa_output as ibpsa_output
 from teaser.data.dataclass import DataClass
+from teaser.data.output.reports import model_report
 from teaser.logic.archetypebuildings.bmvbs.office import Office
 from teaser.logic.archetypebuildings.bmvbs.custom.institute import Institute
 from teaser.logic.archetypebuildings.bmvbs.custom.institute4 import Institute4
@@ -1032,7 +1033,8 @@ class Project(object):
         corG=None,
         internal_id=None,
         path=None,
-        use_postprocessing_calc=False
+        use_postprocessing_calc=False,
+        report=False
     ):
         """Exports values to a record file for Modelica simulation
 
@@ -1054,6 +1056,9 @@ class Project(object):
         path : string
             if the Files should not be stored in default output path of TEASER,
             an alternative path can be specified as a full path
+        report: boolean
+            if True a model report in form of a html and csv file will be
+            created for the exported project.
         """
 
         if building_model is not None or zone_model is not None or corG is not None:
@@ -1084,6 +1089,10 @@ class Project(object):
                         buildings=[bldg], prj=self, path=path,
                         use_postprocessing_calc=use_postprocessing_calc
                     )
+
+        if report:
+            report_path = os.path.join(path, "Resources", "ModelReport")
+            model_report.create_model_report(prj=self, path=report_path)
         return path
 
     def export_ibpsa(self, library="AixLib", internal_id=None, path=None):

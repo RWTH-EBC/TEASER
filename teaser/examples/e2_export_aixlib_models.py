@@ -69,7 +69,8 @@ def example_export_aixlib():
 
     path = prj.export_aixlib(
         internal_id=None,
-        path=None)
+        path=None,
+        report=True)
 
     return path
 
