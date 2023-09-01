@@ -1,12 +1,10 @@
 
-Created July 2015
-TEASER Development Team
+# Example 7: Retrofit buildings
+This module contains an example that shows how to retrofit all buildings
+in a TEASER project with different setups
+You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)
 
 ```python
-"""This module contains an example that shows how to retrofit all buildings
-in a TEASER project with different setups
-"""
-
 import teaser.examples.e1_generate_archetype as e1
 ```
 
