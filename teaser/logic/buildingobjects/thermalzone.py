@@ -56,11 +56,10 @@ class ThermalZone(object):
         List of Floor instances.
     ceilings: list
         List of Ceiling instances.
-    use_conditions : instance of UseConditions()
+    use_conditions : UseConditions
         Instance of UseConditions with all relevant information for the usage
         of the thermal zone
-    model_attr : instance of OneElement(), TwoElement(), ThreeElement() or
-                FourElement()
+    model_attr : Union[OneElement, TwoElement, ThreeElement, FourElement]
         Instance of OneElement(), TwoElement(), ThreeElement() or
         FourElement(), that holds all calculation functions and attributes
         needed for the specific model.
@@ -117,11 +116,12 @@ class ThermalZone(object):
         the corresponding calculation Class (e.g. TwoElement) and calculates
         the zone parameters. Currently the function is able to distinguishes
         between the number of elements, we distinguish between:
+
             - one element: all outer walls are aggregated into one element,
-            inner wall are neglected
+              inner wall are neglected
             - two elements: exterior and interior walls are aggregated
             - three elements: like 2, but floor or roofs are aggregated
-            separately
+              separately
             - four elements: roofs and floors are aggregated separately
 
         For all four options we can chose if the thermal conduction through

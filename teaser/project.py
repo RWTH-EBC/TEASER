@@ -357,9 +357,9 @@ class Project(object):
         construction_type : str
             Construction type of used wall constructions default is "heavy")
 
-            1. heavy: heavy construction
+            - heavy: heavy construction
 
-            2. light: light construction
+            - light: light construction
 
         Returns
         -------
@@ -523,55 +523,72 @@ class Project(object):
             and
             assigned to attribute central_ahu. This instance holds information
             for central Air Handling units. Default is False.
-internal_gains_mode: int [1, 2, 3]
-        mode for the internal gains calculation done in AixLib:
-        1: Temperature and activity degree dependent heat flux calculation for persons. The
-           calculation is based on  SIA 2024 (default)
-        2: Temperature and activity degree independent heat flux calculation for persons, the max.
-           heatflowrate is prescribed by the parameter
-           fixed_heat_flow_rate_persons.
-        3: Temperature and activity degree dependent calculation with
-           consideration of moisture and co2. The moisture calculation is
-           based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
-           Engineering ToolBox (2004) and regards only persons.
+        internal_gains_mode: int [1, 2, 3]
+            mode for the internal gains calculation done in AixLib:
+
+            1. Temperature and activity degree dependent heat flux calculation for persons. The
+               calculation is based on  SIA 2024 (default)
+
+            2. Temperature and activity degree independent heat flux calculation for persons, the max.
+               heatflowrate is prescribed by the parameter
+               fixed_heat_flow_rate_persons.
+
+            3. Temperature and activity degree dependent calculation with
+               consideration of moisture and co2. The moisture calculation is
+               based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
+               Engineering ToolBox (2004) and regards only persons.
+
         residential_layout : int
             Structure of floor plan (default = 0) CAUTION only used for iwu
-                0: compact
-                1: elongated/complex
+
+            0. compact
+
+            1. elongated/complex
+
         neighbour_buildings : int
             Number of neighbour buildings. CAUTION: this will not change
             the orientation of the buildings wall, but just the overall
             exterior wall and window area(!) (default = 0)
-                0: no neighbour
-                1: one neighbour
-                2: two neighbours
+
+            0. no neighbour
+            1. one neighbour
+            2. two neighbours
+
         attic : int
             Design of the attic. CAUTION: this will not change the orientation
             or tilt of the roof instances, but just adapt the roof area(!) (
             default = 0) CAUTION only used for iwu
-                0: flat roof
-                1: non heated attic
-                2: partly heated attic
-                3: heated attic
+
+            0. flat roof
+            1. non heated attic
+            2. partly heated attic
+            3. heated attic
+
         cellar : int
             Design of the of cellar CAUTION: this will not change the
             orientation, tilt of GroundFloor instances, nor the number or area
             of ThermalZones, but will change GroundFloor area(!) (default = 0)
             CAUTION only used for iwu
-                0: no cellar
-                1: non heated cellar
-                2: partly heated cellar
-                3: heated cellar
+
+            0. no cellar
+            1. non heated cellar
+            2. partly heated cellar
+            3. heated cellar
+
         dormer : str
             Is a dormer attached to the roof? CAUTION: this will not
             change roof or window orientation or tilt, but just adapt the roof
             area(!) (default = 0) CAUTION only used for iwu
-                0: no dormer
-                1: dormer
+
+            0. no dormer
+            1. dormer
+
         construction_type : str
             Construction type of used wall constructions default is "heavy")
-                heavy: heavy construction
-                light: light construction
+
+            - heavy: heavy construction
+            - light: light construction
+
         number_of_apartments : int
             number of apartments inside Building (default = 1). CAUTION only
             used for urbanrenet

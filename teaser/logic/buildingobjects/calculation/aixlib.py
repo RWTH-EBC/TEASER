@@ -256,8 +256,8 @@ class AixLib(object):
         3,6,9,...  Column : profile_machines
         4,7,10,... Column : profile_lighting
 
-        Note
-        ----
+        Notes
+        -----
         When time line is created, we need to add a 0 to first element of
         all boundaries. This is due to to expected format in Modelica.
 

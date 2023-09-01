@@ -49,29 +49,33 @@ class EST1a(Residential):
         central Air Handling units. Default is False.
     internal_gains_mode: int [1, 2, 3]
         mode for the internal gains calculation done in AixLib:
-        1: Temperature and activity degree dependent heat flux calculation for persons. The
+
+        1. Temperature and activity degree dependent heat flux calculation for persons. The
            calculation is based on  SIA 2024 (default)
-        2: Temperature and activity degree independent heat flux calculation for persons, the max.
+        2. Temperature and activity degree independent heat flux calculation for persons, the max.
            heatflowrate is prescribed by the parameter
            fixed_heat_flow_rate_persons.
-        3: Temperature and activity degree dependent calculation with
+        3. Temperature and activity degree dependent calculation with
            consideration of moisture and co2. The moisture calculation is
            based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
            Engineering ToolBox (2004) and regards only persons.
+
     neighbour_buildings : int
         Number of neighbour buildings. CAUTION: this will not change
         the orientation of the buildings wall, but just the overall
         exterior wall and window area(!) (default = 0)
-            0: no neighbour
-            1: one neighbour
-            2: two neighbours
+
+        0. no neighbour
+        1. one neighbour
+        2. two neighbours
+
     construction_type : str
         Construction type of used wall constructions default is "heavy")
             heavy: heavy construction
             light: light construction
 
-    Note
-    ----
+    Notes
+    -----
     The listed attributes are just the ones that are set by the user
     calculated values are not included in this list. Changing these values is
     expert mode.

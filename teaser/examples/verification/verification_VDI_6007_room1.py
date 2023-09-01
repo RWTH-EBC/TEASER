@@ -1,5 +1,5 @@
 """
-This script loads the VDI 6007 Room 1 as *.teaserjson and computes
+This script loads the VDI 6007 Room 1 as `*.teaserjson` and computes
 parameters. The parameters are then compared with the ones from Rouvel
 """
 

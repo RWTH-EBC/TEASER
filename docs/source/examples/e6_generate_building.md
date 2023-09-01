@@ -1,5 +1,7 @@
- Created July 2015
- TEASER Development Team
+
+Created July 2015
+TEASER Development Team
+
 ```python
 """This module contains an example that shows to create a building not using
 the archetype approach but adding all information separately. In this example
@@ -8,24 +10,30 @@ application we suggest to use PEP008 and import them at the beginning of the
 script.
 """
 ```
- First step: Import the TEASER API (called Project) into your Python module
+
+First step: Import the TEASER API (called Project) into your Python module
+
 ```python
 from teaser.project import Project
 ```
- To use the API instantiate the Project class and rename the Project. The
- parameter load_data=True indicates that we load data into our
- Project (e.g. for Material properties and typical wall constructions.
- This can take a few seconds, depending on the size of the used data base.
+
+To use the API instantiate the Project class and rename the Project. The
+parameter load_data=True indicates that we load data into our
+Project (e.g. for Material properties and typical wall constructions.
+This can take a few seconds, depending on the size of the used data base.
+
 ```python
 prj = Project(load_data=True)
 prj.name = "BuildingExample"
 ```
- Instantiate a Building class and set the Project API as a parent to
- this building. This will automatically add this building and all its
- future changes to the project. This is helpful as we can use the data
- base and API functions (like explained in e2 - e5). We also set some
- building parameters. Be careful: Dymola does not like whitespaces in
- names and filenames, thus we will delete them anyway in TEASER.
+
+Instantiate a Building class and set the Project API as a parent to
+this building. This will automatically add this building and all its
+future changes to the project. This is helpful as we can use the data
+base and API functions (like explained in e2 - e5). We also set some
+building parameters. Be careful: Dymola does not like whitespaces in
+names and filenames, thus we will delete them anyway in TEASER.
+
 ```python
 from teaser.logic.buildingobjects.building import Building
 
@@ -37,10 +45,12 @@ bldg.year_of_construction = 2015
 bldg.number_of_floors = 1
 bldg.height_of_floors = 3.5
 ```
- Instantiate a ThermalZone class and set the Building as a parent of it.
- Set some parameters of the thermal zone. Be careful: Dymola does not
- like whitespaces in  names and filenames, thus we will delete them
- anyway in TEASER.
+
+Instantiate a ThermalZone class and set the Building as a parent of it.
+Set some parameters of the thermal zone. Be careful: Dymola does not
+like whitespaces in  names and filenames, thus we will delete them
+anyway in TEASER.
+
 ```python
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
@@ -50,7 +60,9 @@ tz.area = 140.0
 tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
 tz.infiltration_rate = 0.5
 ```
- Instantiate BoundaryConditions and load conditions for `Living`.
+
+Instantiate BoundaryConditions and load conditions for `Living`.
+
 ```python
 from teaser.logic.buildingobjects.useconditions \
     import UseConditions
@@ -58,13 +70,15 @@ from teaser.logic.buildingobjects.useconditions \
 tz.use_conditions = UseConditions(parent=tz)
 tz.use_conditions.load_use_conditions("Living", prj.data)
 ```
- Define two building elements reflecting a pitched roof (south = 180° and
- north = 0°). Setting the the ThermalZone as a parent will automatically
- assign this element to the thermal zone. We also set names, tilt and
- coefficients for heat transfer on the inner and outer side of the
- roofs. If the building has a flat roof, please use -1 as
- orientation. Please read the docs to get more information on these
- parameters.
+
+Define two building elements reflecting a pitched roof (south = 180° and
+north = 0°). Setting the the ThermalZone as a parent will automatically
+assign this element to the thermal zone. We also set names, tilt and
+coefficients for heat transfer on the inner and outer side of the
+roofs. If the building has a flat roof, please use -1 as
+orientation. Please read the docs to get more information on these
+parameters.
+
 ```python
 from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 
@@ -88,14 +102,18 @@ roof_north.outer_convection = 20.0
 roof_north.inner_radiation = 5.0
 roof_north.outer_radiation = 5.0
 ```
- To define the wall constructions we need to instantiate Layer and
- Material objects and set attributes. id indicates the order of wall
- construction from inside to outside (so 0 is on the inner surface). You
- need to set this value!
+
+To define the wall constructions we need to instantiate Layer and
+Material objects and set attributes. id indicates the order of wall
+construction from inside to outside (so 0 is on the inner surface). You
+need to set this value!
+
 ```python
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
 ```
- First layer south
+
+First layer south
+
 ```python
 layer_s1 = Layer(parent=roof_south, id=0)
 layer_s1.thickness = 0.3
@@ -108,7 +126,9 @@ material_s1.density = 120.0
 material_s1.heat_capac = 0.04
 material_s1.thermal_conduc = 1.0
 ```
- Second layer south
+
+Second layer south
+
 ```python
 layer_s2 = Layer(parent=roof_south, id=1)
 layer_s2.thickness = 0.15
@@ -119,7 +139,9 @@ material_s2.density = 1400.0
 material_s2.heat_capac = 0.6
 material_s2.thermal_conduc = 2.5
 ```
- First layer north
+
+First layer north
+
 ```python
 layer_n1 = Layer(parent=roof_north, id=0)
 layer_n1.thickness = 0.3
@@ -132,7 +154,9 @@ material_n1.density = 120.0
 material_n1.heat_capac = 0.04
 material_n1.thermal_conduc = 1.0
 ```
- Second layer north
+
+Second layer north
+
 ```python
 layer_n2 = Layer(parent=roof_north, id=1)
 layer_n2.thickness = 0.15
@@ -143,14 +167,16 @@ material_n2.density = 1400.0
 material_n2.heat_capac = 0.6
 material_n2.thermal_conduc = 2.5
 ```
- Another option is to use the database for typical wall constructions,
- but set area, tilt, orientation individually. To simplify code,
- we save individual information for exterior walls, interior walls into
- dictionaries.
- outer walls
- {'name_of_wall': [area, tilt, orientation]}
- interior walls
- {'name_of_wall': [area, tilt, orientation]}
+
+Another option is to use the database for typical wall constructions,
+but set area, tilt, orientation individually. To simplify code,
+we save individual information for exterior walls, interior walls into
+dictionaries.
+outer walls
+{'name_of_wall': [area, tilt, orientation]}
+interior walls
+{'name_of_wall': [area, tilt, orientation]}
+
 ```python
 from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 
@@ -159,7 +185,9 @@ out_wall_dict = {"OuterWall_north": [10.0, 90.0, 0.0],
                  "OuterWall_south": [10.0, 90.0, 180.0],
                  "OuterWall_west": [14.0, 90.0, 270.0]}
 ```
- For ground floors the orientation is always -2
+
+For ground floors the orientation is always -2
+
 ```python
 ground_floor_dict = {"GroundFloor": [100.0, 0.0, -2]}
 
@@ -187,7 +215,9 @@ for key, value in out_wall_dict.items():
     out_wall.tilt = value[1]
     out_wall.orientation = value[2]
 ```
- Repeat the procedure for inner walls and ground floors
+
+Repeat the procedure for inner walls and ground floors
+
 ```python
 for key, value in in_wall_dict.items():
 

@@ -3,11 +3,6 @@ Advanced examples
 
 The following examples demonstrate how to generate a building without archetype functions and how to generate a whole set of buildings using data base information
 
-Example 7: Generate single building
--------------------------------------
-
-.. mdinclude::  examples/e6_generate_building.md
-
 Example 8: Change boundary conditions
 --------------------------------------
 
