@@ -6256,7 +6256,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh:[1489:1523]\n==test_tabula_th:[1352:1387]\n            name=\"ResidentialBuilding\",\n            year_of_construction=1993,\n            number_of_floors=2,\n            height_of_floors=3.2,\n            net_leased_area=219, construction_type=\"tabula_adv_retrofit\")\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.14 - 0.21)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.11 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.19 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_sfh_2001(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh:[1489:1523]\n==test_tabula_th:[1352:1387]\n            name=\"ResidentialBuilding\",\n            year_of_construction=1993,\n            number_of_floors=2,\n            height_of_floors=3.2,\n            net_leased_area=219, construction_type=\"tabula_adv_retrofit\")\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.14 - 0.21)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.11 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.19 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_th_2001(self):\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -6333,7 +6333,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[445:480]\n==test_tabula_th:[823:858]\n            name=\"ResidentialBuilding\",\n            year_of_construction=1967,\n            number_of_floors=2,\n            height_of_floors=3.2,\n            net_leased_area=219, construction_type=\"tabula_retrofit\")\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.19 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.23 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.31 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_ab_1978(self):\n\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[445:480]\n==test_tabula_th:[823:858]\n            name=\"ResidentialBuilding\",\n            year_of_construction=1967,\n            number_of_floors=2,\n            height_of_floors=3.2,\n            net_leased_area=219, construction_type=\"tabula_retrofit\")\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.19 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.23 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.31 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_th_1978(self):\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -6344,7 +6344,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[409:444]\n==test_tabula_mfh:[900:934]\n            name=\"ResidentialBuilding\",\n            year_of_construction=1956,\n            number_of_floors=2,\n            height_of_floors=3.2,\n            net_leased_area=219, construction_type=\"tabula_retrofit\")\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.23 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.23 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.33 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_ab_1968(self):\n\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[409:444]\n==test_tabula_mfh:[900:934]\n            name=\"ResidentialBuilding\",\n            year_of_construction=1956,\n            number_of_floors=2,\n            height_of_floors=3.2,\n            net_leased_area=219, construction_type=\"tabula_retrofit\")\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.23 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.23 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.33 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_mfh_1968(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -6355,7 +6355,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[663:693]\n==test_tabula_mfh:[1411:1443]\n            name=\"ResidentialBuilding\",\n            year_of_construction=1977,\n            number_of_floors=2,\n            height_of_floors=3.2,\n            net_leased_area=219, construction_type=\"tabula_adv_retrofit\")\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.09 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.13 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.21 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[663:693]\n==test_tabula_mfh:[1411:1443]\n            name=\"ResidentialBuilding\",\n            year_of_construction=1977,\n            number_of_floors=2,\n            height_of_floors=3.2,\n            net_leased_area=219, construction_type=\"tabula_adv_retrofit\")\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.09 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.13 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.21 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_mfh_1983(self):",
             "message-id": "R0801"
         },
         {
@@ -6421,7 +6421,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh:[424:447]\n==test_tabula_th:[351:374]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 1.7 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.77 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_th_1957(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh:[424:447]\n==test_tabula_th:[351:374]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 1.7 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.77 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_sfh_1957(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -6432,7 +6432,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[715:738]\n==test_tabula_sfh:[721:744]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.28 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.35 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_mfh_2100(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[715:738]\n==test_tabula_sfh:[721:744]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.28 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.35 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_sfh_2100(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -6465,7 +6465,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[348:372]\n==test_tabula_th:[726:750]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.34 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.29 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.6 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.6 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_th_1948(self):\n\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[348:372]\n==test_tabula_th:[726:750]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.34 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.29 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.6 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.6 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_ab_1948(self):\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -6509,7 +6509,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1597:1620]\n==test_tabula_sfh:[1605:1628]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.12 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.12 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.7 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_mfh_2100(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1597:1620]\n==test_tabula_sfh:[1605:1628]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.12 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.12 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.7 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_sfh_2100(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -6520,7 +6520,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[674:693]\n==test_tabula_sfh:[1309:1330]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.13 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.21 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[674:693]\n==test_tabula_sfh:[1309:1330]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.13 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.21 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_sfh_1957(self):",
             "message-id": "R0801"
         },
         {
@@ -6608,7 +6608,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[650:668]\n==test_tabula_sfh:[656:674]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.4 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.9 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_sfh_2009(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[650:668]\n==test_tabula_sfh:[656:674]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.4 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.9 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_mfh_2009(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -6674,7 +6674,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[533:552]\n==test_tabula_mfh:[1275:1293]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.22 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_ab_1948(self):\n\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[533:552]\n==test_tabula_mfh:[1275:1293]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.22 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_mfh_1948(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -6685,7 +6685,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[389:408]\n==test_tabula_mfh:[986:1004]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.28 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_mfh_1983(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[389:408]\n==test_tabula_mfh:[986:1004]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.28 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_ab_1957(self):\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -6707,7 +6707,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[316:335]\n==test_tabula_mfh:[545:563]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.77 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 4.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_mfh_1983(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[316:335]\n==test_tabula_mfh:[545:563]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.77 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 4.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_ab_1919(self):\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -6784,7 +6784,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh:[1126:1149]\n==test_tabula_th:[1018:1042]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.15 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.17 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_th_2015(self):\n\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh:[1126:1149]\n==test_tabula_th:[1018:1042]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.15 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.17 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_sfh_2015(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -6806,7 +6806,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh:[429:447]\n==test_tabula_th:[461:479]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.77 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_sfh_1957(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh:[429:447]\n==test_tabula_th:[461:479]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.77 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_th_1983(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -6850,7 +6850,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1016:1039]\n==test_tabula_th:[905:929]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.21 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.26 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_mfh_1994(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1016:1039]\n==test_tabula_th:[905:929]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.21 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.26 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_th_1994(self):\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -6894,7 +6894,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[995:1018]\n==test_tabula_th_dk:[1026:1049]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.13 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.15 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.9 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_adv_retrofit_th_dk_1971(self):\n        prj.add_residential(\n            method='tabula_dk',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[995:1018]\n==test_tabula_th_dk:[1026:1049]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.13 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.15 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.9 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)\n    #\n    def test_tabula_uvalue_adv_retrofit_ab_dk_1949(self):\n        prj.add_residential(\n            method='tabula_dk',",
             "message-id": "R0801"
         },
         {
@@ -6960,7 +6960,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[276:299]\n==test_tabula_mfh:[505:528]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 1.2 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 1.08 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_mfh_1978(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[276:299]\n==test_tabula_mfh:[505:528]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 1.2 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 1.08 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_ab_1978(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -7147,7 +7147,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[350:375]\n==test_tabula_sfh:[386:412]\n        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:\n\n            if \"_1_\" in floor.construction_type:\n\n                assert round(1 / (floor.r_conduc * floor.area),\n                             1) == round((1 / (1 / 0.88 - 0.34)), 1)\n\n            elif \"_2_\" in floor.construction_type:\n\n                assert round(1 / (floor.r_conduc * floor.area),\n                             1) == round((1 / (1 / 1.2 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_sfh_1948(self):\n\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[350:375]\n==test_tabula_sfh:[386:412]\n        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:\n            if \"_1_\" in floor.construction_type:\n\n                assert round(1 / (floor.r_conduc * floor.area),\n                             1) == round((1 / (1 / 0.88 - 0.34)), 1)\n\n            elif \"_2_\" in floor.construction_type:\n\n                assert round(1 / (floor.r_conduc * floor.area),\n                             1) == round((1 / (1 / 1.2 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_mfh_1918(self):\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -7268,7 +7268,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh_dk:[971:991]\n==test_tabula_th_dk:[925:943]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.12 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.9 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n#----------------------------------------------------------------------------------\n\n    def test_tabula_uvalue_adv_retrofit_sfh_dk_1971(self):\n        prj.add_residential(\n            method='tabula_dk',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh_dk:[971:991]\n==test_tabula_th_dk:[925:943]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.12 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.9 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_adv_retrofit_th_dk_1929(self):\n        prj.add_residential(\n            method='tabula_dk',",
             "message-id": "R0801"
         },
         {
@@ -7389,7 +7389,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh:[1136:1149]\n==test_tabula_th:[879:893]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_th_1983(self):\n\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh:[1136:1149]\n==test_tabula_th:[879:893]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_sfh_2015(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -7411,7 +7411,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh:[1066:1079]\n==test_tabula_th:[808:822]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_sfh_2001(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh:[1066:1079]\n==test_tabula_th:[808:822]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_th_1968(self):\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -7422,7 +7422,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh:[1031:1044]\n==test_tabula_th:[772:786]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_sfh_1994(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh:[1031:1044]\n==test_tabula_th:[772:786]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_th_1957(self):\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -7466,7 +7466,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1572:1585]\n==test_tabula_sfh:[1440:1453]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_sfh_1983(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1572:1585]\n==test_tabula_sfh:[1440:1453]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_mfh_2015(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -7488,7 +7488,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1502:1515]\n==test_tabula_sfh:[1360:1373]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_mfh_2001(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1502:1515]\n==test_tabula_sfh:[1360:1373]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_sfh_1968(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -7499,7 +7499,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1467:1480]\n==test_tabula_sfh:[1319:1332]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_sfh_1957(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1467:1480]\n==test_tabula_sfh:[1319:1332]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_mfh_1994(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -7510,7 +7510,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1432:1445]\n==test_tabula_sfh:[1283:1296]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_mfh_1983(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1432:1445]\n==test_tabula_sfh:[1283:1296]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_sfh_1948(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -7521,7 +7521,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1397:1410]\n==test_tabula_sfh:[1243:1256]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_sfh_1918(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1397:1410]\n==test_tabula_sfh:[1243:1256]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_mfh_1978(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -7543,7 +7543,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1201:1215]\n==test_tabula_sfh:[1206:1220]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.1 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_mfh_1859(self):\n\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1201:1215]\n==test_tabula_sfh:[1206:1220]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.1 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_sfh_1859(self):\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -7554,7 +7554,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[760:774]\n==test_tabula_sfh:[766:780]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.1 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_mfh_1859(self):\n\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[760:774]\n==test_tabula_sfh:[766:780]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.1 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_sfh_1859(self):\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -7565,7 +7565,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1131:1144]\n==test_tabula_sfh:[996:1009]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_sfh_1983(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1131:1144]\n==test_tabula_sfh:[996:1009]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_mfh_2015(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -7609,7 +7609,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[725:738]\n==test_tabula_sfh:[1171:1184]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_mfh_2100(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[725:738]\n==test_tabula_sfh:[1171:1184]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_sfh_2100(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -7653,7 +7653,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[1035:1053]\n==test_tabula_sfh_dk:[1087:1107]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.14 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.9 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n#----------------------------------------------------------------------------------\n\n    def test_tabula_uvalue_adv_retrofit_sfh_dk_1929(self):\n        prj.add_residential(\n            method='tabula_dk',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[1035:1053]\n==test_tabula_sfh_dk:[1087:1107]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.14 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.9 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)\n    #\n    def test_tabula_uvalue_adv_retrofit_ab_dk_1959(self):\n        prj.add_residential(\n            method='tabula_dk',",
             "message-id": "R0801"
         },
         {
@@ -7719,7 +7719,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[575:589]\n==test_tabula_mfh:[1280:1293]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_ab_1957(self):\n\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[575:589]\n==test_tabula_mfh:[1280:1293]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_mfh_1948(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -7730,7 +7730,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[538:552]\n==test_tabula_mfh:[1244:1257]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_mfh_1918(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[538:552]\n==test_tabula_mfh:[1244:1257]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_ab_1948(self):\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -7752,7 +7752,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[466:480]\n==test_tabula_mfh:[921:934]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_mfh_1968(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[466:480]\n==test_tabula_mfh:[921:934]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_ab_1978(self):\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -7763,7 +7763,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[430:444]\n==test_tabula_mfh:[956:969]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_ab_1968(self):\n\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[430:444]\n==test_tabula_mfh:[956:969]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_mfh_1978(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -8016,7 +8016,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh_dk:[545:565]\n==test_tabula_th_dk:[342:360]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 1.5 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.7 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_th_dk_1949(self):\n        prj.add_residential(\n            method='tabula_dk',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh_dk:[545:565]\n==test_tabula_th_dk:[342:360]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 1.5 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.7 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n#----------------------------------------------------------------------------------\n\n    def test_tabula_uvalue_standard_sfh_dk_1929(self):\n        prj.add_residential(\n            method='tabula_dk',",
             "message-id": "R0801"
         },
         {
@@ -8060,7 +8060,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh_dk:[1163:1172]\n==test_tabula_th_dk:[925:941]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.12 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.9 - 0.17)), 1)",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh_dk:[1163:1172]\n==test_tabula_th_dk:[925:941]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.12 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.9 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_adv_retrofit_th_dk_1929(self):",
             "message-id": "R0801"
         },
         {
@@ -8126,7 +8126,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh:[475:488]\n==test_tabula_th:[466:479]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_th_1983(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh:[475:488]\n==test_tabula_th:[466:479]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_sfh_1968(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -8137,7 +8137,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh:[434:447]\n==test_tabula_th:[501:514]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_sfh_1957(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh:[434:447]\n==test_tabula_th:[501:514]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_th_1994(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -8159,7 +8159,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh:[355:369]\n==test_tabula_th:[396:409]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_sfh_1918(self):\n\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh:[355:369]\n==test_tabula_th:[396:409]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_th_1968(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -8335,7 +8335,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1382:1395]\n==test_tabula_sfh_dk:[1152:1166]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.09 - 0.21)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.13 - 0.17)), 1)\n        # U-value of website is 0.33, but is seems to be wrong\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1382:1395]\n==test_tabula_sfh_dk:[1152:1166]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.09 - 0.21)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.13 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),",
             "message-id": "R0801"
         },
         {
@@ -8357,7 +8357,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1166:1179]\n==test_tabula_sfh:[1615:1628]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.7 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_sfh_2100(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1166:1179]\n==test_tabula_sfh:[1615:1628]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.7 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_mfh_2100(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -8390,7 +8390,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1311:1322]\n==test_tabula_sfh:[1345:1356]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.13 - 0.17)), 1)\n\n        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:\n            if \"_1_\" in floor.construction_type:\n\n                assert round(1 / (floor.r_conduc * floor.area),\n                             1) == round((1 / (1 / 0.21 - 0.34)), 1)\n",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1311:1322]\n==test_tabula_sfh:[1345:1356]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.13 - 0.17)), 1)\n\n        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:\n\n            if \"_1_\" in floor.construction_type:\n                assert round(1 / (floor.r_conduc * floor.area),\n                             1) == round((1 / (1 / 0.21 - 0.34)), 1)\n",
             "message-id": "R0801"
         },
         {
@@ -8632,7 +8632,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[795:805]\n==test_tabula_sfh_dk:[961:969]\n        for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:\n            if \"_1_\" in wall.construction_type:\n                assert round(\n                    1 / (wall.r_conduc * wall.area),\n                    1) == round((1 / (1 / 0.1 - 0.17)), 1)\n\n            if \"_2_\" in wall.construction_type:\n\n                assert round(\n                    1 / (wall.r_conduc * wall.area),",
+            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[795:805]\n==test_tabula_sfh_dk:[961:969]\n        for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:\n            if \"_1_\" in wall.construction_type:\n                assert round(\n                    1 / (wall.r_conduc * wall.area),\n                    1) == round((1 / (1 / 0.1 - 0.17)), 1)\n            if \"_2_\" in wall.construction_type:\n                assert round(\n                    1 / (wall.r_conduc * wall.area),",
             "message-id": "R0801"
         },
         {
@@ -8643,7 +8643,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[414:430]\n==test_tabula_sfh:[429:439]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.77 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.8 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)\n    #\n    def test_tabula_uvalue_standard_ab_dk_1971(self):",
+            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[414:430]\n==test_tabula_sfh:[429:439]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.77 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.8 - 0.17)), 1)\n",
             "message-id": "R0801"
         },
         {
@@ -8775,7 +8775,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[251:264]\n==test_tabula_mfh:[480:493]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_ab_1968(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[251:264]\n==test_tabula_mfh:[480:493]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_mfh_1968(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -9369,7 +9369,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[763:774]\n==test_tabula_th:[702:713]\n                             1) == round((1 / (1 / 1.1 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_th_1919(self):\n\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[763:774]\n==test_tabula_th:[702:713]\n            1) == round((1 / (1 / 1.1 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_mfh_1859(self):\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -9490,7 +9490,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1051:1059]\n==test_tabula_sfh_dk:[885:894]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.2 - 0.17)), 1)\n        # U-value of website is 0.33, but is seems to be wrong\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1051:1059]\n==test_tabula_sfh_dk:[885:894]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.2 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),",
             "message-id": "R0801"
         },
         {
@@ -9622,7 +9622,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1553:1585]\n==test_tabula_sfh:[1526:1558]\n            number_of_floors=2,\n            height_of_floors=3.2,\n            net_leased_area=219, construction_type=\"tabula_adv_retrofit\")\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.14 - 0.21)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.14 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.17 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_mfh_2015(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1553:1585]\n==test_tabula_sfh:[1526:1558]\n            number_of_floors=2,\n            height_of_floors=3.2,\n            net_leased_area=219, construction_type=\"tabula_adv_retrofit\")\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.14 - 0.21)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.14 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.17 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_sfh_2009(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -9655,7 +9655,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1311:1320]\n==test_tabula_sfh:[1269:1277]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.13 - 0.17)), 1)\n\n        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:\n            if \"_1_\" in floor.construction_type:\n                assert round(1 / (floor.r_conduc * floor.area),",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1311:1320]\n==test_tabula_sfh:[1269:1277]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.13 - 0.17)), 1)\n\n        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:\n            if \"_1_\" in floor.construction_type:\n\n                assert round(1 / (floor.r_conduc * floor.area),",
             "message-id": "R0801"
         },
         {
@@ -9721,7 +9721,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[951:969]\n==test_tabula_sfh:[954:972]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.31 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_sfh_1978(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[951:969]\n==test_tabula_sfh:[954:972]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.31 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_mfh_1978(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -9842,7 +9842,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[429:438]\n==test_tabula_sfh:[381:391]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 1.7 - 0.17)), 1)\n\n        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:\n            if \"_1_\" in floor.construction_type:\n\n                assert round(1 / (floor.r_conduc * floor.area),",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[429:438]\n==test_tabula_sfh:[381:391]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 1.7 - 0.17)), 1)\n\n        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:\n\n            if \"_1_\" in floor.construction_type:\n\n                assert round(1 / (floor.r_conduc * floor.area),",
             "message-id": "R0801"
         },
         {
@@ -9853,7 +9853,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[990:998]\n==test_tabula_th_dk:[985:994]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.09 - 0.14)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),",
+            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[990:998]\n==test_tabula_th_dk:[985:994]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.09 - 0.14)), 1)\n\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),",
             "message-id": "R0801"
         },
         {
@@ -10029,7 +10029,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[497:504]\n==test_tabula_th_dk:[753:761]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.28 - 0.34)), 1)\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[497:504]\n==test_tabula_th_dk:[753:761]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.28 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),",
             "message-id": "R0801"
         },
         {
@@ -10502,7 +10502,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_th:[593:609]\n==test_tabula_th_dk:[540:564]\n            height_of_floors=3.2,\n            net_leased_area=219)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.2 - 0.21)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.3 - 0.17)), 1)\n\n            # if \"_1_\" in wall.construction_type:\n            #     assert round(1 / (wall.r_conduc * wall.area),\n            #                  1) == round((1 / (1 / 0.6 - 0.17)), 1)\n            #\n            # if \"_2_\" in wall.construction_type:\n            #     assert round(1 / (wall.r_conduc * wall.area),\n            #                  1) == round((1 / (1 / 0.6 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),",
+            "message": "Similar lines in 2 files\n==test_tabula_th:[593:609]\n==test_tabula_th_dk:[540:564]\n            height_of_floors=3.2,\n            net_leased_area=219)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.2 - 0.21)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n            1) == round((1 / (1 / 0.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),",
             "message-id": "R0801"
         },
         {
@@ -10513,7 +10513,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh_dk:[392:407]\n==test_tabula_th_dk:[601:618]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.5 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n#----------------------------------------------------------------------------------\n\n    def test_tabula_uvalue_standard_sfh_dk_1977(self):\n        prj.add_residential(\n            method='tabula_dk',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh_dk:[392:407]\n==test_tabula_th_dk:[601:618]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.5 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n#--------------------------------------------------------------------------------------------------------------------------------------------S\n#test for U-value retrofit\n\n    def test_tabula_uvalue_retrofit_th_dk_1849(self):\n\n        prj.add_residential(\n            method='tabula_dk',",
             "message-id": "R0801"
         },
         {
@@ -10524,7 +10524,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh_dk:[318:333]\n==test_tabula_th_dk:[566:579]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.5 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_th_dk_2009(self):\n        prj.add_residential(\n            method='tabula_dk',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh_dk:[318:333]\n==test_tabula_th_dk:[566:579]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.5 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n#----------------------------------------------------------------------------------\n\n    def test_tabula_uvalue_standard_sfh_dk_2005(self):\n        prj.add_residential(\n            method='tabula_dk',",
             "message-id": "R0801"
         },
         {
@@ -10623,7 +10623,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh:[666:674]\n==test_tabula_th:[581:589]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_sfh_2009(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh:[666:674]\n==test_tabula_th:[581:589]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_th_2008(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -10634,7 +10634,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh:[631:639]\n==test_tabula_th:[401:409]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_th_1968(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh:[631:639]\n==test_tabula_th:[401:409]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_sfh_2001(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -10645,7 +10645,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh:[596:604]\n==test_tabula_th:[366:374]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_th_1957(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh:[596:604]\n==test_tabula_th:[366:374]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_sfh_1994(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -10656,7 +10656,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh:[520:528]\n==test_tabula_th:[331:339]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_sfh_1978(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh:[520:528]\n==test_tabula_th:[331:339]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_th_1948(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -10854,7 +10854,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1241:1257]\n==test_tabula_sfh:[1357:1373]\n                assert round(1 / (floor.r_conduc * floor.area),\n                             1) == round((1 / (1 / 0.23 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_mfh_1918(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1241:1257]\n==test_tabula_sfh:[1357:1373]\n                assert round(1 / (floor.r_conduc * floor.area),\n                             1) == round((1 / (1 / 0.23 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_sfh_1968(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -10865,7 +10865,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[875:884]\n==test_tabula_sfh:[909:917]\n        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:\n            if \"_1_\" in floor.construction_type:\n\n                assert round(1 / (floor.r_conduc * floor.area),\n                             1) == round((1 / (1 / 0.28 - 0.34)), 1)\n\n            elif \"_2_\" in floor.construction_type:\n\n                assert round(1 / (floor.r_conduc * floor.area),",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[875:884]\n==test_tabula_sfh:[909:917]\n        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:\n\n            if \"_1_\" in floor.construction_type:\n                assert round(1 / (floor.r_conduc * floor.area),\n                             1) == round((1 / (1 / 0.28 - 0.34)), 1)\n\n            elif \"_2_\" in floor.construction_type:\n                assert round(1 / (floor.r_conduc * floor.area),",
             "message-id": "R0801"
         },
         {
@@ -10942,7 +10942,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[660:668]\n==test_tabula_sfh:[701:709]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_sfh_2015(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[660:668]\n==test_tabula_sfh:[701:709]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_mfh_2009(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -10953,7 +10953,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[520:528]\n==test_tabula_sfh:[480:488]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_sfh_1968(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[520:528]\n==test_tabula_sfh:[480:488]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_mfh_1978(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -10975,7 +10975,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[450:458]\n==test_tabula_sfh:[403:412]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_mfh_1957(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[450:458]\n==test_tabula_sfh:[403:412]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_sfh_1948(self):\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -11173,7 +11173,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[1205:1219]\n==test_tabula_th_dk:[965:978]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.9 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_adv_retrofit_th_dk_1949(self):\n        prj.add_residential(\n            method='tabula_dk',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[1205:1219]\n==test_tabula_th_dk:[965:978]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.9 - 0.17)), 1)\n\n    #\n    #     # assert round(\n    #     #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n    #     #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n    #     #     1) == round((1 / (1 / 2.0 - 0.17)), 1)\n    #\n    def test_tabula_uvalue_adv_retrofit_ab_dk_2009(self):\n        prj.add_residential(\n            method='tabula_dk',",
             "message-id": "R0801"
         },
         {
@@ -11195,7 +11195,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[541:554]\n==test_tabula_th_dk:[347:360]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.7 - 0.17)), 1)\n    #\n    #     # assert round(\n    #     #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n    #     #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n    #     #     1) == round((1 / (1 / 3.0 - 0.17)), 1)\n    #\n    def test_tabula_uvalue_standard_ab_dk_2005(self):\n        prj.add_residential(\n            method='tabula_dk',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[541:554]\n==test_tabula_th_dk:[347:360]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.7 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_th_dk_1949(self):\n        prj.add_residential(\n            method='tabula_dk',",
             "message-id": "R0801"
         },
         {
@@ -11239,7 +11239,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[1075:1088]\n==test_tabula_sfh_dk:[1050:1065]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.9 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n#----------------------------------------------------------------------------------\n\n    def test_tabula_uvalue_adv_retrofit_sfh_dk_1949(self):\n        prj.add_residential(\n            method='tabula_dk',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[1075:1088]\n==test_tabula_sfh_dk:[1050:1065]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.9 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)\n    #\n    def test_tabula_uvalue_adv_retrofit_ab_dk_1971(self):\n        prj.add_residential(\n            method='tabula_dk',",
             "message-id": "R0801"
         },
         {
@@ -11250,7 +11250,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[1040:1053]\n==test_tabula_sfh_dk:[1013:1028]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.9 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n#----------------------------------------------------------------------------------\n\n    def test_tabula_uvalue_adv_retrofit_sfh_dk_1959(self):\n        prj.add_residential(\n            method='tabula_dk',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[1040:1053]\n==test_tabula_sfh_dk:[1013:1028]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.9 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)\n    #\n    def test_tabula_uvalue_adv_retrofit_ab_dk_1959(self):\n        prj.add_residential(\n            method='tabula_dk',",
             "message-id": "R0801"
         },
         {
@@ -11272,7 +11272,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[970:983]\n==test_tabula_sfh_dk:[934:949]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.9 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n#----------------------------------------------------------------------------------\n\n    def test_tabula_uvalue_adv_retrofit_sfh_dk_1977(self):\n        prj.add_residential(\n            method='tabula_dk',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[970:983]\n==test_tabula_sfh_dk:[934:949]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.9 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_adv_retrofit_ab_dk_1929(self):\n        prj.add_residential(\n            method='tabula_dk',",
             "message-id": "R0801"
         },
         {
@@ -11283,7 +11283,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[875:888]\n==test_tabula_sfh_dk:[858:873]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.4 - 0.17)), 1)\n    #\n    #     # assert round(\n    #     #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n    #     #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n    #     #     1) == round((1 / (1 / 3.0 - 0.17)), 1)\n    #\n    def test_tabula_uvalue_retrofit_ab_dk_2005(self):\n        prj.add_residential(\n            method='tabula_dk',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[875:888]\n==test_tabula_sfh_dk:[858:873]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.4 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n#----------------------------------------------------------------------------------\n\n    def test_tabula_uvalue_retrofit_sfh_dk_1849(self):\n        prj.add_residential(\n            method='tabula_dk',",
             "message-id": "R0801"
         },
         {
@@ -11305,7 +11305,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[812:825]\n==test_tabula_sfh_dk:[896:912]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.4 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)\n    #\n    def test_tabula_uvalue_retrofit_ab_dk_1977(self):\n        prj.add_residential(\n            method='tabula_dk',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[812:825]\n==test_tabula_sfh_dk:[896:912]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.4 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n#----------------------------------------------------------------------------------------------------------------------------------------------------------\n#U-value adv retrofit\n\n    def test_tabula_uvalue_adv_retrofit_sfh_dk_1997(self):\n        prj.add_residential(\n            method='tabula_dk',",
             "message-id": "R0801"
         },
         {
@@ -11327,7 +11327,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[735:748]\n==test_tabula_sfh_dk:[741:756]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.4 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)\n    #\n    def test_tabula_uvalue_retrofit_ab_dk_1959(self):\n        prj.add_residential(\n            method='tabula_dk',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[735:748]\n==test_tabula_sfh_dk:[741:756]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.4 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n#----------------------------------------------------------------------------------\n\n    def test_tabula_uvalue_retrofit_sfh_dk_1959(self):\n        prj.add_residential(\n            method='tabula_dk',",
             "message-id": "R0801"
         },
         {
@@ -11360,7 +11360,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[506:519]\n==test_tabula_sfh_dk:[626:645]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.8 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n#--------------------------------------------------------------------------------------------------------------------------------------------------------------\n#---------------------------------------------------------------------------------------------------------------------------------------------------------------\n#-----------------------------------------------------------------------------------------------------------------------------------------------------------------\n#test for U-value for retrofit\n\n\n    def test_tabula_uvalue_retrofit_sfh_dk_1997(self):\n        prj.add_residential(\n            method='tabula_dk',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[506:519]\n==test_tabula_sfh_dk:[626:645]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.8 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)\n    # #\n    def test_tabula_uvalue_standard_ab_dk_1997(self):\n        prj.add_residential(\n            method='tabula_dk',",
             "message-id": "R0801"
         },
         {
@@ -11371,7 +11371,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[419:432]\n==test_tabula_sfh_dk:[508:523]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.8 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)\n    #\n    def test_tabula_uvalue_standard_ab_dk_1971(self):\n        prj.add_residential(\n            method='tabula_dk',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[419:432]\n==test_tabula_sfh_dk:[508:523]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.8 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n#----------------------------------------------------------------------------------\n\n    def test_tabula_uvalue_standard_sfh_dk_1949(self):\n        prj.add_residential(\n            method='tabula_dk',",
             "message-id": "R0801"
         },
         {
@@ -11382,7 +11382,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[384:397]\n==test_tabula_sfh_dk:[471:486]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.8 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)\n    #\n    def test_tabula_uvalue_standard_ab_dk_1959(self):\n        prj.add_residential(\n            method='tabula_dk',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[384:397]\n==test_tabula_sfh_dk:[471:486]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.8 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n#----------------------------------------------------------------------------------\n\n    def test_tabula_uvalue_standard_sfh_dk_1959(self):\n        prj.add_residential(\n            method='tabula_dk',",
             "message-id": "R0801"
         },
         {
@@ -11415,7 +11415,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[314:327]\n==test_tabula_sfh_dk:[550:565]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.7 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_ab_dk_1929(self):\n        prj.add_residential(\n            method='tabula_dk',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab_dk:[314:327]\n==test_tabula_sfh_dk:[550:565]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 2.7 - 0.17)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)\n\n#----------------------------------------------------------------------------------\n\n    def test_tabula_uvalue_standard_sfh_dk_1929(self):\n        prj.add_residential(\n            method='tabula_dk',",
             "message-id": "R0801"
         },
         {
@@ -11426,7 +11426,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[653:662]\n==test_tabula_th:[1500:1509]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_ab_1978(self):\n\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[653:662]\n==test_tabula_th:[1500:1509]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_th_2100(self):\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -11437,7 +11437,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[617:626]\n==test_tabula_sfh:[1620:1628]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_ab_1968(self):\n\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[617:626]\n==test_tabula_sfh:[1620:1628]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_sfh_2100(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -11448,7 +11448,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[506:515]\n==test_tabula_sfh:[1211:1220]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_sfh_1859(self):\n\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[506:515]\n==test_tabula_sfh:[1211:1220]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_ab_1919(self):\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -11459,7 +11459,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[471:480]\n==test_tabula_sfh:[771:780]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_sfh_1859(self):\n\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[471:480]\n==test_tabula_sfh:[771:780]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_ab_1978(self):\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -11525,7 +11525,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[435:444]\n==test_tabula_mfh:[1206:1215]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_ab_1968(self):\n\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[435:444]\n==test_tabula_mfh:[1206:1215]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_mfh_1859(self):\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -11613,7 +11613,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[186:194]\n==test_tabula_mfh:[402:411]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_mfh_1948(self):\n\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[186:194]\n==test_tabula_mfh:[402:411]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 3.0 - 0.17)), 1)\n\n    def test_tabula_uvalue_standard_ab_1948(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -11690,7 +11690,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==helptest:[160:166]\n==test_data:[2663:2669]\n            win.inner_convection = 1.7\n            win.inner_radiation = 5.0\n            win.outer_convection = 20.0\n            win.outer_radiation = 5.0\n            win.g_value = 0.789\n            win.a_conv = 0.03",
+            "message": "Similar lines in 2 files\n==helptest:[160:166]\n==test_data:[2663:2669]\n        win.inner_convection = 1.7\n        win.inner_radiation = 5.0\n        win.outer_convection = 20.0\n        win.outer_radiation = 5.0\n        win.g_value = 0.789\n        win.a_conv = 0.03",
             "message-id": "R0801"
         },
         {
@@ -11789,7 +11789,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh_dk:[726:732]\n==test_tabula_th_dk:[848:864]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.13 - 0.21)), 1)\n\n        assert round(",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh_dk:[726:732]\n==test_tabula_th_dk:[848:864]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.13 - 0.21)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n        #     1) == round((1 / (1 / 0.3 - 0.17)), 1)\n        #\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n        #     1) == round((1 / (1 / 0.18 - 0.34)), 1)\n\n        assert round(",
             "message-id": "R0801"
         },
         {
@@ -11888,7 +11888,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh:[1608:1615]\n==test_tabula_th:[1529:1536]\n            1) == round((1 / (1 / 0.12 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.12 - 0.34)), 1)\n",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh:[1608:1615]\n==test_tabula_th:[1529:1536]\n                             1) == round((1 / (1 / 0.12 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.12 - 0.34)), 1)\n",
             "message-id": "R0801"
         },
         {
@@ -11899,7 +11899,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh:[1358:1373]\n==test_tabula_th:[1263:1279]\n                             1) == round((1 / (1 / 0.23 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_sfh_1968(self):\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh:[1358:1373]\n==test_tabula_th:[1263:1279]\n            1) == round((1 / (1 / 0.23 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 0.8 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_adv_th_1978(self):\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -11954,7 +11954,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh:[238:248]\n==test_tabula_th:[64:74]\n        assert round(\n            sum(wall.area for wall in\n                prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0\n\n    def test_tabula_de_th_area_1956(self):\n        \"\"\"\n        Test for area estimation of tabula th\n        \"\"\"\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh:[238:248]\n==test_tabula_th:[64:74]\n        assert round(\n            sum(wall.area for wall in\n                prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0\n\n    def test_tabula_de_sfh_area_2001(self):\n        \"\"\"\n        Test for area estimation of tabula sfh\n        \"\"\"\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -11965,7 +11965,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh:[209:219]\n==test_tabula_th:[35:45]\n        assert round(\n            sum(wall.area for wall in\n                prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0\n\n    def test_tabula_de_th_area_1948(self):\n        \"\"\"\n        Test for area estimation of tabula th\n        \"\"\"\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh:[209:219]\n==test_tabula_th:[35:45]\n        assert round(\n            sum(wall.area for wall in\n                prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0\n\n    def test_tabula_de_sfh_area_1994(self):\n        \"\"\"\n        Test for area estimation of tabula sfh\n        \"\"\"\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -11998,7 +11998,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh:[6:16]\n==test_tabula_th:[5:16]\n    global prj\n\n    def test_tabula_de_sfh_area_1859(self):\n        \"\"\"\n        Test for area estimation of tabula sfh\n        \"\"\"\n        prj.set_default()\n        prj.data = None\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh:[6:16]\n==test_tabula_th:[5:16]\n    global prj\n\n    def test_tabula_de_th_area_1919(self):\n        \"\"\"\n        Test for area estimation of tabula th\n        \"\"\"\n        prj.set_default()\n        prj.data = None\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -12009,7 +12009,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_sfh:[1191:1197]\n==test_tabula_sfh_dk:[689:700]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.13 - 0.21)), 1)\n\n        assert round(",
+            "message": "Similar lines in 2 files\n==test_tabula_sfh:[1191:1197]\n==test_tabula_sfh_dk:[689:700]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.13 - 0.21)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n        #     1) == round((1 / (1 / 0.3 - 0.17)), 1)\n\n        assert round(",
             "message-id": "R0801"
         },
         {
@@ -12020,7 +12020,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1382:1388]\n==test_tabula_th_dk:[1126:1142]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.09 - 0.21)), 1)\n\n        assert round(",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[1382:1388]\n==test_tabula_th_dk:[1126:1142]\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),\n            1) == round((1 / (1 / 0.09 - 0.21)), 1)\n\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),\n        #     1) == round((1 / (1 / 0.3 - 0.17)), 1)\n        #\n        # assert round(\n        #     1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n        #          * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n        #     1) == round((1 / (1 / 0.18 - 0.34)), 1)\n\n        assert round(",
             "message-id": "R0801"
         },
         {
@@ -12064,7 +12064,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[718:725]\n==test_tabula_th:[644:651]\n                             1) == round((1 / (1 / 0.28 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.35 - 0.34)), 1)\n",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[718:725]\n==test_tabula_th:[644:651]\n            1) == round((1 / (1 / 0.28 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),\n            1) == round((1 / (1 / 0.35 - 0.34)), 1)\n",
             "message-id": "R0801"
         },
         {
@@ -12130,7 +12130,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[296:306]\n==test_tabula_sfh:[180:190]\n        assert round(\n            sum(wall.area for wall in\n                prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0\n\n    def test_tabula_de_mfh_area_2015(self):\n        \"\"\"\n        Test for area estimation of tabula mfh\n        \"\"\"\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[296:306]\n==test_tabula_sfh:[180:190]\n        assert round(\n            sum(wall.area for wall in\n                prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0\n\n    def test_tabula_de_sfh_area_1983(self):\n        \"\"\"\n        Test for area estimation of tabula sfh\n        \"\"\"\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -12141,7 +12141,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_mfh:[267:277]\n==test_tabula_sfh:[122:132]\n        assert round(\n            sum(wall.area for wall in\n                prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0\n\n    def test_tabula_de_sfh_area_1968(self):\n        \"\"\"\n        Test for area estimation of tabula sfh\n        \"\"\"\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_mfh:[267:277]\n==test_tabula_sfh:[122:132]\n        assert round(\n            sum(wall.area for wall in\n                prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0\n\n    def test_tabula_de_mfh_area_2009(self):\n        \"\"\"\n        Test for area estimation of tabula mfh\n        \"\"\"\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -12262,7 +12262,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[464:480]\n==test_tabula_sfh:[917:932]\n            1) == round((1 / (1 / 0.31 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_ab_1978(self):\n\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[464:480]\n==test_tabula_sfh:[917:932]\n                             1) == round((1 / (1 / 0.31 - 0.34)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n        assert round(\n            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc\n                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),\n            1) == round((1 / (1 / 1.3 - 0.17)), 1)\n\n    def test_tabula_uvalue_retrofit_sfh_1968(self):\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -12317,7 +12317,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[151:159]\n==test_tabula_mfh:[151:161]\n        assert round(\n            sum(wall.area for wall in\n                prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0\n\n    def test_tabula_de_mfh_area_1978(self):\n        \"\"\"\n        Test for area estimation of tabula mfh\n        \"\"\"\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[151:159]\n==test_tabula_mfh:[151:161]\n        assert round(\n            sum(wall.area for wall in\n                prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0\n\n    def test_tabula_uvalue_standard_ab_1919(self):\n\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -12350,7 +12350,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[64:74]\n==test_tabula_mfh:[64:74]\n        assert round(\n            sum(wall.area for wall in\n                prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0\n\n    def test_tabula_de_mfh_area_1948(self):\n        \"\"\"\n        Test for area estimation of tabula mfh\n        \"\"\"\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[64:74]\n==test_tabula_mfh:[64:74]\n        assert round(\n            sum(wall.area for wall in\n                prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0\n\n    def test_tabula_de_ab_area_1957(self):\n        \"\"\"\n        Test for area estimation of tabula ab\n        \"\"\"\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -12361,7 +12361,7 @@
             "column": 0,
             "path": "tests/test_useconditions.py",
             "symbol": "duplicate-code",
-            "message": "Similar lines in 2 files\n==test_tabula_ab:[35:45]\n==test_tabula_mfh:[35:45]\n        assert round(\n            sum(wall.area for wall in\n                prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0\n\n    def test_tabula_de_mfh_area_1919(self):\n        \"\"\"\n        Test for area estimation of tabula mfh\n        \"\"\"\n        prj.add_residential(\n            method='tabula_de',",
+            "message": "Similar lines in 2 files\n==test_tabula_ab:[35:45]\n==test_tabula_mfh:[35:45]\n        assert round(\n            sum(wall.area for wall in\n                prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0\n\n    def test_tabula_de_ab_area_1948(self):\n        \"\"\"\n        Test for area estimation of tabula ab\n        \"\"\"\n        prj.add_residential(\n            method='tabula_de',",
             "message-id": "R0801"
         },
         {
@@ -12670,10 +12670,10 @@
             ],
             "teaser.logic.utilities": [
                 "test_useconditions",
-                "test_simulation_export",
+                "test_examples",
                 "test_data",
                 "teaser.project",
-                "test_examples"
+                "test_simulation_export"
             ],
             "teaser.data.input.teaserjson_input": [
                 "teaser.project"
@@ -12810,18 +12810,18 @@
                 "helptest"
             ],
             "teaser.project": [
+                "test_tabula_ab_dk",
+                "test_useconditions",
+                "test_examples",
+                "test_tabula_ab",
+                "test_data",
                 "test_tabula_mfh",
                 "test_tabula_th_dk",
-                "test_modelicaversion",
-                "test_tabula_sfh",
-                "test_useconditions",
-                "test_tabula_th",
-                "test_tabula_ab",
-                "test_tabula_ab_dk",
-                "test_tabula_sfh_dk",
                 "test_simulation_export",
-                "test_data",
-                "test_examples"
+                "test_tabula_sfh_dk",
+                "test_tabula_sfh",
+                "test_tabula_th",
+                "test_modelicaversion"
             ],
             "helptest": [
                 "test_useconditions",
@@ -12864,8 +12864,8 @@
                 "test_examples"
             ],
             "teaser.examples.e2_export_aixlib_models": [
-                "test_simulation_export",
-                "test_examples"
+                "test_examples",
+                "test_simulation_export"
             ],
             "teaser.examples.e3_export_ibpsa_models": [
                 "test_examples"
@@ -13125,10 +13125,10 @@
             ],
             "teaser.logic.utilities": [
                 "test_useconditions",
-                "test_simulation_export",
+                "test_examples",
                 "test_data",
                 "teaser.project",
-                "test_examples"
+                "test_simulation_export"
             ],
             "teaser.data.input.teaserjson_input": [
                 "teaser.project"
@@ -13265,18 +13265,18 @@
                 "helptest"
             ],
             "teaser.project": [
+                "test_tabula_ab_dk",
+                "test_useconditions",
+                "test_examples",
+                "test_tabula_ab",
+                "test_data",
                 "test_tabula_mfh",
                 "test_tabula_th_dk",
-                "test_tabula_sfh",
-                "test_modelicaversion",
-                "test_useconditions",
-                "test_tabula_th",
-                "test_tabula_ab",
-                "test_tabula_ab_dk",
-                "test_tabula_sfh_dk",
                 "test_simulation_export",
-                "test_data",
-                "test_examples"
+                "test_tabula_sfh_dk",
+                "test_tabula_sfh",
+                "test_tabula_th",
+                "test_modelicaversion"
             ],
             "helptest": [
                 "test_useconditions",
@@ -13319,8 +13319,8 @@
                 "test_examples"
             ],
             "teaser.examples.e2_export_aixlib_models": [
-                "test_simulation_export",
-                "test_examples"
+                "test_examples",
+                "test_simulation_export"
             ],
             "teaser.examples.e3_export_ibpsa_models": [
                 "test_examples"
