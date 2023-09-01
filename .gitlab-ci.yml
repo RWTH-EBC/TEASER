@@ -33,8 +33,6 @@ include:
     file: 'python/tests/coverage.gitlab-ci.yml'
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     file: 'python/pypi-release/release.gitlab-ci.yml'
-    ref: add_github_app
-    
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     file: 'python/examples/examples.gitlab-ci.yml'
   - template: Dependency-Scanning.gitlab-ci.yml
