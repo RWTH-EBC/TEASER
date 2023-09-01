@@ -1,97 +1,52 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>teaser.examples package &mdash; TEASER 0.7.7 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/autodoc_pydantic.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/autodoc_pydantic.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="teaser.examples.verification package" href="teaser.examples.verification.html" />
     <link rel="prev" title="teaser.data.output package" href="teaser.data.output.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../index.html" class="icon icon-home"> TEASER
           
-
-          
+          <a href="../index.html" class="icon icon-home">
+            TEASER
           </a>
-
-          
-            
-            
               <div class="version">
                 0.7
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../install_teaser.html">Install TEASER</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../archetypes.html">Archetype Buildings</a></li>
@@ -101,7 +56,53 @@
 <li class="toctree-l3"><a class="reference internal" href="teaser.html#teaser">teaser</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="teaser.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="teaser.data.html">teaser.data package</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">teaser.examples package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">teaser.examples package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="teaser.examples.verification.html">teaser.examples.verification package</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e1_generate_archetype">teaser.examples.e1_generate_archetype module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e1_generate_archetype.example_generate_archetype"><code class="docutils literal notranslate"><span class="pre">example_generate_archetype()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e2_export_aixlib_models">teaser.examples.e2_export_aixlib_models module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e2_export_aixlib_models.example_export_aixlib"><code class="docutils literal notranslate"><span class="pre">example_export_aixlib()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e3_export_ibpsa_models">teaser.examples.e3_export_ibpsa_models module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e3_export_ibpsa_models.example_export_ibpsa"><code class="docutils literal notranslate"><span class="pre">example_export_ibpsa()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e4_save">teaser.examples.e4_save module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e4_save.example_save"><code class="docutils literal notranslate"><span class="pre">example_save()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e5_load">teaser.examples.e5_load module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e5_load.example_load"><code class="docutils literal notranslate"><span class="pre">example_load()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e6_generate_building">teaser.examples.e6_generate_building module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e6_generate_building.example_create_building"><code class="docutils literal notranslate"><span class="pre">example_create_building()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e7_retrofit">teaser.examples.e7_retrofit module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e7_retrofit.example_retrofit_building"><code class="docutils literal notranslate"><span class="pre">example_retrofit_building()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e8_change_boundary_conditions">teaser.examples.e8_change_boundary_conditions module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e8_change_boundary_conditions.example_change_boundary_conditions"><code class="docutils literal notranslate"><span class="pre">example_change_boundary_conditions()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e9_building_data_import_from_excel">teaser.examples.e9_building_data_import_from_excel module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e9_building_data_import_from_excel.get_list_of_present_entries"><code class="docutils literal notranslate"><span class="pre">get_list_of_present_entries()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e9_building_data_import_from_excel.import_building_from_excel"><code class="docutils literal notranslate"><span class="pre">import_building_from_excel()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e9_building_data_import_from_excel.import_data"><code class="docutils literal notranslate"><span class="pre">import_data()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e9_building_data_import_from_excel.zoning_example"><code class="docutils literal notranslate"><span class="pre">zoning_example()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="teaser.logic.html">teaser.logic package</a></li>
 </ul>
 </li>
@@ -117,79 +118,36 @@
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Issues solved in development</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">TEASER</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="modules.html">teaser</a> &raquo;</li>
-        
-          <li><a href="teaser.html">teaser package</a> &raquo;</li>
-        
-      <li>teaser.examples package</li>
-    
-    
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">teaser</a></li>
+          <li class="breadcrumb-item"><a href="teaser.html">teaser package</a></li>
+      <li class="breadcrumb-item active">teaser.examples package</li>
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/code/teaser.examples.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <section id="module-teaser.examples">
-<span id="teaser-examples-package"></span><h1>teaser.examples package<a class="headerlink" href="#module-teaser.examples" title="Permalink to this heading">¶</a></h1>
+<span id="teaser-examples-package"></span><h1>teaser.examples package<a class="headerlink" href="#module-teaser.examples" title="Permalink to this heading"></a></h1>
 <section id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading">¶</a></h2>
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="teaser.examples.verification.html">teaser.examples.verification package</a><ul>
@@ -232,107 +190,87 @@
 </div>
 </section>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
 </section>
 <section id="module-teaser.examples.e1_generate_archetype">
-<span id="teaser-examples-e1-generate-archetype-module"></span><h2>teaser.examples.e1_generate_archetype module<a class="headerlink" href="#module-teaser.examples.e1_generate_archetype" title="Permalink to this heading">¶</a></h2>
-<p>This module contains an example how to generate archetype buildings using
-TEASER API functions.</p>
+<span id="teaser-examples-e1-generate-archetype-module"></span><h2>teaser.examples.e1_generate_archetype module<a class="headerlink" href="#module-teaser.examples.e1_generate_archetype" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaser.examples.e1_generate_archetype.example_generate_archetype">
-<span class="sig-prename descclassname"><span class="pre">teaser.examples.e1_generate_archetype.</span></span><span class="sig-name descname"><span class="pre">example_generate_archetype</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e1_generate_archetype.html#example_generate_archetype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e1_generate_archetype.example_generate_archetype" title="Permalink to this definition">¶</a></dt>
-<dd><p>“This function demonstrates the generation of residential and
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e1_generate_archetype.</span></span><span class="sig-name descname"><span class="pre">example_generate_archetype</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e1_generate_archetype.html#example_generate_archetype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e1_generate_archetype.example_generate_archetype" title="Permalink to this definition"></a></dt>
+<dd><p>This function demonstrates the generation of residential and
 non-residential archetype buildings using the API function of TEASER</p>
 </dd></dl>
 
 </section>
 <section id="module-teaser.examples.e2_export_aixlib_models">
-<span id="teaser-examples-e2-export-aixlib-models-module"></span><h2>teaser.examples.e2_export_aixlib_models module<a class="headerlink" href="#module-teaser.examples.e2_export_aixlib_models" title="Permalink to this heading">¶</a></h2>
-<p>This module contains an example how to export buildings from a TEASER
-project to ready-to-run simulation models for Modelica library AixLib. These
-models will only simulate using Dymola, the reason for this are state
-machines that are used in one AixLib specific AHU model.</p>
+<span id="teaser-examples-e2-export-aixlib-models-module"></span><h2>teaser.examples.e2_export_aixlib_models module<a class="headerlink" href="#module-teaser.examples.e2_export_aixlib_models" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaser.examples.e2_export_aixlib_models.example_export_aixlib">
-<span class="sig-prename descclassname"><span class="pre">teaser.examples.e2_export_aixlib_models.</span></span><span class="sig-name descname"><span class="pre">example_export_aixlib</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e2_export_aixlib_models.html#example_export_aixlib"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e2_export_aixlib_models.example_export_aixlib" title="Permalink to this definition">¶</a></dt>
-<dd><p>“This function demonstrates the export to Modelica library AixLib using
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e2_export_aixlib_models.</span></span><span class="sig-name descname"><span class="pre">example_export_aixlib</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e2_export_aixlib_models.html#example_export_aixlib"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e2_export_aixlib_models.example_export_aixlib" title="Permalink to this definition"></a></dt>
+<dd><p>This function demonstrates the export to Modelica library AixLib using
 the API function of TEASER</p>
 </dd></dl>
 
 </section>
 <section id="module-teaser.examples.e3_export_ibpsa_models">
-<span id="teaser-examples-e3-export-ibpsa-models-module"></span><h2>teaser.examples.e3_export_ibpsa_models module<a class="headerlink" href="#module-teaser.examples.e3_export_ibpsa_models" title="Permalink to this heading">¶</a></h2>
-<p>This module contains an example how to export buildings from a TEASER
-project to ready-to-run simulation models for Modelica library IBPSA. These
-models simulate in Dymola, OpenModelica and JModelica.</p>
+<span id="teaser-examples-e3-export-ibpsa-models-module"></span><h2>teaser.examples.e3_export_ibpsa_models module<a class="headerlink" href="#module-teaser.examples.e3_export_ibpsa_models" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaser.examples.e3_export_ibpsa_models.example_export_ibpsa">
-<span class="sig-prename descclassname"><span class="pre">teaser.examples.e3_export_ibpsa_models.</span></span><span class="sig-name descname"><span class="pre">example_export_ibpsa</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e3_export_ibpsa_models.html#example_export_ibpsa"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e3_export_ibpsa_models.example_export_ibpsa" title="Permalink to this definition">¶</a></dt>
-<dd><p>“This function demonstrates the export to Modelica library IBPSA using
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e3_export_ibpsa_models.</span></span><span class="sig-name descname"><span class="pre">example_export_ibpsa</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e3_export_ibpsa_models.html#example_export_ibpsa"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e3_export_ibpsa_models.example_export_ibpsa" title="Permalink to this definition"></a></dt>
+<dd><p>This function demonstrates the export to Modelica library IBPSA using
 the API function of TEASER</p>
 </dd></dl>
 
 </section>
 <section id="module-teaser.examples.e4_save">
-<span id="teaser-examples-e4-save-module"></span><h2>teaser.examples.e4_save module<a class="headerlink" href="#module-teaser.examples.e4_save" title="Permalink to this heading">¶</a></h2>
-<p>This module contains an example how to save buildings from a TEASER
-project to json and pickle in order to save information.</p>
+<span id="teaser-examples-e4-save-module"></span><h2>teaser.examples.e4_save module<a class="headerlink" href="#module-teaser.examples.e4_save" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaser.examples.e4_save.example_save">
-<span class="sig-prename descclassname"><span class="pre">teaser.examples.e4_save.</span></span><span class="sig-name descname"><span class="pre">example_save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e4_save.html#example_save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e4_save.example_save" title="Permalink to this definition">¶</a></dt>
-<dd><p>“This function demonstrates different saving options of TEASER</p>
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e4_save.</span></span><span class="sig-name descname"><span class="pre">example_save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e4_save.html#example_save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e4_save.example_save" title="Permalink to this definition"></a></dt>
+<dd><p>This function demonstrates different saving options of TEASER</p>
 </dd></dl>
 
 </section>
 <section id="module-teaser.examples.e5_load">
-<span id="teaser-examples-e5-load-module"></span><h2>teaser.examples.e5_load module<a class="headerlink" href="#module-teaser.examples.e5_load" title="Permalink to this heading">¶</a></h2>
-<p>This module contains an example how to import TEASER projects from
-<a href="#id1"><span class="problematic" id="id2">*</span></a>.teaserjson and pickle in order to reuse data.</p>
+<span id="teaser-examples-e5-load-module"></span><h2>teaser.examples.e5_load module<a class="headerlink" href="#module-teaser.examples.e5_load" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaser.examples.e5_load.example_load">
-<span class="sig-prename descclassname"><span class="pre">teaser.examples.e5_load.</span></span><span class="sig-name descname"><span class="pre">example_load</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e5_load.html#example_load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e5_load.example_load" title="Permalink to this definition">¶</a></dt>
-<dd><p>“This function demonstrates different loading options of TEASER</p>
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e5_load.</span></span><span class="sig-name descname"><span class="pre">example_load</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e5_load.html#example_load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e5_load.example_load" title="Permalink to this definition"></a></dt>
+<dd><p>This function demonstrates different loading options of TEASER</p>
 </dd></dl>
 
 </section>
 <section id="module-teaser.examples.e6_generate_building">
-<span id="teaser-examples-e6-generate-building-module"></span><h2>teaser.examples.e6_generate_building module<a class="headerlink" href="#module-teaser.examples.e6_generate_building" title="Permalink to this heading">¶</a></h2>
-<p>This module contains an example that shows to create a building not using
-the archetype approach but adding all information separately. In this example
-we import all needed modules and classes where we need it in the code. For you
-application we suggest to use PEP008 and import them at the beginning of the
-script.</p>
+<span id="teaser-examples-e6-generate-building-module"></span><h2>teaser.examples.e6_generate_building module<a class="headerlink" href="#module-teaser.examples.e6_generate_building" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaser.examples.e6_generate_building.example_create_building">
-<span class="sig-prename descclassname"><span class="pre">teaser.examples.e6_generate_building.</span></span><span class="sig-name descname"><span class="pre">example_create_building</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e6_generate_building.html#example_create_building"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e6_generate_building.example_create_building" title="Permalink to this definition">¶</a></dt>
-<dd><p>“This function demonstrates generating a building adding all
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e6_generate_building.</span></span><span class="sig-name descname"><span class="pre">example_create_building</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e6_generate_building.html#example_create_building"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e6_generate_building.example_create_building" title="Permalink to this definition"></a></dt>
+<dd><p>This function demonstrates generating a building adding all
 information separately</p>
 </dd></dl>
 
 </section>
 <section id="module-teaser.examples.e7_retrofit">
-<span id="teaser-examples-e7-retrofit-module"></span><h2>teaser.examples.e7_retrofit module<a class="headerlink" href="#module-teaser.examples.e7_retrofit" title="Permalink to this heading">¶</a></h2>
-<p>This module contains an example that shows how to retrofit all buildings
-in a TEASER project with different setups</p>
+<span id="teaser-examples-e7-retrofit-module"></span><h2>teaser.examples.e7_retrofit module<a class="headerlink" href="#module-teaser.examples.e7_retrofit" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaser.examples.e7_retrofit.example_retrofit_building">
-<span class="sig-prename descclassname"><span class="pre">teaser.examples.e7_retrofit.</span></span><span class="sig-name descname"><span class="pre">example_retrofit_building</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e7_retrofit.html#example_retrofit_building"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e7_retrofit.example_retrofit_building" title="Permalink to this definition">¶</a></dt>
-<dd><p>“This function demonstrates retrofit options of TEASER API</p>
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e7_retrofit.</span></span><span class="sig-name descname"><span class="pre">example_retrofit_building</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e7_retrofit.html#example_retrofit_building"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e7_retrofit.example_retrofit_building" title="Permalink to this definition"></a></dt>
+<dd><p>This function demonstrates retrofit options of TEASER API</p>
 </dd></dl>
 
 </section>
 <section id="module-teaser.examples.e8_change_boundary_conditions">
-<span id="teaser-examples-e8-change-boundary-conditions-module"></span><h2>teaser.examples.e8_change_boundary_conditions module<a class="headerlink" href="#module-teaser.examples.e8_change_boundary_conditions" title="Permalink to this heading">¶</a></h2>
+<span id="teaser-examples-e8-change-boundary-conditions-module"></span><h2>teaser.examples.e8_change_boundary_conditions module<a class="headerlink" href="#module-teaser.examples.e8_change_boundary_conditions" title="Permalink to this heading"></a></h2>
 <p>This module contains an example how to change time dependent profiles.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaser.examples.e8_change_boundary_conditions.example_change_boundary_conditions">
-<span class="sig-prename descclassname"><span class="pre">teaser.examples.e8_change_boundary_conditions.</span></span><span class="sig-name descname"><span class="pre">example_change_boundary_conditions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e8_change_boundary_conditions.html#example_change_boundary_conditions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e8_change_boundary_conditions.example_change_boundary_conditions" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e8_change_boundary_conditions.</span></span><span class="sig-name descname"><span class="pre">example_change_boundary_conditions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e8_change_boundary_conditions.html#example_change_boundary_conditions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e8_change_boundary_conditions.example_change_boundary_conditions" title="Permalink to this definition"></a></dt>
 <dd><p>Demonstrate changes to time dependent profiles.</p>
 </dd></dl>
 
 </section>
 <section id="module-teaser.examples.e9_building_data_import_from_excel">
-<span id="teaser-examples-e9-building-data-import-from-excel-module"></span><h2>teaser.examples.e9_building_data_import_from_excel module<a class="headerlink" href="#module-teaser.examples.e9_building_data_import_from_excel" title="Permalink to this heading">¶</a></h2>
+<span id="teaser-examples-e9-building-data-import-from-excel-module"></span><h2>teaser.examples.e9_building_data_import_from_excel module<a class="headerlink" href="#module-teaser.examples.e9_building_data_import_from_excel" title="Permalink to this heading"></a></h2>
 <p>This script demonstrates how a building can be generated by importing building
 data from excel.
 An appropriate example file with some building data is imported from
@@ -380,11 +318,11 @@ convert it.
 it should be accounted with 2x the area</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaser.examples.e9_building_data_import_from_excel.get_list_of_present_entries">
-<span class="sig-prename descclassname"><span class="pre">teaser.examples.e9_building_data_import_from_excel.</span></span><span class="sig-name descname"><span class="pre">get_list_of_present_entries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e9_building_data_import_from_excel.html#get_list_of_present_entries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e9_building_data_import_from_excel.get_list_of_present_entries" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e9_building_data_import_from_excel.</span></span><span class="sig-name descname"><span class="pre">get_list_of_present_entries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e9_building_data_import_from_excel.html#get_list_of_present_entries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e9_building_data_import_from_excel.get_list_of_present_entries" title="Permalink to this definition"></a></dt>
 <dd><p>Extracts a list of all in the list available entries, discarding “None”
 and “nan” entries</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>list_: list</strong></dt><dd><p>list that shall be processed</p>
 </dd>
@@ -395,11 +333,11 @@ and “nan” entries</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="teaser.examples.e9_building_data_import_from_excel.import_building_from_excel">
-<span class="sig-prename descclassname"><span class="pre">teaser.examples.e9_building_data_import_from_excel.</span></span><span class="sig-name descname"><span class="pre">import_building_from_excel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">building_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">construction_age</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_to_excel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e9_building_data_import_from_excel.html#import_building_from_excel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e9_building_data_import_from_excel.import_building_from_excel" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e9_building_data_import_from_excel.</span></span><span class="sig-name descname"><span class="pre">import_building_from_excel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">building_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">construction_age</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_to_excel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e9_building_data_import_from_excel.html#import_building_from_excel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e9_building_data_import_from_excel.import_building_from_excel" title="Permalink to this definition"></a></dt>
 <dd><p>Import building data from excel, convert it via the respective zoning and feed it to teasers logic classes.
 Pay attention to hard coded parts, which are marked.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>project: Project()</strong></dt><dd><p>TEASER instance of Project</p>
 </dd>
@@ -422,12 +360,12 @@ Pay attention to hard coded parts, which are marked.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="teaser.examples.e9_building_data_import_from_excel.import_data">
-<span class="sig-prename descclassname"><span class="pre">teaser.examples.e9_building_data_import_from_excel.</span></span><span class="sig-name descname"><span class="pre">import_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e9_building_data_import_from_excel.html#import_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e9_building_data_import_from_excel.import_data" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e9_building_data_import_from_excel.</span></span><span class="sig-name descname"><span class="pre">import_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e9_building_data_import_from_excel.html#import_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e9_building_data_import_from_excel.import_data" title="Permalink to this definition"></a></dt>
 <dd><p>Import data from the building data excel file and perform some
 preprocessing for nan and empty cells.
 If several sheets are imported, the data is concatenated to one dataframe</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>path: str</strong></dt><dd><p>path to the excel file that should be imported</p>
 </dd>
@@ -440,7 +378,7 @@ If several sheets are imported, the data is concatenated to one dataframe</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="teaser.examples.e9_building_data_import_from_excel.zoning_example">
-<span class="sig-prename descclassname"><span class="pre">teaser.examples.e9_building_data_import_from_excel.</span></span><span class="sig-name descname"><span class="pre">zoning_example</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e9_building_data_import_from_excel.html#zoning_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e9_building_data_import_from_excel.zoning_example" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e9_building_data_import_from_excel.</span></span><span class="sig-name descname"><span class="pre">zoning_example</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e9_building_data_import_from_excel.html#zoning_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e9_building_data_import_from_excel.zoning_example" title="Permalink to this definition"></a></dt>
 <dd><p>This is an example on how the rooms of a building could be aggregated to
 zones.</p>
 <p>In this example the UsageType has to be empty in the case that the
@@ -448,7 +386,7 @@ respective line does not represent another
 room but a different orientated wall or window belonging to a room that
 is already declared once in the excel file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>data: pandas.dataframe</strong></dt><dd><p>The data which shall be zoned</p>
 </dd>
@@ -469,50 +407,33 @@ UsageType must be available in the UseConditions.json.</p>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="teaser.examples.verification.html" class="btn btn-neutral float-right" title="teaser.examples.verification package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="teaser.data.output.html" class="btn btn-neutral float-left" title="teaser.data.output package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="teaser.examples.verification.html" class="btn btn-neutral float-right" title="teaser.examples.verification package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
-
-    </p>
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

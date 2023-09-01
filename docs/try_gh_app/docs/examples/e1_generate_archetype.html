@@ -1,99 +1,63 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>&lt;no title&gt; &mdash; TEASER 0.7.7 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/autodoc_pydantic.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>Example 1: Generate archetype buildings using TEASER API &mdash; TEASER 0.7.7 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/autodoc_pydantic.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="e2_export_aixlib_models.html" />
+    <link rel="prev" title="API examples" href="../teaser_api_example.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../index.html" class="icon icon-home"> TEASER
           
-
-          
+          <a href="../index.html" class="icon icon-home">
+            TEASER
           </a>
-
-          
-            
-            
               <div class="version">
                 0.7
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <ul>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../install_teaser.html">Install TEASER</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../archetypes.html">Archetype Buildings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../teaser.Examples.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../teaser_api_example.html">API examples</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Example 1: Generate archetype buildings using TEASER API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../teaser_advanced_example.html">Advanced examples</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../code/modules.html">teaser</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
@@ -101,168 +65,124 @@
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Issues solved in development</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">TEASER</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-      <li>&lt;no title&gt;</li>
-    
-    
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../teaser.Examples.html">Examples</a></li>
+          <li class="breadcrumb-item"><a href="../teaser_api_example.html">API examples</a></li>
+      <li class="breadcrumb-item active">Example 1: Generate archetype buildings using TEASER API</li>
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/examples/e1_generate_archetype.md.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <blockquote>
-<div><p>Created July 2015
+             
+  <section id="example-1-generate-archetype-buildings-using-teaser-api">
+<h1>Example 1: Generate archetype buildings using TEASER API<a class="headerlink" href="#example-1-generate-archetype-buildings-using-teaser-api" title="Permalink to this heading"></a></h1>
+<p>Created July 2015
 TEASER 4 Development Team</p>
-</div></blockquote>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="sd">&quot;&quot;&quot;This module contains an example how to generate archetype buildings using</span>
-<span class="sd">  TEASER API functions.</span>
-<span class="sd">  &quot;&quot;&quot;</span>
-
-<span class="n">First</span> <span class="n">step</span><span class="p">:</span> <span class="n">Import</span> <span class="n">the</span> <span class="n">TEASER</span> <span class="n">API</span> <span class="p">(</span><span class="n">called</span> <span class="n">Project</span><span class="p">)</span> <span class="n">into</span> <span class="n">your</span> <span class="n">Python</span>
-<span class="n">module</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;This module contains an example how to generate archetype buildings using</span>
+<span class="sd">TEASER API functions.</span>
+<span class="sd">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  from teaser.project import Project
-
-To use the API instantiate the Project class and rename the Project. The
-parameter load_data=True indicates that we load ``iwu`` typology archetype
+<p>First step: Import the TEASER API (called Project) into your Python
+module</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">teaser.project</span> <span class="kn">import</span> <span class="n">Project</span>
+</pre></div>
+</div>
+<p>To use the API instantiate the Project class and rename the Project. The
+parameter load_data=True indicates that we load <code class="docutils literal notranslate"><span class="pre">iwu</span></code> typology archetype
 data into our Project (e.g. for Material properties and typical wall
 constructions. This can take a few seconds, depending on the size of the
 used data base). Be careful: Dymola does not like whitespaces in names and
-filenames, thus we will delete them anyway in TEASER.
+filenames, thus we will delete them anyway in TEASER.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">(</span><span class="n">load_data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ArchetypeExample&quot;</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  prj = Project(load_data=True)
-  prj.name = &quot;ArchetypeExample&quot;
-
-There are two different types of archetype groups: residential and
+<p>There are two different types of archetype groups: residential and
 non-residential buildings. Two API functions offer the opportunity to
-generate specific archetypes.
-To generate residential archetype buildings the function
+generate specific archetypes.</p>
+<p>To generate residential archetype buildings the function
 Project.add_residential() is used. Seven parameters are compulsory,
-additional parameters can be set according to the used method. ``method``
-and ``usage`` are used to distinguish between different archetype
+additional parameters can be set according to the used method. <code class="docutils literal notranslate"><span class="pre">method</span></code>
+and <code class="docutils literal notranslate"><span class="pre">usage</span></code> are used to distinguish between different archetype
 methods. The name, year_of_construction, number and height of floors
 and net_leased_area need to be set to provide enough information for
 archetype generation. For specific information on the parameters please
-read the docs.
+read the docs.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prj</span><span class="o">.</span><span class="n">add_residential</span><span class="p">(</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;iwu&#39;</span><span class="p">,</span>
+    <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;single_family_dwelling&#39;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ResidentialBuilding&quot;</span><span class="p">,</span>
+    <span class="n">year_of_construction</span><span class="o">=</span><span class="mi">1988</span><span class="p">,</span>
+    <span class="n">number_of_floors</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">height_of_floors</span><span class="o">=</span><span class="mf">3.2</span><span class="p">,</span>
+    <span class="n">net_leased_area</span><span class="o">=</span><span class="mf">200.0</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="n">prj</span><span class="o">.</span><span class="n">add_residential</span><span class="p">(</span>
-      <span class="n">method</span><span class="o">=</span><span class="s1">&#39;iwu&#39;</span><span class="p">,</span>
-      <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;single_family_dwelling&#39;</span><span class="p">,</span>
-      <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ResidentialBuilding&quot;</span><span class="p">,</span>
-      <span class="n">year_of_construction</span><span class="o">=</span><span class="mi">1988</span><span class="p">,</span>
-      <span class="n">number_of_floors</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-      <span class="n">height_of_floors</span><span class="o">=</span><span class="mf">3.2</span><span class="p">,</span>
-      <span class="n">net_leased_area</span><span class="o">=</span><span class="mf">200.0</span><span class="p">)</span>
+<p>To generate non-residential archetype buildings (in this case an
+office and a laboratory (a.k.a. institute)) the function
+Project.add_residential() is used. The meaning of compulsory parameters
+does not differ from the residential archetype building.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prj</span><span class="o">.</span><span class="n">add_non_residential</span><span class="p">(</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bmvbs&#39;</span><span class="p">,</span>
+    <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;office&#39;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;OfficeBuilding&quot;</span><span class="p">,</span>
+    <span class="n">year_of_construction</span><span class="o">=</span><span class="mi">1988</span><span class="p">,</span>
+    <span class="n">number_of_floors</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">height_of_floors</span><span class="o">=</span><span class="mf">3.5</span><span class="p">,</span>
+    <span class="n">net_leased_area</span><span class="o">=</span><span class="mf">4500.0</span><span class="p">)</span>
 
-<span class="n">To</span> <span class="n">generate</span> <span class="n">non</span><span class="o">-</span><span class="n">residential</span> <span class="n">archetype</span> <span class="n">buildings</span> <span class="p">(</span><span class="ow">in</span> <span class="n">this</span> <span class="n">case</span> <span class="n">an</span>
-<span class="n">office</span> <span class="ow">and</span> <span class="n">a</span> <span class="n">laboratory</span> <span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">k</span><span class="o">.</span><span class="n">a</span><span class="o">.</span> <span class="n">institute</span><span class="p">))</span> <span class="n">the</span> <span class="n">function</span>
-<span class="n">Project</span><span class="o">.</span><span class="n">add_residential</span><span class="p">()</span> <span class="ow">is</span> <span class="n">used</span><span class="o">.</span> <span class="n">The</span> <span class="n">meaning</span> <span class="n">of</span> <span class="n">compulsory</span> <span class="n">parameters</span>
-<span class="n">does</span> <span class="ow">not</span> <span class="n">differ</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">residential</span> <span class="n">archetype</span> <span class="n">building</span><span class="o">.</span>
+<span class="n">prj</span><span class="o">.</span><span class="n">add_non_residential</span><span class="p">(</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bmvbs&#39;</span><span class="p">,</span>
+    <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;institute&#39;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;InstituteBuilding&quot;</span><span class="p">,</span>
+    <span class="n">year_of_construction</span><span class="o">=</span><span class="mi">1952</span><span class="p">,</span>
+    <span class="n">number_of_floors</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">height_of_floors</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span>
+    <span class="n">net_leased_area</span><span class="o">=</span><span class="mf">3400.0</span><span class="p">)</span>
+
+<span class="n">prj</span><span class="o">.</span><span class="n">add_non_residential</span><span class="p">(</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bmvbs&#39;</span><span class="p">,</span>
+    <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;institute&#39;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;InstituteBuildingMoisture&quot;</span><span class="p">,</span>
+    <span class="n">year_of_construction</span><span class="o">=</span><span class="mi">1980</span><span class="p">,</span>
+    <span class="n">number_of_floors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">height_of_floors</span><span class="o">=</span><span class="mf">4.2</span><span class="p">,</span>
+    <span class="n">net_leased_area</span><span class="o">=</span><span class="mf">3600.0</span><span class="p">,</span>
+    <span class="n">internal_gains_mode</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  prj.add_non_residential(
-      method=&#39;bmvbs&#39;,
-      usage=&#39;office&#39;,
-      name=&quot;OfficeBuilding&quot;,
-      year_of_construction=1988,
-      number_of_floors=4,
-      height_of_floors=3.5,
-      net_leased_area=4500.0)
-
-  prj.add_non_residential(
-      method=&#39;bmvbs&#39;,
-      usage=&#39;institute&#39;,
-      name=&quot;InstituteBuilding&quot;,
-      year_of_construction=1952,
-      number_of_floors=5,
-      height_of_floors=4.0,
-      net_leased_area=3400.0)
-
-  prj.add_non_residential(
-      method=&#39;bmvbs&#39;,
-      usage=&#39;institute&#39;,
-      name=&quot;InstituteBuildingMoisture&quot;,
-      year_of_construction=1980,
-      number_of_floors=3,
-      height_of_floors=4.2,
-      net_leased_area=3600.0,
-      internal_gains_mode=3)
-
-Besides ``iwu`` and ``bmvbs`` there is a third option for archetype
+<p>Besides <code class="docutils literal notranslate"><span class="pre">iwu</span></code> and <code class="docutils literal notranslate"><span class="pre">bmvbs</span></code> there is a third option for archetype
 generation. We integrated the typology of TABULA Germany
-(http://webtool.building-typology.eu/#bm) and other countries are about to
-follow. To use TABULA archetype simple choose ``tabula_de`` as the method
-and ``single_family_house``\ , ``multi_family_house``\ , ``terraced_house`` or
-``apartment_block`` as the usage. In addition you can specify the
-construction type of TABULA, chose between ``tabula_standard`` (default),
-``tabula_retrofit`` or ``tabula_adv_retrofit``. In this case we generate one
-single and one multi family house with TABULA typology.
-Please not: as we need to load the construction information which are
+(<a class="reference external" href="http://webtool.building-typology.eu/#bm">http://webtool.building-typology.eu/#bm</a>) and other countries are about to
+follow. To use TABULA archetype simple choose <code class="docutils literal notranslate"><span class="pre">tabula_de</span></code> as the method
+and <code class="docutils literal notranslate"><span class="pre">single_family_house</span></code>, <code class="docutils literal notranslate"><span class="pre">multi_family_house</span></code>, <code class="docutils literal notranslate"><span class="pre">terraced_house</span></code> or
+<code class="docutils literal notranslate"><span class="pre">apartment_block</span></code> as the usage. In addition you can specify the
+construction type of TABULA, chose between <code class="docutils literal notranslate"><span class="pre">tabula_standard</span></code> (default),
+<code class="docutils literal notranslate"><span class="pre">tabula_retrofit</span></code> or <code class="docutils literal notranslate"><span class="pre">tabula_adv_retrofit</span></code>. In this case we generate one
+single and one multi family house with TABULA typology.</p>
+<p>Please not: as we need to load the construction information which are
 rather big for TABULA, switching from one typology to another in the same
 Project takes some seconds. If you know from beginning you will only use
 TABULA typology you should instantiate you Project class without loading
-data. Project(load_data=False).
-</pre></div>
-</div>
+data. Project(load_data=False).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prj</span><span class="o">.</span><span class="n">add_residential</span><span class="p">(</span>
     <span class="n">method</span><span class="o">=</span><span class="s1">&#39;tabula_de&#39;</span><span class="p">,</span>
     <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;single_family_house&#39;</span><span class="p">,</span>
@@ -284,49 +204,37 @@ data. Project(load_data=False).
     <span class="n">construction_type</span><span class="o">=</span><span class="s1">&#39;tabula_retrofit&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../teaser_api_example.html" class="btn btn-neutral float-left" title="API examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="e2_export_aixlib_models.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
-
-    </p>
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

@@ -1,94 +1,49 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>teaser.project &mdash; TEASER 0.7.7 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/autodoc_pydantic.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/autodoc_pydantic.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../index.html" class="icon icon-home"> TEASER
           
-
-          
+          <a href="../../index.html" class="icon icon-home">
+            TEASER
           </a>
-
-          
-            
-            
               <div class="version">
                 0.7
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../install_teaser.html">Install TEASER</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../archetypes.html">Archetype Buildings</a></li>
@@ -100,69 +55,30 @@
 <li class="toctree-l1"><a class="reference internal" href="../../development.html">Issues solved in development</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">TEASER</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-        
-      <li>teaser.project</li>
-    
-    
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">teaser.project</li>
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for teaser.project</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;This module includes the Project class, which is the API for TEASER.&quot;&quot;&quot;</span>
 
@@ -523,9 +439,9 @@
 <span class="sd">        construction_type : str</span>
 <span class="sd">            Construction type of used wall constructions default is &quot;heavy&quot;)</span>
 
-<span class="sd">            1. heavy: heavy construction</span>
+<span class="sd">            - heavy: heavy construction</span>
 
-<span class="sd">            2. light: light construction</span>
+<span class="sd">            - light: light construction</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -689,55 +605,72 @@
 <span class="sd">            and</span>
 <span class="sd">            assigned to attribute central_ahu. This instance holds information</span>
 <span class="sd">            for central Air Handling units. Default is False.</span>
-<span class="sd">internal_gains_mode: int [1, 2, 3]</span>
-<span class="sd">        mode for the internal gains calculation done in AixLib:</span>
-<span class="sd">        1: Temperature and activity degree dependent heat flux calculation for persons. The</span>
-<span class="sd">           calculation is based on  SIA 2024 (default)</span>
-<span class="sd">        2: Temperature and activity degree independent heat flux calculation for persons, the max.</span>
-<span class="sd">           heatflowrate is prescribed by the parameter</span>
-<span class="sd">           fixed_heat_flow_rate_persons.</span>
-<span class="sd">        3: Temperature and activity degree dependent calculation with</span>
-<span class="sd">           consideration of moisture and co2. The moisture calculation is</span>
-<span class="sd">           based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on</span>
-<span class="sd">           Engineering ToolBox (2004) and regards only persons.</span>
+<span class="sd">        internal_gains_mode: int [1, 2, 3]</span>
+<span class="sd">            mode for the internal gains calculation done in AixLib:</span>
+
+<span class="sd">            1. Temperature and activity degree dependent heat flux calculation for persons. The</span>
+<span class="sd">               calculation is based on  SIA 2024 (default)</span>
+
+<span class="sd">            2. Temperature and activity degree independent heat flux calculation for persons, the max.</span>
+<span class="sd">               heatflowrate is prescribed by the parameter</span>
+<span class="sd">               fixed_heat_flow_rate_persons.</span>
+
+<span class="sd">            3. Temperature and activity degree dependent calculation with</span>
+<span class="sd">               consideration of moisture and co2. The moisture calculation is</span>
+<span class="sd">               based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on</span>
+<span class="sd">               Engineering ToolBox (2004) and regards only persons.</span>
+
 <span class="sd">        residential_layout : int</span>
 <span class="sd">            Structure of floor plan (default = 0) CAUTION only used for iwu</span>
-<span class="sd">                0: compact</span>
-<span class="sd">                1: elongated/complex</span>
+
+<span class="sd">            0. compact</span>
+
+<span class="sd">            1. elongated/complex</span>
+
 <span class="sd">        neighbour_buildings : int</span>
 <span class="sd">            Number of neighbour buildings. CAUTION: this will not change</span>
 <span class="sd">            the orientation of the buildings wall, but just the overall</span>
 <span class="sd">            exterior wall and window area(!) (default = 0)</span>
-<span class="sd">                0: no neighbour</span>
-<span class="sd">                1: one neighbour</span>
-<span class="sd">                2: two neighbours</span>
+
+<span class="sd">            0. no neighbour</span>
+<span class="sd">            1. one neighbour</span>
+<span class="sd">            2. two neighbours</span>
+
 <span class="sd">        attic : int</span>
 <span class="sd">            Design of the attic. CAUTION: this will not change the orientation</span>
 <span class="sd">            or tilt of the roof instances, but just adapt the roof area(!) (</span>
 <span class="sd">            default = 0) CAUTION only used for iwu</span>
-<span class="sd">                0: flat roof</span>
-<span class="sd">                1: non heated attic</span>
-<span class="sd">                2: partly heated attic</span>
-<span class="sd">                3: heated attic</span>
+
+<span class="sd">            0. flat roof</span>
+<span class="sd">            1. non heated attic</span>
+<span class="sd">            2. partly heated attic</span>
+<span class="sd">            3. heated attic</span>
+
 <span class="sd">        cellar : int</span>
 <span class="sd">            Design of the of cellar CAUTION: this will not change the</span>
 <span class="sd">            orientation, tilt of GroundFloor instances, nor the number or area</span>
 <span class="sd">            of ThermalZones, but will change GroundFloor area(!) (default = 0)</span>
 <span class="sd">            CAUTION only used for iwu</span>
-<span class="sd">                0: no cellar</span>
-<span class="sd">                1: non heated cellar</span>
-<span class="sd">                2: partly heated cellar</span>
-<span class="sd">                3: heated cellar</span>
+
+<span class="sd">            0. no cellar</span>
+<span class="sd">            1. non heated cellar</span>
+<span class="sd">            2. partly heated cellar</span>
+<span class="sd">            3. heated cellar</span>
+
 <span class="sd">        dormer : str</span>
 <span class="sd">            Is a dormer attached to the roof? CAUTION: this will not</span>
 <span class="sd">            change roof or window orientation or tilt, but just adapt the roof</span>
 <span class="sd">            area(!) (default = 0) CAUTION only used for iwu</span>
-<span class="sd">                0: no dormer</span>
-<span class="sd">                1: dormer</span>
+
+<span class="sd">            0. no dormer</span>
+<span class="sd">            1. dormer</span>
+
 <span class="sd">        construction_type : str</span>
 <span class="sd">            Construction type of used wall constructions default is &quot;heavy&quot;)</span>
-<span class="sd">                heavy: heavy construction</span>
-<span class="sd">                light: light construction</span>
+
+<span class="sd">            - heavy: heavy construction</span>
+<span class="sd">            - light: light construction</span>
+
 <span class="sd">        number_of_apartments : int</span>
 <span class="sd">            number of apartments inside Building (default = 1). CAUTION only</span>
 <span class="sd">            used for urbanrenet</span>
@@ -1438,46 +1371,30 @@
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
-
-    </p>
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

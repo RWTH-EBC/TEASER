@@ -1,97 +1,52 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>teaser.logic package &mdash; TEASER 0.7.7 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/autodoc_pydantic.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/autodoc_pydantic.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="teaser.logic.archetypebuildings package" href="teaser.logic.archetypebuildings.html" />
     <link rel="prev" title="teaser.examples.verification package" href="teaser.examples.verification.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../index.html" class="icon icon-home"> TEASER
           
-
-          
+          <a href="../index.html" class="icon icon-home">
+            TEASER
           </a>
-
-          
-            
-            
               <div class="version">
                 0.7
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../install_teaser.html">Install TEASER</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../archetypes.html">Archetype Buildings</a></li>
@@ -102,7 +57,25 @@
 <li class="toctree-l3 current"><a class="reference internal" href="teaser.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="teaser.data.html">teaser.data package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="teaser.examples.html">teaser.examples package</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">teaser.logic package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">teaser.logic package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="teaser.logic.archetypebuildings.html">teaser.logic.archetypebuildings package</a></li>
+<li class="toctree-l6"><a class="reference internal" href="teaser.logic.buildingobjects.html">teaser.logic.buildingobjects package</a></li>
+<li class="toctree-l6"><a class="reference internal" href="teaser.logic.simulation.html">teaser.logic.simulation package</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.logic.utilities">teaser.logic.utilities module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.logic.utilities.celsius_to_kelvin"><code class="docutils literal notranslate"><span class="pre">celsius_to_kelvin()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.logic.utilities.clear_directory"><code class="docutils literal notranslate"><span class="pre">clear_directory()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.logic.utilities.create_path"><code class="docutils literal notranslate"><span class="pre">create_path()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.logic.utilities.division_from_json"><code class="docutils literal notranslate"><span class="pre">division_from_json()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.logic.utilities.get_default_path"><code class="docutils literal notranslate"><span class="pre">get_default_path()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.logic.utilities.get_full_path"><code class="docutils literal notranslate"><span class="pre">get_full_path()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="teaser.html#submodules">Submodules</a></li>
@@ -117,79 +90,36 @@
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Issues solved in development</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">TEASER</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="modules.html">teaser</a> &raquo;</li>
-        
-          <li><a href="teaser.html">teaser package</a> &raquo;</li>
-        
-      <li>teaser.logic package</li>
-    
-    
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">teaser</a></li>
+          <li class="breadcrumb-item"><a href="teaser.html">teaser package</a></li>
+      <li class="breadcrumb-item active">teaser.logic package</li>
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/code/teaser.logic.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <section id="module-teaser.logic">
-<span id="teaser-logic-package"></span><h1>teaser.logic package<a class="headerlink" href="#module-teaser.logic" title="Permalink to this heading">¶</a></h1>
+<span id="teaser-logic-package"></span><h1>teaser.logic package<a class="headerlink" href="#module-teaser.logic" title="Permalink to this heading"></a></h1>
 <section id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading">¶</a></h2>
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="teaser.logic.archetypebuildings.html">teaser.logic.archetypebuildings package</a><ul>
@@ -370,23 +300,23 @@
 </div>
 </section>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
 </section>
 <section id="module-teaser.logic.utilities">
-<span id="teaser-logic-utilities-module"></span><h2>teaser.logic.utilities module<a class="headerlink" href="#module-teaser.logic.utilities" title="Permalink to this heading">¶</a></h2>
+<span id="teaser-logic-utilities-module"></span><h2>teaser.logic.utilities module<a class="headerlink" href="#module-teaser.logic.utilities" title="Permalink to this heading"></a></h2>
 <p>Utilities: Collection of all utility functions that are useful in several
 classes</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaser.logic.utilities.celsius_to_kelvin">
-<span class="sig-prename descclassname"><span class="pre">teaser.logic.utilities.</span></span><span class="sig-name descname"><span class="pre">celsius_to_kelvin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/utilities.html#celsius_to_kelvin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.utilities.celsius_to_kelvin" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaser.logic.utilities.</span></span><span class="sig-name descname"><span class="pre">celsius_to_kelvin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/utilities.html#celsius_to_kelvin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.utilities.celsius_to_kelvin" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="teaser.logic.utilities.clear_directory">
-<span class="sig-prename descclassname"><span class="pre">teaser.logic.utilities.</span></span><span class="sig-name descname"><span class="pre">clear_directory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/utilities.html#clear_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.utilities.clear_directory" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaser.logic.utilities.</span></span><span class="sig-name descname"><span class="pre">clear_directory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/utilities.html#clear_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.utilities.clear_directory" title="Permalink to this definition"></a></dt>
 <dd><p>Function to delete all files inside a directory.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>dir_path</strong><span class="classifier">str</span></dt><dd><p>Path of directory to be deleted. By default the teaser default
 directory is cleared</p>
@@ -398,11 +328,11 @@ directory is cleared</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="teaser.logic.utilities.create_path">
-<span class="sig-prename descclassname"><span class="pre">teaser.logic.utilities.</span></span><span class="sig-name descname"><span class="pre">create_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/utilities.html#create_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.utilities.create_path" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaser.logic.utilities.</span></span><span class="sig-name descname"><span class="pre">create_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/utilities.html#create_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.utilities.create_path" title="Permalink to this definition"></a></dt>
 <dd><p>Create a folder.</p>
 <p>Creates a new folder.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>path</strong><span class="classifier">str</span></dt><dd></dd>
 </dl>
@@ -412,11 +342,11 @@ directory is cleared</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="teaser.logic.utilities.division_from_json">
-<span class="sig-prename descclassname"><span class="pre">teaser.logic.utilities.</span></span><span class="sig-name descname"><span class="pre">division_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ordereddict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/utilities.html#division_from_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.utilities.division_from_json" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaser.logic.utilities.</span></span><span class="sig-name descname"><span class="pre">division_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ordereddict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/utilities.html#division_from_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.utilities.division_from_json" title="Permalink to this definition"></a></dt>
 <dd><p>function to transform the output of division in json after loading to
 python into float values</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>ordereddict</strong><span class="classifier">output of the json load of arguments like</span></dt><dd></dd>
 <dt><strong>“persons”: {“/”:[1,15]}</strong></dt><dd></dd>
@@ -427,24 +357,24 @@ python into float values</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="teaser.logic.utilities.get_default_path">
-<span class="sig-prename descclassname"><span class="pre">teaser.logic.utilities.</span></span><span class="sig-name descname"><span class="pre">get_default_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/utilities.html#get_default_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.utilities.get_default_path" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaser.logic.utilities.</span></span><span class="sig-name descname"><span class="pre">get_default_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/utilities.html#get_default_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.utilities.get_default_path" title="Permalink to this definition"></a></dt>
 <dd><p>Function to construct default path to OutputData folder
 This function constructs the default path to the OutputData folder</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="teaser.logic.utilities.get_full_path">
-<span class="sig-prename descclassname"><span class="pre">teaser.logic.utilities.</span></span><span class="sig-name descname"><span class="pre">get_full_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rel_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/utilities.html#get_full_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.utilities.get_full_path" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaser.logic.utilities.</span></span><span class="sig-name descname"><span class="pre">get_full_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rel_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/utilities.html#get_full_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.utilities.get_full_path" title="Permalink to this definition"></a></dt>
 <dd><p>Helperfunction to construct pathes to files within teaser.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>rel_path</strong><span class="classifier">str</span></dt><dd><p>Relative path beginning from teaser source folder including
 filename</p>
 </dd>
 </dl>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
 <dt><strong>full_path</strong><span class="classifier">str</span></dt><dd></dd>
 </dl>
@@ -457,50 +387,33 @@ filename</p>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="teaser.logic.archetypebuildings.html" class="btn btn-neutral float-right" title="teaser.logic.archetypebuildings package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="teaser.examples.verification.html" class="btn btn-neutral float-left" title="teaser.examples.verification package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="teaser.logic.archetypebuildings.html" class="btn btn-neutral float-right" title="teaser.logic.archetypebuildings package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
-
-    </p>
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
