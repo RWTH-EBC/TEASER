@@ -550,15 +550,15 @@ class Wall(BuildingElement):
                 )
 
                 setpoint_diff_heating = np.subtract(
-                    this_use.schedules["heating_profile"]
-                    - other_use.schedules["heating_profile"]
+                    this_use.schedules["heating_profile"],
+                    other_use.schedules["heating_profile"]
                 )
                 this_warmer = any(setpoint_diff_heating > max_setpoint_diff)
                 other_warmer = any(setpoint_diff_heating < -max_setpoint_diff)
 
                 setpoint_diff_cooling = np.subtract(
-                    this_use.schedules["cooling_profile"]
-                    - other_use.schedules["cooling_profile"]
+                    this_use.schedules["cooling_profile"],
+                    other_use.schedules["cooling_profile"]
                 )
                 this_colder = any(setpoint_diff_cooling < -max_setpoint_diff)
                 other_colder = any(setpoint_diff_cooling > max_setpoint_diff)
