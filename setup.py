@@ -5,7 +5,8 @@ from setuptools import setup
 from pathlib import Path
 
 readme_path = Path(__file__).parent.joinpath("README.md")
-long_description = readme_path.read_text()
+with open(readme_path, "r", encoding="utf-8") as file:
+    long_description = file.read()
 
 with open(Path(__file__).parent.joinpath("teaser", "__init__.py"), "r") as file:
     for line in file.readlines():

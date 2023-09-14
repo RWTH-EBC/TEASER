@@ -3,7 +3,7 @@
 
 """
 This script contains of three functions. The first one loads the heavy-weight
-ASHRAE 140 test room 900 from a *.teaserjson file. The second one creates
+ASHRAE 140 test room 900 from a `*.teaserjson` file. The second one creates
 that room within the code. The third one computes parameter with the help of
 one of the aforementioned functions.
 """
