@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser.data.output.ibpsa_output &mdash; TEASER 0.7.7 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/autodoc_pydantic.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            TEASER
+          </a>
+              <div class="version">
+                0.7
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code/modules.html">teaser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">teaser.data.output.ibpsa_output</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for teaser.data.output.ibpsa_output</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Created May 2016</span>
+<span class="c1"># TEASER Development Team</span>
+
+<span class="sd">&quot;&quot;&quot;ibpsa_output</span>
+
+<span class="sd">This module contains function to call Templates for IBPSA model generation</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">teaser.data.output.aixlib_output</span> <span class="k">as</span> <span class="nn">ibpsa_output</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utilities</span>
+<span class="kn">from</span> <span class="nn">mako.template</span> <span class="kn">import</span> <span class="n">Template</span>
+<span class="kn">from</span> <span class="nn">mako.lookup</span> <span class="kn">import</span> <span class="n">TemplateLookup</span>
+
+
+<div class="viewcode-block" id="export_ibpsa"><a class="viewcode-back" href="../../../../code/teaser.data.output.html#teaser.data.output.ibpsa_output.export_ibpsa">[docs]</a><span class="k">def</span> <span class="nf">export_ibpsa</span><span class="p">(</span>
+        <span class="n">buildings</span><span class="p">,</span>
+        <span class="n">prj</span><span class="p">,</span>
+        <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">library</span><span class="o">=</span><span class="s1">&#39;AixLib&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Exports models for IBPSA library</span>
+
+<span class="sd">    Export a building to several models for</span>
+<span class="sd">    IBPSA.ThermalZones.ReducedOrder. Depending on the chosen calculation</span>
+<span class="sd">    method models for 1, 2, 3, or 4 element model are exported. In addition</span>
+<span class="sd">    you can specify if windows should be lumped into the walls, like it is</span>
+<span class="sd">    done in VDI 6007 (merge_windows=True) or not. For each zone, one model is</span>
+<span class="sd">    exported, if you want to combine all thermal zones into one model, consider</span>
+<span class="sd">    using AixLib. The export includes internal gains from use conditions (</span>
+<span class="sd">    calculated in teaser.logic.calculation.ibpsa) but does not include any</span>
+<span class="sd">    heating or cooling equipment.</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    buildings : list of instances of Building</span>
+<span class="sd">        list of TEASER instances of a Building that are exported If you</span>
+<span class="sd">        want to</span>
+<span class="sd">        export a single building, please pass it over as a list containing</span>
+<span class="sd">        only that building.</span>
+<span class="sd">    prj : instance of Project</span>
+<span class="sd">        Instance of TEASER Project object to access Project related</span>
+<span class="sd">        information, e.g. name or version of used libraries</span>
+<span class="sd">    path : string</span>
+<span class="sd">        if the Files should not be stored in default output path of TEASER,</span>
+<span class="sd">        an alternative path can be specified as a full path</span>
+<span class="sd">    library : str</span>
+<span class="sd">        Used library within the framework of IBPSA library. The</span>
+<span class="sd">        models are identical in each library, but IBPSA Modelica library is</span>
+<span class="sd">        just a core set of models and should not be used standalone.</span>
+<span class="sd">        Valid values are &#39;AixLib&#39; (default), &#39;Buildings&#39;,</span>
+<span class="sd">        &#39;BuildingSystems&#39; and &#39;IDEAS&#39;.</span>
+
+<span class="sd">     Attributes</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    lookup : TemplateLookup object</span>
+<span class="sd">        Instance of mako.TemplateLookup to store general functions for templates</span>
+<span class="sd">    model_template_1 : Template object</span>
+<span class="sd">        Template for ThermalZoneRecord using 1 element model</span>
+<span class="sd">    model_template_2 : Template object</span>
+<span class="sd">        Template for ThermalZoneRecord using 2 element model</span>
+<span class="sd">    model_template_3 : Template object</span>
+<span class="sd">        Template for ThermalZoneRecord using 3 element model</span>
+<span class="sd">    model_template_4 : Template object</span>
+<span class="sd">        Template for ThermalZoneRecord using 4 element model</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">uses</span> <span class="o">=</span> <span class="n">uses</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;Modelica(version=&quot;&#39;</span> <span class="o">+</span> <span class="n">prj</span><span class="o">.</span><span class="n">modelica_info</span><span class="o">.</span><span class="n">version</span> <span class="o">+</span> <span class="s1">&#39;&quot;)&#39;</span><span class="p">,</span>
+        <span class="n">library</span> <span class="o">+</span> <span class="s1">&#39;(version=&quot;&#39;</span> <span class="o">+</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">library_attr</span><span class="o">.</span><span class="n">version</span><span class="p">[</span>
+            <span class="n">library</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&quot;)&#39;</span><span class="p">]</span>
+
+    <span class="n">lookup</span> <span class="o">=</span> <span class="n">TemplateLookup</span><span class="p">(</span><span class="n">directories</span><span class="o">=</span><span class="p">[</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="s1">&#39;modelicatemplate&#39;</span><span class="p">))])</span>
+    <span class="n">model_template_1</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span>
+        <span class="n">filename</span><span class="o">=</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+            <span class="s2">&quot;data/output/modelicatemplate/IBPSA/IBPSA_OneElement&quot;</span><span class="p">),</span>
+        <span class="n">lookup</span><span class="o">=</span><span class="n">lookup</span><span class="p">)</span>
+    <span class="n">model_template_2</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span>
+        <span class="n">filename</span><span class="o">=</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+            <span class="s2">&quot;data/output/modelicatemplate/IBPSA/IBPSA_TwoElements&quot;</span><span class="p">),</span>
+        <span class="n">lookup</span><span class="o">=</span><span class="n">lookup</span><span class="p">)</span>
+    <span class="n">model_template_3</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span>
+        <span class="n">filename</span><span class="o">=</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+            <span class="s2">&quot;data/output/modelicatemplate/IBPSA/IBPSA_ThreeElements&quot;</span><span class="p">),</span>
+        <span class="n">lookup</span><span class="o">=</span><span class="n">lookup</span><span class="p">)</span>
+    <span class="n">model_template_4</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span>
+        <span class="n">filename</span><span class="o">=</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+            <span class="s2">&quot;data/output/modelicatemplate/IBPSA/IBPSA_FourElements&quot;</span><span class="p">),</span>
+        <span class="n">lookup</span><span class="o">=</span><span class="n">lookup</span><span class="p">)</span>
+
+    <span class="n">ibpsa_output</span><span class="o">.</span><span class="n">_help_package</span><span class="p">(</span>
+        <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">prj</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+        <span class="n">uses</span><span class="o">=</span><span class="n">uses</span><span class="p">,</span>
+        <span class="n">within</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">ibpsa_output</span><span class="o">.</span><span class="n">_help_package_order</span><span class="p">(</span>
+        <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
+        <span class="n">package_list</span><span class="o">=</span><span class="n">buildings</span><span class="p">,</span>
+        <span class="n">addition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">extra</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">ibpsa_output</span><span class="o">.</span><span class="n">_copy_weather_data</span><span class="p">(</span><span class="n">prj</span><span class="o">.</span><span class="n">weather_file_path</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">buildings</span><span class="p">):</span>
+
+        <span class="n">ass_error</span> <span class="o">=</span> <span class="s2">&quot;You chose AixLib calculation, &quot;</span> \
+                    <span class="s2">&quot;but want to export IBPSA models, &quot;</span> \
+                    <span class="s2">&quot;this is not possible&quot;</span>
+
+        <span class="k">assert</span> <span class="n">bldg</span><span class="o">.</span><span class="n">used_library_calc</span> <span class="o">==</span> <span class="s1">&#39;IBPSA&#39;</span><span class="p">,</span> <span class="n">ass_error</span>
+
+        <span class="n">bldg_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span><span class="n">bldg_path</span><span class="p">))</span>
+        <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bldg_path</span><span class="p">,</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_Models&quot;</span><span class="p">)))</span>
+
+        <span class="n">ibpsa_output</span><span class="o">.</span><span class="n">_help_package</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">bldg_path</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">within</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="n">ibpsa_output</span><span class="o">.</span><span class="n">_help_package_order</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">bldg_path</span><span class="p">,</span>
+            <span class="n">package_list</span><span class="o">=</span><span class="p">[],</span>
+            <span class="n">addition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">extra</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_Models&quot;</span><span class="p">)</span>
+
+        <span class="n">zone_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">bldg_path</span><span class="p">,</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_Models&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">zone</span> <span class="ow">in</span> <span class="n">bldg</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+
+            <span class="n">zone</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">library_attr</span><span class="o">.</span><span class="n">file_internal_gains</span> <span class="o">=</span> \
+                <span class="s1">&#39;InternalGains_&#39;</span> <span class="o">+</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="n">zone</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;.txt&#39;</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">library_attr</span><span class="o">.</span><span class="n">modelica_gains_boundary</span><span class="p">(</span>
+                <span class="n">zone</span><span class="o">=</span><span class="n">zone</span><span class="p">,</span>
+                <span class="n">path</span><span class="o">=</span><span class="n">zone_path</span><span class="p">)</span>
+
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="n">zone_path</span><span class="p">,</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">zone</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;.mo&#39;</span><span class="p">)),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out_file</span><span class="p">:</span>
+
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;OneElement&quot;</span><span class="p">:</span>
+                    <span class="n">out_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">model_template_1</span><span class="o">.</span><span class="n">render_unicode</span><span class="p">(</span><span class="n">zone</span><span class="o">=</span><span class="n">zone</span><span class="p">,</span>
+                                                                   <span class="n">library</span><span class="o">=</span><span class="n">library</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;TwoElement&quot;</span><span class="p">:</span>
+                    <span class="n">out_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">model_template_2</span><span class="o">.</span><span class="n">render_unicode</span><span class="p">(</span><span class="n">zone</span><span class="o">=</span><span class="n">zone</span><span class="p">,</span>
+                                                                   <span class="n">library</span><span class="o">=</span><span class="n">library</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;ThreeElement&quot;</span><span class="p">:</span>
+                    <span class="n">out_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">model_template_3</span><span class="o">.</span><span class="n">render_unicode</span><span class="p">(</span><span class="n">zone</span><span class="o">=</span><span class="n">zone</span><span class="p">,</span>
+                                                                   <span class="n">library</span><span class="o">=</span><span class="n">library</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;FourElement&quot;</span><span class="p">:</span>
+                    <span class="n">out_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">model_template_4</span><span class="o">.</span><span class="n">render_unicode</span><span class="p">(</span><span class="n">zone</span><span class="o">=</span><span class="n">zone</span><span class="p">,</span>
+                                                                   <span class="n">library</span><span class="o">=</span><span class="n">library</span><span class="p">))</span>
+
+
+        <span class="n">ibpsa_output</span><span class="o">.</span><span class="n">_help_package</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">zone_path</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_Models&quot;</span><span class="p">,</span>
+            <span class="n">within</span><span class="o">=</span><span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="n">ibpsa_output</span><span class="o">.</span><span class="n">_help_package_order</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">zone_path</span><span class="p">,</span>
+            <span class="n">package_list</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">,</span>
+            <span class="n">addition</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exports can be found here:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
