@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser.project &mdash; TEASER 0.7.7 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/autodoc_pydantic.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            TEASER
+          </a>
+              <div class="version">
+                0.7
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code/modules.html">teaser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">teaser.project</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for teaser.project</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;This module includes the Project class, which is the API for TEASER.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utilities</span>
+<span class="kn">import</span> <span class="nn">teaser.data.input.teaserjson_input</span> <span class="k">as</span> <span class="nn">tjson_in</span>
+<span class="kn">import</span> <span class="nn">teaser.data.output.teaserjson_output</span> <span class="k">as</span> <span class="nn">tjson_out</span>
+<span class="kn">import</span> <span class="nn">teaser.data.output.aixlib_output</span> <span class="k">as</span> <span class="nn">aixlib_output</span>
+<span class="kn">import</span> <span class="nn">teaser.data.output.ibpsa_output</span> <span class="k">as</span> <span class="nn">ibpsa_output</span>
+<span class="kn">from</span> <span class="nn">teaser.data.dataclass</span> <span class="kn">import</span> <span class="n">DataClass</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.bmvbs.office</span> <span class="kn">import</span> <span class="n">Office</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.bmvbs.custom.institute</span> <span class="kn">import</span> <span class="n">Institute</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.bmvbs.custom.institute4</span> <span class="kn">import</span> <span class="n">Institute4</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.bmvbs.custom.institute8</span> <span class="kn">import</span> <span class="n">Institute8</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est1a</span> <span class="kn">import</span> <span class="n">EST1a</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est1b</span> <span class="kn">import</span> <span class="n">EST1b</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est2</span> <span class="kn">import</span> <span class="n">EST2</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est3</span> <span class="kn">import</span> <span class="n">EST3</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est4a</span> <span class="kn">import</span> <span class="n">EST4a</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est4b</span> <span class="kn">import</span> <span class="n">EST4b</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est5</span> <span class="kn">import</span> <span class="n">EST5</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est6</span> <span class="kn">import</span> <span class="n">EST6</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est7</span> <span class="kn">import</span> <span class="n">EST7</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est8a</span> <span class="kn">import</span> <span class="n">EST8a</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est8b</span> <span class="kn">import</span> <span class="n">EST8b</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SingleFamilyHouse</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.dk.singlefamilyhouse</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SingleFamilyHouse</span> <span class="k">as</span> <span class="n">SingleFamilyHouse_DK</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.de.terracedhouse</span> <span class="kn">import</span> <span class="n">TerracedHouse</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.dk.terracedhouse</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">TerracedHouse</span> <span class="k">as</span> <span class="n">TerracedHouse_DK</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.de.multifamilyhouse</span> <span class="kn">import</span> <span class="n">MultiFamilyHouse</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.de.apartmentblock</span> <span class="kn">import</span> <span class="n">ApartmentBlock</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.dk.apartmentblock</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ApartmentBlock</span> <span class="k">as</span> <span class="n">ApartmentBlock_DK</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SingleFamilyDwelling</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.simulation.modelicainfo</span> <span class="kn">import</span> <span class="n">ModelicaInfo</span>
+
+
+<div class="viewcode-block" id="Project"><a class="viewcode-back" href="../../code/teaser.html#teaser.project.Project">[docs]</a><span class="k">class</span> <span class="nc">Project</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Top class for TEASER projects it serves as an API</span>
+
+<span class="sd">    The Project class is the top class for all TEASER projects and serves as an</span>
+<span class="sd">    API for script based interface. It is highly recommended to always</span>
+<span class="sd">    instantiate the Project class before starting to work with TEASER. It</span>
+<span class="sd">    contains functions to generate archetype buildings, to export models and to</span>
+<span class="sd">    save information for later use.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    load_data : boolean</span>
+<span class="sd">        boolean if data bases for materials, type elements and use conditions</span>
+<span class="sd">        should be loaded. default = False but will be automatically loaded</span>
+<span class="sd">        once you add a archetype building. For building generation from</span>
+<span class="sd">        scratch, set to True</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    name : str</span>
+<span class="sd">        Name of the Project (default is &#39;Project&#39;)</span>
+<span class="sd">    modelica_info : instance of ModelicaInfo</span>
+<span class="sd">        TEASER instance of ModelicaInfo to store Modelica related</span>
+<span class="sd">        information, like used compiler, start and stop time, etc.</span>
+<span class="sd">    buildings : list</span>
+<span class="sd">        List of all buildings in one project, instances of Building()</span>
+<span class="sd">    data : instance of DataClass</span>
+<span class="sd">        TEASER instance of DataClass containing JSON binding classes</span>
+<span class="sd">    weather_file_path : str</span>
+<span class="sd">        Absolute path to weather file used for Modelica simulation. Default</span>
+<span class="sd">        weather file can be find in inputdata/weatherdata.</span>
+<span class="sd">    number_of_elements_calc : int</span>
+<span class="sd">        Defines the number of elements, that are aggregated (1, 2, 3 or 4),</span>
+<span class="sd">        default is 2</span>
+<span class="sd">    merge_windows_calc : bool</span>
+<span class="sd">        True for merging the windows into the outer walls, False for</span>
+<span class="sd">        separate resistance for window, default is False (only supported for</span>
+<span class="sd">        IBPSA)</span>
+<span class="sd">    used_library_calc : str</span>
+<span class="sd">        used library (AixLib and IBPSA are supported)</span>
+<span class="sd">    dir_reference_results : str</span>
+<span class="sd">        Path to reference results in BuildingsPy format. If not None, the results</span>
+<span class="sd">        will be copied into the model output directories so that the exported</span>
+<span class="sd">        models can be regression tested against these results with BuildingsPy.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">load_data</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor of Project Class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="s2">&quot;Project&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modelica_info</span> <span class="o">=</span> <span class="n">ModelicaInfo</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">weather_file_path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="s2">&quot;data&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;input&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;inputdata&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;weatherdata&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">buildings</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_data</span> <span class="o">=</span> <span class="n">load_data</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_elements_calc</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_merge_windows_calc</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_used_library_calc</span> <span class="o">=</span> <span class="s2">&quot;AixLib&quot;</span>
+
+        <span class="k">if</span> <span class="n">load_data</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">instantiate_data_class</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">dir_reference_results</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Project.instantiate_data_class"><a class="viewcode-back" href="../../code/teaser.html#teaser.project.Project.instantiate_data_class">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">instantiate_data_class</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization of DataClass</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        DataClass : Instance of DataClass()</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">DataClass</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Project.calc_all_buildings"><a class="viewcode-back" href="../../code/teaser.html#teaser.project.Project.calc_all_buildings">[docs]</a>    <span class="k">def</span> <span class="nf">calc_all_buildings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raise_errors</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates values for all project buildings</span>
+
+<span class="sd">        You need to set the following parameters in the Project class.</span>
+
+<span class="sd">        number_of_elements_calc : int</span>
+<span class="sd">            defines the number of elements, that area aggregated, between 1</span>
+<span class="sd">            and 4, default is 2</span>
+<span class="sd">            For AixLib you should always use 2 elements!!!</span>
+
+<span class="sd">        merge_windows_calc : bool</span>
+<span class="sd">            True for merging the windows into the outer walls, False for</span>
+<span class="sd">            separate resistance for window, default is False</span>
+<span class="sd">            For AixLib vdi calculation is True, ebc calculation is False</span>
+
+<span class="sd">        used_library_calc : str</span>
+<span class="sd">            used library (AixLib and IBPSA are supported)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">raise_errors</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">):</span>
+                <span class="n">bldg</span><span class="o">.</span><span class="n">calc_building_parameter</span><span class="p">(</span>
+                    <span class="n">number_of_elements</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_number_of_elements_calc</span><span class="p">,</span>
+                    <span class="n">merge_windows</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_merge_windows_calc</span><span class="p">,</span>
+                    <span class="n">used_library</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_used_library_calc</span><span class="p">,</span>
+                <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">bldg</span><span class="o">.</span><span class="n">calc_building_parameter</span><span class="p">(</span>
+                        <span class="n">number_of_elements</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_number_of_elements_calc</span><span class="p">,</span>
+                        <span class="n">merge_windows</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_merge_windows_calc</span><span class="p">,</span>
+                        <span class="n">used_library</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_used_library_calc</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="k">except</span> <span class="p">(</span><span class="ne">ZeroDivisionError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+                    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                        <span class="s2">&quot;Following building can&#39;t be calculated and is &quot;</span>
+                        <span class="s2">&quot;removed from buildings list. Use raise_errors=True &quot;</span>
+                        <span class="s2">&quot;to get python errors and stop TEASER from deleting &quot;</span>
+                        <span class="s2">&quot;this building:&quot;</span> <span class="o">+</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span>
+                    <span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">bldg</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Project.retrofit_all_buildings"><a class="viewcode-back" href="../../code/teaser.html#teaser.project.Project.retrofit_all_buildings">[docs]</a>    <span class="k">def</span> <span class="nf">retrofit_all_buildings</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">year_of_retrofit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">type_of_retrofit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">window_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">material</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrofits all buildings in the project.</span>
+
+<span class="sd">        Depending on the used Archetype approach this function will retrofit</span>
+<span class="sd">        the building. If you have archetypes of both typologies (tabula and</span>
+<span class="sd">        iwu/BMBVS) you need to pass all keywords (see also Parameters section).</span>
+
+<span class="sd">        If TABULA approach is used, it will replace the current construction</span>
+<span class="sd">        with the construction specified in &#39;type_of_retrofit&#39;,</span>
+<span class="sd">        where &#39;retrofit&#39; and &#39;adv_retrofit&#39; are allowed.</span>
+
+<span class="sd">        &#39;iwu&#39; or &#39;BMVBS&#39; Buildings in the project are retrofitted in the</span>
+<span class="sd">        following manner:</span>
+
+<span class="sd">        - replace all windows of the building to retrofitted window according</span>
+<span class="sd">          to the year of retrofit.</span>
+<span class="sd">        - add an additional insulation layer to all outer walls</span>
+<span class="sd">          (including roof, and ground floor).</span>
+<span class="sd">          The thickness of the insulation layer is calculated</span>
+<span class="sd">          that the U-Value of the wall corresponds to the retrofit standard of</span>
+<span class="sd">          the year of retrofit.</span>
+
+<span class="sd">        The needed parameters for the Modelica Model are calculated</span>
+<span class="sd">        automatically, using the calculation_method specified in the</span>
+<span class="sd">        first scenario.</span>
+
+<span class="sd">        Note: To Calculate U-Value, the standard TEASER coefficients for outer</span>
+<span class="sd">        and inner heat transfer are used.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        year_of_retrofit : int</span>
+<span class="sd">            the year the buildings are retrofitted, only &#39;iwu&#39;/&#39;bmbvs&#39;</span>
+<span class="sd">            archetype approach.</span>
+<span class="sd">        type_of_retrofit : str</span>
+<span class="sd">            The classification of retrofit, if the archetype building</span>
+<span class="sd">            approach of TABULA is used.</span>
+<span class="sd">        window_type : str</span>
+<span class="sd">            Default: EnEv 2014, only &#39;iwu&#39;/&#39;bmbvs&#39; archetype approach.</span>
+<span class="sd">        material : str</span>
+<span class="sd">            Default: EPS035, only &#39;iwu&#39;/&#39;bmbvs&#39; archetype approach.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ass_error_type</span> <span class="o">=</span> <span class="s2">&quot;only &#39;retrofit&#39; and &#39;adv_retrofit&#39; are valid &quot;</span>
+        <span class="k">assert</span> <span class="n">type_of_retrofit</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;adv_retrofit&quot;</span><span class="p">,</span> <span class="s2">&quot;retrofit&quot;</span><span class="p">],</span> <span class="n">ass_error_type</span>
+        <span class="n">tabula_buildings</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">iwu_buildings</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bldg</span><span class="p">,</span> <span class="n">SingleFamilyHouse</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">type_of_retrofit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="s2">&quot;you need to set type_of_retrofit for &quot;</span> <span class="s2">&quot;TABULA retrofit&quot;</span>
+                    <span class="p">)</span>
+                <span class="n">tabula_buildings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bldg</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">year_of_retrofit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;you need to set year_of_retrofit for &quot;</span> <span class="s2">&quot;retrofit&quot;</span><span class="p">)</span>
+                <span class="n">iwu_buildings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bldg</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">used_statistic</span> <span class="o">==</span> <span class="s2">&quot;iwu&quot;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">bld_iwu</span> <span class="ow">in</span> <span class="n">iwu_buildings</span><span class="p">:</span>
+                <span class="n">bld_iwu</span><span class="o">.</span><span class="n">retrofit_building</span><span class="p">(</span>
+                    <span class="n">year_of_retrofit</span><span class="o">=</span><span class="n">year_of_retrofit</span><span class="p">,</span>
+                    <span class="n">window_type</span><span class="o">=</span><span class="n">window_type</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">material</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataClass</span><span class="p">(</span><span class="n">used_statistic</span><span class="o">=</span><span class="s2">&quot;tabula_de&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">bld_tabula</span> <span class="ow">in</span> <span class="n">tabula_buildings</span><span class="p">:</span>
+                <span class="n">bld_tabula</span><span class="o">.</span><span class="n">retrofit_building</span><span class="p">(</span><span class="n">type_of_retrofit</span><span class="o">=</span><span class="n">type_of_retrofit</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">bld_tabula</span> <span class="ow">in</span> <span class="n">tabula_buildings</span><span class="p">:</span>
+                <span class="n">bld_tabula</span><span class="o">.</span><span class="n">retrofit_building</span><span class="p">(</span><span class="n">type_of_retrofit</span><span class="o">=</span><span class="n">type_of_retrofit</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataClass</span><span class="p">(</span><span class="n">used_statistic</span><span class="o">=</span><span class="s2">&quot;iwu&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">bld_iwu</span> <span class="ow">in</span> <span class="n">iwu_buildings</span><span class="p">:</span>
+                <span class="n">bld_iwu</span><span class="o">.</span><span class="n">retrofit_building</span><span class="p">(</span>
+                    <span class="n">year_of_retrofit</span><span class="o">=</span><span class="n">year_of_retrofit</span><span class="p">,</span>
+                    <span class="n">window_type</span><span class="o">=</span><span class="n">window_type</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">material</span><span class="p">,</span>
+                <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Project.add_non_residential"><a class="viewcode-back" href="../../code/teaser.html#teaser.project.Project.add_non_residential">[docs]</a>    <span class="k">def</span> <span class="nf">add_non_residential</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">method</span><span class="p">,</span>
+        <span class="n">usage</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">,</span>
+        <span class="n">year_of_construction</span><span class="p">,</span>
+        <span class="n">number_of_floors</span><span class="p">,</span>
+        <span class="n">height_of_floors</span><span class="p">,</span>
+        <span class="n">net_leased_area</span><span class="p">,</span>
+        <span class="n">with_ahu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">internal_gains_mode</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">office_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">window_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">construction_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a non-residential building to the TEASER project.</span>
+
+<span class="sd">        This function adds a non-residential archetype building to the TEASER</span>
+<span class="sd">        project. You need to specify the method of the archetype generation.</span>
+<span class="sd">        Currently TEASER supports only method according to Lichtmess and BMVBS</span>
+<span class="sd">        for non-residential buildings. Further the type of usage needs to be</span>
+<span class="sd">        specified. Currently TEASER supports four different types of</span>
+<span class="sd">        non-residential buildings (&#39;office&#39;, &#39;institute&#39;, &#39;institute4&#39;,</span>
+<span class="sd">        &#39;institute8&#39;). For more information on specific archetype buildings and</span>
+<span class="sd">        methods, please read the docs of archetype classes.</span>
+
+<span class="sd">        This function also calculates the parameters of the buildings directly</span>
+<span class="sd">        with the settings set in the project (e.g. used_library_calc or</span>
+<span class="sd">        number_of_elements_calc).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        method : str</span>
+<span class="sd">            Used archetype method, currently only &#39;bmvbs&#39; is supported</span>
+<span class="sd">        usage : str</span>
+<span class="sd">            Main usage of the obtained building, currently only &#39;office&#39;,</span>
+<span class="sd">            &#39;institute&#39;, &#39;institute4&#39;, institute8&#39; are supported</span>
+<span class="sd">        name : str</span>
+<span class="sd">            Individual name</span>
+<span class="sd">        year_of_construction : int</span>
+<span class="sd">            Year of first construction</span>
+<span class="sd">        height_of_floors : float [m]</span>
+<span class="sd">            Average height of the buildings&#39; floors</span>
+<span class="sd">        number_of_floors : int</span>
+<span class="sd">            Number of building&#39;s floors above ground</span>
+<span class="sd">        net_leased_area : float [m2]</span>
+<span class="sd">            Total net leased area of building. This is area is NOT the</span>
+<span class="sd">            footprint</span>
+<span class="sd">            of a building</span>
+<span class="sd">        with_ahu : Boolean</span>
+<span class="sd">            If set to True, an empty instance of BuildingAHU is instantiated</span>
+<span class="sd">            and</span>
+<span class="sd">            assigned to attribute central_ahu. This instance holds information</span>
+<span class="sd">            for central Air Handling units. Default is False.</span>
+<span class="sd">        internal_gains_mode: int [1, 2, 3]</span>
+<span class="sd">            mode for the internal gains calculation done in AixLib:</span>
+
+<span class="sd">            1. Temperature and activity degree dependent heat flux calculation for persons. The</span>
+<span class="sd">            calculation is based on  SIA 2024 (default)</span>
+
+<span class="sd">            2. Temperature and activity degree independent heat flux calculation for persons, the max.</span>
+<span class="sd">            heatflowrate is prescribed by the parameter</span>
+<span class="sd">            fixed_heat_flow_rate_persons.</span>
+
+<span class="sd">            3. Temperature and activity degree dependent calculation with</span>
+<span class="sd">            consideration of moisture and co2. The moisture calculation is</span>
+<span class="sd">            based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on</span>
+<span class="sd">            Engineering ToolBox (2004) and regards only persons.</span>
+
+<span class="sd">        office_layout : int</span>
+<span class="sd">            Structure of the floor plan of office buildings, default is 1,</span>
+<span class="sd">            which is representative for one elongated floor.</span>
+
+<span class="sd">            1. elongated 1 floor</span>
+
+<span class="sd">            2. elongated 2 floors</span>
+
+<span class="sd">            3. compact (e.g. for a square base building)</span>
+
+<span class="sd">        window_layout : int</span>
+<span class="sd">            Structure of the window facade type, default is 1, which is</span>
+<span class="sd">            representative for a punctuated facade.</span>
+
+<span class="sd">            1. punctuated facade (individual windows)</span>
+
+<span class="sd">            2. banner facade (continuous windows)</span>
+
+<span class="sd">            3. full glazing</span>
+<span class="sd">        construction_type : str</span>
+<span class="sd">            Construction type of used wall constructions default is &quot;heavy&quot;)</span>
+
+<span class="sd">            - heavy: heavy construction</span>
+
+<span class="sd">            - light: light construction</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        type_bldg : Instance of Office()</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ass_error_method</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;only &#39;bmvbs&#39; is a valid method for &quot;</span> <span class="s2">&quot;non-residential archetype generation&quot;</span>
+        <span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;bmvbs&quot;</span><span class="p">],</span> <span class="n">ass_error_method</span>
+
+        <span class="n">ass_error_usage</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;only &#39;office&#39;, &#39;institute&#39;, &#39;institute4&#39;, &quot;</span>
+            <span class="s2">&quot;&#39;institute8&#39; are valid usages for archetype &quot;</span>
+            <span class="s2">&quot;generation&quot;</span>
+        <span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">usage</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="s2">&quot;office&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;institute&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;institute4&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;institute8&quot;</span><span class="p">,</span>
+        <span class="p">],</span> <span class="n">ass_error_usage</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataClass</span><span class="p">(</span><span class="n">used_statistic</span><span class="o">=</span><span class="s2">&quot;iwu&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">used_statistic</span> <span class="o">!=</span> <span class="s2">&quot;iwu&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataClass</span><span class="p">(</span><span class="n">used_statistic</span><span class="o">=</span><span class="s2">&quot;iwu&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;office&quot;</span><span class="p">:</span>
+
+            <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">Office</span><span class="p">(</span>
+                <span class="bp">self</span><span class="p">,</span>
+                <span class="n">name</span><span class="p">,</span>
+                <span class="n">year_of_construction</span><span class="p">,</span>
+                <span class="n">number_of_floors</span><span class="p">,</span>
+                <span class="n">height_of_floors</span><span class="p">,</span>
+                <span class="n">net_leased_area</span><span class="p">,</span>
+                <span class="n">with_ahu</span><span class="p">,</span>
+                <span class="n">internal_gains_mode</span><span class="p">,</span>
+                <span class="n">office_layout</span><span class="p">,</span>
+                <span class="n">window_layout</span><span class="p">,</span>
+                <span class="n">construction_type</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;institute&quot;</span><span class="p">:</span>
+
+            <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">Institute</span><span class="p">(</span>
+                <span class="bp">self</span><span class="p">,</span>
+                <span class="n">name</span><span class="p">,</span>
+                <span class="n">year_of_construction</span><span class="p">,</span>
+                <span class="n">number_of_floors</span><span class="p">,</span>
+                <span class="n">height_of_floors</span><span class="p">,</span>
+                <span class="n">net_leased_area</span><span class="p">,</span>
+                <span class="n">with_ahu</span><span class="p">,</span>
+                <span class="n">internal_gains_mode</span><span class="p">,</span>
+                <span class="n">office_layout</span><span class="p">,</span>
+                <span class="n">window_layout</span><span class="p">,</span>
+                <span class="n">construction_type</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;institute4&quot;</span><span class="p">:</span>
+
+            <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">Institute4</span><span class="p">(</span>
+                <span class="bp">self</span><span class="p">,</span>
+                <span class="n">name</span><span class="p">,</span>
+                <span class="n">year_of_construction</span><span class="p">,</span>
+                <span class="n">number_of_floors</span><span class="p">,</span>
+                <span class="n">height_of_floors</span><span class="p">,</span>
+                <span class="n">net_leased_area</span><span class="p">,</span>
+                <span class="n">with_ahu</span><span class="p">,</span>
+                <span class="n">internal_gains_mode</span><span class="p">,</span>
+                <span class="n">office_layout</span><span class="p">,</span>
+                <span class="n">window_layout</span><span class="p">,</span>
+                <span class="n">construction_type</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;institute8&quot;</span><span class="p">:</span>
+
+            <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">Institute8</span><span class="p">(</span>
+                <span class="bp">self</span><span class="p">,</span>
+                <span class="n">name</span><span class="p">,</span>
+                <span class="n">year_of_construction</span><span class="p">,</span>
+                <span class="n">number_of_floors</span><span class="p">,</span>
+                <span class="n">height_of_floors</span><span class="p">,</span>
+                <span class="n">net_leased_area</span><span class="p">,</span>
+                <span class="n">with_ahu</span><span class="p">,</span>
+                <span class="n">internal_gains_mode</span><span class="p">,</span>
+                <span class="n">office_layout</span><span class="p">,</span>
+                <span class="n">window_layout</span><span class="p">,</span>
+                <span class="n">construction_type</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="n">type_bldg</span><span class="o">.</span><span class="n">generate_archetype</span><span class="p">()</span>
+        <span class="n">type_bldg</span><span class="o">.</span><span class="n">calc_building_parameter</span><span class="p">(</span>
+            <span class="n">number_of_elements</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_number_of_elements_calc</span><span class="p">,</span>
+            <span class="n">merge_windows</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_merge_windows_calc</span><span class="p">,</span>
+            <span class="n">used_library</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_used_library_calc</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">type_bldg</span></div>
+
+<div class="viewcode-block" id="Project.add_residential"><a class="viewcode-back" href="../../code/teaser.html#teaser.project.Project.add_residential">[docs]</a>    <span class="k">def</span> <span class="nf">add_residential</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">method</span><span class="p">,</span>
+        <span class="n">usage</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">,</span>
+        <span class="n">year_of_construction</span><span class="p">,</span>
+        <span class="n">number_of_floors</span><span class="p">,</span>
+        <span class="n">height_of_floors</span><span class="p">,</span>
+        <span class="n">net_leased_area</span><span class="p">,</span>
+        <span class="n">with_ahu</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">internal_gains_mode</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">residential_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">neighbour_buildings</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">attic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">cellar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">dormer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">construction_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">number_of_apartments</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a residential building to the TEASER project.</span>
+
+<span class="sd">        This function adds a residential archetype building to the TEASER</span>
+<span class="sd">        project. You need to specify the method of the archetype generation.</span>
+<span class="sd">        Currently TEASER supports only method according &#39;iwu&#39;, &#39;urbanrenet&#39;,</span>
+<span class="sd">        &#39;tabula_de&#39; and &#39;tabula_dk&#39; for residential buildings. Further the</span>
+<span class="sd">        type of usage needs to be specified. Currently TEASER supports one type</span>
+<span class="sd">        of</span>
+<span class="sd">        residential building for &#39;iwu&#39; and eleven types for &#39;urbanrenet&#39;. For</span>
+<span class="sd">        more information on specific archetype buildings and methods, please</span>
+<span class="sd">        read the docs of archetype classes.</span>
+<span class="sd">        This function also calculates the parameters of the buildings directly</span>
+<span class="sd">        with the settings set in the project (e.g. used_library_calc or</span>
+<span class="sd">        number_of_elements_calc).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        method : str</span>
+<span class="sd">            Used archetype method, currently only &#39;iwu&#39; or &#39;urbanrenet&#39; are</span>
+<span class="sd">            supported, &#39;tabula_de&#39; to follow soon</span>
+<span class="sd">        usage : str</span>
+<span class="sd">            Main usage of the obtained building, currently only</span>
+<span class="sd">            &#39;single_family_dwelling&#39; is supported for iwu and &#39;est1a&#39;, &#39;est1b&#39;,</span>
+<span class="sd">            &#39;est2&#39;, &#39;est3&#39;, &#39;est4a&#39;, &#39;est4b&#39;, &#39;est5&#39; &#39;est6&#39;, &#39;est7&#39;, &#39;est8a&#39;,</span>
+<span class="sd">            &#39;est8b&#39; for urbanrenet.</span>
+<span class="sd">        name : str</span>
+<span class="sd">            Individual name</span>
+<span class="sd">        year_of_construction : int</span>
+<span class="sd">            Year of first construction</span>
+<span class="sd">        height_of_floors : float [m]</span>
+<span class="sd">            Average height of the buildings&#39; floors</span>
+<span class="sd">        number_of_floors : int</span>
+<span class="sd">            Number of building&#39;s floors above ground</span>
+<span class="sd">        net_leased_area : float [m2]</span>
+<span class="sd">            Total net leased area of building. This is area is NOT the</span>
+<span class="sd">            footprint</span>
+<span class="sd">            of a building</span>
+<span class="sd">        with_ahu : Boolean</span>
+<span class="sd">            If set to True, an empty instance of BuildingAHU is instantiated</span>
+<span class="sd">            and</span>
+<span class="sd">            assigned to attribute central_ahu. This instance holds information</span>
+<span class="sd">            for central Air Handling units. Default is False.</span>
+<span class="sd">        internal_gains_mode: int [1, 2, 3]</span>
+<span class="sd">            mode for the internal gains calculation done in AixLib:</span>
+
+<span class="sd">            1. Temperature and activity degree dependent heat flux calculation for persons. The</span>
+<span class="sd">               calculation is based on  SIA 2024 (default)</span>
+
+<span class="sd">            2. Temperature and activity degree independent heat flux calculation for persons, the max.</span>
+<span class="sd">               heatflowrate is prescribed by the parameter</span>
+<span class="sd">               fixed_heat_flow_rate_persons.</span>
+
+<span class="sd">            3. Temperature and activity degree dependent calculation with</span>
+<span class="sd">               consideration of moisture and co2. The moisture calculation is</span>
+<span class="sd">               based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on</span>
+<span class="sd">               Engineering ToolBox (2004) and regards only persons.</span>
+
+<span class="sd">        residential_layout : int</span>
+<span class="sd">            Structure of floor plan (default = 0) CAUTION only used for iwu</span>
+
+<span class="sd">            0. compact</span>
+
+<span class="sd">            1. elongated/complex</span>
+
+<span class="sd">        neighbour_buildings : int</span>
+<span class="sd">            Number of neighbour buildings. CAUTION: this will not change</span>
+<span class="sd">            the orientation of the buildings wall, but just the overall</span>
+<span class="sd">            exterior wall and window area(!) (default = 0)</span>
+
+<span class="sd">            0. no neighbour</span>
+<span class="sd">            1. one neighbour</span>
+<span class="sd">            2. two neighbours</span>
+
+<span class="sd">        attic : int</span>
+<span class="sd">            Design of the attic. CAUTION: this will not change the orientation</span>
+<span class="sd">            or tilt of the roof instances, but just adapt the roof area(!) (</span>
+<span class="sd">            default = 0) CAUTION only used for iwu</span>
+
+<span class="sd">            0. flat roof</span>
+<span class="sd">            1. non heated attic</span>
+<span class="sd">            2. partly heated attic</span>
+<span class="sd">            3. heated attic</span>
+
+<span class="sd">        cellar : int</span>
+<span class="sd">            Design of the of cellar CAUTION: this will not change the</span>
+<span class="sd">            orientation, tilt of GroundFloor instances, nor the number or area</span>
+<span class="sd">            of ThermalZones, but will change GroundFloor area(!) (default = 0)</span>
+<span class="sd">            CAUTION only used for iwu</span>
+
+<span class="sd">            0. no cellar</span>
+<span class="sd">            1. non heated cellar</span>
+<span class="sd">            2. partly heated cellar</span>
+<span class="sd">            3. heated cellar</span>
+
+<span class="sd">        dormer : str</span>
+<span class="sd">            Is a dormer attached to the roof? CAUTION: this will not</span>
+<span class="sd">            change roof or window orientation or tilt, but just adapt the roof</span>
+<span class="sd">            area(!) (default = 0) CAUTION only used for iwu</span>
+
+<span class="sd">            0. no dormer</span>
+<span class="sd">            1. dormer</span>
+
+<span class="sd">        construction_type : str</span>
+<span class="sd">            Construction type of used wall constructions default is &quot;heavy&quot;)</span>
+
+<span class="sd">            - heavy: heavy construction</span>
+<span class="sd">            - light: light construction</span>
+
+<span class="sd">        number_of_apartments : int</span>
+<span class="sd">            number of apartments inside Building (default = 1). CAUTION only</span>
+<span class="sd">            used for urbanrenet</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        type_bldg : Instance of Archetype Building</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ass_error_method</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;only&#39;tabula_de&#39;, &#39;tabula_dk&#39;, &#39;iwu&#39; and &quot;</span>
+            <span class="s2">&quot;&#39;urbanrenet&#39; &quot;</span>
+            <span class="s2">&quot;are valid methods for residential archetype &quot;</span>
+            <span class="s2">&quot;generation&quot;</span>
+        <span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="s2">&quot;tabula_de&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;iwu&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;urbanrenet&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;tabula_dk&quot;</span><span class="p">,</span>
+        <span class="p">],</span> <span class="n">ass_error_method</span>
+
+        <span class="n">ass_error_apart</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;The keyword number_of_apartments does not have any &quot;</span>
+            <span class="s2">&quot;effect on archetype generation for &#39;iwu&#39; or&quot;</span>
+            <span class="s2">&quot;&#39;tabula_de&#39;, see docs for more information&quot;</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">method</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;iwu&quot;</span><span class="p">,</span> <span class="s2">&quot;tabula_de&quot;</span><span class="p">,</span> <span class="s2">&quot;tabula_dk&quot;</span><span class="p">]</span>
+            <span class="ow">and</span> <span class="n">number_of_apartments</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">ass_error_apart</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;tabula_de&quot;</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataClass</span><span class="p">(</span><span class="n">used_statistic</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">used_statistic</span> <span class="o">!=</span> <span class="s2">&quot;tabula_de&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataClass</span><span class="p">(</span><span class="n">used_statistic</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+
+            <span class="n">ass_error_usage_tabula</span> <span class="o">=</span> <span class="s2">&quot;only &#39;single_family_house&#39;,&quot;</span>
+            <span class="s2">&quot;&#39;terraced_house&#39;, &#39;multi_family_house&#39;, &#39;apartment_block&#39; are&quot;</span>
+            <span class="s2">&quot;valid usages for iwu archetype method&quot;</span>
+            <span class="k">assert</span> <span class="n">usage</span> <span class="ow">in</span> <span class="p">[</span>
+                <span class="s2">&quot;single_family_house&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;terraced_house&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;multi_family_house&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;apartment_block&quot;</span><span class="p">,</span>
+            <span class="p">],</span> <span class="n">ass_error_usage_tabula</span>
+
+            <span class="k">if</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;single_family_house&quot;</span><span class="p">:</span>
+
+                <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">SingleFamilyHouse</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="p">,</span>
+                    <span class="n">name</span><span class="p">,</span>
+                    <span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">number_of_floors</span><span class="p">,</span>
+                    <span class="n">height_of_floors</span><span class="p">,</span>
+                    <span class="n">net_leased_area</span><span class="p">,</span>
+                    <span class="n">with_ahu</span><span class="p">,</span>
+                    <span class="n">internal_gains_mode</span><span class="p">,</span>
+                    <span class="n">construction_type</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">type_bldg</span><span class="o">.</span><span class="n">generate_archetype</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">type_bldg</span>
+
+            <span class="k">elif</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;terraced_house&quot;</span><span class="p">:</span>
+
+                <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">TerracedHouse</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="p">,</span>
+                    <span class="n">name</span><span class="p">,</span>
+                    <span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">number_of_floors</span><span class="p">,</span>
+                    <span class="n">height_of_floors</span><span class="p">,</span>
+                    <span class="n">net_leased_area</span><span class="p">,</span>
+                    <span class="n">with_ahu</span><span class="p">,</span>
+                    <span class="n">internal_gains_mode</span><span class="p">,</span>
+                    <span class="n">construction_type</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">type_bldg</span><span class="o">.</span><span class="n">generate_archetype</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">type_bldg</span>
+
+            <span class="k">elif</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;multi_family_house&quot;</span><span class="p">:</span>
+
+                <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">MultiFamilyHouse</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="p">,</span>
+                    <span class="n">name</span><span class="p">,</span>
+                    <span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">number_of_floors</span><span class="p">,</span>
+                    <span class="n">height_of_floors</span><span class="p">,</span>
+                    <span class="n">net_leased_area</span><span class="p">,</span>
+                    <span class="n">with_ahu</span><span class="p">,</span>
+                    <span class="n">internal_gains_mode</span><span class="p">,</span>
+                    <span class="n">construction_type</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">type_bldg</span><span class="o">.</span><span class="n">generate_archetype</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">type_bldg</span>
+
+            <span class="k">elif</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;apartment_block&quot;</span><span class="p">:</span>
+
+                <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">ApartmentBlock</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="p">,</span>
+                    <span class="n">name</span><span class="p">,</span>
+                    <span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">number_of_floors</span><span class="p">,</span>
+                    <span class="n">height_of_floors</span><span class="p">,</span>
+                    <span class="n">net_leased_area</span><span class="p">,</span>
+                    <span class="n">with_ahu</span><span class="p">,</span>
+                    <span class="n">internal_gains_mode</span><span class="p">,</span>
+                    <span class="n">construction_type</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="n">type_bldg</span><span class="o">.</span><span class="n">generate_archetype</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">type_bldg</span>
+
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;tabula_dk&quot;</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataClass</span><span class="p">(</span><span class="n">used_statistic</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">used_statistic</span> <span class="o">!=</span> <span class="s2">&quot;tabula_dk&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataClass</span><span class="p">(</span><span class="n">used_statistic</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+
+            <span class="n">ass_error_usage_tabula</span> <span class="o">=</span> <span class="s2">&quot;only &#39;single_family_house&#39;,&quot;</span>
+            <span class="s2">&quot;&#39;terraced_house&#39;, &#39;apartment_block&#39; are&quot;</span>
+            <span class="s2">&quot;valid usages for iwu archetype method&quot;</span>
+            <span class="k">assert</span> <span class="n">usage</span> <span class="ow">in</span> <span class="p">[</span>
+                <span class="s2">&quot;single_family_house&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;terraced_house&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;apartment_block&quot;</span><span class="p">,</span>
+            <span class="p">],</span> <span class="n">ass_error_usage_tabula</span>
+
+            <span class="k">if</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;single_family_house&quot;</span><span class="p">:</span>
+
+                <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">SingleFamilyHouse_DK</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="p">,</span>
+                    <span class="n">name</span><span class="p">,</span>
+                    <span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">number_of_floors</span><span class="p">,</span>
+                    <span class="n">height_of_floors</span><span class="p">,</span>
+                    <span class="n">net_leased_area</span><span class="p">,</span>
+                    <span class="n">with_ahu</span><span class="p">,</span>
+                    <span class="n">internal_gains_mode</span><span class="p">,</span>
+                    <span class="n">construction_type</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">type_bldg</span><span class="o">.</span><span class="n">generate_archetype</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">type_bldg</span>
+
+            <span class="k">elif</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;terraced_house&quot;</span><span class="p">:</span>
+
+                <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">TerracedHouse_DK</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="p">,</span>
+                    <span class="n">name</span><span class="p">,</span>
+                    <span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">number_of_floors</span><span class="p">,</span>
+                    <span class="n">height_of_floors</span><span class="p">,</span>
+                    <span class="n">net_leased_area</span><span class="p">,</span>
+                    <span class="n">with_ahu</span><span class="p">,</span>
+                    <span class="n">internal_gains_mode</span><span class="p">,</span>
+                    <span class="n">construction_type</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">type_bldg</span><span class="o">.</span><span class="n">generate_archetype</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">type_bldg</span>
+
+            <span class="k">elif</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;apartment_block&quot;</span><span class="p">:</span>
+
+                <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">ApartmentBlock_DK</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="p">,</span>
+                    <span class="n">name</span><span class="p">,</span>
+                    <span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">number_of_floors</span><span class="p">,</span>
+                    <span class="n">height_of_floors</span><span class="p">,</span>
+                    <span class="n">net_leased_area</span><span class="p">,</span>
+                    <span class="n">with_ahu</span><span class="p">,</span>
+                    <span class="n">internal_gains_mode</span><span class="p">,</span>
+                    <span class="n">construction_type</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">type_bldg</span><span class="o">.</span><span class="n">generate_archetype</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">type_bldg</span>
+
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;iwu&quot;</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataClass</span><span class="p">(</span><span class="n">used_statistic</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">used_statistic</span> <span class="o">!=</span> <span class="s2">&quot;iwu&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataClass</span><span class="p">(</span><span class="n">used_statistic</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+
+            <span class="n">ass_error_usage_iwu</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">&quot;only &#39;single_family_dwelling&#39; is a valid &quot;</span>
+                <span class="s2">&quot;usage for iwu archetype method&quot;</span>
+            <span class="p">)</span>
+            <span class="k">assert</span> <span class="n">usage</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;single_family_dwelling&quot;</span><span class="p">],</span> <span class="n">ass_error_usage_iwu</span>
+
+            <span class="k">if</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;single_family_dwelling&quot;</span><span class="p">:</span>
+
+                <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">SingleFamilyDwelling</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="p">,</span>
+                    <span class="n">name</span><span class="p">,</span>
+                    <span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">number_of_floors</span><span class="p">,</span>
+                    <span class="n">height_of_floors</span><span class="p">,</span>
+                    <span class="n">net_leased_area</span><span class="p">,</span>
+                    <span class="n">with_ahu</span><span class="p">,</span>
+                    <span class="n">internal_gains_mode</span><span class="p">,</span>
+                    <span class="n">residential_layout</span><span class="p">,</span>
+                    <span class="n">neighbour_buildings</span><span class="p">,</span>
+                    <span class="n">attic</span><span class="p">,</span>
+                    <span class="n">cellar</span><span class="p">,</span>
+                    <span class="n">dormer</span><span class="p">,</span>
+                    <span class="n">construction_type</span><span class="p">,</span>
+                <span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;urbanrenet&quot;</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataClass</span><span class="p">(</span><span class="n">used_statistic</span><span class="o">=</span><span class="s2">&quot;iwu&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">used_statistic</span> <span class="o">!=</span> <span class="s2">&quot;iwu&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataClass</span><span class="p">(</span><span class="n">used_statistic</span><span class="o">=</span><span class="s2">&quot;iwu&quot;</span><span class="p">)</span>
+
+            <span class="n">ass_error_usage_urn</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">&quot;only &#39;est1a&#39;, &#39;est1b&#39;, &#39;est2&#39;, &#39;est3&#39;, &quot;</span>
+                <span class="s2">&quot;&#39;est4a&#39;, &#39;est4b&#39;, &#39;est5&#39; &#39;est6&#39;, &#39;est7&#39;, &quot;</span>
+                <span class="s2">&quot;&#39;est8a&#39;,&#39;est8b&#39; is are valid usages for &quot;</span>
+                <span class="s2">&quot;urbanrenet archetype method&quot;</span>
+            <span class="p">)</span>
+            <span class="k">assert</span> <span class="n">usage</span> <span class="ow">in</span> <span class="p">[</span>
+                <span class="s2">&quot;est1a&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;est1b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;est2&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;est3&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;est4a&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;est4b&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;est5&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;est6&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;est7&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;est8a&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;est8b&quot;</span><span class="p">,</span>
+            <span class="p">],</span> <span class="n">ass_error_usage_urn</span>
+            <span class="k">if</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;est1a&quot;</span><span class="p">:</span>
+
+                <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">EST1a</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="p">,</span>
+                    <span class="n">name</span><span class="p">,</span>
+                    <span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">number_of_floors</span><span class="p">,</span>
+                    <span class="n">height_of_floors</span><span class="p">,</span>
+                    <span class="n">net_leased_area</span><span class="p">,</span>
+                    <span class="n">with_ahu</span><span class="p">,</span>
+                    <span class="n">internal_gains_mode</span><span class="p">,</span>
+                    <span class="n">neighbour_buildings</span><span class="p">,</span>
+                    <span class="n">construction_type</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;est1b&quot;</span><span class="p">:</span>
+
+                <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">EST1b</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="p">,</span>
+                    <span class="n">name</span><span class="p">,</span>
+                    <span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">number_of_floors</span><span class="p">,</span>
+                    <span class="n">height_of_floors</span><span class="p">,</span>
+                    <span class="n">net_leased_area</span><span class="p">,</span>
+                    <span class="n">with_ahu</span><span class="p">,</span>
+                    <span class="n">internal_gains_mode</span><span class="p">,</span>
+                    <span class="n">neighbour_buildings</span><span class="p">,</span>
+                    <span class="n">construction_type</span><span class="p">,</span>
+                    <span class="n">number_of_apartments</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;est2&quot;</span><span class="p">:</span>
+
+                <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">EST2</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="p">,</span>
+                    <span class="n">name</span><span class="p">,</span>
+                    <span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">number_of_floors</span><span class="p">,</span>
+                    <span class="n">height_of_floors</span><span class="p">,</span>
+                    <span class="n">net_leased_area</span><span class="p">,</span>
+                    <span class="n">with_ahu</span><span class="p">,</span>
+                    <span class="n">internal_gains_mode</span><span class="p">,</span>
+                    <span class="n">neighbour_buildings</span><span class="p">,</span>
+                    <span class="n">construction_type</span><span class="p">,</span>
+                    <span class="n">number_of_apartments</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;est3&quot;</span><span class="p">:</span>
+
+                <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">EST3</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="p">,</span>
+                    <span class="n">name</span><span class="p">,</span>
+                    <span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">number_of_floors</span><span class="p">,</span>
+                    <span class="n">height_of_floors</span><span class="p">,</span>
+                    <span class="n">net_leased_area</span><span class="p">,</span>
+                    <span class="n">with_ahu</span><span class="p">,</span>
+                    <span class="n">internal_gains_mode</span><span class="p">,</span>
+                    <span class="n">neighbour_buildings</span><span class="p">,</span>
+                    <span class="n">construction_type</span><span class="p">,</span>
+                    <span class="n">number_of_apartments</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;est4a&quot;</span><span class="p">:</span>
+
+                <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">EST4a</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="p">,</span>
+                    <span class="n">name</span><span class="p">,</span>
+                    <span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">number_of_floors</span><span class="p">,</span>
+                    <span class="n">height_of_floors</span><span class="p">,</span>
+                    <span class="n">net_leased_area</span><span class="p">,</span>
+                    <span class="n">with_ahu</span><span class="p">,</span>
+                    <span class="n">internal_gains_mode</span><span class="p">,</span>
+                    <span class="n">neighbour_buildings</span><span class="p">,</span>
+                    <span class="n">construction_type</span><span class="p">,</span>
+                    <span class="n">number_of_apartments</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;est4b&quot;</span><span class="p">:</span>
+
+                <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">EST4b</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="p">,</span>
+                    <span class="n">name</span><span class="p">,</span>
+                    <span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">number_of_floors</span><span class="p">,</span>
+                    <span class="n">height_of_floors</span><span class="p">,</span>
+                    <span class="n">net_leased_area</span><span class="p">,</span>
+                    <span class="n">with_ahu</span><span class="p">,</span>
+                    <span class="n">internal_gains_mode</span><span class="p">,</span>
+                    <span class="n">neighbour_buildings</span><span class="p">,</span>
+                    <span class="n">construction_type</span><span class="p">,</span>
+                    <span class="n">number_of_apartments</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;est5&quot;</span><span class="p">:</span>
+
+                <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">EST5</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="p">,</span>
+                    <span class="n">name</span><span class="p">,</span>
+                    <span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">number_of_floors</span><span class="p">,</span>
+                    <span class="n">height_of_floors</span><span class="p">,</span>
+                    <span class="n">net_leased_area</span><span class="p">,</span>
+                    <span class="n">with_ahu</span><span class="p">,</span>
+                    <span class="n">internal_gains_mode</span><span class="p">,</span>
+                    <span class="n">neighbour_buildings</span><span class="p">,</span>
+                    <span class="n">construction_type</span><span class="p">,</span>
+                    <span class="n">number_of_apartments</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;est6&quot;</span><span class="p">:</span>
+
+                <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">EST6</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="p">,</span>
+                    <span class="n">name</span><span class="p">,</span>
+                    <span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">number_of_floors</span><span class="p">,</span>
+                    <span class="n">height_of_floors</span><span class="p">,</span>
+                    <span class="n">net_leased_area</span><span class="p">,</span>
+                    <span class="n">with_ahu</span><span class="p">,</span>
+                    <span class="n">internal_gains_mode</span><span class="p">,</span>
+                    <span class="n">neighbour_buildings</span><span class="p">,</span>
+                    <span class="n">construction_type</span><span class="p">,</span>
+                    <span class="n">number_of_apartments</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;est7&quot;</span><span class="p">:</span>
+
+                <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">EST7</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="p">,</span>
+                    <span class="n">name</span><span class="p">,</span>
+                    <span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">number_of_floors</span><span class="p">,</span>
+                    <span class="n">height_of_floors</span><span class="p">,</span>
+                    <span class="n">net_leased_area</span><span class="p">,</span>
+                    <span class="n">with_ahu</span><span class="p">,</span>
+                    <span class="n">internal_gains_mode</span><span class="p">,</span>
+                    <span class="n">neighbour_buildings</span><span class="p">,</span>
+                    <span class="n">construction_type</span><span class="p">,</span>
+                    <span class="n">number_of_apartments</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;est8a&quot;</span><span class="p">:</span>
+
+                <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">EST8a</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="p">,</span>
+                    <span class="n">name</span><span class="p">,</span>
+                    <span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">number_of_floors</span><span class="p">,</span>
+                    <span class="n">height_of_floors</span><span class="p">,</span>
+                    <span class="n">net_leased_area</span><span class="p">,</span>
+                    <span class="n">with_ahu</span><span class="p">,</span>
+                    <span class="n">internal_gains_mode</span><span class="p">,</span>
+                    <span class="n">neighbour_buildings</span><span class="p">,</span>
+                    <span class="n">construction_type</span><span class="p">,</span>
+                    <span class="n">number_of_apartments</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">usage</span> <span class="o">==</span> <span class="s2">&quot;est8b&quot;</span><span class="p">:</span>
+
+                <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">EST8b</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="p">,</span>
+                    <span class="n">name</span><span class="p">,</span>
+                    <span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">number_of_floors</span><span class="p">,</span>
+                    <span class="n">height_of_floors</span><span class="p">,</span>
+                    <span class="n">net_leased_area</span><span class="p">,</span>
+                    <span class="n">with_ahu</span><span class="p">,</span>
+                    <span class="n">internal_gains_mode</span><span class="p">,</span>
+                    <span class="n">neighbour_buildings</span><span class="p">,</span>
+                    <span class="n">construction_type</span><span class="p">,</span>
+                    <span class="n">number_of_apartments</span><span class="p">,</span>
+                <span class="p">)</span>
+
+        <span class="n">type_bldg</span><span class="o">.</span><span class="n">generate_archetype</span><span class="p">()</span>
+        <span class="n">type_bldg</span><span class="o">.</span><span class="n">calc_building_parameter</span><span class="p">(</span>
+            <span class="n">number_of_elements</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_number_of_elements_calc</span><span class="p">,</span>
+            <span class="n">merge_windows</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_merge_windows_calc</span><span class="p">,</span>
+            <span class="n">used_library</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_used_library_calc</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">type_bldg</span></div>
+
+<div class="viewcode-block" id="Project.save_project"><a class="viewcode-back" href="../../code/teaser.html#teaser.project.Project.save_project">[docs]</a>    <span class="k">def</span> <span class="nf">save_project</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Saves the project to a JSON file</span>
+
+<span class="sd">        Calls the function save_teaser_json in data.output.teaserjson_output</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        file_name : string</span>
+<span class="sd">            name of the new file</span>
+<span class="sd">        path : string</span>
+<span class="sd">            if the Files should not be stored in OutputData, an alternative</span>
+<span class="sd">            can be specified</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">file_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">file_name</span>
+
+        <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">new_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_default_path</span><span class="p">(),</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+        <span class="n">tjson_out</span><span class="o">.</span><span class="n">save_teaser_json</span><span class="p">(</span><span class="n">new_path</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Project.load_project"><a class="viewcode-back" href="../../code/teaser.html#teaser.project.Project.load_project">[docs]</a>    <span class="k">def</span> <span class="nf">load_project</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load the project from a json file (new format).</span>
+
+<span class="sd">        Calls the function load_teaser_json.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        path : string</span>
+<span class="sd">            full path to a json file</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">tjson_in</span><span class="o">.</span><span class="n">load_teaser_json</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Project.export_aixlib"><a class="viewcode-back" href="../../code/teaser.html#teaser.project.Project.export_aixlib">[docs]</a>    <span class="k">def</span> <span class="nf">export_aixlib</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">building_model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">zone_model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">corG</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">internal_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Exports values to a record file for Modelica simulation</span>
+
+<span class="sd">        Exports one (if internal_id is not None) or all buildings for</span>
+<span class="sd">        AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped models</span>
+<span class="sd">        using the ThermalZoneEquipped model with a correction of g-value (</span>
+<span class="sd">        double pane glazing) and supporting models, like tables and weather</span>
+<span class="sd">        model. In contrast to versions &lt; 0.5 TEASER now does not</span>
+<span class="sd">        support any model options, as we observed no need, since single</span>
+<span class="sd">        ThermalZones are identically with IBPSA models. If you miss one of</span>
+<span class="sd">        the old options please contact us.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        internal_id : float</span>
+<span class="sd">            setter of a specific building which will be exported, if None then</span>
+<span class="sd">            all buildings will be exported</span>
+<span class="sd">        path : string</span>
+<span class="sd">            if the Files should not be stored in default output path of TEASER,</span>
+<span class="sd">            an alternative path can be specified as a full path</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">building_model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">zone_model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">corG</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;building_model, zone_model and corG are no longer &quot;</span>
+                <span class="s2">&quot;supported for AixLib export and have no effect. &quot;</span>
+                <span class="s2">&quot;The keywords will be deleted within the next &quot;</span>
+                <span class="s2">&quot;version, consider rewriting your code.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_default_path</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">internal_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">aixlib_output</span><span class="o">.</span><span class="n">export_multizone</span><span class="p">(</span>
+                <span class="n">buildings</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">,</span> <span class="n">prj</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">bldg</span><span class="o">.</span><span class="n">internal_id</span> <span class="o">==</span> <span class="n">internal_id</span><span class="p">:</span>
+                    <span class="n">aixlib_output</span><span class="o">.</span><span class="n">export_multizone</span><span class="p">(</span>
+                        <span class="n">buildings</span><span class="o">=</span><span class="p">[</span><span class="n">bldg</span><span class="p">],</span> <span class="n">prj</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span>
+                    <span class="p">)</span>
+        <span class="k">return</span> <span class="n">path</span></div>
+
+<div class="viewcode-block" id="Project.export_ibpsa"><a class="viewcode-back" href="../../code/teaser.html#teaser.project.Project.export_ibpsa">[docs]</a>    <span class="k">def</span> <span class="nf">export_ibpsa</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">library</span><span class="o">=</span><span class="s2">&quot;AixLib&quot;</span><span class="p">,</span> <span class="n">internal_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Exports values to a record file for Modelica simulation</span>
+
+<span class="sd">        For Annex 60 Library</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        library : str</span>
+<span class="sd">            Used library within the framework of IBPSA library. The</span>
+<span class="sd">            models are identical in each library, but IBPSA Modelica library is</span>
+<span class="sd">            just a core set of models and should not be used standalone.</span>
+<span class="sd">            Valid values are &#39;AixLib&#39; (default), &#39;Buildings&#39;,</span>
+<span class="sd">            &#39;BuildingSystems&#39; and &#39;IDEAS&#39;.</span>
+<span class="sd">        internal_id : float</span>
+<span class="sd">            setter of a specific building which will be exported, if None then</span>
+<span class="sd">            all buildings will be exported</span>
+<span class="sd">        path : string</span>
+<span class="sd">            if the Files should not be stored in default output path of TEASER,</span>
+<span class="sd">            an alternative path can be specified as a full path</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">ass_error_1</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;library for IBPSA export has to be &#39;AixLib&#39;, &quot;</span>
+            <span class="s2">&quot;&#39;Buildings&#39;, &#39;BuildingSystems&#39; or &#39;IDEAS&#39;&quot;</span>
+        <span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">library</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="s2">&quot;AixLib&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Buildings&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;BuildingSystems&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;IDEAS&quot;</span><span class="p">,</span>
+        <span class="p">],</span> <span class="n">ass_error_1</span>
+
+        <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_default_path</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">internal_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ibpsa_output</span><span class="o">.</span><span class="n">export_ibpsa</span><span class="p">(</span>
+                <span class="n">buildings</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">,</span> <span class="n">prj</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">library</span><span class="o">=</span><span class="n">library</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">bldg</span><span class="o">.</span><span class="n">internal_id</span> <span class="o">==</span> <span class="n">internal_id</span><span class="p">:</span>
+                    <span class="n">ibpsa_output</span><span class="o">.</span><span class="n">export_ibpsa</span><span class="p">(</span><span class="n">buildings</span><span class="o">=</span><span class="p">[</span><span class="n">bldg</span><span class="p">],</span> <span class="n">prj</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">path</span></div>
+
+<div class="viewcode-block" id="Project.set_default"><a class="viewcode-back" href="../../code/teaser.html#teaser.project.Project.set_default">[docs]</a>    <span class="k">def</span> <span class="nf">set_default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">load_data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets all attributes to default</span>
+
+<span class="sd">        Caution: this will delete all buildings.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        load_data : boolean, None-type</span>
+<span class="sd">            boolean if data bindings for type elements and use conditions</span>
+<span class="sd">            should be loaded (default = True), in addition it could be a None-</span>
+<span class="sd">            type to use the already used data bindings</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="s2">&quot;Project&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modelica_info</span> <span class="o">=</span> <span class="n">ModelicaInfo</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">weather_file_path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="s2">&quot;data&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;input&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;inputdata&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;weatherdata&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">buildings</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="n">load_data</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">instantiate_data_class</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">load_data</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_elements_calc</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_merge_windows_calc</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_used_library_calc</span> <span class="o">=</span> <span class="s2">&quot;AixLib&quot;</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">weather_file_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weather_file_path</span>
+
+    <span class="nd">@weather_file_path</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">weather_file_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_weather_file_path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="s2">&quot;data&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;input&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;inputdata&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;weatherdata&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_weather_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">weather_file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weather_file_path</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">number_of_elements_calc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_elements_calc</span>
+
+    <span class="nd">@number_of_elements_calc</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">number_of_elements_calc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+
+        <span class="n">ass_error_1</span> <span class="o">=</span> <span class="s2">&quot;number_of_elements_calc has to be 1,2,3 or 4&quot;</span>
+
+        <span class="k">assert</span> <span class="n">value</span> <span class="o">!=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">ass_error_1</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_elements_calc</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">:</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">number_of_elements_calc</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">merge_windows_calc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merge_windows_calc</span>
+
+    <span class="nd">@merge_windows_calc</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">merge_windows_calc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+
+        <span class="n">ass_error_1</span> <span class="o">=</span> <span class="s2">&quot;merge windows needs to be True or False&quot;</span>
+
+        <span class="k">assert</span> <span class="n">value</span> <span class="o">!=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">ass_error_1</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_merge_windows_calc</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">:</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">merge_windows_calc</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">used_library_calc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_used_library_calc</span>
+
+    <span class="nd">@used_library_calc</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">used_library_calc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+
+        <span class="n">ass_error_1</span> <span class="o">=</span> <span class="s2">&quot;used library needs to be AixLib or IBPSA&quot;</span>
+
+        <span class="k">assert</span> <span class="n">value</span> <span class="o">!=</span> <span class="p">[</span><span class="s2">&quot;AixLib&quot;</span><span class="p">,</span> <span class="s2">&quot;IBPSA&quot;</span><span class="p">],</span> <span class="n">ass_error_1</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_used_library_calc</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">:</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">used_library_calc</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+
+    <span class="nd">@name</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;[^a-zA-z0-9]&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">regex</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="n">regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;[^a-zA-z0-9]&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">regex</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert name to string&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="s2">&quot;P&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
