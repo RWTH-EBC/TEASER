@@ -459,7 +459,8 @@ def create_html_page(bldg_data, prj_name, bldg_name, html_file_name, iframe_src)
                         <th scope="row">{html.escape(key_human_readable)}</th>
                         """
             if not isinstance(value, str):
-                value = str(round(value, 2))
+                if value:
+                    value = str(round(value, 2))
         if not list_item:
             html_content += f"""
                 <td>{html.escape(value)} </td>
