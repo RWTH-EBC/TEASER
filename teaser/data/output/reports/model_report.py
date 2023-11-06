@@ -183,13 +183,16 @@ def export_reports(bldg_data, bldg_name, path, prj):
     output_path_base = os.path.join(path, base_name)
     plotly_file_name = os.path.join(path, "plots", base_name + "_plotly.html")
     # Draw an abstract image of the building and save it with plotly to HTML
-    interactive_fig = create_simple_3d_visualization(bldg_data, roof_angle=30)
+    interactive_fig, fixed_height =\
+        create_simple_3d_visualization(bldg_data, roof_angle=30)
     if interactive_fig:
         interactive_fig.write_html(plotly_file_name)
     else:
         plotly_file_name = None
     html_file_name = os.path.join(output_path_base + ".html")
-    create_html_page(bldg_data, prj.name, bldg_name, html_file_name, plotly_file_name)
+    create_html_page(
+        bldg_data, prj.name, bldg_name, html_file_name, plotly_file_name,
+        fixed_height)
     create_csv_report(bldg_data, output_path_base)
 
 
@@ -235,7 +238,9 @@ def create_csv_report(bldg_data, output_path_base):
     ]
     # round values
     for key, value in prj_data_flat.items():
-        if not isinstance(value, str):
+        if not value:
+            value = "-"
+        elif not isinstance(value, str):
             prj_data_flat[key] = round(value, 2)
         else:
             prj_data_flat[key] = value
@@ -312,7 +317,8 @@ def add_compass_to_3d_plot(fig, x_y_axis_sizing):
     return fig
 
 
-def create_html_page(bldg_data, prj_name, bldg_name, html_file_name, iframe_src):
+def create_html_page(bldg_data, prj_name, bldg_name, html_file_name,
+                     iframe_src, fixed_height):
     html_content = f"""
     <!DOCTYPE html>
     <html>
@@ -459,7 +465,10 @@ def create_html_page(bldg_data, prj_name, bldg_name, html_file_name, iframe_src)
                         <th scope="row">{html.escape(key_human_readable)}</th>
                         """
             if not isinstance(value, str):
-                value = str(round(value, 2))
+                if value:
+                    value = str(round(value, 2))
+                else:
+                    value = "-"
         if not list_item:
             html_content += f"""
                 <td>{html.escape(value)} </td>
@@ -508,7 +517,11 @@ def create_html_page(bldg_data, prj_name, bldg_name, html_file_name, iframe_src)
                     <li><i>Only works for buildings with 4 directions currently,
                      while the smallest will be interpreted as
                     north, the next bigger one as east and so on.</i></li>
-                    <li><i>The roof is not displayed correctly yet</i></li>
+                    <li><i>The roof is not displayed correctly yet</i></li>"""
+    if fixed_height:
+        html_content += f"""<li><i>The height of all floors is assumed to be 3
+        meters.</i></li>"""
+    html_content += f"""
                 </div>
               </div>
             </div>
@@ -561,6 +574,10 @@ def create_simple_3d_visualization(bldg_data, roof_angle=30):
         window_area_south = get_value_with_default(window_values, 2, 0)
         window_area_west = get_value_with_default(window_values, 3, 0)
         height = bldg_data["Floor Height"]
+        fixed_height = False
+        if not height:
+            height = 3
+            fixed_height = True
         num_floors = bldg_data["Number of Floors"]
 
         length_north = area_north / (num_floors * height)
@@ -754,7 +771,7 @@ def create_simple_3d_visualization(bldg_data, roof_angle=30):
                         )
                     )
 
-        return fig
+        return fig, fixed_height
     except Exception as e:
         message = type(e).__name__ + str(e.args)
         print(
