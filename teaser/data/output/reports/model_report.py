@@ -519,7 +519,7 @@ def create_html_page(bldg_data, prj_name, bldg_name, html_file_name,
                     north, the next bigger one as east and so on.</i></li>
                     <li><i>The roof is not displayed correctly yet</i></li>"""
     if fixed_height:
-        html_content += f"""<li><i>The height of all floors is assumed to be 3 
+        html_content += f"""<li><i>The height of all floors is assumed to be 3
         meters.</i></li>"""
     html_content += f"""
                 </div>
