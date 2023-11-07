@@ -1,3 +1,14 @@
+stages:
+  - test
+  - doc
+  - deploy
+
+include:
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file: 'python/doc/sphinxdoc.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file: 'pages/pages.gitlab-ci.yml'  
+
 test3.6-subset:
   image: python:3.6
   stage: test
@@ -44,3 +55,6 @@ test3.7:
     - pip install -e .
     - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests,.eggs --max-line-length=120
     - py.test --ignore=tests/test_modelicaversion.py
+
+
+

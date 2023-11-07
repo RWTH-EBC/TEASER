@@ -291,10 +291,10 @@ class ThreeElement(object):
         Modelica export for parametric studies. See heat_load_outside_factor.
     facade_areas : list of floats [m2]
         List containing the area of each facade (with same tilt and
-        orientation) this includes also roofs and ground floors and windows.
+        orientation) this includes also roofs and possibly windows.
     n_outer : int
         Number of total facades with different combination of tilt and
-        orientation, windows and outer walls rooftops
+        orientation, including outer walls, roofs and windows.
     tilt_facade : list of floats [degree]
         Tilt of facades against the horizontal.
     orientation_facade : list of floats [degree]
