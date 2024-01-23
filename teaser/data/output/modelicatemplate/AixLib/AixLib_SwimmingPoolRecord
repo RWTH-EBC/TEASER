@@ -12,7 +12,7 @@ record Swimming_hall_${pool.name} "Swimming_hall_${pool.name}"
     use_parLoa = ${get_true_false(pool.use_partial_load)},
     dpHeaExcPool = ${pool.dp_heat_exchanger},
     QMaxHeat = ${pool.QMax},
-    QMinHeat = ${pool.Min},
+    QMinHeat = ${pool.QMin},
     KHeat = 1000,
     timeHea = 1,
     use_ideHeaExc = ${get_true_false(pool.use_ideal_heat_exchanger)},

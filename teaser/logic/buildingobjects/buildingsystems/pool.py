@@ -167,7 +167,7 @@ class Pool(object):
         self.h_con_water_vertical = 5200.0
         self.pool_wall_construction_type = 'concrete_with_insulation'
         self.m_flow_evap_pool_used = 0
-        self.QMax = 250*self.area
+        self.QMax = 1000000
         self.QMin = 0
 
     @property
