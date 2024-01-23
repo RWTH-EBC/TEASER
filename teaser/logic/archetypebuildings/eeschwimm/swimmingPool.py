@@ -39,7 +39,7 @@ class SwimmingFacility(NonResidential):
     And 2 swimming pool:
     - Swimmer_pool
     - Nonswimmer_pool
-    Each of the zones and pools hasseveral configurable parameters and
+    Each of the zones and pools has several configurable parameters and
     attributes, which are listed below.
 
 
@@ -48,7 +48,7 @@ class SwimmingFacility(NonResidential):
 
     parent: Project()
         The parent class of this object, the Project the Building belongs to.
-        Allowater_area for better control of hierarchical structures. If not None it
+        Allows for better control of hierarchical structures. If not None it
         adds this Building instance to Project.buildings.
         (default: None)
     name : str
@@ -348,10 +348,10 @@ class SwimmingFacility(NonResidential):
             num_shower = math.ceil(num_shower / 4) * 4
             num_sanitary_double_blocks = math.floor(num_shower / 20)
             num_additional_showers = (num_shower - num_sanitary_double_blocks * 20) / 4
-            zone_area = num_sanitary_double_blocks * 82.53 + num_additional_showers * 10.44
+            zone_area = num_sanitary_double_blocks * 81.78 + num_additional_showers * 10.44
         zone_width = 4 + 2 * 0.9
         zone_length = zone_area / zone_width
-        zone_temperature = 301.15
+        zone_temperature = 300.15
         self.zone_area_factors["Shower_and_sanitary_rooms"] = ["WC and sanitary rooms in non-residential buildings",
                                                                zone_area, zone_volume, zone_length, zone_width,
                                                                zone_temperature]
@@ -382,7 +382,7 @@ class SwimmingFacility(NonResidential):
         zone_volume = zone_area * 3.5
         zone_width = self.zone_area_factors["Swimming_hall"][4]
         zone_length = zone_area / zone_width
-        zone_temperature = 297.15
+        zone_temperature = 301.15
         self.zone_area_factors["Technical_room"] = ["Stock, technical equipment, archives", zone_area, zone_volume,
                                                     zone_length, zone_width, zone_temperature]
 
@@ -518,7 +518,7 @@ class SwimmingFacility(NonResidential):
                 window.name = key
                 window.load_type_element(
                     self.year_of_construction,
-                    "Kunststofffenster, " "Isolierverglasung",
+                    construction="Kunststofffenster, " "Isolierverglasung",
                     data_class=self.parent.data)                
                 window.tilt = value[0]
                 window.orientation = value[1]     
