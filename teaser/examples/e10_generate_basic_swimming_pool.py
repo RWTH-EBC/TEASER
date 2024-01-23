@@ -2,8 +2,16 @@
 """
 This is an example to generate a basic swimming pool based on 
 TEASER example 1 - generate archetype and example 2 - export aixlib models.
-Last modified 2021-11-15 for Project 'Energieeffizienz in Schwimmbädern - 
-Neubau und Bestand'
+The basic swimming pool model contains 6 zones:
+    - Swimming_hall
+    - Changing_rooms
+    - Shower_and_sanitary_rooms
+    - Entrance
+    - Supervisory_room
+    - Technical_room
+    And 2 swimming pool:
+    - Swimmer_pool
+    - Nonswimmer_pool
 """
 import teaser.logic.utilities as utilities
 import os
@@ -42,7 +50,9 @@ def generate_basic_swimmingPool():
     year_of_construction = 1980
     filePathOutput = None
 
-    # This should not be changed for now:
+    # Add non residential building to project
+    # net_leased_area is not relevant for the usage "swimmingPool"
+    # all areas are defined according to the water_area
     prj.add_non_residential(
         method='bmvbs',
         usage='swimmingPool',

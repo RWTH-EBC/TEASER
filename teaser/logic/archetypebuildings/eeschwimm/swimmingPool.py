@@ -23,11 +23,10 @@ from teaser.logic.buildingobjects.buildingsystems.pool import Pool
 
 
 class SwimmingFacility(NonResidential):
-    """
-    Archetype swimming facility based on project
+    """Archetype swimming facility based on project
     'Energieeffizienz in Schwimmbädern - Neubau und Bestand'
 
-    Subclass from NonResidential archetype.
+    Subclass from NonResidential archetype class to represent swimming facilities.
 
     The basic model contains 6 zones
     - Swimming_hall
@@ -39,8 +38,14 @@ class SwimmingFacility(NonResidential):
     And 2 swimming pool:
     - Swimmer_pool
     - Nonswimmer_pool
-    Each of the zones and pools has several configurable parameters and
-    attributes, which are listed below.
+
+    Unlike the other building types, in case of the swimming facility the parameter 'net_lead_area' has no relevance.
+    Instead, the dimensions of the iswimming facility and its zones are defined according to the water area (water_area).
+
+    The basis for the building dimensions is mainly
+        KOK-Richtlinien für den Bäderbau 2013 (KOK guidline for pool construction 2013).
+    The design of the swimming pool model within the swimming facility is based on
+        DIN 19643 Treatment of water of swimming pools and baths - Part 1 (2012)
 
 
     Building parameters
@@ -60,8 +65,8 @@ class SwimmingFacility(NonResidential):
     number_of_floors : int
         Number of building's floors above ground
     net_leased_area : float [m2]
-        For the swimming pool, this parameter stores the TOTAL WATER AREA 
-        within the swimming pool building, unlike other building types.
+        For the swimming pool, this parameter is not used
+        The parameter exists as it is required for non-residential buildings
     with_ahu : Boolean
         If set to True, an empty instance of BuildingAHU is instantiated and
         assigned to attribute central_ahu. This instance holds information for
@@ -79,36 +84,24 @@ class SwimmingFacility(NonResidential):
         Construction type of used wall constructions default is "heavy")
             heavy: heavy construction
             light: light construction
+    water_area: float [m2]
+        Water area of the whole swimming facility
+        According to normative standards this is distributed to the pool
+    use_correction_factor: Boolean
+        If 'true' the building dimensions are calculated according to normative standards
+        Afterwards, they are scaled with a correction factor that was determined using real data.
 
-
-    Important!
+        Note
     ----------
-    All variable attributes for the swimming pool zones and its pools are 
-    stored within the dictionary "poolsInDict". This dictionary contains 
-    information on all zones and pools within the swimming pool building. 
-    The respective zone or pool is indicated with the first key (e.g. "Zone 1",
-    "Swimmer pool" etc.). The second key stores the attributes like the area 
-    or volume of a zone/pool. To refer to an attribute, indicate the pool 
-    name/type at the first and the respective attribute at the second position. 
-    To create several pools of the same type, add a number behind the pool 
-    name. The name itself can't be changed. Attributes that are False or True 
-    have to be written as string in small letters (convention for Modelica)!
-    
-    Examples:
-    poolsInDict["Freeform_pool"]["Night setback"] = "false",
-    poolsInDict["Swimmer_pool"]["Water area"] = 450,
-    poolsInDict["Zone 1"]["Air volume"] = 3000    
-    
-    The listed attributes are just the ones that are set (optional) by 
-    the user. Example 11 provides further information on this. 
-    Calculated values are not included in this list. Changing these 
-    values is expert mode. 
-    
+    The listed attributes are just the ones that are set by the user
+    calculated values are not included in this list. Changing these values is
+    expert mode.
+
 
     Attributes for zones
     ----------
 
-    Zones for poolsInDict (Designation without SPACE):
+    Zones:
         - "Zone 1" # Swimming_hall
         - "Zone 2" # Changing_rooms
         - "Zone 3" # Shower_and_sanitary_rooms
@@ -117,140 +110,46 @@ class SwimmingFacility(NonResidential):
         - "Zone 6" # Sauna_area
         - "Zone 7" # Fitness
         - "Zone 8" # Technical_room
-    Outer wall area north : float [m²]
-        Default is calculated individually from total water area.
-    Outer wall area east : float [m²]
-        Default is calculated individually from total water area.
-    Outer wall area south : float [m²]
-        Default is calculated individually from total water area.
-    Outer wall area west : float [m²]
-        Default is calculated individually from total water area.
-    Transparent element in outer wall north : float [m²]
-        Default is calculated individually from total water area.
-    Transparent element in outer wall east : float [m²]
-        Default is calculated individually from total water area.
-    Transparent element in outer wall south : float [m²]
-        Default is calculated individually from total water area.
-    Transparent element in outer wall west : float [m²]
-        Default is calculated individually from total water area.
-    Roof area : float [m²]
-        Upper building closure, including horizontal transparent elements.
-        Default is calculated individually from total water area.
-    Ground floor area : float [m²]
-        Lower building closure WITH EARTH CONTACT.
-        Default is calculated individually from total water area.
-    Inner walls as a sum : float [m²]
-        Shared inner walls of two zones are splittet equally.
-        Default is calculated individually from total water area.
-    Ceiling area : float [m²]
-        Inner ceiling within the building.
-        Default is calculated individually from total water area.
-    Floor area : float [m²]
-        Inner floor within the building WITHOUT EARTH CONTACT.
-        Default is calculated individually from total water area.
-    Total area of zone : float [m²]
-        INCLUDING WATER AREA:
-        Default is calculated individually from total water area.
-    Air volume : float [m³]
-        Total conditioned air volume of the zone.    
-        Default is calculated individually from total water area.   
-       
-        
+
+    zone_area_factors : dict
+        This dictionary contains the name of the zones as keys and a list for each zone as value,
+        containing the zone usage from BoundaryConditions json (str), the zone area in m² (float),
+        the zone volume in m3 (float), the zone length in m (float), the zone width in m (float)
+        and the zone temperature in Kelvin (float)
+
+    outer_wall_names : dict
+        This dictionary contains a random name for the outer walls,
+        their orientation and tilt. Default is a building in north-south
+        orientation)
+    roof_names : dict
+        This dictionary contains the name of the roofs, their orientation
+        and tilt. Default is one flat roof.
+        ground_floor_names : dict
+        This dictionary contains the name of the ground floors, their
+        orientation and tilt. Default is one ground floor.
+    window_names : dict
+        This dictionary contains the name of the window, their
+        orientation and tilt. Default is a building in north-south
+        orientation)
+    inner_wall_names : dict
+        This dictionary contains the name of the inner walls, their
+        orientation and tilt. Default is one cumulated inner wall.
+    ceiling_names : dict
+        This dictionary contains the name of the ceilings, their
+        orientation and tilt. Default is one cumulated ceiling.
+    floor_names : dict
+        This dictionary contains the name of the floors, their
+        orientation and tilt. Default is one cumulated floor.
+
+
     Attributes for pools
     ---------
-    
-    Pools for poolsInDict:
-        - Swimmer_pool
-        - Nonswimmer_pool
-        - Multipurpose_pool
-        - Toddler_pool
-        - Diving_pool
-        - Freeform_pool
-    Water area : float [m²]
-        Water area of the respective pool. Default is calculated
-        individually based on the total water area.
-    Average pool depth : float [m]
-        Average depth of the pool. 
-        Default is 3 m for "Swimmer_pool" and 0.975 m for
-        "Nonswimmer_pool".
-    Water volume : float [m³]
-        Default is calculated individually based on the total 
-        water area.
-    Perimeter pool : float [m]
-        Default is calculated individually based on the total
-        water area.
-    Pool floor with earth contact : float [m²]
-        Pool floor that has direct earth contact (no zone below).
-        Default is the whole water area.
-    Pool floor without earth contact : float [m²]
-        Pool floor that has NO direct earth contact (e.g. basement 
-        below water area). Default is 0.
-    Pool wall with earth contact : float [m²]
-        Pool wall that has direct earth contact (no contiguous zone).
-        Default is half of the whole pool wall area.
-    Pool wall without earth contact : float [m²]
-        Pool wall that has NO direct earth contact (e.g. contiguous
-        technical zone). Default is half of the whole pool wall area.
-    Pool temperature : float [K]
-        Default is 299.15.
-    Filter rinses per week : int
-        Default is 2.
-    Filter type : string
-        Installed filter for the respective pool. Default is 
-        "Open suction filter". Possible types are:
-            - "Activated carbon filter with ozone"
-            - "Closed quick filter"
-            - "Closed sorption filter"
-            - "Open quick filter"
-            - "Open suction filter"
-            - "Quantozone filter"
-            - "Quartz gravel filter"
-            - "Two-layer filter"
-            - "Two-layer filter with ozone"
-    Filter combination : string
-        Default is "without ozone". Possible combinations are:
-            - "without ozone"
-            - "with ozone"            
-            - "with ultrafiltration"
-            - "with bromine"
-    Water type : string
-        Default is "Freshwater". Possible types are:
-            - "Freshwater"
-            - "Saltwater"
-    Pressure loss heat exchanger : int [Pa]
-        Default is 350.
-    Heat recovery rinsing wastewater : boolean
-        Default is "true".
-    Heat recovery rate rinsing wastewater : float
-        Default is 0.8.
-    Wastewater treatment : boolean
-        Default is "true".
-    Wastewater treatment rate : boolean
-        Default is 0.8.
-    Night setback : boolean
-        Default is "false".
-    Volume flow wastewater treatment night : float
-        Default is 30.
-    Visitor number per hour : int
-        Number of people that use the respective pool in one day.
-        Default is calculated individually based on the total 
-        water area.
-    Pool covering outside operating hours : boolean
-        Default is "true".
-    Operation of artificial waves : boolean
-        Default is "false".
-    Wave height : float [m]
-        Default is 0.
-    Wave width : float [m]
-        Default is 0.
-    Interval wave operation : int [sec]
-        Default is 1800.
-    Share of wave operation : int [%]
-        Default is 600.  
-    Construction of pool wall : string
-        Default is "Reinforced concrete". 
-        Possible constructions are:
-            - "Reinforced concrete"
+    basic_pools_dict : dict
+        This dictionary contains the basic pool types ("Swimmer_pool" and "Nonswimmer_pool") as keys
+        and a list with basic pool information, containing the type of the pool (str), the area
+        of the pool in  m² (float), the length of the pool in m (float), the width of the pool in m (float)
+        and the perimeter of the pool in m (float)
+
     """
     
         
@@ -290,7 +189,7 @@ class SwimmingFacility(NonResidential):
         Creating basic swimming facility with one pool for beginners and 
         one for swimmers or only one pool for swimmers, if the water area is 
         not sufficient for two basic pools. Zone areas and volumes are 
-        calculated from the WATER AREA according to 'Koordinierungskreis 
+        calculated from the water area according to 'Koordinierungskreis 
         Bäder - Richtlinien für den Bäderbau - 2013' with further adjustments 
         from the project 'Energieeffizienz in Schwimmbädern - Neubau und 
         Bestand'.
@@ -299,11 +198,10 @@ class SwimmingFacility(NonResidential):
         print("Calculating framework data for swimming facility according to an pool area of:", self.water_area)
         print()
 
-        #self.poolsInDict = self.createBasicSwimmingFacility(self.net_leased_area)
         # pool dict with "Swimmer_pool" and "Nonswimmer_pool" [type, area, length, width, perimeter]
         self.basic_pools_dict = self.create_basic_pools(water_area)
 
-        # [zone_usage, zone_area, zone_volume, zone_length, zone_width, zone_temperature]
+        # zone dict with [zone_usage, zone_area, zone_volume, zone_length, zone_width, zone_temperature]
         self.zone_area_factors = collections.OrderedDict()
 
         # Zone swimming_hall

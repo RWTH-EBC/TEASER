@@ -29,26 +29,26 @@ class Pool(object):
     pool_type : str
         pool type for the calulation of attributes, currently the following are supported:
         'Swimmer_pool', 'Nonswimmer_pool', 'Multipurpose_pool', 'Child_pool', 'Diving_pool','Freeform_pool'
-    internal_id : float
-        Random id for the distinction between different pools.
     name : str
         Individual name.
-    area : float [m2]
-        Pool area.
-    width : float [m]
-        Pool width.
-    length : float [m]
-        Pool length
-    perimeter : float [m]
-        Perimeter of pool [m]
-    volume : float [m3]
-        Pool volume.
-    depth : float [m]
-        Average pool depth.
-    temperature : float [K]
-        Pool temperature.
-    temperature_air : float [K]
-        Air temperature.
+    internal_id : float
+        Random id for the distinction between different pools.
+    area : float
+        Pool area in m2
+    width : float
+        Pool width in m.
+    length : float
+        Pool length in m.
+    perimeter : float
+        Perimeter of pool in m
+    volume : float
+        Pool volume in m3.
+    depth : float
+        Average pool depth in m.
+    temperature : float
+        Pool temperature in K.
+    temperature_air : float
+        Air temperature in K.
     filter_type : str
         Information on used filter type within the water treatment system.
         Possible input: '"Activated carbon filter with ozone', 'Two-layer filter with ozone',
@@ -60,64 +60,64 @@ class Pool(object):
     water_type : str
         Information on water usage within the pool.
         Possible inputs: 'Fresh water" or any other
-    volume_flow : float [m3/h]
-        Volume flow of water treatment according to DIN 19643-1"
-    volume_flow_night : float [m3/h]
-        Volume flow of water treatment at night according to DIN 19643-1
+    volume_flow : float
+        Volume flow of water treatment according to DIN 19643-1 in m3/h"
+    volume_flow_night : float
+        Volume flow of water treatment at night according to DIN 19643-1 in m3/h
     use_partial_load : Boolean
         If true, the volume flow of the water treatment is reduced at night.
-    volume_storage : float [m3]
-        Volume of the water storage within the water treatment system according to DIN 19643-1
-    beta_in_use : float [-]
+    volume_storage : float
+        Volume of the water storage within the water treatment system according to DIN 19643-1 in m3
+    beta_in_use : float
         Factor for the evaporation within a used pool according to VDI 2089
     use_ideal_heat_exchanger : Boolean
         If true, the exported AixLib model includes an ideally heated pool.
-    dp_heat_exchanger : float [Pa]
-        pressure loss of heat exchanger, only needed if use_ideal_heat_exchanger = False.
+    dp_heat_exchanger : float
+        pressure loss of heat exchanger in Pa, only needed if use_ideal_heat_exchanger = False.
     use_heat_recovery : Boolean
         If true, heat recovery is considered for waste water.
-    eta_heat_recovery : float [-]
+    eta_heat_recovery : float
         Efficiency for heat recovery.
     use_pool_cover: Boolean
         If true, pool has a pool cover, which is used during night.
     use_wave_pool : Boolean
         If true, pool is realised with a wave machine, which is run regular.
-    wave_height : float [m]
-        Hight of produced waves.
-    wave_width: float [m]
-        Width of produced waves.
-    wave_period : float [sec]
-        Length of wave cycling period (wave production and break).
-    wave_period_start : float [sec]
-        Start time of first wave cycle.
-    wave_share_period : float [-]
+    wave_height : float
+        Hight of produced waves in m.
+    wave_width: float
+        Width of produced waves in m.
+    wave_period : float
+        Length of wave cycling period in sec (wave production and break).
+    wave_period_start : float
+        Start time of first wave cycle in sec.
+    wave_share_period : float
         Share of the time with wave generation within the cycling period.
     use_water_recycling : Boolean
         If true, water recycling unit within the water treatment system
-    x_recycling : float [-]
+    x_recycling : float
         Rate of water recycling
-    num_visitors : float [1/h]
-        Average number of visitors per hour.
-    num_filter_rinses : float [1/week]
-       Required number of filter rinses per week according to DIN 19643-1
-    m_flow_waste_water : float [kg/s]
-        Water exchange due to filter rinses per week or people in the pool, DIN 19643-1
-    area_pool_wall_inner : float [m2]
-        Area of pool walls which is connected to inner rooms (inner pool walls).
-    area_pool_wall_exterior : float [m2]
-        Area of pool walls which is connected to the ground (pool wall with earth contact).
-    area_pool_floor_inner : float [m2]
-        Area of pool floor which is connected to inner rooms (inner pool floor).
-    area_pool_floor_exterior : float [m2]
-        Area of pool floor which is connected to the ground (pool floor with earth contact).
-    h_con_water_horizontal : float [W/(m2*K)]
-        Mean value for the heat transfer coefficient of free convection on horizontal pool floors.
-    h_con_water_vertical : float [W/(m2*K)]
-        Mean value for the heat transfer coefficient of free convection on vertical pool walls.
+    num_visitors : float
+        Average number of visitors per hour in 1/h.
+    num_filter_rinses : float
+       Required number of filter rinses per week according to DIN 19643-1 in 1/week
+    m_flow_waste_water : float
+        Water exchange due to filter rinses per week or people in the pool, DIN 19643-1 in kg/s
+    area_pool_wall_inner : float
+        Area of pool walls which is connected to inner rooms in m2 (inner pool walls).
+    area_pool_wall_exterior : float
+        Area of pool walls which is connected to the ground in m2 (pool wall with earth contact).
+    area_pool_floor_inner : float
+        Area of pool floor which is connected to inner rooms in m2 (inner pool floor).
+    area_pool_floor_exterior : float
+        Area of pool floor which is connected to the ground in m2 (pool floor with earth contact).
+    h_con_water_horizontal : float
+        Mean value for the heat transfer coefficient of free convection on horizontal pool floors in W/(m2*K).
+    h_con_water_vertical : float
+        Mean value for the heat transfer coefficient of free convection on vertical pool walls in W/(m2*K).
     pool_wall_construction_type : str
         Construction type of pool wall, supported construction types: 'concrete_with_insulation', 'stainless_steel'
-    m_flow_evap_pool_used : float [kg/h]
-        Evaporation mass flow of used pool with maximal occupancy
+    m_flow_evap_pool_used : float
+        Evaporation mass flow of used pool with maximal occupancy in kg/h
     """
 
     def __init__(self, parent=None):
