@@ -20,7 +20,7 @@ class Pool(object):
     Parameters
     ----------
     parent : ThermalZone()
-        The parent class of this object, the ThermalZone the BE belongs to.
+        The parent class of this object, the ThermalZone the pool belongs to.
         Allows for better control of hierarchical structures.
         Default is None.
 
@@ -184,8 +184,7 @@ class Pool(object):
 
 
     def calc_pool_parameters(self):
-    #    self.perimeter = 2 * self.length + 2 * self.width
-
+        # Typical temperatures and depths for pools according to DIN 19643 and VDI 2089
         if self.pool_type == 'Swimmer_pool':
             self.depth = 2.5
             self.temperature = 301.15
@@ -200,7 +199,7 @@ class Pool(object):
             self.temperature = 301.15
         elif self.pool_type == 'Diving_pool':
             self.depth = 3.8
-            self.temperature = 288.15
+            self.temperature = 301.15
         elif self.pool_type == 'Freeform_pool':
             self.depth = 0.75
             self.temperature = 303.15
@@ -209,8 +208,9 @@ class Pool(object):
                         f"'Swimmer_pool', 'Nonswimmer_pool', 'Multipurpose_pool', 'Child_pool'," \
                         f" 'Multipurpose_pool', 'Diving_pool', 'Freeform_pool'")
 
-
         self.volume = self.area * self.depth
+
+        # avereage number of visitors KOK
         self.num_visitors = round(self.area ** 0.58, 0)
 
         # Calculation of the nominal volume_flow according to DIN 19643-1
@@ -250,8 +250,10 @@ class Pool(object):
                         f"'Swimmer_pool', 'Nonswimmer_pool', 'Multipurpose_pool', 'Child_pool'," \
                         f" 'Multipurpose_pool', 'Diving_pool', 'Freeform_pool'")
 
-        # V_H, V_K, V_B
-        V_H = N / k
+        # V_H: hygienic minimum volume flow
+        # V_K: hygienic minimum volume flow for children pool
+        # V_B: hydraulic minimum volume flow
+        V_H = N / k          # Ratio of nominal load divided by factor k
         V_B = 1 * self.perimeter
         if self.pool_type == 'Child_pool' and self.area < 20:
             V_K = m * self.volume
