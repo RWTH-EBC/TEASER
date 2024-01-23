@@ -13,7 +13,7 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     ASurTot=${bldg.library_attr.total_surface_area},
     numZones = ${len(bldg.thermal_zones)},
     % if bldg.type_of_building == "SwimmingFacility":
-    use_pools = true,
+    use_pools_tot = true,
     % else:
     use_pools = false,
     % endif
@@ -61,10 +61,60 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
   dpAHU_sup=800,
   dpAHU_eta=800,
 % endif
-  zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
+  zone(
+    % if bldg.type_of_building == "SwimmingFacility":
+        use_pools={
+        %for zone in bldg.thermal_zones:
+        ${'true' if zone.name == "Swimming_hall" else 'false'}${',' if not loop.last else ''}
+        %endfor
+        },
+        nPools={
+        %for zone in bldg.thermal_zones:
+        ${zone.nPools if zone.name == "Swimming_hall" else '1'}${',' if not loop.last else ''}
+        %endfor
+        },
+       poolWallParam={
+        %for zone in bldg.thermal_zones:
+            %if zone.name == "Swimming_hall":
+                {
+                %for pool in zone.pools:
+                    %if pool.pool_wall_construction_type=="concrete_with_insulation":
+                        AixLib.DataBase.Pools.SwimmingPoolWalls.ConcreteInsulationConstruction()${',' if not loop.last else ''}
+                    %elif pool.pool_wall_construction_type=="stainless_steel":
+                        AixLib.DataBase.Pools.SwimmingPoolWalls.StainlessSteelConstruction()${',' if not loop.last else ''}
+                    %else:
+                        AixLib.DataBase.Pools.SwimmingPoolWalls.ConcreteConstruction()${',' if not loop.last else ''}
+                    %endif
+                %endfor
+                }${',' if not loop.last else ''}
+            %else:
+               {AixLib.DataBase.Walls.ASHRAE140.DummyDefinition()}${',' if not loop.last else ''}
+            %endif
+        %endfor
+        },
+      poolParam={
+       %for zone in bldg.thermal_zones:
+            %if zone.name == "Swimming_hall":
+                {
+                %for pool in zone.pools:
+                    ${zone.parent.name}_DataBase.${zone.name}_DataBase.${zone.name}_${pool.name}()${',' if not loop.last else ''}
+                %endfor
+                }${',' if not loop.last else ''}
+            %else:
+                {AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()}${',' if not loop.last else ''}
+            %endif
+      %endfor
+      },
+      ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
            intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
            (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
            der_T(fixed=true))))),
+    % else:
+      ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
+           intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
+           (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
+           der_T(fixed=true))))),
+    % endif
    redeclare model corG =
         AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane,
 % if bldg.central_ahu:

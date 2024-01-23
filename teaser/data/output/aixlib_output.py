@@ -207,7 +207,7 @@ def export_multizone(buildings, prj, path=None, use_postprocessing_calc=False):
                 _help_package(
                     path=pool_path,
                     name=zone.name + '_DataBase',
-                    within=prj.name + '.' + bldg.name + zone.name)
+                    within=prj.name + '.' + bldg.name + '.' + bldg.name + '_DataBase')
                 _help_package_order(
                     path=pool_path,
                     package_list=list(zone.pools),
