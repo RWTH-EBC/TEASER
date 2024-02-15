@@ -67,10 +67,21 @@ def example_export_aixlib():
     # exported. In this case we want to export all buildings to our home
     # directory, thus we are passing over None for both parameters.
 
+    # We might want not have all data stored in our result file. By defining
+    # export_vars as following we can specify which results we want to store.
+
+    export_vars = {
+        "HeatingDemands": ["*multizone.PHeater*", "*multizone.PHeatAHU"],
+        "CoolingDemands": ["*multizone.PCooler*", "*multizone.PCoolAHU"],
+        "Temperatures": ["*multizone.TAir*", "*multizone.TRad*"]
+    }
+
     path = prj.export_aixlib(
         internal_id=None,
         path=None,
-        report=True)
+        report=True,
+        export_vars=export_vars
+    )
 
     return path
 
