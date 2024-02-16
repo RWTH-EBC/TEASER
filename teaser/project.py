@@ -1063,8 +1063,8 @@ class Project(object):
         export_vars: dict[str:list]
             dict where key is a name for this variable selection and value is a
             list of variables to export, wildcards can be used, multiple
-            variable selections are possible.
-
+            variable selections are possible. This works only for Dymola. See
+            (https://www.claytex.com/blog/selection-of-variables-to-be-saved-in-the-result-file/)
         """
 
         if building_model is not None or zone_model is not None or corG is not None:

@@ -68,7 +68,9 @@ def example_export_aixlib():
     # directory, thus we are passing over None for both parameters.
 
     # We might want not have all data stored in our result file. By defining
-    # export_vars as following we can specify which results we want to store.
+    # export_vars as following we can specify which results we want to store
+    # and define a collection name under which these results are stored. This
+    # feature only works with Dymola.
 
     export_vars = {
         "HeatingDemands": ["*multizone.PHeater*", "*multizone.PHeatAHU"],
