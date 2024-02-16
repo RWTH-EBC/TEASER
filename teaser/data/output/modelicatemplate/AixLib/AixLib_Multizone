@@ -185,6 +185,11 @@ equation
       __Dymola_Commands(file=
         "Resources/Scripts/Dymola/${bldg.name}/${bldg.name}.mos"
       "Simulate and Plot"),
+    % if export_vars:
+    __Dymola_selections={
+        Selection(name="BuildingSimulationOutputs",
+        match={${export_vars}})},
+    % endif
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
         graphics={
         Line(points={{80,-82}}, color={28,108,200}),
