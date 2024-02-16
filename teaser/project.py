@@ -1062,8 +1062,8 @@ class Project(object):
             created for the exported project.
         export_vars: dict[str:list]
             dict where key is a name for this variable selection and value is a
-             list of variables to export, wildcards can be used, multiple
-             variable selections are possible.
+            list of variables to export, wildcards can be used, multiple
+            variable selections are possible.
 
         """
 
