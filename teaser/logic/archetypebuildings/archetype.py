@@ -5,13 +5,13 @@
 from teaser.logic.buildingobjects.building import Building
 
 
-class Residential(Building):
-    """Base class for each residential archetype.
+class Archetype(Building):
+    """Base class for building archetypes.
 
-    This is the base class for all residential archetype buildings (BMVBS,
-    UrbanReNet, Tabula, etc.). It is a subclass of Building and introduces
+    This is the base class for archetype buildings.
+    It is a subclass of Building and introduces
     several parameters to be obligatory (parent, name, year_of_construction,
-    net_leased_area)
+    net_leased_area).
 
     Please use this class to create new archetype methodologies.
 
@@ -45,6 +45,7 @@ class Residential(Building):
            consideration of moisture and co2. The moisture calculation is
            based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
            Engineering ToolBox (2004) and regards only persons.
+
     Attributes
     ----------
     central_ahu : instance of BuildingAHU
@@ -117,10 +118,10 @@ class Residential(Building):
         with_ahu=False,
         internal_gains_mode=1,
     ):
-        """Constructor of Residential archetype building
+        """Constructor of Archetype building
         """
 
-        super(Residential, self).__init__(
+        super(Archetype, self).__init__(
             parent,
             name,
             year_of_construction,

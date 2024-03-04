@@ -4,7 +4,7 @@
 
 import math
 import collections
-from teaser.logic.archetypebuildings.nonresidential import NonResidential
+from teaser.logic.archetypebuildings.archetype import Archetype
 from teaser.logic.buildingobjects.useconditions import UseConditions as UseCond
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
@@ -16,7 +16,7 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
 
-class Office(NonResidential):
+class Office(Archetype):
     """Archetype Office Building according to BMVBS
 
     Subclass from NonResidential archetype class to represent office buildings.
