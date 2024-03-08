@@ -453,7 +453,7 @@ class UseConditions(object):
 
     def randomize_profile(self,profile):
         """Randomizes profiles by applying a randomized normal distribution
-        Seed for randomization may be altered to
+        Randomization profile has to be pre-generated and referenced
 
         Parameters
         ----------
@@ -819,6 +819,9 @@ class UseConditions(object):
                     else:
                         cooling_profile.append(value)
             self._cooling_profile = cooling_profile
+
+    def save_schedules(self, save_path):
+        self.schedules.to_pickle(save_path)
 
     @property
     def adjusted_opening_times(self):

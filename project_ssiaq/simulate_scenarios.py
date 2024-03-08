@@ -41,10 +41,10 @@ def load_scenarios(scenario_file=None):
                                              ]).all(), ass_error_building_type
 
         ass_error_net_area = "check if net area is betwenn 10 and 20000 "
-        assert scenarios.Net_Area.between(10,20000).all(), ass_error_net_area
+        assert scenarios.Net_Area.between(10, 20000).all(), ass_error_net_area
 
         ass_error_year_of_construction = "check if year of construction is betwenn 1850 and 2023 "
-        assert scenarios.Year_of_construction.between(1850,2023).all(), ass_error_year_of_construction
+        assert scenarios.Year_of_construction.between(1850, 2023).all(), ass_error_year_of_construction
 
         ass_error_modernization = "only 'non-modernized' and 'modernized' are valid modernization states"
         assert scenarios.Modernization_state.isin(["non-modernized", "modernized"]).all(), ass_error_modernization
@@ -65,15 +65,14 @@ def load_scenarios(scenario_file=None):
 
         ass_error_control = "only 'reference', 'demand_driven' and 'MPC' are valid equipment states"
         assert scenarios.Control_strategy.isin(["reference",
-                                              "demand_driven",
-                                              "MPC"]).all(), ass_error_control
+                                                "demand_driven",
+                                                "MPC"]).all(), ass_error_control
     except AssertionError as err:
         print('Error while loading scenarios')
         print(err)
     else:
         print('Loaded ', scenarios.__len__(), ' scenarios')
         return scenarios
-
 
 
 def generate_bldg(prj, scenario):
@@ -85,7 +84,7 @@ def generate_bldg(prj, scenario):
         else:
             ahu_usage = False
 
-        if scenario['Building_type'] in ["hotel","school"]:
+        if scenario['Building_type'] in ["hotel", "school"]:
             method = "dataNWG"
         else:
             method = "bmvbs"
@@ -123,7 +122,7 @@ def generate_bldg(prj, scenario):
     return prj
 
 
-def export_aixlib_model(prj, model_path, location):
+def export_aixlib_model(prj, model_path, location, control_type):
     weather_data = {"Aachen": "TRY2015_507931060546_Jahr_City_Aachen.mos",
                     "Garmisch-Partenkirchen": "TRY2015_474849111318_Jahr_City_Garmisch-Partenkirchen.mos",
                     "München": "TRY2015_481308115636_Jahr_City_Muenchen.mos",
@@ -131,6 +130,11 @@ def export_aixlib_model(prj, model_path, location):
                     "Gerolstein": "TRY2015_502252066685_Jahr_City_Gerolstein.mos",
                     "Greifswald": "TRY2015_541071133759_Jahr_City_Greifswald.mos"
                     }
+
+    if control_type == "MPC":
+        change_model_inputs = True
+    else:
+        change_model_inputs = False
 
     prj.dir_reference_results = utilities.get_full_path(
         os.path.join(
@@ -155,10 +159,18 @@ def export_aixlib_model(prj, model_path, location):
 
     path = prj.export_aixlib(
         internal_id=None,
-        path=model_path)
+        path=model_path,
+        change_model_inputs=change_model_inputs)
 
     return path
 
+def export_schedules(prj, export_path):
+    if not os.path.exists(export_path):
+        os.mkdir(export_path)
+    for idx, zone in enumerate(prj.buildings[0].thermal_zones):
+        file_name = 'schedules_'+str(idx)+'.pkl'
+        zone.use_conditions.save_schedules(save_path=export_path.joinpath(file_name))
+    return
 
 def simulate(
         aixlib_mo,
@@ -196,7 +208,7 @@ def simulate(
         show_window=True,
         n_restart=-1,
         equidistant_output=False,
-        extract_variables=False
+        extract_variables=True
     )
 
     simulation_setup = {"start_time": 0,
@@ -216,18 +228,19 @@ def simulate(
 if __name__ == "__main__":
 
     setup_name = "20230803_ddc_rand"
-    basepath = pathlib.Path('N:\Forschung\EBC0741_ZIM_SmartSenseIAQ_NK\Data\Simulationen/02_Bedarfsorierntierte_Regelung').joinpath(
+    basepath = pathlib.Path(
+        'N:\Forschung\EBC0741_ZIM_SmartSenseIAQ_NK\Data\Simulationen/02_Bedarfsorientierte_Regelung').joinpath(
         setup_name)
     scenarios = load_scenarios(basepath.joinpath("scenarios_full.xlsx"))
     model_export_path = basepath.joinpath("models")
     start_scenario = 10
     for index, scenario in scenarios.iterrows():
-        if index+1 < start_scenario:
-            continue        # skip scenarios until start_scenario is reached
+        if index + 1 < start_scenario:
+            continue  # skip scenarios until start_scenario is reached
         scenario_name = "S" + str(scenario['Scenario_number']) + "_" + str(scenario['Building_type'])
         prj = generate_project(name=scenario_name)
         prj = generate_bldg(prj, scenario)
-        export_aixlib_model(prj, model_export_path.joinpath(scenario_name), scenario['Location'])
+        export_aixlib_model(prj, model_export_path.joinpath(scenario_name), scenario['Location'], scenario['Control_strategy'])
 
         simulate(
             aixlib_mo=r"D:\pse\GIT\AixLib\AixLib\package.mo",

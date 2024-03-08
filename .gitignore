@@ -52,3 +52,5 @@ dist
 
 doc/_build
 /venv
+old
+999_old

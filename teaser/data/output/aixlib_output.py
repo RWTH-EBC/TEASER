@@ -8,7 +8,7 @@ from mako.lookup import TemplateLookup
 import teaser.logic.utilities as utilities
 
 
-def export_multizone(buildings, prj, path=None, use_postprocessing_calc=False):
+def export_multizone(buildings, prj, path=None, use_postprocessing_calc=False, change_model_inputs=False ):
     """Exports models for AixLib library
 
     Exports a building for
@@ -42,6 +42,10 @@ def export_multizone(buildings, prj, path=None, use_postprocessing_calc=False):
         If activated the exported model will use the multizonePostProcessing
         to calculate common outputs for simulation time like total heating
         demands. Only supported for Aixlib. Default is False.
+    change_model_inputs: boool
+        If activated the exported model will change TSetHeatInput and
+        TSetCoolInput from Tables to RealInputs and add zonal T_Air as
+        RealOutput. Only supported for Aixlib. Default is False.
    
     Attributes
     ----------
@@ -151,7 +155,8 @@ def export_multizone(buildings, prj, path=None, use_postprocessing_calc=False):
                 bldg=bldg,
                 weather=bldg.parent.weather_file_path,
                 modelica_info=bldg.parent.modelica_info,
-                use_postprocessing_calc=use_postprocessing_calc))
+                use_postprocessing_calc=use_postprocessing_calc,
+                change_model_inputs=change_model_inputs))
             out_file.close()
 
         dir_resources = os.path.join(path, "Resources")

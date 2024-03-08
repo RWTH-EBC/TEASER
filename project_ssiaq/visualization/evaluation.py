@@ -66,6 +66,7 @@ def plot_presence(tsd, building_type, scenario, zone_map, color_map,save_flag=Fa
         plt.savefig("Specific_People_" + scenario + ".png", bbox_inches="tight")
     print("Figure saved")
     plt.close()
+
 def get_bldg_type_from_filename(filename):
     building_types = ['single_family_house', 'multi_family_house', 'terraced_house', 'apartment_block', 'office',
                       'school', 'hotel']

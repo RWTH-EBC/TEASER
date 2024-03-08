@@ -24,7 +24,6 @@ def save_use_conditions(use_cond, data_class):
         DataClass containing the bindings for TypeBuildingElement and
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.ile
-
     """
     if use_cond.usage in data_class.conditions_bind.keys():
         add_to_json = False
