@@ -6,6 +6,7 @@ import numpy as np
 import pathlib
 import os
 
+
 def import_and_process(path):
     tsd = TimeSeriesData(path)
     tsd.to_datetime_index(origin=datetime.datetime(2022, 1, 1, 0, 0, 0))
@@ -80,13 +81,13 @@ def get_bldg_type_from_filename(filename):
 
 if __name__ == '__main__':
     setup_name = "20230428_bedarfsorientiert_nwg"
-    basepath = Path('N:/Forschung/EBC0741_ZIM_SmartSenseIAQ_NK/Data/Simulationen/02_Bedarfsorierntierte_Regelung').joinpath(
+    basepath = Path('R:\EBC0741_ZIM_SmartSenseIAQ_NK\Assistenten\SimDaten/02_Bedarfsorientierte_Regelung').joinpath(
         setup_name, "sim_results")
     # find all result files in given setup folder
 
     pathlist = Path(basepath).rglob('*.mat')
     #pathlist = Path("N:\Forschung\EBC0741_ZIM_SmartSenseIAQ_NK\Data\Simulationen/01_Referenzszenarien/20230307_referenz_komplett\sim_results\S157_school").rglob('*.mat')
-    # TODO: Configure zone map
+
     zone_map = dict(office=['Office', 'Floor', 'Storage', 'Meeting', 'Restroom', 'ICT'],
                     school=['Classrooms', 'Floor', 'Storage', 'Office', 'Restroom', 'Further common rooms','Canteen',
                             'Auditorium'],
@@ -100,8 +101,9 @@ if __name__ == '__main__':
         path_in_str = str(path)
         building_type, scenario = get_bldg_type_from_filename(path_in_str)
         tsd = import_and_process(path_in_str)
-        slicedCM = cmap(np.linspace(0, 1, len(zone_map[building_type])))
+        num_zones = len(zone_map[building_type])
+        slicedCM = cmap(np.linspace(0, 1, num_zones))
         os.chdir(path.parents[0])
         #plot_T_Air(tsd, building_type, scenario, zone_map,slicedCM,save_flag=True)
         #plot_Q_flow(tsd, building_type, scenario, zone_map,slicedCM,save_flag=True)
-        plot_presence(tsd, building_type, scenario, zone_map,slicedCM,save_flag=True)
+        #plot_presence(tsd, building_type, scenario, zone_map,slicedCM,save_flag=True)
