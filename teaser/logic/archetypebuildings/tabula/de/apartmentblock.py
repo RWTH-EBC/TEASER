@@ -102,7 +102,7 @@ class ApartmentBlock(SingleFamilyHouse):
         self._construction_type_1 = self.construction_type + '_1_AB'
         self._construction_type_2 = self.construction_type + '_2_AB'
 
-        self.zone_area_factors = {"SingleDwelling": [1, "Living"]}
+        self.zone_area_factors = {"SingleDwelling": [1, "Living_MFH"]}
 
         self._outer_wall_names_1 = {
             "ExteriorFacadeNorth_1": [90.0, 0.0],
