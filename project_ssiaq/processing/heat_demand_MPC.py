@@ -11,7 +11,7 @@ from scipy import integrate
 from pathlib import Path
 from project_ssiaq.simulate_scenarios import load_scenarios
 import matplotlib.pyplot as plt
-import numpy as np
+import pandas as pd
 
 def get_zone_number(building_class, building_type):
     """
@@ -63,7 +63,12 @@ if __name__ == '__main__':
     scenarios = load_scenarios(basepath.parent.joinpath("scenarios.xlsx"))
 
     start_row = 1  # row index of excel sheet != actual scenario number
-    end_row = 1
+    end_row = 3
+
+    result_df = pd.DataFrame(
+        columns=['Scenario', 'Building type', 'Num Zones', 'Heat demand total', 'Net area', 'Construction year'],
+        index=range(end_row))
+
     for index, scenario in scenarios.iterrows():
         if index + 1 < start_row or index + 1 > end_row:
             continue  # skip scenarios until start_scenario is reached
@@ -77,8 +82,15 @@ if __name__ == '__main__':
         heat_demand_zonal = list()
         for zone in range(num_zones):
             heat_demand_zonal.append(integrate.trapezoid(df["multizone.PHeater["+str(zone+1)+"]"], df["SimTime"]/3600/1000)) # in kWh
-        total_heat_demand = sum(heat_demand_zonal)
-        cmap = plt.get_cmap('plasma')
-        slicedCM = cmap(np.linspace(0, 1, num_zones))
-        plot_Q_flow(df, num_zones,slicedCM)
-        plot_T_Air(df, num_zones,slicedCM)
+        heat_demand_total = sum(heat_demand_zonal)
+        result_df.loc[index] = {'Scenario': scenario['Scenario_number'], 'Building type': scenario['Building_type'], 'Num Zones': num_zones,
+                       'Heat demand total': heat_demand_total, 'Net area': scenario["Net_Area"],
+                       'Construction year': scenario["Year_of_construction"]}
+        # cmap = plt.get_cmap('plasma')
+        # slicedCM = cmap(np.linspace(0, 1, num_zones))
+        # plot_Q_flow(df, num_zones,slicedCM)
+        # plot_T_Air(df, num_zones,slicedCM)
+
+    result_df["Specific heat demand"] = result_df['Heat demand total'] / result_df['Net area']
+    result_df.to_pickle(basepath.joinpath('dataframe_heat_demand_total.pkl'))
+    print("Saved pickle to:",str(basepath.joinpath('dataframe_heat_demand_total.pkl')))
