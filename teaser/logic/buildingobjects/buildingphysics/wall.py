@@ -29,7 +29,7 @@ class Wall(BuildingElement):
         Random id for the distinction between different elements.
     name : str
         Individual name
-    construction_type : str
+    construction_data : str
         Type of construction (e.g. "heavy" or "light"). Needed for
         distinction between different constructions types in the same
         building age period.
@@ -370,6 +370,102 @@ class Wall(BuildingElement):
                     (((
                       1 - calc_u * self.r_inner_comb - calc_u *
                       self.r_outer_comb) /
+                      calc_u) * self.area - r_conduc) * \
+                    self.layer[-1].material.thermal_conduc
+
+                self.layer[-1].id = len(self.layer)
+
+    def retrofit_wall_kfw(self, type_of_retrofit, material=None):
+        """Retrofits wall to German Effizienzhaus standards (KfW).
+
+        This function adds an additional layer of insulation and sets the
+        thickness of the layer according to the Effizienzhaus Number
+        (kfw_40, kfw_55, kfw_70, kfw_85, kfw_100)
+
+        Note: To Calculate thickness and U-Value, the standard TEASER
+        coefficients for outer and inner heat transfer are used.
+
+        Parameters
+        ----------
+        material : string
+            Type of material, that is used for insulation
+        type_of_retrofit : string
+            KfW Standard number (kfw_40, kfw_55, kfw_70, kfw_85 and kfw_100 are allowed)
+
+        """
+
+        if material is None:
+            material = "EPS_perimeter_insulation_top_layer"
+        else:
+            pass
+
+        if type(self).__name__ == 'OuterWall':
+
+            if type_of_retrofit == "kfw_100":
+                self.insulate_wall(material)
+                calc_u = 0.32 * self.area
+            elif type_of_retrofit == "kfw_85":
+                self.insulate_wall(material)
+                calc_u = 0.28 * self.area
+            elif type_of_retrofit == "kfw_70":
+                self.insulate_wall(material)
+                calc_u = 0.24 * self.area
+            elif type_of_retrofit == "kfw_55":
+                self.insulate_wall(material)
+                calc_u = 0.20 * self.area
+            elif type_of_retrofit == "kfw_40":
+                self.insulate_wall(material)
+                calc_u = 0.15 * self.area
+
+        elif type(self).__name__ == 'Rooftop':
+
+            if type_of_retrofit == "kfw_100":
+                self.insulate_wall(material)
+                calc_u = 0.23 * self.area
+            elif type_of_retrofit == "kfw_85":
+                self.insulate_wall(material)
+                calc_u = 0.2 * self.area
+            elif type_of_retrofit == "kfw_70":
+                self.insulate_wall(material)
+                calc_u = 0.17 * self.area
+            elif type_of_retrofit == "kfw_55":
+                self.insulate_wall(material)
+                calc_u = 0.14 * self.area
+            elif type_of_retrofit == "kfw_40":
+                self.insulate_wall(material)
+                calc_u = 0.11 * self.area
+
+        if type(self).__name__ == 'GroundFloor':
+
+            if type_of_retrofit == "kfw_100":
+                self.insulate_wall(material)
+                calc_u = 0.40 * self.area
+            elif type_of_retrofit == "kfw_85":
+                self.insulate_wall(material)
+                calc_u = 0.35 * self.area
+            elif type_of_retrofit == "kfw_70":
+                self.insulate_wall(material)
+                calc_u = 0.30 * self.area
+            elif type_of_retrofit == "kfw_55":
+                self.insulate_wall(material)
+                calc_u = 0.25 * self.area
+            elif type_of_retrofit == "kfw_40":
+                self.insulate_wall(material)
+                calc_u = 0.20 * self.area
+
+        r_conduc = 0
+
+        if self.ua_value < calc_u:
+            pass
+        else:
+            for count_layer in self.layer[:-1]:
+                r_conduc += (count_layer.thickness /
+                             count_layer.material.thermal_conduc)
+
+                self.layer[-1].thickness = \
+                    (((
+                              1 - calc_u * self.r_inner_comb - calc_u *
+                              self.r_outer_comb) /
                       calc_u) * self.area - r_conduc) * \
                     self.layer[-1].material.thermal_conduc
 

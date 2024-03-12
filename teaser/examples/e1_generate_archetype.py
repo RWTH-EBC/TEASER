@@ -30,7 +30,7 @@ def example_generate_archetype():
     # To generate residential archetype buildings the function
     # Project.add_residential() is used. Seven parameters are compulsory,
     # additional parameters can be set according to the used method. `method`
-    # and `usage` are used to distinguish between different archetype
+    # and `geometry_data` are used to distinguish between different archetype
     # methods. The name, year_of_construction, number and height of floors
     # and net_leased_area need to be set to provide enough information for
     # archetype generation. For specific information on the parameters please
@@ -38,7 +38,7 @@ def example_generate_archetype():
 
     prj.add_residential(
         method='iwu',
-        usage='single_family_dwelling',
+        geometry_data='single_family_dwelling',
         name="ResidentialBuilding",
         year_of_construction=1988,
         number_of_floors=2,
@@ -52,7 +52,8 @@ def example_generate_archetype():
 
     prj.add_non_residential(
         method='bmvbs',
-        usage='office',
+        #gemetry_data --> bmvbs_office
+        geometry_data='office',
         name="OfficeBuilding",
         year_of_construction=1988,
         number_of_floors=4,
@@ -61,7 +62,7 @@ def example_generate_archetype():
 
     prj.add_non_residential(
         method='bmvbs',
-        usage='institute',
+        geometry_data='institute',
         name="InstituteBuilding",
         year_of_construction=1952,
         number_of_floors=5,
@@ -70,7 +71,7 @@ def example_generate_archetype():
 
     prj.add_non_residential(
         method='bmvbs',
-        usage='institute',
+        geometry_data='institute',
         name="InstituteBuildingMoisture",
         year_of_construction=1980,
         number_of_floors=3,
@@ -83,7 +84,7 @@ def example_generate_archetype():
     # (http://webtool.building-typology.eu/#bm) and other countries are about to
     # follow. To use TABULA archetype simple choose `tabula_de` as the method
     # and `single_family_house`, `multi_family_house`, `terraced_house` or
-    # `apartment_block` as the usage. In addition you can specify the
+    # `apartment_block` as the geometry_data. In addition you can specify the
     # construction type of TABULA, chose between `tabula_standard` (default),
     # `tabula_retrofit` or `tabula_adv_retrofit`. In this case we generate one
     # single and one multi family house with TABULA typology.
@@ -96,23 +97,23 @@ def example_generate_archetype():
 
     prj.add_residential(
         method='tabula_de',
-        usage='single_family_house',
+        geometry_data='single_family_house',
         name="ResidentialBuildingTabula",
         year_of_construction=1988,
         number_of_floors=3,
         height_of_floors=3.2,
         net_leased_area=280.0,
-        construction_type='tabula_standard')
+        construction_data='tabula_standard')
 
     prj.add_residential(
         method='tabula_de',
-        usage='multi_family_house',
+        geometry_data='multi_family_house',
         name="ResidentialBuildingTabulaMulti",
         year_of_construction=1960,
         number_of_floors=4,
         height_of_floors=3.2,
         net_leased_area=600.0,
-        construction_type='tabula_retrofit')
+        construction_data='tabula_retrofit')
 
     return prj
 

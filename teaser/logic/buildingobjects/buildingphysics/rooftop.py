@@ -27,7 +27,7 @@ class Rooftop(OuterWall):
         Random id for the distinction between different elements.
     name : str
         Individual name
-    construction_type : str
+    construction_data : str
         Type of construction (e.g. "heavy" or "light"). Needed for
         distinction between different constructions types in the same
         building age period.

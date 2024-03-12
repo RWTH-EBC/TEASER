@@ -7,6 +7,8 @@
 # You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)
 
 import teaser.examples.e1_generate_archetype as e1
+import teaser.examples.e10_generate_KfW_archetype as e10
+import teaser.examples.e11_generate_KfW_archetype as e11
 import teaser.logic.utilities as utilities
 import os
 
@@ -18,7 +20,9 @@ def example_export_aixlib():
     # In e1_generate_archetype we created a Project with three archetype
     # buildings to get this Project we rerun this example
 
-    prj = e1.example_generate_archetype()
+    #prj = e1.example_generate_archetype()
+    #prj = e10.example_generate_KfW_archetype()
+    prj = e11.example_generate_KfW_archetype()
 
     # To make sure the export is using the desired parameters you should
     # always set model settings in the Project.

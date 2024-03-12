@@ -1,6 +1,8 @@
 """This module holds file paths and bindings for json data."""
 import os
 import sys
+import warnings
+
 import teaser.logic.utilities as utils
 import json
 import collections
@@ -12,7 +14,6 @@ if v >= (2, 7):
     except NameError:
         FileNotFoundError = IOError
 
-
 class DataClass(object):
     """Class for JSON data.
 
@@ -23,15 +24,15 @@ class DataClass(object):
     ----------
     used_statistics : str
         This parameter indicates which statistical data about building
-        elements should be used. Use 'iwu' or 'tabula_de'.
+        elements should be used. Use 'iwu', 'tabula_de' or 'kfw'.
 
     Attributes
     ----------
     element_bind : collections.OrderedDict
         Ordered dictionary of the TypeBuildingElements binding.
     path_tb : str
-        Full path to TypeBuildingElements.json. Default is
-        teaser/data/input/inputdata/TypeBuildingElements.json.
+        Full path to TypeElements_IWU.json. Default is
+        teaser/data/input/inputdata/TypeElements_IWU.json.
     material_bind : collections.OrderedDict
         Ordered dictionary of the Material binding.
     path_mat : str
@@ -51,7 +52,7 @@ class DataClass(object):
         self.element_bind = None
         if self.used_statistic == "iwu":
             self.path_tb = utils.get_full_path(
-                "data/input/inputdata/TypeBuildingElements.json"
+                "data/input/inputdata/TypeElements_IWU.json"
             )
             self.load_tb_binding()
         elif self.used_statistic == "tabula_de":
@@ -65,6 +66,13 @@ class DataClass(object):
             self.path_tb = utils.get_full_path(
                 os.path.join(
                     "data", "input", "inputdata", "TypeElements_TABULA_DK.json"
+                )
+            )
+            self.load_tb_binding()
+        elif self.used_statistic == "kfw":
+            self.path_tb = utils.get_full_path(
+                os.path.join(
+                    "data", "input", "inputdata", "TypeElements_KFW.json"
                 )
             )
             self.load_tb_binding()

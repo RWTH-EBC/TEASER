@@ -1,6 +1,6 @@
 # created April 2017
 # by TEASER Development Team
-
+import teaser.data.utilities as datahandling
 from teaser.logic.archetypebuildings.residential import Residential
 from teaser.logic.buildingobjects.useconditions import UseConditions as UseCond
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
@@ -37,7 +37,7 @@ class SingleFamilyHouse(Residential):
     the surface area for heat transmission, but is only used to calculate the
     interior wall area, which is not specified in TABULA at all. Further, TABULA
     does not specify any specific user profile, by default the SingleFamilyHouse
-    class has exactly one usage zone, which is 'Living'. TABULA also does not
+    class has exactly one geometry_data zone, which is 'Living'. TABULA also does not
     always specify the exact construction of building elements, but always
     provides a prescribed U-Value. We used the U-Value and the given material
     information to determine thickness of each layer and implemented it into
@@ -88,7 +88,7 @@ class SingleFamilyHouse(Residential):
            based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
            Engineering ToolBox (2004) and regards only persons.
 
-    construction_type : str
+    construction_data : str
         Construction type of used wall constructions default is "existing
         state"
 
@@ -112,7 +112,7 @@ class SingleFamilyHouse(Residential):
         net_leased_area=None,
         with_ahu=False,
         internal_gains_mode=1,
-        construction_type=None,
+        construction_data=None,
     ):
 
         super(SingleFamilyHouse, self).__init__(
@@ -124,12 +124,12 @@ class SingleFamilyHouse(Residential):
             internal_gains_mode
         )
 
-        self.construction_type = construction_type
+        self.construction_data = construction_data
         self.number_of_floors = number_of_floors
         self.height_of_floors = height_of_floors
 
-        self._construction_type_1 = self.construction_type + "_1_SFH"
-        self._construction_type_2 = self.construction_type + "_2_SFH"
+        self._construction_data_1 = self.construction_data + "_1_SFH"
+        self._construction_data_2 = self.construction_data + "_2_SFH"
 
         self.zone_area_factors = {"SingleDwelling": [1, "Living"]}
 
@@ -366,7 +366,7 @@ class SingleFamilyHouse(Residential):
             zone.name = key
             zone.area = type_bldg_area * value[0]
             use_cond = UseCond(parent=zone)
-            use_cond.load_use_conditions(zone_usage=value[1])
+            use_cond.load_use_conditions(zone_geometry_data=value[1])
             zone.use_conditions = use_cond
 
             zone.use_conditions.with_ahu = False
@@ -377,7 +377,7 @@ class SingleFamilyHouse(Residential):
                     outer_wall = OuterWall(zone)
                     outer_wall.load_type_element(
                         year=self.year_of_construction,
-                        construction=self._construction_type_1,
+                        construction=self._construction_data_1,
                         data_class=self.parent.data,
                     )
                     outer_wall.name = key
@@ -394,7 +394,7 @@ class SingleFamilyHouse(Residential):
                     outer_wall = OuterWall(zone)
                     outer_wall.load_type_element(
                         year=self.year_of_construction,
-                        construction=self._construction_type_2,
+                        construction=self._construction_data_2,
                         data_class=self.parent.data,
                     )
                     outer_wall.name = key
@@ -411,7 +411,7 @@ class SingleFamilyHouse(Residential):
                     window = Window(zone)
                     window.load_type_element(
                         self.year_of_construction,
-                        construction=self._construction_type_1,
+                        construction=self._construction_data_1,
                         data_class=self.parent.data,
                     )
                     window.name = key
@@ -428,7 +428,7 @@ class SingleFamilyHouse(Residential):
                     window = Window(zone)
                     window.load_type_element(
                         self.year_of_construction,
-                        construction=self._construction_type_2,
+                        construction=self._construction_data_2,
                         data_class=self.parent.data,
                     )
                     window.name = key
@@ -446,7 +446,7 @@ class SingleFamilyHouse(Residential):
                     gf = GroundFloor(zone)
                     gf.load_type_element(
                         year=self.year_of_construction,
-                        construction=self._construction_type_1,
+                        construction=self._construction_data_1,
                         data_class=self.parent.data,
                     )
                     gf.name = key
@@ -464,7 +464,7 @@ class SingleFamilyHouse(Residential):
                     gf = GroundFloor(zone)
                     gf.load_type_element(
                         year=self.year_of_construction,
-                        construction=self._construction_type_2,
+                        construction=self._construction_data_2,
                         data_class=self.parent.data,
                     )
                     gf.name = key
@@ -482,7 +482,7 @@ class SingleFamilyHouse(Residential):
                     rt = Rooftop(zone)
                     rt.load_type_element(
                         year=self.year_of_construction,
-                        construction=self._construction_type_1,
+                        construction=self._construction_data_1,
                         data_class=self.parent.data,
                     )
                     rt.name = key
@@ -500,7 +500,7 @@ class SingleFamilyHouse(Residential):
                     rt = Rooftop(zone)
                     rt.load_type_element(
                         year=self.year_of_construction,
-                        construction=self._construction_type_2,
+                        construction=self._construction_data_2,
                         data_class=self.parent.data,
                     )
                     rt.name = key
@@ -518,7 +518,7 @@ class SingleFamilyHouse(Residential):
                     door = Door(zone)
                     door.load_type_element(
                         year=self.year_of_construction,
-                        construction=self._construction_type_1,
+                        construction=self._construction_data_1,
                         data_class=self.parent.data,
                     )
                     door.name = key
@@ -574,20 +574,35 @@ class SingleFamilyHouse(Residential):
             zone.set_inner_wall_area()
             zone.set_volume_zone()
 
-    @property
-    def construction_type(self):
-        return self._construction_type
 
-    @construction_type.setter
-    def construction_type(self, value):
-        if value is not None:
-            if value in ["tabula_standard", "tabula_retrofit", "tabula_adv_retrofit"]:
-                self._construction_type = value
-            else:
-                raise ValueError(
-                    "Construction_type has to be tabula_standard,"
-                    "tabula_retrofit, "
-                    "tabula_adv_retrofit"
-                )
-        else:
-            self._construction_type = "tabula_standard"
+    #TODO #745 bei Umbenennung der construction_data Werte im Folgenden noch anpassen
+    #@property
+    #def construction_data(self):
+    #    return self._construction_data
+
+    #@construction_data.setter
+    #def construction_data(self, value):
+    #    if value is not None:
+    #        if value in ["tabula_de_standard", "tabula_de_retrofit", "tabula_de_adv_retrofit", "kfw_40", "kfw_55", "kfw_70", "kfw_85", "kfw_100"]:
+    #            self._construction_data = value
+    #        else:
+    #            raise ValueError(
+    #                "construction_data has to be tabula_de_standard,"
+    #                "tabula_de_retrofit, "
+    #                "tabula_de_adv_retrofit, "
+    #                "or a kfw-standard like kfw_40"
+    #            )
+    #    else:
+    #        self._construction_data = "tabula_de_standard"
+
+    @property
+    def construction_data(self):
+        return self._construction_data
+
+    #TODO #745 folgender Abschnitt überflüssig, da in data/utilities in dictionaries vorhanden?
+    @construction_data.setter
+    def construction_data(self, value):
+        if not isinstance(value, datahandling.ConstructionData):
+            raise ValueError(f"Invalid construction_data: {value}. Must be a ConstructionData enum value.")
+        self._construction_data = value
+

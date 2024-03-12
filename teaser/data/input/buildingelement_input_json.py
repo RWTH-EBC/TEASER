@@ -3,7 +3,9 @@
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
 from teaser.logic.buildingobjects.buildingphysics.material import Material
 import teaser.data.input.material_input_json as mat_input
+import logging
 
+logging.basicConfig(level=logging.INFO)
 
 def load_type_element(element, year, construction, data_class):
     """Load BuildingElement from json.
@@ -14,6 +16,7 @@ def load_type_element(element, year, construction, data_class):
     cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.26.07.2007` and
     :cite:`KurzverfahrenIWU`, which is combined with normative material data
     from :cite:`VereinDeutscherIngenieure.2012b`.
+    #TODO: Update documentation: source of information for TypeElements_KfW
 
     Parameters
     ----------
@@ -36,22 +39,25 @@ def load_type_element(element, year, construction, data_class):
 
     for key, element_in in element_binding.items():
         if key != "version":
-            if (
-                element_in["building_age_group"][0]
-                <= year
-                <= element_in["building_age_group"][1]
-                and element_in["construction_type"] == construction
-                and key.startswith(type(element).__name__)
-            ):
-                _set_basic_data(element=element, element_in=element_in)
-                for id, layer_in in element_in["layer"].items():
-                    layer = Layer(element)
-                    layer.id = id
-                    layer.thickness = layer_in["thickness"]
-                    material = Material(layer)
-                    mat_input.load_material_id(
-                        material, layer_in["material"]["material_id"], data_class
-                    )
+            try:
+                if (
+                    element_in["building_age_group"][0]
+                    <= year
+                    <= element_in["building_age_group"][1]
+                    and element_in["construction_data"] == construction
+                    and key.startswith(type(element).__name__)
+                ):
+                    _set_basic_data(element=element, element_in=element_in)
+                    for id, layer_in in element_in["layer"].items():
+                        layer = Layer(element)
+                        layer.id = id
+                        layer.thickness = layer_in["thickness"]
+                        material = Material(layer)
+                        mat_input.load_material_id(
+                            material, layer_in["material"]["material_id"], data_class
+                        )
+            except Exception as e:
+                logging.error(f"Error loading TypeElement {element_in} from JSON Template.")
 
 
 def _set_basic_data(element, element_in):
@@ -68,7 +74,7 @@ def _set_basic_data(element, element_in):
 
     """
     element.building_age_group = element_in["building_age_group"]
-    element.construction_type = element_in["construction_type"]
+    element.construction_data = element_in["construction_data"]
     element.inner_radiation = element_in["inner_radiation"]
     element.inner_convection = element_in["inner_convection"]
 

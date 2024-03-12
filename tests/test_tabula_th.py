@@ -561,11 +561,11 @@ class Test_tabula_th(object):
 
         for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
 
-            if "_1_" in wall.construction_type:
+            if "_1_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.6 - 0.17)), 1)
 
-            if "_2_" in wall.construction_type:
+            if "_2_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.6 - 0.17)), 1)
 
@@ -636,11 +636,11 @@ class Test_tabula_th(object):
 
         for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
 
-            if "_1_" in wall.construction_type:
+            if "_1_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.28 - 0.17)), 1)
 
-            if "_2_" in wall.construction_type:
+            if "_2_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.28 - 0.17)), 1)
 
@@ -650,11 +650,11 @@ class Test_tabula_th(object):
             1) == round((1 / (1 / 0.35 - 0.34)), 1)
 
         for win in prj.buildings[-1].thermal_zones[-1].windows:
-            if "_1_" in win.construction_type:
+            if "_1_" in win.construction_data:
                 assert round(1 / (win.r_conduc * win.area),
                              1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-            if "_2_" in win.construction_type:
+            if "_2_" in win.construction_data:
                 assert round(1 / (win.r_conduc * win.area),
                              1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
@@ -680,11 +680,11 @@ class Test_tabula_th(object):
 
         for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
 
-            if "_1_" in wall.construction_type:
+            if "_1_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.16 - 0.17)), 1)
 
-            if "_2_" in wall.construction_type:
+            if "_2_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.16 - 0.17)), 1)
 
@@ -694,11 +694,11 @@ class Test_tabula_th(object):
             1) == round((1 / (1 / 0.16 - 0.34)), 1)
 
         for win in prj.buildings[-1].thermal_zones[-1].windows:
-            if "_1_" in win.construction_type:
+            if "_1_" in win.construction_data:
                 assert round(1 / (win.r_conduc * win.area),
                              1) == round((1 / (1 / 1.1 - 0.17)), 1)
 
-            if "_2_" in win.construction_type:
+            if "_2_" in win.construction_data:
                 assert round(1 / (win.r_conduc * win.area),
                              1) == round((1 / (1 / 1.1 - 0.17)), 1)
 
@@ -717,7 +717,7 @@ class Test_tabula_th(object):
             number_of_floors=2,
             height_of_floors=3.2,
             net_leased_area=219,
-            construction_type="tabula_retrofit")
+            construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -753,7 +753,7 @@ class Test_tabula_th(object):
             year_of_construction=1947,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219, construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -789,7 +789,7 @@ class Test_tabula_th(object):
             year_of_construction=1956,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219, construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -825,7 +825,7 @@ class Test_tabula_th(object):
             year_of_construction=1967,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219, construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -861,7 +861,7 @@ class Test_tabula_th(object):
             year_of_construction=1977,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219, construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -896,7 +896,7 @@ class Test_tabula_th(object):
             year_of_construction=1982,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219, construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -932,7 +932,7 @@ class Test_tabula_th(object):
             year_of_construction=1993,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219, construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -968,7 +968,7 @@ class Test_tabula_th(object):
             year_of_construction=2000,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219, construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -977,11 +977,11 @@ class Test_tabula_th(object):
 
         for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
 
-            if "_1_" in wall.construction_type:
+            if "_1_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.2 - 0.17)), 1)
 
-            if "_2_" in wall.construction_type:
+            if "_2_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.2 - 0.17)), 1)
 
@@ -1009,7 +1009,7 @@ class Test_tabula_th(object):
             year_of_construction=2008,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219, construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1045,7 +1045,7 @@ class Test_tabula_th(object):
             year_of_construction=2014,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219, construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1054,11 +1054,11 @@ class Test_tabula_th(object):
 
         for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
 
-            if "_1_" in wall.construction_type:
+            if "_1_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.2 - 0.17)), 1)
 
-            if "_2_" in wall.construction_type:
+            if "_2_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.2 - 0.17)), 1)
 
@@ -1068,11 +1068,11 @@ class Test_tabula_th(object):
             1) == round((1 / (1 / 0.25 - 0.34)), 1)
 
         for win in prj.buildings[-1].thermal_zones[-1].windows:
-            if "_1_" in win.construction_type:
+            if "_1_" in win.construction_data:
                 assert round(1 / (win.r_conduc * win.area),
                              1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-            if "_2_" in win.construction_type:
+            if "_2_" in win.construction_data:
                 assert round(1 / (win.r_conduc * win.area),
                              1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
@@ -1090,7 +1090,7 @@ class Test_tabula_th(object):
             year_of_construction=2099,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219, construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1099,11 +1099,11 @@ class Test_tabula_th(object):
 
         for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
 
-            if "_1_" in wall.construction_type:
+            if "_1_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.15 - 0.17)), 1)
 
-            if "_2_" in wall.construction_type:
+            if "_2_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.15 - 0.17)), 1)
 
@@ -1113,11 +1113,11 @@ class Test_tabula_th(object):
             1) == round((1 / (1 / 0.15 - 0.34)), 1)
 
         for win in prj.buildings[-1].thermal_zones[-1].windows:
-            if "_1_" in win.construction_type:
+            if "_1_" in win.construction_data:
                 assert round(1 / (win.r_conduc * win.area),
                              1) == round((1 / (1 / 1.1 - 0.17)), 1)
 
-            if "_2_" in win.construction_type:
+            if "_2_" in win.construction_data:
                 assert round(1 / (win.r_conduc * win.area),
                              1) == round((1 / (1 / 1.1 - 0.17)), 1)
 
@@ -1136,7 +1136,7 @@ class Test_tabula_th(object):
             number_of_floors=2,
             height_of_floors=3.2,
             net_leased_area=219,
-            construction_type="tabula_adv_retrofit")
+            construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1173,7 +1173,7 @@ class Test_tabula_th(object):
             number_of_floors=2,
             height_of_floors=3.2,
             net_leased_area=219,
-            construction_type="tabula_adv_retrofit")
+            construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1210,7 +1210,7 @@ class Test_tabula_th(object):
             number_of_floors=2,
             height_of_floors=3.2,
             net_leased_area=219,
-            construction_type="tabula_adv_retrofit")
+            construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1246,7 +1246,7 @@ class Test_tabula_th(object):
             year_of_construction=1967,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_adv_retrofit")
+            net_leased_area=219, construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1282,7 +1282,7 @@ class Test_tabula_th(object):
             year_of_construction=1977,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_adv_retrofit")
+            net_leased_area=219, construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1318,7 +1318,7 @@ class Test_tabula_th(object):
             year_of_construction=1982,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_adv_retrofit")
+            net_leased_area=219, construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1354,7 +1354,7 @@ class Test_tabula_th(object):
             year_of_construction=1993,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_adv_retrofit")
+            net_leased_area=219, construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1390,7 +1390,7 @@ class Test_tabula_th(object):
             year_of_construction=2000,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_adv_retrofit")
+            net_leased_area=219, construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1399,11 +1399,11 @@ class Test_tabula_th(object):
 
         for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
 
-            if "_1_" in wall.construction_type:
+            if "_1_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.14 - 0.17)), 1)
 
-            if "_2_" in wall.construction_type:
+            if "_2_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.14 - 0.17)), 1)
 
@@ -1431,7 +1431,7 @@ class Test_tabula_th(object):
             year_of_construction=2008,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_adv_retrofit")
+            net_leased_area=219, construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1467,7 +1467,7 @@ class Test_tabula_th(object):
             year_of_construction=2014,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_adv_retrofit")
+            net_leased_area=219, construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1476,11 +1476,11 @@ class Test_tabula_th(object):
 
         for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
 
-            if "_1_" in wall.construction_type:
+            if "_1_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.12 - 0.17)), 1)
 
-            if "_2_" in wall.construction_type:
+            if "_2_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.12 - 0.17)), 1)
 
@@ -1490,11 +1490,11 @@ class Test_tabula_th(object):
             1) == round((1 / (1 / 0.12 - 0.34)), 1)
 
         for win in prj.buildings[-1].thermal_zones[-1].windows:
-            if "_1_" in win.construction_type:
+            if "_1_" in win.construction_data:
                 assert round(1 / (win.r_conduc * win.area),
                              1) == round((1 / (1 / 0.7 - 0.17)), 1)
 
-            if "_2_" in win.construction_type:
+            if "_2_" in win.construction_data:
                 assert round(1 / (win.r_conduc * win.area),
                              1) == round((1 / (1 / 1.0 - 0.17)), 1)
 
@@ -1512,7 +1512,7 @@ class Test_tabula_th(object):
             year_of_construction=2099,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_adv_retrofit")
+            net_leased_area=219, construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1521,11 +1521,11 @@ class Test_tabula_th(object):
 
         for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
 
-            if "_1_" in wall.construction_type:
+            if "_1_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.12 - 0.17)), 1)
 
-            if "_2_" in wall.construction_type:
+            if "_2_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.12 - 0.17)), 1)
 
@@ -1535,11 +1535,11 @@ class Test_tabula_th(object):
             1) == round((1 / (1 / 0.12 - 0.34)), 1)
 
         for win in prj.buildings[-1].thermal_zones[-1].windows:
-            if "_1_" in win.construction_type:
+            if "_1_" in win.construction_data:
                 assert round(1 / (win.r_conduc * win.area),
                              1) == round((1 / (1 / 0.7 - 0.17)), 1)
 
-            if "_2_" in win.construction_type:
+            if "_2_" in win.construction_data:
                 assert round(1 / (win.r_conduc * win.area),
                              1) == round((1 / (1 / 1.0 - 0.17)), 1)
 

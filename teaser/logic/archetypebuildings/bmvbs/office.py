@@ -23,9 +23,9 @@ class Office(NonResidential):
 
     The office module contains a multi zone building according to BMVBS (see
     :cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.December2010`).
-    This German office building contains 6 usage zones (zones with similar
+    This German office building contains 6 geometry_data zones (zones with similar
     thermal behaviour). Each zone has 4 outer walls, 4 windows, a roof and a
-    ground floor. Depending on zone usage (typical length and width), an
+    ground floor. Depending on zone geometry_data (typical length and width), an
     interior
     wall area is assigned. Exterior wall
     surfaces are estimated based on
@@ -103,7 +103,7 @@ class Office(NonResidential):
         2. banner facade (continuous windows)
         3. full glazing
 
-    construction_type : str
+    construction_data : str
         Construction type of used wall constructions default is "heavy")
 
         - heavy: heavy construction
@@ -120,7 +120,7 @@ class Office(NonResidential):
 
     zone_area_factors : dict
         This dictionary contains the name of the zone (str), the
-        zone area factor (float) and the zone usage from BoundaryConditions json
+        zone area factor (float) and the zone geometry_data from BoundaryConditions json
         (str). (Default see doc string above)
     outer_wall_names : dict
         This dictionary contains a random name for the outer walls,
@@ -170,7 +170,7 @@ class Office(NonResidential):
         internal_gains_mode=1,
         office_layout=None,
         window_layout=None,
-        construction_type=None,
+        construction_data=None,
     ):
         """Constructor of Office archetype
         """
@@ -185,13 +185,13 @@ class Office(NonResidential):
 
         self.office_layout = office_layout
         self.window_layout = window_layout
-        self.construction_type = construction_type
+        self.construction_data = construction_data
         self.number_of_floors = number_of_floors
         self.height_of_floors = height_of_floors
         # Parameters are default values for current
         # calculation following Lichtmess
 
-        # [area factor, usage type(has to be set)]
+        # [area factor, geometry_data type(has to be set)]
         self.zone_area_factors = collections.OrderedDict()
         self.zone_area_factors["Office"] = [
             0.5,
@@ -306,7 +306,7 @@ class Office(NonResidential):
         self.thermal_zones = None
         type_bldg_area = self.net_leased_area
         self.net_leased_area = 0.0
-        # create zones with their corresponding area, name and usage
+        # create zones with their corresponding area, name and geometry_data
         for key, value in self.zone_area_factors.items():
             zone = ThermalZone(self)
             zone.area = type_bldg_area * value[0]
@@ -360,7 +360,7 @@ class Office(NonResidential):
                 outer_wall = OuterWall(zone)
                 outer_wall.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_type,
+                    construction=self.construction_data,
                     data_class=self.parent.data,
                 )
                 outer_wall.name = key
@@ -404,7 +404,7 @@ class Office(NonResidential):
                 roof = Rooftop(zone)
                 roof.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_type,
+                    construction=self.construction_data,
                     data_class=self.parent.data,
                 )
                 roof.name = key
@@ -419,7 +419,7 @@ class Office(NonResidential):
                 ground_floor = GroundFloor(zone)
                 ground_floor.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_type,
+                    construction=self.construction_data,
                     data_class=self.parent.data,
                 )
                 ground_floor.name = key
@@ -432,7 +432,7 @@ class Office(NonResidential):
                 inner_wall = InnerWall(zone)
                 inner_wall.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_type,
+                    construction=self.construction_data,
                     data_class=self.parent.data,
                 )
                 inner_wall.name = key
@@ -447,7 +447,7 @@ class Office(NonResidential):
                     ceiling = Ceiling(zone)
                     ceiling.load_type_element(
                         year=self.year_of_construction,
-                        construction=self.construction_type,
+                        construction=self.construction_data,
                         data_class=self.parent.data,
                     )
                     ceiling.name = key
@@ -461,7 +461,7 @@ class Office(NonResidential):
                     floor = Floor(zone)
                     floor.load_type_element(
                         year=self.year_of_construction,
-                        construction=self.construction_type,
+                        construction=self.construction_data,
                         data_class=self.parent.data,
                     )
                     floor.name = key
@@ -502,15 +502,15 @@ class Office(NonResidential):
             self._window_layout = 0
 
     @property
-    def construction_type(self):
-        return self._construction_type
+    def construction_data(self):
+        return self._construction_data
 
-    @construction_type.setter
-    def construction_type(self, value):
+    @construction_data.setter
+    def construction_data(self, value):
         if value is not None:
             if value == "heavy" or value == "light":
-                self._construction_type = value
+                self._construction_data = value
             else:
-                raise ValueError("Construction_type has to be light or heavy")
+                raise ValueError("construction_data has to be light or heavy")
         else:
-            self._construction_type = "heavy"
+            self._construction_data = "heavy"

@@ -196,7 +196,7 @@ class Test_teaser(object):
             net_leased_area=2500,
             office_layout=1,
             window_layout=1,
-            construction_type="light",
+            construction_data="light",
         )
 
         test_office.generate_archetype()
@@ -224,7 +224,7 @@ class Test_teaser(object):
             net_leased_area=2500,
             office_layout=2,
             window_layout=2,
-            construction_type="heavy",
+            construction_data="heavy",
         )
 
         test_office.generate_archetype()
@@ -252,7 +252,7 @@ class Test_teaser(object):
             net_leased_area=2500,
             office_layout=3,
             window_layout=3,
-            construction_type="light",
+            construction_data="light",
         )
 
         test_office.generate_archetype()
@@ -287,7 +287,7 @@ class Test_teaser(object):
             net_leased_area=2500,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
+            construction_data="heavy",
         )
 
         test_institute4.generate_archetype()
@@ -344,7 +344,7 @@ class Test_teaser(object):
             net_leased_area=2500,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
+            construction_data="heavy",
         )
 
         test_institute8.generate_archetype()
@@ -401,7 +401,7 @@ class Test_teaser(object):
             net_leased_area=2500,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
+            construction_data="heavy",
         )
 
         test_institute.generate_archetype()
@@ -498,7 +498,7 @@ class Test_teaser(object):
             attic=1,
             dormer=1,
             cellar=1,
-            construction_type="light",
+            construction_data="light",
         )
 
         test_residential.generate_archetype()
@@ -529,7 +529,7 @@ class Test_teaser(object):
             attic=2,
             dormer=0,
             cellar=2,
-            construction_type="heavy",
+            construction_data="heavy",
         )
 
         test_residential.generate_archetype()
@@ -560,7 +560,7 @@ class Test_teaser(object):
             attic=3,
             dormer=0,
             cellar=3,
-            construction_type="light",
+            construction_data="light",
         )
 
         test_residential.generate_archetype()
@@ -792,7 +792,7 @@ class Test_teaser(object):
             with_ahu=False,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
+            construction_data="heavy",
         )
         prj.add_non_residential(
             method="bmvbs",
@@ -806,7 +806,7 @@ class Test_teaser(object):
             internal_gains_mode=2,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
+            construction_data="heavy",
         )
         prj.add_non_residential(
             method="bmvbs",
@@ -820,7 +820,7 @@ class Test_teaser(object):
             internal_gains_mode=3,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
+            construction_data="heavy",
         )
 
     def test_type_bldg_institute(self):
@@ -837,7 +837,7 @@ class Test_teaser(object):
             with_ahu=True,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
+            construction_data="heavy",
         )
         prj.add_non_residential(
             method="bmvbs",
@@ -851,7 +851,7 @@ class Test_teaser(object):
             internal_gains_mode=2,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
+            construction_data="heavy",
         )
         prj.add_non_residential(
             method="bmvbs",
@@ -865,7 +865,7 @@ class Test_teaser(object):
             internal_gains_mode=3,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
+            construction_data="heavy",
         )
 
     def test_type_bldg_institute4(self):
@@ -882,7 +882,7 @@ class Test_teaser(object):
             with_ahu=True,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
+            construction_data="heavy",
         )
 
     def test_type_bldg_institute8(self):
@@ -899,7 +899,7 @@ class Test_teaser(object):
             with_ahu=True,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
+            construction_data="heavy",
         )
 
     def test_type_bldg_residential(self):
@@ -919,7 +919,7 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
+            construction_data="heavy",
         )
 
     def test_est_bldgs(self):
@@ -939,7 +939,7 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
+            construction_data="heavy",
             number_of_apartments=1,
         )
 
@@ -957,7 +957,7 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
+            construction_data="heavy",
             number_of_apartments=1,
         )
 
@@ -975,7 +975,7 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
+            construction_data="heavy",
             number_of_apartments=1,
         )
 
@@ -993,7 +993,7 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
+            construction_data="heavy",
             number_of_apartments=1,
         )
 
@@ -1011,7 +1011,7 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
+            construction_data="heavy",
             number_of_apartments=1,
         )
 
@@ -1029,7 +1029,7 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
+            construction_data="heavy",
             number_of_apartments=1,
         )
 
@@ -1047,7 +1047,7 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
+            construction_data="heavy",
             number_of_apartments=1,
         )
 
@@ -1065,7 +1065,7 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
+            construction_data="heavy",
             number_of_apartments=1,
         )
 
@@ -1083,7 +1083,7 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
+            construction_data="heavy",
             number_of_apartments=1,
         )
 
@@ -1101,7 +1101,7 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
+            construction_data="heavy",
             number_of_apartments=1,
         )
 
@@ -1119,7 +1119,7 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
+            construction_data="heavy",
             number_of_apartments=1,
         )
 
@@ -3146,7 +3146,7 @@ class Test_teaser(object):
             with_ahu=True,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
+            construction_data="heavy",
         )
         prj.buildings[-1].thermal_zones[0].use_conditions.with_ahu = True
         prj.buildings[-1].thermal_zones[0].use_conditions.with_ideal_thresholds = True

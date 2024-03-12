@@ -5547,7 +5547,7 @@
             0.0
         ]
     },
-    "Parking garages (office and private usage)": {
+    "Parking garages (office and private geometry_data)": {
         "typical_length": 50.0,
         "typical_width": 50.0,
         "with_heating": true,
@@ -5715,7 +5715,7 @@
             0.0
         ]
     },
-    "Parking garages (public usage)": {
+    "Parking garages (public geometry_data)": {
         "typical_length": 100.0,
         "typical_width": 50.0,
         "with_heating": true,

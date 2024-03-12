@@ -60,7 +60,7 @@ class MultiFamilyHouse(SingleFamilyHouse):
            based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
            Engineering ToolBox (2004) and regards only persons.
 
-    construction_type : str
+    construction_data : str
         Construction type of used wall constructions default is "existing
         state"
 
@@ -85,7 +85,7 @@ class MultiFamilyHouse(SingleFamilyHouse):
             net_leased_area=None,
             with_ahu=False,
             internal_gains_mode=1,
-            construction_type=None):
+            construction_data=None):
 
         super(MultiFamilyHouse, self).__init__(
             parent,
@@ -96,14 +96,14 @@ class MultiFamilyHouse(SingleFamilyHouse):
             net_leased_area,
             with_ahu,
             internal_gains_mode,
-            construction_type)
+            construction_data)
 
-        self.construction_type = construction_type
+        self.construction_data = construction_data
         self.number_of_floors = number_of_floors
         self.height_of_floors = height_of_floors
 
-        self._construction_type_1 = self.construction_type + '_1_MFH'
-        self._construction_type_2 = self.construction_type + '_2_MFH'
+        self._construction_data_1 = self.construction_data + '_1_MFH'
+        self._construction_data_2 = self.construction_data + '_2_MFH'
 
         self.zone_area_factors = {"SingleDwelling": [1, "Living"]}
 

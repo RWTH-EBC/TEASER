@@ -79,7 +79,7 @@ def building_test2(prj):
         out_wall = OuterWall(parent=tz)
         out_wall.name = value[0]
         out_wall.year_of_construction = value[1][0]
-        out_wall.construction_type = value[1][1]
+        out_wall.construction_data = value[1][1]
         out_wall.area = value[1][2]
         out_wall.tilt = value[1][3]
         out_wall.orientation = value[1][4]
@@ -118,7 +118,7 @@ def building_test2(prj):
         in_wall = InnerWall(parent=tz)
         in_wall.name = value[0]
         in_wall.year_of_construction = value[1][0]
-        in_wall.construction_type = value[1][1]
+        in_wall.construction_data = value[1][1]
         in_wall.area = value[1][2]
         in_wall.building_age_group = [1994, 1998]
         in_wall.inner_radiation = 5.0
@@ -151,7 +151,7 @@ def building_test2(prj):
 
     for value in win_dict:
         win = Window(parent=tz)
-        win.construction_type = "Window"
+        win.construction_data = "Window"
         win.name = value[0]
         win.area = value[1][1]
         win.tilt = value[1][2]
@@ -178,7 +178,7 @@ def building_test2(prj):
     roof = Rooftop(parent=tz)
     roof.name = "Roof"
     roof.year_of_construction = bldg.year_of_construction
-    roof.construction_type = "heavy"
+    roof.construction_data = "heavy"
     roof.area = 140.0
 
     roof_layer1 = Layer(roof)
@@ -202,7 +202,7 @@ def building_test2(prj):
     ground = GroundFloor(parent=tz)
     ground.name = "ground"
     ground.year_of_construction = bldg.year_of_construction
-    ground.construction_type = "heavy"
+    ground.construction_data = "heavy"
     ground.area = 140.0
 
     ground_layer1 = Layer(ground)

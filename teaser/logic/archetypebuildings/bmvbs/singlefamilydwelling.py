@@ -11,7 +11,7 @@ from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
-
+import teaser.data.utilities as datahandling
 
 class SingleFamilyDwelling(Residential):
     """Archetype Residential Building according
@@ -113,11 +113,12 @@ class SingleFamilyDwelling(Residential):
         0. no dormer
         1. dormer
 
-    construction_type : str
+    construction_data : str
         Construction type of used wall constructions default is "heavy"
 
         - heavy: heavy construction
         - light: light construction
+        - kfw_40, kfw_55, kfw_70, kfw_85, kfw_100: kfw standard numbers
 
     Notes
     -----
@@ -131,7 +132,7 @@ class SingleFamilyDwelling(Residential):
 
     zone_area_factors : dict
         This dictionary contains the name of the zone (str), the
-        zone area factor (float) and the zone usage from BoundaryConditions json
+        zone area factor (float) and the zone geometry_data from BoundaryConditions json
         (str). (Default see doc string above)
     outer_wall_names : dict
         This dictionary contains a random name for the outer walls,
@@ -183,7 +184,7 @@ class SingleFamilyDwelling(Residential):
         attic=None,
         cellar=None,
         dormer=None,
-        construction_type=None,
+        construction_data=None,
     ):
         """Constructor of SingleFamilyDwelling
         """
@@ -202,13 +203,13 @@ class SingleFamilyDwelling(Residential):
         self.attic = attic
         self.cellar = cellar
         self.dormer = dormer
-        self.construction_type = construction_type
+        self.construction_data = construction_data
         self.number_of_floors = number_of_floors
         self.height_of_floors = height_of_floors
 
         # Parameters are default values for current calculation following IWU
 
-        # [area factor, usage type(has to be set)]
+        # [area factor, geometry_data type(has to be set)]
         self.zone_area_factors = {"SingleDwelling": [1, "Living"]}
 
         self.outer_wall_names = {
@@ -414,7 +415,7 @@ class SingleFamilyDwelling(Residential):
                 outer_wall = OuterWall(zone)
                 outer_wall.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_type,
+                    construction=self.construction_data,
                     data_class=self.parent.data,
                 )
                 outer_wall.name = key
@@ -436,16 +437,28 @@ class SingleFamilyDwelling(Residential):
             code - will be fixed sometime
             """
             for zone in self.thermal_zones:
-                window = Window(zone)
+                if self.parent.data.used_statistic == "kfw":
+                    window = Window(zone)
 
-                window.load_type_element(
-                    self.year_of_construction,
-                    "Kunststofffenster, " "Isolierverglasung",
-                    data_class=self.parent.data,
-                )
-                window.name = key
-                window.tilt = value[0]
-                window.orientation = value[1]
+                    window.load_type_element(
+                        self.year_of_construction,
+                        "Waermeschutzverglasung, " "dreifach",
+                        data_class=self.parent.data,
+                    )
+                    window.name = key
+                    window.tilt = value[0]
+                    window.orientation = value[1]
+                else:
+                    window = Window(zone)
+
+                    window.load_type_element(
+                        self.year_of_construction,
+                        "Kunststofffenster, " "Isolierverglasung",
+                        data_class=self.parent.data,
+                    )
+                    window.name = key
+                    window.tilt = value[0]
+                    window.orientation = value[1]
 
         for key, value in self.roof_names.items():
 
@@ -455,7 +468,7 @@ class SingleFamilyDwelling(Residential):
                 roof = Rooftop(zone)
                 roof.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_type,
+                    construction=self.construction_data,
                     data_class=self.parent.data,
                 )
                 roof.name = key
@@ -470,7 +483,7 @@ class SingleFamilyDwelling(Residential):
                 ground_floor = GroundFloor(zone)
                 ground_floor.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_type,
+                    construction=self.construction_data,
                     data_class=self.parent.data,
                 )
                 ground_floor.name = key
@@ -483,7 +496,7 @@ class SingleFamilyDwelling(Residential):
                 inner_wall = InnerWall(zone)
                 inner_wall.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_type,
+                    construction=self.construction_data,
                     data_class=self.parent.data,
                 )
                 inner_wall.name = key
@@ -499,7 +512,7 @@ class SingleFamilyDwelling(Residential):
                     ceiling = Ceiling(zone)
                     ceiling.load_type_element(
                         year=self.year_of_construction,
-                        construction=self.construction_type,
+                        construction=self.construction_data,
                         data_class=self.parent.data,
                     )
                     ceiling.name = key
@@ -513,7 +526,7 @@ class SingleFamilyDwelling(Residential):
                     floor = Floor(zone)
                     floor.load_type_element(
                         year=self.year_of_construction,
-                        construction=self.construction_type,
+                        construction=self.construction_data,
                         data_class=self.parent.data,
                     )
                     floor.name = key
@@ -587,16 +600,14 @@ class SingleFamilyDwelling(Residential):
         else:
             self._dormer = 0
 
+    #TODO #745 bei Umbenennung hier noch die zulässigen construction_data auflisten
     @property
-    def construction_type(self):
-        return self._construction_type
+    def construction_data(self):
+        return self._construction_data
 
-    @construction_type.setter
-    def construction_type(self, value):
-        if value is not None:
-            if value == "heavy" or value == "light":
-                self._construction_type = value
-            else:
-                raise ValueError("Construction_type has to be light or heavy")
-        else:
-            self._construction_type = "heavy"
+    #TODO #745 folgender Abschnitt überflüssig, da in data/utilities in dictionaries vorhanden?
+    @construction_data.setter
+    def construction_data(self, value):
+        if not isinstance(value, datahandling.ConstructionData):
+            raise ValueError(f"Invalid construction_data: {value}. Must be a ConstructionData enum value.")
+        self._construction_data = value

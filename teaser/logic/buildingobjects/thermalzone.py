@@ -57,7 +57,7 @@ class ThermalZone(object):
     ceilings: list
         List of Ceiling instances.
     use_conditions : UseConditions
-        Instance of UseConditions with all relevant information for the usage
+        Instance of UseConditions with all relevant information for the geometry_data
         of the thermal zone
     model_attr : Union[OneElement, TwoElement, ThreeElement, FourElement]
         Instance of OneElement(), TwoElement(), ThreeElement() or
@@ -375,22 +375,40 @@ class ThermalZone(object):
             for wall_count in self.outer_walls \
                     + self.rooftops + self.ground_floors + self.doors + \
                     self.windows:
-                if "adv_retrofit" in wall_count.construction_type:
+                if "adv_retrofit" in wall_count.construction_data:
                     warnings.warn(
                         "already highest available standard"
                         + self.parent.name + wall_count.name)
-                elif "standard" in wall_count.construction_type:
+                elif "standard" in wall_count.construction_data:
                     wall_count.load_type_element(
                         year=self.parent.year_of_construction,
-                        construction=wall_count.construction_type.replace(
+                        construction=wall_count.construction_data.replace(
                             "standard", type_of_retrofit))
                 else:
                     wall_count.load_type_element(
                         year=self.parent.year_of_construction,
-                        construction=wall_count.construction_type.replace(
+                        construction=wall_count.construction_data.replace(
                             "retrofit", type_of_retrofit))
-        else:
 
+        elif type_of_retrofit.startswith("kfw"):
+            for wall_count in self.outer_walls:
+                wall_count.retrofit_wall_kfw(
+                    self.parent.type_of_retrofit,
+                    material)
+            for roof_count in self.rooftops:
+                roof_count.retrofit_wall_kfw(
+                    self.parent.type_of_retrofit,
+                    material)
+            for ground_count in self.ground_floors:
+                ground_count.retrofit_wall_kfw(
+                    self.parent.type_of_retrofit,
+                    material)
+            for win_count in self.windows:
+                win_count.replace_window(
+                    self.parent.type_of_retrofit,
+                    window_type)
+
+        else:
             for wall_count in self.outer_walls:
                 wall_count.retrofit_wall(
                     self.parent.year_of_retrofit,

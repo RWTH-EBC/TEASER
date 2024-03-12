@@ -133,7 +133,7 @@ def load_teaser_json(path, project):
             tz.area = zone_in["area"]
             tz.volume = zone_in["volume"]
             tz.use_conditions = UseConditions(parent=tz)
-            tz.use_conditions.usage = zone_in["use_conditions"]["usage"]
+            tz.use_conditions.geometry_data = zone_in["use_conditions"]["geometry_data"]
             tz.use_conditions.typical_length = zone_in["use_conditions"][
                 "typical_length"
             ]
@@ -271,7 +271,7 @@ def set_basic_data_teaser(wall_in, element):
     element.inner_convection = wall_in["inner_convection"]
     element.year_of_construction = wall_in["year_of_construction"]
     element.year_of_retrofit = wall_in["year_of_retrofit"]
-    element.construction_type = wall_in["construction_type"]
+    element.construction_data = wall_in["construction_data"]
 
     if (
         type(element).__name__ == "OuterWall"

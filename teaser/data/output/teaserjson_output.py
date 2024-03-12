@@ -48,16 +48,16 @@ def save_teaser_json(path, project):
     prj_out["project"]["modelica_info"]["version"] = project.modelica_info.version
     prj_out["project"]["buildings"] = collections.OrderedDict()
     __building_class = {
-        "Building": {"method": "undefined", "usage": "undefined"},
-        "Office": {"method": "bmvbs", "usage": "office"},
-        "Institute": {"method": "bmvbs", "usage": "institute"},
-        "Institute4": {"method": "bmvbs", "usage": "institute4"},
-        "Institute8": {"method": "bmvbs", "usage": "institute8"},
-        "SingleFamilyDwelling": {"method": "iwu", "usage": "single_family_dwelling"},
-        "SingleFamilyHouse": {"method": "tabula_de", "usage": "single_family_house"},
-        "TerracedHouse": {"method": "tabula_de", "usage": "terraced_house"},
-        "MultiFamilyHouse": {"method": "tabula_de", "usage": "multi_family_house"},
-        "ApartmentBlock": {"method": "tabula_de", "usage": "apartment_block"},
+        "Building": {"method": "undefined", "geometry_data": "undefined"},
+        "Office": {"method": "bmvbs", "geometry_data": "office"},
+        "Institute": {"method": "bmvbs", "geometry_data": "institute"},
+        "Institute4": {"method": "bmvbs", "geometry_data": "institute4"},
+        "Institute8": {"method": "bmvbs", "geometry_data": "institute8"},
+        "SingleFamilyDwelling": {"method": "iwu", "geometry_data": "single_family_dwelling"},
+        "SingleFamilyHouse": {"method": "tabula_de", "geometry_data": "single_family_house"},
+        "TerracedHouse": {"method": "tabula_de", "geometry_data": "terraced_house"},
+        "MultiFamilyHouse": {"method": "tabula_de", "geometry_data": "multi_family_house"},
+        "ApartmentBlock": {"method": "tabula_de", "geometry_data": "apartment_block"},
     }
 
     for bldg in project.buildings:
@@ -125,7 +125,7 @@ def save_teaser_json(path, project):
             zone_out["area"] = zone.area
             zone_out["volume"] = zone.volume
             zone_out["use_conditions"] = collections.OrderedDict()
-            zone_out["use_conditions"]["usage"] = zone.use_conditions.usage
+            zone_out["use_conditions"]["geometry_data"] = zone.use_conditions.geometry_data
 
             zone_out["use_conditions"][
                 "typical_length"
@@ -272,7 +272,7 @@ def set_basic_data(wall_out, element):
     """
     wall_out["year_of_construction"] = element.year_of_construction
     wall_out["year_of_retrofit"] = element.year_of_retrofit
-    wall_out["construction_type"] = element.construction_type
+    wall_out["construction_data"] = element.construction_data
 
     wall_out["area"] = element.area
     wall_out["tilt"] = element.tilt

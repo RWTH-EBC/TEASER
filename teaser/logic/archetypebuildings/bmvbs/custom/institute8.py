@@ -84,7 +84,7 @@ class Institute8(Office):
         2. banner facade (continuous windows)
         3. full glazing
 
-    construction_type : str
+    construction_data : str
         Construction type of used wall constructions default is "heavy")
 
         - heavy: heavy construction
@@ -101,7 +101,7 @@ class Institute8(Office):
 
     zone_area_factors : dict
         This dictionary contains the name of the zone (str), the
-        zone area factor (float) and the zone usage from BoundaryConditions json
+        zone area factor (float) and the zone geometry_data from BoundaryConditions json
         (str). (Default see doc string above)
     outer_wall_names : dict
         This dictionary contains a random name for the outer walls,
@@ -151,7 +151,7 @@ class Institute8(Office):
                  internal_gains_mode=1,
                  office_layout=None,
                  window_layout=None,
-                 construction_type=None):
+                 construction_data=None):
         """Constructor of Institute8
 
         Adds an additional zone "Laboratory"
@@ -168,7 +168,7 @@ class Institute8(Office):
                                          internal_gains_mode,
                                          office_layout,
                                          window_layout,
-                                         construction_type)
+                                         construction_data)
 
         self.zone_area_factors["Office"] = \
             [0.04, "Group Office (between 2 and 6 employees)"]

@@ -418,11 +418,11 @@ class Test_tabula_sfh_dk(object):
             1) == round((1 / (1 / 0.3 - 0.21)), 1)
 
         for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
-            if "_1_" in wall.construction_type:
+            if "_1_" in wall.construction_data:
                 assert round(
                     1 / (wall.r_conduc * wall.area),
                     1) == round((1 / (1 / 0.3 - 0.17)), 1)
-            if "_2_" in wall.construction_type:
+            if "_2_" in wall.construction_data:
                 assert round(
                     1 / (wall.r_conduc * wall.area),
                     1) == round((1 / (1 / 0.3 - 0.17)), 1)
@@ -534,11 +534,11 @@ class Test_tabula_sfh_dk(object):
             1) == round((1 / (1 / 1.5 - 0.14)), 1)
 
         for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
-            if "_1_" in wall.construction_type:
+            if "_1_" in wall.construction_data:
                 assert round(
                     1 / (wall.r_conduc * wall.area),
                     1) == round((1 / (1 / 1.6 - 0.17)), 1)
-            if "_2_" in wall.construction_type:
+            if "_2_" in wall.construction_data:
                 assert round(
                     1 / (wall.r_conduc * wall.area),
                     1) == round((1 / (1 / 0.67 - 0.17)), 1)
@@ -648,7 +648,7 @@ class Test_tabula_sfh_dk(object):
             year_of_construction=1997,
             number_of_floors=1,
             height_of_floors=3.2,
-            net_leased_area=122, construction_type="tabula_retrofit")
+            net_leased_area=122, construction_data="tabula_retrofit")
 
         # assert round(
         #     1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -685,7 +685,7 @@ class Test_tabula_sfh_dk(object):
             year_of_construction=1977,
             number_of_floors=1,
             height_of_floors=3.2,
-            net_leased_area=117, construction_type="tabula_retrofit")
+            net_leased_area=117, construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -722,7 +722,7 @@ class Test_tabula_sfh_dk(object):
             year_of_construction=1971,
             number_of_floors=1,
             height_of_floors=3.2,
-            net_leased_area=153, construction_type="tabula_retrofit")
+            net_leased_area=153, construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -759,7 +759,7 @@ class Test_tabula_sfh_dk(object):
             year_of_construction=1959,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=90, construction_type="tabula_retrofit")
+            net_leased_area=90, construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -796,7 +796,7 @@ class Test_tabula_sfh_dk(object):
             year_of_construction=1949,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=119, construction_type="tabula_retrofit")
+            net_leased_area=119, construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -804,11 +804,11 @@ class Test_tabula_sfh_dk(object):
             1) == round((1 / (1 / 0.12 - 0.14)), 1)
 
         for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
-            if "_1_" in wall.construction_type:
+            if "_1_" in wall.construction_data:
                 assert round(
                     1 / (wall.r_conduc * wall.area),
                     1) == round((1 / (1 / 0.4 - 0.17)), 1)
-            if "_2_" in wall.construction_type:
+            if "_2_" in wall.construction_data:
                 assert round(
                     1 / (wall.r_conduc * wall.area),
                     1) == round((1 / (1 / 0.67 - 0.17)), 1)
@@ -838,7 +838,7 @@ class Test_tabula_sfh_dk(object):
             year_of_construction=1929,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=95, construction_type="tabula_retrofit")
+            net_leased_area=95, construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -876,7 +876,7 @@ class Test_tabula_sfh_dk(object):
             year_of_construction=1849,
             number_of_floors=1,
             height_of_floors=3.2,
-            net_leased_area=132, construction_type="tabula_retrofit")
+            net_leased_area=132, construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -915,7 +915,7 @@ class Test_tabula_sfh_dk(object):
             year_of_construction=1997,
             number_of_floors=1,
             height_of_floors=3.2,
-            net_leased_area=122, construction_type="tabula_adv_retrofit")
+            net_leased_area=122, construction_data="tabula_adv_retrofit")
 
         # assert round(
         #     1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -952,7 +952,7 @@ class Test_tabula_sfh_dk(object):
             year_of_construction=1977,
             number_of_floors=1,
             height_of_floors=3.2,
-            net_leased_area=117, construction_type="tabula_adv_retrofit")
+            net_leased_area=117, construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -960,11 +960,11 @@ class Test_tabula_sfh_dk(object):
             1) == round((1 / (1 / 0.1 - 0.21)), 1)
 
         for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
-            if "_1_" in wall.construction_type:
+            if "_1_" in wall.construction_data:
                 assert round(
                     1 / (wall.r_conduc * wall.area),
                     1) == round((1 / (1 / 0.1 - 0.17)), 1)
-            if "_2_" in wall.construction_type:
+            if "_2_" in wall.construction_data:
                 assert round(
                     1 / (wall.r_conduc * wall.area),
                     1) == round((1 / (1 / 0.3 - 0.17)), 1)
@@ -994,7 +994,7 @@ class Test_tabula_sfh_dk(object):
             year_of_construction=1971,
             number_of_floors=1,
             height_of_floors=3.2,
-            net_leased_area=153, construction_type="tabula_adv_retrofit")
+            net_leased_area=153, construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1031,7 +1031,7 @@ class Test_tabula_sfh_dk(object):
             year_of_construction=1959,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=90, construction_type="tabula_adv_retrofit")
+            net_leased_area=90, construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1068,7 +1068,7 @@ class Test_tabula_sfh_dk(object):
             year_of_construction=1949,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=119, construction_type="tabula_adv_retrofit")
+            net_leased_area=119, construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1076,11 +1076,11 @@ class Test_tabula_sfh_dk(object):
             1) == round((1 / (1 / 0.09 - 0.14)), 1)
 
         for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
-            if "_1_" in wall.construction_type:
+            if "_1_" in wall.construction_data:
                 assert round(
                     1 / (wall.r_conduc * wall.area),
                     1) == round((1 / (1 / 0.12 - 0.17)), 1)
-            if "_2_" in wall.construction_type:
+            if "_2_" in wall.construction_data:
                 assert round(
                     1 / (wall.r_conduc * wall.area),
                     1) == round((1 / (1 / 0.67 - 0.17)), 1)
@@ -1110,7 +1110,7 @@ class Test_tabula_sfh_dk(object):
             year_of_construction=1929,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=95, construction_type="tabula_adv_retrofit")
+            net_leased_area=95, construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1148,7 +1148,7 @@ class Test_tabula_sfh_dk(object):
             year_of_construction=1849,
             number_of_floors=1,
             height_of_floors=3.2,
-            net_leased_area=132, construction_type="tabula_adv_retrofit")
+            net_leased_area=132, construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1187,7 +1187,7 @@ class Test_tabula_sfh_dk(object):
     #         year_of_construction=2008,
     #         number_of_floors=2,
     #         height_of_floors=3.2,
-    #         net_leased_area=219, construction_type="tabula_adv_retrofit")
+    #         net_leased_area=219, construction_data="tabula_adv_retrofit")
     #
     #     assert round(
     #         1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1229,7 +1229,7 @@ class Test_tabula_sfh_dk(object):
     #         number_of_floors=2,
     #         height_of_floors=3.2,
     #         net_leased_area=219,
-    #         construction_type='tabula_standard')
+    #         construction_data='tabula_standard')
     #     prj.add_residential(
     #         method='tabula_de',
     #         usage='single_family_house',
@@ -1238,7 +1238,7 @@ class Test_tabula_sfh_dk(object):
     #         number_of_floors=2,
     #         height_of_floors=3.2,
     #         net_leased_area=219,
-    #         construction_type='tabula_retrofit')
+    #         construction_data='tabula_retrofit')
     #     prj.add_residential(
     #         method='tabula_de',
     #         usage='single_family_house',
@@ -1247,7 +1247,7 @@ class Test_tabula_sfh_dk(object):
     #         number_of_floors=2,
     #         height_of_floors=3.2,
     #         net_leased_area=219,
-    #         construction_type='tabula_adv_retrofit')
+    #         construction_data='tabula_adv_retrofit')
     #
     #     prj.retrofit_all_buildings(type_of_retrofit='retrofit')
     #
@@ -1276,7 +1276,7 @@ class Test_tabula_sfh_dk(object):
     #         number_of_floors=2,
     #         height_of_floors=3.2,
     #         net_leased_area=219,
-    #         construction_type="tabula_retrofit")
+    #         construction_data="tabula_retrofit")
     #
     #     prj.retrofit_all_buildings(
     #         type_of_retrofit="adv_retrofit")

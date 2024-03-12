@@ -14,7 +14,7 @@ from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
-
+import teaser.data.utilities as datahandling
 
 class EST1a(Residential):
     """Archetype for Urban Fabric Type EST1a.
@@ -69,7 +69,7 @@ class EST1a(Residential):
         1. one neighbour
         2. two neighbours
 
-    construction_type : str
+    construction_data : str
         Construction type of used wall constructions default is "heavy")
             heavy: heavy construction
             light: light construction
@@ -85,7 +85,7 @@ class EST1a(Residential):
 
     zone_area_factors : dict
         This dictionary contains the name of the zone (str), the
-        zone area factor (float) and the zone usage from BoundaryConditions json
+        zone area factor (float) and the zone geometry_data from BoundaryConditions json
         (str). (Default see doc string above)
     outer_wall_names : dict
         This dictionary contains a random name for the outer walls,
@@ -128,7 +128,8 @@ class EST1a(Residential):
             with_ahu=False,
             internal_gains_mode=1,
             neighbour_buildings=None,
-            construction_type=None):
+            construction_data=None
+    ):
         """Constructor of EST1a
         """
 
@@ -141,7 +142,7 @@ class EST1a(Residential):
             internal_gains_mode)
 
         self.neighbour_buildings = neighbour_buildings
-        self.construction_type = construction_type
+        self.construction_data = construction_data
         self.number_of_apartments = 1
         self.number_of_floors = number_of_floors
         self.height_of_floors = height_of_floors
@@ -149,7 +150,7 @@ class EST1a(Residential):
         # Parameters are default values for current calculation following
         # Hegger
 
-        # [area factor, usage type(has to be set)]
+        # [area factor, geometry_data type(has to be set)]
         self.zone_area_factors = {}
         for value in range(1, self._number_of_apartments + 1):
             zone_name = "Apartment " + str(value)
@@ -263,7 +264,7 @@ class EST1a(Residential):
                 # create wall and set building elements
                 outer_wall = OuterWall(zone)
                 outer_wall.load_type_element(self.year_of_construction,
-                                             self.construction_type)
+                                             self.construction_data)
                 outer_wall.name = key
                 outer_wall.tilt = value[0]
                 outer_wall.orientation = value[1]
@@ -301,7 +302,7 @@ class EST1a(Residential):
             for zone in self.thermal_zones:
                 roof = Rooftop(zone)
                 roof.load_type_element(self.year_of_construction,
-                                       self.construction_type)
+                                       self.construction_data)
                 roof.name = key
                 roof.tilt = value[0]
                 roof.orientation = value[1]
@@ -313,7 +314,7 @@ class EST1a(Residential):
             for zone in self.thermal_zones:
                 ground_floor = GroundFloor(zone)
                 ground_floor.load_type_element(self.year_of_construction,
-                                               self.construction_type)
+                                               self.construction_data)
                 ground_floor.name = key
                 ground_floor.tilt = value[0]
                 ground_floor.orientation = value[1]
@@ -323,7 +324,7 @@ class EST1a(Residential):
             for zone in self.thermal_zones:
                 inner_wall = InnerWall(zone)
                 inner_wall.load_type_element(self.year_of_construction,
-                                             self.construction_type)
+                                             self.construction_data)
                 inner_wall.name = key
                 inner_wall.tilt = value[0]
                 inner_wall.orientation = value[1]
@@ -336,7 +337,7 @@ class EST1a(Residential):
                 for zone in self.thermal_zones:
                     ceiling = Ceiling(zone)
                     ceiling.load_type_element(self.year_of_construction,
-                                              self.construction_type)
+                                              self.construction_data)
                     ceiling.name = key
                     ceiling.tilt = value[0]
                     ceiling.orientation = value[1]
@@ -347,7 +348,7 @@ class EST1a(Residential):
                 for zone in self.thermal_zones:
                     floor = Floor(zone)
                     floor.load_type_element(self.year_of_construction,
-                                            self.construction_type)
+                                            self.construction_data)
                     floor.name = key
                     floor.tilt = value[0]
                     floor.orientation = value[1]
@@ -364,19 +365,31 @@ class EST1a(Residential):
             zone.set_inner_wall_area()
             zone.set_volume_zone()
 
-    @property
-    def construction_type(self):
-        return self._construction_type
+    #@property
+    #def construction_data(self):
+    #    return self._construction_data
 
-    @construction_type.setter
-    def construction_type(self, value):
-        if value is not None:
-            if value == "heavy" or value == "light":
-                self._construction_type = value
-            else:
-                raise ValueError("Construction_type has to be light or heavy")
-        else:
-            self._construction_type = "heavy"
+    #@construction_data.setter
+    #def construction_data(self, value):
+    #    if value is not None:
+    #        if value == "heavy" or value == "light":
+    #            self._construction_data = value
+    #        else:
+    #            raise ValueError("construction_data has to be light or heavy")
+    #    else:
+    #        self._construction_data = "heavy"
+
+    @property
+    def construction_data(self):
+        return self._construction_data
+
+    #TODO #745 folgender Abschnitt überflüssig, da in data/utilities in dictionaries vorhanden?
+    @construction_data.setter
+    def construction_data(self, value):
+        if not isinstance(value, datahandling.ConstructionData):
+            raise ValueError(f"Invalid construction_data: {value}. Must be a ConstructionData enum value.")
+        self._construction_data = value
+
 
     @property
     def neighbour_buildings(self):

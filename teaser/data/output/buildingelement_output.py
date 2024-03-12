@@ -37,7 +37,7 @@ def save_type_element(element, data_class):
     )
 
     check_str = "{}_{}_{}".format(
-        type(element).__name__, element.building_age_group, element.construction_type
+        type(element).__name__, element.building_age_group, element.construction_data
     )
 
     if check_str in data_class.element_bind.keys():
@@ -83,7 +83,7 @@ def delete_type_element(element, data_class):
 
     """
     check_str = "{}_{}_{}".format(
-        type(element).__name__, element.building_age_group, element.construction_type
+        type(element).__name__, element.building_age_group, element.construction_data
     )
 
     del data_class.element_bind[check_str]
@@ -108,7 +108,7 @@ def _set_basic_data_json(element, wall_out):
 
     """
     wall_out["building_age_group"] = element.building_age_group
-    wall_out["construction_type"] = element.construction_type
+    wall_out["construction_data"] = element.construction_data
     wall_out["inner_radiation"] = element.inner_radiation
     wall_out["inner_convection"] = element.inner_convection
 

@@ -339,7 +339,7 @@ class Test_tabula_ab(object):
             number_of_floors=2,
             height_of_floors=3.2,
             net_leased_area=219,
-            construction_type="tabula_retrofit")
+            construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -375,7 +375,7 @@ class Test_tabula_ab(object):
             year_of_construction=1947,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219, construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -411,7 +411,7 @@ class Test_tabula_ab(object):
             year_of_construction=1956,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219, construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -447,7 +447,7 @@ class Test_tabula_ab(object):
             year_of_construction=1967,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219, construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -483,7 +483,7 @@ class Test_tabula_ab(object):
             year_of_construction=1977,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219, construction_data="tabula_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -519,7 +519,7 @@ class Test_tabula_ab(object):
             number_of_floors=2,
             height_of_floors=3.2,
             net_leased_area=219,
-            construction_type="tabula_adv_retrofit")
+            construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -556,7 +556,7 @@ class Test_tabula_ab(object):
             number_of_floors=2,
             height_of_floors=3.2,
             net_leased_area=219,
-            construction_type="tabula_adv_retrofit")
+            construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -593,7 +593,7 @@ class Test_tabula_ab(object):
             number_of_floors=2,
             height_of_floors=3.2,
             net_leased_area=219,
-            construction_type="tabula_adv_retrofit")
+            construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -629,7 +629,7 @@ class Test_tabula_ab(object):
             year_of_construction=1967,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_adv_retrofit")
+            net_leased_area=219, construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -665,7 +665,7 @@ class Test_tabula_ab(object):
             year_of_construction=1977,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_adv_retrofit")
+            net_leased_area=219, construction_data="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
