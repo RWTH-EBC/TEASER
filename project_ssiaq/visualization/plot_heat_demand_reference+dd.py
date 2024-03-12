@@ -14,7 +14,9 @@ from evaluation import get_bldg_type_from_filename
 
 def plot_heat_demand_reference(df):
     sns.set_style("white")
-    ax = sns.stripplot(data=df, x="Building type", y="Specific heat demand", hue="Construction year")
+    #heat_demand = "Specific heat demand"
+    heat_demand = "Heat demand total"
+    ax = sns.stripplot(data=df, x="Building type", y=heat_demand, hue="Construction year")
     #labels = ax.get_xticklabels()
     ax.set_xticklabels(["","MFH"," ", "EFH","",  "GMFH","", "RH","", "Schule","", "Hotel","", "Büro",""])
 

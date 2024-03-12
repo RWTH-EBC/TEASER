@@ -233,7 +233,7 @@ if __name__ == "__main__":
         setup_name)
     scenarios = load_scenarios(basepath.joinpath("scenarios_full.xlsx"))
     model_export_path = basepath.joinpath("models")
-    start_scenario = 10
+    start_scenario = 1
     for index, scenario in scenarios.iterrows():
         if index + 1 < start_scenario:
             continue  # skip scenarios until start_scenario is reached

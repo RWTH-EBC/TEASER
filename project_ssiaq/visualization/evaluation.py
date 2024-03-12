@@ -24,7 +24,7 @@ def plot_T_Air(tsd, building_type, scenario, zone_map,color_map,save_flag=False)
     plt.xlabel('Time')
     plt.ylabel('Air temperature in °C')
     plt.legend(bbox_to_anchor=(1.04, 1), loc="upper left")
-    #plt.show()
+    plt.show()
     if save_flag:
         plt.savefig("T_Air"+scenario+".png",bbox_inches="tight")
     plt.close()
@@ -44,7 +44,7 @@ def plot_Q_flow(tsd, building_type, scenario, zone_map,color_map,save_flag=False
     plt.xlabel('Time')
     plt.ylabel('Power in W')
     plt.legend(bbox_to_anchor=(1.04, 1), loc="upper left")
-    #plt.show()
+    plt.show()
     if save_flag:
         plt.savefig("Q_flow" + scenario + ".png",bbox_inches="tight")
     plt.close()
@@ -85,8 +85,8 @@ if __name__ == '__main__':
         setup_name, "sim_results")
     # find all result files in given setup folder
 
-    pathlist = Path(basepath).rglob('*.mat')
-    #pathlist = Path("N:\Forschung\EBC0741_ZIM_SmartSenseIAQ_NK\Data\Simulationen/01_Referenzszenarien/20230307_referenz_komplett\sim_results\S157_school").rglob('*.mat')
+    #pathlist = Path(basepath).rglob('*.mat')
+    pathlist = Path(r"R:\EBC0741_ZIM_SmartSenseIAQ_NK\Assistenten\SimDaten\01_Referenzszenarien\20230802_referenz_rand\sim_results\S127_office").rglob('*.mat')
 
     zone_map = dict(office=['Office', 'Floor', 'Storage', 'Meeting', 'Restroom', 'ICT'],
                     school=['Classrooms', 'Floor', 'Storage', 'Office', 'Restroom', 'Further common rooms','Canteen',
@@ -104,6 +104,7 @@ if __name__ == '__main__':
         num_zones = len(zone_map[building_type])
         slicedCM = cmap(np.linspace(0, 1, num_zones))
         os.chdir(path.parents[0])
-        #plot_T_Air(tsd, building_type, scenario, zone_map,slicedCM,save_flag=True)
-        #plot_Q_flow(tsd, building_type, scenario, zone_map,slicedCM,save_flag=True)
+        plot_T_Air(tsd, building_type, scenario, zone_map,slicedCM,save_flag=False)
+        plot_Q_flow(tsd, building_type, scenario, zone_map,slicedCM,save_flag=False)
         #plot_presence(tsd, building_type, scenario, zone_map,slicedCM,save_flag=True)
+
