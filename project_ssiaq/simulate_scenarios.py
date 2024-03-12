@@ -202,7 +202,7 @@ def simulate(
 
     dym_api = DymolaAPI(
         model_name=building_mo,
-        cd=cd,
+        working_directory=cd,
         n_cpu=n_cpu,
         packages=[aixlib_mo, teaser_mo],
         show_window=True,
@@ -229,14 +229,15 @@ if __name__ == "__main__":
 
     setup_name = "20230803_ddc_rand"
     basepath = pathlib.Path(
-        'N:\Forschung\EBC0741_ZIM_SmartSenseIAQ_NK\Data\Simulationen/02_Bedarfsorientierte_Regelung').joinpath(
+        r'R:\EBC0741_ZIM_SmartSenseIAQ_NK\Assistenten\SimDaten\02_Bedarfsorientierte_Regelung').joinpath(
         setup_name)
     scenarios = load_scenarios(basepath.joinpath("scenarios_full.xlsx"))
     model_export_path = basepath.joinpath("models")
-    start_scenario = 10
+    start_row = 1  # row index of excel sheet != actual scenario number
+    end_row = 120
     for index, scenario in scenarios.iterrows():
-        if index + 1 < start_scenario:
-            continue  # skip scenarios until start_scenario is reached
+        if index + 1 < start_row or index + 1 > end_row:
+            continue  # skip scenarios until start_scenario is reached and after end scenario is reached
         scenario_name = "S" + str(scenario['Scenario_number']) + "_" + str(scenario['Building_type'])
         prj = generate_project(name=scenario_name)
         prj = generate_bldg(prj, scenario)

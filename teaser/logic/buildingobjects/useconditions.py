@@ -449,7 +449,6 @@ class UseConditions(object):
             if people == 0:
                 self.heating_profile[i] += self.heating_set_back
                 self.cooling_profile[i] += self.cooling_set_back
-        print('test')
 
     def randomize_profile(self,profile):
         """Randomizes profiles by applying a randomized normal distribution

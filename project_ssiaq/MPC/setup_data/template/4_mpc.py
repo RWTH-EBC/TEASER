@@ -53,7 +53,7 @@ for repetition in range(6):
 
 
 ThermalZone_MPC.nlp.build(solver_options={'verbose': False, 'ipopt.print_level': 0}, predictors=predictors)
-online_data = system.run(duration=358*one_day, controllers=[ThermalZone_MPC])
+online_data = system.run(duration=360*one_day, controllers=[ThermalZone_MPC])
 dh.add(online_data)
 
 dh.save(filename='mpc_data',override=True)

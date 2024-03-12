@@ -51,19 +51,20 @@ def export_fmu(cd,model_name,aixlib_mo,teaser_mo):
               r"C:\Users\pse\AppData\Roaming\DassaultSystemes\Dymola\dymola.lic")
 
 if __name__ == "__main__":
-        setup_name = "20240304_mpc_test2"
+        setup_name = "20240310_reduced_scenarios"
         #basepath = pathlib.Path('R:\EBC0741_ZIM_SmartSenseIAQ_NK\Assistenten\SimDaten/03_Modellpraediktive_Regelung').joinpath(
         #        setup_name)
         basepath = pathlib.Path(r'D:\pse\temp_SSIAQ').joinpath(setup_name)
-        scenarios = load_scenarios(basepath.joinpath("scenarios_test.xlsx"))
+        scenarios = load_scenarios(basepath.joinpath("scenarios.xlsx"))
         model_export_path = basepath.joinpath("models")
         fmu_export_path = basepath.joinpath("fmus")
         if not os.path.exists(basepath.joinpath("schedules")):
             os.mkdir(basepath.joinpath("schedules"))
 
-        start_scenario = 1 # row index of excel sheet != actual scenario number
+        start_row = 1 # row index of excel sheet != actual scenario number
+        end_row = 3
         for index, scenario in scenarios.iterrows():
-                if index + 1 < start_scenario:
+                if index + 1 < start_row or index + 1 > end_row:
                         continue  # skip scenarios until start_scenario is reached
                 scenario_name = "S" + str(scenario['Scenario_number']) + "_" + str(scenario['Building_type'])
                 prj = generate_project(name=scenario_name)
