@@ -13,21 +13,21 @@ from evaluation import get_bldg_type_from_filename
 
 def plot_heat_demand_comparison(df):
 
-    sns.barplot(data=df[df["Scenario"].isin([127,162,206])], x='Scenario', y='Specific heat demand', hue='Control type')
-    #sns.set_style("white")
+    ax=sns.barplot(data=df[df["Scenario"].isin([127,162,206])], x='Scenario', y='Specific heat demand', hue='Regelalgorithmus')
+    sns.set_style("white")
     #labels = ax.get_xticklabels()
     #ax.xaxis.set_ticks([0,1,2], labels=["127", "162", "206 "])
-    #ax.set_xticklabels(["127", "162", "206 "])
+    ax.set_xticklabels(["Büro\nZwischenbau ", "Schule\nAltbau", "Hotel\nNeubau "])
     #ax.xaxis.set_major_formatter(ticker.NullFormatter())
     #ax.xaxis.set_minor_formatter(ticker.NullFormatter())
 
 
     #ax.set_xticklabels(["TEst", "MFH", "EFH"])
-    plt.xlabel("Scenario")
-    plt.ylabel("Differenz Spezifischer Wärmebedarf in kWh/m2")
+    plt.tight_layout()
+    plt.xlabel("Szenario", fontweight='bold')
+    plt.ylabel("Spezifischer Wärmebedarf in kWh/m2*a",fontweight='bold')
+    plt.savefig('Vergleich Wärmebedarf.png')
     plt.show()
-    #plt.savefig('heat_demand_comparison.png')
-
 
 if __name__ == '__main__':
 
@@ -43,8 +43,8 @@ if __name__ == '__main__':
     basepath_3 = Path(r'R:\EBC0741_ZIM_SmartSenseIAQ_NK\Assistenten\SimDaten\03_Modellpraediktive_Regelung').joinpath(
         setup_name_3, "mpc")
 
-    df1 = pd.read_pickle(basepath_1.joinpath('dataframe_heat_demand_total.pkl'))
-    df2 = pd.read_pickle(basepath_2.joinpath('dataframe_heat_demand_total.pkl'))
+    df1 = pd.read_pickle(basepath_1.joinpath('dataframe_heat_comfort_total.pkl'))
+    df2 = pd.read_pickle(basepath_2.joinpath('dataframe_heat_comfort_total.pkl'))
     df3 = pd.read_pickle(basepath_3.joinpath('dataframe_heat_demand_total.pkl'))
 
     df1 = df1.replace(["multi_family_house", "single_family_house", "apartment_block", "terraced_house",
@@ -58,9 +58,9 @@ if __name__ == '__main__':
     df3.set_index(df3["Scenario"],inplace=True)
 
 
-    df1['Control type'] = "Reference"
-    df2['Control type'] = "Demand Driven"
-    df3['Control type'] = "MPC"
+    df1['Regelalgorithmus'] = "Referenz"
+    df2['Regelalgorithmus'] = "Bedarfsgerecht"
+    df3['Regelalgorithmus'] = "MPC"
 
     df = pd.concat([df1,df2,df3])
     plot_heat_demand_comparison(df)

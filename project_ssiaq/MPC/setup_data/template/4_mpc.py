@@ -16,7 +16,7 @@ for zone in range(num_zones):
 
 nlp = NLP(
     model=model,
-    N=4 * 4,    # 4 h prediction horizon
+    N=4 * 4,    # 4 h prediction horizon/15 min step size
     objectives=Objectives,
     constraints=constraints,
 )
