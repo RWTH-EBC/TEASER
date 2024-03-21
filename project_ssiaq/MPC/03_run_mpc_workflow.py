@@ -7,9 +7,9 @@ from project_ssiaq.simulate_scenarios import *
 
 if __name__ == "__main__":
         setup_name = "20240310_reduced_scenarios"
-        #basepath = pathlib.Path('R:\EBC0741_ZIM_SmartSenseIAQ_NK\Assistenten\SimDaten/03_Modellpraediktive_Regelung').joinpath(
-        #        setup_name)
-        basepath = pathlib.Path(r'D:\pse\temp_SSIAQ').joinpath(setup_name)
+        basepath = pathlib.Path('R:\EBC0741_ZIM_SmartSenseIAQ_NK\Assistenten\SimDaten/03_Modellpraediktive_Regelung').joinpath(
+                setup_name)
+        #basepath = pathlib.Path(r'D:\pse\temp_SSIAQ').joinpath(setup_name)
         mpc_path = basepath.joinpath('mpc')
         scenarios = load_scenarios(basepath.joinpath("scenarios.xlsx"))
 
