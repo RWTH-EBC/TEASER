@@ -52,9 +52,9 @@ def export_fmu(cd,model_name,aixlib_mo,teaser_mo):
 
 if __name__ == "__main__":
         setup_name = "20240310_reduced_scenarios"
-        #basepath = pathlib.Path('R:\EBC0741_ZIM_SmartSenseIAQ_NK\Assistenten\SimDaten/03_Modellpraediktive_Regelung').joinpath(
-        #        setup_name)
-        basepath = pathlib.Path(r'D:\pse\temp_SSIAQ').joinpath(setup_name)
+        basepath = pathlib.Path('R:\EBC0741_ZIM_SmartSenseIAQ_NK\Assistenten\SimDaten/03_Modellpraediktive_Regelung').joinpath(
+                setup_name)
+        #basepath = pathlib.Path(r'D:\pse\temp_SSIAQ').joinpath(setup_name)
         scenarios = load_scenarios(basepath.joinpath("scenarios.xlsx"))
         model_export_path = basepath.joinpath("models")
         fmu_export_path = basepath.joinpath("fmus")

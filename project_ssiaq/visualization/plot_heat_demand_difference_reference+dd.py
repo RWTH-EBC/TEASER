@@ -28,22 +28,6 @@ def plot_heat_demand_difference(df):
     plt.savefig("Reduktionspotenzial Bedarfsgerecht")
     plt.show()
 
-def plot_comfort_violations_heat_demand_diff(df):
-    hue_order = ["Altbau Wohngebäude", "Zwischenbau Wohngebäude", "Neubau Wohngebäude",
-                 "Altbau Nichtohngebäude"]
-
-    ax = sns.scatterplot(data=df, y="Specific heat demand - Diff", x="Comfort violations - Diff", hue="Hue_BAK_Klasse")
-    sns.set_style("white")
-
-    plt.legend(loc='upper right')
-
-    plt.xlabel("Komfortverletzungen in Kh/a", fontweight='bold')
-    plt.ylabel("Spezifischer Wärmebedarf in kWh/m2*a", fontweight='bold')
-    plt.title("Differenz zwischen Bedarfsgerecht und Referenz", fontweight='bold')
-    plt.tight_layout()
-    plt.savefig("Komfortverletzungen_Pareto")
-    plt.show()
-
 
 if __name__ == '__main__':
 
@@ -76,5 +60,4 @@ if __name__ == '__main__':
     df2 = df2.replace([1960, 1978, 1996, 2020],["Altbau", "Altbau", "Zwischenbau", "Neubau"])
 
 
-    #plot_heat_demand_difference(df2)
-    plot_comfort_violations_heat_demand_diff(df2)
+    plot_heat_demand_difference(df2)

@@ -23,6 +23,7 @@ def calculate_heat_demand(tsd, num_zones):
 def calculate_comfort_violations(tsd, num_zones):
     #tsd = preprocessing.convert_datetime_index_to_float_index(tsd)
     comfort_violations_zonal = list()
+    # thresholds for comfort violations
     lower_threshold = 20
     upper_threshold = 24
     for zone in range(num_zones):
@@ -30,6 +31,7 @@ def calculate_comfort_violations(tsd, num_zones):
         int_gains_coloumn_index = 3 * (zone + 1) - 2
         presence = "multizone.intGains[" + str(int_gains_coloumn_index) + "]", "raw"
         tsd[air_temp] = tsd[air_temp]-273.15
+        # calculate differences only if presence is >0
         tsd['temp_diff_lower'] = tsd.apply(lambda row: row[air_temp] - lower_threshold if row[air_temp] < lower_threshold and row[presence] > 0 else None, axis=1)
         tsd['temp_diff_upper'] = tsd.apply(lambda row: row[air_temp] - upper_threshold if row[air_temp] > upper_threshold and row[presence] > 0 else None, axis=1)
         tsd['temp_diff'] = tsd['temp_diff_lower'].fillna(tsd['temp_diff_upper'])

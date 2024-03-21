@@ -27,9 +27,9 @@ def get_zone_number(building_class, building_type):
 
 if __name__ == "__main__":
         setup_name = "20240310_reduced_scenarios"
-        #basepath = pathlib.Path('R:\EBC0741_ZIM_SmartSenseIAQ_NK\Assistenten\SimDaten/03_Modellpraediktive_Regelung').joinpath(
-        #        setup_name)
-        basepath = pathlib.Path(r'D:\pse\temp_SSIAQ').joinpath(setup_name)
+        basepath = pathlib.Path('R:\EBC0741_ZIM_SmartSenseIAQ_NK\Assistenten\SimDaten/03_Modellpraediktive_Regelung').joinpath(
+                setup_name)
+        #basepath = pathlib.Path(r'D:\pse\temp_SSIAQ').joinpath(setup_name)
 
         mpc_path = basepath.joinpath('mpc')
         if not os.path.exists(basepath.joinpath('ddmpc')):

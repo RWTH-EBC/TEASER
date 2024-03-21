@@ -6,6 +6,7 @@ from project_ssiaq.visualization.evaluation import get_bldg_type_from_filename
 from project_ssiaq.simulate_scenarios import load_scenarios
 
 if __name__ == '__main__':
+    # choose setup and comment other
     """
     setup_name = "20230803_ddc_rand"
     basepath = Path(r'R:\EBC0741_ZIM_SmartSenseIAQ_NK\Assistenten\SimDaten\02_Bedarfsorientierte_Regelung').joinpath(

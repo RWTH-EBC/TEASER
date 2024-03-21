@@ -96,8 +96,7 @@ if __name__ == '__main__':
                        "school", "hotel", "office"], ["MFH", "EFH", "GMFH", "RH",
                        "Schule", "Hotel", "Büro"])
 
-
-
+    # select plot functions
     #plot_comfort_violations_heat_demand_diff_building_type(df2)
     #plot_comfort_violations_heat_demand_diff_building_age(df2)
     plot_comfort_violations_heat_demand_diff_combined(df2)

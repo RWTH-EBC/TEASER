@@ -15,14 +15,9 @@ def plot_heat_demand_comparison(df):
 
     ax=sns.barplot(data=df[df["Scenario"].isin([127,162,206])], x='Scenario', y='Specific heat demand', hue='Regelalgorithmus')
     sns.set_style("white")
-    #labels = ax.get_xticklabels()
-    #ax.xaxis.set_ticks([0,1,2], labels=["127", "162", "206 "])
+
     ax.set_xticklabels(["Büro\nZwischenbau ", "Schule\nAltbau", "Hotel\nNeubau "])
-    #ax.xaxis.set_major_formatter(ticker.NullFormatter())
-    #ax.xaxis.set_minor_formatter(ticker.NullFormatter())
 
-
-    #ax.set_xticklabels(["TEst", "MFH", "EFH"])
     plt.tight_layout()
     plt.xlabel("Szenario", fontweight='bold')
     plt.ylabel("Spezifischer Wärmebedarf in kWh/m2*a",fontweight='bold')

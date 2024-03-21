@@ -27,6 +27,7 @@ def get_zone_number(building_class, building_type):
         return building_type_dict[building_type]
 
 def plot_Q_flow(df, zone_nr,color_map):
+    # optional plot function
     plt.figure(dpi=300)
 
     for idx in range(zone_nr):
@@ -41,6 +42,7 @@ def plot_Q_flow(df, zone_nr,color_map):
     plt.close()
 
 def plot_T_Air(df, zone_nr,color_map):
+    # optional plot function
     plt.figure(dpi=300)
 
     for idx in range(zone_nr):
@@ -86,6 +88,9 @@ if __name__ == '__main__':
         result_df.loc[index] = {'Scenario': scenario['Scenario_number'], 'Building type': scenario['Building_type'], 'Num Zones': num_zones,
                        'Heat demand total': heat_demand_total, 'Net area': scenario["Net_Area"],
                        'Construction year': scenario["Year_of_construction"]}
+
+        # optional plotting
+
         # cmap = plt.get_cmap('plasma')
         # slicedCM = cmap(np.linspace(0, 1, num_zones))
         # plot_Q_flow(df, num_zones,slicedCM)
