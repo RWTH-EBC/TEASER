@@ -28,6 +28,23 @@ def plot_heat_demand_difference(df):
     plt.savefig("Reduktionspotenzial Bedarfsgerecht")
     plt.show()
 
+def plot_heat_demand_difference_relative(df):
+
+    hue_order = ["Altbau","Zwischenbau","Neubau"]
+
+    ax = sns.boxplot(data=df, x="Building type", y="rel Diff", hue="Baualtersklasse", hue_order=hue_order)
+    sns.set_style("white")
+    ax.set_xticklabels(["MFH", "EFH","GMFH","RH", "Schule", "Hotel","Büro"])
+    plt.legend(loc='upper center')
+
+    plt.xlabel("Gebäudetyp", fontweight='bold')
+    plt.ylabel("Relatives prozentuales Reduktionspotenzial", fontweight='bold')
+    plt.title("Reduktionspotenzial Bedarfsgerecht vs. Referenz",fontweight='bold')
+    plt.tight_layout()
+    plt.savefig("Reduktionspotenzial Bedarfsgerecht relativ")
+    plt.show()
+
+
 
 if __name__ == '__main__':
 
@@ -59,5 +76,7 @@ if __name__ == '__main__':
     df2.rename(columns= {"Construction year": "Baualtersklasse"}, inplace=True)
     df2 = df2.replace([1960, 1978, 1996, 2020],["Altbau", "Altbau", "Zwischenbau", "Neubau"])
 
+    df2["rel Diff"] = df2["Specific heat demand - Diff"] / df2["Specific heat demand - Ref"]*100
 
-    plot_heat_demand_difference(df2)
+    #plot_heat_demand_difference(df2)
+    plot_heat_demand_difference_relative(df2)
