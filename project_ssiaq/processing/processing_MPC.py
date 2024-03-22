@@ -56,6 +56,29 @@ def plot_T_Air(df, zone_nr,color_map):
     plt.show()
     plt.close()
 
+def calculate_comfort_violations(df, num_zones):
+    #TODO: copied from non MPC conversion and not completly tested;
+    # verify when disturbances have been adjusted in config file;
+    # currently not working
+    #tsd = preprocessing.convert_datetime_index_to_float_index(tsd)
+    comfort_violations_zonal = list()
+    # thresholds for comfort violations
+    lower_threshold = 20
+    upper_threshold = 24
+    for zone in range(num_zones):
+        air_temp = "TAirOutput[" + str(zone + 1) + "]"
+        presence = "multizone.zone["+str(zone + 1)+"].intGains[" + str(zone + 1) + "]"
+        df[air_temp] = df[air_temp]-273.15
+        # calculate differences only if presence is >0
+        df['temp_diff_lower'] = df.apply(lambda row: row[air_temp] - lower_threshold if row[air_temp] < lower_threshold and row[presence] > 0 else None, axis=1)
+        df['temp_diff_upper'] = df.apply(lambda row: row[air_temp] - upper_threshold if row[air_temp] > upper_threshold and row[presence] > 0 else None, axis=1)
+        df['temp_diff'] = df['temp_diff_lower'].fillna(df['temp_diff_upper'])
+        df['temp_diff'] = df.temp_diff.fillna(0)
+        df['temp_diff'] = df['temp_diff'].abs()
+        comfort_violations_zonal.append(integrate.trapezoid(df['temp_diff'], df["SimTime"]/3600)) # in Kh
+    total_comfort_violations = sum(comfort_violations_zonal)
+    return comfort_violations_zonal, total_comfort_violations
+
 
 if __name__ == '__main__':
 
@@ -70,7 +93,12 @@ if __name__ == '__main__':
     result_df = pd.DataFrame(
         columns=['Scenario', 'Building type', 'Num Zones', 'Heat demand total', 'Net area', 'Construction year'],
         index=range(end_row))
-
+    # TODO: folgende Code-Zeile aktivieren und obere löschen
+    """
+    result_df = pd.DataFrame(
+        columns=['Scenario', 'Building type', 'Num Zones', 'Heat demand total', 'Comfort violations', 'Net area', 'Construction year'],
+        index=range(end_row))
+    """
     for index, scenario in scenarios.iterrows():
         if index + 1 < start_row or index + 1 > end_row:
             continue  # skip scenarios until start_scenario is reached
@@ -85,10 +113,19 @@ if __name__ == '__main__':
         for zone in range(num_zones):
             heat_demand_zonal.append(integrate.trapezoid(df["multizone.PHeater["+str(zone+1)+"]"], df["SimTime"]/3600/1000)) # in kWh
         heat_demand_total = sum(heat_demand_zonal)
+        #comfort_violations_zonal, comfort_violations_total = calculate_comfort_violations(df,num_zones)
+
         result_df.loc[index] = {'Scenario': scenario['Scenario_number'], 'Building type': scenario['Building_type'], 'Num Zones': num_zones,
                        'Heat demand total': heat_demand_total, 'Net area': scenario["Net_Area"],
                        'Construction year': scenario["Year_of_construction"]}
-
+        #TODO: folgende Code-Zeile aktivieren und obere löschen
+        """
+        result_df.loc[index] = {'Scenario': scenario['Scenario_number'], 'Building type': scenario['Building_type'],
+                                'Num Zones': num_zones,
+                                'Heat demand total': heat_demand_total, 'Comfort violations': comfort_violations_total,
+                                'Net area': scenario["Net_Area"],
+                                'Construction year': scenario["Year_of_construction"]}
+        """
         # optional plotting
 
         # cmap = plt.get_cmap('plasma')
