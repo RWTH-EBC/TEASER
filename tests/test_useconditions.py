@@ -5,7 +5,7 @@ import os
 import helptest
 import pytest
 
-prj = Project(True)
+prj = Project(False)
 
 
 class Test_useconditions(object):
@@ -52,8 +52,8 @@ class Test_useconditions(object):
         prj_test.name = "TestAHUProfiles"
 
         prj_test.add_non_residential(
-            method="bmvbs",
-            usage="office",
+            construction_data="iwu_heavy",
+            geometry_data="bmvbs_office",
             name="OfficeBuilding",
             year_of_construction=2015,
             number_of_floors=4,

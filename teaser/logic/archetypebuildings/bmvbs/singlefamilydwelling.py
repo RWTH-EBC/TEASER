@@ -415,7 +415,7 @@ class SingleFamilyDwelling(Residential):
                 outer_wall = OuterWall(zone)
                 outer_wall.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_data,
+                    construction=self.construction_data.value,
                     data_class=self.parent.data,
                 )
                 outer_wall.name = key
@@ -437,9 +437,8 @@ class SingleFamilyDwelling(Residential):
             code - will be fixed sometime
             """
             for zone in self.thermal_zones:
-                if self.parent.data.used_statistic == "kfw":
+                if self.construction_data.is_kfw():
                     window = Window(zone)
-
                     window.load_type_element(
                         self.year_of_construction,
                         "Waermeschutzverglasung, " "dreifach",
@@ -450,7 +449,6 @@ class SingleFamilyDwelling(Residential):
                     window.orientation = value[1]
                 else:
                     window = Window(zone)
-
                     window.load_type_element(
                         self.year_of_construction,
                         "Kunststofffenster, " "Isolierverglasung",
@@ -468,7 +466,7 @@ class SingleFamilyDwelling(Residential):
                 roof = Rooftop(zone)
                 roof.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_data,
+                    construction=self.construction_data.value,
                     data_class=self.parent.data,
                 )
                 roof.name = key
@@ -483,7 +481,7 @@ class SingleFamilyDwelling(Residential):
                 ground_floor = GroundFloor(zone)
                 ground_floor.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_data,
+                    construction=self.construction_data.value,
                     data_class=self.parent.data,
                 )
                 ground_floor.name = key
@@ -496,7 +494,7 @@ class SingleFamilyDwelling(Residential):
                 inner_wall = InnerWall(zone)
                 inner_wall.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_data,
+                    construction=self.construction_data.value,
                     data_class=self.parent.data,
                 )
                 inner_wall.name = key
@@ -512,7 +510,7 @@ class SingleFamilyDwelling(Residential):
                     ceiling = Ceiling(zone)
                     ceiling.load_type_element(
                         year=self.year_of_construction,
-                        construction=self.construction_data,
+                        construction=self.construction_data.value,
                         data_class=self.parent.data,
                     )
                     ceiling.name = key
@@ -526,7 +524,7 @@ class SingleFamilyDwelling(Residential):
                     floor = Floor(zone)
                     floor.load_type_element(
                         year=self.year_of_construction,
-                        construction=self.construction_data,
+                        construction=self.construction_data.value,
                         data_class=self.parent.data,
                     )
                     floor.name = key
@@ -600,14 +598,23 @@ class SingleFamilyDwelling(Residential):
         else:
             self._dormer = 0
 
-    #TODO #745 bei Umbenennung hier noch die zulässigen construction_data auflisten
     @property
     def construction_data(self):
         return self._construction_data
 
-    #TODO #745 folgender Abschnitt überflüssig, da in data/utilities in dictionaries vorhanden?
+    #@construction_data.setter
+    #def construction_data(self, value):
+    #    if not isinstance(value, datahandling.ConstructionData):
+    #        raise ValueError(f"Invalid construction_data: {value}. Must be a ConstructionData enum value.")
+    #    self._construction_data = value
+
     @construction_data.setter
     def construction_data(self, value):
-        if not isinstance(value, datahandling.ConstructionData):
-            raise ValueError(f"Invalid construction_data: {value}. Must be a ConstructionData enum value.")
-        self._construction_data = value
+        if value is None:
+            self._construction_data = datahandling.ConstructionData.iwu_heavy
+        elif isinstance(value, str):
+            self._construction_data = datahandling.ConstructionData(value)
+        elif isinstance(value, datahandling.ConstructionData):
+            self._construction_data = value
+        else:
+            raise ValueError("construction_data must be either a string or a ConstructionData enum value.")

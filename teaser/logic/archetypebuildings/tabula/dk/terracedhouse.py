@@ -101,8 +101,8 @@ class TerracedHouse(SingleFamilyHouse):
         self.number_of_floors = number_of_floors
         self.height_of_floors = height_of_floors
 
-        self._construction_data_1 = self.construction_data + '_1_TH'
-        self._construction_data_2 = self.construction_data + '_2_TH'
+        self._construction_data_1 = self.construction_data.value + '_1_TH'
+        self._construction_data_2 = self.construction_data.value + '_2_TH'
 
         self.zone_area_factors = {"SingleDwelling": [1, "Living"]}
 

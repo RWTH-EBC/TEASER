@@ -10,41 +10,8 @@ import teaser.data.output.teaserjson_output as tjson_out
 import teaser.data.output.aixlib_output as aixlib_output
 import teaser.data.output.ibpsa_output as ibpsa_output
 from teaser.data.dataclass import DataClass
-from teaser.logic.archetypebuildings.bmvbs.office import Office
-from teaser.logic.archetypebuildings.bmvbs.custom.institute import Institute
-from teaser.logic.archetypebuildings.bmvbs.custom.institute4 import Institute4
-from teaser.logic.archetypebuildings.bmvbs.custom.institute8 import Institute8
-from teaser.logic.archetypebuildings.urbanrenet.est1a import EST1a
-from teaser.logic.archetypebuildings.urbanrenet.est1b import EST1b
-from teaser.logic.archetypebuildings.urbanrenet.est2 import EST2
-from teaser.logic.archetypebuildings.urbanrenet.est3 import EST3
-from teaser.logic.archetypebuildings.urbanrenet.est4a import EST4a
-from teaser.logic.archetypebuildings.urbanrenet.est4b import EST4b
-from teaser.logic.archetypebuildings.urbanrenet.est5 import EST5
-from teaser.logic.archetypebuildings.urbanrenet.est6 import EST6
-from teaser.logic.archetypebuildings.urbanrenet.est7 import EST7
-from teaser.logic.archetypebuildings.urbanrenet.est8a import EST8a
-from teaser.logic.archetypebuildings.urbanrenet.est8b import EST8b
-from teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse import (
-    SingleFamilyHouse,
-)
-from teaser.logic.archetypebuildings.tabula.dk.singlefamilyhouse import (
-    SingleFamilyHouse as SingleFamilyHouse_DK,
-)
-from teaser.logic.archetypebuildings.tabula.de.terracedhouse import TerracedHouse
-from teaser.logic.archetypebuildings.tabula.dk.terracedhouse import (
-    TerracedHouse as TerracedHouse_DK,
-)
-from teaser.logic.archetypebuildings.tabula.de.multifamilyhouse import MultiFamilyHouse
-from teaser.logic.archetypebuildings.tabula.de.apartmentblock import ApartmentBlock
-from teaser.logic.archetypebuildings.tabula.dk.apartmentblock import (
-    ApartmentBlock as ApartmentBlock_DK,
-)
-from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import (
-    SingleFamilyDwelling,
-)
+from teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse import SingleFamilyHouse
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
-from typing import Union
 
 
 class Project(object):
@@ -118,10 +85,9 @@ class Project(object):
         self._merge_windows_calc = False
         self._used_library_calc = "AixLib"
 
-        if load_data is True:
-            self.data = self.instantiate_data_class()
-        else:
-            self.data = None
+        if load_data:
+           raise ValueError("This option was deprecated")
+        self.data = None
 
         self.dir_reference_results = None
 
@@ -135,7 +101,7 @@ class Project(object):
         DataClass : Instance of DataClass()
 
         """
-        return DataClass()
+        return DataClass(construction_data=datahandling.ConstructionData.iwu_heavy)
 
     def calc_all_buildings(self, raise_errors=True):
         """Calculates values for all project buildings
@@ -234,13 +200,12 @@ class Project(object):
             Default: EPS035, only 'iwu'/'bmbvs' archetype approach.
 
         """
-        # TODO #745: wenn type_of_retrofit nicht auch für kfw retrofit verwenden werden kann, neuen Parameter einführen
+        #TODO #745: kfw retrofit
         ass_error_type = "only 'retrofit' and 'adv_retrofit' are valid "
-        assert type_of_retrofit in [None, "adv_retrofit", "retrofit", "kfw_40", "kfw_55", "kfw_70", "kfw_85",
-                                    "kfw_100"], ass_error_type
+        assert type_of_retrofit in [None, "adv_retrofit", "retrofit"], ass_error_type
         tabula_buildings = []
         iwu_buildings = []
-        # TODO #745 construction_data muss gesplittet werden, damit diese Schleife funktioniert (wegen used_statistic == "iwu")
+
         for bldg in self.buildings:
             if isinstance(bldg, SingleFamilyHouse):
                 if type_of_retrofit is None:
@@ -252,21 +217,22 @@ class Project(object):
                 if year_of_retrofit is None:
                     raise ValueError("you need to set year_of_retrofit for " "retrofit")
                 iwu_buildings.append(bldg)
-        if self.data.used_statistic == "iwu":
+
+        if self.data == DataClass(construction_data=datahandling.ConstructionData.iwu_heavy):
             for bld_iwu in iwu_buildings:
                 bld_iwu.retrofit_building(
                     year_of_retrofit=year_of_retrofit,
                     window_type=window_type,
                     material=material,
                 )
-            self.data = DataClass(used_statistic="tabula_de")
+            self.data = DataClass(construction_data=datahandling.ConstructionData.tabula_de_standard)
             for bld_tabula in tabula_buildings:
                 bld_tabula.retrofit_building(type_of_retrofit=type_of_retrofit)
 
         else:
             for bld_tabula in tabula_buildings:
                 bld_tabula.retrofit_building(type_of_retrofit=type_of_retrofit)
-            self.data = DataClass(used_statistic="iwu")
+            self.data = DataClass(construction_data=datahandling.ConstructionData.iwu_heavy)
             for bld_iwu in iwu_buildings:
                 bld_iwu.retrofit_building(
                     year_of_retrofit=year_of_retrofit,
@@ -289,7 +255,7 @@ class Project(object):
             window_layout=None,
     ):
         """Add a non-residential building to the TEASER project.
-        #TODO adjust docstring to new variables, why bmvbs as method? Used_statistic is set to iwu as default
+        #TODO #745 adjust docstring to new variables
         This function adds a non-residential archetype building to the TEASER
         project. You need to specify the method of the archetype generation.
         Currently TEASER supports only method according to Lichtmess and BMVBS
@@ -373,30 +339,17 @@ class Project(object):
         if isinstance(geometry_data, str):
             geometry_data = datahandling.GeometryData(geometry_data)
 
-
         ass_error_construction_data = (
             "only 'iwu' is a valid construction_data for " "non-residential archetype generation"
         )
 
         assert construction_data.value in ["iwu_heavy", "iwu_light"], ass_error_construction_data
 
-        ass_error_geometry_data = (
-            "only 'office', 'institute', 'institute4', "
-            "'institute8' are valid geometry_datas for archetype "
-            "generation"
-        )
+        ass_error_geometry_data = ("geometry_data does not match the construction_data")
 
-        assert geometry_data.value in [
-            "office",
-            "institute",
-            "institute4",
-            "institute8",
-        ], ass_error_geometry_data
+        assert geometry_data in datahandling.allowed_geometries.get(construction_data, []), ass_error_geometry_data
 
-        if self.data is None:
-            self.data = DataClass(used_statistic="iwu")
-        elif self.data.used_statistic != "iwu":
-            self.data = DataClass(used_statistic="iwu")
+        self.data = DataClass(construction_data)
 
         type_bldg = datahandling.geometries[geometry_data](
             self,
@@ -455,7 +408,7 @@ class Project(object):
 
         Parameters
         ----------
-        #TODO: Docstring bei construction_data (method) anpassen
+        #TODO #745: adjust docstring
         construction_data : str
             Used archetype construction_data, currently only 'iwu' or 'urbanrenet' are
             supported, 'tabula_de' to follow soon
@@ -540,9 +493,9 @@ class Project(object):
 
             0. no dormer
             1. dormer
-        #TODO #745 wenn Umbenennungen stattfinden hier dokumentieren
+
         construction_data : str
-            construction_data of used wall constructions default is "heavy")
+            construction_data of used wall constructions default is "iwu_heavy")
 
             - iwu_heavy: heavy construction
             - iwu_light: light construction
@@ -559,7 +512,6 @@ class Project(object):
         type_bldg : Instance of Archetype Building
 
         """
-
         if isinstance(construction_data, str):
             construction_data = datahandling.ConstructionData(construction_data)
         if isinstance(geometry_data, str):
@@ -575,92 +527,54 @@ class Project(object):
                 and number_of_apartments is not None):
             warnings.warn(ass_error_apart)
 
-        #    self.data = construction_data.get_path()
-
-        if self.data is None:
-            self.data = DataClass(used_statistic=construction_data.get_prefix())
+        self.data = DataClass(construction_data)
 
         ass_error_geometry_data = ("geometry_data does not match the construction_data")
 
-        #assert geometry_data in datahandling.allowed_geometries[construction_data], ass_error_geometry_data
-
         assert geometry_data in datahandling.allowed_geometries.get(construction_data, []), ass_error_geometry_data
 
-        #TODO: verschiedene arguments entsprechend unterscheiden
-        #so in etwa: type_bldg = datahandling.geometries[geometry_data.value](Keyword_arguments[construction_data.value])
-        # je nach geometry_data unterschiedliche Argumente übergeben
-        #neighbour buildings nur bei iwu und urbanrenet
+        common_arg = {
+            'name': name,
+            'year_of_construction': year_of_construction,
+            'number_of_floors': number_of_floors,
+            'height_of_floors': height_of_floors,
+            'net_leased_area': net_leased_area,
+            'with_ahu': with_ahu,
+            'internal_gains_mode': internal_gains_mode,
+            'construction_data': construction_data,
+        }
 
-        common_arg = [
-            self,
-            name,
-            year_of_construction,
-            number_of_floors,
-            height_of_floors,
-            net_leased_area,
-            with_ahu,
-            internal_gains_mode,
-            construction_data,
-        ]
+        urbanrenet_arg = common_arg.copy()
+        urbanrenet_arg.update({
+            'neighbour_buildings': neighbour_buildings,
+        })
 
-        urbanrenet_arg = [
-            self,
-            name,
-            year_of_construction,
-            number_of_floors,
-            height_of_floors,
-            net_leased_area,
-            with_ahu,
-            internal_gains_mode,
-            neighbour_buildings,
-            construction_data,
-        ]
-
-        iwu_arg = [
-            self,
-            name,
-            year_of_construction,
-            number_of_floors,
-            height_of_floors,
-            net_leased_area,
-            with_ahu,
-            internal_gains_mode,
-            residential_layout,
-            neighbour_buildings,
-            attic,
-            cellar,
-            dormer,
-            construction_data,
-        ]
-
-        #try:
-        #    type_bldg = datahandling.geometries[geometry_data](*common_arg)
-        #except TypeError:
-        #    try:
-        #        type_bldg = datahandling.geometries[geometry_data](*iwu_arg)
-        #    except TypeError:
-        #        type_bldg = datahandling.geometries[geometry_data](*urbanrenet_arg)
-
-        #type_bldg.generate_archetype()
-        #return type_bldg
-
-        # TODO #745 urbanrenet existiert nicht in ConstructionData; Gebaeude muessen alle urbanrenet als prefix erhalten
-        # number of apartments in allen urbanrenet Gebauedetypen ausser est1a!
-        #Reihenfolge beachten!
+        iwu_arg = common_arg.copy()
+        iwu_arg.update({
+            'residential_layout': residential_layout,
+            'neighbour_buildings': neighbour_buildings,
+            'attic': attic,
+            'cellar': cellar,
+            'dormer': dormer,
+        })
 
         if geometry_data == datahandling.GeometryData.IwuSingleFamilyDwelling:
-            type_bldg = datahandling.geometries[geometry_data](*iwu_arg)
+            type_bldg = datahandling.geometries[geometry_data](self, **iwu_arg)
         elif geometry_data == datahandling.GeometryData.UrbanrenetEst1a:
-            type_bldg = datahandling.geometries[geometry_data](*urbanrenet_arg)
-        elif geometry_data.value in [datahandling.GeometryData.UrbanrenetEst1b, datahandling.GeometryData.UrbanrenetEst2,
-                                     datahandling.GeometryData.UrbanrenetEst3, datahandling.GeometryData.UrbanrenetEst4a,
-                                     datahandling.GeometryData.UrbanrenetEst4b, datahandling.GeometryData.UrbanrenetEst5,
+            type_bldg = datahandling.geometries[geometry_data](self, **urbanrenet_arg)
+        elif geometry_data.value in [datahandling.GeometryData.UrbanrenetEst1b,
+                                     datahandling.GeometryData.UrbanrenetEst2,
+                                     datahandling.GeometryData.UrbanrenetEst3,
+                                     datahandling.GeometryData.UrbanrenetEst4a,
+                                     datahandling.GeometryData.UrbanrenetEst4b,
+                                     datahandling.GeometryData.UrbanrenetEst5,
                                      datahandling.GeometryData.UrbanrenetEst6, datahandling.GeometryData.UrbanrenetEst7,
-                                     datahandling.GeometryData.UrbanrenetEst8a, datahandling.GeometryData.UrbanrenetEst8b]:
-            urbanrenet_arg.append(number_of_apartments)
-            type_bldg = datahandling.geometries[geometry_data](*urbanrenet_arg)
+                                     datahandling.GeometryData.UrbanrenetEst8a,
+                                     datahandling.GeometryData.UrbanrenetEst8b]:
+            urbanrenet_arg['number_of_apartments'] = number_of_apartments
+            type_bldg = datahandling.geometries[geometry_data](self, **urbanrenet_arg)
         else:
-            type_bldg = datahandling.geometries[geometry_data](*common_arg)
+            type_bldg = datahandling.geometries[geometry_data](self, **common_arg)
         type_bldg.generate_archetype()
         return type_bldg
 
@@ -840,6 +754,7 @@ class Project(object):
 
         self.buildings = []
 
+        #TODO #745 hier vielleicht noch Anpassungen notwendig
         if load_data is True:
             self.data = self.instantiate_data_class()
         elif not load_data:

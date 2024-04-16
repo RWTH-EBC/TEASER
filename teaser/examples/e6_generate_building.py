@@ -21,7 +21,7 @@ def example_create_building():
     # Project (e.g. for Material properties and typical wall constructions.
     # This can take a few seconds, depending on the size of the used data base.
 
-    prj = Project(load_data=True)
+    prj = Project(load_data=False)
     prj.name = "BuildingExample"
 
     # Instantiate a Building class and set the Project API as a parent to

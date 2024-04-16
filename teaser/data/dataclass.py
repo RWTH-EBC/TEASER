@@ -7,6 +7,7 @@ import teaser.logic.utilities as utils
 import json
 import collections
 
+from teaser.data.utilities import ConstructionData
 v = sys.version_info
 if v >= (2, 7):
     try:
@@ -22,9 +23,9 @@ class DataClass(object):
 
     Parameters
     ----------
-    used_statistics : str
-        This parameter indicates which statistical data about building
-        elements should be used. Use 'iwu', 'tabula_de' or 'kfw'.
+    construction_data : ConstructionData
+        The prefix of this parameter indicates which statistical data about building
+        elements should be used. Its type is the enum class ConstructionData (.
 
     Attributes
     ----------
@@ -46,37 +47,36 @@ class DataClass(object):
 
     """
 
-    def __init__(self, used_statistic="iwu"):
+    def __init__(self, construction_data: ConstructionData) -> object:
         """Construct DataClass."""
-        self.used_statistic = used_statistic
         self.element_bind = None
-        if self.used_statistic == "iwu":
+        if construction_data.is_iwu():
             self.path_tb = utils.get_full_path(
                 "data/input/inputdata/TypeElements_IWU.json"
             )
             self.load_tb_binding()
-        elif self.used_statistic == "tabula_de":
+        elif construction_data.is_tabula_de():
             self.path_tb = utils.get_full_path(
                 os.path.join(
                     "data", "input", "inputdata", "TypeElements_TABULA_DE.json"
                 )
             )
             self.load_tb_binding()
-        elif self.used_statistic == "tabula_dk":
+        elif construction_data.is_tabula_dk():
             self.path_tb = utils.get_full_path(
                 os.path.join(
                     "data", "input", "inputdata", "TypeElements_TABULA_DK.json"
                 )
             )
             self.load_tb_binding()
-        elif self.used_statistic == "kfw":
+        elif construction_data.is_kfw():
             self.path_tb = utils.get_full_path(
                 os.path.join(
                     "data", "input", "inputdata", "TypeElements_KFW.json"
                 )
             )
             self.load_tb_binding()
-        elif self.used_statistic is None:
+        elif construction_data is None:
             pass
         self.material_bind = None
         self.path_mat = utils.get_full_path(

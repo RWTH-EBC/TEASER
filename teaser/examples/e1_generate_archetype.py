@@ -20,7 +20,7 @@ def example_generate_archetype():
     # used data base). Be careful: Dymola does not like whitespaces in names and
     # filenames, thus we will delete them anyway in TEASER.
 
-    prj = Project(load_data=True)
+    prj = Project(load_data=False)
     prj.name = "ArchetypeExample"
 
     # There are two different types of archetype groups: residential and
@@ -37,8 +37,8 @@ def example_generate_archetype():
     # read the docs.
 
     prj.add_residential(
-        method='iwu',
-        geometry_data='single_family_dwelling',
+        construction_data='iwu_heavy',
+        geometry_data='iwu_single_family_dwelling',
         name="ResidentialBuilding",
         year_of_construction=1988,
         number_of_floors=2,
@@ -51,9 +51,8 @@ def example_generate_archetype():
     # does not differ from the residential archetype building.
 
     prj.add_non_residential(
-        method='bmvbs',
-        #gemetry_data --> bmvbs_office
-        geometry_data='office',
+        construction_data='iwu_heavy',
+        geometry_data='bmvbs_office',
         name="OfficeBuilding",
         year_of_construction=1988,
         number_of_floors=4,
@@ -61,8 +60,8 @@ def example_generate_archetype():
         net_leased_area=4500.0)
 
     prj.add_non_residential(
-        method='bmvbs',
-        geometry_data='institute',
+        construction_data='iwu_heavy',
+        geometry_data='bmvbs_institute',
         name="InstituteBuilding",
         year_of_construction=1952,
         number_of_floors=5,
@@ -70,8 +69,8 @@ def example_generate_archetype():
         net_leased_area=3400.0)
 
     prj.add_non_residential(
-        method='bmvbs',
-        geometry_data='institute',
+        construction_data='iwu_heavy',
+        geometry_data='bmvbs_institute',
         name="InstituteBuildingMoisture",
         year_of_construction=1980,
         number_of_floors=3,
@@ -96,24 +95,32 @@ def example_generate_archetype():
     # data. Project(load_data=False).
 
     prj.add_residential(
-        method='tabula_de',
-        geometry_data='single_family_house',
+        construction_data='tabula_de_standard',
+        geometry_data='tabula_de_single_family_house',
         name="ResidentialBuildingTabula",
         year_of_construction=1988,
         number_of_floors=3,
         height_of_floors=3.2,
-        net_leased_area=280.0,
-        construction_data='tabula_standard')
+        net_leased_area=280.0)
 
     prj.add_residential(
-        method='tabula_de',
-        geometry_data='multi_family_house',
+        construction_data='tabula_de_retrofit',
+        geometry_data='tabula_de_multi_family_house',
         name="ResidentialBuildingTabulaMulti",
         year_of_construction=1960,
         number_of_floors=4,
         height_of_floors=3.2,
-        net_leased_area=600.0,
-        construction_data='tabula_retrofit')
+        net_leased_area=600.0)
+
+    #prj.add_residential(
+    #    construction_data='kfw_40',
+    #    geometry_data='iwu_single_family_dwelling',
+    #    name="ResidentialBuildingKfw",
+    #    year_of_construction=2024,
+    #    number_of_floors=2,
+    #    height_of_floors=3.2,
+    #    net_leased_area=200.0
+    #)
 
     return prj
 

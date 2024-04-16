@@ -128,8 +128,12 @@ class SingleFamilyHouse(Residential):
         self.number_of_floors = number_of_floors
         self.height_of_floors = height_of_floors
 
-        self._construction_data_1 = self.construction_data + "_1_SFH"
-        self._construction_data_2 = self.construction_data + "_2_SFH"
+        if self.construction_data.is_kfw():
+            self._construction_data_1 = self.construction_data.value
+            self._construction_data_2 = self.construction_data.value
+        else:
+            self._construction_data_1 = self.construction_data.value + "_1_SFH"
+            self._construction_data_2 = self.construction_data.value + "_2_SFH"
 
         self.zone_area_factors = {"SingleDwelling": [1, "Living"]}
 
@@ -408,15 +412,26 @@ class SingleFamilyHouse(Residential):
         if self.facade_estimation_factors[self.building_age_group]["win1"] != 0:
             for key, value in self.window_names_1.items():
                 for zone in self.thermal_zones:
-                    window = Window(zone)
-                    window.load_type_element(
-                        self.year_of_construction,
-                        construction=self._construction_data_1,
-                        data_class=self.parent.data,
-                    )
-                    window.name = key
-                    window.tilt = value[0]
-                    window.orientation = value[1]
+                    if self.construction_data.is_kfw():
+                        window = Window(zone)
+                        window.load_type_element(
+                            self.year_of_construction,
+                            "Waermeschutzverglasung, " "dreifach",
+                            data_class=self.parent.data,
+                        )
+                        window.name = key
+                        window.tilt = value[0]
+                        window.orientation = value[1]
+                    else:
+                        window = Window(zone)
+                        window.load_type_element(
+                            self.year_of_construction,
+                            construction=self._construction_data_1,
+                            data_class=self.parent.data,
+                        )
+                        window.name = key
+                        window.tilt = value[0]
+                        window.orientation = value[1]
                     window.area = (
                         self.facade_estimation_factors[self.building_age_group]["win1"]
                         * zone.area
@@ -425,15 +440,26 @@ class SingleFamilyHouse(Residential):
         if self.facade_estimation_factors[self.building_age_group]["win2"] != 0:
             for key, value in self.window_names_2.items():
                 for zone in self.thermal_zones:
-                    window = Window(zone)
-                    window.load_type_element(
-                        self.year_of_construction,
-                        construction=self._construction_data_2,
-                        data_class=self.parent.data,
-                    )
-                    window.name = key
-                    window.tilt = value[0]
-                    window.orientation = value[1]
+                    if self.construction_data.is_kfw():
+                        window = Window(zone)
+                        window.load_type_element(
+                            self.year_of_construction,
+                            "Waermeschutzverglasung, " "dreifach",
+                            data_class=self.parent.data,
+                        )
+                        window.name = key
+                        window.tilt = value[0]
+                        window.orientation = value[1]
+                    else:
+                        window = Window(zone)
+                        window.load_type_element(
+                            self.year_of_construction,
+                            construction=self._construction_data_2,
+                            data_class=self.parent.data,
+                        )
+                        window.name = key
+                        window.tilt = value[0]
+                        window.orientation = value[1]
                     window.area = (
                         self.facade_estimation_factors[self.building_age_group]["win2"]
                         * zone.area
@@ -533,11 +559,18 @@ class SingleFamilyHouse(Residential):
 
             for zone in self.thermal_zones:
                 inner_wall = InnerWall(zone)
-                inner_wall.load_type_element(
-                    year=self.year_of_construction,
-                    construction="tabula_standard",
-                    data_class=self.parent.data,
-                )
+                if self.construction_data.is_tabula_de():
+                    inner_wall.load_type_element(
+                        year=self.year_of_construction,
+                        construction="tabula_de_standard",
+                        data_class=self.parent.data,
+                    )
+                else:
+                    inner_wall.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self.construction_data.value,
+                        data_class=self.parent.data,
+                    )
                 inner_wall.name = key
                 inner_wall.tilt = value[0]
                 inner_wall.orientation = value[1]
@@ -548,11 +581,18 @@ class SingleFamilyHouse(Residential):
 
                 for zone in self.thermal_zones:
                     ceiling = Ceiling(zone)
-                    ceiling.load_type_element(
-                        year=self.year_of_construction,
-                        construction="tabula_standard",
-                        data_class=self.parent.data,
-                    )
+                    if self.construction_data.is_tabula_de():
+                        ceiling.load_type_element(
+                            year=self.year_of_construction,
+                            construction="tabula_de_standard",
+                            data_class=self.parent.data,
+                        )
+                    else:
+                        ceiling.load_type_element(
+                            year=self.year_of_construction,
+                            construction=self.construction_data.value,
+                            data_class=self.parent.data,
+                        )
                     ceiling.name = key
                     ceiling.tilt = value[0]
                     ceiling.orientation = value[1]
@@ -561,11 +601,18 @@ class SingleFamilyHouse(Residential):
 
                 for zone in self.thermal_zones:
                     floor = Floor(zone)
-                    floor.load_type_element(
-                        year=self.year_of_construction,
-                        construction="tabula_standard",
-                        data_class=self.parent.data,
-                    )
+                    if self.construction_data.is_tabula_de():
+                        floor.load_type_element(
+                            year=self.year_of_construction,
+                            construction="tabula_de_standard",
+                            data_class=self.parent.data,
+                        )
+                    else:
+                        floor.load_type_element(
+                            year=self.year_of_construction,
+                            construction=self.construction_data.value,
+                            data_class=self.parent.data,
+                        )
                     floor.name = key
                     floor.tilt = value[0]
                     floor.orientation = value[1]
@@ -574,35 +621,23 @@ class SingleFamilyHouse(Residential):
             zone.set_inner_wall_area()
             zone.set_volume_zone()
 
-
-    #TODO #745 bei Umbenennung der construction_data Werte im Folgenden noch anpassen
-    #@property
-    #def construction_data(self):
-    #    return self._construction_data
-
-    #@construction_data.setter
-    #def construction_data(self, value):
-    #    if value is not None:
-    #        if value in ["tabula_de_standard", "tabula_de_retrofit", "tabula_de_adv_retrofit", "kfw_40", "kfw_55", "kfw_70", "kfw_85", "kfw_100"]:
-    #            self._construction_data = value
-    #        else:
-    #            raise ValueError(
-    #                "construction_data has to be tabula_de_standard,"
-    #                "tabula_de_retrofit, "
-    #                "tabula_de_adv_retrofit, "
-    #                "or a kfw-standard like kfw_40"
-    #            )
-    #    else:
-    #        self._construction_data = "tabula_de_standard"
-
     @property
     def construction_data(self):
         return self._construction_data
 
-    #TODO #745 folgender Abschnitt überflüssig, da in data/utilities in dictionaries vorhanden?
+    #@construction_data.setter
+    #def construction_data(self, value):
+    #    if not isinstance(value, datahandling.ConstructionData):
+    #        raise ValueError(f"Invalid construction_data: {value}. Must be a ConstructionData enum value.")
+    #    self._construction_data = value
+
     @construction_data.setter
     def construction_data(self, value):
-        if not isinstance(value, datahandling.ConstructionData):
-            raise ValueError(f"Invalid construction_data: {value}. Must be a ConstructionData enum value.")
-        self._construction_data = value
-
+        if value is None:
+            self._construction_data = datahandling.ConstructionData.tabula_de_standard
+        elif isinstance(value, str):
+            self._construction_data = datahandling.ConstructionData(value)
+        elif isinstance(value, datahandling.ConstructionData):
+            self._construction_data = value
+        else:
+            raise ValueError("construction_data must be either a string or a ConstructionData enum value.")

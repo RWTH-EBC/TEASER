@@ -264,7 +264,7 @@ class EST1a(Residential):
                 # create wall and set building elements
                 outer_wall = OuterWall(zone)
                 outer_wall.load_type_element(self.year_of_construction,
-                                             self.construction_data)
+                                             self.construction_data.value)
                 outer_wall.name = key
                 outer_wall.tilt = value[0]
                 outer_wall.orientation = value[1]
@@ -302,7 +302,7 @@ class EST1a(Residential):
             for zone in self.thermal_zones:
                 roof = Rooftop(zone)
                 roof.load_type_element(self.year_of_construction,
-                                       self.construction_data)
+                                       self.construction_data.value)
                 roof.name = key
                 roof.tilt = value[0]
                 roof.orientation = value[1]
@@ -314,7 +314,7 @@ class EST1a(Residential):
             for zone in self.thermal_zones:
                 ground_floor = GroundFloor(zone)
                 ground_floor.load_type_element(self.year_of_construction,
-                                               self.construction_data)
+                                               self.construction_data.value)
                 ground_floor.name = key
                 ground_floor.tilt = value[0]
                 ground_floor.orientation = value[1]
@@ -324,7 +324,7 @@ class EST1a(Residential):
             for zone in self.thermal_zones:
                 inner_wall = InnerWall(zone)
                 inner_wall.load_type_element(self.year_of_construction,
-                                             self.construction_data)
+                                             self.construction_data.value)
                 inner_wall.name = key
                 inner_wall.tilt = value[0]
                 inner_wall.orientation = value[1]
@@ -337,7 +337,7 @@ class EST1a(Residential):
                 for zone in self.thermal_zones:
                     ceiling = Ceiling(zone)
                     ceiling.load_type_element(self.year_of_construction,
-                                              self.construction_data)
+                                              self.construction_data.value)
                     ceiling.name = key
                     ceiling.tilt = value[0]
                     ceiling.orientation = value[1]
@@ -348,7 +348,7 @@ class EST1a(Residential):
                 for zone in self.thermal_zones:
                     floor = Floor(zone)
                     floor.load_type_element(self.year_of_construction,
-                                            self.construction_data)
+                                            self.construction_data.value)
                     floor.name = key
                     floor.tilt = value[0]
                     floor.orientation = value[1]
@@ -383,13 +383,22 @@ class EST1a(Residential):
     def construction_data(self):
         return self._construction_data
 
-    #TODO #745 folgender Abschnitt überflüssig, da in data/utilities in dictionaries vorhanden?
+    #@construction_data.setter
+    #def construction_data(self, value):
+    #    if not isinstance(value, datahandling.ConstructionData):
+    #        raise ValueError(f"Invalid construction_data: {value}. Must be a ConstructionData enum value.")
+    #    self._construction_data = value
+
     @construction_data.setter
     def construction_data(self, value):
-        if not isinstance(value, datahandling.ConstructionData):
-            raise ValueError(f"Invalid construction_data: {value}. Must be a ConstructionData enum value.")
-        self._construction_data = value
-
+        if value is None:
+            self._construction_data = datahandling.ConstructionData.tabula_de_standard
+        elif isinstance(value, str):
+            self._construction_data = datahandling.ConstructionData(value)
+        elif isinstance(value, datahandling.ConstructionData):
+            self._construction_data = value
+        else:
+            raise ValueError("construction_data must be either a string or a ConstructionData enum value.")
 
     @property
     def neighbour_buildings(self):

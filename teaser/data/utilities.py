@@ -108,24 +108,6 @@ class ConstructionData(Enum):
     def is_kfw(self):
         return self.get_prefix() == "kfw"
 
-    def get_path(self):
-        if self.is_iwu():
-            return utils.get_full_path("data/input/inputdata/TypeElements_IWU.json")
-        elif self.is_kfw():
-            return utils.get_full_path(
-                os.path.join("data", "input", "inputdata", "TypeElements_KFW.json")
-            )
-        elif self.is_tabula_de():
-            return utils.get_full_path(
-                os.path.join("data", "input", "inputdata", "TypeElements_TABULA_DE.json")
-            )
-        elif self.is_tabula_dk():
-            return utils.get_full_path(
-                os.path.join("data", "input", "inputdata", "TypeElements_TABULA_DK.json")
-            )
-        else:
-            raise ValueError(f"Invalid construction_data: {self}")
-
 #Dictionaries:
 #dictionary for each building class:
 geometries = {

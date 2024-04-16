@@ -14,6 +14,7 @@ from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
+import teaser.data.utilities as datahandling
 
 
 class Office(NonResidential):
@@ -360,7 +361,7 @@ class Office(NonResidential):
                 outer_wall = OuterWall(zone)
                 outer_wall.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_data,
+                    construction=self.construction_data.value,
                     data_class=self.parent.data,
                 )
                 outer_wall.name = key
@@ -404,7 +405,7 @@ class Office(NonResidential):
                 roof = Rooftop(zone)
                 roof.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_data,
+                    construction=self.construction_data.value,
                     data_class=self.parent.data,
                 )
                 roof.name = key
@@ -419,7 +420,7 @@ class Office(NonResidential):
                 ground_floor = GroundFloor(zone)
                 ground_floor.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_data,
+                    construction=self.construction_data.value,
                     data_class=self.parent.data,
                 )
                 ground_floor.name = key
@@ -432,7 +433,7 @@ class Office(NonResidential):
                 inner_wall = InnerWall(zone)
                 inner_wall.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_data,
+                    construction=self.construction_data.value,
                     data_class=self.parent.data,
                 )
                 inner_wall.name = key
@@ -447,7 +448,7 @@ class Office(NonResidential):
                     ceiling = Ceiling(zone)
                     ceiling.load_type_element(
                         year=self.year_of_construction,
-                        construction=self.construction_data,
+                        construction=self.construction_data.value,
                         data_class=self.parent.data,
                     )
                     ceiling.name = key
@@ -461,7 +462,7 @@ class Office(NonResidential):
                     floor = Floor(zone)
                     floor.load_type_element(
                         year=self.year_of_construction,
-                        construction=self.construction_data,
+                        construction=self.construction_data.value,
                         data_class=self.parent.data,
                     )
                     floor.name = key
@@ -505,12 +506,19 @@ class Office(NonResidential):
     def construction_data(self):
         return self._construction_data
 
+    #@construction_data.setter
+    #def construction_data(self, value):
+    #    if not isinstance(value, datahandling.ConstructionData):
+    #        raise ValueError(f"Invalid construction_data: {value}. Must be a ConstructionData enum value.")
+    #    self._construction_data = value
+
     @construction_data.setter
     def construction_data(self, value):
-        if value is not None:
-            if value == "heavy" or value == "light":
-                self._construction_data = value
-            else:
-                raise ValueError("construction_data has to be light or heavy")
+        if value is None:
+            self._construction_data = datahandling.ConstructionData.iwu_heavy
+        elif isinstance(value, str):
+            self._construction_data = datahandling.ConstructionData(value)
+        elif isinstance(value, datahandling.ConstructionData):
+            self._construction_data = value
         else:
-            self._construction_data = "heavy"
+            raise ValueError("construction_data must be either a string or a ConstructionData enum value.")

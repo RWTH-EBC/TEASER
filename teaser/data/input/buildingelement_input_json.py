@@ -16,7 +16,7 @@ def load_type_element(element, year, construction, data_class):
     cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.26.07.2007` and
     :cite:`KurzverfahrenIWU`, which is combined with normative material data
     from :cite:`VereinDeutscherIngenieure.2012b`.
-    #TODO: Update documentation: source of information for TypeElements_KfW
+    #TODO #745: Update documentation: source of information for TypeElements_KfW
 
     Parameters
     ----------
@@ -56,8 +56,10 @@ def load_type_element(element, year, construction, data_class):
                         mat_input.load_material_id(
                             material, layer_in["material"]["material_id"], data_class
                         )
+                    return
             except Exception as e:
-                logging.error(f"Error loading TypeElement {element_in} from JSON Template.")
+                logging.warning(f"Warning loading TypeElement {element_in} from JSON Template: {e}")
+    logging.warning(f"No database entry found for {construction=}, {year=}, element={type(element).__name__}")
 
 
 def _set_basic_data(element, element_in):

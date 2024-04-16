@@ -12,6 +12,7 @@ from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.buildingphysics.door import Door
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
+import teaser.data.utilities as datahandling
 
 
 class SingleFamilyHouse(Residential):
@@ -129,8 +130,8 @@ class SingleFamilyHouse(Residential):
         self.number_of_floors = number_of_floors
         self.height_of_floors = height_of_floors
 
-        self._construction_data_1 = self.construction_data + "_1_SFH"
-        self._construction_data_2 = self.construction_data + "_2_SFH"
+        self._construction_data_1 = self.construction_data.value + "_1_SFH"
+        self._construction_data_2 = self.construction_data.value + "_2_SFH"
 
         self.zone_area_factors = {"SingleDwelling": [1, "Living"]}
 
@@ -503,7 +504,7 @@ class SingleFamilyHouse(Residential):
                 inner_wall = InnerWall(zone)
                 inner_wall.load_type_element(
                     year=self.year_of_construction,
-                    construction="tabula_standard",
+                    construction="tabula_dk_standard",
                     data_class=self.parent.data,
                 )
                 inner_wall.name = key
@@ -518,7 +519,7 @@ class SingleFamilyHouse(Residential):
                     ceiling = Ceiling(zone)
                     ceiling.load_type_element(
                         year=self.year_of_construction,
-                        construction="tabula_standard",
+                        construction="tabula_dk_standard",
                         data_class=self.parent.data,
                     )
                     ceiling.name = key
@@ -531,7 +532,7 @@ class SingleFamilyHouse(Residential):
                     floor = Floor(zone)
                     floor.load_type_element(
                         year=self.year_of_construction,
-                        construction="tabula_standard",
+                        construction="tabula_dk_standard",
                         data_class=self.parent.data,
                     )
                     floor.name = key
@@ -546,16 +547,19 @@ class SingleFamilyHouse(Residential):
     def construction_data(self):
         return self._construction_data
 
+    #@construction_data.setter
+    #def construction_data(self, value):
+    #    if not isinstance(value, datahandling.ConstructionData):
+    #        raise ValueError(f"Invalid construction_data: {value}. Must be a ConstructionData enum value.")
+    #    self._construction_data = value
+
     @construction_data.setter
     def construction_data(self, value):
-        if value is not None:
-            if value in ["tabula_dk_standard", "tabula_dk_retrofit", "tabula_dk_adv_retrofit"]:
-                self._construction_data = value
-            else:
-                raise ValueError(
-                    "construction_data has to be tabula_dk_standard,"
-                    "tabula_dk_retrofit, "
-                    "tabula_dk_adv_retrofit"
-                )
+        if value is None:
+            self._construction_data = datahandling.ConstructionData.tabula_de_standard
+        elif isinstance(value, str):
+            self._construction_data = datahandling.ConstructionData(value).value
+        elif isinstance(value, datahandling.ConstructionData):
+            self._construction_data = value
         else:
-            self._construction_data = "tabula_dk_standard"
+            raise ValueError("construction_data must be either a string or a ConstructionData enum value.")
