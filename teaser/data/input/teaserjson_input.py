@@ -172,6 +172,14 @@ def load_teaser_json(path, project):
             tz.use_conditions.ratio_conv_rad_lighting = zone_in["use_conditions"][
                 "ratio_conv_rad_lighting"
             ]
+            tz.use_conditions.maintained_illuminance = zone_in["use_conditions"][
+                "maintained_illuminance"]
+            tz.use_conditions.lighting_efficiency_lumen = zone_in["use_conditions"][
+                "lighting_efficiency_lumen"]
+            tz.use_conditions.lighting_efficiency = zone_in["use_conditions"][
+                "lighting_efficiency"]
+            tz.use_conditions.lighting_power_el = zone_in["use_conditions"][
+                "lighting_power_el"]
             tz.use_conditions.use_constant_infiltration = zone_in["use_conditions"][
                 "use_constant_infiltration"
             ]
