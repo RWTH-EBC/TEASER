@@ -792,7 +792,7 @@ class UseConditions(object):
         else:
 
             self._parent = None
-
+    """
     @property
     def ligthing_power(self):
         return self._lighting_power
@@ -806,3 +806,4 @@ class UseConditions(object):
                 self._lighting_power = value
         else:
             self._lighting_power = 15.9
+    """
