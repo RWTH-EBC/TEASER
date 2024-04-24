@@ -117,6 +117,10 @@ class UseConditions(object):
         length, TEASER will multiplicate this list for one whole year.
         AixLib: Used for internal gains profile on top-level
         Annex: Used for internal gains
+    lighting_method: bool
+        decision variable to determine wether lighting power will be given by
+        direct input or by calculation using the variables maintained_illuminance
+        and lighting_efficiency_lumen
     lighting_power: float [W/m2]
         spec. electr. Power for lighting. This value is taken from SIA 2024.
         AixLib: Used in Zone record for internal gains
@@ -126,6 +130,15 @@ class UseConditions(object):
         of the lighting [convective/radiative]. Default values are derived from
         :cite:`DiLaura.2011`.
         AixLib: Used in Zone record for internal gains, lighting
+    maintained_illuminance : float [Lx]
+        maintained illuminance value (lx)
+        Currently not used
+    lighting_efficiency_lumen: float [lm/W_el]
+        lighting efficiency in lm/W_el, in german: Lichtausbeute
+    lighting_efficiency: float [W_light/W_el]
+        lighting efficiency in light power / electrical power
+    lighting_power_el: float [W_el/m2]
+        specific electric lighting power per m2
     lighting_profil : [float]
         Relative presence of lighting 0-1 (e.g. 0.5 means that 50% of the total
         lighting power are currently used). Typically given for 24h. This is
@@ -212,15 +225,6 @@ class UseConditions(object):
     cooling_set_back: float [K]
         Set back temperature offset for cooling profile. Positive (+) values
         increase the profile, negative (-) decrease.
-    maintained_illuminance : float [Lx]
-        maintained illuminance value (lx)
-        Currently not used
-    lighting_efficiency_lumen: float [lm/W_el]
-        lighting efficiency in lm/W_el, in german: Lichtausbeute
-    lighting_efficiency: float [W_light/W_el]
-        lighting efficiency in light power / electrical power
-    lighting_power_el: float [W_el/m2]
-        specific electric lighting power per m2
 
     """
 
@@ -248,8 +252,13 @@ class UseConditions(object):
         self.machines = 7.0
         self.ratio_conv_rad_machines = 0.75
 
-        self.lighting_power = 15.9
+        self.lighting_method = False    #Choose wether lighting power will be given by direct input or calculated by maintained illuminance and lighting_efficiency_lumen
+        self._lighting_power = 15.9
         self.ratio_conv_rad_lighting = 0.4
+        self.maintained_illuminance = 500.0
+        self.lighting_efficiency_lumen = 100  # lighting efficiency in lm/W_el
+        self.lighting_efficiency = 0.3  # [W_light/W_el]
+        self.lighting_power_el = 5  # [W_el/m2]
 
         self.use_constant_infiltration = False
         self.infiltration_rate = 0.2
@@ -272,11 +281,6 @@ class UseConditions(object):
         self._adjusted_opening_times = None
 
         self._with_ideal_thresholds = False
-
-        self.maintained_illuminance = 500.0
-        self.lighting_efficiency_lumen = 100  # lighting efficiency in lm/W_el
-        self.lighting_efficiency = 0.3  # [W_light/W_el]
-        self.lighting_power_el = 5  # [W_el/m2]
 
         self._heating_profile = [
             294.15,
@@ -788,3 +792,17 @@ class UseConditions(object):
         else:
 
             self._parent = None
+
+    @property
+    def ligthing_power(self):
+        return self._lighting_power
+
+    @ligthing_power.setter
+    def lighting_power(self, value):
+        if isinstance(self.lighting_method, bool):
+            if self.lighting_method:
+                self._lighting_power = self.maintained_illuminance / self.lighting_efficiency_lumen
+            else:
+                self._lighting_power = value
+        else:
+            self._lighting_power = 15.9

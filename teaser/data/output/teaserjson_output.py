@@ -166,8 +166,8 @@ def save_teaser_json(path, project):
                 "ratio_conv_rad_machines"
             ] = zone.use_conditions.ratio_conv_rad_machines
             zone_out["use_conditions"][
-                "lighting_power"
-            ] = zone.use_conditions.lighting_power
+                "lighting_method"
+            ] = zone.use_conditions.lighting_method
             zone_out["use_conditions"][
                 "ratio_conv_rad_lighting"
             ] = zone.use_conditions.ratio_conv_rad_lighting
@@ -183,6 +183,12 @@ def save_teaser_json(path, project):
             zone_out["use_conditions"][
                 "lighting_power_el"
             ] = zone.use_conditions.lighting_power_el
+
+            if zone_out["use_conditions"]["lighting_method"]:
+                zone_out["use_conditions"]["lighting_power"] = zone_out["use_conditions"]["maintained_illuminance"] / zone_out["use_conditions"]["lighting_efficiency_lumen"]
+            else:
+                zone_out["use_conditions"]["lighting_power"] = zone.use_conditions.lighting_power
+
             zone_out["use_conditions"][
                 "use_constant_infiltration"
             ] = zone.use_conditions.use_constant_infiltration
