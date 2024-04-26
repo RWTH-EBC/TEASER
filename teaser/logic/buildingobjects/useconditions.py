@@ -801,8 +801,7 @@ class UseConditions(object):
     def lighting_power(self, value):
         if isinstance(self.lighting_method, bool):
             if self.lighting_method:
-                #self._lighting_power = self.maintained_illuminance / self.lighting_efficiency_lumen
-                self._lighting_power = 1
+                self._lighting_power = float(self.maintained_illuminance) / float(self.lighting_efficiency_lumen)
             else:
                 self._lighting_power = value
         else:
