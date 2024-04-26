@@ -792,7 +792,7 @@ class UseConditions(object):
         else:
 
             self._parent = None
-    """
+
     @property
     def ligthing_power(self):
         return self._lighting_power
@@ -801,9 +801,9 @@ class UseConditions(object):
     def lighting_power(self, value):
         if isinstance(self.lighting_method, bool):
             if self.lighting_method:
-                self._lighting_power = self.maintained_illuminance / self.lighting_efficiency_lumen
+                #self._lighting_power = self.maintained_illuminance / self.lighting_efficiency_lumen
+                self._lighting_power = 1
             else:
                 self._lighting_power = value
         else:
             self._lighting_power = 15.9
-    """
