@@ -793,16 +793,3 @@ class UseConditions(object):
 
             self._parent = None
 
-    @property
-    def lighting_power(self):
-        return self._lighting_power
-
-    @lighting_power.setter
-    def lighting_power(self, value):
-        if isinstance(self.use_maintained_illuminance, bool):
-            if self.use_maintained_illuminance:
-                self._lighting_power = float(self.maintained_illuminance) / float(self.lighting_efficiency_lumen)
-            else:
-                self._lighting_power = value
-        else:
-            self._lighting_power = 15.9
