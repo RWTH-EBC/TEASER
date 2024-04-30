@@ -166,8 +166,8 @@ def load_teaser_json(path, project):
             tz.use_conditions.ratio_conv_rad_machines = zone_in["use_conditions"][
                 "ratio_conv_rad_machines"
             ]
-            tz.use_conditions.lighting_method = zone_in["use_conditions"][
-                "lighting_method"
+            tz.use_conditions.use_maintained_illuminance = zone_in["use_conditions"][
+                "use_maintained_illuminance"
             ]
             tz.use_conditions.ratio_conv_rad_lighting = zone_in["use_conditions"][
                 "ratio_conv_rad_lighting"
@@ -185,7 +185,7 @@ def load_teaser_json(path, project):
                 "lighting_power_el"
             ]
 
-            if tz.use_conditions.lighting_method:
+            if tz.use_conditions.use_maintained_illuminance:
                 tz.use_conditions.lighting_power = tz.use_conditions.maintained_illuminance / tz.use_conditions.lighting_efficiency_lumen
             else:
                 tz.use_conditions.lighting_power = zone_in["use_conditions"][

@@ -203,22 +203,21 @@ class Test_useconditions(object):
         )
         assert (isinstance(schedules, pd.DataFrame))
 
-    """
+
     def test_lighting_input_method(self):
         prj.set_default()
         helptest.building_test2(prj)
         use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
         lighting_power = 10
-        use_cond.lighting_method = True
-        use_cond.maintained_illuminance = 500
-        use_cond.lighting_efficiency_lumen = 34
+        use_cond.use_maintained_illuminance = True
+        use_cond.maintained_illuminance = 300
+        use_cond.lighting_efficiency_lumen = 33
         use_cond.lighting_power = lighting_power
         assert(use_cond.lighting_power == use_cond.maintained_illuminance/use_cond.lighting_efficiency_lumen)
-        use_cond.lighting_method = False
+        use_cond.use_maintained_illuminance = False
         use_cond.lighting_power = lighting_power
         assert(use_cond.lighting_power == lighting_power)
-        use_cond.lighting_method = 10
+        use_cond.use_maintained_illuminance = 10
         use_cond.lighting_power = lighting_power
         assert (use_cond.lighting_power != lighting_power)
         assert (use_cond.lighting_power != use_cond.maintained_illuminance / use_cond.lighting_efficiency_lumen)
-    """

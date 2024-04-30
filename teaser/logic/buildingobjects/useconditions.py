@@ -117,7 +117,7 @@ class UseConditions(object):
         length, TEASER will multiplicate this list for one whole year.
         AixLib: Used for internal gains profile on top-level
         Annex: Used for internal gains
-    lighting_method: bool
+    use_maintained_illuminance: bool
         decision variable to determine wether lighting power will be given by
         direct input or by calculation using the variables maintained_illuminance
         and lighting_efficiency_lumen
@@ -252,10 +252,10 @@ class UseConditions(object):
         self.machines = 7.0
         self.ratio_conv_rad_machines = 0.75
 
-        self.lighting_method = False    #Choose wether lighting power will be given by direct input or calculated by maintained illuminance and lighting_efficiency_lumen
+        self.use_maintained_illuminance = False    #Choose wether lighting power will be given by direct input or calculated by maintained illuminance and lighting_efficiency_lumen
         self._lighting_power = 15.9
         self.ratio_conv_rad_lighting = 0.4
-        self.maintained_illuminance = 500.0
+        self.maintained_illuminance = 500
         self.lighting_efficiency_lumen = 100  # lighting efficiency in lm/W_el
         self.lighting_efficiency = 0.3  # [W_light/W_el]
         self.lighting_power_el = 5  # [W_el/m2]
@@ -794,13 +794,13 @@ class UseConditions(object):
             self._parent = None
 
     @property
-    def ligthing_power(self):
+    def lighting_power(self):
         return self._lighting_power
 
-    @ligthing_power.setter
+    @lighting_power.setter
     def lighting_power(self, value):
-        if isinstance(self.lighting_method, bool):
-            if self.lighting_method:
+        if isinstance(self.use_maintained_illuminance, bool):
+            if self.use_maintained_illuminance:
                 self._lighting_power = float(self.maintained_illuminance) / float(self.lighting_efficiency_lumen)
             else:
                 self._lighting_power = value

@@ -79,8 +79,8 @@ def save_use_conditions(use_cond, data_class):
             "ratio_conv_rad_machines"
         ] = use_cond.ratio_conv_rad_machines
         data_class.conditions_bind[use_cond.usage][
-            "lighting_method"
-        ] = use_cond.lighting_method
+            "use_maintained_illuminance"
+        ] = use_cond.use_maintained_illuminance
         data_class.conditions_bind[use_cond.usage][
             "ratio_conv_rad_lighting"
         ] = use_cond.ratio_conv_rad_lighting
@@ -98,7 +98,7 @@ def save_use_conditions(use_cond, data_class):
         ] = use_cond.lighting_power_el
 
 
-        if data_class.conditions_bind[use_cond.usage]["lighting_method"]:
+        if data_class.conditions_bind[use_cond.usage]["use_maintained_illuminance"]:
             data_class.conditions_bind[use_cond.usage]["lighting_power"] = data_class.conditions_bind[use_cond.usage]["maintained_illuminance"] / data_class.conditions_bind[use_cond.usage]["lighting_efficiency_lumen"]
         else:
             data_class.conditions_bind[use_cond.usage]["lighting_power"] = use_cond.lighting_power
