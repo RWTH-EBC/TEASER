@@ -136,6 +136,35 @@ equation
   connect(tableTSetCool.y, multizone.TSetCool) annotation (Line(points={{55.2,-58},
           {36.8,-58},{36.8,-9}}, color={0,0,127}));
 
+
+% if use_postprocessing_calc:
+  connect(multizone.TAir, multizonePostProcessing.TAir) annotation (Line(points={{51,4.95},
+          {70,4.95},{70,99},{81.8,99}},             color={0,0,127}));
+
+  connect(multizone.PCooler, multizonePostProcessing.PCooler) annotation (Line(
+        points={{51,-7},{70,-7},{70,90.6},{81.8,90.6}},
+                                                      color={0,0,127}));
+  connect(multizone.PHeater, multizonePostProcessing.PHeater) annotation (Line(
+        points={{51,-5},{70,-5},{70,94.8},{81.8,94.8}},
+                                                      color={0,0,127}));
+  connect(multizone.Pel, multizonePostProcessing.PelAHU) annotation (Line(
+        points={{51,1},{70,1},{70,86.6},{81.6,86.6}}, color={0,0,127}));
+
+  connect(multizone.PCoolAHU, multizonePostProcessing.PCoolAHU) annotation (
+      Line(points={{51,-3},{70,-3},{70,79},{81.6,79}}, color={0,0,127}));
+
+  connect(multizone.PHeatAHU, multizonePostProcessing.PHeatAHU) annotation (
+      Line(points={{51,-1},{70,-1},{70,82.8},{81.6,82.8}}, color={0,0,127}));
+
+  connect(multizone.X_w, multizonePostProcessing.X_w) annotation (Line(points={{57,2},{
+          70,2},{70,94.2},{80,94.2}},        color={0,0,127}));
+
+  connect(multizone.TRad, multizonePostProcessing.TRad) annotation (Line(points={{51,3},{
+          70,3},{70,97.6},{80,97.6}},         color={0,0,127}));
+  connect(multizone.QIntGains_flow, multizonePostProcessing.QIntGains_flow) 
+    annotation (Line(points={{51,-7},{70,-7},{70,80},{80,80}}, color={0,0,127}));
+% endif
+
   annotation (experiment(
       StartTime=${str(zone.parent.parent.modelica_info.start_time)},
       StopTime=${str(zone.parent.parent.modelica_info.stop_time)},
@@ -147,6 +176,11 @@ equation
       __Dymola_Commands(file=
         "Resources/Scripts/Dymola/${bldg.name}/${bldg.name}.mos"
       "Simulate and Plot"),
+    % if export_vars:
+    __Dymola_selections={
+        Selection(name="BuildingSimulationOutputs",
+        match={${export_vars}})},
+    % endif
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
         graphics={
         Line(points={{80,-82}}, color={28,108,200}),

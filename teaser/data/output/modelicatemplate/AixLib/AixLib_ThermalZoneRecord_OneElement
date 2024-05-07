@@ -82,6 +82,8 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     TNHeat = 1,
     HeaterOn = ${get_true_false(zone.use_conditions.with_heating)},
     hCool = 0,
+    heaLoadFacOut = ${zone.model_attr.heat_load_outside_factor},
+    heaLoadFacGrd = ${zone.model_attr.heat_load_ground_factor},
     lCool = ${zone.model_attr.cool_load},
     KRCool = 10000,
     TNCool = 1,
