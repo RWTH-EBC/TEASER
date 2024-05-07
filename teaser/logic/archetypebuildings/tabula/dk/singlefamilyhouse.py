@@ -38,7 +38,7 @@ class SingleFamilyHouse(Residential):
     the surface area for heat transmission, but is only used to calculate the
     interior wall area, which is not specified in TABULA at all. Further, TABULA
     does not specify any specific user profile, by default the SingleFamilyHouse
-    class has exactly one geometry_data zone, which is 'Living'. TABULA also does not
+    class has exactly one usage zone, which is 'Living'. TABULA also does not
     always specify the exact construction of building elements, but always
     provides a prescribed U-Value. We used the U-Value and the given material
     information to determine thickness of each layer and implemented it into
@@ -333,7 +333,7 @@ class SingleFamilyHouse(Residential):
             zone.name = key
             zone.area = type_bldg_area * value[0]
             use_cond = UseCond(parent=zone)
-            use_cond.load_use_conditions(zone_geometry_data=value[1])
+            use_cond.load_use_conditions(zone_usage=value[1])
             zone.use_conditions = use_cond
 
             zone.use_conditions.with_ahu = False
@@ -547,19 +547,14 @@ class SingleFamilyHouse(Residential):
     def construction_data(self):
         return self._construction_data
 
-    #@construction_data.setter
-    #def construction_data(self, value):
-    #    if not isinstance(value, datahandling.ConstructionData):
-    #        raise ValueError(f"Invalid construction_data: {value}. Must be a ConstructionData enum value.")
-    #    self._construction_data = value
-
     @construction_data.setter
     def construction_data(self, value):
         if value is None:
-            self._construction_data = datahandling.ConstructionData.tabula_de_standard
+            self._construction_data = datahandling.ConstructionData.tabula_dk_standard
         elif isinstance(value, str):
-            self._construction_data = datahandling.ConstructionData(value).value
+            self._construction_data = datahandling.ConstructionData(value)
         elif isinstance(value, datahandling.ConstructionData):
             self._construction_data = value
         else:
-            raise ValueError("construction_data must be either a string or a ConstructionData enum value.")
+            raise ValueError(f"Invalid construction_data: {value}. "
+                             f"Must be either a string or a ConstructionData enum value.")

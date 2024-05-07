@@ -173,10 +173,6 @@ class Project(object):
           The thickness of the insulation layer is calculated
           that the U-Value of the wall corresponds to the retrofit standard of
           the year of retrofit.
-        #TODO #745: je nach eingeführter Variable für den kfw retrofit noch abändern
-        - alternatively these buildings can be retrofitted to kfw-standards
-          with the 'type_of_retrofit' parameter (allowed values are kfw_40, kfw_55,
-          kfw_70, kfw_85 and kfw_100)
 
         The needed parameters for the Modelica Model are calculated
         automatically, using the calculation_method specified in the
@@ -193,14 +189,12 @@ class Project(object):
         type_of_retrofit : str
             The classification of retrofit, if the archetype building
             approach of TABULA is used.
-            Or if the building has to be retrofitted on kfw-standards
         window_type : str
             Default: EnEv 2014, only 'iwu'/'bmbvs' archetype approach.
         material : str
             Default: EPS035, only 'iwu'/'bmbvs' archetype approach.
 
         """
-        #TODO #745: kfw retrofit
         ass_error_type = "only 'retrofit' and 'adv_retrofit' are valid "
         assert type_of_retrofit in [None, "adv_retrofit", "retrofit"], ass_error_type
         tabula_buildings = []
@@ -241,21 +235,20 @@ class Project(object):
                 )
 
     def add_non_residential(
-            self,
-            construction_data,
-            geometry_data,
-            name,
-            year_of_construction,
-            number_of_floors,
-            height_of_floors,
-            net_leased_area,
-            with_ahu=True,
-            internal_gains_mode=1,
-            office_layout=None,
-            window_layout=None,
+        self,
+        construction_data,
+        geometry_data,
+        name,
+        year_of_construction,
+        number_of_floors,
+        height_of_floors,
+        net_leased_area,
+        with_ahu=True,
+        internal_gains_mode=1,
+        office_layout=None,
+        window_layout=None,
     ):
         """Add a non-residential building to the TEASER project.
-        #TODO #745 adjust docstring to new variables
         This function adds a non-residential archetype building to the TEASER
         project. You need to specify the method of the archetype generation.
         Currently TEASER supports only method according to Lichtmess and BMVBS
@@ -272,10 +265,10 @@ class Project(object):
         Parameters
         ----------
         construction_data : str
-            Used archetype method, currently only 'bmvbs' is supported
+            Used data for construction, for bmvbs non-residential buildings 'iwu_heavy' is supported
         geometry_data : str
-            Main geometry_data of the obtained building, currently only 'office',
-            'institute', 'institute4', institute8' are supported
+            Main geometry_data of the obtained building, currently only 'bmvbs_office',
+            'bmvbs_institute', 'bmvbs_institute4', 'bmvbs_institute8' are supported
         name : str
             Individual name
         year_of_construction : int
@@ -340,10 +333,10 @@ class Project(object):
             geometry_data = datahandling.GeometryData(geometry_data)
 
         ass_error_construction_data = (
-            "only 'iwu' is a valid construction_data for " "non-residential archetype generation"
+            "only 'iwu_heavy' is a valid construction_data for " "non-residential archetype generation"
         )
 
-        assert construction_data.value in ["iwu_heavy", "iwu_light"], ass_error_construction_data
+        assert construction_data.value == "iwu_heavy", ass_error_construction_data
 
         ass_error_geometry_data = ("geometry_data does not match the construction_data")
 
@@ -374,22 +367,22 @@ class Project(object):
         return type_bldg
 
     def add_residential(
-            self,
-            construction_data,
-            geometry_data,
-            name,
-            year_of_construction,
-            number_of_floors,
-            height_of_floors,
-            net_leased_area,
-            with_ahu=False,
-            internal_gains_mode=1,
-            residential_layout=None,
-            neighbour_buildings=None,
-            attic=None,
-            cellar=None,
-            dormer=None,
-            number_of_apartments=None,
+        self,
+        construction_data,
+        geometry_data,
+        name,
+        year_of_construction,
+        number_of_floors,
+        height_of_floors,
+        net_leased_area,
+        with_ahu=False,
+        internal_gains_mode=1,
+        residential_layout=None,
+        neighbour_buildings=None,
+        attic=None,
+        cellar=None,
+        dormer=None,
+        number_of_apartments=None,
     ):
         """Add a residential building to the TEASER project.
 
@@ -408,15 +401,23 @@ class Project(object):
 
         Parameters
         ----------
-        #TODO #745: adjust docstring
         construction_data : str
-            Used archetype construction_data, currently only 'iwu' or 'urbanrenet' are
-            supported, 'tabula_de' to follow soon
+            Used construction_data, currently supported values: 'iwu_heavy', 'iwu_light',
+            'tabula_de_standard', 'tabula_de_retrofit', 'tabula_de_adv_retrofit',
+            'tabula_dk_standard', 'tabula_dk_retrofit', 'tabula_dk_adv_retrofit'
+            and the KfW Efficiency house standards 'kfw_40', 'kfw_55', 'kfw_70', 'kfw_85, kfw_100'
+
         geometry_data : str
-            Main geometry_data of the obtained building, currently only
-            'single_family_dwelling' is supported for iwu and 'est1a', 'est1b',
-            'est2', 'est3', 'est4a', 'est4b', 'est5' 'est6', 'est7', 'est8a',
-            'est8b' for urbanrenet.
+            Main geometry_data of the obtained building, currently supported values:
+            'iwu_single_family_dwelling', 'urbanrenet_est1a', 'urbanrenet_est1b',
+            'urbanrenet_est2', 'urbanrenet_est3', 'urbanrenet_est4a', 'urbanrenet_est4b',
+            'urbanrenet_est5' 'urbanrenet_est6', 'urbanrenet_est7', 'urbanrenet_est8a',
+            'urbanrenet_est8b'
+            'tabula_de_single_family_house', 'tabula_de_terraced_house',
+            'tabula_de_multi_family_house', 'tabula_de_apartment_block',
+            'tabula_dk_single_family_house', 'tabula_dk_terraced_house',
+            'tabula_dk_multi_family_house', 'tabula_dk_apartment_block'
+
         name : str
             Individual name
         year_of_construction : int
@@ -494,15 +495,6 @@ class Project(object):
             0. no dormer
             1. dormer
 
-        construction_data : str
-            construction_data of used wall constructions default is "iwu_heavy")
-
-            - iwu_heavy: heavy construction
-            - iwu_light: light construction
-            - tabula_de
-            - tabula_dk
-            - kfw_40, kfw_55, kfw_70, kfw_85, kfw_100
-
         number_of_apartments : int
             number of apartments inside Building (default = 1). CAUTION only
             used for urbanrenet
@@ -523,7 +515,10 @@ class Project(object):
             "'tabula_de', see docs for more information"
         )
 
-        if (construction_data.get_prefix() in ["iwu", "tabula_de", "tabula_dk", "kfw"]
+        if ((construction_data.is_iwu() or
+             construction_data.is_tabula_de() or
+             construction_data.is_tabula_dk() or
+             construction_data.is_kfw())
                 and number_of_apartments is not None):
             warnings.warn(ass_error_apart)
 
@@ -568,7 +563,8 @@ class Project(object):
                                      datahandling.GeometryData.UrbanrenetEst4a,
                                      datahandling.GeometryData.UrbanrenetEst4b,
                                      datahandling.GeometryData.UrbanrenetEst5,
-                                     datahandling.GeometryData.UrbanrenetEst6, datahandling.GeometryData.UrbanrenetEst7,
+                                     datahandling.GeometryData.UrbanrenetEst6,
+                                     datahandling.GeometryData.UrbanrenetEst7,
                                      datahandling.GeometryData.UrbanrenetEst8a,
                                      datahandling.GeometryData.UrbanrenetEst8b]:
             urbanrenet_arg['number_of_apartments'] = number_of_apartments
@@ -576,6 +572,11 @@ class Project(object):
         else:
             type_bldg = datahandling.geometries[geometry_data](self, **common_arg)
         type_bldg.generate_archetype()
+        #type_bldg.calc_building_parameter(
+        #    number_of_elements=self._number_of_elements_calc,
+        #    merge_windows=self._merge_windows_calc,
+        #    used_library=self._used_library_calc,
+        #)
         return type_bldg
 
     def save_project(self, file_name=None, path=None):
@@ -754,7 +755,6 @@ class Project(object):
 
         self.buildings = []
 
-        #TODO #745 hier vielleicht noch Anpassungen notwendig
         if load_data is True:
             self.data = self.instantiate_data_class()
         elif not load_data:

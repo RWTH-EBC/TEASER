@@ -125,7 +125,7 @@ def save_teaser_json(path, project):
             zone_out["area"] = zone.area
             zone_out["volume"] = zone.volume
             zone_out["use_conditions"] = collections.OrderedDict()
-            zone_out["use_conditions"]["geometry_data"] = zone.use_conditions.geometry_data
+            zone_out["use_conditions"]["geometry_data"] = zone.use_conditions.usage
 
             zone_out["use_conditions"][
                 "typical_length"

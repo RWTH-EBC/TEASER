@@ -114,11 +114,11 @@ class SingleFamilyDwelling(Residential):
         1. dormer
 
     construction_data : str
-        Construction type of used wall constructions default is "heavy"
+        Construction type of used wall constructions default is "iwu_heavy"
 
-        - heavy: heavy construction
-        - light: light construction
-        - kfw_40, kfw_55, kfw_70, kfw_85, kfw_100: kfw standard numbers
+        - iwu_heavy: heavy construction
+        - iwu_light: light construction
+        - kfw_40, kfw_55, kfw_70, kfw_85, kfw_100: KfW efficiency building standards
 
     Notes
     -----
@@ -132,7 +132,7 @@ class SingleFamilyDwelling(Residential):
 
     zone_area_factors : dict
         This dictionary contains the name of the zone (str), the
-        zone area factor (float) and the zone geometry_data from BoundaryConditions json
+        zone area factor (float) and the zone usage from BoundaryConditions json
         (str). (Default see doc string above)
     outer_wall_names : dict
         This dictionary contains a random name for the outer walls,
@@ -209,7 +209,7 @@ class SingleFamilyDwelling(Residential):
 
         # Parameters are default values for current calculation following IWU
 
-        # [area factor, geometry_data type(has to be set)]
+        # [area factor, usage type(has to be set)]
         self.zone_area_factors = {"SingleDwelling": [1, "Living"]}
 
         self.outer_wall_names = {
@@ -601,13 +601,6 @@ class SingleFamilyDwelling(Residential):
     @property
     def construction_data(self):
         return self._construction_data
-
-    #@construction_data.setter
-    #def construction_data(self, value):
-    #    if not isinstance(value, datahandling.ConstructionData):
-    #        raise ValueError(f"Invalid construction_data: {value}. Must be a ConstructionData enum value.")
-    #    self._construction_data = value
-
     @construction_data.setter
     def construction_data(self, value):
         if value is None:
@@ -617,4 +610,5 @@ class SingleFamilyDwelling(Residential):
         elif isinstance(value, datahandling.ConstructionData):
             self._construction_data = value
         else:
-            raise ValueError("construction_data must be either a string or a ConstructionData enum value.")
+            raise ValueError(f"Invalid construction_data: {value}. "
+                             f"Must be either a string or a ConstructionData enum value.")

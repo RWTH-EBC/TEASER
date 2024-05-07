@@ -1,14 +1,4 @@
-# file fuer data handling functions (neue Datei damit mit dataclass noch eine funktionierende Datei existiert)
-# hier soll alles rein von splitting bis hin zu der Definition der Dateipfade der json Dateien
-# auch deprecation errors hier definieren?
-import os
-import teaser.logic.utilities as utils
 from enum import Enum
-import os
-import sys
-import json
-import collections
-from typing import Union
 from teaser.logic.archetypebuildings.bmvbs.office import Office
 from teaser.logic.archetypebuildings.bmvbs.custom.institute import Institute
 from teaser.logic.archetypebuildings.bmvbs.custom.institute4 import Institute4
@@ -108,7 +98,6 @@ class ConstructionData(Enum):
     def is_kfw(self):
         return self.get_prefix() == "kfw"
 
-#Dictionaries:
 #dictionary for each building class:
 geometries = {
     #non residential:
@@ -183,15 +172,3 @@ allowed_geometries = {
     ConstructionData.kfw_85: [GeometryData.IwuSingleFamilyDwelling, GeometryData.TabulaDeSingleFamilyHouse],
     ConstructionData.kfw_100: [GeometryData.IwuSingleFamilyDwelling, GeometryData.TabulaDeSingleFamilyHouse],
 }
-
-
-"""def aktuell(method, usage, construction_type):
-    pass
-"""
-
-
-"""def neu(geometry_data=None, construction_data=None, method=None, usage=None, construction_type=None):
-    if method is None or usage is None or construction_type is None:
-        warnings.warn("usage, method, and ct are now gd", DeprecationWarning)
-        geometry_data = method + "_" + usage
-        construction_data = method + "_" + construction_type"""

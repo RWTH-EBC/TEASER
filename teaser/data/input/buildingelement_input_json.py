@@ -5,8 +5,6 @@ from teaser.logic.buildingobjects.buildingphysics.material import Material
 import teaser.data.input.material_input_json as mat_input
 import logging
 
-logging.basicConfig(level=logging.INFO)
-
 def load_type_element(element, year, construction, data_class):
     """Load BuildingElement from json.
 
@@ -16,7 +14,10 @@ def load_type_element(element, year, construction, data_class):
     cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.26.07.2007` and
     :cite:`KurzverfahrenIWU`, which is combined with normative material data
     from :cite:`VereinDeutscherIngenieure.2012b`.
-    #TODO #745: Update documentation: source of information for TypeElements_KfW
+
+    Most of the elements for the KfW Efficiency House standards (TypeElements_KFW.json) were derived from the respective
+    required U-value and the component catalog of the U-value online calculator https://www.ubakus.de/bauteilkatalog/.
+    For the respective source of each element, the comment in the json file can be observed.
 
     Parameters
     ----------
@@ -27,7 +28,7 @@ def load_type_element(element, year, construction, data_class):
         Year of construction
 
     construction : str
-        Construction type, code list ('heavy', 'light', tabula, ...)
+        Construction type, code list ('iwu_heavy', 'iwu_light', 'tabula_de_standard', 'kfw_40', ...)
 
     data_class : DataClass()
         DataClass containing the bindings for TypeBuildingElement and

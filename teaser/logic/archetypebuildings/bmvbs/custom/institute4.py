@@ -101,7 +101,7 @@ class Institute4(Office):
 
     zone_area_factors : dict
         This dictionary contains the name of the zone (str), the
-        zone area factor (float) and the zone geometry_data from BoundaryConditions json
+        zone area factor (float) and the zone usage from BoundaryConditions json
         (str). (Default see doc string above)
     outer_wall_names : dict
         This dictionary contains a random name for the outer walls,

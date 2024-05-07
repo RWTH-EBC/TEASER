@@ -4,9 +4,11 @@ from teaser.project import Project
 import os
 import helptest
 import pytest
+from teaser.data.dataclass import DataClass
+from teaser.data.utilities import ConstructionData
 
 prj = Project(False)
-
+prj.data = DataClass(construction_data=ConstructionData.iwu_heavy)
 
 class Test_useconditions(object):
     """Unit Tests for TEASER."""
@@ -48,7 +50,7 @@ class Test_useconditions(object):
         Related to issue 553 at https://github.com/RWTH-EBC/TEASER/issues/553
         """
 
-        prj_test = Project(load_data=True)
+        prj_test = Project(load_data=False)
         prj_test.name = "TestAHUProfiles"
 
         prj_test.add_non_residential(

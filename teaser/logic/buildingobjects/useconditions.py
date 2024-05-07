@@ -24,15 +24,15 @@ class UseConditions(object):
 
     Attributes
     ----------
-    geometry_data: str
-        geometry_data type
-        AixLib geometry_data: String to distinguish geometry_datas of a zone
+    usage: str
+        usage type
+        AixLib usage: String to distinguish usages of a zone
     typical_length: float [m]
-        typical length of a room in a geometry_data zone. This value is taken from
-        SIA 2024. Archetype geometry_data: division of geometry_data zones in rooms
+        typical length of a room in a usage zone. This value is taken from
+        SIA 2024. Archetype usage: division of usage zones in rooms
     typical width: float [m]
-        typical width of a geometry_data zone. This value is taken from
-        SIA 2024. Archetype geometry_data: division of geometry_data zones in rooms
+        typical width of a usage zone. This value is taken from
+        SIA 2024. Archetype usage: division of usage zones in rooms
     with_heating: boolean
         Sets if the zone is heated by ideal heater or not.
     with_cooling: boolean
@@ -193,7 +193,7 @@ class UseConditions(object):
         self.internal_id = random.random()
 
         self.parent = parent
-        self.geometry_data = "Single office"
+        self.usage = "Single office"
 
         self.typical_length = 6.0
         self.typical_width = 6.0
@@ -372,15 +372,15 @@ class UseConditions(object):
             },
         )
 
-    def load_use_conditions(self, zone_geometry_data, data_class=None):
+    def load_use_conditions(self, zone_usage, data_class=None):
         """Load typical use conditions from JSON data base.
 
         Loads Use conditions specified in the JSON.
 
         Parameters
         ----------
-        zone_geometry_data : str
-            code list for zone_geometry_data according to 18599 or self defined
+        zone_usage : str
+            code list for zone_usage according to 18599 or self defined
 
         data_class : DataClass()
             DataClass containing the bindings for Use Conditions (typically
@@ -396,7 +396,7 @@ class UseConditions(object):
             data_class = data_class
 
         usecond_input.load_use_conditions(
-            use_cond=self, zone_geometry_data=zone_geometry_data, data_class=data_class
+            use_cond=self, zone_usage=zone_usage, data_class=data_class
         )
 
     def save_use_conditions(self, data_class=None):

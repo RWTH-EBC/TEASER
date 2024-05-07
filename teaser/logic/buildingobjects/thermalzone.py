@@ -57,7 +57,7 @@ class ThermalZone(object):
     ceilings: list
         List of Ceiling instances.
     use_conditions : UseConditions
-        Instance of UseConditions with all relevant information for the geometry_data
+        Instance of UseConditions with all relevant information for the usage
         of the thermal zone
     model_attr : Union[OneElement, TwoElement, ThreeElement, FourElement]
         Instance of OneElement(), TwoElement(), ThreeElement() or
@@ -389,25 +389,6 @@ class ThermalZone(object):
                         year=self.parent.year_of_construction,
                         construction=wall_count.construction_data.replace(
                             "retrofit", type_of_retrofit))
-
-        elif type_of_retrofit.startswith("kfw"):
-            for wall_count in self.outer_walls:
-                wall_count.retrofit_wall_kfw(
-                    self.parent.type_of_retrofit,
-                    material)
-            for roof_count in self.rooftops:
-                roof_count.retrofit_wall_kfw(
-                    self.parent.type_of_retrofit,
-                    material)
-            for ground_count in self.ground_floors:
-                ground_count.retrofit_wall_kfw(
-                    self.parent.type_of_retrofit,
-                    material)
-            for win_count in self.windows:
-                win_count.replace_window(
-                    self.parent.type_of_retrofit,
-                    window_type)
-
         else:
             for wall_count in self.outer_walls:
                 wall_count.retrofit_wall(

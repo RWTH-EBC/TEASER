@@ -71,8 +71,8 @@ class EST1a(Residential):
 
     construction_data : str
         Construction type of used wall constructions default is "heavy")
-            heavy: heavy construction
-            light: light construction
+            iwu_heavy: heavy construction
+            iwu_light: light construction
 
     Notes
     -----
@@ -85,7 +85,7 @@ class EST1a(Residential):
 
     zone_area_factors : dict
         This dictionary contains the name of the zone (str), the
-        zone area factor (float) and the zone geometry_data from BoundaryConditions json
+        zone area factor (float) and the zone usage from BoundaryConditions json
         (str). (Default see doc string above)
     outer_wall_names : dict
         This dictionary contains a random name for the outer walls,
@@ -150,7 +150,7 @@ class EST1a(Residential):
         # Parameters are default values for current calculation following
         # Hegger
 
-        # [area factor, geometry_data type(has to be set)]
+        # [area factor, usage type(has to be set)]
         self.zone_area_factors = {}
         for value in range(1, self._number_of_apartments + 1):
             zone_name = "Apartment " + str(value)
@@ -365,40 +365,21 @@ class EST1a(Residential):
             zone.set_inner_wall_area()
             zone.set_volume_zone()
 
-    #@property
-    #def construction_data(self):
-    #    return self._construction_data
-
-    #@construction_data.setter
-    #def construction_data(self, value):
-    #    if value is not None:
-    #        if value == "heavy" or value == "light":
-    #            self._construction_data = value
-    #        else:
-    #            raise ValueError("construction_data has to be light or heavy")
-    #    else:
-    #        self._construction_data = "heavy"
-
     @property
     def construction_data(self):
         return self._construction_data
 
-    #@construction_data.setter
-    #def construction_data(self, value):
-    #    if not isinstance(value, datahandling.ConstructionData):
-    #        raise ValueError(f"Invalid construction_data: {value}. Must be a ConstructionData enum value.")
-    #    self._construction_data = value
-
     @construction_data.setter
     def construction_data(self, value):
         if value is None:
-            self._construction_data = datahandling.ConstructionData.tabula_de_standard
+            self._construction_data = datahandling.ConstructionData.iwu_heavy
         elif isinstance(value, str):
             self._construction_data = datahandling.ConstructionData(value)
         elif isinstance(value, datahandling.ConstructionData):
             self._construction_data = value
         else:
-            raise ValueError("construction_data must be either a string or a ConstructionData enum value.")
+            raise ValueError(f"Invalid construction_data: {value}. "
+                             f"Must be either a string or a ConstructionData enum value.")
 
     @property
     def neighbour_buildings(self):

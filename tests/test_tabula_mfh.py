@@ -1210,7 +1210,7 @@ class Test_tabula_mfh(object):
     def test_tabula_uvalue_retrofit_adv_mfh_1859(self):
 
         prj.add_residential(
-            construction_data='tabula_de_retrofit',
+            construction_data='tabula_de_adv_retrofit',
             geometry_data='tabula_de_multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1858,

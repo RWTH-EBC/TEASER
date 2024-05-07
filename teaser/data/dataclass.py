@@ -25,7 +25,7 @@ class DataClass(object):
     ----------
     construction_data : ConstructionData
         The prefix of this parameter indicates which statistical data about building
-        elements should be used. Its type is the enum class ConstructionData (.
+        elements should be used. Its type is the enum class ConstructionData.
 
     Attributes
     ----------

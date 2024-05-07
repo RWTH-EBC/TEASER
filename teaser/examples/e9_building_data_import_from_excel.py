@@ -32,7 +32,7 @@ and half to the adjacent zone
 - Orientations are clockwise in degree, 0° is directed north
 
 -respective construction types have to be added to the TypeBuildingElements.json
--respective geometry_dataTypes for Zones have to be added to the UseConditions.json
+-respective usageTypes for Zones have to be added to the UseConditions.json
 -excel file format has to be as shown in the "ExcelBuildingData_Sample.xlsx"
 
 Information about the required excel format:
@@ -41,9 +41,9 @@ Information about the required excel format:
 header, keep value names consistent.
 -non yellowed columns may either not be used or be used for your zoning
 algorithm
--Under the cell ‚geometry_data type‘  you will see some cells that are blank but have
+-Under the cell ‚usage type‘  you will see some cells that are blank but have
 their row filled.
-It means the blank cell actually belongs to the geometry_data type above but in that
+It means the blank cell actually belongs to the usage type above but in that
 specific row we filled the characteristics
 of the window/wall of a different orientation of the same exact room. That
 means every row is either a new room or a
@@ -140,7 +140,7 @@ def zoning_example(data):
     This is an example on how the rooms of a building could be aggregated to
     zones.
 
-    In this example the geometry_dataType has to be empty in the case that the
+    In this example the usageType has to be empty in the case that the
     respective line does not represent another
     room but a different orientated wall or window belonging to a room that
     is already declared once in the excel file.
@@ -153,9 +153,9 @@ def zoning_example(data):
         The zoning should return the imported dataset with an additional
         column called "Zone" which inhibits the
         information to which zone the respective room shall be part of,
-        and also a column called "geometry_dataType_Teaser" which stores the
-        in geometry_dataType of each row.
-        geometry_dataType must be available in the UseConditions.json.
+        and also a column called "UsageType_Teaser" which stores the
+        in UsageType of each row.
+        UsageType must be available in the UseConditions.json.
     """
 
     # account all outer walls not adjacent to the ambient to the entity
@@ -189,16 +189,16 @@ def zoning_example(data):
     # check for lines in which the net area is zero, marking an second wall
     # or window
     # element for the respective room, and in which there is still stated a
-    # geometry_dataType which is wrong
+    # usageType which is wrong
     # and should be changed in the file
     for i, row in data.iterrows():
         if (row["NetArea[m²]"] == 0 or row["NetArea[m²]"] == np.nan) and not pd.isna(
-            row["geometry_dataType"]
+            row["usageType"]
         ):
             warnings.warn(
                 "In line %s the net area is zero, marking an second wall or "
                 "window element for the respective room, "
-                "and in which there is still stated a geometry_dataType which is "
+                "and in which there is still stated a usageType which is "
                 "wrong and should be changed in the file" % i
             )
 
@@ -208,9 +208,9 @@ def zoning_example(data):
         count = 0
         for line in cluster.iterrows():
             if pd.isna(line[1]["BelongsToIdentifier"]) and not pd.isna(
-                line[1]["geometry_dataType"]
+                line[1]["usageType"]
             ):
-                main_geometry_data = line[1]["geometry_dataType"]
+                main_geometry_data = line[1]["usageType"]
                 for i, row in data.iterrows():
                     if row["RoomCluster"] == line[1]["RoomCluster"]:
                         data.loc[i, "RoomClustergeometry_data"] = main_geometry_data
@@ -221,9 +221,9 @@ def zoning_example(data):
                 "check your excel file for mistakes! \n"
                 "Common mistakes: \n"
                 "-NetArea of a wall is not equal to 0 \n"
-                "-geometry_dataType of a wall is not empty \n"
+                "-usageType of a wall is not empty \n"
                 "Explanation: Rooms may have outer walls/windows on different orientations.\n"
-                "Every row with an empty slot in the column geometry_dataType, "
+                "Every row with an empty slot in the column usageType, "
                 "marks another direction of an outer wall and/or"
                 "window entity of the same room.\n"
                 "The connection of the same room is realised by an "
@@ -231,8 +231,8 @@ def zoning_example(data):
                 "BelongsToIdentifier. \n Cluster = %s" % cluster
             )
 
-    # name geometry_data types after geometry_data types available in the json
-    geometry_data_to_json_geometry_data = {
+    # name usage types after usage types available in the json
+    usage_to_json_usage = {
         "IsolationRoom": "Bed room",
         "PatientRoom": "Bed room",
         "Aisle": "Corridors in the general care area",
@@ -250,17 +250,17 @@ def zoning_example(data):
 
     # rename all zone names from the excel to the according zone name which
     # is in the UseConditions.json files
-    geometry_datas = get_list_of_present_entries(data["RoomClustergeometry_data"])
-    data["geometry_dataType_Teaser"] = ""
-    for geometry_data in geometry_datas:
-        data["geometry_dataType_Teaser"] = np.where(
-            data["RoomClustergeometry_data"] == geometry_data,
-            geometry_data_to_json_geometry_data[geometry_data],
-            data["geometry_dataType_Teaser"],
+    usages = get_list_of_present_entries(data["RoomClusterUsage"])
+    data["UsageType_Teaser"] = ""
+    for usage in usages:
+        data["UsageType_Teaser"] = np.where(
+            data["RoomClusterUsage"] == usage,
+            usage_to_json_usage[usage],
+            data["UsageType_Teaser"],
         )
 
     # name the column where the zones are defined "Zone"
-    data["Zone"] = data["geometry_dataType_Teaser"]
+    data["Zone"] = data["usageType_Teaser"]
 
     return data
 
@@ -347,15 +347,15 @@ def import_building_from_excel(
     data = import_data(path_to_excel, sheet_names)
 
     # informative print
-    geometry_data_types = get_list_of_present_entries(data["geometry_dataType"])
-    print("List of present geometry_data_types in the original Data set: \n%s" % geometry_data_types)
+    usage_types = get_list_of_present_entries(data["UsageType"])
+    print("List of present usage_types in the original Data set: \n%s" % usage_types)
 
     # define the zoning methodology/function
     data = zoning_example(data)
 
     # informative print
-    geometry_data_types = get_list_of_present_entries(data["Zone"])
-    print("List of zones after the zoning is applied: \n%s" % geometry_data_types)
+    usage_types = get_list_of_present_entries(data["Zone"])
+    print("List of zones after the zoning is applied: \n%s" % usage_types)
 
     # aggregate all rooms of each zone and for each set general parameter,
     # boundary conditions
@@ -373,11 +373,11 @@ def import_building_from_excel(
         )
 
         # Block: Boundary Conditions
-        # load geometry_dataOperationTime, Lighting, RoomClimate and InternalGains
+        # load usageOperationTime, Lighting, RoomClimate and InternalGains
         # from the "UseCondition.json"
         tz.use_conditions = UseConditions(parent=tz)
         tz.use_conditions.load_use_conditions(
-            zone["geometry_dataType_Teaser"].iloc[0], project.data
+            zone["usageType_Teaser"].iloc[0], project.data
         )
 
         # Block: Building Physics

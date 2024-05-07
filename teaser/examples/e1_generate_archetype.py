@@ -29,8 +29,8 @@ def example_generate_archetype():
 
     # To generate residential archetype buildings the function
     # Project.add_residential() is used. Seven parameters are compulsory,
-    # additional parameters can be set according to the used method. `method`
-    # and `geometry_data` are used to distinguish between different archetype
+    # additional parameters can be set according to the used method. `construction_data`
+    # and `geometry_data` are used to distinguish between different construction and archetype
     # methods. The name, year_of_construction, number and height of floors
     # and net_leased_area need to be set to provide enough information for
     # archetype generation. For specific information on the parameters please
@@ -81,11 +81,11 @@ def example_generate_archetype():
     # Besides `iwu` and `bmvbs` there is a third option for archetype
     # generation. We integrated the typology of TABULA Germany
     # (http://webtool.building-typology.eu/#bm) and other countries are about to
-    # follow. To use TABULA archetype simple choose `tabula_de` as the method
-    # and `single_family_house`, `multi_family_house`, `terraced_house` or
-    # `apartment_block` as the geometry_data. In addition you can specify the
-    # construction type of TABULA, chose between `tabula_standard` (default),
-    # `tabula_retrofit` or `tabula_adv_retrofit`. In this case we generate one
+    # follow. To use TABULA archetype simple choose the default `tabula_de_standard` as the construction_data
+    # and `tabula_de_single_family_house`, `tabula_de_multi_family_house`, `tabula_de_terraced_house` or
+    # `tabula_de_apartment_block` as the geometry_data. In addition you can specify the
+    # construction type of TABULA, chose between `tabula_de_standard` (default),
+    # `tabula_de_retrofit` or `tabula_de_adv_retrofit`. In this case we generate one
     # single and one multi family house with TABULA typology.
 
     # Please not: as we need to load the construction information which are
@@ -111,6 +111,8 @@ def example_generate_archetype():
         number_of_floors=4,
         height_of_floors=3.2,
         net_leased_area=600.0)
+
+    # This part is still commented out, otherwise example7 (retrofit) will not work
 
     #prj.add_residential(
     #    construction_data='kfw_40',

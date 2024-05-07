@@ -133,7 +133,7 @@ def load_teaser_json(path, project):
             tz.area = zone_in["area"]
             tz.volume = zone_in["volume"]
             tz.use_conditions = UseConditions(parent=tz)
-            tz.use_conditions.geometry_data = zone_in["use_conditions"]["geometry_data"]
+            tz.use_conditions.usage = zone_in["use_conditions"]["geometry_data"]
             tz.use_conditions.typical_length = zone_in["use_conditions"][
                 "typical_length"
             ]

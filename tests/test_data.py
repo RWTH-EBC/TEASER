@@ -3,7 +3,6 @@ Created July 2015
 
 @author: TEASER 4 Development Team
 """
-import teaser.data.utilities
 from teaser.logic import utilities
 from teaser.project import Project
 from teaser.data.utilities import ConstructionData
@@ -20,7 +19,6 @@ class Test_teaser(object):
     """Unit Tests for TEASER"""
 
     global prj
-
     def test_calc_vdi_room1(self):
         """Parameter Verification for rouvel room1"""
         import teaser.examples.verification.verification_VDI_6007_room1 as room1
@@ -2324,7 +2322,7 @@ class Test_teaser(object):
 
         from teaser.data.dataclass import DataClass
 
-        dat = DataClass(construction_data=teaser.data.utilities.ConstructionData.iwu_heavy)
+        dat = DataClass(construction_data=ConstructionData.iwu_heavy)
         dat.path_mat = path
         dat.load_mat_binding()
 
@@ -2341,6 +2339,7 @@ class Test_teaser(object):
     def test_warnings_prj(self):
         """Tests misc parts in project.py"""
 
+        prj.data = DataClass(construction_data=ConstructionData.iwu_heavy)
         from teaser.logic.buildingobjects.building import Building
         from teaser.logic.buildingobjects.thermalzone import ThermalZone
         from teaser.logic.buildingobjects.useconditions import UseConditions

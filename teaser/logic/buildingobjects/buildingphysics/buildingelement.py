@@ -8,10 +8,6 @@ import random
 import re
 import logging
 
-logging.basicConfig(level=logging.INFO)
-logging.basicConfig(level=logging.ERROR)
-
-
 
 class BuildingElement(object):
     """Building element class.

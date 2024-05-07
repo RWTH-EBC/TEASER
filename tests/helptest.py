@@ -64,13 +64,13 @@ def building_test2(prj):
     tz.use_conditions.winter_reduction_infiltration = [
         0.2, 273.15, 273.15 + 10]
 
-    out_wall_dict = [["Outer Wall 1", [bldg.year_of_construction, 'heavy',
+    out_wall_dict = [["Outer Wall 1", [bldg.year_of_construction, 'iwu_heavy',
                                        10.0, 90.0, 0.0]],
-                     ["Outer Wall 2", [bldg.year_of_construction, 'heavy',
+                     ["Outer Wall 2", [bldg.year_of_construction, 'iwu_heavy',
                                        14.0, 90.0, 90.0]],
-                     ["Outer Wall 3", [bldg.year_of_construction, 'heavy',
+                     ["Outer Wall 3", [bldg.year_of_construction, 'iwu_heavy',
                                        10.0, 90.0, 180.0]],
-                     ["Outer Wall 4", [bldg.year_of_construction, 'heavy',
+                     ["Outer Wall 4", [bldg.year_of_construction, 'iwu_heavy',
                                        14.0, 90.0, 270.0]]]
     #import collections
     #out_wall_dict = collections.OrderedDict(sorted(out_wall_dict.items(), key=lambda t: t[0]))
@@ -109,9 +109,9 @@ def building_test2(prj):
         out_wall_material.heat_capac = 0.84
         out_wall_material.transmittance = 0.0
 
-    in_wall_dict = [["Inner Wall 1", [bldg.year_of_construction, 'light', 10.0]],
-                    ["Inner Wall 2", [bldg.year_of_construction, 'heavy', 14.0]],
-                    ["Inner Wall 3", [bldg.year_of_construction, 'light', 10.0]]]
+    in_wall_dict = [["Inner Wall 1", [bldg.year_of_construction, 'iwu_light', 10.0]],
+                    ["Inner Wall 2", [bldg.year_of_construction, 'iwu_heavy', 14.0]],
+                    ["Inner Wall 3", [bldg.year_of_construction, 'iwu_light', 10.0]]]
 
     for value in in_wall_dict:
         '''instantiate OuterWall class'''
@@ -178,7 +178,7 @@ def building_test2(prj):
     roof = Rooftop(parent=tz)
     roof.name = "Roof"
     roof.year_of_construction = bldg.year_of_construction
-    roof.construction_data = "heavy"
+    roof.construction_data = "iwu_heavy"
     roof.area = 140.0
 
     roof_layer1 = Layer(roof)
@@ -202,7 +202,7 @@ def building_test2(prj):
     ground = GroundFloor(parent=tz)
     ground.name = "ground"
     ground.year_of_construction = bldg.year_of_construction
-    ground.construction_data = "heavy"
+    ground.construction_data = "iwu_heavy"
     ground.area = 140.0
 
     ground_layer1 = Layer(ground)

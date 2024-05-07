@@ -24,9 +24,9 @@ class Office(NonResidential):
 
     The office module contains a multi zone building according to BMVBS (see
     :cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.December2010`).
-    This German office building contains 6 geometry_data zones (zones with similar
+    This German office building contains 6 usage zones (zones with similar
     thermal behaviour). Each zone has 4 outer walls, 4 windows, a roof and a
-    ground floor. Depending on zone geometry_data (typical length and width), an
+    ground floor. Depending on zone usage (typical length and width), an
     interior
     wall area is assigned. Exterior wall
     surfaces are estimated based on
@@ -105,10 +105,10 @@ class Office(NonResidential):
         3. full glazing
 
     construction_data : str
-        Construction type of used wall constructions default is "heavy")
+        Construction type of used wall constructions default is "iwu_heavy")
 
-        - heavy: heavy construction
-        - light: light construction
+        - iwu_heavy: heavy construction
+        - iwu_light: light construction
 
     Notes
     -----
@@ -121,7 +121,7 @@ class Office(NonResidential):
 
     zone_area_factors : dict
         This dictionary contains the name of the zone (str), the
-        zone area factor (float) and the zone geometry_data from BoundaryConditions json
+        zone area factor (float) and the zone usage from BoundaryConditions json
         (str). (Default see doc string above)
     outer_wall_names : dict
         This dictionary contains a random name for the outer walls,
@@ -192,7 +192,7 @@ class Office(NonResidential):
         # Parameters are default values for current
         # calculation following Lichtmess
 
-        # [area factor, geometry_data type(has to be set)]
+        # [area factor, usage type(has to be set)]
         self.zone_area_factors = collections.OrderedDict()
         self.zone_area_factors["Office"] = [
             0.5,
@@ -307,7 +307,7 @@ class Office(NonResidential):
         self.thermal_zones = None
         type_bldg_area = self.net_leased_area
         self.net_leased_area = 0.0
-        # create zones with their corresponding area, name and geometry_data
+        # create zones with their corresponding area, name and usage
         for key, value in self.zone_area_factors.items():
             zone = ThermalZone(self)
             zone.area = type_bldg_area * value[0]
@@ -506,12 +506,6 @@ class Office(NonResidential):
     def construction_data(self):
         return self._construction_data
 
-    #@construction_data.setter
-    #def construction_data(self, value):
-    #    if not isinstance(value, datahandling.ConstructionData):
-    #        raise ValueError(f"Invalid construction_data: {value}. Must be a ConstructionData enum value.")
-    #    self._construction_data = value
-
     @construction_data.setter
     def construction_data(self, value):
         if value is None:
@@ -521,4 +515,5 @@ class Office(NonResidential):
         elif isinstance(value, datahandling.ConstructionData):
             self._construction_data = value
         else:
-            raise ValueError("construction_data must be either a string or a ConstructionData enum value.")
+            raise ValueError(f"Invalid construction_data: {value}. "
+                             f"Must be either a string or a ConstructionData enum value.")
