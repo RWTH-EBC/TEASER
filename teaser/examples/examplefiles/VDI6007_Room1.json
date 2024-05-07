@@ -39,7 +39,7 @@
                         "area": 17.5,
                         "volume": 61.25,
                         "use_conditions": {
-                            "geometry_data": "43",
+                            "usage": "43",
                             "typical_length": 123.0,
                             "typical_width": 123.0,
                             "with_heating": true,

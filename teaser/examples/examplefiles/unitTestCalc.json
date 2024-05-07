@@ -47,7 +47,7 @@
                         "area": 2000.0,
                         "volume": 8000.0,
                         "use_conditions": {
-                            "geometry_data": "Living",
+                            "usage": "Living",
                             "typical_length": 123.0,
                             "typical_width": 123.0,
                             "with_heating": true,

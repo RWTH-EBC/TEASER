@@ -69,8 +69,8 @@ def save_teaser_json(path, project):
             bldg
         ).__name__
         prj_out["project"]["buildings"][bldg.name]["classification"][
-            "method"
-        ] = __building_class[type(bldg).__name__]["method"]
+            "construction_data"
+        ] = __building_class[type(bldg).__name__]["construction_data"]
         prj_out["project"]["buildings"][bldg.name]["street_name"] = bldg.street_name
         prj_out["project"]["buildings"][bldg.name]["city"] = bldg.city
         prj_out["project"]["buildings"][bldg.name][

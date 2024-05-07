@@ -51,7 +51,7 @@
                         "typical_length": 6.0,
                         "typical_width": 6.0,
                         "use_conditions": {
-                            "geometry_data": "Group Office (between 2 and 6 employees)",
+                            "usage": "Group Office (between 2 and 6 employees)",
                             "typical_length": 6.0,
                             "typical_width": 6.0,
                             "with_heating": true,
@@ -786,7 +786,7 @@
                         "typical_length": 2.0,
                         "typical_width": 12.0,
                         "use_conditions": {
-                            "geometry_data": "Traffic area",
+                            "usage": "Traffic area",
                             "typical_length": 2.0,
                             "typical_width": 12.0,
                             "with_heating": true,
@@ -1521,7 +1521,7 @@
                         "typical_length": 6.0,
                         "typical_width": 6.0,
                         "use_conditions": {
-                            "geometry_data": "Stock, technical equipment, archives",
+                            "usage": "Stock, technical equipment, archives",
                             "typical_length": 6.0,
                             "typical_width": 6.0,
                             "with_heating": true,
@@ -2256,7 +2256,7 @@
                         "typical_length": 6.0,
                         "typical_width": 6.0,
                         "use_conditions": {
-                            "geometry_data": "Meeting, Conference, seminar",
+                            "usage": "Meeting, Conference, seminar",
                             "typical_length": 6.0,
                             "typical_width": 6.0,
                             "with_heating": true,
@@ -2991,7 +2991,7 @@
                         "typical_length": 3.0,
                         "typical_width": 6.0,
                         "use_conditions": {
-                            "geometry_data": "WC and sanitary rooms in non-residential buildings",
+                            "usage": "WC and sanitary rooms in non-residential buildings",
                             "typical_length": 3.0,
                             "typical_width": 6.0,
                             "with_heating": true,
@@ -3726,7 +3726,7 @@
                         "typical_length": 6.0,
                         "typical_width": 6.0,
                         "use_conditions": {
-                            "geometry_data": "Data center",
+                            "usage": "Data center",
                             "typical_length": 6.0,
                             "typical_width": 6.0,
                             "with_heating": true,

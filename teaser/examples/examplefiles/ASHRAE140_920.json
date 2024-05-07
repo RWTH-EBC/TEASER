@@ -44,7 +44,7 @@
                         "area": 48.0,
                         "volume": 129.60000000000002,
                         "use_conditions": {
-                            "geometry_data": "Single office",
+                            "usage": "Single office",
                             "typical_length": 123.0,
                             "typical_width": 123.0,
                             "with_heating": true,
