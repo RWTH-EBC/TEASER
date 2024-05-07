@@ -48,16 +48,16 @@ def save_teaser_json(path, project):
     prj_out["project"]["modelica_info"]["version"] = project.modelica_info.version
     prj_out["project"]["buildings"] = collections.OrderedDict()
     __building_class = {
-        "Building": {"method": "undefined", "geometry_data": "undefined"},
-        "Office": {"method": "bmvbs", "geometry_data": "office"},
-        "Institute": {"method": "bmvbs", "geometry_data": "institute"},
-        "Institute4": {"method": "bmvbs", "geometry_data": "institute4"},
-        "Institute8": {"method": "bmvbs", "geometry_data": "institute8"},
-        "SingleFamilyDwelling": {"method": "iwu", "geometry_data": "single_family_dwelling"},
-        "SingleFamilyHouse": {"method": "tabula_de", "geometry_data": "single_family_house"},
-        "TerracedHouse": {"method": "tabula_de", "geometry_data": "terraced_house"},
-        "MultiFamilyHouse": {"method": "tabula_de", "geometry_data": "multi_family_house"},
-        "ApartmentBlock": {"method": "tabula_de", "geometry_data": "apartment_block"},
+        "Building": {"construction_data": "undefined", "geometry_data": "undefined"},
+        "Office": {"construction_data": "bmvbs", "geometry_data": "bmvbs_office"},
+        "Institute": {"construction_data": "bmvbs", "geometry_data": "bmvbs_institute"},
+        "Institute4": {"construction_data": "bmvbs", "geometry_data": "bmvbs_institute4"},
+        "Institute8": {"construction_data": "bmvbs", "geometry_data": "bmvbs_institute8"},
+        "SingleFamilyDwelling": {"construction_data": "iwu", "geometry_data": "iwu_single_family_dwelling"},
+        "SingleFamilyHouse": {"construction_data": "tabula_de_standard", "geometry_data": "tabula_de_single_family_house"},
+        "TerracedHouse": {"construction_data": "tabula_de_standard", "geometry_data": "tabula_de_terraced_house"},
+        "MultiFamilyHouse": {"construction_data": "tabula_de_standard", "geometry_data": "tabula_de_multi_family_house"},
+        "ApartmentBlock": {"construction_data": "tabula_de_standard", "geometry_data": "tabula_de_apartment_block"},
     }
 
     for bldg in project.buildings:
@@ -125,7 +125,7 @@ def save_teaser_json(path, project):
             zone_out["area"] = zone.area
             zone_out["volume"] = zone.volume
             zone_out["use_conditions"] = collections.OrderedDict()
-            zone_out["use_conditions"]["geometry_data"] = zone.use_conditions.usage
+            zone_out["use_conditions"]["usage"] = zone.use_conditions.usage
 
             zone_out["use_conditions"][
                 "typical_length"

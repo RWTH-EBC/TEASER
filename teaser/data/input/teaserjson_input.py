@@ -47,16 +47,16 @@ def load_teaser_json(path, project):
 
     """
     __building_class = {
-        "Office": {"method": "bmvbs", "teaser_class": Office},
-        "Institute": {"method": "bmvbs", "teaser_class": Institute},
-        "Institute4": {"method": "bmvbs", "teaser_class": Institute4},
-        "Institute8": {"method": "bmvbs", "teaser_class": Institute8},
-        "Building": {"method": "undefined", "teaser_class": Building},
-        "SingleFamilyDwelling": {"method": "iwu", "teaser_class": SingleFamilyDwelling},
-        "SingleFamilyHouse": {"method": "tabula_de", "teaser_class": SingleFamilyHouse},
-        "TerracedHouse": {"method": "tabula_de", "teaser_class": TerracedHouse},
-        "MultiFamilyHouse": {"method": "tabula_de", "teaser_class": MultiFamilyHouse},
-        "ApartmentBlock": {"method": "tabula_de", "teaser_class": ApartmentBlock},
+        "Office": {"construction_data": "iwu_heavy", "teaser_class": Office},
+        "Institute": {"construction_data": "iwu_heavy", "teaser_class": Institute},
+        "Institute4": {"construction_data": "iwu_heavy", "teaser_class": Institute4},
+        "Institute8": {"construction_data": "iwu_heavy", "teaser_class": Institute8},
+        "Building": {"construction_data": "undefined", "teaser_class": Building},
+        "SingleFamilyDwelling": {"construction_data": "iwu_heavy", "teaser_class": SingleFamilyDwelling},
+        "SingleFamilyHouse": {"construction_data": "tabula_de_standard", "teaser_class": SingleFamilyHouse},
+        "TerracedHouse": {"construction_data": "tabula_de_standard", "teaser_class": TerracedHouse},
+        "MultiFamilyHouse": {"construction_data": "tabula_de_standard", "teaser_class": MultiFamilyHouse},
+        "ApartmentBlock": {"construction_data": "tabula_de_standard", "teaser_class": ApartmentBlock},
     }
     with open(path, "r+") as f:
         prj_in = json.load(f, object_pairs_hook=collections.OrderedDict)
@@ -133,7 +133,7 @@ def load_teaser_json(path, project):
             tz.area = zone_in["area"]
             tz.volume = zone_in["volume"]
             tz.use_conditions = UseConditions(parent=tz)
-            tz.use_conditions.usage = zone_in["use_conditions"]["geometry_data"]
+            tz.use_conditions.usage = zone_in["use_conditions"]["usage"]
             tz.use_conditions.typical_length = zone_in["use_conditions"][
                 "typical_length"
             ]

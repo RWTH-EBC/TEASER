@@ -32,7 +32,7 @@ and half to the adjacent zone
 - Orientations are clockwise in degree, 0° is directed north
 
 -respective construction types have to be added to the TypeBuildingElements.json
--respective usageTypes for Zones have to be added to the UseConditions.json
+-respective UsageTypes for Zones have to be added to the UseConditions.json
 -excel file format has to be as shown in the "ExcelBuildingData_Sample.xlsx"
 
 Information about the required excel format:
@@ -41,9 +41,9 @@ Information about the required excel format:
 header, keep value names consistent.
 -non yellowed columns may either not be used or be used for your zoning
 algorithm
--Under the cell ‚usage type‘  you will see some cells that are blank but have
+-Under the cell ‚Usage type‘  you will see some cells that are blank but have
 their row filled.
-It means the blank cell actually belongs to the usage type above but in that
+It means the blank cell actually belongs to the Usage type above but in that
 specific row we filled the characteristics
 of the window/wall of a different orientation of the same exact room. That
 means every row is either a new room or a
@@ -140,7 +140,7 @@ def zoning_example(data):
     This is an example on how the rooms of a building could be aggregated to
     zones.
 
-    In this example the usageType has to be empty in the case that the
+    In this example the UsageType has to be empty in the case that the
     respective line does not represent another
     room but a different orientated wall or window belonging to a room that
     is already declared once in the excel file.
@@ -189,41 +189,41 @@ def zoning_example(data):
     # check for lines in which the net area is zero, marking an second wall
     # or window
     # element for the respective room, and in which there is still stated a
-    # usageType which is wrong
+    # UsageType which is wrong
     # and should be changed in the file
     for i, row in data.iterrows():
         if (row["NetArea[m²]"] == 0 or row["NetArea[m²]"] == np.nan) and not pd.isna(
-            row["usageType"]
+            row["UsageType"]
         ):
             warnings.warn(
                 "In line %s the net area is zero, marking an second wall or "
                 "window element for the respective room, "
-                "and in which there is still stated a usageType which is "
+                "and in which there is still stated a UsageType which is "
                 "wrong and should be changed in the file" % i
             )
 
-    # make all rooms of the cluster having the geometry_data type of the main geometry_data type
+    # make all rooms of the cluster having the usage type of the main usage type
     _groups = data.groupby(["RoomCluster"])
     for index, cluster in _groups:
         count = 0
         for line in cluster.iterrows():
             if pd.isna(line[1]["BelongsToIdentifier"]) and not pd.isna(
-                line[1]["usageType"]
+                line[1]["UsageType"]
             ):
-                main_geometry_data = line[1]["usageType"]
+                main_usage = line[1]["UsageType"]
                 for i, row in data.iterrows():
                     if row["RoomCluster"] == line[1]["RoomCluster"]:
-                        data.loc[i, "RoomClustergeometry_data"] = main_geometry_data
+                        data.loc[i, "RoomClusterUsage"] = main_usage
                 count += 1
         if count != 1:
             warnings.warn(
-                "This cluster has more than one main geometry_data type or none, "
+                "This cluster has more than one main usage type or none, "
                 "check your excel file for mistakes! \n"
                 "Common mistakes: \n"
                 "-NetArea of a wall is not equal to 0 \n"
-                "-usageType of a wall is not empty \n"
+                "-UsageType of a wall is not empty \n"
                 "Explanation: Rooms may have outer walls/windows on different orientations.\n"
-                "Every row with an empty slot in the column usageType, "
+                "Every row with an empty slot in the column UsageType, "
                 "marks another direction of an outer wall and/or"
                 "window entity of the same room.\n"
                 "The connection of the same room is realised by an "
@@ -260,7 +260,7 @@ def zoning_example(data):
         )
 
     # name the column where the zones are defined "Zone"
-    data["Zone"] = data["usageType_Teaser"]
+    data["Zone"] = data["UsageType_Teaser"]
 
     return data
 
@@ -377,7 +377,7 @@ def import_building_from_excel(
         # from the "UseCondition.json"
         tz.use_conditions = UseConditions(parent=tz)
         tz.use_conditions.load_use_conditions(
-            zone["usageType_Teaser"].iloc[0], project.data
+            zone["UsageType_Teaser"].iloc[0], project.data
         )
 
         # Block: Building Physics
