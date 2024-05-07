@@ -12,6 +12,7 @@ import teaser.data.output.ibpsa_output as ibpsa_output
 from teaser.data.dataclass import DataClass
 from teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse import SingleFamilyHouse
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
+from teaser.data.output.reports import model_report
 
 
 class Project(object):
@@ -620,12 +621,15 @@ class Project(object):
         tjson_in.load_teaser_json(path, self)
 
     def export_aixlib(
-            self,
-            building_model=None,
-            zone_model=None,
-            corG=None,
-            internal_id=None,
-            path=None,
+        self,
+        building_model=None,
+        zone_model=None,
+        corG=None,
+        internal_id=None,
+        path=None,
+        use_postprocessing_calc=False,
+        report=False,
+        export_vars=None
     ):
         """Exports values to a record file for Modelica simulation
 
@@ -647,6 +651,14 @@ class Project(object):
         path : string
             if the Files should not be stored in default output path of TEASER,
             an alternative path can be specified as a full path
+        report: boolean
+            if True a model report in form of a html and csv file will be
+            created for the exported project.
+        export_vars: dict[str:list]
+            dict where key is a name for this variable selection and value is a
+            list of variables to export, wildcards can be used, multiple
+            variable selections are possible. This works only for Dymola. See
+            (https://www.claytex.com/blog/selection-of-variables-to-be-saved-in-the-result-file/)
         """
 
         if building_model is not None or zone_model is not None or corG is not None:
@@ -656,6 +668,8 @@ class Project(object):
                 "The keywords will be deleted within the next "
                 "version, consider rewriting your code."
             )
+        if export_vars:
+            export_vars = self.process_export_vars(export_vars)
 
         if path is None:
             path = os.path.join(utilities.get_default_path(), self.name)
@@ -666,14 +680,22 @@ class Project(object):
 
         if internal_id is None:
             aixlib_output.export_multizone(
-                buildings=self.buildings, prj=self, path=path
+                buildings=self.buildings, prj=self, path=path,
+                use_postprocessing_calc=use_postprocessing_calc,
+                export_vars=export_vars
             )
         else:
             for bldg in self.buildings:
                 if bldg.internal_id == internal_id:
                     aixlib_output.export_multizone(
-                        buildings=[bldg], prj=self, path=path
+                        buildings=[bldg], prj=self, path=path,
+                        use_postprocessing_calc=use_postprocessing_calc,
+                        export_vars=export_vars
                     )
+
+        if report:
+            report_path = os.path.join(path, "Resources", "ModelReport")
+            model_report.create_model_report(prj=self, path=report_path)
         return path
 
     def export_ibpsa(self, library="AixLib", internal_id=None, path=None):
@@ -765,6 +787,21 @@ class Project(object):
         self._number_of_elements_calc = 2
         self._merge_windows_calc = False
         self._used_library_calc = "AixLib"
+
+    @staticmethod
+    def process_export_vars(export_vars):
+        """Process export vars to fit __Dymola_selections syntax."""
+        export_vars_str = ''
+        for index, (var_sel_name, var_list) in enumerate(
+                export_vars.items(), start=1):
+            export_vars_str += 'MatchVariable(name="'
+            processed_list = '|'.join(map(str, export_vars[var_sel_name]))
+            export_vars_str += processed_list
+            export_vars_str += '",newName="'
+            export_vars_str += var_sel_name + '.%path%")'
+            if not index == len(export_vars):
+                export_vars_str += ','
+        return export_vars_str
 
     @property
     def weather_file_path(self):
