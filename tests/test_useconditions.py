@@ -217,7 +217,7 @@ class Test_useconditions(object):
         json_path = Path(project_dir, 'teaser', 'data', 'input', 'inputdata', 'UseConditions.json')
 
         # use_maintained_illuminance == True
-        with open(json_path, 'r') as json_file:
+        with open(fr"D:\dja-jho\Git\TEASER\teaser\data\input\inputdata\UseConditions.json", 'r') as json_file:
             data = json.load(json_file)
 
         data["Living"]["use_maintained_illuminance"] = True
