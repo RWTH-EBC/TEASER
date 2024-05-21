@@ -2380,6 +2380,7 @@ class Test_teaser(object):
         prj.export_ibpsa(internal_id=prj.buildings[-1].internal_id)
 
         prj.set_default(load_data="Test")
+        prj.data = DataClass(construction_data=ConstructionData.iwu_heavy)
 
     def test_export_aixlib_only_iw(self):
         """
