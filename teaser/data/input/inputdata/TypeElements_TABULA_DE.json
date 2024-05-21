@@ -25,7 +25,7 @@
             1860,
             1918
         ],
-        "construction_data": "tabula_de_de_standard_1_SFH",
+        "construction_data": "tabula_de_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 2.7,
         "outer_radiation": 5.0,
