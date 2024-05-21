@@ -57,10 +57,8 @@ def load_use_conditions(use_cond, zone_usage, data_class):
 
     if use_cond.use_maintained_illuminance:
         use_cond.lighting_power = use_cond.maintained_illuminance / use_cond.lighting_efficiency_lumen
-        print(f"Using illuminance and lighting efficiency to calculcate lighting power in zone {zone_usage}!")
     else:
         use_cond.lighting_power = conditions_bind[zone_usage]["lighting_power"]
-        print(f"Using direct input of lighting power in zone {zone_usage}!")
 
     use_cond.use_constant_infiltration = conditions_bind[zone_usage][
         "use_constant_infiltration"]

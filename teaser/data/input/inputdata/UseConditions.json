@@ -6,7 +6,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,14]},
+        "persons": {
+            "/": [
+                1,
+                14
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -179,7 +184,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,14]},
+        "persons": {
+            "/": [
+                1,
+                14
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -352,7 +362,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,10]},
+        "persons": {
+            "/": [
+                1,
+                10
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -525,7 +540,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,3]},
+        "persons": {
+            "/": [
+                1,
+                3
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -698,7 +718,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,12]},
+        "persons": {
+            "/": [
+                1,
+                12
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -871,7 +896,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,8]},
+        "persons": {
+            "/": [
+                1,
+                8
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -1044,7 +1074,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,8]},
+        "persons": {
+            "/": [
+                1,
+                8
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -1217,7 +1252,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,3]},
+        "persons": {
+            "/": [
+                1,
+                3
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -1390,7 +1430,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,2]},
+        "persons": {
+            "/": [
+                1,
+                2
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -1563,7 +1608,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,10]},
+        "persons": {
+            "/": [
+                1,
+                10
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -1736,7 +1786,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,15]},
+        "persons": {
+            "/": [
+                1,
+                15
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -1909,7 +1964,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,2]},
+        "persons": {
+            "/": [
+                1,
+                2
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -2082,7 +2142,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,2]},
+        "persons": {
+            "/": [
+                1,
+                2
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -2255,7 +2320,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,2]},
+        "persons": {
+            "/": [
+                1,
+                2
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 10.0,
@@ -2428,7 +2498,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,5]},
+        "persons": {
+            "/": [
+                1,
+                5
+            ]
+        },
         "activity_degree_persons": 2.0,
         "fixed_heat_flow_rate_persons": 90,
         "internal_gains_moisture_no_people": 0.5,
@@ -2602,7 +2677,6 @@
         "T_threshold_heating": 288.15,
         "T_threshold_cooling": 295.15,
         "with_cooling": false,
-        "T_threshold_cooling": 295.15,
         "persons": 0.0,
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
@@ -2775,7 +2849,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,3]},
+        "persons": {
+            "/": [
+                1,
+                3
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -2949,7 +3028,6 @@
         "T_threshold_heating": 288.15,
         "T_threshold_cooling": 295.15,
         "with_cooling": false,
-        "T_threshold_cooling": 295.15,
         "persons": 0.0,
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
@@ -3123,7 +3201,6 @@
         "T_threshold_heating": 288.15,
         "T_threshold_cooling": 295.15,
         "with_cooling": false,
-        "T_threshold_cooling": 295.15,
         "persons": 0.0,
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
@@ -3296,7 +3373,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,40]},
+        "persons": {
+            "/": [
+                1,
+                40
+            ]
+        },
         "activity_degree_persons": 2.0,
         "fixed_heat_flow_rate_persons": 90,
         "internal_gains_moisture_no_people": 0.0,
@@ -3642,7 +3724,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,15]},
+        "persons": {
+            "/": [
+                1,
+                15
+            ]
+        },
         "activity_degree_persons": 2.0,
         "fixed_heat_flow_rate_persons": 90,
         "internal_gains_moisture_no_people": 0.0,
@@ -3815,7 +3902,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,15]},
+        "persons": {
+            "/": [
+                1,
+                15
+            ]
+        },
         "activity_degree_persons": 1.6,
         "fixed_heat_flow_rate_persons": 80,
         "internal_gains_moisture_no_people": 0.0,
@@ -3988,7 +4080,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,15]},
+        "persons": {
+            "/": [
+                1,
+                15
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.0,
@@ -4161,7 +4258,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,3]},
+        "persons": {
+            "/": [
+                1,
+                3
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -4330,7 +4432,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,12]},
+        "persons": {
+            "/": [
+                1,
+                12
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -4503,7 +4610,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,5]},
+        "persons": {
+            "/": [
+                1,
+                5
+            ]
+        },
         "activity_degree_persons": 2.0,
         "fixed_heat_flow_rate_persons": 90,
         "internal_gains_moisture_no_people": 0.5,
@@ -4676,7 +4788,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,3]},
+        "persons": {
+            "/": [
+                1,
+                3
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -4849,7 +4966,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,3]},
+        "persons": {
+            "/": [
+                1,
+                3
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -5022,7 +5144,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,5]},
+        "persons": {
+            "/": [
+                1,
+                5
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -5195,7 +5322,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,5]},
+        "persons": {
+            "/": [
+                1,
+                5
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -5368,7 +5500,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,5]},
+        "persons": {
+            "/": [
+                1,
+                5
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -5541,7 +5678,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,20]},
+        "persons": {
+            "/": [
+                1,
+                20
+            ]
+        },
         "activity_degree_persons": 3.0,
         "fixed_heat_flow_rate_persons": 120,
         "internal_gains_moisture_no_people": 0.0,
@@ -5714,7 +5856,7 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons":0.0,
+        "persons": 0.0,
         "activity_degree_persons": 0.0,
         "fixed_heat_flow_rate_persons": 35,
         "internal_gains_moisture_no_people": 0.0,
@@ -5888,7 +6030,6 @@
         "T_threshold_heating": 288.15,
         "T_threshold_cooling": 295.15,
         "with_cooling": false,
-        "T_threshold_cooling": 295.15,
         "persons": 0.0,
         "activity_degree_persons": 0.0,
         "fixed_heat_flow_rate_persons": 35,
@@ -6061,7 +6202,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,10]},
+        "persons": {
+            "/": [
+                1,
+                10
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 10.0,
@@ -6234,7 +6380,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,10]},
+        "persons": {
+            "/": [
+                1,
+                10
+            ]
+        },
         "activity_degree_persons": 3.0,
         "fixed_heat_flow_rate_persons": 120,
         "internal_gains_moisture_no_people": 0.0,
@@ -6407,7 +6558,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,15]},
+        "persons": {
+            "/": [
+                1,
+                15
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.0,
@@ -6580,7 +6736,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,5]},
+        "persons": {
+            "/": [
+                1,
+                5
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -6753,7 +6914,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,3]},
+        "persons": {
+            "/": [
+                1,
+                3
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -6927,7 +7093,6 @@
         "T_threshold_heating": 288.15,
         "T_threshold_cooling": 295.15,
         "with_cooling": false,
-        "T_threshold_cooling": 295.15,
         "persons": 0.0,
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
@@ -7100,7 +7265,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,5]},
+        "persons": {
+            "/": [
+                1,
+                5
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -7273,7 +7443,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,40]},
+        "persons": {
+            "/": [
+                1,
+                40
+            ]
+        },
         "activity_degree_persons": 2.0,
         "fixed_heat_flow_rate_persons": 90,
         "internal_gains_moisture_no_people": 0.0,
@@ -7446,7 +7621,12 @@
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/":[1,50]},
+        "persons": {
+            "/": [
+                1,
+                50
+            ]
+        },
         "activity_degree_persons": 1.2,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,
@@ -7455,7 +7635,7 @@
         "machines": 2.0,
         "ratio_conv_rad_machines": 0.75,
         "use_maintained_illuminance": false,
-        "lighting_power": 7.0,
+        "lighting_power": 10,
         "maintained_illuminance": 500.0,
         "lighting_efficiency_lumen": 100,
         "lighting_efficiency": 0.3,
@@ -7613,13 +7793,18 @@
             0.0
         ]
     },
-	"Classroom": {
+    "Classroom": {
         "typical_length": 10.0,
         "typical_width": 7.0,
         "with_heating": true,
         "T_threshold_heating": 288.15,
         "with_cooling": false,
-        "persons": {"/": [1,3]},
+        "persons": {
+            "/": [
+                1,
+                3
+            ]
+        },
         "activity_degree_persons": 1.0,
         "fixed_heat_flow_rate_persons": 70,
         "internal_gains_moisture_no_people": 0.5,

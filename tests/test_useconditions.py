@@ -4,6 +4,8 @@ import os
 import pytest
 import helptest
 import pandas as pd
+import json
+from pathlib import Path
 
 from teaser.logic import utilities
 from teaser.project import Project
@@ -205,9 +207,82 @@ class Test_useconditions(object):
 
 
     def test_use_maintained_illuminance(self):
-        pass
+        #pass
         # TODO
         # Test in which bool use_maintained_illuminance is set to TRUE, FALSE and NONE.
         # If True: check if lighting_power == maintained_illuminance / lighting_efficiency_lumen
         # If False or NONE: check if lighting_power == lighting_power
+
+        project_dir = Path(__file__).parent.parent
+        json_path = Path(project_dir, 'teaser', 'data', 'input', 'inputdata', 'UseConditions.json')
+
+        # use_maintained_illuminance == True
+        with open(json_path, 'r') as json_file:
+            data = json.load(json_file)
+
+        data["Living"]["use_maintained_illuminance"] = True
+
+        with open(json_path, 'w') as json_file:
+            json.dump(data, json_file, indent=4)
+
+        prj_test_1 = Project(True)
+        prj_test_1.set_default()
+        helptest.building_test2(prj_test_1)
+        use_cond = prj_test_1.buildings[-1].thermal_zones[-1].use_conditions
+        use_cond.load_use_conditions("Living", data_class=prj_test_1.data)
+
+        assert (use_cond.lighting_power == use_cond.maintained_illuminance / use_cond.lighting_efficiency_lumen)
+
+
+        # use_maintained_illuminance == False
+        with open(json_path, 'r') as json_file:
+            data = json.load(json_file)
+
+        data["Living"]["use_maintained_illuminance"] = False
+        lighting_power_test = 10
+        data["Living"]["lighting_power"] = lighting_power_test
+
+        with open(json_path, 'w') as json_file:
+            json.dump(data, json_file, indent=4)
+
+        use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
+        use_cond.load_use_conditions("Living", data_class=prj.data)
+
+        assert (use_cond.lighting_power == lighting_power_test)
+
+
+        # use_maintained_illuminance == None
+        with open(json_path, 'r') as json_file:
+            data = json.load(json_file)
+
+        data["Living"]["use_maintained_illuminance"] = False
+        lighting_power_test = 10
+        data["Living"]["lighting_power"] = lighting_power_test
+
+        with open(json_path, 'w') as json_file:
+            json.dump(data, json_file, indent=4)
+
+        use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
+        use_cond.load_use_conditions("Living", data_class=prj.data)
+
+        assert (use_cond.lighting_power == lighting_power_test)
+
+
+    def test(self):
+        prj = Project(True)
+        prj.set_default()
+        helptest.building_test2(prj)
+        use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
+        use_cond.load_use_conditions("Living", data_class=prj.data)
+
+        use_cond.use_maintained_illuminance = True
+        test1 = use_cond.lighting_power
+        print(test1)
+
+        use_cond.use_maintained_illuminance = False
+        test1 = use_cond.lighting_power
+        print(test1)
+
+
+
 

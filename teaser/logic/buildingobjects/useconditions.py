@@ -252,8 +252,8 @@ class UseConditions(object):
         self.machines = 7.0
         self.ratio_conv_rad_machines = 0.75
 
-        self.use_maintained_illuminance = False    #Choose wether lighting power will be given by direct input or calculated by maintained illuminance and lighting_efficiency_lumen
-        self._lighting_power = 15.9
+        self._use_maintained_illuminance = False    #Choose wether lighting power will be given by direct input or calculated by maintained illuminance and lighting_efficiency_lumen
+        self.lighting_power = 10
         self.ratio_conv_rad_lighting = 0.4
         self.maintained_illuminance = 500
         self.lighting_efficiency_lumen = 100  # lighting efficiency in lm/W_el
@@ -793,3 +793,14 @@ class UseConditions(object):
 
             self._parent = None
 
+    @property
+    def use_maintained_illuminance(self):
+        return self._use_maintained_illuminance
+
+    @use_maintained_illuminance.setter
+    def use_maintained_illuminance(self, value):
+        if value:
+            self.lighting_power = self.maintained_illuminance / self.lighting_efficiency_lumen
+        else:
+            self.lighting_power = self.lighting_power
+        self._use_maintained_illuminance = value
