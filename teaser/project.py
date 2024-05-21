@@ -104,7 +104,7 @@ class Project(object):
         """
         return DataClass(construction_data=datahandling.ConstructionData.iwu_heavy)
 
-    def calc_all_buildings(self, raise_errors=True):
+    def calc_all_buildings(self, raise_errors=False):
         """Calculates values for all project buildings
 
         You need to set the following parameters in the Project class.
