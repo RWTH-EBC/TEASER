@@ -573,11 +573,12 @@ class Project(object):
         else:
             type_bldg = datahandling.geometries[geometry_data](self, **common_arg)
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter(
-            number_of_elements=self._number_of_elements_calc,
-            merge_windows=self._merge_windows_calc,
-            used_library=self._used_library_calc,
-        )
+        if not construction_data.is_tabula_de() and not construction_data.is_tabula_dk():
+            type_bldg.calc_building_parameter(
+                number_of_elements=self._number_of_elements_calc,
+                merge_windows=self._merge_windows_calc,
+                used_library=self._used_library_calc,
+            )
         return type_bldg
 
     def save_project(self, file_name=None, path=None):
