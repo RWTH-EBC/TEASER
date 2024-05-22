@@ -489,11 +489,13 @@ class ThermalZone(object):
         # check if another zone with same name exists
         tz_names = [tz._name for tz in self.parent.thermal_zones[:-1]]
         if name in tz_names:
-            for i in itertools.count(start=1):
-                name_add = name + "_" + str(i)
+            i = 1
+            while True:
+                name_add = f"{name}_{i}"
                 if name_add not in tz_names:
                     name = name_add
                     break
+                i += 1
         self._name = name
 
     @property
