@@ -84,7 +84,7 @@ class Project(object):
     merge_windows_calc : bool
         True for merging the windows into the outer walls, False for
         separate resistance for window, default is False (only supported for
-        IBPSA). AixLib models use an extra resistance for windows.
+        IBPSA)
     used_library_calc : str
         used library (AixLib and IBPSA are supported)
     dir_reference_results : str
@@ -129,7 +129,7 @@ class Project(object):
         """Initialization of DataClass
 
         Returns
-        ----------
+        -------
 
         DataClass : Instance of DataClass()
 
@@ -323,36 +323,47 @@ class Project(object):
             for central Air Handling units. Default is False.
         internal_gains_mode: int [1, 2, 3]
             mode for the internal gains calculation done in AixLib:
-                1: Temperature and activity degree dependent heat flux
-                   calculation for persons. The calculation is based on
-                   SIA 2024 (default)
-                2: Temperature and activity degree independent heat flux
-                   calculation for persons, the max. heatflowrate is prescribed
-                   by the parameter fixed_heat_flow_rate_persons.
-                3: Temperature and activity degree dependent calculation with
-                   consideration of moisture and co2. The moisture calculation
-                   is based on SIA 2024 (2015) and regards persons and
-                   non-persons, the co2 calculation is based on Engineering
-                   ToolBox (2004) and regards only persons.
+
+            1. Temperature and activity degree dependent heat flux calculation for persons. The
+            calculation is based on  SIA 2024 (default)
+
+            2. Temperature and activity degree independent heat flux calculation for persons, the max.
+            heatflowrate is prescribed by the parameter
+            fixed_heat_flow_rate_persons.
+
+            3. Temperature and activity degree dependent calculation with
+            consideration of moisture and co2. The moisture calculation is
+            based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
+            Engineering ToolBox (2004) and regards only persons.
+
         office_layout : int
             Structure of the floor plan of office buildings, default is 1,
             which is representative for one elongated floor.
-                1: elongated 1 floor
-                2: elongated 2 floors
-                3: compact (e.g. for a square base building)
+
+            1. elongated 1 floor
+
+            2. elongated 2 floors
+
+            3. compact (e.g. for a square base building)
+
         window_layout : int
             Structure of the window facade type, default is 1, which is
             representative for a punctuated facade.
-                1: punctuated facade (individual windows)
-                2: banner facade (continuous windows)
-                3: full glazing
+
+            1. punctuated facade (individual windows)
+
+            2. banner facade (continuous windows)
+
+            3. full glazing
         construction_type : str
             Construction type of used wall constructions default is "heavy")
-                heavy: heavy construction
-                light: light construction
+
+            - heavy: heavy construction
+
+            - light: light construction
 
         Returns
-        ----------
+        -------
         type_bldg : Instance of Office()
 
         """
@@ -515,61 +526,76 @@ class Project(object):
             for central Air Handling units. Default is False.
         internal_gains_mode: int [1, 2, 3]
             mode for the internal gains calculation done in AixLib:
-                1: Temperature and activity degree dependent heat flux
-                   calculation for persons. The calculation is based on
-                   SIA 2024 (default)
-                2: Temperature and activity degree independent heat flux
-                   calculation for persons, the max. heatflowrate is prescribed
-                   by the parameter fixed_heat_flow_rate_persons.
-                3: Temperature and activity degree dependent calculation with
-                   consideration of moisture and co2. The moisture calculation
-                   is based on SIA 2024 (2015) and regards persons and
-                   non-persons, the co2 calculation is based on Engineering
-                   ToolBox (2004) and regards only persons.
+
+            1. Temperature and activity degree dependent heat flux calculation for persons. The
+               calculation is based on  SIA 2024 (default)
+
+            2. Temperature and activity degree independent heat flux calculation for persons, the max.
+               heatflowrate is prescribed by the parameter
+               fixed_heat_flow_rate_persons.
+
+            3. Temperature and activity degree dependent calculation with
+               consideration of moisture and co2. The moisture calculation is
+               based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
+               Engineering ToolBox (2004) and regards only persons.
+
         residential_layout : int
             Structure of floor plan (default = 0) CAUTION only used for iwu
-                0: compact
-                1: elongated/complex
+
+            0. compact
+
+            1. elongated/complex
+
         neighbour_buildings : int
             Number of neighbour buildings. CAUTION: this will not change
             the orientation of the buildings wall, but just the overall
             exterior wall and window area(!) (default = 0)
-                0: no neighbour
-                1: one neighbour
-                2: two neighbours
+
+            0. no neighbour
+            1. one neighbour
+            2. two neighbours
+
         attic : int
             Design of the attic. CAUTION: this will not change the orientation
             or tilt of the roof instances, but just adapt the roof area(!) (
             default = 0) CAUTION only used for iwu
-                0: flat roof
-                1: non heated attic
-                2: partly heated attic
-                3: heated attic
+
+            0. flat roof
+            1. non heated attic
+            2. partly heated attic
+            3. heated attic
+
         cellar : int
             Design of the of cellar CAUTION: this will not change the
             orientation, tilt of GroundFloor instances, nor the number or area
             of ThermalZones, but will change GroundFloor area(!) (default = 0)
             CAUTION only used for iwu
-                0: no cellar
-                1: non heated cellar
-                2: partly heated cellar
-                3: heated cellar
+
+            0. no cellar
+            1. non heated cellar
+            2. partly heated cellar
+            3. heated cellar
+
         dormer : str
             Is a dormer attached to the roof? CAUTION: this will not
             change roof or window orientation or tilt, but just adapt the roof
             area(!) (default = 0) CAUTION only used for iwu
-                0: no dormer
-                1: dormer
+
+            0. no dormer
+            1. dormer
+
         construction_type : str
             Construction type of used wall constructions default is "heavy")
-                heavy: heavy construction
-                light: light construction
+
+            - heavy: heavy construction
+            - light: light construction
+
         number_of_apartments : int
             number of apartments inside Building (default = 1). CAUTION only
             used for urbanrenet
 
         Returns
-        ----------
+        -------
         type_bldg : Instance of Archetype Building
 
         """

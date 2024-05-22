@@ -2,7 +2,7 @@ Frequently Asked Questions
 =============================
 
 After installing TEASER with pip I get error messages from python packages NumPy or SciPy
---------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
 
 If you have installed TEASER using pip, it also tries to update all required
 packages. This update often fails for NumPy and SciPy. NumPy and SciPy packages

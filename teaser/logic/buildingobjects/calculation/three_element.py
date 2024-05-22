@@ -570,7 +570,7 @@ class ThreeElement(object):
             VDI 6007 frequency
 
         Returns
-        ----------
+        -------
         r1 : float [K/W]
             VDI 6007 resistance for all inner or outer walls
         c1 : float [K/W]

@@ -235,6 +235,5 @@ terracedhouse
 Literature
 -----------
 
-  .. bibliography:: Literatur.bib
+  .. bibliography::
   	:style: unsrt
-  	:encoding: latin

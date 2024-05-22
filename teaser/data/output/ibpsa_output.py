@@ -141,23 +141,22 @@ def export_ibpsa(
                 zone=zone,
                 path=zone_path)
 
-            out_file = open(utilities.get_full_path(os.path.join(
-                zone_path, bldg.name + '_' + zone.name + '.mo')), 'w')
+            with open(utilities.get_full_path(os.path.join(
+                zone_path, bldg.name + '_' + zone.name + '.mo')), 'w') as out_file:
 
-            if type(zone.model_attr).__name__ == "OneElement":
-                out_file.write(model_template_1.render_unicode(zone=zone,
-                                                               library=library))
-            elif type(zone.model_attr).__name__ == "TwoElement":
-                out_file.write(model_template_2.render_unicode(zone=zone,
-                                                               library=library))
-            elif type(zone.model_attr).__name__ == "ThreeElement":
-                out_file.write(model_template_3.render_unicode(zone=zone,
-                                                               library=library))
-            elif type(zone.model_attr).__name__ == "FourElement":
-                out_file.write(model_template_4.render_unicode(zone=zone,
-                                                               library=library))
+                if type(zone.model_attr).__name__ == "OneElement":
+                    out_file.write(model_template_1.render_unicode(zone=zone,
+                                                                   library=library))
+                elif type(zone.model_attr).__name__ == "TwoElement":
+                    out_file.write(model_template_2.render_unicode(zone=zone,
+                                                                   library=library))
+                elif type(zone.model_attr).__name__ == "ThreeElement":
+                    out_file.write(model_template_3.render_unicode(zone=zone,
+                                                                   library=library))
+                elif type(zone.model_attr).__name__ == "FourElement":
+                    out_file.write(model_template_4.render_unicode(zone=zone,
+                                                                   library=library))
 
-            out_file.close()
 
         ibpsa_output._help_package(
             path=zone_path,

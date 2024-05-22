@@ -40,11 +40,11 @@ class BuildingAHU(object):
         AixLib: 'HRS'
         (default = True)
     by_pass_dehumidification : float
-         By-pass factor of cooling coil during dehumidification. Necessary to
-         calculate the real outgoing enthalpy flow of heat exchanger in
-         dehumidification mode taking the surface enthalpy of the cooling
-         coil into account. In AixLib called "BPF_DeHu" (default = 0.2,
-         according to :cite:`Lindeburg.2013`)
+        By-pass factor of cooling coil during dehumidification. Necessary to
+        calculate the real outgoing enthalpy flow of heat exchanger in
+        dehumidification mode taking the surface enthalpy of the cooling
+        coil into account. In AixLib called "BPF_DeHu" (default = 0.2,
+        according to :cite:`Lindeburg.2013`)
     efficiency_recovery : float
         efficiency of HRS in the AHU modes if HRS is enabled.
         AixLib: "efficiencyHRS_enabled" (default = 0.65, according to
@@ -73,11 +73,12 @@ class BuildingAHU(object):
         timeline of relative humidity requirements for AHU simulation
     v_flow_profile : [int]
         timeline of desired relative v_flow of the AHU simulation (0..1)
-        Note: The AixLib parameter "WithProfile" determines whether the
-            (v_flow_profile combined with "min_ahu and max_ahu") or the
-            (persons_profile combined with "min_ahu and max_ahu")
-            is used for the AHU supply flow calculations.
-            Per default: (v_flow_profile combined with "min_ahu and max_ahu")
+
+        - **Note:** The AixLib parameter "WithProfile" determines whether the
+          (v_flow_profile combined with "min_ahu and max_ahu") or the
+          (persons_profile combined with "min_ahu and max_ahu")
+          is used for the AHU supply flow calculations.
+          Per default: (v_flow_profile combined with "min_ahu and max_ahu")
 
     """
 

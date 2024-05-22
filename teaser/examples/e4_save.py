@@ -1,9 +1,8 @@
-# Created January 2017
-# TEASER Development Team
+# # Example 4: Save information
+# This module contains an example how to save buildings from a TEASER
+# project to json and pickle in order to save information.
+# You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)
 
-"""This module contains an example how to save buildings from a TEASER
-project to json and pickle in order to save information.
-"""
 
 import teaser.examples.e1_generate_archetype as e1
 import teaser.logic.utilities as utilities
@@ -11,7 +10,7 @@ import os
 
 
 def example_save():
-    """"This function demonstrates different saving options of TEASER"""
+    """This function demonstrates different saving options of TEASER"""
 
     # In e1_generate_archetype we created a Project with three archetype
     # buildings to get this Project we rerun this example
@@ -21,7 +20,7 @@ def example_save():
     # First option is to use TEASERs own json format to save all relevant
     # data into a more or less human readable format. The corresponding
     # function is called Project().save_project() you can specify a file name
-    #  and a save path. If both are non (as in this case) it will use the
+    # and a save path. If both are non (as in this case) it will use the
     # projects name and default path in your home folder.
 
     prj.save_project(file_name=None, path=None)

@@ -71,6 +71,7 @@ def delete_type_element(element, data_class):
     the file given in Project.data. Alternatively you can specify a path to
     a file of TypeBuildingElements. If this file does not exist,
     a new file is created.
+
     Parameters
     ----------
     element : BuildingElement()
@@ -78,7 +79,7 @@ def delete_type_element(element, data_class):
     data_class : DataClass()
         DataClass containing the bindings for TypeBuildingElement and
         Material (typically this is the data class stored in prj.data,
-        but the user can individually change that.
+        but the user can individually change that.)
 
     """
     check_str = "{}_{}_{}".format(
