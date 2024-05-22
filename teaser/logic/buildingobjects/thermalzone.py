@@ -477,15 +477,12 @@ class ThermalZone(object):
 
     @name.setter
     def name(self, value):
+        regex = re.compile('[^a-zA-z0-9]')
         if isinstance(value, str):
-            regex = re.compile('[^a-zA-z0-9]')
-            self._name = regex.sub('', value)
+            name = regex.sub('', value)
         else:
             try:
-                value = str(value)
-                regex = re.compile('[^a-zA-z0-9]')
-                self._name = regex.sub('', value)
-
+                name = regex.sub('', str(value))
             except ValueError:
                 print("Can't convert name to string")
         
