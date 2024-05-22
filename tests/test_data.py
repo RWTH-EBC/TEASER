@@ -3157,22 +3157,22 @@ class Test_teaser(object):
         prj.calc_all_buildings()
         prj.export_aixlib()
 
-    # def test_tz_naming(self):
+    def test_tz_naming(self):
 
-    #     from teaser.logic.buildingobjects.building import Building
-    #     from teaser.logic.buildingobjects.thermalzone import ThermalZone
+        from teaser.logic.buildingobjects.building import Building
+        from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
-    #     # warnings for not calculated buildings
-    #     bld = Building(parent=prj)
-    #     tz1 = ThermalZone(parent=bld)
-    #     tz1.name = "living"
+        # warnings for not calculated buildings
+        bld = Building(parent=prj)
+        tz1 = ThermalZone(parent=bld)
+        tz1.name = "living"
 
-    #     tz2 = ThermalZone(parent=bld)
-    #     tz2.name = "kitchen"
+        tz2 = ThermalZone(parent=bld)
+        tz2.name = "kitchen"
 
-    #     tz3 = ThermalZone(parent=bld)
-    #     tz3.name = "living"
+        tz3 = ThermalZone(parent=bld)
+        tz3.name = "living"
 
-    #     assert tz1.name == "living"
-    #     assert tz2.name == "kitchen"
-    #     assert tz3.name == "living_1"
+        assert tz1.name == "living"
+        assert tz2.name == "kitchen"
+        assert tz3.name == "living_1"
