@@ -488,6 +488,16 @@ class ThermalZone(object):
 
             except ValueError:
                 print("Can't convert name to string")
+        
+        # check if another zone with same name exists
+        tz_names = [tz._name for tz in self.parent.thermal_zones[:-1]]
+        if name in tz_names:
+            for i in itertools.count(start=1):
+                name_add = name + "_" + str(i)
+                if name_add not in tz_names:
+                    name = name_add
+                    break
+        self._name = name
 
     @property
     def outer_walls(self):
