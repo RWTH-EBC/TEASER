@@ -12,7 +12,6 @@ import teaser.data.output.ibpsa_output as ibpsa_output
 from teaser.data.dataclass import DataClass
 from teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse import SingleFamilyHouse
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
-from teaser.data.output.reports import model_report
 
 
 class Project(object):
@@ -695,6 +694,14 @@ class Project(object):
                     )
 
         if report:
+            try:
+                from teaser.data.output.reports import model_report
+            except ImportError:
+                raise ImportError(
+                    "To create the model report, you have to install TEASER "
+                    "using the option report: pip install teaser[report] or install "
+                    "plotly manually."
+                )
             report_path = os.path.join(path, "Resources", "ModelReport")
             model_report.create_model_report(prj=self, path=report_path)
         return path
