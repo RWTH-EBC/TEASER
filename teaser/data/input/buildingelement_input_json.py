@@ -60,7 +60,8 @@ def load_type_element(element, year, construction, data_class):
                     return
             except Exception as e:
                 logging.warning(f"Warning loading TypeElement {element_in} from JSON Template: {e}")
-    logging.warning(f"No database entry found for {construction=}, {year=}, element={type(element).__name__}")
+    logging.warning(f"No database entry found for construction={construction}, "
+                    f"year{year}, element={type(element).__name__}")
 
 
 def _set_basic_data(element, element_in):
