@@ -136,6 +136,7 @@ equation
   connect(tableTSetCool.y, multizone.TSetCool) annotation (Line(points={{55.2,-58},
           {36.8,-58},{36.8,-9}}, color={0,0,127}));
 
+
 % if use_postprocessing_calc:
   connect(multizone.TAir, multizonePostProcessing.TAir) annotation (Line(points={{51,4.95},
           {70,4.95},{70,99},{81.8,99}},             color={0,0,127}));
@@ -160,7 +161,7 @@ equation
 
   connect(multizone.TRad, multizonePostProcessing.TRad) annotation (Line(points={{51,3},{
           70,3},{70,97.6},{80,97.6}},         color={0,0,127}));
-  connect(multizone.QIntGains_flow, multizonePostProcessing.QIntGains_flow)
+  connect(multizone.QIntGains_flow, multizonePostProcessing.QIntGains_flow) 
     annotation (Line(points={{51,-7},{70,-7},{70,80},{80,80}}, color={0,0,127}));
 % endif
 

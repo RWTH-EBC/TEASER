@@ -70,8 +70,22 @@ pass over the internal_id of that building and only this model will be
 exported. In this case we want to export all buildings to our home
 directory, thus we are passing over None for both parameters.
 
+We might want not have all data stored in our result file. By defining
+export_vars as following we can specify which results we want to store
+and define a collection name under which these results are stored. This
+feature only works with Dymola.
+
 ```python
+export_vars = {
+    "HeatingDemands": ["*multizone.PHeater*", "*multizone.PHeatAHU"],
+    "CoolingDemands": ["*multizone.PCooler*", "*multizone.PCoolAHU"],
+    "Temperatures": ["*multizone.TAir*", "*multizone.TRad*"]
+}
+
 path = prj.export_aixlib(
     internal_id=None,
-    path=None)
+    path=None,
+    report=True,
+    export_vars=export_vars
+)
 ```
