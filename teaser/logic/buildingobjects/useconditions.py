@@ -714,15 +714,15 @@ class UseConditions(object):
                 self.set_back_times[0] - 1, self.set_back_times[1] - 1
             heating_profile, cooling_profile = [], []
             for i, value in enumerate(self._heating_profile):
-                if 0 <= i < set_back_index_morning \
-                        or set_back_index_evening < i <= 24:
+                if 0 <= i <= set_back_index_morning \
+                        or set_back_index_evening <= i <= 24:
                     heating_profile.append(value + self.heating_set_back)
                 else:
                     heating_profile.append(value)
             self._heating_profile = heating_profile
             for i, value in enumerate(self._cooling_profile):
-                if 0 <= i < set_back_index_morning \
-                        or set_back_index_evening < i <= 24:
+                if 0 <= i <= set_back_index_morning \
+                        or set_back_index_evening <= i <= 24:
                     cooling_profile.append(value + self.cooling_set_back)
                 else:
                     cooling_profile.append(value)

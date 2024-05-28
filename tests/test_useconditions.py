@@ -4,8 +4,6 @@ import os
 import pytest
 import helptest
 import pandas as pd
-import json
-from pathlib import Path
 
 from teaser.logic import utilities
 from teaser.project import Project

@@ -62,7 +62,6 @@ def example_create_building():
 
     tz.use_conditions = UseConditions(parent=tz)
     tz.use_conditions.load_use_conditions("Living", prj.data)
-    tz.use_conditions.lighting_power = 2
 
     # Define two building elements reflecting a pitched roof (south = 180° and
     # north = 0°). Setting the the ThermalZone as a parent will automatically
