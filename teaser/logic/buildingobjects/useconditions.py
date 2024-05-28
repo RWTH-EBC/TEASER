@@ -9,7 +9,7 @@ from collections import OrderedDict
 import teaser.data.input.usecond_input as usecond_input
 import teaser.data.output.usecond_output as usecond_output
 from teaser.logic.utilities import division_from_json
-
+import warnings
 
 class UseConditions(object):
     """UseConditions class contains all zone specific boundary conditions.
@@ -118,21 +118,22 @@ class UseConditions(object):
         AixLib: Used for internal gains profile on top-level
         Annex: Used for internal gains
     use_maintained_illuminance: bool
-        decision variable to determine wether lighting power will be given by
-        direct input or by calculation using the variables maintained_illuminance
+        decision variable to determine wether lighting_power will be given by
+        fixed_lighting_power or by calculation using the variables maintained_illuminance
         and lighting_efficiency_lumen
     lighting_power: float [W/m2]
-        spec. electr. Power for lighting. This value is taken from SIA 2024.
+        spec. electr. Power for lighting. Determined by use_maintained_illuminance
         AixLib: Used in Zone record for internal gains
         Annex: Not used (see Annex examples)
+    fixed_lighting_power: float [W/m2]
+        spec. fixed electrical power for lighting. This value is taken from SIA 2024.
     ratio_conv_rad_lighting : float
         describes the ratio between convective and radiative heat transfer
         of the lighting [convective/radiative]. Default values are derived from
         :cite:`DiLaura.2011`.
         AixLib: Used in Zone record for internal gains, lighting
     maintained_illuminance : float [Lx]
-        maintained illuminance value (lx)
-        Currently not used
+        maintained illuminance value for lighting. This value is taken from SIA 2024
     lighting_efficiency_lumen: float [lm/W_el]
         lighting efficiency in lm/W_el, in german: Lichtausbeute
     lighting_efficiency: float [W_light/W_el]
@@ -253,7 +254,8 @@ class UseConditions(object):
         self.ratio_conv_rad_machines = 0.75
 
         self._use_maintained_illuminance = False    #Choose wether lighting power will be given by direct input or calculated by maintained illuminance and lighting_efficiency_lumen
-        self.lighting_power = 10
+        self._lighting_power = 10
+        self.fixed_lighting_power = 10
         self.ratio_conv_rad_lighting = 0.4
         self.maintained_illuminance = 500
         self.lighting_efficiency_lumen = 100  # lighting efficiency in lm/W_el
@@ -800,7 +802,24 @@ class UseConditions(object):
     @use_maintained_illuminance.setter
     def use_maintained_illuminance(self, value):
         if value:
-            self.lighting_power = self.maintained_illuminance / self.lighting_efficiency_lumen
+            self._lighting_power = self.maintained_illuminance / self.lighting_efficiency_lumen
         else:
-            self.lighting_power = self.lighting_power
+            self._lighting_power = self.fixed_lighting_power
         self._use_maintained_illuminance = value
+
+
+    @property
+    def lighting_power(self):
+        return self._lighting_power
+
+    @lighting_power.setter
+    def lighting_power(self, value):
+        if self.use_maintained_illuminance:
+            warnings.warn(
+                "\n"
+                "Parameter 'use_maintained_illuminance' is 'True'!\n"
+                "Parameter 'lighting_power' will be overwritten and 'use_maintained_illuminance' will be set to 'False'.",
+                UserWarning
+            )
+        self._use_maintained_illuminance = False
+        self._lighting_power = value
