@@ -816,10 +816,9 @@ class UseConditions(object):
     def lighting_power(self, value):
         if self.use_maintained_illuminance:
             warnings.warn(
-                "\n"
                 "Parameter 'use_maintained_illuminance' is 'True'!\n"
                 "Parameter 'lighting_power' will be overwritten and 'use_maintained_illuminance' will be set to 'False'.",
-                UserWarning
+                Warning
             )
         self._use_maintained_illuminance = False
         self._lighting_power = value
