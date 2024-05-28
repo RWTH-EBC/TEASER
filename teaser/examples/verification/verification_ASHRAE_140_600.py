@@ -65,7 +65,7 @@ def from_scratch(number_of_elements, save=False, path=utilities.get_default_path
         Project that contains the building with the test room
 
     """
-    prj = Project(load_data=False)
+    prj = Project()
     prj.name = "ASHRAE140Verification"
 
     bldg = Building(parent=prj)

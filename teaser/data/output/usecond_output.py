@@ -29,7 +29,7 @@ def save_use_conditions(use_cond, data_class):
     if use_cond.usage in data_class.conditions_bind.keys():
         add_to_json = False
         warnings.warn(
-            "usage already exist in this JSON, consider "
+            "Usage already exist in this JSON, consider "
             + "revising your inputs. The UseConditions is  "
             + "NOT saved into JSON"
         )

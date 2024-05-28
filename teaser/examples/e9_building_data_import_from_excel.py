@@ -373,7 +373,7 @@ def import_building_from_excel(
         )
 
         # Block: Boundary Conditions
-        # load usageOperationTime, Lighting, RoomClimate and InternalGains
+        # load UsageOperationTime, Lighting, RoomClimate and InternalGains
         # from the "UseCondition.json"
         tz.use_conditions = UseConditions(parent=tz)
         tz.use_conditions.load_use_conditions(
@@ -613,7 +613,7 @@ def import_building_from_excel(
 if __name__ == "__main__":
     result_path = os.path.dirname(__file__)
 
-    prj = Project(load_data=True)
+    prj = Project()
     prj.name = "BuildingGeneratedviaExcelImport"
     prj.data.load_uc_binding()
     prj.weather_file_path = os.path.join(

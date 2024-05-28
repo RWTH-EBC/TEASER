@@ -212,7 +212,7 @@
                             "BuildinElement356347": {
                                 "year_of_construction": 1960,
                                 "year_of_retrofit": null,
-                                "construction_data": "heavy",
+                                "construction_data": "iwu_heavy",
                                 "area": 3.5,
                                 "tilt": 90.0,
                                 "orientation": 0.0,
@@ -403,7 +403,7 @@
                             "BuildinElement456238": {
                                 "year_of_construction": 1960,
                                 "year_of_retrofit": null,
-                                "construction_data": "heavy",
+                                "construction_data": "iwu_heavy",
                                 "area": 17.5,
                                 "tilt": null,
                                 "orientation": null,

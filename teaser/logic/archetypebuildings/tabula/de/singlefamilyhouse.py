@@ -412,26 +412,20 @@ class SingleFamilyHouse(Residential):
         if self.facade_estimation_factors[self.building_age_group]["win1"] != 0:
             for key, value in self.window_names_1.items():
                 for zone in self.thermal_zones:
-                    if self.construction_data.is_kfw():
-                        window = Window(zone)
-                        window.load_type_element(
-                            self.year_of_construction,
-                            "Waermeschutzverglasung, " "dreifach",
-                            data_class=self.parent.data,
-                        )
-                        window.name = key
-                        window.tilt = value[0]
-                        window.orientation = value[1]
-                    else:
-                        window = Window(zone)
-                        window.load_type_element(
-                            self.year_of_construction,
-                            construction=self._construction_data_1,
-                            data_class=self.parent.data,
-                        )
-                        window.name = key
-                        window.tilt = value[0]
-                        window.orientation = value[1]
+                    window = Window(zone)
+                    construction = (
+                        "Waermeschutzverglasung, dreifach"
+                        if self.construction_data.is_kfw()
+                        else self._construction_data_1
+                    )
+                    window.load_type_element(
+                        self.year_of_construction,
+                        construction=construction,
+                        data_class=self.parent.data,
+                    )
+                    window.name = key
+                    window.tilt = value[0]
+                    window.orientation = value[1]
                     window.area = (
                         self.facade_estimation_factors[self.building_age_group]["win1"]
                         * zone.area
@@ -440,26 +434,20 @@ class SingleFamilyHouse(Residential):
         if self.facade_estimation_factors[self.building_age_group]["win2"] != 0:
             for key, value in self.window_names_2.items():
                 for zone in self.thermal_zones:
-                    if self.construction_data.is_kfw():
-                        window = Window(zone)
-                        window.load_type_element(
-                            self.year_of_construction,
-                            "Waermeschutzverglasung, " "dreifach",
-                            data_class=self.parent.data,
-                        )
-                        window.name = key
-                        window.tilt = value[0]
-                        window.orientation = value[1]
-                    else:
-                        window = Window(zone)
-                        window.load_type_element(
-                            self.year_of_construction,
-                            construction=self._construction_data_2,
-                            data_class=self.parent.data,
-                        )
-                        window.name = key
-                        window.tilt = value[0]
-                        window.orientation = value[1]
+                    window = Window(zone)
+                    construction = (
+                        "Waermeschutzverglasung, dreifach"
+                        if self.construction_data.is_kfw()
+                        else self._construction_data_2
+                    )
+                    window.load_type_element(
+                        self.year_of_construction,
+                        construction=construction,
+                        data_class=self.parent.data,
+                    )
+                    window.name = key
+                    window.tilt = value[0]
+                    window.orientation = value[1]
                     window.area = (
                         self.facade_estimation_factors[self.building_age_group]["win2"]
                         * zone.area

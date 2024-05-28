@@ -3054,7 +3054,7 @@ class Test_teaser(object):
         Related to issue 553 at https://github.com/RWTH-EBC/TEASER/issues/553
         """
 
-        prj_test = Project(load_data=False)
+        prj_test = Project()
         prj_test.name = "TestAHUProfiles"
 
         prj_test.add_non_residential(

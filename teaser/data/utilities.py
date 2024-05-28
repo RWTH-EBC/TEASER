@@ -1,3 +1,7 @@
+"""This module provides the definitions and mappings for various building archetypes and construction standards
+used in the TEASER framework. The module includes enumerations for different geometry types of buildings and
+construction data types, as well as dictionaries that map these enumerations to their corresponding building classes.
+Additionally, it defines which construction data types are allowed for each building geometry type."""
 from enum import Enum
 from teaser.logic.archetypebuildings.bmvbs.office import Office
 from teaser.logic.archetypebuildings.bmvbs.custom.institute import Institute
@@ -35,6 +39,10 @@ from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import (
 
 
 class GeometryData(Enum):
+    """
+    The GeometryData enumeration replaces the former parameter "usage" and
+    represents different archetypes of residential and non-residential buildings.
+    """
     IwuSingleFamilyDwelling = "iwu_single_family_dwelling"
 
     TabulaDeSingleFamilyHouse = "tabula_de_single_family_house"
@@ -64,6 +72,11 @@ class GeometryData(Enum):
     UrbanrenetEst8b = "urbanrenet_est8b"
 
 class ConstructionData(Enum):
+    """
+    The ConstructionData enumeration combines the former parameters “method” and “construction_type”.
+    The prefix of each value is used to select the appropriate json file as input data.
+    The complete value is used to search for the appropriate element within the json file.
+    """
     iwu_heavy = "iwu_heavy"
     iwu_light = "iwu_light"
     tabula_de_standard = "tabula_de_standard"
@@ -98,7 +111,7 @@ class ConstructionData(Enum):
     def is_kfw(self):
         return self.get_prefix() == "kfw"
 
-#dictionary for each building class:
+# Dictionary that maps GeometryData enumeration values to their corresponding building classes.
 geometries = {
     #non residential:
     #BMVBS
@@ -133,7 +146,7 @@ geometries = {
     GeometryData.UrbanrenetEst8b: EST8b,
 }
 
-#allow certain geometries for the construction_data in each case
+# Dictionary that defines which building geometries are allowed for each construction data type.
 allowed_geometries = {
     ConstructionData.iwu_heavy: [GeometryData.IwuSingleFamilyDwelling, GeometryData.BmvbsOffice,
                                  GeometryData.BmvbsInstitute, GeometryData.BmvbsInstitute4,

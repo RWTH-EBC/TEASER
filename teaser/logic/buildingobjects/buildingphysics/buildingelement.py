@@ -6,7 +6,6 @@ import teaser.data.input.buildingelement_input_json as buildingelement_input
 import numpy as np
 import random
 import re
-import logging
 
 
 class BuildingElement(object):
@@ -158,41 +157,37 @@ class BuildingElement(object):
         Calculates the U*A value and resistances for radiative and
         convective heat transfer of a building element.
         """
-        try:
-            self.ua_value = 0.0
-            self.r_conduc = 0.0
-            self.r_inner_conv = 0.0
-            self.r_inner_rad = 0.0
-            self.r_inner_comb = 0.0
-            self.r_outer_conv = 0.0
-            self.r_outer_rad = 0.0
-            self.r_outer_comb = 0.0
-            r_conduc = 0.0
-            for count_layer in self.layer:
-                r_conduc += (
-                    count_layer.thickness / count_layer.material.thermal_conduc) \
 
-            self.r_conduc = r_conduc * (1 / self.area)
-            self.r_inner_conv = (1 / self.inner_convection) * (1 / self.area)
-            self.r_inner_rad = (1 / self.inner_radiation) * (1 / self.area)
-            self.r_inner_comb = 1 / (1 / self.r_inner_conv + 1 / self.r_inner_rad)
+        self.ua_value = 0.0
+        self.r_conduc = 0.0
+        self.r_inner_conv = 0.0
+        self.r_inner_rad = 0.0
+        self.r_inner_comb = 0.0
+        self.r_outer_conv = 0.0
+        self.r_outer_rad = 0.0
+        self.r_outer_comb = 0.0
+        r_conduc = 0.0
+        for count_layer in self.layer:
+            r_conduc += (
+                count_layer.thickness / count_layer.material.thermal_conduc) \
 
-            if self.outer_convection is not None \
-                    and self.outer_radiation is not None:
+        self.r_conduc = r_conduc * (1 / self.area)
+        self.r_inner_conv = (1 / self.inner_convection) * (1 / self.area)
+        self.r_inner_rad = (1 / self.inner_radiation) * (1 / self.area)
+        self.r_inner_comb = 1 / (1 / self.r_inner_conv + 1 / self.r_inner_rad)
 
-                self.r_outer_conv = (1 / self.outer_convection) * (1 / self.area)
-                self.r_outer_rad = (1 / self.outer_radiation) * (1 / self.area)
-                self.r_outer_comb = 1 / \
-                    (1 / self.r_outer_conv + 1 / self.r_outer_rad)
+        if self.outer_convection is not None \
+                and self.outer_radiation is not None:
 
-            self.ua_value = (1 / (
-                self.r_inner_comb + self.r_conduc + self.r_outer_comb))
-            self.u_value = self.ua_value / self.area
+            self.r_outer_conv = (1 / self.outer_convection) * (1 / self.area)
+            self.r_outer_rad = (1 / self.outer_radiation) * (1 / self.area)
+            self.r_outer_comb = 1 / \
+                (1 / self.r_outer_conv + 1 / self.r_outer_rad)
 
-        except Exception as e:
-            logging.error(f"Error calculating UA value for BuildingElement with internal_id: {self.internal_id}."
-                          f"Encountered TypeError: {e}")
-            logging.info(f"Details for BuildingElement with internal_id {self.internal_id}: {self.__dict__}")
+        self.ua_value = (1 / (
+            self.r_inner_comb + self.r_conduc + self.r_outer_comb))
+        self.u_value = self.ua_value / self.area
+
 
     def gather_element_properties(self):
         """Helper function for matrix calculation.

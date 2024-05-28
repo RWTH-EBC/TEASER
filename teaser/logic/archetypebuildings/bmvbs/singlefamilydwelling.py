@@ -437,26 +437,20 @@ class SingleFamilyDwelling(Residential):
             code - will be fixed sometime
             """
             for zone in self.thermal_zones:
-                if self.construction_data.is_kfw():
-                    window = Window(zone)
-                    window.load_type_element(
-                        self.year_of_construction,
-                        "Waermeschutzverglasung, " "dreifach",
-                        data_class=self.parent.data,
-                    )
-                    window.name = key
-                    window.tilt = value[0]
-                    window.orientation = value[1]
-                else:
-                    window = Window(zone)
-                    window.load_type_element(
-                        self.year_of_construction,
-                        "Kunststofffenster, " "Isolierverglasung",
-                        data_class=self.parent.data,
-                    )
-                    window.name = key
-                    window.tilt = value[0]
-                    window.orientation = value[1]
+                window = Window(zone)
+                construction = (
+                    "Waermeschutzverglasung, dreifach"
+                    if self.construction_data.is_kfw()
+                    else "Kunststofffenster, " "Isolierverglasung"
+                )
+                window.load_type_element(
+                    self.year_of_construction,
+                    construction=construction,
+                    data_class=self.parent.data,
+                )
+                window.name = key
+                window.tilt = value[0]
+                window.orientation = value[1]
 
         for key, value in self.roof_names.items():
 

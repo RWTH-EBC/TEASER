@@ -147,11 +147,11 @@ class Project(object):
                     self.buildings.remove(bldg)
 
     def retrofit_all_buildings(
-            self,
-            year_of_retrofit=None,
-            type_of_retrofit=None,
-            window_type=None,
-            material=None,
+        self,
+        year_of_retrofit=None,
+        type_of_retrofit=None,
+        window_type=None,
+        material=None,
     ):
         """Retrofits all buildings in the project.
 

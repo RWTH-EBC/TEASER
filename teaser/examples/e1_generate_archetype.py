@@ -20,7 +20,7 @@ def example_generate_archetype():
     # used data base). Be careful: Dymola does not like whitespaces in names and
     # filenames, thus we will delete them anyway in TEASER.
 
-    prj = Project(load_data=False)
+    prj = Project()
     prj.name = "ArchetypeExample"
 
     # There are two different types of archetype groups: residential and
@@ -111,18 +111,6 @@ def example_generate_archetype():
         number_of_floors=4,
         height_of_floors=3.2,
         net_leased_area=600.0)
-
-    # This part is still commented out, otherwise example7 (retrofit) will not work
-
-    #prj.add_residential(
-    #    construction_data='kfw_40',
-    #    geometry_data='iwu_single_family_dwelling',
-    #    name="ResidentialBuildingKfw",
-    #    year_of_construction=2024,
-    #    number_of_floors=2,
-    #    height_of_floors=3.2,
-    #    net_leased_area=200.0
-    #)
 
     return prj
 

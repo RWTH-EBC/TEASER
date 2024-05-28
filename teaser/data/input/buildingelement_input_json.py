@@ -40,26 +40,23 @@ def load_type_element(element, year, construction, data_class):
 
     for key, element_in in element_binding.items():
         if key != "version":
-            try:
-                if (
-                    element_in["building_age_group"][0]
-                    <= year
-                    <= element_in["building_age_group"][1]
-                    and element_in["construction_data"] == construction
-                    and key.startswith(type(element).__name__)
-                ):
-                    _set_basic_data(element=element, element_in=element_in)
-                    for id, layer_in in element_in["layer"].items():
-                        layer = Layer(element)
-                        layer.id = id
-                        layer.thickness = layer_in["thickness"]
-                        material = Material(layer)
-                        mat_input.load_material_id(
-                            material, layer_in["material"]["material_id"], data_class
-                        )
-                    return
-            except Exception as e:
-                logging.warning(f"Warning loading TypeElement {element_in} from JSON Template: {e}")
+            if (
+                element_in["building_age_group"][0]
+                <= year
+                <= element_in["building_age_group"][1]
+                and element_in["construction_data"] == construction
+                and key.startswith(type(element).__name__)
+            ):
+                _set_basic_data(element=element, element_in=element_in)
+                for id, layer_in in element_in["layer"].items():
+                    layer = Layer(element)
+                    layer.id = id
+                    layer.thickness = layer_in["thickness"]
+                    material = Material(layer)
+                    mat_input.load_material_id(
+                        material, layer_in["material"]["material_id"], data_class
+                    )
+                return
     logging.warning(f"No database entry found for construction={construction}, "
                     f"year{year}, element={type(element).__name__}")
 
