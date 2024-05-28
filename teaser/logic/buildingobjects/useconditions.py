@@ -122,7 +122,9 @@ class UseConditions(object):
         fixed_lighting_power or by calculation using the variables maintained_illuminance
         and lighting_efficiency_lumen
     lighting_power: float [W/m2]
-        spec. electr. Power for lighting. Determined by use_maintained_illuminance
+        spec. electr. Power for lighting
+        Determined by use_maintained_illuminance
+        Not needed in input json file
         AixLib: Used in Zone record for internal gains
         Annex: Not used (see Annex examples)
     fixed_lighting_power: float [W/m2]

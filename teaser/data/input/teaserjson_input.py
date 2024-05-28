@@ -167,7 +167,7 @@ def load_teaser_json(path, project):
                 "ratio_conv_rad_machines"
             ]
             tz.use_conditions.lighting_power = zone_in["use_conditions"][
-                "lighting_power"
+                "fixed_lighting_power"
             ]
             tz.use_conditions.fixed_lighting_power = zone_in["use_conditions"][
                 "fixed_lighting_power"
