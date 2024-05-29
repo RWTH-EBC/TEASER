@@ -21,7 +21,7 @@ Project (e.g. for Material properties and typical wall constructions.
 This can take a few seconds, depending on the size of the used data base.
 
 ```python
-prj = Project(load_data=False)
+prj = Project()
 prj.name = "BuildingExample"
 prj.data = DataClass(construction_data=ConstructionData.iwu_heavy)
 ```
