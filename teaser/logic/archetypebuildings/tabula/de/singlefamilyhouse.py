@@ -615,12 +615,4 @@ class SingleFamilyHouse(Residential):
 
     @construction_data.setter
     def construction_data(self, value):
-        if value is None:
-            self._construction_data = datahandling.ConstructionData.tabula_de_standard
-        elif isinstance(value, str):
-            self._construction_data = datahandling.ConstructionData(value)
-        elif isinstance(value, datahandling.ConstructionData):
-            self._construction_data = value
-        else:
-            raise ValueError(f"Invalid construction_data: {value}. "
-                             f"Must be either a string or a ConstructionData enum value.")
+        self._construction_data = datahandling.check_construction_data_setter_tabula_de(value)

@@ -1,7 +1,8 @@
 """This module provides the definitions and mappings for various building archetypes and construction standards
 used in the TEASER framework. The module includes enumerations for different geometry types of buildings and
 construction data types, as well as dictionaries that map these enumerations to their corresponding building classes.
-Additionally, it defines which construction data types are allowed for each building geometry type."""
+Additionally, it defines which construction data types are allowed for each building geometry data and
+includes functions to set the suitable construction_data."""
 from enum import Enum
 from teaser.logic.archetypebuildings.bmvbs.office import Office
 from teaser.logic.archetypebuildings.bmvbs.custom.institute import Institute
@@ -185,3 +186,37 @@ allowed_geometries = {
     ConstructionData.kfw_85: [GeometryData.IwuSingleFamilyDwelling, GeometryData.TabulaDeSingleFamilyHouse],
     ConstructionData.kfw_100: [GeometryData.IwuSingleFamilyDwelling, GeometryData.TabulaDeSingleFamilyHouse],
 }
+
+
+def check_construction_data_setter_iwu(value):
+    """This function validates and sets the construction_data for buildings using the iwu construction_data."""
+    if value is None:
+        return ConstructionData.iwu_heavy
+    if isinstance(value, str):
+        return ConstructionData(value)
+    if isinstance(value, ConstructionData):
+        return value
+    raise ValueError(f"Invalid construction_data: {value}. "
+                     f"Must be either a string or a ConstructionData enum value.")
+
+def check_construction_data_setter_tabula_de(value):
+    """This function validates and sets the construction_data for buildings using the tabula_de construction_data."""
+    if value is None:
+        return ConstructionData.tabula_de_standard
+    if isinstance(value, str):
+        return ConstructionData(value)
+    if isinstance(value, ConstructionData):
+        return value
+    raise ValueError(f"Invalid construction_data: {value}. "
+                     f"Must be either a string or a ConstructionData enum value.")
+
+def check_construction_data_setter_tabula_dk(value):
+    """This function validates and sets the construction_data for buildings using the tabula_dk construction_data."""
+    if value is None:
+        return ConstructionData.tabula_dk_standard
+    if isinstance(value, str):
+        return ConstructionData(value)
+    if isinstance(value, ConstructionData):
+        return value
+    raise ValueError(f"Invalid construction_data: {value}. "
+                     f"Must be either a string or a ConstructionData enum value.")
