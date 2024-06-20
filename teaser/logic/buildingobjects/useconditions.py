@@ -650,7 +650,7 @@ class UseConditions(object):
     def schedules(self):
         self._schedules = pd.DataFrame(
             index=pd.date_range("2019-01-01 00:00:00", periods=8760,
-                                freq="H").to_series().dt.strftime(
+                                freq="h").to_series().dt.strftime(
                 "%m-%d %H:%M:%S"),
             data={
                 "heating_profile": list(
