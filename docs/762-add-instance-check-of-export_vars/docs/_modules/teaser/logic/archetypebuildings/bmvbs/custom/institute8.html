@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser.logic.archetypebuildings.bmvbs.custom.institute8 &mdash; TEASER 0.7.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=db26dd79" />
+      <link rel="stylesheet" type="text/css" href="../../../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../../../_static/autodoc_pydantic.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../../_static/documentation_options.js?v=35f4697d"></script>
+        <script src="../../../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../../index.html" class="icon icon-home">
+            TEASER
+          </a>
+              <div class="version">
+                0.7
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../code/modules.html">teaser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">teaser.logic.archetypebuildings.bmvbs.custom.institute8</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for teaser.logic.archetypebuildings.bmvbs.custom.institute8</h1><div class="highlight"><pre>
+<span></span><span class="c1"># created June 2015</span>
+<span class="c1"># by TEASER4 Development Team</span>
+
+
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.bmvbs.office</span> <span class="kn">import</span> <span class="n">Office</span>
+
+
+<div class="viewcode-block" id="Institute8">
+<a class="viewcode-back" href="../../../../../../code/teaser.logic.archetypebuildings.bmvbs.custom.html#teaser.logic.archetypebuildings.bmvbs.custom.institute8.Institute8">[docs]</a>
+<span class="k">class</span> <span class="nc">Institute8</span><span class="p">(</span><span class="n">Office</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Type Institute Building (type 8)</span>
+
+<span class="sd">    The institute type 8 module contains a multi zone building which is based</span>
+<span class="sd">    on an</span>
+<span class="sd">    office building with an additional laboratory zone. The zonal</span>
+<span class="sd">    distribution is based on investigations of the Forschungszentrum Juelich</span>
+<span class="sd">    :cite:`Lauster.2018`. According to the dataset from Juelich,</span>
+<span class="sd">    the typebuilding institute type 8 is based on the buildingsclass of BWZK</span>
+<span class="sd">    with</span>
+<span class="sd">    the number 2280</span>
+<span class="sd">    :cite:`Bauministerkonferenz.Dezember2010`. The estimation of exterior</span>
+<span class="sd">    wall surfaces follows the approach for office buildings, but with adapted</span>
+<span class="sd">    parameters :cite:`Lauster.2018`. This building type is by default</span>
+<span class="sd">    equipped with an air handling unit.</span>
+
+<span class="sd">    In detail the net leased area is divided into the following thermal zone</span>
+<span class="sd">    areas:</span>
+
+<span class="sd">    #. Office (4% of net leased area)</span>
+<span class="sd">    #. Floor (6% of net leased area)</span>
+<span class="sd">    #. Storage (30% of net leased area)</span>
+<span class="sd">    #. Meeting (4% of net leased area)</span>
+<span class="sd">    #. Restroom (4% of net leased area)</span>
+<span class="sd">    #. ICT (2% of net leased area)</span>
+<span class="sd">    #. Laboratory (50% of the net leased area)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    parent: Project()</span>
+<span class="sd">        The parent class of this object, the Project the Building belongs to.</span>
+<span class="sd">        Allows for better control of hierarchical structures. If not None it</span>
+<span class="sd">        adds this Building instance to Project.buildings.</span>
+<span class="sd">        (default: None)</span>
+<span class="sd">    name : str</span>
+<span class="sd">        Individual name</span>
+<span class="sd">    year_of_construction : int</span>
+<span class="sd">        Year of first construction</span>
+<span class="sd">    height_of_floors : float [m]</span>
+<span class="sd">        Average height of the buildings&#39; floors</span>
+<span class="sd">    number_of_floors : int</span>
+<span class="sd">        Number of building&#39;s floors above ground</span>
+<span class="sd">    net_leased_area : float [m2]</span>
+<span class="sd">        Total net leased area of building. This is area is NOT the footprint</span>
+<span class="sd">        of a building</span>
+<span class="sd">    with_ahu : Boolean</span>
+<span class="sd">        If set to True, an empty instance of BuildingAHU is instantiated and</span>
+<span class="sd">        assigned to attribute central_ahu. This instance holds information for</span>
+<span class="sd">        central Air Handling units. Default is False.</span>
+<span class="sd">    internal_gains_mode: int [1, 2, 3]</span>
+<span class="sd">        mode for the internal gains calculation done in AixLib:</span>
+
+<span class="sd">        1. Temperature and activity degree dependent heat flux calculation. The</span>
+<span class="sd">           calculation is based on  SIA 2024 (default)</span>
+<span class="sd">        2. Temperature and activity degree independent heat flux calculation, the max.</span>
+<span class="sd">           heatflowrate is prescribed by the parameter</span>
+<span class="sd">           fixed_heat_flow_rate_persons.</span>
+<span class="sd">        3. Temperature and activity degree dependent calculation with</span>
+<span class="sd">           consideration of moisture and co2. The moisture calculation is</span>
+<span class="sd">           based on SIA 2024 (2015), the co2 calculation is based on</span>
+<span class="sd">           Engineering ToolBox (2004)</span>
+
+<span class="sd">    office_layout : int</span>
+<span class="sd">        Structure of the floor plan of office buildings, default is 1,</span>
+<span class="sd">        which is representative for one elongated floor.</span>
+
+<span class="sd">        1. elongated 1 floor</span>
+<span class="sd">        2. elongated 2 floors</span>
+<span class="sd">        3. compact (e.g. for a square base building)</span>
+
+<span class="sd">    window_layout : int</span>
+<span class="sd">        Structure of the window facade type, default is 1, which is</span>
+<span class="sd">        representative for a punctuated facade.</span>
+
+<span class="sd">        1. punctuated facade (individual windows)</span>
+<span class="sd">        2. banner facade (continuous windows)</span>
+<span class="sd">        3. full glazing</span>
+
+<span class="sd">    construction_type : str</span>
+<span class="sd">        Construction type of used wall constructions default is &quot;heavy&quot;)</span>
+
+<span class="sd">        - heavy: heavy construction</span>
+<span class="sd">        - light: light construction</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The listed attributes are just the ones that are set by the user</span>
+<span class="sd">    calculated values are not included in this list. Changing these values is</span>
+<span class="sd">    expert mode.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    zone_area_factors : dict</span>
+<span class="sd">        This dictionary contains the name of the zone (str), the</span>
+<span class="sd">        zone area factor (float) and the zone usage from BoundaryConditions json</span>
+<span class="sd">        (str). (Default see doc string above)</span>
+<span class="sd">    outer_wall_names : dict</span>
+<span class="sd">        This dictionary contains a random name for the outer walls,</span>
+<span class="sd">        their orientation and tilt. Default is a building in north-south</span>
+<span class="sd">        orientation)</span>
+<span class="sd">    roof_names : dict</span>
+<span class="sd">        This dictionary contains the name of the roofs, their orientation</span>
+<span class="sd">        and tilt. Default is one flat roof.</span>
+<span class="sd">    ground_floor_names : dict</span>
+<span class="sd">        This dictionary contains the name of the ground floors, their</span>
+<span class="sd">        orientation and tilt. Default is one ground floor.</span>
+<span class="sd">    window_names : dict</span>
+<span class="sd">        This dictionary contains the name of the window, their</span>
+<span class="sd">        orientation and tilt. Default is a building in north-south</span>
+<span class="sd">        orientation)</span>
+<span class="sd">    inner_wall_names : dict</span>
+<span class="sd">        This dictionary contains the name of the inner walls, their</span>
+<span class="sd">        orientation and tilt. Default is one cumulated inner wall.</span>
+<span class="sd">    ceiling_names : dict</span>
+<span class="sd">        This dictionary contains the name of the ceilings, their</span>
+<span class="sd">        orientation and tilt. Default is one cumulated ceiling.</span>
+<span class="sd">    floor_names : dict</span>
+<span class="sd">        This dictionary contains the name of the floors, their</span>
+<span class="sd">        orientation and tilt. Default is one cumulated floor.</span>
+<span class="sd">    gross_factor : float</span>
+<span class="sd">        gross factor used to correct the rooftop and floor area (default is</span>
+<span class="sd">        1.15)</span>
+<span class="sd">    est_factor_wall_area : float</span>
+<span class="sd">        estimation factor to calculate outer wall area</span>
+<span class="sd">    est_exponent_wall : float</span>
+<span class="sd">        estimation factor exponent to calculate outer wall area</span>
+<span class="sd">    est_factor_win_area : float</span>
+<span class="sd">        estimation factor to calculate window area</span>
+<span class="sd">    est_exponent_win : float</span>
+<span class="sd">        estimation factor exponent to calculate window area</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">parent</span><span class="p">,</span>
+                 <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">year_of_construction</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">number_of_floors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">height_of_floors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">net_leased_area</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">with_ahu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">internal_gains_mode</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                 <span class="n">office_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">window_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">construction_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor of Institute8</span>
+
+<span class="sd">        Adds an additional zone &quot;Laboratory&quot;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">Institute8</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span>
+                                         <span class="n">name</span><span class="p">,</span>
+                                         <span class="n">year_of_construction</span><span class="p">,</span>
+                                         <span class="n">number_of_floors</span><span class="p">,</span>
+                                         <span class="n">height_of_floors</span><span class="p">,</span>
+                                         <span class="n">net_leased_area</span><span class="p">,</span>
+                                         <span class="n">with_ahu</span><span class="p">,</span>
+                                         <span class="n">internal_gains_mode</span><span class="p">,</span>
+                                         <span class="n">office_layout</span><span class="p">,</span>
+                                         <span class="n">window_layout</span><span class="p">,</span>
+                                         <span class="n">construction_type</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">zone_area_factors</span><span class="p">[</span><span class="s2">&quot;Office&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="p">[</span><span class="mf">0.04</span><span class="p">,</span> <span class="s2">&quot;Group Office (between 2 and 6 employees)&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">zone_area_factors</span><span class="p">[</span><span class="s2">&quot;Floor&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="p">[</span><span class="mf">0.06</span><span class="p">,</span> <span class="s2">&quot;Traffic area&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">zone_area_factors</span><span class="p">[</span><span class="s2">&quot;Laboratory&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="s2">&quot;Laboratory&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">zone_area_factors</span><span class="p">[</span><span class="s2">&quot;Storage&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="s2">&quot;Stock, technical equipment, archives&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">zone_area_factors</span><span class="p">[</span><span class="s2">&quot;Meeting&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="p">[</span><span class="mf">0.04</span><span class="p">,</span> <span class="s2">&quot;Meeting, Conference, seminar&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">zone_area_factors</span><span class="p">[</span><span class="s2">&quot;Restroom&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="p">[</span><span class="mf">0.04</span><span class="p">,</span> <span class="s2">&quot;WC and sanitary rooms in non-residential buildings&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">zone_area_factors</span><span class="p">[</span><span class="s2">&quot;ICT&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="p">[</span><span class="mf">0.02</span><span class="p">,</span> <span class="s2">&quot;Data center&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">est_exponent_wall</span> <span class="o">=</span> <span class="mf">0.6177</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">est_factor_wall_area</span> <span class="o">=</span> <span class="mf">13.895</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

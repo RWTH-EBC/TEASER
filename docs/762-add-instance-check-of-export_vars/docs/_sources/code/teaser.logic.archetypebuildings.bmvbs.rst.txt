@@ -1,0 +1,34 @@
+teaser.logic.archetypebuildings.bmvbs package
+=============================================
+
+.. automodule:: teaser.logic.archetypebuildings.bmvbs
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   teaser.logic.archetypebuildings.bmvbs.custom
+
+Submodules
+----------
+
+teaser.logic.archetypebuildings.bmvbs.office module
+---------------------------------------------------
+
+.. automodule:: teaser.logic.archetypebuildings.bmvbs.office
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling module
+-----------------------------------------------------------------
+
+.. automodule:: teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling
+   :members:
+   :undoc-members:
+   :show-inheritance:
