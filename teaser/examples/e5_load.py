@@ -1,26 +1,25 @@
-# Created January 2017
-# TEASER Development Team
+# # Example 5: Load information
+# This module contains an example how to import TEASER projects from
+# `*.teaserjson` and pickle in order to reuse data.
+# You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)
 
-"""This module contains an example how to import TEASER projects from
-*.teaserjson and pickle in order to reuse data.
-"""
 
 import teaser.logic.utilities as utilities
 import os
 
 
 def example_load():
-    """"This function demonstrates different loading options of TEASER"""
+    """This function demonstrates different loading options of TEASER"""
 
-    # In example e4_save we saved two TEASER projects using *.teaserjson and
+    # In example e4_save we saved two TEASER projects using `*.teaserjson` and
     # Python package pickle. This example shows how to import these
     # information into your python environment again.
 
-    # To load data from *.teaserjson we can use a simple API function. So
+    # To load data from `*.teaserjson` we can use a simple API function. So
     # first we need to instantiate our API (similar to example
     # e1_generate_archetype). The json file is called
     # `ArchetypeExample.teaserjson` and saved in the default path. You need to
-    #  run e4 first before you can load this example file.
+    # run e4 first before you can load this example file.
 
     from teaser.project import Project
 

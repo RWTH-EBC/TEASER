@@ -196,7 +196,7 @@ class BuildingElement(object):
         equivalent_res(t_bt) especially for walls.
 
         Returns
-        ----------
+        -------
         number_of_layer : int
             number of layer (length of layer list)
         density : np.array
