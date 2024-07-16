@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser.data.output.reports.model_report &mdash; TEASER 0.7.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=db26dd79" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/autodoc_pydantic.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../_static/documentation_options.js?v=35f4697d"></script>
+        <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            TEASER
+          </a>
+              <div class="version">
+                0.7
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../code/modules.html">teaser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">teaser.data.output.reports.model_report</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for teaser.data.output.reports.model_report</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;holds functions to create a report for a TEASER project model&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">html</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+
+
+<div class="viewcode-block" id="localize_floats">
+<a class="viewcode-back" href="../../../../../code/teaser.data.output.reports.html#teaser.data.output.reports.model_report.localize_floats">[docs]</a>
+<span class="k">def</span> <span class="nf">localize_floats</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">el</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;,&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="k">else</span> <span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="create_model_report">
+<a class="viewcode-back" href="../../../../../code/teaser.data.output.reports.html#teaser.data.output.reports.model_report.create_model_report">[docs]</a>
+<span class="k">def</span> <span class="nf">create_model_report</span><span class="p">(</span><span class="n">prj</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates model report for the project.</span>
+
+<span class="sd">    This creates a html and .csv model report for each building of the project</span>
+<span class="sd">    for easier analysis of the created buildings. Currently only the basic</span>
+<span class="sd">    values for areas and U-values and an abstracted 3D visualization are part of</span>
+<span class="sd">    the report. Wall constructions and similar things might come in the future.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    prj : Project</span>
+<span class="sd">        project that the report should be created for</span>
+<span class="sd">    path : string</span>
+<span class="sd">        path of the base project export</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">prj_data</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">:</span>
+        <span class="n">bldg_name</span> <span class="o">=</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span>
+        <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="c1"># create keys</span>
+        <span class="k">if</span> <span class="n">bldg</span><span class="o">.</span><span class="n">type_of_building</span><span class="p">:</span>
+            <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Type of Building&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bldg</span><span class="o">.</span><span class="n">type_of_building</span>
+        <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Net Ground Area&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bldg</span><span class="o">.</span><span class="n">net_leased_area</span>
+        <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Ground Floor Area&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Roof Area&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Floor Height&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bldg</span><span class="o">.</span><span class="n">height_of_floors</span>
+        <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Number of Floors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bldg</span><span class="o">.</span><span class="n">number_of_floors</span>
+        <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Total Air Volume&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bldg</span><span class="o">.</span><span class="n">volume</span>
+        <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Number of Zones&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bldg</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">)</span>
+        <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Year of Construction&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bldg</span><span class="o">.</span><span class="n">year_of_construction</span>
+        <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Calculated Heat Load&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bldg</span><span class="o">.</span><span class="n">sum_heat_load</span>
+        <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Calculated Cooling Load&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bldg</span><span class="o">.</span><span class="n">sum_cooling_load</span>
+
+        <span class="c1"># todo use bldg.*_names if existing</span>
+
+        <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Outerwall Area&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">outer_wall_area_total</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">outer_areas</span> <span class="o">=</span> <span class="n">bldg</span><span class="o">.</span><span class="n">outer_area</span>
+        <span class="c1"># make sure that lowest values of orient come first</span>
+        <span class="n">sorted_keys</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">outer_areas</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">sorted_outer_areas</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">outer_areas</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">sorted_keys</span><span class="p">}</span>
+        <span class="k">for</span> <span class="n">orient</span> <span class="ow">in</span> <span class="n">sorted_outer_areas</span><span class="p">:</span>
+            <span class="c1"># some archetypes use floats, some integers for orientation in</span>
+            <span class="c1"># TEASER</span>
+            <span class="n">orient</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">orient</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">orient</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Roof Area&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">sorted_outer_areas</span><span class="p">[</span><span class="n">orient</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">orient</span> <span class="o">==</span> <span class="o">-</span><span class="mi">2</span><span class="p">:</span>
+                <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Ground Floor Area&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">sorted_outer_areas</span><span class="p">[</span><span class="n">orient</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">orient</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Outerwall Area&quot;</span><span class="p">]:</span>
+                    <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Outerwall Area&quot;</span><span class="p">][</span><span class="n">orient</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Outerwall Area&quot;</span><span class="p">][</span><span class="n">orient</span><span class="p">]</span> <span class="o">+=</span> <span class="n">sorted_outer_areas</span><span class="p">[</span>
+                    <span class="n">orient</span>
+                <span class="p">]</span>
+                <span class="n">outer_wall_area_total</span> <span class="o">+=</span> <span class="n">sorted_outer_areas</span><span class="p">[</span><span class="n">orient</span><span class="p">]</span>
+        <span class="n">window_area_total</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Outerwall Area Total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">outer_wall_area_total</span>
+        <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Window Area&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">window_areas</span> <span class="o">=</span> <span class="n">bldg</span><span class="o">.</span><span class="n">window_area</span>
+        <span class="c1"># make sure that lowest values of orient come first</span>
+        <span class="n">sorted_keys</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">window_areas</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">sorted_window_areas</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">window_areas</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">sorted_keys</span><span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">orient</span> <span class="ow">in</span> <span class="n">sorted_window_areas</span><span class="p">:</span>
+            <span class="n">orient</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">orient</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">orient</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Window Area&quot;</span><span class="p">]:</span>
+                <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Window Area&quot;</span><span class="p">][</span><span class="n">orient</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Window Area&quot;</span><span class="p">][</span><span class="n">orient</span><span class="p">]</span> <span class="o">+=</span> <span class="n">sorted_window_areas</span><span class="p">[</span><span class="n">orient</span><span class="p">]</span>
+            <span class="n">window_area_total</span> <span class="o">+=</span> <span class="n">sorted_window_areas</span><span class="p">[</span><span class="n">orient</span><span class="p">]</span>
+
+        <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Window Area Total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">window_area_total</span>
+        <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Window-Wall-Ratio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">window_area_total</span> <span class="o">/</span> <span class="n">outer_wall_area_total</span>
+        <span class="p">)</span>
+        <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;Inner Wall Area&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bldg</span><span class="o">.</span><span class="n">get_inner_wall_area</span><span class="p">()</span>
+
+        <span class="n">u_values_win</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">g_values_windows</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">u_values_ground_floor</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">u_values_inner_wall</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">u_values_outer_wall</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">u_values_door</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">u_values_roof</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">u_values_ceiling</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">tz</span> <span class="ow">in</span> <span class="n">bldg</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">window</span> <span class="ow">in</span> <span class="n">tz</span><span class="o">.</span><span class="n">windows</span><span class="p">:</span>
+                <span class="n">u_values_win</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">window</span><span class="o">.</span><span class="n">r_conduc</span> <span class="o">*</span> <span class="n">window</span><span class="o">.</span><span class="n">area</span><span class="p">))</span>
+                <span class="n">g_values_windows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">window</span><span class="o">.</span><span class="n">g_value</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">inner_wall</span> <span class="ow">in</span> <span class="n">tz</span><span class="o">.</span><span class="n">inner_walls</span><span class="p">:</span>
+                <span class="n">u_values_inner_wall</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">inner_wall</span><span class="o">.</span><span class="n">r_conduc</span> <span class="o">*</span> <span class="n">inner_wall</span><span class="o">.</span><span class="n">area</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">outer_wall</span> <span class="ow">in</span> <span class="n">tz</span><span class="o">.</span><span class="n">outer_walls</span><span class="p">:</span>
+                <span class="n">u_values_outer_wall</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">outer_wall</span><span class="o">.</span><span class="n">r_conduc</span> <span class="o">*</span> <span class="n">outer_wall</span><span class="o">.</span><span class="n">area</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">rooftop</span> <span class="ow">in</span> <span class="n">tz</span><span class="o">.</span><span class="n">rooftops</span><span class="p">:</span>
+                <span class="n">u_values_roof</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">rooftop</span><span class="o">.</span><span class="n">r_conduc</span> <span class="o">*</span> <span class="n">rooftop</span><span class="o">.</span><span class="n">area</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">ground_floor</span> <span class="ow">in</span> <span class="n">tz</span><span class="o">.</span><span class="n">ground_floors</span><span class="p">:</span>
+                <span class="n">u_values_ground_floor</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">ground_floor</span><span class="o">.</span><span class="n">r_conduc</span> <span class="o">*</span> <span class="n">ground_floor</span><span class="o">.</span><span class="n">area</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">for</span> <span class="n">ceiling</span> <span class="ow">in</span> <span class="n">tz</span><span class="o">.</span><span class="n">ceilings</span><span class="p">:</span>
+                <span class="n">u_values_ceiling</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">ceiling</span><span class="o">.</span><span class="n">r_conduc</span> <span class="o">*</span> <span class="n">ceiling</span><span class="o">.</span><span class="n">area</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">floor</span> <span class="ow">in</span> <span class="n">tz</span><span class="o">.</span><span class="n">floors</span><span class="p">:</span>
+                <span class="n">u_values_ceiling</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">floor</span><span class="o">.</span><span class="n">r_conduc</span> <span class="o">*</span> <span class="n">floor</span><span class="o">.</span><span class="n">area</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">door</span> <span class="ow">in</span> <span class="n">tz</span><span class="o">.</span><span class="n">doors</span><span class="p">:</span>
+                <span class="n">u_values_door</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">door</span><span class="o">.</span><span class="n">r_conduc</span> <span class="o">*</span> <span class="n">door</span><span class="o">.</span><span class="n">area</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">u_values_outer_wall</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;UValue Outerwall&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">u_values_outer_wall</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span>
+                <span class="n">u_values_outer_wall</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;UValue Outerwall&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">u_values_inner_wall</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;UValue Innerwall&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">u_values_inner_wall</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span>
+                <span class="n">u_values_inner_wall</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;UValue Innerwall&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">u_values_win</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;UValue Window&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">u_values_win</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">u_values_win</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;UValue Window&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">u_values_door</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;UValue Door&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">u_values_door</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">u_values_door</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;UValue Door&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">u_values_roof</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;UValue Roof&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">u_values_roof</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">u_values_roof</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;UValue Roof&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">u_values_ceiling</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;UValue Ceiling&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">u_values_ceiling</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span>
+                <span class="n">u_values_ceiling</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;UValue Ceiling&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">u_values_ground_floor</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;UValue Groundfloor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+                <span class="n">u_values_ground_floor</span>
+            <span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">u_values_ground_floor</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;UValue Groundfloor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">g_values_windows</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;gValue Window&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">g_values_windows</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span>
+                <span class="n">g_values_windows</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">][</span><span class="s2">&quot;gValue Window&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">bldg_data</span> <span class="o">=</span> <span class="n">prj_data</span><span class="p">[</span><span class="n">bldg_name</span><span class="p">]</span>
+
+        <span class="n">export_reports</span><span class="p">(</span><span class="n">bldg_data</span><span class="p">,</span> <span class="n">bldg_name</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">prj</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="export_reports">
+<a class="viewcode-back" href="../../../../../code/teaser.data.output.reports.html#teaser.data.output.reports.model_report.export_reports">[docs]</a>
+<span class="k">def</span> <span class="nf">export_reports</span><span class="p">(</span><span class="n">bldg_data</span><span class="p">,</span> <span class="n">bldg_name</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">prj</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;plots&quot;</span><span class="p">))</span>
+    <span class="n">base_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prj</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">bldg_name</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">output_path_base</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">base_name</span><span class="p">)</span>
+    <span class="n">plotly_file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;plots&quot;</span><span class="p">,</span> <span class="n">base_name</span> <span class="o">+</span> <span class="s2">&quot;_plotly.html&quot;</span><span class="p">)</span>
+    <span class="c1"># Draw an abstract image of the building and save it with plotly to HTML</span>
+    <span class="n">interactive_fig</span><span class="p">,</span> <span class="n">fixed_height</span> <span class="o">=</span>\
+        <span class="n">create_simple_3d_visualization</span><span class="p">(</span><span class="n">bldg_data</span><span class="p">,</span> <span class="n">roof_angle</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">interactive_fig</span><span class="p">:</span>
+        <span class="n">interactive_fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="n">plotly_file_name</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plotly_file_name</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">html_file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_path_base</span> <span class="o">+</span> <span class="s2">&quot;.html&quot;</span><span class="p">)</span>
+    <span class="n">create_html_page</span><span class="p">(</span>
+        <span class="n">bldg_data</span><span class="p">,</span> <span class="n">prj</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">bldg_name</span><span class="p">,</span> <span class="n">html_file_name</span><span class="p">,</span> <span class="n">plotly_file_name</span><span class="p">,</span>
+        <span class="n">fixed_height</span><span class="p">)</span>
+    <span class="n">create_csv_report</span><span class="p">(</span><span class="n">bldg_data</span><span class="p">,</span> <span class="n">output_path_base</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="create_csv_report">
+<a class="viewcode-back" href="../../../../../code/teaser.data.output.reports.html#teaser.data.output.reports.model_report.create_csv_report">[docs]</a>
+<span class="k">def</span> <span class="nf">create_csv_report</span><span class="p">(</span><span class="n">bldg_data</span><span class="p">,</span> <span class="n">output_path_base</span><span class="p">):</span>
+    <span class="c1"># flat the keys</span>
+
+    <span class="n">prj_data_flat</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">bldg_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bldg_data</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">subkey</span> <span class="ow">in</span> <span class="n">bldg_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">prj_data_flat</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">subkey</span><span class="si">:</span><span class="s2">03</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bldg_data</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="n">subkey</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">prj_data_flat</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">bldg_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+    <span class="n">bldg_add_list</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;OuterWall&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;Window&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">prj_data_flat</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;Outerwall Area_&quot;</span><span class="p">):</span>
+            <span class="n">bldg_add_list</span><span class="p">[</span><span class="s2">&quot;OuterWall&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;Window Area_&quot;</span><span class="p">):</span>
+            <span class="n">bldg_add_list</span><span class="p">[</span><span class="s2">&quot;Window&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="n">bldg_add_list</span><span class="p">[</span><span class="s2">&quot;OuterWall&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">bldg_add_list</span><span class="p">[</span><span class="s2">&quot;Window&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+    <span class="n">bldg_sorted_list</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;Net Ground Area&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Number of Zones&quot;</span> <span class="s2">&quot;Ground Floor Area&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Roof Area&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Floor Height&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Number of Floors&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Total Air Volume&quot;</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">bldg_add_list</span><span class="p">[</span><span class="s2">&quot;OuterWall&quot;</span><span class="p">],</span>
+        <span class="o">*</span><span class="n">bldg_add_list</span><span class="p">[</span><span class="s2">&quot;Window&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;Window-Wall-Ratio&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Inner Wall Area&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;UValue Outerwall&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;UValue Innerwall&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;UValue Window&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;UValue Door&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;UValue Roof&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;UValue Ceiling&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;UValue Groundfloor&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gValue Window&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="c1"># round values</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">prj_data_flat</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">prj_data_flat</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">prj_data_flat</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="n">bldg_data_flat_sorted</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">prj_data_flat</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">bldg_sorted_list</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">prj_data_flat</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+    <span class="p">]</span>
+
+    <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span>
+    <span class="n">keys</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bldg_data_flat_sorted</span><span class="p">])</span>
+
+    <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;TEASER&quot;</span><span class="p">]</span>
+    <span class="n">values</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bldg_data_flat_sorted</span><span class="p">])</span>
+
+    <span class="n">csv_file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_path_base</span> <span class="o">+</span> <span class="s2">&quot;.csv&quot;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_file_name</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">csvwriter</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+        <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
+        <span class="n">csvwriter</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">localize_floats</span><span class="p">(</span><span class="n">values</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="add_compass_to_3d_plot">
+<a class="viewcode-back" href="../../../../../code/teaser.data.output.reports.html#teaser.data.output.reports.model_report.add_compass_to_3d_plot">[docs]</a>
+<span class="k">def</span> <span class="nf">add_compass_to_3d_plot</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">x_y_axis_sizing</span><span class="p">):</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_y_axis_sizing</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_y_axis_sizing</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;&lt;b&gt;N&lt;/b&gt;&quot;</span><span class="p">),</span>
+        <span class="p">((</span><span class="n">x_y_axis_sizing</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="n">x_y_axis_sizing</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;&lt;b&gt;E&lt;/b&gt;&quot;</span><span class="p">),</span>
+        <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">x_y_axis_sizing</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">x_y_axis_sizing</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;&lt;b&gt;S&lt;/b&gt;&quot;</span><span class="p">),</span>
+        <span class="p">((</span><span class="o">-</span><span class="n">x_y_axis_sizing</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="n">x_y_axis_sizing</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;&lt;b&gt;W&lt;/b&gt;&quot;</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+            <span class="n">go</span><span class="o">.</span><span class="n">Scatter3d</span><span class="p">(</span>
+                <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">start</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">end</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
+                <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="n">start</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">end</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+                <span class="n">z</span><span class="o">=</span><span class="p">[</span><span class="n">start</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">end</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span>
+                <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines+text&quot;</span><span class="p">,</span>
+                <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">),</span>
+                <span class="n">hoverinfo</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+                <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+            <span class="n">go</span><span class="o">.</span><span class="n">Scatter3d</span><span class="p">(</span>
+                <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">end</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
+                <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="n">end</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+                <span class="n">z</span><span class="o">=</span><span class="p">[</span><span class="n">end</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span>
+                <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;text&quot;</span><span class="p">,</span>
+                <span class="n">text</span><span class="o">=</span><span class="p">[</span><span class="n">label</span><span class="p">],</span>
+                <span class="n">textposition</span><span class="o">=</span><span class="s2">&quot;top center&quot;</span><span class="p">,</span>
+                <span class="n">hoverinfo</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+                <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">arrow_length</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">arrow_color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span>
+
+        <span class="n">arrow</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Cone</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">end</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
+            <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="n">end</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+            <span class="n">z</span><span class="o">=</span><span class="p">[</span><span class="n">end</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span>
+            <span class="n">u</span><span class="o">=</span><span class="p">[</span><span class="n">end</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">start</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
+            <span class="n">v</span><span class="o">=</span><span class="p">[</span><span class="n">end</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">start</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+            <span class="n">w</span><span class="o">=</span><span class="p">[</span><span class="n">end</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">start</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span>
+            <span class="n">sizemode</span><span class="o">=</span><span class="s2">&quot;absolute&quot;</span><span class="p">,</span>
+            <span class="n">sizeref</span><span class="o">=</span><span class="n">arrow_length</span><span class="p">,</span>
+            <span class="n">showscale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">colorscale</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="n">arrow_color</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">arrow_color</span><span class="p">]],</span>
+            <span class="n">hoverinfo</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">arrow</span><span class="p">)</span>
+
+    <span class="c1"># Set layout</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">scene</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">aspectmode</span><span class="o">=</span><span class="s2">&quot;manual&quot;</span><span class="p">,</span> <span class="n">aspectratio</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+<div class="viewcode-block" id="create_html_page">
+<a class="viewcode-back" href="../../../../../code/teaser.data.output.reports.html#teaser.data.output.reports.model_report.create_html_page">[docs]</a>
+<span class="k">def</span> <span class="nf">create_html_page</span><span class="p">(</span><span class="n">bldg_data</span><span class="p">,</span> <span class="n">prj_name</span><span class="p">,</span> <span class="n">bldg_name</span><span class="p">,</span> <span class="n">html_file_name</span><span class="p">,</span>
+                     <span class="n">iframe_src</span><span class="p">,</span> <span class="n">fixed_height</span><span class="p">):</span>
+    <span class="n">html_content</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    &lt;!DOCTYPE html&gt;</span>
+<span class="s2">    &lt;html&gt;</span>
+<span class="s2">    &lt;head&gt;</span>
+<span class="s2">        &lt;title&gt;</span><span class="si">{</span><span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">prj_name</span><span class="p">)</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">bldg_name</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/title&gt;</span>
+<span class="s2">        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css&quot;&gt;</span>
+<span class="s2">        &lt;style&gt;</span>
+<span class="s2">            body </span><span class="se">{{</span>
+<span class="s2">                font-family: Arial, sans-serif;</span>
+<span class="s2">                background-color: #f8f9fa;</span>
+<span class="s2">                padding: 20px;</span>
+<span class="s2">            </span><span class="se">}}</span>
+<span class="s2">            .container </span><span class="se">{{</span>
+<span class="s2">                background-color: #ffffff;</span>
+<span class="s2">                border: 1px solid #e2e2e2;</span>
+<span class="s2">                border-radius: 5px;</span>
+<span class="s2">                padding: 20px;</span>
+<span class="s2">                box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);</span>
+<span class="s2">            </span><span class="se">}}</span>
+<span class="s2">            h1 </span><span class="se">{{</span>
+<span class="s2">                text-align: center;</span>
+<span class="s2">                margin-bottom: 20px;</span>
+<span class="s2">            </span><span class="se">}}</span>
+<span class="s2">            table </span><span class="se">{{</span>
+<span class="s2">                border-collapse: collapse;</span>
+<span class="s2">            </span><span class="se">}}</span>
+<span class="s2">            th, td </span><span class="se">{{</span>
+<span class="s2">                padding: 12px;</span>
+<span class="s2">                text-align: left;</span>
+<span class="s2">                border-bottom: 1px solid #dee2e6;</span>
+<span class="s2">            </span><span class="se">}}</span>
+<span class="s2">            th </span><span class="se">{{</span>
+<span class="s2">                background-color: #f8f9fa;</span>
+<span class="s2">            </span><span class="se">}}</span>
+<span class="s2">            .red-bg </span><span class="se">{{</span>
+<span class="s2">                background-color: #f44336;</span>
+<span class="s2">                color: #ffffff;</span>
+<span class="s2">            </span><span class="se">}}</span>
+<span class="s2">            .iframe-container </span><span class="se">{{</span>
+<span class="s2">                border: 1px solid #e2e2e2;</span>
+<span class="s2">                border-radius: 5px;</span>
+<span class="s2">                padding: 0px;</span>
+<span class="s2">            </span><span class="se">}}</span>
+<span class="s2">            iframe </span><span class="se">{{</span>
+<span class="s2">                width: 100%;</span>
+<span class="s2">                height: 600px;</span>
+<span class="s2">                border: none;</span>
+<span class="s2">            </span><span class="se">}}</span>
+<span class="s2">            .legend </span><span class="se">{{</span>
+<span class="s2">                margin-top: 10px;</span>
+<span class="s2">                font-size: 14px;</span>
+<span class="s2">            </span><span class="se">}}</span>
+<span class="s2">        &lt;/style&gt;</span>
+<span class="s2">    &lt;/head&gt;</span>
+<span class="s2">    &lt;body&gt;</span>
+<span class="s2">        &lt;h1 class=&quot;red-bg py-2&quot;&gt;</span><span class="si">{</span>
+<span class="w">    </span><span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">prj_name</span><span class="p">)</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">bldg_name</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/h1&gt;</span>
+<span class="s2">        &lt;div class=&quot;container&quot;&gt;</span>
+<span class="s2">            &lt;div class=&quot;row&quot;&gt;</span>
+<span class="s2">                &lt;div class=&quot;col-md-6&quot;&gt;</span>
+<span class="s2">                    &lt;table class=&quot;table table-bordered&quot;&gt;</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">current_category</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">bldg_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">unit</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span>
+        <span class="n">category</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">list_item</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="c1"># Handle category names</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="s2">&quot;window&quot;</span> <span class="ow">in</span> <span class="n">key</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span> <span class="s2">&quot;wall&quot;</span> <span class="ow">in</span> <span class="n">key</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;uvalue&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">key</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">category</span> <span class="o">=</span> <span class="s2">&quot;Wall and Window Areas&quot;</span>
+            <span class="n">unit</span> <span class="o">=</span> <span class="s2">&quot;m²&quot;</span>
+        <span class="k">elif</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;UValue&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;Gvalue&quot;</span><span class="p">):</span>
+            <span class="n">category</span> <span class="o">=</span> <span class="s2">&quot;U-Values (mean)&quot;</span>
+            <span class="n">unit</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;kW&quot;</span><span class="p">,</span> <span class="s2">&quot;kg K&quot;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="s2">&quot;Net Ground Area&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Roof Area&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Floor Height&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Number of Floors&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Total Air Volume&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Number of Zones&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Year of Construction&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Type of Building&quot;</span><span class="p">,</span>
+        <span class="p">]:</span>
+            <span class="n">category</span> <span class="o">=</span> <span class="s2">&quot;Base Values&quot;</span>
+            <span class="n">unit</span> <span class="o">=</span> <span class="s2">&quot;m²&quot;</span>
+        <span class="k">elif</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;Calculated&quot;</span><span class="p">):</span>
+            <span class="n">category</span> <span class="o">=</span> <span class="s2">&quot;Calculated Values&quot;</span>
+            <span class="n">unit</span> <span class="o">=</span> <span class="s2">&quot;W&quot;</span>
+
+        <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="s2">&quot;number of floors&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;number of zones&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;year of construction&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;window-wall-ratio&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;gvalue window&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type of building&quot;</span><span class="p">,</span>
+        <span class="p">]:</span>
+            <span class="n">unit</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span>
+        <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;total air volume&quot;</span><span class="p">:</span>
+            <span class="n">unit</span> <span class="o">=</span> <span class="s2">&quot;m³&quot;</span>
+        <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;floor height&quot;</span><span class="p">:</span>
+            <span class="n">unit</span> <span class="o">=</span> <span class="s2">&quot;m&quot;</span>
+        <span class="k">if</span> <span class="n">category</span> <span class="ow">and</span> <span class="n">category</span> <span class="o">!=</span> <span class="n">current_category</span><span class="p">:</span>
+            <span class="n">html_content</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                    &lt;tr class=&quot;table-secondary&quot;&gt;</span>
+<span class="s2">                        &lt;th colspan=&quot;3&quot;&gt;</span><span class="si">{</span><span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">category</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/th&gt;</span>
+<span class="s2">                    &lt;/tr&gt;</span>
+<span class="s2">                &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="n">category</span> <span class="o">==</span> <span class="s2">&quot;Wall and Window Areas&quot;</span><span class="p">:</span>
+                <span class="n">html_content</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                    &lt;tr&gt;</span>
+<span class="s2">                        &lt;td colspan=&quot;2&quot;&gt;(0° := North, 90° := East,</span>
+<span class="s2">                         180° := South, 270° := West)&lt;/td&gt;</span>
+<span class="s2">                    &lt;/tr&gt;</span>
+<span class="s2">                &quot;&quot;&quot;</span>
+            <span class="n">current_category</span> <span class="o">=</span> <span class="n">category</span>
+
+        <span class="c1"># handle subdict for outerwall and window area with directions</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;Outerwall Area&quot;</span> <span class="ow">or</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;Window Area&quot;</span><span class="p">:</span>
+            <span class="n">list_item</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">for</span> <span class="n">orient</span><span class="p">,</span> <span class="n">area</span> <span class="ow">in</span> <span class="n">bldg_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">area</span>
+                <span class="n">html_content</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                    &lt;tr&gt;</span>
+<span class="s2">                    &lt;th scope=&quot;row&quot;&gt;</span><span class="si">{</span><span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">))</span><span class="si">}</span>
+<span class="s2">                        </span><span class="si">{</span><span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">orient</span><span class="p">))</span><span class="si">}</span><span class="s2">&lt;/th&gt;</span>
+<span class="s2">                 &lt;td&gt;</span><span class="si">{</span><span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span>
+<span class="w">                    </span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)))</span><span class="si">}</span><span class="s2"> &lt;/td&gt;</span>
+<span class="s2">                &lt;td style=</span>
+<span class="s2">                    &quot;text-align: center; background-color: #D3D3D3;&quot;&gt;</span>
+<span class="s2">                                        </span><span class="si">{</span><span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/td&gt;</span>
+<span class="s2">                &lt;/tr&gt;</span>
+<span class="s2">                    &quot;&quot;&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">key_human_readable</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">word</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)]</span>
+            <span class="p">)</span>
+            <span class="n">html_content</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                    &lt;tr&gt;</span>
+<span class="s2">                        &lt;th scope=&quot;row&quot;&gt;</span><span class="si">{</span><span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">key_human_readable</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/th&gt;</span>
+<span class="s2">                        &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">value</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">list_item</span><span class="p">:</span>
+            <span class="n">html_content</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                &lt;td&gt;</span><span class="si">{</span><span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="s2"> &lt;/td&gt;</span>
+<span class="s2">                    &lt;td style=</span>
+<span class="s2">                        &quot;text-align: center; background-color: #D3D3D3;&quot;&gt;</span>
+<span class="s2">                    &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">html_content</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                        </span><span class="si">{</span><span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">unit</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s2"> &lt;frac&gt; </span><span class="si">{</span><span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">unit</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="si">}</span><span class="s2">&lt;/td&gt;</span>
+<span class="s2">                    &lt;/tr&gt;</span>
+<span class="s2">                &quot;&quot;&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">html_content</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                        </span><span class="si">{</span><span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/td&gt;</span>
+<span class="s2">                    &lt;/tr&gt;</span>
+<span class="s2">                &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">iframe_src</span><span class="p">:</span>
+        <span class="n">html_content</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            &lt;/table&gt;</span>
+<span class="s2">                &lt;/div&gt;</span>
+<span class="s2">                &lt;div class=&quot;col-md-6&quot;&gt;</span>
+<span class="s2">                  &lt;div class=&quot;iframe-container&quot;&gt;</span>
+<span class="s2">                      &lt;iframe src=&quot;</span><span class="si">{</span><span class="n">iframe_src</span><span class="si">}</span><span class="s2">&quot;&gt;&lt;/iframe&gt;</span>
+<span class="s2">                          &lt;div class=&quot;legend&quot;&gt;</span>
+<span class="s2">                             &lt;span class=&quot;badge badge-light&quot;</span>
+<span class="s2">    style=&quot;background-color: gray;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/span&gt;</span>
+<span class="s2">    Walls</span>
+<span class="s2">    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>
+<span class="s2">    &lt;span class=&quot;badge badge-light&quot;</span>
+<span class="s2">    style=&quot;background-color: blue;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/span&gt;</span>
+<span class="s2">    Windows &lt;br&gt;&quot;&quot;&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">html_content</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                                &lt;/table&gt;</span>
+<span class="s2">                            &lt;/div&gt;</span>
+<span class="s2">                            &lt;div class=&quot;col-md-6&quot;&gt;</span>
+<span class="s2">                                &lt;div class=&quot;iframe-container&quot;&gt;</span>
+<span class="s2">                                    &lt;p style=&quot;color:Red&quot;&gt;&lt;b&gt;Error: No graphic</span>
+<span class="s2">                                    available.</span>
+<span class="s2">                                    Error during image creation.&lt;/b&gt; &lt;br&gt;&lt;/p&gt;&quot;&quot;&quot;</span>
+    <span class="n">html_content</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                    &lt;i&gt;Assumptions&lt;/i&gt;: &lt;br&gt;</span>
+<span class="s2">                    &lt;li&gt;&lt;i&gt;All windows of a storey and with the same</span>
+<span class="s2">                    orientation are put together into one big window</span>
+<span class="s2">                    which is placed in the middle of the storey&lt;/i&gt;&lt;/li&gt;</span>
+<span class="s2">                    &lt;li&gt;&lt;i&gt;Only works for buildings with 4 directions currently,</span>
+<span class="s2">                     while the smallest will be interpreted as</span>
+<span class="s2">                    north, the next bigger one as east and so on.&lt;/i&gt;&lt;/li&gt;</span>
+<span class="s2">                    &lt;li&gt;&lt;i&gt;The roof is not displayed correctly yet&lt;/i&gt;&lt;/li&gt;&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">fixed_height</span><span class="p">:</span>
+        <span class="n">html_content</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;li&gt;&lt;i&gt;The height of all floors is assumed to be 3</span>
+<span class="s2">        meters.&lt;/i&gt;&lt;/li&gt;&quot;&quot;&quot;</span>
+    <span class="n">html_content</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                &lt;/div&gt;</span>
+<span class="s2">              &lt;/div&gt;</span>
+<span class="s2">            &lt;/div&gt;</span>
+<span class="s2">        &lt;/div&gt;</span>
+<span class="s2">    &lt;/body&gt;</span>
+<span class="s2">&lt;/html&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">html_file_name</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">html_file</span><span class="p">:</span>
+        <span class="n">html_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">html_content</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="create_simple_3d_visualization">
+<a class="viewcode-back" href="../../../../../code/teaser.data.output.reports.html#teaser.data.output.reports.model_report.create_simple_3d_visualization">[docs]</a>
+<span class="k">def</span> <span class="nf">create_simple_3d_visualization</span><span class="p">(</span><span class="n">bldg_data</span><span class="p">,</span> <span class="n">roof_angle</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a simplified 3d plot of the building.</span>
+
+<span class="sd">    This is for a rough first visual analysis of the building and is mostly</span>
+<span class="sd">    relevant for buildings that are created &quot;manual&quot; and not for archetypes.</span>
+<span class="sd">    The simplified visualization has multiple assumptions/simplifications:</span>
+<span class="sd">    * All windows of a storey and with the same orientation are put together</span>
+<span class="sd">    into one big window which is placed in the middle of the storey</span>
+<span class="sd">    * Only works for buildings with 4 directions currently, while the smallest</span>
+<span class="sd">    will be interpreted as north, the next bigger one as east and so on.</span>
+<span class="sd">    * Orientations are</span>
+<span class="sd">        Positive y: North</span>
+<span class="sd">        Positive x: East</span>
+<span class="sd">        Negative y: South</span>
+<span class="sd">        Negative x: West</span>
+<span class="sd">    * The roof is not displayed correctly yet # TODO</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">get_value_with_default</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">default_value</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">lst</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">default_value</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">area_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">bldg_data</span><span class="p">[</span><span class="s2">&quot;Outerwall Area&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="n">window_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">bldg_data</span><span class="p">[</span><span class="s2">&quot;Window Area&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="c1"># TODO: use orientations as well and &quot;turn&quot; the vertices based on this.</span>
+        <span class="c1">#  Currently the first value (which is the smallest) will be taken as</span>
+        <span class="c1">#  north, the next one as east and so on. Only the first 4 values are</span>
+        <span class="c1">#  taken into account.</span>
+        <span class="n">area_north</span> <span class="o">=</span> <span class="n">get_value_with_default</span><span class="p">(</span><span class="n">area_values</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">area_east</span> <span class="o">=</span> <span class="n">get_value_with_default</span><span class="p">(</span><span class="n">area_values</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">area_south</span> <span class="o">=</span> <span class="n">get_value_with_default</span><span class="p">(</span><span class="n">area_values</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">area_west</span> <span class="o">=</span> <span class="n">get_value_with_default</span><span class="p">(</span><span class="n">area_values</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">window_area_north</span> <span class="o">=</span> <span class="n">get_value_with_default</span><span class="p">(</span><span class="n">window_values</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">window_area_east</span> <span class="o">=</span> <span class="n">get_value_with_default</span><span class="p">(</span><span class="n">window_values</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">window_area_south</span> <span class="o">=</span> <span class="n">get_value_with_default</span><span class="p">(</span><span class="n">window_values</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">window_area_west</span> <span class="o">=</span> <span class="n">get_value_with_default</span><span class="p">(</span><span class="n">window_values</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">height</span> <span class="o">=</span> <span class="n">bldg_data</span><span class="p">[</span><span class="s2">&quot;Floor Height&quot;</span><span class="p">]</span>
+        <span class="n">fixed_height</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">height</span><span class="p">:</span>
+            <span class="n">height</span> <span class="o">=</span> <span class="mi">3</span>
+            <span class="n">fixed_height</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">num_floors</span> <span class="o">=</span> <span class="n">bldg_data</span><span class="p">[</span><span class="s2">&quot;Number of Floors&quot;</span><span class="p">]</span>
+
+        <span class="n">length_north</span> <span class="o">=</span> <span class="n">area_north</span> <span class="o">/</span> <span class="p">(</span><span class="n">num_floors</span> <span class="o">*</span> <span class="n">height</span><span class="p">)</span>
+        <span class="n">length_east</span> <span class="o">=</span> <span class="n">area_east</span> <span class="o">/</span> <span class="p">(</span><span class="n">num_floors</span> <span class="o">*</span> <span class="n">height</span><span class="p">)</span>
+        <span class="n">length_south</span> <span class="o">=</span> <span class="n">area_south</span> <span class="o">/</span> <span class="p">(</span><span class="n">num_floors</span> <span class="o">*</span> <span class="n">height</span><span class="p">)</span>
+        <span class="n">length_west</span> <span class="o">=</span> <span class="n">area_west</span> <span class="o">/</span> <span class="p">(</span><span class="n">num_floors</span> <span class="o">*</span> <span class="n">height</span><span class="p">)</span>
+
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+            <span class="n">paper_bgcolor</span><span class="o">=</span><span class="s2">&quot;rgba(0,0,0,0)&quot;</span><span class="p">,</span>
+            <span class="n">plot_bgcolor</span><span class="o">=</span><span class="s2">&quot;rgba(0,0,0,0)&quot;</span><span class="p">,</span>
+            <span class="n">margin</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+            <span class="n">scene</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                    <span class="n">gridcolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span>
+                    <span class="n">showbackground</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">zerolinecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">yaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                    <span class="n">gridcolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">showbackground</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">zerolinecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span>
+                <span class="p">),</span>
+                <span class="n">zaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                    <span class="n">gridcolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">showbackground</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">zerolinecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span>
+                <span class="p">),</span>
+                <span class="n">aspectmode</span><span class="o">=</span><span class="s2">&quot;cube&quot;</span><span class="p">,</span>
+                <span class="n">xaxis_showgrid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">yaxis_showgrid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">zaxis_showgrid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                <span class="n">zaxis_title</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="n">max_length</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">length_north</span><span class="p">,</span> <span class="n">length_south</span><span class="p">,</span> <span class="n">length_west</span><span class="p">,</span> <span class="n">length_east</span><span class="p">)</span>
+        <span class="n">x_y_axis_sizing</span> <span class="o">=</span> <span class="p">(</span><span class="n">max_length</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.1</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+            <span class="n">scene</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="n">x_y_axis_sizing</span><span class="p">,</span> <span class="n">x_y_axis_sizing</span><span class="p">]),</span>
+                <span class="n">yaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="n">x_y_axis_sizing</span><span class="p">,</span> <span class="n">x_y_axis_sizing</span><span class="p">]),</span>
+                <span class="n">zaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_length</span><span class="p">]),</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">add_compass_to_3d_plot</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">x_y_axis_sizing</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">floor</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_floors</span><span class="p">):</span>
+            <span class="c1"># Ecken des aktuellen Stockwerks</span>
+            <span class="n">floor_height</span> <span class="o">=</span> <span class="n">height</span> <span class="o">*</span> <span class="n">floor</span>
+            <span class="n">vertices</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">(</span><span class="o">-</span><span class="n">length_south</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="n">length_east</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">floor_height</span><span class="p">),</span>
+                <span class="p">(</span><span class="o">-</span><span class="n">length_south</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">length_north</span><span class="p">,</span> <span class="o">-</span><span class="n">length_east</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">floor_height</span><span class="p">),</span>
+                <span class="p">(</span>
+                    <span class="o">-</span><span class="n">length_south</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">length_north</span><span class="p">,</span>
+                    <span class="o">-</span><span class="n">length_east</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">length_west</span><span class="p">,</span>
+                    <span class="n">floor_height</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="p">(</span><span class="o">-</span><span class="n">length_south</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="n">length_east</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">length_west</span><span class="p">,</span> <span class="n">floor_height</span><span class="p">),</span>
+                <span class="p">(</span><span class="o">-</span><span class="n">length_south</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="n">length_east</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">floor_height</span> <span class="o">+</span> <span class="n">height</span><span class="p">),</span>
+                <span class="p">(</span>
+                    <span class="o">-</span><span class="n">length_south</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">length_north</span><span class="p">,</span>
+                    <span class="o">-</span><span class="n">length_east</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                    <span class="n">floor_height</span> <span class="o">+</span> <span class="n">height</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="p">(</span>
+                    <span class="o">-</span><span class="n">length_south</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">length_north</span><span class="p">,</span>
+                    <span class="o">-</span><span class="n">length_east</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">length_west</span><span class="p">,</span>
+                    <span class="n">floor_height</span> <span class="o">+</span> <span class="n">height</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="p">(</span>
+                    <span class="o">-</span><span class="n">length_south</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                    <span class="o">-</span><span class="n">length_east</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">length_west</span><span class="p">,</span>
+                    <span class="n">floor_height</span> <span class="o">+</span> <span class="n">height</span><span class="p">,</span>
+                <span class="p">),</span>
+            <span class="p">]</span>
+
+            <span class="n">edges</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="c1"># 0: bottom</span>
+                <span class="p">[</span><span class="n">vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
+                <span class="c1"># 1: top</span>
+                <span class="p">[</span><span class="n">vertices</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">4</span><span class="p">]],</span>
+                <span class="c1"># 2: south</span>
+                <span class="p">[</span><span class="n">vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
+                <span class="c1"># 3: north</span>
+                <span class="p">[</span><span class="n">vertices</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span>
+                <span class="c1"># 4: east</span>
+                <span class="p">[</span><span class="n">vertices</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+                <span class="c1"># 5: west</span>
+                <span class="p">[</span><span class="n">vertices</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vertices</span><span class="p">[</span><span class="mi">4</span><span class="p">]],</span>
+            <span class="p">]</span>
+
+            <span class="c1"># Add walls as 3D polygons with color fill</span>
+            <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+                <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">zs</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">edge</span><span class="p">)</span>
+                <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+                    <span class="n">go</span><span class="o">.</span><span class="n">Mesh3d</span><span class="p">(</span>
+                        <span class="n">x</span><span class="o">=</span><span class="n">xs</span><span class="p">,</span>
+                        <span class="n">y</span><span class="o">=</span><span class="n">ys</span><span class="p">,</span>
+                        <span class="n">z</span><span class="o">=</span><span class="n">zs</span><span class="p">,</span>
+                        <span class="n">i</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                        <span class="n">j</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+                        <span class="n">k</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                        <span class="n">opacity</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+                        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span>
+                        <span class="n">hoverinfo</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+
+            <span class="c1"># Fenster hinzufügen</span>
+            <span class="n">window_gap_top_bottom</span> <span class="o">=</span> <span class="mf">0.5</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">window_area</span><span class="p">,</span> <span class="n">wall_vertices</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+                <span class="nb">zip</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="n">window_area_north</span><span class="p">,</span>
+                        <span class="n">window_area_east</span><span class="p">,</span>
+                        <span class="n">window_area_south</span><span class="p">,</span>
+                        <span class="n">window_area_west</span><span class="p">,</span>
+                    <span class="p">],</span>
+                    <span class="p">[</span><span class="n">edges</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">edges</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">edges</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">edges</span><span class="p">[</span><span class="mi">5</span><span class="p">]],</span>
+                <span class="p">)</span>
+            <span class="p">):</span>
+                <span class="n">window_height</span> <span class="o">=</span> <span class="n">height</span> <span class="o">-</span> <span class="n">window_gap_top_bottom</span>
+                <span class="n">window_width</span> <span class="o">=</span> <span class="n">window_area</span> <span class="o">/</span> <span class="p">(</span><span class="n">num_floors</span> <span class="o">*</span> <span class="n">window_height</span><span class="p">)</span>
+                <span class="n">window_x_center</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">wall_vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="o">+</span> <span class="p">(</span><span class="n">wall_vertices</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">wall_vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+                <span class="p">)</span>
+                <span class="n">window_y_center</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">wall_vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="o">+</span> <span class="p">(</span><span class="n">wall_vertices</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">wall_vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+                <span class="p">)</span>
+                <span class="n">window_z_center</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">floor_height</span> <span class="o">+</span> <span class="n">window_gap_top_bottom</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">window_height</span> <span class="o">/</span> <span class="mi">2</span>
+                <span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+                        <span class="n">go</span><span class="o">.</span><span class="n">Mesh3d</span><span class="p">(</span>
+                            <span class="n">x</span><span class="o">=</span><span class="p">[</span>
+                                <span class="n">window_x_center</span> <span class="o">-</span> <span class="n">window_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                                <span class="n">window_x_center</span> <span class="o">+</span> <span class="n">window_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                                <span class="n">window_x_center</span> <span class="o">+</span> <span class="n">window_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                                <span class="n">window_x_center</span> <span class="o">-</span> <span class="n">window_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                            <span class="p">],</span>
+                            <span class="n">y</span><span class="o">=</span><span class="p">[</span>
+                                <span class="n">window_y_center</span><span class="p">,</span>
+                                <span class="n">window_y_center</span><span class="p">,</span>
+                                <span class="n">window_y_center</span><span class="p">,</span>
+                                <span class="n">window_y_center</span><span class="p">,</span>
+                            <span class="p">],</span>
+                            <span class="n">z</span><span class="o">=</span><span class="p">[</span>
+                                <span class="n">window_z_center</span> <span class="o">-</span> <span class="n">window_height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                                <span class="n">window_z_center</span> <span class="o">-</span> <span class="n">window_height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                                <span class="n">window_z_center</span> <span class="o">+</span> <span class="n">window_height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                                <span class="n">window_z_center</span> <span class="o">+</span> <span class="n">window_height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                            <span class="p">],</span>
+                            <span class="n">i</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                            <span class="n">j</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+                            <span class="n">k</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                            <span class="n">opacity</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+                            <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+                            <span class="n">hoverinfo</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+                        <span class="p">)</span>
+                    <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+                        <span class="n">go</span><span class="o">.</span><span class="n">Mesh3d</span><span class="p">(</span>
+                            <span class="n">x</span><span class="o">=</span><span class="p">[</span>
+                                <span class="n">window_x_center</span><span class="p">,</span>
+                                <span class="n">window_x_center</span><span class="p">,</span>
+                                <span class="n">window_x_center</span><span class="p">,</span>
+                                <span class="n">window_x_center</span><span class="p">,</span>
+                            <span class="p">],</span>
+                            <span class="n">y</span><span class="o">=</span><span class="p">[</span>
+                                <span class="n">window_y_center</span> <span class="o">-</span> <span class="n">window_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                                <span class="n">window_y_center</span> <span class="o">+</span> <span class="n">window_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                                <span class="n">window_y_center</span> <span class="o">+</span> <span class="n">window_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                                <span class="n">window_y_center</span> <span class="o">-</span> <span class="n">window_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                            <span class="p">],</span>
+                            <span class="n">z</span><span class="o">=</span><span class="p">[</span>
+                                <span class="n">window_z_center</span> <span class="o">-</span> <span class="n">window_height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                                <span class="n">window_z_center</span> <span class="o">-</span> <span class="n">window_height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                                <span class="n">window_z_center</span> <span class="o">+</span> <span class="n">window_height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                                <span class="n">window_z_center</span> <span class="o">+</span> <span class="n">window_height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                            <span class="p">],</span>
+                            <span class="n">i</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                            <span class="n">j</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+                            <span class="n">k</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                            <span class="n">opacity</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+                            <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+                            <span class="n">hoverinfo</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+                        <span class="p">)</span>
+                    <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">fixed_height</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;An error occured during creating the simplified plot for model &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;report. Will continue without plot. Error: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">: &quot;</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
