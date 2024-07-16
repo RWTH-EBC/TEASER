@@ -171,7 +171,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_used_library_calc</span> <span class="o">=</span> <span class="s2">&quot;AixLib&quot;</span>
 
         <span class="k">if</span> <span class="n">load_data</span><span class="p">:</span>
-           <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;This option was deprecated&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;This option was deprecated&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">dir_reference_results</span> <span class="o">=</span> <span class="kc">None</span>
@@ -188,7 +188,8 @@
 <span class="sd">        DataClass : Instance of DataClass()</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">DataClass</span><span class="p">(</span><span class="n">construction_data</span><span class="o">=</span><span class="n">datahandling</span><span class="o">.</span><span class="n">ConstructionData</span><span class="o">.</span><span class="n">iwu_heavy</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">DataClass</span><span class="p">(</span>
+            <span class="n">construction_data</span><span class="o">=</span><span class="n">datahandling</span><span class="o">.</span><span class="n">ConstructionData</span><span class="o">.</span><span class="n">iwu_heavy</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Project.calc_all_buildings">
@@ -288,8 +289,9 @@
 <span class="sd">            Default: EPS035, only &#39;iwu&#39;/&#39;bmbvs&#39; archetype approach.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ass_error_type</span> <span class="o">=</span> <span class="s2">&quot;only &#39;retrofit&#39; and &#39;adv_retrofit&#39; are valid &quot;</span>
-        <span class="k">assert</span> <span class="n">type_of_retrofit</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;adv_retrofit&quot;</span><span class="p">,</span> <span class="s2">&quot;retrofit&quot;</span><span class="p">],</span> <span class="n">ass_error_type</span>
+        <span class="n">ass_error_type</span> <span class="o">=</span> <span class="s2">&quot;only &#39;retrofit&#39; and &#39;adv_retrofit&#39; are valid&quot;</span>
+        <span class="k">assert</span> <span class="n">type_of_retrofit</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;adv_retrofit&quot;</span><span class="p">,</span> <span class="s2">&quot;retrofit&quot;</span><span class="p">],</span> \
+            <span class="n">ass_error_type</span>
         <span class="n">tabula_buildings</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">iwu_buildings</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -297,29 +299,35 @@
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bldg</span><span class="p">,</span> <span class="n">SingleFamilyHouse</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">type_of_retrofit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                        <span class="s2">&quot;you need to set type_of_retrofit for &quot;</span> <span class="s2">&quot;TABULA retrofit&quot;</span>
+                        <span class="s2">&quot;you need to set type_of_retrofit for &quot;</span>
+                        <span class="s2">&quot;TABULA retrofit&quot;</span>
                     <span class="p">)</span>
                 <span class="n">tabula_buildings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bldg</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">year_of_retrofit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;you need to set year_of_retrofit for &quot;</span> <span class="s2">&quot;retrofit&quot;</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="s2">&quot;you need to set year_of_retrofit for retrofit&quot;</span><span class="p">)</span>
                 <span class="n">iwu_buildings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bldg</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">==</span> <span class="n">DataClass</span><span class="p">(</span><span class="n">construction_data</span><span class="o">=</span><span class="n">datahandling</span><span class="o">.</span><span class="n">ConstructionData</span><span class="o">.</span><span class="n">iwu_heavy</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">==</span> <span class="n">DataClass</span><span class="p">(</span>
+                <span class="n">construction_data</span><span class="o">=</span><span class="n">datahandling</span><span class="o">.</span><span class="n">ConstructionData</span><span class="o">.</span><span class="n">iwu_heavy</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">bld_iwu</span> <span class="ow">in</span> <span class="n">iwu_buildings</span><span class="p">:</span>
                 <span class="n">bld_iwu</span><span class="o">.</span><span class="n">retrofit_building</span><span class="p">(</span>
                     <span class="n">year_of_retrofit</span><span class="o">=</span><span class="n">year_of_retrofit</span><span class="p">,</span>
                     <span class="n">window_type</span><span class="o">=</span><span class="n">window_type</span><span class="p">,</span>
                     <span class="n">material</span><span class="o">=</span><span class="n">material</span><span class="p">,</span>
                 <span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataClass</span><span class="p">(</span><span class="n">construction_data</span><span class="o">=</span><span class="n">datahandling</span><span class="o">.</span><span class="n">ConstructionData</span><span class="o">.</span><span class="n">tabula_de_standard</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataClass</span><span class="p">(</span>
+                <span class="n">construction_data</span><span class="o">=</span><span class="n">datahandling</span><span class="o">.</span><span class="n">ConstructionData</span><span class="o">.</span>
+                <span class="n">tabula_de_standard</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">bld_tabula</span> <span class="ow">in</span> <span class="n">tabula_buildings</span><span class="p">:</span>
                 <span class="n">bld_tabula</span><span class="o">.</span><span class="n">retrofit_building</span><span class="p">(</span><span class="n">type_of_retrofit</span><span class="o">=</span><span class="n">type_of_retrofit</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">bld_tabula</span> <span class="ow">in</span> <span class="n">tabula_buildings</span><span class="p">:</span>
                 <span class="n">bld_tabula</span><span class="o">.</span><span class="n">retrofit_building</span><span class="p">(</span><span class="n">type_of_retrofit</span><span class="o">=</span><span class="n">type_of_retrofit</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataClass</span><span class="p">(</span><span class="n">construction_data</span><span class="o">=</span><span class="n">datahandling</span><span class="o">.</span><span class="n">ConstructionData</span><span class="o">.</span><span class="n">iwu_heavy</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataClass</span><span class="p">(</span>
+                <span class="n">construction_data</span><span class="o">=</span><span class="n">datahandling</span><span class="o">.</span><span class="n">ConstructionData</span><span class="o">.</span><span class="n">iwu_heavy</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">bld_iwu</span> <span class="ow">in</span> <span class="n">iwu_buildings</span><span class="p">:</span>
                 <span class="n">bld_iwu</span><span class="o">.</span><span class="n">retrofit_building</span><span class="p">(</span>
                     <span class="n">year_of_retrofit</span><span class="o">=</span><span class="n">year_of_retrofit</span><span class="p">,</span>
@@ -422,21 +430,24 @@
 <span class="sd">        type_bldg : Instance of Office()</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># definiere construction_data und geometry_data als enum falls noch nicht geschehen</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">construction_data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="n">construction_data</span> <span class="o">=</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">ConstructionData</span><span class="p">(</span><span class="n">construction_data</span><span class="p">)</span>
+            <span class="n">construction_data</span> <span class="o">=</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">ConstructionData</span><span class="p">(</span>
+                <span class="n">construction_data</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">geometry_data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">geometry_data</span> <span class="o">=</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">GeometryData</span><span class="p">(</span><span class="n">geometry_data</span><span class="p">)</span>
 
         <span class="n">ass_error_construction_data</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="s2">&quot;only &#39;iwu_heavy&#39; is a valid construction_data for &quot;</span> <span class="s2">&quot;non-residential archetype generation&quot;</span>
-        <span class="p">)</span>
+            <span class="s2">&quot;only &#39;iwu_heavy&#39; is a valid construction_data for &quot;</span>
+            <span class="s2">&quot;&#39;non-residential&#39; archetype generation&quot;</span><span class="p">)</span>
 
-        <span class="k">assert</span> <span class="n">construction_data</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;iwu_heavy&quot;</span><span class="p">,</span> <span class="n">ass_error_construction_data</span>
+        <span class="k">assert</span> <span class="n">construction_data</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;iwu_heavy&quot;</span><span class="p">,</span> \
+            <span class="n">ass_error_construction_data</span>
 
-        <span class="n">ass_error_geometry_data</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;geometry_data does not match the construction_data&quot;</span><span class="p">)</span>
+        <span class="n">ass_error_geometry_data</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;geometry_data does not match the construction_data&quot;</span><span class="p">)</span>
 
-        <span class="k">assert</span> <span class="n">geometry_data</span> <span class="ow">in</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">allowed_geometries</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">construction_data</span><span class="p">,</span> <span class="p">[]),</span> <span class="n">ass_error_geometry_data</span>
+        <span class="k">assert</span> <span class="n">geometry_data</span> <span class="ow">in</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">allowed_geometries</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">construction_data</span><span class="p">,</span> <span class="p">[]),</span> <span class="n">ass_error_geometry_data</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataClass</span><span class="p">(</span><span class="n">construction_data</span><span class="p">)</span>
 
@@ -604,7 +615,8 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">construction_data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="n">construction_data</span> <span class="o">=</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">ConstructionData</span><span class="p">(</span><span class="n">construction_data</span><span class="p">)</span>
+            <span class="n">construction_data</span> <span class="o">=</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">ConstructionData</span><span class="p">(</span>
+                <span class="n">construction_data</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">geometry_data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">geometry_data</span> <span class="o">=</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">GeometryData</span><span class="p">(</span><span class="n">geometry_data</span><span class="p">)</span>
 
@@ -623,9 +635,11 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataClass</span><span class="p">(</span><span class="n">construction_data</span><span class="p">)</span>
 
-        <span class="n">ass_error_geometry_data</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;geometry_data does not match the construction_data&quot;</span><span class="p">)</span>
+        <span class="n">ass_error_geometry_data</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;geometry_data does not match the construction_data&quot;</span><span class="p">)</span>
 
-        <span class="k">assert</span> <span class="n">geometry_data</span> <span class="ow">in</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">allowed_geometries</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">construction_data</span><span class="p">,</span> <span class="p">[]),</span> <span class="n">ass_error_geometry_data</span>
+        <span class="k">assert</span> <span class="n">geometry_data</span> <span class="ow">in</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">allowed_geometries</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">construction_data</span><span class="p">,</span> <span class="p">[]),</span> <span class="n">ass_error_geometry_data</span>
 
         <span class="n">common_arg</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
@@ -655,7 +669,8 @@
         <span class="k">if</span> <span class="n">geometry_data</span> <span class="o">==</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">IwuSingleFamilyDwelling</span><span class="p">:</span>
             <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">geometries</span><span class="p">[</span><span class="n">geometry_data</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">iwu_arg</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">geometry_data</span> <span class="o">==</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst1a</span><span class="p">:</span>
-            <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">geometries</span><span class="p">[</span><span class="n">geometry_data</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">urbanrenet_arg</span><span class="p">)</span>
+            <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">geometries</span><span class="p">[</span><span class="n">geometry_data</span><span class="p">](</span>
+                <span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">urbanrenet_arg</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">geometry_data</span><span class="o">.</span><span class="n">value</span> <span class="ow">in</span> <span class="p">[</span><span class="n">datahandling</span><span class="o">.</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst1b</span><span class="p">,</span>
                                      <span class="n">datahandling</span><span class="o">.</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst2</span><span class="p">,</span>
                                      <span class="n">datahandling</span><span class="o">.</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst3</span><span class="p">,</span>
@@ -667,11 +682,14 @@
                                      <span class="n">datahandling</span><span class="o">.</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst8a</span><span class="p">,</span>
                                      <span class="n">datahandling</span><span class="o">.</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst8b</span><span class="p">]:</span>
             <span class="n">urbanrenet_arg</span><span class="p">[</span><span class="s1">&#39;number_of_apartments&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">number_of_apartments</span>
-            <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">geometries</span><span class="p">[</span><span class="n">geometry_data</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">urbanrenet_arg</span><span class="p">)</span>
+            <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">geometries</span><span class="p">[</span><span class="n">geometry_data</span><span class="p">](</span>
+                <span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">urbanrenet_arg</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">geometries</span><span class="p">[</span><span class="n">geometry_data</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">common_arg</span><span class="p">)</span>
+            <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">geometries</span><span class="p">[</span><span class="n">geometry_data</span><span class="p">](</span>
+                <span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">common_arg</span><span class="p">)</span>
         <span class="n">type_bldg</span><span class="o">.</span><span class="n">generate_archetype</span><span class="p">()</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">construction_data</span><span class="o">.</span><span class="n">is_tabula_de</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">construction_data</span><span class="o">.</span><span class="n">is_tabula_dk</span><span class="p">():</span>
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">construction_data</span><span class="o">.</span><span class="n">is_tabula_de</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span>
+                <span class="n">construction_data</span><span class="o">.</span><span class="n">is_tabula_dk</span><span class="p">()):</span>
             <span class="n">type_bldg</span><span class="o">.</span><span class="n">calc_building_parameter</span><span class="p">(</span>
                 <span class="n">number_of_elements</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_number_of_elements_calc</span><span class="p">,</span>
                 <span class="n">merge_windows</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_merge_windows_calc</span><span class="p">,</span>
