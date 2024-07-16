@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser.data.output package &mdash; TEASER 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="teaser.data.output.reports package" href="teaser.data.output.reports.html" />
+    <link rel="prev" title="teaser.data.input.inputdata.weatherdata package" href="teaser.data.input.inputdata.weatherdata.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            TEASER
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">teaser</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="teaser.html">teaser package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="teaser.html#teaser">teaser</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="teaser.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="teaser.data.html">teaser.data package</a><ul class="current">
+<li class="toctree-l5 current"><a class="reference internal" href="teaser.data.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l6"><a class="reference internal" href="teaser.data.input.html">teaser.data.input package</a></li>
+<li class="toctree-l6 current"><a class="current reference internal" href="#">teaser.data.output package</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="teaser.data.output.reports.html">teaser.data.output.reports package</a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#module-teaser.data.output.aixlib_output">teaser.data.output.aixlib_output module</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="#teaser.data.output.aixlib_output.export_multizone"><code class="docutils literal notranslate"><span class="pre">export_multizone()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="#module-teaser.data.output.buildingelement_output">teaser.data.output.buildingelement_output module</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="#teaser.data.output.buildingelement_output.delete_type_element"><code class="docutils literal notranslate"><span class="pre">delete_type_element()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="#teaser.data.output.buildingelement_output.save_type_element"><code class="docutils literal notranslate"><span class="pre">save_type_element()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="#module-teaser.data.output.ibpsa_output">teaser.data.output.ibpsa_output module</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="#teaser.data.output.ibpsa_output.export_ibpsa"><code class="docutils literal notranslate"><span class="pre">export_ibpsa()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="#module-teaser.data.output.material_output">teaser.data.output.material_output module</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="#teaser.data.output.material_output.save_material"><code class="docutils literal notranslate"><span class="pre">save_material()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="#module-teaser.data.output.runUnitTests">teaser.data.output.runUnitTests module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#module-teaser.data.output.teaserjson_output">teaser.data.output.teaserjson_output module</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="#teaser.data.output.teaserjson_output.save_teaser_json"><code class="docutils literal notranslate"><span class="pre">save_teaser_json()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="#teaser.data.output.teaserjson_output.set_basic_data"><code class="docutils literal notranslate"><span class="pre">set_basic_data()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="#teaser.data.output.teaserjson_output.set_layer_data"><code class="docutils literal notranslate"><span class="pre">set_layer_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="#module-teaser.data.output.usecond_output">teaser.data.output.usecond_output module</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="#teaser.data.output.usecond_output.save_use_conditions"><code class="docutils literal notranslate"><span class="pre">save_use_conditions()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="teaser.data.html#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="teaser.data.html#module-teaser.data.dataclass">teaser.data.dataclass module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="teaser.data.html#module-teaser.data.utilities">teaser.data.utilities module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.examples.html">teaser.examples package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.html">teaser.logic package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.html#module-teaser.project">teaser.project module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">teaser</a></li>
+          <li class="breadcrumb-item"><a href="teaser.html">teaser package</a></li>
+          <li class="breadcrumb-item"><a href="teaser.data.html">teaser.data package</a></li>
+      <li class="breadcrumb-item active">teaser.data.output package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/code/teaser.data.output.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-teaser.data.output">
+<span id="teaser-data-output-package"></span><h1>teaser.data.output package<a class="headerlink" href="#module-teaser.data.output" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="teaser.data.output.reports.html">teaser.data.output.reports package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.output.reports.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.output.reports.html#module-teaser.data.output.reports.model_report">teaser.data.output.reports.model_report module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.output.reports.html#teaser.data.output.reports.model_report.add_compass_to_3d_plot"><code class="docutils literal notranslate"><span class="pre">add_compass_to_3d_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.output.reports.html#teaser.data.output.reports.model_report.create_csv_report"><code class="docutils literal notranslate"><span class="pre">create_csv_report()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.output.reports.html#teaser.data.output.reports.model_report.create_html_page"><code class="docutils literal notranslate"><span class="pre">create_html_page()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.output.reports.html#teaser.data.output.reports.model_report.create_model_report"><code class="docutils literal notranslate"><span class="pre">create_model_report()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.output.reports.html#teaser.data.output.reports.model_report.create_simple_3d_visualization"><code class="docutils literal notranslate"><span class="pre">create_simple_3d_visualization()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.output.reports.html#teaser.data.output.reports.model_report.export_reports"><code class="docutils literal notranslate"><span class="pre">export_reports()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.output.reports.html#teaser.data.output.reports.model_report.localize_floats"><code class="docutils literal notranslate"><span class="pre">localize_floats()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-teaser.data.output.aixlib_output">
+<span id="teaser-data-output-aixlib-output-module"></span><h2>teaser.data.output.aixlib_output module<a class="headerlink" href="#module-teaser.data.output.aixlib_output" title="Link to this heading"></a></h2>
+<p>This module contains function for AixLib model generation</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.data.output.aixlib_output.export_multizone">
+<span class="sig-prename descclassname"><span class="pre">teaser.data.output.aixlib_output.</span></span><span class="sig-name descname"><span class="pre">export_multizone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buildings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_postprocessing_calc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/output/aixlib_output.html#export_multizone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.output.aixlib_output.export_multizone" title="Link to this definition"></a></dt>
+<dd><p>Exports models for AixLib library</p>
+<p>Exports a building for
+AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped models
+using the ThermalZoneEquipped and supporting models, like tables and weather
+model. Depending on chosen calculation method the parameter set to 1,2,
+3 or 4 element model. By default it uses the  correction for solar
+glazing (corG) and decoupled heat conduction through windows (
+merge_windows=False). In contrast to versions &lt; 0.5 TEASER now does not
+support any other model options, as we observed no need, since single
+ThermalZones are identical with IBPSA models. If you miss one of the
+old options please contact us.</p>
+<p>This function uses Mako Templates specified in
+data.output.modelicatemplates.AixLib</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>buildings</strong><span class="classifier">list of instances of Building</span></dt><dd><p>list of TEASER instances of a Building that is exported to a AixLib
+MultizoneEquipped models. If you want to export a single building,
+please pass it over as a list containing only that building.</p>
+</dd>
+<dt><strong>prj</strong><span class="classifier">instance of Project</span></dt><dd><p>Instance of TEASER Project object to access Project related
+information, e.g. name or version of used libraries</p>
+</dd>
+<dt><strong>path</strong><span class="classifier">string</span></dt><dd><p>if the Files should not be stored in default output path of TEASER,
+an alternative path can be specified as a full path</p>
+</dd>
+<dt><strong>use_postprocessing_calc</strong><span class="classifier">bool</span></dt><dd><p>If activated the exported model will use the multizonePostProcessing
+to calculate common outputs for simulation time like total heating
+demands. Only supported for Aixlib. Default is False.</p>
+</dd>
+<dt><strong>export_vars</strong><span class="classifier">str</span></dt><dd><p>Holds the string about which variables to export following the
+__Dymola_selection syntax.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>lookup</strong><span class="classifier">TemplateLookup object</span></dt><dd><p>Instance of mako.TemplateLookup to store general functions for templates</p>
+</dd>
+<dt><strong>zone_template_1</strong><span class="classifier">Template object</span></dt><dd><p>Template for ThermalZoneRecord using 1 element model</p>
+</dd>
+<dt><strong>zone_template_2</strong><span class="classifier">Template object</span></dt><dd><p>Template for ThermalZoneRecord using 2 element model</p>
+</dd>
+<dt><strong>zone_template_3</strong><span class="classifier">Template object</span></dt><dd><p>Template for ThermalZoneRecord using 3 element model</p>
+</dd>
+<dt><strong>zone_template_4</strong><span class="classifier">Template object</span></dt><dd><p>Template for ThermalZoneRecord using 4 element model</p>
+</dd>
+<dt><strong>model_template</strong><span class="classifier">Template object</span></dt><dd><p>Template for MultiZone model</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-teaser.data.output.buildingelement_output">
+<span id="teaser-data-output-buildingelement-output-module"></span><h2>teaser.data.output.buildingelement_output module<a class="headerlink" href="#module-teaser.data.output.buildingelement_output" title="Link to this heading"></a></h2>
+<p>This module contains function to save building element classes.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.data.output.buildingelement_output.delete_type_element">
+<span class="sig-prename descclassname"><span class="pre">teaser.data.output.buildingelement_output.</span></span><span class="sig-name descname"><span class="pre">delete_type_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/output/buildingelement_output.html#delete_type_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.output.buildingelement_output.delete_type_element" title="Link to this definition"></a></dt>
+<dd><p>Delete typical element in json.</p>
+<p>Deletes typical building elements according to their construction
+year and their construction type in the the json file for type building
+elements. If the Project parent is set, it automatically saves it to
+the file given in Project.data. Alternatively you can specify a path to
+a file of TypeBuildingElements. If this file does not exist,
+a new file is created.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>element</strong><span class="classifier">BuildingElement()</span></dt><dd><p>Instance of BuildingElement or inherited Element of TEASER</p>
+</dd>
+<dt><strong>data_class</strong><span class="classifier">DataClass()</span></dt><dd><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that.)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.data.output.buildingelement_output.save_type_element">
+<span class="sig-prename descclassname"><span class="pre">teaser.data.output.buildingelement_output.</span></span><span class="sig-name descname"><span class="pre">save_type_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/output/buildingelement_output.html#save_type_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.output.buildingelement_output.save_type_element" title="Link to this definition"></a></dt>
+<dd><p>Save information about building element to json.</p>
+<p>Saves typical building elements according to their construction
+year and their construction type in the json file for type building
+elements. If the Project parent is set, it automatically saves it to
+the file given in Project.data. Alternatively you can specify a path to
+a file of TypeBuildingElements. If this file does not exist,
+a new file is created.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>element</strong><span class="classifier">BuildingElement()</span></dt><dd><p>Instance of BuildingElement or inherited Element of TEASER</p>
+</dd>
+<dt><strong>data_class</strong><span class="classifier">DataClass()</span></dt><dd><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-teaser.data.output.ibpsa_output">
+<span id="teaser-data-output-ibpsa-output-module"></span><h2>teaser.data.output.ibpsa_output module<a class="headerlink" href="#module-teaser.data.output.ibpsa_output" title="Link to this heading"></a></h2>
+<p>ibpsa_output</p>
+<p>This module contains function to call Templates for IBPSA model generation</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.data.output.ibpsa_output.export_ibpsa">
+<span class="sig-prename descclassname"><span class="pre">teaser.data.output.ibpsa_output.</span></span><span class="sig-name descname"><span class="pre">export_ibpsa</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buildings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">library</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'AixLib'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/output/ibpsa_output.html#export_ibpsa"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.output.ibpsa_output.export_ibpsa" title="Link to this definition"></a></dt>
+<dd><p>Exports models for IBPSA library</p>
+<p>Export a building to several models for
+IBPSA.ThermalZones.ReducedOrder. Depending on the chosen calculation
+method models for 1, 2, 3, or 4 element model are exported. In addition
+you can specify if windows should be lumped into the walls, like it is
+done in VDI 6007 (merge_windows=True) or not. For each zone, one model is
+exported, if you want to combine all thermal zones into one model, consider
+using AixLib. The export includes internal gains from use conditions (
+calculated in teaser.logic.calculation.ibpsa) but does not include any
+heating or cooling equipment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>buildings</strong><span class="classifier">list of instances of Building</span></dt><dd><p>list of TEASER instances of a Building that are exported If you
+want to
+export a single building, please pass it over as a list containing
+only that building.</p>
+</dd>
+<dt><strong>prj</strong><span class="classifier">instance of Project</span></dt><dd><p>Instance of TEASER Project object to access Project related
+information, e.g. name or version of used libraries</p>
+</dd>
+<dt><strong>path</strong><span class="classifier">string</span></dt><dd><p>if the Files should not be stored in default output path of TEASER,
+an alternative path can be specified as a full path</p>
+</dd>
+<dt><strong>library</strong><span class="classifier">str</span></dt><dd><p>Used library within the framework of IBPSA library. The
+models are identical in each library, but IBPSA Modelica library is
+just a core set of models and should not be used standalone.
+Valid values are ‘AixLib’ (default), ‘Buildings’,
+‘BuildingSystems’ and ‘IDEAS’.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>lookup</strong><span class="classifier">TemplateLookup object</span></dt><dd><p>Instance of mako.TemplateLookup to store general functions for templates</p>
+</dd>
+<dt><strong>model_template_1</strong><span class="classifier">Template object</span></dt><dd><p>Template for ThermalZoneRecord using 1 element model</p>
+</dd>
+<dt><strong>model_template_2</strong><span class="classifier">Template object</span></dt><dd><p>Template for ThermalZoneRecord using 2 element model</p>
+</dd>
+<dt><strong>model_template_3</strong><span class="classifier">Template object</span></dt><dd><p>Template for ThermalZoneRecord using 3 element model</p>
+</dd>
+<dt><strong>model_template_4</strong><span class="classifier">Template object</span></dt><dd><p>Template for ThermalZoneRecord using 4 element model</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-teaser.data.output.material_output">
+<span id="teaser-data-output-material-output-module"></span><h2>teaser.data.output.material_output module<a class="headerlink" href="#module-teaser.data.output.material_output" title="Link to this heading"></a></h2>
+<p>This module contains function to save material classes.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.data.output.material_output.save_material">
+<span class="sig-prename descclassname"><span class="pre">teaser.data.output.material_output.</span></span><span class="sig-name descname"><span class="pre">save_material</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/output/material_output.html#save_material"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.output.material_output.save_material" title="Link to this definition"></a></dt>
+<dd><p>Material saver.</p>
+<p>Saves material and their properties the JSON file for type building
+elements. If the Project parent is set, it automatically saves it to
+the file given in Project.data. Alternatively you can specify a path to
+a file with Materials. If this file does not exist, a new file is created.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>material</strong><span class="classifier">Material()</span></dt><dd><p>instance of TEASERS Material class</p>
+</dd>
+<dt><strong>data_class</strong><span class="classifier">DataClass()</span></dt><dd><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-teaser.data.output.runUnitTests">
+<span id="teaser-data-output-rununittests-module"></span><h2>teaser.data.output.runUnitTests module<a class="headerlink" href="#module-teaser.data.output.runUnitTests" title="Link to this heading"></a></h2>
+</section>
+<section id="module-teaser.data.output.teaserjson_output">
+<span id="teaser-data-output-teaserjson-output-module"></span><h2>teaser.data.output.teaserjson_output module<a class="headerlink" href="#module-teaser.data.output.teaserjson_output" title="Link to this heading"></a></h2>
+<p>Saves alls Project data into a json.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.data.output.teaserjson_output.save_teaser_json">
+<span class="sig-prename descclassname"><span class="pre">teaser.data.output.teaserjson_output.</span></span><span class="sig-name descname"><span class="pre">save_teaser_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/output/teaserjson_output.html#save_teaser_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.output.teaserjson_output.save_teaser_json" title="Link to this definition"></a></dt>
+<dd><p>Save a project to a JSON file.</p>
+<p>The function needs to be written.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>path: string</strong></dt><dd><p>complete path to the output file</p>
+</dd>
+<dt><strong>project: Project()</strong></dt><dd><p>Teaser instance of Project()</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.data.output.teaserjson_output.set_basic_data">
+<span class="sig-prename descclassname"><span class="pre">teaser.data.output.teaserjson_output.</span></span><span class="sig-name descname"><span class="pre">set_basic_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wall_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/output/teaserjson_output.html#set_basic_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.output.teaserjson_output.set_basic_data" title="Link to this definition"></a></dt>
+<dd><p>Set basic data of building elements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wall_out</strong><span class="classifier">collection.OrderedDict</span></dt><dd><p>OrderedDict for walls</p>
+</dd>
+<dt><strong>element</strong><span class="classifier">TEASERClass</span></dt><dd><p>teaser class representation of a building element</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.data.output.teaserjson_output.set_layer_data">
+<span class="sig-prename descclassname"><span class="pre">teaser.data.output.teaserjson_output.</span></span><span class="sig-name descname"><span class="pre">set_layer_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wall_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/output/teaserjson_output.html#set_layer_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.output.teaserjson_output.set_layer_data" title="Link to this definition"></a></dt>
+<dd><p>Set layer data of building element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wall_out</strong><span class="classifier">collection.OrderedDict</span></dt><dd><p>OrderedDict for walls</p>
+</dd>
+<dt><strong>element</strong><span class="classifier">TEASERClass</span></dt><dd><p>teaser class representation of a building element</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-teaser.data.output.usecond_output">
+<span id="teaser-data-output-usecond-output-module"></span><h2>teaser.data.output.usecond_output module<a class="headerlink" href="#module-teaser.data.output.usecond_output" title="Link to this heading"></a></h2>
+<p>This module contains function to save UseConditions classes.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.data.output.usecond_output.save_use_conditions">
+<span class="sig-prename descclassname"><span class="pre">teaser.data.output.usecond_output.</span></span><span class="sig-name descname"><span class="pre">save_use_conditions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_cond</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/output/usecond_output.html#save_use_conditions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.output.usecond_output.save_use_conditions" title="Link to this definition"></a></dt>
+<dd><p>Use conditions saver.</p>
+<p>Saves use conditions according to their usage type in the the JSON file
+for use conditions in InputData. If the Project parent is set, it
+automatically saves it to the file given in Project.data. Alternatively
+you can specify a path to a file of UseConditions. If this
+file does not exist, a new file is created.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>bound_cond</strong><span class="classifier">UseCondtiions()</span></dt><dd><p>Instance of TEASERs
+BuildingObjects.UseCondtiions</p>
+</dd>
+<dt><strong>data_class</strong><span class="classifier">DataClass()</span></dt><dd><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that.ile</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="teaser.data.input.inputdata.weatherdata.html" class="btn btn-neutral float-left" title="teaser.data.input.inputdata.weatherdata package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="teaser.data.output.reports.html" class="btn btn-neutral float-right" title="teaser.data.output.reports package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
