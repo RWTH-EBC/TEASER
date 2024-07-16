@@ -86,7 +86,7 @@ class Project(object):
         self._used_library_calc = "AixLib"
 
         if load_data:
-           raise ValueError("This option was deprecated")
+            raise ValueError("This option was deprecated")
         self.data = None
 
         self.dir_reference_results = None
