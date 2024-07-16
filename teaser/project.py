@@ -101,7 +101,8 @@ class Project(object):
         DataClass : Instance of DataClass()
 
         """
-        return DataClass(construction_data=datahandling.ConstructionData.iwu_heavy)
+        return DataClass(
+            construction_data=datahandling.ConstructionData.iwu_heavy)
 
     def calc_all_buildings(self, raise_errors=False):
         """Calculates values for all project buildings
@@ -195,8 +196,9 @@ class Project(object):
             Default: EPS035, only 'iwu'/'bmbvs' archetype approach.
 
         """
-        ass_error_type = "only 'retrofit' and 'adv_retrofit' are valid "
-        assert type_of_retrofit in [None, "adv_retrofit", "retrofit"], ass_error_type
+        ass_error_type = "only 'retrofit' and 'adv_retrofit' are valid"
+        assert type_of_retrofit in [None, "adv_retrofit", "retrofit"], \
+            ass_error_type
         tabula_buildings = []
         iwu_buildings = []
 
@@ -204,29 +206,35 @@ class Project(object):
             if isinstance(bldg, SingleFamilyHouse):
                 if type_of_retrofit is None:
                     raise ValueError(
-                        "you need to set type_of_retrofit for " "TABULA retrofit"
+                        "you need to set type_of_retrofit for "
+                        "TABULA retrofit"
                     )
                 tabula_buildings.append(bldg)
             else:
                 if year_of_retrofit is None:
-                    raise ValueError("you need to set year_of_retrofit for " "retrofit")
+                    raise ValueError(
+                        "you need to set year_of_retrofit for retrofit")
                 iwu_buildings.append(bldg)
 
-        if self.data == DataClass(construction_data=datahandling.ConstructionData.iwu_heavy):
+        if self.data == DataClass(
+                construction_data=datahandling.ConstructionData.iwu_heavy):
             for bld_iwu in iwu_buildings:
                 bld_iwu.retrofit_building(
                     year_of_retrofit=year_of_retrofit,
                     window_type=window_type,
                     material=material,
                 )
-            self.data = DataClass(construction_data=datahandling.ConstructionData.tabula_de_standard)
+            self.data = DataClass(
+                construction_data=datahandling.ConstructionData.
+                tabula_de_standard)
             for bld_tabula in tabula_buildings:
                 bld_tabula.retrofit_building(type_of_retrofit=type_of_retrofit)
 
         else:
             for bld_tabula in tabula_buildings:
                 bld_tabula.retrofit_building(type_of_retrofit=type_of_retrofit)
-            self.data = DataClass(construction_data=datahandling.ConstructionData.iwu_heavy)
+            self.data = DataClass(
+                construction_data=datahandling.ConstructionData.iwu_heavy)
             for bld_iwu in iwu_buildings:
                 bld_iwu.retrofit_building(
                     year_of_retrofit=year_of_retrofit,
@@ -326,21 +334,24 @@ class Project(object):
         type_bldg : Instance of Office()
 
         """
-        # definiere construction_data und geometry_data als enum falls noch nicht geschehen
         if isinstance(construction_data, str):
-            construction_data = datahandling.ConstructionData(construction_data)
+            construction_data = datahandling.ConstructionData(
+                construction_data)
         if isinstance(geometry_data, str):
             geometry_data = datahandling.GeometryData(geometry_data)
 
         ass_error_construction_data = (
-            "only 'iwu_heavy' is a valid construction_data for " "non-residential archetype generation"
-        )
+            "only 'iwu_heavy' is a valid construction_data for "
+            "'non-residential' archetype generation")
 
-        assert construction_data.value == "iwu_heavy", ass_error_construction_data
+        assert construction_data.value == "iwu_heavy", \
+            ass_error_construction_data
 
-        ass_error_geometry_data = ("geometry_data does not match the construction_data")
+        ass_error_geometry_data = (
+            "geometry_data does not match the construction_data")
 
-        assert geometry_data in datahandling.allowed_geometries.get(construction_data, []), ass_error_geometry_data
+        assert geometry_data in datahandling.allowed_geometries.get(
+            construction_data, []), ass_error_geometry_data
 
         self.data = DataClass(construction_data)
 
@@ -505,7 +516,8 @@ class Project(object):
 
         """
         if isinstance(construction_data, str):
-            construction_data = datahandling.ConstructionData(construction_data)
+            construction_data = datahandling.ConstructionData(
+                construction_data)
         if isinstance(geometry_data, str):
             geometry_data = datahandling.GeometryData(geometry_data)
 
@@ -524,9 +536,11 @@ class Project(object):
 
         self.data = DataClass(construction_data)
 
-        ass_error_geometry_data = ("geometry_data does not match the construction_data")
+        ass_error_geometry_data = (
+            "geometry_data does not match the construction_data")
 
-        assert geometry_data in datahandling.allowed_geometries.get(construction_data, []), ass_error_geometry_data
+        assert geometry_data in datahandling.allowed_geometries.get(
+            construction_data, []), ass_error_geometry_data
 
         common_arg = {
             'name': name,
@@ -556,7 +570,8 @@ class Project(object):
         if geometry_data == datahandling.GeometryData.IwuSingleFamilyDwelling:
             type_bldg = datahandling.geometries[geometry_data](self, **iwu_arg)
         elif geometry_data == datahandling.GeometryData.UrbanrenetEst1a:
-            type_bldg = datahandling.geometries[geometry_data](self, **urbanrenet_arg)
+            type_bldg = datahandling.geometries[geometry_data](
+                self, **urbanrenet_arg)
         elif geometry_data.value in [datahandling.GeometryData.UrbanrenetEst1b,
                                      datahandling.GeometryData.UrbanrenetEst2,
                                      datahandling.GeometryData.UrbanrenetEst3,
@@ -568,11 +583,14 @@ class Project(object):
                                      datahandling.GeometryData.UrbanrenetEst8a,
                                      datahandling.GeometryData.UrbanrenetEst8b]:
             urbanrenet_arg['number_of_apartments'] = number_of_apartments
-            type_bldg = datahandling.geometries[geometry_data](self, **urbanrenet_arg)
+            type_bldg = datahandling.geometries[geometry_data](
+                self, **urbanrenet_arg)
         else:
-            type_bldg = datahandling.geometries[geometry_data](self, **common_arg)
+            type_bldg = datahandling.geometries[geometry_data](
+                self, **common_arg)
         type_bldg.generate_archetype()
-        if not construction_data.is_tabula_de() and not construction_data.is_tabula_dk():
+        if (not construction_data.is_tabula_de() and not
+                construction_data.is_tabula_dk()):
             type_bldg.calc_building_parameter(
                 number_of_elements=self._number_of_elements_calc,
                 merge_windows=self._merge_windows_calc,
