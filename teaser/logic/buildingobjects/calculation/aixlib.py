@@ -123,7 +123,7 @@ class AixLib(object):
         path = os.path.join(path, self.file_set_t_heat)
 
         export = pd.DataFrame(
-            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
+            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="h")
             .to_series()
             .dt.strftime("%m-%d %H:%M:%S"),
             columns=[zone.name for zone in self.parent.thermal_zones],
@@ -165,7 +165,7 @@ class AixLib(object):
         path = os.path.join(path, self.file_set_t_cool)
 
         export = pd.DataFrame(
-            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
+            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="h")
             .to_series()
             .dt.strftime("%m-%d %H:%M:%S"),
             columns=[zone.name for zone in self.parent.thermal_zones],
@@ -226,7 +226,7 @@ class AixLib(object):
             export = self.parent.central_ahu.schedules
         else:  # Dummy values for Input Table
             export = pd.DataFrame(
-                index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
+                index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="h")
                 .to_series()
                 .dt.strftime("%m-%d %H:%M:%S")
             )
@@ -256,8 +256,8 @@ class AixLib(object):
         3,6,9,...  Column : profile_machines
         4,7,10,... Column : profile_lighting
 
-        Note
-        ----------
+        Notes
+        -----
         When time line is created, we need to add a 0 to first element of
         all boundaries. This is due to to expected format in Modelica.
 
@@ -276,7 +276,7 @@ class AixLib(object):
         path = os.path.join(path, self.file_internal_gains)
 
         export = pd.DataFrame(
-            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
+            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="h")
             .to_series()
             .dt.strftime("%m-%d %H:%M:%S")
         )

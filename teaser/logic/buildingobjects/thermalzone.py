@@ -4,8 +4,6 @@
 """This module includes the ThermalZone class
 """
 from __future__ import division
-
-import itertools
 import random
 import re
 import warnings
@@ -58,11 +56,10 @@ class ThermalZone(object):
         List of Floor instances.
     ceilings: list
         List of Ceiling instances.
-    use_conditions : instance of UseConditions()
+    use_conditions : UseConditions
         Instance of UseConditions with all relevant information for the usage
         of the thermal zone
-    model_attr : instance of OneElement(), TwoElement(), ThreeElement() or
-                FourElement()
+    model_attr : Union[OneElement, TwoElement, ThreeElement, FourElement]
         Instance of OneElement(), TwoElement(), ThreeElement() or
         FourElement(), that holds all calculation functions and attributes
         needed for the specific model.
@@ -119,11 +116,12 @@ class ThermalZone(object):
         the corresponding calculation Class (e.g. TwoElement) and calculates
         the zone parameters. Currently the function is able to distinguishes
         between the number of elements, we distinguish between:
+
             - one element: all outer walls are aggregated into one element,
-            inner wall are neglected
+              inner wall are neglected
             - two elements: exterior and interior walls are aggregated
             - three elements: like 2, but floor or roofs are aggregated
-            separately
+              separately
             - four elements: roofs and floors are aggregated separately
 
         For all four options we can chose if the thermal conduction through
@@ -484,20 +482,20 @@ class ThermalZone(object):
             name = regex.sub('', value)
         else:
             try:
-                value = str(value)
-                name = regex.sub('', value)
-
+                name = regex.sub('', str(value))
             except ValueError:
                 print("Can't convert name to string")
-
+        
         # check if another zone with same name exists
         tz_names = [tz._name for tz in self.parent.thermal_zones[:-1]]
         if name in tz_names:
-            for i in itertools.count(start=1):
-                name_add = name + "_" + str(i)
+            i = 1
+            while True:
+                name_add = f"{name}_{i}"
                 if name_add not in tz_names:
                     name = name_add
                     break
+                i += 1
         self._name = name
 
     @property

@@ -1,10 +1,11 @@
-![E.ON EBC RWTH Aachen University](./doc/_static/EBC_Logo.png)
+![E.ON EBC RWTH Aachen University](docs/source/_static/EBC_Logo.png)
 
 # TEASER - Tool for Energy Analysis and Simulation for Efficient Retrofit
 
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 [![Coverage Status](https://coveralls.io/repos/github/RWTH-EBC/TEASER/badge.svg)](https://coveralls.io/github/RWTH-EBC/TEASER)
 [![Build Status](https://travis-ci.org/RWTH-EBC/TEASER.svg?branch=master)](https://travis-ci.org/RWTH-EBC/TEASER.svg?branch=master)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)
 
 TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit) allows
 fast generation of archetype buildings with low input requirements and the
@@ -32,10 +33,6 @@ available under the
 If you have any questions regarding TEASER feel free to contact us at
 [ebc-teaser@eonerc.rwth-aachen.de](mailto:ebc-teaser@eonerc.rwth-aachen.de).
 
-If you want to use TEASER without installation, you can use out TEASER webtool, which
-will generate a Modelica model and provide this as download:
-
- * [http://teaser.eonerc.rwth-aachen.de](http://teaser.eonerc.rwth-aachen.de)
 
 ## Description
 
@@ -58,10 +55,15 @@ models for all libraries supporting the
 
 ## Version
 
-TEASER is a ongoing research project, the current version is 0.7.6, which is
-still a pre-release.
+TEASER is an ongoing research project, the current version is still a pre-release.
 
 ## How to use TEASER
+
+### Examples and jupyter notebooks
+
+We provide different examples to show the usage of TEASER.
+Check out the files under teaser/examples or the jupyter-notebooks available here: docs/jupyter-notebooks.
+If you just want to read the example on github, check them here: docs/examples.
 
 ### Dependencies
 
@@ -148,4 +150,4 @@ Parts of TEASER have been developed within public funded projects
 and with financial support by BMWi (German Federal Ministry for Economic
 Affairs and Energy).
 
-<img src="http://www.innovation-beratung-foerderung.de/INNO/Redaktion/DE/Bilder/Titelbilder/titel_foerderlogo_bmwi.jpg;jsessionid=4BD60B6CD6337CDB6DE21DC1F3D6FEC5?__blob=poster&v=2)" width="200">
+<img src="https://www.innovation-beratung-foerderung.de/INNO/Redaktion/DE/Bilder/Titelbilder/titel_foerderlogo_bmwi.jpg?__blob=normal" width="200">

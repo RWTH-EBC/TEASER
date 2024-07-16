@@ -57,7 +57,7 @@ def create_model_report(prj, path):
         # make sure that lowest values of orient come first
         sorted_keys = sorted(outer_areas.keys())
         sorted_outer_areas = {key: outer_areas[key] for key in sorted_keys}
-        for orient in outer_areas:
+        for orient in sorted_outer_areas:
             # some archetypes use floats, some integers for orientation in
             # TEASER
             orient = float(orient)

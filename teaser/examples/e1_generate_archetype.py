@@ -1,13 +1,11 @@
-# Created July 2015
-# TEASER 4 Development Team
-
-"""This module contains an example how to generate archetype buildings using
-TEASER API functions.
-"""
+# # Example 1: Generate archetype buildings using TEASER API
+# This module contains an example how to generate archetype buildings
+# using TEASER API functions.
+# You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)
 
 
 def example_generate_archetype():
-    """"This function demonstrates the generation of residential and
+    """This function demonstrates the generation of residential and
     non-residential archetype buildings using the API function of TEASER"""
 
     # First step: Import the TEASER API (called Project) into your Python

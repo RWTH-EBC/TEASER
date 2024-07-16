@@ -7,15 +7,8 @@ Tool for Energy Analysis and Simulation for Efficient Retrofit
 import sys
 import os
 
-v = sys.version_info
-if v >= (3, 3):
-    py33 = True
-    py27 = False
-elif v >= (2, 7) and v < (3,):
-    py33 = False
-    py27 = True
-else:
-    raise Exception('This software runs on python versions 2.7 or >=3.3 only!')
+__version__ = "0.7.7"
+
 
 new_path = os.path.join(os.path.expanduser('~'), ("TEASEROutput"))
 if not os.path.exists(new_path):

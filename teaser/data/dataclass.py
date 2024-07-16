@@ -85,7 +85,7 @@ class DataClass(object):
         if self.path_tb.endswith("json"):
             if os.path.isfile(self.path_tb):
                 try:
-                    with open(self.path_tb, "r+") as f:
+                    with open(self.path_tb, "r") as f:
                         self.element_bind = json.load(
                             f, object_pairs_hook=collections.OrderedDict
                         )
@@ -101,7 +101,7 @@ class DataClass(object):
         if self.path_uc.endswith("json"):
             if os.path.isfile(self.path_uc):
                 try:
-                    with open(self.path_uc, "r+") as f:
+                    with open(self.path_uc, "r") as f:
                         self.conditions_bind = json.load(
                             f, object_pairs_hook=collections.OrderedDict
                         )
@@ -117,7 +117,7 @@ class DataClass(object):
         if self.path_mat.endswith("json"):
             if os.path.isfile(self.path_mat):
                 try:
-                    with open(self.path_mat, "r+") as f:
+                    with open(self.path_mat, "r") as f:
                         self.material_bind = json.load(
                             f, object_pairs_hook=collections.OrderedDict
                         )
