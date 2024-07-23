@@ -16,9 +16,6 @@ from teaser.data.dataclass import DataClass
 ```
 
 To use the API, instantiate the Project class and rename the project.
-As a default, the 'iwu' archetype data will be loaded into our Project
-via DataClass(construction_data=ConstructionData.iwu_heavy) (e.g. for material properties
-and typical wall constructions. This can take a few seconds depending on the size of the used database).
 
 ```python
 prj = Project()
