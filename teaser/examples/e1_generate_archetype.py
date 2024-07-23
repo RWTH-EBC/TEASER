@@ -14,9 +14,6 @@ def example_generate_archetype():
     from teaser.project import Project
 
     # To use the API, instantiate the Project class and rename the project.
-    # As a default, the 'iwu' archetype data will be loaded into our Project
-    # via DataClass(construction_data=ConstructionData.iwu_heavy) (e.g. for material properties
-    # and typical wall constructions. This can take a few seconds depending on the size of the used database).
     # Be careful: Dymola does not like whitespaces in names and filenames, thus we will delete them anyway in TEASER.
 
     prj = Project()
