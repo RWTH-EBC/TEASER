@@ -784,7 +784,7 @@ class Project(object):
         ----------
         load_data : boolean, None-type
             boolean if data bindings for type elements and use conditions
-            should be loaded (default = True), in addition it could be a None-
+            should be loaded (default = False), in addition it could be a None-
             type to use the already used data bindings
         """
 

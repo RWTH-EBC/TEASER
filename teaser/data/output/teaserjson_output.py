@@ -2,6 +2,7 @@
 
 import json
 import collections
+import teaser
 
 
 def save_teaser_json(path, project):
@@ -24,7 +25,7 @@ def save_teaser_json(path, project):
 
     prj_out = collections.OrderedDict()
     prj_out["project"] = collections.OrderedDict()
-    prj_out["project"]["version"] = "0.7"
+    prj_out["project"]["version"] = teaser.__version__
     prj_out["project"]["name"] = project.name
     prj_out["project"]["weather_file_path"] = project.weather_file_path
     prj_out["project"]["number_of_elements_calc"] = project.number_of_elements_calc

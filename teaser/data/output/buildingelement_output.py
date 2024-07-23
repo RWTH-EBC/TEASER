@@ -27,7 +27,6 @@ def save_type_element(element, data_class):
         but the user can individually change that.
 
     """
-    data_class.element_bind["version"] = "0.7"
     add_to_json = True
 
     warning_text = (

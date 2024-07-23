@@ -102,7 +102,6 @@ class DataClass(object):
             else:
                 with open(self.path_tb, "w") as f:
                     self.element_bind = collections.OrderedDict()
-                    self.element_bind["version"] = "0.7"
 
     def load_uc_binding(self):
         """Load UseConditions json into binding classes."""
@@ -118,7 +117,6 @@ class DataClass(object):
             else:
                 with open(self.path_uc, "w") as f:
                     self.conditions_bind = collections.OrderedDict()
-                    self.conditions_bind["version"] = "0.7"
 
     def load_mat_binding(self):
         """Load MaterialTemplates json into binding classes."""
@@ -134,4 +132,3 @@ class DataClass(object):
             else:
                 with open(self.path_mat, "w") as f:
                     self.material_bind = collections.OrderedDict()
-                    self.material_bind["version"] = "0.7"

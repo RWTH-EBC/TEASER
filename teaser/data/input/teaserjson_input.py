@@ -29,6 +29,8 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.buildingphysics.door import Door
 import json
 import collections
+import teaser
+import warnings
 
 
 def load_teaser_json(path, project):
@@ -60,6 +62,13 @@ def load_teaser_json(path, project):
     }
     with open(path, "r+") as f:
         prj_in = json.load(f, object_pairs_hook=collections.OrderedDict)
+    json_version = prj_in["project"]["version"]
+    teaser_version = teaser.__version__
+
+    if json_version != teaser_version:
+        warnings.warn(
+            f"TEASER version mismatch: JSON version {json_version} "
+            f"does not match current TEASER version {teaser_version}")
 
     project.name = prj_in["project"]["name"]
     project.weather_file_path = prj_in["project"]["weather_file_path"]

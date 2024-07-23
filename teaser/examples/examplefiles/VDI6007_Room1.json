@@ -1,6 +1,6 @@
 {
     "project": {
-        "version": "0.7",
+        "version": "1.0.0",
         "name": "Project",
         "weather_file_path": "modelica://AixLib/Resources/WeatherData/",
         "number_of_elements_calc": 2,
