@@ -99,9 +99,6 @@
     <span class="kn">from</span> <span class="nn">teaser.project</span> <span class="kn">import</span> <span class="n">Project</span>
 
     <span class="c1"># To use the API, instantiate the Project class and rename the project.</span>
-    <span class="c1"># As a default, the &#39;iwu&#39; archetype data will be loaded into our Project</span>
-    <span class="c1"># via DataClass(construction_data=ConstructionData.iwu_heavy) (e.g. for material properties</span>
-    <span class="c1"># and typical wall constructions. This can take a few seconds depending on the size of the used database).</span>
     <span class="c1"># Be careful: Dymola does not like whitespaces in names and filenames, thus we will delete them anyway in TEASER.</span>
 
     <span class="n">prj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">()</span>
