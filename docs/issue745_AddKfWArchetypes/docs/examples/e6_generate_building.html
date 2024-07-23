@@ -112,10 +112,10 @@ You can run this example using the <a class="reference external" href="https://m
 <span class="kn">from</span> <span class="nn">teaser.data.dataclass</span> <span class="kn">import</span> <span class="n">DataClass</span>
 </pre></div>
 </div>
-<p>To use the API instantiate the Project class and rename the Project. The
-parameter load_data=True indicates that we load data into our
-Project (e.g. for Material properties and typical wall constructions.
-This can take a few seconds, depending on the size of the used data base.</p>
+<p>To use the API, instantiate the Project class and rename the project.
+As a default, the ‘iwu’ archetype data will be loaded into our Project
+via DataClass(construction_data=ConstructionData.iwu_heavy) (e.g. for material properties
+and typical wall constructions. This can take a few seconds depending on the size of the used database).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">()</span>
 <span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;BuildingExample&quot;</span>
 <span class="n">prj</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataClass</span><span class="p">(</span><span class="n">construction_data</span><span class="o">=</span><span class="n">ConstructionData</span><span class="o">.</span><span class="n">iwu_heavy</span><span class="p">)</span>
