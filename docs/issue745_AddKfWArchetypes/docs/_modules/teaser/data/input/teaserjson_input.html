@@ -112,6 +112,8 @@
 <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.door</span> <span class="kn">import</span> <span class="n">Door</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">teaser</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 
 
 <div class="viewcode-block" id="load_teaser_json">
@@ -145,6 +147,13 @@
     <span class="p">}</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">prj_in</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">object_pairs_hook</span><span class="o">=</span><span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">)</span>
+    <span class="n">json_version</span> <span class="o">=</span> <span class="n">prj_in</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;version&quot;</span><span class="p">]</span>
+    <span class="n">teaser_version</span> <span class="o">=</span> <span class="n">teaser</span><span class="o">.</span><span class="n">__version__</span>
+
+    <span class="k">if</span> <span class="n">json_version</span> <span class="o">!=</span> <span class="n">teaser_version</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;TEASER version mismatch: JSON version </span><span class="si">{</span><span class="n">json_version</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;does not match current TEASER version </span><span class="si">{</span><span class="n">teaser_version</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="n">project</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">prj_in</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
     <span class="n">project</span><span class="o">.</span><span class="n">weather_file_path</span> <span class="o">=</span> <span class="n">prj_in</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;weather_file_path&quot;</span><span class="p">]</span>
