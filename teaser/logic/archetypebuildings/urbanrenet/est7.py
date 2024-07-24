@@ -56,7 +56,7 @@ class EST7(EST1a):
         1. one neighbour
         2. two neighbours
 
-    construction_type : str
+    construction_data : str
         Construction type of used wall constructions default is "heavy")
             heavy: heavy construction
             light: light construction
@@ -74,7 +74,7 @@ class EST7(EST1a):
                  with_ahu=False,
                  internal_gains_mode=1,
                  neighbour_buildings=None,
-                 construction_type=None,
+                 construction_data=None,
                  number_of_apartments=None):
         """Constructor of EST7
         """
@@ -89,7 +89,7 @@ class EST7(EST1a):
             with_ahu,
             internal_gains_mode,
             neighbour_buildings,
-            construction_type)
+            construction_data)
 
         self.number_of_apartments = number_of_apartments
         self.est_factor_facade_to_volume = 0.49

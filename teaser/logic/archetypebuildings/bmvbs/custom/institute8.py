@@ -84,7 +84,7 @@ class Institute8(Office):
         2. banner facade (continuous windows)
         3. full glazing
 
-    construction_type : str
+    construction_data : str
         Construction type of used wall constructions default is "heavy")
 
         - heavy: heavy construction
@@ -151,7 +151,7 @@ class Institute8(Office):
                  internal_gains_mode=1,
                  office_layout=None,
                  window_layout=None,
-                 construction_type=None):
+                 construction_data=None):
         """Constructor of Institute8
 
         Adds an additional zone "Laboratory"
@@ -168,7 +168,7 @@ class Institute8(Office):
                                          internal_gains_mode,
                                          office_layout,
                                          window_layout,
-                                         construction_type)
+                                         construction_data)
 
         self.zone_area_factors["Office"] = \
             [0.04, "Group Office (between 2 and 6 employees)"]

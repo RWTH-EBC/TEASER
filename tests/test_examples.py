@@ -10,7 +10,7 @@ import math
 import os
 import warnings as warnings
 
-prj = Project(True)
+prj = Project(False)
 
 
 class Test_examples(object):

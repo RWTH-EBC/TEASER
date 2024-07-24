@@ -1,11 +1,10 @@
 {
-    "version": "0.7",
-    "OuterWall_[2007, 2010]_tabula_standard_1_SFH": {
+    "OuterWall_[2007, 2010]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             2007,
             2010
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -34,12 +33,12 @@
             }
         }
     },
-    "OuterWall_[1999, 2006]_tabula_standard_1_SFH": {
+    "OuterWall_[1999, 2006]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1999,
             2006
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -68,12 +67,12 @@
             }
         }
     },
-    "OuterWall_[1979, 1998]_tabula_standard_1_SFH": {
+    "OuterWall_[1979, 1998]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -102,12 +101,12 @@
             }
         }
     },
-    "OuterWall_[1973, 1978]_tabula_standard_1_SFH": {
+    "OuterWall_[1973, 1978]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -136,12 +135,12 @@
             }
         }
     },
-    "OuterWall_[1961, 1972]_tabula_standard_1_SFH": {
+    "OuterWall_[1961, 1972]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -170,12 +169,12 @@
             }
         }
     },
-    "OuterWall_[1951, 1960]_tabula_standard_1_SFH": {
+    "OuterWall_[1951, 1960]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -204,12 +203,12 @@
             }
         }
     },
-    "OuterWall_[1931, 1950]_tabula_standard_1_SFH": {
+    "OuterWall_[1931, 1950]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -238,12 +237,12 @@
             }
         }
     },
-    "OuterWall_[1851, 1930]_tabula_standard_1_SFH": {
+    "OuterWall_[1851, 1930]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -272,12 +271,12 @@
             }
         }
     },
-    "OuterWall_[0, 1850]_tabula_standard_1_SFH": {
+    "OuterWall_[0, 1850]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -313,12 +312,12 @@
             }
         }
     },
-    "OuterWall_[1961, 1972]_tabula_retrofit_1_SFH": {
+    "OuterWall_[1961, 1972]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -354,12 +353,12 @@
             }
         }
     },
-    "OuterWall_[1951, 1960]_tabula_retrofit_1_SFH": {
+    "OuterWall_[1951, 1960]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -388,12 +387,12 @@
             }
         }
     },
-    "OuterWall_[1931, 1950]_tabula_retrofit_1_SFH": {
+    "OuterWall_[1931, 1950]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -422,12 +421,12 @@
             }
         }
     },
-    "OuterWall_[1851, 1930]_tabula_retrofit_1_SFH": {
+    "OuterWall_[1851, 1930]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -456,12 +455,12 @@
             }
         }
     },
-    "OuterWall_[0, 1850]_tabula_retrofit_1_SFH": {
+    "OuterWall_[0, 1850]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -504,12 +503,12 @@
             }
         }
     },
-    "OuterWall_[1979, 1998]_tabula_adv_retrofit_1_SFH": {
+    "OuterWall_[1979, 1998]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -545,12 +544,12 @@
             }
         }
     },
-    "OuterWall_[1973, 1978]_tabula_adv_retrofit_1_SFH": {
+    "OuterWall_[1973, 1978]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -586,12 +585,12 @@
             }
         }
     },
-    "OuterWall_[1961, 1972]_tabula_adv_retrofit_1_SFH": {
+    "OuterWall_[1961, 1972]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -627,12 +626,12 @@
             }
         }
     },
-    "OuterWall_[1951, 1960]_tabula_adv_retrofit_1_SFH": {
+    "OuterWall_[1951, 1960]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -661,12 +660,12 @@
             }
         }
     },
-    "OuterWall_[1931, 1950]_tabula_adv_retrofit_1_SFH": {
+    "OuterWall_[1931, 1950]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -702,12 +701,12 @@
             }
         }
     },
-    "OuterWall_[1851, 1930]_tabula_adv_retrofit_1_SFH": {
+    "OuterWall_[1851, 1930]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -743,12 +742,12 @@
             }
         }
     },
-    "OuterWall_[0, 1850]_tabula_adv_retrofit_1_SFH": {
+    "OuterWall_[0, 1850]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -791,12 +790,12 @@
             }
         }
     },
-    "OuterWall_[2007, 2010]_tabula_standard_1_TH": {
+    "OuterWall_[2007, 2010]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             2007,
             2010
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -825,12 +824,12 @@
             }
         }
     },
-    "OuterWall_[1999, 2006]_tabula_standard_1_TH": {
+    "OuterWall_[1999, 2006]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1999,
             2006
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -859,12 +858,12 @@
             }
         }
     },
-    "OuterWall_[1979, 1998]_tabula_standard_1_TH": {
+    "OuterWall_[1979, 1998]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -893,12 +892,12 @@
             }
         }
     },
-    "OuterWall_[1973, 1978]_tabula_standard_1_TH": {
+    "OuterWall_[1973, 1978]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -927,12 +926,12 @@
             }
         }
     },
-    "OuterWall_[1961, 1972]_tabula_standard_1_TH": {
+    "OuterWall_[1961, 1972]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -961,12 +960,12 @@
             }
         }
     },
-    "OuterWall_[1951, 1960]_tabula_standard_1_TH": {
+    "OuterWall_[1951, 1960]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -995,12 +994,12 @@
             }
         }
     },
-    "OuterWall_[1931, 1950]_tabula_standard_1_TH": {
+    "OuterWall_[1931, 1950]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1029,12 +1028,12 @@
             }
         }
     },
-    "OuterWall_[1851, 1930]_tabula_standard_1_TH": {
+    "OuterWall_[1851, 1930]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1049,12 +1048,12 @@
             }
         }
     },
-    "OuterWall_[0, 1850]_tabula_standard_1_TH": {
+    "OuterWall_[0, 1850]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1083,12 +1082,12 @@
             }
         }
     },
-    "OuterWall_[1973, 1978]_tabula_retrofit_1_TH": {
+    "OuterWall_[1973, 1978]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1117,12 +1116,12 @@
             }
         }
     },
-    "OuterWall_[1961, 1972]_tabula_retrofit_1_TH": {
+    "OuterWall_[1961, 1972]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1158,12 +1157,12 @@
             }
         }
     },
-    "OuterWall_[1951, 1960]_tabula_retrofit_1_TH": {
+    "OuterWall_[1951, 1960]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1199,12 +1198,12 @@
             }
         }
     },
-    "OuterWall_[1931, 1950]_tabula_retrofit_1_TH": {
+    "OuterWall_[1931, 1950]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1233,12 +1232,12 @@
             }
         }
     },
-    "OuterWall_[1851, 1930]_tabula_retrofit_1_TH": {
+    "OuterWall_[1851, 1930]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1260,12 +1259,12 @@
             }
         }
     },
-    "OuterWall_[0, 1850]_tabula_retrofit_1_TH": {
+    "OuterWall_[0, 1850]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1294,12 +1293,12 @@
             }
         }
     },
-    "OuterWall_[1973, 1978]_tabula_adv_retrofit_1_TH": {
+    "OuterWall_[1973, 1978]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1328,12 +1327,12 @@
             }
         }
     },
-    "OuterWall_[1961, 1972]_tabula_adv_retrofit_1_TH": {
+    "OuterWall_[1961, 1972]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1369,12 +1368,12 @@
             }
         }
     },
-    "OuterWall_[1951, 1960]_tabula_adv_retrofit_1_TH": {
+    "OuterWall_[1951, 1960]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1410,12 +1409,12 @@
             }
         }
     },
-    "OuterWall_[1931, 1950]_tabula_adv_retrofit_1_TH": {
+    "OuterWall_[1931, 1950]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1451,12 +1450,12 @@
             }
         }
     },
-    "OuterWall_[1851, 1930]_tabula_adv_retrofit_1_TH": {
+    "OuterWall_[1851, 1930]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1478,12 +1477,12 @@
             }
         }
     },
-    "OuterWall_[0, 1850]_tabula_adv_retrofit_1_TH": {
+    "OuterWall_[0, 1850]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1519,12 +1518,12 @@
             }
         }
     },
-    "OuterWall_[2007, 2010]_tabula_standard_1_AB": {
+    "OuterWall_[2007, 2010]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             2007,
             2010
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1546,12 +1545,12 @@
             }
         }
     },
-    "OuterWall_[1999, 2006]_tabula_standard_1_AB": {
+    "OuterWall_[1999, 2006]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1999,
             2006
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1580,12 +1579,12 @@
             }
         }
     },
-    "OuterWall_[1979, 1998]_tabula_standard_1_AB": {
+    "OuterWall_[1979, 1998]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1614,12 +1613,12 @@
             }
         }
     },
-    "OuterWall_[1973, 1978]_tabula_standard_1_AB": {
+    "OuterWall_[1973, 1978]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1648,12 +1647,12 @@
             }
         }
     },
-    "OuterWall_[1961, 1972]_tabula_standard_1_AB": {
+    "OuterWall_[1961, 1972]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1682,12 +1681,12 @@
             }
         }
     },
-    "OuterWall_[1931, 1950]_tabula_standard_1_AB": {
+    "OuterWall_[1931, 1950]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1702,12 +1701,12 @@
             }
         }
     },
-    "OuterWall_[1851, 1930]_tabula_standard_1_AB": {
+    "OuterWall_[1851, 1930]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1736,12 +1735,12 @@
             }
         }
     },
-    "OuterWall_[0, 1850]_tabula_standard_1_AB": {
+    "OuterWall_[0, 1850]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1756,12 +1755,12 @@
             }
         }
     },
-    "OuterWall_[1961, 1972]_tabula_retrofit_1_AB": {
+    "OuterWall_[1961, 1972]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1797,12 +1796,12 @@
             }
         }
     },
-    "OuterWall_[1951, 1960]_tabula_retrofit_1_AB": {
+    "OuterWall_[1951, 1960]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1831,12 +1830,12 @@
             }
         }
     },
-    "OuterWall_[1931, 1950]_tabula_retrofit_1_AB": {
+    "OuterWall_[1931, 1950]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1858,12 +1857,12 @@
             }
         }
     },
-    "OuterWall_[1851, 1930]_tabula_retrofit_1_AB": {
+    "OuterWall_[1851, 1930]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1899,12 +1898,12 @@
             }
         }
     },
-    "OuterWall_[0, 1850]_tabula_retrofit_1_AB": {
+    "OuterWall_[0, 1850]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1926,12 +1925,12 @@
             }
         }
     },
-    "OuterWall_[1961, 1972]_tabula_adv_retrofit_1_AB": {
+    "OuterWall_[1961, 1972]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1967,12 +1966,12 @@
             }
         }
     },
-    "OuterWall_[1931, 1950]_tabula_adv_retrofit_1_AB": {
+    "OuterWall_[1931, 1950]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -1994,12 +1993,12 @@
             }
         }
     },
-    "OuterWall_[1951, 1960]_tabula_adv_retrofit_1_AB": {
+    "OuterWall_[1951, 1960]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2035,12 +2034,12 @@
             }
         }
     },
-    "OuterWall_[1851, 1930]_tabula_adv_retrofit_1_AB": {
+    "OuterWall_[1851, 1930]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2076,12 +2075,12 @@
             }
         }
     },
-    "OuterWall_[0, 1850]_tabula_adv_retrofit_1_AB": {
+    "OuterWall_[0, 1850]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2103,12 +2102,12 @@
             }
         }
     },
-    "OuterWall_[1973, 1978]_tabula_standard_2_SFH": {
+    "OuterWall_[1973, 1978]_tabula_dk_standard_2_SFH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_standard_2_SFH",
+        "construction_data": "tabula_dk_standard_2_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2137,12 +2136,12 @@
             }
         }
     },
-    "OuterWall_[1931, 1950]_tabula_standard_2_SFH": {
+    "OuterWall_[1931, 1950]_tabula_dk_standard_2_SFH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_standard_2_SFH",
+        "construction_data": "tabula_dk_standard_2_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2171,12 +2170,12 @@
             }
         }
     },
-    "OuterWall_[1973, 1978]_tabula_standard_2_AB": {
+    "OuterWall_[1973, 1978]_tabula_dk_standard_2_AB": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_standard_2_AB",
+        "construction_data": "tabula_dk_standard_2_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2205,12 +2204,12 @@
             }
         }
     },
-    "OuterWall_[1961, 1972]_tabula_standard_2_AB": {
+    "OuterWall_[1961, 1972]_tabula_dk_standard_2_AB": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_standard_2_AB",
+        "construction_data": "tabula_dk_standard_2_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2239,12 +2238,12 @@
             }
         }
     },
-    "OuterWall_[0, 1850]_tabula_standard_2_AB": {
+    "OuterWall_[0, 1850]_tabula_dk_standard_2_AB": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_standard_2_AB",
+        "construction_data": "tabula_dk_standard_2_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2259,12 +2258,12 @@
             }
         }
     },
-    "OuterWall_[1951, 1960]_tabula_standard_1_AB": {
+    "OuterWall_[1951, 1960]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2293,12 +2292,12 @@
             }
         }
     },
-    "OuterWall_[0, 1849]_tabula_standard_2_TH": {
+    "OuterWall_[0, 1849]_tabula_dk_standard_2_TH": {
         "building_age_group": [
             0,
             1849
         ],
-        "construction_type": "tabula_standard_2_TH",
+        "construction_data": "tabula_dk_standard_2_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2327,12 +2326,12 @@
             }
         }
     },
-    "OuterWall_[1931, 1950]_tabula_retrofit_2_SFH": {
+    "OuterWall_[1931, 1950]_tabula_dk_retrofit_2_SFH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_retrofit_2_SFH",
+        "construction_data": "tabula_dk_retrofit_2_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2361,12 +2360,12 @@
             }
         }
     },
-    "OuterWall_[1931, 1950]_tabula_adv_retrofit_2_SFH": {
+    "OuterWall_[1931, 1950]_tabula_dk_adv_retrofit_2_SFH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_adv_retrofit_2_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_2_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2395,12 +2394,12 @@
             }
         }
     },
-    "OuterWall_[1973, 1978]_tabula_adv_retrofit_2_SFH": {
+    "OuterWall_[1973, 1978]_tabula_dk_adv_retrofit_2_SFH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_adv_retrofit_2_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_2_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2429,12 +2428,12 @@
             }
         }
     },
-    "OuterWall_[0, 1850]_tabula_retrofit_2_TH": {
+    "OuterWall_[0, 1850]_tabula_dk_retrofit_2_TH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_retrofit_2_TH",
+        "construction_data": "tabula_dk_retrofit_2_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2463,12 +2462,12 @@
             }
         }
     },
-    "OuterWall_[0, 1850]_tabula_adv_retrofit_2_TH": {
+    "OuterWall_[0, 1850]_tabula_dk_adv_retrofit_2_TH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_adv_retrofit_2_TH",
+        "construction_data": "tabula_dk_adv_retrofit_2_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2497,12 +2496,12 @@
             }
         }
     },
-    "OuterWall_[0, 1850]_tabula_retrofit_2_AB": {
+    "OuterWall_[0, 1850]_tabula_dk_retrofit_2_AB": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_retrofit_2_AB",
+        "construction_data": "tabula_dk_retrofit_2_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2517,12 +2516,12 @@
             }
         }
     },
-    "OuterWall_[0, 1850]_tabula_adv_retrofit_2_AB": {
+    "OuterWall_[0, 1850]_tabula_dk_adv_retrofit_2_AB": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_adv_retrofit_2_AB",
+        "construction_data": "tabula_dk_adv_retrofit_2_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2537,12 +2536,12 @@
             }
         }
     },
-    "OuterWall_[1961, 1972]_tabula_retrofit_2_AB": {
+    "OuterWall_[1961, 1972]_tabula_dk_retrofit_2_AB": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_retrofit_2_AB",
+        "construction_data": "tabula_dk_retrofit_2_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2571,12 +2570,12 @@
             }
         }
     },
-    "OuterWall_[1961, 1972]_tabula_adv_retrofit_2_AB": {
+    "OuterWall_[1961, 1972]_tabula_dk_adv_retrofit_2_AB": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_adv_retrofit_2_AB",
+        "construction_data": "tabula_dk_adv_retrofit_2_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2605,12 +2604,12 @@
             }
         }
     },
-    "Door_[2007, 2010]_tabula_standard_1_SFH": {
+    "Door_[2007, 2010]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             2007,
             2010
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 2.7,
         "outer_radiation": 5.0,
@@ -2625,12 +2624,12 @@
             }
         }
     },
-    "Window_[2007, 2010]_tabula_standard_1_SFH": {
+    "Window_[2007, 2010]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             2007,
             2010
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2649,12 +2648,12 @@
             }
         }
     },
-    "Window_[1999, 2006]_tabula_standard_1_SFH": {
+    "Window_[1999, 2006]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1999,
             2006
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2673,12 +2672,12 @@
             }
         }
     },
-    "Window_[1979, 1998]_tabula_standard_1_SFH": {
+    "Window_[1979, 1998]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2697,12 +2696,12 @@
             }
         }
     },
-    "Window_[1973, 1978]_tabula_standard_1_SFH": {
+    "Window_[1973, 1978]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2721,12 +2720,12 @@
             }
         }
     },
-    "Window_[1961, 1972]_tabula_standard_1_SFH": {
+    "Window_[1961, 1972]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2745,12 +2744,12 @@
             }
         }
     },
-    "Window_[1951, 1960]_tabula_standard_1_SFH": {
+    "Window_[1951, 1960]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2769,12 +2768,12 @@
             }
         }
     },
-    "Window_[1931, 1950]_tabula_standard_1_SFH": {
+    "Window_[1931, 1950]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2793,12 +2792,12 @@
             }
         }
     },
-    "Window_[1851, 1930]_tabula_standard_1_SFH": {
+    "Window_[1851, 1930]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2817,12 +2816,12 @@
             }
         }
     },
-    "Window_[0, 1850]_tabula_standard_1_SFH": {
+    "Window_[0, 1850]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2841,12 +2840,12 @@
             }
         }
     },
-    "Window_[1979, 1998]_tabula_retrofit_1_SFH": {
+    "Window_[1979, 1998]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2865,12 +2864,12 @@
             }
         }
     },
-    "Window_[1973, 1978]_tabula_retrofit_1_SFH": {
+    "Window_[1973, 1978]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2889,12 +2888,12 @@
             }
         }
     },
-    "Window_[1961, 1972]_tabula_retrofit_1_SFH": {
+    "Window_[1961, 1972]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2913,12 +2912,12 @@
             }
         }
     },
-    "Window_[1951, 1960]_tabula_retrofit_1_SFH": {
+    "Window_[1951, 1960]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2937,12 +2936,12 @@
             }
         }
     },
-    "Window_[1931, 1950]_tabula_retrofit_1_SFH": {
+    "Window_[1931, 1950]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2961,12 +2960,12 @@
             }
         }
     },
-    "Window_[1851, 1930]_tabula_retrofit_1_SFH": {
+    "Window_[1851, 1930]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -2985,12 +2984,12 @@
             }
         }
     },
-    "Window_[0, 1850]_tabula_retrofit_1_SFH": {
+    "Window_[0, 1850]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3009,12 +3008,12 @@
             }
         }
     },
-    "Window_[1979, 1998]_tabula_adv_retrofit_1_SFH": {
+    "Window_[1979, 1998]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3033,12 +3032,12 @@
             }
         }
     },
-    "Window_[1973, 1978]_tabula_adv_retrofit_1_SFH": {
+    "Window_[1973, 1978]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3057,12 +3056,12 @@
             }
         }
     },
-    "Window_[1961, 1972]_tabula_adv_retrofit_1_SFH": {
+    "Window_[1961, 1972]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3081,12 +3080,12 @@
             }
         }
     },
-    "Window_[1951, 1960]_tabula_adv_retrofit_1_SFH": {
+    "Window_[1951, 1960]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3105,12 +3104,12 @@
             }
         }
     },
-    "Window_[1931, 1950]_tabula_adv_retrofit_1_SFH": {
+    "Window_[1931, 1950]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3129,12 +3128,12 @@
             }
         }
     },
-    "Window_[1851, 1930]_tabula_adv_retrofit_1_SFH": {
+    "Window_[1851, 1930]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3153,12 +3152,12 @@
             }
         }
     },
-    "Window_[0, 1850]_tabula_adv_retrofit_1_SFH": {
+    "Window_[0, 1850]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3177,12 +3176,12 @@
             }
         }
     },
-    "Window_[2007, 2010]_tabula_standard_1_TH": {
+    "Window_[2007, 2010]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             2007,
             2010
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3201,12 +3200,12 @@
             }
         }
     },
-    "Window_[1999, 2006]_tabula_standard_1_TH": {
+    "Window_[1999, 2006]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1999,
             2006
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3225,12 +3224,12 @@
             }
         }
     },
-    "Window_[1979, 1998]_tabula_standard_1_TH": {
+    "Window_[1979, 1998]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3249,12 +3248,12 @@
             }
         }
     },
-    "Window_[1973, 1978]_tabula_standard_1_TH": {
+    "Window_[1973, 1978]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3273,12 +3272,12 @@
             }
         }
     },
-    "Window_[1961, 1972]_tabula_standard_1_TH": {
+    "Window_[1961, 1972]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3297,12 +3296,12 @@
             }
         }
     },
-    "Window_[1951, 1960]_tabula_standard_1_TH": {
+    "Window_[1951, 1960]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3321,12 +3320,12 @@
             }
         }
     },
-    "Window_[1931, 1950]_tabula_standard_1_TH": {
+    "Window_[1931, 1950]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3345,12 +3344,12 @@
             }
         }
     },
-    "Window_[1851, 1930]_tabula_standard_1_TH": {
+    "Window_[1851, 1930]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3369,12 +3368,12 @@
             }
         }
     },
-    "Window_[0, 1850]_tabula_standard_1_TH": {
+    "Window_[0, 1850]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3393,12 +3392,12 @@
             }
         }
     },
-    "Window_[1979, 1998]_tabula_retrofit_1_TH": {
+    "Window_[1979, 1998]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3417,12 +3416,12 @@
             }
         }
     },
-    "Window_[1973, 1978]_tabula_retrofit_1_TH": {
+    "Window_[1973, 1978]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3441,12 +3440,12 @@
             }
         }
     },
-    "Window_[1961, 1972]_tabula_retrofit_1_TH": {
+    "Window_[1961, 1972]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3465,12 +3464,12 @@
             }
         }
     },
-    "Window_[1951, 1960]_tabula_retrofit_1_TH": {
+    "Window_[1951, 1960]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3489,12 +3488,12 @@
             }
         }
     },
-    "Window_[1931, 1950]_tabula_retrofit_1_TH": {
+    "Window_[1931, 1950]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3513,12 +3512,12 @@
             }
         }
     },
-    "Window_[1851, 1930]_tabula_retrofit_1_TH": {
+    "Window_[1851, 1930]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3537,12 +3536,12 @@
             }
         }
     },
-    "Window_[0, 1850]_tabula_retrofit_1_TH": {
+    "Window_[0, 1850]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3561,12 +3560,12 @@
             }
         }
     },
-    "Window_[1999, 2006]_tabula_adv_retrofit_1_TH": {
+    "Window_[1999, 2006]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1999,
             2006
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3585,12 +3584,12 @@
             }
         }
     },
-    "Window_[1979, 1998]_tabula_adv_retrofit_1_TH": {
+    "Window_[1979, 1998]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3609,12 +3608,12 @@
             }
         }
     },
-    "Window_[1973, 1978]_tabula_adv_retrofit_1_TH": {
+    "Window_[1973, 1978]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3633,12 +3632,12 @@
             }
         }
     },
-    "Window_[1961, 1972]_tabula_adv_retrofit_1_TH": {
+    "Window_[1961, 1972]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3657,12 +3656,12 @@
             }
         }
     },
-    "Window_[1951, 1960]_tabula_adv_retrofit_1_TH": {
+    "Window_[1951, 1960]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3681,12 +3680,12 @@
             }
         }
     },
-    "Window_[1931, 1950]_tabula_adv_retrofit_1_TH": {
+    "Window_[1931, 1950]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3705,12 +3704,12 @@
             }
         }
     },
-    "Window_[1851, 1930]_tabula_adv_retrofit_1_TH": {
+    "Window_[1851, 1930]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3729,12 +3728,12 @@
             }
         }
     },
-    "Window_[0, 1850]_tabula_adv_retrofit_1_TH": {
+    "Window_[0, 1850]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3753,12 +3752,12 @@
             }
         }
     },
-    "Window_[2007, 2010]_tabula_standard_1_AB": {
+    "Window_[2007, 2010]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             2007,
             2010
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3777,12 +3776,12 @@
             }
         }
     },
-    "Window_[1999, 2006]_tabula_standard_1_AB": {
+    "Window_[1999, 2006]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1999,
             2006
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3801,12 +3800,12 @@
             }
         }
     },
-    "Window_[1979, 1998]_tabula_standard_1_AB": {
+    "Window_[1979, 1998]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3825,12 +3824,12 @@
             }
         }
     },
-    "Window_[1973, 1978]_tabula_standard_1_AB": {
+    "Window_[1973, 1978]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3849,12 +3848,12 @@
             }
         }
     },
-    "Window_[1961, 1972]_tabula_standard_1_AB": {
+    "Window_[1961, 1972]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3873,12 +3872,12 @@
             }
         }
     },
-    "Window_[1951, 1960]_tabula_standard_1_AB": {
+    "Window_[1951, 1960]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3897,12 +3896,12 @@
             }
         }
     },
-    "Window_[1931, 1950]_tabula_standard_1_AB": {
+    "Window_[1931, 1950]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3921,12 +3920,12 @@
             }
         }
     },
-    "Window_[1851, 1930]_tabula_standard_1_AB": {
+    "Window_[1851, 1930]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3945,12 +3944,12 @@
             }
         }
     },
-    "Window_[0, 1850]_tabula_standard_1_AB": {
+    "Window_[0, 1850]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3969,12 +3968,12 @@
             }
         }
     },
-    "Window_[1979, 1998]_tabula_retrofit_1_AB": {
+    "Window_[1979, 1998]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -3993,12 +3992,12 @@
             }
         }
     },
-    "Window_[1973, 1978]_tabula_retrofit_1_AB": {
+    "Window_[1973, 1978]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4017,12 +4016,12 @@
             }
         }
     },
-    "Window_[1961, 1972]_tabula_retrofit_1_AB": {
+    "Window_[1961, 1972]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4041,12 +4040,12 @@
             }
         }
     },
-    "Window_[1951, 1960]_tabula_retrofit_1_AB": {
+    "Window_[1951, 1960]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4065,12 +4064,12 @@
             }
         }
     },
-    "Window_[1931, 1950]_tabula_retrofit_1_AB": {
+    "Window_[1931, 1950]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4089,12 +4088,12 @@
             }
         }
     },
-    "Window_[1851, 1930]_tabula_retrofit_1_AB": {
+    "Window_[1851, 1930]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4113,12 +4112,12 @@
             }
         }
     },
-    "Window_[0, 1850]_tabula_retrofit_1_AB": {
+    "Window_[0, 1850]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4137,12 +4136,12 @@
             }
         }
     },
-    "Window_[1999, 2006]_tabula_adv_retrofit_1_AB": {
+    "Window_[1999, 2006]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1999,
             2006
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4161,12 +4160,12 @@
             }
         }
     },
-    "Window_[1979, 1998]_tabula_adv_retrofit_1_AB": {
+    "Window_[1979, 1998]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4185,12 +4184,12 @@
             }
         }
     },
-    "Window_[1973, 1978]_tabula_adv_retrofit_1_AB": {
+    "Window_[1973, 1978]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4209,12 +4208,12 @@
             }
         }
     },
-    "Window_[1961, 1972]_tabula_adv_retrofit_1_AB": {
+    "Window_[1961, 1972]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4233,12 +4232,12 @@
             }
         }
     },
-    "Window_[1951, 1960]_tabula_adv_retrofit_1_AB": {
+    "Window_[1951, 1960]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4257,12 +4256,12 @@
             }
         }
     },
-    "Window_[1931, 1950]_tabula_adv_retrofit_1_AB": {
+    "Window_[1931, 1950]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4281,12 +4280,12 @@
             }
         }
     },
-    "Window_[1851, 1930]_tabula_adv_retrofit_1_AB": {
+    "Window_[1851, 1930]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4305,12 +4304,12 @@
             }
         }
     },
-    "Window_[0, 1850]_tabula_adv_retrofit_1_AB": {
+    "Window_[0, 1850]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4329,12 +4328,12 @@
             }
         }
     },
-    "Rooftop_[2007, 2010]_tabula_standard_1_SFH": {
+    "Rooftop_[2007, 2010]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             2007,
             2010
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4363,12 +4362,12 @@
             }
         }
     },
-    "Rooftop_[1999, 2006]_tabula_standard_1_SFH": {
+    "Rooftop_[1999, 2006]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1999,
             2006
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4404,12 +4403,12 @@
             }
         }
     },
-    "Rooftop_[1979, 1998]_tabula_standard_1_SFH": {
+    "Rooftop_[1979, 1998]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4445,12 +4444,12 @@
             }
         }
     },
-    "Rooftop_[1973, 1978]_tabula_standard_1_SFH": {
+    "Rooftop_[1973, 1978]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4486,12 +4485,12 @@
             }
         }
     },
-    "Rooftop_[1961, 1972]_tabula_standard_1_SFH": {
+    "Rooftop_[1961, 1972]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4527,12 +4526,12 @@
             }
         }
     },
-    "Rooftop_[1951, 1960]_tabula_standard_1_SFH": {
+    "Rooftop_[1951, 1960]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4568,12 +4567,12 @@
             }
         }
     },
-    "Rooftop_[1931, 1950]_tabula_standard_1_SFH": {
+    "Rooftop_[1931, 1950]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4602,12 +4601,12 @@
             }
         }
     },
-    "Rooftop_[1851, 1930]_tabula_standard_1_SFH": {
+    "Rooftop_[1851, 1930]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4643,12 +4642,12 @@
             }
         }
     },
-    "Rooftop_[0, 1850]_tabula_standard_1_SFH": {
+    "Rooftop_[0, 1850]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4684,12 +4683,12 @@
             }
         }
     },
-    "Rooftop_[1973, 1978]_tabula_retrofit_1_SFH": {
+    "Rooftop_[1973, 1978]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4732,12 +4731,12 @@
             }
         }
     },
-    "Rooftop_[1973, 1978]_tabula_adv_retrofit_1_SFH": {
+    "Rooftop_[1973, 1978]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4780,12 +4779,12 @@
             }
         }
     },
-    "Rooftop_[1961, 1972]_tabula_retrofit_1_SFH": {
+    "Rooftop_[1961, 1972]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4828,12 +4827,12 @@
             }
         }
     },
-    "Rooftop_[1951, 1960]_tabula_retrofit_1_SFH": {
+    "Rooftop_[1951, 1960]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4876,12 +4875,12 @@
             }
         }
     },
-    "Rooftop_[1931, 1950]_tabula_retrofit_1_SFH": {
+    "Rooftop_[1931, 1950]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4917,12 +4916,12 @@
             }
         }
     },
-    "Rooftop_[1851, 1930]_tabula_retrofit_1_SFH": {
+    "Rooftop_[1851, 1930]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -4965,12 +4964,12 @@
             }
         }
     },
-    "Rooftop_[0, 1850]_tabula_retrofit_1_SFH": {
+    "Rooftop_[0, 1850]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5013,12 +5012,12 @@
             }
         }
     },
-    "Rooftop_[1961, 1972]_tabula_adv_retrofit_1_SFH": {
+    "Rooftop_[1961, 1972]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5061,12 +5060,12 @@
             }
         }
     },
-    "Rooftop_[1951, 1960]_tabula_adv_retrofit_1_SFH": {
+    "Rooftop_[1951, 1960]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5109,12 +5108,12 @@
             }
         }
     },
-    "Rooftop_[1931, 1950]_tabula_adv_retrofit_1_SFH": {
+    "Rooftop_[1931, 1950]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5150,12 +5149,12 @@
             }
         }
     },
-    "Rooftop_[1851, 1930]_tabula_adv_retrofit_1_SFH": {
+    "Rooftop_[1851, 1930]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5198,12 +5197,12 @@
             }
         }
     },
-    "Rooftop_[0, 1850]_tabula_adv_retrofit_1_SFH": {
+    "Rooftop_[0, 1850]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5246,12 +5245,12 @@
             }
         }
     },
-    "Rooftop_[2007, 2010]_tabula_standard_1_TH": {
+    "Rooftop_[2007, 2010]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             2007,
             2010
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5287,12 +5286,12 @@
             }
         }
     },
-    "Rooftop_[1999, 2006]_tabula_standard_1_TH": {
+    "Rooftop_[1999, 2006]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1999,
             2006
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5321,12 +5320,12 @@
             }
         }
     },
-    "Rooftop_[1979, 1998]_tabula_standard_1_TH": {
+    "Rooftop_[1979, 1998]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5355,12 +5354,12 @@
             }
         }
     },
-    "Rooftop_[1973, 1978]_tabula_standard_1_TH": {
+    "Rooftop_[1973, 1978]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5389,12 +5388,12 @@
             }
         }
     },
-    "Rooftop_[1961, 1972]_tabula_standard_1_TH": {
+    "Rooftop_[1961, 1972]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5423,12 +5422,12 @@
             }
         }
     },
-    "Rooftop_[1951, 1960]_tabula_standard_1_TH": {
+    "Rooftop_[1951, 1960]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5457,12 +5456,12 @@
             }
         }
     },
-    "Rooftop_[1931, 1950]_tabula_standard_1_TH": {
+    "Rooftop_[1931, 1950]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5491,12 +5490,12 @@
             }
         }
     },
-    "Rooftop_[1851, 1930]_tabula_standard_1_TH": {
+    "Rooftop_[1851, 1930]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5525,12 +5524,12 @@
             }
         }
     },
-    "Rooftop_[0, 1850]_tabula_standard_1_TH": {
+    "Rooftop_[0, 1850]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5559,12 +5558,12 @@
             }
         }
     },
-    "Rooftop_[1999, 2006]_tabula_retrofit_1_TH": {
+    "Rooftop_[1999, 2006]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             1999,
             2006
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5600,12 +5599,12 @@
             }
         }
     },
-    "Rooftop_[1979, 1998]_tabula_retrofit_1_TH": {
+    "Rooftop_[1979, 1998]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5641,12 +5640,12 @@
             }
         }
     },
-    "Rooftop_[1973, 1978]_tabula_retrofit_1_TH": {
+    "Rooftop_[1973, 1978]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5682,12 +5681,12 @@
             }
         }
     },
-    "Rooftop_[1961, 1972]_tabula_retrofit_1_TH": {
+    "Rooftop_[1961, 1972]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5723,12 +5722,12 @@
             }
         }
     },
-    "Rooftop_[1951, 1960]_tabula_retrofit_1_TH": {
+    "Rooftop_[1951, 1960]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5764,12 +5763,12 @@
             }
         }
     },
-    "Rooftop_[0, 1950]_tabula_retrofit_1_TH": {
+    "Rooftop_[0, 1950]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             0,
             1950
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5805,12 +5804,12 @@
             }
         }
     },
-    "Rooftop_[1999, 2006]_tabula_adv_retrofit_1_TH": {
+    "Rooftop_[1999, 2006]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1999,
             2006
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5846,12 +5845,12 @@
             }
         }
     },
-    "Rooftop_[1979, 1998]_tabula_adv_retrofit_1_TH": {
+    "Rooftop_[1979, 1998]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5887,12 +5886,12 @@
             }
         }
     },
-    "Rooftop_[1973, 1978]_tabula_adv_retrofit_1_TH": {
+    "Rooftop_[1973, 1978]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5928,12 +5927,12 @@
             }
         }
     },
-    "Rooftop_[1961, 1972]_tabula_adv_retrofit_1_TH": {
+    "Rooftop_[1961, 1972]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -5969,12 +5968,12 @@
             }
         }
     },
-    "Rooftop_[1951, 1960]_tabula_adv_retrofit_1_TH": {
+    "Rooftop_[1951, 1960]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6010,12 +6009,12 @@
             }
         }
     },
-    "Rooftop_[1931, 1950]_tabula_adv_retrofit_1_TH": {
+    "Rooftop_[1931, 1950]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6051,12 +6050,12 @@
             }
         }
     },
-    "Rooftop_[1851, 1930]_tabula_adv_retrofit_1_TH": {
+    "Rooftop_[1851, 1930]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6092,12 +6091,12 @@
             }
         }
     },
-    "Rooftop_[0, 1850]_tabula_adv_retrofit_1_TH": {
+    "Rooftop_[0, 1850]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6133,12 +6132,12 @@
             }
         }
     },
-    "Rooftop_[2007, 2010]_tabula_standard_1_AB": {
+    "Rooftop_[2007, 2010]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             2007,
             2010
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6160,12 +6159,12 @@
             }
         }
     },
-    "Rooftop_[1999, 2006]_tabula_standard_1_AB": {
+    "Rooftop_[1999, 2006]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1999,
             2006
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6187,12 +6186,12 @@
             }
         }
     },
-    "Rooftop_[1979, 1998]_tabula_standard_1_AB": {
+    "Rooftop_[1979, 1998]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6214,12 +6213,12 @@
             }
         }
     },
-    "Rooftop_[1973, 1978]_tabula_standard_1_AB": {
+    "Rooftop_[1973, 1978]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6241,12 +6240,12 @@
             }
         }
     },
-    "Rooftop_[1961, 1972]_tabula_standard_1_AB": {
+    "Rooftop_[1961, 1972]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6275,12 +6274,12 @@
             }
         }
     },
-    "Rooftop_[1951, 1960]_tabula_standard_1_AB": {
+    "Rooftop_[1951, 1960]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6316,12 +6315,12 @@
             }
         }
     },
-    "Rooftop_[1931, 1950]_tabula_standard_1_AB": {
+    "Rooftop_[1931, 1950]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6350,12 +6349,12 @@
             }
         }
     },
-    "Rooftop_[1851, 1930]_tabula_standard_1_AB": {
+    "Rooftop_[1851, 1930]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6384,12 +6383,12 @@
             }
         }
     },
-    "Rooftop_[0, 1850]_tabula_standard_1_AB": {
+    "Rooftop_[0, 1850]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6418,12 +6417,12 @@
             }
         }
     },
-    "Rooftop_[2007, 2010]_tabula_retrofit_1_AB": {
+    "Rooftop_[2007, 2010]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             2007,
             2010
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6452,12 +6451,12 @@
             }
         }
     },
-    "Rooftop_[1999, 2006]_tabula_retrofit_1_AB": {
+    "Rooftop_[1999, 2006]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1999,
             2006
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6486,12 +6485,12 @@
             }
         }
     },
-    "Rooftop_[1979, 1998]_tabula_retrofit_1_AB": {
+    "Rooftop_[1979, 1998]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6520,12 +6519,12 @@
             }
         }
     },
-    "Rooftop_[1973, 1978]_tabula_retrofit_1_AB": {
+    "Rooftop_[1973, 1978]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6554,12 +6553,12 @@
             }
         }
     },
-    "Rooftop_[1961, 1972]_tabula_retrofit_1_AB": {
+    "Rooftop_[1961, 1972]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6595,12 +6594,12 @@
             }
         }
     },
-    "Rooftop_[1951, 1960]_tabula_retrofit_1_AB": {
+    "Rooftop_[1951, 1960]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6643,12 +6642,12 @@
             }
         }
     },
-    "Rooftop_[1931, 1950]_tabula_retrofit_1_AB": {
+    "Rooftop_[1931, 1950]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6677,12 +6676,12 @@
             }
         }
     },
-    "Rooftop_[0, 1850]_tabula_retrofit_1_AB": {
+    "Rooftop_[0, 1850]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6718,12 +6717,12 @@
             }
         }
     },
-    "Rooftop_[1851, 1930]_tabula_retrofit_1_AB": {
+    "Rooftop_[1851, 1930]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6759,12 +6758,12 @@
             }
         }
     },
-    "Rooftop_[2007, 2010]_tabula_adv_retrofit_1_AB": {
+    "Rooftop_[2007, 2010]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             2007,
             2010
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6793,12 +6792,12 @@
             }
         }
     },
-    "Rooftop_[1999, 2006]_tabula_adv_retrofit_1_AB": {
+    "Rooftop_[1999, 2006]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1999,
             2006
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6827,12 +6826,12 @@
             }
         }
     },
-    "Rooftop_[1979, 1998]_tabula_adv_retrofit_1_AB": {
+    "Rooftop_[1979, 1998]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6861,12 +6860,12 @@
             }
         }
     },
-    "Rooftop_[1973, 1978]_tabula_adv_retrofit_1_AB": {
+    "Rooftop_[1973, 1978]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6895,12 +6894,12 @@
             }
         }
     },
-    "Rooftop_[1961, 1972]_tabula_adv_retrofit_1_AB": {
+    "Rooftop_[1961, 1972]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6936,12 +6935,12 @@
             }
         }
     },
-    "Rooftop_[1951, 1960]_tabula_adv_retrofit_1_AB": {
+    "Rooftop_[1951, 1960]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -6984,12 +6983,12 @@
             }
         }
     },
-    "Rooftop_[1931, 1950]_tabula_adv_retrofit_1_AB": {
+    "Rooftop_[1931, 1950]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -7018,12 +7017,12 @@
             }
         }
     },
-    "Rooftop_[1851, 1930]_tabula_adv_retrofit_1_AB": {
+    "Rooftop_[1851, 1930]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -7059,12 +7058,12 @@
             }
         }
     },
-    "Rooftop_[0, 1850]_tabula_adv_retrofit_1_AB": {
+    "Rooftop_[0, 1850]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "outer_radiation": 5.0,
@@ -7100,12 +7099,12 @@
             }
         }
     },
-    "GroundFloor_[2007, 2010]_tabula_standard_1_SFH": {
+    "GroundFloor_[2007, 2010]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             2007,
             2010
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7132,12 +7131,12 @@
             }
         }
     },
-    "GroundFloor_[1999, 2006]_tabula_standard_1_SFH": {
+    "GroundFloor_[1999, 2006]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1999,
             2006
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7171,12 +7170,12 @@
             }
         }
     },
-    "GroundFloor_[1979, 1998]_tabula_standard_1_SFH": {
+    "GroundFloor_[1979, 1998]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7210,12 +7209,12 @@
             }
         }
     },
-    "GroundFloor_[1973, 1978]_tabula_standard_1_SFH": {
+    "GroundFloor_[1973, 1978]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7249,12 +7248,12 @@
             }
         }
     },
-    "GroundFloor_[1961, 1972]_tabula_standard_1_SFH": {
+    "GroundFloor_[1961, 1972]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7288,12 +7287,12 @@
             }
         }
     },
-    "GroundFloor_[1951, 1960]_tabula_standard_1_SFH": {
+    "GroundFloor_[1951, 1960]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7320,12 +7319,12 @@
             }
         }
     },
-    "GroundFloor_[1931, 1950]_tabula_standard_1_SFH": {
+    "GroundFloor_[1931, 1950]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7352,12 +7351,12 @@
             }
         }
     },
-    "GroundFloor_[1851, 1930]_tabula_standard_1_SFH": {
+    "GroundFloor_[1851, 1930]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7384,12 +7383,12 @@
             }
         }
     },
-    "GroundFloor_[0, 1850]_tabula_standard_1_SFH": {
+    "GroundFloor_[0, 1850]_tabula_dk_standard_1_SFH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_standard_1_SFH",
+        "construction_data": "tabula_dk_standard_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7416,12 +7415,12 @@
             }
         }
     },
-    "GroundFloor_[1973, 1978]_tabula_retrofit_1_SFH": {
+    "GroundFloor_[1973, 1978]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7455,12 +7454,12 @@
             }
         }
     },
-    "GroundFloor_[1961, 1972]_tabula_retrofit_1_SFH": {
+    "GroundFloor_[1961, 1972]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7494,12 +7493,12 @@
             }
         }
     },
-    "GroundFloor_[1951, 1960]_tabula_retrofit_1_SFH": {
+    "GroundFloor_[1951, 1960]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7540,12 +7539,12 @@
             }
         }
     },
-    "GroundFloor_[1931, 1950]_tabula_retrofit_1_SFH": {
+    "GroundFloor_[1931, 1950]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7579,12 +7578,12 @@
             }
         }
     },
-    "GroundFloor_[1851, 1930]_tabula_retrofit_1_SFH": {
+    "GroundFloor_[1851, 1930]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7618,12 +7617,12 @@
             }
         }
     },
-    "GroundFloor_[0, 1850]_tabula_retrofit_1_SFH": {
+    "GroundFloor_[0, 1850]_tabula_dk_retrofit_1_SFH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_retrofit_1_SFH",
+        "construction_data": "tabula_dk_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7650,12 +7649,12 @@
             }
         }
     },
-    "GroundFloor_[1973, 1978]_tabula_adv_retrofit_1_SFH": {
+    "GroundFloor_[1973, 1978]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7682,12 +7681,12 @@
             }
         }
     },
-    "GroundFloor_[1961, 1972]_tabula_adv_retrofit_1_SFH": {
+    "GroundFloor_[1961, 1972]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7714,12 +7713,12 @@
             }
         }
     },
-    "GroundFloor_[1951, 1960]_tabula_adv_retrofit_1_SFH": {
+    "GroundFloor_[1951, 1960]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7753,12 +7752,12 @@
             }
         }
     },
-    "GroundFloor_[1931, 1950]_tabula_adv_retrofit_1_SFH": {
+    "GroundFloor_[1931, 1950]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7799,12 +7798,12 @@
             }
         }
     },
-    "GroundFloor_[1851, 1930]_tabula_adv_retrofit_1_SFH": {
+    "GroundFloor_[1851, 1930]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7845,12 +7844,12 @@
             }
         }
     },
-    "GroundFloor_[0, 1850]_tabula_adv_retrofit_1_SFH": {
+    "GroundFloor_[0, 1850]_tabula_dk_adv_retrofit_1_SFH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_adv_retrofit_1_SFH",
+        "construction_data": "tabula_dk_adv_retrofit_1_SFH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7884,12 +7883,12 @@
             }
         }
     },
-    "GroundFloor_[2007, 2010]_tabula_standard_1_TH": {
+    "GroundFloor_[2007, 2010]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             2007,
             2010
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7923,12 +7922,12 @@
             }
         }
     },
-    "GroundFloor_[1999, 2006]_tabula_standard_1_TH": {
+    "GroundFloor_[1999, 2006]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1999,
             2006
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -7962,12 +7961,12 @@
             }
         }
     },
-    "GroundFloor_[1979, 1998]_tabula_standard_1_TH": {
+    "GroundFloor_[1979, 1998]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8001,12 +8000,12 @@
             }
         }
     },
-    "GroundFloor_[1973, 1978]_tabula_standard_1_TH": {
+    "GroundFloor_[1973, 1978]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8040,12 +8039,12 @@
             }
         }
     },
-    "GroundFloor_[1961, 1972]_tabula_standard_1_TH": {
+    "GroundFloor_[1961, 1972]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8072,12 +8071,12 @@
             }
         }
     },
-    "GroundFloor_[1951, 1960]_tabula_standard_1_TH": {
+    "GroundFloor_[1951, 1960]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8104,12 +8103,12 @@
             }
         }
     },
-    "GroundFloor_[1931, 1950]_tabula_standard_1_TH": {
+    "GroundFloor_[1931, 1950]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8150,12 +8149,12 @@
             }
         }
     },
-    "GroundFloor_[1851, 1930]_tabula_standard_1_TH": {
+    "GroundFloor_[1851, 1930]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8189,12 +8188,12 @@
             }
         }
     },
-    "GroundFloor_[0, 1850]_tabula_standard_1_TH": {
+    "GroundFloor_[0, 1850]_tabula_dk_standard_1_TH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_standard_1_TH",
+        "construction_data": "tabula_dk_standard_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8228,12 +8227,12 @@
             }
         }
     },
-    "GroundFloor_[1973, 1978]_tabula_retrofit_1_TH": {
+    "GroundFloor_[1973, 1978]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8267,12 +8266,12 @@
             }
         }
     },
-    "GroundFloor_[1961, 1972]_tabula_retrofit_1_TH": {
+    "GroundFloor_[1961, 1972]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8313,12 +8312,12 @@
             }
         }
     },
-    "GroundFloor_[1951, 1960]_tabula_retrofit_1_TH": {
+    "GroundFloor_[1951, 1960]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8359,12 +8358,12 @@
             }
         }
     },
-    "GroundFloor_[1931, 1950]_tabula_retrofit_1_TH": {
+    "GroundFloor_[1931, 1950]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8412,12 +8411,12 @@
             }
         }
     },
-    "GroundFloor_[1851, 1930]_tabula_retrofit_1_TH": {
+    "GroundFloor_[1851, 1930]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8458,12 +8457,12 @@
             }
         }
     },
-    "GroundFloor_[0, 1850]_tabula_retrofit_1_TH": {
+    "GroundFloor_[0, 1850]_tabula_dk_retrofit_1_TH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_retrofit_1_TH",
+        "construction_data": "tabula_dk_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8497,12 +8496,12 @@
             }
         }
     },
-    "GroundFloor_[1973, 1978]_tabula_adv_retrofit_1_TH": {
+    "GroundFloor_[1973, 1978]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8536,12 +8535,12 @@
             }
         }
     },
-    "GroundFloor_[1961, 1972]_tabula_adv_retrofit_1_TH": {
+    "GroundFloor_[1961, 1972]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8582,12 +8581,12 @@
             }
         }
     },
-    "GroundFloor_[1951, 1960]_tabula_adv_retrofit_1_TH": {
+    "GroundFloor_[1951, 1960]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8628,12 +8627,12 @@
             }
         }
     },
-    "GroundFloor_[1931, 1950]_tabula_adv_retrofit_1_TH": {
+    "GroundFloor_[1931, 1950]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8681,12 +8680,12 @@
             }
         }
     },
-    "GroundFloor_[1851, 1930]_tabula_adv_retrofit_1_TH": {
+    "GroundFloor_[1851, 1930]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8727,12 +8726,12 @@
             }
         }
     },
-    "GroundFloor_[0, 1850]_tabula_adv_retrofit_1_TH": {
+    "GroundFloor_[0, 1850]_tabula_dk_adv_retrofit_1_TH": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_adv_retrofit_1_TH",
+        "construction_data": "tabula_dk_adv_retrofit_1_TH",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8766,12 +8765,12 @@
             }
         }
     },
-    "GroundFloor_[2007, 2010]_tabula_standard_1_AB": {
+    "GroundFloor_[2007, 2010]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             2007,
             2010
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8805,12 +8804,12 @@
             }
         }
     },
-    "GroundFloor_[1999, 2006]_tabula_standard_1_AB": {
+    "GroundFloor_[1999, 2006]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1999,
             2006
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8844,12 +8843,12 @@
             }
         }
     },
-    "GroundFloor_[1979, 1998]_tabula_standard_1_AB": {
+    "GroundFloor_[1979, 1998]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1979,
             1998
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8883,12 +8882,12 @@
             }
         }
     },
-    "GroundFloor_[1973, 1978]_tabula_standard_1_AB": {
+    "GroundFloor_[1973, 1978]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8922,12 +8921,12 @@
             }
         }
     },
-    "GroundFloor_[1961, 1972]_tabula_standard_1_AB": {
+    "GroundFloor_[1961, 1972]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8954,12 +8953,12 @@
             }
         }
     },
-    "GroundFloor_[1951, 1960]_tabula_standard_1_AB": {
+    "GroundFloor_[1951, 1960]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -8986,12 +8985,12 @@
             }
         }
     },
-    "GroundFloor_[1931, 1950]_tabula_standard_1_AB": {
+    "GroundFloor_[1931, 1950]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -9011,12 +9010,12 @@
             }
         }
     },
-    "GroundFloor_[1851, 1930]_tabula_standard_1_AB": {
+    "GroundFloor_[1851, 1930]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -9043,12 +9042,12 @@
             }
         }
     },
-    "GroundFloor_[0, 1850]_tabula_standard_1_AB": {
+    "GroundFloor_[0, 1850]_tabula_dk_standard_1_AB": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_standard_1_AB",
+        "construction_data": "tabula_dk_standard_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -9082,12 +9081,12 @@
             }
         }
     },
-    "GroundFloor_[1973, 1978]_tabula_retrofit_1_AB": {
+    "GroundFloor_[1973, 1978]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -9128,12 +9127,12 @@
             }
         }
     },
-    "GroundFloor_[1961, 1972]_tabula_retrofit_1_AB": {
+    "GroundFloor_[1961, 1972]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -9167,12 +9166,12 @@
             }
         }
     },
-    "GroundFloor_[1951, 1960]_tabula_retrofit_1_AB": {
+    "GroundFloor_[1951, 1960]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -9206,12 +9205,12 @@
             }
         }
     },
-    "GroundFloor_[1931, 1950]_tabula_retrofit_1_AB": {
+    "GroundFloor_[1931, 1950]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -9238,12 +9237,12 @@
             }
         }
     },
-    "GroundFloor_[1851, 1930]_tabula_retrofit_1_AB": {
+    "GroundFloor_[1851, 1930]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -9284,12 +9283,12 @@
             }
         }
     },
-    "GroundFloor_[0, 1850]_tabula_retrofit_1_AB": {
+    "GroundFloor_[0, 1850]_tabula_dk_retrofit_1_AB": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_retrofit_1_AB",
+        "construction_data": "tabula_dk_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -9330,12 +9329,12 @@
             }
         }
     },
-    "GroundFloor_[1973, 1978]_tabula_adv_retrofit_1_AB": {
+    "GroundFloor_[1973, 1978]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -9376,12 +9375,12 @@
             }
         }
     },
-    "GroundFloor_[1961, 1972]_tabula_adv_retrofit_1_AB": {
+    "GroundFloor_[1961, 1972]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1961,
             1972
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -9415,12 +9414,12 @@
             }
         }
     },
-    "GroundFloor_[1951, 1960]_tabula_adv_retrofit_1_AB": {
+    "GroundFloor_[1951, 1960]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1951,
             1960
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -9454,12 +9453,12 @@
             }
         }
     },
-    "GroundFloor_[1931, 1950]_tabula_adv_retrofit_1_AB": {
+    "GroundFloor_[1931, 1950]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1931,
             1950
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -9486,12 +9485,12 @@
             }
         }
     },
-    "GroundFloor_[1851, 1930]_tabula_adv_retrofit_1_AB": {
+    "GroundFloor_[1851, 1930]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             1851,
             1930
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -9532,12 +9531,12 @@
             }
         }
     },
-    "GroundFloor_[0, 1850]_tabula_adv_retrofit_1_AB": {
+    "GroundFloor_[0, 1850]_tabula_dk_adv_retrofit_1_AB": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_adv_retrofit_1_AB",
+        "construction_data": "tabula_dk_adv_retrofit_1_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -9578,12 +9577,12 @@
             }
         }
     },
-    "GroundFloor_[1973, 1978]_tabula_standard_2_AB": {
+    "GroundFloor_[1973, 1978]_tabula_dk_standard_2_AB": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_standard_2_AB",
+        "construction_data": "tabula_dk_standard_2_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -9603,12 +9602,12 @@
             }
         }
     },
-    "GroundFloor_[0, 1850]_tabula_standard_2_AB": {
+    "GroundFloor_[0, 1850]_tabula_dk_standard_2_AB": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_standard_2_AB",
+        "construction_data": "tabula_dk_standard_2_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -9628,12 +9627,12 @@
             }
         }
     },
-    "GroundFloor_[0, 1850]_tabula_retrofit_2_AB": {
+    "GroundFloor_[0, 1850]_tabula_dk_retrofit_2_AB": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_retrofit_2_AB",
+        "construction_data": "tabula_dk_retrofit_2_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -9653,12 +9652,12 @@
             }
         }
     },
-    "GroundFloor_[0, 1850]_tabula_adv_retrofit_2_AB": {
+    "GroundFloor_[0, 1850]_tabula_dk_adv_retrofit_2_AB": {
         "building_age_group": [
             0,
             1850
         ],
-        "construction_type": "tabula_adv_retrofit_2_AB",
+        "construction_data": "tabula_dk_adv_retrofit_2_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -9678,12 +9677,12 @@
             }
         }
     },
-    "GroundFloor_[1973, 1978]_tabula_retrofit_2_AB": {
+    "GroundFloor_[1973, 1978]_tabula_dk_retrofit_2_AB": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_retrofit_2_AB",
+        "construction_data": "tabula_dk_retrofit_2_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -9703,12 +9702,12 @@
             }
         }
     },
-    "GroundFloor_[1973, 1978]_tabula_adv_retrofit_2_AB": {
+    "GroundFloor_[1973, 1978]_tabula_dk_adv_retrofit_2_AB": {
         "building_age_group": [
             1973,
             1978
         ],
-        "construction_type": "tabula_adv_retrofit_2_AB",
+        "construction_data": "tabula_dk_adv_retrofit_2_AB",
         "inner_radiation": 5.0,
         "inner_convection": 1.7,
         "layer": {
@@ -9728,12 +9727,12 @@
             }
         }
     },
-    "InnerWall_[1995, 2015]_tabula_standard": {
+    "InnerWall_[1995, 2015]_tabula_dk_standard": {
         "building_age_group": [
             1995,
             2015
         ],
-        "construction_type": "tabula_standard",
+        "construction_data": "tabula_dk_standard",
         "inner_radiation": 5.0,
         "inner_convection": 2.7,
         "layer": {
@@ -9760,12 +9759,12 @@
             }
         }
     },
-    "Ceiling_[1995, 2015]_tabula_standard": {
+    "Ceiling_[1995, 2015]_tabula_dk_standard": {
         "building_age_group": [
             1995,
             2015
         ],
-        "construction_type": "tabula_standard",
+        "construction_data": "tabula_dk_standard",
         "inner_radiation": 5.0,
         "inner_convection": 1.7000000000000002,
         "layer": {
@@ -9792,12 +9791,12 @@
             }
         }
     },
-    "Floor_[1995, 2015]_tabula_standard": {
+    "Floor_[1995, 2015]_tabula_dk_standard": {
         "building_age_group": [
             1995,
             2015
         ],
-        "construction_type": "tabula_standard",
+        "construction_data": "tabula_dk_standard",
         "inner_radiation": 5.0,
         "inner_convection": 1.7000000000000002,
         "layer": {

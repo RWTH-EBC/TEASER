@@ -14,6 +14,7 @@ from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
+import teaser.data.utilities as datahandling
 
 
 class Office(NonResidential):
@@ -103,11 +104,11 @@ class Office(NonResidential):
         2. banner facade (continuous windows)
         3. full glazing
 
-    construction_type : str
-        Construction type of used wall constructions default is "heavy")
+    construction_data : str
+        Construction type of used wall constructions default is "iwu_heavy")
 
-        - heavy: heavy construction
-        - light: light construction
+        - iwu_heavy: heavy construction
+        - iwu_light: light construction
 
     Notes
     -----
@@ -170,7 +171,7 @@ class Office(NonResidential):
         internal_gains_mode=1,
         office_layout=None,
         window_layout=None,
-        construction_type=None,
+        construction_data=None,
     ):
         """Constructor of Office archetype
         """
@@ -185,7 +186,7 @@ class Office(NonResidential):
 
         self.office_layout = office_layout
         self.window_layout = window_layout
-        self.construction_type = construction_type
+        self.construction_data = construction_data
         self.number_of_floors = number_of_floors
         self.height_of_floors = height_of_floors
         # Parameters are default values for current
@@ -360,7 +361,7 @@ class Office(NonResidential):
                 outer_wall = OuterWall(zone)
                 outer_wall.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_type,
+                    construction=self.construction_data.value,
                     data_class=self.parent.data,
                 )
                 outer_wall.name = key
@@ -404,7 +405,7 @@ class Office(NonResidential):
                 roof = Rooftop(zone)
                 roof.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_type,
+                    construction=self.construction_data.value,
                     data_class=self.parent.data,
                 )
                 roof.name = key
@@ -419,7 +420,7 @@ class Office(NonResidential):
                 ground_floor = GroundFloor(zone)
                 ground_floor.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_type,
+                    construction=self.construction_data.value,
                     data_class=self.parent.data,
                 )
                 ground_floor.name = key
@@ -432,7 +433,7 @@ class Office(NonResidential):
                 inner_wall = InnerWall(zone)
                 inner_wall.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_type,
+                    construction=self.construction_data.value,
                     data_class=self.parent.data,
                 )
                 inner_wall.name = key
@@ -447,7 +448,7 @@ class Office(NonResidential):
                     ceiling = Ceiling(zone)
                     ceiling.load_type_element(
                         year=self.year_of_construction,
-                        construction=self.construction_type,
+                        construction=self.construction_data.value,
                         data_class=self.parent.data,
                     )
                     ceiling.name = key
@@ -461,7 +462,7 @@ class Office(NonResidential):
                     floor = Floor(zone)
                     floor.load_type_element(
                         year=self.year_of_construction,
-                        construction=self.construction_type,
+                        construction=self.construction_data.value,
                         data_class=self.parent.data,
                     )
                     floor.name = key
@@ -502,15 +503,9 @@ class Office(NonResidential):
             self._window_layout = 0
 
     @property
-    def construction_type(self):
-        return self._construction_type
+    def construction_data(self):
+        return self._construction_data
 
-    @construction_type.setter
-    def construction_type(self, value):
-        if value is not None:
-            if value == "heavy" or value == "light":
-                self._construction_type = value
-            else:
-                raise ValueError("Construction_type has to be light or heavy")
-        else:
-            self._construction_type = "heavy"
+    @construction_data.setter
+    def construction_data(self, value):
+        self._construction_data = datahandling.check_construction_data_setter_iwu(value)

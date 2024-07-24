@@ -3,22 +3,22 @@ Created July 2015
 
 @author: TEASER 4 Development Team
 """
-
 from teaser.logic import utilities
 from teaser.project import Project
+from teaser.data.utilities import ConstructionData
+from teaser.data.dataclass import DataClass
 import math
 import os
 import helptest
 import warnings as warnings
 
-prj = Project(True)
-
+prj = Project(False)
+prj.data = DataClass(construction_data=ConstructionData.iwu_heavy)
 
 class Test_teaser(object):
     """Unit Tests for TEASER"""
 
     global prj
-
     def test_calc_vdi_room1(self):
         """Parameter Verification for rouvel room1"""
         import teaser.examples.verification.verification_VDI_6007_room1 as room1
@@ -196,7 +196,7 @@ class Test_teaser(object):
             net_leased_area=2500,
             office_layout=1,
             window_layout=1,
-            construction_type="light",
+            construction_data="iwu_light",
         )
 
         test_office.generate_archetype()
@@ -224,7 +224,7 @@ class Test_teaser(object):
             net_leased_area=2500,
             office_layout=2,
             window_layout=2,
-            construction_type="heavy",
+            construction_data="iwu_heavy",
         )
 
         test_office.generate_archetype()
@@ -252,7 +252,7 @@ class Test_teaser(object):
             net_leased_area=2500,
             office_layout=3,
             window_layout=3,
-            construction_type="light",
+            construction_data="iwu_light",
         )
 
         test_office.generate_archetype()
@@ -287,7 +287,7 @@ class Test_teaser(object):
             net_leased_area=2500,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
+            construction_data="iwu_heavy",
         )
 
         test_institute4.generate_archetype()
@@ -344,7 +344,7 @@ class Test_teaser(object):
             net_leased_area=2500,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
+            construction_data="iwu_heavy",
         )
 
         test_institute8.generate_archetype()
@@ -401,7 +401,7 @@ class Test_teaser(object):
             net_leased_area=2500,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
+            construction_data="iwu_heavy",
         )
 
         test_institute.generate_archetype()
@@ -498,7 +498,7 @@ class Test_teaser(object):
             attic=1,
             dormer=1,
             cellar=1,
-            construction_type="light",
+            construction_data="iwu_light",
         )
 
         test_residential.generate_archetype()
@@ -529,7 +529,7 @@ class Test_teaser(object):
             attic=2,
             dormer=0,
             cellar=2,
-            construction_type="heavy",
+            construction_data="iwu_heavy",
         )
 
         test_residential.generate_archetype()
@@ -560,7 +560,7 @@ class Test_teaser(object):
             attic=3,
             dormer=0,
             cellar=3,
-            construction_type="light",
+            construction_data="iwu_light",
         )
 
         test_residential.generate_archetype()
@@ -597,7 +597,7 @@ class Test_teaser(object):
 
     def test_load_save_project_new(self):
         """test of load_project and save_project"""
-        prj.set_default(load_data=True)
+        prj.set_default(load_data=False)
         prj.load_project(os.path.join(utilities.get_default_path(), "unitTest.json"))
         therm_zone = prj.buildings[-1].thermal_zones[0]
         assert therm_zone.area == 994.0
@@ -628,8 +628,8 @@ class Test_teaser(object):
     def test_retrofit_all_buildings(self):
         """test of retrofit_all_buildings, no calculation verification"""
         prj.add_residential(
-            method="iwu",
-            usage="single_family_dwelling",
+            construction_data="iwu_heavy",
+            geometry_data="iwu_single_family_dwelling",
             name="ResidentialBuilding",
             year_of_construction=1858,
             number_of_floors=2,
@@ -637,8 +637,8 @@ class Test_teaser(object):
             net_leased_area=219,
         )
         prj.add_residential(
-            method="tabula_de",
-            usage="single_family_house",
+            construction_data="tabula_de_standard",
+            geometry_data="tabula_de_single_family_house",
             name="ResidentialBuilding",
             year_of_construction=1858,
             number_of_floors=2,
@@ -779,11 +779,11 @@ class Test_teaser(object):
     def test_type_bldg_office(self):
         """test of type_bldg_office, no calculation verification
         """
-        prj.set_default(load_data=True)
+        prj.set_default(load_data=False)
 
         prj.add_non_residential(
-            method="bmvbs",
-            usage="office",
+            construction_data="iwu_heavy",
+            geometry_data="bmvbs_office",
             name="TestBuilding",
             year_of_construction=1988,
             number_of_floors=7,
@@ -792,11 +792,10 @@ class Test_teaser(object):
             with_ahu=False,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
         )
         prj.add_non_residential(
-            method="bmvbs",
-            usage="office",
+            construction_data="iwu_heavy",
+            geometry_data="bmvbs_office",
             name="TestBuilding",
             year_of_construction=1988,
             number_of_floors=7,
@@ -806,11 +805,10 @@ class Test_teaser(object):
             internal_gains_mode=2,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
         )
         prj.add_non_residential(
-            method="bmvbs",
-            usage="office",
+            construction_data="iwu_heavy",
+            geometry_data="bmvbs_office",
             name="TestBuilding",
             year_of_construction=1988,
             number_of_floors=7,
@@ -820,15 +818,14 @@ class Test_teaser(object):
             internal_gains_mode=3,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
         )
 
     def test_type_bldg_institute(self):
         """test of type_bldg_institute, no calculation verification"""
 
         prj.add_non_residential(
-            method="bmvbs",
-            usage="institute",
+            construction_data="iwu_heavy",
+            geometry_data="bmvbs_institute",
             name="TestBuilding",
             year_of_construction=1988,
             number_of_floors=7,
@@ -837,11 +834,11 @@ class Test_teaser(object):
             with_ahu=True,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
+
         )
         prj.add_non_residential(
-            method="bmvbs",
-            usage="institute",
+            construction_data="iwu_heavy",
+            geometry_data="bmvbs_institute",
             name="TestBuilding",
             year_of_construction=1988,
             number_of_floors=7,
@@ -851,11 +848,10 @@ class Test_teaser(object):
             internal_gains_mode=2,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
         )
         prj.add_non_residential(
-            method="bmvbs",
-            usage="institute",
+            construction_data="iwu_heavy",
+            geometry_data="bmvbs_institute",
             name="TestBuilding",
             year_of_construction=1988,
             number_of_floors=7,
@@ -865,15 +861,14 @@ class Test_teaser(object):
             internal_gains_mode=3,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
         )
 
     def test_type_bldg_institute4(self):
         """test of type_bldg_institute4, no calculation verification"""
 
         prj.add_non_residential(
-            method="bmvbs",
-            usage="institute4",
+            construction_data="iwu_heavy",
+            geometry_data="bmvbs_institute4",
             name="TestBuilding",
             year_of_construction=1988,
             number_of_floors=7,
@@ -882,15 +877,14 @@ class Test_teaser(object):
             with_ahu=True,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
         )
 
     def test_type_bldg_institute8(self):
         """test of type_bldg_institute8, no calculation verification"""
 
         prj.add_non_residential(
-            method="bmvbs",
-            usage="institute8",
+            construction_data="iwu_heavy",
+            geometry_data="bmvbs_institute8",
             name="TestBuilding",
             year_of_construction=1988,
             number_of_floors=7,
@@ -899,15 +893,14 @@ class Test_teaser(object):
             with_ahu=True,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
         )
 
     def test_type_bldg_residential(self):
         """test of type_bldg_residential, no calculation verification"""
 
         prj.add_residential(
-            method="iwu",
-            usage="single_family_dwelling",
+            construction_data="iwu_heavy",
+            geometry_data="iwu_single_family_dwelling",
             name="TestBuilding",
             year_of_construction=1988,
             number_of_floors=7,
@@ -919,15 +912,14 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
         )
 
     def test_est_bldgs(self):
         """test of type_bldg_est, no calculation verification"""
 
         prj.add_residential(
-            method="urbanrenet",
-            usage="est1a",
+            construction_data="iwu_heavy",
+            geometry_data="urbanrenet_est1a",
             name="TestBuilding",
             year_of_construction=1988,
             number_of_floors=7,
@@ -939,13 +931,12 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
             number_of_apartments=1,
         )
 
         prj.add_residential(
-            method="urbanrenet",
-            usage="est1b",
+            construction_data="iwu_heavy",
+            geometry_data="urbanrenet_est1b",
             name="TestBuilding",
             year_of_construction=1988,
             number_of_floors=7,
@@ -957,13 +948,12 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
             number_of_apartments=1,
         )
 
         prj.add_residential(
-            method="urbanrenet",
-            usage="est2",
+            construction_data="iwu_heavy",
+            geometry_data="urbanrenet_est2",
             name="TestBuilding",
             year_of_construction=1988,
             number_of_floors=7,
@@ -975,13 +965,12 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
             number_of_apartments=1,
         )
 
         prj.add_residential(
-            method="urbanrenet",
-            usage="est3",
+            construction_data="iwu_heavy",
+            geometry_data="urbanrenet_est3",
             name="TestBuilding",
             year_of_construction=1988,
             number_of_floors=7,
@@ -993,13 +982,12 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
             number_of_apartments=1,
         )
 
         prj.add_residential(
-            method="urbanrenet",
-            usage="est4a",
+            construction_data="iwu_heavy",
+            geometry_data="urbanrenet_est4a",
             name="TestBuilding",
             year_of_construction=1988,
             number_of_floors=7,
@@ -1011,13 +999,12 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
             number_of_apartments=1,
         )
 
         prj.add_residential(
-            method="urbanrenet",
-            usage="est4b",
+            construction_data="iwu_heavy",
+            geometry_data="urbanrenet_est4b",
             name="TestBuilding",
             year_of_construction=1988,
             number_of_floors=7,
@@ -1029,13 +1016,12 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
             number_of_apartments=1,
         )
 
         prj.add_residential(
-            method="urbanrenet",
-            usage="est5",
+            construction_data="iwu_heavy",
+            geometry_data="urbanrenet_est5",
             name="TestBuilding",
             year_of_construction=1988,
             number_of_floors=7,
@@ -1047,13 +1033,12 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
             number_of_apartments=1,
         )
 
         prj.add_residential(
-            method="urbanrenet",
-            usage="est6",
+            construction_data="iwu_heavy",
+            geometry_data="urbanrenet_est6",
             name="TestBuilding",
             year_of_construction=1988,
             number_of_floors=7,
@@ -1065,13 +1050,12 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
             number_of_apartments=1,
         )
 
         prj.add_residential(
-            method="urbanrenet",
-            usage="est7",
+            construction_data="iwu_heavy",
+            geometry_data="urbanrenet_est7",
             name="TestBuilding",
             year_of_construction=1988,
             number_of_floors=7,
@@ -1083,13 +1067,12 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
             number_of_apartments=1,
         )
 
         prj.add_residential(
-            method="urbanrenet",
-            usage="est8a",
+            construction_data="iwu_heavy",
+            geometry_data="urbanrenet_est8a",
             name="TestBuilding",
             year_of_construction=1988,
             number_of_floors=7,
@@ -1101,13 +1084,12 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
             number_of_apartments=1,
         )
 
         prj.add_residential(
-            method="urbanrenet",
-            usage="est8b",
+            construction_data="iwu_heavy",
+            geometry_data="urbanrenet_est8b",
             name="TestBuilding",
             year_of_construction=1988,
             number_of_floors=7,
@@ -1119,7 +1101,6 @@ class Test_teaser(object):
             attic=0,
             cellar=0,
             dormer=0,
-            construction_type="heavy",
             number_of_apartments=1,
         )
 
@@ -2204,7 +2185,7 @@ class Test_teaser(object):
 
     def test_ua_value(self):
         """test of ua_value"""
-        prj.set_default(load_data=True)
+        prj.set_default(load_data=False)
         helptest.building_test2(prj)
 
         therm_zone = prj.buildings[-1].thermal_zones[-1]
@@ -2229,8 +2210,8 @@ class Test_teaser(object):
 
         # test load function
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].load_type_element(1988, "heavy", prj.data)
-        therm_zone.inner_walls[0].load_type_element(1988, "light", prj.data)
+        therm_zone.outer_walls[0].load_type_element(1988, "iwu_heavy", prj.data)
+        therm_zone.inner_walls[0].load_type_element(1988, "iwu_light", prj.data)
         therm_zone.windows[0].load_type_element(
             1988, "Kunststofffenster, Isolierverglasung", prj.data
         )
@@ -2341,7 +2322,7 @@ class Test_teaser(object):
 
         from teaser.data.dataclass import DataClass
 
-        dat = DataClass()
+        dat = DataClass(construction_data=ConstructionData.iwu_heavy)
         dat.path_mat = path
         dat.load_mat_binding()
 
@@ -2358,6 +2339,7 @@ class Test_teaser(object):
     def test_warnings_prj(self):
         """Tests misc parts in project.py"""
 
+        prj.data = DataClass(construction_data=ConstructionData.iwu_heavy)
         from teaser.logic.buildingobjects.building import Building
         from teaser.logic.buildingobjects.thermalzone import ThermalZone
         from teaser.logic.buildingobjects.useconditions import UseConditions
@@ -2367,11 +2349,11 @@ class Test_teaser(object):
         tz = ThermalZone(parent=bld)
         tz.use_conditions = UseConditions(parent=tz)
         prj.calc_all_buildings()
-        prj.set_default(load_data=True)
+        prj.set_default(load_data=False)
         # warning if iwu and number_of_apartments is used
         prj.add_residential(
-            method="iwu",
-            usage="single_family_dwelling",
+            construction_data="iwu_heavy",
+            geometry_data="iwu_single_family_dwelling",
             name="test",
             year_of_construction=1988,
             number_of_floors=1,
@@ -2381,8 +2363,8 @@ class Test_teaser(object):
         )
         # not all buildings if internal id is passed over
         prj.add_residential(
-            method="iwu",
-            usage="single_family_dwelling",
+            construction_data="iwu_heavy",
+            geometry_data="iwu_single_family_dwelling",
             name="test1",
             year_of_construction=1988,
             number_of_floors=15,
@@ -2398,6 +2380,7 @@ class Test_teaser(object):
         prj.export_ibpsa(internal_id=prj.buildings[-1].internal_id)
 
         prj.set_default(load_data="Test")
+        prj.data = DataClass(construction_data=ConstructionData.iwu_heavy)
 
     def test_export_aixlib_only_iw(self):
         """
@@ -2406,7 +2389,7 @@ class Test_teaser(object):
 
         from teaser.logic.buildingobjects.building import Building
 
-        prj.set_default(load_data=True)
+        prj.set_default(load_data=False)
 
         bldg = Building(parent=prj)
         bldg.name = "SuperExampleBuilding"
@@ -2442,7 +2425,7 @@ class Test_teaser(object):
             in_wall = InnerWall(parent=tz)
             in_wall.name = key
             in_wall.load_type_element(
-                year=bldg.year_of_construction, construction="heavy"
+                year=bldg.year_of_construction, construction="iwu_heavy"
             )
             in_wall.area = value[0]
 
@@ -2536,7 +2519,7 @@ class Test_teaser(object):
             out_wall.name = key
 
             out_wall.load_type_element(
-                year=bldg.year_of_construction, construction="heavy"
+                year=bldg.year_of_construction, construction="iwu_heavy"
             )
 
             out_wall.area = value[0]
@@ -2926,7 +2909,7 @@ class Test_teaser(object):
             ground = GroundFloor(parent=tz)
             ground.name = key
             ground.load_type_element(
-                year=bldg.year_of_construction, construction="heavy"
+                year=bldg.year_of_construction, construction="iwu_heavy"
             )
             ground.area = value[0]
             ground.tilt = value[1]
@@ -3071,12 +3054,12 @@ class Test_teaser(object):
         Related to issue 553 at https://github.com/RWTH-EBC/TEASER/issues/553
         """
 
-        prj_test = Project(load_data=True)
+        prj_test = Project()
         prj_test.name = "TestAHUProfiles"
 
         prj_test.add_non_residential(
-            method="bmvbs",
-            usage="office",
+            construction_data="iwu_heavy",
+            geometry_data="bmvbs_office",
             name="OfficeBuilding",
             year_of_construction=2015,
             number_of_floors=4,
@@ -3133,11 +3116,11 @@ class Test_teaser(object):
 
     def test_export_bldg_threshold(self):
 
-        prj.set_default(load_data=True)
+        prj.set_default(load_data=False)
 
         prj.add_non_residential(
-            method="bmvbs",
-            usage="institute",
+            construction_data="iwu_heavy",
+            geometry_data="bmvbs_institute",
             name="TestBuilding",
             year_of_construction=1988,
             number_of_floors=7,
@@ -3146,7 +3129,6 @@ class Test_teaser(object):
             with_ahu=True,
             office_layout=0,
             window_layout=0,
-            construction_type="heavy",
         )
         prj.buildings[-1].thermal_zones[0].use_conditions.with_ahu = True
         prj.buildings[-1].thermal_zones[0].use_conditions.with_ideal_thresholds = True

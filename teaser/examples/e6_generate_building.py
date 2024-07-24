@@ -15,14 +15,14 @@ def example_create_building():
     # First step: Import the TEASER API (called Project) into your Python module
 
     from teaser.project import Project
+    from teaser.data.utilities import ConstructionData
+    from teaser.data.dataclass import DataClass
 
-    # To use the API instantiate the Project class and rename the Project. The
-    # parameter load_data=True indicates that we load data into our
-    # Project (e.g. for Material properties and typical wall constructions.
-    # This can take a few seconds, depending on the size of the used data base.
+    # To use the API, instantiate the Project class and rename the project.
 
-    prj = Project(load_data=True)
+    prj = Project()
     prj.name = "BuildingExample"
+    prj.data = DataClass(construction_data=ConstructionData.iwu_heavy)
 
     # Instantiate a Building class and set the Project API as a parent to
     # this building. This will automatically add this building and all its
@@ -183,7 +183,7 @@ def example_create_building():
 
         out_wall.load_type_element(
             year=bldg.year_of_construction,
-            construction='heavy')
+            construction='iwu_heavy')
 
         # area, tilt and orientation need to be set individually.
 
@@ -199,7 +199,7 @@ def example_create_building():
         in_wall.name = key
         in_wall.load_type_element(
             year=bldg.year_of_construction,
-            construction='heavy')
+            construction='iwu_heavy')
         in_wall.area = value[0]
 
     from teaser.logic.buildingobjects.buildingphysics.groundfloor import \
@@ -211,7 +211,7 @@ def example_create_building():
         ground.name = key
         ground.load_type_element(
             year=bldg.year_of_construction,
-            construction='heavy')
+            construction='iwu_heavy')
         ground.area = value[0]
         ground.tilt = value[1]
         ground.orientation = value[2]

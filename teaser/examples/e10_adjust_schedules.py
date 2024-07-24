@@ -12,12 +12,12 @@ def example_adjust_schedules():
     for an residential building using calc_adj_schedules function"""
 
     # First part is only archetype creation, see e1_generate_archetype.py
-    prj = Project(load_data=True)
+    prj = Project()
     prj.name = "ArchetypeExample"
 
     prj.add_residential(
-        method='iwu',
-        usage='single_family_dwelling',
+        construction_data='iwu_heavy',
+        geometry_data='iwu_single_family_dwelling',
         name="ResidentialBuilding",
         year_of_construction=1988,
         number_of_floors=2,
