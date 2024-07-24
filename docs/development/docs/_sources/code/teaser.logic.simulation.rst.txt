@@ -1,0 +1,18 @@
+teaser.logic.simulation package
+===============================
+
+.. automodule:: teaser.logic.simulation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+teaser.logic.simulation.modelicainfo module
+-------------------------------------------
+
+.. automodule:: teaser.logic.simulation.modelicainfo
+   :members:
+   :undoc-members:
+   :show-inheritance:
