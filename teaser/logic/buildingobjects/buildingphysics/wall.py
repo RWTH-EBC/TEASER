@@ -29,7 +29,7 @@ class Wall(BuildingElement):
         Random id for the distinction between different elements.
     name : str
         Individual name
-    construction_type : str
+    construction_data : str
         Type of construction (e.g. "heavy" or "light"). Needed for
         distinction between different constructions types in the same
         building age period.
@@ -331,3 +331,4 @@ class Wall(BuildingElement):
         d_ins = lambda_ins * (1 / calc_u - self.r_outer_comb * self.area -
                               self.r_inner_comb * self.area - r_conduc_rem)
         return d_ins
+

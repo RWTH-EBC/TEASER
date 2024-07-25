@@ -32,7 +32,7 @@ def save_material(material, data_class):
                     "properties")
 
     for id, check in data_class.material_bind.items():
-        if id != "version":
+        if isinstance(check, (collections.OrderedDict, dict)):
             if check["name"] == material.name and \
                     check["density"] == material.density and \
                     check["thermal_conduc"] == material.thermal_conduc and \

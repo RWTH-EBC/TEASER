@@ -7,7 +7,7 @@ Tool for Energy Analysis and Simulation for Efficient Retrofit
 import sys
 import os
 
-__version__ = "0.7.7"
+__version__ = "1.0.0"
 
 
 new_path = os.path.join(os.path.expanduser('~'), ("TEASEROutput"))
