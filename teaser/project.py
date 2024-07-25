@@ -820,6 +820,8 @@ class Project(object):
         export_vars_str = ''
         for index, (var_sel_name, var_list) in enumerate(
                 export_vars.items(), start=1):
+            if not isinstance(var_list, list):
+                raise TypeError(f"Item of key {var_sel_name} in dict 'export_vars' is not an instance of a list!")
             export_vars_str += 'MatchVariable(name="'
             processed_list = '|'.join(map(str, export_vars[var_sel_name]))
             export_vars_str += processed_list
