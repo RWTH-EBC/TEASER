@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.logic.buildingobjects.buildingphysics.buildingelement &mdash; TEASER 0.7.7 documentation</title>
+  <title>teaser.logic.buildingobjects.buildingphysics.buildingelement &mdash; TEASER 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/autodoc_pydantic.css" />
@@ -15,7 +15,7 @@
   
         <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../../_static/documentation_options.js?v=35f4697d"></script>
+        <script src="../../../../../_static/documentation_options.js?v=8d563738"></script>
         <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../../_static/js/theme.js"></script>
@@ -35,7 +35,7 @@
             TEASER
           </a>
               <div class="version">
-                0.7
+                1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
@@ -115,7 +115,7 @@
 <span class="sd">        Random id for the distinction between different elements.</span>
 <span class="sd">    name : str</span>
 <span class="sd">        Individual name</span>
-<span class="sd">    construction_type : str</span>
+<span class="sd">    construction_data : str</span>
 <span class="sd">        Type of construction (e.g. &quot;heavy&quot; or &quot;light&quot;). Needed for</span>
 <span class="sd">        distinction between different constructions types in the same</span>
 <span class="sd">        building age period.</span>
@@ -205,7 +205,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">internal_id</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_construction_type</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_construction_data</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_year_of_retrofit</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_year_of_construction</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">building_age_group</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
@@ -274,6 +274,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ua_value</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">r_inner_comb</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">r_conduc</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">r_outer_comb</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">u_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ua_value</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">area</span></div>
+
 
 
 <div class="viewcode-block" id="BuildingElement.gather_element_properties">
@@ -751,13 +752,13 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert year to int&quot;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">construction_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_construction_type</span>
+    <span class="k">def</span> <span class="nf">construction_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_construction_data</span>
 
-    <span class="nd">@construction_type</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">construction_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="nd">@construction_data</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">construction_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_construction_type</span> <span class="o">=</span> <span class="n">value</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_construction_data</span> <span class="o">=</span> <span class="n">value</span></div>
 
 </pre></div>
 

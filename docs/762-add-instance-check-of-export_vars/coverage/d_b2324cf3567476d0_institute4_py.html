@@ -65,7 +65,7 @@
             <a id="nextFileLink" class="nav" href="d_b2324cf3567476d0_institute8_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.4.4">coverage.py v7.4.4</a>,
-            created at 2024-07-16 14:51 +0000
+            created at 2024-07-25 10:56 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"/>
@@ -166,7 +166,7 @@
     <p class="pln"><span class="n"><a id="t84" href="#t84">84</a></span><span class="t"><span class="str">        2. banner facade (continuous windows)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t85" href="#t85">85</a></span><span class="t"><span class="str">        3. full glazing</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t86" href="#t86">86</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t87" href="#t87">87</a></span><span class="t"><span class="str">    construction_type : str</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t87" href="#t87">87</a></span><span class="t"><span class="str">    construction_data : str</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t88" href="#t88">88</a></span><span class="t"><span class="str">        Construction type of used wall constructions default is "heavy")</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t89" href="#t89">89</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t90" href="#t90">90</a></span><span class="t"><span class="str">        - heavy: heavy construction</span>&nbsp;</span><span class="r"></span></p>
@@ -233,7 +233,7 @@
     <p class="pln"><span class="n"><a id="t151" href="#t151">151</a></span><span class="t">                 <span class="nam">internal_gains_mode</span><span class="op">=</span><span class="num">1</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t152" href="#t152">152</a></span><span class="t">                 <span class="nam">office_layout</span><span class="op">=</span><span class="key">None</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t153" href="#t153">153</a></span><span class="t">                 <span class="nam">window_layout</span><span class="op">=</span><span class="key">None</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t154" href="#t154">154</a></span><span class="t">                 <span class="nam">construction_type</span><span class="op">=</span><span class="key">None</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t154" href="#t154">154</a></span><span class="t">                 <span class="nam">construction_data</span><span class="op">=</span><span class="key">None</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t155" href="#t155">155</a></span><span class="t">        <span class="str">"""Constructor of Institute4</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t156" href="#t156">156</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t157" href="#t157">157</a></span><span class="t"><span class="str">        adds an additional zone "Laboratory"</span>&nbsp;</span><span class="r"></span></p>
@@ -250,7 +250,7 @@
     <p class="pln"><span class="n"><a id="t168" href="#t168">168</a></span><span class="t">                                         <span class="nam">internal_gains_mode</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t169" href="#t169">169</a></span><span class="t">                                         <span class="nam">office_layout</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t170" href="#t170">170</a></span><span class="t">                                         <span class="nam">window_layout</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t171" href="#t171">171</a></span><span class="t">                                         <span class="nam">construction_type</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t171" href="#t171">171</a></span><span class="t">                                         <span class="nam">construction_data</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t172" href="#t172">172</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">zone_area_factors</span><span class="op">[</span><span class="str">"Office"</span><span class="op">]</span> <span class="op">=</span> <span class="xx">\</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t173" href="#t173">173</a></span><span class="t">            <span class="op">[</span><span class="num">0.22</span><span class="op">,</span> <span class="str">"Group Office (between 2 and 6 employees)"</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t174" href="#t174">174</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">zone_area_factors</span><span class="op">[</span><span class="str">"Floor"</span><span class="op">]</span> <span class="op">=</span> <span class="xx">\</span>&nbsp;</span><span class="r"></span></p>
@@ -279,7 +279,7 @@
             <a id="nextFileLink" class="nav" href="d_b2324cf3567476d0_institute8_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.4.4">coverage.py v7.4.4</a>,
-            created at 2024-07-16 14:51 +0000
+            created at 2024-07-25 10:56 +0000
         </p>
     </div>
 </footer>

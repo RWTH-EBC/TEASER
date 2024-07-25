@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling &mdash; TEASER 0.7.7 documentation</title>
+  <title>teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling &mdash; TEASER 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/autodoc_pydantic.css" />
@@ -15,7 +15,7 @@
   
         <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../../_static/documentation_options.js?v=35f4697d"></script>
+        <script src="../../../../../_static/documentation_options.js?v=8d563738"></script>
         <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../../_static/js/theme.js"></script>
@@ -35,7 +35,7 @@
             TEASER
           </a>
               <div class="version">
-                0.7
+                1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
@@ -94,7 +94,7 @@
 <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.rooftop</span> <span class="kn">import</span> <span class="n">Rooftop</span>
 <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.window</span> <span class="kn">import</span> <span class="n">Window</span>
 <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.thermalzone</span> <span class="kn">import</span> <span class="n">ThermalZone</span>
-
+<span class="kn">import</span> <span class="nn">teaser.data.utilities</span> <span class="k">as</span> <span class="nn">datahandling</span>
 
 <div class="viewcode-block" id="SingleFamilyDwelling">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.archetypebuildings.bmvbs.html#teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling.SingleFamilyDwelling">[docs]</a>
@@ -198,11 +198,12 @@
 <span class="sd">        0. no dormer</span>
 <span class="sd">        1. dormer</span>
 
-<span class="sd">    construction_type : str</span>
-<span class="sd">        Construction type of used wall constructions default is &quot;heavy&quot;</span>
+<span class="sd">    construction_data : str</span>
+<span class="sd">        Construction type of used wall constructions default is &quot;iwu_heavy&quot;</span>
 
-<span class="sd">        - heavy: heavy construction</span>
-<span class="sd">        - light: light construction</span>
+<span class="sd">        - iwu_heavy: heavy construction</span>
+<span class="sd">        - iwu_light: light construction</span>
+<span class="sd">        - kfw_40, kfw_55, kfw_70, kfw_85, kfw_100: KfW efficiency building standards</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -268,7 +269,7 @@
         <span class="n">attic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">cellar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">dormer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">construction_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">construction_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor of SingleFamilyDwelling</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -287,7 +288,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">attic</span> <span class="o">=</span> <span class="n">attic</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cellar</span> <span class="o">=</span> <span class="n">cellar</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dormer</span> <span class="o">=</span> <span class="n">dormer</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">construction_type</span> <span class="o">=</span> <span class="n">construction_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">construction_data</span> <span class="o">=</span> <span class="n">construction_data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">number_of_floors</span> <span class="o">=</span> <span class="n">number_of_floors</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">height_of_floors</span> <span class="o">=</span> <span class="n">height_of_floors</span>
 
@@ -501,7 +502,7 @@
                 <span class="n">outer_wall</span> <span class="o">=</span> <span class="n">OuterWall</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
                 <span class="n">outer_wall</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
                     <span class="n">year</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
-                    <span class="n">construction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">construction_type</span><span class="p">,</span>
+                    <span class="n">construction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">construction_data</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
                     <span class="n">data_class</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
                 <span class="p">)</span>
                 <span class="n">outer_wall</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
@@ -524,10 +525,14 @@
 <span class="sd">            &quot;&quot;&quot;</span>
             <span class="k">for</span> <span class="n">zone</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
                 <span class="n">window</span> <span class="o">=</span> <span class="n">Window</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
-
+                <span class="n">construction</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="s2">&quot;Waermeschutzverglasung, dreifach&quot;</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">construction_data</span><span class="o">.</span><span class="n">is_kfw</span><span class="p">()</span>
+                    <span class="k">else</span> <span class="s2">&quot;Kunststofffenster, &quot;</span> <span class="s2">&quot;Isolierverglasung&quot;</span>
+                <span class="p">)</span>
                 <span class="n">window</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
-                    <span class="s2">&quot;Kunststofffenster, &quot;</span> <span class="s2">&quot;Isolierverglasung&quot;</span><span class="p">,</span>
+                    <span class="n">construction</span><span class="o">=</span><span class="n">construction</span><span class="p">,</span>
                     <span class="n">data_class</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
                 <span class="p">)</span>
                 <span class="n">window</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
@@ -542,7 +547,7 @@
                 <span class="n">roof</span> <span class="o">=</span> <span class="n">Rooftop</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
                 <span class="n">roof</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
                     <span class="n">year</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
-                    <span class="n">construction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">construction_type</span><span class="p">,</span>
+                    <span class="n">construction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">construction_data</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
                     <span class="n">data_class</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
                 <span class="p">)</span>
                 <span class="n">roof</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
@@ -557,7 +562,7 @@
                 <span class="n">ground_floor</span> <span class="o">=</span> <span class="n">GroundFloor</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
                 <span class="n">ground_floor</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
                     <span class="n">year</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
-                    <span class="n">construction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">construction_type</span><span class="p">,</span>
+                    <span class="n">construction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">construction_data</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
                     <span class="n">data_class</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
                 <span class="p">)</span>
                 <span class="n">ground_floor</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
@@ -570,7 +575,7 @@
                 <span class="n">inner_wall</span> <span class="o">=</span> <span class="n">InnerWall</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
                 <span class="n">inner_wall</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
                     <span class="n">year</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
-                    <span class="n">construction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">construction_type</span><span class="p">,</span>
+                    <span class="n">construction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">construction_data</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
                     <span class="n">data_class</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
                 <span class="p">)</span>
                 <span class="n">inner_wall</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
@@ -586,7 +591,7 @@
                     <span class="n">ceiling</span> <span class="o">=</span> <span class="n">Ceiling</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
                     <span class="n">ceiling</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
                         <span class="n">year</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
-                        <span class="n">construction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">construction_type</span><span class="p">,</span>
+                        <span class="n">construction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">construction_data</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
                         <span class="n">data_class</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
                     <span class="p">)</span>
                     <span class="n">ceiling</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
@@ -600,7 +605,7 @@
                     <span class="n">floor</span> <span class="o">=</span> <span class="n">Floor</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
                     <span class="n">floor</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
                         <span class="n">year</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
-                        <span class="n">construction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">construction_type</span><span class="p">,</span>
+                        <span class="n">construction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">construction_data</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
                         <span class="n">data_class</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
                     <span class="p">)</span>
                     <span class="n">floor</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
@@ -676,18 +681,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_dormer</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">construction_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_construction_type</span>
-
-    <span class="nd">@construction_type</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">construction_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;heavy&quot;</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;light&quot;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_construction_type</span> <span class="o">=</span> <span class="n">value</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Construction_type has to be light or heavy&quot;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_construction_type</span> <span class="o">=</span> <span class="s2">&quot;heavy&quot;</span></div>
+    <span class="k">def</span> <span class="nf">construction_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_construction_data</span>
+    <span class="nd">@construction_data</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">construction_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_construction_data</span> <span class="o">=</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">check_construction_data_setter_iwu</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
 
 </pre></div>
 

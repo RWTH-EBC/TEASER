@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Example 1: Generate archetype buildings using TEASER API &mdash; TEASER 0.7.7 documentation</title>
+  <title>Example 1: Generate archetype buildings using TEASER API &mdash; TEASER 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=35f4697d"></script>
+        <script src="../_static/documentation_options.js?v=8d563738"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -38,7 +38,7 @@
             TEASER
           </a>
               <div class="version">
-                0.7
+                1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -108,13 +108,9 @@ module</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">teaser.project</span> <span class="kn">import</span> <span class="n">Project</span>
 </pre></div>
 </div>
-<p>To use the API instantiate the Project class and rename the Project. The
-parameter load_data=True indicates that we load <code class="docutils literal notranslate"><span class="pre">iwu</span></code> typology archetype
-data into our Project (e.g. for Material properties and typical wall
-constructions. This can take a few seconds, depending on the size of the
-used data base). Be careful: Dymola does not like whitespaces in names and
-filenames, thus we will delete them anyway in TEASER.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">(</span><span class="n">load_data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<p>To use the API, instantiate the Project class and rename the project.
+Be careful: Dymola does not like whitespaces in names and filenames, thus we will delete them anyway in TEASER.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">()</span>
 <span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ArchetypeExample&quot;</span>
 </pre></div>
 </div>
@@ -123,15 +119,15 @@ non-residential buildings. Two API functions offer the opportunity to
 generate specific archetypes.</p>
 <p>To generate residential archetype buildings the function
 Project.add_residential() is used. Seven parameters are compulsory,
-additional parameters can be set according to the used method. <code class="docutils literal notranslate"><span class="pre">method</span></code>
-and <code class="docutils literal notranslate"><span class="pre">usage</span></code> are used to distinguish between different archetype
+additional parameters can be set according to the used method. <code class="docutils literal notranslate"><span class="pre">construction_data</span></code>
+and <code class="docutils literal notranslate"><span class="pre">geometry_data</span></code> are used to distinguish between different construction and archetype
 methods. The name, year_of_construction, number and height of floors
 and net_leased_area need to be set to provide enough information for
 archetype generation. For specific information on the parameters please
 read the docs.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prj</span><span class="o">.</span><span class="n">add_residential</span><span class="p">(</span>
-    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;iwu&#39;</span><span class="p">,</span>
-    <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;single_family_dwelling&#39;</span><span class="p">,</span>
+    <span class="n">construction_data</span><span class="o">=</span><span class="s1">&#39;iwu_heavy&#39;</span><span class="p">,</span>
+    <span class="n">geometry_data</span><span class="o">=</span><span class="s1">&#39;iwu_single_family_dwelling&#39;</span><span class="p">,</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ResidentialBuilding&quot;</span><span class="p">,</span>
     <span class="n">year_of_construction</span><span class="o">=</span><span class="mi">1988</span><span class="p">,</span>
     <span class="n">number_of_floors</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
@@ -144,8 +140,8 @@ office and a laboratory (a.k.a. institute)) the function
 Project.add_residential() is used. The meaning of compulsory parameters
 does not differ from the residential archetype building.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prj</span><span class="o">.</span><span class="n">add_non_residential</span><span class="p">(</span>
-    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bmvbs&#39;</span><span class="p">,</span>
-    <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;office&#39;</span><span class="p">,</span>
+    <span class="n">construction_data</span><span class="o">=</span><span class="s1">&#39;iwu_heavy&#39;</span><span class="p">,</span>
+    <span class="n">geometry_data</span><span class="o">=</span><span class="s1">&#39;bmvbs_office&#39;</span><span class="p">,</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;OfficeBuilding&quot;</span><span class="p">,</span>
     <span class="n">year_of_construction</span><span class="o">=</span><span class="mi">1988</span><span class="p">,</span>
     <span class="n">number_of_floors</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
@@ -153,8 +149,8 @@ does not differ from the residential archetype building.</p>
     <span class="n">net_leased_area</span><span class="o">=</span><span class="mf">4500.0</span><span class="p">)</span>
 
 <span class="n">prj</span><span class="o">.</span><span class="n">add_non_residential</span><span class="p">(</span>
-    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bmvbs&#39;</span><span class="p">,</span>
-    <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;institute&#39;</span><span class="p">,</span>
+    <span class="n">construction_data</span><span class="o">=</span><span class="s1">&#39;iwu_heavy&#39;</span><span class="p">,</span>
+    <span class="n">geometry_data</span><span class="o">=</span><span class="s1">&#39;bmvbs_institute&#39;</span><span class="p">,</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;InstituteBuilding&quot;</span><span class="p">,</span>
     <span class="n">year_of_construction</span><span class="o">=</span><span class="mi">1952</span><span class="p">,</span>
     <span class="n">number_of_floors</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
@@ -162,8 +158,8 @@ does not differ from the residential archetype building.</p>
     <span class="n">net_leased_area</span><span class="o">=</span><span class="mf">3400.0</span><span class="p">)</span>
 
 <span class="n">prj</span><span class="o">.</span><span class="n">add_non_residential</span><span class="p">(</span>
-    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bmvbs&#39;</span><span class="p">,</span>
-    <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;institute&#39;</span><span class="p">,</span>
+    <span class="n">construction_data</span><span class="o">=</span><span class="s1">&#39;iwu_heavy&#39;</span><span class="p">,</span>
+    <span class="n">geometry_data</span><span class="o">=</span><span class="s1">&#39;bmvbs_institute&#39;</span><span class="p">,</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;InstituteBuildingMoisture&quot;</span><span class="p">,</span>
     <span class="n">year_of_construction</span><span class="o">=</span><span class="mi">1980</span><span class="p">,</span>
     <span class="n">number_of_floors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
@@ -175,11 +171,11 @@ does not differ from the residential archetype building.</p>
 <p>Besides <code class="docutils literal notranslate"><span class="pre">iwu</span></code> and <code class="docutils literal notranslate"><span class="pre">bmvbs</span></code> there is a third option for archetype
 generation. We integrated the typology of TABULA Germany
 (<a class="reference external" href="http://webtool.building-typology.eu/#bm">http://webtool.building-typology.eu/#bm</a>) and other countries are about to
-follow. To use TABULA archetype simple choose <code class="docutils literal notranslate"><span class="pre">tabula_de</span></code> as the method
-and <code class="docutils literal notranslate"><span class="pre">single_family_house</span></code>, <code class="docutils literal notranslate"><span class="pre">multi_family_house</span></code>, <code class="docutils literal notranslate"><span class="pre">terraced_house</span></code> or
-<code class="docutils literal notranslate"><span class="pre">apartment_block</span></code> as the usage. In addition you can specify the
-construction type of TABULA, chose between <code class="docutils literal notranslate"><span class="pre">tabula_standard</span></code> (default),
-<code class="docutils literal notranslate"><span class="pre">tabula_retrofit</span></code> or <code class="docutils literal notranslate"><span class="pre">tabula_adv_retrofit</span></code>. In this case we generate one
+follow. To use TABULA archetype simple choose the default <code class="docutils literal notranslate"><span class="pre">tabula_de_standard</span></code> as the construction_data
+and <code class="docutils literal notranslate"><span class="pre">tabula_de_single_family_house</span></code>, <code class="docutils literal notranslate"><span class="pre">tabula_de_multi_family_house</span></code>, <code class="docutils literal notranslate"><span class="pre">tabula_de_terraced_house</span></code> or
+<code class="docutils literal notranslate"><span class="pre">tabula_de_apartment_block</span></code> as the geometry_data. In addition you can specify the
+construction type of TABULA, chose between <code class="docutils literal notranslate"><span class="pre">tabula_de_standard</span></code> (default),
+<code class="docutils literal notranslate"><span class="pre">tabula_de_retrofit</span></code> or <code class="docutils literal notranslate"><span class="pre">tabula_de_adv_retrofit</span></code>. In this case we generate one
 single and one multi family house with TABULA typology.</p>
 <p>Please not: as we need to load the construction information which are
 rather big for TABULA, switching from one typology to another in the same
@@ -187,24 +183,22 @@ Project takes some seconds. If you know from beginning you will only use
 TABULA typology you should instantiate you Project class without loading
 data. Project(load_data=False).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prj</span><span class="o">.</span><span class="n">add_residential</span><span class="p">(</span>
-    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;tabula_de&#39;</span><span class="p">,</span>
-    <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;single_family_house&#39;</span><span class="p">,</span>
+    <span class="n">construction_data</span><span class="o">=</span><span class="s1">&#39;tabula_de_standard&#39;</span><span class="p">,</span>
+    <span class="n">geometry_data</span><span class="o">=</span><span class="s1">&#39;tabula_de_single_family_house&#39;</span><span class="p">,</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ResidentialBuildingTabula&quot;</span><span class="p">,</span>
     <span class="n">year_of_construction</span><span class="o">=</span><span class="mi">1988</span><span class="p">,</span>
     <span class="n">number_of_floors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
     <span class="n">height_of_floors</span><span class="o">=</span><span class="mf">3.2</span><span class="p">,</span>
-    <span class="n">net_leased_area</span><span class="o">=</span><span class="mf">280.0</span><span class="p">,</span>
-    <span class="n">construction_type</span><span class="o">=</span><span class="s1">&#39;tabula_standard&#39;</span><span class="p">)</span>
+    <span class="n">net_leased_area</span><span class="o">=</span><span class="mf">280.0</span><span class="p">)</span>
 
 <span class="n">prj</span><span class="o">.</span><span class="n">add_residential</span><span class="p">(</span>
-    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;tabula_de&#39;</span><span class="p">,</span>
-    <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;multi_family_house&#39;</span><span class="p">,</span>
+    <span class="n">construction_data</span><span class="o">=</span><span class="s1">&#39;tabula_de_retrofit&#39;</span><span class="p">,</span>
+    <span class="n">geometry_data</span><span class="o">=</span><span class="s1">&#39;tabula_de_multi_family_house&#39;</span><span class="p">,</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ResidentialBuildingTabulaMulti&quot;</span><span class="p">,</span>
     <span class="n">year_of_construction</span><span class="o">=</span><span class="mi">1960</span><span class="p">,</span>
     <span class="n">number_of_floors</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
     <span class="n">height_of_floors</span><span class="o">=</span><span class="mf">3.2</span><span class="p">,</span>
-    <span class="n">net_leased_area</span><span class="o">=</span><span class="mf">600.0</span><span class="p">,</span>
-    <span class="n">construction_type</span><span class="o">=</span><span class="s1">&#39;tabula_retrofit&#39;</span><span class="p">)</span>
+    <span class="n">net_leased_area</span><span class="o">=</span><span class="mf">600.0</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>

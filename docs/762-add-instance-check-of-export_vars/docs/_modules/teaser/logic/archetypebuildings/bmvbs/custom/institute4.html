@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.logic.archetypebuildings.bmvbs.custom.institute4 &mdash; TEASER 0.7.7 documentation</title>
+  <title>teaser.logic.archetypebuildings.bmvbs.custom.institute4 &mdash; TEASER 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../../../_static/autodoc_pydantic.css" />
@@ -15,7 +15,7 @@
   
         <script src="../../../../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../../../_static/documentation_options.js?v=35f4697d"></script>
+        <script src="../../../../../../_static/documentation_options.js?v=8d563738"></script>
         <script src="../../../../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../../../_static/js/theme.js"></script>
@@ -35,7 +35,7 @@
             TEASER
           </a>
               <div class="version">
-                0.7
+                1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
@@ -169,7 +169,7 @@
 <span class="sd">        2. banner facade (continuous windows)</span>
 <span class="sd">        3. full glazing</span>
 
-<span class="sd">    construction_type : str</span>
+<span class="sd">    construction_data : str</span>
 <span class="sd">        Construction type of used wall constructions default is &quot;heavy&quot;)</span>
 
 <span class="sd">        - heavy: heavy construction</span>
@@ -236,7 +236,7 @@
                  <span class="n">internal_gains_mode</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                  <span class="n">office_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">window_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">construction_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                 <span class="n">construction_data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor of Institute4</span>
 
 <span class="sd">        adds an additional zone &quot;Laboratory&quot;</span>
@@ -253,7 +253,7 @@
                                          <span class="n">internal_gains_mode</span><span class="p">,</span>
                                          <span class="n">office_layout</span><span class="p">,</span>
                                          <span class="n">window_layout</span><span class="p">,</span>
-                                         <span class="n">construction_type</span><span class="p">)</span>
+                                         <span class="n">construction_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">zone_area_factors</span><span class="p">[</span><span class="s2">&quot;Office&quot;</span><span class="p">]</span> <span class="o">=</span> \
             <span class="p">[</span><span class="mf">0.22</span><span class="p">,</span> <span class="s2">&quot;Group Office (between 2 and 6 employees)&quot;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">zone_area_factors</span><span class="p">[</span><span class="s2">&quot;Floor&quot;</span><span class="p">]</span> <span class="o">=</span> \

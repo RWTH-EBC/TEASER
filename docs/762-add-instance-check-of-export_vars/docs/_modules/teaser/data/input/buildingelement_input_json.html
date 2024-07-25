@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.data.input.buildingelement_input_json &mdash; TEASER 0.7.7 documentation</title>
+  <title>teaser.data.input.buildingelement_input_json &mdash; TEASER 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
@@ -15,7 +15,7 @@
   
         <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../_static/documentation_options.js?v=35f4697d"></script>
+        <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
         <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
@@ -35,7 +35,7 @@
             TEASER
           </a>
               <div class="version">
-                0.7
+                1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -86,7 +86,7 @@
 <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.layer</span> <span class="kn">import</span> <span class="n">Layer</span>
 <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.material</span> <span class="kn">import</span> <span class="n">Material</span>
 <span class="kn">import</span> <span class="nn">teaser.data.input.material_input_json</span> <span class="k">as</span> <span class="nn">mat_input</span>
-
+<span class="kn">import</span> <span class="nn">logging</span>
 
 <div class="viewcode-block" id="load_type_element">
 <a class="viewcode-back" href="../../../../code/teaser.data.input.html#teaser.data.input.buildingelement_input_json.load_type_element">[docs]</a>
@@ -100,6 +100,10 @@
 <span class="sd">    :cite:`KurzverfahrenIWU`, which is combined with normative material data</span>
 <span class="sd">    from :cite:`VereinDeutscherIngenieure.2012b`.</span>
 
+<span class="sd">    Most of the elements for the KfW Efficiency House standards (TypeElements_KFW.json) were derived from the respective</span>
+<span class="sd">    required U-value and the component catalog of the U-value online calculator https://www.ubakus.de/bauteilkatalog/.</span>
+<span class="sd">    For the respective source of each element, the comment in the json file can be observed.</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    element : BuildingElement()</span>
@@ -109,7 +113,7 @@
 <span class="sd">        Year of construction</span>
 
 <span class="sd">    construction : str</span>
-<span class="sd">        Construction type, code list (&#39;heavy&#39;, &#39;light&#39;, tabula, ...)</span>
+<span class="sd">        Construction type, code list (&#39;iwu_heavy&#39;, &#39;iwu_light&#39;, &#39;tabula_de_standard&#39;, &#39;kfw_40&#39;, ...)</span>
 
 <span class="sd">    data_class : DataClass()</span>
 <span class="sd">        DataClass containing the bindings for TypeBuildingElement and</span>
@@ -120,23 +124,25 @@
     <span class="n">element_binding</span> <span class="o">=</span> <span class="n">data_class</span><span class="o">.</span><span class="n">element_bind</span>
 
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">element_in</span> <span class="ow">in</span> <span class="n">element_binding</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">key</span> <span class="o">!=</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="p">(</span>
-                <span class="n">element_in</span><span class="p">[</span><span class="s2">&quot;building_age_group&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-                <span class="o">&lt;=</span> <span class="n">year</span>
-                <span class="o">&lt;=</span> <span class="n">element_in</span><span class="p">[</span><span class="s2">&quot;building_age_group&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-                <span class="ow">and</span> <span class="n">element_in</span><span class="p">[</span><span class="s2">&quot;construction_type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">construction</span>
-                <span class="ow">and</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
-            <span class="p">):</span>
-                <span class="n">_set_basic_data</span><span class="p">(</span><span class="n">element</span><span class="o">=</span><span class="n">element</span><span class="p">,</span> <span class="n">element_in</span><span class="o">=</span><span class="n">element_in</span><span class="p">)</span>
-                <span class="k">for</span> <span class="nb">id</span><span class="p">,</span> <span class="n">layer_in</span> <span class="ow">in</span> <span class="n">element_in</span><span class="p">[</span><span class="s2">&quot;layer&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                    <span class="n">layer</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
-                    <span class="n">layer</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
-                    <span class="n">layer</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="n">layer_in</span><span class="p">[</span><span class="s2">&quot;thickness&quot;</span><span class="p">]</span>
-                    <span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
-                    <span class="n">mat_input</span><span class="o">.</span><span class="n">load_material_id</span><span class="p">(</span>
-                        <span class="n">material</span><span class="p">,</span> <span class="n">layer_in</span><span class="p">[</span><span class="s2">&quot;material&quot;</span><span class="p">][</span><span class="s2">&quot;material_id&quot;</span><span class="p">],</span> <span class="n">data_class</span>
-                    <span class="p">)</span></div>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">element_in</span><span class="p">[</span><span class="s2">&quot;building_age_group&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="o">&lt;=</span> <span class="n">year</span>
+            <span class="o">&lt;=</span> <span class="n">element_in</span><span class="p">[</span><span class="s2">&quot;building_age_group&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="ow">and</span> <span class="n">element_in</span><span class="p">[</span><span class="s2">&quot;construction_data&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">construction</span>
+            <span class="ow">and</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="n">_set_basic_data</span><span class="p">(</span><span class="n">element</span><span class="o">=</span><span class="n">element</span><span class="p">,</span> <span class="n">element_in</span><span class="o">=</span><span class="n">element_in</span><span class="p">)</span>
+            <span class="k">for</span> <span class="nb">id</span><span class="p">,</span> <span class="n">layer_in</span> <span class="ow">in</span> <span class="n">element_in</span><span class="p">[</span><span class="s2">&quot;layer&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">layer</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+                <span class="n">layer</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+                <span class="n">layer</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="n">layer_in</span><span class="p">[</span><span class="s2">&quot;thickness&quot;</span><span class="p">]</span>
+                <span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+                <span class="n">mat_input</span><span class="o">.</span><span class="n">load_material_id</span><span class="p">(</span>
+                    <span class="n">material</span><span class="p">,</span> <span class="n">layer_in</span><span class="p">[</span><span class="s2">&quot;material&quot;</span><span class="p">][</span><span class="s2">&quot;material_id&quot;</span><span class="p">],</span> <span class="n">data_class</span>
+                <span class="p">)</span>
+            <span class="k">return</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No database entry found for construction=</span><span class="si">{</span><span class="n">construction</span><span class="si">}</span><span class="s2">, &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;year</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">, element=</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
 
@@ -154,7 +160,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">element</span><span class="o">.</span><span class="n">building_age_group</span> <span class="o">=</span> <span class="n">element_in</span><span class="p">[</span><span class="s2">&quot;building_age_group&quot;</span><span class="p">]</span>
-    <span class="n">element</span><span class="o">.</span><span class="n">construction_type</span> <span class="o">=</span> <span class="n">element_in</span><span class="p">[</span><span class="s2">&quot;construction_type&quot;</span><span class="p">]</span>
+    <span class="n">element</span><span class="o">.</span><span class="n">construction_data</span> <span class="o">=</span> <span class="n">element_in</span><span class="p">[</span><span class="s2">&quot;construction_data&quot;</span><span class="p">]</span>
     <span class="n">element</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="n">element_in</span><span class="p">[</span><span class="s2">&quot;inner_radiation&quot;</span><span class="p">]</span>
     <span class="n">element</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="n">element_in</span><span class="p">[</span><span class="s2">&quot;inner_convection&quot;</span><span class="p">]</span>
 

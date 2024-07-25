@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.logic.archetypebuildings.tabula.de.apartmentblock &mdash; TEASER 0.7.7 documentation</title>
+  <title>teaser.logic.archetypebuildings.tabula.de.apartmentblock &mdash; TEASER 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../../../_static/autodoc_pydantic.css" />
@@ -15,7 +15,7 @@
   
         <script src="../../../../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../../../_static/documentation_options.js?v=35f4697d"></script>
+        <script src="../../../../../../_static/documentation_options.js?v=8d563738"></script>
         <script src="../../../../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../../../_static/js/theme.js"></script>
@@ -35,7 +35,7 @@
             TEASER
           </a>
               <div class="version">
-                0.7
+                1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
@@ -145,7 +145,7 @@
 <span class="sd">           based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on</span>
 <span class="sd">           Engineering ToolBox (2004) and regards only persons.</span>
 
-<span class="sd">    construction_type : str</span>
+<span class="sd">    construction_data : str</span>
 <span class="sd">        Construction type of used wall constructions default is &quot;existing state&quot;</span>
 
 <span class="sd">        * existing state:</span>
@@ -169,7 +169,7 @@
             <span class="n">net_leased_area</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">with_ahu</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
             <span class="n">internal_gains_mode</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">construction_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+            <span class="n">construction_data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="nb">super</span><span class="p">(</span><span class="n">ApartmentBlock</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="n">parent</span><span class="p">,</span>
@@ -180,14 +180,14 @@
             <span class="n">net_leased_area</span><span class="p">,</span>
             <span class="n">with_ahu</span><span class="p">,</span>
             <span class="n">internal_gains_mode</span><span class="p">,</span>
-            <span class="n">construction_type</span><span class="p">)</span>
+            <span class="n">construction_data</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">construction_type</span> <span class="o">=</span> <span class="n">construction_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">construction_data</span> <span class="o">=</span> <span class="n">construction_data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">number_of_floors</span> <span class="o">=</span> <span class="n">number_of_floors</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">height_of_floors</span> <span class="o">=</span> <span class="n">height_of_floors</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_construction_type_1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">construction_type</span> <span class="o">+</span> <span class="s1">&#39;_1_AB&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_construction_type_2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">construction_type</span> <span class="o">+</span> <span class="s1">&#39;_2_AB&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_construction_data_1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">construction_data</span><span class="o">.</span><span class="n">value</span> <span class="o">+</span> <span class="s1">&#39;_1_AB&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_construction_data_2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">construction_data</span><span class="o">.</span><span class="n">value</span> <span class="o">+</span> <span class="s1">&#39;_2_AB&#39;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">zone_area_factors</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;SingleDwelling&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Living&quot;</span><span class="p">]}</span>
 

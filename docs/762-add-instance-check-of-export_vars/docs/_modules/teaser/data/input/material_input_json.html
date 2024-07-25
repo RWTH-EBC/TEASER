@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.data.input.material_input_json &mdash; TEASER 0.7.7 documentation</title>
+  <title>teaser.data.input.material_input_json &mdash; TEASER 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
@@ -15,7 +15,7 @@
   
         <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../_static/documentation_options.js?v=35f4697d"></script>
+        <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
         <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
@@ -35,7 +35,7 @@
             TEASER
           </a>
               <div class="version">
-                0.7
+                1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -111,17 +111,16 @@
     <span class="n">binding</span> <span class="o">=</span> <span class="n">data_class</span><span class="o">.</span><span class="n">material_bind</span>
 
     <span class="k">for</span> <span class="nb">id</span><span class="p">,</span> <span class="n">mat</span> <span class="ow">in</span> <span class="n">binding</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="k">if</span> <span class="nb">id</span> <span class="o">!=</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">mat_name</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">mat_name</span><span class="p">:</span>
 
-                <span class="n">material</span><span class="o">.</span><span class="n">material_id</span> <span class="o">=</span> <span class="nb">id</span>
-                <span class="n">material</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
-                <span class="n">material</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;density&quot;</span><span class="p">]</span>
-                <span class="n">material</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;thermal_conduc&quot;</span><span class="p">]</span>
-                <span class="n">material</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;heat_capac&quot;</span><span class="p">]</span>
-                <span class="n">material</span><span class="o">.</span><span class="n">solar_absorp</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;solar_absorp&quot;</span><span class="p">]</span>
-                <span class="n">material</span><span class="o">.</span><span class="n">thickness_default</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;thickness_default&quot;</span><span class="p">]</span>
-                <span class="n">material</span><span class="o">.</span><span class="n">thickness_list</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;thickness_list&quot;</span><span class="p">]</span></div>
+            <span class="n">material</span><span class="o">.</span><span class="n">material_id</span> <span class="o">=</span> <span class="nb">id</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;density&quot;</span><span class="p">]</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;thermal_conduc&quot;</span><span class="p">]</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;heat_capac&quot;</span><span class="p">]</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">solar_absorp</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;solar_absorp&quot;</span><span class="p">]</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">thickness_default</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;thickness_default&quot;</span><span class="p">]</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">thickness_list</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;thickness_list&quot;</span><span class="p">]</span></div>
 
 
 
@@ -149,17 +148,16 @@
     <span class="n">binding</span> <span class="o">=</span> <span class="n">data_class</span><span class="o">.</span><span class="n">material_bind</span>
 
     <span class="k">for</span> <span class="nb">id</span><span class="p">,</span> <span class="n">mat</span> <span class="ow">in</span> <span class="n">binding</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="k">if</span> <span class="nb">id</span> <span class="o">!=</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">id</span> <span class="o">==</span> <span class="n">mat_id</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">id</span> <span class="o">==</span> <span class="n">mat_id</span><span class="p">:</span>
 
-                <span class="n">material</span><span class="o">.</span><span class="n">material_id</span> <span class="o">=</span> <span class="nb">id</span>
-                <span class="n">material</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
-                <span class="n">material</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;density&quot;</span><span class="p">]</span>
-                <span class="n">material</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;thermal_conduc&quot;</span><span class="p">]</span>
-                <span class="n">material</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;heat_capac&quot;</span><span class="p">]</span>
-                <span class="n">material</span><span class="o">.</span><span class="n">solar_absorp</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;solar_absorp&quot;</span><span class="p">]</span>
-                <span class="n">material</span><span class="o">.</span><span class="n">thickness_default</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;thickness_default&quot;</span><span class="p">]</span>
-                <span class="n">material</span><span class="o">.</span><span class="n">thickness_list</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;thickness_list&quot;</span><span class="p">]</span></div>
+            <span class="n">material</span><span class="o">.</span><span class="n">material_id</span> <span class="o">=</span> <span class="nb">id</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;density&quot;</span><span class="p">]</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;thermal_conduc&quot;</span><span class="p">]</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;heat_capac&quot;</span><span class="p">]</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">solar_absorp</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;solar_absorp&quot;</span><span class="p">]</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">thickness_default</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;thickness_default&quot;</span><span class="p">]</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">thickness_list</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="s2">&quot;thickness_list&quot;</span><span class="p">]</span></div>
 
 </pre></div>
 

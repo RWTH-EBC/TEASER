@@ -65,7 +65,7 @@
             <a id="nextFileLink" class="nav" href="d_843f0df9445a6348_multifamilyhouse_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.4.4">coverage.py v7.4.4</a>,
-            created at 2024-07-16 14:51 +0000
+            created at 2024-07-25 10:56 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"/>
@@ -142,7 +142,7 @@
     <p class="pln"><span class="n"><a id="t60" href="#t60">60</a></span><span class="t"><span class="str">           based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t61" href="#t61">61</a></span><span class="t"><span class="str">           Engineering ToolBox (2004) and regards only persons.</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t62" href="#t62">62</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t63" href="#t63">63</a></span><span class="t"><span class="str">    construction_type : str</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t63" href="#t63">63</a></span><span class="t"><span class="str">    construction_data : str</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t64" href="#t64">64</a></span><span class="t"><span class="str">        Construction type of used wall constructions default is "existing state"</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t65" href="#t65">65</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t66" href="#t66">66</a></span><span class="t"><span class="str">        * existing state:</span>&nbsp;</span><span class="r"></span></p>
@@ -166,7 +166,7 @@
     <p class="pln"><span class="n"><a id="t84" href="#t84">84</a></span><span class="t">            <span class="nam">net_leased_area</span><span class="op">=</span><span class="key">None</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t85" href="#t85">85</a></span><span class="t">            <span class="nam">with_ahu</span><span class="op">=</span><span class="key">False</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t86" href="#t86">86</a></span><span class="t">            <span class="nam">internal_gains_mode</span><span class="op">=</span><span class="num">1</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t87" href="#t87">87</a></span><span class="t">            <span class="nam">construction_type</span><span class="op">=</span><span class="key">None</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t87" href="#t87">87</a></span><span class="t">            <span class="nam">construction_data</span><span class="op">=</span><span class="key">None</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t88" href="#t88">88</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t89" href="#t89">89</a></span><span class="t">        <span class="nam">super</span><span class="op">(</span><span class="nam">ApartmentBlock</span><span class="op">,</span> <span class="nam">self</span><span class="op">)</span><span class="op">.</span><span class="nam">__init__</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t90" href="#t90">90</a></span><span class="t">            <span class="nam">parent</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
@@ -177,14 +177,14 @@
     <p class="pln"><span class="n"><a id="t95" href="#t95">95</a></span><span class="t">            <span class="nam">net_leased_area</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t96" href="#t96">96</a></span><span class="t">            <span class="nam">with_ahu</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t97" href="#t97">97</a></span><span class="t">            <span class="nam">internal_gains_mode</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t98" href="#t98">98</a></span><span class="t">            <span class="nam">construction_type</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t98" href="#t98">98</a></span><span class="t">            <span class="nam">construction_data</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t99" href="#t99">99</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t100" href="#t100">100</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">construction_type</span> <span class="op">=</span> <span class="nam">construction_type</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t100" href="#t100">100</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">construction_data</span> <span class="op">=</span> <span class="nam">construction_data</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t101" href="#t101">101</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">number_of_floors</span> <span class="op">=</span> <span class="nam">number_of_floors</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t102" href="#t102">102</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">height_of_floors</span> <span class="op">=</span> <span class="nam">height_of_floors</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t103" href="#t103">103</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t104" href="#t104">104</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">_construction_type_1</span> <span class="op">=</span> <span class="nam">self</span><span class="op">.</span><span class="nam">construction_type</span> <span class="op">+</span> <span class="str">'_1_AB'</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t105" href="#t105">105</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">_construction_type_2</span> <span class="op">=</span> <span class="nam">self</span><span class="op">.</span><span class="nam">construction_type</span> <span class="op">+</span> <span class="str">'_2_AB'</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t104" href="#t104">104</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">_construction_data_1</span> <span class="op">=</span> <span class="nam">self</span><span class="op">.</span><span class="nam">construction_data</span><span class="op">.</span><span class="nam">value</span> <span class="op">+</span> <span class="str">'_1_AB'</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t105" href="#t105">105</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">_construction_data_2</span> <span class="op">=</span> <span class="nam">self</span><span class="op">.</span><span class="nam">construction_data</span><span class="op">.</span><span class="nam">value</span> <span class="op">+</span> <span class="str">'_2_AB'</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t106" href="#t106">106</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t107" href="#t107">107</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">zone_area_factors</span> <span class="op">=</span> <span class="op">{</span><span class="str">"SingleDwelling"</span><span class="op">:</span> <span class="op">[</span><span class="num">1</span><span class="op">,</span> <span class="str">"Living"</span><span class="op">]</span><span class="op">}</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t108" href="#t108">108</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -306,7 +306,7 @@
             <a id="nextFileLink" class="nav" href="d_843f0df9445a6348_multifamilyhouse_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.4.4">coverage.py v7.4.4</a>,
-            created at 2024-07-16 14:51 +0000
+            created at 2024-07-25 10:56 +0000
         </p>
     </div>
 </footer>
