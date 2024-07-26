@@ -185,7 +185,10 @@ class OuterWall(Wall):
 
             self.__parent = None
 
-    def retrofit_wall(self, year_of_retrofit, material=None):
+    def retrofit_wall(self,
+                      year_of_retrofit,
+                      material=None,
+                      add_at_position=None):
         """Retrofits wall to German refurbishment standards.
 
         This function adds an additional layer of insulation and sets the
@@ -204,10 +207,14 @@ class OuterWall(Wall):
             Type of material, that is used for insulation
         year_of_retrofit : int
             Year of the retrofit of the wall/building
+        add_at_position : int
+            position at which to insert the insulation layer.
+            0 inside, None (default) or -1 outside/other side
 
         """
-        material, year_of_retrofit = self.initialize_retrofit(
-            material, year_of_retrofit)
+        material, year_of_retrofit, ins_layer = self.initialize_retrofit(
+            material, year_of_retrofit, add_at_position
+        )
 
         calc_u = None
 
@@ -224,4 +231,5 @@ class OuterWall(Wall):
         elif year_of_retrofit >= 2014:
             calc_u = 0.24
 
-        self.set_insulation(material, calc_u, year_of_retrofit)
+        self.set_insulation(material, calc_u, year_of_retrofit,
+                            ins_layer_index=ins_layer)

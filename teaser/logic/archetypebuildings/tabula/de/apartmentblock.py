@@ -71,17 +71,6 @@ class ApartmentBlock(SingleFamilyHouse):
               proportional to the square root of the area
             b) rooftops, windows and ground floors (= walls with border to
                 soil) may have a vertical share
-    construction_type : str
-        Construction type of used wall constructions default is "existing
-        state"
-            existing state:
-                construction of walls according to existing state in TABULA
-            usual refurbishment:
-                construction of walls according to usual refurbishment in
-                TABULA
-            advanced refurbishment:
-                construction of walls according to advanced refurbishment in
-                TABULA
 
     construction_data : str
         Construction type of used wall constructions default is "existing state"

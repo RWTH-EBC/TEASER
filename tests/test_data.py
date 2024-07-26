@@ -811,7 +811,7 @@ class Test_teaser(object):
         prj.merge_windows_calc = False
         prj.used_library_calc = "AixLib"
         prj.calc_all_buildings(raise_errors=True)
-        prj.export_aixlib(path='C:\\Users\\gorz_pi\\Desktop\\TEASEROut_2nd')
+        prj.export_aixlib(path=utilities.get_default_path() + '_2')
 
     def test_instantiate_data_class(self):
         """test of instantiate_data_class"""
@@ -1335,7 +1335,7 @@ class Test_teaser(object):
             + therm_zone.rooftops
             + therm_zone.ground_floors
             + therm_zone.windows
-            + calc_attr.nzbs_for_ow
+            + therm_zone.find_izes_outer(add_reversed=True)
         )
 
         r1_ow, c1_ow = calc_attr._calc_parallel_connection(
@@ -1472,7 +1472,7 @@ class Test_teaser(object):
             + therm_zone.rooftops
             + therm_zone.ground_floors
             + therm_zone.windows
-            + calc_attr.nzbs_for_ow
+            + therm_zone.find_izes_outer(add_reversed=True)
         )
 
         r1_ow, c1_ow = calc_attr._calc_parallel_connection(
@@ -1624,7 +1624,7 @@ class Test_teaser(object):
 
         helplist_outer_walls_with_nzb = (
             therm_zone.outer_walls + therm_zone.rooftops + therm_zone.windows
-            + calc_attr.nzbs_for_ow
+            + therm_zone.find_izes_outer(add_reversed=True)
         )
 
         r1_ow, c1_ow = calc_attr._calc_parallel_connection(
@@ -1793,7 +1793,7 @@ class Test_teaser(object):
         helplist_outer_walls_with_nzb = (
                 therm_zone.outer_walls
                 + therm_zone.windows
-                + calc_attr.nzbs_for_ow
+                + therm_zone.find_izes_outer(add_reversed=True)
         )
 
         r1_ow, c1_ow = calc_attr._calc_parallel_connection(
@@ -2494,12 +2494,12 @@ class Test_teaser(object):
         for interzonal_element in therm_zone_unheated.interzonal_ceilings:
             interzonal_element.retrofit_wall(2015, "EPS_040_15")
             assert (round(interzonal_element.ua_value, 2)
-                    == 0.3 * interzonal_element.area)
+                    == 0.2 * interzonal_element.area)
             assert interzonal_element.layer[0].material.name == "EPS_040_15"
         for interzonal_element in therm_zone_unheated.interzonal_floors:
             interzonal_element.retrofit_wall(2015, "EPS_040_15")
             assert (round(interzonal_element.ua_value, 2)
-                    == 0.2 * interzonal_element.area)
+                    == 0.3 * interzonal_element.area)
             assert interzonal_element.layer[0].material.name == "EPS_040_15"
 
     def test_interzonal_type_element(self):
@@ -2613,32 +2613,32 @@ class Test_teaser(object):
         calc_attr._sum_interzonal_elements()
 
         # interzonal elements (lumping wall and floor)
-        assert len(calc_attr.nzbs_per_nz) == 2
+        assert len(calc_attr.nzbs_per_nz) == 1
         assert len(calc_attr.nzbs_per_nz[0]) == 2
         assert round(calc_attr.ua_value_nzb[0], 16) == 8.615411975711941
-        assert round(calc_attr.ua_value_nzb[1], 16) == 10.9827415998065
+        assert len(calc_attr.ua_value_nzb) == 1
         assert round(calc_attr.area_nzb[0], 1) == 20.0
-        assert round(calc_attr.area_nzb[1], 1) == 20.0
+        assert len(calc_attr.area_nzb) == 1
         assert round(calc_attr.r_conv_inner_nzb[0], 19) == 0.022727272727272728
+        assert len(calc_attr.r_conv_inner_nzb) == 1
         assert round(calc_attr.r_rad_inner_nzb[0], 4) == 0.01
-        assert round(calc_attr.r_conv_inner_nzb[1], 19) == 0.022727272727272728
-        assert round(calc_attr.r_rad_inner_nzb[1], 4) == 0.01
+        assert len(calc_attr.r_conv_inner_nzb) == 1
         assert round(calc_attr.r_comb_inner_nzb[0], 19) == 0.006944444444444444
+        assert len(calc_attr.r_comb_inner_nzb) == 1
         assert round(calc_attr.r_conv_outer_nzb[0], 5) == 0.02273
-        assert round(calc_attr.r_comb_inner_nzb[1], 19) == 0.006944444444444444
-        assert round(calc_attr.r_conv_outer_nzb[1], 5) == 0.02273
+        assert len(calc_attr.r_conv_outer_nzb) == 1
         assert round(calc_attr.r_rad_outer_nzb[0], 4) == 0.01
+        assert len(calc_attr.r_rad_outer_nzb) == 1
         assert round(calc_attr.r_comb_outer_nzb[0], 4) == 0.0069
-        assert round(calc_attr.r_rad_outer_nzb[1], 4) == 0.01
-        assert round(calc_attr.r_comb_outer_nzb[1], 4) == 0.0069
+        assert len(calc_attr.r_comb_outer_nzb) == 1
         assert round(calc_attr.alpha_conv_inner_nzb[0], 1) == 2.2
-        assert round(calc_attr.alpha_conv_inner_nzb[1], 1) == 2.2
+        assert len(calc_attr.alpha_conv_inner_nzb) == 1
         assert round(calc_attr.alpha_comb_outer_nzb[0], 1) == 7.2
-        assert round(calc_attr.alpha_comb_outer_nzb[1], 1) == 7.2
+        assert len(calc_attr.alpha_comb_outer_nzb) == 1
         assert round(calc_attr.alpha_conv_outer_nzb[0], 1) == 2.2
-        assert round(calc_attr.alpha_conv_outer_nzb[1], 1) == 2.2
+        assert len(calc_attr.alpha_conv_outer_nzb) == 1
         assert round(calc_attr.ir_emissivity_outer_nzb[0], 3) == 0.9
-        assert round(calc_attr.ir_emissivity_outer_nzb[1], 3) == 0.9
+        assert len(calc_attr.ir_emissivity_outer_nzb) == 1
 
         prj.number_of_elements_calc = 5
         prj.merge_windows_calc = False
@@ -2655,13 +2655,18 @@ class Test_teaser(object):
         # check that attributes of the elements match if they represent the
         # same physical element
         assert calc_attr.other_nz_indexes[0] == 1
-        assert calc_attr.other_nz_indexes[1] == 2
+        assert len(calc_attr.other_nz_indexes) == 1
+        assert calc_attr_1.other_nz_indexes[0] == 0
+        assert len(calc_attr_2.other_nz_indexes) == 0
         assert round(calc_attr.r_total_nzb[0], 5) == round(calc_attr_1.r_total_nzb[0], 5)
-        assert round(calc_attr.r_total_nzb[1], 5) == round(calc_attr_2.r_total_nzb[0], 5)
+        assert len(calc_attr.r_total_nzb) == 1
+        assert len(calc_attr_2.r_total_nzb) == 0
         assert round(calc_attr.r1_nzb[0], 5) == round(calc_attr_1.r_rest_nzb[0], 5)
-        assert round(calc_attr.r1_nzb[1], 5) == round(calc_attr_2.r_rest_nzb[0], 5)
+        assert len(calc_attr.r1_nzb) == 1
+        assert len(calc_attr_2.r1_nzb) == 0
         assert round(calc_attr.r_rest_nzb[0], 5) == round(calc_attr_1.r1_nzb[0], 5)
-        assert round(calc_attr.r_rest_nzb[1], 5) == round(calc_attr_2.r1_nzb[0], 5)
+        assert len(calc_attr.r_rest_nzb) == 1
+        assert len(calc_attr_2.r_rest_nzb) == 0
 
     def test_calc_chain_matrix_five(self):
         """test of calc_chain_matrix"""
@@ -2729,8 +2734,11 @@ class Test_teaser(object):
             element_list=therm_zone_2.interzonal_elements, omega=omega,
             mode='izw_backwards'
         )
-        assert round(r1_izw_2, 13) == 0.0056673521065
-        assert round(c1_izw_2, 6) == 1855776.602032
+        # CAUTION: these values need to be equal to the ones above
+        # when applied in practice, FiveElement._calc_interzonal_elements will
+        #  revertedly apply the values to the final model parameters
+        assert round(r1_izw_2, 13) == 0.0023421240754
+        assert round(c1_izw_2, 6) == 4782078.891281
 
     def test_calc_equivalent_res_win(self):
         """test of calc_equivalent_res, win"""

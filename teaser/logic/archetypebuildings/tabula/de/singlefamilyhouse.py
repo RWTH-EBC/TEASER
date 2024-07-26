@@ -99,7 +99,6 @@ class SingleFamilyHouse(Residential):
               proportional to the square root of the area
             b) rooftops, windows and ground floors (= walls with border to
                 soil) may have a vertical share
-    construction_type : str
 
     construction_data : str
         Construction type of used wall constructions default is "existing

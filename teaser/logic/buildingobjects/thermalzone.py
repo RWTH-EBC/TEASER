@@ -432,7 +432,7 @@ class ThermalZone(object):
             for pot_vert_be in self.rooftops + self.windows:
                 wall_area -= pot_vert_be.area \
                              * math.sin(pot_vert_be.tilt * math.pi / 180)
-            wall_area -= max(0.01, sum(gf.area for gf in self.ground_floors)
+            wall_area -= max(0.0, sum(gf.area for gf in self.ground_floors)
                              - self.area)
             wall_area = max(0.01, wall_area)
         else:

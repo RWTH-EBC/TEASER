@@ -169,14 +169,13 @@ class Wall(BuildingElement):
         nr_of_layer, density, thermal_conduc, heat_capac, thickness = \
             self.gather_element_properties()
 
-        if type(self).__name__.startswith("Interzonal") \
-                and self.other_side is not None:
-            if (not self.parent.use_conditions.with_heating and
-                    self.other_side.use_conditions.with_heating):
-                density = density[-1::-1]
-                thermal_conduc = thermal_conduc[-1::-1]
-                heat_capac = heat_capac[-1::-1]
-                thickness = thickness[-1::-1]
+        reverse_layers = self.interzonal_type_export == 'outer_reversed'
+
+        if reverse_layers:
+            density = density[-1::-1]
+            thermal_conduc = thermal_conduc[-1::-1]
+            heat_capac = heat_capac[-1::-1]
+            thickness = thickness[-1::-1]
 
         omega = 2 * np.pi / (86400 * t_bt)
 
@@ -260,23 +259,20 @@ class Wall(BuildingElement):
 
         r_wall = self.r1 + self.r2 + self.r3
 
-        # if type(self).__name__.startswith("Interzonal") \
-        #         and self.other_side is not None:
-        #     if (not self.parent.use_conditions.with_heating and
-        #             self.other_side.use_conditions.with_heating):
-        #         r_for_c1_korr = self.r2
-        #     else:
-        #         r_for_c1_korr = self.r1
-        # else:
-        #     r_for_c1_korr = self.r1
-        r_for_c1_korr = self.r1
-
-        self.c1_korr = (1 / (omega * r_for_c1_korr)) \
+        self.c1_korr = (1 / (omega * self.r1)) \
                        * ((r_wall * self.area
                            - new_mat[0][2] * new_mat[3][3]
                            - new_mat[0][3] * new_mat[2][3])
                           / (new_mat[3][3] * new_mat[0][3]
                              - new_mat[0][2] * new_mat[2][3]))
+
+        if reverse_layers:
+            former_r2 = self.r2
+            self.r2 = self.r1
+            self.r1 = former_r2
+            former_c2 = self.c2
+            self.c2 = self.c1
+            self.c1 = former_c2
 
         if type(self).__name__ == "OuterWall" \
                 or type(self).__name__ == "Rooftop" \
@@ -292,7 +288,7 @@ class Wall(BuildingElement):
             add_plaster_thickness=None):
         """Retrofit the walls with an additional insulation layer
 
-        Adds an additional layer on the wall, outer sight
+        Adds an additional layer on the wall
 
         Parameters
         ----------
@@ -358,7 +354,9 @@ class Wall(BuildingElement):
 
         return insulation_index
 
-    def retrofit_wall(self, year_of_retrofit, material=None,
+    def retrofit_wall(self,
+                      year_of_retrofit,
+                      material=None,
                       add_at_position=None):
         """Retrofits wall to German refurbishment standards.
 
@@ -387,10 +385,14 @@ class Wall(BuildingElement):
 
 
         """
-        raise NotImplementedError("Please call this method only against"
-                                  "Outerwalls, Rooftops and Groundfloors")
+        raise NotImplementedError("Please call this method only against "
+                                  "OuterWall, Rooftop, GroundFloor, and "
+                                  "interzonal elements")
 
-    def initialize_retrofit(self, material, year_of_retrofit):
+    def initialize_retrofit(self,
+                            material,
+                            year_of_retrofit,
+                            add_at_position=None):
         """Checks the retrofit inputs and sets material and year of retrofit
         if needed."""
         self.set_calc_default()
@@ -406,9 +408,19 @@ class Wall(BuildingElement):
             warnings.warn("You are using a year of retrofit not supported\
                     by teaser. We will change your year of retrofit to 1977\
                     for the calculation. Be careful!")
-        return material, year_of_retrofit
 
-    def set_insulation(self, material, calc_u, year_of_retrofit):
+        if add_at_position is None:
+            ins_layer_index = -1  # default: outside
+        else:
+            ins_layer_index = add_at_position
+
+        return material, year_of_retrofit, ins_layer_index
+
+    def set_insulation(self,
+                       material,
+                       calc_u,
+                       year_of_retrofit,
+                       ins_layer_index=-1):
         """Sets the correct insulation thickness based on the given u-value"""
         if calc_u:
             if self.u_value <= calc_u:
@@ -416,23 +428,33 @@ class Wall(BuildingElement):
                     f'No retrofit needed for {self.name} as u value '
                     f'is already lower than needed.')
             else:
-                self.insulate_wall(material)
-                d_ins = self.calc_ins_layer_thickness(calc_u)
-                self.layer[-1].thickness = d_ins
-                self.layer[-1].id = len(self.layer)
+                ins_layer_index = self.insulate_wall(
+                    material,
+                    add_at_position=ins_layer_index
+                )
+                d_ins = self.calc_ins_layer_thickness(
+                    calc_u,
+                    ins_layer_index
+                )
+                self.layer[ins_layer_index].thickness = d_ins
+                self.layer[ins_layer_index].id = len(self.layer)
         else:
             warnings.warn(
                 f'No fitting retrofit type found for {year_of_retrofit}')
 
-    def calc_ins_layer_thickness(self, calc_u):
+    def calc_ins_layer_thickness(self, calc_u, ins_layer_index):
         """Calculates the thickness of the fresh insulated layer from
         retrofit"""
         r_conduc_rem = 0
-        for count_layer in self.layer[:-1]:
-            r_conduc_rem += (count_layer.thickness /
-                             count_layer.material.thermal_conduc)
 
-        lambda_ins = self.layer[-1].material.thermal_conduc
+        for layer_index, count_layer in enumerate(self.layer):
+            if layer_index == ins_layer_index:
+                pass
+            else:
+                r_conduc_rem += (count_layer.thickness /
+                                 count_layer.material.thermal_conduc)
+
+        lambda_ins = self.layer[ins_layer_index].material.thermal_conduc
 
         d_ins = lambda_ins * (1 / calc_u - self.r_outer_comb * self.area -
                               self.r_inner_comb * self.area - r_conduc_rem)
@@ -457,8 +479,16 @@ class Wall(BuildingElement):
 
         """
         this_use = self.parent.use_conditions
-        other_use = self.other_side.use_conditions
-        if method == 'heating_difference':
+        try:
+            other_use = self.other_side.use_conditions
+        except AttributeError:
+            other_use = None
+        if other_use is None:
+            if not this_use.with_heating and not this_use.with_cooling:
+                value = 'inner'
+            else:
+                value = 'outer_ordered'
+        elif method == 'heating_difference':
             if ((other_use.with_heating and this_use.with_heating)
                     or (not other_use.with_heating
                         and not this_use.with_heating)):
@@ -467,7 +497,7 @@ class Wall(BuildingElement):
                 value = 'outer_ordered'
             else:  # this_use.with_heating is False:
                 value = 'outer_reversed'
-        if (method == 'heating_cooling_difference'
+        elif (method == 'heating_cooling_difference'
                 or method.startswith('setpoint_difference_')):
             # first decision: different heating conditions?
             if this_use.with_heating and not other_use.with_heating:

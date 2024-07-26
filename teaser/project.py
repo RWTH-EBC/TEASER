@@ -789,7 +789,6 @@ class Project(object):
             aixlib_output.export_multizone(
                 buildings=self.buildings, prj=self, path=path,
                 custom_multizone_template_path=custom_multizone_template_path,
-                buildings=self.buildings, prj=self, path=path,
                 use_postprocessing_calc=use_postprocessing_calc,
                 export_vars=export_vars
             )

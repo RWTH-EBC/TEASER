@@ -222,7 +222,7 @@
                             "wall_ID_29E5A1CEACFE4029A7E004BB1BCEDEDC_attic_90_333_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 7.595013187197167,
                                 "tilt": 90.0,
                                 "orientation": 333,
@@ -280,7 +280,7 @@
                             "wall_ID_92348F00CF394570AD9669B8AB944B84_attic_90_153_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 7.373346391213454,
                                 "tilt": 90.0,
                                 "orientation": 153,
@@ -338,7 +338,7 @@
                             "wall_ID_29E5A1CEACFE4029A7E004BB1BCEDEDC_attic_90_333_2": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 0.46858693185792283,
                                 "tilt": 90.0,
                                 "orientation": 333,
@@ -396,7 +396,7 @@
                             "wall_ID_92348F00CF394570AD9669B8AB944B84_attic_90_153_2": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 0.45491083133450616,
                                 "tilt": 90.0,
                                 "orientation": 153,
@@ -457,7 +457,7 @@
                             "roof_ID_99039A1669984020A103C0299EF81D2D_attic_48_251_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 38.01645838279441,
                                 "tilt": 48.0,
                                 "orientation": 251,
@@ -482,7 +482,7 @@
                             "roof_ID_8F350ED0BE2945ADAAE443B0DF1570ED_attic_49_71_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 37.70724932250004,
                                 "tilt": 49.0,
                                 "orientation": 71,
@@ -510,7 +510,7 @@
                             "window_F7A7FC1F7CEC42F9AB4A1D61AA5D71A6_90_333_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 0.0854780546614556,
                                 "tilt": 90.0,
                                 "orientation": 333,
@@ -539,7 +539,7 @@
                             "window_41DEDD6BE979436D89CA037B45775A76_90_153_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 0.14869610304800834,
                                 "tilt": 90.0,
                                 "orientation": 153,
@@ -576,7 +576,7 @@
                                 "other_side": "storey_1",
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 1.6167606471475964,
                                 "tilt": 0.0,
                                 "orientation": -2,
@@ -778,7 +778,7 @@
                             "wall_ID_3221F79B29564630A3ED200C07339FCA_basement_90_243_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 6.669670738082091,
                                 "tilt": 90.0,
                                 "orientation": 243,
@@ -803,7 +803,7 @@
                             "wall_ID_29E5A1CEACFE4029A7E004BB1BCEDEDC_basement_90_333_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 6.046013337403205,
                                 "tilt": 90.0,
                                 "orientation": 333,
@@ -828,7 +828,7 @@
                             "wall_ID_92348F00CF394570AD9669B8AB944B84_basement_90_153_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 6.045838317312415,
                                 "tilt": 90.0,
                                 "orientation": 153,
@@ -853,7 +853,7 @@
                             "wall_ID_F5586D9A9E5D410DAF42EB31C5BAD571_basement_90_63_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 6.750634865953637,
                                 "tilt": 90.0,
                                 "orientation": 63,
@@ -878,7 +878,7 @@
                             "wall_ID_3221F79B29564630A3ED200C07339FCA_basement_90_243_2": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_2_SFH",
+                                "construction_data": "tabula_de_standard_2_SFH",
                                 "area": 0.4114963951515943,
                                 "tilt": 90.0,
                                 "orientation": 243,
@@ -914,7 +914,7 @@
                             "wall_ID_29E5A1CEACFE4029A7E004BB1BCEDEDC_basement_90_333_2": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_2_SFH",
+                                "construction_data": "tabula_de_standard_2_SFH",
                                 "area": 0.3730188177318173,
                                 "tilt": 90.0,
                                 "orientation": 333,
@@ -950,7 +950,7 @@
                             "wall_ID_92348F00CF394570AD9669B8AB944B84_basement_90_153_2": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_2_SFH",
+                                "construction_data": "tabula_de_standard_2_SFH",
                                 "area": 0.3730080195771156,
                                 "tilt": 90.0,
                                 "orientation": 153,
@@ -986,7 +986,7 @@
                             "wall_ID_F5586D9A9E5D410DAF42EB31C5BAD571_basement_90_63_2": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_2_SFH",
+                                "construction_data": "tabula_de_standard_2_SFH",
                                 "area": 0.41649161126706236,
                                 "tilt": 90.0,
                                 "orientation": 63,
@@ -1026,7 +1026,7 @@
                             "wall_ID_3221F79B29564630A3ED200C07339FCA_basement_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 13.660011826418122,
                                 "tilt": 0.0,
                                 "orientation": -2,
@@ -1082,7 +1082,7 @@
                             "wall_ID_29E5A1CEACFE4029A7E004BB1BCEDEDC_basement_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 12.38271227094463,
                                 "tilt": 0.0,
                                 "orientation": -2,
@@ -1138,7 +1138,7 @@
                             "wall_ID_92348F00CF394570AD9669B8AB944B84_basement_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 12.382353815991763,
                                 "tilt": 0.0,
                                 "orientation": -2,
@@ -1194,7 +1194,7 @@
                             "wall_ID_F5586D9A9E5D410DAF42EB31C5BAD571_basement_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 13.825832747370944,
                                 "tilt": 0.0,
                                 "orientation": -2,
@@ -1250,7 +1250,7 @@
                             "floor_ID_4DD3EC4ABB44426EADEFA15A7828D25D_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 79.60430702671911,
                                 "tilt": 0.0,
                                 "orientation": -2,
@@ -1308,7 +1308,7 @@
                             "dummy": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 0.0001,
                                 "tilt": 90.0,
                                 "orientation": 243,
@@ -1339,7 +1339,7 @@
                             "InnerWall": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 81.6764,
                                 "tilt": 90.0,
                                 "orientation": 0.0,
@@ -1391,7 +1391,7 @@
                                 "other_side": "storey_1",
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 79.60430702671911,
                                 "tilt": 0.0,
                                 "orientation": -1,
@@ -1626,7 +1626,7 @@
                             "wall_ID_3221F79B29564630A3ED200C07339FCA_storey_1_90_243_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 1.3958777473647628,
                                 "tilt": 90.0,
                                 "orientation": 243,
@@ -1695,7 +1695,7 @@
                             "wall_ID_29E5A1CEACFE4029A7E004BB1BCEDEDC_storey_1_90_333_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 34.00445505151268,
                                 "tilt": 90.0,
                                 "orientation": 333,
@@ -1753,7 +1753,7 @@
                             "wall_ID_92348F00CF394570AD9669B8AB944B84_storey_1_90_153_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 32.294091062899135,
                                 "tilt": 90.0,
                                 "orientation": 153,
@@ -1822,7 +1822,7 @@
                             "wall_ID_F5586D9A9E5D410DAF42EB31C5BAD571_storey_1_90_63_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 30.404423156163865,
                                 "tilt": 90.0,
                                 "orientation": 63,
@@ -1891,7 +1891,7 @@
                             "wall_ID_3221F79B29564630A3ED200C07339FCA_storey_1_90_243_2": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 0.0861209921253324,
                                 "tilt": 90.0,
                                 "orientation": 243,
@@ -1960,7 +1960,7 @@
                             "wall_ID_29E5A1CEACFE4029A7E004BB1BCEDEDC_storey_1_90_333_2": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 2.097961237111322,
                                 "tilt": 90.0,
                                 "orientation": 333,
@@ -2018,7 +2018,7 @@
                             "wall_ID_92348F00CF394570AD9669B8AB944B84_storey_1_90_153_2": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 1.9924374948832366,
                                 "tilt": 90.0,
                                 "orientation": 153,
@@ -2087,7 +2087,7 @@
                             "wall_ID_F5586D9A9E5D410DAF42EB31C5BAD571_storey_1_90_63_2": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 1.8758513001232204,
                                 "tilt": 90.0,
                                 "orientation": 63,
@@ -2156,7 +2156,7 @@
                             "wall_ID_3221F79B29564630A3ED200C07339FCA_storey_1_90_243_3": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 32.1997006112,
                                 "tilt": 90.0,
                                 "orientation": 243,
@@ -2228,7 +2228,7 @@
                             "roof_ID_99039A1669984020A103C0299EF81D2D_storey_1_48_251_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 21.590845904644723,
                                 "tilt": 48.0,
                                 "orientation": 251,
@@ -2275,7 +2275,7 @@
                             "roof_ID_8F350ED0BE2945ADAAE443B0DF1570ED_storey_1_49_71_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 21.99865510533169,
                                 "tilt": 49.0,
                                 "orientation": 71,
@@ -2325,7 +2325,7 @@
                             "window_1338ED9098AD431D928DAB7D62328F18_90_333_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 2.1530912942190277,
                                 "tilt": 90.0,
                                 "orientation": 333,
@@ -2354,7 +2354,7 @@
                             "window_34F41DFF033549859C89E53690934653_90_333_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 1.1254264071526683,
                                 "tilt": 90.0,
                                 "orientation": 333,
@@ -2383,7 +2383,7 @@
                             "window_6C61038A30DF45FFB832D72EB6F3F603_90_333_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 1.0794756746292478,
                                 "tilt": 90.0,
                                 "orientation": 333,
@@ -2412,7 +2412,7 @@
                             "window_FF47A1B8799040E5B14078B5213E4267_90_333_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 1.0817952033780482,
                                 "tilt": 90.0,
                                 "orientation": 333,
@@ -2441,7 +2441,7 @@
                             "window_6A6AB28B07D8492B914AF196DD25231C_90_333_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 0.8416591693231069,
                                 "tilt": 90.0,
                                 "orientation": 333,
@@ -2470,7 +2470,7 @@
                             "window_D9BBD9F0A379406BA159503576072D5C_90_153_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 2.952355843263607,
                                 "tilt": 90.0,
                                 "orientation": 153,
@@ -2499,7 +2499,7 @@
                             "window_905E3C528338410DB7EC8D52F24CC86F_90_153_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 0.39957912185457434,
                                 "tilt": 90.0,
                                 "orientation": 153,
@@ -2528,7 +2528,7 @@
                             "window_2784A81D841E4261878CEB0C16BC5166_90_153_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 2.3551941637741622,
                                 "tilt": 90.0,
                                 "orientation": 153,
@@ -2557,7 +2557,7 @@
                             "window_04A1C9DE66584BF3B879D60CF13DF0DA_90_153_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 2.2875988300433447,
                                 "tilt": 90.0,
                                 "orientation": 153,
@@ -2586,7 +2586,7 @@
                             "window_9F9A1D3F037C4D7DBC685FD627F5D92B_90_63_1": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 1.469956978567883,
                                 "tilt": 90.0,
                                 "orientation": 63,
@@ -2617,7 +2617,7 @@
                             "InnerWall": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 132.74215581488374,
                                 "tilt": 90.0,
                                 "orientation": 0.0,
@@ -2664,7 +2664,7 @@
                             "Floor": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 66.15407513491138,
                                 "tilt": 0.0,
                                 "orientation": -2,
@@ -2711,7 +2711,7 @@
                             "Ceiling": {
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 66.15407513491138,
                                 "tilt": 0.0,
                                 "orientation": -1,
@@ -2760,7 +2760,7 @@
                                 "other_side": "basement",
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "tabula_standard_1_SFH",
+                                "construction_data": "tabula_de_standard_1_SFH",
                                 "area": 79.60430702671913,
                                 "tilt": 0.0,
                                 "orientation": -1,
@@ -2821,7 +2821,7 @@
                                 "other_side": "attic",
                                 "year_of_construction": 1965,
                                 "year_of_retrofit": null,
-                                "construction_type": "custom",
+                                "construction_data": "custom",
                                 "area": 1.6167606471475966,
                                 "tilt": 0.0,
                                 "orientation": -1,

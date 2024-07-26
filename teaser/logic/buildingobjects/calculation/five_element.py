@@ -1656,7 +1656,7 @@ class FiveElement(object):
                 self.shading_g_total.append(1.0)
                 self.window_areas.append(0.0)
                 self.transparent_areas.append(0.0)
-                self.shading_max_irr.append(0.0)
+                self.shading_max_irr.append(9999.9)
             else:
                 self.weightfactor_win.append(sum([win.wf_out for win in wins]))
 
@@ -1736,20 +1736,21 @@ class FiveElement(object):
                 ].use_conditions.with_heating:
                     ua_value_nzb_temp += ua_value_izw
 
-        self.heat_load = (
-            (
-                (ua_value_ow_temp + self.ua_value_win + ua_value_nzb_temp)
-                + self.thermal_zone.volume
-                * self.thermal_zone.use_conditions.infiltration_rate
-                * 1
-                / 3600
-                * self.thermal_zone.heat_capac_air
-                * self.thermal_zone.density_air
-            )
-            * (self.thermal_zone.t_inside - self.thermal_zone.t_outside)
-        ) + (
-            self.ua_value_gf * (self.thermal_zone.t_inside - t_ground)
+        self.heat_load_outside_factor = (
+            (ua_value_ow_temp + self.ua_value_win + ua_value_nzb_temp)
+            + self.thermal_zone.volume
+            * self.thermal_zone.use_conditions.infiltration_rate
+            * 1
+            / 3600
+            * self.thermal_zone.heat_capac_air
+            * self.thermal_zone.density_air
         )
+        self.heat_load_ground_factor = self.ua_value_gf
+        self.heat_load = \
+            self.heat_load_outside_factor \
+            * (self.thermal_zone.t_inside - self.thermal_zone.t_outside) \
+            + self.heat_load_ground_factor \
+            * (self.thermal_zone.t_inside - t_ground)
 
     def set_calc_default(self):
         """sets default calculation parameters

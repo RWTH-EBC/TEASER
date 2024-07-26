@@ -1496,7 +1496,7 @@ class FourElement(object):
                 self.shading_g_total.append(1.0)
                 self.window_areas.append(0.0)
                 self.transparent_areas.append(0.0)
-                self.shading_max_irr.append(0.0)
+                self.shading_max_irr.append(9999.9)
             else:
                 self.weightfactor_win.append(sum([win.wf_out for win in wins]))
 
@@ -1580,7 +1580,7 @@ class FourElement(object):
             self.heat_load_outside_factor \
             * (self.thermal_zone.t_inside - self.thermal_zone.t_outside) \
             + self.heat_load_ground_factor \
-            * (self.thermal_zone.t_inside - self.thermal_zone.t_ground)
+            * (self.thermal_zone.t_inside - t_ground)
 
     def set_calc_default(self):
         """sets default calculation parameters
