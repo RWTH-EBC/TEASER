@@ -20,7 +20,7 @@ from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
 from teaser.logic.buildingobjects.buildingsystems.pool import Pool
-
+import teaser.data.utilities as datahandling
 
 class SwimmingFacility(NonResidential):
     """Archetype swimming facility based on project
@@ -39,8 +39,9 @@ class SwimmingFacility(NonResidential):
     - Swimmer_pool
     - Nonswimmer_pool
 
-    Unlike the other building types, in case of the swimming facility the parameter 'net_lead_area' has no relevance.
-    Instead, the dimensions of the iswimming facility and its zones are defined according to the water area (water_area).
+    Unlike the other building types, in case of the swimming facility the parameter 'net_lead_area' corresponds to the
+    water area. All dimensions of the swimming facility and its zones are defined according to this input
+    value for the water area (net_lead_area).
 
     The basis for the building dimensions is mainly
         KOK-Richtlinien für den Bäderbau 2013 (KOK guidline for pool construction 2013).
@@ -65,8 +66,8 @@ class SwimmingFacility(NonResidential):
     number_of_floors : int
         Number of building's floors above ground
     net_leased_area : float [m2]
-        For the swimming pool, this parameter is not used
-        The parameter exists as it is required for non-residential buildings
+        For the swimming pool, this parameter corresponds to the total water area of the whole swimming facility and
+        is distrubuted to the pools according to normative standards
     with_ahu : Boolean
         If set to True, an empty instance of BuildingAHU is instantiated and
         assigned to attribute central_ahu. This instance holds information for
@@ -84,12 +85,7 @@ class SwimmingFacility(NonResidential):
         Construction type of used wall constructions default is "heavy")
             heavy: heavy construction
             light: light construction
-    water_area: float [m2]
-        Water area of the whole swimming facility
-        According to normative standards this is distributed to the pool
-    use_correction_factor: Boolean
-        If 'true' the building dimensions are calculated according to normative standards
-        Afterwards, they are scaled with a correction factor that was determined using real data.
+
 
         Note
     ----------
@@ -154,19 +150,20 @@ class SwimmingFacility(NonResidential):
     
         
     def __init__(
-        self,
-        parent,        
-        name=None,
-        year_of_construction=None,
-        number_of_floors=None,
-        height_of_floors=None,
-        net_leased_area=None,
-        with_ahu=False,
-        internal_gains_mode=1,
-        construction_type=None,
-        water_area=None,
-        use_correction_factor=False,
+            self,
+            parent,
+            name=None,
+            year_of_construction=None,
+            number_of_floors=None,
+            height_of_floors=None,
+            net_leased_area=None,
+            with_ahu=False,
+            internal_gains_mode=1,
+            office_layout=None,
+            window_layout=None,
+            construction_data=None,
     ):
+
         """Constructor of Swimming facility archetype
         """
         super(SwimmingFacility, self).__init__(
@@ -177,13 +174,17 @@ class SwimmingFacility(NonResidential):
             with_ahu,
             internal_gains_mode,
         )
-        self.construction_type = construction_type
+        self.construction_data = construction_data
         self.number_of_floors = number_of_floors
         self.height_of_floors = height_of_floors
         if self.year_of_construction > 2015:
             self.year_of_construction = 2015
-        self.water_area = water_area
-        self.use_correction_factor = use_correction_factor
+        self.water_area = net_leased_area
+        self.use_correction_factor = False
+        """ use_correction_factor: Boolean
+        If 'true' the building dimensions are calculated according to normative standards
+        Afterwards, they are scaled with a correction factor that was determined using real data."""
+
 
         """
         Creating basic swimming facility with one pool for beginners and 
@@ -199,7 +200,7 @@ class SwimmingFacility(NonResidential):
         print()
 
         # pool dict with "Swimmer_pool" and "Nonswimmer_pool" [type, area, length, width, perimeter]
-        self.basic_pools_dict = self.create_basic_pools(water_area)
+        self.basic_pools_dict = self.create_basic_pools(self.water_area)
 
         # zone dict with [zone_usage, zone_area, zone_volume, zone_length, zone_width, zone_temperature]
         self.zone_area_factors = collections.OrderedDict()
@@ -219,12 +220,12 @@ class SwimmingFacility(NonResidential):
 
         # Zone Changing_rooms
         # zone_area = changing_rooms + sanitary_objects + cleaning_room + corridors
-        changing_rooms = 3.675 + math.ceil(water_area ** 0.58 / (14 * 2)) * 21.7 + \
-                        math.ceil(water_area ** 0.58 / (7 * 2)) * 23.625
-        sanitary_objects = math.ceil(water_area * 0.02)
+        changing_rooms = 3.675 + math.ceil(self.water_area ** 0.58 / (14 * 2)) * 21.7 + \
+                        math.ceil(self.water_area ** 0.58 / (7 * 2)) * 23.625
+        sanitary_objects = math.ceil(self.water_area * 0.02)
         cleaning_room = 2
-        corridors = (math.ceil(water_area ** 0.58 / 14) * 3.1 + \
-                     math.ceil(water_area ** 0.58 / 7) * 3.375) * 1.5
+        corridors = (math.ceil(self.water_area ** 0.58 / 14) * 3.1 + \
+                     math.ceil(self.water_area ** 0.58 / 7) * 3.375) * 1.5
         zone_area = changing_rooms + sanitary_objects + cleaning_room + corridors
         zone_volume = zone_area * 2.75
         zone_temperature = 299.15
@@ -235,12 +236,12 @@ class SwimmingFacility(NonResidential):
 
         # Zone Shower_and_sanitary_rooms
         # zone_area = sanitary blocks + additional showers
-        if water_area <= 150:
+        if self.water_area <= 150:
             zone_area = 45.24
-        elif water_area <= 500:
+        elif self.water_area <= 500:
             zone_area = 82.53
         else:
-            num_shower = water_area ** 0.5
+            num_shower = self.water_area ** 0.5
             # (Due to the arrangement of the sanitary rooms, only 4 showers can be
             # added at once for additional capacity)
             num_shower = math.ceil(num_shower / 4) * 4
@@ -256,7 +257,7 @@ class SwimmingFacility(NonResidential):
 
         # Zone Entrance
         # zone_area = entrance + management room
-        zone_area = 12 + water_area * 0.2
+        zone_area = 12 + self.water_area * 0.2
         zone_volume = zone_area * 2.75
         zone_width = self.zone_area_factors["Changing_rooms"][4] + 2
         zone_length = zone_area / zone_width
@@ -276,7 +277,7 @@ class SwimmingFacility(NonResidential):
                                                       zone_length, zone_width, zone_temperature]
 
         # Zone Technical_room
-        zone_area = water_area + water_area * (1 / 24) + 25
+        zone_area = self.water_area + self.water_area * (1 / 24) + 25
         zone_volume = zone_area * 3.5
         zone_width = self.zone_area_factors["Swimming_hall"][4]
         zone_length = zone_area / zone_width
@@ -287,7 +288,7 @@ class SwimmingFacility(NonResidential):
 
         # Zone area correction
         if self.use_correction_factor:
-            correction_factor = (2247.5 * math.log(water_area) - 10505) / (2.8582 * water_area + 336.4)
+            correction_factor = (2247.5 * math.log(self.water_area) - 10505) / (2.8582 * self.water_area + 336.4)
 
             for key in self.zone_area_factors.keys():
                 self.zone_area_factors[key][1] *= correction_factor
@@ -404,7 +405,7 @@ class SwimmingFacility(NonResidential):
                 outer_wall.name = key
                 outer_wall.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_type,
+                    construction=self.construction_data.value,
                     data_class=self.parent.data)               
                 outer_wall.tilt = value[0]
                 outer_wall.orientation = value[1]
@@ -431,7 +432,7 @@ class SwimmingFacility(NonResidential):
                 roof.name = key
                 roof.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_type,
+                    construction=self.construction_data.value,
                     data_class=self.parent.data)
                 roof.tilt = value[0]
                 roof.orientation = value[1]
@@ -446,7 +447,7 @@ class SwimmingFacility(NonResidential):
                 ground_floor.name = key
                 ground_floor.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_type,
+                    construction=self.construction_data.value,
                     data_class=self.parent.data)
                 ground_floor.tilt = value[0]
                 ground_floor.orientation = value[1]
@@ -458,7 +459,7 @@ class SwimmingFacility(NonResidential):
                 inner_wall.name = key
                 inner_wall.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_type,
+                    construction=self.construction_data.value,
                     data_class=self.parent.data)
                 inner_wall.tilt = value[0]
                 inner_wall.orientation = value[1]   
@@ -471,7 +472,7 @@ class SwimmingFacility(NonResidential):
                     ceiling.name = key
                     ceiling.load_type_element(
                         year=self.year_of_construction,
-                        construction=self.construction_type,
+                        construction=self.construction_data.value,
                         data_class=self.parent.data)
                     ceiling.tilt = value[0]
                     ceiling.orientation = value[1] 
@@ -483,7 +484,7 @@ class SwimmingFacility(NonResidential):
                     floor.name = key
                     floor.load_type_element(
                         year=self.year_of_construction,
-                        construction=self.construction_type,
+                        construction=self.construction_data.value,
                         data_class=self.parent.data)
                     floor.tilt = value[0]
                     floor.orientation = value[1]   
@@ -633,8 +634,9 @@ class SwimmingFacility(NonResidential):
                 # density: 1.225 kg/m3
                 zone.use_conditions.max_ahu = m_flow_ahu_nominal / (1.225 * zone.area)
                 zone.use_conditions.min_ahu = 0.3 * zone.use_conditions.max_ahu
-                print('max_AHU',zone.use_conditions.max_ahu)
-                print('min_AHU', zone.use_conditions.min_ahu)
+            else:
+                zone.use_conditions.with_ahu = False
+
 
 
     def create_basic_pools(self, water_area):
@@ -686,15 +688,9 @@ class SwimmingFacility(NonResidential):
 
 
     @property
-    def construction_type(self):
-        return self._construction_type
+    def construction_data(self):
+        return self._construction_data
 
-    @construction_type.setter
-    def construction_type(self, value):
-        if value is not None:
-            if value == "heavy" or value == "light":
-                self._construction_type = value
-            else:
-                raise ValueError("Construction_type has to be light or heavy")
-        else:
-            self._construction_type = "heavy"
+    @construction_data.setter
+    def construction_data(self, value):
+        self._construction_data = datahandling.check_construction_data_setter_iwu(value)

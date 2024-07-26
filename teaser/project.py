@@ -261,9 +261,9 @@ class Project(object):
         project. You need to specify the method of the archetype generation.
         Currently TEASER supports only method according to Lichtmess and BMVBS
         for non-residential buildings. Further the type of geometry_data needs to be
-        specified. Currently TEASER supports four different types of
+        specified. Currently TEASER supports five different types of
         non-residential buildings ('office', 'institute', 'institute4',
-        'institute8'). For more information on specific archetype buildings and
+        'institute8','swimming_facility'). For more information on specific archetype buildings and
         methods, please read the docs of archetype classes.
 
         This function also calculates the parameters of the buildings directly
@@ -276,7 +276,7 @@ class Project(object):
             Used data for construction, for bmvbs non-residential buildings 'iwu_heavy' is supported
         geometry_data : str
             Main geometry_data of the obtained building, currently only 'bmvbs_office',
-            'bmvbs_institute', 'bmvbs_institute4', 'bmvbs_institute8' are supported
+            'bmvbs_institute', 'bmvbs_institute4', 'bmvbs_institute8' and 'swimmingPool' are supported
         name : str
             Individual name
         year_of_construction : int
