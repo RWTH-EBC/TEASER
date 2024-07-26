@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser.examples package &mdash; TEASER 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="teaser.examples.verification package" href="teaser.examples.verification.html" />
+    <link rel="prev" title="teaser.data.output.reports package" href="teaser.data.output.reports.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            TEASER
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">teaser</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="teaser.html">teaser package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="teaser.html#teaser">teaser</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="teaser.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html">teaser.data package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">teaser.examples package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="teaser.examples.verification.html">teaser.examples.verification package</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e10_adjust_schedules">teaser.examples.e10_adjust_schedules module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e10_adjust_schedules.example_adjust_schedules"><code class="docutils literal notranslate"><span class="pre">example_adjust_schedules()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e10_generate_basic_swimming_pool">teaser.examples.e10_generate_basic_swimming_pool module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e10_generate_basic_swimming_pool.generate_basic_swimmingPool"><code class="docutils literal notranslate"><span class="pre">generate_basic_swimmingPool()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#teaser-examples-e11-generate-advanced-swimming-pool-module">teaser.examples.e11_generate_advanced_swimming_pool module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e1_generate_archetype">teaser.examples.e1_generate_archetype module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e1_generate_archetype.example_generate_archetype"><code class="docutils literal notranslate"><span class="pre">example_generate_archetype()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e2_export_aixlib_models">teaser.examples.e2_export_aixlib_models module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e2_export_aixlib_models.example_export_aixlib"><code class="docutils literal notranslate"><span class="pre">example_export_aixlib()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e3_export_ibpsa_models">teaser.examples.e3_export_ibpsa_models module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e3_export_ibpsa_models.example_export_ibpsa"><code class="docutils literal notranslate"><span class="pre">example_export_ibpsa()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e4_save">teaser.examples.e4_save module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e4_save.example_save"><code class="docutils literal notranslate"><span class="pre">example_save()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e5_load">teaser.examples.e5_load module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e5_load.example_load"><code class="docutils literal notranslate"><span class="pre">example_load()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e6_generate_building">teaser.examples.e6_generate_building module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e6_generate_building.example_create_building"><code class="docutils literal notranslate"><span class="pre">example_create_building()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e7_retrofit">teaser.examples.e7_retrofit module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e7_retrofit.example_retrofit_building"><code class="docutils literal notranslate"><span class="pre">example_retrofit_building()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e8_change_boundary_conditions">teaser.examples.e8_change_boundary_conditions module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e8_change_boundary_conditions.example_change_boundary_conditions"><code class="docutils literal notranslate"><span class="pre">example_change_boundary_conditions()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e9_building_data_import_from_excel">teaser.examples.e9_building_data_import_from_excel module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e9_building_data_import_from_excel.get_list_of_present_entries"><code class="docutils literal notranslate"><span class="pre">get_list_of_present_entries()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e9_building_data_import_from_excel.import_building_from_excel"><code class="docutils literal notranslate"><span class="pre">import_building_from_excel()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e9_building_data_import_from_excel.import_data"><code class="docutils literal notranslate"><span class="pre">import_data()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e9_building_data_import_from_excel.zoning_example"><code class="docutils literal notranslate"><span class="pre">zoning_example()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.html">teaser.logic package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.html#module-teaser.project">teaser.project module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">teaser</a></li>
+          <li class="breadcrumb-item"><a href="teaser.html">teaser package</a></li>
+      <li class="breadcrumb-item active">teaser.examples package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/code/teaser.examples.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-teaser.examples">
+<span id="teaser-examples-package"></span><h1>teaser.examples package<a class="headerlink" href="#module-teaser.examples" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="teaser.examples.verification.html">teaser.examples.verification package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.verification.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.verification.html#module-teaser.examples.verification.verification_ASHRAE_140_600">teaser.examples.verification.verification_ASHRAE_140_600 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.verification.html#teaser.examples.verification.verification_ASHRAE_140_600.from_scratch"><code class="docutils literal notranslate"><span class="pre">from_scratch()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.verification.html#teaser.examples.verification.verification_ASHRAE_140_600.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.verification.html#module-teaser.examples.verification.verification_ASHRAE_140_620">teaser.examples.verification.verification_ASHRAE_140_620 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.verification.html#teaser.examples.verification.verification_ASHRAE_140_620.from_scratch"><code class="docutils literal notranslate"><span class="pre">from_scratch()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.verification.html#teaser.examples.verification.verification_ASHRAE_140_620.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.verification.html#module-teaser.examples.verification.verification_ASHRAE_140_900">teaser.examples.verification.verification_ASHRAE_140_900 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.verification.html#teaser.examples.verification.verification_ASHRAE_140_900.from_scratch"><code class="docutils literal notranslate"><span class="pre">from_scratch()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.verification.html#teaser.examples.verification.verification_ASHRAE_140_900.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.verification.html#module-teaser.examples.verification.verification_ASHRAE_140_920">teaser.examples.verification.verification_ASHRAE_140_920 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.verification.html#teaser.examples.verification.verification_ASHRAE_140_920.from_scratch"><code class="docutils literal notranslate"><span class="pre">from_scratch()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.verification.html#teaser.examples.verification.verification_ASHRAE_140_920.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.verification.html#module-teaser.examples.verification.verification_VDI_6007_room1">teaser.examples.verification.verification_VDI_6007_room1 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.verification.html#teaser.examples.verification.verification_VDI_6007_room1.parameter_room1"><code class="docutils literal notranslate"><span class="pre">parameter_room1()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.verification.html#module-teaser.examples.verification.verification_VDI_6007_room3">teaser.examples.verification.verification_VDI_6007_room3 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.verification.html#teaser.examples.verification.verification_VDI_6007_room3.parameter_room3"><code class="docutils literal notranslate"><span class="pre">parameter_room3()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.verification.html#module-teaser.examples.verification.verification_VDI_6007_room8">teaser.examples.verification.verification_VDI_6007_room8 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.verification.html#teaser.examples.verification.verification_VDI_6007_room8.parameter_room8"><code class="docutils literal notranslate"><span class="pre">parameter_room8()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-teaser.examples.e10_adjust_schedules">
+<span id="teaser-examples-e10-adjust-schedules-module"></span><h2>teaser.examples.e10_adjust_schedules module<a class="headerlink" href="#module-teaser.examples.e10_adjust_schedules" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.examples.e10_adjust_schedules.example_adjust_schedules">
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e10_adjust_schedules.</span></span><span class="sig-name descname"><span class="pre">example_adjust_schedules</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e10_adjust_schedules.html#example_adjust_schedules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e10_adjust_schedules.example_adjust_schedules" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>“This function demonstrates the adjustment of default schedules for</dt><dd><ul class="simple">
+<li><p>adjusted_opening_times</p></li>
+<li><p>first_saturday_of_year</p></li>
+<li><p>profiles_weekend_factor</p></li>
+<li><p>set_back_times</p></li>
+<li><p>heating_set_back</p></li>
+<li><p>cooling_set_back</p></li>
+</ul>
+</dd>
+</dl>
+<p>for an residential building using calc_adj_schedules function</p>
+</dd></dl>
+
+</section>
+<section id="module-teaser.examples.e10_generate_basic_swimming_pool">
+<span id="teaser-examples-e10-generate-basic-swimming-pool-module"></span><h2>teaser.examples.e10_generate_basic_swimming_pool module<a class="headerlink" href="#module-teaser.examples.e10_generate_basic_swimming_pool" title="Link to this heading"></a></h2>
+<p>This is an example to generate a basic swimming pool based on 
+TEASER example 1 - generate archetype and example 2 - export aixlib models.
+The basic swimming pool model contains 6 zones:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Swimming_hall</p></li>
+<li><p>Changing_rooms</p></li>
+<li><p>Shower_and_sanitary_rooms</p></li>
+<li><p>Entrance</p></li>
+<li><p>Supervisory_room</p></li>
+<li><p>Technical_room</p></li>
+</ul>
+<p>And 2 swimming pool:
+- Swimmer_pool
+- Nonswimmer_pool</p>
+</div></blockquote>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.examples.e10_generate_basic_swimming_pool.generate_basic_swimmingPool">
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e10_generate_basic_swimming_pool.</span></span><span class="sig-name descname"><span class="pre">generate_basic_swimmingPool</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e10_generate_basic_swimming_pool.html#generate_basic_swimmingPool"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e10_generate_basic_swimming_pool.generate_basic_swimmingPool" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="teaser-examples-e11-generate-advanced-swimming-pool-module">
+<h2>teaser.examples.e11_generate_advanced_swimming_pool module<a class="headerlink" href="#teaser-examples-e11-generate-advanced-swimming-pool-module" title="Link to this heading"></a></h2>
+</section>
+<section id="module-teaser.examples.e1_generate_archetype">
+<span id="teaser-examples-e1-generate-archetype-module"></span><h2>teaser.examples.e1_generate_archetype module<a class="headerlink" href="#module-teaser.examples.e1_generate_archetype" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.examples.e1_generate_archetype.example_generate_archetype">
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e1_generate_archetype.</span></span><span class="sig-name descname"><span class="pre">example_generate_archetype</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e1_generate_archetype.html#example_generate_archetype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e1_generate_archetype.example_generate_archetype" title="Link to this definition"></a></dt>
+<dd><p>This function demonstrates the generation of residential and
+non-residential archetype buildings using the API function of TEASER</p>
+</dd></dl>
+
+</section>
+<section id="module-teaser.examples.e2_export_aixlib_models">
+<span id="teaser-examples-e2-export-aixlib-models-module"></span><h2>teaser.examples.e2_export_aixlib_models module<a class="headerlink" href="#module-teaser.examples.e2_export_aixlib_models" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.examples.e2_export_aixlib_models.example_export_aixlib">
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e2_export_aixlib_models.</span></span><span class="sig-name descname"><span class="pre">example_export_aixlib</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e2_export_aixlib_models.html#example_export_aixlib"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e2_export_aixlib_models.example_export_aixlib" title="Link to this definition"></a></dt>
+<dd><p>This function demonstrates the export to Modelica library AixLib using
+the API function of TEASER</p>
+</dd></dl>
+
+</section>
+<section id="module-teaser.examples.e3_export_ibpsa_models">
+<span id="teaser-examples-e3-export-ibpsa-models-module"></span><h2>teaser.examples.e3_export_ibpsa_models module<a class="headerlink" href="#module-teaser.examples.e3_export_ibpsa_models" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.examples.e3_export_ibpsa_models.example_export_ibpsa">
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e3_export_ibpsa_models.</span></span><span class="sig-name descname"><span class="pre">example_export_ibpsa</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e3_export_ibpsa_models.html#example_export_ibpsa"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e3_export_ibpsa_models.example_export_ibpsa" title="Link to this definition"></a></dt>
+<dd><p>This function demonstrates the export to Modelica library IBPSA using
+the API function of TEASER</p>
+</dd></dl>
+
+</section>
+<section id="module-teaser.examples.e4_save">
+<span id="teaser-examples-e4-save-module"></span><h2>teaser.examples.e4_save module<a class="headerlink" href="#module-teaser.examples.e4_save" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.examples.e4_save.example_save">
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e4_save.</span></span><span class="sig-name descname"><span class="pre">example_save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e4_save.html#example_save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e4_save.example_save" title="Link to this definition"></a></dt>
+<dd><p>This function demonstrates different saving options of TEASER</p>
+</dd></dl>
+
+</section>
+<section id="module-teaser.examples.e5_load">
+<span id="teaser-examples-e5-load-module"></span><h2>teaser.examples.e5_load module<a class="headerlink" href="#module-teaser.examples.e5_load" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.examples.e5_load.example_load">
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e5_load.</span></span><span class="sig-name descname"><span class="pre">example_load</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e5_load.html#example_load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e5_load.example_load" title="Link to this definition"></a></dt>
+<dd><p>This function demonstrates different loading options of TEASER</p>
+</dd></dl>
+
+</section>
+<section id="module-teaser.examples.e6_generate_building">
+<span id="teaser-examples-e6-generate-building-module"></span><h2>teaser.examples.e6_generate_building module<a class="headerlink" href="#module-teaser.examples.e6_generate_building" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.examples.e6_generate_building.example_create_building">
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e6_generate_building.</span></span><span class="sig-name descname"><span class="pre">example_create_building</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e6_generate_building.html#example_create_building"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e6_generate_building.example_create_building" title="Link to this definition"></a></dt>
+<dd><p>This function demonstrates generating a building adding all
+information separately</p>
+</dd></dl>
+
+</section>
+<section id="module-teaser.examples.e7_retrofit">
+<span id="teaser-examples-e7-retrofit-module"></span><h2>teaser.examples.e7_retrofit module<a class="headerlink" href="#module-teaser.examples.e7_retrofit" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.examples.e7_retrofit.example_retrofit_building">
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e7_retrofit.</span></span><span class="sig-name descname"><span class="pre">example_retrofit_building</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e7_retrofit.html#example_retrofit_building"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e7_retrofit.example_retrofit_building" title="Link to this definition"></a></dt>
+<dd><p>This function demonstrates retrofit options of TEASER API</p>
+</dd></dl>
+
+</section>
+<section id="module-teaser.examples.e8_change_boundary_conditions">
+<span id="teaser-examples-e8-change-boundary-conditions-module"></span><h2>teaser.examples.e8_change_boundary_conditions module<a class="headerlink" href="#module-teaser.examples.e8_change_boundary_conditions" title="Link to this heading"></a></h2>
+<p>This module contains an example how to change time dependent profiles.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.examples.e8_change_boundary_conditions.example_change_boundary_conditions">
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e8_change_boundary_conditions.</span></span><span class="sig-name descname"><span class="pre">example_change_boundary_conditions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e8_change_boundary_conditions.html#example_change_boundary_conditions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e8_change_boundary_conditions.example_change_boundary_conditions" title="Link to this definition"></a></dt>
+<dd><p>Demonstrate changes to time dependent profiles.</p>
+</dd></dl>
+
+</section>
+<section id="module-teaser.examples.e9_building_data_import_from_excel">
+<span id="teaser-examples-e9-building-data-import-from-excel-module"></span><h2>teaser.examples.e9_building_data_import_from_excel module<a class="headerlink" href="#module-teaser.examples.e9_building_data_import_from_excel" title="Link to this heading"></a></h2>
+<p>This script demonstrates how a building can be generated by importing building
+data from excel.
+An appropriate example file with some building data is imported from
+examplefiles/ExcelBuildingData_Sample.xlsx.</p>
+<p>In the excel every room is listed by its own, via a custom defined zoning
+algorithm these rooms are combined to zones.
+The user needs to adjust the zoning to his needs.
+See # Block: Zoning methodologies (define your zoning function here)</p>
+<p>Limitations and assumptions:
+- Outer and inner wall area depend on the calculations done in the excel
+- Ground floor area is only as big the respective net area of the heated room
+volume (NetArea)
+- Floor area is only as big the respective net area of the heated room volume
+(NetArea)
+- Rooftop area is only as big the respective net area of the heated room
+volume (NetArea)
+- Rooftops are flat and not tilted, see “RooftopTilt”
+- Ceiling area is only as big the respective net area of the heated room
+volume (NetArea)
+- Ceiling, floor and inner walls are only respected by half their area,
+since they belong half to the respective
+and half to the adjacent zone
+- Orientations are clockwise in degree, 0° is directed north</p>
+<p>-respective construction types have to be added to the TypeBuildingElements.json
+-respective UsageTypes for Zones have to be added to the UseConditions.json
+-excel file format has to be as shown in the “ExcelBuildingData_Sample.xlsx”</p>
+<p>Information about the required excel format:
+#Documentation in progress!
+-yellowed columns are necessary input to teaser -&gt; don´t change column
+header, keep value names consistent.
+-non yellowed columns may either not be used or be used for your zoning
+algorithm
+-Under the cell ‚Usage type‘  you will see some cells that are blank but have
+their row filled.
+It means the blank cell actually belongs to the Usage type above but in that
+specific row we filled the characteristics
+of the window/wall of a different orientation of the same exact room. That
+means every row is either a new room or a
+new orientation of that room. A room might have two outer walls in two
+different orientation so for each outer wall,
+a an extra row defining the respective orientation is added
+-The entries in the excel sheet must be consistent for python being able to
+convert it.
+-If an inner wall is reaching inside a room but is not the limit of the room,
+it should be accounted with 2x the area</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.examples.e9_building_data_import_from_excel.get_list_of_present_entries">
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e9_building_data_import_from_excel.</span></span><span class="sig-name descname"><span class="pre">get_list_of_present_entries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e9_building_data_import_from_excel.html#get_list_of_present_entries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e9_building_data_import_from_excel.get_list_of_present_entries" title="Link to this definition"></a></dt>
+<dd><p>Extracts a list of all in the list available entries, discarding “None”
+and “nan” entries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>list_: list</strong></dt><dd><p>list that shall be processed</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.examples.e9_building_data_import_from_excel.import_building_from_excel">
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e9_building_data_import_from_excel.</span></span><span class="sig-name descname"><span class="pre">import_building_from_excel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">building_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">construction_age</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_to_excel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e9_building_data_import_from_excel.html#import_building_from_excel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e9_building_data_import_from_excel.import_building_from_excel" title="Link to this definition"></a></dt>
+<dd><p>Import building data from excel, convert it via the respective zoning and feed it to teasers logic classes.
+Pay attention to hard coded parts, which are marked.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>project: Project()</strong></dt><dd><p>TEASER instance of Project</p>
+</dd>
+<dt><strong>building_name: str</strong></dt><dd><p>name of building to be set in the project</p>
+</dd>
+<dt><strong>construction_age: int [y]</strong></dt><dd><p>construction age of the building</p>
+</dd>
+<dt><strong>path_to_excel: str</strong></dt><dd><p>path to excel file to be imported</p>
+</dd>
+<dt><strong>sheet_names: str or list</strong></dt><dd><p>sheet names which shall be imported</p>
+</dd>
+<dt><strong>return data: pandas.DataFrame</strong></dt><dd><p>zoned DataFrame which is finally used to parametrize the teaser classes</p>
+</dd>
+<dt><strong>return project: Project()</strong></dt><dd><p>TEASER instance of Project filled with the imported building data</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.examples.e9_building_data_import_from_excel.import_data">
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e9_building_data_import_from_excel.</span></span><span class="sig-name descname"><span class="pre">import_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e9_building_data_import_from_excel.html#import_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e9_building_data_import_from_excel.import_data" title="Link to this definition"></a></dt>
+<dd><p>Import data from the building data excel file and perform some
+preprocessing for nan and empty cells.
+If several sheets are imported, the data is concatenated to one dataframe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>path: str</strong></dt><dd><p>path to the excel file that should be imported</p>
+</dd>
+<dt><strong>sheet_names: list or str</strong></dt><dd><p>sheets of excel that should be imported</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.examples.e9_building_data_import_from_excel.zoning_example">
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e9_building_data_import_from_excel.</span></span><span class="sig-name descname"><span class="pre">zoning_example</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e9_building_data_import_from_excel.html#zoning_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e9_building_data_import_from_excel.zoning_example" title="Link to this definition"></a></dt>
+<dd><p>This is an example on how the rooms of a building could be aggregated to
+zones.</p>
+<p>In this example the UsageType has to be empty in the case that the
+respective line does not represent another
+room but a different orientated wall or window belonging to a room that
+is already declared once in the excel file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data: pandas.dataframe</strong></dt><dd><p>The data which shall be zoned</p>
+</dd>
+<dt><strong>return data: pandas.dataframe</strong></dt><dd><p>The zoning should return the imported dataset with an additional
+column called “Zone” which inhibits the
+information to which zone the respective room shall be part of,
+and also a column called “UsageType_Teaser” which stores the
+in UsageType of each row.
+UsageType must be available in the UseConditions.json.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="teaser.data.output.reports.html" class="btn btn-neutral float-left" title="teaser.data.output.reports package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="teaser.examples.verification.html" class="btn btn-neutral float-right" title="teaser.examples.verification package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

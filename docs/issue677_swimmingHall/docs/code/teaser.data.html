@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser.data package &mdash; TEASER 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="teaser.data.input package" href="teaser.data.input.html" />
+    <link rel="prev" title="teaser package" href="teaser.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            TEASER
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">teaser</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="teaser.html">teaser package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="teaser.html#teaser">teaser</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="teaser.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">teaser.data package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="teaser.data.input.html">teaser.data.input package</a></li>
+<li class="toctree-l6"><a class="reference internal" href="teaser.data.output.html">teaser.data.output package</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.data.dataclass">teaser.data.dataclass module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.data.dataclass.DataClass"><code class="docutils literal notranslate"><span class="pre">DataClass</span></code></a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.dataclass.DataClass.load_mat_binding"><code class="docutils literal notranslate"><span class="pre">DataClass.load_mat_binding()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.dataclass.DataClass.load_tb_binding"><code class="docutils literal notranslate"><span class="pre">DataClass.load_tb_binding()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.dataclass.DataClass.load_uc_binding"><code class="docutils literal notranslate"><span class="pre">DataClass.load_uc_binding()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.data.utilities">teaser.data.utilities module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.data.utilities.ConstructionData"><code class="docutils literal notranslate"><span class="pre">ConstructionData</span></code></a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.ConstructionData.get_prefix"><code class="docutils literal notranslate"><span class="pre">ConstructionData.get_prefix()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.ConstructionData.is_iwu"><code class="docutils literal notranslate"><span class="pre">ConstructionData.is_iwu()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.ConstructionData.is_kfw"><code class="docutils literal notranslate"><span class="pre">ConstructionData.is_kfw()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.ConstructionData.is_tabula_de"><code class="docutils literal notranslate"><span class="pre">ConstructionData.is_tabula_de()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.ConstructionData.is_tabula_dk"><code class="docutils literal notranslate"><span class="pre">ConstructionData.is_tabula_dk()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.ConstructionData.iwu_heavy"><code class="docutils literal notranslate"><span class="pre">ConstructionData.iwu_heavy</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.ConstructionData.iwu_light"><code class="docutils literal notranslate"><span class="pre">ConstructionData.iwu_light</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.ConstructionData.kfw_100"><code class="docutils literal notranslate"><span class="pre">ConstructionData.kfw_100</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.ConstructionData.kfw_40"><code class="docutils literal notranslate"><span class="pre">ConstructionData.kfw_40</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.ConstructionData.kfw_55"><code class="docutils literal notranslate"><span class="pre">ConstructionData.kfw_55</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.ConstructionData.kfw_70"><code class="docutils literal notranslate"><span class="pre">ConstructionData.kfw_70</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.ConstructionData.kfw_85"><code class="docutils literal notranslate"><span class="pre">ConstructionData.kfw_85</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.ConstructionData.tabula_de_adv_retrofit"><code class="docutils literal notranslate"><span class="pre">ConstructionData.tabula_de_adv_retrofit</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.ConstructionData.tabula_de_retrofit"><code class="docutils literal notranslate"><span class="pre">ConstructionData.tabula_de_retrofit</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.ConstructionData.tabula_de_standard"><code class="docutils literal notranslate"><span class="pre">ConstructionData.tabula_de_standard</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.ConstructionData.tabula_dk_adv_retrofit"><code class="docutils literal notranslate"><span class="pre">ConstructionData.tabula_dk_adv_retrofit</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.ConstructionData.tabula_dk_retrofit"><code class="docutils literal notranslate"><span class="pre">ConstructionData.tabula_dk_retrofit</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.ConstructionData.tabula_dk_standard"><code class="docutils literal notranslate"><span class="pre">ConstructionData.tabula_dk_standard</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.data.utilities.GeometryData"><code class="docutils literal notranslate"><span class="pre">GeometryData</span></code></a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.BmvbsInstitute"><code class="docutils literal notranslate"><span class="pre">GeometryData.BmvbsInstitute</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.BmvbsInstitute4"><code class="docutils literal notranslate"><span class="pre">GeometryData.BmvbsInstitute4</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.BmvbsInstitute8"><code class="docutils literal notranslate"><span class="pre">GeometryData.BmvbsInstitute8</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.BmvbsOffice"><code class="docutils literal notranslate"><span class="pre">GeometryData.BmvbsOffice</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.IwuSingleFamilyDwelling"><code class="docutils literal notranslate"><span class="pre">GeometryData.IwuSingleFamilyDwelling</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.TabulaDeApartmentBlock"><code class="docutils literal notranslate"><span class="pre">GeometryData.TabulaDeApartmentBlock</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.TabulaDeMultiFamilyHouse"><code class="docutils literal notranslate"><span class="pre">GeometryData.TabulaDeMultiFamilyHouse</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.TabulaDeSingleFamilyHouse"><code class="docutils literal notranslate"><span class="pre">GeometryData.TabulaDeSingleFamilyHouse</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.TabulaDeTerracedHouse"><code class="docutils literal notranslate"><span class="pre">GeometryData.TabulaDeTerracedHouse</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.TabulaDkApartmentBlock"><code class="docutils literal notranslate"><span class="pre">GeometryData.TabulaDkApartmentBlock</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.TabulaDkSingleFamilyHouse"><code class="docutils literal notranslate"><span class="pre">GeometryData.TabulaDkSingleFamilyHouse</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.TabulaDkTerracedHouse"><code class="docutils literal notranslate"><span class="pre">GeometryData.TabulaDkTerracedHouse</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.UrbanrenetEst1a"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst1a</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.UrbanrenetEst1b"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst1b</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.UrbanrenetEst2"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst2</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.UrbanrenetEst3"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst3</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.UrbanrenetEst4a"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst4a</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.UrbanrenetEst4b"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst4b</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.UrbanrenetEst5"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst5</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.UrbanrenetEst6"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst6</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.UrbanrenetEst7"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst7</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.UrbanrenetEst8a"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst8a</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#teaser.data.utilities.GeometryData.UrbanrenetEst8b"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst8b</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.data.utilities.check_construction_data_setter_iwu"><code class="docutils literal notranslate"><span class="pre">check_construction_data_setter_iwu()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.data.utilities.check_construction_data_setter_tabula_de"><code class="docutils literal notranslate"><span class="pre">check_construction_data_setter_tabula_de()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.data.utilities.check_construction_data_setter_tabula_dk"><code class="docutils literal notranslate"><span class="pre">check_construction_data_setter_tabula_dk()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.examples.html">teaser.examples package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.html">teaser.logic package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.html#module-teaser.project">teaser.project module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">teaser</a></li>
+          <li class="breadcrumb-item"><a href="teaser.html">teaser package</a></li>
+      <li class="breadcrumb-item active">teaser.data package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/code/teaser.data.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-teaser.data">
+<span id="teaser-data-package"></span><h1>teaser.data package<a class="headerlink" href="#module-teaser.data" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="teaser.data.input.html">teaser.data.input package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.input.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.input.inputdata.html">teaser.data.input.inputdata package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.input.inputdata.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.input.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.input.html#module-teaser.data.input.buildingelement_input_json">teaser.data.input.buildingelement_input_json module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.input.html#teaser.data.input.buildingelement_input_json.load_type_element"><code class="docutils literal notranslate"><span class="pre">load_type_element()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.input.html#module-teaser.data.input.material_input_json">teaser.data.input.material_input_json module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.input.html#teaser.data.input.material_input_json.load_material"><code class="docutils literal notranslate"><span class="pre">load_material()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.input.html#teaser.data.input.material_input_json.load_material_id"><code class="docutils literal notranslate"><span class="pre">load_material_id()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.input.html#module-teaser.data.input.teaserjson_input">teaser.data.input.teaserjson_input module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.input.html#teaser.data.input.teaserjson_input.load_teaser_json"><code class="docutils literal notranslate"><span class="pre">load_teaser_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.input.html#teaser.data.input.teaserjson_input.set_basic_data_teaser"><code class="docutils literal notranslate"><span class="pre">set_basic_data_teaser()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.input.html#teaser.data.input.teaserjson_input.set_layer_data_teaser"><code class="docutils literal notranslate"><span class="pre">set_layer_data_teaser()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.input.html#module-teaser.data.input.usecond_input">teaser.data.input.usecond_input module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.input.html#teaser.data.input.usecond_input.load_use_conditions"><code class="docutils literal notranslate"><span class="pre">load_use_conditions()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="teaser.data.output.html">teaser.data.output package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.output.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.output.reports.html">teaser.data.output.reports package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.output.reports.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.output.reports.html#module-teaser.data.output.reports.model_report">teaser.data.output.reports.model_report module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.output.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.aixlib_output">teaser.data.output.aixlib_output module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.output.html#teaser.data.output.aixlib_output.export_multizone"><code class="docutils literal notranslate"><span class="pre">export_multizone()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.buildingelement_output">teaser.data.output.buildingelement_output module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.output.html#teaser.data.output.buildingelement_output.delete_type_element"><code class="docutils literal notranslate"><span class="pre">delete_type_element()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.output.html#teaser.data.output.buildingelement_output.save_type_element"><code class="docutils literal notranslate"><span class="pre">save_type_element()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.ibpsa_output">teaser.data.output.ibpsa_output module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.output.html#teaser.data.output.ibpsa_output.export_ibpsa"><code class="docutils literal notranslate"><span class="pre">export_ibpsa()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.material_output">teaser.data.output.material_output module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.output.html#teaser.data.output.material_output.save_material"><code class="docutils literal notranslate"><span class="pre">save_material()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.runUnitTests">teaser.data.output.runUnitTests module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.teaserjson_output">teaser.data.output.teaserjson_output module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.output.html#teaser.data.output.teaserjson_output.save_teaser_json"><code class="docutils literal notranslate"><span class="pre">save_teaser_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.output.html#teaser.data.output.teaserjson_output.set_basic_data"><code class="docutils literal notranslate"><span class="pre">set_basic_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.output.html#teaser.data.output.teaserjson_output.set_layer_data"><code class="docutils literal notranslate"><span class="pre">set_layer_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.usecond_output">teaser.data.output.usecond_output module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.output.html#teaser.data.output.usecond_output.save_use_conditions"><code class="docutils literal notranslate"><span class="pre">save_use_conditions()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-teaser.data.dataclass">
+<span id="teaser-data-dataclass-module"></span><h2>teaser.data.dataclass module<a class="headerlink" href="#module-teaser.data.dataclass" title="Link to this heading"></a></h2>
+<p>This module holds file paths and bindings for json data.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.data.dataclass.DataClass">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.data.dataclass.</span></span><span class="sig-name descname"><span class="pre">DataClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">construction_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#teaser.data.utilities.ConstructionData" title="teaser.data.utilities.ConstructionData"><span class="pre">ConstructionData</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/dataclass.html#DataClass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.dataclass.DataClass" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for JSON data.</p>
+<p>This class loads all JSON files with statistic or template data needed
+for statistical data enrichment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>construction_data</strong><span class="classifier">ConstructionData</span></dt><dd><p>The prefix of this parameter indicates which statistical data about building
+elements should be used. Its type is the enum class ConstructionData.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>element_bind</strong><span class="classifier">collections.OrderedDict</span></dt><dd><p>Ordered dictionary of the TypeBuildingElements binding.</p>
+</dd>
+<dt><strong>path_tb</strong><span class="classifier">str</span></dt><dd><p>Full path to TypeElements_IWU.json. Default is
+teaser/data/input/inputdata/TypeElements_IWU.json.</p>
+</dd>
+<dt><strong>material_bind</strong><span class="classifier">collections.OrderedDict</span></dt><dd><p>Ordered dictionary of the Material binding.</p>
+</dd>
+<dt><strong>path_mat</strong><span class="classifier">str</span></dt><dd><p>Full path to MaterialTemplates.json. Default is
+teaser/data/input/inputdata/MaterialTemplates.json.</p>
+</dd>
+<dt><strong>conditions_bind</strong><span class="classifier">collections.OrderedDict</span></dt><dd><p>Ordered dictionary of the UseConditions binding.</p>
+</dd>
+<dt><strong>path_uc</strong><span class="classifier">str</span></dt><dd><p>Full path to UseConditions.json. Default is
+teaser/data/input/inputdata/UseConditions.json</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.data.dataclass.DataClass.load_mat_binding">
+<span class="sig-name descname"><span class="pre">load_mat_binding</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/dataclass.html#DataClass.load_mat_binding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.dataclass.DataClass.load_mat_binding" title="Link to this definition"></a></dt>
+<dd><p>Load MaterialTemplates json into binding classes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.data.dataclass.DataClass.load_tb_binding">
+<span class="sig-name descname"><span class="pre">load_tb_binding</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/dataclass.html#DataClass.load_tb_binding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.dataclass.DataClass.load_tb_binding" title="Link to this definition"></a></dt>
+<dd><p>Load TypeBuildingElement json into binding classes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.data.dataclass.DataClass.load_uc_binding">
+<span class="sig-name descname"><span class="pre">load_uc_binding</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/dataclass.html#DataClass.load_uc_binding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.dataclass.DataClass.load_uc_binding" title="Link to this definition"></a></dt>
+<dd><p>Load UseConditions json into binding classes.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-teaser.data.utilities">
+<span id="teaser-data-utilities-module"></span><h2>teaser.data.utilities module<a class="headerlink" href="#module-teaser.data.utilities" title="Link to this heading"></a></h2>
+<p>This module provides the definitions and mappings for various building archetypes and construction standards
+used in the TEASER framework. The module includes enumerations for different geometry types of buildings and
+construction data types, as well as dictionaries that map these enumerations to their corresponding building classes.
+Additionally, it defines which construction data types are allowed for each building geometry data and
+includes functions to set the suitable construction_data.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.data.utilities.ConstructionData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.data.utilities.</span></span><span class="sig-name descname"><span class="pre">ConstructionData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/utilities.html#ConstructionData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.utilities.ConstructionData" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>The ConstructionData enumeration combines the former parameters “method” and “construction_type”.
+The prefix of each value is used to select the appropriate json file as input data.
+The complete value is used to search for the appropriate element within the json file.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.data.utilities.ConstructionData.get_prefix">
+<span class="sig-name descname"><span class="pre">get_prefix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/utilities.html#ConstructionData.get_prefix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.utilities.ConstructionData.get_prefix" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.data.utilities.ConstructionData.is_iwu">
+<span class="sig-name descname"><span class="pre">is_iwu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/utilities.html#ConstructionData.is_iwu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.utilities.ConstructionData.is_iwu" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.data.utilities.ConstructionData.is_kfw">
+<span class="sig-name descname"><span class="pre">is_kfw</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/utilities.html#ConstructionData.is_kfw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.utilities.ConstructionData.is_kfw" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.data.utilities.ConstructionData.is_tabula_de">
+<span class="sig-name descname"><span class="pre">is_tabula_de</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/utilities.html#ConstructionData.is_tabula_de"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.utilities.ConstructionData.is_tabula_de" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.data.utilities.ConstructionData.is_tabula_dk">
+<span class="sig-name descname"><span class="pre">is_tabula_dk</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/utilities.html#ConstructionData.is_tabula_dk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.utilities.ConstructionData.is_tabula_dk" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.ConstructionData.iwu_heavy">
+<span class="sig-name descname"><span class="pre">iwu_heavy</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'iwu_heavy'</span></em><a class="headerlink" href="#teaser.data.utilities.ConstructionData.iwu_heavy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.ConstructionData.iwu_light">
+<span class="sig-name descname"><span class="pre">iwu_light</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'iwu_light'</span></em><a class="headerlink" href="#teaser.data.utilities.ConstructionData.iwu_light" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.ConstructionData.kfw_100">
+<span class="sig-name descname"><span class="pre">kfw_100</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'kfw_100'</span></em><a class="headerlink" href="#teaser.data.utilities.ConstructionData.kfw_100" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.ConstructionData.kfw_40">
+<span class="sig-name descname"><span class="pre">kfw_40</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'kfw_40'</span></em><a class="headerlink" href="#teaser.data.utilities.ConstructionData.kfw_40" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.ConstructionData.kfw_55">
+<span class="sig-name descname"><span class="pre">kfw_55</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'kfw_55'</span></em><a class="headerlink" href="#teaser.data.utilities.ConstructionData.kfw_55" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.ConstructionData.kfw_70">
+<span class="sig-name descname"><span class="pre">kfw_70</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'kfw_70'</span></em><a class="headerlink" href="#teaser.data.utilities.ConstructionData.kfw_70" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.ConstructionData.kfw_85">
+<span class="sig-name descname"><span class="pre">kfw_85</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'kfw_85'</span></em><a class="headerlink" href="#teaser.data.utilities.ConstructionData.kfw_85" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.ConstructionData.tabula_de_adv_retrofit">
+<span class="sig-name descname"><span class="pre">tabula_de_adv_retrofit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tabula_de_adv_retrofit'</span></em><a class="headerlink" href="#teaser.data.utilities.ConstructionData.tabula_de_adv_retrofit" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.ConstructionData.tabula_de_retrofit">
+<span class="sig-name descname"><span class="pre">tabula_de_retrofit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tabula_de_retrofit'</span></em><a class="headerlink" href="#teaser.data.utilities.ConstructionData.tabula_de_retrofit" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.ConstructionData.tabula_de_standard">
+<span class="sig-name descname"><span class="pre">tabula_de_standard</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tabula_de_standard'</span></em><a class="headerlink" href="#teaser.data.utilities.ConstructionData.tabula_de_standard" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.ConstructionData.tabula_dk_adv_retrofit">
+<span class="sig-name descname"><span class="pre">tabula_dk_adv_retrofit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tabula_dk_adv_retrofit'</span></em><a class="headerlink" href="#teaser.data.utilities.ConstructionData.tabula_dk_adv_retrofit" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.ConstructionData.tabula_dk_retrofit">
+<span class="sig-name descname"><span class="pre">tabula_dk_retrofit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tabula_dk_retrofit'</span></em><a class="headerlink" href="#teaser.data.utilities.ConstructionData.tabula_dk_retrofit" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.ConstructionData.tabula_dk_standard">
+<span class="sig-name descname"><span class="pre">tabula_dk_standard</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tabula_dk_standard'</span></em><a class="headerlink" href="#teaser.data.utilities.ConstructionData.tabula_dk_standard" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.data.utilities.</span></span><span class="sig-name descname"><span class="pre">GeometryData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/utilities.html#GeometryData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.utilities.GeometryData" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>The GeometryData enumeration replaces the former parameter “usage” and
+represents different archetypes of residential and non-residential buildings.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.BmvbsInstitute">
+<span class="sig-name descname"><span class="pre">BmvbsInstitute</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bmvbs_institute'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.BmvbsInstitute" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.BmvbsInstitute4">
+<span class="sig-name descname"><span class="pre">BmvbsInstitute4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bmvbs_institute4'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.BmvbsInstitute4" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.BmvbsInstitute8">
+<span class="sig-name descname"><span class="pre">BmvbsInstitute8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bmvbs_institute8'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.BmvbsInstitute8" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.BmvbsOffice">
+<span class="sig-name descname"><span class="pre">BmvbsOffice</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bmvbs_office'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.BmvbsOffice" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.IwuSingleFamilyDwelling">
+<span class="sig-name descname"><span class="pre">IwuSingleFamilyDwelling</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'iwu_single_family_dwelling'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.IwuSingleFamilyDwelling" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.TabulaDeApartmentBlock">
+<span class="sig-name descname"><span class="pre">TabulaDeApartmentBlock</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tabula_de_apartment_block'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.TabulaDeApartmentBlock" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.TabulaDeMultiFamilyHouse">
+<span class="sig-name descname"><span class="pre">TabulaDeMultiFamilyHouse</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tabula_de_multi_family_house'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.TabulaDeMultiFamilyHouse" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.TabulaDeSingleFamilyHouse">
+<span class="sig-name descname"><span class="pre">TabulaDeSingleFamilyHouse</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tabula_de_single_family_house'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.TabulaDeSingleFamilyHouse" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.TabulaDeTerracedHouse">
+<span class="sig-name descname"><span class="pre">TabulaDeTerracedHouse</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tabula_de_terraced_house'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.TabulaDeTerracedHouse" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.TabulaDkApartmentBlock">
+<span class="sig-name descname"><span class="pre">TabulaDkApartmentBlock</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tabula_dk_apartment_block'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.TabulaDkApartmentBlock" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.TabulaDkSingleFamilyHouse">
+<span class="sig-name descname"><span class="pre">TabulaDkSingleFamilyHouse</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tabula_dk_single_family_house'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.TabulaDkSingleFamilyHouse" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.TabulaDkTerracedHouse">
+<span class="sig-name descname"><span class="pre">TabulaDkTerracedHouse</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tabula_dk_terraced_house'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.TabulaDkTerracedHouse" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.UrbanrenetEst1a">
+<span class="sig-name descname"><span class="pre">UrbanrenetEst1a</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'urbanrenet_est1a'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.UrbanrenetEst1a" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.UrbanrenetEst1b">
+<span class="sig-name descname"><span class="pre">UrbanrenetEst1b</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'urbanrenet_est1b'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.UrbanrenetEst1b" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.UrbanrenetEst2">
+<span class="sig-name descname"><span class="pre">UrbanrenetEst2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'urbanrenet_est2'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.UrbanrenetEst2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.UrbanrenetEst3">
+<span class="sig-name descname"><span class="pre">UrbanrenetEst3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'urbanrenet_est3'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.UrbanrenetEst3" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.UrbanrenetEst4a">
+<span class="sig-name descname"><span class="pre">UrbanrenetEst4a</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'urbanrenet_est4a'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.UrbanrenetEst4a" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.UrbanrenetEst4b">
+<span class="sig-name descname"><span class="pre">UrbanrenetEst4b</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'urbanrenet_est4b'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.UrbanrenetEst4b" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.UrbanrenetEst5">
+<span class="sig-name descname"><span class="pre">UrbanrenetEst5</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'urbanrenet_est5'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.UrbanrenetEst5" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.UrbanrenetEst6">
+<span class="sig-name descname"><span class="pre">UrbanrenetEst6</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'urbanrenet_est6'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.UrbanrenetEst6" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.UrbanrenetEst7">
+<span class="sig-name descname"><span class="pre">UrbanrenetEst7</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'urbanrenet_est7'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.UrbanrenetEst7" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.UrbanrenetEst8a">
+<span class="sig-name descname"><span class="pre">UrbanrenetEst8a</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'urbanrenet_est8a'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.UrbanrenetEst8a" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="teaser.data.utilities.GeometryData.UrbanrenetEst8b">
+<span class="sig-name descname"><span class="pre">UrbanrenetEst8b</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'urbanrenet_est8b'</span></em><a class="headerlink" href="#teaser.data.utilities.GeometryData.UrbanrenetEst8b" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.data.utilities.check_construction_data_setter_iwu">
+<span class="sig-prename descclassname"><span class="pre">teaser.data.utilities.</span></span><span class="sig-name descname"><span class="pre">check_construction_data_setter_iwu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/utilities.html#check_construction_data_setter_iwu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.utilities.check_construction_data_setter_iwu" title="Link to this definition"></a></dt>
+<dd><p>This function validates and sets the construction_data for buildings using the iwu construction_data.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.data.utilities.check_construction_data_setter_tabula_de">
+<span class="sig-prename descclassname"><span class="pre">teaser.data.utilities.</span></span><span class="sig-name descname"><span class="pre">check_construction_data_setter_tabula_de</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/utilities.html#check_construction_data_setter_tabula_de"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.utilities.check_construction_data_setter_tabula_de" title="Link to this definition"></a></dt>
+<dd><p>This function validates and sets the construction_data for buildings using the tabula_de construction_data.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.data.utilities.check_construction_data_setter_tabula_dk">
+<span class="sig-prename descclassname"><span class="pre">teaser.data.utilities.</span></span><span class="sig-name descname"><span class="pre">check_construction_data_setter_tabula_dk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/utilities.html#check_construction_data_setter_tabula_dk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.utilities.check_construction_data_setter_tabula_dk" title="Link to this definition"></a></dt>
+<dd><p>This function validates and sets the construction_data for buildings using the tabula_dk construction_data.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="teaser.html" class="btn btn-neutral float-left" title="teaser package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="teaser.data.input.html" class="btn btn-neutral float-right" title="teaser.data.input package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

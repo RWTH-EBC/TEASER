@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser.examples.verification.verification_ASHRAE_140_920 &mdash; TEASER 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=db26dd79" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            TEASER
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code/modules.html">teaser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">teaser.examples.verification.verification_ASHRAE_140_920</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for teaser.examples.verification.verification_ASHRAE_140_920</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Created March 2017</span>
+<span class="c1"># TEASER Development Team</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This script contains of three functions. The first one loads the heavy-weight</span>
+<span class="sd">ASHRAE 140 test room 920 from a `*.teaserjson` file. The second one creates</span>
+<span class="sd">that room within the code. The third one computes parameter with the help of</span>
+<span class="sd">one of the aforementioned functions.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">teaser.project</span> <span class="kn">import</span> <span class="n">Project</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.building</span> <span class="kn">import</span> <span class="n">Building</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.thermalzone</span> <span class="kn">import</span> <span class="n">ThermalZone</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.rooftop</span> <span class="kn">import</span> <span class="n">Rooftop</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.layer</span> <span class="kn">import</span> <span class="n">Layer</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.material</span> <span class="kn">import</span> <span class="n">Material</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.outerwall</span> <span class="kn">import</span> <span class="n">OuterWall</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.floor</span> <span class="kn">import</span> <span class="n">Floor</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.groundfloor</span> <span class="kn">import</span> <span class="n">GroundFloor</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.window</span> <span class="kn">import</span> <span class="n">Window</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.useconditions</span> <span class="kn">import</span> <span class="n">UseConditions</span>
+<span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utilities</span>
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../../../../code/teaser.examples.verification.html#teaser.examples.verification.verification_ASHRAE_140_920.main">[docs]</a>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">number_of_elements</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+
+    <span class="n">prj</span> <span class="o">=</span> <span class="n">from_scratch</span><span class="p">(</span><span class="n">number_of_elements</span><span class="o">=</span><span class="n">number_of_elements</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="c1"># prj = load_file()</span>
+
+    <span class="n">prj</span><span class="o">.</span><span class="n">used_library_calc</span> <span class="o">=</span> <span class="s2">&quot;IBPSA&quot;</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">number_of_elements_calc</span> <span class="o">=</span> <span class="n">number_of_elements</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">merge_windows_calc</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">weather_file_path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="s2">&quot;inputdata&quot;</span><span class="p">,</span> <span class="s2">&quot;weatherdata&quot;</span><span class="p">,</span> <span class="s2">&quot;ASHRAE140.mos&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">calc_building_parameter</span><span class="p">(</span>
+        <span class="n">number_of_elements</span><span class="o">=</span><span class="n">number_of_elements</span><span class="p">,</span> <span class="n">merge_windows</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">used_library</span><span class="o">=</span><span class="s2">&quot;IBPSA&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">prj</span><span class="o">.</span><span class="n">export_ibpsa</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="from_scratch">
+<a class="viewcode-back" href="../../../../code/teaser.examples.verification.html#teaser.examples.verification.verification_ASHRAE_140_920.from_scratch">[docs]</a>
+<span class="k">def</span> <span class="nf">from_scratch</span><span class="p">(</span><span class="n">number_of_elements</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_default_path</span><span class="p">()):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function creates the test room from scratch.</span>
+
+<span class="sd">    Notes: The standard defines an solar absorption coefficient for interior</span>
+<span class="sd">    surfaces of 0.6. We do not consider this, but we could by multiplying</span>
+<span class="sd">    the solar radiation after the window by 0.6.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    number_of_elements: int</span>
+<span class="sd">        Number of elements of model</span>
+<span class="sd">    path: str (optional)</span>
+<span class="sd">        Path where Project should be stored as .teaserjson</span>
+<span class="sd">    save: bool (optional)</span>
+<span class="sd">        True if Project should be stored as .teaserjson at path</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+
+<span class="sd">    prj: Project</span>
+<span class="sd">        Project that contains the building with the test room</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">()</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ASHRAE140Verification&quot;</span>
+
+    <span class="n">bldg</span> <span class="o">=</span> <span class="n">Building</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">prj</span><span class="p">)</span>
+    <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;TestBuilding&quot;</span>
+
+    <span class="n">tz</span> <span class="o">=</span> <span class="n">ThermalZone</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">bldg</span><span class="p">)</span>
+    <span class="n">tz</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;TestRoom920&quot;</span>
+    <span class="n">tz</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mf">8.0</span> <span class="o">*</span> <span class="mf">6.0</span>
+    <span class="n">tz</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="n">tz</span><span class="o">.</span><span class="n">area</span> <span class="o">*</span> <span class="mf">2.7</span>
+    <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span> <span class="o">=</span> <span class="n">UseConditions</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+    <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">infiltration_rate</span> <span class="o">=</span> <span class="mf">0.41</span>
+
+    <span class="n">roof</span> <span class="o">=</span> <span class="n">Rooftop</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+    <span class="n">roof</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Roof&quot;</span>
+    <span class="n">roof</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mf">8.0</span> <span class="o">*</span> <span class="mf">6.0</span>
+    <span class="n">roof</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+    <span class="n">roof</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">roof</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">roof</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">24.67</span>
+    <span class="n">roof</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="mf">5.13</span>
+    <span class="n">roof</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="mf">4.63</span>
+
+    <span class="n">layer_r1</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">roof</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">layer_r1</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.01</span>
+
+    <span class="n">material_r1</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_r1</span><span class="p">)</span>
+    <span class="n">material_r1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Plasterboard&quot;</span>
+    <span class="n">material_r1</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mf">950.0</span>
+    <span class="n">material_r1</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mf">840.0</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="n">material_r1</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.16</span>
+    <span class="n">material_r1</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+
+    <span class="n">layer_r2</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">roof</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">layer_r2</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.1118</span>
+
+    <span class="n">material_r2</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_r2</span><span class="p">)</span>
+    <span class="n">material_r2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Fiberglass&quot;</span>
+    <span class="n">material_r2</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mi">12</span>
+    <span class="n">material_r2</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mi">840</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="n">material_r2</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.04</span>
+
+    <span class="n">layer_r3</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">roof</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">layer_r3</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.019</span>
+
+    <span class="n">material_r3</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_r3</span><span class="p">)</span>
+    <span class="n">material_r3</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Roofdeck&quot;</span>
+    <span class="n">material_r3</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mi">530</span>
+    <span class="n">material_r3</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mi">900</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="n">material_r3</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.14</span>
+    <span class="n">material_r3</span><span class="o">.</span><span class="n">solar_absorp</span> <span class="o">=</span> <span class="mf">0.6</span>
+    <span class="n">material_r3</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+
+    <span class="n">out_wall_north</span> <span class="o">=</span> <span class="n">OuterWall</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+    <span class="n">out_wall_north</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;OuterWallNorth&quot;</span>
+    <span class="n">out_wall_north</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mf">8.0</span> <span class="o">*</span> <span class="mf">2.7</span>
+    <span class="n">out_wall_north</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">out_wall_north</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="mf">90.0</span>
+    <span class="n">out_wall_north</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">3.16</span>
+    <span class="n">out_wall_north</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">24.67</span>
+    <span class="n">out_wall_north</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="mf">5.13</span>
+    <span class="n">out_wall_north</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="mf">4.63</span>
+
+    <span class="n">layer_own1</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">out_wall_north</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">layer_own1</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+    <span class="n">material_own1</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_own1</span><span class="p">)</span>
+    <span class="n">material_own1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Concrete&quot;</span>
+    <span class="n">material_own1</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mf">1400.0</span>
+    <span class="n">material_own1</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="n">material_own1</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.51</span>
+    <span class="n">material_own1</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+
+    <span class="n">layer_own2</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">out_wall_north</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">layer_own2</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.062</span>
+
+    <span class="n">material_own2</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_own2</span><span class="p">)</span>
+    <span class="n">material_own2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;FoamInsulation&quot;</span>
+    <span class="n">material_own2</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">material_own2</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mi">1400</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="n">material_own2</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.04</span>
+
+    <span class="n">layer_own3</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">out_wall_north</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">layer_own3</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.009</span>
+
+    <span class="n">material_own3</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_own3</span><span class="p">)</span>
+    <span class="n">material_own3</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;WoodSiding&quot;</span>
+    <span class="n">material_own3</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mi">530</span>
+    <span class="n">material_own3</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mi">900</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="n">material_own3</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.14</span>
+    <span class="n">material_own3</span><span class="o">.</span><span class="n">solar_absorp</span> <span class="o">=</span> <span class="mf">0.6</span>
+    <span class="n">material_own3</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+
+    <span class="n">out_wall_east</span> <span class="o">=</span> <span class="n">OuterWall</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+    <span class="n">out_wall_east</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;OuterWallEast&quot;</span>
+    <span class="n">out_wall_east</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mf">6.0</span> <span class="o">*</span> <span class="mf">2.7</span> <span class="o">-</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="mf">2.0</span>  <span class="c1"># minus one window</span>
+    <span class="n">out_wall_east</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mf">90.0</span>
+    <span class="n">out_wall_east</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="mf">90.0</span>
+    <span class="n">out_wall_east</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">3.16</span>
+    <span class="n">out_wall_east</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">24.67</span>
+    <span class="n">out_wall_east</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="mf">5.13</span>
+    <span class="n">out_wall_east</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="mf">4.63</span>
+
+    <span class="n">layer_owe1</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">out_wall_east</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">layer_owe1</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+    <span class="n">material_owe1</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_owe1</span><span class="p">)</span>
+    <span class="n">material_owe1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Concrete&quot;</span>
+    <span class="n">material_owe1</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mf">1400.0</span>
+    <span class="n">material_owe1</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="n">material_owe1</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.51</span>
+    <span class="n">material_owe1</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+
+    <span class="n">layer_owe2</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">out_wall_east</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">layer_owe2</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.062</span>
+
+    <span class="n">material_owe2</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_owe2</span><span class="p">)</span>
+    <span class="n">material_owe2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;FoamInsulation&quot;</span>
+    <span class="n">material_owe2</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">material_owe2</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mi">1400</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="n">material_owe2</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.04</span>
+
+    <span class="n">layer_owe3</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">out_wall_east</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">layer_owe3</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.009</span>
+
+    <span class="n">material_owe3</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_owe3</span><span class="p">)</span>
+    <span class="n">material_owe3</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;WoodSiding&quot;</span>
+    <span class="n">material_owe3</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mi">530</span>
+    <span class="n">material_owe3</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mi">900</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="n">material_owe3</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.14</span>
+    <span class="n">material_owe3</span><span class="o">.</span><span class="n">solar_absorp</span> <span class="o">=</span> <span class="mf">0.6</span>
+    <span class="n">material_owe3</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+
+    <span class="n">out_wall_south</span> <span class="o">=</span> <span class="n">OuterWall</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+    <span class="n">out_wall_south</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;OuterWallSouth&quot;</span>
+    <span class="n">out_wall_south</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mf">8.0</span> <span class="o">*</span> <span class="mf">2.7</span>
+    <span class="n">out_wall_south</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mf">180.0</span>
+    <span class="n">out_wall_south</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="mf">90.0</span>
+    <span class="n">out_wall_south</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">3.16</span>
+    <span class="n">out_wall_south</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">24.67</span>
+    <span class="n">out_wall_south</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="mf">5.13</span>
+    <span class="n">out_wall_south</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="mf">4.63</span>
+
+    <span class="n">layer_ows1</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">out_wall_south</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">layer_ows1</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+    <span class="n">material_ows1</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_ows1</span><span class="p">)</span>
+    <span class="n">material_ows1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Concrete&quot;</span>
+    <span class="n">material_ows1</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mf">1400.0</span>
+    <span class="n">material_ows1</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mf">1000.0</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="n">material_ows1</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.51</span>
+    <span class="n">material_ows1</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+
+    <span class="n">layer_ows2</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">out_wall_south</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">layer_ows2</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.062</span>
+
+    <span class="n">material_ows2</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_ows2</span><span class="p">)</span>
+    <span class="n">material_ows2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;FoamInsulation&quot;</span>
+    <span class="n">material_ows2</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">material_ows2</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mi">1400</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="n">material_ows2</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.04</span>
+
+    <span class="n">layer_ows3</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">out_wall_south</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">layer_ows3</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.009</span>
+
+    <span class="n">material_ows3</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_ows3</span><span class="p">)</span>
+    <span class="n">material_ows3</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;WoodSiding&quot;</span>
+    <span class="n">material_ows3</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mi">530</span>
+    <span class="n">material_ows3</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mi">900</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="n">material_ows3</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.14</span>
+    <span class="n">material_ows3</span><span class="o">.</span><span class="n">solar_absorp</span> <span class="o">=</span> <span class="mf">0.6</span>
+    <span class="n">material_ows3</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+
+    <span class="n">out_wall_west</span> <span class="o">=</span> <span class="n">OuterWall</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+    <span class="n">out_wall_west</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;OuterWallWest&quot;</span>
+    <span class="n">out_wall_west</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">*</span> <span class="mf">2.7</span> <span class="o">-</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="mf">2.0</span>  <span class="c1"># minus one window</span>
+    <span class="n">out_wall_west</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mf">270.0</span>
+    <span class="n">out_wall_west</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="mf">90.0</span>
+    <span class="n">out_wall_west</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">3.16</span>
+    <span class="n">out_wall_west</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">24.67</span>
+    <span class="n">out_wall_west</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="mf">5.13</span>
+    <span class="n">out_wall_west</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="mf">4.63</span>
+
+    <span class="n">layer_oww1</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">out_wall_west</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">layer_oww1</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+    <span class="n">material_oww1</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_oww1</span><span class="p">)</span>
+    <span class="n">material_oww1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Concrete&quot;</span>
+    <span class="n">material_oww1</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mf">1400.0</span>
+    <span class="n">material_oww1</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mf">1000.0</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="n">material_oww1</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.51</span>
+    <span class="n">material_oww1</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+
+    <span class="n">layer_oww2</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">out_wall_west</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">layer_oww2</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.062</span>
+
+    <span class="n">material_oww2</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_oww2</span><span class="p">)</span>
+    <span class="n">material_oww2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;FoamInsulation&quot;</span>
+    <span class="n">material_oww2</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">material_oww2</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mi">1400</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="n">material_oww2</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.04</span>
+
+    <span class="n">layer_oww3</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">out_wall_west</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">layer_oww3</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.009</span>
+
+    <span class="n">material_oww3</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_oww3</span><span class="p">)</span>
+    <span class="n">material_oww3</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;WoodSiding&quot;</span>
+    <span class="n">material_oww3</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mi">530</span>
+    <span class="n">material_oww3</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mi">900</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="n">material_oww3</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.14</span>
+    <span class="n">material_oww3</span><span class="o">.</span><span class="n">solar_absorp</span> <span class="o">=</span> <span class="mf">0.6</span>
+    <span class="n">material_oww3</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+
+    <span class="n">in_wall_floor</span> <span class="o">=</span> <span class="n">Floor</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+    <span class="n">in_wall_floor</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;InnerWallFloor&quot;</span>
+    <span class="n">in_wall_floor</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">*</span> <span class="mi">8</span>
+    <span class="n">in_wall_floor</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.0</span>
+    <span class="n">in_wall_floor</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">in_wall_floor</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">4.13</span>
+    <span class="n">in_wall_floor</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="mf">5.13</span>
+
+    <span class="n">layer_iwf1</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">in_wall_floor</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">layer_iwf1</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.08</span>
+
+    <span class="n">material_iwf1</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_iwf1</span><span class="p">)</span>
+    <span class="n">material_iwf1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Concrete&quot;</span>
+    <span class="n">material_iwf1</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mi">1400</span>
+    <span class="n">material_iwf1</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="n">material_iwf1</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">1.13</span>
+    <span class="n">material_iwf1</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+
+    <span class="n">layer_iwf2</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">in_wall_floor</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">layer_iwf2</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">1.007</span>
+
+    <span class="n">material_iwf2</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_iwf2</span><span class="p">)</span>
+    <span class="n">material_iwf2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Insulation&quot;</span>
+    <span class="n">material_iwf2</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mf">0.000000000001</span>  <span class="c1"># 0.0001, as small as possible</span>
+    <span class="n">material_iwf2</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mf">0.000000000001</span>  <span class="c1"># 0.0001, as small as possible</span>
+    <span class="n">material_iwf2</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.04</span>
+
+    <span class="n">win_1</span> <span class="o">=</span> <span class="n">Window</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+    <span class="n">win_1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;WindowWest&quot;</span>
+    <span class="n">win_1</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="n">win_1</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="mf">90.0</span>
+    <span class="n">win_1</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mf">270.0</span>
+    <span class="n">win_1</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">3.16</span>
+    <span class="n">win_1</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="mf">5.13</span>
+    <span class="n">win_1</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">16.37</span>
+    <span class="n">win_1</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="mf">4.63</span>
+    <span class="n">win_1</span><span class="o">.</span><span class="n">g_value</span> <span class="o">=</span> <span class="mf">0.789</span>
+    <span class="n">win_1</span><span class="o">.</span><span class="n">a_conv</span> <span class="o">=</span> <span class="mf">0.03</span>  <span class="c1"># for the given U-value extracted from VDI 6007-2/-3</span>
+
+    <span class="n">win_1_layer</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">win_1</span><span class="p">)</span>
+    <span class="n">win_1_layer</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">win_1_layer</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.024</span>
+
+    <span class="n">win_1_material</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">win_1_layer</span><span class="p">)</span>
+    <span class="n">win_1_material</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;GlasWindow&quot;</span>
+    <span class="n">win_1_material</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.15</span>
+    <span class="n">win_1_material</span><span class="o">.</span><span class="n">transmittance</span> <span class="o">=</span> <span class="mf">0.907</span>
+    <span class="n">win_1_material</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+
+    <span class="n">win_2</span> <span class="o">=</span> <span class="n">Window</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+    <span class="n">win_2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;WindowEast&quot;</span>
+    <span class="n">win_2</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="n">win_2</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="mf">90.0</span>
+    <span class="n">win_2</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mf">90.0</span>
+    <span class="n">win_2</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">3.16</span>
+    <span class="n">win_2</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="mf">5.13</span>
+    <span class="n">win_2</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">16.37</span>
+    <span class="n">win_2</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="mf">4.63</span>
+    <span class="n">win_2</span><span class="o">.</span><span class="n">g_value</span> <span class="o">=</span> <span class="mf">0.789</span>
+    <span class="n">win_2</span><span class="o">.</span><span class="n">a_conv</span> <span class="o">=</span> <span class="mf">0.03</span>  <span class="c1"># for the given U-value extracted from VDI 6007-2/-3</span>
+
+    <span class="n">win_2_layer</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">win_2</span><span class="p">)</span>
+    <span class="n">win_2_layer</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">win_2_layer</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.024</span>
+
+    <span class="n">win_2_material</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">win_2_layer</span><span class="p">)</span>
+    <span class="n">win_2_material</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;GlasWindow&quot;</span>
+    <span class="n">win_2_material</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.15</span>
+    <span class="n">win_2_material</span><span class="o">.</span><span class="n">transmittance</span> <span class="o">=</span> <span class="mf">0.907</span>
+    <span class="n">win_2_material</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+
+    <span class="c1">#  This is a dummy ground floor to export three and four elements models.</span>
+    <span class="c1">#  Please set values for floor plate in three element and four element</span>
+    <span class="c1">#  models to default.</span>
+
+    <span class="k">if</span> <span class="n">number_of_elements</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">out_wall_gf</span> <span class="o">=</span> <span class="n">GroundFloor</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+        <span class="n">out_wall_gf</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ExtWallGroundFloor&quot;</span>
+        <span class="n">out_wall_gf</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">*</span> <span class="mi">8</span>
+        <span class="n">out_wall_gf</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.0</span>
+        <span class="n">out_wall_gf</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">out_wall_gf</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">4.13</span>
+        <span class="n">out_wall_gf</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="mf">5.13</span>
+
+        <span class="n">layer_ofgw1</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">out_wall_gf</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">layer_ofgw1</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">1.003</span>
+
+        <span class="n">material_ofgw1</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_ofgw1</span><span class="p">)</span>
+        <span class="n">material_ofgw1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Insulation&quot;</span>
+        <span class="n">material_ofgw1</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mf">0.0001</span>  <span class="c1"># as small as possible</span>
+        <span class="n">material_ofgw1</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mf">0.0001</span>  <span class="c1"># as small as possible</span>
+        <span class="n">material_ofgw1</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.04</span>
+
+    <span class="k">if</span> <span class="n">save</span><span class="p">:</span>
+        <span class="n">prj</span><span class="o">.</span><span class="n">save_project</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;ASHRAE140_920&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">prj</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ASHRAE 920: That&#39;s it!&quot;</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
