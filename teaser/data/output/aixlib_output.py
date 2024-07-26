@@ -117,7 +117,8 @@ def export_multizone(buildings, prj, path=None,
         addition=None,
         extra=None)
     _copy_weather_data(prj.weather_file_path, path)
-    _copy_weather_data(prj.t_soil_file_path, path)
+    if prj.t_soil_mode == 3:
+        _copy_weather_data(prj.t_soil_file_path, path)
 
     for i, bldg in enumerate(buildings):
 
@@ -348,8 +349,10 @@ def _copy_weather_data(source_path, destination_path):
     destination_path : str
         path of where the weather file should be placed
     """
-
-    shutil.copy2(source_path, destination_path)
+    try:
+        shutil.copy2(source_path, destination_path)
+    except shutil.SameFileError:
+        pass
 
 
 def _copy_script_unit_tests(destination_path):

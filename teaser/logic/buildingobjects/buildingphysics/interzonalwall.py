@@ -231,6 +231,11 @@ class InterzonalWall(Wall):
                 else:
                     raise ValueError('Instance of InterzonalWall not known')
 
+        if (element_type in ("InnerWall", "Ceiling", "Floor")
+                and "tabula" in construction):
+            # there is no adv_retrofit / retrofit version of inner elements
+            construction = 'tabula_standard'
+
         BuildingElement.load_type_element(
             self,
             year=year,
