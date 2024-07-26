@@ -3,13 +3,16 @@ import os
 
 import pytest
 import helptest
+import pytest
 import pandas as pd
 
+from teaser.data.dataclass import DataClass
+from teaser.data.utilities import ConstructionData
 from teaser.logic import utilities
 from teaser.project import Project
 
-prj = Project(True)
-
+prj = Project(False)
+prj.data = DataClass(construction_data=ConstructionData.iwu_heavy)
 
 class Test_useconditions(object):
     """Unit Tests for TEASER."""
@@ -51,12 +54,12 @@ class Test_useconditions(object):
         Related to issue 553 at https://github.com/RWTH-EBC/TEASER/issues/553
         """
 
-        prj_test = Project(load_data=True)
+        prj_test = Project()
         prj_test.name = "TestAHUProfiles"
 
         prj_test.add_non_residential(
-            method="bmvbs",
-            usage="office",
+            construction_data="iwu_heavy",
+            geometry_data="bmvbs_office",
             name="OfficeBuilding",
             year_of_construction=2015,
             number_of_floors=4,

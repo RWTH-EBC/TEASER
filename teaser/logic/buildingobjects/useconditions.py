@@ -24,6 +24,7 @@ class UseConditions(object):
 
     Note: Most attributes description are translations from DIN V 18599-10
     standard
+
     Attributes
     ----------
     usage: str
@@ -47,11 +48,11 @@ class UseConditions(object):
         cooling from ideal heater and vice versa. This should only be turned
         on if an AHU exists.
     T_threshold_heating: float [K]
-       Threshold for the outside temperature above which the ideal heater is
-       permanently shut down regardless the inside temperature.
-       Default is 15 °C which corresponds to the value for all buildings
-       that are not built
-       according to EnEV standard according to DIN EN 18599-5.
+        Threshold for the outside temperature above which the ideal heater is
+        permanently shut down regardless the inside temperature.
+        Default is 15 °C which corresponds to the value for all buildings
+        that are not built
+        according to EnEV standard according to DIN EN 18599-5.
     T_threshold_cooling: float [K]
         Threshold for the outside temperature below which the ideal cooler is
         permanently shut down regardless the inside temperature.
@@ -136,20 +137,24 @@ class UseConditions(object):
         Zone specific minimum specific air flow supplied by the AHU.
         AixLib: Used on Multizone level for central AHU to determine total
         volume flow of each zone.
-            Note: The AixLib parameter "WithProfile" determines whether the
-            (v_flow_profile combined with "min_ahu and max_ahu") or the
-            (persons_profile combined with "min_ahu and max_ahu")
-            is used for the AHU supply flow calculations.
-            Per default: (v_flow_profile combined with "min_ahu and max_ahu")
+
+        - **Note**: The AixLib parameter "WithProfile" determines whether the
+          (v_flow_profile combined with "min_ahu and max_ahu") or the
+          (persons_profile combined with "min_ahu and max_ahu")
+          is used for the AHU supply flow calculations.
+          Per default: (v_flow_profile combined with "min_ahu and max_ahu")
+
     max_ahu : float [m3/(m2*h)]
         Zone specific maximum specific air flow supplied by the AHU.
         AixLib: Used on Multizone level for central AHU to determine total
         volume flow of each zone.
-            Note: The AixLib parameter "WithProfile" determines whether the
-            (v_flow_profile combined with "min_ahu and max_ahu") or the
-            (persons_profile combined with "min_ahu and max_ahu")
-            is used for the AHU supply flow calculations.
-            Per default: (v_flow_profile combined with "min_ahu and max_ahu")
+
+        - **Note**: The AixLib parameter "WithProfile" determines whether the
+          (v_flow_profile combined with "min_ahu and max_ahu") or the
+          (persons_profile combined with "min_ahu and max_ahu")
+          is used for the AHU supply flow calculations.
+          Per default: (v_flow_profile combined with "min_ahu and max_ahu")
+
     with_ahu : boolean
         Zone is connected to central air handling unit or not
         AixLib: Used on Multizone level for central AHU.
@@ -157,7 +162,7 @@ class UseConditions(object):
         choose whether window opening should be regarded.
         true = natural infiltration + ventilation due to a AHU
         false = natural infiltration + ventilation due to a AHU
-            + window infiltration calculated by window opening model
+        + window infiltration calculated by window opening model
         AixLib: Used on Zone level for ventilation.
     base_infiltration : float [1/h]
         base value for the natural infiltration without window openings
@@ -645,7 +650,7 @@ class UseConditions(object):
     def schedules(self):
         self._schedules = pd.DataFrame(
             index=pd.date_range("2019-01-01 00:00:00", periods=8760,
-                                freq="H").to_series().dt.strftime(
+                                freq="h").to_series().dt.strftime(
                 "%m-%d %H:%M:%S"),
             data={
                 "heating_profile": list(

@@ -1,3 +1,4 @@
+
 from teaser.project import Project
 prj = Project(False)
 
@@ -12,8 +13,8 @@ class Test_tabula_sfh(object):
         prj.set_default()
         prj.data = None
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1858,
             number_of_floors=2,
@@ -41,8 +42,8 @@ class Test_tabula_sfh(object):
         Test for area estimation of tabula sfh
         """
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1918,
             number_of_floors=2,
@@ -70,8 +71,8 @@ class Test_tabula_sfh(object):
         Test for area estimation of tabula sfh
         """
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1947,
             number_of_floors=2,
@@ -99,8 +100,8 @@ class Test_tabula_sfh(object):
         Test for area estimation of tabula sfh
         """
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1956,
             number_of_floors=2,
@@ -128,8 +129,8 @@ class Test_tabula_sfh(object):
         Test for area estimation of tabula sfh
         """
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1967,
             number_of_floors=2,
@@ -157,8 +158,8 @@ class Test_tabula_sfh(object):
         Test for area estimation of tabula sfh
         """
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1977,
             number_of_floors=2,
@@ -186,8 +187,8 @@ class Test_tabula_sfh(object):
         Test for area estimation of tabula sfh
         """
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1982,
             number_of_floors=2,
@@ -215,8 +216,8 @@ class Test_tabula_sfh(object):
         Test for area estimation of tabula sfh
         """
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1993,
             number_of_floors=2,
@@ -244,8 +245,8 @@ class Test_tabula_sfh(object):
         Test for area estimation of tabula sfh
         """
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=2000,
             number_of_floors=2,
@@ -273,8 +274,8 @@ class Test_tabula_sfh(object):
         Test for area estimation of tabula sfh
         """
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=2008,
             number_of_floors=2,
@@ -302,8 +303,8 @@ class Test_tabula_sfh(object):
         Test for area estimation of tabula sfh
         """
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=2014,
             number_of_floors=2,
@@ -329,8 +330,8 @@ class Test_tabula_sfh(object):
     def test_tabula_uvalue_standard_sfh_1859(self):
 
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1858,
             number_of_floors=2,
@@ -365,8 +366,8 @@ class Test_tabula_sfh(object):
     def test_tabula_uvalue_standard_sfh_1918(self):
 
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1918,
             number_of_floors=2,
@@ -385,12 +386,12 @@ class Test_tabula_sfh(object):
 
         for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
 
-            if "_1_" in floor.construction_type:
+            if "_1_" in floor.construction_data:
 
                 assert round(1 / (floor.r_conduc * floor.area),
                              1) == round((1 / (1 / 0.88 - 0.34)), 1)
 
-            elif "_2_" in floor.construction_type:
+            elif "_2_" in floor.construction_data:
 
                 assert round(1 / (floor.r_conduc * floor.area),
                              1) == round((1 / (1 / 1.2 - 0.34)), 1)
@@ -408,8 +409,8 @@ class Test_tabula_sfh(object):
     def test_tabula_uvalue_standard_sfh_1948(self):
 
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1947,
             number_of_floors=2,
@@ -443,8 +444,8 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_standard_sfh_1957(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1956,
             number_of_floors=2,
@@ -462,12 +463,12 @@ class Test_tabula_sfh(object):
             1) == round((1 / (1 / 1.4 - 0.17)), 1)
 
         for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
-            if "_1_" in floor.construction_type:
+            if "_1_" in floor.construction_data:
 
                 assert round(1 / (floor.r_conduc * floor.area),
                              1) == round((1 / (1 / 0.78 - 0.34)), 1)
 
-            elif "_2_" in floor.construction_type:
+            elif "_2_" in floor.construction_data:
 
                 assert round(1 / (floor.r_conduc * floor.area),
                              1) == round((1 / (1 / 1.0 - 0.34)), 1)
@@ -484,8 +485,8 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_standard_sfh_1968(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1967,
             number_of_floors=2,
@@ -499,11 +500,11 @@ class Test_tabula_sfh(object):
 
         for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
 
-            if "_1_" in wall.construction_type:
+            if "_1_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 1.2 - 0.17)), 1)
 
-            if "_2_" in wall.construction_type:
+            if "_2_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
@@ -524,8 +525,8 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_standard_sfh_1978(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1977,
             number_of_floors=2,
@@ -543,12 +544,12 @@ class Test_tabula_sfh(object):
             1) == round((1 / (1 / 1.0 - 0.17)), 1)
 
         for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
-            if "_1_" in floor.construction_type:
+            if "_1_" in floor.construction_data:
 
                 assert round(1 / (floor.r_conduc * floor.area),
                              1) == round((1 / (1 / 0.77 - 0.34)), 1)
 
-            elif "_2_" in floor.construction_type:
+            elif "_2_" in floor.construction_data:
 
                 assert round(1 / (floor.r_conduc * floor.area),
                              1) == round((1 / (1 / 1.0 - 0.17)), 1)
@@ -565,8 +566,8 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_standard_sfh_1983(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1982,
             number_of_floors=2,
@@ -600,8 +601,8 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_standard_sfh_1994(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1993,
             number_of_floors=2,
@@ -635,8 +636,8 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_standard_sfh_2001(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=2000,
             number_of_floors=2,
@@ -670,8 +671,8 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_standard_sfh_2009(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=2008,
             number_of_floors=2,
@@ -705,8 +706,8 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_standard_sfh_2015(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=2014,
             number_of_floors=2,
@@ -740,8 +741,8 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_standard_sfh_2100(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=2099,
             number_of_floors=2,
@@ -776,14 +777,14 @@ class Test_tabula_sfh(object):
     def test_tabula_uvalue_retrofit_sfh_1859(self):
 
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1858,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219,
-            construction_type="tabula_retrofit")
+            net_leased_area=219
+            )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -812,14 +813,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_sfh_1918(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1918,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219,
-            construction_type="tabula_retrofit")
+            net_leased_area=219
+            )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -832,11 +833,11 @@ class Test_tabula_sfh(object):
             1) == round((1 / (1 / 0.25 - 0.17)), 1)
 
         for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
-            if "_1_" in floor.construction_type:
+            if "_1_" in floor.construction_data:
                 assert round(1 / (floor.r_conduc * floor.area),
                              1) == round((1 / (1 / 0.29 - 0.34)), 1)
 
-            elif "_2_" in floor.construction_type:
+            elif "_2_" in floor.construction_data:
 
                 assert round(1 / (floor.r_conduc * floor.area),
                              1) == round((1 / (1 / 0.32 - 0.34)), 1)
@@ -853,13 +854,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_sfh_1948(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1947,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -888,13 +890,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_sfh_1957(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1956,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -908,11 +911,11 @@ class Test_tabula_sfh(object):
 
         for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
 
-            if "_1_" in floor.construction_type:
+            if "_1_" in floor.construction_data:
                 assert round(1 / (floor.r_conduc * floor.area),
                              1) == round((1 / (1 / 0.28 - 0.34)), 1)
 
-            elif "_2_" in floor.construction_type:
+            elif "_2_" in floor.construction_data:
                 assert round(1 / (floor.r_conduc * floor.area),
                              1) == round((1 / (1 / 0.31 - 0.34)), 1)
 
@@ -928,13 +931,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_sfh_1968(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1967,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -943,11 +947,11 @@ class Test_tabula_sfh(object):
 
         for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
 
-            if "_1_" in wall.construction_type:
+            if "_1_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.23 - 0.17)), 1)
 
-            if "_2_" in wall.construction_type:
+            if "_2_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.21 - 0.17)), 1)
 
@@ -968,13 +972,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_sfh_1978(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1977,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -987,10 +992,10 @@ class Test_tabula_sfh(object):
             1) == round((1 / (1 / 0.22 - 0.17)), 1)
 
         for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
-            if "_1_" in floor.construction_type:
+            if "_1_" in floor.construction_data:
                 assert round(1 / (floor.r_conduc * floor.area),
                              1) == round((1 / (1 / 0.28 - 0.34)), 1)
-            elif "_2_" in floor.construction_type:
+            elif "_2_" in floor.construction_data:
                 assert round(1 / (floor.r_conduc * floor.area),
                              1) == round((1 / (1 / 0.3 - 0.34)), 1)
         assert round(
@@ -1005,13 +1010,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_sfh_1983(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1982,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1040,13 +1046,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_sfh_1994(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1993,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1075,13 +1082,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_sfh_2001(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=2000,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1110,13 +1118,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_sfh_2009(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=2008,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1145,13 +1154,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_sfh_2015(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=2014,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1180,13 +1190,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_sfh_2100(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=2099,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1216,14 +1227,14 @@ class Test_tabula_sfh(object):
     def test_tabula_uvalue_retrofit_adv_sfh_1859(self):
 
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_adv_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1858,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219,
-            construction_type="tabula_adv_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1252,14 +1263,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_adv_sfh_1918(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_adv_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1918,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219,
-            construction_type="tabula_adv_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1272,11 +1283,11 @@ class Test_tabula_sfh(object):
             1) == round((1 / (1 / 0.13 - 0.17)), 1)
 
         for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
-            if "_1_" in floor.construction_type:
+            if "_1_" in floor.construction_data:
                 assert round(1 / (floor.r_conduc * floor.area),
                              1) == round((1 / (1 / 0.22 - 0.34)), 1)
 
-            elif "_2_" in floor.construction_type:
+            elif "_2_" in floor.construction_data:
                 assert round(1 / (floor.r_conduc * floor.area),
                              1) == round((1 / (1 / 0.23 - 0.34)), 1)
 
@@ -1292,14 +1303,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_adv_sfh_1948(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_adv_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1947,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219,
-            construction_type="tabula_adv_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1328,14 +1339,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_adv_sfh_1957(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_adv_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1956,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219,
-            construction_type="tabula_adv_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1349,11 +1360,11 @@ class Test_tabula_sfh(object):
 
         for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
 
-            if "_1_" in floor.construction_type:
+            if "_1_" in floor.construction_data:
                 assert round(1 / (floor.r_conduc * floor.area),
                              1) == round((1 / (1 / 0.21 - 0.34)), 1)
 
-            if "_2_" in floor.construction_type:
+            if "_2_" in floor.construction_data:
                 assert round(1 / (floor.r_conduc * floor.area),
                              1) == round((1 / (1 / 0.23 - 0.34)), 1)
 
@@ -1369,13 +1380,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_adv_sfh_1968(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_adv_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1967,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_adv_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1384,11 +1396,11 @@ class Test_tabula_sfh(object):
 
         for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
 
-            if "_1_" in wall.construction_type:
+            if "_1_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.13 - 0.34)), 1)
 
-            if "_2_" in wall.construction_type:
+            if "_2_" in wall.construction_data:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.12 - 0.34)), 1)
 
@@ -1409,13 +1421,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_adv_sfh_1978(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_adv_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1977,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_adv_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1429,11 +1442,11 @@ class Test_tabula_sfh(object):
 
         for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
 
-            if "_1_" in floor.construction_type:
+            if "_1_" in floor.construction_data:
                 assert round(1 / (floor.r_conduc * floor.area),
                              1) == round((1 / (1 / 0.21 - 0.34)), 1)
 
-            if "_2_" in floor.construction_type:
+            if "_2_" in floor.construction_data:
                 assert round(1 / (floor.r_conduc * floor.area),
                              1) == round((1 / (1 / 0.23 - 0.34)), 1)
 
@@ -1449,13 +1462,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_adv_sfh_1983(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_adv_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1982,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_adv_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1484,13 +1498,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_adv_sfh_1994(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_adv_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1993,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_adv_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1519,13 +1534,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_adv_sfh_2001(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_adv_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=2000,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_adv_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1554,13 +1570,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_adv_sfh_2009(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_adv_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=2008,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_adv_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1589,13 +1606,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_adv_sfh_2015(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_adv_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=2014,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_adv_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1624,13 +1642,14 @@ class Test_tabula_sfh(object):
 
     def test_tabula_uvalue_retrofit_adv_sfh_2100(self):
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_adv_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=2100,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219, construction_type="tabula_adv_retrofit")
+            net_leased_area=219
+        )
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
@@ -1664,40 +1683,40 @@ class Test_tabula_sfh(object):
         prj.set_default()
         prj.data = None
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1858,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219,
-            construction_type='tabula_standard')
+            net_leased_area=219
+        )
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1858,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219,
-            construction_type='tabula_retrofit')
+            net_leased_area=219
+        )
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_adv_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1858,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219,
-            construction_type='tabula_adv_retrofit')
+            net_leased_area=219
+        )
 
         prj.retrofit_all_buildings(type_of_retrofit='retrofit')
 
         prj.set_default()
         prj.data = None
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_standard',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1858,
             number_of_floors=2,
@@ -1711,14 +1730,14 @@ class Test_tabula_sfh(object):
             material="None")
 
         prj.add_residential(
-            method='tabula_de',
-            usage='single_family_house',
+            construction_data='tabula_de_retrofit',
+            geometry_data='tabula_de_single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1858,
             number_of_floors=2,
             height_of_floors=3.2,
             net_leased_area=219,
-            construction_type="tabula_retrofit")
+            )
 
         prj.retrofit_all_buildings(
             type_of_retrofit="adv_retrofit")

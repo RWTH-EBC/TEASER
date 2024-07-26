@@ -69,7 +69,7 @@ def get_full_path(rel_path):
         filename
 
     Returns
-    ----------
+    -------
     full_path : str
 
     """

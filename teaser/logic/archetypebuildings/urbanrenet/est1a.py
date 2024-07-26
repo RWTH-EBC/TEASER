@@ -14,7 +14,7 @@ from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
-
+import teaser.data.utilities as datahandling
 
 class EST1a(Residential):
     """Archetype for Urban Fabric Type EST1a.
@@ -49,29 +49,33 @@ class EST1a(Residential):
         central Air Handling units. Default is False.
     internal_gains_mode: int [1, 2, 3]
         mode for the internal gains calculation done in AixLib:
-        1: Temperature and activity degree dependent heat flux calculation for persons. The
+
+        1. Temperature and activity degree dependent heat flux calculation for persons. The
            calculation is based on  SIA 2024 (default)
-        2: Temperature and activity degree independent heat flux calculation for persons, the max.
+        2. Temperature and activity degree independent heat flux calculation for persons, the max.
            heatflowrate is prescribed by the parameter
            fixed_heat_flow_rate_persons.
-        3: Temperature and activity degree dependent calculation with
+        3. Temperature and activity degree dependent calculation with
            consideration of moisture and co2. The moisture calculation is
            based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
            Engineering ToolBox (2004) and regards only persons.
+
     neighbour_buildings : int
         Number of neighbour buildings. CAUTION: this will not change
         the orientation of the buildings wall, but just the overall
         exterior wall and window area(!) (default = 0)
-            0: no neighbour
-            1: one neighbour
-            2: two neighbours
-    construction_type : str
-        Construction type of used wall constructions default is "heavy")
-            heavy: heavy construction
-            light: light construction
 
-    Note
-    ----------
+        0. no neighbour
+        1. one neighbour
+        2. two neighbours
+
+    construction_data : str
+        Construction type of used wall constructions default is "heavy")
+            iwu_heavy: heavy construction
+            iwu_light: light construction
+
+    Notes
+    -----
     The listed attributes are just the ones that are set by the user
     calculated values are not included in this list. Changing these values is
     expert mode.
@@ -124,7 +128,8 @@ class EST1a(Residential):
             with_ahu=False,
             internal_gains_mode=1,
             neighbour_buildings=None,
-            construction_type=None):
+            construction_data=None
+    ):
         """Constructor of EST1a
         """
 
@@ -137,7 +142,7 @@ class EST1a(Residential):
             internal_gains_mode)
 
         self.neighbour_buildings = neighbour_buildings
-        self.construction_type = construction_type
+        self.construction_data = construction_data
         self.number_of_apartments = 1
         self.number_of_floors = number_of_floors
         self.height_of_floors = height_of_floors
@@ -259,7 +264,7 @@ class EST1a(Residential):
                 # create wall and set building elements
                 outer_wall = OuterWall(zone)
                 outer_wall.load_type_element(self.year_of_construction,
-                                             self.construction_type)
+                                             self.construction_data.value)
                 outer_wall.name = key
                 outer_wall.tilt = value[0]
                 outer_wall.orientation = value[1]
@@ -297,7 +302,7 @@ class EST1a(Residential):
             for zone in self.thermal_zones:
                 roof = Rooftop(zone)
                 roof.load_type_element(self.year_of_construction,
-                                       self.construction_type)
+                                       self.construction_data.value)
                 roof.name = key
                 roof.tilt = value[0]
                 roof.orientation = value[1]
@@ -309,7 +314,7 @@ class EST1a(Residential):
             for zone in self.thermal_zones:
                 ground_floor = GroundFloor(zone)
                 ground_floor.load_type_element(self.year_of_construction,
-                                               self.construction_type)
+                                               self.construction_data.value)
                 ground_floor.name = key
                 ground_floor.tilt = value[0]
                 ground_floor.orientation = value[1]
@@ -319,7 +324,7 @@ class EST1a(Residential):
             for zone in self.thermal_zones:
                 inner_wall = InnerWall(zone)
                 inner_wall.load_type_element(self.year_of_construction,
-                                             self.construction_type)
+                                             self.construction_data.value)
                 inner_wall.name = key
                 inner_wall.tilt = value[0]
                 inner_wall.orientation = value[1]
@@ -332,7 +337,7 @@ class EST1a(Residential):
                 for zone in self.thermal_zones:
                     ceiling = Ceiling(zone)
                     ceiling.load_type_element(self.year_of_construction,
-                                              self.construction_type)
+                                              self.construction_data.value)
                     ceiling.name = key
                     ceiling.tilt = value[0]
                     ceiling.orientation = value[1]
@@ -343,7 +348,7 @@ class EST1a(Residential):
                 for zone in self.thermal_zones:
                     floor = Floor(zone)
                     floor.load_type_element(self.year_of_construction,
-                                            self.construction_type)
+                                            self.construction_data.value)
                     floor.name = key
                     floor.tilt = value[0]
                     floor.orientation = value[1]
@@ -361,18 +366,12 @@ class EST1a(Residential):
             zone.set_volume_zone()
 
     @property
-    def construction_type(self):
-        return self._construction_type
+    def construction_data(self):
+        return self._construction_data
 
-    @construction_type.setter
-    def construction_type(self, value):
-        if value is not None:
-            if value == "heavy" or value == "light":
-                self._construction_type = value
-            else:
-                raise ValueError("Construction_type has to be light or heavy")
-        else:
-            self._construction_type = "heavy"
+    @construction_data.setter
+    def construction_data(self, value):
+        self._construction_data = datahandling.check_construction_data_setter_iwu(value)
 
     @property
     def neighbour_buildings(self):

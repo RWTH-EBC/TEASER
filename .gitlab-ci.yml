@@ -1,46 +1,40 @@
-test3.6-subset:
-  image: python:3.6
-  stage: test
-  script:
+stages:
+ - test
+ - doc
+ - code_quality
+ - examples
+ - build
+ - release
+ - deploy
 
-    - pip install --upgrade pip setuptools wheel
-    - pip install --only-binary=numpy,scipy numpy scipy
-    - pip install pyxb
-    - pip install pytest
-    - pip install PyGithub==1.55
-    - pip install flake8==3.4.1
-    - pip install -e .
-    - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests,.eggs --max-line-length=120
-    - py.test --ignore=tests/test_modelicaversion.py
+variables:
+  COVERAGE_TYPE: "NotDymola"
+  PAGES_BRANCH: master
+  PYTHON_VERSION: "registry.git.rwth-aachen.de/ebc/ebc_all/gitlab_ci/templates:python_3.9"
+  PYTHON_PACKAGE_NAME: "teaser"
+  TEST_ENGINE: "PYTEST"
+  GIT_REPO: "RWTH-EBC/TEASER"
+  EXAMPLE_CONVERTER_CONFIG: teaser/examples/converter.toml
+  EXTRA_REQUIREMENTS_PIP: "[report]"
 
-test3.6-full:
-  image: python:3.6
-  stage: test
-  only:
-    - master
-  script:
-
-    - pip install --upgrade pip setuptools wheel
-    - pip install --only-binary=numpy,scipy numpy scipy
-    - pip install pyxb
-    - pip install pytest
-    - pip install PyGithub==1.55
-    - pip install flake8==3.4.1
-    - pip install -e .
-    - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests,.eggs --max-line-length=120
-    - py.test
-
-test3.7:
-  image: python:3.7
-  stage: test
-  script:
-
-    - pip install --upgrade pip setuptools wheel
-    - pip install --only-binary=numpy,scipy numpy scipy
-    - pip install pyxb
-    - pip install pytest
-    - pip install PyGithub==1.55
-    - pip install flake8==3.4.1
-    - pip install -e .
-    - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests,.eggs --max-line-length=120
-    - py.test --ignore=tests/test_modelicaversion.py
+include:
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file: 'python/code-quality/pylint.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file: 'python/doc/sphinxdoc.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file: 'python/build/build.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file: 'pages/gl-pages.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file: 'pages/gh-pages.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file: 'python/tests/tests.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file: 'python/tests/coverage.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file: 'python/pypi-release/release.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file: 'python/examples/examples.gitlab-ci.yml'
+  - template: Dependency-Scanning.gitlab-ci.yml
+  - template: SAST.gitlab-ci.yml

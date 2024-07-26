@@ -1,12 +1,28 @@
 from setuptools import setup
 
+
+# read the contents of your README file
+from pathlib import Path
+
+readme_path = Path(__file__).parent.joinpath("README.md")
+with open(readme_path, "r", encoding="utf-8") as file:
+    long_description = file.read()
+
+with open(Path(__file__).parent.joinpath("teaser", "__init__.py"), "r") as file:
+    for line in file.readlines():
+        if line.startswith("__version__"):
+            VERSION = line.replace("__version__", "").split("=")[1].strip().replace("'", "").replace('"', '')
+
 setup(
     name="teaser",
-    version="0.7.6",
+    version=VERSION,
     description="Tool for Energy Analysis and Simulation for " "Efficient Retrofit ",
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     url="https://github.com/RWTH-EBC/TEASER",
+    download_url=f'https://github.com/RWTH-EBC/TEASER/archive/refs/tags/{VERSION}.tar.gz',
     author="RWTH Aachen University, E.ON Energy Research Center, "
-    "Institute of Energy Efficient Buildings and Indoor Climate",
+           "Institute of Energy Efficient Buildings and Indoor Climate",
     author_email="ebc-teaser@eonerc.rwth-aachen.de",
     license="MIT",
     packages=[
@@ -75,12 +91,16 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: Microsoft :: Windows",
         "Operating System :: POSIX :: Linux",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Intended Audience :: Science/Research",
         "Topic :: Software Development :: Code Generators",
         "Topic :: Scientific/Engineering",
         "Topic :: Utilities",
     ],
-    install_requires=["mako", "pytest", "pandas", "numpy", "plotly"],
+    install_requires=["mako", "pytest", "pandas", "numpy"],
+    extras_require={"report": ["plotly"]}
 )

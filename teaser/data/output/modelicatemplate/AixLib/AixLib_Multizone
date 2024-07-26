@@ -172,6 +172,15 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
       columns=2:${len(bldg.thermal_zones)+1})
       "Set points for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
+  % if use_postprocessing_calc:
+    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.MultizonePostProcessing
+      multizonePostProcessing(
+      VAir=multizone.VAir,
+      numZones=multizone.numZones,
+      zoneParam=multizone.zoneParam,
+      calc_rel_humidity=multizone.use_moisture_balance)
+      annotation (Placement(transformation(extent={{82,80},{102,100}})));
+  % endif
 
 % if bldg.type_of_building == "SwimmingFacility":
      Modelica.Blocks.Sources.CombiTimeTable openingHours(
@@ -211,6 +220,7 @@ equation
 
   connect(tableTSetCool.y, multizone.TSetCool) annotation (Line(points={{55.2,-58},
           {36.8,-58},{36.8,-9}}, color={0,0,127}));
+
 
 % if use_postprocessing_calc:
   connect(multizone.TAir, multizonePostProcessing.TAir) annotation (Line(points={{51,4.95},
@@ -255,6 +265,11 @@ equation
       __Dymola_Commands(file=
         "Resources/Scripts/Dymola/${bldg.name}/${bldg.name}.mos"
       "Simulate and Plot"),
+    % if export_vars:
+    __Dymola_selections={
+        Selection(name="BuildingSimulationOutputs",
+        match={${export_vars}})},
+    % endif
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
         graphics={
         Line(points={{80,-82}}, color={28,108,200}),

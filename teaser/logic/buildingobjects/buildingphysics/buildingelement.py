@@ -30,7 +30,7 @@ class BuildingElement(object):
         Random id for the distinction between different elements.
     name : str
         Individual name
-    construction_type : str
+    construction_data : str
         Type of construction (e.g. "heavy" or "light"). Needed for
         distinction between different constructions types in the same
         building age period.
@@ -120,7 +120,7 @@ class BuildingElement(object):
         self.internal_id = random.random()
 
         self.name = None
-        self._construction_type = None
+        self._construction_data = None
         self._year_of_retrofit = None
         self._year_of_construction = None
         self.building_age_group = [None, None]
@@ -188,6 +188,7 @@ class BuildingElement(object):
             self.r_inner_comb + self.r_conduc + self.r_outer_comb))
         self.u_value = self.ua_value / self.area
 
+
     def gather_element_properties(self):
         """Helper function for matrix calculation.
 
@@ -196,7 +197,7 @@ class BuildingElement(object):
         equivalent_res(t_bt) especially for walls.
 
         Returns
-        ----------
+        -------
         number_of_layer : int
             number of layer (length of layer list)
         density : np.array
@@ -642,10 +643,10 @@ class BuildingElement(object):
                 raise ValueError("Can't convert year to int")
 
     @property
-    def construction_type(self):
-        return self._construction_type
+    def construction_data(self):
+        return self._construction_data
 
-    @construction_type.setter
-    def construction_type(self, value):
+    @construction_data.setter
+    def construction_data(self, value):
 
-        self._construction_type = value
+        self._construction_data = value

@@ -1,17 +1,19 @@
 """This module holds file paths and bindings for json data."""
 import os
 import sys
+import warnings
+
 import teaser.logic.utilities as utils
 import json
 import collections
 
+from teaser.data.utilities import ConstructionData
 v = sys.version_info
 if v >= (2, 7):
     try:
         FileNotFoundError
     except NameError:
         FileNotFoundError = IOError
-
 
 class DataClass(object):
     """Class for JSON data.
@@ -21,17 +23,17 @@ class DataClass(object):
 
     Parameters
     ----------
-    used_statistics : str
-        This parameter indicates which statistical data about building
-        elements should be used. Use 'iwu' or 'tabula_de'.
+    construction_data : ConstructionData
+        The prefix of this parameter indicates which statistical data about building
+        elements should be used. Its type is the enum class ConstructionData.
 
     Attributes
     ----------
     element_bind : collections.OrderedDict
         Ordered dictionary of the TypeBuildingElements binding.
     path_tb : str
-        Full path to TypeBuildingElements.json. Default is
-        teaser/data/input/inputdata/TypeBuildingElements.json.
+        Full path to TypeElements_IWU.json. Default is
+        teaser/data/input/inputdata/TypeElements_IWU.json.
     material_bind : collections.OrderedDict
         Ordered dictionary of the Material binding.
     path_mat : str
@@ -45,30 +47,36 @@ class DataClass(object):
 
     """
 
-    def __init__(self, used_statistic="iwu"):
+    def __init__(self, construction_data: ConstructionData) -> object:
         """Construct DataClass."""
-        self.used_statistic = used_statistic
         self.element_bind = None
-        if self.used_statistic == "iwu":
+        if construction_data.is_iwu():
             self.path_tb = utils.get_full_path(
-                "data/input/inputdata/TypeBuildingElements.json"
+                "data/input/inputdata/TypeElements_IWU.json"
             )
             self.load_tb_binding()
-        elif self.used_statistic == "tabula_de":
+        elif construction_data.is_tabula_de():
             self.path_tb = utils.get_full_path(
                 os.path.join(
                     "data", "input", "inputdata", "TypeElements_TABULA_DE.json"
                 )
             )
             self.load_tb_binding()
-        elif self.used_statistic == "tabula_dk":
+        elif construction_data.is_tabula_dk():
             self.path_tb = utils.get_full_path(
                 os.path.join(
                     "data", "input", "inputdata", "TypeElements_TABULA_DK.json"
                 )
             )
             self.load_tb_binding()
-        elif self.used_statistic is None:
+        elif construction_data.is_kfw():
+            self.path_tb = utils.get_full_path(
+                os.path.join(
+                    "data", "input", "inputdata", "TypeElements_KFW.json"
+                )
+            )
+            self.load_tb_binding()
+        elif construction_data is None:
             pass
         self.material_bind = None
         self.path_mat = utils.get_full_path(
@@ -85,7 +93,7 @@ class DataClass(object):
         if self.path_tb.endswith("json"):
             if os.path.isfile(self.path_tb):
                 try:
-                    with open(self.path_tb, "r+") as f:
+                    with open(self.path_tb, "r") as f:
                         self.element_bind = json.load(
                             f, object_pairs_hook=collections.OrderedDict
                         )
@@ -94,14 +102,13 @@ class DataClass(object):
             else:
                 with open(self.path_tb, "w") as f:
                     self.element_bind = collections.OrderedDict()
-                    self.element_bind["version"] = "0.7"
 
     def load_uc_binding(self):
         """Load UseConditions json into binding classes."""
         if self.path_uc.endswith("json"):
             if os.path.isfile(self.path_uc):
                 try:
-                    with open(self.path_uc, "r+") as f:
+                    with open(self.path_uc, "r") as f:
                         self.conditions_bind = json.load(
                             f, object_pairs_hook=collections.OrderedDict
                         )
@@ -110,14 +117,13 @@ class DataClass(object):
             else:
                 with open(self.path_uc, "w") as f:
                     self.conditions_bind = collections.OrderedDict()
-                    self.conditions_bind["version"] = "0.7"
 
     def load_mat_binding(self):
         """Load MaterialTemplates json into binding classes."""
         if self.path_mat.endswith("json"):
             if os.path.isfile(self.path_mat):
                 try:
-                    with open(self.path_mat, "r+") as f:
+                    with open(self.path_mat, "r") as f:
                         self.material_bind = json.load(
                             f, object_pairs_hook=collections.OrderedDict
                         )
@@ -126,4 +132,3 @@ class DataClass(object):
             else:
                 with open(self.path_mat, "w") as f:
                     self.material_bind = collections.OrderedDict()
-                    self.material_bind["version"] = "0.7"
