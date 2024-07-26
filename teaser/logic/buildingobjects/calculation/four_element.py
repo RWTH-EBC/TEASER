@@ -589,6 +589,8 @@ class FourElement(object):
         self.orientation_facade = []
         self.heat_load = 0.0
         self.cool_load = 0.0
+        self.heat_load_outside_factor = 0.0
+        self.heat_load_ground_factor = 0.0
 
     def calc_attributes(self):
         """Calls all necessary function to calculate model attributes"""

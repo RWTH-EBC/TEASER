@@ -176,7 +176,9 @@ def export_multizone(
             out_file.write(model_template.render_unicode(
                 bldg=bldg,
                 weather=bldg.parent.weather_file_path,
-                modelica_info=bldg.parent.modelica_info))
+                modelica_info=bldg.parent.modelica_info,
+                use_postprocessing_calc=use_postprocessing_calc,
+                export_vars=export_vars))
             out_file.close()
 
         dir_resources = os.path.join(path, "Resources")
