@@ -62,6 +62,8 @@ class Pool(object):
         Possible inputs: 'Fresh water" or any other
     volume_flow : float
         Volume flow of water treatment according to DIN 19643-1 in m3/h"
+    night_set_back_volume_flow : Boolean
+        If true, a night set back mode for the volume flow exists
     volume_flow_night : float
         Volume flow of water treatment at night according to DIN 19643-1 in m3/h
     use_partial_load : Boolean
@@ -135,29 +137,30 @@ class Pool(object):
         self.depth = None
         self.temperature = None
         self.temperature_air = 303.15+2
-        self.filter_type = 'Open suction filter'
-        self.filter_combination = 'without_ozone'
-        self.water_type = 'Fresh water'
+        self.filter_type = None
+        self.filter_combination = None
+        self.water_type = None
         self.volume_flow = None
+        self.night_set_back_volume_flow = None
         self.volume_flow_night = None
         self.use_partial_load = True
         self.volume_storage = None
         self.beta_in_use = None
         self.use_ideal_heat_exchanger = True
-        self.dp_heat_exchanger = 350
-        self.use_heat_recovery = True
-        self.eta_heat_recovery = 0.8
-        self.use_pool_cover = False
-        self.use_wave_pool = False
-        self.wave_height = 0
-        self.wave_width = 0
-        self.wave_period = 1800
-        self.wave_period_start = 600
-        self.wave_share_period = 10/30*100
-        self.use_water_recycling = False
-        self.x_recycling = 0.8
+        self.dp_heat_exchanger = None
+        self.use_heat_recovery = None
+        self.eta_heat_recovery = None
+        self.use_pool_cover = None
+        self.use_wave_pool = None
+        self.wave_height = None
+        self.wave_width = None
+        self.wave_period = None
+        self.wave_period_start = None
+        self.wave_share_period = None
+        self.use_water_recycling = None
+        self.x_recycling = None
         self.num_visitors = None
-        self.num_filter_rinses = 2
+        self.num_filter_rinses = None
         self.m_flow_waste_water = None
         self.area_pool_wall_inner = None
         self.area_pool_wall_exterior = None
@@ -165,7 +168,7 @@ class Pool(object):
         self.area_pool_floor_exterior = None
         self.h_con_water_horizontal = 50.0
         self.h_con_water_vertical = 5200.0
-        self.pool_wall_construction_type = 'concrete_with_insulation'
+        self.pool_wall_construction_type = None
         self.m_flow_evap_pool_used = 0
         self.QMax = 1000000
         self.QMin = 0
@@ -186,36 +189,54 @@ class Pool(object):
 
 
     def calc_pool_parameters(self):
-        # Typical temperatures and depths for pools according to DIN 19643 and VDI 2089
-        if self.pool_type == 'Swimmer_pool':
-            self.depth = 2.5
-            self.temperature = 301.15
-        elif self.pool_type == 'Nonswimmer_pool':
-            self.depth = 0.975
-            self.temperature = 303.15
-        elif self.pool_type == 'Child_pool':
-            self.depth = 0.6
-            self.temperature = 305.15
-        elif self.pool_type == 'Multipurpose_pool':
-            self.depth = 1.35
-            self.temperature = 301.15
-        elif self.pool_type == 'Diving_pool':
-            self.depth = 3.8
-            self.temperature = 301.15
-        elif self.pool_type == 'Freeform_pool':
-            self.depth = 0.75
-            self.temperature = 303.15
-        else:
-            raise ValueError(f"Unknown pool type: {self.pool_type}. Only the following pool types are supported: " \
+        # Typical depths for pools according to DIN 19643 and VDI 2089
+        if self.depth is None:
+            if self.pool_type == 'Swimmer_pool':
+                self.depth = 2.5
+            elif self.pool_type == 'Nonswimmer_pool':
+                self.depth = 0.975
+            elif self.pool_type == 'Child_pool':
+                self.depth = 0.6
+            elif self.pool_type == 'Multipurpose_pool':
+                self.depth = 1.35
+            elif self.pool_type == 'Diving_pool':
+                self.depth = 3.8
+            elif self.pool_type == 'Freeform_pool':
+                self.depth = 0.75
+            else:
+                raise ValueError(f"Unknown pool type: {self.pool_type}. Only the following pool types are supported: " \
                         f"'Swimmer_pool', 'Nonswimmer_pool', 'Multipurpose_pool', 'Child_pool'," \
                         f" 'Multipurpose_pool', 'Diving_pool', 'Freeform_pool'")
 
-        self.volume = self.area * self.depth
+        # Typical temperature for pools according to DIN 19643 and VDI 2089
+        if self.temperature is None:
+            if self.pool_type == 'Swimmer_pool':
+                self.temperature = 301.15
+            elif self.pool_type == 'Nonswimmer_pool':
+                self.temperature = 303.15
+            elif self.pool_type == 'Child_pool':
+                self.temperature = 305.15
+            elif self.pool_type == 'Multipurpose_pool':
+                self.temperature = 301.15
+            elif self.pool_type == 'Diving_pool':
+                self.temperature = 301.15
+            elif self.pool_type == 'Freeform_pool':
+                self.temperature = 303.15
+            else:
+                raise ValueError(f"Unknown pool type: {self.pool_type}. Only the following pool types are supported: " \
+                        f"'Swimmer_pool', 'Nonswimmer_pool', 'Multipurpose_pool', 'Child_pool'," \
+                        f" 'Multipurpose_pool', 'Diving_pool', 'Freeform_pool'")
 
-        # avereage number of visitors KOK
-        self.num_visitors = round(self.area ** 0.58, 0)
+
+        if self.volume is None:
+            self.volume = self.area * self.depth
+
 
         # Calculation of the nominal volume_flow according to DIN 19643-1
+        # filter_combination
+        if self.filter_combination is None:
+            self.filter_combination = 'without_ozone'
+
         # help parameter k
         if self.filter_combination == 'without_ozone' or \
                 self.filter_combination == 'with_bromine':
@@ -271,12 +292,23 @@ class Pool(object):
             self.volume_flow = min(V_H, V_B) / 3600
 
         # volume_flow_night
-        if V_B > 30:
-            self.volume_flow_night = V_B/3600
+        if self.night_set_back_volume_flow is None:
+            self.night_set_back_volume_flow = True
+
+        if self.night_set_back_volume_flow == True:
+            if self.volume_flow_night is None:
+                if V_B > 30:
+                    self.volume_flow_night = V_B/3600
+                else:
+                    self.volume_flow_night = 30/3600
         else:
-            self.volume_flow_night = 30/3600
+            self.volume_flow_night = self.volume_flow
 
         # volume_storage
+        if self.filter_type is None:
+            self.filter_type = 'Open suction filter'
+        if self.water_type is None:
+            self.water_type = "Fresh water"
         # help parameter v_f
         if self.filter_type == 'Activated carbon filter with ozone' \
             or self.filter_type == 'Two-layer filter with ozone':
@@ -328,6 +360,11 @@ class Pool(object):
                 self.beta_in_use = 40/3600
 
         # Caluclation of m_flow_waste_water
+        if self.num_filter_rinses is None:
+            self.num_filter_rinses = 2
+            # avereage number of visitors KOK
+        if self.num_visitors is None:
+            self.num_visitors = round(self.area ** 0.58, 0)
         m_visitors = 0.03 * 995.65 * self.num_visitors * 1/(24*3600)
         m_filter = 995.65 * self.num_filter_rinses * V_fs * 1/(7*24*3600)
         self.m_flow_waste_water = max(m_visitors, m_filter)
@@ -343,6 +380,44 @@ class Pool(object):
         self.m_flow_evap_pool_used = -((self.beta_in_use*3600)/(R_D*aritmethic_temperature))* \
                                      (p_sat_pool_temp-p_sat_air_temp)*self.area
         print('self.m_flow_evap_pool_used',self.m_flow_evap_pool_used)
+
+        # heat recovery rinsing wastewater
+        if self.use_heat_recovery is None:
+            self.use_heat_recovery = True
+        if self.eta_heat_recovery is None:
+            self.eta_heat_recovery = 0.8
+        if self.dp_heat_exchanger is None:
+            self.dp_heat_exchanger = 350
+
+        # wastewater treatment
+        if self.use_water_recycling is None:
+            self.use_water_recycling = False
+        if self.x_recycling is None:
+            self.x_recycling = 0.8
+
+
+        # pool cover
+        if self.use_pool_cover is None:
+            self.use_pool_cover = False
+
+        # wave pool
+        if self.use_wave_pool is None:
+            self.use_wave_pool = False
+        if self.wave_period is None:
+            self.wave_period = 1800
+        if self.wave_height is None:
+            self.wave_height = 0
+        if self.wave_width is None:
+            self.wave_width = 0
+        if self.wave_period_start is None:
+            self.wave_period_start = 600
+        if self.wave_share_period is None:
+            self.wave_share_period = 10/30*100
+
+        # pool wall construction
+        if self.pool_wall_construction_type is None:
+            self.pool_wall_construction_type = 'concrete_with_insulation'
+
 
     def calc_sat_pressure(self, temp):
         log_pw = 10.79574 * (1.0 - 273.16 / temp) \

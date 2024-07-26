@@ -20,7 +20,9 @@ from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
 from teaser.logic.buildingobjects.buildingphysics.material import Material
+from teaser.logic.buildingobjects.buildingsystems.pool import Pool
 from teaser.data.input import material_input_json as matInput
+
 
 
 def generate_advanced_swimmingPool():
@@ -56,38 +58,40 @@ def generate_advanced_swimmingPool():
     building_name = "Hallenbad"
     water_area = 550
     year_of_construction = 2012
-    excelFileName = "2022-08-03_Swimming pool_Database.xlsx"
+    excelFileName = "2022-02-27_Swimming pool_DatabaseAhlen.xlsx"
     filePathOutput = None
-    
-    # This should not be changed for now:
+
+
     prj.add_non_residential(
         method='bmvbs',
         usage='swimmingPool',
         name=building_name,
         year_of_construction=year_of_construction,
-        number_of_floors=1,
+        number_of_floors=2,
         height_of_floors=3.5,
-        net_leased_area=water_area,
-        internal_gains_mode=3)
+        net_leased_area=0,
+        with_ahu=True,
+        internal_gains_mode=3,
+        construction_type='heavy',
+        water_area=500,
+        use_correction_factor=False
+        )
 
     # Added buildings are stored within Project.buildings    
-    swimmingPool = prj.buildings[0]
+    swimmingFacitlity = prj.buildings[0]
     
-    # Call method to read out Excel file.    
-    # IMPORTANT! Excel file must be closed before compiling code!
-    readExcelFile(swimmingPool, excelFileName, prj)  
-    
-    for zone in swimmingPool.thermal_zones:   
-        print ("Added", zone.name, "with zone area:", \
-           zone.area, "m²")
-    for pool in swimmingPool.poolsInDict.keys():
-        if not pool.startswith("Zone"):
-            print("Added pool", pool, "with water area:", swimmingPool.poolsInDict[
-                pool]["Water area"], "m²")
+    # Read data from excel and set values for zones, pools and material
+    readExcelFile(swimmingFacitlity, excelFileName, prj)
+
+    print("Your individual swimming facility includes:")
+    for zone in swimmingFacitlity.thermal_zones:
+        print(zone.name, "with zone area:",zone.area, " m²")
+    for pool in swimmingFacitlity.thermal_zones[0].pools:
+            print(pool.name, "with water area:", pool.area, " m²")
     
     print()
-    print("Total net leased area of building:", swimmingPool.net_leased_area, "m²")
-    print("Total air volume of building:", swimmingPool.volume, "m³")
+    print("Total net leased area of building:", swimmingFacitlity.net_leased_area, "m²")
+    print("Total air volume of building:", swimmingFacitlity.volume, "m³")
     print() 
         
     prj.used_library_calc = 'AixLib'
@@ -117,11 +121,10 @@ def generate_advanced_swimmingPool():
     return path
 
 
-def readExcelFile(swimmingPool, fileName, prj):
+def readExcelFile(swimmingFacitlity, fileName, prj):
     """
     Reads out zone and pool data from an Excel file and overrides the data from the 
-    previously created basic swimming pool. 
-    IMPORTANT: Excel file must be closed! Rows and columns start from 0.    
+    previously created basic swimming pool.
 
     Parameters
     ----------
@@ -135,91 +138,148 @@ def readExcelFile(swimmingPool, fileName, prj):
     
     print("Reading zone data from Excel...")
     print()
-    wb = xlrd.open_workbook(fileName)
-    #wb = pandas.read_excel(fileName)
-    zoneData = wb.sheet_by_name("Zone Data")
-    poolData = wb.sheet_by_name("Pool Data")
-    matData = wb.sheet_by_name("Envelope Structures")
-    
-    # Step 1: Identify the number of zones within the building
-    rowZoneName = 2
-    rowZoneArea = 17
-    colsZoneDataSheet = 17
-    for col in range(1, colsZoneDataSheet-1, 2):
-        zoneName = zoneData.cell_value(rowZoneName, col)
-        zoneArea = zoneData.cell_value(rowZoneArea, col+1)
-        if zoneArea != "" \
-        and zoneArea != 0 \
-        and zoneName not in swimmingPool.poolsInDict.keys():
-            swimmingPool.poolsInDict[zoneName] = dict()
-        if zoneName in swimmingPool.poolsInDict.keys(): 
-            readZoneData(swimmingPool, zoneData, zoneName, rowZoneName, col)
-            
-    # Step 2: Override the available data for each zone        
-    addBuildingZones(swimmingPool)
-    overrideZoneData(swimmingPool)
-    swimmingPool.net_leased_area = round(swimmingPool.net_leased_area, 2)
-    swimmingPool.volume = round(swimmingPool.volume, 2)
-                
-    # Step 3: Identify the number and type of pools within the building
-    rowPoolName = 3
-    rowPoolArea = 4  
-    rowPoolPerimeter = 7
-    colsPoolDataSheet = 12
-    existingPools= list()
-    for col in range(3, colsPoolDataSheet - 1):
-        poolName = convertPoolName(poolData.cell_value(rowPoolName, col))
-        poolArea = poolData.cell_value(rowPoolArea, col)
-        poolPerimeter = poolData.cell_value(rowPoolPerimeter, col)        
-        if poolArea != "" \
-        and poolArea != 0:
-            existingPools.append(poolName)    
-            if poolName not in swimmingPool.poolsInDict.keys():
-                swimmingPool.poolsInDict[poolName] = dict()
-                swimmingPool.createPool(swimmingPool.poolsInDict, poolName, \
-                poolArea, poolPerimeter)
-            
+    zoneData = pandas.read_excel(fileName,sheet_name="Zone Data",header=2, index_col=0)
+    poolData = pandas.read_excel(fileName,sheet_name="Pool Data",header=3, index_col=0)
+    matData = pandas.read_excel(fileName, sheet_name="Envelope Structures",index_col=2)
 
-    remList = list()
-    for pool in swimmingPool.poolsInDict.keys():
-        if not pool.startswith("Zone") and not pool.startswith("Total") \
-        and pool not in existingPools:  
-            remList.append(pool)      
-    for zone in swimmingPool.thermal_zones:
-        if zone.name == "Swimming_hall":
-            for pool in remList:        
-                swimmingPool.poolsInDict.pop(pool)
-                zone.paramRecord.pop(pool)
-            for pool in existingPools:
-                if pool not in zone.paramRecord.keys():
-                    zone.paramRecord[pool] = dict()
-            
-    # Step 4: Override pool data from basic swimming pool
-    colParamName = 0    
-    for col in range(3, colsPoolDataSheet):
-        poolName = convertPoolName(poolData.cell_value(rowPoolName, col))
-        poolArea = poolData.cell_value(rowPoolArea, col)
-        
-        if poolArea != "" and poolArea != 0:
-            for row in range(rowPoolArea, poolData.nrows):
-                paramName = poolData.cell_value(row, colParamName)
-                if poolData.cell_value(row, col) != "" \
-                and poolData.cell_value(row, col) != 0: 
-                    
-                    if paramName in swimmingPool.poolsInDict[poolName].keys() \
-                    and paramName != "Construction of pool wall":
-                        swimmingPool.poolsInDict[poolName][paramName] = \
-                        poolData.cell_value(row, col)
-                    elif paramName == "Construction of pool wall":                    
-                        if poolData.cell_value(row, col) == "Reinforced concrete":
-                            swimmingPool.poolsInDict[poolName][paramName] = \
-                            "AixLib.DataBase.Pools.SwimmingPoolWall.ConcreteInsulationConstruction()"
-                    else:
-                        print()
-                        print("ERROR:", paramName, "not found in poolsInDict!")
-    
-    swimmingPool.calcPoolParameter()
-    
+
+    zone_list = ["Zone 1", "Zone 2", "Zone 3", "Zone 4", "Zone 5", "Zone 6"]
+    for zone in range(len(zone_list)):
+        swimmingFacitlity.thermal_zones[zone].name = zoneData[zone_list[zone]].values[0]
+
+        # Set area of outer walls and windows
+        for dir in range(4):
+            # outer walls
+            if zoneData[zone_list[zone]].values[dir+1] > 0:
+                swimmingFacitlity.thermal_zones[zone].outer_walls[dir].area = zoneData[zone_list[zone]].values[dir+1]
+            else:
+                swimmingFacitlity.thermal_zones[zone].outer_walls[dir].area = 0.0001
+
+            # windows
+            if zoneData[zone_list[zone]].values[dir+5] > 0:
+                swimmingFacitlity.thermal_zones[zone].windows[dir].area = zoneData[zone_list[zone]].values[dir+5]
+            else:
+                swimmingFacitlity.thermal_zones[zone].windows[dir].area = 0.0001
+
+        # Set area of rooftop
+        if zoneData[zone_list[zone]].values[9] > 0:
+            swimmingFacitlity.thermal_zones[zone].rooftops[0].area = zoneData[zone_list[zone]].values[9]
+        else:
+            swimmingFacitlity.thermal_zones[zone].rooftops[0].area = 0.0001
+
+        # Set area of grounfloor
+        if zoneData[zone_list[zone]].values[10] > 0:
+            swimmingFacitlity.thermal_zones[zone].ground_floors[0].area = zoneData[zone_list[zone]].values[10]
+        else:
+            swimmingFacitlity.thermal_zones[zone].ground_floors[0].area = 0.0001
+
+        # Set area of inner walls
+        if zoneData[zone_list[zone]].values[11] > 0:
+            swimmingFacitlity.thermal_zones[zone].inner_walls[0].area = zoneData[zone_list[zone]].values[11]
+        else:
+            swimmingFacitlity.thermal_zones[zone].inner_walls[0].area = 0.0001
+
+        # Set area of ceilings
+        if swimmingFacitlity.number_of_floors > 0:
+            if zoneData[zone_list[zone]].values[12] > 0:
+                swimmingFacitlity.thermal_zones[zone].ceilings[0].area = zoneData[zone_list[zone]].values[12]
+            else:
+                swimmingFacitlity.thermal_zones[zone].ceilings[0].area = 0.0001
+
+        # Set area of floors
+        if zoneData[zone_list[zone]].values[13] > 0:
+            swimmingFacitlity.thermal_zones[zone].floors[0].area = zoneData[zone_list[zone]].values[13]
+        else:
+            swimmingFacitlity.thermal_zones[zone].floors[0].area = 0.0001
+
+        # Total area of zones
+        swimmingFacitlity.thermal_zones[zone].area = zoneData[zone_list[zone]].values[14]
+
+        # Total volume of zones
+        swimmingFacitlity.thermal_zones[zone].volume = zoneData[zone_list[zone]].values[15]
+
+        # Number of pools
+        swimmingFacitlity.thermal_zones[0].nPools = zoneData[zone_list[0]].values[16]
+
+
+    swimmingFacitlity.thermal_zones[0].pools.clear()
+    swimmingFacitlity.basic_pools_dict.clear()
+    list_pools = poolData.keys()[3:swimmingFacitlity.thermal_zones[0].nPools+3]
+
+    # dict for swimming pools [name, area, length, width,perimeter]
+    #basic_pools_dict = {}
+
+    #for pool in list_pools:
+    #    print(poolData[pool].values[0])
+    #    print(pool)
+    #    basic_pools_dict[pool] = [poolData[pool].values[0],poolData[pool].values[1],poolData[pool].values[2],
+    #                              poolData[pool].values[3], poolData[pool].values[4]]
+
+    #print(basic_pools_dict)
+
+    print(list_pools)
+    # Generate and calculate swimming pools:
+    for zone in swimmingFacitlity.thermal_zones:
+        if zone.name == "Swimming_hall_1":
+            for i in list_pools:
+                print(i)
+                pool = Pool(zone)
+                pool.name = i
+                pool.pool_type = poolData[i].values[0]
+                pool.area = poolData[i].values[1]
+                pool.length = poolData[i].values[2]
+                pool.width = poolData[i].values[3]
+                pool.perimeter = poolData[i].values[4]
+                pool.depth = poolData[i].values[5]
+                pool.volume = poolData[i].values[6]
+                pool.area_pool_floor_exterior = poolData[i].values[7]
+                pool.area_pool_floor_inner = poolData[i].values[8]
+                pool.area_pool_wall_exterior = poolData[i].values[9]
+                pool.area_pool_wall_inner = poolData[i].values[10]
+                pool.temperature = poolData[i].values[11]
+                pool.num_filter_rinses = poolData[i].values[12]
+                pool.filter_type = poolData[i].values[13]
+                print("filter combination",poolData[i].values[14])
+                pool.filter_combination = poolData[i].values[14]
+                pool.water_type = poolData[i].values[15]
+                pool.use_heat_recovery = poolData[i].values[16]
+                pool.eta_heat_recovery = poolData[i].values[17]
+                pool.dp_heat_exchanger = poolData[i].values[18]
+                pool.use_water_recycling = poolData[i].values[19]
+                pool.x_recycling = poolData[i].values[20]
+                pool.night_set_back_volume_flow = poolData[i].values[21]
+                pool.volume_flow_night = poolData[i].values[22]
+                pool.num_visitors = poolData[i].values[23]
+                pool.use_pool_cover = poolData[i].values[24]
+                pool.use_wave_pool = poolData[i].values[25]
+                pool.wave_height = poolData[i].values[26]
+                pool.wave_width = poolData[i].values[27]
+                pool.wave_period = poolData[i].values[28]
+                pool.wave_share_period = poolData[i].values[29]
+                pool.pool_wall_construction_type = poolData[i].values[30]
+                pool.calc_pool_parameters()
+            print('Pools are sucessfully added')
+
+            # AHU design according to VDI 2089
+            abs_hum_swimming_hall = 0.0143  # Absolute humidity within the swimming hall in kg/kg
+            abs_hum_amb = 0.009  # Average absolute humidity outdoor air in kg/kg
+            m_flow_evap_pools_sum = 0  # Sum of evaporation of all pools (occupied pools) in kg/h
+            m_flow_evap_pools_add_sum = 0  # Zero for basis swimming facility in kg/h
+            m_flow_evap_attr = 0  # Zero for basic/ sport-oriented swimming pool in kg/g
+
+            for pool in zone.pools:
+                m_flow_evap_pools_sum += pool.m_flow_evap_pool_used
+
+            m_flow_evap_max = m_flow_evap_pools_sum + m_flow_evap_pools_add_sum + m_flow_evap_attr  # Max evaporation in kg/h
+            m_flow_ahu_nominal = m_flow_evap_max / (abs_hum_swimming_hall - abs_hum_amb)  # Design air flow in kg/h
+
+            # AHU design, nominal mass flow in m3/(h*m2)  m2: area of swimming hall
+            # density: 1.225 kg/m3
+            zone.use_conditions.max_ahu = m_flow_ahu_nominal / (1.225 * zone.area)
+            zone.use_conditions.min_ahu = 0.3 * zone.use_conditions.max_ahu
+            print('max_AHU', zone.use_conditions.max_ahu)
+            print('min_AHU', zone.use_conditions.min_ahu)
+
     # Step 5: Read material data
     matDict = dict()
     colThickness = 2
@@ -246,8 +306,8 @@ def readExcelFile(swimmingPool, fileName, prj):
                 matData.cell_value(row, colMatId)) 
         
     # Step 6: Set material data
-    for zone in swimmingPool.thermal_zones:
-        overrideMaterialData(zone, matDict, prj)
+    for zone in swimmingFacitlity.thermal_zones:
+        overrideMaterialData(zone, matData, prj)
 
                     
 def overrideMaterialData(zone, matDict, prj):

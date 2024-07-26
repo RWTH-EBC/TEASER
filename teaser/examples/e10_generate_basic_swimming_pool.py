@@ -58,7 +58,7 @@ def generate_basic_swimmingPool():
         usage='swimmingPool',
         name=building_name,
         year_of_construction=year_of_construction,
-        number_of_floors=1,
+        number_of_floors=2,
         height_of_floors=3.5,
         net_leased_area=0,
         with_ahu=True,
