@@ -17,10 +17,12 @@ import teaser.logic.utilities as utilities
 import os
 
 def generate_basic_swimmingPool():
+    """This function demonstrates the generation of a basic swimming pool
+    archetype using the API function of TEASER"""
 
     # First step: Import the TEASER API (called Project) into your Python
     # module
-    
+
     from teaser.project import Project
 
     # To use the API, instantiate the Project class and rename the Project. The
@@ -30,7 +32,7 @@ def generate_basic_swimmingPool():
     # used data base). Be careful: Dymola does not like whitespaces in names and
     # filenames, thus we will delete them anyway in TEASER.
     
-    prj = Project(load_data=True)
+    prj = Project()
     prj.name = "Output_Swimming_Pool_Basic_Model"
 
     # To generate non-residential archetype buildings the function
@@ -54,21 +56,15 @@ def generate_basic_swimmingPool():
     # net_leased_area is not relevant for the usage "swimmingPool"
     # all areas are defined according to the water_area
     prj.add_non_residential(
-        method='bmvbs',
-        usage='swimmingPool',
+        construction_data='iwu_heavy',
+        geometry_data='swimming_facility',
         name=building_name,
         year_of_construction=year_of_construction,
         number_of_floors=2,
         height_of_floors=3.5,
-        net_leased_area=0,
+        net_leased_area=water_area,
         with_ahu=True,
-        internal_gains_mode=3,
-        construction_type='heavy',
-        water_area=412.5,
-        use_correction_factor=False
-        )
-
-
+        internal_gains_mode=3)
 
     # Added buildings are stored within Project.buildings. The following code is
     # optional and should provide some basic information about the calculated 
@@ -76,7 +72,7 @@ def generate_basic_swimmingPool():
     
     swimmingPool = prj.buildings[0]
     for zone in swimmingPool.thermal_zones:
-        print ("Added zone", zone.name,  "with zone area:", \
+        print("Added zone", zone.name,  "with zone area:", \
                zone.area, "m²")
 
 
@@ -110,7 +106,8 @@ def generate_basic_swimmingPool():
     # To export the ready-to-run models simply call Project.export_aixlib().
     # You can specify the path, where the model files should be saved.
     # None means, that the default path in your home directory
-    # will be used. 
+    # will be used.
+
     
     print("Exporting building(s)...")
     path = prj.export_aixlib(
