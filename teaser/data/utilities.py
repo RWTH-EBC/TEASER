@@ -19,6 +19,7 @@ from teaser.logic.archetypebuildings.urbanrenet.est6 import EST6
 from teaser.logic.archetypebuildings.urbanrenet.est7 import EST7
 from teaser.logic.archetypebuildings.urbanrenet.est8a import EST8a
 from teaser.logic.archetypebuildings.urbanrenet.est8b import EST8b
+from teaser.logic.archetypebuildings.eeschwimm.swimmingPool import SwimmingFacility
 from teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse import (
     SingleFamilyHouse,
 )
@@ -71,6 +72,8 @@ class GeometryData(Enum):
     UrbanrenetEst7 = "urbanrenet_est7"
     UrbanrenetEst8a = "urbanrenet_est8a"
     UrbanrenetEst8b = "urbanrenet_est8b"
+
+    EESchwimmSwimmingFacility = "swimming_facility"
 
 class ConstructionData(Enum):
     """
@@ -145,6 +148,9 @@ geometries = {
     GeometryData.UrbanrenetEst7: EST7,
     GeometryData.UrbanrenetEst8a: EST8a,
     GeometryData.UrbanrenetEst8b: EST8b,
+    #EESchwimm
+    GeometryData.EESchwimmSwimmingFacility: SwimmingFacility
+
 }
 
 # Dictionary that defines which building geometries are allowed for each construction data type.
@@ -156,7 +162,8 @@ allowed_geometries = {
                                  GeometryData.UrbanrenetEst3, GeometryData.UrbanrenetEst4a,
                                  GeometryData.UrbanrenetEst4b, GeometryData.UrbanrenetEst5,
                                  GeometryData.UrbanrenetEst6, GeometryData.UrbanrenetEst7,
-                                 GeometryData.UrbanrenetEst8a, GeometryData.UrbanrenetEst8b],
+                                 GeometryData.UrbanrenetEst8a, GeometryData.UrbanrenetEst8b,
+                                 GeometryData.EESchwimmSwimmingFacility],
     ConstructionData.iwu_light: [GeometryData.IwuSingleFamilyDwelling, GeometryData.BmvbsOffice,
                                  GeometryData.BmvbsInstitute, GeometryData.BmvbsInstitute4,
                                  GeometryData.BmvbsInstitute8, GeometryData.UrbanrenetEst1a,
@@ -164,7 +171,8 @@ allowed_geometries = {
                                  GeometryData.UrbanrenetEst3, GeometryData.UrbanrenetEst4a,
                                  GeometryData.UrbanrenetEst4b, GeometryData.UrbanrenetEst5,
                                  GeometryData.UrbanrenetEst6, GeometryData.UrbanrenetEst7,
-                                 GeometryData.UrbanrenetEst8a, GeometryData.UrbanrenetEst8b],
+                                 GeometryData.UrbanrenetEst8a, GeometryData.UrbanrenetEst8b,
+                                 GeometryData.EESchwimmSwimmingFacility],
 
     ConstructionData.tabula_de_standard: [GeometryData.TabulaDeSingleFamilyHouse, GeometryData.TabulaDeTerracedHouse,
                                           GeometryData.TabulaDeMultiFamilyHouse, GeometryData.TabulaDeApartmentBlock],
