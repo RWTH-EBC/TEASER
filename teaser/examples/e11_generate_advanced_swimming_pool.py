@@ -39,7 +39,7 @@ def generate_advanced_swimmingPool():
     # used data base). Be careful: Dymola does not like whitespaces in names and
     # filenames, thus we will delete them anyway in TEASER.
 
-    prj = Project(load_data=True)
+    prj = Project()
     prj.name = "Output_Swimming_Pool_Advanced_Model"
 
 
@@ -63,18 +63,15 @@ def generate_advanced_swimmingPool():
 
 
     prj.add_non_residential(
-        method='bmvbs',
-        usage='swimmingPool',
+        construction_data='iwu_heavy',
+        geometry_data='swimming_facility',
         name=building_name,
         year_of_construction=year_of_construction,
         number_of_floors=2,
         height_of_floors=3.5,
-        net_leased_area=0,
+        net_leased_area=water_area,
         with_ahu=True,
-        internal_gains_mode=3,
-        construction_type='heavy',
-        water_area=500,
-        use_correction_factor=False
+        internal_gains_mode=3
         )
 
     # Added buildings are stored within Project.buildings    
@@ -279,6 +276,9 @@ def readExcelFile(swimmingFacitlity, fileName, prj):
             zone.use_conditions.min_ahu = 0.3 * zone.use_conditions.max_ahu
             print('max_AHU', zone.use_conditions.max_ahu)
             print('min_AHU', zone.use_conditions.min_ahu)
+        else:
+            zone.use_conditions.ahu = False
+
 
     # Step 5: Read material data
     matDict = dict()
@@ -318,7 +318,7 @@ def overrideMaterialData(zone, matDict, prj):
             for numLayer in range(0, len(matDict[wallName]["Thickness"])):
                 mat_id = matDict[wallName]["Material_Id"][numLayer]
                 thickness = matDict[wallName]["Thickness"][numLayer]
-                layer = Layer(parent = wall, id = numLayer)
+                layer = Layer(parent=wall, id=numLayer)
                 layer.thickness = thickness
                 material = Material(layer)
                 matInput.load_material_id(material, mat_id, prj.data)
