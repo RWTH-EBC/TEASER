@@ -3,7 +3,7 @@
 
 """
 This script contains of three functions. The first one loads the heavy-weight
-ASHRAE 140 test room 920 from a *.teaserjson file. The second one creates
+ASHRAE 140 test room 920 from a `*.teaserjson` file. The second one creates
 that room within the code. The third one computes parameter with the help of
 one of the aforementioned functions.
 """
@@ -65,7 +65,7 @@ def from_scratch(number_of_elements, save=False, path=utilities.get_default_path
         Project that contains the building with the test room
 
     """
-    prj = Project(load_data=True)
+    prj = Project()
     prj.name = "ASHRAE140Verification"
 
     bldg = Building(parent=prj)

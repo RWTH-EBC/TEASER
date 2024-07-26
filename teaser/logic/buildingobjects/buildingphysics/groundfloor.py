@@ -1,6 +1,6 @@
 # created June 2015
 # by TEASER4 Development Team
-
+import warnings
 
 from teaser.logic.buildingobjects.buildingphysics.outerwall \
     import OuterWall
@@ -27,7 +27,7 @@ class GroundFloor(OuterWall):
         Random id for the distinction between different elements.
     name : str
         Individual name
-    construction_type : str
+    construction_data : str
         Type of construction (e.g. "heavy" or "light"). Needed for
         distinction between different constructions types in the same
         building age period.
@@ -114,6 +114,7 @@ class GroundFloor(OuterWall):
     c1_korr : float [J/K]
         corrected capacity C1,korr for building elements in the case of
         asymmetrical thermal load given in VDI 6007
+    calc_u: Required area-specific U-value in retrofit cases [W/K]
     ua_value : float [W/K]
         UA-Value of building element (Area times U-Value)
     r_inner_conv : float [K/W]
@@ -152,3 +153,44 @@ class GroundFloor(OuterWall):
         self._inner_radiation = 5.0
         self._outer_convection = None
         self._outer_radiation = None
+
+    def retrofit_wall(self, year_of_retrofit, material=None):
+        """Retrofits wall to German refurbishment standards.
+
+        This function adds an additional layer of insulation and sets the
+        thickness of the layer according to the retrofit standard in the
+        year of refurbishment. Refurbishment year must be newer then 1977
+
+        Note: To Calculate thickness and U-Value, the standard TEASER
+        coefficients for outer and inner heat transfer are used.
+
+        The used Standards are namely the Waermeschutzverordnung (WSVO) and
+        Energieeinsparverordnung (EnEv)
+
+        Parameters
+        ----------
+        material : string
+            Type of material, that is used for insulation
+        year_of_retrofit : int
+            Year of the retrofit of the wall/building
+
+        """
+        material, year_of_retrofit = self.initialize_retrofit(
+            material, year_of_retrofit)
+
+        calc_u = None
+
+        if 1977 <= year_of_retrofit <= 1981:
+            calc_u = 0.8
+        elif 1982 <= year_of_retrofit <= 1994:
+            calc_u = 0.7
+        elif 1995 <= year_of_retrofit <= 2001:
+            calc_u = 0.5
+        elif 2002 <= year_of_retrofit <= 2008:
+            calc_u = 0.4
+        elif 2009 <= year_of_retrofit <= 2013:
+            calc_u = 0.3
+        elif year_of_retrofit >= 2014:
+            calc_u = 0.3
+
+        self.set_insulation(material, calc_u, year_of_retrofit)

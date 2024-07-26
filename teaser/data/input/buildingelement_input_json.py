@@ -3,7 +3,7 @@
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
 from teaser.logic.buildingobjects.buildingphysics.material import Material
 import teaser.data.input.material_input_json as mat_input
-
+import logging
 
 def load_type_element(element, year, construction, data_class,
                       element_type=None, reverse_layers=False):
@@ -16,6 +16,10 @@ def load_type_element(element, year, construction, data_class,
     :cite:`KurzverfahrenIWU`, which is combined with normative material data
     from :cite:`VereinDeutscherIngenieure.2012b`.
 
+    Most of the elements for the KfW Efficiency House standards (TypeElements_KFW.json) were derived from the respective
+    required U-value and the component catalog of the U-value online calculator https://www.ubakus.de/bauteilkatalog/.
+    For the respective source of each element, the comment in the json file can be observed.
+
     Parameters
     ----------
     element : BuildingElement()
@@ -25,7 +29,7 @@ def load_type_element(element, year, construction, data_class,
         Year of construction
 
     construction : str
-        Construction type, code list ('heavy', 'light', tabula, ...)
+        Construction type, code list ('iwu_heavy', 'iwu_light', 'tabula_de_standard', 'kfw_40', ...)
 
     data_class : DataClass()
         DataClass containing the bindings for TypeBuildingElement and
@@ -48,26 +52,28 @@ def load_type_element(element, year, construction, data_class,
         element_type = type(element).__name__
 
     for key, element_in in element_binding.items():
-        if key != "version":
-            if (
-                element_in["building_age_group"][0]
-                <= year
-                <= element_in["building_age_group"][1]
-                and element_in["construction_type"] == construction
-                and key.startswith(element_type)
-            ):
-                _set_basic_data(element=element, element_in=element_in)
-                for id, layer_in in (
+        if (
+            element_in["building_age_group"][0]
+            <= year
+            <= element_in["building_age_group"][1]
+            and element_in["construction_data"] == construction
+            and key.startswith(element_type)
+        ):
+            _set_basic_data(element=element, element_in=element_in)
+            for id, layer_in in (
                         element_in["layer"].items().__reversed__()
                         if reverse_layers else element_in["layer"].items()
                 ):
-                    layer = Layer(element)
-                    layer.id = id
-                    layer.thickness = layer_in["thickness"]
-                    material = Material(layer)
-                    mat_input.load_material_id(
-                        material, layer_in["material"]["material_id"], data_class
-                    )
+                layer = Layer(element)
+                layer.id = id
+                layer.thickness = layer_in["thickness"]
+                material = Material(layer)
+                mat_input.load_material_id(
+                    material, layer_in["material"]["material_id"], data_class
+                )
+            return
+    logging.warning(f"No database entry found for construction={construction}, "
+                    f"year{year}, element={type(element).__name__}")
 
 
 def load_type_element_by_key(element, key_str, data_class,
@@ -129,7 +135,7 @@ def _set_basic_data(element, element_in):
 
     """
     element.building_age_group = element_in["building_age_group"]
-    element.construction_type = element_in["construction_type"]
+    element.construction_data = element_in["construction_data"]
     element.inner_radiation = element_in["inner_radiation"]
     element.inner_convection = element_in["inner_convection"]
 

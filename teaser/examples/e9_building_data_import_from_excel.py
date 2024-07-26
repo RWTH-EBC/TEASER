@@ -293,7 +293,7 @@ def import_building_from_excel(
 
     def warn_constructiontype(element):
         """Generic warning function"""
-        if element.construction_type is None:
+        if element.construction_data is None:
             warnings.warn(
                 'In zone "%s" the %s construction "%s" could not be loaded from the TypeBuildingElements.json, '
                 "an error will occur due to missing data for calculation."
@@ -613,7 +613,7 @@ def import_building_from_excel(
 if __name__ == "__main__":
     result_path = os.path.dirname(__file__)
 
-    prj = Project(load_data=True)
+    prj = Project()
     prj.name = "BuildingGeneratedviaExcelImport"
     prj.data.load_uc_binding()
     prj.weather_file_path = os.path.join(

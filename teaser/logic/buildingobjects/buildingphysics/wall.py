@@ -29,7 +29,7 @@ class Wall(BuildingElement):
         Random id for the distinction between different elements.
     name : str
         Individual name
-    construction_type : str
+    construction_data : str
         Type of construction (e.g. "heavy" or "light"). Needed for
         distinction between different constructions types in the same
         building age period.
@@ -118,6 +118,7 @@ class Wall(BuildingElement):
     c1_korr : float [J/K]
         corrected capacity C1,korr for building elements in the case of
         asymmetrical thermal load given in VDI 6007
+    calc_u: Required area-specific U-value in retrofit cases [W/K]
     ua_value : float [W/K]
         UA-Value of building element (Area times U-Value)
     r_inner_conv : float [K/W]
@@ -386,6 +387,12 @@ class Wall(BuildingElement):
 
 
         """
+        raise NotImplementedError("Please call this method only against"
+                                  "Outerwalls, Rooftops and Groundfloors")
+
+    def initialize_retrofit(self, material, year_of_retrofit):
+        """Checks the retrofit inputs and sets material and year of retrofit
+        if needed."""
         self.set_calc_default()
         self.calc_ua_value()
 
@@ -399,107 +406,38 @@ class Wall(BuildingElement):
             warnings.warn("You are using a year of retrofit not supported\
                     by teaser. We will change your year of retrofit to 1977\
                     for the calculation. Be careful!")
+        return material, year_of_retrofit
 
-        if add_at_position is None:
-            insulation_layer_index = -1  # default: outside
-        else:
-            insulation_layer_index = add_at_position
-
-        use_u_value_standards_of = type(self).__name__
-        if type(self).__name__.startswith("Interzonal") \
-                and self.other_side is not None:
-            if (self.parent.use_conditions.with_heating is
-                    self.other_side.use_conditions.with_heating):
-                use_u_value_standards_of = "InnerWall"
-            elif (not self.parent.use_conditions.with_heating and
-                  self.other_side.use_conditions.with_heating):
-                if add_at_position is None:
-                    insulation_layer_index = 0
-                if (type(self)).__name__ == 'InterzonalWall':
-                    use_u_value_standards_of = 'OuterWall'
-                elif (type(self)).__name__ == 'InterzonalFloor':
-                    use_u_value_standards_of = 'Rooftop'
-                else:
-                    use_u_value_standards_of = 'GroundFloor'
+    def set_insulation(self, material, calc_u, year_of_retrofit):
+        """Sets the correct insulation thickness based on the given u-value"""
+        if calc_u:
+            if self.u_value <= calc_u:
+                warnings.warn(
+                    f'No retrofit needed for {self.name} as u value '
+                    f'is already lower than needed.')
             else:
-                if (type(self)).__name__ == 'InterzonalWall':
-                    use_u_value_standards_of = 'OuterWall'
-                elif (type(self)).__name__ == 'InterzonalFloor':
-                    use_u_value_standards_of = 'GroundFloor'
-                else:
-                    use_u_value_standards_of = 'Rooftop'
-
-        if use_u_value_standards_of == "InnerWall":
-            calc_u = np.inf
-
-        elif use_u_value_standards_of == 'OuterWall':
-
-            if 1977 <= year_of_retrofit <= 1981:
-                calc_u = 1.06 * self.area
-            elif 1982 <= year_of_retrofit <= 1994:
-                calc_u = 0.6 * self.area
-            elif 1995 <= year_of_retrofit <= 2001:
-                calc_u = 0.5 * self.area
-            elif 2002 <= year_of_retrofit <= 2008:
-                calc_u = 0.45 * self.area
-            elif 2009 <= year_of_retrofit <= 2013:
-                calc_u = 0.24 * self.area
-            elif year_of_retrofit >= 2014:
-                calc_u = 0.24 * self.area
-
-        elif use_u_value_standards_of == 'Rooftop':
-
-            if 1977 <= year_of_retrofit <= 1981:
-                calc_u = 0.45 * self.area
-            elif 1982 <= year_of_retrofit <= 1994:
-                calc_u = 0.45 * self.area
-            elif 1995 <= year_of_retrofit <= 2001:
-                calc_u = 0.3 * self.area
-            elif 2002 <= year_of_retrofit <= 2008:
-                calc_u = 0.3 * self.area
-            elif 2009 <= year_of_retrofit <= 2013:
-                calc_u = 0.2 * self.area
-            elif year_of_retrofit >= 2014:
-                calc_u = 0.2 * self.area
-
-        elif use_u_value_standards_of == 'GroundFloor':
-
-            if 1977 <= year_of_retrofit <= 1981:
-                calc_u = 0.8 * self.area
-            elif 1982 <= year_of_retrofit <= 1994:
-                calc_u = 0.7 * self.area
-            elif 1995 <= year_of_retrofit <= 2001:
-                calc_u = 0.5 * self.area
-            elif 2002 <= year_of_retrofit <= 2008:
-                calc_u = 0.4 * self.area
-            elif 2009 <= year_of_retrofit <= 2013:
-                calc_u = 0.3 * self.area
-            elif year_of_retrofit >= 2014:
-                calc_u = 0.3 * self.area
-
+                self.insulate_wall(material)
+                d_ins = self.calc_ins_layer_thickness(calc_u)
+                self.layer[-1].thickness = d_ins
+                self.layer[-1].id = len(self.layer)
         else:
-            calc_u = np.inf
+            warnings.warn(
+                f'No fitting retrofit type found for {year_of_retrofit}')
 
-        if self.ua_value > calc_u:
-            self.insulate_wall(material, add_at_position=insulation_layer_index)
+    def calc_ins_layer_thickness(self, calc_u):
+        """Calculates the thickness of the fresh insulated layer from
+        retrofit"""
+        r_conduc_rem = 0
+        for count_layer in self.layer[:-1]:
+            r_conduc_rem += (count_layer.thickness /
+                             count_layer.material.thermal_conduc)
 
-            r_conduc = 0
+        lambda_ins = self.layer[-1].material.thermal_conduc
 
-            for layer_index, count_layer in enumerate(self.layer):
-                if layer_index == insulation_layer_index:
-                    pass
-                else:
-                    r_conduc += (count_layer.thickness /
-                                 count_layer.material.thermal_conduc)
+        d_ins = lambda_ins * (1 / calc_u - self.r_outer_comb * self.area -
+                              self.r_inner_comb * self.area - r_conduc_rem)
+        return d_ins
 
-            self.layer[insulation_layer_index].thickness = \
-                (((
-                  1 - calc_u * self.r_inner_comb - calc_u *
-                  self.r_outer_comb) /
-                  calc_u) * self.area - r_conduc) * \
-                self.layer[insulation_layer_index].material.thermal_conduc
-
-            self.layer[insulation_layer_index].id = len(self.layer)
 
     def _interzonal_type_standard_value(self, method):
         """return the standard value for the treatment of interzonal elements

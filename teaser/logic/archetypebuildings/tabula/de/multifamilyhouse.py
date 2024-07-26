@@ -12,16 +12,17 @@ class MultiFamilyHouse(SingleFamilyHouse):
     (http://webtool.building-typology.eu/#bm).
 
     Description of:
-       - estimation factors
-       - always 4 walls, 1 roof, 1 floor, 4 windows, one door (default
-       orientation?)
-       - how we calculate facade and window area
-       - calculate u-values
-       - zones (one zone)
-       - differences between TABULA und our approach (net floor area, height
-       and number of storeys)
-       - how to proceed with rooftops (keep them as flat roofs or pitched
-       roofs? what orientation?)
+
+    - estimation factors
+    - always 4 walls, 1 roof, 1 floor, 4 windows, one door (default
+      orientation?)
+    - how we calculate facade and window area
+    - calculate u-values
+    - zones (one zone)
+    - differences between TABULA und our approach (net floor area, height
+      and number of storeys)
+    - how to proceed with rooftops (keep them as flat roofs or pitched
+      roofs? what orientation?)
 
     Parameters
     ----------
@@ -48,15 +49,17 @@ class MultiFamilyHouse(SingleFamilyHouse):
         central Air Handling units. Default is False.
     internal_gains_mode: int [1, 2, 3]
         mode for the internal gains calculation done in AixLib:
-        1: Temperature and activity degree dependent heat flux calculation for persons. The
+
+        1. Temperature and activity degree dependent heat flux calculation for persons. The
            calculation is based on  SIA 2024 (default)
-        2: Temperature and activity degree independent heat flux calculation for persons, the max.
+        2. Temperature and activity degree independent heat flux calculation for persons, the max.
            heatflowrate is prescribed by the parameter
            fixed_heat_flow_rate_persons.
-        3: Temperature and activity degree dependent calculation with
+        3. Temperature and activity degree dependent calculation with
            consideration of moisture and co2. The moisture calculation is
            based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
            Engineering ToolBox (2004) and regards only persons.
+
     inner_wall_approximation_approach : str
         'teaser_default' (default) sets length of inner walls = typical
             length * height of floors + 2 * typical width * height of floors
@@ -69,17 +72,20 @@ class MultiFamilyHouse(SingleFamilyHouse):
               proportional to the square root of the area
             b) rooftops, windows and ground floors (= walls with border to
                 soil) may have a vertical share
-    construction_type : str
+
+    construction_data : str
         Construction type of used wall constructions default is "existing
         state"
-            existing state:
-                construction of walls according to existing state in TABULA
-            usual refurbishment:
-                construction of walls according to usual refurbishment in
-                TABULA
-            advanced refurbishment:
-                construction of walls according to advanced refurbishment in
-                TABULA
+
+        - existing state:
+          construction of walls according to existing state in TABULA
+        - usual refurbishment:
+          construction of walls according to usual refurbishment in
+          TABULA
+        - advanced refurbishment:
+          construction of walls according to advanced refurbishment in
+          TABULA
+
     """
 
     def __init__(
@@ -93,7 +99,7 @@ class MultiFamilyHouse(SingleFamilyHouse):
             with_ahu=False,
             internal_gains_mode=1,
             inner_wall_approximation_approach='teaser_default',
-            construction_type=None):
+            construction_data=None):
 
         super(MultiFamilyHouse, self).__init__(
             parent,
@@ -105,14 +111,14 @@ class MultiFamilyHouse(SingleFamilyHouse):
             with_ahu,
             internal_gains_mode,
             inner_wall_approximation_approach,
-            construction_type)
+            construction_data)
 
-        self.construction_type = construction_type
+        self.construction_data = construction_data
         self.number_of_floors = number_of_floors
         self.height_of_floors = height_of_floors
 
-        self._construction_type_1 = self.construction_type + '_1_MFH'
-        self._construction_type_2 = self.construction_type + '_2_MFH'
+        self._construction_data_1 = self.construction_data.value + '_1_MFH'
+        self._construction_data_2 = self.construction_data.value + '_2_MFH'
 
         self.zone_area_factors = {"SingleDwelling": [1, "Living"]}
 

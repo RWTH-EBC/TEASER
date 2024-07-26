@@ -65,14 +65,13 @@ class ThermalZone(object):
         List of InterzonalFloor instances.
     interzonal_ceilings: list
         List of InterzonalCeiling instances.
-    use_conditions : instance of UseConditions()
+    use_conditions : UseConditions
         Instance of UseConditions with all relevant information for the usage
         of the thermal zone
-    model_attr : instance of OneElement(), TwoElement(), ThreeElement() or
-                FourElement()
-        Instance of OneElement(), TwoElement(), ThreeElement() or
-        FourElement(), that holds all calculation functions and attributes
-        needed for the specific model.
+    model_attr : Union[OneElement, TwoElement, ThreeElement, FourElement, FiveElement]
+        Instance of OneElement(), TwoElement(), ThreeElement(),
+        FourElement(), or FiveElement() that holds all calculation functions
+        and attributes needed for the specific model.
     t_inside : float [K]
         Normative indoor temperature for static heat load calculation.
         The input of t_inside is ALWAYS in Kelvin
@@ -148,12 +147,14 @@ class ThermalZone(object):
         the corresponding calculation Class (e.g. TwoElement) and calculates
         the zone parameters. Currently the function is able to distinguishes
         between the number of elements, we distinguish between:
+
             - one element: all outer walls are aggregated into one element,
-            inner wall are neglected
+              inner wall are neglected
             - two elements: exterior and interior walls are aggregated
             - three elements: like 2, but floor or roofs are aggregated
-            separately
+              separately
             - four elements: roofs and floors are aggregated separately
+            - five elements: includes borders to adjacent zones
 
         For all four options we can chose if the thermal conduction through
         the window is considered in a separate resistance or not.
@@ -491,19 +492,19 @@ class ThermalZone(object):
             for wall_count in self.outer_walls \
                     + self.rooftops + self.ground_floors + self.doors + \
                     self.windows:
-                if "adv_retrofit" in wall_count.construction_type:
+                if "adv_retrofit" in wall_count.construction_data:
                     warnings.warn(
                         "already highest available standard"
                         + self.parent.name + wall_count.name)
-                elif "standard" in wall_count.construction_type:
+                elif "standard" in wall_count.construction_data:
                     wall_count.load_type_element(
                         year=self.parent.year_of_construction,
-                        construction=wall_count.construction_type.replace(
+                        construction=wall_count.construction_data.replace(
                             "standard", type_of_retrofit))
                 else:
                     wall_count.load_type_element(
                         year=self.parent.year_of_construction,
-                        construction=wall_count.construction_type.replace(
+                        construction=wall_count.construction_data.replace(
                             "retrofit", type_of_retrofit))
         else:
 
@@ -597,17 +598,26 @@ class ThermalZone(object):
 
     @name.setter
     def name(self, value):
+        regex = re.compile('[^a-zA-z0-9]')
         if isinstance(value, str):
-            regex = re.compile('[^a-zA-z0-9]')
-            self._name = regex.sub('', value)
+            name = regex.sub('', value)
         else:
             try:
-                value = str(value)
-                regex = re.compile('[^a-zA-z0-9]')
-                self._name = regex.sub('', value)
-
+                name = regex.sub('', str(value))
             except ValueError:
                 print("Can't convert name to string")
+
+        # check if another zone with same name exists
+        tz_names = [tz._name for tz in self.parent.thermal_zones[:-1]]
+        if name in tz_names:
+            i = 1
+            while True:
+                name_add = f"{name}_{i}"
+                if name_add not in tz_names:
+                    name = name_add
+                    break
+                i += 1
+        self._name = name
 
     @property
     def outer_walls(self):

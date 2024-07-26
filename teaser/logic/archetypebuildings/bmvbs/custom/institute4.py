@@ -40,7 +40,7 @@ class Institute4(Office):
         Allows for better control of hierarchical structures. If not None it
         adds this Building instance to Project.buildings.
         (default: None)
-    name : str
+    name: str
         Individual name
     year_of_construction : int
         Year of first construction
@@ -57,21 +57,25 @@ class Institute4(Office):
         central Air Handling units. Default is False.
     internal_gains_mode: int [1, 2, 3]
         mode for the internal gains calculation done in AixLib:
-        1: Temperature and activity degree dependent heat flux calculation for persons. The
+
+        1. Temperature and activity degree dependent heat flux calculation for persons. The
            calculation is based on  SIA 2024 (default)
-        2: Temperature and activity degree independent heat flux calculation for persons, the max.
+        2. Temperature and activity degree independent heat flux calculation for persons, the max.
            heatflowrate is prescribed by the parameter
            fixed_heat_flow_rate_persons.
-        3: Temperature and activity degree dependent calculation with
+        3. Temperature and activity degree dependent calculation with
            consideration of moisture and co2. The moisture calculation is
            based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
            Engineering ToolBox (2004) and regards only persons.
+
     office_layout : int
         Structure of the floor plan of office buildings, default is 1,
         which is representative for one elongated floor.
-            1: elongated 1 floor
-            2: elongated 2 floors
-            3: compact (e.g. for a square base building)
+
+        1. elongated 1 floor
+        2. elongated 2 floors
+        3. compact (e.g. for a square base building)
+
     inner_wall_approximation_approach : str
         'teaser_default' (default) sets length of inner walls = typical
             length * height of floors + 2 * typical width * height of floors
@@ -84,19 +88,23 @@ class Institute4(Office):
               proportional to the square root of the area
             b) rooftops, windows and ground floors (= walls with border to
                 soil) may have a vertical share
+
     window_layout : int
         Structure of the window facade type, default is 1, which is
         representative for a punctuated facade.
-            1: punctuated facade (individual windows)
-            2: banner facade (continuous windows)
-            3: full glazing
-    construction_type : str
-        Construction type of used wall constructions default is "heavy")
-            heavy: heavy construction
-            light: light construction
 
-    Note
-    ----------
+        1. punctuated facade (individual windows)
+        2. banner facade (continuous windows)
+        3. full glazing
+
+    construction_data : str
+        Construction type of used wall constructions default is "heavy")
+
+        - heavy: heavy construction
+        - light: light construction
+
+    Notes
+    -----
     The listed attributes are just the ones that are set by the user
     calculated values are not included in this list. Changing these values is
     expert mode.
@@ -159,7 +167,7 @@ class Institute4(Office):
                  office_layout=None,
                  inner_wall_approximation_approach='teaser_default',
                  window_layout=None,
-                 construction_type=None):
+                 construction_data=None):
         """Constructor of Institute4
 
         adds an additional zone "Laboratory"
@@ -177,7 +185,7 @@ class Institute4(Office):
                                          office_layout,
                                          inner_wall_approximation_approach,
                                          window_layout,
-                                         construction_type)
+                                         construction_data)
         self.zone_area_factors["Office"] = \
             [0.22, "Group Office (between 2 and 6 employees)"]
         self.zone_area_factors["Floor"] = \

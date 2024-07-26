@@ -27,7 +27,6 @@ def save_type_element(element, data_class):
         but the user can individually change that.
 
     """
-    data_class.element_bind["version"] = "0.7"
     add_to_json = True
 
     warning_text = (
@@ -37,7 +36,7 @@ def save_type_element(element, data_class):
     )
 
     check_str = "{}_{}_{}".format(
-        type(element).__name__, element.building_age_group, element.construction_type
+        type(element).__name__, element.building_age_group, element.construction_data
     )
 
     if check_str in data_class.element_bind.keys():
@@ -71,6 +70,7 @@ def delete_type_element(element, data_class):
     the file given in Project.data. Alternatively you can specify a path to
     a file of TypeBuildingElements. If this file does not exist,
     a new file is created.
+
     Parameters
     ----------
     element : BuildingElement()
@@ -78,11 +78,11 @@ def delete_type_element(element, data_class):
     data_class : DataClass()
         DataClass containing the bindings for TypeBuildingElement and
         Material (typically this is the data class stored in prj.data,
-        but the user can individually change that.
+        but the user can individually change that.)
 
     """
     check_str = "{}_{}_{}".format(
-        type(element).__name__, element.building_age_group, element.construction_type
+        type(element).__name__, element.building_age_group, element.construction_data
     )
 
     del data_class.element_bind[check_str]
@@ -107,7 +107,7 @@ def _set_basic_data_json(element, wall_out):
 
     """
     wall_out["building_age_group"] = element.building_age_group
-    wall_out["construction_type"] = element.construction_type
+    wall_out["construction_data"] = element.construction_data
     wall_out["inner_radiation"] = element.inner_radiation
     wall_out["inner_convection"] = element.inner_convection
 

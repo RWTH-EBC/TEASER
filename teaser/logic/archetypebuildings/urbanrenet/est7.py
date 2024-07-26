@@ -36,23 +36,27 @@ class EST7(EST1a):
         central Air Handling units. Default is False.
     internal_gains_mode: int [1, 2, 3]
         mode for the internal gains calculation done in AixLib:
-        1: Temperature and activity degree dependent heat flux calculation for persons. The
+
+        1. Temperature and activity degree dependent heat flux calculation for persons. The
            calculation is based on  SIA 2024 (default)
-        2: Temperature and activity degree independent heat flux calculation for persons, the max.
+        2. Temperature and activity degree independent heat flux calculation for persons, the max.
            heatflowrate is prescribed by the parameter
            fixed_heat_flow_rate_persons.
-        3: Temperature and activity degree dependent calculation with
+        3. Temperature and activity degree dependent calculation with
            consideration of moisture and co2. The moisture calculation is
            based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
            Engineering ToolBox (2004) and regards only persons.
+
     neighbour_buildings : int
         Number of neighbour buildings. CAUTION: this will not change
         the orientation of the buildings wall, but just the overall
         exterior wall and window area(!) (default = 0)
-            0: no neighbour
-            1: one neighbour
-            2: two neighbours
-    construction_type : str
+
+        0. no neighbour
+        1. one neighbour
+        2. two neighbours
+
+    construction_data : str
         Construction type of used wall constructions default is "heavy")
             heavy: heavy construction
             light: light construction
@@ -82,7 +86,7 @@ class EST7(EST1a):
                  with_ahu=False,
                  internal_gains_mode=1,
                  neighbour_buildings=None,
-                 construction_type=None,
+                 construction_data=None,
                  number_of_apartments=None,
                  inner_wall_approximation_approach='teaser_default'):
         """Constructor of EST7
@@ -98,7 +102,7 @@ class EST7(EST1a):
             with_ahu,
             internal_gains_mode,
             neighbour_buildings,
-            construction_type,
+            construction_data,
             inner_wall_approximation_approach)
 
         self.number_of_apartments = number_of_apartments

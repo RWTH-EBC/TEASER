@@ -12,6 +12,7 @@ from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.buildingphysics.door import Door
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
+import teaser.data.utilities as datahandling
 
 
 class SingleFamilyHouse(Residential):
@@ -77,12 +78,13 @@ class SingleFamilyHouse(Residential):
         central Air Handling units. Default is False.
     internal_gains_mode: int [1, 2, 3]
         mode for the internal gains calculation done in AixLib:
-        1: Temperature and activity degree dependent heat flux calculation for persons. The
+
+        1. Temperature and activity degree dependent heat flux calculation for persons. The
            calculation is based on  SIA 2024 (default)
-        2: Temperature and activity degree independent heat flux calculation for persons, the max.
+        2. Temperature and activity degree independent heat flux calculation for persons, the max.
            heatflowrate is prescribed by the parameter
            fixed_heat_flow_rate_persons.
-        3: Temperature and activity degree dependent calculation with
+        3. Temperature and activity degree dependent calculation with
            consideration of moisture and co2. The moisture calculation is
            based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
            Engineering ToolBox (2004) and regards only persons.
@@ -98,16 +100,19 @@ class SingleFamilyHouse(Residential):
               proportional to the square root of the area
             b) rooftops, windows and ground floors (= walls with border to
                 soil) may have a vertical share
-    construction_type : str
+    construction_data : str
         Construction type of used wall constructions default is "existing
         state"
-            existing state:
-                construction of walls according to existing state in TABULA
-            usual refurbishment:
-                construction of walls according to usual refurbishment in TABULA
-            advanced refurbishment:
-                construction of walls according to advanced refurbishment in
-                TABULA
+
+        - existing state:
+          construction of walls according to existing state in TABULA
+        - usual refurbishment:
+          construction of walls according to usual refurbishment in
+          TABULA
+        - advanced refurbishment:
+          construction of walls according to advanced refurbishment in
+          TABULA
+
     """
 
     def __init__(
@@ -121,7 +126,7 @@ class SingleFamilyHouse(Residential):
         with_ahu=False,
         internal_gains_mode=1,
         inner_wall_approximation_approach='teaser_default',
-        construction_type=None,
+        construction_data=None,
     ):
 
         super(SingleFamilyHouse, self).__init__(
@@ -134,12 +139,12 @@ class SingleFamilyHouse(Residential):
             inner_wall_approximation_approach
         )
 
-        self.construction_type = construction_type
+        self.construction_data = construction_data
         self.number_of_floors = number_of_floors
         self.height_of_floors = height_of_floors
 
-        self._construction_type_1 = self.construction_type + "_1_SFH"
-        self._construction_type_2 = self.construction_type + "_2_SFH"
+        self._construction_data_1 = self.construction_data.value + "_1_SFH"
+        self._construction_data_2 = self.construction_data.value + "_2_SFH"
 
         self.zone_area_factors = {"SingleDwelling": [1, "Living"]}
 
@@ -362,7 +367,7 @@ class SingleFamilyHouse(Residential):
                     outer_wall = OuterWall(zone)
                     outer_wall.load_type_element(
                         year=self.year_of_construction,
-                        construction=self._construction_type_1,
+                        construction=self._construction_data_1,
                         data_class=self.parent.data,
                     )
                     outer_wall.name = key
@@ -379,7 +384,7 @@ class SingleFamilyHouse(Residential):
                     outer_wall = OuterWall(zone)
                     outer_wall.load_type_element(
                         year=self.year_of_construction,
-                        construction=self._construction_type_2,
+                        construction=self._construction_data_2,
                         data_class=self.parent.data,
                     )
                     outer_wall.name = key
@@ -396,7 +401,7 @@ class SingleFamilyHouse(Residential):
                     window = Window(zone)
                     window.load_type_element(
                         self.year_of_construction,
-                        construction=self._construction_type_1,
+                        construction=self._construction_data_1,
                         data_class=self.parent.data,
                     )
                     window.name = key
@@ -413,7 +418,7 @@ class SingleFamilyHouse(Residential):
                     window = Window(zone)
                     window.load_type_element(
                         self.year_of_construction,
-                        construction=self._construction_type_2,
+                        construction=self._construction_data_2,
                         data_class=self.parent.data,
                     )
                     window.name = key
@@ -431,7 +436,7 @@ class SingleFamilyHouse(Residential):
                     gf = GroundFloor(zone)
                     gf.load_type_element(
                         year=self.year_of_construction,
-                        construction=self._construction_type_1,
+                        construction=self._construction_data_1,
                         data_class=self.parent.data,
                     )
                     gf.name = key
@@ -449,7 +454,7 @@ class SingleFamilyHouse(Residential):
                     gf = GroundFloor(zone)
                     gf.load_type_element(
                         year=self.year_of_construction,
-                        construction=self._construction_type_2,
+                        construction=self._construction_data_2,
                         data_class=self.parent.data,
                     )
                     gf.name = key
@@ -467,7 +472,7 @@ class SingleFamilyHouse(Residential):
                     rt = Rooftop(zone)
                     rt.load_type_element(
                         year=self.year_of_construction,
-                        construction=self._construction_type_1,
+                        construction=self._construction_data_1,
                         data_class=self.parent.data,
                     )
                     rt.name = key
@@ -485,7 +490,7 @@ class SingleFamilyHouse(Residential):
                     rt = Rooftop(zone)
                     rt.load_type_element(
                         year=self.year_of_construction,
-                        construction=self._construction_type_2,
+                        construction=self._construction_data_2,
                         data_class=self.parent.data,
                     )
                     rt.name = key
@@ -503,7 +508,7 @@ class SingleFamilyHouse(Residential):
                     door = Door(zone)
                     door.load_type_element(
                         year=self.year_of_construction,
-                        construction=self._construction_type_1,
+                        construction=self._construction_data_1,
                         data_class=self.parent.data,
                     )
                     door.name = key
@@ -520,7 +525,7 @@ class SingleFamilyHouse(Residential):
                 inner_wall = InnerWall(zone)
                 inner_wall.load_type_element(
                     year=self.year_of_construction,
-                    construction="tabula_standard",
+                    construction="tabula_dk_standard",
                     data_class=self.parent.data,
                 )
                 inner_wall.name = key
@@ -535,7 +540,7 @@ class SingleFamilyHouse(Residential):
                     ceiling = Ceiling(zone)
                     ceiling.load_type_element(
                         year=self.year_of_construction,
-                        construction="tabula_standard",
+                        construction="tabula_dk_standard",
                         data_class=self.parent.data,
                     )
                     ceiling.name = key
@@ -548,7 +553,7 @@ class SingleFamilyHouse(Residential):
                     floor = Floor(zone)
                     floor.load_type_element(
                         year=self.year_of_construction,
-                        construction="tabula_standard",
+                        construction="tabula_dk_standard",
                         data_class=self.parent.data,
                     )
                     floor.name = key
@@ -560,19 +565,9 @@ class SingleFamilyHouse(Residential):
             zone.set_volume_zone()
 
     @property
-    def construction_type(self):
-        return self._construction_type
+    def construction_data(self):
+        return self._construction_data
 
-    @construction_type.setter
-    def construction_type(self, value):
-        if value is not None:
-            if value in ["tabula_standard", "tabula_retrofit", "tabula_adv_retrofit"]:
-                self._construction_type = value
-            else:
-                raise ValueError(
-                    "Construction_type has to be tabula_standard,"
-                    "tabula_retrofit, "
-                    "tabula_adv_retrofit"
-                )
-        else:
-            self._construction_type = "tabula_standard"
+    @construction_data.setter
+    def construction_data(self, value):
+        self._construction_data = datahandling.check_construction_data_setter_tabula_dk(value)

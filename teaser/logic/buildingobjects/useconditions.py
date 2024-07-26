@@ -1,10 +1,13 @@
 """This module contains UseConditions class."""
 import random
-import teaser.data.input.usecond_input as usecond_input
-import teaser.data.output.usecond_output as usecond_output
+from builtins import ValueError
+
 import pandas as pd
 from itertools import cycle, islice
 from collections import OrderedDict
+
+import teaser.data.input.usecond_input as usecond_input
+import teaser.data.output.usecond_output as usecond_output
 from teaser.logic.utilities import division_from_json
 
 
@@ -21,6 +24,7 @@ class UseConditions(object):
 
     Note: Most attributes description are translations from DIN V 18599-10
     standard
+
     Attributes
     ----------
     usage: str
@@ -44,11 +48,11 @@ class UseConditions(object):
         cooling from ideal heater and vice versa. This should only be turned
         on if an AHU exists.
     T_threshold_heating: float [K]
-       Threshold for the outside temperature above which the ideal heater is
-       permanently shut down regardless the inside temperature.
-       Default is 15 °C which corresponds to the value for all buildings
-       that are not built
-       according to EnEV standard according to DIN EN 18599-5.
+        Threshold for the outside temperature above which the ideal heater is
+        permanently shut down regardless the inside temperature.
+        Default is 15 °C which corresponds to the value for all buildings
+        that are not built
+        according to EnEV standard according to DIN EN 18599-5.
     T_threshold_cooling: float [K]
         Threshold for the outside temperature below which the ideal cooler is
         permanently shut down regardless the inside temperature.
@@ -88,7 +92,7 @@ class UseConditions(object):
         :cite:`VereinDeutscherIngenieure.2015c`.
         AixLib: Used in Zone record for internal gains
         Annex: Used for internal gains
-    persons_profile : list
+    persons_profile: list
         Relative presence of persons 0-1 (e.g. 0.5 means that 50% of the total
         number of persons are currently in the room). Given
         for 24h. This value is taken from SIA 2024. You can set a list of any
@@ -133,20 +137,24 @@ class UseConditions(object):
         Zone specific minimum specific air flow supplied by the AHU.
         AixLib: Used on Multizone level for central AHU to determine total
         volume flow of each zone.
-            Note: The AixLib parameter "WithProfile" determines whether the
-            (v_flow_profile combined with "min_ahu and max_ahu") or the
-            (persons_profile combined with "min_ahu and max_ahu")
-            is used for the AHU supply flow calculations.
-            Per default: (v_flow_profile combined with "min_ahu and max_ahu")
+
+        - **Note**: The AixLib parameter "WithProfile" determines whether the
+          (v_flow_profile combined with "min_ahu and max_ahu") or the
+          (persons_profile combined with "min_ahu and max_ahu")
+          is used for the AHU supply flow calculations.
+          Per default: (v_flow_profile combined with "min_ahu and max_ahu")
+
     max_ahu : float [m3/(m2*h)]
         Zone specific maximum specific air flow supplied by the AHU.
         AixLib: Used on Multizone level for central AHU to determine total
         volume flow of each zone.
-            Note: The AixLib parameter "WithProfile" determines whether the
-            (v_flow_profile combined with "min_ahu and max_ahu") or the
-            (persons_profile combined with "min_ahu and max_ahu")
-            is used for the AHU supply flow calculations.
-            Per default: (v_flow_profile combined with "min_ahu and max_ahu")
+
+        - **Note**: The AixLib parameter "WithProfile" determines whether the
+          (v_flow_profile combined with "min_ahu and max_ahu") or the
+          (persons_profile combined with "min_ahu and max_ahu")
+          is used for the AHU supply flow calculations.
+          Per default: (v_flow_profile combined with "min_ahu and max_ahu")
+
     with_ahu : boolean
         Zone is connected to central air handling unit or not
         AixLib: Used on Multizone level for central AHU.
@@ -154,7 +162,7 @@ class UseConditions(object):
         choose whether window opening should be regarded.
         true = natural infiltration + ventilation due to a AHU
         false = natural infiltration + ventilation due to a AHU
-            + window infiltration calculated by window opening model
+        + window infiltration calculated by window opening model
         AixLib: Used on Zone level for ventilation.
     base_infiltration : float [1/h]
         base value for the natural infiltration without window openings
@@ -178,9 +186,37 @@ class UseConditions(object):
         aligned to :cite:`DINV1859910`.
     schedules: pandas.DataFrame
         All time dependent boundary attributes in one pandas DataFrame, used
-        for export (one year in hourly timestep.)
+        for export (one year in hourly timestamps.) Derived from json.
+        Schedules can be adjusted by setting the following parameters:
+          - adjusted_opening_times
+          - first_saturday_of_year
+          - profiles_weekend_factor
+          - set_back_times
+          - heating_set_back
+          - cooling_set_back
+        To take adjustments into account you need to call calc_schedules()
+        function afterwards.
         Note: python attribute, not customizable by user (derived from Json)
-
+    adjusted_opening_times: list
+        Sets the first and last hour of opening. These will cut or extend the
+        existing profiles (machines, lights, persons).
+        [opening_hour, closing_hour]
+    first_saturday_of_year: int
+        Weekday number of first saturday of the year [1:monday;7:tuesday].
+        Is needed to calc which days of profile should be reduced by
+        profiles_weekend_factor.
+    profiles_weekend_factor: float
+        Factor to scale the existing profiles on weekends. For a reduction use
+        values between [0;1]. Increase is also possible.
+    set_back_times: list
+        Sets the first and last hour outside of which the offset is applied.
+         List of two integers [first_hour, last_hour]
+    heating_set_back: float [K]
+        Set back temperature offset for heating profile. Positive (+) values
+         increase the profile, negative (-) decrease.
+    cooling_set_back: float [K]
+        Set back temperature offset for cooling profile. Positive (+) values
+        increase the profile, negative (-) decrease.
 
     """
 
@@ -221,6 +257,15 @@ class UseConditions(object):
         self.min_ahu = 0.0
         self.max_ahu = 2.6
         self.with_ahu = False
+
+        self._first_saturday_of_year = 1
+        self.profiles_weekend_factor = None
+
+        self._set_back_times = None
+        self.heating_set_back = -2
+        self.cooling_set_back = 2
+
+        self._adjusted_opening_times = None
 
         self._with_ideal_thresholds = False
 
@@ -355,18 +400,92 @@ class UseConditions(object):
             0.0,
         ]
 
-        self.schedules = pd.DataFrame(
-            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
-            .to_series()
-            .dt.strftime("%m-%d %H:%M:%S"),
-            data={
-                "heating_profile": list(islice(cycle(self._heating_profile), 8760)),
-                "cooling_profile": list(islice(cycle(self._cooling_profile), 8760)),
-                "persons_profile": list(islice(cycle(self._persons_profile), 8760)),
-                "lighting_profile": list(islice(cycle(self._lighting_profile), 8760)),
-                "machines_profile": list(islice(cycle(self._machines_profile), 8760)),
-            },
-        )
+        self._schedules = None
+
+    def adjust_profile_by_opening(self, profile):
+        """Adjusts the given profile by opening times specified for use
+        condition with the parameter self.set_back_times.
+
+        Parameters
+        ----------
+        profile : list
+            list with the given profile (lighting, machines, persons)
+        """
+        new_profile = []
+        # split profile into daily profiles
+        profile_len = len(profile)
+        n_sublists = profile_len // 24
+        daily_profiles = (profile[i * 24:(i + 1) * 24] for i in
+                          range(n_sublists))
+        opening_hour_index = self.adjusted_opening_times[0] - 1
+        closing_hour_index = self.adjusted_opening_times[1] - 1
+
+        for profile_day in daily_profiles:
+            baseload = profile_day[0]
+            for i, value in enumerate(profile_day):
+                # check if runtime variable(time) is inside opening times
+                #  +/- delta times
+                if opening_hour_index <= i <= closing_hour_index:
+                    if value == baseload:
+                        # start new iteration of profile_day from beginning
+                        for j, value2 in enumerate(profile_day):
+                            # search first value which is > baseload
+                            # if
+                            if (
+                                    value2 > baseload and i < (
+                                    closing_hour_index - opening_hour_index) / 2
+                            ):
+                                profile_day[i] = profile_day[j]
+                                break
+                            elif (
+                                    value2 > baseload and i >= (
+                                    closing_hour_index - opening_hour_index) / 2
+                            ):
+                                # value is overwritten every time,
+                                # so that last value that is > baseload
+                                # is used
+                                profile_day[i] = value2
+                            else:
+                                pass
+                    else:
+                        pass
+                elif not (
+                        opening_hour_index <= i <= closing_hour_index) and \
+                        value != baseload:
+                    # if time is not inside opening times, set value to
+                    # baseload
+                    profile_day[i] = baseload
+            new_profile.extend(profile_day)
+            return new_profile
+
+    def adjust_profile_by_weekend(self, profile):
+        """Scales the given profile on weekends. Factor for scaling is taken
+        from self.profiles_weekend_factor.
+
+        Parameters
+        ----------
+        profile : list
+            list with the given profile (lighting, machines, persons)
+        """
+        new_profile = []
+        # check if profile is at least week profile (other cases
+        # than 24, 168,8760 are excluded already)
+        if len(profile) == 24:
+            profile = profile * 7
+        n_sublists = len(profile) // 24
+        daily_profiles = (profile[i * 24:(i + 1) * 24] for i in
+                          range(n_sublists))
+        weekend_days = []
+        for i in range(self.first_saturday_of_year, 365, 7):
+            weekend_days.append(i)
+            weekend_days.append(i + 1)
+        for day_nr, profile_day in enumerate(daily_profiles, 1):
+            if day_nr in weekend_days:
+                profile_day = \
+                    [round((x * self.profiles_weekend_factor), 3)
+                     for x in profile_day]
+            new_profile.extend(profile_day)
+        return new_profile
 
     def load_use_conditions(self, zone_usage, data_class=None):
         """Load typical use conditions from JSON data base.
@@ -404,6 +523,24 @@ class UseConditions(object):
 
         usecond_output.save_use_conditions(use_cond=self, data_class=data_class)
 
+    @staticmethod
+    def is_periodic(profile_list):
+        """Checks if the given profile list is periodic.
+         Allowed periods are: 24h, 168h (7 days), 8760h (1year).
+
+        Parameters
+        ----------
+        profile_list: list
+            given profile as list of hourly values.
+        """
+        if not isinstance(profile_list, list):
+            profile_list = list(profile_list)
+        profile_len = len(profile_list)
+        if profile_len in [24, 168, 8760]:
+            return True
+        else:
+            return False
+
     @property
     def persons(self):
         return self._persons
@@ -436,9 +573,14 @@ class UseConditions(object):
     @heating_profile.setter
     def heating_profile(self, value):
         if not isinstance(value, list):
-            value = [value]
-        self._heating_profile = value
-        self.schedules["heating_profile"] = list(islice(cycle(value), 8760))
+            value = [value] * 24
+        if self.is_periodic(value):
+            self._heating_profile = value
+        else:
+            raise ValueError(
+                f"heating profile should be periodic (24h, 168h pr 8760h), "
+                f"but length is {len(value)}"
+            )
 
     @property
     def cooling_profile(self):
@@ -447,9 +589,14 @@ class UseConditions(object):
     @cooling_profile.setter
     def cooling_profile(self, value):
         if not isinstance(value, list):
-            value = [value]
-        self._cooling_profile = value
-        self.schedules["cooling_profile"] = list(islice(cycle(value), 8760))
+            value = [value] * 24
+        if self.is_periodic(value):
+            self._cooling_profile = value
+        else:
+            raise ValueError(
+                f"cooling profile should be periodic (24h, 168h pr 8760h), "
+                f"but length is {len(value)}"
+            )
 
     @property
     def persons_profile(self):
@@ -458,9 +605,14 @@ class UseConditions(object):
     @persons_profile.setter
     def persons_profile(self, value):
         if not isinstance(value, list):
-            value = [value]
-        self._persons_profile = value
-        self.schedules["persons_profile"] = list(islice(cycle(value), 8760))
+            value = [value] * 24
+        if self.is_periodic(value):
+            self._persons_profile = value
+        else:
+            raise ValueError(
+                f"persons profile should be periodic (24h, 168h pr 8760h), "
+                f"but length is {len(value)}"
+            )
 
     @property
     def machines_profile(self):
@@ -469,9 +621,14 @@ class UseConditions(object):
     @machines_profile.setter
     def machines_profile(self, value):
         if not isinstance(value, list):
-            value = [value]
-        self._machines_profile = value
-        self.schedules["machines_profile"] = list(islice(cycle(value), 8760))
+            value = [value] * 24
+        if self.is_periodic(value):
+            self._machines_profile = value
+        else:
+            raise ValueError(
+                f"machines profile should be periodic (24h, 168h pr 8760h), "
+                "but length is {len(value)}"
+            )
 
     @property
     def lighting_profile(self):
@@ -480,9 +637,128 @@ class UseConditions(object):
     @lighting_profile.setter
     def lighting_profile(self, value):
         if not isinstance(value, list):
-            value = [value]
-        self._lighting_profile = value
-        self.schedules["lighting_profile"] = list(islice(cycle(value), 8760))
+            value = [value] * 24
+        if self.is_periodic(value):
+            self._lighting_profile = value
+        else:
+            raise ValueError(
+                f"lighting profile should be periodic (24h, 168h pr 8760h), "
+                "but length is {len(value)}"
+            )
+
+    @property
+    def schedules(self):
+        self._schedules = pd.DataFrame(
+            index=pd.date_range("2019-01-01 00:00:00", periods=8760,
+                                freq="h").to_series().dt.strftime(
+                "%m-%d %H:%M:%S"),
+            data={
+                "heating_profile": list(
+                    islice(cycle(self._heating_profile), 8760)),
+                "cooling_profile": list(
+                    islice(cycle(self._cooling_profile), 8760)),
+                "persons_profile": list(
+                    islice(cycle(self._persons_profile), 8760)),
+                "lighting_profile": list(
+                    islice(cycle(self._lighting_profile), 8760)),
+                "machines_profile": list(
+                    islice(cycle(self._machines_profile), 8760)),
+            },
+        )
+        return self._schedules
+
+    @schedules.setter
+    def schedules(self, value):
+        self._schedules = value
+
+    def calc_adj_schedules(self):
+        """calculates adjusted schedules for use conditions. When called the
+        profiles get adjusted due to specified conditions. Afterwards the
+        existing schedules will be overwritten by the resulting pandas dataframe
+        with 8760 h.
+
+        """
+        if self.adjusted_opening_times:
+            self._machines_profile = self.adjust_profile_by_opening(
+                self._machines_profile)
+            self._lighting_profile = self.adjust_profile_by_opening(
+                self._lighting_profile)
+            self._persons_profile = self.adjust_profile_by_opening(
+                self._persons_profile)
+
+        if self.profiles_weekend_factor:
+            self._machines_profile = self.adjust_profile_by_weekend(
+                self._machines_profile)
+            self._lighting_profile = self.adjust_profile_by_weekend(
+                self._lighting_profile)
+            self._persons_profile = self.adjust_profile_by_weekend(
+                self._persons_profile)
+
+        if self.set_back_times:
+            set_back_index_morning, set_back_index_evening = \
+                self.set_back_times[0] - 1, self.set_back_times[1] - 1
+            heating_profile, cooling_profile = [], []
+            for i, value in enumerate(self._heating_profile):
+                if 0 <= i <= set_back_index_morning \
+                        or set_back_index_evening <= i <= 24:
+                    heating_profile.append(value + self.heating_set_back)
+                else:
+                    heating_profile.append(value)
+            self._heating_profile = heating_profile
+            for i, value in enumerate(self._cooling_profile):
+                if 0 <= i <= set_back_index_morning \
+                        or set_back_index_evening <= i <= 24:
+                    cooling_profile.append(value + self.cooling_set_back)
+                else:
+                    cooling_profile.append(value)
+            self._cooling_profile = cooling_profile
+
+    @property
+    def adjusted_opening_times(self):
+        return self._adjusted_opening_times
+
+    @adjusted_opening_times.setter
+    def adjusted_opening_times(self, value):
+        if len(value) != 2:
+            raise ValueError(f"adjusted_opening_times must be list of length 2,"
+                             f" but list of length {len(value)} was provided")
+        elif value[0] < 0 or value[0] > 24 or value[1] < 0 or value[1] > 24:
+            raise ValueError(f"elements of adjusted_opening_times must be "
+                             f"hours between 0 and 24. But are {value[0]} and"
+                             f" {value[1]}")
+        else:
+            self._adjusted_opening_times = value
+
+    @property
+    def set_back_times(self):
+        return self._set_back_times
+
+    @set_back_times.setter
+    def set_back_times(self, value):
+        if len(value) != 2:
+            raise ValueError(f"set_back_times must be list of length 2,"
+                             f" but list of length {len(value)} was provided")
+        elif value[0] < 0 or value[0] > 24 or value[1] < 0 or value[1] > 24:
+            raise ValueError(f"elements of set_back_times must be "
+                             f"hours between 0 and 24. But are {value[0]} and"
+                             f" {value[1]}")
+        else:
+            self._set_back_times = value
+
+    @property
+    def first_saturday_of_year(self):
+        return self._first_saturday_of_year
+
+    @first_saturday_of_year.setter
+    def first_saturday_of_year(self, value):
+        if value < 1 or value > 7:
+            raise ValueError(f"first_saturday_of_year must be int between "
+                             f"[1, 7] but is {value}")
+        elif not isinstance(value, int):
+            raise ValueError(f"first_saturday_of_year must be int but is "
+                             f"{type(value)}")
+        else:
+            self._first_saturday_of_year = value
 
     @property
     def parent(self):

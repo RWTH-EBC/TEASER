@@ -117,34 +117,16 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     columns=2:${len(bldg.thermal_zones)+1})
     "Set points for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
+  % if use_postprocessing_calc:
+    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.MultizonePostProcessing
+      multizonePostProcessing(
+      VAir=multizone.VAir,
+      numZones=multizone.numZones,
+      zoneParam=multizone.zoneParam,
+      calc_rel_humidity=multizone.use_moisture_balance)
+      annotation (Placement(transformation(extent={{82,80},{102,100}})));
+  % endif
 
-% if False:
-   Modelica.Blocks.Sources.CombiTimeTable tableIntGainsRad(
-    tableOnFile=true,
-    tableName="IntGainsConvRad",
-    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://${bldg.parent.name}/${bldg.name}/${bldg.library_attr.file_add_int_gains}"),
-    columns=2:${len(bldg.thermal_zones)+1})
-    "Additional internal gains (radiative)"
-    annotation (Placement(transformation(extent={{-64,-34},{-48,-18}})));
-
-   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRad[${len(bldg.thermal_zones)}]
-    annotation (Placement(transformation(extent={{-22,-36},{-2,-16}})));
-
-   Modelica.Blocks.Sources.CombiTimeTable tableIntGainsConv(
-    tableOnFile=true,
-    tableName="IntGainsConvRad",
-    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://${bldg.parent.name}/${bldg.name}/${bldg.library_attr.file_add_int_gains}"),
-    columns=${len(bldg.thermal_zones)+2}:${(2*len(bldg.thermal_zones))+1})
-    "Additional internal gains (convective)"
-    annotation (Placement(transformation(extent={{-64,-72},{-48,-56}})));
-
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowConv[${len(bldg.thermal_zones)}]
-    annotation (Placement(transformation(extent={{-24,-74},{-4,-54}})));
-% endif
 equation
   connect(weaDat.weaBus, multizone.weaBus) annotation (Line(
       points={{-62,40},{-32,40},{-32,6},{34,6}},
@@ -163,19 +145,34 @@ equation
   connect(tableTSetCool.y, multizone.TSetCool) annotation (Line(points={{55.2,-58},
           {36.8,-58},{36.8,-9}}, color={0,0,127}));
 
-% if False:
-  connect(tableIntGainsRad.y, heatFlowRad.Q_flow)
-    annotation (Line(points={{-47.2,-26},{-22,-26}}, color={0,0,127}));
 
-  connect(heatFlowRad.port, multizone.intGainsRad) annotation (Line(points={{-2,
-          -26},{16,-26},{16,-3},{34,-3}}, color={191,0,0}));
+% if use_postprocessing_calc:
+  connect(multizone.TAir, multizonePostProcessing.TAir) annotation (Line(points={{51,4.95},
+          {70,4.95},{70,99},{81.8,99}},             color={0,0,127}));
 
-  connect(heatFlowConv.port, multizone.intGainsConv) annotation (Line(points={{-4,
-          -64},{20,-64},{20,-6.2},{34,-6.2}}, color={191,0,0}));
+  connect(multizone.PCooler, multizonePostProcessing.PCooler) annotation (Line(
+        points={{51,-7},{70,-7},{70,90.6},{81.8,90.6}},
+                                                      color={0,0,127}));
+  connect(multizone.PHeater, multizonePostProcessing.PHeater) annotation (Line(
+        points={{51,-5},{70,-5},{70,94.8},{81.8,94.8}},
+                                                      color={0,0,127}));
+  connect(multizone.Pel, multizonePostProcessing.PelAHU) annotation (Line(
+        points={{51,1},{70,1},{70,86.6},{81.6,86.6}}, color={0,0,127}));
 
-  connect(tableIntGainsConv.y, heatFlowConv.Q_flow)
-    annotation (Line(points={{-47.2,-64},{-24,-64}}, color={0,0,127}));
-%endif
+  connect(multizone.PCoolAHU, multizonePostProcessing.PCoolAHU) annotation (
+      Line(points={{51,-3},{70,-3},{70,79},{81.6,79}}, color={0,0,127}));
+
+  connect(multizone.PHeatAHU, multizonePostProcessing.PHeatAHU) annotation (
+      Line(points={{51,-1},{70,-1},{70,82.8},{81.6,82.8}}, color={0,0,127}));
+
+  connect(multizone.X_w, multizonePostProcessing.X_w) annotation (Line(points={{57,2},{
+          70,2},{70,94.2},{80,94.2}},        color={0,0,127}));
+
+  connect(multizone.TRad, multizonePostProcessing.TRad) annotation (Line(points={{51,3},{
+          70,3},{70,97.6},{80,97.6}},         color={0,0,127}));
+  connect(multizone.QIntGains_flow, multizonePostProcessing.QIntGains_flow)
+    annotation (Line(points={{51,-7},{70,-7},{70,80},{80,80}}, color={0,0,127}));
+% endif
 
   annotation (experiment(
       StartTime=${str(zone.parent.parent.modelica_info.start_time)},

@@ -1,11 +1,10 @@
-# Created January 2017
-# TEASER Development Team
+# # Example 2: Export Modelica models for AixLib library using TEASER API
 
-"""This module contains an example how to export buildings from a TEASER
-project to ready-to-run simulation models for Modelica library AixLib. These
-models will only simulate using Dymola, the reason for this are state
-machines that are used in one AixLib specific AHU model.
-"""
+# This module contains an example how to export buildings from a TEASER
+# project to ready-to-run simulation models for Modelica library AixLib. These
+# models will only simulate using Dymola, the reason for this are state
+# machines that are used in one AixLib specific AHU model.
+# You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)
 
 import teaser.examples.e1_generate_archetype as e1
 import teaser.logic.utilities as utilities
@@ -13,7 +12,7 @@ import os
 
 
 def example_export_aixlib():
-    """"This function demonstrates the export to Modelica library AixLib using
+    """This function demonstrates the export to Modelica library AixLib using
     the API function of TEASER"""
 
     # In e1_generate_archetype we created a Project with three archetype
@@ -67,9 +66,23 @@ def example_export_aixlib():
     # exported. In this case we want to export all buildings to our home
     # directory, thus we are passing over None for both parameters.
 
+    # We might want not have all data stored in our result file. By defining
+    # export_vars as following we can specify which results we want to store
+    # and define a collection name under which these results are stored. This
+    # feature only works with Dymola.
+
+    export_vars = {
+        "HeatingDemands": ["*multizone.PHeater*", "*multizone.PHeatAHU"],
+        "CoolingDemands": ["*multizone.PCooler*", "*multizone.PCoolAHU"],
+        "Temperatures": ["*multizone.TAir*", "*multizone.TRad*"]
+    }
+
     path = prj.export_aixlib(
         internal_id=None,
-        path=None)
+        path=None,
+        report=True,
+        export_vars=export_vars
+    )
 
     return path
 

@@ -44,12 +44,13 @@ class Building(object):
         central Air Handling units. Default is False.
     internal_gains_mode: int [1, 2, 3]
         mode for the internal gains calculation done in AixLib:
-        1: Temperature and activity degree dependent heat flux calculation for persons. The
+
+        1. Temperature and activity degree dependent heat flux calculation for persons. The
            calculation is based on  SIA 2024 (default)
-        2: Temperature and activity degree independent heat flux calculation for persons, the max.
+        2. Temperature and activity degree independent heat flux calculation for persons, the max.
            heatflowrate is prescribed by the parameter
            fixed_heat_flow_rate_persons.
-        3: Temperature and activity degree dependent calculation with
+        3. Temperature and activity degree dependent calculation with
            consideration of moisture and co2. The moisture calculation is
            based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
            Engineering ToolBox (2004) and regards only persons.
@@ -116,10 +117,12 @@ class Building(object):
     number_of_elements_calc : int
         Number of elements that are used for thermal zone calculation in this
         building.
-        1: OneElement
-        2: TwoElement
-        3: ThreeElement
-        4: FourElement
+
+        1. OneElement
+        2. TwoElement
+        3. ThreeElement
+        4. FourElement
+
     merge_windows_calc : boolean
         True for merging the windows into the outer wall's RC-combination,
         False for separate resistance for window, default is False. (Only
@@ -257,7 +260,7 @@ class Building(object):
         orientation : float
             orientation of the obtained wall
         Returns
-        ----------
+        -------
         sum_area : float
             area of all walls of one direction
         """
@@ -294,7 +297,7 @@ class Building(object):
         orientation : float
             orientation of the obtained windows
         Returns
-        ----------
+        -------
         sum_area : float
             area of all windows of one direction
         """
@@ -313,7 +316,7 @@ class Building(object):
         Ceilings and Floors.
 
         Returns
-        ----------
+        -------
         sum_area : float
             area of all inner walls
 

@@ -1,15 +1,13 @@
-# Created July 2015
-# TEASER Development Team
-
-"""This module contains an example that shows how to retrofit all buildings
-in a TEASER project with different setups
-"""
+# # Example 7: Retrofit buildings
+# This module contains an example that shows how to retrofit all buildings
+# in a TEASER project with different setups
+# You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)
 
 import teaser.examples.e1_generate_archetype as e1
 
 
 def example_retrofit_building():
-    """"This function demonstrates retrofit options of TEASER API"""
+    """This function demonstrates retrofit options of TEASER API"""
 
     # In e1_generate_archetype we created a Project with three archetype
     # buildings to get this Project we rerun this example
@@ -26,7 +24,7 @@ def example_retrofit_building():
     # retrofit standard od the year of retrofit.
     # The year of retrofit has to be specified. In addition, we can set
     # the used window_type and the type of insulation material used.
-    # As we have both `iwu`/`bmvbs` and `tabuly` typology in our project we need
+    # As we have both `iwu`/`bmvbs` and `tabula` typology in our project we need
     # to pass all keywords to the function year_of_retrofit, window_type,
     # material for `iwu`/`bmvbs` and type_of_retrofit for `tabula`.
 
