@@ -191,6 +191,7 @@
 <li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.BmvbsInstitute4"><code class="docutils literal notranslate"><span class="pre">GeometryData.BmvbsInstitute4</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.BmvbsInstitute8"><code class="docutils literal notranslate"><span class="pre">GeometryData.BmvbsInstitute8</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.BmvbsOffice"><code class="docutils literal notranslate"><span class="pre">GeometryData.BmvbsOffice</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.EESchwimmSwimmingFacility"><code class="docutils literal notranslate"><span class="pre">GeometryData.EESchwimmSwimmingFacility</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.IwuSingleFamilyDwelling"><code class="docutils literal notranslate"><span class="pre">GeometryData.IwuSingleFamilyDwelling</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.TabulaDeApartmentBlock"><code class="docutils literal notranslate"><span class="pre">GeometryData.TabulaDeApartmentBlock</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.TabulaDeMultiFamilyHouse"><code class="docutils literal notranslate"><span class="pre">GeometryData.TabulaDeMultiFamilyHouse</span></code></a></li>
@@ -388,9 +389,9 @@ This function adds a non-residential archetype building to the TEASER
 project. You need to specify the method of the archetype generation.
 Currently TEASER supports only method according to Lichtmess and BMVBS
 for non-residential buildings. Further the type of geometry_data needs to be
-specified. Currently TEASER supports four different types of
+specified. Currently TEASER supports five different types of
 non-residential buildings (‘office’, ‘institute’, ‘institute4’,
-‘institute8’). For more information on specific archetype buildings and
+‘institute8’,’swimming_facility’). For more information on specific archetype buildings and
 methods, please read the docs of archetype classes.</p>
 <p>This function also calculates the parameters of the buildings directly
 with the settings set in the project (e.g. used_library_calc or
@@ -401,7 +402,7 @@ number_of_elements_calc).</p>
 <dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Used data for construction, for bmvbs non-residential buildings ‘iwu_heavy’ is supported</p>
 </dd>
 <dt><strong>geometry_data</strong><span class="classifier">str</span></dt><dd><p>Main geometry_data of the obtained building, currently only ‘bmvbs_office’,
-‘bmvbs_institute’, ‘bmvbs_institute4’, ‘bmvbs_institute8’ are supported</p>
+‘bmvbs_institute’, ‘bmvbs_institute4’, ‘bmvbs_institute8’ and ‘swimmingPool’ are supported</p>
 </dd>
 <dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
 </dd>

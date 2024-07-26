@@ -102,6 +102,7 @@
 <span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est7</span> <span class="kn">import</span> <span class="n">EST7</span>
 <span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est8a</span> <span class="kn">import</span> <span class="n">EST8a</span>
 <span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est8b</span> <span class="kn">import</span> <span class="n">EST8b</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.eeschwimm.swimmingPool</span> <span class="kn">import</span> <span class="n">SwimmingFacility</span>
 <span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">SingleFamilyHouse</span><span class="p">,</span>
 <span class="p">)</span>
@@ -155,7 +156,9 @@
     <span class="n">UrbanrenetEst6</span> <span class="o">=</span> <span class="s2">&quot;urbanrenet_est6&quot;</span>
     <span class="n">UrbanrenetEst7</span> <span class="o">=</span> <span class="s2">&quot;urbanrenet_est7&quot;</span>
     <span class="n">UrbanrenetEst8a</span> <span class="o">=</span> <span class="s2">&quot;urbanrenet_est8a&quot;</span>
-    <span class="n">UrbanrenetEst8b</span> <span class="o">=</span> <span class="s2">&quot;urbanrenet_est8b&quot;</span></div>
+    <span class="n">UrbanrenetEst8b</span> <span class="o">=</span> <span class="s2">&quot;urbanrenet_est8b&quot;</span>
+
+    <span class="n">EESchwimmSwimmingFacility</span> <span class="o">=</span> <span class="s2">&quot;swimming_facility&quot;</span></div>
 
 
 <div class="viewcode-block" id="ConstructionData">
@@ -249,6 +252,9 @@
     <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst7</span><span class="p">:</span> <span class="n">EST7</span><span class="p">,</span>
     <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst8a</span><span class="p">:</span> <span class="n">EST8a</span><span class="p">,</span>
     <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst8b</span><span class="p">:</span> <span class="n">EST8b</span><span class="p">,</span>
+    <span class="c1">#EESchwimm</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">EESchwimmSwimmingFacility</span><span class="p">:</span> <span class="n">SwimmingFacility</span>
+
 <span class="p">}</span>
 
 <span class="c1"># Dictionary that defines which building geometries are allowed for each construction data type.</span>
@@ -260,7 +266,8 @@
                                  <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst3</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst4a</span><span class="p">,</span>
                                  <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst4b</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst5</span><span class="p">,</span>
                                  <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst6</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst7</span><span class="p">,</span>
-                                 <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst8a</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst8b</span><span class="p">],</span>
+                                 <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst8a</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst8b</span><span class="p">,</span>
+                                 <span class="n">GeometryData</span><span class="o">.</span><span class="n">EESchwimmSwimmingFacility</span><span class="p">],</span>
     <span class="n">ConstructionData</span><span class="o">.</span><span class="n">iwu_light</span><span class="p">:</span> <span class="p">[</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">IwuSingleFamilyDwelling</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">BmvbsOffice</span><span class="p">,</span>
                                  <span class="n">GeometryData</span><span class="o">.</span><span class="n">BmvbsInstitute</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">BmvbsInstitute4</span><span class="p">,</span>
                                  <span class="n">GeometryData</span><span class="o">.</span><span class="n">BmvbsInstitute8</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst1a</span><span class="p">,</span>
@@ -268,7 +275,8 @@
                                  <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst3</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst4a</span><span class="p">,</span>
                                  <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst4b</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst5</span><span class="p">,</span>
                                  <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst6</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst7</span><span class="p">,</span>
-                                 <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst8a</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst8b</span><span class="p">],</span>
+                                 <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst8a</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst8b</span><span class="p">,</span>
+                                 <span class="n">GeometryData</span><span class="o">.</span><span class="n">EESchwimmSwimmingFacility</span><span class="p">],</span>
 
     <span class="n">ConstructionData</span><span class="o">.</span><span class="n">tabula_de_standard</span><span class="p">:</span> <span class="p">[</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeSingleFamilyHouse</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeTerracedHouse</span><span class="p">,</span>
                                           <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeMultiFamilyHouse</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeApartmentBlock</span><span class="p">],</span>
