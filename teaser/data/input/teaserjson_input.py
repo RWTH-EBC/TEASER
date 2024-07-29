@@ -29,6 +29,8 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.buildingphysics.door import Door
 import json
 import collections
+import teaser
+import warnings
 
 
 def load_teaser_json(path, project):
@@ -47,19 +49,26 @@ def load_teaser_json(path, project):
 
     """
     __building_class = {
-        "Office": {"method": "bmvbs", "teaser_class": Office},
-        "Institute": {"method": "bmvbs", "teaser_class": Institute},
-        "Institute4": {"method": "bmvbs", "teaser_class": Institute4},
-        "Institute8": {"method": "bmvbs", "teaser_class": Institute8},
-        "Building": {"method": "undefined", "teaser_class": Building},
-        "SingleFamilyDwelling": {"method": "iwu", "teaser_class": SingleFamilyDwelling},
-        "SingleFamilyHouse": {"method": "tabula_de", "teaser_class": SingleFamilyHouse},
-        "TerracedHouse": {"method": "tabula_de", "teaser_class": TerracedHouse},
-        "MultiFamilyHouse": {"method": "tabula_de", "teaser_class": MultiFamilyHouse},
-        "ApartmentBlock": {"method": "tabula_de", "teaser_class": ApartmentBlock},
+        "Office": {"construction_data": "iwu_heavy", "teaser_class": Office},
+        "Institute": {"construction_data": "iwu_heavy", "teaser_class": Institute},
+        "Institute4": {"construction_data": "iwu_heavy", "teaser_class": Institute4},
+        "Institute8": {"construction_data": "iwu_heavy", "teaser_class": Institute8},
+        "Building": {"construction_data": "undefined", "teaser_class": Building},
+        "SingleFamilyDwelling": {"construction_data": "iwu_heavy", "teaser_class": SingleFamilyDwelling},
+        "SingleFamilyHouse": {"construction_data": "tabula_de_standard", "teaser_class": SingleFamilyHouse},
+        "TerracedHouse": {"construction_data": "tabula_de_standard", "teaser_class": TerracedHouse},
+        "MultiFamilyHouse": {"construction_data": "tabula_de_standard", "teaser_class": MultiFamilyHouse},
+        "ApartmentBlock": {"construction_data": "tabula_de_standard", "teaser_class": ApartmentBlock},
     }
     with open(path, "r+") as f:
         prj_in = json.load(f, object_pairs_hook=collections.OrderedDict)
+    json_version = prj_in["project"]["version"]
+    teaser_version = teaser.__version__
+
+    if json_version != teaser_version:
+        warnings.warn(
+            f"TEASER version mismatch: JSON version {json_version} "
+            f"does not match current TEASER version {teaser_version}")
 
     project.name = prj_in["project"]["name"]
     project.weather_file_path = prj_in["project"]["weather_file_path"]
@@ -289,7 +298,7 @@ def set_basic_data_teaser(wall_in, element):
     element.inner_convection = wall_in["inner_convection"]
     element.year_of_construction = wall_in["year_of_construction"]
     element.year_of_retrofit = wall_in["year_of_retrofit"]
-    element.construction_type = wall_in["construction_type"]
+    element.construction_data = wall_in["construction_data"]
 
     if (
         type(element).__name__ == "OuterWall"

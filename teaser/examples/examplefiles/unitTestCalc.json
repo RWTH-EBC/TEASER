@@ -1,6 +1,6 @@
 {
     "project": {
-        "version": "0.7",
+        "version": "1.0.0",
         "name": "Project",
         "weather_file_path": "modelica://AixLib/Resources/WeatherData/",
         "number_of_elements_calc": 2,
@@ -224,7 +224,7 @@
                             "BuildinElement460863": {
                                 "year_of_construction": 1988,
                                 "year_of_retrofit": null,
-                                "construction_type": "massiv",
+                                "construction_data": "massiv",
                                 "area": 40.0,
                                 "tilt": 90.0,
                                 "orientation": 0.0,
@@ -271,7 +271,7 @@
                             "BuildinElement444425": {
                                 "year_of_construction": 1988,
                                 "year_of_retrofit": null,
-                                "construction_type": "massiv",
+                                "construction_data": "massiv",
                                 "area": 20.0,
                                 "tilt": 90.0,
                                 "orientation": 90.0,
@@ -318,7 +318,7 @@
                             "BuildinElement110574": {
                                 "year_of_construction": 1988,
                                 "year_of_retrofit": null,
-                                "construction_type": "massiv",
+                                "construction_data": "massiv",
                                 "area": 40.0,
                                 "tilt": 90.0,
                                 "orientation": 180.0,
@@ -365,7 +365,7 @@
                             "BuildinElement198283": {
                                 "year_of_construction": 1988,
                                 "year_of_retrofit": null,
-                                "construction_type": "massiv",
+                                "construction_data": "massiv",
                                 "area": 20.0,
                                 "tilt": 90.0,
                                 "orientation": 270.0,
@@ -415,7 +415,7 @@
                             "BuildinElement365831": {
                                 "year_of_construction": 1988,
                                 "year_of_retrofit": null,
-                                "construction_type": "massiv",
+                                "construction_data": "massiv",
                                 "area": 400.0,
                                 "tilt": 0.0,
                                 "orientation": -1.0,
@@ -464,7 +464,7 @@
                             "BuildinElement130002": {
                                 "year_of_construction": 1988,
                                 "year_of_retrofit": null,
-                                "construction_type": "massiv",
+                                "construction_data": "massiv",
                                 "area": 400.0,
                                 "tilt": 0.0,
                                 "orientation": -2.0,
@@ -511,7 +511,7 @@
                             "BuildinElement60639": {
                                 "year_of_construction": 1988,
                                 "year_of_retrofit": null,
-                                "construction_type": "9",
+                                "construction_data": "9",
                                 "area": 20.0,
                                 "tilt": 90.0,
                                 "orientation": 0.0,
@@ -540,7 +540,7 @@
                             "BuildinElement1874": {
                                 "year_of_construction": 1988,
                                 "year_of_retrofit": null,
-                                "construction_type": "9",
+                                "construction_data": "9",
                                 "area": 10.0,
                                 "tilt": 90.0,
                                 "orientation": 90.0,
@@ -569,7 +569,7 @@
                             "BuildinElement8631": {
                                 "year_of_construction": 1988,
                                 "year_of_retrofit": null,
-                                "construction_type": "9",
+                                "construction_data": "9",
                                 "area": 20.0,
                                 "tilt": 90.0,
                                 "orientation": 180.0,
@@ -598,7 +598,7 @@
                             "BuildinElement8413": {
                                 "year_of_construction": 1988,
                                 "year_of_retrofit": null,
-                                "construction_type": "9",
+                                "construction_data": "9",
                                 "area": 10.0,
                                 "tilt": 90.0,
                                 "orientation": 270.0,
@@ -629,7 +629,7 @@
                             "BuildinElement36207": {
                                 "year_of_construction": 1988,
                                 "year_of_retrofit": null,
-                                "construction_type": "massiv",
+                                "construction_data": "massiv",
                                 "area": 6666.66666667,
                                 "tilt": null,
                                 "orientation": null,
@@ -674,7 +674,7 @@
                             "BuildinElement42622": {
                                 "year_of_construction": 1988,
                                 "year_of_retrofit": null,
-                                "construction_type": "massiv",
+                                "construction_data": "massiv",
                                 "area": 1600.0,
                                 "tilt": null,
                                 "orientation": null,
@@ -719,7 +719,7 @@
                             "BuildinElement327133": {
                                 "year_of_construction": 1988,
                                 "year_of_retrofit": null,
-                                "construction_type": "massiv",
+                                "construction_data": "massiv",
                                 "area": 1600.0,
                                 "tilt": null,
                                 "orientation": null,

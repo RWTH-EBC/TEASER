@@ -2,6 +2,7 @@
 
 import json
 import collections
+import teaser
 
 
 def save_teaser_json(path, project):
@@ -24,7 +25,7 @@ def save_teaser_json(path, project):
 
     prj_out = collections.OrderedDict()
     prj_out["project"] = collections.OrderedDict()
-    prj_out["project"]["version"] = "0.7"
+    prj_out["project"]["version"] = teaser.__version__
     prj_out["project"]["name"] = project.name
     prj_out["project"]["weather_file_path"] = project.weather_file_path
     prj_out["project"]["number_of_elements_calc"] = project.number_of_elements_calc
@@ -48,16 +49,16 @@ def save_teaser_json(path, project):
     prj_out["project"]["modelica_info"]["version"] = project.modelica_info.version
     prj_out["project"]["buildings"] = collections.OrderedDict()
     __building_class = {
-        "Building": {"method": "undefined", "usage": "undefined"},
-        "Office": {"method": "bmvbs", "usage": "office"},
-        "Institute": {"method": "bmvbs", "usage": "institute"},
-        "Institute4": {"method": "bmvbs", "usage": "institute4"},
-        "Institute8": {"method": "bmvbs", "usage": "institute8"},
-        "SingleFamilyDwelling": {"method": "iwu", "usage": "single_family_dwelling"},
-        "SingleFamilyHouse": {"method": "tabula_de", "usage": "single_family_house"},
-        "TerracedHouse": {"method": "tabula_de", "usage": "terraced_house"},
-        "MultiFamilyHouse": {"method": "tabula_de", "usage": "multi_family_house"},
-        "ApartmentBlock": {"method": "tabula_de", "usage": "apartment_block"},
+        "Building": {"construction_data": "undefined", "geometry_data": "undefined"},
+        "Office": {"construction_data": "bmvbs", "geometry_data": "bmvbs_office"},
+        "Institute": {"construction_data": "bmvbs", "geometry_data": "bmvbs_institute"},
+        "Institute4": {"construction_data": "bmvbs", "geometry_data": "bmvbs_institute4"},
+        "Institute8": {"construction_data": "bmvbs", "geometry_data": "bmvbs_institute8"},
+        "SingleFamilyDwelling": {"construction_data": "iwu", "geometry_data": "iwu_single_family_dwelling"},
+        "SingleFamilyHouse": {"construction_data": "tabula_de_standard", "geometry_data": "tabula_de_single_family_house"},
+        "TerracedHouse": {"construction_data": "tabula_de_standard", "geometry_data": "tabula_de_terraced_house"},
+        "MultiFamilyHouse": {"construction_data": "tabula_de_standard", "geometry_data": "tabula_de_multi_family_house"},
+        "ApartmentBlock": {"construction_data": "tabula_de_standard", "geometry_data": "tabula_de_apartment_block"},
     }
 
     for bldg in project.buildings:
@@ -69,8 +70,8 @@ def save_teaser_json(path, project):
             bldg
         ).__name__
         prj_out["project"]["buildings"][bldg.name]["classification"][
-            "method"
-        ] = __building_class[type(bldg).__name__]["method"]
+            "construction_data"
+        ] = __building_class[type(bldg).__name__]["construction_data"]
         prj_out["project"]["buildings"][bldg.name]["street_name"] = bldg.street_name
         prj_out["project"]["buildings"][bldg.name]["city"] = bldg.city
         prj_out["project"]["buildings"][bldg.name][
@@ -292,7 +293,7 @@ def set_basic_data(wall_out, element):
     """
     wall_out["year_of_construction"] = element.year_of_construction
     wall_out["year_of_retrofit"] = element.year_of_retrofit
-    wall_out["construction_type"] = element.construction_type
+    wall_out["construction_data"] = element.construction_data
 
     wall_out["area"] = element.area
     wall_out["tilt"] = element.tilt

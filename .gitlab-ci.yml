@@ -15,6 +15,7 @@ variables:
   TEST_ENGINE: "PYTEST"
   GIT_REPO: "RWTH-EBC/TEASER"
   EXAMPLE_CONVERTER_CONFIG: teaser/examples/converter.toml
+  EXTRA_REQUIREMENTS_PIP: "[report]"
 
 include:
   - project: 'EBC/EBC_all/gitlab_ci/templates'

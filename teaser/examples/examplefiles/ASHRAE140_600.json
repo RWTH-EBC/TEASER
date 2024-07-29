@@ -1,6 +1,6 @@
 {
     "project": {
-        "version": "0.7",
+        "version": "1.0.0",
         "name": "Project",
         "weather_file_path": "modelica://AixLib/Resources/WeatherData/ASHRAE140.mos",
         "number_of_elements_calc": 2,
@@ -220,7 +220,7 @@
                             "OuterWallNorth": {
                                 "year_of_construction": null,
                                 "year_of_retrofit": null,
-                                "construction_type": null,
+                                "construction_data": null,
                                 "area": 21.6,
                                 "tilt": 90.0,
                                 "orientation": 0.0,
@@ -267,7 +267,7 @@
                             "OuterWallEast": {
                                 "year_of_construction": null,
                                 "year_of_retrofit": null,
-                                "construction_type": null,
+                                "construction_data": null,
                                 "area": 16.200000000000003,
                                 "tilt": 90.0,
                                 "orientation": 90.0,
@@ -314,7 +314,7 @@
                             "OuterWallSouth": {
                                 "year_of_construction": null,
                                 "year_of_retrofit": null,
-                                "construction_type": null,
+                                "construction_data": null,
                                 "area": 9.600000000000001,
                                 "tilt": 90.0,
                                 "orientation": 180.0,
@@ -361,7 +361,7 @@
                             "OuterWallWest": {
                                 "year_of_construction": null,
                                 "year_of_retrofit": null,
-                                "construction_type": null,
+                                "construction_data": null,
                                 "area": 16.200000000000003,
                                 "tilt": 90.0,
                                 "orientation": 270.0,
@@ -411,7 +411,7 @@
                             "Roof": {
                                 "year_of_construction": null,
                                 "year_of_retrofit": null,
-                                "construction_type": null,
+                                "construction_data": null,
                                 "area": 48.0,
                                 "tilt": 0.0,
                                 "orientation": -1.0,
@@ -461,7 +461,7 @@
                             "WindowSouthLeft": {
                                 "year_of_construction": null,
                                 "year_of_retrofit": null,
-                                "construction_type": null,
+                                "construction_data": null,
                                 "area": 6.0,
                                 "tilt": 90.0,
                                 "orientation": 180.0,
@@ -490,7 +490,7 @@
                             "WindowSouthRight": {
                                 "year_of_construction": null,
                                 "year_of_retrofit": null,
-                                "construction_type": null,
+                                "construction_data": null,
                                 "area": 6.0,
                                 "tilt": 90.0,
                                 "orientation": 180.0,
@@ -522,7 +522,7 @@
                             "InnerWallFloor": {
                                 "year_of_construction": null,
                                 "year_of_retrofit": null,
-                                "construction_type": null,
+                                "construction_data": null,
                                 "area": 48.0,
                                 "tilt": 0.0,
                                 "orientation": -2.0,

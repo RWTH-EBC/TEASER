@@ -24,7 +24,7 @@ def example_retrofit_building():
     # retrofit standard od the year of retrofit.
     # The year of retrofit has to be specified. In addition, we can set
     # the used window_type and the type of insulation material used.
-    # As we have both `iwu`/`bmvbs` and `tabuly` typology in our project we need
+    # As we have both `iwu`/`bmvbs` and `tabula` typology in our project we need
     # to pass all keywords to the function year_of_retrofit, window_type,
     # material for `iwu`/`bmvbs` and type_of_retrofit for `tabula`.
 

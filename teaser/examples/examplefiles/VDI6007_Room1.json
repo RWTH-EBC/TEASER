@@ -1,6 +1,6 @@
 {
     "project": {
-        "version": "0.7",
+        "version": "1.0.0",
         "name": "Project",
         "weather_file_path": "modelica://AixLib/Resources/WeatherData/",
         "number_of_elements_calc": 2,
@@ -216,7 +216,7 @@
                             "BuildinElement253090": {
                                 "year_of_construction": 1960,
                                 "year_of_retrofit": null,
-                                "construction_type": "heavy",
+                                "construction_data": "iwu_heavy",
                                 "area": 3.5,
                                 "tilt": 90.0,
                                 "orientation": 0.0,
@@ -268,7 +268,7 @@
                             "BuildinElement431313": {
                                 "year_of_construction": 1960,
                                 "year_of_retrofit": null,
-                                "construction_type": "1",
+                                "construction_data": "1",
                                 "area": 7.0,
                                 "tilt": 90.0,
                                 "orientation": 0.0,
@@ -299,7 +299,7 @@
                             "BuildinElement411941": {
                                 "year_of_construction": 1960,
                                 "year_of_retrofit": null,
-                                "construction_type": "ASD",
+                                "construction_data": "ASD",
                                 "area": 38.5,
                                 "tilt": null,
                                 "orientation": null,
@@ -322,7 +322,7 @@
                             "BuildinElement298490": {
                                 "year_of_construction": 1960,
                                 "year_of_retrofit": null,
-                                "construction_type": null,
+                                "construction_data": null,
                                 "area": 2.0,
                                 "tilt": null,
                                 "orientation": null,
@@ -347,7 +347,7 @@
                             "BuildinElement148348": {
                                 "year_of_construction": 1919,
                                 "year_of_retrofit": null,
-                                "construction_type": "leicht",
+                                "construction_data": "leicht",
                                 "area": 17.5,
                                 "tilt": null,
                                 "orientation": null,
@@ -405,7 +405,7 @@
                             "BuildinElement215026": {
                                 "year_of_construction": 1960,
                                 "year_of_retrofit": null,
-                                "construction_type": "heavy",
+                                "construction_data": "iwu_heavy",
                                 "area": 17.5,
                                 "tilt": null,
                                 "orientation": null,
