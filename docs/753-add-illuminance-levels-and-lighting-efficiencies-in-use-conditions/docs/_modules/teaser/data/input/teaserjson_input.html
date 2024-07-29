@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.data.input.teaserjson_input &mdash; TEASER 0.7.7 documentation</title>
+  <title>teaser.data.input.teaserjson_input &mdash; TEASER 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
@@ -15,7 +15,7 @@
   
         <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../_static/documentation_options.js?v=35f4697d"></script>
+        <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
         <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
@@ -35,7 +35,7 @@
             TEASER
           </a>
               <div class="version">
-                0.7
+                1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -112,6 +112,8 @@
 <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.door</span> <span class="kn">import</span> <span class="n">Door</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">teaser</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 
 
 <div class="viewcode-block" id="load_teaser_json">
@@ -132,19 +134,26 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__building_class</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;Office&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;bmvbs&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">Office</span><span class="p">},</span>
-        <span class="s2">&quot;Institute&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;bmvbs&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">Institute</span><span class="p">},</span>
-        <span class="s2">&quot;Institute4&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;bmvbs&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">Institute4</span><span class="p">},</span>
-        <span class="s2">&quot;Institute8&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;bmvbs&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">Institute8</span><span class="p">},</span>
-        <span class="s2">&quot;Building&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;undefined&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">Building</span><span class="p">},</span>
-        <span class="s2">&quot;SingleFamilyDwelling&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;iwu&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">SingleFamilyDwelling</span><span class="p">},</span>
-        <span class="s2">&quot;SingleFamilyHouse&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;tabula_de&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">SingleFamilyHouse</span><span class="p">},</span>
-        <span class="s2">&quot;TerracedHouse&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;tabula_de&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">TerracedHouse</span><span class="p">},</span>
-        <span class="s2">&quot;MultiFamilyHouse&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;tabula_de&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">MultiFamilyHouse</span><span class="p">},</span>
-        <span class="s2">&quot;ApartmentBlock&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;tabula_de&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">ApartmentBlock</span><span class="p">},</span>
+        <span class="s2">&quot;Office&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;construction_data&quot;</span><span class="p">:</span> <span class="s2">&quot;iwu_heavy&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">Office</span><span class="p">},</span>
+        <span class="s2">&quot;Institute&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;construction_data&quot;</span><span class="p">:</span> <span class="s2">&quot;iwu_heavy&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">Institute</span><span class="p">},</span>
+        <span class="s2">&quot;Institute4&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;construction_data&quot;</span><span class="p">:</span> <span class="s2">&quot;iwu_heavy&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">Institute4</span><span class="p">},</span>
+        <span class="s2">&quot;Institute8&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;construction_data&quot;</span><span class="p">:</span> <span class="s2">&quot;iwu_heavy&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">Institute8</span><span class="p">},</span>
+        <span class="s2">&quot;Building&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;construction_data&quot;</span><span class="p">:</span> <span class="s2">&quot;undefined&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">Building</span><span class="p">},</span>
+        <span class="s2">&quot;SingleFamilyDwelling&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;construction_data&quot;</span><span class="p">:</span> <span class="s2">&quot;iwu_heavy&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">SingleFamilyDwelling</span><span class="p">},</span>
+        <span class="s2">&quot;SingleFamilyHouse&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;construction_data&quot;</span><span class="p">:</span> <span class="s2">&quot;tabula_de_standard&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">SingleFamilyHouse</span><span class="p">},</span>
+        <span class="s2">&quot;TerracedHouse&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;construction_data&quot;</span><span class="p">:</span> <span class="s2">&quot;tabula_de_standard&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">TerracedHouse</span><span class="p">},</span>
+        <span class="s2">&quot;MultiFamilyHouse&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;construction_data&quot;</span><span class="p">:</span> <span class="s2">&quot;tabula_de_standard&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">MultiFamilyHouse</span><span class="p">},</span>
+        <span class="s2">&quot;ApartmentBlock&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;construction_data&quot;</span><span class="p">:</span> <span class="s2">&quot;tabula_de_standard&quot;</span><span class="p">,</span> <span class="s2">&quot;teaser_class&quot;</span><span class="p">:</span> <span class="n">ApartmentBlock</span><span class="p">},</span>
     <span class="p">}</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">prj_in</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">object_pairs_hook</span><span class="o">=</span><span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">)</span>
+    <span class="n">json_version</span> <span class="o">=</span> <span class="n">prj_in</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;version&quot;</span><span class="p">]</span>
+    <span class="n">teaser_version</span> <span class="o">=</span> <span class="n">teaser</span><span class="o">.</span><span class="n">__version__</span>
+
+    <span class="k">if</span> <span class="n">json_version</span> <span class="o">!=</span> <span class="n">teaser_version</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;TEASER version mismatch: JSON version </span><span class="si">{</span><span class="n">json_version</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;does not match current TEASER version </span><span class="si">{</span><span class="n">teaser_version</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="n">project</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">prj_in</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
     <span class="n">project</span><span class="o">.</span><span class="n">weather_file_path</span> <span class="o">=</span> <span class="n">prj_in</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;weather_file_path&quot;</span><span class="p">]</span>
@@ -377,7 +386,7 @@
     <span class="n">element</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;inner_convection&quot;</span><span class="p">]</span>
     <span class="n">element</span><span class="o">.</span><span class="n">year_of_construction</span> <span class="o">=</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;year_of_construction&quot;</span><span class="p">]</span>
     <span class="n">element</span><span class="o">.</span><span class="n">year_of_retrofit</span> <span class="o">=</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;year_of_retrofit&quot;</span><span class="p">]</span>
-    <span class="n">element</span><span class="o">.</span><span class="n">construction_type</span> <span class="o">=</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;construction_type&quot;</span><span class="p">]</span>
+    <span class="n">element</span><span class="o">.</span><span class="n">construction_data</span> <span class="o">=</span> <span class="n">wall_in</span><span class="p">[</span><span class="s2">&quot;construction_data&quot;</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="p">(</span>
         <span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;OuterWall&quot;</span>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.examples.e1_generate_archetype &mdash; TEASER 0.7.7 documentation</title>
+  <title>teaser.examples.e1_generate_archetype &mdash; TEASER 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
@@ -15,7 +15,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=35f4697d"></script>
+        <script src="../../../_static/documentation_options.js?v=8d563738"></script>
         <script src="../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -35,7 +35,7 @@
             TEASER
           </a>
               <div class="version">
-                0.7
+                1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -98,14 +98,10 @@
 
     <span class="kn">from</span> <span class="nn">teaser.project</span> <span class="kn">import</span> <span class="n">Project</span>
 
-    <span class="c1"># To use the API instantiate the Project class and rename the Project. The</span>
-    <span class="c1"># parameter load_data=True indicates that we load `iwu` typology archetype</span>
-    <span class="c1"># data into our Project (e.g. for Material properties and typical wall</span>
-    <span class="c1"># constructions. This can take a few seconds, depending on the size of the</span>
-    <span class="c1"># used data base). Be careful: Dymola does not like whitespaces in names and</span>
-    <span class="c1"># filenames, thus we will delete them anyway in TEASER.</span>
+    <span class="c1"># To use the API, instantiate the Project class and rename the project.</span>
+    <span class="c1"># Be careful: Dymola does not like whitespaces in names and filenames, thus we will delete them anyway in TEASER.</span>
 
-    <span class="n">prj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">(</span><span class="n">load_data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">prj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">()</span>
     <span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ArchetypeExample&quot;</span>
 
     <span class="c1"># There are two different types of archetype groups: residential and</span>
@@ -114,16 +110,16 @@
 
     <span class="c1"># To generate residential archetype buildings the function</span>
     <span class="c1"># Project.add_residential() is used. Seven parameters are compulsory,</span>
-    <span class="c1"># additional parameters can be set according to the used method. `method`</span>
-    <span class="c1"># and `usage` are used to distinguish between different archetype</span>
+    <span class="c1"># additional parameters can be set according to the used method. `construction_data`</span>
+    <span class="c1"># and `geometry_data` are used to distinguish between different construction and archetype</span>
     <span class="c1"># methods. The name, year_of_construction, number and height of floors</span>
     <span class="c1"># and net_leased_area need to be set to provide enough information for</span>
     <span class="c1"># archetype generation. For specific information on the parameters please</span>
     <span class="c1"># read the docs.</span>
 
     <span class="n">prj</span><span class="o">.</span><span class="n">add_residential</span><span class="p">(</span>
-        <span class="n">method</span><span class="o">=</span><span class="s1">&#39;iwu&#39;</span><span class="p">,</span>
-        <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;single_family_dwelling&#39;</span><span class="p">,</span>
+        <span class="n">construction_data</span><span class="o">=</span><span class="s1">&#39;iwu_heavy&#39;</span><span class="p">,</span>
+        <span class="n">geometry_data</span><span class="o">=</span><span class="s1">&#39;iwu_single_family_dwelling&#39;</span><span class="p">,</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ResidentialBuilding&quot;</span><span class="p">,</span>
         <span class="n">year_of_construction</span><span class="o">=</span><span class="mi">1988</span><span class="p">,</span>
         <span class="n">number_of_floors</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
@@ -136,8 +132,8 @@
     <span class="c1"># does not differ from the residential archetype building.</span>
 
     <span class="n">prj</span><span class="o">.</span><span class="n">add_non_residential</span><span class="p">(</span>
-        <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bmvbs&#39;</span><span class="p">,</span>
-        <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;office&#39;</span><span class="p">,</span>
+        <span class="n">construction_data</span><span class="o">=</span><span class="s1">&#39;iwu_heavy&#39;</span><span class="p">,</span>
+        <span class="n">geometry_data</span><span class="o">=</span><span class="s1">&#39;bmvbs_office&#39;</span><span class="p">,</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;OfficeBuilding&quot;</span><span class="p">,</span>
         <span class="n">year_of_construction</span><span class="o">=</span><span class="mi">1988</span><span class="p">,</span>
         <span class="n">number_of_floors</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
@@ -145,8 +141,8 @@
         <span class="n">net_leased_area</span><span class="o">=</span><span class="mf">4500.0</span><span class="p">)</span>
 
     <span class="n">prj</span><span class="o">.</span><span class="n">add_non_residential</span><span class="p">(</span>
-        <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bmvbs&#39;</span><span class="p">,</span>
-        <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;institute&#39;</span><span class="p">,</span>
+        <span class="n">construction_data</span><span class="o">=</span><span class="s1">&#39;iwu_heavy&#39;</span><span class="p">,</span>
+        <span class="n">geometry_data</span><span class="o">=</span><span class="s1">&#39;bmvbs_institute&#39;</span><span class="p">,</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;InstituteBuilding&quot;</span><span class="p">,</span>
         <span class="n">year_of_construction</span><span class="o">=</span><span class="mi">1952</span><span class="p">,</span>
         <span class="n">number_of_floors</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
@@ -154,8 +150,8 @@
         <span class="n">net_leased_area</span><span class="o">=</span><span class="mf">3400.0</span><span class="p">)</span>
 
     <span class="n">prj</span><span class="o">.</span><span class="n">add_non_residential</span><span class="p">(</span>
-        <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bmvbs&#39;</span><span class="p">,</span>
-        <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;institute&#39;</span><span class="p">,</span>
+        <span class="n">construction_data</span><span class="o">=</span><span class="s1">&#39;iwu_heavy&#39;</span><span class="p">,</span>
+        <span class="n">geometry_data</span><span class="o">=</span><span class="s1">&#39;bmvbs_institute&#39;</span><span class="p">,</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;InstituteBuildingMoisture&quot;</span><span class="p">,</span>
         <span class="n">year_of_construction</span><span class="o">=</span><span class="mi">1980</span><span class="p">,</span>
         <span class="n">number_of_floors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
@@ -166,11 +162,11 @@
     <span class="c1"># Besides `iwu` and `bmvbs` there is a third option for archetype</span>
     <span class="c1"># generation. We integrated the typology of TABULA Germany</span>
     <span class="c1"># (http://webtool.building-typology.eu/#bm) and other countries are about to</span>
-    <span class="c1"># follow. To use TABULA archetype simple choose `tabula_de` as the method</span>
-    <span class="c1"># and `single_family_house`, `multi_family_house`, `terraced_house` or</span>
-    <span class="c1"># `apartment_block` as the usage. In addition you can specify the</span>
-    <span class="c1"># construction type of TABULA, chose between `tabula_standard` (default),</span>
-    <span class="c1"># `tabula_retrofit` or `tabula_adv_retrofit`. In this case we generate one</span>
+    <span class="c1"># follow. To use TABULA archetype simple choose the default `tabula_de_standard` as the construction_data</span>
+    <span class="c1"># and `tabula_de_single_family_house`, `tabula_de_multi_family_house`, `tabula_de_terraced_house` or</span>
+    <span class="c1"># `tabula_de_apartment_block` as the geometry_data. In addition you can specify the</span>
+    <span class="c1"># construction type of TABULA, chose between `tabula_de_standard` (default),</span>
+    <span class="c1"># `tabula_de_retrofit` or `tabula_de_adv_retrofit`. In this case we generate one</span>
     <span class="c1"># single and one multi family house with TABULA typology.</span>
 
     <span class="c1"># Please not: as we need to load the construction information which are</span>
@@ -180,24 +176,22 @@
     <span class="c1"># data. Project(load_data=False).</span>
 
     <span class="n">prj</span><span class="o">.</span><span class="n">add_residential</span><span class="p">(</span>
-        <span class="n">method</span><span class="o">=</span><span class="s1">&#39;tabula_de&#39;</span><span class="p">,</span>
-        <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;single_family_house&#39;</span><span class="p">,</span>
+        <span class="n">construction_data</span><span class="o">=</span><span class="s1">&#39;tabula_de_standard&#39;</span><span class="p">,</span>
+        <span class="n">geometry_data</span><span class="o">=</span><span class="s1">&#39;tabula_de_single_family_house&#39;</span><span class="p">,</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ResidentialBuildingTabula&quot;</span><span class="p">,</span>
         <span class="n">year_of_construction</span><span class="o">=</span><span class="mi">1988</span><span class="p">,</span>
         <span class="n">number_of_floors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
         <span class="n">height_of_floors</span><span class="o">=</span><span class="mf">3.2</span><span class="p">,</span>
-        <span class="n">net_leased_area</span><span class="o">=</span><span class="mf">280.0</span><span class="p">,</span>
-        <span class="n">construction_type</span><span class="o">=</span><span class="s1">&#39;tabula_standard&#39;</span><span class="p">)</span>
+        <span class="n">net_leased_area</span><span class="o">=</span><span class="mf">280.0</span><span class="p">)</span>
 
     <span class="n">prj</span><span class="o">.</span><span class="n">add_residential</span><span class="p">(</span>
-        <span class="n">method</span><span class="o">=</span><span class="s1">&#39;tabula_de&#39;</span><span class="p">,</span>
-        <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;multi_family_house&#39;</span><span class="p">,</span>
+        <span class="n">construction_data</span><span class="o">=</span><span class="s1">&#39;tabula_de_retrofit&#39;</span><span class="p">,</span>
+        <span class="n">geometry_data</span><span class="o">=</span><span class="s1">&#39;tabula_de_multi_family_house&#39;</span><span class="p">,</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ResidentialBuildingTabulaMulti&quot;</span><span class="p">,</span>
         <span class="n">year_of_construction</span><span class="o">=</span><span class="mi">1960</span><span class="p">,</span>
         <span class="n">number_of_floors</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
         <span class="n">height_of_floors</span><span class="o">=</span><span class="mf">3.2</span><span class="p">,</span>
-        <span class="n">net_leased_area</span><span class="o">=</span><span class="mf">600.0</span><span class="p">,</span>
-        <span class="n">construction_type</span><span class="o">=</span><span class="s1">&#39;tabula_retrofit&#39;</span><span class="p">)</span>
+        <span class="n">net_leased_area</span><span class="o">=</span><span class="mf">600.0</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">prj</span></div>
 

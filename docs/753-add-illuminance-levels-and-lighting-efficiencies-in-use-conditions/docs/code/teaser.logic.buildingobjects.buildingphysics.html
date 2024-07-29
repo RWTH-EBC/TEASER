@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.logic.buildingobjects.buildingphysics package &mdash; TEASER 0.7.7 documentation</title>
+  <title>teaser.logic.buildingobjects.buildingphysics package &mdash; TEASER 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=35f4697d"></script>
+        <script src="../_static/documentation_options.js?v=8d563738"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -38,7 +38,7 @@
             TEASER
           </a>
               <div class="version">
-                0.7
+                1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -205,7 +205,7 @@ Default is None.</p>
 </dd>
 <dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
 </dd>
-<dt><strong>construction_type</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
 distinction between different constructions types in the same
 building age period.</p>
 </dd>
@@ -332,8 +332,8 @@ convective heat transfer of a building element.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.construction_type">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">construction_type</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.construction_type" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.construction_data">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">construction_data</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.construction_data" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -520,7 +520,7 @@ Default is None.</p>
 </dd>
 <dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
 </dd>
-<dt><strong>construction_type</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
 distinction between different constructions types in the same
 building age period.</p>
 </dd>
@@ -628,7 +628,7 @@ Default is None.</p>
 </dd>
 <dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
 </dd>
-<dt><strong>construction_type</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
 distinction between different constructions types in the same
 building age period.</p>
 </dd>
@@ -735,7 +735,7 @@ Default is None.</p>
 </dd>
 <dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
 </dd>
-<dt><strong>construction_type</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
 distinction between different constructions types in the same
 building age period.</p>
 </dd>
@@ -840,7 +840,7 @@ Default is None.</p>
 </dd>
 <dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
 </dd>
-<dt><strong>construction_type</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
 distinction between different constructions types in the same
 building age period.</p>
 </dd>
@@ -967,7 +967,7 @@ Default is None.</p>
 </dd>
 <dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
 </dd>
-<dt><strong>construction_type</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
 distinction between different constructions types in the same
 building age period.</p>
 </dd>
@@ -1282,7 +1282,7 @@ Default is None.</p>
 </dd>
 <dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
 </dd>
-<dt><strong>construction_type</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
 distinction between different constructions types in the same
 building age period.</p>
 </dd>
@@ -1414,7 +1414,7 @@ Default is None.</p>
 </dd>
 <dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
 </dd>
-<dt><strong>construction_type</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
 distinction between different constructions types in the same
 building age period.</p>
 </dd>
@@ -1542,7 +1542,7 @@ Default is None.</p>
 </dd>
 <dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
 </dd>
-<dt><strong>construction_type</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
 distinction between different constructions types in the same
 building age period.</p>
 </dd>
@@ -1725,7 +1725,7 @@ Default is None.</p>
 </dd>
 <dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
 </dd>
-<dt><strong>construction_type</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
 distinction between different constructions types in the same
 building age period.</p>
 </dd>

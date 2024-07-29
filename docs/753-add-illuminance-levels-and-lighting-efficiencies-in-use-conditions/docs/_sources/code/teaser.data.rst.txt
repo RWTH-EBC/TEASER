@@ -25,3 +25,11 @@ teaser.data.dataclass module
    :members:
    :undoc-members:
    :show-inheritance:
+
+teaser.data.utilities module
+----------------------------
+
+.. automodule:: teaser.data.utilities
+   :members:
+   :undoc-members:
+   :show-inheritance:

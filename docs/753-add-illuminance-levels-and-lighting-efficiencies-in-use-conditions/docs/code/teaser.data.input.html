@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.data.input package &mdash; TEASER 0.7.7 documentation</title>
+  <title>teaser.data.input package &mdash; TEASER 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=35f4697d"></script>
+        <script src="../_static/documentation_options.js?v=8d563738"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -38,7 +38,7 @@
             TEASER
           </a>
               <div class="version">
-                0.7
+                1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -90,6 +90,7 @@
 </li>
 <li class="toctree-l5"><a class="reference internal" href="teaser.data.html#submodules">Submodules</a></li>
 <li class="toctree-l5"><a class="reference internal" href="teaser.data.html#module-teaser.data.dataclass">teaser.data.dataclass module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="teaser.data.html#module-teaser.data.utilities">teaser.data.utilities module</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="teaser.examples.html">teaser.examples package</a></li>
@@ -167,6 +168,9 @@ building characteristics from
 cite:<cite>BundesministeriumfurVerkehrBauundStadtentwicklung.26.07.2007</cite> and
 <span id="id1">[<a class="reference internal" href="../archetypes.html#id31" title="Tobias Loga, Nikolaus Diefenbach, Jens Knissel, and Rolf Born. Ein vereinfachtes, statistisch abgesichertes Verfahren zur Erhebung von Gebäudedaten für die energetische Bewertung von Gebäuden. Volume Bauforschung für die Praxis. Institut Wohnen und Umwelt GmbH, Darmstadt, 2005.">3</a>]</span>, which is combined with normative material data
 from <span id="id2">[<a class="reference internal" href="../archetypes.html#id45" title="Berechnung des instationären thermischen Verhaltens von Räumen und Gebäuden - Fenstermodell. März 2012.">10</a>]</span>.</p>
+<p>Most of the elements for the KfW Efficiency House standards (TypeElements_KFW.json) were derived from the respective
+required U-value and the component catalog of the U-value online calculator <a class="reference external" href="https://www.ubakus.de/bauteilkatalog/">https://www.ubakus.de/bauteilkatalog/</a>.
+For the respective source of each element, the comment in the json file can be observed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -174,7 +178,7 @@ from <span id="id2">[<a class="reference internal" href="../archetypes.html#id45
 </dd>
 <dt><strong>year</strong><span class="classifier">int</span></dt><dd><p>Year of construction</p>
 </dd>
-<dt><strong>construction</strong><span class="classifier">str</span></dt><dd><p>Construction type, code list (‘heavy’, ‘light’, tabula, …)</p>
+<dt><strong>construction</strong><span class="classifier">str</span></dt><dd><p>Construction type, code list (‘iwu_heavy’, ‘iwu_light’, ‘tabula_de_standard’, ‘kfw_40’, …)</p>
 </dd>
 <dt><strong>data_class</strong><span class="classifier">DataClass()</span></dt><dd><p>DataClass containing the bindings for TypeBuildingElement and
 Material (typically this is the data class stored in prj.data,
