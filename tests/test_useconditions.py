@@ -210,7 +210,6 @@ class Test_useconditions(object):
     def test_lighting_power(self):
         lighting_power_test = 3
 
-        prj = Project(True)
         prj.set_default()
         helptest.building_test2(prj)
         use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
