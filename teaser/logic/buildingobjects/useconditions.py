@@ -260,7 +260,7 @@ class UseConditions(object):
         self.machines = 7.0
         self.ratio_conv_rad_machines = 0.75
 
-        self._use_maintained_illuminance = False    #Choose wether lighting power will be given by direct input or calculated by maintained illuminance and lighting_efficiency_lumen
+        self._use_maintained_illuminance = False # Choose wether lighting power will be given by direct input or calculated by maintained illuminance and lighting_efficiency_lumen
         self._lighting_power = 10
         self.fixed_lighting_power = 10
         self.ratio_conv_rad_lighting = 0.4
@@ -825,7 +825,6 @@ class UseConditions(object):
             warnings.warn(
                 "Parameter 'use_maintained_illuminance' is 'True'!\n"
                 "Parameter 'lighting_power' will be overwritten and 'use_maintained_illuminance' will be set to 'False'.",
-                Warning
             )
         self._use_maintained_illuminance = False
         self._lighting_power = value
