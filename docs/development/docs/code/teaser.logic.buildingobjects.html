@@ -144,6 +144,7 @@
 <li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.first_saturday_of_year"><code class="docutils literal notranslate"><span class="pre">UseConditions.first_saturday_of_year</span></code></a></li>
 <li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.heating_profile"><code class="docutils literal notranslate"><span class="pre">UseConditions.heating_profile</span></code></a></li>
 <li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.is_periodic"><code class="docutils literal notranslate"><span class="pre">UseConditions.is_periodic()</span></code></a></li>
+<li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.lighting_power"><code class="docutils literal notranslate"><span class="pre">UseConditions.lighting_power</span></code></a></li>
 <li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.lighting_profile"><code class="docutils literal notranslate"><span class="pre">UseConditions.lighting_profile</span></code></a></li>
 <li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.load_use_conditions"><code class="docutils literal notranslate"><span class="pre">UseConditions.load_use_conditions()</span></code></a></li>
 <li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.machines_profile"><code class="docutils literal notranslate"><span class="pre">UseConditions.machines_profile</span></code></a></li>
@@ -153,6 +154,7 @@
 <li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.save_use_conditions"><code class="docutils literal notranslate"><span class="pre">UseConditions.save_use_conditions()</span></code></a></li>
 <li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.schedules"><code class="docutils literal notranslate"><span class="pre">UseConditions.schedules</span></code></a></li>
 <li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.set_back_times"><code class="docutils literal notranslate"><span class="pre">UseConditions.set_back_times</span></code></a></li>
+<li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.use_maintained_illuminance"><code class="docutils literal notranslate"><span class="pre">UseConditions.use_maintained_illuminance</span></code></a></li>
 <li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.useconditions.UseConditions.with_ideal_thresholds"><code class="docutils literal notranslate"><span class="pre">UseConditions.with_ideal_thresholds</span></code></a></li>
 </ul>
 </li>
@@ -1280,14 +1282,30 @@ length, TEASER will multiplicate this list for one whole year.
 AixLib: Used for internal gains profile on top-level
 Annex: Used for internal gains</p>
 </dd>
-<dt><strong>lighting_power: float [W/m2]</strong></dt><dd><p>spec. electr. Power for lighting. This value is taken from SIA 2024.
+<dt><strong>use_maintained_illuminance: bool</strong></dt><dd><p>decision variable to determine wether lighting_power will be given by
+fixed_lighting_power or by calculation using the variables maintained_illuminance
+and lighting_efficiency_lumen</p>
+</dd>
+<dt><strong>lighting_power: float [W/m2]</strong></dt><dd><p>spec. electr. Power for lighting
+Determined by use_maintained_illuminance
+Not needed in input json file
 AixLib: Used in Zone record for internal gains
 Annex: Not used (see Annex examples)</p>
+</dd>
+<dt><strong>fixed_lighting_power: float [W/m2]</strong></dt><dd><p>spec. fixed electrical power for lighting. This value is taken from SIA 2024.</p>
 </dd>
 <dt><strong>ratio_conv_rad_lighting</strong><span class="classifier">float</span></dt><dd><p>describes the ratio between convective and radiative heat transfer
 of the lighting [convective/radiative]. Default values are derived from
 <span id="id6">[<a class="reference internal" href="../archetypes.html#id43" title="David DiLaura. The lighting handbook: Reference and application. Illuminating Engineering Society of North America, New York, NY, 10. ed. edition, 2011. ISBN 978-0-87995-241-9.">19</a>]</span>.
 AixLib: Used in Zone record for internal gains, lighting</p>
+</dd>
+<dt><strong>maintained_illuminance</strong><span class="classifier">float [Lx]</span></dt><dd><p>maintained illuminance value for lighting. This value is taken from SIA 2024</p>
+</dd>
+<dt><strong>lighting_efficiency_lumen: float [lm/W_el]</strong></dt><dd><p>lighting efficiency in lm/W_el, in german: Lichtausbeute</p>
+</dd>
+<dt><strong>lighting_efficiency: float [W_light/W_el]</strong></dt><dd><p>lighting efficiency in light power / electrical power</p>
+</dd>
+<dt><strong>lighting_power_el: float [W_el/m2]</strong></dt><dd><p>specific electric lighting power per m2</p>
 </dd>
 <dt><strong>lighting_profil</strong><span class="classifier">[float]</span></dt><dd><p>Relative presence of lighting 0-1 (e.g. 0.5 means that 50% of the total
 lighting power are currently used). Typically given for 24h. This is
@@ -1467,6 +1485,11 @@ with 8760 h.</p>
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.useconditions.UseConditions.lighting_power">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lighting_power</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.useconditions.UseConditions.lighting_power" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="teaser.logic.buildingobjects.useconditions.UseConditions.lighting_profile">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lighting_profile</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.useconditions.UseConditions.lighting_profile" title="Link to this definition"></a></dt>
 <dd></dd></dl>
@@ -1526,6 +1549,11 @@ which is DataClass in current project)</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="teaser.logic.buildingobjects.useconditions.UseConditions.set_back_times">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_back_times</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.useconditions.UseConditions.set_back_times" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.useconditions.UseConditions.use_maintained_illuminance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">use_maintained_illuminance</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.useconditions.UseConditions.use_maintained_illuminance" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">

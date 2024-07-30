@@ -92,7 +92,7 @@
 <span class="kn">import</span> <span class="nn">teaser.data.input.usecond_input</span> <span class="k">as</span> <span class="nn">usecond_input</span>
 <span class="kn">import</span> <span class="nn">teaser.data.output.usecond_output</span> <span class="k">as</span> <span class="nn">usecond_output</span>
 <span class="kn">from</span> <span class="nn">teaser.logic.utilities</span> <span class="kn">import</span> <span class="n">division_from_json</span>
-
+<span class="kn">import</span> <span class="nn">warnings</span>
 
 <div class="viewcode-block" id="UseConditions">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions">[docs]</a>
@@ -203,15 +203,31 @@
 <span class="sd">        length, TEASER will multiplicate this list for one whole year.</span>
 <span class="sd">        AixLib: Used for internal gains profile on top-level</span>
 <span class="sd">        Annex: Used for internal gains</span>
+<span class="sd">    use_maintained_illuminance: bool</span>
+<span class="sd">        decision variable to determine wether lighting_power will be given by</span>
+<span class="sd">        fixed_lighting_power or by calculation using the variables maintained_illuminance</span>
+<span class="sd">        and lighting_efficiency_lumen</span>
 <span class="sd">    lighting_power: float [W/m2]</span>
-<span class="sd">        spec. electr. Power for lighting. This value is taken from SIA 2024.</span>
+<span class="sd">        spec. electr. Power for lighting</span>
+<span class="sd">        Determined by use_maintained_illuminance</span>
+<span class="sd">        Not needed in input json file</span>
 <span class="sd">        AixLib: Used in Zone record for internal gains</span>
 <span class="sd">        Annex: Not used (see Annex examples)</span>
+<span class="sd">    fixed_lighting_power: float [W/m2]</span>
+<span class="sd">        spec. fixed electrical power for lighting. This value is taken from SIA 2024.</span>
 <span class="sd">    ratio_conv_rad_lighting : float</span>
 <span class="sd">        describes the ratio between convective and radiative heat transfer</span>
 <span class="sd">        of the lighting [convective/radiative]. Default values are derived from</span>
 <span class="sd">        :cite:`DiLaura.2011`.</span>
 <span class="sd">        AixLib: Used in Zone record for internal gains, lighting</span>
+<span class="sd">    maintained_illuminance : float [Lx]</span>
+<span class="sd">        maintained illuminance value for lighting. This value is taken from SIA 2024</span>
+<span class="sd">    lighting_efficiency_lumen: float [lm/W_el]</span>
+<span class="sd">        lighting efficiency in lm/W_el, in german: Lichtausbeute</span>
+<span class="sd">    lighting_efficiency: float [W_light/W_el]</span>
+<span class="sd">        lighting efficiency in light power / electrical power</span>
+<span class="sd">    lighting_power_el: float [W_el/m2]</span>
+<span class="sd">        specific electric lighting power per m2</span>
 <span class="sd">    lighting_profil : [float]</span>
 <span class="sd">        Relative presence of lighting 0-1 (e.g. 0.5 means that 50% of the total</span>
 <span class="sd">        lighting power are currently used). Typically given for 24h. This is</span>
@@ -329,8 +345,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">machines</span> <span class="o">=</span> <span class="mf">7.0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ratio_conv_rad_machines</span> <span class="o">=</span> <span class="mf">0.75</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">lighting_power</span> <span class="o">=</span> <span class="mf">15.9</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_use_maintained_illuminance</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># Choose wether lighting power will be given by direct input or calculated by maintained illuminance and lighting_efficiency_lumen</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lighting_power</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fixed_lighting_power</span> <span class="o">=</span> <span class="mi">10</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ratio_conv_rad_lighting</span> <span class="o">=</span> <span class="mf">0.4</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maintained_illuminance</span> <span class="o">=</span> <span class="mi">500</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lighting_efficiency_lumen</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># lighting efficiency in lm/W_el</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lighting_efficiency</span> <span class="o">=</span> <span class="mf">0.3</span>  <span class="c1"># [W_light/W_el]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lighting_power_el</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># [W_el/m2]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">use_constant_infiltration</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">infiltration_rate</span> <span class="o">=</span> <span class="mf">0.2</span>
@@ -881,7 +903,34 @@
 
         <span class="k">else</span><span class="p">:</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span> <span class="o">=</span> <span class="kc">None</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">use_maintained_illuminance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_maintained_illuminance</span>
+
+    <span class="nd">@use_maintained_illuminance</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">use_maintained_illuminance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_lighting_power</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maintained_illuminance</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">lighting_efficiency_lumen</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_lighting_power</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fixed_lighting_power</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_use_maintained_illuminance</span> <span class="o">=</span> <span class="n">value</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">lighting_power</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lighting_power</span>
+
+    <span class="nd">@lighting_power</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">lighting_power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_maintained_illuminance</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;Parameter &#39;use_maintained_illuminance&#39; is &#39;True&#39;!</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;Parameter &#39;lighting_power&#39; will be overwritten and &#39;use_maintained_illuminance&#39; will be set to &#39;False&#39;.&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_use_maintained_illuminance</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lighting_power</span> <span class="o">=</span> <span class="n">value</span></div>
 
 </pre></div>
 
