@@ -345,7 +345,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">machines</span> <span class="o">=</span> <span class="mf">7.0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ratio_conv_rad_machines</span> <span class="o">=</span> <span class="mf">0.75</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_use_maintained_illuminance</span> <span class="o">=</span> <span class="kc">False</span>    <span class="c1">#Choose wether lighting power will be given by direct input or calculated by maintained illuminance and lighting_efficiency_lumen</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_use_maintained_illuminance</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># Choose wether lighting power will be given by direct input or calculated by maintained illuminance and lighting_efficiency_lumen</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_lighting_power</span> <span class="o">=</span> <span class="mi">10</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fixed_lighting_power</span> <span class="o">=</span> <span class="mi">10</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ratio_conv_rad_lighting</span> <span class="o">=</span> <span class="mf">0.4</span>
@@ -928,7 +928,6 @@
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
                 <span class="s2">&quot;Parameter &#39;use_maintained_illuminance&#39; is &#39;True&#39;!</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="s2">&quot;Parameter &#39;lighting_power&#39; will be overwritten and &#39;use_maintained_illuminance&#39; will be set to &#39;False&#39;.&quot;</span><span class="p">,</span>
-                <span class="ne">Warning</span>
             <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_use_maintained_illuminance</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_lighting_power</span> <span class="o">=</span> <span class="n">value</span></div>
