@@ -5,6 +5,7 @@ from teaser.logic.buildingobjects.buildingphysics.material import Material
 import teaser.data.input.material_input_json as mat_input
 import logging
 
+
 def load_type_element(element, year, construction, data_class):
     """Load BuildingElement from json.
 
@@ -18,6 +19,10 @@ def load_type_element(element, year, construction, data_class):
     Most of the elements for the KfW Efficiency House standards (TypeElements_KFW.json) were derived from the respective
     required U-value and the component catalog of the U-value online calculator https://www.ubakus.de/bauteilkatalog/.
     For the respective source of each element, the comment in the json file can be observed.
+
+    Tabula data is taken from Tabula web tool for OuterWall, Rooftop, Window
+    Door, and GroundFloor. As there is no Tabula data for inner components, the
+    following components are copied from IWU data: InnerWall, Ceiling, Floor.
 
     Parameters
     ----------
