@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser.logic.archetypebuildings.bmvbs.custom package &mdash; TEASER 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="teaser.logic.archetypebuildings.tabula package" href="teaser.logic.archetypebuildings.tabula.html" />
+    <link rel="prev" title="teaser.logic.archetypebuildings.bmvbs package" href="teaser.logic.archetypebuildings.bmvbs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            TEASER
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">teaser</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="teaser.html">teaser package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="teaser.html#teaser">teaser</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="teaser.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html">teaser.data package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.examples.html">teaser.examples package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="teaser.logic.html">teaser.logic package</a><ul class="current">
+<li class="toctree-l5 current"><a class="reference internal" href="teaser.logic.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l6 current"><a class="reference internal" href="teaser.logic.archetypebuildings.html">teaser.logic.archetypebuildings package</a><ul class="current">
+<li class="toctree-l7 current"><a class="reference internal" href="teaser.logic.archetypebuildings.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l8 current"><a class="reference internal" href="teaser.logic.archetypebuildings.bmvbs.html">teaser.logic.archetypebuildings.bmvbs package</a><ul class="current">
+<li class="toctree-l9 current"><a class="reference internal" href="teaser.logic.archetypebuildings.bmvbs.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l10 current"><a class="current reference internal" href="#">teaser.logic.archetypebuildings.bmvbs.custom package</a></li>
+</ul>
+</li>
+<li class="toctree-l9"><a class="reference internal" href="teaser.logic.archetypebuildings.bmvbs.html#submodules">Submodules</a></li>
+<li class="toctree-l9"><a class="reference internal" href="teaser.logic.archetypebuildings.bmvbs.html#module-teaser.logic.archetypebuildings.bmvbs.office">teaser.logic.archetypebuildings.bmvbs.office module</a></li>
+<li class="toctree-l9"><a class="reference internal" href="teaser.logic.archetypebuildings.bmvbs.html#module-teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling">teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling module</a></li>
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="teaser.logic.archetypebuildings.tabula.html">teaser.logic.archetypebuildings.tabula package</a></li>
+<li class="toctree-l8"><a class="reference internal" href="teaser.logic.archetypebuildings.urbanrenet.html">teaser.logic.archetypebuildings.urbanrenet package</a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="teaser.logic.archetypebuildings.html#submodules">Submodules</a></li>
+<li class="toctree-l7"><a class="reference internal" href="teaser.logic.archetypebuildings.html#module-teaser.logic.archetypebuildings.nonresidential">teaser.logic.archetypebuildings.nonresidential module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="teaser.logic.archetypebuildings.html#module-teaser.logic.archetypebuildings.residential">teaser.logic.archetypebuildings.residential module</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="teaser.logic.buildingobjects.html">teaser.logic.buildingobjects package</a></li>
+<li class="toctree-l6"><a class="reference internal" href="teaser.logic.simulation.html">teaser.logic.simulation package</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="teaser.logic.html#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="teaser.logic.html#module-teaser.logic.utilities">teaser.logic.utilities module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.html#module-teaser.project">teaser.project module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">teaser</a></li>
+          <li class="breadcrumb-item"><a href="teaser.html">teaser package</a></li>
+          <li class="breadcrumb-item"><a href="teaser.logic.html">teaser.logic package</a></li>
+          <li class="breadcrumb-item"><a href="teaser.logic.archetypebuildings.html">teaser.logic.archetypebuildings package</a></li>
+          <li class="breadcrumb-item"><a href="teaser.logic.archetypebuildings.bmvbs.html">teaser.logic.archetypebuildings.bmvbs package</a></li>
+      <li class="breadcrumb-item active">teaser.logic.archetypebuildings.bmvbs.custom package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/code/teaser.logic.archetypebuildings.bmvbs.custom.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-teaser.logic.archetypebuildings.bmvbs.custom">
+<span id="teaser-logic-archetypebuildings-bmvbs-custom-package"></span><h1>teaser.logic.archetypebuildings.bmvbs.custom package<a class="headerlink" href="#module-teaser.logic.archetypebuildings.bmvbs.custom" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-teaser.logic.archetypebuildings.bmvbs.custom.institute">
+<span id="teaser-logic-archetypebuildings-bmvbs-custom-institute-module"></span><h2>teaser.logic.archetypebuildings.bmvbs.custom.institute module<a class="headerlink" href="#module-teaser.logic.archetypebuildings.bmvbs.custom.institute" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.logic.archetypebuildings.bmvbs.custom.institute.Institute">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.archetypebuildings.bmvbs.custom.institute.</span></span><span class="sig-name descname"><span class="pre">Institute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_construction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_floors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height_of_floors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_leased_area</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_ahu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_gains_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">office_layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">construction_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/archetypebuildings/bmvbs/custom/institute.html#Institute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.archetypebuildings.bmvbs.custom.institute.Institute" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="teaser.logic.archetypebuildings.bmvbs.html#teaser.logic.archetypebuildings.bmvbs.office.Office" title="teaser.logic.archetypebuildings.bmvbs.office.Office"><code class="xref py py-class docutils literal notranslate"><span class="pre">Office</span></code></a></p>
+<p>Type Institute Building</p>
+<p>The institute module contains a multi zone building which is based on an
+office building with an additional laboratory zone. The zonal
+distribution is based on investigations of the Forschungszentrum Juelich
+<span id="id1">[<a class="reference internal" href="../archetypes.html#id34" title="Moritz Lauster. Parametrierbare Gebäudemodelle für dynamische Energiebedarfsrechnungen von Stadtquartieren. PhD thesis, RWTH Aachen University, Aachen, 2018.">14</a>]</span>. According to the dataset from Juelich,
+the typebuilding institute is based on the buildingsclass of BWZK with
+the number 2000 and all subsets, which represents all institute buildings
+which are not institute type 4 (2230, 2240 and 2250) or institute type 8 (
+2280)
+<span id="id2">[<a class="reference internal" href="../archetypes.html#id19" title="Bauministerkonferenz. Bauwerkszuordnungskatalog. 2010.">9</a>]</span>. The estimation of exterior
+wall surfaces follows the approach for office buildings, but with adapted
+parameters <span id="id3">[<a class="reference internal" href="../archetypes.html#id34" title="Moritz Lauster. Parametrierbare Gebäudemodelle für dynamische Energiebedarfsrechnungen von Stadtquartieren. PhD thesis, RWTH Aachen University, Aachen, 2018.">14</a>]</span>.</p>
+<p>In detail the net leased area is divided into the following thermal zone
+areas:</p>
+<ol class="arabic simple">
+<li><p>Office (16% of net leased area)</p></li>
+<li><p>Floor (19% of net leased area)</p></li>
+<li><p>Storage (40% of net leased area)</p></li>
+<li><p>Meeting (4% of net leased area)</p></li>
+<li><p>Restroom (4% of net leased area)</p></li>
+<li><p>ICT (2% of net leased area)</p></li>
+<li><p>Laboratory (15% of the net leased area)</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parent: Project()</strong></dt><dd><p>The parent class of this object, the Project the Building belongs to.
+Allows for better control of hierarchical structures. If not None it
+adds this Building instance to Project.buildings.
+(default: None)</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
+</dd>
+<dt><strong>year_of_construction</strong><span class="classifier">int</span></dt><dd><p>Year of first construction</p>
+</dd>
+<dt><strong>height_of_floors</strong><span class="classifier">float [m]</span></dt><dd><p>Average height of the buildings’ floors</p>
+</dd>
+<dt><strong>number_of_floors</strong><span class="classifier">int</span></dt><dd><p>Number of building’s floors above ground</p>
+</dd>
+<dt><strong>net_leased_area</strong><span class="classifier">float [m2]</span></dt><dd><p>Total net leased area of building. This is area is NOT the footprint
+of a building</p>
+</dd>
+<dt><strong>with_ahu</strong><span class="classifier">Boolean</span></dt><dd><p>If set to True, an empty instance of BuildingAHU is instantiated and
+assigned to attribute central_ahu. This instance holds information for
+central Air Handling units. Default is False.</p>
+</dd>
+<dt><strong>internal_gains_mode: int [1, 2, 3]</strong></dt><dd><p>mode for the internal gains calculation done in AixLib:</p>
+<ol class="arabic simple">
+<li><p>Temperature and activity degree dependent heat flux calculation for persons. The
+calculation is based on  SIA 2024 (default)</p></li>
+<li><p>Temperature and activity degree independent heat flux calculation for persons, the max.
+heatflowrate is prescribed by the parameter
+fixed_heat_flow_rate_persons.</p></li>
+<li><p>Temperature and activity degree dependent calculation with
+consideration of moisture and co2. The moisture calculation is
+based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
+Engineering ToolBox (2004) and regards only persons.</p></li>
+</ol>
+</dd>
+<dt><strong>office_layout</strong><span class="classifier">int</span></dt><dd><p>Structure of the floor plan of office buildings, default is 1,
+which is representative for one elongated floor.</p>
+<ol class="arabic simple">
+<li><p>elongated 1 floor</p></li>
+<li><p>elongated 2 floors</p></li>
+<li><p>compact (e.g. for a square base building)</p></li>
+</ol>
+</dd>
+<dt><strong>window_layout</strong><span class="classifier">int</span></dt><dd><p>Structure of the window facade type, default is 1, which is
+representative for a punctuated facade.</p>
+<ol class="arabic simple">
+<li><p>punctuated facade (individual windows)</p></li>
+<li><p>banner facade (continuous windows)</p></li>
+<li><p>full glazing</p></li>
+</ol>
+</dd>
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Construction type of used wall constructions default is “heavy”)</p>
+<ul class="simple">
+<li><p>heavy: heavy construction</p></li>
+<li><p>light: light construction</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>zone_area_factors</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains the name of the zone (str), the
+zone area factor (float) and the zone usage from BoundaryConditions json
+(str). (Default see doc string above)</p>
+</dd>
+<dt><strong>outer_wall_names</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains a random name for the outer walls,
+their orientation and tilt. Default is a building in north-south
+orientation)</p>
+</dd>
+<dt><strong>roof_names</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains the name of the roofs, their orientation
+and tilt. Default is one flat roof.</p>
+</dd>
+<dt><strong>ground_floor_names</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains the name of the ground floors, their
+orientation and tilt. Default is one ground floor.</p>
+</dd>
+<dt><strong>window_names</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains the name of the window, their
+orientation and tilt. Default is a building in north-south
+orientation)</p>
+</dd>
+<dt><strong>inner_wall_names</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains the name of the inner walls, their
+orientation and tilt. Default is one cumulated inner wall.</p>
+</dd>
+<dt><strong>ceiling_names</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains the name of the ceilings, their
+orientation and tilt. Default is one cumulated ceiling.</p>
+</dd>
+<dt><strong>floor_names</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains the name of the floors, their
+orientation and tilt. Default is one cumulated floor.</p>
+</dd>
+<dt><strong>gross_factor</strong><span class="classifier">float</span></dt><dd><p>gross factor used to correct the rooftop and floor area (default is
+1.15)</p>
+</dd>
+<dt><strong>est_factor_wall_area</strong><span class="classifier">float</span></dt><dd><p>estimation factor to calculate outer wall area</p>
+</dd>
+<dt><strong>est_exponent_wall</strong><span class="classifier">float</span></dt><dd><p>estimation factor exponent to calculate outer wall area</p>
+</dd>
+<dt><strong>est_factor_win_area</strong><span class="classifier">float</span></dt><dd><p>estimation factor to calculate window area</p>
+</dd>
+<dt><strong>est_exponent_win</strong><span class="classifier">float</span></dt><dd><p>estimation factor exponent to calculate window area</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The listed attributes are just the ones that are set by the user
+calculated values are not included in this list. Changing these values is
+expert mode.</p>
+</dd></dl>
+
+</section>
+<section id="module-teaser.logic.archetypebuildings.bmvbs.custom.institute4">
+<span id="teaser-logic-archetypebuildings-bmvbs-custom-institute4-module"></span><h2>teaser.logic.archetypebuildings.bmvbs.custom.institute4 module<a class="headerlink" href="#module-teaser.logic.archetypebuildings.bmvbs.custom.institute4" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.logic.archetypebuildings.bmvbs.custom.institute4.Institute4">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.archetypebuildings.bmvbs.custom.institute4.</span></span><span class="sig-name descname"><span class="pre">Institute4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_construction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_floors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height_of_floors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_leased_area</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_ahu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_gains_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">office_layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">construction_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/archetypebuildings/bmvbs/custom/institute4.html#Institute4"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.archetypebuildings.bmvbs.custom.institute4.Institute4" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="teaser.logic.archetypebuildings.bmvbs.html#teaser.logic.archetypebuildings.bmvbs.office.Office" title="teaser.logic.archetypebuildings.bmvbs.office.Office"><code class="xref py py-class docutils literal notranslate"><span class="pre">Office</span></code></a></p>
+<p>Type Institute Building (type 4)</p>
+<p>The institute type 4 module contains a multi zone building which is based
+on an
+office building with an additional laboratory zone. The zonal
+distribution is based on investigations of the Forschungszentrum Juelich
+<span id="id4">[<a class="reference internal" href="../archetypes.html#id34" title="Moritz Lauster. Parametrierbare Gebäudemodelle für dynamische Energiebedarfsrechnungen von Stadtquartieren. PhD thesis, RWTH Aachen University, Aachen, 2018.">14</a>]</span>. According to the dataset from Juelich,
+the typebuilding institute type 4 is based on the buildingsclass of BWZK
+with
+the number 2230, 2240 and 2250
+<span id="id5">[<a class="reference internal" href="../archetypes.html#id19" title="Bauministerkonferenz. Bauwerkszuordnungskatalog. 2010.">9</a>]</span>. The estimation of exterior
+wall surfaces follows the approach for office buildings, but with adapted
+parameters <span id="id6">[<a class="reference internal" href="../archetypes.html#id34" title="Moritz Lauster. Parametrierbare Gebäudemodelle für dynamische Energiebedarfsrechnungen von Stadtquartieren. PhD thesis, RWTH Aachen University, Aachen, 2018.">14</a>]</span>. This building type is by default
+equipped with an air handling unit without humidification.</p>
+<p>In detail the net leased area is divided into the following thermal zone
+areas:</p>
+<ol class="arabic simple">
+<li><p>Office (22% of net leased area)</p></li>
+<li><p>Floor (20% of net leased area)</p></li>
+<li><p>Storage (28% of net leased area)</p></li>
+<li><p>Meeting (4% of net leased area)</p></li>
+<li><p>Restroom (4% of net leased area)</p></li>
+<li><p>ICT (2% of net leased area)</p></li>
+<li><p>Laboratory (20% of the net leased area)</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parent: Project()</strong></dt><dd><p>The parent class of this object, the Project the Building belongs to.
+Allows for better control of hierarchical structures. If not None it
+adds this Building instance to Project.buildings.
+(default: None)</p>
+</dd>
+<dt><strong>name: str</strong></dt><dd><p>Individual name</p>
+</dd>
+<dt><strong>year_of_construction</strong><span class="classifier">int</span></dt><dd><p>Year of first construction</p>
+</dd>
+<dt><strong>height_of_floors</strong><span class="classifier">float [m]</span></dt><dd><p>Average height of the buildings’ floors</p>
+</dd>
+<dt><strong>number_of_floors</strong><span class="classifier">int</span></dt><dd><p>Number of building’s floors above ground</p>
+</dd>
+<dt><strong>net_leased_area</strong><span class="classifier">float [m2]</span></dt><dd><p>Total net leased area of building. This is area is NOT the footprint
+of a building</p>
+</dd>
+<dt><strong>with_ahu</strong><span class="classifier">Boolean</span></dt><dd><p>If set to True, an empty instance of BuildingAHU is instantiated and
+assigned to attribute central_ahu. This instance holds information for
+central Air Handling units. Default is False.</p>
+</dd>
+<dt><strong>internal_gains_mode: int [1, 2, 3]</strong></dt><dd><p>mode for the internal gains calculation done in AixLib:</p>
+<ol class="arabic simple">
+<li><p>Temperature and activity degree dependent heat flux calculation for persons. The
+calculation is based on  SIA 2024 (default)</p></li>
+<li><p>Temperature and activity degree independent heat flux calculation for persons, the max.
+heatflowrate is prescribed by the parameter
+fixed_heat_flow_rate_persons.</p></li>
+<li><p>Temperature and activity degree dependent calculation with
+consideration of moisture and co2. The moisture calculation is
+based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
+Engineering ToolBox (2004) and regards only persons.</p></li>
+</ol>
+</dd>
+<dt><strong>office_layout</strong><span class="classifier">int</span></dt><dd><p>Structure of the floor plan of office buildings, default is 1,
+which is representative for one elongated floor.</p>
+<ol class="arabic simple">
+<li><p>elongated 1 floor</p></li>
+<li><p>elongated 2 floors</p></li>
+<li><p>compact (e.g. for a square base building)</p></li>
+</ol>
+</dd>
+<dt><strong>window_layout</strong><span class="classifier">int</span></dt><dd><p>Structure of the window facade type, default is 1, which is
+representative for a punctuated facade.</p>
+<ol class="arabic simple">
+<li><p>punctuated facade (individual windows)</p></li>
+<li><p>banner facade (continuous windows)</p></li>
+<li><p>full glazing</p></li>
+</ol>
+</dd>
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Construction type of used wall constructions default is “heavy”)</p>
+<ul class="simple">
+<li><p>heavy: heavy construction</p></li>
+<li><p>light: light construction</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>zone_area_factors</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains the name of the zone (str), the
+zone area factor (float) and the zone usage from BoundaryConditions json
+(str). (Default see doc string above)</p>
+</dd>
+<dt><strong>outer_wall_names</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains a random name for the outer walls,
+their orientation and tilt. Default is a building in north-south
+orientation)</p>
+</dd>
+<dt><strong>roof_names</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains the name of the roofs, their orientation
+and tilt. Default is one flat roof.</p>
+</dd>
+<dt><strong>ground_floor_names</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains the name of the ground floors, their
+orientation and tilt. Default is one ground floor.</p>
+</dd>
+<dt><strong>window_names</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains the name of the window, their
+orientation and tilt. Default is a building in north-south
+orientation)</p>
+</dd>
+<dt><strong>inner_wall_names</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains the name of the inner walls, their
+orientation and tilt. Default is one cumulated inner wall.</p>
+</dd>
+<dt><strong>ceiling_names</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains the name of the ceilings, their
+orientation and tilt. Default is one cumulated ceiling.</p>
+</dd>
+<dt><strong>floor_names</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains the name of the floors, their
+orientation and tilt. Default is one cumulated floor.</p>
+</dd>
+<dt><strong>gross_factor</strong><span class="classifier">float</span></dt><dd><p>gross factor used to correct the rooftop and floor area (default is
+1.15)</p>
+</dd>
+<dt><strong>est_factor_wall_area</strong><span class="classifier">float</span></dt><dd><p>estimation factor to calculate outer wall area</p>
+</dd>
+<dt><strong>est_exponent_wall</strong><span class="classifier">float</span></dt><dd><p>estimation factor exponent to calculate outer wall area</p>
+</dd>
+<dt><strong>est_factor_win_area</strong><span class="classifier">float</span></dt><dd><p>estimation factor to calculate window area</p>
+</dd>
+<dt><strong>est_exponent_win</strong><span class="classifier">float</span></dt><dd><p>estimation factor exponent to calculate window area</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The listed attributes are just the ones that are set by the user
+calculated values are not included in this list. Changing these values is
+expert mode.</p>
+</dd></dl>
+
+</section>
+<section id="module-teaser.logic.archetypebuildings.bmvbs.custom.institute8">
+<span id="teaser-logic-archetypebuildings-bmvbs-custom-institute8-module"></span><h2>teaser.logic.archetypebuildings.bmvbs.custom.institute8 module<a class="headerlink" href="#module-teaser.logic.archetypebuildings.bmvbs.custom.institute8" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.logic.archetypebuildings.bmvbs.custom.institute8.Institute8">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.archetypebuildings.bmvbs.custom.institute8.</span></span><span class="sig-name descname"><span class="pre">Institute8</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_construction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_floors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height_of_floors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_leased_area</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_ahu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_gains_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">office_layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">construction_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/archetypebuildings/bmvbs/custom/institute8.html#Institute8"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.archetypebuildings.bmvbs.custom.institute8.Institute8" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="teaser.logic.archetypebuildings.bmvbs.html#teaser.logic.archetypebuildings.bmvbs.office.Office" title="teaser.logic.archetypebuildings.bmvbs.office.Office"><code class="xref py py-class docutils literal notranslate"><span class="pre">Office</span></code></a></p>
+<p>Type Institute Building (type 8)</p>
+<p>The institute type 8 module contains a multi zone building which is based
+on an
+office building with an additional laboratory zone. The zonal
+distribution is based on investigations of the Forschungszentrum Juelich
+<span id="id7">[<a class="reference internal" href="../archetypes.html#id34" title="Moritz Lauster. Parametrierbare Gebäudemodelle für dynamische Energiebedarfsrechnungen von Stadtquartieren. PhD thesis, RWTH Aachen University, Aachen, 2018.">14</a>]</span>. According to the dataset from Juelich,
+the typebuilding institute type 8 is based on the buildingsclass of BWZK
+with
+the number 2280
+<span id="id8">[<a class="reference internal" href="../archetypes.html#id19" title="Bauministerkonferenz. Bauwerkszuordnungskatalog. 2010.">9</a>]</span>. The estimation of exterior
+wall surfaces follows the approach for office buildings, but with adapted
+parameters <span id="id9">[<a class="reference internal" href="../archetypes.html#id34" title="Moritz Lauster. Parametrierbare Gebäudemodelle für dynamische Energiebedarfsrechnungen von Stadtquartieren. PhD thesis, RWTH Aachen University, Aachen, 2018.">14</a>]</span>. This building type is by default
+equipped with an air handling unit.</p>
+<p>In detail the net leased area is divided into the following thermal zone
+areas:</p>
+<ol class="arabic simple">
+<li><p>Office (4% of net leased area)</p></li>
+<li><p>Floor (6% of net leased area)</p></li>
+<li><p>Storage (30% of net leased area)</p></li>
+<li><p>Meeting (4% of net leased area)</p></li>
+<li><p>Restroom (4% of net leased area)</p></li>
+<li><p>ICT (2% of net leased area)</p></li>
+<li><p>Laboratory (50% of the net leased area)</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parent: Project()</strong></dt><dd><p>The parent class of this object, the Project the Building belongs to.
+Allows for better control of hierarchical structures. If not None it
+adds this Building instance to Project.buildings.
+(default: None)</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
+</dd>
+<dt><strong>year_of_construction</strong><span class="classifier">int</span></dt><dd><p>Year of first construction</p>
+</dd>
+<dt><strong>height_of_floors</strong><span class="classifier">float [m]</span></dt><dd><p>Average height of the buildings’ floors</p>
+</dd>
+<dt><strong>number_of_floors</strong><span class="classifier">int</span></dt><dd><p>Number of building’s floors above ground</p>
+</dd>
+<dt><strong>net_leased_area</strong><span class="classifier">float [m2]</span></dt><dd><p>Total net leased area of building. This is area is NOT the footprint
+of a building</p>
+</dd>
+<dt><strong>with_ahu</strong><span class="classifier">Boolean</span></dt><dd><p>If set to True, an empty instance of BuildingAHU is instantiated and
+assigned to attribute central_ahu. This instance holds information for
+central Air Handling units. Default is False.</p>
+</dd>
+<dt><strong>internal_gains_mode: int [1, 2, 3]</strong></dt><dd><p>mode for the internal gains calculation done in AixLib:</p>
+<ol class="arabic simple">
+<li><p>Temperature and activity degree dependent heat flux calculation. The
+calculation is based on  SIA 2024 (default)</p></li>
+<li><p>Temperature and activity degree independent heat flux calculation, the max.
+heatflowrate is prescribed by the parameter
+fixed_heat_flow_rate_persons.</p></li>
+<li><p>Temperature and activity degree dependent calculation with
+consideration of moisture and co2. The moisture calculation is
+based on SIA 2024 (2015), the co2 calculation is based on
+Engineering ToolBox (2004)</p></li>
+</ol>
+</dd>
+<dt><strong>office_layout</strong><span class="classifier">int</span></dt><dd><p>Structure of the floor plan of office buildings, default is 1,
+which is representative for one elongated floor.</p>
+<ol class="arabic simple">
+<li><p>elongated 1 floor</p></li>
+<li><p>elongated 2 floors</p></li>
+<li><p>compact (e.g. for a square base building)</p></li>
+</ol>
+</dd>
+<dt><strong>window_layout</strong><span class="classifier">int</span></dt><dd><p>Structure of the window facade type, default is 1, which is
+representative for a punctuated facade.</p>
+<ol class="arabic simple">
+<li><p>punctuated facade (individual windows)</p></li>
+<li><p>banner facade (continuous windows)</p></li>
+<li><p>full glazing</p></li>
+</ol>
+</dd>
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Construction type of used wall constructions default is “heavy”)</p>
+<ul class="simple">
+<li><p>heavy: heavy construction</p></li>
+<li><p>light: light construction</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>zone_area_factors</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains the name of the zone (str), the
+zone area factor (float) and the zone usage from BoundaryConditions json
+(str). (Default see doc string above)</p>
+</dd>
+<dt><strong>outer_wall_names</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains a random name for the outer walls,
+their orientation and tilt. Default is a building in north-south
+orientation)</p>
+</dd>
+<dt><strong>roof_names</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains the name of the roofs, their orientation
+and tilt. Default is one flat roof.</p>
+</dd>
+<dt><strong>ground_floor_names</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains the name of the ground floors, their
+orientation and tilt. Default is one ground floor.</p>
+</dd>
+<dt><strong>window_names</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains the name of the window, their
+orientation and tilt. Default is a building in north-south
+orientation)</p>
+</dd>
+<dt><strong>inner_wall_names</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains the name of the inner walls, their
+orientation and tilt. Default is one cumulated inner wall.</p>
+</dd>
+<dt><strong>ceiling_names</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains the name of the ceilings, their
+orientation and tilt. Default is one cumulated ceiling.</p>
+</dd>
+<dt><strong>floor_names</strong><span class="classifier">dict</span></dt><dd><p>This dictionary contains the name of the floors, their
+orientation and tilt. Default is one cumulated floor.</p>
+</dd>
+<dt><strong>gross_factor</strong><span class="classifier">float</span></dt><dd><p>gross factor used to correct the rooftop and floor area (default is
+1.15)</p>
+</dd>
+<dt><strong>est_factor_wall_area</strong><span class="classifier">float</span></dt><dd><p>estimation factor to calculate outer wall area</p>
+</dd>
+<dt><strong>est_exponent_wall</strong><span class="classifier">float</span></dt><dd><p>estimation factor exponent to calculate outer wall area</p>
+</dd>
+<dt><strong>est_factor_win_area</strong><span class="classifier">float</span></dt><dd><p>estimation factor to calculate window area</p>
+</dd>
+<dt><strong>est_exponent_win</strong><span class="classifier">float</span></dt><dd><p>estimation factor exponent to calculate window area</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The listed attributes are just the ones that are set by the user
+calculated values are not included in this list. Changing these values is
+expert mode.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="teaser.logic.archetypebuildings.bmvbs.html" class="btn btn-neutral float-left" title="teaser.logic.archetypebuildings.bmvbs package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="teaser.logic.archetypebuildings.tabula.html" class="btn btn-neutral float-right" title="teaser.logic.archetypebuildings.tabula package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

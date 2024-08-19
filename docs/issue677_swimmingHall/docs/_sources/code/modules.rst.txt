@@ -1,7 +1,0 @@
-teaser
-======
-
-.. toctree::
-   :maxdepth: 4
-
-   teaser

@@ -1,7 +1,0 @@
-teaser.data.input.inputdata.weatherdata package
-===============================================
-
-.. automodule:: teaser.data.input.inputdata.weatherdata
-   :members:
-   :undoc-members:
-   :show-inheritance:
