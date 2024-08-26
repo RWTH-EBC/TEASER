@@ -224,10 +224,6 @@
 <span class="sd">        maintained illuminance value for lighting. This value is taken from SIA 2024</span>
 <span class="sd">    lighting_efficiency_lumen: float [lm/W_el]</span>
 <span class="sd">        lighting efficiency in lm/W_el, in german: Lichtausbeute</span>
-<span class="sd">    lighting_efficiency: float [W_light/W_el]</span>
-<span class="sd">        lighting efficiency in light power / electrical power</span>
-<span class="sd">    lighting_power_el: float [W_el/m2]</span>
-<span class="sd">        specific electric lighting power per m2</span>
 <span class="sd">    lighting_profil : [float]</span>
 <span class="sd">        Relative presence of lighting 0-1 (e.g. 0.5 means that 50% of the total</span>
 <span class="sd">        lighting power are currently used). Typically given for 24h. This is</span>
@@ -351,8 +347,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ratio_conv_rad_lighting</span> <span class="o">=</span> <span class="mf">0.4</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">maintained_illuminance</span> <span class="o">=</span> <span class="mi">500</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lighting_efficiency_lumen</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># lighting efficiency in lm/W_el</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lighting_efficiency</span> <span class="o">=</span> <span class="mf">0.3</span>  <span class="c1"># [W_light/W_el]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lighting_power_el</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># [W_el/m2]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">use_constant_infiltration</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">infiltration_rate</span> <span class="o">=</span> <span class="mf">0.2</span>
