@@ -61,8 +61,6 @@
                             "fixed_lighting_power": 15.9,
                             "maintained_illuminance": 500.0,
                             "lighting_efficiency_lumen": 150,
-                            "lighting_efficiency": 0.3,
-                            "lighting_power_el": 5,
                             "ratio_conv_rad_lighting": 0.5,
                             "use_constant_infiltration": false,
                             "infiltration_rate": 0.2,

@@ -139,10 +139,6 @@ class UseConditions(object):
         maintained illuminance value for lighting. This value is taken from SIA 2024
     lighting_efficiency_lumen: float [lm/W_el]
         lighting efficiency in lm/W_el, in german: Lichtausbeute
-    lighting_efficiency: float [W_light/W_el]
-        lighting efficiency in light power / electrical power
-    lighting_power_el: float [W_el/m2]
-        specific electric lighting power per m2
     lighting_profil : [float]
         Relative presence of lighting 0-1 (e.g. 0.5 means that 50% of the total
         lighting power are currently used). Typically given for 24h. This is
@@ -266,8 +262,6 @@ class UseConditions(object):
         self.ratio_conv_rad_lighting = 0.4
         self.maintained_illuminance = 500
         self.lighting_efficiency_lumen = 100  # lighting efficiency in lm/W_el
-        self.lighting_efficiency = 0.3  # [W_light/W_el]
-        self.lighting_power_el = 5  # [W_el/m2]
 
         self.use_constant_infiltration = False
         self.infiltration_rate = 0.2

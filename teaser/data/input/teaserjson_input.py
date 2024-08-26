@@ -193,12 +193,6 @@ def load_teaser_json(path, project):
             tz.use_conditions.lighting_efficiency_lumen = zone_in["use_conditions"][
                 "lighting_efficiency_lumen"
             ]
-            tz.use_conditions.lighting_efficiency = zone_in["use_conditions"][
-                "lighting_efficiency"
-            ]
-            tz.use_conditions.lighting_power_el = zone_in["use_conditions"][
-                "lighting_power_el"
-            ]
             tz.use_conditions.use_constant_infiltration = zone_in["use_conditions"][
                 "use_constant_infiltration"
             ]

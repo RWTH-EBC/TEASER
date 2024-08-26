@@ -54,8 +54,6 @@ def load_use_conditions(use_cond, zone_usage, data_class):
     use_cond.ratio_conv_rad_lighting = conditions_bind[zone_usage]["ratio_conv_rad_lighting"]
     use_cond.maintained_illuminance = conditions_bind[zone_usage]["maintained_illuminance"]
     use_cond.lighting_efficiency_lumen = conditions_bind[zone_usage]["lighting_efficiency_lumen"]
-    use_cond.lighting_efficiency = conditions_bind[zone_usage]["lighting_efficiency"]
-    use_cond.lighting_power_el = conditions_bind[zone_usage]["lighting_power_el"]
     use_cond.use_maintained_illuminance = conditions_bind[zone_usage]["use_maintained_illuminance"]
 
     use_cond.use_constant_infiltration = conditions_bind[zone_usage][

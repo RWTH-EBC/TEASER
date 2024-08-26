@@ -97,12 +97,6 @@ def save_use_conditions(use_cond, data_class):
         data_class.conditions_bind[use_cond.usage][
             "lighting_efficiency_lumen"
         ] = use_cond.lighting_efficiency_lumen
-        data_class.conditions_bind[use_cond.usage][
-            "lighting_efficiency"
-        ] = use_cond.lighting_efficiency
-        data_class.conditions_bind[use_cond.usage][
-            "lighting_power_el"
-        ] = use_cond.lighting_power_el
 
         data_class.conditions_bind[use_cond.usage][
             "use_constant_infiltration"

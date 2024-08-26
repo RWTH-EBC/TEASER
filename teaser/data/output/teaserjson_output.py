@@ -185,12 +185,6 @@ def save_teaser_json(path, project):
             zone_out["use_conditions"][
                 "lighting_efficiency_lumen"
             ] = zone.use_conditions.lighting_efficiency_lumen
-            zone_out["use_conditions"][
-                "lighting_efficiency"
-            ] = zone.use_conditions.lighting_efficiency
-            zone_out["use_conditions"][
-                "lighting_power_el"
-            ] = zone.use_conditions.lighting_power_el
 
             zone_out["use_conditions"][
                 "use_constant_infiltration"
