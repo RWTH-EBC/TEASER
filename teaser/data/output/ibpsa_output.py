@@ -127,7 +127,7 @@ def export_ibpsa(
             path=bldg_path,
             package_list=[],
             addition=None,
-            extra=bldg.name + "_Models")
+            extra=[bldg.name + "_Models"])
 
         zone_path = os.path.join(
             bldg_path,

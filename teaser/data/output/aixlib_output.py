@@ -139,7 +139,7 @@ def export_multizone(
             path=bldg_path,
             package_list=[bldg],
             addition=None,
-            extra=bldg.name + "_DataBase")
+            extra=[bldg.name + "_DataBase"])
 
         if bldg.building_id is None:
             bldg.building_id = i
@@ -313,13 +313,13 @@ def _help_package_order(path, package_list, addition=None, extra=None):
 
     path : string
         path of where the package.order should be placed
-    package_list : [string]
-        name of all models or packages contained in the package
+    package_list : [buildings or thermal_zones]
+        objects with the attribute name of all models or packages contained in the package
     addition : string
-        if there should be a suffix in front of package_list.string it can
+        if there should be a prefix of package_list.string it can
         be specified
-    extra : string
-        an extra package or model not contained in package_list can be
+    extra : [string]
+        list of extra packages or models not contained in package_list can be
         specified
 
     """
