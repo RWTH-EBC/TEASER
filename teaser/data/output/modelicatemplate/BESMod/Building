@@ -1,0 +1,15 @@
+<%namespace file="/modelica_language/" import="get_true_false"/>
+within ${bldg.parent.name}.${bldg.name};
+model ${bldg.name}
+  extends BESMod.Systems.Demand.Building.TEASERThermalZone(
+    zoneParam = {
+      %for zone in bldg.thermal_zones:
+      ${bldg.name}_DataBase.${bldg.name}_${zone.name}()${',' if not loop.last else ''}
+      %endfor
+      },
+      hBui=${bldg.bldg_height},
+      ABui=${bldg.area_gf},
+      ARoo=${bldg.area_rt},
+      nZones=${len(bldg.thermal_zones)});
+
+end ${bldg.name};

@@ -8,6 +8,7 @@ import teaser.data.utilities as datahandling
 import teaser.data.input.teaserjson_input as tjson_in
 import teaser.data.output.teaserjson_output as tjson_out
 import teaser.data.output.aixlib_output as aixlib_output
+import teaser.data.output.besmod_output as besmod_output
 import teaser.data.output.ibpsa_output as ibpsa_output
 from teaser.data.dataclass import DataClass
 from teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse import SingleFamilyHouse
@@ -698,6 +699,92 @@ class Project(object):
 
         if internal_id is None:
             aixlib_output.export_multizone(
+                buildings=self.buildings, prj=self, path=path,
+                use_postprocessing_calc=use_postprocessing_calc,
+                export_vars=export_vars
+            )
+        else:
+            for bldg in self.buildings:
+                if bldg.internal_id == internal_id:
+                    aixlib_output.export_multizone(
+                        buildings=[bldg], prj=self, path=path,
+                        use_postprocessing_calc=use_postprocessing_calc,
+                        export_vars=export_vars
+                    )
+
+        if report:
+            try:
+                from teaser.data.output.reports import model_report
+            except ImportError:
+                raise ImportError(
+                    "To create the model report, you have to install TEASER "
+                    "using the option report: pip install teaser[report] or install "
+                    "plotly manually."
+                )
+            report_path = os.path.join(path, "Resources", "ModelReport")
+            model_report.create_model_report(prj=self, path=report_path)
+        return path
+
+    def export_besmod(
+        self,
+        building_model=None,
+        zone_model=None,
+        corG=None,
+        internal_id=None,
+        path=None,
+        use_postprocessing_calc=False,
+        report=False,
+        export_vars=None
+    ):  # ToDo: At the moment same as AixLib. Check what can be changed
+        """Exports values to a record file for Modelica simulation
+
+        Exports one (if internal_id is not None) or all buildings for
+        AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped models
+        using the ThermalZoneEquipped model with a correction of g-value (
+        double pane glazing) and supporting models, like tables and weather
+        model. In contrast to versions < 0.5 TEASER now does not
+        support any model options, as we observed no need, since single
+        ThermalZones are identically with IBPSA models. If you miss one of
+        the old options please contact us.
+
+        Parameters
+        ----------
+
+        internal_id : float
+            setter of a specific building which will be exported, if None then
+            all buildings will be exported
+        path : string
+            if the Files should not be stored in default output path of TEASER,
+            an alternative path can be specified as a full path
+        report: boolean
+            if True a model report in form of a html and csv file will be
+            created for the exported project.
+        export_vars: dict[str:list]
+            dict where key is a name for this variable selection and value is a
+            list of variables to export, wildcards can be used, multiple
+            variable selections are possible. This works only for Dymola. See
+            (https://www.claytex.com/blog/selection-of-variables-to-be-saved-in-the-result-file/)
+        """
+
+        if building_model is not None or zone_model is not None or corG is not None:
+            warnings.warn(
+                "building_model, zone_model and corG are no longer "
+                "supported for AixLib export and have no effect. "
+                "The keywords will be deleted within the next "
+                "version, consider rewriting your code."
+            )
+        if export_vars:
+            export_vars = self.process_export_vars(export_vars)
+
+        if path is None:
+            path = os.path.join(utilities.get_default_path(), self.name)
+        else:
+            path = os.path.join(path, self.name)
+
+        utilities.create_path(path)
+
+        if internal_id is None:
+            besmod_output.export_besmod(
                 buildings=self.buildings, prj=self, path=path,
                 use_postprocessing_calc=use_postprocessing_calc,
                 export_vars=export_vars
