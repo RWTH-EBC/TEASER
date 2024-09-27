@@ -60,7 +60,18 @@ def export_besmod(
         buildings = [buildings]
 
     supported_examples = ["TEASERHeatLoadCalculation",
-                          "ModelicaConferencePaper"]
+                          "ModelicaConferencePaper",
+                          "GasBoilerBuildingOnly"]
+
+    dir_resources = os.path.join(path, "Resources")
+    if not os.path.exists(dir_resources):
+        os.mkdir(dir_resources)
+    dir_scripts = os.path.join(dir_resources, "Scripts")
+    if not os.path.exists(dir_scripts):
+        os.mkdir(dir_scripts)
+    dir_dymola = os.path.join(dir_scripts, "Dymola")
+    if not os.path.exists(dir_dymola):
+        os.mkdir(dir_dymola)
 
     lookup = TemplateLookup(directories=[utilities.get_full_path(
         os.path.join('data', 'output', 'modelicatemplate'))])
@@ -87,14 +98,6 @@ def export_besmod(
     model_template = Template(
         filename=utilities.get_full_path(
             "data/output/modelicatemplate/BESMod/Building"),
-        lookup=lookup)
-    exp_heat_load_calc_template = Template(
-        filename=utilities.get_full_path(
-            "data/output/modelicatemplate/BESMod/Example_TEASERHeatLoadCalculation"),
-        lookup=lookup)
-    example_sim_plot_script = Template(
-        filename=utilities.get_full_path(
-            "data/output/modelicatemplate/BESMod/Script_TEASERHeatLoadCalculation"),
         lookup=lookup)
 
     uses = [
@@ -133,12 +136,15 @@ def export_besmod(
         bldg.library_attr.modelica_gains_boundary(
             path=bldg_path)
 
+        example_bldg = [exp + bldg.name for exp in examples]
+        example_bldg.append(bldg.name + "_DataBase")
+
         aixlib_output._help_package(path=bldg_path, name=bldg.name, within=bldg.parent.name)
         aixlib_output._help_package_order(
             path=bldg_path,
             package_list=[bldg],
             addition=None,
-            extra=[bldg.name + "_DataBase", "TEASERHeatLoadCalculation" + bldg.name])
+            extra=example_bldg)
 
         if bldg.building_id is None:
             bldg.building_id = i
@@ -160,23 +166,24 @@ def export_besmod(
                 modelica_info=bldg.parent.modelica_info))
             out_file.close()
 
-        with open(utilities.get_full_path(
-                os.path.join(bldg_path, "TEASERHeatLoadCalculation" + bldg.name + ".mo")), 'w') as out_file:
-            out_file.write(exp_heat_load_calc_template.render_unicode(
-                bldg=bldg,
-                project=prj))
-            out_file.close()
+        for exp in examples:
+            exp_heat_load_calc_template = Template(
+                filename=utilities.get_full_path(
+                    "data/output/modelicatemplate/BESMod/Example_" + exp),
+                lookup=lookup)
+            example_sim_plot_script = Template(
+                filename=utilities.get_full_path(
+                    "data/output/modelicatemplate/BESMod/Script_" + exp),
+                lookup=lookup)
 
-        dir_resources = os.path.join(path, "Resources")
-        if not os.path.exists(dir_resources):
-            os.mkdir(dir_resources)
-        dir_scripts = os.path.join(dir_resources, "Scripts")
-        if not os.path.exists(dir_scripts):
-            os.mkdir(dir_scripts)
-        dir_dymola = os.path.join(dir_scripts, "Dymola")
-        if not os.path.exists(dir_dymola):
-            os.mkdir(dir_dymola)
-        _help_test_script(bldg, dir_dymola, example_sim_plot_script)  # ToDo fwu-hst: adapt for multiple examples
+            with open(utilities.get_full_path(
+                    os.path.join(bldg_path, exp + bldg.name + ".mo")), 'w') as out_file:
+                out_file.write(exp_heat_load_calc_template.render_unicode(
+                    bldg=bldg,
+                    project=prj))
+                out_file.close()
+
+            _help_example_script(bldg, dir_dymola, example_sim_plot_script, exp)  # ToDo fwu-hst: adapt for multiple examples
 
         zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
 
@@ -213,8 +220,8 @@ def export_besmod(
     print(path)
 
 
-def _help_test_script(bldg, dir_dymola, test_script_template):
-    """Create a test script for regression testing with BuildingsPy
+def _help_example_script(bldg, dir_dymola, test_script_template, example):
+    """Create a script for the simulation and basic plotting of the examples
 
     Parameters
     ----------
@@ -235,7 +242,7 @@ def _help_test_script(bldg, dir_dymola, test_script_template):
     if not os.path.exists(dir_building):
         os.mkdir(dir_building)
     with open(utilities.get_full_path(os.path.join(
-            dir_building, "TEASERHeatLoadCalculation" + bldg.name + ".mos")), 'w') as out_file:
+            dir_building, example + bldg.name + ".mos")), 'w') as out_file:
         out_file.write(test_script_template.render_unicode(
             project=bldg.parent,
             bldg=bldg

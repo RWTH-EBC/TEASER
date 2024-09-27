@@ -1,4 +1,5 @@
 <%namespace file="/modelica_language/" import="get_true_false"/>
+within ${bldg.parent.name}.${bldg.name};
 model ModelicaConferencePaper${bldg.name}
   extends BESMod.Examples.ModelicaConferencePaper.PartialModelicaConferenceUseCase(
     redeclare ${bldg.name} building(
@@ -11,7 +12,8 @@ model ModelicaConferencePaper${bldg.name}
         use_hydraulic=true,
         use_ventilation=true,
         nZones=${len(bldg.thermal_zones)},
-        QBui_flow_nominal=QRec_flow_nominal));
+        QBui_flow_nominal=building.QRec_flow_nominal,
+        THydSup_nominal=fill(328.15,systemParameters.nZones)));
   extends Modelica.Icons.Example;
 
 
@@ -21,4 +23,4 @@ annotation(experiment(StopTime=172800,
    __Dymola_Commands(file=
         "Resources/Scripts/Dymola/${bldg.name}/ModelicaConferencePaper${bldg.name}.mos"
         "Simulate and plot"));
-end TEASERBuilding;
+end ModelicaConferencePaper${bldg.name};

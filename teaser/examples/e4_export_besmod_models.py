@@ -77,9 +77,14 @@ def example_export_besmod():
         "Temperatures": ["*multizone.TAir*", "*multizone.TRad*"]
     }
 
+    examples = ["TEASERHeatLoadCalculation",
+                "ModelicaConferencePaper",
+                "GasBoilerBuildingOnly"]
+
     path = prj.export_besmod(
         internal_id=None,
         path=r"D:\fwu-hst\TEASEROutput_besmod",
+        examples=examples,
         report=True
     )
 
