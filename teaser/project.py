@@ -727,25 +727,16 @@ class Project(object):
 
     def export_besmod(
         self,
-        building_model=None,
-        zone_model=None,
-        corG=None,
         internal_id=None,
+        examples=None,
         path=None,
-        use_postprocessing_calc=False,
-        report=False,
-        export_vars=None
-    ):  # ToDo: At the moment same as AixLib. Check what can be changed
-        """Exports values to a record file for Modelica simulation
+        report=False
+    ):
+        """Exports buildings for BESMod simulation
 
-        Exports one (if internal_id is not None) or all buildings for
-        AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped models
-        using the ThermalZoneEquipped model with a correction of g-value (
-        double pane glazing) and supporting models, like tables and weather
-        model. In contrast to versions < 0.5 TEASER now does not
-        support any model options, as we observed no need, since single
-        ThermalZones are identically with IBPSA models. If you miss one of
-        the old options please contact us.
+        Exports one (if internal_id is not None) or all buildings as
+        BESMod.Systems.Demand.Building.TEASERThermalZone models. Additionally,
+        BESMod.Examples can be specified and directly exported including the building.
 
         Parameters
         ----------
@@ -753,28 +744,16 @@ class Project(object):
         internal_id : float
             setter of a specific building which will be exported, if None then
             all buildings will be exported
+        examples: [string]
+            List of BESMod.Examples to include buildings in and export them.
+            Supported Examples are: "TEASERHeatLoadCalculation", "ModelicaConferencePaper".
         path : string
             if the Files should not be stored in default output path of TEASER,
             an alternative path can be specified as a full path
         report: boolean
             if True a model report in form of a html and csv file will be
             created for the exported project.
-        export_vars: dict[str:list]
-            dict where key is a name for this variable selection and value is a
-            list of variables to export, wildcards can be used, multiple
-            variable selections are possible. This works only for Dymola. See
-            (https://www.claytex.com/blog/selection-of-variables-to-be-saved-in-the-result-file/)
         """
-
-        if building_model is not None or zone_model is not None or corG is not None:
-            warnings.warn(
-                "building_model, zone_model and corG are no longer "
-                "supported for AixLib export and have no effect. "
-                "The keywords will be deleted within the next "
-                "version, consider rewriting your code."
-            )
-        if export_vars:
-            export_vars = self.process_export_vars(export_vars)
 
         if path is None:
             path = os.path.join(utilities.get_default_path(), self.name)
@@ -785,20 +764,16 @@ class Project(object):
 
         if internal_id is None:
             besmod_output.export_besmod(
-                buildings=self.buildings, prj=self, path=path,
-                use_postprocessing_calc=use_postprocessing_calc,
-                export_vars=export_vars
+                buildings=self.buildings, prj=self, path=path, examples=examples
             )
         else:
             for bldg in self.buildings:
                 if bldg.internal_id == internal_id:
-                    aixlib_output.export_multizone(
-                        buildings=[bldg], prj=self, path=path,
-                        use_postprocessing_calc=use_postprocessing_calc,
-                        export_vars=export_vars
+                    besmod_output.export_besmod(
+                        buildings=[bldg], prj=self, path=path, examples=examples
                     )
 
-        if report:
+        if report: # ToDo fwu-hst: Same as AixLib. Maybe create helper function
             try:
                 from teaser.data.output.reports import model_report
             except ImportError:

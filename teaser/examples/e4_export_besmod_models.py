@@ -43,15 +43,15 @@ def example_export_besmod():
 
     print(prj.dir_reference_results)
 
-    prj.used_library_calc = 'AixLib'  # ToDo: Always AixLib? If true, put it in explicit in besmod_output
-    prj.number_of_elements_calc = 4  # ToDo: Should it always be 4? If true, put it in explicit in besmod_output
+    prj.used_library_calc = 'AixLib'  # ToDo fwu-hst: Always AixLib? If true, put it in explicit in besmod_output
+    prj.number_of_elements_calc = 4  # ToDo fwu-hst: Should it always be 4? If true, put it in explicit in besmod_output
     prj.weather_file_path = utilities.get_full_path(
         os.path.join(
             "data",
             "input",
             "inputdata",
             "weatherdata",
-            "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos"))  # ToDo: Check if relevant for besmod
+            "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos"))  # ToDo fwu-hst: Check if relevant for besmod
 
     # To make sure the parameters are calculated correctly we recommend to
     # run calc_all_buildings() function
@@ -80,8 +80,7 @@ def example_export_besmod():
     path = prj.export_besmod(
         internal_id=None,
         path=r"D:\fwu-hst\TEASEROutput_besmod",
-        report=True,
-        export_vars=export_vars
+        report=True
     )
 
     return path

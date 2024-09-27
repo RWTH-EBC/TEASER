@@ -13,44 +13,31 @@ def export_besmod(
         buildings,
         prj,
         path=None,
-        use_postprocessing_calc=False,
-        export_vars=None):
-    """Exports models for AixLib library
+        examples=None):
+    """Exports buildings for BESMod simulation
 
-    Exports a building for
-    AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped models
-    using the ThermalZoneEquipped and supporting models, like tables and weather
-    model. Depending on chosen calculation method the parameter set to 1,2,
-    3 or 4 element model. By default it uses the  correction for solar
-    glazing (corG) and decoupled heat conduction through windows (
-    merge_windows=False). In contrast to versions < 0.5 TEASER now does not
-    support any other model options, as we observed no need, since single
-    ThermalZones are identical with IBPSA models. If you miss one of the
-    old options please contact us.
+    Exports one (if internal_id is not None) or all buildings as
+    BESMod.Systems.Demand.Building.TEASERThermalZone models. Additionally,
+    BESMod.Examples can be specified and directly exported including the building.
 
     This function uses Mako Templates specified in
-    data.output.modelicatemplates.AixLib
+    data.output.modelicatemplates.BESMod
 
     Parameters
     ----------
 
-    buildings : list of instances of Building
-        list of TEASER instances of a Building that is exported to a AixLib
-        MultizoneEquipped models. If you want to export a single building,
-        please pass it over as a list containing only that building.
+    buildings : list of Building instances
+        list of TEASER Building instances that are exported to BESMod
+        building TEASERThermalZone models. Additionally, the buildings are export
+        into the BESMod examples specified in the parameter examples
     prj : instance of Project
         Instance of TEASER Project object to access Project related
         information, e.g. name or version of used libraries
     path : string
         if the Files should not be stored in default output path of TEASER,
-        an alternative path can be specified as a full path
-    use_postprocessing_calc : bool
-        If activated the exported model will use the multizonePostProcessing
-        to calculate common outputs for simulation time like total heating
-        demands. Only supported for Aixlib. Default is False.
-    export_vars : str
-        Holds the string about which variables to export following the
-        __Dymola_selection syntax.
+        an alternative path can be specified as a full paths
+    examples: [string]
+        BESMod examples which are exported with the buildings
 
     Attributes
     ----------
@@ -68,6 +55,12 @@ def export_besmod(
     model_template : Template object
         Template for MultiZone model
     """
+
+    if not isinstance(buildings, list):
+        buildings = [buildings]
+
+    supported_examples = ["TEASERHeatLoadCalculation",
+                          "ModelicaConferencePaper"]
 
     lookup = TemplateLookup(directories=[utilities.get_full_path(
         os.path.join('data', 'output', 'modelicatemplate'))])
@@ -99,14 +92,14 @@ def export_besmod(
         filename=utilities.get_full_path(
             "data/output/modelicatemplate/BESMod/Example_TEASERHeatLoadCalculation"),
         lookup=lookup)
-    test_script_template = Template(
+    example_sim_plot_script = Template(
         filename=utilities.get_full_path(
             "data/output/modelicatemplate/BESMod/Script_TEASERHeatLoadCalculation"),
         lookup=lookup)
 
     uses = [
         'Modelica(version="' + prj.modelica_info.version + '")',
-        'AixLib(version="' + prj.buildings[-1].library_attr.version + '")']  # ToDo: BESMod version?
+        'AixLib(version="' + prj.buildings[-1].library_attr.version + '")']  # ToDo fwu-hst: BESMod version?
     aixlib_output._help_package(
         path=path,
         name=prj.name,
@@ -120,7 +113,7 @@ def export_besmod(
     # _copy_weather_data(prj.weather_file_path, path)
 
     for i, bldg in enumerate(buildings):
-        bldg.bldg_height = bldg.number_of_floors * bldg.height_of_floors  # ToDo: better place? Create logic/calculation/besmod.py as for aixlib?
+        bldg.bldg_height = bldg.number_of_floors * bldg.height_of_floors  # ToDo fwu-hst: better place? Create logic/calculation/besmod.py as for aixlib?
 
         ass_error = "You chose IBPSA calculation, " \
                     "but want to export AixLib models, " \
@@ -164,9 +157,7 @@ def export_besmod(
             out_file.write(model_template.render_unicode(
                 bldg=bldg,
                 weather=bldg.parent.weather_file_path,
-                modelica_info=bldg.parent.modelica_info,
-                use_postprocessing_calc=use_postprocessing_calc,
-                export_vars=export_vars))
+                modelica_info=bldg.parent.modelica_info))
             out_file.close()
 
         with open(utilities.get_full_path(
@@ -185,12 +176,12 @@ def export_besmod(
         dir_dymola = os.path.join(dir_scripts, "Dymola")
         if not os.path.exists(dir_dymola):
             os.mkdir(dir_dymola)
-        _help_test_script(bldg, dir_dymola, test_script_template)  # ToDo: What is this and is it needed?
+        _help_test_script(bldg, dir_dymola, example_sim_plot_script)  # ToDo fwu-hst: adapt for multiple examples
 
         zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
 
         for zone in bldg.thermal_zones:
-            zone.use_conditions.with_heating = False # ToDo: really allways false for besmod?
+            zone.use_conditions.with_heating = False # ToDo fwu-hst: really allways false for besmod?
             with open(utilities.get_full_path(os.path.join(
                     zone_path,
                     bldg.name + '_' + zone.name + '.mo')), 'w') as out_file:
@@ -216,7 +207,7 @@ def export_besmod(
             extra=None)
 
     # _copy_script_unit_tests(os.path.join(dir_scripts, "runUnitTests.py"))
-    # _copy_reference_results(dir_resources, prj)  # ToDo: Creat reference results for example models
+    # _copy_reference_results(dir_resources, prj)  # ToDo fwu-hst: Creat reference results for example models
 
     print("Exports can be found here:")
     print(path)
