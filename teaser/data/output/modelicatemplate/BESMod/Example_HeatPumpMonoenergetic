@@ -1,7 +1,7 @@
 <%namespace file="/modelica_language/" import="get_true_false"/>
 within ${bldg.parent.name}.${bldg.name};
-model ModelicaConferencePaper${bldg.name}
-  extends BESMod.Examples.ModelicaConferencePaper.PartialModelicaConferenceUseCase(
+model HeatPumpMonoenergetic${bldg.name}
+  extends BESMod.Systems.BaseClasses.TEASERExport.PartialHeatPumpMonoenergetic(
     redeclare ${bldg.name} building(
       use_verboseEnergyBalance=false,
       energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial),
@@ -21,6 +21,6 @@ annotation(experiment(StopTime=172800,
      Interval=600,
      Tolerance=1e-06),
    __Dymola_Commands(file=
-        "Resources/Scripts/Dymola/${bldg.name}/ModelicaConferencePaper${bldg.name}.mos"
+        "Resources/Scripts/Dymola/${bldg.name}/HeatPumpMonoenergetic${bldg.name}.mos"
         "Simulate and plot"));
-end ModelicaConferencePaper${bldg.name};
+end HeatPumpMonoenergetic${bldg.name};

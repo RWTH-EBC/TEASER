@@ -60,7 +60,7 @@ def export_besmod(
         buildings = [buildings]
 
     supported_examples = ["TEASERHeatLoadCalculation",
-                          "ModelicaConferencePaper",
+                          "HeatPumpMonoenergetic",
                           "GasBoilerBuildingOnly"]
 
     dir_resources = os.path.join(path, "Resources")

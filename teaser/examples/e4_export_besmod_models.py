@@ -78,7 +78,7 @@ def example_export_besmod():
     }
 
     examples = ["TEASERHeatLoadCalculation",
-                "ModelicaConferencePaper",
+                "HeatPumpMonoenergetic",
                 "GasBoilerBuildingOnly"]
 
     path = prj.export_besmod(

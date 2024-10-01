@@ -1,7 +1,7 @@
 <%namespace file="/modelica_language/" import="get_true_false"/>
 within ${bldg.parent.name}.${bldg.name};
 model TEASERHeatLoadCalculation${bldg.name}
-  extends BESMod.Examples.TEASERHeatLoadCalculation.PartialCalculation(
+  extends BESMod.Systems.BaseClasses.TEASERExport.PartialTEASERHeatLoadCalculation(
     redeclare ${bldg.name} building,
     userProfiles(dTSetBack=3,
         fileNameIntGains=Modelica.Utilities.Files.loadResource(
