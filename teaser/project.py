@@ -605,6 +605,34 @@ class Project(object):
             retrofit_choices: list,
             add_residential_kwargs: dict
     ):
+        """
+        Generate non-residential buildings for all possible combinations of
+        retrofit statuses for specified building elements.
+
+        This function creates multiple variations of a non-residential building based
+        on different retrofit options for specified building elements.
+        It's designed to work with TABULA archetypes.
+
+        Parameters
+        ----------
+        add_residential_kwargs : dict
+            Keyword arguments for the function add_residential.
+        elements : list, optional
+            List of building elements to consider for retrofit.
+            Defaults to ['outer_walls', 'windows', 'rooftops', 'ground_floors'].
+        retrofit_choices : list, optional
+            List of retrofit options to consider.
+            Defaults to ['standard', 'retrofit', 'adv_retrofit'].
+
+        Raises
+        ------
+            ValueError: If unsupported elements or retrofit choices are provided, or if the
+                        construction data is not from TABULA DE or DK.
+
+        Note
+        ----
+            This function only works with TABULA DE or DK construction data.
+        """
         generate_buildings_for_all_element_combinations(
             project_add_building_function=self.add_non_residential,
             add_building_function_kwargs=add_residential_kwargs,
@@ -618,6 +646,34 @@ class Project(object):
             retrofit_choices: list,
             add_residential_kwargs: dict
     ):
+        """
+        Generate residential buildings for all possible combinations of
+        retrofit statuses for specified building elements.
+
+        This function creates multiple variations of a residential building based
+        on different retrofit options for specified building elements.
+        It's designed to work with TABULA archetypes.
+
+        Parameters
+        ----------
+        add_residential_kwargs : dict
+            Keyword arguments for the function add_residential.
+        elements : list, optional
+            List of building elements to consider for retrofit.
+            Defaults to ['outer_walls', 'windows', 'rooftops', 'ground_floors'].
+        retrofit_choices : list, optional
+            List of retrofit options to consider.
+            Defaults to ['standard', 'retrofit', 'adv_retrofit'].
+
+        Raises
+        ------
+            ValueError: If unsupported elements or retrofit choices are provided, or if the
+                        construction data is not from TABULA DE or DK.
+
+        Note
+        ----
+            This function only works with TABULA DE or DK construction data.
+        """
         generate_buildings_for_all_element_combinations(
             project_add_building_function=self.add_residential,
             add_building_function_kwargs=add_residential_kwargs,

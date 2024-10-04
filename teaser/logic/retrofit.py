@@ -10,6 +10,40 @@ def generate_buildings_for_all_element_combinations(
         elements: list = None,
         retrofit_choices: list = None
 ):
+    """
+    Generate buildings for all possible combinations of
+    retrofit statuses for specified building elements.
+
+    This function creates multiple variations of a building based
+    on different retrofit options for specified building elements.
+    It's designed to work with TABULA archetypes.
+
+    Parameters
+    ----------
+    project_add_building_function : callable
+        Function to add a building to the project.
+    add_building_function_kwargs : dict
+        Keyword arguments for the add_building function.
+    elements : list, optional
+        List of building elements to consider for retrofit.
+        Defaults to ['outer_walls', 'windows', 'rooftops', 'ground_floors'].
+    retrofit_choices : list, optional
+        List of retrofit options to consider.
+        Defaults to ['standard', 'retrofit', 'adv_retrofit'].
+
+    Returns
+    -------
+        list: A list of names of the generated buildings.
+
+    Raises
+    ------
+        ValueError: If unsupported elements or retrofit choices are provided, or if the
+                    construction data is not from TABULA DE or DK.
+
+    Note
+    ----
+        This function only works with TABULA DE or DK construction data.
+    """
     construction_data = datahandling.ConstructionData(
         add_building_function_kwargs["construction_data"]
     )
@@ -66,6 +100,26 @@ def generate_buildings_for_all_element_combinations(
 
 
 def component_based_retrofit(building: Building, element_retrofit_stats: dict):
+    """
+    Apply component-based retrofits to a building based on specified retrofit statuses.
+
+    This function applies retrofits to specific building elements (e.g., walls, windows)
+    based on the provided retrofit statuses.
+
+    Parameters
+    ----------
+    building : Building
+        The building object to be retrofitted.
+    element_retrofit_stats : dict
+        A dictionary specifying the retrofit status for each
+        building element. Keys are element names (e.g., 'outer_walls'),
+        and values are retrofit options (e.g., 'standard', 'retrofit').
+
+    Note
+    ----
+        This function modifies the building object in-place.
+        Only elements with 'standard' retrofit option are processed.
+    """
     for zone in building.thermal_zones:
         for element, retrofit_option in element_retrofit_stats.items():
             if retrofit_option != "standard":
