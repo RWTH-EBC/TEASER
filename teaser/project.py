@@ -624,6 +624,10 @@ class Project(object):
             List of retrofit options to consider.
             Defaults to ['standard', 'retrofit', 'adv_retrofit'].
 
+        Returns
+        -------
+            list: A list of names of the generated buildings.
+
         Raises
         ------
             ValueError: If unsupported elements or retrofit choices are provided, or if the
@@ -633,7 +637,7 @@ class Project(object):
         ----
             This function only works with TABULA DE or DK construction data.
         """
-        generate_buildings_for_all_element_combinations(
+        return generate_buildings_for_all_element_combinations(
             project_add_building_function=self.add_non_residential,
             add_building_function_kwargs=add_residential_kwargs,
             elements=elements,
@@ -665,6 +669,10 @@ class Project(object):
             List of retrofit options to consider.
             Defaults to ['standard', 'retrofit', 'adv_retrofit'].
 
+        Returns
+        -------
+            list: A list of names of the generated buildings.
+
         Raises
         ------
             ValueError: If unsupported elements or retrofit choices are provided, or if the
@@ -674,7 +682,7 @@ class Project(object):
         ----
             This function only works with TABULA DE or DK construction data.
         """
-        generate_buildings_for_all_element_combinations(
+        return generate_buildings_for_all_element_combinations(
             project_add_building_function=self.add_residential,
             add_building_function_kwargs=add_residential_kwargs,
             elements=elements,
