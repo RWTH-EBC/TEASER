@@ -12,6 +12,7 @@ import teaser.data.output.ibpsa_output as ibpsa_output
 from teaser.data.dataclass import DataClass
 from teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse import SingleFamilyHouse
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
+from teaser.logic.retrofit import generate_buildings_for_all_element_combinations
 
 
 class Project(object):
@@ -597,6 +598,32 @@ class Project(object):
                 used_library=self._used_library_calc,
             )
         return type_bldg
+
+    def add_non_residential_retrofit_combinations(
+            self,
+            elements: list,
+            retrofit_choices: list,
+            add_residential_kwargs: dict
+    ):
+        generate_buildings_for_all_element_combinations(
+            project_add_building_function=self.add_non_residential,
+            add_building_function_kwargs=add_residential_kwargs,
+            elements=elements,
+            retrofit_choices=retrofit_choices,
+        )
+
+    def add_residential_retrofit_combinations(
+            self,
+            elements: list,
+            retrofit_choices: list,
+            add_residential_kwargs: dict
+    ):
+        generate_buildings_for_all_element_combinations(
+            project_add_building_function=self.add_residential,
+            add_building_function_kwargs=add_residential_kwargs,
+            elements=elements,
+            retrofit_choices=retrofit_choices,
+        )
 
     def save_project(self, file_name=None, path=None):
         """Saves the project to a JSON file
