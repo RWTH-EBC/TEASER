@@ -122,7 +122,7 @@ def component_based_retrofit(building: Building, element_retrofit_stats: dict):
     """
     for zone in building.thermal_zones:
         for element, retrofit_option in element_retrofit_stats.items():
-            if retrofit_option != "standard":
+            if retrofit_option == "standard":
                 continue
             for wall_count in getattr(zone, element):
                 wall_count.load_type_element(
