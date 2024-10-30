@@ -14,8 +14,6 @@ model HeatPumpMonoenergetic${bldg.name}
         nZones=${len(bldg.thermal_zones)},
         QBui_flow_nominal=building.QRec_flow_nominal,
         THydSup_nominal=fill(328.15,systemParameters.nZones)));
-  extends Modelica.Icons.Example;
-
 
 annotation(experiment(StopTime=172800,
      Interval=600,
