@@ -45,3 +45,26 @@
 
   %>
 </%def>
+
+##extract adjacent zone connection (index) pairs
+<%def name="get_nz_connection_pairs(value)", filter="trim">
+  <%
+  # collect all connections
+  all_other_indexes = []
+  for zone in bldg.thermal_zones:
+    all_other_indexes.append(zone.model_attr.other_nz_indexes)
+  return_value = "{"
+  total_index = 0
+  for zone_index, other_indexes in enumerate(all_other_indexes):
+    for other_index in other_indexes:
+        total_index += 1
+        # add connection only if we're at the zone with the lower index
+        if other_index > zone_index:
+            # find out which index the other side of the connection has in a concatenated array of all outgoing connections
+            other_total_index = sum(len(index_list) for index_list in all_other_indexes[:other_index]) + all_other_indexes[other_index].index(zone_index)
+            return_value = return_value + "{" + str(int(total_index)) + "," + str(int(other_total_index + 1)) + "},"
+  return_value = return_value[:-1] + "}" if len(return_value) > 1 else "{0}"
+  return return_value
+
+  %>
+</%def>

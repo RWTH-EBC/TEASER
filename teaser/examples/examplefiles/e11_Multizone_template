@@ -1,4 +1,5 @@
 <%namespace file="/modelica_language/" import="get_true_false"/>
+<%namespace file="/conversion/" import="get_nz_connection_pairs"/>
 within ${bldg.parent.name}.${bldg.name};
 model ${bldg.name}
   "This is the simulation model of ${bldg.name} with traceable ID ${bldg.building_id}"
@@ -12,6 +13,11 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     ABuilding=${bldg.net_leased_area},
     ASurTot=${bldg.library_attr.total_surface_area},
     numZones = ${len(bldg.thermal_zones)},
+    % if bldg.number_of_elements_calc==5:
+        nNzConnectors= ${int(sum(len(zone.model_attr.other_nz_indexes) for zone in bldg.thermal_zones)/2)},
+        nzConnectionPairs= ${get_nz_connection_pairs(bldg)},
+        use_interzonal_flow = true,
+    % endif
     internalGainsMode = ${bldg.internal_gains_mode},
     use_C_flow = false,
     use_moisture_balance = false,
@@ -116,7 +122,7 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     tableName="IntGainsConvRad",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://${bldg.parent.name}/${bldg.name}/e10_AddIntGains.txt"),
+        "modelica://${bldg.parent.name}/${bldg.name}/e11_AddIntGains.txt"),
     columns=2:${len(bldg.thermal_zones)+1})
     "Additional internal gains (radiative)"
     annotation (Placement(transformation(extent={{-64,-34},{-48,-18}})));
@@ -129,7 +135,7 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     tableName="IntGainsConvRad",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://${bldg.parent.name}/${bldg.name}/e10_AddIntGains.txt"),
+        "modelica://${bldg.parent.name}/${bldg.name}/e11_AddIntGains.txt"),
     columns=${len(bldg.thermal_zones)+2}:${(2*len(bldg.thermal_zones))+1})
     "Additional internal gains (convective)"
     annotation (Placement(transformation(extent={{-64,-72},{-48,-56}})));
