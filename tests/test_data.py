@@ -656,47 +656,47 @@ class Test_teaser(object):
     def test_export_aixlib(self):
         """test of export_aixlib, no calculation verification"""
 
-        # prj.number_of_elements_calc = 1
-        # prj.merge_windows_calc = False
-        # prj.used_library_calc = "AixLib"
-        # prj.calc_all_buildings()
-        # prj.export_aixlib()
-        #
-        # prj.number_of_elements_calc = 2
-        # prj.merge_windows_calc = False
-        # prj.used_library_calc = "AixLib"
-        # prj.calc_all_buildings()
-        # prj.export_aixlib()
-        #
-        # prj.number_of_elements_calc = 3
-        # prj.merge_windows_calc = False
-        # prj.used_library_calc = "AixLib"
-        # prj.calc_all_buildings()
-        # prj.export_aixlib()
-        #
-        # prj.number_of_elements_calc = 4
-        # prj.merge_windows_calc = False
-        # prj.used_library_calc = "AixLib"
-        # prj.calc_all_buildings()
-        # prj.export_aixlib()
-        #
-        # prj.number_of_elements_calc = 4
-        # prj.merge_windows_calc = False
-        # prj.used_library_calc = "AixLib"
-        # prj.calc_all_buildings()
-        # prj.export_aixlib(building_model="Test", zone_model="Test", corG="Test")
-        #
-        # prj.number_of_elements_calc = 4
-        # prj.merge_windows_calc = False
-        # prj.used_library_calc = "AixLib"
-        # prj.calc_all_buildings()
-        # prj.buildings.append(prj.buildings[-1])
-        #
-        # prj.number_of_elements_calc = 4
-        # prj.merge_windows_calc = False
-        # prj.used_library_calc = "AixLib"
-        # prj.calc_all_buildings()
-        # prj.export_aixlib(path=utilities.get_default_path())
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.export_aixlib(building_model="Test", zone_model="Test", corG="Test")
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.buildings.append(prj.buildings[-1])
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.export_aixlib(path=utilities.get_default_path())
 
         prj.number_of_elements_calc = 5
         prj.merge_windows_calc = False

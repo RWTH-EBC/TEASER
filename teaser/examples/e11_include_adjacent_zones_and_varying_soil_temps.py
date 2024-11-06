@@ -20,6 +20,7 @@ from teaser.project import Project
 from teaser.data.dataclass import DataClass
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
 from teaser.logic.buildingobjects.buildingphysics.material import Material
+from teaser.data.utilities import ConstructionData
 import teaser.logic.utilities as utilities
 import os
 import shutil
@@ -29,12 +30,12 @@ for variation in ['A', 'B', 'C', 'D']:
     # this project is initialized without data class
     prj = Project(False)
     # now, we can set 'tabula_de' manually
-    prj.data = DataClass(used_statistic='tabula_de')
+    prj.data = DataClass(construction_data=ConstructionData.tabula_de_standard)
 
     if variation == 'D':
         # this is the variation that represents the actual state of the building
         prj.load_project(utilities.get_full_path(
-            f"examples/examplefiles/e10_varD.json"
+            f"examples/examplefiles/e11_varD.json"
         ))
 
         # in the json for variation D, one interzonal element is missing, so we
@@ -131,7 +132,7 @@ for variation in ['A', 'B', 'C', 'D']:
 
     elif variation in ('A', 'B', 'C'):
         prj.load_project(utilities.get_full_path(
-            f"examples/examplefiles/e10_raw.json"
+            f"examples/examplefiles/e11_raw.json"
         ))
 
         # The default properties from the typology (selected previously by
@@ -143,7 +144,7 @@ for variation in ['A', 'B', 'C', 'D']:
             # Note that the windows get a different year of construction (1995)
             # than the rest of the building (1965, from the json import file).
             for el in tz.windows:
-                el.load_type_element(1995, 'tabula_standard_1_SFH')
+                el.load_type_element(1995, 'tabula_de_standard_1_SFH')
                 el.shading_max_irr = 10000
             # rooftops, ground floors and interzonal elements have a clearly
             # associated TABULA standard construction. See the publication
@@ -154,7 +155,7 @@ for variation in ['A', 'B', 'C', 'D']:
             # and True for the main zone)
             for el in tz.rooftops + tz.ground_floors + tz.interzonal_elements:
                 el.load_type_element(el.year_of_construction,
-                                     'tabula_standard_1_SFH')
+                                     'tabula_de_standard_1_SFH')
             # There are two different standard constructions for some element
             # types in some TABULA type building, especially outer walls.
             # This is why two outer wall elements are  stored in the JSON file
@@ -164,10 +165,10 @@ for variation in ['A', 'B', 'C', 'D']:
             # building's wall.
             for el in tz.outer_walls[:4]:
                 el.load_type_element(el.year_of_construction,
-                                     'tabula_standard_1_SFH')
+                                     'tabula_de_standard_1_SFH')
             for el in tz.outer_walls[4:]:
                 el.load_type_element(el.year_of_construction,
-                                     'tabula_standard_2_SFH')
+                                     'tabula_de_standard_2_SFH')
 
     for tz in prj.buildings[0].thermal_zones:
         # In this case, we want to simulate one-directional heat flow. This
@@ -196,7 +197,7 @@ for variation in ['A', 'B', 'C', 'D']:
                 el.outer_convection = 0.9
 
     # change the project name so exports are clearly recognizable
-    prj.name = 'Example_e10_var' + variation
+    prj.name = 'Example_e11_var' + variation
 
     # three ways for setting the inner wall area
     # if you run the example, you will see the difference in the console output.
@@ -257,12 +258,12 @@ for variation in ['A', 'B', 'C', 'D']:
     #    surface between building element and soil
     prj.t_soil_mode = 3
     prj.t_soil_file_path = utilities.get_full_path(
-        "data/input/inputdata/weatherdata/t_soil_example_e10.txt"
+        "examples/examplefiles/t_soil_example_e11.txt"
     )
 
     # 2. the weather is set to the actual weather at the time
     prj.weather_file_path = utilities.get_full_path(
-        "data/input/inputdata/weatherdata/DEU_NW_Morschenich_for_example_e10.mos"
+        "examples/examplefiles/DEU_NW_Morschenich_for_example_e11.mos"
     )
 
     # 3. we restrict the simulation time to the interesting part of the year
@@ -299,11 +300,11 @@ for variation in ['A', 'B', 'C', 'D']:
     # 2. additional internal gains are connected to the ports of the Multizone
     export_path = prj.export_aixlib(
         custom_multizone_template_path=utilities.get_full_path(
-            "examples/examplefiles/e10_Multizone_template"
+            "examples/examplefiles/e11_Multizone_template"
         )
     )
     # the additional import source files need to be copied to the export path
     shutil.copyfile(
-        utilities.get_full_path("examples/examplefiles/e10_AddIntGains.txt"),
-        os.path.join(export_path, prj.buildings[0].name, "e10_AddIntGains.txt")
+        utilities.get_full_path("examples/examplefiles/e11_AddIntGains.txt"),
+        os.path.join(export_path, prj.buildings[0].name, "e11_AddIntGains.txt")
     )
