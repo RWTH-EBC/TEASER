@@ -174,12 +174,26 @@ def save_teaser_json(path, project):
             zone_out["use_conditions"][
                 "ratio_conv_rad_machines"
             ] = zone.use_conditions.ratio_conv_rad_machines
+
             zone_out["use_conditions"][
                 "lighting_power"
             ] = zone.use_conditions.lighting_power
             zone_out["use_conditions"][
+                "fixed_lighting_power"
+            ] = zone.use_conditions.fixed_lighting_power
+            zone_out["use_conditions"][
+                "use_maintained_illuminance"
+            ] = zone.use_conditions.use_maintained_illuminance
+            zone_out["use_conditions"][
                 "ratio_conv_rad_lighting"
             ] = zone.use_conditions.ratio_conv_rad_lighting
+            zone_out["use_conditions"][
+                "maintained_illuminance"
+            ] = zone.use_conditions.maintained_illuminance
+            zone_out["use_conditions"][
+                "lighting_efficiency_lumen"
+            ] = zone.use_conditions.lighting_efficiency_lumen
+
             zone_out["use_conditions"][
                 "use_constant_infiltration"
             ] = zone.use_conditions.use_constant_infiltration
