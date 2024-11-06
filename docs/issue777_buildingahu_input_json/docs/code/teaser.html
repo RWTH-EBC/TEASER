@@ -1,0 +1,823 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser package &mdash; TEASER 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="teaser.data package" href="teaser.data.html" />
+    <link rel="prev" title="teaser" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            TEASER
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">teaser</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">teaser package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#teaser">teaser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html">teaser.data package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.examples.html">teaser.examples package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.html">teaser.logic package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-teaser.project">teaser.project module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#teaser.project.Project"><code class="docutils literal notranslate"><span class="pre">Project</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.add_non_residential"><code class="docutils literal notranslate"><span class="pre">Project.add_non_residential()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.add_residential"><code class="docutils literal notranslate"><span class="pre">Project.add_residential()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.calc_all_buildings"><code class="docutils literal notranslate"><span class="pre">Project.calc_all_buildings()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.export_aixlib"><code class="docutils literal notranslate"><span class="pre">Project.export_aixlib()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.export_ibpsa"><code class="docutils literal notranslate"><span class="pre">Project.export_ibpsa()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.instantiate_data_class"><code class="docutils literal notranslate"><span class="pre">Project.instantiate_data_class()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.load_project"><code class="docutils literal notranslate"><span class="pre">Project.load_project()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.merge_windows_calc"><code class="docutils literal notranslate"><span class="pre">Project.merge_windows_calc</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.name"><code class="docutils literal notranslate"><span class="pre">Project.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.number_of_elements_calc"><code class="docutils literal notranslate"><span class="pre">Project.number_of_elements_calc</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.process_export_vars"><code class="docutils literal notranslate"><span class="pre">Project.process_export_vars()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.retrofit_all_buildings"><code class="docutils literal notranslate"><span class="pre">Project.retrofit_all_buildings()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.save_project"><code class="docutils literal notranslate"><span class="pre">Project.save_project()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.set_default"><code class="docutils literal notranslate"><span class="pre">Project.set_default()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.used_library_calc"><code class="docutils literal notranslate"><span class="pre">Project.used_library_calc</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.weather_file_path"><code class="docutils literal notranslate"><span class="pre">Project.weather_file_path</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">teaser</a></li>
+      <li class="breadcrumb-item active">teaser package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/code/teaser.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-teaser">
+<span id="teaser-package"></span><h1>teaser package<a class="headerlink" href="#module-teaser" title="Link to this heading"></a></h1>
+<section id="teaser">
+<h2>teaser<a class="headerlink" href="#teaser" title="Link to this heading"></a></h2>
+<p>Tool for Energy Analysis and Simulation for Efficient Retrofit</p>
+</section>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="teaser.data.html">teaser.data package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.input.html">teaser.data.input package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.input.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.input.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.input.html#module-teaser.data.input.buildingelement_input_json">teaser.data.input.buildingelement_input_json module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.input.html#module-teaser.data.input.material_input_json">teaser.data.input.material_input_json module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.input.html#module-teaser.data.input.teaserjson_input">teaser.data.input.teaserjson_input module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.input.html#module-teaser.data.input.usecond_input">teaser.data.input.usecond_input module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.output.html">teaser.data.output package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.output.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.output.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.aixlib_output">teaser.data.output.aixlib_output module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.buildingelement_output">teaser.data.output.buildingelement_output module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.ibpsa_output">teaser.data.output.ibpsa_output module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.material_output">teaser.data.output.material_output module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.runUnitTests">teaser.data.output.runUnitTests module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.teaserjson_output">teaser.data.output.teaserjson_output module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.usecond_output">teaser.data.output.usecond_output module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.html#module-teaser.data.dataclass">teaser.data.dataclass module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.html#teaser.data.dataclass.DataClass"><code class="docutils literal notranslate"><span class="pre">DataClass</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.dataclass.DataClass.load_mat_binding"><code class="docutils literal notranslate"><span class="pre">DataClass.load_mat_binding()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.dataclass.DataClass.load_tb_binding"><code class="docutils literal notranslate"><span class="pre">DataClass.load_tb_binding()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.dataclass.DataClass.load_uc_binding"><code class="docutils literal notranslate"><span class="pre">DataClass.load_uc_binding()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.html#module-teaser.data.utilities">teaser.data.utilities module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.ConstructionData"><code class="docutils literal notranslate"><span class="pre">ConstructionData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.ConstructionData.get_prefix"><code class="docutils literal notranslate"><span class="pre">ConstructionData.get_prefix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.ConstructionData.is_iwu"><code class="docutils literal notranslate"><span class="pre">ConstructionData.is_iwu()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.ConstructionData.is_kfw"><code class="docutils literal notranslate"><span class="pre">ConstructionData.is_kfw()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.ConstructionData.is_tabula_de"><code class="docutils literal notranslate"><span class="pre">ConstructionData.is_tabula_de()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.ConstructionData.is_tabula_dk"><code class="docutils literal notranslate"><span class="pre">ConstructionData.is_tabula_dk()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.ConstructionData.iwu_heavy"><code class="docutils literal notranslate"><span class="pre">ConstructionData.iwu_heavy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.ConstructionData.iwu_light"><code class="docutils literal notranslate"><span class="pre">ConstructionData.iwu_light</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.ConstructionData.kfw_100"><code class="docutils literal notranslate"><span class="pre">ConstructionData.kfw_100</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.ConstructionData.kfw_40"><code class="docutils literal notranslate"><span class="pre">ConstructionData.kfw_40</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.ConstructionData.kfw_55"><code class="docutils literal notranslate"><span class="pre">ConstructionData.kfw_55</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.ConstructionData.kfw_70"><code class="docutils literal notranslate"><span class="pre">ConstructionData.kfw_70</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.ConstructionData.kfw_85"><code class="docutils literal notranslate"><span class="pre">ConstructionData.kfw_85</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.ConstructionData.tabula_de_adv_retrofit"><code class="docutils literal notranslate"><span class="pre">ConstructionData.tabula_de_adv_retrofit</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.ConstructionData.tabula_de_retrofit"><code class="docutils literal notranslate"><span class="pre">ConstructionData.tabula_de_retrofit</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.ConstructionData.tabula_de_standard"><code class="docutils literal notranslate"><span class="pre">ConstructionData.tabula_de_standard</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.ConstructionData.tabula_dk_adv_retrofit"><code class="docutils literal notranslate"><span class="pre">ConstructionData.tabula_dk_adv_retrofit</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.ConstructionData.tabula_dk_retrofit"><code class="docutils literal notranslate"><span class="pre">ConstructionData.tabula_dk_retrofit</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.ConstructionData.tabula_dk_standard"><code class="docutils literal notranslate"><span class="pre">ConstructionData.tabula_dk_standard</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData"><code class="docutils literal notranslate"><span class="pre">GeometryData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.BmvbsInstitute"><code class="docutils literal notranslate"><span class="pre">GeometryData.BmvbsInstitute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.BmvbsInstitute4"><code class="docutils literal notranslate"><span class="pre">GeometryData.BmvbsInstitute4</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.BmvbsInstitute8"><code class="docutils literal notranslate"><span class="pre">GeometryData.BmvbsInstitute8</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.BmvbsOffice"><code class="docutils literal notranslate"><span class="pre">GeometryData.BmvbsOffice</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.IwuSingleFamilyDwelling"><code class="docutils literal notranslate"><span class="pre">GeometryData.IwuSingleFamilyDwelling</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.TabulaDeApartmentBlock"><code class="docutils literal notranslate"><span class="pre">GeometryData.TabulaDeApartmentBlock</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.TabulaDeMultiFamilyHouse"><code class="docutils literal notranslate"><span class="pre">GeometryData.TabulaDeMultiFamilyHouse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.TabulaDeSingleFamilyHouse"><code class="docutils literal notranslate"><span class="pre">GeometryData.TabulaDeSingleFamilyHouse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.TabulaDeTerracedHouse"><code class="docutils literal notranslate"><span class="pre">GeometryData.TabulaDeTerracedHouse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.TabulaDkApartmentBlock"><code class="docutils literal notranslate"><span class="pre">GeometryData.TabulaDkApartmentBlock</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.TabulaDkSingleFamilyHouse"><code class="docutils literal notranslate"><span class="pre">GeometryData.TabulaDkSingleFamilyHouse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.TabulaDkTerracedHouse"><code class="docutils literal notranslate"><span class="pre">GeometryData.TabulaDkTerracedHouse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.UrbanrenetEst1a"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst1a</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.UrbanrenetEst1b"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst1b</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.UrbanrenetEst2"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.UrbanrenetEst3"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst3</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.UrbanrenetEst4a"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst4a</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.UrbanrenetEst4b"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst4b</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.UrbanrenetEst5"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst5</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.UrbanrenetEst6"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst6</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.UrbanrenetEst7"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst7</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.UrbanrenetEst8a"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst8a</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.GeometryData.UrbanrenetEst8b"><code class="docutils literal notranslate"><span class="pre">GeometryData.UrbanrenetEst8b</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.check_construction_data_setter_iwu"><code class="docutils literal notranslate"><span class="pre">check_construction_data_setter_iwu()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.check_construction_data_setter_tabula_de"><code class="docutils literal notranslate"><span class="pre">check_construction_data_setter_tabula_de()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.html#teaser.data.utilities.check_construction_data_setter_tabula_dk"><code class="docutils literal notranslate"><span class="pre">check_construction_data_setter_tabula_dk()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="teaser.examples.html">teaser.examples package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.verification.html">teaser.examples.verification package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.examples.verification.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.examples.verification.html#module-teaser.examples.verification.verification_ASHRAE_140_600">teaser.examples.verification.verification_ASHRAE_140_600 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.examples.verification.html#module-teaser.examples.verification.verification_ASHRAE_140_620">teaser.examples.verification.verification_ASHRAE_140_620 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.examples.verification.html#module-teaser.examples.verification.verification_ASHRAE_140_900">teaser.examples.verification.verification_ASHRAE_140_900 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.examples.verification.html#module-teaser.examples.verification.verification_ASHRAE_140_920">teaser.examples.verification.verification_ASHRAE_140_920 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.examples.verification.html#module-teaser.examples.verification.verification_VDI_6007_room1">teaser.examples.verification.verification_VDI_6007_room1 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.examples.verification.html#module-teaser.examples.verification.verification_VDI_6007_room3">teaser.examples.verification.verification_VDI_6007_room3 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.examples.verification.html#module-teaser.examples.verification.verification_VDI_6007_room8">teaser.examples.verification.verification_VDI_6007_room8 module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.html#module-teaser.examples.e10_adjust_schedules">teaser.examples.e10_adjust_schedules module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.html#teaser.examples.e10_adjust_schedules.example_adjust_schedules"><code class="docutils literal notranslate"><span class="pre">example_adjust_schedules()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.html#module-teaser.examples.e1_generate_archetype">teaser.examples.e1_generate_archetype module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.html#teaser.examples.e1_generate_archetype.example_generate_archetype"><code class="docutils literal notranslate"><span class="pre">example_generate_archetype()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.html#module-teaser.examples.e2_export_aixlib_models">teaser.examples.e2_export_aixlib_models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.html#teaser.examples.e2_export_aixlib_models.example_export_aixlib"><code class="docutils literal notranslate"><span class="pre">example_export_aixlib()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.html#module-teaser.examples.e3_export_ibpsa_models">teaser.examples.e3_export_ibpsa_models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.html#teaser.examples.e3_export_ibpsa_models.example_export_ibpsa"><code class="docutils literal notranslate"><span class="pre">example_export_ibpsa()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.html#module-teaser.examples.e4_save">teaser.examples.e4_save module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.html#teaser.examples.e4_save.example_save"><code class="docutils literal notranslate"><span class="pre">example_save()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.html#module-teaser.examples.e5_load">teaser.examples.e5_load module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.html#teaser.examples.e5_load.example_load"><code class="docutils literal notranslate"><span class="pre">example_load()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.html#module-teaser.examples.e6_generate_building">teaser.examples.e6_generate_building module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.html#teaser.examples.e6_generate_building.example_create_building"><code class="docutils literal notranslate"><span class="pre">example_create_building()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.html#module-teaser.examples.e7_retrofit">teaser.examples.e7_retrofit module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.html#teaser.examples.e7_retrofit.example_retrofit_building"><code class="docutils literal notranslate"><span class="pre">example_retrofit_building()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.html#module-teaser.examples.e8_change_boundary_conditions">teaser.examples.e8_change_boundary_conditions module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.html#teaser.examples.e8_change_boundary_conditions.example_change_boundary_conditions"><code class="docutils literal notranslate"><span class="pre">example_change_boundary_conditions()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.html#module-teaser.examples.e9_building_data_import_from_excel">teaser.examples.e9_building_data_import_from_excel module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.html#teaser.examples.e9_building_data_import_from_excel.get_list_of_present_entries"><code class="docutils literal notranslate"><span class="pre">get_list_of_present_entries()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.html#teaser.examples.e9_building_data_import_from_excel.import_building_from_excel"><code class="docutils literal notranslate"><span class="pre">import_building_from_excel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.html#teaser.examples.e9_building_data_import_from_excel.import_data"><code class="docutils literal notranslate"><span class="pre">import_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.html#teaser.examples.e9_building_data_import_from_excel.zoning_example"><code class="docutils literal notranslate"><span class="pre">zoning_example()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="teaser.logic.html">teaser.logic package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.archetypebuildings.html">teaser.logic.archetypebuildings package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.html#module-teaser.logic.archetypebuildings.nonresidential">teaser.logic.archetypebuildings.nonresidential module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.html#module-teaser.logic.archetypebuildings.residential">teaser.logic.archetypebuildings.residential module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.html">teaser.logic.buildingobjects package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#module-teaser.logic.buildingobjects.building">teaser.logic.buildingobjects.building module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#module-teaser.logic.buildingobjects.thermalzone">teaser.logic.buildingobjects.thermalzone module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#module-teaser.logic.buildingobjects.useconditions">teaser.logic.buildingobjects.useconditions module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.simulation.html">teaser.logic.simulation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.simulation.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.simulation.html#module-teaser.logic.simulation.modelicainfo">teaser.logic.simulation.modelicainfo module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.html#module-teaser.logic.utilities">teaser.logic.utilities module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.html#teaser.logic.utilities.celsius_to_kelvin"><code class="docutils literal notranslate"><span class="pre">celsius_to_kelvin()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.html#teaser.logic.utilities.clear_directory"><code class="docutils literal notranslate"><span class="pre">clear_directory()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.html#teaser.logic.utilities.create_path"><code class="docutils literal notranslate"><span class="pre">create_path()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.html#teaser.logic.utilities.division_from_json"><code class="docutils literal notranslate"><span class="pre">division_from_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.html#teaser.logic.utilities.get_default_path"><code class="docutils literal notranslate"><span class="pre">get_default_path()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.html#teaser.logic.utilities.get_full_path"><code class="docutils literal notranslate"><span class="pre">get_full_path()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-teaser.project">
+<span id="teaser-project-module"></span><h2>teaser.project module<a class="headerlink" href="#module-teaser.project" title="Link to this heading"></a></h2>
+<p>This module includes the Project class, which is the API for TEASER.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.project.Project">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.project.</span></span><span class="sig-name descname"><span class="pre">Project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">load_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Top class for TEASER projects it serves as an API</p>
+<p>The Project class is the top class for all TEASER projects and serves as an
+API for script based interface. It is highly recommended to always
+instantiate the Project class before starting to work with TEASER. It
+contains functions to generate archetype buildings, to export models and to
+save information for later use.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>load_data</strong><span class="classifier">boolean</span></dt><dd><p>boolean if data bases for materials, type elements and use conditions
+should be loaded. default = False but will be automatically loaded
+once you add a archetype building. For building generation from
+scratch, set to True</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Name of the Project (default is ‘Project’)</p>
+</dd>
+<dt><strong>modelica_info</strong><span class="classifier">instance of ModelicaInfo</span></dt><dd><p>TEASER instance of ModelicaInfo to store Modelica related
+information, like used compiler, start and stop time, etc.</p>
+</dd>
+<dt><strong>buildings</strong><span class="classifier">list</span></dt><dd><p>List of all buildings in one project, instances of Building()</p>
+</dd>
+<dt><strong>data</strong><span class="classifier">instance of DataClass</span></dt><dd><p>TEASER instance of DataClass containing JSON binding classes</p>
+</dd>
+<dt><strong>weather_file_path</strong><span class="classifier">str</span></dt><dd><p>Absolute path to weather file used for Modelica simulation. Default
+weather file can be find in inputdata/weatherdata.</p>
+</dd>
+<dt><strong>number_of_elements_calc</strong><span class="classifier">int</span></dt><dd><p>Defines the number of elements, that are aggregated (1, 2, 3 or 4),
+default is 2</p>
+</dd>
+<dt><strong>merge_windows_calc</strong><span class="classifier">bool</span></dt><dd><p>True for merging the windows into the outer walls, False for
+separate resistance for window, default is False (only supported for
+IBPSA)</p>
+</dd>
+<dt><strong>used_library_calc</strong><span class="classifier">str</span></dt><dd><p>used library (AixLib and IBPSA are supported)</p>
+</dd>
+<dt><strong>dir_reference_results</strong><span class="classifier">str</span></dt><dd><p>Path to reference results in BuildingsPy format. If not None, the results
+will be copied into the model output directories so that the exported
+models can be regression tested against these results with BuildingsPy.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.project.Project.add_non_residential">
+<span class="sig-name descname"><span class="pre">add_non_residential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">construction_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_construction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_floors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height_of_floors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_leased_area</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_ahu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_gains_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">office_layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.add_non_residential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.add_non_residential" title="Link to this definition"></a></dt>
+<dd><p>Add a non-residential building to the TEASER project.
+This function adds a non-residential archetype building to the TEASER
+project. You need to specify the method of the archetype generation.
+Currently TEASER supports only method according to Lichtmess and BMVBS
+for non-residential buildings. Further the type of geometry_data needs to be
+specified. Currently TEASER supports four different types of
+non-residential buildings (‘office’, ‘institute’, ‘institute4’,
+‘institute8’). For more information on specific archetype buildings and
+methods, please read the docs of archetype classes.</p>
+<p>This function also calculates the parameters of the buildings directly
+with the settings set in the project (e.g. used_library_calc or
+number_of_elements_calc).</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Used data for construction, for bmvbs non-residential buildings ‘iwu_heavy’ is supported</p>
+</dd>
+<dt><strong>geometry_data</strong><span class="classifier">str</span></dt><dd><p>Main geometry_data of the obtained building, currently only ‘bmvbs_office’,
+‘bmvbs_institute’, ‘bmvbs_institute4’, ‘bmvbs_institute8’ are supported</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
+</dd>
+<dt><strong>year_of_construction</strong><span class="classifier">int</span></dt><dd><p>Year of first construction</p>
+</dd>
+<dt><strong>height_of_floors</strong><span class="classifier">float [m]</span></dt><dd><p>Average height of the buildings’ floors</p>
+</dd>
+<dt><strong>number_of_floors</strong><span class="classifier">int</span></dt><dd><p>Number of building’s floors above ground</p>
+</dd>
+<dt><strong>net_leased_area</strong><span class="classifier">float [m2]</span></dt><dd><p>Total net leased area of building. This is area is NOT the
+footprint
+of a building</p>
+</dd>
+<dt><strong>with_ahu</strong><span class="classifier">Boolean</span></dt><dd><p>If set to True, an empty instance of BuildingAHU is instantiated
+and
+assigned to attribute central_ahu. This instance holds information
+for central Air Handling units. Default is False.</p>
+</dd>
+<dt><strong>internal_gains_mode: int [1, 2, 3]</strong></dt><dd><p>mode for the internal gains calculation done in AixLib:</p>
+<p>1. Temperature and activity degree dependent heat flux calculation for persons. The
+calculation is based on  SIA 2024 (default)</p>
+<p>2. Temperature and activity degree independent heat flux calculation for persons, the max.
+heatflowrate is prescribed by the parameter
+fixed_heat_flow_rate_persons.</p>
+<p>3. Temperature and activity degree dependent calculation with
+consideration of moisture and co2. The moisture calculation is
+based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
+Engineering ToolBox (2004) and regards only persons.</p>
+</dd>
+<dt><strong>office_layout</strong><span class="classifier">int</span></dt><dd><p>Structure of the floor plan of office buildings, default is 1,
+which is representative for one elongated floor.</p>
+<ol class="arabic simple">
+<li><p>elongated 1 floor</p></li>
+<li><p>elongated 2 floors</p></li>
+<li><p>compact (e.g. for a square base building)</p></li>
+</ol>
+</dd>
+<dt><strong>window_layout</strong><span class="classifier">int</span></dt><dd><p>Structure of the window facade type, default is 1, which is
+representative for a punctuated facade.</p>
+<ol class="arabic simple">
+<li><p>punctuated facade (individual windows)</p></li>
+<li><p>banner facade (continuous windows)</p></li>
+<li><p>full glazing</p></li>
+</ol>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>type_bldg</strong><span class="classifier">Instance of Office()</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.project.Project.add_residential">
+<span class="sig-name descname"><span class="pre">add_residential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">construction_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_construction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_floors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height_of_floors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_leased_area</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_ahu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_gains_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residential_layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbour_buildings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cellar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dormer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_apartments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.add_residential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.add_residential" title="Link to this definition"></a></dt>
+<dd><p>Add a residential building to the TEASER project.</p>
+<p>This function adds a residential archetype building to the TEASER
+project. You need to specify the construction_data of the archetype generation.
+Currently TEASER supports only construction_data according ‘iwu’, ‘urbanrenet’,
+‘tabula_de’ and ‘tabula_dk’ for residential buildings. Further the
+type of geometry_data needs to be specified. Currently TEASER supports one type
+of
+residential building for ‘iwu’ and eleven types for ‘urbanrenet’. For
+more information on specific archetype buildings and methods, please
+read the docs of archetype classes.
+This function also calculates the parameters of the buildings directly
+with the settings set in the project (e.g. used_library_calc or
+number_of_elements_calc).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Used construction_data, currently supported values: ‘iwu_heavy’, ‘iwu_light’,
+‘tabula_de_standard’, ‘tabula_de_retrofit’, ‘tabula_de_adv_retrofit’,
+‘tabula_dk_standard’, ‘tabula_dk_retrofit’, ‘tabula_dk_adv_retrofit’
+and the KfW Efficiency house standards ‘kfw_40’, ‘kfw_55’, ‘kfw_70’, ‘kfw_85, kfw_100’</p>
+</dd>
+<dt><strong>geometry_data</strong><span class="classifier">str</span></dt><dd><p>Main geometry_data of the obtained building, currently supported values:
+‘iwu_single_family_dwelling’, ‘urbanrenet_est1a’, ‘urbanrenet_est1b’,
+‘urbanrenet_est2’, ‘urbanrenet_est3’, ‘urbanrenet_est4a’, ‘urbanrenet_est4b’,
+‘urbanrenet_est5’ ‘urbanrenet_est6’, ‘urbanrenet_est7’, ‘urbanrenet_est8a’,
+‘urbanrenet_est8b’
+‘tabula_de_single_family_house’, ‘tabula_de_terraced_house’,
+‘tabula_de_multi_family_house’, ‘tabula_de_apartment_block’,
+‘tabula_dk_single_family_house’, ‘tabula_dk_terraced_house’,
+‘tabula_dk_multi_family_house’, ‘tabula_dk_apartment_block’</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
+</dd>
+<dt><strong>year_of_construction</strong><span class="classifier">int</span></dt><dd><p>Year of first construction</p>
+</dd>
+<dt><strong>height_of_floors</strong><span class="classifier">float [m]</span></dt><dd><p>Average height of the buildings’ floors</p>
+</dd>
+<dt><strong>number_of_floors</strong><span class="classifier">int</span></dt><dd><p>Number of building’s floors above ground</p>
+</dd>
+<dt><strong>net_leased_area</strong><span class="classifier">float [m2]</span></dt><dd><p>Total net leased area of building. This is area is NOT the
+footprint
+of a building</p>
+</dd>
+<dt><strong>with_ahu</strong><span class="classifier">Boolean</span></dt><dd><p>If set to True, an empty instance of BuildingAHU is instantiated
+and
+assigned to attribute central_ahu. This instance holds information
+for central Air Handling units. Default is False.</p>
+</dd>
+<dt><strong>internal_gains_mode: int [1, 2, 3]</strong></dt><dd><p>mode for the internal gains calculation done in AixLib:</p>
+<ol class="arabic simple">
+<li><p>Temperature and activity degree dependent heat flux calculation for persons. The
+calculation is based on  SIA 2024 (default)</p></li>
+<li><p>Temperature and activity degree independent heat flux calculation for persons, the max.
+heatflowrate is prescribed by the parameter
+fixed_heat_flow_rate_persons.</p></li>
+<li><p>Temperature and activity degree dependent calculation with
+consideration of moisture and co2. The moisture calculation is
+based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
+Engineering ToolBox (2004) and regards only persons.</p></li>
+</ol>
+</dd>
+<dt><strong>residential_layout</strong><span class="classifier">int</span></dt><dd><p>Structure of floor plan (default = 0) CAUTION only used for iwu</p>
+<ol class="arabic simple" start="0">
+<li><p>compact</p></li>
+<li><p>elongated/complex</p></li>
+</ol>
+</dd>
+<dt><strong>neighbour_buildings</strong><span class="classifier">int</span></dt><dd><p>Number of neighbour buildings. CAUTION: this will not change
+the orientation of the buildings wall, but just the overall
+exterior wall and window area(!) (default = 0)</p>
+<ol class="arabic simple" start="0">
+<li><p>no neighbour</p></li>
+<li><p>one neighbour</p></li>
+<li><p>two neighbours</p></li>
+</ol>
+</dd>
+<dt><strong>attic</strong><span class="classifier">int</span></dt><dd><p>Design of the attic. CAUTION: this will not change the orientation
+or tilt of the roof instances, but just adapt the roof area(!) (
+default = 0) CAUTION only used for iwu</p>
+<ol class="arabic simple" start="0">
+<li><p>flat roof</p></li>
+<li><p>non heated attic</p></li>
+<li><p>partly heated attic</p></li>
+<li><p>heated attic</p></li>
+</ol>
+</dd>
+<dt><strong>cellar</strong><span class="classifier">int</span></dt><dd><p>Design of the of cellar CAUTION: this will not change the
+orientation, tilt of GroundFloor instances, nor the number or area
+of ThermalZones, but will change GroundFloor area(!) (default = 0)
+CAUTION only used for iwu</p>
+<ol class="arabic simple" start="0">
+<li><p>no cellar</p></li>
+<li><p>non heated cellar</p></li>
+<li><p>partly heated cellar</p></li>
+<li><p>heated cellar</p></li>
+</ol>
+</dd>
+<dt><strong>dormer</strong><span class="classifier">str</span></dt><dd><p>Is a dormer attached to the roof? CAUTION: this will not
+change roof or window orientation or tilt, but just adapt the roof
+area(!) (default = 0) CAUTION only used for iwu</p>
+<ol class="arabic simple" start="0">
+<li><p>no dormer</p></li>
+<li><p>dormer</p></li>
+</ol>
+</dd>
+<dt><strong>number_of_apartments</strong><span class="classifier">int</span></dt><dd><p>number of apartments inside Building (default = 1). CAUTION only
+used for urbanrenet</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>type_bldg</strong><span class="classifier">Instance of Archetype Building</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.project.Project.calc_all_buildings">
+<span class="sig-name descname"><span class="pre">calc_all_buildings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raise_errors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.calc_all_buildings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.calc_all_buildings" title="Link to this definition"></a></dt>
+<dd><p>Calculates values for all project buildings</p>
+<p>You need to set the following parameters in the Project class.</p>
+<dl class="simple">
+<dt>number_of_elements_calc<span class="classifier">int</span></dt><dd><p>defines the number of elements, that area aggregated, between 1
+and 4, default is 2
+For AixLib you should always use 2 elements!!!</p>
+</dd>
+<dt>merge_windows_calc<span class="classifier">bool</span></dt><dd><p>True for merging the windows into the outer walls, False for
+separate resistance for window, default is False
+For AixLib vdi calculation is True, ebc calculation is False</p>
+</dd>
+<dt>used_library_calc<span class="classifier">str</span></dt><dd><p>used library (AixLib and IBPSA are supported)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.project.Project.export_aixlib">
+<span class="sig-name descname"><span class="pre">export_aixlib</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">building_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zone_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corG</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_postprocessing_calc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">report</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.export_aixlib"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.export_aixlib" title="Link to this definition"></a></dt>
+<dd><p>Exports values to a record file for Modelica simulation</p>
+<p>Exports one (if internal_id is not None) or all buildings for
+AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped models
+using the ThermalZoneEquipped model with a correction of g-value (
+double pane glazing) and supporting models, like tables and weather
+model. In contrast to versions &lt; 0.5 TEASER now does not
+support any model options, as we observed no need, since single
+ThermalZones are identically with IBPSA models. If you miss one of
+the old options please contact us.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>setter of a specific building which will be exported, if None then
+all buildings will be exported</p>
+</dd>
+<dt><strong>path</strong><span class="classifier">string</span></dt><dd><p>if the Files should not be stored in default output path of TEASER,
+an alternative path can be specified as a full path</p>
+</dd>
+<dt><strong>report: boolean</strong></dt><dd><p>if True a model report in form of a html and csv file will be
+created for the exported project.</p>
+</dd>
+<dt><strong>export_vars: dict[str:list]</strong></dt><dd><p>dict where key is a name for this variable selection and value is a
+list of variables to export, wildcards can be used, multiple
+variable selections are possible. This works only for Dymola. See
+(<a class="reference external" href="https://www.claytex.com/blog/selection-of-variables-to-be-saved-in-the-result-file/">https://www.claytex.com/blog/selection-of-variables-to-be-saved-in-the-result-file/</a>)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.project.Project.export_ibpsa">
+<span class="sig-name descname"><span class="pre">export_ibpsa</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">library</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'AixLib'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.export_ibpsa"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.export_ibpsa" title="Link to this definition"></a></dt>
+<dd><p>Exports values to a record file for Modelica simulation</p>
+<p>For Annex 60 Library</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>library</strong><span class="classifier">str</span></dt><dd><p>Used library within the framework of IBPSA library. The
+models are identical in each library, but IBPSA Modelica library is
+just a core set of models and should not be used standalone.
+Valid values are ‘AixLib’ (default), ‘Buildings’,
+‘BuildingSystems’ and ‘IDEAS’.</p>
+</dd>
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>setter of a specific building which will be exported, if None then
+all buildings will be exported</p>
+</dd>
+<dt><strong>path</strong><span class="classifier">string</span></dt><dd><p>if the Files should not be stored in default output path of TEASER,
+an alternative path can be specified as a full path</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.project.Project.instantiate_data_class">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">instantiate_data_class</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.instantiate_data_class"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.instantiate_data_class" title="Link to this definition"></a></dt>
+<dd><p>Initialization of DataClass</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>DataClass</strong><span class="classifier">Instance of DataClass()</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.project.Project.load_project">
+<span class="sig-name descname"><span class="pre">load_project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.load_project"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.load_project" title="Link to this definition"></a></dt>
+<dd><p>Load the project from a json file (new format).</p>
+<p>Calls the function load_teaser_json.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>path</strong><span class="classifier">string</span></dt><dd><p>full path to a json file</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.project.Project.merge_windows_calc">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">merge_windows_calc</span></span><a class="headerlink" href="#teaser.project.Project.merge_windows_calc" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.project.Project.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#teaser.project.Project.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.project.Project.number_of_elements_calc">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">number_of_elements_calc</span></span><a class="headerlink" href="#teaser.project.Project.number_of_elements_calc" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.project.Project.process_export_vars">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">process_export_vars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">export_vars</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.process_export_vars"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.process_export_vars" title="Link to this definition"></a></dt>
+<dd><p>Process export vars to fit __Dymola_selections syntax.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.project.Project.retrofit_all_buildings">
+<span class="sig-name descname"><span class="pre">retrofit_all_buildings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_of_retrofit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.retrofit_all_buildings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.retrofit_all_buildings" title="Link to this definition"></a></dt>
+<dd><p>Retrofits all buildings in the project.</p>
+<p>Depending on the used Archetype approach this function will retrofit
+the building. If you have archetypes of both typologies (tabula and
+iwu/BMBVS) you need to pass all keywords (see also Parameters section).</p>
+<p>If TABULA approach is used, it will replace the current construction
+with the construction specified in ‘type_of_retrofit’,
+where ‘retrofit’ and ‘adv_retrofit’ are allowed.</p>
+<p>‘iwu’ or ‘BMVBS’ Buildings in the project are retrofitted in the
+following manner:</p>
+<ul class="simple">
+<li><p>replace all windows of the building to retrofitted window according
+to the year of retrofit.</p></li>
+<li><p>add an additional insulation layer to all outer walls
+(including roof, and ground floor).
+The thickness of the insulation layer is calculated
+that the U-Value of the wall corresponds to the retrofit standard of
+the year of retrofit.</p></li>
+</ul>
+<p>The needed parameters for the Modelica Model are calculated
+automatically, using the calculation_method specified in the
+first scenario.</p>
+<p>Note: To Calculate U-Value, the standard TEASER coefficients for outer
+and inner heat transfer are used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>the year the buildings are retrofitted, only ‘iwu’/’bmbvs’
+archetype approach.</p>
+</dd>
+<dt><strong>type_of_retrofit</strong><span class="classifier">str</span></dt><dd><p>The classification of retrofit, if the archetype building
+approach of TABULA is used.</p>
+</dd>
+<dt><strong>window_type</strong><span class="classifier">str</span></dt><dd><p>Default: EnEv 2014, only ‘iwu’/’bmbvs’ archetype approach.</p>
+</dd>
+<dt><strong>material</strong><span class="classifier">str</span></dt><dd><p>Default: EPS035, only ‘iwu’/’bmbvs’ archetype approach.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.project.Project.save_project">
+<span class="sig-name descname"><span class="pre">save_project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.save_project"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.save_project" title="Link to this definition"></a></dt>
+<dd><p>Saves the project to a JSON file</p>
+<p>Calls the function save_teaser_json in data.output.teaserjson_output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_name</strong><span class="classifier">string</span></dt><dd><p>name of the new file</p>
+</dd>
+<dt><strong>path</strong><span class="classifier">string</span></dt><dd><p>if the Files should not be stored in OutputData, an alternative
+can be specified</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.project.Project.set_default">
+<span class="sig-name descname"><span class="pre">set_default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">load_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.set_default"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.set_default" title="Link to this definition"></a></dt>
+<dd><p>Sets all attributes to default</p>
+<p>Caution: this will delete all buildings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>load_data</strong><span class="classifier">boolean, None-type</span></dt><dd><p>boolean if data bindings for type elements and use conditions
+should be loaded (default = False), in addition it could be a None-
+type to use the already used data bindings</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.project.Project.used_library_calc">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">used_library_calc</span></span><a class="headerlink" href="#teaser.project.Project.used_library_calc" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.project.Project.weather_file_path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">weather_file_path</span></span><a class="headerlink" href="#teaser.project.Project.weather_file_path" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="teaser" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="teaser.data.html" class="btn btn-neutral float-right" title="teaser.data package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

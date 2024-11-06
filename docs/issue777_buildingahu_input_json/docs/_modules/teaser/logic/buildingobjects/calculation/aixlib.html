@@ -1,0 +1,448 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser.logic.buildingobjects.calculation.aixlib &mdash; TEASER 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=db26dd79" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            TEASER
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../code/modules.html">teaser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">teaser.logic.buildingobjects.calculation.aixlib</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for teaser.logic.buildingobjects.calculation.aixlib</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;This module includes AixLib calculation class.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utilities</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">cycle</span><span class="p">,</span> <span class="n">islice</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+
+<div class="viewcode-block" id="AixLib">
+<a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.aixlib.AixLib">[docs]</a>
+<span class="k">class</span> <span class="nc">AixLib</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to calculate parameters for AixLib output.</span>
+
+<span class="sd">    This class holds functions to sort and partly rewrite zone and building</span>
+<span class="sd">    attributes specific for AixLib MultizoneEquipped</span>
+<span class="sd">    simulation. This includes the export of boundary conditions and AHU</span>
+<span class="sd">    operation values.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    parent: Building()</span>
+<span class="sd">        The parent class of this object, the Building the attributes are</span>
+<span class="sd">        calculated for. (default: None)</span>
+
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    file_set_t : str</span>
+<span class="sd">        Filename for set temperature file</span>
+<span class="sd">    file_ahu : str</span>
+<span class="sd">        Filename for AHU boundary conditions file</span>
+<span class="sd">    file_internal_gains : str</span>
+<span class="sd">        Filename for internal gains file</span>
+<span class="sd">    version : str</span>
+<span class="sd">        Used AixLib version, default should always be current master version</span>
+<span class="sd">        of GitHub</span>
+<span class="sd">    total_surface_area : float [m2]</span>
+<span class="sd">        This is the total surface area of the building for interior and</span>
+<span class="sd">        exterior surfaces. That includes: OuterWalls, Rooftops, GroundFloors,</span>
+<span class="sd">        Windows for exterior surfaces, and InnerWalls, Ceilings, Floors for</span>
+<span class="sd">        interior walls.</span>
+<span class="sd">    consider_heat_capacity : bool</span>
+<span class="sd">        decides whether air capacity is considered or not for all thermal</span>
+<span class="sd">        zones in the building. Default is True, you need to export your</span>
+<span class="sd">        model again if changing this value</span>
+<span class="sd">    use_set_back : bool</span>
+<span class="sd">        True if night set back should be used. In this case the function</span>
+<span class="sd">        considers heating_time and temp_set_back defined in</span>
+<span class="sd">        use_conditions of zone. Default is True, you need to export your</span>
+<span class="sd">        model again if changing this value</span>
+<span class="sd">    use_set_point_temperature_profile_heating : bool</span>
+<span class="sd">        Standard is False. True if the set_point temperature profile heating</span>
+<span class="sd">        should be used for the export. Then, the night set back and everything</span>
+<span class="sd">        except the set point profile will be ignored.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct AixLib.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_set_t_heat</span> <span class="o">=</span> <span class="s2">&quot;TsetHeat_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.txt&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_set_t_cool</span> <span class="o">=</span> <span class="s2">&quot;TsetCool_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.txt&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_ahu</span> <span class="o">=</span> <span class="s2">&quot;AHU_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.txt&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_internal_gains</span> <span class="o">=</span> <span class="s2">&quot;InternalGains_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.txt&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;1.3.2&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">total_surface_area</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">consider_heat_capacity</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_set_back</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_set_point_temperature_profile_heating</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_set_back_cool</span> <span class="o">=</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="AixLib.calc_auxiliary_attr">
+<a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.aixlib.AixLib.calc_auxiliary_attr">[docs]</a>
+    <span class="k">def</span> <span class="nf">calc_auxiliary_attr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Call function to calculate all auxiliary attributes for AixLib.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calc_surface_area</span><span class="p">()</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_calc_surface_area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the total surface area of all surfaces.&quot;&quot;&quot;</span>
+        <span class="n">surf_area_temp</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">zone</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;OneElement&quot;</span><span class="p">:</span>
+                <span class="n">surf_area_temp</span> <span class="o">+=</span> <span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">area_ow</span> <span class="o">+</span> <span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">area_win</span>
+            <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;TwoElement&quot;</span><span class="p">:</span>
+                <span class="n">surf_area_temp</span> <span class="o">+=</span> <span class="p">(</span>
+                    <span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">area_ow</span>
+                    <span class="o">+</span> <span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">area_iw</span>
+                    <span class="o">+</span> <span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">area_win</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;ThreeElement&quot;</span><span class="p">:</span>
+                <span class="n">surf_area_temp</span> <span class="o">+=</span> <span class="p">(</span>
+                    <span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">area_ow</span>
+                    <span class="o">+</span> <span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">area_iw</span>
+                    <span class="o">+</span> <span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">area_gf</span>
+                    <span class="o">+</span> <span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">area_win</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;FourElement&quot;</span><span class="p">:</span>
+                <span class="n">surf_area_temp</span> <span class="o">+=</span> <span class="p">(</span>
+                    <span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">area_ow</span>
+                    <span class="o">+</span> <span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">area_iw</span>
+                    <span class="o">+</span> <span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">area_gf</span>
+                    <span class="o">+</span> <span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">area_rt</span>
+                    <span class="o">+</span> <span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">area_win</span>
+                <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">total_surface_area</span> <span class="o">=</span> <span class="n">surf_area_temp</span>
+
+<div class="viewcode-block" id="AixLib.modelica_set_temp">
+<a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.aixlib.AixLib.modelica_set_temp">[docs]</a>
+    <span class="k">def</span> <span class="nf">modelica_set_temp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create .txt file for set temperatures for heating.</span>
+
+<span class="sd">        This function creates a txt for set temperatures of each</span>
+<span class="sd">        zone, that are all saved into one matrix.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        path : str</span>
+<span class="sd">            optional path, when matfile is exported separately</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_default_path</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_set_t_heat</span><span class="p">)</span>
+
+        <span class="n">export</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">&quot;2019-01-01 00:00:00&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">8760</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;h&quot;</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">to_series</span><span class="p">()</span>
+            <span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">),</span>
+            <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">zone</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">],</span>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">zone_count</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+            <span class="n">export</span><span class="p">[</span><span class="n">zone_count</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">zone_count</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">schedules</span><span class="p">[</span>
+                <span class="s2">&quot;heating_profile&quot;</span>
+            <span class="p">]</span>
+
+        <span class="n">export</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3600</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8760</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_delete_file</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;#1</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                <span class="s2">&quot;double Tset(</span><span class="si">{}</span><span class="s2">, </span><span class="si">{}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">8760</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">export</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index_label</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AixLib.modelica_set_temp_cool">
+<a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.aixlib.AixLib.modelica_set_temp_cool">[docs]</a>
+    <span class="k">def</span> <span class="nf">modelica_set_temp_cool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create .txt file for set temperatures cooling.</span>
+
+<span class="sd">        This function creates a txt for set temperatures for cooling</span>
+<span class="sd">        of each zone, that are all saved into one matrix.</span>
+
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        path : str</span>
+<span class="sd">            optional path, when matfile is exported separately</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_default_path</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_set_t_cool</span><span class="p">)</span>
+
+        <span class="n">export</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">&quot;2019-01-01 00:00:00&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">8760</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;h&quot;</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">to_series</span><span class="p">()</span>
+            <span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">),</span>
+            <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">zone</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">],</span>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">zone_count</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+            <span class="n">export</span><span class="p">[</span><span class="n">zone_count</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">zone_count</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">schedules</span><span class="p">[</span>
+                <span class="s2">&quot;cooling_profile&quot;</span>
+            <span class="p">]</span>
+
+        <span class="n">export</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3600</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8760</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_delete_file</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;#1</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                <span class="s2">&quot;double Tset(</span><span class="si">{}</span><span class="s2">, </span><span class="si">{}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">8760</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">export</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index_label</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AixLib.modelica_AHU_boundary">
+<a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.aixlib.AixLib.modelica_AHU_boundary">[docs]</a>
+    <span class="k">def</span> <span class="nf">modelica_AHU_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create .txt file for AHU boundary conditions (building).</span>
+
+<span class="sd">        This function creates a txt for building AHU boundary</span>
+<span class="sd">        conditions</span>
+
+<span class="sd">        1. Column : time step</span>
+<span class="sd">        2. Column : desired AHU profile temperature</span>
+<span class="sd">        3. Column : Desired minimal relative humidity</span>
+<span class="sd">        4. Column : desired maximal relative humidity</span>
+<span class="sd">        5. Column : AHU status (On/Off)</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        path : str</span>
+<span class="sd">            optional path, when matfile is exported separately</span>
+
+<span class="sd">        Attributes</span>
+<span class="sd">        ----------</span>
+<span class="sd">        temperature_profile : [float]</span>
+<span class="sd">            timeline of temperatures requirements for AHU simulation</span>
+<span class="sd">        min_relative_humidity_profile : [float]</span>
+<span class="sd">            timeline of relative humidity requirements for AHU simulation</span>
+<span class="sd">        max_relative_humidity_profile : [float]</span>
+<span class="sd">            timeline of relative humidity requirements for AHU simulation</span>
+<span class="sd">        v_flow_profile : [int]</span>
+<span class="sd">            timeline of desired relative v_flow of the AHU simulation (0..1)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_default_path</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_ahu</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">with_ahu</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">export</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">schedules</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># Dummy values for Input Table</span>
+            <span class="n">export</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">&quot;2019-01-01 00:00:00&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">8760</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;h&quot;</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">to_series</span><span class="p">()</span>
+                <span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+            <span class="p">)</span>
+
+            <span class="n">export</span><span class="p">[</span><span class="s2">&quot;temperature_profile&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">cycle</span><span class="p">([</span><span class="mf">293.15</span><span class="p">,</span> <span class="mf">293.15</span><span class="p">]),</span> <span class="mi">8760</span><span class="p">))</span>
+            <span class="n">export</span><span class="p">[</span><span class="s2">&quot;min_relative_humidity_profile&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">cycle</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="mi">8760</span><span class="p">))</span>
+            <span class="n">export</span><span class="p">[</span><span class="s2">&quot;max_relative_humidity_profile&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">cycle</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="mi">8760</span><span class="p">))</span>
+            <span class="n">export</span><span class="p">[</span><span class="s2">&quot;v_flow_profile&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">cycle</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="mi">8760</span><span class="p">))</span>
+
+        <span class="n">export</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3600</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8760</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_delete_file</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;#1</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;double AHU(</span><span class="si">{}</span><span class="s2">, </span><span class="si">{}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">8760</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+            <span class="n">export</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index_label</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AixLib.modelica_gains_boundary">
+<a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.aixlib.AixLib.modelica_gains_boundary">[docs]</a>
+    <span class="k">def</span> <span class="nf">modelica_gains_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create .txt file for internal gains boundary conditions.</span>
+
+<span class="sd">        This function creates a matfile (-v4) for building internal gains</span>
+<span class="sd">        boundary conditions. It collects all internal gain profiles of the</span>
+<span class="sd">        zones and stores them into one file. The file is extended for each</span>
+<span class="sd">        zone. Only applicable if zones are defined</span>
+
+<span class="sd">        1. Column : time step</span>
+<span class="sd">        2,5,8,...  Column : profile_persons</span>
+<span class="sd">        3,6,9,...  Column : profile_machines</span>
+<span class="sd">        4,7,10,... Column : profile_lighting</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        When time line is created, we need to add a 0 to first element of</span>
+<span class="sd">        all boundaries. This is due to to expected format in Modelica.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        path : str</span>
+<span class="sd">            optional path, when matfile is exported separately</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_default_path</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_internal_gains</span><span class="p">)</span>
+
+        <span class="n">export</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">&quot;2019-01-01 00:00:00&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">8760</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;h&quot;</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">to_series</span><span class="p">()</span>
+            <span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">zone_count</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+            <span class="n">export</span><span class="p">[</span>
+                <span class="s2">&quot;person_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">zone_count</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="p">]</span> <span class="o">=</span> <span class="n">zone_count</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">schedules</span><span class="p">[</span><span class="s2">&quot;persons_profile&quot;</span><span class="p">]</span>
+            <span class="n">export</span><span class="p">[</span>
+                <span class="s2">&quot;machines_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">zone_count</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="p">]</span> <span class="o">=</span> <span class="n">zone_count</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">schedules</span><span class="p">[</span><span class="s2">&quot;machines_profile&quot;</span><span class="p">]</span>
+            <span class="n">export</span><span class="p">[</span>
+                <span class="s2">&quot;lighting_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">zone_count</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="p">]</span> <span class="o">=</span> <span class="n">zone_count</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">schedules</span><span class="p">[</span><span class="s2">&quot;lighting_profile&quot;</span><span class="p">]</span>
+
+        <span class="n">export</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3600</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8760</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_delete_file</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;#1</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                <span class="s2">&quot;double Internals(</span><span class="si">{}</span><span class="s2">, </span><span class="si">{}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="mi">8760</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">export</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index_label</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_delete_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete a file before new information is written to it.</span>
+
+<span class="sd">        If a building with the exact name and project name is generated, we need to make</span>
+<span class="sd">        sure to delete the old information in the text files. This helper function is a</span>
+<span class="sd">        wrapper to delete a file with given filepath.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">        -----------</span>
+<span class="sd">        path : str</span>
+<span class="sd">            Absolute path to the file to be deleted.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+            <span class="k">pass</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
