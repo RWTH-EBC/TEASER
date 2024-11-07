@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
@@ -5,19 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>teaser.data.input.teaserjson_input &mdash; TEASER 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=db26dd79" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
-        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
@@ -34,9 +32,6 @@
           <a href="../../../../index.html" class="icon icon-home">
             TEASER
           </a>
-              <div class="version">
-                1.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -191,31 +186,30 @@
         <span class="n">bldg</span><span class="o">.</span><span class="n">window_area</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;window_area&quot;</span><span class="p">]</span>
 
         <span class="k">try</span><span class="p">:</span>
+            <span class="n">ahu_in</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">]</span>
             <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span> <span class="o">=</span> <span class="n">BuildingAHU</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">bldg</span><span class="p">)</span>
-            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">heating</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span><span class="s2">&quot;heating&quot;</span><span class="p">]</span>
-            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">cooling</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span><span class="s2">&quot;cooling&quot;</span><span class="p">]</span>
-            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">dehumidification</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span>
-                <span class="s2">&quot;dehumidification&quot;</span>
-            <span class="p">]</span>
-            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">humidification</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span><span class="s2">&quot;humidification&quot;</span><span class="p">]</span>
-            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">heat_recovery</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span><span class="s2">&quot;heat_recovery&quot;</span><span class="p">]</span>
-            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">by_pass_dehumidification</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">heating</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span><span class="s2">&quot;heating&quot;</span><span class="p">]</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">cooling</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span><span class="s2">&quot;cooling&quot;</span><span class="p">]</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">dehumidification</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span><span class="s2">&quot;dehumidification&quot;</span><span class="p">]</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">humidification</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span><span class="s2">&quot;humidification&quot;</span><span class="p">]</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">heat_recovery</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span><span class="s2">&quot;heat_recovery&quot;</span><span class="p">]</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">by_pass_dehumidification</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span>
                 <span class="s2">&quot;by_pass_dehumidification&quot;</span>
             <span class="p">]</span>
-            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">efficiency_recovery</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">efficiency_recovery</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span>
                 <span class="s2">&quot;efficiency_recovery&quot;</span>
             <span class="p">]</span>
-            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">efficiency_recovery_false</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">efficiency_recovery_false</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span>
                 <span class="s2">&quot;efficiency_recovery_false&quot;</span>
             <span class="p">]</span>
-            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">min_relative_humidity_profile</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">min_relative_humidity_profile</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span>
                 <span class="s2">&quot;min_relative_humidity_profile&quot;</span>
             <span class="p">]</span>
-            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">max_relative_humidity_profile</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">max_relative_humidity_profile</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span>
                 <span class="s2">&quot;max_relative_humidity_profile&quot;</span>
             <span class="p">]</span>
-            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">v_flow_profile</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span><span class="s2">&quot;v_flow_profile&quot;</span><span class="p">]</span>
-            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">temperature_profile</span> <span class="o">=</span> <span class="n">bldg_in</span><span class="p">[</span><span class="s2">&quot;central_ahu&quot;</span><span class="p">][</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">v_flow_profile</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span><span class="s2">&quot;v_flow_profile&quot;</span><span class="p">]</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">temperature_profile</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span>
                 <span class="s2">&quot;temperature_profile&quot;</span>
             <span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
