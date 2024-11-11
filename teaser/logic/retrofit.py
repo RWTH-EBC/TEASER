@@ -127,7 +127,7 @@ def component_based_retrofit(building: Building, element_retrofit_stats: dict):
             for wall_count in getattr(zone, element):
                 wall_count.load_type_element(
                     year=building.year_of_construction,
-                    construction=wall_count.construction_type.replace(
+                    construction=wall_count.construction_data.replace(
                         "standard",
                         retrofit_option
                     )
