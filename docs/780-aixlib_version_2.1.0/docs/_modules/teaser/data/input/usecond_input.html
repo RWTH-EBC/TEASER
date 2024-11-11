@@ -1,0 +1,198 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser.data.input.usecond_input &mdash; TEASER 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=db26dd79" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            TEASER
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code/modules.html">teaser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">teaser.data.input.usecond_input</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for teaser.data.input.usecond_input</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;This module contains function to load UseConditions classes.&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="load_use_conditions">
+<a class="viewcode-back" href="../../../../code/teaser.data.input.html#teaser.data.input.usecond_input.load_use_conditions">[docs]</a>
+<span class="k">def</span> <span class="nf">load_use_conditions</span><span class="p">(</span><span class="n">use_cond</span><span class="p">,</span> <span class="n">zone_usage</span><span class="p">,</span> <span class="n">data_class</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load use conditions from JSON, according to DIN 18599,</span>
+<span class="sd">    SIA2024 in addition some AixLib specific use conditions for central AHU</span>
+<span class="sd">    are defined.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    use_cond : UseConditions()</span>
+<span class="sd">        Instance of TEASERs</span>
+<span class="sd">        BuildingObjects.UseConditions</span>
+
+<span class="sd">    zone_usage : str</span>
+<span class="sd">        code list for zone_usage according to 18599</span>
+
+<span class="sd">    data_class : DataClass()</span>
+<span class="sd">        DataClass containing the bindings for TypeBuildingElement and</span>
+<span class="sd">        Material (typically this is the data class stored in prj.data,</span>
+<span class="sd">        but the user can individually change that.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">conditions_bind</span> <span class="o">=</span> <span class="n">data_class</span><span class="o">.</span><span class="n">conditions_bind</span>
+
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">usage</span> <span class="o">=</span> <span class="n">zone_usage</span>
+
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">typical_length</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;typical_length&quot;</span><span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">typical_width</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;typical_width&quot;</span><span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">with_heating</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;with_heating&quot;</span><span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">T_threshold_heating</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;T_threshold_heating&quot;</span><span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">T_threshold_cooling</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;T_threshold_cooling&quot;</span><span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">with_cooling</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;with_cooling&quot;</span><span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">fixed_heat_flow_rate_persons</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span>
+        <span class="s2">&quot;fixed_heat_flow_rate_persons&quot;</span>
+    <span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">activity_degree_persons</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span>
+        <span class="s2">&quot;activity_degree_persons&quot;</span>
+    <span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">persons</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;persons&quot;</span><span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">internal_gains_moisture_no_people</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span>
+        <span class="s2">&quot;internal_gains_moisture_no_people&quot;</span>
+    <span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">ratio_conv_rad_persons</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span>
+        <span class="s2">&quot;ratio_conv_rad_persons&quot;</span>
+    <span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">machines</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;machines&quot;</span><span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">ratio_conv_rad_machines</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span>
+        <span class="s2">&quot;ratio_conv_rad_machines&quot;</span>
+    <span class="p">]</span>
+
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">lighting_power</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;fixed_lighting_power&quot;</span><span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">fixed_lighting_power</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;fixed_lighting_power&quot;</span><span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">ratio_conv_rad_lighting</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;ratio_conv_rad_lighting&quot;</span><span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">maintained_illuminance</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;maintained_illuminance&quot;</span><span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">lighting_efficiency_lumen</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;lighting_efficiency_lumen&quot;</span><span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">use_maintained_illuminance</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;use_maintained_illuminance&quot;</span><span class="p">]</span>
+
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">use_constant_infiltration</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span>
+        <span class="s2">&quot;use_constant_infiltration&quot;</span>
+    <span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">infiltration_rate</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span>
+        <span class="s2">&quot;infiltration_rate&quot;</span>
+    <span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">max_user_infiltration</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span>
+        <span class="s2">&quot;max_user_infiltration&quot;</span>
+    <span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">max_overheating_infiltration</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span>
+        <span class="s2">&quot;max_overheating_infiltration&quot;</span>
+    <span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">max_summer_infiltration</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span>
+        <span class="s2">&quot;max_summer_infiltration&quot;</span>
+    <span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">winter_reduction_infiltration</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span>
+        <span class="s2">&quot;winter_reduction_infiltration&quot;</span>
+    <span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">min_ahu</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;min_ahu&quot;</span><span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">max_ahu</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;max_ahu&quot;</span><span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">with_ahu</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;with_ahu&quot;</span><span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">heating_profile</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;heating_profile&quot;</span><span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">cooling_profile</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;cooling_profile&quot;</span><span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">persons_profile</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;persons_profile&quot;</span><span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">machines_profile</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;machines_profile&quot;</span><span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">lighting_profile</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span><span class="s2">&quot;lighting_profile&quot;</span><span class="p">]</span>
+    <span class="n">use_cond</span><span class="o">.</span><span class="n">with_ideal_thresholds</span> <span class="o">=</span> <span class="n">conditions_bind</span><span class="p">[</span><span class="n">zone_usage</span><span class="p">][</span>
+        <span class="s2">&quot;with_ideal_thresholds&quot;</span>
+    <span class="p">]</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
