@@ -730,6 +730,10 @@ class Project(object):
         internal_id=None,
         examples=None,
         path=None,
+        THydSup_nominal=None,
+        TOda_nominal=262.65,
+        QBuiOld_flow_design=None,
+        THydSupOld_design=None,
         report=False
     ):
         """Exports buildings for BESMod simulation
@@ -746,7 +750,11 @@ class Project(object):
             all buildings will be exported
         examples: [string]
             List of BESMod.Examples to include buildings in and export them.
-            Supported Examples are: "TEASERHeatLoadCalculation", "ModelicaConferencePaper".
+            Supported Examples are: "TEASERHeatLoadCalculation", "HeatPumpMonoenergetic" and "GasBoilerBuildingOnly".
+        THydSup_nominal: float, dict
+            Nominal hydraulic supply temperature in kelvin.
+        partial_retrofit_args: dict
+            Arguments to specify a partial retrofit model in BESMod. Default is
         path : string
             if the Files should not be stored in default output path of TEASER,
             an alternative path can be specified as a full path
@@ -764,13 +772,17 @@ class Project(object):
 
         if internal_id is None:
             besmod_output.export_besmod(
-                buildings=self.buildings, prj=self, path=path, examples=examples
+                buildings=self.buildings, prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
+                        TOda_nominal=TOda_nominal, QBuiOld_flow_design=QBuiOld_flow_design,
+                        THydSupOld_design=THydSupOld_design
             )
         else:
             for bldg in self.buildings:
                 if bldg.internal_id == internal_id:
                     besmod_output.export_besmod(
-                        buildings=[bldg], prj=self, path=path, examples=examples
+                        buildings=[bldg], prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
+                        TOda_nominal=TOda_nominal, QBuiOld_flow_design=QBuiOld_flow_design,
+                        THydSupOld_design=THydSupOld_design
                     )
 
         if report: # ToDo fwu-hst: Same as AixLib. Maybe create helper function

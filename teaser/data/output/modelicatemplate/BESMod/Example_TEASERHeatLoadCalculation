@@ -6,7 +6,8 @@ model TEASERHeatLoadCalculation${bldg.name}
     userProfiles(dTSetBack=3,
         fileNameIntGains=Modelica.Utilities.Files.loadResource(
         "modelica://${bldg.parent.name}/${bldg.name}/InternalGains_${bldg.name}.txt")),
-    systemParameters(nZones=${len(bldg.thermal_zones)}));
+    systemParameters(nZones=${len(bldg.thermal_zones)},
+                     TOda_nominal=${TOda_nominal}));
 
   annotation (
     experiment(StopTime=172800,

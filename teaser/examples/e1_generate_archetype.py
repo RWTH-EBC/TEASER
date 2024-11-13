@@ -17,7 +17,7 @@ def example_generate_archetype():
     # Be careful: Dymola does not like whitespaces in names and filenames, thus we will delete them anyway in TEASER.
 
     prj = Project()
-    prj.name = "ArchetypeExample_neu"
+    prj.name = "ArchetypeExample"
 
     # There are two different types of archetype groups: residential and
     # non-residential buildings. Two API functions offer the opportunity to

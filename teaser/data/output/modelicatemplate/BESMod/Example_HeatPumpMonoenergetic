@@ -12,8 +12,11 @@ model HeatPumpMonoenergetic${bldg.name}
         use_hydraulic=true,
         use_ventilation=true,
         nZones=${len(bldg.thermal_zones)},
+        TOda_nominal=${TOda_nominal},
         QBui_flow_nominal=building.QRec_flow_nominal,
-        THydSup_nominal=fill(328.15,systemParameters.nZones)));
+        THydSup_nominal=${THydSup_nominal},
+        QBuiOld_flow_design=${QBuiOld_flow_design},
+        THydSupOld_design=${THydSupOld_design}));
 
 annotation(experiment(StopTime=172800,
      Interval=600,

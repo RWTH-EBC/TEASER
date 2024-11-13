@@ -5,7 +5,11 @@ model GasBoilerBuildingOnly${bldg.name}
     redeclare ${bldg.name} building,
     userProfiles(fileNameIntGains=Modelica.Utilities.Files.loadResource(
         "modelica://${bldg.parent.name}/${bldg.name}/InternalGains_${bldg.name}.txt")),
-    systemParameters(nZones=${len(bldg.thermal_zones)}));
+    systemParameters(nZones=${len(bldg.thermal_zones)},
+                     TOda_nominal=${TOda_nominal},
+                     THydSup_nominal=${THydSup_nominal},
+                     QBuiOld_flow_design=${QBuiOld_flow_design},
+                     THydSupOld_design=${THydSupOld_design}));
   extends Modelica.Icons.Example;
 
   annotation (experiment(StopTime=172800,

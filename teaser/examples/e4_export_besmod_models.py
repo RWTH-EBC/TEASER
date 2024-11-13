@@ -44,7 +44,7 @@ def example_export_besmod():
     print(prj.dir_reference_results)
 
     prj.used_library_calc = 'AixLib'  # ToDo fwu-hst: Always AixLib? If true, put it in explicit in besmod_output
-    prj.number_of_elements_calc = 4  # ToDo fwu-hst: Should it always be 4? If true, put it in explicit in besmod_output
+    prj.number_of_elements_calc = 4
     prj.weather_file_path = utilities.get_full_path(
         os.path.join(
             "data",
@@ -66,22 +66,57 @@ def example_export_besmod():
     # exported. In this case we want to export all buildings to our home
     # directory, thus we are passing over None for both parameters.
 
-    # We might want not have all data stored in our result file. By defining
-    # export_vars as following we can specify which results we want to store
-    # and define a collection name under which these results are stored. This
-    # feature only works with Dymola.
-
-    export_vars = {
-        "HeatingDemands": ["*multizone.PHeater*", "*multizone.PHeatAHU"],
-        "CoolingDemands": ["*multizone.PCooler*", "*multizone.PCoolAHU"],
-        "Temperatures": ["*multizone.TAir*", "*multizone.TRad*"]
-    }
-
     examples = ["TEASERHeatLoadCalculation",
                 "HeatPumpMonoenergetic",
                 "GasBoilerBuildingOnly"]
 
+    THydSup_nominal = 55 + 273.15
+    THydSup_nominal = {1950: 90+273.15, 1980: 70+273.15, 2010: 55+273.15, 2024: 35+273.15}
+    THydSup_nominal = {"ResidentialBuilding": 328.15,
+                       "OfficeBuilding": 328.15,
+                       "InstituteBuilding": 343.15,
+                       "InstituteBuildingMoisture": 343.15,
+                       "ResidentialBuildingTabula": 328.15,
+                       "ResidentialBuildingTabulaMulti": 328.15}
+
     path = prj.export_besmod(
+        THydSup_nominal=THydSup_nominal,
+        internal_id=None,
+        path=r"D:\fwu-hst\TEASEROutput_besmod",
+        examples=examples,
+        report=True
+    )
+
+
+    QBuiOld_flow_design = {}
+    for bldg in prj.buildings:
+        QBuiOld_flow_design[bldg.name] = {}
+        for tz in bldg.thermal_zones:
+            QBuiOld_flow_design[bldg.name][tz.name] = tz.model_attr.heat_load # ToDo fwu-hst: calculation with infiltration rate 0.2 instead of 0.5 as in BESMod
+
+    prj.name = "ArchetypeExample_partial_retrofit"
+
+    prj.retrofit_all_buildings(
+        year_of_retrofit=2015,
+        type_of_retrofit="adv_retrofit",
+        window_type='Alu- oder Stahlfenster, Isolierverglasung',
+        material='EPS_perimeter_insulation_top_layer')
+
+    prj.calc_all_buildings()
+
+    path = prj.export_besmod(
+        THydSup_nominal=THydSup_nominal,
+        QBuiOld_flow_design=QBuiOld_flow_design,
+        internal_id=None,
+        path=r"D:\fwu-hst\TEASEROutput_besmod",
+        examples=examples,
+        report=True
+    )
+
+    prj.name = "ArchetypeExample_total_retrofit"
+
+    path = prj.export_besmod(
+        THydSup_nominal=THydSup_nominal,
         internal_id=None,
         path=r"D:\fwu-hst\TEASEROutput_besmod",
         examples=examples,
