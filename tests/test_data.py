@@ -1191,7 +1191,7 @@ class Test_teaser(object):
         """test of heating_load"""
         prj.set_default()
         helptest.building_test2(prj)
-        prj.buildings[-1].thermal_zones[-1].use_conditions.infiltration_rate = 0.5
+        prj.buildings[-1].thermal_zones[-1].use_conditions.base_infiltration = 0.5
         prj.buildings[-1].thermal_zones[-1].calc_zone_parameters(
             number_of_elements=2, merge_windows=True
         )

@@ -264,7 +264,7 @@ class UseConditions(object):
         self.lighting_efficiency_lumen = 100  # lighting efficiency in lm/W_el
 
         self.use_constant_infiltration = False
-        self.infiltration_rate = 0.2
+        self.base_infiltration = 0.2
         self.max_user_infiltration = 1.0
         self.max_overheating_infiltration = [3.0, 2.0]
         self.max_summer_infiltration = [1.0, 273.15 + 10, 273.15 + 17]

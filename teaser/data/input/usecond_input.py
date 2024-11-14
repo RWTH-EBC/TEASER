@@ -59,7 +59,7 @@ def load_use_conditions(use_cond, zone_usage, data_class):
     use_cond.use_constant_infiltration = conditions_bind[zone_usage][
         "use_constant_infiltration"
     ]
-    use_cond.infiltration_rate = conditions_bind[zone_usage][
+    use_cond.base_infiltration = conditions_bind[zone_usage][
         "infiltration_rate"
     ]
     use_cond.max_user_infiltration = conditions_bind[zone_usage][

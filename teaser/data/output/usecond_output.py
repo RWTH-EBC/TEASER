@@ -103,7 +103,7 @@ def save_use_conditions(use_cond, data_class):
         ] = use_cond.use_constant_infiltration
         data_class.conditions_bind[use_cond.usage][
             "infiltration_rate"
-        ] = use_cond.infiltration_rate
+        ] = use_cond.base_infiltration
         data_class.conditions_bind[use_cond.usage][
             "max_user_infiltration"
         ] = use_cond.max_user_infiltration
