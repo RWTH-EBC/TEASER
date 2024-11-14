@@ -51,7 +51,7 @@ def example_export_besmod():
             "input",
             "inputdata",
             "weatherdata",
-            "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos"))  # ToDo fwu-hst: Check if relevant for besmod
+            "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos"))  # ToDo fwu-hst: add to export (look at AixLib export)
 
     # To make sure the parameters are calculated correctly we recommend to
     # run calc_all_buildings() function
@@ -93,7 +93,7 @@ def example_export_besmod():
         QBuiOld_flow_design[bldg.name] = {}
         for tz in bldg.thermal_zones:
             QBuiOld_flow_design[bldg.name][tz.name] = tz.model_attr.heat_load # ToDo fwu-hst: calculation with infiltration rate 0.2 instead of 0.5 as in BESMod
-
+    # ToDo fwu-hst: set t_outside for heat_load calculation?
     prj.name = "ArchetypeExample_partial_retrofit"
 
     prj.retrofit_all_buildings(
