@@ -92,7 +92,7 @@ def example_export_besmod():
     for bldg in prj.buildings:
         QBuiOld_flow_design[bldg.name] = {}
         for tz in bldg.thermal_zones:
-            QBuiOld_flow_design[bldg.name][tz.name] = tz.model_attr.heat_load # ToDo fwu-hst: calculation with infiltration rate 0.2 instead of 0.5 as in BESMod
+            QBuiOld_flow_design[bldg.name][tz.name] = tz.model_attr.heat_load
     # ToDo fwu-hst: set t_outside for heat_load calculation?
     prj.name = "ArchetypeExample_partial_retrofit"
 
