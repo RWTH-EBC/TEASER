@@ -4,7 +4,7 @@
 # project to ready-to-run simulation models for Modelica library AixLib. These
 # models will only simulate using Dymola, the reason for this are state
 # machines that are used in one AixLib specific AHU model.
-# You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)
+# You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks)
 
 import teaser.examples.e1_generate_archetype as e1
 import teaser.logic.utilities as utilities

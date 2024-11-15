@@ -30,7 +30,7 @@ class AixLib(object):
     file_internal_gains : str
         Filename for internal gains file
     version : str
-        Used AixLib version, default should always be current master version
+        Used AixLib version, default should always be current main version
         of GitHub
     total_surface_area : float [m2]
         This is the total surface area of the building for interior and
