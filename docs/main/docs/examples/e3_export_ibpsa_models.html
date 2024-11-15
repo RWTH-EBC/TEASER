@@ -1,0 +1,192 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example 3: Export Modelica models for IBPSA library using TEASER API &mdash; TEASER 1.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=292eb321"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Example 4: Save information" href="e4_save.html" />
+    <link rel="prev" title="Example 2: Export Modelica models for AixLib library using TEASER API" href="e2_export_aixlib_models.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            TEASER
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../teaser.Examples.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../teaser_api_example.html">API examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="e1_generate_archetype.html">Example 1: Generate archetype buildings using TEASER API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="e2_export_aixlib_models.html">Example 2: Export Modelica models for AixLib library using TEASER API</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Example 3: Export Modelica models for IBPSA library using TEASER API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="e4_save.html">Example 4: Save information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="e5_load.html">Example 5: Load information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="e6_generate_building.html">Example 7: Generate single building</a></li>
+<li class="toctree-l3"><a class="reference internal" href="e7_retrofit.html">Example 7: Retrofit buildings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../teaser_advanced_example.html">Advanced examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../code/modules.html">teaser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../teaser.Examples.html">Examples</a></li>
+          <li class="breadcrumb-item"><a href="../teaser_api_example.html">API examples</a></li>
+      <li class="breadcrumb-item active">Example 3: Export Modelica models for IBPSA library using TEASER API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/examples/e3_export_ibpsa_models.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="example-3-export-modelica-models-for-ibpsa-library-using-teaser-api">
+<h1>Example 3: Export Modelica models for IBPSA library using TEASER API<a class="headerlink" href="#example-3-export-modelica-models-for-ibpsa-library-using-teaser-api" title="Link to this heading"></a></h1>
+<p>This module contains an example how to export buildings from a TEASER
+project to ready-to-run simulation models for Modelica library IBPSA. These
+models simulate in Dymola, OpenModelica and JModelica.
+You can run this example using the <a class="reference external" href="https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks">jupyter-notebook</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">teaser.examples.e1_generate_archetype</span> <span class="k">as</span> <span class="nn">e1</span>
+<span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utilities</span>
+<span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+<p>In e1_generate_archetype we created a Project with three archetype
+buildings to get this Project we rerun this example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prj</span> <span class="o">=</span> <span class="n">e1</span><span class="o">.</span><span class="n">example_generate_archetype</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>To make sure the export is using the desired parameters you should
+always set model settings in the Project.
+Project().used_library_calc specifies the used Modelica library
+Project().number_of_elements_calc sets the models order
+Project().merge_windows_calc specifies if thermal conduction through
+windows is lumped into outer walls or not.
+For more information on models we’d like to refer you to the docs. By
+default TEASER uses a weather file provided in
+teaser.data.input.inputdata.weatherdata. You can use your own weather
+file by setting Project().weather_file_path. However we will use default
+weather file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ArchetypeExampleIBPSA&quot;</span>
+<span class="n">prj</span><span class="o">.</span><span class="n">used_library_calc</span> <span class="o">=</span> <span class="s1">&#39;IBPSA&#39;</span>
+<span class="n">prj</span><span class="o">.</span><span class="n">number_of_elements_calc</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">prj</span><span class="o">.</span><span class="n">merge_windows_calc</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">prj</span><span class="o">.</span><span class="n">weather_file_path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="s2">&quot;data&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;input&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;inputdata&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;weatherdata&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>To make sure the parameters are calculated correctly we recommend to
+run calc_all_buildings() function</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prj</span><span class="o">.</span><span class="n">calc_all_buildings</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>To export the ready-to-run models simply call Project.export_ibpsa().
+First specify the IBPSA related library you want to export the models
+for. The models are identical in each library, but IBPSA Modelica
+library is  just a core set of models and should not be used
+standalone. Valid values are ‘AixLib’ (default), ‘Buildings’,
+‘BuildingSystems’ and ‘IDEAS’. We chose AixLib
+You can specify the path, where the model files should be saved.
+None means, that the default path in your home directory
+will be used. If you only want to export one specific building, you can
+pass over the internal_id of that building and only this model will be
+exported. In this case we want to export all buildings to our home
+directory, thus we are passing over None for both parameters.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prj</span><span class="o">.</span><span class="n">export_ibpsa</span><span class="p">(</span>
+    <span class="n">library</span><span class="o">=</span><span class="s1">&#39;AixLib&#39;</span><span class="p">,</span>
+    <span class="n">internal_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="e2_export_aixlib_models.html" class="btn btn-neutral float-left" title="Example 2: Export Modelica models for AixLib library using TEASER API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="e4_save.html" class="btn btn-neutral float-right" title="Example 4: Save information" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
