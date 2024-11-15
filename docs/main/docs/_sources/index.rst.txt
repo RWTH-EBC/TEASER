@@ -35,7 +35,7 @@ If you have any questions regarding TEASER feel free to contact us at
 Note that this documentation will always be auto-generated using the
 `development branch <https://github.com/RWTH-EBC/TEASER/tree/development>`_.
 That means, there might be new developments described in this docu that are not
-working in the master and pip installation of TEASER. A list of those issue can
+working in the main and pip installation of TEASER. A list of those issue can
 be found `here <development.html>`_
 
 Also have a look at the `FAQ section <faq.html>`_. If you feel your question should also be listed, please open an issue in the issue section of the `repository <https://github.com/RWTH-EBC/TEASER/issues>`_.
@@ -59,8 +59,8 @@ Contents
 
 Publications
 ============
-  - TEASER: an open tool for urban energy modelling of building stocks. Remmen P., Lauster M., Mans M., Fuchs M., Osterhage T., Müller D.. Journal of Building Performance Simulation, February 2017, `pdf <http://dx.doi.org/10.1080/19401493.2017.1283539>`__, `bibtex <https://github.com/RWTH-EBC/TEASER/tree/master/doc/cite_jbps.bib>`__
-  - CityGML Import and Export for Dynamic Building Performance Simulation in Modelica. Remmen P., Lauster M., Mans M., Osterhage T., Müller D.. BSO16, p.329-336, September 2016, `pdf <http://www.ibpsa.org/proceedings/BSO2016/p1047.pdf>`__, `bibtex <https://github.com/RWTH-EBC/TEASER/tree/master/doc/cite.bib>`__
+  - TEASER: an open tool for urban energy modelling of building stocks. Remmen P., Lauster M., Mans M., Fuchs M., Osterhage T., Müller D.. Journal of Building Performance Simulation, February 2017, `pdf <http://dx.doi.org/10.1080/19401493.2017.1283539>`__, `bibtex <https://github.com/RWTH-EBC/TEASER/tree/main/doc/cite_jbps.bib>`__
+  - CityGML Import and Export for Dynamic Building Performance Simulation in Modelica. Remmen P., Lauster M., Mans M., Osterhage T., Müller D.. BSO16, p.329-336, September 2016, `pdf <http://www.ibpsa.org/proceedings/BSO2016/p1047.pdf>`__, `bibtex <https://github.com/RWTH-EBC/TEASER/tree/main/doc/cite.bib>`__
   - Scalable Design-Driven Parameterization of Reduced Order Models Using Archetype Buildings with TEASER. Lauster M., Mans M., Remmen P., Fuchs M., Müller D.. BauSIM2016, p.535-542, September 2016, `pdf <https://www.researchgate.net/profile/Moritz_Lauster/publication/310465372_Scalable_Design-Driven_Parameterization_of_Reduced_Order_Models_using_Archetype_Buildings_with_TEASER/links/582ee96908ae004f74be1fb0.pdf?origin=publication_detail&ev=pub_int_prw_xdl&msrp=eEyK6WYemhC8wK7xkMEPRDO4obE4uxBN4-0BdBy1Ldwhy9FhCe1pXfNObJYubvC_aZN0IWDPf9uayBo3u79bsZvg3hzUoLoYRatES2ARH8c.B2cYwSICt0IOa7lD-4oAiEa_3TtrO-7k-1W9chuNQwr_VNMCpZ5ubSb-eY2D77rGUP4S6wS8m6vudUUbMlXbQQ.Cledgd1Q9fPp11nYGpcpKNhSS6bVTqAEXeMZPkiV3HsJxcVWTFj4Hr_jmLZ0MOzDxbDEZObcGiKfmTL_9k_59A>`__
 
 Funding
