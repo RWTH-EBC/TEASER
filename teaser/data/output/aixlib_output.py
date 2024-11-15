@@ -8,7 +8,12 @@ from mako.lookup import TemplateLookup
 import teaser.logic.utilities as utilities
 
 
-def export_multizone(buildings, prj, path=None):
+def export_multizone(
+        buildings,
+        prj,
+        path=None,
+        use_postprocessing_calc=False,
+        export_vars=None):
     """Exports models for AixLib library
 
     Exports a building for
@@ -38,6 +43,13 @@ def export_multizone(buildings, prj, path=None):
     path : string
         if the Files should not be stored in default output path of TEASER,
         an alternative path can be specified as a full path
+    use_postprocessing_calc : bool
+        If activated the exported model will use the multizonePostProcessing
+        to calculate common outputs for simulation time like total heating
+        demands. Only supported for Aixlib. Default is False.
+    export_vars : str
+        Holds the string about which variables to export following the
+        __Dymola_selection syntax.
 
     Attributes
     ----------
@@ -146,7 +158,10 @@ def export_multizone(buildings, prj, path=None):
             out_file.write(model_template.render_unicode(
                 bldg=bldg,
                 weather=bldg.parent.weather_file_path,
-                modelica_info=bldg.parent.modelica_info))
+                modelica_info=bldg.parent.modelica_info,
+                use_postprocessing_calc=use_postprocessing_calc,
+                export_vars=export_vars))
+
             out_file.close()
 
         dir_resources = os.path.join(path, "Resources")

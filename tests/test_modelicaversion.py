@@ -2,7 +2,7 @@ from teaser.project import Project
 import warnings as warnings
 import os
 
-prj = Project(True)
+prj = Project(False)
 
 
 class TestModelicaVersions(object):

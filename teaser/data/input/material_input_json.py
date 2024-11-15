@@ -26,17 +26,16 @@ def load_material(material, mat_name, data_class):
     binding = data_class.material_bind
 
     for id, mat in binding.items():
-        if id != "version":
-            if mat["name"] == mat_name:
+        if mat["name"] == mat_name:
 
-                material.material_id = id
-                material.name = mat["name"]
-                material.density = mat["density"]
-                material.thermal_conduc = mat["thermal_conduc"]
-                material.heat_capac = mat["heat_capac"]
-                material.solar_absorp = mat["solar_absorp"]
-                material.thickness_default = mat["thickness_default"]
-                material.thickness_list = mat["thickness_list"]
+            material.material_id = id
+            material.name = mat["name"]
+            material.density = mat["density"]
+            material.thermal_conduc = mat["thermal_conduc"]
+            material.heat_capac = mat["heat_capac"]
+            material.solar_absorp = mat["solar_absorp"]
+            material.thickness_default = mat["thickness_default"]
+            material.thickness_list = mat["thickness_list"]
 
 
 def load_material_id(material, mat_id, data_class):
@@ -61,14 +60,13 @@ def load_material_id(material, mat_id, data_class):
     binding = data_class.material_bind
 
     for id, mat in binding.items():
-        if id != "version":
-            if id == mat_id:
+        if id == mat_id:
 
-                material.material_id = id
-                material.name = mat["name"]
-                material.density = mat["density"]
-                material.thermal_conduc = mat["thermal_conduc"]
-                material.heat_capac = mat["heat_capac"]
-                material.solar_absorp = mat["solar_absorp"]
-                material.thickness_default = mat["thickness_default"]
-                material.thickness_list = mat["thickness_list"]
+            material.material_id = id
+            material.name = mat["name"]
+            material.density = mat["density"]
+            material.thermal_conduc = mat["thermal_conduc"]
+            material.heat_capac = mat["heat_capac"]
+            material.solar_absorp = mat["solar_absorp"]
+            material.thickness_default = mat["thickness_default"]
+            material.thickness_list = mat["thickness_list"]

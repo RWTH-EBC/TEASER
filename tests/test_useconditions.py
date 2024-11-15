@@ -1,12 +1,18 @@
 """Module to test UseCondition functions."""
-from teaser.logic import utilities
-from teaser.project import Project
 import os
+
+import pytest
 import helptest
 import pytest
+import pandas as pd
 
-prj = Project(True)
+from teaser.data.dataclass import DataClass
+from teaser.data.utilities import ConstructionData
+from teaser.logic import utilities
+from teaser.project import Project
 
+prj = Project(False)
+prj.data = DataClass(construction_data=ConstructionData.iwu_heavy)
 
 class Test_useconditions(object):
     """Unit Tests for TEASER."""
@@ -48,12 +54,12 @@ class Test_useconditions(object):
         Related to issue 553 at https://github.com/RWTH-EBC/TEASER/issues/553
         """
 
-        prj_test = Project(load_data=True)
+        prj_test = Project()
         prj_test.name = "TestAHUProfiles"
 
         prj_test.add_non_residential(
-            method="bmvbs",
-            usage="office",
+            construction_data="iwu_heavy",
+            geometry_data="bmvbs_office",
             name="OfficeBuilding",
             year_of_construction=2015,
             number_of_floors=4,
@@ -65,7 +71,6 @@ class Test_useconditions(object):
         prj_test.number_of_elements_calc = 2
 
         heating_profile_workday = [
-            293,
             293,
             293,
             293,
@@ -142,3 +147,87 @@ class Test_useconditions(object):
         use_cond.with_ahu = False
         with pytest.raises(Exception):
             use_cond.with_ideal_thresholds = True
+
+    def test_profile_adjust_opening_times(self):
+        prj.set_default()
+        helptest.building_test2(prj)
+        use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
+        profile_before = use_cond.machines_profile
+        use_cond.adjusted_opening_times = [10, 15]
+        use_cond.calc_adj_schedules()
+        schedules = use_cond.schedules
+        profile_after = use_cond.machines_profile
+        assert (profile_after[8] != profile_before[8])
+        assert (profile_after[7] != profile_before[7])
+        assert (profile_after[9] == profile_before[9])
+        assert (profile_after[8] == 0.0)
+        assert (isinstance(schedules, pd.DataFrame))
+
+    def test_profile_adjust_weekend_profiles(self):
+        prj.set_default()
+        helptest.building_test2(prj)
+        use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
+        profile_before = use_cond.machines_profile
+        use_cond.first_saturday_of_year = 4
+        use_cond.profiles_weekend_factor = 0.4
+        use_cond.calc_adj_schedules()
+        schedules = use_cond.schedules
+        profile_after = use_cond.machines_profile
+        assert (profile_after[81] != profile_before[9])
+        assert (profile_after[105] != profile_before[9])
+        assert (
+            profile_after[105]
+            == profile_before[9] * use_cond.profiles_weekend_factor
+        )
+        assert (isinstance(schedules, pd.DataFrame))
+
+    def test_profile_setback(self):
+        prj.set_default()
+        helptest.building_test2(prj)
+        use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
+        profile_heating_before = use_cond.heating_profile
+        profile_cooling_before = use_cond.cooling_profile
+        use_cond.set_back_times = [5, 22]
+        use_cond.heating_set_back = -2
+        use_cond.cooling_set_back = 3
+        use_cond.calc_adj_schedules()
+        schedules = use_cond.schedules
+        profile_heating_after = use_cond.heating_profile
+        profile_cooling_after = use_cond.cooling_profile
+        assert (profile_heating_after[4] != profile_heating_before[4])
+        assert (
+                profile_heating_after[4]
+                == profile_heating_before[4] + use_cond.heating_set_back
+        )
+        assert (profile_cooling_after[4] != profile_cooling_before[4])
+        assert (
+                profile_cooling_after[4]
+                == profile_cooling_before[4] + use_cond.cooling_set_back
+        )
+        assert (isinstance(schedules, pd.DataFrame))
+
+
+    def test_lighting_power(self):
+        lighting_power_test = 3
+
+        prj.set_default()
+        helptest.building_test2(prj)
+        use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
+        use_cond.load_use_conditions("Living", data_class=prj.data)
+
+        use_cond.use_maintained_illuminance = True
+        assert(use_cond.lighting_power == use_cond.maintained_illuminance / use_cond.lighting_efficiency_lumen)
+
+        use_cond.lighting_power = lighting_power_test
+        assert(use_cond.lighting_power == lighting_power_test)
+
+        use_cond.use_maintained_illuminance = False
+        assert(use_cond.lighting_power == use_cond.fixed_lighting_power)
+
+        use_cond.lighting_power = lighting_power_test
+        assert(use_cond.lighting_power == lighting_power_test)
+
+
+
+
+

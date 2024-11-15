@@ -78,12 +78,26 @@ def save_use_conditions(use_cond, data_class):
         data_class.conditions_bind[use_cond.usage][
             "ratio_conv_rad_machines"
         ] = use_cond.ratio_conv_rad_machines
+
         data_class.conditions_bind[use_cond.usage][
             "lighting_power"
         ] = use_cond.lighting_power
         data_class.conditions_bind[use_cond.usage][
+            "fixed_lighting_power"
+        ] = use_cond.fixed_lighting_power
+        data_class.conditions_bind[use_cond.usage][
+            "use_maintained_illuminance"
+        ] = use_cond.use_maintained_illuminance
+        data_class.conditions_bind[use_cond.usage][
             "ratio_conv_rad_lighting"
         ] = use_cond.ratio_conv_rad_lighting
+        data_class.conditions_bind[use_cond.usage][
+            "maintained_illuminance"
+        ] = use_cond.maintained_illuminance
+        data_class.conditions_bind[use_cond.usage][
+            "lighting_efficiency_lumen"
+        ] = use_cond.lighting_efficiency_lumen
+
         data_class.conditions_bind[use_cond.usage][
             "use_constant_infiltration"
         ] = use_cond.use_constant_infiltration

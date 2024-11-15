@@ -11,7 +11,7 @@ from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
-
+import teaser.data.utilities as datahandling
 
 class SingleFamilyDwelling(Residential):
     """Archetype Residential Building according
@@ -113,11 +113,12 @@ class SingleFamilyDwelling(Residential):
         0. no dormer
         1. dormer
 
-    construction_type : str
-        Construction type of used wall constructions default is "heavy"
+    construction_data : str
+        Construction type of used wall constructions default is "iwu_heavy"
 
-        - heavy: heavy construction
-        - light: light construction
+        - iwu_heavy: heavy construction
+        - iwu_light: light construction
+        - kfw_40, kfw_55, kfw_70, kfw_85, kfw_100: KfW efficiency building standards
 
     Notes
     -----
@@ -183,7 +184,7 @@ class SingleFamilyDwelling(Residential):
         attic=None,
         cellar=None,
         dormer=None,
-        construction_type=None,
+        construction_data=None,
     ):
         """Constructor of SingleFamilyDwelling
         """
@@ -202,7 +203,7 @@ class SingleFamilyDwelling(Residential):
         self.attic = attic
         self.cellar = cellar
         self.dormer = dormer
-        self.construction_type = construction_type
+        self.construction_data = construction_data
         self.number_of_floors = number_of_floors
         self.height_of_floors = height_of_floors
 
@@ -414,7 +415,7 @@ class SingleFamilyDwelling(Residential):
                 outer_wall = OuterWall(zone)
                 outer_wall.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_type,
+                    construction=self.construction_data.value,
                     data_class=self.parent.data,
                 )
                 outer_wall.name = key
@@ -437,10 +438,14 @@ class SingleFamilyDwelling(Residential):
             """
             for zone in self.thermal_zones:
                 window = Window(zone)
-
+                construction = (
+                    "Waermeschutzverglasung, dreifach"
+                    if self.construction_data.is_kfw()
+                    else "Kunststofffenster, " "Isolierverglasung"
+                )
                 window.load_type_element(
                     self.year_of_construction,
-                    "Kunststofffenster, " "Isolierverglasung",
+                    construction=construction,
                     data_class=self.parent.data,
                 )
                 window.name = key
@@ -455,7 +460,7 @@ class SingleFamilyDwelling(Residential):
                 roof = Rooftop(zone)
                 roof.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_type,
+                    construction=self.construction_data.value,
                     data_class=self.parent.data,
                 )
                 roof.name = key
@@ -470,7 +475,7 @@ class SingleFamilyDwelling(Residential):
                 ground_floor = GroundFloor(zone)
                 ground_floor.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_type,
+                    construction=self.construction_data.value,
                     data_class=self.parent.data,
                 )
                 ground_floor.name = key
@@ -483,7 +488,7 @@ class SingleFamilyDwelling(Residential):
                 inner_wall = InnerWall(zone)
                 inner_wall.load_type_element(
                     year=self.year_of_construction,
-                    construction=self.construction_type,
+                    construction=self.construction_data.value,
                     data_class=self.parent.data,
                 )
                 inner_wall.name = key
@@ -499,7 +504,7 @@ class SingleFamilyDwelling(Residential):
                     ceiling = Ceiling(zone)
                     ceiling.load_type_element(
                         year=self.year_of_construction,
-                        construction=self.construction_type,
+                        construction=self.construction_data.value,
                         data_class=self.parent.data,
                     )
                     ceiling.name = key
@@ -513,7 +518,7 @@ class SingleFamilyDwelling(Residential):
                     floor = Floor(zone)
                     floor.load_type_element(
                         year=self.year_of_construction,
-                        construction=self.construction_type,
+                        construction=self.construction_data.value,
                         data_class=self.parent.data,
                     )
                     floor.name = key
@@ -588,15 +593,8 @@ class SingleFamilyDwelling(Residential):
             self._dormer = 0
 
     @property
-    def construction_type(self):
-        return self._construction_type
-
-    @construction_type.setter
-    def construction_type(self, value):
-        if value is not None:
-            if value == "heavy" or value == "light":
-                self._construction_type = value
-            else:
-                raise ValueError("Construction_type has to be light or heavy")
-        else:
-            self._construction_type = "heavy"
+    def construction_data(self):
+        return self._construction_data
+    @construction_data.setter
+    def construction_data(self, value):
+        self._construction_data = datahandling.check_construction_data_setter_iwu(value)

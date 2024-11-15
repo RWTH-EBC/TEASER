@@ -43,6 +43,10 @@ def building_test2(prj):
     tz.use_conditions.persons = 3
     tz.use_conditions.machines = 3
     tz.use_conditions.lighting_power = 3
+    tz.use_conditions.use_maintained_illuminance = False
+    tz.use_conditions.fixed_lighting_power = 11.1
+    tz.use_conditions.maintained_illuminance = 500.0,
+    tz.use_conditions.lighting_efficiency_lumen = 150,
     tz.use_conditions.ratio_conv_rad_machines = 0.5
     tz.use_conditions.machines_profile = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
                                           0.2, 0.4, 0.6, 0.8, 0.8, 0.4, 0.6,
@@ -64,13 +68,13 @@ def building_test2(prj):
     tz.use_conditions.winter_reduction_infiltration = [
         0.2, 273.15, 273.15 + 10]
 
-    out_wall_dict = [["Outer Wall 1", [bldg.year_of_construction, 'heavy',
+    out_wall_dict = [["Outer Wall 1", [bldg.year_of_construction, 'iwu_heavy',
                                        10.0, 90.0, 0.0]],
-                     ["Outer Wall 2", [bldg.year_of_construction, 'heavy',
+                     ["Outer Wall 2", [bldg.year_of_construction, 'iwu_heavy',
                                        14.0, 90.0, 90.0]],
-                     ["Outer Wall 3", [bldg.year_of_construction, 'heavy',
+                     ["Outer Wall 3", [bldg.year_of_construction, 'iwu_heavy',
                                        10.0, 90.0, 180.0]],
-                     ["Outer Wall 4", [bldg.year_of_construction, 'heavy',
+                     ["Outer Wall 4", [bldg.year_of_construction, 'iwu_heavy',
                                        14.0, 90.0, 270.0]]]
     #import collections
     #out_wall_dict = collections.OrderedDict(sorted(out_wall_dict.items(), key=lambda t: t[0]))
@@ -79,7 +83,7 @@ def building_test2(prj):
         out_wall = OuterWall(parent=tz)
         out_wall.name = value[0]
         out_wall.year_of_construction = value[1][0]
-        out_wall.construction_type = value[1][1]
+        out_wall.construction_data = value[1][1]
         out_wall.area = value[1][2]
         out_wall.tilt = value[1][3]
         out_wall.orientation = value[1][4]
@@ -109,16 +113,16 @@ def building_test2(prj):
         out_wall_material.heat_capac = 0.84
         out_wall_material.transmittance = 0.0
 
-    in_wall_dict = [["Inner Wall 1", [bldg.year_of_construction, 'light', 10.0]],
-                    ["Inner Wall 2", [bldg.year_of_construction, 'heavy', 14.0]],
-                    ["Inner Wall 3", [bldg.year_of_construction, 'light', 10.0]]]
+    in_wall_dict = [["Inner Wall 1", [bldg.year_of_construction, 'iwu_light', 10.0]],
+                    ["Inner Wall 2", [bldg.year_of_construction, 'iwu_heavy', 14.0]],
+                    ["Inner Wall 3", [bldg.year_of_construction, 'iwu_light', 10.0]]]
 
     for value in in_wall_dict:
         '''instantiate OuterWall class'''
         in_wall = InnerWall(parent=tz)
         in_wall.name = value[0]
         in_wall.year_of_construction = value[1][0]
-        in_wall.construction_type = value[1][1]
+        in_wall.construction_data = value[1][1]
         in_wall.area = value[1][2]
         in_wall.building_age_group = [1994, 1998]
         in_wall.inner_radiation = 5.0
@@ -151,7 +155,7 @@ def building_test2(prj):
 
     for value in win_dict:
         win = Window(parent=tz)
-        win.construction_type = "Window"
+        win.construction_data = "Window"
         win.name = value[0]
         win.area = value[1][1]
         win.tilt = value[1][2]
@@ -178,7 +182,7 @@ def building_test2(prj):
     roof = Rooftop(parent=tz)
     roof.name = "Roof"
     roof.year_of_construction = bldg.year_of_construction
-    roof.construction_type = "heavy"
+    roof.construction_data = "iwu_heavy"
     roof.area = 140.0
 
     roof_layer1 = Layer(roof)
@@ -202,7 +206,7 @@ def building_test2(prj):
     ground = GroundFloor(parent=tz)
     ground.name = "ground"
     ground.year_of_construction = bldg.year_of_construction
-    ground.construction_type = "heavy"
+    ground.construction_data = "iwu_heavy"
     ground.area = 140.0
 
     ground_layer1 = Layer(ground)

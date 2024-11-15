@@ -46,6 +46,7 @@ setup(
         "teaser.data.input.inputdata.weatherdata",
         "teaser.data.output",
         "teaser.data.output.modelicatemplate",
+        "teaser.data.output.reports",
         "teaser.data.output.modelicatemplate.AixLib",
         "teaser.data.output.modelicatemplate.IBPSA",
         "teaser.examples",
@@ -101,4 +102,5 @@ setup(
         "Topic :: Utilities",
     ],
     install_requires=["mako", "pytest", "pandas", "numpy"],
+    extras_require={"report": ["plotly"]}
 )

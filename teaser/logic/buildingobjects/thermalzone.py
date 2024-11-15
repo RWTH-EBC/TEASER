@@ -375,22 +375,21 @@ class ThermalZone(object):
             for wall_count in self.outer_walls \
                     + self.rooftops + self.ground_floors + self.doors + \
                     self.windows:
-                if "adv_retrofit" in wall_count.construction_type:
+                if "adv_retrofit" in wall_count.construction_data:
                     warnings.warn(
                         "already highest available standard"
                         + self.parent.name + wall_count.name)
-                elif "standard" in wall_count.construction_type:
+                elif "standard" in wall_count.construction_data:
                     wall_count.load_type_element(
                         year=self.parent.year_of_construction,
-                        construction=wall_count.construction_type.replace(
+                        construction=wall_count.construction_data.replace(
                             "standard", type_of_retrofit))
                 else:
                     wall_count.load_type_element(
                         year=self.parent.year_of_construction,
-                        construction=wall_count.construction_type.replace(
+                        construction=wall_count.construction_data.replace(
                             "retrofit", type_of_retrofit))
         else:
-
             for wall_count in self.outer_walls:
                 wall_count.retrofit_wall(
                     self.parent.year_of_retrofit,
@@ -477,17 +476,26 @@ class ThermalZone(object):
 
     @name.setter
     def name(self, value):
+        regex = re.compile('[^a-zA-z0-9]')
         if isinstance(value, str):
-            regex = re.compile('[^a-zA-z0-9]')
-            self._name = regex.sub('', value)
+            name = regex.sub('', value)
         else:
             try:
-                value = str(value)
-                regex = re.compile('[^a-zA-z0-9]')
-                self._name = regex.sub('', value)
-
+                name = regex.sub('', str(value))
             except ValueError:
                 print("Can't convert name to string")
+        
+        # check if another zone with same name exists
+        tz_names = [tz._name for tz in self.parent.thermal_zones[:-1]]
+        if name in tz_names:
+            i = 1
+            while True:
+                name_add = f"{name}_{i}"
+                if name_add not in tz_names:
+                    name = name_add
+                    break
+                i += 1
+        self._name = name
 
     @property
     def outer_walls(self):

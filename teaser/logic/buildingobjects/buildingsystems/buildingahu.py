@@ -107,7 +107,7 @@ class BuildingAHU(object):
         self._v_flow_profile = 7 * [0.0] + 12 * [1.0] + 5 * [0.0]
 
         self.schedules = pd.DataFrame(
-            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="H")
+            index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="h")
             .to_series()
             .dt.strftime("%m-%d %H:%M:%S"),
             data={
