@@ -15,7 +15,6 @@ def export_besmod(
         path=None,
         examples=None,
         THydSup_nominal=None,
-        TOda_nominal=262.65,
         QBuiOld_flow_design=None,
         THydSupOld_design=None):
     """Exports buildings for BESMod simulation
@@ -37,8 +36,6 @@ def export_besmod(
     prj : instance of Project
         Instance of TEASER Project object to access Project related
         information, e.g. name or version of used libraries
-    TOda_nominal: float
-        Nominal outdoor temperature in Kelvin, default Mannheim (-10.5 °C)
     path : string
         if the Files should not be stored in default output path of TEASER,
         an alternative path can be specified as a full paths
@@ -181,7 +178,7 @@ def export_besmod(
                 out_file.write(example_template.render_unicode(
                     bldg=bldg,
                     project=prj,
-                    TOda_nominal=TOda_nominal,
+                    TOda_nominal=bldg.thermal_zones[0].t_outside,
                     THydSup_nominal=THydSup_nominal_bldg[bldg.name],
                     QBuiOld_flow_design=QBuiOld_flow_design[bldg.name],
                     THydSupOld_design=THydSupOld_design_bldg[bldg.name]))

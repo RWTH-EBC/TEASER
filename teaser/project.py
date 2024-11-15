@@ -888,6 +888,41 @@ class Project(object):
         self._merge_windows_calc = False
         self._used_library_calc = "AixLib"
 
+    def set_location_parameters(self,
+                     t_outside=262.65,
+                     t_ground=286.15,
+                     weather_file_path=None,
+                     calc_all_buildings=True):
+        """ Set location specific parameters
+
+        Temperatures are used for static heat load calculation
+        and parameters are used in the BESMod export.
+        Default is Mannheim.
+
+        Parameters
+        ----------
+        t_outside: float [K]
+            Normative outdoor temperature for static heat load calculation.
+            The input of t_inside is ALWAYS in Kelvin
+        t_ground: float [K]
+            Temperature directly at the outer side of ground floors for static
+            heat load calculation.
+            The input of t_ground is ALWAYS in Kelvin
+        weather_file_path : str
+            Absolute path to weather file used for Modelica simulation. Default
+            weather file can be find in inputdata/weatherdata.
+        calc_all_buildings: boolean
+            If True, calculates all buildings new.
+            Here imported for changing static heat load.
+        """
+        self.weather_file_path = weather_file_path
+        for bldg in self.buildings:
+            for tz in bldg.thermal_zones:
+                tz.t_outside = t_outside
+                tz.t_ground = t_ground
+        if calc_all_buildings:
+            self.calc_all_buildings()
+
     @staticmethod
     def process_export_vars(export_vars):
         """Process export vars to fit __Dymola_selections syntax."""

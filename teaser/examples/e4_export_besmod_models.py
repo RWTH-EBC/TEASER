@@ -45,7 +45,7 @@ def example_export_besmod():
 
     prj.used_library_calc = 'AixLib'  # ToDo fwu-hst: Always AixLib? If true, put it in explicit in besmod_output
     prj.number_of_elements_calc = 4
-    prj.weather_file_path = utilities.get_full_path(
+    weather_file_path = utilities.get_full_path(
         os.path.join(
             "data",
             "input",
@@ -56,7 +56,12 @@ def example_export_besmod():
     # To make sure the parameters are calculated correctly we recommend to
     # run calc_all_buildings() function
 
-    prj.calc_all_buildings()
+    prj.set_location_parameters(t_outside=262.65,
+                                t_ground=286.15,
+                                weather_file_path=weather_file_path,
+                                calc_all_buildings=True)
+
+    # prj.calc_all_buildings()
 
     # To export the ready-to-run models simply call Project.export_aixlib().
     # You can specify the path, where the model files should be saved.
