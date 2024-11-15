@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.project &mdash; TEASER 1.0.0 documentation</title>
+  <title>teaser.project &mdash; TEASER 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/autodoc_pydantic.css" />
@@ -13,7 +13,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/documentation_options.js?v=292eb321"></script>
       <script src="../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -90,6 +90,7 @@
 <span class="kn">from</span> <span class="nn">teaser.data.dataclass</span> <span class="kn">import</span> <span class="n">DataClass</span>
 <span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse</span> <span class="kn">import</span> <span class="n">SingleFamilyHouse</span>
 <span class="kn">from</span> <span class="nn">teaser.logic.simulation.modelicainfo</span> <span class="kn">import</span> <span class="n">ModelicaInfo</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.retrofit</span> <span class="kn">import</span> <span class="n">generate_buildings_for_all_element_combinations</span>
 
 
 <div class="viewcode-block" id="Project">
@@ -691,6 +692,54 @@
                 <span class="n">used_library</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_used_library_calc</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">return</span> <span class="n">type_bldg</span></div>
+
+
+<div class="viewcode-block" id="Project.add_residential_retrofit_combinations">
+<a class="viewcode-back" href="../../code/teaser.html#teaser.project.Project.add_residential_retrofit_combinations">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_residential_retrofit_combinations</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">elements</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">retrofit_choices</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">add_residential_kwargs</span><span class="p">:</span> <span class="nb">dict</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate residential buildings for all possible combinations of</span>
+<span class="sd">        retrofit statuses for specified building elements.</span>
+
+<span class="sd">        This function creates multiple variations of a residential building based</span>
+<span class="sd">        on different retrofit options for specified building elements.</span>
+<span class="sd">        It&#39;s designed to work with TABULA archetypes.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        add_residential_kwargs : dict</span>
+<span class="sd">            Keyword arguments for the function add_residential.</span>
+<span class="sd">        elements : list, optional</span>
+<span class="sd">            List of building elements to consider for retrofit.</span>
+<span class="sd">            Defaults to [&#39;outer_walls&#39;, &#39;windows&#39;, &#39;rooftops&#39;, &#39;ground_floors&#39;].</span>
+<span class="sd">        retrofit_choices : list, optional</span>
+<span class="sd">            List of retrofit options to consider.</span>
+<span class="sd">            Defaults to [&#39;standard&#39;, &#39;retrofit&#39;, &#39;adv_retrofit&#39;].</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">            list: A list of names of the generated buildings.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">            ValueError: If unsupported elements or retrofit choices are provided, or if the</span>
+<span class="sd">                        construction data is not from TABULA DE or DK.</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">            This function only works with TABULA DE or DK construction data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">generate_buildings_for_all_element_combinations</span><span class="p">(</span>
+            <span class="n">project_add_building_function</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">add_residential</span><span class="p">,</span>
+            <span class="n">add_building_function_kwargs</span><span class="o">=</span><span class="n">add_residential_kwargs</span><span class="p">,</span>
+            <span class="n">elements</span><span class="o">=</span><span class="n">elements</span><span class="p">,</span>
+            <span class="n">retrofit_choices</span><span class="o">=</span><span class="n">retrofit_choices</span><span class="p">,</span>
+        <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Project.save_project">

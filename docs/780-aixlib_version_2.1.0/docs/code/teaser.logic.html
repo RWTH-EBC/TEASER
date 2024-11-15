@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.logic package &mdash; TEASER 1.0.0 documentation</title>
+  <title>teaser.logic package &mdash; TEASER 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
@@ -14,7 +14,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/documentation_options.js?v=292eb321"></script>
       <script src="../_static/doctools.js?v=9a2dae69"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -61,6 +61,11 @@
 </ul>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.logic.retrofit">teaser.logic.retrofit module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.logic.retrofit.component_based_retrofit"><code class="docutils literal notranslate"><span class="pre">component_based_retrofit()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.logic.retrofit.generate_buildings_for_all_element_combinations"><code class="docutils literal notranslate"><span class="pre">generate_buildings_for_all_element_combinations()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l5"><a class="reference internal" href="#module-teaser.logic.utilities">teaser.logic.utilities module</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="#teaser.logic.utilities.celsius_to_kelvin"><code class="docutils literal notranslate"><span class="pre">celsius_to_kelvin()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="#teaser.logic.utilities.clear_directory"><code class="docutils literal notranslate"><span class="pre">clear_directory()</span></code></a></li>
@@ -307,6 +312,66 @@
 </section>
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-teaser.logic.retrofit">
+<span id="teaser-logic-retrofit-module"></span><h2>teaser.logic.retrofit module<a class="headerlink" href="#module-teaser.logic.retrofit" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.logic.retrofit.component_based_retrofit">
+<span class="sig-prename descclassname"><span class="pre">teaser.logic.retrofit.</span></span><span class="sig-name descname"><span class="pre">component_based_retrofit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">building</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building" title="teaser.logic.buildingobjects.building.Building"><span class="pre">Building</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">element_retrofit_stats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/retrofit.html#component_based_retrofit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.retrofit.component_based_retrofit" title="Link to this definition"></a></dt>
+<dd><p>Apply component-based retrofits to a building based on specified retrofit statuses.</p>
+<p>This function applies retrofits to specific building elements (e.g., walls, windows)
+based on the provided retrofit statuses.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>building</strong><span class="classifier">Building</span></dt><dd><p>The building object to be retrofitted.</p>
+</dd>
+<dt><strong>element_retrofit_stats</strong><span class="classifier">dict</span></dt><dd><p>A dictionary specifying the retrofit status for each
+building element. Keys are element names (e.g., ‘outer_walls’),
+and values are retrofit options (e.g., ‘standard’, ‘retrofit’).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.logic.retrofit.generate_buildings_for_all_element_combinations">
+<span class="sig-prename descclassname"><span class="pre">teaser.logic.retrofit.</span></span><span class="sig-name descname"><span class="pre">generate_buildings_for_all_element_combinations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_add_building_function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_building_function_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retrofit_choices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/retrofit.html#generate_buildings_for_all_element_combinations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.retrofit.generate_buildings_for_all_element_combinations" title="Link to this definition"></a></dt>
+<dd><p>Generate buildings for all possible combinations of
+retrofit statuses for specified building elements.</p>
+<p>This function creates multiple variations of a building based
+on different retrofit options for specified building elements.
+It’s designed to work with TABULA archetypes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>project_add_building_function</strong><span class="classifier">callable</span></dt><dd><p>Function to add a building to the project.</p>
+</dd>
+<dt><strong>add_building_function_kwargs</strong><span class="classifier">dict</span></dt><dd><p>Keyword arguments for the add_building function.</p>
+</dd>
+<dt><strong>elements</strong><span class="classifier">list, optional</span></dt><dd><p>List of building elements to consider for retrofit.
+Defaults to [‘outer_walls’, ‘windows’, ‘rooftops’, ‘ground_floors’].</p>
+</dd>
+<dt><strong>retrofit_choices</strong><span class="classifier">list, optional</span></dt><dd><p>List of retrofit options to consider.
+Defaults to [‘standard’, ‘retrofit’, ‘adv_retrofit’].</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>list: A list of names of the generated buildings.</dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ValueError: If unsupported elements or retrofit choices are provided, or if the</dt><dd><p>construction data is not from TABULA DE or DK.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="module-teaser.logic.utilities">
 <span id="teaser-logic-utilities-module"></span><h2>teaser.logic.utilities module<a class="headerlink" href="#module-teaser.logic.utilities" title="Link to this heading"></a></h2>
