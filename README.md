@@ -135,6 +135,10 @@ Remmen P., Schäfer J., Müller D.. Building Simulation 2019, September 2019,
 
 + The [Institute of Energy Efficiency and Sustainable Building](https://www.e3d.rwth-aachen.de/go/id/iyld/?) published a parametric study of TEASER where all functions and  parameters used in TEASER are gathered and explained. The publication can be found [here](https://publications.rwth-aachen.de/record/749801/files/749801.pdf).
 
++ “Modeling District Heating and Cooling Systems with URBANopt, GeoJSON to Modelica Translator, and the Modelica Buildings Library.”
+Long, Nicholas, Antoine Gautier, Hagar Elarga, Amy Allen, Ted Summer, Lauren Klun, Nathan Moore, and Michael Wetter. 2021.
+In Building Simulation 2021, 8. Bruges, Brussels.
+https://docs.urbanopt.net/doc_files/modeling_des_paper.pdf.
 
 ## License
 
