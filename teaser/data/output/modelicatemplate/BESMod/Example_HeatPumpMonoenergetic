@@ -16,7 +16,8 @@ model HeatPumpMonoenergetic${bldg.name}
         QBui_flow_nominal=building.QRec_flow_nominal,
         THydSup_nominal=${THydSup_nominal},
         QBuiOld_flow_design=${QBuiOld_flow_design},
-        THydSupOld_design=${THydSupOld_design}));
+        THydSupOld_design=${THydSupOld_design},
+        filNamWea=Modelica.Utilities.Files.loadResource("modelica://${bldg.parent.name}/Resources/${bldg.parent.weather_file_name}")));
 
 annotation(experiment(StopTime=172800,
      Interval=600,

@@ -110,7 +110,7 @@ def export_besmod(
         package_list=buildings,
         addition=None,
         extra=None)
-    # _copy_weather_data(prj.weather_file_path, path)
+    aixlib_output._copy_weather_data(prj.weather_file_path, dir_resources)
 
     for i, bldg in enumerate(buildings):
         bldg.bldg_height = bldg.number_of_floors * bldg.height_of_floors  # ToDo fwu-hst: better place? Create logic/calculation/besmod.py as for aixlib?

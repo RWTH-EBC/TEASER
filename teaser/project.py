@@ -819,16 +819,14 @@ class Project(object):
         if internal_id is None:
             besmod_output.export_besmod(
                 buildings=self.buildings, prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
-                        TOda_nominal=TOda_nominal, QBuiOld_flow_design=QBuiOld_flow_design,
-                        THydSupOld_design=THydSupOld_design
+                QBuiOld_flow_design=QBuiOld_flow_design, THydSupOld_design=THydSupOld_design
             )
         else:
             for bldg in self.buildings:
                 if bldg.internal_id == internal_id:
                     besmod_output.export_besmod(
                         buildings=[bldg], prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
-                        TOda_nominal=TOda_nominal, QBuiOld_flow_design=QBuiOld_flow_design,
-                        THydSupOld_design=THydSupOld_design
+                        QBuiOld_flow_design=QBuiOld_flow_design, THydSupOld_design=THydSupOld_design
                     )
 
         if report: # ToDo fwu-hst: Same as AixLib. Maybe create helper function
