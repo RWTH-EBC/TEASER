@@ -674,6 +674,8 @@ class Building(object):
         if value is True and self.central_ahu is None:
             self.central_ahu = BuildingAHU(self)
             self._with_ahu = True
+        elif value and self.central_ahu and self._with_ahu is False:
+            self._with_ahu = True
         elif value is False and self.central_ahu:
             self.central_ahu = None
             self._with_ahu = False
