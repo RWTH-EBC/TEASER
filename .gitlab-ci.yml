@@ -9,7 +9,7 @@ stages:
 
 variables:
   COVERAGE_TYPE: "NotDymola"
-  PAGES_BRANCH: master
+  PAGES_BRANCH: main
   PYTHON_VERSION: "registry.git.rwth-aachen.de/ebc/ebc_all/gitlab_ci/templates:python_3.9"
   PYTHON_PACKAGE_NAME: "teaser"
   TEST_ENGINE: "PYTEST"
