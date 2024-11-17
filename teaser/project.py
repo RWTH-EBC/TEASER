@@ -12,6 +12,7 @@ import teaser.data.output.ibpsa_output as ibpsa_output
 from teaser.data.dataclass import DataClass
 from teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse import SingleFamilyHouse
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
+from teaser.logic.retrofit import generate_buildings_for_all_element_combinations
 
 
 class Project(object):
@@ -682,6 +683,51 @@ class Project(object):
                 used_library=self._used_library_calc,
             )
         return type_bldg
+
+    def add_residential_retrofit_combinations(
+            self,
+            elements: list = None,
+            retrofit_choices: list = None,
+            **add_residential_kwargs: dict
+    ):
+        """
+        Generate residential buildings for all possible combinations of
+        retrofit statuses for specified building elements.
+
+        This function creates multiple variations of a residential building based
+        on different retrofit options for specified building elements.
+        It's designed to work with TABULA archetypes.
+
+        Parameters
+        ----------
+        add_residential_kwargs : dict
+            Keyword arguments for the function add_residential.
+        elements : list, optional
+            List of building elements to consider for retrofit.
+            Defaults to ['outer_walls', 'windows', 'rooftops', 'ground_floors'].
+        retrofit_choices : list, optional
+            List of retrofit options to consider.
+            Defaults to ['standard', 'retrofit', 'adv_retrofit'].
+
+        Returns
+        -------
+            list: A list of names of the generated buildings.
+
+        Raises
+        ------
+            ValueError: If unsupported elements or retrofit choices are provided, or if the
+                        construction data is not from TABULA DE or DK.
+
+        Note
+        ----
+            This function only works with TABULA DE or DK construction data.
+        """
+        return generate_buildings_for_all_element_combinations(
+            project_add_building_function=self.add_residential,
+            add_building_function_kwargs=add_residential_kwargs,
+            elements=elements,
+            retrofit_choices=retrofit_choices,
+        )
 
     def save_project(self, file_name=None, path=None):
         """Saves the project to a JSON file

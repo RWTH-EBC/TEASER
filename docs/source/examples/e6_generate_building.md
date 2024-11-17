@@ -5,7 +5,7 @@ the archetype approach but adding all information separately. In this example
 we import all needed modules and classes where we need it in the code. For you
 application we suggest to use PEP008 and import them at the beginning of the
 script.
-You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)
+You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks)
 
 First step: Import the TEASER API (called Project) into your Python module
 
