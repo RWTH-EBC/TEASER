@@ -51,7 +51,7 @@ def export_multizone(
     export_vars : str
         Holds the string about which variables to export following the
         __Dymola_selection syntax.
-    custom_multizone_template_path : string
+    custom_multizone_template_path : str
         if a custom template for writing the multizone model should be used,
         its path can be specified as a full path
 
@@ -128,9 +128,11 @@ def export_multizone(
         package_list=buildings,
         addition=None,
         extra=None)
-    _copy_weather_data(prj.weather_file_path, path)
+    if not prj.weather_file_path.startswith("modelica:"):
+        _copy_weather_data(prj.weather_file_path, path)
     if prj.t_soil_mode == 3:
-        _copy_weather_data(prj.t_soil_file_path, path)
+    	if not prj.t_soil_file_path.startswith("modelica:"):
+        	_copy_weather_data(prj.t_soil_file_path, path)
 
     for i, bldg in enumerate(buildings):
 

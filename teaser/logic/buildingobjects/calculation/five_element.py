@@ -754,7 +754,7 @@ class FiveElement(object):
         return True
 
     @staticmethod
-    def _calc_parallel_connection(element_list, omega, mode):
+    def _calc_parallel_connection(element_list, omega, mode='iw'):
         """Parallel connection of walls according to VDI 6007
 
         Calculates the parallel connection of wall elements according to VDI
