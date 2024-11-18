@@ -1,8 +1,6 @@
 """This module contains function for BESMod model generation"""
 
 import os
-import warnings
-import shutil
 from mako.template import Template
 from mako.lookup import TemplateLookup
 import teaser.logic.utilities as utilities
@@ -93,8 +91,8 @@ def export_besmod(
 
     uses = [
         'Modelica(version="' + prj.modelica_info.version + '")',
-        'AixLib(version="' + prj.buildings[-1].library_attr.version + '")']  # ToDo fwu-hst: BESMod version?
-    aixlib_output._help_package(
+        'AixLib(version="' + prj.buildings[-1].library_attr.version + '")',
+        'BESMod(version="0.5.0")']  # ToDo fwu-hst: BESMod version make attribute of AixLib?
     modelica_output.create_package(
         path=path,
         name=prj.name,
@@ -107,23 +105,13 @@ def export_besmod(
     for i, bldg in enumerate(buildings):
         bldg.bldg_height = bldg.number_of_floors * bldg.height_of_floors  # ToDo fwu-hst: better place? Create logic/calculation/besmod.py as for aixlib?
 
-        ass_error = "You chose IBPSA calculation, " \
-                    "but want to export AixLib models, " \
-                    "this is not possible"
-
+        ass_error = "BESMod export is only implemented for AixLib calculation."
         assert bldg.used_library_calc == 'AixLib', ass_error
 
         bldg_path = os.path.join(path, bldg.name)
-        utilities.create_path(utilities.get_full_path(bldg_path))
-        utilities.create_path(utilities.get_full_path(
-            os.path.join(bldg_path,
-                         bldg.name + "_DataBase")))
-        # bldg.library_attr.modelica_set_temp(path=bldg_path)
-        # bldg.library_attr.modelica_set_temp_cool(path=bldg_path)
-        # bldg.library_attr.modelica_AHU_boundary(
-        #     path=bldg_path)
-        bldg.library_attr.modelica_gains_boundary(
-            path=bldg_path)
+        utilities.create_path(bldg_path)
+        utilities.create_path(os.path.join(bldg_path, bldg.name + "_DataBase"))
+        bldg.library_attr.modelica_gains_boundary(path=bldg_path)
 
         example_bldg = [exp + bldg.name for exp in examples]
         example_bldg.append(bldg.name + "_DataBase")
@@ -133,18 +121,6 @@ def export_besmod(
             path=bldg_path,
             package_list=[bldg],
             extra=example_bldg)
-
-        if bldg.building_id is None:
-            bldg.building_id = i
-        else:
-            try:
-                bldg.building_id = int(bldg.building_id)
-            except UserWarning:
-                warnings.warn("Cannot convert building_id to integer, "
-                              "is set to ", i, "which is the enumeration "
-                                               "number of the building in "
-                                               "the project list.")
-                bldg.building_id = i
 
         with open(utilities.get_full_path(
                 os.path.join(bldg_path, bldg.name + ".mo")), 'w') as out_file:
@@ -175,8 +151,7 @@ def export_besmod(
                     THydSupOld_design=THydSupOld_design_bldg[bldg.name]))
                 out_file.close()
 
-            _help_example_script(bldg, dir_dymola, example_sim_plot_script,
-                                 exp)  # ToDo fwu-hst: adapt for multiple examples
+            _help_example_script(bldg, dir_dymola, example_sim_plot_script, exp)
 
         zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
 
