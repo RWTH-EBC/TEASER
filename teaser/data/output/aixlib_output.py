@@ -99,6 +99,10 @@ def export_multizone(
             "data/output/modelicatemplate/modelica_test_script"),
         lookup=lookup)
 
+    dir_resources = utilities.create_path(os.path.join(path, "Resources"))
+    dir_scripts = utilities.create_path(os.path.join(dir_resources, "Scripts"))
+    dir_dymola = utilities.create_path(os.path.join(dir_scripts, "Dymola"))
+
     uses = [
         'Modelica(version="' + prj.modelica_info.version + '")',
         'AixLib(version="' + prj.buildings[-1].library_attr.version + '")']
@@ -164,15 +168,6 @@ def export_multizone(
 
             out_file.close()
 
-        dir_resources = os.path.join(path, "Resources")
-        if not os.path.exists(dir_resources):
-            os.mkdir(dir_resources)
-        dir_scripts = os.path.join(dir_resources, "Scripts")
-        if not os.path.exists(dir_scripts):
-            os.mkdir(dir_scripts)
-        dir_dymola = os.path.join(dir_scripts, "Dymola")
-        if not os.path.exists(dir_dymola):
-            os.mkdir(dir_dymola)
         _help_test_script(bldg, dir_dymola, test_script_template)
 
         zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")

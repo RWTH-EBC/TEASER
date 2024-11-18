@@ -75,15 +75,9 @@ def export_besmod(
                           "HeatPumpMonoenergetic",
                           "GasBoilerBuildingOnly"]
 
-    dir_resources = os.path.join(path, "Resources")
-    if not os.path.exists(dir_resources):
-        os.mkdir(dir_resources)
-    dir_scripts = os.path.join(dir_resources, "Scripts")
-    if not os.path.exists(dir_scripts):
-        os.mkdir(dir_scripts)
-    dir_dymola = os.path.join(dir_scripts, "Dymola")
-    if not os.path.exists(dir_dymola):
-        os.mkdir(dir_dymola)
+    dir_resources = utilities.create_path(os.path.join(path, "Resources"))
+    dir_scripts = utilities.create_path(os.path.join(dir_resources, "Scripts"))
+    dir_dymola = utilities.create_path(os.path.join(dir_scripts, "Dymola"))
 
     lookup = TemplateLookup(directories=[utilities.get_full_path(
         os.path.join('data', 'output', 'modelicatemplate'))])
