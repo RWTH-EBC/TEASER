@@ -6,6 +6,7 @@ import shutil
 from mako.template import Template
 from mako.lookup import TemplateLookup
 import teaser.logic.utilities as utilities
+import teaser.data.output.modelica_output as modelica_output
 
 
 def export_multizone(
@@ -106,17 +107,15 @@ def export_multizone(
     uses = [
         'Modelica(version="' + prj.modelica_info.version + '")',
         'AixLib(version="' + prj.buildings[-1].library_attr.version + '")']
-    _help_package(
+    modelica_output.create_package(
         path=path,
         name=prj.name,
-        uses=uses,
-        within=None)
-    _help_package_order(
+        uses=uses)
+    modelica_output.create_package_order(
         path=path,
         package_list=buildings,
-        addition=None,
         extra=None)
-    _copy_weather_data(prj.weather_file_path, path)
+    modelica_output.copy_weather_data(prj.weather_file_path, path)
 
     for i, bldg in enumerate(buildings):
 
@@ -138,11 +137,10 @@ def export_multizone(
         bldg.library_attr.modelica_gains_boundary(
             path=bldg_path)
 
-        _help_package(path=bldg_path, name=bldg.name, within=bldg.parent.name)
-        _help_package_order(
+        modelica_output.create_package(path=bldg_path, name=bldg.name, within=bldg.parent.name)
+        modelica_output.create_package_order(
             path=bldg_path,
             package_list=[bldg],
-            addition=None,
             extra=[bldg.name + "_DataBase"])
 
         if bldg.building_id is None:
@@ -188,11 +186,11 @@ def export_multizone(
 
                 out_file.close()
 
-        _help_package(
+        modelica_output.create_package(
             path=zone_path,
             name=bldg.name + '_DataBase',
             within=prj.name + '.' + bldg.name)
-        _help_package_order(
+        modelica_output.create_package_order(
             path=zone_path,
             package_list=bldg.thermal_zones,
             addition=bldg.name + "_",
@@ -267,80 +265,6 @@ def _help_test_script(bldg, dir_dymola, test_script_template):
             names_variables=names_variables,
         ))
         out_file.close()
-
-
-def _help_package(path, name, uses=None, within=None):
-    """creates a package.mo file
-
-    private function, do not call
-
-    Parameters
-    ----------
-
-    path : string
-        path of where the package.mo should be placed
-    name : string
-        name of the Modelica package
-    within : string
-        path of Modelica package containing this package
-
-    """
-
-    package_template = Template(filename=utilities.get_full_path(
-        "data/output/modelicatemplate/package"))
-    with open(utilities.get_full_path(os.path.join(
-            path, "package.mo")), 'w') as out_file:
-
-        out_file.write(package_template.render_unicode(
-            name=name,
-            within=within,
-            uses=uses))
-        out_file.close()
-
-
-def _help_package_order(path, package_list, addition=None, extra=None):
-    """creates a package.order file
-
-    private function, do not call
-
-    Parameters
-    ----------
-
-    path : string
-        path of where the package.order should be placed
-    package_list : [buildings or thermal_zones]
-        objects with the attribute name of all models or packages contained in the package
-    addition : string
-        if there should be a prefix of package_list.string it can
-        be specified
-    extra : [string]
-        list of extra packages or models not contained in package_list can be
-        specified
-
-    """
-
-    order_template = Template(filename=utilities.get_full_path(
-        "data/output/modelicatemplate/package_order"))
-    with open(utilities.get_full_path(
-            path + "/" + "package" + ".order"), 'w') as out_file:
-
-        out_file.write(order_template.render_unicode
-                       (list=package_list, addition=addition, extra=extra))
-        out_file.close()
-
-
-def _copy_weather_data(source_path, destination_path):
-    """Copies the imported .mos weather file to the results folder.
-
-    Parameters
-    ----------
-    source_path : str
-        path of local weather file
-    destination_path : str
-        path of where the weather file should be placed
-    """
-
-    shutil.copy2(source_path, destination_path)
 
 
 def _copy_script_unit_tests(destination_path):

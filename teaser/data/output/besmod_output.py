@@ -6,7 +6,7 @@ import shutil
 from mako.template import Template
 from mako.lookup import TemplateLookup
 import teaser.logic.utilities as utilities
-import teaser.data.output.aixlib_output as aixlib_output
+import teaser.data.output.modelica_output as modelica_output
 
 
 def export_besmod(
@@ -95,16 +95,14 @@ def export_besmod(
         'Modelica(version="' + prj.modelica_info.version + '")',
         'AixLib(version="' + prj.buildings[-1].library_attr.version + '")']  # ToDo fwu-hst: BESMod version?
     aixlib_output._help_package(
+    modelica_output.create_package(
         path=path,
         name=prj.name,
-        uses=uses,
-        within=None)
-    aixlib_output._help_package_order(
+        uses=uses)
+    modelica_output.create_package_order(
         path=path,
-        package_list=buildings,
-        addition=None,
-        extra=None)
-    aixlib_output._copy_weather_data(prj.weather_file_path, dir_resources)
+        package_list=buildings)
+    modelica_output.copy_weather_data(prj.weather_file_path, dir_resources)
 
     for i, bldg in enumerate(buildings):
         bldg.bldg_height = bldg.number_of_floors * bldg.height_of_floors  # ToDo fwu-hst: better place? Create logic/calculation/besmod.py as for aixlib?
@@ -130,11 +128,10 @@ def export_besmod(
         example_bldg = [exp + bldg.name for exp in examples]
         example_bldg.append(bldg.name + "_DataBase")
 
-        aixlib_output._help_package(path=bldg_path, name=bldg.name, within=bldg.parent.name)
-        aixlib_output._help_package_order(
+        modelica_output.create_package(path=bldg_path, name=bldg.name, within=bldg.parent.name)
+        modelica_output.create_package_order(
             path=bldg_path,
             package_list=[bldg],
-            addition=None,
             extra=example_bldg)
 
         if bldg.building_id is None:
@@ -199,15 +196,14 @@ def export_besmod(
 
                 out_file.close()
 
-        aixlib_output._help_package(
+        modelica_output.create_package(
             path=zone_path,
             name=bldg.name + '_DataBase',
             within=prj.name + '.' + bldg.name)
-        aixlib_output._help_package_order(
+        modelica_output.create_package_order(
             path=zone_path,
             package_list=bldg.thermal_zones,
-            addition=bldg.name + "_",
-            extra=None)
+            addition=bldg.name + "_")
 
     # _copy_script_unit_tests(os.path.join(dir_scripts, "runUnitTests.py"))
     # _copy_reference_results(dir_resources, prj)  # ToDo fwu-hst: Creat reference results for example models
