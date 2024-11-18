@@ -190,7 +190,7 @@ def save_teaser_json(path, project):
                 "use_constant_infiltration"
             ] = zone.use_conditions.use_constant_infiltration
             zone_out["use_conditions"][
-                "infiltration_rate"
+                "base_infiltration"
             ] = zone.use_conditions.base_infiltration
             zone_out["use_conditions"][
                 "max_user_infiltration"

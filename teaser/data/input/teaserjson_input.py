@@ -196,7 +196,7 @@ def load_teaser_json(path, project):
                 "use_constant_infiltration"
             ]
             tz.use_conditions.base_infiltration = zone_in["use_conditions"][
-                "infiltration_rate"
+                "base_infiltration"
             ]
             tz.use_conditions.max_user_infiltration = zone_in["use_conditions"][
                 "max_user_infiltration"
