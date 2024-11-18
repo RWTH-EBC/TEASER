@@ -14,9 +14,9 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     ASurTot=${bldg.library_attr.total_surface_area},
     numZones = ${len(bldg.thermal_zones)},
     % if bldg.number_of_elements_calc==5:
-        nNzConnectors = ${int(sum(len(zone.model_attr.other_nz_indexes) for zone in bldg.thermal_zones)/2)},
-        nzConnectionPairs = ${get_nz_connection_pairs(bldg)},
-        use_interzonal_flow = true,
+        nZonCon = ${int(sum(len(zone.model_attr.other_nz_indexes) for zone in bldg.thermal_zones)/2)},
+        zonConPaiArr = ${get_nz_connection_pairs(bldg)},
+        use_izeCon = true,
     % endif
     internalGainsMode = ${bldg.internal_gains_mode},
     % if bldg.internal_gains_mode==3:
@@ -65,7 +65,7 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
   zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
            intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
            (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
-           der_T(fixed=true))))),
+           der_T(fixed=true))),izeRC(extWalRC(thermCapExt(each der_T(fixed=true)))))),
    redeclare model corG =
         AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane,
 % if bldg.central_ahu:
