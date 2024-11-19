@@ -777,7 +777,6 @@ class Project(object):
         examples=None,
         path=None,
         THydSup_nominal=None,
-        TOda_nominal=262.65,
         QBuiOld_flow_design=None,
         THydSupOld_design=None,
         report=False

@@ -15,40 +15,49 @@ def export_besmod(
         THydSup_nominal=None,
         QBuiOld_flow_design=None,
         THydSupOld_design=None):
-    """Exports buildings for BESMod simulation
+    """
+    Export building models for BESMod simulations.
 
-    Exports one (if internal_id is not None) or all buildings as
-    BESMod.Systems.Demand.Building.TEASERThermalZone models. Additionally,
-    BESMod.Examples can be specified and directly exported including the building.
-
-    This function uses Mako Templates specified in
-    data.output.modelicatemplates.BESMod
+    This function generates BESMod.Systems.Demand.Building.TEASERThermalZone models
+    for one or more TEASER buildings. It also allows exporting examples from
+    BESMod.Examples, including the building models.
 
     Parameters
     ----------
+    buildings : list[Building] or Building
+        TEASER Building instances to export as BESMod models. Can be a single
+        Building or a list of Buildings.
+    prj : Project
+        TEASER Project instance containing project metadata such as library
+        versions and weather file paths.
+    path : str, optional
+        Output directory path for the exported files. If not specified,
+        the default output path in TEASER is used.
+    examples : list[str], optional
+        Names of BESMod examples to export alongside the building models.
+    THydSup_nominal : float or dict, optional
+        Nominal supply temperature(s) for the hydraulic system. Required for
+        certain examples (e.g., HeatPumpMonoenergetic, GasBoilerBuildingOnly).
+        See docstring of teaser.data.output.besmod_output.convert_input() for further information.
+    QBuiOld_flow_design : dict, optional
+        For partially retrofitted systems specify the old nominal heat flow
+        of the Buildings in a dictionary with the building names as keys.
+        By default, only the radiator transfer system is not retrofitted in BESMod.
+    THydSupOld_design : float or dict, optional
+        Design supply temperatures for old not retrofitted hydraulic systems.
 
-    buildings : list of Building instances
-        list of TEASER Building instances that are exported to BESMod
-        building TEASERThermalZone models. Additionally, the buildings are export
-        into the BESMod examples specified in the parameter examples
-    prj : instance of Project
-        Instance of TEASER Project object to access Project related
-        information, e.g. name or version of used libraries
-    path : string
-        if the Files should not be stored in default output path of TEASER,
-        an alternative path can be specified as a full paths
-    examples: [string]
-        BESMod examples which are exported with the buildings
+    Raises
+    ------
+    ValueError
+        If `THydSup_nominal` is not provided for examples requiring it.
+    AssertionError
+        If the used library for calculations is not AixLib.
+    NotImplementedError
+        If a building uses a thermal zone model other than the four-element model.
 
-    Attributes
-    ----------
-
-    lookup : TemplateLookup object
-        Instance of mako.TemplateLookup to store general functions for templates
-    zone_template_4 : Template object
-        Template for ThermalZoneRecord using 4 element model
-    model_template : Template object
-        Template for MultiZone model
+    Notes
+    -----
+    The function uses Mako templates for generating Modelica models.
     """
 
     if not isinstance(buildings, list):
@@ -58,16 +67,17 @@ def export_besmod(
         raise ValueError("For the examples HeatPumpMonoenergetic and GasBoilerBuildingOnly "
                          "the parameter THydSup_nominal needs to be set.")
     # construct dict {bldg.name: THydSup_nominal_actual_value}
-    THydSup_nominal_bldg = _convert_THydSup_nominl_input(THydSup_nominal, buildings)
+    THydSup_nominal_bldg = convert_input(THydSup_nominal, buildings)
     if THydSupOld_design is None:
         THydSupOld_design_bldg = {bldg.name: "systemParameters.THydSup_nominal" for bldg in buildings}
     else:
-        THydSupOld_design_bldg = _convert_THydSup_nominl_input(THydSupOld_design, buildings)
+        THydSupOld_design_bldg = convert_input(THydSupOld_design, buildings)
 
     if QBuiOld_flow_design is None:
         QBuiOld_flow_design = {bldg.name: "systemParameters.QBui_flow_nominal" for bldg in buildings}
     else:
-        QBuiOld_flow_design = {bldg.name: _convert_to_zone_array(bldg, QBuiOld_flow_design[bldg.name]) for bldg in buildings}
+        QBuiOld_flow_design = {bldg.name: _convert_to_zone_array(bldg, QBuiOld_flow_design[bldg.name]) for bldg in
+                               buildings}
 
     supported_examples = ["TEASERHeatLoadCalculation",
                           "HeatPumpMonoenergetic",
@@ -180,51 +190,116 @@ def export_besmod(
             package_list=bldg.thermal_zones,
             addition=bldg.name + "_")
 
-    # _copy_script_unit_tests(os.path.join(dir_scripts, "runUnitTests.py"))
-    # _copy_reference_results(dir_resources, prj)  # ToDo fwu-hst: Creat reference results for example models
-
     print("Exports can be found here:")
     print(path)
 
 
-def _convert_THydSup_nominl_input(THydSup_nominal, buildings):
+def convert_input(building_zones_input, buildings):
+    """
+    Convert input values for BESMod zone specific parameters to a dictionary.
+
+    Supports single values, dictionaries keyed by construction year, or
+    dictionaries keyed by building names.
+    If single values are given then all buildings and zones get this values set.
+    If a dictionary keyed by construction year is given then all zones of a building get the
+    value set of the next higher year corresponding to the construction year of the building.
+    If a dictionary keyed by building name is given the value must be a single value for all zones
+    or another dictionary specifying for each zone name a value.
+
+    Parameters
+    ----------
+    building_zones_input : float, int, or dict
+        Input value(s) for BESMod parameters. Can be a single value, or a
+        dictionary keyed by construction year, or building name.
+    buildings : list[Building]
+        List of TEASER Building instances.
+
+    Returns
+    -------
+    dict
+        Dictionary mapping building names to BESMod parameter input strings.
+
+    Raises
+    ------
+    ValueError
+        If the input dictionary has invalid values.
+    KeyError
+        If the input dictionary is missing required keys.
+    """
     bldg_names = [bldg.name for bldg in buildings]
-    if isinstance(THydSup_nominal, (float, int)):
-        return {bldg.name: f"fill({THydSup_nominal},systemParameters.nZones)" for bldg in buildings}
-    elif isinstance(THydSup_nominal, dict):
-        THydSup_nominal_bldg = {}
-        if isinstance(list(THydSup_nominal.keys())[0], int):
+    if isinstance(building_zones_input, (float, int)):
+        return {bldg.name: f"fill({building_zones_input},systemParameters.nZones)" for bldg in buildings}
+    elif isinstance(building_zones_input, dict):
+        t_hyd_sup_nominal_bldg = {}
+        if isinstance(list(building_zones_input.keys())[0], int):
             for bldg in buildings:
-                temperature = _get_next_higher_year_value(THydSup_nominal, bldg.year_of_construction)
-                THydSup_nominal_bldg[bldg.name] = f"fill({temperature},systemParameters.nZones)"
-        elif set(list(THydSup_nominal.keys())) == set(bldg_names):
+                temperature = _get_next_higher_year_value(building_zones_input, bldg.year_of_construction)
+                t_hyd_sup_nominal_bldg[bldg.name] = f"fill({temperature},systemParameters.nZones)"
+        elif set(list(building_zones_input.keys())) == set(bldg_names):
             for bldg in buildings:
-                if isinstance(THydSup_nominal[bldg.name], (int, float)):
-                    THydSup_nominal_bldg[bldg.name] = f"fill({THydSup_nominal[bldg.name]},systemParameters.nZones)"
-                elif isinstance(THydSup_nominal[bldg.name], dict):
-                    THydSup_nominal_bldg[bldg.name] = _convert_to_zone_array(bldg, THydSup_nominal[bldg.name])
+                if isinstance(building_zones_input[bldg.name], (int, float)):
+                    t_hyd_sup_nominal_bldg[
+                        bldg.name] = f"fill({building_zones_input[bldg.name]},systemParameters.nZones)"
+                elif isinstance(building_zones_input[bldg.name], dict):
+                    t_hyd_sup_nominal_bldg[bldg.name] = _convert_to_zone_array(bldg, building_zones_input[bldg.name])
                 else:
                     raise ValueError("If THydSup_nominal is specified for all buildings in a dictionary "
                                      "the values must be either a single value for all thermal zones or "
                                      "a dict with all building.thermal_zones.name as keys.")
         else:
-            raise ValueError("If THydSup_nominal is given by a dictionary "
-                             "the keys must be all building names or construction years.")
-        return THydSup_nominal_bldg
+            raise KeyError("If THydSup_nominal is given by a dictionary "
+                           "the keys must be all building names or construction years.")
+        return t_hyd_sup_nominal_bldg
 
 
 def _convert_to_zone_array(bldg, zone_dict):
+    """
+    Convert a dictionary of zone values to a BESMod-compatible array string.
+
+    Parameters
+    ----------
+    bldg : Building
+        TEASER Building instance.
+    zone_dict : dict
+        Dictionary with zone names as keys and zone parameter values as values.
+
+    Returns
+    -------
+    str
+        Array string for BESMod parameter input.
+
+    Raises
+    ------
+    KeyError
+        If the dictionary is missing zone names present in the building.
+    """
     tz_names = [tz.name for tz in bldg.thermal_zones]
     if set(tz_names) == set(list(zone_dict.keys())):
         array_string = "{"
         for tz in tz_names:
             array_string += str(zone_dict[tz]) + ","
-        return array_string[:-2] + "}"
+        return array_string[:-1] + "}"
     else:
-        raise ValueError("Given thermal zones in dictionary are not matching.")
+        raise KeyError(f"{set(tz_names) - set(list(zone_dict.keys()))} thermal zones missing in given dictionary.")
 
 
 def _get_next_higher_year_value(years_dict, given_year):
+    """
+        Get the next higher value for a given year from a dictionary.
+
+        Parameters
+        ----------
+        years_dict : dict
+            Dictionary with years as keys and corresponding values.
+        given_year : int
+            Year to find the next higher value for.
+
+        Returns
+        -------
+        float or int
+            Value corresponding to the next higher year. If no higher year is found,
+            returns the value of the latest year.
+        """
     years = sorted(years_dict.keys())
     for year in years:
         if year > given_year:
@@ -233,28 +308,23 @@ def _get_next_higher_year_value(years_dict, given_year):
 
 
 def _help_example_script(bldg, dir_dymola, test_script_template, example):
-    """Create a script for the simulation and basic plotting of the examples
+    """
+    Create a .mos script for simulating and plotting BESMod examples from a Mako template.
 
     Parameters
     ----------
-    bldg : teaser.logic.buildingobjects.building.Building
-        Building for which test script is created
+    bldg : Building
+        TEASER Building instance for which the script is created.
     dir_dymola : str
-        Output directory for Dymola scripts
-    test_script_template : mako.template.Template
-        Template for the test script
-
-    Returns
-    -------
-    dir_scripts : str
-        Path to the scripts directory
+        Output directory for Dymola scripts.
+    test_script_template : Template
+        Mako template for the simulation script.
+    example : str
+        Name of the BESMod example.
     """
 
-    dir_building = os.path.join(dir_dymola, bldg.name)
-    if not os.path.exists(dir_building):
-        os.mkdir(dir_building)
-    with open(utilities.get_full_path(os.path.join(
-            dir_building, example + bldg.name + ".mos")), 'w') as out_file:
+    dir_building = utilities.create_path(os.path.join(dir_dymola, bldg.name))
+    with open(os.path.join(dir_building, example + bldg.name + ".mos"), 'w') as out_file:
         out_file.write(test_script_template.render_unicode(
             project=bldg.parent,
             bldg=bldg

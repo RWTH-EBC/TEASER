@@ -79,7 +79,13 @@ def example_export_besmod():
     THydSup_nominal = {1950: 90+273.15, 1980: 70+273.15, 2010: 55+273.15, 2024: 35+273.15}
     THydSup_nominal = {"ResidentialBuilding": 328.15,
                        "OfficeBuilding": 328.15,
-                       "InstituteBuilding": 343.15,
+                       "InstituteBuilding": {"Office": 343.15,
+                                             "Floor": 343.15,
+                                             "Storage": 343.15,
+                                             "Meeting": 343.15,
+                                             "Restroom": 343.15,
+                                             "ICT": 343.15,
+                                             "Laboratory": 328.15},
                        "InstituteBuildingMoisture": 343.15,
                        "ResidentialBuildingTabula": 328.15,
                        "ResidentialBuildingTabulaMulti": 328.15}
