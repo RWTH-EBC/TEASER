@@ -28,6 +28,8 @@ def save_teaser_json(path, project):
     prj_out["project"]["version"] = teaser.__version__
     prj_out["project"]["name"] = project.name
     prj_out["project"]["weather_file_path"] = project.weather_file_path
+    prj_out["project"]["t_soil_mode"] = project.t_soil_mode
+    prj_out["project"]["t_soil_file_path"] = project.t_soil_file_path
     prj_out["project"]["number_of_elements_calc"] = project.number_of_elements_calc
     prj_out["project"]["merge_windows_calc"] = project.merge_windows_calc
     prj_out["project"]["used_library_calc"] = project.used_library_calc
@@ -91,6 +93,7 @@ def save_teaser_json(path, project):
         ] = bldg.net_leased_area
         prj_out["project"]["buildings"][bldg.name]["outer_area"] = bldg.outer_area
         prj_out["project"]["buildings"][bldg.name]["window_area"] = bldg.window_area
+        prj_out["project"]["buildings"][bldg.name]["inner_wall_approximation_approach"] = bldg.inner_wall_approximation_approach
         if bldg.central_ahu is not None:
             ahu_out = collections.OrderedDict()
             ahu_out["heating"] = bldg.central_ahu.heating
@@ -125,6 +128,11 @@ def save_teaser_json(path, project):
 
             zone_out["area"] = zone.area
             zone_out["volume"] = zone.volume
+            zone_out["number_of_floors"] = zone.number_of_floors
+            zone_out["height_of_floors"] = zone.height_of_floors
+            zone_out["t_ground"] = zone.t_ground
+            zone_out["t_ground_amplitude"] = zone.t_ground_amplitude
+            zone_out["time_to_minimal_t_ground"] = zone.time_to_minimal_t_ground
             zone_out["use_conditions"] = collections.OrderedDict()
             zone_out["use_conditions"]["usage"] = zone.use_conditions.usage
 
@@ -231,6 +239,9 @@ def save_teaser_json(path, project):
             zone_out["inner_walls"] = collections.OrderedDict()
             zone_out["floors"] = collections.OrderedDict()
             zone_out["ceilings"] = collections.OrderedDict()
+            zone_out["interzonal_walls"] = collections.OrderedDict()
+            zone_out["interzonal_floors"] = collections.OrderedDict()
+            zone_out["interzonal_ceilings"] = collections.OrderedDict()
 
             for out_wall in zone.outer_walls:
                 zone_out["outer_walls"][out_wall.name] = collections.OrderedDict()
@@ -264,6 +275,27 @@ def save_teaser_json(path, project):
                 zone_out["ceilings"][ceil.name] = collections.OrderedDict()
                 set_basic_data(zone_out["ceilings"][ceil.name], ceil)
                 set_layer_data(zone_out["ceilings"][ceil.name], ceil)
+            for izw in zone.interzonal_walls:
+                zone_out["interzonal_walls"][izw.name] \
+                    = collections.OrderedDict()
+                zone_out["interzonal_walls"][izw.name]["other_side"] \
+                    = izw.other_side.name
+                set_basic_data(zone_out["interzonal_walls"][izw.name], izw)
+                set_layer_data(zone_out["interzonal_walls"][izw.name], izw)
+            for izf in zone.interzonal_floors:
+                zone_out["interzonal_floors"][izf.name] \
+                    = collections.OrderedDict()
+                zone_out["interzonal_floors"][izf.name]["other_side"] \
+                    = izf.other_side.name
+                set_basic_data(zone_out["interzonal_floors"][izf.name], izf)
+                set_layer_data(zone_out["interzonal_floors"][izf.name], izf)
+            for izc in zone.interzonal_ceilings:
+                zone_out["interzonal_ceilings"][izc.name] \
+                    = collections.OrderedDict()
+                zone_out["interzonal_ceilings"][izc.name]["other_side"] \
+                    = izc.other_side.name
+                set_basic_data(zone_out["interzonal_ceilings"][izc.name], izc)
+                set_layer_data(zone_out["interzonal_ceilings"][izc.name], izc)
 
             prj_out["project"]["buildings"][bldg.name]["thermal_zones"][
                 zone.name
@@ -300,6 +332,9 @@ def set_basic_data(wall_out, element):
         type(element).__name__ == "OuterWall"
         or type(element).__name__ == "Rooftop"
         or type(element).__name__ == "Door"
+        or type(element).__name__ == "InterzonalWall"
+        or type(element).__name__ == "InterzonalCeiling"
+        or type(element).__name__ == "InterzonalFloor"
     ):
 
         wall_out["outer_radiation"] = element.outer_radiation
@@ -313,6 +348,16 @@ def set_basic_data(wall_out, element):
         wall_out["a_conv"] = element.a_conv
         wall_out["shading_g_total"] = element.shading_g_total
         wall_out["shading_max_irr"] = element.shading_max_irr
+
+    if (
+        type(element).__name__ == "InterzonalWall"
+        or type(element).__name__ == "InterzonalCeiling"
+        or type(element).__name__ == "InterzonalFloor"
+    ):
+        try:
+            wall_out["other_side"] = wall_out.other_side.name
+        except AttributeError:
+            pass
 
 
 def set_layer_data(wall_out, element):

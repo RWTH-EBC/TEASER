@@ -75,6 +75,19 @@ class Institute(Office):
         2. elongated 2 floors
         3. compact (e.g. for a square base building)
 
+    inner_wall_approximation_approach : str
+        'teaser_default' (default) sets length of inner walls = typical
+            length * height of floors + 2 * typical width * height of floors
+        'typical_minus_outer' sets length of inner walls = 2 * typical
+            length * height of floors + 2 * typical width * height of floors
+            - length of outer or interzonal walls
+        'typical_minus_outer_extended' like 'typical_minus_outer', but also
+            considers that
+            a) a non-complete "average room" reduces its circumference
+              proportional to the square root of the area
+            b) rooftops, windows and ground floors (= walls with border to
+                soil) may have a vertical share
+
     window_layout : int
         Structure of the window facade type, default is 1, which is
         representative for a punctuated facade.
@@ -100,8 +113,10 @@ class Institute(Office):
 
     zone_area_factors : dict
         This dictionary contains the name of the zone (str), the
-        zone area factor (float) and the zone usage from BoundaryConditions json
-        (str). (Default see doc string above)
+        zone area factor (float), the zone usage from BoundaryConditions json
+        (str) (Default see doc string above), and may contain a dictionary with
+        keyword-attribute-like changes to zone parameters that are usually
+        inherited from parent: 'number_of_floors', 'height_of_floors'
     outer_wall_names : dict
         This dictionary contains a random name for the outer walls,
         their orientation and tilt. Default is a building in north-south
@@ -149,6 +164,7 @@ class Institute(Office):
         with_ahu=True,
         internal_gains_mode=1,
         office_layout=None,
+        inner_wall_approximation_approach='teaser_default',
         window_layout=None,
         construction_data=None,
     ):
@@ -168,6 +184,7 @@ class Institute(Office):
             with_ahu,
             internal_gains_mode,
             office_layout,
+            inner_wall_approximation_approach,
             window_layout,
             construction_data,
         )
