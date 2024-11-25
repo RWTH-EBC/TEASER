@@ -93,7 +93,6 @@
 <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.calculation.five_element</span> <span class="kn">import</span> <span class="n">FiveElement</span>
 
 
-
 <div class="viewcode-block" id="ThermalZone">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone">[docs]</a>
 <span class="k">class</span> <span class="nc">ThermalZone</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -148,7 +147,8 @@
 <span class="sd">    use_conditions : UseConditions</span>
 <span class="sd">        Instance of UseConditions with all relevant information for the usage</span>
 <span class="sd">        of the thermal zone</span>
-<span class="sd">    model_attr : Union[OneElement, TwoElement, ThreeElement, FourElement, FiveElement]</span>
+<span class="sd">    model_attr : Union[OneElement, TwoElement, ThreeElement, FourElement,</span>
+<span class="sd">    FiveElement]</span>
 <span class="sd">        Instance of OneElement(), TwoElement(), ThreeElement(),</span>
 <span class="sd">        FourElement(), or FiveElement() that holds all calculation functions</span>
 <span class="sd">        and attributes needed for the specific model.</span>
@@ -227,7 +227,7 @@
 
 <span class="sd">        Based on the input parameters (used model) this function instantiates</span>
 <span class="sd">        the corresponding calculation Class (e.g. TwoElement) and calculates</span>
-<span class="sd">        the zone parameters. Currently the function is able to distinguishes</span>
+<span class="sd">        the zone parameters. Currently, the function is able to distinguishes</span>
 <span class="sd">        between the number of elements, we distinguish between:</span>
 
 <span class="sd">            - one element: all outer walls are aggregated into one element,</span>
@@ -238,14 +238,14 @@
 <span class="sd">            - four elements: roofs and floors are aggregated separately</span>
 <span class="sd">            - five elements: includes borders to adjacent zones</span>
 
-<span class="sd">        For all four options we can chose if the thermal conduction through</span>
+<span class="sd">        For all four options we can choose if the thermal conduction through</span>
 <span class="sd">        the window is considered in a separate resistance or not.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        number_of_elements : int</span>
 <span class="sd">            defines the number of elements, that area aggregated, between 1</span>
-<span class="sd">            and 4, default is 2</span>
+<span class="sd">            and 5, default is 2</span>
 
 <span class="sd">        merge_windows : bool</span>
 <span class="sd">            True for merging the windows into the outer walls, False for</span>

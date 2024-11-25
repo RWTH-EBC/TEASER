@@ -619,7 +619,7 @@ sums volume of all zones</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>number_of_elements</strong><span class="classifier">int</span></dt><dd><p>defines the number of elements, that area aggregated, between 1
-and 4, default is 2</p>
+and 5, default is 2</p>
 </dd>
 <dt><strong>merge_windows</strong><span class="classifier">bool</span></dt><dd><p>True for merging the windows into the outer walls, False for
 separate resistance for window, default is False</p>
@@ -918,7 +918,8 @@ Default is None</p>
 <dt><strong>use_conditions</strong><span class="classifier">UseConditions</span></dt><dd><p>Instance of UseConditions with all relevant information for the usage
 of the thermal zone</p>
 </dd>
-<dt><strong>model_attr</strong><span class="classifier">Union[OneElement, TwoElement, ThreeElement, FourElement, FiveElement]</span></dt><dd><p>Instance of OneElement(), TwoElement(), ThreeElement(),
+<dt><strong>model_attr</strong><span class="classifier">Union[OneElement, TwoElement, ThreeElement, FourElement,</span></dt><dd></dd>
+<dt><strong>FiveElement]</strong></dt><dd><p>Instance of OneElement(), TwoElement(), ThreeElement(),
 FourElement(), or FiveElement() that holds all calculation functions
 and attributes needed for the specific model.</p>
 </dd>
@@ -979,7 +980,7 @@ depending on the type of the Building Element</p>
 <dd><p>RC-Calculation for the thermal zone</p>
 <p>Based on the input parameters (used model) this function instantiates
 the corresponding calculation Class (e.g. TwoElement) and calculates
-the zone parameters. Currently the function is able to distinguishes
+the zone parameters. Currently, the function is able to distinguishes
 between the number of elements, we distinguish between:</p>
 <blockquote>
 <div><ul class="simple">
@@ -992,13 +993,13 @@ separately</p></li>
 <li><p>five elements: includes borders to adjacent zones</p></li>
 </ul>
 </div></blockquote>
-<p>For all four options we can chose if the thermal conduction through
+<p>For all four options we can choose if the thermal conduction through
 the window is considered in a separate resistance or not.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>number_of_elements</strong><span class="classifier">int</span></dt><dd><p>defines the number of elements, that area aggregated, between 1
-and 4, default is 2</p>
+and 5, default is 2</p>
 </dd>
 <dt><strong>merge_windows</strong><span class="classifier">bool</span></dt><dd><p>True for merging the windows into the outer walls, False for
 separate resistance for window, default is False (Only
