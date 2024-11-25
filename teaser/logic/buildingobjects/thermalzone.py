@@ -15,7 +15,6 @@ from teaser.logic.buildingobjects.calculation.four_element import FourElement
 from teaser.logic.buildingobjects.calculation.five_element import FiveElement
 
 
-
 class ThermalZone(object):
     """Thermal zone class.
 
@@ -68,7 +67,8 @@ class ThermalZone(object):
     use_conditions : UseConditions
         Instance of UseConditions with all relevant information for the usage
         of the thermal zone
-    model_attr : Union[OneElement, TwoElement, ThreeElement, FourElement, FiveElement]
+    model_attr : Union[OneElement, TwoElement, ThreeElement, FourElement,
+    FiveElement]
         Instance of OneElement(), TwoElement(), ThreeElement(),
         FourElement(), or FiveElement() that holds all calculation functions
         and attributes needed for the specific model.
@@ -145,7 +145,7 @@ class ThermalZone(object):
 
         Based on the input parameters (used model) this function instantiates
         the corresponding calculation Class (e.g. TwoElement) and calculates
-        the zone parameters. Currently the function is able to distinguishes
+        the zone parameters. Currently, the function is able to distinguishes
         between the number of elements, we distinguish between:
 
             - one element: all outer walls are aggregated into one element,
@@ -156,14 +156,14 @@ class ThermalZone(object):
             - four elements: roofs and floors are aggregated separately
             - five elements: includes borders to adjacent zones
 
-        For all four options we can chose if the thermal conduction through
+        For all four options we can choose if the thermal conduction through
         the window is considered in a separate resistance or not.
 
         Parameters
         ----------
         number_of_elements : int
             defines the number of elements, that area aggregated, between 1
-            and 4, default is 2
+            and 5, default is 2
 
         merge_windows : bool
             True for merging the windows into the outer walls, False for
