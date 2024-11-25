@@ -49,6 +49,8 @@ def export_besmod(
     Raises
     ------
     ValueError
+        If given example is not supported.
+    ValueError
         If `THydSup_nominal` is not provided for examples requiring it.
     AssertionError
         If the used library for calculations is not AixLib.
@@ -63,15 +65,24 @@ def export_besmod(
     if not isinstance(buildings, list):
         buildings = [buildings]
 
-    if THydSup_nominal is None and ("HeatPumpMonoenergetic" or "GasBoilerBuildingOnly" in examples):
-        raise ValueError("For the examples HeatPumpMonoenergetic and GasBoilerBuildingOnly "
-                         "the parameter THydSup_nominal needs to be set.")
-    # construct dict {bldg.name: THydSup_nominal_actual_value}
+    if not isinstance(examples, list):
+        examples =  [examples]
+    supported_examples = ["TEASERHeatLoadCalculation",
+                          "HeatPumpMonoenergetic",
+                          "GasBoilerBuildingOnly"]
+    for exp in examples:
+        if exp not in supported_examples:
+            raise ValueError(f"Example {exp} is not supported. "
+                             f"Supported examples are {supported_examples}.")
+
+    if THydSup_nominal is None and any(
+            example in examples for example in ["HeatPumpMonoenergetic", "GasBoilerBuildingOnly"]):
+        raise ValueError("Examples 'HeatPumpMonoenergetic' and 'GasBoilerBuildingOnly' "
+                         "require the `THydSup_nominal` parameter.")
+
     THydSup_nominal_bldg = convert_input(THydSup_nominal, buildings)
-    if THydSupOld_design is None:
-        THydSupOld_design_bldg = {bldg.name: "systemParameters.THydSup_nominal" for bldg in buildings}
-    else:
-        THydSupOld_design_bldg = convert_input(THydSupOld_design, buildings)
+    THydSupOld_design_bldg = convert_input(THydSupOld_design, buildings) if THydSupOld_design else \
+        {bldg.name: "systemParameters.THydSup_nominal" for bldg in buildings}
 
     if QBuiOld_flow_design is None:
         QBuiOld_flow_design = {bldg.name: "systemParameters.QBui_flow_nominal" for bldg in buildings}
@@ -79,24 +90,17 @@ def export_besmod(
         QBuiOld_flow_design = {bldg.name: _convert_to_zone_array(bldg, QBuiOld_flow_design[bldg.name]) for bldg in
                                buildings}
 
-    supported_examples = ["TEASERHeatLoadCalculation",
-                          "HeatPumpMonoenergetic",
-                          "GasBoilerBuildingOnly"]
-
     dir_resources = utilities.create_path(os.path.join(path, "Resources"))
     dir_scripts = utilities.create_path(os.path.join(dir_resources, "Scripts"))
     dir_dymola = utilities.create_path(os.path.join(dir_scripts, "Dymola"))
+    template_path = utilities.get_full_path("data/output/modelicatemplate")
+    lookup = TemplateLookup(directories=[template_path])
 
-    lookup = TemplateLookup(directories=[utilities.get_full_path(
-        os.path.join('data', 'output', 'modelicatemplate'))])
     zone_template_4 = Template(
-        filename=utilities.get_full_path(
-            "data/output/modelicatemplate/AixLib"
-            "/AixLib_ThermalZoneRecord_FourElement"),
+        filename=os.path.join(template_path, "AixLib/AixLib_ThermalZoneRecord_FourElement"),
         lookup=lookup)
-    model_template = Template(
-        filename=utilities.get_full_path(
-            "data/output/modelicatemplate/BESMod/Building"),
+    building_template = Template(
+        filename=os.path.join(template_path, "BESMod/Building"),
         lookup=lookup)
 
     uses = [
@@ -134,10 +138,8 @@ def export_besmod(
 
         with open(utilities.get_full_path(
                 os.path.join(bldg_path, bldg.name + ".mo")), 'w') as out_file:
-            out_file.write(model_template.render_unicode(
-                bldg=bldg,
-                weather=bldg.parent.weather_file_path,
-                modelica_info=bldg.parent.modelica_info))
+            out_file.write(building_template.render_unicode(
+                bldg=bldg))
             out_file.close()
 
         for exp in examples:

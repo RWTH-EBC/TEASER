@@ -43,7 +43,7 @@ def example_export_besmod():
 
     print(prj.dir_reference_results)
 
-    prj.used_library_calc = 'AixLib'  # ToDo fwu-hst: Always AixLib? If true, put it in explicit in besmod_output
+    prj.used_library_calc = 'AixLib'
     prj.number_of_elements_calc = 4
     weather_file_path = utilities.get_full_path(
         os.path.join(
