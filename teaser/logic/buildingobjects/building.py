@@ -380,7 +380,7 @@ class Building(object):
         ----------
         number_of_elements : int
             defines the number of elements, that area aggregated, between 1
-            and 4, default is 2
+            and 5, default is 2
         merge_windows : bool
             True for merging the windows into the outer walls, False for
             separate resistance for window, default is False

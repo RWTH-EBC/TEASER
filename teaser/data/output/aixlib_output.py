@@ -131,8 +131,8 @@ def export_multizone(
     if not prj.weather_file_path.startswith("modelica:"):
         _copy_weather_data(prj.weather_file_path, path)
     if prj.t_soil_mode == 3:
-    	if not prj.t_soil_file_path.startswith("modelica:"):
-        	_copy_weather_data(prj.t_soil_file_path, path)
+        if not prj.t_soil_file_path.startswith("modelica:"):
+            _copy_weather_data(prj.t_soil_file_path, path)
 
     for i, bldg in enumerate(buildings):
 
