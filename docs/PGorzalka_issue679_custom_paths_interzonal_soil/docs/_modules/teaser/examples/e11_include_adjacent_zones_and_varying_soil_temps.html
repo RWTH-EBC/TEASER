@@ -1,0 +1,760 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser.examples.e11_include_adjacent_zones_and_varying_soil_temps &mdash; TEASER 1.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=db26dd79" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=292eb321"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            TEASER
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code/modules.html">teaser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">teaser.examples.e11_include_adjacent_zones_and_varying_soil_temps</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for teaser.examples.e11_include_adjacent_zones_and_varying_soil_temps</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># @Author: Philip Groesdonk</span>
+<span class="c1"># @Date:   2019-06-30 09:09:09</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This script demonstrates five features of TEASER:</span>
+<span class="sd"> - how borders between adjacent zones can be modelled</span>
+<span class="sd"> - in connection to that, the export to a FiveElement AixLib ROM model</span>
+<span class="sd"> - how elements (here windows) can be newer than the building and get the</span>
+<span class="sd">   respective typical properties</span>
+<span class="sd"> - how non-constant soil temperatures are included</span>
+<span class="sd"> - how custom templates for the Modelica export are used</span>
+<span class="sd"> - the different estimation approaches for the interior wall area</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">teaser.project</span> <span class="kn">import</span> <span class="n">Project</span>
+<span class="kn">from</span> <span class="nn">teaser.data.dataclass</span> <span class="kn">import</span> <span class="n">DataClass</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.layer</span> <span class="kn">import</span> <span class="n">Layer</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.material</span> <span class="kn">import</span> <span class="n">Material</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.outerwall</span> <span class="kn">import</span> <span class="n">OuterWall</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.groundfloor</span> <span class="kn">import</span> <span class="n">GroundFloor</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.window</span> <span class="kn">import</span> <span class="n">Window</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.interzonalwall</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">InterzonalWall</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.thermalzone</span> <span class="kn">import</span> <span class="n">ThermalZone</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.useconditions</span> <span class="kn">import</span> <span class="n">UseConditions</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.building</span> <span class="kn">import</span> <span class="n">Building</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.rooftop</span> <span class="kn">import</span> <span class="n">Rooftop</span>
+<span class="kn">from</span> <span class="nn">teaser.data.utilities</span> <span class="kn">import</span> <span class="n">ConstructionData</span>
+<span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utilities</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+
+
+<div class="viewcode-block" id="example_interzonal_single_building">
+<a class="viewcode-back" href="../../../code/teaser.examples.html#teaser.examples.e11_include_adjacent_zones_and_varying_soil_temps.example_interzonal_single_building">[docs]</a>
+<span class="k">def</span> <span class="nf">example_interzonal_single_building</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This example features the data presented in a contribution to the 2023</span>
+<span class="sd">    International Modelica Conference: https://doi.org/10.3384/ecp204577</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># for the conference publication, four variations were calculated</span>
+    <span class="k">for</span> <span class="n">variation</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">]:</span>
+        <span class="c1"># this project is initialized without data class</span>
+        <span class="n">prj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># now, we can set &#39;tabula_de&#39; manually</span>
+        <span class="n">prj</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataClass</span><span class="p">(</span><span class="n">construction_data</span><span class="o">=</span><span class="n">ConstructionData</span><span class="o">.</span><span class="n">tabula_de_standard</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">variation</span> <span class="o">==</span> <span class="s1">&#39;D&#39;</span><span class="p">:</span>
+            <span class="c1"># this is the variation that represents the actual state of the building</span>
+            <span class="n">prj</span><span class="o">.</span><span class="n">load_project</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;examples/examplefiles/e11_varD.json&quot;</span>
+            <span class="p">))</span>
+
+            <span class="c1"># in the json for variation D, one interzonal element is missing, so we</span>
+            <span class="c1"># can show in the example how it is manually added</span>
+            <span class="c1"># Because we want to add the properties manually here, check the</span>
+            <span class="c1"># generation of variations A to C further below to see how typical</span>
+            <span class="c1"># element properties are added to interzonal elements</span>
+
+            <span class="c1"># Add the interzonal element connecting zone 0 (attic) and zone 2 (main</span>
+            <span class="c1"># zone)</span>
+            <span class="n">attic</span> <span class="o">=</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">main_zone</span> <span class="o">=</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+            <span class="c1"># It needs to be as an element of both the attic and the main zone</span>
+            <span class="c1"># The two elements, although representing the same physical element,</span>
+            <span class="c1"># are not semantically connected in the TEASER project due to the</span>
+            <span class="c1"># hierarchical structure project &gt; building &gt; thermal zone &gt; element.</span>
+            <span class="c1"># Therefore, make sure that changes to one element always have to be</span>
+            <span class="c1"># implemented also for its counterpart.</span>
+
+            <span class="c1"># start with the ceiling of the main zone</span>
+            <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.interzonalceiling</span>\
+                <span class="kn">import</span> <span class="nn">InterzonalCeiling</span>
+            <span class="n">main_ceiling</span> <span class="o">=</span> <span class="n">InterzonalCeiling</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">main_zone</span><span class="p">,</span> <span class="n">other_side</span><span class="o">=</span><span class="n">attic</span><span class="p">)</span>
+            <span class="n">main_ceiling</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;floor_4C797480FF814849944536D7EDE2A122_2&quot;</span>
+            <span class="n">main_ceiling</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mf">48.90700957621479</span>
+            <span class="n">main_ceiling</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="n">main_ceiling</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="n">main_ceiling</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">5.0</span>
+            <span class="n">main_ceiling</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">5.0</span>
+            <span class="n">main_ceiling</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="mf">5.0</span>
+            <span class="n">main_ceiling</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="mf">5.0</span>
+
+            <span class="c1"># First layer: concrete</span>
+            <span class="n">layer_mc1</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">main_ceiling</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">layer_mc1</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.02</span>
+            <span class="n">material_mc1</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_mc1</span><span class="p">)</span>
+            <span class="n">material_mc1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Tile&quot;</span>
+            <span class="n">material_mc1</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mf">2400.0</span>
+            <span class="n">material_mc1</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mf">1.0</span>
+            <span class="n">material_mc1</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">2.5</span>
+            <span class="n">material_mc1</span><span class="o">.</span><span class="n">solar_absorp</span> <span class="o">=</span> <span class="mf">0.7</span>
+            <span class="n">material_mc1</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+
+            <span class="c1"># Second layer: mineral wool</span>
+            <span class="n">layer_mc2</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">main_ceiling</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">layer_mc2</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.13</span>
+            <span class="n">material_mc2</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_mc2</span><span class="p">)</span>
+            <span class="n">material_mc2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Mineralwolle_13cm&quot;</span>
+            <span class="n">material_mc2</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mf">1800.0</span>
+            <span class="n">material_mc2</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mf">0.95</span>
+            <span class="n">material_mc2</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.06</span>
+            <span class="n">material_mc2</span><span class="o">.</span><span class="n">solar_absorp</span> <span class="o">=</span> <span class="mf">0.7</span>
+            <span class="n">material_mc2</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+
+            <span class="c1"># now add the attic floor and give it the same properties</span>
+            <span class="c1"># differences are</span>
+            <span class="c1"># a) the orientation (-2 instead of -1)</span>
+            <span class="c1"># b) the layer sequence is inverted - because the sequence always starts</span>
+            <span class="c1">#    at the inside of the thermal zone the element belongs to</span>
+            <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.interzonalfloor</span>\
+                <span class="kn">import</span> <span class="nn">InterzonalFloor</span>
+            <span class="n">attic_floor</span> <span class="o">=</span> <span class="n">InterzonalFloor</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">attic</span><span class="p">,</span> <span class="n">other_side</span><span class="o">=</span><span class="n">main_zone</span><span class="p">)</span>
+            <span class="n">attic_floor</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;floor_4C797480FF814849944536D7EDE2A122_2&quot;</span>
+            <span class="n">attic_floor</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mf">48.90700957621479</span>
+            <span class="n">attic_floor</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span>
+            <span class="n">attic_floor</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="n">attic_floor</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">5.0</span>
+            <span class="n">attic_floor</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">5.0</span>
+            <span class="n">attic_floor</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="mf">5.0</span>
+            <span class="n">attic_floor</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="mf">5.0</span>
+
+            <span class="c1"># First layer: mineral wool</span>
+            <span class="n">layer_af1</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">attic_floor</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">layer_af1</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.13</span>
+            <span class="n">material_af1</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_af1</span><span class="p">)</span>
+            <span class="n">material_af1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Mineralwolle_13cm&quot;</span>
+            <span class="n">material_af1</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mf">1800.0</span>
+            <span class="n">material_af1</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mf">0.95</span>
+            <span class="n">material_af1</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.06</span>
+            <span class="n">material_af1</span><span class="o">.</span><span class="n">solar_absorp</span> <span class="o">=</span> <span class="mf">0.7</span>
+            <span class="n">material_af1</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+
+            <span class="c1"># Second layer: concrete</span>
+            <span class="n">layer_af2</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">attic_floor</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">layer_af2</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.02</span>
+            <span class="n">material_af2</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_af2</span><span class="p">)</span>
+            <span class="n">material_af2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Tile&quot;</span>
+            <span class="n">material_af2</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mf">2400.0</span>
+            <span class="n">material_af2</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mf">1.0</span>
+            <span class="n">material_af2</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">2.5</span>
+            <span class="n">material_af2</span><span class="o">.</span><span class="n">solar_absorp</span> <span class="o">=</span> <span class="mf">0.7</span>
+            <span class="n">material_af2</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+
+        <span class="k">elif</span> <span class="n">variation</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">):</span>
+            <span class="n">prj</span><span class="o">.</span><span class="n">load_project</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;examples/examplefiles/e11_raw.json&quot;</span>
+            <span class="p">))</span>
+
+            <span class="c1"># The default properties from the typology (selected previously by</span>
+            <span class="c1"># setting the data class) need to be loaded element-wise, replacing all</span>
+            <span class="c1"># previously set energy-relevant parameters of the elements.</span>
+            <span class="c1"># Here, we just load the standard existing state for the year of</span>
+            <span class="c1"># construction for each element. Note that</span>
+            <span class="k">for</span> <span class="n">tz</span> <span class="ow">in</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+                <span class="c1"># Note that the windows get a different year of construction (1995)</span>
+                <span class="c1"># than the rest of the building (1965, from the json import file).</span>
+                <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">tz</span><span class="o">.</span><span class="n">windows</span><span class="p">:</span>
+                    <span class="n">el</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span><span class="mi">1995</span><span class="p">,</span> <span class="s1">&#39;tabula_de_standard_1_SFH&#39;</span><span class="p">)</span>
+                    <span class="n">el</span><span class="o">.</span><span class="n">shading_max_irr</span> <span class="o">=</span> <span class="mi">10000</span>
+                <span class="c1"># rooftops, ground floors and interzonal elements have a clearly</span>
+                <span class="c1"># associated TABULA standard construction. See the publication</span>
+                <span class="c1"># mentioned above for details about when which standard construction</span>
+                <span class="c1"># is used for interzonal elements.</span>
+                <span class="c1"># (here, typical outer elements are loaded, because</span>
+                <span class="c1"># tz.use_conditions.with_heating is False for attic and basement</span>
+                <span class="c1"># and True for the main zone)</span>
+                <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">tz</span><span class="o">.</span><span class="n">rooftops</span> <span class="o">+</span> <span class="n">tz</span><span class="o">.</span><span class="n">ground_floors</span> <span class="o">+</span> <span class="n">tz</span><span class="o">.</span><span class="n">interzonal_elements</span><span class="p">:</span>
+                    <span class="n">el</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+                                         <span class="s1">&#39;tabula_de_standard_1_SFH&#39;</span><span class="p">)</span>
+                <span class="c1"># There are two different standard constructions for some element</span>
+                <span class="c1"># types in some TABULA type building, especially outer walls.</span>
+                <span class="c1"># This is why two outer wall elements are  stored in the JSON file</span>
+                <span class="c1"># here and why generate_archetype will create similar structures,</span>
+                <span class="c1"># too. The ratio of their sizes is sourced from the TABULA</span>
+                <span class="c1"># publications. In total, they sum up to the size of the actual</span>
+                <span class="c1"># building&#39;s wall.</span>
+                <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">tz</span><span class="o">.</span><span class="n">outer_walls</span><span class="p">[:</span><span class="mi">4</span><span class="p">]:</span>
+                    <span class="n">el</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+                                         <span class="s1">&#39;tabula_de_standard_1_SFH&#39;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">tz</span><span class="o">.</span><span class="n">outer_walls</span><span class="p">[</span><span class="mi">4</span><span class="p">:]:</span>
+                    <span class="n">el</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+                                         <span class="s1">&#39;tabula_de_standard_2_SFH&#39;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">tz</span> <span class="ow">in</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+            <span class="c1"># In this case, we want to simulate one-directional heat flow. This</span>
+            <span class="c1"># is why we adapt the respective convection coefficients</span>
+            <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">tz</span><span class="o">.</span><span class="n">rooftops</span><span class="p">:</span>
+                <span class="n">el</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">5.0</span>
+            <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">tz</span><span class="o">.</span><span class="n">ground_floors</span><span class="p">:</span>
+                <span class="n">el</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">0.9</span>
+            <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">tz</span><span class="o">.</span><span class="n">interzonal_ceilings</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">el</span><span class="o">.</span><span class="n">other_side</span> <span class="ow">is</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+                    <span class="c1"># border (from basement) to main zone</span>
+                    <span class="n">el</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">0.9</span>
+                    <span class="n">el</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">0.9</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># border (from main zone) to attic</span>
+                    <span class="n">el</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">5.0</span>
+                    <span class="n">el</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">5.0</span>
+            <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">tz</span><span class="o">.</span><span class="n">interzonal_floors</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">el</span><span class="o">.</span><span class="n">other_side</span> <span class="ow">is</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+                    <span class="c1"># border (from attic) to main zone</span>
+                    <span class="n">el</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">5.0</span>
+                    <span class="n">el</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">5.0</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># border (from main zone) to basement</span>
+                    <span class="n">el</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">0.9</span>
+                    <span class="n">el</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">0.9</span>
+
+        <span class="c1"># change the project name so exports are clearly recognizable</span>
+        <span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Example_e11_var&#39;</span> <span class="o">+</span> <span class="n">variation</span>
+
+        <span class="c1"># three ways for setting the inner wall area</span>
+        <span class="c1"># if you run the example, you will see the difference in the console output.</span>
+        <span class="c1"># for both approximation approaches (A and B), it is essential that you</span>
+        <span class="c1"># set the number of floors per zone before calling tz.set_inner_wall_area().</span>
+        <span class="c1"># If you don&#39;t, the function will assume the zone has the same number of</span>
+        <span class="c1"># floors as the building.</span>
+        <span class="k">if</span> <span class="n">variation</span> <span class="o">==</span> <span class="s1">&#39;A&#39;</span><span class="p">:</span>
+            <span class="c1"># use the approach that was implemented in TEASER the first version</span>
+            <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">inner_wall_approximation_approach</span> <span class="o">=</span> <span class="s1">&#39;teaser_default&#39;</span>
+        <span class="k">elif</span> <span class="n">variation</span> <span class="o">==</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span>
+            <span class="c1"># use the new approach that checks typical room sizes and outer elements</span>
+            <span class="c1"># in this case, interzonal elements must be created beforehand. They may</span>
+            <span class="c1"># influence the result of the application.</span>
+            <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">inner_wall_approximation_approach</span> \
+                <span class="o">=</span> <span class="s1">&#39;typical_minus_outer_extended&#39;</span>
+        <span class="k">elif</span> <span class="n">variation</span> <span class="o">==</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span>
+            <span class="c1"># define the areas manually for each zone</span>
+            <span class="n">iw_areas</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">81.6764</span><span class="p">,</span> <span class="mf">132.74215581488374</span><span class="p">]</span>
+            <span class="n">ceil_areas</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">66.15407513491138</span><span class="p">]</span>
+            <span class="n">floor_areas</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">66.15407513491138</span><span class="p">]</span>
+
+        <span class="c1"># calculate the areas and print the result to the console</span>
+        <span class="n">thermal_zone_dict</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;attic&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;basement&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;main zone&#39;</span><span class="p">}</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;inner wall sizes for variation &#39;</span> <span class="o">+</span> <span class="n">variation</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">tzno</span><span class="p">,</span> <span class="n">tz</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Thermal zone </span><span class="si">{</span><span class="n">tzno</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">thermal_zone_dict</span><span class="p">[</span><span class="n">tzno</span><span class="p">]</span><span class="si">}</span><span class="s1">):&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">tzno</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">tzno</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">tz</span><span class="o">.</span><span class="n">number_of_floors</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">tzno</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">tz</span><span class="o">.</span><span class="n">number_of_floors</span> <span class="o">=</span> <span class="mi">2</span>
+            <span class="k">if</span> <span class="n">variation</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]:</span>
+                <span class="n">tz</span><span class="o">.</span><span class="n">set_inner_wall_area</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">variation</span> <span class="o">==</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">iw</span> <span class="ow">in</span> <span class="n">tz</span><span class="o">.</span><span class="n">inner_walls</span><span class="p">:</span>
+                    <span class="n">iw</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">iw_areas</span><span class="p">[</span><span class="n">tzno</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">ceil</span> <span class="ow">in</span> <span class="n">tz</span><span class="o">.</span><span class="n">ceilings</span><span class="p">:</span>
+                    <span class="n">ceil</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">ceil_areas</span><span class="p">[</span><span class="n">tzno</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">floor</span> <span class="ow">in</span> <span class="n">tz</span><span class="o">.</span><span class="n">floors</span><span class="p">:</span>
+                    <span class="n">floor</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">floor_areas</span><span class="p">[</span><span class="n">tzno</span><span class="p">]</span>
+            <span class="n">zone_wall_area</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">iw</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tz</span><span class="o">.</span><span class="n">inner_walls</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;inner wall </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">: area </span><span class="si">{</span><span class="n">iw</span><span class="o">.</span><span class="n">area</span><span class="si">}</span><span class="s1"> m²&#39;</span><span class="p">)</span>
+                <span class="n">zone_wall_area</span> <span class="o">+=</span> <span class="n">iw</span><span class="o">.</span><span class="n">area</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">iw</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tz</span><span class="o">.</span><span class="n">floors</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;floor </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">: area </span><span class="si">{</span><span class="n">iw</span><span class="o">.</span><span class="n">area</span><span class="si">}</span><span class="s1"> m²&#39;</span><span class="p">)</span>
+                <span class="n">zone_wall_area</span> <span class="o">+=</span> <span class="n">iw</span><span class="o">.</span><span class="n">area</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">iw</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tz</span><span class="o">.</span><span class="n">ceilings</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ceiling </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">: area </span><span class="si">{</span><span class="n">iw</span><span class="o">.</span><span class="n">area</span><span class="si">}</span><span class="s1"> m²&#39;</span><span class="p">)</span>
+                <span class="n">zone_wall_area</span> <span class="o">+=</span> <span class="n">iw</span><span class="o">.</span><span class="n">area</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;total interior area for zone </span><span class="si">{</span><span class="n">tzno</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">zone_wall_area</span><span class="si">}</span><span class="s1"> m²&#39;</span><span class="p">)</span>
+
+        <span class="c1"># for this specific application, we want to simulate the temperature in an</span>
+        <span class="c1"># unoccupied building which was actually measured during a period in</span>
+        <span class="c1"># February 2019. This is why the following steps are taken:</span>
+
+        <span class="c1"># 1. the soil temperature is set to the temperature measured on the contact</span>
+        <span class="c1">#    surface between building element and soil</span>
+        <span class="n">prj</span><span class="o">.</span><span class="n">t_soil_mode</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="n">prj</span><span class="o">.</span><span class="n">t_soil_file_path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+            <span class="s2">&quot;examples/examplefiles/t_soil_example_e11.txt&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># 2. the weather is set to the actual weather at the time</span>
+        <span class="n">prj</span><span class="o">.</span><span class="n">weather_file_path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+            <span class="s2">&quot;examples/examplefiles/DEU_NW_Morschenich_for_example_e11.mos&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># 3. we restrict the simulation time to the interesting part of the year</span>
+        <span class="c1">#    (but leave enough time for the model reaching a steady state before</span>
+        <span class="c1">#    the measurement starts)</span>
+        <span class="n">prj</span><span class="o">.</span><span class="n">modelica_info</span><span class="o">.</span><span class="n">start_time</span> <span class="o">=</span> <span class="mi">1497600</span>
+        <span class="n">prj</span><span class="o">.</span><span class="n">modelica_info</span><span class="o">.</span><span class="n">stop_time</span> <span class="o">=</span> <span class="mi">5155200</span>
+
+        <span class="c1"># 4. we make sure that heaters, coolers, internal gains and automatical</span>
+        <span class="c1">#    shading do not influence the calculation</span>
+        <span class="k">for</span> <span class="n">tz</span> <span class="ow">in</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">cooling_profile</span> <span class="o">=</span> <span class="mf">373.15</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">heating_profile</span> <span class="o">=</span> <span class="mf">253.15</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">lighting_profile</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">machines_profile</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">persons_profile</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="c1"># set the maximum irradiation (above which shading is automatically</span>
+            <span class="c1"># applied in the simulation) to an unreachable number</span>
+            <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">tz</span><span class="o">.</span><span class="n">windows</span><span class="p">:</span>
+                <span class="n">el</span><span class="o">.</span><span class="n">shading_max_irr</span> <span class="o">=</span> <span class="mi">10000</span>
+
+        <span class="c1"># for the calculation, we choose number of elements 5 and library AixLib</span>
+        <span class="k">for</span> <span class="n">building</span> <span class="ow">in</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">:</span>
+            <span class="n">building</span><span class="o">.</span><span class="n">calc_building_parameter</span><span class="p">(</span>
+                <span class="n">number_of_elements</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                <span class="n">used_library</span><span class="o">=</span><span class="s2">&quot;AixLib&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># now, we do not want to use the default Multizone template, but a custom</span>
+        <span class="c1"># template. It has two important features:</span>
+        <span class="c1"># 1. the Medium DryAirNasa is used because the default SimpleAir cannot</span>
+        <span class="c1">#    handle interior temperatures below 0 °C, but those will be present in</span>
+        <span class="c1">#    the unheated attic here</span>
+        <span class="c1"># 2. additional internal gains are connected to the ports of the Multizone</span>
+        <span class="n">export_path</span> <span class="o">=</span> <span class="n">prj</span><span class="o">.</span><span class="n">export_aixlib</span><span class="p">(</span>
+            <span class="n">custom_multizone_template_path</span><span class="o">=</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+                <span class="s2">&quot;examples/examplefiles/e11_Multizone_template&quot;</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="c1"># the additional import source files need to be copied to the export path</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span>
+            <span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span><span class="s2">&quot;examples/examplefiles/e11_AddIntGains.txt&quot;</span><span class="p">),</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">export_path</span><span class="p">,</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;e11_AddIntGains.txt&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">prj</span></div>
+
+
+
+<div class="viewcode-block" id="example_interzonal_ashrae_960">
+<a class="viewcode-back" href="../../../code/teaser.examples.html#teaser.examples.e11_include_adjacent_zones_and_varying_soil_temps.example_interzonal_ashrae_960">[docs]</a>
+<span class="k">def</span> <span class="nf">example_interzonal_ashrae_960</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This example creates a two-zone model as far as possible according to</span>
+<span class="sd">    Test Case 960 of ASHRAE 140-2020</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">prj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">()</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ASHRAE140&quot;</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">DataClass</span><span class="p">(</span><span class="n">construction_data</span><span class="o">=</span><span class="n">ConstructionData</span><span class="o">.</span><span class="n">iwu_heavy</span><span class="p">)</span>
+
+    <span class="n">bldg</span> <span class="o">=</span> <span class="n">Building</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">prj</span><span class="p">)</span>
+    <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Case960&quot;</span>
+    <span class="n">bldg</span><span class="o">.</span><span class="n">year_of_construction</span> <span class="o">=</span> <span class="mi">2015</span>
+    <span class="n">bldg</span><span class="o">.</span><span class="n">number_of_floors</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">bldg</span><span class="o">.</span><span class="n">height_of_floors</span> <span class="o">=</span> <span class="mf">2.7</span>
+
+    <span class="n">tz1</span> <span class="o">=</span> <span class="n">ThermalZone</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">bldg</span><span class="p">)</span>
+    <span class="n">tz1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;BackZone&quot;</span>
+    <span class="n">tz1</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">6</span>
+    <span class="n">tz1</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="n">tz1</span><span class="o">.</span><span class="n">area</span> <span class="o">*</span> <span class="n">bldg</span><span class="o">.</span><span class="n">number_of_floors</span> <span class="o">*</span> <span class="n">bldg</span><span class="o">.</span><span class="n">height_of_floors</span>
+    <span class="n">tz1</span><span class="o">.</span><span class="n">infiltration_rate</span> <span class="o">=</span> <span class="mf">0.414</span>
+
+    <span class="n">tz2</span> <span class="o">=</span> <span class="n">ThermalZone</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">bldg</span><span class="p">)</span>
+    <span class="n">tz2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;SunZone&quot;</span>
+    <span class="n">tz2</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="n">tz2</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="n">tz2</span><span class="o">.</span><span class="n">area</span> <span class="o">*</span> <span class="n">bldg</span><span class="o">.</span><span class="n">number_of_floors</span> <span class="o">*</span> <span class="n">bldg</span><span class="o">.</span><span class="n">height_of_floors</span>
+    <span class="n">tz2</span><span class="o">.</span><span class="n">infiltration_rate</span> <span class="o">=</span> <span class="mf">0.414</span>
+    <span class="c1"># set dummy use conditions</span>
+    <span class="n">tz1</span><span class="o">.</span><span class="n">use_conditions</span> <span class="o">=</span> <span class="n">UseConditions</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz1</span><span class="p">)</span>
+    <span class="n">tz1</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">load_use_conditions</span><span class="p">(</span><span class="s2">&quot;Living&quot;</span><span class="p">,</span> <span class="n">prj</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">tz2</span><span class="o">.</span><span class="n">use_conditions</span> <span class="o">=</span> <span class="n">UseConditions</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz2</span><span class="p">)</span>
+    <span class="n">tz2</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">load_use_conditions</span><span class="p">(</span><span class="s2">&quot;Living&quot;</span><span class="p">,</span> <span class="n">prj</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+    <span class="c1"># adapt as needed</span>
+    <span class="n">tz1</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">with_heating</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">tz1</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">with_cooling</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">tz1</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">persons</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">tz1</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">fixed_heat_flow_rate_persons</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">tz1</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">internal_gains_moisture_no_people</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">tz1</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">use_constant_infiltration</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">tz1</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">machines</span> <span class="o">=</span> <span class="mf">200.0</span> <span class="o">/</span> <span class="n">tz1</span><span class="o">.</span><span class="n">area</span>
+    <span class="n">tz1</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">fixed_lighting_power</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">tz1</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">heating_profile</span> <span class="o">=</span> <span class="p">[</span><span class="mf">293.15</span><span class="p">]</span> <span class="o">*</span> <span class="mi">24</span>
+    <span class="n">tz1</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">cooling_profile</span> <span class="o">=</span> <span class="p">[</span><span class="mf">300.15</span><span class="p">]</span> <span class="o">*</span> <span class="mi">24</span>
+    <span class="n">tz1</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">persons_profile</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">24</span>
+    <span class="n">tz1</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">machines_profile</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">24</span>
+    <span class="n">tz1</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">lighting_profile</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">24</span>
+    <span class="n">tz2</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">with_heating</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">tz2</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">with_cooling</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">tz2</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">persons</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">tz2</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">fixed_heat_flow_rate_persons</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">tz2</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">internal_gains_moisture_no_people</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">tz2</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">use_constant_infiltration</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">tz2</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">machines</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">tz2</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">fixed_lighting_power</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">tz2</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">heating_profile</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.15</span><span class="p">]</span> <span class="o">*</span> <span class="mi">24</span>
+    <span class="n">tz2</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">cooling_profile</span> <span class="o">=</span> <span class="p">[</span><span class="mf">500.15</span><span class="p">]</span> <span class="o">*</span> <span class="mi">24</span>
+    <span class="n">tz2</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">persons_profile</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">24</span>
+    <span class="n">tz2</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">machines_profile</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">24</span>
+    <span class="n">tz2</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">lighting_profile</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">24</span>
+
+    <span class="c1"># build up rooftop</span>
+    <span class="n">roof_back</span> <span class="o">=</span> <span class="n">Rooftop</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz1</span><span class="p">)</span>
+    <span class="n">roof_back</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;roof_back&quot;</span>
+    <span class="n">roof_back</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">tz1</span><span class="o">.</span><span class="n">area</span>
+    <span class="n">roof_back</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">roof_back</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">roof_back</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">1.8</span>
+    <span class="n">roof_back</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">14.4</span>
+    <span class="n">roof_back</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span>
+    <span class="n">roof_back</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="mf">7.4</span>
+
+    <span class="n">ks</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.14</span><span class="p">]</span>
+    <span class="n">materials</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Plasterboard&#39;</span><span class="p">,</span> <span class="s1">&#39;Fiberglass quilt&#39;</span><span class="p">,</span> <span class="s1">&#39;Roofdeck&#39;</span><span class="p">]</span>
+    <span class="n">thicknesses</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.010</span><span class="p">,</span> <span class="mf">0.1118</span><span class="p">,</span> <span class="mf">0.019</span><span class="p">]</span>
+    <span class="n">densities</span> <span class="o">=</span> <span class="p">[</span><span class="mi">950</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">530</span><span class="p">]</span>
+    <span class="n">c_ps</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.840</span><span class="p">,</span> <span class="mf">0.840</span><span class="p">,</span> <span class="mf">0.900</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">layer_id</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">matname</span><span class="p">,</span> <span class="n">thickness</span><span class="p">,</span> <span class="n">density</span><span class="p">,</span> <span class="n">c_p</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span>
+        <span class="n">ks</span><span class="p">,</span> <span class="n">materials</span><span class="p">,</span> <span class="n">thicknesses</span><span class="p">,</span> <span class="n">densities</span><span class="p">,</span> <span class="n">c_ps</span>
+    <span class="p">)):</span>
+        <span class="n">layer</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">roof_back</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">layer_id</span><span class="p">)</span>
+        <span class="n">layer</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="n">thickness</span>
+        <span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+        <span class="n">material</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">matname</span>
+        <span class="n">material</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="n">density</span>
+        <span class="n">material</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="n">c_p</span>
+        <span class="n">material</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="n">k</span>
+        <span class="n">material</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+        <span class="n">material</span><span class="o">.</span><span class="n">solar_absorp</span> <span class="o">=</span> <span class="mf">0.6</span>
+
+    <span class="n">out_wall_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;OuterWall_north&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+                     <span class="s2">&quot;OuterWall_east&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">14.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">],</span>
+                     <span class="s2">&quot;OuterWall_west&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">14.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">270.0</span><span class="p">]}</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">out_wall_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="c1"># Instantiate class, key is the name</span>
+        <span class="n">out_wall</span> <span class="o">=</span> <span class="n">OuterWall</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz1</span><span class="p">)</span>
+        <span class="n">out_wall</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="n">ks</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.14</span><span class="p">]</span>
+        <span class="n">materials</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Plasterboard&#39;</span><span class="p">,</span> <span class="s1">&#39;Fiberglass quilt&#39;</span><span class="p">,</span> <span class="s1">&#39;Wood siding&#39;</span><span class="p">]</span>
+        <span class="n">thicknesses</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.012</span><span class="p">,</span> <span class="mf">0.066</span><span class="p">,</span> <span class="mf">0.009</span><span class="p">]</span>
+        <span class="n">densities</span> <span class="o">=</span> <span class="p">[</span><span class="mi">950</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">530</span><span class="p">]</span>
+        <span class="n">c_ps</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.840</span><span class="p">,</span> <span class="mf">0.840</span><span class="p">,</span> <span class="mf">0.900</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">layer_id</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">matname</span><span class="p">,</span> <span class="n">thickness</span><span class="p">,</span> <span class="n">density</span><span class="p">,</span> <span class="n">c_p</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span>
+                <span class="n">ks</span><span class="p">,</span> <span class="n">materials</span><span class="p">,</span> <span class="n">thicknesses</span><span class="p">,</span> <span class="n">densities</span><span class="p">,</span> <span class="n">c_ps</span>
+        <span class="p">)):</span>
+            <span class="n">layer</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">out_wall</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">layer_id</span><span class="p">)</span>
+            <span class="n">layer</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="n">thickness</span>
+            <span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">matname</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="n">density</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="n">c_p</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="n">k</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">solar_absorp</span> <span class="o">=</span> <span class="mf">0.6</span>
+        <span class="c1"># area, tilt and orientation need to be set individually.</span>
+        <span class="n">out_wall</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">out_wall</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">out_wall</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">out_wall</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">2.2</span>
+        <span class="n">out_wall</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">11.9</span>
+        <span class="n">out_wall</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.4</span>
+        <span class="n">out_wall</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="mf">9.7</span>
+
+    <span class="c1"># For ground floors the orientation is always -2</span>
+    <span class="n">ground_floor_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;GroundFloor&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">48.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]}</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">ground_floor_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">ground</span> <span class="o">=</span> <span class="n">GroundFloor</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz1</span><span class="p">)</span>
+        <span class="n">ground</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="n">ks</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.14</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">]</span>
+        <span class="n">materials</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Timber flooring&#39;</span><span class="p">,</span> <span class="s1">&#39;Insulation&#39;</span><span class="p">]</span>
+        <span class="n">thicknesses</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.025</span><span class="p">,</span> <span class="mf">1.003</span><span class="p">]</span>
+        <span class="n">densities</span> <span class="o">=</span> <span class="p">[</span><span class="mi">650</span><span class="p">,</span> <span class="mf">0.00001</span><span class="p">]</span>
+        <span class="n">c_ps</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.000001</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">layer_id</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">matname</span><span class="p">,</span> <span class="n">thickness</span><span class="p">,</span> <span class="n">density</span><span class="p">,</span> <span class="n">c_p</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span>
+                <span class="n">ks</span><span class="p">,</span> <span class="n">materials</span><span class="p">,</span> <span class="n">thicknesses</span><span class="p">,</span> <span class="n">densities</span><span class="p">,</span> <span class="n">c_ps</span>
+        <span class="p">)):</span>
+            <span class="n">layer</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">ground</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">layer_id</span><span class="p">)</span>
+            <span class="n">layer</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="n">thickness</span>
+            <span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">matname</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="n">density</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="n">c_p</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="n">k</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">solar_absorp</span> <span class="o">=</span> <span class="mf">0.6</span>
+        <span class="n">ground</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">ground</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">ground</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">ground</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">2.2</span>
+        <span class="n">ground</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">0.8</span>
+        <span class="n">ground</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="mf">1.5</span>
+        <span class="n">ground</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="mf">4.4</span>
+
+    <span class="c1"># build up rooftop</span>
+    <span class="n">roof</span> <span class="o">=</span> <span class="n">Rooftop</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz2</span><span class="p">)</span>
+    <span class="n">roof</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;roof_sun&quot;</span>
+    <span class="n">roof</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">tz1</span><span class="o">.</span><span class="n">area</span>
+    <span class="n">roof</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">roof</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">roof</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">1.8</span>
+    <span class="n">roof</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">14.4</span>
+    <span class="n">roof</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span>
+    <span class="n">roof</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="mf">7.4</span>
+
+    <span class="n">ks</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.14</span><span class="p">]</span>
+    <span class="n">materials</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Plasterboard&#39;</span><span class="p">,</span> <span class="s1">&#39;Fiberglass quilt&#39;</span><span class="p">,</span> <span class="s1">&#39;Roofdeck&#39;</span><span class="p">]</span>
+    <span class="n">thicknesses</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.010</span><span class="p">,</span> <span class="mf">0.1118</span><span class="p">,</span> <span class="mf">0.019</span><span class="p">]</span>
+    <span class="n">densities</span> <span class="o">=</span> <span class="p">[</span><span class="mi">950</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">530</span><span class="p">]</span>
+    <span class="n">c_ps</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.840</span><span class="p">,</span> <span class="mf">0.840</span><span class="p">,</span> <span class="mf">0.900</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">layer_id</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">matname</span><span class="p">,</span> <span class="n">thickness</span><span class="p">,</span> <span class="n">density</span><span class="p">,</span> <span class="n">c_p</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span>
+        <span class="n">ks</span><span class="p">,</span> <span class="n">materials</span><span class="p">,</span> <span class="n">thicknesses</span><span class="p">,</span> <span class="n">densities</span><span class="p">,</span> <span class="n">c_ps</span>
+    <span class="p">)):</span>
+        <span class="n">layer</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">roof</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">layer_id</span><span class="p">)</span>
+        <span class="n">layer</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="n">thickness</span>
+        <span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+        <span class="n">material</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">matname</span>
+        <span class="n">material</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="n">density</span>
+        <span class="n">material</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="n">c_p</span>
+        <span class="n">material</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="n">k</span>
+        <span class="n">material</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+        <span class="n">material</span><span class="o">.</span><span class="n">solar_absorp</span> <span class="o">=</span> <span class="mf">0.6</span>
+
+    <span class="n">out_wall_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;OuterWall_south&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">8</span><span class="o">*</span><span class="mf">2.7</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">],</span>
+                     <span class="s2">&quot;OuterWall_east&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">5.4</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">],</span>
+                     <span class="s2">&quot;OuterWall_west&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">5.4</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">270.0</span><span class="p">]}</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">out_wall_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="c1"># Instantiate class, key is the name</span>
+        <span class="n">out_wall</span> <span class="o">=</span> <span class="n">OuterWall</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz2</span><span class="p">)</span>
+        <span class="n">out_wall</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="n">ks</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.51</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.14</span><span class="p">]</span>
+        <span class="n">materials</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Concrete block&#39;</span><span class="p">,</span> <span class="s1">&#39;Foam insulation&#39;</span><span class="p">,</span> <span class="s1">&#39;Wood siding&#39;</span><span class="p">]</span>
+        <span class="n">thicknesses</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0615</span><span class="p">,</span> <span class="mf">0.009</span><span class="p">]</span>
+        <span class="n">densities</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1400</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">530</span><span class="p">]</span>
+        <span class="n">c_ps</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mf">0.900</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">layer_id</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">matname</span><span class="p">,</span> <span class="n">thickness</span><span class="p">,</span> <span class="n">density</span><span class="p">,</span> <span class="n">c_p</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span>
+                <span class="n">ks</span><span class="p">,</span> <span class="n">materials</span><span class="p">,</span> <span class="n">thicknesses</span><span class="p">,</span> <span class="n">densities</span><span class="p">,</span> <span class="n">c_ps</span>
+        <span class="p">)):</span>
+            <span class="n">layer</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">out_wall</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">layer_id</span><span class="p">)</span>
+            <span class="n">layer</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="n">thickness</span>
+            <span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">matname</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="n">density</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="n">c_p</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="n">k</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">solar_absorp</span> <span class="o">=</span> <span class="mf">0.6</span>
+        <span class="c1"># area, tilt and orientation need to be set individually.</span>
+        <span class="n">out_wall</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">out_wall</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">out_wall</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">out_wall</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">2.2</span>
+        <span class="n">out_wall</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">11.9</span>
+        <span class="n">out_wall</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.4</span>
+        <span class="n">out_wall</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="mf">9.7</span>
+
+    <span class="c1"># For ground floors the orientation is always -2</span>
+    <span class="n">ground_floor_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;GroundFloor&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">16.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]}</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">ground_floor_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">ground</span> <span class="o">=</span> <span class="n">GroundFloor</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz2</span><span class="p">)</span>
+        <span class="n">ground</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="n">ks</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.13</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">]</span>
+        <span class="n">materials</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Concrete slab&#39;</span><span class="p">,</span> <span class="s1">&#39;Insulation&#39;</span><span class="p">]</span>
+        <span class="n">thicknesses</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.080</span><span class="p">,</span> <span class="mf">1.007</span><span class="p">]</span>
+        <span class="n">densities</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1400</span><span class="p">,</span> <span class="mf">0.00001</span><span class="p">]</span>
+        <span class="n">c_ps</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.000001</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">layer_id</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">matname</span><span class="p">,</span> <span class="n">thickness</span><span class="p">,</span> <span class="n">density</span><span class="p">,</span> <span class="n">c_p</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span>
+                <span class="n">ks</span><span class="p">,</span> <span class="n">materials</span><span class="p">,</span> <span class="n">thicknesses</span><span class="p">,</span> <span class="n">densities</span><span class="p">,</span> <span class="n">c_ps</span>
+        <span class="p">)):</span>
+            <span class="n">layer</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">ground</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">layer_id</span><span class="p">)</span>
+            <span class="n">layer</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="n">thickness</span>
+            <span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">matname</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="n">density</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="n">c_p</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="n">k</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">solar_absorp</span> <span class="o">=</span> <span class="mf">0.6</span>
+        <span class="n">ground</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">ground</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">ground</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">ground</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">2.2</span>
+        <span class="n">ground</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">0.8</span>
+        <span class="n">ground</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="mf">1.5</span>
+        <span class="n">ground</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="mf">4.4</span>
+
+    <span class="n">win_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Window_south1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">6.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">],</span>
+                <span class="s2">&quot;Window_south2&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">6.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">]}</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">win_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">win</span> <span class="o">=</span> <span class="n">Window</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz2</span><span class="p">)</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">2.4</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="mf">2.1</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">8.0</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="mf">9.8</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">g_value</span> <span class="o">=</span> <span class="mf">0.769</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">a_conv</span> <span class="o">=</span> <span class="mf">0.03</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">shading_g_total</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">shading_max_irr</span> <span class="o">=</span> <span class="mf">10000.0</span>
+
+        <span class="c1"># One equivalent layer for windows</span>
+        <span class="n">win_layer</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">win</span><span class="p">)</span>
+        <span class="n">win_layer</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">win_layer</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.47650</span> <span class="o">-</span> <span class="mf">0.22222</span> <span class="o">-</span> <span class="mf">0.05618</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1</span>
+        <span class="c1"># Material for glass</span>
+        <span class="n">win_material</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">win_layer</span><span class="p">)</span>
+        <span class="n">win_material</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;GlasWindow&quot;</span>
+        <span class="n">win_material</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">win_material</span><span class="o">.</span><span class="n">transmittance</span> <span class="o">=</span> <span class="mf">0.834</span> <span class="o">*</span> <span class="mf">0.834</span>
+
+    <span class="c1"># finally, add the zone boundary (for each zone)</span>
+    <span class="k">for</span> <span class="n">tzfront</span><span class="p">,</span> <span class="n">tzback</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="n">tz1</span><span class="p">,</span> <span class="n">tz2</span><span class="p">],</span> <span class="p">[</span><span class="n">tz2</span><span class="p">,</span> <span class="n">tz1</span><span class="p">]):</span>
+        <span class="n">boundary</span> <span class="o">=</span> <span class="n">InterzonalWall</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tzfront</span><span class="p">,</span> <span class="n">other_side</span><span class="o">=</span><span class="n">tzback</span><span class="p">)</span>
+        <span class="n">boundary</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;floor_4C797480FF814849944536D7EDE2A122_2&quot;</span>
+        <span class="n">boundary</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mf">48.90700957621479</span>
+        <span class="n">boundary</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">boundary</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="c1"># this is unclear, taking wall values</span>
+        <span class="n">boundary</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">2.2</span>
+        <span class="n">boundary</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">11.9</span>
+        <span class="n">boundary</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.4</span>
+        <span class="n">boundary</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="mf">9.7</span>
+
+        <span class="c1"># First layer: concrete</span>
+        <span class="n">layer_mc1</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">boundary</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">layer_mc1</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.2</span>
+        <span class="n">material_mc1</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_mc1</span><span class="p">)</span>
+        <span class="n">material_mc1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;boundary_material&quot;</span>
+        <span class="n">material_mc1</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mf">1400.0</span>
+        <span class="n">material_mc1</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">material_mc1</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.51</span>
+        <span class="n">material_mc1</span><span class="o">.</span><span class="n">solar_absorp</span> <span class="o">=</span> <span class="mf">0.6</span>
+        <span class="n">material_mc1</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">=</span> <span class="mf">0.9</span>
+
+    <span class="c1"># 1. the soil temperature is set to the temperature measured on the contact</span>
+    <span class="c1">#    surface between building element and soil</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">t_soil_mode</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">t_soil_file_path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+        <span class="s2">&quot;examples/examplefiles/t_soil_from_ashrae_140_air_temp.txt&quot;</span>
+    <span class="p">)</span>
+    <span class="c1"># 2. the weather is set to the actual weather at the time</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">weather_file_path</span> <span class="o">=</span> <span class="s2">&quot;modelica://AixLib/Resources/WeatherData/ASHRAE140.mos&quot;</span>
+
+    <span class="c1"># for the calculation, we choose number of elements 5 and library AixLib</span>
+    <span class="k">for</span> <span class="n">building</span> <span class="ow">in</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">:</span>
+        <span class="n">building</span><span class="o">.</span><span class="n">calc_building_parameter</span><span class="p">(</span>
+            <span class="n">number_of_elements</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">used_library</span><span class="o">=</span><span class="s2">&quot;AixLib&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">export_path</span> <span class="o">=</span> <span class="n">prj</span><span class="o">.</span><span class="n">export_aixlib</span><span class="p">()</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">prj1</span> <span class="o">=</span> <span class="n">example_interzonal_single_building</span><span class="p">()</span>
+    <span class="n">prj2</span> <span class="o">=</span> <span class="n">example_interzonal_ashrae_960</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 11: That&#39;s it! :)&quot;</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

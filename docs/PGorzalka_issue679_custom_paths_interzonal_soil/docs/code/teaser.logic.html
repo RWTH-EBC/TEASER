@@ -1,0 +1,504 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser.logic package &mdash; TEASER 1.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=292eb321"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="teaser.logic.archetypebuildings package" href="teaser.logic.archetypebuildings.html" />
+    <link rel="prev" title="teaser.examples.verification package" href="teaser.examples.verification.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            TEASER
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">teaser</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="teaser.html">teaser package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="teaser.html#teaser">teaser</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="teaser.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html">teaser.data package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.examples.html">teaser.examples package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">teaser.logic package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="teaser.logic.archetypebuildings.html">teaser.logic.archetypebuildings package</a></li>
+<li class="toctree-l6"><a class="reference internal" href="teaser.logic.buildingobjects.html">teaser.logic.buildingobjects package</a></li>
+<li class="toctree-l6"><a class="reference internal" href="teaser.logic.simulation.html">teaser.logic.simulation package</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.logic.retrofit">teaser.logic.retrofit module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.logic.retrofit.component_based_retrofit"><code class="docutils literal notranslate"><span class="pre">component_based_retrofit()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.logic.retrofit.generate_buildings_for_all_element_combinations"><code class="docutils literal notranslate"><span class="pre">generate_buildings_for_all_element_combinations()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.logic.utilities">teaser.logic.utilities module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.logic.utilities.celsius_to_kelvin"><code class="docutils literal notranslate"><span class="pre">celsius_to_kelvin()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.logic.utilities.clear_directory"><code class="docutils literal notranslate"><span class="pre">clear_directory()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.logic.utilities.create_path"><code class="docutils literal notranslate"><span class="pre">create_path()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.logic.utilities.division_from_json"><code class="docutils literal notranslate"><span class="pre">division_from_json()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.logic.utilities.get_default_path"><code class="docutils literal notranslate"><span class="pre">get_default_path()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.logic.utilities.get_full_path"><code class="docutils literal notranslate"><span class="pre">get_full_path()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.html#module-teaser.project">teaser.project module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">teaser</a></li>
+          <li class="breadcrumb-item"><a href="teaser.html">teaser package</a></li>
+      <li class="breadcrumb-item active">teaser.logic package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/code/teaser.logic.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-teaser.logic">
+<span id="teaser-logic-package"></span><h1>teaser.logic package<a class="headerlink" href="#module-teaser.logic" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="teaser.logic.archetypebuildings.html">teaser.logic.archetypebuildings package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.archetypebuildings.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.archetypebuildings.bmvbs.html">teaser.logic.archetypebuildings.bmvbs package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.bmvbs.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.bmvbs.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.bmvbs.html#module-teaser.logic.archetypebuildings.bmvbs.office">teaser.logic.archetypebuildings.bmvbs.office module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.bmvbs.html#module-teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling">teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.archetypebuildings.tabula.html">teaser.logic.archetypebuildings.tabula package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.tabula.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.archetypebuildings.urbanrenet.html">teaser.logic.archetypebuildings.urbanrenet package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.urbanrenet.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.urbanrenet.html#module-teaser.logic.archetypebuildings.urbanrenet.est1a">teaser.logic.archetypebuildings.urbanrenet.est1a module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.urbanrenet.html#module-teaser.logic.archetypebuildings.urbanrenet.est1b">teaser.logic.archetypebuildings.urbanrenet.est1b module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.urbanrenet.html#module-teaser.logic.archetypebuildings.urbanrenet.est2">teaser.logic.archetypebuildings.urbanrenet.est2 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.urbanrenet.html#module-teaser.logic.archetypebuildings.urbanrenet.est3">teaser.logic.archetypebuildings.urbanrenet.est3 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.urbanrenet.html#module-teaser.logic.archetypebuildings.urbanrenet.est4a">teaser.logic.archetypebuildings.urbanrenet.est4a module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.urbanrenet.html#module-teaser.logic.archetypebuildings.urbanrenet.est4b">teaser.logic.archetypebuildings.urbanrenet.est4b module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.urbanrenet.html#module-teaser.logic.archetypebuildings.urbanrenet.est5">teaser.logic.archetypebuildings.urbanrenet.est5 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.urbanrenet.html#module-teaser.logic.archetypebuildings.urbanrenet.est6">teaser.logic.archetypebuildings.urbanrenet.est6 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.urbanrenet.html#module-teaser.logic.archetypebuildings.urbanrenet.est7">teaser.logic.archetypebuildings.urbanrenet.est7 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.urbanrenet.html#module-teaser.logic.archetypebuildings.urbanrenet.est8a">teaser.logic.archetypebuildings.urbanrenet.est8a module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.urbanrenet.html#module-teaser.logic.archetypebuildings.urbanrenet.est8b">teaser.logic.archetypebuildings.urbanrenet.est8b module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.archetypebuildings.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.archetypebuildings.html#module-teaser.logic.archetypebuildings.nonresidential">teaser.logic.archetypebuildings.nonresidential module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.archetypebuildings.html#teaser.logic.archetypebuildings.nonresidential.NonResidential"><code class="docutils literal notranslate"><span class="pre">NonResidential</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.html#teaser.logic.archetypebuildings.nonresidential.NonResidential.generate_archetype"><code class="docutils literal notranslate"><span class="pre">NonResidential.generate_archetype()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.archetypebuildings.html#module-teaser.logic.archetypebuildings.residential">teaser.logic.archetypebuildings.residential module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.archetypebuildings.html#teaser.logic.archetypebuildings.residential.Residential"><code class="docutils literal notranslate"><span class="pre">Residential</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.archetypebuildings.html#teaser.logic.archetypebuildings.residential.Residential.generate_archetype"><code class="docutils literal notranslate"><span class="pre">Residential.generate_archetype()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="teaser.logic.buildingobjects.html">teaser.logic.buildingobjects package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html">teaser.logic.buildingobjects.buildingphysics package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.buildingelement">teaser.logic.buildingobjects.buildingphysics.buildingelement module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.ceiling">teaser.logic.buildingobjects.buildingphysics.ceiling module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.door">teaser.logic.buildingobjects.buildingphysics.door module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.floor">teaser.logic.buildingobjects.buildingphysics.floor module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.groundfloor">teaser.logic.buildingobjects.buildingphysics.groundfloor module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.innerwall">teaser.logic.buildingobjects.buildingphysics.innerwall module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.interzonalceiling">teaser.logic.buildingobjects.buildingphysics.interzonalceiling module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.interzonalfloor">teaser.logic.buildingobjects.buildingphysics.interzonalfloor module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.interzonalwall">teaser.logic.buildingobjects.buildingphysics.interzonalwall module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.layer">teaser.logic.buildingobjects.buildingphysics.layer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.material">teaser.logic.buildingobjects.buildingphysics.material module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.outerwall">teaser.logic.buildingobjects.buildingphysics.outerwall module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.rooftop">teaser.logic.buildingobjects.buildingphysics.rooftop module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.wall">teaser.logic.buildingobjects.buildingphysics.wall module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingphysics.html#module-teaser.logic.buildingobjects.buildingphysics.window">teaser.logic.buildingobjects.buildingphysics.window module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.buildingsystems.html">teaser.logic.buildingobjects.buildingsystems package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingsystems.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.buildingsystems.html#module-teaser.logic.buildingobjects.buildingsystems.buildingahu">teaser.logic.buildingobjects.buildingsystems.buildingahu module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html">teaser.logic.buildingobjects.calculation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#module-teaser.logic.buildingobjects.calculation.aixlib">teaser.logic.buildingobjects.calculation.aixlib module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#module-teaser.logic.buildingobjects.calculation.five_element">teaser.logic.buildingobjects.calculation.five_element module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#module-teaser.logic.buildingobjects.calculation.four_element">teaser.logic.buildingobjects.calculation.four_element module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#module-teaser.logic.buildingobjects.calculation.ibpsa">teaser.logic.buildingobjects.calculation.ibpsa module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#module-teaser.logic.buildingobjects.calculation.one_element">teaser.logic.buildingobjects.calculation.one_element module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#module-teaser.logic.buildingobjects.calculation.three_element">teaser.logic.buildingobjects.calculation.three_element module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html#module-teaser.logic.buildingobjects.calculation.two_element">teaser.logic.buildingobjects.calculation.two_element module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.html#module-teaser.logic.buildingobjects.building">teaser.logic.buildingobjects.building module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building"><code class="docutils literal notranslate"><span class="pre">Building</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.add_zone"><code class="docutils literal notranslate"><span class="pre">Building.add_zone()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.calc_building_parameter"><code class="docutils literal notranslate"><span class="pre">Building.calc_building_parameter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.central_ahu"><code class="docutils literal notranslate"><span class="pre">Building.central_ahu</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.fill_outer_area_dict"><code class="docutils literal notranslate"><span class="pre">Building.fill_outer_area_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.fill_window_area_dict"><code class="docutils literal notranslate"><span class="pre">Building.fill_window_area_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.get_inner_wall_area"><code class="docutils literal notranslate"><span class="pre">Building.get_inner_wall_area()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.get_outer_wall_area"><code class="docutils literal notranslate"><span class="pre">Building.get_outer_wall_area()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.get_window_area"><code class="docutils literal notranslate"><span class="pre">Building.get_window_area()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.height_of_floors"><code class="docutils literal notranslate"><span class="pre">Building.height_of_floors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.inner_wall_approximation_approach"><code class="docutils literal notranslate"><span class="pre">Building.inner_wall_approximation_approach</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.merge_windows_calc"><code class="docutils literal notranslate"><span class="pre">Building.merge_windows_calc</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.name"><code class="docutils literal notranslate"><span class="pre">Building.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.net_leased_area"><code class="docutils literal notranslate"><span class="pre">Building.net_leased_area</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.number_of_elements_calc"><code class="docutils literal notranslate"><span class="pre">Building.number_of_elements_calc</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.number_of_floors"><code class="docutils literal notranslate"><span class="pre">Building.number_of_floors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.outer_area"><code class="docutils literal notranslate"><span class="pre">Building.outer_area</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.parent"><code class="docutils literal notranslate"><span class="pre">Building.parent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.retrofit_building"><code class="docutils literal notranslate"><span class="pre">Building.retrofit_building()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.rotate_building"><code class="docutils literal notranslate"><span class="pre">Building.rotate_building()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.set_outer_wall_area"><code class="docutils literal notranslate"><span class="pre">Building.set_outer_wall_area()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.set_window_area"><code class="docutils literal notranslate"><span class="pre">Building.set_window_area()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.thermal_zones"><code class="docutils literal notranslate"><span class="pre">Building.thermal_zones</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.used_library_calc"><code class="docutils literal notranslate"><span class="pre">Building.used_library_calc</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.window_area"><code class="docutils literal notranslate"><span class="pre">Building.window_area</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.with_ahu"><code class="docutils literal notranslate"><span class="pre">Building.with_ahu</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.year_of_construction"><code class="docutils literal notranslate"><span class="pre">Building.year_of_construction</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.year_of_retrofit"><code class="docutils literal notranslate"><span class="pre">Building.year_of_retrofit</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.html#module-teaser.logic.buildingobjects.thermalzone">teaser.logic.buildingobjects.thermalzone module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone"><code class="docutils literal notranslate"><span class="pre">ThermalZone</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.add_element"><code class="docutils literal notranslate"><span class="pre">ThermalZone.add_element()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.area"><code class="docutils literal notranslate"><span class="pre">ThermalZone.area</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.calc_zone_parameters"><code class="docutils literal notranslate"><span class="pre">ThermalZone.calc_zone_parameters()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.ceilings"><code class="docutils literal notranslate"><span class="pre">ThermalZone.ceilings</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.delete"><code class="docutils literal notranslate"><span class="pre">ThermalZone.delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.doors"><code class="docutils literal notranslate"><span class="pre">ThermalZone.doors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_doors"><code class="docutils literal notranslate"><span class="pre">ThermalZone.find_doors()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_gfs"><code class="docutils literal notranslate"><span class="pre">ThermalZone.find_gfs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_izes_outer"><code class="docutils literal notranslate"><span class="pre">ThermalZone.find_izes_outer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_rts"><code class="docutils literal notranslate"><span class="pre">ThermalZone.find_rts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_walls"><code class="docutils literal notranslate"><span class="pre">ThermalZone.find_walls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_wins"><code class="docutils literal notranslate"><span class="pre">ThermalZone.find_wins()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.floors"><code class="docutils literal notranslate"><span class="pre">ThermalZone.floors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.ground_floors"><code class="docutils literal notranslate"><span class="pre">ThermalZone.ground_floors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.height_of_floors"><code class="docutils literal notranslate"><span class="pre">ThermalZone.height_of_floors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.infiltration_rate"><code class="docutils literal notranslate"><span class="pre">ThermalZone.infiltration_rate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.inner_walls"><code class="docutils literal notranslate"><span class="pre">ThermalZone.inner_walls</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.interzonal_ceilings"><code class="docutils literal notranslate"><span class="pre">ThermalZone.interzonal_ceilings</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.interzonal_elements"><code class="docutils literal notranslate"><span class="pre">ThermalZone.interzonal_elements</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.interzonal_floors"><code class="docutils literal notranslate"><span class="pre">ThermalZone.interzonal_floors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.interzonal_walls"><code class="docutils literal notranslate"><span class="pre">ThermalZone.interzonal_walls</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.name"><code class="docutils literal notranslate"><span class="pre">ThermalZone.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.number_of_floors"><code class="docutils literal notranslate"><span class="pre">ThermalZone.number_of_floors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.outer_walls"><code class="docutils literal notranslate"><span class="pre">ThermalZone.outer_walls</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.parent"><code class="docutils literal notranslate"><span class="pre">ThermalZone.parent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.retrofit_zone"><code class="docutils literal notranslate"><span class="pre">ThermalZone.retrofit_zone()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.rooftops"><code class="docutils literal notranslate"><span class="pre">ThermalZone.rooftops</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.set_inner_wall_area"><code class="docutils literal notranslate"><span class="pre">ThermalZone.set_inner_wall_area()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.set_volume_zone"><code class="docutils literal notranslate"><span class="pre">ThermalZone.set_volume_zone()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.t_ground"><code class="docutils literal notranslate"><span class="pre">ThermalZone.t_ground</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.t_ground_amplitude"><code class="docutils literal notranslate"><span class="pre">ThermalZone.t_ground_amplitude</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.t_inside"><code class="docutils literal notranslate"><span class="pre">ThermalZone.t_inside</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.t_outside"><code class="docutils literal notranslate"><span class="pre">ThermalZone.t_outside</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.use_conditions"><code class="docutils literal notranslate"><span class="pre">ThermalZone.use_conditions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.volume"><code class="docutils literal notranslate"><span class="pre">ThermalZone.volume</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.windows"><code class="docutils literal notranslate"><span class="pre">ThermalZone.windows</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.buildingobjects.html#module-teaser.logic.buildingobjects.useconditions">teaser.logic.buildingobjects.useconditions module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions"><code class="docutils literal notranslate"><span class="pre">UseConditions</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.adjust_profile_by_opening"><code class="docutils literal notranslate"><span class="pre">UseConditions.adjust_profile_by_opening()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.adjust_profile_by_weekend"><code class="docutils literal notranslate"><span class="pre">UseConditions.adjust_profile_by_weekend()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.adjusted_opening_times"><code class="docutils literal notranslate"><span class="pre">UseConditions.adjusted_opening_times</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.calc_adj_schedules"><code class="docutils literal notranslate"><span class="pre">UseConditions.calc_adj_schedules()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.cooling_profile"><code class="docutils literal notranslate"><span class="pre">UseConditions.cooling_profile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.first_saturday_of_year"><code class="docutils literal notranslate"><span class="pre">UseConditions.first_saturday_of_year</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.heating_profile"><code class="docutils literal notranslate"><span class="pre">UseConditions.heating_profile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.is_periodic"><code class="docutils literal notranslate"><span class="pre">UseConditions.is_periodic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.lighting_power"><code class="docutils literal notranslate"><span class="pre">UseConditions.lighting_power</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.lighting_profile"><code class="docutils literal notranslate"><span class="pre">UseConditions.lighting_profile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.load_use_conditions"><code class="docutils literal notranslate"><span class="pre">UseConditions.load_use_conditions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.machines_profile"><code class="docutils literal notranslate"><span class="pre">UseConditions.machines_profile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.parent"><code class="docutils literal notranslate"><span class="pre">UseConditions.parent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.persons"><code class="docutils literal notranslate"><span class="pre">UseConditions.persons</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.persons_profile"><code class="docutils literal notranslate"><span class="pre">UseConditions.persons_profile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.save_use_conditions"><code class="docutils literal notranslate"><span class="pre">UseConditions.save_use_conditions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.schedules"><code class="docutils literal notranslate"><span class="pre">UseConditions.schedules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.set_back_times"><code class="docutils literal notranslate"><span class="pre">UseConditions.set_back_times</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.use_maintained_illuminance"><code class="docutils literal notranslate"><span class="pre">UseConditions.use_maintained_illuminance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.with_ideal_thresholds"><code class="docutils literal notranslate"><span class="pre">UseConditions.with_ideal_thresholds</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="teaser.logic.simulation.html">teaser.logic.simulation package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.simulation.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.logic.simulation.html#module-teaser.logic.simulation.modelicainfo">teaser.logic.simulation.modelicainfo module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.logic.simulation.html#teaser.logic.simulation.modelicainfo.ModelicaInfo"><code class="docutils literal notranslate"><span class="pre">ModelicaInfo</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-teaser.logic.retrofit">
+<span id="teaser-logic-retrofit-module"></span><h2>teaser.logic.retrofit module<a class="headerlink" href="#module-teaser.logic.retrofit" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.logic.retrofit.component_based_retrofit">
+<span class="sig-prename descclassname"><span class="pre">teaser.logic.retrofit.</span></span><span class="sig-name descname"><span class="pre">component_based_retrofit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">building</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building" title="teaser.logic.buildingobjects.building.Building"><span class="pre">Building</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">element_retrofit_stats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/retrofit.html#component_based_retrofit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.retrofit.component_based_retrofit" title="Link to this definition"></a></dt>
+<dd><p>Apply component-based retrofits to a building based on specified retrofit statuses.</p>
+<p>This function applies retrofits to specific building elements (e.g., walls, windows)
+based on the provided retrofit statuses.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>building</strong><span class="classifier">Building</span></dt><dd><p>The building object to be retrofitted.</p>
+</dd>
+<dt><strong>element_retrofit_stats</strong><span class="classifier">dict</span></dt><dd><p>A dictionary specifying the retrofit status for each
+building element. Keys are element names (e.g., ‘outer_walls’),
+and values are retrofit options (e.g., ‘standard’, ‘retrofit’).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.logic.retrofit.generate_buildings_for_all_element_combinations">
+<span class="sig-prename descclassname"><span class="pre">teaser.logic.retrofit.</span></span><span class="sig-name descname"><span class="pre">generate_buildings_for_all_element_combinations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_add_building_function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_building_function_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retrofit_choices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/retrofit.html#generate_buildings_for_all_element_combinations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.retrofit.generate_buildings_for_all_element_combinations" title="Link to this definition"></a></dt>
+<dd><p>Generate buildings for all possible combinations of
+retrofit statuses for specified building elements.</p>
+<p>This function creates multiple variations of a building based
+on different retrofit options for specified building elements.
+It’s designed to work with TABULA archetypes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>project_add_building_function</strong><span class="classifier">callable</span></dt><dd><p>Function to add a building to the project.</p>
+</dd>
+<dt><strong>add_building_function_kwargs</strong><span class="classifier">dict</span></dt><dd><p>Keyword arguments for the add_building function.</p>
+</dd>
+<dt><strong>elements</strong><span class="classifier">list, optional</span></dt><dd><p>List of building elements to consider for retrofit.
+Defaults to [‘outer_walls’, ‘windows’, ‘rooftops’, ‘ground_floors’].</p>
+</dd>
+<dt><strong>retrofit_choices</strong><span class="classifier">list, optional</span></dt><dd><p>List of retrofit options to consider.
+Defaults to [‘standard’, ‘retrofit’, ‘adv_retrofit’].</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>list: A list of names of the generated buildings.</dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ValueError: If unsupported elements or retrofit choices are provided, or if the</dt><dd><p>construction data is not from TABULA DE or DK.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-teaser.logic.utilities">
+<span id="teaser-logic-utilities-module"></span><h2>teaser.logic.utilities module<a class="headerlink" href="#module-teaser.logic.utilities" title="Link to this heading"></a></h2>
+<p>Utilities: Collection of all utility functions that are useful in several
+classes</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.logic.utilities.celsius_to_kelvin">
+<span class="sig-prename descclassname"><span class="pre">teaser.logic.utilities.</span></span><span class="sig-name descname"><span class="pre">celsius_to_kelvin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/utilities.html#celsius_to_kelvin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.utilities.celsius_to_kelvin" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.logic.utilities.clear_directory">
+<span class="sig-prename descclassname"><span class="pre">teaser.logic.utilities.</span></span><span class="sig-name descname"><span class="pre">clear_directory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/utilities.html#clear_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.utilities.clear_directory" title="Link to this definition"></a></dt>
+<dd><p>Function to delete all files inside a directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dir_path</strong><span class="classifier">str</span></dt><dd><p>Path of directory to be deleted. By default the teaser default
+directory is cleared</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.logic.utilities.create_path">
+<span class="sig-prename descclassname"><span class="pre">teaser.logic.utilities.</span></span><span class="sig-name descname"><span class="pre">create_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/utilities.html#create_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.utilities.create_path" title="Link to this definition"></a></dt>
+<dd><p>Create a folder.</p>
+<p>Creates a new folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>path</strong><span class="classifier">str</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.logic.utilities.division_from_json">
+<span class="sig-prename descclassname"><span class="pre">teaser.logic.utilities.</span></span><span class="sig-name descname"><span class="pre">division_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ordereddict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/utilities.html#division_from_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.utilities.division_from_json" title="Link to this definition"></a></dt>
+<dd><p>function to transform the output of division in json after loading to
+python into float values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>ordereddict</strong><span class="classifier">output of the json load of arguments like</span></dt><dd></dd>
+<dt><strong>“persons”: {“/”:[1,15]}</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.logic.utilities.get_default_path">
+<span class="sig-prename descclassname"><span class="pre">teaser.logic.utilities.</span></span><span class="sig-name descname"><span class="pre">get_default_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/utilities.html#get_default_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.utilities.get_default_path" title="Link to this definition"></a></dt>
+<dd><p>Function to construct default path to OutputData folder
+This function constructs the default path to the OutputData folder</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.logic.utilities.get_full_path">
+<span class="sig-prename descclassname"><span class="pre">teaser.logic.utilities.</span></span><span class="sig-name descname"><span class="pre">get_full_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rel_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/utilities.html#get_full_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.utilities.get_full_path" title="Link to this definition"></a></dt>
+<dd><p>Helperfunction to construct pathes to files within teaser.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>rel_path</strong><span class="classifier">str</span></dt><dd><p>Relative path beginning from teaser source folder including
+filename</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>full_path</strong><span class="classifier">str</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="teaser.examples.verification.html" class="btn btn-neutral float-left" title="teaser.examples.verification package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="teaser.logic.archetypebuildings.html" class="btn btn-neutral float-right" title="teaser.logic.archetypebuildings package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

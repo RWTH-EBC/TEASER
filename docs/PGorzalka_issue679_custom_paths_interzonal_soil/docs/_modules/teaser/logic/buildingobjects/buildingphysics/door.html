@@ -1,0 +1,302 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser.logic.buildingobjects.buildingphysics.door &mdash; TEASER 1.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=db26dd79" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../../_static/documentation_options.js?v=292eb321"></script>
+      <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            TEASER
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../code/modules.html">teaser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">teaser.logic.buildingobjects.buildingphysics.door</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for teaser.logic.buildingobjects.buildingphysics.door</h1><div class="highlight"><pre>
+<span></span><span class="c1"># created April 2017</span>
+<span class="c1"># by TEASER4 Development Team</span>
+
+
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.outerwall</span> \
+    <span class="kn">import</span> <span class="nn">OuterWall</span>
+
+
+<div class="viewcode-block" id="Door">
+<a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.door.Door">[docs]</a>
+<span class="k">class</span> <span class="nc">Door</span><span class="p">(</span><span class="n">OuterWall</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Outer door class</span>
+
+<span class="sd">    This class holds information of an entrance door and is a child of</span>
+<span class="sd">    OuterWall()</span>
+
+<span class="sd">    Will be treated exactly as OuterWalls, we need this distinction due to</span>
+<span class="sd">    Door class in Tabula</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    parent : ThermalZone()</span>
+<span class="sd">        The parent class of this object, the ThermalZone the BE belongs to.</span>
+<span class="sd">        Allows for better control of hierarchical structures. If not None it</span>
+<span class="sd">        adds this OuterWall to ThermalZone.outer_walls.</span>
+<span class="sd">        Default is None.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    internal_id : float</span>
+<span class="sd">        Random id for the distinction between different elements.</span>
+<span class="sd">    name : str</span>
+<span class="sd">        Individual name</span>
+<span class="sd">    construction_data : str</span>
+<span class="sd">        Type of construction (e.g. &quot;heavy&quot; or &quot;light&quot;). Needed for</span>
+<span class="sd">        distinction between different constructions types in the same</span>
+<span class="sd">        building age period.</span>
+<span class="sd">    year_of_retrofit : int</span>
+<span class="sd">        Year of last retrofit</span>
+<span class="sd">    year_of_construction : int</span>
+<span class="sd">        Year of first construction</span>
+<span class="sd">    building_age_group : list</span>
+<span class="sd">        Determines the building age period that this building</span>
+<span class="sd">        element belongs to [begin, end], e.g. [1984, 1994]</span>
+<span class="sd">    area : float [m2]</span>
+<span class="sd">        Area of building element</span>
+<span class="sd">    tilt : float [degree]</span>
+<span class="sd">        Tilt against horizontal, default is 90.0</span>
+<span class="sd">    orientation : float [degree]</span>
+<span class="sd">        Azimuth direction of building element (0 : north, 90: east, 180: south,</span>
+<span class="sd">        270: west)</span>
+<span class="sd">    inner_convection : float [W/(m2*K)]</span>
+<span class="sd">        Constant heat transfer coefficient of convection inner side (facing</span>
+<span class="sd">        the zone), default 2.7</span>
+<span class="sd">    inner_radiation : float [W/(m2*K)]</span>
+<span class="sd">        Constant heat transfer coefficient of radiation inner side (facing</span>
+<span class="sd">        the zone), default 5.0</span>
+<span class="sd">    outer_convection : float [W/(m2*K)]</span>
+<span class="sd">        Constant heat transfer coefficient of convection outer side (facing</span>
+<span class="sd">        the ambient or adjacent zone), default 20.0</span>
+<span class="sd">    outer_radiation : float [W/(m2*K)]</span>
+<span class="sd">        Constant heat transfer coefficient of radiation outer side (facing</span>
+<span class="sd">        the ambient or adjacent zone), default 5.0</span>
+<span class="sd">    layer : list</span>
+<span class="sd">        List of all layers of a building element (to be filled with Layer</span>
+<span class="sd">        objects). Use element.layer = None to delete all layers of the building</span>
+<span class="sd">        element</span>
+<span class="sd">    other_side : ThermalZone()</span>
+<span class="sd">        the thermal zone on the other side of the building element (only for</span>
+<span class="sd">        interzonal elements)</span>
+<span class="sd">    interzonal_type_material : str</span>
+<span class="sd">        one of (None (default), &#39;inner&#39;, &#39;outer_ordered&#39;, &#39;outer_reversed&#39;)</span>
+<span class="sd">        describes as which kind of element the element is treated when loading</span>
+<span class="sd">        type elements. Caution: Make sure that the complimentary element of</span>
+<span class="sd">        the other zone is also changed accordingly if this is adapted manually</span>
+<span class="sd">            None: treatment based on project.method_interzonal_export_enrichment</span>
+<span class="sd">            &#39;inner&#39;: InterzonalWall treated as InnerWall,</span>
+<span class="sd">                     InterzonalFloor treated as Floor,</span>
+<span class="sd">                     InterzonalCeiling treated as Ceiling</span>
+<span class="sd">            &#39;outer_ordered&#39;: InterzonalWall treated as Wall,</span>
+<span class="sd">                             InterzonalFloor treated as GroundFloor,</span>
+<span class="sd">                             InterzonalCeiling treated as Rooftop</span>
+<span class="sd">            &#39;outer_reversed&#39;: InterzonalWall treated as Wall,</span>
+<span class="sd">                              InterzonalFloor treated as Rooftop,</span>
+<span class="sd">                              InterzonalCeiling treated as GroundFloor, but with</span>
+<span class="sd">                              reversed layers, resulting in the reversed</span>
+<span class="sd">                              sequence of layers as for the complimentary</span>
+<span class="sd">                              element declared as &#39;outer_ordered&#39;</span>
+<span class="sd">    interzonal_type_export : str</span>
+<span class="sd">        one of (None (default), &#39;inner&#39;, &#39;outer_ordered&#39;, &#39;outer_reversed&#39;)</span>
+<span class="sd">        describes as which kind of element the element is treated when exporting</span>
+<span class="sd">        to Modelica. Caution: Make sure that the complimentary element of</span>
+<span class="sd">        the other zone is also changed accordingly if this is adapted manually</span>
+<span class="sd">            &#39;inner&#39;: element will be lumped with InnerWall. No heat flow to the</span>
+<span class="sd">                     zone on the other side will be modelled.</span>
+<span class="sd">            &#39;outer_ordered&#39;: element will be lumped with OuterWall (OneElement</span>
+<span class="sd">                             to FourElement export) or treated as border to an</span>
+<span class="sd">                             adjacent zone (FiveElement export). Borders to the</span>
+<span class="sd">                             same adjacent zone will be lumped.</span>
+<span class="sd">            &#39;outer_reversed&#39;: like &#39;outer_ordered&#39;, but the lumping follows</span>
+<span class="sd">                              VDI 6007-1 in reversed order, resulting in the</span>
+<span class="sd">                              reversed order of resistances and capacitors as</span>
+<span class="sd">                              for the complimentary element declared as</span>
+<span class="sd">                              &#39;outer_ordered&#39;</span>
+
+<span class="sd">    Calculated Attributes</span>
+
+<span class="sd">    r1 : float [K/W]</span>
+<span class="sd">        equivalent resistance R1 of the analogous model given in VDI 6007</span>
+<span class="sd">    r2 : float [K/W]</span>
+<span class="sd">        equivalent resistance R2 of the analogous model given in VDI 6007</span>
+<span class="sd">    r3 : float [K/W]</span>
+<span class="sd">        equivalent resistance R3 of the analogous model given in VDI 6007</span>
+<span class="sd">    c1 : float [J/K]</span>
+<span class="sd">        equivalent capacity C1 of the analogous model given in VDI 6007</span>
+<span class="sd">    c2 : float [J/K]</span>
+<span class="sd">        equivalent capacity C2 of the analogous model given in VDI 6007</span>
+<span class="sd">    c1_korr : float [J/K]</span>
+<span class="sd">        corrected capacity C1,korr for building elements in the case of</span>
+<span class="sd">        asymmetrical thermal load given in VDI 6007</span>
+<span class="sd">    ua_value : float [W/K]</span>
+<span class="sd">        UA-Value of building element (Area times U-Value)</span>
+<span class="sd">    r_inner_conv : float [K/W]</span>
+<span class="sd">        Convective resistance of building element on inner side (facing the</span>
+<span class="sd">        zone)</span>
+<span class="sd">    r_inner_rad : float [K/W]</span>
+<span class="sd">        Radiative resistance of building element on inner side (facing the</span>
+<span class="sd">        zone)</span>
+<span class="sd">    r_inner_conv : float [K/W]</span>
+<span class="sd">        Combined convective and radiative resistance of building element on</span>
+<span class="sd">        inner side (facing the zone)</span>
+<span class="sd">    r_outer_conv : float [K/W]</span>
+<span class="sd">        Convective resistance of building element on outer side (facing</span>
+<span class="sd">        the ambient or adjacent zone). Currently for all InnerWalls and</span>
+<span class="sd">        GroundFloors this value is set to 0.0</span>
+<span class="sd">    r_outer_rad : float [K/W]</span>
+<span class="sd">        Radiative resistance of building element on outer side (facing</span>
+<span class="sd">        the ambient or adjacent zone). Currently for all InnerWalls and</span>
+<span class="sd">        GroundFloors this value is set to 0.0</span>
+<span class="sd">    r_outer_comb : float [K/W]</span>
+<span class="sd">        Combined convective and radiative resistance of building element on</span>
+<span class="sd">        outer side (facing the ambient or adjacent zone). Currently for all</span>
+<span class="sd">        InnerWalls and GroundFloors this value is set to 0.0</span>
+<span class="sd">    wf_out : float</span>
+<span class="sd">        Weightfactor of building element ua_value/ua_value_zone</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">OuterWall</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tilt</span> <span class="o">=</span> <span class="mf">90.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_inner_convection</span> <span class="o">=</span> <span class="mf">2.7</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_inner_radiation</span> <span class="o">=</span> <span class="mf">5.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_outer_convection</span> <span class="o">=</span> <span class="mf">20.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_outer_radiation</span> <span class="o">=</span> <span class="mf">5.0</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__parent</span>
+
+    <span class="nd">@parent</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="n">ass_error_1</span> <span class="o">=</span> <span class="s2">&quot;Parent has to be an instance of ThermalZone()&quot;</span>
+
+            <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;ThermalZone&quot;</span><span class="p">,</span> <span class="n">ass_error_1</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__parent</span> <span class="o">=</span> <span class="n">value</span>
+
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;OuterWall&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__parent</span><span class="o">.</span><span class="n">outer_walls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;Rooftop&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__parent</span><span class="o">.</span><span class="n">rooftops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;GroundFloor&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__parent</span><span class="o">.</span><span class="n">ground_floors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;Door&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__parent</span><span class="o">.</span><span class="n">doors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Instance of OuterWall not known&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">year_of_construction</span> <span class="o">=</span> \
+                    <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">year_of_construction</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__parent</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
