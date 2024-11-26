@@ -45,6 +45,14 @@ def example_export_besmod():
 
     prj.used_library_calc = 'AixLib'
     prj.number_of_elements_calc = 4
+
+    Residential = [
+        bldg for bldg in prj.buildings if bldg.name == "ResidentialBuilding"][0]
+
+    Residential.thermal_zones[0].use_conditions.set_back_times = [5, 22]
+    Residential.thermal_zones[0].use_conditions.heating_set_back = -3
+    # Residential.thermal_zones[0].use_conditions.calc_adj_schedules()
+
     weather_file_path = utilities.get_full_path(
         os.path.join(
             "data",

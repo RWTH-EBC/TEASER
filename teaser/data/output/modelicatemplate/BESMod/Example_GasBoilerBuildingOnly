@@ -4,7 +4,10 @@ model GasBoilerBuildingOnly${bldg.name}
   extends BESMod.Systems.BaseClasses.TEASERExport.PartialGasBoilerBuildingOnly(
     redeclare ${bldg.name} building,
     userProfiles(fileNameIntGains=Modelica.Utilities.Files.loadResource(
-        "modelica://${bldg.parent.name}/${bldg.name}/InternalGains_${bldg.name}.txt")),
+        "modelica://${bldg.parent.name}/${bldg.name}/InternalGains_${bldg.name}.txt"),
+        dTSetBack=${-bldg.thermal_zones[0].use_conditions.heating_set_back},
+        startTimeSetBack=${startTimeSetBack},
+        hoursSetBack=${hoursSetBack}),
     systemParameters(nZones=${len(bldg.thermal_zones)},
                      TOda_nominal=${TOda_nominal},
                      THydSup_nominal=${THydSup_nominal},

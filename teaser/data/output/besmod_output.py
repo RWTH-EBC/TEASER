@@ -66,7 +66,7 @@ def export_besmod(
         buildings = [buildings]
 
     if not isinstance(examples, list):
-        examples =  [examples]
+        examples = [examples]
     supported_examples = ["TEASERHeatLoadCalculation",
                           "HeatPumpMonoenergetic",
                           "GasBoilerBuildingOnly"]
@@ -119,6 +119,14 @@ def export_besmod(
     for i, bldg in enumerate(buildings):
         bldg.bldg_height = bldg.number_of_floors * bldg.height_of_floors  # ToDo fwu-hst: better place? Create logic/calculation/besmod.py as for aixlib?
 
+        set_back_times = bldg.thermal_zones[0].use_conditions.set_back_times
+        start_time_set_back = 0
+        hours_set_back = 0
+        if set_back_times:
+            start_time_set_back = bldg.thermal_zones[0].use_conditions.set_back_times[1] * 3600
+            hours_set_back = 24 - bldg.thermal_zones[0].use_conditions.set_back_times[1] + \
+                             bldg.thermal_zones[0].use_conditions.set_back_times[0]
+
         ass_error = "BESMod export is only implemented for AixLib calculation."
         assert bldg.used_library_calc == 'AixLib', ass_error
 
@@ -160,7 +168,9 @@ def export_besmod(
                     TOda_nominal=bldg.thermal_zones[0].t_outside,
                     THydSup_nominal=THydSup_nominal_bldg[bldg.name],
                     QBuiOld_flow_design=QBuiOld_flow_design[bldg.name],
-                    THydSupOld_design=THydSupOld_design_bldg[bldg.name]))
+                    THydSupOld_design=THydSupOld_design_bldg[bldg.name],
+                    startTimeSetBack=start_time_set_back,
+                    hoursSetBack=hours_set_back))
                 out_file.close()
 
             _help_example_script(bldg, dir_dymola, example_sim_plot_script, exp)

@@ -7,7 +7,10 @@ model HeatPumpMonoenergetic${bldg.name}
       energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial),
     redeclare BESMod.Systems.UserProfiles.TEASERProfiles
       userProfiles(fileNameIntGains=Modelica.Utilities.Files.loadResource(
-        "modelica://${bldg.parent.name}/${bldg.name}/InternalGains_${bldg.name}.txt")),
+        "modelica://${bldg.parent.name}/${bldg.name}/InternalGains_${bldg.name}.txt"),
+        dTSetBack=${-bldg.thermal_zones[0].use_conditions.heating_set_back},
+        startTimeSetBack=${startTimeSetBack},
+        hoursSetBack=${hoursSetBack})),
     systemParameters(
         use_hydraulic=true,
         use_ventilation=true,
