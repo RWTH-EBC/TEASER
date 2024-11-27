@@ -73,6 +73,8 @@ def export_besmod(
     if not isinstance(buildings, list):
         buildings = [buildings]
 
+    if examples is None:
+        examples = []
     if not isinstance(examples, list):
         examples = [examples]
     supported_examples = ["TEASERHeatLoadCalculation",
@@ -88,8 +90,8 @@ def export_besmod(
         raise ValueError("Examples 'HeatPumpMonoenergetic' and 'GasBoilerBuildingOnly' "
                          "require the `THydSup_nominal` parameter.")
 
-    THydSup_nominal_bldg = convert_input(THydSup_nominal, buildings)
-    THydSupOld_design_bldg = convert_input(THydSupOld_design, buildings) if THydSupOld_design else \
+    t_hyd_sup_nominal_bldg = convert_input(THydSup_nominal, buildings)
+    t_hyd_sup_old_design_bldg = convert_input(THydSupOld_design, buildings) if THydSupOld_design else \
         {bldg.name: "systemParameters.THydSup_nominal" for bldg in buildings}
 
     if QBuiOld_flow_design is None:
@@ -155,17 +157,17 @@ def export_besmod(
 
         def write_example_mo(example_template, example):
             with open(utilities.get_full_path(
-                    os.path.join(bldg_path, example + bldg.name + ".mo")), 'w') as out_file:
-                out_file.write(example_template.render_unicode(
+                    os.path.join(bldg_path, example + bldg.name + ".mo")), 'w') as model_file:
+                model_file.write(example_template.render_unicode(
                     bldg=bldg,
                     project=prj,
                     TOda_nominal=bldg.thermal_zones[0].t_outside,
-                    THydSup_nominal=THydSup_nominal_bldg[bldg.name],
+                    THydSup_nominal=t_hyd_sup_nominal_bldg[bldg.name],
                     QBuiOld_flow_design=QBuiOld_flow_design[bldg.name],
-                    THydSupOld_design=THydSupOld_design_bldg[bldg.name],
+                    THydSupOld_design=t_hyd_sup_old_design_bldg[bldg.name],
                     startTimeSetBack=start_time_set_back,
                     hoursSetBack=hours_set_back))
-                out_file.close()
+                model_file.close()
 
         for exp in examples:
             exp_template = Template(
