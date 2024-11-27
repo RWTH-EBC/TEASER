@@ -57,6 +57,14 @@ teaser.data.output.material\_output module
    :undoc-members:
    :show-inheritance:
 
+teaser.data.output.modelica\_output module
+------------------------------------------
+
+.. automodule:: teaser.data.output.modelica_output
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 teaser.data.output.runUnitTests module
 --------------------------------------
 

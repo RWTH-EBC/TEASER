@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.examples.e4_export_besmod_models &mdash; TEASER 1.0.0 documentation</title>
+  <title>teaser.examples.e4_export_besmod_models &mdash; TEASER 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/documentation_options.js?v=292eb321"></script>
       <script src="../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -79,9 +79,7 @@
 <span></span><span class="c1"># # Example 2: Export Modelica models for AixLib library using TEASER API</span>
 
 <span class="c1"># This module contains an example how to export buildings from a TEASER</span>
-<span class="c1"># project to ready-to-run simulation models for Modelica library AixLib. These</span>
-<span class="c1"># models will only simulate using Dymola, the reason for this are state</span>
-<span class="c1"># machines that are used in one AixLib specific AHU model.</span>
+<span class="c1"># project to ready-to-run simulation models for Modelica library BESMod.</span>
 <span class="c1"># You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)</span>
 
 <span class="kn">import</span> <span class="nn">teaser.examples.e1_generate_archetype</span> <span class="k">as</span> <span class="nn">e1</span>
@@ -100,19 +98,6 @@
 
     <span class="n">prj</span> <span class="o">=</span> <span class="n">e1</span><span class="o">.</span><span class="n">example_generate_archetype</span><span class="p">()</span>
 
-    <span class="c1"># To make sure the export is using the desired parameters you should</span>
-    <span class="c1"># always set model settings in the Project.</span>
-    <span class="c1"># Project().used_library_calc specifies the used Modelica library</span>
-    <span class="c1"># Project().number_of_elements_calc sets the models order</span>
-    <span class="c1"># For more information on models we&#39;d like to refer you to the docs. By</span>
-    <span class="c1"># default TEASER uses a weather file provided in</span>
-    <span class="c1"># teaser.data.input.inputdata.weatherdata. You can use your own weather</span>
-    <span class="c1"># file by setting Project().weather_file_path. However we will use default</span>
-    <span class="c1"># weather file.</span>
-    <span class="c1"># Be careful: Dymola does not like whitespaces in names and filenames,</span>
-    <span class="c1"># thus we will delete them anyway in TEASER.</span>
-
-    <span class="c1"># for CI testing purpose we set the reference result folder</span>
 
     <span class="n">prj</span><span class="o">.</span><span class="n">dir_reference_results</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
         <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
@@ -123,28 +108,31 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="n">prj</span><span class="o">.</span><span class="n">dir_reference_results</span><span class="p">)</span>
 
-    <span class="n">prj</span><span class="o">.</span><span class="n">used_library_calc</span> <span class="o">=</span> <span class="s1">&#39;AixLib&#39;</span>  <span class="c1"># ToDo fwu-hst: Always AixLib? If true, put it in explicit in besmod_output</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">used_library_calc</span> <span class="o">=</span> <span class="s1">&#39;AixLib&#39;</span>
     <span class="n">prj</span><span class="o">.</span><span class="n">number_of_elements_calc</span> <span class="o">=</span> <span class="mi">4</span>
-    <span class="n">prj</span><span class="o">.</span><span class="n">weather_file_path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+
+    <span class="n">Residential</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">bldg</span> <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span> <span class="k">if</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;ResidentialBuilding&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">Residential</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">set_back_times</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">22</span><span class="p">]</span>
+    <span class="n">Residential</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">heating_set_back</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span>
+    <span class="c1"># Residential.thermal_zones[0].use_conditions.calc_adj_schedules()</span>
+
+    <span class="n">weather_file_path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
         <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
             <span class="s2">&quot;data&quot;</span><span class="p">,</span>
             <span class="s2">&quot;input&quot;</span><span class="p">,</span>
             <span class="s2">&quot;inputdata&quot;</span><span class="p">,</span>
             <span class="s2">&quot;weatherdata&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos&quot;</span><span class="p">))</span>  <span class="c1"># ToDo fwu-hst: Check if relevant for besmod</span>
+            <span class="s2">&quot;DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos&quot;</span><span class="p">))</span>
 
-    <span class="c1"># To make sure the parameters are calculated correctly we recommend to</span>
-    <span class="c1"># run calc_all_buildings() function</span>
 
-    <span class="n">prj</span><span class="o">.</span><span class="n">calc_all_buildings</span><span class="p">()</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">set_location_parameters</span><span class="p">(</span><span class="n">t_outside</span><span class="o">=</span><span class="mf">262.65</span><span class="p">,</span>
+                                <span class="n">t_ground</span><span class="o">=</span><span class="mf">286.15</span><span class="p">,</span>
+                                <span class="n">weather_file_path</span><span class="o">=</span><span class="n">weather_file_path</span><span class="p">,</span>
+                                <span class="n">calc_all_buildings</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="c1"># To export the ready-to-run models simply call Project.export_aixlib().</span>
-    <span class="c1"># You can specify the path, where the model files should be saved.</span>
-    <span class="c1"># None means, that the default path in your home directory</span>
-    <span class="c1"># will be used. If you only want to export one specific building, you can</span>
-    <span class="c1"># pass over the internal_id of that building and only this model will be</span>
-    <span class="c1"># exported. In this case we want to export all buildings to our home</span>
-    <span class="c1"># directory, thus we are passing over None for both parameters.</span>
+    <span class="c1"># prj.calc_all_buildings()</span>
 
     <span class="n">examples</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;TEASERHeatLoadCalculation&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;HeatPumpMonoenergetic&quot;</span><span class="p">,</span>
@@ -154,7 +142,13 @@
     <span class="n">THydSup_nominal</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1950</span><span class="p">:</span> <span class="mi">90</span><span class="o">+</span><span class="mf">273.15</span><span class="p">,</span> <span class="mi">1980</span><span class="p">:</span> <span class="mi">70</span><span class="o">+</span><span class="mf">273.15</span><span class="p">,</span> <span class="mi">2010</span><span class="p">:</span> <span class="mi">55</span><span class="o">+</span><span class="mf">273.15</span><span class="p">,</span> <span class="mi">2024</span><span class="p">:</span> <span class="mi">35</span><span class="o">+</span><span class="mf">273.15</span><span class="p">}</span>
     <span class="n">THydSup_nominal</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ResidentialBuilding&quot;</span><span class="p">:</span> <span class="mf">328.15</span><span class="p">,</span>
                        <span class="s2">&quot;OfficeBuilding&quot;</span><span class="p">:</span> <span class="mf">328.15</span><span class="p">,</span>
-                       <span class="s2">&quot;InstituteBuilding&quot;</span><span class="p">:</span> <span class="mf">343.15</span><span class="p">,</span>
+                       <span class="s2">&quot;InstituteBuilding&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Office&quot;</span><span class="p">:</span> <span class="mf">343.15</span><span class="p">,</span>
+                                             <span class="s2">&quot;Floor&quot;</span><span class="p">:</span> <span class="mf">343.15</span><span class="p">,</span>
+                                             <span class="s2">&quot;Storage&quot;</span><span class="p">:</span> <span class="mf">343.15</span><span class="p">,</span>
+                                             <span class="s2">&quot;Meeting&quot;</span><span class="p">:</span> <span class="mf">343.15</span><span class="p">,</span>
+                                             <span class="s2">&quot;Restroom&quot;</span><span class="p">:</span> <span class="mf">343.15</span><span class="p">,</span>
+                                             <span class="s2">&quot;ICT&quot;</span><span class="p">:</span> <span class="mf">343.15</span><span class="p">,</span>
+                                             <span class="s2">&quot;Laboratory&quot;</span><span class="p">:</span> <span class="mf">328.15</span><span class="p">},</span>
                        <span class="s2">&quot;InstituteBuildingMoisture&quot;</span><span class="p">:</span> <span class="mf">343.15</span><span class="p">,</span>
                        <span class="s2">&quot;ResidentialBuildingTabula&quot;</span><span class="p">:</span> <span class="mf">328.15</span><span class="p">,</span>
                        <span class="s2">&quot;ResidentialBuildingTabulaMulti&quot;</span><span class="p">:</span> <span class="mf">328.15</span><span class="p">}</span>
@@ -172,7 +166,7 @@
     <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">:</span>
         <span class="n">QBuiOld_flow_design</span><span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">tz</span> <span class="ow">in</span> <span class="n">bldg</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
-            <span class="n">QBuiOld_flow_design</span><span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="n">tz</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">tz</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">heat_load</span> <span class="c1"># ToDo fwu-hst: calculation with infiltration rate 0.2 instead of 0.5 as in BESMod</span>
+            <span class="n">QBuiOld_flow_design</span><span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="n">tz</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">tz</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">heat_load</span>
 
     <span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ArchetypeExample_partial_retrofit&quot;</span>
 
@@ -195,11 +189,17 @@
 
     <span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ArchetypeExample_total_retrofit&quot;</span>
 
+    <span class="n">custom_template</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ModelicaConferencePaper&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;D:\fwu-hst\00_temp\custom_template.txt&quot;</span><span class="p">}</span>
+    <span class="n">custom_script</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;HeatPumpMonoenergetic&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;D:\fwu-hst\00_temp\custom_script_hp_mono.txt&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;ModelicaConferencePaper&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;D:\fwu-hst\00_temp\custom_script.txt&quot;</span><span class="p">}</span>
+
     <span class="n">path</span> <span class="o">=</span> <span class="n">prj</span><span class="o">.</span><span class="n">export_besmod</span><span class="p">(</span>
         <span class="n">THydSup_nominal</span><span class="o">=</span><span class="n">THydSup_nominal</span><span class="p">,</span>
         <span class="n">internal_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;D:\fwu-hst\TEASEROutput_besmod&quot;</span><span class="p">,</span>
         <span class="n">examples</span><span class="o">=</span><span class="n">examples</span><span class="p">,</span>
+        <span class="n">custom_examples</span><span class="o">=</span><span class="n">custom_template</span><span class="p">,</span>
+        <span class="n">custom_script</span><span class="o">=</span><span class="n">custom_script</span><span class="p">,</span>
         <span class="n">report</span><span class="o">=</span><span class="kc">True</span>
     <span class="p">)</span>
 

@@ -19,6 +19,14 @@ Subpackages
 Submodules
 ----------
 
+teaser.logic.retrofit module
+----------------------------
+
+.. automodule:: teaser.logic.retrofit
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 teaser.logic.utilities module
 -----------------------------
 

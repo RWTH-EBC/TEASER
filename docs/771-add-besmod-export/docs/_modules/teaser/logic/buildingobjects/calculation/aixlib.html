@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.logic.buildingobjects.calculation.aixlib &mdash; TEASER 1.0.0 documentation</title>
+  <title>teaser.logic.buildingobjects.calculation.aixlib &mdash; TEASER 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/autodoc_pydantic.css" />
@@ -13,7 +13,7 @@
   
       <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../../_static/documentation_options.js?v=292eb321"></script>
       <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../../_static/js/theme.js"></script>
@@ -112,6 +112,9 @@
 <span class="sd">    version : str</span>
 <span class="sd">        Used AixLib version, default should always be current master version</span>
 <span class="sd">        of GitHub</span>
+<span class="sd">    besmod_version : str</span>
+<span class="sd">        Used BESMod version vor export_besmod, default should always be current main version</span>
+<span class="sd">        of GitHub</span>
 <span class="sd">    total_surface_area : float [m2]</span>
 <span class="sd">        This is the total surface area of the building for interior and</span>
 <span class="sd">        exterior surfaces. That includes: OuterWalls, Rooftops, GroundFloors,</span>
@@ -141,7 +144,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">file_set_t_cool</span> <span class="o">=</span> <span class="s2">&quot;TsetCool_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.txt&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">file_ahu</span> <span class="o">=</span> <span class="s2">&quot;AHU_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.txt&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">file_internal_gains</span> <span class="o">=</span> <span class="s2">&quot;InternalGains_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.txt&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;1.3.2&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;2.1.0&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">besmod_version</span> <span class="o">=</span> <span class="s2">&quot;0.5.0&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">total_surface_area</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">consider_heat_capacity</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">use_set_back</span> <span class="o">=</span> <span class="kc">True</span>

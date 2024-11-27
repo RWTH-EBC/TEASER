@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.project &mdash; TEASER 1.0.0 documentation</title>
+  <title>teaser.project &mdash; TEASER 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/autodoc_pydantic.css" />
@@ -13,7 +13,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/documentation_options.js?v=292eb321"></script>
       <script src="../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -91,6 +91,7 @@
 <span class="kn">from</span> <span class="nn">teaser.data.dataclass</span> <span class="kn">import</span> <span class="n">DataClass</span>
 <span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse</span> <span class="kn">import</span> <span class="n">SingleFamilyHouse</span>
 <span class="kn">from</span> <span class="nn">teaser.logic.simulation.modelicainfo</span> <span class="kn">import</span> <span class="n">ModelicaInfo</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.retrofit</span> <span class="kn">import</span> <span class="n">generate_buildings_for_all_element_combinations</span>
 
 
 <div class="viewcode-block" id="Project">
@@ -694,6 +695,54 @@
         <span class="k">return</span> <span class="n">type_bldg</span></div>
 
 
+<div class="viewcode-block" id="Project.add_residential_retrofit_combinations">
+<a class="viewcode-back" href="../../code/teaser.html#teaser.project.Project.add_residential_retrofit_combinations">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_residential_retrofit_combinations</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">elements</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">retrofit_choices</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">add_residential_kwargs</span><span class="p">:</span> <span class="nb">dict</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate residential buildings for all possible combinations of</span>
+<span class="sd">        retrofit statuses for specified building elements.</span>
+
+<span class="sd">        This function creates multiple variations of a residential building based</span>
+<span class="sd">        on different retrofit options for specified building elements.</span>
+<span class="sd">        It&#39;s designed to work with TABULA archetypes.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        add_residential_kwargs : dict</span>
+<span class="sd">            Keyword arguments for the function add_residential.</span>
+<span class="sd">        elements : list, optional</span>
+<span class="sd">            List of building elements to consider for retrofit.</span>
+<span class="sd">            Defaults to [&#39;outer_walls&#39;, &#39;windows&#39;, &#39;rooftops&#39;, &#39;ground_floors&#39;].</span>
+<span class="sd">        retrofit_choices : list, optional</span>
+<span class="sd">            List of retrofit options to consider.</span>
+<span class="sd">            Defaults to [&#39;standard&#39;, &#39;retrofit&#39;, &#39;adv_retrofit&#39;].</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">            list: A list of names of the generated buildings.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">            ValueError: If unsupported elements or retrofit choices are provided, or if the</span>
+<span class="sd">                        construction data is not from TABULA DE or DK.</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">            This function only works with TABULA DE or DK construction data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">generate_buildings_for_all_element_combinations</span><span class="p">(</span>
+            <span class="n">project_add_building_function</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">add_residential</span><span class="p">,</span>
+            <span class="n">add_building_function_kwargs</span><span class="o">=</span><span class="n">add_residential_kwargs</span><span class="p">,</span>
+            <span class="n">elements</span><span class="o">=</span><span class="n">elements</span><span class="p">,</span>
+            <span class="n">retrofit_choices</span><span class="o">=</span><span class="n">retrofit_choices</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="Project.save_project">
 <a class="viewcode-back" href="../../code/teaser.html#teaser.project.Project.save_project">[docs]</a>
     <span class="k">def</span> <span class="nf">save_project</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -816,16 +865,7 @@
                     <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">report</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="kn">from</span> <span class="nn">teaser.data.output.reports</span> <span class="kn">import</span> <span class="n">model_report</span>
-            <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
-                    <span class="s2">&quot;To create the model report, you have to install TEASER &quot;</span>
-                    <span class="s2">&quot;using the option report: pip install teaser[report] or install &quot;</span>
-                    <span class="s2">&quot;plotly manually.&quot;</span>
-                <span class="p">)</span>
-            <span class="n">report_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;Resources&quot;</span><span class="p">,</span> <span class="s2">&quot;ModelReport&quot;</span><span class="p">)</span>
-            <span class="n">model_report</span><span class="o">.</span><span class="n">create_model_report</span><span class="p">(</span><span class="n">prj</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">report_path</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_write_report</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">path</span></div>
 
 
@@ -837,9 +877,11 @@
         <span class="n">examples</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">THydSup_nominal</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">TOda_nominal</span><span class="o">=</span><span class="mf">262.65</span><span class="p">,</span>
+        <span class="n">TSetZone_nominal</span><span class="o">=</span><span class="mf">293.15</span><span class="p">,</span>
         <span class="n">QBuiOld_flow_design</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">THydSupOld_design</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">custom_examples</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">custom_script</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">report</span><span class="o">=</span><span class="kc">False</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Exports buildings for BESMod simulation</span>
@@ -855,12 +897,27 @@
 <span class="sd">            setter of a specific building which will be exported, if None then</span>
 <span class="sd">            all buildings will be exported</span>
 <span class="sd">        examples: [string]</span>
-<span class="sd">            List of BESMod.Examples to include buildings in and export them.</span>
+<span class="sd">            Names of BESMod examples to export alongside the building models.</span>
 <span class="sd">            Supported Examples are: &quot;TEASERHeatLoadCalculation&quot;, &quot;HeatPumpMonoenergetic&quot; and &quot;GasBoilerBuildingOnly&quot;.</span>
-<span class="sd">        THydSup_nominal: float, dict</span>
-<span class="sd">            Nominal hydraulic supply temperature in kelvin.</span>
-<span class="sd">        partial_retrofit_args: dict</span>
-<span class="sd">            Arguments to specify a partial retrofit model in BESMod. Default is</span>
+<span class="sd">        THydSup_nominal : float or dict, optional</span>
+<span class="sd">            Nominal supply temperature(s) for the hydraulic system. Required for</span>
+<span class="sd">            certain examples (e.g., HeatPumpMonoenergetic, GasBoilerBuildingOnly).</span>
+<span class="sd">            See docstring of teaser.data.output.besmod_output.convert_input() for further information.</span>
+<span class="sd">        TSetZone_nominal : float or dict, optional</span>
+<span class="sd">            Nominal set temperature(s) for the thermal zones.</span>
+<span class="sd">            See docstring of teaser.data.output.besmod_output.convert_input() for further information.</span>
+<span class="sd">        QBuiOld_flow_design : dict, optional</span>
+<span class="sd">            For partially retrofitted systems specify the old nominal heat flow</span>
+<span class="sd">            of the Buildings in a dictionary with the building names as keys.</span>
+<span class="sd">            By default, only the radiator transfer system is not retrofitted in BESMod.</span>
+<span class="sd">        THydSupOld_design : float or dict, optional</span>
+<span class="sd">            Design supply temperatures for old not retrofitted hydraulic systems.</span>
+<span class="sd">        custom_examples: dict, optional</span>
+<span class="sd">            Specify custom examples with a dictionary containing the example name as the key and</span>
+<span class="sd">            the path to the corresponding custom mako template as the value.</span>
+<span class="sd">        custom_script: dict, optional</span>
+<span class="sd">            Specify custom .mos scripts for the existing and custom examples with a dictionary</span>
+<span class="sd">            containing the example name as the key and the path to the corresponding custom mako template as the value.</span>
 <span class="sd">        path : string</span>
 <span class="sd">            if the Files should not be stored in default output path of TEASER,</span>
 <span class="sd">            an alternative path can be specified as a full path</span>
@@ -879,31 +936,36 @@
         <span class="k">if</span> <span class="n">internal_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">besmod_output</span><span class="o">.</span><span class="n">export_besmod</span><span class="p">(</span>
                 <span class="n">buildings</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">,</span> <span class="n">prj</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">examples</span><span class="o">=</span><span class="n">examples</span><span class="p">,</span> <span class="n">THydSup_nominal</span><span class="o">=</span><span class="n">THydSup_nominal</span><span class="p">,</span>
-                        <span class="n">TOda_nominal</span><span class="o">=</span><span class="n">TOda_nominal</span><span class="p">,</span> <span class="n">QBuiOld_flow_design</span><span class="o">=</span><span class="n">QBuiOld_flow_design</span><span class="p">,</span>
-                        <span class="n">THydSupOld_design</span><span class="o">=</span><span class="n">THydSupOld_design</span>
+                <span class="n">TSetZone_nominal</span><span class="o">=</span><span class="n">TSetZone_nominal</span><span class="p">,</span> <span class="n">QBuiOld_flow_design</span><span class="o">=</span><span class="n">QBuiOld_flow_design</span><span class="p">,</span>
+                <span class="n">THydSupOld_design</span><span class="o">=</span><span class="n">THydSupOld_design</span><span class="p">,</span>
+                <span class="n">custom_examples</span><span class="o">=</span><span class="n">custom_examples</span><span class="p">,</span> <span class="n">custom_script</span><span class="o">=</span><span class="n">custom_script</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">bldg</span><span class="o">.</span><span class="n">internal_id</span> <span class="o">==</span> <span class="n">internal_id</span><span class="p">:</span>
                     <span class="n">besmod_output</span><span class="o">.</span><span class="n">export_besmod</span><span class="p">(</span>
                         <span class="n">buildings</span><span class="o">=</span><span class="p">[</span><span class="n">bldg</span><span class="p">],</span> <span class="n">prj</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">examples</span><span class="o">=</span><span class="n">examples</span><span class="p">,</span> <span class="n">THydSup_nominal</span><span class="o">=</span><span class="n">THydSup_nominal</span><span class="p">,</span>
-                        <span class="n">TOda_nominal</span><span class="o">=</span><span class="n">TOda_nominal</span><span class="p">,</span> <span class="n">QBuiOld_flow_design</span><span class="o">=</span><span class="n">QBuiOld_flow_design</span><span class="p">,</span>
-                        <span class="n">THydSupOld_design</span><span class="o">=</span><span class="n">THydSupOld_design</span>
+                        <span class="n">TSetZone_nominal</span><span class="o">=</span><span class="n">TSetZone_nominal</span><span class="p">,</span> <span class="n">QBuiOld_flow_design</span><span class="o">=</span><span class="n">QBuiOld_flow_design</span><span class="p">,</span>
+                        <span class="n">THydSupOld_design</span><span class="o">=</span><span class="n">THydSupOld_design</span><span class="p">,</span>
+                        <span class="n">custom_examples</span><span class="o">=</span><span class="n">custom_examples</span><span class="p">,</span> <span class="n">custom_script</span><span class="o">=</span><span class="n">custom_script</span>
                     <span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">report</span><span class="p">:</span> <span class="c1"># ToDo fwu-hst: Same as AixLib. Maybe create helper function</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="kn">from</span> <span class="nn">teaser.data.output.reports</span> <span class="kn">import</span> <span class="n">model_report</span>
-            <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
-                    <span class="s2">&quot;To create the model report, you have to install TEASER &quot;</span>
-                    <span class="s2">&quot;using the option report: pip install teaser[report] or install &quot;</span>
-                    <span class="s2">&quot;plotly manually.&quot;</span>
-                <span class="p">)</span>
-            <span class="n">report_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;Resources&quot;</span><span class="p">,</span> <span class="s2">&quot;ModelReport&quot;</span><span class="p">)</span>
-            <span class="n">model_report</span><span class="o">.</span><span class="n">create_model_report</span><span class="p">(</span><span class="n">prj</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">report_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">report</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_write_report</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">path</span></div>
 
+
+    <span class="k">def</span> <span class="nf">_write_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">teaser.data.output.reports</span> <span class="kn">import</span> <span class="n">model_report</span>
+        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+                <span class="s2">&quot;To create the model report, you have to install TEASER &quot;</span>
+                <span class="s2">&quot;using the option report: pip install teaser[report] or install &quot;</span>
+                <span class="s2">&quot;plotly manually.&quot;</span>
+            <span class="p">)</span>
+        <span class="n">report_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;Resources&quot;</span><span class="p">,</span> <span class="s2">&quot;ModelReport&quot;</span><span class="p">)</span>
+        <span class="n">model_report</span><span class="o">.</span><span class="n">create_model_report</span><span class="p">(</span><span class="n">prj</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">report_path</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Project.export_ibpsa">
 <a class="viewcode-back" href="../../code/teaser.html#teaser.project.Project.export_ibpsa">[docs]</a>
@@ -999,6 +1061,44 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_elements_calc</span> <span class="o">=</span> <span class="mi">2</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_merge_windows_calc</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_used_library_calc</span> <span class="o">=</span> <span class="s2">&quot;AixLib&quot;</span></div>
+
+
+<div class="viewcode-block" id="Project.set_location_parameters">
+<a class="viewcode-back" href="../../code/teaser.html#teaser.project.Project.set_location_parameters">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_location_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                     <span class="n">t_outside</span><span class="o">=</span><span class="mf">262.65</span><span class="p">,</span>
+                     <span class="n">t_ground</span><span class="o">=</span><span class="mf">286.15</span><span class="p">,</span>
+                     <span class="n">weather_file_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">calc_all_buildings</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Set location specific parameters</span>
+
+<span class="sd">        Temperatures are used for static heat load calculation</span>
+<span class="sd">        and as parameters in the exports.</span>
+<span class="sd">        Default location is Mannheim.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        t_outside: float [K]</span>
+<span class="sd">            Normative outdoor temperature for static heat load calculation.</span>
+<span class="sd">            The input of t_inside is ALWAYS in Kelvin</span>
+<span class="sd">        t_ground: float [K]</span>
+<span class="sd">            Temperature directly at the outer side of ground floors for static</span>
+<span class="sd">            heat load calculation.</span>
+<span class="sd">            The input of t_ground is ALWAYS in Kelvin</span>
+<span class="sd">        weather_file_path : str</span>
+<span class="sd">            Absolute path to weather file used for Modelica simulation. Default</span>
+<span class="sd">            weather file can be find in inputdata/weatherdata.</span>
+<span class="sd">        calc_all_buildings: boolean</span>
+<span class="sd">            If True, calculates all buildings new. Default is True.</span>
+<span class="sd">            Here important for new calculation of static heat load.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weather_file_path</span> <span class="o">=</span> <span class="n">weather_file_path</span>
+        <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">tz</span> <span class="ow">in</span> <span class="n">bldg</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+                <span class="n">tz</span><span class="o">.</span><span class="n">t_outside</span> <span class="o">=</span> <span class="n">t_outside</span>
+                <span class="n">tz</span><span class="o">.</span><span class="n">t_ground</span> <span class="o">=</span> <span class="n">t_ground</span>
+        <span class="k">if</span> <span class="n">calc_all_buildings</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">calc_all_buildings</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="Project.process_export_vars">

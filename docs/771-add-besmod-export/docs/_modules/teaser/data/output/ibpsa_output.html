@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.data.output.ibpsa_output &mdash; TEASER 1.0.0 documentation</title>
+  <title>teaser.data.output.ibpsa_output &mdash; TEASER 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
@@ -13,7 +13,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/documentation_options.js?v=292eb321"></script>
       <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
@@ -79,12 +79,12 @@
 <span></span><span class="c1"># Created May 2016</span>
 <span class="c1"># TEASER Development Team</span>
 
-<span class="sd">&quot;&quot;&quot;ibpsa_output</span>
+<span class="sd">&quot;&quot;&quot;modelica_output</span>
 
 <span class="sd">This module contains function to call Templates for IBPSA model generation</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">teaser.data.output.aixlib_output</span> <span class="k">as</span> <span class="nn">ibpsa_output</span>
+<span class="kn">import</span> <span class="nn">teaser.data.output.modelica_output</span> <span class="k">as</span> <span class="nn">modelica_output</span>
 <span class="kn">import</span> <span class="nn">os.path</span>
 <span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utilities</span>
 <span class="kn">from</span> <span class="nn">mako.template</span> <span class="kn">import</span> <span class="n">Template</span>
@@ -172,17 +172,15 @@
             <span class="s2">&quot;data/output/modelicatemplate/IBPSA/IBPSA_FourElements&quot;</span><span class="p">),</span>
         <span class="n">lookup</span><span class="o">=</span><span class="n">lookup</span><span class="p">)</span>
 
-    <span class="n">ibpsa_output</span><span class="o">.</span><span class="n">_help_package</span><span class="p">(</span>
+    <span class="n">modelica_output</span><span class="o">.</span><span class="n">create_package</span><span class="p">(</span>
         <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
         <span class="n">name</span><span class="o">=</span><span class="n">prj</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-        <span class="n">uses</span><span class="o">=</span><span class="n">uses</span><span class="p">,</span>
-        <span class="n">within</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">ibpsa_output</span><span class="o">.</span><span class="n">_help_package_order</span><span class="p">(</span>
+        <span class="n">uses</span><span class="o">=</span><span class="n">uses</span><span class="p">)</span>
+    <span class="n">modelica_output</span><span class="o">.</span><span class="n">create_package_order</span><span class="p">(</span>
         <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
         <span class="n">package_list</span><span class="o">=</span><span class="n">buildings</span><span class="p">,</span>
-        <span class="n">addition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">extra</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">ibpsa_output</span><span class="o">.</span><span class="n">_copy_weather_data</span><span class="p">(</span><span class="n">prj</span><span class="o">.</span><span class="n">weather_file_path</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="n">modelica_output</span><span class="o">.</span><span class="n">copy_weather_data</span><span class="p">(</span><span class="n">prj</span><span class="o">.</span><span class="n">weather_file_path</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">buildings</span><span class="p">):</span>
 
@@ -198,15 +196,14 @@
         <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
             <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bldg_path</span><span class="p">,</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_Models&quot;</span><span class="p">)))</span>
 
-        <span class="n">ibpsa_output</span><span class="o">.</span><span class="n">_help_package</span><span class="p">(</span>
+        <span class="n">modelica_output</span><span class="o">.</span><span class="n">create_package</span><span class="p">(</span>
             <span class="n">path</span><span class="o">=</span><span class="n">bldg_path</span><span class="p">,</span>
             <span class="n">name</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
             <span class="n">within</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
-        <span class="n">ibpsa_output</span><span class="o">.</span><span class="n">_help_package_order</span><span class="p">(</span>
+        <span class="n">modelica_output</span><span class="o">.</span><span class="n">create_package_order</span><span class="p">(</span>
             <span class="n">path</span><span class="o">=</span><span class="n">bldg_path</span><span class="p">,</span>
             <span class="n">package_list</span><span class="o">=</span><span class="p">[],</span>
-            <span class="n">addition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">extra</span><span class="o">=</span><span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_Models&quot;</span><span class="p">])</span>
 
         <span class="n">zone_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
@@ -238,12 +235,12 @@
                                                                    <span class="n">library</span><span class="o">=</span><span class="n">library</span><span class="p">))</span>
 
 
-        <span class="n">ibpsa_output</span><span class="o">.</span><span class="n">_help_package</span><span class="p">(</span>
+        <span class="n">modelica_output</span><span class="o">.</span><span class="n">create_package</span><span class="p">(</span>
             <span class="n">path</span><span class="o">=</span><span class="n">zone_path</span><span class="p">,</span>
             <span class="n">name</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_Models&quot;</span><span class="p">,</span>
             <span class="n">within</span><span class="o">=</span><span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
-        <span class="n">ibpsa_output</span><span class="o">.</span><span class="n">_help_package_order</span><span class="p">(</span>
+        <span class="n">modelica_output</span><span class="o">.</span><span class="n">create_package_order</span><span class="p">(</span>
             <span class="n">path</span><span class="o">=</span><span class="n">zone_path</span><span class="p">,</span>
             <span class="n">package_list</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">,</span>
             <span class="n">addition</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>

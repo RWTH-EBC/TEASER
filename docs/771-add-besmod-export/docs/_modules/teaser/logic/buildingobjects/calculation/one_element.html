@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.logic.buildingobjects.calculation.one_element &mdash; TEASER 1.0.0 documentation</title>
+  <title>teaser.logic.buildingobjects.calculation.one_element &mdash; TEASER 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/autodoc_pydantic.css" />
@@ -13,7 +13,7 @@
   
       <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../../_static/documentation_options.js?v=292eb321"></script>
       <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../../_static/js/theme.js"></script>
@@ -1070,7 +1070,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">heat_load_outside_factor</span> <span class="o">=</span> <span class="p">(</span>
             <span class="p">(</span><span class="n">ua_value_ow_temp</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">ua_value_win</span><span class="p">)</span>
             <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">volume</span>
-            <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">infiltration_rate</span>
+            <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">static_infiltration</span>
             <span class="o">*</span> <span class="mi">1</span>
             <span class="o">/</span> <span class="mi">3600</span>
             <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">heat_capac_air</span>
