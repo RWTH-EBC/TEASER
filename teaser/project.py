@@ -759,16 +759,7 @@ class Project(object):
                     )
 
         if report:
-            try:
-                from teaser.data.output.reports import model_report
-            except ImportError:
-                raise ImportError(
-                    "To create the model report, you have to install TEASER "
-                    "using the option report: pip install teaser[report] or install "
-                    "plotly manually."
-                )
-            report_path = os.path.join(path, "Resources", "ModelReport")
-            model_report.create_model_report(prj=self, path=report_path)
+            self._write_report(path)
         return path
 
     def export_besmod(
@@ -836,18 +827,21 @@ class Project(object):
                         custom_examples=custom_examples, custom_script=custom_script
                     )
 
-        if report: # ToDo fwu-hst: Same as AixLib. Maybe create helper function
-            try:
-                from teaser.data.output.reports import model_report
-            except ImportError:
-                raise ImportError(
-                    "To create the model report, you have to install TEASER "
-                    "using the option report: pip install teaser[report] or install "
-                    "plotly manually."
-                )
-            report_path = os.path.join(path, "Resources", "ModelReport")
-            model_report.create_model_report(prj=self, path=report_path)
+        if report:
+            self._write_report(path)
         return path
+
+    def _write_report(self, path):
+        try:
+            from teaser.data.output.reports import model_report
+        except ImportError:
+            raise ImportError(
+                "To create the model report, you have to install TEASER "
+                "using the option report: pip install teaser[report] or install "
+                "plotly manually."
+            )
+        report_path = os.path.join(path, "Resources", "ModelReport")
+        model_report.create_model_report(prj=self, path=report_path)
 
     def export_ibpsa(self, library="AixLib", internal_id=None, path=None):
         """Exports values to a record file for Modelica simulation
