@@ -14,7 +14,9 @@ def export_besmod(
         examples=None,
         THydSup_nominal=None,
         QBuiOld_flow_design=None,
-        THydSupOld_design=None):
+        THydSupOld_design=None,
+        custom_examples=None,
+        custom_script=None):
     """
     Export building models for BESMod simulations.
 
@@ -45,6 +47,12 @@ def export_besmod(
         By default, only the radiator transfer system is not retrofitted in BESMod.
     THydSupOld_design : float or dict, optional
         Design supply temperatures for old not retrofitted hydraulic systems.
+    custom_examples: dict, optional
+        Specify custom examples with a dictionary containing the example name as the key and
+        the path to the corresponding custom mako template as the value.
+    custom_script: dict, optional
+        Specify custom .mos scripts for the existing and custom examples with a dictionary
+        containing the example name as the key and the path to the corresponding custom mako template as the value.
 
     Raises
     ------
@@ -135,14 +143,10 @@ def export_besmod(
         utilities.create_path(os.path.join(bldg_path, bldg.name + "_DataBase"))
         bldg.library_attr.modelica_gains_boundary(path=bldg_path)
 
-        example_bldg = [exp + bldg.name for exp in examples]
-        example_bldg.append(bldg.name + "_DataBase")
+        if custom_script is None:
+            custom_script = {}
 
-        modelica_output.create_package(path=bldg_path, name=bldg.name, within=bldg.parent.name)
-        modelica_output.create_package_order(
-            path=bldg_path,
-            package_list=[bldg],
-            extra=example_bldg)
+        bldg_package = [exp + bldg.name for exp in examples]
 
         with open(utilities.get_full_path(
                 os.path.join(bldg_path, bldg.name + ".mo")), 'w') as out_file:
@@ -150,18 +154,9 @@ def export_besmod(
                 bldg=bldg))
             out_file.close()
 
-        for exp in examples:
-            example_template = Template(
-                filename=utilities.get_full_path(
-                    "data/output/modelicatemplate/BESMod/Example_" + exp),
-                lookup=lookup)
-            example_sim_plot_script = Template(
-                filename=utilities.get_full_path(
-                    "data/output/modelicatemplate/BESMod/Script_" + exp),
-                lookup=lookup)
-
+        def write_example_mo(example_template, example):
             with open(utilities.get_full_path(
-                    os.path.join(bldg_path, exp + bldg.name + ".mo")), 'w') as out_file:
+                    os.path.join(bldg_path, example + bldg.name + ".mo")), 'w') as out_file:
                 out_file.write(example_template.render_unicode(
                     bldg=bldg,
                     project=prj,
@@ -173,7 +168,42 @@ def export_besmod(
                     hoursSetBack=hours_set_back))
                 out_file.close()
 
+        for exp in examples:
+            exp_template = Template(
+                filename=utilities.get_full_path(
+                    "data/output/modelicatemplate/BESMod/Example_" + exp),
+                lookup=lookup)
+            if exp in custom_script.keys():
+                example_sim_plot_script = Template(
+                    filename=custom_script[exp],
+                    lookup=lookup)
+            else:
+                example_sim_plot_script = Template(
+                    filename=utilities.get_full_path(
+                        "data/output/modelicatemplate/BESMod/Script_" + exp),
+                    lookup=lookup)
             _help_example_script(bldg, dir_dymola, example_sim_plot_script, exp)
+            write_example_mo(exp_template, exp)
+        if custom_examples:
+            for exp, c_path in custom_examples.items():
+                bldg_package.append(exp + bldg.name)
+                exp_template = Template(
+                    filename=c_path,
+                    lookup=lookup)
+                write_example_mo(exp_template, exp)
+                if exp in custom_script.keys():
+                    example_sim_plot_script = Template(
+                        filename=custom_script[exp],
+                        lookup=lookup)
+                    _help_example_script(bldg, dir_dymola, example_sim_plot_script, exp)
+
+
+        bldg_package.append(bldg.name + "_DataBase")
+        modelica_output.create_package(path=bldg_path, name=bldg.name, within=bldg.parent.name)
+        modelica_output.create_package_order(
+            path=bldg_path,
+            package_list=[bldg],
+            extra=bldg_package)
 
         zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
 

@@ -1,9 +1,7 @@
 # # Example 2: Export Modelica models for AixLib library using TEASER API
 
 # This module contains an example how to export buildings from a TEASER
-# project to ready-to-run simulation models for Modelica library AixLib. These
-# models will only simulate using Dymola, the reason for this are state
-# machines that are used in one AixLib specific AHU model.
+# project to ready-to-run simulation models for Modelica library BESMod.
 # You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)
 
 import teaser.examples.e1_generate_archetype as e1
@@ -20,19 +18,6 @@ def example_export_besmod():
 
     prj = e1.example_generate_archetype()
 
-    # To make sure the export is using the desired parameters you should
-    # always set model settings in the Project.
-    # Project().used_library_calc specifies the used Modelica library
-    # Project().number_of_elements_calc sets the models order
-    # For more information on models we'd like to refer you to the docs. By
-    # default TEASER uses a weather file provided in
-    # teaser.data.input.inputdata.weatherdata. You can use your own weather
-    # file by setting Project().weather_file_path. However we will use default
-    # weather file.
-    # Be careful: Dymola does not like whitespaces in names and filenames,
-    # thus we will delete them anyway in TEASER.
-
-    # for CI testing purpose we set the reference result folder
 
     prj.dir_reference_results = utilities.get_full_path(
         os.path.join(
@@ -61,8 +46,6 @@ def example_export_besmod():
             "weatherdata",
             "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos"))
 
-    # To make sure the parameters are calculated correctly we recommend to
-    # run calc_all_buildings() function
 
     prj.set_location_parameters(t_outside=262.65,
                                 t_ground=286.15,
@@ -70,14 +53,6 @@ def example_export_besmod():
                                 calc_all_buildings=True)
 
     # prj.calc_all_buildings()
-
-    # To export the ready-to-run models simply call Project.export_aixlib().
-    # You can specify the path, where the model files should be saved.
-    # None means, that the default path in your home directory
-    # will be used. If you only want to export one specific building, you can
-    # pass over the internal_id of that building and only this model will be
-    # exported. In this case we want to export all buildings to our home
-    # directory, thus we are passing over None for both parameters.
 
     examples = ["TEASERHeatLoadCalculation",
                 "HeatPumpMonoenergetic",
@@ -134,11 +109,17 @@ def example_export_besmod():
 
     prj.name = "ArchetypeExample_total_retrofit"
 
+    custom_template = {"ModelicaConferencePaper": r"D:\fwu-hst\00_temp\custom_template.txt"}
+    custom_script = {"HeatPumpMonoenergetic": r"D:\fwu-hst\00_temp\custom_script_hp_mono.txt",
+                     "ModelicaConferencePaper": r"D:\fwu-hst\00_temp\custom_script.txt"}
+
     path = prj.export_besmod(
         THydSup_nominal=THydSup_nominal,
         internal_id=None,
         path=r"D:\fwu-hst\TEASEROutput_besmod",
         examples=examples,
+        custom_examples=custom_template,
+        custom_script=custom_script,
         report=True
     )
 

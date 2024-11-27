@@ -779,6 +779,8 @@ class Project(object):
         THydSup_nominal=None,
         QBuiOld_flow_design=None,
         THydSupOld_design=None,
+        custom_examples=None,
+        custom_script=None,
         report=False
     ):
         """Exports buildings for BESMod simulation
@@ -798,8 +800,12 @@ class Project(object):
             Supported Examples are: "TEASERHeatLoadCalculation", "HeatPumpMonoenergetic" and "GasBoilerBuildingOnly".
         THydSup_nominal: float, dict
             Nominal hydraulic supply temperature in kelvin.
-        partial_retrofit_args: dict
-            Arguments to specify a partial retrofit model in BESMod. Default is
+        custom_examples: dict, optional
+            Specify custom examples with a dictionary containing the example name as the key and
+            the path to the corresponding custom mako template as the value.
+        custom_script: dict, optional
+            Specify custom .mos scripts for the existing and custom examples with a dictionary
+            containing the example name as the key and the path to the corresponding custom mako template as the value.
         path : string
             if the Files should not be stored in default output path of TEASER,
             an alternative path can be specified as a full path
@@ -818,14 +824,16 @@ class Project(object):
         if internal_id is None:
             besmod_output.export_besmod(
                 buildings=self.buildings, prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
-                QBuiOld_flow_design=QBuiOld_flow_design, THydSupOld_design=THydSupOld_design
+                QBuiOld_flow_design=QBuiOld_flow_design, THydSupOld_design=THydSupOld_design,
+                custom_examples=custom_examples, custom_script=custom_script
             )
         else:
             for bldg in self.buildings:
                 if bldg.internal_id == internal_id:
                     besmod_output.export_besmod(
                         buildings=[bldg], prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
-                        QBuiOld_flow_design=QBuiOld_flow_design, THydSupOld_design=THydSupOld_design
+                        QBuiOld_flow_design=QBuiOld_flow_design, THydSupOld_design=THydSupOld_design,
+                        custom_examples=custom_examples, custom_script=custom_script
                     )
 
         if report: # ToDo fwu-hst: Same as AixLib. Maybe create helper function
