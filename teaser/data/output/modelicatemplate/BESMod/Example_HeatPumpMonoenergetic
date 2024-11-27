@@ -10,7 +10,7 @@ model HeatPumpMonoenergetic${bldg.name}
         "modelica://${bldg.parent.name}/${bldg.name}/InternalGains_${bldg.name}.txt"),
         dTSetBack=${-bldg.thermal_zones[0].use_conditions.heating_set_back},
         startTimeSetBack=${startTimeSetBack},
-        hoursSetBack=${hoursSetBack})),
+        hoursSetBack=${hoursSetBack}),
     systemParameters(
         use_hydraulic=true,
         use_ventilation=true,
