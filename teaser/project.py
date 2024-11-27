@@ -955,8 +955,8 @@ class Project(object):
         """ Set location specific parameters
 
         Temperatures are used for static heat load calculation
-        and parameters are used in the BESMod export.
-        Default is Mannheim.
+        and as parameters in the exports.
+        Default location is Mannheim.
 
         Parameters
         ----------
@@ -971,8 +971,8 @@ class Project(object):
             Absolute path to weather file used for Modelica simulation. Default
             weather file can be find in inputdata/weatherdata.
         calc_all_buildings: boolean
-            If True, calculates all buildings new.
-            Here imported for changing static heat load.
+            If True, calculates all buildings new. Default is True.
+            Here important for new calculation of static heat load.
         """
         self.weather_file_path = weather_file_path
         for bldg in self.buildings:
