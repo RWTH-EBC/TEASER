@@ -13,6 +13,7 @@ def export_besmod(
         path=None,
         examples=None,
         THydSup_nominal=None,
+        TSetZone_nominal=293.15,
         QBuiOld_flow_design=None,
         THydSupOld_design=None,
         custom_examples=None,
@@ -40,6 +41,9 @@ def export_besmod(
     THydSup_nominal : float or dict, optional
         Nominal supply temperature(s) for the hydraulic system. Required for
         certain examples (e.g., HeatPumpMonoenergetic, GasBoilerBuildingOnly).
+        See docstring of teaser.data.output.besmod_output.convert_input() for further information.
+    TSetZone_nominal : float or dict, optional
+        Nominal set temperature(s) for the thermal zones.
         See docstring of teaser.data.output.besmod_output.convert_input() for further information.
     QBuiOld_flow_design : dict, optional
         For partially retrofitted systems specify the old nominal heat flow
@@ -91,6 +95,7 @@ def export_besmod(
                          "require the `THydSup_nominal` parameter.")
 
     t_hyd_sup_nominal_bldg = convert_input(THydSup_nominal, buildings)
+    t_set_zone_nominal_bldg = convert_input(TSetZone_nominal, buildings)
     t_hyd_sup_old_design_bldg = convert_input(THydSupOld_design, buildings) if THydSupOld_design else \
         {bldg.name: "systemParameters.THydSup_nominal" for bldg in buildings}
 
@@ -163,6 +168,7 @@ def export_besmod(
                     project=prj,
                     TOda_nominal=bldg.thermal_zones[0].t_outside,
                     THydSup_nominal=t_hyd_sup_nominal_bldg[bldg.name],
+                    TSetZone_nominal=t_set_zone_nominal_bldg[bldg.name],
                     QBuiOld_flow_design=QBuiOld_flow_design[bldg.name],
                     THydSupOld_design=t_hyd_sup_old_design_bldg[bldg.name],
                     startTimeSetBack=start_time_set_back,

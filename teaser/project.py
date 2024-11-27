@@ -768,6 +768,7 @@ class Project(object):
         examples=None,
         path=None,
         THydSup_nominal=None,
+        TSetZone_nominal=293.15,
         QBuiOld_flow_design=None,
         THydSupOld_design=None,
         custom_examples=None,
@@ -787,10 +788,21 @@ class Project(object):
             setter of a specific building which will be exported, if None then
             all buildings will be exported
         examples: [string]
-            List of BESMod.Examples to include buildings in and export them.
+            Names of BESMod examples to export alongside the building models.
             Supported Examples are: "TEASERHeatLoadCalculation", "HeatPumpMonoenergetic" and "GasBoilerBuildingOnly".
-        THydSup_nominal: float, dict
-            Nominal hydraulic supply temperature in kelvin.
+        THydSup_nominal : float or dict, optional
+            Nominal supply temperature(s) for the hydraulic system. Required for
+            certain examples (e.g., HeatPumpMonoenergetic, GasBoilerBuildingOnly).
+            See docstring of teaser.data.output.besmod_output.convert_input() for further information.
+        TSetZone_nominal : float or dict, optional
+            Nominal set temperature(s) for the thermal zones.
+            See docstring of teaser.data.output.besmod_output.convert_input() for further information.
+        QBuiOld_flow_design : dict, optional
+            For partially retrofitted systems specify the old nominal heat flow
+            of the Buildings in a dictionary with the building names as keys.
+            By default, only the radiator transfer system is not retrofitted in BESMod.
+        THydSupOld_design : float or dict, optional
+            Design supply temperatures for old not retrofitted hydraulic systems.
         custom_examples: dict, optional
             Specify custom examples with a dictionary containing the example name as the key and
             the path to the corresponding custom mako template as the value.
@@ -815,7 +827,8 @@ class Project(object):
         if internal_id is None:
             besmod_output.export_besmod(
                 buildings=self.buildings, prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
-                QBuiOld_flow_design=QBuiOld_flow_design, THydSupOld_design=THydSupOld_design,
+                TSetZone_nominal=TSetZone_nominal, QBuiOld_flow_design=QBuiOld_flow_design,
+                THydSupOld_design=THydSupOld_design,
                 custom_examples=custom_examples, custom_script=custom_script
             )
         else:
@@ -823,7 +836,8 @@ class Project(object):
                 if bldg.internal_id == internal_id:
                     besmod_output.export_besmod(
                         buildings=[bldg], prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
-                        QBuiOld_flow_design=QBuiOld_flow_design, THydSupOld_design=THydSupOld_design,
+                        TSetZone_nominal=TSetZone_nominal, QBuiOld_flow_design=QBuiOld_flow_design,
+                        THydSupOld_design=THydSupOld_design,
                         custom_examples=custom_examples, custom_script=custom_script
                     )
 
