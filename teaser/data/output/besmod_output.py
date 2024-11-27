@@ -114,7 +114,7 @@ def export_besmod(
     uses = [
         'Modelica(version="' + prj.modelica_info.version + '")',
         'AixLib(version="' + prj.buildings[-1].library_attr.version + '")',
-        'BESMod(version="0.5.0")']  # ToDo fwu-hst: BESMod version make attribute of AixLib?
+        'BESMod(version="' + prj.buildings[-1].library_attr.besmod_version + '")']
     modelica_output.create_package(
         path=path,
         name=prj.name,
@@ -125,8 +125,7 @@ def export_besmod(
     modelica_output.copy_weather_data(prj.weather_file_path, dir_resources)
 
     for i, bldg in enumerate(buildings):
-        bldg.bldg_height = bldg.number_of_floors * bldg.height_of_floors  # ToDo fwu-hst: better place? Create logic/calculation/besmod.py as for aixlib?
-
+        bldg.bldg_height = bldg.number_of_floors * bldg.height_of_floors 
         set_back_times = bldg.thermal_zones[0].use_conditions.set_back_times
         start_time_set_back = 0
         hours_set_back = 0
