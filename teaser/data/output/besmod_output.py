@@ -133,13 +133,19 @@ def export_besmod(
 
     for i, bldg in enumerate(buildings):
         bldg.bldg_height = bldg.number_of_floors * bldg.height_of_floors
-        set_back_times = bldg.thermal_zones[0].use_conditions.set_back_times
-        start_time_set_back = 0
-        hours_set_back = 0
-        if set_back_times:
-            start_time_set_back = bldg.thermal_zones[0].use_conditions.set_back_times[1] * 3600
-            hours_set_back = 24 - bldg.thermal_zones[0].use_conditions.set_back_times[1] + \
-                             bldg.thermal_zones[0].use_conditions.set_back_times[0]
+        start_time_set_back = []
+        hours_set_back = []
+        heating_set_back = []
+        for tz in bldg.thermal_zones:
+            if tz.use_conditions.set_back_times:
+                heating_set_back.append(tz.use_conditions.heating_set_back)
+                start_time_set_back.append(tz.use_conditions.set_back_times[1] * 3600)
+                hours_set_back.append(100 * (24 - tz.use_conditions.set_back_times[1] +
+                                 tz.use_conditions.set_back_times[0])/24)
+            else:
+                heating_set_back.append(0)
+                start_time_set_back.append(0)
+                hours_set_back.append(0)
 
         ass_error = "BESMod export is only implemented for AixLib calculation."
         assert bldg.used_library_calc == 'AixLib', ass_error
@@ -171,8 +177,9 @@ def export_besmod(
                     TSetZone_nominal=t_set_zone_nominal_bldg[bldg.name],
                     QBuiOld_flow_design=QBuiOld_flow_design[bldg.name],
                     THydSupOld_design=t_hyd_sup_old_design_bldg[bldg.name],
-                    startTimeSetBack=start_time_set_back,
-                    hoursSetBack=hours_set_back))
+                    setBakTSetZone_amplitude=heating_set_back,
+                    setBakTSetZone_startTime=start_time_set_back,
+                    setBakTSetZone_width=hours_set_back))
                 model_file.close()
 
         for exp in examples:

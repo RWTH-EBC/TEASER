@@ -1,4 +1,4 @@
-<%namespace file="/modelica_language/" import="get_true_false"/>
+<%namespace file="/modelica_language/" import="get_list"/>
 within ${bldg.parent.name}.${bldg.name};
 model TEASERHeatLoadCalculation${bldg.name}
   extends BESMod.Systems.BaseClasses.TEASERExport.PartialTEASERHeatLoadCalculation(
@@ -6,9 +6,10 @@ model TEASERHeatLoadCalculation${bldg.name}
     userProfiles(
         fileNameIntGains=Modelica.Utilities.Files.loadResource(
         "modelica://${bldg.parent.name}/${bldg.name}/InternalGains_${bldg.name}.txt"),
-        dTSetBack=${-bldg.thermal_zones[0].use_conditions.heating_set_back},
-        startTimeSetBack=${startTimeSetBack},
-        hoursSetBack=${hoursSetBack}),
+        setBakTSetZone(
+            amplitude=${get_list(setBakTSetZone_amplitude)},
+            width=${get_list(setBakTSetZone_width)},
+            startTime=${get_list(setBakTSetZone_startTime)})),
     systemParameters(nZones=${len(bldg.thermal_zones)},
                      TSetZone_nominal=${TSetZone_nominal},
                      TOda_nominal=${TOda_nominal},
