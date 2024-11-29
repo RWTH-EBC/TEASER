@@ -16,7 +16,7 @@ model HeatPumpMonoenergetic${bldg.name}
         use_hydraulic=true,
         use_ventilation=true,
         nZones=${len(bldg.thermal_zones)},
-        TSetZone_nominal=${TSetZone_nominal},
+        TSetZone_nominal=${get_list(TSetZone_nominal)},
         TOda_nominal=${TOda_nominal},
         QBui_flow_nominal=building.QRec_flow_nominal,
         THydSup_nominal=${THydSup_nominal},

@@ -13,7 +13,6 @@ def export_besmod(
         path=None,
         examples=None,
         THydSup_nominal=None,
-        TSetZone_nominal=293.15,
         QBuiOld_flow_design=None,
         THydSupOld_design=None,
         custom_examples=None,
@@ -41,9 +40,6 @@ def export_besmod(
     THydSup_nominal : float or dict, optional
         Nominal supply temperature(s) for the hydraulic system. Required for
         certain examples (e.g., HeatPumpMonoenergetic, GasBoilerBuildingOnly).
-        See docstring of teaser.data.output.besmod_output.convert_input() for further information.
-    TSetZone_nominal : float or dict, optional
-        Nominal set temperature(s) for the thermal zones.
         See docstring of teaser.data.output.besmod_output.convert_input() for further information.
     QBuiOld_flow_design : dict, optional
         For partially retrofitted systems specify the old nominal heat flow
@@ -95,7 +91,6 @@ def export_besmod(
                          "require the `THydSup_nominal` parameter.")
 
     t_hyd_sup_nominal_bldg = convert_input(THydSup_nominal, buildings)
-    t_set_zone_nominal_bldg = convert_input(TSetZone_nominal, buildings)
     t_hyd_sup_old_design_bldg = convert_input(THydSupOld_design, buildings) if THydSupOld_design else \
         {bldg.name: "systemParameters.THydSup_nominal" for bldg in buildings}
 
@@ -133,19 +128,17 @@ def export_besmod(
 
     for i, bldg in enumerate(buildings):
         bldg.bldg_height = bldg.number_of_floors * bldg.height_of_floors
-        start_time_set_back = []
-        hours_set_back = []
-        heating_set_back = []
+        start_time_zones = []
+        width_zones = []
+        amplitude_zones = []
+        t_set_zone_nominal = []
         for tz in bldg.thermal_zones:
-            if tz.use_conditions.set_back_times:
-                heating_set_back.append(tz.use_conditions.heating_set_back)
-                start_time_set_back.append(tz.use_conditions.set_back_times[1] * 3600)
-                hours_set_back.append(100 * (24 - tz.use_conditions.set_back_times[1] +
-                                 tz.use_conditions.set_back_times[0])/24)
-            else:
-                heating_set_back.append(0)
-                start_time_set_back.append(0)
-                hours_set_back.append(0)
+            heating_profile = tz.use_conditions.heating_profile
+            t_set_nominal, start_time, width, amplitude = _convert_heating_profile(heating_profile)
+            t_set_zone_nominal.append(t_set_nominal)
+            amplitude_zones.append(amplitude)
+            start_time_zones.append(start_time)
+            width_zones.append(width)
 
         ass_error = "BESMod export is only implemented for AixLib calculation."
         assert bldg.used_library_calc == 'AixLib', ass_error
@@ -174,12 +167,12 @@ def export_besmod(
                     project=prj,
                     TOda_nominal=bldg.thermal_zones[0].t_outside,
                     THydSup_nominal=t_hyd_sup_nominal_bldg[bldg.name],
-                    TSetZone_nominal=t_set_zone_nominal_bldg[bldg.name],
+                    TSetZone_nominal=t_set_zone_nominal,
                     QBuiOld_flow_design=QBuiOld_flow_design[bldg.name],
                     THydSupOld_design=t_hyd_sup_old_design_bldg[bldg.name],
-                    setBakTSetZone_amplitude=heating_set_back,
-                    setBakTSetZone_startTime=start_time_set_back,
-                    setBakTSetZone_width=hours_set_back))
+                    setBakTSetZone_amplitude=amplitude_zones,
+                    setBakTSetZone_startTime=start_time_zones,
+                    setBakTSetZone_width=width_zones))
                 model_file.close()
 
         for exp in examples:
@@ -210,7 +203,6 @@ def export_besmod(
                         filename=custom_script[exp],
                         lookup=lookup)
                     _help_example_script(bldg, dir_dymola, example_sim_plot_script, exp)
-
 
         bldg_package.append(bldg.name + "_DataBase")
         modelica_output.create_package(path=bldg_path, name=bldg.name, within=bldg.parent.name)
@@ -337,6 +329,63 @@ def _convert_to_zone_array(bldg, zone_dict):
         return array_string[:-1] + "}"
     else:
         raise KeyError(f"{set(tz_names) - set(list(zone_dict.keys()))} thermal zones missing in given dictionary.")
+
+
+def _convert_heating_profile(heating_profile):
+    """
+    Convert a 24-hour heating profile for BESMod export.
+
+    This function analyzes a 24-hour heating profile to extract:
+    - The nominal temperature.
+    - Start time of setbacks (if any).
+    - Width of setback intervals.
+    - Amplitude of the heating variation.
+
+    Parameters
+    ----------
+    heating_profile : list[float]
+        List of 24 hourly heating temperatures.
+
+    Returns
+    -------
+    t_set_zone_nominal : float
+        Maximum temperature in the profile, used as the nominal set point.
+    start_time : int
+        Start time of the setback interval in seconds.
+    width : float
+        Width of the setback interval as a percentage of the day.
+    amplitude : float
+        Difference between the minimum and nominal temperatures.
+
+    Raises
+    ------
+    ValueError
+        If the profile has more than two distinct intervals or does not have 24 values.
+    """
+
+    if len(heating_profile) != 24:
+        raise ValueError("Only 24 hours heating profiles can be used for BESMod export.")
+    change_count = 0
+    change_indexes = []
+    for i in range(1, len(heating_profile)):
+        if heating_profile[i] != heating_profile[i - 1]:
+            change_count += 1
+            change_indexes.append(i)
+    t_set_zone_nominal = max(heating_profile)
+    amplitude = min(heating_profile) - t_set_zone_nominal
+    if change_count == 0:
+        start_time = 0
+        width = 0
+    elif change_count == 1:
+        start_time = 24 * 3600
+        width = 100 * change_indexes[0] / 24
+    elif change_count == 2:
+        start_time = change_indexes[1] * 3600
+        width = 100 * (24-change_indexes[1] + change_indexes[0]) / 24
+    else:
+        raise ValueError("You have more than two temperature intervals in the heating profile."
+                         "BESMod can only handel one heating set back.")
+    return t_set_zone_nominal, start_time, width, amplitude
 
 
 def _get_next_higher_year_value(years_dict, given_year):

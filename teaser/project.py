@@ -768,7 +768,6 @@ class Project(object):
         examples=None,
         path=None,
         THydSup_nominal=None,
-        TSetZone_nominal=293.15,
         QBuiOld_flow_design=None,
         THydSupOld_design=None,
         custom_examples=None,
@@ -793,9 +792,6 @@ class Project(object):
         THydSup_nominal : float or dict, optional
             Nominal supply temperature(s) for the hydraulic system. Required for
             certain examples (e.g., HeatPumpMonoenergetic, GasBoilerBuildingOnly).
-            See docstring of teaser.data.output.besmod_output.convert_input() for further information.
-        TSetZone_nominal : float or dict, optional
-            Nominal set temperature(s) for the thermal zones.
             See docstring of teaser.data.output.besmod_output.convert_input() for further information.
         QBuiOld_flow_design : dict, optional
             For partially retrofitted systems specify the old nominal heat flow
@@ -827,8 +823,7 @@ class Project(object):
         if internal_id is None:
             besmod_output.export_besmod(
                 buildings=self.buildings, prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
-                TSetZone_nominal=TSetZone_nominal, QBuiOld_flow_design=QBuiOld_flow_design,
-                THydSupOld_design=THydSupOld_design,
+                QBuiOld_flow_design=QBuiOld_flow_design, THydSupOld_design=THydSupOld_design,
                 custom_examples=custom_examples, custom_script=custom_script
             )
         else:
@@ -836,8 +831,7 @@ class Project(object):
                 if bldg.internal_id == internal_id:
                     besmod_output.export_besmod(
                         buildings=[bldg], prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
-                        TSetZone_nominal=TSetZone_nominal, QBuiOld_flow_design=QBuiOld_flow_design,
-                        THydSupOld_design=THydSupOld_design,
+                        QBuiOld_flow_design=QBuiOld_flow_design, THydSupOld_design=THydSupOld_design,
                         custom_examples=custom_examples, custom_script=custom_script
                     )
 

@@ -10,7 +10,7 @@ model GasBoilerBuildingOnly${bldg.name}
             width=${get_list(setBakTSetZone_width)},
             startTime=${get_list(setBakTSetZone_startTime)})),
     systemParameters(nZones=${len(bldg.thermal_zones)},
-                     TSetZone_nominal=${TSetZone_nominal},
+                     TSetZone_nominal=${get_list(TSetZone_nominal)},
                      TOda_nominal=${TOda_nominal},
                      THydSup_nominal=${THydSup_nominal},
                      QBuiOld_flow_design=${QBuiOld_flow_design},
