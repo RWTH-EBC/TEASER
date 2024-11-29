@@ -877,7 +877,6 @@
         <span class="n">examples</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">THydSup_nominal</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">TSetZone_nominal</span><span class="o">=</span><span class="mf">293.15</span><span class="p">,</span>
         <span class="n">QBuiOld_flow_design</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">THydSupOld_design</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">custom_examples</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -902,9 +901,6 @@
 <span class="sd">        THydSup_nominal : float or dict, optional</span>
 <span class="sd">            Nominal supply temperature(s) for the hydraulic system. Required for</span>
 <span class="sd">            certain examples (e.g., HeatPumpMonoenergetic, GasBoilerBuildingOnly).</span>
-<span class="sd">            See docstring of teaser.data.output.besmod_output.convert_input() for further information.</span>
-<span class="sd">        TSetZone_nominal : float or dict, optional</span>
-<span class="sd">            Nominal set temperature(s) for the thermal zones.</span>
 <span class="sd">            See docstring of teaser.data.output.besmod_output.convert_input() for further information.</span>
 <span class="sd">        QBuiOld_flow_design : dict, optional</span>
 <span class="sd">            For partially retrofitted systems specify the old nominal heat flow</span>
@@ -936,8 +932,7 @@
         <span class="k">if</span> <span class="n">internal_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">besmod_output</span><span class="o">.</span><span class="n">export_besmod</span><span class="p">(</span>
                 <span class="n">buildings</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">,</span> <span class="n">prj</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">examples</span><span class="o">=</span><span class="n">examples</span><span class="p">,</span> <span class="n">THydSup_nominal</span><span class="o">=</span><span class="n">THydSup_nominal</span><span class="p">,</span>
-                <span class="n">TSetZone_nominal</span><span class="o">=</span><span class="n">TSetZone_nominal</span><span class="p">,</span> <span class="n">QBuiOld_flow_design</span><span class="o">=</span><span class="n">QBuiOld_flow_design</span><span class="p">,</span>
-                <span class="n">THydSupOld_design</span><span class="o">=</span><span class="n">THydSupOld_design</span><span class="p">,</span>
+                <span class="n">QBuiOld_flow_design</span><span class="o">=</span><span class="n">QBuiOld_flow_design</span><span class="p">,</span> <span class="n">THydSupOld_design</span><span class="o">=</span><span class="n">THydSupOld_design</span><span class="p">,</span>
                 <span class="n">custom_examples</span><span class="o">=</span><span class="n">custom_examples</span><span class="p">,</span> <span class="n">custom_script</span><span class="o">=</span><span class="n">custom_script</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -945,8 +940,7 @@
                 <span class="k">if</span> <span class="n">bldg</span><span class="o">.</span><span class="n">internal_id</span> <span class="o">==</span> <span class="n">internal_id</span><span class="p">:</span>
                     <span class="n">besmod_output</span><span class="o">.</span><span class="n">export_besmod</span><span class="p">(</span>
                         <span class="n">buildings</span><span class="o">=</span><span class="p">[</span><span class="n">bldg</span><span class="p">],</span> <span class="n">prj</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">examples</span><span class="o">=</span><span class="n">examples</span><span class="p">,</span> <span class="n">THydSup_nominal</span><span class="o">=</span><span class="n">THydSup_nominal</span><span class="p">,</span>
-                        <span class="n">TSetZone_nominal</span><span class="o">=</span><span class="n">TSetZone_nominal</span><span class="p">,</span> <span class="n">QBuiOld_flow_design</span><span class="o">=</span><span class="n">QBuiOld_flow_design</span><span class="p">,</span>
-                        <span class="n">THydSupOld_design</span><span class="o">=</span><span class="n">THydSupOld_design</span><span class="p">,</span>
+                        <span class="n">QBuiOld_flow_design</span><span class="o">=</span><span class="n">QBuiOld_flow_design</span><span class="p">,</span> <span class="n">THydSupOld_design</span><span class="o">=</span><span class="n">THydSupOld_design</span><span class="p">,</span>
                         <span class="n">custom_examples</span><span class="o">=</span><span class="n">custom_examples</span><span class="p">,</span> <span class="n">custom_script</span><span class="o">=</span><span class="n">custom_script</span>
                     <span class="p">)</span>
 

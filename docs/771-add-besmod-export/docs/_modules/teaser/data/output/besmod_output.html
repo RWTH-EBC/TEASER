@@ -93,7 +93,6 @@
         <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">examples</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">THydSup_nominal</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">TSetZone_nominal</span><span class="o">=</span><span class="mf">293.15</span><span class="p">,</span>
         <span class="n">QBuiOld_flow_design</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">THydSupOld_design</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">custom_examples</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -121,9 +120,6 @@
 <span class="sd">    THydSup_nominal : float or dict, optional</span>
 <span class="sd">        Nominal supply temperature(s) for the hydraulic system. Required for</span>
 <span class="sd">        certain examples (e.g., HeatPumpMonoenergetic, GasBoilerBuildingOnly).</span>
-<span class="sd">        See docstring of teaser.data.output.besmod_output.convert_input() for further information.</span>
-<span class="sd">    TSetZone_nominal : float or dict, optional</span>
-<span class="sd">        Nominal set temperature(s) for the thermal zones.</span>
 <span class="sd">        See docstring of teaser.data.output.besmod_output.convert_input() for further information.</span>
 <span class="sd">    QBuiOld_flow_design : dict, optional</span>
 <span class="sd">        For partially retrofitted systems specify the old nominal heat flow</span>
@@ -175,7 +171,6 @@
                          <span class="s2">&quot;require the `THydSup_nominal` parameter.&quot;</span><span class="p">)</span>
 
     <span class="n">t_hyd_sup_nominal_bldg</span> <span class="o">=</span> <span class="n">convert_input</span><span class="p">(</span><span class="n">THydSup_nominal</span><span class="p">,</span> <span class="n">buildings</span><span class="p">)</span>
-    <span class="n">t_set_zone_nominal_bldg</span> <span class="o">=</span> <span class="n">convert_input</span><span class="p">(</span><span class="n">TSetZone_nominal</span><span class="p">,</span> <span class="n">buildings</span><span class="p">)</span>
     <span class="n">t_hyd_sup_old_design_bldg</span> <span class="o">=</span> <span class="n">convert_input</span><span class="p">(</span><span class="n">THydSupOld_design</span><span class="p">,</span> <span class="n">buildings</span><span class="p">)</span> <span class="k">if</span> <span class="n">THydSupOld_design</span> <span class="k">else</span> \
         <span class="p">{</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="s2">&quot;systemParameters.THydSup_nominal&quot;</span> <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="n">buildings</span><span class="p">}</span>
 
@@ -213,13 +208,17 @@
 
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">buildings</span><span class="p">):</span>
         <span class="n">bldg</span><span class="o">.</span><span class="n">bldg_height</span> <span class="o">=</span> <span class="n">bldg</span><span class="o">.</span><span class="n">number_of_floors</span> <span class="o">*</span> <span class="n">bldg</span><span class="o">.</span><span class="n">height_of_floors</span>
-        <span class="n">set_back_times</span> <span class="o">=</span> <span class="n">bldg</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">set_back_times</span>
-        <span class="n">start_time_set_back</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">hours_set_back</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">if</span> <span class="n">set_back_times</span><span class="p">:</span>
-            <span class="n">start_time_set_back</span> <span class="o">=</span> <span class="n">bldg</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">set_back_times</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3600</span>
-            <span class="n">hours_set_back</span> <span class="o">=</span> <span class="mi">24</span> <span class="o">-</span> <span class="n">bldg</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">set_back_times</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> \
-                             <span class="n">bldg</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">set_back_times</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">start_time_zones</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">width_zones</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">amplitude_zones</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">t_set_zone_nominal</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">tz</span> <span class="ow">in</span> <span class="n">bldg</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+            <span class="n">heating_profile</span> <span class="o">=</span> <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">heating_profile</span>
+            <span class="n">t_set_nominal</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">amplitude</span> <span class="o">=</span> <span class="n">_convert_heating_profile</span><span class="p">(</span><span class="n">heating_profile</span><span class="p">)</span>
+            <span class="n">t_set_zone_nominal</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_set_nominal</span><span class="p">)</span>
+            <span class="n">amplitude_zones</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">amplitude</span><span class="p">)</span>
+            <span class="n">start_time_zones</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">start_time</span><span class="p">)</span>
+            <span class="n">width_zones</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
 
         <span class="n">ass_error</span> <span class="o">=</span> <span class="s2">&quot;BESMod export is only implemented for AixLib calculation.&quot;</span>
         <span class="k">assert</span> <span class="n">bldg</span><span class="o">.</span><span class="n">used_library_calc</span> <span class="o">==</span> <span class="s1">&#39;AixLib&#39;</span><span class="p">,</span> <span class="n">ass_error</span>
@@ -248,11 +247,12 @@
                     <span class="n">project</span><span class="o">=</span><span class="n">prj</span><span class="p">,</span>
                     <span class="n">TOda_nominal</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">t_outside</span><span class="p">,</span>
                     <span class="n">THydSup_nominal</span><span class="o">=</span><span class="n">t_hyd_sup_nominal_bldg</span><span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">],</span>
-                    <span class="n">TSetZone_nominal</span><span class="o">=</span><span class="n">t_set_zone_nominal_bldg</span><span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">],</span>
+                    <span class="n">TSetZone_nominal</span><span class="o">=</span><span class="n">t_set_zone_nominal</span><span class="p">,</span>
                     <span class="n">QBuiOld_flow_design</span><span class="o">=</span><span class="n">QBuiOld_flow_design</span><span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">],</span>
                     <span class="n">THydSupOld_design</span><span class="o">=</span><span class="n">t_hyd_sup_old_design_bldg</span><span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">],</span>
-                    <span class="n">startTimeSetBack</span><span class="o">=</span><span class="n">start_time_set_back</span><span class="p">,</span>
-                    <span class="n">hoursSetBack</span><span class="o">=</span><span class="n">hours_set_back</span><span class="p">))</span>
+                    <span class="n">setBakTSetZone_amplitude</span><span class="o">=</span><span class="n">amplitude_zones</span><span class="p">,</span>
+                    <span class="n">setBakTSetZone_startTime</span><span class="o">=</span><span class="n">start_time_zones</span><span class="p">,</span>
+                    <span class="n">setBakTSetZone_width</span><span class="o">=</span><span class="n">width_zones</span><span class="p">))</span>
                 <span class="n">model_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
         <span class="k">for</span> <span class="n">exp</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
@@ -283,7 +283,6 @@
                         <span class="n">filename</span><span class="o">=</span><span class="n">custom_script</span><span class="p">[</span><span class="n">exp</span><span class="p">],</span>
                         <span class="n">lookup</span><span class="o">=</span><span class="n">lookup</span><span class="p">)</span>
                     <span class="n">_help_example_script</span><span class="p">(</span><span class="n">bldg</span><span class="p">,</span> <span class="n">dir_dymola</span><span class="p">,</span> <span class="n">example_sim_plot_script</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
-
 
         <span class="n">bldg_package</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_DataBase&quot;</span><span class="p">)</span>
         <span class="n">modelica_output</span><span class="o">.</span><span class="n">create_package</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">bldg_path</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">within</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
@@ -414,6 +413,63 @@
         <span class="k">return</span> <span class="n">array_string</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;}&quot;</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="n">tz_names</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">zone_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span><span class="si">}</span><span class="s2"> thermal zones missing in given dictionary.&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_convert_heating_profile</span><span class="p">(</span><span class="n">heating_profile</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert a 24-hour heating profile for BESMod export.</span>
+
+<span class="sd">    This function analyzes a 24-hour heating profile to extract:</span>
+<span class="sd">    - The nominal temperature.</span>
+<span class="sd">    - Start time of setbacks (if any).</span>
+<span class="sd">    - Width of setback intervals.</span>
+<span class="sd">    - Amplitude of the heating variation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    heating_profile : list[float]</span>
+<span class="sd">        List of 24 hourly heating temperatures.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    t_set_zone_nominal : float</span>
+<span class="sd">        Maximum temperature in the profile, used as the nominal set point.</span>
+<span class="sd">    start_time : int</span>
+<span class="sd">        Start time of the setback interval in seconds.</span>
+<span class="sd">    width : float</span>
+<span class="sd">        Width of the setback interval as a percentage of the day.</span>
+<span class="sd">    amplitude : float</span>
+<span class="sd">        Difference between the minimum and nominal temperatures.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If the profile has more than two distinct intervals or does not have 24 values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">heating_profile</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">24</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Only 24 hours heating profiles can be used for BESMod export.&quot;</span><span class="p">)</span>
+    <span class="n">change_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">change_indexes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">heating_profile</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">heating_profile</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">heating_profile</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="n">change_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">change_indexes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">t_set_zone_nominal</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">heating_profile</span><span class="p">)</span>
+    <span class="n">amplitude</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">heating_profile</span><span class="p">)</span> <span class="o">-</span> <span class="n">t_set_zone_nominal</span>
+    <span class="k">if</span> <span class="n">change_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">change_count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">3600</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">change_indexes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">24</span>
+    <span class="k">elif</span> <span class="n">change_count</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">change_indexes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3600</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="mi">24</span><span class="o">-</span><span class="n">change_indexes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">change_indexes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">24</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have more than two temperature intervals in the heating profile.&quot;</span>
+                         <span class="s2">&quot;BESMod can only handel one heating set back.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">t_set_zone_nominal</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">amplitude</span>
 
 
 <span class="k">def</span> <span class="nf">_get_next_higher_year_value</span><span class="p">(</span><span class="n">years_dict</span><span class="p">,</span> <span class="n">given_year</span><span class="p">):</span>

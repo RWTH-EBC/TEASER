@@ -76,7 +76,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for teaser.examples.e4_export_besmod_models</h1><div class="highlight"><pre>
-<span></span><span class="c1"># # Example 2: Export Modelica models for AixLib library using TEASER API</span>
+<span></span><span class="c1"># # Example 4: Export Modelica models for BESMod library using TEASER API</span>
 
 <span class="c1"># This module contains an example how to export buildings from a TEASER</span>
 <span class="c1"># project to ready-to-run simulation models for Modelica library BESMod.</span>
@@ -89,8 +89,8 @@
 
 <div class="viewcode-block" id="example_export_besmod">
 <a class="viewcode-back" href="../../../code/teaser.examples.html#teaser.examples.e4_export_besmod_models.example_export_besmod">[docs]</a>
-<span class="k">def</span> <span class="nf">example_export_besmod</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function demonstrates the export to Modelica library AixLib using</span>
+<span class="k">def</span> <span class="nf">example_export_besmod</span><span class="p">(</span><span class="n">save_dir_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function demonstrates the export to Modelica library BESMod using</span>
 <span class="sd">    the API function of TEASER&quot;&quot;&quot;</span>
 
     <span class="c1"># In e1_generate_archetype we created a Project with three archetype</span>
@@ -98,48 +98,32 @@
 
     <span class="n">prj</span> <span class="o">=</span> <span class="n">e1</span><span class="o">.</span><span class="n">example_generate_archetype</span><span class="p">()</span>
 
-
-    <span class="n">prj</span><span class="o">.</span><span class="n">dir_reference_results</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-            <span class="s2">&quot;examples&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;examplefiles&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ReferenceResults&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;Dymola&quot;</span><span class="p">))</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="n">prj</span><span class="o">.</span><span class="n">dir_reference_results</span><span class="p">)</span>
+    <span class="c1"># To make sure the export is using the desired parameters you should</span>
+    <span class="c1"># always set model settings in the Project.</span>
+    <span class="c1"># The TEASER building in BESMod uses the AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone model</span>
+    <span class="c1"># with 4 elements, so we have to set these project settings</span>
 
     <span class="n">prj</span><span class="o">.</span><span class="n">used_library_calc</span> <span class="o">=</span> <span class="s1">&#39;AixLib&#39;</span>
     <span class="n">prj</span><span class="o">.</span><span class="n">number_of_elements_calc</span> <span class="o">=</span> <span class="mi">4</span>
 
-    <span class="n">Residential</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">bldg</span> <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span> <span class="k">if</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;ResidentialBuilding&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-
-    <span class="n">Residential</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">set_back_times</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">22</span><span class="p">]</span>
-    <span class="n">Residential</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">heating_set_back</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span>
-    <span class="c1"># Residential.thermal_zones[0].use_conditions.calc_adj_schedules()</span>
-
-    <span class="n">weather_file_path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;input&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;inputdata&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;weatherdata&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos&quot;</span><span class="p">))</span>
-
-
-    <span class="n">prj</span><span class="o">.</span><span class="n">set_location_parameters</span><span class="p">(</span><span class="n">t_outside</span><span class="o">=</span><span class="mf">262.65</span><span class="p">,</span>
-                                <span class="n">t_ground</span><span class="o">=</span><span class="mf">286.15</span><span class="p">,</span>
-                                <span class="n">weather_file_path</span><span class="o">=</span><span class="n">weather_file_path</span><span class="p">,</span>
-                                <span class="n">calc_all_buildings</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-    <span class="c1"># prj.calc_all_buildings()</span>
+    <span class="c1"># With these information we could already export the building models</span>
+    <span class="c1"># which extend from BESMod.Systems.Demand.Building.TEASERThermalZone.</span>
+    <span class="c1"># But we have also the option to include these building models directly in</span>
+    <span class="c1"># predefined example building energy systems. These systems are:</span>
+    <span class="c1"># &quot;TEASERHeatLoadCalculation&quot; which is a system with an ideal electric heater for heat load calculation.</span>
+    <span class="c1"># &quot;HeatPumpMonoenergetic&quot; which is a system with a heat pump and an electric heater in serial,</span>
+    <span class="c1"># buffer and DHW storages, radiators and PV.</span>
+    <span class="c1"># &quot;GasBoilerBuildingOnly&quot; which is a system with a gas boiler and radiators.</span>
 
     <span class="n">examples</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;TEASERHeatLoadCalculation&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;HeatPumpMonoenergetic&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;GasBoilerBuildingOnly&quot;</span><span class="p">]</span>
 
+    <span class="c1"># For the examples with hydraulic system, we need further parameters to get fully parameterized ready to run model.</span>
+    <span class="c1"># This is manly the nominal hydraulic supply temperature. We have different options to set this value.</span>
+    <span class="c1"># First, we can set one value for all buildings and thermal zones in the project.</span>
     <span class="n">THydSup_nominal</span> <span class="o">=</span> <span class="mi">55</span> <span class="o">+</span> <span class="mf">273.15</span>
-    <span class="n">THydSup_nominal</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1950</span><span class="p">:</span> <span class="mi">90</span><span class="o">+</span><span class="mf">273.15</span><span class="p">,</span> <span class="mi">1980</span><span class="p">:</span> <span class="mi">70</span><span class="o">+</span><span class="mf">273.15</span><span class="p">,</span> <span class="mi">2010</span><span class="p">:</span> <span class="mi">55</span><span class="o">+</span><span class="mf">273.15</span><span class="p">,</span> <span class="mi">2024</span><span class="p">:</span> <span class="mi">35</span><span class="o">+</span><span class="mf">273.15</span><span class="p">}</span>
+    <span class="c1"># Second, we can set the value separately for each building and with in the building also for each thermal zone.</span>
     <span class="n">THydSup_nominal</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ResidentialBuilding&quot;</span><span class="p">:</span> <span class="mf">328.15</span><span class="p">,</span>
                        <span class="s2">&quot;OfficeBuilding&quot;</span><span class="p">:</span> <span class="mf">328.15</span><span class="p">,</span>
                        <span class="s2">&quot;InstituteBuilding&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Office&quot;</span><span class="p">:</span> <span class="mf">343.15</span><span class="p">,</span>
@@ -152,15 +136,45 @@
                        <span class="s2">&quot;InstituteBuildingMoisture&quot;</span><span class="p">:</span> <span class="mf">343.15</span><span class="p">,</span>
                        <span class="s2">&quot;ResidentialBuildingTabula&quot;</span><span class="p">:</span> <span class="mf">328.15</span><span class="p">,</span>
                        <span class="s2">&quot;ResidentialBuildingTabulaMulti&quot;</span><span class="p">:</span> <span class="mf">328.15</span><span class="p">}</span>
+    <span class="c1"># Third, we can specify the value for a building by the construction year. Here the value of the next higher</span>
+    <span class="c1"># specified year is set to the building. The classification here is taken from</span>
+    <span class="c1"># https://www.ffe.de/projekte/waermepumpen-fahrplan-finanzielle-kipppunkte-zur-modernisierung-mit-waermepumpen-im-wohngebaeudebestand/</span>
+    <span class="n">THydSup_nominal</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1950</span><span class="p">:</span> <span class="mi">90</span> <span class="o">+</span> <span class="mf">273.15</span><span class="p">,</span> <span class="mi">1980</span><span class="p">:</span> <span class="mi">70</span> <span class="o">+</span> <span class="mf">273.15</span><span class="p">,</span> <span class="mi">2010</span><span class="p">:</span> <span class="mi">55</span> <span class="o">+</span> <span class="mf">273.15</span><span class="p">,</span> <span class="mi">2024</span><span class="p">:</span> <span class="mi">35</span> <span class="o">+</span> <span class="mf">273.15</span><span class="p">}</span>
 
+    <span class="c1"># The parameters for the BESMod.Systems.UserProfiles.TEASERProfiles are also set in the export of</span>
+    <span class="c1"># the examples. The internal gains file which is exported with the building is set and heating set backs</span>
+    <span class="c1"># are extracted from the heating_profile of each zone and directly set in the setBakTSetZone Pulse block.</span>
+    <span class="c1"># BESMod only allows 24 hours heating profiles.</span>
+
+    <span class="c1"># We also need to set location specific parameters which we can do with the following function.</span>
+    <span class="c1"># The values we set here are the default values which correspond to Mannheim.</span>
+
+    <span class="n">weather_file_path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="s2">&quot;data&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;input&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;inputdata&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;weatherdata&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos&quot;</span><span class="p">))</span>
+
+    <span class="n">prj</span><span class="o">.</span><span class="n">set_location_parameters</span><span class="p">(</span><span class="n">t_outside</span><span class="o">=</span><span class="mf">262.65</span><span class="p">,</span>
+                                <span class="n">t_ground</span><span class="o">=</span><span class="mf">286.15</span><span class="p">,</span>
+                                <span class="n">weather_file_path</span><span class="o">=</span><span class="n">weather_file_path</span><span class="p">,</span>
+                                <span class="n">calc_all_buildings</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># To make sure the parameters are calculated correctly we recommend to</span>
+    <span class="c1"># run prj.calc_all_buildings() function which is here already done in the set_location_parameters function</span>
+
+    <span class="c1"># Now we export all building in the project and also include it in all optional examples.</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">prj</span><span class="o">.</span><span class="n">export_besmod</span><span class="p">(</span>
         <span class="n">THydSup_nominal</span><span class="o">=</span><span class="n">THydSup_nominal</span><span class="p">,</span>
-        <span class="n">internal_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;D:\fwu-hst\TEASEROutput_besmod&quot;</span><span class="p">,</span>
-        <span class="n">examples</span><span class="o">=</span><span class="n">examples</span><span class="p">,</span>
-        <span class="n">report</span><span class="o">=</span><span class="kc">True</span>
+        <span class="n">path</span><span class="o">=</span><span class="n">save_dir_path</span><span class="p">,</span>
+        <span class="n">examples</span><span class="o">=</span><span class="n">examples</span>
     <span class="p">)</span>
 
+    <span class="c1"># We can also utilize the partial retrofit option of the energy system in BESMod.</span>
+    <span class="c1"># For that we need to extract the nominal heat flow of each zone in the building</span>
+    <span class="c1"># and then retrofit the buildings here in TEASER.</span>
 
     <span class="n">QBuiOld_flow_design</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">:</span>
@@ -169,38 +183,51 @@
             <span class="n">QBuiOld_flow_design</span><span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="n">tz</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">tz</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">heat_load</span>
 
     <span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ArchetypeExample_partial_retrofit&quot;</span>
-
     <span class="n">prj</span><span class="o">.</span><span class="n">retrofit_all_buildings</span><span class="p">(</span>
         <span class="n">year_of_retrofit</span><span class="o">=</span><span class="mi">2015</span><span class="p">,</span>
         <span class="n">type_of_retrofit</span><span class="o">=</span><span class="s2">&quot;adv_retrofit&quot;</span><span class="p">,</span>
         <span class="n">window_type</span><span class="o">=</span><span class="s1">&#39;Alu- oder Stahlfenster, Isolierverglasung&#39;</span><span class="p">,</span>
-        <span class="n">material</span><span class="o">=</span><span class="s1">&#39;EPS_perimeter_insulation_top_layer&#39;</span><span class="p">)</span>
-
+        <span class="n">material</span><span class="o">=</span><span class="s1">&#39;EPS_perimeter_insulation_top_layer&#39;</span>
+    <span class="p">)</span>
     <span class="n">prj</span><span class="o">.</span><span class="n">calc_all_buildings</span><span class="p">()</span>
+
+    <span class="c1"># When we now set heat flow of the old building design.</span>
+    <span class="c1"># By default, the radiator transfer systems are not retrofitted when the</span>
+    <span class="c1"># QBuiOld_flow_design parameter is set and different to the new nominal heat flow.</span>
+    <span class="c1"># We would also have the option to set new THycSup_nominal temperatures and set</span>
+    <span class="c1"># the old temperatures with THydSupOld_design which are used for the sizing of the radiators</span>
+    <span class="c1"># but not in the controls.</span>
 
     <span class="n">path</span> <span class="o">=</span> <span class="n">prj</span><span class="o">.</span><span class="n">export_besmod</span><span class="p">(</span>
         <span class="n">THydSup_nominal</span><span class="o">=</span><span class="n">THydSup_nominal</span><span class="p">,</span>
         <span class="n">QBuiOld_flow_design</span><span class="o">=</span><span class="n">QBuiOld_flow_design</span><span class="p">,</span>
-        <span class="n">internal_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;D:\fwu-hst\TEASEROutput_besmod&quot;</span><span class="p">,</span>
-        <span class="n">examples</span><span class="o">=</span><span class="n">examples</span><span class="p">,</span>
-        <span class="n">report</span><span class="o">=</span><span class="kc">True</span>
+        <span class="n">path</span><span class="o">=</span><span class="n">save_dir_path</span><span class="p">,</span>
+        <span class="n">examples</span><span class="o">=</span><span class="n">examples</span>
     <span class="p">)</span>
+
+    <span class="c1"># If QBuiOld_flow_design is not set the energy system is also totally retrofitted to the new heat demand.</span>
+    <span class="c1"># We have also the option to define custom templates into which the building should be included.</span>
+    <span class="c1"># For example, we have here a custom template where the building is included in the</span>
+    <span class="c1"># ModelicaConferencePaper example in BESMod which als includes a battery.</span>
 
     <span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ArchetypeExample_total_retrofit&quot;</span>
 
-    <span class="n">custom_template</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ModelicaConferencePaper&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;D:\fwu-hst\00_temp\custom_template.txt&quot;</span><span class="p">}</span>
-    <span class="n">custom_script</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;HeatPumpMonoenergetic&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;D:\fwu-hst\00_temp\custom_script_hp_mono.txt&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;ModelicaConferencePaper&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;D:\fwu-hst\00_temp\custom_script.txt&quot;</span><span class="p">}</span>
+    <span class="n">custom_template_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&quot;examplefiles&quot;</span><span class="p">,</span> <span class="s2">&quot;custom_besmod_templates&quot;</span>
+    <span class="p">)</span>
+    <span class="n">custom_example_template</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ModelicaConferencePaper&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">custom_template_path</span><span class="p">,</span><span class="s2">&quot;custom_template.txt&quot;</span><span class="p">)}</span>
 
+    <span class="c1"># Also .mos scripts can be generated with a template and exported together with the model.</span>
+    <span class="c1"># For the existing examples a basic simulate and plot .mos script is exported</span>
+
+    <span class="n">custom_script</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;HeatPumpMonoenergetic&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">custom_template_path</span><span class="p">,</span><span class="s2">&quot;custom_script_hp_mono.txt&quot;</span><span class="p">),</span>
+                     <span class="s2">&quot;ModelicaConferencePaper&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">custom_template_path</span><span class="p">,</span><span class="s2">&quot;custom_script.txt&quot;</span><span class="p">)}</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">prj</span><span class="o">.</span><span class="n">export_besmod</span><span class="p">(</span>
         <span class="n">THydSup_nominal</span><span class="o">=</span><span class="n">THydSup_nominal</span><span class="p">,</span>
-        <span class="n">internal_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;D:\fwu-hst\TEASEROutput_besmod&quot;</span><span class="p">,</span>
+        <span class="n">path</span><span class="o">=</span><span class="n">save_dir_path</span><span class="p">,</span>
         <span class="n">examples</span><span class="o">=</span><span class="n">examples</span><span class="p">,</span>
-        <span class="n">custom_examples</span><span class="o">=</span><span class="n">custom_template</span><span class="p">,</span>
-        <span class="n">custom_script</span><span class="o">=</span><span class="n">custom_script</span><span class="p">,</span>
-        <span class="n">report</span><span class="o">=</span><span class="kc">True</span>
+        <span class="n">custom_examples</span><span class="o">=</span><span class="n">custom_example_template</span><span class="p">,</span>
+        <span class="n">custom_script</span><span class="o">=</span><span class="n">custom_script</span>
     <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">path</span></div>
@@ -208,10 +235,9 @@
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">example_export_besmod</span><span class="p">(</span><span class="n">save_dir_path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;D:\fwu-hst\TEASEROutput_besmod&quot;</span><span class="p">)</span>
 
-    <span class="n">example_export_besmod</span><span class="p">()</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 2: That&#39;s it! :)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 4: That&#39;s it! :)&quot;</span><span class="p">)</span>
 </pre></div>
 
            </div>
