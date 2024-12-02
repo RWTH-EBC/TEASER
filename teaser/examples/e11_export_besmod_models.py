@@ -1,4 +1,4 @@
-# # Example 4: Export Modelica models for BESMod library using TEASER API
+# # Example 11: Export Modelica models for BESMod library using TEASER API
 
 # This module demonstrates how to export building models from a TEASER project
 # to ready-to-run simulation models for the Modelica BESMod library.
@@ -190,4 +190,4 @@ def example_export_besmod(save_dir_path=None):
 if __name__ == '__main__':
     example_export_besmod(save_dir_path=None)
 
-    print("Example 4: That's it! :)")
+    print("Example 11: That's it! :)")
