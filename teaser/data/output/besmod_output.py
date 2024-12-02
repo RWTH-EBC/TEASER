@@ -381,7 +381,7 @@ def _convert_heating_profile(heating_profile):
         width = 100 * change_indexes[0] / 24
     elif change_count == 2:
         start_time = change_indexes[1] * 3600
-        width = 100 * (24-change_indexes[1] + change_indexes[0]) / 24
+        width = 100 * (24 - change_indexes[1] + change_indexes[0]) / 24
     else:
         raise ValueError("You have more than two temperature intervals in the heating profile."
                          "BESMod can only handel one heating set back.")

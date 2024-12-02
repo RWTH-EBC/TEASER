@@ -1,8 +1,9 @@
 # # Example 4: Export Modelica models for BESMod library using TEASER API
 
-# This module contains an example how to export buildings from a TEASER
-# project to ready-to-run simulation models for Modelica library BESMod.
-# You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)
+# This module demonstrates how to export building models from a TEASER project
+# to ready-to-run simulation models for the Modelica BESMod library.
+# You can execute this example using
+# [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)
 
 import teaser.examples.e1_generate_archetype as e1
 import teaser.logic.utilities as utilities
@@ -18,32 +19,26 @@ def example_export_besmod(save_dir_path=None):
 
     prj = e1.example_generate_archetype()
 
-    # To make sure the export is using the desired parameters you should
-    # always set model settings in the Project.
-    # The TEASER building in BESMod uses the AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone model
-    # with 4 elements, so we have to set these project settings
-
+    # Configure project settings to ensure compatibility with BESMod. The BESMod
+    # library uses the AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone model
+    # with 4 elements for the demand building model. Set these parameters in the project:
     prj.used_library_calc = 'AixLib'
     prj.number_of_elements_calc = 4
 
-    # With these information we could already export the building models
-    # which extend from BESMod.Systems.Demand.Building.TEASERThermalZone.
-    # But we have also the option to include these building models directly in
-    # predefined example building energy systems. These systems are:
-    # "TEASERHeatLoadCalculation" which is a system with an ideal electric heater for heat load calculation.
-    # "HeatPumpMonoenergetic" which is a system with a heat pump and an electric heater in serial,
-    # buffer and DHW storages, radiators and PV.
-    # "GasBoilerBuildingOnly" which is a system with a gas boiler and radiators.
+    # BESMod allows building models to be included in predefined example energy systems:
+    examples = [
+        "TEASERHeatLoadCalculation",  # Ideal electric heater for heat load calculations
+        "HeatPumpMonoenergetic",  # Heat pump with radiators, buffer storage, and PV
+        "GasBoilerBuildingOnly"  # Gas boiler with radiators
+    ]
 
-    examples = ["TEASERHeatLoadCalculation",
-                "HeatPumpMonoenergetic",
-                "GasBoilerBuildingOnly"]
+    # For hydraulic systems, specify the nominal hydraulic supply temperature.
+    # Multiple options are available:
 
-    # For the examples with hydraulic system, we need further parameters to get fully parameterized ready to run model.
-    # This is manly the nominal hydraulic supply temperature. We have different options to set this value.
-    # First, we can set one value for all buildings and thermal zones in the project.
+    # Option 1: Set a single value for all buildings and zones.
     THydSup_nominal = 55 + 273.15
-    # Second, we can set the value separately for each building and with in the building also for each thermal zone.
+
+    # Option 2: Set values for each building or thermal zone.
     THydSup_nominal = {"ResidentialBuilding": 328.15,
                        "OfficeBuilding": 328.15,
                        "InstituteBuilding": {"Office": 343.15,
@@ -56,19 +51,26 @@ def example_export_besmod(save_dir_path=None):
                        "InstituteBuildingMoisture": 343.15,
                        "ResidentialBuildingTabula": 328.15,
                        "ResidentialBuildingTabulaMulti": 328.15}
-    # Third, we can specify the value for a building by the construction year. Here the value of the next higher
-    # specified year is set to the building. The classification here is taken from
+
+    # Option 3: Specify values based on construction year.
+    # Here the value of the next higher specified year is set to the building.
+    # The classification here is taken from:
     # https://www.ffe.de/projekte/waermepumpen-fahrplan-finanzielle-kipppunkte-zur-modernisierung-mit-waermepumpen-im-wohngebaeudebestand/
-    THydSup_nominal = {1950: 90 + 273.15, 1980: 70 + 273.15, 2010: 55 + 273.15, 2024: 35 + 273.15}
+    THydSup_nominal = {
+        1950: 90 + 273.15,
+        1980: 70 + 273.15,
+        2010: 55 + 273.15,
+        2024: 35 + 273.15
+    }
 
-    # The parameters for the BESMod.Systems.UserProfiles.TEASERProfiles are also set in the export of
-    # the examples. The internal gains file which is exported with the building is set and heating set backs
-    # are extracted from the heating_profile of each zone and directly set in the setBakTSetZone Pulse block.
-    # BESMod only allows 24 hours heating profiles.
+    # In the examples, the parameters for BESMod.Systems.UserProfiles.TEASERProfiles are configured,
+    # including internal gains and heating profiles for each zone.
+    # BESMod requires 24-hour heating profiles, which are used
+    # to define the parameters of the setBakTSetZone Pulse block.
+    # By default, the TEASER profiles are applied, but these can be customized if needed.
 
-    # We also need to set location specific parameters which we can do with the following function.
-    # The values we set here are the default values which correspond to Mannheim.
-
+    # Additionally, location-specific parameters must be set, which can be achieved using the following function.
+    # The default values provided here correspond to Mannheim.
     weather_file_path = utilities.get_full_path(
         os.path.join(
             "data",
@@ -83,25 +85,25 @@ def example_export_besmod(save_dir_path=None):
                                 calc_all_buildings=True)
 
     # To make sure the parameters are calculated correctly we recommend to
-    # run prj.calc_all_buildings() function which is here already done in the set_location_parameters function
+    # run prj.calc_all_buildings() function which is here already done in the set_location_parameters function.
 
-    # Now we export all building in the project and also include it in all optional examples.
+    # Export all buildings to BESMod and include them in predefined example systems.
     path = prj.export_besmod(
         THydSup_nominal=THydSup_nominal,
         path=save_dir_path,
         examples=examples
     )
 
-    # We can also utilize the partial retrofit option of the energy system in BESMod.
-    # For that we need to extract the nominal heat flow of each zone in the building
-    # and then retrofit the buildings here in TEASER.
+    # The partial retrofit option of the energy system in BESMod can also be utilized.
+    # To enable this, the nominal heat flow of each zone in the building must be extracted prior to the retrofit.
+    QBuiOld_flow_design = {
+        bldg.name: {
+            tz.name: tz.model_attr.heat_load for tz in bldg.thermal_zones
+        }
+        for bldg in prj.buildings
+    }
 
-    QBuiOld_flow_design = {}
-    for bldg in prj.buildings:
-        QBuiOld_flow_design[bldg.name] = {}
-        for tz in bldg.thermal_zones:
-            QBuiOld_flow_design[bldg.name][tz.name] = tz.model_attr.heat_load
-
+    # Retrofit project buildings and recalculate parameters.
     prj.name = "ArchetypeExample_partial_retrofit"
     prj.retrofit_all_buildings(
         year_of_retrofit=2015,
@@ -111,12 +113,10 @@ def example_export_besmod(save_dir_path=None):
     )
     prj.calc_all_buildings()
 
-    # When we now set heat flow of the old building design.
-    # By default, the radiator transfer systems are not retrofitted when the
-    # QBuiOld_flow_design parameter is set and different to the new nominal heat flow.
-    # We would also have the option to set new THycSup_nominal temperatures and set
-    # the old temperatures with THydSupOld_design which are used for the sizing of the radiators
-    # but not in the controls.
+    # By default, radiator transfer systems are not retrofitted when the
+    # QBuiOld_flow_design parameter is provided and differs from the new nominal heat flow.
+    # Additionally, new THydSup_nominal temperatures can be specified alongside
+    # THydSupOld_design values, which are used for radiator sizing but not for control settings.
 
     path = prj.export_besmod(
         THydSup_nominal=THydSup_nominal,
@@ -125,23 +125,57 @@ def example_export_besmod(save_dir_path=None):
         examples=examples
     )
 
-    # If QBuiOld_flow_design is not set the energy system is also totally retrofitted to the new heat demand.
-    # We have also the option to define custom templates into which the building should be included.
-    # For example, we have here a custom template where the building is included in the
-    # ModelicaConferencePaper example in BESMod which als includes a battery.
+    # Additionally, we have the flexibility to define custom templates for including buildings in specific setups.
+    # For instance, a custom template is defined here to include the building in the
+    # ModelicaConferencePaper example from BESMod, which features an integrated battery system.
+
+    # Custom template
+    # < %namespace file = "/modelica_language/" import="get_list" / >
+    # within ${bldg.parent.name}.${bldg.name};
+    # model ModelicaConferencePaper${bldg.name}
+    #     extends BESMod.Examples.ModelicaConferencePaper.PartialModelicaConferenceUseCase(
+    #       redeclare ${bldg.name} building,
+    #       redeclare BESMod.Systems.UserProfiles.TEASERProfiles
+    #       userProfiles(fileNameIntGains=Modelica.Utilities.Files.loadResource(
+    #               "modelica://${bldg.parent.name}/${bldg.name}/InternalGains_${bldg.name}.txt"),
+    #                setBakTSetZone(amplitude=${get_list(setBakTSetZone_amplitude)},
+    #                               width =${get_list(setBakTSetZone_width)},
+    #                               startTime =${get_list(setBakTSetZone_startTime)})),
+    #     systemParameters(nZones=${len(bldg.thermal_zones)},
+    #                      QBui_flow_nominal = building.QRec_flow_nominal,
+    #                      TOda_nominal =${TOda_nominal},
+    #                      TSetZone_nominal =${get_list(TSetZone_nominal)},
+    #                      THydSup_nominal =${THydSup_nominal},
+    #                      QBuiOld_flow_design =${QBuiOld_flow_design},
+    #                      THydSupOld_design =${THydSupOld_design},
+    #                      filNamWea = Modelica.Utilities.Files.loadResource(
+    #                           "modelica://${bldg.parent.name}/Resources/${bldg.parent.weather_file_name}")));
+    #
+    #     annotation(experiment(StopTime=172800,
+    #                           Interval=600,
+    #                           Tolerance=1e-06),
+    #                __Dymola_Commands(file=
+    #                                  "Resources/Scripts/Dymola/${bldg.name}/ModelicaConferencePaper${bldg.name}.mos"
+    #                                  "Simulate and plot"));
+    # end
+    # ModelicaConferencePaper${bldg.name};
 
     prj.name = "ArchetypeExample_total_retrofit"
 
     custom_template_path = os.path.join(
         os.path.dirname(__file__), "examplefiles", "custom_besmod_templates"
     )
-    custom_example_template = {"ModelicaConferencePaper": os.path.join(custom_template_path,"custom_template.txt")}
+    custom_example_template = {"ModelicaConferencePaper": os.path.join(custom_template_path, "custom_template.txt")}
 
-    # Also .mos scripts can be generated with a template and exported together with the model.
-    # For the existing examples a basic simulate and plot .mos script is exported
+    # The template also includes a .mos script as part of its annotation.
+    # By default, the provided examples export a basic "simulate and plot" script,
+    # which is incorporated into their annotation, as shown in the custom example.
+    # Additionally, you have the flexibility to modify the template for existing examples
+    # and define custom scripts for your tailored examples.
 
-    custom_script = {"HeatPumpMonoenergetic": os.path.join(custom_template_path,"custom_script_hp_mono.txt"),
-                     "ModelicaConferencePaper": os.path.join(custom_template_path,"custom_script.txt")}
+    custom_script = {"HeatPumpMonoenergetic": os.path.join(custom_template_path, "custom_script_hp_mono.txt"),
+                     "ModelicaConferencePaper": os.path.join(custom_template_path, "custom_script.txt")}
+
     path = prj.export_besmod(
         THydSup_nominal=THydSup_nominal,
         path=save_dir_path,
@@ -154,6 +188,6 @@ def example_export_besmod(save_dir_path=None):
 
 
 if __name__ == '__main__':
-    example_export_besmod(save_dir_path=r"D:\fwu-hst\TEASEROutput_besmod")
+    example_export_besmod(save_dir_path=None)
 
     print("Example 4: That's it! :)")
