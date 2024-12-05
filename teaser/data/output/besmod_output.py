@@ -70,9 +70,8 @@ def export_besmod(
     The function uses Mako templates for generating Modelica models.
     """
 
-    if not isinstance(buildings, list):
-        buildings = [buildings]
-
+    if prj.used_library_calc != "AixLib":
+        raise AttributeError("BESMod export is only implemented for AixLib calculation.")
     if examples is None:
         examples = []
     if not isinstance(examples, list):
@@ -99,6 +98,9 @@ def export_besmod(
     else:
         QBuiOld_flow_design = {bldg.name: _convert_to_zone_array(bldg, QBuiOld_flow_design[bldg.name]) for bldg in
                                buildings}
+
+    if custom_script is None:
+        custom_script = {}
 
     dir_resources = utilities.create_path(os.path.join(path, "Resources"))
     dir_scripts = utilities.create_path(os.path.join(dir_resources, "Scripts"))
@@ -140,18 +142,10 @@ def export_besmod(
             start_time_zones.append(start_time)
             width_zones.append(width)
 
-        ass_error = "BESMod export is only implemented for AixLib calculation."
-        assert bldg.used_library_calc == 'AixLib', ass_error
-
         bldg_path = os.path.join(path, bldg.name)
         utilities.create_path(bldg_path)
         utilities.create_path(os.path.join(bldg_path, bldg.name + "_DataBase"))
         bldg.library_attr.modelica_gains_boundary(path=bldg_path)
-
-        if custom_script is None:
-            custom_script = {}
-
-        bldg_package = [exp + bldg.name for exp in examples]
 
         with open(utilities.get_full_path(
                 os.path.join(bldg_path, bldg.name + ".mo")), 'w') as out_file:
@@ -191,6 +185,7 @@ def export_besmod(
                     lookup=lookup)
             _help_example_script(bldg, dir_dymola, example_sim_plot_script, exp)
             write_example_mo(exp_template, exp)
+        bldg_package = [exp + bldg.name for exp in examples]
         if custom_examples:
             for exp, c_path in custom_examples.items():
                 bldg_package.append(exp + bldg.name)
@@ -218,15 +213,10 @@ def export_besmod(
             with open(utilities.get_full_path(os.path.join(
                     zone_path,
                     bldg.name + '_' + zone.name + '.mo')), 'w') as out_file:
-                if type(zone.model_attr).__name__ == "OneElement":
-                    raise NotImplementedError("BESMod export is only implemented for four elements.")
-                elif type(zone.model_attr).__name__ == "TwoElement":
-                    raise NotImplementedError("BESMod export is only implemented for four elements.")
-                elif type(zone.model_attr).__name__ == "ThreeElement":
-                    raise NotImplementedError("BESMod export is only implemented for four elements.")
-                elif type(zone.model_attr).__name__ == "FourElement":
+                if type(zone.model_attr).__name__ == "FourElement":
                     out_file.write(zone_template_4.render_unicode(zone=zone))
-
+                else:
+                    raise NotImplementedError("BESMod export is only implemented for four elements.")
                 out_file.close()
 
         modelica_output.create_package(
@@ -374,11 +364,16 @@ def _convert_heating_profile(heating_profile):
     t_set_zone_nominal = max(heating_profile)
     amplitude = min(heating_profile) - t_set_zone_nominal
     if change_count == 0:
+        amplitude = 0
         start_time = 0
-        width = 0
+        width = 1e-50
     elif change_count == 1:
-        start_time = 24 * 3600
-        width = 100 * change_indexes[0] / 24
+        if heating_profile[0]<heating_profile[-1]:
+            start_time = 0
+            width = 100 * change_indexes[0] / 24
+        else:
+            start_time = change_indexes[0] * 3600
+            width = 100 * (24-change_indexes[0]) / 24
     elif change_count == 2:
         start_time = change_indexes[1] * 3600
         width = 100 * (24 - change_indexes[1] + change_indexes[0]) / 24
