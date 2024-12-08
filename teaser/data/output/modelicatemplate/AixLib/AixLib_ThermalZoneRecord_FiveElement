@@ -57,11 +57,11 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     zoneInd = ${zone.parent.thermal_zones.index(zone) + 1},
     TSoil = ${zone.t_ground},
 % if zone.parent.parent.t_soil_mode == 3:
-    TSoiDatSou = AixLib.BoundaryConditions.GroundTemperature.DataSource.File,
+    TSoiDatSou = AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.File,
 % elif zone.parent.parent.t_soil_mode == 2:
-    TSoiDatSou = AixLib.BoundaryConditions.GroundTemperature.DataSource.Sine,
+    TSoiDatSou = AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.Sine,
 % else:
-    TSoiDatSou = AixLib.BoundaryConditions.GroundTemperature.DataSource.Constant,
+    TSoiDatSou = AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.Constant,
 % endif
     TSoiOffTim = ${zone.time_to_minimal_t_ground},
     TSoiAmp = ${zone.t_ground_amplitude},
