@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.examples package &mdash; TEASER 1.0.1 documentation</title>
+  <title>teaser.examples package &mdash; TEASER 1.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
@@ -14,7 +14,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=292eb321"></script>
+      <script src="../_static/documentation_options.js?v=fc837d61"></script>
       <script src="../_static/doctools.js?v=9a2dae69"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -62,6 +62,10 @@
 <li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e10_adjust_schedules.example_adjust_schedules"><code class="docutils literal notranslate"><span class="pre">example_adjust_schedules()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e11_export_besmod_models">teaser.examples.e11_export_besmod_models module</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e11_export_besmod_models.example_export_besmod"><code class="docutils literal notranslate"><span class="pre">example_export_besmod()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e1_generate_archetype">teaser.examples.e1_generate_archetype module</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e1_generate_archetype.example_generate_archetype"><code class="docutils literal notranslate"><span class="pre">example_generate_archetype()</span></code></a></li>
 </ul>
@@ -72,10 +76,6 @@
 </li>
 <li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e3_export_ibpsa_models">teaser.examples.e3_export_ibpsa_models module</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e3_export_ibpsa_models.example_export_ibpsa"><code class="docutils literal notranslate"><span class="pre">example_export_ibpsa()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e4_export_besmod_models">teaser.examples.e4_export_besmod_models module</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="#teaser.examples.e4_export_besmod_models.example_export_besmod"><code class="docutils literal notranslate"><span class="pre">example_export_besmod()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="#module-teaser.examples.e4_save">teaser.examples.e4_save module</a><ul>
@@ -216,6 +216,16 @@
 </dd></dl>
 
 </section>
+<section id="module-teaser.examples.e11_export_besmod_models">
+<span id="teaser-examples-e11-export-besmod-models-module"></span><h2>teaser.examples.e11_export_besmod_models module<a class="headerlink" href="#module-teaser.examples.e11_export_besmod_models" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.examples.e11_export_besmod_models.example_export_besmod">
+<span class="sig-prename descclassname"><span class="pre">teaser.examples.e11_export_besmod_models.</span></span><span class="sig-name descname"><span class="pre">example_export_besmod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">save_dir_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e11_export_besmod_models.html#example_export_besmod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e11_export_besmod_models.example_export_besmod" title="Link to this definition"></a></dt>
+<dd><p>This function demonstrates the export to Modelica library BESMod using
+the API function of TEASER</p>
+</dd></dl>
+
+</section>
 <section id="module-teaser.examples.e1_generate_archetype">
 <span id="teaser-examples-e1-generate-archetype-module"></span><h2>teaser.examples.e1_generate_archetype module<a class="headerlink" href="#module-teaser.examples.e1_generate_archetype" title="Link to this heading"></a></h2>
 <dl class="py function">
@@ -242,16 +252,6 @@ the API function of TEASER</p>
 <dt class="sig sig-object py" id="teaser.examples.e3_export_ibpsa_models.example_export_ibpsa">
 <span class="sig-prename descclassname"><span class="pre">teaser.examples.e3_export_ibpsa_models.</span></span><span class="sig-name descname"><span class="pre">example_export_ibpsa</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e3_export_ibpsa_models.html#example_export_ibpsa"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e3_export_ibpsa_models.example_export_ibpsa" title="Link to this definition"></a></dt>
 <dd><p>This function demonstrates the export to Modelica library IBPSA using
-the API function of TEASER</p>
-</dd></dl>
-
-</section>
-<section id="module-teaser.examples.e4_export_besmod_models">
-<span id="teaser-examples-e4-export-besmod-models-module"></span><h2>teaser.examples.e4_export_besmod_models module<a class="headerlink" href="#module-teaser.examples.e4_export_besmod_models" title="Link to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="teaser.examples.e4_export_besmod_models.example_export_besmod">
-<span class="sig-prename descclassname"><span class="pre">teaser.examples.e4_export_besmod_models.</span></span><span class="sig-name descname"><span class="pre">example_export_besmod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">save_dir_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/examples/e4_export_besmod_models.html#example_export_besmod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.examples.e4_export_besmod_models.example_export_besmod" title="Link to this definition"></a></dt>
-<dd><p>This function demonstrates the export to Modelica library BESMod using
 the API function of TEASER</p>
 </dd></dl>
 

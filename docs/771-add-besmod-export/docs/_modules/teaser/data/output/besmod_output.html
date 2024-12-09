@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.data.output.besmod_output &mdash; TEASER 1.0.1 documentation</title>
+  <title>teaser.data.output.besmod_output &mdash; TEASER 1.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
@@ -13,7 +13,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=292eb321"></script>
+      <script src="../../../../_static/documentation_options.js?v=fc837d61"></script>
       <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
@@ -150,9 +150,8 @@
 <span class="sd">    The function uses Mako templates for generating Modelica models.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">buildings</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-        <span class="n">buildings</span> <span class="o">=</span> <span class="p">[</span><span class="n">buildings</span><span class="p">]</span>
-
+    <span class="k">if</span> <span class="n">prj</span><span class="o">.</span><span class="n">used_library_calc</span> <span class="o">!=</span> <span class="s2">&quot;AixLib&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;BESMod export is only implemented for AixLib calculation.&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">examples</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">examples</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">examples</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -179,6 +178,9 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">QBuiOld_flow_design</span> <span class="o">=</span> <span class="p">{</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">_convert_to_zone_array</span><span class="p">(</span><span class="n">bldg</span><span class="p">,</span> <span class="n">QBuiOld_flow_design</span><span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">])</span> <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span>
                                <span class="n">buildings</span><span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">custom_script</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">custom_script</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="n">dir_resources</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;Resources&quot;</span><span class="p">))</span>
     <span class="n">dir_scripts</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_resources</span><span class="p">,</span> <span class="s2">&quot;Scripts&quot;</span><span class="p">))</span>
@@ -220,18 +222,10 @@
             <span class="n">start_time_zones</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">start_time</span><span class="p">)</span>
             <span class="n">width_zones</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
 
-        <span class="n">ass_error</span> <span class="o">=</span> <span class="s2">&quot;BESMod export is only implemented for AixLib calculation.&quot;</span>
-        <span class="k">assert</span> <span class="n">bldg</span><span class="o">.</span><span class="n">used_library_calc</span> <span class="o">==</span> <span class="s1">&#39;AixLib&#39;</span><span class="p">,</span> <span class="n">ass_error</span>
-
         <span class="n">bldg_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">bldg_path</span><span class="p">)</span>
         <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bldg_path</span><span class="p">,</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_DataBase&quot;</span><span class="p">))</span>
         <span class="n">bldg</span><span class="o">.</span><span class="n">library_attr</span><span class="o">.</span><span class="n">modelica_gains_boundary</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">bldg_path</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">custom_script</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">custom_script</span> <span class="o">=</span> <span class="p">{}</span>
-
-        <span class="n">bldg_package</span> <span class="o">=</span> <span class="p">[</span><span class="n">exp</span> <span class="o">+</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">exp</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">]</span>
 
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bldg_path</span><span class="p">,</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.mo&quot;</span><span class="p">)),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out_file</span><span class="p">:</span>
@@ -271,6 +265,7 @@
                     <span class="n">lookup</span><span class="o">=</span><span class="n">lookup</span><span class="p">)</span>
             <span class="n">_help_example_script</span><span class="p">(</span><span class="n">bldg</span><span class="p">,</span> <span class="n">dir_dymola</span><span class="p">,</span> <span class="n">example_sim_plot_script</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
             <span class="n">write_example_mo</span><span class="p">(</span><span class="n">exp_template</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+        <span class="n">bldg_package</span> <span class="o">=</span> <span class="p">[</span><span class="n">exp</span> <span class="o">+</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">exp</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">custom_examples</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">exp</span><span class="p">,</span> <span class="n">c_path</span> <span class="ow">in</span> <span class="n">custom_examples</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">bldg_package</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">exp</span> <span class="o">+</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
@@ -298,15 +293,10 @@
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
                     <span class="n">zone_path</span><span class="p">,</span>
                     <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">zone</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;.mo&#39;</span><span class="p">)),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out_file</span><span class="p">:</span>
-                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;OneElement&quot;</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;BESMod export is only implemented for four elements.&quot;</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;TwoElement&quot;</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;BESMod export is only implemented for four elements.&quot;</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;ThreeElement&quot;</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;BESMod export is only implemented for four elements.&quot;</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;FourElement&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;FourElement&quot;</span><span class="p">:</span>
                     <span class="n">out_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">zone_template_4</span><span class="o">.</span><span class="n">render_unicode</span><span class="p">(</span><span class="n">zone</span><span class="o">=</span><span class="n">zone</span><span class="p">))</span>
-
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;BESMod export is only implemented for four elements.&quot;</span><span class="p">)</span>
                 <span class="n">out_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
         <span class="n">modelica_output</span><span class="o">.</span><span class="n">create_package</span><span class="p">(</span>
@@ -458,14 +448,19 @@
     <span class="n">t_set_zone_nominal</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">heating_profile</span><span class="p">)</span>
     <span class="n">amplitude</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">heating_profile</span><span class="p">)</span> <span class="o">-</span> <span class="n">t_set_zone_nominal</span>
     <span class="k">if</span> <span class="n">change_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">amplitude</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">start_time</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">width</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="mf">1e-50</span>
     <span class="k">elif</span> <span class="n">change_count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">start_time</span> <span class="o">=</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">3600</span>
-        <span class="n">width</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">change_indexes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">24</span>
+        <span class="k">if</span> <span class="n">heating_profile</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span><span class="n">heating_profile</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">start_time</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">width</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">change_indexes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">24</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start_time</span> <span class="o">=</span> <span class="n">change_indexes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3600</span>
+            <span class="n">width</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="mi">24</span><span class="o">-</span><span class="n">change_indexes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">24</span>
     <span class="k">elif</span> <span class="n">change_count</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
         <span class="n">start_time</span> <span class="o">=</span> <span class="n">change_indexes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3600</span>
-        <span class="n">width</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="mi">24</span><span class="o">-</span><span class="n">change_indexes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">change_indexes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">24</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="mi">24</span> <span class="o">-</span> <span class="n">change_indexes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">change_indexes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">24</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have more than two temperature intervals in the heating profile.&quot;</span>
                          <span class="s2">&quot;BESMod can only handel one heating set back.&quot;</span><span class="p">)</span>
