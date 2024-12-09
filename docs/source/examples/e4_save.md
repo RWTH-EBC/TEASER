@@ -2,7 +2,7 @@
 # Example 4: Save information
 This module contains an example how to save buildings from a TEASER
 project to json and pickle in order to save information.
-You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)
+You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks)
 
 ```python
 import teaser.examples.e1_generate_archetype as e1

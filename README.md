@@ -4,8 +4,8 @@
 
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 [![Coverage Status](https://coveralls.io/repos/github/RWTH-EBC/TEASER/badge.svg)](https://coveralls.io/github/RWTH-EBC/TEASER)
-[![Build Status](https://travis-ci.org/RWTH-EBC/TEASER.svg?branch=master)](https://travis-ci.org/RWTH-EBC/TEASER.svg?branch=master)
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)
+[![Build Status](https://travis-ci.org/RWTH-EBC/TEASER.svg?branch=main)](https://travis-ci.org/RWTH-EBC/TEASER.svg?branch=main)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks)
 
 TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit) allows
 fast generation of archetype buildings with low input requirements and the
@@ -29,7 +29,7 @@ classes and functions can be found at the website:
 
 This GitHub page will be used to further develop the package and make it
 available under the
-[MIT License](https://github.com/RWTH-EBC/TEASER/blob/master/License.md).
+[MIT License](https://github.com/RWTH-EBC/TEASER/blob/main/License.md).
 
 If you have any questions regarding TEASER feel free to contact us at
 [ebc-teaser@eonerc.rwth-aachen.de](mailto:ebc-teaser@eonerc.rwth-aachen.de).
@@ -114,14 +114,14 @@ The workflow for changes is described in our [Wiki](https://github.com/RWTH-EBC/
 
 + TEASER: an open tool for urban energy modelling of building stocks. Remmen P., Lauster M., Mans M., Fuchs M., Osterhage T., Müller D.. Journal of Building Performance Simulation, February 2017,
 [pdf](http://dx.doi.org/10.1080/19401493.2017.1283539),
-[bibtex](https://github.com/RWTH-EBC/TEASER/tree/master/doc/cite_jbps.bib)
+[bibtex](https://github.com/RWTH-EBC/TEASER/tree/main/doc/cite_jbps.bib)
 
 ### TEASER related publications
 
 + CityGML Import and Export for Dynamic Building Performance Simulation in Modelica. Remmen P.,
 Lauster M., Mans M., Osterhage T., Müller D.. BSO16, p.329-336, September 2016,
 [pdf](http://www.ibpsa.org/proceedings/BSO2016/p1047.pdf),
-[bibtex](https://github.com/RWTH-EBC/TEASER/tree/master/doc/cite.bib)
+[bibtex](https://github.com/RWTH-EBC/TEASER/tree/main/doc/cite.bib)
 
 + Scalable Design-Driven Parameterization of Reduced Order Models Using Archetype Buildings with TEASER.
 Lauster M., Mans M., Remmen P., Fuchs M., Müller D.. BauSIM2016, p.535-542, September 2016,
@@ -131,7 +131,7 @@ Lauster M., Mans M., Remmen P., Fuchs M., Müller D.. BauSIM2016, p.535-542, Sep
 Remmen P., Schäfer J., Müller D.. Building Simulation 2019, September 2019,
 [pdf](https://www.researchgate.net/publication/337925776_Refinement_of_Dynamic_Non-Residential_Building_Archetypes_Using_Measurement_Data_and_Bayesian_Calibration)
 
-+ Selecting statistical indices for calibrating building energy models. Vogt, M., Remmen P., Lauster M., Fuchs M. , Müller D.. Building and Environment 144, pages 94-107, October 2018. [bibtex](https://github.com/RWTH-EBC/TEASER/tree/master/doc/cite_be.bib)
++ Selecting statistical indices for calibrating building energy models. Vogt, M., Remmen P., Lauster M., Fuchs M. , Müller D.. Building and Environment 144, pages 94-107, October 2018. [bibtex](https://github.com/RWTH-EBC/TEASER/tree/main/doc/cite_be.bib)
 
 + The [Institute of Energy Efficiency and Sustainable Building](https://www.e3d.rwth-aachen.de/go/id/iyld/?) published a parametric study of TEASER where all functions and  parameters used in TEASER are gathered and explained. The publication can be found [here](https://publications.rwth-aachen.de/record/749801/files/749801.pdf).
 
@@ -141,7 +141,7 @@ Remmen P., Schäfer J., Müller D.. Building Simulation 2019, September 2019,
 TEASER is released by RWTH Aachen University, E.ON Energy
 Research Center, Institute for Energy Efficient Buildings and Indoor Climate,
 under the
-[MIT License](https://github.com/RWTH-EBC/TEASER/blob/master/License.md).
+[MIT License](https://github.com/RWTH-EBC/TEASER/blob/main/License.md).
 
 ## Acknowledgements
 

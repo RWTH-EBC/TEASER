@@ -30,7 +30,7 @@ class AixLib(object):
     file_internal_gains : str
         Filename for internal gains file
     version : str
-        Used AixLib version, default should always be current master version
+        Used AixLib version, default should always be current main version
         of GitHub
     besmod_version : str
         Used BESMod version vor export_besmod, default should always be current main version

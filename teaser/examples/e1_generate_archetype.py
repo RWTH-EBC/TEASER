@@ -1,7 +1,7 @@
 # # Example 1: Generate archetype buildings using TEASER API
 # This module contains an example how to generate archetype buildings
 # using TEASER API functions.
-# You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)
+# You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks)
 
 
 def example_generate_archetype():
