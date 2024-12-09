@@ -98,7 +98,7 @@ class Test_besmod_output(unittest.TestCase):
             }
             for bldg in prj.buildings
         }
-        custom_template_path = utilities.get_full_path(r"examples\examplefiles\custom_besmod_templates")
+        custom_template_path = utilities.get_full_path("examples/examplefiles/custom_besmod_templates")
         custom_example_template = {"ModelicaConferencePaper": os.path.join(custom_template_path, "custom_template.txt")}
         custom_script = {"HeatPumpMonoenergetic": os.path.join(custom_template_path, "custom_script_hp_mono.txt"),
                          "ModelicaConferencePaper": os.path.join(custom_template_path, "custom_script.txt")}
