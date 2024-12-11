@@ -151,6 +151,8 @@ def example_export_besmod(save_dir_path=None):
     #                      filNamWea = Modelica.Utilities.Files.loadResource(
     #                           "modelica://${bldg.parent.name}/Resources/${bldg.parent.weather_file_name}")));
     #
+    #    extends Modelica.Icons.Example;
+    #
     #     annotation(experiment(StopTime=172800,
     #                           Interval=600,
     #                           Tolerance=1e-06),

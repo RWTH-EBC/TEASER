@@ -15,6 +15,8 @@ model TEASERHeatLoadCalculation${bldg.name}
                      TOda_nominal=${TOda_nominal},
                      filNamWea=Modelica.Utilities.Files.loadResource("modelica://${bldg.parent.name}/Resources/${bldg.parent.weather_file_name}")));
 
+  extends Modelica.Icons.Example;
+
   annotation (
     experiment(StopTime=172800,
      Interval=600,
