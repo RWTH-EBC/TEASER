@@ -236,7 +236,8 @@ def export_besmod(
     print(path)
 
 
-def convert_input(building_zones_input, buildings):
+def convert_input(building_zones_input: Union[float, Dict[Union[int, str], Union[float, Dict[str, float]]]],
+                  buildings: List[Building]) -> Dict[str, str]:
     """
     Convert input values for BESMod zone specific parameters to a dictionary.
 
@@ -250,15 +251,25 @@ def convert_input(building_zones_input, buildings):
 
     Parameters
     ----------
-    building_zones_input : float, int, or dict
-        Input value(s) for BESMod parameters. Can be a single value, or a
-        dictionary keyed by construction year, or building name.
-    buildings : list[Building]
+    building_zones_input : Union[float, Dict[Union[int, str], Union[float, Dict[str, float]]]]
+        Input value(s) for BESMod parameters. Can be a single value, a dictionary keyed by construction year,
+        or a dictionary keyed by building name.
+        Example:
+        - Single value: 328.15
+        - Dictionary keyed by construction year: {1970: 348.15, 1990: 328.15}
+        - Dictionary keyed by building name: {
+            "Building1": 328.15,
+            "Building2": {
+                "Zone1": 328.15,
+                "Zone2": 308.15
+            }
+        }
+    buildings : List[Building]
         List of TEASER Building instances.
 
     Returns
     -------
-    dict
+    Dict[str, str]
         Dictionary mapping building names to BESMod parameter input strings.
 
     Raises
