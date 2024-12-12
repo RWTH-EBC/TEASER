@@ -93,6 +93,10 @@ class Building(object):
         that direction as value.
     bldg_height : float [m]
         Total building height.
+    area_rt : float [m2]
+        Total roof area of all thermal zones.
+    area_gf : float [m2]
+        Total ground floor area of all thermal zones.
     volume : float [m3]
         Total volume of all thermal zones.
     sum_heat_load : float [W]

@@ -53,7 +53,7 @@ setup(
         "teaser.examples",
         "teaser.examples.verification",
         "teaser.examples.examplefiles",
-    ],  # ToDo fwu-hst: update setup.py
+    ],
     package_data={
         "teaser.data.input.inputdata": ["*.json"],
         "teaser.data.input.inputdata.weatherdata": [

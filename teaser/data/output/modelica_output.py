@@ -1,4 +1,4 @@
-"""This module contains function for all modelica model generations with AixLib, IBPSA and BESMod"""
+"""This module contains functions for all modelica model generations with AixLib, IBPSA and BESMod"""
 
 import os
 import shutil

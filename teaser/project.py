@@ -3,6 +3,7 @@
 import warnings
 import os
 import re
+from typing import Optional, Union, List, Dict
 import teaser.logic.utilities as utilities
 import teaser.data.utilities as datahandling
 import teaser.data.input.teaserjson_input as tjson_in
@@ -763,17 +764,17 @@ class Project(object):
         return path
 
     def export_besmod(
-        self,
-        internal_id=None,
-        examples=None,
-        path=None,
-        THydSup_nominal=None,
-        QBuiOld_flow_design=None,
-        THydSupOld_design=None,
-        custom_examples=None,
-        custom_script=None,
-        report=False
-    ):
+            self,
+            internal_id: Optional[float] = None,
+            examples: Optional[List[str]] = None,
+            path: Optional[str] = None,
+            THydSup_nominal: Optional[Union[float, Dict[str, float]]] = None,
+            QBuiOld_flow_design: Optional[Dict[str, float]] = None,
+            THydSupOld_design: Optional[Union[float, Dict[str, float]]] = None,
+            custom_examples: Optional[Dict[str, str]] = None,
+            custom_script: Optional[Dict[str, str]] = None,
+            report: bool = False
+    ) -> str:
         """Exports buildings for BESMod simulation
 
         Exports one (if internal_id is not None) or all buildings as
@@ -783,34 +784,36 @@ class Project(object):
         Parameters
         ----------
 
-        internal_id : float
-            setter of a specific building which will be exported, if None then
-            all buildings will be exported
-        examples: [string]
+        internal_id : Optional[float]
+            Specifies a specific building to export by its internal ID. If None, all buildings are exported.
+        examples : Optional[List[str]]
             Names of BESMod examples to export alongside the building models.
-            Supported Examples are: "TEASERHeatLoadCalculation", "HeatPumpMonoenergetic" and "GasBoilerBuildingOnly".
-        THydSup_nominal : float or dict, optional
+            Supported Examples: "TEASERHeatLoadCalculation", "HeatPumpMonoenergetic", and "GasBoilerBuildingOnly".
+        path : Optional[str]
+            Alternative output path for storing the exported files. If None, the default TEASER output path is used.
+        THydSup_nominal : Optional[Union[float, Dict[str, float]]]
             Nominal supply temperature(s) for the hydraulic system. Required for
             certain examples (e.g., HeatPumpMonoenergetic, GasBoilerBuildingOnly).
             See docstring of teaser.data.output.besmod_output.convert_input() for further information.
-        QBuiOld_flow_design : dict, optional
+        QBuiOld_flow_design : Optional[Dict[str, float]
             For partially retrofitted systems specify the old nominal heat flow
             of the Buildings in a dictionary with the building names as keys.
             By default, only the radiator transfer system is not retrofitted in BESMod.
-        THydSupOld_design : float or dict, optional
-            Design supply temperatures for old not retrofitted hydraulic systems.
-        custom_examples: dict, optional
+        THydSupOld_design : Optional[Union[float, Dict[str, float]]]
+            Design supply temperatures for old, non-retrofitted hydraulic systems.
+        custom_examples: Optional[Dict[str, str]]
             Specify custom examples with a dictionary containing the example name as the key and
             the path to the corresponding custom mako template as the value.
-        custom_script: dict, optional
+        custom_script: Optional[Dict[str, str]]
             Specify custom .mos scripts for the existing and custom examples with a dictionary
             containing the example name as the key and the path to the corresponding custom mako template as the value.
-        path : string
-            if the Files should not be stored in default output path of TEASER,
-            an alternative path can be specified as a full path
-        report: boolean
-            if True a model report in form of a html and csv file will be
-            created for the exported project.
+        report : bool
+            If True, generates a model report in HTML and CSV format for the exported project. Default is False.
+
+        Returns
+        -------
+        str
+            The path where the exported files are stored.
         """
 
         if path is None:
@@ -966,7 +969,7 @@ class Project(object):
             weather file can be find in inputdata/weatherdata.
         calc_all_buildings: boolean
             If True, calculates all buildings new. Default is True.
-            Here important for new calculation of static heat load.
+            Important for new calculation of static heat load.
         """
         self.weather_file_path = weather_file_path
         for bldg in self.buildings:
