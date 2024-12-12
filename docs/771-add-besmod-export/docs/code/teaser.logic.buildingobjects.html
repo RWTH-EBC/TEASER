@@ -500,6 +500,10 @@ that direction as value.</p>
 </dd>
 <dt><strong>bldg_height</strong><span class="classifier">float [m]</span></dt><dd><p>Total building height.</p>
 </dd>
+<dt><strong>area_rt</strong><span class="classifier">float [m2]</span></dt><dd><p>Total roof area of all thermal zones.</p>
+</dd>
+<dt><strong>area_gf</strong><span class="classifier">float [m2]</span></dt><dd><p>Total ground floor area of all thermal zones.</p>
+</dd>
 <dt><strong>volume</strong><span class="classifier">float [m3]</span></dt><dd><p>Total volume of all thermal zones.</p>
 </dd>
 <dt><strong>sum_heat_load</strong><span class="classifier">float [W]</span></dt><dd><p>Total heating load of all thermal zones.</p>
@@ -1336,7 +1340,7 @@ false = natural infiltration + ventilation due to a AHU
 + window infiltration calculated by window opening model
 AixLib: Used on Zone level for ventilation.</p>
 </dd>
-<dt><strong>static_infiltration: float [1/h]</strong></dt><dd><p>Infiltration rate for static heat load calculation.
+<dt><strong>normative_infiltration: float [1/h]</strong></dt><dd><p>Infiltration rate for static heat load calculation.
 Default is 0.5 based on the DIN EN 12831-1:2017 minimal air exchange rate reference value.</p>
 </dd>
 <dt><strong>base_infiltration</strong><span class="classifier">float [1/h]</span></dt><dd><p>base value for the natural infiltration without window openings

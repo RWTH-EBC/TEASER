@@ -81,6 +81,7 @@
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
 <span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utilities</span>
 <span class="kn">import</span> <span class="nn">teaser.data.utilities</span> <span class="k">as</span> <span class="nn">datahandling</span>
 <span class="kn">import</span> <span class="nn">teaser.data.input.teaserjson_input</span> <span class="k">as</span> <span class="nn">tjson_in</span>
@@ -872,17 +873,17 @@
 <div class="viewcode-block" id="Project.export_besmod">
 <a class="viewcode-back" href="../../code/teaser.html#teaser.project.Project.export_besmod">[docs]</a>
     <span class="k">def</span> <span class="nf">export_besmod</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">internal_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">examples</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">THydSup_nominal</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">QBuiOld_flow_design</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">THydSupOld_design</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">custom_examples</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">custom_script</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">report</span><span class="o">=</span><span class="kc">False</span>
-    <span class="p">):</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">internal_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">examples</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">THydSup_nominal</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">QBuiOld_flow_design</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">THydSupOld_design</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">custom_examples</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">custom_script</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">report</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Exports buildings for BESMod simulation</span>
 
 <span class="sd">        Exports one (if internal_id is not None) or all buildings as</span>
@@ -892,34 +893,37 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 
-<span class="sd">        internal_id : float</span>
-<span class="sd">            setter of a specific building which will be exported, if None then</span>
-<span class="sd">            all buildings will be exported</span>
-<span class="sd">        examples: [string]</span>
+<span class="sd">        internal_id : Optional[float]</span>
+<span class="sd">            Specifies a specific building to export by its internal ID. If None, all buildings are exported.</span>
+<span class="sd">        examples : Optional[List[str]]</span>
 <span class="sd">            Names of BESMod examples to export alongside the building models.</span>
-<span class="sd">            Supported Examples are: &quot;TEASERHeatLoadCalculation&quot;, &quot;HeatPumpMonoenergetic&quot; and &quot;GasBoilerBuildingOnly&quot;.</span>
-<span class="sd">        THydSup_nominal : float or dict, optional</span>
+<span class="sd">            Supported Examples: &quot;TEASERHeatLoadCalculation&quot;, &quot;HeatPumpMonoenergetic&quot;, and &quot;GasBoilerBuildingOnly&quot;.</span>
+<span class="sd">        path : Optional[str]</span>
+<span class="sd">            Alternative output path for storing the exported files. If None, the default TEASER output path is used.</span>
+<span class="sd">        THydSup_nominal : Optional[Union[float, Dict[str, float]]]</span>
 <span class="sd">            Nominal supply temperature(s) for the hydraulic system. Required for</span>
 <span class="sd">            certain examples (e.g., HeatPumpMonoenergetic, GasBoilerBuildingOnly).</span>
 <span class="sd">            See docstring of teaser.data.output.besmod_output.convert_input() for further information.</span>
-<span class="sd">        QBuiOld_flow_design : dict, optional</span>
+<span class="sd">        QBuiOld_flow_design : Optional[Dict[str, Dict[str, float]]]</span>
 <span class="sd">            For partially retrofitted systems specify the old nominal heat flow</span>
-<span class="sd">            of the Buildings in a dictionary with the building names as keys.</span>
+<span class="sd">            of all zones in the Buildings in a nested dictionary with</span>
+<span class="sd">            the building names and in a level below the zone names as keys.</span>
 <span class="sd">            By default, only the radiator transfer system is not retrofitted in BESMod.</span>
-<span class="sd">        THydSupOld_design : float or dict, optional</span>
-<span class="sd">            Design supply temperatures for old not retrofitted hydraulic systems.</span>
-<span class="sd">        custom_examples: dict, optional</span>
+<span class="sd">        THydSupOld_design : Optional[Union[float, Dict[str, float]]]</span>
+<span class="sd">            Design supply temperatures for old, non-retrofitted hydraulic systems.</span>
+<span class="sd">        custom_examples: Optional[Dict[str, str]]</span>
 <span class="sd">            Specify custom examples with a dictionary containing the example name as the key and</span>
 <span class="sd">            the path to the corresponding custom mako template as the value.</span>
-<span class="sd">        custom_script: dict, optional</span>
+<span class="sd">        custom_script: Optional[Dict[str, str]]</span>
 <span class="sd">            Specify custom .mos scripts for the existing and custom examples with a dictionary</span>
 <span class="sd">            containing the example name as the key and the path to the corresponding custom mako template as the value.</span>
-<span class="sd">        path : string</span>
-<span class="sd">            if the Files should not be stored in default output path of TEASER,</span>
-<span class="sd">            an alternative path can be specified as a full path</span>
-<span class="sd">        report: boolean</span>
-<span class="sd">            if True a model report in form of a html and csv file will be</span>
-<span class="sd">            created for the exported project.</span>
+<span class="sd">        report : bool</span>
+<span class="sd">            If True, generates a model report in HTML and CSV format for the exported project. Default is False.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            The path where the exported files are stored.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1084,7 +1088,7 @@
 <span class="sd">            weather file can be find in inputdata/weatherdata.</span>
 <span class="sd">        calc_all_buildings: boolean</span>
 <span class="sd">            If True, calculates all buildings new. Default is True.</span>
-<span class="sd">            Here important for new calculation of static heat load.</span>
+<span class="sd">            Important for new calculation of static heat load.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weather_file_path</span> <span class="o">=</span> <span class="n">weather_file_path</span>
         <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">:</span>

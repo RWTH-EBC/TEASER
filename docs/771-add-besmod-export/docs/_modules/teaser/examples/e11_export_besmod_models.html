@@ -80,6 +80,12 @@
 
 <span class="c1"># This module demonstrates how to export building models from a TEASER project</span>
 <span class="c1"># to ready-to-run simulation models for the Modelica BESMod library.</span>
+<span class="c1"># BESMod enables seamless integration with state-of-the-art energy systems,</span>
+<span class="c1"># such as heat pumps and photovoltaic systems. These systems can be utilized</span>
+<span class="c1"># to generate primary energy demand curves (e.g., for electricity or gas) or</span>
+<span class="c1"># to conduct in-depth analyses of building energy systems. In contrast,</span>
+<span class="c1"># AixLib focuses on ideal heat demand calculation, and IBPSA on</span>
+<span class="c1"># free floating temperature without an ideal heater.</span>
 <span class="c1"># You can execute this example using</span>
 <span class="c1"># [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)</span>
 
@@ -101,18 +107,21 @@
 
     <span class="c1"># Configure project settings to ensure compatibility with BESMod. The BESMod</span>
     <span class="c1"># library uses the AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone model</span>
-    <span class="c1"># with 4 elements for the demand building model. Set these parameters in the project:</span>
+    <span class="c1"># with 4 elements for the demand building model. Other numbers of elements are possible,</span>
+    <span class="c1"># but compatability with ARoof for PV and AFloor for UFH systems must be checked first.</span>
+    <span class="c1"># Set these parameters in the project:</span>
     <span class="n">prj</span><span class="o">.</span><span class="n">used_library_calc</span> <span class="o">=</span> <span class="s1">&#39;AixLib&#39;</span>
     <span class="n">prj</span><span class="o">.</span><span class="n">number_of_elements_calc</span> <span class="o">=</span> <span class="mi">4</span>
 
     <span class="c1"># BESMod allows building models to be included in predefined example energy systems:</span>
     <span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s2">&quot;TEASERHeatLoadCalculation&quot;</span><span class="p">,</span>  <span class="c1"># Ideal electric heater for heat load calculations</span>
-        <span class="s2">&quot;HeatPumpMonoenergetic&quot;</span><span class="p">,</span>  <span class="c1"># Heat pump with radiators, buffer storage, and PV</span>
+        <span class="s2">&quot;HeatPumpMonoenergetic&quot;</span><span class="p">,</span>  <span class="c1"># Heat pump with radiators, buffer and DHW storage, and PV</span>
         <span class="s2">&quot;GasBoilerBuildingOnly&quot;</span>  <span class="c1"># Gas boiler with radiators</span>
     <span class="p">]</span>
 
-    <span class="c1"># For hydraulic systems, specify the nominal hydraulic supply temperature.</span>
+    <span class="c1"># For the hydraulic systems, you have to specify a nominal supply temperature</span>
+    <span class="c1"># for heat transfer, e.g. in radiators.</span>
     <span class="c1"># Multiple options are available:</span>
 
     <span class="c1"># Option 1: Set a single value for all buildings and zones.</span>
@@ -133,7 +142,7 @@
                        <span class="s2">&quot;ResidentialBuildingTabulaMulti&quot;</span><span class="p">:</span> <span class="mf">328.15</span><span class="p">}</span>
 
     <span class="c1"># Option 3: Specify values based on construction year.</span>
-    <span class="c1"># Here the value of the next higher specified year is set to the building.</span>
+    <span class="c1"># Here, the value of the next higher specified year is set to the building.</span>
     <span class="c1"># The classification here is taken from:</span>
     <span class="c1"># https://www.ffe.de/projekte/waermepumpen-fahrplan-finanzielle-kipppunkte-zur-modernisierung-mit-waermepumpen-im-wohngebaeudebestand/</span>
     <span class="n">THydSup_nominal</span> <span class="o">=</span> <span class="p">{</span>
@@ -146,7 +155,7 @@
     <span class="c1"># In the examples, the parameters for BESMod.Systems.UserProfiles.TEASERProfiles are configured,</span>
     <span class="c1"># including internal gains and heating profiles for each zone.</span>
     <span class="c1"># BESMod requires 24-hour heating profiles, which are used</span>
-    <span class="c1"># to define the parameters of the setBakTSetZone Pulse block.</span>
+    <span class="c1"># to define the parameters of the `setBakTSetZone` Pulse block.</span>
     <span class="c1"># By default, the TEASER profiles are applied, but these can be customized if needed.</span>
 
     <span class="c1"># Additionally, location-specific parameters must be set, which can be achieved using the following function.</span>
@@ -175,7 +184,8 @@
     <span class="p">)</span>
 
     <span class="c1"># The partial retrofit option of the energy system in BESMod can also be utilized.</span>
-    <span class="c1"># To enable this, the nominal heat flow of each zone in the building must be extracted prior to the retrofit.</span>
+    <span class="c1"># For more information on this see BESMod.UsersGuide.GettingStarted.Parameterization.</span>
+    <span class="c1"># To enable this here, the nominal heat flow of each zone in the building must be extracted prior to the retrofit.</span>
     <span class="n">QBuiOld_flow_design</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="p">{</span>
             <span class="n">tz</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">tz</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">heat_load</span> <span class="k">for</span> <span class="n">tz</span> <span class="ow">in</span> <span class="n">bldg</span><span class="o">.</span><span class="n">thermal_zones</span>

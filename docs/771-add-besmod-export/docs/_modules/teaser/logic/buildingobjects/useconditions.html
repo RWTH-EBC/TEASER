@@ -256,7 +256,7 @@
 <span class="sd">        false = natural infiltration + ventilation due to a AHU</span>
 <span class="sd">        + window infiltration calculated by window opening model</span>
 <span class="sd">        AixLib: Used on Zone level for ventilation.</span>
-<span class="sd">    static_infiltration: float [1/h]</span>
+<span class="sd">    normative_infiltration: float [1/h]</span>
 <span class="sd">        Infiltration rate for static heat load calculation.</span>
 <span class="sd">        Default is 0.5 based on the DIN EN 12831-1:2017 minimal air exchange rate reference value.</span>
 <span class="sd">    base_infiltration : float [1/h]</span>
@@ -347,7 +347,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">lighting_efficiency_lumen</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># lighting efficiency in lm/W_el</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">use_constant_infiltration</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">static_infiltration</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">normative_infiltration</span> <span class="o">=</span> <span class="mf">0.5</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">base_infiltration</span> <span class="o">=</span> <span class="mf">0.2</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_user_infiltration</span> <span class="o">=</span> <span class="mf">1.0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_overheating_infiltration</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]</span>
