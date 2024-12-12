@@ -2,6 +2,12 @@
 
 # This module demonstrates how to export building models from a TEASER project
 # to ready-to-run simulation models for the Modelica BESMod library.
+# BESMod enables seamless integration with state-of-the-art energy systems,
+# such as heat pumps and photovoltaic systems. These systems can be utilized
+# to generate primary energy demand curves (e.g., for electricity or gas) or
+# to conduct in-depth analyses of building energy systems. In contrast,
+# AixLib focuses on ideal heat demand calculation, and IBPSA on
+# free floating temperature without an ideal heater.
 # You can execute this example using
 # [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)
 
@@ -21,18 +27,21 @@ def example_export_besmod(save_dir_path=None):
 
     # Configure project settings to ensure compatibility with BESMod. The BESMod
     # library uses the AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone model
-    # with 4 elements for the demand building model. Set these parameters in the project:
+    # with 4 elements for the demand building model. Other numbers of elements are possible,
+    # but compatability with ARoof for PV and AFloor for UFH systems must be checked first.
+    # Set these parameters in the project:
     prj.used_library_calc = 'AixLib'
     prj.number_of_elements_calc = 4
 
     # BESMod allows building models to be included in predefined example energy systems:
     examples = [
         "TEASERHeatLoadCalculation",  # Ideal electric heater for heat load calculations
-        "HeatPumpMonoenergetic",  # Heat pump with radiators, buffer storage, and PV
+        "HeatPumpMonoenergetic",  # Heat pump with radiators, buffer and DHW storage, and PV
         "GasBoilerBuildingOnly"  # Gas boiler with radiators
     ]
 
-    # For hydraulic systems, specify the nominal hydraulic supply temperature.
+    # For the hydraulic systems, you have to specify a nominal supply temperature
+    # for heat transfer, e.g. in radiators.
     # Multiple options are available:
 
     # Option 1: Set a single value for all buildings and zones.
@@ -53,7 +62,7 @@ def example_export_besmod(save_dir_path=None):
                        "ResidentialBuildingTabulaMulti": 328.15}
 
     # Option 3: Specify values based on construction year.
-    # Here the value of the next higher specified year is set to the building.
+    # Here, the value of the next higher specified year is set to the building.
     # The classification here is taken from:
     # https://www.ffe.de/projekte/waermepumpen-fahrplan-finanzielle-kipppunkte-zur-modernisierung-mit-waermepumpen-im-wohngebaeudebestand/
     THydSup_nominal = {
@@ -66,7 +75,7 @@ def example_export_besmod(save_dir_path=None):
     # In the examples, the parameters for BESMod.Systems.UserProfiles.TEASERProfiles are configured,
     # including internal gains and heating profiles for each zone.
     # BESMod requires 24-hour heating profiles, which are used
-    # to define the parameters of the setBakTSetZone Pulse block.
+    # to define the parameters of the `setBakTSetZone` Pulse block.
     # By default, the TEASER profiles are applied, but these can be customized if needed.
 
     # Additionally, location-specific parameters must be set, which can be achieved using the following function.
@@ -95,7 +104,8 @@ def example_export_besmod(save_dir_path=None):
     )
 
     # The partial retrofit option of the energy system in BESMod can also be utilized.
-    # To enable this, the nominal heat flow of each zone in the building must be extracted prior to the retrofit.
+    # For more information on this see BESMod.UsersGuide.GettingStarted.Parameterization.
+    # To enable this here, the nominal heat flow of each zone in the building must be extracted prior to the retrofit.
     QBuiOld_flow_design = {
         bldg.name: {
             tz.name: tz.model_attr.heat_load for tz in bldg.thermal_zones
