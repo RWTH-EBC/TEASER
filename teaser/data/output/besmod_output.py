@@ -16,7 +16,7 @@ def export_besmod(
     path: Optional[str] = None,
     examples: Optional[List[str]] = None,
     THydSup_nominal: Optional[Union[float, Dict[str, float]]] = None,
-    QBuiOld_flow_design: Optional[Dict[str, float]] = None,
+    QBuiOld_flow_design: Optional[Dict[str, Dict[str, float]]] = None,
     THydSupOld_design: Optional[Union[float, Dict[str, float]]] = None,
     custom_examples: Optional[Dict[str, str]] = None,
     custom_script: Optional[Dict[str, str]] = None
@@ -45,9 +45,10 @@ def export_besmod(
         Nominal supply temperature(s) for the hydraulic system. Required for
         certain examples (e.g., HeatPumpMonoenergetic, GasBoilerBuildingOnly).
         See docstring of teaser.data.output.besmod_output.convert_input() for further information.
-    QBuiOld_flow_design : Optional[Dict[str, float]
+    QBuiOld_flow_design : Optional[Dict[str, Dict[str, float]]]
         For partially retrofitted systems specify the old nominal heat flow
-        of the Buildings in a dictionary with the building names as keys.
+        of all zones in the Buildings in a nested dictionary with
+        the building names and in a level below the zone names as keys.
         By default, only the radiator transfer system is not retrofitted in BESMod.
     THydSupOld_design : Optional[Union[float, Dict[str, float]]]
         Design supply temperatures for old, non-retrofitted hydraulic systems.
