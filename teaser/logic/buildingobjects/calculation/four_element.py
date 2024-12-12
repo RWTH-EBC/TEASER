@@ -1555,7 +1555,7 @@ class FourElement(object):
         self.heat_load_outside_factor = (
             (ua_value_ow_temp + self.ua_value_win)
             + self.thermal_zone.volume
-            * self.thermal_zone.use_conditions.static_infiltration
+            * self.thermal_zone.use_conditions.normative_infiltration
             * 1
             / 3600
             * self.thermal_zone.heat_capac_air
