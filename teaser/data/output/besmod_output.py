@@ -1,22 +1,26 @@
 """This module contains function for BESMod model generation"""
 
 import os
+from typing import Optional, Union, List, Dict
 from mako.template import Template
 from mako.lookup import TemplateLookup
 import teaser.logic.utilities as utilities
 import teaser.data.output.modelica_output as modelica_output
+from teaser.project import Project
+from teaser.logic.buildingobjects.building import Building
 
 
 def export_besmod(
-        buildings,
-        prj,
-        path=None,
-        examples=None,
-        THydSup_nominal=None,
-        QBuiOld_flow_design=None,
-        THydSupOld_design=None,
-        custom_examples=None,
-        custom_script=None):
+    buildings: Union[List[Building], Building],
+    prj: Project,
+    path: Optional[str] = None,
+    examples: Optional[List[str]] = None,
+    THydSup_nominal: Optional[Union[float, Dict[str, float]]] = None,
+    QBuiOld_flow_design: Optional[Dict[str, float]] = None,
+    THydSupOld_design: Optional[Union[float, Dict[str, float]]] = None,
+    custom_examples: Optional[Dict[str, str]] = None,
+    custom_script: Optional[Dict[str, str]] = None
+) -> None:
     """
     Export building models for BESMod simulations.
 
@@ -26,31 +30,31 @@ def export_besmod(
 
     Parameters
     ----------
-    buildings : list[Building] or Building
+    buildings : Union[List[Building], Building]
         TEASER Building instances to export as BESMod models. Can be a single
         Building or a list of Buildings.
     prj : Project
         TEASER Project instance containing project metadata such as library
         versions and weather file paths.
-    path : str, optional
-        Output directory path for the exported files. If not specified,
-        the default output path in TEASER is used.
-    examples : list[str], optional
+    examples : Optional[List[str]]
         Names of BESMod examples to export alongside the building models.
-    THydSup_nominal : float or dict, optional
+        Supported Examples: "TEASERHeatLoadCalculation", "HeatPumpMonoenergetic", and "GasBoilerBuildingOnly".
+    path : Optional[str]
+        Alternative output path for storing the exported files. If None, the default TEASER output path is used.
+    THydSup_nominal : Optional[Union[float, Dict[str, float]]]
         Nominal supply temperature(s) for the hydraulic system. Required for
         certain examples (e.g., HeatPumpMonoenergetic, GasBoilerBuildingOnly).
         See docstring of teaser.data.output.besmod_output.convert_input() for further information.
-    QBuiOld_flow_design : dict, optional
+    QBuiOld_flow_design : Optional[Dict[str, float]
         For partially retrofitted systems specify the old nominal heat flow
         of the Buildings in a dictionary with the building names as keys.
         By default, only the radiator transfer system is not retrofitted in BESMod.
-    THydSupOld_design : float or dict, optional
-        Design supply temperatures for old not retrofitted hydraulic systems.
-    custom_examples: dict, optional
+    THydSupOld_design : Optional[Union[float, Dict[str, float]]]
+        Design supply temperatures for old, non-retrofitted hydraulic systems.
+    custom_examples: Optional[Dict[str, str]]
         Specify custom examples with a dictionary containing the example name as the key and
         the path to the corresponding custom mako template as the value.
-    custom_script: dict, optional
+    custom_script: Optional[Dict[str, str]]
         Specify custom .mos scripts for the existing and custom examples with a dictionary
         containing the example name as the key and the path to the corresponding custom mako template as the value.
 
@@ -368,12 +372,12 @@ def _convert_heating_profile(heating_profile):
         start_time = 0
         width = 1e-50
     elif change_count == 1:
-        if heating_profile[0]<heating_profile[-1]:
+        if heating_profile[0] < heating_profile[-1]:
             start_time = 0
             width = 100 * change_indexes[0] / 24
         else:
             start_time = change_indexes[0] * 3600
-            width = 100 * (24-change_indexes[0]) / 24
+            width = 100 * (24 - change_indexes[0]) / 24
     elif change_count == 2:
         start_time = change_indexes[1] * 3600
         width = 100 * (24 - change_indexes[1] + change_indexes[0]) / 24
