@@ -11,15 +11,15 @@ from teaser.logic.buildingobjects.building import Building
 
 
 def export_besmod(
-    buildings: Union[List[Building], Building],
-    prj: Project,
-    path: Optional[str] = None,
-    examples: Optional[List[str]] = None,
-    THydSup_nominal: Optional[Union[float, Dict[str, float]]] = None,
-    QBuiOld_flow_design: Optional[Dict[str, Dict[str, float]]] = None,
-    THydSupOld_design: Optional[Union[float, Dict[str, float]]] = None,
-    custom_examples: Optional[Dict[str, str]] = None,
-    custom_script: Optional[Dict[str, str]] = None
+        buildings: Union[List[Building], Building],
+        prj: Project,
+        path: Optional[str] = None,
+        examples: Optional[List[str]] = None,
+        THydSup_nominal: Optional[Union[float, Dict[str, float]]] = None,
+        QBuiOld_flow_design: Optional[Dict[str, Dict[str, float]]] = None,
+        THydSupOld_design: Optional[Union[float, Dict[str, float]]] = None,
+        custom_examples: Optional[Dict[str, str]] = None,
+        custom_script: Optional[Dict[str, str]] = None
 ) -> None:
     """
     Export building models for BESMod simulations.
@@ -77,32 +77,50 @@ def export_besmod(
 
     if prj.used_library_calc != "AixLib":
         raise AttributeError("BESMod export is only implemented for AixLib calculation.")
+
     if examples is None:
         examples = []
+
     if not isinstance(examples, list):
         examples = [examples]
-    supported_examples = ["TEASERHeatLoadCalculation",
-                          "HeatPumpMonoenergetic",
-                          "GasBoilerBuildingOnly"]
+
+    supported_examples = [
+        "TEASERHeatLoadCalculation",
+        "HeatPumpMonoenergetic",
+        "GasBoilerBuildingOnly",
+    ]
+
     for exp in examples:
         if exp not in supported_examples:
-            raise ValueError(f"Example {exp} is not supported. "
-                             f"Supported examples are {supported_examples}.")
+            raise ValueError(
+                f"Example {exp} is not supported. "
+                f"Supported examples are {supported_examples}."
+            )
 
     if THydSup_nominal is None and any(
-            example in examples for example in ["HeatPumpMonoenergetic", "GasBoilerBuildingOnly"]):
-        raise ValueError("Examples 'HeatPumpMonoenergetic' and 'GasBoilerBuildingOnly' "
-                         "require the `THydSup_nominal` parameter.")
+            example in examples for example in ["HeatPumpMonoenergetic", "GasBoilerBuildingOnly"]
+    ):
+        raise ValueError(
+            "Examples 'HeatPumpMonoenergetic' and 'GasBoilerBuildingOnly' "
+            "require the `THydSup_nominal` parameter."
+        )
 
     t_hyd_sup_nominal_bldg = convert_input(THydSup_nominal, buildings)
-    t_hyd_sup_old_design_bldg = convert_input(THydSupOld_design, buildings) if THydSupOld_design else \
-        {bldg.name: "systemParameters.THydSup_nominal" for bldg in buildings}
+    t_hyd_sup_old_design_bldg = (
+        convert_input(THydSupOld_design, buildings)
+        if THydSupOld_design
+        else {bldg.name: "systemParameters.THydSup_nominal" for bldg in buildings}
+    )
 
     if QBuiOld_flow_design is None:
-        QBuiOld_flow_design = {bldg.name: "systemParameters.QBui_flow_nominal" for bldg in buildings}
+        QBuiOld_flow_design = {
+            bldg.name: "systemParameters.QBui_flow_nominal" for bldg in buildings
+        }
     else:
-        QBuiOld_flow_design = {bldg.name: _convert_to_zone_array(bldg, QBuiOld_flow_design[bldg.name]) for bldg in
-                               buildings}
+        QBuiOld_flow_design = {
+            bldg.name: _convert_to_zone_array(bldg, QBuiOld_flow_design[bldg.name])
+            for bldg in buildings
+        }
 
     if custom_script is None:
         custom_script = {}
