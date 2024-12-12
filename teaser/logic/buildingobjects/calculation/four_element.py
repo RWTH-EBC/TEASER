@@ -1549,6 +1549,10 @@ class FourElement(object):
         ua_value_gf_temp : float [W/(m2*K)]
             UA Value of all GroundFloors
         """
+        if self.thermal_zone.use_condition.base_infiltration > 0.5:
+            raise warnings.warn("The base_infiltration is larger than 0.5, "
+                                "which could lead to ideal heaters being too small.")
+
         self.heat_load = 0.0
 
         ua_value_ow_temp = self.ua_value_rt + self.ua_value_ow
