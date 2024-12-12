@@ -6,13 +6,12 @@ from mako.template import Template
 from mako.lookup import TemplateLookup
 import teaser.logic.utilities as utilities
 import teaser.data.output.modelica_output as modelica_output
-from teaser.project import Project
 from teaser.logic.buildingobjects.building import Building
 
 
 def export_besmod(
         buildings: Union[List[Building], Building],
-        prj: Project,
+        prj: 'Project',
         path: Optional[str] = None,
         examples: Optional[List[str]] = None,
         THydSup_nominal: Optional[Union[float, Dict[str, float]]] = None,
