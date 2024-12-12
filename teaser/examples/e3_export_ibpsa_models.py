@@ -1,7 +1,7 @@
 # # Example 3: Export Modelica models for IBPSA library using TEASER API
 # This module contains an example how to export buildings from a TEASER
 # project to ready-to-run simulation models for Modelica library IBPSA. These
-# models simulate in Dymola, OpenModelica and JModelica.
+# models should simulate in Dymola, OpenModelica and JModelica.
 # You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks)
 
 import teaser.examples.e1_generate_archetype as e1
