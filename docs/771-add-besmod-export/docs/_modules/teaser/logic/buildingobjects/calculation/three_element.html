@@ -1365,6 +1365,10 @@
 <span class="sd">        ua_value_gf_temp : float [W/(m2*K)]</span>
 <span class="sd">            UA Value of all GroundFloors</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">base_infiltration</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;The base_infiltration is larger than 0.5, &quot;</span>
+                                <span class="s2">&quot;which could lead to ideal heaters being too small.&quot;</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">heat_load</span> <span class="o">=</span> <span class="mf">0.0</span>
         <span class="n">ua_value_ow_temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ua_value_ow</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">heat_load_outside_factor</span> <span class="o">=</span> <span class="p">(</span>
