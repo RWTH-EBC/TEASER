@@ -826,3 +826,22 @@ class UseConditions(object):
             )
         self._use_maintained_illuminance = False
         self._lighting_power = value
+
+    @property
+    def infiltration_rate(self):
+        warnings.warn(
+            "'infiltration_rate' is deprecated and will be removed in a future release. "
+            "Use 'base_infiltration' instead.",
+            DeprecationWarning,
+            stacklevel=2)
+        return self.base_infiltration
+
+    @infiltration_rate.setter
+    def infiltration_rate(self, value):
+        self.base_infiltration = value
+        warnings.warn(
+            "'infiltration_rate' is deprecated and will be removed in a future release. "
+            "Use 'base_infiltration' instead.",
+            DeprecationWarning,
+            stacklevel=2)
+
