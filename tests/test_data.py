@@ -2405,7 +2405,6 @@ class Test_teaser(object):
         tz.name = "LivingRoom"
         tz.area = 140.0
         tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
-        tz.infiltration_rate = 0.5
 
         from teaser.logic.buildingobjects.useconditions import UseConditions
 
@@ -2498,7 +2497,6 @@ class Test_teaser(object):
         tz.name = "LivingRoom"
         tz.area = 140.0
         tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
-        tz.infiltration_rate = 0.5
 
         from teaser.logic.buildingobjects.useconditions import UseConditions
 
@@ -2619,7 +2617,6 @@ class Test_teaser(object):
         tz.name = "LivingRoom"
         tz.area = 140.0
         tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
-        tz.infiltration_rate = 0.5
 
         from teaser.logic.buildingobjects.useconditions import UseConditions
 
@@ -2755,7 +2752,6 @@ class Test_teaser(object):
         tz.name = "LivingRoom"
         tz.area = 140.0
         tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
-        tz.infiltration_rate = 0.5
 
         from teaser.logic.buildingobjects.useconditions import UseConditions
 
@@ -2893,7 +2889,6 @@ class Test_teaser(object):
         tz.name = "LivingRoom"
         tz.area = 140.0
         tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
-        tz.infiltration_rate = 0.5
 
         from teaser.logic.buildingobjects.useconditions import UseConditions
 
