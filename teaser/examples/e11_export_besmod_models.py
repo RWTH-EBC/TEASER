@@ -1,5 +1,4 @@
 # # Example 11: Export Modelica models for BESMod library using TEASER API
-
 # This module demonstrates how to export building models from a TEASER project
 # to ready-to-run simulation models for the Modelica BESMod library.
 # BESMod enables seamless integration with state-of-the-art energy systems,
@@ -9,7 +8,7 @@
 # AixLib focuses on ideal heat demand calculation, and IBPSA on
 # free floating temperature without an ideal heater.
 # You can execute this example using
-# [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)
+# [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks)
 
 import teaser.examples.e1_generate_archetype as e1
 import teaser.logic.utilities as utilities
@@ -20,6 +19,7 @@ def example_export_besmod(save_dir_path=None):
     """This function demonstrates the export to Modelica library BESMod using
     the API function of TEASER"""
 
+    # ## Standard export
     # In e1_generate_archetype we created a Project with three archetype
     # buildings to get this Project we rerun this example
 
@@ -103,6 +103,7 @@ def example_export_besmod(save_dir_path=None):
         examples=examples
     )
 
+    # ## Partial retrofit export
     # The partial retrofit option of the energy system in BESMod can also be utilized.
     # For more information on this see BESMod.UsersGuide.GettingStarted.Parameterization.
     # To enable this here, the nominal heat flow of each zone in the building must be extracted prior to the retrofit.
@@ -135,6 +136,7 @@ def example_export_besmod(save_dir_path=None):
         examples=examples
     )
 
+    # ## Custom export
     # Additionally, we have the flexibility to define custom templates for including buildings in specific setups.
     # For instance, a custom template is defined here to include the building in the
     # ModelicaConferencePaper example from BESMod, which features an integrated battery system.
@@ -172,7 +174,7 @@ def example_export_besmod(save_dir_path=None):
     # end
     # ModelicaConferencePaper${bldg.name};
 
-    prj.name = "ArchetypeExample_total_retrofit"
+    prj.name = "ArchetypeExample_custom"
 
     custom_template_path = os.path.join(
         os.path.dirname(__file__), "examplefiles", "custom_besmod_templates"
