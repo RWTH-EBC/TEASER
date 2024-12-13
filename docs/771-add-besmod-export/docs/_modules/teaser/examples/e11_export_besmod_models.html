@@ -77,7 +77,6 @@
              
   <h1>Source code for teaser.examples.e11_export_besmod_models</h1><div class="highlight"><pre>
 <span></span><span class="c1"># # Example 11: Export Modelica models for BESMod library using TEASER API</span>
-
 <span class="c1"># This module demonstrates how to export building models from a TEASER project</span>
 <span class="c1"># to ready-to-run simulation models for the Modelica BESMod library.</span>
 <span class="c1"># BESMod enables seamless integration with state-of-the-art energy systems,</span>
@@ -87,7 +86,7 @@
 <span class="c1"># AixLib focuses on ideal heat demand calculation, and IBPSA on</span>
 <span class="c1"># free floating temperature without an ideal heater.</span>
 <span class="c1"># You can execute this example using</span>
-<span class="c1"># [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)</span>
+<span class="c1"># [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks)</span>
 
 <span class="kn">import</span> <span class="nn">teaser.examples.e1_generate_archetype</span> <span class="k">as</span> <span class="nn">e1</span>
 <span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utilities</span>
@@ -100,6 +99,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function demonstrates the export to Modelica library BESMod using</span>
 <span class="sd">    the API function of TEASER&quot;&quot;&quot;</span>
 
+    <span class="c1"># ## Standard export</span>
     <span class="c1"># In e1_generate_archetype we created a Project with three archetype</span>
     <span class="c1"># buildings to get this Project we rerun this example</span>
 
@@ -183,6 +183,7 @@
         <span class="n">examples</span><span class="o">=</span><span class="n">examples</span>
     <span class="p">)</span>
 
+    <span class="c1"># ## Partial retrofit export</span>
     <span class="c1"># The partial retrofit option of the energy system in BESMod can also be utilized.</span>
     <span class="c1"># For more information on this see BESMod.UsersGuide.GettingStarted.Parameterization.</span>
     <span class="c1"># To enable this here, the nominal heat flow of each zone in the building must be extracted prior to the retrofit.</span>
@@ -215,6 +216,7 @@
         <span class="n">examples</span><span class="o">=</span><span class="n">examples</span>
     <span class="p">)</span>
 
+    <span class="c1"># ## Custom export</span>
     <span class="c1"># Additionally, we have the flexibility to define custom templates for including buildings in specific setups.</span>
     <span class="c1"># For instance, a custom template is defined here to include the building in the</span>
     <span class="c1"># ModelicaConferencePaper example from BESMod, which features an integrated battery system.</span>
@@ -252,7 +254,7 @@
     <span class="c1"># end</span>
     <span class="c1"># ModelicaConferencePaper${bldg.name};</span>
 
-    <span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ArchetypeExample_total_retrofit&quot;</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ArchetypeExample_custom&quot;</span>
 
     <span class="n">custom_template_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
         <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&quot;examplefiles&quot;</span><span class="p">,</span> <span class="s2">&quot;custom_besmod_templates&quot;</span>

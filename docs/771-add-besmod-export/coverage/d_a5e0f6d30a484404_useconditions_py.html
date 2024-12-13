@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Coverage for teaser/logic/buildingobjects/useconditions.py: 90%</title>
+    <title>Coverage for teaser/logic/buildingobjects/useconditions.py: 88%</title>
     <link rel="icon" sizes="32x32" href="favicon_32.png">
     <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="coverage_html.js" defer></script>
@@ -12,7 +12,7 @@
     <div class="content">
         <h1>
             <span class="text">Coverage for </span><b>teaser/logic/buildingobjects/useconditions.py</b>:
-            <span class="pc_cov">90%</span>
+            <span class="pc_cov">88%</span>
         </h1>
         <aside id="help_panel_wrapper">
             <input id="help_panel_state" type="checkbox">
@@ -54,9 +54,9 @@
             </div>
         </aside>
         <h2>
-            <span class="text">267 statements &nbsp;</span>
-            <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">239<span class="text"> run</span></button>
-            <button type="button" class="mis show_mis button_toggle_mis" value="mis" data-shortcut="m" title="Toggle lines missing">28<span class="text"> missing</span></button>
+            <span class="text">275 statements &nbsp;</span>
+            <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">243<span class="text"> run</span></button>
+            <button type="button" class="mis show_mis button_toggle_mis" value="mis" data-shortcut="m" title="Toggle lines missing">32<span class="text"> missing</span></button>
             <button type="button" class="exc show_exc button_toggle_exc" value="exc" data-shortcut="x" title="Toggle lines excluded">0<span class="text"> excluded</span></button>
         </h2>
         <p class="text">
@@ -65,7 +65,7 @@
             <a id="nextFileLink" class="nav" href="d_2775d8dee3fabccf_retrofit_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.4.4">coverage.py v7.4.4</a>,
-            created at 2024-12-13 10:30 +0000
+            created at 2024-12-13 11:10 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"/>
@@ -908,6 +908,25 @@
     <p class="pln"><span class="n"><a id="t826" href="#t826">826</a></span><span class="t">            <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t827" href="#t827">827</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">_use_maintained_illuminance</span> <span class="op">=</span> <span class="key">False</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t828" href="#t828">828</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">_lighting_power</span> <span class="op">=</span> <span class="nam">value</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t829" href="#t829">829</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t830" href="#t830">830</a></span><span class="t">    <span class="op">@</span><span class="nam">property</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t831" href="#t831">831</a></span><span class="t">    <span class="key">def</span> <span class="nam">infiltration_rate</span><span class="op">(</span><span class="nam">self</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t832" href="#t832">832</a></span><span class="t">        <span class="nam">warnings</span><span class="op">.</span><span class="nam">warn</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t833" href="#t833">833</a></span><span class="t">            <span class="str">"'infiltration_rate' is deprecated and will be removed in a future release. "</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t834" href="#t834">834</a></span><span class="t">            <span class="str">"Use 'base_infiltration' instead."</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t835" href="#t835">835</a></span><span class="t">            <span class="nam">DeprecationWarning</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t836" href="#t836">836</a></span><span class="t">            <span class="nam">stacklevel</span><span class="op">=</span><span class="num">2</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t837" href="#t837">837</a></span><span class="t">        <span class="key">return</span> <span class="nam">self</span><span class="op">.</span><span class="nam">base_infiltration</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t838" href="#t838">838</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t839" href="#t839">839</a></span><span class="t">    <span class="op">@</span><span class="nam">infiltration_rate</span><span class="op">.</span><span class="nam">setter</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t840" href="#t840">840</a></span><span class="t">    <span class="key">def</span> <span class="nam">infiltration_rate</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">value</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t841" href="#t841">841</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">base_infiltration</span> <span class="op">=</span> <span class="nam">value</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t842" href="#t842">842</a></span><span class="t">        <span class="nam">warnings</span><span class="op">.</span><span class="nam">warn</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t843" href="#t843">843</a></span><span class="t">            <span class="str">"'infiltration_rate' is deprecated and will be removed in a future release. "</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t844" href="#t844">844</a></span><span class="t">            <span class="str">"Use 'base_infiltration' instead."</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t845" href="#t845">845</a></span><span class="t">            <span class="nam">DeprecationWarning</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t846" href="#t846">846</a></span><span class="t">            <span class="nam">stacklevel</span><span class="op">=</span><span class="num">2</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t847" href="#t847">847</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
 </main>
 <footer>
     <div class="content">
@@ -917,7 +936,7 @@
             <a id="nextFileLink" class="nav" href="d_2775d8dee3fabccf_retrofit_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.4.4">coverage.py v7.4.4</a>,
-            created at 2024-12-13 10:30 +0000
+            created at 2024-12-13 11:10 +0000
         </p>
     </div>
 </footer>
