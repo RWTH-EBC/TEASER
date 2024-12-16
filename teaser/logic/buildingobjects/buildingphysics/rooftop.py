@@ -61,6 +61,43 @@ class Rooftop(OuterWall):
         List of all layers of a building element (to be filled with Layer
         objects). Use element.layer = None to delete all layers of the building
         element
+    other_side : ThermalZone()
+        the thermal zone on the other side of the building element (only for
+        interzonal elements)
+    interzonal_type_material : str
+        one of (None (default), 'inner', 'outer_ordered', 'outer_reversed')
+        describes as which kind of element the element is treated when loading
+        type elements. Caution: Make sure that the complimentary element of
+        the other zone is also changed accordingly if this is adapted manually
+            None: treatment based on project.method_interzonal_export_enrichment
+            'inner': InterzonalWall treated as InnerWall,
+                     InterzonalFloor treated as Floor,
+                     InterzonalCeiling treated as Ceiling
+            'outer_ordered': InterzonalWall treated as Wall,
+                             InterzonalFloor treated as GroundFloor,
+                             InterzonalCeiling treated as Rooftop
+            'outer_reversed': InterzonalWall treated as Wall,
+                              InterzonalFloor treated as Rooftop,
+                              InterzonalCeiling treated as GroundFloor, but with
+                              reversed layers, resulting in the reversed
+                              sequence of layers as for the complimentary
+                              element declared as 'outer_ordered'
+    interzonal_type_export : str
+        one of (None (default), 'inner', 'outer_ordered', 'outer_reversed')
+        describes as which kind of element the element is treated when exporting
+        to Modelica. Caution: Make sure that the complimentary element of
+        the other zone is also changed accordingly if this is adapted manually
+            'inner': element will be lumped with InnerWall. No heat flow to the
+                     zone on the other side will be modelled.
+            'outer_ordered': element will be lumped with OuterWall (OneElement
+                             to FourElement export) or treated as border to an
+                             adjacent zone (FiveElement export). Borders to the
+                             same adjacent zone will be lumped.
+            'outer_reversed': like 'outer_ordered', but the lumping follows
+                              VDI 6007-1 in reversed order, resulting in the
+                              reversed order of resistances and capacitors as
+                              for the complimentary element declared as
+                              'outer_ordered'
 
     Calculated Attributes
 
@@ -97,7 +134,7 @@ class Rooftop(OuterWall):
         Radiative resistance of building element on outer side (facing
         the ambient or adjacent zone). Currently for all InnerWalls and
         GroundFloors this value is set to 0.0
-    r_outer_conv : float [K/W]
+    r_outer_comb : float [K/W]
         Combined convective and radiative resistance of building element on
         outer side (facing the ambient or adjacent zone). Currently for all
         InnerWalls and GroundFloors this value is set to 0.0
@@ -117,7 +154,10 @@ class Rooftop(OuterWall):
         self._outer_convection = 20.0
         self._outer_radiation = 5.0
 
-    def retrofit_wall(self, year_of_retrofit, material=None):
+    def retrofit_wall(self,
+                      year_of_retrofit,
+                      material=None,
+                      add_at_position=None):
         """Retrofits wall to German refurbishment standards.
 
         This function adds an additional layer of insulation and sets the
@@ -136,10 +176,14 @@ class Rooftop(OuterWall):
             Type of material, that is used for insulation
         year_of_retrofit : int
             Year of the retrofit of the wall/building
+        add_at_position : int
+            position at which to insert the insulation layer.
+            0 inside, None (default) or -1 outside/other side
 
         """
-        material, year_of_retrofit = self.initialize_retrofit(
-            material, year_of_retrofit)
+        material, year_of_retrofit, ins_layer = self.initialize_retrofit(
+            material, year_of_retrofit, add_at_position
+        )
 
         calc_u = None
 
@@ -156,4 +200,5 @@ class Rooftop(OuterWall):
         elif year_of_retrofit >= 2014:
             calc_u = 0.2
 
-        self.set_insulation(material, calc_u, year_of_retrofit)
+        self.set_insulation(material, calc_u, year_of_retrofit,
+                            ins_layer_index=ins_layer)

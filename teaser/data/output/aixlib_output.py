@@ -13,7 +13,8 @@ def export_multizone(
         prj,
         path=None,
         use_postprocessing_calc=False,
-        export_vars=None):
+        export_vars=None,
+        custom_multizone_template_path=None):
     """Exports models for AixLib library
 
     Exports a building for
@@ -50,6 +51,9 @@ def export_multizone(
     export_vars : str
         Holds the string about which variables to export following the
         __Dymola_selection syntax.
+    custom_multizone_template_path : str
+        if a custom template for writing the multizone model should be used,
+        its path can be specified as a full path
 
     Attributes
     ----------
@@ -64,6 +68,8 @@ def export_multizone(
         Template for ThermalZoneRecord using 3 element model
     zone_template_4 : Template object
         Template for ThermalZoneRecord using 4 element model
+    zone_template_5 : Template object
+        Template for ThermalZoneRecord using 5 element model
     model_template : Template object
         Template for MultiZone model
     """
@@ -90,10 +96,20 @@ def export_multizone(
             "data/output/modelicatemplate/AixLib"
             "/AixLib_ThermalZoneRecord_FourElement"),
         lookup=lookup)
-    model_template = Template(
+    zone_template_5 = Template(
         filename=utilities.get_full_path(
-            "data/output/modelicatemplate/AixLib/AixLib_Multizone"),
+            "data/output/modelicatemplate/AixLib"
+            "/AixLib_ThermalZoneRecord_FiveElement"),
         lookup=lookup)
+    if custom_multizone_template_path:
+        model_template = Template(
+            filename=custom_multizone_template_path,
+            lookup=lookup)
+    else:
+        model_template = Template(
+            filename=utilities.get_full_path(
+                "data/output/modelicatemplate/AixLib/AixLib_Multizone"),
+            lookup=lookup)
     test_script_template = Template(
         filename=utilities.get_full_path(
             "data/output/modelicatemplate/modelica_test_script"),
@@ -112,7 +128,11 @@ def export_multizone(
         package_list=buildings,
         addition=None,
         extra=None)
-    _copy_weather_data(prj.weather_file_path, path)
+    if not prj.weather_file_path.startswith("modelica:"):
+        _copy_weather_data(prj.weather_file_path, path)
+    if prj.t_soil_mode == 3:
+        if not prj.t_soil_file_path.startswith("modelica:"):
+            _copy_weather_data(prj.t_soil_file_path, path)
 
     for i, bldg in enumerate(buildings):
 
@@ -161,7 +181,6 @@ def export_multizone(
                 modelica_info=bldg.parent.modelica_info,
                 use_postprocessing_calc=use_postprocessing_calc,
                 export_vars=export_vars))
-
             out_file.close()
 
         dir_resources = os.path.join(path, "Resources")
@@ -190,6 +209,8 @@ def export_multizone(
                     out_file.write(zone_template_3.render_unicode(zone=zone))
                 elif type(zone.model_attr).__name__ == "FourElement":
                     out_file.write(zone_template_4.render_unicode(zone=zone))
+                elif type(zone.model_attr).__name__ == "FiveElement":
+                    out_file.write(zone_template_5.render_unicode(zone=zone))
 
                 out_file.close()
 
@@ -344,8 +365,10 @@ def _copy_weather_data(source_path, destination_path):
     destination_path : str
         path of where the weather file should be placed
     """
-
-    shutil.copy2(source_path, destination_path)
+    try:
+        shutil.copy2(source_path, destination_path)
+    except shutil.SameFileError:
+        pass
 
 
 def _copy_script_unit_tests(destination_path):

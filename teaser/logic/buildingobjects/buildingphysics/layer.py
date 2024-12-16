@@ -29,12 +29,12 @@ class Layer(object):
         Thickness of the layer
     """
 
-    def __init__(self, parent=None, id=0):
+    def __init__(self, parent=None, id=0, parent_position=None):
         """Constructor of Layer.
 
 
         """
-        self.parent = parent
+        self.parent = (parent, parent_position)
         self.internal_id = random.random()
         self.id = id
         self._material = None
@@ -47,6 +47,12 @@ class Layer(object):
     @parent.setter
     def parent(self, value):
 
+        if type(value) == tuple:
+            position = value[1]
+            value = value[0]
+        else:
+            position = None
+
         if value is not None:
 
             ass_error_1 = "Parent has to be an instance of a BE"
@@ -57,11 +63,14 @@ class Layer(object):
                 or type(value).__name__ == "InnerWall" \
                 or type(value).__name__ == "Ceiling" \
                 or type(value).__name__ == "Floor" \
+                or type(value).__name__ == "InterzonalWall"\
+                or type(value).__name__ == "InterzonalCeiling"\
+                or type(value).__name__ == "InterzonalFloor"\
                 or type(value).__name__ == "Door" \
                 or type(value).__name__ == "Window", ass_error_1
 
             self.__parent = value
-            self.__parent.layer.append(self)
+            self.__parent.add_layer(self, position=position)
 
         else:
             self.__parent = None

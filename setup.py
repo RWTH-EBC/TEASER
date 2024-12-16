@@ -72,6 +72,7 @@ setup(
             "AixLib_ThermalZoneRecord_TwoElement",
             "AixLib_ThermalZoneRecord_ThreeElement",
             "AixLib_ThermalZoneRecord_FourElement",
+            "AixLib_ThermalZoneRecord_FiveElement",
         ],
         "teaser.data.output.modelicatemplate.IBPSA": [
             "IBPSA_OneElement",

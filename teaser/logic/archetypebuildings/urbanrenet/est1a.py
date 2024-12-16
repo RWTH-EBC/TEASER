@@ -73,6 +73,18 @@ class EST1a(Residential):
         Construction type of used wall constructions default is "heavy")
             iwu_heavy: heavy construction
             iwu_light: light construction
+    inner_wall_approximation_approach : str
+        'teaser_default' (default) sets length of inner walls = typical
+            length * height of floors + 2 * typical width * height of floors
+        'typical_minus_outer' sets length of inner walls = 2 * typical
+            length * height of floors + 2 * typical width * height of floors
+            - length of outer or interzonal walls
+        'typical_minus_outer_extended' like 'typical_minus_outer', but also
+            considers that
+            a) a non-complete "average room" reduces its circumference
+              proportional to the square root of the area
+            b) rooftops, windows and ground floors (= walls with border to
+                soil) may have a vertical share
 
     Notes
     -----
@@ -85,8 +97,10 @@ class EST1a(Residential):
 
     zone_area_factors : dict
         This dictionary contains the name of the zone (str), the
-        zone area factor (float) and the zone usage from BoundaryConditions json
-        (str). (Default see doc string above)
+        zone area factor (float), the zone usage from BoundaryConditions json
+        (str) (Default see doc string above), and may contain a dictionary with
+        keyword-attribute-like changes to zone parameters that are usually
+        inherited from parent: 'number_of_floors', 'height_of_floors'
     outer_wall_names : dict
         This dictionary contains a random name for the outer walls,
         their orientation and tilt. Default is a building in north-south
@@ -128,7 +142,8 @@ class EST1a(Residential):
             with_ahu=False,
             internal_gains_mode=1,
             neighbour_buildings=None,
-            construction_data=None
+            construction_data=None,
+            inner_wall_approximation_approach='teaser_default'
     ):
         """Constructor of EST1a
         """
@@ -139,7 +154,8 @@ class EST1a(Residential):
             year_of_construction,
             net_leased_area,
             with_ahu,
-            internal_gains_mode)
+            internal_gains_mode,
+            inner_wall_approximation_approach)
 
         self.neighbour_buildings = neighbour_buildings
         self.construction_data = construction_data
@@ -243,6 +259,14 @@ class EST1a(Residential):
             zone = ThermalZone(self)
             zone.name = key
             zone.area = type_bldg_area * value[0]
+            try:
+                zone.number_of_floors = value[2]['number_of_floors']
+            except (KeyError, IndexError):
+                pass
+            try:
+                zone.height_of_floors = value[2]['height_of_floors']
+            except (KeyError, IndexError):
+                pass
             use_cond = UseCond(zone)
             use_cond.load_use_conditions(value[1])
 
