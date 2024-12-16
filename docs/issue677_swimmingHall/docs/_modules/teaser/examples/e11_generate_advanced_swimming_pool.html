@@ -1,0 +1,627 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser.examples.e11_generate_advanced_swimming_pool &mdash; TEASER 1.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=db26dd79" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=292eb321"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            TEASER
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code/modules.html">teaser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">teaser.examples.e11_generate_advanced_swimming_pool</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for teaser.examples.e11_generate_advanced_swimming_pool</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This is an example to generate an advanced swimming pool based on </span>
+<span class="sd">TEASER example 1 - generate archetype and example 2 - export aixlib models.</span>
+<span class="sd">Last modified 2021-12-06 for Project &#39;Energieeffizienz in Schwimmbädern - </span>
+<span class="sd">Neubau und Bestand&#39;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utilities</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="c1">#import xlrd</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.thermalzone</span> <span class="kn">import</span> <span class="n">ThermalZone</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.useconditions</span> <span class="kn">import</span> <span class="n">UseConditions</span> <span class="k">as</span> <span class="n">UseCond</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.ceiling</span> <span class="kn">import</span> <span class="n">Ceiling</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.floor</span> <span class="kn">import</span> <span class="n">Floor</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.groundfloor</span> <span class="kn">import</span> <span class="n">GroundFloor</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.innerwall</span> <span class="kn">import</span> <span class="n">InnerWall</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.outerwall</span> <span class="kn">import</span> <span class="n">OuterWall</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.rooftop</span> <span class="kn">import</span> <span class="n">Rooftop</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.window</span> <span class="kn">import</span> <span class="n">Window</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.layer</span> <span class="kn">import</span> <span class="n">Layer</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.material</span> <span class="kn">import</span> <span class="n">Material</span>
+<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingsystems.pool</span> <span class="kn">import</span> <span class="n">Pool</span>
+<span class="kn">from</span> <span class="nn">teaser.data.input</span> <span class="kn">import</span> <span class="n">material_input_json</span> <span class="k">as</span> <span class="n">matInput</span>
+
+
+
+<div class="viewcode-block" id="generate_advanced_swimmingPool">
+<a class="viewcode-back" href="../../../code/teaser.examples.html#teaser.examples.e11_generate_advanced_swimming_pool.generate_advanced_swimmingPool">[docs]</a>
+<span class="k">def</span> <span class="nf">generate_advanced_swimmingPool</span><span class="p">():</span>
+
+    <span class="c1"># First step: Import the TEASER API (called Project) into your Python</span>
+    <span class="c1"># module</span>
+
+    <span class="kn">from</span> <span class="nn">teaser.project</span> <span class="kn">import</span> <span class="n">Project</span>
+
+    <span class="c1"># To use the API instantiate the Project class and rename the Project. The</span>
+    <span class="c1"># parameter load_data=True indicates that we load `iwu` typology archetype</span>
+    <span class="c1"># data into our Project (e.g. for Material properties and typical wall</span>
+    <span class="c1"># constructions. This can take a few seconds, depending on the size of the</span>
+    <span class="c1"># used data base). Be careful: Dymola does not like whitespaces in names and</span>
+    <span class="c1"># filenames, thus we will delete them anyway in TEASER.</span>
+
+    <span class="n">prj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">()</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Output_Swimming_Pool_Advanced_Model&quot;</span>
+
+
+    <span class="c1"># To generate non-residential archetype buildings the function</span>
+    <span class="c1"># Project.add_non_residential() is used. </span>
+    <span class="c1"># The following parameters need to be provided for swimming pools:</span>
+    <span class="c1"># Building Name: Name of swimming pool building.</span>
+    <span class="c1"># Water area: Used to calculate the size of the zones. Due to the</span>
+    <span class="c1"># code structure, the value is provided in place of the net leased area.</span>
+    <span class="c1"># Year of construction: Building construction year without retrofitting.</span>
+    <span class="c1"># Further parameters are currently not supported for swimming pools.   </span>
+
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    --- CHANGE PARAMETERS HERE ---</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">building_name</span> <span class="o">=</span> <span class="s2">&quot;Hallenbad&quot;</span>
+    <span class="n">water_area</span> <span class="o">=</span> <span class="mf">550.0</span>
+    <span class="n">year_of_construction</span> <span class="o">=</span> <span class="mi">2012</span>
+    <span class="n">excelFileName</span> <span class="o">=</span> <span class="s2">&quot;2022-02-27_Swimming pool_DatabaseAhlen.xlsx&quot;</span>
+    <span class="n">filePathOutput</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+    <span class="n">prj</span><span class="o">.</span><span class="n">add_non_residential</span><span class="p">(</span>
+        <span class="n">construction_data</span><span class="o">=</span><span class="s1">&#39;iwu_heavy&#39;</span><span class="p">,</span>
+        <span class="n">geometry_data</span><span class="o">=</span><span class="s1">&#39;swimming_facility&#39;</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">building_name</span><span class="p">,</span>
+        <span class="n">year_of_construction</span><span class="o">=</span><span class="n">year_of_construction</span><span class="p">,</span>
+        <span class="n">number_of_floors</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">height_of_floors</span><span class="o">=</span><span class="mf">3.5</span><span class="p">,</span>
+        <span class="n">net_leased_area</span><span class="o">=</span><span class="n">water_area</span><span class="p">,</span>
+        <span class="n">with_ahu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">internal_gains_mode</span><span class="o">=</span><span class="mi">3</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Added buildings are stored within Project.buildings    </span>
+    <span class="n">swimmingFacitlity</span> <span class="o">=</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># Read data from excel and set values for zones, pools and material</span>
+    <span class="n">readExcelFile</span><span class="p">(</span><span class="n">swimmingFacitlity</span><span class="p">,</span> <span class="n">excelFileName</span><span class="p">,</span> <span class="n">prj</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Your individual swimming facility includes:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">zone</span> <span class="ow">in</span> <span class="n">swimmingFacitlity</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;with zone area:&quot;</span><span class="p">,</span> <span class="n">zone</span><span class="o">.</span><span class="n">area</span><span class="p">,</span> <span class="s2">&quot; m²&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">pool</span> <span class="ow">in</span> <span class="n">swimmingFacitlity</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">pools</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">pool</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;with water area:&quot;</span><span class="p">,</span> <span class="n">pool</span><span class="o">.</span><span class="n">area</span><span class="p">,</span> <span class="s2">&quot; m²&quot;</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total net leased area of building:&quot;</span><span class="p">,</span> <span class="n">swimmingFacitlity</span><span class="o">.</span><span class="n">net_leased_area</span><span class="p">,</span> <span class="s2">&quot;m²&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total air volume of building:&quot;</span><span class="p">,</span> <span class="n">swimmingFacitlity</span><span class="o">.</span><span class="n">volume</span><span class="p">,</span> <span class="s2">&quot;m³&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span> 
+        
+    <span class="n">prj</span><span class="o">.</span><span class="n">used_library_calc</span> <span class="o">=</span> <span class="s1">&#39;AixLib&#39;</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">number_of_elements_calc</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">weather_file_path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="s2">&quot;data&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;input&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;inputdata&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;weatherdata&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos&quot;</span><span class="p">))</span>
+
+    <span class="c1"># To make sure the parameters are calculated correctly we recommend to</span>
+    <span class="c1"># run calc_all_buildings() function    </span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">calc_all_buildings</span><span class="p">()</span>
+
+
+    <span class="c1"># To export the ready-to-run models simply call Project.export_aixlib().</span>
+    <span class="c1"># You can specify the path, where the model files should be saved.</span>
+    <span class="c1"># None means, that the default path in your home directory</span>
+    <span class="c1"># will be used. </span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exporting building(s)...&quot;</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">prj</span><span class="o">.</span><span class="n">export_aixlib</span><span class="p">(</span>
+        <span class="n">internal_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">path</span><span class="o">=</span><span class="n">filePathOutput</span><span class="p">,</span>
+        <span class="n">use_postprocessing_calc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">path</span></div>
+
+
+
+<div class="viewcode-block" id="readExcelFile">
+<a class="viewcode-back" href="../../../code/teaser.examples.html#teaser.examples.e11_generate_advanced_swimming_pool.readExcelFile">[docs]</a>
+<span class="k">def</span> <span class="nf">readExcelFile</span><span class="p">(</span><span class="n">swimmingFacitlity</span><span class="p">,</span> <span class="n">fileName</span><span class="p">,</span> <span class="n">prj</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads out zone and pool data from an Excel file and overrides the data from the </span>
+<span class="sd">    previously created basic swimming pool.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    swimmingPool : object</span>
+<span class="sd">        Class that stores swimming pool building information.</span>
+<span class="sd">    fileName : String</span>
+<span class="sd">        Name of the Excel file.</span>
+<span class="sd">    prj : Project</span>
+<span class="sd">        Instance of project class</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reading zone data from Excel...&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="n">zoneData</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;Zone Data&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">poolData</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;Pool Data&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">matData</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;Envelope Structures&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+
+
+    <span class="k">for</span> <span class="n">zone</span> <span class="ow">in</span> <span class="n">swimmingFacitlity</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Start overwriting default data with individual data.&#39;</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># Set area of outer walls and windows</span>
+        <span class="k">for</span> <span class="nb">dir</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+            <span class="c1"># outer wall</span>
+            <span class="k">if</span> <span class="n">zoneData</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="nb">dir</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">:</span>
+                <span class="n">zone</span><span class="o">.</span><span class="n">outer_walls</span><span class="p">[</span><span class="nb">dir</span><span class="p">]</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">zoneData</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="nb">dir</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">zone</span><span class="o">.</span><span class="n">outer_walls</span><span class="p">[</span><span class="nb">dir</span><span class="p">]</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mf">0.0001</span>
+            <span class="c1"># windows</span>
+            <span class="k">if</span> <span class="n">zoneData</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="nb">dir</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">:</span>
+                <span class="n">zone</span><span class="o">.</span><span class="n">windows</span><span class="p">[</span><span class="nb">dir</span><span class="p">]</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">zoneData</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="nb">dir</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">zone</span><span class="o">.</span><span class="n">windows</span><span class="p">[</span><span class="nb">dir</span><span class="p">]</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mf">0.0001</span>
+
+
+
+        <span class="c1"># Set area of rooftop</span>
+        <span class="k">if</span> <span class="n">zoneData</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">zone</span><span class="o">.</span><span class="n">rooftops</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">area</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">zoneData</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">rooftops</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">zoneData</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">rooftops</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mf">0.0001</span>
+
+        <span class="c1"># Set area of grounfloor</span>
+        <span class="k">if</span> <span class="n">zoneData</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">ground_floors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">zoneData</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">ground_floors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mf">0.0001</span>
+
+        <span class="c1"># Set area of inner walls</span>
+        <span class="k">if</span> <span class="n">zoneData</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">inner_walls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">zoneData</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">inner_walls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mf">0.0001</span>
+
+        <span class="c1"># Set area of ceilings</span>
+        <span class="k">if</span> <span class="n">zoneData</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">ceilings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">zoneData</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">ceilings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mf">0.0001</span>
+
+        <span class="c1"># Set area of floors</span>
+        <span class="k">if</span> <span class="n">zoneData</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">floors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">zoneData</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">floors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mf">0.0001</span>
+
+        <span class="c1"># Total area of zones</span>
+        <span class="n">zone</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">zoneData</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span>
+
+        <span class="c1"># Total volume of zones</span>
+        <span class="n">zone</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="n">zoneData</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span>
+
+        <span class="c1"># Number of pools</span>
+        <span class="k">if</span> <span class="n">zone</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;swimming_hall&quot;</span><span class="p">:</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">nPools</span> <span class="o">=</span> <span class="n">zoneData</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">pools</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+
+    <span class="c1">#swimmingFacitlity.thermal_zones[0].pools.clear()</span>
+    <span class="c1">#swimmingFacitlity.basic_pools_dict.clear()</span>
+    <span class="n">list_pools</span> <span class="o">=</span> <span class="n">poolData</span><span class="o">.</span><span class="n">keys</span><span class="p">()[</span><span class="mi">3</span><span class="p">:</span><span class="n">swimmingFacitlity</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">nPools</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span>
+
+    <span class="c1"># dict for swimming pools [name, area, length, width,perimeter]</span>
+    <span class="c1">#basic_pools_dict = {}</span>
+
+    <span class="c1">#for pool in list_pools:</span>
+    <span class="c1">#    print(poolData[pool].values[0])</span>
+    <span class="c1">#    print(pool)</span>
+    <span class="c1">#    basic_pools_dict[pool] = [poolData[pool].values[0],poolData[pool].values[1],poolData[pool].values[2],</span>
+    <span class="c1">#                              poolData[pool].values[3], poolData[pool].values[4]]</span>
+
+    <span class="c1">#print(basic_pools_dict)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">list_pools</span><span class="p">)</span>
+    <span class="c1"># Generate and calculate swimming pools:</span>
+    <span class="k">for</span> <span class="n">zone</span> <span class="ow">in</span> <span class="n">swimmingFacitlity</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">zone</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;Swimming_hall_1&quot;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">list_pools</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="n">pool</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">i</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">pool_type</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">perimeter</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">depth</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">area_pool_floor_exterior</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">area_pool_floor_inner</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">area_pool_wall_exterior</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">area_pool_wall_inner</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">temperature</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">num_filter_rinses</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">filter_type</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;filter combination&quot;</span><span class="p">,</span><span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">14</span><span class="p">])</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">filter_combination</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">water_type</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">use_heat_recovery</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">eta_heat_recovery</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">dp_heat_exchanger</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">use_water_recycling</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">19</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">x_recycling</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">night_set_back_volume_flow</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">21</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">volume_flow_night</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">22</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">num_visitors</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">23</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">use_pool_cover</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">24</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">use_wave_pool</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">wave_height</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">26</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">wave_width</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">27</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">wave_period</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">28</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">wave_share_period</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">29</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">pool_wall_construction_type</span> <span class="o">=</span> <span class="n">poolData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">calc_pool_parameters</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Pools are sucessfully added&#39;</span><span class="p">)</span>
+
+            <span class="c1"># AHU design according to VDI 2089</span>
+            <span class="n">abs_hum_swimming_hall</span> <span class="o">=</span> <span class="mf">0.0143</span>  <span class="c1"># Absolute humidity within the swimming hall in kg/kg</span>
+            <span class="n">abs_hum_amb</span> <span class="o">=</span> <span class="mf">0.009</span>  <span class="c1"># Average absolute humidity outdoor air in kg/kg</span>
+            <span class="n">m_flow_evap_pools_sum</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Sum of evaporation of all pools (occupied pools) in kg/h</span>
+            <span class="n">m_flow_evap_pools_add_sum</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Zero for basis swimming facility in kg/h</span>
+            <span class="n">m_flow_evap_attr</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Zero for basic/ sport-oriented swimming pool in kg/g</span>
+
+            <span class="k">for</span> <span class="n">pool</span> <span class="ow">in</span> <span class="n">zone</span><span class="o">.</span><span class="n">pools</span><span class="p">:</span>
+                <span class="n">m_flow_evap_pools_sum</span> <span class="o">+=</span> <span class="n">pool</span><span class="o">.</span><span class="n">m_flow_evap_pool_used</span>
+
+            <span class="n">m_flow_evap_max</span> <span class="o">=</span> <span class="n">m_flow_evap_pools_sum</span> <span class="o">+</span> <span class="n">m_flow_evap_pools_add_sum</span> <span class="o">+</span> <span class="n">m_flow_evap_attr</span>  <span class="c1"># Max evaporation in kg/h</span>
+            <span class="n">m_flow_ahu_nominal</span> <span class="o">=</span> <span class="n">m_flow_evap_max</span> <span class="o">/</span> <span class="p">(</span><span class="n">abs_hum_swimming_hall</span> <span class="o">-</span> <span class="n">abs_hum_amb</span><span class="p">)</span>  <span class="c1"># Design air flow in kg/h</span>
+
+            <span class="c1"># AHU design, nominal mass flow in m3/(h*m2)  m2: area of swimming hall</span>
+            <span class="c1"># density: 1.225 kg/m3</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">max_ahu</span> <span class="o">=</span> <span class="n">m_flow_ahu_nominal</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.225</span> <span class="o">*</span> <span class="n">zone</span><span class="o">.</span><span class="n">area</span><span class="p">)</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">min_ahu</span> <span class="o">=</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">max_ahu</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;max_AHU&#39;</span><span class="p">,</span> <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">max_ahu</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;min_AHU&#39;</span><span class="p">,</span> <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">min_ahu</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">ahu</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+    <span class="c1"># Step 5: Read material data</span>
+
+    <span class="n">matDict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;OuterWall&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;thickness&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;material_id&#39;</span><span class="p">:</span> <span class="p">[]},</span>
+               <span class="s1">&#39;InnerWall&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;thickness&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;material_id&#39;</span><span class="p">:</span> <span class="p">[]},</span>
+               <span class="s1">&#39;Rooftop&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;thickness&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;material_id&#39;</span><span class="p">:</span> <span class="p">[]},</span>
+               <span class="s1">&#39;GroundFloor&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;thickness&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;material_id&#39;</span><span class="p">:</span> <span class="p">[]},</span>
+               <span class="s1">&#39;Ceiling&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;thickness&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;material_id&#39;</span><span class="p">:</span> <span class="p">[]},</span>
+               <span class="s1">&#39;Window&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;thickness&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;material_id&#39;</span><span class="p">:</span> <span class="p">[]}}</span>
+
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matData</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">matData</span><span class="p">[</span><span class="s1">&#39;thickness&#39;</span><span class="p">][</span><span class="n">row</span><span class="p">])</span> <span class="o">==</span> <span class="kc">False</span> <span class="ow">and</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">matData</span><span class="p">[</span><span class="s1">&#39;material_id&#39;</span><span class="p">][</span><span class="n">row</span><span class="p">])</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="n">matDict</span><span class="p">[</span><span class="n">matData</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="n">row</span><span class="p">]][</span><span class="s2">&quot;thickness&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matData</span><span class="p">[</span><span class="s1">&#39;thickness&#39;</span><span class="p">][</span><span class="n">row</span><span class="p">]</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span>
+            <span class="n">matDict</span><span class="p">[</span><span class="n">matData</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="n">row</span><span class="p">]][</span><span class="s2">&quot;material_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matData</span><span class="p">[</span><span class="s1">&#39;material_id&#39;</span><span class="p">][</span><span class="n">row</span><span class="p">])</span>
+
+
+    <span class="c1"># Step 6: Set material data</span>
+    <span class="k">for</span> <span class="n">zone</span> <span class="ow">in</span> <span class="n">swimmingFacitlity</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+        <span class="n">overrideMaterialData</span><span class="p">(</span><span class="n">zone</span><span class="p">,</span> <span class="n">matData</span><span class="p">,</span> <span class="n">prj</span><span class="p">)</span></div>
+
+
+                    
+<div class="viewcode-block" id="overrideMaterialData">
+<a class="viewcode-back" href="../../../code/teaser.examples.html#teaser.examples.e11_generate_advanced_swimming_pool.overrideMaterialData">[docs]</a>
+<span class="k">def</span> <span class="nf">overrideMaterialData</span><span class="p">(</span><span class="n">zone</span><span class="p">,</span> <span class="n">matDict</span><span class="p">,</span> <span class="n">prj</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">wall</span> <span class="ow">in</span> <span class="n">zone</span><span class="o">.</span><span class="n">outer_walls</span><span class="p">:</span>
+        <span class="n">wallName</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">wall</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">if</span> <span class="n">wallName</span> <span class="ow">in</span> <span class="n">matDict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>                
+            <span class="n">wall</span><span class="o">.</span><span class="n">layer</span> <span class="o">=</span> <span class="kc">None</span>       
+            <span class="k">for</span> <span class="n">numLayer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">matDict</span><span class="p">[</span><span class="n">wallName</span><span class="p">][</span><span class="s2">&quot;Thickness&quot;</span><span class="p">])):</span>
+                <span class="n">mat_id</span> <span class="o">=</span> <span class="n">matDict</span><span class="p">[</span><span class="n">wallName</span><span class="p">][</span><span class="s2">&quot;Material_Id&quot;</span><span class="p">][</span><span class="n">numLayer</span><span class="p">]</span>
+                <span class="n">thickness</span> <span class="o">=</span> <span class="n">matDict</span><span class="p">[</span><span class="n">wallName</span><span class="p">][</span><span class="s2">&quot;Thickness&quot;</span><span class="p">][</span><span class="n">numLayer</span><span class="p">]</span>
+                <span class="n">layer</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">wall</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">numLayer</span><span class="p">)</span>
+                <span class="n">layer</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="n">thickness</span>
+                <span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+                <span class="n">matInput</span><span class="o">.</span><span class="n">load_material_id</span><span class="p">(</span><span class="n">material</span><span class="p">,</span> <span class="n">mat_id</span><span class="p">,</span> <span class="n">prj</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+                    
+        <span class="k">for</span> <span class="n">wall</span> <span class="ow">in</span> <span class="n">zone</span><span class="o">.</span><span class="n">inner_walls</span><span class="p">:</span>
+            <span class="n">wallName</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">wall</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="k">if</span> <span class="n">wallName</span> <span class="ow">in</span> <span class="n">matDict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>                
+                <span class="n">wall</span><span class="o">.</span><span class="n">layer</span> <span class="o">=</span> <span class="kc">None</span>       
+                <span class="k">for</span> <span class="n">numLayer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">matDict</span><span class="p">[</span><span class="n">wallName</span><span class="p">][</span><span class="s2">&quot;Thickness&quot;</span><span class="p">])):</span>
+                    <span class="n">mat_id</span> <span class="o">=</span> <span class="n">matDict</span><span class="p">[</span><span class="n">wallName</span><span class="p">][</span><span class="s2">&quot;Material_Id&quot;</span><span class="p">][</span><span class="n">numLayer</span><span class="p">]</span>
+                    <span class="n">thickness</span> <span class="o">=</span> <span class="n">matDict</span><span class="p">[</span><span class="n">wallName</span><span class="p">][</span><span class="s2">&quot;Thickness&quot;</span><span class="p">][</span><span class="n">numLayer</span><span class="p">]</span>
+                    <span class="n">layer</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span> <span class="o">=</span> <span class="n">wall</span><span class="p">,</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">numLayer</span><span class="p">)</span>
+                    <span class="n">layer</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="n">thickness</span>
+                    <span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+                    <span class="n">matInput</span><span class="o">.</span><span class="n">load_material_id</span><span class="p">(</span><span class="n">material</span><span class="p">,</span> <span class="n">mat_id</span><span class="p">,</span> <span class="n">prj</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+                    
+        <span class="k">for</span> <span class="n">rooftop</span> <span class="ow">in</span> <span class="n">zone</span><span class="o">.</span><span class="n">rooftops</span><span class="p">:</span>
+            <span class="n">rooftopName</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">rooftop</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="k">if</span> <span class="n">rooftopName</span> <span class="ow">in</span> <span class="n">matDict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>                
+                <span class="n">rooftop</span><span class="o">.</span><span class="n">layer</span> <span class="o">=</span> <span class="kc">None</span>       
+                <span class="k">for</span> <span class="n">numLayer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">matDict</span><span class="p">[</span><span class="n">rooftopName</span><span class="p">][</span><span class="s2">&quot;Thickness&quot;</span><span class="p">])):</span>
+                    <span class="n">mat_id</span> <span class="o">=</span> <span class="n">matDict</span><span class="p">[</span><span class="n">rooftopName</span><span class="p">][</span><span class="s2">&quot;Material_Id&quot;</span><span class="p">][</span><span class="n">numLayer</span><span class="p">]</span>
+                    <span class="n">thickness</span> <span class="o">=</span> <span class="n">matDict</span><span class="p">[</span><span class="n">rooftopName</span><span class="p">][</span><span class="s2">&quot;Thickness&quot;</span><span class="p">][</span><span class="n">numLayer</span><span class="p">]</span>
+                    <span class="n">layer</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span> <span class="o">=</span> <span class="n">rooftop</span><span class="p">,</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">numLayer</span><span class="p">)</span>
+                    <span class="n">layer</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="n">thickness</span>
+                    <span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+                    <span class="n">matInput</span><span class="o">.</span><span class="n">load_material_id</span><span class="p">(</span><span class="n">material</span><span class="p">,</span> <span class="n">mat_id</span><span class="p">,</span> <span class="n">prj</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+                    
+        <span class="k">for</span> <span class="n">floor</span> <span class="ow">in</span> <span class="n">zone</span><span class="o">.</span><span class="n">ground_floors</span><span class="p">:</span>
+            <span class="n">floorName</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">floor</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="k">if</span> <span class="n">floorName</span> <span class="ow">in</span> <span class="n">matDict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>                
+                <span class="n">floor</span><span class="o">.</span><span class="n">layer</span> <span class="o">=</span> <span class="kc">None</span>       
+                <span class="k">for</span> <span class="n">numLayer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">matDict</span><span class="p">[</span><span class="n">floorName</span><span class="p">][</span><span class="s2">&quot;Thickness&quot;</span><span class="p">])):</span>
+                    <span class="n">mat_id</span> <span class="o">=</span> <span class="n">matDict</span><span class="p">[</span><span class="n">floorName</span><span class="p">][</span><span class="s2">&quot;Material_Id&quot;</span><span class="p">][</span><span class="n">numLayer</span><span class="p">]</span>
+                    <span class="n">thickness</span> <span class="o">=</span> <span class="n">matDict</span><span class="p">[</span><span class="n">floorName</span><span class="p">][</span><span class="s2">&quot;Thickness&quot;</span><span class="p">][</span><span class="n">numLayer</span><span class="p">]</span>
+                    <span class="n">layer</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span> <span class="o">=</span> <span class="n">floor</span><span class="p">,</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">numLayer</span><span class="p">)</span>
+                    <span class="n">layer</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="n">thickness</span>
+                    <span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+                    <span class="n">matInput</span><span class="o">.</span><span class="n">load_material_id</span><span class="p">(</span><span class="n">material</span><span class="p">,</span> <span class="n">mat_id</span><span class="p">,</span> <span class="n">prj</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+                    
+        <span class="k">for</span> <span class="n">floor</span> <span class="ow">in</span> <span class="n">zone</span><span class="o">.</span><span class="n">floors</span><span class="p">:</span>
+            <span class="n">floorName</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">floor</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="k">if</span> <span class="n">floorName</span> <span class="ow">in</span> <span class="n">matDict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>                
+                <span class="n">floor</span><span class="o">.</span><span class="n">layer</span> <span class="o">=</span> <span class="kc">None</span>       
+                <span class="k">for</span> <span class="n">numLayer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">matDict</span><span class="p">[</span><span class="n">floorName</span><span class="p">][</span><span class="s2">&quot;Thickness&quot;</span><span class="p">])):</span>
+                    <span class="n">mat_id</span> <span class="o">=</span> <span class="n">matDict</span><span class="p">[</span><span class="n">floorName</span><span class="p">][</span><span class="s2">&quot;Material_Id&quot;</span><span class="p">][</span><span class="n">numLayer</span><span class="p">]</span>
+                    <span class="n">thickness</span> <span class="o">=</span> <span class="n">matDict</span><span class="p">[</span><span class="n">floorName</span><span class="p">][</span><span class="s2">&quot;Thickness&quot;</span><span class="p">][</span><span class="n">numLayer</span><span class="p">]</span>
+                    <span class="n">layer</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span> <span class="o">=</span> <span class="n">floor</span><span class="p">,</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">numLayer</span><span class="p">)</span>
+                    <span class="n">layer</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="n">thickness</span>
+                    <span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+                    <span class="n">matInput</span><span class="o">.</span><span class="n">load_material_id</span><span class="p">(</span><span class="n">material</span><span class="p">,</span> <span class="n">mat_id</span><span class="p">,</span> <span class="n">prj</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+                    
+        <span class="k">for</span> <span class="n">ceiling</span> <span class="ow">in</span> <span class="n">zone</span><span class="o">.</span><span class="n">ceilings</span><span class="p">:</span>
+            <span class="n">ceilingName</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">ceiling</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="k">if</span> <span class="n">ceilingName</span> <span class="ow">in</span> <span class="n">matDict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>                
+                <span class="n">ceiling</span><span class="o">.</span><span class="n">layer</span> <span class="o">=</span> <span class="kc">None</span>       
+                <span class="k">for</span> <span class="n">numLayer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">matDict</span><span class="p">[</span><span class="n">ceilingName</span><span class="p">][</span><span class="s2">&quot;Thickness&quot;</span><span class="p">])):</span>
+                    <span class="n">mat_id</span> <span class="o">=</span> <span class="n">matDict</span><span class="p">[</span><span class="n">ceilingName</span><span class="p">][</span><span class="s2">&quot;Material_Id&quot;</span><span class="p">][</span><span class="n">numLayer</span><span class="p">]</span>
+                    <span class="n">thickness</span> <span class="o">=</span> <span class="n">matDict</span><span class="p">[</span><span class="n">ceilingName</span><span class="p">][</span><span class="s2">&quot;Thickness&quot;</span><span class="p">][</span><span class="n">numLayer</span><span class="p">]</span>
+                    <span class="n">layer</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span> <span class="o">=</span> <span class="n">ceiling</span><span class="p">,</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">numLayer</span><span class="p">)</span>
+                    <span class="n">layer</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="n">thickness</span>
+                    <span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+                    <span class="n">matInput</span><span class="o">.</span><span class="n">load_material_id</span><span class="p">(</span><span class="n">material</span><span class="p">,</span> <span class="n">mat_id</span><span class="p">,</span> <span class="n">prj</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+                    
+        <span class="k">for</span> <span class="n">window</span> <span class="ow">in</span> <span class="n">zone</span><span class="o">.</span><span class="n">windows</span><span class="p">:</span>
+            <span class="n">windowName</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">window</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="k">if</span> <span class="n">windowName</span> <span class="ow">in</span> <span class="n">matDict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>                
+                <span class="n">window</span><span class="o">.</span><span class="n">layer</span> <span class="o">=</span> <span class="kc">None</span>       
+                <span class="k">for</span> <span class="n">numLayer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">matDict</span><span class="p">[</span><span class="n">windowName</span><span class="p">][</span><span class="s2">&quot;Thickness&quot;</span><span class="p">])):</span>
+                    <span class="n">mat_id</span> <span class="o">=</span> <span class="n">matDict</span><span class="p">[</span><span class="n">windowName</span><span class="p">][</span><span class="s2">&quot;Material_Id&quot;</span><span class="p">][</span><span class="n">numLayer</span><span class="p">]</span>
+                    <span class="n">thickness</span> <span class="o">=</span> <span class="n">matDict</span><span class="p">[</span><span class="n">windowName</span><span class="p">][</span><span class="s2">&quot;Thickness&quot;</span><span class="p">][</span><span class="n">numLayer</span><span class="p">]</span>
+                    <span class="n">layer</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span> <span class="o">=</span> <span class="n">window</span><span class="p">,</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">numLayer</span><span class="p">)</span>
+                    <span class="n">layer</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="n">thickness</span>
+                    <span class="n">material</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+                    <span class="n">matInput</span><span class="o">.</span><span class="n">load_material_id</span><span class="p">(</span><span class="n">material</span><span class="p">,</span> <span class="n">mat_id</span><span class="p">,</span> <span class="n">prj</span><span class="o">.</span><span class="n">data</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="addBuildingZones">
+<a class="viewcode-back" href="../../../code/teaser.examples.html#teaser.examples.e11_generate_advanced_swimming_pool.addBuildingZones">[docs]</a>
+<span class="k">def</span> <span class="nf">addBuildingZones</span><span class="p">(</span><span class="n">swimmingPool</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">zoneName</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">swimmingPool</span><span class="o">.</span><span class="n">zone_area_factors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">zoneName</span> <span class="o">==</span> <span class="s2">&quot;Sauna_area&quot;</span> <span class="ow">or</span> <span class="n">zoneName</span> <span class="o">==</span> <span class="s2">&quot;Fitness&quot;</span><span class="p">:</span>
+            <span class="n">zone</span> <span class="o">=</span> <span class="n">ThermalZone</span><span class="p">(</span><span class="n">swimmingPool</span><span class="p">)</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
+            <span class="n">zone</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">zoneName</span>
+            <span class="n">use_cond</span> <span class="o">=</span> <span class="n">UseCond</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
+            <span class="n">use_cond</span><span class="o">.</span><span class="n">load_use_conditions</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">data_class</span><span class="o">=</span><span class="n">swimmingPool</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span> <span class="o">=</span> <span class="n">use_cond</span>
+            
+            <span class="k">if</span> <span class="n">zoneName</span> <span class="o">==</span> <span class="s2">&quot;Sauna_area&quot;</span><span class="p">:</span>
+                <span class="n">swimmingPool</span><span class="o">.</span><span class="n">poolsInDict</span><span class="p">[</span>
+                <span class="n">swimmingPool</span><span class="o">.</span><span class="n">zoneDesignation</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]][</span><span class="s2">&quot;Temperature&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">297.15</span>
+            <span class="k">elif</span> <span class="n">zoneName</span> <span class="o">==</span> <span class="s2">&quot;Fitness&quot;</span><span class="p">:</span>
+                <span class="n">swimmingPool</span><span class="o">.</span><span class="n">poolsInDict</span><span class="p">[</span>
+                <span class="n">swimmingPool</span><span class="o">.</span><span class="n">zoneDesignation</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]][</span><span class="s2">&quot;Temperature&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">294.15</span>
+                
+            <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">_heating_profile</span> <span class="o">=</span> <span class="p">[</span><span class="n">swimmingPool</span><span class="o">.</span><span class="n">poolsInDict</span><span class="p">[</span>
+                <span class="n">swimmingPool</span><span class="o">.</span><span class="n">zoneDesignation</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]][</span><span class="s2">&quot;Temperature&quot;</span><span class="p">]]</span> <span class="o">*</span><span class="mi">25</span> 
+            
+            <span class="k">if</span> <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">_cooling_profile</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> \
+                <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">_heating_profile</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">_cooling_profile</span> <span class="o">=</span> \
+                    <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">_heating_profile</span>
+            
+            <span class="n">zone</span><span class="o">.</span><span class="n">t_inside</span> <span class="o">=</span> <span class="n">swimmingPool</span><span class="o">.</span><span class="n">poolsInDict</span><span class="p">[</span>
+                <span class="n">swimmingPool</span><span class="o">.</span><span class="n">zoneDesignation</span><span class="p">[</span><span class="n">zone</span><span class="o">.</span><span class="n">name</span><span class="p">]][</span><span class="s2">&quot;Temperature&quot;</span><span class="p">]</span>
+            
+            <span class="c1"># OUTER WALLS #</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">swimmingPool</span><span class="o">.</span><span class="n">outer_wall_names</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="c1">#Creates an outer wall for each zone and assigns building elements  </span>
+                <span class="n">outer_wall</span> <span class="o">=</span> <span class="n">OuterWall</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
+                <span class="n">outer_wall</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+                <span class="n">outer_wall</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
+                    <span class="n">year</span><span class="o">=</span><span class="n">swimmingPool</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">construction</span><span class="o">=</span><span class="n">swimmingPool</span><span class="o">.</span><span class="n">construction_type</span><span class="p">,</span>
+                    <span class="n">data_class</span><span class="o">=</span><span class="n">swimmingPool</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>               
+                <span class="n">outer_wall</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">outer_wall</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                
+            <span class="c1"># WINDOWS #        </span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">swimmingPool</span><span class="o">.</span><span class="n">window_names</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>                        
+                <span class="n">window</span> <span class="o">=</span> <span class="n">Window</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
+                <span class="n">window</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+                <span class="n">window</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
+                    <span class="n">swimmingPool</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="s2">&quot;Kunststofffenster, &quot;</span> <span class="s2">&quot;Isolierverglasung&quot;</span><span class="p">,</span>
+                    <span class="n">data_class</span><span class="o">=</span><span class="n">swimmingPool</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>                
+                <span class="n">window</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">window</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>     
+                    
+            <span class="c1"># ROOFTOPS #</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">swimmingPool</span><span class="o">.</span><span class="n">roof_names</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">roof</span> <span class="o">=</span> <span class="n">Rooftop</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
+                <span class="n">roof</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+                <span class="n">roof</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
+                    <span class="n">year</span><span class="o">=</span><span class="n">swimmingPool</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">construction</span><span class="o">=</span><span class="n">swimmingPool</span><span class="o">.</span><span class="n">construction_type</span><span class="p">,</span>
+                    <span class="n">data_class</span><span class="o">=</span><span class="n">swimmingPool</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+                <span class="n">roof</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">roof</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            
+            <span class="c1"># GROUNDFLOORS #</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">swimmingPool</span><span class="o">.</span><span class="n">ground_floor_names</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> 
+                <span class="n">ground_floor</span> <span class="o">=</span> <span class="n">GroundFloor</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
+                <span class="n">ground_floor</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+                <span class="n">ground_floor</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
+                    <span class="n">year</span><span class="o">=</span><span class="n">swimmingPool</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">construction</span><span class="o">=</span><span class="n">swimmingPool</span><span class="o">.</span><span class="n">construction_type</span><span class="p">,</span>
+                    <span class="n">data_class</span><span class="o">=</span><span class="n">swimmingPool</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+                <span class="n">ground_floor</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">ground_floor</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                    
+            <span class="c1"># INNER WALLS #</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">swimmingPool</span><span class="o">.</span><span class="n">inner_wall_names</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>    
+                <span class="n">inner_wall</span> <span class="o">=</span> <span class="n">InnerWall</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
+                <span class="n">inner_wall</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+                <span class="n">inner_wall</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
+                    <span class="n">year</span><span class="o">=</span><span class="n">swimmingPool</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">construction</span><span class="o">=</span><span class="n">swimmingPool</span><span class="o">.</span><span class="n">construction_type</span><span class="p">,</span>
+                    <span class="n">data_class</span><span class="o">=</span><span class="n">swimmingPool</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+                <span class="n">inner_wall</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">inner_wall</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>   
+    
+            <span class="k">if</span> <span class="n">swimmingPool</span><span class="o">.</span><span class="n">number_of_floors</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="c1"># CEILINGS #</span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">swimmingPool</span><span class="o">.</span><span class="n">ceiling_names</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> 
+                    <span class="n">ceiling</span> <span class="o">=</span> <span class="n">Ceiling</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
+                    <span class="n">ceiling</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+                    <span class="n">ceiling</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
+                        <span class="n">year</span><span class="o">=</span><span class="n">swimmingPool</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+                        <span class="n">construction</span><span class="o">=</span><span class="n">swimmingPool</span><span class="o">.</span><span class="n">construction_type</span><span class="p">,</span>
+                        <span class="n">data_class</span><span class="o">=</span><span class="n">swimmingPool</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+                    <span class="n">ceiling</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">ceiling</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> 
+            
+                <span class="c1"># FLOORS #   </span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">swimmingPool</span><span class="o">.</span><span class="n">floor_names</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">floor</span> <span class="o">=</span> <span class="n">Floor</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
+                    <span class="n">floor</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+                    <span class="n">floor</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
+                        <span class="n">year</span><span class="o">=</span><span class="n">swimmingPool</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+                        <span class="n">construction</span><span class="o">=</span><span class="n">swimmingPool</span><span class="o">.</span><span class="n">construction_type</span><span class="p">,</span>
+                        <span class="n">data_class</span><span class="o">=</span><span class="n">swimmingPool</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+                    <span class="n">floor</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">floor</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> </div>
+
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">prj</span> <span class="o">=</span> <span class="n">generate_advanced_swimmingPool</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SwimmingPool(s) exported successfully. That&#39;s it! :)&quot;</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
