@@ -177,7 +177,7 @@ run prj.calc_all_buildings() function which is here already done in the set_loca
 <p>Export all buildings to BESMod and include them in predefined example systems.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">prj</span><span class="o">.</span><span class="n">export_besmod</span><span class="p">(</span>
     <span class="n">THydSup_nominal</span><span class="o">=</span><span class="n">THydSup_nominal</span><span class="p">,</span>
-    <span class="n">path</span><span class="o">=</span><span class="n">save_dir_path</span><span class="p">,</span>
+    <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">examples</span><span class="o">=</span><span class="n">examples</span>
 <span class="p">)</span>
 </pre></div>
@@ -214,7 +214,7 @@ THydSupOld_design values, which are used for radiator sizing but not for control
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">prj</span><span class="o">.</span><span class="n">export_besmod</span><span class="p">(</span>
     <span class="n">THydSup_nominal</span><span class="o">=</span><span class="n">THydSup_nominal</span><span class="p">,</span>
     <span class="n">QBuiOld_flow_design</span><span class="o">=</span><span class="n">QBuiOld_flow_design</span><span class="p">,</span>
-    <span class="n">path</span><span class="o">=</span><span class="n">save_dir_path</span><span class="p">,</span>
+    <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">examples</span><span class="o">=</span><span class="n">examples</span>
 <span class="p">)</span>
 </pre></div>
@@ -225,52 +225,40 @@ THydSupOld_design values, which are used for radiator sizing but not for control
 <p>Additionally, we have the flexibility to define custom templates for including buildings in specific setups.
 For instance, a custom template is defined here to include the building in the
 ModelicaConferencePaper example from BESMod, which features an integrated battery system.</p>
-<p>Custom template
-&lt; %namespace file = “/modelica_language/” import=”get<a href="#id1"><span class="problematic" id="id2">*</span></a>list” / &gt;
+<p>Custom template</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt; %namespace file = &quot;/modelica_language/&quot; import=&quot;get_list&quot; / &gt;
 within ${bldg.parent.name}.${bldg.name};
-model ModelicaConferencePaper${bldg.name}</p>
-<blockquote>
-<div><blockquote>
-<div><dl>
-<dt>extends BESMod.Examples.ModelicaConferencePaper.PartialModelicaConferenceUseCase(</dt><dd><p>redeclare ${bldg.name} building,
-redeclare BESMod.Systems.UserProfiles.TEASERProfiles
-userProfiles(fileNameIntGains=Modelica.Utilities.Files.loadResource(</p>
-<blockquote>
-<div><dl class="simple">
-<dt>“modelica://${bldg.parent.name}/${bldg.name}/InternalGains*${bldg.name}.txt”),</dt><dd><dl class="simple">
-<dt>setBakTSetZone(amplitude=${get_list(setBakTSetZone_amplitude)},</dt><dd><p>width =${get_list(setBakTSetZone_width)},
-startTime =${get_list(setBakTSetZone_startTime)})),</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</div></blockquote>
-</dd>
-<dt>systemParameters(nZones=${len(bldg.thermal_zones)},</dt><dd><p>QBui_flow_nominal = building.QRec_flow_nominal,
-TOda_nominal =${TOda_nominal},
-TSetZone_nominal =${get_list(TSetZone_nominal)},
-THydSup_nominal =${THydSup_nominal},
-QBuiOld_flow_design =${QBuiOld_flow_design},
-THydSupOld_design =${THydSupOld_design},
-filNamWea = Modelica.Utilities.Files.loadResource(</p>
-<blockquote>
-<div><p>“modelica://${bldg.parent.name}/Resources/${bldg.parent.weather_file_name}”)));</p>
-</div></blockquote>
-</dd>
-</dl>
-</div></blockquote>
-<p>extends Modelica.Icons.Example;</p>
-</div></blockquote>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">annotation</span><span class="p">(</span><span class="n">experiment</span><span class="p">(</span><span class="n">StopTime</span><span class="o">=</span><span class="mi">172800</span><span class="p">,</span>
-                      <span class="n">Interval</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
-                      <span class="n">Tolerance</span><span class="o">=</span><span class="mf">1e-06</span><span class="p">),</span>
-           <span class="n">__Dymola_Commands</span><span class="p">(</span><span class="n">file</span><span class="o">=</span>
-                             <span class="s2">&quot;Resources/Scripts/Dymola/$</span><span class="si">{bldg.name}</span><span class="s2">/ModelicaConferencePaper$</span><span class="si">{bldg.name}</span><span class="s2">.mos&quot;</span>
-                             <span class="s2">&quot;Simulate and plot&quot;</span><span class="p">));</span>
+model ModelicaConferencePaper${bldg.name}
+    extends BESMod.Examples.ModelicaConferencePaper.PartialModelicaConferenceUseCase(
+      redeclare ${bldg.name} building,
+      redeclare BESMod.Systems.UserProfiles.TEASERProfiles
+      userProfiles(fileNameIntGains=Modelica.Utilities.Files.loadResource(
+              &quot;modelica://${bldg.parent.name}/${bldg.name}/InternalGains_${bldg.name}.txt&quot;),
+               setBakTSetZone(amplitude=${get_list(setBakTSetZone_amplitude)},
+                              width =${get_list(setBakTSetZone_width)},
+                              startTime =${get_list(setBakTSetZone_startTime)})),
+    systemParameters(nZones=${len(bldg.thermal_zones)},
+                     QBui_flow_nominal = building.QRec_flow_nominal,
+                     TOda_nominal =${TOda_nominal},
+                     TSetZone_nominal =${get_list(TSetZone_nominal)},
+                     THydSup_nominal =${THydSup_nominal},
+                     QBuiOld_flow_design =${QBuiOld_flow_design},
+                     THydSupOld_design =${THydSupOld_design},
+                     filNamWea = Modelica.Utilities.Files.loadResource(
+                          &quot;modelica://${bldg.parent.name}/Resources/${bldg.parent.weather_file_name}&quot;)));
+
+   extends Modelica.Icons.Example;
+
+    annotation(experiment(StopTime=172800,
+                          Interval=600,
+                          Tolerance=1e-06),
+               __Dymola_Commands(file=
+                                 &quot;Resources/Scripts/Dymola/${bldg.name}/ModelicaConferencePaper${bldg.name}.mos&quot;
+                                 &quot;Simulate and plot&quot;));
+end
+ModelicaConferencePaper${bldg.name};
 </pre></div>
 </div>
-<p>end
-ModelicaConferencePaper${bldg.name};</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ArchetypeExample_custom&quot;</span>
 
 <span class="n">custom_template_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
@@ -289,7 +277,7 @@ and define custom scripts for your tailored examples.</p>
 
 <span class="n">path</span> <span class="o">=</span> <span class="n">prj</span><span class="o">.</span><span class="n">export_besmod</span><span class="p">(</span>
     <span class="n">THydSup_nominal</span><span class="o">=</span><span class="n">THydSup_nominal</span><span class="p">,</span>
-    <span class="n">path</span><span class="o">=</span><span class="n">save_dir_path</span><span class="p">,</span>
+    <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">examples</span><span class="o">=</span><span class="n">examples</span><span class="p">,</span>
     <span class="n">custom_examples</span><span class="o">=</span><span class="n">custom_example_template</span><span class="p">,</span>
     <span class="n">custom_script</span><span class="o">=</span><span class="n">custom_script</span>
