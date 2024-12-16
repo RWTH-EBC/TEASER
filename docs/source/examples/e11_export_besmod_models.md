@@ -119,7 +119,7 @@ Export all buildings to BESMod and include them in predefined example systems.
 ```python
 path = prj.export_besmod(
     THydSup_nominal=THydSup_nominal,
-    path=save_dir_path,
+    path=None,
     examples=examples
 )
 ```
@@ -160,7 +160,7 @@ THydSupOld_design values, which are used for radiator sizing but not for control
 path = prj.export_besmod(
     THydSup_nominal=THydSup_nominal,
     QBuiOld_flow_design=QBuiOld_flow_design,
-    path=save_dir_path,
+    path=None,
     examples=examples
 )
 ```
@@ -171,6 +171,7 @@ For instance, a custom template is defined here to include the building in the
 ModelicaConferencePaper example from BESMod, which features an integrated battery system.
 
 Custom template
+```
 < %namespace file = "/modelica_language/" import="get_list" / >
 within ${bldg.parent.name}.${bldg.name};
 model ModelicaConferencePaper${bldg.name}
@@ -202,6 +203,7 @@ model ModelicaConferencePaper${bldg.name}
                                  "Simulate and plot"));
 end
 ModelicaConferencePaper${bldg.name};
+```
 
 ```python
 prj.name = "ArchetypeExample_custom"
@@ -224,7 +226,7 @@ custom_script = {"HeatPumpMonoenergetic": os.path.join(custom_template_path, "cu
 
 path = prj.export_besmod(
     THydSup_nominal=THydSup_nominal,
-    path=save_dir_path,
+    path=None,
     examples=examples,
     custom_examples=custom_example_template,
     custom_script=custom_script
