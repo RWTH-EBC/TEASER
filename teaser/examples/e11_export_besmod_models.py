@@ -15,7 +15,7 @@ import teaser.logic.utilities as utilities
 import os
 
 
-def example_export_besmod(save_dir_path=None):
+def example_export_besmod():
     """This function demonstrates the export to Modelica library BESMod using
     the API function of TEASER"""
 
@@ -99,7 +99,7 @@ def example_export_besmod(save_dir_path=None):
     # Export all buildings to BESMod and include them in predefined example systems.
     path = prj.export_besmod(
         THydSup_nominal=THydSup_nominal,
-        path=save_dir_path,
+        path=None,
         examples=examples
     )
 
@@ -132,7 +132,7 @@ def example_export_besmod(save_dir_path=None):
     path = prj.export_besmod(
         THydSup_nominal=THydSup_nominal,
         QBuiOld_flow_design=QBuiOld_flow_design,
-        path=save_dir_path,
+        path=None,
         examples=examples
     )
 
@@ -142,6 +142,7 @@ def example_export_besmod(save_dir_path=None):
     # ModelicaConferencePaper example from BESMod, which features an integrated battery system.
 
     # Custom template
+    # ```
     # < %namespace file = "/modelica_language/" import="get_list" / >
     # within ${bldg.parent.name}.${bldg.name};
     # model ModelicaConferencePaper${bldg.name}
@@ -173,6 +174,7 @@ def example_export_besmod(save_dir_path=None):
     #                                  "Simulate and plot"));
     # end
     # ModelicaConferencePaper${bldg.name};
+    # ```
 
     prj.name = "ArchetypeExample_custom"
 
@@ -192,7 +194,7 @@ def example_export_besmod(save_dir_path=None):
 
     path = prj.export_besmod(
         THydSup_nominal=THydSup_nominal,
-        path=save_dir_path,
+        path=None,
         examples=examples,
         custom_examples=custom_example_template,
         custom_script=custom_script
@@ -202,6 +204,6 @@ def example_export_besmod(save_dir_path=None):
 
 
 if __name__ == '__main__':
-    example_export_besmod(save_dir_path=None)
+    example_export_besmod()
 
     print("Example 11: That's it! :)")
