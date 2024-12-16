@@ -69,7 +69,7 @@ class AixLib(object):
         self.use_set_back = True
         self.use_set_point_temperature_profile_heating = False
         self.use_set_back_cool = False
-
+        self.file_opening_hours = "OpeningHours_" + self.parent.name + ".txt"
 
     def calc_auxiliary_attr(self):
         """Call function to calculate all auxiliary attributes for AixLib."""
