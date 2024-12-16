@@ -95,7 +95,7 @@
 
 <div class="viewcode-block" id="example_export_besmod">
 <a class="viewcode-back" href="../../../code/teaser.examples.html#teaser.examples.e11_export_besmod_models.example_export_besmod">[docs]</a>
-<span class="k">def</span> <span class="nf">example_export_besmod</span><span class="p">(</span><span class="n">save_dir_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">example_export_besmod</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function demonstrates the export to Modelica library BESMod using</span>
 <span class="sd">    the API function of TEASER&quot;&quot;&quot;</span>
 
@@ -179,7 +179,7 @@
     <span class="c1"># Export all buildings to BESMod and include them in predefined example systems.</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">prj</span><span class="o">.</span><span class="n">export_besmod</span><span class="p">(</span>
         <span class="n">THydSup_nominal</span><span class="o">=</span><span class="n">THydSup_nominal</span><span class="p">,</span>
-        <span class="n">path</span><span class="o">=</span><span class="n">save_dir_path</span><span class="p">,</span>
+        <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">examples</span><span class="o">=</span><span class="n">examples</span>
     <span class="p">)</span>
 
@@ -212,7 +212,7 @@
     <span class="n">path</span> <span class="o">=</span> <span class="n">prj</span><span class="o">.</span><span class="n">export_besmod</span><span class="p">(</span>
         <span class="n">THydSup_nominal</span><span class="o">=</span><span class="n">THydSup_nominal</span><span class="p">,</span>
         <span class="n">QBuiOld_flow_design</span><span class="o">=</span><span class="n">QBuiOld_flow_design</span><span class="p">,</span>
-        <span class="n">path</span><span class="o">=</span><span class="n">save_dir_path</span><span class="p">,</span>
+        <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">examples</span><span class="o">=</span><span class="n">examples</span>
     <span class="p">)</span>
 
@@ -222,6 +222,7 @@
     <span class="c1"># ModelicaConferencePaper example from BESMod, which features an integrated battery system.</span>
 
     <span class="c1"># Custom template</span>
+    <span class="c1"># ```</span>
     <span class="c1"># &lt; %namespace file = &quot;/modelica_language/&quot; import=&quot;get_list&quot; / &gt;</span>
     <span class="c1"># within ${bldg.parent.name}.${bldg.name};</span>
     <span class="c1"># model ModelicaConferencePaper${bldg.name}</span>
@@ -253,6 +254,7 @@
     <span class="c1">#                                  &quot;Simulate and plot&quot;));</span>
     <span class="c1"># end</span>
     <span class="c1"># ModelicaConferencePaper${bldg.name};</span>
+    <span class="c1"># ```</span>
 
     <span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ArchetypeExample_custom&quot;</span>
 
@@ -272,7 +274,7 @@
 
     <span class="n">path</span> <span class="o">=</span> <span class="n">prj</span><span class="o">.</span><span class="n">export_besmod</span><span class="p">(</span>
         <span class="n">THydSup_nominal</span><span class="o">=</span><span class="n">THydSup_nominal</span><span class="p">,</span>
-        <span class="n">path</span><span class="o">=</span><span class="n">save_dir_path</span><span class="p">,</span>
+        <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">examples</span><span class="o">=</span><span class="n">examples</span><span class="p">,</span>
         <span class="n">custom_examples</span><span class="o">=</span><span class="n">custom_example_template</span><span class="p">,</span>
         <span class="n">custom_script</span><span class="o">=</span><span class="n">custom_script</span>
@@ -283,7 +285,7 @@
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">example_export_besmod</span><span class="p">(</span><span class="n">save_dir_path</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">example_export_besmod</span><span class="p">()</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 11: That&#39;s it! :)&quot;</span><span class="p">)</span>
 </pre></div>
