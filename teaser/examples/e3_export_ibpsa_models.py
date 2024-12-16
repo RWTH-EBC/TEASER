@@ -5,7 +5,7 @@
 # IBPSA focuses on free floating temperature without an ideal heater.
 # In contrast, AixLib focuses on ideal heat demand calculation, and
 # BESMod on the coupling to state-of-the-art energy systems.
-# These models simulate in Dymola, OpenModelica and JModelica.
+# These models should simulate in Dymola, OpenModelica and JModelica.
 # You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks)
 
 import teaser.examples.e1_generate_archetype as e1
