@@ -1,5 +1,4 @@
 # # Example 3: Export Modelica models for IBPSA library using TEASER API
-
 # This module contains an example how to export buildings from a TEASER
 # project to ready-to-run simulation models for Modelica library IBPSA.
 # IBPSA focuses on free floating temperature without an ideal heater.

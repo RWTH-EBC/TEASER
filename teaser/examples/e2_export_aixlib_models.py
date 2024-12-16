@@ -1,5 +1,4 @@
 # # Example 2: Export Modelica models for AixLib library using TEASER API
-
 # This module contains an example how to export buildings from a TEASER
 # project to ready-to-run simulation models for Modelica library AixLib.
 # AixLib focuses on ideal hat demand calculation. In contrast,
