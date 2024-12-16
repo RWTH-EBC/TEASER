@@ -205,3 +205,29 @@ class Test_useconditions(object):
                 == profile_cooling_before[4] + use_cond.cooling_set_back
         )
         assert (isinstance(schedules, pd.DataFrame))
+
+
+    def test_lighting_power(self):
+        lighting_power_test = 3
+
+        prj.set_default()
+        helptest.building_test2(prj)
+        use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
+        use_cond.load_use_conditions("Living", data_class=prj.data)
+
+        use_cond.use_maintained_illuminance = True
+        assert(use_cond.lighting_power == use_cond.maintained_illuminance / use_cond.lighting_efficiency_lumen)
+
+        use_cond.lighting_power = lighting_power_test
+        assert(use_cond.lighting_power == lighting_power_test)
+
+        use_cond.use_maintained_illuminance = False
+        assert(use_cond.lighting_power == use_cond.fixed_lighting_power)
+
+        use_cond.lighting_power = lighting_power_test
+        assert(use_cond.lighting_power == lighting_power_test)
+
+
+
+
+

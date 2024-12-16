@@ -43,6 +43,10 @@ def building_test2(prj):
     tz.use_conditions.persons = 3
     tz.use_conditions.machines = 3
     tz.use_conditions.lighting_power = 3
+    tz.use_conditions.use_maintained_illuminance = False
+    tz.use_conditions.fixed_lighting_power = 11.1
+    tz.use_conditions.maintained_illuminance = 500.0,
+    tz.use_conditions.lighting_efficiency_lumen = 150,
     tz.use_conditions.ratio_conv_rad_machines = 0.5
     tz.use_conditions.machines_profile = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
                                           0.2, 0.4, 0.6, 0.8, 0.8, 0.4, 0.6,

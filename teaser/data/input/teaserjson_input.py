@@ -106,31 +106,30 @@ def load_teaser_json(path, project):
         bldg.window_area = bldg_in["window_area"]
 
         try:
+            ahu_in = bldg_in["central_ahu"]
             bldg.central_ahu = BuildingAHU(parent=bldg)
-            bldg.central_ahu.heating = bldg_in["central_ahu"]["heating"]
-            bldg.central_ahu.cooling = bldg_in["central_ahu"]["cooling"]
-            bldg.central_ahu.dehumidification = bldg_in["central_ahu"][
-                "dehumidification"
-            ]
-            bldg.central_ahu.humidification = bldg_in["central_ahu"]["humidification"]
-            bldg.central_ahu.heat_recovery = bldg_in["central_ahu"]["heat_recovery"]
-            bldg.central_ahu.by_pass_dehumidification = bldg_in["central_ahu"][
+            bldg.central_ahu.heating = ahu_in["heating"]
+            bldg.central_ahu.cooling = ahu_in["cooling"]
+            bldg.central_ahu.dehumidification = ahu_in["dehumidification"]
+            bldg.central_ahu.humidification = ahu_in["humidification"]
+            bldg.central_ahu.heat_recovery = ahu_in["heat_recovery"]
+            bldg.central_ahu.by_pass_dehumidification = ahu_in[
                 "by_pass_dehumidification"
             ]
-            bldg.central_ahu.efficiency_recovery = bldg_in["central_ahu"][
+            bldg.central_ahu.efficiency_recovery = ahu_in[
                 "efficiency_recovery"
             ]
-            bldg.central_ahu.efficiency_recovery_false = bldg_in["central_ahu"][
+            bldg.central_ahu.efficiency_recovery_false = ahu_in[
                 "efficiency_recovery_false"
             ]
-            bldg.central_ahu.min_relative_humidity_profile = bldg_in["central_ahu"][
+            bldg.central_ahu.min_relative_humidity_profile = ahu_in[
                 "min_relative_humidity_profile"
             ]
-            bldg.central_ahu.max_relative_humidity_profile = bldg_in["central_ahu"][
+            bldg.central_ahu.max_relative_humidity_profile = ahu_in[
                 "max_relative_humidity_profile"
             ]
-            bldg.central_ahu.v_flow_profile = bldg_in["central_ahu"]["v_flow_profile"]
-            bldg.central_ahu.temperature_profile = bldg_in["central_ahu"][
+            bldg.central_ahu.v_flow_profile = ahu_in["v_flow_profile"]
+            bldg.central_ahu.temperature_profile = ahu_in[
                 "temperature_profile"
             ]
         except KeyError:
@@ -176,10 +175,22 @@ def load_teaser_json(path, project):
                 "ratio_conv_rad_machines"
             ]
             tz.use_conditions.lighting_power = zone_in["use_conditions"][
-                "lighting_power"
+                "fixed_lighting_power"
+            ]
+            tz.use_conditions.fixed_lighting_power = zone_in["use_conditions"][
+                "fixed_lighting_power"
+            ]
+            tz.use_conditions.use_maintained_illuminance = zone_in["use_conditions"][
+                "use_maintained_illuminance"
             ]
             tz.use_conditions.ratio_conv_rad_lighting = zone_in["use_conditions"][
                 "ratio_conv_rad_lighting"
+            ]
+            tz.use_conditions.maintained_illuminance = zone_in["use_conditions"][
+                "maintained_illuminance"
+            ]
+            tz.use_conditions.lighting_efficiency_lumen = zone_in["use_conditions"][
+                "lighting_efficiency_lumen"
             ]
             tz.use_conditions.use_constant_infiltration = zone_in["use_conditions"][
                 "use_constant_infiltration"

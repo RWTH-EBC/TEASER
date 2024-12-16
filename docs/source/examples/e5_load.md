@@ -2,7 +2,7 @@
 # Example 5: Load information
 This module contains an example how to import TEASER projects from
 `*.teaserjson` and pickle in order to reuse data.
-You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/master?labpath=docs%2Fjupyter_notebooks)
+You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks)
 
 ```python
 import teaser.logic.utilities as utilities
