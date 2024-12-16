@@ -136,7 +136,9 @@ class UseConditions(object):
         :cite:`DiLaura.2011`.
         AixLib: Used in Zone record for internal gains, lighting
     maintained_illuminance : float [Lx]
-        maintained illuminance value for lighting. This value is taken from SIA 2024
+        maintained illuminance value for lighting.
+        This value is partially taken from SIA 2024 (2015-10) and partially
+        from DIN V EN 18599-10 (2018-09).
     lighting_efficiency_lumen: float [lm/W_el]
         lighting efficiency in lm/W_el, in german: Lichtausbeute
     lighting_profil : [float]
