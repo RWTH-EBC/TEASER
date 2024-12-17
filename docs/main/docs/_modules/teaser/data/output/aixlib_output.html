@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.data.output.aixlib_output &mdash; TEASER 1.0.1 documentation</title>
+  <title>teaser.data.output.aixlib_output &mdash; TEASER 1.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
@@ -13,7 +13,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=292eb321"></script>
+      <script src="../../../../_static/documentation_options.js?v=fc837d61"></script>
       <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
@@ -84,6 +84,7 @@
 <span class="kn">from</span> <span class="nn">mako.template</span> <span class="kn">import</span> <span class="n">Template</span>
 <span class="kn">from</span> <span class="nn">mako.lookup</span> <span class="kn">import</span> <span class="n">TemplateLookup</span>
 <span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utilities</span>
+<span class="kn">import</span> <span class="nn">teaser.data.output.modelica_output</span> <span class="k">as</span> <span class="nn">modelica_output</span>
 
 
 <div class="viewcode-block" id="export_multizone">
@@ -179,20 +180,22 @@
             <span class="s2">&quot;data/output/modelicatemplate/modelica_test_script&quot;</span><span class="p">),</span>
         <span class="n">lookup</span><span class="o">=</span><span class="n">lookup</span><span class="p">)</span>
 
+    <span class="n">dir_resources</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;Resources&quot;</span><span class="p">))</span>
+    <span class="n">dir_scripts</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_resources</span><span class="p">,</span> <span class="s2">&quot;Scripts&quot;</span><span class="p">))</span>
+    <span class="n">dir_dymola</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_scripts</span><span class="p">,</span> <span class="s2">&quot;Dymola&quot;</span><span class="p">))</span>
+
     <span class="n">uses</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s1">&#39;Modelica(version=&quot;&#39;</span> <span class="o">+</span> <span class="n">prj</span><span class="o">.</span><span class="n">modelica_info</span><span class="o">.</span><span class="n">version</span> <span class="o">+</span> <span class="s1">&#39;&quot;)&#39;</span><span class="p">,</span>
         <span class="s1">&#39;AixLib(version=&quot;&#39;</span> <span class="o">+</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">library_attr</span><span class="o">.</span><span class="n">version</span> <span class="o">+</span> <span class="s1">&#39;&quot;)&#39;</span><span class="p">]</span>
-    <span class="n">_help_package</span><span class="p">(</span>
+    <span class="n">modelica_output</span><span class="o">.</span><span class="n">create_package</span><span class="p">(</span>
         <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
         <span class="n">name</span><span class="o">=</span><span class="n">prj</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-        <span class="n">uses</span><span class="o">=</span><span class="n">uses</span><span class="p">,</span>
-        <span class="n">within</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">_help_package_order</span><span class="p">(</span>
+        <span class="n">uses</span><span class="o">=</span><span class="n">uses</span><span class="p">)</span>
+    <span class="n">modelica_output</span><span class="o">.</span><span class="n">create_package_order</span><span class="p">(</span>
         <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
         <span class="n">package_list</span><span class="o">=</span><span class="n">buildings</span><span class="p">,</span>
-        <span class="n">addition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">extra</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">_copy_weather_data</span><span class="p">(</span><span class="n">prj</span><span class="o">.</span><span class="n">weather_file_path</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="n">modelica_output</span><span class="o">.</span><span class="n">copy_weather_data</span><span class="p">(</span><span class="n">prj</span><span class="o">.</span><span class="n">weather_file_path</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">buildings</span><span class="p">):</span>
 
@@ -214,12 +217,11 @@
         <span class="n">bldg</span><span class="o">.</span><span class="n">library_attr</span><span class="o">.</span><span class="n">modelica_gains_boundary</span><span class="p">(</span>
             <span class="n">path</span><span class="o">=</span><span class="n">bldg_path</span><span class="p">)</span>
 
-        <span class="n">_help_package</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">bldg_path</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">within</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="n">_help_package_order</span><span class="p">(</span>
+        <span class="n">modelica_output</span><span class="o">.</span><span class="n">create_package</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">bldg_path</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">within</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">modelica_output</span><span class="o">.</span><span class="n">create_package_order</span><span class="p">(</span>
             <span class="n">path</span><span class="o">=</span><span class="n">bldg_path</span><span class="p">,</span>
             <span class="n">package_list</span><span class="o">=</span><span class="p">[</span><span class="n">bldg</span><span class="p">],</span>
-            <span class="n">addition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">extra</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_DataBase&quot;</span><span class="p">)</span>
+            <span class="n">extra</span><span class="o">=</span><span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_DataBase&quot;</span><span class="p">])</span>
 
         <span class="k">if</span> <span class="n">bldg</span><span class="o">.</span><span class="n">building_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">bldg</span><span class="o">.</span><span class="n">building_id</span> <span class="o">=</span> <span class="n">i</span>
@@ -244,15 +246,6 @@
 
             <span class="n">out_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-        <span class="n">dir_resources</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;Resources&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dir_resources</span><span class="p">):</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">dir_resources</span><span class="p">)</span>
-        <span class="n">dir_scripts</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_resources</span><span class="p">,</span> <span class="s2">&quot;Scripts&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dir_scripts</span><span class="p">):</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">dir_scripts</span><span class="p">)</span>
-        <span class="n">dir_dymola</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_scripts</span><span class="p">,</span> <span class="s2">&quot;Dymola&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dir_dymola</span><span class="p">):</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">dir_dymola</span><span class="p">)</span>
         <span class="n">_help_test_script</span><span class="p">(</span><span class="n">bldg</span><span class="p">,</span> <span class="n">dir_dymola</span><span class="p">,</span> <span class="n">test_script_template</span><span class="p">)</span>
 
         <span class="n">zone_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bldg_path</span><span class="p">,</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_DataBase&quot;</span><span class="p">)</span>
@@ -273,11 +266,11 @@
 
                 <span class="n">out_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-        <span class="n">_help_package</span><span class="p">(</span>
+        <span class="n">modelica_output</span><span class="o">.</span><span class="n">create_package</span><span class="p">(</span>
             <span class="n">path</span><span class="o">=</span><span class="n">zone_path</span><span class="p">,</span>
             <span class="n">name</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_DataBase&#39;</span><span class="p">,</span>
             <span class="n">within</span><span class="o">=</span><span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="n">_help_package_order</span><span class="p">(</span>
+        <span class="n">modelica_output</span><span class="o">.</span><span class="n">create_package_order</span><span class="p">(</span>
             <span class="n">path</span><span class="o">=</span><span class="n">zone_path</span><span class="p">,</span>
             <span class="n">package_list</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">,</span>
             <span class="n">addition</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span><span class="p">,</span>
@@ -353,80 +346,6 @@
             <span class="n">names_variables</span><span class="o">=</span><span class="n">names_variables</span><span class="p">,</span>
         <span class="p">))</span>
         <span class="n">out_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-
-<span class="k">def</span> <span class="nf">_help_package</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">uses</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">within</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;creates a package.mo file</span>
-
-<span class="sd">    private function, do not call</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-
-<span class="sd">    path : string</span>
-<span class="sd">        path of where the package.mo should be placed</span>
-<span class="sd">    name : string</span>
-<span class="sd">        name of the Modelica package</span>
-<span class="sd">    within : string</span>
-<span class="sd">        path of Modelica package containing this package</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">package_template</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
-        <span class="s2">&quot;data/output/modelicatemplate/package&quot;</span><span class="p">))</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-            <span class="n">path</span><span class="p">,</span> <span class="s2">&quot;package.mo&quot;</span><span class="p">)),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out_file</span><span class="p">:</span>
-
-        <span class="n">out_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">package_template</span><span class="o">.</span><span class="n">render_unicode</span><span class="p">(</span>
-            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
-            <span class="n">within</span><span class="o">=</span><span class="n">within</span><span class="p">,</span>
-            <span class="n">uses</span><span class="o">=</span><span class="n">uses</span><span class="p">))</span>
-        <span class="n">out_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-
-<span class="k">def</span> <span class="nf">_help_package_order</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">package_list</span><span class="p">,</span> <span class="n">addition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;creates a package.order file</span>
-
-<span class="sd">    private function, do not call</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-
-<span class="sd">    path : string</span>
-<span class="sd">        path of where the package.order should be placed</span>
-<span class="sd">    package_list : [string]</span>
-<span class="sd">        name of all models or packages contained in the package</span>
-<span class="sd">    addition : string</span>
-<span class="sd">        if there should be a suffix in front of package_list.string it can</span>
-<span class="sd">        be specified</span>
-<span class="sd">    extra : string</span>
-<span class="sd">        an extra package or model not contained in package_list can be</span>
-<span class="sd">        specified</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">order_template</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
-        <span class="s2">&quot;data/output/modelicatemplate/package_order&quot;</span><span class="p">))</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
-            <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="s2">&quot;package&quot;</span> <span class="o">+</span> <span class="s2">&quot;.order&quot;</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out_file</span><span class="p">:</span>
-
-        <span class="n">out_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">order_template</span><span class="o">.</span><span class="n">render_unicode</span>
-                       <span class="p">(</span><span class="nb">list</span><span class="o">=</span><span class="n">package_list</span><span class="p">,</span> <span class="n">addition</span><span class="o">=</span><span class="n">addition</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="n">extra</span><span class="p">))</span>
-        <span class="n">out_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-
-<span class="k">def</span> <span class="nf">_copy_weather_data</span><span class="p">(</span><span class="n">source_path</span><span class="p">,</span> <span class="n">destination_path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Copies the imported .mos weather file to the results folder.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    source_path : str</span>
-<span class="sd">        path of local weather file</span>
-<span class="sd">    destination_path : str</span>
-<span class="sd">        path of where the weather file should be placed</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">shutil</span><span class="o">.</span><span class="n">copy2</span><span class="p">(</span><span class="n">source_path</span><span class="p">,</span> <span class="n">destination_path</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">_copy_script_unit_tests</span><span class="p">(</span><span class="n">destination_path</span><span class="p">):</span>

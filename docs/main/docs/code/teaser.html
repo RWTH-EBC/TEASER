@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser package &mdash; TEASER 1.0.1 documentation</title>
+  <title>teaser package &mdash; TEASER 1.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
@@ -14,7 +14,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=292eb321"></script>
+      <script src="../_static/documentation_options.js?v=fc837d61"></script>
       <script src="../_static/doctools.js?v=9a2dae69"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -64,6 +64,7 @@
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.add_residential_retrofit_combinations"><code class="docutils literal notranslate"><span class="pre">Project.add_residential_retrofit_combinations()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.calc_all_buildings"><code class="docutils literal notranslate"><span class="pre">Project.calc_all_buildings()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.export_aixlib"><code class="docutils literal notranslate"><span class="pre">Project.export_aixlib()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.export_besmod"><code class="docutils literal notranslate"><span class="pre">Project.export_besmod()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.export_ibpsa"><code class="docutils literal notranslate"><span class="pre">Project.export_ibpsa()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.instantiate_data_class"><code class="docutils literal notranslate"><span class="pre">Project.instantiate_data_class()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.load_project"><code class="docutils literal notranslate"><span class="pre">Project.load_project()</span></code></a></li>
@@ -74,6 +75,7 @@
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.retrofit_all_buildings"><code class="docutils literal notranslate"><span class="pre">Project.retrofit_all_buildings()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.save_project"><code class="docutils literal notranslate"><span class="pre">Project.save_project()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.set_default"><code class="docutils literal notranslate"><span class="pre">Project.set_default()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.set_location_parameters"><code class="docutils literal notranslate"><span class="pre">Project.set_location_parameters()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.used_library_calc"><code class="docutils literal notranslate"><span class="pre">Project.used_library_calc</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.weather_file_path"><code class="docutils literal notranslate"><span class="pre">Project.weather_file_path</span></code></a></li>
 </ul>
@@ -140,9 +142,11 @@
 <li class="toctree-l4"><a class="reference internal" href="teaser.data.output.html#subpackages">Subpackages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="teaser.data.output.html#submodules">Submodules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.aixlib_output">teaser.data.output.aixlib_output module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.besmod_output">teaser.data.output.besmod_output module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.buildingelement_output">teaser.data.output.buildingelement_output module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.ibpsa_output">teaser.data.output.ibpsa_output module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.material_output">teaser.data.output.material_output module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.modelica_output">teaser.data.output.modelica_output module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.runUnitTests">teaser.data.output.runUnitTests module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.teaserjson_output">teaser.data.output.teaserjson_output module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="teaser.data.output.html#module-teaser.data.output.usecond_output">teaser.data.output.usecond_output module</a></li>
@@ -233,6 +237,10 @@
 <li class="toctree-l2"><a class="reference internal" href="teaser.examples.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="teaser.examples.html#module-teaser.examples.e10_adjust_schedules">teaser.examples.e10_adjust_schedules module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="teaser.examples.html#teaser.examples.e10_adjust_schedules.example_adjust_schedules"><code class="docutils literal notranslate"><span class="pre">example_adjust_schedules()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.html#module-teaser.examples.e11_export_besmod_models">teaser.examples.e11_export_besmod_models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.html#teaser.examples.e11_export_besmod_models.example_export_besmod"><code class="docutils literal notranslate"><span class="pre">example_export_besmod()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="teaser.examples.html#module-teaser.examples.e1_generate_archetype">teaser.examples.e1_generate_archetype module</a><ul>
@@ -663,6 +671,53 @@ variable selections are possible. This works only for Dymola. See
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="teaser.project.Project.export_besmod">
+<span class="sig-name descname"><span class="pre">export_besmod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">internal_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">examples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">THydSup_nominal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">QBuiOld_flow_design</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">THydSupOld_design</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_examples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_script</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">report</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/teaser/project.html#Project.export_besmod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.export_besmod" title="Link to this definition"></a></dt>
+<dd><p>Exports buildings for BESMod simulation</p>
+<p>Exports one (if internal_id is not None) or all buildings as
+BESMod.Systems.Demand.Building.TEASERThermalZone models. Additionally,
+BESMod.Examples can be specified and directly exported including the building.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>internal_id</strong><span class="classifier">Optional[float]</span></dt><dd><p>Specifies a specific building to export by its internal ID. If None, all buildings are exported.</p>
+</dd>
+<dt><strong>examples</strong><span class="classifier">Optional[List[str]]</span></dt><dd><p>Names of BESMod examples to export alongside the building models.
+Supported Examples: “TEASERHeatLoadCalculation”, “HeatPumpMonoenergetic”, and “GasBoilerBuildingOnly”.</p>
+</dd>
+<dt><strong>path</strong><span class="classifier">Optional[str]</span></dt><dd><p>Alternative output path for storing the exported files. If None, the default TEASER output path is used.</p>
+</dd>
+<dt><strong>THydSup_nominal</strong><span class="classifier">Optional[Union[float, Dict[str, float]]]</span></dt><dd><p>Nominal supply temperature(s) for the hydraulic system. Required for
+certain examples (e.g., HeatPumpMonoenergetic, GasBoilerBuildingOnly).
+See docstring of teaser.data.output.besmod_output.convert_input() for further information.</p>
+</dd>
+<dt><strong>QBuiOld_flow_design</strong><span class="classifier">Optional[Dict[str, Dict[str, float]]]</span></dt><dd><p>For partially retrofitted systems specify the old nominal heat flow
+of all zones in the Buildings in a nested dictionary with
+the building names and in a level below the zone names as keys.
+By default, only the radiator transfer system is not retrofitted in BESMod.</p>
+</dd>
+<dt><strong>THydSupOld_design</strong><span class="classifier">Optional[Union[float, Dict[str, float]]]</span></dt><dd><p>Design supply temperatures for old, non-retrofitted hydraulic systems.</p>
+</dd>
+<dt><strong>custom_examples: Optional[Dict[str, str]]</strong></dt><dd><p>Specify custom examples with a dictionary containing the example name as the key and
+the path to the corresponding custom mako template as the value.</p>
+</dd>
+<dt><strong>custom_script: Optional[Dict[str, str]]</strong></dt><dd><p>Specify custom .mos scripts for the existing and custom examples with a dictionary
+containing the example name as the key and the path to the corresponding custom mako template as the value.</p>
+</dd>
+<dt><strong>report</strong><span class="classifier">bool</span></dt><dd><p>If True, generates a model report in HTML and CSV format for the exported project. Default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd><p>The path where the exported files are stored.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="teaser.project.Project.export_ibpsa">
 <span class="sig-name descname"><span class="pre">export_ibpsa</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">library</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'AixLib'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.export_ibpsa"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.export_ibpsa" title="Link to this definition"></a></dt>
 <dd><p>Exports values to a record file for Modelica simulation</p>
@@ -809,6 +864,34 @@ can be specified</p>
 <dt><strong>load_data</strong><span class="classifier">boolean, None-type</span></dt><dd><p>boolean if data bindings for type elements and use conditions
 should be loaded (default = False), in addition it could be a None-
 type to use the already used data bindings</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.project.Project.set_location_parameters">
+<span class="sig-name descname"><span class="pre">set_location_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t_outside</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">262.65</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_ground</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">286.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weather_file_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_all_buildings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.set_location_parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.set_location_parameters" title="Link to this definition"></a></dt>
+<dd><p>Set location specific parameters</p>
+<p>Temperatures are used for static heat load calculation
+and as parameters in the exports.
+Default location is Mannheim.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>t_outside: float [K]</strong></dt><dd><p>Normative outdoor temperature for static heat load calculation.
+The input of t_inside is ALWAYS in Kelvin</p>
+</dd>
+<dt><strong>t_ground: float [K]</strong></dt><dd><p>Temperature directly at the outer side of ground floors for static
+heat load calculation.
+The input of t_ground is ALWAYS in Kelvin</p>
+</dd>
+<dt><strong>weather_file_path</strong><span class="classifier">str</span></dt><dd><p>Absolute path to weather file used for Modelica simulation. Default
+weather file can be find in inputdata/weatherdata.</p>
+</dd>
+<dt><strong>calc_all_buildings: boolean</strong></dt><dd><p>If True, calculates all buildings new. Default is True.
+Important for new calculation of static heat load.</p>
 </dd>
 </dl>
 </dd>

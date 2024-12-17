@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.examples.e2_export_aixlib_models &mdash; TEASER 1.0.1 documentation</title>
+  <title>teaser.examples.e2_export_aixlib_models &mdash; TEASER 1.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=292eb321"></script>
+      <script src="../../../_static/documentation_options.js?v=fc837d61"></script>
       <script src="../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -77,10 +77,12 @@
              
   <h1>Source code for teaser.examples.e2_export_aixlib_models</h1><div class="highlight"><pre>
 <span></span><span class="c1"># # Example 2: Export Modelica models for AixLib library using TEASER API</span>
-
 <span class="c1"># This module contains an example how to export buildings from a TEASER</span>
-<span class="c1"># project to ready-to-run simulation models for Modelica library AixLib. These</span>
-<span class="c1"># models will only simulate using Dymola, the reason for this are state</span>
+<span class="c1"># project to ready-to-run simulation models for Modelica library AixLib.</span>
+<span class="c1"># AixLib focuses on ideal hat demand calculation. In contrast,</span>
+<span class="c1"># IBPSA focuses on the free floating temperature and has no ideal heater,</span>
+<span class="c1"># and BESMod on the coupling to state-of-the-art energy systems.</span>
+<span class="c1"># These models will only simulate using Dymola, the reason for this are state</span>
 <span class="c1"># machines that are used in one AixLib specific AHU model.</span>
 <span class="c1"># You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks)</span>
 

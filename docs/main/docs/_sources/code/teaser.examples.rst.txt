@@ -25,6 +25,14 @@ teaser.examples.e10\_adjust\_schedules module
    :undoc-members:
    :show-inheritance:
 
+teaser.examples.e11\_export\_besmod\_models module
+--------------------------------------------------
+
+.. automodule:: teaser.examples.e11_export_besmod_models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 teaser.examples.e1\_generate\_archetype module
 ----------------------------------------------
 
