@@ -93,6 +93,10 @@ class Building(object):
         that direction as value.
     bldg_height : float [m]
         Total building height.
+    area_rt : float [m2]
+        Total roof area of all thermal zones.
+    area_gf : float [m2]
+        Total ground floor area of all thermal zones.
     volume : float [m3]
         Total volume of all thermal zones.
     sum_heat_load : float [W]
@@ -161,6 +165,8 @@ class Building(object):
         self._window_area = {}
 
         self.bldg_height = None
+        self.area_rt = None
+        self.area_gf = None
         self.volume = 0
         self.sum_heat_load = 0
         self.sum_cooling_load = 0
@@ -374,6 +380,8 @@ class Building(object):
         self._merge_windows_calc = merge_windows
         self._used_library_calc = used_library
 
+        self.area_rt = 0
+        self.area_gf = 0
         for zone in self.thermal_zones:
             zone.calc_zone_parameters(
                 number_of_elements=number_of_elements,
@@ -381,6 +389,8 @@ class Building(object):
                 t_bt=5,
             )
             self.sum_heat_load += zone.model_attr.heat_load
+            self.area_rt += sum(rf.area for rf in zone.rooftops)
+            self.area_gf += sum(gf.area for gf in zone.ground_floors)
 
         if self.used_library_calc == self.library_attr.__class__.__name__:
             if self.used_library_calc == "AixLib":

@@ -1173,7 +1173,7 @@ class Test_teaser(object):
         )
 
         assert round(prj.buildings[-1].volume, 1) == 490.0
-        assert round(prj.buildings[-1].sum_heat_load, 4) == 5023.0256
+        assert round(prj.buildings[-1].sum_heat_load, 4) == 6659.6256
 
     # methods in therm_zone
 
@@ -1191,7 +1191,7 @@ class Test_teaser(object):
         """test of heating_load"""
         prj.set_default()
         helptest.building_test2(prj)
-        prj.buildings[-1].thermal_zones[-1].use_conditions.infiltration_rate = 0.5
+        prj.buildings[-1].thermal_zones[-1].use_conditions.base_infiltration = 0.5
         prj.buildings[-1].thermal_zones[-1].calc_zone_parameters(
             number_of_elements=2, merge_windows=True
         )
@@ -2405,7 +2405,6 @@ class Test_teaser(object):
         tz.name = "LivingRoom"
         tz.area = 140.0
         tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
-        tz.infiltration_rate = 0.5
 
         from teaser.logic.buildingobjects.useconditions import UseConditions
 
@@ -2498,7 +2497,6 @@ class Test_teaser(object):
         tz.name = "LivingRoom"
         tz.area = 140.0
         tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
-        tz.infiltration_rate = 0.5
 
         from teaser.logic.buildingobjects.useconditions import UseConditions
 
@@ -2619,7 +2617,6 @@ class Test_teaser(object):
         tz.name = "LivingRoom"
         tz.area = 140.0
         tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
-        tz.infiltration_rate = 0.5
 
         from teaser.logic.buildingobjects.useconditions import UseConditions
 
@@ -2755,7 +2752,6 @@ class Test_teaser(object):
         tz.name = "LivingRoom"
         tz.area = 140.0
         tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
-        tz.infiltration_rate = 0.5
 
         from teaser.logic.buildingobjects.useconditions import UseConditions
 
@@ -2893,7 +2889,6 @@ class Test_teaser(object):
         tz.name = "LivingRoom"
         tz.area = 140.0
         tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
-        tz.infiltration_rate = 0.5
 
         from teaser.logic.buildingobjects.useconditions import UseConditions
 

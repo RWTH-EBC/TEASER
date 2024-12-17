@@ -67,3 +67,9 @@ class Test_examples(object):
         from teaser.examples import e8_change_boundary_conditions as e8
 
         prj = e8.example_change_boundary_conditions()
+
+    def test_e11_example_export_besmod(self):
+        """Tests the executability of example 11"""
+        from teaser.examples import e11_export_besmod_models as e11
+
+        prj = e11.example_export_besmod()

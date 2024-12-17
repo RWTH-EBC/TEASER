@@ -89,7 +89,6 @@ class ThermalZone(object):
         self.name = None
         self._area = None
         self._volume = None
-        self._infiltration_rate = 0.4
         self._outer_walls = []
         self._doors = []
         self._rooftops = []
@@ -644,18 +643,6 @@ class ThermalZone(object):
                 self._volume = value
         else:
             self._volume = value
-
-    @property
-    def infiltration_rate(self):
-        warnings.warn(
-            "Deprecated for ThermalZone, moved to UseConditions",
-            DeprecationWarning)
-
-    @infiltration_rate.setter
-    def infiltration_rate(self, value):
-        warnings.warn(
-            "Deprecated for ThermalZone, moved to UseConditions",
-            DeprecationWarning)
 
     @property
     def t_inside(self):

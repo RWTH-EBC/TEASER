@@ -1,0 +1,4 @@
+simulateModel("${project.name}.${bldg.name}.HeatPumpMonoenergetic${bldg.name}", stopTime=172800, method="dassl", tolerance=1e-06, resultFile="HeatPumpMonoenergetic${bldg.name}");
+createPlot(id=2, position={75, 70, 1210, 240}, y={"electrical.distribution.OutputDistr.PEleGen.value","electrical.distribution.OutputDistr.PEleLoa.value"}, grid=true, subPlot=1, colors={{28,108,200},{238,46,47}});
+createPlot(id=2, position={75, 70, 1210, 240}, y={"hydraulic.distribution.sigBusDistr.TStoDHWTopMea","hydraulic.distribution.sigBusDistr.TStoBufTopMea","hydraulic.generation.sigBusGen.TGenOutMea"}, grid=true, subPlot=2, colors={{28,108,200},{238,46,47},{0,140,72}});
+createPlot(id=2, position={75, 70, 1210, 240}, y={"ventilation.generation.TSup.T","ventilation.generation.weaBus.TDryBul","building.buiMeaBus.TZoneMea[1]"}, grid=true, subPlot=3, colors={{28,108,200},{238,46,47},{0,140,72}});
