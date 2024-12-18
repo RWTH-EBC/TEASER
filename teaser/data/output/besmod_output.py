@@ -1,6 +1,7 @@
 """This module contains function for BESMod model generation"""
 
 import os
+import warnings
 from typing import Optional, Union, List, Dict
 from mako.template import Template
 from mako.lookup import TemplateLookup
@@ -103,6 +104,12 @@ def export_besmod(
             "Examples 'HeatPumpMonoenergetic' and 'GasBoilerBuildingOnly' "
             "require the `THydSup_nominal` parameter."
         )
+    elif THydSup_nominal is None:
+        THydSup_nominal = 328.15
+        if custom_examples:
+            warnings.warn("If you set THydSup_nominal in your custom examples template, "
+                          "please provide it in the export. "
+                          "Otherwise, the default value of 328.15 K will be used.")
 
     t_hyd_sup_nominal_bldg = convert_input(THydSup_nominal, buildings)
     t_hyd_sup_old_design_bldg = (

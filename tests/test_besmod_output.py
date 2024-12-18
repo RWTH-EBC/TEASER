@@ -48,6 +48,8 @@ class Test_besmod_output(unittest.TestCase):
         with self.assertRaises(ValueError):
             prj.export_besmod(examples=examples)
 
+        prj.export_besmod(examples=["TEASERHeatLoadCalculation"])
+
         prj.export_besmod(examples=examples,
                           THydSup_nominal=55 + 273.15)
 
@@ -110,6 +112,7 @@ class Test_besmod_output(unittest.TestCase):
                           THydSupOld_design=t_hyd_sup_nominal_old,
                           custom_examples=custom_example_template,
                           custom_script=custom_script)
+        prj.export_besmod(custom_examples=custom_example_template)
 
     def test_convert_heating_profile(self):
         """Test the conversion of heating profiles for BESMod"""
