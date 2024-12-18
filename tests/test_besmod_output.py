@@ -48,6 +48,8 @@ class Test_besmod_output(unittest.TestCase):
         with self.assertRaises(ValueError):
             prj.export_besmod(examples=examples)
 
+        prj.export_besmod(examples=["TEASERHeatLoadCalculation"])
+
         prj.export_besmod(examples=examples,
                           THydSup_nominal=55 + 273.15)
 
