@@ -79,6 +79,7 @@
 <span></span><span class="sd">&quot;&quot;&quot;This module contains function for BESMod model generation&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
 <span class="kn">from</span> <span class="nn">mako.template</span> <span class="kn">import</span> <span class="n">Template</span>
 <span class="kn">from</span> <span class="nn">mako.lookup</span> <span class="kn">import</span> <span class="n">TemplateLookup</span>
@@ -183,6 +184,12 @@
             <span class="s2">&quot;Examples &#39;HeatPumpMonoenergetic&#39; and &#39;GasBoilerBuildingOnly&#39; &quot;</span>
             <span class="s2">&quot;require the `THydSup_nominal` parameter.&quot;</span>
         <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">THydSup_nominal</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">THydSup_nominal</span> <span class="o">=</span> <span class="mf">328.15</span>
+        <span class="k">if</span> <span class="n">custom_examples</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;If you set THydSup_nominal in your custom examples template, &quot;</span>
+                          <span class="s2">&quot;please provide it in the export. &quot;</span>
+                          <span class="s2">&quot;Otherwise, the default value of 328.15 K will be used.&quot;</span><span class="p">)</span>
 
     <span class="n">t_hyd_sup_nominal_bldg</span> <span class="o">=</span> <span class="n">convert_input</span><span class="p">(</span><span class="n">THydSup_nominal</span><span class="p">,</span> <span class="n">buildings</span><span class="p">)</span>
     <span class="n">t_hyd_sup_old_design_bldg</span> <span class="o">=</span> <span class="p">(</span>
