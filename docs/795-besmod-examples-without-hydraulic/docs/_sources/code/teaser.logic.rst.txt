@@ -1,0 +1,36 @@
+teaser.logic package
+====================
+
+.. automodule:: teaser.logic
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   teaser.logic.archetypebuildings
+   teaser.logic.buildingobjects
+   teaser.logic.simulation
+
+Submodules
+----------
+
+teaser.logic.retrofit module
+----------------------------
+
+.. automodule:: teaser.logic.retrofit
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.logic.utilities module
+-----------------------------
+
+.. automodule:: teaser.logic.utilities
+   :members:
+   :undoc-members:
+   :show-inheritance:
