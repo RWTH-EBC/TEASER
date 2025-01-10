@@ -9,8 +9,6 @@ from teaser.project import Project
 class TestTEASERJson(object):
     """Unit Tests for TEASER"""
 
-    # global prj
-
     def test_save_teaser_json_tabula_de(self):
         """Tests the save function of a teaser residential project"""
         prj = Project(False)
