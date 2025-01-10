@@ -1,0 +1,66 @@
+teaser.examples.verification package
+====================================
+
+.. automodule:: teaser.examples.verification
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+teaser.examples.verification.verification\_ASHRAE\_140\_600 module
+------------------------------------------------------------------
+
+.. automodule:: teaser.examples.verification.verification_ASHRAE_140_600
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.examples.verification.verification\_ASHRAE\_140\_620 module
+------------------------------------------------------------------
+
+.. automodule:: teaser.examples.verification.verification_ASHRAE_140_620
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.examples.verification.verification\_ASHRAE\_140\_900 module
+------------------------------------------------------------------
+
+.. automodule:: teaser.examples.verification.verification_ASHRAE_140_900
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.examples.verification.verification\_ASHRAE\_140\_920 module
+------------------------------------------------------------------
+
+.. automodule:: teaser.examples.verification.verification_ASHRAE_140_920
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.examples.verification.verification\_VDI\_6007\_room1 module
+------------------------------------------------------------------
+
+.. automodule:: teaser.examples.verification.verification_VDI_6007_room1
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.examples.verification.verification\_VDI\_6007\_room3 module
+------------------------------------------------------------------
+
+.. automodule:: teaser.examples.verification.verification_VDI_6007_room3
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.examples.verification.verification\_VDI\_6007\_room8 module
+------------------------------------------------------------------
+
+.. automodule:: teaser.examples.verification.verification_VDI_6007_room8
+   :members:
+   :undoc-members:
+   :show-inheritance:

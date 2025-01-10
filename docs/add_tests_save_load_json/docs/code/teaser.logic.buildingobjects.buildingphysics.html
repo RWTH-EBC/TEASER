@@ -1,0 +1,1903 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser.logic.buildingobjects.buildingphysics package &mdash; TEASER 1.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=fc837d61"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="teaser.logic.buildingobjects.buildingsystems package" href="teaser.logic.buildingobjects.buildingsystems.html" />
+    <link rel="prev" title="teaser.logic.buildingobjects package" href="teaser.logic.buildingobjects.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            TEASER
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">teaser</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="teaser.html">teaser package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="teaser.html#teaser">teaser</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="teaser.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="teaser.data.html">teaser.data package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.examples.html">teaser.examples package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="teaser.logic.html">teaser.logic package</a><ul class="current">
+<li class="toctree-l5 current"><a class="reference internal" href="teaser.logic.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l6"><a class="reference internal" href="teaser.logic.archetypebuildings.html">teaser.logic.archetypebuildings package</a></li>
+<li class="toctree-l6 current"><a class="reference internal" href="teaser.logic.buildingobjects.html">teaser.logic.buildingobjects package</a><ul class="current">
+<li class="toctree-l7 current"><a class="reference internal" href="teaser.logic.buildingobjects.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l8 current"><a class="current reference internal" href="#">teaser.logic.buildingobjects.buildingphysics package</a><ul>
+<li class="toctree-l9"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l9"><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.buildingelement">teaser.logic.buildingobjects.buildingphysics.buildingelement module</a><ul>
+<li class="toctree-l10"><a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement"><code class="docutils literal notranslate"><span class="pre">BuildingElement</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l9"><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.ceiling">teaser.logic.buildingobjects.buildingphysics.ceiling module</a><ul>
+<li class="toctree-l10"><a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.ceiling.Ceiling"><code class="docutils literal notranslate"><span class="pre">Ceiling</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l9"><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.door">teaser.logic.buildingobjects.buildingphysics.door module</a><ul>
+<li class="toctree-l10"><a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.door.Door"><code class="docutils literal notranslate"><span class="pre">Door</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l9"><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.floor">teaser.logic.buildingobjects.buildingphysics.floor module</a><ul>
+<li class="toctree-l10"><a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.floor.Floor"><code class="docutils literal notranslate"><span class="pre">Floor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l9"><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.groundfloor">teaser.logic.buildingobjects.buildingphysics.groundfloor module</a><ul>
+<li class="toctree-l10"><a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.groundfloor.GroundFloor"><code class="docutils literal notranslate"><span class="pre">GroundFloor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l9"><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.innerwall">teaser.logic.buildingobjects.buildingphysics.innerwall module</a><ul>
+<li class="toctree-l10"><a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall"><code class="docutils literal notranslate"><span class="pre">InnerWall</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l9"><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.layer">teaser.logic.buildingobjects.buildingphysics.layer module</a><ul>
+<li class="toctree-l10"><a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.layer.Layer"><code class="docutils literal notranslate"><span class="pre">Layer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l9"><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.material">teaser.logic.buildingobjects.buildingphysics.material module</a><ul>
+<li class="toctree-l10"><a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.material.Material"><code class="docutils literal notranslate"><span class="pre">Material</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l9"><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.outerwall">teaser.logic.buildingobjects.buildingphysics.outerwall module</a><ul>
+<li class="toctree-l10"><a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall"><code class="docutils literal notranslate"><span class="pre">OuterWall</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l9"><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.rooftop">teaser.logic.buildingobjects.buildingphysics.rooftop module</a><ul>
+<li class="toctree-l10"><a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.rooftop.Rooftop"><code class="docutils literal notranslate"><span class="pre">Rooftop</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l9"><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.wall">teaser.logic.buildingobjects.buildingphysics.wall module</a><ul>
+<li class="toctree-l10"><a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall"><code class="docutils literal notranslate"><span class="pre">Wall</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l9"><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.window">teaser.logic.buildingobjects.buildingphysics.window module</a><ul>
+<li class="toctree-l10"><a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.window.Window"><code class="docutils literal notranslate"><span class="pre">Window</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="teaser.logic.buildingobjects.buildingsystems.html">teaser.logic.buildingobjects.buildingsystems package</a></li>
+<li class="toctree-l8"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html">teaser.logic.buildingobjects.calculation package</a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="teaser.logic.buildingobjects.html#submodules">Submodules</a></li>
+<li class="toctree-l7"><a class="reference internal" href="teaser.logic.buildingobjects.html#module-teaser.logic.buildingobjects.building">teaser.logic.buildingobjects.building module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="teaser.logic.buildingobjects.html#module-teaser.logic.buildingobjects.thermalzone">teaser.logic.buildingobjects.thermalzone module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="teaser.logic.buildingobjects.html#module-teaser.logic.buildingobjects.useconditions">teaser.logic.buildingobjects.useconditions module</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="teaser.logic.simulation.html">teaser.logic.simulation package</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="teaser.logic.html#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="teaser.logic.html#module-teaser.logic.retrofit">teaser.logic.retrofit module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="teaser.logic.html#module-teaser.logic.utilities">teaser.logic.utilities module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.html#module-teaser.project">teaser.project module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">teaser</a></li>
+          <li class="breadcrumb-item"><a href="teaser.html">teaser package</a></li>
+          <li class="breadcrumb-item"><a href="teaser.logic.html">teaser.logic package</a></li>
+          <li class="breadcrumb-item"><a href="teaser.logic.buildingobjects.html">teaser.logic.buildingobjects package</a></li>
+      <li class="breadcrumb-item active">teaser.logic.buildingobjects.buildingphysics package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/code/teaser.logic.buildingobjects.buildingphysics.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-teaser.logic.buildingobjects.buildingphysics">
+<span id="teaser-logic-buildingobjects-buildingphysics-package"></span><h1>teaser.logic.buildingobjects.buildingphysics package<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-teaser.logic.buildingobjects.buildingphysics.buildingelement">
+<span id="teaser-logic-buildingobjects-buildingphysics-buildingelement-module"></span><h2>teaser.logic.buildingobjects.buildingphysics.buildingelement module<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.buildingelement" title="Link to this heading"></a></h2>
+<p>This module contains the Base class for all building elements.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingphysics.buildingelement.</span></span><span class="sig-name descname"><span class="pre">BuildingElement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/buildingelement.html#BuildingElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Building element class.</p>
+<p>This is the base class for all building elements. Building elements are
+all physical elements that may serve as boundaries for a thermal zone or
+building.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
+Allows for better control of hierarchical structures.
+Default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
+</dd>
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+distinction between different constructions types in the same
+building age period.</p>
+</dd>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of last retrofit</p>
+</dd>
+<dt><strong>year_of_construction</strong><span class="classifier">int</span></dt><dd><p>Year of first construction</p>
+</dd>
+<dt><strong>building_age_group</strong><span class="classifier">list</span></dt><dd><p>Determines the building age period that this building
+element belongs to [begin, end], e.g. [1984, 1994]</p>
+</dd>
+<dt><strong>area</strong><span class="classifier">float [m2]</span></dt><dd><p>Area of building element</p>
+</dd>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against horizontal</p>
+</dd>
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth direction of building element (0 : north, 90: east, 180: south,
+270: west)</p>
+</dd>
+<dt><strong>inner_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection inner side (facing
+the zone)</p>
+</dd>
+<dt><strong>inner_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation inner side (facing
+the zone)</p>
+</dd>
+<dt><strong>outer_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>outer_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>layer</strong><span class="classifier">list</span></dt><dd><p>List of all layers of a building element (to be filled with Layer
+objects). Use element.layer = None to delete all layers of the building
+element</p>
+</dd>
+<dt><strong>Calculated Attributes</strong></dt><dd></dd>
+<dt><strong>r1</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r2</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r3</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R3 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c2</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1_korr</strong><span class="classifier">float [J/K]</span></dt><dd><p>corrected capacity C1,korr for building elements in the case of
+asymmetrical thermal load given in VDI 6007</p>
+</dd>
+<dt><strong>u_value</strong><span class="classifier">float [W/m2K)</span></dt><dd><p>U-Value of building element</p>
+</dd>
+<dt><strong>ua_value</strong><span class="classifier">float [W/K]</span></dt><dd><p>UA-Value of building element (Area times U-Value)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_comb</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+inner side (facing the zone)</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_comb</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+outer side (facing the ambient or adjacent zone). Currently for all
+InnerWalls and GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>wf_out</strong><span class="classifier">float</span></dt><dd><p>Weightfactor of building element ua_value/ua_value_zone</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.add_layer">
+<span class="sig-name descname"><span class="pre">add_layer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/buildingelement.html#BuildingElement.add_layer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.add_layer" title="Link to this definition"></a></dt>
+<dd><p>Adds a layer at a certain position</p>
+<p>This function adds a Layer instance to the layer list at a given
+position</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>layer</strong><span class="classifier">instance of Layer</span></dt><dd><p>Layer instance of TEASER</p>
+</dd>
+<dt><strong>position</strong><span class="classifier">int</span></dt><dd><p>position in the wall starting from 0 (inner side)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.add_layer_list">
+<span class="sig-name descname"><span class="pre">add_layer_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/buildingelement.html#BuildingElement.add_layer_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.add_layer_list" title="Link to this definition"></a></dt>
+<dd><p>Appends a layer set to the layer list</p>
+<p>The layer list has to be in correct order</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>layer_list</strong><span class="classifier">list</span></dt><dd><p>list of sorted TEASER Layer instances</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.area">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">area</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.area" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.calc_ua_value">
+<span class="sig-name descname"><span class="pre">calc_ua_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/buildingelement.html#BuildingElement.calc_ua_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.calc_ua_value" title="Link to this definition"></a></dt>
+<dd><p>U*A value for building element.</p>
+<p>Calculates the U*A value and resistances for radiative and
+convective heat transfer of a building element.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.construction_data">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">construction_data</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.construction_data" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.delete_type_element">
+<span class="sig-name descname"><span class="pre">delete_type_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/buildingelement.html#BuildingElement.delete_type_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.delete_type_element" title="Link to this definition"></a></dt>
+<dd><p>Deletes typical element.</p>
+<p>Deletes typical building elements according to their construction
+year and their construction type in the the json file for type building
+elements. If the Project parent is set, it automatically saves it to
+the file given in Project.data. Alternatively you can specify a path to
+a file of TypeBuildingElements. If this file does not exist,
+a new file is created.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_class</strong><span class="classifier">DataClass()</span></dt><dd><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that. Default is
+self.parent.parent.parent.data (which is data_class in current
+project)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.gather_element_properties">
+<span class="sig-name descname"><span class="pre">gather_element_properties</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/buildingelement.html#BuildingElement.gather_element_properties"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.gather_element_properties" title="Link to this definition"></a></dt>
+<dd><p>Helper function for matrix calculation.</p>
+<p>Gathers all material properties of the building element and returns
+them as a np.array. Needed for the calculation of the matrix in
+equivalent_res(t_bt) especially for walls.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>number_of_layer</strong><span class="classifier">int</span></dt><dd><p>number of layer (length of layer list)</p>
+</dd>
+<dt><strong>density</strong><span class="classifier">np.array</span></dt><dd><p>Numpy array with length of number of layer, filled with density
+of each layer</p>
+</dd>
+<dt><strong>thermal_conduc</strong><span class="classifier">np.array</span></dt><dd><p>Numpy array with length of number of layer, filled with
+thermal_conduc of each layer</p>
+</dd>
+<dt><strong>heat_capac</strong><span class="classifier">np.array</span></dt><dd><p>Numpy array with length of number of layer, filled with heat_capac
+of each layer</p>
+</dd>
+<dt><strong>thickness</strong><span class="classifier">np.array</span></dt><dd><p>Numpy array with length of number of layer, filled with thickness
+of each layer</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.inner_convection">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">inner_convection</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.inner_convection" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.inner_radiation">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">inner_radiation</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.inner_radiation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.layer">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layer</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.layer" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.load_type_element">
+<span class="sig-name descname"><span class="pre">load_type_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">construction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/buildingelement.html#BuildingElement.load_type_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.load_type_element" title="Link to this definition"></a></dt>
+<dd><p>Typical element loader.</p>
+<p>Loads typical building elements according to their construction
+year and their construction type from a json.</p>
+<p>This function will only work if the parents to Building are set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>year</strong><span class="classifier">int</span></dt><dd><p>Year of construction</p>
+</dd>
+<dt><strong>construction</strong><span class="classifier">str</span></dt><dd><p>Construction type, code list (‘heavy’, ‘light’)</p>
+</dd>
+<dt><strong>data_class</strong><span class="classifier">DataClass()</span></dt><dd><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that. Default is
+self.parent.parent.parent.data (which is data_class in current
+project)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.orientation">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">orientation</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.orientation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.outer_convection">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">outer_convection</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.outer_convection" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.outer_radiation">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">outer_radiation</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.outer_radiation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.save_type_element">
+<span class="sig-name descname"><span class="pre">save_type_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/buildingelement.html#BuildingElement.save_type_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.save_type_element" title="Link to this definition"></a></dt>
+<dd><p>Typical element saver.</p>
+<p>Saves typical building elements according to their construction
+year and their construction type in the the json file for type building
+elements. If the Project parent is set, it automatically saves it to
+the file given in Project.data. Alternatively you can specify a path to
+a file of TypeBuildingElements. If this file does not exist,
+a new file is created.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_class</strong><span class="classifier">DataClass()</span></dt><dd><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that. Default is
+self.parent.parent.parent.data (which is data_class in current
+project)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.set_calc_default">
+<span class="sig-name descname"><span class="pre">set_calc_default</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/buildingelement.html#BuildingElement.set_calc_default"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.set_calc_default" title="Link to this definition"></a></dt>
+<dd><p>Sets all calculated values of the Building Element to zero</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.tilt">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tilt</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.tilt" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.year_of_construction">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">year_of_construction</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.year_of_construction" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.year_of_retrofit">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">year_of_retrofit</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.year_of_retrofit" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-teaser.logic.buildingobjects.buildingphysics.ceiling">
+<span id="teaser-logic-buildingobjects-buildingphysics-ceiling-module"></span><h2>teaser.logic.buildingobjects.buildingphysics.ceiling module<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.ceiling" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.ceiling.Ceiling">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingphysics.ceiling.</span></span><span class="sig-name descname"><span class="pre">Ceiling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">InnerWall</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/ceiling.html#Ceiling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.ceiling.Ceiling" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall" title="teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall"><code class="xref py py-class docutils literal notranslate"><span class="pre">InnerWall</span></code></a></p>
+<p>This class represents a ceiling and is a child of InnerWall()</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
+Allows for better control of hierarchical structures. If not None it
+adds this Ceiling to ThermalZone.ceilings.
+Default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
+</dd>
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+distinction between different constructions types in the same
+building age period.</p>
+</dd>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of last retrofit</p>
+</dd>
+<dt><strong>year_of_construction</strong><span class="classifier">int</span></dt><dd><p>Year of first construction</p>
+</dd>
+<dt><strong>building_age_group</strong><span class="classifier">list</span></dt><dd><p>Determines the building age period that this building
+element belongs to [begin, end], e.g. [1984, 1994]</p>
+</dd>
+<dt><strong>area</strong><span class="classifier">float [m2]</span></dt><dd><p>Area of building element</p>
+</dd>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against horizontal, default is 0.0</p>
+</dd>
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth direction of building element (0 : north, 90: east, 180: south,
+270: west), default is -1, for horizontal ceiling</p>
+</dd>
+<dt><strong>inner_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection inner side (facing
+the zone), default is 1.7</p>
+</dd>
+<dt><strong>inner_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation inner side (facing
+the zone), default is 5.0</p>
+</dd>
+<dt><strong>outer_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>outer_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>layer</strong><span class="classifier">list</span></dt><dd><p>List of all layers of a building element (to be filled with Layer
+objects). Use element.layer = None to delete all layers of the building
+element</p>
+</dd>
+<dt><strong>Calculated Attributes</strong></dt><dd></dd>
+<dt><strong>r1</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r2</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r3</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R3 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c2</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1_korr</strong><span class="classifier">float [J/K]</span></dt><dd><p>corrected capacity C1,korr for building elements in the case of
+asymmetrical thermal load given in VDI 6007</p>
+</dd>
+<dt><strong>ua_value</strong><span class="classifier">float [W/K]</span></dt><dd><p>UA-Value of building element (Area times U-Value)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+inner side (facing the zone)</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+outer side (facing the ambient or adjacent zone). Currently for all
+InnerWalls and GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>wf_out</strong><span class="classifier">float</span></dt><dd><p>Weightfactor of building element ua_value/ua_value_zone</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-teaser.logic.buildingobjects.buildingphysics.door">
+<span id="teaser-logic-buildingobjects-buildingphysics-door-module"></span><h2>teaser.logic.buildingobjects.buildingphysics.door module<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.door" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.door.Door">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingphysics.door.</span></span><span class="sig-name descname"><span class="pre">Door</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/door.html#Door"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.door.Door" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall" title="teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall"><code class="xref py py-class docutils literal notranslate"><span class="pre">OuterWall</span></code></a></p>
+<p>Outer door class</p>
+<p>This class holds information of an entrance door and is a child of
+OuterWall()</p>
+<p>Will be treated exactly as OuterWalls, we need this distinction due to
+Door class in Tabula</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
+Allows for better control of hierarchical structures. If not None it
+adds this OuterWall to ThermalZone.outer_walls.
+Default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
+</dd>
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+distinction between different constructions types in the same
+building age period.</p>
+</dd>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of last retrofit</p>
+</dd>
+<dt><strong>year_of_construction</strong><span class="classifier">int</span></dt><dd><p>Year of first construction</p>
+</dd>
+<dt><strong>building_age_group</strong><span class="classifier">list</span></dt><dd><p>Determines the building age period that this building
+element belongs to [begin, end], e.g. [1984, 1994]</p>
+</dd>
+<dt><strong>area</strong><span class="classifier">float [m2]</span></dt><dd><p>Area of building element</p>
+</dd>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against horizontal, default is 90.0</p>
+</dd>
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth direction of building element (0 : north, 90: east, 180: south,
+270: west)</p>
+</dd>
+<dt><strong>inner_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection inner side (facing
+the zone), default 2.7</p>
+</dd>
+<dt><strong>inner_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation inner side (facing
+the zone), default 5.0</p>
+</dd>
+<dt><strong>outer_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection outer side (facing
+the ambient or adjacent zone), default 20.0</p>
+</dd>
+<dt><strong>outer_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation outer side (facing
+the ambient or adjacent zone), default 5.0</p>
+</dd>
+<dt><strong>layer</strong><span class="classifier">list</span></dt><dd><p>List of all layers of a building element (to be filled with Layer
+objects). Use element.layer = None to delete all layers of the building
+element</p>
+</dd>
+<dt><strong>Calculated Attributes</strong></dt><dd></dd>
+<dt><strong>r1</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r2</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r3</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R3 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c2</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1_korr</strong><span class="classifier">float [J/K]</span></dt><dd><p>corrected capacity C1,korr for building elements in the case of
+asymmetrical thermal load given in VDI 6007</p>
+</dd>
+<dt><strong>ua_value</strong><span class="classifier">float [W/K]</span></dt><dd><p>UA-Value of building element (Area times U-Value)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+inner side (facing the zone)</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+outer side (facing the ambient or adjacent zone). Currently for all
+InnerWalls and GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>wf_out</strong><span class="classifier">float</span></dt><dd><p>Weightfactor of building element ua_value/ua_value_zone</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.door.Door.parent">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parent</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.door.Door.parent" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-teaser.logic.buildingobjects.buildingphysics.floor">
+<span id="teaser-logic-buildingobjects-buildingphysics-floor-module"></span><h2>teaser.logic.buildingobjects.buildingphysics.floor module<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.floor" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.floor.Floor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingphysics.floor.</span></span><span class="sig-name descname"><span class="pre">Floor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">InnerWall</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/floor.html#Floor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.floor.Floor" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall" title="teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall"><code class="xref py py-class docutils literal notranslate"><span class="pre">InnerWall</span></code></a></p>
+<p>This class represents a floor and is a child of InnerWall()</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
+Allows for better control of hierarchical structures. If not None it
+adds this Floor to ThermalZone.floors.
+Default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
+</dd>
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+distinction between different constructions types in the same
+building age period.</p>
+</dd>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of last retrofit</p>
+</dd>
+<dt><strong>year_of_construction</strong><span class="classifier">int</span></dt><dd><p>Year of first construction</p>
+</dd>
+<dt><strong>building_age_group</strong><span class="classifier">list</span></dt><dd><p>Determines the building age period that this building
+element belongs to [begin, end], e.g. [1984, 1994]</p>
+</dd>
+<dt><strong>area</strong><span class="classifier">float [m2]</span></dt><dd><p>Area of building element</p>
+</dd>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against horizontal, default is 0.0</p>
+</dd>
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth direction of building element (0 : north, 90: east, 180: south,
+270: west), default is -2, for horizontal floor</p>
+</dd>
+<dt><strong>inner_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection inner side (facing
+the zone), default is 1.7</p>
+</dd>
+<dt><strong>inner_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation inner side (facing
+the zone), default is 5.0</p>
+</dd>
+<dt><strong>outer_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>outer_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>layer</strong><span class="classifier">list</span></dt><dd><p>List of all layers of a building element (to be filled with Layer
+objects). Use element.layer = None to delete all layers of the building
+element</p>
+</dd>
+<dt><strong>Calculated Attributes</strong></dt><dd></dd>
+<dt><strong>r1</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r2</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r3</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R3 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c2</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1_korr</strong><span class="classifier">float [J/K]</span></dt><dd><p>corrected capacity C1,korr for building elements in the case of
+asymmetrical thermal load given in VDI 6007</p>
+</dd>
+<dt><strong>ua_value</strong><span class="classifier">float [W/K]</span></dt><dd><p>UA-Value of building element (Area times U-Value)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+inner side (facing the zone)</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+outer side (facing the ambient or adjacent zone). Currently for all
+InnerWalls and GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>wf_out</strong><span class="classifier">float</span></dt><dd><p>Weightfactor of building element ua_value/ua_value_zone</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-teaser.logic.buildingobjects.buildingphysics.groundfloor">
+<span id="teaser-logic-buildingobjects-buildingphysics-groundfloor-module"></span><h2>teaser.logic.buildingobjects.buildingphysics.groundfloor module<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.groundfloor" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.groundfloor.GroundFloor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingphysics.groundfloor.</span></span><span class="sig-name descname"><span class="pre">GroundFloor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/groundfloor.html#GroundFloor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.groundfloor.GroundFloor" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall" title="teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall"><code class="xref py py-class docutils literal notranslate"><span class="pre">OuterWall</span></code></a></p>
+<p>GroundFloor class</p>
+<p>This class holds information of a GroundFloor and is a child of OuterWall()</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
+Allows for better control of hierarchical structures. If not None it
+adds this GroundFloor to ThermalZone.ground_floors.
+Default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
+</dd>
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+distinction between different constructions types in the same
+building age period.</p>
+</dd>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of last retrofit</p>
+</dd>
+<dt><strong>year_of_construction</strong><span class="classifier">int</span></dt><dd><p>Year of first construction</p>
+</dd>
+<dt><strong>building_age_group</strong><span class="classifier">list</span></dt><dd><p>Determines the building age period that this building
+element belongs to [begin, end], e.g. [1984, 1994]</p>
+</dd>
+<dt><strong>area</strong><span class="classifier">float [m2]</span></dt><dd><p>Area of building element</p>
+</dd>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against horizontal, default is 0.0</p>
+</dd>
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth direction of building element (0 : north, 90: east, 180: south,
+270: west), orientation -2.0</p>
+</dd>
+<dt><strong>inner_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection inner side (facing
+the zone), default 1.7</p>
+</dd>
+<dt><strong>inner_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation inner side (facing
+the zone), default 5.0</p>
+</dd>
+<dt><strong>outer_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection outer side (facing
+the ambient or adjacent zone), default 0.0</p>
+</dd>
+<dt><strong>outer_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation outer side (facing
+the ambient or adjacent zone), default 0.0</p>
+</dd>
+<dt><strong>layer</strong><span class="classifier">list</span></dt><dd><p>List of all layers of a building element (to be filled with Layer
+objects). Use element.layer = None to delete all layers of the building
+element</p>
+</dd>
+<dt><strong>Calculated Attributes</strong></dt><dd></dd>
+<dt><strong>r1</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r2</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r3</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R3 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c2</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1_korr</strong><span class="classifier">float [J/K]</span></dt><dd><p>corrected capacity C1,korr for building elements in the case of
+asymmetrical thermal load given in VDI 6007</p>
+</dd>
+<dt><strong>calc_u: Required area-specific U-value in retrofit cases [W/K]</strong></dt><dd></dd>
+<dt><strong>ua_value</strong><span class="classifier">float [W/K]</span></dt><dd><p>UA-Value of building element (Area times U-Value)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+inner side (facing the zone)</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+outer side (facing the ambient or adjacent zone). Currently for all
+InnerWalls and GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>wf_out</strong><span class="classifier">float</span></dt><dd><p>Weightfactor of building element ua_value/ua_value_zone</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.groundfloor.GroundFloor.retrofit_wall">
+<span class="sig-name descname"><span class="pre">retrofit_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/groundfloor.html#GroundFloor.retrofit_wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.groundfloor.GroundFloor.retrofit_wall" title="Link to this definition"></a></dt>
+<dd><p>Retrofits wall to German refurbishment standards.</p>
+<p>This function adds an additional layer of insulation and sets the
+thickness of the layer according to the retrofit standard in the
+year of refurbishment. Refurbishment year must be newer then 1977</p>
+<p>Note: To Calculate thickness and U-Value, the standard TEASER
+coefficients for outer and inner heat transfer are used.</p>
+<p>The used Standards are namely the Waermeschutzverordnung (WSVO) and
+Energieeinsparverordnung (EnEv)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>material</strong><span class="classifier">string</span></dt><dd><p>Type of material, that is used for insulation</p>
+</dd>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of the retrofit of the wall/building</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-teaser.logic.buildingobjects.buildingphysics.innerwall">
+<span id="teaser-logic-buildingobjects-buildingphysics-innerwall-module"></span><h2>teaser.logic.buildingobjects.buildingphysics.innerwall module<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.innerwall" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingphysics.innerwall.</span></span><span class="sig-name descname"><span class="pre">InnerWall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/innerwall.html#InnerWall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall" title="teaser.logic.buildingobjects.buildingphysics.wall.Wall"><code class="xref py py-class docutils literal notranslate"><span class="pre">Wall</span></code></a></p>
+<p>InnerWall class</p>
+<p>This class holds information for an inner wall and is a child of Wall()</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
+Allows for better control of hierarchical structures. If not None it
+adds this InnerWall to ThermalZone.inner_walls.
+Default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
+</dd>
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+distinction between different constructions types in the same
+building age period.</p>
+</dd>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of last retrofit</p>
+</dd>
+<dt><strong>year_of_construction</strong><span class="classifier">int</span></dt><dd><p>Year of first construction</p>
+</dd>
+<dt><strong>building_age_group</strong><span class="classifier">list</span></dt><dd><p>Determines the building age period that this building
+element belongs to [begin, end], e.g. [1984, 1994]</p>
+</dd>
+<dt><strong>area</strong><span class="classifier">float [m2]</span></dt><dd><p>Area of building element</p>
+</dd>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against horizontal, default is 90.0</p>
+</dd>
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth direction of building element (0 : north, 90: east, 180: south,
+270: west)</p>
+</dd>
+<dt><strong>inner_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection inner side (facing
+the zone), default 1.7</p>
+</dd>
+<dt><strong>inner_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation inner side (facing
+the zone), default 5.0</p>
+</dd>
+<dt><strong>outer_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>outer_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>layer</strong><span class="classifier">list</span></dt><dd><p>List of all layers of a building element (to be filled with Layer
+objects). Use element.layer = None to delete all layers of the building
+element</p>
+</dd>
+<dt><strong>Calculated Attributes</strong></dt><dd></dd>
+<dt><strong>r1</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r2</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r3</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R3 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c2</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1_korr</strong><span class="classifier">float [J/K]</span></dt><dd><p>corrected capacity C1,korr for building elements in the case of
+asymmetrical thermal load given in VDI 6007</p>
+</dd>
+<dt><strong>ua_value</strong><span class="classifier">float [W/K]</span></dt><dd><p>UA-Value of building element (Area times U-Value)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+inner side (facing the zone)</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+outer side (facing the ambient or adjacent zone). Currently for all
+InnerWalls and GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>wf_out</strong><span class="classifier">float</span></dt><dd><p>Weightfactor of building element ua_value/ua_value_zone</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall.parent">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parent</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall.parent" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-teaser.logic.buildingobjects.buildingphysics.layer">
+<span id="teaser-logic-buildingobjects-buildingphysics-layer-module"></span><h2>teaser.logic.buildingobjects.buildingphysics.layer module<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.layer" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.layer.Layer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingphysics.layer.</span></span><span class="sig-name descname"><span class="pre">Layer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/layer.html#Layer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.layer.Layer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Layer class</p>
+<p>This class holds information of a layer of a specific building element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parent</strong><span class="classifier">BuildingElement</span></dt><dd><p>The parent class of this object, the Building Element the layer
+belongs to. Allows for better control of hierarchical structures. If
+not None this adds the Layer to BuildingElement.layers.
+Default is None</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>id</strong><span class="classifier">int</span></dt><dd><p>Position (starting from 0 and the inner side)</p>
+</dd>
+<dt><strong>material</strong><span class="classifier">Material()</span></dt><dd><p>Material class of TEASER</p>
+</dd>
+<dt><strong>thickness</strong><span class="classifier">float [m]</span></dt><dd><p>Thickness of the layer</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.layer.Layer.material">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">material</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.layer.Layer.material" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.layer.Layer.parent">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parent</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.layer.Layer.parent" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.layer.Layer.thickness">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">thickness</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.layer.Layer.thickness" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-teaser.logic.buildingobjects.buildingphysics.material">
+<span id="teaser-logic-buildingobjects-buildingphysics-material-module"></span><h2>teaser.logic.buildingobjects.buildingphysics.material module<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.material" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.material.Material">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingphysics.material.</span></span><span class="sig-name descname"><span class="pre">Material</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/material.html#Material"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.material.Material" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Material class</p>
+<p>This class holds information of Material used for building element layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parent</strong><span class="classifier">Layer</span></dt><dd><p>The parent class of this object, the layer the material
+belongs to. Allows for better control of hierarchical structures. If
+not None this adds this Material to Layer.material.
+Default is None</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Name of material</p>
+</dd>
+<dt><strong>density</strong><span class="classifier">float [kg/m3]</span></dt><dd><p>Density of material</p>
+</dd>
+<dt><strong>thermal_conduc</strong><span class="classifier">float [W/(m*K)]</span></dt><dd><p>Thermal conductivity of material</p>
+</dd>
+<dt><strong>heat_capac</strong><span class="classifier">float [kJ/(kg*K)]</span></dt><dd><p>Specific heat capacity of material</p>
+</dd>
+<dt><strong>solar_absorp</strong><span class="classifier">float [-]</span></dt><dd><p>Coefficient of absorption of solar short wave</p>
+</dd>
+<dt><strong>ir_emissivity</strong><span class="classifier">float [-]</span></dt><dd><p>Coefficient of longwave emissivity of material</p>
+</dd>
+<dt><strong>transmittance</strong><span class="classifier">float [-]</span></dt><dd><p>Coefficient of transmittance of material</p>
+</dd>
+<dt><strong>thickness_default</strong><span class="classifier">float [m]</span></dt><dd><p>Default value for material thickness</p>
+</dd>
+<dt><strong>thickness_list</strong><span class="classifier">list</span></dt><dd><p>List of usual values for material thickness, float [m]</p>
+</dd>
+<dt><strong>material_id</strong><span class="classifier">str(uuid)</span></dt><dd><p>UUID of material, this is used to have similar behaviour like foreign
+key in SQL data bases for use in TypeBuildingElements and Material json</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.material.Material.density">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">density</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.material.Material.density" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.material.Material.heat_capac">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">heat_capac</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.material.Material.heat_capac" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.material.Material.ir_emissivity">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ir_emissivity</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.material.Material.ir_emissivity" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.material.Material.load_material_template">
+<span class="sig-name descname"><span class="pre">load_material_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mat_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/material.html#Material.load_material_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.material.Material.load_material_template" title="Link to this definition"></a></dt>
+<dd><p>Material loader.</p>
+<p>Loads Material specified in the json.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mat_name</strong><span class="classifier">str</span></dt><dd><p>Code list for Material</p>
+</dd>
+<dt><strong>data_class</strong><span class="classifier">DataClass()</span></dt><dd><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that. Default is
+self.parent.parent.parent.parent.data which is data in project</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.material.Material.material_id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">material_id</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.material.Material.material_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.material.Material.modify_material_template">
+<span class="sig-name descname"><span class="pre">modify_material_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/material.html#Material.modify_material_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.material.Material.modify_material_template" title="Link to this definition"></a></dt>
+<dd><p>Material modifier.</p>
+<p>Modify Material specified in the json.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_class</strong><span class="classifier">DataClass()</span></dt><dd><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that. Default is
+self.parent.parent.parent.parent.data which is data in project</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.material.Material.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.material.Material.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.material.Material.parent">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parent</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.material.Material.parent" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.material.Material.save_material_template">
+<span class="sig-name descname"><span class="pre">save_material_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/material.html#Material.save_material_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.material.Material.save_material_template" title="Link to this definition"></a></dt>
+<dd><p>Material saver.</p>
+<p>Saves Material specified in the json.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_class</strong><span class="classifier">DataClass()</span></dt><dd><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that. Default is
+self.parent.parent.parent.parent.data which is data in project</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.material.Material.solar_absorp">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">solar_absorp</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.material.Material.solar_absorp" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.material.Material.thermal_conduc">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">thermal_conduc</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.material.Material.thermal_conduc" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.material.Material.thickness_default">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">thickness_default</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.material.Material.thickness_default" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.material.Material.thickness_list">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">thickness_list</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.material.Material.thickness_list" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.material.Material.transmittance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transmittance</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.material.Material.transmittance" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-teaser.logic.buildingobjects.buildingphysics.outerwall">
+<span id="teaser-logic-buildingobjects-buildingphysics-outerwall-module"></span><h2>teaser.logic.buildingobjects.buildingphysics.outerwall module<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.outerwall" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingphysics.outerwall.</span></span><span class="sig-name descname"><span class="pre">OuterWall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/outerwall.html#OuterWall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall" title="teaser.logic.buildingobjects.buildingphysics.wall.Wall"><code class="xref py py-class docutils literal notranslate"><span class="pre">Wall</span></code></a></p>
+<p>OuterWall class</p>
+<p>This class holds information of an outer wall and is a child of Wall()</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
+Allows for better control of hierarchical structures. If not None it
+adds this OuterWall to ThermalZone.outer_walls.
+Default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
+</dd>
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+distinction between different constructions types in the same
+building age period.</p>
+</dd>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of last retrofit</p>
+</dd>
+<dt><strong>year_of_construction</strong><span class="classifier">int</span></dt><dd><p>Year of first construction</p>
+</dd>
+<dt><strong>building_age_group</strong><span class="classifier">list</span></dt><dd><p>Determines the building age period that this building
+element belongs to [begin, end], e.g. [1984, 1994]</p>
+</dd>
+<dt><strong>area</strong><span class="classifier">float [m2]</span></dt><dd><p>Area of building element</p>
+</dd>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against horizontal, default is 90.0</p>
+</dd>
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth direction of building element (0 : north, 90: east, 180: south,
+270: west)</p>
+</dd>
+<dt><strong>inner_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection inner side (facing
+the zone), default 2.7</p>
+</dd>
+<dt><strong>inner_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation inner side (facing
+the zone), default 5.0</p>
+</dd>
+<dt><strong>outer_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection outer side (facing
+the ambient or adjacent zone), default 20.0</p>
+</dd>
+<dt><strong>outer_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation outer side (facing
+the ambient or adjacent zone), default 5.0</p>
+</dd>
+<dt><strong>layer</strong><span class="classifier">list</span></dt><dd><p>List of all layers of a building element (to be filled with Layer
+objects). Use element.layer = None to delete all layers of the building
+element</p>
+</dd>
+<dt><strong>Calculated Attributes</strong></dt><dd></dd>
+<dt><strong>r1</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r2</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r3</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R3 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c2</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1_korr</strong><span class="classifier">float [J/K]</span></dt><dd><p>corrected capacity C1,korr for building elements in the case of
+asymmetrical thermal load given in VDI 6007</p>
+</dd>
+<dt><strong>calc_u: Required area-specific U-value in retrofit cases [W/K]</strong></dt><dd></dd>
+<dt><strong>ua_value</strong><span class="classifier">float [W/K]</span></dt><dd><p>UA-Value of building element (Area times U-Value)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+inner side (facing the zone)</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+outer side (facing the ambient or adjacent zone). Currently for all
+InnerWalls and GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>wf_out</strong><span class="classifier">float</span></dt><dd><p>Weightfactor of building element ua_value/ua_value_zone</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall.parent">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parent</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall.parent" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall.retrofit_wall">
+<span class="sig-name descname"><span class="pre">retrofit_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/outerwall.html#OuterWall.retrofit_wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall.retrofit_wall" title="Link to this definition"></a></dt>
+<dd><p>Retrofits wall to German refurbishment standards.</p>
+<p>This function adds an additional layer of insulation and sets the
+thickness of the layer according to the retrofit standard in the
+year of refurbishment. Refurbishment year must be newer then 1977</p>
+<p>Note: To Calculate thickness and U-Value, the standard TEASER
+coefficients for outer and inner heat transfer are used.</p>
+<p>The used Standards are namely the Waermeschutzverordnung (WSVO) and
+Energieeinsparverordnung (EnEv)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>material</strong><span class="classifier">string</span></dt><dd><p>Type of material, that is used for insulation</p>
+</dd>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of the retrofit of the wall/building</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-teaser.logic.buildingobjects.buildingphysics.rooftop">
+<span id="teaser-logic-buildingobjects-buildingphysics-rooftop-module"></span><h2>teaser.logic.buildingobjects.buildingphysics.rooftop module<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.rooftop" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.rooftop.Rooftop">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingphysics.rooftop.</span></span><span class="sig-name descname"><span class="pre">Rooftop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/rooftop.html#Rooftop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.rooftop.Rooftop" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall" title="teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall"><code class="xref py py-class docutils literal notranslate"><span class="pre">OuterWall</span></code></a></p>
+<p>Rooftop class</p>
+<p>This class holds information a roof top and is a child of OuterWall()</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
+Allows for better control of hierarchical structures. If not None it
+adds this Rooftop to ThermalZone.rooftops.
+Default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
+</dd>
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+distinction between different constructions types in the same
+building age period.</p>
+</dd>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of last retrofit</p>
+</dd>
+<dt><strong>year_of_construction</strong><span class="classifier">int</span></dt><dd><p>Year of first construction</p>
+</dd>
+<dt><strong>building_age_group</strong><span class="classifier">list</span></dt><dd><p>Determines the building age period that this building
+element belongs to [begin, end], e.g. [1984, 1994]</p>
+</dd>
+<dt><strong>area</strong><span class="classifier">float [m2]</span></dt><dd><p>Area of building element</p>
+</dd>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against horizontal, default is 0.0</p>
+</dd>
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth direction of building element (0 : north, 90: east, 180: south,
+270: west), orientation -1.0</p>
+</dd>
+<dt><strong>inner_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection inner side (facing
+the zone), default 1.7</p>
+</dd>
+<dt><strong>inner_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation inner side (facing
+the zone), default 5.0</p>
+</dd>
+<dt><strong>outer_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection outer side (facing
+the ambient or adjacent zone), default 20.0</p>
+</dd>
+<dt><strong>outer_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation outer side (facing
+the ambient or adjacent zone), default 5.0</p>
+</dd>
+<dt><strong>layer</strong><span class="classifier">list</span></dt><dd><p>List of all layers of a building element (to be filled with Layer
+objects). Use element.layer = None to delete all layers of the building
+element</p>
+</dd>
+<dt><strong>Calculated Attributes</strong></dt><dd></dd>
+<dt><strong>r1</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r2</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r3</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R3 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c2</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1_korr</strong><span class="classifier">float [J/K]</span></dt><dd><p>corrected capacity C1,korr for building elements in the case of
+asymmetrical thermal load given in VDI 6007</p>
+</dd>
+<dt><strong>calc_u: Required area-specific U-value in retrofit cases [W/K]</strong></dt><dd></dd>
+<dt><strong>ua_value</strong><span class="classifier">float [W/K]</span></dt><dd><p>UA-Value of building element (Area times U-Value)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+inner side (facing the zone)</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+outer side (facing the ambient or adjacent zone). Currently for all
+InnerWalls and GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>wf_out</strong><span class="classifier">float</span></dt><dd><p>Weightfactor of building element ua_value/ua_value_zone</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.rooftop.Rooftop.retrofit_wall">
+<span class="sig-name descname"><span class="pre">retrofit_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/rooftop.html#Rooftop.retrofit_wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.rooftop.Rooftop.retrofit_wall" title="Link to this definition"></a></dt>
+<dd><p>Retrofits wall to German refurbishment standards.</p>
+<p>This function adds an additional layer of insulation and sets the
+thickness of the layer according to the retrofit standard in the
+year of refurbishment. Refurbishment year must be newer then 1977</p>
+<p>Note: To Calculate thickness and U-Value, the standard TEASER
+coefficients for outer and inner heat transfer are used.</p>
+<p>The used Standards are namely the Waermeschutzverordnung (WSVO) and
+Energieeinsparverordnung (EnEv)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>material</strong><span class="classifier">string</span></dt><dd><p>Type of material, that is used for insulation</p>
+</dd>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of the retrofit of the wall/building</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-teaser.logic.buildingobjects.buildingphysics.wall">
+<span id="teaser-logic-buildingobjects-buildingphysics-wall-module"></span><h2>teaser.logic.buildingobjects.buildingphysics.wall module<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.wall" title="Link to this heading"></a></h2>
+<p>asd</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.wall.Wall">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingphysics.wall.</span></span><span class="sig-name descname"><span class="pre">Wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/wall.html#Wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement" title="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">BuildingElement</span></code></a></p>
+<p>Wall class</p>
+<p>This class holds functions and information for walls. It inherits for
+BuildingElement() and is a base class for all inner and outer walls.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
+Allows for better control of hierarchical structures.
+Default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
+</dd>
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+distinction between different constructions types in the same
+building age period.</p>
+</dd>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of last retrofit</p>
+</dd>
+<dt><strong>year_of_construction</strong><span class="classifier">int</span></dt><dd><p>Year of first construction</p>
+</dd>
+<dt><strong>building_age_group</strong><span class="classifier">list</span></dt><dd><p>Determines the building age period that this building
+element belongs to [begin, end], e.g. [1984, 1994]</p>
+</dd>
+<dt><strong>area</strong><span class="classifier">float [m2]</span></dt><dd><p>Area of building element</p>
+</dd>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against horizontal</p>
+</dd>
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth direction of building element (0 : north, 90: east, 180: south,
+270: west)</p>
+</dd>
+<dt><strong>inner_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection inner side (facing
+the zone)</p>
+</dd>
+<dt><strong>inner_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation inner side (facing
+the zone)</p>
+</dd>
+<dt><strong>outer_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>outer_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>layer</strong><span class="classifier">list</span></dt><dd><p>List of all layers of a building element (to be filled with Layer
+objects). Use element.layer = None to delete all layers of the building
+element</p>
+</dd>
+<dt><strong>Calculated Attributes</strong></dt><dd></dd>
+<dt><strong>r1</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r2</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r3</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R3 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c2</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1_korr</strong><span class="classifier">float [J/K]</span></dt><dd><p>corrected capacity C1,korr for building elements in the case of
+asymmetrical thermal load given in VDI 6007</p>
+</dd>
+<dt><strong>calc_u: Required area-specific U-value in retrofit cases [W/K]</strong></dt><dd></dd>
+<dt><strong>ua_value</strong><span class="classifier">float [W/K]</span></dt><dd><p>UA-Value of building element (Area times U-Value)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+inner side (facing the zone)</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+outer side (facing the ambient or adjacent zone). Currently for all
+InnerWalls and GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>wf_out</strong><span class="classifier">float</span></dt><dd><p>Weightfactor of building element ua_value/ua_value_zone</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.wall.Wall.calc_equivalent_res">
+<span class="sig-name descname"><span class="pre">calc_equivalent_res</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t_bt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/wall.html#Wall.calc_equivalent_res"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.calc_equivalent_res" title="Link to this definition"></a></dt>
+<dd><p>Equivalent resistance according to VDI 6007.</p>
+<p>Calculates the equivalent resistance and capacity of a wall according
+to VDI 6007 guideline. (Analogous model).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>t_bt</strong><span class="classifier">int</span></dt><dd><p>Time constant according to VDI 6007 (default t_bt = 7)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.wall.Wall.calc_ins_layer_thickness">
+<span class="sig-name descname"><span class="pre">calc_ins_layer_thickness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">calc_u</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/wall.html#Wall.calc_ins_layer_thickness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.calc_ins_layer_thickness" title="Link to this definition"></a></dt>
+<dd><p>Calculates the thickness of the fresh insulated layer from
+retrofit</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.wall.Wall.initialize_retrofit">
+<span class="sig-name descname"><span class="pre">initialize_retrofit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/wall.html#Wall.initialize_retrofit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.initialize_retrofit" title="Link to this definition"></a></dt>
+<dd><p>Checks the retrofit inputs and sets material and year of retrofit
+if needed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.wall.Wall.insulate_wall">
+<span class="sig-name descname"><span class="pre">insulate_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/wall.html#Wall.insulate_wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.insulate_wall" title="Link to this definition"></a></dt>
+<dd><p>Retrofit the walls with an additional insulation layer</p>
+<p>Adds an additional layer on the wall, outer sight</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>material</strong><span class="classifier">string</span></dt><dd><p>Type of material, that is used for insulation, default = EPS035</p>
+</dd>
+<dt><strong>thickness</strong><span class="classifier">float</span></dt><dd><p>thickness of the insulation layer, default = None</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.wall.Wall.retrofit_wall">
+<span class="sig-name descname"><span class="pre">retrofit_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/wall.html#Wall.retrofit_wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.retrofit_wall" title="Link to this definition"></a></dt>
+<dd><p>Retrofits wall to German refurbishment standards.</p>
+<p>This function adds an additional layer of insulation and sets the
+thickness of the layer according to the retrofit standard in the
+year of refurbishment. Refurbishment year must be newer then 1977</p>
+<p>Note: To Calculate thickness and U-Value, the standard TEASER
+coefficients for outer and inner heat transfer are used.</p>
+<p>The used Standards are namely the Waermeschutzverordnung (WSVO) and
+Energieeinsparverordnung (EnEv)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>material</strong><span class="classifier">string</span></dt><dd><p>Type of material, that is used for insulation</p>
+</dd>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of the retrofit of the wall/building</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.wall.Wall.set_insulation">
+<span class="sig-name descname"><span class="pre">set_insulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/wall.html#Wall.set_insulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.set_insulation" title="Link to this definition"></a></dt>
+<dd><p>Sets the correct insulation thickness based on the given u-value</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-teaser.logic.buildingobjects.buildingphysics.window">
+<span id="teaser-logic-buildingobjects-buildingphysics-window-module"></span><h2>teaser.logic.buildingobjects.buildingphysics.window module<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.window" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.window.Window">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingphysics.window.</span></span><span class="sig-name descname"><span class="pre">Window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/window.html#Window"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.window.Window" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement" title="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">BuildingElement</span></code></a></p>
+<p>Window class</p>
+<p>This class holds information of a window and is a child of
+BuildingElement().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
+Allows for better control of hierarchical structures.  If not None it
+adds this Window to ThermalZone.windows.
+Default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
+</dd>
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+distinction between different constructions types in the same
+building age period.</p>
+</dd>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of last retrofit</p>
+</dd>
+<dt><strong>year_of_construction</strong><span class="classifier">int</span></dt><dd><p>Year of first construction</p>
+</dd>
+<dt><strong>building_age_group</strong><span class="classifier">list</span></dt><dd><p>Determines the building age period that this building
+element belongs to [begin, end], e.g. [1984, 1994]</p>
+</dd>
+<dt><strong>area</strong><span class="classifier">float [m2]</span></dt><dd><p>Area of building element</p>
+</dd>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against horizontal, default 90.0</p>
+</dd>
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth direction of building element (0 : north, 90: east, 180: south,
+270: west)</p>
+</dd>
+<dt><strong>inner_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection inner side (facing
+the zone), default 2.7</p>
+</dd>
+<dt><strong>inner_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation inner side (facing
+the zone), default 5.0</p>
+</dd>
+<dt><strong>outer_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection outer side (facing
+the ambient or adjacent zone), default 20.0</p>
+</dd>
+<dt><strong>outer_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation outer side (facing
+the ambient or adjacent zone), default 5.0</p>
+</dd>
+<dt><strong>layer</strong><span class="classifier">list</span></dt><dd><p>List of all layers of a building element (to be filled with Layer
+objects). Use element.layer = None to delete all layers of the building
+element</p>
+</dd>
+<dt><strong>Specific Attributes for Window</strong></dt><dd></dd>
+<dt><strong>g_value</strong><span class="classifier">float</span></dt><dd><p>solar heat gain coefficient of Window</p>
+</dd>
+<dt><strong>a_conv</strong><span class="classifier">float</span></dt><dd><p>relative convective heat emission because of absorption of short wave
+irradiation of inner side of Window according to VDI 6007</p>
+</dd>
+<dt><strong>shading_g_total</strong><span class="classifier">float</span></dt><dd><p>shaded g value of the window</p>
+</dd>
+<dt><strong>shading_max_irr</strong><span class="classifier">float</span></dt><dd><p>threshold for automatic shading</p>
+</dd>
+<dt><strong>Calculated Attributes</strong></dt><dd></dd>
+<dt><strong>r1</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r2</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r3</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R3 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c2</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1_korr</strong><span class="classifier">float [J/K]</span></dt><dd><p>corrected capacity C1,korr for building elements in the case of
+asymmetrical thermal load given in VDI 6007</p>
+</dd>
+<dt><strong>ua_value</strong><span class="classifier">float [W/K]</span></dt><dd><p>UA-Value of building element (Area times U-Value)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+inner side (facing the zone)</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+outer side (facing the ambient or adjacent zone). Currently for all
+InnerWalls and GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>wf_out</strong><span class="classifier">float</span></dt><dd><p>Weightfactor of building element ua_value/ua_value_zone</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.window.Window.a_conv">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">a_conv</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.window.Window.a_conv" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.window.Window.calc_equivalent_res">
+<span class="sig-name descname"><span class="pre">calc_equivalent_res</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/window.html#Window.calc_equivalent_res"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.window.Window.calc_equivalent_res" title="Link to this definition"></a></dt>
+<dd><p>Equivalent resistance VDI 6007</p>
+<p>Calculates the equivalent resistance of a wall according to  VDI
+6007 guideline.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>t_bt</strong><span class="classifier">int</span></dt><dd><p>time constant according to VDI 6007 (default t_bt = 7)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.window.Window.g_value">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">g_value</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.window.Window.g_value" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.window.Window.parent">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parent</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.window.Window.parent" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.window.Window.replace_window">
+<span class="sig-name descname"><span class="pre">replace_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/window.html#Window.replace_window"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.window.Window.replace_window" title="Link to this definition"></a></dt>
+<dd><p>Replace a window, with a newer one.</p>
+<p>Replaces all attributes from the window and replaces it with a high
+insulated one.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>year_of_retrofit: int</strong></dt><dd><p>The year, the building was refurbished</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.window.Window.shading_g_total">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shading_g_total</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.window.Window.shading_g_total" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.window.Window.shading_max_irr">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shading_max_irr</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.window.Window.shading_max_irr" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="teaser.logic.buildingobjects.html" class="btn btn-neutral float-left" title="teaser.logic.buildingobjects package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="teaser.logic.buildingobjects.buildingsystems.html" class="btn btn-neutral float-right" title="teaser.logic.buildingobjects.buildingsystems package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
