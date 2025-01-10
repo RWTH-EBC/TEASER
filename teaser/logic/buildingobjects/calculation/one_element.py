@@ -233,7 +233,7 @@ class OneElement(object):
 
     """
 
-    def __init__(self, thermal_zone, merge_windows, t_bt, t_bt_layer):
+    def __init__(self, thermal_zone, merge_windows, t_bt, t_bt_layer=7):
         """Constructor for TwoElement"""
 
         self.internal_id = random.random()
