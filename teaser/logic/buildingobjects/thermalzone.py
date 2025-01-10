@@ -108,7 +108,9 @@ class ThermalZone(object):
             self,
             number_of_elements=2,
             merge_windows=False,
-            t_bt=5):
+            t_bt=5,
+            t_bt_layer=7
+    ):
         """RC-Calculation for the thermal zone
 
         Based on the input parameters (used model) this function instantiates
@@ -139,31 +141,38 @@ class ThermalZone(object):
 
         t_bt : float
             Time constant according to VDI 6007 (default t_bt = 5)
+        t_bt_layer: float
+            Time constant according to VDI 6007 for aggragation of layers (default t_bt = 7)
         """
 
         if number_of_elements == 1:
             self.model_attr = OneElement(
                 thermal_zone=self,
                 merge_windows=merge_windows,
-                t_bt=t_bt)
+                t_bt=t_bt,
+                t_bt_layer=t_bt_layer)
             self.model_attr.calc_attributes()
         elif number_of_elements == 2:
             self.model_attr = TwoElement(
                 thermal_zone=self,
                 merge_windows=merge_windows,
-                t_bt=t_bt)
+                t_bt=t_bt,
+                t_bt_layer=t_bt_layer)
             self.model_attr.calc_attributes()
         elif number_of_elements == 3:
             self.model_attr = ThreeElement(
                 thermal_zone=self,
                 merge_windows=merge_windows,
-                t_bt=t_bt)
+                t_bt=t_bt,
+                t_bt_layer=t_bt_layer)
             self.model_attr.calc_attributes()
         elif number_of_elements == 4:
             self.model_attr = FourElement(
                 thermal_zone=self,
                 merge_windows=merge_windows,
-                t_bt=t_bt)
+                t_bt=t_bt,
+                t_bt_layer=t_bt_layer
+            )
             self.model_attr.calc_attributes()
 
     def find_walls(self, orientation, tilt):

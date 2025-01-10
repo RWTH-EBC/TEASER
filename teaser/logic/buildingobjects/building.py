@@ -122,8 +122,17 @@ class Building(object):
     library_attr : Annex() or AixLib() instance
         Classes with specific functions and attributes for building models in
         IBPSA and AixLib. Python classes can be found in calculation package.
-
-    """
+    t_bt : float
+        Time constant according to VDI 6007.
+        Default 5 d, only change if you know what you are doing.
+        See https://publications.rwth-aachen.de/record/749705/files/749705.pdf for more
+        information
+    t_bt_layer: float
+        Time constant according to VDI 6007 for aggragation of layers.
+        Default 7 d, only change if you know what you are doing
+        See https://publications.rwth-aachen.de/record/749705/files/749705.pdf for more
+        information
+   """
 
     def __init__(
         self,
@@ -175,6 +184,9 @@ class Building(object):
         self._used_library_calc = "AixLib"
 
         self.library_attr = None
+
+        self.t_bt = 5
+        self.t_bt_layer = 7
 
     def set_outer_wall_area(self, new_area, orientation):
         """Outer area wall setter
@@ -386,7 +398,8 @@ class Building(object):
             zone.calc_zone_parameters(
                 number_of_elements=number_of_elements,
                 merge_windows=merge_windows,
-                t_bt=5,
+                t_bt=self.t_bt,
+                t_bt_layer=self.t_bt_layer
             )
             self.sum_heat_load += zone.model_attr.heat_load
             self.area_rt += sum(rf.area for rf in zone.rooftops)

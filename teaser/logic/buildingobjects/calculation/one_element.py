@@ -31,6 +31,8 @@ class OneElement(object):
         supported for IBPSA)
     t_bt : float [d]
         Time constant according to VDI 6007 (default t_bt = 5)
+    t_bt_layer : float [d]
+        Time constant according to VDI 6007 for aggragation of layers (default t_bt = 7)
 
     Attributes
     ----------
@@ -239,6 +241,7 @@ class OneElement(object):
         self.thermal_zone = thermal_zone
         self.merge_windows = merge_windows
         self.t_bt = t_bt
+        self.t_bt_layer = t_bt_layer
 
         # Attributes for outer walls (OuterWall, Rooftop, GroundFloor)
         self.area_ow = 0.0
@@ -349,7 +352,7 @@ class OneElement(object):
         )
 
         for out_wall in outer_walls:
-            out_wall.calc_equivalent_res()
+            out_wall.calc_equivalent_res(t_bt=self.t_bt_layer)
             out_wall.calc_ua_value()
         for win in self.thermal_zone.windows:
             win.calc_equivalent_res()
@@ -359,7 +362,7 @@ class OneElement(object):
             + self.thermal_zone.floors
             + self.thermal_zone.ceilings
         ):
-            inner_wall.calc_equivalent_res()
+            inner_wall.calc_equivalent_res(t_bt=self.t_bt_layer)
             inner_wall.calc_ua_value()
 
         self.set_calc_default()
