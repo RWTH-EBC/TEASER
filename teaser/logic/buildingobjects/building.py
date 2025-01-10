@@ -126,12 +126,12 @@ class Building(object):
         Time constant according to VDI 6007.
         Default 5 d, only change if you know what you are doing.
         See https://publications.rwth-aachen.de/record/749705/files/749705.pdf for more
-        information
+        information (Section 4.1.2)
     t_bt_layer: float
         Time constant according to VDI 6007 for aggragation of layers.
         Default 7 d, only change if you know what you are doing
         See https://publications.rwth-aachen.de/record/749705/files/749705.pdf for more
-        information
+        information (Section 4.1.2)
    """
 
     def __init__(
