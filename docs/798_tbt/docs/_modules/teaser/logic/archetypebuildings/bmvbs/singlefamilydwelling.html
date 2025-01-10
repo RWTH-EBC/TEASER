@@ -1,0 +1,714 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling &mdash; TEASER 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=db26dd79" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            TEASER
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../code/modules.html">teaser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling</h1><div class="highlight"><pre>
+<span></span><span class="c1"># created June 2015</span>
+<span class="c1"># by TEASER4 Development Team</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.residential</span><span class="w"> </span><span class="kn">import</span> <span class="n">Residential</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.useconditions</span><span class="w"> </span><span class="kn">import</span> <span class="n">UseConditions</span> <span class="k">as</span> <span class="n">UseCond</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.ceiling</span><span class="w"> </span><span class="kn">import</span> <span class="n">Ceiling</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.floor</span><span class="w"> </span><span class="kn">import</span> <span class="n">Floor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.groundfloor</span><span class="w"> </span><span class="kn">import</span> <span class="n">GroundFloor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.innerwall</span><span class="w"> </span><span class="kn">import</span> <span class="n">InnerWall</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.outerwall</span><span class="w"> </span><span class="kn">import</span> <span class="n">OuterWall</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.rooftop</span><span class="w"> </span><span class="kn">import</span> <span class="n">Rooftop</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.window</span><span class="w"> </span><span class="kn">import</span> <span class="n">Window</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.thermalzone</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThermalZone</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">teaser.data.utilities</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">datahandling</span>
+
+<div class="viewcode-block" id="SingleFamilyDwelling">
+<a class="viewcode-back" href="../../../../../code/teaser.logic.archetypebuildings.bmvbs.html#teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling.SingleFamilyDwelling">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SingleFamilyDwelling</span><span class="p">(</span><span class="n">Residential</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Archetype Residential Building according</span>
+
+<span class="sd">    Subclass from Residential archetype class to represent</span>
+<span class="sd">    SingleFamilyDwelling according to IWU :cite:`KurzverfahrenIWU`.</span>
+
+<span class="sd">    The SingleFamilyDwelling module contains a single zone building. It has 4</span>
+<span class="sd">    outer walls, 4 windows, a flat roof and a ground floor. Interior wall</span>
+<span class="sd">    areas are assigned related to typical width and depth of zones according to</span>
+<span class="sd">    :cite:`SwissSocietyofEngineersandArchitects.March2006`. It makes</span>
+<span class="sd">    number_of_floors and height_of_floors mandatory parameters.</span>
+<span class="sd">    Additional information can be passed</span>
+<span class="sd">    to the archetype (e.g. floor layout and number of neighbors).</span>
+
+<span class="sd">    Default values are given according to IWU.</span>
+
+<span class="sd">    In detail the net leased area is divided into the following thermal zone</span>
+<span class="sd">    area:</span>
+
+<span class="sd">    #. Single dwelling (100% of net leased area)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    parent: Project()</span>
+<span class="sd">        The parent class of this object, the Project the Building belongs to.</span>
+<span class="sd">        Allows for better control of hierarchical structures. If not None it</span>
+<span class="sd">        adds this Building instance to Project.buildings.</span>
+<span class="sd">        (default: None)</span>
+<span class="sd">    name : str</span>
+<span class="sd">        Individual name</span>
+<span class="sd">    year_of_construction : int</span>
+<span class="sd">        Year of first construction</span>
+<span class="sd">    height_of_floors : float [m]</span>
+<span class="sd">        Average height of the buildings&#39; floors</span>
+<span class="sd">    number_of_floors : int</span>
+<span class="sd">        Number of building&#39;s floors above ground</span>
+<span class="sd">    net_leased_area : float [m2]</span>
+<span class="sd">        Total net leased area of building. This is area is NOT the footprint</span>
+<span class="sd">        of a building</span>
+<span class="sd">    with_ahu : Boolean</span>
+<span class="sd">        If set to True, an empty instance of BuildingAHU is instantiated and</span>
+<span class="sd">        assigned to attribute central_ahu. This instance holds information for</span>
+<span class="sd">        central Air Handling units. Default is False.</span>
+<span class="sd">    internal_gains_mode: int [1, 2, 3]</span>
+<span class="sd">        mode for the internal gains calculation done in AixLib:</span>
+
+<span class="sd">        1. Temperature and activity degree dependent heat flux calculation. The</span>
+<span class="sd">           calculation is based on  SIA 2024 (default)</span>
+<span class="sd">        2. Temperature and activity degree independent heat flux calculation, the max.</span>
+<span class="sd">           heatflowrate is prescribed by the parameter</span>
+<span class="sd">           fixed_heat_flow_rate_persons.</span>
+<span class="sd">        3. Temperature and activity degree dependent calculation with</span>
+<span class="sd">           consideration of moisture and co2. The moisture calculation is</span>
+<span class="sd">           based on SIA 2024 (2015), the co2 calculation is based on</span>
+<span class="sd">           Engineering ToolBox (2004)</span>
+
+<span class="sd">    residential_layout : int</span>
+<span class="sd">        Structure of floor plan (default = 0)</span>
+
+<span class="sd">        0. compact</span>
+<span class="sd">        1. elongated/complex</span>
+
+<span class="sd">    neighbour_buildings : int</span>
+<span class="sd">        Number of neighbour buildings. CAUTION: this will not change</span>
+<span class="sd">        the orientation of the buildings wall, but just the overall</span>
+<span class="sd">        exterior wall and window area(!) (default = 0)</span>
+
+<span class="sd">        0. no neighbour</span>
+<span class="sd">        1. one neighbour</span>
+<span class="sd">        2. two neighbours</span>
+
+<span class="sd">    attic : int</span>
+<span class="sd">        Design of the attic. CAUTION: this will not change the orientation or</span>
+<span class="sd">        tilt of the roof instances, but just adapt the roof area(!) (default</span>
+<span class="sd">        = 0)</span>
+
+<span class="sd">        0. flat roof</span>
+<span class="sd">        1. non heated attic</span>
+<span class="sd">        2. partly heated attic</span>
+<span class="sd">        3. heated attic</span>
+
+<span class="sd">    cellar : int</span>
+<span class="sd">        Design of the of cellar CAUTION: this will not change the</span>
+<span class="sd">        orientation, tilt of GroundFloor instances, nor the number or area of</span>
+<span class="sd">        ThermalZones, but will change GroundFloor area(!) (default = 0)</span>
+
+<span class="sd">        0. no cellar</span>
+<span class="sd">        1. non heated cellar</span>
+<span class="sd">        2. partly heated cellar</span>
+<span class="sd">        3. heated cellar</span>
+
+<span class="sd">    dormer : str</span>
+<span class="sd">        Is a dormer attached to the roof? CAUTION: this will not</span>
+<span class="sd">        change roof or window orientation or tilt, but just adapt the roof</span>
+<span class="sd">        area(!) (default = 0)</span>
+
+<span class="sd">        0. no dormer</span>
+<span class="sd">        1. dormer</span>
+
+<span class="sd">    construction_data : str</span>
+<span class="sd">        Construction type of used wall constructions default is &quot;iwu_heavy&quot;</span>
+
+<span class="sd">        - iwu_heavy: heavy construction</span>
+<span class="sd">        - iwu_light: light construction</span>
+<span class="sd">        - kfw_40, kfw_55, kfw_70, kfw_85, kfw_100: KfW efficiency building standards</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The listed attributes are just the ones that are set by the user</span>
+<span class="sd">    calculated values are not included in this list. Changing these values is</span>
+<span class="sd">    expert mode.</span>
+
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    zone_area_factors : dict</span>
+<span class="sd">        This dictionary contains the name of the zone (str), the</span>
+<span class="sd">        zone area factor (float) and the zone usage from BoundaryConditions json</span>
+<span class="sd">        (str). (Default see doc string above)</span>
+<span class="sd">    outer_wall_names : dict</span>
+<span class="sd">        This dictionary contains a random name for the outer walls,</span>
+<span class="sd">        their orientation and tilt. Default is a building in north-south</span>
+<span class="sd">        orientation)</span>
+<span class="sd">    roof_names : dict</span>
+<span class="sd">        This dictionary contains the name of the roofs, their orientation</span>
+<span class="sd">        and tilt. Default is one flat roof.</span>
+<span class="sd">    ground_floor_names : dict</span>
+<span class="sd">        This dictionary contains the name of the ground floors, their</span>
+<span class="sd">        orientation and tilt. Default is one ground floor.</span>
+<span class="sd">    window_names : dict</span>
+<span class="sd">        This dictionary contains the name of the window, their</span>
+<span class="sd">        orientation and tilt. Default is a building in north-south</span>
+<span class="sd">        orientation)</span>
+<span class="sd">    inner_wall_names : dict</span>
+<span class="sd">        This dictionary contains the name of the inner walls, their</span>
+<span class="sd">        orientation and tilt. Default is one cumulated inner wall.</span>
+<span class="sd">    ceiling_names : dict</span>
+<span class="sd">        This dictionary contains the name of the ceilings, their</span>
+<span class="sd">        orientation and tilt. Default is one cumulated ceiling.</span>
+<span class="sd">    floor_names : dict</span>
+<span class="sd">        This dictionary contains the name of the floors, their</span>
+<span class="sd">        orientation and tilt. Default is one cumulated floor.</span>
+<span class="sd">    est_living_area_factor : float</span>
+<span class="sd">        Estimation factor for calculation of number of heated floors</span>
+<span class="sd">    est_bottom_building_closure : float</span>
+<span class="sd">        Estimation factor to calculate ground floor area</span>
+<span class="sd">    est_upper_building_closure : float</span>
+<span class="sd">        Estimation factor to calculate attic area</span>
+<span class="sd">    est_factor_win_area : float</span>
+<span class="sd">        Estimation factor to calculate window area</span>
+<span class="sd">    est_factor_cellar_area : float</span>
+<span class="sd">        Estimation factor to calculate heated cellar area</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">parent</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">year_of_construction</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">number_of_floors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">height_of_floors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">net_leased_area</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">with_ahu</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">internal_gains_mode</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">residential_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">neighbour_buildings</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">attic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">cellar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">dormer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">construction_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor of SingleFamilyDwelling</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">SingleFamilyDwelling</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">parent</span><span class="p">,</span>
+            <span class="n">name</span><span class="p">,</span>
+            <span class="n">year_of_construction</span><span class="p">,</span>
+            <span class="n">net_leased_area</span><span class="p">,</span>
+            <span class="n">with_ahu</span><span class="p">,</span>
+            <span class="n">internal_gains_mode</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">residential_layout</span> <span class="o">=</span> <span class="n">residential_layout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">neighbour_buildings</span> <span class="o">=</span> <span class="n">neighbour_buildings</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attic</span> <span class="o">=</span> <span class="n">attic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cellar</span> <span class="o">=</span> <span class="n">cellar</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dormer</span> <span class="o">=</span> <span class="n">dormer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">construction_data</span> <span class="o">=</span> <span class="n">construction_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">number_of_floors</span> <span class="o">=</span> <span class="n">number_of_floors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height_of_floors</span> <span class="o">=</span> <span class="n">height_of_floors</span>
+
+        <span class="c1"># Parameters are default values for current calculation following IWU</span>
+
+        <span class="c1"># [area factor, usage type(has to be set)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">zone_area_factors</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;SingleDwelling&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Living&quot;</span><span class="p">]}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">outer_wall_names</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;Exterior Facade North&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+            <span class="s2">&quot;Exterior Facade East&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">],</span>
+            <span class="s2">&quot;Exterior Facade South&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">],</span>
+            <span class="s2">&quot;Exterior Facade West&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">270.0</span><span class="p">],</span>
+        <span class="p">}</span>
+        <span class="c1"># [tilt, orientation]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">roof_names</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Rooftop&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]}</span>  <span class="c1"># [0, -1]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ground_floor_names</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Ground Floor&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]}</span>  <span class="c1"># [0, -2]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">window_names</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;Window Facade North&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+            <span class="s2">&quot;Window Facade East&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">],</span>
+            <span class="s2">&quot;Window Facade South&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">],</span>
+            <span class="s2">&quot;Window Facade West&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">270.0</span><span class="p">],</span>
+        <span class="p">}</span>
+        <span class="c1"># [tilt, orientation]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">inner_wall_names</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;InnerWall&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ceiling_names</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Ceiling&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">floor_names</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Floor&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">est_living_area_factor</span> <span class="o">=</span> <span class="mf">0.75</span>  <span class="c1"># fW</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">est_bottom_building_closure</span> <span class="o">=</span> <span class="mf">1.33</span>  <span class="c1"># p_FB</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">est_upper_building_closure</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">est_factor_win_area</span> <span class="o">=</span> <span class="mf">0.2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">est_factor_cellar_area</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">nr_of_orientation</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outer_wall_names</span><span class="p">)</span>
+
+        <span class="c1"># estimated intermediate calculated values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_living_area_per_floor</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_heated_floors</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_heated_cellar</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_heated_attic</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_est_roof_area</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_est_ground_floor_area</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_est_win_area</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_est_outer_wall_area</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_est_cellar_wall_area</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_volume</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">est_factor_neighbour</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># n_Nachbar</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">est_extra_floor_area</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># q_Fa</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">neighbour_buildings</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_neighbour</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_extra_floor_area</span> <span class="o">=</span> <span class="mf">50.0</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">neighbour_buildings</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_neighbour</span> <span class="o">=</span> <span class="mf">1.0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_extra_floor_area</span> <span class="o">=</span> <span class="mf">30.0</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">neighbour_buildings</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_neighbour</span> <span class="o">=</span> <span class="mf">2.0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_extra_floor_area</span> <span class="o">=</span> <span class="mf">10.0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_est_facade_to_floor_area</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># p_Fa</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">residential_layout</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_facade_to_floor_area</span> <span class="o">=</span> <span class="mf">0.66</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">residential_layout</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_facade_to_floor_area</span> <span class="o">=</span> <span class="mf">0.8</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_heated_attic</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># f_TB_DG</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_est_area_per_floor</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># p_DA</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_est_area_per_roof</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># p_OG</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">attic</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_heated_attic</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_area_per_floor</span> <span class="o">=</span> <span class="mf">1.33</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_area_per_roof</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">attic</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_heated_attic</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_area_per_floor</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_area_per_roof</span> <span class="o">=</span> <span class="mf">1.33</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">attic</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_heated_attic</span> <span class="o">=</span> <span class="mf">0.5</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_area_per_floor</span> <span class="o">=</span> <span class="mf">0.75</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_area_per_roof</span> <span class="o">=</span> <span class="mf">0.67</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">attic</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_heated_attic</span> <span class="o">=</span> <span class="mf">1.0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_area_per_floor</span> <span class="o">=</span> <span class="mf">1.5</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_area_per_roof</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_heated_cellar</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># f_TB_KG</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellar</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_heated_cellar</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellar</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_heated_cellar</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellar</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_heated_cellar</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellar</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_heated_cellar</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_dormer</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dormer</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_dormer</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dormer</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_dormer</span> <span class="o">=</span> <span class="mf">1.3</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">with_ahu</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">temperature_profile</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="mi">7</span> <span class="o">*</span> <span class="p">[</span><span class="mf">293.15</span><span class="p">]</span> <span class="o">+</span> <span class="mi">12</span> <span class="o">*</span> <span class="p">[</span><span class="mf">295.15</span><span class="p">]</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="p">[</span><span class="mf">293.15</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="c1">#  according to :cite:`DeutschesInstitutfurNormung.2016`</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">min_relative_humidity_profile</span> <span class="o">=</span> <span class="mi">24</span> <span class="o">*</span> <span class="p">[</span><span class="mf">0.45</span><span class="p">]</span>
+            <span class="c1">#  according to :cite:`DeutschesInstitutfurNormung.2016b`  and</span>
+            <span class="c1"># :cite:`DeutschesInstitutfurNormung.2016`</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">max_relative_humidity_profile</span> <span class="o">=</span> <span class="mi">24</span> <span class="o">*</span> <span class="p">[</span><span class="mf">0.65</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">v_flow_profile</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="mi">7</span> <span class="o">*</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">12</span> <span class="o">*</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span>
+            <span class="p">)</span>  <span class="c1"># according to user  #</span>
+            <span class="c1"># profile in :cite:`DeutschesInstitutfurNormung.2016`</span>
+
+<div class="viewcode-block" id="SingleFamilyDwelling.generate_archetype">
+<a class="viewcode-back" href="../../../../../code/teaser.logic.archetypebuildings.bmvbs.html#teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling.SingleFamilyDwelling.generate_archetype">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_archetype</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates a SingleFamilyDwelling building.</span>
+
+<span class="sd">        With given values, this class generates a archetype building for</span>
+<span class="sd">        single family dwellings according to TEASER requirements</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># help area for the correct building area setting while using typeBldgs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zones</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">type_bldg_area</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">net_leased_area</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net_leased_area</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_heated_floors</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_heated_cellar</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_floors</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">est_living_area_factor</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_heated_attic</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_living_area_per_floor</span> <span class="o">=</span> <span class="n">type_bldg_area</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_heated_floors</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_est_ground_floor_area</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">est_bottom_building_closure</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_living_area_per_floor</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_est_roof_area</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">est_upper_building_closure</span>
+            <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_dormer</span>
+            <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_est_area_per_floor</span>
+            <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_living_area_per_floor</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_top_floor_area</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_est_area_per_roof</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_living_area_per_floor</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_est_roof_area</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_est_roof_area</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_top_floor_area</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_est_facade_area</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_est_facade_to_floor_area</span> <span class="o">*</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_living_area_per_floor</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_est_extra_floor_area</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_est_win_area</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">est_factor_win_area</span> <span class="o">*</span> <span class="n">type_bldg_area</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_est_cellar_wall_area</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">est_factor_cellar_area</span>
+            <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_est_factor_heated_cellar</span>
+            <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_est_facade_area</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_est_outer_wall_area</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_number_of_heated_floors</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_est_facade_area</span><span class="p">)</span>
+            <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_est_cellar_wall_area</span>
+            <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_est_win_area</span>
+        <span class="p">)</span>
+
+        <span class="c1"># self._est_factor_volume = type_bldg_area * 2.5</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">zone_area_factors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">zone</span> <span class="o">=</span> <span class="n">ThermalZone</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">type_bldg_area</span> <span class="o">*</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">use_cond</span> <span class="o">=</span> <span class="n">UseCond</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
+            <span class="n">use_cond</span><span class="o">.</span><span class="n">load_use_conditions</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">data_class</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+            <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span> <span class="o">=</span> <span class="n">use_cond</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">with_ahu</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">outer_wall_names</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1"># North and South</span>
+
+            <span class="k">if</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mf">180.0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">outer_area</span><span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_est_outer_wall_area</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr_of_orientation</span>
+                <span class="p">)</span>
+            <span class="c1"># East and West</span>
+            <span class="k">elif</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">90</span> <span class="ow">or</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">270</span><span class="p">:</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">outer_area</span><span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_est_outer_wall_area</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr_of_orientation</span>
+                <span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">zone</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+                <span class="c1"># create wall and set building elements</span>
+                <span class="n">outer_wall</span> <span class="o">=</span> <span class="n">OuterWall</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
+                <span class="n">outer_wall</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
+                    <span class="n">year</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">construction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">construction_data</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                    <span class="n">data_class</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">outer_wall</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+                <span class="n">outer_wall</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">outer_wall</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_names</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+            <span class="k">if</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">180</span><span class="p">:</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">window_area</span><span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_est_win_area</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr_of_orientation</span>
+
+            <span class="k">elif</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">90</span> <span class="ow">or</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">270</span><span class="p">:</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">window_area</span><span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_est_win_area</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr_of_orientation</span>
+
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            There is no real classification for windows, so this is a bit hard</span>
+<span class="sd">            code - will be fixed sometime</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">for</span> <span class="n">zone</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+                <span class="n">window</span> <span class="o">=</span> <span class="n">Window</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
+                <span class="n">construction</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="s2">&quot;Waermeschutzverglasung, dreifach&quot;</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">construction_data</span><span class="o">.</span><span class="n">is_kfw</span><span class="p">()</span>
+                    <span class="k">else</span> <span class="s2">&quot;Kunststofffenster, &quot;</span> <span class="s2">&quot;Isolierverglasung&quot;</span>
+                <span class="p">)</span>
+                <span class="n">window</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">construction</span><span class="o">=</span><span class="n">construction</span><span class="p">,</span>
+                    <span class="n">data_class</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">window</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+                <span class="n">window</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">window</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">roof_names</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">outer_area</span><span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_est_roof_area</span>
+
+            <span class="k">for</span> <span class="n">zone</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+                <span class="n">roof</span> <span class="o">=</span> <span class="n">Rooftop</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
+                <span class="n">roof</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
+                    <span class="n">year</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">construction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">construction_data</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                    <span class="n">data_class</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">roof</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+                <span class="n">roof</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">roof</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ground_floor_names</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">outer_area</span><span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_est_ground_floor_area</span>
+
+            <span class="k">for</span> <span class="n">zone</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+                <span class="n">ground_floor</span> <span class="o">=</span> <span class="n">GroundFloor</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
+                <span class="n">ground_floor</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
+                    <span class="n">year</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">construction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">construction_data</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                    <span class="n">data_class</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">ground_floor</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+                <span class="n">ground_floor</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">ground_floor</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inner_wall_names</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+            <span class="k">for</span> <span class="n">zone</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+                <span class="n">inner_wall</span> <span class="o">=</span> <span class="n">InnerWall</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
+                <span class="n">inner_wall</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
+                    <span class="n">year</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+                    <span class="n">construction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">construction_data</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                    <span class="n">data_class</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">inner_wall</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+                <span class="n">inner_wall</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">inner_wall</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="c1"># zone.inner_walls.append(inner_wall)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_floors</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ceiling_names</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+                <span class="k">for</span> <span class="n">zone</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+                    <span class="n">ceiling</span> <span class="o">=</span> <span class="n">Ceiling</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
+                    <span class="n">ceiling</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
+                        <span class="n">year</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+                        <span class="n">construction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">construction_data</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                        <span class="n">data_class</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="n">ceiling</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+                    <span class="n">ceiling</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">ceiling</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="c1"># zone.inner_walls.append(ceiling)</span>
+
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">floor_names</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+                <span class="k">for</span> <span class="n">zone</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+                    <span class="n">floor</span> <span class="o">=</span> <span class="n">Floor</span><span class="p">(</span><span class="n">zone</span><span class="p">)</span>
+                    <span class="n">floor</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
+                        <span class="n">year</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+                        <span class="n">construction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">construction_data</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                        <span class="n">data_class</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="n">floor</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+                    <span class="n">floor</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">floor</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="c1"># zone.inner_walls.append(floor)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">outer_area</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_outer_wall_area</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_area</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_window_area</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">zone</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">set_inner_wall_area</span><span class="p">()</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">set_volume_zone</span><span class="p">()</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">residential_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_residential_layout</span>
+
+    <span class="nd">@residential_layout</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">residential_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_residential_layout</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_residential_layout</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">neighbour_buildings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_neighbour_buildings</span>
+
+    <span class="nd">@neighbour_buildings</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">neighbour_buildings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_neighbour_buildings</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_neighbour_buildings</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">attic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attic</span>
+
+    <span class="nd">@attic</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">attic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_attic</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_attic</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cellar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cellar</span>
+
+    <span class="nd">@cellar</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cellar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cellar</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cellar</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dormer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dormer</span>
+
+    <span class="nd">@dormer</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dormer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dormer</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dormer</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construction_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_construction_data</span>
+    <span class="nd">@construction_data</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construction_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_construction_data</span> <span class="o">=</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">check_construction_data_setter_iwu</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

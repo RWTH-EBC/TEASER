@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser.examples.e11_export_besmod_models &mdash; TEASER 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=db26dd79" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            TEASER
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code/modules.html">teaser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">teaser.examples.e11_export_besmod_models</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for teaser.examples.e11_export_besmod_models</h1><div class="highlight"><pre>
+<span></span><span class="c1"># # Example 11: Export Modelica models for BESMod library using TEASER API</span>
+<span class="c1"># This module demonstrates how to export building models from a TEASER project</span>
+<span class="c1"># to ready-to-run simulation models for the Modelica BESMod library.</span>
+<span class="c1"># BESMod enables seamless integration with state-of-the-art energy systems,</span>
+<span class="c1"># such as heat pumps and photovoltaic systems. These systems can be utilized</span>
+<span class="c1"># to generate primary energy demand curves (e.g., for electricity or gas) or</span>
+<span class="c1"># to conduct in-depth analyses of building energy systems. In contrast,</span>
+<span class="c1"># AixLib focuses on ideal heat demand calculation, and IBPSA on</span>
+<span class="c1"># free floating temperature without an ideal heater.</span>
+<span class="c1"># You can execute this example using</span>
+<span class="c1"># [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">teaser.examples.e1_generate_archetype</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">e1</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">teaser.logic.utilities</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">utilities</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+
+<div class="viewcode-block" id="example_export_besmod">
+<a class="viewcode-back" href="../../../code/teaser.examples.html#teaser.examples.e11_export_besmod_models.example_export_besmod">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">example_export_besmod</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function demonstrates the export to Modelica library BESMod using</span>
+<span class="sd">    the API function of TEASER&quot;&quot;&quot;</span>
+
+    <span class="c1"># ## Standard export</span>
+    <span class="c1"># In e1_generate_archetype we created a Project with three archetype</span>
+    <span class="c1"># buildings to get this Project we rerun this example</span>
+
+    <span class="n">prj</span> <span class="o">=</span> <span class="n">e1</span><span class="o">.</span><span class="n">example_generate_archetype</span><span class="p">()</span>
+
+    <span class="c1"># Configure project settings to ensure compatibility with BESMod. The BESMod</span>
+    <span class="c1"># library uses the AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone model</span>
+    <span class="c1"># with 4 elements for the demand building model. Other numbers of elements are possible,</span>
+    <span class="c1"># but compatability with ARoof for PV and AFloor for UFH systems must be checked first.</span>
+    <span class="c1"># Set these parameters in the project:</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">used_library_calc</span> <span class="o">=</span> <span class="s1">&#39;AixLib&#39;</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">number_of_elements_calc</span> <span class="o">=</span> <span class="mi">4</span>
+
+    <span class="c1"># BESMod allows building models to be included in predefined example energy systems:</span>
+    <span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;TEASERHeatLoadCalculation&quot;</span><span class="p">,</span>  <span class="c1"># Ideal electric heater for heat load calculations</span>
+        <span class="s2">&quot;HeatPumpMonoenergetic&quot;</span><span class="p">,</span>  <span class="c1"># Heat pump with radiators, buffer and DHW storage, and PV</span>
+        <span class="s2">&quot;GasBoilerBuildingOnly&quot;</span>  <span class="c1"># Gas boiler with radiators</span>
+    <span class="p">]</span>
+
+    <span class="c1"># For the hydraulic systems, you have to specify a nominal supply temperature</span>
+    <span class="c1"># for heat transfer, e.g. in radiators.</span>
+    <span class="c1"># Multiple options are available:</span>
+
+    <span class="c1"># Option 1: Set a single value for all buildings and zones.</span>
+    <span class="n">THydSup_nominal</span> <span class="o">=</span> <span class="mi">55</span> <span class="o">+</span> <span class="mf">273.15</span>
+
+    <span class="c1"># Option 2: Set values for each building or thermal zone.</span>
+    <span class="n">THydSup_nominal</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ResidentialBuilding&quot;</span><span class="p">:</span> <span class="mf">328.15</span><span class="p">,</span>
+                       <span class="s2">&quot;OfficeBuilding&quot;</span><span class="p">:</span> <span class="mf">328.15</span><span class="p">,</span>
+                       <span class="s2">&quot;InstituteBuilding&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Office&quot;</span><span class="p">:</span> <span class="mf">343.15</span><span class="p">,</span>
+                                             <span class="s2">&quot;Floor&quot;</span><span class="p">:</span> <span class="mf">343.15</span><span class="p">,</span>
+                                             <span class="s2">&quot;Storage&quot;</span><span class="p">:</span> <span class="mf">343.15</span><span class="p">,</span>
+                                             <span class="s2">&quot;Meeting&quot;</span><span class="p">:</span> <span class="mf">343.15</span><span class="p">,</span>
+                                             <span class="s2">&quot;Restroom&quot;</span><span class="p">:</span> <span class="mf">343.15</span><span class="p">,</span>
+                                             <span class="s2">&quot;ICT&quot;</span><span class="p">:</span> <span class="mf">343.15</span><span class="p">,</span>
+                                             <span class="s2">&quot;Laboratory&quot;</span><span class="p">:</span> <span class="mf">328.15</span><span class="p">},</span>
+                       <span class="s2">&quot;InstituteBuildingMoisture&quot;</span><span class="p">:</span> <span class="mf">343.15</span><span class="p">,</span>
+                       <span class="s2">&quot;ResidentialBuildingTabula&quot;</span><span class="p">:</span> <span class="mf">328.15</span><span class="p">,</span>
+                       <span class="s2">&quot;ResidentialBuildingTabulaMulti&quot;</span><span class="p">:</span> <span class="mf">328.15</span><span class="p">}</span>
+
+    <span class="c1"># Option 3: Specify values based on construction year.</span>
+    <span class="c1"># Here, the value of the next higher specified year is set to the building.</span>
+    <span class="c1"># The classification here is taken from:</span>
+    <span class="c1"># https://www.ffe.de/projekte/waermepumpen-fahrplan-finanzielle-kipppunkte-zur-modernisierung-mit-waermepumpen-im-wohngebaeudebestand/</span>
+    <span class="n">THydSup_nominal</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="mi">1950</span><span class="p">:</span> <span class="mi">90</span> <span class="o">+</span> <span class="mf">273.15</span><span class="p">,</span>
+        <span class="mi">1980</span><span class="p">:</span> <span class="mi">70</span> <span class="o">+</span> <span class="mf">273.15</span><span class="p">,</span>
+        <span class="mi">2010</span><span class="p">:</span> <span class="mi">55</span> <span class="o">+</span> <span class="mf">273.15</span><span class="p">,</span>
+        <span class="mi">2024</span><span class="p">:</span> <span class="mi">35</span> <span class="o">+</span> <span class="mf">273.15</span>
+    <span class="p">}</span>
+
+    <span class="c1"># In the examples, the parameters for BESMod.Systems.UserProfiles.TEASERProfiles are configured,</span>
+    <span class="c1"># including internal gains and heating profiles for each zone.</span>
+    <span class="c1"># BESMod requires 24-hour heating profiles, which are used</span>
+    <span class="c1"># to define the parameters of the `setBakTSetZone` Pulse block.</span>
+    <span class="c1"># By default, the TEASER profiles are applied, but these can be customized if needed.</span>
+
+    <span class="c1"># Additionally, location-specific parameters must be set, which can be achieved using the following function.</span>
+    <span class="c1"># The default values provided here correspond to Mannheim.</span>
+    <span class="n">weather_file_path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="s2">&quot;data&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;input&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;inputdata&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;weatherdata&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos&quot;</span><span class="p">))</span>
+
+    <span class="n">prj</span><span class="o">.</span><span class="n">set_location_parameters</span><span class="p">(</span><span class="n">t_outside</span><span class="o">=</span><span class="mf">262.65</span><span class="p">,</span>
+                                <span class="n">t_ground</span><span class="o">=</span><span class="mf">286.15</span><span class="p">,</span>
+                                <span class="n">weather_file_path</span><span class="o">=</span><span class="n">weather_file_path</span><span class="p">,</span>
+                                <span class="n">calc_all_buildings</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># To make sure the parameters are calculated correctly we recommend to</span>
+    <span class="c1"># run prj.calc_all_buildings() function which is here already done in the set_location_parameters function.</span>
+
+    <span class="c1"># Export all buildings to BESMod and include them in predefined example systems.</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">prj</span><span class="o">.</span><span class="n">export_besmod</span><span class="p">(</span>
+        <span class="n">THydSup_nominal</span><span class="o">=</span><span class="n">THydSup_nominal</span><span class="p">,</span>
+        <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">examples</span><span class="o">=</span><span class="n">examples</span>
+    <span class="p">)</span>
+
+    <span class="c1"># ## Partial retrofit export</span>
+    <span class="c1"># The partial retrofit option of the energy system in BESMod can also be utilized.</span>
+    <span class="c1"># For more information on this see BESMod.UsersGuide.GettingStarted.Parameterization.</span>
+    <span class="c1"># To enable this here, the nominal heat flow of each zone in the building must be extracted prior to the retrofit.</span>
+    <span class="n">QBuiOld_flow_design</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="p">{</span>
+            <span class="n">tz</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">tz</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">heat_load</span> <span class="k">for</span> <span class="n">tz</span> <span class="ow">in</span> <span class="n">bldg</span><span class="o">.</span><span class="n">thermal_zones</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Retrofit project buildings and recalculate parameters.</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ArchetypeExample_partial_retrofit&quot;</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">retrofit_all_buildings</span><span class="p">(</span>
+        <span class="n">year_of_retrofit</span><span class="o">=</span><span class="mi">2015</span><span class="p">,</span>
+        <span class="n">type_of_retrofit</span><span class="o">=</span><span class="s2">&quot;adv_retrofit&quot;</span><span class="p">,</span>
+        <span class="n">window_type</span><span class="o">=</span><span class="s1">&#39;Alu- oder Stahlfenster, Isolierverglasung&#39;</span><span class="p">,</span>
+        <span class="n">material</span><span class="o">=</span><span class="s1">&#39;EPS_perimeter_insulation_top_layer&#39;</span>
+    <span class="p">)</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">calc_all_buildings</span><span class="p">()</span>
+
+    <span class="c1"># By default, radiator transfer systems are not retrofitted when the</span>
+    <span class="c1"># QBuiOld_flow_design parameter is provided and differs from the new nominal heat flow.</span>
+    <span class="c1"># Additionally, new THydSup_nominal temperatures can be specified alongside</span>
+    <span class="c1"># THydSupOld_design values, which are used for radiator sizing but not for control settings.</span>
+
+    <span class="n">path</span> <span class="o">=</span> <span class="n">prj</span><span class="o">.</span><span class="n">export_besmod</span><span class="p">(</span>
+        <span class="n">THydSup_nominal</span><span class="o">=</span><span class="n">THydSup_nominal</span><span class="p">,</span>
+        <span class="n">QBuiOld_flow_design</span><span class="o">=</span><span class="n">QBuiOld_flow_design</span><span class="p">,</span>
+        <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">examples</span><span class="o">=</span><span class="n">examples</span>
+    <span class="p">)</span>
+
+    <span class="c1"># ## Custom export</span>
+    <span class="c1"># Additionally, we have the flexibility to define custom templates for including buildings in specific setups.</span>
+    <span class="c1"># For instance, a custom template is defined here to include the building in the</span>
+    <span class="c1"># ModelicaConferencePaper example from BESMod, which features an integrated battery system.</span>
+
+    <span class="c1"># Custom template</span>
+    <span class="c1"># ```</span>
+    <span class="c1"># &lt; %namespace file = &quot;/modelica_language/&quot; import=&quot;get_list&quot; / &gt;</span>
+    <span class="c1"># within ${bldg.parent.name}.${bldg.name};</span>
+    <span class="c1"># model ModelicaConferencePaper${bldg.name}</span>
+    <span class="c1">#     extends BESMod.Examples.ModelicaConferencePaper.PartialModelicaConferenceUseCase(</span>
+    <span class="c1">#       redeclare ${bldg.name} building,</span>
+    <span class="c1">#       redeclare BESMod.Systems.UserProfiles.TEASERProfiles</span>
+    <span class="c1">#       userProfiles(fileNameIntGains=Modelica.Utilities.Files.loadResource(</span>
+    <span class="c1">#               &quot;modelica://${bldg.parent.name}/${bldg.name}/InternalGains_${bldg.name}.txt&quot;),</span>
+    <span class="c1">#                setBakTSetZone(amplitude=${get_list(setBakTSetZone_amplitude)},</span>
+    <span class="c1">#                               width =${get_list(setBakTSetZone_width)},</span>
+    <span class="c1">#                               startTime =${get_list(setBakTSetZone_startTime)})),</span>
+    <span class="c1">#     systemParameters(nZones=${len(bldg.thermal_zones)},</span>
+    <span class="c1">#                      QBui_flow_nominal = building.QRec_flow_nominal,</span>
+    <span class="c1">#                      TOda_nominal =${TOda_nominal},</span>
+    <span class="c1">#                      TSetZone_nominal =${get_list(TSetZone_nominal)},</span>
+    <span class="c1">#                      THydSup_nominal =${THydSup_nominal},</span>
+    <span class="c1">#                      QBuiOld_flow_design =${QBuiOld_flow_design},</span>
+    <span class="c1">#                      THydSupOld_design =${THydSupOld_design},</span>
+    <span class="c1">#                      filNamWea = Modelica.Utilities.Files.loadResource(</span>
+    <span class="c1">#                           &quot;modelica://${bldg.parent.name}/Resources/${bldg.parent.weather_file_name}&quot;)));</span>
+    <span class="c1">#</span>
+    <span class="c1">#    extends Modelica.Icons.Example;</span>
+    <span class="c1">#</span>
+    <span class="c1">#     annotation(experiment(StopTime=172800,</span>
+    <span class="c1">#                           Interval=600,</span>
+    <span class="c1">#                           Tolerance=1e-06),</span>
+    <span class="c1">#                __Dymola_Commands(file=</span>
+    <span class="c1">#                                  &quot;Resources/Scripts/Dymola/${bldg.name}/ModelicaConferencePaper${bldg.name}.mos&quot;</span>
+    <span class="c1">#                                  &quot;Simulate and plot&quot;));</span>
+    <span class="c1"># end</span>
+    <span class="c1"># ModelicaConferencePaper${bldg.name};</span>
+    <span class="c1"># ```</span>
+
+    <span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ArchetypeExample_custom&quot;</span>
+
+    <span class="n">custom_template_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&quot;examplefiles&quot;</span><span class="p">,</span> <span class="s2">&quot;custom_besmod_templates&quot;</span>
+    <span class="p">)</span>
+    <span class="n">custom_example_template</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ModelicaConferencePaper&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">custom_template_path</span><span class="p">,</span> <span class="s2">&quot;custom_template.txt&quot;</span><span class="p">)}</span>
+
+    <span class="c1"># The template also includes a .mos script as part of its annotation.</span>
+    <span class="c1"># By default, the provided examples export a basic &quot;simulate and plot&quot; script,</span>
+    <span class="c1"># which is incorporated into their annotation, as shown in the custom example.</span>
+    <span class="c1"># Additionally, you have the flexibility to modify the template for existing examples</span>
+    <span class="c1"># and define custom scripts for your tailored examples.</span>
+
+    <span class="n">custom_script</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;HeatPumpMonoenergetic&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">custom_template_path</span><span class="p">,</span> <span class="s2">&quot;custom_script_hp_mono.txt&quot;</span><span class="p">),</span>
+                     <span class="s2">&quot;ModelicaConferencePaper&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">custom_template_path</span><span class="p">,</span> <span class="s2">&quot;custom_script.txt&quot;</span><span class="p">)}</span>
+
+    <span class="n">path</span> <span class="o">=</span> <span class="n">prj</span><span class="o">.</span><span class="n">export_besmod</span><span class="p">(</span>
+        <span class="n">THydSup_nominal</span><span class="o">=</span><span class="n">THydSup_nominal</span><span class="p">,</span>
+        <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">examples</span><span class="o">=</span><span class="n">examples</span><span class="p">,</span>
+        <span class="n">custom_examples</span><span class="o">=</span><span class="n">custom_example_template</span><span class="p">,</span>
+        <span class="n">custom_script</span><span class="o">=</span><span class="n">custom_script</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">path</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">example_export_besmod</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 11: That&#39;s it! :)&quot;</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

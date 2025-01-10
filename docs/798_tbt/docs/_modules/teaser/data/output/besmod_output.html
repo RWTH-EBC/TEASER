@@ -1,0 +1,579 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser.data.output.besmod_output &mdash; TEASER 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=db26dd79" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            TEASER
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code/modules.html">teaser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">teaser.data.output.besmod_output</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for teaser.data.output.besmod_output</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;This module contains function for BESMod model generation&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mako.template</span><span class="w"> </span><span class="kn">import</span> <span class="n">Template</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mako.lookup</span><span class="w"> </span><span class="kn">import</span> <span class="n">TemplateLookup</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">teaser.logic.utilities</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">utilities</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">teaser.data.output.modelica_output</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">modelica_output</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.building</span><span class="w"> </span><span class="kn">import</span> <span class="n">Building</span>
+
+
+<div class="viewcode-block" id="export_besmod">
+<a class="viewcode-back" href="../../../../code/teaser.data.output.html#teaser.data.output.besmod_output.export_besmod">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">export_besmod</span><span class="p">(</span>
+        <span class="n">buildings</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Building</span><span class="p">],</span> <span class="n">Building</span><span class="p">],</span>
+        <span class="n">prj</span><span class="p">:</span> <span class="s1">&#39;Project&#39;</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">examples</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">THydSup_nominal</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">QBuiOld_flow_design</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">THydSupOld_design</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">custom_examples</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">custom_script</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Export building models for BESMod simulations.</span>
+
+<span class="sd">    This function generates BESMod.Systems.Demand.Building.TEASERThermalZone models</span>
+<span class="sd">    for one or more TEASER buildings. It also allows exporting examples from</span>
+<span class="sd">    BESMod.Examples, including the building models.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    buildings : Union[List[Building], Building]</span>
+<span class="sd">        TEASER Building instances to export as BESMod models. Can be a single</span>
+<span class="sd">        Building or a list of Buildings.</span>
+<span class="sd">    prj : Project</span>
+<span class="sd">        TEASER Project instance containing project metadata such as library</span>
+<span class="sd">        versions and weather file paths.</span>
+<span class="sd">    examples : Optional[List[str]]</span>
+<span class="sd">        Names of BESMod examples to export alongside the building models.</span>
+<span class="sd">        Supported Examples: &quot;TEASERHeatLoadCalculation&quot;, &quot;HeatPumpMonoenergetic&quot;, and &quot;GasBoilerBuildingOnly&quot;.</span>
+<span class="sd">    path : Optional[str]</span>
+<span class="sd">        Alternative output path for storing the exported files. If None, the default TEASER output path is used.</span>
+<span class="sd">    THydSup_nominal : Optional[Union[float, Dict[str, float]]]</span>
+<span class="sd">        Nominal supply temperature(s) for the hydraulic system. Required for</span>
+<span class="sd">        certain examples (e.g., HeatPumpMonoenergetic, GasBoilerBuildingOnly).</span>
+<span class="sd">        See docstring of teaser.data.output.besmod_output.convert_input() for further information.</span>
+<span class="sd">    QBuiOld_flow_design : Optional[Dict[str, Dict[str, float]]]</span>
+<span class="sd">        For partially retrofitted systems specify the old nominal heat flow</span>
+<span class="sd">        of all zones in the Buildings in a nested dictionary with</span>
+<span class="sd">        the building names and in a level below the zone names as keys.</span>
+<span class="sd">        By default, only the radiator transfer system is not retrofitted in BESMod.</span>
+<span class="sd">    THydSupOld_design : Optional[Union[float, Dict[str, float]]]</span>
+<span class="sd">        Design supply temperatures for old, non-retrofitted hydraulic systems.</span>
+<span class="sd">    custom_examples: Optional[Dict[str, str]]</span>
+<span class="sd">        Specify custom examples with a dictionary containing the example name as the key and</span>
+<span class="sd">        the path to the corresponding custom mako template as the value.</span>
+<span class="sd">    custom_script: Optional[Dict[str, str]]</span>
+<span class="sd">        Specify custom .mos scripts for the existing and custom examples with a dictionary</span>
+<span class="sd">        containing the example name as the key and the path to the corresponding custom mako template as the value.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If given example is not supported.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If `THydSup_nominal` is not provided for examples requiring it.</span>
+<span class="sd">    AssertionError</span>
+<span class="sd">        If the used library for calculations is not AixLib.</span>
+<span class="sd">    NotImplementedError</span>
+<span class="sd">        If a building uses a thermal zone model other than the four-element model.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The function uses Mako templates for generating Modelica models.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">prj</span><span class="o">.</span><span class="n">used_library_calc</span> <span class="o">!=</span> <span class="s2">&quot;AixLib&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;BESMod export is only implemented for AixLib calculation.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">examples</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">examples</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">examples</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">examples</span> <span class="o">=</span> <span class="p">[</span><span class="n">examples</span><span class="p">]</span>
+
+    <span class="n">supported_examples</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;TEASERHeatLoadCalculation&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;HeatPumpMonoenergetic&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;GasBoilerBuildingOnly&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">exp</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">exp</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">supported_examples</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Example </span><span class="si">{</span><span class="n">exp</span><span class="si">}</span><span class="s2"> is not supported. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Supported examples are </span><span class="si">{</span><span class="n">supported_examples</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">THydSup_nominal</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span>
+            <span class="n">example</span> <span class="ow">in</span> <span class="n">examples</span> <span class="k">for</span> <span class="n">example</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;HeatPumpMonoenergetic&quot;</span><span class="p">,</span> <span class="s2">&quot;GasBoilerBuildingOnly&quot;</span><span class="p">]</span>
+    <span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Examples &#39;HeatPumpMonoenergetic&#39; and &#39;GasBoilerBuildingOnly&#39; &quot;</span>
+            <span class="s2">&quot;require the `THydSup_nominal` parameter.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">t_hyd_sup_nominal_bldg</span> <span class="o">=</span> <span class="n">convert_input</span><span class="p">(</span><span class="n">THydSup_nominal</span><span class="p">,</span> <span class="n">buildings</span><span class="p">)</span>
+    <span class="n">t_hyd_sup_old_design_bldg</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">convert_input</span><span class="p">(</span><span class="n">THydSupOld_design</span><span class="p">,</span> <span class="n">buildings</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">THydSupOld_design</span>
+        <span class="k">else</span> <span class="p">{</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="s2">&quot;systemParameters.THydSup_nominal&quot;</span> <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="n">buildings</span><span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">QBuiOld_flow_design</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">QBuiOld_flow_design</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="s2">&quot;systemParameters.QBui_flow_nominal&quot;</span> <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="n">buildings</span>
+        <span class="p">}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">QBuiOld_flow_design</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">_convert_to_zone_array</span><span class="p">(</span><span class="n">bldg</span><span class="p">,</span> <span class="n">QBuiOld_flow_design</span><span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="n">buildings</span>
+        <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">custom_script</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">custom_script</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="n">dir_resources</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;Resources&quot;</span><span class="p">))</span>
+    <span class="n">dir_scripts</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_resources</span><span class="p">,</span> <span class="s2">&quot;Scripts&quot;</span><span class="p">))</span>
+    <span class="n">dir_dymola</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_scripts</span><span class="p">,</span> <span class="s2">&quot;Dymola&quot;</span><span class="p">))</span>
+    <span class="n">template_path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span><span class="s2">&quot;data/output/modelicatemplate&quot;</span><span class="p">)</span>
+    <span class="n">lookup</span> <span class="o">=</span> <span class="n">TemplateLookup</span><span class="p">(</span><span class="n">directories</span><span class="o">=</span><span class="p">[</span><span class="n">template_path</span><span class="p">])</span>
+
+    <span class="n">zone_template_4</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span>
+        <span class="n">filename</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">template_path</span><span class="p">,</span> <span class="s2">&quot;AixLib/AixLib_ThermalZoneRecord_FourElement&quot;</span><span class="p">),</span>
+        <span class="n">lookup</span><span class="o">=</span><span class="n">lookup</span><span class="p">)</span>
+    <span class="n">building_template</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span>
+        <span class="n">filename</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">template_path</span><span class="p">,</span> <span class="s2">&quot;BESMod/Building&quot;</span><span class="p">),</span>
+        <span class="n">lookup</span><span class="o">=</span><span class="n">lookup</span><span class="p">)</span>
+
+    <span class="n">uses</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;Modelica(version=&quot;&#39;</span> <span class="o">+</span> <span class="n">prj</span><span class="o">.</span><span class="n">modelica_info</span><span class="o">.</span><span class="n">version</span> <span class="o">+</span> <span class="s1">&#39;&quot;)&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;AixLib(version=&quot;&#39;</span> <span class="o">+</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">library_attr</span><span class="o">.</span><span class="n">version</span> <span class="o">+</span> <span class="s1">&#39;&quot;)&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;BESMod(version=&quot;&#39;</span> <span class="o">+</span> <span class="n">prj</span><span class="o">.</span><span class="n">buildings</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">library_attr</span><span class="o">.</span><span class="n">besmod_version</span> <span class="o">+</span> <span class="s1">&#39;&quot;)&#39;</span><span class="p">]</span>
+    <span class="n">modelica_output</span><span class="o">.</span><span class="n">create_package</span><span class="p">(</span>
+        <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">prj</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+        <span class="n">uses</span><span class="o">=</span><span class="n">uses</span><span class="p">)</span>
+    <span class="n">modelica_output</span><span class="o">.</span><span class="n">create_package_order</span><span class="p">(</span>
+        <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
+        <span class="n">package_list</span><span class="o">=</span><span class="n">buildings</span><span class="p">)</span>
+    <span class="n">modelica_output</span><span class="o">.</span><span class="n">copy_weather_data</span><span class="p">(</span><span class="n">prj</span><span class="o">.</span><span class="n">weather_file_path</span><span class="p">,</span> <span class="n">dir_resources</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">buildings</span><span class="p">):</span>
+        <span class="n">bldg</span><span class="o">.</span><span class="n">bldg_height</span> <span class="o">=</span> <span class="n">bldg</span><span class="o">.</span><span class="n">number_of_floors</span> <span class="o">*</span> <span class="n">bldg</span><span class="o">.</span><span class="n">height_of_floors</span>
+        <span class="n">start_time_zones</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">width_zones</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">amplitude_zones</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">t_set_zone_nominal</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">tz</span> <span class="ow">in</span> <span class="n">bldg</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+            <span class="n">heating_profile</span> <span class="o">=</span> <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">heating_profile</span>
+            <span class="n">t_set_nominal</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">amplitude</span> <span class="o">=</span> <span class="n">_convert_heating_profile</span><span class="p">(</span><span class="n">heating_profile</span><span class="p">)</span>
+            <span class="n">t_set_zone_nominal</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_set_nominal</span><span class="p">)</span>
+            <span class="n">amplitude_zones</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">amplitude</span><span class="p">)</span>
+            <span class="n">start_time_zones</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">start_time</span><span class="p">)</span>
+            <span class="n">width_zones</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
+
+        <span class="n">bldg_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">bldg_path</span><span class="p">)</span>
+        <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bldg_path</span><span class="p">,</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_DataBase&quot;</span><span class="p">))</span>
+        <span class="n">bldg</span><span class="o">.</span><span class="n">library_attr</span><span class="o">.</span><span class="n">modelica_gains_boundary</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">bldg_path</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bldg_path</span><span class="p">,</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.mo&quot;</span><span class="p">)),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out_file</span><span class="p">:</span>
+            <span class="n">out_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">building_template</span><span class="o">.</span><span class="n">render_unicode</span><span class="p">(</span>
+                <span class="n">bldg</span><span class="o">=</span><span class="n">bldg</span><span class="p">))</span>
+            <span class="n">out_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">write_example_mo</span><span class="p">(</span><span class="n">example_template</span><span class="p">,</span> <span class="n">example</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bldg_path</span><span class="p">,</span> <span class="n">example</span> <span class="o">+</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.mo&quot;</span><span class="p">)),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">model_file</span><span class="p">:</span>
+                <span class="n">model_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">example_template</span><span class="o">.</span><span class="n">render_unicode</span><span class="p">(</span>
+                    <span class="n">bldg</span><span class="o">=</span><span class="n">bldg</span><span class="p">,</span>
+                    <span class="n">project</span><span class="o">=</span><span class="n">prj</span><span class="p">,</span>
+                    <span class="n">TOda_nominal</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">t_outside</span><span class="p">,</span>
+                    <span class="n">THydSup_nominal</span><span class="o">=</span><span class="n">t_hyd_sup_nominal_bldg</span><span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">],</span>
+                    <span class="n">TSetZone_nominal</span><span class="o">=</span><span class="n">t_set_zone_nominal</span><span class="p">,</span>
+                    <span class="n">QBuiOld_flow_design</span><span class="o">=</span><span class="n">QBuiOld_flow_design</span><span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">],</span>
+                    <span class="n">THydSupOld_design</span><span class="o">=</span><span class="n">t_hyd_sup_old_design_bldg</span><span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">],</span>
+                    <span class="n">setBakTSetZone_amplitude</span><span class="o">=</span><span class="n">amplitude_zones</span><span class="p">,</span>
+                    <span class="n">setBakTSetZone_startTime</span><span class="o">=</span><span class="n">start_time_zones</span><span class="p">,</span>
+                    <span class="n">setBakTSetZone_width</span><span class="o">=</span><span class="n">width_zones</span><span class="p">))</span>
+                <span class="n">model_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">exp</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
+            <span class="n">exp_template</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span>
+                <span class="n">filename</span><span class="o">=</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+                    <span class="s2">&quot;data/output/modelicatemplate/BESMod/Example_&quot;</span> <span class="o">+</span> <span class="n">exp</span><span class="p">),</span>
+                <span class="n">lookup</span><span class="o">=</span><span class="n">lookup</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">exp</span> <span class="ow">in</span> <span class="n">custom_script</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">example_sim_plot_script</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span>
+                    <span class="n">filename</span><span class="o">=</span><span class="n">custom_script</span><span class="p">[</span><span class="n">exp</span><span class="p">],</span>
+                    <span class="n">lookup</span><span class="o">=</span><span class="n">lookup</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">example_sim_plot_script</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span>
+                    <span class="n">filename</span><span class="o">=</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+                        <span class="s2">&quot;data/output/modelicatemplate/BESMod/Script_&quot;</span> <span class="o">+</span> <span class="n">exp</span><span class="p">),</span>
+                    <span class="n">lookup</span><span class="o">=</span><span class="n">lookup</span><span class="p">)</span>
+            <span class="n">_help_example_script</span><span class="p">(</span><span class="n">bldg</span><span class="p">,</span> <span class="n">dir_dymola</span><span class="p">,</span> <span class="n">example_sim_plot_script</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+            <span class="n">write_example_mo</span><span class="p">(</span><span class="n">exp_template</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+        <span class="n">bldg_package</span> <span class="o">=</span> <span class="p">[</span><span class="n">exp</span> <span class="o">+</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">exp</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">custom_examples</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">exp</span><span class="p">,</span> <span class="n">c_path</span> <span class="ow">in</span> <span class="n">custom_examples</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">bldg_package</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">exp</span> <span class="o">+</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="n">exp_template</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span>
+                    <span class="n">filename</span><span class="o">=</span><span class="n">c_path</span><span class="p">,</span>
+                    <span class="n">lookup</span><span class="o">=</span><span class="n">lookup</span><span class="p">)</span>
+                <span class="n">write_example_mo</span><span class="p">(</span><span class="n">exp_template</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">exp</span> <span class="ow">in</span> <span class="n">custom_script</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">example_sim_plot_script</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span>
+                        <span class="n">filename</span><span class="o">=</span><span class="n">custom_script</span><span class="p">[</span><span class="n">exp</span><span class="p">],</span>
+                        <span class="n">lookup</span><span class="o">=</span><span class="n">lookup</span><span class="p">)</span>
+                    <span class="n">_help_example_script</span><span class="p">(</span><span class="n">bldg</span><span class="p">,</span> <span class="n">dir_dymola</span><span class="p">,</span> <span class="n">example_sim_plot_script</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="n">bldg_package</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_DataBase&quot;</span><span class="p">)</span>
+        <span class="n">modelica_output</span><span class="o">.</span><span class="n">create_package</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">bldg_path</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">within</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">modelica_output</span><span class="o">.</span><span class="n">create_package_order</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">bldg_path</span><span class="p">,</span>
+            <span class="n">package_list</span><span class="o">=</span><span class="p">[</span><span class="n">bldg</span><span class="p">],</span>
+            <span class="n">extra</span><span class="o">=</span><span class="n">bldg_package</span><span class="p">)</span>
+
+        <span class="n">zone_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bldg_path</span><span class="p">,</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_DataBase&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">zone</span> <span class="ow">in</span> <span class="n">bldg</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
+            <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">with_heating</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="n">zone_path</span><span class="p">,</span>
+                    <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">zone</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;.mo&#39;</span><span class="p">)),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out_file</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;FourElement&quot;</span><span class="p">:</span>
+                    <span class="n">out_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">zone_template_4</span><span class="o">.</span><span class="n">render_unicode</span><span class="p">(</span><span class="n">zone</span><span class="o">=</span><span class="n">zone</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;BESMod export is only implemented for four elements.&quot;</span><span class="p">)</span>
+                <span class="n">out_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="n">modelica_output</span><span class="o">.</span><span class="n">create_package</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">zone_path</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_DataBase&#39;</span><span class="p">,</span>
+            <span class="n">within</span><span class="o">=</span><span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">modelica_output</span><span class="o">.</span><span class="n">create_package_order</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">zone_path</span><span class="p">,</span>
+            <span class="n">package_list</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">,</span>
+            <span class="n">addition</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exports can be found here:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="convert_input">
+<a class="viewcode-back" href="../../../../code/teaser.data.output.html#teaser.data.output.besmod_output.convert_input">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">convert_input</span><span class="p">(</span><span class="n">building_zones_input</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]]],</span>
+                  <span class="n">buildings</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Building</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert input values for BESMod zone specific parameters to a dictionary.</span>
+
+<span class="sd">    Supports single values, dictionaries keyed by construction year, or</span>
+<span class="sd">    dictionaries keyed by building names.</span>
+<span class="sd">    If single values are given then all buildings and zones get this values set.</span>
+<span class="sd">    If a dictionary keyed by construction year is given then all zones of a building get the</span>
+<span class="sd">    value set of the next higher year corresponding to the construction year of the building.</span>
+<span class="sd">    If a dictionary keyed by building name is given the value must be a single value for all zones</span>
+<span class="sd">    or another dictionary specifying for each zone name a value.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    building_zones_input : Union[float, Dict[Union[int, str], Union[float, Dict[str, float]]]]</span>
+<span class="sd">        Input value(s) for BESMod parameters. Can be a single value, a dictionary keyed by construction year,</span>
+<span class="sd">        or a dictionary keyed by building name.</span>
+<span class="sd">        Example:</span>
+<span class="sd">        - Single value: 328.15</span>
+<span class="sd">        - Dictionary keyed by construction year: {1970: 348.15, 1990: 328.15}</span>
+<span class="sd">        - Dictionary keyed by building name: {</span>
+<span class="sd">            &quot;Building1&quot;: 328.15,</span>
+<span class="sd">            &quot;Building2&quot;: {</span>
+<span class="sd">                &quot;Zone1&quot;: 328.15,</span>
+<span class="sd">                &quot;Zone2&quot;: 308.15</span>
+<span class="sd">            }</span>
+<span class="sd">        }</span>
+<span class="sd">    buildings : List[Building]</span>
+<span class="sd">        List of TEASER Building instances.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Dict[str, str]</span>
+<span class="sd">        Dictionary mapping building names to BESMod parameter input strings.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If the input dictionary has invalid values.</span>
+<span class="sd">    KeyError</span>
+<span class="sd">        If the input dictionary is missing required keys.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bldg_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="n">buildings</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">building_zones_input</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;fill(</span><span class="si">{</span><span class="n">building_zones_input</span><span class="si">}</span><span class="s2">,systemParameters.nZones)&quot;</span> <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="n">buildings</span><span class="p">}</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">building_zones_input</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">t_hyd_sup_nominal_bldg</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">building_zones_input</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="n">buildings</span><span class="p">:</span>
+                <span class="n">temperature</span> <span class="o">=</span> <span class="n">_get_next_higher_year_value</span><span class="p">(</span><span class="n">building_zones_input</span><span class="p">,</span> <span class="n">bldg</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">)</span>
+                <span class="n">t_hyd_sup_nominal_bldg</span><span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;fill(</span><span class="si">{</span><span class="n">temperature</span><span class="si">}</span><span class="s2">,systemParameters.nZones)&quot;</span>
+        <span class="k">elif</span> <span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">building_zones_input</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">bldg_names</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="n">buildings</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">building_zones_input</span><span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+                    <span class="n">t_hyd_sup_nominal_bldg</span><span class="p">[</span>
+                        <span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;fill(</span><span class="si">{</span><span class="n">building_zones_input</span><span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="si">}</span><span class="s2">,systemParameters.nZones)&quot;</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">building_zones_input</span><span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="n">t_hyd_sup_nominal_bldg</span><span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">_convert_to_zone_array</span><span class="p">(</span><span class="n">bldg</span><span class="p">,</span> <span class="n">building_zones_input</span><span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;If THydSup_nominal is specified for all buildings in a dictionary &quot;</span>
+                                     <span class="s2">&quot;the values must be either a single value for all thermal zones or &quot;</span>
+                                     <span class="s2">&quot;a dict with all building.thermal_zones.name as keys.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;If THydSup_nominal is given by a dictionary &quot;</span>
+                           <span class="s2">&quot;the keys must be all building names or construction years.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">t_hyd_sup_nominal_bldg</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_convert_to_zone_array</span><span class="p">(</span><span class="n">bldg</span><span class="p">,</span> <span class="n">zone_dict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert a dictionary of zone values to a BESMod-compatible array string.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    bldg : Building</span>
+<span class="sd">        TEASER Building instance.</span>
+<span class="sd">    zone_dict : dict</span>
+<span class="sd">        Dictionary with zone names as keys and zone parameter values as values.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        Array string for BESMod parameter input.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    KeyError</span>
+<span class="sd">        If the dictionary is missing zone names present in the building.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tz_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">tz</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">tz</span> <span class="ow">in</span> <span class="n">bldg</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">tz_names</span><span class="p">)</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">zone_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())):</span>
+        <span class="n">array_string</span> <span class="o">=</span> <span class="s2">&quot;{&quot;</span>
+        <span class="k">for</span> <span class="n">tz</span> <span class="ow">in</span> <span class="n">tz_names</span><span class="p">:</span>
+            <span class="n">array_string</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">zone_dict</span><span class="p">[</span><span class="n">tz</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span>
+        <span class="k">return</span> <span class="n">array_string</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;}&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="n">tz_names</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">zone_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span><span class="si">}</span><span class="s2"> thermal zones missing in given dictionary.&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_convert_heating_profile</span><span class="p">(</span><span class="n">heating_profile</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert a 24-hour heating profile for BESMod export.</span>
+
+<span class="sd">    This function analyzes a 24-hour heating profile to extract:</span>
+<span class="sd">    - The nominal temperature.</span>
+<span class="sd">    - Start time of setbacks (if any).</span>
+<span class="sd">    - Width of setback intervals.</span>
+<span class="sd">    - Amplitude of the heating variation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    heating_profile : list[float]</span>
+<span class="sd">        List of 24 hourly heating temperatures.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    t_set_zone_nominal : float</span>
+<span class="sd">        Maximum temperature in the profile, used as the nominal set point.</span>
+<span class="sd">    start_time : int</span>
+<span class="sd">        Start time of the setback interval in seconds.</span>
+<span class="sd">    width : float</span>
+<span class="sd">        Width of the setback interval as a percentage of the day.</span>
+<span class="sd">    amplitude : float</span>
+<span class="sd">        Difference between the minimum and nominal temperatures.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If the profile has more than two distinct intervals or does not have 24 values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">heating_profile</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">24</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Only 24 hours heating profiles can be used for BESMod export.&quot;</span><span class="p">)</span>
+    <span class="n">change_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">change_indexes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">heating_profile</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">heating_profile</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">heating_profile</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="n">change_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">change_indexes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">t_set_zone_nominal</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">heating_profile</span><span class="p">)</span>
+    <span class="n">amplitude</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">heating_profile</span><span class="p">)</span> <span class="o">-</span> <span class="n">t_set_zone_nominal</span>
+    <span class="k">if</span> <span class="n">change_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">amplitude</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="mf">1e-50</span>
+    <span class="k">elif</span> <span class="n">change_count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">heating_profile</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">heating_profile</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">start_time</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">width</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">change_indexes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">24</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start_time</span> <span class="o">=</span> <span class="n">change_indexes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3600</span>
+            <span class="n">width</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="mi">24</span> <span class="o">-</span> <span class="n">change_indexes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">24</span>
+    <span class="k">elif</span> <span class="n">change_count</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">change_indexes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3600</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="mi">24</span> <span class="o">-</span> <span class="n">change_indexes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">change_indexes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">24</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have more than two temperature intervals in the heating profile.&quot;</span>
+                         <span class="s2">&quot;BESMod can only handel one heating set back.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">t_set_zone_nominal</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">amplitude</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_next_higher_year_value</span><span class="p">(</span><span class="n">years_dict</span><span class="p">,</span> <span class="n">given_year</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the next higher value for a given year from a dictionary.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        years_dict : dict</span>
+<span class="sd">            Dictionary with years as keys and corresponding values.</span>
+<span class="sd">        given_year : int</span>
+<span class="sd">            Year to find the next higher value for.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float or int</span>
+<span class="sd">            Value corresponding to the next higher year. If no higher year is found,</span>
+<span class="sd">            returns the value of the latest year.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="n">years</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">years_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">years</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">year</span> <span class="o">&gt;</span> <span class="n">given_year</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">years_dict</span><span class="p">[</span><span class="n">year</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">years_dict</span><span class="p">[</span><span class="n">years</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_help_example_script</span><span class="p">(</span><span class="n">bldg</span><span class="p">,</span> <span class="n">dir_dymola</span><span class="p">,</span> <span class="n">test_script_template</span><span class="p">,</span> <span class="n">example</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a .mos script for simulating and plotting BESMod examples from a Mako template.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    bldg : Building</span>
+<span class="sd">        TEASER Building instance for which the script is created.</span>
+<span class="sd">    dir_dymola : str</span>
+<span class="sd">        Output directory for Dymola scripts.</span>
+<span class="sd">    test_script_template : Template</span>
+<span class="sd">        Mako template for the simulation script.</span>
+<span class="sd">    example : str</span>
+<span class="sd">        Name of the BESMod example.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">dir_building</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">create_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_dymola</span><span class="p">,</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_building</span><span class="p">,</span> <span class="n">example</span> <span class="o">+</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.mos&quot;</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out_file</span><span class="p">:</span>
+        <span class="n">out_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">test_script_template</span><span class="o">.</span><span class="n">render_unicode</span><span class="p">(</span>
+            <span class="n">project</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span>
+            <span class="n">bldg</span><span class="o">=</span><span class="n">bldg</span>
+        <span class="p">))</span>
+        <span class="n">out_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,352 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser.data.input package &mdash; TEASER 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="teaser.data.input.inputdata package" href="teaser.data.input.inputdata.html" />
+    <link rel="prev" title="teaser.data package" href="teaser.data.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            TEASER
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">teaser</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="teaser.html">teaser package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="teaser.html#teaser">teaser</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="teaser.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="teaser.data.html">teaser.data package</a><ul class="current">
+<li class="toctree-l5 current"><a class="reference internal" href="teaser.data.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l6 current"><a class="current reference internal" href="#">teaser.data.input package</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="teaser.data.input.inputdata.html">teaser.data.input.inputdata package</a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#module-teaser.data.input.buildingelement_input_json">teaser.data.input.buildingelement_input_json module</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="#teaser.data.input.buildingelement_input_json.load_type_element"><code class="docutils literal notranslate"><span class="pre">load_type_element()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="#module-teaser.data.input.material_input_json">teaser.data.input.material_input_json module</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="#teaser.data.input.material_input_json.load_material"><code class="docutils literal notranslate"><span class="pre">load_material()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="#teaser.data.input.material_input_json.load_material_id"><code class="docutils literal notranslate"><span class="pre">load_material_id()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="#module-teaser.data.input.teaserjson_input">teaser.data.input.teaserjson_input module</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="#teaser.data.input.teaserjson_input.load_teaser_json"><code class="docutils literal notranslate"><span class="pre">load_teaser_json()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="#teaser.data.input.teaserjson_input.set_basic_data_teaser"><code class="docutils literal notranslate"><span class="pre">set_basic_data_teaser()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="#teaser.data.input.teaserjson_input.set_layer_data_teaser"><code class="docutils literal notranslate"><span class="pre">set_layer_data_teaser()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="#module-teaser.data.input.usecond_input">teaser.data.input.usecond_input module</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="#teaser.data.input.usecond_input.load_use_conditions"><code class="docutils literal notranslate"><span class="pre">load_use_conditions()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="teaser.data.output.html">teaser.data.output package</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="teaser.data.html#submodules">Submodules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="teaser.data.html#module-teaser.data.dataclass">teaser.data.dataclass module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="teaser.data.html#module-teaser.data.utilities">teaser.data.utilities module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.examples.html">teaser.examples package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.logic.html">teaser.logic package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.html#module-teaser.project">teaser.project module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">teaser</a></li>
+          <li class="breadcrumb-item"><a href="teaser.html">teaser package</a></li>
+          <li class="breadcrumb-item"><a href="teaser.data.html">teaser.data package</a></li>
+      <li class="breadcrumb-item active">teaser.data.input package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/code/teaser.data.input.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-teaser.data.input">
+<span id="teaser-data-input-package"></span><h1>teaser.data.input package<a class="headerlink" href="#module-teaser.data.input" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="teaser.data.input.inputdata.html">teaser.data.input.inputdata package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.data.input.inputdata.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.data.input.inputdata.weatherdata.html">teaser.data.input.inputdata.weatherdata package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-teaser.data.input.buildingelement_input_json">
+<span id="teaser-data-input-buildingelement-input-json-module"></span><h2>teaser.data.input.buildingelement_input_json module<a class="headerlink" href="#module-teaser.data.input.buildingelement_input_json" title="Link to this heading"></a></h2>
+<p>This module contains function to load building element classes.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.data.input.buildingelement_input_json.load_type_element">
+<span class="sig-prename descclassname"><span class="pre">teaser.data.input.buildingelement_input_json.</span></span><span class="sig-name descname"><span class="pre">load_type_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">construction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/input/buildingelement_input_json.html#load_type_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.input.buildingelement_input_json.load_type_element" title="Link to this definition"></a></dt>
+<dd><p>Load BuildingElement from json.</p>
+<p>Loads typical building elements according to their construction year and
+their construction type from a JSON. The elements are created by using
+building characteristics from
+cite:<cite>BundesministeriumfurVerkehrBauundStadtentwicklung.26.07.2007</cite> and
+<span id="id1">[<a class="reference internal" href="../archetypes.html#id31" title="Tobias Loga, Nikolaus Diefenbach, Jens Knissel, and Rolf Born. Ein vereinfachtes, statistisch abgesichertes Verfahren zur Erhebung von Gebäudedaten für die energetische Bewertung von Gebäuden. Volume Bauforschung für die Praxis. Institut Wohnen und Umwelt GmbH, Darmstadt, 2005.">3</a>]</span>, which is combined with normative material data
+from <span id="id2">[<a class="reference internal" href="../archetypes.html#id45" title="Berechnung des instationären thermischen Verhaltens von Räumen und Gebäuden - Fenstermodell. März 2012.">10</a>]</span>.</p>
+<p>Most of the elements for the KfW Efficiency House standards (TypeElements_KFW.json) were derived from the respective
+required U-value and the component catalog of the U-value online calculator <a class="reference external" href="https://www.ubakus.de/bauteilkatalog/">https://www.ubakus.de/bauteilkatalog/</a>.
+For the respective source of each element, the comment in the json file can be observed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>element</strong><span class="classifier">BuildingElement()</span></dt><dd><p>Instance of BuildingElement or inherited Element of TEASER</p>
+</dd>
+<dt><strong>year</strong><span class="classifier">int</span></dt><dd><p>Year of construction</p>
+</dd>
+<dt><strong>construction</strong><span class="classifier">str</span></dt><dd><p>Construction type, code list (‘iwu_heavy’, ‘iwu_light’, ‘tabula_de_standard’, ‘kfw_40’, …)</p>
+</dd>
+<dt><strong>data_class</strong><span class="classifier">DataClass()</span></dt><dd><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-teaser.data.input.material_input_json">
+<span id="teaser-data-input-material-input-json-module"></span><h2>teaser.data.input.material_input_json module<a class="headerlink" href="#module-teaser.data.input.material_input_json" title="Link to this heading"></a></h2>
+<p>This module contains function to load material classes.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.data.input.material_input_json.load_material">
+<span class="sig-prename descclassname"><span class="pre">teaser.data.input.material_input_json.</span></span><span class="sig-name descname"><span class="pre">load_material</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mat_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/input/material_input_json.html#load_material"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.input.material_input_json.load_material" title="Link to this definition"></a></dt>
+<dd><p>Material loader with name as identification.</p>
+<p>Loads Material specified in the JSON. Sources are
+<span id="id3">[<a class="reference internal" href="../archetypes.html#id25" title="DIN 12524. Baustoffe und -produkte - Wärme- und feuchteschutztechnische Eigenschaften - Tabellierte Bemessungswerte - Deutsche Fassung. Juli 2000.">6</a>]</span>,
+DeutschesInstitutfurNormung.Februar2013, <span id="id4">[<a class="reference internal" href="../archetypes.html#id46" title="Ernst-Rudolf Schramek, Hermann Recknagel, and Hermann Sprenger, editors. Taschenbuch für Heizung und Klimatechnik [09/10]: Einschließlich Warmwasser- und Kältetechnik. Oldenbourg Industrieverlag, München, 74 aufl. edition, 2009. ISBN 978-3-8356-3134-2.">11</a>]</span> and
+<span id="id5">[<a class="reference internal" href="../archetypes.html#id41" title="Berechnung der thermischen Lasten und Raumtemperaturen (Auslegung Kühllast und Jahressimulation). Juni 2015.">12</a>]</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>material</strong><span class="classifier">Material()</span></dt><dd><p>instance of TEASERS Material class</p>
+</dd>
+<dt><strong>mat_name</strong><span class="classifier">str</span></dt><dd><p>Code list for Material</p>
+</dd>
+<dt><strong>data_class</strong><span class="classifier">DataClass()</span></dt><dd><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.data.input.material_input_json.load_material_id">
+<span class="sig-prename descclassname"><span class="pre">teaser.data.input.material_input_json.</span></span><span class="sig-name descname"><span class="pre">load_material_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mat_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/input/material_input_json.html#load_material_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.input.material_input_json.load_material_id" title="Link to this definition"></a></dt>
+<dd><p>Material loader with id as identification.</p>
+<p>Loads Material specified in the JSON by given material_id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>material</strong><span class="classifier">Material()</span></dt><dd><p>instance of TEASERS Material class</p>
+</dd>
+<dt><strong>mat_id</strong><span class="classifier">name</span></dt><dd><p>id of material from JSON</p>
+</dd>
+<dt><strong>data_class</strong><span class="classifier">DataClass()</span></dt><dd><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-teaser.data.input.teaserjson_input">
+<span id="teaser-data-input-teaserjson-input-module"></span><h2>teaser.data.input.teaserjson_input module<a class="headerlink" href="#module-teaser.data.input.teaserjson_input" title="Link to this heading"></a></h2>
+<p>Load Projects in the proprietary TEASER file format .json.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.data.input.teaserjson_input.load_teaser_json">
+<span class="sig-prename descclassname"><span class="pre">teaser.data.input.teaserjson_input.</span></span><span class="sig-name descname"><span class="pre">load_teaser_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/input/teaserjson_input.html#load_teaser_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.input.teaserjson_input.load_teaser_json" title="Link to this definition"></a></dt>
+<dd><p>Load a project from json.</p>
+<p>TEASERs internal file format to store information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>path: string</strong></dt><dd><p>path of teaserjson file</p>
+</dd>
+<dt><strong>project: Project()</strong></dt><dd><p>Teaser instance of Project()</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.data.input.teaserjson_input.set_basic_data_teaser">
+<span class="sig-prename descclassname"><span class="pre">teaser.data.input.teaserjson_input.</span></span><span class="sig-name descname"><span class="pre">set_basic_data_teaser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wall_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/input/teaserjson_input.html#set_basic_data_teaser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.input.teaserjson_input.set_basic_data_teaser" title="Link to this definition"></a></dt>
+<dd><p>Set basic data for a building element.</p>
+<p>Helper function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wall_in</strong><span class="classifier">collection.OrderedDict</span></dt><dd><p>OrderedDict for walls</p>
+</dd>
+<dt><strong>element</strong><span class="classifier">TEASERClass</span></dt><dd><p>teaser class representation of a building element</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.data.input.teaserjson_input.set_layer_data_teaser">
+<span class="sig-prename descclassname"><span class="pre">teaser.data.input.teaserjson_input.</span></span><span class="sig-name descname"><span class="pre">set_layer_data_teaser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wall_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/input/teaserjson_input.html#set_layer_data_teaser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.input.teaserjson_input.set_layer_data_teaser" title="Link to this definition"></a></dt>
+<dd><p>Set layer data of a building element.</p>
+<p>Helper function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wall_in</strong><span class="classifier">collection.OrderedDict</span></dt><dd><p>OrderedDict for walls</p>
+</dd>
+<dt><strong>element</strong><span class="classifier">TEASERClass</span></dt><dd><p>teaser class representation of a building element</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-teaser.data.input.usecond_input">
+<span id="teaser-data-input-usecond-input-module"></span><h2>teaser.data.input.usecond_input module<a class="headerlink" href="#module-teaser.data.input.usecond_input" title="Link to this heading"></a></h2>
+<p>This module contains function to load UseConditions classes.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.data.input.usecond_input.load_use_conditions">
+<span class="sig-prename descclassname"><span class="pre">teaser.data.input.usecond_input.</span></span><span class="sig-name descname"><span class="pre">load_use_conditions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_cond</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zone_usage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/input/usecond_input.html#load_use_conditions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.input.usecond_input.load_use_conditions" title="Link to this definition"></a></dt>
+<dd><p>Load use conditions from JSON, according to DIN 18599,
+SIA2024 in addition some AixLib specific use conditions for central AHU
+are defined.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>use_cond</strong><span class="classifier">UseConditions()</span></dt><dd><p>Instance of TEASERs
+BuildingObjects.UseConditions</p>
+</dd>
+<dt><strong>zone_usage</strong><span class="classifier">str</span></dt><dd><p>code list for zone_usage according to 18599</p>
+</dd>
+<dt><strong>data_class</strong><span class="classifier">DataClass()</span></dt><dd><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="teaser.data.html" class="btn btn-neutral float-left" title="teaser.data package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="teaser.data.input.inputdata.html" class="btn btn-neutral float-right" title="teaser.data.input.inputdata package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
