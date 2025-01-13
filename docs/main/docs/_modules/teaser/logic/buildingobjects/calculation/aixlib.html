@@ -78,15 +78,15 @@
   <h1>Source code for teaser.logic.buildingobjects.calculation.aixlib</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;This module includes AixLib calculation class.&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utilities</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">cycle</span><span class="p">,</span> <span class="n">islice</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">teaser.logic.utilities</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">utilities</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">cycle</span><span class="p">,</span> <span class="n">islice</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 
 <div class="viewcode-block" id="AixLib">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.aixlib.AixLib">[docs]</a>
-<span class="k">class</span> <span class="nc">AixLib</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AixLib</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to calculate parameters for AixLib output.</span>
 
 <span class="sd">    This class holds functions to sort and partly rewrite zone and building</span>
@@ -136,7 +136,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct AixLib.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
 
@@ -154,12 +154,12 @@
 
 <div class="viewcode-block" id="AixLib.calc_auxiliary_attr">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.aixlib.AixLib.calc_auxiliary_attr">[docs]</a>
-    <span class="k">def</span> <span class="nf">calc_auxiliary_attr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calc_auxiliary_attr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Call function to calculate all auxiliary attributes for AixLib.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_calc_surface_area</span><span class="p">()</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_calc_surface_area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calc_surface_area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the total surface area of all surfaces.&quot;&quot;&quot;</span>
         <span class="n">surf_area_temp</span> <span class="o">=</span> <span class="mf">0.0</span>
         <span class="k">for</span> <span class="n">zone</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">thermal_zones</span><span class="p">:</span>
@@ -191,7 +191,7 @@
 
 <div class="viewcode-block" id="AixLib.modelica_set_temp">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.aixlib.AixLib.modelica_set_temp">[docs]</a>
-    <span class="k">def</span> <span class="nf">modelica_set_temp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">modelica_set_temp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create .txt file for set temperatures for heating.</span>
 
 <span class="sd">        This function creates a txt for set temperatures of each</span>
@@ -235,7 +235,7 @@
 
 <div class="viewcode-block" id="AixLib.modelica_set_temp_cool">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.aixlib.AixLib.modelica_set_temp_cool">[docs]</a>
-    <span class="k">def</span> <span class="nf">modelica_set_temp_cool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">modelica_set_temp_cool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create .txt file for set temperatures cooling.</span>
 
 <span class="sd">        This function creates a txt for set temperatures for cooling</span>
@@ -280,7 +280,7 @@
 
 <div class="viewcode-block" id="AixLib.modelica_AHU_boundary">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.aixlib.AixLib.modelica_AHU_boundary">[docs]</a>
-    <span class="k">def</span> <span class="nf">modelica_AHU_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">modelica_AHU_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create .txt file for AHU boundary conditions (building).</span>
 
 <span class="sd">        This function creates a txt for building AHU boundary</span>
@@ -341,7 +341,7 @@
 
 <div class="viewcode-block" id="AixLib.modelica_gains_boundary">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.aixlib.AixLib.modelica_gains_boundary">[docs]</a>
-    <span class="k">def</span> <span class="nf">modelica_gains_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">modelica_gains_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create .txt file for internal gains boundary conditions.</span>
 
 <span class="sd">        This function creates a matfile (-v4) for building internal gains</span>
@@ -402,7 +402,7 @@
             <span class="n">export</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index_label</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_delete_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_delete_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete a file before new information is written to it.</span>
 
 <span class="sd">        If a building with the exact name and project name is generated, we need to make</span>

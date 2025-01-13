@@ -88,15 +88,15 @@
 
 <div class="viewcode-block" id="example_create_building">
 <a class="viewcode-back" href="../../../code/teaser.examples.html#teaser.examples.e6_generate_building.example_create_building">[docs]</a>
-<span class="k">def</span> <span class="nf">example_create_building</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">example_create_building</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function demonstrates generating a building adding all</span>
 <span class="sd">    information separately&quot;&quot;&quot;</span>
 
     <span class="c1"># First step: Import the TEASER API (called Project) into your Python module</span>
 
-    <span class="kn">from</span> <span class="nn">teaser.project</span> <span class="kn">import</span> <span class="n">Project</span>
-    <span class="kn">from</span> <span class="nn">teaser.data.utilities</span> <span class="kn">import</span> <span class="n">ConstructionData</span>
-    <span class="kn">from</span> <span class="nn">teaser.data.dataclass</span> <span class="kn">import</span> <span class="n">DataClass</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaser.project</span><span class="w"> </span><span class="kn">import</span> <span class="n">Project</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaser.data.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstructionData</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaser.data.dataclass</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataClass</span>
 
     <span class="c1"># To use the API, instantiate the Project class and rename the project.</span>
 
@@ -111,7 +111,7 @@
     <span class="c1"># building parameters. Be careful: Dymola does not like whitespaces in</span>
     <span class="c1"># names and filenames, thus we will delete them anyway in TEASER.</span>
 
-    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.building</span> <span class="kn">import</span> <span class="n">Building</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.building</span><span class="w"> </span><span class="kn">import</span> <span class="n">Building</span>
 
     <span class="n">bldg</span> <span class="o">=</span> <span class="n">Building</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">prj</span><span class="p">)</span>
     <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;SuperExampleBuilding&quot;</span>
@@ -126,7 +126,7 @@
     <span class="c1"># like whitespaces in  names and filenames, thus we will delete them</span>
     <span class="c1"># anyway in TEASER.</span>
 
-    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.thermalzone</span> <span class="kn">import</span> <span class="n">ThermalZone</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.thermalzone</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThermalZone</span>
 
     <span class="n">tz</span> <span class="o">=</span> <span class="n">ThermalZone</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">bldg</span><span class="p">)</span>
     <span class="n">tz</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;LivingRoom&quot;</span>
@@ -135,8 +135,8 @@
 
     <span class="c1"># Instantiate BoundaryConditions and load conditions for `Living`.</span>
 
-    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.useconditions</span> \
-        <span class="kn">import</span> <span class="nn">UseConditions</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.useconditions</span> \
+        <span class="kn">import</span><span class="w"> </span><span class="nn">UseConditions</span>
 
     <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span> <span class="o">=</span> <span class="n">UseConditions</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
     <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">load_use_conditions</span><span class="p">(</span><span class="s2">&quot;Living&quot;</span><span class="p">,</span> <span class="n">prj</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
@@ -149,7 +149,7 @@
     <span class="c1"># orientation. Please read the docs to get more information on these</span>
     <span class="c1"># parameters.</span>
 
-    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.rooftop</span> <span class="kn">import</span> <span class="n">Rooftop</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.rooftop</span><span class="w"> </span><span class="kn">import</span> <span class="n">Rooftop</span>
 
     <span class="n">roof_south</span> <span class="o">=</span> <span class="n">Rooftop</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
     <span class="n">roof_south</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Roof_South&quot;</span>
@@ -176,14 +176,14 @@
     <span class="c1"># construction from inside to outside (so 0 is on the inner surface). You</span>
     <span class="c1"># need to set this value!</span>
 
-    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.layer</span> <span class="kn">import</span> <span class="n">Layer</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.layer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Layer</span>
 
     <span class="c1"># First layer south</span>
 
     <span class="n">layer_s1</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">roof_south</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">layer_s1</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.3</span>
 
-    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.material</span> <span class="kn">import</span> <span class="n">Material</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.material</span><span class="w"> </span><span class="kn">import</span> <span class="n">Material</span>
 
     <span class="n">material_s1</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_s1</span><span class="p">)</span>
     <span class="n">material_s1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Insulation&quot;</span>
@@ -207,7 +207,7 @@
     <span class="n">layer_n1</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">roof_north</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">layer_n1</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.3</span>
 
-    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.material</span> <span class="kn">import</span> <span class="n">Material</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.material</span><span class="w"> </span><span class="kn">import</span> <span class="n">Material</span>
 
     <span class="n">material_n1</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_n1</span><span class="p">)</span>
     <span class="n">material_n1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Insulation&quot;</span>
@@ -235,7 +235,7 @@
     <span class="c1"># interior walls</span>
     <span class="c1"># {&#39;name_of_wall&#39;: [area, tilt, orientation]}</span>
 
-    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.outerwall</span> <span class="kn">import</span> <span class="n">OuterWall</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.outerwall</span><span class="w"> </span><span class="kn">import</span> <span class="n">OuterWall</span>
 
     <span class="n">out_wall_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;OuterWall_north&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
                      <span class="s2">&quot;OuterWall_east&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">14.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">],</span>
@@ -246,7 +246,7 @@
 
     <span class="n">ground_floor_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;GroundFloor&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]}</span>
 
-    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.innerwall</span> <span class="kn">import</span> <span class="n">InnerWall</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.innerwall</span><span class="w"> </span><span class="kn">import</span> <span class="n">InnerWall</span>
 
     <span class="n">in_wall_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;InnerWall1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">],</span>
                     <span class="s2">&quot;InnerWall2&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">14.0</span><span class="p">],</span>
@@ -281,7 +281,7 @@
             <span class="n">construction</span><span class="o">=</span><span class="s1">&#39;iwu_heavy&#39;</span><span class="p">)</span>
         <span class="n">in_wall</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.groundfloor</span> <span class="kn">import</span> \
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.groundfloor</span><span class="w"> </span><span class="kn">import</span> \
         <span class="n">GroundFloor</span>
 
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">ground_floor_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -295,7 +295,7 @@
         <span class="n">ground</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">ground</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
-    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.window</span> <span class="kn">import</span> <span class="n">Window</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.window</span><span class="w"> </span><span class="kn">import</span> <span class="n">Window</span>
 
     <span class="n">win_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Window_east&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">],</span>
                 <span class="s2">&quot;Window_south&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">],</span>
@@ -337,7 +337,8 @@
         <span class="n">win_material</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">win_layer</span><span class="p">)</span>
         <span class="n">win_material</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;GlasWindow&quot;</span>
         <span class="n">win_material</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.067</span>
-        <span class="n">win_material</span><span class="o">.</span><span class="n">transmittance</span> <span class="o">=</span> <span class="mf">0.9</span></div>
+        <span class="n">win_material</span><span class="o">.</span><span class="n">transmittance</span> <span class="o">=</span> <span class="mf">0.9</span>
+    <span class="k">return</span> <span class="n">prj</span></div>
 
 
 

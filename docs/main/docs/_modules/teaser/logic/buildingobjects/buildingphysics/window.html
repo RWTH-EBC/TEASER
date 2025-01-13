@@ -80,14 +80,14 @@
 <span class="c1"># by TEASER4 Development Team</span>
 
 
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.buildingelement</span> \
-    <span class="kn">import</span> <span class="nn">BuildingElement</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.buildingelement</span> \
+    <span class="kn">import</span><span class="w"> </span><span class="nn">BuildingElement</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 
 
 <div class="viewcode-block" id="Window">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.window.Window">[docs]</a>
-<span class="k">class</span> <span class="nc">Window</span><span class="p">(</span><span class="n">BuildingElement</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Window</span><span class="p">(</span><span class="n">BuildingElement</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Window class</span>
 
 <span class="sd">    This class holds information of a window and is a child of</span>
@@ -199,7 +199,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="nb">super</span><span class="p">(</span><span class="n">Window</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_g_value</span> <span class="o">=</span> <span class="mf">0.0</span>
@@ -214,7 +214,7 @@
 
 <div class="viewcode-block" id="Window.calc_equivalent_res">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.window.Window.calc_equivalent_res">[docs]</a>
-    <span class="k">def</span> <span class="nf">calc_equivalent_res</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calc_equivalent_res</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Equivalent resistance VDI 6007</span>
 
 <span class="sd">        Calculates the equivalent resistance of a wall according to  VDI</span>
@@ -241,7 +241,7 @@
 
 <div class="viewcode-block" id="Window.replace_window">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.window.Window.replace_window">[docs]</a>
-    <span class="k">def</span> <span class="nf">replace_window</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year_of_retrofit</span><span class="p">,</span> <span class="n">window_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">replace_window</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year_of_retrofit</span><span class="p">,</span> <span class="n">window_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Replace a window, with a newer one.</span>
 
 <span class="sd">        Replaces all attributes from the window and replaces it with a high</span>
@@ -272,11 +272,11 @@
 
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__parent</span>
 
     <span class="nd">@parent</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
             <span class="n">ass_error_1</span> <span class="o">=</span> <span class="s2">&quot;Parent has to be an instance of ThermalZone()&quot;</span>
@@ -300,11 +300,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__parent</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">g_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">g_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_g_value</span>
 
     <span class="nd">@g_value</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">g_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">g_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_g_value</span> <span class="o">=</span> <span class="n">value</span>
@@ -318,11 +318,11 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert g value to float&quot;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">a_conv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">a_conv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_a_conv</span>
 
     <span class="nd">@a_conv</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">a_conv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">a_conv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_a_conv</span> <span class="o">=</span> <span class="n">value</span>
@@ -336,11 +336,11 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert a conv to float&quot;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">shading_g_total</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">shading_g_total</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shading_g_total</span>
 
     <span class="nd">@shading_g_total</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">shading_g_total</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">shading_g_total</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_shading_g_total</span> <span class="o">=</span> <span class="n">value</span>
@@ -354,11 +354,11 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert shaded g value to float&quot;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">shading_max_irr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">shading_max_irr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shading_max_irr</span>
 
     <span class="nd">@shading_max_irr</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">shading_max_irr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">shading_max_irr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_shading_max_irr</span> <span class="o">=</span> <span class="n">value</span>

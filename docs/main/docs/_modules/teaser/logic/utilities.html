@@ -83,16 +83,16 @@
 <span class="sd">classes</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">shutil</span>
-<span class="kn">import</span> <span class="nn">operator</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">operator</span>
 
 <span class="n">ops</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;/&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">truediv</span><span class="p">}</span>
 
 
 <div class="viewcode-block" id="celsius_to_kelvin">
 <a class="viewcode-back" href="../../../code/teaser.logic.html#teaser.logic.utilities.celsius_to_kelvin">[docs]</a>
-<span class="k">def</span> <span class="nf">celsius_to_kelvin</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">celsius_to_kelvin</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">f_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
@@ -103,7 +103,7 @@
 
 <div class="viewcode-block" id="create_path">
 <a class="viewcode-back" href="../../../code/teaser.logic.html#teaser.logic.utilities.create_path">[docs]</a>
-<span class="k">def</span> <span class="nf">create_path</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_path</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a folder.</span>
 
 <span class="sd">    Creates a new folder.</span>
@@ -126,7 +126,7 @@
 
 <div class="viewcode-block" id="get_default_path">
 <a class="viewcode-back" href="../../../code/teaser.logic.html#teaser.logic.utilities.get_default_path">[docs]</a>
-<span class="k">def</span> <span class="nf">get_default_path</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_default_path</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to construct default path to OutputData folder</span>
 <span class="sd">    This function constructs the default path to the OutputData folder</span>
 
@@ -148,7 +148,7 @@
 
 <div class="viewcode-block" id="get_full_path">
 <a class="viewcode-back" href="../../../code/teaser.logic.html#teaser.logic.utilities.get_full_path">[docs]</a>
-<span class="k">def</span> <span class="nf">get_full_path</span><span class="p">(</span><span class="n">rel_path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_full_path</span><span class="p">(</span><span class="n">rel_path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Helperfunction to construct pathes to files within teaser.</span>
 
 <span class="sd">    Parameters</span>
@@ -175,7 +175,7 @@
 
 <div class="viewcode-block" id="clear_directory">
 <a class="viewcode-back" href="../../../code/teaser.logic.html#teaser.logic.utilities.clear_directory">[docs]</a>
-<span class="k">def</span> <span class="nf">clear_directory</span><span class="p">(</span><span class="n">dir_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">clear_directory</span><span class="p">(</span><span class="n">dir_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to delete all files inside a directory.</span>
 
 <span class="sd">    Parameters</span>
@@ -205,7 +205,7 @@
 
 <div class="viewcode-block" id="division_from_json">
 <a class="viewcode-back" href="../../../code/teaser.logic.html#teaser.logic.utilities.division_from_json">[docs]</a>
-<span class="k">def</span> <span class="nf">division_from_json</span><span class="p">(</span><span class="n">ordereddict</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">division_from_json</span><span class="p">(</span><span class="n">ordereddict</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    function to transform the output of division in json after loading to</span>
 <span class="sd">    python into float values</span>

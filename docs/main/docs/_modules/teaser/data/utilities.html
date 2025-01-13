@@ -81,45 +81,45 @@
 <span class="sd">construction data types, as well as dictionaries that map these enumerations to their corresponding building classes.</span>
 <span class="sd">Additionally, it defines which construction data types are allowed for each building geometry data and</span>
 <span class="sd">includes functions to set the suitable construction_data.&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.bmvbs.office</span> <span class="kn">import</span> <span class="n">Office</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.bmvbs.custom.institute</span> <span class="kn">import</span> <span class="n">Institute</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.bmvbs.custom.institute4</span> <span class="kn">import</span> <span class="n">Institute4</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.bmvbs.custom.institute8</span> <span class="kn">import</span> <span class="n">Institute8</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est1a</span> <span class="kn">import</span> <span class="n">EST1a</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est1b</span> <span class="kn">import</span> <span class="n">EST1b</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est2</span> <span class="kn">import</span> <span class="n">EST2</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est3</span> <span class="kn">import</span> <span class="n">EST3</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est4a</span> <span class="kn">import</span> <span class="n">EST4a</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est4b</span> <span class="kn">import</span> <span class="n">EST4b</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est5</span> <span class="kn">import</span> <span class="n">EST5</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est6</span> <span class="kn">import</span> <span class="n">EST6</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est7</span> <span class="kn">import</span> <span class="n">EST7</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est8a</span> <span class="kn">import</span> <span class="n">EST8a</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.urbanrenet.est8b</span> <span class="kn">import</span> <span class="n">EST8b</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.bmvbs.office</span><span class="w"> </span><span class="kn">import</span> <span class="n">Office</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.bmvbs.custom.institute</span><span class="w"> </span><span class="kn">import</span> <span class="n">Institute</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.bmvbs.custom.institute4</span><span class="w"> </span><span class="kn">import</span> <span class="n">Institute4</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.bmvbs.custom.institute8</span><span class="w"> </span><span class="kn">import</span> <span class="n">Institute8</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est1a</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST1a</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est1b</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST1b</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est2</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST2</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est3</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST3</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est4a</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST4a</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est4b</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST4b</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est5</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST5</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est6</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST6</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est7</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST7</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est8a</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST8a</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est8b</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST8b</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">SingleFamilyHouse</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.dk.singlefamilyhouse</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.tabula.dk.singlefamilyhouse</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">SingleFamilyHouse</span> <span class="k">as</span> <span class="n">SingleFamilyHouse_DK</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.de.terracedhouse</span> <span class="kn">import</span> <span class="n">TerracedHouse</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.dk.terracedhouse</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.tabula.de.terracedhouse</span><span class="w"> </span><span class="kn">import</span> <span class="n">TerracedHouse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.tabula.dk.terracedhouse</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">TerracedHouse</span> <span class="k">as</span> <span class="n">TerracedHouse_DK</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.de.multifamilyhouse</span> <span class="kn">import</span> <span class="n">MultiFamilyHouse</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.de.apartmentblock</span> <span class="kn">import</span> <span class="n">ApartmentBlock</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.dk.apartmentblock</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.tabula.de.multifamilyhouse</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultiFamilyHouse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.tabula.de.apartmentblock</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApartmentBlock</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.tabula.dk.apartmentblock</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">ApartmentBlock</span> <span class="k">as</span> <span class="n">ApartmentBlock_DK</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">SingleFamilyDwelling</span><span class="p">,</span>
 <span class="p">)</span>
 
 
 <div class="viewcode-block" id="GeometryData">
 <a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.utilities.GeometryData">[docs]</a>
-<span class="k">class</span> <span class="nc">GeometryData</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">GeometryData</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The GeometryData enumeration replaces the former parameter &quot;usage&quot; and</span>
 <span class="sd">    represents different archetypes of residential and non-residential buildings.</span>
@@ -155,7 +155,7 @@
 
 <div class="viewcode-block" id="ConstructionData">
 <a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.utilities.ConstructionData">[docs]</a>
-<span class="k">class</span> <span class="nc">ConstructionData</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ConstructionData</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The ConstructionData enumeration combines the former parameters “method” and “construction_type”.</span>
 <span class="sd">    The prefix of each value is used to select the appropriate json file as input data.</span>
@@ -177,7 +177,7 @@
 
 <div class="viewcode-block" id="ConstructionData.get_prefix">
 <a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.utilities.ConstructionData.get_prefix">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">parts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -188,25 +188,25 @@
 
 <div class="viewcode-block" id="ConstructionData.is_iwu">
 <a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.utilities.ConstructionData.is_iwu">[docs]</a>
-    <span class="k">def</span> <span class="nf">is_iwu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_iwu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_prefix</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;iwu&quot;</span></div>
 
 
 <div class="viewcode-block" id="ConstructionData.is_tabula_de">
 <a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.utilities.ConstructionData.is_tabula_de">[docs]</a>
-    <span class="k">def</span> <span class="nf">is_tabula_de</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_tabula_de</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_prefix</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;tabula_de&quot;</span></div>
 
 
 <div class="viewcode-block" id="ConstructionData.is_tabula_dk">
 <a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.utilities.ConstructionData.is_tabula_dk">[docs]</a>
-    <span class="k">def</span> <span class="nf">is_tabula_dk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_tabula_dk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_prefix</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;tabula_dk&quot;</span></div>
 
 
 <div class="viewcode-block" id="ConstructionData.is_kfw">
 <a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.utilities.ConstructionData.is_kfw">[docs]</a>
-    <span class="k">def</span> <span class="nf">is_kfw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_kfw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_prefix</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;kfw&quot;</span></div>
 </div>
 
@@ -289,7 +289,7 @@
 
 <div class="viewcode-block" id="check_construction_data_setter_iwu">
 <a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.utilities.check_construction_data_setter_iwu">[docs]</a>
-<span class="k">def</span> <span class="nf">check_construction_data_setter_iwu</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_construction_data_setter_iwu</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function validates and sets the construction_data for buildings using the iwu construction_data.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">ConstructionData</span><span class="o">.</span><span class="n">iwu_heavy</span>
@@ -303,7 +303,7 @@
 
 <div class="viewcode-block" id="check_construction_data_setter_tabula_de">
 <a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.utilities.check_construction_data_setter_tabula_de">[docs]</a>
-<span class="k">def</span> <span class="nf">check_construction_data_setter_tabula_de</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_construction_data_setter_tabula_de</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function validates and sets the construction_data for buildings using the tabula_de construction_data.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">ConstructionData</span><span class="o">.</span><span class="n">tabula_de_standard</span>
@@ -317,7 +317,7 @@
 
 <div class="viewcode-block" id="check_construction_data_setter_tabula_dk">
 <a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.utilities.check_construction_data_setter_tabula_dk">[docs]</a>
-<span class="k">def</span> <span class="nf">check_construction_data_setter_tabula_dk</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_construction_data_setter_tabula_dk</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function validates and sets the construction_data for buildings using the tabula_dk construction_data.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">ConstructionData</span><span class="o">.</span><span class="n">tabula_dk_standard</span>

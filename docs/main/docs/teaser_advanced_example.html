@@ -94,10 +94,10 @@
 <h2>Example 8: Change boundary conditions<a class="headerlink" href="#example-8-change-boundary-conditions" title="Link to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;This module contains an example how to change time dependent profiles.&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">teaser.examples.e1_generate_archetype</span> <span class="k">as</span> <span class="nn">e1</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">teaser.examples.e1_generate_archetype</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">e1</span>
 
 
-<span class="k">def</span> <span class="nf">example_change_boundary_conditions</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">example_change_boundary_conditions</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate changes to time dependent profiles.&quot;&quot;&quot;</span>
     <span class="c1"># In e1_generate_archetype we created a Project with three archetype</span>
     <span class="c1"># buildings to get this Project we rerun this example</span>
@@ -267,25 +267,25 @@
 <span class="sd">it should be accounted with 2x the area</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">import</span> <span class="nn">shutil</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">teaser.project</span> <span class="kn">import</span> <span class="n">Project</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.building</span> <span class="kn">import</span> <span class="n">Building</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.thermalzone</span> <span class="kn">import</span> <span class="n">ThermalZone</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.useconditions</span> <span class="kn">import</span> <span class="n">UseConditions</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.outerwall</span> <span class="kn">import</span> <span class="n">OuterWall</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.floor</span> <span class="kn">import</span> <span class="n">Floor</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.rooftop</span> <span class="kn">import</span> <span class="n">Rooftop</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.groundfloor</span> <span class="kn">import</span> <span class="n">GroundFloor</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.ceiling</span> <span class="kn">import</span> <span class="n">Ceiling</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.window</span> <span class="kn">import</span> <span class="n">Window</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.innerwall</span> <span class="kn">import</span> <span class="n">InnerWall</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.project</span><span class="w"> </span><span class="kn">import</span> <span class="n">Project</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.building</span><span class="w"> </span><span class="kn">import</span> <span class="n">Building</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.thermalzone</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThermalZone</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.useconditions</span><span class="w"> </span><span class="kn">import</span> <span class="n">UseConditions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.outerwall</span><span class="w"> </span><span class="kn">import</span> <span class="n">OuterWall</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.floor</span><span class="w"> </span><span class="kn">import</span> <span class="n">Floor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.rooftop</span><span class="w"> </span><span class="kn">import</span> <span class="n">Rooftop</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.groundfloor</span><span class="w"> </span><span class="kn">import</span> <span class="n">GroundFloor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.ceiling</span><span class="w"> </span><span class="kn">import</span> <span class="n">Ceiling</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.window</span><span class="w"> </span><span class="kn">import</span> <span class="n">Window</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.innerwall</span><span class="w"> </span><span class="kn">import</span> <span class="n">InnerWall</span>
 
 
-<span class="k">def</span> <span class="nf">import_data</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sheet_names</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">import_data</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sheet_names</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Import data from the building data excel file and perform some</span>
 <span class="sd">    preprocessing for nan and empty cells.</span>
@@ -324,7 +324,7 @@
     <span class="k">return</span> <span class="n">data</span>
 
 
-<span class="k">def</span> <span class="nf">get_list_of_present_entries</span><span class="p">(</span><span class="n">list_</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_list_of_present_entries</span><span class="p">(</span><span class="n">list_</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Extracts a list of all in the list available entries, discarding &quot;None&quot;</span>
 <span class="sd">    and &quot;nan&quot; entries</span>
@@ -346,7 +346,7 @@
 
 <span class="c1"># Block: Zoning methodologies (define your zoning function here)</span>
 <span class="c1"># -------------------------------------------------------------</span>
-<span class="k">def</span> <span class="nf">zoning_example</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">zoning_example</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This is an example on how the rooms of a building could be aggregated to</span>
 <span class="sd">    zones.</span>
@@ -477,7 +477,7 @@
 
 
 <span class="c1"># -------------------------------------------------------------</span>
-<span class="k">def</span> <span class="nf">import_building_from_excel</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">import_building_from_excel</span><span class="p">(</span>
     <span class="n">project</span><span class="p">,</span> <span class="n">building_name</span><span class="p">,</span> <span class="n">construction_age</span><span class="p">,</span> <span class="n">path_to_excel</span><span class="p">,</span> <span class="n">sheet_names</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -502,7 +502,7 @@
 <span class="sd">        TEASER instance of Project filled with the imported building data</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">warn_constructiontype</span><span class="p">(</span><span class="n">element</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">warn_constructiontype</span><span class="p">(</span><span class="n">element</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Generic warning function&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">construction_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>

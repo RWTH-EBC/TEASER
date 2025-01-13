@@ -81,20 +81,20 @@
 
 <span class="sd">&quot;&quot;&quot;This module includes the Building class</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">inspect</span>
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.calculation.aixlib</span> <span class="kn">import</span> <span class="n">AixLib</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.calculation.ibpsa</span> <span class="kn">import</span> <span class="n">IBPSA</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.calculation.aixlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">AixLib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.calculation.ibpsa</span><span class="w"> </span><span class="kn">import</span> <span class="n">IBPSA</span>
 
 
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingsystems.buildingahu</span> <span class="kn">import</span> <span class="n">BuildingAHU</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingsystems.buildingahu</span><span class="w"> </span><span class="kn">import</span> <span class="n">BuildingAHU</span>
 
 
 <div class="viewcode-block" id="Building">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building">[docs]</a>
-<span class="k">class</span> <span class="nc">Building</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Building</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Building Class</span>
 
 <span class="sd">    This class is used to manage information and parameter calculation for</span>
@@ -205,7 +205,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -258,7 +258,7 @@
 
 <div class="viewcode-block" id="Building.set_outer_wall_area">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.set_outer_wall_area">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_outer_wall_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_area</span><span class="p">,</span> <span class="n">orientation</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_outer_wall_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_area</span><span class="p">,</span> <span class="n">orientation</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Outer area wall setter</span>
 
 <span class="sd">        sets the outer wall area of all walls of one direction and weights</span>
@@ -301,7 +301,7 @@
 
 <div class="viewcode-block" id="Building.set_window_area">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.set_window_area">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_window_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_area</span><span class="p">,</span> <span class="n">orientation</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_window_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_area</span><span class="p">,</span> <span class="n">orientation</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Window area setter</span>
 
 <span class="sd">        sets the window area of all windows of one direction and weights</span>
@@ -325,7 +325,7 @@
 
 <div class="viewcode-block" id="Building.get_outer_wall_area">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.get_outer_wall_area">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_outer_wall_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_outer_wall_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get aggregated wall area of one orientation</span>
 
 <span class="sd">        Returns the area of all outer walls of one direction. This function</span>
@@ -366,7 +366,7 @@
 
 <div class="viewcode-block" id="Building.get_window_area">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.get_window_area">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_window_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_window_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get aggregated window area of one orientation</span>
 
 <span class="sd">        returns the area of all windows of one direction</span>
@@ -391,7 +391,7 @@
 
 <div class="viewcode-block" id="Building.get_inner_wall_area">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.get_inner_wall_area">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_inner_wall_area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_inner_wall_area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get aggregated inner wall area</span>
 
 <span class="sd">        Returns the area of all inner walls. This function covers InnerWalls,</span>
@@ -417,7 +417,7 @@
 
 <div class="viewcode-block" id="Building.fill_outer_area_dict">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.fill_outer_area_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">fill_outer_area_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fill_outer_area_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Fills the attribute outer_area</span>
 
 <span class="sd">        Fills the dictionary outer_area with the sum of outer wall area</span>
@@ -440,7 +440,7 @@
 
 <div class="viewcode-block" id="Building.fill_window_area_dict">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.fill_window_area_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">fill_window_area_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fill_window_area_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Fills the attribute</span>
 
 <span class="sd">        Fills the dictionary window_area with the sum of window area</span>
@@ -458,7 +458,7 @@
 
 <div class="viewcode-block" id="Building.calc_building_parameter">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.calc_building_parameter">[docs]</a>
-    <span class="k">def</span> <span class="nf">calc_building_parameter</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calc_building_parameter</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">number_of_elements</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">merge_windows</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">used_library</span><span class="o">=</span><span class="s2">&quot;AixLib&quot;</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;calc all building parameters</span>
@@ -525,7 +525,7 @@
 
 <div class="viewcode-block" id="Building.retrofit_building">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.retrofit_building">[docs]</a>
-    <span class="k">def</span> <span class="nf">retrofit_building</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">retrofit_building</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">year_of_retrofit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">type_of_retrofit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -570,7 +570,7 @@
 
 <div class="viewcode-block" id="Building.rotate_building">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.rotate_building">[docs]</a>
-    <span class="k">def</span> <span class="nf">rotate_building</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rotate_building</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Rotates the building to a given angle</span>
 
 <span class="sd">        This function covers OuterWall, Rooftop (if not flat roof) and Windows.</span>
@@ -609,7 +609,7 @@
 
 <div class="viewcode-block" id="Building.add_zone">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.add_zone">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_zone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thermal_zone</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_zone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thermal_zone</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds a thermal zone to the corresponding list</span>
 
 <span class="sd">        This function adds a ThermalZone instance to the the thermal_zones list</span>
@@ -628,11 +628,11 @@
 
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__parent</span>
 
     <span class="nd">@parent</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
@@ -653,11 +653,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__parent</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__name</span>
 
     <span class="nd">@name</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;[^a-zA-z0-9]&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__name</span> <span class="o">=</span> <span class="n">regex</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
@@ -673,11 +673,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__name</span> <span class="o">=</span> <span class="s2">&quot;B&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__name</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">year_of_construction</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">year_of_construction</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__year_of_construction</span>
 
     <span class="nd">@year_of_construction</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">year_of_construction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">year_of_construction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
@@ -691,11 +691,11 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert year of construction to int&quot;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">number_of_floors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">number_of_floors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__number_of_floors</span>
 
     <span class="nd">@number_of_floors</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">number_of_floors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">number_of_floors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
@@ -709,11 +709,11 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert number of floors to int&quot;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">height_of_floors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">height_of_floors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__height_of_floors</span>
 
     <span class="nd">@height_of_floors</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">height_of_floors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">height_of_floors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">or</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
@@ -727,11 +727,11 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert height of floors to float&quot;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">net_leased_area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">net_leased_area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__net_leased_area</span>
 
     <span class="nd">@net_leased_area</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">net_leased_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">net_leased_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__net_leased_area</span> <span class="o">=</span> <span class="n">value</span>
@@ -745,48 +745,48 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert net leased area to float&quot;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">thermal_zones</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">thermal_zones</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_zones</span>
 
     <span class="nd">@thermal_zones</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">thermal_zones</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">thermal_zones</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_thermal_zones</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">outer_area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">outer_area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_outer_area</span>
 
     <span class="nd">@outer_area</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">outer_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">outer_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_outer_area</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">window_area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">window_area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_window_area</span>
 
     <span class="nd">@window_area</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">window_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">window_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_window_area</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">year_of_retrofit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">year_of_retrofit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_year_of_retrofit</span>
 
     <span class="nd">@year_of_retrofit</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">year_of_retrofit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">year_of_retrofit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">year_of_construction</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_year_of_retrofit</span> <span class="o">=</span> <span class="n">value</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Specify year of construction first&quot;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">with_ahu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">with_ahu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_with_ahu</span>
 
     <span class="nd">@with_ahu</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">with_ahu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">with_ahu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">central_ahu</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">central_ahu</span> <span class="o">=</span> <span class="n">BuildingAHU</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -798,11 +798,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_with_ahu</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">central_ahu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">central_ahu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_central_ahu</span>
 
     <span class="nd">@central_ahu</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">central_ahu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">central_ahu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_central_ahu</span> <span class="o">=</span> <span class="n">value</span>
@@ -815,12 +815,12 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_central_ahu</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">number_of_elements_calc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">number_of_elements_calc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_elements_calc</span>
 
     <span class="nd">@number_of_elements_calc</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">number_of_elements_calc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">number_of_elements_calc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="n">ass_error_1</span> <span class="o">=</span> <span class="s2">&quot;calculation_method has to be 1,2,3 or 4&quot;</span>
 
@@ -834,12 +834,12 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_elements_calc</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">merge_windows_calc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">merge_windows_calc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merge_windows_calc</span>
 
     <span class="nd">@merge_windows_calc</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">merge_windows_calc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">merge_windows_calc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="n">ass_error_1</span> <span class="o">=</span> <span class="s2">&quot;merge windows needs to be True or False&quot;</span>
 
@@ -853,12 +853,12 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_merge_windows_calc</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">used_library_calc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">used_library_calc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_used_library_calc</span>
 
     <span class="nd">@used_library_calc</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">used_library_calc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">used_library_calc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="n">ass_error_1</span> <span class="o">=</span> <span class="s2">&quot;used library needs to be AixLib or IBPSA&quot;</span>
 

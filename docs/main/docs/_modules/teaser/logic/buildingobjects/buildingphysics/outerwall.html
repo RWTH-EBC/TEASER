@@ -80,13 +80,13 @@
 <span class="c1"># by TEASER4 Development Team</span>
 
 
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.wall</span> \
-    <span class="kn">import</span> <span class="nn">Wall</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.wall</span> \
+    <span class="kn">import</span><span class="w"> </span><span class="nn">Wall</span>
 
 
 <div class="viewcode-block" id="OuterWall">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall">[docs]</a>
-<span class="k">class</span> <span class="nc">OuterWall</span><span class="p">(</span><span class="n">Wall</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">OuterWall</span><span class="p">(</span><span class="n">Wall</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;OuterWall class</span>
 
 <span class="sd">    This class holds information of an outer wall and is a child of Wall()</span>
@@ -185,7 +185,7 @@
 <span class="sd">        Weightfactor of building element ua_value/ua_value_zone</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">OuterWall</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
@@ -197,11 +197,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_outer_radiation</span> <span class="o">=</span> <span class="mf">5.0</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__parent</span>
 
     <span class="nd">@parent</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
             <span class="n">ass_error_1</span> <span class="o">=</span> <span class="s2">&quot;Parent has to be an instance of ThermalZone()&quot;</span>
@@ -230,7 +230,7 @@
 
 <div class="viewcode-block" id="OuterWall.retrofit_wall">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall.retrofit_wall">[docs]</a>
-    <span class="k">def</span> <span class="nf">retrofit_wall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year_of_retrofit</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">retrofit_wall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year_of_retrofit</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrofits wall to German refurbishment standards.</span>
 
 <span class="sd">        This function adds an additional layer of insulation and sets the</span>

@@ -78,19 +78,19 @@
   <h1>Source code for teaser.data.output.besmod_output</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;This module contains function for BESMod model generation&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
-<span class="kn">from</span> <span class="nn">mako.template</span> <span class="kn">import</span> <span class="n">Template</span>
-<span class="kn">from</span> <span class="nn">mako.lookup</span> <span class="kn">import</span> <span class="n">TemplateLookup</span>
-<span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utilities</span>
-<span class="kn">import</span> <span class="nn">teaser.data.output.modelica_output</span> <span class="k">as</span> <span class="nn">modelica_output</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.building</span> <span class="kn">import</span> <span class="n">Building</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mako.template</span><span class="w"> </span><span class="kn">import</span> <span class="n">Template</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mako.lookup</span><span class="w"> </span><span class="kn">import</span> <span class="n">TemplateLookup</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">teaser.logic.utilities</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">utilities</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">teaser.data.output.modelica_output</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">modelica_output</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.building</span><span class="w"> </span><span class="kn">import</span> <span class="n">Building</span>
 
 
 <div class="viewcode-block" id="export_besmod">
 <a class="viewcode-back" href="../../../../code/teaser.data.output.html#teaser.data.output.besmod_output.export_besmod">[docs]</a>
-<span class="k">def</span> <span class="nf">export_besmod</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">export_besmod</span><span class="p">(</span>
         <span class="n">buildings</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Building</span><span class="p">],</span> <span class="n">Building</span><span class="p">],</span>
         <span class="n">prj</span><span class="p">:</span> <span class="s1">&#39;Project&#39;</span><span class="p">,</span>
         <span class="n">path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -262,7 +262,7 @@
                 <span class="n">bldg</span><span class="o">=</span><span class="n">bldg</span><span class="p">))</span>
             <span class="n">out_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-        <span class="k">def</span> <span class="nf">write_example_mo</span><span class="p">(</span><span class="n">example_template</span><span class="p">,</span> <span class="n">example</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">write_example_mo</span><span class="p">(</span><span class="n">example_template</span><span class="p">,</span> <span class="n">example</span><span class="p">):</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
                     <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bldg_path</span><span class="p">,</span> <span class="n">example</span> <span class="o">+</span> <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.mo&quot;</span><span class="p">)),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">model_file</span><span class="p">:</span>
                 <span class="n">model_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">example_template</span><span class="o">.</span><span class="n">render_unicode</span><span class="p">(</span>
@@ -344,7 +344,7 @@
 
 <div class="viewcode-block" id="convert_input">
 <a class="viewcode-back" href="../../../../code/teaser.data.output.html#teaser.data.output.besmod_output.convert_input">[docs]</a>
-<span class="k">def</span> <span class="nf">convert_input</span><span class="p">(</span><span class="n">building_zones_input</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]]],</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">convert_input</span><span class="p">(</span><span class="n">building_zones_input</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]]],</span>
                   <span class="n">buildings</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Building</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert input values for BESMod zone specific parameters to a dictionary.</span>
@@ -414,7 +414,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">_convert_to_zone_array</span><span class="p">(</span><span class="n">bldg</span><span class="p">,</span> <span class="n">zone_dict</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_convert_to_zone_array</span><span class="p">(</span><span class="n">bldg</span><span class="p">,</span> <span class="n">zone_dict</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert a dictionary of zone values to a BESMod-compatible array string.</span>
 
@@ -445,7 +445,7 @@
         <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="n">tz_names</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">zone_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span><span class="si">}</span><span class="s2"> thermal zones missing in given dictionary.&quot;</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_convert_heating_profile</span><span class="p">(</span><span class="n">heating_profile</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_convert_heating_profile</span><span class="p">(</span><span class="n">heating_profile</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert a 24-hour heating profile for BESMod export.</span>
 
@@ -507,7 +507,7 @@
     <span class="k">return</span> <span class="n">t_set_zone_nominal</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">amplitude</span>
 
 
-<span class="k">def</span> <span class="nf">_get_next_higher_year_value</span><span class="p">(</span><span class="n">years_dict</span><span class="p">,</span> <span class="n">given_year</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_next_higher_year_value</span><span class="p">(</span><span class="n">years_dict</span><span class="p">,</span> <span class="n">given_year</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the next higher value for a given year from a dictionary.</span>
 
@@ -531,7 +531,7 @@
     <span class="k">return</span> <span class="n">years_dict</span><span class="p">[</span><span class="n">years</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
 
 
-<span class="k">def</span> <span class="nf">_help_example_script</span><span class="p">(</span><span class="n">bldg</span><span class="p">,</span> <span class="n">dir_dymola</span><span class="p">,</span> <span class="n">test_script_template</span><span class="p">,</span> <span class="n">example</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_help_example_script</span><span class="p">(</span><span class="n">bldg</span><span class="p">,</span> <span class="n">dir_dymola</span><span class="p">,</span> <span class="n">test_script_template</span><span class="p">,</span> <span class="n">example</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a .mos script for simulating and plotting BESMod examples from a Mako template.</span>
 

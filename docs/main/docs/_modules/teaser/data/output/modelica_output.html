@@ -78,15 +78,15 @@
   <h1>Source code for teaser.data.output.modelica_output</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;This module contains functions for all modelica model generations with AixLib, IBPSA and BESMod&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">shutil</span>
-<span class="kn">from</span> <span class="nn">mako.template</span> <span class="kn">import</span> <span class="n">Template</span>
-<span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utilities</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mako.template</span><span class="w"> </span><span class="kn">import</span> <span class="n">Template</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">teaser.logic.utilities</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">utilities</span>
 
 
 <div class="viewcode-block" id="create_package">
 <a class="viewcode-back" href="../../../../code/teaser.data.output.html#teaser.data.output.modelica_output.create_package">[docs]</a>
-<span class="k">def</span> <span class="nf">create_package</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">uses</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">within</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_package</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">uses</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">within</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;creates a package.mo file</span>
 
 <span class="sd">    private function, do not call</span>
@@ -120,7 +120,7 @@
 
 <div class="viewcode-block" id="create_package_order">
 <a class="viewcode-back" href="../../../../code/teaser.data.output.html#teaser.data.output.modelica_output.create_package_order">[docs]</a>
-<span class="k">def</span> <span class="nf">create_package_order</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">package_list</span><span class="p">,</span> <span class="n">addition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_package_order</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">package_list</span><span class="p">,</span> <span class="n">addition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;creates a package.order file</span>
 
 <span class="sd">    private function, do not call</span>
@@ -154,7 +154,7 @@
 
 <div class="viewcode-block" id="copy_weather_data">
 <a class="viewcode-back" href="../../../../code/teaser.data.output.html#teaser.data.output.modelica_output.copy_weather_data">[docs]</a>
-<span class="k">def</span> <span class="nf">copy_weather_data</span><span class="p">(</span><span class="n">source_path</span><span class="p">,</span> <span class="n">destination_path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">copy_weather_data</span><span class="p">(</span><span class="n">source_path</span><span class="p">,</span> <span class="n">destination_path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Copies the imported .mos weather file to the results folder.</span>
 
 <span class="sd">    Parameters</span>

@@ -98,8 +98,8 @@
 <p>This module contains an example how to import TEASER projects from
 <code class="docutils literal notranslate"><span class="pre">*.teaserjson</span></code> and pickle in order to reuse data.
 You can run this example using the <a class="reference external" href="https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks">jupyter-notebook</a></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utilities</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">teaser.logic.utilities</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">utilities</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 </pre></div>
 </div>
 <p>In example e4_save we saved two TEASER projects using <code class="docutils literal notranslate"><span class="pre">*.teaserjson</span></code> and
@@ -110,7 +110,7 @@ first we need to instantiate our API (similar to example
 e1_generate_archetype). The json file is called
 <code class="docutils literal notranslate"><span class="pre">ArchetypeExample.teaserjson</span></code> and saved in the default path. You need to
 run e4 first before you can load this example file.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">teaser.project</span> <span class="kn">import</span> <span class="n">Project</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">teaser.project</span><span class="w"> </span><span class="kn">import</span> <span class="n">Project</span>
 
 <span class="n">prj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">()</span>
 
@@ -126,7 +126,7 @@ run e4 first before you can load this example file.</p>
 <p>To reload data from a pickle file, we do not need to instantiate an
 API, as pickle will automatically instantiate all classes as they have
 been saved. The saved file from example e4 is called ´teaser_pickle.p´</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
 
 <span class="n">load_pickle</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_default_path</span><span class="p">(),</span> <span class="s2">&quot;teaser_pickle.p&quot;</span><span class="p">)</span>
 

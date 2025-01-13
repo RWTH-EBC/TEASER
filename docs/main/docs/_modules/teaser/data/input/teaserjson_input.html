@@ -78,42 +78,42 @@
   <h1>Source code for teaser.data.input.teaserjson_input</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Load Projects in the proprietary TEASER file format .json.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.building</span> <span class="kn">import</span> <span class="n">Building</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.de.apartmentblock</span> <span class="kn">import</span> <span class="n">ApartmentBlock</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.de.multifamilyhouse</span> <span class="kn">import</span> <span class="n">MultiFamilyHouse</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.building</span><span class="w"> </span><span class="kn">import</span> <span class="n">Building</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.tabula.de.apartmentblock</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApartmentBlock</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.tabula.de.multifamilyhouse</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultiFamilyHouse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">SingleFamilyHouse</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.tabula.de.terracedhouse</span> <span class="kn">import</span> <span class="n">TerracedHouse</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.bmvbs.office</span> <span class="kn">import</span> <span class="n">Office</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.tabula.de.terracedhouse</span><span class="w"> </span><span class="kn">import</span> <span class="n">TerracedHouse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.bmvbs.office</span><span class="w"> </span><span class="kn">import</span> <span class="n">Office</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">SingleFamilyDwelling</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.bmvbs.custom.institute</span> <span class="kn">import</span> <span class="n">Institute</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.bmvbs.custom.institute4</span> <span class="kn">import</span> <span class="n">Institute4</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.bmvbs.custom.institute8</span> <span class="kn">import</span> <span class="n">Institute8</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.thermalzone</span> <span class="kn">import</span> <span class="n">ThermalZone</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingsystems.buildingahu</span> <span class="kn">import</span> <span class="n">BuildingAHU</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.useconditions</span> <span class="kn">import</span> <span class="n">UseConditions</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.outerwall</span> <span class="kn">import</span> <span class="n">OuterWall</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.layer</span> <span class="kn">import</span> <span class="n">Layer</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.material</span> <span class="kn">import</span> <span class="n">Material</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.rooftop</span> <span class="kn">import</span> <span class="n">Rooftop</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.groundfloor</span> <span class="kn">import</span> <span class="n">GroundFloor</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.innerwall</span> <span class="kn">import</span> <span class="n">InnerWall</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.ceiling</span> <span class="kn">import</span> <span class="n">Ceiling</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.floor</span> <span class="kn">import</span> <span class="n">Floor</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.window</span> <span class="kn">import</span> <span class="n">Window</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.door</span> <span class="kn">import</span> <span class="n">Door</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">collections</span>
-<span class="kn">import</span> <span class="nn">teaser</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.bmvbs.custom.institute</span><span class="w"> </span><span class="kn">import</span> <span class="n">Institute</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.bmvbs.custom.institute4</span><span class="w"> </span><span class="kn">import</span> <span class="n">Institute4</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.bmvbs.custom.institute8</span><span class="w"> </span><span class="kn">import</span> <span class="n">Institute8</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.thermalzone</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThermalZone</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingsystems.buildingahu</span><span class="w"> </span><span class="kn">import</span> <span class="n">BuildingAHU</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.useconditions</span><span class="w"> </span><span class="kn">import</span> <span class="n">UseConditions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.outerwall</span><span class="w"> </span><span class="kn">import</span> <span class="n">OuterWall</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.layer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Layer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.material</span><span class="w"> </span><span class="kn">import</span> <span class="n">Material</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.rooftop</span><span class="w"> </span><span class="kn">import</span> <span class="n">Rooftop</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.groundfloor</span><span class="w"> </span><span class="kn">import</span> <span class="n">GroundFloor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.innerwall</span><span class="w"> </span><span class="kn">import</span> <span class="n">InnerWall</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.ceiling</span><span class="w"> </span><span class="kn">import</span> <span class="n">Ceiling</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.floor</span><span class="w"> </span><span class="kn">import</span> <span class="n">Floor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.window</span><span class="w"> </span><span class="kn">import</span> <span class="n">Window</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.door</span><span class="w"> </span><span class="kn">import</span> <span class="n">Door</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">collections</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">teaser</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 
 
 <div class="viewcode-block" id="load_teaser_json">
 <a class="viewcode-back" href="../../../../code/teaser.data.input.html#teaser.data.input.teaserjson_input.load_teaser_json">[docs]</a>
-<span class="k">def</span> <span class="nf">load_teaser_json</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">project</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_teaser_json</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">project</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Load a project from json.</span>
 
 <span class="sd">    TEASERs internal file format to store information.</span>
@@ -354,7 +354,7 @@
 
 <div class="viewcode-block" id="set_basic_data_teaser">
 <a class="viewcode-back" href="../../../../code/teaser.data.input.html#teaser.data.input.teaserjson_input.set_basic_data_teaser">[docs]</a>
-<span class="k">def</span> <span class="nf">set_basic_data_teaser</span><span class="p">(</span><span class="n">wall_in</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_basic_data_teaser</span><span class="p">(</span><span class="n">wall_in</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set basic data for a building element.</span>
 
 <span class="sd">    Helper function.</span>
@@ -398,7 +398,7 @@
 
 <div class="viewcode-block" id="set_layer_data_teaser">
 <a class="viewcode-back" href="../../../../code/teaser.data.input.html#teaser.data.input.teaserjson_input.set_layer_data_teaser">[docs]</a>
-<span class="k">def</span> <span class="nf">set_layer_data_teaser</span><span class="p">(</span><span class="n">wall_in</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_layer_data_teaser</span><span class="p">(</span><span class="n">wall_in</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set layer data of a building element.</span>
 
 <span class="sd">    Helper function.</span>

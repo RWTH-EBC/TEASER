@@ -77,15 +77,15 @@
              
   <h1>Source code for teaser.data.dataclass</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;This module holds file paths and bindings for json data.&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 
-<span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utils</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">teaser.logic.utilities</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">utils</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">collections</span>
 
-<span class="kn">from</span> <span class="nn">teaser.data.utilities</span> <span class="kn">import</span> <span class="n">ConstructionData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.data.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstructionData</span>
 <span class="n">v</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span>
 <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
@@ -95,7 +95,7 @@
 
 <div class="viewcode-block" id="DataClass">
 <a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.dataclass.DataClass">[docs]</a>
-<span class="k">class</span> <span class="nc">DataClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DataClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for JSON data.</span>
 
 <span class="sd">    This class loads all JSON files with statistic or template data needed</span>
@@ -127,7 +127,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">construction_data</span><span class="p">:</span> <span class="n">ConstructionData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">object</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">construction_data</span><span class="p">:</span> <span class="n">ConstructionData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">object</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct DataClass.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">element_bind</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">construction_data</span><span class="o">.</span><span class="n">is_iwu</span><span class="p">():</span>
@@ -170,7 +170,7 @@
 
 <div class="viewcode-block" id="DataClass.load_tb_binding">
 <a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.dataclass.DataClass.load_tb_binding">[docs]</a>
-    <span class="k">def</span> <span class="nf">load_tb_binding</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_tb_binding</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Load TypeBuildingElement json into binding classes.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">path_tb</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_tb</span><span class="p">):</span>
@@ -188,7 +188,7 @@
 
 <div class="viewcode-block" id="DataClass.load_uc_binding">
 <a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.dataclass.DataClass.load_uc_binding">[docs]</a>
-    <span class="k">def</span> <span class="nf">load_uc_binding</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_uc_binding</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Load UseConditions json into binding classes.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">path_uc</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_uc</span><span class="p">):</span>
@@ -206,7 +206,7 @@
 
 <div class="viewcode-block" id="DataClass.load_mat_binding">
 <a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.dataclass.DataClass.load_mat_binding">[docs]</a>
-    <span class="k">def</span> <span class="nf">load_mat_binding</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_mat_binding</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Load MaterialTemplates json into binding classes.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">path_mat</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_mat</span><span class="p">):</span>

@@ -82,13 +82,13 @@
 <span class="c1"># You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks)</span>
 
 
-<span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utilities</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">teaser.logic.utilities</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">utilities</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 
 <div class="viewcode-block" id="example_load">
 <a class="viewcode-back" href="../../../code/teaser.examples.html#teaser.examples.e5_load.example_load">[docs]</a>
-<span class="k">def</span> <span class="nf">example_load</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">example_load</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This function demonstrates different loading options of TEASER&quot;&quot;&quot;</span>
 
     <span class="c1"># In example e4_save we saved two TEASER projects using `*.teaserjson` and</span>
@@ -101,7 +101,7 @@
     <span class="c1"># `ArchetypeExample.teaserjson` and saved in the default path. You need to</span>
     <span class="c1"># run e4 first before you can load this example file.</span>
 
-    <span class="kn">from</span> <span class="nn">teaser.project</span> <span class="kn">import</span> <span class="n">Project</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">teaser.project</span><span class="w"> </span><span class="kn">import</span> <span class="n">Project</span>
 
     <span class="n">prj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">()</span>
 
@@ -117,7 +117,7 @@
     <span class="c1"># API, as pickle will automatically instantiate all classes as they have</span>
     <span class="c1"># been saved. The saved file from example e4 is called ´teaser_pickle.p´</span>
 
-    <span class="kn">import</span> <span class="nn">pickle</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
 
     <span class="n">load_pickle</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_default_path</span><span class="p">(),</span> <span class="s2">&quot;teaser_pickle.p&quot;</span><span class="p">)</span>
 

@@ -79,24 +79,24 @@
 <span></span><span class="c1"># created June 2015</span>
 <span class="c1"># by TEASER4 Development Team</span>
 
-<span class="kn">from</span> <span class="nn">teaser.logic.archetypebuildings.residential</span> \
-    <span class="kn">import</span> <span class="nn">Residential</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.useconditions</span> \
-    <span class="kn">import</span> <span class="nn">UseConditions</span> <span class="k">as</span> <span class="nn">UseCond</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.ceiling</span> <span class="kn">import</span> <span class="n">Ceiling</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.floor</span> <span class="kn">import</span> <span class="n">Floor</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.groundfloor</span> \
-    <span class="kn">import</span> <span class="nn">GroundFloor</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.innerwall</span> <span class="kn">import</span> <span class="n">InnerWall</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.outerwall</span> <span class="kn">import</span> <span class="n">OuterWall</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.rooftop</span> <span class="kn">import</span> <span class="n">Rooftop</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.window</span> <span class="kn">import</span> <span class="n">Window</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.thermalzone</span> <span class="kn">import</span> <span class="n">ThermalZone</span>
-<span class="kn">import</span> <span class="nn">teaser.data.utilities</span> <span class="k">as</span> <span class="nn">datahandling</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.residential</span> \
+    <span class="kn">import</span><span class="w"> </span><span class="nn">Residential</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.useconditions</span> \
+    <span class="kn">import</span><span class="w"> </span><span class="nn">UseConditions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">UseCond</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.ceiling</span><span class="w"> </span><span class="kn">import</span> <span class="n">Ceiling</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.floor</span><span class="w"> </span><span class="kn">import</span> <span class="n">Floor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.groundfloor</span> \
+    <span class="kn">import</span><span class="w"> </span><span class="nn">GroundFloor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.innerwall</span><span class="w"> </span><span class="kn">import</span> <span class="n">InnerWall</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.outerwall</span><span class="w"> </span><span class="kn">import</span> <span class="n">OuterWall</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.rooftop</span><span class="w"> </span><span class="kn">import</span> <span class="n">Rooftop</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.window</span><span class="w"> </span><span class="kn">import</span> <span class="n">Window</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.thermalzone</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThermalZone</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">teaser.data.utilities</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">datahandling</span>
 
 <div class="viewcode-block" id="EST1a">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.archetypebuildings.urbanrenet.html#teaser.logic.archetypebuildings.urbanrenet.est1a.EST1a">[docs]</a>
-<span class="k">class</span> <span class="nc">EST1a</span><span class="p">(</span><span class="n">Residential</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">EST1a</span><span class="p">(</span><span class="n">Residential</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Archetype for Urban Fabric Type EST1a.</span>
 
 <span class="sd">    Subclass from Residential for urban fabric type EST1a. Boundary values</span>
@@ -197,7 +197,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">parent</span><span class="p">,</span>
             <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -294,7 +294,7 @@
 
 <div class="viewcode-block" id="EST1a.generate_archetype">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.archetypebuildings.urbanrenet.html#teaser.logic.archetypebuildings.urbanrenet.est1a.EST1a.generate_archetype">[docs]</a>
-    <span class="k">def</span> <span class="nf">generate_archetype</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_archetype</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates a residential building.</span>
 
 <span class="sd">        With given values, this class generates a type residential</span>
@@ -449,30 +449,30 @@
 
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">construction_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construction_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_construction_data</span>
 
     <span class="nd">@construction_data</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">construction_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construction_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_construction_data</span> <span class="o">=</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">check_construction_data_setter_iwu</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">neighbour_buildings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">neighbour_buildings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_neighbour_buildings</span>
 
     <span class="nd">@neighbour_buildings</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">neighbour_buildings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">neighbour_buildings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_neighbour_buildings</span> <span class="o">=</span> <span class="n">value</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_neighbour_buildings</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">number_of_apartments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">number_of_apartments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_apartments</span>
 
     <span class="nd">@number_of_apartments</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">number_of_apartments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">number_of_apartments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_apartments</span> <span class="o">=</span> <span class="n">value</span>
         <span class="k">else</span><span class="p">:</span>

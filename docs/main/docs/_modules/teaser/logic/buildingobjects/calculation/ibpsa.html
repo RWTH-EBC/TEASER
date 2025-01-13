@@ -78,14 +78,14 @@
   <h1>Source code for teaser.logic.buildingobjects.calculation.ibpsa</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;This module includes IBPSA calculation class.&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utilities</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">teaser.logic.utilities</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">utilities</span>
 
 
 <div class="viewcode-block" id="IBPSA">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.ibpsa.IBPSA">[docs]</a>
-<span class="k">class</span> <span class="nc">IBPSA</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">IBPSA</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to calculate parameters for AixLib output.</span>
 
 <span class="sd">    This class holds functions to sort and partly rewrite zone and building</span>
@@ -111,7 +111,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct IBPSA.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">file_internal_gains</span> <span class="o">=</span> <span class="s2">&quot;InternalGains_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.mat&quot;</span>
@@ -125,7 +125,7 @@
 
 <div class="viewcode-block" id="IBPSA.modelica_gains_boundary">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.ibpsa.IBPSA.modelica_gains_boundary">[docs]</a>
-    <span class="k">def</span> <span class="nf">modelica_gains_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zone</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">modelica_gains_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zone</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;creates .mat file for internal gains boundary conditions</span>
 
 <span class="sd">        This function creates a matfile (-v4) for building internal gains</span>
@@ -203,7 +203,7 @@
             <span class="n">export</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index_label</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_delete_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_delete_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete a file before new information is written to it.</span>
 
 <span class="sd">        If a building with the exact name and project name is generated, we need to make</span>

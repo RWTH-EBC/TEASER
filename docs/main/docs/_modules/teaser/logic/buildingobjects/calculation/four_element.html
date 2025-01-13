@@ -78,15 +78,15 @@
   <h1>Source code for teaser.logic.buildingobjects.calculation.four_element</h1><div class="highlight"><pre>
 <span></span><span class="c1"># created January 2017</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">division</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 
 
 <div class="viewcode-block" id="FourElement">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.four_element.FourElement">[docs]</a>
-<span class="k">class</span> <span class="nc">FourElement</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FourElement</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This class contains attributes and functions for four element model</span>
 
 <span class="sd">    This model adds another element for the roof. Roofs commonly exhibit the</span>
@@ -460,7 +460,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thermal_zone</span><span class="p">,</span> <span class="n">merge_windows</span><span class="p">,</span> <span class="n">t_bt</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thermal_zone</span><span class="p">,</span> <span class="n">merge_windows</span><span class="p">,</span> <span class="n">t_bt</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor for TwoElement&quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">internal_id</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
@@ -674,7 +674,7 @@
 
 <div class="viewcode-block" id="FourElement.calc_attributes">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.four_element.FourElement.calc_attributes">[docs]</a>
-    <span class="k">def</span> <span class="nf">calc_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calc_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calls all necessary function to calculate model attributes&quot;&quot;&quot;</span>
 
         <span class="k">for</span> <span class="n">out_wall</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">outer_walls</span><span class="p">:</span>
@@ -776,7 +776,7 @@
 
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_calc_parallel_connection</span><span class="p">(</span><span class="n">element_list</span><span class="p">,</span> <span class="n">omega</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calc_parallel_connection</span><span class="p">(</span><span class="n">element_list</span><span class="p">,</span> <span class="n">omega</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Parallel connection of walls according to VDI 6007</span>
 
 <span class="sd">        Calculates the parallel connection of wall elements according to VDI</span>
@@ -880,7 +880,7 @@
                 <span class="p">)</span>
         <span class="k">return</span> <span class="n">r1</span><span class="p">,</span> <span class="n">c1</span>
 
-    <span class="k">def</span> <span class="nf">_sum_outer_wall_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_sum_outer_wall_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Sum attributes for outer wall elements</span>
 
 <span class="sd">        This function sums and computes the area-weighted values,</span>
@@ -960,7 +960,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">alpha_rad_outer_ow</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r_rad_outer_ow</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_ow</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">alpha_comb_outer_ow</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r_comb_outer_ow</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_ow</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_sum_ground_floor_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_sum_ground_floor_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Sum attributes for ground floor elements</span>
 
 <span class="sd">        This function sums and computes the area-weighted values,</span>
@@ -1003,7 +1003,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">alpha_rad_inner_gf</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r_rad_inner_gf</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_gf</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">alpha_comb_inner_gf</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r_comb_inner_gf</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_gf</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_sum_rooftop_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_sum_rooftop_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Sum attributes for rooftop elements</span>
 
 <span class="sd">        This function sums and computes the area-weighted values,</span>
@@ -1080,7 +1080,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">alpha_rad_outer_rt</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r_rad_outer_rt</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_rt</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">alpha_comb_outer_rt</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r_comb_outer_rt</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_rt</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_sum_inner_wall_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_sum_inner_wall_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Sum attributes for interior elements</span>
 
 <span class="sd">        This function sums and computes the area-weighted values,</span>
@@ -1148,7 +1148,7 @@
 
         <span class="c1"># adjacent thermal zones are not supported!</span>
 
-    <span class="k">def</span> <span class="nf">_sum_window_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_sum_window_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Sum attributes for window elements</span>
 
 <span class="sd">        This function sums and computes the area-weighted values,</span>
@@ -1231,7 +1231,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">alpha_rad_outer_win</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r_rad_outer_win</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_win</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">alpha_comb_outer_win</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r_comb_outer_win</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_win</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_calc_outer_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calc_outer_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Lumped parameter for outer wall elements</span>
 
 <span class="sd">        Calculates all necessary parameters for outer walls. This includes</span>
@@ -1333,7 +1333,7 @@
                     <span class="s2">&quot;parameter cannot be calculated&quot;</span>
                 <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_calc_ground_floor_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calc_ground_floor_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Lumped parameter for ground floor elements</span>
 
 <span class="sd">        Calculates lumped parameters for ground floors. No windows in ground</span>
@@ -1374,7 +1374,7 @@
                 <span class="s2">&quot;parameter cannot be calculated&quot;</span>
             <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_calc_rooftop_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calc_rooftop_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Lumped parameter for ground floor elements</span>
 
 <span class="sd">        Calculates lumped parameters for rooftops. Windows are considered in</span>
@@ -1413,7 +1413,7 @@
         <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;As no rooftops are defined lumped &quot;</span> <span class="s2">&quot;parameter cannot be calculated&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_calc_inner_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calc_inner_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Lumped parameter for outer wall elements</span>
 
 <span class="sd">        Calculates all necessary parameters for inner walls. This includes</span>
@@ -1455,7 +1455,7 @@
                 <span class="s2">&quot;to RunTimeErrors&quot;</span>
             <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_calc_wf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calc_wf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Weightfactors for outer elements(walls, roof, ground floor, windows)</span>
 
 <span class="sd">        Calculates the weightfactors of outer walls, rooftops, including</span>
@@ -1490,7 +1490,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;specify merge window method correctly&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_calc_mean_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calc_mean_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates mean values for inner and outer elements</span>
 
 <span class="sd">        This function calculates mean values inside the thermal zone (e.g.</span>
@@ -1511,7 +1511,7 @@
             <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_win</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha_rad_outer_win</span>
         <span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">area_ow</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_rt</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_win</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_calc_number_of_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calc_number_of_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the number of facade elements with different tilt/orient</span>
 
 <span class="sd">        This function calculates the number of outer elements with a</span>
@@ -1531,7 +1531,7 @@
             <span class="n">tilt_orient_rt</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">roof</span><span class="o">.</span><span class="n">orientation</span><span class="p">,</span> <span class="n">roof</span><span class="o">.</span><span class="n">tilt</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_rt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">tilt_orient_rt</span><span class="p">)))</span>
 
-    <span class="k">def</span> <span class="nf">_fill_zone_lists</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_fill_zone_lists</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Fills lists like weightfactors and tilt, orientation</span>
 
 <span class="sd">        Fills the lists of a zone  according to orientation and tilt of the</span>
@@ -1617,7 +1617,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">weightfactor_rt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="n">rt</span><span class="o">.</span><span class="n">wf_out</span> <span class="k">for</span> <span class="n">rt</span> <span class="ow">in</span> <span class="n">rts</span><span class="p">]))</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">rooftop_areas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="n">rt</span><span class="o">.</span><span class="n">area</span> <span class="k">for</span> <span class="n">rt</span> <span class="ow">in</span> <span class="n">rts</span><span class="p">]))</span>
 
-    <span class="k">def</span> <span class="nf">_calc_heat_load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calc_heat_load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Static heat load calculation</span>
 
 <span class="sd">        This function calculates the static heat load of the thermal zone by</span>
@@ -1657,7 +1657,7 @@
 
 <div class="viewcode-block" id="FourElement.set_calc_default">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.four_element.FourElement.set_calc_default">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_calc_default</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_calc_default</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;sets default calculation parameters</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 

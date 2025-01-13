@@ -77,21 +77,21 @@
              
   <h1>Source code for teaser.logic.buildingobjects.useconditions</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;This module contains UseConditions class.&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="ne">ValueError</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">builtins</span><span class="w"> </span><span class="kn">import</span> <span class="ne">ValueError</span>
 
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">cycle</span><span class="p">,</span> <span class="n">islice</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">cycle</span><span class="p">,</span> <span class="n">islice</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
 
-<span class="kn">import</span> <span class="nn">teaser.data.input.usecond_input</span> <span class="k">as</span> <span class="nn">usecond_input</span>
-<span class="kn">import</span> <span class="nn">teaser.data.output.usecond_output</span> <span class="k">as</span> <span class="nn">usecond_output</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.utilities</span> <span class="kn">import</span> <span class="n">division_from_json</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">teaser.data.input.usecond_input</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">usecond_input</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">teaser.data.output.usecond_output</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">usecond_output</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">division_from_json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 
 <div class="viewcode-block" id="UseConditions">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions">[docs]</a>
-<span class="k">class</span> <span class="nc">UseConditions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">UseConditions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;UseConditions class contains all zone specific boundary conditions.</span>
 
 <span class="sd">    Class that contains the boundary conditions of use for buildings defined in</span>
@@ -317,7 +317,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct UseConditions.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">internal_id</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
 
@@ -506,7 +506,7 @@
 
 <div class="viewcode-block" id="UseConditions.adjust_profile_by_opening">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.adjust_profile_by_opening">[docs]</a>
-    <span class="k">def</span> <span class="nf">adjust_profile_by_opening</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">profile</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">adjust_profile_by_opening</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">profile</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Adjusts the given profile by opening times specified for use</span>
 <span class="sd">        condition with the parameter self.set_back_times.</span>
 
@@ -565,7 +565,7 @@
 
 <div class="viewcode-block" id="UseConditions.adjust_profile_by_weekend">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.adjust_profile_by_weekend">[docs]</a>
-    <span class="k">def</span> <span class="nf">adjust_profile_by_weekend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">profile</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">adjust_profile_by_weekend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">profile</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Scales the given profile on weekends. Factor for scaling is taken</span>
 <span class="sd">        from self.profiles_weekend_factor.</span>
 
@@ -597,7 +597,7 @@
 
 <div class="viewcode-block" id="UseConditions.load_use_conditions">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.load_use_conditions">[docs]</a>
-    <span class="k">def</span> <span class="nf">load_use_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zone_usage</span><span class="p">,</span> <span class="n">data_class</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_use_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zone_usage</span><span class="p">,</span> <span class="n">data_class</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Load typical use conditions from JSON data base.</span>
 
 <span class="sd">        Loads Use conditions specified in the JSON.</span>
@@ -627,7 +627,7 @@
 
 <div class="viewcode-block" id="UseConditions.save_use_conditions">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.save_use_conditions">[docs]</a>
-    <span class="k">def</span> <span class="nf">save_use_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_class</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_use_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_class</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Documentation is missing.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">data_class</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">data_class</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">data</span>
@@ -640,7 +640,7 @@
 <div class="viewcode-block" id="UseConditions.is_periodic">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.is_periodic">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">is_periodic</span><span class="p">(</span><span class="n">profile_list</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_periodic</span><span class="p">(</span><span class="n">profile_list</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks if the given profile list is periodic.</span>
 <span class="sd">         Allowed periods are: 24h, 168h (7 days), 8760h (1year).</span>
 
@@ -659,22 +659,22 @@
 
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">persons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">persons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_persons</span>
 
     <span class="nd">@persons</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">persons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">persons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">OrderedDict</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_persons</span> <span class="o">=</span> <span class="n">division_from_json</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_persons</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">with_ideal_thresholds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">with_ideal_thresholds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_with_ideal_thresholds</span>
 
     <span class="nd">@with_ideal_thresholds</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">with_ideal_thresholds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">with_ideal_thresholds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">with_ahu</span> <span class="ow">is</span> <span class="kc">False</span> <span class="ow">and</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;Threshold for ideal heaters should only be used&quot;</span>
@@ -684,11 +684,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_with_ideal_thresholds</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">heating_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">heating_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_heating_profile</span>
 
     <span class="nd">@heating_profile</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">heating_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">heating_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span> <span class="o">*</span> <span class="mi">24</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_periodic</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
@@ -700,11 +700,11 @@
             <span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">cooling_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cooling_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cooling_profile</span>
 
     <span class="nd">@cooling_profile</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">cooling_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cooling_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span> <span class="o">*</span> <span class="mi">24</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_periodic</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
@@ -716,11 +716,11 @@
             <span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">persons_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">persons_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_persons_profile</span>
 
     <span class="nd">@persons_profile</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">persons_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">persons_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span> <span class="o">*</span> <span class="mi">24</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_periodic</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
@@ -732,11 +732,11 @@
             <span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">machines_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">machines_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_machines_profile</span>
 
     <span class="nd">@machines_profile</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">machines_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">machines_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span> <span class="o">*</span> <span class="mi">24</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_periodic</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
@@ -748,11 +748,11 @@
             <span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">lighting_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lighting_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lighting_profile</span>
 
     <span class="nd">@lighting_profile</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">lighting_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lighting_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span> <span class="o">*</span> <span class="mi">24</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_periodic</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
@@ -764,7 +764,7 @@
             <span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">schedules</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">schedules</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_schedules</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
             <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">&quot;2019-01-01 00:00:00&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">8760</span><span class="p">,</span>
                                 <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;h&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span>
@@ -785,12 +785,12 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schedules</span>
 
     <span class="nd">@schedules</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">schedules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">schedules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_schedules</span> <span class="o">=</span> <span class="n">value</span>
 
 <div class="viewcode-block" id="UseConditions.calc_adj_schedules">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.useconditions.UseConditions.calc_adj_schedules">[docs]</a>
-    <span class="k">def</span> <span class="nf">calc_adj_schedules</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calc_adj_schedules</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;calculates adjusted schedules for use conditions. When called the</span>
 <span class="sd">        profiles get adjusted due to specified conditions. Afterwards the</span>
 <span class="sd">        existing schedules will be overwritten by the resulting pandas dataframe</span>
@@ -834,11 +834,11 @@
 
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">adjusted_opening_times</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">adjusted_opening_times</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adjusted_opening_times</span>
 
     <span class="nd">@adjusted_opening_times</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">adjusted_opening_times</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">adjusted_opening_times</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;adjusted_opening_times must be list of length 2,&quot;</span>
                              <span class="sa">f</span><span class="s2">&quot; but list of length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="s2"> was provided&quot;</span><span class="p">)</span>
@@ -850,11 +850,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_adjusted_opening_times</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">set_back_times</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_back_times</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_back_times</span>
 
     <span class="nd">@set_back_times</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">set_back_times</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_back_times</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;set_back_times must be list of length 2,&quot;</span>
                              <span class="sa">f</span><span class="s2">&quot; but list of length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="s2"> was provided&quot;</span><span class="p">)</span>
@@ -866,11 +866,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_set_back_times</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">first_saturday_of_year</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">first_saturday_of_year</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_first_saturday_of_year</span>
 
     <span class="nd">@first_saturday_of_year</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">first_saturday_of_year</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">first_saturday_of_year</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">7</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;first_saturday_of_year must be int between &quot;</span>
                              <span class="sa">f</span><span class="s2">&quot;[1, 7] but is </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -881,11 +881,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_first_saturday_of_year</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span>
 
     <span class="nd">@parent</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
@@ -901,11 +901,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">use_maintained_illuminance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">use_maintained_illuminance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_maintained_illuminance</span>
 
     <span class="nd">@use_maintained_illuminance</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">use_maintained_illuminance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">use_maintained_illuminance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_lighting_power</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maintained_illuminance</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">lighting_efficiency_lumen</span>
         <span class="k">else</span><span class="p">:</span>
@@ -914,11 +914,11 @@
 
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">lighting_power</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lighting_power</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lighting_power</span>
 
     <span class="nd">@lighting_power</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">lighting_power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lighting_power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_maintained_illuminance</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
                 <span class="s2">&quot;Parameter &#39;use_maintained_illuminance&#39; is &#39;True&#39;!</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -928,7 +928,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_lighting_power</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">infiltration_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">infiltration_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
             <span class="s2">&quot;&#39;infiltration_rate&#39; is deprecated and will be removed in a future release. &quot;</span>
             <span class="s2">&quot;Use &#39;base_infiltration&#39; instead.&quot;</span><span class="p">,</span>
@@ -937,7 +937,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_infiltration</span>
 
     <span class="nd">@infiltration_rate</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">infiltration_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">infiltration_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">base_infiltration</span> <span class="o">=</span> <span class="n">value</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
             <span class="s2">&quot;&#39;infiltration_rate&#39; is deprecated and will be removed in a future release. &quot;</span>

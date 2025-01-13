@@ -77,17 +77,17 @@
              
   <h1>Source code for teaser.logic.buildingobjects.buildingphysics.wall</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;asd&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.buildingelement</span> \
-    <span class="kn">import</span> <span class="nn">BuildingElement</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.layer</span> <span class="kn">import</span> <span class="n">Layer</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.material</span> <span class="kn">import</span> <span class="n">Material</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.buildingelement</span> \
+    <span class="kn">import</span><span class="w"> </span><span class="nn">BuildingElement</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.layer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Layer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.material</span><span class="w"> </span><span class="kn">import</span> <span class="n">Material</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 
 
 <div class="viewcode-block" id="Wall">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.wall.Wall">[docs]</a>
-<span class="k">class</span> <span class="nc">Wall</span><span class="p">(</span><span class="n">BuildingElement</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Wall</span><span class="p">(</span><span class="n">BuildingElement</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Wall class</span>
 
 <span class="sd">    This class holds functions and information for walls. It inherits for</span>
@@ -189,14 +189,14 @@
 <span class="sd">        Weightfactor of building element ua_value/ua_value_zone</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor of Wall</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Wall</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Wall.calc_equivalent_res">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.wall.Wall.calc_equivalent_res">[docs]</a>
-    <span class="k">def</span> <span class="nf">calc_equivalent_res</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t_bt</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calc_equivalent_res</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t_bt</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Equivalent resistance according to VDI 6007.</span>
 
 <span class="sd">        Calculates the equivalent resistance and capacity of a wall according</span>
@@ -311,7 +311,7 @@
 
 <div class="viewcode-block" id="Wall.insulate_wall">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.wall.Wall.insulate_wall">[docs]</a>
-    <span class="k">def</span> <span class="nf">insulate_wall</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">insulate_wall</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">material</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">thickness</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -348,7 +348,7 @@
 
 <div class="viewcode-block" id="Wall.retrofit_wall">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.wall.Wall.retrofit_wall">[docs]</a>
-    <span class="k">def</span> <span class="nf">retrofit_wall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year_of_retrofit</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">retrofit_wall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year_of_retrofit</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrofits wall to German refurbishment standards.</span>
 
 <span class="sd">        This function adds an additional layer of insulation and sets the</span>
@@ -375,7 +375,7 @@
 
 <div class="viewcode-block" id="Wall.initialize_retrofit">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.wall.Wall.initialize_retrofit">[docs]</a>
-    <span class="k">def</span> <span class="nf">initialize_retrofit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">material</span><span class="p">,</span> <span class="n">year_of_retrofit</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">initialize_retrofit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">material</span><span class="p">,</span> <span class="n">year_of_retrofit</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks the retrofit inputs and sets material and year of retrofit</span>
 <span class="sd">        if needed.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_calc_default</span><span class="p">()</span>
@@ -396,7 +396,7 @@
 
 <div class="viewcode-block" id="Wall.set_insulation">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.wall.Wall.set_insulation">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_insulation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">material</span><span class="p">,</span> <span class="n">calc_u</span><span class="p">,</span> <span class="n">year_of_retrofit</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_insulation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">material</span><span class="p">,</span> <span class="n">calc_u</span><span class="p">,</span> <span class="n">year_of_retrofit</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the correct insulation thickness based on the given u-value&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">calc_u</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_value</span> <span class="o">&lt;=</span> <span class="n">calc_u</span><span class="p">:</span>
@@ -415,7 +415,7 @@
 
 <div class="viewcode-block" id="Wall.calc_ins_layer_thickness">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.wall.Wall.calc_ins_layer_thickness">[docs]</a>
-    <span class="k">def</span> <span class="nf">calc_ins_layer_thickness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">calc_u</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calc_ins_layer_thickness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">calc_u</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the thickness of the fresh insulated layer from</span>
 <span class="sd">        retrofit&quot;&quot;&quot;</span>
         <span class="n">r_conduc_rem</span> <span class="o">=</span> <span class="mi">0</span>

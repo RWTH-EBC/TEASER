@@ -78,17 +78,17 @@
   <h1>Source code for teaser.logic.buildingobjects.buildingphysics.buildingelement</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;This module contains the Base class for all building elements.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
-<span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.layer</span> <span class="kn">import</span> <span class="n">Layer</span>
-<span class="kn">import</span> <span class="nn">teaser.data.input.buildingelement_input_json</span> <span class="k">as</span> <span class="nn">buildingelement_input</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">division</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingphysics.layer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Layer</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">teaser.data.input.buildingelement_input_json</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">buildingelement_input</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
 
 <div class="viewcode-block" id="BuildingElement">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement">[docs]</a>
-<span class="k">class</span> <span class="nc">BuildingElement</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BuildingElement</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Building element class.</span>
 
 <span class="sd">    This is the base class for all building elements. Building elements are</span>
@@ -191,7 +191,7 @@
 <span class="sd">        Weightfactor of building element ua_value/ua_value_zone</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor for BuildingElement</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -233,7 +233,7 @@
 
 <div class="viewcode-block" id="BuildingElement.calc_ua_value">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.calc_ua_value">[docs]</a>
-    <span class="k">def</span> <span class="nf">calc_ua_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calc_ua_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;U*A value for building element.</span>
 
 <span class="sd">        Calculates the U*A value and resistances for radiative and</span>
@@ -274,7 +274,7 @@
 
 <div class="viewcode-block" id="BuildingElement.gather_element_properties">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.gather_element_properties">[docs]</a>
-    <span class="k">def</span> <span class="nf">gather_element_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">gather_element_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper function for matrix calculation.</span>
 
 <span class="sd">        Gathers all material properties of the building element and returns</span>
@@ -317,7 +317,7 @@
 
 <div class="viewcode-block" id="BuildingElement.add_layer">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.add_layer">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_layer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layer</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_layer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layer</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds a layer at a certain position</span>
 
 <span class="sd">        This function adds a Layer instance to the layer list at a given</span>
@@ -343,7 +343,7 @@
 
 <div class="viewcode-block" id="BuildingElement.add_layer_list">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.add_layer_list">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_layer_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layer_list</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_layer_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layer_list</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Appends a layer set to the layer list</span>
 
 <span class="sd">        The layer list has to be in correct order</span>
@@ -363,7 +363,7 @@
 
 <div class="viewcode-block" id="BuildingElement.load_type_element">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.load_type_element">[docs]</a>
-    <span class="k">def</span> <span class="nf">load_type_element</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_type_element</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">year</span><span class="p">,</span>
             <span class="n">construction</span><span class="p">,</span>
@@ -411,7 +411,7 @@
 
 <div class="viewcode-block" id="BuildingElement.save_type_element">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.save_type_element">[docs]</a>
-    <span class="k">def</span> <span class="nf">save_type_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_class</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_type_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_class</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Typical element saver.</span>
 
 <span class="sd">        Saves typical building elements according to their construction</span>
@@ -438,7 +438,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">data_class</span> <span class="o">=</span> <span class="n">data_class</span>
 
-        <span class="kn">import</span> <span class="nn">teaser.data.output.buildingelement_output</span> <span class="k">as</span> \
+        <span class="kn">import</span><span class="w"> </span><span class="nn">teaser.data.output.buildingelement_output</span><span class="w"> </span><span class="k">as</span><span class="w"> </span>\
             <span class="n">buildingelement_output</span>
 
         <span class="n">buildingelement_output</span><span class="o">.</span><span class="n">save_type_element</span><span class="p">(</span><span class="n">element</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
@@ -447,7 +447,7 @@
 
 <div class="viewcode-block" id="BuildingElement.delete_type_element">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.delete_type_element">[docs]</a>
-    <span class="k">def</span> <span class="nf">delete_type_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_class</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete_type_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_class</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Deletes typical element.</span>
 
 <span class="sd">        Deletes typical building elements according to their construction</span>
@@ -474,7 +474,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">data_class</span> <span class="o">=</span> <span class="n">data_class</span>
 
-        <span class="kn">import</span> <span class="nn">teaser.data.output.buildingelement_output</span> <span class="k">as</span> \
+        <span class="kn">import</span><span class="w"> </span><span class="nn">teaser.data.output.buildingelement_output</span><span class="w"> </span><span class="k">as</span><span class="w"> </span>\
             <span class="n">buildingelement_output</span>
 
         <span class="n">buildingelement_output</span><span class="o">.</span><span class="n">delete_type_element</span><span class="p">(</span><span class="n">element</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
@@ -483,7 +483,7 @@
 
 <div class="viewcode-block" id="BuildingElement.set_calc_default">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.set_calc_default">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_calc_default</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_calc_default</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets all calculated values of the Building Element to zero</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">r1</span> <span class="o">=</span> <span class="mf">0.0</span>
@@ -503,11 +503,11 @@
 
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
 
     <span class="nd">@name</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
 
             <span class="k">if</span> <span class="n">value</span><span class="p">:</span>
@@ -527,11 +527,11 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert name to string&quot;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">year_of_retrofit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">year_of_retrofit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_year_of_retrofit</span>
 
     <span class="nd">@year_of_retrofit</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">year_of_retrofit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">year_of_retrofit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="k">pass</span>
@@ -550,11 +550,11 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Specify year of construction first&quot;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orientation</span>
 
     <span class="nd">@orientation</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_orientation</span> <span class="o">=</span> <span class="n">value</span>
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;OuterWall&quot;</span><span class="p">:</span>
@@ -567,11 +567,11 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">fill_window_area_dict</span><span class="p">()</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">layer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">layer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_layer</span>
 
     <span class="nd">@layer</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">layer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">layer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_layer</span> <span class="o">=</span> <span class="p">[]</span>
@@ -582,11 +582,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">calc_ua_value</span><span class="p">()</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">inner_convection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inner_convection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inner_convection</span>
 
     <span class="nd">@inner_convection</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">inner_convection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inner_convection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
             <span class="k">pass</span>
@@ -606,11 +606,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">calc_ua_value</span><span class="p">()</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">inner_radiation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inner_radiation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inner_radiation</span>
 
     <span class="nd">@inner_radiation</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">inner_radiation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inner_radiation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
             <span class="k">pass</span>
@@ -630,11 +630,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">calc_ua_value</span><span class="p">()</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">outer_convection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">outer_convection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_outer_convection</span>
 
     <span class="nd">@outer_convection</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">outer_convection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">outer_convection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
             <span class="k">pass</span>
@@ -654,11 +654,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">calc_ua_value</span><span class="p">()</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">outer_radiation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">outer_radiation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_outer_radiation</span>
 
     <span class="nd">@outer_radiation</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">outer_radiation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">outer_radiation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
             <span class="k">pass</span>
@@ -678,11 +678,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">calc_ua_value</span><span class="p">()</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_area</span>
 
     <span class="nd">@area</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
             <span class="k">pass</span>
@@ -711,11 +711,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">calc_ua_value</span><span class="p">()</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">tilt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tilt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tilt</span>
 
     <span class="nd">@tilt</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">tilt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tilt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_tilt</span> <span class="o">=</span> <span class="n">value</span>
@@ -729,11 +729,11 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert tilt to float&quot;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">year_of_construction</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">year_of_construction</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_year_of_construction</span>
 
     <span class="nd">@year_of_construction</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">year_of_construction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">year_of_construction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_year_of_construction</span> <span class="o">=</span> <span class="n">value</span>
@@ -747,11 +747,11 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert year to int&quot;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">construction_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construction_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_construction_data</span>
 
     <span class="nd">@construction_data</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">construction_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construction_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_construction_data</span> <span class="o">=</span> <span class="n">value</span></div>
 
