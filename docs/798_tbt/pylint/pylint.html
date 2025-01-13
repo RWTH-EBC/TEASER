@@ -28,9 +28,9 @@
 
         
         <h2>Score</h2>
-        7.47 / 10
+        7.50 / 10
             
-            (previous score: 7.47 / 10)
+            (previous score: 7.50 / 10)
             
         
 
@@ -2980,16 +2980,6 @@
                 <td>W0621</td>
                 <td>Test_examples.test_e6_example_create_building</td>
                 <td><pre>Redefining name &#39;prj&#39; from outer scope (line 13)</pre></td>
-            </tr>
-            
-            <tr>
-                <td>57</td>
-                <td>8</td>
-                <td>error</td>
-                <td><code>assignment-from-no-return</code></td>
-                <td>E1111</td>
-                <td>Test_examples.test_e6_example_create_building</td>
-                <td><pre>Assigning result of a function call, where the function has no return</pre></td>
             </tr>
             
             <tr>
@@ -6134,6 +6124,100 @@
             
         </table>
         
+        <h3>Module <code>test_teaser_json</code> (<code>tests/test_teaser_json.py</code>)</h3>
+        <table>
+            <tr>
+                <th>Line</th>
+                <th>Col.</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>ID</th>
+                <th>Obj</th>
+                <th>Message</th>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>convention</td>
+                <td><code>missing-module-docstring</code></td>
+                <td>C0114</td>
+                <td></td>
+                <td><pre>Missing module docstring</pre></td>
+            </tr>
+            
+            <tr>
+                <td>9</td>
+                <td>0</td>
+                <td>refactor</td>
+                <td><code>useless-object-inheritance</code></td>
+                <td>R0205</td>
+                <td>TestTEASERJson</td>
+                <td><pre>Class &#39;TestTEASERJson&#39; inherits from object, can be safely removed from bases in python3</pre></td>
+            </tr>
+            
+            <tr>
+                <td>29</td>
+                <td>17</td>
+                <td>warning</td>
+                <td><code>unspecified-encoding</code></td>
+                <td>W1514</td>
+                <td>TestTEASERJson.test_save_teaser_json_tabula_de</td>
+                <td><pre>Using open without explicitly specifying an encoding</pre></td>
+            </tr>
+            
+            <tr>
+                <td>29</td>
+                <td>41</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>TestTEASERJson.test_save_teaser_json_tabula_de</td>
+                <td><pre>Variable name &#34;f&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>50</td>
+                <td>17</td>
+                <td>warning</td>
+                <td><code>unspecified-encoding</code></td>
+                <td>W1514</td>
+                <td>TestTEASERJson.test_save_teaser_json_iwu_de</td>
+                <td><pre>Using open without explicitly specifying an encoding</pre></td>
+            </tr>
+            
+            <tr>
+                <td>50</td>
+                <td>41</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>TestTEASERJson.test_save_teaser_json_iwu_de</td>
+                <td><pre>Variable name &#34;f&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+            <tr>
+                <td>71</td>
+                <td>17</td>
+                <td>warning</td>
+                <td><code>unspecified-encoding</code></td>
+                <td>W1514</td>
+                <td>TestTEASERJson.test_save_teaser_json_kfw_de</td>
+                <td><pre>Using open without explicitly specifying an encoding</pre></td>
+            </tr>
+            
+            <tr>
+                <td>71</td>
+                <td>41</td>
+                <td>convention</td>
+                <td><code>invalid-name</code></td>
+                <td>C0103</td>
+                <td>TestTEASERJson.test_save_teaser_json_kfw_de</td>
+                <td><pre>Variable name &#34;f&#34; doesn&#39;t conform to snake_case naming style</pre></td>
+            </tr>
+            
+        </table>
+        
         <h3>Module <code>test_useconditions</code> (<code>tests/test_useconditions.py</code>)</h3>
         <table>
             <tr>
@@ -6234,7 +6318,8 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_mfh_1983(self):
+    def test_tabula_uvalue_retrofit_adv_th_1983(self):
+
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -6269,7 +6354,6 @@
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
             1) == round((1 / (1 / 0.28 - 0.34)), 1)
-
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
@@ -6280,7 +6364,8 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_mfh_1983(self):
+    def test_tabula_uvalue_retrofit_th_1983(self):
+
         prj.add_residential(
             construction_data=&#39;tabula_de_retrofit&#39;,</pre></td>
             </tr>
@@ -6420,7 +6505,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_th_1957(self):
+    def test_tabula_uvalue_retrofit_adv_ab_1957(self):
 
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
@@ -6514,8 +6599,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_ab_1968(self):
-
+    def test_tabula_uvalue_retrofit_mfh_1968(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_retrofit&#39;,</pre></td>
             </tr>
@@ -6559,9 +6643,7 @@
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-            1) == round((1 / (1 / 0.8 - 0.17)), 1)
-
-    def test_tabula_uvalue_retrofit_adv_mfh_1983(self):</pre></td>
+            1) == round((1 / (1 / 0.8 - 0.17)), 1)</pre></td>
             </tr>
             
             <tr>
@@ -6702,8 +6784,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_th_1957(self):
-
+    def test_tabula_uvalue_retrofit_adv_sfh_1957(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -6738,7 +6819,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_th_1957(self):
+    def test_tabula_uvalue_standard_sfh_1957(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
             </tr>
@@ -6808,7 +6889,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_mfh_2100(self):
+    def test_tabula_uvalue_standard_sfh_2100(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
             </tr>
@@ -6843,7 +6924,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_ab_1968(self):
+    def test_tabula_uvalue_retrofit_adv_th_1968(self):
 
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
@@ -6879,7 +6960,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_ab_1948(self):
+    def test_tabula_uvalue_retrofit_adv_th_1948(self):
 
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
@@ -6986,7 +7067,8 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_mfh_1983(self):
+    def test_tabula_uvalue_retrofit_adv_ab_1957(self):
+
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -7002,6 +7084,7 @@
 ==test_tabula_mfh:[350:375]
 ==test_tabula_sfh:[386:412]
         for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
+
             if &#34;_1_&#34; in floor.construction_data:
 
                 assert round(1 / (floor.r_conduc * floor.area),
@@ -7022,7 +7105,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_mfh_1918(self):
+    def test_tabula_uvalue_standard_sfh_1948(self):
 
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
@@ -7214,9 +7297,7 @@
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-            1) == round((1 / (1 / 0.8 - 0.17)), 1)
-
-    def test_tabula_uvalue_retrofit_adv_sfh_1957(self):</pre></td>
+            1) == round((1 / (1 / 0.8 - 0.17)), 1)</pre></td>
             </tr>
             
             <tr>
@@ -7262,10 +7343,12 @@
 ==test_tabula_sfh:[1284:1306]
         for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
             if &#34;_1_&#34; in floor.construction_data:
+
                 assert round(1 / (floor.r_conduc * floor.area),
                              1) == round((1 / (1 / 0.22 - 0.34)), 1)
 
             elif &#34;_2_&#34; in floor.construction_data:
+
                 assert round(1 / (floor.r_conduc * floor.area),
                              1) == round((1 / (1 / 0.23 - 0.34)), 1)
 
@@ -7279,7 +7362,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_sfh_1948(self):
+    def test_tabula_uvalue_retrofit_adv_mfh_1918(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -7374,8 +7457,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_mfh_1948(self):
-
+    def test_tabula_uvalue_standard_th_1948(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
             </tr>
@@ -7610,7 +7692,8 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_mfh_1983(self):
+    def test_tabula_uvalue_retrofit_ab_1957(self):
+
         prj.add_residential(
             construction_data=&#39;tabula_de_retrofit&#39;,</pre></td>
             </tr>
@@ -7745,6 +7828,7 @@
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
             1) == round((1 / (1 / 0.28 - 0.34)), 1)
+
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
@@ -7755,8 +7839,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_ab_1919(self):
-
+    def test_tabula_uvalue_retrofit_mfh_1983(self):
         prj.add_residential(</pre></td>
             </tr>
             
@@ -7785,7 +7868,8 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 4.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_mfh_1983(self):
+    def test_tabula_uvalue_retrofit_ab_1919(self):
+
         prj.add_residential(</pre></td>
             </tr>
             
@@ -7852,8 +7936,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_th_2015(self):
-
+    def test_tabula_uvalue_retrofit_adv_sfh_2009(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -7888,7 +7971,8 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_sfh_2015(self):
+    def test_tabula_uvalue_retrofit_th_2015(self):
+
         prj.add_residential(
             construction_data=&#39;tabula_de_retrofit&#39;,</pre></td>
             </tr>
@@ -8097,7 +8181,10 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_mfh_2100(self):</pre></td>
+    def test_tabula_retrofit(self):
+        &#34;&#34;&#34;
+        Test for retrofit of tabula
+        &#34;&#34;&#34;</pre></td>
             </tr>
             
             <tr>
@@ -8165,7 +8252,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_sfh_1994(self):
+    def test_tabula_uvalue_retrofit_mfh_1994(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_retrofit&#39;,</pre></td>
             </tr>
@@ -8235,7 +8322,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_th_1968(self):
+    def test_tabula_uvalue_retrofit_ab_1968(self):
 
         prj.add_residential(
             construction_data=&#39;tabula_de_retrofit&#39;,</pre></td>
@@ -8816,9 +8903,11 @@
         # assert round(
         #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
         #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)
-    #
-    def test_tabula_uvalue_adv_retrofit_th_dk_1997(self):
+        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)
+
+#----------------------------------------------------------------------------------
+
+    def test_tabula_uvalue_adv_retrofit_sfh_dk_1959(self):
         prj.add_residential(
             construction_data=&#39;tabula_dk_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -8876,11 +8965,9 @@
         # assert round(
         #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
         #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)
-
-#----------------------------------------------------------------------------------
-
-    def test_tabula_uvalue_retrofit_sfh_dk_1959(self):
+        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)
+    #
+    def test_tabula_uvalue_retrofit_th_dk_1997(self):
         prj.add_residential(
             construction_data=&#39;tabula_dk_retrofit&#39;,</pre></td>
             </tr>
@@ -8935,7 +9022,8 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_sfh_1957(self):
+    def test_tabula_uvalue_retrofit_adv_th_2015(self):
+
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -8986,8 +9074,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_th_2001(self):
-
+    def test_tabula_uvalue_retrofit_adv_sfh_1918(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -9012,8 +9099,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_th_1978(self):
-
+    def test_tabula_uvalue_retrofit_sfh_2015(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_retrofit&#39;,</pre></td>
             </tr>
@@ -9063,8 +9149,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_th_1957(self):
-
+    def test_tabula_uvalue_retrofit_sfh_2001(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_retrofit&#39;,</pre></td>
             </tr>
@@ -9115,7 +9200,8 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_mfh_2015(self):
+    def test_tabula_uvalue_retrofit_adv_th_1994(self):
+
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -9216,8 +9302,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_th_1968(self):
-
+    def test_tabula_uvalue_retrofit_adv_mfh_1983(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -9342,7 +9427,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_sfh_1968(self):
+    def test_tabula_uvalue_retrofit_adv_mfh_1918(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -9530,7 +9615,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_mfh_2001(self):
+    def test_tabula_uvalue_retrofit_sfh_1978(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_retrofit&#39;,</pre></td>
             </tr>
@@ -9580,7 +9665,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_sfh_1968(self):
+    def test_tabula_uvalue_retrofit_mfh_1983(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_retrofit&#39;,</pre></td>
             </tr>
@@ -9649,7 +9734,6 @@
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
             1) == round((1 / (1 / 0.14 - 0.34)), 1)
-# U-value of website is 1.03, but is seems to be wrong
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -9659,11 +9743,9 @@
         # assert round(
         #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
         #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)
-
-#----------------------------------------------------------------------------------
-
-    def test_tabula_uvalue_adv_retrofit_sfh_dk_1849(self):
+        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)
+    #
+    def test_tabula_uvalue_adv_retrofit_ab_dk_1977(self):
         prj.add_residential(
             construction_data=&#39;tabula_dk_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -9691,9 +9773,11 @@
         # assert round(
         #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
         #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)
-    #
-    def test_tabula_uvalue_adv_retrofit_ab_dk_1959(self):
+        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)
+
+#----------------------------------------------------------------------------------
+
+    def test_tabula_uvalue_adv_retrofit_sfh_dk_1929(self):
         prj.add_residential(
             construction_data=&#39;tabula_dk_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -9742,7 +9826,8 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_mfh_1968(self):
+    def test_tabula_uvalue_retrofit_adv_ab_1978(self):
+
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -9793,8 +9878,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_ab_1957(self):
-
+    def test_tabula_uvalue_retrofit_adv_mfh_1948(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -9819,7 +9903,8 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_mfh_1918(self):
+    def test_tabula_uvalue_retrofit_adv_ab_1948(self):
+
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -9869,8 +9954,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_ab_1968(self):
-
+    def test_tabula_uvalue_retrofit_mfh_1978(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_retrofit&#39;,</pre></td>
             </tr>
@@ -9895,7 +9979,8 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_mfh_1957(self):
+    def test_tabula_uvalue_retrofit_ab_1957(self):
+
         prj.add_residential(
             construction_data=&#39;tabula_de_retrofit&#39;,</pre></td>
             </tr>
@@ -9945,8 +10030,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_mfh_1918(self):
-
+    def test_tabula_uvalue_standard_ab_1948(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
             </tr>
@@ -10142,9 +10226,12 @@
         # assert round(
         #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
         #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)
+        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_th_dk_1929(self):
+#----------------------------------------------------------------------------------------------------------------------------------------------------------
+#U-value adv retrofit
+
+    def test_tabula_uvalue_adv_retrofit_sfh_dk_1997(self):
         prj.add_residential(</pre></td>
             </tr>
             
@@ -10263,7 +10350,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_sfh_2100(self):
+    def test_tabula_uvalue_retrofit_mfh_2100(self):
         prj.add_residential(</pre></td>
             </tr>
             
@@ -10386,7 +10473,8 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 4.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_mfh_1994(self):
+    def test_tabula_uvalue_retrofit_ab_1919(self):
+
         prj.add_residential(</pre></td>
             </tr>
             
@@ -10434,6 +10522,7 @@
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
             1) == round((1 / (1 / 0.24 - 0.34)), 1)
+# U-value of website is 1.03, but is seems to be wrong
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -10443,9 +10532,11 @@
         # assert round(
         #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
         #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)
+        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_th_dk_1959(self):
+#----------------------------------------------------------------------------------
+
+    def test_tabula_uvalue_retrofit_sfh_dk_1849(self):
         prj.add_residential(
             construction_data=&#39;tabula_dk_retrofit&#39;,</pre></td>
             </tr>
@@ -10473,11 +10564,9 @@
         # assert round(
         #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
         #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)
+        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-#----------------------------------------------------------------------------------
-
-    def test_tabula_uvalue_standard_sfh_dk_1929(self):
+    def test_tabula_uvalue_standard_th_dk_1949(self):
         prj.add_residential(
             construction_data=&#39;tabula_dk_standard&#39;,</pre></td>
             </tr>
@@ -10560,14 +10649,7 @@
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
-            1) == round((1 / (1 / 0.9 - 0.17)), 1)
-
-        # assert round(
-        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
-        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)
-
-    def test_tabula_uvalue_adv_retrofit_th_dk_1929(self):</pre></td>
+            1) == round((1 / (1 / 0.9 - 0.17)), 1)</pre></td>
             </tr>
             
             <tr>
@@ -10589,7 +10671,13 @@
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
             1) == round((1 / (1 / 1.4 - 0.17)), 1)
-</pre></td>
+
+        # assert round(
+        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
+        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
+        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)
+
+    def test_tabula_uvalue_retrofit_th_dk_1971(self):</pre></td>
             </tr>
             
             <tr>
@@ -10653,7 +10741,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_th_1978(self):
+    def test_tabula_uvalue_standard_sfh_1978(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
             </tr>
@@ -10703,7 +10791,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_th_1983(self):
+    def test_tabula_uvalue_standard_sfh_1968(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
             </tr>
@@ -10728,7 +10816,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_sfh_1957(self):
+    def test_tabula_uvalue_standard_th_1994(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
             </tr>
@@ -10913,8 +11001,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_mfh_1918(self):
-
+    def test_tabula_uvalue_standard_th_1957(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
             </tr>
@@ -11194,7 +11281,6 @@
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
             1) == round((1 / (1 / 0.13 - 0.17)), 1)
-        # U-value of website is 0.33, but is seems to be wrong
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
@@ -11224,9 +11310,7 @@
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-            1) == round((1 / (1 / 0.8 - 0.17)), 1)
-
-    def test_tabula_uvalue_retrofit_adv_sfh_2100(self):</pre></td>
+            1) == round((1 / (1 / 0.8 - 0.17)), 1)</pre></td>
             </tr>
             
             <tr>
@@ -11254,7 +11338,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_mfh_2001(self):
+    def test_tabula_uvalue_retrofit_adv_sfh_2001(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -11304,7 +11388,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_sfh_2009(self):
+    def test_tabula_uvalue_retrofit_adv_mfh_2001(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -11329,7 +11413,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_mfh_1994(self):
+    def test_tabula_uvalue_retrofit_adv_sfh_1994(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -11429,7 +11513,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_sfh_1957(self):
+    def test_tabula_uvalue_retrofit_adv_mfh_1957(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -11519,7 +11603,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_mfh_2015(self):
+    def test_tabula_uvalue_retrofit_adv_sfh_2009(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -11591,7 +11675,10 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_mfh_2100(self):</pre></td>
+    def test_tabula_retrofit(self):
+        &#34;&#34;&#34;
+        Test for retrofit of tabula
+        &#34;&#34;&#34;</pre></td>
             </tr>
             
             <tr>
@@ -11677,7 +11764,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_sfh_2009(self):
+    def test_tabula_uvalue_retrofit_mfh_2009(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_retrofit&#39;,</pre></td>
             </tr>
@@ -11707,7 +11794,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_mfh_2001(self):
+    def test_tabula_uvalue_retrofit_sfh_2001(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_retrofit&#39;,</pre></td>
             </tr>
@@ -11737,7 +11824,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_mfh_1983(self):
+    def test_tabula_uvalue_retrofit_sfh_1957(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_retrofit&#39;,</pre></td>
             </tr>
@@ -12098,9 +12185,11 @@
         # assert round(
         #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
         #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)
-    #
-    def test_tabula_uvalue_retrofit_ab_dk_1949(self):
+        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)
+
+#----------------------------------------------------------------------------------
+
+    def test_tabula_uvalue_retrofit_sfh_dk_1949(self):
         prj.add_residential(
             construction_data=&#39;tabula_dk_retrofit&#39;,</pre></td>
             </tr>
@@ -12120,7 +12209,9 @@
                 assert round(
                     1 / (wall.r_conduc * wall.area),
                     1) == round((1 / (1 / 0.1 - 0.17)), 1)
+
             if &#34;_2_&#34; in wall.construction_data:
+
                 assert round(
                     1 / (wall.r_conduc * wall.area),</pre></td>
             </tr>
@@ -12308,8 +12399,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_ab_1978(self):
-
+    def test_tabula_uvalue_retrofit_sfh_1978(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_retrofit&#39;,</pre></td>
             </tr>
@@ -12397,7 +12487,7 @@
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_mfh_1968(self):
+    def test_tabula_uvalue_standard_ab_1968(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
             </tr>
@@ -12647,14 +12737,14 @@
                 <td><pre>Similar lines in 2 files
 ==test_partial_retrofit:[27:35]
 ==test_tabula_sfh:[1685:1693]
-            construction_data=&#39;tabula_de_standard&#39;,
-            geometry_data=&#39;tabula_de_single_family_house&#39;,
-            name=&#34;ResidentialBuilding&#34;,
-            year_of_construction=1858,
-            number_of_floors=2,
-            height_of_floors=3.2,
-            net_leased_area=219
-        )</pre></td>
+                construction_data=&#39;tabula_de_standard&#39;,
+                geometry_data=&#39;tabula_de_single_family_house&#39;,
+                name=&#34;ResidentialBuilding&#34;,
+                year_of_construction=1858,
+                number_of_floors=2,
+                height_of_floors=3.2,
+                net_leased_area=219
+            )</pre></td>
             </tr>
             
             <tr>
@@ -12667,15 +12757,16 @@
                 <td><pre>Similar lines in 2 files
 ==helptest:[170:180]
 ==test_data:[2650:2661]
-        win.shading_max_irr = 180.0
-        win_layer = Layer(parent=win)
-        win_layer.id = 1
-        win_layer.thickness = 0.024
+            win.shading_max_irr = 180.0
 
-        win_material = Material(win_layer)
-        win_material.name = &#34;GlasWindow&#34;
-        win_material.thermal_conduc = 0.067
-        win_material.transmittance = 0.9
+            win_layer = Layer(parent=win)
+            win_layer.id = 1
+            win_layer.thickness = 0.024
+
+            win_material = Material(win_layer)
+            win_material.name = &#34;GlasWindow&#34;
+            win_material.thermal_conduc = 0.067
+            win_material.transmittance = 0.9
 </pre></td>
             </tr>
             
@@ -12927,6 +13018,25 @@
                 <td>R0801</td>
                 <td></td>
                 <td><pre>Similar lines in 2 files
+==test_tabula_sfh:[14:21]
+==test_teaser_json:[14:21]
+        prj.add_residential(
+            construction_data=&#39;tabula_de_standard&#39;,
+            geometry_data=&#39;tabula_de_single_family_house&#39;,
+            name=&#34;ResidentialBuilding&#34;,
+            year_of_construction=1858,
+            number_of_floors=2,
+            height_of_floors=3.2,</pre></td>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>refactor</td>
+                <td><code>duplicate-code</code></td>
+                <td>R0801</td>
+                <td></td>
+                <td><pre>Similar lines in 2 files
 ==test_tabula_sfh:[1170:1178]
 ==test_tabula_th_dk:[748:756]
         assert round(
@@ -13150,14 +13260,15 @@
                 <td><pre>Similar lines in 2 files
 ==test_tabula_sfh:[1183:1193]
 ==test_tabula_th:[1076:1087]
-            1) == round((1 / (1 / 1.3 - 0.17)), 1)
+                             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_sfh_2100(self):
+    def test_tabula_uvalue_retrofit_th_2100(self):
+
         prj.add_residential(
             construction_data=&#39;tabula_de_retrofit&#39;,</pre></td>
             </tr>
@@ -13532,14 +13643,14 @@
                 <td><pre>Similar lines in 2 files
 ==test_tabula_mfh:[763:774]
 ==test_tabula_th:[702:713]
-            1) == round((1 / (1 / 1.1 - 0.17)), 1)
+                             1) == round((1 / (1 / 1.1 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_mfh_1859(self):
+    def test_tabula_uvalue_retrofit_th_1919(self):
 
         prj.add_residential(
             construction_data=&#39;tabula_de_retrofit&#39;,</pre></td>
@@ -13555,14 +13666,14 @@
                 <td><pre>Similar lines in 2 files
 ==test_tabula_mfh:[728:738]
 ==test_tabula_th:[658:668]
-                             1) == round((1 / (1 / 1.3 - 0.17)), 1)
+            1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_th_2100(self):
+    def test_tabula_uvalue_standard_mfh_2100(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
             </tr>
@@ -13744,7 +13855,6 @@
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
             1) == round((1 / (1 / 0.13 - 0.17)), 1)
-        # U-value of website is 0.33, but is seems to be wrong
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
@@ -14269,7 +14379,6 @@
 
         for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
             if &#34;_1_&#34; in floor.construction_data:
-
                 assert round(1 / (floor.r_conduc * floor.area),</pre></td>
             </tr>
             
@@ -14349,7 +14458,6 @@
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
             1) == round((1 / (1 / 0.09 - 0.14)), 1)
-
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
@@ -14486,7 +14594,7 @@
                 <td><pre>Similar lines in 2 files
 ==test_tabula_ab_dk:[312:327]
 ==test_tabula_sfh_dk:[432:449]
-                    1) == round((1 / (1 / 0.2 - 0.34)), 1)
+            1) == round((1 / (1 / 0.2 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -14496,9 +14604,11 @@
         # assert round(
         #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
         #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)
+        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_ab_dk_1929(self):
+#----------------------------------------------------------------------------------
+
+    def test_tabula_uvalue_standard_sfh_dk_1971(self):
         prj.add_residential(
             construction_data=&#39;tabula_dk_standard&#39;,</pre></td>
             </tr>
@@ -14677,7 +14787,6 @@
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
             1) == round((1 / (1 / 0.28 - 0.34)), 1)
-
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),</pre></td>
@@ -15421,14 +15530,13 @@ class Test_tabula_ab(object):
                 <td><pre>Similar lines in 2 files
 ==test_partial_retrofit:[28:35]
 ==test_tabula_sfh:[780:788]
-            geometry_data=&#39;tabula_de_single_family_house&#39;,
-            name=&#34;ResidentialBuilding&#34;,
-            year_of_construction=1858,
-            number_of_floors=2,
-            height_of_floors=3.2,
-            net_leased_area=219
-            )
-</pre></td>
+                geometry_data=&#39;tabula_de_single_family_house&#39;,
+                name=&#34;ResidentialBuilding&#34;,
+                year_of_construction=1858,
+                number_of_floors=2,
+                height_of_floors=3.2,
+                net_leased_area=219
+            )</pre></td>
             </tr>
             
             <tr>
@@ -15548,6 +15656,7 @@ class Test_tabula_ab(object):
             1) == round((1 / (1 / 0.1 - 0.21)), 1)
 
         for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
+
             if &#34;_1_&#34; in wall.construction_data:</pre></td>
             </tr>
             
@@ -15561,14 +15670,14 @@ class Test_tabula_ab(object):
                 <td><pre>Similar lines in 2 files
 ==test_tabula_sfh:[1183:1192]
 ==test_tabula_th:[658:667]
-                             1) == round((1 / (1 / 1.3 - 0.17)), 1)
+            1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_th_2100(self):
+    def test_tabula_uvalue_retrofit_sfh_2100(self):
         prj.add_residential(</pre></td>
             </tr>
             
@@ -15607,7 +15716,7 @@ class Test_tabula_ab(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_th_1968(self):
+    def test_tabula_uvalue_standard_sfh_2001(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
             </tr>
@@ -15627,7 +15736,7 @@ class Test_tabula_ab(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_th_1957(self):
+    def test_tabula_uvalue_standard_sfh_1994(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
             </tr>
@@ -15647,7 +15756,7 @@ class Test_tabula_ab(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_sfh_1978(self):
+    def test_tabula_uvalue_standard_th_1948(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
             </tr>
@@ -15685,14 +15794,14 @@ class Test_tabula_ab(object):
                 <td><pre>Similar lines in 2 files
 ==test_tabula_mfh:[1202:1212]
 ==test_tabula_th:[702:712]
-                             1) == round((1 / (1 / 1.1 - 0.17)), 1)
+            1) == round((1 / (1 / 1.1 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_th_1919(self):
+    def test_tabula_uvalue_retrofit_adv_mfh_1859(self):
 
         prj.add_residential(</pre></td>
             </tr>
@@ -15707,14 +15816,14 @@ class Test_tabula_ab(object):
                 <td><pre>Similar lines in 2 files
 ==test_tabula_mfh:[763:773]
 ==test_tabula_th:[1121:1131]
-            1) == round((1 / (1 / 1.1 - 0.17)), 1)
+                             1) == round((1 / (1 / 1.1 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_mfh_1859(self):
+    def test_tabula_uvalue_retrofit_adv_th_1919(self):
 
         prj.add_residential(</pre></td>
             </tr>
@@ -15950,13 +16059,12 @@ class Test_tabula_ab(object):
 ==test_tabula_mfh:[873:882]
 ==test_tabula_sfh:[911:919]
         for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
-            if &#34;_1_&#34; in floor.construction_data:
 
+            if &#34;_1_&#34; in floor.construction_data:
                 assert round(1 / (floor.r_conduc * floor.area),
                              1) == round((1 / (1 / 0.28 - 0.34)), 1)
 
             elif &#34;_2_&#34; in floor.construction_data:
-
                 assert round(1 / (floor.r_conduc * floor.area),</pre></td>
             </tr>
             
@@ -15996,7 +16104,7 @@ class Test_tabula_ab(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 2.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_sfh_2015(self):
+    def test_tabula_uvalue_standard_mfh_2009(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
             </tr>
@@ -16036,7 +16144,7 @@ class Test_tabula_ab(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_sfh_1957(self):
+    def test_tabula_uvalue_standard_mfh_1968(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
             </tr>
@@ -16397,13 +16505,13 @@ class Test_tabula_ab(object):
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
             1) == round((1 / (1 / 2.7 - 0.17)), 1)
-    #
-    #     # assert round(
-    #     #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
-    #     #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-    #     #     1) == round((1 / (1 / 3.0 - 0.17)), 1)
-    #
-    def test_tabula_uvalue_standard_ab_dk_2005(self):
+
+        # assert round(
+        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
+        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
+        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)
+
+    def test_tabula_uvalue_standard_th_dk_1949(self):
         prj.add_residential(
             construction_data=&#39;tabula_dk_standard&#39;,</pre></td>
             </tr>
@@ -16427,8 +16535,8 @@ class Test_tabula_ab(object):
         #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
         #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
         #     1) == round((1 / (1 / 3.0 - 0.17)), 1)
-    # #
-    def test_tabula_uvalue_standard_ab_dk_1997(self):
+
+    def test_tabula_uvalue_standard_th_dk_1929(self):
         prj.add_residential(
             construction_data=&#39;tabula_dk_standard&#39;,</pre></td>
             </tr>
@@ -16523,9 +16631,11 @@ class Test_tabula_ab(object):
         # assert round(
         #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
         #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)
-    #
-    def test_tabula_uvalue_adv_retrofit_ab_dk_1971(self):
+        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)
+
+#----------------------------------------------------------------------------------
+
+    def test_tabula_uvalue_adv_retrofit_sfh_dk_1949(self):
         prj.add_residential(
             construction_data=&#39;tabula_dk_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -16548,9 +16658,11 @@ class Test_tabula_ab(object):
         # assert round(
         #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
         #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)
-    #
-    def test_tabula_uvalue_adv_retrofit_ab_dk_1959(self):
+        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)
+
+#----------------------------------------------------------------------------------
+
+    def test_tabula_uvalue_adv_retrofit_sfh_dk_1959(self):
         prj.add_residential(
             construction_data=&#39;tabula_dk_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -16619,15 +16731,13 @@ class Test_tabula_ab(object):
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
             1) == round((1 / (1 / 1.4 - 0.17)), 1)
-
-        # assert round(
-        #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
-        #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)
-
-#----------------------------------------------------------------------------------
-
-    def test_tabula_uvalue_retrofit_sfh_dk_1849(self):
+    #
+    #     # assert round(
+    #     #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
+    #     #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
+    #     #     1) == round((1 / (1 / 3.0 - 0.17)), 1)
+    #
+    def test_tabula_uvalue_retrofit_ab_dk_2005(self):
         prj.add_residential(
             construction_data=&#39;tabula_dk_retrofit&#39;,</pre></td>
             </tr>
@@ -16915,7 +17025,7 @@ class Test_tabula_ab(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_th_2100(self):
+    def test_tabula_uvalue_retrofit_adv_ab_1968(self):
 
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
@@ -16957,8 +17067,7 @@ class Test_tabula_ab(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_ab_1957(self):
-
+    def test_tabula_uvalue_retrofit_adv_sfh_2100(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -16978,7 +17087,7 @@ class Test_tabula_ab(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_ab_1968(self):
+    def test_tabula_uvalue_retrofit_sfh_1859(self):
 
         prj.add_residential(
             construction_data=&#39;tabula_de_retrofit&#39;,</pre></td>
@@ -16999,8 +17108,7 @@ class Test_tabula_ab(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_sfh_1918(self):
-
+    def test_tabula_uvalue_standard_ab_1978(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
             </tr>
@@ -17041,7 +17149,7 @@ class Test_tabula_ab(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_ab_1919(self):
+    def test_tabula_uvalue_retrofit_adv_mfh_1859(self):
 
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
@@ -17405,12 +17513,12 @@ class Test_tabula_ab(object):
                 <td><pre>Similar lines in 2 files
 ==test_partial_retrofit:[27:33]
 ==test_tabula_sfh:[15:21]
-            construction_data=&#39;tabula_de_standard&#39;,
-            geometry_data=&#39;tabula_de_single_family_house&#39;,
-            name=&#34;ResidentialBuilding&#34;,
-            year_of_construction=1858,
-            number_of_floors=2,
-            height_of_floors=3.2,</pre></td>
+                construction_data=&#39;tabula_de_standard&#39;,
+                geometry_data=&#39;tabula_de_single_family_house&#39;,
+                name=&#34;ResidentialBuilding&#34;,
+                year_of_construction=1858,
+                number_of_floors=2,
+                height_of_floors=3.2,</pre></td>
             </tr>
             
             <tr>
@@ -17449,8 +17557,7 @@ prj = Project(False)
             number_of_floors=2,
             height_of_floors=3.2,
             net_leased_area=219,
-            )
-</pre></td>
+        )</pre></td>
             </tr>
             
             <tr>
@@ -17463,12 +17570,12 @@ prj = Project(False)
                 <td><pre>Similar lines in 2 files
 ==helptest:[163:169]
 ==test_data:[2643:2649]
-        win.inner_convection = 1.7
-        win.inner_radiation = 5.0
-        win.outer_convection = 20.0
-        win.outer_radiation = 5.0
-        win.g_value = 0.789
-        win.a_conv = 0.03</pre></td>
+            win.inner_convection = 1.7
+            win.inner_radiation = 5.0
+            win.outer_convection = 20.0
+            win.outer_radiation = 5.0
+            win.g_value = 0.789
+            win.a_conv = 0.03</pre></td>
             </tr>
             
             <tr>
@@ -17503,16 +17610,6 @@ prj = Project(False)
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
             1) == round((1 / (1 / 0.13 - 0.21)), 1)
-
-        # assert round(
-        #     1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
-        #          * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
-        #     1) == round((1 / (1 / 0.3 - 0.17)), 1)
-        #
-        # assert round(
-        #     1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
-        #          * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-        #     1) == round((1 / (1 / 0.18 - 0.34)), 1)
 
         assert round(</pre></td>
             </tr>
@@ -17615,7 +17712,7 @@ prj = Project(False)
                 <td><pre>Similar lines in 2 files
 ==test_tabula_sfh_dk:[969:979]
 ==test_tabula_th_dk:[821:831]
-            1) == round((1 / (1 / 0.3 - 0.17)), 1)
+                    1) == round((1 / (1 / 0.3 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
@@ -17683,11 +17780,9 @@ prj = Project(False)
         #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
         #     1) == round((1 / (1 / 2.0 - 0.17)), 1)
 
-#--------------------------------------------------------------------------------------------------------------------------------------------S
-#test for U-value retrofit
+#----------------------------------------------------------------------------------
 
-    def test_tabula_uvalue_retrofit_th_dk_1849(self):
-
+    def test_tabula_uvalue_standard_sfh_dk_2005(self):
         prj.add_residential(</pre></td>
             </tr>
             
@@ -17723,6 +17818,23 @@ prj = Project(False)
                 prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 118
         assert round(
             sum(wall.area for wall in</pre></td>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>refactor</td>
+                <td><code>duplicate-code</code></td>
+                <td>R0801</td>
+                <td></td>
+                <td><pre>Similar lines in 2 files
+==test_tabula_sfh:[780:785]
+==test_teaser_json:[16:21]
+            geometry_data=&#39;tabula_de_single_family_house&#39;,
+            name=&#34;ResidentialBuilding&#34;,
+            year_of_construction=1858,
+            number_of_floors=2,
+            height_of_floors=3.2,</pre></td>
             </tr>
             
             <tr>
@@ -17772,7 +17884,7 @@ prj = Project(False)
                 <td><pre>Similar lines in 2 files
 ==test_tabula_sfh:[1291:1306]
 ==test_tabula_th:[1260:1276]
-            1) == round((1 / (1 / 0.23 - 0.34)), 1)
+                             1) == round((1 / (1 / 0.23 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -17784,8 +17896,7 @@ prj = Project(False)
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_th_1978(self):
-
+    def test_tabula_uvalue_retrofit_adv_sfh_1948(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -17800,7 +17911,7 @@ prj = Project(False)
                 <td><pre>Similar lines in 2 files
 ==test_tabula_sfh:[1209:1216]
 ==test_tabula_th:[1107:1114]
-            1) == round((1 / (1 / 0.15 - 0.17)), 1)
+                             1) == round((1 / (1 / 0.15 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
@@ -17885,9 +17996,9 @@ prj = Project(False)
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
 
-    def test_tabula_de_th_area_1956(self):
+    def test_tabula_de_sfh_area_2001(self):
         &#34;&#34;&#34;
-        Test for area estimation of tabula th
+        Test for area estimation of tabula sfh
         &#34;&#34;&#34;
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
@@ -17974,6 +18085,16 @@ prj = Project(False)
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
             1) == round((1 / (1 / 0.09 - 0.21)), 1)
+
+        # assert round(
+        #     1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
+        #          * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
+        #     1) == round((1 / (1 / 0.3 - 0.17)), 1)
+        #
+        # assert round(
+        #     1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
+        #          * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
+        #     1) == round((1 / (1 / 0.18 - 0.34)), 1)
 
         assert round(</pre></td>
             </tr>
@@ -18101,11 +18222,6 @@ prj = Project(False)
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
             1) == round((1 / (1 / 0.21 - 0.17)), 1)
-        #
-        # assert round(
-        #     1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
-        #          * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-        #     1) == round((1 / (1 / 0.33 - 0.34)), 1)
 
         assert round(</pre></td>
             </tr>
@@ -18137,7 +18253,7 @@ prj = Project(False)
                 <td><pre>Similar lines in 2 files
 ==test_tabula_mfh:[1321:1336]
 ==test_tabula_sfh:[1409:1424]
-            1) == round((1 / (1 / 0.23 - 0.17)), 1)
+                             1) == round((1 / (1 / 0.23 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -18149,7 +18265,7 @@ prj = Project(False)
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_sfh_1978(self):
+    def test_tabula_uvalue_retrofit_adv_mfh_1957(self):
         prj.add_residential(
             construction_data=&#39;tabula_de_adv_retrofit&#39;,</pre></td>
             </tr>
@@ -18168,9 +18284,9 @@ prj = Project(False)
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
 
-    def test_tabula_de_mfh_area_2015(self):
+    def test_tabula_de_sfh_area_1983(self):
         &#34;&#34;&#34;
-        Test for area estimation of tabula mfh
+        Test for area estimation of tabula sfh
         &#34;&#34;&#34;
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
@@ -18234,9 +18350,9 @@ prj = Project(False)
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
 
-    def test_tabula_de_mfh_area_1994(self):
+    def test_tabula_de_sfh_area_1948(self):
         &#34;&#34;&#34;
-        Test for area estimation of tabula mfh
+        Test for area estimation of tabula sfh
         &#34;&#34;&#34;
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
@@ -18342,9 +18458,12 @@ prj = Project(False)
         # assert round(
         #     1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
         #          * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-        #     1) == round((1 / (1 / 3.0 - 0.17)), 1)
+        #     1) == round((1 / (1 / 2.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_ab_dk_1929(self):
+#----------------------------------------------------------------------------------------------------------------------------------------------------------
+#U-value adv retrofit
+
+    def test_tabula_uvalue_adv_retrofit_sfh_dk_1997(self):
         prj.add_residential(</pre></td>
             </tr>
             
@@ -18555,7 +18674,7 @@ prj = Project(False)
                 <td><pre>Similar lines in 2 files
 ==test_tabula_ab:[560:567]
 ==test_tabula_mfh:[1305:1312]
-                             1) == round((1 / (1 / 0.1 - 0.17)), 1)
+            1) == round((1 / (1 / 0.1 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
@@ -18579,8 +18698,7 @@ prj = Project(False)
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_ab_1948(self):
-
+    def test_tabula_uvalue_retrofit_mfh_2100(self):
         prj.add_residential(</pre></td>
             </tr>
             
@@ -18599,7 +18717,7 @@ prj = Project(False)
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_mfh_1859(self):
+    def test_tabula_uvalue_retrofit_adv_ab_1919(self):
 
         prj.add_residential(</pre></td>
             </tr>
@@ -18692,8 +18810,10 @@ prj = Project(False)
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
 
-    def test_tabula_uvalue_standard_ab_1919(self):
-
+    def test_tabula_de_mfh_area_1978(self):
+        &#34;&#34;&#34;
+        Test for area estimation of tabula mfh
+        &#34;&#34;&#34;
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
             </tr>
@@ -18734,9 +18854,9 @@ prj = Project(False)
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
 
-    def test_tabula_de_mfh_area_1957(self):
+    def test_tabula_de_ab_area_1968(self):
         &#34;&#34;&#34;
-        Test for area estimation of tabula mfh
+        Test for area estimation of tabula ab
         &#34;&#34;&#34;
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
@@ -18756,9 +18876,9 @@ prj = Project(False)
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
 
-    def test_tabula_de_mfh_area_1948(self):
+    def test_tabula_de_ab_area_1957(self):
         &#34;&#34;&#34;
-        Test for area estimation of tabula mfh
+        Test for area estimation of tabula ab
         &#34;&#34;&#34;
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
@@ -18798,13 +18918,12 @@ prj = Project(False)
 ==test_tabula_mfh:[6:16]
     global prj
 
-    def test_tabula_de_ab_area_1919(self):
+    def test_tabula_de_mfh_area_1859(self):
         &#34;&#34;&#34;
-        Test for area estimation of tabula ab
+        Test for area estimation of tabula mfh
         &#34;&#34;&#34;
         prj.set_default()
         prj.data = None
-
         prj.add_residential(
             construction_data=&#39;tabula_de_standard&#39;,</pre></td>
             </tr>
@@ -18819,11 +18938,11 @@ prj = Project(False)
                 <td><pre>Similar lines in 2 files
 ==test_partial_retrofit:[28:33]
 ==test_tabula_sfh:[1733:1738]
-            geometry_data=&#39;tabula_de_single_family_house&#39;,
-            name=&#34;ResidentialBuilding&#34;,
-            year_of_construction=1858,
-            number_of_floors=2,
-            height_of_floors=3.2,</pre></td>
+                geometry_data=&#39;tabula_de_single_family_house&#39;,
+                name=&#34;ResidentialBuilding&#34;,
+                year_of_construction=1858,
+                number_of_floors=2,
+                height_of_floors=3.2,</pre></td>
             </tr>
             
             <tr>
@@ -19121,22 +19240,22 @@ prj = Project(False)
             
             <tr>
                 <td>error</td>
-                <td>12</td>
+                <td>11</td>
             </tr>
             
             <tr>
                 <td>refactor</td>
-                <td>646</td>
+                <td>649</td>
             </tr>
             
             <tr>
                 <td>warning</td>
-                <td>85</td>
+                <td>88</td>
             </tr>
             
             <tr>
                 <td>convention</td>
-                <td>402</td>
+                <td>406</td>
             </tr>
             
         </table>
@@ -19171,12 +19290,12 @@ prj = Project(False)
             
             <tr>
                 <td>invalid-name</td>
-                <td>28</td>
+                <td>31</td>
             </tr>
             
             <tr>
                 <td>unspecified-encoding</td>
-                <td>1</td>
+                <td>4</td>
             </tr>
             
             <tr>
@@ -19201,7 +19320,7 @@ prj = Project(False)
             
             <tr>
                 <td>useless-object-inheritance</td>
-                <td>14</td>
+                <td>15</td>
             </tr>
             
             <tr>
@@ -19236,7 +19355,7 @@ prj = Project(False)
             
             <tr>
                 <td>missing-module-docstring</td>
-                <td>11</td>
+                <td>12</td>
             </tr>
             
             <tr>
@@ -19326,7 +19445,7 @@ prj = Project(False)
             
             <tr>
                 <td>assignment-from-no-return</td>
-                <td>6</td>
+                <td>5</td>
             </tr>
             
             <tr>
@@ -19361,7 +19480,7 @@ prj = Project(False)
             
             <tr>
                 <td>duplicate-code</td>
-                <td>531</td>
+                <td>533</td>
             </tr>
             
         </table>
@@ -19406,7 +19525,7 @@ prj = Project(False)
             
             <tr>
                 <td>test_examples</td>
-                <td>43</td>
+                <td>42</td>
             </tr>
             
             <tr>
@@ -19460,8 +19579,13 @@ prj = Project(False)
             </tr>
             
             <tr>
+                <td>test_teaser_json</td>
+                <td>8</td>
+            </tr>
+            
+            <tr>
                 <td>test_useconditions</td>
-                <td>559</td>
+                <td>561</td>
             </tr>
             
         </table>
@@ -19506,7 +19630,7 @@ prj = Project(False)
             
             <tr>
                 <td>tests/test_examples.py</td>
-                <td>43</td>
+                <td>42</td>
             </tr>
             
             <tr>
@@ -19560,8 +19684,13 @@ prj = Project(False)
             </tr>
             
             <tr>
+                <td>tests/test_teaser_json.py</td>
+                <td>8</td>
+            </tr>
+            
+            <tr>
                 <td>tests/test_useconditions.py</td>
-                <td>559</td>
+                <td>561</td>
             </tr>
             
         </table>
