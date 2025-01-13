@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.logic.buildingobjects.calculation package &mdash; TEASER 1.1.0 documentation</title>
+  <title>teaser.logic.buildingobjects.calculation package &mdash; TEASER 1.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
@@ -14,7 +14,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=fc837d61"></script>
+      <script src="../_static/documentation_options.js?v=58fbf978"></script>
       <script src="../_static/doctools.js?v=9a2dae69"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -311,7 +311,7 @@ of each zone, that are all saved into one matrix.</p>
 <span id="teaser-logic-buildingobjects-calculation-four-element-module"></span><h2>teaser.logic.buildingobjects.calculation.four_element module<a class="headerlink" href="#module-teaser.logic.buildingobjects.calculation.four_element" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="teaser.logic.buildingobjects.calculation.four_element.FourElement">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.calculation.four_element.</span></span><span class="sig-name descname"><span class="pre">FourElement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thermal_zone</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_windows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_bt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/calculation/four_element.html#FourElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.four_element.FourElement" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.calculation.four_element.</span></span><span class="sig-name descname"><span class="pre">FourElement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thermal_zone</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_windows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_bt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_bt_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/calculation/four_element.html#FourElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.four_element.FourElement" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class contains attributes and functions for four element model</p>
 <p>This model adds another element for the roof. Roofs commonly exhibit the
@@ -337,6 +337,8 @@ False for separate resistance for window, default is False. (Only
 supported for IBPSA)</p>
 </dd>
 <dt><strong>t_bt</strong><span class="classifier">float [d]</span></dt><dd><p>Time constant according to VDI 6007 (default t_bt = 5)</p>
+</dd>
+<dt><strong>t_bt_layer</strong><span class="classifier">float [d]</span></dt><dd><p>Time constant according to VDI 6007 for aggragation of layers (default t_bt = 7)</p>
 </dd>
 </dl>
 </dd>
@@ -758,7 +760,7 @@ all boundaries. This is due to to expected format in Modelica.</p>
 <span id="teaser-logic-buildingobjects-calculation-one-element-module"></span><h2>teaser.logic.buildingobjects.calculation.one_element module<a class="headerlink" href="#module-teaser.logic.buildingobjects.calculation.one_element" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="teaser.logic.buildingobjects.calculation.one_element.OneElement">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.calculation.one_element.</span></span><span class="sig-name descname"><span class="pre">OneElement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thermal_zone</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_windows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_bt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/calculation/one_element.html#OneElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.one_element.OneElement" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.calculation.one_element.</span></span><span class="sig-name descname"><span class="pre">OneElement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thermal_zone</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_windows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_bt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_bt_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/calculation/one_element.html#OneElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.one_element.OneElement" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class contains attributes and functions for one element model</p>
 <p>his model merges all thermal masses into one element, parameterized by the
@@ -780,6 +782,8 @@ False for separate resistance for window, default is False. (Only
 supported for IBPSA)</p>
 </dd>
 <dt><strong>t_bt</strong><span class="classifier">float [d]</span></dt><dd><p>Time constant according to VDI 6007 (default t_bt = 5)</p>
+</dd>
+<dt><strong>t_bt_layer</strong><span class="classifier">float [d]</span></dt><dd><p>Time constant according to VDI 6007 for aggragation of layers (default t_bt = 7)</p>
 </dd>
 </dl>
 </dd>
@@ -994,7 +998,7 @@ orientation, including Rooftops and GroundFloors</p>
 <span id="teaser-logic-buildingobjects-calculation-three-element-module"></span><h2>teaser.logic.buildingobjects.calculation.three_element module<a class="headerlink" href="#module-teaser.logic.buildingobjects.calculation.three_element" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="teaser.logic.buildingobjects.calculation.three_element.ThreeElement">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.calculation.three_element.</span></span><span class="sig-name descname"><span class="pre">ThreeElement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thermal_zone</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_windows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_bt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/calculation/three_element.html#ThreeElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.three_element.ThreeElement" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.calculation.three_element.</span></span><span class="sig-name descname"><span class="pre">ThreeElement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thermal_zone</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_windows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_bt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_bt_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/calculation/three_element.html#ThreeElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.three_element.ThreeElement" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class contains attributes and functions for three element model</p>
 <p>This model adds one further element for the floor plate. Long-term effects
@@ -1021,6 +1025,8 @@ False for separate resistance for window, default is False. (Only
 supported for IBPSA)</p>
 </dd>
 <dt><strong>t_bt</strong><span class="classifier">float [d]</span></dt><dd><p>Time constant according to VDI 6007 (default t_bt = 5)</p>
+</dd>
+<dt><strong>t_bt_layer</strong><span class="classifier">float [d]</span></dt><dd><p>Time constant according to VDI 6007 for aggragation of layers (default t_bt = 7)</p>
 </dd>
 </dl>
 </dd>
@@ -1302,7 +1308,7 @@ orientation, windows and outer walls rooftops</p>
 <span id="teaser-logic-buildingobjects-calculation-two-element-module"></span><h2>teaser.logic.buildingobjects.calculation.two_element module<a class="headerlink" href="#module-teaser.logic.buildingobjects.calculation.two_element" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="teaser.logic.buildingobjects.calculation.two_element.TwoElement">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.calculation.two_element.</span></span><span class="sig-name descname"><span class="pre">TwoElement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thermal_zone</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_windows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_bt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/calculation/two_element.html#TwoElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.two_element.TwoElement" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.calculation.two_element.</span></span><span class="sig-name descname"><span class="pre">TwoElement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thermal_zone</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_windows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_bt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_bt_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/calculation/two_element.html#TwoElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.two_element.TwoElement" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class contains attributes and functions for two element model</p>
 <p>This model distinguishes between internal thermal masses and exterior walls.
@@ -1324,6 +1330,8 @@ False for separate resistance for window, default is False. (Only
 supported for IBPSA)</p>
 </dd>
 <dt><strong>t_bt</strong><span class="classifier">float [d]</span></dt><dd><p>Time constant according to VDI 6007 (default t_bt = 5)</p>
+</dd>
+<dt><strong>t_bt_layer</strong><span class="classifier">float [d]</span></dt><dd><p>Time constant according to VDI 6007 for aggragation of layers (default t_bt = 7)</p>
 </dd>
 </dl>
 </dd>

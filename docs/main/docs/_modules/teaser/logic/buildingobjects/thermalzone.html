@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.logic.buildingobjects.thermalzone &mdash; TEASER 1.1.0 documentation</title>
+  <title>teaser.logic.buildingobjects.thermalzone &mdash; TEASER 1.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
@@ -13,7 +13,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=fc837d61"></script>
+      <script src="../../../../_static/documentation_options.js?v=58fbf978"></script>
       <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
@@ -190,7 +190,9 @@
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">number_of_elements</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">merge_windows</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-            <span class="n">t_bt</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+            <span class="n">t_bt</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">t_bt_layer</span><span class="o">=</span><span class="mi">7</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;RC-Calculation for the thermal zone</span>
 
 <span class="sd">        Based on the input parameters (used model) this function instantiates</span>
@@ -221,31 +223,38 @@
 
 <span class="sd">        t_bt : float</span>
 <span class="sd">            Time constant according to VDI 6007 (default t_bt = 5)</span>
+<span class="sd">        t_bt_layer: float</span>
+<span class="sd">            Time constant according to VDI 6007 for aggragation of layers (default t_bt = 7)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">number_of_elements</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">model_attr</span> <span class="o">=</span> <span class="n">OneElement</span><span class="p">(</span>
                 <span class="n">thermal_zone</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
                 <span class="n">merge_windows</span><span class="o">=</span><span class="n">merge_windows</span><span class="p">,</span>
-                <span class="n">t_bt</span><span class="o">=</span><span class="n">t_bt</span><span class="p">)</span>
+                <span class="n">t_bt</span><span class="o">=</span><span class="n">t_bt</span><span class="p">,</span>
+                <span class="n">t_bt_layer</span><span class="o">=</span><span class="n">t_bt_layer</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">calc_attributes</span><span class="p">()</span>
         <span class="k">elif</span> <span class="n">number_of_elements</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">model_attr</span> <span class="o">=</span> <span class="n">TwoElement</span><span class="p">(</span>
                 <span class="n">thermal_zone</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
                 <span class="n">merge_windows</span><span class="o">=</span><span class="n">merge_windows</span><span class="p">,</span>
-                <span class="n">t_bt</span><span class="o">=</span><span class="n">t_bt</span><span class="p">)</span>
+                <span class="n">t_bt</span><span class="o">=</span><span class="n">t_bt</span><span class="p">,</span>
+                <span class="n">t_bt_layer</span><span class="o">=</span><span class="n">t_bt_layer</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">calc_attributes</span><span class="p">()</span>
         <span class="k">elif</span> <span class="n">number_of_elements</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">model_attr</span> <span class="o">=</span> <span class="n">ThreeElement</span><span class="p">(</span>
                 <span class="n">thermal_zone</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
                 <span class="n">merge_windows</span><span class="o">=</span><span class="n">merge_windows</span><span class="p">,</span>
-                <span class="n">t_bt</span><span class="o">=</span><span class="n">t_bt</span><span class="p">)</span>
+                <span class="n">t_bt</span><span class="o">=</span><span class="n">t_bt</span><span class="p">,</span>
+                <span class="n">t_bt_layer</span><span class="o">=</span><span class="n">t_bt_layer</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">calc_attributes</span><span class="p">()</span>
         <span class="k">elif</span> <span class="n">number_of_elements</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">model_attr</span> <span class="o">=</span> <span class="n">FourElement</span><span class="p">(</span>
                 <span class="n">thermal_zone</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
                 <span class="n">merge_windows</span><span class="o">=</span><span class="n">merge_windows</span><span class="p">,</span>
-                <span class="n">t_bt</span><span class="o">=</span><span class="n">t_bt</span><span class="p">)</span>
+                <span class="n">t_bt</span><span class="o">=</span><span class="n">t_bt</span><span class="p">,</span>
+                <span class="n">t_bt_layer</span><span class="o">=</span><span class="n">t_bt_layer</span>
+            <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">calc_attributes</span><span class="p">()</span></div>
 
 

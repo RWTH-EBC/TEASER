@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.logic.buildingobjects package &mdash; TEASER 1.1.0 documentation</title>
+  <title>teaser.logic.buildingobjects package &mdash; TEASER 1.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
@@ -14,7 +14,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=fc837d61"></script>
+      <script src="../_static/documentation_options.js?v=58fbf978"></script>
       <script src="../_static/doctools.js?v=9a2dae69"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -529,6 +529,16 @@ supported for IBPSA)</p>
 <dt><strong>library_attr</strong><span class="classifier">Annex() or AixLib() instance</span></dt><dd><p>Classes with specific functions and attributes for building models in
 IBPSA and AixLib. Python classes can be found in calculation package.</p>
 </dd>
+<dt><strong>t_bt</strong><span class="classifier">float</span></dt><dd><p>Time constant according to VDI 6007.
+Default 5 d, only change if you know what you are doing.
+See <a class="reference external" href="https://publications.rwth-aachen.de/record/749705/files/749705.pdf">https://publications.rwth-aachen.de/record/749705/files/749705.pdf</a> for more
+information (Section 4.1.2)</p>
+</dd>
+<dt><strong>t_bt_layer: float</strong></dt><dd><p>Time constant according to VDI 6007 for aggragation of layers.
+Default 7 d, only change if you know what you are doing
+See <a class="reference external" href="https://publications.rwth-aachen.de/record/749705/files/749705.pdf">https://publications.rwth-aachen.de/record/749705/files/749705.pdf</a> for more
+information (Section 4.1.2)</p>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -890,7 +900,7 @@ depending on the type of the Building Element</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.calc_zone_parameters">
-<span class="sig-name descname"><span class="pre">calc_zone_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number_of_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_windows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_bt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/thermalzone.html#ThermalZone.calc_zone_parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.calc_zone_parameters" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">calc_zone_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number_of_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_windows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_bt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_bt_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/thermalzone.html#ThermalZone.calc_zone_parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.calc_zone_parameters" title="Link to this definition"></a></dt>
 <dd><p>RC-Calculation for the thermal zone</p>
 <p>Based on the input parameters (used model) this function instantiates
 the corresponding calculation Class (e.g. TwoElement) and calculates
@@ -919,6 +929,8 @@ separate resistance for window, default is False (Only
 supported for IBPSA)</p>
 </dd>
 <dt><strong>t_bt</strong><span class="classifier">float</span></dt><dd><p>Time constant according to VDI 6007 (default t_bt = 5)</p>
+</dd>
+<dt><strong>t_bt_layer: float</strong></dt><dd><p>Time constant according to VDI 6007 for aggragation of layers (default t_bt = 7)</p>
 </dd>
 </dl>
 </dd>

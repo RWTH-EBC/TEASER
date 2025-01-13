@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.logic.buildingobjects.building &mdash; TEASER 1.1.0 documentation</title>
+  <title>teaser.logic.buildingobjects.building &mdash; TEASER 1.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
@@ -13,7 +13,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=fc837d61"></script>
+      <script src="../../../../_static/documentation_options.js?v=58fbf978"></script>
       <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
@@ -202,8 +202,17 @@
 <span class="sd">    library_attr : Annex() or AixLib() instance</span>
 <span class="sd">        Classes with specific functions and attributes for building models in</span>
 <span class="sd">        IBPSA and AixLib. Python classes can be found in calculation package.</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    t_bt : float</span>
+<span class="sd">        Time constant according to VDI 6007.</span>
+<span class="sd">        Default 5 d, only change if you know what you are doing.</span>
+<span class="sd">        See https://publications.rwth-aachen.de/record/749705/files/749705.pdf for more</span>
+<span class="sd">        information (Section 4.1.2)</span>
+<span class="sd">    t_bt_layer: float</span>
+<span class="sd">        Time constant according to VDI 6007 for aggragation of layers.</span>
+<span class="sd">        Default 7 d, only change if you know what you are doing</span>
+<span class="sd">        See https://publications.rwth-aachen.de/record/749705/files/749705.pdf for more</span>
+<span class="sd">        information (Section 4.1.2)</span>
+<span class="sd">   &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -255,6 +264,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_used_library_calc</span> <span class="o">=</span> <span class="s2">&quot;AixLib&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">library_attr</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">t_bt</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">t_bt_layer</span> <span class="o">=</span> <span class="mi">7</span>
 
 <div class="viewcode-block" id="Building.set_outer_wall_area">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.set_outer_wall_area">[docs]</a>
@@ -489,7 +501,8 @@
             <span class="n">zone</span><span class="o">.</span><span class="n">calc_zone_parameters</span><span class="p">(</span>
                 <span class="n">number_of_elements</span><span class="o">=</span><span class="n">number_of_elements</span><span class="p">,</span>
                 <span class="n">merge_windows</span><span class="o">=</span><span class="n">merge_windows</span><span class="p">,</span>
-                <span class="n">t_bt</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                <span class="n">t_bt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">t_bt</span><span class="p">,</span>
+                <span class="n">t_bt_layer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">t_bt_layer</span>
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">sum_heat_load</span> <span class="o">+=</span> <span class="n">zone</span><span class="o">.</span><span class="n">model_attr</span><span class="o">.</span><span class="n">heat_load</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">area_rt</span> <span class="o">+=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">rf</span><span class="o">.</span><span class="n">area</span> <span class="k">for</span> <span class="n">rf</span> <span class="ow">in</span> <span class="n">zone</span><span class="o">.</span><span class="n">rooftops</span><span class="p">)</span>
