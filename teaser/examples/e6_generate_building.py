@@ -258,6 +258,7 @@ def example_create_building():
         win_material.name = "GlasWindow"
         win_material.thermal_conduc = 0.067
         win_material.transmittance = 0.9
+    return prj
 
 
 if __name__ == '__main__':
