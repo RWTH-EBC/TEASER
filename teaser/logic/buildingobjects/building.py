@@ -368,7 +368,10 @@ class Building(object):
             self.window_area[key] = self.get_window_area(key)
 
     def calc_building_parameter(
-        self, number_of_elements=2, merge_windows=False, used_library="AixLib"
+            self,
+            number_of_elements=None,
+            merge_windows=None,
+            used_library=None
     ):
         """calc all building parameters
 
@@ -378,19 +381,30 @@ class Building(object):
 
         Parameters
         ----------
-        number_of_elements : int
+        number_of_elements : int, optional
             defines the number of elements, that area aggregated, between 1
-            and 4, default is 2
-        merge_windows : bool
+            and 4. If None, uses existing class property
+        merge_windows : bool, optional
             True for merging the windows into the outer walls, False for
-            separate resistance for window, default is False
-        used_library : str
-            used library (AixLib and IBPSA are supported)
+            separate resistance for window. If None, uses existing class
+            property
+        used_library : str, optional
+            used library (AixLib and IBPSA are supported). If None, uses
+            existing class property
         """
+        # Use provided values or fall back to existing class properties
+        number_of_elements = (
+            number_of_elements if number_of_elements is not None
+            else self._number_of_elements_calc)
+        merge_windows = (merge_windows if merge_windows is not None
+                         else self._merge_windows_calc)
+        used_library = used_library if used_library is not None else (
+            self._used_library_calc)
 
-        self._number_of_elements_calc = number_of_elements
-        self._merge_windows_calc = merge_windows
-        self._used_library_calc = used_library
+        # Update class properties with the values being used
+        self.number_of_elements_calc = number_of_elements
+        self.merge_windows_calc = merge_windows
+        self.used_library_calc = used_library
 
         self.area_rt = 0
         self.area_gf = 0
