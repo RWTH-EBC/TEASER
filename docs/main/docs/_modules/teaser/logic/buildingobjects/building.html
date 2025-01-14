@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.logic.buildingobjects.building &mdash; TEASER 1.1.1 documentation</title>
+  <title>teaser.logic.buildingobjects.building &mdash; TEASER 1.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
@@ -13,7 +13,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../../../../_static/documentation_options.js?v=6f037312"></script>
       <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
@@ -471,7 +471,10 @@
 <div class="viewcode-block" id="Building.calc_building_parameter">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building.calc_building_parameter">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">calc_building_parameter</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">number_of_elements</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">merge_windows</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">used_library</span><span class="o">=</span><span class="s2">&quot;AixLib&quot;</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">number_of_elements</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">merge_windows</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">used_library</span><span class="o">=</span><span class="kc">None</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;calc all building parameters</span>
 
@@ -481,19 +484,30 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        number_of_elements : int</span>
+<span class="sd">        number_of_elements : int, optional</span>
 <span class="sd">            defines the number of elements, that area aggregated, between 1</span>
-<span class="sd">            and 4, default is 2</span>
-<span class="sd">        merge_windows : bool</span>
+<span class="sd">            and 4. If None, uses existing class property</span>
+<span class="sd">        merge_windows : bool, optional</span>
 <span class="sd">            True for merging the windows into the outer walls, False for</span>
-<span class="sd">            separate resistance for window, default is False</span>
-<span class="sd">        used_library : str</span>
-<span class="sd">            used library (AixLib and IBPSA are supported)</span>
+<span class="sd">            separate resistance for window. If None, uses existing class</span>
+<span class="sd">            property</span>
+<span class="sd">        used_library : str, optional</span>
+<span class="sd">            used library (AixLib and IBPSA are supported). If None, uses</span>
+<span class="sd">            existing class property</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Use provided values or fall back to existing class properties</span>
+        <span class="n">number_of_elements</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">number_of_elements</span> <span class="k">if</span> <span class="n">number_of_elements</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_elements_calc</span><span class="p">)</span>
+        <span class="n">merge_windows</span> <span class="o">=</span> <span class="p">(</span><span class="n">merge_windows</span> <span class="k">if</span> <span class="n">merge_windows</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                         <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merge_windows_calc</span><span class="p">)</span>
+        <span class="n">used_library</span> <span class="o">=</span> <span class="n">used_library</span> <span class="k">if</span> <span class="n">used_library</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_used_library_calc</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_number_of_elements_calc</span> <span class="o">=</span> <span class="n">number_of_elements</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_merge_windows_calc</span> <span class="o">=</span> <span class="n">merge_windows</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_used_library_calc</span> <span class="o">=</span> <span class="n">used_library</span>
+        <span class="c1"># Update class properties with the values being used</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">number_of_elements_calc</span> <span class="o">=</span> <span class="n">number_of_elements</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">merge_windows_calc</span> <span class="o">=</span> <span class="n">merge_windows</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">used_library_calc</span> <span class="o">=</span> <span class="n">used_library</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">area_rt</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">area_gf</span> <span class="o">=</span> <span class="mi">0</span>
