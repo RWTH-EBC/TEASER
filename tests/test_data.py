@@ -4,6 +4,9 @@ Created July 2015
 @author: TEASER 4 Development Team
 """
 from teaser.logic import utilities
+from teaser.logic.buildingobjects.calculation.four_element import FourElement
+from teaser.logic.buildingobjects.calculation.three_element import ThreeElement
+from teaser.logic.buildingobjects.calculation.two_element import TwoElement
 from teaser.project import Project
 from teaser.data.utilities import ConstructionData
 from teaser.data.dataclass import DataClass
@@ -15,10 +18,12 @@ import warnings as warnings
 prj = Project(False)
 prj.data = DataClass(construction_data=ConstructionData.iwu_heavy)
 
+
 class Test_teaser(object):
     """Unit Tests for TEASER"""
 
     global prj
+
     def test_calc_vdi_room1(self):
         """Parameter Verification for rouvel room1"""
         import teaser.examples.verification.verification_VDI_6007_room1 as room1
@@ -624,6 +629,86 @@ class Test_teaser(object):
         prj.merge_windows_calc = False
         prj.used_library_calc = "AixLib"
         prj.calc_all_buildings(raise_errors=True)
+
+    def test_number_of_elements_propagation(self):
+        """Tests propagation of changes in number_of_elements_calc"""
+
+        helptest.building_test2(prj)
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings(raise_errors=True)
+
+        assert prj.number_of_elements_calc == 2
+        bldg = prj.buildings[-1]
+        assert bldg.number_of_elements_calc == 2
+        tz = bldg.thermal_zones[0]
+        assert isinstance(tz.model_attr, TwoElement)
+        assert not hasattr(tz.model_attr, 'area_gf')
+        assert not hasattr(tz.model_attr, 'area_rt')
+
+        prj.number_of_elements_calc = 3
+        prj.calc_all_buildings(raise_errors=True)
+
+        assert prj.number_of_elements_calc == 3
+        bldg = prj.buildings[-1]
+        assert bldg.number_of_elements_calc == 3
+        tz = bldg.thermal_zones[0]
+        assert isinstance(tz.model_attr, ThreeElement)
+        assert tz.model_attr.area_gf == 140.0
+        assert not hasattr(tz.model_attr, 'area_rt')
+
+        prj.number_of_elements_calc = 4
+        prj.calc_all_buildings(raise_errors=True)
+
+        assert prj.number_of_elements_calc == 4
+        bldg = prj.buildings[-1]
+        assert bldg.number_of_elements_calc == 4
+        tz = bldg.thermal_zones[0]
+        assert isinstance(tz.model_attr, FourElement)
+        assert tz.model_attr.area_rt == 140.0
+        assert tz.model_attr.area_gf == 140.0
+
+    def test_calc_building_parameter(self):
+        """Check that calc_building_parameter() not overwrites prj settings"""
+        helptest.building_test2(prj)
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings(raise_errors=True)
+
+        assert prj.number_of_elements_calc == 2
+        bldg = prj.buildings[-1]
+        assert bldg.number_of_elements_calc == 2
+        bldg.calc_building_parameter()
+        tz = bldg.thermal_zones[0]
+        assert isinstance(tz.model_attr, TwoElement)
+        assert not hasattr(tz.model_attr, 'area_gf')
+        assert not hasattr(tz.model_attr, 'area_rt')
+
+        prj.number_of_elements_calc = 3
+        prj.calc_all_buildings(raise_errors=True)
+
+        assert prj.number_of_elements_calc == 3
+        bldg = prj.buildings[-1]
+        assert bldg.number_of_elements_calc == 3
+        bldg.calc_building_parameter()
+        tz = bldg.thermal_zones[0]
+        assert isinstance(tz.model_attr, ThreeElement)
+        assert tz.model_attr.area_gf == 140.0
+        assert not hasattr(tz.model_attr, 'area_rt')
+
+        prj.number_of_elements_calc = 4
+        prj.calc_all_buildings(raise_errors=True)
+
+        assert prj.number_of_elements_calc == 4
+        bldg = prj.buildings[-1]
+        assert bldg.number_of_elements_calc == 4
+        bldg.calc_building_parameter()
+        tz = bldg.thermal_zones[0]
+        assert isinstance(tz.model_attr, FourElement)
+        assert tz.model_attr.area_rt == 140.0
+        assert tz.model_attr.area_gf == 140.0
 
     def test_retrofit_all_buildings(self):
         """test of retrofit_all_buildings, no calculation verification"""
