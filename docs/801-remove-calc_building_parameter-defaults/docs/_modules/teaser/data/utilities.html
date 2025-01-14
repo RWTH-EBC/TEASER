@@ -1,0 +1,360 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teaser.data.utilities &mdash; TEASER 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=db26dd79" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            TEASER
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install_teaser.html">Install TEASER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../archetypes.html">Archetype Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../teaser.Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code/modules.html">teaser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../development.html">Issues solved in development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TEASER</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">teaser.data.utilities</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for teaser.data.utilities</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;This module provides the definitions and mappings for various building archetypes and construction standards</span>
+<span class="sd">used in the TEASER framework. The module includes enumerations for different geometry types of buildings and</span>
+<span class="sd">construction data types, as well as dictionaries that map these enumerations to their corresponding building classes.</span>
+<span class="sd">Additionally, it defines which construction data types are allowed for each building geometry data and</span>
+<span class="sd">includes functions to set the suitable construction_data.&quot;&quot;&quot;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.bmvbs.office</span><span class="w"> </span><span class="kn">import</span> <span class="n">Office</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.bmvbs.custom.institute</span><span class="w"> </span><span class="kn">import</span> <span class="n">Institute</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.bmvbs.custom.institute4</span><span class="w"> </span><span class="kn">import</span> <span class="n">Institute4</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.bmvbs.custom.institute8</span><span class="w"> </span><span class="kn">import</span> <span class="n">Institute8</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est1a</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST1a</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est1b</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST1b</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est2</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST2</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est3</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST3</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est4a</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST4a</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est4b</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST4b</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est5</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST5</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est6</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST6</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est7</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST7</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est8a</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST8a</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.urbanrenet.est8b</span><span class="w"> </span><span class="kn">import</span> <span class="n">EST8b</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SingleFamilyHouse</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.tabula.dk.singlefamilyhouse</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SingleFamilyHouse</span> <span class="k">as</span> <span class="n">SingleFamilyHouse_DK</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.tabula.de.terracedhouse</span><span class="w"> </span><span class="kn">import</span> <span class="n">TerracedHouse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.tabula.dk.terracedhouse</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">TerracedHouse</span> <span class="k">as</span> <span class="n">TerracedHouse_DK</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.tabula.de.multifamilyhouse</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultiFamilyHouse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.tabula.de.apartmentblock</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApartmentBlock</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.tabula.dk.apartmentblock</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ApartmentBlock</span> <span class="k">as</span> <span class="n">ApartmentBlock_DK</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SingleFamilyDwelling</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="GeometryData">
+<a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.utilities.GeometryData">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GeometryData</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The GeometryData enumeration replaces the former parameter &quot;usage&quot; and</span>
+<span class="sd">    represents different archetypes of residential and non-residential buildings.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">IwuSingleFamilyDwelling</span> <span class="o">=</span> <span class="s2">&quot;iwu_single_family_dwelling&quot;</span>
+
+    <span class="n">TabulaDeSingleFamilyHouse</span> <span class="o">=</span> <span class="s2">&quot;tabula_de_single_family_house&quot;</span>
+    <span class="n">TabulaDeTerracedHouse</span> <span class="o">=</span> <span class="s2">&quot;tabula_de_terraced_house&quot;</span>
+    <span class="n">TabulaDeMultiFamilyHouse</span> <span class="o">=</span> <span class="s2">&quot;tabula_de_multi_family_house&quot;</span>
+    <span class="n">TabulaDeApartmentBlock</span> <span class="o">=</span> <span class="s2">&quot;tabula_de_apartment_block&quot;</span>
+
+    <span class="n">TabulaDkSingleFamilyHouse</span> <span class="o">=</span> <span class="s2">&quot;tabula_dk_single_family_house&quot;</span>
+    <span class="n">TabulaDkTerracedHouse</span> <span class="o">=</span> <span class="s2">&quot;tabula_dk_terraced_house&quot;</span>
+    <span class="n">TabulaDkApartmentBlock</span> <span class="o">=</span> <span class="s2">&quot;tabula_dk_apartment_block&quot;</span>
+
+    <span class="n">BmvbsOffice</span> <span class="o">=</span> <span class="s2">&quot;bmvbs_office&quot;</span>
+    <span class="n">BmvbsInstitute</span> <span class="o">=</span> <span class="s2">&quot;bmvbs_institute&quot;</span>
+    <span class="n">BmvbsInstitute4</span> <span class="o">=</span> <span class="s2">&quot;bmvbs_institute4&quot;</span>
+    <span class="n">BmvbsInstitute8</span> <span class="o">=</span> <span class="s2">&quot;bmvbs_institute8&quot;</span>
+
+    <span class="n">UrbanrenetEst1a</span> <span class="o">=</span> <span class="s2">&quot;urbanrenet_est1a&quot;</span>
+    <span class="n">UrbanrenetEst1b</span> <span class="o">=</span> <span class="s2">&quot;urbanrenet_est1b&quot;</span>
+    <span class="n">UrbanrenetEst2</span> <span class="o">=</span> <span class="s2">&quot;urbanrenet_est2&quot;</span>
+    <span class="n">UrbanrenetEst3</span> <span class="o">=</span> <span class="s2">&quot;urbanrenet_est3&quot;</span>
+    <span class="n">UrbanrenetEst4a</span> <span class="o">=</span> <span class="s2">&quot;urbanrenet_est4a&quot;</span>
+    <span class="n">UrbanrenetEst4b</span> <span class="o">=</span> <span class="s2">&quot;urbanrenet_est4b&quot;</span>
+    <span class="n">UrbanrenetEst5</span> <span class="o">=</span> <span class="s2">&quot;urbanrenet_est5&quot;</span>
+    <span class="n">UrbanrenetEst6</span> <span class="o">=</span> <span class="s2">&quot;urbanrenet_est6&quot;</span>
+    <span class="n">UrbanrenetEst7</span> <span class="o">=</span> <span class="s2">&quot;urbanrenet_est7&quot;</span>
+    <span class="n">UrbanrenetEst8a</span> <span class="o">=</span> <span class="s2">&quot;urbanrenet_est8a&quot;</span>
+    <span class="n">UrbanrenetEst8b</span> <span class="o">=</span> <span class="s2">&quot;urbanrenet_est8b&quot;</span></div>
+
+
+<div class="viewcode-block" id="ConstructionData">
+<a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.utilities.ConstructionData">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ConstructionData</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The ConstructionData enumeration combines the former parameters “method” and “construction_type”.</span>
+<span class="sd">    The prefix of each value is used to select the appropriate json file as input data.</span>
+<span class="sd">    The complete value is used to search for the appropriate element within the json file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">iwu_heavy</span> <span class="o">=</span> <span class="s2">&quot;iwu_heavy&quot;</span>
+    <span class="n">iwu_light</span> <span class="o">=</span> <span class="s2">&quot;iwu_light&quot;</span>
+    <span class="n">tabula_de_standard</span> <span class="o">=</span> <span class="s2">&quot;tabula_de_standard&quot;</span>
+    <span class="n">tabula_de_retrofit</span> <span class="o">=</span> <span class="s2">&quot;tabula_de_retrofit&quot;</span>
+    <span class="n">tabula_de_adv_retrofit</span> <span class="o">=</span> <span class="s2">&quot;tabula_de_adv_retrofit&quot;</span>
+    <span class="n">tabula_dk_standard</span> <span class="o">=</span> <span class="s2">&quot;tabula_dk_standard&quot;</span>
+    <span class="n">tabula_dk_retrofit</span> <span class="o">=</span> <span class="s2">&quot;tabula_dk_retrofit&quot;</span>
+    <span class="n">tabula_dk_adv_retrofit</span> <span class="o">=</span> <span class="s2">&quot;tabula_dk_adv_retrofit&quot;</span>
+    <span class="n">kfw_40</span> <span class="o">=</span> <span class="s2">&quot;kfw_40&quot;</span>
+    <span class="n">kfw_55</span> <span class="o">=</span> <span class="s2">&quot;kfw_55&quot;</span>
+    <span class="n">kfw_70</span> <span class="o">=</span> <span class="s2">&quot;kfw_70&quot;</span>
+    <span class="n">kfw_85</span> <span class="o">=</span> <span class="s2">&quot;kfw_85&quot;</span>
+    <span class="n">kfw_100</span> <span class="o">=</span> <span class="s2">&quot;kfw_100&quot;</span>
+
+<div class="viewcode-block" id="ConstructionData.get_prefix">
+<a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.utilities.ConstructionData.get_prefix">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span></div>
+
+<div class="viewcode-block" id="ConstructionData.is_iwu">
+<a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.utilities.ConstructionData.is_iwu">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_iwu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_prefix</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;iwu&quot;</span></div>
+
+
+<div class="viewcode-block" id="ConstructionData.is_tabula_de">
+<a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.utilities.ConstructionData.is_tabula_de">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_tabula_de</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_prefix</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;tabula_de&quot;</span></div>
+
+
+<div class="viewcode-block" id="ConstructionData.is_tabula_dk">
+<a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.utilities.ConstructionData.is_tabula_dk">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_tabula_dk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_prefix</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;tabula_dk&quot;</span></div>
+
+
+<div class="viewcode-block" id="ConstructionData.is_kfw">
+<a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.utilities.ConstructionData.is_kfw">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_kfw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_prefix</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;kfw&quot;</span></div>
+</div>
+
+
+<span class="c1"># Dictionary that maps GeometryData enumeration values to their corresponding building classes.</span>
+<span class="n">geometries</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">#non residential:</span>
+    <span class="c1">#BMVBS</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">BmvbsOffice</span><span class="p">:</span> <span class="n">Office</span><span class="p">,</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">BmvbsInstitute</span><span class="p">:</span> <span class="n">Institute</span><span class="p">,</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">BmvbsInstitute4</span><span class="p">:</span> <span class="n">Institute4</span><span class="p">,</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">BmvbsInstitute8</span><span class="p">:</span> <span class="n">Institute8</span><span class="p">,</span>
+
+    <span class="c1">#residential:</span>
+    <span class="c1">#IWU</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">IwuSingleFamilyDwelling</span><span class="p">:</span> <span class="n">SingleFamilyDwelling</span><span class="p">,</span>
+    <span class="c1">#Tabula DE</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeSingleFamilyHouse</span><span class="p">:</span> <span class="n">SingleFamilyHouse</span><span class="p">,</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeTerracedHouse</span><span class="p">:</span> <span class="n">TerracedHouse</span><span class="p">,</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeMultiFamilyHouse</span><span class="p">:</span> <span class="n">MultiFamilyHouse</span><span class="p">,</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeApartmentBlock</span><span class="p">:</span> <span class="n">ApartmentBlock</span><span class="p">,</span>
+    <span class="c1">#Tabula DK</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDkSingleFamilyHouse</span><span class="p">:</span> <span class="n">SingleFamilyHouse_DK</span><span class="p">,</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDkTerracedHouse</span><span class="p">:</span> <span class="n">TerracedHouse_DK</span><span class="p">,</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDkApartmentBlock</span><span class="p">:</span> <span class="n">ApartmentBlock_DK</span><span class="p">,</span>
+    <span class="c1">#Urbanrenet</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst1a</span><span class="p">:</span> <span class="n">EST1a</span><span class="p">,</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst1b</span><span class="p">:</span> <span class="n">EST1b</span><span class="p">,</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst2</span><span class="p">:</span> <span class="n">EST2</span><span class="p">,</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst3</span><span class="p">:</span> <span class="n">EST3</span><span class="p">,</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst4a</span><span class="p">:</span> <span class="n">EST4a</span><span class="p">,</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst4b</span><span class="p">:</span> <span class="n">EST4b</span><span class="p">,</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst5</span><span class="p">:</span> <span class="n">EST5</span><span class="p">,</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst6</span><span class="p">:</span> <span class="n">EST6</span><span class="p">,</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst7</span><span class="p">:</span> <span class="n">EST7</span><span class="p">,</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst8a</span><span class="p">:</span> <span class="n">EST8a</span><span class="p">,</span>
+    <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst8b</span><span class="p">:</span> <span class="n">EST8b</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># Dictionary that defines which building geometries are allowed for each construction data type.</span>
+<span class="n">allowed_geometries</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">ConstructionData</span><span class="o">.</span><span class="n">iwu_heavy</span><span class="p">:</span> <span class="p">[</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">IwuSingleFamilyDwelling</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">BmvbsOffice</span><span class="p">,</span>
+                                 <span class="n">GeometryData</span><span class="o">.</span><span class="n">BmvbsInstitute</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">BmvbsInstitute4</span><span class="p">,</span>
+                                 <span class="n">GeometryData</span><span class="o">.</span><span class="n">BmvbsInstitute8</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst1a</span><span class="p">,</span>
+                                 <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst1b</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst2</span><span class="p">,</span>
+                                 <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst3</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst4a</span><span class="p">,</span>
+                                 <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst4b</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst5</span><span class="p">,</span>
+                                 <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst6</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst7</span><span class="p">,</span>
+                                 <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst8a</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst8b</span><span class="p">],</span>
+    <span class="n">ConstructionData</span><span class="o">.</span><span class="n">iwu_light</span><span class="p">:</span> <span class="p">[</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">IwuSingleFamilyDwelling</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">BmvbsOffice</span><span class="p">,</span>
+                                 <span class="n">GeometryData</span><span class="o">.</span><span class="n">BmvbsInstitute</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">BmvbsInstitute4</span><span class="p">,</span>
+                                 <span class="n">GeometryData</span><span class="o">.</span><span class="n">BmvbsInstitute8</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst1a</span><span class="p">,</span>
+                                 <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst1b</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst2</span><span class="p">,</span>
+                                 <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst3</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst4a</span><span class="p">,</span>
+                                 <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst4b</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst5</span><span class="p">,</span>
+                                 <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst6</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst7</span><span class="p">,</span>
+                                 <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst8a</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">UrbanrenetEst8b</span><span class="p">],</span>
+
+    <span class="n">ConstructionData</span><span class="o">.</span><span class="n">tabula_de_standard</span><span class="p">:</span> <span class="p">[</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeSingleFamilyHouse</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeTerracedHouse</span><span class="p">,</span>
+                                          <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeMultiFamilyHouse</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeApartmentBlock</span><span class="p">],</span>
+    <span class="n">ConstructionData</span><span class="o">.</span><span class="n">tabula_de_retrofit</span><span class="p">:</span> <span class="p">[</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeSingleFamilyHouse</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeTerracedHouse</span><span class="p">,</span>
+                                          <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeMultiFamilyHouse</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeApartmentBlock</span><span class="p">],</span>
+    <span class="n">ConstructionData</span><span class="o">.</span><span class="n">tabula_de_adv_retrofit</span><span class="p">:</span> <span class="p">[</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeSingleFamilyHouse</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeTerracedHouse</span><span class="p">,</span>
+                                              <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeMultiFamilyHouse</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeApartmentBlock</span><span class="p">],</span>
+
+    <span class="n">ConstructionData</span><span class="o">.</span><span class="n">tabula_dk_standard</span><span class="p">:</span> <span class="p">[</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDkSingleFamilyHouse</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDkTerracedHouse</span><span class="p">,</span>
+                                          <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDkApartmentBlock</span><span class="p">],</span>
+    <span class="n">ConstructionData</span><span class="o">.</span><span class="n">tabula_dk_retrofit</span><span class="p">:</span> <span class="p">[</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDkSingleFamilyHouse</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDkTerracedHouse</span><span class="p">,</span>
+                                          <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDkApartmentBlock</span><span class="p">],</span>
+    <span class="n">ConstructionData</span><span class="o">.</span><span class="n">tabula_dk_adv_retrofit</span><span class="p">:</span> <span class="p">[</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDkSingleFamilyHouse</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDkTerracedHouse</span><span class="p">,</span>
+                                              <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDkApartmentBlock</span><span class="p">],</span>
+
+    <span class="n">ConstructionData</span><span class="o">.</span><span class="n">kfw_40</span><span class="p">:</span> <span class="p">[</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">IwuSingleFamilyDwelling</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeSingleFamilyHouse</span><span class="p">],</span>
+    <span class="n">ConstructionData</span><span class="o">.</span><span class="n">kfw_55</span><span class="p">:</span> <span class="p">[</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">IwuSingleFamilyDwelling</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeSingleFamilyHouse</span><span class="p">],</span>
+    <span class="n">ConstructionData</span><span class="o">.</span><span class="n">kfw_70</span><span class="p">:</span> <span class="p">[</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">IwuSingleFamilyDwelling</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeSingleFamilyHouse</span><span class="p">],</span>
+    <span class="n">ConstructionData</span><span class="o">.</span><span class="n">kfw_85</span><span class="p">:</span> <span class="p">[</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">IwuSingleFamilyDwelling</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeSingleFamilyHouse</span><span class="p">],</span>
+    <span class="n">ConstructionData</span><span class="o">.</span><span class="n">kfw_100</span><span class="p">:</span> <span class="p">[</span><span class="n">GeometryData</span><span class="o">.</span><span class="n">IwuSingleFamilyDwelling</span><span class="p">,</span> <span class="n">GeometryData</span><span class="o">.</span><span class="n">TabulaDeSingleFamilyHouse</span><span class="p">],</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="check_construction_data_setter_iwu">
+<a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.utilities.check_construction_data_setter_iwu">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_construction_data_setter_iwu</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function validates and sets the construction_data for buildings using the iwu construction_data.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ConstructionData</span><span class="o">.</span><span class="n">iwu_heavy</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ConstructionData</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">ConstructionData</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">value</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid construction_data: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">. &quot;</span>
+                     <span class="sa">f</span><span class="s2">&quot;Must be either a string or a ConstructionData enum value.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="check_construction_data_setter_tabula_de">
+<a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.utilities.check_construction_data_setter_tabula_de">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_construction_data_setter_tabula_de</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function validates and sets the construction_data for buildings using the tabula_de construction_data.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ConstructionData</span><span class="o">.</span><span class="n">tabula_de_standard</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ConstructionData</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">ConstructionData</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">value</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid construction_data: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">. &quot;</span>
+                     <span class="sa">f</span><span class="s2">&quot;Must be either a string or a ConstructionData enum value.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="check_construction_data_setter_tabula_dk">
+<a class="viewcode-back" href="../../../code/teaser.data.html#teaser.data.utilities.check_construction_data_setter_tabula_dk">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_construction_data_setter_tabula_dk</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function validates and sets the construction_data for buildings using the tabula_dk construction_data.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ConstructionData</span><span class="o">.</span><span class="n">tabula_dk_standard</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ConstructionData</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">ConstructionData</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">value</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid construction_data: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">. &quot;</span>
+                     <span class="sa">f</span><span class="s2">&quot;Must be either a string or a ConstructionData enum value.&quot;</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
