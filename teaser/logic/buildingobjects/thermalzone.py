@@ -724,6 +724,7 @@ class ThermalZone(object):
                     f" ConcreteCoreActivation transfer system only when "
                     f"using FourElement!")
                 self._transfer_system = value
+            # TODO @Jonatan
             elif isinstance(self.model_attr, FourElement):
                 self._transfer_system = value
             else:
