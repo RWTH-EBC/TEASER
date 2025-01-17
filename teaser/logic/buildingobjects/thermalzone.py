@@ -11,6 +11,8 @@ from teaser.logic.buildingobjects.calculation.one_element import OneElement
 from teaser.logic.buildingobjects.calculation.two_element import TwoElement
 from teaser.logic.buildingobjects.calculation.three_element import ThreeElement
 from teaser.logic.buildingobjects.calculation.four_element import FourElement
+from teaser.logic.buildingobjects.buildingsystems.transfer_systems import \
+    TransferSystems
 
 
 class ThermalZone(object):
@@ -73,6 +75,11 @@ class ThermalZone(object):
         Temperature directly at the outer side of ground floors for static
         heat load calculation.
         The input of t_ground is ALWAYS in Kelvin
+    transfer_system : Union[TransferSystems]
+        Selected transfer system for simplified modeling of heat transfer.
+        Check TransferSystem class for more information. Default is IdealHeater
+        which has no time delay at all. UFH and CCA are only available for 4
+        element model.
     density_air : float [kg/m3]
         average density of the air in the thermal zone
     heat_capac_air : float [J/K]
@@ -103,6 +110,7 @@ class ThermalZone(object):
         self.density_air = 1.25
         self.heat_capac_air = 1002
         self.t_ground = 286.15
+        self._transfer_system = TransferSystems.IdealHeater
 
     def calc_zone_parameters(
             self,
@@ -687,3 +695,34 @@ class ThermalZone(object):
                 self._t_outside = value
             except:
                 raise ValueError("Can't convert temperature to float")
+
+    @property
+    def transfer_system(self):
+        return self._transfer_system
+
+    @transfer_system.setter
+    def transfer_system(self, value):
+        if value not in [ts for ts in TransferSystems]:
+            raise ValueError(f"{value} is not a valid transfer system")
+
+        if value in [TransferSystems.IdealHeater, TransferSystems.Radiator]:
+            self._transfer_system = value
+
+        elif value in [
+            TransferSystems.UnderFloorHeating,
+            TransferSystems.ConcreteCoreActivation
+        ]:
+            if not hasattr(self, "model_attr"):
+                warnings.warn(
+                    f"Zone parameters for {self} were not calculated yet."
+                    f" Please make sure to use UnderFloorHeating and"
+                    f" ConcreteCoreActivation transfer system only when "
+                    f"using FourElement!")
+                self._transfer_system = value
+            elif self.model_attr == FourElement:
+                self._transfer_system = value
+            else:
+                raise ValueError(
+                    f"TransferSystem {value} can only be used with FourElement"
+                    f" thermal zone model, but you are using "
+                    f"{self.model_attr}")
