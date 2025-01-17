@@ -111,6 +111,11 @@ class ThermalZone(object):
         self.heat_capac_air = 1002
         self.t_ground = 286.15
         self._transfer_system = TransferSystems.IdealHeater
+        self.pid_gain_heat = 1
+        self.pid_ti_heat = 1
+        self.pid_gain_cool = 1
+        self.pid_ti_cool = 1
+
 
     def calc_zone_parameters(
             self,
