@@ -91,6 +91,6 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     withIdealThresholds = ${get_true_false(zone.use_conditions.with_ideal_thresholds)},
     TThresholdHeater = ${zone.use_conditions.T_threshold_heating},
     TThresholdCooler = ${zone.use_conditions.T_threshold_cooling},
-    traSys = AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem.${zone.transfer_system}
+    traSys = AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystems.${zone.transfer_system}
     );
 end ${zone.parent.name}_${zone.name};
