@@ -191,6 +191,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">heat_capac_air</span> <span class="o">=</span> <span class="mi">1002</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">t_ground</span> <span class="o">=</span> <span class="mf">286.15</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system</span> <span class="o">=</span> <span class="n">TransferSystems</span><span class="o">.</span><span class="n">IdealHeater</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pid_gain_heat</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pid_ti_heat</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pid_gain_cool</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pid_ti_cool</span> <span class="o">=</span> <span class="mi">1</span>
+
 
 <div class="viewcode-block" id="ThermalZone.calc_zone_parameters">
 <a class="viewcode-back" href="../../../../code/teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.thermalzone.ThermalZone.calc_zone_parameters">[docs]</a>
