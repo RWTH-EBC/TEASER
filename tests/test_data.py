@@ -3239,21 +3239,3 @@ class Test_teaser(object):
         assert tz2.name == "kitchen"
         assert tz3.name == "living_1"
 
-    def test_transfer_systems(self):
-        # TODO #806 need to finish the tests and refactor calc_zone_parameters
-        #  function similar to calc_building_parameter functino in #801
-        from teaser.logic.buildingobjects.building import Building
-        from teaser.logic.buildingobjects.thermalzone import ThermalZone
-        from teaser.logic.buildingobjects.buildingsystems.transfer_systems import TransferSystems
-
-        prj.number_of_elements_calc = 4
-        bld = Building(parent=prj, )
-        tz1 = ThermalZone(parent=bld)
-
-        tz1.transfer_system = TransferSystems.IdealHeater
-        tz2 = ThermalZone(parent=bld)
-        tz2.transfer_system = TransferSystems.Radiator
-        tz3 = ThermalZone(parent=bld)
-        tz3.transfer_system = TransferSystems.UnderFloorHeating
-        tz4 = ThermalZone(parent=bld)
-        tz4.transfer_system = TransferSystems.ConcreteCoreActivation
