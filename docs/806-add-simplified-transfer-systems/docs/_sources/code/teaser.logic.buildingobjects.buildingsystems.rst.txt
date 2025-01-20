@@ -16,11 +16,3 @@ teaser.logic.buildingobjects.buildingsystems.buildingahu module
    :members:
    :undoc-members:
    :show-inheritance:
-
-teaser.logic.buildingobjects.buildingsystems.transfer\_systems module
----------------------------------------------------------------------
-
-.. automodule:: teaser.logic.buildingobjects.buildingsystems.transfer_systems
-   :members:
-   :undoc-members:
-   :show-inheritance:

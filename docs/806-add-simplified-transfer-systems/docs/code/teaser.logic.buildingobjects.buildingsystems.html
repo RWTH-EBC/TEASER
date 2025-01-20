@@ -65,10 +65,6 @@
 <li class="toctree-l10"><a class="reference internal" href="#teaser.logic.buildingobjects.buildingsystems.buildingahu.BuildingAHU"><code class="docutils literal notranslate"><span class="pre">BuildingAHU</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l9"><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingsystems.transfer_systems">teaser.logic.buildingobjects.buildingsystems.transfer_systems module</a><ul>
-<li class="toctree-l10"><a class="reference internal" href="#teaser.logic.buildingobjects.buildingsystems.transfer_systems.TransferSystems"><code class="docutils literal notranslate"><span class="pre">TransferSystems</span></code></a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l8"><a class="reference internal" href="teaser.logic.buildingobjects.calculation.html">teaser.logic.buildingobjects.calculation package</a></li>
@@ -239,44 +235,6 @@ Per default: (v_flow_profile combined with “min_ahu and max_ahu”)</p></li>
 <dl class="py property">
 <dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingsystems.buildingahu.BuildingAHU.v_flow_profile">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v_flow_profile</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingsystems.buildingahu.BuildingAHU.v_flow_profile" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-</section>
-<section id="module-teaser.logic.buildingobjects.buildingsystems.transfer_systems">
-<span id="teaser-logic-buildingobjects-buildingsystems-transfer-systems-module"></span><h2>teaser.logic.buildingobjects.buildingsystems.transfer_systems module<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingsystems.transfer_systems" title="Link to this heading"></a></h2>
-<p>The here named transfer systems are simply using a PT 1 element to delay
-the heat transfer into the zone. The PT 1 is modeled in the
-AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped class in
-Modelica.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingsystems.transfer_systems.TransferSystems">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingsystems.transfer_systems.</span></span><span class="sig-name descname"><span class="pre">TransferSystems</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingsystems/transfer_systems.html#TransferSystems"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingsystems.transfer_systems.TransferSystems" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
-<p>Enum for transfer systems.</p>
-<p>Ideal heater uses no PT 1, Radiator, UnderFloorHeating and
-ConcreteCoreActivation use different PT 1 parameters, that delay the heat
-transfer into the zone. The model parameters can be found in AixLib under:
-AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingsystems.transfer_systems.TransferSystems.ConcreteCoreActivation">
-<span class="sig-name descname"><span class="pre">ConcreteCoreActivation</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#teaser.logic.buildingobjects.buildingsystems.transfer_systems.TransferSystems.ConcreteCoreActivation" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingsystems.transfer_systems.TransferSystems.IdealHeater">
-<span class="sig-name descname"><span class="pre">IdealHeater</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#teaser.logic.buildingobjects.buildingsystems.transfer_systems.TransferSystems.IdealHeater" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingsystems.transfer_systems.TransferSystems.Radiator">
-<span class="sig-name descname"><span class="pre">Radiator</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#teaser.logic.buildingobjects.buildingsystems.transfer_systems.TransferSystems.Radiator" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingsystems.transfer_systems.TransferSystems.UnderFloorHeating">
-<span class="sig-name descname"><span class="pre">UnderFloorHeating</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#teaser.logic.buildingobjects.buildingsystems.transfer_systems.TransferSystems.UnderFloorHeating" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
