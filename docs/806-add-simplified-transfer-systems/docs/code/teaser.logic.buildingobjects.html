@@ -121,7 +121,10 @@
 <li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.set_volume_zone"><code class="docutils literal notranslate"><span class="pre">ThermalZone.set_volume_zone()</span></code></a></li>
 <li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.t_inside"><code class="docutils literal notranslate"><span class="pre">ThermalZone.t_inside</span></code></a></li>
 <li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.t_outside"><code class="docutils literal notranslate"><span class="pre">ThermalZone.t_outside</span></code></a></li>
-<li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.transfer_system"><code class="docutils literal notranslate"><span class="pre">ThermalZone.transfer_system</span></code></a></li>
+<li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.transfer_system_fraCooRad"><code class="docutils literal notranslate"><span class="pre">ThermalZone.transfer_system_fraCooRad</span></code></a></li>
+<li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.transfer_system_fraHeaRad"><code class="docutils literal notranslate"><span class="pre">ThermalZone.transfer_system_fraHeaRad</span></code></a></li>
+<li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.transfer_system_pt1_K"><code class="docutils literal notranslate"><span class="pre">ThermalZone.transfer_system_pt1_K</span></code></a></li>
+<li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.transfer_system_pt1_T"><code class="docutils literal notranslate"><span class="pre">ThermalZone.transfer_system_pt1_T</span></code></a></li>
 <li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.use_conditions"><code class="docutils literal notranslate"><span class="pre">ThermalZone.use_conditions</span></code></a></li>
 <li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.volume"><code class="docutils literal notranslate"><span class="pre">ThermalZone.volume</span></code></a></li>
 <li class="toctree-l9"><a class="reference internal" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.windows"><code class="docutils literal notranslate"><span class="pre">ThermalZone.windows</span></code></a></li>
@@ -883,10 +886,18 @@ The input of t_inside is ALWAYS in Kelvin</p>
 heat load calculation.
 The input of t_ground is ALWAYS in Kelvin</p>
 </dd>
-<dt><strong>transfer_system</strong><span class="classifier">Union[TransferSystems]</span></dt><dd><p>Selected transfer system for simplified modeling of heat transfer.
-Check TransferSystem class for more information. Default is IdealHeater
-which has no time delay at all. UFH and CCA are only available for 4
-element model.</p>
+<dt><strong># transfer_system</strong><span class="classifier">Union[TransferSystems]</span></dt><dd></dd>
+<dt><strong>#     Selected transfer system for simplified modeling of heat transfer.</strong></dt><dd></dd>
+<dt><strong>#     Check TransferSystem class for more information. Default is IdealHeater</strong></dt><dd></dd>
+<dt><strong>#     which has no time delay at all. UFH and CCA are only available for 4</strong></dt><dd></dd>
+<dt><strong>#     element model.</strong></dt><dd></dd>
+<dt><strong>transfer_system_pt1_K: float []</strong></dt><dd><p>Gain for PT1 for damped heat transfer</p>
+</dd>
+<dt><strong>transfer_system_pt1_T: float [h]</strong></dt><dd><p>Time Constant for PT1 for damped heat transfer</p>
+</dd>
+<dt><strong>transfer_system_fraHeaRad:</strong></dt><dd><p>Fraction of heat transfer to radiation</p>
+</dd>
+<dt><strong>transfer_system_fraCooRad:</strong></dt><dd><p>Fraction of cool transfer to radiation</p>
 </dd>
 <dt><strong>density_air</strong><span class="classifier">float [kg/m3]</span></dt><dd><p>average density of the air in the thermal zone</p>
 </dd>
@@ -1179,8 +1190,23 @@ approach is used. This function covers Floors, Ceilings and InnerWalls.</p>
 <dd></dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.transfer_system">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transfer_system</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.transfer_system" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.transfer_system_fraCooRad">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transfer_system_fraCooRad</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.transfer_system_fraCooRad" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.transfer_system_fraHeaRad">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transfer_system_fraHeaRad</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.transfer_system_fraHeaRad" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.transfer_system_pt1_K">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transfer_system_pt1_K</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.transfer_system_pt1_K" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.thermalzone.ThermalZone.transfer_system_pt1_T">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transfer_system_pt1_T</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.transfer_system_pt1_T" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">

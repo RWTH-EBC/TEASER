@@ -89,8 +89,8 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.calculation.two_element</span><span class="w"> </span><span class="kn">import</span> <span class="n">TwoElement</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.calculation.three_element</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThreeElement</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.calculation.four_element</span><span class="w"> </span><span class="kn">import</span> <span class="n">FourElement</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">teaser.logic.buildingobjects.buildingsystems.transfer_systems</span><span class="w"> </span><span class="kn">import</span> \
-    <span class="n">TransferSystems</span>
+<span class="c1"># from teaser.logic.buildingobjects.buildingsystems.transfer_systems import \</span>
+<span class="c1">#     TransferSystems</span>
 
 
 <div class="viewcode-block" id="ThermalZone">
@@ -155,11 +155,19 @@
 <span class="sd">        Temperature directly at the outer side of ground floors for static</span>
 <span class="sd">        heat load calculation.</span>
 <span class="sd">        The input of t_ground is ALWAYS in Kelvin</span>
-<span class="sd">    transfer_system : Union[TransferSystems]</span>
-<span class="sd">        Selected transfer system for simplified modeling of heat transfer.</span>
-<span class="sd">        Check TransferSystem class for more information. Default is IdealHeater</span>
-<span class="sd">        which has no time delay at all. UFH and CCA are only available for 4</span>
-<span class="sd">        element model.</span>
+<span class="sd">    # transfer_system : Union[TransferSystems]</span>
+<span class="sd">    #     Selected transfer system for simplified modeling of heat transfer.</span>
+<span class="sd">    #     Check TransferSystem class for more information. Default is IdealHeater</span>
+<span class="sd">    #     which has no time delay at all. UFH and CCA are only available for 4</span>
+<span class="sd">    #     element model.</span>
+<span class="sd">    transfer_system_pt1_K: float []</span>
+<span class="sd">        Gain for PT1 for damped heat transfer</span>
+<span class="sd">    transfer_system_pt1_T: float [h]</span>
+<span class="sd">        Time Constant for PT1 for damped heat transfer</span>
+<span class="sd">    transfer_system_fraHeaRad:</span>
+<span class="sd">        Fraction of heat transfer to radiation</span>
+<span class="sd">    transfer_system_fraCooRad:</span>
+<span class="sd">        Fraction of cool transfer to radiation</span>
 <span class="sd">    density_air : float [kg/m3]</span>
 <span class="sd">        average density of the air in the thermal zone</span>
 <span class="sd">    heat_capac_air : float [J/K]</span>
@@ -190,7 +198,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">density_air</span> <span class="o">=</span> <span class="mf">1.25</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">heat_capac_air</span> <span class="o">=</span> <span class="mi">1002</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">t_ground</span> <span class="o">=</span> <span class="mf">286.15</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system</span> <span class="o">=</span> <span class="n">TransferSystems</span><span class="o">.</span><span class="n">IdealHeater</span>
+        <span class="c1"># self._transfer_system = TransferSystems.IdealHeater</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system_pt1_K</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system_pt1_T</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system_fraHeaRad</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system_fraCooRad</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pid_gain_heat</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pid_ti_heat</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pid_gain_cool</span> <span class="o">=</span> <span class="mi">1</span>
@@ -814,37 +826,110 @@
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert temperature to float&quot;</span><span class="p">)</span>
 
+    <span class="c1"># @property</span>
+    <span class="c1"># def transfer_system(self):</span>
+    <span class="c1">#     return self._transfer_system</span>
+    <span class="c1">#</span>
+    <span class="c1"># @transfer_system.setter</span>
+    <span class="c1"># def transfer_system(self, value):</span>
+    <span class="c1">#     if value not in [ts for ts in TransferSystems]:</span>
+    <span class="c1">#         raise ValueError(f&quot;{value} is not a valid transfer system&quot;)</span>
+    <span class="c1">#</span>
+    <span class="c1">#     if value in [TransferSystems.IdealHeater, TransferSystems.Radiator]:</span>
+    <span class="c1">#         self._transfer_system = value</span>
+    <span class="c1">#</span>
+    <span class="c1">#     elif value in [</span>
+    <span class="c1">#         TransferSystems.UnderFloorHeating,</span>
+    <span class="c1">#         TransferSystems.ConcreteCoreActivation</span>
+    <span class="c1">#     ]:</span>
+    <span class="c1">#         if not hasattr(self, &quot;model_attr&quot;):</span>
+    <span class="c1">#             warnings.warn(</span>
+    <span class="c1">#                 f&quot;Zone parameters for {self} were not calculated yet.&quot;</span>
+    <span class="c1">#                 f&quot; Please make sure to use UnderFloorHeating and&quot;</span>
+    <span class="c1">#                 f&quot; ConcreteCoreActivation transfer system only when &quot;</span>
+    <span class="c1">#                 f&quot;using FourElement!&quot;)</span>
+    <span class="c1">#             self._transfer_system = value</span>
+    <span class="c1">#         # TODO @Jonatan</span>
+    <span class="c1">#         elif isinstance(self.model_attr, FourElement):</span>
+    <span class="c1">#             self._transfer_system = value</span>
+    <span class="c1">#         else:</span>
+    <span class="c1">#             raise ValueError(</span>
+    <span class="c1">#                 f&quot;TransferSystem {value} can only be used with FourElement&quot;</span>
+    <span class="c1">#                 f&quot; thermal zone model, but you are using &quot;</span>
+    <span class="c1">#                 f&quot;{self.model_attr}&quot;)</span>
+
+
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">transfer_system</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transfer_system_pt1_K</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system_pt1_K</span>
 
-    <span class="nd">@transfer_system</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">transfer_system</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">ts</span> <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">TransferSystems</span><span class="p">]:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2"> is not a valid transfer system&quot;</span><span class="p">)</span>
+    <span class="nd">@transfer_system_pt1_K</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transfer_system_pt1_K</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
-        <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">[</span><span class="n">TransferSystems</span><span class="o">.</span><span class="n">IdealHeater</span><span class="p">,</span> <span class="n">TransferSystems</span><span class="o">.</span><span class="n">Radiator</span><span class="p">]:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system_pt1_K</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system_pt1_K</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system_pt1_K</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert value to float&quot;</span><span class="p">)</span>
 
-        <span class="k">elif</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">[</span>
-            <span class="n">TransferSystems</span><span class="o">.</span><span class="n">UnderFloorHeating</span><span class="p">,</span>
-            <span class="n">TransferSystems</span><span class="o">.</span><span class="n">ConcreteCoreActivation</span>
-        <span class="p">]:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;model_attr&quot;</span><span class="p">):</span>
-                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;Zone parameters for </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s2"> were not calculated yet.&quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot; Please make sure to use UnderFloorHeating and&quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot; ConcreteCoreActivation transfer system only when &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;using FourElement!&quot;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system</span> <span class="o">=</span> <span class="n">value</span>
-            <span class="c1"># TODO @Jonatan</span>
-            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_attr</span><span class="p">,</span> <span class="n">FourElement</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system</span> <span class="o">=</span> <span class="n">value</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;TransferSystem </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2"> can only be used with FourElement&quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot; thermal zone model, but you are using &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model_attr</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transfer_system_pt1_T</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system_pt1_T</span>
+
+    <span class="nd">@transfer_system_pt1_K</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transfer_system_pt1_T</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system_pt1_T</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system_pt1_T</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system_pt1_T</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert value to float&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transfer_system_fraHeaRad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system_fraHeaRad</span>
+
+    <span class="nd">@transfer_system_pt1_K</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transfer_system_fraHeaRad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system_fraHeaRad</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system_fraHeaRad</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system_fraHeaRad</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert value to float&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transfer_system_fraCooRad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system_fraCooRad</span>
+
+    <span class="nd">@transfer_system_pt1_K</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transfer_system_fraCooRad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system_fraCooRad</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system_fraCooRad</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_transfer_system_fraCooRad</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert value to float&quot;</span><span class="p">)</span></div>
 
 </pre></div>
 
