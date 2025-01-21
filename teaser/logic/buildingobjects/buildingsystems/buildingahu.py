@@ -39,6 +39,9 @@ class BuildingAHU(object):
         Is a HeatRecoverySystem physically integrated in the AHU
         AixLib: 'HRS'
         (default = True)
+    dynamic_control: boolean
+        Wether to use dynamic ventilation control which depends on room temperature deviation
+        (default = false)
     by_pass_dehumidification : float
         By-pass factor of cooling coil during dehumidification. Necessary to
         calculate the real outgoing enthalpy flow of heat exchanger in
@@ -92,6 +95,7 @@ class BuildingAHU(object):
         self.dehumidification = True
         self.humidification = True
         self.heat_recovery = True
+        self.dynamic_control = False
         self.by_pass_dehumidification = 0.2
         self.efficiency_recovery = 0.65
         self.efficiency_recovery_false = 0.2

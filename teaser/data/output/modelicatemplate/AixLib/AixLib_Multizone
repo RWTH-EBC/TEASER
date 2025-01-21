@@ -34,6 +34,7 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
   huAHU=${get_true_false(bldg.central_ahu.humidification)},
   BPFDehuAHU=${bldg.central_ahu.by_pass_dehumidification},
   HRS=${get_true_false(bldg.central_ahu.heat_recovery)},
+  dynamicControlAHU=${get_true_false(bldg.central_ahu.dynamic_control)},
   sampleRateAHU=${bldg.central_ahu.sample_rate},
   effFanAHU_sup=${bldg.central_ahu.efficiency_fan_supply},
   effFanAHU_eta=${bldg.central_ahu.efficiency_fan_return},

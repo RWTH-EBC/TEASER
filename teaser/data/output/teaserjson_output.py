@@ -98,6 +98,7 @@ def save_teaser_json(path, project):
             ahu_out["dehumidification"] = bldg.central_ahu.dehumidification
             ahu_out["humidification"] = bldg.central_ahu.humidification
             ahu_out["heat_recovery"] = bldg.central_ahu.heat_recovery
+            ahu_out["dynamic_control"] = bldg.central_ahu.dynamic_control
             ahu_out[
                 "by_pass_dehumidification"
             ] = bldg.central_ahu.by_pass_dehumidification
