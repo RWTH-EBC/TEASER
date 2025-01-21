@@ -119,6 +119,9 @@
 <span class="sd">        Is a HeatRecoverySystem physically integrated in the AHU</span>
 <span class="sd">        AixLib: &#39;HRS&#39;</span>
 <span class="sd">        (default = True)</span>
+<span class="sd">    dynamic_control: boolean</span>
+<span class="sd">        Wether to use dynamic ventilation control which depends on room temperature deviation</span>
+<span class="sd">        (default = false)</span>
 <span class="sd">    by_pass_dehumidification : float</span>
 <span class="sd">        By-pass factor of cooling coil during dehumidification. Necessary to</span>
 <span class="sd">        calculate the real outgoing enthalpy flow of heat exchanger in</span>
@@ -172,6 +175,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">dehumidification</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">humidification</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">heat_recovery</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dynamic_control</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">by_pass_dehumidification</span> <span class="o">=</span> <span class="mf">0.2</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">efficiency_recovery</span> <span class="o">=</span> <span class="mf">0.65</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">efficiency_recovery_false</span> <span class="o">=</span> <span class="mf">0.2</span>
