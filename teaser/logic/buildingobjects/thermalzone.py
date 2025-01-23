@@ -112,8 +112,8 @@ class ThermalZone(object):
         self.density_air = 1.25
         self.heat_capac_air = 1002
         self.t_ground = 286.15
-        self._transfer_system_pt1_K = 0
-        self._transfer_system_pt1_T = 0
+        self._transfer_system_pt1_K = 1
+        self._transfer_system_pt1_T = 1
         self._transfer_system_fraHeaRad = 0
         self._transfer_system_fraCooRad = 0
         self.pid_gain_heat = 1
