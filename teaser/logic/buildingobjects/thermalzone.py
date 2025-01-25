@@ -13,6 +13,7 @@ from teaser.logic.buildingobjects.calculation.three_element import ThreeElement
 from teaser.logic.buildingobjects.calculation.four_element import FourElement
 
 
+
 class ThermalZone(object):
     """Thermal zone class.
 
@@ -73,6 +74,14 @@ class ThermalZone(object):
         Temperature directly at the outer side of ground floors for static
         heat load calculation.
         The input of t_ground is ALWAYS in Kelvin
+    transfer_system_pt1_K: float []
+        Gain for PT1 for damped heat transfer
+    transfer_system_pt1_T: float [h]
+        Time Constant for PT1 for damped heat transfer
+    transfer_system_fraHeaRad:
+        Fraction of heat transfer to radiation
+    transfer_system_fraCooRad:
+        Fraction of cool transfer to radiation
     density_air : float [kg/m3]
         average density of the air in the thermal zone
     heat_capac_air : float [J/K]
@@ -103,6 +112,15 @@ class ThermalZone(object):
         self.density_air = 1.25
         self.heat_capac_air = 1002
         self.t_ground = 286.15
+        self._transfer_system_pt1_K = 1
+        self._transfer_system_pt1_T = 1
+        self._transfer_system_fraHeaRad = 0
+        self._transfer_system_fraCooRad = 0
+        self.pid_gain_heat = 1
+        self.pid_ti_heat = 1
+        self.pid_gain_cool = 1
+        self.pid_ti_cool = 1
+
 
     def calc_zone_parameters(
             self,
@@ -687,3 +705,76 @@ class ThermalZone(object):
                 self._t_outside = value
             except:
                 raise ValueError("Can't convert temperature to float")
+
+
+    @property
+    def transfer_system_pt1_K(self):
+        return self._transfer_system_pt1_K
+
+    @transfer_system_pt1_K.setter
+    def transfer_system_pt1_K(self, value):
+
+        if isinstance(value, float):
+            self._transfer_system_pt1_K = value
+        elif value is None:
+            self._transfer_system_pt1_K = value
+        else:
+            try:
+                value = float(value)
+                self._transfer_system_pt1_K = value
+            except:
+                raise ValueError("Can't convert value to float")
+
+    @property
+    def transfer_system_pt1_T(self):
+        return self._transfer_system_pt1_T
+
+    @transfer_system_pt1_T.setter
+    def transfer_system_pt1_T(self, value):
+
+        if isinstance(value, float):
+            self._transfer_system_pt1_T = value
+        elif value is None:
+            self._transfer_system_pt1_T = value
+        else:
+            try:
+                value = float(value)
+                self._transfer_system_pt1_T = value
+            except:
+                raise ValueError("Can't convert value to float")
+
+    @property
+    def transfer_system_fraHeaRad(self):
+        return self._transfer_system_fraHeaRad
+
+    @transfer_system_fraHeaRad.setter
+    def transfer_system_fraHeaRad(self, value):
+
+        if isinstance(value, float):
+            self._transfer_system_fraHeaRad = value
+        elif value is None:
+            self._transfer_system_fraHeaRad = value
+        else:
+            try:
+                value = float(value)
+                self._transfer_system_fraHeaRad = value
+            except:
+                raise ValueError("Can't convert value to float")
+
+    @property
+    def transfer_system_fraCooRad(self):
+        return self._transfer_system_fraCooRad
+
+    @transfer_system_fraCooRad.setter
+    def transfer_system_fraCooRad(self, value):
+
+        if isinstance(value, float):
+            self._transfer_system_fraCooRad = value
+        elif value is None:
+            self._transfer_system_fraCooRad = value
+        else:
+            try:
+                value = float(value)
+                self._transfer_system_fraCooRad = value
+            except:
+                raise ValueError("Can't convert value to float")

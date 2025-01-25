@@ -113,6 +113,8 @@ def load_teaser_json(path, project):
             bldg.central_ahu.dehumidification = ahu_in["dehumidification"]
             bldg.central_ahu.humidification = ahu_in["humidification"]
             bldg.central_ahu.heat_recovery = ahu_in["heat_recovery"]
+            bldg.central_ahu.dynamic_volume_flow_control = ahu_in["dynamic_volume_flow_control"]
+            bldg.central_ahu.dynamic_supply_temperature_control = ahu_in["dynamic_supply_temperature_control"]
             bldg.central_ahu.by_pass_dehumidification = ahu_in[
                 "by_pass_dehumidification"
             ]
@@ -132,6 +134,9 @@ def load_teaser_json(path, project):
             bldg.central_ahu.temperature_profile = ahu_in[
                 "temperature_profile"
             ]
+            bldg.central_ahu.T_treshold_heating = ahu_in["T_treshold_heating"]
+            bldg.central_ahu.T_treshold_cooling = ahu_in["T_treshold_cooling"]
+
         except KeyError:
             pass
 
