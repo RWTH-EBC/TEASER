@@ -168,7 +168,10 @@ Allows for better control of hierarchical structures.
 AixLib: ‘HRS’
 (default = True)</p>
 </dd>
-<dt><strong>dynamic_control: boolean</strong></dt><dd><p>Wether to use dynamic ventilation control which depends on room temperature deviation
+<dt><strong>dynamic_volume_flow_control: boolean</strong></dt><dd><p>Wether to use dynamic volume flow control which depends on room temperature deviation
+(default = false)</p>
+</dd>
+<dt><strong>dynamic_supply_temperature_control: boolean</strong></dt><dd><p>Wether to use dynamic supply temperature flow control which depends on temperature in AHU after HRS
 (default = false)</p>
 </dd>
 <dt><strong>by_pass_dehumidification</strong><span class="classifier">float</span></dt><dd><p>By-pass factor of cooling coil during dehumidification. Necessary to
@@ -204,6 +207,12 @@ an hour as typical input is hourly (default = 1800)</p>
 <dt><strong>max_relative_humidity_profile</strong><span class="classifier">[float]</span></dt><dd><p>timeline of relative humidity requirements for AHU simulation</p>
 </dd>
 <dt><strong>v_flow_profile</strong><span class="classifier">[int]</span></dt><dd><p>timeline of desired relative v_flow of the AHU simulation (0..1)</p>
+</dd>
+<dt><strong>T_treshold_heating: float [K]</strong></dt><dd><p>Temperature after HRS in AHU over which there should be no ahu heating
+for temperature reasons (humidifciation/dehumidifaction still possible)</p>
+</dd>
+<dt><strong>T_treshold_cooling: float</strong></dt><dd><p>Temperature after HRS in AHU under which there should be no ahu cooling
+for temperature reasons (humidifciation/dehumidifaction still possible)</p>
 <ul class="simple">
 <li><p><strong>Note:</strong> The AixLib parameter “WithProfile” determines whether the
 (v_flow_profile combined with “min_ahu and max_ahu”) or the

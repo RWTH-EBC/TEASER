@@ -193,7 +193,8 @@
             <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">dehumidification</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span><span class="s2">&quot;dehumidification&quot;</span><span class="p">]</span>
             <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">humidification</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span><span class="s2">&quot;humidification&quot;</span><span class="p">]</span>
             <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">heat_recovery</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span><span class="s2">&quot;heat_recovery&quot;</span><span class="p">]</span>
-            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">dynamic_control</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span><span class="s2">&quot;dynamic_control&quot;</span><span class="p">]</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">dynamic_volume_flow_control</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span><span class="s2">&quot;dynamic_volume_flow_control&quot;</span><span class="p">]</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">dynamic_supply_temperature_control</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span><span class="s2">&quot;dynamic_supply_temperature_control&quot;</span><span class="p">]</span>
             <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">by_pass_dehumidification</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span>
                 <span class="s2">&quot;by_pass_dehumidification&quot;</span>
             <span class="p">]</span>
@@ -213,6 +214,9 @@
             <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">temperature_profile</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span>
                 <span class="s2">&quot;temperature_profile&quot;</span>
             <span class="p">]</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">T_treshold_heating</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span><span class="s2">&quot;T_treshold_heating&quot;</span><span class="p">]</span>
+            <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">T_treshold_cooling</span> <span class="o">=</span> <span class="n">ahu_in</span><span class="p">[</span><span class="s2">&quot;T_treshold_cooling&quot;</span><span class="p">]</span>
+
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="k">pass</span>
 
