@@ -81,6 +81,9 @@ def export_besmod(
     if examples is None:
         examples = []
 
+    if path is None:
+        path = utilities.get_full_path("")
+
     if not isinstance(examples, list):
         examples = [examples]
 
@@ -176,15 +179,14 @@ def export_besmod(
         utilities.create_path(os.path.join(bldg_path, bldg.name + "_DataBase"))
         bldg.library_attr.modelica_gains_boundary(path=bldg_path)
 
-        with open(utilities.get_full_path(
-                os.path.join(bldg_path, bldg.name + ".mo")), 'w') as out_file:
+        with open(os.path.join(bldg_path, bldg.name + ".mo"), 'w') as out_file:
             out_file.write(building_template.render_unicode(
                 bldg=bldg))
             out_file.close()
 
         def write_example_mo(example_template, example):
-            with open(utilities.get_full_path(
-                    os.path.join(bldg_path, example + bldg.name + ".mo")), 'w') as model_file:
+            with open(os.path.join(bldg_path, example + bldg.name + ".mo"),
+                      'w') as model_file:
                 model_file.write(example_template.render_unicode(
                     bldg=bldg,
                     project=prj,
@@ -239,9 +241,9 @@ def export_besmod(
 
         for zone in bldg.thermal_zones:
             zone.use_conditions.with_heating = False
-            with open(utilities.get_full_path(os.path.join(
+            with open(os.path.join(
                     zone_path,
-                    bldg.name + '_' + zone.name + '.mo')), 'w') as out_file:
+                    bldg.name + '_' + zone.name + '.mo'), 'w') as out_file:
                 if type(zone.model_attr).__name__ == "FourElement":
                     out_file.write(zone_template_4.render_unicode(zone=zone))
                 else:
