@@ -73,6 +73,9 @@ def export_ibpsa(
         library + '(version="' + prj.buildings[-1].library_attr.version[
             library] + '")']
 
+    if path is None:
+        path = utilities.get_full_path("")
+
     lookup = TemplateLookup(directories=[utilities.get_full_path(
         os.path.join('data', 'output', 'modelicatemplate'))])
     model_template_1 = Template(
@@ -112,9 +115,8 @@ def export_ibpsa(
 
         bldg_path = os.path.join(path, bldg.name)
 
-        utilities.create_path(utilities.get_full_path(bldg_path))
-        utilities.create_path(utilities.get_full_path(
-            os.path.join(bldg_path, bldg.name + "_Models")))
+        utilities.create_path(bldg_path)
+        utilities.create_path(os.path.join(bldg_path, bldg.name + "_Models"))
 
         modelica_output.create_package(
             path=bldg_path,
@@ -138,8 +140,8 @@ def export_ibpsa(
                 zone=zone,
                 path=zone_path)
 
-            with open(utilities.get_full_path(os.path.join(
-                zone_path, bldg.name + '_' + zone.name + '.mo')), 'w') as out_file:
+            with open(os.path.join(
+                zone_path, bldg.name + '_' + zone.name + '.mo'), 'w') as out_file:
 
                 if type(zone.model_attr).__name__ == "OneElement":
                     out_file.write(model_template_1.render_unicode(zone=zone,

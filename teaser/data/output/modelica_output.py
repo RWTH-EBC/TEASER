@@ -27,8 +27,7 @@ def create_package(path, name, uses=None, within=None):
 
     package_template = Template(filename=utilities.get_full_path(
         "data/output/modelicatemplate/package"))
-    with open(utilities.get_full_path(os.path.join(
-            path, "package.mo")), 'w') as out_file:
+    with open(os.path.join(path, "package.mo"), 'w') as out_file:
 
         out_file.write(package_template.render_unicode(
             name=name,
@@ -60,8 +59,7 @@ def create_package_order(path, package_list, addition=None, extra=None):
 
     order_template = Template(filename=utilities.get_full_path(
         "data/output/modelicatemplate/package_order"))
-    with open(utilities.get_full_path(
-            path + "/" + "package" + ".order"), 'w') as out_file:
+    with open(path + "/" + "package" + ".order", 'w') as out_file:
 
         out_file.write(order_template.render_unicode
                        (list=package_list, addition=addition, extra=extra))

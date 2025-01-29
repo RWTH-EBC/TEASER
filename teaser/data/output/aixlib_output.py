@@ -69,6 +69,9 @@ def export_multizone(
         Template for MultiZone model
     """
 
+    if path is None:
+        path = utilities.get_full_path("")
+
     lookup = TemplateLookup(directories=[utilities.get_full_path(
         os.path.join('data', 'output', 'modelicatemplate'))])
     zone_template_1 = Template(
@@ -126,10 +129,8 @@ def export_multizone(
         assert bldg.used_library_calc == 'AixLib', ass_error
 
         bldg_path = os.path.join(path, bldg.name)
-        utilities.create_path(utilities.get_full_path(bldg_path))
-        utilities.create_path(utilities.get_full_path(
-            os.path.join(bldg_path,
-                         bldg.name + "_DataBase")))
+        utilities.create_path(bldg_path)
+        utilities.create_path(os.path.join(bldg_path, bldg.name + "_DataBase"))
         bldg.library_attr.modelica_set_temp(path=bldg_path)
         bldg.library_attr.modelica_set_temp_cool(path=bldg_path)
         bldg.library_attr.modelica_AHU_boundary(
@@ -154,8 +155,7 @@ def export_multizone(
                                                "number of the building in "
                                                "the project list.")
                 bldg.building_id = i
-        with open(utilities.get_full_path(
-                os.path.join(bldg_path, bldg.name + ".mo")), 'w') as out_file:
+        with open(os.path.join(bldg_path, bldg.name + ".mo"), 'w') as out_file:
 
             out_file.write(model_template.render_unicode(
                 bldg=bldg,
@@ -172,9 +172,8 @@ def export_multizone(
 
         for zone in bldg.thermal_zones:
 
-            with open(utilities.get_full_path(os.path.join(
-                    zone_path,
-                    bldg.name + '_' + zone.name + '.mo')), 'w') as out_file:
+            with open(os.path.join(zone_path, bldg.name + '_' + zone.name + '.mo'),
+                'w') as out_file:
                 if type(zone.model_attr).__name__ == "OneElement":
                     out_file.write(zone_template_1.render_unicode(zone=zone))
                 elif type(zone.model_attr).__name__ == "TwoElement":
@@ -250,8 +249,7 @@ def _help_test_script(bldg, dir_dymola, test_script_template):
     dir_building = os.path.join(dir_dymola, bldg.name)
     if not os.path.exists(dir_building):
         os.mkdir(dir_building)
-    with open(utilities.get_full_path(os.path.join(
-            dir_building, bldg.name + ".mos")), 'w') as out_file:
+    with open(os.path.join(dir_building, bldg.name + ".mos"), 'w') as out_file:
 
         names_variables = []
         for i, zone in enumerate(bldg.thermal_zones):
