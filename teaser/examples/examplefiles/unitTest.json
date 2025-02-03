@@ -47,7 +47,7 @@
                     "Office": {
                         "area": 994.0,
                         "volume": 994.0,
-                        "infiltration_rate": null,
+                        "base_infiltration": null,
                         "typical_length": 6.0,
                         "typical_width": 6.0,
                         "use_conditions": {
@@ -71,7 +71,7 @@
                             "lighting_efficiency_lumen": 150,
                             "ratio_conv_rad_lighting": 0.9,
                             "use_constant_infiltration": false,
-                            "infiltration_rate": 0.2,
+                            "base_infiltration": 0.2,
                             "max_user_infiltration": 1.0,
                             "max_overheating_infiltration": [
                                 3.0,
@@ -785,7 +785,7 @@
                     "Floor": {
                         "area": 497.0,
                         "volume": 497.0,
-                        "infiltration_rate": null,
+                        "base_infiltration": null,
                         "typical_length": 2.0,
                         "typical_width": 12.0,
                         "use_conditions": {
@@ -809,7 +809,7 @@
                             "lighting_efficiency_lumen": 150,
                             "ratio_conv_rad_lighting": 0.9,
                             "use_constant_infiltration": false,
-                            "infiltration_rate": 0.2,
+                            "base_infiltration": 0.2,
                             "max_user_infiltration": 1.0,
                             "max_overheating_infiltration": [
                                 3.0,
@@ -1523,7 +1523,7 @@
                     "Storage": {
                         "area": 298.2,
                         "volume": 298.2,
-                        "infiltration_rate": null,
+                        "base_infiltration": null,
                         "typical_length": 6.0,
                         "typical_width": 6.0,
                         "use_conditions": {
@@ -1547,7 +1547,7 @@
                             "lighting_efficiency_lumen": 150,
                             "ratio_conv_rad_lighting": 0.9,
                             "use_constant_infiltration": false,
-                            "infiltration_rate": 0.2,
+                            "base_infiltration": 0.2,
                             "max_user_infiltration": 1.0,
                             "max_overheating_infiltration": [
                                 3.0,
@@ -2261,7 +2261,7 @@
                     "Meeting": {
                         "area": 79.52,
                         "volume": 79.52,
-                        "infiltration_rate": null,
+                        "base_infiltration": null,
                         "typical_length": 6.0,
                         "typical_width": 6.0,
                         "use_conditions": {
@@ -2285,7 +2285,7 @@
                             "lighting_efficiency_lumen": 150,
                             "ratio_conv_rad_lighting": 0.9,
                             "use_constant_infiltration": false,
-                            "infiltration_rate": 0.2,
+                            "base_infiltration": 0.2,
                             "max_user_infiltration": 1.0,
                             "max_overheating_infiltration": [
                                 3.0,
@@ -2999,7 +2999,7 @@
                     "Restroom": {
                         "area": 79.52,
                         "volume": 79.52,
-                        "infiltration_rate": null,
+                        "base_infiltration": null,
                         "typical_length": 3.0,
                         "typical_width": 6.0,
                         "use_conditions": {
@@ -3023,7 +3023,7 @@
                             "lighting_efficiency_lumen": 150,
                             "ratio_conv_rad_lighting": 0.9,
                             "use_constant_infiltration": false,
-                            "infiltration_rate": 0.2,
+                            "base_infiltration": 0.2,
                             "max_user_infiltration": 1.0,
                             "max_overheating_infiltration": [
                                 3.0,
@@ -3737,7 +3737,7 @@
                     "ICT": {
                         "area": 39.76,
                         "volume": 39.76,
-                        "infiltration_rate": null,
+                        "base_infiltration": null,
                         "typical_length": 6.0,
                         "typical_width": 6.0,
                         "use_conditions": {
@@ -3761,7 +3761,7 @@
                             "lighting_efficiency_lumen": 150,
                             "ratio_conv_rad_lighting": 0.9,
                             "use_constant_infiltration": false,
-                            "infiltration_rate": 0.2,
+                            "base_infiltration": 0.2,
                             "max_user_infiltration": 1.0,
                             "max_overheating_infiltration": [
                                 3.0,

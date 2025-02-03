@@ -32,7 +32,6 @@ def building_test2(prj):
     tz.name = "Living Room"
     tz.area = 140.0
     tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
-    tz.infiltration_rate = 0.5
 
     tz.use_conditions = UseConditions(tz)
     tz.use_conditions.usage = "Living"

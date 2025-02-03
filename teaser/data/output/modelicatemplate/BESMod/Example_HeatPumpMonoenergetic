@@ -1,0 +1,31 @@
+<%namespace file="/modelica_language/" import="get_list"/>
+within ${bldg.parent.name}.${bldg.name};
+model HeatPumpMonoenergetic${bldg.name}
+  extends BESMod.Systems.BaseClasses.TEASERExport.PartialHeatPumpMonoenergetic(
+    redeclare ${bldg.name} building(
+      use_verboseEnergyBalance=false,
+      energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial),
+    userProfiles(fileNameIntGains=Modelica.Utilities.Files.loadResource(
+      "modelica://${bldg.parent.name}/${bldg.name}/InternalGains_${bldg.name}.txt"),
+      setBakTSetZone(
+        amplitude=${get_list(setBakTSetZone_amplitude)},
+        width=${get_list(setBakTSetZone_width)},
+        startTime=${get_list(setBakTSetZone_startTime)})),
+    systemParameters(
+        nZones=${len(bldg.thermal_zones)},
+        TSetZone_nominal=${get_list(TSetZone_nominal)},
+        TOda_nominal=${TOda_nominal},
+        THydSup_nominal=${THydSup_nominal},
+        QBuiOld_flow_design=${QBuiOld_flow_design},
+        THydSupOld_design=${THydSupOld_design},
+        filNamWea=Modelica.Utilities.Files.loadResource("modelica://${bldg.parent.name}/Resources/${bldg.parent.weather_file_name}")));
+
+  extends Modelica.Icons.Example;
+
+annotation(experiment(StopTime=172800,
+     Interval=600,
+     Tolerance=1e-06),
+   __Dymola_Commands(file=
+        "Resources/Scripts/Dymola/${bldg.name}/HeatPumpMonoenergetic${bldg.name}.mos"
+        "Simulate and plot"));
+end HeatPumpMonoenergetic${bldg.name};

@@ -31,6 +31,8 @@ class TwoElement(object):
         supported for IBPSA)
     t_bt : float [d]
         Time constant according to VDI 6007 (default t_bt = 5)
+    t_bt_layer : float [d]
+        Time constant according to VDI 6007 for aggragation of layers (default t_bt = 7)
 
     Attributes
     ----------
@@ -267,7 +269,7 @@ class TwoElement(object):
 
     """
 
-    def __init__(self, thermal_zone, merge_windows, t_bt):
+    def __init__(self, thermal_zone, merge_windows, t_bt, t_bt_layer=7):
         """Constructor for TwoElement"""
 
         self.internal_id = random.random()
@@ -275,6 +277,7 @@ class TwoElement(object):
         self.thermal_zone = thermal_zone
         self.merge_windows = merge_windows
         self.t_bt = t_bt
+        self.t_bt_layer = t_bt_layer
 
         # Attributes of inner walls
         self.area_iw = 0.0
@@ -412,7 +415,7 @@ class TwoElement(object):
         )
 
         for out_wall in outer_walls:
-            out_wall.calc_equivalent_res()
+            out_wall.calc_equivalent_res(t_bt=self.t_bt_layer)
             out_wall.calc_ua_value()
         for win in self.thermal_zone.windows:
             win.calc_equivalent_res()
@@ -422,7 +425,7 @@ class TwoElement(object):
             + self.thermal_zone.floors
             + self.thermal_zone.ceilings
         ):
-            inner_wall.calc_equivalent_res()
+            inner_wall.calc_equivalent_res(t_bt=self.t_bt_layer)
             inner_wall.calc_ua_value()
 
         self.set_calc_default()
@@ -1171,6 +1174,10 @@ class TwoElement(object):
         ua_value_gf_temp : float [W/(m2*K)]
             UA Value of all GroundFloors
         """
+        if self.thermal_zone.use_conditions.base_infiltration > 0.5:
+            raise warnings.warn("The base_infiltration is larger than 0.5, "
+                                "which could lead to ideal heaters being too small.")
+
         self.heat_load = 0.0
         ua_value_gf_temp = sum(
             ground.ua_value for ground in self.thermal_zone.ground_floors
@@ -1179,7 +1186,7 @@ class TwoElement(object):
         self.heat_load_outside_factor = (
             (ua_value_ow_temp + self.ua_value_win)
             + self.thermal_zone.volume
-            * self.thermal_zone.use_conditions.infiltration_rate
+            * self.thermal_zone.use_conditions.normative_infiltration
             * 1
             / 3600
             * self.thermal_zone.heat_capac_air

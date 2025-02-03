@@ -1,5 +1,7 @@
-%if extra != None: 
-${extra}
+%if extra != None:
+%for name in extra:
+${name}
+%endfor
 %endif
 %for i in list:
 %if addition != None: 

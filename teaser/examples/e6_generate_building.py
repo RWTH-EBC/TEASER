@@ -52,7 +52,6 @@ def example_create_building():
     tz.name = "LivingRoom"
     tz.area = 140.0
     tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
-    tz.infiltration_rate = 0.5
 
     # Instantiate BoundaryConditions and load conditions for `Living`.
 
@@ -259,6 +258,7 @@ def example_create_building():
         win_material.name = "GlasWindow"
         win_material.thermal_conduc = 0.067
         win_material.transmittance = 0.9
+    return prj
 
 
 if __name__ == '__main__':
