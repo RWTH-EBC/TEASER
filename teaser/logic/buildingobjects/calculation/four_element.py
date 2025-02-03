@@ -383,7 +383,7 @@ class FourElement(object):
     """
 
     def __init__(self, thermal_zone, merge_windows, t_bt, t_bt_layer=7):
-        """Constructor for TwoElement"""
+        """Constructor for FourElement"""
 
         self.internal_id = random.random()
 
@@ -597,8 +597,7 @@ class FourElement(object):
 
     def calc_attributes(self):
         """Calls all necessary function to calculate model attributes"""
-
-        for out_wall in self.thermal_zone.outer_walls:
+        for out_wall in self.thermal_zone.outer_walls + self.thermal_zone.find_izes_outer():
             out_wall.calc_equivalent_res(t_bt=self.t_bt_layer)
             out_wall.calc_ua_value()
         for rt in self.thermal_zone.rooftops:
@@ -611,15 +610,16 @@ class FourElement(object):
             win.calc_equivalent_res()
             win.calc_ua_value()
         for inner_wall in (
-            self.thermal_zone.inner_walls
-            + self.thermal_zone.floors
-            + self.thermal_zone.ceilings
+                self.thermal_zone.inner_walls
+                + self.thermal_zone.floors
+                + self.thermal_zone.ceilings
+                + self.nzbs_for_iw
         ):
             inner_wall.calc_equivalent_res()
             inner_wall.calc_ua_value()
 
         self.set_calc_default()
-        if len(self.thermal_zone.outer_walls) < 1:
+        if len(self.thermal_zone.outer_walls + self.thermal_zone.find_izes_outer()) < 1:
             warnings.warn(
                 "No walls are defined as outer walls for thermal "
                 + "zone "
@@ -632,12 +632,13 @@ class FourElement(object):
         else:
             self._sum_outer_wall_elements()
         if (
-            len(
-                self.thermal_zone.inner_walls
-                + self.thermal_zone.floors
-                + self.thermal_zone.ceilings
-            )
-            < 1
+                len(
+                    self.thermal_zone.inner_walls
+                    + self.thermal_zone.floors
+                    + self.thermal_zone.ceilings
+                    + self.nzbs_for_iw
+                )
+                < 1
         ):
             warnings.warn(
                 "For thermal zone "
@@ -682,12 +683,24 @@ class FourElement(object):
             self._sum_rooftop_elements()
             self._calc_rooftop_elements()
         if (
-            len(self.thermal_zone.outer_walls) >= 1
-            or len(self.thermal_zone.windows) >= 1
+                len(self.thermal_zone.outer_walls) >= 1
+                or len(self.thermal_zone.windows) >= 1
+                or len(self.thermal_zone.find_izes_outer()) >= 1
         ):
             self._calc_outer_elements()
             self._calc_wf()
             self._calc_mean_values()
+        if len(self.thermal_zone.interzonal_elements) >= 1:
+            warnings.warn(
+                "For thermal zone "
+                + self.thermal_zone.name
+                + " in building "
+                + self.thermal_zone.parent.name
+                + ", interzonal elements have been defined. FourElement export "
+                + "will treat them as outer walls or inner walls depending on "
+                + "the project parameter 'method_interzonal_export'. Consider "
+                + "using FiveElement instead."
+            )
         self._calc_number_of_elements()
         self._fill_zone_lists()
         self._calc_heat_load()
@@ -696,7 +709,7 @@ class FourElement(object):
         return True
 
     @staticmethod
-    def _calc_parallel_connection(element_list, omega):
+    def _calc_parallel_connection(element_list, omega, mode='iw'):
         """Parallel connection of walls according to VDI 6007
 
         Calculates the parallel connection of wall elements according to VDI
@@ -708,6 +721,9 @@ class FourElement(object):
             List of inner or outer walls
         omega : float
             VDI 6007 frequency
+        mode : str
+            'ow' uses r1 and c1_korr
+            'iw' uses r1 and c1 (function falls back here for other strings)
 
         Returns
         -------
@@ -720,84 +736,41 @@ class FourElement(object):
         for wall_count in range(len(element_list) - 1):
 
             if wall_count == 0:
-
-                r1 = (
-                    element_list[wall_count].r1 * element_list[wall_count].c1 ** 2
-                    + element_list[wall_count + 1].r1
-                    * element_list[wall_count + 1].c1 ** 2
-                    + omega ** 2
-                    * element_list[wall_count].r1
-                    * element_list[wall_count + 1].r1
-                    * (element_list[wall_count].r1 + element_list[wall_count + 1].r1)
-                    * element_list[wall_count].c1 ** 2
-                    * element_list[wall_count + 1].c1 ** 2
-                ) / (
-                    (element_list[wall_count].c1 + element_list[wall_count + 1].c1) ** 2
-                    + omega ** 2
-                    * (element_list[wall_count].r1 + element_list[wall_count + 1].r1)
-                    ** 2
-                    * element_list[wall_count].c1 ** 2
-                    * element_list[wall_count + 1].c1 ** 2
-                )
-
-                c1 = (
-                    (element_list[wall_count].c1 + element_list[wall_count + 1].c1) ** 2
-                    + omega ** 2
-                    * (element_list[wall_count].r1 + element_list[wall_count + 1].r1)
-                    ** 2
-                    * element_list[wall_count].c1 ** 2
-                    * element_list[wall_count + 1].c1 ** 2
-                ) / (
-                    element_list[wall_count].c1
-                    + element_list[wall_count + 1].c1
-                    + omega ** 2
-                    * (
-                        element_list[wall_count].r1 ** 2 * element_list[wall_count].c1
-                        + element_list[wall_count + 1].r1 ** 2
-                        * element_list[wall_count + 1].c1
-                    )
-                    * element_list[wall_count].c1
-                    * element_list[wall_count + 1].c1
-                )
+                r1_before = element_list[wall_count].r1
+                if mode == 'ow':
+                    c1_before = element_list[wall_count].c1_korr
+                else:
+                    c1_before = element_list[wall_count].c1
             else:
-                r1x = r1
-                c1x = c1
-                r1 = (
-                    r1x * c1x ** 2
-                    + element_list[wall_count + 1].r1
-                    * element_list[wall_count + 1].c1 ** 2
-                    + omega ** 2
-                    * r1x
-                    * element_list[wall_count + 1].r1
-                    * (r1x + element_list[wall_count + 1].r1)
-                    * c1x ** 2
-                    * element_list[wall_count + 1].c1 ** 2
-                ) / (
-                    (c1x + element_list[wall_count + 1].c1) ** 2
-                    + omega ** 2
-                    * (r1x + element_list[wall_count + 1].r1) ** 2
-                    * c1x ** 2
-                    * element_list[wall_count + 1].c1 ** 2
-                )
+                r1_before = r1
+                c1_before = c1
+            r1_add = element_list[wall_count + 1].r1
+            if mode == 'ow':
+                c1_add = element_list[wall_count + 1].c1_korr
+            else:
+                c1_add = element_list[wall_count + 1].c1
 
-                c1 = (
-                    (c1x + element_list[wall_count + 1].c1) ** 2
-                    + omega ** 2
-                    * (r1x + element_list[wall_count + 1].r1) ** 2
-                    * c1x ** 2
-                    * element_list[wall_count + 1].c1 ** 2
-                ) / (
-                    c1x
-                    + element_list[wall_count + 1].c1
-                    + omega ** 2
-                    * (
-                        r1x ** 2 * c1x
-                        + element_list[wall_count + 1].r1 ** 2
-                        * element_list[wall_count + 1].c1
-                    )
-                    * c1x
-                    * element_list[wall_count + 1].c1
-                )
+            r1 = (
+                r1_before * c1_before ** 2 + r1_add * c1_add ** 2
+                + omega ** 2 * r1_before * r1_add * (r1_before + r1_add)
+                * c1_before ** 2 * c1_add ** 2
+            ) / (
+                (c1_before + c1_add) ** 2
+                + omega ** 2 * (r1_before + r1_add) ** 2 * c1_before ** 2
+                * c1_add ** 2
+            )
+
+            c1 = (
+                (c1_before + c1_add) ** 2
+                + omega ** 2 * (r1_before + r1_add) ** 2 * c1_before ** 2
+                * c1_add ** 2
+            ) / (
+                c1_before + c1_add
+                + omega ** 2
+                * (r1_before ** 2 * c1_before + r1_add ** 2 * c1_add)
+                * c1_before * c1_add
+            )
+
         return r1, c1
 
     def _sum_outer_wall_elements(self):
@@ -807,15 +780,18 @@ class FourElement(object):
         where necessary  for coefficients of heat
         transfer, resistances, areas and UA-Values.
 
-        For ThreeElement model it treats rooftops and outer walls
+        For FourElement model it treats outer walls and zone borders to
+        neighboured zones (if this zone is heated)
         as one kind of wall type.
 
         """
 
-        self.area_ow = sum(out_wall.area for out_wall in self.thermal_zone.outer_walls)
+        outer_walls = self.thermal_zone.outer_walls + self.thermal_zone.find_izes_outer()
+
+        self.area_ow = sum(out_wall.area for out_wall in outer_walls)
 
         self.ua_value_ow = sum(
-            out_wall.ua_value for out_wall in self.thermal_zone.outer_walls
+            out_wall.ua_value for out_wall in outer_walls
         )
 
         self.r_total_ow = 1 / self.ua_value_ow
@@ -823,21 +799,21 @@ class FourElement(object):
         # values facing the inside of the thermal zone
 
         self.r_conv_inner_ow = 1 / (
-            sum(1 / out_wall.r_inner_conv for out_wall in self.thermal_zone.outer_walls)
+            sum(1 / out_wall.r_inner_conv for out_wall in outer_walls)
         )
 
         self.r_rad_inner_ow = 1 / (
-            sum(1 / out_wall.r_inner_rad for out_wall in self.thermal_zone.outer_walls)
+            sum(1 / out_wall.r_inner_rad for out_wall in outer_walls)
         )
 
         self.r_comb_inner_ow = 1 / (
-            sum(1 / out_wall.r_inner_comb for out_wall in self.thermal_zone.outer_walls)
+            sum(1 / out_wall.r_inner_comb for out_wall in outer_walls)
         )
 
         self.ir_emissivity_inner_ow = (
             sum(
                 out_wall.layer[0].material.ir_emissivity * out_wall.area
-                for out_wall in self.thermal_zone.outer_walls
+                for out_wall in outer_walls
             )
         ) / self.area_ow
 
@@ -849,20 +825,20 @@ class FourElement(object):
         # ground floor does not have any coefficients on ambient side
 
         self.r_conv_outer_ow = 1 / (
-            sum(1 / out_wall.r_outer_conv for out_wall in self.thermal_zone.outer_walls)
+            sum(1 / out_wall.r_outer_conv for out_wall in outer_walls)
         )
         self.r_rad_outer_ow = 1 / (
-            sum(1 / out_wall.r_outer_rad for out_wall in self.thermal_zone.outer_walls)
+            sum(1 / out_wall.r_outer_rad for out_wall in outer_walls)
         )
         self.r_comb_outer_ow = 1 / (
-            sum(1 / out_wall.r_outer_comb for out_wall in self.thermal_zone.outer_walls)
+            sum(1 / out_wall.r_outer_comb for out_wall in outer_walls)
         )
 
         self.ir_emissivity_outer_ow = (
             (
                 sum(
                     out_wall.layer[-1].material.ir_emissivity * out_wall.area
-                    for out_wall in self.thermal_zone.outer_walls
+                    for out_wall in outer_walls
                 )
             )
         ) / self.area_ow
@@ -871,7 +847,7 @@ class FourElement(object):
             (
                 sum(
                     out_wall.layer[-1].material.solar_absorp * out_wall.area
-                    for out_wall in self.thermal_zone.outer_walls
+                    for out_wall in outer_walls
                 )
             )
         ) / self.area_ow
@@ -930,7 +906,8 @@ class FourElement(object):
         where necessary  for coefficients of heat
         transfer, resistances, areas and UA-Values.
 
-        For ThreeElement model it treats rooftops and outer walls
+        For FourElement model it treats outer walls and zone borders to
+        neighboured zones (if this zone is heated)
         as one kind of wall type.
 
         """
@@ -1016,51 +993,60 @@ class FourElement(object):
 
         """
         self.area_iw = (
-            sum(in_wall.area for in_wall in self.thermal_zone.inner_walls)
-            + sum(floor.area for floor in self.thermal_zone.floors)
-            + sum(ceiling.area for ceiling in self.thermal_zone.ceilings)
+                sum(in_wall.area for in_wall in self.thermal_zone.inner_walls)
+                + sum(floor.area for floor in self.thermal_zone.floors)
+                + sum(ceiling.area for ceiling in self.thermal_zone.ceilings)
+                + sum(nzb.area for nzb in self.nzbs_for_iw)
         )
 
         self.ua_value_iw = (
-            sum(in_wall.ua_value for in_wall in self.thermal_zone.inner_walls)
-            + sum(floor.ua_value for floor in self.thermal_zone.floors)
-            + sum(ceiling.ua_value for ceiling in self.thermal_zone.ceilings)
+                sum(in_wall.ua_value for in_wall in self.thermal_zone.inner_walls)
+                + sum(floor.ua_value for floor in self.thermal_zone.floors)
+                + sum(ceiling.ua_value for ceiling in self.thermal_zone.ceilings)
+                + sum(nzb.ua_value for nzb in self.nzbs_for_iw)
         )
 
         # values facing the inside of the thermal zone
 
         self.r_conv_inner_iw = 1 / (
-            sum(1 / in_wall.r_inner_conv for in_wall in self.thermal_zone.inner_walls)
-            + sum(1 / floor.r_inner_conv for floor in self.thermal_zone.floors)
-            + sum(1 / ceiling.r_inner_conv for ceiling in self.thermal_zone.ceilings)
+                sum(1 / in_wall.r_inner_conv for in_wall in self.thermal_zone.inner_walls)
+                + sum(1 / floor.r_inner_conv for floor in self.thermal_zone.floors)
+                + sum(1 / ceiling.r_inner_conv for ceiling in self.thermal_zone.ceilings)
+                + sum(1 / nzb.r_inner_conv for nzb in self.nzbs_for_iw)
         )
 
         self.r_rad_inner_iw = 1 / (
-            sum(1 / in_wall.r_inner_rad for in_wall in self.thermal_zone.inner_walls)
-            + sum(1 / floor.r_inner_rad for floor in self.thermal_zone.floors)
-            + sum(1 / ceiling.r_inner_rad for ceiling in self.thermal_zone.ceilings)
+                sum(1 / in_wall.r_inner_rad for in_wall in self.thermal_zone.inner_walls)
+                + sum(1 / floor.r_inner_rad for floor in self.thermal_zone.floors)
+                + sum(1 / ceiling.r_inner_rad for ceiling in self.thermal_zone.ceilings)
+                + sum(1 / nzb.r_inner_rad for nzb in self.nzbs_for_iw)
         )
 
         self.r_comb_inner_iw = 1 / (
-            sum(1 / in_wall.r_inner_comb for in_wall in self.thermal_zone.inner_walls)
-            + sum(1 / floor.r_inner_comb for floor in self.thermal_zone.floors)
-            + sum(1 / ceiling.r_inner_comb for ceiling in self.thermal_zone.ceilings)
+                sum(1 / in_wall.r_inner_comb for in_wall in self.thermal_zone.inner_walls)
+                + sum(1 / floor.r_inner_comb for floor in self.thermal_zone.floors)
+                + sum(1 / ceiling.r_inner_comb for ceiling in self.thermal_zone.ceilings)
+                + sum(1 / nzb.r_inner_comb for nzb in self.nzbs_for_iw)
         )
 
         self.ir_emissivity_inner_iw = (
-            sum(
-                in_wall.layer[0].material.ir_emissivity * in_wall.area
-                for in_wall in self.thermal_zone.inner_walls
-            )
-            + sum(
-                floor.layer[0].material.ir_emissivity * floor.area
-                for floor in self.thermal_zone.floors
-            )
-            + sum(
-                ceiling.layer[0].material.ir_emissivity * ceiling.area
-                for ceiling in self.thermal_zone.ceilings
-            )
-        ) / self.area_iw
+                                              sum(
+                                                  in_wall.layer[0].material.ir_emissivity * in_wall.area
+                                                  for in_wall in self.thermal_zone.inner_walls
+                                              )
+                                              + sum(
+                                          floor.layer[0].material.ir_emissivity * floor.area
+                                          for floor in self.thermal_zone.floors
+                                      )
+                                              + sum(
+                                          ceiling.layer[0].material.ir_emissivity * ceiling.area
+                                          for ceiling in self.thermal_zone.ceilings
+                                      )
+                                              + sum(
+                                          nzb.layer[0].material.ir_emissivity * nzb.area
+                                          for nzb in self.nzbs_for_iw
+                                      )
+                                      ) / self.area_iw
 
         self.alpha_conv_inner_iw = 1 / (self.r_conv_inner_iw * self.area_iw)
         self.alpha_rad_inner_iw = 1 / (self.r_rad_inner_iw * self.area_iw)
@@ -1168,7 +1154,7 @@ class FourElement(object):
 
         omega = 2 * math.pi / 86400 / self.t_bt
 
-        outer_walls = self.thermal_zone.outer_walls
+        outer_walls = self.thermal_zone.outer_walls + self.thermal_zone.find_izes_outer()
 
         if 0 < len(outer_walls) <= 1:
             # only one outer wall, no need to calculate chain matrix
@@ -1176,7 +1162,9 @@ class FourElement(object):
             self.c1_ow = outer_walls[0].c1_korr
         elif len(outer_walls) > 1:
             # more than one outer wall, calculate chain matrix
-            self.r1_ow, self.c1_ow = self._calc_parallel_connection(outer_walls, omega)
+            self.r1_ow, self.c1_ow = self._calc_parallel_connection(
+                outer_walls, omega, mode='ow'
+            )
         else:
             warnings.warn(
                 "No walls are defined as outer walls, please be "
@@ -1191,7 +1179,7 @@ class FourElement(object):
                     self.r1_win = 1 / sum(
                         (1 / win.r1) for win in self.thermal_zone.windows
                     )
-                if len(self.thermal_zone.outer_walls) > 0:
+                if len(outer_walls) > 0:
                     conduction = 1 / sum(
                         (1 / element.r_conduc) for element in outer_walls
                     )
@@ -1208,8 +1196,8 @@ class FourElement(object):
 
             try:
                 if (
-                    len(self.thermal_zone.windows) > 0
-                    and len(self.thermal_zone.outer_walls) > 0
+                        len(self.thermal_zone.windows) > 0
+                        and len(outer_walls) > 0
                 ):
                     self.r1_win = 1 / sum(
                         1 / (win.r1 / 6) for win in self.thermal_zone.windows
@@ -1274,7 +1262,7 @@ class FourElement(object):
         elif len(self.thermal_zone.ground_floors) > 1:
             # more than one outer wall, calculate chain matrix
             self.r1_gf, self.c1_gf = self._calc_parallel_connection(
-                self.thermal_zone.ground_floors, omega
+                self.thermal_zone.ground_floors, omega, mode='ow'
             )
         else:
             warnings.warn(
@@ -1316,7 +1304,7 @@ class FourElement(object):
         elif len(self.thermal_zone.rooftops) > 1:
             # more than one outer wall, calculate chain matrix
             self.r1_rt, self.c1_rt = self._calc_parallel_connection(
-                self.thermal_zone.rooftops, omega
+                self.thermal_zone.rooftops, omega, mode='ow'
             )
         else:
             warnings.warn(
@@ -1334,7 +1322,7 @@ class FourElement(object):
             print("As no rooftops are defined lumped " "parameter cannot be calculated")
 
     def _calc_inner_elements(self):
-        """Lumped parameter for outer wall elements
+        """Lumped parameter for inner wall elements
 
         Calculates all necessary parameters for inner walls. This includes
         InnerWalls, Ceilings and Floors.
@@ -1352,9 +1340,10 @@ class FourElement(object):
         omega = 2 * math.pi / 86400 / self.t_bt
 
         inner_walls = (
-            self.thermal_zone.inner_walls
-            + self.thermal_zone.floors
-            + self.thermal_zone.ceilings
+                self.thermal_zone.inner_walls
+                + self.thermal_zone.floors
+                + self.thermal_zone.ceilings
+                + self.nzbs_for_iw
         )
 
         for in_wall in inner_walls:
@@ -1362,15 +1351,17 @@ class FourElement(object):
             in_wall.calc_ua_value()
 
         if 0 < len(inner_walls) <= 1:
-            # only one outer wall, no need to calculate chain matrix
+            # only one inner wall, no need to calculate chain matrix
             self.r1_iw = inner_walls[0].r1
             self.c1_iw = inner_walls[0].c1_korr
         elif len(inner_walls) > 1:
-            # more than one outer wall, calculate chain matrix
-            self.r1_iw, self.c1_iw = self._calc_parallel_connection(inner_walls, omega)
+            # more than one inner wall, calculate chain matrix
+            self.r1_iw, self.c1_iw = self._calc_parallel_connection(
+                inner_walls, omega, mode='iw'
+            )
         else:
             warnings.warn(
-                "No walls are defined as outer walls, please be "
+                "No walls are defined as inner walls, please be "
                 "careful with results. In addition this might lead "
                 "to RunTimeErrors"
             )
@@ -1387,7 +1378,7 @@ class FourElement(object):
 
         if self.merge_windows is True:
 
-            for wall in self.thermal_zone.outer_walls:
+            for wall in self.thermal_zone.outer_walls + self.thermal_zone.find_izes_outer():
                 wall.wf_out = wall.ua_value / (self.ua_value_ow + self.ua_value_win)
 
             for win in self.thermal_zone.windows:
@@ -1398,7 +1389,7 @@ class FourElement(object):
 
         elif self.merge_windows is False:
 
-            for wall in self.thermal_zone.outer_walls:
+            for wall in self.thermal_zone.outer_walls + self.thermal_zone.find_izes_outer():
                 wall.wf_out = wall.ua_value / self.ua_value_ow
 
             for win in self.thermal_zone.windows:
@@ -1436,10 +1427,15 @@ class FourElement(object):
 
         This function calculates the number of outer elements with a
         different combination of orientation and tilt, this includes the
-        rooftops and ground floors.
+        outer walls and borders to unheated neighboured zones if
+        this zone is heated.
         """
 
-        outer_elements = self.thermal_zone.outer_walls + self.thermal_zone.windows
+        outer_elements = (
+            self.thermal_zone.outer_walls
+            + self.thermal_zone.find_izes_outer()
+            + self.thermal_zone.windows
+        )
 
         tilt_orient = []
         for element in outer_elements:
@@ -1459,7 +1455,11 @@ class FourElement(object):
         elements and then creates lists for zone weightfactors, orientation,
         tilt, ares and sunblinds."""
 
-        outer_elements = self.thermal_zone.outer_walls + self.thermal_zone.windows
+        outer_elements = (
+            self.thermal_zone.outer_walls
+            + self.thermal_zone.find_izes_outer()
+            + self.thermal_zone.windows
+        )
 
         tilt_orient = []
         for element in outer_elements:
@@ -1467,25 +1467,32 @@ class FourElement(object):
         tilt_orient = list(set(tilt_orient))
 
         for i in tilt_orient:
-            walls = self.thermal_zone.find_walls(i[0], i[1])
+            wall_nzb = self.thermal_zone.find_walls(
+                i[0], i[1]
+            ) + self.thermal_zone.find_izes_outer(
+                i[0], i[1]
+            )
             wins = self.thermal_zone.find_wins(i[0], i[1])
 
             if self.merge_windows is True:
                 self.facade_areas.append(
-                    sum([element.area for element in (walls + wins)])
+                    sum([element.area for element in (wall_nzb + wins)])
                 )
             else:
-                self.facade_areas.append(sum([element.area for element in (walls)]))
+                self.facade_areas.append(sum([element.area for element
+                                              in (wall_nzb)]))
 
             self.orientation_facade.append(i[0])
             self.tilt_facade.append(i[1])
 
-            if not walls:
+            if not wall_nzb:
                 self.weightfactor_ow.append(0.0)
                 self.outer_wall_areas.append(0.0)
             else:
-                self.weightfactor_ow.append(sum([wall.wf_out for wall in walls]))
-                self.outer_wall_areas.append(sum([wall.area for wall in walls]))
+                self.weightfactor_ow.append(sum([wall.wf_out
+                                                 for wall in wall_nzb]))
+                self.outer_wall_areas.append(sum([wall.area
+                                                  for wall in wall_nzb]))
 
             if not wins:
                 self.weightfactor_win.append(0.0)
@@ -1493,6 +1500,7 @@ class FourElement(object):
                 self.shading_max_irr.append(9999.0)
                 self.window_areas.append(0.0)
                 self.transparent_areas.append(0.0)
+                self.shading_max_irr.append(9999.9)
             else:
                 self.weightfactor_win.append(sum([win.wf_out for win in wins]))
 
@@ -1559,6 +1567,12 @@ class FourElement(object):
 
         self.heat_load = 0.0
 
+        if self.thermal_zone.parent.parent.t_soil_mode == 2:
+            t_ground = self.thermal_zone.t_ground \
+                       - self.thermal_zone.t_ground_amplitude
+        else:
+            t_ground = self.thermal_zone.t_ground
+
         ua_value_ow_temp = self.ua_value_rt + self.ua_value_ow
         self.heat_load_outside_factor = (
             (ua_value_ow_temp + self.ua_value_win)
@@ -1574,7 +1588,7 @@ class FourElement(object):
             self.heat_load_outside_factor \
             * (self.thermal_zone.t_inside - self.thermal_zone.t_outside) \
             + self.heat_load_ground_factor \
-            * (self.thermal_zone.t_inside - self.thermal_zone.t_ground)
+            * (self.thermal_zone.t_inside - t_ground)
 
     def set_calc_default(self):
         """sets default calculation parameters
@@ -1777,3 +1791,23 @@ class FourElement(object):
         self.orientation_facade = []
         self.heat_load = 0.0
         self.cool_load = 0.0
+
+    @property
+    def nzbs_for_iw(self):
+        """returns borders to neighboured zones to be considered as inner walls
+
+        Returns
+        -------
+        value : list
+            list of those interzonal elements that are NOT to be treated as
+            'outer_ordered' depending on their 'interzonal_type_export'
+            attribute
+
+        """
+        elements = []
+        for i in self.thermal_zone.interzonal_elements:
+            if not i.interzonal_type_export == 'outer_ordered':
+                elements.append(i)
+            else:
+                pass
+        return elements

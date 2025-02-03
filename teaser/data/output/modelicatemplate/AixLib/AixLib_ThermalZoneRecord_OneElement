@@ -45,7 +45,30 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     wfRoof = {0.0},
     aRoof = 0.0,
     aExt = ${zone.model_attr.solar_absorp_ow},
+    nIze = 1,
+    AIze = {0.0},
+    hConIze = {0.0},
+    nIzeRC = 1,
+    RIze = {{0.00001}},
+    RIzeRem = {0.00001},
+    CIze = {{0.00001}},
+    othZoneInd = {1},
+    zoneInd = ${zone.parent.thermal_zones.index(zone) + 1},
     TSoil = ${zone.t_ground},
+% if zone.parent.parent.t_soil_mode == 3:
+    TSoiDatSou = AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.File,
+% elif zone.parent.parent.t_soil_mode == 2:
+    TSoiDatSou = AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.Sine,
+% else:
+    TSoiDatSou = AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.Constant,
+% endif
+    TSoiOffTim = ${zone.time_to_minimal_t_ground},
+    TSoiAmp = ${zone.t_ground_amplitude},
+% if zone.parent.parent.t_soil_mode == 3:
+    TSoiFil = Modelica.Utilities.Files.loadResource("modelica://${zone.parent.parent.name}/${zone.parent.parent.t_soil_file_name}"),
+% else:
+    TSoiFil = "NoName",
+% endif
     hConWallOut = ${zone.model_attr.alpha_conv_outer_ow},
     hRadWall = ${zone.model_attr.alpha_rad_outer_mean},
     hConWinOut = ${zone.model_attr.alpha_conv_outer_win},
@@ -85,6 +108,8 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     heaLoadFacOut = ${zone.model_attr.heat_load_outside_factor},
     heaLoadFacGrd = ${zone.model_attr.heat_load_ground_factor},
     lCool = ${zone.model_attr.cool_load},
+    heaLoadFacOut = 1,
+    heaLoadFacGrd = 1,
     KRCool = 10000,
     TNCool = 1,
     CoolerOn = ${get_true_false(zone.use_conditions.with_cooling)},

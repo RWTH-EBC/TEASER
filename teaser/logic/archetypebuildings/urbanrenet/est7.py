@@ -62,6 +62,18 @@ class EST7(EST1a):
             light: light construction
     number_of_apartments : int
         number of apartments inside Building (default = 1)
+    inner_wall_approximation_approach : str
+        'teaser_default' (default) sets length of inner walls = typical
+            length * height of floors + 2 * typical width * height of floors
+        'typical_minus_outer' sets length of inner walls = 2 * typical
+            length * height of floors + 2 * typical width * height of floors
+            - length of outer or interzonal walls
+        'typical_minus_outer_extended' like 'typical_minus_outer', but also
+            considers that
+            a) a non-complete "average room" reduces its circumference
+              proportional to the square root of the area
+            b) rooftops, windows and ground floors (= walls with border to
+                soil) may have a vertical share
     """
 
     def __init__(self,
@@ -75,7 +87,8 @@ class EST7(EST1a):
                  internal_gains_mode=1,
                  neighbour_buildings=None,
                  construction_data=None,
-                 number_of_apartments=None):
+                 number_of_apartments=None,
+                 inner_wall_approximation_approach='teaser_default'):
         """Constructor of EST7
         """
 
@@ -89,7 +102,8 @@ class EST7(EST1a):
             with_ahu,
             internal_gains_mode,
             neighbour_buildings,
-            construction_data)
+            construction_data,
+            inner_wall_approximation_approach)
 
         self.number_of_apartments = number_of_apartments
         self.est_factor_facade_to_volume = 0.49

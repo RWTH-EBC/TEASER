@@ -54,6 +54,21 @@ class Building(object):
            consideration of moisture and co2. The moisture calculation is
            based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
            Engineering ToolBox (2004) and regards only persons.
+    inner_wall_approximation_approach : str
+        'teaser_default' (default) assumes area of inner wall per room as equal
+            to one typical length (defined in use conditions) * height of
+            floors, where number of rooms is
+            zone area/(typical length + typical width)
+        'typical_minus_outer' sets length of inner walls per room = 2 * typical
+            length * height of floors + 2 * typical width * height of floors
+            - length of outer or interzonal walls. When calculating the number
+            of rooms, considers the square root of the share for non-complete
+            rooms in comparison to 'teaser_default'.
+        'typical_minus_outer_extended' like 'typical_minus_outer', but also
+            considers that rooftops, windows and ground floors (= walls with
+            border to soil) may have vertical and horizontal shares
+        area of floors and ceilings is not affected by this and always equal to
+        (zone number of floors - 1) * zone area
 
     Attributes
     ----------
@@ -142,6 +157,7 @@ class Building(object):
         net_leased_area=None,
         with_ahu=False,
         internal_gains_mode=1,
+        inner_wall_approximation_approach='teaser_default'
     ):
         """Constructor of Building Class
         """
@@ -160,6 +176,8 @@ class Building(object):
         self.internal_gains_mode = internal_gains_mode
         self.number_of_floors = None
         self.height_of_floors = None
+        self.inner_wall_approximation_approach \
+            = inner_wall_approximation_approach
         self.internal_id = random.random()
         self._year_of_retrofit = None
         self.type_of_building = type(self).__name__
@@ -383,7 +401,7 @@ class Building(object):
         ----------
         number_of_elements : int, optional
             defines the number of elements, that area aggregated, between 1
-            and 4. If None, uses existing class property
+            and 5. Default is 2. If None, uses existing class property
         merge_windows : bool, optional
             True for merging the windows into the outer walls, False for
             separate resistance for window. If None, uses existing class
@@ -736,9 +754,9 @@ class Building(object):
     @number_of_elements_calc.setter
     def number_of_elements_calc(self, value):
 
-        ass_error_1 = "calculation_method has to be 1,2,3 or 4"
+        ass_error_1 = "calculation_method has to be 1, 2, 3, 4, or 5"
 
-        assert value != [1, 2, 3, 4], ass_error_1
+        assert value != [1, 2, 3, 4, 5], ass_error_1
 
         if self.parent is None and value is None:
             self._number_of_elements_calc = 2
@@ -789,3 +807,21 @@ class Building(object):
             self.library_attr = AixLib(parent=self)
         elif self.used_library_calc == "IBPSA":
             self.library_attr = IBPSA(parent=self)
+
+    @property
+    def inner_wall_approximation_approach(self):
+        return self._inner_wall_approximation_approach
+
+    @inner_wall_approximation_approach.setter
+    def inner_wall_approximation_approach(self, value):
+        ass_error_1 = "inner wall approximation approach needs to be one of " \
+                      "'teaser_default', 'typical_minus_outer', "\
+                      "'typical_minus_outer_extended'"
+
+        assert value in (
+                'teaser_default',
+                'typical_minus_outer',
+                'typical_minus_outer_extended'
+        ), ass_error_1
+
+        self._inner_wall_approximation_approach = value

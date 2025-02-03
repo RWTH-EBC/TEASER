@@ -4,6 +4,7 @@
 """This module includes the ThermalZone class
 """
 from __future__ import division
+import math
 import random
 import re
 import warnings
@@ -11,6 +12,7 @@ from teaser.logic.buildingobjects.calculation.one_element import OneElement
 from teaser.logic.buildingobjects.calculation.two_element import TwoElement
 from teaser.logic.buildingobjects.calculation.three_element import ThreeElement
 from teaser.logic.buildingobjects.calculation.four_element import FourElement
+from teaser.logic.buildingobjects.calculation.five_element import FiveElement
 
 
 class ThermalZone(object):
@@ -56,13 +58,20 @@ class ThermalZone(object):
         List of Floor instances.
     ceilings: list
         List of Ceiling instances.
+    interzonal_walls : list
+        List of InterzonalWall instances.
+    interzonal_floors : list
+        List of InterzonalFloor instances.
+    interzonal_ceilings: list
+        List of InterzonalCeiling instances.
     use_conditions : UseConditions
         Instance of UseConditions with all relevant information for the usage
         of the thermal zone
-    model_attr : Union[OneElement, TwoElement, ThreeElement, FourElement]
-        Instance of OneElement(), TwoElement(), ThreeElement() or
-        FourElement(), that holds all calculation functions and attributes
-        needed for the specific model.
+    model_attr : Union[OneElement, TwoElement, ThreeElement, FourElement,
+    FiveElement]
+        Instance of OneElement(), TwoElement(), ThreeElement(),
+        FourElement(), or FiveElement() that holds all calculation functions
+        and attributes needed for the specific model.
     t_inside : float [K]
         Normative indoor temperature for static heat load calculation.
         The input of t_inside is ALWAYS in Kelvin
@@ -73,10 +82,24 @@ class ThermalZone(object):
         Temperature directly at the outer side of ground floors for static
         heat load calculation.
         The input of t_ground is ALWAYS in Kelvin
+    t_ground_amplitude : float [K]
+        Temperature amplitude of the ground over the year
+    time_to_minimal_t_ground : int [s]
+        Time between simulation time 0 (not: start_time) and the minimum of
+        the ground temperature if the sine option for ground temperature is
+        chosen. Default: 6004800 (noon of Mar 11 as published by Virginia Tech
+        (https://www.builditsolar.com/Projects/Cooling/EarthTemperatures.htm)
+        for a depth of 5 ft)
     density_air : float [kg/m3]
         average density of the air in the thermal zone
     heat_capac_air : float [J/K]
         average heat capacity of the air in the thermal zone
+    number_of_floors : float
+        number of floors of the zone. If None, parent's number_of_floors is used
+    height_of_floors : float [m]
+        average height of floors of the zone. If None, parent's height_of_floors
+        is used
+
     """
 
     def __init__(self, parent=None):
@@ -97,12 +120,20 @@ class ThermalZone(object):
         self._inner_walls = []
         self._floors = []
         self._ceilings = []
+        self._interzonal_walls = []
+        self._interzonal_floors = []
+        self._interzonal_ceilings = []
         self._use_conditions = None
         self._t_inside = 293.15
         self._t_outside = 261.15
         self.density_air = 1.25
         self.heat_capac_air = 1002
-        self.t_ground = 286.15
+        self._t_ground = 286.15
+        self._t_ground_amplitude = 0
+        self.time_to_minimal_t_ground = 6004800
+
+        self._number_of_floors = None
+        self._height_of_floors = None
 
     def calc_zone_parameters(
             self,
@@ -115,7 +146,7 @@ class ThermalZone(object):
 
         Based on the input parameters (used model) this function instantiates
         the corresponding calculation Class (e.g. TwoElement) and calculates
-        the zone parameters. Currently the function is able to distinguishes
+        the zone parameters. Currently, the function is able to distinguishes
         between the number of elements, we distinguish between:
 
             - one element: all outer walls are aggregated into one element,
@@ -124,15 +155,16 @@ class ThermalZone(object):
             - three elements: like 2, but floor or roofs are aggregated
               separately
             - four elements: roofs and floors are aggregated separately
+            - five elements: includes borders to adjacent zones
 
-        For all four options we can chose if the thermal conduction through
+        For all four options we can choose if the thermal conduction through
         the window is considered in a separate resistance or not.
 
         Parameters
         ----------
         number_of_elements : int
             defines the number of elements, that area aggregated, between 1
-            and 4, default is 2
+            and 5, default is 2
 
         merge_windows : bool
             True for merging the windows into the outer walls, False for
@@ -173,6 +205,12 @@ class ThermalZone(object):
                 t_bt=t_bt,
                 t_bt_layer=t_bt_layer
             )
+            self.model_attr.calc_attributes()
+        elif number_of_elements == 5:
+            self.model_attr = FiveElement(
+                thermal_zone=self,
+                merge_windows=merge_windows,
+                t_bt=t_bt)
             self.model_attr.calc_attributes()
 
     def find_walls(self, orientation, tilt):
@@ -305,11 +343,50 @@ class ThermalZone(object):
                 pass
         return elements
 
+    def find_izes_outer(self, orientation=None, tilt=None, add_reversed=False):
+        """Returns all interzonal elements with given orientation and tilt
+
+        This function returns a list of all InterzonalWall, InterzonalCeiling
+        and InterzonalFloor elements that are to be lumped with outer elements
+        or exported as borders to adjacent zones, optionally reduced to those
+        with given orientation and tilt.
+
+        Parameters
+        ----------
+        orientation : float [degree]
+            Azimuth of the desired elements.
+        tilt : float [degree]
+            Tilt against the horizontal of the desired elements.
+        add_reversed : bool
+            also consider the elements with method_interzonal_export
+            'outer_reversed' (only for lumping to borders with adjacent zones)
+
+        Returns
+        -------
+        elements : list
+            List of InterzonalWall, InterzonalCeiling and InterzonalFloor
+            instances with desired orientation and tilt.
+        """
+        elements = []
+        for i in self.interzonal_elements:
+            if ((i.orientation == orientation or orientation is None)
+                    and (i.tilt == tilt or tilt is None)):
+                if i.interzonal_type_export == 'outer_ordered' or (
+                        add_reversed and i.interzonal_type_export == 'outer_reversed'
+                ):
+                    elements.append(i)
+            else:
+                pass
+        return elements
+
     def set_inner_wall_area(self):
         """Sets the inner wall area according to zone area
 
         Sets the inner wall area according to zone area size if type building
         approach is used. This function covers Floors, Ceilings and InnerWalls.
+        Approximation approach depends on the building's
+        inner_wall_approximation_approach attribute.
+
         """
 
         ass_error_1 = "You need to specify parent for thermal zone"
@@ -317,24 +394,64 @@ class ThermalZone(object):
         assert self.parent is not None, ass_error_1
 
         for floor in self.floors:
-            floor.area = (
-                (self.parent.number_of_floors - 1) /
-                self.parent.number_of_floors) * self.area
+            floor.area = ((self.number_of_floors - 1) / self.number_of_floors) \
+                         * self.area
         for ceiling in self.ceilings:
-            ceiling.area = (
-                (self.parent.number_of_floors - 1) /
-                self.parent.number_of_floors) * self.area
+            ceiling.area = ((self.number_of_floors - 1)
+                            / self.number_of_floors) * self.area
+
+        typical_area = self.use_conditions.typical_length * \
+            self.use_conditions.typical_width
+
+        avg_room_nr = self.area / typical_area
+
+        approximation_approach \
+            = self.parent.inner_wall_approximation_approach
+        if approximation_approach not in (
+                'teaser_default',
+                'typical_minus_outer',
+                'typical_minus_outer_extended'
+        ):
+            warnings.warn(f'Inner wall approximation approach '
+                          f'{approximation_approach} unknown. '
+                          f'Falling back to teaser_default.')
+            approximation_approach = 'teaser_default'
+        if approximation_approach == 'typical_minus_outer':
+            wall_area = ((int(avg_room_nr)
+                          + math.sqrt(avg_room_nr - int(avg_room_nr)))
+                         * (2 * self.use_conditions.typical_length
+                            * self.height_of_floors
+                            + 2 * self.use_conditions.typical_width
+                            * self.height_of_floors))
+            for other_verticals in self.outer_walls + self.interzonal_walls\
+                    + self.windows + self.doors:
+                wall_area -= other_verticals.area
+            wall_area = max(0.01, wall_area)
+        elif approximation_approach == 'typical_minus_outer_extended':
+            wall_area = ((int(avg_room_nr)
+                          + math.sqrt(avg_room_nr - int(avg_room_nr)))
+                         * (2 * self.use_conditions.typical_length
+                            * self.height_of_floors
+                            + 2 * self.use_conditions.typical_width
+                            * self.height_of_floors))
+            for other_verticals in self.outer_walls + self.interzonal_walls\
+                    + self.doors:
+                wall_area -= other_verticals.area
+            for pot_vert_be in self.rooftops + self.windows:
+                wall_area -= pot_vert_be.area \
+                             * math.sin(pot_vert_be.tilt * math.pi / 180)
+            wall_area -= max(0.0, sum(gf.area for gf in self.ground_floors)
+                             - self.area)
+            wall_area = max(0.01, wall_area)
+        else:
+            wall_area = (avg_room_nr
+                         * (self.use_conditions.typical_length
+                            * self.height_of_floors
+                            + 2 * self.use_conditions.typical_width
+                            * self.height_of_floors))
 
         for wall in self.inner_walls:
-            typical_area = self.use_conditions.typical_length * \
-                self.use_conditions.typical_width
-
-            avg_room_nr = self.area / typical_area
-
-            wall.area = (avg_room_nr * (self.use_conditions.typical_length *
-                                        self.parent.height_of_floors +
-                                        2 * self.use_conditions.typical_width *
-                                        self.parent.height_of_floors))
+            wall.area = wall_area
 
     def set_volume_zone(self):
         """Sets the zone volume according to area and height of floors
@@ -347,7 +464,7 @@ class ThermalZone(object):
 
         assert self.parent is not None, ass_error_1
 
-        self.volume = self.area * self.parent.height_of_floors
+        self.volume = self.area * self.height_of_floors
 
     def retrofit_zone(
             self,
@@ -398,16 +515,14 @@ class ThermalZone(object):
                         construction=wall_count.construction_data.replace(
                             "retrofit", type_of_retrofit))
         else:
-            for wall_count in self.outer_walls:
-                wall_count.retrofit_wall(
-                    self.parent.year_of_retrofit,
-                    material)
-            for roof_count in self.rooftops:
-                roof_count.retrofit_wall(
-                    self.parent.year_of_retrofit,
-                    material)
-            for ground_count in self.ground_floors:
-                ground_count.retrofit_wall(
+
+            for element_count in (
+                    self.outer_walls
+                    + self.rooftops
+                    + self.ground_floors
+                    + self.interzonal_elements
+            ):
+                element_count.retrofit_wall(
                     self.parent.year_of_retrofit,
                     material)
             for win_count in self.windows:
@@ -448,6 +563,7 @@ class ThermalZone(object):
         assert type(building_element).__name__ in (
             "OuterWall", "Rooftop", "GroundFloor",
             "InnerWall", "Ceiling", "Floor",
+            "InterzonalWall", "InterzonalCeiling", "InterzonalFloor",
             "Window"), ass_error_1
 
         if type(building_element).__name__ == "OuterWall":
@@ -462,6 +578,12 @@ class ThermalZone(object):
             self._ceilings.append(building_element)
         elif type(building_element).__name__ == "Floor":
             self._floors.append(building_element)
+        elif type(building_element).__name__ == "InterzonalWall":
+            self._interzonal_walls.append(building_element)
+        elif type(building_element).__name__ == "InterzonalCeiling":
+            self._interzonal_ceilings.append(building_element)
+        elif type(building_element).__name__ == "InterzonalFloor":
+            self._interzonal_floors.append(building_element)
         elif type(building_element).__name__ == "Window":
             self._windows.append(building_element)
 
@@ -492,7 +614,7 @@ class ThermalZone(object):
                 name = regex.sub('', str(value))
             except ValueError:
                 print("Can't convert name to string")
-        
+
         # check if another zone with same name exists
         tz_names = [tz._name for tz in self.parent.thermal_zones[:-1]]
         if name in tz_names:
@@ -570,6 +692,41 @@ class ThermalZone(object):
             self._inner_walls = []
 
     @property
+    def interzonal_walls(self):
+        return self._interzonal_walls
+
+    @interzonal_walls.setter
+    def interzonal_walls(self, value):
+
+        if value is None:
+            self._interzonal_walls = []
+
+    @property
+    def interzonal_ceilings(self):
+        return self._interzonal_ceilings
+
+    @interzonal_ceilings.setter
+    def interzonal_ceilings(self, value):
+
+        if value is None:
+            self._interzonal_ceilings = []
+
+    @property
+    def interzonal_floors(self):
+        return self._interzonal_floors
+
+    @interzonal_floors.setter
+    def interzonal_floors(self, value):
+
+        if value is None:
+            self._interzonal_floors = []
+
+    @property
+    def interzonal_elements(self):
+        return self.interzonal_walls + self.interzonal_ceilings \
+            + self.interzonal_floors
+
+    @property
     def windows(self):
         return self._windows
 
@@ -624,6 +781,58 @@ class ThermalZone(object):
                 self._area = value
         else:
             self._area = value
+
+    @property
+    def number_of_floors(self):
+        if self._number_of_floors is None:
+            if self.parent is not None:
+                number_of_floors = self.parent.number_of_floors
+            else:
+                number_of_floors = None
+        else:
+            number_of_floors = self._number_of_floors
+        return number_of_floors
+
+    @number_of_floors.setter
+    def number_of_floors(self, value):
+
+        if isinstance(value, float):
+            pass
+        elif value is None:
+            pass
+        else:
+            try:
+                value = float(value)
+            except ValueError:
+                raise ValueError("Can't convert zone number_of_floors to float")
+
+        self._number_of_floors = value
+
+    @property
+    def height_of_floors(self):
+        if self._height_of_floors is None:
+            if self.parent is not None:
+                height_of_floors = self.parent.height_of_floors
+            else:
+                height_of_floors = None
+        else:
+            height_of_floors = self._height_of_floors
+        return height_of_floors
+
+    @height_of_floors.setter
+    def height_of_floors(self, value):
+
+        if isinstance(value, float):
+            pass
+        elif value is None:
+            pass
+        else:
+            try:
+                value = float(value)
+            except ValueError:
+                raise ValueError("Can't convert zone height_of_floors to float")
+
+        self._height_of_floors = value
 
     @property
     def volume(self):
@@ -685,5 +894,41 @@ class ThermalZone(object):
             try:
                 value = float(value)
                 self._t_outside = value
+            except:
+                raise ValueError("Can't convert temperature to float")
+
+    @property
+    def t_ground(self):
+        return self._t_ground
+
+    @t_ground.setter
+    def t_ground(self, value):
+
+        if isinstance(value, float):
+            self._t_ground = value
+        elif value is None:
+            self._t_ground = value
+        else:
+            try:
+                value = float(value)
+                self._t_ground = value
+            except:
+                raise ValueError("Can't convert temperature to float")
+
+    @property
+    def t_ground_amplitude(self):
+        return self._t_ground_amplitude
+
+    @t_ground_amplitude.setter
+    def t_ground_amplitude(self, value):
+
+        if isinstance(value, float):
+            self._t_ground_amplitude = value
+        elif value is None:
+            self._t_ground_amplitude = value
+        else:
+            try:
+                value = float(value)
+                self._t_ground_amplitude = value
             except:
                 raise ValueError("Can't convert temperature to float")
