@@ -13,12 +13,10 @@ model ${zone.parent.name}_${zone.name}
   ${library}.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${min_orientations(zone.model_attr.n_outer)}](    each outSkyCon=true,
     each outGroCon=true,
     til=${get_list(deg_to_rad(zone.model_attr.tilt_facade))},
-    each lat = ${deg_to_rad(zone.parent.latitude)},
     azi = ${get_list(azmiut_conv(zone.model_attr.orientation_facade))})
     "Calculates diffuse solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,20},{-48,40}})));
   ${library}.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${min_orientations(zone.model_attr.n_outer)}](    til=${get_list(deg_to_rad(zone.model_attr.tilt_facade))},
-    each lat =  ${deg_to_rad(zone.parent.latitude)},
     azi=${get_list(azmiut_conv(zone.model_attr.orientation_facade))})
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,52},{-48,72}})));
@@ -200,12 +198,10 @@ model ${zone.parent.name}_${zone.name}
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{4,76},{14,86}})));
   ${library}.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[${min_orientations(zone.model_attr.n_rt)}](    til=${get_list(deg_to_rad(zone.model_attr.tilt_rt))},
-    each lat = ${deg_to_rad(zone.parent.latitude)},
     azi=${get_list(azmiut_conv(zone.model_attr.orientation_rt))})
     "Calculates direct solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-68,74},{-48,94}})));
   ${library}.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilRoof[${min_orientations(zone.model_attr.n_rt)}](    til=${get_list(deg_to_rad(zone.model_attr.tilt_rt))},
-    each lat = ${deg_to_rad(zone.parent.latitude)},
     azi=${get_list(azmiut_conv(zone.model_attr.orientation_rt))})
     "Calculates diffuse solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-68,48},{-48,68}})));

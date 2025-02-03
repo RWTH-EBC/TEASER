@@ -108,6 +108,10 @@ class Building(object):
         that direction as value.
     bldg_height : float [m]
         Total building height.
+    area_rt : float [m2]
+        Total roof area of all thermal zones.
+    area_gf : float [m2]
+        Total ground floor area of all thermal zones.
     volume : float [m3]
         Total volume of all thermal zones.
     sum_heat_load : float [W]
@@ -133,8 +137,17 @@ class Building(object):
     library_attr : Annex() or AixLib() instance
         Classes with specific functions and attributes for building models in
         IBPSA and AixLib. Python classes can be found in calculation package.
-
-    """
+    t_bt : float
+        Time constant according to VDI 6007.
+        Default 5 d, only change if you know what you are doing.
+        See https://publications.rwth-aachen.de/record/749705/files/749705.pdf for more
+        information (Section 4.1.2)
+    t_bt_layer: float
+        Time constant according to VDI 6007 for aggragation of layers.
+        Default 7 d, only change if you know what you are doing
+        See https://publications.rwth-aachen.de/record/749705/files/749705.pdf for more
+        information (Section 4.1.2)
+   """
 
     def __init__(
         self,
@@ -179,6 +192,8 @@ class Building(object):
         self._window_area = {}
 
         self.bldg_height = None
+        self.area_rt = None
+        self.area_gf = None
         self.volume = 0
         self.sum_heat_load = 0
         self.sum_cooling_load = 0
@@ -187,6 +202,9 @@ class Building(object):
         self._used_library_calc = "AixLib"
 
         self.library_attr = None
+
+        self.t_bt = 5
+        self.t_bt_layer = 7
 
     def set_outer_wall_area(self, new_area, orientation):
         """Outer area wall setter
@@ -368,7 +386,10 @@ class Building(object):
             self.window_area[key] = self.get_window_area(key)
 
     def calc_building_parameter(
-        self, number_of_elements=2, merge_windows=False, used_library="AixLib"
+            self,
+            number_of_elements=None,
+            merge_windows=None,
+            used_library=None
     ):
         """calc all building parameters
 
@@ -378,27 +399,43 @@ class Building(object):
 
         Parameters
         ----------
-        number_of_elements : int
+        number_of_elements : int, optional
             defines the number of elements, that area aggregated, between 1
-            and 5, default is 2
-        merge_windows : bool
+            and 5. Default is 2. If None, uses existing class property
+        merge_windows : bool, optional
             True for merging the windows into the outer walls, False for
-            separate resistance for window, default is False
-        used_library : str
-            used library (AixLib and IBPSA are supported)
+            separate resistance for window. If None, uses existing class
+            property
+        used_library : str, optional
+            used library (AixLib and IBPSA are supported). If None, uses
+            existing class property
         """
+        # Use provided values or fall back to existing class properties
+        number_of_elements = (
+            number_of_elements if number_of_elements is not None
+            else self._number_of_elements_calc)
+        merge_windows = (merge_windows if merge_windows is not None
+                         else self._merge_windows_calc)
+        used_library = used_library if used_library is not None else (
+            self._used_library_calc)
 
-        self._number_of_elements_calc = number_of_elements
-        self._merge_windows_calc = merge_windows
-        self._used_library_calc = used_library
+        # Update class properties with the values being used
+        self.number_of_elements_calc = number_of_elements
+        self.merge_windows_calc = merge_windows
+        self.used_library_calc = used_library
 
+        self.area_rt = 0
+        self.area_gf = 0
         for zone in self.thermal_zones:
             zone.calc_zone_parameters(
                 number_of_elements=number_of_elements,
                 merge_windows=merge_windows,
-                t_bt=5,
+                t_bt=self.t_bt,
+                t_bt_layer=self.t_bt_layer
             )
             self.sum_heat_load += zone.model_attr.heat_load
+            self.area_rt += sum(rf.area for rf in zone.rooftops)
+            self.area_gf += sum(gf.area for gf in zone.ground_floors)
 
         if self.used_library_calc == self.library_attr.__class__.__name__:
             if self.used_library_calc == "AixLib":

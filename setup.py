@@ -48,6 +48,7 @@ setup(
         "teaser.data.output.modelicatemplate",
         "teaser.data.output.reports",
         "teaser.data.output.modelicatemplate.AixLib",
+        "teaser.data.output.modelicatemplate.BESMod",
         "teaser.data.output.modelicatemplate.IBPSA",
         "teaser.examples",
         "teaser.examples.verification",
@@ -73,6 +74,15 @@ setup(
             "AixLib_ThermalZoneRecord_ThreeElement",
             "AixLib_ThermalZoneRecord_FourElement",
             "AixLib_ThermalZoneRecord_FiveElement",
+        ],
+        "teaser.data.output.modelicatemplate.BESMod": [
+            "Building",
+            "Example_GasBoilerBuildingOnly",
+            "Example_HeatPumpMonoenergetic",
+            "Example_TEASERHeatLoadCalculation",
+            "Script_GasBoilerBuildingOnly",
+            "Script_HeatPumpMonoenergetic",
+            "Script_TEASERHeatLoadCalculation",
         ],
         "teaser.data.output.modelicatemplate.IBPSA": [
             "IBPSA_OneElement",

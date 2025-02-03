@@ -76,7 +76,7 @@ def from_scratch(number_of_elements, save=False, path=utilities.get_default_path
     tz.area = 8.0 * 6.0
     tz.volume = tz.area * 2.7
     tz.use_conditions = UseConditions(parent=tz)
-    tz.use_conditions.infiltration_rate = 0.41
+    tz.use_conditions.base_infiltration = 0.41
 
     roof = Rooftop(parent=tz)
     roof.name = "Roof"
