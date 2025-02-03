@@ -276,8 +276,8 @@ class BuildingElement(object):
 
     def load_type_element(
             self,
-            year,
-            construction,
+            year=None,
+            construction=None,
             data_class=None,
             element_type=None,
             reverse_layers=False,
@@ -318,6 +318,10 @@ class BuildingElement(object):
 
         """
 
+        if type_element_key is None and (year is None or construction is None):
+            raise ValueError("specify either year and construction "
+                             "or type_element_key")
+
         if data_class is None:
             data_class = self.parent.parent.parent.data
         else:
@@ -332,7 +336,7 @@ class BuildingElement(object):
         if type_element_key:
             try:
                 buildingelement_input.load_type_element_by_key(
-                    element=self, key_str=type_element_key,
+                    element=self, type_element_key=type_element_key,
                     data_class=data_class, reverse_layers=reverse_layers
                 )
             except KeyError:

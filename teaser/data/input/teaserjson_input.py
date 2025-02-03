@@ -297,42 +297,46 @@ def load_teaser_json(path, project):
                 ceil.name = cl_name
                 set_basic_data_teaser(cl_in, ceil)
                 set_layer_data_teaser(cl_in, ceil)
-            try:
-                for izw_name, izw_in in zone_in["interzonal_walls"].items():
-                    iz_wall = InterzonalWall(parent=tz)
-                    iz_wall.name = izw_name
-                    set_basic_data_teaser(izw_in, iz_wall)
-                    set_layer_data_teaser(izw_in, iz_wall)
-                for izf_name, izf_in in zone_in["interzonal_floors"].items():
-                    izf = InterzonalFloor(parent=tz)
-                    izf.name = izf_name
-                    set_basic_data_teaser(izf_in, izf)
-                    set_layer_data_teaser(izf_in, izf)
-                for izc_name, izc_in in zone_in["interzonal_ceilings"].items():
-                    izc = InterzonalCeiling(parent=tz)
-                    izc.name = izc_name
-                    set_basic_data_teaser(izc_in, izc)
-                    set_layer_data_teaser(izc_in, izc)
-            except KeyError as error:
-                pass
-        try:
-            for tz, (tz_name, zone_in) in zip(bldg.thermal_zones,
-                                              bldg_in["thermal_zones"].items()):
-                for iz_wall, (izw_name, izw_in) in zip(
-                        tz.interzonal_walls, zone_in["interzonal_walls"].items()
-                ):
-                    iz_wall.other_side = zones_created[izw_in["other_side"]]
-                for iz_floor, (izf_name, izf_in) in zip(
-                        tz.interzonal_floors, zone_in["interzonal_floors"].items()
-                ):
-                    iz_floor.other_side = zones_created[izf_in["other_side"]]
-                for iz_ceiling, (izc_name, izc_in) in zip(
-                        tz.interzonal_ceilings,
-                        zone_in["interzonal_ceilings"].items()
-                ):
-                    iz_ceiling.other_side = zones_created[izc_in["other_side"]]
-        except KeyError as error:
-            pass
+            for izw_name, izw_in in zone_in.get(
+                    "interzonal_walls", dict()
+            ).items():
+                iz_wall = InterzonalWall(parent=tz)
+                iz_wall.name = izw_name
+                set_basic_data_teaser(izw_in, iz_wall)
+                set_layer_data_teaser(izw_in, iz_wall)
+            for izf_name, izf_in in zone_in.get(
+                    "interzonal_floors", dict()
+            ).items():
+                izf = InterzonalFloor(parent=tz)
+                izf.name = izf_name
+                set_basic_data_teaser(izf_in, izf)
+                set_layer_data_teaser(izf_in, izf)
+            for izc_name, izc_in in zone_in.get(
+                    "interzonal_ceilings", dict()
+            ).items():
+                izc = InterzonalCeiling(parent=tz)
+                izc.name = izc_name
+                set_basic_data_teaser(izc_in, izc)
+                set_layer_data_teaser(izc_in, izc)
+
+        # fill other_side attribute of interzonal elements
+        for tz, (tz_name, zone_in) in zip(bldg.thermal_zones,
+                                          bldg_in["thermal_zones"].items()):
+            for iz_wall, (izw_name, izw_in) in zip(
+                    tz.interzonal_walls,
+                    zone_in.get("interzonal_walls", dict()).items()
+            ):
+                iz_wall.other_side = zones_created[izw_in["other_side"]]
+            for iz_floor, (izf_name, izf_in) in zip(
+                    tz.interzonal_floors,
+                    zone_in.get("interzonal_floors", dict()).items()
+            ):
+                iz_floor.other_side = zones_created[izf_in["other_side"]]
+            for iz_ceiling, (izc_name, izc_in) in zip(
+                    tz.interzonal_ceilings,
+                    zone_in.get("interzonal_ceilings", dict()).items()
+            ):
+                iz_ceiling.other_side = zones_created[izc_in["other_side"]]
 
 
 def set_basic_data_teaser(wall_in, element):

@@ -76,7 +76,7 @@ def load_type_element(element, year, construction, data_class,
                     f"year{year}, element={type(element).__name__}")
 
 
-def load_type_element_by_key(element, key_str, data_class,
+def load_type_element_by_key(element, type_element_key, data_class,
                              reverse_layers=False):
     """Load BuildingElement from json by key string.
 
@@ -91,7 +91,7 @@ def load_type_element_by_key(element, key_str, data_class,
     element : BuildingElement()
         Instance of BuildingElement or inherited Element of TEASER
 
-    key_str : str
+    type_element_key : str
         key string to the type element of the building characteristics sources
 
     data_class : DataClass()
@@ -105,7 +105,7 @@ def load_type_element_by_key(element, key_str, data_class,
     """
     element_binding = data_class.element_bind
 
-    element_in = element_binding[key_str]
+    element_in = element_binding[type_element_key]
 
     _set_basic_data(element=element, element_in=element_in)
     for id, layer_in in (

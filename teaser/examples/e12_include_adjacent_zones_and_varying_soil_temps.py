@@ -40,6 +40,7 @@ def example_interzonal_single_building():
     International Modelica Conference: https://doi.org/10.3384/ecp204577
     """
     # for the conference publication, four variations were calculated
+    # see paper, in particular its Table 1, for details
     for variation in ['A', 'B', 'C', 'D']:
         # this project is initialized without data class
         prj = Project(False)
@@ -49,7 +50,7 @@ def example_interzonal_single_building():
         if variation == 'D':
             # this is the variation that represents the actual state of the building
             prj.load_project(utilities.get_full_path(
-                f"examples/examplefiles/e11_varD.json"
+                f"examples/examplefiles/e10_varD.json"
             ))
 
             # in the json for variation D, one interzonal element is missing, so we
@@ -146,7 +147,7 @@ def example_interzonal_single_building():
 
         elif variation in ('A', 'B', 'C'):
             prj.load_project(utilities.get_full_path(
-                f"examples/examplefiles/e11_raw.json"
+                f"examples/examplefiles/e10_raw.json"
             ))
 
             # The default properties from the typology (selected previously by
@@ -158,7 +159,10 @@ def example_interzonal_single_building():
                 # Note that the windows get a different year of construction (1995)
                 # than the rest of the building (1965, from the json import file).
                 for el in tz.windows:
-                    el.load_type_element(1995, 'tabula_de_standard_1_SFH')
+                    el.load_type_element(
+                        type_element_key="Window_[1995, 2001]_tabula_"
+                                         "de_standard_1_SFH"
+                    )
                     el.shading_max_irr = 10000
                 # rooftops, ground floors and interzonal elements have a clearly
                 # associated TABULA standard construction. See the publication
@@ -211,7 +215,7 @@ def example_interzonal_single_building():
                     el.outer_convection = 0.9
 
         # change the project name so exports are clearly recognizable
-        prj.name = 'Example_e11_var' + variation
+        prj.name = 'Example_e10_var' + variation
 
         # three ways for setting the inner wall area
         # if you run the example, you will see the difference in the console output.
@@ -272,12 +276,12 @@ def example_interzonal_single_building():
         #    surface between building element and soil
         prj.t_soil_mode = 3
         prj.t_soil_file_path = utilities.get_full_path(
-            "examples/examplefiles/t_soil_example_e11.txt"
+            "examples/examplefiles/t_soil_example_e10.txt"
         )
 
         # 2. the weather is set to the actual weather at the time
         prj.weather_file_path = utilities.get_full_path(
-            "examples/examplefiles/DEU_NW_Morschenich_for_example_e11.mos"
+            "examples/examplefiles/DEU_NW_Morschenich_for_example_e10.mos"
         )
 
         # 3. we restrict the simulation time to the interesting part of the year
@@ -314,13 +318,13 @@ def example_interzonal_single_building():
         # 2. additional internal gains are connected to the ports of the Multizone
         export_path = prj.export_aixlib(
             custom_multizone_template_path=utilities.get_full_path(
-                "examples/examplefiles/e11_Multizone_template"
+                "examples/examplefiles/e10_Multizone_template"
             )
         )
         # the additional import source files need to be copied to the export path
         shutil.copyfile(
-            utilities.get_full_path("examples/examplefiles/e11_AddIntGains.txt"),
-            os.path.join(export_path, prj.buildings[0].name, "e11_AddIntGains.txt")
+            utilities.get_full_path("examples/examplefiles/e10_AddIntGains.txt"),
+            os.path.join(export_path, prj.buildings[0].name, "e10_AddIntGains.txt")
         )
 
     return prj
