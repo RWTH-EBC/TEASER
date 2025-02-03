@@ -32,6 +32,9 @@ class AixLib(object):
     version : str
         Used AixLib version, default should always be current main version
         of GitHub
+    besmod_version : str
+        Used BESMod version vor export_besmod, default should always be current main version
+        of GitHub
     total_surface_area : float [m2]
         This is the total surface area of the building for interior and
         exterior surfaces. That includes: OuterWalls, Rooftops, GroundFloors,
@@ -61,7 +64,8 @@ class AixLib(object):
         self.file_set_t_cool = "TsetCool_" + self.parent.name + ".txt"
         self.file_ahu = "AHU_" + self.parent.name + ".txt"
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".txt"
-        self.version = "2.1.0"
+        self.version = "2.1.1"
+        self.besmod_version = "0.6.0"
         self.total_surface_area = None
         self.consider_heat_capacity = True
         self.use_set_back = True

@@ -639,8 +639,9 @@ def example_interzonal_ashrae_960():
 
     export_path = prj.export_aixlib()
 
+
 if __name__ == '__main__':
     prj1 = example_interzonal_single_building()
-    prj2 = example_interzonal_ashrae_960()
+    example_interzonal_ashrae_960()
 
     print("Example 11: That's it! :)")

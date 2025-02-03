@@ -1,12 +1,12 @@
 # Created May 2016
 # TEASER Development Team
 
-"""ibpsa_output
+"""modelica_output
 
 This module contains function to call Templates for IBPSA model generation
 """
 
-import teaser.data.output.aixlib_output as ibpsa_output
+import teaser.data.output.modelica_output as modelica_output
 import os.path
 import teaser.logic.utilities as utilities
 from mako.template import Template
@@ -73,6 +73,9 @@ def export_ibpsa(
         library + '(version="' + prj.buildings[-1].library_attr.version[
             library] + '")']
 
+    if path is None:
+        path = utilities.get_full_path("")
+
     lookup = TemplateLookup(directories=[utilities.get_full_path(
         os.path.join('data', 'output', 'modelicatemplate'))])
     model_template_1 = Template(
@@ -92,17 +95,15 @@ def export_ibpsa(
             "data/output/modelicatemplate/IBPSA/IBPSA_FourElements"),
         lookup=lookup)
 
-    ibpsa_output._help_package(
+    modelica_output.create_package(
         path=path,
         name=prj.name,
-        uses=uses,
-        within=None)
-    ibpsa_output._help_package_order(
+        uses=uses)
+    modelica_output.create_package_order(
         path=path,
         package_list=buildings,
-        addition=None,
         extra=None)
-    ibpsa_output._copy_weather_data(prj.weather_file_path, path)
+    modelica_output.copy_weather_data(prj.weather_file_path, path)
 
     for i, bldg in enumerate(buildings):
 
@@ -114,20 +115,18 @@ def export_ibpsa(
 
         bldg_path = os.path.join(path, bldg.name)
 
-        utilities.create_path(utilities.get_full_path(bldg_path))
-        utilities.create_path(utilities.get_full_path(
-            os.path.join(bldg_path, bldg.name + "_Models")))
+        utilities.create_path(bldg_path)
+        utilities.create_path(os.path.join(bldg_path, bldg.name + "_Models"))
 
-        ibpsa_output._help_package(
+        modelica_output.create_package(
             path=bldg_path,
             name=bldg.name,
             within=bldg.parent.name)
 
-        ibpsa_output._help_package_order(
+        modelica_output.create_package_order(
             path=bldg_path,
             package_list=[],
-            addition=None,
-            extra=bldg.name + "_Models")
+            extra=[bldg.name + "_Models"])
 
         zone_path = os.path.join(
             bldg_path,
@@ -141,8 +140,8 @@ def export_ibpsa(
                 zone=zone,
                 path=zone_path)
 
-            with open(utilities.get_full_path(os.path.join(
-                zone_path, bldg.name + '_' + zone.name + '.mo')), 'w') as out_file:
+            with open(os.path.join(
+                zone_path, bldg.name + '_' + zone.name + '.mo'), 'w') as out_file:
 
                 if type(zone.model_attr).__name__ == "OneElement":
                     out_file.write(model_template_1.render_unicode(zone=zone,
@@ -158,12 +157,12 @@ def export_ibpsa(
                                                                    library=library))
 
 
-        ibpsa_output._help_package(
+        modelica_output.create_package(
             path=zone_path,
             name=bldg.name + "_Models",
             within=prj.name + '.' + bldg.name)
 
-        ibpsa_output._help_package_order(
+        modelica_output.create_package_order(
             path=zone_path,
             package_list=bldg.thermal_zones,
             addition=bldg.name + "_")

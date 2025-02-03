@@ -1,0 +1,6 @@
+
+simulateModel("${project.name}.${bldg.name}.TEASERHeatLoadCalculation${bldg.name}", stopTime=172800, method="dassl", tolerance=1e-06, resultFile="TEASERHeatLoadCalculation${bldg.name}");
+
+createPlot(id=1, position={75, 70, 1210, 600}, y={"weaDat.weaBus.TDryBul"}, grid=true, subPlot=1, colors={{28,108,200}});
+createPlot(id=1, y={"outputs.building.TZone[1]"}, grid=true, subPlot=2, colors={{0,140,72}});
+createPlot(id=1, y={"electricalGrid.PElecGen","electricalGrid.PElecLoa"}, grid=true, subPlot=3, colors={{28,108,200},{238,46,47}});
