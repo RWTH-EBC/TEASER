@@ -1,6 +1,6 @@
 {
     "OuterWall_[2016, 2100]_kfw_40": {
-        "_comment": "Passivhauswand (ubakus)",
+        "_comment": "custom out of ubakus generator",
         "building_age_group": [
             2016,
             2100
@@ -10,49 +10,42 @@
         "inner_convection": 2.7,
         "outer_radiation": 5.0,
         "outer_convection": 20.0,
-        "u_value": 0.13,
+        "u_value": 0.133,
         "u_value_prescribed": 0.154,
         "layer": {
             "0": {
                 "thickness": 0.01,
                 "material": {
-                    "name": "exterior_plaster_1",
-                    "material_id": "c21ad9c5-8859-11ee-9a8d-e8b1fc95108b"
+                    "name": "lime_cement_plaster",
+                    "material_id": "c21ad9cd-8859-11ee-b6b0-e8b1fc95108b"
                 }
             },
             "1": {
-                "thickness": 0.04,
+                "thickness": 0.175,
                 "material": {
-                    "name": "wood_fiber_insulation_board",
-                    "material_id": "c21bff4d-8859-11ee-8f1a-e8b1fc95108b"
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
                 }
             },
             "2": {
-                "thickness": 0.18,
+                "thickness": 0.02,
                 "material": {
-                    "name": "cellulose",
-                    "material_id": "647ea59c-3a43-11e7-a118-2cd444b2e704"
+                    "name": "lime_cement_plaster",
+                    "material_id": "c21ad9cd-8859-11ee-b6b0-e8b1fc95108b"
                 }
             },
             "3": {
-                "thickness": 0.015,
+                "thickness": 0.3,
                 "material": {
-                    "name": "OSB_3",
-                    "material_id": "c21ad9d1-8859-11ee-875c-e8b1fc95108b"
+                    "name": "vertical_core_brick_600",
+                    "material_id": "290b5c24-3a43-11e7-a0f8-2cd444b2e704"
                 }
             },
             "4": {
                 "thickness": 0.06,
                 "material": {
-                    "name": "installation_level",
-                    "material_id": "c21ad9ca-8859-11ee-bbfa-e8b1fc95108b"
-                }
-            },
-            "5": {
-                "thickness": 0.0125,
-                "material": {
-                    "name": "plasterboard",
-                    "material_id": "27068cc0-3a43-11e7-bc9e-2cd444b2e704"
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
                 }
             }
         }
@@ -347,7 +340,7 @@
         }
     },
     "OuterWall_[2016, 2100]_kfw_55": {
-        "_comment": "Holzbauwand (ubakus)",
+        "_comment": "custom out of ubakus generator",
         "building_age_group": [
             2016,
             2100
@@ -357,56 +350,42 @@
         "inner_convection": 2.7,
         "outer_radiation": 5.0,
         "outer_convection": 20.0,
-        "u_value": 0.17,
-        "u_value_prescribed": 0.196,
+        "u_value": 0.168,
+        "u_value_prescribed": 0.168,
         "layer": {
             "0": {
-                "thickness": 0.02,
+                "thickness": 0.01,
                 "material": {
-                    "name": "exterior_plaster_087",
-                    "material_id": "c21ad9c4-8859-11ee-a3a7-e8b1fc95108b"
+                    "name": "lime_cement_plaster",
+                    "material_id": "c21ad9cd-8859-11ee-b6b0-e8b1fc95108b"
                 }
             },
             "1": {
-                "thickness": 0.06,
+                "thickness": 0.12,
                 "material": {
-                    "name": "wood_fiber_insulation_board",
-                    "material_id": "c21bff4d-8859-11ee-8f1a-e8b1fc95108b"
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
                 }
             },
             "2": {
-                "thickness": 0.12,
+                "thickness": 0.02,
                 "material": {
-                    "name": "cellulose",
-                    "material_id": "647ea59c-3a43-11e7-a118-2cd444b2e704"
+                    "name": "lime_cement_plaster",
+                    "material_id": "c21ad9cd-8859-11ee-b6b0-e8b1fc95108b"
                 }
             },
             "3": {
-                "thickness": 0.015,
+                "thickness": 0.3,
                 "material": {
-                    "name": "OSB_3",
-                    "material_id": "c21ad9d1-8859-11ee-875c-e8b1fc95108b"
+                    "name": "vertical_core_brick_600",
+                    "material_id": "290b5c24-3a43-11e7-a0f8-2cd444b2e704"
                 }
             },
             "4": {
-                "thickness": 0.04,
+                "thickness": 0.06,
                 "material": {
-                    "name": "insulated_installation_level",
-                    "material_id": "c21ad9cb-8859-11ee-a39c-e8b1fc95108b"
-                }
-            },
-            "5": {
-                "thickness": 0.015,
-                "material": {
-                    "name": "fire_protection_board_GKF",
-                    "material_id": "c21ad9c7-8859-11ee-bf95-e8b1fc95108b"
-                }
-            },
-            "6": {
-                "thickness": 0.0125,
-                "material": {
-                    "name": "gypsum_fiberboard",
-                    "material_id": "c21ad9c8-8859-11ee-b4ec-e8b1fc95108b"
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
                 }
             }
         }
@@ -651,7 +630,7 @@
         }
     },
     "OuterWall_[2016, 2100]_kfw_70": {
-        "_comment": "Leichthochlochziegel (ubakus)",
+        "_comment": "custom out of ubakus generator",
         "building_age_group": [
             2016,
             2100
@@ -661,28 +640,42 @@
         "inner_convection": 2.7,
         "outer_radiation": 5.0,
         "outer_convection": 20.0,
-        "u_value": 0.23,
-        "u_value_prescribed": 0.238,
+        "u_value": 0.196,
+        "u_value_prescribed": 0.196,
         "layer": {
             "0": {
-                "thickness": 0.02,
+                "thickness": 0.01,
                 "material": {
                     "name": "lime_cement_plaster",
-                    "material_id": "2edbe06e-3a43-11e7-a83d-2cd444b2e704"
+                    "material_id": "c21ad9cd-8859-11ee-b6b0-e8b1fc95108b"
                 }
             },
             "1": {
-                "thickness": 0.365,
+                "thickness": 0.09,
                 "material": {
-                    "name": "lightweight_perforated_bricks",
-                    "material_id": "c21ad9cc-8859-11ee-8440-e8b1fc95108b"
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
                 }
             },
             "2": {
-                "thickness": 0.015,
+                "thickness": 0.02,
                 "material": {
-                    "name": "lime_gypsum_plaster",
-                    "material_id": "c21ad9ce-8859-11ee-924d-e8b1fc95108b"
+                    "name": "lime_cement_plaster",
+                    "material_id": "c21ad9cd-8859-11ee-b6b0-e8b1fc95108b"
+                }
+            },
+            "3": {
+                "thickness": 0.3,
+                "material": {
+                    "name": "vertical_core_brick_600",
+                    "material_id": "290b5c24-3a43-11e7-a0f8-2cd444b2e704"
+                }
+            },
+            "4": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
                 }
             }
         }
@@ -927,7 +920,7 @@
         }
     },
     "OuterWall_[2016, 2100]_kfw_85": {
-        "_comment": "Leichthochlochziegel (ubakus)",
+        "_comment": "custom out of ubakus generator",
         "building_age_group": [
             2016,
             2100
@@ -937,28 +930,42 @@
         "inner_convection": 2.7,
         "outer_radiation": 5.0,
         "outer_convection": 20.0,
-        "u_value": 0.28,
-        "u_value_prescribed": 0.28,
+        "u_value": 0.228,
+        "u_value_prescribed": 0.228,
         "layer": {
             "0": {
-                "thickness": 0.02,
+                "thickness": 0.01,
                 "material": {
                     "name": "lime_cement_plaster",
-                    "material_id": "2edbe06e-3a43-11e7-a83d-2cd444b2e704"
+                    "material_id": "c21ad9cd-8859-11ee-b6b0-e8b1fc95108b"
                 }
             },
             "1": {
-                "thickness": 0.3,
+                "thickness": 0.065,
                 "material": {
-                    "name": "lightweight_perforated_bricks",
-                    "material_id": "c21ad9cc-8859-11ee-8440-e8b1fc95108b"
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
                 }
             },
             "2": {
-                "thickness": 0.015,
+                "thickness": 0.02,
                 "material": {
-                    "name": "lime_gypsum_plaster",
-                    "material_id": "c21ad9ce-8859-11ee-924d-e8b1fc95108b"
+                    "name": "lime_cement_plaster",
+                    "material_id": "c21ad9cd-8859-11ee-b6b0-e8b1fc95108b"
+                }
+            },
+            "3": {
+                "thickness": 0.3,
+                "material": {
+                    "name": "vertical_core_brick_600",
+                    "material_id": "290b5c24-3a43-11e7-a0f8-2cd444b2e704"
+                }
+            },
+            "4": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
                 }
             }
         }
@@ -1196,7 +1203,7 @@
         }
     },
     "OuterWall_[2016, 2100]_kfw_100": {
-        "_comment": "Leichthochlochziegel (ubakus)",
+        "_comment": "custom out of ubakus generator",
         "building_age_group": [
             2016,
             2100
@@ -1206,28 +1213,42 @@
         "inner_convection": 2.7,
         "outer_radiation": 5.0,
         "outer_convection": 20.0,
-        "u_value": 0.32,
-        "u_value_prescribed": 0.322,
+        "u_value": 0.272,
+        "u_value_prescribed": 0.272,
         "layer": {
             "0": {
-                "thickness": 0.02,
+                "thickness": 0.01,
                 "material": {
                     "name": "lime_cement_plaster",
-                    "material_id": "2edbe06e-3a43-11e7-a83d-2cd444b2e704"
+                    "material_id": "c21ad9cd-8859-11ee-b6b0-e8b1fc95108b"
                 }
             },
             "1": {
-                "thickness": 0.26,
+                "thickness": 0.04,
                 "material": {
-                    "name": "lightweight_perforated_bricks",
-                    "material_id": "c21ad9cc-8859-11ee-8440-e8b1fc95108b"
+                    "name": "EPS_040_15",
+                    "material_id": "25d281da-3a43-11e7-8191-2cd444b2e704"
                 }
             },
             "2": {
-                "thickness": 0.015,
+                "thickness": 0.02,
                 "material": {
-                    "name": "lime_gypsum_plaster",
-                    "material_id": "c21ad9ce-8859-11ee-924d-e8b1fc95108b"
+                    "name": "lime_cement_plaster",
+                    "material_id": "c21ad9cd-8859-11ee-b6b0-e8b1fc95108b"
+                }
+            },
+            "3": {
+                "thickness": 0.3,
+                "material": {
+                    "name": "vertical_core_brick_600",
+                    "material_id": "290b5c24-3a43-11e7-a0f8-2cd444b2e704"
+                }
+            },
+            "4": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "lime_plaster",
+                    "material_id": "2e2c8180-3a43-11e7-a6be-2cd444b2e704"
                 }
             }
         }
