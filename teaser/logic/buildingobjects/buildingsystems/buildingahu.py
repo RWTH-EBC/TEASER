@@ -39,6 +39,12 @@ class BuildingAHU(object):
         Is a HeatRecoverySystem physically integrated in the AHU
         AixLib: 'HRS'
         (default = True)
+    dynamic_volume_flow_control: boolean
+        Wether to use dynamic volume flow control which depends on room temperature deviation
+        (default = false)
+    dynamic_supply_temperature_control: boolean
+        Wether to use dynamic supply temperature flow control which depends on temperature in AHU after HRS
+        (default = false)
     by_pass_dehumidification : float
         By-pass factor of cooling coil during dehumidification. Necessary to
         calculate the real outgoing enthalpy flow of heat exchanger in
@@ -73,6 +79,12 @@ class BuildingAHU(object):
         timeline of relative humidity requirements for AHU simulation
     v_flow_profile : [int]
         timeline of desired relative v_flow of the AHU simulation (0..1)
+    T_treshold_heating: float [K]
+        Temperature after HRS in AHU over which there should be no ahu heating
+        for temperature reasons (humidifciation/dehumidifaction still possible)
+    T_treshold_cooling: float
+        Temperature after HRS in AHU under which there should be no ahu cooling
+        for temperature reasons (humidifciation/dehumidifaction still possible)
 
         - **Note:** The AixLib parameter "WithProfile" determines whether the
           (v_flow_profile combined with "min_ahu and max_ahu") or the
@@ -92,6 +104,8 @@ class BuildingAHU(object):
         self.dehumidification = True
         self.humidification = True
         self.heat_recovery = True
+        self.dynamic_volume_flow_control = False
+        self.dynamic_supply_temperature_control = False
         self.by_pass_dehumidification = 0.2
         self.efficiency_recovery = 0.65
         self.efficiency_recovery_false = 0.2
@@ -105,6 +119,9 @@ class BuildingAHU(object):
         self._min_relative_humidity_profile = 24 * [0.45]
         self._max_relative_humidity_profile = 24 * [0.65]
         self._v_flow_profile = 7 * [0.0] + 12 * [1.0] + 5 * [0.0]
+
+        self.T_treshold_heating = 290.15
+        self.T_treshold_cooling = 294.15
 
         self.schedules = pd.DataFrame(
             index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="h")

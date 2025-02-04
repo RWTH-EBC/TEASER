@@ -79,17 +79,22 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     maxAHU = ${zone.use_conditions.max_ahu},
     hHeat = ${zone.model_attr.heat_load},
     lHeat = 0,
-    KRHeat = 10000,
-    TNHeat = 1,
+    KRHeat = ${0.1*zone.model_attr.heat_load},
+    TNHeat = ${zone.pid_ti_heat},
     HeaterOn = ${get_true_false(zone.use_conditions.with_heating)},
     hCool = 0,
     lCool = ${zone.model_attr.cool_load},
     heaLoadFacOut = ${zone.model_attr.heat_load_outside_factor},
     heaLoadFacGrd = ${zone.model_attr.heat_load_ground_factor},
-    KRCool = 10000,
-    TNCool = 1,
+    KRCool = ${-0.1*zone.model_attr.cool_load},
+    TNCool = ${zone.pid_ti_cool},
     CoolerOn = ${get_true_false(zone.use_conditions.with_cooling)},
     withIdealThresholds = ${get_true_false(zone.use_conditions.with_ideal_thresholds)},
     TThresholdHeater = ${zone.use_conditions.T_threshold_heating},
-    TThresholdCooler = ${zone.use_conditions.T_threshold_cooling});
+    TThresholdCooler = ${zone.use_conditions.T_threshold_cooling},
+    traSysK = ${zone.transfer_system_pt1_K},
+    traSysT = ${zone.transfer_system_pt1_T},
+    traSysFraHeaRad = ${zone.transfer_system_fraHeaRad},
+    traSysFraCooRad = ${zone.transfer_system_fraCooRad}
+    );
 end ${zone.parent.name}_${zone.name};
