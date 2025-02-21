@@ -28,10 +28,6 @@ classes and functions can be found at the website:
 
  * http://rwth-ebc.github.io/TEASER/
 
-This GitHub page will be used to further develop the package and make it
-available under the
-[MIT License](https://github.com/RWTH-EBC/TEASER/blob/main/License.md).
-
 If you have any questions regarding TEASER feel free to contact us at
 [ebc-teaser@eonerc.rwth-aachen.de](mailto:ebc-teaser@eonerc.rwth-aachen.de).
 
@@ -53,23 +49,18 @@ building stocks. TEASER provides an easy interface for multiple data sources,
 data enrichment (where necessary) and export of ready-to-run Modelica simulation
 models for all libraries supporting the
 [Modelica IBPSA library](https://github.com/ibpsa/modelica).
-
-
-## Version
-
-TEASER is an ongoing research project, the current version is still a pre-release.
-
+  
 ## How to use TEASER
 
 ### Examples and jupyter notebooks
 
 We provide different examples to show the usage of TEASER.
-Check out the files under teaser/examples or the jupyter-notebooks available here: docs/jupyter-notebooks.
-If you just want to read the example on github, check them here: docs/examples.
+Check out the files under teaser/examples or the jupyter-notebooks available here: [docs/jupyter_notebooks](https://github.com/RWTH-EBC/TEASER/tree/main/docs/jupyter_notebooks).
+If you just want to read the example on github, check them here: [docs/source/jupyter_notebooks](https://github.com/RWTH-EBC/TEASER/tree/main/docs/source/jupyter_notebooks).
 
 ### Dependencies
 
-TEASER is currently tested against Python 3.7 up to 3.11. Older versions of Python may
+TEASER is currently tested against Python 3.7 up to 3.12. Older versions of Python may
 still work, but are no longer actively supported.
 Using a Python distribution is recommended as they already contain (or easily
 support installation of) many Python packages (e.g. SciPy, NumPy, pip, PyQT,
