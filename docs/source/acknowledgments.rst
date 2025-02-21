@@ -9,5 +9,11 @@ The following people have directly contributed to the implementation of TEASER:
  - Yasin Goerguelue
  - Christoph Gingter
  - Peter Remmen
+ - David Jansen
+ - Larissa Kühn
+ - Fabian Wüllhorst
+ - Jonatan Höpp
+ - Jonas Reuter-Schniete
+ - Hendrick van der Stok
 
 Special thanks goes to Gregor Hillebrand, who created the basis of TEASER (Retrofit Matrix).
