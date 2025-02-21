@@ -1,10 +1,11 @@
-![E.ON EBC RWTH Aachen University](docs/source/_static/EBC_Logo.png)
+![E.ON EBC RWTH Aachen University](https://raw.githubusercontent.com/RWTH-EBC/TEASER/main/docs/source/_static/EBC_Logo.png)
 
 # TEASER - Tool for Energy Analysis and Simulation for Efficient Retrofit
 
+[![documentation](https://rwth-ebc.github.io/TEASER/main/docs/doc.svg)](https://rwth-ebc.github.io/TEASER/main/docs/index.html)
+[![coverage](https://rwth-ebc.github.io/TEASER/main/coverage/badge.svg)](https://rwth-ebc.github.io/TEASER/main/coverage)
+[![Build Status](https://rwth-ebc.github.io/TEASER/main/build/build.svg)](https://rwth-ebc.github.io/TEASER/main/build/build.svg)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
-[![Coverage Status](https://coveralls.io/repos/github/RWTH-EBC/TEASER/badge.svg)](https://coveralls.io/github/RWTH-EBC/TEASER)
-[![Build Status](https://travis-ci.org/RWTH-EBC/TEASER.svg?branch=main)](https://travis-ci.org/RWTH-EBC/TEASER.svg?branch=main)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks)
 
 TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit) allows
