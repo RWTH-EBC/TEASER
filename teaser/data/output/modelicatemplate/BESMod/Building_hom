@@ -1,0 +1,68 @@
+<%namespace file="/modelica_language/" import="get_true_false"/>
+<%namespace file="/conversion/" import="deg_to_rad, azmiut_conv"/>
+within ${bldg.parent.name}.${bldg.name};
+model ${bldg.name}_HOM
+  extends BESMod.Systems.Demand.Building.AixLibHigherOrder(
+    redeclare replaceable parameter
+      ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase.Walls.${zone.parent.name}_wallTypes,
+      redeclare model WindowModel =
+          AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple,
+      redeclare ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase.Walls.${zone.parent.name}_windowSimple Type_Win,
+      redeclare model CorrSolarGainWin =
+          AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
+      redeclare BESMod.Systems.Demand.Building.Components.AixLibHighOrderOFD
+      HOMBuiEnv(wholeHouseBuildingEnvelope(
+        groundFloor_Building(
+            Hobby(withWindow1=true, windowarea_OW1=${}),
+            WC_Storage(withDoor2=false),
+            Corridor(withDoor1=false, withWindow1=true, windowarea_OW1=${}),
+            room_width=${},
+            room_height=${height_of_floors},
+            length1=${},
+            length2=${},
+            length3=${},
+            length4=${},
+            thickness_IWsimple=${},
+            windowarea_11=${},
+            windowarea_12=${},
+            windowarea_22=${},
+            windowarea_41=${},
+            windowarea_51=${},
+            windowarea_52=${}),
+        upperFloor_Building(
+            Bedroom(withWindow3=false),
+            Children1(withWindow3=false),
+            Children2(withWindow3=false),
+            room_width_long=${},
+            room_width_short=${},
+            room_height_long=${height_of_floors},
+            room_height_short=${},
+            roof_width=${},
+            length5=${},
+            length6=${},
+            length7=${},
+            length8=${},
+            thickness_IWsimple=${},
+            windowarea_62=${},
+            windowarea_72=${},
+            windowarea_92=${},
+            windowarea_102=${}),
+        attic_2Ro_5Rooms(
+            length=${},
+            width=${},
+            roof_width1=${},
+            roof_width2=${},
+            room1_length=${},
+            room2_length=${},
+            room3_length=${},
+            room4_length=${},
+            room5_length=${},
+            room1_width=${},
+            room2_width=${},
+            room3_width=${},
+            room4_width=${},
+            room5_width=${},
+            alfa=${deg_to_rad(alfa_grad)}))
+      )
+  );
+end $bldg.name}_HOM;

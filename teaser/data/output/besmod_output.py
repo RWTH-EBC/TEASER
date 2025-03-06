@@ -5,6 +5,8 @@ import warnings
 from typing import Optional, Union, List, Dict
 from mako.template import Template
 from mako.lookup import TemplateLookup
+from numpy.ma.core import true_divide
+
 import teaser.logic.utilities as utilities
 import teaser.data.output.modelica_output as modelica_output
 from teaser.logic.buildingobjects.building import Building
@@ -146,6 +148,17 @@ def export_besmod(
     building_template = Template(
         filename=os.path.join(template_path, "BESMod/Building"),
         lookup=lookup)
+    single_wall_template = Template(
+        filename=os.path.join(template_path, "BESMod/single_wall_record"),
+        lookup=lookup)
+    multi_inner_wall_template = Template(
+        filename=os.path.join(template_path, "BESMod/multi_inner_wall_record"),
+        lookup=lookup)
+    window_simple_template = Template(
+        filename=os.path.join(template_path, "BESMod/window_simple_record"),
+        lookup=lookup)
+    wall_types = ['OW', 'roof', 'IW_vert_half', 'IW_hori_half', 'ground_floor_loHalf', 'ground_floor_upHalf',
+                  'IW_hori_att_half0']
 
     uses = [
         'Modelica(version="' + prj.modelica_info.version + '")',
@@ -238,6 +251,8 @@ def export_besmod(
             extra=bldg_package)
 
         zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
+        wall_path = os.path.join(zone_path, "Walls")
+        utilities.create_path(wall_path)
 
         for zone in bldg.thermal_zones:
             zone.use_conditions.with_heating = False
@@ -250,6 +265,26 @@ def export_besmod(
                     raise NotImplementedError("BESMod export is only implemented for four elements.")
                 out_file.close()
 
+            for wall_type in wall_types:
+                write_wall_record(wall_path=wall_path,
+                                  wall_type=wall_type,
+                                  zone=zone,
+                                  single_wall_template=single_wall_template,
+                                  bldg=bldg)
+
+            with open(os.path.join(
+                    wall_path,
+                    bldg.name + '_wallTypes.mo'), 'w') as out_file:
+                out_file.write(multi_inner_wall_template.render_unicode(zone=zone))
+                out_file.close()
+            with open(os.path.join(
+                    wall_path,
+                    bldg.name + '_windowSimple.mo'), 'w') as out_file:
+                out_file.write(window_simple_template.render_unicode(zone=zone,
+                                                                     Uw=zone.windows[0].u_value,
+                                                                     g=zone.windows[0].g_value))
+                out_file.close()
+
         modelica_output.create_package(
             path=zone_path,
             name=bldg.name + '_DataBase',
@@ -257,7 +292,17 @@ def export_besmod(
         modelica_output.create_package_order(
             path=zone_path,
             package_list=bldg.thermal_zones,
-            addition=bldg.name + "_")
+            addition=bldg.name + "_",
+            extra=["Walls"])
+
+        modelica_output.create_package(
+            path=wall_path,
+            name='Walls',
+            within=prj.name + '.' + bldg.name + '.' + bldg.name + '_DataBase')
+        modelica_output.create_package_order(
+            path=wall_path,
+            package_list=[],
+            extra=[bldg.name + "_"+ w for w in ['windowSimple','wallTypes']+wall_types])
 
     print("Exports can be found here:")
     print(path)
@@ -472,3 +517,91 @@ def _help_example_script(bldg, dir_dymola, test_script_template, example):
             bldg=bldg
         ))
         out_file.close()
+
+
+def write_wall_record(wall_path, wall_type, zone, single_wall_template, bldg):
+    half = False
+    if wall_type == 'OW':
+        layers = zone.outer_walls[0].layer
+        n = len(layers)
+        first_layer = 0
+        last_layer = n
+    elif wall_type == 'roof':
+        layers = zone.rooftops[0].layer
+        n = len(layers)
+        first_layer = 0
+        last_layer = n
+    elif wall_type == 'IW_vert_half':
+        layers = zone.inner_walls[0].layer
+        n = len(layers)
+        quotient, remainder = divmod(n, 2)
+        if remainder > 0:
+            half = True
+        first_layer = quotient
+        last_layer = n
+    elif wall_type == 'ground_floor_loHalf':
+        layers = zone.ground_floors[
+            -1].layer  # ToDo fwu-hst: If multiple ground floors for neighboring cellar or dirct solil exist for first testing the soil floor is taken
+        n = len(layers)
+        first_layer = 0
+        last_layer = 1
+    elif wall_type == 'ground_floor_upHalf':
+        layers = zone.ground_floors[-1].layer
+        n = len(layers)
+        first_layer = 1
+        last_layer = n
+    elif wall_type == 'IW_hori_half':
+        layers = zone.ceilings[0].layer
+        half = True  # ToDo fwu-hst: floors and ceiling are the same but with the layer order switched so for both the ceiling is take because ther is the first layer the concret which is the outsied in the record also this layer i take halfe becaus it corresponds to both
+        n = len(layers)
+        first_layer = 0
+        last_layer = n
+    elif wall_type == 'IW_hori_att_half0':
+        with open(os.path.join(
+                wall_path,
+                bldg.name + '_' + wall_type + '.mo'), 'w') as out_file:
+            out_file.write(
+                single_wall_template.render_unicode(zone=zone, wall_type=wall_type, d=['Modelica.Constants.eps'],
+                                                    rho=['Modelica.Constants.eps'],
+                                                    conductivity=[1], c=['Modelica.Constants.eps'], eps=1,
+                                                    n=1))
+            out_file.close()
+        return
+    else:
+        raise NotImplementedError("This wall type does not exit")
+    d = []
+    rho = []
+    conductivity = []
+    c = []
+    eps = layers[n-1].material.ir_emissivity
+    for idx, layer in enumerate(layers[first_layer:last_layer]):
+        if half and idx == 0:
+            d.append(layer.thickness / 2)
+        else:
+            d.append(layer.thickness)
+        rho.append(layer.material.density)
+        conductivity.append(layer.material.thermal_conduc)
+        c.append(layer.material.heat_capac)
+    with open(os.path.join(
+            wall_path,
+            bldg.name + '_' + wall_type + '.mo'), 'w') as out_file:
+        out_file.write(single_wall_template.render_unicode(zone=zone, wall_type=wall_type, d=d, rho=rho,
+                                                           conductivity=conductivity, c=c, eps=eps,
+                                                           n=n))
+        out_file.close()
+
+
+def calc_hom_dimensions(bldg):
+    template_kwargs = {}
+    net_leased_area = bldg.net_leased_area
+    area_gf = bldg.area_gf
+    area_rt = bldg.area_rt
+    height_of_floors = bldg.height_of_floors
+
+    bldg_width = area_gf
+
+    roof_tilt = bldg.thermal_zones[0].rooftops[0].tilt
+    alfa_grad = 180 - 2*roof_tilt
+    template_kwargs["alfa_grad"] = alfa_grad
+
+    template_kwargs["height_of_floors"] = height_of_floors

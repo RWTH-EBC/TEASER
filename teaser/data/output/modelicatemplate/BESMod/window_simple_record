@@ -1,0 +1,9 @@
+<%namespace file="/modelica_language/" import="get_true_false, get_list, min_orientations"/>
+<%namespace file="/conversion/" import="deg_to_rad, azmiut_conv"/>
+within ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase.Walls;
+record ${zone.parent.name}_windowSimple
+    extends AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(
+        Uw=${Uw},
+        frameFraction=0,
+        g=${g});
+end ${zone.parent.name}_windowSimple;
