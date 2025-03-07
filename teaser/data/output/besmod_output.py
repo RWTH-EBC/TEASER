@@ -6,6 +6,7 @@ from typing import Optional, Union, List, Dict
 from mako.template import Template
 from mako.lookup import TemplateLookup
 from numpy.ma.core import true_divide
+from math import sin, cos, tan, pi
 
 import teaser.logic.utilities as utilities
 import teaser.data.output.modelica_output as modelica_output
@@ -148,6 +149,9 @@ def export_besmod(
     building_template = Template(
         filename=os.path.join(template_path, "BESMod/Building"),
         lookup=lookup)
+    building_hom_aixlib_template = Template(
+        filename=os.path.join(template_path, "AixLib/Building_hom_aixlib_dim"),
+        lookup=lookup)
     single_wall_template = Template(
         filename=os.path.join(template_path, "BESMod/single_wall_record"),
         lookup=lookup)
@@ -195,6 +199,12 @@ def export_besmod(
         with open(os.path.join(bldg_path, bldg.name + ".mo"), 'w') as out_file:
             out_file.write(building_template.render_unicode(
                 bldg=bldg))
+            out_file.close()
+
+        hom_template_kwargs = calc_hom_dimensions_aixlib(bldg)
+        with open(os.path.join(bldg_path, bldg.name + "_HOM.mo"), 'w') as out_file:
+            out_file.write(building_hom_aixlib_template.render_unicode(
+                hom_template_kwargs))
             out_file.close()
 
         def write_example_mo(example_template, example):
@@ -605,3 +615,75 @@ def calc_hom_dimensions(bldg):
     template_kwargs["alfa_grad"] = alfa_grad
 
     template_kwargs["height_of_floors"] = height_of_floors
+
+def calc_hom_dimensions_aixlib(bldg):
+    template_kwargs = {'bldg': bldg}
+    net_leased_area = bldg.net_leased_area
+
+    bldg_width = net_leased_area/2 * (7.84/10.73)
+    bldg_length = net_leased_area/2/bldg_width
+
+    room_width = bldg_width/2
+    template_kwargs['room_width'] = room_width
+
+    l1 = bldg_length * 3.3/10.37
+    l2 = bldg_length * 2.44/10.37
+    l3 = bldg_length * 1.33/10.37
+    l4 = bldg_length * 3.3/10.37
+
+    template_kwargs["l1"] = l1
+    template_kwargs["l2"] = l2
+    template_kwargs["l3"] = l3
+    template_kwargs["l4"] = l4
+
+    thickness_iw_simple = 0.145
+    template_kwargs["thickness_iw_simple"] = thickness_iw_simple
+    room1_length = l1 + l2 + thickness_iw_simple
+    room3_length = l2 + l3
+    room5_length = l3 + l4 + thickness_iw_simple
+
+    template_kwargs["room1_length"] = room1_length
+    template_kwargs["room3_length"] = room3_length
+    template_kwargs["room5_length"] = room5_length
+
+    roof_length = bldg_length + 2*thickness_iw_simple # inner wall thicknesses load simpled?
+    template_kwargs["roof_length"] = roof_length
+
+    alfa_grad = 90
+    roof_tilt = (180 - alfa_grad)/2
+    template_kwargs["alfa_grad"] = alfa_grad
+    height_of_floors = 2.6
+    template_kwargs["height_of_floors"] = height_of_floors
+    room_height_short = 1  # here fixed
+    room_width_short = room_width - (height_of_floors-room_height_short)/tan(roof_tilt*pi/180)
+    template_kwargs["room_width_short"] = room_width_short
+    template_kwargs["room_height_short"] = room_height_short
+    wRO = (height_of_floors-room_height_short)/sin(roof_tilt*pi/180)
+    template_kwargs["wRO"] = wRO
+
+    roof_width = room_width_short + thickness_iw_simple # better to use load wall thickness could also be computed directly in modelica
+    template_kwargs["roof_width"] = roof_width
+    wROi = roof_width/2/cos(roof_tilt*pi/180)
+    template_kwargs["wROi"] = wROi
+    print(f"Complete building height: {height_of_floors*2+wROi*sin(roof_tilt*pi/180)}")
+
+    windowarea_11 = 8.44*room1_length/5.885
+    windowarea_12 = 1.73*room_width/3.92
+    windowarea_22 = 1.73*roof_width/3.92
+    windowarea_41 = 1.4*l4/3.3
+    windowarea_51 = 3.46*room5_length/4.775
+    windowarea_52 = 1.73*room_width/3.92
+
+    template_kwargs["windowarea_11"] = windowarea_11
+    template_kwargs["windowarea_12"] = windowarea_12
+    template_kwargs["windowarea_22"] = windowarea_22
+    template_kwargs["windowarea_41"] = windowarea_41
+    template_kwargs["windowarea_51"] = windowarea_51
+    template_kwargs["windowarea_52"] = windowarea_52
+
+    windowarea_i_up_roof = 1.73*room_width_short/2.28
+    windowarea_i_up_wall = 1.73*bldg_length/10.37
+    template_kwargs["windowarea_i_up_roof"] = windowarea_i_up_roof
+    template_kwargs["windowarea_i_up_wall"] = windowarea_i_up_wall
+
+    return template_kwargs
