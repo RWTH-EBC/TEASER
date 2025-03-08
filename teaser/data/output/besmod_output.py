@@ -1,5 +1,5 @@
 """This module contains function for BESMod model generation"""
-
+import math
 import os
 import warnings
 from typing import Optional, Union, List, Dict
@@ -150,7 +150,7 @@ def export_besmod(
         filename=os.path.join(template_path, "BESMod/Building"),
         lookup=lookup)
     building_hom_aixlib_template = Template(
-        filename=os.path.join(template_path, "AixLib/Building_hom_aixlib_dim"),
+        filename=os.path.join(template_path, "BESMod/Building_hom_aixlib_dim"),
         lookup=lookup)
     single_wall_template = Template(
         filename=os.path.join(template_path, "BESMod/single_wall_record"),
@@ -204,7 +204,9 @@ def export_besmod(
         hom_template_kwargs = calc_hom_dimensions_aixlib(bldg)
         with open(os.path.join(bldg_path, bldg.name + "_HOM.mo"), 'w') as out_file:
             out_file.write(building_hom_aixlib_template.render_unicode(
-                hom_template_kwargs))
+                bldg=bldg,
+                zone=bldg.thermal_zones[0],
+                **hom_template_kwargs))
             out_file.close()
 
         def write_example_mo(example_template, example):
@@ -258,7 +260,7 @@ def export_besmod(
         modelica_output.create_package_order(
             path=bldg_path,
             package_list=[bldg],
-            extra=bldg_package)
+            extra=[bldg.name+"_HOM"]+bldg_package)
 
         zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
         wall_path = os.path.join(zone_path, "Walls")
@@ -571,9 +573,9 @@ def write_wall_record(wall_path, wall_type, zone, single_wall_template, bldg):
                 wall_path,
                 bldg.name + '_' + wall_type + '.mo'), 'w') as out_file:
             out_file.write(
-                single_wall_template.render_unicode(zone=zone, wall_type=wall_type, d=['Modelica.Constants.eps'],
-                                                    rho=['Modelica.Constants.eps'],
-                                                    conductivity=[1], c=['Modelica.Constants.eps'], eps=1,
+                single_wall_template.render_unicode(zone=zone, wall_type=wall_type, d=[0.000001],
+                                                    rho=[0.000001],
+                                                    conductivity=[1], c=[0.000001], eps=1,
                                                     n=1))
             out_file.close()
         return
@@ -597,7 +599,7 @@ def write_wall_record(wall_path, wall_type, zone, single_wall_template, bldg):
             bldg.name + '_' + wall_type + '.mo'), 'w') as out_file:
         out_file.write(single_wall_template.render_unicode(zone=zone, wall_type=wall_type, d=d, rho=rho,
                                                            conductivity=conductivity, c=c, eps=eps,
-                                                           n=n))
+                                                           n=len(d)))
         out_file.close()
 
 
@@ -617,10 +619,10 @@ def calc_hom_dimensions(bldg):
     template_kwargs["height_of_floors"] = height_of_floors
 
 def calc_hom_dimensions_aixlib(bldg):
-    template_kwargs = {'bldg': bldg}
+    template_kwargs = {}
     net_leased_area = bldg.net_leased_area
 
-    bldg_width = net_leased_area/2 * (7.84/10.73)
+    bldg_width = math.sqrt(net_leased_area/2 * (7.84/10.73))
     bldg_length = net_leased_area/2/bldg_width
 
     room_width = bldg_width/2

@@ -2,15 +2,15 @@
 <%namespace file="/conversion/" import="deg_to_rad, azmiut_conv"/>
 within ${bldg.parent.name}.${bldg.name};
 model ${bldg.name}_HOM
-  extends BESMod.Systems.Demand.Building.AixLibHigherOrder(
+  extends BESMod.Systems.Demand.Building.AixLibHighOrder(
     redeclare replaceable parameter
-      ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase.Walls.${zone.parent.name}_wallTypes,
-      redeclare model WindowModel =
-          AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple,
-      redeclare ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase.Walls.${zone.parent.name}_windowSimple Type_Win,
-      redeclare model CorrSolarGainWin =
-          AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
-      redeclare BESMod.Systems.Demand.Building.Components.AixLibHighOrderOFD
+      ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase.Walls.${zone.parent.name}_wallTypes wallTypes,
+    redeclare model WindowModel =
+       AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple,
+    redeclare ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase.Walls.${zone.parent.name}_windowSimple Type_Win,
+    redeclare model CorrSolarGainWin =
+       AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
+    redeclare BESMod.Systems.Demand.Building.Components.AixLibHighOrderOFD
       HOMBuiEnv(wholeHouseBuildingEnvelope(
         groundFloor_Building(
             room_width=${room_width},
