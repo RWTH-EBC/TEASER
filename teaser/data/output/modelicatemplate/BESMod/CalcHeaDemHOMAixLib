@@ -1,0 +1,35 @@
+model CalcHeaDemHOMAixLib_${bldg.name}
+  "Calculate the heat demand for a high order model from AixLib library"
+  extends Modelica.Icons.Example;
+
+  extends BESMod.Systems.Demand.Building.HeatDemand.PartialCalcHeatingDemand(
+    redeclare BESMod.Systems.UserProfiles.AixLibHighOrderProfiles heaDemSce(
+      redeclare AixLib.DataBase.Profiles.Ventilation2perDayMean05perH venPro,
+      redeclare AixLib.DataBase.Profiles.SetTemperaturesVentilation2perDay
+        TSetProfile,
+      gain=0),
+    TN_heater=1,
+    KR_heater=10000,
+    h_heater=fill(100000, building.nZones),
+    redeclare BESMod.Examples.HighOrderModel.HOMSystem systemParameters(
+      TOda_nominal=${TOda_nominal},
+      TSetZone_nominal(each displayUnit="K") = {293.15,293.15,288.15,293.15,
+        293.15,293.15,293.15,288.15,297.15,293.15},
+      THydSup_nominal=fill(273.15 + 55, building.nZones),
+      filNamWea=Modelica.Utilities.Files.loadResource("modelica://${bldg.parent.name}/Resources/${bldg.parent.weather_file_name}")),
+    redeclare ${bldg.name}_HOM building(
+      useConstVentRate=true,
+      ventRate={0.5,0.5,0,0.5,0.5,0.5,0.5,0,0.5,0.5},
+      GroundReflectance=0.2,
+      T0_air=293.15,
+      TWalls_start=292.15,
+      use_sunblind=false,
+      use_infiltEN12831=true,
+      TOda_nominal=${TOda_nominal}),
+    heaterCooler(each Heater_on=true));
+
+  annotation (experiment(
+      StopTime=25920000,
+      Interval=3600,
+      __Dymola_Algorithm="Dassl"));
+end CalcHeaDemHOMAixLib_${bldg.name};

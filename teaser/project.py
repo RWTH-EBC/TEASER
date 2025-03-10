@@ -773,6 +773,7 @@ class Project(object):
             THydSupOld_design: Optional[Union[float, Dict[str, float]]] = None,
             custom_examples: Optional[Dict[str, str]] = None,
             custom_script: Optional[Dict[str, str]] = None,
+            export_hom: Optional[bool] = False,
             report: bool = False
     ) -> str:
         """Exports buildings for BESMod simulation
@@ -828,7 +829,7 @@ class Project(object):
             besmod_output.export_besmod(
                 buildings=self.buildings, prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
                 QBuiOld_flow_design=QBuiOld_flow_design, THydSupOld_design=THydSupOld_design,
-                custom_examples=custom_examples, custom_script=custom_script
+                custom_examples=custom_examples, custom_script=custom_script, export_hom=export_hom
             )
         else:
             for bldg in self.buildings:
@@ -836,7 +837,7 @@ class Project(object):
                     besmod_output.export_besmod(
                         buildings=[bldg], prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
                         QBuiOld_flow_design=QBuiOld_flow_design, THydSupOld_design=THydSupOld_design,
-                        custom_examples=custom_examples, custom_script=custom_script
+                        custom_examples=custom_examples, custom_script=custom_script, export_hom=export_hom
                     )
 
         if report:

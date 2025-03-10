@@ -22,7 +22,8 @@ def export_besmod(
         QBuiOld_flow_design: Optional[Dict[str, Dict[str, float]]] = None,
         THydSupOld_design: Optional[Union[float, Dict[str, float]]] = None,
         custom_examples: Optional[Dict[str, str]] = None,
-        custom_script: Optional[Dict[str, str]] = None
+        custom_script: Optional[Dict[str, str]] = None,
+        export_hom: Optional[bool] = False,
 ) -> None:
     """
     Export building models for BESMod simulations.
@@ -149,6 +150,7 @@ def export_besmod(
     building_template = Template(
         filename=os.path.join(template_path, "BESMod/Building"),
         lookup=lookup)
+
     building_hom_aixlib_template = Template(
         filename=os.path.join(template_path, "BESMod/Building_hom_aixlib_dim"),
         lookup=lookup)
@@ -163,6 +165,9 @@ def export_besmod(
         lookup=lookup)
     wall_types = ['OW', 'roof', 'IW_vert_half', 'IW_hori_half', 'ground_floor_loHalf', 'ground_floor_upHalf',
                   'IW_hori_att_half0']
+    calc_hea_dem_hom = Template(
+        filename=os.path.join(template_path, "BESMod/CalcHeaDemHOMAixLib"),
+        lookup=lookup)
 
     uses = [
         'Modelica(version="' + prj.modelica_info.version + '")',
@@ -200,14 +205,19 @@ def export_besmod(
             out_file.write(building_template.render_unicode(
                 bldg=bldg))
             out_file.close()
-
-        hom_template_kwargs = calc_hom_dimensions_aixlib(bldg)
-        with open(os.path.join(bldg_path, bldg.name + "_HOM.mo"), 'w') as out_file:
-            out_file.write(building_hom_aixlib_template.render_unicode(
-                bldg=bldg,
-                zone=bldg.thermal_zones[0],
-                **hom_template_kwargs))
-            out_file.close()
+        if export_hom:
+            hom_template_kwargs = calc_hom_dimensions_aixlib(bldg)
+            with open(os.path.join(bldg_path, bldg.name + "_HOM.mo"), 'w') as out_file:
+                out_file.write(building_hom_aixlib_template.render_unicode(
+                    bldg=bldg,
+                    zone=bldg.thermal_zones[0],
+                    **hom_template_kwargs))
+                out_file.close()
+            with open(os.path.join(bldg_path, "CalcHeaDemHOMAixLib_" + bldg.name + ".mo"), 'w') as out_file:
+                out_file.write(calc_hea_dem_hom.render_unicode(
+                    bldg=bldg,
+                    TOda_nominal=bldg.thermal_zones[0].t_outside))
+                out_file.close()
 
         def write_example_mo(example_template, example):
             with open(os.path.join(bldg_path, example + bldg.name + ".mo"),
@@ -242,6 +252,11 @@ def export_besmod(
             _help_example_script(bldg, dir_dymola, example_sim_plot_script, exp)
             write_example_mo(exp_template, exp)
         bldg_package = [exp + bldg.name for exp in examples]
+
+        if export_hom:
+            bldg_package.append("CalcHeaDemHOMAixLib_" + bldg.name)
+            bldg_package.append(bldg.name+"_HOM")
+
         if custom_examples:
             for exp, c_path in custom_examples.items():
                 bldg_package.append(exp + bldg.name)
@@ -260,11 +275,12 @@ def export_besmod(
         modelica_output.create_package_order(
             path=bldg_path,
             package_list=[bldg],
-            extra=[bldg.name+"_HOM"]+bldg_package)
+            extra=bldg_package)
 
         zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
-        wall_path = os.path.join(zone_path, "Walls")
-        utilities.create_path(wall_path)
+        if export_hom:
+            wall_path = os.path.join(zone_path, "Walls")
+            utilities.create_path(wall_path)
 
         for zone in bldg.thermal_zones:
             zone.use_conditions.with_heating = False
@@ -277,25 +293,39 @@ def export_besmod(
                     raise NotImplementedError("BESMod export is only implemented for four elements.")
                 out_file.close()
 
-            for wall_type in wall_types:
-                write_wall_record(wall_path=wall_path,
-                                  wall_type=wall_type,
-                                  zone=zone,
-                                  single_wall_template=single_wall_template,
-                                  bldg=bldg)
+            if export_hom:
+                for wall_type in wall_types:
+                    write_wall_record(wall_path=wall_path,
+                                      wall_type=wall_type,
+                                      zone=zone,
+                                      single_wall_template=single_wall_template,
+                                      bldg=bldg)
 
-            with open(os.path.join(
-                    wall_path,
-                    bldg.name + '_wallTypes.mo'), 'w') as out_file:
-                out_file.write(multi_inner_wall_template.render_unicode(zone=zone))
-                out_file.close()
-            with open(os.path.join(
-                    wall_path,
-                    bldg.name + '_windowSimple.mo'), 'w') as out_file:
-                out_file.write(window_simple_template.render_unicode(zone=zone,
-                                                                     Uw=zone.windows[0].u_value,
-                                                                     g=zone.windows[0].g_value))
-                out_file.close()
+                with open(os.path.join(
+                        wall_path,
+                        bldg.name + '_wallTypes.mo'), 'w') as out_file:
+                    out_file.write(multi_inner_wall_template.render_unicode(zone=zone))
+                    out_file.close()
+                with open(os.path.join(
+                        wall_path,
+                        bldg.name + '_windowSimple.mo'), 'w') as out_file:
+                    out_file.write(window_simple_template.render_unicode(zone=zone,
+                                                                         Uw=zone.windows[0].u_value,
+                                                                         g=zone.windows[0].g_value))
+                    out_file.close()
+
+        if export_hom:
+            modelica_output.create_package(
+                path=wall_path,
+                name='Walls',
+                within=prj.name + '.' + bldg.name + '.' + bldg.name + '_DataBase')
+            modelica_output.create_package_order(
+                path=wall_path,
+                package_list=[],
+                extra=[bldg.name + "_"+ w for w in ['windowSimple','wallTypes']+wall_types])
+            extra_data_base_package = ["Walls"]
+        else:
+            extra_data_base_package = None
 
         modelica_output.create_package(
             path=zone_path,
@@ -305,16 +335,7 @@ def export_besmod(
             path=zone_path,
             package_list=bldg.thermal_zones,
             addition=bldg.name + "_",
-            extra=["Walls"])
-
-        modelica_output.create_package(
-            path=wall_path,
-            name='Walls',
-            within=prj.name + '.' + bldg.name + '.' + bldg.name + '_DataBase')
-        modelica_output.create_package_order(
-            path=wall_path,
-            package_list=[],
-            extra=[bldg.name + "_"+ w for w in ['windowSimple','wallTypes']+wall_types])
+            extra=extra_data_base_package)
 
     print("Exports can be found here:")
     print(path)
@@ -620,6 +641,16 @@ def calc_hom_dimensions(bldg):
 
 def calc_hom_dimensions_aixlib(bldg):
     template_kwargs = {}
+    if bldg.year_of_construction < 1995:
+        tir = 4
+    elif 2002 > bldg.year_of_construction >= 1995:
+        tir = 3
+    elif 2009 > bldg.year_of_construction >= 2002:
+        tir = 2
+    else:
+        tir = 1
+    template_kwargs["tir"] = tir
+
     net_leased_area = bldg.net_leased_area
 
     bldg_width = math.sqrt(net_leased_area/2 * (7.84/10.73))
