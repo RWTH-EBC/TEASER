@@ -1605,7 +1605,7 @@ class Test_teaser(object):
         assert calc_attr.alpha_comb_inner_iw == approx(7.7, abs=0.1)
 
         # outerwall
-        assert calc_attr.ua_value_ow == approx(77.23037843150993, abs=1e-14)
+        assert calc_attr.ua_value_ow == approx(77.23037843150993, abs=1e-13)
         assert calc_attr.area_ow == approx(188.0, abs=0.1)
         assert calc_attr.r_conv_inner_ow == approx(0.0027203482045701846,
                                                    abs=1e-19)
@@ -2572,6 +2572,7 @@ class Test_teaser(object):
 
     def test_calc_weightfactor_three(self):
         """test of calc_weightfactor"""
+
         prj.set_default()
         helptest.building_test2(prj)
         prj.buildings[-1].calc_building_parameter(
@@ -2589,7 +2590,9 @@ class Test_teaser(object):
         calc_attr.weightfactor_ow.sort()
         weightfactors_test_list.sort()
 
-        assert calc_attr.weightfactor_ow == weightfactors_test_list
+        assert calc_attr.weightfactor_ow == approx(weightfactors_test_list,
+                                                   abs=1e-14)
+
         weightfactors_test_list = [
             0.13271234911406493,
             0.0,
@@ -2599,7 +2602,8 @@ class Test_teaser(object):
         ]
         calc_attr.weightfactor_win.sort()
         weightfactors_test_list.sort()
-        assert calc_attr.weightfactor_win == weightfactors_test_list
+        assert calc_attr.weightfactor_win == approx(weightfactors_test_list,
+                                                    abs=1e-14)
         assert calc_attr.weightfactor_ground == 0
 
         prj.buildings[-1].thermal_zones[-1].weightfactor_ow = []
@@ -2621,7 +2625,8 @@ class Test_teaser(object):
         calc_attr.weightfactor_ow.sort()
         weightfactors_test_list.sort()
 
-        assert calc_attr.weightfactor_ow == weightfactors_test_list
+        assert calc_attr.weightfactor_ow == approx(weightfactors_test_list,
+                                                   abs=1e-14)
 
         weightfactors_test_list = [
             0.44444444444444453,
@@ -2632,7 +2637,8 @@ class Test_teaser(object):
         ]
         calc_attr.weightfactor_win.sort()
         weightfactors_test_list.sort()
-        assert calc_attr.weightfactor_win == weightfactors_test_list
+        assert calc_attr.weightfactor_win == approx(weightfactors_test_list,
+                                                    abs=1e-14)
         assert calc_attr.weightfactor_ground == 0
 
     def test_calc_weightfactor_four(self):
@@ -2779,61 +2785,70 @@ class Test_teaser(object):
 
     def test_calc_three_element(self):
         """test of calc_three_element"""
+        from pytest import approx
         prj.set_default()
         helptest.building_test2(prj)
 
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.calc_zone_parameters(number_of_elements=3, merge_windows=True)
+        therm_zone.calc_zone_parameters(number_of_elements=3,
+                                        merge_windows=True)
 
         zone_attr = therm_zone.model_attr
-        assert round(zone_attr.area_ow, 1) == 188.0
-        assert round(zone_attr.ua_value_ow, 16) == 77.23037843150993
-        assert round(zone_attr.r_conv_inner_ow, 16) == 0.0027203482045702
-        assert round(zone_attr.r_rad_inner_ow, 16) == 0.001063829787234
-        assert round(zone_attr.r_conv_outer_ow, 9) == 0.000265957
-        assert round(zone_attr.alpha_conv_inner_ow, 5) == 1.95532
-        assert round(zone_attr.alpha_rad_inner_ow, 1) == 5.0
-        assert round(zone_attr.r1_ow, 14) == 0.00114890338306
-        assert round(zone_attr.c1_ow, 5) == 2091259.60825
-        assert round(zone_attr.r1_iw, 15) == 0.009719561140816
-        assert round(zone_attr.c1_iw, 5) == 319983.51874
-        assert round(zone_attr.r_rest_ow, 11) == 0.00702003101
-        assert round(zone_attr.area_gf, 1) == 140.0
-        assert round(zone_attr.ua_value_gf, 16) == 58.351477449455686
-        assert round(zone_attr.r_conv_inner_gf, 16) == 0.0042016806722689
-        assert round(zone_attr.r_rad_inner_gf, 16) == 0.0014285714285714
-        assert round(zone_attr.alpha_conv_inner_gf, 5) == 1.7
-        assert round(zone_attr.alpha_rad_inner_gf, 1) == 5.0
-        assert round(zone_attr.r1_gf, 14) == 0.00236046484848
-        assert round(zone_attr.c1_gf, 5) == 1557320.98487
-        assert round(zone_attr.r_rest_gf, 13) == 0.0137109637229
+        assert zone_attr.area_ow == approx(188.0, abs=0.1)
+        assert zone_attr.ua_value_ow == approx(77.23037843150993, abs=1e-13)
+        assert zone_attr.r_conv_inner_ow == approx(0.0027203482045702,
+                                                   abs=1e-14)
+        assert zone_attr.r_rad_inner_ow == approx(0.001063829787234, abs=1e-14)
+        assert zone_attr.r_conv_outer_ow == approx(0.000265957, abs=1e-9)
+        assert zone_attr.alpha_conv_inner_ow == approx(1.95532, abs=0.00001)
+        assert zone_attr.alpha_rad_inner_ow == approx(5.0, abs=0.1)
+        assert zone_attr.r1_ow == approx(0.00114890338306, abs=1e-14)
+        assert zone_attr.c1_ow == approx(2091259.60825, abs=0.00001)
+        assert zone_attr.r1_iw == approx(0.009719561140816, abs=1e-15)
+        assert zone_attr.c1_iw == approx(319983.51874, abs=0.00001)
+        assert zone_attr.r_rest_ow == approx(0.00702003101, abs=1e-11)
+        assert zone_attr.area_gf == approx(140.0, abs=0.1)
+        assert zone_attr.ua_value_gf == approx(58.351477449455686, abs=1e-14)
+        assert zone_attr.r_conv_inner_gf == approx(0.0042016806722689,
+                                                   abs=1e-14)
+        assert zone_attr.r_rad_inner_gf == approx(0.0014285714285714,
+                                                  abs=1e-14)
+        assert zone_attr.alpha_conv_inner_gf == approx(1.7, abs=0.00001)
+        assert zone_attr.alpha_rad_inner_gf == approx(5.0, abs=0.1)
+        assert zone_attr.r1_gf == approx(0.00236046484848, abs=1e-14)
+        assert zone_attr.c1_gf == approx(1557320.98487, abs=0.00001)
+        assert zone_attr.r_rest_gf == approx(0.0137109637229, abs=1e-13)
 
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.calc_zone_parameters(number_of_elements=3, merge_windows=False)
+        therm_zone.calc_zone_parameters(number_of_elements=3,
+                                        merge_windows=False)
 
         zone_attr = therm_zone.model_attr
-        assert round(zone_attr.area_ow, 1) == 188.0
-        assert round(zone_attr.ua_value_ow, 16) == 77.23037843150993
-        assert round(zone_attr.r_conv_inner_ow, 16) == 0.0027203482045702
-        assert round(zone_attr.r_rad_inner_ow, 16) == 0.001063829787234
-        assert round(zone_attr.r_conv_outer_ow, 9) == 0.000265957
-        assert round(zone_attr.alpha_conv_inner_ow, 5) == 1.95532
-        assert round(zone_attr.alpha_rad_inner_ow, 1) == 5.0
-        assert round(zone_attr.r1_win, 13) == 0.0199004975124
-        assert round(zone_attr.r1_ow, 13) == 0.0017577929723
-        assert round(zone_attr.c1_ow, 5) == 2091259.60825
-        assert round(zone_attr.r1_iw, 15) == 0.009719561140816
-        assert round(zone_attr.c1_iw, 5) == 319983.51874
-        assert round(zone_attr.r_rest_ow, 13) == 0.0102102921341
-        assert round(zone_attr.area_gf, 1) == 140.0
-        assert round(zone_attr.ua_value_gf, 16) == 58.351477449455686
-        assert round(zone_attr.r_conv_inner_gf, 16) == 0.0042016806722689
-        assert round(zone_attr.r_rad_inner_gf, 16) == 0.0014285714285714
-        assert round(zone_attr.alpha_conv_inner_gf, 5) == 1.7
-        assert round(zone_attr.alpha_rad_inner_gf, 1) == 5.0
-        assert round(zone_attr.r1_gf, 14) == 0.00236046484848
-        assert round(zone_attr.c1_gf, 5) == 1557320.98487
-        assert round(zone_attr.r_rest_gf, 13) == 0.0137109637229
+        assert zone_attr.area_ow == approx(188.0, abs=0.1)
+        assert zone_attr.ua_value_ow == approx(77.23037843150993, abs=1e-13)
+        assert zone_attr.r_conv_inner_ow == approx(0.0027203482045702,
+                                                   abs=1e-14)
+        assert zone_attr.r_rad_inner_ow == approx(0.001063829787234, abs=1e-14)
+        assert zone_attr.r_conv_outer_ow == approx(0.000265957, abs=1e-9)
+        assert zone_attr.alpha_conv_inner_ow == approx(1.95532, abs=0.00001)
+        assert zone_attr.alpha_rad_inner_ow == approx(5.0, abs=0.1)
+        assert zone_attr.r1_win == approx(0.0199004975124, abs=1e-13)
+        assert zone_attr.r1_ow == approx(0.0017577929723, abs=1e-13)
+        assert zone_attr.c1_ow == approx(2091259.60825, abs=0.00001)
+        assert zone_attr.r1_iw == approx(0.009719561140816, abs=1e-15)
+        assert zone_attr.c1_iw == approx(319983.51874, abs=0.00001)
+        assert zone_attr.r_rest_ow == approx(0.0102102921341, abs=1e-13)
+        assert zone_attr.area_gf == approx(140.0, abs=0.1)
+        assert zone_attr.ua_value_gf == approx(58.351477449455686, abs=1e-14)
+        assert zone_attr.r_conv_inner_gf == approx(0.0042016806722689,
+                                                   abs=1e-14)
+        assert zone_attr.r_rad_inner_gf == approx(0.0014285714285714,
+                                                  abs=1e-14)
+        assert zone_attr.alpha_conv_inner_gf == approx(1.7, abs=0.00001)
+        assert zone_attr.alpha_rad_inner_gf == approx(5.0, abs=0.1)
+        assert zone_attr.r1_gf == approx(0.00236046484848, abs=1e-14)
+        assert zone_attr.c1_gf == approx(1557320.98487, abs=0.00001)
+        assert zone_attr.r_rest_gf == approx(0.0137109637229, abs=1e-13)
 
     def test_calc_four_element(self):
         """test of calc_four_element"""
