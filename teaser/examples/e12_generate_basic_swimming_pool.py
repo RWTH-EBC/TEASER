@@ -60,7 +60,7 @@ def generate_basic_swimmingPool():
         geometry_data='swimming_facility',
         name=building_name,
         year_of_construction=year_of_construction,
-        number_of_floors=2,
+        number_of_floors=2,   # todo: werden die überhaupt benutz?
         height_of_floors=3.5,
         net_leased_area=water_area,
         with_ahu=True,
@@ -102,6 +102,12 @@ def generate_basic_swimmingPool():
     # run calc_all_buildings() function
     
     prj.calc_all_buildings()
+
+    # scale heater of all zones to ensure enough power
+    for bld in prj.buildings:
+        for zone in bld.thermal_zones:
+            zone.model_attr.heat_load *= 100
+
 
     # To export the ready-to-run models simply call Project.export_aixlib().
     # You can specify the path, where the model files should be saved.

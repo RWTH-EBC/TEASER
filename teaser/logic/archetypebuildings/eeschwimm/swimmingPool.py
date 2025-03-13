@@ -328,17 +328,19 @@ class SwimmingFacility(NonResidential):
         self.opening_hours = [0.0] * 7 + [1.0] * 5 + [0.5] + [1.0] * 9 + [0.0] * 3
         
 
-
         if self.with_ahu is True:
-            self.central_ahu.temperature_profile = (
-                  #  7 * [293.15] + 12 * [295.15] + 6 * [293.15]
-                  24 * [303.15])
-            self.central_ahu.min_relative_humidity_profile = 24 * [0.0]  #
-            self.central_ahu.max_relative_humidity_profile = 24 * [1.0]
+            self.central_ahu.temperature_profile = (24 * [303.15])
+            # Set humidity profile for central AHU (only relevant for swimming hall)
+            # According to VDI 2089 rel humidity between 40 and 64 %
+            rel_hum_swimming_hall_max_day = 0.47  # Relative humidity at 30 °C and  0.0143 kg/kg to ensure comfort
+            rel_hum_swimming_hall_max_night = 0.64  # Relative humidity to ensure building protection
+            rel_hum_swimming_hall_min = 0.4
 
-            # AHU v_flow_profile
-            self.central_ahu.v_flow_profile = (
-               7 * [1.0] + 15 * [1.0] + 2 * [1.0])
+            self.central_ahu.min_relative_humidity_profile = (24 * [rel_hum_swimming_hall_min])
+            self.central_ahu.max_relative_humidity_profile = (7 * [rel_hum_swimming_hall_max_night]
+                                                              + 15 * [rel_hum_swimming_hall_max_day]
+                                                              + 2 * [rel_hum_swimming_hall_max_night])
+            # v_flow_profile set according to integrated pools
 
 
     def generate_archetype(self):
@@ -366,7 +368,6 @@ class SwimmingFacility(NonResidential):
 
             # final use conditions for  swimming facility not defined, therefore temperatures are set manually
             # Todo: Correct, when norm is final
-            zone.use_conditions.with_ahu = True
             zone.use_conditions.heating_profile = self.zone_area_factors[key][5]
             zone.use_conditions._heating_profile = [self.zone_area_factors[key][5]] * 25
 
@@ -522,7 +523,6 @@ class SwimmingFacility(NonResidential):
                     
         # Overwrite wall and window areas for swimming pool   
         # North
-        self.thermal_zones
         self.thermal_zones[0].outer_walls[0].area = \
             self.zone_area_factors["Swimming_hall"][3] * 2.2
         self.thermal_zones[0].windows[0].area = \
@@ -596,7 +596,6 @@ class SwimmingFacility(NonResidential):
         for zone in self.thermal_zones:
             zone.set_inner_wall_area()
 
-
         # Swimming hall specific calculations
         for zone in self.thermal_zones:
             if zone.name == "Swimming_hall":
@@ -632,10 +631,26 @@ class SwimmingFacility(NonResidential):
 
                 # AHU design, nominal mass flow in m3/(h*m2)  m2: area of swimming hall
                 # density: 1.225 kg/m3
-                zone.use_conditions.max_ahu = m_flow_ahu_nominal / (1.225 * zone.area)
-                zone.use_conditions.min_ahu = 0.3 * zone.use_conditions.max_ahu
+                v_flow_max = m_flow_ahu_nominal / (1.225 * zone.area)
+                v_flow_min = 0.15 * v_flow_max
+                zone.use_conditions.max_ahu = v_flow_max
+                zone.use_conditions.min_ahu = v_flow_min
+
+                # heat swimming hall via AHU instead of ideal heater
+                #zone.use_conditions.with_heating = False
+
+
+
             else:
                 zone.use_conditions.with_ahu = False
+
+
+        # AHU v_flow_profile
+        self.central_ahu.v_flow_profile = (
+                7 * [v_flow_min] + 15 * [0.3 * v_flow_max] + 2 * [v_flow_min])
+
+
+
 
 
 

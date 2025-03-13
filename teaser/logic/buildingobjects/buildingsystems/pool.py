@@ -379,7 +379,7 @@ class Pool(object):
 
         self.m_flow_evap_pool_used = -((self.beta_in_use*3600)/(R_D*aritmethic_temperature))* \
                                      (p_sat_pool_temp-p_sat_air_temp)*self.area
-        print('self.m_flow_evap_pool_used',self.m_flow_evap_pool_used)
+        #print('self.m_flow_evap_pool_used', self.m_flow_evap_pool_used)
 
         # heat recovery rinsing wastewater
         if self.use_heat_recovery is None:
