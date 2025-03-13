@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.examples.e11_generate_advanced_swimming_pool &mdash; TEASER 1.1.4 documentation</title>
+  <title>teaser.examples.e13_generate_advanced_swimming_pool &mdash; TEASER 1.1.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
@@ -66,7 +66,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">teaser.examples.e11_generate_advanced_swimming_pool</li>
+      <li class="breadcrumb-item active">teaser.examples.e13_generate_advanced_swimming_pool</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -75,7 +75,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for teaser.examples.e11_generate_advanced_swimming_pool</h1><div class="highlight"><pre>
+  <h1>Source code for teaser.examples.e13_generate_advanced_swimming_pool</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This is an example to generate an advanced swimming pool based on </span>
@@ -104,7 +104,7 @@
 
 
 <div class="viewcode-block" id="generate_advanced_swimmingPool">
-<a class="viewcode-back" href="../../../code/teaser.examples.html#teaser.examples.e11_generate_advanced_swimming_pool.generate_advanced_swimmingPool">[docs]</a>
+<a class="viewcode-back" href="../../../code/teaser.examples.html#teaser.examples.e13_generate_advanced_swimming_pool.generate_advanced_swimmingPool">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">generate_advanced_swimmingPool</span><span class="p">():</span>
 
     <span class="c1"># First step: Import the TEASER API (called Project) into your Python</span>
@@ -201,7 +201,7 @@
 
 
 <div class="viewcode-block" id="readExcelFile">
-<a class="viewcode-back" href="../../../code/teaser.examples.html#teaser.examples.e11_generate_advanced_swimming_pool.readExcelFile">[docs]</a>
+<a class="viewcode-back" href="../../../code/teaser.examples.html#teaser.examples.e13_generate_advanced_swimming_pool.readExcelFile">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">readExcelFile</span><span class="p">(</span><span class="n">swimmingFacitlity</span><span class="p">,</span> <span class="n">fileName</span><span class="p">,</span> <span class="n">prj</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Reads out zone and pool data from an Excel file and overrides the data from the </span>
@@ -390,7 +390,7 @@
 
                     
 <div class="viewcode-block" id="overrideMaterialData">
-<a class="viewcode-back" href="../../../code/teaser.examples.html#teaser.examples.e11_generate_advanced_swimming_pool.overrideMaterialData">[docs]</a>
+<a class="viewcode-back" href="../../../code/teaser.examples.html#teaser.examples.e13_generate_advanced_swimming_pool.overrideMaterialData">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">overrideMaterialData</span><span class="p">(</span><span class="n">zone</span><span class="p">,</span> <span class="n">matDict</span><span class="p">,</span> <span class="n">prj</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">wall</span> <span class="ow">in</span> <span class="n">zone</span><span class="o">.</span><span class="n">outer_walls</span><span class="p">:</span>
         <span class="n">wallName</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">wall</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
@@ -479,7 +479,7 @@
 
 
 <div class="viewcode-block" id="addBuildingZones">
-<a class="viewcode-back" href="../../../code/teaser.examples.html#teaser.examples.e11_generate_advanced_swimming_pool.addBuildingZones">[docs]</a>
+<a class="viewcode-back" href="../../../code/teaser.examples.html#teaser.examples.e13_generate_advanced_swimming_pool.addBuildingZones">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">addBuildingZones</span><span class="p">(</span><span class="n">swimmingPool</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">zoneName</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">swimmingPool</span><span class="o">.</span><span class="n">zone_area_factors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">zoneName</span> <span class="o">==</span> <span class="s2">&quot;Sauna_area&quot;</span> <span class="ow">or</span> <span class="n">zoneName</span> <span class="o">==</span> <span class="s2">&quot;Fitness&quot;</span><span class="p">:</span>

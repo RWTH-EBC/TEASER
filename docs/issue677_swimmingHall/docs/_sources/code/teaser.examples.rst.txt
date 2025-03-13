@@ -25,14 +25,6 @@ teaser.examples.e10\_adjust\_schedules module
    :undoc-members:
    :show-inheritance:
 
-teaser.examples.e10\_generate\_basic\_swimming\_pool module
------------------------------------------------------------
-
-.. automodule:: teaser.examples.e10_generate_basic_swimming_pool
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 teaser.examples.e11\_export\_besmod\_models module
 --------------------------------------------------
 
@@ -41,10 +33,18 @@ teaser.examples.e11\_export\_besmod\_models module
    :undoc-members:
    :show-inheritance:
 
-teaser.examples.e11\_generate\_advanced\_swimming\_pool module
+teaser.examples.e12\_generate\_basic\_swimming\_pool module
+-----------------------------------------------------------
+
+.. automodule:: teaser.examples.e12_generate_basic_swimming_pool
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.examples.e13\_generate\_advanced\_swimming\_pool module
 --------------------------------------------------------------
 
-.. automodule:: teaser.examples.e11_generate_advanced_swimming_pool
+.. automodule:: teaser.examples.e13_generate_advanced_swimming_pool
    :members:
    :undoc-members:
    :show-inheritance:
