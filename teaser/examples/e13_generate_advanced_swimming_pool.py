@@ -58,7 +58,7 @@ def generate_advanced_swimmingPool():
     building_name = "Hallenbad"
     water_area = 550.0
     year_of_construction = 2012
-    excelFileName = "2022-02-27_Swimming pool_DatabaseAhlen.xlsx"
+    excelFileName = "Swimming pool_Database.xlsx"
     filePathOutput = None
 
 
@@ -104,6 +104,11 @@ def generate_advanced_swimmingPool():
     # To make sure the parameters are calculated correctly we recommend to
     # run calc_all_buildings() function    
     prj.calc_all_buildings()
+
+    # scale heater of all zones to ensure enough power
+    for bld in prj.buildings:
+        for zone in bld.thermal_zones:
+            zone.model_attr.heat_load *= 100
 
 
     # To export the ready-to-run models simply call Project.export_aixlib().
@@ -410,7 +415,7 @@ def addBuildingZones(swimmingPool):
                 swimmingPool.zoneDesignation[zone.name]]["Temperature"] = 294.15
                 
             zone.use_conditions._heating_profile = [swimmingPool.poolsInDict[
-                swimmingPool.zoneDesignation[zone.name]]["Temperature"]] *25 
+                swimmingPool.zoneDesignation[zone.name]]["Temperature"]] * 25
             
             if zone.use_conditions._cooling_profile[0] < \
                 zone.use_conditions._heating_profile[0]:
