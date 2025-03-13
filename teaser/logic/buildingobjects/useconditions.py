@@ -178,6 +178,9 @@ class UseConditions(object):
         false = natural infiltration + ventilation due to a AHU
         + window infiltration calculated by window opening model
         AixLib: Used on Zone level for ventilation.
+    normative_infiltration: float [1/h]
+        Infiltration rate for static heat load calculation.
+        Default is 0.5 based on the DIN EN 12831-1:2017 minimal air exchange rate reference value.
     base_infiltration : float [1/h]
         base value for the natural infiltration without window openings
         AixLib: Used on Zone level for ventilation.
@@ -266,7 +269,8 @@ class UseConditions(object):
         self.lighting_efficiency_lumen = 100  # lighting efficiency in lm/W_el
 
         self.use_constant_infiltration = False
-        self.infiltration_rate = 0.2
+        self.normative_infiltration = 0.5
+        self.base_infiltration = 0.2
         self.max_user_infiltration = 1.0
         self.max_overheating_infiltration = [3.0, 2.0]
         self.max_summer_infiltration = [1.0, 273.15 + 10, 273.15 + 17]
@@ -824,3 +828,22 @@ class UseConditions(object):
             )
         self._use_maintained_illuminance = False
         self._lighting_power = value
+
+    @property
+    def infiltration_rate(self):
+        warnings.warn(
+            "'infiltration_rate' is deprecated and will be removed in a future release. "
+            "Use 'base_infiltration' instead.",
+            DeprecationWarning,
+            stacklevel=2)
+        return self.base_infiltration
+
+    @infiltration_rate.setter
+    def infiltration_rate(self, value):
+        self.base_infiltration = value
+        warnings.warn(
+            "'infiltration_rate' is deprecated and will be removed in a future release. "
+            "Use 'base_infiltration' instead.",
+            DeprecationWarning,
+            stacklevel=2)
+

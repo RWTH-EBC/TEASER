@@ -17,6 +17,7 @@ Efficient Buildings and Indoor
 Climate](https://www.ebc.eonerc.rwth-aachen.de/cms/~dmzz/E-ON-ERC-EBC/?lidx=1).
 
  * [AixLib](https://github.com/RWTH-EBC/AixLib)
+ * [BESMod](https://github.com/RWTH-EBC/BESMod)
  * [Buildings](https://github.com/lbl-srg/modelica-buildings)
  * [BuildingSystems](https://github.com/UdK-VPT/BuildingSystems)
  * [IDEAS](https://github.com/open-ideas/IDEAS).
@@ -67,7 +68,7 @@ If you just want to read the example on github, check them here: docs/examples.
 
 ### Dependencies
 
-TEASER is currently tested against Python 3.6 and 3.7. Older versions of Python may
+TEASER is currently tested against Python 3.7 up to 3.11. Older versions of Python may
 still work, but are no longer actively supported.
 Using a Python distribution is recommended as they already contain (or easily
 support installation of) many Python packages (e.g. SciPy, NumPy, pip, PyQT,

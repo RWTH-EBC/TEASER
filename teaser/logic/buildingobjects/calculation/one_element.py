@@ -31,6 +31,8 @@ class OneElement(object):
         supported for IBPSA)
     t_bt : float [d]
         Time constant according to VDI 6007 (default t_bt = 5)
+    t_bt_layer : float [d]
+        Time constant according to VDI 6007 for aggragation of layers (default t_bt = 7)
 
     Attributes
     ----------
@@ -231,7 +233,7 @@ class OneElement(object):
 
     """
 
-    def __init__(self, thermal_zone, merge_windows, t_bt):
+    def __init__(self, thermal_zone, merge_windows, t_bt, t_bt_layer=7):
         """Constructor for TwoElement"""
 
         self.internal_id = random.random()
@@ -239,6 +241,7 @@ class OneElement(object):
         self.thermal_zone = thermal_zone
         self.merge_windows = merge_windows
         self.t_bt = t_bt
+        self.t_bt_layer = t_bt_layer
 
         # Attributes for outer walls (OuterWall, Rooftop, GroundFloor)
         self.area_ow = 0.0
@@ -349,7 +352,7 @@ class OneElement(object):
         )
 
         for out_wall in outer_walls:
-            out_wall.calc_equivalent_res()
+            out_wall.calc_equivalent_res(t_bt=self.t_bt_layer)
             out_wall.calc_ua_value()
         for win in self.thermal_zone.windows:
             win.calc_equivalent_res()
@@ -359,7 +362,7 @@ class OneElement(object):
             + self.thermal_zone.floors
             + self.thermal_zone.ceilings
         ):
-            inner_wall.calc_equivalent_res()
+            inner_wall.calc_equivalent_res(t_bt=self.t_bt_layer)
             inner_wall.calc_ua_value()
 
         self.set_calc_default()
@@ -936,6 +939,7 @@ class OneElement(object):
             if not wins:
                 self.weightfactor_win.append(0.0)
                 self.shading_g_total.append(1.0)
+                self.shading_max_irr.append(9999.0)
                 self.window_areas.append(0.0)
                 self.transparent_areas.append(0.0)
             else:
@@ -979,6 +983,10 @@ class OneElement(object):
         ua_value_gf_temp : float [W/(m2*K)]
             UA Value of all GroundFloors
         """
+        if self.thermal_zone.use_conditions.base_infiltration > 0.5:
+            raise warnings.warn("The base_infiltration is larger than 0.5, "
+                                "which could lead to ideal heaters being too small.")
+
         self.heat_load = 0.0
         ua_value_gf_temp = sum(
             ground.ua_value for ground in self.thermal_zone.ground_floors
@@ -987,7 +995,7 @@ class OneElement(object):
         self.heat_load_outside_factor = (
             (ua_value_ow_temp + self.ua_value_win)
             + self.thermal_zone.volume
-            * self.thermal_zone.use_conditions.infiltration_rate
+            * self.thermal_zone.use_conditions.normative_infiltration
             * 1
             / 3600
             * self.thermal_zone.heat_capac_air

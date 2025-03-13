@@ -1,5 +1,7 @@
 %if extra != None:
-${extra}
+%for name in extra:
+${name}
+%endfor
 %endif
 %for i in list:
 %if i.name == "Swimming_hall":

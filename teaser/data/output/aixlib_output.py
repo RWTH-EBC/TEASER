@@ -6,6 +6,7 @@ import shutil
 from mako.template import Template
 from mako.lookup import TemplateLookup
 import teaser.logic.utilities as utilities
+import teaser.data.output.modelica_output as modelica_output
 
 
 def export_multizone(
@@ -68,6 +69,9 @@ def export_multizone(
         Template for MultiZone model
     """
 
+    if path is None:
+        path = utilities.get_full_path("")
+
     lookup = TemplateLookup(directories=[utilities.get_full_path(
         os.path.join('data', 'output', 'modelicatemplate'))])
     zone_template_1 = Template(
@@ -104,20 +108,22 @@ def export_multizone(
             "data/output/modelicatemplate/modelica_test_script"),
         lookup=lookup)
 
+    dir_resources = utilities.create_path(os.path.join(path, "Resources"))
+    dir_scripts = utilities.create_path(os.path.join(dir_resources, "Scripts"))
+    dir_dymola = utilities.create_path(os.path.join(dir_scripts, "Dymola"))
+
     uses = [
         'Modelica(version="' + prj.modelica_info.version + '")',
         'AixLib(version="' + prj.buildings[-1].library_attr.version + '")']
-    _help_package(
+    modelica_output.create_package(
         path=path,
         name=prj.name,
-        uses=uses,
-        within=None)
-    _help_package_order(
+        uses=uses)
+    modelica_output.create_package_order(
         path=path,
         package_list=buildings,
-        addition=None,
         extra=None)
-    _copy_weather_data(prj.weather_file_path, path)
+    modelica_output.copy_weather_data(prj.weather_file_path, path)
 
     for i, bldg in enumerate(buildings):
 
@@ -128,10 +134,8 @@ def export_multizone(
         assert bldg.used_library_calc == 'AixLib', ass_error
 
         bldg_path = os.path.join(path, bldg.name)
-        utilities.create_path(utilities.get_full_path(bldg_path))
-        utilities.create_path(utilities.get_full_path(
-            os.path.join(bldg_path,
-                         bldg.name + "_DataBase")))
+        utilities.create_path(bldg_path)
+        utilities.create_path(os.path.join(bldg_path, bldg.name + "_DataBase"))
         bldg.library_attr.modelica_set_temp(path=bldg_path)
         bldg.library_attr.modelica_set_temp_cool(path=bldg_path)
         bldg.library_attr.modelica_AHU_boundary(
@@ -142,15 +146,11 @@ def export_multizone(
         if bldg.type_of_building == "SwimmingFacility":
             bldg.library_attr.modelica_opening_hours(path=bldg_path)
         
-        #if hasattr(bldg.thermal_zones[0], "paramRecord"):
-        #    bldg.library_attr.modelica_opening_hours(path=bldg_path)
-
-        _help_package(path=bldg_path, name=bldg.name, within=bldg.parent.name)
-        _help_package_order(
+        modelica_output.create_package(path=bldg_path, name=bldg.name, within=bldg.parent.name)
+        modelica_output.create_package_order(
             path=bldg_path,
             package_list=[bldg],
-            addition=None,
-            extra=bldg.name + "_DataBase")
+            extra=[bldg.name + "_DataBase"])
 
         if bldg.building_id is None:
             bldg.building_id = i
@@ -163,8 +163,7 @@ def export_multizone(
                                                "number of the building in "
                                                "the project list.")
                 bldg.building_id = i
-        with open(utilities.get_full_path(
-                os.path.join(bldg_path, bldg.name + ".mo")), 'w') as out_file:
+        with open(os.path.join(bldg_path, bldg.name + ".mo"), 'w') as out_file:
 
             out_file.write(model_template.render_unicode(
                 bldg=bldg,
@@ -175,21 +174,13 @@ def export_multizone(
 
             out_file.close()
 
-        dir_resources = os.path.join(path, "Resources")
-        if not os.path.exists(dir_resources):
-            os.mkdir(dir_resources)
-        dir_scripts = os.path.join(dir_resources, "Scripts")
-        if not os.path.exists(dir_scripts):
-            os.mkdir(dir_scripts)
-        dir_dymola = os.path.join(dir_scripts, "Dymola")
-        if not os.path.exists(dir_dymola):
-            os.mkdir(dir_dymola)
         _help_test_script(bldg, dir_dymola, test_script_template)
 
         zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
 
 
         for zone in bldg.thermal_zones:
+
             with open(utilities.get_full_path(os.path.join(
                     zone_path,
                     bldg.name + '_' + zone.name + '.mo')), 'w') as out_file:
@@ -204,36 +195,11 @@ def export_multizone(
 
                 out_file.close()
 
-
-            if len(zone.pools) > 0:
-                pool_path = os.path.join(zone_path, zone.name + "_DataBase")
-                utilities.create_path(utilities.get_full_path(os.path.join(
-                    zone_path, zone.name + "_DataBase")))
-                for pool in zone.pools:
-                    out_file = open(utilities.get_full_path(os.path.join(
-                        pool_path, zone.name + '_' + pool.name + '.mo')), 'w')
-                    out_file.write(template_pool.render_unicode(zone=zone, pool=pool))
-                    out_file.close()
-                _help_package(
-                    path=pool_path,
-                    name=zone.name + '_DataBase',
-                    within=prj.name + '.' + bldg.name + '.' + bldg.name + '_DataBase')
-                _help_package_order(
-                    path=pool_path,
-                    package_list=list(zone.pools),
-                    addition=zone.name + "_",
-                    extra=None,
-                    pool=True)
-
-
-
-
-
         _help_package(
             path=zone_path,
             name=bldg.name + '_DataBase',
             within=prj.name + '.' + bldg.name)
-        _help_package_order(
+        modelica_output.create_package_order(
             path=zone_path,
             package_list=bldg.thermal_zones,
             addition=bldg.name + "_",
@@ -294,8 +260,7 @@ def _help_test_script(bldg, dir_dymola, test_script_template):
     dir_building = os.path.join(dir_dymola, bldg.name)
     if not os.path.exists(dir_building):
         os.mkdir(dir_building)
-    with open(utilities.get_full_path(os.path.join(
-            dir_building, bldg.name + ".mos")), 'w') as out_file:
+    with open(os.path.join(dir_building, bldg.name + ".mos"), 'w') as out_file:
 
         names_variables = []
         for i, zone in enumerate(bldg.thermal_zones):
@@ -339,7 +304,8 @@ def _help_package(path, name, uses=None, within=None):
             uses=uses))
         out_file.close()
 
-def _help_package_order(path, package_list, addition=None, extra=None, pool=None):
+
+def _help_package_order(path, package_list, addition=None, extra=None):
     """creates a package.order file
 
     private function, do not call

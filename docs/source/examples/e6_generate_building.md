@@ -54,7 +54,6 @@ tz = ThermalZone(parent=bldg)
 tz.name = "LivingRoom"
 tz.area = 140.0
 tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
-tz.infiltration_rate = 0.5
 ```
 
 Instantiate BoundaryConditions and load conditions for `Living`.

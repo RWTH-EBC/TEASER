@@ -39,3 +39,9 @@ filename = "teaser/examples/e7_retrofit.py"
 func_name = "example_retrofit_building"
 md_path = "docs/source/examples"
 ipynb_path = "docs/jupyter_notebooks"
+
+[[ExampleFile]]
+filename = "teaser/examples/e11_export_besmod_models.py"
+func_name = "example_export_besmod"
+md_path = "docs/source/examples"
+ipynb_path = "docs/jupyter_notebooks"

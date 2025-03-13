@@ -3,11 +3,13 @@
 import warnings
 import os
 import re
+from typing import Optional, Union, List, Dict
 import teaser.logic.utilities as utilities
 import teaser.data.utilities as datahandling
 import teaser.data.input.teaserjson_input as tjson_in
 import teaser.data.output.teaserjson_output as tjson_out
 import teaser.data.output.aixlib_output as aixlib_output
+import teaser.data.output.besmod_output as besmod_output
 import teaser.data.output.ibpsa_output as ibpsa_output
 from teaser.data.dataclass import DataClass
 from teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse import SingleFamilyHouse
@@ -758,17 +760,100 @@ class Project(object):
                     )
 
         if report:
-            try:
-                from teaser.data.output.reports import model_report
-            except ImportError:
-                raise ImportError(
-                    "To create the model report, you have to install TEASER "
-                    "using the option report: pip install teaser[report] or install "
-                    "plotly manually."
-                )
-            report_path = os.path.join(path, "Resources", "ModelReport")
-            model_report.create_model_report(prj=self, path=report_path)
+            self._write_report(path)
         return path
+
+    def export_besmod(
+            self,
+            internal_id: Optional[float] = None,
+            examples: Optional[List[str]] = None,
+            path: Optional[str] = None,
+            THydSup_nominal: Optional[Union[float, Dict[str, float]]] = None,
+            QBuiOld_flow_design: Optional[Dict[str, Dict[str, float]]] = None,
+            THydSupOld_design: Optional[Union[float, Dict[str, float]]] = None,
+            custom_examples: Optional[Dict[str, str]] = None,
+            custom_script: Optional[Dict[str, str]] = None,
+            report: bool = False
+    ) -> str:
+        """Exports buildings for BESMod simulation
+
+        Exports one (if internal_id is not None) or all buildings as
+        BESMod.Systems.Demand.Building.TEASERThermalZone models. Additionally,
+        BESMod.Examples can be specified and directly exported including the building.
+
+        Parameters
+        ----------
+
+        internal_id : Optional[float]
+            Specifies a specific building to export by its internal ID. If None, all buildings are exported.
+        examples : Optional[List[str]]
+            Names of BESMod examples to export alongside the building models.
+            Supported Examples: "TEASERHeatLoadCalculation", "HeatPumpMonoenergetic", and "GasBoilerBuildingOnly".
+        path : Optional[str]
+            Alternative output path for storing the exported files. If None, the default TEASER output path is used.
+        THydSup_nominal : Optional[Union[float, Dict[str, float]]]
+            Nominal supply temperature(s) for the hydraulic system. Required for
+            certain examples (e.g., HeatPumpMonoenergetic, GasBoilerBuildingOnly).
+            See docstring of teaser.data.output.besmod_output.convert_input() for further information.
+        QBuiOld_flow_design : Optional[Dict[str, Dict[str, float]]]
+            For partially retrofitted systems specify the old nominal heat flow
+            of all zones in the Buildings in a nested dictionary with
+            the building names and in a level below the zone names as keys.
+            By default, only the radiator transfer system is not retrofitted in BESMod.
+        THydSupOld_design : Optional[Union[float, Dict[str, float]]]
+            Design supply temperatures for old, non-retrofitted hydraulic systems.
+        custom_examples: Optional[Dict[str, str]]
+            Specify custom examples with a dictionary containing the example name as the key and
+            the path to the corresponding custom mako template as the value.
+        custom_script: Optional[Dict[str, str]]
+            Specify custom .mos scripts for the existing and custom examples with a dictionary
+            containing the example name as the key and the path to the corresponding custom mako template as the value.
+        report : bool
+            If True, generates a model report in HTML and CSV format for the exported project. Default is False.
+
+        Returns
+        -------
+        str
+            The path where the exported files are stored.
+        """
+
+        if path is None:
+            path = os.path.join(utilities.get_default_path(), self.name)
+        else:
+            path = os.path.join(path, self.name)
+
+        utilities.create_path(path)
+
+        if internal_id is None:
+            besmod_output.export_besmod(
+                buildings=self.buildings, prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
+                QBuiOld_flow_design=QBuiOld_flow_design, THydSupOld_design=THydSupOld_design,
+                custom_examples=custom_examples, custom_script=custom_script
+            )
+        else:
+            for bldg in self.buildings:
+                if bldg.internal_id == internal_id:
+                    besmod_output.export_besmod(
+                        buildings=[bldg], prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
+                        QBuiOld_flow_design=QBuiOld_flow_design, THydSupOld_design=THydSupOld_design,
+                        custom_examples=custom_examples, custom_script=custom_script
+                    )
+
+        if report:
+            self._write_report(path)
+        return path
+
+    def _write_report(self, path):
+        try:
+            from teaser.data.output.reports import model_report
+        except ImportError:
+            raise ImportError(
+                "To create the model report, you have to install TEASER "
+                "using the option report: pip install teaser[report] or install "
+                "plotly manually."
+            )
+        report_path = os.path.join(path, "Resources", "ModelReport")
+        model_report.create_model_report(prj=self, path=report_path)
 
     def export_ibpsa(self, library="AixLib", internal_id=None, path=None):
         """Exports values to a record file for Modelica simulation
@@ -859,6 +944,41 @@ class Project(object):
         self._number_of_elements_calc = 2
         self._merge_windows_calc = False
         self._used_library_calc = "AixLib"
+
+    def set_location_parameters(self,
+                     t_outside=262.65,
+                     t_ground=286.15,
+                     weather_file_path=None,
+                     calc_all_buildings=True):
+        """ Set location specific parameters
+
+        Temperatures are used for static heat load calculation
+        and as parameters in the exports.
+        Default location is Mannheim.
+
+        Parameters
+        ----------
+        t_outside: float [K]
+            Normative outdoor temperature for static heat load calculation.
+            The input of t_inside is ALWAYS in Kelvin
+        t_ground: float [K]
+            Temperature directly at the outer side of ground floors for static
+            heat load calculation.
+            The input of t_ground is ALWAYS in Kelvin
+        weather_file_path : str
+            Absolute path to weather file used for Modelica simulation. Default
+            weather file can be find in inputdata/weatherdata.
+        calc_all_buildings: boolean
+            If True, calculates all buildings new. Default is True.
+            Important for new calculation of static heat load.
+        """
+        self.weather_file_path = weather_file_path
+        for bldg in self.buildings:
+            for tz in bldg.thermal_zones:
+                tz.t_outside = t_outside
+                tz.t_ground = t_ground
+        if calc_all_buildings:
+            self.calc_all_buildings()
 
     @staticmethod
     def process_export_vars(export_vars):
