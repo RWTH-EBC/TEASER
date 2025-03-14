@@ -13,7 +13,7 @@
             "current_solver": "Cvode",
             "equidistant_output": true,
             "results_at_events": false,
-            "version": "3.2.2"
+            "version": "4.0.0"
         },
         "buildings": {
             "TestBuilding": {
