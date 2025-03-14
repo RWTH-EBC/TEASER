@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser package &mdash; TEASER 1.1.4 documentation</title>
+  <title>teaser package &mdash; TEASER 1.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
@@ -14,7 +14,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=00f267c6"></script>
+      <script src="../_static/documentation_options.js?v=6efca38a"></script>
       <script src="../_static/doctools.js?v=9a2dae69"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -69,6 +69,8 @@
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.instantiate_data_class"><code class="docutils literal notranslate"><span class="pre">Project.instantiate_data_class()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.load_project"><code class="docutils literal notranslate"><span class="pre">Project.load_project()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.merge_windows_calc"><code class="docutils literal notranslate"><span class="pre">Project.merge_windows_calc</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.method_interzonal_export"><code class="docutils literal notranslate"><span class="pre">Project.method_interzonal_export</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.method_interzonal_material_enrichment"><code class="docutils literal notranslate"><span class="pre">Project.method_interzonal_material_enrichment</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.name"><code class="docutils literal notranslate"><span class="pre">Project.name</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.number_of_elements_calc"><code class="docutils literal notranslate"><span class="pre">Project.number_of_elements_calc</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.process_export_vars"><code class="docutils literal notranslate"><span class="pre">Project.process_export_vars()</span></code></a></li>
@@ -76,6 +78,7 @@
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.save_project"><code class="docutils literal notranslate"><span class="pre">Project.save_project()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.set_default"><code class="docutils literal notranslate"><span class="pre">Project.set_default()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.set_location_parameters"><code class="docutils literal notranslate"><span class="pre">Project.set_location_parameters()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.t_soil_file_path"><code class="docutils literal notranslate"><span class="pre">Project.t_soil_file_path</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.used_library_calc"><code class="docutils literal notranslate"><span class="pre">Project.used_library_calc</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#teaser.project.Project.weather_file_path"><code class="docutils literal notranslate"><span class="pre">Project.weather_file_path</span></code></a></li>
 </ul>
@@ -243,6 +246,11 @@
 <li class="toctree-l3"><a class="reference internal" href="teaser.examples.html#teaser.examples.e11_export_besmod_models.example_export_besmod"><code class="docutils literal notranslate"><span class="pre">example_export_besmod()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.examples.html#module-teaser.examples.e12_include_adjacent_zones_and_varying_soil_temps">teaser.examples.e12_include_adjacent_zones_and_varying_soil_temps module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.html#teaser.examples.e12_include_adjacent_zones_and_varying_soil_temps.example_interzonal_ashrae_960"><code class="docutils literal notranslate"><span class="pre">example_interzonal_ashrae_960()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.examples.html#teaser.examples.e12_include_adjacent_zones_and_varying_soil_temps.example_interzonal_single_building"><code class="docutils literal notranslate"><span class="pre">example_interzonal_single_building()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="teaser.examples.html#module-teaser.examples.e1_generate_archetype">teaser.examples.e1_generate_archetype module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="teaser.examples.html#teaser.examples.e1_generate_archetype.example_generate_archetype"><code class="docutils literal notranslate"><span class="pre">example_generate_archetype()</span></code></a></li>
 </ul>
@@ -344,7 +352,7 @@ API for script based interface. It is highly recommended to always
 instantiate the Project class before starting to work with TEASER. It
 contains functions to generate archetype buildings, to export models and to
 save information for later use.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>load_data</strong><span class="classifier">boolean</span></dt><dd><p>boolean if data bases for materials, type elements and use conditions
@@ -355,7 +363,7 @@ scratch, set to True</p>
 </dl>
 </dd>
 <dt class="field-even">Attributes<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
+<dd class="field-even"><dl>
 <dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Name of the Project (default is ‘Project’)</p>
 </dd>
 <dt><strong>modelica_info</strong><span class="classifier">instance of ModelicaInfo</span></dt><dd><p>TEASER instance of ModelicaInfo to store Modelica related
@@ -366,7 +374,18 @@ information, like used compiler, start and stop time, etc.</p>
 <dt><strong>data</strong><span class="classifier">instance of DataClass</span></dt><dd><p>TEASER instance of DataClass containing JSON binding classes</p>
 </dd>
 <dt><strong>weather_file_path</strong><span class="classifier">str</span></dt><dd><p>Absolute path to weather file used for Modelica simulation. Default
-weather file can be find in inputdata/weatherdata.</p>
+weather file can be found in inputdata/weatherdata.</p>
+</dd>
+<dt><strong>t_soil_mode</strong><span class="classifier">int</span></dt><dd><p>1 : constant value (stored in each zone)
+2 : sine model (mean value and amplitude stored in each zone)
+3 : from file (stored for the project)</p>
+<blockquote>
+<div><p>heat load calculation will consider the constant zone.t_ground</p>
+</div></blockquote>
+</dd>
+<dt><strong>t_soil_file_path</strong><span class="classifier">str</span></dt><dd><p>Absolute path to soil temperature file used for Modelica simulation if
+t_soil_mode 3 is chosen.
+Sample t_soil file can be found in inputdata/weatherdata.</p>
 </dd>
 <dt><strong>number_of_elements_calc</strong><span class="classifier">int</span></dt><dd><p>Defines the number of elements, that are aggregated (1, 2, 3 or 4),
 default is 2</p>
@@ -381,12 +400,50 @@ IBPSA)</p>
 will be copied into the model output directories so that the exported
 models can be regression tested against these results with BuildingsPy.</p>
 </dd>
+<dt><strong>method_interzonal_material_enrichment</strong><span class="classifier">str</span></dt><dd><p>Method used to choose the default type element for interzonal elements.
+‘heating_difference’: (default) check the difference between</p>
+<blockquote>
+<div><p>thermal_zone.use_conditions.with_heating.
+If equal, default element is inner element. If
+not, an outer envelope type element is loaded,
+with the outer layer on the non-heated side.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>‘cooling_difference’: If there is no difference between heating states,</dt><dd><p>check the difference between
+thermal_zone.use_conditions.with_cooling.
+If equal, default element is inner element. If
+not, an outer envelope type element is loaded,
+with the outer layer on the non-cooled side.</p>
+</dd>
+<dt>‘setpoint_difference_x’: For interzonal elements where</dt><dd><p>‘heating_difference’ and ‘cooling_difference’
+lead to treatment as inner element, the
+setpoints are compared. The float number x is
+read from the string and used as maximum
+difference. If a zone can be clearly identified
+as “more conditioned” (i.e., the heating
+setpoint is clearly higher or, if heating
+setpoints are approximately equal, the cooling
+setpoint is clearly lower, an outer envelope
+type element is loaded, with the outer layer on
+the “less conditioned” side.</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>method_interzonal_export</strong><span class="classifier">str</span></dt><dd><p>Method used to choose the way to export interzonal elements. Valid
+strings are the same as for method_interzonal_material_enrichment.
+Inner elements will always be lumped to the InnerWall. For “outer”
+elements, interzonal heat flow will be modelled in the FiveElement
+export. For OneElement to FourElement export (not recommended, because
+not yet validated or tested), they will be lumped to the OuterWall
+element from the heated/cooled/more conditioned side and to the
+InnerWall from the other side.</p>
+</dd>
 </dl>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="teaser.project.Project.add_non_residential">
-<span class="sig-name descname"><span class="pre">add_non_residential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">construction_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_construction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_floors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height_of_floors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_leased_area</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_ahu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_gains_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">office_layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.add_non_residential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.add_non_residential" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_non_residential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">construction_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_construction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_floors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height_of_floors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_leased_area</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_ahu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_gains_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inner_wall_approximation_approach</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'teaser_default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">office_layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.add_non_residential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.add_non_residential" title="Link to this definition"></a></dt>
 <dd><p>Add a non-residential building to the TEASER project.
 This function adds a non-residential archetype building to the TEASER
 project. You need to specify the method of the archetype generation.
@@ -425,15 +482,38 @@ assigned to attribute central_ahu. This instance holds information
 for central Air Handling units. Default is False.</p>
 </dd>
 <dt><strong>internal_gains_mode: int [1, 2, 3]</strong></dt><dd><p>mode for the internal gains calculation done in AixLib:</p>
-<p>1. Temperature and activity degree dependent heat flux calculation for persons. The
-calculation is based on  SIA 2024 (default)</p>
-<p>2. Temperature and activity degree independent heat flux calculation for persons, the max.
+<ol class="arabic simple">
+<li><p>Temperature and activity degree dependent heat flux calculation for persons. The
+calculation is based on  SIA 2024 (default)</p></li>
+<li><p>Temperature and activity degree independent heat flux calculation for persons, the max.
 heatflowrate is prescribed by the parameter
-fixed_heat_flow_rate_persons.</p>
-<p>3. Temperature and activity degree dependent calculation with
+fixed_heat_flow_rate_persons.</p></li>
+<li><p>Temperature and activity degree dependent calculation with
 consideration of moisture and co2. The moisture calculation is
 based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
-Engineering ToolBox (2004) and regards only persons.</p>
+Engineering ToolBox (2004) and regards only persons.</p></li>
+</ol>
+</dd>
+<dt><strong>inner_wall_approximation_approach</strong><span class="classifier">str</span></dt><dd><dl>
+<dt>‘teaser_default’ (default) sets length of inner walls = typical</dt><dd><p>length * height of floors + 2 * typical width * height of floors</p>
+</dd>
+<dt>‘typical_minus_outer’ sets length of inner walls = 2 * typical</dt><dd><p>length * height of floors + 2 * typical width * height of floors
+- length of outer or interzonal walls</p>
+</dd>
+<dt>‘typical_minus_outer_extended’ like ‘typical_minus_outer’, but also</dt><dd><p>considers that
+a) a non-complete “average room” reduces its circumference</p>
+<blockquote>
+<div><p>proportional to the square root of the area</p>
+</div></blockquote>
+<ol class="loweralpha simple" start="2">
+<li><dl class="simple">
+<dt>rooftops, windows and ground floors (= walls with border to</dt><dd><p>soil) may have a vertical share</p>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+</dl>
 </dd>
 <dt><strong>office_layout</strong><span class="classifier">int</span></dt><dd><p>Structure of the floor plan of office buildings, default is 1,
 which is representative for one elongated floor.</p>
@@ -463,7 +543,7 @@ representative for a punctuated facade.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="teaser.project.Project.add_residential">
-<span class="sig-name descname"><span class="pre">add_residential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">construction_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_construction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_floors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height_of_floors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_leased_area</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_ahu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_gains_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residential_layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbour_buildings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cellar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dormer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_apartments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.add_residential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.add_residential" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_residential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">construction_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_construction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_floors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height_of_floors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_leased_area</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_ahu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_gains_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inner_wall_approximation_approach</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'teaser_default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residential_layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbour_buildings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cellar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dormer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_apartments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.add_residential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.add_residential" title="Link to this definition"></a></dt>
 <dd><p>Add a residential building to the TEASER project.</p>
 <p>This function adds a residential archetype building to the TEASER
 project. You need to specify the construction_data of the archetype generation.
@@ -477,9 +557,9 @@ read the docs of archetype classes.
 This function also calculates the parameters of the buildings directly
 with the settings set in the project (e.g. used_library_calc or
 number_of_elements_calc).</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
+<dd class="field-odd"><dl>
 <dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Used construction_data, currently supported values: ‘iwu_heavy’, ‘iwu_light’,
 ‘tabula_de_standard’, ‘tabula_de_retrofit’, ‘tabula_de_adv_retrofit’,
 ‘tabula_dk_standard’, ‘tabula_dk_retrofit’, ‘tabula_dk_adv_retrofit’
@@ -512,10 +592,12 @@ and
 assigned to attribute central_ahu. This instance holds information
 for central Air Handling units. Default is False.</p>
 </dd>
-<dt><strong>internal_gains_mode: int [1, 2, 3]</strong></dt><dd><p>mode for the internal gains calculation done in AixLib:</p>
-<ol class="arabic simple">
-<li><p>Temperature and activity degree dependent heat flux calculation for persons. The
-calculation is based on  SIA 2024 (default)</p></li>
+<dt><strong>internal_gains_mode: int [1, 2, 3]</strong></dt><dd><p>mode for the internal gains calculation done in AixLib:
+1. Temperature and activity degree dependent heat flux calculation for persons. The</p>
+<blockquote>
+<div><p>calculation is based on  SIA 2024 (default)</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
 <li><p>Temperature and activity degree independent heat flux calculation for persons, the max.
 heatflowrate is prescribed by the parameter
 fixed_heat_flow_rate_persons.</p></li>
@@ -524,6 +606,27 @@ consideration of moisture and co2. The moisture calculation is
 based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
 Engineering ToolBox (2004) and regards only persons.</p></li>
 </ol>
+</dd>
+<dt><strong>inner_wall_approximation_approach</strong><span class="classifier">str</span></dt><dd><dl>
+<dt>‘teaser_default’ (default) sets length of inner walls = typical</dt><dd><p>length * height of floors + 2 * typical width * height of floors</p>
+</dd>
+<dt>‘typical_minus_outer’ sets length of inner walls = 2 * typical</dt><dd><p>length * height of floors + 2 * typical width * height of floors
+- length of outer or interzonal walls</p>
+</dd>
+<dt>‘typical_minus_outer_extended’ like ‘typical_minus_outer’, but also</dt><dd><p>considers that
+a) a non-complete “average room” reduces its circumference</p>
+<blockquote>
+<div><p>proportional to the square root of the area</p>
+</div></blockquote>
+<ol class="loweralpha simple" start="2">
+<li><dl class="simple">
+<dt>rooftops, windows and ground floors (= walls with border to</dt><dd><p>soil) may have a vertical share</p>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+</dl>
 </dd>
 <dt><strong>residential_layout</strong><span class="classifier">int</span></dt><dd><p>Structure of floor plan (default = 0) CAUTION only used for iwu</p>
 <ol class="arabic simple" start="0">
@@ -624,7 +727,7 @@ Defaults to [‘standard’, ‘retrofit’, ‘adv_retrofit’].</p>
 <p>You need to set the following parameters in the Project class.</p>
 <dl class="simple">
 <dt>number_of_elements_calc<span class="classifier">int</span></dt><dd><p>defines the number of elements, that area aggregated, between 1
-and 4, default is 2
+and 5, default is 2
 For AixLib you should always use 2 elements!!!</p>
 </dd>
 <dt>merge_windows_calc<span class="classifier">bool</span></dt><dd><p>True for merging the windows into the outer walls, False for
@@ -638,7 +741,7 @@ For AixLib vdi calculation is True, ebc calculation is False</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="teaser.project.Project.export_aixlib">
-<span class="sig-name descname"><span class="pre">export_aixlib</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">building_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zone_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corG</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_postprocessing_calc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">report</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.export_aixlib"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.export_aixlib" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">export_aixlib</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">building_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zone_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corG</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_multizone_template_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_postprocessing_calc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">report</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.export_aixlib"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.export_aixlib" title="Link to this definition"></a></dt>
 <dd><p>Exports values to a record file for Modelica simulation</p>
 <p>Exports one (if internal_id is not None) or all buildings for
 AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped models
@@ -656,6 +759,9 @@ all buildings will be exported</p>
 </dd>
 <dt><strong>path</strong><span class="classifier">string</span></dt><dd><p>if the Files should not be stored in default output path of TEASER,
 an alternative path can be specified as a full path</p>
+</dd>
+<dt><strong>custom_multizone_template_path</strong><span class="classifier">string</span></dt><dd><p>if a custom template for writing the multizone model should be used,
+specify its full path as string</p>
 </dd>
 <dt><strong>report: boolean</strong></dt><dd><p>if True a model report in form of a html and csv file will be
 created for the exported project.</p>
@@ -773,6 +879,16 @@ an alternative path can be specified as a full path</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="teaser.project.Project.merge_windows_calc">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">merge_windows_calc</span></span><a class="headerlink" href="#teaser.project.Project.merge_windows_calc" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.project.Project.method_interzonal_export">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">method_interzonal_export</span></span><a class="headerlink" href="#teaser.project.Project.method_interzonal_export" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.project.Project.method_interzonal_material_enrichment">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">method_interzonal_material_enrichment</span></span><a class="headerlink" href="#teaser.project.Project.method_interzonal_material_enrichment" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
@@ -897,6 +1013,11 @@ Important for new calculation of static heat load.</p>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.project.Project.t_soil_file_path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">t_soil_file_path</span></span><a class="headerlink" href="#teaser.project.Project.t_soil_file_path" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="teaser.project.Project.used_library_calc">

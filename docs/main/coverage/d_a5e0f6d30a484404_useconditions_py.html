@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Coverage for teaser/logic/buildingobjects/useconditions.py: 88%</title>
+    <title>Coverage for teaser/logic/buildingobjects/useconditions.py: 90%</title>
     <link rel="icon" sizes="32x32" href="favicon_32.png">
     <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="coverage_html.js" defer></script>
@@ -12,7 +12,7 @@
     <div class="content">
         <h1>
             <span class="text">Coverage for </span><b>teaser/logic/buildingobjects/useconditions.py</b>:
-            <span class="pc_cov">88%</span>
+            <span class="pc_cov">90%</span>
         </h1>
         <aside id="help_panel_wrapper">
             <input id="help_panel_state" type="checkbox">
@@ -55,8 +55,8 @@
         </aside>
         <h2>
             <span class="text">275 statements &nbsp;</span>
-            <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">243<span class="text"> run</span></button>
-            <button type="button" class="mis show_mis button_toggle_mis" value="mis" data-shortcut="m" title="Toggle lines missing">32<span class="text"> missing</span></button>
+            <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">248<span class="text"> run</span></button>
+            <button type="button" class="mis show_mis button_toggle_mis" value="mis" data-shortcut="m" title="Toggle lines missing">27<span class="text"> missing</span></button>
             <button type="button" class="exc show_exc button_toggle_exc" value="exc" data-shortcut="x" title="Toggle lines excluded">0<span class="text"> excluded</span></button>
         </h2>
         <p class="text">
@@ -65,7 +65,7 @@
             <a id="nextFileLink" class="nav" href="d_2775d8dee3fabccf_retrofit_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.4.4">coverage.py v7.4.4</a>,
-            created at 2025-01-29 09:27 +0000
+            created at 2025-03-14 07:35 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"/>
@@ -709,7 +709,7 @@
     <p class="run"><span class="n"><a id="t627" href="#t627">627</a></span><span class="t">    <span class="op">@</span><span class="nam">persons_profile</span><span class="op">.</span><span class="nam">setter</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t628" href="#t628">628</a></span><span class="t">    <span class="key">def</span> <span class="nam">persons_profile</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">value</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t629" href="#t629">629</a></span><span class="t">        <span class="key">if</span> <span class="key">not</span> <span class="nam">isinstance</span><span class="op">(</span><span class="nam">value</span><span class="op">,</span> <span class="nam">list</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t630" href="#t630">630</a></span><span class="t">            <span class="nam">value</span> <span class="op">=</span> <span class="op">[</span><span class="nam">value</span><span class="op">]</span> <span class="op">*</span> <span class="num">24</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t630" href="#t630">630</a></span><span class="t">            <span class="nam">value</span> <span class="op">=</span> <span class="op">[</span><span class="nam">value</span><span class="op">]</span> <span class="op">*</span> <span class="num">24</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t631" href="#t631">631</a></span><span class="t">        <span class="key">if</span> <span class="nam">self</span><span class="op">.</span><span class="nam">is_periodic</span><span class="op">(</span><span class="nam">value</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t632" href="#t632">632</a></span><span class="t">            <span class="nam">self</span><span class="op">.</span><span class="nam">_persons_profile</span> <span class="op">=</span> <span class="nam">value</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t633" href="#t633">633</a></span><span class="t">        <span class="key">else</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
@@ -725,7 +725,7 @@
     <p class="run"><span class="n"><a id="t643" href="#t643">643</a></span><span class="t">    <span class="op">@</span><span class="nam">machines_profile</span><span class="op">.</span><span class="nam">setter</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t644" href="#t644">644</a></span><span class="t">    <span class="key">def</span> <span class="nam">machines_profile</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">value</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t645" href="#t645">645</a></span><span class="t">        <span class="key">if</span> <span class="key">not</span> <span class="nam">isinstance</span><span class="op">(</span><span class="nam">value</span><span class="op">,</span> <span class="nam">list</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t646" href="#t646">646</a></span><span class="t">            <span class="nam">value</span> <span class="op">=</span> <span class="op">[</span><span class="nam">value</span><span class="op">]</span> <span class="op">*</span> <span class="num">24</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t646" href="#t646">646</a></span><span class="t">            <span class="nam">value</span> <span class="op">=</span> <span class="op">[</span><span class="nam">value</span><span class="op">]</span> <span class="op">*</span> <span class="num">24</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t647" href="#t647">647</a></span><span class="t">        <span class="key">if</span> <span class="nam">self</span><span class="op">.</span><span class="nam">is_periodic</span><span class="op">(</span><span class="nam">value</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t648" href="#t648">648</a></span><span class="t">            <span class="nam">self</span><span class="op">.</span><span class="nam">_machines_profile</span> <span class="op">=</span> <span class="nam">value</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t649" href="#t649">649</a></span><span class="t">        <span class="key">else</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
@@ -741,7 +741,7 @@
     <p class="run"><span class="n"><a id="t659" href="#t659">659</a></span><span class="t">    <span class="op">@</span><span class="nam">lighting_profile</span><span class="op">.</span><span class="nam">setter</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t660" href="#t660">660</a></span><span class="t">    <span class="key">def</span> <span class="nam">lighting_profile</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">value</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t661" href="#t661">661</a></span><span class="t">        <span class="key">if</span> <span class="key">not</span> <span class="nam">isinstance</span><span class="op">(</span><span class="nam">value</span><span class="op">,</span> <span class="nam">list</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t662" href="#t662">662</a></span><span class="t">            <span class="nam">value</span> <span class="op">=</span> <span class="op">[</span><span class="nam">value</span><span class="op">]</span> <span class="op">*</span> <span class="num">24</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t662" href="#t662">662</a></span><span class="t">            <span class="nam">value</span> <span class="op">=</span> <span class="op">[</span><span class="nam">value</span><span class="op">]</span> <span class="op">*</span> <span class="num">24</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t663" href="#t663">663</a></span><span class="t">        <span class="key">if</span> <span class="nam">self</span><span class="op">.</span><span class="nam">is_periodic</span><span class="op">(</span><span class="nam">value</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t664" href="#t664">664</a></span><span class="t">            <span class="nam">self</span><span class="op">.</span><span class="nam">_lighting_profile</span> <span class="op">=</span> <span class="nam">value</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t665" href="#t665">665</a></span><span class="t">        <span class="key">else</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
@@ -913,12 +913,12 @@
     <p class="pln"><span class="n"><a id="t831" href="#t831">831</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t832" href="#t832">832</a></span><span class="t">    <span class="op">@</span><span class="nam">property</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t833" href="#t833">833</a></span><span class="t">    <span class="key">def</span> <span class="nam">infiltration_rate</span><span class="op">(</span><span class="nam">self</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t834" href="#t834">834</a></span><span class="t">        <span class="nam">warnings</span><span class="op">.</span><span class="nam">warn</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t834" href="#t834">834</a></span><span class="t">        <span class="nam">warnings</span><span class="op">.</span><span class="nam">warn</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t835" href="#t835">835</a></span><span class="t">            <span class="str">"'infiltration_rate' is deprecated and will be removed in a future release. "</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t836" href="#t836">836</a></span><span class="t">            <span class="str">"Use 'base_infiltration' instead."</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t837" href="#t837">837</a></span><span class="t">            <span class="nam">DeprecationWarning</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t838" href="#t838">838</a></span><span class="t">            <span class="nam">stacklevel</span><span class="op">=</span><span class="num">2</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t839" href="#t839">839</a></span><span class="t">        <span class="key">return</span> <span class="nam">self</span><span class="op">.</span><span class="nam">base_infiltration</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t839" href="#t839">839</a></span><span class="t">        <span class="key">return</span> <span class="nam">self</span><span class="op">.</span><span class="nam">base_infiltration</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t840" href="#t840">840</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t841" href="#t841">841</a></span><span class="t">    <span class="op">@</span><span class="nam">infiltration_rate</span><span class="op">.</span><span class="nam">setter</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t842" href="#t842">842</a></span><span class="t">    <span class="key">def</span> <span class="nam">infiltration_rate</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">value</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
@@ -938,7 +938,7 @@
             <a id="nextFileLink" class="nav" href="d_2775d8dee3fabccf_retrofit_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.4.4">coverage.py v7.4.4</a>,
-            created at 2025-01-29 09:27 +0000
+            created at 2025-03-14 07:35 +0000
         </p>
     </div>
 </footer>

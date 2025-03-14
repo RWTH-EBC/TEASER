@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.logic.buildingobjects.calculation.two_element &mdash; TEASER 1.1.4 documentation</title>
+  <title>teaser.logic.buildingobjects.calculation.two_element &mdash; TEASER 1.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/autodoc_pydantic.css" />
@@ -13,7 +13,7 @@
   
       <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../../_static/documentation_options.js?v=00f267c6"></script>
+      <script src="../../../../../_static/documentation_options.js?v=6efca38a"></script>
       <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../../_static/js/theme.js"></script>
@@ -489,11 +489,11 @@
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.two_element.TwoElement.calc_attributes">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">calc_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calls all necessary function to calculate model attributes&quot;&quot;&quot;</span>
-
         <span class="n">outer_walls</span> <span class="o">=</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">outer_walls</span>
             <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ground_floors</span>
             <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">rooftops</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">find_izes_outer</span><span class="p">()</span>
         <span class="p">)</span>
 
         <span class="k">for</span> <span class="n">out_wall</span> <span class="ow">in</span> <span class="n">outer_walls</span><span class="p">:</span>
@@ -506,6 +506,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">inner_walls</span>
             <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">floors</span>
             <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ceilings</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">nzbs_for_iw</span>
         <span class="p">):</span>
             <span class="n">inner_wall</span><span class="o">.</span><span class="n">calc_equivalent_res</span><span class="p">(</span><span class="n">t_bt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">t_bt_layer</span><span class="p">)</span>
             <span class="n">inner_wall</span><span class="o">.</span><span class="n">calc_ua_value</span><span class="p">()</span>
@@ -528,6 +529,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">inner_walls</span>
                 <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">floors</span>
                 <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ceilings</span>
+                <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">nzbs_for_iw</span>
             <span class="p">)</span>
             <span class="o">&lt;</span> <span class="mi">1</span>
         <span class="p">):</span>
@@ -555,6 +557,17 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_calc_outer_elements</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_calc_wf</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_calc_mean_values</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">interzonal_elements</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;For thermal zone &quot;</span>
+                <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">name</span>
+                <span class="o">+</span> <span class="s2">&quot; in building &quot;</span>
+                <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span>
+                <span class="o">+</span> <span class="s2">&quot;, interzonal elements have been defined. TwoElement export &quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;will treat them as outer walls or inner walls depending on &quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;the project parameter &#39;method_interzonal_export&#39;. Consider &quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;using FiveElement instead.&quot;</span>
+            <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_calc_number_of_elements</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fill_zone_lists</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_calc_heat_load</span><span class="p">()</span>
@@ -564,7 +577,7 @@
 
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_calc_parallel_connection</span><span class="p">(</span><span class="n">element_list</span><span class="p">,</span> <span class="n">omega</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calc_parallel_connection</span><span class="p">(</span><span class="n">element_list</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;iw&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Parallel connection of walls according to VDI 6007</span>
 
 <span class="sd">        Calculates the parallel connection of wall elements according to VDI</span>
@@ -576,6 +589,9 @@
 <span class="sd">            List of inner or outer walls</span>
 <span class="sd">        omega : float</span>
 <span class="sd">            VDI 6007 frequency</span>
+<span class="sd">        mode : str</span>
+<span class="sd">            &#39;ow&#39; uses r1 and c1_korr</span>
+<span class="sd">            &#39;iw&#39; uses r1 and c1 (function falls back here for other strings)</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -588,84 +604,41 @@
         <span class="k">for</span> <span class="n">wall_count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">element_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
 
             <span class="k">if</span> <span class="n">wall_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-
-                <span class="n">r1</span> <span class="o">=</span> <span class="p">(</span>
-                    <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span><span class="p">]</span><span class="o">.</span><span class="n">r1</span> <span class="o">*</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">+</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">r1</span>
-                    <span class="o">*</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">+</span> <span class="n">omega</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">*</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span><span class="p">]</span><span class="o">.</span><span class="n">r1</span>
-                    <span class="o">*</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">r1</span>
-                    <span class="o">*</span> <span class="p">(</span><span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span><span class="p">]</span><span class="o">.</span><span class="n">r1</span> <span class="o">+</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">r1</span><span class="p">)</span>
-                    <span class="o">*</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">*</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span> <span class="o">**</span> <span class="mi">2</span>
-                <span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
-                    <span class="p">(</span><span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span> <span class="o">+</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">+</span> <span class="n">omega</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">*</span> <span class="p">(</span><span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span><span class="p">]</span><span class="o">.</span><span class="n">r1</span> <span class="o">+</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">r1</span><span class="p">)</span>
-                    <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">*</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">*</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span> <span class="o">**</span> <span class="mi">2</span>
-                <span class="p">)</span>
-
-                <span class="n">c1</span> <span class="o">=</span> <span class="p">(</span>
-                    <span class="p">(</span><span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span> <span class="o">+</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">+</span> <span class="n">omega</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">*</span> <span class="p">(</span><span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span><span class="p">]</span><span class="o">.</span><span class="n">r1</span> <span class="o">+</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">r1</span><span class="p">)</span>
-                    <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">*</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">*</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span> <span class="o">**</span> <span class="mi">2</span>
-                <span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
-                    <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span>
-                    <span class="o">+</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span>
-                    <span class="o">+</span> <span class="n">omega</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">*</span> <span class="p">(</span>
-                        <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span><span class="p">]</span><span class="o">.</span><span class="n">r1</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span>
-                        <span class="o">+</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">r1</span> <span class="o">**</span> <span class="mi">2</span>
-                        <span class="o">*</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span>
-                    <span class="p">)</span>
-                    <span class="o">*</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span>
-                    <span class="o">*</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span>
-                <span class="p">)</span>
+                <span class="n">r1_before</span> <span class="o">=</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span><span class="p">]</span><span class="o">.</span><span class="n">r1</span>
+                <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;ow&#39;</span><span class="p">:</span>
+                    <span class="n">c1_before</span> <span class="o">=</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span><span class="p">]</span><span class="o">.</span><span class="n">c1_korr</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">c1_before</span> <span class="o">=</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">r1x</span> <span class="o">=</span> <span class="n">r1</span>
-                <span class="n">c1x</span> <span class="o">=</span> <span class="n">c1</span>
-                <span class="n">r1</span> <span class="o">=</span> <span class="p">(</span>
-                    <span class="n">r1x</span> <span class="o">*</span> <span class="n">c1x</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">+</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">r1</span>
-                    <span class="o">*</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">+</span> <span class="n">omega</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">*</span> <span class="n">r1x</span>
-                    <span class="o">*</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">r1</span>
-                    <span class="o">*</span> <span class="p">(</span><span class="n">r1x</span> <span class="o">+</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">r1</span><span class="p">)</span>
-                    <span class="o">*</span> <span class="n">c1x</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">*</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span> <span class="o">**</span> <span class="mi">2</span>
-                <span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
-                    <span class="p">(</span><span class="n">c1x</span> <span class="o">+</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">+</span> <span class="n">omega</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">*</span> <span class="p">(</span><span class="n">r1x</span> <span class="o">+</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">r1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">*</span> <span class="n">c1x</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">*</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span> <span class="o">**</span> <span class="mi">2</span>
-                <span class="p">)</span>
+                <span class="n">r1_before</span> <span class="o">=</span> <span class="n">r1</span>
+                <span class="n">c1_before</span> <span class="o">=</span> <span class="n">c1</span>
+            <span class="n">r1_add</span> <span class="o">=</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">r1</span>
+            <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;ow&#39;</span><span class="p">:</span>
+                <span class="n">c1_add</span> <span class="o">=</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">c1_korr</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">c1_add</span> <span class="o">=</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span>
 
-                <span class="n">c1</span> <span class="o">=</span> <span class="p">(</span>
-                    <span class="p">(</span><span class="n">c1x</span> <span class="o">+</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">+</span> <span class="n">omega</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">*</span> <span class="p">(</span><span class="n">r1x</span> <span class="o">+</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">r1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">*</span> <span class="n">c1x</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">*</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span> <span class="o">**</span> <span class="mi">2</span>
-                <span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
-                    <span class="n">c1x</span>
-                    <span class="o">+</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span>
-                    <span class="o">+</span> <span class="n">omega</span> <span class="o">**</span> <span class="mi">2</span>
-                    <span class="o">*</span> <span class="p">(</span>
-                        <span class="n">r1x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">c1x</span>
-                        <span class="o">+</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">r1</span> <span class="o">**</span> <span class="mi">2</span>
-                        <span class="o">*</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span>
-                    <span class="p">)</span>
-                    <span class="o">*</span> <span class="n">c1x</span>
-                    <span class="o">*</span> <span class="n">element_list</span><span class="p">[</span><span class="n">wall_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">c1</span>
-                <span class="p">)</span>
+            <span class="n">r1</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">r1_before</span> <span class="o">*</span> <span class="n">c1_before</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">r1_add</span> <span class="o">*</span> <span class="n">c1_add</span> <span class="o">**</span> <span class="mi">2</span>
+                <span class="o">+</span> <span class="n">omega</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">r1_before</span> <span class="o">*</span> <span class="n">r1_add</span> <span class="o">*</span> <span class="p">(</span><span class="n">r1_before</span> <span class="o">+</span> <span class="n">r1_add</span><span class="p">)</span>
+                <span class="o">*</span> <span class="n">c1_before</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">c1_add</span> <span class="o">**</span> <span class="mi">2</span>
+            <span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
+                <span class="p">(</span><span class="n">c1_before</span> <span class="o">+</span> <span class="n">c1_add</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+                <span class="o">+</span> <span class="n">omega</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">r1_before</span> <span class="o">+</span> <span class="n">r1_add</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">c1_before</span> <span class="o">**</span> <span class="mi">2</span>
+                <span class="o">*</span> <span class="n">c1_add</span> <span class="o">**</span> <span class="mi">2</span>
+            <span class="p">)</span>
+
+            <span class="n">c1</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="p">(</span><span class="n">c1_before</span> <span class="o">+</span> <span class="n">c1_add</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+                <span class="o">+</span> <span class="n">omega</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">r1_before</span> <span class="o">+</span> <span class="n">r1_add</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">c1_before</span> <span class="o">**</span> <span class="mi">2</span>
+                <span class="o">*</span> <span class="n">c1_add</span> <span class="o">**</span> <span class="mi">2</span>
+            <span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
+                <span class="n">c1_before</span> <span class="o">+</span> <span class="n">c1_add</span>
+                <span class="o">+</span> <span class="n">omega</span> <span class="o">**</span> <span class="mi">2</span>
+                <span class="o">*</span> <span class="p">(</span><span class="n">r1_before</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">c1_before</span> <span class="o">+</span> <span class="n">r1_add</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">c1_add</span><span class="p">)</span>
+                <span class="o">*</span> <span class="n">c1_before</span> <span class="o">*</span> <span class="n">c1_add</span>
+            <span class="p">)</span>
+
         <span class="k">return</span> <span class="n">r1</span><span class="p">,</span> <span class="n">c1</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_sum_outer_wall_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -675,22 +648,26 @@
 <span class="sd">        where necessary (the class doc string) for coefficients of heat</span>
 <span class="sd">        transfer, resistances, areas and UA-Values.</span>
 
-<span class="sd">        For TwoElement model it treats rooftops, ground floor and outer walls</span>
+<span class="sd">        For TwoElement model it treats rooftops, ground floor, outer walls</span>
+<span class="sd">        and zone borders to neighboured zones (if this zone is heated)</span>
 <span class="sd">        as one kind of wall type.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># treat all outer wall types identical</span>
 
+        <span class="n">outer_walls</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">outer_walls</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ground_floors</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">rooftops</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">find_izes_outer</span><span class="p">()</span>
+        <span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">area_ow</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="nb">sum</span><span class="p">(</span><span class="n">out_wall</span><span class="o">.</span><span class="n">area</span> <span class="k">for</span> <span class="n">out_wall</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">outer_walls</span><span class="p">)</span>
-            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ground</span><span class="o">.</span><span class="n">area</span> <span class="k">for</span> <span class="n">ground</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ground_floors</span><span class="p">)</span>
-            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">roof</span><span class="o">.</span><span class="n">area</span> <span class="k">for</span> <span class="n">roof</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">rooftops</span><span class="p">)</span>
+            <span class="nb">sum</span><span class="p">(</span><span class="n">out_wall</span><span class="o">.</span><span class="n">area</span> <span class="k">for</span> <span class="n">out_wall</span> <span class="ow">in</span> <span class="n">outer_walls</span><span class="p">)</span>
         <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">ua_value_ow</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="nb">sum</span><span class="p">(</span><span class="n">out_wall</span><span class="o">.</span><span class="n">ua_value</span> <span class="k">for</span> <span class="n">out_wall</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">outer_walls</span><span class="p">)</span>
-            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ground</span><span class="o">.</span><span class="n">ua_value</span> <span class="k">for</span> <span class="n">ground</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ground_floors</span><span class="p">)</span>
-            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">roof</span><span class="o">.</span><span class="n">ua_value</span> <span class="k">for</span> <span class="n">roof</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">rooftops</span><span class="p">)</span>
+            <span class="nb">sum</span><span class="p">(</span><span class="n">out_wall</span><span class="o">.</span><span class="n">ua_value</span> <span class="k">for</span> <span class="n">out_wall</span> <span class="ow">in</span> <span class="n">outer_walls</span><span class="p">)</span>
         <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">r_total_ow</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">ua_value_ow</span>
@@ -698,35 +675,21 @@
         <span class="c1"># values facing the inside of the thermal zone</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">r_conv_inner_ow</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span>
-            <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">out_wall</span><span class="o">.</span><span class="n">r_inner_conv</span> <span class="k">for</span> <span class="n">out_wall</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">outer_walls</span><span class="p">)</span>
-            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">ground</span><span class="o">.</span><span class="n">r_inner_conv</span> <span class="k">for</span> <span class="n">ground</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ground_floors</span><span class="p">)</span>
-            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">roof</span><span class="o">.</span><span class="n">r_inner_conv</span> <span class="k">for</span> <span class="n">roof</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">rooftops</span><span class="p">)</span>
+            <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">out_wall</span><span class="o">.</span><span class="n">r_inner_conv</span> <span class="k">for</span> <span class="n">out_wall</span> <span class="ow">in</span> <span class="n">outer_walls</span><span class="p">)</span>
         <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">r_rad_inner_ow</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span>
-            <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">out_wall</span><span class="o">.</span><span class="n">r_inner_rad</span> <span class="k">for</span> <span class="n">out_wall</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">outer_walls</span><span class="p">)</span>
-            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">ground</span><span class="o">.</span><span class="n">r_inner_rad</span> <span class="k">for</span> <span class="n">ground</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ground_floors</span><span class="p">)</span>
-            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">roof</span><span class="o">.</span><span class="n">r_inner_rad</span> <span class="k">for</span> <span class="n">roof</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">rooftops</span><span class="p">)</span>
+            <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">out_wall</span><span class="o">.</span><span class="n">r_inner_rad</span> <span class="k">for</span> <span class="n">out_wall</span> <span class="ow">in</span> <span class="n">outer_walls</span><span class="p">)</span>
         <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">r_comb_inner_ow</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span>
-            <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">out_wall</span><span class="o">.</span><span class="n">r_inner_comb</span> <span class="k">for</span> <span class="n">out_wall</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">outer_walls</span><span class="p">)</span>
-            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">ground</span><span class="o">.</span><span class="n">r_inner_comb</span> <span class="k">for</span> <span class="n">ground</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ground_floors</span><span class="p">)</span>
-            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">roof</span><span class="o">.</span><span class="n">r_inner_comb</span> <span class="k">for</span> <span class="n">roof</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">rooftops</span><span class="p">)</span>
+            <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">out_wall</span><span class="o">.</span><span class="n">r_inner_comb</span> <span class="k">for</span> <span class="n">out_wall</span> <span class="ow">in</span> <span class="n">outer_walls</span><span class="p">)</span>
         <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">ir_emissivity_inner_ow</span> <span class="o">=</span> <span class="p">(</span>
             <span class="nb">sum</span><span class="p">(</span>
                 <span class="n">out_wall</span><span class="o">.</span><span class="n">layer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">*</span> <span class="n">out_wall</span><span class="o">.</span><span class="n">area</span>
-                <span class="k">for</span> <span class="n">out_wall</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">outer_walls</span>
-            <span class="p">)</span>
-            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span>
-                <span class="n">ground</span><span class="o">.</span><span class="n">layer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">*</span> <span class="n">ground</span><span class="o">.</span><span class="n">area</span>
-                <span class="k">for</span> <span class="n">ground</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ground_floors</span>
-            <span class="p">)</span>
-            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span>
-                <span class="n">roof</span><span class="o">.</span><span class="n">layer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">*</span> <span class="n">roof</span><span class="o">.</span><span class="n">area</span>
-                <span class="k">for</span> <span class="n">roof</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">rooftops</span>
+                <span class="k">for</span> <span class="n">out_wall</span> <span class="ow">in</span> <span class="n">outer_walls</span>
             <span class="p">)</span>
         <span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_ow</span>
 
@@ -739,19 +702,28 @@
 
         <span class="n">_area_ow_rt</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
             <span class="n">out_wall</span><span class="o">.</span><span class="n">area</span> <span class="k">for</span> <span class="n">out_wall</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">outer_walls</span>
-        <span class="p">)</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">roof</span><span class="o">.</span><span class="n">area</span> <span class="k">for</span> <span class="n">roof</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">rooftops</span><span class="p">)</span>
+        <span class="p">)</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span>
+            <span class="n">roof</span><span class="o">.</span><span class="n">area</span> <span class="k">for</span> <span class="n">roof</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">rooftops</span>
+        <span class="p">)</span>
+
+        <span class="n">_area_ow_rt_nzb</span> <span class="o">=</span> <span class="n">_area_ow_rt</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span>
+            <span class="n">roof</span><span class="o">.</span><span class="n">area</span> <span class="k">for</span> <span class="n">roof</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">find_izes_outer</span><span class="p">()</span>
+        <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">r_conv_outer_ow</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span>
             <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">out_wall</span><span class="o">.</span><span class="n">r_outer_conv</span> <span class="k">for</span> <span class="n">out_wall</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">outer_walls</span><span class="p">)</span>
             <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">roof</span><span class="o">.</span><span class="n">r_outer_conv</span> <span class="k">for</span> <span class="n">roof</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">rooftops</span><span class="p">)</span>
+            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">nzb</span><span class="o">.</span><span class="n">r_outer_conv</span> <span class="k">for</span> <span class="n">nzb</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">find_izes_outer</span><span class="p">())</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">r_rad_outer_ow</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span>
             <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">out_wall</span><span class="o">.</span><span class="n">r_outer_rad</span> <span class="k">for</span> <span class="n">out_wall</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">outer_walls</span><span class="p">)</span>
             <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">roof</span><span class="o">.</span><span class="n">r_outer_rad</span> <span class="k">for</span> <span class="n">roof</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">rooftops</span><span class="p">)</span>
+            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">nzb</span><span class="o">.</span><span class="n">r_outer_rad</span> <span class="k">for</span> <span class="n">nzb</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">find_izes_outer</span><span class="p">())</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">r_comb_outer_ow</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span>
             <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">out_wall</span><span class="o">.</span><span class="n">r_outer_comb</span> <span class="k">for</span> <span class="n">out_wall</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">outer_walls</span><span class="p">)</span>
             <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">roof</span><span class="o">.</span><span class="n">r_outer_comb</span> <span class="k">for</span> <span class="n">roof</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">rooftops</span><span class="p">)</span>
+            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">nzb</span><span class="o">.</span><span class="n">r_outer_comb</span> <span class="k">for</span> <span class="n">nzb</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">find_izes_outer</span><span class="p">())</span>
         <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">ir_emissivity_outer_ow</span> <span class="o">=</span> <span class="p">(</span>
@@ -776,9 +748,9 @@
             <span class="p">)</span>
         <span class="p">)</span> <span class="o">/</span> <span class="n">_area_ow_rt</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">alpha_conv_outer_ow</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r_conv_outer_ow</span> <span class="o">*</span> <span class="n">_area_ow_rt</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">alpha_rad_outer_ow</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r_rad_outer_ow</span> <span class="o">*</span> <span class="n">_area_ow_rt</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">alpha_comb_outer_ow</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r_comb_outer_ow</span> <span class="o">*</span> <span class="n">_area_ow_rt</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alpha_conv_outer_ow</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r_conv_outer_ow</span> <span class="o">*</span> <span class="n">_area_ow_rt_nzb</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alpha_rad_outer_ow</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r_rad_outer_ow</span> <span class="o">*</span> <span class="n">_area_ow_rt_nzb</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alpha_comb_outer_ow</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r_comb_outer_ow</span> <span class="o">*</span> <span class="n">_area_ow_rt_nzb</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_sum_inner_wall_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Sum attributes for interior elements</span>
@@ -799,12 +771,14 @@
             <span class="nb">sum</span><span class="p">(</span><span class="n">in_wall</span><span class="o">.</span><span class="n">area</span> <span class="k">for</span> <span class="n">in_wall</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">inner_walls</span><span class="p">)</span>
             <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">floor</span><span class="o">.</span><span class="n">area</span> <span class="k">for</span> <span class="n">floor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">floors</span><span class="p">)</span>
             <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ceiling</span><span class="o">.</span><span class="n">area</span> <span class="k">for</span> <span class="n">ceiling</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ceilings</span><span class="p">)</span>
+            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">nzb</span><span class="o">.</span><span class="n">area</span> <span class="k">for</span> <span class="n">nzb</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nzbs_for_iw</span><span class="p">)</span>
         <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">ua_value_iw</span> <span class="o">=</span> <span class="p">(</span>
             <span class="nb">sum</span><span class="p">(</span><span class="n">in_wall</span><span class="o">.</span><span class="n">ua_value</span> <span class="k">for</span> <span class="n">in_wall</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">inner_walls</span><span class="p">)</span>
             <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">floor</span><span class="o">.</span><span class="n">ua_value</span> <span class="k">for</span> <span class="n">floor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">floors</span><span class="p">)</span>
             <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ceiling</span><span class="o">.</span><span class="n">ua_value</span> <span class="k">for</span> <span class="n">ceiling</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ceilings</span><span class="p">)</span>
+            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">nzb</span><span class="o">.</span><span class="n">ua_value</span> <span class="k">for</span> <span class="n">nzb</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nzbs_for_iw</span><span class="p">)</span>
         <span class="p">)</span>
 
         <span class="c1"># values facing the inside of the thermal zone</span>
@@ -813,18 +787,21 @@
             <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">in_wall</span><span class="o">.</span><span class="n">r_inner_conv</span> <span class="k">for</span> <span class="n">in_wall</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">inner_walls</span><span class="p">)</span>
             <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">floor</span><span class="o">.</span><span class="n">r_inner_conv</span> <span class="k">for</span> <span class="n">floor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">floors</span><span class="p">)</span>
             <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">ceiling</span><span class="o">.</span><span class="n">r_inner_conv</span> <span class="k">for</span> <span class="n">ceiling</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ceilings</span><span class="p">)</span>
+            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">nzb</span><span class="o">.</span><span class="n">r_inner_conv</span> <span class="k">for</span> <span class="n">nzb</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nzbs_for_iw</span><span class="p">)</span>
         <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">r_rad_inner_iw</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span>
             <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">in_wall</span><span class="o">.</span><span class="n">r_inner_rad</span> <span class="k">for</span> <span class="n">in_wall</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">inner_walls</span><span class="p">)</span>
             <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">floor</span><span class="o">.</span><span class="n">r_inner_rad</span> <span class="k">for</span> <span class="n">floor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">floors</span><span class="p">)</span>
             <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">ceiling</span><span class="o">.</span><span class="n">r_inner_rad</span> <span class="k">for</span> <span class="n">ceiling</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ceilings</span><span class="p">)</span>
+            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">nzb</span><span class="o">.</span><span class="n">r_inner_rad</span> <span class="k">for</span> <span class="n">nzb</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nzbs_for_iw</span><span class="p">)</span>
         <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">r_comb_inner_iw</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span>
             <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">in_wall</span><span class="o">.</span><span class="n">r_inner_comb</span> <span class="k">for</span> <span class="n">in_wall</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">inner_walls</span><span class="p">)</span>
             <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">floor</span><span class="o">.</span><span class="n">r_inner_comb</span> <span class="k">for</span> <span class="n">floor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">floors</span><span class="p">)</span>
             <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">ceiling</span><span class="o">.</span><span class="n">r_inner_comb</span> <span class="k">for</span> <span class="n">ceiling</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ceilings</span><span class="p">)</span>
+            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">nzb</span><span class="o">.</span><span class="n">r_inner_comb</span> <span class="k">for</span> <span class="n">nzb</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nzbs_for_iw</span><span class="p">)</span>
         <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">ir_emissivity_inner_iw</span> <span class="o">=</span> <span class="p">(</span>
@@ -839,6 +816,10 @@
             <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span>
                 <span class="n">ceiling</span><span class="o">.</span><span class="n">layer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">*</span> <span class="n">ceiling</span><span class="o">.</span><span class="n">area</span>
                 <span class="k">for</span> <span class="n">ceiling</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ceilings</span>
+            <span class="p">)</span>
+            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span>
+                <span class="n">nzb</span><span class="o">.</span><span class="n">layer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">ir_emissivity</span> <span class="o">*</span> <span class="n">nzb</span><span class="o">.</span><span class="n">area</span>
+                <span class="k">for</span> <span class="n">nzb</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nzbs_for_iw</span>
             <span class="p">)</span>
         <span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_iw</span>
 
@@ -953,6 +934,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">outer_walls</span>
             <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ground_floors</span>
             <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">rooftops</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">find_izes_outer</span><span class="p">()</span>
         <span class="p">)</span>
 
         <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">outer_walls</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
@@ -961,7 +943,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">c1_ow</span> <span class="o">=</span> <span class="n">outer_walls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">c1_korr</span>
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">outer_walls</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="c1"># more than one outer wall, calculate chain matrix</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">r1_ow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c1_ow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_parallel_connection</span><span class="p">(</span><span class="n">outer_walls</span><span class="p">,</span> <span class="n">omega</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">r1_ow</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c1_ow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_parallel_connection</span><span class="p">(</span>
+                <span class="n">outer_walls</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;ow&#39;</span>
+            <span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">merge_windows</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
@@ -970,7 +954,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">r1_win</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span>
                         <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">win</span><span class="o">.</span><span class="n">r1</span><span class="p">)</span> <span class="k">for</span> <span class="n">win</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">windows</span>
                     <span class="p">)</span>
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">outer_walls</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">outer_walls</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="n">conduction</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span>
                         <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">element</span><span class="o">.</span><span class="n">r_conduc</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">outer_walls</span>
                     <span class="p">)</span>
@@ -989,7 +973,7 @@
 
                 <span class="k">if</span> <span class="p">(</span>
                     <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">windows</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
-                    <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">outer_walls</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+                    <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">outer_walls</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
                 <span class="p">):</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">r1_win</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span>
                         <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">win</span><span class="o">.</span><span class="n">r1</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">win</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">windows</span>
@@ -1055,6 +1039,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">inner_walls</span>
             <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">floors</span>
             <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ceilings</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">nzbs_for_iw</span>
         <span class="p">)</span>
 
         <span class="k">for</span> <span class="n">in_wall</span> <span class="ow">in</span> <span class="n">inner_walls</span><span class="p">:</span>
@@ -1067,7 +1052,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">c1_iw</span> <span class="o">=</span> <span class="n">inner_walls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">c1_korr</span>
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">inner_walls</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="c1"># more than one outer wall, calculate chain matrix</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">r1_iw</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c1_iw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_parallel_connection</span><span class="p">(</span><span class="n">inner_walls</span><span class="p">,</span> <span class="n">omega</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">r1_iw</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c1_iw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_parallel_connection</span><span class="p">(</span>
+                <span class="n">inner_walls</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;iw&#39;</span>
+            <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_calc_wf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Weightfactors for outer elements(walls, roof, ground floor, windows)</span>
@@ -1087,6 +1074,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">outer_walls</span>
             <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ground_floors</span>
             <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">rooftops</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">find_izes_outer</span><span class="p">()</span>
         <span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">merge_windows</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
@@ -1139,11 +1127,13 @@
 
 <span class="sd">        This function calculates the number of outer elements with a</span>
 <span class="sd">        different combination of orientation and tilt, this includes the</span>
-<span class="sd">        rooftops and ground floors.</span>
+<span class="sd">        rooftops, ground floors, and borders to unheated neighboured zones if</span>
+<span class="sd">        this zone is heated.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">outer_elements</span> <span class="o">=</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">outer_walls</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">find_izes_outer</span><span class="p">()</span>
             <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ground_floors</span>
             <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">rooftops</span>
             <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">windows</span>
@@ -1164,9 +1154,10 @@
 
         <span class="n">outer_elements</span> <span class="o">=</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">outer_walls</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">find_izes_outer</span><span class="p">()</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ground_floors</span>
             <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">rooftops</span>
             <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">windows</span>
-            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ground_floors</span>
         <span class="p">)</span>
 
         <span class="n">tilt_orient</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1175,25 +1166,29 @@
         <span class="n">tilt_orient</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">tilt_orient</span><span class="p">))</span>
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tilt_orient</span><span class="p">:</span>
-            <span class="n">wall_rt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">find_walls</span><span class="p">(</span>
+            <span class="n">wall_rt_nzb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">find_walls</span><span class="p">(</span>
                 <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">find_rts</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">find_rts</span><span class="p">(</span>
+                <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">find_izes_outer</span><span class="p">(</span>
+                <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="p">)</span>
             <span class="n">wins</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">find_wins</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
             <span class="n">gf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">find_gfs</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">merge_windows</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">facade_areas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="nb">sum</span><span class="p">([</span><span class="n">element</span><span class="o">.</span><span class="n">area</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">(</span><span class="n">wall_rt</span> <span class="o">+</span> <span class="n">wins</span> <span class="o">+</span> <span class="n">gf</span><span class="p">)])</span>
+                    <span class="nb">sum</span><span class="p">([</span><span class="n">element</span><span class="o">.</span><span class="n">area</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">(</span><span class="n">wall_rt_nzb</span> <span class="o">+</span> <span class="n">wins</span> <span class="o">+</span> <span class="n">gf</span><span class="p">)])</span>
                 <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">facade_areas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="nb">sum</span><span class="p">([</span><span class="n">element</span><span class="o">.</span><span class="n">area</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">(</span><span class="n">wall_rt</span> <span class="o">+</span> <span class="n">gf</span><span class="p">)])</span>
+                    <span class="nb">sum</span><span class="p">([</span><span class="n">element</span><span class="o">.</span><span class="n">area</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">(</span><span class="n">wall_rt_nzb</span> <span class="o">+</span> <span class="n">gf</span><span class="p">)])</span>
                 <span class="p">)</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">orientation_facade</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tilt_facade</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">wall_rt</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">wall_rt_nzb</span><span class="p">:</span>
 
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">gf</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">weightfactor_ow</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
@@ -1204,8 +1199,10 @@
                         <span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="n">element</span><span class="o">.</span><span class="n">area</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">gf</span><span class="p">]))</span>
                     <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">weightfactor_ow</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="n">wall</span><span class="o">.</span><span class="n">wf_out</span> <span class="k">for</span> <span class="n">wall</span> <span class="ow">in</span> <span class="n">wall_rt</span><span class="p">]))</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">outer_wall_areas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="n">wall</span><span class="o">.</span><span class="n">area</span> <span class="k">for</span> <span class="n">wall</span> <span class="ow">in</span> <span class="n">wall_rt</span><span class="p">]))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">weightfactor_ow</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="n">wall</span><span class="o">.</span><span class="n">wf_out</span>
+                                                 <span class="k">for</span> <span class="n">wall</span> <span class="ow">in</span> <span class="n">wall_rt_nzb</span><span class="p">]))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">outer_wall_areas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="n">wall</span><span class="o">.</span><span class="n">area</span>
+                                                  <span class="k">for</span> <span class="n">wall</span> <span class="ow">in</span> <span class="n">wall_rt_nzb</span><span class="p">]))</span>
 
             <span class="k">if</span> <span class="ow">not</span> <span class="n">wins</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">weightfactor_win</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
@@ -1262,6 +1259,13 @@
                                 <span class="s2">&quot;which could lead to ideal heaters being too small.&quot;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">heat_load</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">t_soil_mode</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">t_ground</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">t_ground</span> \
+                       <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">t_ground_amplitude</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">t_ground</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">t_ground</span>
+
         <span class="n">ua_value_gf_temp</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
             <span class="n">ground</span><span class="o">.</span><span class="n">ua_value</span> <span class="k">for</span> <span class="n">ground</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">ground_floors</span>
         <span class="p">)</span>
@@ -1280,7 +1284,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">heat_load_outside_factor</span> \
             <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">t_inside</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">t_outside</span><span class="p">)</span> \
             <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">heat_load_ground_factor</span> \
-            <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">t_inside</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">t_ground</span><span class="p">)</span>
+            <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">t_inside</span> <span class="o">-</span> <span class="n">t_ground</span><span class="p">)</span>
 
 <div class="viewcode-block" id="TwoElement.set_calc_default">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.calculation.html#teaser.logic.buildingobjects.calculation.two_element.TwoElement.set_calc_default">[docs]</a>
@@ -1409,7 +1413,27 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">orientation_facade</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">heat_load</span> <span class="o">=</span> <span class="mf">0.0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cool_load</span> <span class="o">=</span> <span class="mf">0.0</span></div>
-</div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">nzbs_for_iw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;returns borders to neighboured zones to be considered as inner walls</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        value : list</span>
+<span class="sd">            list of those interzonal elements that are NOT to be treated as</span>
+<span class="sd">            &#39;outer_ordered&#39; depending on their &#39;interzonal_type_export&#39;</span>
+<span class="sd">            attribute</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_zone</span><span class="o">.</span><span class="n">interzonal_elements</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span><span class="o">.</span><span class="n">interzonal_type_export</span> <span class="o">==</span> <span class="s1">&#39;outer_ordered&#39;</span><span class="p">:</span>
+                <span class="n">elements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">pass</span>
+        <span class="k">return</span> <span class="n">elements</span></div>
 
 </pre></div>
 

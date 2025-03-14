@@ -57,6 +57,30 @@ teaser.logic.buildingobjects.buildingphysics.innerwall module
    :undoc-members:
    :show-inheritance:
 
+teaser.logic.buildingobjects.buildingphysics.interzonalceiling module
+---------------------------------------------------------------------
+
+.. automodule:: teaser.logic.buildingobjects.buildingphysics.interzonalceiling
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.logic.buildingobjects.buildingphysics.interzonalfloor module
+-------------------------------------------------------------------
+
+.. automodule:: teaser.logic.buildingobjects.buildingphysics.interzonalfloor
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+teaser.logic.buildingobjects.buildingphysics.interzonalwall module
+------------------------------------------------------------------
+
+.. automodule:: teaser.logic.buildingobjects.buildingphysics.interzonalwall
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 teaser.logic.buildingobjects.buildingphysics.layer module
 ---------------------------------------------------------
 

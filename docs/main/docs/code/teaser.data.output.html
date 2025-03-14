@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.data.output package &mdash; TEASER 1.1.4 documentation</title>
+  <title>teaser.data.output package &mdash; TEASER 1.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
@@ -14,7 +14,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=00f267c6"></script>
+      <script src="../_static/documentation_options.js?v=6efca38a"></script>
       <script src="../_static/doctools.js?v=9a2dae69"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -182,7 +182,7 @@
 <p>This module contains function for AixLib model generation</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaser.data.output.aixlib_output.export_multizone">
-<span class="sig-prename descclassname"><span class="pre">teaser.data.output.aixlib_output.</span></span><span class="sig-name descname"><span class="pre">export_multizone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buildings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_postprocessing_calc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/output/aixlib_output.html#export_multizone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.output.aixlib_output.export_multizone" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaser.data.output.aixlib_output.</span></span><span class="sig-name descname"><span class="pre">export_multizone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buildings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_postprocessing_calc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_multizone_template_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/output/aixlib_output.html#export_multizone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.output.aixlib_output.export_multizone" title="Link to this definition"></a></dt>
 <dd><p>Exports models for AixLib library</p>
 <p>Exports a building for
 AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped models
@@ -216,6 +216,9 @@ demands. Only supported for Aixlib. Default is False.</p>
 <dt><strong>export_vars</strong><span class="classifier">str</span></dt><dd><p>Holds the string about which variables to export following the
 __Dymola_selection syntax.</p>
 </dd>
+<dt><strong>custom_multizone_template_path</strong><span class="classifier">str</span></dt><dd><p>if a custom template for writing the multizone model should be used,
+its path can be specified as a full path</p>
+</dd>
 </dl>
 </dd>
 <dt class="field-even">Attributes<span class="colon">:</span></dt>
@@ -229,6 +232,8 @@ __Dymola_selection syntax.</p>
 <dt><strong>zone_template_3</strong><span class="classifier">Template object</span></dt><dd><p>Template for ThermalZoneRecord using 3 element model</p>
 </dd>
 <dt><strong>zone_template_4</strong><span class="classifier">Template object</span></dt><dd><p>Template for ThermalZoneRecord using 4 element model</p>
+</dd>
+<dt><strong>zone_template_5</strong><span class="classifier">Template object</span></dt><dd><p>Template for ThermalZoneRecord using 5 element model</p>
 </dd>
 <dt><strong>model_template</strong><span class="classifier">Template object</span></dt><dd><p>Template for MultiZone model</p>
 </dd>

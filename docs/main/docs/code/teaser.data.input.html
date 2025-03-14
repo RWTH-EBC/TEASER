@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.data.input package &mdash; TEASER 1.1.4 documentation</title>
+  <title>teaser.data.input package &mdash; TEASER 1.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
@@ -14,7 +14,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=00f267c6"></script>
+      <script src="../_static/documentation_options.js?v=6efca38a"></script>
       <script src="../_static/doctools.js?v=9a2dae69"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -61,6 +61,7 @@
 <li class="toctree-l7"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l7"><a class="reference internal" href="#module-teaser.data.input.buildingelement_input_json">teaser.data.input.buildingelement_input_json module</a><ul>
 <li class="toctree-l8"><a class="reference internal" href="#teaser.data.input.buildingelement_input_json.load_type_element"><code class="docutils literal notranslate"><span class="pre">load_type_element()</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="#teaser.data.input.buildingelement_input_json.load_type_element_by_key"><code class="docutils literal notranslate"><span class="pre">load_type_element_by_key()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l7"><a class="reference internal" href="#module-teaser.data.input.material_input_json">teaser.data.input.material_input_json module</a><ul>
@@ -155,7 +156,7 @@
 <p>This module contains function to load building element classes.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="teaser.data.input.buildingelement_input_json.load_type_element">
-<span class="sig-prename descclassname"><span class="pre">teaser.data.input.buildingelement_input_json.</span></span><span class="sig-name descname"><span class="pre">load_type_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">construction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/input/buildingelement_input_json.html#load_type_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.input.buildingelement_input_json.load_type_element" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">teaser.data.input.buildingelement_input_json.</span></span><span class="sig-name descname"><span class="pre">load_type_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">construction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/input/buildingelement_input_json.html#load_type_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.input.buildingelement_input_json.load_type_element" title="Link to this definition"></a></dt>
 <dd><p>Load BuildingElement from json.</p>
 <p>Loads typical building elements according to their construction year and
 their construction type from a JSON. The elements are created by using
@@ -179,6 +180,40 @@ For the respective source of each element, the comment in the json file can be o
 Material (typically this is the data class stored in prj.data,
 but the user can individually change that.</p>
 </dd>
+<dt><strong>element_type</strong><span class="classifier">str</span></dt><dd><p>Element type to load - only to specify if the data_class entry for a
+different type than type(element) is to be loaded, e.g. InnerWall
+instead of OuterWall</p>
+</dd>
+<dt><strong>reverse_layers</strong><span class="classifier">bool</span></dt><dd><p>defines if layer list should be reversed - this is necessary for zone
+borders to maintain consistency</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="teaser.data.input.buildingelement_input_json.load_type_element_by_key">
+<span class="sig-prename descclassname"><span class="pre">teaser.data.input.buildingelement_input_json.</span></span><span class="sig-name descname"><span class="pre">load_type_element_by_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_element_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/input/buildingelement_input_json.html#load_type_element_by_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.input.buildingelement_input_json.load_type_element_by_key" title="Link to this definition"></a></dt>
+<dd><p>Load BuildingElement from json by key string.</p>
+<p>Loads typical building elements according to their key string from a JSON.
+The elements are created by using building characteristics from
+cite:<cite>BundesministeriumfurVerkehrBauundStadtentwicklung.26.07.2007</cite> and
+<span id="id3">[<a class="reference internal" href="../archetypes.html#id31" title="Tobias Loga, Nikolaus Diefenbach, Jens Knissel, and Rolf Born. Ein vereinfachtes, statistisch abgesichertes Verfahren zur Erhebung von Gebäudedaten für die energetische Bewertung von Gebäuden. Volume Bauforschung für die Praxis. Institut Wohnen und Umwelt GmbH, Darmstadt, 2005.">3</a>]</span>, which is combined with normative material data
+from <span id="id4">[<a class="reference internal" href="../archetypes.html#id45" title="Berechnung des instationären thermischen Verhaltens von Räumen und Gebäuden - Fenstermodell. März 2012.">10</a>]</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>element</strong><span class="classifier">BuildingElement()</span></dt><dd><p>Instance of BuildingElement or inherited Element of TEASER</p>
+</dd>
+<dt><strong>type_element_key</strong><span class="classifier">str</span></dt><dd><p>key string to the type element of the building characteristics sources</p>
+</dd>
+<dt><strong>data_class</strong><span class="classifier">DataClass()</span></dt><dd><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that.</p>
+</dd>
+<dt><strong>reverse_layers</strong><span class="classifier">bool</span></dt><dd><p>defines if layer list should be reversed</p>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -193,9 +228,9 @@ but the user can individually change that.</p>
 <span class="sig-prename descclassname"><span class="pre">teaser.data.input.material_input_json.</span></span><span class="sig-name descname"><span class="pre">load_material</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mat_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/input/material_input_json.html#load_material"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.input.material_input_json.load_material" title="Link to this definition"></a></dt>
 <dd><p>Material loader with name as identification.</p>
 <p>Loads Material specified in the JSON. Sources are
-<span id="id3">[<a class="reference internal" href="../archetypes.html#id25" title="DIN 12524. Baustoffe und -produkte - Wärme- und feuchteschutztechnische Eigenschaften - Tabellierte Bemessungswerte - Deutsche Fassung. Juli 2000.">6</a>]</span>,
-DeutschesInstitutfurNormung.Februar2013, <span id="id4">[<a class="reference internal" href="../archetypes.html#id46" title="Ernst-Rudolf Schramek, Hermann Recknagel, and Hermann Sprenger, editors. Taschenbuch für Heizung und Klimatechnik [09/10]: Einschließlich Warmwasser- und Kältetechnik. Oldenbourg Industrieverlag, München, 74 aufl. edition, 2009. ISBN 978-3-8356-3134-2.">11</a>]</span> and
-<span id="id5">[<a class="reference internal" href="../archetypes.html#id41" title="Berechnung der thermischen Lasten und Raumtemperaturen (Auslegung Kühllast und Jahressimulation). Juni 2015.">12</a>]</span>.</p>
+<span id="id5">[<a class="reference internal" href="../archetypes.html#id25" title="DIN 12524. Baustoffe und -produkte - Wärme- und feuchteschutztechnische Eigenschaften - Tabellierte Bemessungswerte - Deutsche Fassung. Juli 2000.">6</a>]</span>,
+DeutschesInstitutfurNormung.Februar2013, <span id="id6">[<a class="reference internal" href="../archetypes.html#id46" title="Ernst-Rudolf Schramek, Hermann Recknagel, and Hermann Sprenger, editors. Taschenbuch für Heizung und Klimatechnik [09/10]: Einschließlich Warmwasser- und Kältetechnik. Oldenbourg Industrieverlag, München, 74 aufl. edition, 2009. ISBN 978-3-8356-3134-2.">11</a>]</span> and
+<span id="id7">[<a class="reference internal" href="../archetypes.html#id41" title="Berechnung der thermischen Lasten und Raumtemperaturen (Auslegung Kühllast und Jahressimulation). Juni 2015.">12</a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">

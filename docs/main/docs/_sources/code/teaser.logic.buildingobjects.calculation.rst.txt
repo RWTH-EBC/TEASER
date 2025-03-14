@@ -17,6 +17,14 @@ teaser.logic.buildingobjects.calculation.aixlib module
    :undoc-members:
    :show-inheritance:
 
+teaser.logic.buildingobjects.calculation.five\_element module
+-------------------------------------------------------------
+
+.. automodule:: teaser.logic.buildingobjects.calculation.five_element
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 teaser.logic.buildingobjects.calculation.four\_element module
 -------------------------------------------------------------
 
