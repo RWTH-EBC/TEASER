@@ -1136,16 +1136,16 @@ class TwoElement(object):
 
                 if self.merge_windows is False:
                     self.window_areas.append(sum([win.area for win in wins]))
-                    self.transparent_areas.append(sum([win.area for win in wins]))
+                    self.transparent_areas.append(sum([win.transparent_area for win in wins]))
 
                 else:
                     self.window_areas.append(0)
-                    self.transparent_areas.append(sum([win.area for win in wins]))
+                    self.transparent_areas.append(sum([win.transparent_area for win in wins]))
 
                 self.shading_g_total.append(
                     sum(
                         [
-                            win.shading_g_total * win.area / sum([w.area for w in wins])
+                            win.shading_g_total * win.transparent_area / sum([w.transparent_area for w in wins])
                             for win in wins
                         ]
                     )
@@ -1153,7 +1153,7 @@ class TwoElement(object):
                 self.shading_max_irr.append(
                     sum(
                         [
-                            win.shading_max_irr * win.area / sum([w.area for w in wins])
+                            win.shading_max_irr * win.transparent_area / sum([w.transparent_area for w in wins])
                             for win in wins
                         ]
                     )

@@ -122,6 +122,8 @@ class Window(BuildingElement):
     def __init__(self, parent=None):
 
         super(Window, self).__init__(parent)
+        self._frame_ratio = 0.0
+        self._transparent_area = 0.0
         self._g_value = 0.0
         self._a_conv = 0.0
         self._shading_g_total = 1.0
@@ -212,6 +214,28 @@ class Window(BuildingElement):
         else:
 
             self.__parent = None
+
+    @property
+    def frame_ratio(self):
+        return self._frame_ratio
+
+    @frame_ratio.setter
+    def frame_ratio(self, value):
+        if isinstance(value, float):
+            self._frame_ratio = value
+        elif value is None:
+            self._frame_ratio = value
+        else:
+            try:
+                value = float(value)
+                self._frame_ratio = value
+            except:
+                raise ValueError("Can't convert g value to float")
+
+    @property
+    def transparent_area(self):
+        self._transparent_area = self.area * (1 - self.frame_ratio)
+        return self._transparent_area
 
     @property
     def g_value(self):
