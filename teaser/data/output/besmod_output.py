@@ -576,12 +576,18 @@ def write_wall_record(wall_path, wall_type, zone, single_wall_template, bldg):
         layers = zone.ground_floors[
             -1].layer  # ToDo fwu-hst: If multiple ground floors for neighboring cellar or dirct solil exist for first testing the soil floor is taken
         n = len(layers)
+        if n == 1:
+            half = True
         first_layer = 0
         last_layer = 1
     elif wall_type == 'ground_floor_upHalf':
         layers = zone.ground_floors[-1].layer
         n = len(layers)
-        first_layer = 1
+        if n == 1:
+            half = True
+            first_layer = 0
+        else:
+            first_layer = 1
         last_layer = n
     elif wall_type == 'IW_hori_half':
         layers = zone.ceilings[0].layer
@@ -596,7 +602,7 @@ def write_wall_record(wall_path, wall_type, zone, single_wall_template, bldg):
             out_file.write(
                 single_wall_template.render_unicode(zone=zone, wall_type=wall_type, d=[0.000001],
                                                     rho=[0.000001],
-                                                    conductivity=[1], c=[0.000001], eps=1,
+                                                    conductivity=[100], c=[0.000001], eps=1,
                                                     n=1))
             out_file.close()
         return
@@ -614,7 +620,7 @@ def write_wall_record(wall_path, wall_type, zone, single_wall_template, bldg):
             d.append(layer.thickness)
         rho.append(layer.material.density)
         conductivity.append(layer.material.thermal_conduc)
-        c.append(layer.material.heat_capac)
+        c.append(layer.material.heat_capac*1000)  # kJ/kgK to J/kgK
     with open(os.path.join(
             wall_path,
             bldg.name + '_' + wall_type + '.mo'), 'w') as out_file:
