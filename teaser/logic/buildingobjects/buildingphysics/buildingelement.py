@@ -1,6 +1,7 @@
 """This module contains the Base class for all building elements."""
 
 from __future__ import division
+import warnings
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
 import teaser.data.input.buildingelement_input_json as buildingelement_input
 import numpy as np
@@ -169,24 +170,28 @@ class BuildingElement(object):
         r_conduc = 0.0
         for count_layer in self.layer:
             r_conduc += (
-                count_layer.thickness / count_layer.material.thermal_conduc) \
+                count_layer.thickness / count_layer.material.thermal_conduc
+            )
 
-        self.r_conduc = r_conduc * (1 / self.area)
-        self.r_inner_conv = (1 / self.inner_convection) * (1 / self.area)
-        self.r_inner_rad = (1 / self.inner_radiation) * (1 / self.area)
-        self.r_inner_comb = 1 / (1 / self.r_inner_conv + 1 / self.r_inner_rad)
+        try:
+            self.r_conduc = r_conduc * (1 / self.area)
+            self.r_inner_conv = (1 / self.inner_convection) * (1 / self.area)
+            self.r_inner_rad = (1 / self.inner_radiation) * (1 / self.area)
+            self.r_inner_comb = 1 / (1 / self.r_inner_conv + 1 / self.r_inner_rad)
 
-        if self.outer_convection is not None \
-                and self.outer_radiation is not None:
+            if self.outer_convection is not None \
+                    and self.outer_radiation is not None:
 
-            self.r_outer_conv = (1 / self.outer_convection) * (1 / self.area)
-            self.r_outer_rad = (1 / self.outer_radiation) * (1 / self.area)
-            self.r_outer_comb = 1 / \
-                (1 / self.r_outer_conv + 1 / self.r_outer_rad)
+                self.r_outer_conv = (1 / self.outer_convection) * (1 / self.area)
+                self.r_outer_rad = (1 / self.outer_radiation) * (1 / self.area)
+                self.r_outer_comb = 1 / \
+                    (1 / self.r_outer_conv + 1 / self.r_outer_rad)
 
-        self.ua_value = (1 / (
+            self.ua_value = (1 / (
             self.r_inner_comb + self.r_conduc + self.r_outer_comb))
-        self.u_value = self.ua_value / self.area
+            self.u_value = self.ua_value / self.area
+        except ZeroDivisionError:
+            pass
 
 
     def gather_element_properties(self):
@@ -271,9 +276,13 @@ class BuildingElement(object):
 
     def load_type_element(
             self,
-            year,
-            construction,
-            data_class=None):
+            year=None,
+            construction=None,
+            data_class=None,
+            element_type=None,
+            reverse_layers=False,
+            type_element_key=None
+    ):
         """Typical element loader.
 
         Loads typical building elements according to their construction
@@ -296,7 +305,22 @@ class BuildingElement(object):
             self.parent.parent.parent.data (which is data_class in current
             project)
 
+        element_type : str
+            Element type to load - only to specify if the json entry for a
+            different type than type(element) is to be loaded, e.g. InnerWall
+            instead of OuterWall
+
+        reverse_layers : bool
+            defines if layer list should be reversed
+
+        type_element_key : str
+            Element to load - specify the full json entry
+
         """
+
+        if type_element_key is None and (year is None or construction is None):
+            raise ValueError("specify either year and construction "
+                             "or type_element_key")
 
         if data_class is None:
             data_class = self.parent.parent.parent.data
@@ -309,10 +333,26 @@ class BuildingElement(object):
         self._outer_convection = None
         self._outer_radiation = None
 
-        buildingelement_input.load_type_element(element=self,
-                                                year=year,
-                                                construction=construction,
-                                                data_class=data_class)
+        if type_element_key:
+            try:
+                buildingelement_input.load_type_element_by_key(
+                    element=self, type_element_key=type_element_key,
+                    data_class=data_class, reverse_layers=reverse_layers
+                )
+            except KeyError:
+                warnings.warn(
+                    ('Type element ' + type_element_key + ' was not found. '
+                     + 'Going back to default element for year and construction'
+                     + '...')
+                )
+                type_element_key = None
+
+        if not type_element_key:
+            buildingelement_input.load_type_element(
+                element=self, year=year, construction=construction,
+                data_class=data_class, element_type=element_type,
+                reverse_layers=reverse_layers
+            )
 
     def save_type_element(self, data_class=None):
         """Typical element saver.
@@ -626,6 +666,8 @@ class BuildingElement(object):
 
     @property
     def year_of_construction(self):
+        if self._year_of_construction is None:
+            return self.parent.parent.year_of_construction
         return self._year_of_construction
 
     @year_of_construction.setter

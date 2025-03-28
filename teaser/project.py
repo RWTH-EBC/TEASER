@@ -48,7 +48,16 @@ class Project(object):
         TEASER instance of DataClass containing JSON binding classes
     weather_file_path : str
         Absolute path to weather file used for Modelica simulation. Default
-        weather file can be find in inputdata/weatherdata.
+        weather file can be found in inputdata/weatherdata.
+    t_soil_mode : int
+        1 : constant value (stored in each zone)
+        2 : sine model (mean value and amplitude stored in each zone)
+        3 : from file (stored for the project)
+            heat load calculation will consider the constant zone.t_ground
+    t_soil_file_path : str
+        Absolute path to soil temperature file used for Modelica simulation if
+        t_soil_mode 3 is chosen.
+        Sample t_soil file can be found in inputdata/weatherdata.
     number_of_elements_calc : int
         Defines the number of elements, that are aggregated (1, 2, 3 or 4),
         default is 2
@@ -62,6 +71,40 @@ class Project(object):
         Path to reference results in BuildingsPy format. If not None, the results
         will be copied into the model output directories so that the exported
         models can be regression tested against these results with BuildingsPy.
+    method_interzonal_material_enrichment : str
+        Method used to choose the default type element for interzonal elements.
+        'heating_difference': (default) check the difference between
+                              thermal_zone.use_conditions.with_heating.
+                              If equal, default element is inner element. If
+                              not, an outer envelope type element is loaded,
+                              with the outer layer on the non-heated side.
+        'cooling_difference': If there is no difference between heating states,
+                              check the difference between
+                              thermal_zone.use_conditions.with_cooling.
+                              If equal, default element is inner element. If
+                              not, an outer envelope type element is loaded,
+                              with the outer layer on the non-cooled side.
+        'setpoint_difference_x': For interzonal elements where
+                                 'heating_difference' and 'cooling_difference'
+                                 lead to treatment as inner element, the
+                                 setpoints are compared. The float number x is
+                                 read from the string and used as maximum
+                                 difference. If a zone can be clearly identified
+                                 as "more conditioned" (i.e., the heating
+                                 setpoint is clearly higher or, if heating
+                                 setpoints are approximately equal, the cooling
+                                 setpoint is clearly lower, an outer envelope
+                                 type element is loaded, with the outer layer on
+                                 the "less conditioned" side.
+    method_interzonal_export : str
+        Method used to choose the way to export interzonal elements. Valid
+        strings are the same as for method_interzonal_material_enrichment.
+        Inner elements will always be lumped to the InnerWall. For "outer"
+        elements, interzonal heat flow will be modelled in the FiveElement
+        export. For OneElement to FourElement export (not recommended, because
+        not yet validated or tested), they will be lumped to the OuterWall
+        element from the heated/cooled/more conditioned side and to the
+        InnerWall from the other side.
     """
 
     def __init__(self, load_data=False):
@@ -80,6 +123,18 @@ class Project(object):
             )
         )
 
+        self.t_soil_mode = 1
+
+        self.t_soil_file_path = utilities.get_full_path(
+            os.path.join(
+                "data",
+                "input",
+                "inputdata",
+                "weatherdata",
+                "t_soil_sample_constant_283_15.mos",
+            )
+        )
+
         self.buildings = []
 
         self.load_data = load_data
@@ -93,6 +148,9 @@ class Project(object):
         self.data = None
 
         self.dir_reference_results = None
+
+        self.method_interzonal_material_enrichment = 'heating_difference'
+        self.method_interzonal_export = 'heating_difference'
 
     @staticmethod
     def instantiate_data_class():
@@ -114,7 +172,7 @@ class Project(object):
 
         number_of_elements_calc : int
             defines the number of elements, that area aggregated, between 1
-            and 4, default is 2
+            and 5, default is 2
             For AixLib you should always use 2 elements!!!
 
         merge_windows_calc : bool
@@ -256,6 +314,7 @@ class Project(object):
         net_leased_area,
         with_ahu=True,
         internal_gains_mode=1,
+        inner_wall_approximation_approach='teaser_default',
         office_layout=None,
         window_layout=None,
     ):
@@ -301,16 +360,29 @@ class Project(object):
             mode for the internal gains calculation done in AixLib:
 
             1. Temperature and activity degree dependent heat flux calculation for persons. The
-            calculation is based on  SIA 2024 (default)
+               calculation is based on  SIA 2024 (default)
 
             2. Temperature and activity degree independent heat flux calculation for persons, the max.
-            heatflowrate is prescribed by the parameter
-            fixed_heat_flow_rate_persons.
+               heatflowrate is prescribed by the parameter
+               fixed_heat_flow_rate_persons.
 
             3. Temperature and activity degree dependent calculation with
-            consideration of moisture and co2. The moisture calculation is
-            based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
-            Engineering ToolBox (2004) and regards only persons.
+               consideration of moisture and co2. The moisture calculation is
+               based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
+               Engineering ToolBox (2004) and regards only persons.
+
+        inner_wall_approximation_approach : str
+            'teaser_default' (default) sets length of inner walls = typical
+                length * height of floors + 2 * typical width * height of floors
+            'typical_minus_outer' sets length of inner walls = 2 * typical
+                length * height of floors + 2 * typical width * height of floors
+                - length of outer or interzonal walls
+            'typical_minus_outer_extended' like 'typical_minus_outer', but also
+                considers that
+                a) a non-complete "average room" reduces its circumference
+                  proportional to the square root of the area
+                b) rooftops, windows and ground floors (= walls with border to
+                    soil) may have a vertical share
 
         office_layout : int
             Structure of the floor plan of office buildings, default is 1,
@@ -359,17 +431,18 @@ class Project(object):
         self.data = DataClass(construction_data)
 
         type_bldg = datahandling.geometries[geometry_data](
-            self,
-            name,
-            year_of_construction,
-            number_of_floors,
-            height_of_floors,
-            net_leased_area,
-            with_ahu,
-            internal_gains_mode,
-            office_layout,
-            window_layout,
-            construction_data,
+            parent=self,
+            name=name,
+            year_of_construction=year_of_construction,
+            number_of_floors=number_of_floors,
+            height_of_floors=height_of_floors,
+            net_leased_area=net_leased_area,
+            with_ahu=with_ahu,
+            internal_gains_mode=internal_gains_mode,
+            inner_wall_approximation_approach=inner_wall_approximation_approach,
+            office_layout=office_layout,
+            window_layout=window_layout,
+            construction_data=construction_data,
         )
 
         type_bldg.generate_archetype()
@@ -391,6 +464,7 @@ class Project(object):
         net_leased_area,
         with_ahu=False,
         internal_gains_mode=1,
+        inner_wall_approximation_approach='teaser_default',
         residential_layout=None,
         neighbour_buildings=None,
         attic=None,
@@ -451,18 +525,28 @@ class Project(object):
             for central Air Handling units. Default is False.
         internal_gains_mode: int [1, 2, 3]
             mode for the internal gains calculation done in AixLib:
-
             1. Temperature and activity degree dependent heat flux calculation for persons. The
                calculation is based on  SIA 2024 (default)
-
             2. Temperature and activity degree independent heat flux calculation for persons, the max.
                heatflowrate is prescribed by the parameter
                fixed_heat_flow_rate_persons.
-
             3. Temperature and activity degree dependent calculation with
                consideration of moisture and co2. The moisture calculation is
                based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
                Engineering ToolBox (2004) and regards only persons.
+
+        inner_wall_approximation_approach : str
+            'teaser_default' (default) sets length of inner walls = typical
+                length * height of floors + 2 * typical width * height of floors
+            'typical_minus_outer' sets length of inner walls = 2 * typical
+                length * height of floors + 2 * typical width * height of floors
+                - length of outer or interzonal walls
+            'typical_minus_outer_extended' like 'typical_minus_outer', but also
+                considers that
+                a) a non-complete "average room" reduces its circumference
+                  proportional to the square root of the area
+                b) rooftops, windows and ground floors (= walls with border to
+                    soil) may have a vertical share
 
         residential_layout : int
             Structure of floor plan (default = 0) CAUTION only used for iwu
@@ -554,6 +638,7 @@ class Project(object):
             'with_ahu': with_ahu,
             'internal_gains_mode': internal_gains_mode,
             'construction_data': construction_data,
+            'inner_wall_approximation_approach': inner_wall_approximation_approach,
         }
 
         urbanrenet_arg = common_arg.copy()
@@ -693,6 +778,7 @@ class Project(object):
         corG=None,
         internal_id=None,
         path=None,
+        custom_multizone_template_path=None,
         use_postprocessing_calc=False,
         report=False,
         export_vars=None
@@ -717,6 +803,9 @@ class Project(object):
         path : string
             if the Files should not be stored in default output path of TEASER,
             an alternative path can be specified as a full path
+        custom_multizone_template_path : string
+            if a custom template for writing the multizone model should be used,
+            specify its full path as string
         report: boolean
             if True a model report in form of a html and csv file will be
             created for the exported project.
@@ -747,6 +836,7 @@ class Project(object):
         if internal_id is None:
             aixlib_output.export_multizone(
                 buildings=self.buildings, prj=self, path=path,
+                custom_multizone_template_path=custom_multizone_template_path,
                 use_postprocessing_calc=use_postprocessing_calc,
                 export_vars=export_vars
             )
@@ -755,6 +845,8 @@ class Project(object):
                 if bldg.internal_id == internal_id:
                     aixlib_output.export_multizone(
                         buildings=[bldg], prj=self, path=path,
+                        custom_multizone_template_path
+                        =custom_multizone_template_path,
                         use_postprocessing_calc=use_postprocessing_calc,
                         export_vars=export_vars
                     )
@@ -933,6 +1025,17 @@ class Project(object):
             )
         )
 
+        self.t_soil_mode = 1
+        self.t_soil_file_path = utilities.get_full_path(
+            os.path.join(
+                "data",
+                "input",
+                "inputdata",
+                "weatherdata",
+                "t_soil_sample_constant_283_15.mos",
+            )
+        )
+
         self.buildings = []
 
         if load_data is True:
@@ -1019,6 +1122,26 @@ class Project(object):
             self.weather_file_name = os.path.split(self.weather_file_path)[1]
 
     @property
+    def t_soil_file_path(self):
+        return self._t_soil_file_path
+
+    @t_soil_file_path.setter
+    def t_soil_file_path(self, value):
+        if value is None:
+            self._t_soil_file_path = utilities.get_full_path(
+                os.path.join(
+                    "data",
+                    "input",
+                    "inputdata",
+                    "weatherdata",
+                    "t_soil_sample_constant_283_15.mos",
+                )
+            )
+        else:
+            self._t_soil_file_path = os.path.normpath(value)
+            self.t_soil_file_name = os.path.split(self.t_soil_file_path)[1]
+
+    @property
     def number_of_elements_calc(self):
         return self._number_of_elements_calc
 
@@ -1085,3 +1208,41 @@ class Project(object):
 
         if self._name[0].isdigit():
             self._name = "P" + self._name
+
+    @property
+    def method_interzonal_material_enrichment(self):
+        return self._method_interzonal_material_enrichment
+
+    @method_interzonal_material_enrichment.setter
+    def method_interzonal_material_enrichment(self, value):
+        assert type(value) is str
+        assert (value in ('heating_difference', 'cooling_difference')
+                or value.startswith('setpoint_difference_'))
+        if value.startswith('setpoint_difference_'):
+            try:
+                setpoint_diff = float(value.lstrip('setpoint_difference_'))
+                self._method_interzonal_material_enrichment = value
+            except ValueError:
+                print("setpoint for method_interzonal_material_enrichment "
+                      "could not be converted to float.")
+        else:
+            self._method_interzonal_material_enrichment = value
+
+    @property
+    def method_interzonal_export(self):
+        return self._method_interzonal_export
+
+    @method_interzonal_export.setter
+    def method_interzonal_export(self, value):
+        assert type(value) is str
+        assert (value in ('heating_difference', 'cooling_difference')
+                or value.startswith('setpoint_difference_'))
+        if value.startswith('setpoint_difference_'):
+            try:
+                setpoint_diff = float(value.lstrip('setpoint_difference_'))
+                self._method_interzonal_export = value
+            except ValueError:
+                print("setpoint for method_interzonal_export "
+                      "could not be converted to float.")
+        else:
+            self._method_interzonal_export = value

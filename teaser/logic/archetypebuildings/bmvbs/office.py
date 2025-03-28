@@ -94,6 +94,19 @@ class Office(NonResidential):
         2. elongated 2 floors
         3. compact (e.g. for a square base building)
 
+    inner_wall_approximation_approach : str
+        'teaser_default' (default) sets length of inner walls = typical
+            length * height of floors + 2 * typical width * height of floors
+        'typical_minus_outer' sets length of inner walls = 2 * typical
+            length * height of floors + 2 * typical width * height of floors
+            - length of outer or interzonal walls
+        'typical_minus_outer_extended' like 'typical_minus_outer', but also
+            considers that
+            a) a non-complete "average room" reduces its circumference
+              proportional to the square root of the area
+            b) rooftops, windows and ground floors (= walls with border to
+                soil) may have a vertical share
+
     window_layout : int
         Structure of the window facade type, default is 0, which is a generic facade
         representing a statistical mean value of window area. This is the foundation
@@ -121,8 +134,10 @@ class Office(NonResidential):
 
     zone_area_factors : dict
         This dictionary contains the name of the zone (str), the
-        zone area factor (float) and the zone usage from BoundaryConditions json
-        (str). (Default see doc string above)
+        zone area factor (float), the zone usage from BoundaryConditions json
+        (str) (Default see doc string above), and may contain a dictionary with
+        keyword-attribute-like changes to zone parameters that are usually
+        inherited from parent: 'number_of_floors', 'height_of_floors'
     outer_wall_names : dict
         This dictionary contains a random name for the outer walls,
         their orientation and tilt. Default is a building in north-south
@@ -170,6 +185,7 @@ class Office(NonResidential):
         with_ahu=False,
         internal_gains_mode=1,
         office_layout=None,
+        inner_wall_approximation_approach='teaser_default',
         window_layout=None,
         construction_data=None,
     ):
@@ -185,6 +201,8 @@ class Office(NonResidential):
         )
 
         self.office_layout = office_layout
+        self.inner_wall_approximation_approach \
+            = inner_wall_approximation_approach
         self.window_layout = window_layout
         self.construction_data = construction_data
         self.number_of_floors = number_of_floors
@@ -311,6 +329,14 @@ class Office(NonResidential):
         for key, value in self.zone_area_factors.items():
             zone = ThermalZone(self)
             zone.area = type_bldg_area * value[0]
+            try:
+                zone.number_of_floors = value[2]['number_of_floors']
+            except (KeyError, IndexError):
+                pass
+            try:
+                zone.height_of_floors = value[2]['height_of_floors']
+            except (KeyError, IndexError):
+                pass
             zone.name = key
             use_cond = UseCond(zone)
             use_cond.load_use_conditions(value[1], data_class=self.parent.data)
