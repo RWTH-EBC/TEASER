@@ -163,8 +163,8 @@ def export_besmod(
     window_simple_template = Template(
         filename=os.path.join(template_path, "BESMod/window_simple_record"),
         lookup=lookup)
-    wall_types = ['OW', 'roof', 'IW_vert_half', 'IW_hori_half', 'ground_floor_loHalf', 'ground_floor_upHalf',
-                  'IW_hori_att_half0']
+    wall_types = ['OW', 'roof', 'IW_vert_half', 'IW_hori_upHalf', 'IW_hori_loHalf', 'ground_floor_loHalf',
+                  'ground_floor_upHalf', 'IW_hori_att_half0']
     calc_hea_dem_hom = Template(
         filename=os.path.join(template_path, "BESMod/CalcHeaDemHOMAixLib"),
         lookup=lookup)
@@ -554,55 +554,63 @@ def _help_example_script(bldg, dir_dymola, test_script_template, example):
 
 def write_wall_record(wall_path, wall_type, zone, single_wall_template, bldg):
     half = False
+    layer_direction = -1
     if wall_type == 'OW':
         layers = zone.outer_walls[0].layer
         n = len(layers)
-        first_layer = 0
-        last_layer = n
+        teaser_id_aixlib_inside_layer = 0
+        teaser_id_aixlib_outside_layer = n
     elif wall_type == 'roof':
         layers = zone.rooftops[0].layer
         n = len(layers)
-        first_layer = 0
-        last_layer = n
+        teaser_id_aixlib_inside_layer = 0
+        teaser_id_aixlib_outside_layer = n
     elif wall_type == 'IW_vert_half':
         layers = zone.inner_walls[0].layer
         n = len(layers)
         quotient, remainder = divmod(n, 2)
         if remainder > 0:
             half = True
-        first_layer = quotient
-        last_layer = n
-    elif wall_type == 'ground_floor_loHalf':
+            quotient += 1
+        teaser_id_aixlib_inside_layer = 0
+        teaser_id_aixlib_outside_layer = quotient
+    elif wall_type == 'ground_floor_upHalf':
         layers = zone.ground_floors[
             -1].layer  # ToDo fwu-hst: If multiple ground floors for neighboring cellar or dirct solil exist for first testing the soil floor is taken
         n = len(layers)
         if n == 1:
             half = True
-        first_layer = 0
-        last_layer = 1
-    elif wall_type == 'ground_floor_upHalf':
+        teaser_id_aixlib_inside_layer = 0
+        teaser_id_aixlib_outside_layer = 1
+    elif wall_type == 'ground_floor_loHalf':
+        # in aixlib different order than ow and rf aixlib last layer is connected to the ground
         layers = zone.ground_floors[-1].layer
         n = len(layers)
         if n == 1:
             half = True
-            first_layer = 0
+            teaser_id_aixlib_outside_layer = 0+1
         else:
-            first_layer = 1
-        last_layer = n
-    elif wall_type == 'IW_hori_half':
+            teaser_id_aixlib_outside_layer = 1+1
+        teaser_id_aixlib_inside_layer = n+1
+        layer_direction = 1
+    elif wall_type == 'IW_hori_loHalf':
         layers = zone.ceilings[0].layer
-        half = True  # ToDo fwu-hst: floors and ceiling are the same but with the layer order switched so for both the ceiling is take because ther is the first layer the concret which is the outsied in the record also this layer i take halfe becaus it corresponds to both
         n = len(layers)
-        first_layer = 0
-        last_layer = n
+        teaser_id_aixlib_inside_layer = 0
+        teaser_id_aixlib_outside_layer = 1
+    elif wall_type == 'IW_hori_upHalf':
+        layers = zone.floors[0].layer
+        n = len(layers)
+        teaser_id_aixlib_inside_layer = 0
+        teaser_id_aixlib_outside_layer = n-1
     elif wall_type == 'IW_hori_att_half0':
         with open(os.path.join(
                 wall_path,
                 bldg.name + '_' + wall_type + '.mo'), 'w') as out_file:
             out_file.write(
-                single_wall_template.render_unicode(zone=zone, wall_type=wall_type, d=[0.000001],
-                                                    rho=[0.000001],
-                                                    conductivity=[100], c=[0.000001], eps=1,
+                single_wall_template.render_unicode(zone=zone, wall_type=wall_type, d=[0.0005],
+                                                    rho=[1.184],
+                                                    conductivity=[0.35], c=[1005], eps=1,
                                                     n=1))
             out_file.close()
         return
@@ -612,15 +620,16 @@ def write_wall_record(wall_path, wall_type, zone, single_wall_template, bldg):
     rho = []
     conductivity = []
     c = []
-    eps = layers[n-1].material.ir_emissivity
-    for idx, layer in enumerate(layers[first_layer:last_layer]):
+    eps = layers[0].material.ir_emissivity
+    # AixLib wall[1] is the outside layer
+    for idx, teaser_layer_id in enumerate(range(teaser_id_aixlib_outside_layer-1, teaser_id_aixlib_inside_layer-1, layer_direction)):
         if half and idx == 0:
-            d.append(layer.thickness / 2)
+            d.append(layers[teaser_layer_id].thickness / 2)
         else:
-            d.append(layer.thickness)
-        rho.append(layer.material.density)
-        conductivity.append(layer.material.thermal_conduc)
-        c.append(layer.material.heat_capac*1000)  # kJ/kgK to J/kgK
+            d.append(layers[teaser_layer_id].thickness)
+        rho.append(layers[teaser_layer_id].material.density)
+        conductivity.append(layers[teaser_layer_id].material.thermal_conduc)
+        c.append(layers[teaser_layer_id].material.heat_capac*1000)  # kJ/kgK to J/kgK
     with open(os.path.join(
             wall_path,
             bldg.name + '_' + wall_type + '.mo'), 'w') as out_file:
@@ -692,7 +701,7 @@ def calc_hom_dimensions_aixlib(bldg):
     roof_tilt = (180 - alfa_grad)/2
     template_kwargs["alfa_grad"] = alfa_grad
     height_of_floors = 2.6
-    template_kwargs["height_of_floors"] = height_of_floors
+    template_kwargs["height_of_floors"] = height_of_floors # fwu-hst ToDo: make this variable
     room_height_short = 1  # here fixed
     room_width_short = room_width - (height_of_floors-room_height_short)/tan(roof_tilt*pi/180)
     template_kwargs["room_width_short"] = room_width_short
