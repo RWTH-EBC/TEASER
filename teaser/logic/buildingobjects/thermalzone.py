@@ -74,10 +74,14 @@ class ThermalZone(object):
         Temperature directly at the outer side of ground floors for static
         heat load calculation.
         The input of t_ground is ALWAYS in Kelvin
-    transfer_system_pt1_K: float []
+    transfer_system_heat_pt1_K: float []
         Gain for PT1 for damped heat transfer
-    transfer_system_pt1_T: float [h]
+    transfer_system_heat_pt1_T: float [h]
         Time Constant for PT1 for damped heat transfer
+    transfer_system_cool_pt1_K: float []
+        Gain for PT1 for damped cool transfer
+    transfer_system_cool_pt1_T: float [h]
+        Time Constant for PT1 for damped cool transfer
     transfer_system_fraHeaRad:
         Fraction of heat transfer to radiation
     transfer_system_fraCooRad:
@@ -711,7 +715,7 @@ class ThermalZone(object):
 
     @property
     def transfer_system_heat_pt1_K(self):
-        return self._transfer_system_pt1_K
+        return self._transfer_system_heat_pt1_K
 
     @transfer_system_heat_pt1_K.setter
     def transfer_system_heat_pt1_K(self, value):
