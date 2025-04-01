@@ -112,8 +112,10 @@ class ThermalZone(object):
         self.density_air = 1.25
         self.heat_capac_air = 1002
         self.t_ground = 286.15
-        self._transfer_system_pt1_K = 1
-        self._transfer_system_pt1_T = 1
+        self._transfer_system_heat_pt1_K = 1
+        self._transfer_system_heat_pt1_T = 1
+        self._transfer_system_cool_pt1_K = 1
+        self._transfer_system_cool_pt1_T = 1
         self._transfer_system_fraHeaRad = 0
         self._transfer_system_fraCooRad = 0
         self.pid_gain_heat = 1
@@ -708,38 +710,74 @@ class ThermalZone(object):
 
 
     @property
-    def transfer_system_pt1_K(self):
+    def transfer_system_heat_pt1_K(self):
         return self._transfer_system_pt1_K
 
-    @transfer_system_pt1_K.setter
-    def transfer_system_pt1_K(self, value):
+    @transfer_system_heat_pt1_K.setter
+    def transfer_system_heat_pt1_K(self, value):
 
         if isinstance(value, float):
-            self._transfer_system_pt1_K = value
+            self._transfer_system_heat_pt1_K = value
         elif value is None:
-            self._transfer_system_pt1_K = value
+            self._transfer_system_heat_pt1_K = value
         else:
             try:
                 value = float(value)
-                self._transfer_system_pt1_K = value
+                self._transfer_system_heat_pt1_K = value
             except:
                 raise ValueError("Can't convert value to float")
 
     @property
-    def transfer_system_pt1_T(self):
-        return self._transfer_system_pt1_T
+    def transfer_system_heat_pt1_T(self):
+        return self._transfer_system_heat_pt1_T
 
-    @transfer_system_pt1_T.setter
-    def transfer_system_pt1_T(self, value):
+    @transfer_system_heat_pt1_T.setter
+    def transfer_system_heat_pt1_T(self, value):
 
         if isinstance(value, float):
-            self._transfer_system_pt1_T = value
+            self._transfer_system_heat_pt1_T = value
         elif value is None:
-            self._transfer_system_pt1_T = value
+            self._transfer_system_heat_pt1_T = value
         else:
             try:
                 value = float(value)
-                self._transfer_system_pt1_T = value
+                self._transfer_system_heat_pt1_T = value
+            except:
+                raise ValueError("Can't convert value to float")
+
+    @property
+    def transfer_system_cool_pt1_K(self):
+        return self._transfer_system_cool_pt1_K
+
+    @transfer_system_cool_pt1_K.setter
+    def transfer_system_cool_pt1_K(self, value):
+
+        if isinstance(value, float):
+            self._transfer_system_cool_pt1_K = value
+        elif value is None:
+            self._transfer_system_cool_pt1_K = value
+        else:
+            try:
+                value = float(value)
+                self._transfer_system_cool_pt1_K = value
+            except:
+                raise ValueError("Can't convert value to float")
+
+    @property
+    def transfer_system_cool_pt1_T(self):
+        return self._transfer_system_cool_pt1_T
+
+    @transfer_system_cool_pt1_T.setter
+    def transfer_system_cool_pt1_T(self, value):
+
+        if isinstance(value, float):
+            self._transfer_system_cool_pt1_T = value
+        elif value is None:
+            self._transfer_system_cool_pt1_T = value
+        else:
+            try:
+                value = float(value)
+                self._transfer_system_cool_pt1_T = value
             except:
                 raise ValueError("Can't convert value to float")
 
