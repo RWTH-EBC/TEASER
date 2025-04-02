@@ -816,6 +816,11 @@ class Project(object):
             (https://www.claytex.com/blog/selection-of-variables-to-be-saved-in-the-result-file/)
         """
 
+        if not self.buildings:
+            raise ValueError("The project includes no buildings to export.")
+        if internal_id is not None and not any(bldg.internal_id == internal_id for bldg in self.buildings):
+            raise ValueError(f"Building with internal_id {internal_id} not found in the project.")
+
         if building_model is not None or zone_model is not None or corG is not None:
             warnings.warn(
                 "building_model, zone_model and corG are no longer "
@@ -909,6 +914,11 @@ class Project(object):
             The path where the exported files are stored.
         """
 
+        if not self.buildings:
+            raise ValueError("The project includes no buildings to export.")
+        if internal_id is not None and not any(bldg.internal_id == internal_id for bldg in self.buildings):
+            raise ValueError(f"Building with internal_id {internal_id} not found in the project.")
+
         if path is None:
             path = os.path.join(utilities.get_default_path(), self.name)
         else:
@@ -980,6 +990,11 @@ class Project(object):
             "BuildingSystems",
             "IDEAS",
         ], ass_error_1
+
+        if not self.buildings:
+            raise ValueError("The project includes no buildings to export.")
+        if internal_id is not None and not any(bldg.internal_id == internal_id for bldg in self.buildings):
+            raise ValueError(f"Building with internal_id {internal_id} not found in the project.")
 
         if path is None:
             path = os.path.join(utilities.get_default_path(), self.name)
