@@ -1280,8 +1280,8 @@ class ThreeElement(object):
             UA Value of all GroundFloors
         """
         if self.thermal_zone.use_conditions.base_infiltration > 0.5:
-            raise warnings.warn("The base_infiltration is larger than 0.5, "
-                                "which could lead to ideal heaters being too small.")
+            warnings.warn("The base_infiltration is larger than 0.5, "
+                          "which could lead to ideal heaters being too small.")
 
         self.heat_load = 0.0
 
