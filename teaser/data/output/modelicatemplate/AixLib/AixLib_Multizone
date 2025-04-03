@@ -39,12 +39,11 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
   dehuAHU=${get_true_false(bldg.central_ahu.dehumidification)},
   huAHU=${get_true_false(bldg.central_ahu.humidification)},
   BPFDehuAHU=${bldg.central_ahu.by_pass_dehumidification},
-  HRS=${get_true_false(bldg.central_ahu.heat_recovery)},
+  heatRecoveryAHU=${get_true_false(bldg.central_ahu.heat_recovery)},
   dynamicVolumeFlowControlAHU=${get_true_false(bldg.central_ahu.dynamic_volume_flow_control)},
   dynamicSetTempControlAHU=${get_true_false(bldg.central_ahu.dynamic_supply_temperature_control)},
   T_Treshold_Heating_AHU=${bldg.central_ahu.T_treshold_heating},
   T_Treshold_Cooling_AHU=${bldg.central_ahu.T_treshold_cooling},
-  sampleRateAHU=${bldg.central_ahu.sample_rate},
   effFanAHU_sup=${bldg.central_ahu.efficiency_fan_supply},
   effFanAHU_eta=${bldg.central_ahu.efficiency_fan_return},
   effHRSAHU_enabled=${bldg.central_ahu.efficiency_recovery},
@@ -57,12 +56,11 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
   dehuAHU = false,
   huAHU = false,
   BPFDehuAHU = 0.2,
-  HRS = false,
   dynamicVolumeFlowControlAHU = false,
   dynamicSetTempControlAHU = false,
   T_Treshold_Heating_AHU = 290.15,
   T_Treshold_Cooling_AHU = 294.15,
-  sampleRateAHU=1800,
+  heatRecoveryAHU = false,
   effFanAHU_sup=0.7,
   effFanAHU_eta=0.7,
   effHRSAHU_enabled = 0.8,
@@ -77,9 +75,9 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
    redeclare model corG =
         AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane,
 % if bldg.central_ahu:
-  redeclare model AHUMod = AixLib.Airflow.AirHandlingUnit.AHU)
+  redeclare model AHUMod = AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.ModularAHU)
 % else:
-  redeclare model AHUMod = AixLib.Airflow.AirHandlingUnit.NoAHU)
+  redeclare model AHUMod = AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.NoModularAHU)
 % endif
     "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
