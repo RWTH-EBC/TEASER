@@ -1,0 +1,15 @@
+teaser.data.input.inputdata package
+===================================
+
+.. automodule:: teaser.data.input.inputdata
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   teaser.data.input.inputdata.weatherdata
