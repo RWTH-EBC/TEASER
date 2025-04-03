@@ -875,6 +875,15 @@
         <span class="n">tjson_in</span><span class="o">.</span><span class="n">load_teaser_json</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span></div>
 
 
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_buildings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">internal_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Utility method to verify that the project has buildings and,</span>
+<span class="sd">        if an internal_id is provided, that it exists.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The project includes no buildings to export.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">internal_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">bldg</span><span class="o">.</span><span class="n">internal_id</span> <span class="o">==</span> <span class="n">internal_id</span> <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Building with internal_id </span><span class="si">{</span><span class="n">internal_id</span><span class="si">}</span><span class="s2"> not found in the project.&quot;</span><span class="p">)</span>
+
 <div class="viewcode-block" id="Project.export_aixlib">
 <a class="viewcode-back" href="../../code/teaser.html#teaser.project.Project.export_aixlib">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">export_aixlib</span><span class="p">(</span>
@@ -922,10 +931,7 @@
 <span class="sd">            (https://www.claytex.com/blog/selection-of-variables-to-be-saved-in-the-result-file/)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The project includes no buildings to export.&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">internal_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">bldg</span><span class="o">.</span><span class="n">internal_id</span> <span class="o">==</span> <span class="n">internal_id</span> <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Building with internal_id </span><span class="si">{</span><span class="n">internal_id</span><span class="si">}</span><span class="s2"> not found in the project.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_buildings</span><span class="p">(</span><span class="n">internal_id</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">building_model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">zone_model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">corG</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
@@ -1023,10 +1029,7 @@
 <span class="sd">            The path where the exported files are stored.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The project includes no buildings to export.&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">internal_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">bldg</span><span class="o">.</span><span class="n">internal_id</span> <span class="o">==</span> <span class="n">internal_id</span> <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Building with internal_id </span><span class="si">{</span><span class="n">internal_id</span><span class="si">}</span><span class="s2"> not found in the project.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_buildings</span><span class="p">(</span><span class="n">internal_id</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_default_path</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
@@ -1103,10 +1106,7 @@
             <span class="s2">&quot;IDEAS&quot;</span><span class="p">,</span>
         <span class="p">],</span> <span class="n">ass_error_1</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The project includes no buildings to export.&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">internal_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">bldg</span><span class="o">.</span><span class="n">internal_id</span> <span class="o">==</span> <span class="n">internal_id</span> <span class="k">for</span> <span class="n">bldg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">buildings</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Building with internal_id </span><span class="si">{</span><span class="n">internal_id</span><span class="si">}</span><span class="s2"> not found in the project.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_buildings</span><span class="p">(</span><span class="n">internal_id</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">utilities</span><span class="o">.</span><span class="n">get_default_path</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
