@@ -101,6 +101,8 @@ def save_teaser_json(path, project):
             ahu_out["dehumidification"] = bldg.central_ahu.dehumidification
             ahu_out["humidification"] = bldg.central_ahu.humidification
             ahu_out["heat_recovery"] = bldg.central_ahu.heat_recovery
+            ahu_out["dynamic_volume_flow_control"] = bldg.central_ahu.dynamic_volume_flow_control
+            ahu_out["dynamic_supply_temperature_control"] = bldg.central_ahu.dynamic_supply_temperature_control
             ahu_out[
                 "by_pass_dehumidification"
             ] = bldg.central_ahu.by_pass_dehumidification
@@ -116,6 +118,8 @@ def save_teaser_json(path, project):
             ] = bldg.central_ahu.max_relative_humidity_profile
             ahu_out["v_flow_profile"] = bldg.central_ahu.v_flow_profile
             ahu_out["temperature_profile"] = bldg.central_ahu.temperature_profile
+            ahu_out["T_treshold_heating"] = bldg.central_ahu.T_treshold_heating
+            ahu_out["T_treshold_cooling"] = bldg.central_ahu.T_treshold_cooling
             prj_out["project"]["buildings"][bldg.name]["central_ahu"] = ahu_out
         else:
             pass
