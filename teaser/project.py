@@ -771,6 +771,15 @@ class Project(object):
 
         tjson_in.load_teaser_json(path, self)
 
+    def _check_buildings(self, internal_id: Optional[float] = None):
+        """Utility method to verify that the project has buildings and,
+        if an internal_id is provided, that it exists.
+        """
+        if not self.buildings:
+            raise ValueError("The project includes no buildings to export.")
+        if internal_id is not None and not any(bldg.internal_id == internal_id for bldg in self.buildings):
+            raise ValueError(f"Building with internal_id {internal_id} not found in the project.")
+
     def export_aixlib(
         self,
         building_model=None,
@@ -815,6 +824,8 @@ class Project(object):
             variable selections are possible. This works only for Dymola. See
             (https://www.claytex.com/blog/selection-of-variables-to-be-saved-in-the-result-file/)
         """
+
+        self._check_buildings(internal_id)
 
         if building_model is not None or zone_model is not None or corG is not None:
             warnings.warn(
@@ -909,6 +920,8 @@ class Project(object):
             The path where the exported files are stored.
         """
 
+        self._check_buildings(internal_id)
+
         if path is None:
             path = os.path.join(utilities.get_default_path(), self.name)
         else:
@@ -980,6 +993,8 @@ class Project(object):
             "BuildingSystems",
             "IDEAS",
         ], ass_error_1
+
+        self._check_buildings(internal_id)
 
         if path is None:
             path = os.path.join(utilities.get_default_path(), self.name)
