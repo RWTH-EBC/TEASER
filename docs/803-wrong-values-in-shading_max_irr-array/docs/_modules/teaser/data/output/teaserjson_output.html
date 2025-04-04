@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.data.output.teaserjson_output &mdash; TEASER 1.1.3 documentation</title>
+  <title>teaser.data.output.teaserjson_output &mdash; TEASER 1.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
@@ -13,7 +13,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=cb7bf70b"></script>
+      <script src="../../../../_static/documentation_options.js?v=ca842793"></script>
       <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
@@ -108,6 +108,8 @@
     <span class="n">prj_out</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;version&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">teaser</span><span class="o">.</span><span class="n">__version__</span>
     <span class="n">prj_out</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">name</span>
     <span class="n">prj_out</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;weather_file_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">weather_file_path</span>
+    <span class="n">prj_out</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;t_soil_mode&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">t_soil_mode</span>
+    <span class="n">prj_out</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;t_soil_file_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">t_soil_file_path</span>
     <span class="n">prj_out</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;number_of_elements_calc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">number_of_elements_calc</span>
     <span class="n">prj_out</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;merge_windows_calc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">merge_windows_calc</span>
     <span class="n">prj_out</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;used_library_calc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">used_library_calc</span>
@@ -171,6 +173,7 @@
         <span class="p">]</span> <span class="o">=</span> <span class="n">bldg</span><span class="o">.</span><span class="n">net_leased_area</span>
         <span class="n">prj_out</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;buildings&quot;</span><span class="p">][</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;outer_area&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bldg</span><span class="o">.</span><span class="n">outer_area</span>
         <span class="n">prj_out</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;buildings&quot;</span><span class="p">][</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;window_area&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bldg</span><span class="o">.</span><span class="n">window_area</span>
+        <span class="n">prj_out</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;buildings&quot;</span><span class="p">][</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;inner_wall_approximation_approach&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bldg</span><span class="o">.</span><span class="n">inner_wall_approximation_approach</span>
         <span class="k">if</span> <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">ahu_out</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
             <span class="n">ahu_out</span><span class="p">[</span><span class="s2">&quot;heating&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bldg</span><span class="o">.</span><span class="n">central_ahu</span><span class="o">.</span><span class="n">heating</span>
@@ -205,6 +208,11 @@
 
             <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;area&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">zone</span><span class="o">.</span><span class="n">area</span>
             <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;volume&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">zone</span><span class="o">.</span><span class="n">volume</span>
+            <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;number_of_floors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">zone</span><span class="o">.</span><span class="n">number_of_floors</span>
+            <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;height_of_floors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">zone</span><span class="o">.</span><span class="n">height_of_floors</span>
+            <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;t_ground&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">zone</span><span class="o">.</span><span class="n">t_ground</span>
+            <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;t_ground_amplitude&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">zone</span><span class="o">.</span><span class="n">t_ground_amplitude</span>
+            <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;time_to_minimal_t_ground&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">zone</span><span class="o">.</span><span class="n">time_to_minimal_t_ground</span>
             <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
             <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;use_conditions&quot;</span><span class="p">][</span><span class="s2">&quot;usage&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">zone</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">usage</span>
 
@@ -311,6 +319,9 @@
             <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;inner_walls&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
             <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;floors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
             <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;ceilings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
+            <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;interzonal_walls&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
+            <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;interzonal_floors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
+            <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;interzonal_ceilings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
 
             <span class="k">for</span> <span class="n">out_wall</span> <span class="ow">in</span> <span class="n">zone</span><span class="o">.</span><span class="n">outer_walls</span><span class="p">:</span>
                 <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;outer_walls&quot;</span><span class="p">][</span><span class="n">out_wall</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
@@ -344,6 +355,27 @@
                 <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;ceilings&quot;</span><span class="p">][</span><span class="n">ceil</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
                 <span class="n">set_basic_data</span><span class="p">(</span><span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;ceilings&quot;</span><span class="p">][</span><span class="n">ceil</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="n">ceil</span><span class="p">)</span>
                 <span class="n">set_layer_data</span><span class="p">(</span><span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;ceilings&quot;</span><span class="p">][</span><span class="n">ceil</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="n">ceil</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">izw</span> <span class="ow">in</span> <span class="n">zone</span><span class="o">.</span><span class="n">interzonal_walls</span><span class="p">:</span>
+                <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;interzonal_walls&quot;</span><span class="p">][</span><span class="n">izw</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> \
+                    <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
+                <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;interzonal_walls&quot;</span><span class="p">][</span><span class="n">izw</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;other_side&quot;</span><span class="p">]</span> \
+                    <span class="o">=</span> <span class="n">izw</span><span class="o">.</span><span class="n">other_side</span><span class="o">.</span><span class="n">name</span>
+                <span class="n">set_basic_data</span><span class="p">(</span><span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;interzonal_walls&quot;</span><span class="p">][</span><span class="n">izw</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="n">izw</span><span class="p">)</span>
+                <span class="n">set_layer_data</span><span class="p">(</span><span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;interzonal_walls&quot;</span><span class="p">][</span><span class="n">izw</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="n">izw</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">izf</span> <span class="ow">in</span> <span class="n">zone</span><span class="o">.</span><span class="n">interzonal_floors</span><span class="p">:</span>
+                <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;interzonal_floors&quot;</span><span class="p">][</span><span class="n">izf</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> \
+                    <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
+                <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;interzonal_floors&quot;</span><span class="p">][</span><span class="n">izf</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;other_side&quot;</span><span class="p">]</span> \
+                    <span class="o">=</span> <span class="n">izf</span><span class="o">.</span><span class="n">other_side</span><span class="o">.</span><span class="n">name</span>
+                <span class="n">set_basic_data</span><span class="p">(</span><span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;interzonal_floors&quot;</span><span class="p">][</span><span class="n">izf</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="n">izf</span><span class="p">)</span>
+                <span class="n">set_layer_data</span><span class="p">(</span><span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;interzonal_floors&quot;</span><span class="p">][</span><span class="n">izf</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="n">izf</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">izc</span> <span class="ow">in</span> <span class="n">zone</span><span class="o">.</span><span class="n">interzonal_ceilings</span><span class="p">:</span>
+                <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;interzonal_ceilings&quot;</span><span class="p">][</span><span class="n">izc</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> \
+                    <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
+                <span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;interzonal_ceilings&quot;</span><span class="p">][</span><span class="n">izc</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;other_side&quot;</span><span class="p">]</span> \
+                    <span class="o">=</span> <span class="n">izc</span><span class="o">.</span><span class="n">other_side</span><span class="o">.</span><span class="n">name</span>
+                <span class="n">set_basic_data</span><span class="p">(</span><span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;interzonal_ceilings&quot;</span><span class="p">][</span><span class="n">izc</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="n">izc</span><span class="p">)</span>
+                <span class="n">set_layer_data</span><span class="p">(</span><span class="n">zone_out</span><span class="p">[</span><span class="s2">&quot;interzonal_ceilings&quot;</span><span class="p">][</span><span class="n">izc</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="n">izc</span><span class="p">)</span>
 
             <span class="n">prj_out</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">][</span><span class="s2">&quot;buildings&quot;</span><span class="p">][</span><span class="n">bldg</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;thermal_zones&quot;</span><span class="p">][</span>
                 <span class="n">zone</span><span class="o">.</span><span class="n">name</span>
@@ -383,6 +415,9 @@
         <span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;OuterWall&quot;</span>
         <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;Rooftop&quot;</span>
         <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;Door&quot;</span>
+        <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;InterzonalWall&quot;</span>
+        <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;InterzonalCeiling&quot;</span>
+        <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;InterzonalFloor&quot;</span>
     <span class="p">):</span>
 
         <span class="n">wall_out</span><span class="p">[</span><span class="s2">&quot;outer_radiation&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">outer_radiation</span>
@@ -395,7 +430,17 @@
         <span class="n">wall_out</span><span class="p">[</span><span class="s2">&quot;g_value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">g_value</span>
         <span class="n">wall_out</span><span class="p">[</span><span class="s2">&quot;a_conv&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">a_conv</span>
         <span class="n">wall_out</span><span class="p">[</span><span class="s2">&quot;shading_g_total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">shading_g_total</span>
-        <span class="n">wall_out</span><span class="p">[</span><span class="s2">&quot;shading_max_irr&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">shading_max_irr</span></div>
+        <span class="n">wall_out</span><span class="p">[</span><span class="s2">&quot;shading_max_irr&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">shading_max_irr</span>
+
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;InterzonalWall&quot;</span>
+        <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;InterzonalCeiling&quot;</span>
+        <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;InterzonalFloor&quot;</span>
+    <span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">wall_out</span><span class="p">[</span><span class="s2">&quot;other_side&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">wall_out</span><span class="o">.</span><span class="n">other_side</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">pass</span></div>
 
 
 

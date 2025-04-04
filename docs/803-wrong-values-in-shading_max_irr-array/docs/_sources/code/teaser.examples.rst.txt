@@ -33,6 +33,14 @@ teaser.examples.e11\_export\_besmod\_models module
    :undoc-members:
    :show-inheritance:
 
+teaser.examples.e12\_include\_adjacent\_zones\_and\_varying\_soil\_temps module
+-------------------------------------------------------------------------------
+
+.. automodule:: teaser.examples.e12_include_adjacent_zones_and_varying_soil_temps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 teaser.examples.e1\_generate\_archetype module
 ----------------------------------------------
 

@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.logic.archetypebuildings package &mdash; TEASER 1.1.3 documentation</title>
+  <title>teaser.logic.archetypebuildings package &mdash; TEASER 1.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
@@ -14,7 +14,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=cb7bf70b"></script>
+      <script src="../_static/documentation_options.js?v=ca842793"></script>
       <script src="../_static/doctools.js?v=9a2dae69"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -257,7 +257,7 @@
 <span id="teaser-logic-archetypebuildings-nonresidential-module"></span><h2>teaser.logic.archetypebuildings.nonresidential module<a class="headerlink" href="#module-teaser.logic.archetypebuildings.nonresidential" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="teaser.logic.archetypebuildings.nonresidential.NonResidential">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.archetypebuildings.nonresidential.</span></span><span class="sig-name descname"><span class="pre">NonResidential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_construction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_leased_area</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_ahu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_gains_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/archetypebuildings/nonresidential.html#NonResidential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.archetypebuildings.nonresidential.NonResidential" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.archetypebuildings.nonresidential.</span></span><span class="sig-name descname"><span class="pre">NonResidential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_construction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_leased_area</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_ahu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_gains_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inner_wall_approximation_approach</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'teaser_default'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/archetypebuildings/nonresidential.html#NonResidential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.archetypebuildings.nonresidential.NonResidential" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building" title="teaser.logic.buildingobjects.building.Building"><code class="xref py py-class docutils literal notranslate"><span class="pre">Building</span></code></a></p>
 <p>Base class for each non-residential archetype.</p>
 <p>This is the base class for all non-residential archetype buildings (BMVBS,
@@ -265,9 +265,9 @@ UrbanReNet, Tabula, etc.). It is a subclass of Building and introduces
 several parameters to be obligatory (parent, name, year_of_construction,
 net_leased_area).</p>
 <p>Please use this class to create new archetype methodologies.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
+<dd class="field-odd"><dl>
 <dt><strong>parent: Project()</strong></dt><dd><p>The parent class of this object, the Project the Building belongs to.
 Allows for better control of hierarchical structures. If not None it
 adds this Building instance to Project.buildings.
@@ -296,6 +296,27 @@ consideration of moisture and co2. The moisture calculation is
 based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
 Engineering ToolBox (2004) and regards only persons.</p></li>
 </ol>
+</dd>
+<dt><strong>inner_wall_approximation_approach</strong><span class="classifier">str</span></dt><dd><dl>
+<dt>‘teaser_default’ (default) sets length of inner walls = typical</dt><dd><p>length * height of floors + 2 * typical width * height of floors</p>
+</dd>
+<dt>‘typical_minus_outer’ sets length of inner walls = 2 * typical</dt><dd><p>length * height of floors + 2 * typical width * height of floors
+- length of outer or interzonal walls</p>
+</dd>
+<dt>‘typical_minus_outer_extended’ like ‘typical_minus_outer’, but also</dt><dd><p>considers that
+a) a non-complete “average room” reduces its circumference</p>
+<blockquote>
+<div><p>proportional to the square root of the area</p>
+</div></blockquote>
+<ol class="loweralpha simple" start="2">
+<li><dl class="simple">
+<dt>rooftops, windows and ground floors (= walls with border to</dt><dd><p>soil) may have a vertical share</p>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd>
@@ -379,7 +400,7 @@ function call to do so.</p>
 <span id="teaser-logic-archetypebuildings-residential-module"></span><h2>teaser.logic.archetypebuildings.residential module<a class="headerlink" href="#module-teaser.logic.archetypebuildings.residential" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="teaser.logic.archetypebuildings.residential.Residential">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.archetypebuildings.residential.</span></span><span class="sig-name descname"><span class="pre">Residential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_construction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_leased_area</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_ahu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_gains_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/archetypebuildings/residential.html#Residential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.archetypebuildings.residential.Residential" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.archetypebuildings.residential.</span></span><span class="sig-name descname"><span class="pre">Residential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_construction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_leased_area</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_ahu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_gains_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inner_wall_approximation_approach</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'teaser_default'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/archetypebuildings/residential.html#Residential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.archetypebuildings.residential.Residential" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="teaser.logic.buildingobjects.html#teaser.logic.buildingobjects.building.Building" title="teaser.logic.buildingobjects.building.Building"><code class="xref py py-class docutils literal notranslate"><span class="pre">Building</span></code></a></p>
 <p>Base class for each residential archetype.</p>
 <p>This is the base class for all residential archetype buildings (BMVBS,
@@ -387,9 +408,9 @@ UrbanReNet, Tabula, etc.). It is a subclass of Building and introduces
 several parameters to be obligatory (parent, name, year_of_construction,
 net_leased_area)</p>
 <p>Please use this class to create new archetype methodologies.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
+<dd class="field-odd"><dl>
 <dt><strong>parent: Project()</strong></dt><dd><p>The parent class of this object, the Project the Building belongs to.
 Allows for better control of hierarchical structures. If not None it
 adds this Building instance to Project.buildings.
@@ -418,6 +439,27 @@ consideration of moisture and co2. The moisture calculation is
 based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
 Engineering ToolBox (2004) and regards only persons.</p></li>
 </ol>
+</dd>
+<dt><strong>inner_wall_approximation_approach</strong><span class="classifier">str</span></dt><dd><dl>
+<dt>‘teaser_default’ (default) sets length of inner walls = typical</dt><dd><p>length * height of floors + 2 * typical width * height of floors</p>
+</dd>
+<dt>‘typical_minus_outer’ sets length of inner walls = 2 * typical</dt><dd><p>length * height of floors + 2 * typical width * height of floors
+- length of outer or interzonal walls</p>
+</dd>
+<dt>‘typical_minus_outer_extended’ like ‘typical_minus_outer’, but also</dt><dd><p>considers that
+a) a non-complete “average room” reduces its circumference</p>
+<blockquote>
+<div><p>proportional to the square root of the area</p>
+</div></blockquote>
+<ol class="loweralpha simple" start="2">
+<li><dl class="simple">
+<dt>rooftops, windows and ground floors (= walls with border to</dt><dd><p>soil) may have a vertical share</p>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd>

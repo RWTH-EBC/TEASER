@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.logic.buildingobjects.buildingphysics.outerwall &mdash; TEASER 1.1.3 documentation</title>
+  <title>teaser.logic.buildingobjects.buildingphysics.outerwall &mdash; TEASER 1.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/autodoc_pydantic.css" />
@@ -13,7 +13,7 @@
   
       <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../../_static/documentation_options.js?v=cb7bf70b"></script>
+      <script src="../../../../../_static/documentation_options.js?v=ca842793"></script>
       <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../../_static/js/theme.js"></script>
@@ -141,6 +141,43 @@
 <span class="sd">        List of all layers of a building element (to be filled with Layer</span>
 <span class="sd">        objects). Use element.layer = None to delete all layers of the building</span>
 <span class="sd">        element</span>
+<span class="sd">    other_side : ThermalZone()</span>
+<span class="sd">        the thermal zone on the other side of the building element (only for</span>
+<span class="sd">        interzonal elements)</span>
+<span class="sd">    interzonal_type_material : str</span>
+<span class="sd">        one of (None (default), &#39;inner&#39;, &#39;outer_ordered&#39;, &#39;outer_reversed&#39;)</span>
+<span class="sd">        describes as which kind of element the element is treated when loading</span>
+<span class="sd">        type elements. Caution: Make sure that the complimentary element of</span>
+<span class="sd">        the other zone is also changed accordingly if this is adapted manually</span>
+<span class="sd">            None: treatment based on project.method_interzonal_export_enrichment</span>
+<span class="sd">            &#39;inner&#39;: InterzonalWall treated as InnerWall,</span>
+<span class="sd">                     InterzonalFloor treated as Floor,</span>
+<span class="sd">                     InterzonalCeiling treated as Ceiling</span>
+<span class="sd">            &#39;outer_ordered&#39;: InterzonalWall treated as Wall,</span>
+<span class="sd">                             InterzonalFloor treated as GroundFloor,</span>
+<span class="sd">                             InterzonalCeiling treated as Rooftop</span>
+<span class="sd">            &#39;outer_reversed&#39;: InterzonalWall treated as Wall,</span>
+<span class="sd">                              InterzonalFloor treated as Rooftop,</span>
+<span class="sd">                              InterzonalCeiling treated as GroundFloor, but with</span>
+<span class="sd">                              reversed layers, resulting in the reversed</span>
+<span class="sd">                              sequence of layers as for the complimentary</span>
+<span class="sd">                              element declared as &#39;outer_ordered&#39;</span>
+<span class="sd">    interzonal_type_export : str</span>
+<span class="sd">        one of (None (default), &#39;inner&#39;, &#39;outer_ordered&#39;, &#39;outer_reversed&#39;)</span>
+<span class="sd">        describes as which kind of element the element is treated when exporting</span>
+<span class="sd">        to Modelica. Caution: Make sure that the complimentary element of</span>
+<span class="sd">        the other zone is also changed accordingly if this is adapted manually</span>
+<span class="sd">            &#39;inner&#39;: element will be lumped with InnerWall. No heat flow to the</span>
+<span class="sd">                     zone on the other side will be modelled.</span>
+<span class="sd">            &#39;outer_ordered&#39;: element will be lumped with OuterWall (OneElement</span>
+<span class="sd">                             to FourElement export) or treated as border to an</span>
+<span class="sd">                             adjacent zone (FiveElement export). Borders to the</span>
+<span class="sd">                             same adjacent zone will be lumped.</span>
+<span class="sd">            &#39;outer_reversed&#39;: like &#39;outer_ordered&#39;, but the lumping follows</span>
+<span class="sd">                              VDI 6007-1 in reversed order, resulting in the</span>
+<span class="sd">                              reversed order of resistances and capacitors as</span>
+<span class="sd">                              for the complimentary element declared as</span>
+<span class="sd">                              &#39;outer_ordered&#39;</span>
 
 <span class="sd">    Calculated Attributes</span>
 
@@ -177,7 +214,7 @@
 <span class="sd">        Radiative resistance of building element on outer side (facing</span>
 <span class="sd">        the ambient or adjacent zone). Currently for all InnerWalls and</span>
 <span class="sd">        GroundFloors this value is set to 0.0</span>
-<span class="sd">    r_outer_conv : float [K/W]</span>
+<span class="sd">    r_outer_comb : float [K/W]</span>
 <span class="sd">        Combined convective and radiative resistance of building element on</span>
 <span class="sd">        outer side (facing the ambient or adjacent zone). Currently for all</span>
 <span class="sd">        InnerWalls and GroundFloors this value is set to 0.0</span>
@@ -230,7 +267,10 @@
 
 <div class="viewcode-block" id="OuterWall.retrofit_wall">
 <a class="viewcode-back" href="../../../../../code/teaser.logic.buildingobjects.buildingphysics.html#teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall.retrofit_wall">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">retrofit_wall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year_of_retrofit</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">retrofit_wall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                      <span class="n">year_of_retrofit</span><span class="p">,</span>
+                      <span class="n">material</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                      <span class="n">add_at_position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrofits wall to German refurbishment standards.</span>
 
 <span class="sd">        This function adds an additional layer of insulation and sets the</span>
@@ -249,10 +289,14 @@
 <span class="sd">            Type of material, that is used for insulation</span>
 <span class="sd">        year_of_retrofit : int</span>
 <span class="sd">            Year of the retrofit of the wall/building</span>
+<span class="sd">        add_at_position : int</span>
+<span class="sd">            position at which to insert the insulation layer.</span>
+<span class="sd">            0 inside, None (default) or -1 outside/other side</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">material</span><span class="p">,</span> <span class="n">year_of_retrofit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialize_retrofit</span><span class="p">(</span>
-            <span class="n">material</span><span class="p">,</span> <span class="n">year_of_retrofit</span><span class="p">)</span>
+        <span class="n">material</span><span class="p">,</span> <span class="n">year_of_retrofit</span><span class="p">,</span> <span class="n">ins_layer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialize_retrofit</span><span class="p">(</span>
+            <span class="n">material</span><span class="p">,</span> <span class="n">year_of_retrofit</span><span class="p">,</span> <span class="n">add_at_position</span>
+        <span class="p">)</span>
 
         <span class="n">calc_u</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -269,7 +313,8 @@
         <span class="k">elif</span> <span class="n">year_of_retrofit</span> <span class="o">&gt;=</span> <span class="mi">2014</span><span class="p">:</span>
             <span class="n">calc_u</span> <span class="o">=</span> <span class="mf">0.24</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_insulation</span><span class="p">(</span><span class="n">material</span><span class="p">,</span> <span class="n">calc_u</span><span class="p">,</span> <span class="n">year_of_retrofit</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_insulation</span><span class="p">(</span><span class="n">material</span><span class="p">,</span> <span class="n">calc_u</span><span class="p">,</span> <span class="n">year_of_retrofit</span><span class="p">,</span>
+                            <span class="n">ins_layer_index</span><span class="o">=</span><span class="n">ins_layer</span><span class="p">)</span></div>
 </div>
 
 </pre></div>

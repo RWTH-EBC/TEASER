@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>teaser.logic.buildingobjects.buildingphysics package &mdash; TEASER 1.1.3 documentation</title>
+  <title>teaser.logic.buildingobjects.buildingphysics package &mdash; TEASER 1.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
@@ -14,7 +14,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=cb7bf70b"></script>
+      <script src="../_static/documentation_options.js?v=ca842793"></script>
       <script src="../_static/doctools.js?v=9a2dae69"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -82,6 +82,18 @@
 </li>
 <li class="toctree-l9"><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.innerwall">teaser.logic.buildingobjects.buildingphysics.innerwall module</a><ul>
 <li class="toctree-l10"><a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall"><code class="docutils literal notranslate"><span class="pre">InnerWall</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l9"><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.interzonalceiling">teaser.logic.buildingobjects.buildingphysics.interzonalceiling module</a><ul>
+<li class="toctree-l10"><a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.interzonalceiling.InterzonalCeiling"><code class="docutils literal notranslate"><span class="pre">InterzonalCeiling</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l9"><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.interzonalfloor">teaser.logic.buildingobjects.buildingphysics.interzonalfloor module</a><ul>
+<li class="toctree-l10"><a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.interzonalfloor.InterzonalFloor"><code class="docutils literal notranslate"><span class="pre">InterzonalFloor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l9"><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.interzonalwall">teaser.logic.buildingobjects.buildingphysics.interzonalwall module</a><ul>
+<li class="toctree-l10"><a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.interzonalwall.InterzonalWall"><code class="docutils literal notranslate"><span class="pre">InterzonalWall</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l9"><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.layer">teaser.logic.buildingobjects.buildingphysics.layer module</a><ul>
@@ -402,7 +414,7 @@ of each layer</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.load_type_element">
-<span class="sig-name descname"><span class="pre">load_type_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">construction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/buildingelement.html#BuildingElement.load_type_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.load_type_element" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">load_type_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">construction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_element_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/buildingelement.html#BuildingElement.load_type_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.load_type_element" title="Link to this definition"></a></dt>
 <dd><p>Typical element loader.</p>
 <p>Loads typical building elements according to their construction
 year and their construction type from a json.</p>
@@ -419,6 +431,14 @@ Material (typically this is the data class stored in prj.data,
 but the user can individually change that. Default is
 self.parent.parent.parent.data (which is data_class in current
 project)</p>
+</dd>
+<dt><strong>element_type</strong><span class="classifier">str</span></dt><dd><p>Element type to load - only to specify if the json entry for a
+different type than type(element) is to be loaded, e.g. InnerWall
+instead of OuterWall</p>
+</dd>
+<dt><strong>reverse_layers</strong><span class="classifier">bool</span></dt><dd><p>defines if layer list should be reversed</p>
+</dd>
+<dt><strong>type_element_key</strong><span class="classifier">str</span></dt><dd><p>Element to load - specify the full json entry</p>
 </dd>
 </dl>
 </dd>
@@ -500,7 +520,7 @@ project)</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingphysics.ceiling.</span></span><span class="sig-name descname"><span class="pre">Ceiling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">InnerWall</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/ceiling.html#Ceiling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.ceiling.Ceiling" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall" title="teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall"><code class="xref py py-class docutils literal notranslate"><span class="pre">InnerWall</span></code></a></p>
 <p>This class represents a ceiling and is a child of InnerWall()</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
@@ -511,7 +531,7 @@ Default is None.</p>
 </dl>
 </dd>
 <dt class="field-even">Attributes<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
+<dd class="field-even"><dl>
 <dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
 </dd>
 <dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
@@ -552,6 +572,53 @@ GroundFloors this value is set to 0.0</p>
 objects). Use element.layer = None to delete all layers of the building
 element</p>
 </dd>
+<dt><strong>other_side</strong><span class="classifier">ThermalZone()</span></dt><dd><p>the thermal zone on the other side of the building element (only for
+interzonal elements)</p>
+</dd>
+<dt><strong>interzonal_type_material</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when loading
+type elements. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><p>None: treatment based on project.method_interzonal_export_enrichment
+‘inner’: InterzonalWall treated as InnerWall,</p>
+<blockquote>
+<div><p>InterzonalFloor treated as Floor,
+InterzonalCeiling treated as Ceiling</p>
+</div></blockquote>
+<dl class="simple">
+<dt>‘outer_ordered’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as GroundFloor,
+InterzonalCeiling treated as Rooftop</p>
+</dd>
+<dt>‘outer_reversed’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as Rooftop,
+InterzonalCeiling treated as GroundFloor, but with
+reversed layers, resulting in the reversed
+sequence of layers as for the complimentary
+element declared as ‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt><strong>interzonal_type_export</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when exporting
+to Modelica. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><dl class="simple">
+<dt>‘inner’: element will be lumped with InnerWall. No heat flow to the</dt><dd><p>zone on the other side will be modelled.</p>
+</dd>
+<dt>‘outer_ordered’: element will be lumped with OuterWall (OneElement</dt><dd><p>to FourElement export) or treated as border to an
+adjacent zone (FiveElement export). Borders to the
+same adjacent zone will be lumped.</p>
+</dd>
+<dt>‘outer_reversed’: like ‘outer_ordered’, but the lumping follows</dt><dd><p>VDI 6007-1 in reversed order, resulting in the
+reversed order of resistances and capacitors as
+for the complimentary element declared as
+‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
 <dt><strong>Calculated Attributes</strong></dt><dd></dd>
 <dt><strong>r1</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R1 of the analogous model given in VDI 6007</p>
 </dd>
@@ -585,7 +652,7 @@ GroundFloors this value is set to 0.0</p>
 the ambient or adjacent zone). Currently for all InnerWalls and
 GroundFloors this value is set to 0.0</p>
 </dd>
-<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+<dt><strong>r_outer_comb</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
 outer side (facing the ambient or adjacent zone). Currently for all
 InnerWalls and GroundFloors this value is set to 0.0</p>
 </dd>
@@ -608,7 +675,7 @@ InnerWalls and GroundFloors this value is set to 0.0</p>
 OuterWall()</p>
 <p>Will be treated exactly as OuterWalls, we need this distinction due to
 Door class in Tabula</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
@@ -619,7 +686,7 @@ Default is None.</p>
 </dl>
 </dd>
 <dt class="field-even">Attributes<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
+<dd class="field-even"><dl>
 <dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
 </dd>
 <dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
@@ -658,6 +725,53 @@ the ambient or adjacent zone), default 5.0</p>
 objects). Use element.layer = None to delete all layers of the building
 element</p>
 </dd>
+<dt><strong>other_side</strong><span class="classifier">ThermalZone()</span></dt><dd><p>the thermal zone on the other side of the building element (only for
+interzonal elements)</p>
+</dd>
+<dt><strong>interzonal_type_material</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when loading
+type elements. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><p>None: treatment based on project.method_interzonal_export_enrichment
+‘inner’: InterzonalWall treated as InnerWall,</p>
+<blockquote>
+<div><p>InterzonalFloor treated as Floor,
+InterzonalCeiling treated as Ceiling</p>
+</div></blockquote>
+<dl class="simple">
+<dt>‘outer_ordered’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as GroundFloor,
+InterzonalCeiling treated as Rooftop</p>
+</dd>
+<dt>‘outer_reversed’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as Rooftop,
+InterzonalCeiling treated as GroundFloor, but with
+reversed layers, resulting in the reversed
+sequence of layers as for the complimentary
+element declared as ‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt><strong>interzonal_type_export</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when exporting
+to Modelica. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><dl class="simple">
+<dt>‘inner’: element will be lumped with InnerWall. No heat flow to the</dt><dd><p>zone on the other side will be modelled.</p>
+</dd>
+<dt>‘outer_ordered’: element will be lumped with OuterWall (OneElement</dt><dd><p>to FourElement export) or treated as border to an
+adjacent zone (FiveElement export). Borders to the
+same adjacent zone will be lumped.</p>
+</dd>
+<dt>‘outer_reversed’: like ‘outer_ordered’, but the lumping follows</dt><dd><p>VDI 6007-1 in reversed order, resulting in the
+reversed order of resistances and capacitors as
+for the complimentary element declared as
+‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
 <dt><strong>Calculated Attributes</strong></dt><dd></dd>
 <dt><strong>r1</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R1 of the analogous model given in VDI 6007</p>
 </dd>
@@ -691,7 +805,7 @@ GroundFloors this value is set to 0.0</p>
 the ambient or adjacent zone). Currently for all InnerWalls and
 GroundFloors this value is set to 0.0</p>
 </dd>
-<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+<dt><strong>r_outer_comb</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
 outer side (facing the ambient or adjacent zone). Currently for all
 InnerWalls and GroundFloors this value is set to 0.0</p>
 </dd>
@@ -715,7 +829,7 @@ InnerWalls and GroundFloors this value is set to 0.0</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingphysics.floor.</span></span><span class="sig-name descname"><span class="pre">Floor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">InnerWall</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/floor.html#Floor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.floor.Floor" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall" title="teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall"><code class="xref py py-class docutils literal notranslate"><span class="pre">InnerWall</span></code></a></p>
 <p>This class represents a floor and is a child of InnerWall()</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
@@ -726,7 +840,7 @@ Default is None.</p>
 </dl>
 </dd>
 <dt class="field-even">Attributes<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
+<dd class="field-even"><dl>
 <dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
 </dd>
 <dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
@@ -767,6 +881,53 @@ GroundFloors this value is set to 0.0</p>
 objects). Use element.layer = None to delete all layers of the building
 element</p>
 </dd>
+<dt><strong>other_side</strong><span class="classifier">ThermalZone()</span></dt><dd><p>the thermal zone on the other side of the building element (only for
+interzonal elements)</p>
+</dd>
+<dt><strong>interzonal_type_material</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when loading
+type elements. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><p>None: treatment based on project.method_interzonal_export_enrichment
+‘inner’: InterzonalWall treated as InnerWall,</p>
+<blockquote>
+<div><p>InterzonalFloor treated as Floor,
+InterzonalCeiling treated as Ceiling</p>
+</div></blockquote>
+<dl class="simple">
+<dt>‘outer_ordered’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as GroundFloor,
+InterzonalCeiling treated as Rooftop</p>
+</dd>
+<dt>‘outer_reversed’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as Rooftop,
+InterzonalCeiling treated as GroundFloor, but with
+reversed layers, resulting in the reversed
+sequence of layers as for the complimentary
+element declared as ‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt><strong>interzonal_type_export</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when exporting
+to Modelica. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><dl class="simple">
+<dt>‘inner’: element will be lumped with InnerWall. No heat flow to the</dt><dd><p>zone on the other side will be modelled.</p>
+</dd>
+<dt>‘outer_ordered’: element will be lumped with OuterWall (OneElement</dt><dd><p>to FourElement export) or treated as border to an
+adjacent zone (FiveElement export). Borders to the
+same adjacent zone will be lumped.</p>
+</dd>
+<dt>‘outer_reversed’: like ‘outer_ordered’, but the lumping follows</dt><dd><p>VDI 6007-1 in reversed order, resulting in the
+reversed order of resistances and capacitors as
+for the complimentary element declared as
+‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
 <dt><strong>Calculated Attributes</strong></dt><dd></dd>
 <dt><strong>r1</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R1 of the analogous model given in VDI 6007</p>
 </dd>
@@ -800,7 +961,7 @@ GroundFloors this value is set to 0.0</p>
 the ambient or adjacent zone). Currently for all InnerWalls and
 GroundFloors this value is set to 0.0</p>
 </dd>
-<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+<dt><strong>r_outer_comb</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
 outer side (facing the ambient or adjacent zone). Currently for all
 InnerWalls and GroundFloors this value is set to 0.0</p>
 </dd>
@@ -820,7 +981,7 @@ InnerWalls and GroundFloors this value is set to 0.0</p>
 <dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall" title="teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall"><code class="xref py py-class docutils literal notranslate"><span class="pre">OuterWall</span></code></a></p>
 <p>GroundFloor class</p>
 <p>This class holds information of a GroundFloor and is a child of OuterWall()</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
@@ -831,7 +992,7 @@ Default is None.</p>
 </dl>
 </dd>
 <dt class="field-even">Attributes<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
+<dd class="field-even"><dl>
 <dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
 </dd>
 <dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
@@ -870,6 +1031,53 @@ the ambient or adjacent zone), default 0.0</p>
 objects). Use element.layer = None to delete all layers of the building
 element</p>
 </dd>
+<dt><strong>other_side</strong><span class="classifier">ThermalZone()</span></dt><dd><p>the thermal zone on the other side of the building element (only for
+interzonal elements)</p>
+</dd>
+<dt><strong>interzonal_type_material</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when loading
+type elements. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><p>None: treatment based on project.method_interzonal_export_enrichment
+‘inner’: InterzonalWall treated as InnerWall,</p>
+<blockquote>
+<div><p>InterzonalFloor treated as Floor,
+InterzonalCeiling treated as Ceiling</p>
+</div></blockquote>
+<dl class="simple">
+<dt>‘outer_ordered’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as GroundFloor,
+InterzonalCeiling treated as Rooftop</p>
+</dd>
+<dt>‘outer_reversed’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as Rooftop,
+InterzonalCeiling treated as GroundFloor, but with
+reversed layers, resulting in the reversed
+sequence of layers as for the complimentary
+element declared as ‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt><strong>interzonal_type_export</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when exporting
+to Modelica. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><dl class="simple">
+<dt>‘inner’: element will be lumped with InnerWall. No heat flow to the</dt><dd><p>zone on the other side will be modelled.</p>
+</dd>
+<dt>‘outer_ordered’: element will be lumped with OuterWall (OneElement</dt><dd><p>to FourElement export) or treated as border to an
+adjacent zone (FiveElement export). Borders to the
+same adjacent zone will be lumped.</p>
+</dd>
+<dt>‘outer_reversed’: like ‘outer_ordered’, but the lumping follows</dt><dd><p>VDI 6007-1 in reversed order, resulting in the
+reversed order of resistances and capacitors as
+for the complimentary element declared as
+‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
 <dt><strong>Calculated Attributes</strong></dt><dd></dd>
 <dt><strong>r1</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R1 of the analogous model given in VDI 6007</p>
 </dd>
@@ -904,7 +1112,7 @@ GroundFloors this value is set to 0.0</p>
 the ambient or adjacent zone). Currently for all InnerWalls and
 GroundFloors this value is set to 0.0</p>
 </dd>
-<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+<dt><strong>r_outer_comb</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
 outer side (facing the ambient or adjacent zone). Currently for all
 InnerWalls and GroundFloors this value is set to 0.0</p>
 </dd>
@@ -915,7 +1123,7 @@ InnerWalls and GroundFloors this value is set to 0.0</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.groundfloor.GroundFloor.retrofit_wall">
-<span class="sig-name descname"><span class="pre">retrofit_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/groundfloor.html#GroundFloor.retrofit_wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.groundfloor.GroundFloor.retrofit_wall" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">retrofit_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_at_position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/groundfloor.html#GroundFloor.retrofit_wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.groundfloor.GroundFloor.retrofit_wall" title="Link to this definition"></a></dt>
 <dd><p>Retrofits wall to German refurbishment standards.</p>
 <p>This function adds an additional layer of insulation and sets the
 thickness of the layer according to the retrofit standard in the
@@ -930,6 +1138,9 @@ Energieeinsparverordnung (EnEv)</p>
 <dt><strong>material</strong><span class="classifier">string</span></dt><dd><p>Type of material, that is used for insulation</p>
 </dd>
 <dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of the retrofit of the wall/building</p>
+</dd>
+<dt><strong>add_at_position</strong><span class="classifier">int</span></dt><dd><p>position at which to insert the insulation layer.
+0 inside, None (default) or -1 outside/other side</p>
 </dd>
 </dl>
 </dd>
@@ -947,7 +1158,7 @@ Energieeinsparverordnung (EnEv)</p>
 <dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall" title="teaser.logic.buildingobjects.buildingphysics.wall.Wall"><code class="xref py py-class docutils literal notranslate"><span class="pre">Wall</span></code></a></p>
 <p>InnerWall class</p>
 <p>This class holds information for an inner wall and is a child of Wall()</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
@@ -958,7 +1169,7 @@ Default is None.</p>
 </dl>
 </dd>
 <dt class="field-even">Attributes<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
+<dd class="field-even"><dl>
 <dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
 </dd>
 <dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
@@ -999,6 +1210,211 @@ GroundFloors this value is set to 0.0</p>
 objects). Use element.layer = None to delete all layers of the building
 element</p>
 </dd>
+<dt><strong>other_side</strong><span class="classifier">ThermalZone()</span></dt><dd><p>the thermal zone on the other side of the building element (only for
+interzonal elements)</p>
+</dd>
+<dt><strong>interzonal_type_material</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when loading
+type elements. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><p>None: treatment based on project.method_interzonal_export_enrichment
+‘inner’: InterzonalWall treated as InnerWall,</p>
+<blockquote>
+<div><p>InterzonalFloor treated as Floor,
+InterzonalCeiling treated as Ceiling</p>
+</div></blockquote>
+<dl class="simple">
+<dt>‘outer_ordered’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as GroundFloor,
+InterzonalCeiling treated as Rooftop</p>
+</dd>
+<dt>‘outer_reversed’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as Rooftop,
+InterzonalCeiling treated as GroundFloor, but with
+reversed layers, resulting in the reversed
+sequence of layers as for the complimentary
+element declared as ‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt><strong>interzonal_type_export</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when exporting
+to Modelica. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><dl class="simple">
+<dt>‘inner’: element will be lumped with InnerWall. No heat flow to the</dt><dd><p>zone on the other side will be modelled.</p>
+</dd>
+<dt>‘outer_ordered’: element will be lumped with OuterWall (OneElement</dt><dd><p>to FourElement export) or treated as border to an
+adjacent zone (FiveElement export). Borders to the
+same adjacent zone will be lumped.</p>
+</dd>
+<dt>‘outer_reversed’: like ‘outer_ordered’, but the lumping follows</dt><dd><p>VDI 6007-1 in reversed order, resulting in the
+reversed order of resistances and capacitors as
+for the complimentary element declared as
+‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt><strong>Calculated Attributes</strong></dt><dd></dd>
+<dt><strong>r1</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r2</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r3</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R3 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c2</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1_korr</strong><span class="classifier">float [J/K]</span></dt><dd><p>corrected capacity C1,korr for building elements in the case of
+asymmetrical thermal load given in VDI 6007</p>
+</dd>
+<dt><strong>ua_value</strong><span class="classifier">float [W/K]</span></dt><dd><p>UA-Value of building element (Area times U-Value)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+inner side (facing the zone)</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_comb</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+outer side (facing the ambient or adjacent zone). Currently for all
+InnerWalls and GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>wf_out</strong><span class="classifier">float</span></dt><dd><p>Weightfactor of building element ua_value/ua_value_zone</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall.parent">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parent</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall.parent" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-teaser.logic.buildingobjects.buildingphysics.interzonalceiling">
+<span id="teaser-logic-buildingobjects-buildingphysics-interzonalceiling-module"></span><h2>teaser.logic.buildingobjects.buildingphysics.interzonalceiling module<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.interzonalceiling" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.interzonalceiling.InterzonalCeiling">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingphysics.interzonalceiling.</span></span><span class="sig-name descname"><span class="pre">InterzonalCeiling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">InterzonalWall</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/interzonalceiling.html#InterzonalCeiling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.interzonalceiling.InterzonalCeiling" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.interzonalwall.InterzonalWall" title="teaser.logic.buildingobjects.buildingphysics.interzonalwall.InterzonalWall"><code class="xref py py-class docutils literal notranslate"><span class="pre">InterzonalWall</span></code></a></p>
+<p>This class represents an interzonal ceiling and is a child of
+InterzonalWall()</p>
+<p>Note that interzonal elements have to be created twice for each zone they
+connect and are not semantically connected afterwards. For an
+InterzonalCeiling of one zone, an InterzonalFloor has to be created for the
+zone on the other side.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
+Allows for better control of hierarchical structures. If not None it
+adds this InterzonalCeiling to ThermalZone.interzonal_ceilings.
+Default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
+</dd>
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+distinction between different constructions types in the same
+building age period.</p>
+</dd>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of last retrofit</p>
+</dd>
+<dt><strong>year_of_construction</strong><span class="classifier">int</span></dt><dd><p>Year of first construction</p>
+</dd>
+<dt><strong>building_age_group</strong><span class="classifier">list</span></dt><dd><p>Determines the building age period that this building
+element belongs to [begin, end], e.g. [1984, 1994]</p>
+</dd>
+<dt><strong>area</strong><span class="classifier">float [m2]</span></dt><dd><p>Area of building element</p>
+</dd>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against horizontal, default is 0.0</p>
+</dd>
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth direction of building element (0 : north, 90: east, 180: south,
+270: west), default is -1, for horizontal ceiling</p>
+</dd>
+<dt><strong>inner_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection inner side (facing
+the zone), default is 1.7</p>
+</dd>
+<dt><strong>inner_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation inner side (facing
+the zone), default is 5.0</p>
+</dd>
+<dt><strong>outer_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection outer side (facing
+the ambient or adjacent zone), default is 1.7</p>
+</dd>
+<dt><strong>outer_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation outer side (facing
+the ambient or adjacent zone), default is 5.0</p>
+</dd>
+<dt><strong>layer</strong><span class="classifier">list</span></dt><dd><p>List of all layers of a building element (to be filled with Layer
+objects). Use element.layer = None to delete all layers of the building
+element</p>
+</dd>
+<dt><strong>other_side</strong><span class="classifier">ThermalZone()</span></dt><dd><p>the thermal zone on the upper side of the interzonal ceiling</p>
+</dd>
+<dt><strong>interzonal_type_material</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when loading
+type elements. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><p>None: treatment based on project.method_interzonal_export_enrichment
+‘inner’: InterzonalWall treated as InnerWall,</p>
+<blockquote>
+<div><p>InterzonalFloor treated as Floor,
+InterzonalCeiling treated as Ceiling</p>
+</div></blockquote>
+<dl class="simple">
+<dt>‘outer_ordered’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as GroundFloor,
+InterzonalCeiling treated as Rooftop</p>
+</dd>
+<dt>‘outer_reversed’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as Rooftop,
+InterzonalCeiling treated as GroundFloor, but with
+reversed layers, resulting in the reversed
+sequence of layers as for the complimentary
+element declared as ‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt><strong>interzonal_type_export</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when exporting
+to Modelica. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><dl class="simple">
+<dt>‘inner’: element will be lumped with InnerWall. No heat flow to the</dt><dd><p>zone on the other side will be modelled.</p>
+</dd>
+<dt>‘outer_ordered’: element will be lumped with OuterWall (OneElement</dt><dd><p>to FourElement export) or treated as border to an
+adjacent zone (FiveElement export). Borders to the
+same adjacent zone will be lumped.</p>
+</dd>
+<dt>‘outer_reversed’: like ‘outer_ordered’, but the lumping follows</dt><dd><p>VDI 6007-1 in reversed order, resulting in the
+reversed order of resistances and capacitors as
+for the complimentary element declared as
+‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
 <dt><strong>Calculated Attributes</strong></dt><dd></dd>
 <dt><strong>r1</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R1 of the analogous model given in VDI 6007</p>
 </dd>
@@ -1041,10 +1457,426 @@ InnerWalls and GroundFloors this value is set to 0.0</p>
 </dl>
 </dd>
 </dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.interzonalceiling.InterzonalCeiling.retrofit_wall">
+<span class="sig-name descname"><span class="pre">retrofit_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_at_position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/interzonalceiling.html#InterzonalCeiling.retrofit_wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.interzonalceiling.InterzonalCeiling.retrofit_wall" title="Link to this definition"></a></dt>
+<dd><p>Retrofits wall to German refurbishment standards.</p>
+<p>This function adds an additional layer of insulation and sets the
+thickness of the layer according to the retrofit standard in the
+year of refurbishment. Refurbishment year must be newer then 1977</p>
+<p>Note: To Calculate thickness and U-Value, the standard TEASER
+coefficients for outer and inner heat transfer are used.</p>
+<p>The used Standards are namely the Waermeschutzverordnung (WSVO) and
+Energieeinsparverordnung (EnEv)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>material</strong><span class="classifier">string</span></dt><dd><p>Type of material, that is used for insulation</p>
+</dd>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of the retrofit of the wall/building</p>
+</dd>
+<dt><strong>add_at_position</strong><span class="classifier">int</span></dt><dd><p>position at which to insert the insulation layer.
+0 inside, None (default) or -1 outside/other side</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-teaser.logic.buildingobjects.buildingphysics.interzonalfloor">
+<span id="teaser-logic-buildingobjects-buildingphysics-interzonalfloor-module"></span><h2>teaser.logic.buildingobjects.buildingphysics.interzonalfloor module<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.interzonalfloor" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.interzonalfloor.InterzonalFloor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingphysics.interzonalfloor.</span></span><span class="sig-name descname"><span class="pre">InterzonalFloor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">InterzonalWall</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/interzonalfloor.html#InterzonalFloor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.interzonalfloor.InterzonalFloor" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.interzonalwall.InterzonalWall" title="teaser.logic.buildingobjects.buildingphysics.interzonalwall.InterzonalWall"><code class="xref py py-class docutils literal notranslate"><span class="pre">InterzonalWall</span></code></a></p>
+<p>This class represents an interzonal floor and is a child of InterzonalWall()</p>
+<p>Note that interzonal elements have to be created twice for each zone they
+connect and are not semantically connected afterwards. For an
+InterzonalFloor of one zone, an InterzonalCeiling has to be created for the
+zone on the other side.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
+Allows for better control of hierarchical structures. If not None it
+adds this InterzonalFloor to ThermalZone.interzonal_floors.
+Default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
+</dd>
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+distinction between different constructions types in the same
+building age period.</p>
+</dd>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of last retrofit</p>
+</dd>
+<dt><strong>year_of_construction</strong><span class="classifier">int</span></dt><dd><p>Year of first construction</p>
+</dd>
+<dt><strong>building_age_group</strong><span class="classifier">list</span></dt><dd><p>Determines the building age period that this building
+element belongs to [begin, end], e.g. [1984, 1994]</p>
+</dd>
+<dt><strong>area</strong><span class="classifier">float [m2]</span></dt><dd><p>Area of building element</p>
+</dd>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against horizontal, default is 0.0</p>
+</dd>
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth direction of building element (0 : north, 90: east, 180: south,
+270: west), default is -2, for horizontal floor</p>
+</dd>
+<dt><strong>inner_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection inner side (facing
+the zone), default is 1.7</p>
+</dd>
+<dt><strong>inner_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation inner side (facing
+the zone), default is 5.0</p>
+</dd>
+<dt><strong>outer_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection outer side (facing
+the ambient or adjacent zone). Default 0.0 - if unchanged, 1.7 when
+adding an outside</p>
+</dd>
+<dt><strong>outer_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation outer side (facing
+the ambient or adjacent zone). Default 0.0 - if unchanged, 5.0 when
+adding an outside</p>
+</dd>
+<dt><strong>layer</strong><span class="classifier">list</span></dt><dd><p>List of all layers of a building element (to be filled with Layer
+objects). Use element.layer = None to delete all layers of the building
+element</p>
+</dd>
+<dt><strong>other_side</strong><span class="classifier">ThermalZone()</span></dt><dd><p>the thermal zone on the upper side of the interzonal floor</p>
+</dd>
+<dt><strong>interzonal_type_material</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when loading
+type elements. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><p>None: treatment based on project.method_interzonal_export_enrichment
+‘inner’: InterzonalWall treated as InnerWall,</p>
+<blockquote>
+<div><p>InterzonalFloor treated as Floor,
+InterzonalCeiling treated as Ceiling</p>
+</div></blockquote>
+<dl class="simple">
+<dt>‘outer_ordered’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as GroundFloor,
+InterzonalCeiling treated as Rooftop</p>
+</dd>
+<dt>‘outer_reversed’: like ‘outer_ordered’, but with reversed layers,</dt><dd><p>resulting in the reversed sequence of layers as
+for the complimentary element declared as
+‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt><strong>interzonal_type_export</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when exporting
+to Modelica. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><dl class="simple">
+<dt>‘inner’: element will be lumped with InnerWall. No heat flow to the</dt><dd><p>zone on the other side will be modelled.</p>
+</dd>
+<dt>‘outer_ordered’: element will be lumped with OuterWall (OneElement</dt><dd><p>to FourElement export) or treated as border to an
+adjacent zone (FiveElement export). Borders to the
+same adjacent zone will be lumped.</p>
+</dd>
+<dt>‘outer_reversed’: like ‘outer_ordered’, but the lumping follows</dt><dd><p>VDI 6007-1 in reversed order, resulting in the
+reversed order of resistances and capacitors as
+for the complimentary element declared as
+‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt><strong>Calculated Attributes</strong></dt><dd></dd>
+<dt><strong>r1</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r2</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r3</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R3 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c2</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1_korr</strong><span class="classifier">float [J/K]</span></dt><dd><p>corrected capacity C1,korr for building elements in the case of
+asymmetrical thermal load given in VDI 6007</p>
+</dd>
+<dt><strong>ua_value</strong><span class="classifier">float [W/K]</span></dt><dd><p>UA-Value of building element (Area times U-Value)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+inner side (facing the zone)</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_comb</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+outer side (facing the ambient or adjacent zone). Currently for all
+InnerWalls and GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>wf_out</strong><span class="classifier">float</span></dt><dd><p>Weightfactor of building element ua_value/ua_value_zone</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.interzonalfloor.InterzonalFloor.retrofit_wall">
+<span class="sig-name descname"><span class="pre">retrofit_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_at_position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/interzonalfloor.html#InterzonalFloor.retrofit_wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.interzonalfloor.InterzonalFloor.retrofit_wall" title="Link to this definition"></a></dt>
+<dd><p>Retrofits wall to German refurbishment standards.</p>
+<p>This function adds an additional layer of insulation and sets the
+thickness of the layer according to the retrofit standard in the
+year of refurbishment. Refurbishment year must be newer then 1977</p>
+<p>Note: To Calculate thickness and U-Value, the standard TEASER
+coefficients for outer and inner heat transfer are used.</p>
+<p>The used Standards are namely the Waermeschutzverordnung (WSVO) and
+Energieeinsparverordnung (EnEv)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>material</strong><span class="classifier">string</span></dt><dd><p>Type of material, that is used for insulation</p>
+</dd>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of the retrofit of the wall/building</p>
+</dd>
+<dt><strong>add_at_position</strong><span class="classifier">int</span></dt><dd><p>position at which to insert the insulation layer.
+0 inside, None (default) or -1 outside/other side</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-teaser.logic.buildingobjects.buildingphysics.interzonalwall">
+<span id="teaser-logic-buildingobjects-buildingphysics-interzonalwall-module"></span><h2>teaser.logic.buildingobjects.buildingphysics.interzonalwall module<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.interzonalwall" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.interzonalwall.InterzonalWall">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingphysics.interzonalwall.</span></span><span class="sig-name descname"><span class="pre">InterzonalWall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_side</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/interzonalwall.html#InterzonalWall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.interzonalwall.InterzonalWall" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall" title="teaser.logic.buildingobjects.buildingphysics.wall.Wall"><code class="xref py py-class docutils literal notranslate"><span class="pre">Wall</span></code></a></p>
+<p>InterzonalWall class</p>
+<p>This class holds information for an interzonal wall and is a child of Wall()</p>
+<p>Note that interzonal elements have to be created twice for each zone they
+connect and are not semantically connected afterwards. For an
+InterzonalWall of one zone, an InterzonalWall has to be created for the
+zone on the other side.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
+Allows for better control of hierarchical structures. If not None it
+adds this InterzonalWall to ThermalZone.interzonal_walls.
+Default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
+</dd>
+<dt><strong>construction_data</strong><span class="classifier">str</span></dt><dd><p>Type of construction (e.g. “heavy” or “light”). Needed for
+distinction between different constructions types in the same
+building age period.</p>
+</dd>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of last retrofit</p>
+</dd>
+<dt><strong>year_of_construction</strong><span class="classifier">int</span></dt><dd><p>Year of first construction</p>
+</dd>
+<dt><strong>building_age_group</strong><span class="classifier">list</span></dt><dd><p>Determines the building age period that this building
+element belongs to [begin, end], e.g. [1984, 1994]</p>
+</dd>
+<dt><strong>area</strong><span class="classifier">float [m2]</span></dt><dd><p>Area of building element</p>
+</dd>
+<dt><strong>tilt</strong><span class="classifier">float [degree]</span></dt><dd><p>Tilt against horizontal, default is 90.0</p>
+</dd>
+<dt><strong>orientation</strong><span class="classifier">float [degree]</span></dt><dd><p>Azimuth direction of building element (0 : north, 90: east, 180: south,
+270: west)</p>
+</dd>
+<dt><strong>inner_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection inner side (facing
+the zone), default 1.7</p>
+</dd>
+<dt><strong>inner_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation inner side (facing
+the zone), default 5.0</p>
+</dd>
+<dt><strong>outer_convection</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of convection outer side (facing
+the ambient or adjacent zone), default 1.7</p>
+</dd>
+<dt><strong>outer_radiation</strong><span class="classifier">float [W/(m2*K)]</span></dt><dd><p>Constant heat transfer coefficient of radiation outer side (facing
+the ambient or adjacent zone), default 5.0</p>
+</dd>
+<dt><strong>layer</strong><span class="classifier">list</span></dt><dd><p>List of all layers of a building element (to be filled with Layer
+objects). Use element.layer = None to delete all layers of the building
+element</p>
+</dd>
+<dt><strong>other_side</strong><span class="classifier">ThermalZone()</span></dt><dd><p>the thermal zone on the other side of the interzonal wall</p>
+</dd>
+<dt><strong>interzonal_type_material</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when loading
+type elements. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><p>None: treatment based on project.method_interzonal_export_enrichment
+‘inner’: InterzonalWall treated as InnerWall,</p>
+<blockquote>
+<div><p>InterzonalFloor treated as Floor,
+InterzonalCeiling treated as Ceiling</p>
+</div></blockquote>
+<dl class="simple">
+<dt>‘outer_ordered’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as GroundFloor,
+InterzonalCeiling treated as Rooftop</p>
+</dd>
+<dt>‘outer_reversed’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as Rooftop,
+InterzonalCeiling treated as GroundFloor, but with
+reversed layers, resulting in the reversed
+sequence of layers as for the complimentary
+element declared as ‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt><strong>interzonal_type_export</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when exporting
+to Modelica. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><dl class="simple">
+<dt>‘inner’: element will be lumped with InnerWall. No heat flow to the</dt><dd><p>zone on the other side will be modelled.</p>
+</dd>
+<dt>‘outer_ordered’: element will be lumped with OuterWall (OneElement</dt><dd><p>to FourElement export) or treated as border to an
+adjacent zone (FiveElement export). Borders to the
+same adjacent zone will be lumped.</p>
+</dd>
+<dt>‘outer_reversed’: like ‘outer_ordered’, but the lumping follows</dt><dd><p>VDI 6007-1 in reversed order, resulting in the
+reversed order of resistances and capacitors as
+for the complimentary element declared as
+‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt><strong>Calculated Attributes</strong></dt><dd></dd>
+<dt><strong>r1</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r2</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>r3</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R3 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C1 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c2</strong><span class="classifier">float [J/K]</span></dt><dd><p>equivalent capacity C2 of the analogous model given in VDI 6007</p>
+</dd>
+<dt><strong>c1_korr</strong><span class="classifier">float [J/K]</span></dt><dd><p>corrected capacity C1,korr for building elements in the case of
+asymmetrical thermal load given in VDI 6007</p>
+</dd>
+<dt><strong>ua_value</strong><span class="classifier">float [W/K]</span></dt><dd><p>UA-Value of building element (Area times U-Value)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on inner side (facing the
+zone)</p>
+</dd>
+<dt><strong>r_inner_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+inner side (facing the zone)</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Convective resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_rad</strong><span class="classifier">float [K/W]</span></dt><dd><p>Radiative resistance of building element on outer side (facing
+the ambient or adjacent zone). Currently for all InnerWalls and
+GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+outer side (facing the ambient or adjacent zone). Currently for all
+InnerWalls and GroundFloors this value is set to 0.0</p>
+</dd>
+<dt><strong>wf_out</strong><span class="classifier">float</span></dt><dd><p>Weightfactor of building element ua_value/ua_value_zone</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.interzonalwall.InterzonalWall.load_type_element">
+<span class="sig-name descname"><span class="pre">load_type_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">construction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_element_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/interzonalwall.html#InterzonalWall.load_type_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.interzonalwall.InterzonalWall.load_type_element" title="Link to this definition"></a></dt>
+<dd><p>Typical element loader.</p>
+<p>Loads typical interzonal wall elements according to their construction
+year and their construction type from a json.</p>
+<p>This function will only work if the parents to Building are set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>year</strong><span class="classifier">int</span></dt><dd><p>Year of construction</p>
+</dd>
+<dt><strong>construction</strong><span class="classifier">str</span></dt><dd><p>Construction type, code list (‘heavy’, ‘light’)</p>
+</dd>
+<dt><strong>data_class</strong><span class="classifier">DataClass()</span></dt><dd><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that. Default is
+self.parent.parent.parent.data (which is data_class in current
+project)</p>
+</dd>
+<dt><strong>element_type</strong><span class="classifier">str</span></dt><dd><p>Element type to load - only to specify if the json entry for a
+different type than type(element) is to be loaded, e.g. InnerWall
+instead of OuterWall. Default: depends on interzonal_type_material.</p>
+</dd>
+<dt><strong>reverse_layers</strong><span class="classifier">bool</span></dt><dd><p>defines if layer list should be reversed</p>
+</dd>
+<dt><strong>type_element_key</strong><span class="classifier">str</span></dt><dd><p>Element to load - specify the full json entry</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py property">
-<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall.parent">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parent</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall.parent" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.interzonalwall.InterzonalWall.parent">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parent</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.interzonalwall.InterzonalWall.parent" title="Link to this definition"></a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.interzonalwall.InterzonalWall.retrofit_wall">
+<span class="sig-name descname"><span class="pre">retrofit_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_at_position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/interzonalwall.html#InterzonalWall.retrofit_wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.interzonalwall.InterzonalWall.retrofit_wall" title="Link to this definition"></a></dt>
+<dd><p>Retrofits wall to German refurbishment standards.</p>
+<p>This function adds an additional layer of insulation and sets the
+thickness of the layer according to the retrofit standard in the
+year of refurbishment. Refurbishment year must be newer then 1977</p>
+<p>Note: To Calculate thickness and U-Value, the standard TEASER
+coefficients for outer and inner heat transfer are used.</p>
+<p>The used Standards are namely the Waermeschutzverordnung (WSVO) and
+Energieeinsparverordnung (EnEv)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>material</strong><span class="classifier">string</span></dt><dd><p>Type of material, that is used for insulation</p>
+</dd>
+<dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of the retrofit of the wall/building</p>
+</dd>
+<dt><strong>add_at_position</strong><span class="classifier">int</span></dt><dd><p>position at which to insert the insulation layer.
+0 inside, None (default) or -1 outside/other side</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -1053,7 +1885,7 @@ InnerWalls and GroundFloors this value is set to 0.0</p>
 <span id="teaser-logic-buildingobjects-buildingphysics-layer-module"></span><h2>teaser.logic.buildingobjects.buildingphysics.layer module<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.layer" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.layer.Layer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingphysics.layer.</span></span><span class="sig-name descname"><span class="pre">Layer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/layer.html#Layer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.layer.Layer" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingphysics.layer.</span></span><span class="sig-name descname"><span class="pre">Layer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/layer.html#Layer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.layer.Layer" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Layer class</p>
 <p>This class holds information of a layer of a specific building element.</p>
@@ -1262,7 +2094,7 @@ self.parent.parent.parent.parent.data which is data in project</p>
 <dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall" title="teaser.logic.buildingobjects.buildingphysics.wall.Wall"><code class="xref py py-class docutils literal notranslate"><span class="pre">Wall</span></code></a></p>
 <p>OuterWall class</p>
 <p>This class holds information of an outer wall and is a child of Wall()</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
@@ -1273,7 +2105,7 @@ Default is None.</p>
 </dl>
 </dd>
 <dt class="field-even">Attributes<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
+<dd class="field-even"><dl>
 <dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
 </dd>
 <dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
@@ -1312,6 +2144,53 @@ the ambient or adjacent zone), default 5.0</p>
 objects). Use element.layer = None to delete all layers of the building
 element</p>
 </dd>
+<dt><strong>other_side</strong><span class="classifier">ThermalZone()</span></dt><dd><p>the thermal zone on the other side of the building element (only for
+interzonal elements)</p>
+</dd>
+<dt><strong>interzonal_type_material</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when loading
+type elements. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><p>None: treatment based on project.method_interzonal_export_enrichment
+‘inner’: InterzonalWall treated as InnerWall,</p>
+<blockquote>
+<div><p>InterzonalFloor treated as Floor,
+InterzonalCeiling treated as Ceiling</p>
+</div></blockquote>
+<dl class="simple">
+<dt>‘outer_ordered’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as GroundFloor,
+InterzonalCeiling treated as Rooftop</p>
+</dd>
+<dt>‘outer_reversed’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as Rooftop,
+InterzonalCeiling treated as GroundFloor, but with
+reversed layers, resulting in the reversed
+sequence of layers as for the complimentary
+element declared as ‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt><strong>interzonal_type_export</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when exporting
+to Modelica. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><dl class="simple">
+<dt>‘inner’: element will be lumped with InnerWall. No heat flow to the</dt><dd><p>zone on the other side will be modelled.</p>
+</dd>
+<dt>‘outer_ordered’: element will be lumped with OuterWall (OneElement</dt><dd><p>to FourElement export) or treated as border to an
+adjacent zone (FiveElement export). Borders to the
+same adjacent zone will be lumped.</p>
+</dd>
+<dt>‘outer_reversed’: like ‘outer_ordered’, but the lumping follows</dt><dd><p>VDI 6007-1 in reversed order, resulting in the
+reversed order of resistances and capacitors as
+for the complimentary element declared as
+‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
 <dt><strong>Calculated Attributes</strong></dt><dd></dd>
 <dt><strong>r1</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R1 of the analogous model given in VDI 6007</p>
 </dd>
@@ -1346,7 +2225,7 @@ GroundFloors this value is set to 0.0</p>
 the ambient or adjacent zone). Currently for all InnerWalls and
 GroundFloors this value is set to 0.0</p>
 </dd>
-<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+<dt><strong>r_outer_comb</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
 outer side (facing the ambient or adjacent zone). Currently for all
 InnerWalls and GroundFloors this value is set to 0.0</p>
 </dd>
@@ -1362,7 +2241,7 @@ InnerWalls and GroundFloors this value is set to 0.0</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall.retrofit_wall">
-<span class="sig-name descname"><span class="pre">retrofit_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/outerwall.html#OuterWall.retrofit_wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall.retrofit_wall" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">retrofit_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_at_position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/outerwall.html#OuterWall.retrofit_wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall.retrofit_wall" title="Link to this definition"></a></dt>
 <dd><p>Retrofits wall to German refurbishment standards.</p>
 <p>This function adds an additional layer of insulation and sets the
 thickness of the layer according to the retrofit standard in the
@@ -1377,6 +2256,9 @@ Energieeinsparverordnung (EnEv)</p>
 <dt><strong>material</strong><span class="classifier">string</span></dt><dd><p>Type of material, that is used for insulation</p>
 </dd>
 <dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of the retrofit of the wall/building</p>
+</dd>
+<dt><strong>add_at_position</strong><span class="classifier">int</span></dt><dd><p>position at which to insert the insulation layer.
+0 inside, None (default) or -1 outside/other side</p>
 </dd>
 </dl>
 </dd>
@@ -1394,7 +2276,7 @@ Energieeinsparverordnung (EnEv)</p>
 <dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall" title="teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall"><code class="xref py py-class docutils literal notranslate"><span class="pre">OuterWall</span></code></a></p>
 <p>Rooftop class</p>
 <p>This class holds information a roof top and is a child of OuterWall()</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
@@ -1405,7 +2287,7 @@ Default is None.</p>
 </dl>
 </dd>
 <dt class="field-even">Attributes<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
+<dd class="field-even"><dl>
 <dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
 </dd>
 <dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
@@ -1444,6 +2326,53 @@ the ambient or adjacent zone), default 5.0</p>
 objects). Use element.layer = None to delete all layers of the building
 element</p>
 </dd>
+<dt><strong>other_side</strong><span class="classifier">ThermalZone()</span></dt><dd><p>the thermal zone on the other side of the building element (only for
+interzonal elements)</p>
+</dd>
+<dt><strong>interzonal_type_material</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when loading
+type elements. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><p>None: treatment based on project.method_interzonal_export_enrichment
+‘inner’: InterzonalWall treated as InnerWall,</p>
+<blockquote>
+<div><p>InterzonalFloor treated as Floor,
+InterzonalCeiling treated as Ceiling</p>
+</div></blockquote>
+<dl class="simple">
+<dt>‘outer_ordered’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as GroundFloor,
+InterzonalCeiling treated as Rooftop</p>
+</dd>
+<dt>‘outer_reversed’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as Rooftop,
+InterzonalCeiling treated as GroundFloor, but with
+reversed layers, resulting in the reversed
+sequence of layers as for the complimentary
+element declared as ‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt><strong>interzonal_type_export</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when exporting
+to Modelica. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><dl class="simple">
+<dt>‘inner’: element will be lumped with InnerWall. No heat flow to the</dt><dd><p>zone on the other side will be modelled.</p>
+</dd>
+<dt>‘outer_ordered’: element will be lumped with OuterWall (OneElement</dt><dd><p>to FourElement export) or treated as border to an
+adjacent zone (FiveElement export). Borders to the
+same adjacent zone will be lumped.</p>
+</dd>
+<dt>‘outer_reversed’: like ‘outer_ordered’, but the lumping follows</dt><dd><p>VDI 6007-1 in reversed order, resulting in the
+reversed order of resistances and capacitors as
+for the complimentary element declared as
+‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
 <dt><strong>Calculated Attributes</strong></dt><dd></dd>
 <dt><strong>r1</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R1 of the analogous model given in VDI 6007</p>
 </dd>
@@ -1478,7 +2407,7 @@ GroundFloors this value is set to 0.0</p>
 the ambient or adjacent zone). Currently for all InnerWalls and
 GroundFloors this value is set to 0.0</p>
 </dd>
-<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+<dt><strong>r_outer_comb</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
 outer side (facing the ambient or adjacent zone). Currently for all
 InnerWalls and GroundFloors this value is set to 0.0</p>
 </dd>
@@ -1489,7 +2418,7 @@ InnerWalls and GroundFloors this value is set to 0.0</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.rooftop.Rooftop.retrofit_wall">
-<span class="sig-name descname"><span class="pre">retrofit_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/rooftop.html#Rooftop.retrofit_wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.rooftop.Rooftop.retrofit_wall" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">retrofit_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_at_position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/rooftop.html#Rooftop.retrofit_wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.rooftop.Rooftop.retrofit_wall" title="Link to this definition"></a></dt>
 <dd><p>Retrofits wall to German refurbishment standards.</p>
 <p>This function adds an additional layer of insulation and sets the
 thickness of the layer according to the retrofit standard in the
@@ -1505,6 +2434,9 @@ Energieeinsparverordnung (EnEv)</p>
 </dd>
 <dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of the retrofit of the wall/building</p>
 </dd>
+<dt><strong>add_at_position</strong><span class="classifier">int</span></dt><dd><p>position at which to insert the insulation layer.
+0 inside, None (default) or -1 outside/other side</p>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -1518,12 +2450,12 @@ Energieeinsparverordnung (EnEv)</p>
 <p>asd</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.wall.Wall">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingphysics.wall.</span></span><span class="sig-name descname"><span class="pre">Wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/wall.html#Wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.logic.buildingobjects.buildingphysics.wall.</span></span><span class="sig-name descname"><span class="pre">Wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_side</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/wall.html#Wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement" title="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">BuildingElement</span></code></a></p>
 <p>Wall class</p>
 <p>This class holds functions and information for walls. It inherits for
 BuildingElement() and is a base class for all inner and outer walls.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
@@ -1533,7 +2465,7 @@ Default is None.</p>
 </dl>
 </dd>
 <dt class="field-even">Attributes<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
+<dd class="field-even"><dl>
 <dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
 </dd>
 <dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
@@ -1574,6 +2506,53 @@ GroundFloors this value is set to 0.0</p>
 objects). Use element.layer = None to delete all layers of the building
 element</p>
 </dd>
+<dt><strong>other_side</strong><span class="classifier">ThermalZone()</span></dt><dd><p>the thermal zone on the other side of the building element (only for
+interzonal elements)</p>
+</dd>
+<dt><strong>interzonal_type_material</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when loading
+type elements. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><p>None: treatment based on project.method_interzonal_export_enrichment
+‘inner’: InterzonalWall treated as InnerWall,</p>
+<blockquote>
+<div><p>InterzonalFloor treated as Floor,
+InterzonalCeiling treated as Ceiling</p>
+</div></blockquote>
+<dl class="simple">
+<dt>‘outer_ordered’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as GroundFloor,
+InterzonalCeiling treated as Rooftop</p>
+</dd>
+<dt>‘outer_reversed’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as Rooftop,
+InterzonalCeiling treated as GroundFloor, but with
+reversed layers, resulting in the reversed
+sequence of layers as for the complimentary
+element declared as ‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt><strong>interzonal_type_export</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when exporting
+to Modelica. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><dl class="simple">
+<dt>‘inner’: element will be lumped with InnerWall. No heat flow to the</dt><dd><p>zone on the other side will be modelled.</p>
+</dd>
+<dt>‘outer_ordered’: element will be lumped with OuterWall (OneElement</dt><dd><p>to FourElement export) or treated as border to an
+adjacent zone (FiveElement export). Borders to the
+same adjacent zone will be lumped.</p>
+</dd>
+<dt>‘outer_reversed’: like ‘outer_ordered’, but the lumping follows</dt><dd><p>VDI 6007-1 in reversed order, resulting in the
+reversed order of resistances and capacitors as
+for the complimentary element declared as
+‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
 <dt><strong>Calculated Attributes</strong></dt><dd></dd>
 <dt><strong>r1</strong><span class="classifier">float [K/W]</span></dt><dd><p>equivalent resistance R1 of the analogous model given in VDI 6007</p>
 </dd>
@@ -1608,7 +2587,7 @@ GroundFloors this value is set to 0.0</p>
 the ambient or adjacent zone). Currently for all InnerWalls and
 GroundFloors this value is set to 0.0</p>
 </dd>
-<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+<dt><strong>r_outer_comb</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
 outer side (facing the ambient or adjacent zone). Currently for all
 InnerWalls and GroundFloors this value is set to 0.0</p>
 </dd>
@@ -1635,23 +2614,23 @@ to VDI 6007 guideline. (Analogous model).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.wall.Wall.calc_ins_layer_thickness">
-<span class="sig-name descname"><span class="pre">calc_ins_layer_thickness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">calc_u</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/wall.html#Wall.calc_ins_layer_thickness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.calc_ins_layer_thickness" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">calc_ins_layer_thickness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">calc_u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ins_layer_index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/wall.html#Wall.calc_ins_layer_thickness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.calc_ins_layer_thickness" title="Link to this definition"></a></dt>
 <dd><p>Calculates the thickness of the fresh insulated layer from
 retrofit</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.wall.Wall.initialize_retrofit">
-<span class="sig-name descname"><span class="pre">initialize_retrofit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/wall.html#Wall.initialize_retrofit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.initialize_retrofit" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">initialize_retrofit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_at_position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/wall.html#Wall.initialize_retrofit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.initialize_retrofit" title="Link to this definition"></a></dt>
 <dd><p>Checks the retrofit inputs and sets material and year of retrofit
 if needed.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.wall.Wall.insulate_wall">
-<span class="sig-name descname"><span class="pre">insulate_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/wall.html#Wall.insulate_wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.insulate_wall" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">insulate_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_at_position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_plaster_material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_plaster_thickness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/wall.html#Wall.insulate_wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.insulate_wall" title="Link to this definition"></a></dt>
 <dd><p>Retrofit the walls with an additional insulation layer</p>
-<p>Adds an additional layer on the wall, outer sight</p>
+<p>Adds an additional layer on the wall</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -1659,18 +2638,51 @@ if needed.</p>
 </dd>
 <dt><strong>thickness</strong><span class="classifier">float</span></dt><dd><p>thickness of the insulation layer, default = None</p>
 </dd>
+<dt><strong>add_at_position</strong><span class="classifier">int</span></dt><dd><p>position at which to insert the insulation layer.
+0 inside, None (default) or -1 outside/other side</p>
+</dd>
+<dt><strong>add_plaster_material</strong><span class="classifier">int</span></dt><dd><p>material of plaster to add, default = None. Is only applied if
+add_plaster_thickness is not None
+can only be applied if add_at_position is 0 or None</p>
+</dd>
+<dt><strong>add_plaster_thickness</strong><span class="classifier">float</span></dt><dd><p>thickness of the plaster layer, default = None</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>insulation_index</strong><span class="classifier">int</span></dt><dd><p>index of the insulation layer in the layer list</p>
+</dd>
 </dl>
 </dd>
 </dl>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.wall.Wall.interzonal_type_export">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">interzonal_type_export</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.interzonal_type_export" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.wall.Wall.interzonal_type_material">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">interzonal_type_material</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.interzonal_type_material" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.wall.Wall.other_side">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">other_side</span></span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.other_side" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.wall.Wall.retrofit_wall">
-<span class="sig-name descname"><span class="pre">retrofit_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/wall.html#Wall.retrofit_wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.retrofit_wall" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">retrofit_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_at_position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/wall.html#Wall.retrofit_wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.retrofit_wall" title="Link to this definition"></a></dt>
 <dd><p>Retrofits wall to German refurbishment standards.</p>
 <p>This function adds an additional layer of insulation and sets the
 thickness of the layer according to the retrofit standard in the
-year of refurbishment. Refurbishment year must be newer then 1977</p>
+year of refurbishment. Refurbishment year must be newer then 1977.
+Refurbishment layers are added on the unheated/outside of outer walls,
+rooftops, ground floors and interzonal elements between heated and
+unheated zones if not otherwise specified.</p>
 <p>Note: To Calculate thickness and U-Value, the standard TEASER
 coefficients for outer and inner heat transfer are used.</p>
 <p>The used Standards are namely the Waermeschutzverordnung (WSVO) and
@@ -1682,6 +2694,9 @@ Energieeinsparverordnung (EnEv)</p>
 </dd>
 <dt><strong>year_of_retrofit</strong><span class="classifier">int</span></dt><dd><p>Year of the retrofit of the wall/building</p>
 </dd>
+<dt><strong>add_at_position</strong><span class="classifier">int</span></dt><dd><p>position at which to insert the insulation layer.
+0 inside, None (default) or -1 outside/other side</p>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -1689,7 +2704,7 @@ Energieeinsparverordnung (EnEv)</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="teaser.logic.buildingobjects.buildingphysics.wall.Wall.set_insulation">
-<span class="sig-name descname"><span class="pre">set_insulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/wall.html#Wall.set_insulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.set_insulation" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_insulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_retrofit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ins_layer_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/logic/buildingobjects/buildingphysics/wall.html#Wall.set_insulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.set_insulation" title="Link to this definition"></a></dt>
 <dd><p>Sets the correct insulation thickness based on the given u-value</p>
 </dd></dl>
 
@@ -1705,7 +2720,7 @@ Energieeinsparverordnung (EnEv)</p>
 <p>Window class</p>
 <p>This class holds information of a window and is a child of
 BuildingElement().</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>parent</strong><span class="classifier">ThermalZone()</span></dt><dd><p>The parent class of this object, the ThermalZone the BE belongs to.
@@ -1716,7 +2731,7 @@ Default is None.</p>
 </dl>
 </dd>
 <dt class="field-even">Attributes<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
+<dd class="field-even"><dl>
 <dt><strong>internal_id</strong><span class="classifier">float</span></dt><dd><p>Random id for the distinction between different elements.</p>
 </dd>
 <dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Individual name</p>
@@ -1754,6 +2769,53 @@ the ambient or adjacent zone), default 5.0</p>
 <dt><strong>layer</strong><span class="classifier">list</span></dt><dd><p>List of all layers of a building element (to be filled with Layer
 objects). Use element.layer = None to delete all layers of the building
 element</p>
+</dd>
+<dt><strong>other_side</strong><span class="classifier">ThermalZone()</span></dt><dd><p>the thermal zone on the other side of the building element (only for
+interzonal elements)</p>
+</dd>
+<dt><strong>interzonal_type_material</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when loading
+type elements. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><p>None: treatment based on project.method_interzonal_export_enrichment
+‘inner’: InterzonalWall treated as InnerWall,</p>
+<blockquote>
+<div><p>InterzonalFloor treated as Floor,
+InterzonalCeiling treated as Ceiling</p>
+</div></blockquote>
+<dl class="simple">
+<dt>‘outer_ordered’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as GroundFloor,
+InterzonalCeiling treated as Rooftop</p>
+</dd>
+<dt>‘outer_reversed’: InterzonalWall treated as Wall,</dt><dd><p>InterzonalFloor treated as Rooftop,
+InterzonalCeiling treated as GroundFloor, but with
+reversed layers, resulting in the reversed
+sequence of layers as for the complimentary
+element declared as ‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt><strong>interzonal_type_export</strong><span class="classifier">str</span></dt><dd><p>one of (None (default), ‘inner’, ‘outer_ordered’, ‘outer_reversed’)
+describes as which kind of element the element is treated when exporting
+to Modelica. Caution: Make sure that the complimentary element of
+the other zone is also changed accordingly if this is adapted manually</p>
+<blockquote>
+<div><dl class="simple">
+<dt>‘inner’: element will be lumped with InnerWall. No heat flow to the</dt><dd><p>zone on the other side will be modelled.</p>
+</dd>
+<dt>‘outer_ordered’: element will be lumped with OuterWall (OneElement</dt><dd><p>to FourElement export) or treated as border to an
+adjacent zone (FiveElement export). Borders to the
+same adjacent zone will be lumped.</p>
+</dd>
+<dt>‘outer_reversed’: like ‘outer_ordered’, but the lumping follows</dt><dd><p>VDI 6007-1 in reversed order, resulting in the
+reversed order of resistances and capacitors as
+for the complimentary element declared as
+‘outer_ordered’</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd>
 <dt><strong>Specific Attributes for Window</strong></dt><dd></dd>
 <dt><strong>g_value</strong><span class="classifier">float</span></dt><dd><p>solar heat gain coefficient of Window</p>
@@ -1798,7 +2860,7 @@ GroundFloors this value is set to 0.0</p>
 the ambient or adjacent zone). Currently for all InnerWalls and
 GroundFloors this value is set to 0.0</p>
 </dd>
-<dt><strong>r_outer_conv</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
+<dt><strong>r_outer_comb</strong><span class="classifier">float [K/W]</span></dt><dd><p>Combined convective and radiative resistance of building element on
 outer side (facing the ambient or adjacent zone). Currently for all
 InnerWalls and GroundFloors this value is set to 0.0</p>
 </dd>
