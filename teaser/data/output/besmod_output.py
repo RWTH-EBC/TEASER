@@ -697,11 +697,11 @@ def calc_hom_dimensions_aixlib(bldg):
     roof_length = bldg_length + 2*thickness_iw_simple # inner wall thicknesses load simpled?
     template_kwargs["roof_length"] = roof_length
 
-    alfa_grad = 90
+    alfa_grad = 90 # maybe test 110 for 35 roof_tilt
     roof_tilt = (180 - alfa_grad)/2
     template_kwargs["alfa_grad"] = alfa_grad
-    height_of_floors = 2.6
-    template_kwargs["height_of_floors"] = height_of_floors # fwu-hst ToDo: make this variable
+    height_of_floors = bldg.height_of_floors
+    template_kwargs["height_of_floors"] = height_of_floors
     room_height_short = 1  # here fixed
     room_width_short = room_width - (height_of_floors-room_height_short)/tan(roof_tilt*pi/180)
     template_kwargs["room_width_short"] = room_width_short
@@ -709,7 +709,7 @@ def calc_hom_dimensions_aixlib(bldg):
     wRO = (height_of_floors-room_height_short)/sin(roof_tilt*pi/180)
     template_kwargs["wRO"] = wRO
 
-    roof_width = room_width_short + thickness_iw_simple # better to use load wall thickness could also be computed directly in modelica
+    roof_width = 2*room_width_short + thickness_iw_simple # better to use load wall thickness could also be computed directly in modelica
     template_kwargs["roof_width"] = roof_width
     wROi = roof_width/2/cos(roof_tilt*pi/180)
     template_kwargs["wROi"] = wROi

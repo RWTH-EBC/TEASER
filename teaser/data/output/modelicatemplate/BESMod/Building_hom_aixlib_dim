@@ -14,6 +14,8 @@ model ${bldg.name}_HOM
     redeclare BESMod.Systems.Demand.Building.Components.AixLibHighOrderOFD
       HOMBuiEnv(wholeHouseBuildingEnvelope(
         groundFloor_Building(
+            WC_Storage(withDoor2=false),
+            Corridor(withDoor1=false),
             room_width=${room_width},
             room_height=${height_of_floors},
             length1=${l1},
