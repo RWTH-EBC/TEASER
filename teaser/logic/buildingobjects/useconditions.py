@@ -580,13 +580,7 @@ class UseConditions(object):
 
     @with_ideal_thresholds.setter
     def with_ideal_thresholds(self, value):
-        if self.with_ahu is False and value is True:
-            raise ValueError(
-                "Threshold for ideal heaters should only be used"
-                " when AHU is used in this zone"
-            )
-        else:
-            self._with_ideal_thresholds = value
+        self._with_ideal_thresholds = value
 
     @property
     def heating_profile(self):
