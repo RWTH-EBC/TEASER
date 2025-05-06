@@ -163,8 +163,8 @@ def export_besmod(
     window_simple_template = Template(
         filename=os.path.join(template_path, "BESMod/window_simple_record"),
         lookup=lookup)
-    wall_types = ['OW', 'roof', 'IW_vert_half', 'IW_hori_upHalf', 'IW_hori_loHalf', 'ground_floor_loHalf',
-                  'ground_floor_upHalf', 'IW_hori_att_half0']
+    wall_types = ['OW', 'roof', 'roof_attic', 'IW_vert_half', 'IW_hori_upHalf', 'IW_hori_loHalf', 'ground_floor_loHalf',
+                  'ground_floor_upHalf', 'IW_hori_att_upHalf', 'IW_hori_att_loHalf']
     calc_hea_dem_hom = Template(
         filename=os.path.join(template_path, "BESMod/CalcHeaDemHOMAixLib"),
         lookup=lookup)
@@ -565,6 +565,11 @@ def write_wall_record(wall_path, wall_type, zone, single_wall_template, bldg):
         n = len(layers)
         teaser_id_aixlib_inside_layer = 0
         teaser_id_aixlib_outside_layer = n
+    elif wall_type == 'roof_attic':
+        layers = zone.rooftops[0].layer
+        n = len(layers)
+        teaser_id_aixlib_inside_layer = n-1
+        teaser_id_aixlib_outside_layer = n
     elif wall_type == 'IW_vert_half':
         layers = zone.inner_walls[0].layer
         n = len(layers)
@@ -603,17 +608,27 @@ def write_wall_record(wall_path, wall_type, zone, single_wall_template, bldg):
         n = len(layers)
         teaser_id_aixlib_inside_layer = 0
         teaser_id_aixlib_outside_layer = n-1
-    elif wall_type == 'IW_hori_att_half0':
-        with open(os.path.join(
-                wall_path,
-                bldg.name + '_' + wall_type + '.mo'), 'w') as out_file:
-            out_file.write(
-                single_wall_template.render_unicode(zone=zone, wall_type=wall_type, d=[0.0005],
-                                                    rho=[1.184],
-                                                    conductivity=[0.35], c=[1005], eps=1,
-                                                    n=1))
-            out_file.close()
-        return
+    elif wall_type == 'IW_hori_att_loHalf':
+        layers = zone.rooftops[0].layer
+        n = len(layers)
+        teaser_id_aixlib_inside_layer = 0
+        teaser_id_aixlib_outside_layer = 1
+    elif wall_type == 'IW_hori_att_upHalf':
+        layers = zone.rooftops[0].layer
+        n = len(layers)
+        teaser_id_aixlib_inside_layer = 1
+        teaser_id_aixlib_outside_layer = 2
+    # elif wall_type == 'IW_hori_att_half0':
+    #     with open(os.path.join(
+    #             wall_path,
+    #             bldg.name + '_' + wall_type + '.mo'), 'w') as out_file:
+    #         out_file.write(
+    #             single_wall_template.render_unicode(zone=zone, wall_type=wall_type, d=[0.0005],
+    #                                                 rho=[1.184],
+    #                                                 conductivity=[0.35], c=[1005], eps=1,
+    #                                                 n=1))
+    #         out_file.close()
+    #     return
     else:
         raise NotImplementedError("This wall type does not exit")
     d = []
@@ -713,7 +728,7 @@ def calc_hom_dimensions_aixlib(bldg):
     template_kwargs["roof_width"] = roof_width
     wROi = roof_width/2/cos(roof_tilt*pi/180)
     template_kwargs["wROi"] = wROi
-    print(f"Complete building height: {height_of_floors*2+wROi*sin(roof_tilt*pi/180)}")
+    # print(f"Complete building height: {height_of_floors*2+wROi*sin(roof_tilt*pi/180)}")
 
     windowarea_11 = 8.44*room1_length/5.885
     windowarea_12 = 1.73*room_width/3.92
