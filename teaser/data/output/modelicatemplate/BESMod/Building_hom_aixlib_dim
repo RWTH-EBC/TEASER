@@ -3,6 +3,8 @@
 within ${bldg.parent.name}.${bldg.name};
 model ${bldg.name}_HOM
   extends BESMod.Systems.Demand.Building.AixLibHighOrder(
+    calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals,
+    calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Bernd_Glueck,
     TIR=${tir},
     redeclare replaceable parameter
       ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase.Walls.${zone.parent.name}_wallTypes wallTypes,
