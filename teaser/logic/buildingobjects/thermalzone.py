@@ -135,6 +135,16 @@ class ThermalZone(object):
         self._number_of_floors = None
         self._height_of_floors = None
 
+        self._roof_area_attic_factor = 1
+        self._ratio_ow_area_top_floor = None
+        self._ratio_ow_area_bottom_floor = None
+        self._ratio_iw_area_top_floor = None
+        self._ratio_iw_area_bottom_floor = None
+        self._ratio_win_area_top_floor = None
+        self._ratio_win_area_bottom_floor = None
+        self._ratio_win_area_ow = 1
+        self._ratio_win_area_iw = 1
+
     def calc_zone_parameters(
             self,
             number_of_elements=2,
@@ -401,7 +411,7 @@ class ThermalZone(object):
                             / self.number_of_floors) * self.area
 
         typical_area = self.use_conditions.typical_length * \
-            self.use_conditions.typical_width
+                       self.use_conditions.typical_width
 
         avg_room_nr = self.area / typical_area
 
@@ -423,8 +433,8 @@ class ThermalZone(object):
                             * self.height_of_floors
                             + 2 * self.use_conditions.typical_width
                             * self.height_of_floors))
-            for other_verticals in self.outer_walls + self.interzonal_walls\
-                    + self.windows + self.doors:
+            for other_verticals in self.outer_walls + self.interzonal_walls \
+                                   + self.windows + self.doors:
                 wall_area -= other_verticals.area
             wall_area = max(0.01, wall_area)
         elif approximation_approach == 'typical_minus_outer_extended':
@@ -434,8 +444,8 @@ class ThermalZone(object):
                             * self.height_of_floors
                             + 2 * self.use_conditions.typical_width
                             * self.height_of_floors))
-            for other_verticals in self.outer_walls + self.interzonal_walls\
-                    + self.doors:
+            for other_verticals in self.outer_walls + self.interzonal_walls \
+                                   + self.doors:
                 wall_area -= other_verticals.area
             for pot_vert_be in self.rooftops + self.windows:
                 wall_area -= pot_vert_be.area \
@@ -496,10 +506,10 @@ class ThermalZone(object):
 
         if type(self.parent).__name__ in [
             "SingleFamilyHouse", "TerracedHouse", "MultiFamilyHouse",
-                "ApartmentBlock"]:
+            "ApartmentBlock"]:
             for wall_count in self.outer_walls \
-                    + self.rooftops + self.ground_floors + self.doors + \
-                    self.windows:
+                              + self.rooftops + self.ground_floors + self.doors + \
+                              self.windows:
                 if "adv_retrofit" in wall_count.construction_data:
                     warnings.warn(
                         "already highest available standard"
@@ -932,3 +942,180 @@ class ThermalZone(object):
                 self._t_ground_amplitude = value
             except:
                 raise ValueError("Can't convert temperature to float")
+
+    @property
+    def roof_area_attic_factor(self):
+        return self._roof_area_attic_factor
+
+    @roof_area_attic_factor.setter
+    def roof_area_attic_factor(self, value):
+        if isinstance(value, float):
+            self._roof_area_attic_factor = value
+        elif value is None:
+            self._roof_area_attic_factor = value
+        else:
+            try:
+                value = float(value)
+                self._roof_area_attic_factor = value
+            except:
+                raise ValueError("Can't convert roof area attic factor to float")
+
+    @property
+    def ratio_ow_area_top_floor(self):
+        if (self._ratio_ow_area_top_floor is None
+                and self.parent is not None
+                and len(self.parent.thermal_zones) == 1):
+            self._ratio_ow_area_top_floor = 1 / self.number_of_floors
+        return self._ratio_ow_area_top_floor
+
+    @ratio_ow_area_top_floor.setter
+    def ratio_ow_area_top_floor(self, value):
+        if isinstance(value, float):
+            self._ratio_ow_area_top_floor = value
+        elif value is None:
+            self._ratio_ow_area_top_floor = value
+        else:
+            try:
+                value = float(value)
+                self._ratio_ow_area_top_floor = value
+            except:
+                raise ValueError("Can't convert ratio outer wall area top floor to float")
+
+    @property
+    def ratio_ow_area_bottom_floor(self):
+        if (self._ratio_ow_area_bottom_floor is None
+                and self.parent is not None
+                and len(self.parent.thermal_zones) == 1):
+            self._ratio_ow_area_bottom_floor = 1 / self.number_of_floors
+        return self._ratio_ow_area_bottom_floor
+
+    @ratio_ow_area_bottom_floor.setter
+    def ratio_ow_area_bottom_floor(self, value):
+        if isinstance(value, float):
+            self._ratio_ow_area_bottom_floor = value
+        elif value is None:
+            self._ratio_ow_area_bottom_floor = value
+        else:
+            try:
+                value = float(value)
+                self._ratio_ow_area_bottom_floor = value
+            except:
+                raise ValueError("Can't convert ratio outer wall area bottom floor to float")
+
+    @property
+    def ratio_iw_area_top_floor(self):
+        if (self._ratio_iw_area_top_floor is None
+                and self.parent is not None
+                and len(self.parent.thermal_zones) == 1):
+            self._ratio_iw_area_top_floor = 1 / self.number_of_floors
+        return self._ratio_iw_area_top_floor
+
+    @ratio_iw_area_top_floor.setter
+    def ratio_iw_area_top_floor(self, value):
+        if isinstance(value, float):
+            self._ratio_iw_area_top_floor = value
+        elif value is None:
+            self._ratio_iw_area_top_floor = value
+        else:
+            try:
+                value = float(value)
+                self._ratio_iw_area_top_floor = value
+            except:
+                raise ValueError("Can't convert ratio inner wall area top floor to float")
+
+    @property
+    def ratio_iw_area_bottom_floor(self):
+        if (self._ratio_iw_area_bottom_floor is None
+                and self.parent is not None
+                and len(self.parent.thermal_zones) == 1):
+            self._ratio_iw_area_bottom_floor = 1 / self.number_of_floors
+        return self._ratio_iw_area_bottom_floor
+
+    @ratio_iw_area_bottom_floor.setter
+    def ratio_iw_area_bottom_floor(self, value):
+        if isinstance(value, float):
+            self._ratio_iw_area_bottom_floor = value
+        elif value is None:
+            self._ratio_iw_area_bottom_floor = value
+        else:
+            try:
+                value = float(value)
+                self._ratio_iw_area_bottom_floor = value
+            except:
+                raise ValueError("Can't convert ratio inner wall area bottom floor to float")
+
+    @property
+    def ratio_win_area_top_floor(self):
+        if (self._ratio_win_area_top_floor is None
+                and self.parent is not None
+                and len(self.parent.thermal_zones) == 1):
+            self._ratio_win_area_top_floor = 1 / self.number_of_floors
+        return self._ratio_win_area_top_floor
+
+    @ratio_win_area_top_floor.setter
+    def ratio_win_area_top_floor(self, value):
+        if isinstance(value, float):
+            self._ratio_win_area_top_floor = value
+        elif value is None:
+            self._ratio_win_area_top_floor = value
+        else:
+            try:
+                value = float(value)
+                self._ratio_win_area_top_floor = value
+            except:
+                raise ValueError("Can't convert ratio window area top floor to float")
+
+    @property
+    def ratio_win_area_bottom_floor(self):
+        if (self._ratio_win_area_bottom_floor is None
+                and self.parent is not None
+                and len(self.parent.thermal_zones) == 1):
+            self._ratio_win_area_bottom_floor = 1 / self.number_of_floors
+        return self._ratio_win_area_bottom_floor
+
+    @ratio_win_area_bottom_floor.setter
+    def ratio_win_area_bottom_floor(self, value):
+        if isinstance(value, float):
+            self._ratio_win_area_bottom_floor = value
+        elif value is None:
+            self._ratio_win_area_bottom_floor = value
+        else:
+            try:
+                value = float(value)
+                self._ratio_win_area_bottom_floor = value
+            except:
+                raise ValueError("Can't convert ratio window area bottom floor to float")
+
+    @property
+    def ratio_win_area_ow(self):
+        return self._ratio_win_area_ow
+
+    @ratio_win_area_ow.setter
+    def ratio_win_area_ow(self, value):
+        if isinstance(value, float):
+            self._ratio_win_area_ow = value
+        elif value is None:
+            self._ratio_win_area_ow = value
+        else:
+            try:
+                value = float(value)
+                self._ratio_win_area_ow = value
+            except:
+                raise ValueError("Can't convert ratio window area outer wall to float")
+
+    @property
+    def ratio_win_area_iw(self):
+        return self._ratio_win_area_iw
+
+    @ratio_win_area_iw.setter
+    def ratio_win_area_iw(self, value):
+        if isinstance(value, float):
+            self._ratio_win_area_iw = value
+        elif value is None:
+            self._ratio_win_area_iw = value
+        else:
+            try:
+                value = float(value)
+                self._ratio_win_area_iw = value
+            except:
+                raise ValueError("Can't convert ratio window area inner wall to float")

@@ -144,9 +144,6 @@ def export_besmod(
     template_path = utilities.get_full_path("data/output/modelicatemplate")
     lookup = TemplateLookup(directories=[template_path])
 
-    zone_template_4 = Template(
-        filename=os.path.join(template_path, "AixLib/AixLib_ThermalZoneRecord_FourElement"),
-        lookup=lookup)
     building_template = Template(
         filename=os.path.join(template_path, "BESMod/Building"),
         lookup=lookup)
@@ -183,6 +180,14 @@ def export_besmod(
     modelica_output.copy_weather_data(prj.weather_file_path, dir_resources)
 
     for i, bldg in enumerate(buildings):
+        if len(bldg.thermal_zones) > 1:
+            zone_template_4 = Template(
+                filename=os.path.join(template_path, "AixLib/AixLib_ThermalZoneRecord_FourElement"),
+                lookup=lookup)
+        else:
+            zone_template_4 = Template(
+                filename=os.path.join(template_path, "BESMod/BuildingSingleThermalZoneRecord_FourElement"),
+                lookup=lookup)
         bldg.bldg_height = bldg.number_of_floors * bldg.height_of_floors
         start_time_zones = []
         width_zones = []
