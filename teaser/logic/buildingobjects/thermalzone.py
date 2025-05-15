@@ -115,7 +115,6 @@ class ThermalZone(object):
         self._outer_walls = []
         self._doors = []
         self._rooftops = []
-        self.area_roof_inner_outer_factor = 1
         self._ground_floors = []
         self._windows = []
         self._inner_walls = []
