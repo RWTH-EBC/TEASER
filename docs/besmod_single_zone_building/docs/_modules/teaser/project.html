@@ -565,6 +565,7 @@
         <span class="n">cellar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">dormer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">number_of_apartments</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">use_old</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a residential building to the TEASER project.</span>
 
@@ -771,6 +772,7 @@
             <span class="n">type_bldg</span> <span class="o">=</span> <span class="n">datahandling</span><span class="o">.</span><span class="n">geometries</span><span class="p">[</span><span class="n">geometry_data</span><span class="p">](</span>
                 <span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">common_arg</span><span class="p">)</span>
         <span class="n">type_bldg</span><span class="o">.</span><span class="n">generate_archetype</span><span class="p">()</span>
+        <span class="n">type_bldg</span><span class="o">.</span><span class="n">use_old</span> <span class="o">=</span> <span class="n">use_old</span>
         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">construction_data</span><span class="o">.</span><span class="n">is_tabula_de</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span>
                 <span class="n">construction_data</span><span class="o">.</span><span class="n">is_tabula_dk</span><span class="p">()):</span>
             <span class="n">type_bldg</span><span class="o">.</span><span class="n">calc_building_parameter</span><span class="p">(</span>
