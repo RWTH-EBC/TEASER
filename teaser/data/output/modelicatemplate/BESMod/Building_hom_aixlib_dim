@@ -12,7 +12,7 @@ model ${bldg.name}_HOM
        AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple,
     redeclare replaceable parameter ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase.Walls.${zone.parent.name}_windowSimple Type_Win,
     redeclare model CorrSolarGainWin =
-       AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
+       AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_VDI6007,
     redeclare BESMod.Systems.Demand.Building.Components.AixLibHighOrderOFD
       HOMBuiEnv(wholeHouseBuildingEnvelope(
         groundFloor_Building(
