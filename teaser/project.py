@@ -471,6 +471,7 @@ class Project(object):
         cellar=None,
         dormer=None,
         number_of_apartments=None,
+        use_old=False,
     ):
         """Add a residential building to the TEASER project.
 
@@ -677,6 +678,7 @@ class Project(object):
             type_bldg = datahandling.geometries[geometry_data](
                 self, **common_arg)
         type_bldg.generate_archetype()
+        type_bldg.use_old = use_old
         if (not construction_data.is_tabula_de() and not
                 construction_data.is_tabula_dk()):
             type_bldg.calc_building_parameter(

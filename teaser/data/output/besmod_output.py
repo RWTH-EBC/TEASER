@@ -180,7 +180,7 @@ def export_besmod(
     modelica_output.copy_weather_data(prj.weather_file_path, dir_resources)
 
     for i, bldg in enumerate(buildings):
-        if len(bldg.thermal_zones) > 1:
+        if len(bldg.thermal_zones) > 1 or bldg.use_old:
             zone_template_4 = Template(
                 filename=os.path.join(template_path, "AixLib/AixLib_ThermalZoneRecord_FourElement"),
                 lookup=lookup)

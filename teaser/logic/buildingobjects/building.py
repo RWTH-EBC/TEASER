@@ -206,6 +206,8 @@ class Building(object):
         self.t_bt = 5
         self.t_bt_layer = 7
 
+        self.use_old = False
+
     def set_outer_wall_area(self, new_area, orientation):
         """Outer area wall setter
 
