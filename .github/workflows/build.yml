@@ -1,0 +1,13 @@
+name: install and build
+
+on:
+  push:
+
+jobs:
+  build:
+    uses: "RWTH-EBC/ci_templates/.github/workflows/build.yml@main"
+    with:
+      python-version: "3.10"
+      use-uv: false
+      install-requirements: true
+      extra-requirements: ""
