@@ -1,0 +1,15 @@
+name: Python CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  ci:
+    uses: RWTH-EBC/ci_templates/.github/workflows/ci_pipeline.yml@main
+    with:
+      PYTHON_VERSION: "3.11"
+      USE_PYLINT: true
+      USE_RUFF: true
+      BUILD_PACKAGE: true
+      GENERATE_DOCUMENTATION: true
