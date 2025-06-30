@@ -88,6 +88,8 @@ def export_besmod(
     if path is None:
         path = utilities.get_full_path("")
 
+    path = "\\\\?\\" + str(path)
+
     if not isinstance(examples, list):
         examples = [examples]
 

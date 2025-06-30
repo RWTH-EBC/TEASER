@@ -59,7 +59,7 @@ def create_package_order(path, package_list, addition=None, extra=None):
 
     order_template = Template(filename=utilities.get_full_path(
         "data/output/modelicatemplate/package_order"))
-    with open(path + "/" + "package" + ".order", 'w') as out_file:
+    with open(path + "\\" + "package" + ".order", 'w') as out_file:
 
         out_file.write(order_template.render_unicode
                        (list=package_list, addition=addition, extra=extra))
