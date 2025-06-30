@@ -1,7 +1,7 @@
 <%namespace file="/modelica_language/" import="get_true_false"/>
 within ${bldg.parent.name}.${bldg.name};
 model ${bldg.name}
-  extends ${'BESMod.Systems.Demand.Building.TEASERThermalZone' if len(bldg.thermal_zones) > 1 or bldg.use_old else 'BESMod.Systems.Demand.Building.TEASERSingleThermalZone'}(
+  extends ${'BESMod.Systems.Demand.Building.TEASERSingleThermalZoneOld' if len(bldg.thermal_zones) > 1 or bldg.use_old else 'BESMod.Systems.Demand.Building.TEASERSingleThermalZone'}(
     zoneParam = {
       %for zone in bldg.thermal_zones:
       ${bldg.name}_DataBase.${bldg.name}_${zone.name}()${',' if not loop.last else ''}
