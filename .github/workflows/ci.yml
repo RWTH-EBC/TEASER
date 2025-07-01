@@ -8,7 +8,7 @@ jobs:
   ci:
     uses: RWTH-EBC/ci_templates/.github/workflows/ci_pipeline.yml@main
     with:
-      PYTHON_VERSION: "3.11"
+      PYTHON_VERSION: "3.10"
       USE_PYLINT: true
       USE_RUFF: true
       BUILD_PACKAGE: true
