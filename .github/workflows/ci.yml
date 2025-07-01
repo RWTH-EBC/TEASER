@@ -13,3 +13,5 @@ jobs:
       USE_RUFF: true
       BUILD_PACKAGE: true
       GENERATE_DOCUMENTATION: true
+      EXECUTE_TESTS: true
+      EXECUTE_COVERAGE_TEST: true
