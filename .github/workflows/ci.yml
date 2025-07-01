@@ -15,3 +15,4 @@ jobs:
       GENERATE_DOCUMENTATION: true
       EXECUTE_TESTS: true
       EXECUTE_COVERAGE_TEST: true
+      EXTRA_REQUIREMENTS: '[report]'
