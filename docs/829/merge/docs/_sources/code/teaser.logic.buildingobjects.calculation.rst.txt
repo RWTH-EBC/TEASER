@@ -1,0 +1,66 @@
+teaser.logic.buildingobjects.calculation package
+================================================
+
+.. automodule:: teaser.logic.buildingobjects.calculation
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Submodules
+----------
+
+teaser.logic.buildingobjects.calculation.aixlib module
+------------------------------------------------------
+
+.. automodule:: teaser.logic.buildingobjects.calculation.aixlib
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+teaser.logic.buildingobjects.calculation.five\_element module
+-------------------------------------------------------------
+
+.. automodule:: teaser.logic.buildingobjects.calculation.five_element
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+teaser.logic.buildingobjects.calculation.four\_element module
+-------------------------------------------------------------
+
+.. automodule:: teaser.logic.buildingobjects.calculation.four_element
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+teaser.logic.buildingobjects.calculation.ibpsa module
+-----------------------------------------------------
+
+.. automodule:: teaser.logic.buildingobjects.calculation.ibpsa
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+teaser.logic.buildingobjects.calculation.one\_element module
+------------------------------------------------------------
+
+.. automodule:: teaser.logic.buildingobjects.calculation.one_element
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+teaser.logic.buildingobjects.calculation.three\_element module
+--------------------------------------------------------------
+
+.. automodule:: teaser.logic.buildingobjects.calculation.three_element
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+teaser.logic.buildingobjects.calculation.two\_element module
+------------------------------------------------------------
+
+.. automodule:: teaser.logic.buildingobjects.calculation.two_element
+   :members:
+   :show-inheritance:
+   :undoc-members:

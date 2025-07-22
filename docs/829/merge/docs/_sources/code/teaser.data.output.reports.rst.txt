@@ -1,0 +1,18 @@
+teaser.data.output.reports package
+==================================
+
+.. automodule:: teaser.data.output.reports
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Submodules
+----------
+
+teaser.data.output.reports.model\_report module
+-----------------------------------------------
+
+.. automodule:: teaser.data.output.reports.model_report
+   :members:
+   :show-inheritance:
+   :undoc-members:

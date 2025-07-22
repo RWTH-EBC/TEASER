@@ -1,0 +1,28 @@
+teaser package
+==============
+
+.. automodule:: teaser
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   teaser.data
+   teaser.examples
+   teaser.logic
+
+Submodules
+----------
+
+teaser.project module
+---------------------
+
+.. automodule:: teaser.project
+   :members:
+   :show-inheritance:
+   :undoc-members:

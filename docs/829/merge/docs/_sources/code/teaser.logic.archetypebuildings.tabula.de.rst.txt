@@ -1,0 +1,42 @@
+teaser.logic.archetypebuildings.tabula.de package
+=================================================
+
+.. automodule:: teaser.logic.archetypebuildings.tabula.de
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Submodules
+----------
+
+teaser.logic.archetypebuildings.tabula.de.apartmentblock module
+---------------------------------------------------------------
+
+.. automodule:: teaser.logic.archetypebuildings.tabula.de.apartmentblock
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+teaser.logic.archetypebuildings.tabula.de.multifamilyhouse module
+-----------------------------------------------------------------
+
+.. automodule:: teaser.logic.archetypebuildings.tabula.de.multifamilyhouse
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse module
+------------------------------------------------------------------
+
+.. automodule:: teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+teaser.logic.archetypebuildings.tabula.de.terracedhouse module
+--------------------------------------------------------------
+
+.. automodule:: teaser.logic.archetypebuildings.tabula.de.terracedhouse
+   :members:
+   :show-inheritance:
+   :undoc-members:
