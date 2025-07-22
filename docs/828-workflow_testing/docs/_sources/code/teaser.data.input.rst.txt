@@ -3,8 +3,8 @@ teaser.data.input package
 
 .. automodule:: teaser.data.input
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Subpackages
 -----------
@@ -22,29 +22,29 @@ teaser.data.input.buildingelement\_input\_json module
 
 .. automodule:: teaser.data.input.buildingelement_input_json
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 teaser.data.input.material\_input\_json module
 ----------------------------------------------
 
 .. automodule:: teaser.data.input.material_input_json
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 teaser.data.input.teaserjson\_input module
 ------------------------------------------
 
 .. automodule:: teaser.data.input.teaserjson_input
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 teaser.data.input.usecond\_input module
 ---------------------------------------
 
 .. automodule:: teaser.data.input.usecond_input
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

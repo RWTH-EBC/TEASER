@@ -3,8 +3,8 @@ teaser.logic.archetypebuildings.bmvbs.custom package
 
 .. automodule:: teaser.logic.archetypebuildings.bmvbs.custom
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Submodules
 ----------
@@ -14,21 +14,21 @@ teaser.logic.archetypebuildings.bmvbs.custom.institute module
 
 .. automodule:: teaser.logic.archetypebuildings.bmvbs.custom.institute
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 teaser.logic.archetypebuildings.bmvbs.custom.institute4 module
 --------------------------------------------------------------
 
 .. automodule:: teaser.logic.archetypebuildings.bmvbs.custom.institute4
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 teaser.logic.archetypebuildings.bmvbs.custom.institute8 module
 --------------------------------------------------------------
 
 .. automodule:: teaser.logic.archetypebuildings.bmvbs.custom.institute8
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

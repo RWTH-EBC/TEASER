@@ -15,7 +15,7 @@
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../_static/documentation_options.js?v=ca842793"></script>
-      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -263,7 +263,7 @@
 <p>This module holds file paths and bindings for json data.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="teaser.data.dataclass.DataClass">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.data.dataclass.</span></span><span class="sig-name descname"><span class="pre">DataClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">construction_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#teaser.data.utilities.ConstructionData" title="teaser.data.utilities.ConstructionData"><span class="pre">ConstructionData</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/dataclass.html#DataClass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.dataclass.DataClass" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.data.dataclass.</span></span><span class="sig-name descname"><span class="pre">DataClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">construction_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#teaser.data.utilities.ConstructionData" title="teaser.data.utilities.ConstructionData"><span class="pre">ConstructionData</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/dataclass.html#DataClass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.dataclass.DataClass" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Class for JSON data.</p>
 <p>This class loads all JSON files with statistic or template data needed
@@ -326,7 +326,7 @@ Additionally, it defines which construction data types are allowed for each buil
 includes functions to set the suitable construction_data.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="teaser.data.utilities.ConstructionData">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.data.utilities.</span></span><span class="sig-name descname"><span class="pre">ConstructionData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/utilities.html#ConstructionData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.utilities.ConstructionData" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.data.utilities.</span></span><span class="sig-name descname"><span class="pre">ConstructionData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/utilities.html#ConstructionData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.utilities.ConstructionData" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
 <p>The ConstructionData enumeration combines the former parameters “method” and “construction_type”.
 The prefix of each value is used to select the appropriate json file as input data.
@@ -425,7 +425,7 @@ The complete value is used to search for the appropriate element within the json
 
 <dl class="py class">
 <dt class="sig sig-object py" id="teaser.data.utilities.GeometryData">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.data.utilities.</span></span><span class="sig-name descname"><span class="pre">GeometryData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/utilities.html#GeometryData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.utilities.GeometryData" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.data.utilities.</span></span><span class="sig-name descname"><span class="pre">GeometryData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/data/utilities.html#GeometryData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.data.utilities.GeometryData" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
 <p>The GeometryData enumeration replaces the former parameter “usage” and
 represents different archetypes of residential and non-residential buildings.</p>

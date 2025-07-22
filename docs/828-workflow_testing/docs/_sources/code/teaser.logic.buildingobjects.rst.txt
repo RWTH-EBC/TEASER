@@ -3,8 +3,8 @@ teaser.logic.buildingobjects package
 
 .. automodule:: teaser.logic.buildingobjects
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Subpackages
 -----------
@@ -24,21 +24,21 @@ teaser.logic.buildingobjects.building module
 
 .. automodule:: teaser.logic.buildingobjects.building
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 teaser.logic.buildingobjects.thermalzone module
 -----------------------------------------------
 
 .. automodule:: teaser.logic.buildingobjects.thermalzone
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 teaser.logic.buildingobjects.useconditions module
 -------------------------------------------------
 
 .. automodule:: teaser.logic.buildingobjects.useconditions
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
