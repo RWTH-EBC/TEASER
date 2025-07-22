@@ -3,8 +3,8 @@ teaser.logic package
 
 .. automodule:: teaser.logic
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 Subpackages
 -----------
@@ -24,13 +24,13 @@ teaser.logic.retrofit module
 
 .. automodule:: teaser.logic.retrofit
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 teaser.logic.utilities module
 -----------------------------
 
 .. automodule:: teaser.logic.utilities
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

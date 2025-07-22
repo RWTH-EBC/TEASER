@@ -3,8 +3,8 @@ teaser.data.input.inputdata package
 
 .. automodule:: teaser.data.input.inputdata
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 Subpackages
 -----------

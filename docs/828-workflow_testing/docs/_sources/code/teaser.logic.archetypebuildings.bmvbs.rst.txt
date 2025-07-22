@@ -3,8 +3,8 @@ teaser.logic.archetypebuildings.bmvbs package
 
 .. automodule:: teaser.logic.archetypebuildings.bmvbs
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 Subpackages
 -----------
@@ -22,13 +22,13 @@ teaser.logic.archetypebuildings.bmvbs.office module
 
 .. automodule:: teaser.logic.archetypebuildings.bmvbs.office
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling module
 -----------------------------------------------------------------
 
 .. automodule:: teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

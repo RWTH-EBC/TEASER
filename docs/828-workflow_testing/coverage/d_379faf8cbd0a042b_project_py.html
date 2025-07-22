@@ -65,7 +65,7 @@
             <a id="nextFileLink" class="nav" href="index.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.4.4">coverage.py v7.4.4</a>,
-            created at 2025-07-22 10:05 +0000
+            created at 2025-07-22 10:06 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"/>
@@ -860,7 +860,7 @@
     <p class="run"><span class="n"><a id="t778" href="#t778">778</a></span><span class="t">        <span class="key">if</span> <span class="key">not</span> <span class="nam">self</span><span class="op">.</span><span class="nam">buildings</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="mis show_mis"><span class="n"><a id="t779" href="#t779">779</a></span><span class="t">            <span class="key">raise</span> <span class="nam">ValueError</span><span class="op">(</span><span class="str">"The project includes no buildings to export."</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t780" href="#t780">780</a></span><span class="t">        <span class="key">if</span> <span class="nam">internal_id</span> <span class="key">is</span> <span class="key">not</span> <span class="key">None</span> <span class="key">and</span> <span class="key">not</span> <span class="nam">any</span><span class="op">(</span><span class="nam">bldg</span><span class="op">.</span><span class="nam">internal_id</span> <span class="op">==</span> <span class="nam">internal_id</span> <span class="key">for</span> <span class="nam">bldg</span> <span class="key">in</span> <span class="nam">self</span><span class="op">.</span><span class="nam">buildings</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t781" href="#t781">781</a></span><span class="t">            <span class="key">raise</span> <span class="nam">ValueError</span><span class="op">(</span><span class="fst">f"</span><span class="fst">Building with internal_id </span><span class="op">{</span><span class="nam">internal_id</span><span class="op">}</span><span class="fst"> not found in the project.</span><span class="fst">"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t781" href="#t781">781</a></span><span class="t">            <span class="key">raise</span> <span class="nam">ValueError</span><span class="op">(</span><span class="str">f"Building with internal_id {internal_id} not found in the project."</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t782" href="#t782">782</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t783" href="#t783">783</a></span><span class="t">    <span class="key">def</span> <span class="nam">export_aixlib</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t784" href="#t784">784</a></span><span class="t">        <span class="nam">self</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
@@ -1187,7 +1187,7 @@
     <p class="run"><span class="n"><a id="t1105" href="#t1105">1105</a></span><span class="t">        <span class="key">for</span> <span class="nam">index</span><span class="op">,</span> <span class="op">(</span><span class="nam">var_sel_name</span><span class="op">,</span> <span class="nam">var_list</span><span class="op">)</span> <span class="key">in</span> <span class="nam">enumerate</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t1106" href="#t1106">1106</a></span><span class="t">                <span class="nam">export_vars</span><span class="op">.</span><span class="nam">items</span><span class="op">(</span><span class="op">)</span><span class="op">,</span> <span class="nam">start</span><span class="op">=</span><span class="num">1</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t1107" href="#t1107">1107</a></span><span class="t">            <span class="key">if</span> <span class="key">not</span> <span class="nam">isinstance</span><span class="op">(</span><span class="nam">var_list</span><span class="op">,</span> <span class="nam">list</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t1108" href="#t1108">1108</a></span><span class="t">                <span class="key">raise</span> <span class="nam">TypeError</span><span class="op">(</span><span class="fst">f"</span><span class="fst">Item of key </span><span class="op">{</span><span class="nam">var_sel_name</span><span class="op">}</span><span class="fst"> in dict 'export_vars' is not an instance of a list!</span><span class="fst">"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t1108" href="#t1108">1108</a></span><span class="t">                <span class="key">raise</span> <span class="nam">TypeError</span><span class="op">(</span><span class="str">f"Item of key {var_sel_name} in dict 'export_vars' is not an instance of a list!"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t1109" href="#t1109">1109</a></span><span class="t">            <span class="nam">export_vars_str</span> <span class="op">+=</span> <span class="str">'MatchVariable(name="'</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t1110" href="#t1110">1110</a></span><span class="t">            <span class="nam">processed_list</span> <span class="op">=</span> <span class="str">'|'</span><span class="op">.</span><span class="nam">join</span><span class="op">(</span><span class="nam">map</span><span class="op">(</span><span class="nam">str</span><span class="op">,</span> <span class="nam">export_vars</span><span class="op">[</span><span class="nam">var_sel_name</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t1111" href="#t1111">1111</a></span><span class="t">            <span class="nam">export_vars_str</span> <span class="op">+=</span> <span class="nam">processed_list</span>&nbsp;</span><span class="r"></span></p>
@@ -1351,7 +1351,7 @@
             <a id="nextFileLink" class="nav" href="index.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.4.4">coverage.py v7.4.4</a>,
-            created at 2025-07-22 10:05 +0000
+            created at 2025-07-22 10:06 +0000
         </p>
     </div>
 </footer>

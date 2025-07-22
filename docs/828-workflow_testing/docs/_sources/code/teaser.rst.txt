@@ -3,8 +3,8 @@ teaser package
 
 .. automodule:: teaser
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 Subpackages
 -----------
@@ -24,5 +24,5 @@ teaser.project module
 
 .. automodule:: teaser.project
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

@@ -3,8 +3,8 @@ teaser.logic.archetypebuildings.tabula.dk package
 
 .. automodule:: teaser.logic.archetypebuildings.tabula.dk
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 Submodules
 ----------
@@ -14,21 +14,21 @@ teaser.logic.archetypebuildings.tabula.dk.apartmentblock module
 
 .. automodule:: teaser.logic.archetypebuildings.tabula.dk.apartmentblock
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 teaser.logic.archetypebuildings.tabula.dk.singlefamilyhouse module
 ------------------------------------------------------------------
 
 .. automodule:: teaser.logic.archetypebuildings.tabula.dk.singlefamilyhouse
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 teaser.logic.archetypebuildings.tabula.dk.terracedhouse module
 --------------------------------------------------------------
 
 .. automodule:: teaser.logic.archetypebuildings.tabula.dk.terracedhouse
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
