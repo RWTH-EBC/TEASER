@@ -15,6 +15,11 @@ You can execute this example using
 import teaser.examples.e1_generate_archetype as e1
 import teaser.logic.utilities as utilities
 import os
+
+
+
+"""This function demonstrates the export to Modelica library BESMod using
+the API function of TEASER"""
 ```
 
 ## Standard export
