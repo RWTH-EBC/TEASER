@@ -6,6 +6,10 @@ You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh
 
 ```python
 import teaser.examples.e1_generate_archetype as e1
+
+
+
+"""This function demonstrates retrofit options of TEASER API"""
 ```
 
 In e1_generate_archetype we created a Project with three archetype
