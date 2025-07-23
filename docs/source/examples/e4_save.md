@@ -8,10 +8,6 @@ You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh
 import teaser.examples.e1_generate_archetype as e1
 import teaser.logic.utilities as utilities
 import os
-
-
-
-"""This function demonstrates different saving options of TEASER"""
 ```
 
 In e1_generate_archetype we created a Project with three archetype
