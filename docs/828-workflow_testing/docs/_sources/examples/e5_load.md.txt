@@ -7,10 +7,6 @@ You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh
 ```python
 import teaser.logic.utilities as utilities
 import os
-
-
-
-"""This function demonstrates different loading options of TEASER"""
 ```
 
 In example e4_save we saved two TEASER projects using `*.teaserjson` and

@@ -7,11 +7,6 @@ application we suggest to use PEP008 and import them at the beginning of the
 script.
 You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks)
 
-```python
-"""This function demonstrates generating a building adding all
-information separately"""
-```
-
 First step: Import the TEASER API (called Project) into your Python module
 
 ```python

@@ -28,7 +28,7 @@
 
         
         <h2>Score</h2>
-        8.02 / 10
+        8.03 / 10
             
             (previous score: 8.02 / 10)
             
@@ -1202,7 +1202,8 @@
         where necessary  for coefficients of heat
         transfer, resistances, areas and UA-Values.
 
-        For ThreeElement model it treats rooftops and outer walls
+        For FourElement model it treats outer walls and zone borders to
+        neighboured zones (if this zone is heated)
         as one kind of wall type.
 
         &#34;&#34;&#34;
@@ -1288,64 +1289,66 @@
 
         &#34;&#34;&#34;
         self.area_iw = (
-            sum(in_wall.area for in_wall in self.thermal_zone.inner_walls)
-            + sum(floor.area for floor in self.thermal_zone.floors)
-            + sum(ceiling.area for ceiling in self.thermal_zone.ceilings)
-            + sum(nzb.area for nzb in self.nzbs_for_iw)
+                sum(in_wall.area for in_wall in self.thermal_zone.inner_walls)
+                + sum(floor.area for floor in self.thermal_zone.floors)
+                + sum(ceiling.area for ceiling in self.thermal_zone.ceilings)
+                + sum(nzb.area for nzb in self.nzbs_for_iw)
         )
 
         self.ua_value_iw = (
-            sum(in_wall.ua_value for in_wall in self.thermal_zone.inner_walls)
-            + sum(floor.ua_value for floor in self.thermal_zone.floors)
-            + sum(ceiling.ua_value for ceiling in self.thermal_zone.ceilings)
-            + sum(nzb.ua_value for nzb in self.nzbs_for_iw)
+                sum(in_wall.ua_value for in_wall in self.thermal_zone.inner_walls)
+                + sum(floor.ua_value for floor in self.thermal_zone.floors)
+                + sum(ceiling.ua_value for ceiling in self.thermal_zone.ceilings)
+                + sum(nzb.ua_value for nzb in self.nzbs_for_iw)
         )
 
         # values facing the inside of the thermal zone
 
         self.r_conv_inner_iw = 1 / (
-            sum(1 / in_wall.r_inner_conv for in_wall in self.thermal_zone.inner_walls)
-            + sum(1 / floor.r_inner_conv for floor in self.thermal_zone.floors)
-            + sum(1 / ceiling.r_inner_conv for ceiling in self.thermal_zone.ceilings)
-            + sum(1 / nzb.r_inner_conv for nzb in self.nzbs_for_iw)
+                sum(1 / in_wall.r_inner_conv for in_wall in self.thermal_zone.inner_walls)
+                + sum(1 / floor.r_inner_conv for floor in self.thermal_zone.floors)
+                + sum(1 / ceiling.r_inner_conv for ceiling in self.thermal_zone.ceilings)
+                + sum(1 / nzb.r_inner_conv for nzb in self.nzbs_for_iw)
         )
 
         self.r_rad_inner_iw = 1 / (
-            sum(1 / in_wall.r_inner_rad for in_wall in self.thermal_zone.inner_walls)
-            + sum(1 / floor.r_inner_rad for floor in self.thermal_zone.floors)
-            + sum(1 / ceiling.r_inner_rad for ceiling in self.thermal_zone.ceilings)
-            + sum(1 / nzb.r_inner_rad for nzb in self.nzbs_for_iw)
+                sum(1 / in_wall.r_inner_rad for in_wall in self.thermal_zone.inner_walls)
+                + sum(1 / floor.r_inner_rad for floor in self.thermal_zone.floors)
+                + sum(1 / ceiling.r_inner_rad for ceiling in self.thermal_zone.ceilings)
+                + sum(1 / nzb.r_inner_rad for nzb in self.nzbs_for_iw)
         )
 
         self.r_comb_inner_iw = 1 / (
-            sum(1 / in_wall.r_inner_comb for in_wall in self.thermal_zone.inner_walls)
-            + sum(1 / floor.r_inner_comb for floor in self.thermal_zone.floors)
-            + sum(1 / ceiling.r_inner_comb for ceiling in self.thermal_zone.ceilings)
-            + sum(1 / nzb.r_inner_comb for nzb in self.nzbs_for_iw)
+                sum(1 / in_wall.r_inner_comb for in_wall in self.thermal_zone.inner_walls)
+                + sum(1 / floor.r_inner_comb for floor in self.thermal_zone.floors)
+                + sum(1 / ceiling.r_inner_comb for ceiling in self.thermal_zone.ceilings)
+                + sum(1 / nzb.r_inner_comb for nzb in self.nzbs_for_iw)
         )
 
         self.ir_emissivity_inner_iw = (
-            sum(
-                in_wall.layer[0].material.ir_emissivity * in_wall.area
-                for in_wall in self.thermal_zone.inner_walls
-            )
-            + sum(
-                floor.layer[0].material.ir_emissivity * floor.area
-                for floor in self.thermal_zone.floors
-            )
-            + sum(
-                ceiling.layer[0].material.ir_emissivity * ceiling.area
-                for ceiling in self.thermal_zone.ceilings
-            )
-            + sum(
-                nzb.layer[0].material.ir_emissivity * nzb.area
-                for nzb in self.nzbs_for_iw
-            )
-        ) / self.area_iw
+                                              sum(
+                                                  in_wall.layer[0].material.ir_emissivity * in_wall.area
+                                                  for in_wall in self.thermal_zone.inner_walls
+                                              )
+                                              + sum(
+                                          floor.layer[0].material.ir_emissivity * floor.area
+                                          for floor in self.thermal_zone.floors
+                                      )
+                                              + sum(
+                                          ceiling.layer[0].material.ir_emissivity * ceiling.area
+                                          for ceiling in self.thermal_zone.ceilings
+                                      )
+                                              + sum(
+                                          nzb.layer[0].material.ir_emissivity * nzb.area
+                                          for nzb in self.nzbs_for_iw
+                                      )
+                                      ) / self.area_iw
 
         self.alpha_conv_inner_iw = 1 / (self.r_conv_inner_iw * self.area_iw)
         self.alpha_rad_inner_iw = 1 / (self.r_rad_inner_iw * self.area_iw)
         self.alpha_comb_inner_iw = 1 / (self.r_comb_inner_iw * self.area_iw)
+
+        # adjacent thermal zones are not supported!
 
     def _sum_window_elements(self):
         &#34;&#34;&#34;Sum attributes for window elements
@@ -1354,8 +1357,7 @@
         where necessary (the class doc string) for coefficients of heat
         transfer, resistances, areas and UA-Values.
 
-        Function is identical for TwoElement, ThreeElement, FourElement and
-        FiveElement.
+        Function is identical for TwoElement, ThreeElement and FourElement.
         &#34;&#34;&#34;
 
         self.area_win = sum(win.area for win in self.thermal_zone.windows)
@@ -1431,14 +1433,21 @@
         self.alpha_rad_outer_win = 1 / (self.r_rad_outer_win * self.area_win)
         self.alpha_comb_outer_win = 1 / (self.r_comb_outer_win * self.area_win)
 
-    def _sum_interzonal_elements(self):
-        &#34;&#34;&#34;Sum attributes for neighboured zone border elements
+    def _calc_outer_elements(self):
+        &#34;&#34;&#34;Lumped parameter for outer wall elements
 
-        This function sums and computes the area-weighted values,
-        where necessary (the class doc string) for coefficients of heat
-        transfer, resistances, areas and UA-Values.
+        Calculates all necessary parameters for outer walls. This includes
+        OuterWalls and Rooftops.
 
-        &#34;&#34;&#34;</pre></td>
+        Attributes
+        ----------
+        omega : float [1/s]
+            angular frequency with given time period.
+        outer_walls : list
+            List containing all TEASER Wall instances that are treated as same
+            outer wall type. In case of TwoElement model OuterWalls, Rooftops
+        &#34;&#34;&#34;
+</pre></td>
             </tr>
             
             <tr>
@@ -1544,10 +1553,8 @@
                 self.window_areas.append(0.0)
                 self.transparent_areas.append(0.0)
                 self.shading_max_irr.append(9999.9)
-
             else:
                 self.weightfactor_win.append(sum([win.wf_out for win in wins]))
-
                 if self.merge_windows is False:
                     self.window_areas.append(sum([win.area for win in wins]))
                     self.transparent_areas.append(sum([win.area for win in wins]))
@@ -1555,7 +1562,6 @@
                 else:
                     self.window_areas.append(0)
                     self.transparent_areas.append(sum([win.area for win in wins]))
-
                 self.shading_g_total.append(
                     sum(
                         [
@@ -1624,7 +1630,7 @@
         &#34;&#34;&#34;sets default calculation parameters
         &#34;&#34;&#34;
 
-        # Attributes of inner walls</pre></td>
+        # Attributes for outer walls (OuterWall, Rooftop, GroundFloor)</pre></td>
             </tr>
             
             <tr>
@@ -2171,8 +2177,8 @@
         self.shading_max_irr = []
         self.weighted_g_value = 0.0
 
-        # Misc values
-</pre></td>
+        # Attributes for neighboured zones (vectorized - one element per other
+        # zone)</pre></td>
             </tr>
             
             <tr>
@@ -3945,7 +3951,7 @@
         self.r1_iw = 0.0
         self.c1_iw = 0.0
 
-        # Attributes for outer walls (OuterWall, Rooftop)
+        # Attributes for outer walls
         self.area_ow = 0.0
 
         # coefficient of heat transfer facing the inside of this thermal zone
@@ -3987,7 +3993,7 @@
         self.weightfactor_ground = 0.0
         self.outer_wall_areas = []
 
-        # Attributes for outer walls (OuterWall, Rooftop, GroundFloor)
+        # Attributes for GroundFloor
         self.area_gf = 0.0
 
         # coefficient of heat transfer facing the inside of this thermal zone
@@ -4016,7 +4022,7 @@
 
         self.weightfactor_ground = 0.0
 
-        # Attributes for windows</pre></td>
+        # Attributes for rooftops</pre></td>
             </tr>
             
             <tr>
@@ -4100,15 +4106,15 @@
         &#34;&#34;&#34;Lumped parameter for outer wall elements
 
         Calculates all necessary parameters for outer walls. This includes
-        OuterWalls and Rooftops.
-
+        OuterWalls, GroundFloors and Rooftops.
         Attributes
         ----------
         omega : float [1/s]
             angular frequency with given time period.
         outer_walls : list
             List containing all TEASER Wall instances that are treated as same
-            outer wall type. In case of TwoElement model OuterWalls, Rooftops
+            outer wall type. In case of TwoElement model OuterWalls,
+            GroundFloors, Rooftops
         &#34;&#34;&#34;
 
         omega = 2 * math.pi / 86400 / self.t_bt
@@ -4192,21 +4198,14 @@
         self.alpha_rad_outer_win = 1 / (self.r_rad_outer_win * self.area_win)
         self.alpha_comb_outer_win = 1 / (self.r_comb_outer_win * self.area_win)
 
-    def _calc_outer_elements(self):
-        &#34;&#34;&#34;Lumped parameter for outer wall elements
+    def _sum_interzonal_elements(self):
+        &#34;&#34;&#34;Sum attributes for neighboured zone border elements
 
-        Calculates all necessary parameters for outer walls. This includes
-        OuterWalls, GroundFloors and Rooftops.
-        Attributes
-        ----------
-        omega : float [1/s]
-            angular frequency with given time period.
-        outer_walls : list
-            List containing all TEASER Wall instances that are treated as same
-            outer wall type. In case of TwoElement model OuterWalls,
-            GroundFloors, Rooftops
-        &#34;&#34;&#34;
-</pre></td>
+        This function sums and computes the area-weighted values,
+        where necessary (the class doc string) for coefficients of heat
+        transfer, resistances, areas and UA-Values.
+
+        &#34;&#34;&#34;</pre></td>
             </tr>
             
             <tr>
@@ -4894,7 +4893,6 @@ class ApartmentBlock(SingleFamilyHouse):
                 self.shading_max_irr.append(9999.9)
             else:
                 self.weightfactor_win.append(sum([win.wf_out for win in wins]))
-
                 if self.merge_windows is False:
                     self.window_areas.append(sum([win.area for win in wins]))
                     self.transparent_areas.append(sum([win.area for win in wins]))
@@ -4926,8 +4924,6 @@ class ApartmentBlock(SingleFamilyHouse):
         multiplying the UA-Value of the elements with the given Temperature
         difference of t_inside and t_outside. And takes heat losses through
         infiltration into account.
-
-        Keep in mind that this is a rough approximation of the DIN Heat Demand
 
         Attributes
         ----------
@@ -5040,14 +5036,15 @@ class ApartmentBlock(SingleFamilyHouse):
         &#34;&#34;&#34;Sum attributes for outer wall elements
 
         This function sums and computes the area-weighted values,
-        where necessary  for coefficients of heat
+        where necessary (the class doc string) for coefficients of heat
         transfer, resistances, areas and UA-Values.
 
-        For FourElement model it treats outer walls and zone borders to
-        neighboured zones (if this zone is heated)
+        For TwoElement model it treats rooftops, ground floor, outer walls
+        and zone borders to neighboured zones (if this zone is heated)
         as one kind of wall type.
 
         &#34;&#34;&#34;
+        # treat all outer wall types identical
 </pre></td>
             </tr>
             
@@ -5143,12 +5140,11 @@ class ApartmentBlock(SingleFamilyHouse):
         where necessary  for coefficients of heat
         transfer, resistances, areas and UA-Values.
 
-        For FourElement model it treats outer walls and zone borders to
-        neighboured zones (if this zone is heated)
+        For ThreeElement model it treats rooftops, outer walls and zone borders
+        to neighboured zones (if this zone is heated)
         as one kind of wall type.
 
-        &#34;&#34;&#34;
-</pre></td>
+        &#34;&#34;&#34;</pre></td>
             </tr>
             
             <tr>
@@ -5595,7 +5591,7 @@ class TerracedHouse(SingleFamilyHouse):
         self.r1_iw = 0.0
         self.c1_iw = 0.0
 
-        # Attributes for outer walls (OuterWall, Rooftop, GroundFloor)
+        # Attributes for outer walls
         self.area_ow = 0.0
 
         # coefficient of heat transfer facing the inside of this thermal zone
@@ -5637,7 +5633,7 @@ class TerracedHouse(SingleFamilyHouse):
         self.weightfactor_ground = 0.0
         self.outer_wall_areas = []
 
-        # Attributes for windows</pre></td>
+        # Attributes for GroundFloor</pre></td>
             </tr>
             
             <tr>
@@ -5791,7 +5787,6 @@ class TerracedHouse(SingleFamilyHouse):
 
     def calc_attributes(self):
         &#34;&#34;&#34;Calls all necessary function to calculate model attributes&#34;&#34;&#34;
-
         outer_walls = (
             self.thermal_zone.outer_walls</pre></td>
             </tr>
@@ -6033,14 +6028,14 @@ class TerracedHouse(SingleFamilyHouse):
     def _calc_ground_floor_elements(self):
         &#34;&#34;&#34;Lumped parameter for ground floor elements
 
-        Calculates all necessary parameters for ground floors.
+        Calculates lumped parameters for ground floors. No windows in ground
+        floor allowed.
 
         Attributes
         ----------
         omega : float [1/s]
             angular frequency with given time period.
         &#34;&#34;&#34;
-
         omega = 2 * math.pi / 86400 / self.t_bt
 
         if 0 &lt; len(self.thermal_zone.ground_floors) &lt;= 1:
@@ -6107,20 +6102,17 @@ class TerracedHouse(SingleFamilyHouse):
                     &#34;parameter cannot be calculated&#34;
                 )
 
-    def _calc_wf(self):
-        &#34;&#34;&#34;Weightfactors for outer elements(walls, roof, ground floor, windows)
+    def _calc_ground_floor_elements(self):
+        &#34;&#34;&#34;Lumped parameter for ground floor elements
 
-        Calculates the weightfactors of the outer walls, including ground and
-        windows.
+        Calculates lumped parameters for ground floors. No windows in ground
+        floor allowed.
 
-        Parameters
+        Attributes
         ----------
-        outer_walls : list
-            List containing all TEASER Wall instances that are treated as same
-            outer wall type. In case of TwoElement model OuterWalls,
-            GroundFloors, Rooftops
-        &#34;&#34;&#34;
-</pre></td>
+        omega : float [1/s]
+            angular frequency with given time period.
+        &#34;&#34;&#34;</pre></td>
             </tr>
             
             <tr>
@@ -6187,7 +6179,6 @@ class TerracedHouse(SingleFamilyHouse):
         omega : float [1/s]
             angular frequency with given time period.
         &#34;&#34;&#34;
-
         omega = 2 * math.pi / 86400 / self.t_bt
 
         if 0 &lt; len(self.thermal_zone.ground_floors) &lt;= 1:
@@ -6218,7 +6209,7 @@ class TerracedHouse(SingleFamilyHouse):
             )
 
     def _calc_rooftop_elements(self):
-        &#34;&#34;&#34;Lumped parameter for ground floor elements
+        &#34;&#34;&#34;Lumped parameter for rooftop elements
 
         Calculates lumped parameters for rooftops. Windows are considered in
         outer wall calculation. This results in an error concerning the
@@ -6275,9 +6266,9 @@ class TerracedHouse(SingleFamilyHouse):
         omega = 2 * math.pi / 86400 / self.t_bt
 
         inner_walls = (
-                self.thermal_zone.inner_walls
-                + self.thermal_zone.floors
-                + self.thermal_zone.ceilings</pre></td>
+            self.thermal_zone.inner_walls
+            + self.thermal_zone.floors
+            + self.thermal_zone.ceilings</pre></td>
             </tr>
             
             <tr>
@@ -6663,7 +6654,24 @@ class TerracedHouse(SingleFamilyHouse):
                         ]
                     )
                 )
-</pre></td>
+
+    def _calc_heat_load(self):
+        &#34;&#34;&#34;Static heat load calculation
+
+        This function calculates the static heat load of the thermal zone by
+        multiplying the UA-Value of the elements with the given Temperature
+        difference of t_inside and t_outside. And takes heat losses through
+        infiltration into account.
+
+        Keep in mind that this is a rough approximation of the DIN Heat Demand
+
+        Attributes
+        ----------
+        ua_value_ow_temp : float [W/(m2*K)]
+            UA Value without GroundFloors
+        ua_value_gf_temp : float [W/(m2*K)]
+            UA Value of all GroundFloors
+        &#34;&#34;&#34;</pre></td>
             </tr>
             
             <tr>
@@ -6684,6 +6692,7 @@ class TerracedHouse(SingleFamilyHouse):
                 self.shading_max_irr.append(9999.9)
             else:
                 self.weightfactor_win.append(sum([win.wf_out for win in wins]))
+
                 if self.merge_windows is False:
                     self.window_areas.append(sum([win.area for win in wins]))
                     self.transparent_areas.append(sum([win.area for win in wins]))
@@ -6707,22 +6716,7 @@ class TerracedHouse(SingleFamilyHouse):
                         ]
                     )
                 )
-
-    def _calc_heat_load(self):
-        &#34;&#34;&#34;Static heat load calculation
-
-        This function calculates the static heat load of the thermal zone by
-        multiplying the UA-Value of the elements with the given Temperature
-        difference of t_inside and t_outside. And takes heat losses through
-        infiltration into account.
-
-        Attributes
-        ----------
-        ua_value_ow_temp : float [W/(m2*K)]
-            UA Value without GroundFloors
-        ua_value_gf_temp : float [W/(m2*K)]
-            UA Value of all GroundFloors
-        &#34;&#34;&#34;</pre></td>
+</pre></td>
             </tr>
             
             <tr>
@@ -6775,7 +6769,8 @@ class TerracedHouse(SingleFamilyHouse):
             use_cond.load_use_conditions(zone_usage=value[1])
             zone.use_conditions = use_cond
 
-            zone.use_conditions.with_ahu = False</pre></td>
+            zone.use_conditions.with_ahu = False
+</pre></td>
             </tr>
             
             <tr>
@@ -7333,8 +7328,8 @@ def from_scratch(number_of_elements, save=False, path=utilities.get_default_path
         self.shading_max_irr = []
         self.weighted_g_value = 0.0
 
-        # Attributes for neighboured zones (vectorized - one element per other
-        # zone)</pre></td>
+        # Misc values
+</pre></td>
             </tr>
             
             <tr>
@@ -7403,31 +7398,31 @@ def from_scratch(number_of_elements, save=False, path=utilities.get_default_path
                 <td><pre>Similar lines in 2 files
 ==teaser.examples.e8_change_boundary_conditions:[21:47]
 ==teaser.logic.buildingobjects.useconditions:[398:424]
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-        ]
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+    ]
 </pre></td>
             </tr>
             
@@ -7471,7 +7466,8 @@ def from_scratch(number_of_elements, save=False, path=utilities.get_default_path
         where necessary (the class doc string) for coefficients of heat
         transfer, resistances, areas and UA-Values.
 
-        For TwoElement model it treats rooftops, ground floor and outer walls
+        For TwoElement model it treats rooftops, ground floor, outer walls
+        and zone borders to neighboured zones (if this zone is heated)
         as one kind of wall type.
 
         &#34;&#34;&#34;
@@ -7574,16 +7570,21 @@ def from_scratch(number_of_elements, save=False, path=utilities.get_default_path
         self.alpha_rad_outer_ow = 1 / (self.r_rad_outer_ow * _area_ow_rt_nzb)
         self.alpha_comb_outer_ow = 1 / (self.r_comb_outer_ow * _area_ow_rt_nzb)
 
-    def _sum_window_elements(self):
-        &#34;&#34;&#34;Sum attributes for window elements
+    def _sum_inner_wall_elements(self):
+        &#34;&#34;&#34;Sum attributes for interior elements
 
         This function sums and computes the area-weighted values,
         where necessary (the class doc string) for coefficients of heat
         transfer, resistances, areas and UA-Values.
 
+        It treats all inner walls identical.
+
         Function is identical for TwoElement, ThreeElement and FourElement.
-        &#34;&#34;&#34;
-</pre></td>
+
+        Calculation of adjacent thermal zones and thus these attributes are
+        currently not supported.
+
+        &#34;&#34;&#34;</pre></td>
             </tr>
             
             <tr>
@@ -7637,7 +7638,7 @@ def from_scratch(number_of_elements, save=False, path=utilities.get_default_path
         self.weightfactor_ground = 0.0
         self.outer_wall_areas = []
 
-        # TODO: check this value</pre></td>
+        # Attributes for GroundFloor</pre></td>
             </tr>
             
             <tr>
@@ -8013,14 +8014,14 @@ def from_scratch(number_of_elements, save=False, path=utilities.get_default_path
         &#34;&#34;&#34;Sum attributes for outer wall elements
 
         This function sums and computes the area-weighted values,
-        where necessary (the class doc string) for coefficients of heat
+        where necessary  for coefficients of heat
         transfer, resistances, areas and UA-Values.
 
-        For TwoElement model it treats rooftops, ground floor and outer walls
+        For FourElement model it treats outer walls and zone borders to
+        neighboured zones (if this zone is heated)
         as one kind of wall type.
 
         &#34;&#34;&#34;
-        # treat all outer wall types identical
 </pre></td>
             </tr>
             
@@ -8986,12 +8987,16 @@ def from_scratch(number_of_elements, save=False, path=utilities.get_default_path
                 &#34;to RunTimeErrors&#34;
             )
 
-    def _calc_wf(self):
-        &#34;&#34;&#34;Weightfactors for outer elements(walls, roof, ground floor, windows)
+    def _calc_interzonal_elements(self):
+        &#34;&#34;&#34;Lumped parameter for neighboured zone border elements
 
-        Calculates the weightfactors of outer walls, rooftops, including
-        ground and windows.
+        Calculates lumped parameters for borders to
+        neighboured zones. No windows allowed.
 
+        Attributes
+        ----------
+        omega : float [1/s]
+            angular frequency with given time period.
         &#34;&#34;&#34;
 </pre></td>
             </tr>
@@ -9018,13 +9023,13 @@ def from_scratch(number_of_elements, save=False, path=utilities.get_default_path
         else:
             self._sum_outer_wall_elements()
         if (
-                len(
-                    self.thermal_zone.inner_walls
-                    + self.thermal_zone.floors
-                    + self.thermal_zone.ceilings
-                    + self.nzbs_for_iw
-                )
-                &lt; 1
+            len(
+                self.thermal_zone.inner_walls
+                + self.thermal_zone.floors
+                + self.thermal_zone.ceilings
+                + self.nzbs_for_iw
+            )
+            &lt; 1
         ):
             warnings.warn(
                 &#34;For thermal zone &#34;
@@ -9241,7 +9246,7 @@ def from_scratch(number_of_elements, save=False, path=utilities.get_default_path
         self.r1_iw = 0.0
         self.c1_iw = 0.0
 
-        # Attributes for outer walls (OuterWall, Rooftop)
+        # Attributes for outer walls
         self.area_ow = 0.0
 
         # coefficient of heat transfer facing the inside of this thermal zone
@@ -9283,7 +9288,7 @@ def from_scratch(number_of_elements, save=False, path=utilities.get_default_path
         self.weightfactor_ground = 0.0
         self.outer_wall_areas = []
 
-        # Attributes for outer walls (OuterWall, Rooftop, GroundFloor)
+        # Attributes for GroundFloor
         self.area_gf = 0.0
 
         # coefficient of heat transfer facing the inside of this thermal zone
@@ -9312,7 +9317,7 @@ def from_scratch(number_of_elements, save=False, path=utilities.get_default_path
 
         self.weightfactor_ground = 0.0
 
-        # Attributes for windows</pre></td>
+        # Attributes for rooftops</pre></td>
             </tr>
             
             <tr>
@@ -9528,8 +9533,8 @@ def from_scratch(number_of_elements, save=False, path=utilities.get_default_path
         self.shading_max_irr = []
         self.weighted_g_value = 0.0
 
-        # Misc values
-</pre></td>
+        # Attributes for neighboured zones (vectorized - one element per other
+        # zone)</pre></td>
             </tr>
             
             <tr>
@@ -9682,7 +9687,7 @@ def from_scratch(number_of_elements, save=False, path=utilities.get_default_path
 
             try:
                 if (
-                        len(self.thermal_zone.windows) &gt; 0</pre></td>
+                    len(self.thermal_zone.windows) &gt; 0</pre></td>
             </tr>
             
             <tr>
@@ -10763,17 +10768,17 @@ from teaser.logic.buildingobjects.thermalzone import ThermalZone
                 <td><pre>Similar lines in 2 files
 ==teaser.examples.e8_change_boundary_conditions:[28:39]
 ==teaser.logic.buildingobjects.useconditions:[404:415]
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,</pre></td>
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,</pre></td>
             </tr>
             
             <tr>
@@ -10786,17 +10791,17 @@ from teaser.logic.buildingobjects.thermalzone import ThermalZone
                 <td><pre>Similar lines in 2 files
 ==teaser.examples.e8_change_boundary_conditions:[27:38]
 ==teaser.logic.buildingobjects.useconditions:[405:416]
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,</pre></td>
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,</pre></td>
             </tr>
             
             <tr>
@@ -11069,16 +11074,16 @@ import teaser.data.utilities as datahandling
                 <td><pre>Similar lines in 2 files
 ==teaser.examples.e8_change_boundary_conditions:[29:39]
 ==teaser.logic.buildingobjects.useconditions:[404:414]
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,</pre></td>
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,</pre></td>
             </tr>
             
             <tr>
@@ -11091,16 +11096,16 @@ import teaser.data.utilities as datahandling
                 <td><pre>Similar lines in 2 files
 ==teaser.examples.e8_change_boundary_conditions:[27:37]
 ==teaser.logic.buildingobjects.useconditions:[406:416]
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,</pre></td>
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,</pre></td>
             </tr>
             
             <tr>
@@ -11163,35 +11168,7 @@ import teaser.data.utilities as datahandling
                 pass
         else:
 
-            self.__parent = None
-
-    def retrofit_wall(self,
-                      year_of_retrofit,
-                      material=None,
-                      add_at_position=None):
-        &#34;&#34;&#34;Retrofits wall to German refurbishment standards.
-
-        This function adds an additional layer of insulation and sets the
-        thickness of the layer according to the retrofit standard in the
-        year of refurbishment. Refurbishment year must be newer then 1977
-
-        Note: To Calculate thickness and U-Value, the standard TEASER
-        coefficients for outer and inner heat transfer are used.
-
-        The used Standards are namely the Waermeschutzverordnung (WSVO) and
-        Energieeinsparverordnung (EnEv)
-
-        Parameters
-        ----------
-        material : string
-            Type of material, that is used for insulation
-        year_of_retrofit : int
-            Year of the retrofit of the wall/building
-        add_at_position : int
-            position at which to insert the insulation layer.
-            0 inside, None (default) or -1 outside/other side
-
-        &#34;&#34;&#34;</pre></td>
+            self.__parent = None</pre></td>
             </tr>
             
             <tr>
@@ -11284,7 +11261,7 @@ import teaser.data.utilities as datahandling
         self.r1_iw = 0.0
         self.c1_iw = 0.0
 
-        # Attributes for outer walls (OuterWall, Rooftop, GroundFloor)
+        # Attributes for outer walls
         self.area_ow = 0.0
 
         # coefficient of heat transfer facing the inside of this thermal zone
@@ -11326,7 +11303,7 @@ import teaser.data.utilities as datahandling
         self.weightfactor_ground = 0.0
         self.outer_wall_areas = []
 
-        # Attributes for windows</pre></td>
+        # Attributes for GroundFloor</pre></td>
             </tr>
             
             <tr>
@@ -11494,8 +11471,8 @@ import teaser.data.utilities as datahandling
                 <td><pre>Similar lines in 2 files
 ==teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse:[623:639]
 ==teaser.logic.archetypebuildings.tabula.dk.singlefamilyhouse:[556:572]
-                        data_class=self.parent.data,
-                    )
+                            data_class=self.parent.data,
+                        )
                     floor.name = key
                     floor.tilt = value[0]
                     floor.orientation = value[1]
@@ -11522,8 +11499,8 @@ import teaser.data.utilities as datahandling
                 <td><pre>Similar lines in 2 files
 ==teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse:[581:593]
 ==teaser.logic.archetypebuildings.tabula.dk.singlefamilyhouse:[528:540]
-                    data_class=self.parent.data,
-                )
+                        data_class=self.parent.data,
+                    )
                 inner_wall.name = key
                 inner_wall.tilt = value[0]
                 inner_wall.orientation = value[1]
@@ -11665,15 +11642,15 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window</pre></td
                 <td><pre>Similar lines in 2 files
 ==teaser.examples.e8_change_boundary_conditions:[30:39]
 ==teaser.logic.buildingobjects.useconditions:[404:413]
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,</pre></td>
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,</pre></td>
             </tr>
             
             <tr>
@@ -12006,9 +11983,12 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window</pre></td
         mode : str
             &#39;ow&#39; uses r1 and c1_korr
             &#39;iw&#39; uses r1 and c1 (function falls back here for other strings)
+            &#39;izw_backwards&#39; uses r2 and c1_korr because heat flow goes towards
+                this thermal zone (instead of away from it) for interzonal
+                elements between heated and unheated zones
 
         Returns
-        -------
+        ----------
         r1 : float [K/W]
             VDI 6007 resistance for all inner or outer walls
         c1 : float [K/W]
@@ -12038,28 +12018,6 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window</pre></td
         self._fill_zone_lists()
         self._calc_heat_load()
         self.cool_load = -self.heat_load
-
-    @staticmethod
-    def _calc_parallel_connection(element_list, omega):
-        &#34;&#34;&#34;Parallel connection of walls according to VDI 6007
-
-        Calculates the parallel connection of wall elements according to VDI
-        6007, resulting in R1 and C1 (equation 23, 24).
-
-        Parameters
-        ----------
-        element_list : list
-            List of inner or outer walls
-        omega : float
-            VDI 6007 frequency
-
-        Returns
-        -------
-        r1 : float [K/W]
-            VDI 6007 resistance for all inner or outer walls
-        c1 : float [K/W]
-            VDI 6007 capacity all for inner or outer walls
-        &#34;&#34;&#34;
 </pre></td>
             </tr>
             
@@ -12193,7 +12151,8 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window</pre></td
         self.zone_area_factors[&#34;ICT&#34;] = \
             [0.02, &#34;Data center&#34;]
         self.est_exponent_wall = 0.6177
-        self.est_factor_wall_area = 13.895</pre></td>
+        self.est_factor_wall_area = 13.895
+</pre></td>
             </tr>
             
             <tr>
@@ -12247,7 +12206,7 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window</pre></td
                 <td><pre>Similar lines in 2 files
 ==teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling:[472:483]
 ==teaser.logic.archetypebuildings.urbanrenet.est1a:[316:327]
-                )
+                                         )
                 window.name = key
                 window.tilt = value[0]
                 window.orientation = value[1]
@@ -12398,6 +12357,14 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window</pre></td
             internal_gains_mode,
             inner_wall_approximation_approach
         )
+
+    def generate_archetype(self):
+        &#34;&#34;&#34;Generates an archetype building.
+
+        If you want to define you own archetype methodology please use this
+        function call to do so.
+
+        &#34;&#34;&#34;
 </pre></td>
             </tr>
             
@@ -12460,14 +12427,14 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window</pre></td
                 <td><pre>Similar lines in 2 files
 ==teaser.examples.e8_change_boundary_conditions:[27:35]
 ==teaser.logic.buildingobjects.useconditions:[408:416]
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,</pre></td>
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,</pre></td>
             </tr>
             
             <tr>
@@ -12519,14 +12486,58 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window</pre></td
 ==teaser.data.output.besmod_output:[255:308]
 ==teaser.data.output.ibpsa_output:[162:171]
             within=prj.name + &#39;.&#39; + bldg.name)
-
         modelica_output.create_package_order(
             path=zone_path,
             package_list=bldg.thermal_zones,
             addition=bldg.name + &#34;_&#34;)
 
     print(&#34;Exports can be found here:&#34;)
-    print(path)</pre></td>
+    print(path)
+
+
+def convert_input(building_zones_input: Union[float, Dict[Union[int, str], Union[float, Dict[str, float]]]],
+                  buildings: List[Building]) -&gt; Dict[str, str]:
+    &#34;&#34;&#34;
+    Convert input values for BESMod zone specific parameters to a dictionary.
+
+    Supports single values, dictionaries keyed by construction year, or
+    dictionaries keyed by building names.
+    If single values are given then all buildings and zones get this values set.
+    If a dictionary keyed by construction year is given then all zones of a building get the
+    value set of the next higher year corresponding to the construction year of the building.
+    If a dictionary keyed by building name is given the value must be a single value for all zones
+    or another dictionary specifying for each zone name a value.
+
+    Parameters
+    ----------
+    building_zones_input : Union[float, Dict[Union[int, str], Union[float, Dict[str, float]]]]
+        Input value(s) for BESMod parameters. Can be a single value, a dictionary keyed by construction year,
+        or a dictionary keyed by building name.
+        Example:
+        - Single value: 328.15
+        - Dictionary keyed by construction year: {1970: 348.15, 1990: 328.15}
+        - Dictionary keyed by building name: {
+            &#34;Building1&#34;: 328.15,
+            &#34;Building2&#34;: {
+                &#34;Zone1&#34;: 328.15,
+                &#34;Zone2&#34;: 308.15
+            }
+        }
+    buildings : List[Building]
+        List of TEASER Building instances.
+
+    Returns
+    -------
+    Dict[str, str]
+        Dictionary mapping building names to BESMod parameter input strings.
+
+    Raises
+    ------
+    ValueError
+        If the input dictionary has invalid values.
+    KeyError
+        If the input dictionary is missing required keys.
+    &#34;&#34;&#34;</pre></td>
             </tr>
             
             <tr>
@@ -12589,9 +12600,7 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window</pre></td
                 value = float(value)
             except:
                 raise ValueError(&#34;Can&#39;t convert thickness to float&#34;)
-
-    @property
-    def thickness_list(self):</pre></td>
+</pre></td>
             </tr>
             
             <tr>
@@ -12634,8 +12643,7 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window</pre></td
             # more than one outer wall, calculate chain matrix
             self.r1_ow, self.c1_ow = self._calc_parallel_connection(
                 outer_walls, omega, mode=&#39;ow&#39;
-            )
-</pre></td>
+            )</pre></td>
             </tr>
             
             <tr>
@@ -12745,11 +12753,11 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window</pre></td
         ) / (self.area_ow + self.area_win)
 
     def _calc_number_of_elements(self):
-        &#34;&#34;&#34;Calculates the number of outer elements with different tilt/orient
+        &#34;&#34;&#34;Calculates the number of facade elements with different tilt/orient
 
         This function calculates the number of outer elements with a
         different combination of orientation and tilt, this includes the
-        rooftops, ground floors, and borders to unheated neighboured zones if
+        rooftops and borders to unheated neighboured zones if
         this zone is heated.
         &#34;&#34;&#34;
 
@@ -12796,8 +12804,7 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window</pre></td
         else:
             t_ground = self.thermal_zone.t_ground
 
-        ua_value_ow_temp = self.ua_value_rt + self.ua_value_ow
-</pre></td>
+        ua_value_ow_temp = self.ua_value_rt + self.ua_value_ow</pre></td>
             </tr>
             
             <tr>
@@ -12839,7 +12846,7 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window</pre></td
                 <td><pre>Similar lines in 2 files
 ==teaser.logic.buildingobjects.calculation.five_element:[687:694]
 ==teaser.logic.buildingobjects.calculation.four_element:[640:647]
-            &lt; 1
+                &lt; 1
         ):
             warnings.warn(
                 &#34;For thermal zone &#34;
@@ -12931,8 +12938,8 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window</pre></td
         self.shading_max_irr = []
         self.weighted_g_value = 0.0
 
-        # Attributes for neighboured zones (vectorized - one element per other
-        # zone)</pre></td>
+        # Misc values
+</pre></td>
             </tr>
             
             <tr>
@@ -12955,8 +12962,8 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window</pre></td
         self.shading_max_irr = []
         self.weighted_g_value = 0.0
 
-        # Attributes for neighboured zones (vectorized - one element per other
-        # zone)</pre></td>
+        # Misc values
+</pre></td>
             </tr>
             
             <tr>
@@ -13036,9 +13043,9 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window</pre></td
             win.calc_equivalent_res()
             win.calc_ua_value()
         for inner_wall in (
-            self.thermal_zone.inner_walls
-            + self.thermal_zone.floors
-            + self.thermal_zone.ceilings</pre></td>
+                self.thermal_zone.inner_walls
+                + self.thermal_zone.floors
+                + self.thermal_zone.ceilings</pre></td>
             </tr>
             
             <tr>
@@ -13253,13 +13260,13 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window</pre></td
                 <td><pre>Similar lines in 2 files
 ==teaser.logic.archetypebuildings.bmvbs.custom.institute8:[177:184]
 ==teaser.logic.archetypebuildings.urbanrenet.est8a:[96:103]
-                                         name,
-                                         year_of_construction,
-                                         number_of_floors,
-                                         height_of_floors,
-                                         net_leased_area,
-                                         with_ahu,
-                                         internal_gains_mode,</pre></td>
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu,
+            internal_gains_mode,</pre></td>
             </tr>
             
             <tr>
@@ -13399,7 +13406,7 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window</pre></td
           &#34;W/(m2*K) ---&#34;, &#34;Rouvel: 2.236423594 W/(m2*K)&#34;)
 
     &#34;&#34;&#34;
-    parameters outer wall Typraum S
+    parameters outer wall Typraum L
     &#34;&#34;&#34;
     print(&#34;\nParameters for outer wall&#34;)
     print(&#34;r_rest_ow&#34;, prj.buildings[0].thermal_zones[0].model_attr.r_rest_ow,</pre></td>
@@ -13415,13 +13422,13 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window</pre></td
                 <td><pre>Similar lines in 2 files
 ==teaser.examples.e8_change_boundary_conditions:[32:39]
 ==teaser.logic.buildingobjects.useconditions:[404:411]
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,</pre></td>
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,</pre></td>
             </tr>
             
             <tr>
@@ -13686,7 +13693,20 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window</pre></td
         self.tilt_facade = []
         self.orientation_facade = []
         self.heat_load = 0.0
-        self.cool_load = 0.0</pre></td>
+        self.cool_load = 0.0
+
+    @property
+    def nzbs_for_iw(self):
+        &#34;&#34;&#34;returns borders to neighboured zones to be considered as inner walls
+
+        Returns
+        -------
+        value : list
+            list of those interzonal elements that are NOT to be treated as
+            &#39;outer_ordered&#39; depending on their &#39;interzonal_type_export&#39;
+            attribute
+
+        &#34;&#34;&#34;</pre></td>
             </tr>
             
             <tr>
@@ -13830,6 +13850,14 @@ from teaser.logic.buildingobjects.buildingphysics.window import Window</pre></td
         for element in outer_elements:
             tilt_orient.append((element.orientation, element.tilt))
         self.n_outer = len(list(set(tilt_orient)))
+
+    def _fill_zone_lists(self):
+        &#34;&#34;&#34;Fills lists like weightfactors and tilt, orientation
+
+        Fills the lists of a zone  according to orientation and tilt of the
+        zone. Therefore it compares orientation and tilt of all outer
+        elements and then creates lists for zone weightfactors, orientation,
+        tilt, ares and sunblinds.&#34;&#34;&#34;
 </pre></td>
             </tr>
             
@@ -14196,12 +14224,12 @@ if __name__ == &#34;__main__&#34;:</pre></td>
                 <td><pre>Similar lines in 2 files
 ==teaser.examples.e8_change_boundary_conditions:[27:33]
 ==teaser.logic.buildingobjects.useconditions:[410:416]
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,</pre></td>
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,</pre></td>
             </tr>
             
             <tr>
@@ -14214,12 +14242,12 @@ if __name__ == &#34;__main__&#34;:</pre></td>
                 <td><pre>Similar lines in 2 files
 ==teaser.examples.e8_change_boundary_conditions:[39:45]
 ==teaser.logic.buildingobjects.useconditions:[347:353]
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,</pre></td>
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,</pre></td>
             </tr>
             
             <tr>
@@ -14232,12 +14260,12 @@ if __name__ == &#34;__main__&#34;:</pre></td>
                 <td><pre>Similar lines in 2 files
 ==teaser.examples.e8_change_boundary_conditions:[21:27]
 ==teaser.logic.buildingobjects.useconditions:[346:352]
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,</pre></td>
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,</pre></td>
             </tr>
             
             <tr>
@@ -14317,17 +14345,8 @@ if __name__ == &#34;__main__&#34;:</pre></td>
         self._outer_convection = 20.0
         self._outer_radiation = 5.0
 
-    def calc_equivalent_res(self):
-        &#34;&#34;&#34;Equivalent resistance VDI 6007
-
-        Calculates the equivalent resistance of a wall according to  VDI
-        6007 guideline.
-
-        Parameters
-        ----------
-        t_bt : int
-            time constant according to VDI 6007 (default t_bt = 7)
-        &#34;&#34;&#34;</pre></td>
+    @property
+    def parent(self):</pre></td>
             </tr>
             
             <tr>
@@ -14441,7 +14460,19 @@ if __name__ == &#34;__main__&#34;:</pre></td>
         self.tilt_facade = []
         self.orientation_facade = []
         self.heat_load = 0.0
-        self.cool_load = 0.0</pre></td>
+        self.cool_load = 0.0
+
+    @property
+    def nzbs_for_iw(self):
+        &#34;&#34;&#34;returns borders to neighboured zones to be considered as inner walls
+
+        Returns
+        -------
+        value : list
+            list of those interzonal elements that are to be treated as
+            &#39;inner&#39; depending on their &#39;interzonal_type_export&#39; attribute
+
+        &#34;&#34;&#34;</pre></td>
             </tr>
             
             <tr>
@@ -14819,7 +14850,7 @@ if __name__ == &#34;__main__&#34;:</pre></td>
         &#34;&#34;&#34;sets default calculation parameters
         &#34;&#34;&#34;
 
-        # Attributes of inner walls</pre></td>
+        # Attributes for outer walls (OuterWall, Rooftop, GroundFloor)</pre></td>
             </tr>
             
             <tr>
@@ -15097,11 +15128,11 @@ if __name__ == &#34;__main__&#34;:</pre></td>
                 <td><pre>Similar lines in 2 files
 ==teaser.logic.buildingobjects.buildingphysics.material:[341:346]
 ==teaser.logic.buildingobjects.thermalzone:[764:769]
-                    pass
-                else:
-                    try:
-                        value = float(value)
-                    except:</pre></td>
+            pass
+        else:
+            try:
+                value = float(value)
+            except:</pre></td>
             </tr>
             
             <tr>
@@ -15384,11 +15415,11 @@ if __name__ == &#34;__main__&#34;:</pre></td>
                 <td><pre>Similar lines in 2 files
 ==teaser.examples.e8_change_boundary_conditions:[27:32]
 ==teaser.logic.buildingobjects.useconditions:[411:416]
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,</pre></td>
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,</pre></td>
             </tr>
             
             <tr>
@@ -15401,11 +15432,11 @@ if __name__ == &#34;__main__&#34;:</pre></td>
                 <td><pre>Similar lines in 2 files
 ==teaser.examples.e8_change_boundary_conditions:[40:45]
 ==teaser.logic.buildingobjects.useconditions:[364:369]
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,</pre></td>
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,</pre></td>
             </tr>
             
             <tr>
@@ -15418,11 +15449,11 @@ if __name__ == &#34;__main__&#34;:</pre></td>
                 <td><pre>Similar lines in 2 files
 ==teaser.examples.e8_change_boundary_conditions:[39:44]
 ==teaser.logic.buildingobjects.useconditions:[365:370]
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,</pre></td>
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,</pre></td>
             </tr>
             
             <tr>
@@ -15486,11 +15517,11 @@ if __name__ == &#34;__main__&#34;:</pre></td>
                 <td><pre>Similar lines in 2 files
 ==teaser.examples.e11_export_besmod_models:[83:88]
 ==teaser.project:[128:133]
-            os.path.join(
-                &#34;data&#34;,
-                &#34;input&#34;,
-                &#34;inputdata&#34;,
-                &#34;weatherdata&#34;,</pre></td>
+        os.path.join(
+            &#34;data&#34;,
+            &#34;input&#34;,
+            &#34;inputdata&#34;,
+            &#34;weatherdata&#34;,</pre></td>
             </tr>
             
             <tr>
@@ -15517,6 +15548,16 @@ if __name__ == &#34;__main__&#34;:</pre></td>
                 <td><code>cyclic-import</code></td>
                 <td>R0401</td>
                 <td></td>
+                <td><pre>Cyclic import (teaser.data.utilities -&gt; teaser.logic.archetypebuildings.urbanrenet.est1a)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>refactor</td>
+                <td><code>cyclic-import</code></td>
+                <td>R0401</td>
+                <td></td>
                 <td><pre>Cyclic import (teaser.logic.buildingobjects.building -&gt; teaser.logic.buildingobjects.buildingsystems.buildingahu)</pre></td>
             </tr>
             
@@ -15527,7 +15568,7 @@ if __name__ == &#34;__main__&#34;:</pre></td>
                 <td><code>cyclic-import</code></td>
                 <td>R0401</td>
                 <td></td>
-                <td><pre>Cyclic import (teaser.data.utilities -&gt; teaser.logic.archetypebuildings.urbanrenet.est4b -&gt; teaser.logic.archetypebuildings.urbanrenet.est1a)</pre></td>
+                <td><pre>Cyclic import (teaser.data.utilities -&gt; teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling)</pre></td>
             </tr>
             
             <tr>
@@ -15547,16 +15588,6 @@ if __name__ == &#34;__main__&#34;:</pre></td>
                 <td><code>cyclic-import</code></td>
                 <td>R0401</td>
                 <td></td>
-                <td><pre>Cyclic import (teaser.data.utilities -&gt; teaser.logic.archetypebuildings.bmvbs.custom.institute8 -&gt; teaser.logic.archetypebuildings.bmvbs.office)</pre></td>
-            </tr>
-            
-            <tr>
-                <td>1</td>
-                <td>0</td>
-                <td>refactor</td>
-                <td><code>cyclic-import</code></td>
-                <td>R0401</td>
-                <td></td>
                 <td><pre>Cyclic import (teaser.data.utilities -&gt; teaser.logic.archetypebuildings.urbanrenet.est1b -&gt; teaser.logic.archetypebuildings.urbanrenet.est1a)</pre></td>
             </tr>
             
@@ -15567,7 +15598,7 @@ if __name__ == &#34;__main__&#34;:</pre></td>
                 <td><code>cyclic-import</code></td>
                 <td>R0401</td>
                 <td></td>
-                <td><pre>Cyclic import (teaser.data.utilities -&gt; teaser.logic.archetypebuildings.urbanrenet.est3 -&gt; teaser.logic.archetypebuildings.urbanrenet.est1a)</pre></td>
+                <td><pre>Cyclic import (teaser.data.utilities -&gt; teaser.logic.archetypebuildings.urbanrenet.est4b -&gt; teaser.logic.archetypebuildings.urbanrenet.est1a)</pre></td>
             </tr>
             
             <tr>
@@ -15617,6 +15648,16 @@ if __name__ == &#34;__main__&#34;:</pre></td>
                 <td><code>cyclic-import</code></td>
                 <td>R0401</td>
                 <td></td>
+                <td><pre>Cyclic import (teaser.data.utilities -&gt; teaser.logic.archetypebuildings.urbanrenet.est3 -&gt; teaser.logic.archetypebuildings.urbanrenet.est1a)</pre></td>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>refactor</td>
+                <td><code>cyclic-import</code></td>
+                <td>R0401</td>
+                <td></td>
                 <td><pre>Cyclic import (teaser.data.utilities -&gt; teaser.logic.archetypebuildings.urbanrenet.est2 -&gt; teaser.logic.archetypebuildings.urbanrenet.est1a)</pre></td>
             </tr>
             
@@ -15637,7 +15678,7 @@ if __name__ == &#34;__main__&#34;:</pre></td>
                 <td><code>cyclic-import</code></td>
                 <td>R0401</td>
                 <td></td>
-                <td><pre>Cyclic import (teaser.data.utilities -&gt; teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling)</pre></td>
+                <td><pre>Cyclic import (teaser.data.utilities -&gt; teaser.logic.archetypebuildings.bmvbs.custom.institute -&gt; teaser.logic.archetypebuildings.bmvbs.office)</pre></td>
             </tr>
             
             <tr>
@@ -15647,7 +15688,7 @@ if __name__ == &#34;__main__&#34;:</pre></td>
                 <td><code>cyclic-import</code></td>
                 <td>R0401</td>
                 <td></td>
-                <td><pre>Cyclic import (teaser.data.utilities -&gt; teaser.logic.archetypebuildings.bmvbs.office)</pre></td>
+                <td><pre>Cyclic import (teaser.data.utilities -&gt; teaser.logic.archetypebuildings.bmvbs.custom.institute8 -&gt; teaser.logic.archetypebuildings.bmvbs.office)</pre></td>
             </tr>
             
             <tr>
@@ -15667,7 +15708,7 @@ if __name__ == &#34;__main__&#34;:</pre></td>
                 <td><code>cyclic-import</code></td>
                 <td>R0401</td>
                 <td></td>
-                <td><pre>Cyclic import (teaser.data.utilities -&gt; teaser.logic.archetypebuildings.bmvbs.custom.institute -&gt; teaser.logic.archetypebuildings.bmvbs.office)</pre></td>
+                <td><pre>Cyclic import (teaser.data.utilities -&gt; teaser.logic.archetypebuildings.tabula.de.multifamilyhouse -&gt; teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse)</pre></td>
             </tr>
             
             <tr>
@@ -15687,17 +15728,7 @@ if __name__ == &#34;__main__&#34;:</pre></td>
                 <td><code>cyclic-import</code></td>
                 <td>R0401</td>
                 <td></td>
-                <td><pre>Cyclic import (teaser.data.utilities -&gt; teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse)</pre></td>
-            </tr>
-            
-            <tr>
-                <td>1</td>
-                <td>0</td>
-                <td>refactor</td>
-                <td><code>cyclic-import</code></td>
-                <td>R0401</td>
-                <td></td>
-                <td><pre>Cyclic import (teaser.data.utilities -&gt; teaser.logic.archetypebuildings.tabula.de.multifamilyhouse -&gt; teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse)</pre></td>
+                <td><pre>Cyclic import (teaser.data.utilities -&gt; teaser.logic.archetypebuildings.tabula.dk.apartmentblock -&gt; teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse)</pre></td>
             </tr>
             
             <tr>
@@ -15728,16 +15759,6 @@ if __name__ == &#34;__main__&#34;:</pre></td>
                 <td>R0401</td>
                 <td></td>
                 <td><pre>Cyclic import (teaser.data.utilities -&gt; teaser.logic.archetypebuildings.tabula.dk.singlefamilyhouse)</pre></td>
-            </tr>
-            
-            <tr>
-                <td>1</td>
-                <td>0</td>
-                <td>refactor</td>
-                <td><code>cyclic-import</code></td>
-                <td>R0401</td>
-                <td></td>
-                <td><pre>Cyclic import (teaser.data.utilities -&gt; teaser.logic.archetypebuildings.tabula.dk.apartmentblock -&gt; teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse)</pre></td>
             </tr>
             
         </table>
@@ -16203,7 +16224,7 @@ if __name__ == &#34;__main__&#34;:</pre></td>
                 <td><code>astroid-error</code></td>
                 <td>F0002</td>
                 <td></td>
-                <td><pre>teaser/data/output/besmod_output.py: Fatal error while checking &#39;teaser/data/output/besmod_output.py&#39;. Please open an issue in our bug tracker so we address this. There is a pre-filled template that you can use in &#39;/home/runner/.cache/pylint/pylint-crash-2025-07-23-08-13-16.txt&#39;.</pre></td>
+                <td><pre>teaser/data/output/besmod_output.py: Fatal error while checking &#39;teaser/data/output/besmod_output.py&#39;. Please open an issue in our bug tracker so we address this. There is a pre-filled template that you can use in &#39;/home/runner/.cache/pylint/pylint-crash-2025-07-23-10-07-15.txt&#39;.</pre></td>
             </tr>
             
             <tr>
@@ -28061,7 +28082,7 @@ if __name__ == &#34;__main__&#34;:</pre></td>
                 <td><code>astroid-error</code></td>
                 <td>F0002</td>
                 <td></td>
-                <td><pre>teaser/project.py: Fatal error while checking &#39;teaser/project.py&#39;. Please open an issue in our bug tracker so we address this. There is a pre-filled template that you can use in &#39;/home/runner/.cache/pylint/pylint-crash-2025-07-23-08-13-09.txt&#39;.</pre></td>
+                <td><pre>teaser/project.py: Fatal error while checking &#39;teaser/project.py&#39;. Please open an issue in our bug tracker so we address this. There is a pre-filled template that you can use in &#39;/home/runner/.cache/pylint/pylint-crash-2025-07-23-10-07-08.txt&#39;.</pre></td>
             </tr>
             
             <tr>
@@ -28234,7 +28255,7 @@ if __name__ == &#34;__main__&#34;:</pre></td>
             
             <tr>
                 <td>refactor</td>
-                <td>785</td>
+                <td>784</td>
             </tr>
             
             <tr>
@@ -28614,7 +28635,7 @@ if __name__ == &#34;__main__&#34;:</pre></td>
             
             <tr>
                 <td>cyclic-import</td>
-                <td>23</td>
+                <td>22</td>
             </tr>
             
         </table>
@@ -29079,7 +29100,7 @@ if __name__ == &#34;__main__&#34;:</pre></td>
             
             <tr>
                 <td>teaser.data.input.inputdata.weatherdata.__init__</td>
-                <td>377</td>
+                <td>376</td>
             </tr>
             
         </table>
@@ -29544,7 +29565,7 @@ if __name__ == &#34;__main__&#34;:</pre></td>
             
             <tr>
                 <td>teaser/data/input/inputdata/weatherdata/__init__.py</td>
-                <td>377</td>
+                <td>376</td>
             </tr>
             
         </table>
