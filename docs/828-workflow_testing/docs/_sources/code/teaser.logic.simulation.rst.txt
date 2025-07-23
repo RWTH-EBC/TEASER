@@ -3,8 +3,8 @@ teaser.logic.simulation package
 
 .. automodule:: teaser.logic.simulation
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Submodules
 ----------
@@ -14,5 +14,5 @@ teaser.logic.simulation.modelicainfo module
 
 .. automodule:: teaser.logic.simulation.modelicainfo
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

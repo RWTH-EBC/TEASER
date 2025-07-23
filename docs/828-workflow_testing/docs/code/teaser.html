@@ -15,7 +15,7 @@
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../_static/documentation_options.js?v=ca842793"></script>
-      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -344,7 +344,7 @@
 <p>This module includes the Project class, which is the API for TEASER.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="teaser.project.Project">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.project.</span></span><span class="sig-name descname"><span class="pre">Project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">load_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teaser.project.</span></span><span class="sig-name descname"><span class="pre">Project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">load_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Top class for TEASER projects it serves as an API</p>
 <p>The Project class is the top class for all TEASER projects and serves as an
@@ -687,7 +687,7 @@ used for urbanrenet</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="teaser.project.Project.add_residential_retrofit_combinations">
-<span class="sig-name descname"><span class="pre">add_residential_retrofit_combinations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retrofit_choices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">add_residential_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.add_residential_retrofit_combinations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.add_residential_retrofit_combinations" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_residential_retrofit_combinations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retrofit_choices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">add_residential_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.add_residential_retrofit_combinations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.add_residential_retrofit_combinations" title="Link to this definition"></a></dt>
 <dd><p>Generate residential buildings for all possible combinations of
 retrofit statuses for specified building elements.</p>
 <p>This function creates multiple variations of a residential building based
@@ -850,7 +850,7 @@ an alternative path can be specified as a full path</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="teaser.project.Project.instantiate_data_class">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">instantiate_data_class</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.instantiate_data_class"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.instantiate_data_class" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">instantiate_data_class</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.instantiate_data_class"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.instantiate_data_class" title="Link to this definition"></a></dt>
 <dd><p>Initialization of DataClass</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -878,32 +878,32 @@ an alternative path can be specified as a full path</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="teaser.project.Project.merge_windows_calc">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">merge_windows_calc</span></span><a class="headerlink" href="#teaser.project.Project.merge_windows_calc" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">merge_windows_calc</span></span><a class="headerlink" href="#teaser.project.Project.merge_windows_calc" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="teaser.project.Project.method_interzonal_export">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">method_interzonal_export</span></span><a class="headerlink" href="#teaser.project.Project.method_interzonal_export" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">method_interzonal_export</span></span><a class="headerlink" href="#teaser.project.Project.method_interzonal_export" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="teaser.project.Project.method_interzonal_material_enrichment">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">method_interzonal_material_enrichment</span></span><a class="headerlink" href="#teaser.project.Project.method_interzonal_material_enrichment" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">method_interzonal_material_enrichment</span></span><a class="headerlink" href="#teaser.project.Project.method_interzonal_material_enrichment" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="teaser.project.Project.name">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#teaser.project.Project.name" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#teaser.project.Project.name" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="teaser.project.Project.number_of_elements_calc">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">number_of_elements_calc</span></span><a class="headerlink" href="#teaser.project.Project.number_of_elements_calc" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">number_of_elements_calc</span></span><a class="headerlink" href="#teaser.project.Project.number_of_elements_calc" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="teaser.project.Project.process_export_vars">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">process_export_vars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">export_vars</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.process_export_vars"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.process_export_vars" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">process_export_vars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">export_vars</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/teaser/project.html#Project.process_export_vars"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teaser.project.Project.process_export_vars" title="Link to this definition"></a></dt>
 <dd><p>Process export vars to fit __Dymola_selections syntax.</p>
 </dd></dl>
 
@@ -1016,17 +1016,17 @@ Important for new calculation of static heat load.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="teaser.project.Project.t_soil_file_path">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">t_soil_file_path</span></span><a class="headerlink" href="#teaser.project.Project.t_soil_file_path" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">t_soil_file_path</span></span><a class="headerlink" href="#teaser.project.Project.t_soil_file_path" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="teaser.project.Project.used_library_calc">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">used_library_calc</span></span><a class="headerlink" href="#teaser.project.Project.used_library_calc" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">used_library_calc</span></span><a class="headerlink" href="#teaser.project.Project.used_library_calc" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="teaser.project.Project.weather_file_path">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">weather_file_path</span></span><a class="headerlink" href="#teaser.project.Project.weather_file_path" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">weather_file_path</span></span><a class="headerlink" href="#teaser.project.Project.weather_file_path" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>

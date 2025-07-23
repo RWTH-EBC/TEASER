@@ -3,8 +3,8 @@ teaser.data package
 
 .. automodule:: teaser.data
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Subpackages
 -----------
@@ -23,13 +23,13 @@ teaser.data.dataclass module
 
 .. automodule:: teaser.data.dataclass
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 teaser.data.utilities module
 ----------------------------
 
 .. automodule:: teaser.data.utilities
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
