@@ -134,6 +134,9 @@ class ThermalZone(object):
 
         self._number_of_floors = None
         self._height_of_floors = None
+        self._number_of_rooms = None
+        self._room_volumes = None
+        self._win_area_room_factors = None
 
         self._roof_area_attic_factor = 1
         self._ratio_ow_area_top_floor = None
@@ -1119,3 +1122,52 @@ class ThermalZone(object):
                 self._ratio_win_area_iw = value
             except:
                 raise ValueError("Can't convert ratio window area inner wall to float")
+
+    @property
+    def number_of_rooms(self):
+        """Returns the number of floors in the thermal zone."""
+        return self._number_of_rooms
+
+    @number_of_rooms.setter
+    def number_of_rooms(self, value):
+        """Sets the number of rooms in the thermal zone."""
+        if isinstance(value, int):
+            self._number_of_rooms = value
+        elif value is None:
+            self._number_of_rooms = 1  # Default to 1 if not set
+        else:
+            try:
+                value = int(value)
+                self._number_of_rooms = value
+            except ValueError:
+                raise ValueError("Can't convert number of rooms to integer")
+
+    @property
+    def win_area_room_factors(self):
+        """Returns the window area room factors for the thermal zone."""
+        return self._win_area_room_factors
+
+    @win_area_room_factors.setter
+    def win_area_room_factors(self, value):
+       """Sets the window area room factors for the thermal zone."""
+       if isinstance(value, list) and all(isinstance(i, list) and all(isinstance(j, float) for j in i) for i in value):
+           self._win_area_room_factors = value
+       elif value is None:
+           self._win_area_room_factors = [[1.0] for _ in range(self.number_of_rooms)]  # Default to equal factors
+       else:
+           raise ValueError("Window area room factors must be a list of lists with float entries")
+
+    @property
+    def room_volumes(self):
+        """Returns the room volumes for the thermal zone."""
+        return self._room_volumes
+
+    @room_volumes.setter
+    def room_volumes(self, value):
+        """Sets the room volumes for the thermal zone."""
+        if isinstance(value, list):
+            self._room_volumes = value
+        elif value is None:
+            self._room_volumes = [self.volume / self.number_of_rooms] * self.number_of_rooms  # Default to equal volumes
+        else:
+            raise ValueError(f"Room volumes must be a list of floats. But it is {type(value)} and {[type(i) for i in value]}.")
