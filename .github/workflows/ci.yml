@@ -5,19 +5,15 @@ on:
 
 jobs:
   ci:
-    uses: RWTH-EBC/ci_templates/.github/workflows/ci_pipeline.yml@main
+    uses: RWTH-EBC/ci_templates/.github/workflows/ci_pipeline.yml@development
     secrets:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
       GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
     with:
       PYTHON_VERSION: "3.13"
-      USE_PYLINT: true
-      USE_RUFF: true
-      BUILD_PACKAGE: true
-      GENERATE_DOCUMENTATION: true
-      USE_SEMANTIC_RELEASE: false
-      EXECUTE_TESTS: true
-      EXECUTE_COVERAGE_TEST: true
-      CONVERT_EXAMPLES: true
       EXTRA_REQUIREMENTS: '[report]'
       PYTHON_PACKAGE_NAME: 'teaser'
+      EXECUTE_TESTS: true
+      PYTHON_TEST_MATRIX: '["3.12", "3.13"]'
+      EXECUTE_COVERAGE_TEST: true
+      USE_DYMOLA: true
