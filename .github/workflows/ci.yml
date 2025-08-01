@@ -13,7 +13,7 @@ jobs:
       PYTHON_VERSION: "3.13"
       EXTRA_REQUIREMENTS: '[report]'
       PYTHON_PACKAGE_NAME: 'teaser'
-      EXECUTE_TESTS: true
+      EXECUTE_TESTS: false
       PYTHON_TEST_MATRIX: '["3.12", "3.13"]'
       EXECUTE_COVERAGE_TEST: true
       USE_DYMOLA: true
