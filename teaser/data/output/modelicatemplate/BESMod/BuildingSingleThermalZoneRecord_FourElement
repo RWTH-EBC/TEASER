@@ -24,6 +24,7 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     AWin = ${get_list(zone.model_attr.window_areas)},
     ATransparent = ${get_list(zone.model_attr.transparent_areas)},
     FacATransparentPerRoom = ${get_list(zone.win_area_room_factors)},
+    splitFactorSolRad = ${get_list(zone.split_factor_sol_rad)},
     hConWin = ${zone.model_attr.alpha_conv_inner_win},
     RWin = ${zone.model_attr.r1_win},
     gWin = ${zone.model_attr.weighted_g_value},

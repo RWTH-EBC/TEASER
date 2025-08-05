@@ -137,6 +137,7 @@ class ThermalZone(object):
         self._number_of_rooms = None
         self._room_volumes = None
         self._win_area_room_factors = None
+        self._split_factor_sol_rad = None
 
         self._roof_area_attic_factor = 1
         self._ratio_ow_area_top_floor = None
@@ -1171,3 +1172,12 @@ class ThermalZone(object):
             self._room_volumes = [self.volume / self.number_of_rooms] * self.number_of_rooms  # Default to equal volumes
         else:
             raise ValueError(f"Room volumes must be a list of floats. But it is {type(value)} and {[type(i) for i in value]}.")
+
+    @property
+    def split_factor_sol_rad(self):
+        """Returns the split factors for the solar radiation thru windows on the inner surfaces"""
+        return self._split_factor_sol_rad
+
+    @split_factor_sol_rad.setter
+    def split_factor_sol_rad(self, value):
+        self._split_factor_sol_rad = value
