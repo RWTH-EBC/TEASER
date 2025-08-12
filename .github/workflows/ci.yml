@@ -21,3 +21,4 @@ jobs:
       CONVERT_EXAMPLES: true
       EXTRA_REQUIREMENTS: '[report]'
       PYTHON_PACKAGE_NAME: 'teaser'
+      PYPI_RELEASE: true
