@@ -103,6 +103,15 @@ class AixLib(object):
                     + zone.model_attr.area_rt
                     + zone.model_attr.area_win
                 )
+            elif type(zone.model_attr).__name__ == "FiveElement":
+                surf_area_temp += (
+                    zone.model_attr.area_ow
+                    + zone.model_attr.area_iw
+                    + zone.model_attr.area_gf
+                    + zone.model_attr.area_rt
+                    + zone.model_attr.area_win
+                    + sum(zone.model_attr.area_nzb)
+                )
 
         self.total_surface_area = surf_area_temp
 

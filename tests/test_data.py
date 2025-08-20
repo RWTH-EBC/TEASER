@@ -10,10 +10,16 @@ from teaser.logic.buildingobjects.calculation.two_element import TwoElement
 from teaser.project import Project
 from teaser.data.utilities import ConstructionData
 from teaser.data.dataclass import DataClass
+from teaser.logic.buildingobjects.buildingphysics.interzonalfloor \
+    import InterzonalFloor
+from teaser.logic.buildingobjects.buildingphysics.interzonalceiling \
+    import InterzonalCeiling
+from teaser.logic.buildingobjects.buildingphysics.interzonalwall \
+    import InterzonalWall
 import math
 import os
 import helptest
-import warnings as warnings
+from pytest import approx
 
 prj = Project(False)
 prj.data = DataClass(construction_data=ConstructionData.iwu_heavy)
@@ -777,6 +783,30 @@ class Test_teaser(object):
         prj.calc_all_buildings()
         prj.export_aixlib(path=utilities.get_default_path())
 
+        prj.number_of_elements_calc = 5
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings(raise_errors=True)
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 5
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.export_aixlib(building_model="Test", zone_model="Test", corG="Test")
+
+        prj.number_of_elements_calc = 5
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.buildings.append(prj.buildings[-1])
+
+        prj.number_of_elements_calc = 5
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.export_aixlib(path=utilities.get_default_path())
+
     def test_export_ibpsa(self):
         """test of export_ibpsa, no calculation verification"""
 
@@ -855,6 +885,18 @@ class Test_teaser(object):
         prj.calc_all_buildings()
         prj.export_ibpsa(path=utilities.get_default_path())
         prj.set_default()
+
+    def test_export_aixlib_five(self):
+        """test AixLib export with five elements, no calculation verification"""
+
+        prj.set_default(load_data=True)
+        helptest.building_test2(prj)
+        helptest.interzonal_test2(prj)
+        prj.number_of_elements_calc = 5
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings(raise_errors=True)
+        prj.export_aixlib(path=utilities.get_default_path() + '_2')
 
     def test_instantiate_data_class(self):
         """test of instantiate_data_class"""
@@ -1315,34 +1357,42 @@ class Test_teaser(object):
         calc_attr._sum_window_elements()
 
         # outerwall
-        assert round(calc_attr.ua_value_ow, 16) == 135.5818558809656
-        assert round(calc_attr.area_ow, 1) == 328.0
-        assert round(calc_attr.r_conv_inner_ow, 19) == 0.0016512549537648611
-        assert round(calc_attr.r_rad_inner_ow, 18) == 0.000609756097560976
-        assert round(calc_attr.r_comb_inner_ow, 20) == 0.00044531528322052017
-        assert round(calc_attr.r_conv_outer_ow, 20) == 0.00026595744680851064
-        assert round(calc_attr.r_rad_outer_ow, 18) == 0.001063829787234043
-        assert round(calc_attr.r_comb_outer_ow, 20) == 0.0002127659574468085
-        assert round(calc_attr.alpha_conv_inner_ow, 5) == 1.84634
-        assert round(calc_attr.alpha_rad_inner_ow, 5) == 5.0
-        assert round(calc_attr.alpha_comb_inner_ow, 5) == 6.84634
-        assert round(calc_attr.alpha_conv_outer_ow, 1) == 20.0
-        assert round(calc_attr.alpha_rad_outer_ow, 5) == 5.0
-        assert round(calc_attr.alpha_comb_outer_ow, 1) == 25.0
+        assert calc_attr.ua_value_ow == approx(135.5818558809656, abs=1e-14)
+        assert calc_attr.area_ow == approx(328.0, abs=0.1)
+        assert calc_attr.r_conv_inner_ow == approx(0.0016512549537648611,
+                                                   abs=1e-19)
+        assert calc_attr.r_rad_inner_ow == approx(0.000609756097560976,
+                                                  abs=1e-18)
+        assert calc_attr.r_comb_inner_ow == approx(0.00044531528322052017,
+                                                   abs=1e-20)
+        assert calc_attr.r_conv_outer_ow == approx(0.00026595744680851064,
+                                                   abs=1e-20)
+        assert calc_attr.r_rad_outer_ow == approx(0.001063829787234043,
+                                                  abs=1e-18)
+        assert calc_attr.r_comb_outer_ow == approx(0.0002127659574468085,
+                                                   abs=1e-20)
+        assert calc_attr.alpha_conv_inner_ow == approx(1.84634, abs=0.00001)
+        assert calc_attr.alpha_rad_inner_ow == approx(5.0, abs=0.00001)
+        assert calc_attr.alpha_comb_inner_ow == approx(6.84634, abs=0.00001)
+        assert calc_attr.alpha_conv_outer_ow == approx(20.0, abs=0.1)
+        assert calc_attr.alpha_rad_outer_ow == approx(5.0, abs=0.00001)
+        assert calc_attr.alpha_comb_outer_ow == approx(25.0, abs=0.1)
 
         # window
-        assert round(calc_attr.ua_value_win, 16) == 32.87895310796074
-        assert round(calc_attr.area_win, 1) == 18.0
-        assert round(calc_attr.r_conv_inner_win, 19) == 0.032679738562091505
-        assert round(calc_attr.r_rad_inner_win, 4) == 0.0111
-        assert round(calc_attr.r_comb_inner_win, 19) == 0.008291873963515755
-        assert round(calc_attr.r_conv_outer_win, 5) == 0.00278
-        assert round(calc_attr.r_rad_outer_win, 4) == 0.0111
-        assert round(calc_attr.r_comb_outer_win, 4) == 0.0022
-        assert round(calc_attr.alpha_conv_inner_win, 1) == 1.7
-        assert round(calc_attr.alpha_comb_outer_win, 1) == 25.0
-        assert round(calc_attr.alpha_conv_outer_win, 1) == 20.0
-        assert round(calc_attr.weighted_g_value, 3) == 0.789
+        assert calc_attr.ua_value_win == approx(32.87895310796074, abs=1e-14)
+        assert calc_attr.area_win == approx(18.0, abs=0.1)
+        assert calc_attr.r_conv_inner_win == approx(0.032679738562091505,
+                                                    abs=1e-19)
+        assert calc_attr.r_rad_inner_win == approx(0.0111, abs=0.0001)
+        assert calc_attr.r_comb_inner_win == approx(0.008291873963515755,
+                                                    abs=1e-19)
+        assert calc_attr.r_conv_outer_win == approx(0.00278, abs=0.00001)
+        assert calc_attr.r_rad_outer_win == approx(0.0111, abs=0.0001)
+        assert calc_attr.r_comb_outer_win == approx(0.0022, abs=0.0001)
+        assert calc_attr.alpha_conv_inner_win == approx(1.7, abs=0.1)
+        assert calc_attr.alpha_comb_outer_win == approx(25.0, abs=0.1)
+        assert calc_attr.alpha_conv_outer_win == approx(20.0, abs=0.1)
+        assert calc_attr.weighted_g_value == approx(0.789, abs=0.001)
 
     def test_calc_chain_matrix_one(self):
         """test of calc_chain_matrix"""
@@ -1412,45 +1462,55 @@ class Test_teaser(object):
         calc_attr._sum_window_elements()
 
         # innerwall
-
-        assert round(calc_attr.ua_value_iw, 16) == 14.286493860845841
-        assert round(calc_attr.area_iw, 1) == 34.0
-        assert round(calc_attr.r_conv_inner_iw, 18) == 0.010893246187363833
-        assert round(calc_attr.r_rad_inner_iw, 19) == 0.0058823529411764705
-        assert round(calc_attr.r_comb_inner_iw, 19) == 0.003819709702062643
-        assert round(calc_attr.alpha_conv_inner_iw, 1) == 2.7
-        assert round(calc_attr.alpha_rad_inner_iw, 1) == 5.0
-        assert round(calc_attr.alpha_comb_inner_iw, 1) == 7.7
+        assert calc_attr.ua_value_iw == approx(14.286493860845841, abs=1e-14)
+        assert calc_attr.area_iw == approx(34.0, abs=0.1)
+        assert calc_attr.r_conv_inner_iw == approx(0.010893246187363833,
+                                                   abs=1e-18)
+        assert calc_attr.r_rad_inner_iw == approx(0.0058823529411764705,
+                                                  abs=1e-19)
+        assert calc_attr.r_comb_inner_iw == approx(0.003819709702062643,
+                                                   abs=1e-19)
+        assert calc_attr.alpha_conv_inner_iw == approx(2.7, abs=0.1)
+        assert calc_attr.alpha_rad_inner_iw == approx(5.0, abs=0.1)
+        assert calc_attr.alpha_comb_inner_iw == approx(7.7, abs=0.1)
 
         # outerwall
-        assert round(calc_attr.ua_value_ow, 16) == 135.5818558809656
-        assert round(calc_attr.area_ow, 1) == 328.0
-        assert round(calc_attr.r_conv_inner_ow, 19) == 0.0016512549537648611
-        assert round(calc_attr.r_rad_inner_ow, 18) == 0.000609756097560976
-        assert round(calc_attr.r_comb_inner_ow, 20) == 0.00044531528322052017
-        assert round(calc_attr.r_conv_outer_ow, 20) == 0.00026595744680851064
-        assert round(calc_attr.r_rad_outer_ow, 18) == 0.001063829787234043
-        assert round(calc_attr.r_comb_outer_ow, 20) == 0.0002127659574468085
-        assert round(calc_attr.alpha_conv_inner_ow, 5) == 1.84634
-        assert round(calc_attr.alpha_rad_inner_ow, 5) == 5.0
-        assert round(calc_attr.alpha_comb_inner_ow, 5) == 6.84634
-        assert round(calc_attr.alpha_conv_outer_ow, 1) == 20.0
-        assert round(calc_attr.alpha_rad_outer_ow, 5) == 5.0
-        assert round(calc_attr.alpha_comb_outer_ow, 1) == 25.0
+        assert calc_attr.ua_value_ow == approx(135.5818558809656, abs=1e-14)
+        assert calc_attr.area_ow == approx(328.0, abs=0.1)
+        assert calc_attr.r_conv_inner_ow == approx(0.0016512549537648611,
+                                                   abs=1e-19)
+        assert calc_attr.r_rad_inner_ow == approx(0.000609756097560976,
+                                                  abs=1e-18)
+        assert calc_attr.r_comb_inner_ow == approx(0.00044531528322052017,
+                                                   abs=1e-20)
+        assert calc_attr.r_conv_outer_ow == approx(0.00026595744680851064,
+                                                   abs=1e-20)
+        assert calc_attr.r_rad_outer_ow == approx(0.001063829787234043,
+                                                  abs=1e-18)
+        assert calc_attr.r_comb_outer_ow == approx(0.0002127659574468085,
+                                                   abs=1e-20)
+        assert calc_attr.alpha_conv_inner_ow == approx(1.84634, abs=0.00001)
+        assert calc_attr.alpha_rad_inner_ow == approx(5.0, abs=0.00001)
+        assert calc_attr.alpha_comb_inner_ow == approx(6.84634, abs=0.00001)
+        assert calc_attr.alpha_conv_outer_ow == approx(20.0, abs=0.1)
+        assert calc_attr.alpha_rad_outer_ow == approx(5.0, abs=0.00001)
+        assert calc_attr.alpha_comb_outer_ow == approx(25.0, abs=0.1)
 
         # window
-        assert round(calc_attr.ua_value_win, 16) == 32.87895310796074
-        assert round(calc_attr.area_win, 1) == 18.0
-        assert round(calc_attr.r_conv_inner_win, 19) == 0.032679738562091505
-        assert round(calc_attr.r_rad_inner_win, 4) == 0.0111
-        assert round(calc_attr.r_comb_inner_win, 19) == 0.008291873963515755
-        assert round(calc_attr.r_conv_outer_win, 5) == 0.00278
-        assert round(calc_attr.r_rad_outer_win, 4) == 0.0111
-        assert round(calc_attr.r_comb_outer_win, 4) == 0.0022
-        assert round(calc_attr.alpha_conv_inner_win, 1) == 1.7
-        assert round(calc_attr.alpha_comb_outer_win, 1) == 25.0
-        assert round(calc_attr.alpha_conv_outer_win, 1) == 20.0
-        assert round(calc_attr.weighted_g_value, 3) == 0.789
+        assert calc_attr.ua_value_win == approx(32.87895310796074, abs=1e-14)
+        assert calc_attr.area_win == approx(18.0, abs=0.1)
+        assert calc_attr.r_conv_inner_win == approx(0.032679738562091505,
+                                                    abs=1e-19)
+        assert calc_attr.r_rad_inner_win == approx(0.0111, abs=0.0001)
+        assert calc_attr.r_comb_inner_win == approx(0.008291873963515755,
+                                                    abs=1e-19)
+        assert calc_attr.r_conv_outer_win == approx(0.00278, abs=0.00001)
+        assert calc_attr.r_rad_outer_win == approx(0.0111, abs=0.0001)
+        assert calc_attr.r_comb_outer_win == approx(0.0022, abs=0.0001)
+        assert calc_attr.alpha_conv_inner_win == approx(1.7, abs=0.1)
+        assert calc_attr.alpha_comb_outer_win == approx(25.0, abs=0.1)
+        assert calc_attr.alpha_conv_outer_win == approx(20.0, abs=0.1)
+        assert calc_attr.weighted_g_value == approx(0.789, abs=0.001)
 
     def test_calc_chain_matrix_two(self):
         """test of calc_chain_matrix"""
@@ -1532,55 +1592,68 @@ class Test_teaser(object):
         calc_attr._sum_window_elements()
 
         # innerwall
-
-        assert round(calc_attr.ua_value_iw, 16) == 14.286493860845841
-        assert round(calc_attr.area_iw, 1) == 34.0
-        assert round(calc_attr.r_conv_inner_iw, 18) == 0.010893246187363833
-        assert round(calc_attr.r_rad_inner_iw, 19) == 0.0058823529411764705
-        assert round(calc_attr.r_comb_inner_iw, 19) == 0.003819709702062643
-        assert round(calc_attr.alpha_conv_inner_iw, 1) == 2.7
-        assert round(calc_attr.alpha_rad_inner_iw, 1) == 5.0
-        assert round(calc_attr.alpha_comb_inner_iw, 1) == 7.7
+        assert calc_attr.ua_value_iw == approx(14.286493860845841, abs=1e-14)
+        assert calc_attr.area_iw == approx(34.0, abs=0.1)
+        assert calc_attr.r_conv_inner_iw == approx(0.010893246187363833,
+                                                   abs=1e-18)
+        assert calc_attr.r_rad_inner_iw == approx(0.0058823529411764705,
+                                                  abs=1e-19)
+        assert calc_attr.r_comb_inner_iw == approx(0.003819709702062643,
+                                                   abs=1e-19)
+        assert calc_attr.alpha_conv_inner_iw == approx(2.7, abs=0.1)
+        assert calc_attr.alpha_rad_inner_iw == approx(5.0, abs=0.1)
+        assert calc_attr.alpha_comb_inner_iw == approx(7.7, abs=0.1)
 
         # outerwall
-        assert round(calc_attr.ua_value_ow, 16) == 77.23037843150993
-        assert round(calc_attr.area_ow, 1) == 188.0
-        assert round(calc_attr.r_conv_inner_ow, 19) == 0.0027203482045701846
-        assert round(calc_attr.r_rad_inner_ow, 18) == 0.001063829787234043
-        assert round(calc_attr.r_comb_inner_ow, 20) == 0.0007647598654022638
-        assert round(calc_attr.r_conv_outer_ow, 20) == 0.00026595744680851064
-        assert round(calc_attr.r_rad_outer_ow, 18) == 0.001063829787234043
-        assert round(calc_attr.r_comb_outer_ow, 20) == 0.0002127659574468085
-        assert round(calc_attr.alpha_conv_inner_ow, 5) == 1.95532
-        assert round(calc_attr.alpha_rad_inner_ow, 5) == 5.0
-        assert round(calc_attr.alpha_comb_inner_ow, 5) == 6.95532
-        assert round(calc_attr.alpha_conv_outer_ow, 1) == 20.0
-        assert round(calc_attr.alpha_rad_outer_ow, 5) == 5.0
-        assert round(calc_attr.alpha_comb_outer_ow, 1) == 25.0
+        assert calc_attr.ua_value_ow == approx(77.23037843150993, abs=1e-13)
+        assert calc_attr.area_ow == approx(188.0, abs=0.1)
+        assert calc_attr.r_conv_inner_ow == approx(0.0027203482045701846,
+                                                   abs=1e-19)
+        assert calc_attr.r_rad_inner_ow == approx(0.001063829787234043,
+                                                  abs=1e-18)
+        assert calc_attr.r_comb_inner_ow == approx(0.0007647598654022638,
+                                                   abs=1e-20)
+        assert calc_attr.r_conv_outer_ow == approx(0.00026595744680851064,
+                                                   abs=1e-20)
+        assert calc_attr.r_rad_outer_ow == approx(0.001063829787234043,
+                                                  abs=1e-18)
+        assert calc_attr.r_comb_outer_ow == approx(0.0002127659574468085,
+                                                   abs=1e-20)
+        assert calc_attr.alpha_conv_inner_ow == approx(1.95532, abs=0.00001)
+        assert calc_attr.alpha_rad_inner_ow == approx(5.0, abs=0.00001)
+        assert calc_attr.alpha_comb_inner_ow == approx(6.95532, abs=0.00001)
+        assert calc_attr.alpha_conv_outer_ow == approx(20.0, abs=0.1)
+        assert calc_attr.alpha_rad_outer_ow == approx(5.0, abs=0.00001)
+        assert calc_attr.alpha_comb_outer_ow == approx(25.0, abs=0.1)
 
         # groundfloor
-        assert round(calc_attr.ua_value_gf, 16) == 58.351477449455686
-        assert round(calc_attr.area_gf, 1) == 140.0
-        assert round(calc_attr.r_conv_inner_gf, 19) == 0.004201680672268907
-        assert round(calc_attr.r_rad_inner_gf, 18) == 0.001428571428571429
-        assert round(calc_attr.r_comb_inner_gf, 20) == 0.0010660980810234541
-        assert round(calc_attr.alpha_conv_inner_gf, 5) == 1.7
-        assert round(calc_attr.alpha_rad_inner_gf, 5) == 5.0
-        assert round(calc_attr.alpha_comb_inner_gf, 5) == 6.7
+        assert calc_attr.ua_value_gf == approx(58.351477449455686, abs=1e-14)
+        assert calc_attr.area_gf == approx(140.0, abs=0.1)
+        assert calc_attr.r_conv_inner_gf == approx(0.004201680672268907,
+                                                   abs=1e-19)
+        assert calc_attr.r_rad_inner_gf == approx(0.001428571428571429,
+                                                  abs=1e-18)
+        assert calc_attr.r_comb_inner_gf == approx(0.0010660980810234541,
+                                                   abs=1e-20)
+        assert calc_attr.alpha_conv_inner_gf == approx(1.7, abs=0.00001)
+        assert calc_attr.alpha_rad_inner_gf == approx(5.0, abs=0.00001)
+        assert calc_attr.alpha_comb_inner_gf == approx(6.7, abs=0.00001)
 
         # window
-        assert round(calc_attr.ua_value_win, 16) == 32.87895310796074
-        assert round(calc_attr.area_win, 1) == 18.0
-        assert round(calc_attr.r_conv_inner_win, 19) == 0.032679738562091505
-        assert round(calc_attr.r_rad_inner_win, 4) == 0.0111
-        assert round(calc_attr.r_comb_inner_win, 19) == 0.008291873963515755
-        assert round(calc_attr.r_conv_outer_win, 5) == 0.00278
-        assert round(calc_attr.r_rad_outer_win, 4) == 0.0111
-        assert round(calc_attr.r_comb_outer_win, 4) == 0.0022
-        assert round(calc_attr.alpha_conv_inner_win, 1) == 1.7
-        assert round(calc_attr.alpha_comb_outer_win, 1) == 25.0
-        assert round(calc_attr.alpha_conv_outer_win, 1) == 20.0
-        assert round(calc_attr.weighted_g_value, 3) == 0.789
+        assert calc_attr.ua_value_win == approx(32.87895310796074, abs=1e-14)
+        assert calc_attr.area_win == approx(18.0, abs=0.1)
+        assert calc_attr.r_conv_inner_win == approx(0.032679738562091505,
+                                                    abs=1e-19)
+        assert calc_attr.r_rad_inner_win == approx(0.0111, abs=0.0001)
+        assert calc_attr.r_comb_inner_win == approx(0.008291873963515755,
+                                                    abs=1e-19)
+        assert calc_attr.r_conv_outer_win == approx(0.00278, abs=0.00001)
+        assert calc_attr.r_rad_outer_win == approx(0.0111, abs=0.0001)
+        assert calc_attr.r_comb_outer_win == approx(0.0022, abs=0.0001)
+        assert calc_attr.alpha_conv_inner_win == approx(1.7, abs=0.1)
+        assert calc_attr.alpha_comb_outer_win == approx(25.0, abs=0.1)
+        assert calc_attr.alpha_conv_outer_win == approx(20.0, abs=0.1)
+        assert calc_attr.weighted_g_value == approx(0.789, abs=0.001)
 
     def test_calc_chain_matrix_three(self):
         """test of calc_chain_matrix"""
@@ -1658,71 +1731,90 @@ class Test_teaser(object):
         calc_attr._sum_window_elements()
 
         # innerwall
-
-        assert round(calc_attr.ua_value_iw, 16) == 14.286493860845841
-        assert round(calc_attr.area_iw, 1) == 34.0
-        assert round(calc_attr.r_conv_inner_iw, 18) == 0.010893246187363833
-        assert round(calc_attr.r_rad_inner_iw, 19) == 0.0058823529411764705
-        assert round(calc_attr.r_comb_inner_iw, 19) == 0.003819709702062643
-        assert round(calc_attr.alpha_conv_inner_iw, 1) == 2.7
-        assert round(calc_attr.alpha_rad_inner_iw, 1) == 5.0
-        assert round(calc_attr.alpha_comb_inner_iw, 1) == 7.7
+        assert calc_attr.ua_value_iw == approx(14.286493860845841, abs=1e-14)
+        assert calc_attr.area_iw == approx(34.0, abs=0.1)
+        assert calc_attr.r_conv_inner_iw == approx(0.010893246187363833,
+                                                   abs=1e-18)
+        assert calc_attr.r_rad_inner_iw == approx(0.0058823529411764705,
+                                                  abs=1e-19)
+        assert calc_attr.r_comb_inner_iw == approx(0.003819709702062643,
+                                                   abs=1e-19)
+        assert calc_attr.alpha_conv_inner_iw == approx(2.7, abs=0.1)
+        assert calc_attr.alpha_rad_inner_iw == approx(5.0, abs=0.1)
+        assert calc_attr.alpha_comb_inner_iw == approx(7.7, abs=0.1)
 
         # outerwall
-        assert round(calc_attr.ua_value_ow, 16) == 19.83577523748189
-        assert round(calc_attr.area_ow, 1) == 48.0
-        assert round(calc_attr.r_conv_inner_ow, 19) == 0.007716049382716048
-        assert round(calc_attr.r_rad_inner_ow, 18) == 0.004166666666666667
-        assert round(calc_attr.r_comb_inner_ow, 20) == 0.0027056277056277055
-        assert round(calc_attr.r_conv_outer_ow, 20) == 0.0010416666666666667
-        assert round(calc_attr.r_rad_outer_ow, 18) == 0.004166666666666667
-        assert round(calc_attr.r_comb_outer_ow, 20) == 0.0008333333333333334
-        assert round(calc_attr.alpha_conv_inner_ow, 5) == 2.7
-        assert round(calc_attr.alpha_rad_inner_ow, 5) == 5.0
-        assert round(calc_attr.alpha_comb_inner_ow, 5) == 7.7
-        assert round(calc_attr.alpha_conv_outer_ow, 1) == 20.0
-        assert round(calc_attr.alpha_rad_outer_ow, 5) == 5.0
-        assert round(calc_attr.alpha_comb_outer_ow, 1) == 25.0
+        assert calc_attr.ua_value_ow == approx(19.83577523748189, abs=1e-14)
+        assert calc_attr.area_ow == approx(48.0, abs=0.1)
+        assert calc_attr.r_conv_inner_ow == approx(0.007716049382716048,
+                                                   abs=1e-19)
+        assert calc_attr.r_rad_inner_ow == approx(0.004166666666666667,
+                                                  abs=1e-18)
+        assert calc_attr.r_comb_inner_ow == approx(0.0027056277056277055,
+                                                   abs=1e-20)
+        assert calc_attr.r_conv_outer_ow == approx(0.0010416666666666667,
+                                                   abs=1e-20)
+        assert calc_attr.r_rad_outer_ow == approx(0.004166666666666667,
+                                                  abs=1e-18)
+        assert calc_attr.r_comb_outer_ow == approx(0.0008333333333333334,
+                                                   abs=1e-20)
+        assert calc_attr.alpha_conv_inner_ow == approx(2.7, abs=0.00001)
+        assert calc_attr.alpha_rad_inner_ow == approx(5.0, abs=0.00001)
+        assert calc_attr.alpha_comb_inner_ow == approx(7.7, abs=0.00001)
+        assert calc_attr.alpha_conv_outer_ow == approx(20.0, abs=0.1)
+        assert calc_attr.alpha_rad_outer_ow == approx(5.0, abs=0.00001)
+        assert calc_attr.alpha_comb_outer_ow == approx(25.0, abs=0.1)
 
         # groundfloor
-        assert round(calc_attr.ua_value_gf, 16) == 58.351477449455686
-        assert round(calc_attr.area_gf, 1) == 140.0
-        assert round(calc_attr.r_conv_inner_gf, 19) == 0.004201680672268907
-        assert round(calc_attr.r_rad_inner_gf, 18) == 0.001428571428571429
-        assert round(calc_attr.r_comb_inner_gf, 20) == 0.0010660980810234541
-        assert round(calc_attr.alpha_conv_inner_gf, 5) == 1.7
-        assert round(calc_attr.alpha_rad_inner_gf, 5) == 5.0
-        assert round(calc_attr.alpha_comb_inner_gf, 5) == 6.7
+        assert calc_attr.ua_value_gf == approx(58.351477449455686, abs=1e-14)
+        assert calc_attr.area_gf == approx(140.0, abs=0.1)
+        assert calc_attr.r_conv_inner_gf == approx(0.004201680672268907,
+                                                   abs=1e-19)
+        assert calc_attr.r_rad_inner_gf == approx(0.001428571428571429,
+                                                  abs=1e-18)
+        assert calc_attr.r_comb_inner_gf == approx(0.0010660980810234541,
+                                                   abs=1e-20)
+        assert calc_attr.alpha_conv_inner_gf == approx(1.7, abs=0.00001)
+        assert calc_attr.alpha_rad_inner_gf == approx(5.0, abs=0.00001)
+        assert calc_attr.alpha_comb_inner_gf == approx(6.7, abs=0.00001)
 
-        # outerwall
-        assert round(calc_attr.ua_value_rt, 16) == 57.394603194028036
-        assert round(calc_attr.area_rt, 1) == 140.0
-        assert round(calc_attr.r_conv_inner_rt, 19) == 0.004201680672268907
-        assert round(calc_attr.r_rad_inner_rt, 18) == 0.001428571428571429
-        assert round(calc_attr.r_comb_inner_rt, 20) == 0.0010660980810234541
-        assert round(calc_attr.r_conv_outer_rt, 20) == 0.00035714285714285714
-        assert round(calc_attr.r_rad_outer_rt, 18) == 0.001428571428571429
-        assert round(calc_attr.r_comb_outer_rt, 20) == 0.00028571428571428574
-        assert round(calc_attr.alpha_conv_inner_rt, 5) == 1.7
-        assert round(calc_attr.alpha_rad_inner_rt, 5) == 5.0
-        assert round(calc_attr.alpha_comb_inner_rt, 5) == 6.7
-        assert round(calc_attr.alpha_conv_outer_rt, 1) == 20.0
-        assert round(calc_attr.alpha_rad_outer_rt, 5) == 5.0
-        assert round(calc_attr.alpha_comb_outer_rt, 1) == 25.0
+        # roof/top (rt)
+        assert calc_attr.ua_value_rt == approx(57.394603194028036, abs=1e-14)
+        assert calc_attr.area_rt == approx(140.0, abs=0.1)
+        assert calc_attr.r_conv_inner_rt == approx(0.004201680672268907,
+                                                   abs=1e-19)
+        assert calc_attr.r_rad_inner_rt == approx(0.001428571428571429,
+                                                  abs=1e-18)
+        assert calc_attr.r_comb_inner_rt == approx(0.0010660980810234541,
+                                                   abs=1e-20)
+        assert calc_attr.r_conv_outer_rt == approx(0.00035714285714285714,
+                                                   abs=1e-20)
+        assert calc_attr.r_rad_outer_rt == approx(0.001428571428571429,
+                                                  abs=1e-18)
+        assert calc_attr.r_comb_outer_rt == approx(0.00028571428571428574,
+                                                   abs=1e-20)
+        assert calc_attr.alpha_conv_inner_rt == approx(1.7, abs=0.00001)
+        assert calc_attr.alpha_rad_inner_rt == approx(5.0, abs=0.00001)
+        assert calc_attr.alpha_comb_inner_rt == approx(6.7, abs=0.00001)
+        assert calc_attr.alpha_conv_outer_rt == approx(20.0, abs=0.1)
+        assert calc_attr.alpha_rad_outer_rt == approx(5.0, abs=0.00001)
+        assert calc_attr.alpha_comb_outer_rt == approx(25.0, abs=0.1)
 
         # window
-        assert round(calc_attr.ua_value_win, 16) == 32.87895310796074
-        assert round(calc_attr.area_win, 1) == 18.0
-        assert round(calc_attr.r_conv_inner_win, 19) == 0.032679738562091505
-        assert round(calc_attr.r_rad_inner_win, 4) == 0.0111
-        assert round(calc_attr.r_comb_inner_win, 19) == 0.008291873963515755
-        assert round(calc_attr.r_conv_outer_win, 5) == 0.00278
-        assert round(calc_attr.r_rad_outer_win, 4) == 0.0111
-        assert round(calc_attr.r_comb_outer_win, 4) == 0.0022
-        assert round(calc_attr.alpha_conv_inner_win, 1) == 1.7
-        assert round(calc_attr.alpha_comb_outer_win, 1) == 25.0
-        assert round(calc_attr.alpha_conv_outer_win, 1) == 20.0
-        assert round(calc_attr.weighted_g_value, 3) == 0.789
+        assert calc_attr.ua_value_win == approx(32.87895310796074, abs=1e-14)
+        assert calc_attr.area_win == approx(18.0, abs=0.1)
+        assert calc_attr.r_conv_inner_win == approx(0.032679738562091505,
+                                                    abs=1e-19)
+        assert calc_attr.r_rad_inner_win == approx(0.0111, abs=0.0001)
+        assert calc_attr.r_comb_inner_win == approx(0.008291873963515755,
+                                                    abs=1e-19)
+        assert calc_attr.r_conv_outer_win == approx(0.00278, abs=0.00001)
+        assert calc_attr.r_rad_outer_win == approx(0.0111, abs=0.0001)
+        assert calc_attr.r_comb_outer_win == approx(0.0022, abs=0.0001)
+        assert calc_attr.alpha_conv_inner_win == approx(1.7, abs=0.1)
+        assert calc_attr.alpha_comb_outer_win == approx(25.0, abs=0.1)
+        assert calc_attr.alpha_conv_outer_win == approx(20.0, abs=0.1)
+        assert calc_attr.weighted_g_value == approx(0.789, abs=0.001)
 
     def test_calc_chain_matrix_four(self):
         """test of calc_chain_matrix"""
@@ -1765,6 +1857,576 @@ class Test_teaser(object):
         )
         assert round(r1_iw, 13) == 0.0097195611408
         assert round(c1_iw, 6) == 319983.518743
+
+    def test_sum_building_elements_one_with_interzonals(self):
+        """test of combine_building_elements"""
+        prj.set_default()
+        helptest.building_test2(prj)
+        helptest.interzonal_test2(prj, connect_to_index=0, add_heated=False)
+        helptest.interzonal_test2(prj, connect_to_index=0, add_heated=True)
+
+        from teaser.logic.buildingobjects.calculation.one_element import OneElement
+
+        therm_zone = prj.buildings[-1].thermal_zones[0]
+
+        calc_attr = OneElement(therm_zone, merge_windows=False, t_bt=5)
+
+        helplist = (
+            therm_zone.outer_walls
+            + therm_zone.rooftops
+            + therm_zone.ground_floors
+            + therm_zone.inner_walls
+            + therm_zone.ceilings
+            + therm_zone.floors
+            + therm_zone.windows
+            + therm_zone.interzonal_elements
+        )
+
+        for element in helplist:
+            element.calc_equivalent_res()
+            element.calc_ua_value()
+
+        calc_attr._sum_outer_wall_elements()
+        calc_attr._sum_window_elements()
+
+        # outerwall
+        assert round(calc_attr.ua_value_ow, 7) == 144.1972679
+        assert round(calc_attr.area_ow, 1) == 348.0
+        assert round(calc_attr.r_conv_inner_ow, 9) == 0.001539409
+        assert round(calc_attr.r_rad_inner_ow, 9) == 0.000574713
+        assert round(calc_attr.r_comb_inner_ow, 8) == 0.00041848
+        assert round(calc_attr.r_conv_outer_ow, 8) == 0.00026288
+        assert round(calc_attr.r_rad_outer_ow, 8) == 0.00096154
+        assert round(calc_attr.r_comb_outer_ow, 8) == 0.00020644
+        assert round(calc_attr.alpha_conv_inner_ow, 5) == 1.86667
+        assert round(calc_attr.alpha_rad_inner_ow, 5) == 5.0
+        assert round(calc_attr.alpha_comb_inner_ow, 5) == 6.86667
+        assert round(calc_attr.alpha_conv_outer_ow, 7) == 18.2884615
+        assert round(calc_attr.alpha_rad_outer_ow, 5) == 5.0
+        assert round(calc_attr.alpha_comb_outer_ow, 7) == 23.2884615
+
+        # window
+        assert round(calc_attr.ua_value_win, 16) == 32.87895310796074
+        assert round(calc_attr.area_win, 1) == 18.0
+        assert round(calc_attr.r_conv_inner_win, 19) == 0.032679738562091505
+        assert round(calc_attr.r_rad_inner_win, 4) == 0.0111
+        assert round(calc_attr.r_comb_inner_win, 19) == 0.008291873963515755
+        assert round(calc_attr.r_conv_outer_win, 5) == 0.00278
+        assert round(calc_attr.r_rad_outer_win, 4) == 0.0111
+        assert round(calc_attr.r_comb_outer_win, 4) == 0.0022
+        assert round(calc_attr.alpha_conv_inner_win, 1) == 1.7
+        assert round(calc_attr.alpha_comb_outer_win, 1) == 25.0
+        assert round(calc_attr.alpha_conv_outer_win, 1) == 20.0
+        assert round(calc_attr.weighted_g_value, 3) == 0.789
+
+    def test_calc_chain_matrix_one_with_interzonals(self):
+        """test of calc_chain_matrix"""
+
+        from teaser.logic.buildingobjects.calculation.one_element import OneElement
+
+        therm_zone = prj.buildings[-1].thermal_zones[0]
+
+        calc_attr = OneElement(therm_zone, merge_windows=False, t_bt=5)
+
+        helplist = (
+            therm_zone.outer_walls
+            + therm_zone.rooftops
+            + therm_zone.ground_floors
+            + therm_zone.inner_walls
+            + therm_zone.ceilings
+            + therm_zone.floors
+            + therm_zone.windows
+            + therm_zone.interzonal_elements
+        )
+
+        for element in helplist:
+            element.calc_equivalent_res()
+            element.calc_ua_value()
+
+        omega = 2 * math.pi / 86400 / 5
+
+        helplist_outer_walls = (
+            therm_zone.outer_walls
+            + therm_zone.rooftops
+            + therm_zone.ground_floors
+            + therm_zone.windows
+            + therm_zone.find_izes_outer(add_reversed=True)
+        )
+
+        r1_ow, c1_ow = calc_attr._calc_parallel_connection(
+            element_list=helplist_outer_walls, omega=omega
+        )
+        assert round(r1_ow, 14) == 0.00093987316367
+        assert round(c1_ow, 5) == 8406194.80039
+
+    def test_sum_building_elements_two_with_interzonals(self):
+        """test of combine_building_elements"""
+        prj.set_default()
+        helptest.building_test2(prj)
+        helptest.interzonal_test2(prj, connect_to_index=0, add_heated=False)
+        helptest.interzonal_test2(prj, connect_to_index=0, add_heated=True)
+
+        from teaser.logic.buildingobjects.calculation.two_element import TwoElement
+
+        therm_zone = prj.buildings[-1].thermal_zones[0]
+
+        calc_attr = TwoElement(therm_zone, merge_windows=False, t_bt=5)
+
+        helplist = (
+            therm_zone.outer_walls
+            + therm_zone.rooftops
+            + therm_zone.ground_floors
+            + therm_zone.inner_walls
+            + therm_zone.ceilings
+            + therm_zone.floors
+            + therm_zone.windows
+            + therm_zone.interzonal_elements
+        )
+
+        for element in helplist:
+            element.calc_equivalent_res()
+            element.calc_ua_value()
+
+        calc_attr._sum_outer_wall_elements()
+        calc_attr._sum_inner_wall_elements()
+        calc_attr._sum_window_elements()
+
+        # innerwall
+        assert round(calc_attr.ua_value_iw, 8) == 25.26923546
+        assert round(calc_attr.area_iw, 1) == 54.0
+        assert round(calc_attr.r_conv_inner_iw, 8) == 0.00736377
+        assert round(calc_attr.r_rad_inner_iw, 9) == 0.003703704
+        assert round(calc_attr.r_comb_inner_iw, 9) == 0.002464268
+        assert round(calc_attr.alpha_conv_inner_iw, 9) == 2.514814815
+        assert round(calc_attr.alpha_rad_inner_iw, 1) == 5.0
+        assert round(calc_attr.alpha_comb_inner_iw, 9) == 7.514814815
+
+        # outerwall
+        assert round(calc_attr.ua_value_ow, 7) == 144.1972679
+        assert round(calc_attr.area_ow, 1) == 348.0
+        assert round(calc_attr.r_conv_inner_ow, 9) == 0.001539409
+        assert round(calc_attr.r_rad_inner_ow, 9) == 0.000574713
+        assert round(calc_attr.r_comb_inner_ow, 8) == 0.00041848
+        assert round(calc_attr.r_conv_outer_ow, 8) == 0.00026288
+        assert round(calc_attr.r_rad_outer_ow, 8) == 0.00096154
+        assert round(calc_attr.r_comb_outer_ow, 8) == 0.00020644
+        assert round(calc_attr.alpha_conv_inner_ow, 5) == 1.86667
+        assert round(calc_attr.alpha_rad_inner_ow, 5) == 5.0
+        assert round(calc_attr.alpha_comb_inner_ow, 5) == 6.86667
+        assert round(calc_attr.alpha_conv_outer_ow, 7) == 18.2884615
+        assert round(calc_attr.alpha_rad_outer_ow, 5) == 5.0
+        assert round(calc_attr.alpha_comb_outer_ow, 7) == 23.2884615
+
+        # window
+        assert round(calc_attr.ua_value_win, 16) == 32.87895310796074
+        assert round(calc_attr.area_win, 1) == 18.0
+        assert round(calc_attr.r_conv_inner_win, 19) == 0.032679738562091505
+        assert round(calc_attr.r_rad_inner_win, 4) == 0.0111
+        assert round(calc_attr.r_comb_inner_win, 19) == 0.008291873963515755
+        assert round(calc_attr.r_conv_outer_win, 5) == 0.00278
+        assert round(calc_attr.r_rad_outer_win, 4) == 0.0111
+        assert round(calc_attr.r_comb_outer_win, 4) == 0.0022
+        assert round(calc_attr.alpha_conv_inner_win, 1) == 1.7
+        assert round(calc_attr.alpha_comb_outer_win, 1) == 25.0
+        assert round(calc_attr.alpha_conv_outer_win, 1) == 20.0
+        assert round(calc_attr.weighted_g_value, 3) == 0.789
+
+    def test_calc_chain_matrix_two_with_interzonals(self):
+        """test of calc_chain_matrix"""
+        from teaser.logic.buildingobjects.calculation.two_element import TwoElement
+
+        therm_zone = prj.buildings[-1].thermal_zones[0]
+
+        calc_attr = TwoElement(therm_zone, merge_windows=False, t_bt=5)
+
+        helplist = (
+            therm_zone.outer_walls
+            + therm_zone.rooftops
+            + therm_zone.ground_floors
+            + therm_zone.inner_walls
+            + therm_zone.ceilings
+            + therm_zone.floors
+            + therm_zone.windows
+            + therm_zone.interzonal_elements
+        )
+
+        for element in helplist:
+            element.calc_equivalent_res()
+            element.calc_ua_value()
+
+        omega = 2 * math.pi / 86400 / 5
+
+        calc_attr = TwoElement(therm_zone, merge_windows=True, t_bt=5)
+
+        helplist_outer_walls = (
+            therm_zone.outer_walls
+            + therm_zone.rooftops
+            + therm_zone.ground_floors
+            + therm_zone.windows
+        )
+
+        r1_ow, c1_ow = calc_attr._calc_parallel_connection(
+            element_list=helplist_outer_walls, omega=omega, mode='ow'
+        )
+        assert round(r1_ow, 14) == 0.00100751548411
+        assert round(c1_ow, 5) == 3648580.59312
+
+        helplist_inner_elements = (
+            therm_zone.inner_walls + therm_zone.ceilings + therm_zone.floors
+        )
+
+        r1_iw, c1_iw = calc_attr._calc_parallel_connection(
+            element_list=helplist_inner_elements, omega=omega,
+            mode='iw'
+        )
+        assert round(r1_iw, 13) == 0.0097195611408
+        assert round(c1_iw, 6) == 319983.518743
+
+        helplist_outer_walls_with_nzb = (
+            therm_zone.outer_walls
+            + therm_zone.rooftops
+            + therm_zone.ground_floors
+            + therm_zone.windows
+            + therm_zone.find_izes_outer(add_reversed=True)
+        )
+
+        r1_ow, c1_ow = calc_attr._calc_parallel_connection(
+            element_list=helplist_outer_walls_with_nzb, omega=omega, mode='ow'
+        )
+        assert round(r1_ow, 14) == 0.00093987316367
+        assert round(c1_ow, 5) == 8406194.80039
+
+        helplist_inner_elements_with_nzb = (
+            therm_zone.inner_walls + therm_zone.ceilings
+            + therm_zone.floors + calc_attr.nzbs_for_iw
+        )
+
+        r1_iw_2, c1_iw_2 = calc_attr._calc_parallel_connection(
+            element_list=helplist_inner_elements_with_nzb, omega=omega,
+            mode='iw'
+        )
+        assert round(r1_iw_2, 13) == 0.0060615482113
+        assert round(c1_iw_2, 6) == 1038852.970991
+
+    def test_sum_building_elements_three_with_interzonals(self):
+        """test of combine_building_elements"""
+        prj.set_default()
+        helptest.building_test2(prj)
+        helptest.interzonal_test2(prj, connect_to_index=0, add_heated=False)
+        helptest.interzonal_test2(prj, connect_to_index=0, add_heated=True)
+
+        from teaser.logic.buildingobjects.calculation.three_element import ThreeElement
+
+        therm_zone = prj.buildings[-1].thermal_zones[0]
+
+        calc_attr = ThreeElement(therm_zone, merge_windows=False, t_bt=5)
+
+        helplist = (
+            therm_zone.outer_walls
+            + therm_zone.rooftops
+            + therm_zone.ground_floors
+            + therm_zone.inner_walls
+            + therm_zone.ceilings
+            + therm_zone.floors
+            + therm_zone.windows
+            + therm_zone.interzonal_elements
+        )
+
+        for element in helplist:
+            element.calc_equivalent_res()
+            element.calc_ua_value()
+
+        calc_attr._sum_outer_wall_elements()
+        calc_attr._sum_ground_floor_elements()
+        calc_attr._sum_inner_wall_elements()
+        calc_attr._sum_window_elements()
+
+        # innerwall
+        assert round(calc_attr.ua_value_iw, 8) == 25.26923546
+        assert round(calc_attr.area_iw, 1) == 54.0
+        assert round(calc_attr.r_conv_inner_iw, 8) == 0.00736377
+        assert round(calc_attr.r_rad_inner_iw, 9) == 0.003703704
+        assert round(calc_attr.r_comb_inner_iw, 9) == 0.002464268
+        assert round(calc_attr.alpha_conv_inner_iw, 9) == 2.514814815
+        assert round(calc_attr.alpha_rad_inner_iw, 1) == 5.0
+        assert round(calc_attr.alpha_comb_inner_iw, 9) == 7.514814815
+
+        # outerwall
+        assert round(calc_attr.ua_value_ow, 8) == 85.84579041
+        assert round(calc_attr.area_ow, 1) == 208.0
+        assert round(calc_attr.r_conv_inner_ow, 9) == 0.002429543
+        assert round(calc_attr.r_rad_inner_ow, 9) == 0.000961538
+        assert round(calc_attr.r_comb_inner_ow, 9) == 0.000688895
+        assert round(calc_attr.r_conv_outer_ow, 8) == 0.00026288
+        assert round(calc_attr.r_rad_outer_ow, 8) == 0.00096154
+        assert round(calc_attr.r_comb_outer_ow, 8) == 0.00020644
+        assert round(calc_attr.alpha_conv_inner_ow, 9) == 1.978846154
+        assert round(calc_attr.alpha_rad_inner_ow, 5) == 5.0
+        assert round(calc_attr.alpha_comb_inner_ow, 9) == 6.978846154
+        assert round(calc_attr.alpha_conv_outer_ow, 7) == 18.2884615
+        assert round(calc_attr.alpha_rad_outer_ow, 5) == 5.0
+        assert round(calc_attr.alpha_comb_outer_ow, 7) == 23.2884615
+
+        # groundfloor
+        assert round(calc_attr.ua_value_gf, 16) == 58.351477449455686
+        assert round(calc_attr.area_gf, 1) == 140.0
+        assert round(calc_attr.r_conv_inner_gf, 19) == 0.004201680672268907
+        assert round(calc_attr.r_rad_inner_gf, 18) == 0.001428571428571429
+        assert round(calc_attr.r_comb_inner_gf, 20) == 0.0010660980810234541
+        assert round(calc_attr.alpha_conv_inner_gf, 5) == 1.7
+        assert round(calc_attr.alpha_rad_inner_gf, 5) == 5.0
+        assert round(calc_attr.alpha_comb_inner_gf, 5) == 6.7
+
+        # window
+        assert round(calc_attr.ua_value_win, 16) == 32.87895310796074
+        assert round(calc_attr.area_win, 1) == 18.0
+        assert round(calc_attr.r_conv_inner_win, 19) == 0.032679738562091505
+        assert round(calc_attr.r_rad_inner_win, 4) == 0.0111
+        assert round(calc_attr.r_comb_inner_win, 19) == 0.008291873963515755
+        assert round(calc_attr.r_conv_outer_win, 5) == 0.00278
+        assert round(calc_attr.r_rad_outer_win, 4) == 0.0111
+        assert round(calc_attr.r_comb_outer_win, 4) == 0.0022
+        assert round(calc_attr.alpha_conv_inner_win, 1) == 1.7
+        assert round(calc_attr.alpha_comb_outer_win, 1) == 25.0
+        assert round(calc_attr.alpha_conv_outer_win, 1) == 20.0
+        assert round(calc_attr.weighted_g_value, 3) == 0.789
+
+    def test_calc_chain_matrix_three_with_interzonals(self):
+        """test of calc_chain_matrix"""
+        from teaser.logic.buildingobjects.calculation.three_element import ThreeElement
+
+        therm_zone = prj.buildings[-1].thermal_zones[0]
+
+        calc_attr = ThreeElement(therm_zone, merge_windows=False, t_bt=5)
+
+        helplist = (
+            therm_zone.outer_walls
+            + therm_zone.rooftops
+            + therm_zone.ground_floors
+            + therm_zone.inner_walls
+            + therm_zone.ceilings
+            + therm_zone.floors
+            + therm_zone.windows
+            + therm_zone.interzonal_elements
+        )
+
+        for element in helplist:
+            element.calc_equivalent_res()
+            element.calc_ua_value()
+
+        omega = 2 * math.pi / 86400 / 5
+
+        helplist_outer_walls = (
+            therm_zone.outer_walls + therm_zone.rooftops + therm_zone.windows
+        )
+
+        r1_ow, c1_ow = calc_attr._calc_parallel_connection(
+            element_list=helplist_outer_walls, omega=omega, mode='ow'
+        )
+        assert round(r1_ow, 14) == 0.00175779297228
+        assert round(c1_ow, 5) == 2091259.60825
+
+        helplist_inner_walls = (
+            therm_zone.inner_walls + therm_zone.ceilings + therm_zone.floors
+        )
+
+        r1_iw, c1_iw = calc_attr._calc_parallel_connection(
+            element_list=helplist_inner_walls, omega=omega, mode='iw'
+        )
+        assert round(r1_iw, 13) == 0.0097195611408
+        assert round(c1_iw, 6) == 319983.518743
+
+        helplist_outer_walls_with_nzb = (
+            therm_zone.outer_walls + therm_zone.rooftops + therm_zone.windows
+            + therm_zone.find_izes_outer(add_reversed=True)
+        )
+
+        r1_ow, c1_ow = calc_attr._calc_parallel_connection(
+            element_list=helplist_outer_walls_with_nzb, omega=omega, mode='ow'
+        )
+        assert round(r1_ow, 14) == 0.00129426438757
+        assert round(c1_ow, 5) == 6856087.1177
+
+        helplist_inner_elements_with_nzb = (
+            therm_zone.inner_walls + therm_zone.ceilings
+            + therm_zone.floors + calc_attr.nzbs_for_iw
+        )
+
+        r1_iw_2, c1_iw_2 = calc_attr._calc_parallel_connection(
+            element_list=helplist_inner_elements_with_nzb, omega=omega,
+            mode='iw'
+        )
+        assert round(r1_iw_2, 13) == 0.0060615482113
+        assert round(c1_iw_2, 6) == 1038852.970991
+
+    def test_sum_building_elements_four_with_interzonals(self):
+        """test of combine_building_elements"""
+        prj.set_default()
+        helptest.building_test2(prj)
+        helptest.interzonal_test2(prj, connect_to_index=0, add_heated=False)
+        helptest.interzonal_test2(prj, connect_to_index=0, add_heated=True)
+
+        from teaser.logic.buildingobjects.calculation.four_element \
+            import FourElement
+
+        therm_zone = prj.buildings[-1].thermal_zones[0]
+
+        calc_attr = FourElement(therm_zone, merge_windows=True, t_bt=5)
+
+        helplist = (
+            therm_zone.outer_walls
+            + therm_zone.rooftops
+            + therm_zone.ground_floors
+            + therm_zone.inner_walls
+            + therm_zone.ceilings
+            + therm_zone.floors
+            + therm_zone.windows
+            + therm_zone.interzonal_elements
+        )
+
+        for element in helplist:
+            element.calc_equivalent_res()
+            element.calc_ua_value()
+
+        calc_attr._sum_outer_wall_elements()
+        calc_attr._sum_ground_floor_elements()
+        calc_attr._sum_rooftop_elements()
+        calc_attr._sum_inner_wall_elements()
+        calc_attr._sum_window_elements()
+
+        # innerwall
+        assert round(calc_attr.ua_value_iw, 8) == 25.26923546
+        assert round(calc_attr.area_iw, 1) == 54.0
+        assert round(calc_attr.r_conv_inner_iw, 8) == 0.00736377
+        assert round(calc_attr.r_rad_inner_iw, 9) == 0.003703704
+        assert round(calc_attr.r_comb_inner_iw, 9) == 0.002464268
+        assert round(calc_attr.alpha_conv_inner_iw, 9) == 2.514814815
+        assert round(calc_attr.alpha_rad_inner_iw, 1) == 5.0
+        assert round(calc_attr.alpha_comb_inner_iw, 9) == 7.514814815
+
+        # outerwall
+        assert round(calc_attr.ua_value_ow, 8) == 28.45118721
+        assert round(calc_attr.area_ow, 1) == 68.0
+        assert round(calc_attr.r_conv_inner_ow, 9) == 0.005760369
+        assert round(calc_attr.r_rad_inner_ow, 9) == 0.002941176
+        assert round(calc_attr.r_comb_inner_ow, 8) == 0.00194704
+        assert round(calc_attr.r_conv_outer_ow, 9) == 0.000996016
+        assert round(calc_attr.r_rad_outer_ow, 9) == 0.002941176
+        assert round(calc_attr.r_comb_outer_ow, 9) == 0.000744048
+        assert round(calc_attr.alpha_conv_inner_ow, 9) == 2.552941176
+        assert round(calc_attr.alpha_rad_inner_ow, 5) == 5.0
+        assert round(calc_attr.alpha_comb_inner_ow, 9) == 7.552941176
+        assert round(calc_attr.alpha_conv_outer_ow, 8) == 14.76470588
+        assert round(calc_attr.alpha_rad_outer_ow, 5) == 5.0
+        assert round(calc_attr.alpha_comb_outer_ow, 8) == 19.76470588
+
+        # groundfloor
+        assert round(calc_attr.ua_value_gf, 16) == 58.351477449455686
+        assert round(calc_attr.area_gf, 1) == 140.0
+        assert round(calc_attr.r_conv_inner_gf, 19) == 0.004201680672268907
+        assert round(calc_attr.r_rad_inner_gf, 18) == 0.001428571428571429
+        assert round(calc_attr.r_comb_inner_gf, 20) == 0.0010660980810234541
+        assert round(calc_attr.alpha_conv_inner_gf, 5) == 1.7
+        assert round(calc_attr.alpha_rad_inner_gf, 5) == 5.0
+        assert round(calc_attr.alpha_comb_inner_gf, 5) == 6.7
+
+        # outerwall
+        assert round(calc_attr.ua_value_rt, 16) == 57.394603194028036
+        assert round(calc_attr.area_rt, 1) == 140.0
+        assert round(calc_attr.r_conv_inner_rt, 19) == 0.004201680672268907
+        assert round(calc_attr.r_rad_inner_rt, 18) == 0.001428571428571429
+        assert round(calc_attr.r_comb_inner_rt, 20) == 0.0010660980810234541
+        assert round(calc_attr.r_conv_outer_rt, 20) == 0.00035714285714285714
+        assert round(calc_attr.r_rad_outer_rt, 18) == 0.001428571428571429
+        assert round(calc_attr.r_comb_outer_rt, 20) == 0.00028571428571428574
+        assert round(calc_attr.alpha_conv_inner_rt, 5) == 1.7
+        assert round(calc_attr.alpha_rad_inner_rt, 5) == 5.0
+        assert round(calc_attr.alpha_comb_inner_rt, 5) == 6.7
+        assert round(calc_attr.alpha_conv_outer_rt, 1) == 20.0
+        assert round(calc_attr.alpha_rad_outer_rt, 5) == 5.0
+        assert round(calc_attr.alpha_comb_outer_rt, 1) == 25.0
+
+        # window
+        assert round(calc_attr.ua_value_win, 16) == 32.87895310796074
+        assert round(calc_attr.area_win, 1) == 18.0
+        assert round(calc_attr.r_conv_inner_win, 19) == 0.032679738562091505
+        assert round(calc_attr.r_rad_inner_win, 4) == 0.0111
+        assert round(calc_attr.r_comb_inner_win, 19) == 0.008291873963515755
+        assert round(calc_attr.r_conv_outer_win, 5) == 0.00278
+        assert round(calc_attr.r_rad_outer_win, 4) == 0.0111
+        assert round(calc_attr.r_comb_outer_win, 4) == 0.0022
+        assert round(calc_attr.alpha_conv_inner_win, 1) == 1.7
+        assert round(calc_attr.alpha_comb_outer_win, 1) == 25.0
+        assert round(calc_attr.alpha_conv_outer_win, 1) == 20.0
+        assert round(calc_attr.weighted_g_value, 3) == 0.789
+
+    def test_calc_chain_matrix_four_with_interzonals(self):
+        """test of calc_chain_matrix"""
+        from teaser.logic.buildingobjects.calculation.four_element \
+            import FourElement
+
+        therm_zone = prj.buildings[-1].thermal_zones[0]
+
+        calc_attr = FourElement(therm_zone, merge_windows=False, t_bt=5)
+
+        helplist = (
+            therm_zone.outer_walls
+            + therm_zone.rooftops
+            + therm_zone.ground_floors
+            + therm_zone.inner_walls
+            + therm_zone.ceilings
+            + therm_zone.floors
+            + therm_zone.windows
+            + therm_zone.interzonal_elements
+        )
+
+        for element in helplist:
+            element.calc_equivalent_res()
+            element.calc_ua_value()
+
+        omega = 2 * math.pi / 86400 / 5
+
+        helplist_outer_walls = therm_zone.outer_walls + therm_zone.windows
+
+        r1_ow, c1_ow = calc_attr._calc_parallel_connection(
+            element_list=helplist_outer_walls, omega=omega, mode='ow'
+        )
+        assert round(r1_ow, 14) == 0.00688468914141
+        assert round(c1_ow, 5) == 533938.62338
+
+        helplist_inner_walls = (
+            therm_zone.inner_walls + therm_zone.ceilings + therm_zone.floors
+        )
+
+        r1_iw, c1_iw = calc_attr._calc_parallel_connection(
+            element_list=helplist_inner_walls, omega=omega, mode='iw'
+        )
+        assert round(r1_iw, 13) == 0.0097195611408
+        assert round(c1_iw, 6) == 319983.518743
+
+        helplist_outer_walls_with_nzb = (
+                therm_zone.outer_walls
+                + therm_zone.windows
+                + therm_zone.find_izes_outer(add_reversed=True)
+        )
+
+        r1_ow, c1_ow = calc_attr._calc_parallel_connection(
+            element_list=helplist_outer_walls_with_nzb, omega=omega, mode='ow'
+        )
+        assert round(r1_ow, 14) == 0.00196382289565
+        assert round(c1_ow, 5) == 5310295.24128
+
+        helplist_inner_elements_with_nzb = (
+            therm_zone.inner_walls + therm_zone.ceilings
+            + therm_zone.floors + calc_attr.nzbs_for_iw
+        )
+
+        r1_iw_2, c1_iw_2 = calc_attr._calc_parallel_connection(
+            element_list=helplist_inner_elements_with_nzb, omega=omega,
+            mode='iw'
+        )
+        assert round(r1_iw_2, 13) == 0.0060615482113
+        assert round(c1_iw_2, 6) == 1038852.970991
 
     def test_calc_weightfactor_one(self):
         """test of calc_weightfactor"""
@@ -1910,6 +2572,7 @@ class Test_teaser(object):
 
     def test_calc_weightfactor_three(self):
         """test of calc_weightfactor"""
+
         prj.set_default()
         helptest.building_test2(prj)
         prj.buildings[-1].calc_building_parameter(
@@ -1927,7 +2590,9 @@ class Test_teaser(object):
         calc_attr.weightfactor_ow.sort()
         weightfactors_test_list.sort()
 
-        assert calc_attr.weightfactor_ow == weightfactors_test_list
+        assert calc_attr.weightfactor_ow == approx(weightfactors_test_list,
+                                                   abs=1e-14)
+
         weightfactors_test_list = [
             0.13271234911406493,
             0.0,
@@ -1937,7 +2602,8 @@ class Test_teaser(object):
         ]
         calc_attr.weightfactor_win.sort()
         weightfactors_test_list.sort()
-        assert calc_attr.weightfactor_win == weightfactors_test_list
+        assert calc_attr.weightfactor_win == approx(weightfactors_test_list,
+                                                    abs=1e-14)
         assert calc_attr.weightfactor_ground == 0
 
         prj.buildings[-1].thermal_zones[-1].weightfactor_ow = []
@@ -1959,7 +2625,8 @@ class Test_teaser(object):
         calc_attr.weightfactor_ow.sort()
         weightfactors_test_list.sort()
 
-        assert calc_attr.weightfactor_ow == weightfactors_test_list
+        assert calc_attr.weightfactor_ow == approx(weightfactors_test_list,
+                                                   abs=1e-14)
 
         weightfactors_test_list = [
             0.44444444444444453,
@@ -1970,7 +2637,8 @@ class Test_teaser(object):
         ]
         calc_attr.weightfactor_win.sort()
         weightfactors_test_list.sort()
-        assert calc_attr.weightfactor_win == weightfactors_test_list
+        assert calc_attr.weightfactor_win == approx(weightfactors_test_list,
+                                                    abs=1e-14)
         assert calc_attr.weightfactor_ground == 0
 
     def test_calc_weightfactor_four(self):
@@ -2116,65 +2784,73 @@ class Test_teaser(object):
         assert round(zone_attr.r_rest_ow, 14) == 0.00585224061345
 
     def test_calc_three_element(self):
-        """test of calc_two_element"""
+        """test of calc_three_element"""
         prj.set_default()
         helptest.building_test2(prj)
 
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.calc_zone_parameters(number_of_elements=3, merge_windows=True)
+        therm_zone.calc_zone_parameters(number_of_elements=3,
+                                        merge_windows=True)
 
         zone_attr = therm_zone.model_attr
-        assert round(zone_attr.area_ow, 1) == 188.0
-        assert round(zone_attr.ua_value_ow, 16) == 77.23037843150993
-        assert round(zone_attr.r_conv_inner_ow, 16) == 0.0027203482045702
-        assert round(zone_attr.r_rad_inner_ow, 16) == 0.001063829787234
-        assert round(zone_attr.r_conv_outer_ow, 9) == 0.000265957
-        assert round(zone_attr.alpha_conv_inner_ow, 5) == 1.95532
-        assert round(zone_attr.alpha_rad_inner_ow, 1) == 5.0
-        assert round(zone_attr.r1_ow, 14) == 0.00114890338306
-        assert round(zone_attr.c1_ow, 5) == 2091259.60825
-        assert round(zone_attr.r1_iw, 15) == 0.009719561140816
-        assert round(zone_attr.c1_iw, 5) == 319983.51874
-        assert round(zone_attr.r_rest_ow, 11) == 0.00702003101
-        assert round(zone_attr.area_gf, 1) == 140.0
-        assert round(zone_attr.ua_value_gf, 16) == 58.351477449455686
-        assert round(zone_attr.r_conv_inner_gf, 16) == 0.0042016806722689
-        assert round(zone_attr.r_rad_inner_gf, 16) == 0.0014285714285714
-        assert round(zone_attr.alpha_conv_inner_gf, 5) == 1.7
-        assert round(zone_attr.alpha_rad_inner_gf, 1) == 5.0
-        assert round(zone_attr.r1_gf, 14) == 0.00236046484848
-        assert round(zone_attr.c1_gf, 5) == 1557320.98487
-        assert round(zone_attr.r_rest_gf, 13) == 0.0137109637229
+        assert zone_attr.area_ow == approx(188.0, abs=0.1)
+        assert zone_attr.ua_value_ow == approx(77.23037843150993, abs=1e-13)
+        assert zone_attr.r_conv_inner_ow == approx(0.0027203482045702,
+                                                   abs=1e-14)
+        assert zone_attr.r_rad_inner_ow == approx(0.001063829787234, abs=1e-14)
+        assert zone_attr.r_conv_outer_ow == approx(0.000265957, abs=1e-9)
+        assert zone_attr.alpha_conv_inner_ow == approx(1.95532, abs=0.00001)
+        assert zone_attr.alpha_rad_inner_ow == approx(5.0, abs=0.1)
+        assert zone_attr.r1_ow == approx(0.00114890338306, abs=1e-14)
+        assert zone_attr.c1_ow == approx(2091259.60825, abs=0.00001)
+        assert zone_attr.r1_iw == approx(0.009719561140816, abs=1e-15)
+        assert zone_attr.c1_iw == approx(319983.51874, abs=0.00001)
+        assert zone_attr.r_rest_ow == approx(0.00702003101, abs=1e-11)
+        assert zone_attr.area_gf == approx(140.0, abs=0.1)
+        assert zone_attr.ua_value_gf == approx(58.351477449455686, abs=1e-14)
+        assert zone_attr.r_conv_inner_gf == approx(0.0042016806722689,
+                                                   abs=1e-14)
+        assert zone_attr.r_rad_inner_gf == approx(0.0014285714285714,
+                                                  abs=1e-14)
+        assert zone_attr.alpha_conv_inner_gf == approx(1.7, abs=0.00001)
+        assert zone_attr.alpha_rad_inner_gf == approx(5.0, abs=0.1)
+        assert zone_attr.r1_gf == approx(0.00236046484848, abs=1e-14)
+        assert zone_attr.c1_gf == approx(1557320.98487, abs=0.00001)
+        assert zone_attr.r_rest_gf == approx(0.0137109637229, abs=1e-13)
 
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.calc_zone_parameters(number_of_elements=3, merge_windows=False)
+        therm_zone.calc_zone_parameters(number_of_elements=3,
+                                        merge_windows=False)
 
         zone_attr = therm_zone.model_attr
-        assert round(zone_attr.area_ow, 1) == 188.0
-        assert round(zone_attr.ua_value_ow, 16) == 77.23037843150993
-        assert round(zone_attr.r_conv_inner_ow, 16) == 0.0027203482045702
-        assert round(zone_attr.r_rad_inner_ow, 16) == 0.001063829787234
-        assert round(zone_attr.r_conv_outer_ow, 9) == 0.000265957
-        assert round(zone_attr.alpha_conv_inner_ow, 5) == 1.95532
-        assert round(zone_attr.alpha_rad_inner_ow, 1) == 5.0
-        assert round(zone_attr.r1_win, 13) == 0.0199004975124
-        assert round(zone_attr.r1_ow, 13) == 0.0017577929723
-        assert round(zone_attr.c1_ow, 5) == 2091259.60825
-        assert round(zone_attr.r1_iw, 15) == 0.009719561140816
-        assert round(zone_attr.c1_iw, 5) == 319983.51874
-        assert round(zone_attr.r_rest_ow, 13) == 0.0102102921341
-        assert round(zone_attr.area_gf, 1) == 140.0
-        assert round(zone_attr.ua_value_gf, 16) == 58.351477449455686
-        assert round(zone_attr.r_conv_inner_gf, 16) == 0.0042016806722689
-        assert round(zone_attr.r_rad_inner_gf, 16) == 0.0014285714285714
-        assert round(zone_attr.alpha_conv_inner_gf, 5) == 1.7
-        assert round(zone_attr.alpha_rad_inner_gf, 1) == 5.0
-        assert round(zone_attr.r1_gf, 14) == 0.00236046484848
-        assert round(zone_attr.c1_gf, 5) == 1557320.98487
-        assert round(zone_attr.r_rest_gf, 13) == 0.0137109637229
+        assert zone_attr.area_ow == approx(188.0, abs=0.1)
+        assert zone_attr.ua_value_ow == approx(77.23037843150993, abs=1e-13)
+        assert zone_attr.r_conv_inner_ow == approx(0.0027203482045702,
+                                                   abs=1e-14)
+        assert zone_attr.r_rad_inner_ow == approx(0.001063829787234, abs=1e-14)
+        assert zone_attr.r_conv_outer_ow == approx(0.000265957, abs=1e-9)
+        assert zone_attr.alpha_conv_inner_ow == approx(1.95532, abs=0.00001)
+        assert zone_attr.alpha_rad_inner_ow == approx(5.0, abs=0.1)
+        assert zone_attr.r1_win == approx(0.0199004975124, abs=1e-13)
+        assert zone_attr.r1_ow == approx(0.0017577929723, abs=1e-13)
+        assert zone_attr.c1_ow == approx(2091259.60825, abs=0.00001)
+        assert zone_attr.r1_iw == approx(0.009719561140816, abs=1e-15)
+        assert zone_attr.c1_iw == approx(319983.51874, abs=0.00001)
+        assert zone_attr.r_rest_ow == approx(0.0102102921341, abs=1e-13)
+        assert zone_attr.area_gf == approx(140.0, abs=0.1)
+        assert zone_attr.ua_value_gf == approx(58.351477449455686, abs=1e-14)
+        assert zone_attr.r_conv_inner_gf == approx(0.0042016806722689,
+                                                   abs=1e-14)
+        assert zone_attr.r_rad_inner_gf == approx(0.0014285714285714,
+                                                  abs=1e-14)
+        assert zone_attr.alpha_conv_inner_gf == approx(1.7, abs=0.00001)
+        assert zone_attr.alpha_rad_inner_gf == approx(5.0, abs=0.1)
+        assert zone_attr.r1_gf == approx(0.00236046484848, abs=1e-14)
+        assert zone_attr.c1_gf == approx(1557320.98487, abs=0.00001)
+        assert zone_attr.r_rest_gf == approx(0.0137109637229, abs=1e-13)
 
     def test_calc_four_element(self):
-        """test of calc_two_element"""
+        """test of calc_four_element"""
         prj.set_default()
         helptest.building_test2(prj)
 
@@ -2262,7 +2938,17 @@ class Test_teaser(object):
 
     def test_set_inner_wall_area(self):
         """test of set_inner_wall_area"""
-
+        prj.buildings[-1].inner_wall_approximation_approach \
+            = 'typical_minus_outer'
+        prj.buildings[-1].thermal_zones[-1].set_inner_wall_area()
+        for wall in prj.buildings[-1].thermal_zones[-1].inner_walls:
+            assert round(wall.area, 16) == 99.65023392678924
+        prj.buildings[-1].inner_wall_approximation_approach \
+            = 'typical_minus_outer_extended'
+        prj.buildings[-1].thermal_zones[-1].set_inner_wall_area()
+        for wall in prj.buildings[-1].thermal_zones[-1].inner_walls:
+            assert round(wall.area, 16) == 99.65023392678924
+        prj.buildings[-1].inner_wall_approximation_approach = 'teaser_default'
         prj.buildings[-1].thermal_zones[-1].set_inner_wall_area()
         for wall in prj.buildings[-1].thermal_zones[-1].inner_walls:
             assert round(wall.area, 16) == 11.951219512195122
@@ -2384,6 +3070,303 @@ class Test_teaser(object):
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         therm_zone.outer_walls[0].retrofit_wall(1980, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 2) == 4.13
+        prj.set_default(load_data=True)
+        helptest.building_test2(prj)
+        helptest.interzonal_test2(prj, connect_to_index=0, add_heated=False)
+        helptest.interzonal_test2(prj, connect_to_index=0, add_heated=True)
+        therm_zone_heated = prj.buildings[-1].thermal_zones[0]
+        therm_zone_unheated = prj.buildings[-1].thermal_zones[1]
+        second_heated_zone = prj.buildings[-1].thermal_zones[2]
+        assert therm_zone_heated.use_conditions.with_heating is True
+        assert therm_zone_unheated.use_conditions.with_heating is False
+        assert second_heated_zone.use_conditions.with_heating is True
+        therm_zone_other_heated = prj.buildings[-1].thermal_zones[2]
+        for interzonal_element in therm_zone_heated.interzonal_walls:
+            previous_ua_value = interzonal_element.ua_value
+            interzonal_element.retrofit_wall(2015, "EPS_040_15")
+            if interzonal_element.other_side is therm_zone_unheated:
+                assert (round(interzonal_element.ua_value, 2)
+                        == 0.24 * interzonal_element.area)
+                assert (interzonal_element.layer[-1].material.name
+                        == "EPS_040_15")
+            if interzonal_element.other_side is second_heated_zone:
+                assert (round(interzonal_element.ua_value, 2)
+                        == round(previous_ua_value, 2))
+        for interzonal_element in therm_zone_heated.interzonal_ceilings:
+            previous_ua_value = interzonal_element.ua_value
+            interzonal_element.retrofit_wall(2015, "EPS_040_15")
+            if interzonal_element.other_side is therm_zone_unheated:
+                assert (round(interzonal_element.ua_value, 2)
+                        == 0.2 * interzonal_element.area)
+                assert (interzonal_element.layer[-1].material.name
+                        == "EPS_040_15")
+            if interzonal_element.other_side is second_heated_zone:
+                assert (round(interzonal_element.ua_value, 2)
+                        == round(previous_ua_value, 2))
+        for interzonal_element in therm_zone_heated.interzonal_floors:
+            previous_ua_value = interzonal_element.ua_value
+            interzonal_element.retrofit_wall(2015, "EPS_040_15")
+            if interzonal_element.other_side is therm_zone_unheated:
+                assert (round(interzonal_element.ua_value, 2)
+                        == 0.3 * interzonal_element.area)
+                assert (interzonal_element.layer[-1].material.name
+                        == "EPS_040_15")
+            if interzonal_element.other_side is second_heated_zone:
+                assert (round(interzonal_element.ua_value, 2)
+                        == round(previous_ua_value, 2))
+        for interzonal_element in therm_zone_unheated.interzonal_walls:
+            interzonal_element.retrofit_wall(2015, "EPS_040_15")
+            assert (round(interzonal_element.ua_value, 2)
+                    == 0.24 * interzonal_element.area)
+            assert interzonal_element.layer[0].material.name == "EPS_040_15"
+        for interzonal_element in therm_zone_unheated.interzonal_ceilings:
+            interzonal_element.retrofit_wall(2015, "EPS_040_15")
+            assert (round(interzonal_element.ua_value, 2)
+                    == 0.2 * interzonal_element.area)
+            assert interzonal_element.layer[0].material.name == "EPS_040_15"
+        for interzonal_element in therm_zone_unheated.interzonal_floors:
+            interzonal_element.retrofit_wall(2015, "EPS_040_15")
+            assert (round(interzonal_element.ua_value, 2)
+                    == 0.3 * interzonal_element.area)
+            assert interzonal_element.layer[0].material.name == "EPS_040_15"
+
+    def test_interzonal_type_element(self):
+        prj.set_default(load_data=True)
+        helptest.building_test2(prj)
+        helptest.interzonal_test2(prj)
+
+        heated_zone = prj.buildings[-1].thermal_zones[-2]
+        unheated_zone = prj.buildings[-1].thermal_zones[-1]
+        iz_ceiling = heated_zone.interzonal_ceilings[-1]
+        iz_floor = unheated_zone.interzonal_floors[-1]
+
+        assert iz_ceiling.layer[0].material.name == "lime_plaster"
+        assert len(iz_ceiling.layer) == len(iz_floor.layer)
+        for ceiling_layer, floor_layer in zip(iz_ceiling.layer,
+                                              reversed(iz_floor.layer)):
+            assert ceiling_layer.material.name == floor_layer.material.name
+            assert ceiling_layer.thickness == floor_layer.thickness
+
+        floor_properties = iz_floor.gather_element_properties()
+        ceiling_properties = iz_ceiling.gather_element_properties()
+        assert floor_properties[0] == ceiling_properties[0]
+        for (floor_layer_density,
+             floor_layer_thermal_conduc,
+             floor_layer_heat_capac,
+             floor_layer_thickness,
+             ceiling_layer_density,
+             ceiling_layer_thermal_conduc,
+             ceiling_layer_heat_capac,
+             ceiling_layer_thickness) in zip(
+                *[list(property_list).__reversed__()
+                  for property_list in floor_properties[1:]],
+                *ceiling_properties[1:]
+        ):
+            assert floor_layer_density == ceiling_layer_density
+            assert floor_layer_thermal_conduc == ceiling_layer_thermal_conduc
+            assert floor_layer_heat_capac == floor_layer_heat_capac
+            assert floor_layer_thickness == ceiling_layer_thickness
+
+        iz_wall_1 = unheated_zone.interzonal_walls[-1]
+        iz_wall_2 = heated_zone.interzonal_walls[-1]
+
+        assert iz_wall_1.layer[0].material.name == "concrete_wz05"
+        assert iz_wall_2.layer[0].material.name == "concrete_CEM_II_BS325R_wz05"
+
+    def test_save_load_building_issue679(self):
+        prj.buildings[-1].thermal_zones[-1].time_to_minimal_t_ground = 25324
+        prj.t_soil_mode = 3
+        prj.t_soil_file_path = "example_file_path"
+        prj.buildings[-1].inner_wall_approximation_approach \
+            = 'typical_minus_outer'
+        prj.buildings[-1].thermal_zones[-1].number_of_floors = 25
+        prj.buildings[-1].thermal_zones[-1].height_of_floors = 3.148
+        prj.buildings[-1].thermal_zones[-1].t_ground = 283.5
+        prj.buildings[-1].thermal_zones[-1].t_ground_amplitude = 10
+        prj.save_project(file_name="unitTestInterzonal",
+                         path=utilities.get_default_path())
+        prj.set_default(load_data=True)
+        prj.load_project(os.path.join(utilities.get_default_path(),
+                                      "unitTestInterzonal.json"))
+
+        assert prj.buildings[-1].thermal_zones[-1].time_to_minimal_t_ground == 25324
+        assert prj.t_soil_mode == 3
+        assert prj.t_soil_file_path == "example_file_path"
+        assert prj.buildings[-1].inner_wall_approximation_approach \
+               == 'typical_minus_outer'
+        assert prj.buildings[-1].thermal_zones[-2].interzonal_walls[-1].other_side \
+               is prj.buildings[-1].thermal_zones[-1]
+        assert prj.buildings[-1].thermal_zones[-1].interzonal_floors[-1].other_side \
+               is prj.buildings[-1].thermal_zones[-2]
+        assert len(prj.buildings[-1].thermal_zones[-2].interzonal_elements) == 2
+        assert len(prj.buildings[-1].thermal_zones[-1].interzonal_elements) == 2
+        assert prj.buildings[-1].thermal_zones[-1].number_of_floors == 25
+        assert prj.buildings[-1].thermal_zones[-1].height_of_floors == 3.148
+        assert prj.buildings[-1].thermal_zones[-1].t_ground == 283.5
+        assert prj.buildings[-1].thermal_zones[-1].t_ground_amplitude == 10
+
+    def test_sum_building_elements_five(self):
+        """test of FiveElement calculator"""
+        prj.set_default()
+        helptest.building_test2(prj)
+        helptest.interzonal_test2(prj, connect_to_index=0, add_heated=False)
+        helptest.interzonal_test2(prj, connect_to_index=0, add_heated=True)
+
+        from teaser.logic.buildingobjects.calculation.five_element import FiveElement
+
+        therm_zone = prj.buildings[0].thermal_zones[0]
+
+        calc_attr = FiveElement(therm_zone, merge_windows=True, t_bt=5)
+
+        helplist = (
+            therm_zone.outer_walls
+            + therm_zone.rooftops
+            + therm_zone.ground_floors
+            + therm_zone.inner_walls
+            + therm_zone.ceilings
+            + therm_zone.floors
+            + therm_zone.windows
+            + therm_zone.interzonal_elements
+        )
+
+        for element in helplist:
+            element.calc_equivalent_res()
+            element.calc_ua_value()
+
+        calc_attr._sum_outer_wall_elements()
+        calc_attr._sum_ground_floor_elements()
+        calc_attr._sum_rooftop_elements()
+        calc_attr._sum_inner_wall_elements()
+        calc_attr._sum_window_elements()
+        calc_attr._sum_interzonal_elements()
+
+        # interzonal elements (lumping wall and floor)
+        assert len(calc_attr.nzbs_per_nz) == 1
+        assert len(calc_attr.nzbs_per_nz[0]) == 2
+        assert round(calc_attr.ua_value_nzb[0], 16) == 8.615411975711941
+        assert len(calc_attr.ua_value_nzb) == 1
+        assert round(calc_attr.area_nzb[0], 1) == 20.0
+        assert len(calc_attr.area_nzb) == 1
+        assert round(calc_attr.r_conv_inner_nzb[0], 19) == 0.022727272727272728
+        assert len(calc_attr.r_conv_inner_nzb) == 1
+        assert round(calc_attr.r_rad_inner_nzb[0], 4) == 0.01
+        assert len(calc_attr.r_conv_inner_nzb) == 1
+        assert round(calc_attr.r_comb_inner_nzb[0], 19) == 0.006944444444444444
+        assert len(calc_attr.r_comb_inner_nzb) == 1
+        assert round(calc_attr.r_conv_outer_nzb[0], 5) == 0.02273
+        assert len(calc_attr.r_conv_outer_nzb) == 1
+        assert round(calc_attr.r_rad_outer_nzb[0], 4) == 0.01
+        assert len(calc_attr.r_rad_outer_nzb) == 1
+        assert round(calc_attr.r_comb_outer_nzb[0], 4) == 0.0069
+        assert len(calc_attr.r_comb_outer_nzb) == 1
+        assert round(calc_attr.alpha_conv_inner_nzb[0], 1) == 2.2
+        assert len(calc_attr.alpha_conv_inner_nzb) == 1
+        assert round(calc_attr.alpha_comb_outer_nzb[0], 1) == 7.2
+        assert len(calc_attr.alpha_comb_outer_nzb) == 1
+        assert round(calc_attr.alpha_conv_outer_nzb[0], 1) == 2.2
+        assert len(calc_attr.alpha_conv_outer_nzb) == 1
+        assert round(calc_attr.ir_emissivity_outer_nzb[0], 3) == 0.9
+        assert len(calc_attr.ir_emissivity_outer_nzb) == 1
+
+        prj.number_of_elements_calc = 5
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings(raise_errors=True)
+
+        therm_zone_1 = prj.buildings[0].thermal_zones[1]
+        therm_zone_2 = prj.buildings[0].thermal_zones[2]
+
+        calc_attr = therm_zone.model_attr
+        calc_attr_1 = therm_zone_1.model_attr
+        calc_attr_2 = therm_zone_2.model_attr
+
+        # check that attributes of the elements match if they represent the
+        # same physical element
+        assert calc_attr.other_nz_indexes[0] == 1
+        assert len(calc_attr.other_nz_indexes) == 1
+        assert calc_attr_1.other_nz_indexes[0] == 0
+        assert len(calc_attr_2.other_nz_indexes) == 0
+        assert round(calc_attr.r_total_nzb[0], 5) == round(calc_attr_1.r_total_nzb[0], 5)
+        assert len(calc_attr.r_total_nzb) == 1
+        assert len(calc_attr_2.r_total_nzb) == 0
+        assert round(calc_attr.r1_nzb[0], 5) == round(calc_attr_1.r_rest_nzb[0], 5)
+        assert len(calc_attr.r1_nzb) == 1
+        assert len(calc_attr_2.r1_nzb) == 0
+        assert round(calc_attr.r_rest_nzb[0], 5) == round(calc_attr_1.r1_nzb[0], 5)
+        assert len(calc_attr.r_rest_nzb) == 1
+        assert len(calc_attr_2.r_rest_nzb) == 0
+
+    def test_calc_chain_matrix_five(self):
+        """test of calc_chain_matrix"""
+        from teaser.logic.buildingobjects.calculation.five_element \
+            import FiveElement
+
+        prj.set_default()
+        helptest.building_test2(prj)
+        helptest.interzonal_test2(prj, connect_to_index=0, add_heated=False)
+
+        therm_zone = prj.buildings[-1].thermal_zones[-2]
+
+        calc_attr = FiveElement(therm_zone, merge_windows=False, t_bt=5)
+
+        helplist = (
+            therm_zone.outer_walls
+            + therm_zone.rooftops
+            + therm_zone.ground_floors
+            + therm_zone.inner_walls
+            + therm_zone.ceilings
+            + therm_zone.floors
+            + therm_zone.windows
+            + therm_zone.interzonal_elements
+        )
+
+        for element in helplist:
+            element.calc_equivalent_res()
+            element.calc_ua_value()
+
+        omega = 2 * math.pi / 86400 / 5
+
+        helplist_outer_walls = therm_zone.outer_walls + therm_zone.windows
+
+        r1_ow, c1_ow = calc_attr._calc_parallel_connection(
+            element_list=helplist_outer_walls, omega=omega, mode='ow'
+        )
+        assert round(r1_ow, 14) == 0.00688468914141
+        assert round(c1_ow, 5) == 533938.62338
+
+        helplist_inner_walls = (
+            therm_zone.inner_walls + therm_zone.ceilings + therm_zone.floors
+        )
+
+        r1_iw, c1_iw = calc_attr._calc_parallel_connection(
+            element_list=helplist_inner_walls, omega=omega, mode='iw'
+        )
+        assert round(r1_iw, 13) == 0.0097195611408
+        assert round(c1_iw, 6) == 319983.518743
+
+        r1_izw, c1_izw = calc_attr._calc_parallel_connection(
+            element_list=therm_zone.interzonal_elements, omega=omega, mode='ow'
+        )
+        assert round(r1_izw, 13) == 0.0023421240754
+        assert round(c1_izw, 6) == 4782078.891281
+
+        therm_zone_2 = prj.buildings[-1].thermal_zones[-1]
+
+        calc_attr_2 = FiveElement(therm_zone_2, merge_windows=True, t_bt=5)
+
+        for element in therm_zone_2.interzonal_elements:
+            element.calc_equivalent_res()
+            element.calc_ua_value()
+
+        r1_izw_2, c1_izw_2 = calc_attr_2._calc_parallel_connection(
+            element_list=therm_zone_2.interzonal_elements, omega=omega,
+            mode='izw_backwards'
+        )
+        # CAUTION: these values need to be equal to the ones above
+        # when applied in practice, FiveElement._calc_interzonal_elements will
+        #  revertedly apply the values to the final model parameters
+        assert round(r1_izw_2, 13) == 0.0023421240754
+        assert round(c1_izw_2, 6) == 4782078.891281
 
     def test_calc_equivalent_res_win(self):
         """test of calc_equivalent_res, win"""
@@ -2537,6 +3520,12 @@ class Test_teaser(object):
         prj.calc_all_buildings()
         prj.export_aixlib()
 
+        prj.number_of_elements_calc = 5
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
         prj.number_of_elements_calc = 1
         prj.merge_windows_calc = False
         prj.used_library_calc = "IBPSA"
@@ -2628,6 +3617,18 @@ class Test_teaser(object):
         prj.export_aixlib()
 
         prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 5
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 5
         prj.merge_windows_calc = False
         prj.used_library_calc = "AixLib"
         prj.calc_all_buildings()
@@ -2763,6 +3764,12 @@ class Test_teaser(object):
         prj.export_aixlib()
 
         prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 5
         prj.merge_windows_calc = False
         prj.used_library_calc = "AixLib"
         prj.calc_all_buildings()
@@ -2929,6 +3936,18 @@ class Test_teaser(object):
         prj.calc_all_buildings()
         prj.export_aixlib()
 
+        prj.number_of_elements_calc = 5
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 5
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
         prj.number_of_elements_calc = 1
         prj.merge_windows_calc = False
         prj.used_library_calc = "IBPSA"
@@ -3014,6 +4033,12 @@ class Test_teaser(object):
         prj.export_aixlib()
 
         prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = "AixLib"
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 5
         prj.merge_windows_calc = False
         prj.used_library_calc = "AixLib"
         prj.calc_all_buildings()

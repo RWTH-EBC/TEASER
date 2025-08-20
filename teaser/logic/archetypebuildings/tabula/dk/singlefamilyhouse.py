@@ -88,7 +88,18 @@ class SingleFamilyHouse(Residential):
            consideration of moisture and co2. The moisture calculation is
            based on SIA 2024 (2015) and regards persons and non-persons, the co2 calculation is based on
            Engineering ToolBox (2004) and regards only persons.
-
+    inner_wall_approximation_approach : str
+        'teaser_default' (default) sets length of inner walls = typical
+            length * height of floors + 2 * typical width * height of floors
+        'typical_minus_outer' sets length of inner walls = 2 * typical
+            length * height of floors + 2 * typical width * height of floors
+            - length of outer or interzonal walls
+        'typical_minus_outer_extended' like 'typical_minus_outer', but also
+            considers that
+            a) a non-complete "average room" reduces its circumference
+              proportional to the square root of the area
+            b) rooftops, windows and ground floors (= walls with border to
+                soil) may have a vertical share
     construction_data : str
         Construction type of used wall constructions default is "existing
         state"
@@ -114,6 +125,7 @@ class SingleFamilyHouse(Residential):
         net_leased_area=None,
         with_ahu=False,
         internal_gains_mode=1,
+        inner_wall_approximation_approach='teaser_default',
         construction_data=None,
     ):
 
@@ -124,6 +136,7 @@ class SingleFamilyHouse(Residential):
             net_leased_area,
             with_ahu,
             internal_gains_mode,
+            inner_wall_approximation_approach
         )
 
         self.construction_data = construction_data
@@ -332,6 +345,14 @@ class SingleFamilyHouse(Residential):
             zone = ThermalZone(parent=self)
             zone.name = key
             zone.area = type_bldg_area * value[0]
+            try:
+                zone.number_of_floors = value[2]['number_of_floors']
+            except (KeyError, IndexError):
+                pass
+            try:
+                zone.height_of_floors = value[2]['height_of_floors']
+            except (KeyError, IndexError):
+                pass
             use_cond = UseCond(parent=zone)
             use_cond.load_use_conditions(zone_usage=value[1])
             zone.use_conditions = use_cond
