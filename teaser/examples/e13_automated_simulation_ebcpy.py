@@ -2,7 +2,8 @@ import json
 import os
 
 from pathlib import Path
-from ebcpy import DymolaAPI, TimeSeriesData
+
+import matplotlib.pyplot as plt
 
 
 def perform_simulations(
@@ -24,6 +25,8 @@ def perform_simulations(
     save_path = path_export.parent.joinpath(path_export.name + "_SimulationResults")
 
     # Start the Dymola-API. For more information, see the example e2, e3 and e5 in ebcpy.
+    from ebcpy import DymolaAPI
+
     dym_api = DymolaAPI(
         working_directory=save_path.joinpath("DymolaWorkingDirectory"),
         model_name=None,  # Keep empty for now
@@ -35,7 +38,7 @@ def perform_simulations(
     )
     simulation_setup = {
         "start_time": 0,
-        "stop_time": 3600 * 8760,  # One year
+        "stop_time": 86400 * 120,  # First 120 days
         "output_interval": 3600
     }
     dym_api.set_sim_setup(sim_setup=simulation_setup)
@@ -60,7 +63,14 @@ def perform_simulations(
 
     # Extract relevant results by loading mat and storing some variables as parquet,
     # which is a pandas default and efficient format.
-    variable_names_to_store = None   # None stores all
+    # Furthermore, create a plot for each building of outdoor and indoor air temperatures,
+    # as well as heat demand
+    from ebcpy import TimeSeriesData
+    variable_names_to_store = [
+        "multizone.PHeater[*]",  # Wildcards store all zones
+        "multizone.TAir[*]",
+        "weaDat.weaBus.TDryBul"
+    ]
     for mat_result_file in simulation_result_files:
         df = TimeSeriesData(mat_result_file, variable_names=variable_names_to_store).to_df()
         df_path = Path(mat_result_file).with_suffix(".parquet")
@@ -71,6 +81,25 @@ def perform_simulations(
             index=True
         )
         os.remove(mat_result_file)
+        df.index /= 86400  # To days
+        fig, ax = plt.subplots(3, 1, sharex=True)
+        ax[0].set_ylabel("$T_\mathrm{Oda}$ in °C")
+        ax[0].plot(df.index, df.loc[:, "weaDat.weaBus.TDryBul"] - 273.15)
+        ax[1].set_ylabel("$T_\mathrm{Zone}$ in °C")
+        ax[2].set_ylabel("$P_\mathrm{Hea}$ in kW")
+        for col in df.columns:
+            if col.startswith("weaBus"):
+                continue
+            zone_number = col.split("[")[-1].split("]")[0]
+            if col.startswith("multizone.TAir"):
+                ax[1].plot(df.index, df.loc[:, col] / 1000, label=f"Zone {zone_number}")
+            if col.startswith("multizone.PHeater"):
+                ax[2].plot(df.index, df.loc[:, col] / 1000, label=f"Zone {zone_number}")
+        ax[1].legend()
+        ax[2].legend()
+        ax[2].set_xlabel("Time in d")
+        fig.suptitle(Path(mat_result_file).stem)
+    plt.show()
 
 
 if __name__ == '__main__':
