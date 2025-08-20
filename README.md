@@ -32,7 +32,7 @@ available under the
 [MIT License](https://github.com/RWTH-EBC/TEASER/blob/main/License.md).
 
 If you have any questions regarding TEASER feel free to contact us at
-[ebc-teaser@eonerc.rwth-aachen.de](mailto:ebc-teaser@eonerc.rwth-aachen.de).
+[ebc-tools@eonerc.rwth-aachen.de](mailto:ebc-tools@eonerc.rwth-aachen.de).
 
 
 ## Description
