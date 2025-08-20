@@ -83,7 +83,8 @@ def example_export_aixlib():
         internal_id=None,
         path=None,
         report=True,
-        export_vars=export_vars
+        export_vars=export_vars,
+        create_simulation_info=True
     )
 
     return path

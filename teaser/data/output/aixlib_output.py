@@ -3,19 +3,28 @@
 import os
 import warnings
 import shutil
+import json
+from pathlib import Path
+from typing import Union, TYPE_CHECKING
+
 from mako.template import Template
 from mako.lookup import TemplateLookup
 import teaser.logic.utilities as utilities
 import teaser.data.output.modelica_output as modelica_output
 
+if TYPE_CHECKING:
+    from teaser.project import Project
+
 
 def export_multizone(
         buildings,
-        prj,
-        path=None,
-        use_postprocessing_calc=False,
+        prj: "Project",
+        path: Union[str, Path] = None,
+        use_postprocessing_calc: bool = False,
         export_vars=None,
-        custom_multizone_template_path=None):
+        custom_multizone_template_path=None,
+        create_simulation_info: bool = False
+):
     """Exports models for AixLib library
 
     Exports a building for
@@ -55,6 +64,10 @@ def export_multizone(
     custom_multizone_template_path : str
         if a custom template for writing the multizone model should be used,
         its path can be specified as a full path
+    create_simulation_info: bool
+        If True (not the default), a .json is generated which stores the
+        model and record names, as well as the package.mo path to streamline
+        direct simulation of exported buildings.
 
     Attributes
     ----------
@@ -221,6 +234,8 @@ def export_multizone(
 
     print("Exports can be found here:")
     print(path)
+    if create_simulation_info:
+        _export_aixlib_simulation_info(prj=prj, path=path)
 
 
 def _copy_reference_results(dir_resources, prj):
@@ -297,3 +312,31 @@ def _copy_script_unit_tests(destination_path):
 
     source_path = utilities.get_full_path("data/output/runUnitTests.py")
     shutil.copy2(source_path, destination_path)
+
+
+def _export_aixlib_simulation_info(prj: "Project", path: Path):
+    buildings_to_simulate = {}
+    path = Path(path)
+    package_path = path.joinpath("package.mo")
+
+    for bui in prj.buildings:
+        record_name = ".".join([
+            prj.name, bui.name,
+            f"{bui.name}_DataBase",
+            f"{bui.name}_SingleDwelling"
+        ])
+        simulation_model_name = ".".join([
+            prj.name, bui.name, bui.name
+        ])
+        buildings_to_simulate[bui.name] = {
+            "record": record_name,
+            "IdealHeatDemand": simulation_model_name,
+        }
+    relevant_information = {
+        "project": prj.name,
+        "package_path": package_path.as_posix(),
+        "buildings": buildings_to_simulate,
+    }
+    save_path = path.joinpath("simulation_information.json")
+    with open(save_path, "w") as file:
+        json.dump(relevant_information, file, indent=2)
