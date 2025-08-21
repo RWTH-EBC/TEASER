@@ -12,9 +12,7 @@
 # You also need Dymola installed on your system to run the simulations.
 
 
-def perform_simulations(
-        path_aixlib = None
-):
+def perform_simulations():
     # First, we export the same archetypes as in `e2_export_aixlib_models`
     from teaser.examples.e2_export_aixlib_models import example_export_aixlib
     path_export = example_export_aixlib()
@@ -39,6 +37,8 @@ def perform_simulations(
 
     # ## Handle AixLib dependency
     # If AixLib path is not provided, clone it from GitHub.
+
+    path_aixlib = None  # If you have AixLib locally, set the path here.
 
     if path_aixlib is None:
         import subprocess
