@@ -76,7 +76,7 @@ def example_export_aixlib():
     export_vars = {
         "HeatingDemands": ["*multizone.PHeater*", "*multizone.PHeatAHU"],
         "CoolingDemands": ["*multizone.PCooler*", "*multizone.PCoolAHU"],
-        "Temperatures": ["*multizone.TAir*", "*multizone.TRad*"]
+        "Temperatures": ["*multizone.TAir*", "*multizone.TRad*", "weaDat.weaBus.TDryBul"]
     }
 
     path = prj.export_aixlib(
