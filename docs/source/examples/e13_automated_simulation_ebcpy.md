@@ -104,6 +104,7 @@ Using multiprocessing capabilities of ebcpy
 
 ```python
 simulation_result_files = dym_api.simulate(
+    return_option="savepath",
     model_names=models_to_simulate,
     savepath=save_path,
     result_file_name=result_file_names
