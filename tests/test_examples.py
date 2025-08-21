@@ -73,3 +73,9 @@ class Test_examples(object):
         from teaser.examples import e11_export_besmod_models as e11
 
         prj = e11.example_export_besmod()
+
+    def test_e13_example_export_besmod(self):
+        """Tests the executability of example 11"""
+        from teaser.examples.e13_automated_simulation_ebcpy import perform_simulations
+
+        perform_simulations()

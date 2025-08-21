@@ -330,7 +330,7 @@ def _export_aixlib_simulation_info(prj: "Project", path: Path):
         ])
         buildings_to_simulate[bui.name] = {
             "record": record_name,
-            "IdealHeatDemand": simulation_model_name,
+            "IdealDemands": simulation_model_name,
         }
     relevant_information = {
         "project": prj.name,

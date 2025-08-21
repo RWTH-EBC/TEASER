@@ -113,5 +113,5 @@ setup(
         "Topic :: Utilities",
     ],
     install_requires=["mako", "pytest", "pandas", "numpy"],
-    extras_require={"report": ["plotly"]}
+    extras_require={"report": ["plotly"], "simulation": ["ebcpy>=0.5.6"]}
 )

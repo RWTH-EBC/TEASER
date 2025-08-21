@@ -1,30 +1,61 @@
-import json
-import os
+# # Example 13: Direct simulation of Modelica with TEASER, ebcpy, and AixLib
+# This example demonstrates how to export building models using TEASER and simulate them with Dymola.
+# You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks)
+
+# ## Prerequisites
+# To use this example, you need to install several packages:
+# 1. ebcpy - For Dymola API interaction (`pip install ebcpy`)
+# 2. AixLib - A Modelica library for building simulation (https://github.com/RWTH-EBC/AixLib).
+#   If not provided, this example will try to clone AixLib using git.
+#
+# You also need Dymola installed on your system to run the simulations.
 
 from pathlib import Path
 
-import matplotlib.pyplot as plt
-
 
 def perform_simulations(
-        path_aixlib: Path
+        path_aixlib: Path = None
 ):
     from teaser.examples.e2_export_aixlib_models import example_export_aixlib
     path_export = example_export_aixlib()
     path_export = Path(path_export)
 
+    # ## Loading simulation information
+    # The TEASER export creates a JSON file with information about the models
+    import json
     with open(path_export.joinpath("simulation_information.json"), "r") as file:
         relevant_information = json.load(file)
 
-    # Extract models to simulate, in this case they are "IdealHeatDemand" simulations
-    models_to_simulate = [bui["IdealHeatDemand"] for bui in relevant_information["buildings"].values()]
-    # Specify that the result files should be named the same as the buildings
+    # ## Preparing simulation parameters
+    # Extract the IdealDemands models for each building and set up result file names
+    models_to_simulate = [bui["IdealDemands"] for bui in relevant_information["buildings"].values()]
     result_file_names = list(relevant_information["buildings"].keys())
 
-    # Let's create a simulation result folder side by side to the project export
+    # ## Setting up simulation directory
+    # Create a folder for simulation results next to the export folder
     save_path = path_export.parent.joinpath(path_export.name + "_SimulationResults")
 
-    # Start the Dymola-API. For more information, see the example e2, e3 and e5 in ebcpy.
+    # ## Handle AixLib dependency
+    # If AixLib path is not provided, clone it from GitHub.
+
+    if path_aixlib is None:
+        import subprocess
+        import os
+
+        save_path.parent.mkdir(exist_ok=True)
+        aixlib_dir = save_path.parent.joinpath("AixLib")
+        if not aixlib_dir.exists():
+            print(f"Cloning AixLib repository to {aixlib_dir}...")
+            subprocess.run(
+                ["git", "clone", "https://github.com/RWTH-EBC/AixLib", str(aixlib_dir)],
+                check=True
+            )
+        path_aixlib = aixlib_dir.joinpath("AixLib/package.mo")
+        print(f"Using AixLib from: {path_aixlib}")
+
+    # ## Initialize Dymola API
+    # This provides an interface to the Dymola simulation environment
+    # Import and initialize the API with simulation parameters and package paths
     from ebcpy import DymolaAPI
 
     dym_api = DymolaAPI(
@@ -36,6 +67,9 @@ def perform_simulations(
         n_cpu=2,  # Increase this number if you want to run more simulations in parallel.
         time_delay_between_starts=1
     )
+
+    # ## Define simulation timeframe
+    # Set up the simulation period (120 days) and output interval (hourly)
     simulation_setup = {
         "start_time": 0,
         "stop_time": 86400 * 120,  # First 120 days
@@ -43,9 +77,9 @@ def perform_simulations(
     }
     dym_api.set_sim_setup(sim_setup=simulation_setup)
 
-    # Perform the simulation storing the results as .mat files.
-    # This is the most robust option with multiprocessing. Further options
-    # exist in ebcpy, see their docs.
+    # ## Run the simulations
+    # Perform the simulations and store results as .mat files
+    # Using multiprocessing capabilities of ebcpy
     simulation_result_files = dym_api.simulate(
         return_option="savepath",
         model_names=models_to_simulate,
@@ -53,7 +87,8 @@ def perform_simulations(
         result_file_name=result_file_names
     )
 
-    # ebcpy has a nice feature to store the simulation settings for later reproduction.
+    # ## Save simulation settings for reproducibility
+    # Store all simulation parameters for later reference
     dym_api.save_for_reproduction(
         title=relevant_information["project"],
         log_message=f"Simulation study of TEASER project",
@@ -61,16 +96,22 @@ def perform_simulations(
     )
     dym_api.close()
 
-    # Extract relevant results by loading mat and storing some variables as parquet,
-    # which is a pandas default and efficient format.
-    # Furthermore, create a plot for each building of outdoor and indoor air temperatures,
-    # as well as heat demand
+    # ## Process simulation results
+    # Convert .mat files to parquet format and create visualization plots.
+    # Set variable_names_to_store to None to load all variables
     from ebcpy import TimeSeriesData
     variable_names_to_store = [
         "multizone.PHeater[*]",  # Wildcards store all zones
         "multizone.TAir[*]",
         "weaDat.weaBus.TDryBul"
     ]
+
+    # ## Analyze each simulation result
+    # For each building,
+    # - Load simulation data into a pandas DataFrame
+    # - convert results to parquet (more efficient than .mat for pandas operations)
+    # - Remove original .mat file to save space
+    # - Plot outdoor temperature, zone temperatures, and heating power
     for mat_result_file in simulation_result_files:
         df = TimeSeriesData(mat_result_file, variable_names=variable_names_to_store).to_df()
         df_path = Path(mat_result_file).with_suffix(".parquet")
@@ -80,19 +121,25 @@ def perform_simulations(
             compression=None,
             index=True
         )
+        import os
         os.remove(mat_result_file)
-        df.index /= 86400  # To days
+
+        import matplotlib.pyplot as plt
         fig, ax = plt.subplots(3, 1, sharex=True)
+
+        df.index /= 86400  # Convert seconds to days for better readability
+
         ax[0].set_ylabel("$T_\mathrm{Oda}$ in °C")
         ax[0].plot(df.index, df.loc[:, "weaDat.weaBus.TDryBul"] - 273.15)
         ax[1].set_ylabel("$T_\mathrm{Zone}$ in °C")
         ax[2].set_ylabel("$P_\mathrm{Hea}$ in kW")
-        for col in df.columns:
+
+        for col in df.columns:  # Plot each zone's temperature and heating power
             if col.startswith("weaBus"):
                 continue
             zone_number = col.split("[")[-1].split("]")[0]
             if col.startswith("multizone.TAir"):
-                ax[1].plot(df.index, df.loc[:, col] / 1000, label=f"Zone {zone_number}")
+                ax[1].plot(df.index, df.loc[:, col] - 273.15, label=f"Zone {zone_number}")
             if col.startswith("multizone.PHeater"):
                 ax[2].plot(df.index, df.loc[:, col] / 1000, label=f"Zone {zone_number}")
         ax[1].legend()
@@ -103,4 +150,4 @@ def perform_simulations(
 
 
 if __name__ == '__main__':
-    perform_simulations(path_aixlib=Path(r"D:\04_git\AixLib\AixLib\package.mo"))
+    perform_simulations()
