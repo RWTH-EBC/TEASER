@@ -4,11 +4,8 @@ Created August 2019
 @author: TEASER Development Team
 """
 
-from teaser.logic import utilities
 from teaser.project import Project
-import math
-import os
-import warnings as warnings
+import pytest
 
 prj = Project(False)
 
@@ -74,8 +71,10 @@ class Test_examples(object):
 
         prj = e11.example_export_besmod()
 
-    def test_e13_example_export_besmod(self):
+    def test_e13_example_simulation_ebcpy(self):
         """Tests the executability of example 11"""
         from teaser.examples.e13_automated_simulation_ebcpy import perform_simulations
-
-        perform_simulations()
+        try:
+            perform_simulations()
+        except FileNotFoundError as err:
+            pytest.skip(f"Dymola is not installed in CI: {err}")
