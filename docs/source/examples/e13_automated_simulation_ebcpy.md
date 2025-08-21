@@ -12,14 +12,11 @@ To use this example, you need to install several packages:
 
 You also need Dymola installed on your system to run the simulations.
 
+First, we export the same archetypes as in `e2_export_aixlib_models`
+
 ```python
-from pathlib import Path
-
-
-
 from teaser.examples.e2_export_aixlib_models import example_export_aixlib
 path_export = example_export_aixlib()
-path_export = Path(path_export)
 ```
 
 ## Loading simulation information
@@ -27,8 +24,11 @@ The TEASER export creates a JSON file with information about the models
 
 ```python
 import json
+from pathlib import Path  # For easier path handling
+path_export = Path(path_export)
 with open(path_export.joinpath("simulation_information.json"), "r") as file:
     relevant_information = json.load(file)
+print(relevant_information)
 ```
 
 ## Preparing simulation parameters
@@ -50,6 +50,8 @@ save_path = path_export.parent.joinpath(path_export.name + "_SimulationResults")
 If AixLib path is not provided, clone it from GitHub.
 
 ```python
+path_aixlib = None  # If you have AixLib locally, set the path here.
+
 if path_aixlib is None:
     import subprocess
     import os
@@ -109,28 +111,22 @@ simulation_result_files = dym_api.simulate(
 ```
 
 ## Save simulation settings for reproducibility
-Store all simulation parameters for later reference
+Optionally, you can store all simulation parameters for later reference
+This feature does not work in jupyter notebooks, as it saves the current script.
+Still, we highly encourage you to add it to your work locally, so
+that you always know which settings were used to perform the simulations.
 
 ```python
 dym_api.save_for_reproduction(
     title=relevant_information["project"],
     log_message=f"Simulation study of TEASER project",
-    export_fmu=False
+    export_fmu=False,
 )
-dym_api.close()
 ```
-
-## Process simulation results
-Convert .mat files to parquet format and create visualization plots.
-Set variable_names_to_store to None to load all variables
+Afterwards, we close Dymola:
 
 ```python
-from ebcpy import TimeSeriesData
-variable_names_to_store = [
-    "multizone.PHeater[*]",  # Wildcards store all zones
-    "multizone.TAir[*]",
-    "weaDat.weaBus.TDryBul"
-]
+dym_api.close()
 ```
 
 ## Analyze each simulation result
@@ -140,7 +136,16 @@ For each building,
 - Remove original .mat file to save space
 - Plot outdoor temperature, zone temperatures, and heating power
 
+Set variable_names_to_store to None to load all variables
+
 ```python
+from ebcpy import TimeSeriesData
+variable_names_to_store = [
+    "multizone.PHeater[*]",  # Wildcards store all zones
+    "multizone.TAir[*]",
+    "weaDat.weaBus.TDryBul"
+]
+
 for mat_result_file in simulation_result_files:
     df = TimeSeriesData(mat_result_file, variable_names=variable_names_to_store).to_df()
     df_path = Path(mat_result_file).with_suffix(".parquet")
