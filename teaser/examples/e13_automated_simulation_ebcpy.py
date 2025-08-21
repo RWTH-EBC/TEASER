@@ -11,21 +11,22 @@
 #
 # You also need Dymola installed on your system to run the simulations.
 
-from pathlib import Path
-
 
 def perform_simulations(
-        path_aixlib: Path = None
+        path_aixlib = None
 ):
+    # First, we export the same archetypes as in `e2_export_aixlib_models`
     from teaser.examples.e2_export_aixlib_models import example_export_aixlib
     path_export = example_export_aixlib()
-    path_export = Path(path_export)
 
     # ## Loading simulation information
     # The TEASER export creates a JSON file with information about the models
     import json
+    from pathlib import Path  # For easier path handling
+    path_export = Path(path_export)
     with open(path_export.joinpath("simulation_information.json"), "r") as file:
         relevant_information = json.load(file)
+    print(relevant_information)
 
     # ## Preparing simulation parameters
     # Extract the IdealDemands models for each building and set up result file names
@@ -89,23 +90,20 @@ def perform_simulations(
     )
 
     # ## Save simulation settings for reproducibility
-    # Store all simulation parameters for later reference
-    dym_api.save_for_reproduction(
-        title=relevant_information["project"],
-        log_message=f"Simulation study of TEASER project",
-        export_fmu=False
-    )
-    dym_api.close()
+    # Optionally, you can store all simulation parameters for later reference
+    # This feature does not work in jupyter notebooks, as it saves the current script.
+    # Still, we highly encourage you to add it to your work locally, so
+    # that you always know which settings were used to perform the simulations.
 
-    # ## Process simulation results
-    # Convert .mat files to parquet format and create visualization plots.
-    # Set variable_names_to_store to None to load all variables
-    from ebcpy import TimeSeriesData
-    variable_names_to_store = [
-        "multizone.PHeater[*]",  # Wildcards store all zones
-        "multizone.TAir[*]",
-        "weaDat.weaBus.TDryBul"
-    ]
+    # ```python
+    # dym_api.save_for_reproduction(
+    #     title=relevant_information["project"],
+    #     log_message=f"Simulation study of TEASER project",
+    #     export_fmu=False,
+    # )
+    # ```
+    # Afterwards, we close Dymola:
+    dym_api.close()
 
     # ## Analyze each simulation result
     # For each building,
@@ -113,6 +111,16 @@ def perform_simulations(
     # - convert results to parquet (more efficient than .mat for pandas operations)
     # - Remove original .mat file to save space
     # - Plot outdoor temperature, zone temperatures, and heating power
+
+    # Set variable_names_to_store to None to load all variables
+
+    from ebcpy import TimeSeriesData
+    variable_names_to_store = [
+        "multizone.PHeater[*]",  # Wildcards store all zones
+        "multizone.TAir[*]",
+        "weaDat.weaBus.TDryBul"
+    ]
+
     for mat_result_file in simulation_result_files:
         df = TimeSeriesData(mat_result_file, variable_names=variable_names_to_store).to_df()
         df_path = Path(mat_result_file).with_suffix(".parquet")

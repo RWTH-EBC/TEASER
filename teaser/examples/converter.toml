@@ -51,3 +51,4 @@ filename = "teaser/examples/e13_automated_simulation_ebcpy.py"
 func_name = "perform_simulations"
 md_path = "docs/source/examples"
 ipynb_path = "docs/jupyter_notebooks"
+docstrings = true
