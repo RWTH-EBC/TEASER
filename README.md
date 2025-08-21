@@ -1,10 +1,11 @@
-![E.ON EBC RWTH Aachen University](docs/source/_static/EBC_Logo.png)
+![E.ON EBC RWTH Aachen University](https://raw.githubusercontent.com/RWTH-EBC/TEASER/main/docs/source/_static/EBC_Logo.png)
 
 # TEASER - Tool for Energy Analysis and Simulation for Efficient Retrofit
 
+[![documentation](https://rwth-ebc.github.io/TEASER/main/docs/doc.svg)](https://rwth-ebc.github.io/TEASER/main/docs/index.html)
+[![coverage](https://rwth-ebc.github.io/TEASER/main/coverage/badge.svg)](https://rwth-ebc.github.io/TEASER/main/coverage)
+[![Build Status](https://rwth-ebc.github.io/TEASER/main/build/build.svg)](https://rwth-ebc.github.io/TEASER/main/build/build.svg)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
-[![Coverage Status](https://coveralls.io/repos/github/RWTH-EBC/TEASER/badge.svg)](https://coveralls.io/github/RWTH-EBC/TEASER)
-[![Build Status](https://travis-ci.org/RWTH-EBC/TEASER.svg?branch=main)](https://travis-ci.org/RWTH-EBC/TEASER.svg?branch=main)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks)
 
 TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit) allows
@@ -27,10 +28,6 @@ classes and functions can be found at the website:
 
  * http://rwth-ebc.github.io/TEASER/
 
-This GitHub page will be used to further develop the package and make it
-available under the
-[MIT License](https://github.com/RWTH-EBC/TEASER/blob/main/License.md).
-
 If you have any questions regarding TEASER feel free to contact us at
 [ebc-tools@eonerc.rwth-aachen.de](mailto:ebc-tools@eonerc.rwth-aachen.de).
 
@@ -52,23 +49,18 @@ building stocks. TEASER provides an easy interface for multiple data sources,
 data enrichment (where necessary) and export of ready-to-run Modelica simulation
 models for all libraries supporting the
 [Modelica IBPSA library](https://github.com/ibpsa/modelica).
-
-
-## Version
-
-TEASER is an ongoing research project, the current version is still a pre-release.
-
+  
 ## How to use TEASER
 
 ### Examples and jupyter notebooks
 
 We provide different examples to show the usage of TEASER.
-Check out the files under teaser/examples or the jupyter-notebooks available here: docs/jupyter-notebooks.
-If you just want to read the example on github, check them here: docs/examples.
+Check out the files under teaser/examples or the jupyter-notebooks available here: [docs/jupyter_notebooks](https://github.com/RWTH-EBC/TEASER/tree/main/docs/jupyter_notebooks).
+If you just want to read the example on github, check them here: [docs/source/jupyter_notebooks](https://github.com/RWTH-EBC/TEASER/tree/main/docs/source/jupyter_notebooks).
 
 ### Dependencies
 
-TEASER is currently tested against Python 3.7 up to 3.11. Older versions of Python may
+TEASER is currently tested against Python 3.7 up to 3.12. Older versions of Python may
 still work, but are no longer actively supported.
 Using a Python distribution is recommended as they already contain (or easily
 support installation of) many Python packages (e.g. SciPy, NumPy, pip, PyQT,
@@ -135,6 +127,10 @@ Remmen P., Schäfer J., Müller D.. Building Simulation 2019, September 2019,
 
 + The [Institute of Energy Efficiency and Sustainable Building](https://www.e3d.rwth-aachen.de/go/id/iyld/?) published a parametric study of TEASER where all functions and  parameters used in TEASER are gathered and explained. The publication can be found [here](https://publications.rwth-aachen.de/record/749801/files/749801.pdf).
 
++ “Modeling District Heating and Cooling Systems with URBANopt, GeoJSON to Modelica Translator, and the Modelica Buildings Library.”
+Long, Nicholas, Antoine Gautier, Hagar Elarga, Amy Allen, Ted Summer, Lauren Klun, Nathan Moore, and Michael Wetter. 2021.
+In Building Simulation 2021, 8. Bruges, Brussels.
+https://docs.urbanopt.net/doc_files/modeling_des_paper.pdf.
 
 ## License
 
