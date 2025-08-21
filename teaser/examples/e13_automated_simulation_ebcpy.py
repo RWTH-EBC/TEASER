@@ -1,6 +1,7 @@
 # # Example 13: Direct simulation of Modelica with TEASER, ebcpy, and AixLib
 # This example demonstrates how to export building models using TEASER and simulate them with Dymola.
-# You can run this example using the [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks)
+# You can not run this example using the online [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks),
+# as you need Dymola installed on your device.
 
 # ## Prerequisites
 # To use this example, you need to install several packages:
