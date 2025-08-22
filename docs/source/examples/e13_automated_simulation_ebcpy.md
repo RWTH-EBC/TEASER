@@ -133,7 +133,7 @@ dym_api.close()
 ## Analyze each simulation result
 For each building,
 - Load simulation data into a pandas DataFrame
-- convert results to parquet (more efficient than .mat for pandas operations)
+- convert results to parquet (more efficient than .mat for pandas operations) (Only supported with python >=3.9)
 - Remove original .mat file to save space
 - Plot outdoor temperature, zone temperatures, and heating power
 
@@ -180,6 +180,7 @@ for mat_result_file in simulation_result_files:
     ax[1].legend()
     ax[2].legend()
     ax[2].set_xlabel("Time in d")
-    fig.suptitle(Path(mat_result_file).stem)
+    fig.suptitle(df_path.stem)
+    fig.savefig(df_path.with_suffix(".png"))
 plt.show()
 ```
