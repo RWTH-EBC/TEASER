@@ -89,6 +89,6 @@ path = prj.export_aixlib(
     path=None,
     report=True,
     export_vars=export_vars,
-    create_simulation_info=True
+    export_simulation_info=True
 )
 ```

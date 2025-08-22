@@ -791,7 +791,7 @@ class Project(object):
         use_postprocessing_calc=False,
         report=False,
         export_vars=None,
-        create_simulation_info: bool = False
+        export_simulation_info: bool = False
     ):
         """Exports values to a record file for Modelica simulation
 
@@ -824,7 +824,7 @@ class Project(object):
             list of variables to export, wildcards can be used, multiple
             variable selections are possible. This works only for Dymola. See
             (https://www.claytex.com/blog/selection-of-variables-to-be-saved-in-the-result-file/)
-        create_simulation_info: bool
+        export_simulation_info: bool
             If True (not the default), a .json is generated which stores the
             model and record names, as well as the package.mo path to streamline
             direct simulation of exported buildings.
@@ -855,7 +855,7 @@ class Project(object):
                 custom_multizone_template_path=custom_multizone_template_path,
                 use_postprocessing_calc=use_postprocessing_calc,
                 export_vars=export_vars,
-                create_simulation_info=create_simulation_info
+                export_simulation_info=export_simulation_info
             )
         else:
             for bldg in self.buildings:
@@ -866,7 +866,7 @@ class Project(object):
                         =custom_multizone_template_path,
                         use_postprocessing_calc=use_postprocessing_calc,
                         export_vars=export_vars,
-                        create_simulation_info=create_simulation_info
+                        export_simulation_info=export_simulation_info
                     )
 
         if report:

@@ -23,7 +23,7 @@ def export_multizone(
         use_postprocessing_calc: bool = False,
         export_vars=None,
         custom_multizone_template_path=None,
-        create_simulation_info: bool = False
+        export_simulation_info: bool = False
 ):
     """Exports models for AixLib library
 
@@ -64,7 +64,7 @@ def export_multizone(
     custom_multizone_template_path : str
         if a custom template for writing the multizone model should be used,
         its path can be specified as a full path
-    create_simulation_info: bool
+    export_simulation_info: bool
         If True (not the default), a .json is generated which stores the
         model and record names, as well as the package.mo path to streamline
         direct simulation of exported buildings.
@@ -234,7 +234,7 @@ def export_multizone(
 
     print("Exports can be found here:")
     print(path)
-    if create_simulation_info:
+    if export_simulation_info:
         _export_aixlib_simulation_info(prj=prj, path=path)
 
 

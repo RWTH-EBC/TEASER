@@ -1,4 +1,14 @@
 from setuptools import setup
+import sys
+
+
+EXTRAS_REQUIRE = {
+    "report": ["plotly"],
+    "simulation": ["ebcpy>=0.5.6"]
+}
+
+if sys.version_info.minor >= 9 and sys.version_info.major == 3:
+    EXTRAS_REQUIRE['simulation'].append('fastparquet>=2023.1.0')
 
 
 # read the contents of your README file
@@ -113,5 +123,5 @@ setup(
         "Topic :: Utilities",
     ],
     install_requires=["mako", "pytest", "pandas", "numpy"],
-    extras_require={"report": ["plotly"], "simulation": ["ebcpy>=0.5.6"]}
+    extras_require=EXTRAS_REQUIRE
 )
