@@ -205,7 +205,7 @@ def export_multizone(
         for zone in bldg.thermal_zones:
 
             with open(os.path.join(zone_path, bldg.name + '_' + zone.name + '.mo'),
-                'w') as out_file:
+                      'w') as out_file:
                 if type(zone.model_attr).__name__ == "OneElement":
                     out_file.write(zone_template_1.render_unicode(zone=zone))
                 elif type(zone.model_attr).__name__ == "TwoElement":
@@ -289,9 +289,9 @@ def _help_test_script(bldg, dir_dymola, test_script_template):
 
         names_variables = []
         for i, zone in enumerate(bldg.thermal_zones):
-            names_variables.append(f"multizone.PHeater[{i+1}]")
-            names_variables.append(f"multizone.PCooler[{i+1}]")
-            names_variables.append(f"multizone.TAir[{i+1}]")
+            names_variables.append(f"multizone.PHeater[{i + 1}]")
+            names_variables.append(f"multizone.PCooler[{i + 1}]")
+            names_variables.append(f"multizone.TAir[{i + 1}]")
         out_file.write(test_script_template.render_unicode(
             project=bldg.parent,
             bldg=bldg,
@@ -320,16 +320,18 @@ def _export_aixlib_simulation_info(prj: "Project", path: Path):
     package_path = path.joinpath("package.mo")
 
     for bui in prj.buildings:
-        record_name = ".".join([
-            prj.name, bui.name,
-            f"{bui.name}_DataBase",
-            f"{bui.name}_SingleDwelling"
-        ])
+        records = [
+            ".".join([
+                prj.name, bui.name,
+                f"{bui.name}_DataBase",
+                f"{bui.name}_{zone.name}"
+            ]) for zone in bui.thermal_zones
+        ]
         simulation_model_name = ".".join([
             prj.name, bui.name, bui.name
         ])
         buildings_to_simulate[bui.name] = {
-            "record": record_name,
+            "ZoneRecords": records,
             "IdealDemands": simulation_model_name,
         }
     relevant_information = {
