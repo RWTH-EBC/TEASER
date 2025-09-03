@@ -20,6 +20,6 @@ jobs:
       EXECUTE_TESTS: true
       EXECUTE_COVERAGE_TEST: true
       CONVERT_EXAMPLES: true
-      EXTRA_REQUIREMENTS: '[report]'
+      EXTRA_REQUIREMENTS: '[report,simulation]'
       PYTHON_PACKAGE_NAME: 'teaser'
       PYPI_RELEASE: true
