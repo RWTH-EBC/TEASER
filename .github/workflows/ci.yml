@@ -17,3 +17,4 @@ jobs:
       PYTHON_TEST_MATRIX: '["3.12", "3.13"]'
       EXECUTE_COVERAGE_TEST: true
       USE_DYMOLA: true
+
