@@ -47,44 +47,57 @@ class DataClass(object):
 
     """
 
-    def __init__(self, construction_data: ConstructionData) -> object:
+    def __init__(self,
+                 construction_data: ConstructionData,
+                 custom_path_type_elements: str=None,
+                 custom_path_material_templates: str=None,
+                 custom_path_use_conditions: str=None) -> object:
+
         """Construct DataClass."""
         self.element_bind = None
-        if construction_data.is_iwu():
+        if custom_path_type_elements:
+            self.path_tb = custom_path_type_elements
+        elif not custom_path_type_elements and construction_data.is_custom():
+            raise KeyError("Provide path to custom type elements .json file")
+        elif construction_data.is_iwu():
             self.path_tb = utils.get_full_path(
                 "data/input/inputdata/TypeElements_IWU.json"
             )
-            self.load_tb_binding()
         elif construction_data.is_tabula_de():
             self.path_tb = utils.get_full_path(
                 os.path.join(
                     "data", "input", "inputdata", "TypeElements_TABULA_DE.json"
                 )
             )
-            self.load_tb_binding()
         elif construction_data.is_tabula_dk():
             self.path_tb = utils.get_full_path(
                 os.path.join(
                     "data", "input", "inputdata", "TypeElements_TABULA_DK.json"
                 )
             )
-            self.load_tb_binding()
         elif construction_data.is_kfw():
             self.path_tb = utils.get_full_path(
                 os.path.join(
                     "data", "input", "inputdata", "TypeElements_KFW.json"
                 )
             )
-            self.load_tb_binding()
         elif construction_data is None:
             pass
-        self.material_bind = None
-        self.path_mat = utils.get_full_path(
-            "data/input/inputdata/MaterialTemplates.json"
-        )
-        self.conditions_bind = None
-        self.path_uc = utils.get_full_path("data/input/inputdata/UseConditions.json")
 
+        self.material_bind = None
+        if custom_path_material_templates:
+            self.path_mat = custom_path_material_templates
+        else:
+            self.path_mat = utils.get_full_path(
+                "data/input/inputdata/MaterialTemplates.json")
+
+        self.conditions_bind = None
+        if custom_path_use_conditions:
+            self.path_uc = custom_path_use_conditions
+        else:
+            self.path_uc = utils.get_full_path("data/input/inputdata/UseConditions.json")
+
+        self.load_tb_binding()
         self.load_uc_binding()
         self.load_mat_binding()
 

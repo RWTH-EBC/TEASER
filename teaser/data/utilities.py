@@ -91,6 +91,7 @@ class ConstructionData(Enum):
     kfw_70 = "kfw_70"
     kfw_85 = "kfw_85"
     kfw_100 = "kfw_100"
+    custom = "Custom"
 
     def get_prefix(self):
         parts = self.value.split("_", 2)
@@ -111,6 +112,9 @@ class ConstructionData(Enum):
 
     def is_kfw(self):
         return self.get_prefix() == "kfw"
+
+    def is_custom(self):
+        return True
 
 # Dictionary that maps GeometryData enumeration values to their corresponding building classes.
 geometries = {
