@@ -2,6 +2,8 @@
 import os
 import sys
 import warnings
+from typing import Union
+from pathlib import Path
 
 import teaser.logic.utilities as utils
 import json
@@ -26,6 +28,12 @@ class DataClass(object):
     construction_data : ConstructionData
         The prefix of this parameter indicates which statistical data about building
         elements should be used. Its type is the enum class ConstructionData.
+    custom_path_type_elements: str or Path
+        Custom path to json file of TypeElements. Default: None
+    custom_path_material_templates: str or Path
+        Custom path to json file of MaterialTemplates. Default: None
+    custom_path_use_conditions: str or Path
+        Custom path to json file of UseConditions. Default: None
 
     Attributes
     ----------
@@ -49,9 +57,9 @@ class DataClass(object):
 
     def __init__(self,
                  construction_data: ConstructionData,
-                 custom_path_type_elements: str=None,
-                 custom_path_material_templates: str=None,
-                 custom_path_use_conditions: str=None) -> object:
+                 custom_path_type_elements: Union[str, Path]=None,
+                 custom_path_material_templates: Union[str, Path]=None,
+                 custom_path_use_conditions: Union[str, Path]=None) -> object:
 
         """Construct DataClass."""
         self.element_bind = None
