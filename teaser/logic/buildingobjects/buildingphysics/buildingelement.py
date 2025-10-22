@@ -296,7 +296,7 @@ class BuildingElement(object):
             Year of construction
 
         construction : str
-            Construction type, code list ('heavy', 'light')
+            Construction type defined in data_class, code list (e.g. 'heavy', 'light' or custom)
 
         data_class : DataClass()
             DataClass containing the bindings for TypeBuildingElement and

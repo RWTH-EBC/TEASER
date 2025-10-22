@@ -21,7 +21,8 @@ class DataClass(object):
     """Class for JSON data.
 
     This class loads all JSON files with statistic or template data needed
-    for statistical data enrichment.
+    for statistical data enrichment. For loading a custom TypeElements JSON files,
+    use ConstructionData.custom as input.
 
     Parameters
     ----------
@@ -29,11 +30,11 @@ class DataClass(object):
         The prefix of this parameter indicates which statistical data about building
         elements should be used. Its type is the enum class ConstructionData.
     custom_path_type_elements: str or Path
-        Custom path to json file of TypeElements. Default: None
+        Custom path to JSON file of TypeElements. Default: None
     custom_path_material_templates: str or Path
-        Custom path to json file of MaterialTemplates. Default: None
+        Custom path to JSON file of MaterialTemplates. Default: None
     custom_path_use_conditions: str or Path
-        Custom path to json file of UseConditions. Default: None
+        Custom path to JSON file of UseConditions. Default: None
 
     Attributes
     ----------

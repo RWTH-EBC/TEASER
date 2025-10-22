@@ -115,7 +115,7 @@ class ConstructionData(Enum):
 
     def is_custom(self):
         if not any(s in self.value for s in ["iwu", "tabula_de", "tabula_dk", "kfw"]):
-            return True
+            return "custom" in self.value
 
 # Dictionary that maps GeometryData enumeration values to their corresponding building classes.
 geometries = {

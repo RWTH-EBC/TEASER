@@ -180,14 +180,14 @@ class InterzonalWall(Wall):
             Year of construction
 
         construction : str
-            Construction type, code list ('heavy', 'light')
+            Construction type defined in data_class, code list (e.g. 'heavy', 'light' or custom)
 
         data_class : DataClass()
             DataClass containing the bindings for TypeBuildingElement and
             Material (typically this is the data class stored in prj.data,
             but the user can individually change that. Default is
             self.parent.parent.parent.data (which is data_class in current
-            project)
+            project).
 
         element_type : str
             Element type to load - only to specify if the json entry for a
