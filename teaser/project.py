@@ -173,7 +173,6 @@ class Project(object):
         number_of_elements_calc : int
             defines the number of elements, that area aggregated, between 1
             and 5, default is 2
-            For AixLib you should always use 2 elements!!!
 
         merge_windows_calc : bool
             True for merging the windows into the outer walls, False for
@@ -207,6 +206,7 @@ class Project(object):
                         "this building:" + bldg.name
                     )
                     self.buildings.remove(bldg)
+
 
     def retrofit_all_buildings(
         self,

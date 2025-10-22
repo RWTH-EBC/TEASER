@@ -112,7 +112,7 @@ class DataClass(object):
 
     def load_tb_binding(self):
         """Load TypeBuildingElement json into binding classes."""
-        if self.path_tb.endswith("json"):
+        if str(self.path_tb).endswith("json"):
             if os.path.isfile(self.path_tb):
                 try:
                     with open(self.path_tb, "r") as f:
@@ -127,7 +127,7 @@ class DataClass(object):
 
     def load_uc_binding(self):
         """Load UseConditions json into binding classes."""
-        if self.path_uc.endswith("json"):
+        if str(self.path_uc).endswith("json"):
             if os.path.isfile(self.path_uc):
                 try:
                     with open(self.path_uc, "r") as f:
@@ -142,7 +142,7 @@ class DataClass(object):
 
     def load_mat_binding(self):
         """Load MaterialTemplates json into binding classes."""
-        if self.path_mat.endswith("json"):
+        if str(self.path_mat).endswith("json"):
             if os.path.isfile(self.path_mat):
                 try:
                     with open(self.path_mat, "r") as f:
