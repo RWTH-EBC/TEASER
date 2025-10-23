@@ -29,6 +29,8 @@ class DataClass(object):
     construction_data : ConstructionData
         The prefix of this parameter indicates which statistical data about building
         elements should be used. Its type is the enum class ConstructionData.
+        To utilize a custom TypeElements via parameter custom_path_type_elements (cf. below)
+        use ConstructionData.custom.
     custom_path_type_elements: str or Path
         Custom path to JSON file of TypeElements. Default: None
     custom_path_material_templates: str or Path
@@ -64,10 +66,12 @@ class DataClass(object):
 
         """Construct DataClass."""
         self.element_bind = None
-        if custom_path_type_elements:
-            self.path_tb = custom_path_type_elements
-        elif not custom_path_type_elements and construction_data.is_custom():
-            raise KeyError("Provide path to custom type elements .json file")
+        if construction_data.is_custom():
+            if custom_path_type_elements:
+                self.path_tb = custom_path_type_elements
+            elif not custom_path_type_elements:
+                raise KeyError("Provide path to custom type elements JSON file "
+                               "or change ConstructionData to a known construction type")
         elif construction_data.is_iwu():
             self.path_tb = utils.get_full_path(
                 "data/input/inputdata/TypeElements_IWU.json"
