@@ -29,7 +29,7 @@ class DataClass(object):
     construction_data : ConstructionData
         The prefix of this parameter indicates which statistical data about building
         elements should be used. Its type is the enum class ConstructionData.
-        To utilize a custom TypeElements via parameter custom_path_type_elements (cf. below)
+        To utilize custom TypeElements via a JSON file via parameter custom_path_type_elements (cf. below)
         use ConstructionData.custom.
     custom_path_type_elements: str or Path
         Custom path to JSON file of TypeElements. Default: None

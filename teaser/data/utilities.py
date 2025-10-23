@@ -77,6 +77,8 @@ class ConstructionData(Enum):
     The ConstructionData enumeration combines the former parameters “method” and “construction_type”.
     The prefix of each value is used to select the appropriate json file as input data.
     The complete value is used to search for the appropriate element within the json file.
+    To utilize custom TypeElements via a JSON file via parameter custom_path_type_elements (cf. below)
+    use ConstructionData.custom.
     """
     iwu_heavy = "iwu_heavy"
     iwu_light = "iwu_light"
