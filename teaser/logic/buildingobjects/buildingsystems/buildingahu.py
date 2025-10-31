@@ -39,12 +39,6 @@ class BuildingAHU(object):
         Is a HeatRecoverySystem physically integrated in the AHU
         AixLib: 'HRS'
         (default = True)
-    dynamic_volume_flow_control: boolean
-        Wether to use dynamic volume flow control which depends on room temperature deviation
-        (default = false)
-    dynamic_supply_temperature_control: boolean
-        Wether to use dynamic supply temperature flow control which depends on temperature in AHU after HRS
-        (default = false)
     by_pass_dehumidification : float
         By-pass factor of cooling coil during dehumidification. Necessary to
         calculate the real outgoing enthalpy flow of heat exchanger in
@@ -92,6 +86,43 @@ class BuildingAHU(object):
           is used for the AHU supply flow calculations.
           Per default: (v_flow_profile combined with "min_ahu and max_ahu")
 
+    dynamic_volume_flow_control: boolean
+        Wether to use dynamic volume flow control which depends on room temperature deviation
+        (default = false)
+    dynamic_supply_temperature_control: boolean
+        Wether to use dynamic supply temperature flow control which depends on temperature in AHU after HRS
+        (default = false)
+    gain_V_flow_Heat_Max: float
+        Dynamic volume flow control: Max volume flow gain for further heating power
+        (default = 1)
+    gain_V_flow_Cool_Max: float
+        Dynamic volume flow control: Max volume flow gain for further heating power
+        (default = 1)
+    dT_SUP_Offset_Heat: float
+        Dynamic supply temperature control: Base air supply temperature increase when in heating mode
+        (default = 0)
+    dT_SUP_Offset_Cool: float
+        Dynamic supply temperature control: Base air supply temperature decrease when in cooling mode
+        (default = 0)
+    dT_SUP_Heat_Max: float
+        Dynamic supply temperature control: Max temperature difference of T_SUP for further heating power
+        (default = 0)
+    dT_SUP_Cool_Max: float
+        Dynamic supply temperature control: Max temperature difference of T_SUP for further cooling power
+        (default = 0)
+    Ti_PI_Heat_V_flow: float
+        Dynamic volume flow control: Time constant of heating PI controller
+        (default = 300)
+    Ti_PI_Cool_V_flow: float
+        Dynamic volume flow control: Time constant of cooling PI controller
+        (default = 300)
+    Ti_PI_Heat_T_SUP: float
+        Dynamic supply temperature control: Time constant of heating PI controller
+        (default = 3600)
+    Ti_PI_Cool_T_SUP: float
+        Dynamic supply temperature control: Time constant of cooling PI controller
+        (default = 3600)
+
     """
 
     def __init__(self, parent=None):
@@ -104,8 +135,6 @@ class BuildingAHU(object):
         self.dehumidification = True
         self.humidification = True
         self.heat_recovery = True
-        self.dynamic_volume_flow_control = False
-        self.dynamic_supply_temperature_control = False
         self.by_pass_dehumidification = 0.2
         self.efficiency_recovery = 0.65
         self.efficiency_recovery_false = 0.2
@@ -122,6 +151,20 @@ class BuildingAHU(object):
 
         self.T_treshold_heating = 290.15
         self.T_treshold_cooling = 294.15
+
+        # Dynamic ahu control params
+        self.dynamic_volume_flow_control = False
+        self.dynamic_supply_temperature_control = False
+        self.gain_V_flow_Heat_Max = 1
+        self.gain_V_flow_Cool_Max = 1
+        self.dT_SUP_Offset_Heat = 0
+        self.dT_SUP_Offset_Cool = 0
+        self.dT_SUP_Heat_Max = 0
+        self.dT_SUP_Cool_Max = 0
+        self.Ti_PI_Heat_V_flow = 300
+        self.Ti_PI_Cool_V_flow = 300
+        self.Ti_PI_Heat_T_SUP = 3600
+        self.Ti_PI_Cool_T_SUP = 3600
 
         self.schedules = pd.DataFrame(
             index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="h")
