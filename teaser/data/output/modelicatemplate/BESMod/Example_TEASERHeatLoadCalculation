@@ -6,10 +6,10 @@ model TEASERHeatLoadCalculation${bldg.name}
     userProfiles(
         fileNameIntGains=Modelica.Utilities.Files.loadResource(
         "modelica://${bldg.parent.name}/${bldg.name}/InternalGains_${bldg.name}.txt"),
-        setBakTSetZone(
-            amplitude=${get_list(setBakTSetZone_amplitude)},
-            width=${get_list(setBakTSetZone_width)},
-            startTime=${get_list(setBakTSetZone_startTime)})),
+        nigSetBack(
+            dTSetBack=${get_list(setBakTSetZone_amplitude)},
+            timeSetBack=${get_list(setBakTSetZone_width)},
+            startTimeSetBack=${get_list(setBakTSetZone_startTime)})),
     systemParameters(nZones=${len(bldg.thermal_zones)},
                      TSetZone_nominal=${get_list(TSetZone_nominal)},
                      TOda_nominal=${TOda_nominal},

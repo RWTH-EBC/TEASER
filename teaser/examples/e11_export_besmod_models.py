@@ -151,9 +151,9 @@ def example_export_besmod():
     #       redeclare BESMod.Systems.UserProfiles.TEASERProfiles
     #       userProfiles(fileNameIntGains=Modelica.Utilities.Files.loadResource(
     #               "modelica://${bldg.parent.name}/${bldg.name}/InternalGains_${bldg.name}.txt"),
-    #                setBakTSetZone(amplitude=${get_list(setBakTSetZone_amplitude)},
-    #                               width =${get_list(setBakTSetZone_width)},
-    #                               startTime =${get_list(setBakTSetZone_startTime)})),
+    #                dTSetBack=${get_list(setBakTSetZone_amplitude)},
+    #                hoursSetBack=${get_list(setBakTSetZone_width)},
+    #                startTimeSetBack=${get_list(setBakTSetZone_startTime)}),
     #     systemParameters(nZones=${len(bldg.thermal_zones)},
     #                      QBui_flow_nominal = building.QRec_flow_nominal,
     #                      TOda_nominal =${TOda_nominal},

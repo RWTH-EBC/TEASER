@@ -404,7 +404,7 @@ def _convert_heating_profile(heating_profile):
             change_count += 1
             change_indexes.append(i)
     t_set_zone_nominal = max(heating_profile)
-    amplitude = min(heating_profile) - t_set_zone_nominal
+    amplitude = abs(min(heating_profile) - t_set_zone_nominal)
     if change_count == 0:
         amplitude = 0
         start_time = 0
@@ -412,17 +412,17 @@ def _convert_heating_profile(heating_profile):
     elif change_count == 1:
         if heating_profile[0] < heating_profile[-1]:
             start_time = 0
-            width = 100 * change_indexes[0] / 24
+            width = change_indexes[0]
         else:
             start_time = change_indexes[0] * 3600
-            width = 100 * (24 - change_indexes[0]) / 24
+            width = (24 - change_indexes[0])
     elif change_count == 2:
         start_time = change_indexes[1] * 3600
-        width = 100 * (24 - change_indexes[1] + change_indexes[0]) / 24
+        width = (24 - change_indexes[1] + change_indexes[0])
     else:
         raise ValueError("You have more than two temperature intervals in the heating profile."
                          "BESMod can only handel one heating set back.")
-    return t_set_zone_nominal, start_time, width, amplitude
+    return t_set_zone_nominal, start_time, width * 3600, amplitude
 
 
 def _get_next_higher_year_value(years_dict, given_year):
