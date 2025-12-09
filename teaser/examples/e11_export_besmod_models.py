@@ -76,7 +76,7 @@ def example_export_besmod():
     # including internal gains and heating profiles for each zone.
     # BESMod requires 24-hour heating profiles in the export here, which are used
     # to define the set-back parameters. Setting these parameters directly or the use of TSet file
-    # is not supported in the export here. Either override them later or  use the custom export option shown below.
+    # is not supported in the export here. Either override them later or use the custom export option shown below.
     # By default, the TEASER profiles are applied, but these can be customized if needed.
     # For example, we modify the heating profile of the first thermal zone of the first building here:
     prj.buildings[0].thermal_zones[0].use_conditions.heating_profile = [
