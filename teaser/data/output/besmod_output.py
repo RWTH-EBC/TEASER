@@ -163,16 +163,16 @@ def export_besmod(
     for i, bldg in enumerate(buildings):
         bldg.bldg_height = bldg.number_of_floors * bldg.height_of_floors
         start_time_zones = []
-        width_zones = []
-        amplitude_zones = []
+        hours_set_back_zones = []
+        d_temp_set_back_zones = []
         t_set_zone_nominal = []
         for tz in bldg.thermal_zones:
             heating_profile = tz.use_conditions.heating_profile
-            t_set_nominal, start_time, width, amplitude = _convert_heating_profile(heating_profile)
+            t_set_nominal, start_time, hours_set_back, d_temp_set_back = _convert_heating_profile(heating_profile)
             t_set_zone_nominal.append(t_set_nominal)
-            amplitude_zones.append(amplitude)
+            d_temp_set_back_zones.append(d_temp_set_back)
             start_time_zones.append(start_time)
-            width_zones.append(width)
+            hours_set_back_zones.append(hours_set_back)
 
         bldg_path = os.path.join(path, bldg.name)
         utilities.create_path(bldg_path)
@@ -195,9 +195,9 @@ def export_besmod(
                     TSetZone_nominal=t_set_zone_nominal,
                     QBuiOld_flow_design=QBuiOld_flow_design[bldg.name],
                     THydSupOld_design=t_hyd_sup_old_design_bldg[bldg.name],
-                    setBakTSetZone_amplitude=amplitude_zones,
-                    setBakTSetZone_startTime=start_time_zones,
-                    setBakTSetZone_width=width_zones))
+                    dTSetBack=d_temp_set_back_zones,
+                    startTimeSetBack=start_time_zones,
+                    hoursSetBack=hours_set_back_zones))
                 model_file.close()
 
         for exp in examples:
@@ -370,8 +370,8 @@ def _convert_heating_profile(heating_profile):
     This function analyzes a 24-hour heating profile to extract:
     - The nominal temperature.
     - Start time of setbacks (if any).
-    - Width of setback intervals.
-    - Amplitude of the heating variation.
+    - hours_set_back of setback intervals.
+    - d_temp_set_back of the heating variation.
 
     Parameters
     ----------
@@ -384,10 +384,10 @@ def _convert_heating_profile(heating_profile):
         Maximum temperature in the profile, used as the nominal set point.
     start_time : int
         Start time of the setback interval in seconds.
-    width : float
-        Width of the setback interval as a percentage of the day.
-    amplitude : float
-        Difference between the minimum and nominal temperatures.
+    hours_set_back : float
+        hours of the setback interval in h.
+    d_temp_set_back : float
+        Absolute difference between the minimum and nominal temperatures.
 
     Raises
     ------
@@ -404,25 +404,25 @@ def _convert_heating_profile(heating_profile):
             change_count += 1
             change_indexes.append(i)
     t_set_zone_nominal = max(heating_profile)
-    amplitude = min(heating_profile) - t_set_zone_nominal
+    d_temp_set_back = abs(min(heating_profile) - t_set_zone_nominal)
     if change_count == 0:
-        amplitude = 0
+        d_temp_set_back = 0
         start_time = 0
-        width = 1e-50
+        hours_set_back = 0
     elif change_count == 1:
         if heating_profile[0] < heating_profile[-1]:
             start_time = 0
-            width = 100 * change_indexes[0] / 24
+            hours_set_back = change_indexes[0]
         else:
             start_time = change_indexes[0] * 3600
-            width = 100 * (24 - change_indexes[0]) / 24
+            hours_set_back = (24 - change_indexes[0])
     elif change_count == 2:
         start_time = change_indexes[1] * 3600
-        width = 100 * (24 - change_indexes[1] + change_indexes[0]) / 24
+        hours_set_back = (24 - change_indexes[1] + change_indexes[0])
     else:
         raise ValueError("You have more than two temperature intervals in the heating profile."
                          "BESMod can only handel one heating set back.")
-    return t_set_zone_nominal, start_time, width, amplitude
+    return t_set_zone_nominal, start_time, hours_set_back, d_temp_set_back
 
 
 def _get_next_higher_year_value(years_dict, given_year):

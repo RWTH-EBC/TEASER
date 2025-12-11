@@ -74,9 +74,37 @@ def example_export_besmod():
 
     # In the examples, the parameters for BESMod.Systems.UserProfiles.TEASERProfiles are configured,
     # including internal gains and heating profiles for each zone.
-    # BESMod requires 24-hour heating profiles, which are used
-    # to define the parameters of the `setBakTSetZone` Pulse block.
+    # BESMod requires 24-hour heating profiles in the export here, which are used
+    # to define the set-back parameters. Setting these parameters directly or the use of TSet file
+    # is not supported in the export here. Either override them later or use the custom export option shown below.
     # By default, the TEASER profiles are applied, but these can be customized if needed.
+    # For example, we modify the heating profile of the first thermal zone of the first building here:
+    prj.buildings[0].thermal_zones[0].use_conditions.heating_profile = [
+            290.15,  #0-1
+            290.15,  #1-2
+            290.15,  #2-3
+            290.15,  #3-4
+            290.15,  #4-5
+            293.15,  #5-6
+            293.15,  #6-7
+            293.15,  #7-8
+            293.15,  #8-9
+            293.15,  #9-10
+            293.15,  #10-11
+            293.15,  #11-12
+            293.15,  #12-13
+            293.15,  #13-14
+            293.15,  #14-15
+            293.15,  #15-16
+            293.15,  #16-17
+            293.15,  #17-18
+            293.15,  #18-19
+            293.15,  #19-20
+            293.15,  #20-21
+            293.15,  #21-22
+            290.15,  #22-23
+            290.15   #23-24
+        ]
 
     # Additionally, location-specific parameters must be set, which can be achieved using the following function.
     # The default values provided here correspond to Mannheim.
@@ -151,9 +179,9 @@ def example_export_besmod():
     #       redeclare BESMod.Systems.UserProfiles.TEASERProfiles
     #       userProfiles(fileNameIntGains=Modelica.Utilities.Files.loadResource(
     #               "modelica://${bldg.parent.name}/${bldg.name}/InternalGains_${bldg.name}.txt"),
-    #                setBakTSetZone(amplitude=${get_list(setBakTSetZone_amplitude)},
-    #                               width =${get_list(setBakTSetZone_width)},
-    #                               startTime =${get_list(setBakTSetZone_startTime)})),
+    #                dTSetBack=${get_list(dTSetBack)},
+    #                hoursSetBack=${get_list(hoursSetBack)},
+    #                startTimeSetBack=${get_list(startTimeSetBack)})),
     #     systemParameters(nZones=${len(bldg.thermal_zones)},
     #                      QBui_flow_nominal = building.QRec_flow_nominal,
     #                      TOda_nominal =${TOda_nominal},
