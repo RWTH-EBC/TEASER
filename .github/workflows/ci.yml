@@ -22,4 +22,5 @@ jobs:
       CONVERT_EXAMPLES: true
       EXTRA_REQUIREMENTS: '[report,simulation]'
       PYTHON_PACKAGE_NAME: 'teaser'
+      EXAMPLE_CONVERTER_CONFIG: 'teaser/examples/converter.toml'
       PYPI_RELEASE: true
