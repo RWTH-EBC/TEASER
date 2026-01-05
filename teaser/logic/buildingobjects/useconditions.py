@@ -580,13 +580,7 @@ class UseConditions(object):
 
     @with_ideal_thresholds.setter
     def with_ideal_thresholds(self, value):
-        if self.with_ahu is False and value is True:
-            raise ValueError(
-                "Threshold for ideal heaters should only be used"
-                " when AHU is used in this zone"
-            )
-        else:
-            self._with_ideal_thresholds = value
+        self._with_ideal_thresholds = value
 
     @property
     def heating_profile(self):
@@ -668,25 +662,31 @@ class UseConditions(object):
                 "but length is {len(value)}"
             )
 
+    def create_daily_repeating_schedule(self) -> pd.DataFrame:
+        """Helper function to create daily schedules from profiles"""
+        return pd.DataFrame(
+                index=pd.date_range("2019-01-01 00:00:00", periods=8760,
+                                    freq="h").to_series().dt.strftime(
+                    "%m-%d %H:%M:%S"),
+                data={
+                    "heating_profile": list(
+                        islice(cycle(self._heating_profile), 8760)),
+                    "cooling_profile": list(
+                        islice(cycle(self._cooling_profile), 8760)),
+                    "persons_profile": list(
+                        islice(cycle(self._persons_profile), 8760)),
+                    "lighting_profile": list(
+                        islice(cycle(self._lighting_profile), 8760)),
+                    "machines_profile": list(
+                        islice(cycle(self._machines_profile), 8760)),
+                },
+            )
+
     @property
     def schedules(self):
-        self._schedules = pd.DataFrame(
-            index=pd.date_range("2019-01-01 00:00:00", periods=8760,
-                                freq="h").to_series().dt.strftime(
-                "%m-%d %H:%M:%S"),
-            data={
-                "heating_profile": list(
-                    islice(cycle(self._heating_profile), 8760)),
-                "cooling_profile": list(
-                    islice(cycle(self._cooling_profile), 8760)),
-                "persons_profile": list(
-                    islice(cycle(self._persons_profile), 8760)),
-                "lighting_profile": list(
-                    islice(cycle(self._lighting_profile), 8760)),
-                "machines_profile": list(
-                    islice(cycle(self._machines_profile), 8760)),
-            },
-        )
+        if self._schedules is None:
+            # Create default schedule
+            self._schedules = self.create_daily_repeating_schedule()
         return self._schedules
 
     @schedules.setter

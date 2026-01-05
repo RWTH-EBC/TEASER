@@ -45,3 +45,9 @@ filename = "teaser/examples/e11_export_besmod_models.py"
 func_name = "example_export_besmod"
 md_path = "docs/source/examples"
 ipynb_path = "docs/jupyter_notebooks"
+
+[[ExampleFile]]
+filename = "teaser/examples/e13_automated_simulation_ebcpy.py"
+func_name = "perform_simulations"
+md_path = "docs/source/examples"
+ipynb_path = "docs/jupyter_notebooks"

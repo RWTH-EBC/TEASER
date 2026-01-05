@@ -81,13 +81,14 @@ feature only works with Dymola.
 export_vars = {
     "HeatingDemands": ["*multizone.PHeater*", "*multizone.PHeatAHU"],
     "CoolingDemands": ["*multizone.PCooler*", "*multizone.PCoolAHU"],
-    "Temperatures": ["*multizone.TAir*", "*multizone.TRad*"]
+    "Temperatures": ["*multizone.TAir*", "*multizone.TRad*", "weaDat.weaBus.TDryBul"]
 }
 
 path = prj.export_aixlib(
     internal_id=None,
     path=None,
     report=True,
-    export_vars=export_vars
+    export_vars=export_vars,
+    export_simulation_info=True
 )
 ```

@@ -29,7 +29,7 @@ def load_type_element(element, year, construction, data_class,
         Year of construction
 
     construction : str
-        Construction type, code list ('iwu_heavy', 'iwu_light', 'tabula_de_standard', 'kfw_40', ...)
+        Construction type defined in data_class, code list (e.g. 'heavy', 'light' or custom)
 
     data_class : DataClass()
         DataClass containing the bindings for TypeBuildingElement and

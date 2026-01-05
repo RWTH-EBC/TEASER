@@ -171,7 +171,7 @@ class Test_besmod_output(unittest.TestCase):
         t_set_zone_nominal, start_time, width, amplitude = _convert_heating_profile(heating_profile)
         self.assertEqual(t_set_zone_nominal, 293.15)
         self.assertAlmostEqual(start_time, 0)
-        self.assertAlmostEqual(width, 1e-50)
+        self.assertAlmostEqual(width, 0)
         self.assertEqual(amplitude, 0)
         heating_profile = [290.15,
                            290.15,
@@ -200,8 +200,8 @@ class Test_besmod_output(unittest.TestCase):
         t_set_zone_nominal, start_time, width, amplitude = _convert_heating_profile(heating_profile)
         self.assertEqual(t_set_zone_nominal, 293.15)
         self.assertAlmostEqual(start_time, 0)
-        self.assertAlmostEqual(width, 6 / 24 * 100)
-        self.assertEqual(amplitude, -3)
+        self.assertAlmostEqual(width, 6)
+        self.assertEqual(amplitude, 3)
         heating_profile = [293.15,
                            293.15,
                            293.15,
@@ -229,8 +229,8 @@ class Test_besmod_output(unittest.TestCase):
         t_set_zone_nominal, start_time, width, amplitude = _convert_heating_profile(heating_profile)
         self.assertEqual(t_set_zone_nominal, 293.15)
         self.assertAlmostEqual(start_time, 20 * 3600)
-        self.assertAlmostEqual(width, 4 / 24 * 100)
-        self.assertEqual(amplitude, -3)
+        self.assertAlmostEqual(width, 4)
+        self.assertEqual(amplitude, 3)
         heating_profile = [290.15,
                            293.15,
                            293.15,
@@ -258,5 +258,5 @@ class Test_besmod_output(unittest.TestCase):
         t_set_zone_nominal, start_time, width, amplitude = _convert_heating_profile(heating_profile)
         self.assertEqual(t_set_zone_nominal, 293.15)
         self.assertAlmostEqual(start_time, 23 * 3600)
-        self.assertAlmostEqual(width, 2 / 24 * 100)
-        self.assertEqual(amplitude, -3)
+        self.assertAlmostEqual(width, 2)
+        self.assertEqual(amplitude, 3)

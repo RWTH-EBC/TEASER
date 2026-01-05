@@ -133,21 +133,6 @@ class Test_useconditions(object):
             == heating_profile_week
         )
 
-    def test_ahu_threshold_true(self):
-        prj.set_default()
-        helptest.building_test2(prj)
-        use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
-        use_cond.with_ahu = True
-        use_cond.with_ideal_thresholds = True
-
-    def test_ahu_threshold_false(self):
-        prj.set_default()
-        helptest.building_test2(prj)
-        use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
-        use_cond.with_ahu = False
-        with pytest.raises(Exception):
-            use_cond.with_ideal_thresholds = True
-
     def test_profile_adjust_opening_times(self):
         prj.set_default()
         helptest.building_test2(prj)
