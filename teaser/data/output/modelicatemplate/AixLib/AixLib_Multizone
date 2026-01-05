@@ -39,8 +39,7 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
   dehuAHU=${get_true_false(bldg.central_ahu.dehumidification)},
   huAHU=${get_true_false(bldg.central_ahu.humidification)},
   BPFDehuAHU=${bldg.central_ahu.by_pass_dehumidification},
-  HRS=${get_true_false(bldg.central_ahu.heat_recovery)},
-  sampleRateAHU=${bldg.central_ahu.sample_rate},
+  heatRecoveryAHU=${get_true_false(bldg.central_ahu.heat_recovery)},
   effFanAHU_sup=${bldg.central_ahu.efficiency_fan_supply},
   effFanAHU_eta=${bldg.central_ahu.efficiency_fan_return},
   effHRSAHU_enabled=${bldg.central_ahu.efficiency_recovery},
@@ -53,8 +52,7 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
   dehuAHU = false,
   huAHU = false,
   BPFDehuAHU = 0.2,
-  HRS = false,
-  sampleRateAHU=1800,
+  heatRecoveryAHU = false,
   effFanAHU_sup=0.7,
   effFanAHU_eta=0.7,
   effHRSAHU_enabled = 0.8,
@@ -69,9 +67,11 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
    redeclare model corG =
         AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane,
 % if bldg.central_ahu:
-  redeclare model AHUMod = AixLib.Airflow.AirHandlingUnit.AHU)
+  redeclare model AHUMod = AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.ModularAHU,
+    AirHandlingUnit(redeclare model humidifier =
+          AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.SteamHumidifier))
 % else:
-  redeclare model AHUMod = AixLib.Airflow.AirHandlingUnit.NoAHU)
+  redeclare model AHUMod = AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.NoModularAHU)
 % endif
     "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
