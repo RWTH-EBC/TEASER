@@ -152,18 +152,6 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
       annotation (Placement(transformation(extent={{82,80},{102,100}})));
   % endif
 
-  Modelica.Blocks.Sources.CombiTimeTable tableBatteryGains(
-    tableOnFile=true,
-    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    tableName="Internals_BatteryStacks",
-    fileName=Modelica.Utilities.Files.loadResource("modelica://CMBlu/Powerhouse/InternalGains_BatteryStacks.txt"),
-    columns={2}) "Profiles for internal gains of battery stacks"
-    annotation (Placement(transformation(extent={{-64,-48},{-48,-32}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
-    annotation (Placement(transformation(extent={{-12,-50},{8,-30}})));
-  Modelica.Blocks.Math.Gain gain_units(k=500)
-    annotation (Placement(transformation(extent={{-36,-44},{-28,-36}})));
-
 equation
   connect(weaDat.weaBus, multizone.weaBus) annotation (Line(
       points={{-62,40},{-32,40},{-32,6},{34,6}},
@@ -181,13 +169,6 @@ equation
 
   connect(tableTSetCool.y, multizone.TSetCool) annotation (Line(points={{55.2,-58},
           {36.8,-58},{36.8,-9}}, color={0,0,127}));
-
-  connect(prescribedHeatFlow.port, multizone.intGainsConv[1]) annotation (Line(
-        points={{8,-40},{28,-40},{28,-6.2},{34,-6.2}}, color={191,0,0}));
-  connect(tableBatteryGains.y[1], gain_units.u)
-    annotation (Line(points={{-47.2,-40},{-36.8,-40}}, color={0,0,127}));
-  connect(gain_units.y, prescribedHeatFlow.Q_flow)
-    annotation (Line(points={{-27.6,-40},{-12,-40}}, color={0,0,127}));
 
 % if use_postprocessing_calc:
   connect(multizone.TAir, multizonePostProcessing.TAir) annotation (Line(points={{51,4.95},
