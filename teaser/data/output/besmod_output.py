@@ -19,7 +19,8 @@ def export_besmod(
         QBuiOld_flow_design: Optional[Dict[str, Dict[str, float]]] = None,
         THydSupOld_design: Optional[Union[float, Dict[str, float]]] = None,
         custom_examples: Optional[Dict[str, str]] = None,
-        custom_script: Optional[Dict[str, str]] = None
+        custom_script: Optional[Dict[str, str]] = None,
+        export_with_hom: bool = True,
 ) -> None:
     """
     Export building models for BESMod simulations.
@@ -147,6 +148,22 @@ def export_besmod(
         filename=os.path.join(template_path, "BESMod/Building"),
         lookup=lookup)
 
+    building_hom_aixlib_template = Template(
+        filename=os.path.join(template_path, "BESMod/Building_hom_aixlib_dim"),
+        lookup=lookup)
+    single_wall_template = Template(
+        filename=os.path.join(template_path, "BESMod/single_wall_record"),
+        lookup=lookup)
+    multi_inner_wall_template = Template(
+        filename=os.path.join(template_path, "BESMod/multi_inner_wall_record"),
+        lookup=lookup)
+    window_simple_template = Template(
+        filename=os.path.join(template_path, "BESMod/window_simple_record"),
+        lookup=lookup)
+    wall_types = ['OW', 'roof', 'roof_attic', 'IW_vert_half', 'IW2_vert_half',
+                  'IW_hori_upHalf', 'IW_hori_loHalf', 'ground_floor_loHalf',
+                  'ground_floor_upHalf', 'IW_hori_att_upHalf', 'IW_hori_att_loHalf']
+
     uses = [
         'Modelica(version="' + prj.modelica_info.version + '")',
         'AixLib(version="' + prj.buildings[-1].library_attr.version + '")',
@@ -183,6 +200,15 @@ def export_besmod(
             out_file.write(building_template.render_unicode(
                 bldg=bldg))
             out_file.close()
+        export_hom = export_with_hom and type(bldg).__name__ == "AixLibHighOrderSingleFamilyHouse"
+        if export_hom:
+            hom_template_kwargs = bldg.top_level_geo_params
+            with open(os.path.join(bldg_path, bldg.name + "_HOM.mo"), 'w') as out_file:
+                out_file.write(building_hom_aixlib_template.render_unicode(
+                    bldg=bldg,
+                    zone=bldg.thermal_zones[0],
+                    **hom_template_kwargs))
+                out_file.close()
 
         def write_example_mo(example_template, example):
             with open(os.path.join(bldg_path, example + bldg.name + ".mo"),
@@ -217,6 +243,10 @@ def export_besmod(
             _help_example_script(bldg, dir_dymola, example_sim_plot_script, exp)
             write_example_mo(exp_template, exp)
         bldg_package = [exp + bldg.name for exp in examples]
+
+        if export_hom:
+            bldg_package.append(bldg.name+"_HOM")
+
         if custom_examples:
             for exp, c_path in custom_examples.items():
                 bldg_package.append(exp + bldg.name)
@@ -238,6 +268,9 @@ def export_besmod(
             extra=bldg_package)
 
         zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
+        if export_hom:
+            wall_path = os.path.join(zone_path, "Walls")
+            utilities.create_path(wall_path)
 
         for zone in bldg.thermal_zones:
             zone.use_conditions.with_heating = False
@@ -250,6 +283,39 @@ def export_besmod(
                     raise NotImplementedError("BESMod export is only implemented for four elements.")
                 out_file.close()
 
+            if export_hom and zone.name == "single_zone_building":
+                for wall_type in wall_types:
+                    write_wall_record(wall_path=wall_path,
+                                      wall_type=wall_type,
+                                      zone=zone,
+                                      single_wall_template=single_wall_template,
+                                      bldg=bldg)
+
+                with open(os.path.join(
+                        wall_path,
+                        bldg.name + '_wallTypes.mo'), 'w') as out_file:
+                    out_file.write(multi_inner_wall_template.render_unicode(bldg=bldg))
+                    out_file.close()
+                with open(os.path.join(
+                        wall_path,
+                        bldg.name + '_windowSimple.mo'), 'w') as out_file:
+                    out_file.write(window_simple_template.render_unicode(bldg=bldg,
+                                                                         Uw=zone.windows[0].u_value,
+                                                                         g=zone.windows[0].g_value))
+                    out_file.close()
+        if export_hom:
+            modelica_output.create_package(
+                path=wall_path,
+                name='Walls',
+                within=prj.name + '.' + bldg.name + '.' + bldg.name + '_DataBase')
+            modelica_output.create_package_order(
+                path=wall_path,
+                package_list=[],
+                extra=[bldg.name + "_" + w for w in ['windowSimple', 'wallTypes'] + wall_types])
+            extra_data_base_package = ["Walls"]
+        else:
+            extra_data_base_package = None
+
         modelica_output.create_package(
             path=zone_path,
             name=bldg.name + '_DataBase',
@@ -257,7 +323,8 @@ def export_besmod(
         modelica_output.create_package_order(
             path=zone_path,
             package_list=bldg.thermal_zones,
-            addition=bldg.name + "_")
+            addition=bldg.name + "_",
+            extra=extra_data_base_package)
 
     print("Exports can be found here:")
     print(path)
@@ -471,4 +538,136 @@ def _help_example_script(bldg, dir_dymola, test_script_template, example):
             project=bldg.parent,
             bldg=bldg
         ))
+        out_file.close()
+
+
+def write_wall_record(wall_path, wall_type, zone, single_wall_template, bldg):
+    half = False
+    layer_direction = -1
+    if wall_type == 'OW':
+        layers = zone.outer_walls[0].layer
+        n = len(layers)
+        teaser_id_aixlib_inside_layer = 0
+        teaser_id_aixlib_outside_layer = n
+    elif wall_type == 'roof':
+        rooftops = next(
+            (w for w in zone.rooftops if getattr(w, "element_construction_type", None) is None),
+            zone.rooftops[0],
+        )
+        layers = rooftops.layer
+        n = len(layers)
+        teaser_id_aixlib_inside_layer = 0
+        teaser_id_aixlib_outside_layer = n
+    elif wall_type == 'roof_attic':
+        rooftops = next(
+            (w for w in zone.rooftops if getattr(w, "element_construction_type", None) == "Attic"),
+            zone.rooftops[0],
+        )
+        layers = rooftops.layer
+        n = len(layers)
+        teaser_id_aixlib_inside_layer = 0
+        teaser_id_aixlib_outside_layer = n
+    elif wall_type == 'IW_vert_half':
+        inner_wall = next(
+            (w for w in zone.inner_walls if getattr(w, "element_construction_type", None) is None),
+            zone.inner_walls[0],
+        )
+        layers = inner_wall.layer
+        n = len(layers)
+        quotient, remainder = divmod(n, 2)
+        if remainder > 0:
+            half = True
+            quotient += 1
+        teaser_id_aixlib_inside_layer = 0
+        teaser_id_aixlib_outside_layer = quotient
+    elif wall_type == 'IW2_vert_half':
+        inner_wall = next(
+            (w for w in zone.inner_walls if getattr(w, "element_construction_type", None) == "LoadBearing"),
+            zone.inner_walls[0],
+        )
+        layers = inner_wall.layer
+        n = len(layers)
+        quotient, remainder = divmod(n, 2)
+        if remainder > 0:
+            half = True
+            quotient += 1
+        teaser_id_aixlib_inside_layer = 0
+        teaser_id_aixlib_outside_layer = quotient
+    elif wall_type == 'ground_floor_upHalf':
+        layers = zone.ground_floors[0].layer
+        n = len(layers)
+        if n == 1:
+            half = True
+        teaser_id_aixlib_inside_layer = 0
+        teaser_id_aixlib_outside_layer = 1
+    elif wall_type == 'ground_floor_loHalf':
+        # in aixlib different order than ow and rf aixlib last layer is connected to the ground
+        layers = zone.ground_floors[-1].layer
+        n = len(layers)
+        if n == 1:
+            half = True
+            teaser_id_aixlib_outside_layer = 0 + 1
+        else:
+            teaser_id_aixlib_outside_layer = 1 + 1
+        teaser_id_aixlib_inside_layer = n + 1
+        layer_direction = 1
+    elif wall_type == 'IW_hori_loHalf':
+        wall = next(
+            (w for w in zone.ceilings if getattr(w, "element_construction_type", None) is None),
+            zone.ceilings[0],
+        )
+        layers = wall.layer
+        n = len(layers)
+        teaser_id_aixlib_inside_layer = 0
+        teaser_id_aixlib_outside_layer = 1
+    elif wall_type == 'IW_hori_upHalf':
+        wall = next(
+            (w for w in zone.floors if getattr(w, "element_construction_type", None) is None),
+            zone.floors[0],
+        )
+        layers = wall.layer
+        n = len(layers)
+        teaser_id_aixlib_inside_layer = 0
+        teaser_id_aixlib_outside_layer = n - 1
+    elif wall_type == 'IW_hori_att_loHalf':
+        wall = next(
+            (w for w in zone.ceilings if getattr(w, "element_construction_type", None) == "Attic"),
+            zone.ceilings[0],
+        )
+        layers = wall.layer
+        n = len(layers)
+        teaser_id_aixlib_inside_layer = 0
+        teaser_id_aixlib_outside_layer = 1
+    elif wall_type == 'IW_hori_att_upHalf':
+        wall = next(
+            (w for w in zone.floors if getattr(w, "element_construction_type", None) == "Attic"),
+            zone.floors[0],
+        )
+        layers = wall.layer
+        n = len(layers)
+        teaser_id_aixlib_inside_layer = 1
+        teaser_id_aixlib_outside_layer = n - 1
+    else:
+        raise NotImplementedError("This wall type does not exit")
+    d = []
+    rho = []
+    conductivity = []
+    c = []
+    eps = layers[0].material.ir_emissivity
+    # AixLib wall[1] is the outside layer
+    for idx, teaser_layer_id in enumerate(
+            range(teaser_id_aixlib_outside_layer - 1, teaser_id_aixlib_inside_layer - 1, layer_direction)):
+        if half and idx == 0:
+            d.append(layers[teaser_layer_id].thickness / 2)
+        else:
+            d.append(layers[teaser_layer_id].thickness)
+        rho.append(layers[teaser_layer_id].material.density)
+        conductivity.append(layers[teaser_layer_id].material.thermal_conduc)
+        c.append(layers[teaser_layer_id].material.heat_capac * 1000)  # kJ/kgK to J/kgK
+    with open(os.path.join(
+            wall_path,
+            bldg.name + '_' + wall_type + '.mo'), 'w') as out_file:
+        out_file.write(single_wall_template.render_unicode(bldg=bldg, wall_type=wall_type, d=d, rho=rho,
+                                                           conductivity=conductivity, c=c, eps=eps,
+                                                           n=len(d)))
         out_file.close()

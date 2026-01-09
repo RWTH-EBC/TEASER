@@ -108,6 +108,16 @@ def example_generate_archetype():
         height_of_floors=3.2,
         net_leased_area=600.0)
 
+    prj.add_residential(
+        construction_data='tabula_de_standard',
+        geometry_data='aixlib_high_order_single_family_house',
+        name="ResidentialBuildingHighOrder",
+        year_of_construction=1980,
+        net_leased_area=170.0,
+        number_of_floors=2,
+        height_of_floors=2.6
+    )
+
     return prj
 
 

@@ -59,7 +59,8 @@ def example_export_besmod():
                                              "Laboratory": 328.15},
                        "InstituteBuildingMoisture": 343.15,
                        "ResidentialBuildingTabula": 328.15,
-                       "ResidentialBuildingTabulaMulti": 328.15}
+                       "ResidentialBuildingTabulaMulti": 328.15,
+                       "ResidentialBuildingHighOrder": 328.15}
 
     # Option 3: Specify values based on construction year.
     # Here, the value of the next higher specified year is set to the building.
@@ -128,7 +129,8 @@ def example_export_besmod():
     path = prj.export_besmod(
         THydSup_nominal=THydSup_nominal,
         path=None,
-        examples=examples
+        examples=examples,
+        export_with_hom=True
     )
 
     # ## Partial retrofit export

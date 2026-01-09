@@ -67,6 +67,11 @@ class BuildingElement(object):
         List of all layers of a building element (to be filled with Layer
         objects). Use element.layer = None to delete all layers of the building
         element
+    element_construction_type : str
+        If multiple construction types exist for a element in the construction data you
+        can specify which one to use here.
+        e.g. for InnerWall define LoadBearing then it is tried to use InnerWallLoadBearing
+        from the json instead of InnerWall
 
     Calculated Attributes
 
@@ -125,6 +130,7 @@ class BuildingElement(object):
         self._year_of_retrofit = None
         self._year_of_construction = None
         self.building_age_group = [None, None]
+        self._element_construction_type = None
 
         self._area = None
         self._tilt = None
@@ -692,3 +698,12 @@ class BuildingElement(object):
     def construction_data(self, value):
 
         self._construction_data = value
+
+    @property
+    def element_construction_type(self):
+        return self._element_construction_type
+
+    @element_construction_type.setter
+    def element_construction_type(self, value):
+
+        self._element_construction_type = value

@@ -505,6 +505,7 @@ class Project(object):
             'tabula_de_multi_family_house', 'tabula_de_apartment_block',
             'tabula_dk_single_family_house', 'tabula_dk_terraced_house',
             'tabula_dk_multi_family_house', 'tabula_dk_apartment_block'
+            'aixlib_high_order_single_family_house'
 
         name : str
             Individual name
@@ -641,6 +642,14 @@ class Project(object):
             'inner_wall_approximation_approach': inner_wall_approximation_approach,
         }
 
+        aixlib_hom_arg = {
+            'name': name,
+            'year_of_construction': year_of_construction,
+            'height_of_floors': height_of_floors,
+            'net_leased_area': net_leased_area,
+            'construction_data': construction_data,
+        }
+
         urbanrenet_arg = common_arg.copy()
         urbanrenet_arg.update({
             'neighbour_buildings': neighbour_buildings,
@@ -673,6 +682,10 @@ class Project(object):
             urbanrenet_arg['number_of_apartments'] = number_of_apartments
             type_bldg = datahandling.geometries[geometry_data](
                 self, **urbanrenet_arg)
+        elif geometry_data == datahandling.GeometryData.AixLibHighOrderSingleFamilyHouse:
+            print(geometry_data, datahandling.GeometryData.AixLibHighOrderSingleFamilyHouse)
+            type_bldg = datahandling.geometries[geometry_data](
+                self, **aixlib_hom_arg)
         else:
             type_bldg = datahandling.geometries[geometry_data](
                 self, **common_arg)
@@ -730,6 +743,20 @@ class Project(object):
             elements=elements,
             retrofit_choices=retrofit_choices,
         )
+
+    def add_singlfamilyhouse_axlib_hom(
+        self,
+        construction_data,
+        name,
+        year_of_construction,
+        number_of_floors,
+        height_of_floors,
+        net_leased_area,
+        internal_gains_mode=1
+    ):
+        if isinstance(construction_data, str):
+            construction_data = datahandling.ConstructionData(
+                construction_data)
 
     def save_project(self, file_name=None, path=None):
         """Saves the project to a JSON file
@@ -883,7 +910,8 @@ class Project(object):
             THydSupOld_design: Optional[Union[float, Dict[str, float]]] = None,
             custom_examples: Optional[Dict[str, str]] = None,
             custom_script: Optional[Dict[str, str]] = None,
-            report: bool = False
+            report: bool = False,
+            export_with_hom = False
     ) -> str:
         """Exports buildings for BESMod simulation
 
@@ -940,7 +968,7 @@ class Project(object):
             besmod_output.export_besmod(
                 buildings=self.buildings, prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
                 QBuiOld_flow_design=QBuiOld_flow_design, THydSupOld_design=THydSupOld_design,
-                custom_examples=custom_examples, custom_script=custom_script
+                custom_examples=custom_examples, custom_script=custom_script, export_with_hom=export_with_hom
             )
         else:
             for bldg in self.buildings:
@@ -948,7 +976,7 @@ class Project(object):
                     besmod_output.export_besmod(
                         buildings=[bldg], prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
                         QBuiOld_flow_design=QBuiOld_flow_design, THydSupOld_design=THydSupOld_design,
-                        custom_examples=custom_examples, custom_script=custom_script
+                        custom_examples=custom_examples, custom_script=custom_script, export_with_hom=export_with_hom
                     )
 
         if report:
@@ -1103,7 +1131,7 @@ class Project(object):
                 tz.t_outside = t_outside
                 tz.t_ground = t_ground
         if calc_all_buildings:
-            self.calc_all_buildings()
+            self.calc_all_buildings(raise_errors=True)
 
     @staticmethod
     def process_export_vars(export_vars):

@@ -1,0 +1,19 @@
+<%namespace file="/modelica_language/" import="get_true_false, get_list, min_orientations"/>
+<%namespace file="/conversion/" import="deg_to_rad, azmiut_conv"/>
+within ${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls;
+record ${bldg.name}_wallTypes
+    extends AixLib.DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls(
+        OW=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_OW(),
+        IW_vert_half_a=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_IW_vert_half(),
+        IW_vert_half_b=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_IW_vert_half(),
+        IW_hori_upp_half=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_IW_hori_upHalf(),
+        IW_hori_low_half=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_IW_hori_loHalf(),
+        IW_hori_att_upp_half=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_IW_hori_att_upHalf(),
+        IW_hori_att_low_half=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_IW_hori_att_loHalf(),
+        groundPlate_upp_half=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_ground_floor_upHalf(),
+        groundPlate_low_half=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_ground_floor_loHalf(),
+        IW2_vert_half_a=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_IW_vert_half(),
+        IW2_vert_half_b=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_IW_vert_half(),
+        roof=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_roof_attic(),
+        roofRoomUpFloor=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_roof());
+end ${bldg.name}_wallTypes;

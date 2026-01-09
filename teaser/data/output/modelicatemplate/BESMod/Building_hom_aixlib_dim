@@ -1,0 +1,70 @@
+<%namespace file="/modelica_language/" import="get_true_false"/>
+<%namespace file="/conversion/" import="deg_to_rad, azmiut_conv"/>
+within ${bldg.parent.name}.${bldg.name};
+model ${bldg.name}_HOM
+  extends BESMod.Systems.Demand.Building.AixLibHighOrder(
+    calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals,
+    calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Bernd_Glueck,
+    TIR=${tir},
+    redeclare replaceable parameter
+      ${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_wallTypes wallTypes,
+    redeclare model WindowModel =
+       AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple,
+    redeclare replaceable parameter ${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_windowSimple Type_Win,
+    redeclare model CorrSolarGainWin =
+       AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_VDI6007,
+    redeclare BESMod.Systems.Demand.Building.Components.AixLibHighOrderOFD
+      HOMBuiEnv(wholeHouseBuildingEnvelope(
+        groundFloor_Building(
+            WC_Storage(withDoor2=false),
+            Corridor(withDoor1=false),
+            room_width=${room_width},
+            room_height=${height_of_floors},
+            length1=${l1},
+            length2=${l2},
+            length3=${l3},
+            length4=${l4},
+            thickness_IWsimple=${thickness_iw_simple},
+            windowarea_11=${windowarea_11},
+            windowarea_12=${windowarea_12},
+            windowarea_22=${windowarea_22},
+            windowarea_41=${windowarea_41},
+            windowarea_51=${windowarea_51},
+            windowarea_52=${windowarea_52}),
+        upperFloor_Building(
+            room_width_long=${room_width},
+            room_width_short=${room_width_short},
+            room_height_long=${height_of_floors},
+            room_height_short=${room_height_short},
+            roof_width=${wRO},
+            length5=${l1},
+            length6=${l2},
+            length7=${l3},
+            length8=${l4},
+            thickness_IWsimple=${thickness_iw_simple},
+            windowarea_62=${windowarea_i_up_wall},
+            windowarea_63=${windowarea_i_up_roof},
+            windowarea_72=${windowarea_i_up_wall},
+            windowarea_73=${windowarea_i_up_roof},
+            windowarea_92=${windowarea_i_up_wall},
+            windowarea_102=${windowarea_i_up_wall},
+            windowarea_103=${windowarea_i_up_roof}),
+        attic_2Ro_5Rooms(
+            length=${roof_length},
+            width=${roof_width},
+            roof_width1=${wROi},
+            roof_width2=${wROi},
+            room1_length=${room1_length},
+            room2_length=${l1},
+            room3_length=${room3_length},
+            room4_length=${l4},
+            room5_length=${room5_length},
+            room1_width=${room_width_short},
+            room2_width=${room_width_short},
+            room3_width=${room_width_short},
+            room4_width=${room_width_short},
+            room5_width=${room_width_short},
+            alfa=${deg_to_rad(alfa_grad)}))
+      )
+  );
+end ${bldg.name}_HOM;
