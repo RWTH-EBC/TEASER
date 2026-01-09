@@ -70,7 +70,8 @@ THydSup_nominal = {"ResidentialBuilding": 328.15,
                                          "Laboratory": 328.15},
                    "InstituteBuildingMoisture": 343.15,
                    "ResidentialBuildingTabula": 328.15,
-                   "ResidentialBuildingTabulaMulti": 328.15}
+                   "ResidentialBuildingTabulaMulti": 328.15,
+                   "ResidentialBuildingHighOrder": 328.15}
 ```
 
 Option 3: Specify values based on construction year.
@@ -151,7 +152,8 @@ Export all buildings to BESMod and include them in predefined example systems.
 path = prj.export_besmod(
     THydSup_nominal=THydSup_nominal,
     path=None,
-    examples=examples
+    examples=examples,
+    export_with_hom=True
 )
 ```
 
