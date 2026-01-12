@@ -7,10 +7,10 @@ model ${bldg.name}_HOM
     calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Bernd_Glueck,
     TIR=${tir},
     redeclare replaceable parameter
-      ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase.Walls.${zone.parent.name}_wallTypes wallTypes,
+      ${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_wallTypes wallTypes,
     redeclare model WindowModel =
        AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple,
-    redeclare replaceable parameter ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase.Walls.${zone.parent.name}_windowSimple Type_Win,
+    redeclare replaceable parameter ${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_windowSimple Type_Win,
     redeclare model CorrSolarGainWin =
        AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_VDI6007,
     redeclare BESMod.Systems.Demand.Building.Components.AixLibHighOrderOFD
@@ -36,7 +36,7 @@ model ${bldg.name}_HOM
             room_width_short=${room_width_short},
             room_height_long=${height_of_floors},
             room_height_short=${room_height_short},
-            roof_width=${roof_width},
+            roof_width=${wRO},
             length5=${l1},
             length6=${l2},
             length7=${l3},
