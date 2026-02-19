@@ -195,6 +195,25 @@ def export_multizone(
 
                 out_file.close()
 
+            if zone.name == "Swimming_hall" and getattr(zone, "pools", None):
+                pool_db_path = os.path.join(zone_path, "Swimming_hall_DataBase")
+                utilities.create_path(pool_db_path)
+                _help_package(
+                    path=pool_db_path,
+                    name="Swimming_hall_DataBase",
+                    within=prj.name + "." + bldg.name + "." + bldg.name + "_DataBase",
+                )
+                pool_record_names = []
+                for pool in zone.pools:
+                    record_name = "Swimming_hall_" + pool.name
+                    pool_record_names.append(record_name)
+                    with open(os.path.join(pool_db_path, record_name + ".mo"), 'w') as pool_file:
+                        pool_file.write(template_pool.render_unicode(zone=zone, pool=pool))
+                        pool_file.close()
+                with open(os.path.join(pool_db_path, "package.order"), 'w') as order_file:
+                    order_file.write("\n".join(pool_record_names) + "\n")
+                    order_file.close()
+
         _help_package(
             path=zone_path,
             name=bldg.name + '_DataBase',
