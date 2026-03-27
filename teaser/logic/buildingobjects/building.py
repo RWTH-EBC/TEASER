@@ -188,6 +188,7 @@ class Building(object):
         self.latitude = 50.79
 
         self._thermal_zones = []
+        self._combined_thermal_zones = []
         self._outer_area = {}
         self._window_area = {}
 

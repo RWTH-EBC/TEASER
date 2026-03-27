@@ -744,20 +744,6 @@ class Project(object):
             retrofit_choices=retrofit_choices,
         )
 
-    def add_singlfamilyhouse_axlib_hom(
-        self,
-        construction_data,
-        name,
-        year_of_construction,
-        number_of_floors,
-        height_of_floors,
-        net_leased_area,
-        internal_gains_mode=1
-    ):
-        if isinstance(construction_data, str):
-            construction_data = datahandling.ConstructionData(
-                construction_data)
-
     def save_project(self, file_name=None, path=None):
         """Saves the project to a JSON file
 

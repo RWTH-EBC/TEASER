@@ -196,10 +196,6 @@ def export_besmod(
         utilities.create_path(os.path.join(bldg_path, bldg.name + "_DataBase"))
         bldg.library_attr.modelica_gains_boundary(path=bldg_path)
 
-        with open(os.path.join(bldg_path, bldg.name + ".mo"), 'w') as out_file:
-            out_file.write(building_template.render_unicode(
-                bldg=bldg))
-            out_file.close()
         export_hom = export_with_hom and type(bldg).__name__ == "AixLibHighOrderSingleFamilyHouse"
         if export_hom:
             hom_template_kwargs = bldg.top_level_geo_params
@@ -209,6 +205,11 @@ def export_besmod(
                     zone=bldg.thermal_zones[0],
                     **hom_template_kwargs))
                 out_file.close()
+
+        with open(os.path.join(bldg_path, bldg.name + ".mo"), 'w') as out_file:
+            out_file.write(building_template.render_unicode(
+                bldg=bldg))
+            out_file.close()
 
         def write_example_mo(example_template, example):
             with open(os.path.join(bldg_path, example + bldg.name + ".mo"),
