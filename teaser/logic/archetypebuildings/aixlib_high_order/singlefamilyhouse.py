@@ -318,6 +318,21 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     "element_construction_type": None,
                     "with_window": False,
                 },
+                "floor": {
+                    "ori": -2,
+                    "tilt": 0,
+                    "area": self.top_level_geo_params["room3_length"] * self.top_level_geo_params["room_width"],
+                    "type": "GroundFloor",
+                    "element_construction_type": None,
+                },
+                "ceiling": {
+                    "ori": -1,
+                    "tilt": 0,
+                    "area": self.top_level_geo_params["room3_length"] * self.top_level_geo_params["room_width"],
+                    "type": "Ceiling",
+                    "element_construction_type": None,
+                    "adjacent": ("Corridor_upp", "floor")
+                },
                 "inside_wall1": {
                     "ori": 270,
                     "tilt": 90,
