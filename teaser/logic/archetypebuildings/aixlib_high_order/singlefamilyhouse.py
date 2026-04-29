@@ -1,4 +1,7 @@
 import warnings
+
+import numpy as np
+
 import teaser.data.utilities as datahandling
 from teaser.logic.archetypebuildings.residential import Residential
 from teaser.logic.buildingobjects.useconditions import UseConditions as UseCond
@@ -794,7 +797,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     "area": self.top_level_geo_params["l4"] * self.top_level_geo_params["room_width_short"],
                     "type": "Ceiling",
                     "element_construction_type": None,
-                    "adjacent": ("Attic", "floorRoom5")
+                    "adjacent": ("Attic", "floorRoom4")
                 },
                 "inside_wall1": {
                     "ori": 180,
@@ -819,6 +822,82 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     "adjacent": ("Corridor_upp", "inside_wall3")
                 },
             },
+            "Attic": {
+                "roof1":{
+                    "ori": 180,
+                    "tilt": self.top_level_geo_params["roof_tilt"],
+                    "area": self.top_level_geo_params["wROi"] *
+                            self.top_level_geo_params["roof_length"],
+                    "type": "Roof",
+                    "element_construction_type": "Attic",
+                    "with_window": False,
+                },
+                "roof2": {
+                    "ori": 0,
+                    "tilt": self.top_level_geo_params["roof_tilt"],
+                    "area": self.top_level_geo_params["wROi"] *
+                            self.top_level_geo_params["roof_length"],
+                    "type": "Roof",
+                    "element_construction_type": "Attic",
+                    "with_window": False,
+                },
+                "outside_wall1": {
+                    "ori": 90,
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["attic_vert_wall_area"],
+                    "type": "OuterWall",
+                    "element_construction_type": "Attic",
+                    "with_window": False,
+                },
+                "outside_wall2": {
+                    "ori": 270,
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["attic_vert_wall_area"],
+                    "type": "OuterWall",
+                    "element_construction_type": "Attic",
+                    "with_window": False,
+                },
+                "floorRoom1": {
+                    "ori": -2,
+                    "tilt": 0,
+                    "area": self.top_level_geo_params["room1_length"] * self.top_level_geo_params["room_width_short"],
+                    "type": "Floor",
+                    "element_construction_type": "Attic",
+                    "adjacent": ("Bedroom", "ceiling")
+                },
+                "floorRoom2": {
+                    "ori": -2,
+                    "tilt": 0,
+                    "area": self.top_level_geo_params["l1"] * self.top_level_geo_params["room_width_short"],
+                    "type": "Floor",
+                    "element_construction_type": "Attic",
+                    "adjacent": ("Children1", "ceiling")
+                },
+                "floorRoom3": {
+                    "ori": -2,
+                    "tilt": 0,
+                    "area": self.top_level_geo_params["room3_length"] * self.top_level_geo_params["room_width_short"],
+                    "type": "Floor",
+                    "element_construction_type": "Attic",
+                    "adjacent": ("Corridor_upp", "ceiling")
+                },
+                "floorRoom4": {
+                    "ori": -2,
+                    "tilt": 0,
+                    "area": self.top_level_geo_params["l4"] * self.top_level_geo_params["room_width_short"],
+                    "type": "Floor",
+                    "element_construction_type": "Attic",
+                    "adjacent": ("Bath", "ceiling")
+                },
+                "floorRoom5": {
+                    "ori": -2,
+                    "tilt": 0,
+                    "area": self.top_level_geo_params["room5_length"] * self.top_level_geo_params["room_width_short"],
+                    "type": "Floor",
+                    "element_construction_type": "Attic",
+                    "adjacent": ("Children2", "ceiling")
+                }
+            }
         }
 
     def update_calc_original_hom_dim_parameters(self):
@@ -922,6 +1001,14 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
 
         self.top_level_geo_params["windowarea_i_up_roof"] = windowarea_i_up_roof
         self.top_level_geo_params["windowarea_i_up_wall"] = windowarea_i_up_wall
+
+        # Heron's formula
+        semi_perimeter = (roof_width + wROi + wROi) * 0.5
+        self.top_level_geo_params["attic_vert_wall_area"] = (
+            np.sqrt(semi_perimeter*(semi_perimeter-roof_width)*
+                    (semi_perimeter-wROi)*(semi_perimeter-wROi))
+        )
+
         return self.top_level_geo_params
 
     def generate_archetype(self):
