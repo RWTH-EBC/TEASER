@@ -420,6 +420,405 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     "adjacent": ("Corridor_gf", "inside_wall3")
                 },
             },
+            "Bedroom": {
+                "roof":{
+                    "ori": 180,
+                    "tilt": self.top_level_geo_params["roof_tilt"],
+                    "area": self.top_level_geo_params["wRO"]*
+                            self.top_level_geo_params["room1_length"]-
+                            self.top_level_geo_params["windowarea_63"],
+                    "type": "Roof",
+                    "element_construction_type": None,
+                    "with_window": True,
+                    "windowarea": self.top_level_geo_params["windowarea_63"],
+                },
+                "outside_wall1": {
+                    "ori": 180,
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["room1_length"] *
+                            self.top_level_geo_params["room_height_short"],
+                    "type": "OuterWall",
+                    "element_construction_type": None,
+                    "with_window": False,
+                },
+                "outside_wall2": {
+                    "ori": 270,
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["room_width"] *
+                            self.top_level_geo_params["height_of_floors"] -
+                            ((self.top_level_geo_params["height_of_floors"]-
+                              self.top_level_geo_params["room_height_short"])*(
+                                self.top_level_geo_params["room_width"] -
+                                self.top_level_geo_params["room_width_short"]
+                            ))/2 -
+                            self.top_level_geo_params["windowarea_62"],
+                    "type": "OuterWall",
+                    "element_construction_type": None,
+                    "with_window": True,
+                    "windowarea": self.top_level_geo_params["windowarea_62"],
+                },
+                "floor": {
+                    "ori": -2,
+                    "tilt": 0,
+                    "area": self.top_level_geo_params["room1_length"] * self.top_level_geo_params["room_width"],
+                    "type": "Floor",
+                    "element_construction_type": None,
+                    "adjacent": ("Livingroom", "ceiling")
+                },
+                "ceiling": {
+                    "ori": -1,
+                    "tilt": 0,
+                    "area": self.top_level_geo_params["room1_length"] * self.top_level_geo_params["room_width_short"],
+                    "type": "Ceiling",
+                    "element_construction_type": "Attic",
+                    "adjacent": ("Attic", "floorRoom1")
+                },
+                "inside_wall1a": {
+                    "ori": 0,
+                    "tilt": 90,
+                    "area": (self.top_level_geo_params["room1_length"] - self.top_level_geo_params["l2"]) *
+                            self.top_level_geo_params["height_of_floors"],
+                    "type": "InnerWall",
+                    "element_construction_type": "LoadBearing",
+                    "adjacent": ("Children1", "inside_wall1")
+                },
+                "inside_wall1b": {
+                    "ori": 0,
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["l2"] * self.top_level_geo_params["height_of_floors"],
+                    "type": "InnerWall",
+                    "element_construction_type": "LoadBearing",
+                    "adjacent": ("Corridor_upp", "inside_wall2a")
+                },
+                "inside_wall2": {
+                    "ori": 90,  # direction of outside of room
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["room_width"] *
+                            self.top_level_geo_params["height_of_floors"] -
+                            ((self.top_level_geo_params["height_of_floors"]-
+                              self.top_level_geo_params["room_height_short"])*(
+                                self.top_level_geo_params["room_width"] -
+                                self.top_level_geo_params["room_width_short"]
+                            ))/2,
+                    "type": "InnerWall",
+                    "element_construction_type": None,
+                    "adjacent": ("Children2", "inside_wall2")
+                }
+            },
+            "Children2": {
+                "roof":{
+                    "ori": 180,
+                    "tilt": self.top_level_geo_params["roof_tilt"],
+                    "area": self.top_level_geo_params["wRO"]*
+                            self.top_level_geo_params["room5_length"]-
+                            self.top_level_geo_params["windowarea_103"],
+                    "type": "Roof",
+                    "element_construction_type": None,
+                    "with_window": True,
+                    "windowarea": self.top_level_geo_params["windowarea_103"],
+                },
+                "outside_wall1": {
+                    "ori": 180,
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["room5_length"] *
+                            self.top_level_geo_params["room_height_short"],
+                    "type": "OuterWall",
+                    "element_construction_type": None,
+                    "with_window": False,
+                },
+                "outside_wall2": {
+                    "ori": 90,
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["room_width"] *
+                            self.top_level_geo_params["height_of_floors"] -
+                            ((self.top_level_geo_params["height_of_floors"]-
+                              self.top_level_geo_params["room_height_short"])*(
+                                self.top_level_geo_params["room_width"] -
+                                self.top_level_geo_params["room_width_short"]
+                            ))/2 -
+                            self.top_level_geo_params["windowarea_102"],
+                    "type": "OuterWall",
+                    "element_construction_type": None,
+                    "with_window": True,
+                    "windowarea": self.top_level_geo_params["windowarea_102"],
+                },
+                "floor": {
+                    "ori": -2,
+                    "tilt": 0,
+                    "area": self.top_level_geo_params["room5_length"] * self.top_level_geo_params["room_width"],
+                    "type": "Floor",
+                    "element_construction_type": None,
+                    "adjacent": ("Kitchen", "ceiling")
+                },
+                "ceiling": {
+                    "ori": -1,
+                    "tilt": 0,
+                    "area": self.top_level_geo_params["room5_length"] * self.top_level_geo_params["room_width_short"],
+                    "type": "Ceiling",
+                    "element_construction_type": "Attic",
+                    "adjacent": ("Attic", "floorRoom5")
+                },
+                "inside_wall1a": {
+                    "ori": 0,
+                    "tilt": 90,
+                    "area": (self.top_level_geo_params["room5_length"] - self.top_level_geo_params["l3"]) *
+                            self.top_level_geo_params["height_of_floors"],
+                    "type": "InnerWall",
+                    "element_construction_type": "LoadBearing",
+                    "adjacent": ("Bath", "inside_wall1")
+                },
+                "inside_wall1b": {
+                    "ori": 0,
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["l3"] * self.top_level_geo_params["height_of_floors"],
+                    "type": "InnerWall",
+                    "element_construction_type": "LoadBearing",
+                    "adjacent": ("Corridor_upp", "inside_wall2b")
+                },
+                "inside_wall2": {
+                    "ori": 270,  # direction of outside of room
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["room_width"] *
+                            self.top_level_geo_params["height_of_floors"] -
+                            ((self.top_level_geo_params["height_of_floors"]-
+                              self.top_level_geo_params["room_height_short"])*(
+                                self.top_level_geo_params["room_width"] -
+                                self.top_level_geo_params["room_width_short"]
+                            ))/2,
+                    "type": "InnerWall",
+                    "element_construction_type": None,
+                    "adjacent": ("Bedroom", "inside_wall2")
+                },
+            },
+            "Children1": {
+                "roof":{
+                    "ori": 0,
+                    "tilt": self.top_level_geo_params["roof_tilt"],
+                    "area": self.top_level_geo_params["wRO"]*
+                            self.top_level_geo_params["l1"]-
+                            self.top_level_geo_params["windowarea_73"],
+                    "type": "Roof",
+                    "element_construction_type": None,
+                    "with_window": True,
+                    "windowarea": self.top_level_geo_params["windowarea_73"],
+                },
+                "outside_wall1": {
+                    "ori": 0,
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["l1"] * self.top_level_geo_params["room_height_short"],
+                    "type": "OuterWall",
+                    "element_construction_type": None,
+                    "with_window": False,
+                },
+                "outside_wall2": {
+                    "ori": 270,
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["room_width"] *
+                            self.top_level_geo_params["height_of_floors"] -
+                            ((self.top_level_geo_params["height_of_floors"]-
+                              self.top_level_geo_params["room_height_short"])*(
+                                self.top_level_geo_params["room_width"] -
+                                self.top_level_geo_params["room_width_short"]
+                            ))/2 -
+                            self.top_level_geo_params["windowarea_72"],
+                    "type": "OuterWall",
+                    "element_construction_type": None,
+                    "with_window": True,
+                    "windowarea": self.top_level_geo_params["windowarea_72"],
+                },
+                "floor": {
+                    "ori": -2,
+                    "tilt": 0,
+                    "area": self.top_level_geo_params["l1"] * self.top_level_geo_params["room_width"],
+                    "type": "Floor",
+                    "element_construction_type": None,
+                    "adjacent": ("Hobby", "ceiling")
+                },
+                "ceiling": {
+                    "ori": -1,
+                    "tilt": 0,
+                    "area": self.top_level_geo_params["l1"] * self.top_level_geo_params["room_width_short"],
+                    "type": "Ceiling",
+                    "element_construction_type": "Attic",
+                    "adjacent": ("Attic", "floorRoom2")
+                },
+                "inside_wall1": {
+                    "ori": 180,
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["l1"] * self.top_level_geo_params["height_of_floors"],
+                    "type": "InnerWall",
+                    "element_construction_type": "LoadBearing",
+                    "adjacent": ("Bedroom", "inside_wall1a")
+                },
+                "inside_wall2": {
+                    "ori": 90,  # direction of outside of room
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["room_width"] *
+                            self.top_level_geo_params["height_of_floors"] -
+                            ((self.top_level_geo_params["height_of_floors"]-
+                              self.top_level_geo_params["room_height_short"])*(
+                                self.top_level_geo_params["room_width"] -
+                                self.top_level_geo_params["room_width_short"]
+                            ))/2,
+                    "type": "InnerWall",
+                    "element_construction_type": None,
+                    "adjacent": ("Corridor_upp", "inside_wall1")
+                },
+            },
+            "Corridor_upp": {
+                "roof":{
+                    "ori": 0,
+                    "tilt": self.top_level_geo_params["roof_tilt"],
+                    "area": self.top_level_geo_params["wRO"]*
+                            self.top_level_geo_params["room3_length"],
+                    "type": "Roof",
+                    "element_construction_type": None,
+                    "with_window": False
+                },
+                "outside_wall1": {
+                    "ori": 0,
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["room3_length"] * self.top_level_geo_params["room_height_short"],
+                    "type": "OuterWall",
+                    "element_construction_type": None,
+                    "with_window": False,
+                },
+                "floor": {
+                    "ori": -2,
+                    "tilt": 0,
+                    "area": self.top_level_geo_params["room3_length"] * self.top_level_geo_params["room_width"],
+                    "type": "Floor",
+                    "element_construction_type": None,
+                    "adjacent": ("Corridor_gf", "ceiling")
+                },
+                "ceiling": {
+                    "ori": -1,
+                    "tilt": 0,
+                    "area": self.top_level_geo_params["room3_length"] * self.top_level_geo_params["room_width_short"],
+                    "type": "Ceiling",
+                    "element_construction_type": "Attic",
+                    "adjacent": ("Corridor_upp", "floorRoom3")
+                },
+                "inside_wall1": {
+                    "ori": 270,
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["room_width"] *
+                            self.top_level_geo_params["height_of_floors"] -
+                            ((self.top_level_geo_params["height_of_floors"]-
+                              self.top_level_geo_params["room_height_short"])*(
+                                self.top_level_geo_params["room_width"] -
+                                self.top_level_geo_params["room_width_short"]
+                            ))/2,
+                    "type": "InnerWall",
+                    "element_construction_type": None,
+                    "adjacent": ("Children1", "inside_wall2")
+                },
+                "inside_wall2a": {
+                    "ori": 90,
+                    "tilt": 90,
+                    "area": (self.top_level_geo_params["room3_length"] - self.top_level_geo_params["l4"]) *
+                            self.top_level_geo_params["height_of_floors"],
+                    "type": "InnerWall",
+                    "element_construction_type": "LoadBearing",
+                    "adjacent": ("Bedroom", "inside_wall1b")
+                },
+                "inside_wall2b": {
+                    "ori": 90,
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["l4"] * self.top_level_geo_params["height_of_floors"],
+                    "type": "InnerWall",
+                    "element_construction_type": "LoadBearing",
+                    "adjacent": ("Children2", "inside_wall1b")
+                },
+                "inside_wall3": {
+                    "ori": 90,
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["room_width"] *
+                            self.top_level_geo_params["height_of_floors"] -
+                            ((self.top_level_geo_params["height_of_floors"]-
+                              self.top_level_geo_params["room_height_short"])*(
+                                self.top_level_geo_params["room_width"] -
+                                self.top_level_geo_params["room_width_short"]
+                            ))/2,
+                    "type": "InnerWall",
+                    "element_construction_type": None,
+                    "adjacent": ("Bath", "inside_wall2")
+                }
+            },
+            "Bath": {
+                "roof":{
+                    "ori": 0,
+                    "tilt": self.top_level_geo_params["roof_tilt"],
+                    "area": self.top_level_geo_params["wRO"]*
+                            self.top_level_geo_params["l4"],
+                    "type": "Roof",
+                    "element_construction_type": None,
+                    "with_window": False
+                },
+                "outside_wall1": {
+                    "ori": 0,
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["l4"] *
+                            self.top_level_geo_params["room_height_short"],
+                    "type": "OuterWall",
+                    "element_construction_type": None,
+                    "with_window": False,
+                },
+                "outside_wall2": {
+                    "ori": 90,
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["room_width"] *
+                            self.top_level_geo_params["height_of_floors"] -
+                            ((self.top_level_geo_params["height_of_floors"]-
+                              self.top_level_geo_params["room_height_short"])*(
+                                self.top_level_geo_params["room_width"] -
+                                self.top_level_geo_params["room_width_short"]
+                            ))/2 -
+                            self.top_level_geo_params["windowarea_92"],
+                    "type": "OuterWall",
+                    "element_construction_type": None,
+                    "with_window": True,
+                    "windowarea": self.top_level_geo_params["windowarea_92"],
+                },
+                "floor": {
+                    "ori": -2,
+                    "tilt": 0,
+                    "area": self.top_level_geo_params["l4"] * self.top_level_geo_params["room_width"],
+                    "type": "Floor",
+                    "element_construction_type": None,
+                    "adjacent": ("WC_Storage", "ceiling")
+                },
+                "ceiling": {
+                    "ori": -1,
+                    "tilt": 0,
+                    "area": self.top_level_geo_params["l4"] * self.top_level_geo_params["room_width_short"],
+                    "type": "Ceiling",
+                    "element_construction_type": None,
+                    "adjacent": ("Attic", "floorRoom5")
+                },
+                "inside_wall1": {
+                    "ori": 180,
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["l4"] * self.top_level_geo_params["height_of_floors"],
+                    "type": "InnerWall",
+                    "element_construction_type": "LoadBearing",
+                    "adjacent": ("Children2", "inside_wall1a")
+                },
+                "inside_wall2": {
+                    "ori": 270,  # direction of outside of room
+                    "tilt": 90,
+                    "area": self.top_level_geo_params["room_width"] *
+                            self.top_level_geo_params["height_of_floors"] -
+                            ((self.top_level_geo_params["height_of_floors"]-
+                              self.top_level_geo_params["room_height_short"])*(
+                                self.top_level_geo_params["room_width"] -
+                                self.top_level_geo_params["room_width_short"]
+                            ))/2,
+                    "type": "InnerWall",
+                    "element_construction_type": None,
+                    "adjacent": ("Corridor_upp", "inside_wall3")
+                },
+            },
         }
 
     def update_calc_original_hom_dim_parameters(self):
@@ -512,6 +911,15 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
 
         windowarea_i_up_roof = 1.73 * room_width_short / 2.28
         windowarea_i_up_wall = 1.73 * bldg_length / og_dim["bldg_inner_length"]
+
+        self.top_level_geo_params["windowarea_62"] =windowarea_i_up_wall
+        self.top_level_geo_params["windowarea_63"] =windowarea_i_up_roof
+        self.top_level_geo_params["windowarea_72"] =windowarea_i_up_wall
+        self.top_level_geo_params["windowarea_73"] =windowarea_i_up_roof
+        self.top_level_geo_params["windowarea_92"] =windowarea_i_up_wall
+        self.top_level_geo_params["windowarea_102"] =windowarea_i_up_wall
+        self.top_level_geo_params["windowarea_103"] =windowarea_i_up_roof
+
         self.top_level_geo_params["windowarea_i_up_roof"] = windowarea_i_up_roof
         self.top_level_geo_params["windowarea_i_up_wall"] = windowarea_i_up_wall
         return self.top_level_geo_params
