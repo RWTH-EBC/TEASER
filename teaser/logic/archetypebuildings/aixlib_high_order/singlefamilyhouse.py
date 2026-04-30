@@ -95,42 +95,42 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         self.scale_building_geometry()
 
         self.element_orientations = {
-        # "attic_2Ro_5Rooms.roof1": ("North", 0.0, "Roof"),
-        "upperFloor_Building.Children1.roof": ("North", 0.0, "Roof"),
-        "upperFloor_Building.Children1.outside_wall1": ("North", 0.0, "OuterWall"),
-        "upperFloor_Building.Corridor.roof": ("North", 0.0, "Roof"),
-        "upperFloor_Building.Corridor.outside_wall1": ("North", 0.0, "OuterWall"),
-        "upperFloor_Building.Bath.roof": ("North", 0.0, "Roof"),
-        "upperFloor_Building.Bath.outside_wall1": ("North", 0.0, "OuterWall"),
-        "groundFloor_Building.Hobby.outside_wall1": ("North", 0.0, "OuterWall"),
-        "groundFloor_Building.WC_Storage.outside_wall1": ("North", 0.0, "OuterWall"),
-        "groundFloor_Building.Corridor.outside_wall1": ("North", 0.0, "OuterWall"),
+            # "attic_2Ro_5Rooms.roof1": ("North", 0.0, "Roof"),
+            "upperFloor_Building.Children1.roof": ("North", 0.0, "Roof"),
+            "upperFloor_Building.Children1.outside_wall1": ("North", 0.0, "OuterWall"),
+            "upperFloor_Building.Corridor.roof": ("North", 0.0, "Roof"),
+            "upperFloor_Building.Corridor.outside_wall1": ("North", 0.0, "OuterWall"),
+            "upperFloor_Building.Bath.roof": ("North", 0.0, "Roof"),
+            "upperFloor_Building.Bath.outside_wall1": ("North", 0.0, "OuterWall"),
+            "groundFloor_Building.Hobby.outside_wall1": ("North", 0.0, "OuterWall"),
+            "groundFloor_Building.WC_Storage.outside_wall1": ("North", 0.0, "OuterWall"),
+            "groundFloor_Building.Corridor.outside_wall1": ("North", 0.0, "OuterWall"),
 
-        # "attic_2Ro_5Rooms.OW1": ("East", 90.0, "OuterWall"),
-        "upperFloor_Building.Children2.outside_wall2": ("East", 90.0, "OuterWall"),
-        "upperFloor_Building.Bath.outside_wall2": ("East", 90.0, "OuterWall"),
-        "groundFloor_Building.Kitchen.outside_wall2": ("East", 90.0, "OuterWall"),
-        "groundFloor_Building.WC_Storage.outside_wall2": ("East", 90.0, "OuterWall"),
+            # "attic_2Ro_5Rooms.OW1": ("East", 90.0, "OuterWall"),
+            "upperFloor_Building.Children2.outside_wall2": ("East", 90.0, "OuterWall"),
+            "upperFloor_Building.Bath.outside_wall2": ("East", 90.0, "OuterWall"),
+            "groundFloor_Building.Kitchen.outside_wall2": ("East", 90.0, "OuterWall"),
+            "groundFloor_Building.WC_Storage.outside_wall2": ("East", 90.0, "OuterWall"),
 
-        # "attic_2Ro_5Rooms.roof2": ("South", 180.0, "Roof"),
-        "upperFloor_Building.Bedroom.roof": ("South", 180.0, "Roof"),
-        "upperFloor_Building.Bedroom.outside_wall1": ("South", 180.0, "OuterWall"),
-        "upperFloor_Building.Children2.roof": ("South", 180.0, "Roof"),
-        "upperFloor_Building.Children2.outside_wall1": ("South", 180.0, "OuterWall"),
-        "groundFloor_Building.Livingroom.outside_wall1": ("South", 180.0, "OuterWall"),
-        "groundFloor_Building.Kitchen.outside_wall1": ("South", 180.0, "OuterWall"),
+            # "attic_2Ro_5Rooms.roof2": ("South", 180.0, "Roof"),
+            "upperFloor_Building.Bedroom.roof": ("South", 180.0, "Roof"),
+            "upperFloor_Building.Bedroom.outside_wall1": ("South", 180.0, "OuterWall"),
+            "upperFloor_Building.Children2.roof": ("South", 180.0, "Roof"),
+            "upperFloor_Building.Children2.outside_wall1": ("South", 180.0, "OuterWall"),
+            "groundFloor_Building.Livingroom.outside_wall1": ("South", 180.0, "OuterWall"),
+            "groundFloor_Building.Kitchen.outside_wall1": ("South", 180.0, "OuterWall"),
 
-        # "attic_2Ro_5Rooms.OW2": ("West", 270.0, "OuterWall"),
-        "upperFloor_Building.Bedroom.outside_wall2": ("West", 270.0, "OuterWall"),
-        "upperFloor_Building.Children1.outside_wall2": ("West", 270.0, "OuterWall"),
-        "groundFloor_Building.Livingroom.outside_wall2": ("West", 270.0, "OuterWall"),
-        "groundFloor_Building.Hobby.outside_wall2": ("West", 270.0, "OuterWall")
+            # "attic_2Ro_5Rooms.OW2": ("West", 270.0, "OuterWall"),
+            "upperFloor_Building.Bedroom.outside_wall2": ("West", 270.0, "OuterWall"),
+            "upperFloor_Building.Children1.outside_wall2": ("West", 270.0, "OuterWall"),
+            "groundFloor_Building.Livingroom.outside_wall2": ("West", 270.0, "OuterWall"),
+            "groundFloor_Building.Hobby.outside_wall2": ("West", 270.0, "OuterWall")
         }
         self.attic_outer = {
-        "attic_2Ro_5Rooms.roof1": ("North", 0.0, "Roof"),
-        "attic_2Ro_5Rooms.OW1": ("East", 90.0, "OuterWall"),
-        "attic_2Ro_5Rooms.roof2": ("South", 180.0, "Roof"),
-        "attic_2Ro_5Rooms.OW2": ("West", 270.0, "OuterWall"),
+            "attic_2Ro_5Rooms.roof1": ("North", 0.0, "Roof"),
+            "attic_2Ro_5Rooms.OW1": ("East", 90.0, "OuterWall"),
+            "attic_2Ro_5Rooms.roof2": ("South", 180.0, "Roof"),
+            "attic_2Ro_5Rooms.OW2": ("West", 270.0, "OuterWall"),
         }
 
         self.detailed_geo = {
@@ -175,7 +175,8 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 "inside_wall1a": {
                     "ori": 0,
                     "tilt": 90,
-                    "area": (self.top_level_geo_params["room1_length"]-self.top_level_geo_params["l2"]) * self.top_level_geo_params["height_of_floors"],
+                    "area": (self.top_level_geo_params["room1_length"] - self.top_level_geo_params["l2"]) *
+                            self.top_level_geo_params["height_of_floors"],
                     "type": "InnerWall",
                     "element_construction_type": "LoadBearing",
                     "adjacent": ("Hobby", "inside_wall1")
@@ -189,7 +190,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     "adjacent": ("Corridor_gf", "inside_wall2a")
                 },
                 "inside_wall2": {
-                    "ori": 90, # direction of outside of room
+                    "ori": 90,  # direction of outside of room
                     "tilt": 90,
                     "area": self.top_level_geo_params["room_width"] * self.top_level_geo_params["height_of_floors"],
                     "type": "InnerWall",
@@ -238,7 +239,8 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 "inside_wall1a": {
                     "ori": 0,
                     "tilt": 90,
-                    "area": (self.top_level_geo_params["room5_length"]-self.top_level_geo_params["l3"]) * self.top_level_geo_params["height_of_floors"],
+                    "area": (self.top_level_geo_params["room5_length"] - self.top_level_geo_params["l3"]) *
+                            self.top_level_geo_params["height_of_floors"],
                     "type": "InnerWall",
                     "element_construction_type": "LoadBearing",
                     "adjacent": ("WC_Storage", "inside_wall1")
@@ -252,7 +254,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     "adjacent": ("Corridor_gf", "inside_wall2b")
                 },
                 "inside_wall2": {
-                    "ori": 270, # direction of outside of room
+                    "ori": 270,  # direction of outside of room
                     "tilt": 90,
                     "area": self.top_level_geo_params["room_width"] * self.top_level_geo_params["height_of_floors"],
                     "type": "InnerWall",
@@ -424,11 +426,11 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 },
             },
             "Bedroom": {
-                "roof":{
+                "roof": {
                     "ori": 180,
                     "tilt": self.top_level_geo_params["roof_tilt"],
-                    "area": self.top_level_geo_params["wRO"]*
-                            self.top_level_geo_params["room1_length"]-
+                    "area": self.top_level_geo_params["wRO"] *
+                            self.top_level_geo_params["room1_length"] -
                             self.top_level_geo_params["windowarea_63"],
                     "type": "Roof",
                     "element_construction_type": None,
@@ -449,11 +451,11 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     "tilt": 90,
                     "area": self.top_level_geo_params["room_width"] *
                             self.top_level_geo_params["height_of_floors"] -
-                            ((self.top_level_geo_params["height_of_floors"]-
-                              self.top_level_geo_params["room_height_short"])*(
-                                self.top_level_geo_params["room_width"] -
-                                self.top_level_geo_params["room_width_short"]
-                            ))/2 -
+                            ((self.top_level_geo_params["height_of_floors"] -
+                              self.top_level_geo_params["room_height_short"]) * (
+                                     self.top_level_geo_params["room_width"] -
+                                     self.top_level_geo_params["room_width_short"]
+                             )) / 2 -
                             self.top_level_geo_params["windowarea_62"],
                     "type": "OuterWall",
                     "element_construction_type": None,
@@ -498,22 +500,22 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     "tilt": 90,
                     "area": self.top_level_geo_params["room_width"] *
                             self.top_level_geo_params["height_of_floors"] -
-                            ((self.top_level_geo_params["height_of_floors"]-
-                              self.top_level_geo_params["room_height_short"])*(
-                                self.top_level_geo_params["room_width"] -
-                                self.top_level_geo_params["room_width_short"]
-                            ))/2,
+                            ((self.top_level_geo_params["height_of_floors"] -
+                              self.top_level_geo_params["room_height_short"]) * (
+                                     self.top_level_geo_params["room_width"] -
+                                     self.top_level_geo_params["room_width_short"]
+                             )) / 2,
                     "type": "InnerWall",
                     "element_construction_type": None,
                     "adjacent": ("Children2", "inside_wall2")
                 }
             },
             "Children2": {
-                "roof":{
+                "roof": {
                     "ori": 180,
                     "tilt": self.top_level_geo_params["roof_tilt"],
-                    "area": self.top_level_geo_params["wRO"]*
-                            self.top_level_geo_params["room5_length"]-
+                    "area": self.top_level_geo_params["wRO"] *
+                            self.top_level_geo_params["room5_length"] -
                             self.top_level_geo_params["windowarea_103"],
                     "type": "Roof",
                     "element_construction_type": None,
@@ -532,13 +534,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 "outside_wall2": {
                     "ori": 90,
                     "tilt": 90,
-                    "area": self.top_level_geo_params["room_width"] *
-                            self.top_level_geo_params["height_of_floors"] -
-                            ((self.top_level_geo_params["height_of_floors"]-
-                              self.top_level_geo_params["room_height_short"])*(
-                                self.top_level_geo_params["room_width"] -
-                                self.top_level_geo_params["room_width_short"]
-                            ))/2 -
+                    "area": self.top_level_geo_params["upp_gable_wall_area"] -
                             self.top_level_geo_params["windowarea_102"],
                     "type": "OuterWall",
                     "element_construction_type": None,
@@ -581,24 +577,18 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 "inside_wall2": {
                     "ori": 270,  # direction of outside of room
                     "tilt": 90,
-                    "area": self.top_level_geo_params["room_width"] *
-                            self.top_level_geo_params["height_of_floors"] -
-                            ((self.top_level_geo_params["height_of_floors"]-
-                              self.top_level_geo_params["room_height_short"])*(
-                                self.top_level_geo_params["room_width"] -
-                                self.top_level_geo_params["room_width_short"]
-                            ))/2,
+                    "area": self.top_level_geo_params["upp_gable_wall_area"],
                     "type": "InnerWall",
                     "element_construction_type": None,
                     "adjacent": ("Bedroom", "inside_wall2")
                 },
             },
             "Children1": {
-                "roof":{
+                "roof": {
                     "ori": 0,
                     "tilt": self.top_level_geo_params["roof_tilt"],
-                    "area": self.top_level_geo_params["wRO"]*
-                            self.top_level_geo_params["l1"]-
+                    "area": self.top_level_geo_params["wRO"] *
+                            self.top_level_geo_params["l1"] -
                             self.top_level_geo_params["windowarea_73"],
                     "type": "Roof",
                     "element_construction_type": None,
@@ -616,13 +606,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 "outside_wall2": {
                     "ori": 270,
                     "tilt": 90,
-                    "area": self.top_level_geo_params["room_width"] *
-                            self.top_level_geo_params["height_of_floors"] -
-                            ((self.top_level_geo_params["height_of_floors"]-
-                              self.top_level_geo_params["room_height_short"])*(
-                                self.top_level_geo_params["room_width"] -
-                                self.top_level_geo_params["room_width_short"]
-                            ))/2 -
+                    "area": self.top_level_geo_params["upp_gable_wall_area"] -
                             self.top_level_geo_params["windowarea_72"],
                     "type": "OuterWall",
                     "element_construction_type": None,
@@ -656,23 +640,17 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 "inside_wall2": {
                     "ori": 90,  # direction of outside of room
                     "tilt": 90,
-                    "area": self.top_level_geo_params["room_width"] *
-                            self.top_level_geo_params["height_of_floors"] -
-                            ((self.top_level_geo_params["height_of_floors"]-
-                              self.top_level_geo_params["room_height_short"])*(
-                                self.top_level_geo_params["room_width"] -
-                                self.top_level_geo_params["room_width_short"]
-                            ))/2,
+                    "area": self.top_level_geo_params["upp_gable_wall_area"],
                     "type": "InnerWall",
                     "element_construction_type": None,
                     "adjacent": ("Corridor_upp", "inside_wall1")
                 },
             },
             "Corridor_upp": {
-                "roof":{
+                "roof": {
                     "ori": 0,
                     "tilt": self.top_level_geo_params["roof_tilt"],
-                    "area": self.top_level_geo_params["wRO"]*
+                    "area": self.top_level_geo_params["wRO"] *
                             self.top_level_geo_params["room3_length"],
                     "type": "Roof",
                     "element_construction_type": None,
@@ -705,13 +683,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 "inside_wall1": {
                     "ori": 270,
                     "tilt": 90,
-                    "area": self.top_level_geo_params["room_width"] *
-                            self.top_level_geo_params["height_of_floors"] -
-                            ((self.top_level_geo_params["height_of_floors"]-
-                              self.top_level_geo_params["room_height_short"])*(
-                                self.top_level_geo_params["room_width"] -
-                                self.top_level_geo_params["room_width_short"]
-                            ))/2,
+                    "area": self.top_level_geo_params["upp_gable_wall_area"],
                     "type": "InnerWall",
                     "element_construction_type": None,
                     "adjacent": ("Children1", "inside_wall2")
@@ -736,23 +708,17 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 "inside_wall3": {
                     "ori": 90,
                     "tilt": 90,
-                    "area": self.top_level_geo_params["room_width"] *
-                            self.top_level_geo_params["height_of_floors"] -
-                            ((self.top_level_geo_params["height_of_floors"]-
-                              self.top_level_geo_params["room_height_short"])*(
-                                self.top_level_geo_params["room_width"] -
-                                self.top_level_geo_params["room_width_short"]
-                            ))/2,
+                    "area": self.top_level_geo_params["upp_gable_wall_area"],
                     "type": "InnerWall",
                     "element_construction_type": None,
                     "adjacent": ("Bath", "inside_wall2")
                 }
             },
             "Bath": {
-                "roof":{
+                "roof": {
                     "ori": 0,
                     "tilt": self.top_level_geo_params["roof_tilt"],
-                    "area": self.top_level_geo_params["wRO"]*
+                    "area": self.top_level_geo_params["wRO"] *
                             self.top_level_geo_params["l4"],
                     "type": "Roof",
                     "element_construction_type": None,
@@ -770,13 +736,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 "outside_wall2": {
                     "ori": 90,
                     "tilt": 90,
-                    "area": self.top_level_geo_params["room_width"] *
-                            self.top_level_geo_params["height_of_floors"] -
-                            ((self.top_level_geo_params["height_of_floors"]-
-                              self.top_level_geo_params["room_height_short"])*(
-                                self.top_level_geo_params["room_width"] -
-                                self.top_level_geo_params["room_width_short"]
-                            ))/2 -
+                    "area": self.top_level_geo_params["upp_gable_wall_area"] -
                             self.top_level_geo_params["windowarea_92"],
                     "type": "OuterWall",
                     "element_construction_type": None,
@@ -810,20 +770,14 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 "inside_wall2": {
                     "ori": 270,  # direction of outside of room
                     "tilt": 90,
-                    "area": self.top_level_geo_params["room_width"] *
-                            self.top_level_geo_params["height_of_floors"] -
-                            ((self.top_level_geo_params["height_of_floors"]-
-                              self.top_level_geo_params["room_height_short"])*(
-                                self.top_level_geo_params["room_width"] -
-                                self.top_level_geo_params["room_width_short"]
-                            ))/2,
+                    "area": self.top_level_geo_params["upp_gable_wall_area"],
                     "type": "InnerWall",
                     "element_construction_type": None,
                     "adjacent": ("Corridor_upp", "inside_wall3")
                 },
             },
             "Attic": {
-                "roof1":{
+                "roof1": {
                     "ori": 180,
                     "tilt": self.top_level_geo_params["roof_tilt"],
                     "area": self.top_level_geo_params["wROi"] *
@@ -899,6 +853,35 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 }
             }
         }
+        self.room_volumes = {
+            "Livigroom": self.top_level_geo_params["room1_length"] *
+                         self.top_level_geo_params["room_width"] *
+                         self.top_level_geo_params["height_of_floors"],
+            "Hobby": self.top_level_geo_params["l1"] *
+                     self.top_level_geo_params["room_width"] *
+                     self.top_level_geo_params["height_of_floors"],
+            "Corridor_gf": self.top_level_geo_params["room3_length"] *
+                           self.top_level_geo_params["room_width"] *
+                           self.top_level_geo_params["height_of_floors"],
+            "WC_Storage": self.top_level_geo_params["l4"] *
+                          self.top_level_geo_params["room_width"] *
+                          self.top_level_geo_params["height_of_floors"],
+            "Kitchen": self.top_level_geo_params["room5_length"] *
+                       self.top_level_geo_params["room_width"] *
+                       self.top_level_geo_params["height_of_floors"],
+            "Bedroom": self.top_level_geo_params["room1_length"] *
+                       self.top_level_geo_params["upp_gable_wall_area"],
+            "Children1": self.top_level_geo_params["l1"] *
+                         self.top_level_geo_params["upp_gable_wall_area"],
+            "Corridor_upp": self.top_level_geo_params["room3_length"] *
+                       self.top_level_geo_params["upp_gable_wall_area"],
+            "Bath": self.top_level_geo_params["l4"] *
+                       self.top_level_geo_params["upp_gable_wall_area"],
+            "Children2": self.top_level_geo_params["room5_length"] *
+                       self.top_level_geo_params["upp_gable_wall_area"],
+            "Attic": self.top_level_geo_params["roof_length"] *
+                     self.top_level_geo_params["attic_vert_wall_area"]
+        }
 
     def update_calc_original_hom_dim_parameters(self):
         def_params = self._original_hom_dim_parameters.copy()
@@ -910,7 +893,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         self._original_hom_dim_parameters["room3_length"] = def_params["l2"] + def_params["l3"]
         self._original_hom_dim_parameters["room5_length"] = (def_params["l3"] + def_params["l4"] +
                                                              def_params["thickness_iw_simple"])
-        
+
     def scale_building_geometry(self):
         og_dim = self._original_hom_dim_parameters
         self.top_level_geo_params = {}
@@ -933,7 +916,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         self.top_level_geo_params['room_width'] = room_width
 
         l1 = bldg_length * og_dim["l1"] / og_dim["bldg_inner_length"]
-        l2 = bldg_length * og_dim["l2"]/ og_dim["bldg_inner_length"]
+        l2 = bldg_length * og_dim["l2"] / og_dim["bldg_inner_length"]
         l3 = bldg_length * og_dim["l3"] / og_dim["bldg_inner_length"]
         l4 = bldg_length * og_dim["l4"] / og_dim["bldg_inner_length"]
 
@@ -955,13 +938,13 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         roof_length = bldg_length + 2 * thickness_iw_simple  # inner wall thicknesses load simpled?
         self.top_level_geo_params["roof_length"] = roof_length
 
-        alfa_grad = 90  # maybe test 110 for 35 roof_tilt
+        alfa_grad = 90  # ToDo: maybe test 110 for 35 roof_tilt make changeable
         roof_tilt = (180 - alfa_grad) / 2
         self.top_level_geo_params["roof_tilt"] = roof_tilt
         self.top_level_geo_params["alfa_grad"] = alfa_grad
         height_of_floors = self.height_of_floors
         self.top_level_geo_params["height_of_floors"] = height_of_floors
-        room_height_short = 1  # here fixed
+        room_height_short = 1  # ToDo: here fixed make changeable
         room_width_short = room_width - (height_of_floors - room_height_short) / tan(roof_tilt * pi / 180)
         self.top_level_geo_params["room_width_short"] = room_width_short
         self.top_level_geo_params["room_height_short"] = room_height_short
@@ -991,13 +974,13 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         windowarea_i_up_roof = 1.73 * room_width_short / 2.28
         windowarea_i_up_wall = 1.73 * bldg_length / og_dim["bldg_inner_length"]
 
-        self.top_level_geo_params["windowarea_62"] =windowarea_i_up_wall
-        self.top_level_geo_params["windowarea_63"] =windowarea_i_up_roof
-        self.top_level_geo_params["windowarea_72"] =windowarea_i_up_wall
-        self.top_level_geo_params["windowarea_73"] =windowarea_i_up_roof
-        self.top_level_geo_params["windowarea_92"] =windowarea_i_up_wall
-        self.top_level_geo_params["windowarea_102"] =windowarea_i_up_wall
-        self.top_level_geo_params["windowarea_103"] =windowarea_i_up_roof
+        self.top_level_geo_params["windowarea_62"] = windowarea_i_up_wall
+        self.top_level_geo_params["windowarea_63"] = windowarea_i_up_roof
+        self.top_level_geo_params["windowarea_72"] = windowarea_i_up_wall
+        self.top_level_geo_params["windowarea_73"] = windowarea_i_up_roof
+        self.top_level_geo_params["windowarea_92"] = windowarea_i_up_wall
+        self.top_level_geo_params["windowarea_102"] = windowarea_i_up_wall
+        self.top_level_geo_params["windowarea_103"] = windowarea_i_up_roof
 
         self.top_level_geo_params["windowarea_i_up_roof"] = windowarea_i_up_roof
         self.top_level_geo_params["windowarea_i_up_wall"] = windowarea_i_up_wall
@@ -1005,9 +988,17 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         # Heron's formula
         semi_perimeter = (roof_width + wROi + wROi) * 0.5
         self.top_level_geo_params["attic_vert_wall_area"] = (
-            np.sqrt(semi_perimeter*(semi_perimeter-roof_width)*
-                    (semi_perimeter-wROi)*(semi_perimeter-wROi))
+            np.sqrt(semi_perimeter * (semi_perimeter - roof_width) *
+                    (semi_perimeter - wROi) * (semi_perimeter - wROi))
         )
+
+        self.top_level_geo_params["upp_gable_wall_area"] = (self.top_level_geo_params["room_width"] *
+                                                            self.top_level_geo_params["height_of_floors"] -
+                                                            ((self.top_level_geo_params["height_of_floors"] -
+                                                              self.top_level_geo_params["room_height_short"]) * (
+                                                                     self.top_level_geo_params["room_width"] -
+                                                                     self.top_level_geo_params["room_width_short"]
+                                                             )) / 2)
 
         return self.top_level_geo_params
 
@@ -1035,10 +1026,10 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             construction=self._construction_data_1,
             data_class=self.parent.data
         )
-        outer_wall.name = "dummy_outer_wall" # LivingRoom outside_wall1 South
+        outer_wall.name = "dummy_outer_wall"  # LivingRoom outside_wall1 South
         outer_wall.tilt = 90
         outer_wall.orientation = 180
-        outer_wall.area = (self.top_level_geo_params["room1_length"]*self.top_level_geo_params["height_of_floors"] -
+        outer_wall.area = (self.top_level_geo_params["room1_length"] * self.top_level_geo_params["height_of_floors"] -
                            self.top_level_geo_params["windowarea_11"])
 
         window = Window(zone)
@@ -1063,7 +1054,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             construction=self._construction_data_1,
             data_class=self.parent.data
         )
-        gf.name = "dummy_ground_floor" # LivingRoom ground_floor
+        gf.name = "dummy_ground_floor"  # LivingRoom ground_floor
         gf.tilt = 0
         gf.orientation = -2
         gf.area = self.top_level_geo_params["room1_length"] * self.top_level_geo_params["room_width"]
@@ -1140,7 +1131,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         ceiling_attic.tilt = 0
         ceiling_attic.orientation = -1
         ceiling_attic.area = (self.top_level_geo_params["room1_length"] *
-                             self.top_level_geo_params["room_width_short"])
+                              self.top_level_geo_params["room_width_short"])
 
         floor = Floor(zone)
         floor.load_type_element(
@@ -1152,9 +1143,9 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         floor.tilt = 0
         floor.orientation = -2
         floor.area = (self.top_level_geo_params["room1_length"] *
-                        self.top_level_geo_params["room_width"])
+                      self.top_level_geo_params["room_width"])
 
-        floor_attic = Floor(zone)   # attic_2Ro_5Rooms
+        floor_attic = Floor(zone)  # attic_2Ro_5Rooms
         floor_attic.element_construction_type = "Attic"
         floor_attic.load_type_element(
             year=self.year_of_construction,
