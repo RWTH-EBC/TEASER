@@ -25,8 +25,21 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             year_of_construction=None,
             height_of_floors=2.6,
             net_leased_area=170,
-            construction_data=None
+            construction_data=None,
     ):
+        """
+
+        Parameters
+        ----------
+        parent
+        name
+        year_of_construction
+        height_of_floors
+        net_leased_area
+            Default is original AixLib HOM dim. similar TABULA buildings span
+            from 111 to 216
+        construction_data
+        """
         super(AixLibHighOrderSingleFamilyHouse, self).__init__(
             parent,
             name,
@@ -41,12 +54,27 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         else:
             self._construction_data_1 = self.construction_data.value
 
+        self.unheated_rooms = ["Attic"]
+
+        self.zoning = {"single_zone_heated": [
+            "Livingroom",
+            "Hobby",
+            "Corridor_gf",
+            "WC_Storage",
+            "Kitchen",
+            "Bedroom",
+            "Children1",
+            "Corridor_upp",
+            "Bathroom",
+            "Children2",
+        ]}
+
         self.number_of_floors = 2
         self._wall_types = ['OW', 'roof', 'roof_attic', 'IW_vert_half', 'IW_hori_upHalf', 'IW_hori_loHalf',
                             'ground_floor_loHalf',
                             'ground_floor_upHalf', 'IW_hori_att_upHalf', 'IW_hori_att_loHalf']
-        self._hom_dim_parameters = {}
         self._original_hom_dim_parameters = {
+            "height_of_floors": 2.6,
             "thickness_iw_simple": 0.145,
             "l1": 3.3,
             "l2": 2.44,
@@ -55,7 +83,6 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             "room_width": 3.92,
             "room_height": 2.6,
             "windowarea_11": 8.44,
-            "window_11_orientation": 180,
             "windowarea_12": 1.73,
             "windowarea_22": 1.73,
             "windowarea_41": 1.4,
@@ -65,7 +92,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             "height_door_31": 2.25,
             "width_door_42": 1.25,
             "height_door_42": 2.25,
-            "heigth_dwarf_wall": 1,
+            "height_dwarf_wall": 1,
             "room_ceiling_attic_width": 2.28,
             "room_roof_length": 2.21,
             "windowarea_62": 1.73,
@@ -75,7 +102,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             "windowarea_92": 1.73,
             "windowarea_102": 1.73,
             "windowarea_103": 1.73,
-            "alfa_grad": 90,
+            "alfa_grad": 90, # ToDo: maybe test 110 for 35 roof_tilt make changeable
         }
         self.update_calc_original_hom_dim_parameters()
 
@@ -925,7 +952,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         self.top_level_geo_params["l3"] = l3
         self.top_level_geo_params["l4"] = l4
 
-        thickness_iw_simple = 0.145
+        thickness_iw_simple = og_dim["thickness_iw_simple"]
         self.top_level_geo_params["thickness_iw_simple"] = thickness_iw_simple
         room1_length = l1 + l2 + thickness_iw_simple
         room3_length = l2 + l3
@@ -938,13 +965,13 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         roof_length = bldg_length + 2 * thickness_iw_simple  # inner wall thicknesses load simpled?
         self.top_level_geo_params["roof_length"] = roof_length
 
-        alfa_grad = 90  # ToDo: maybe test 110 for 35 roof_tilt make changeable
+        alfa_grad = og_dim["alfa_grad"]
         roof_tilt = (180 - alfa_grad) / 2
         self.top_level_geo_params["roof_tilt"] = roof_tilt
         self.top_level_geo_params["alfa_grad"] = alfa_grad
         height_of_floors = self.height_of_floors
         self.top_level_geo_params["height_of_floors"] = height_of_floors
-        room_height_short = 1  # ToDo: here fixed make changeable
+        room_height_short = og_dim["height_dwarf_wall"]
         room_width_short = room_width - (height_of_floors - room_height_short) / tan(roof_tilt * pi / 180)
         self.top_level_geo_params["room_width_short"] = room_width_short
         self.top_level_geo_params["room_height_short"] = room_height_short
@@ -957,12 +984,12 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         self.top_level_geo_params["wROi"] = wROi
         # print(f"Complete building height: {height_of_floors*2+wROi*sin(roof_tilt*pi/180)}")
 
-        windowarea_11 = 8.44 * room1_length / 5.885
-        windowarea_12 = 1.73 * room_width / 3.92
-        windowarea_22 = 1.73 * roof_width / 3.92
-        windowarea_41 = 1.4 * l4 / 3.3
-        windowarea_51 = 3.46 * room5_length / 4.775
-        windowarea_52 = 1.73 * room_width / 3.92
+        windowarea_11 = og_dim["windowarea_11"] * room1_length / og_dim["room1_length"]
+        windowarea_12 = og_dim["windowarea_12"] * room_width / og_dim["room_width"]
+        windowarea_22 = og_dim["windowarea_22"] * roof_width / og_dim["room_width"]
+        windowarea_41 = og_dim["windowarea_41"] * l4 / og_dim["l4"]
+        windowarea_51 = og_dim["windowarea_51"] * room5_length / og_dim["room5_length"]
+        windowarea_52 = og_dim["windowarea_52"] * room_width / og_dim["room_width"]
 
         self.top_level_geo_params["windowarea_11"] = windowarea_11
         self.top_level_geo_params["windowarea_12"] = windowarea_12
@@ -971,7 +998,8 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         self.top_level_geo_params["windowarea_51"] = windowarea_51
         self.top_level_geo_params["windowarea_52"] = windowarea_52
 
-        windowarea_i_up_roof = 1.73 * room_width_short / 2.28
+        # Make roof windows separately changeable? Or length scaling instead of width scaling?
+        windowarea_i_up_roof = 1.73 * room_width_short / og_dim["room_ceiling_attic_width"]
         windowarea_i_up_wall = 1.73 * bldg_length / og_dim["bldg_inner_length"]
 
         self.top_level_geo_params["windowarea_62"] = windowarea_i_up_wall
