@@ -137,8 +137,136 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             "Children2": "upp",
         }
         self.top_level_geo_params = {}
-        self.scale_building_geometry()
+        self.detailed_geo = {}
+        self.room_volumes = {}
 
+    def update_calc_original_hom_dim_parameters(self):
+        def_params = self._original_hom_dim_parameters.copy()
+        self._original_hom_dim_parameters["bldg_inner_width"] = 2 * def_params["room_width"]
+        self._original_hom_dim_parameters["bldg_inner_length"] = (def_params["l1"] + def_params["l2"] +
+                                                                  def_params["l3"] + def_params["l4"])
+        self._original_hom_dim_parameters["room1_length"] = (def_params["l1"] + def_params["l2"] +
+                                                             def_params["thickness_iw_simple"])
+        self._original_hom_dim_parameters["room3_length"] = def_params["l2"] + def_params["l3"]
+        self._original_hom_dim_parameters["room5_length"] = (def_params["l3"] + def_params["l4"] +
+                                                             def_params["thickness_iw_simple"])
+
+    def scale_building_geometry(self):
+        og_dim = self._original_hom_dim_parameters
+        self.top_level_geo_params = {}
+        if self.year_of_construction < 1995:
+            tir = 4
+        elif 2002 > self.year_of_construction >= 1995:
+            tir = 3
+        elif 2009 > self.year_of_construction >= 2002:
+            tir = 2
+        else:
+            tir = 1
+        self.top_level_geo_params["tir"] = tir
+
+        net_leased_area = self.net_leased_area
+
+        bldg_width = sqrt(net_leased_area / 2 * (og_dim["bldg_inner_width"] / og_dim["bldg_inner_length"]))
+        bldg_length = net_leased_area / 2 / bldg_width
+
+        room_width = bldg_width / 2
+        self.top_level_geo_params['room_width'] = room_width
+
+        l1 = bldg_length * og_dim["l1"] / og_dim["bldg_inner_length"]
+        l2 = bldg_length * og_dim["l2"] / og_dim["bldg_inner_length"]
+        l3 = bldg_length * og_dim["l3"] / og_dim["bldg_inner_length"]
+        l4 = bldg_length * og_dim["l4"] / og_dim["bldg_inner_length"]
+
+        self.top_level_geo_params["l1"] = l1
+        self.top_level_geo_params["l2"] = l2
+        self.top_level_geo_params["l3"] = l3
+        self.top_level_geo_params["l4"] = l4
+
+        thickness_iw_simple = og_dim["thickness_iw_simple"]
+        self.top_level_geo_params["thickness_iw_simple"] = thickness_iw_simple
+        room1_length = l1 + l2 + thickness_iw_simple
+        room3_length = l2 + l3
+        room5_length = l3 + l4 + thickness_iw_simple
+
+        self.top_level_geo_params["room1_length"] = room1_length
+        self.top_level_geo_params["room3_length"] = room3_length
+        self.top_level_geo_params["room5_length"] = room5_length
+
+        roof_length = bldg_length + 2 * thickness_iw_simple  # inner wall thicknesses load simpled?
+        self.top_level_geo_params["roof_length"] = roof_length
+
+        alfa_grad = og_dim["alfa_grad"]
+        roof_tilt = (180 - alfa_grad) / 2
+        self.top_level_geo_params["roof_tilt"] = roof_tilt
+        self.top_level_geo_params["alfa_grad"] = alfa_grad
+        height_of_floors = self.height_of_floors
+        self.top_level_geo_params["height_of_floors"] = height_of_floors
+        room_height_short = og_dim["height_dwarf_wall"]
+        room_width_short = room_width - (height_of_floors - room_height_short) / tan(roof_tilt * pi / 180)
+        self.top_level_geo_params["room_width_short"] = room_width_short
+        self.top_level_geo_params["room_height_short"] = room_height_short
+        wRO = (height_of_floors - room_height_short) / sin(roof_tilt * pi / 180)
+        self.top_level_geo_params["wRO"] = wRO
+
+        roof_width = 2 * room_width_short + thickness_iw_simple  # better to use load wall thickness could also be computed directly in modelica
+        self.top_level_geo_params["roof_width"] = roof_width
+        wROi = roof_width / 2 / cos(roof_tilt * pi / 180)
+        self.top_level_geo_params["wROi"] = wROi
+        # print(f"Complete building height: {height_of_floors*2+wROi*sin(roof_tilt*pi/180)}")
+
+        windowarea_11 = og_dim["windowarea_11"] * room1_length / og_dim["room1_length"]
+        windowarea_12 = og_dim["windowarea_12"] * room_width / og_dim["room_width"]
+        windowarea_22 = og_dim["windowarea_22"] * roof_width / og_dim["room_width"]
+        windowarea_41 = og_dim["windowarea_41"] * l4 / og_dim["l4"]
+        windowarea_51 = og_dim["windowarea_51"] * room5_length / og_dim["room5_length"]
+        windowarea_52 = og_dim["windowarea_52"] * room_width / og_dim["room_width"]
+
+        self.top_level_geo_params["windowarea_11"] = windowarea_11
+        self.top_level_geo_params["windowarea_12"] = windowarea_12
+        self.top_level_geo_params["windowarea_22"] = windowarea_22
+        self.top_level_geo_params["windowarea_41"] = windowarea_41
+        self.top_level_geo_params["windowarea_51"] = windowarea_51
+        self.top_level_geo_params["windowarea_52"] = windowarea_52
+
+        # Make roof windows separately changeable? Or length scaling instead of width scaling?
+        windowarea_i_up_roof = 1.73 * room_width_short / og_dim["room_ceiling_attic_width"]
+        windowarea_i_up_wall = 1.73 * bldg_length / og_dim["bldg_inner_length"]
+
+        self.top_level_geo_params["windowarea_62"] = windowarea_i_up_wall
+        self.top_level_geo_params["windowarea_63"] = windowarea_i_up_roof
+        self.top_level_geo_params["windowarea_72"] = windowarea_i_up_wall
+        self.top_level_geo_params["windowarea_73"] = windowarea_i_up_roof
+        self.top_level_geo_params["windowarea_92"] = windowarea_i_up_wall
+        self.top_level_geo_params["windowarea_102"] = windowarea_i_up_wall
+        self.top_level_geo_params["windowarea_103"] = windowarea_i_up_roof
+
+        self.top_level_geo_params["windowarea_i_up_roof"] = windowarea_i_up_roof
+        self.top_level_geo_params["windowarea_i_up_wall"] = windowarea_i_up_wall
+
+        # Heron's formula
+        semi_perimeter = (roof_width + wROi + wROi) * 0.5
+        self.top_level_geo_params["attic_vert_wall_area"] = (
+            np.sqrt(semi_perimeter * (semi_perimeter - roof_width) *
+                    (semi_perimeter - wROi) * (semi_perimeter - wROi))
+        )
+
+        self.top_level_geo_params["upp_gable_wall_area"] = (self.top_level_geo_params["room_width"] *
+                                                            self.top_level_geo_params["height_of_floors"] -
+                                                            ((self.top_level_geo_params["height_of_floors"] -
+                                                              self.top_level_geo_params["room_height_short"]) * (
+                                                                     self.top_level_geo_params["room_width"] -
+                                                                     self.top_level_geo_params["room_width_short"]
+                                                             )) / 2)
+
+        return self.top_level_geo_params
+
+    def generate_archetype(self):
+        """Generates a SingleFamilyHouse archetype buildings
+
+        With given values, this function generates an archetype building for
+        AixLib HOM Single Family House.
+        """
+        self.scale_building_geometry()
         self.detailed_geo = {
             "Livingroom": {
                 "outside_wall1": {
@@ -861,8 +989,8 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         }
         self.room_volumes = {
             "Livingroom": self.top_level_geo_params["room1_length"] *
-                         self.top_level_geo_params["room_width"] *
-                         self.top_level_geo_params["height_of_floors"],
+                          self.top_level_geo_params["room_width"] *
+                          self.top_level_geo_params["height_of_floors"],
             "Hobby": self.top_level_geo_params["l1"] *
                      self.top_level_geo_params["room_width"] *
                      self.top_level_geo_params["height_of_floors"],
@@ -880,141 +1008,15 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             "Children1": self.top_level_geo_params["l1"] *
                          self.top_level_geo_params["upp_gable_wall_area"],
             "Corridor_upp": self.top_level_geo_params["room3_length"] *
-                       self.top_level_geo_params["upp_gable_wall_area"],
+                            self.top_level_geo_params["upp_gable_wall_area"],
             "Bath": self.top_level_geo_params["l4"] *
-                       self.top_level_geo_params["upp_gable_wall_area"],
+                    self.top_level_geo_params["upp_gable_wall_area"],
             "Children2": self.top_level_geo_params["room5_length"] *
-                       self.top_level_geo_params["upp_gable_wall_area"],
+                         self.top_level_geo_params["upp_gable_wall_area"],
             "Attic": self.top_level_geo_params["roof_length"] *
                      self.top_level_geo_params["attic_vert_wall_area"]
         }
 
-    def update_calc_original_hom_dim_parameters(self):
-        def_params = self._original_hom_dim_parameters.copy()
-        self._original_hom_dim_parameters["bldg_inner_width"] = 2 * def_params["room_width"]
-        self._original_hom_dim_parameters["bldg_inner_length"] = (def_params["l1"] + def_params["l2"] +
-                                                                  def_params["l3"] + def_params["l4"])
-        self._original_hom_dim_parameters["room1_length"] = (def_params["l1"] + def_params["l2"] +
-                                                             def_params["thickness_iw_simple"])
-        self._original_hom_dim_parameters["room3_length"] = def_params["l2"] + def_params["l3"]
-        self._original_hom_dim_parameters["room5_length"] = (def_params["l3"] + def_params["l4"] +
-                                                             def_params["thickness_iw_simple"])
-
-    def scale_building_geometry(self):
-        og_dim = self._original_hom_dim_parameters
-        self.top_level_geo_params = {}
-        if self.year_of_construction < 1995:
-            tir = 4
-        elif 2002 > self.year_of_construction >= 1995:
-            tir = 3
-        elif 2009 > self.year_of_construction >= 2002:
-            tir = 2
-        else:
-            tir = 1
-        self.top_level_geo_params["tir"] = tir
-
-        net_leased_area = self.net_leased_area
-
-        bldg_width = sqrt(net_leased_area / 2 * (og_dim["bldg_inner_width"] / og_dim["bldg_inner_length"]))
-        bldg_length = net_leased_area / 2 / bldg_width
-
-        room_width = bldg_width / 2
-        self.top_level_geo_params['room_width'] = room_width
-
-        l1 = bldg_length * og_dim["l1"] / og_dim["bldg_inner_length"]
-        l2 = bldg_length * og_dim["l2"] / og_dim["bldg_inner_length"]
-        l3 = bldg_length * og_dim["l3"] / og_dim["bldg_inner_length"]
-        l4 = bldg_length * og_dim["l4"] / og_dim["bldg_inner_length"]
-
-        self.top_level_geo_params["l1"] = l1
-        self.top_level_geo_params["l2"] = l2
-        self.top_level_geo_params["l3"] = l3
-        self.top_level_geo_params["l4"] = l4
-
-        thickness_iw_simple = og_dim["thickness_iw_simple"]
-        self.top_level_geo_params["thickness_iw_simple"] = thickness_iw_simple
-        room1_length = l1 + l2 + thickness_iw_simple
-        room3_length = l2 + l3
-        room5_length = l3 + l4 + thickness_iw_simple
-
-        self.top_level_geo_params["room1_length"] = room1_length
-        self.top_level_geo_params["room3_length"] = room3_length
-        self.top_level_geo_params["room5_length"] = room5_length
-
-        roof_length = bldg_length + 2 * thickness_iw_simple  # inner wall thicknesses load simpled?
-        self.top_level_geo_params["roof_length"] = roof_length
-
-        alfa_grad = og_dim["alfa_grad"]
-        roof_tilt = (180 - alfa_grad) / 2
-        self.top_level_geo_params["roof_tilt"] = roof_tilt
-        self.top_level_geo_params["alfa_grad"] = alfa_grad
-        height_of_floors = self.height_of_floors
-        self.top_level_geo_params["height_of_floors"] = height_of_floors
-        room_height_short = og_dim["height_dwarf_wall"]
-        room_width_short = room_width - (height_of_floors - room_height_short) / tan(roof_tilt * pi / 180)
-        self.top_level_geo_params["room_width_short"] = room_width_short
-        self.top_level_geo_params["room_height_short"] = room_height_short
-        wRO = (height_of_floors - room_height_short) / sin(roof_tilt * pi / 180)
-        self.top_level_geo_params["wRO"] = wRO
-
-        roof_width = 2 * room_width_short + thickness_iw_simple  # better to use load wall thickness could also be computed directly in modelica
-        self.top_level_geo_params["roof_width"] = roof_width
-        wROi = roof_width / 2 / cos(roof_tilt * pi / 180)
-        self.top_level_geo_params["wROi"] = wROi
-        # print(f"Complete building height: {height_of_floors*2+wROi*sin(roof_tilt*pi/180)}")
-
-        windowarea_11 = og_dim["windowarea_11"] * room1_length / og_dim["room1_length"]
-        windowarea_12 = og_dim["windowarea_12"] * room_width / og_dim["room_width"]
-        windowarea_22 = og_dim["windowarea_22"] * roof_width / og_dim["room_width"]
-        windowarea_41 = og_dim["windowarea_41"] * l4 / og_dim["l4"]
-        windowarea_51 = og_dim["windowarea_51"] * room5_length / og_dim["room5_length"]
-        windowarea_52 = og_dim["windowarea_52"] * room_width / og_dim["room_width"]
-
-        self.top_level_geo_params["windowarea_11"] = windowarea_11
-        self.top_level_geo_params["windowarea_12"] = windowarea_12
-        self.top_level_geo_params["windowarea_22"] = windowarea_22
-        self.top_level_geo_params["windowarea_41"] = windowarea_41
-        self.top_level_geo_params["windowarea_51"] = windowarea_51
-        self.top_level_geo_params["windowarea_52"] = windowarea_52
-
-        # Make roof windows separately changeable? Or length scaling instead of width scaling?
-        windowarea_i_up_roof = 1.73 * room_width_short / og_dim["room_ceiling_attic_width"]
-        windowarea_i_up_wall = 1.73 * bldg_length / og_dim["bldg_inner_length"]
-
-        self.top_level_geo_params["windowarea_62"] = windowarea_i_up_wall
-        self.top_level_geo_params["windowarea_63"] = windowarea_i_up_roof
-        self.top_level_geo_params["windowarea_72"] = windowarea_i_up_wall
-        self.top_level_geo_params["windowarea_73"] = windowarea_i_up_roof
-        self.top_level_geo_params["windowarea_92"] = windowarea_i_up_wall
-        self.top_level_geo_params["windowarea_102"] = windowarea_i_up_wall
-        self.top_level_geo_params["windowarea_103"] = windowarea_i_up_roof
-
-        self.top_level_geo_params["windowarea_i_up_roof"] = windowarea_i_up_roof
-        self.top_level_geo_params["windowarea_i_up_wall"] = windowarea_i_up_wall
-
-        # Heron's formula
-        semi_perimeter = (roof_width + wROi + wROi) * 0.5
-        self.top_level_geo_params["attic_vert_wall_area"] = (
-            np.sqrt(semi_perimeter * (semi_perimeter - roof_width) *
-                    (semi_perimeter - wROi) * (semi_perimeter - wROi))
-        )
-
-        self.top_level_geo_params["upp_gable_wall_area"] = (self.top_level_geo_params["room_width"] *
-                                                            self.top_level_geo_params["height_of_floors"] -
-                                                            ((self.top_level_geo_params["height_of_floors"] -
-                                                              self.top_level_geo_params["room_height_short"]) * (
-                                                                     self.top_level_geo_params["room_width"] -
-                                                                     self.top_level_geo_params["room_width_short"]
-                                                             )) / 2)
-
-        return self.top_level_geo_params
-
-    def generate_archetype(self):
-        """Generates a SingleFamilyHouse archetype buildings
-
-        With given values, this function generates an archetype building for
-        AixLib HOM Single Family House.
-        """
         self.thermal_zones = None
         for zone_name, room_names in self.zoning.items():
             zone = ThermalZone(parent=self)
