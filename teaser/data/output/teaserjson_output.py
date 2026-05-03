@@ -61,6 +61,7 @@ def save_teaser_json(path, project):
         "TerracedHouse": {"construction_data": "tabula_de_standard", "geometry_data": "tabula_de_terraced_house"},
         "MultiFamilyHouse": {"construction_data": "tabula_de_standard", "geometry_data": "tabula_de_multi_family_house"},
         "ApartmentBlock": {"construction_data": "tabula_de_standard", "geometry_data": "tabula_de_apartment_block"},
+        "AixLibHighOrderSingleFamilyHouse": {"construction_data": "tabula_de_standard", "geometry_data": "aixlib_high_order_single_family_house"}
     }
 
     for bldg in project.buildings:
