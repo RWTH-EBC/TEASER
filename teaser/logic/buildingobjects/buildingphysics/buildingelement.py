@@ -121,6 +121,7 @@ class BuildingElement(object):
         """Constructor for BuildingElement
         """
 
+        self.u_value = None
         self.parent = parent
 
         self.internal_id = random.random()

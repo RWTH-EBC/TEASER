@@ -8,6 +8,13 @@ from mako.lookup import TemplateLookup
 import teaser.logic.utilities as utilities
 import teaser.data.output.modelica_output as modelica_output
 from teaser.logic.buildingobjects.building import Building
+from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
+from teaser.logic.buildingobjects.buildingphysics.floor import Floor
+from teaser.logic.buildingobjects.buildingphysics.groundfloor import GroundFloor
+from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
+from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
+from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
+from teaser.logic.buildingobjects.buildingphysics.window import Window
 
 
 def export_besmod(
@@ -246,7 +253,7 @@ def export_besmod(
         bldg_package = [exp + bldg.name for exp in examples]
 
         if export_hom:
-            bldg_package.append(bldg.name+"_HOM")
+            bldg_package.append(bldg.name + "_HOM")
 
         if custom_examples:
             for exp, c_path in custom_examples.items():
@@ -269,10 +276,6 @@ def export_besmod(
             extra=bldg_package)
 
         zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
-        if export_hom:
-            wall_path = os.path.join(zone_path, "Walls")
-            utilities.create_path(wall_path)
-
         for zone in bldg.thermal_zones:
             zone.use_conditions.with_heating = False
             with open(os.path.join(
@@ -284,27 +287,40 @@ def export_besmod(
                     raise NotImplementedError("BESMod export is only implemented for four elements.")
                 out_file.close()
 
-            if export_hom and zone.name == "single_zone_building":
-                for wall_type in wall_types:
-                    write_wall_record(wall_path=wall_path,
-                                      wall_type=wall_type,
-                                      zone=zone,
-                                      single_wall_template=single_wall_template,
-                                      bldg=bldg)
-
-                with open(os.path.join(
-                        wall_path,
-                        bldg.name + '_wallTypes.mo'), 'w') as out_file:
-                    out_file.write(multi_inner_wall_template.render_unicode(bldg=bldg))
-                    out_file.close()
-                with open(os.path.join(
-                        wall_path,
-                        bldg.name + '_windowSimple.mo'), 'w') as out_file:
-                    out_file.write(window_simple_template.render_unicode(bldg=bldg,
-                                                                         Uw=zone.windows[0].u_value,
-                                                                         g=zone.windows[0].g_value))
-                    out_file.close()
         if export_hom:
+            wall_path = os.path.join(zone_path, "Walls")
+            utilities.create_path(wall_path)
+            for wall_type in wall_types:
+                write_wall_record(wall_path=wall_path,
+                                  wall_type=wall_type,
+                                  single_wall_template=single_wall_template,
+                                  bldg=bldg)
+
+            with open(os.path.join(
+                    wall_path,
+                    bldg.name + '_wallTypes.mo'), 'w') as out_file:
+                out_file.write(multi_inner_wall_template.render_unicode(bldg=bldg))
+                out_file.close()
+            window = Window(None)
+            window.area = 1  # dummy value
+            construction = (
+                "Waermeschutzverglasung, dreifach"
+                if bldg.construction_data.is_kfw()
+                else bldg.construction_data_1
+            )
+            window.load_type_element(
+                bldg.year_of_construction,
+                construction=construction,
+                data_class=bldg.parent.data,
+            )
+            window.calc_ua_value()
+            with open(os.path.join(
+                    wall_path,
+                    bldg.name + '_windowSimple.mo'), 'w') as out_file:
+                out_file.write(window_simple_template.render_unicode(bldg=bldg,
+                                                                     Uw=window.u_value,
+                                                                     g=window.g_value))
+                out_file.close()
             modelica_output.create_package(
                 path=wall_path,
                 name='Walls',
@@ -542,38 +558,51 @@ def _help_example_script(bldg, dir_dymola, test_script_template, example):
         out_file.close()
 
 
-def write_wall_record(wall_path, wall_type, zone, single_wall_template, bldg):
+def write_wall_record(wall_path, wall_type, single_wall_template, bldg):
     half = False
     layer_direction = -1
     if wall_type == 'OW':
-        layers = zone.outer_walls[0].layer
+        element = OuterWall(parent=None)
+        element.load_type_element(
+                        year=bldg.year_of_construction,
+                        construction=bldg.construction_data_1,
+                        data_class=bldg.parent.data,
+        )
+        layers = element.layer
         n = len(layers)
         teaser_id_aixlib_inside_layer = 0
         teaser_id_aixlib_outside_layer = n
     elif wall_type == 'roof':
-        rooftops = next(
-            (w for w in zone.rooftops if getattr(w, "element_construction_type", None) is None),
-            zone.rooftops[0],
+        element = Rooftop(parent=None)
+        element.load_type_element(
+            year=bldg.year_of_construction,
+            construction=bldg.construction_data_1,
+            data_class=bldg.parent.data,
         )
-        layers = rooftops.layer
+        layers = element.layer
         n = len(layers)
         teaser_id_aixlib_inside_layer = 0
         teaser_id_aixlib_outside_layer = n
     elif wall_type == 'roof_attic':
-        rooftops = next(
-            (w for w in zone.rooftops if getattr(w, "element_construction_type", None) == "Attic"),
-            zone.rooftops[0],
+        element = Rooftop(parent=None)
+        element.element_construction_type = "Attic"
+        element.load_type_element(
+            year=bldg.year_of_construction,
+            construction=bldg.construction_data_1,
+            data_class=bldg.parent.data,
         )
-        layers = rooftops.layer
+        layers = element.layer
         n = len(layers)
         teaser_id_aixlib_inside_layer = 0
         teaser_id_aixlib_outside_layer = n
     elif wall_type == 'IW_vert_half':
-        inner_wall = next(
-            (w for w in zone.inner_walls if getattr(w, "element_construction_type", None) is None),
-            zone.inner_walls[0],
+        element = InnerWall(parent=None)
+        element.load_type_element(
+            year=bldg.year_of_construction,
+            construction=bldg.construction_data.value,
+            data_class=bldg.parent.data,
         )
-        layers = inner_wall.layer
+        layers = element.layer
         n = len(layers)
         quotient, remainder = divmod(n, 2)
         if remainder > 0:
@@ -582,11 +611,14 @@ def write_wall_record(wall_path, wall_type, zone, single_wall_template, bldg):
         teaser_id_aixlib_inside_layer = 0
         teaser_id_aixlib_outside_layer = quotient
     elif wall_type == 'IW2_vert_half':
-        inner_wall = next(
-            (w for w in zone.inner_walls if getattr(w, "element_construction_type", None) == "LoadBearing"),
-            zone.inner_walls[0],
+        element = InnerWall(parent=None)
+        element.element_construction_type = "LoadBearing"
+        element.load_type_element(
+            year=bldg.year_of_construction,
+            construction=bldg.construction_data.value,
+            data_class=bldg.parent.data,
         )
-        layers = inner_wall.layer
+        layers = element.layer
         n = len(layers)
         quotient, remainder = divmod(n, 2)
         if remainder > 0:
@@ -595,7 +627,13 @@ def write_wall_record(wall_path, wall_type, zone, single_wall_template, bldg):
         teaser_id_aixlib_inside_layer = 0
         teaser_id_aixlib_outside_layer = quotient
     elif wall_type == 'ground_floor_upHalf':
-        layers = zone.ground_floors[0].layer
+        element = GroundFloor(parent=None)
+        element.load_type_element(
+            year=bldg.year_of_construction,
+            construction=bldg.construction_data_1,
+            data_class=bldg.parent.data,
+        )
+        layers = element.layer
         n = len(layers)
         if n == 1:
             half = True
@@ -603,7 +641,13 @@ def write_wall_record(wall_path, wall_type, zone, single_wall_template, bldg):
         teaser_id_aixlib_outside_layer = 1
     elif wall_type == 'ground_floor_loHalf':
         # in aixlib different order than ow and rf aixlib last layer is connected to the ground
-        layers = zone.ground_floors[-1].layer
+        element = GroundFloor(parent=None)
+        element.load_type_element(
+            year=bldg.year_of_construction,
+            construction=bldg.construction_data_1,
+            data_class=bldg.parent.data,
+        )
+        layers = element.layer
         n = len(layers)
         if n == 1:
             half = True
@@ -613,38 +657,48 @@ def write_wall_record(wall_path, wall_type, zone, single_wall_template, bldg):
         teaser_id_aixlib_inside_layer = n + 1
         layer_direction = 1
     elif wall_type == 'IW_hori_loHalf':
-        wall = next(
-            (w for w in zone.ceilings if getattr(w, "element_construction_type", None) is None),
-            zone.ceilings[0],
+        element = Ceiling(parent=None)
+        element.load_type_element(
+            year=bldg.year_of_construction,
+            construction=bldg.construction_data.value,
+            data_class=bldg.parent.data,
         )
-        layers = wall.layer
+        layers = element.layer
         n = len(layers)
         teaser_id_aixlib_inside_layer = 0
         teaser_id_aixlib_outside_layer = 1
     elif wall_type == 'IW_hori_upHalf':
-        wall = next(
-            (w for w in zone.floors if getattr(w, "element_construction_type", None) is None),
-            zone.floors[0],
+        element = Floor(parent=None)
+        element.load_type_element(
+            year=bldg.year_of_construction,
+            construction=bldg.construction_data.value,
+            data_class=bldg.parent.data,
         )
-        layers = wall.layer
+        layers = element.layer
         n = len(layers)
         teaser_id_aixlib_inside_layer = 0
         teaser_id_aixlib_outside_layer = n - 1
     elif wall_type == 'IW_hori_att_loHalf':
-        wall = next(
-            (w for w in zone.ceilings if getattr(w, "element_construction_type", None) == "Attic"),
-            zone.ceilings[0],
+        element = Ceiling(parent=None)
+        element.element_construction_type = "Attic"
+        element.load_type_element(
+            year=bldg.year_of_construction,
+            construction=bldg.construction_data.value,
+            data_class=bldg.parent.data,
         )
-        layers = wall.layer
+        layers = element.layer
         n = len(layers)
         teaser_id_aixlib_inside_layer = 0
         teaser_id_aixlib_outside_layer = 1
     elif wall_type == 'IW_hori_att_upHalf':
-        wall = next(
-            (w for w in zone.floors if getattr(w, "element_construction_type", None) == "Attic"),
-            zone.floors[0],
+        element = Floor(parent=None)
+        element.element_construction_type = "Attic"
+        element.load_type_element(
+            year=bldg.year_of_construction,
+            construction=bldg.construction_data.value,
+            data_class=bldg.parent.data,
         )
-        layers = wall.layer
+        layers = element.layer
         n = len(layers)
         teaser_id_aixlib_inside_layer = 1
         teaser_id_aixlib_outside_layer = n - 1

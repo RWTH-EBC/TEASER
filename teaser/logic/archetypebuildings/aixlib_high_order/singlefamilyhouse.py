@@ -57,9 +57,9 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         self.height_of_floors = height_of_floors
 
         if self.construction_data.is_tabula_de() or self.construction_data.is_tabula_dk():
-            self._construction_data_1 = self.construction_data.value + "_1_SFH"
+            self.construction_data_1 = self.construction_data.value + "_1_SFH"
         else:
-            self._construction_data_1 = self.construction_data.value
+            self.construction_data_1 = self.construction_data.value
 
         self.unheated_rooms = ["Attic"]
 
@@ -1054,7 +1054,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     element.element_construction_type = ele_info["element_construction_type"]
                     element.load_type_element(
                         year=self.year_of_construction,
-                        construction=self._construction_data.value if is_inner else self._construction_data_1,
+                        construction=self._construction_data.value if is_inner else self.construction_data_1,
                         data_class=self.parent.data,
                         element_type=ele_info["element_construction_type"],
                     )
@@ -1067,7 +1067,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                         construction = (
                             "Waermeschutzverglasung, dreifach"
                             if self.construction_data.is_kfw()
-                            else self._construction_data_1
+                            else self.construction_data_1
                         )
                         window.load_type_element(
                             self.year_of_construction,
