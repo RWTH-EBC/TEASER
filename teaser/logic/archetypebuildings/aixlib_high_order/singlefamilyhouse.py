@@ -17,6 +17,13 @@ from teaser.logic.buildingobjects.buildingphysics.door import Door
 from math import sin, cos, tan, pi, sqrt
 
 
+def _check_number_of_floors(room_names: list, room_floor: dict):
+    floor_names = []
+    for room_name in room_names:
+        floor_names.append(room_floor[room_name])
+    return len(set(floor_names))
+
+
 class AixLibHighOrderSingleFamilyHouse(Residential):
     def __init__(
             self,
@@ -65,11 +72,10 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             "Bedroom",
             "Children1",
             "Corridor_upp",
-            "Bathroom",
+            "Bath",
             "Children2",
         ]}
 
-        self.number_of_floors = 2
         self._wall_types = ['OW', 'roof', 'roof_attic', 'IW_vert_half', 'IW_hori_upHalf', 'IW_hori_loHalf',
                             'ground_floor_loHalf',
                             'ground_floor_upHalf', 'IW_hori_att_upHalf', 'IW_hori_att_loHalf']
@@ -115,50 +121,23 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             "Bedroom": 6,
             "Children1": 7,
             "Corridor_upp": 8,
-            "Bathroom": 9,
+            "Bath": 9,
             "Children2": 10,
+        }
+        self.room_floor = {
+            "Livingroom": "gf",
+            "Hobby": "gf",
+            "Corridor_gf": "gf",
+            "WC_Storage": "gf",
+            "Kitchen": "gf",
+            "Bedroom": "upp",
+            "Children1": "upp",
+            "Corridor_upp": "upp",
+            "Bath": "upp",
+            "Children2": "upp",
         }
         self.top_level_geo_params = {}
         self.scale_building_geometry()
-
-        self.element_orientations = {
-            # "attic_2Ro_5Rooms.roof1": ("North", 0.0, "Roof"),
-            "upperFloor_Building.Children1.roof": ("North", 0.0, "Roof"),
-            "upperFloor_Building.Children1.outside_wall1": ("North", 0.0, "OuterWall"),
-            "upperFloor_Building.Corridor.roof": ("North", 0.0, "Roof"),
-            "upperFloor_Building.Corridor.outside_wall1": ("North", 0.0, "OuterWall"),
-            "upperFloor_Building.Bath.roof": ("North", 0.0, "Roof"),
-            "upperFloor_Building.Bath.outside_wall1": ("North", 0.0, "OuterWall"),
-            "groundFloor_Building.Hobby.outside_wall1": ("North", 0.0, "OuterWall"),
-            "groundFloor_Building.WC_Storage.outside_wall1": ("North", 0.0, "OuterWall"),
-            "groundFloor_Building.Corridor.outside_wall1": ("North", 0.0, "OuterWall"),
-
-            # "attic_2Ro_5Rooms.OW1": ("East", 90.0, "OuterWall"),
-            "upperFloor_Building.Children2.outside_wall2": ("East", 90.0, "OuterWall"),
-            "upperFloor_Building.Bath.outside_wall2": ("East", 90.0, "OuterWall"),
-            "groundFloor_Building.Kitchen.outside_wall2": ("East", 90.0, "OuterWall"),
-            "groundFloor_Building.WC_Storage.outside_wall2": ("East", 90.0, "OuterWall"),
-
-            # "attic_2Ro_5Rooms.roof2": ("South", 180.0, "Roof"),
-            "upperFloor_Building.Bedroom.roof": ("South", 180.0, "Roof"),
-            "upperFloor_Building.Bedroom.outside_wall1": ("South", 180.0, "OuterWall"),
-            "upperFloor_Building.Children2.roof": ("South", 180.0, "Roof"),
-            "upperFloor_Building.Children2.outside_wall1": ("South", 180.0, "OuterWall"),
-            "groundFloor_Building.Livingroom.outside_wall1": ("South", 180.0, "OuterWall"),
-            "groundFloor_Building.Kitchen.outside_wall1": ("South", 180.0, "OuterWall"),
-
-            # "attic_2Ro_5Rooms.OW2": ("West", 270.0, "OuterWall"),
-            "upperFloor_Building.Bedroom.outside_wall2": ("West", 270.0, "OuterWall"),
-            "upperFloor_Building.Children1.outside_wall2": ("West", 270.0, "OuterWall"),
-            "groundFloor_Building.Livingroom.outside_wall2": ("West", 270.0, "OuterWall"),
-            "groundFloor_Building.Hobby.outside_wall2": ("West", 270.0, "OuterWall")
-        }
-        self.attic_outer = {
-            "attic_2Ro_5Rooms.roof1": ("North", 0.0, "Roof"),
-            "attic_2Ro_5Rooms.OW1": ("East", 90.0, "OuterWall"),
-            "attic_2Ro_5Rooms.roof2": ("South", 180.0, "Roof"),
-            "attic_2Ro_5Rooms.OW2": ("West", 270.0, "OuterWall"),
-        }
 
         self.detailed_geo = {
             "Livingroom": {
@@ -881,7 +860,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             }
         }
         self.room_volumes = {
-            "Livigroom": self.top_level_geo_params["room1_length"] *
+            "Livingroom": self.top_level_geo_params["room1_length"] *
                          self.top_level_geo_params["room_width"] *
                          self.top_level_geo_params["height_of_floors"],
             "Hobby": self.top_level_geo_params["l1"] *
@@ -1037,154 +1016,68 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         AixLib HOM Single Family House.
         """
         self.thermal_zones = None
-        zone = ThermalZone(parent=self)
-        zone.name = "single_zone_building"
-        zone.area = self.net_leased_area
-        zone.number_of_floors = self.number_of_floors
-        zone.height_of_floors = self.height_of_floors
-        zone.volume = self.net_leased_area * self.height_of_floors
-        use_cond = UseCond(parent=zone)
-        use_cond.load_use_conditions(zone_usage="Living")  # create use conditions for single rooms
-        zone.use_conditions = use_cond
-        zone.use_conditions.with_ahu = False
+        for zone_name, room_names in self.zoning.items():
+            zone = ThermalZone(parent=self)
+            zone.name = zone_name
+            zone.area = sum([self.detailed_geo[r]["floor"]["area"] for r in room_names])
+            zone.number_of_floors = _check_number_of_floors(room_names, self.room_floor)
+            zone.height_of_floors = self.height_of_floors
+            zone.volume = sum([self.room_volumes[r] for r in room_names])
+            use_cond = UseCond(parent=zone)
+            use_cond.load_use_conditions(zone_usage="Living")  # create use conditions for single rooms
+            zone.use_conditions = use_cond
+            zone.use_conditions.with_ahu = False
 
-        outer_wall = OuterWall(zone)
-        outer_wall.load_type_element(
-            year=self.year_of_construction,
-            construction=self._construction_data_1,
-            data_class=self.parent.data
-        )
-        outer_wall.name = "dummy_outer_wall"  # LivingRoom outside_wall1 South
-        outer_wall.tilt = 90
-        outer_wall.orientation = 180
-        outer_wall.area = (self.top_level_geo_params["room1_length"] * self.top_level_geo_params["height_of_floors"] -
-                           self.top_level_geo_params["windowarea_11"])
+            for room_name in room_names:
+                for ele_name, ele_info in self.detailed_geo[room_name].items():
+                    ele_type = ele_info["type"]
+                    is_inner = False
+                    if ele_type == "OuterWall":
+                        element = OuterWall(parent=zone)
+                    elif ele_type == "GroundFloor":
+                        element = GroundFloor(parent=zone)
+                    elif ele_type == "Roof":
+                        element = Rooftop(parent=zone)
+                    elif ele_type == "InnerWall":
+                        element = InnerWall(parent=zone)
+                        is_inner = True
+                    elif ele_type == "Floor":
+                        element = Floor(parent=zone)
+                        is_inner = True
+                    elif ele_type == "Ceiling":
+                        element = Ceiling(parent=zone)
+                        is_inner = True
+                    else:
+                        raise ValueError("Element type not recognized")
 
-        window = Window(zone)
-        construction = (
-            "Waermeschutzverglasung, dreifach"
-            if self.construction_data.is_kfw()
-            else self._construction_data_1
-        )
-        window.load_type_element(
-            self.year_of_construction,
-            construction=construction,
-            data_class=self.parent.data,
-        )
-        window.name = "dummy_window"  # LivingRoom window11 West
-        window.tilt = 90
-        window.orientation = 270
-        window.area = self.top_level_geo_params["windowarea_11"]
+                    element.name = f"{room_name}_{ele_name}"
+                    element.element_construction_type = ele_info["element_construction_type"]
+                    element.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self._construction_data.value if is_inner else self._construction_data_1,
+                        data_class=self.parent.data,
+                        element_type=ele_info["element_construction_type"],
+                    )
+                    element.tilt = ele_info["tilt"]
+                    element.orientation = ele_info["ori"]
+                    element.area = ele_info["area"]
 
-        gf = GroundFloor(zone)
-        gf.load_type_element(
-            year=self.year_of_construction,
-            construction=self._construction_data_1,
-            data_class=self.parent.data
-        )
-        gf.name = "dummy_ground_floor"  # LivingRoom ground_floor
-        gf.tilt = 0
-        gf.orientation = -2
-        gf.area = self.top_level_geo_params["room1_length"] * self.top_level_geo_params["room_width"]
-
-        rt = Rooftop(zone)
-        rt.load_type_element(
-            year=self.year_of_construction,
-            construction=self._construction_data_1,
-            data_class=self.parent.data
-        )
-        rt.name = "dummy_rooftop"  # Bedroom roof
-        rt.tilt = self.top_level_geo_params["roof_tilt"]
-        rt.orientation = 180
-        rt.area = (self.top_level_geo_params["room1_length"] * self.top_level_geo_params["wRO"] -
-                   self.top_level_geo_params["windowarea_i_up_roof"])
-
-        rt_attic = Rooftop(zone)
-        rt_attic.element_construction_type = "Attic"
-        rt_attic.load_type_element(
-            year=self.year_of_construction,
-            construction=self._construction_data_1,
-            data_class=self.parent.data
-        )
-        rt_attic.name = "dummy_rooftop_attic"  # attic_2Ro_5Rooms.roof1
-        rt_attic.tilt = self.top_level_geo_params["roof_tilt"]
-        rt_attic.orientation = 0
-        rt_attic.area = (self.top_level_geo_params["roof_length"] * self.top_level_geo_params["wROi"])
-
-        inner_wall = InnerWall(zone)
-        inner_wall.load_type_element(
-            year=self.year_of_construction,
-            construction=self.construction_data.value,
-            data_class=self.parent.data
-        )
-        inner_wall.name = "dummy_inner_wall"  # LivingRoom IW_simple to Kitchen
-        inner_wall.tilt = 90
-        inner_wall.orientation = 90
-        inner_wall.area = (self.top_level_geo_params["room_width"] *
-                           self.top_level_geo_params["height_of_floors"])
-
-        inner_wall_load = InnerWall(zone)
-        inner_wall_load.element_construction_type = "LoadBearing"
-        inner_wall_load.load_type_element(
-            year=self.year_of_construction,
-            construction=self.construction_data.value,
-            data_class=self.parent.data
-        )
-        inner_wall_load.name = "dummy_inner_wall_load"  # LivingRoom IW_loadBearing to hobby
-        inner_wall_load.tilt = 90
-        inner_wall_load.orientation = 180
-        inner_wall_load.area = (self.top_level_geo_params["l1"] *
-                                self.top_level_geo_params["height_of_floors"])
-
-        ceiling = Ceiling(zone)
-        ceiling.load_type_element(
-            year=self.year_of_construction,
-            construction=self.construction_data.value,
-            data_class=self.parent.data
-        )
-        ceiling.name = "dummy_ceiling"  # LivingRoom ceiling
-        ceiling.tilt = 0
-        ceiling.orientation = -1
-        ceiling.area = (self.top_level_geo_params["room1_length"] *
-                        self.top_level_geo_params["room_width"])
-
-        ceiling_attic = Ceiling(zone)
-        ceiling_attic.element_construction_type = "Attic"
-        ceiling_attic.load_type_element(
-            year=self.year_of_construction,
-            construction=self.construction_data.value,
-            data_class=self.parent.data
-        )
-        ceiling_attic.name = "dummy_ceiling_attic"  # Bedroom ceiling_attic
-        ceiling_attic.tilt = 0
-        ceiling_attic.orientation = -1
-        ceiling_attic.area = (self.top_level_geo_params["room1_length"] *
-                              self.top_level_geo_params["room_width_short"])
-
-        floor = Floor(zone)
-        floor.load_type_element(
-            year=self.year_of_construction,
-            construction=self.construction_data.value,
-            data_class=self.parent.data
-        )
-        floor.name = "dummy_floor"  # Bedroom floor
-        floor.tilt = 0
-        floor.orientation = -2
-        floor.area = (self.top_level_geo_params["room1_length"] *
-                      self.top_level_geo_params["room_width"])
-
-        floor_attic = Floor(zone)  # attic_2Ro_5Rooms
-        floor_attic.element_construction_type = "Attic"
-        floor_attic.load_type_element(
-            year=self.year_of_construction,
-            construction=self.construction_data.value,
-            data_class=self.parent.data
-        )
-        floor_attic.name = "dummy_floor_attic"  # attic_2Ro_5Rooms floor
-        floor_attic.tilt = 0
-        floor_attic.orientation = -2
-        floor_attic.area = (self.top_level_geo_params["roof_length"] *
-                            self.top_level_geo_params["roof_width"])
+                    if ele_info.get("with_window", False):
+                        window = Window(zone)
+                        construction = (
+                            "Waermeschutzverglasung, dreifach"
+                            if self.construction_data.is_kfw()
+                            else self._construction_data_1
+                        )
+                        window.load_type_element(
+                            self.year_of_construction,
+                            construction=construction,
+                            data_class=self.parent.data,
+                        )
+                        window.name = f"{room_name}_{ele_name}_win"
+                        window.tilt = ele_info["tilt"]
+                        window.orientation = ele_info["ori"]
+                        window.area = ele_info["windowarea"]
 
     @property
     def construction_data(self):
