@@ -1,9 +1,12 @@
+import copy
 import warnings
 
 import numpy as np
 
 import teaser.data.utilities as datahandling
 from teaser.logic.archetypebuildings.residential import Residential
+from teaser.logic.buildingobjects.buildingphysics.layer import Layer
+from teaser.logic.buildingobjects.buildingphysics.material import Material
 from teaser.logic.buildingobjects.useconditions import UseConditions as UseCond
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
@@ -61,7 +64,12 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         else:
             self.construction_data_1 = self.construction_data.value
 
-        self.unheated_rooms = ["Attic"]
+        # only single zone roms
+        self.integrate_unheated_rooms_integration_methods = [
+            "const_volumes",
+            # "inner_heated_as_outer_no_sun",
+        ]
+        self.integrate_unheated_rooms = {"Attic": "const_volumes"}
 
         self.zoning = {"single_zone_heated": [
             "Livingroom",
@@ -108,7 +116,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             "windowarea_92": 1.73,
             "windowarea_102": 1.73,
             "windowarea_103": 1.73,
-            "alfa_grad": 90, # ToDo: maybe test 110 for 35 roof_tilt make changeable
+            "alfa_grad": 90,  # ToDo: maybe test 110 for 35 roof_tilt make changeable
         }
         self.update_calc_original_hom_dim_parameters()
 
@@ -812,7 +820,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     "area": self.top_level_geo_params["room3_length"] * self.top_level_geo_params["room_width_short"],
                     "type": "Ceiling",
                     "element_construction_type": "Attic",
-                    "adjacent": ("Corridor_upp", "floorRoom3")
+                    "adjacent": ("Attic", "floorRoom3")
                 },
                 "inside_wall1": {
                     "ori": 270,
@@ -1018,6 +1026,10 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         }
 
         self.thermal_zones = None
+        if len(self.zoning) != 1 and self.integrate_unheated_rooms:
+            raise AttributeError("The integration of unheated rooms is only supported for "
+                                 "single-zone-ROMs")
+        adj_ele_heated_to_unheated = {}
         for zone_name, room_names in self.zoning.items():
             zone = ThermalZone(parent=self)
             zone.name = zone_name
@@ -1032,6 +1044,10 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
 
             for room_name in room_names:
                 for ele_name, ele_info in self.detailed_geo[room_name].items():
+                    adj_ele_unheated = ele_info.get("adjacent", (None, None))
+                    if adj_ele_unheated[0] in self.integrate_unheated_rooms:
+                        adj_ele_heated_to_unheated[(room_name, ele_name)] = adj_ele_unheated
+                        continue  # handle elements to unheated rooms later
                     ele_type = ele_info["type"]
                     is_inner = False
                     if ele_type == "OuterWall":
@@ -1058,7 +1074,6 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                         year=self.year_of_construction,
                         construction=self._construction_data.value if is_inner else self.construction_data_1,
                         data_class=self.parent.data,
-                        element_type=ele_info["element_construction_type"],
                     )
                     element.tilt = ele_info["tilt"]
                     element.orientation = ele_info["ori"]
@@ -1080,6 +1095,83 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                         window.tilt = ele_info["tilt"]
                         window.orientation = ele_info["ori"]
                         window.area = ele_info["windowarea"]
+            sum_eq_area = 0
+            for room, method in self.integrate_unheated_rooms.items():
+                if method == "const_volumes":
+                    outer_elements = {_n: _i for _n, _i in self.detailed_geo[room].items() if
+                                      _i["type"] in ["OuterWall", "Roof", "GroundFloor"]}
+                    inner_elements = {_n: _i for _n, _i in self.detailed_geo[room].items() if
+                                      _i["type"] in ["InnerWall", "Ceiling", "Floor"]}
+                    unheated_tot_outer_area = sum([ele["area"] for ele in outer_elements.values()])
+                    unheated_tot_inner_area = sum([ele["area"] for ele in inner_elements.values()])
+
+                    for heated, unheated in adj_ele_heated_to_unheated.items():
+                        if unheated[0] != room:
+                            continue
+                        ele_info = self.detailed_geo[heated[0]][heated[1]]
+                        if ele_info["type"] == "InnerWall":
+                            inner_dummy_element = InnerWall(parent=None)
+                        elif ele_info["type"] == "Floor":
+                            inner_dummy_element = Floor(parent=None)
+                        elif ele_info["type"] == "Ceiling":
+                            inner_dummy_element = Ceiling(parent=None)
+                        else:
+                            raise ValueError("Element type not recognized")
+                        inner_dummy_element.element_construction_type = ele_info["element_construction_type"]
+                        inner_dummy_element.load_type_element(
+                            year=self.year_of_construction,
+                            construction=self._construction_data.value,
+                            data_class=self.parent.data,
+                        )
+                        for outer_ele_name, outer_ele_info in outer_elements.items():
+                            if outer_ele_info["type"] == "OuterWall":
+                                outer_dummy_element = OuterWall(parent=None)
+                                outer_equivalent_part_element = OuterWall(parent=zone)
+                            elif outer_ele_info["type"] == "GroundFloor":
+                                outer_dummy_element = GroundFloor(parent=None)
+                                outer_equivalent_part_element = GroundFloor(parent=zone)
+                            elif outer_ele_info["type"] == "Roof":
+                                outer_dummy_element = Rooftop(parent=None)
+                                outer_equivalent_part_element = Rooftop(parent=zone)
+                            else:
+                                raise ValueError("Element type not recognized")
+                            outer_dummy_element.element_construction_type = outer_ele_info["element_construction_type"]
+                            outer_dummy_element.load_type_element(
+                                year=self.year_of_construction,
+                                construction=self.construction_data_1,
+                                data_class=self.parent.data,
+                            )
+
+                            eq_area = outer_ele_info["area"] * \
+                                      ele_info["area"] / \
+                                      unheated_tot_inner_area  # maybe unheated_to_heated_tot_inner_area
+                            sum_eq_area += eq_area
+                            outer_equivalent_part_element.name = f"{heated[0]}_{outer_ele_name}"
+                            outer_equivalent_part_element.area = eq_area
+                            outer_equivalent_part_element.orientation = outer_ele_info["ori"]
+                            outer_equivalent_part_element.tilt = outer_ele_info["tilt"]
+                            outer_equivalent_part_element.inner_convection = inner_dummy_element.inner_convection
+                            outer_equivalent_part_element.outer_convection = outer_dummy_element.outer_convection
+                            outer_equivalent_part_element.inner_radiation = inner_dummy_element.inner_radiation * \
+                                                                            unheated_tot_inner_area/unheated_tot_outer_area
+                            outer_equivalent_part_element.outer_radiation = outer_dummy_element.outer_radiation
+                            inner_layers = inner_dummy_element.layer
+                            for layer in inner_layers:
+                                layer = copy.deepcopy(layer)
+                                layer.parent = outer_equivalent_part_element
+                                layer.thickness = layer.thickness * unheated_tot_inner_area/unheated_tot_outer_area
+                            air_layer = Layer(parent=outer_equivalent_part_element)
+                            air_layer.thickness = self.room_volumes[room] / unheated_tot_outer_area
+                            air_material = Material(parent=air_layer)
+                            air_material.load_material_template(
+                                mat_name="air_layer",
+                                data_class=self.parent.data,
+                            )
+                            outer_layers = outer_dummy_element.layer
+                            for layer in outer_layers:
+                                layer = copy.deepcopy(layer)
+                                layer.parent = outer_equivalent_part_element
+
 
     @property
     def construction_data(self):
