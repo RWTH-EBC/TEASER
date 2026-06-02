@@ -86,9 +86,7 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
    redeclare model corG =
         AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane,
 % if bldg.central_ahu:
-  redeclare model AHUMod = AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.ModularAHU,
-    AirHandlingUnit(redeclare model humidifier =
-          AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.SteamHumidifier))
+  redeclare model AHUMod = AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.ModularAHU)
 % else:
   redeclare model AHUMod = AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.NoModularAHU)
 % endif

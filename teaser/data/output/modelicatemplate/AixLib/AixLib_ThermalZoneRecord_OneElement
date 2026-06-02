@@ -116,11 +116,11 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     withIdealThresholds = ${get_true_false(zone.use_conditions.with_ideal_thresholds)},
     TThresholdHeater = ${zone.use_conditions.T_threshold_heating},
     TThresholdCooler = ${zone.use_conditions.T_threshold_cooling},
-    traSysHeatK = ${zone.transfer_system_heat_pt1_K},
-    traSysHeatT = ${zone.transfer_system_heat_pt1_T},
-    traSysCoolK = ${zone.transfer_system_cool_pt1_K},
-    traSysCoolT = ${zone.transfer_system_cool_pt1_T},
-    traSysFraHeaRad = ${zone.transfer_system_fraHeaRad},
-    traSysFraCooRad = ${zone.transfer_system_fraCooRad}
+    kDampedTransferHea = ${zone.transfer_system_k_damped_heat},
+    TauDampedTransferHea = ${zone.transfer_system_T_damped_heat},
+    kDampedTransferCoo = ${zone.transfer_system_k_damped_cool},
+    TauDampedTransferCoo = ${zone.transfer_system_T_damped_cool},
+    FraRadHea = ${zone.transfer_system_FraRadHea},
+    FraRadCoo = ${zone.transfer_system_FraRadCoo}
     );
 end ${zone.parent.name}_${zone.name};
