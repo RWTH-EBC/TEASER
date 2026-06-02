@@ -73,12 +73,55 @@ class BuildingAHU(object):
         timeline of relative humidity requirements for AHU simulation
     v_flow_profile : [int]
         timeline of desired relative v_flow of the AHU simulation (0..1)
+    T_treshold_heating: float [K]
+        Temperature after HRS in AHU over which there should be no ahu heating
+        for temperature reasons (humidifciation/dehumidifaction still possible)
+    T_treshold_cooling: float
+        Temperature after HRS in AHU under which there should be no ahu cooling
+        for temperature reasons (humidifciation/dehumidifaction still possible)
 
         - **Note:** The AixLib parameter "WithProfile" determines whether the
           (v_flow_profile combined with "min_ahu and max_ahu") or the
           (persons_profile combined with "min_ahu and max_ahu")
           is used for the AHU supply flow calculations.
           Per default: (v_flow_profile combined with "min_ahu and max_ahu")
+
+    dynamic_volume_flow_control: boolean
+        Wether to use dynamic volume flow control which depends on room temperature deviation
+        (default = false)
+    dynamic_supply_temperature_control: boolean
+        Wether to use dynamic supply temperature flow control which depends on temperature in AHU after HRS
+        (default = false)
+    gain_V_flow_Heat_Max: float
+        Dynamic volume flow control: Max volume flow gain for further heating power
+        (default = 1)
+    gain_V_flow_Cool_Max: float
+        Dynamic volume flow control: Max volume flow gain for further heating power
+        (default = 1)
+    dT_SUP_Offset_Heat: float
+        Dynamic supply temperature control: Base air supply temperature increase when in heating mode
+        (default = 0)
+    dT_SUP_Offset_Cool: float
+        Dynamic supply temperature control: Base air supply temperature decrease when in cooling mode
+        (default = 0)
+    dT_SUP_Heat_Max: float
+        Dynamic supply temperature control: Max temperature difference of T_SUP for further heating power
+        (default = 0)
+    dT_SUP_Cool_Max: float
+        Dynamic supply temperature control: Max temperature difference of T_SUP for further cooling power
+        (default = 0)
+    Ti_PI_Heat_V_flow: float
+        Dynamic volume flow control: Time constant of heating PI controller
+        (default = 300)
+    Ti_PI_Cool_V_flow: float
+        Dynamic volume flow control: Time constant of cooling PI controller
+        (default = 300)
+    Ti_PI_Heat_T_SUP: float
+        Dynamic supply temperature control: Time constant of heating PI controller
+        (default = 3600)
+    Ti_PI_Cool_T_SUP: float
+        Dynamic supply temperature control: Time constant of cooling PI controller
+        (default = 3600)
 
     """
 
@@ -105,6 +148,23 @@ class BuildingAHU(object):
         self._min_relative_humidity_profile = 24 * [0.45]
         self._max_relative_humidity_profile = 24 * [0.65]
         self._v_flow_profile = 7 * [0.0] + 12 * [1.0] + 5 * [0.0]
+
+        self.T_treshold_heating = 290.15
+        self.T_treshold_cooling = 294.15
+
+        # Dynamic ahu control params
+        self.dynamic_volume_flow_control = False
+        self.dynamic_supply_temperature_control = False
+        self.gain_V_flow_Heat_Max = 1
+        self.gain_V_flow_Cool_Max = 1
+        self.dT_SUP_Offset_Heat = 0
+        self.dT_SUP_Offset_Cool = 0
+        self.dT_SUP_Heat_Max = 0
+        self.dT_SUP_Cool_Max = 0
+        self.Ti_PI_Heat_V_flow = 300
+        self.Ti_PI_Cool_V_flow = 300
+        self.Ti_PI_Heat_T_SUP = 3600
+        self.Ti_PI_Cool_T_SUP = 3600
 
         self.schedules = pd.DataFrame(
             index=pd.date_range("2019-01-01 00:00:00", periods=8760, freq="h")

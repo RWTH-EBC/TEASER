@@ -39,22 +39,39 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
   dehuAHU=${get_true_false(bldg.central_ahu.dehumidification)},
   huAHU=${get_true_false(bldg.central_ahu.humidification)},
   BPFDehuAHU=${bldg.central_ahu.by_pass_dehumidification},
-  HRS=${get_true_false(bldg.central_ahu.heat_recovery)},
-  sampleRateAHU=${bldg.central_ahu.sample_rate},
+  heatRecoveryAHU=${get_true_false(bldg.central_ahu.heat_recovery)},
+  T_Treshold_Heating_AHU=${bldg.central_ahu.T_treshold_heating},
+  T_Treshold_Cooling_AHU=${bldg.central_ahu.T_treshold_cooling},
   effFanAHU_sup=${bldg.central_ahu.efficiency_fan_supply},
   effFanAHU_eta=${bldg.central_ahu.efficiency_fan_return},
   effHRSAHU_enabled=${bldg.central_ahu.efficiency_recovery},
   effHRSAHU_disabled=${bldg.central_ahu.efficiency_recovery_false},
   dpAHU_sup=${bldg.central_ahu.pressure_drop_fan_supply},
   dpAHU_eta=${bldg.central_ahu.pressure_drop_fan_return},
+  dynamicVolumeFlowControlAHU=${get_true_false(bldg.central_ahu.dynamic_volume_flow_control)},
+  dynamicSetTempControlAHU=${get_true_false(bldg.central_ahu.dynamic_supply_temperature_control)},
+  gain_V_flow_Heat_Max=${bldg.central_ahu.gain_V_flow_Heat_Max},
+  gain_V_flow_Cool_Max=${bldg.central_ahu.gain_V_flow_Cool_Max},
+  dT_SUP_Offset_Heat=${bldg.central_ahu.dT_SUP_Offset_Heat},
+  dT_SUP_Offset_Cool=${bldg.central_ahu.dT_SUP_Offset_Cool},
+  dT_SUP_Heat_Max=${bldg.central_ahu.dT_SUP_Heat_Max},
+  dT_SUP_Cool_Max=${bldg.central_ahu.dT_SUP_Cool_Max},
+  Ti_PI_Heat_V_flow=${bldg.central_ahu.Ti_PI_Heat_V_flow},
+  Ti_PI_Cool_V_flow=${bldg.central_ahu.Ti_PI_Cool_V_flow},
+  Ti_PI_Heat_T_SUP=${bldg.central_ahu.Ti_PI_Heat_T_SUP},
+  Ti_PI_Cool_T_SUP=${bldg.central_ahu.Ti_PI_Cool_T_SUP},
+
 % else:
   heatAHU = false,
   coolAHU = false,
   dehuAHU = false,
   huAHU = false,
   BPFDehuAHU = 0.2,
-  HRS = false,
-  sampleRateAHU=1800,
+  dynamicVolumeFlowControlAHU = false,
+  dynamicSetTempControlAHU = false,
+  T_Treshold_Heating_AHU = 290.15,
+  T_Treshold_Cooling_AHU = 294.15,
+  heatRecoveryAHU = false,
   effFanAHU_sup=0.7,
   effFanAHU_eta=0.7,
   effHRSAHU_enabled = 0.8,
@@ -69,9 +86,9 @@ AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
    redeclare model corG =
         AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane,
 % if bldg.central_ahu:
-  redeclare model AHUMod = AixLib.Airflow.AirHandlingUnit.AHU)
+  redeclare model AHUMod = AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.ModularAHU)
 % else:
-  redeclare model AHUMod = AixLib.Airflow.AirHandlingUnit.NoAHU)
+  redeclare model AHUMod = AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.NoModularAHU)
 % endif
     "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
@@ -150,7 +167,6 @@ equation
 
   connect(tableTSetCool.y, multizone.TSetCool) annotation (Line(points={{55.2,-58},
           {36.8,-58},{36.8,-9}}, color={0,0,127}));
-
 
 % if use_postprocessing_calc:
   connect(multizone.TAir, multizonePostProcessing.TAir) annotation (Line(points={{51,4.95},

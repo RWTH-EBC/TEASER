@@ -90,6 +90,18 @@ class ThermalZone(object):
         chosen. Default: 6004800 (noon of Mar 11 as published by Virginia Tech
         (https://www.builditsolar.com/Projects/Cooling/EarthTemperatures.htm)
         for a depth of 5 ft)
+    transfer_system_k_damped_heat: float []
+        Gain for PT1 for damped heat transfer
+    transfer_system_T_damped_heat: float [h]
+        Time Constant for PT1 for damped heat transfer
+    transfer_system_k_damped_cool: float []
+        Gain for PT1 for damped cool transfer
+    transfer_system_T_damped_cool: float [h]
+        Time Constant for PT1 for damped cool transfer
+    transfer_system_FraRadHea:
+        Fraction of heat transfer to radiation
+    transfer_system_FraRadCoo:
+        Fraction of cool transfer to radiation
     density_air : float [kg/m3]
         average density of the air in the thermal zone
     heat_capac_air : float [J/K]
@@ -134,6 +146,18 @@ class ThermalZone(object):
 
         self._number_of_floors = None
         self._height_of_floors = None
+        self.t_ground = 286.15
+        self._transfer_system_k_damped_heat = 1
+        self._transfer_system_T_damped_heat = 1
+        self._transfer_system_k_damped_cool = 1
+        self._transfer_system_T_damped_cool = 1
+        self._transfer_system_FraRadHea = 0
+        self._transfer_system_FraRadCoo = 0
+        self.pid_gain_heat = 1
+        self.pid_ti_heat = 1
+        self.pid_gain_cool = 1
+        self.pid_ti_cool = 1
+
 
     def calc_zone_parameters(
             self,
@@ -897,6 +921,114 @@ class ThermalZone(object):
             except:
                 raise ValueError("Can't convert temperature to float")
 
+
+    @property
+    def transfer_system_k_damped_heat(self):
+        return self._transfer_system_k_damped_heat
+
+    @transfer_system_k_damped_heat.setter
+    def transfer_system_k_damped_heat(self, value):
+
+        if isinstance(value, float):
+            self._transfer_system_k_damped_heat = value
+        elif value is None:
+            self._transfer_system_k_damped_heat = value
+        else:
+            try:
+                value = float(value)
+                self._transfer_system_k_damped_heat = value
+            except:
+                raise ValueError("Can't convert value to float")
+
+    @property
+    def transfer_system_T_damped_heat(self):
+        return self._transfer_system_T_damped_heat
+
+    @transfer_system_T_damped_heat.setter
+    def transfer_system_T_damped_heat(self, value):
+
+        if isinstance(value, float):
+            self._transfer_system_T_damped_heat = value
+        elif value is None:
+            self._transfer_system_T_damped_heat = value
+        else:
+            try:
+                value = float(value)
+                self._transfer_system_T_damped_heat = value
+            except:
+                raise ValueError("Can't convert value to float")
+
+    @property
+    def transfer_system_k_damped_cool(self):
+        return self._transfer_system_k_damped_cool
+
+    @transfer_system_k_damped_cool.setter
+    def transfer_system_k_damped_cool(self, value):
+
+        if isinstance(value, float):
+            self._transfer_system_k_damped_cool = value
+        elif value is None:
+            self._transfer_system_k_damped_cool = value
+        else:
+            try:
+                value = float(value)
+                self._transfer_system_k_damped_cool = value
+            except:
+                raise ValueError("Can't convert value to float")
+
+    @property
+    def transfer_system_T_damped_cool(self):
+        return self._transfer_system_T_damped_cool
+
+    @transfer_system_T_damped_cool.setter
+    def transfer_system_T_damped_cool(self, value):
+
+        if isinstance(value, float):
+            self._transfer_system_T_damped_cool = value
+        elif value is None:
+            self._transfer_system_T_damped_cool = value
+        else:
+            try:
+                value = float(value)
+                self._transfer_system_T_damped_cool = value
+            except:
+                raise ValueError("Can't convert value to float")
+
+    @property
+    def transfer_system_FraRadHea(self):
+        return self._transfer_system_FraRadHea
+
+    @transfer_system_FraRadHea.setter
+    def transfer_system_FraRadHea(self, value):
+
+        if isinstance(value, float):
+            self._transfer_system_FraRadHea = value
+        elif value is None:
+            self._transfer_system_FraRadHea = value
+        else:
+            try:
+                value = float(value)
+                self._transfer_system_FraRadHea = value
+            except:
+                raise ValueError("Can't convert value to float")
+
+    @property
+    def transfer_system_FraRadCoo(self):
+        return self._transfer_system_FraRadCoo
+
+    @transfer_system_FraRadCoo.setter
+    def transfer_system_FraRadCoo(self, value):
+
+        if isinstance(value, float):
+            self._transfer_system_FraRadCoo = value
+        elif value is None:
+            self._transfer_system_FraRadCoo = value
+        else:
+            try:
+                value = float(value)
+                self._transfer_system_FraRadCoo = value
+            except:
+                raise ValueError("Can't convert value to float")
     @property
     def t_ground(self):
         return self._t_ground
