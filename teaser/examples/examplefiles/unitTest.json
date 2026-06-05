@@ -74,7 +74,8 @@
                             "base_infiltration": 0.2,
                             "max_user_infiltration": 1.0,
                             "max_overheating_infiltration": [
-                                3.0,
+                                1.0,
+				3.0,
                                 2.0
                             ],
                             "max_summer_infiltration": [
@@ -812,7 +813,8 @@
                             "base_infiltration": 0.2,
                             "max_user_infiltration": 1.0,
                             "max_overheating_infiltration": [
-                                3.0,
+                                1.0,
+				3.0,
                                 2.0
                             ],
                             "max_summer_infiltration": [
@@ -1550,7 +1552,8 @@
                             "base_infiltration": 0.2,
                             "max_user_infiltration": 1.0,
                             "max_overheating_infiltration": [
-                                3.0,
+                                1.0,
+				3.0,
                                 2.0
                             ],
                             "max_summer_infiltration": [
@@ -2288,7 +2291,8 @@
                             "base_infiltration": 0.2,
                             "max_user_infiltration": 1.0,
                             "max_overheating_infiltration": [
-                                3.0,
+                                1.0,
+				3.0,
                                 2.0
                             ],
                             "max_summer_infiltration": [
@@ -3026,7 +3030,8 @@
                             "base_infiltration": 0.2,
                             "max_user_infiltration": 1.0,
                             "max_overheating_infiltration": [
-                                3.0,
+                                1.0,
+				3.0,
                                 2.0
                             ],
                             "max_summer_infiltration": [
@@ -3764,7 +3769,8 @@
                             "base_infiltration": 0.2,
                             "max_user_infiltration": 1.0,
                             "max_overheating_infiltration": [
-                                3.0,
+                                1.0,
+				3.0,
                                 2.0
                             ],
                             "max_summer_infiltration": [
