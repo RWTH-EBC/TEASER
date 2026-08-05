@@ -147,6 +147,12 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         self.top_level_geo_params = {}
         self.detailed_geo = {}
         self.room_volumes = {}
+        # Persistent, retrofittable elements for unheated rooms' own
+        # envelope (e.g. the Attic's roof/gable walls). These are not part
+        # of any ThermalZone (the ROM only has the single heated zone), so
+        # they would never be touched by retrofit otherwise. Structure:
+        # {unheated_room_name: {element_name: BuildingElement}}
+        self.unheated_room_envelope_elements = {}
 
     def update_calc_original_hom_dim_parameters(self):
         def_params = self._original_hom_dim_parameters.copy()
@@ -1026,6 +1032,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         }
 
         self.thermal_zones = None
+        self.unheated_room_envelope_elements = {}
         if len(self.zoning) != 1 and self.integrate_unheated_rooms:
             raise AttributeError("The integration of unheated rooms is only supported for "
                                  "single-zone-ROMs")
@@ -1095,82 +1102,196 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                         window.tilt = ele_info["tilt"]
                         window.orientation = ele_info["ori"]
                         window.area = ele_info["windowarea"]
-            sum_eq_area = 0
-            for room, method in self.integrate_unheated_rooms.items():
-                if method == "const_volumes":
-                    outer_elements = {_n: _i for _n, _i in self.detailed_geo[room].items() if
-                                      _i["type"] in ["OuterWall", "Roof", "GroundFloor"]}
-                    inner_elements = {_n: _i for _n, _i in self.detailed_geo[room].items() if
-                                      _i["type"] in ["InnerWall", "Ceiling", "Floor"]}
-                    unheated_tot_outer_area = sum([ele["area"] for ele in outer_elements.values()])
-                    unheated_tot_inner_area = sum([ele["area"] for ele in inner_elements.values()])
+            self._integrate_unheated_rooms(zone, adj_ele_heated_to_unheated)
 
-                    for heated, unheated in adj_ele_heated_to_unheated.items():
-                        if unheated[0] != room:
-                            continue
-                        ele_info = self.detailed_geo[heated[0]][heated[1]]
-                        if ele_info["type"] == "InnerWall":
-                            inner_dummy_element = InnerWall(parent=None)
-                        elif ele_info["type"] == "Floor":
-                            inner_dummy_element = Floor(parent=None)
-                        elif ele_info["type"] == "Ceiling":
-                            inner_dummy_element = Ceiling(parent=None)
+    def _compute_adjacent_to_unheated(self, room_names):
+        """Re-derive the (room_name, ele_name) -> (unheated_room, unheated_ele_name)
+        mapping for a zone's rooms from detailed_geo. Pure geometry lookup
+        (no elements touched), so it is cheap to recompute e.g. when
+        rebuilding the unheated-room integration after a retrofit.
+        """
+        adj_ele_heated_to_unheated = {}
+        for room_name in room_names:
+            for ele_name, ele_info in self.detailed_geo[room_name].items():
+                adj = ele_info.get("adjacent", (None, None))
+                if adj[0] in self.integrate_unheated_rooms:
+                    adj_ele_heated_to_unheated[(room_name, ele_name)] = adj
+        return adj_ele_heated_to_unheated
+
+    def _get_or_create_unheated_envelope_element(self, room, ele_name, ele_info):
+        """Get (or, on first call, create) the persistent, retrofittable
+        real element representing one piece of an unheated room's own
+        envelope (e.g. one of the Attic's roof/gable walls).
+
+        Unlike the rest of detailed_geo, this element is not disposable: it
+        is cached on self.unheated_room_envelope_elements so retrofit can be
+        applied to it directly (it belongs to no ThermalZone and would
+        otherwise never be retrofitted), and so _integrate_unheated_rooms
+        can later rebuild the zone's equivalent-resistance elements from its
+        actual, possibly-retrofitted state.
+        """
+        room_elements = self.unheated_room_envelope_elements.setdefault(room, {})
+        element = room_elements.get(ele_name)
+        if element is not None:
+            return element
+
+        if ele_info["type"] == "OuterWall":
+            element = OuterWall(parent=None)
+        elif ele_info["type"] == "GroundFloor":
+            element = GroundFloor(parent=None)
+        elif ele_info["type"] == "Roof":
+            element = Rooftop(parent=None)
+        else:
+            raise ValueError("Element type not recognized")
+
+        element.name = f"{room}_{ele_name}"
+        element.element_construction_type = ele_info["element_construction_type"]
+        element.load_type_element(
+            year=self.year_of_construction,
+            construction=self.construction_data_1,
+            data_class=self.data_class,
+        )
+        element.tilt = ele_info["tilt"]
+        element.orientation = ele_info["ori"]
+        element.area = ele_info["area"]
+        room_elements[ele_name] = element
+        return element
+
+    def _integrate_unheated_rooms(self, zone, adj_ele_heated_to_unheated):
+        """(Re)builds the zone's equivalent-resistance elements that
+        integrate unheated rooms (e.g. the Attic) into the single heated
+        zone, following the 'const_volumes' method.
+
+        Safe to call more than once for the same zone (e.g. after
+        retrofitting the unheated rooms' own envelope elements via
+        retrofit_building): existing equivalent elements are found by name
+        and rebuilt in place from the current (possibly retrofitted) state
+        of the unheated rooms' envelope elements, rather than duplicated.
+        """
+        existing_by_name = {
+            element.name: element
+            for element in zone.outer_walls + zone.rooftops + zone.ground_floors
+        }
+        for room, method in self.integrate_unheated_rooms.items():
+            if method != "const_volumes":
+                continue
+            outer_elements = {_n: _i for _n, _i in self.detailed_geo[room].items() if
+                              _i["type"] in ["OuterWall", "Roof", "GroundFloor"]}
+            inner_elements = {_n: _i for _n, _i in self.detailed_geo[room].items() if
+                              _i["type"] in ["InnerWall", "Ceiling", "Floor"]}
+            unheated_tot_outer_area = sum([ele["area"] for ele in outer_elements.values()])
+            unheated_tot_inner_area = sum([ele["area"] for ele in inner_elements.values()])
+
+            for heated, unheated in adj_ele_heated_to_unheated.items():
+                if unheated[0] != room:
+                    continue
+                ele_info = self.detailed_geo[heated[0]][heated[1]]
+                if ele_info["type"] == "InnerWall":
+                    inner_dummy_element = InnerWall(parent=None)
+                elif ele_info["type"] == "Floor":
+                    inner_dummy_element = Floor(parent=None)
+                elif ele_info["type"] == "Ceiling":
+                    inner_dummy_element = Ceiling(parent=None)
+                else:
+                    raise ValueError("Element type not recognized")
+                inner_dummy_element.element_construction_type = ele_info["element_construction_type"]
+                inner_dummy_element.load_type_element(
+                    year=self.year_of_construction,
+                    construction=self._construction_data.value,
+                    data_class=self.data_class,
+                )
+                for outer_ele_name, outer_ele_info in outer_elements.items():
+                    outer_element = self._get_or_create_unheated_envelope_element(
+                        room, outer_ele_name, outer_ele_info,
+                    )
+
+                    eq_name = f"{heated[0]}_{outer_ele_name}"
+                    outer_equivalent_part_element = existing_by_name.get(eq_name)
+                    if outer_equivalent_part_element is None:
+                        if outer_ele_info["type"] == "OuterWall":
+                            outer_equivalent_part_element = OuterWall(parent=zone)
+                        elif outer_ele_info["type"] == "GroundFloor":
+                            outer_equivalent_part_element = GroundFloor(parent=zone)
+                        elif outer_ele_info["type"] == "Roof":
+                            outer_equivalent_part_element = Rooftop(parent=zone)
                         else:
                             raise ValueError("Element type not recognized")
-                        inner_dummy_element.element_construction_type = ele_info["element_construction_type"]
-                        inner_dummy_element.load_type_element(
-                            year=self.year_of_construction,
-                            construction=self._construction_data.value,
-                            data_class=self.data_class,
-                        )
-                        for outer_ele_name, outer_ele_info in outer_elements.items():
-                            if outer_ele_info["type"] == "OuterWall":
-                                outer_dummy_element = OuterWall(parent=None)
-                                outer_equivalent_part_element = OuterWall(parent=zone)
-                            elif outer_ele_info["type"] == "GroundFloor":
-                                outer_dummy_element = GroundFloor(parent=None)
-                                outer_equivalent_part_element = GroundFloor(parent=zone)
-                            elif outer_ele_info["type"] == "Roof":
-                                outer_dummy_element = Rooftop(parent=None)
-                                outer_equivalent_part_element = Rooftop(parent=zone)
-                            else:
-                                raise ValueError("Element type not recognized")
-                            outer_dummy_element.element_construction_type = outer_ele_info["element_construction_type"]
-                            outer_dummy_element.load_type_element(
-                                year=self.year_of_construction,
-                                construction=self.construction_data_1,
-                                data_class=self.data_class,
-                            )
+                        outer_equivalent_part_element.name = eq_name
+                        existing_by_name[eq_name] = outer_equivalent_part_element
+                    else:
+                        outer_equivalent_part_element.layer = None
 
-                            eq_area = outer_ele_info["area"] * \
-                                      ele_info["area"] / \
-                                      unheated_tot_inner_area  # maybe unheated_to_heated_tot_inner_area
-                            sum_eq_area += eq_area
-                            outer_equivalent_part_element.name = f"{heated[0]}_{outer_ele_name}"
-                            outer_equivalent_part_element.area = eq_area
-                            outer_equivalent_part_element.orientation = outer_ele_info["ori"]
-                            outer_equivalent_part_element.tilt = outer_ele_info["tilt"]
-                            outer_equivalent_part_element.inner_convection = inner_dummy_element.inner_convection
-                            outer_equivalent_part_element.outer_convection = outer_dummy_element.outer_convection
-                            outer_equivalent_part_element.inner_radiation = inner_dummy_element.inner_radiation * \
-                                                                            unheated_tot_inner_area/unheated_tot_outer_area
-                            outer_equivalent_part_element.outer_radiation = outer_dummy_element.outer_radiation
-                            inner_layers = inner_dummy_element.layer
-                            for layer in inner_layers:
-                                layer = copy.deepcopy(layer)
-                                layer.parent = outer_equivalent_part_element
-                                layer.thickness = layer.thickness * unheated_tot_inner_area/unheated_tot_outer_area
-                            air_layer = Layer(parent=outer_equivalent_part_element)
-                            air_layer.thickness = self.room_volumes[room] / unheated_tot_outer_area
-                            air_material = Material(parent=air_layer)
-                            air_material.load_material_template(
-                                mat_name="air_layer",
-                                data_class=self.data_class,
-                            )
-                            outer_layers = outer_dummy_element.layer
-                            for layer in outer_layers:
-                                layer = copy.deepcopy(layer)
-                                layer.parent = outer_equivalent_part_element
+                    eq_area = outer_ele_info["area"] * \
+                              ele_info["area"] / \
+                              unheated_tot_inner_area  # maybe unheated_to_heated_tot_inner_area
+                    outer_equivalent_part_element.area = eq_area
+                    outer_equivalent_part_element.orientation = outer_ele_info["ori"]
+                    outer_equivalent_part_element.tilt = outer_ele_info["tilt"]
+                    outer_equivalent_part_element.inner_convection = inner_dummy_element.inner_convection
+                    outer_equivalent_part_element.outer_convection = outer_element.outer_convection
+                    outer_equivalent_part_element.inner_radiation = inner_dummy_element.inner_radiation * \
+                                                                    unheated_tot_inner_area/unheated_tot_outer_area
+                    outer_equivalent_part_element.outer_radiation = outer_element.outer_radiation
+                    inner_layers = inner_dummy_element.layer
+                    for layer in inner_layers:
+                        layer = copy.deepcopy(layer)
+                        layer.parent = outer_equivalent_part_element
+                        layer.thickness = layer.thickness * unheated_tot_inner_area/unheated_tot_outer_area
+                    air_layer = Layer(parent=outer_equivalent_part_element)
+                    air_layer.thickness = self.room_volumes[room] / unheated_tot_outer_area
+                    air_material = Material(parent=air_layer)
+                    air_material.load_material_template(
+                        mat_name="air_layer",
+                        data_class=self.data_class,
+                    )
+                    outer_layers = outer_element.layer
+                    for layer in outer_layers:
+                        layer = copy.deepcopy(layer)
+                        layer.parent = outer_equivalent_part_element
+
+    def retrofit_building(
+            self,
+            year_of_retrofit=None,
+            type_of_retrofit=None,
+            window_type=None,
+            material=None,
+    ):
+        """Retrofits all zones in the building, and the unheated rooms'
+        own envelope elements.
+
+        The Attic (and any other unheated room integrated via
+        'const_volumes') has no ThermalZone of its own - only its
+        equivalent-resistance stand-ins live in the single heated zone - so
+        its real envelope elements would never be retrofitted by the base
+        implementation. This override retrofits them directly, then
+        rebuilds the zone's equivalent elements from their new state, in
+        addition to the normal zone/window/outer-envelope retrofit.
+
+        Parameters are the same as Building.retrofit_building.
+        """
+        self.sum_heat_load = 0
+
+        if year_of_retrofit is not None:
+            self.year_of_retrofit = year_of_retrofit
+
+        for elements in self.unheated_room_envelope_elements.values():
+            for element in elements.values():
+                element.retrofit_wall(
+                    self.year_of_retrofit, material, data_class=self.data_class,
+                )
+
+        for zone in self.thermal_zones:
+            zone.retrofit_zone(type_of_retrofit, window_type, material)
+            adj_ele_heated_to_unheated = self._compute_adjacent_to_unheated(
+                self.zoning[zone.name]
+            )
+            self._integrate_unheated_rooms(zone, adj_ele_heated_to_unheated)
+
+        self.calc_building_parameter(
+            number_of_elements=self.number_of_elements_calc,
+            merge_windows=self.merge_windows_calc,
+            used_library=self.used_library_calc,
+        )
 
 
     @property

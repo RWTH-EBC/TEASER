@@ -10,7 +10,6 @@ import teaser.data.output.modelica_output as modelica_output
 from teaser.logic.buildingobjects.building import Building
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
-from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 
 
 def export_besmod(
@@ -590,19 +589,12 @@ def write_wall_record(wall_path, wall_type, single_wall_template, bldg):
         teaser_id_aixlib_inside_layer = 0
         teaser_id_aixlib_outside_layer = n
     elif wall_type == 'roof_attic':
-        # The attic's own envelope is never added to the (merged) zone as a
-        # real element - only its equivalent-resistance stand-ins are (see
-        # AixLibHighOrderSingleFamilyHouse.generate_archetype). It is
-        # therefore not currently retrofittable, and has to be re-derived
-        # from the original construction here rather than sourced from the
-        # zone.
-        element = Rooftop(parent=None)
-        element.element_construction_type = "Attic"
-        element.load_type_element(
-            year=bldg.year_of_construction,
-            construction=bldg.construction_data_1,
-            data_class=bldg.data_class,
-        )
+        # The attic's own envelope is not part of the (merged) zone - only
+        # its equivalent-resistance stand-ins are (see
+        # AixLibHighOrderSingleFamilyHouse.generate_archetype) - but is kept
+        # as a persistent, retrofittable element on the building itself
+        # (unheated_room_envelope_elements), so this reflects retrofit too.
+        element = bldg.unheated_room_envelope_elements["Attic"]["roof1"]
         layers = element.layer
         n = len(layers)
         teaser_id_aixlib_inside_layer = 0
