@@ -1297,6 +1297,78 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             used_library=self.used_library_calc,
         )
 
+    def calc_room_heat_loads(self):
+        """Simplified, room-wise static heat load for each heated room.
+
+        Uses the same method TEASER already applies at zone level (see
+        TwoElement._calc_heat_load): UA-value of the envelope times the
+        nominal indoor/outdoor (and ground) temperature difference, plus
+        infiltration - just evaluated per room instead of aggregated over
+        the whole (single, merged) zone. Room elements are found by name
+        (every element and window created for a room is named
+        "{room_name}_...", see generate_archetype), so this also picks up
+        a room's share of the unheated-room equivalent elements (e.g. its
+        connection to the Attic via its ceiling), since those are named
+        after the heated room they belong to.
+
+        Simplified for now to only include transmission and infiltration
+        to the outside/ground, not heat exchange with other rooms (which
+        would need a more DIN 12831-like approach to apportion internal
+        room-to-room losses/gains - not implemented here yet).
+
+        Call this before and after retrofit_building to get the room heat
+        loads for both states - element ua_values (and therefore the
+        result) reflect whatever retrofit has already been applied.
+
+        Must be called after the zone's parameters have been calculated at
+        least once (e.g. via calc_building_parameter/calc_all_buildings),
+        same prerequisite as the zone-level heat_load.
+
+        Returns
+        -------
+        room_heat_loads : dict
+            {room_name: heat_load [W]} for every heated room.
+        """
+        zone = self.thermal_zones[0]
+        use_cond = zone.use_conditions
+
+        if zone.parent.parent.t_soil_mode == 2:
+            t_ground = zone.t_ground - zone.t_ground_amplitude
+        else:
+            t_ground = zone.t_ground
+
+        room_heat_loads = {}
+        for room_names in self.zoning.values():
+            for room_name in room_names:
+                prefix = f"{room_name}_"
+                ua_value_outside = sum(
+                    ele.ua_value for ele in zone.outer_walls + zone.rooftops
+                    if ele.name.startswith(prefix)
+                ) + sum(
+                    win.ua_value for win in zone.windows
+                    if win.name.startswith(prefix)
+                )
+                ua_value_ground = sum(
+                    ele.ua_value for ele in zone.ground_floors
+                    if ele.name.startswith(prefix)
+                )
+
+                heat_load_outside_factor = (
+                    ua_value_outside
+                    + self.room_volumes[room_name]
+                    * use_cond.normative_infiltration
+                    / 3600
+                    * zone.heat_capac_air
+                    * zone.density_air
+                )
+                heat_load_ground_factor = ua_value_ground
+
+                room_heat_loads[room_name] = (
+                    heat_load_outside_factor * (zone.t_inside - zone.t_outside)
+                    + heat_load_ground_factor * (zone.t_inside - t_ground)
+                )
+
+        return room_heat_loads
 
     @property
     def construction_data(self):
