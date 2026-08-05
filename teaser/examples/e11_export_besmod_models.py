@@ -128,7 +128,7 @@ def example_export_besmod():
     # Export all buildings to BESMod and include them in predefined example systems.
     path = prj.export_besmod(
         THydSup_nominal=THydSup_nominal,
-        path=None,
+        path=r"D:\03_TEASER_dev\test_hom_export",
         examples=examples,
         export_with_hom=True
     )
@@ -162,7 +162,7 @@ def example_export_besmod():
     path = prj.export_besmod(
         THydSup_nominal=THydSup_nominal,
         QBuiOld_flow_design=QBuiOld_flow_design,
-        path=None,
+        path=r"D:\03_TEASER_dev\test_hom_export",
         examples=examples
     )
 
@@ -224,7 +224,7 @@ def example_export_besmod():
 
     path = prj.export_besmod(
         THydSup_nominal=THydSup_nominal,
-        path=None,
+        path=r"D:\03_TEASER_dev\test_hom_export",
         examples=examples,
         custom_examples=custom_example_template,
         custom_script=custom_script
