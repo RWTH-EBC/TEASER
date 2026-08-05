@@ -1205,7 +1205,11 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                         room, outer_ele_name, outer_ele_info,
                     )
 
-                    eq_name = f"{heated[0]}_{outer_ele_name}"
+                    # room ("Attic") is included so this can never collide
+                    # with a heated room's own real element names (e.g.
+                    # both a heated room and Attic can have an
+                    # "outside_wall1" key in detailed_geo).
+                    eq_name = f"{heated[0]}_{room}_{outer_ele_name}"
                     outer_equivalent_part_element = existing_by_name.get(eq_name)
                     if outer_equivalent_part_element is None:
                         if outer_ele_info["type"] == "OuterWall":
