@@ -401,7 +401,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     "area": self.top_level_geo_params["room_width"] * self.top_level_geo_params["height_of_floors"],
                     "type": "InnerWall",
                     "element_construction_type": None,
-                    "adjacent": ("Livigroom", "inside_wall2")
+                    "adjacent": ("Livingroom", "inside_wall2")
                 },
             },
             "Hobby": {
@@ -898,7 +898,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     "tilt": 0,
                     "area": self.top_level_geo_params["l4"] * self.top_level_geo_params["room_width_short"],
                     "type": "Ceiling",
-                    "element_construction_type": None,
+                    "element_construction_type": "Attic",
                     "adjacent": ("Attic", "floorRoom4")
                 },
                 "inside_wall1": {
