@@ -1370,6 +1370,26 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
 
         return room_heat_loads
 
+    def calc_room_heat_loads_list(self):
+        """Room-wise heat loads as a list, ordered by room_name_nr (1..10).
+
+        Convenience wrapper around calc_room_heat_loads for use in
+        Modelica array parameters (e.g. QRooms_flow_nominal), where rooms
+        are referenced by their fixed room_name_nr index rather than by
+        name. Same call-before/after-retrofit usage as
+        calc_room_heat_loads.
+
+        Returns
+        -------
+        room_heat_loads : list of float
+            Heat load [W] of each room, room_heat_loads[0] is the room
+            with room_name_nr 1, room_heat_loads[-1] the room with
+            room_name_nr 10 (== len(room_name_nr)).
+        """
+        room_heat_loads = self.calc_room_heat_loads()
+        rooms_by_nr = sorted(self.room_name_nr, key=self.room_name_nr.get)
+        return [room_heat_loads[room] for room in rooms_by_nr]
+
     @property
     def construction_data(self):
         return self._construction_data
