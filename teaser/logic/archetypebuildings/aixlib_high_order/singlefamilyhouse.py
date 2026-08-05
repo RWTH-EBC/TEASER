@@ -1073,7 +1073,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     element.load_type_element(
                         year=self.year_of_construction,
                         construction=self._construction_data.value if is_inner else self.construction_data_1,
-                        data_class=self.parent.data,
+                        data_class=self.data_class,
                     )
                     element.tilt = ele_info["tilt"]
                     element.orientation = ele_info["ori"]
@@ -1089,7 +1089,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                         window.load_type_element(
                             self.year_of_construction,
                             construction=construction,
-                            data_class=self.parent.data,
+                            data_class=self.data_class,
                         )
                         window.name = f"{room_name}_{ele_name}_win"
                         window.tilt = ele_info["tilt"]
@@ -1121,7 +1121,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                         inner_dummy_element.load_type_element(
                             year=self.year_of_construction,
                             construction=self._construction_data.value,
-                            data_class=self.parent.data,
+                            data_class=self.data_class,
                         )
                         for outer_ele_name, outer_ele_info in outer_elements.items():
                             if outer_ele_info["type"] == "OuterWall":
@@ -1139,7 +1139,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                             outer_dummy_element.load_type_element(
                                 year=self.year_of_construction,
                                 construction=self.construction_data_1,
-                                data_class=self.parent.data,
+                                data_class=self.data_class,
                             )
 
                             eq_area = outer_ele_info["area"] * \
@@ -1165,7 +1165,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                             air_material = Material(parent=air_layer)
                             air_material.load_material_template(
                                 mat_name="air_layer",
-                                data_class=self.parent.data,
+                                data_class=self.data_class,
                             )
                             outer_layers = outer_dummy_element.layer
                             for layer in outer_layers:

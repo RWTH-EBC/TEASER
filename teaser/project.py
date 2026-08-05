@@ -445,6 +445,7 @@ class Project(object):
             construction_data=construction_data,
         )
 
+        type_bldg.data_class = self.data
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
             number_of_elements=self._number_of_elements_calc,
@@ -683,12 +684,12 @@ class Project(object):
             type_bldg = datahandling.geometries[geometry_data](
                 self, **urbanrenet_arg)
         elif geometry_data == datahandling.GeometryData.AixLibHighOrderSingleFamilyHouse:
-            print(geometry_data, datahandling.GeometryData.AixLibHighOrderSingleFamilyHouse)
             type_bldg = datahandling.geometries[geometry_data](
                 self, **aixlib_hom_arg)
         else:
             type_bldg = datahandling.geometries[geometry_data](
                 self, **common_arg)
+        type_bldg.data_class = self.data
         type_bldg.generate_archetype()
         if (not construction_data.is_tabula_de() and not
                 construction_data.is_tabula_dk()):

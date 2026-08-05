@@ -207,6 +207,30 @@ class Building(object):
         self.t_bt = 5
         self.t_bt_layer = 7
 
+        self._data_class = None
+
+    @property
+    def data_class(self):
+        """DataClass() instance this building was generated from.
+
+        Used as the default `data_class` for calculation/retrofit of this
+        building's elements, so it stays correct even if the parent
+        Project's `data` attribute is later reassigned (e.g. by adding
+        another building with different construction_data, or by
+        Project.retrofit_all_buildings). Falls back to `self.parent.data`
+        if never explicitly set (e.g. for buildings created without going
+        through Project.add_residential/add_non_residential).
+        """
+        if self._data_class is not None:
+            return self._data_class
+        if self.parent is not None:
+            return self.parent.data
+        return None
+
+    @data_class.setter
+    def data_class(self, value):
+        self._data_class = value
+
     def set_outer_wall_area(self, new_area, orientation):
         """Outer area wall setter
 
@@ -499,6 +523,10 @@ class Building(object):
             self.year_of_retrofit = year_of_retrofit
 
         for zone in self.thermal_zones:
+            # data_class is intentionally not passed here: retrofit_zone
+            # resolves the correct default itself per retrofit branch (the
+            # building's own data_class for the TABULA-style branch, a
+            # fixed iwu_heavy catalog for the generic 'iwu'-style branch).
             zone.retrofit_zone(type_of_retrofit, window_type, material)
 
         self.calc_building_parameter(

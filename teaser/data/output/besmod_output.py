@@ -10,11 +10,7 @@ import teaser.data.output.modelica_output as modelica_output
 from teaser.logic.buildingobjects.building import Building
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
-from teaser.logic.buildingobjects.buildingphysics.groundfloor import GroundFloor
-from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
-from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
-from teaser.logic.buildingobjects.buildingphysics.window import Window
 
 
 def export_besmod(
@@ -301,18 +297,11 @@ def export_besmod(
                     bldg.name + '_wallTypes.mo'), 'w') as out_file:
                 out_file.write(multi_inner_wall_template.render_unicode(bldg=bldg))
                 out_file.close()
-            window = Window(None)
-            window.area = 1  # dummy value
-            construction = (
-                "Waermeschutzverglasung, dreifach"
-                if bldg.construction_data.is_kfw()
-                else bldg.construction_data_1
-            )
-            window.load_type_element(
-                bldg.year_of_construction,
-                construction=construction,
-                data_class=bldg.parent.data,
-            )
+            # Sourced from an actual (and, if applicable, retrofitted) zone
+            # window rather than re-derived fresh from year_of_construction,
+            # so retrofit is reflected here too. u_value is area-independent
+            # (ua_value / area), so any window works regardless of its area.
+            window = bldg.thermal_zones[0].windows[0]
             window.calc_ua_value()
             with open(os.path.join(
                     wall_path,
@@ -558,50 +547,68 @@ def _help_example_script(bldg, dir_dymola, test_script_template, example):
         out_file.close()
 
 
+def _find_wall_type_element(elements, element_construction_type=None):
+    """Find the first element matching element_construction_type.
+
+    Used by write_wall_record to source the generic material/layer stack
+    for a HOM wall-type record from an actual (already generated and, if
+    applicable, retrofitted) zone element, instead of re-deriving a fresh
+    element straight from year/construction. This keeps the exported HOM
+    wall types consistent with whatever retrofit was actually applied to
+    the zone, rather than always reflecting the original construction.
+
+    Relies on the genuine per-room elements (element_construction_type is
+    None or "LoadBearing") being added to the zone before the unheated-room
+    equivalent-resistance elements in
+    AixLibHighOrderSingleFamilyHouse.generate_archetype, so the first match
+    (in insertion order) is always a genuine element and never one of the
+    equivalent ones (which are currently left untagged, also None).
+    """
+    for element in elements:
+        if element.element_construction_type == element_construction_type:
+            return element
+    raise ValueError(
+        "No element with element_construction_type="
+        f"{element_construction_type!r} found for HOM wall-type export."
+    )
+
+
 def write_wall_record(wall_path, wall_type, single_wall_template, bldg):
     half = False
     layer_direction = -1
+    zone = bldg.thermal_zones[0]
     if wall_type == 'OW':
-        element = OuterWall(parent=None)
-        element.load_type_element(
-                        year=bldg.year_of_construction,
-                        construction=bldg.construction_data_1,
-                        data_class=bldg.parent.data,
-        )
+        element = _find_wall_type_element(zone.outer_walls)
         layers = element.layer
         n = len(layers)
         teaser_id_aixlib_inside_layer = 0
         teaser_id_aixlib_outside_layer = n
     elif wall_type == 'roof':
-        element = Rooftop(parent=None)
-        element.load_type_element(
-            year=bldg.year_of_construction,
-            construction=bldg.construction_data_1,
-            data_class=bldg.parent.data,
-        )
+        element = _find_wall_type_element(zone.rooftops)
         layers = element.layer
         n = len(layers)
         teaser_id_aixlib_inside_layer = 0
         teaser_id_aixlib_outside_layer = n
     elif wall_type == 'roof_attic':
+        # The attic's own envelope is never added to the (merged) zone as a
+        # real element - only its equivalent-resistance stand-ins are (see
+        # AixLibHighOrderSingleFamilyHouse.generate_archetype). It is
+        # therefore not currently retrofittable, and has to be re-derived
+        # from the original construction here rather than sourced from the
+        # zone.
         element = Rooftop(parent=None)
         element.element_construction_type = "Attic"
         element.load_type_element(
             year=bldg.year_of_construction,
             construction=bldg.construction_data_1,
-            data_class=bldg.parent.data,
+            data_class=bldg.data_class,
         )
         layers = element.layer
         n = len(layers)
         teaser_id_aixlib_inside_layer = 0
         teaser_id_aixlib_outside_layer = n
     elif wall_type == 'IW_vert_half':
-        element = InnerWall(parent=None)
-        element.load_type_element(
-            year=bldg.year_of_construction,
-            construction=bldg.construction_data.value,
-            data_class=bldg.parent.data,
-        )
+        element = _find_wall_type_element(zone.inner_walls)
         layers = element.layer
         n = len(layers)
         quotient, remainder = divmod(n, 2)
@@ -611,13 +618,7 @@ def write_wall_record(wall_path, wall_type, single_wall_template, bldg):
         teaser_id_aixlib_inside_layer = 0
         teaser_id_aixlib_outside_layer = quotient
     elif wall_type == 'IW2_vert_half':
-        element = InnerWall(parent=None)
-        element.element_construction_type = "LoadBearing"
-        element.load_type_element(
-            year=bldg.year_of_construction,
-            construction=bldg.construction_data.value,
-            data_class=bldg.parent.data,
-        )
+        element = _find_wall_type_element(zone.inner_walls, "LoadBearing")
         layers = element.layer
         n = len(layers)
         quotient, remainder = divmod(n, 2)
@@ -627,12 +628,7 @@ def write_wall_record(wall_path, wall_type, single_wall_template, bldg):
         teaser_id_aixlib_inside_layer = 0
         teaser_id_aixlib_outside_layer = quotient
     elif wall_type == 'ground_floor_upHalf':
-        element = GroundFloor(parent=None)
-        element.load_type_element(
-            year=bldg.year_of_construction,
-            construction=bldg.construction_data_1,
-            data_class=bldg.parent.data,
-        )
+        element = _find_wall_type_element(zone.ground_floors)
         layers = element.layer
         n = len(layers)
         if n == 1:
@@ -641,12 +637,7 @@ def write_wall_record(wall_path, wall_type, single_wall_template, bldg):
         teaser_id_aixlib_outside_layer = 1
     elif wall_type == 'ground_floor_loHalf':
         # in aixlib different order than ow and rf aixlib last layer is connected to the ground
-        element = GroundFloor(parent=None)
-        element.load_type_element(
-            year=bldg.year_of_construction,
-            construction=bldg.construction_data_1,
-            data_class=bldg.parent.data,
-        )
+        element = _find_wall_type_element(zone.ground_floors)
         layers = element.layer
         n = len(layers)
         if n == 1:
@@ -657,46 +648,40 @@ def write_wall_record(wall_path, wall_type, single_wall_template, bldg):
         teaser_id_aixlib_inside_layer = n + 1
         layer_direction = 1
     elif wall_type == 'IW_hori_loHalf':
-        element = Ceiling(parent=None)
-        element.load_type_element(
-            year=bldg.year_of_construction,
-            construction=bldg.construction_data.value,
-            data_class=bldg.parent.data,
-        )
+        element = _find_wall_type_element(zone.ceilings)
         layers = element.layer
         n = len(layers)
         teaser_id_aixlib_inside_layer = 0
         teaser_id_aixlib_outside_layer = 1
     elif wall_type == 'IW_hori_upHalf':
-        element = Floor(parent=None)
-        element.load_type_element(
-            year=bldg.year_of_construction,
-            construction=bldg.construction_data.value,
-            data_class=bldg.parent.data,
-        )
+        element = _find_wall_type_element(zone.floors)
         layers = element.layer
         n = len(layers)
         teaser_id_aixlib_inside_layer = 0
         teaser_id_aixlib_outside_layer = n - 1
     elif wall_type == 'IW_hori_att_loHalf':
+        # See the roof_attic comment above: not tracked as a real,
+        # retrofittable zone element.
         element = Ceiling(parent=None)
         element.element_construction_type = "Attic"
         element.load_type_element(
             year=bldg.year_of_construction,
             construction=bldg.construction_data.value,
-            data_class=bldg.parent.data,
+            data_class=bldg.data_class,
         )
         layers = element.layer
         n = len(layers)
         teaser_id_aixlib_inside_layer = 0
         teaser_id_aixlib_outside_layer = 1
     elif wall_type == 'IW_hori_att_upHalf':
+        # See the roof_attic comment above: not tracked as a real,
+        # retrofittable zone element.
         element = Floor(parent=None)
         element.element_construction_type = "Attic"
         element.load_type_element(
             year=bldg.year_of_construction,
             construction=bldg.construction_data.value,
-            data_class=bldg.parent.data,
+            data_class=bldg.data_class,
         )
         layers = element.layer
         n = len(layers)

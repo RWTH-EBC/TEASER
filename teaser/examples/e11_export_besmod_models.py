@@ -163,7 +163,8 @@ def example_export_besmod():
         THydSup_nominal=THydSup_nominal,
         QBuiOld_flow_design=QBuiOld_flow_design,
         path=r"D:\03_TEASER_dev\test_hom_export",
-        examples=examples
+        examples=examples,
+        export_with_hom=True
     )
 
     # ## Custom export

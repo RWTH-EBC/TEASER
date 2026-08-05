@@ -193,7 +193,7 @@ class Window(BuildingElement):
         for layer_count in c_layer:
             self.c1 += layer_count
 
-    def replace_window(self, year_of_retrofit, window_type=None):
+    def replace_window(self, year_of_retrofit, window_type=None, data_class=None):
         """Replace a window, with a newer one.
 
         Replaces all attributes from the window and replaces it with a high
@@ -203,12 +203,19 @@ class Window(BuildingElement):
         ----------
         year_of_retrofit: int
             The year, the building was refurbished
+        data_class : DataClass(), optional
+            DataClass to load the window type element from. If None,
+            defaults to self.parent.parent.parent.data (data_class in
+            current project).
         """
 
         if window_type is None:
             window_type = "EnEv"
         else:
             pass
+
+        if data_class is None:
+            data_class = self.parent.parent.parent.data
 
         if year_of_retrofit < 1995:
             year_of_retrofit = 1995
@@ -220,7 +227,7 @@ class Window(BuildingElement):
         self.layer = None
         self.load_type_element(year_of_retrofit,
                                window_type,
-                               self.parent.parent.parent.data)
+                               data_class)
 
     @property
     def parent(self):
