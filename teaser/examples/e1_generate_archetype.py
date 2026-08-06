@@ -118,6 +118,24 @@ def example_generate_archetype():
         height_of_floors=2.6
     )
 
+    # The AixLib HOM archetype can also be built from its own reference
+    # wall constructions (converted from AixLib's WallconstructionsAixLib.xls
+    # into TypeElements_AixLib.json), independent of TABULA. Choose between
+    # `aixlib_S` (masonry), `aixlib_M` (aerated concrete) or `aixlib_L`
+    # (timber frame) as construction_data; `aixlib_M_retrofit` covers the
+    # same 1960s aerated-concrete construction with partially retrofitted
+    # windows.
+
+    prj.add_residential(
+        construction_data='aixlib_S',
+        geometry_data='aixlib_high_order_single_family_house',
+        name="ResidentialBuildingHighOrderAixLib",
+        year_of_construction=1990,
+        net_leased_area=170.0,
+        number_of_floors=2,
+        height_of_floors=2.6
+    )
+
     return prj
 
 

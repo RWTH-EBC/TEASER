@@ -98,6 +98,10 @@ class ConstructionData(Enum):
     kfw_70 = "kfw_70"
     kfw_85 = "kfw_85"
     kfw_100 = "kfw_100"
+    aixlib_S = "aixlib_S"
+    aixlib_M = "aixlib_M"
+    aixlib_L = "aixlib_L"
+    aixlib_M_retrofit = "aixlib_M_retrofit"
     custom = "custom"
 
     def get_prefix(self):
@@ -119,6 +123,13 @@ class ConstructionData(Enum):
 
     def is_kfw(self):
         return self.get_prefix() == "kfw"
+
+    def is_aixlib(self):
+        # not using get_prefix() here: aixlib_M_retrofit has an extra
+        # "_retrofit" segment that would otherwise change the computed
+        # prefix (get_prefix mirrors tabula_de/tabula_dk's fixed 2-segment
+        # convention, which doesn't fit aixlib's S/M/L + retrofit suffix).
+        return self.value.startswith("aixlib")
 
     def is_custom(self):
         return self.value == "custom"
@@ -208,6 +219,15 @@ allowed_geometries = {
                               GeometryData.AixLibHighOrderSingleFamilyHouse],
     ConstructionData.kfw_100: [GeometryData.IwuSingleFamilyDwelling, GeometryData.TabulaDeSingleFamilyHouse,
                                GeometryData.AixLibHighOrderSingleFamilyHouse],
+
+    # aixlib_S/M/L (+ aixlib_M_retrofit) are specific to the AixLib HOM
+    # archetype's own wall-type conventions (InnerWallLoadBearing, Attic/
+    # Cellar-tagged elements, S/M/L construction classes) and not meant
+    # for the other geometries.
+    ConstructionData.aixlib_S: [GeometryData.AixLibHighOrderSingleFamilyHouse],
+    ConstructionData.aixlib_M: [GeometryData.AixLibHighOrderSingleFamilyHouse],
+    ConstructionData.aixlib_L: [GeometryData.AixLibHighOrderSingleFamilyHouse],
+    ConstructionData.aixlib_M_retrofit: [GeometryData.AixLibHighOrderSingleFamilyHouse],
 }
 
 
