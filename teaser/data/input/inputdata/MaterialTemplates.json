@@ -7781,25 +7781,7 @@
         ],
         "solar_absorp": 0.5
     },
-    "75bd19d6-91a1-11f1-8b86-40c73c88cbfa": {
-        "name": "mineral_wool_120_1",
-        "density": 120.0,
-        "thermal_conduc": 0.05,
-        "heat_capac": 1.03,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75bd610f-91a1-11f1-b171-40c73c88cbfa": {
-        "name": "sand_lime_brick_1600",
-        "density": 1600.0,
-        "thermal_conduc": 0.79,
-        "heat_capac": 1.0,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75bd6611-91a1-11f1-9868-40c73c88cbfa": {
+    "4407c6be-9230-11f1-8e4e-40c73c88cbfa": {
         "name": "gypsum_plaster",
         "density": 1200.0,
         "thermal_conduc": 0.51,
@@ -7808,61 +7790,25 @@
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bd6b7f-91a1-11f1-90ed-40c73c88cbfa": {
-        "name": "foam_glass_100_1",
-        "density": 100.0,
-        "thermal_conduc": 0.05,
+    "4407f239-9230-11f1-a291-40c73c88cbfa": {
+        "name": "sand_lime_brick_1600",
+        "density": 1600.0,
+        "thermal_conduc": 0.79,
         "heat_capac": 1.0,
         "thickness_default": 0.1,
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bd6fbf-91a1-11f1-8f39-40c73c88cbfa": {
-        "name": "reinforced_concrete",
-        "density": 2300.0,
-        "thermal_conduc": 2.3,
-        "heat_capac": 1.0,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75bd73dd-91a1-11f1-9224-40c73c88cbfa": {
-        "name": "mineral_wool_120_2",
+    "4407f7e8-9230-11f1-a0ea-40c73c88cbfa": {
+        "name": "mineral_wool_120_lambda050",
         "density": 120.0,
-        "thermal_conduc": 0.055,
+        "thermal_conduc": 0.05,
         "heat_capac": 1.03,
         "thickness_default": 0.1,
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bd7ba6-91a1-11f1-af15-40c73c88cbfa": {
-        "name": "chipboard_900",
-        "density": 900.0,
-        "thermal_conduc": 0.18,
-        "heat_capac": 1.7,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75bd7fb0-91a1-11f1-865f-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda090",
-        "density": 156.1595,
-        "thermal_conduc": 0.09,
-        "heat_capac": 1.366879,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75bd83ea-91a1-11f1-a6ce-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda079",
-        "density": 193.8462,
-        "thermal_conduc": 0.079294,
-        "heat_capac": 1.301429,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75bd881a-91a1-11f1-a85f-40c73c88cbfa": {
+    "44080175-9230-11f1-a1c2-40c73c88cbfa": {
         "name": "gypsum_board",
         "density": 800.0,
         "thermal_conduc": 0.25,
@@ -7871,17 +7817,62 @@
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bd8c32-91a1-11f1-8879-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda084_1",
-        "density": 160.3469,
+    "4408064b-9230-11f1-a514-40c73c88cbfa": {
+        "name": "aixlib_wood_insulation_composite_lambda084_160",
+        "density": 160.0,
         "thermal_conduc": 0.084,
-        "heat_capac": 1.358135,
+        "heat_capac": 1.358,
         "thickness_default": 0.1,
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bd9064-91a1-11f1-8694-40c73c88cbfa": {
-        "name": "aerated_concrete_1000_1",
+    "44080ed8-9230-11f1-83d9-40c73c88cbfa": {
+        "name": "mineral_wool_120_lambda055",
+        "density": 120.0,
+        "thermal_conduc": 0.055,
+        "heat_capac": 1.03,
+        "thickness_default": 0.1,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "440812f0-9230-11f1-bae3-40c73c88cbfa": {
+        "name": "reinforced_concrete",
+        "density": 2300.0,
+        "thermal_conduc": 2.3,
+        "heat_capac": 1.0,
+        "thickness_default": 0.1,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "440816ff-9230-11f1-85d3-40c73c88cbfa": {
+        "name": "foam_glass_100",
+        "density": 100.0,
+        "thermal_conduc": 0.05,
+        "heat_capac": 1.0,
+        "thickness_default": 0.1,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "44081c77-9230-11f1-8958-40c73c88cbfa": {
+        "name": "aixlib_wood_insulation_composite_lambda090_156",
+        "density": 155.5,
+        "thermal_conduc": 0.09,
+        "heat_capac": 1.3665,
+        "thickness_default": 0.1,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "440820bb-9230-11f1-92fb-40c73c88cbfa": {
+        "name": "chipboard_900",
+        "density": 900.0,
+        "thermal_conduc": 0.18,
+        "heat_capac": 1.7,
+        "thickness_default": 0.1,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "44085b7b-9230-11f1-813c-40c73c88cbfa": {
+        "name": "aixlib_gipskartonplatte_gipsputz_merged_1000",
         "density": 1000.0,
         "thermal_conduc": 0.315,
         "heat_capac": 1.0,
@@ -7889,61 +7880,61 @@
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bd948b-91a1-11f1-b3cc-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda140",
-        "density": 126.8477,
+    "4408890a-9230-11f1-b434-40c73c88cbfa": {
+        "name": "aixlib_gipskartonplatte_gipsputz_merged_1018",
+        "density": 1018.2,
+        "thermal_conduc": 0.346,
+        "heat_capac": 1.0,
+        "thickness_default": 0.1,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "44088e13-9230-11f1-97ef-40c73c88cbfa": {
+        "name": "aixlib_wood_insulation_composite_lambda140_127",
+        "density": 127.0,
         "thermal_conduc": 0.14,
-        "heat_capac": 1.444671,
+        "heat_capac": 1.445,
         "thickness_default": 0.1,
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bd98a7-91a1-11f1-b9bb-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda142",
-        "density": 193.8462,
-        "thermal_conduc": 0.142209,
-        "heat_capac": 1.301429,
+    "4408940f-9230-11f1-8394-40c73c88cbfa": {
+        "name": "chipboard_510",
+        "density": 510.0,
+        "thermal_conduc": 0.084,
+        "heat_capac": 1.621,
         "thickness_default": 0.1,
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bd9d09-91a1-11f1-b957-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda440",
-        "density": 93.3485,
-        "thermal_conduc": 0.44,
-        "heat_capac": 1.5934,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75bda134-91a1-11f1-88e8-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda780",
-        "density": 93.3485,
-        "thermal_conduc": 0.78,
-        "heat_capac": 1.5934,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75bda55b-91a1-11f1-a6c9-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda730",
-        "density": 93.3485,
+    "44089848-9230-11f1-a34c-40c73c88cbfa": {
+        "name": "aixlib_wood_insulation_composite_lambda730_93",
+        "density": 93.0,
         "thermal_conduc": 0.73,
-        "heat_capac": 1.5934,
+        "heat_capac": 1.593,
         "thickness_default": 0.1,
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bda997-91a1-11f1-a9f9-40c73c88cbfa": {
-        "name": "mineral_wool_120_3",
-        "density": 120.0,
-        "thermal_conduc": 0.04,
-        "heat_capac": 1.03,
+    "44089e0b-9230-11f1-b383-40c73c88cbfa": {
+        "name": "aixlib_wood_insulation_composite_lambda440_93",
+        "density": 93.0,
+        "thermal_conduc": 0.44,
+        "heat_capac": 1.593,
         "thickness_default": 0.1,
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bdaddf-91a1-11f1-9ea6-40c73c88cbfa": {
+    "4408a283-9230-11f1-9a49-40c73c88cbfa": {
+        "name": "aixlib_wood_insulation_composite_lambda780_93",
+        "density": 93.0,
+        "thermal_conduc": 0.78,
+        "heat_capac": 1.593,
+        "thickness_default": 0.1,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "4408ee73-9230-11f1-8bff-40c73c88cbfa": {
         "name": "sand_lime_brick_1400",
         "density": 1400.0,
         "thermal_conduc": 0.7,
@@ -7952,8 +7943,26 @@
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bdb1ec-91a1-11f1-9bc0-40c73c88cbfa": {
-        "name": "mineral_wool_120_4",
+    "4408f34a-9230-11f1-a597-40c73c88cbfa": {
+        "name": "mineral_wool_120_lambda040",
+        "density": 120.0,
+        "thermal_conduc": 0.04,
+        "heat_capac": 1.03,
+        "thickness_default": 0.1,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "4408f7ce-9230-11f1-bff4-40c73c88cbfa": {
+        "name": "aixlib_wood_insulation_composite_lambda058_194",
+        "density": 194.0,
+        "thermal_conduc": 0.058,
+        "heat_capac": 1.301,
+        "thickness_default": 0.1,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "4408fc3c-9230-11f1-96ef-40c73c88cbfa": {
+        "name": "mineral_wool_120_lambda045",
         "density": 120.0,
         "thermal_conduc": 0.045,
         "heat_capac": 1.03,
@@ -7961,8 +7970,8 @@
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bdb5f0-91a1-11f1-94ae-40c73c88cbfa": {
-        "name": "mineral_wool_120_5",
+    "44090091-9230-11f1-bd4d-40c73c88cbfa": {
+        "name": "mineral_wool_120_lambda035",
         "density": 120.0,
         "thermal_conduc": 0.035,
         "heat_capac": 1.03,
@@ -7970,7 +7979,16 @@
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bdba10-91a1-11f1-b95f-40c73c88cbfa": {
+    "440905c1-9230-11f1-9a57-40c73c88cbfa": {
+        "name": "aixlib_wood_insulation_composite_lambda054_194",
+        "density": 194.0,
+        "thermal_conduc": 0.054,
+        "heat_capac": 1.301,
+        "thickness_default": 0.1,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "44090a04-9230-11f1-9254-40c73c88cbfa": {
         "name": "chipboard_600",
         "density": 600.0,
         "thermal_conduc": 0.14,
@@ -7979,26 +7997,8 @@
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bdbe13-91a1-11f1-8db5-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda054_1",
-        "density": 193.8462,
-        "thermal_conduc": 0.054,
-        "heat_capac": 1.301429,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75bdc223-91a1-11f1-b52f-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda058_1",
-        "density": 193.8462,
-        "thermal_conduc": 0.058,
-        "heat_capac": 1.301429,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75bdc63d-91a1-11f1-a180-40c73c88cbfa": {
-        "name": "aerated_concrete_700",
+    "4409373d-9230-11f1-9e65-40c73c88cbfa": {
+        "name": "aixlib_material_rho700_lambda210",
         "density": 700.0,
         "thermal_conduc": 0.21,
         "heat_capac": 1.0,
@@ -8006,34 +8006,43 @@
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bdca43-91a1-11f1-a036-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda105",
-        "density": 138.0141,
+    "4409404f-9230-11f1-b30d-40c73c88cbfa": {
+        "name": "aixlib_gipskartonplatte_gipsputz_merged_1000",
+        "density": 1000.0,
+        "thermal_conduc": 0.31,
+        "heat_capac": 1.0,
+        "thickness_default": 0.1,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "440972a5-9230-11f1-8b72-40c73c88cbfa": {
+        "name": "aixlib_wood_insulation_composite_lambda105_138",
+        "density": 138.0,
         "thermal_conduc": 0.105,
-        "heat_capac": 1.41114,
+        "heat_capac": 1.411,
         "thickness_default": 0.1,
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bdce55-91a1-11f1-80ec-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda104",
-        "density": 193.8462,
-        "thermal_conduc": 0.103707,
-        "heat_capac": 1.301429,
+    "440979dc-9230-11f1-af1c-40c73c88cbfa": {
+        "name": "chipboard_360",
+        "density": 360.0,
+        "thermal_conduc": 0.068,
+        "heat_capac": 1.588,
         "thickness_default": 0.1,
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bdd27f-91a1-11f1-a9f8-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda530",
-        "density": 93.3485,
+    "44097ebf-9230-11f1-9586-40c73c88cbfa": {
+        "name": "aixlib_wood_insulation_composite_lambda530_93",
+        "density": 93.0,
         "thermal_conduc": 0.53,
-        "heat_capac": 1.5934,
+        "heat_capac": 1.593,
         "thickness_default": 0.1,
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bdd6a6-91a1-11f1-b5a3-40c73c88cbfa": {
+    "4409af20-9230-11f1-99ab-40c73c88cbfa": {
         "name": "sand_lime_brick_1200",
         "density": 1200.0,
         "thermal_conduc": 0.56,
@@ -8042,8 +8051,17 @@
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bddabf-91a1-11f1-8020-40c73c88cbfa": {
-        "name": "foam_glass_100_2",
+    "4409b47f-9230-11f1-833b-40c73c88cbfa": {
+        "name": "aixlib_wood_insulation_composite_lambda054_181",
+        "density": 181.0,
+        "thermal_conduc": 0.054,
+        "heat_capac": 1.32,
+        "thickness_default": 0.1,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "4409b994-9230-11f1-b798-40c73c88cbfa": {
+        "name": "foam_glass_100",
         "density": 100.0,
         "thermal_conduc": 0.055,
         "heat_capac": 1.0,
@@ -8051,7 +8069,16 @@
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bdded5-91a1-11f1-aeea-40c73c88cbfa": {
+    "4409bf93-9230-11f1-8b7e-40c73c88cbfa": {
+        "name": "aixlib_wood_insulation_composite_lambda058_160",
+        "density": 160.0,
+        "thermal_conduc": 0.058,
+        "heat_capac": 1.358,
+        "thickness_default": 0.1,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "4409c438-9230-11f1-b297-40c73c88cbfa": {
         "name": "chipboard_300",
         "density": 300.0,
         "thermal_conduc": 0.1,
@@ -8060,35 +8087,8 @@
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bde2df-91a1-11f1-93da-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda058_2",
-        "density": 160.3469,
-        "thermal_conduc": 0.058,
-        "heat_capac": 1.358087,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75bde6eb-91a1-11f1-a5c8-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda054_3",
-        "density": 193.8462,
-        "thermal_conduc": 0.054454,
-        "heat_capac": 1.301429,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75bdec7b-91a1-11f1-be0a-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda054_2",
-        "density": 181.2839,
-        "thermal_conduc": 0.054,
-        "heat_capac": 1.320222,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75bdf0b6-91a1-11f1-a349-40c73c88cbfa": {
-        "name": "aerated_concrete_500",
+    "4409f03e-9230-11f1-82d0-40c73c88cbfa": {
+        "name": "aixlib_material_rho500_lambda160",
         "density": 500.0,
         "thermal_conduc": 0.16,
         "heat_capac": 1.0,
@@ -8096,43 +8096,34 @@
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bdf4fe-91a1-11f1-908d-40c73c88cbfa": {
-        "name": "aerated_concrete_1000_2",
-        "density": 1000.0,
-        "thermal_conduc": 0.31,
-        "heat_capac": 1.0,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75bdf922-91a1-11f1-9c20-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda097",
-        "density": 138.0141,
+    "440a205d-9230-11f1-a75e-40c73c88cbfa": {
+        "name": "aixlib_wood_insulation_composite_lambda097_138",
+        "density": 138.0,
         "thermal_conduc": 0.097,
-        "heat_capac": 1.41114,
+        "heat_capac": 1.411,
         "thickness_default": 0.1,
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75bdfd3f-91a1-11f1-a830-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda096",
-        "density": 193.8462,
-        "thermal_conduc": 0.096187,
-        "heat_capac": 1.301429,
+    "440a264d-9230-11f1-b74e-40c73c88cbfa": {
+        "name": "chipboard_210",
+        "density": 210.0,
+        "thermal_conduc": 0.062,
+        "heat_capac": 1.509,
         "thickness_default": 0.1,
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75be0150-91a1-11f1-90c1-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda710",
-        "density": 93.3485,
+    "440a2a6b-9230-11f1-b542-40c73c88cbfa": {
+        "name": "aixlib_wood_insulation_composite_lambda710_93",
+        "density": 93.0,
         "thermal_conduc": 0.71,
-        "heat_capac": 1.5934,
+        "heat_capac": 1.593,
         "thickness_default": 0.1,
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75be0583-91a1-11f1-9840-40c73c88cbfa": {
+    "440a5874-9230-11f1-9d60-40c73c88cbfa": {
         "name": "sand_lime_brick_1000",
         "density": 1000.0,
         "thermal_conduc": 0.5,
@@ -8141,8 +8132,17 @@
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75be09a5-91a1-11f1-a599-40c73c88cbfa": {
-        "name": "foam_glass_140",
+    "440a5d78-9230-11f1-b44b-40c73c88cbfa": {
+        "name": "aixlib_wood_insulation_composite_lambda045_194",
+        "density": 194.0,
+        "thermal_conduc": 0.045,
+        "heat_capac": 1.301,
+        "thickness_default": 0.1,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "440a6231-9230-11f1-9bec-40c73c88cbfa": {
+        "name": "aixlib_material_rho140_lambda040",
         "density": 140.0,
         "thermal_conduc": 0.04,
         "heat_capac": 1.0,
@@ -8150,17 +8150,8 @@
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75be0dc6-91a1-11f1-9855-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda045",
-        "density": 193.8462,
-        "thermal_conduc": 0.045,
-        "heat_capac": 1.301429,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75be11f6-91a1-11f1-8263-40c73c88cbfa": {
-        "name": "aerated_concrete_350",
+    "440a8b5e-9230-11f1-943d-40c73c88cbfa": {
+        "name": "aixlib_material_rho350_lambda110",
         "density": 350.0,
         "thermal_conduc": 0.11,
         "heat_capac": 1.0,
@@ -8168,74 +8159,11 @@
         "thickness_list": [],
         "solar_absorp": 0.5
     },
-    "75be1618-91a1-11f1-a7c6-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda056_1",
-        "density": 171.5133,
+    "440ab6b4-9230-11f1-9e50-40c73c88cbfa": {
+        "name": "aixlib_wood_insulation_composite_lambda056_172",
+        "density": 172.0,
         "thermal_conduc": 0.056,
-        "heat_capac": 1.336742,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75be1a3a-91a1-11f1-8e83-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda056_2",
-        "density": 193.8462,
-        "thermal_conduc": 0.056079,
-        "heat_capac": 1.301429,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75be1e69-91a1-11f1-ad19-40c73c88cbfa": {
-        "name": "clay_brick_1800_1",
-        "density": 1800.0,
-        "thermal_conduc": 0.81,
-        "heat_capac": 0.84,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75be2477-91a1-11f1-ade9-40c73c88cbfa": {
-        "name": "clay_brick_1800_2",
-        "density": 1800.0,
-        "thermal_conduc": 0.81,
-        "heat_capac": 1.0,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75be28ed-91a1-11f1-949f-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda084_2",
-        "density": 109.6422,
-        "thermal_conduc": 0.084,
-        "heat_capac": 1.413906,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75be2d44-91a1-11f1-b571-40c73c88cbfa": {
-        "name": "XPS",
-        "density": 35.0,
-        "thermal_conduc": 0.04,
-        "heat_capac": 1.45,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75be31a8-91a1-11f1-9968-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda084_3",
-        "density": 26.7318,
-        "thermal_conduc": 0.084,
-        "heat_capac": 1.413906,
-        "thickness_default": 0.1,
-        "thickness_list": [],
-        "solar_absorp": 0.5
-    },
-    "75be35dc-91a1-11f1-a83f-40c73c88cbfa": {
-        "name": "aixlib_wood_insulation_composite_lambda084_4",
-        "density": 160.0,
-        "thermal_conduc": 0.084,
-        "heat_capac": 0.827179,
+        "heat_capac": 1.337,
         "thickness_default": 0.1,
         "thickness_list": [],
         "solar_absorp": 0.5
