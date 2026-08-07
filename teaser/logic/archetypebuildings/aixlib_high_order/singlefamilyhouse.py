@@ -144,6 +144,23 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             "Bath": "upp",
             "Children2": "upp",
         }
+        # Nominal/design indoor temperature per room [K], used for the
+        # room-wise heat load (calc_room_heat_loads) and, aggregated via
+        # t_set_nominal_aggregation, for the single-zone ROM's own
+        # zone.t_inside. Override individual rooms as needed, e.g. to tune
+        # the default DIN-EN-12831-style assumption that only the bathroom
+        # is designed for a higher temperature than the rest of the house.
+        self.room_t_set_nominal = {room: 293.15 for room in self.room_name_nr}
+        self.room_t_set_nominal["Bath"] = 297.15
+        print(self.room_t_set_nominal)
+        # How room_t_set_nominal is reduced to the ROM's single
+        # zone.t_inside. Built-in options: "max" (default - the heating
+        # system must be able to reach the hottest-demand room, so this is
+        # the safe choice for a value that feeds system sizing) and
+        # "volume_weighted_average". Alternatively, assign a callable
+        # taking (room_names, self) and returning a temperature in K for
+        # full custom control.
+        self.t_set_nominal_aggregation = "max"
         self.top_level_geo_params = {}
         self.detailed_geo = {}
         self.room_volumes = {}
@@ -1048,6 +1065,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             use_cond.load_use_conditions(zone_usage="Living")  # create use conditions for single rooms
             zone.use_conditions = use_cond
             zone.use_conditions.with_ahu = False
+            zone.t_inside = self._aggregate_t_set_nominal(room_names)
 
             for room_name in room_names:
                 for ele_name, ele_info in self.detailed_geo[room_name].items():
@@ -1103,6 +1121,27 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                         window.orientation = ele_info["ori"]
                         window.area = ele_info["windowarea"]
             self._integrate_unheated_rooms(zone, adj_ele_heated_to_unheated)
+
+    def _aggregate_t_set_nominal(self, room_names):
+        """Reduce room_t_set_nominal to a single nominal temperature [K]
+        for a zone containing room_names, using self.t_set_nominal_aggregation
+        ("max", "volume_weighted_average", or a custom callable taking
+        (room_names, self) and returning a temperature in K).
+        """
+        aggregation = self.t_set_nominal_aggregation
+        if callable(aggregation):
+            return aggregation(room_names, self)
+        if aggregation == "max":
+            return max(self.room_t_set_nominal[r] for r in room_names)
+        if aggregation == "volume_weighted_average":
+            total_volume = sum(self.room_volumes[r] for r in room_names)
+            return sum(
+                self.room_t_set_nominal[r] * self.room_volumes[r] for r in room_names
+            ) / total_volume
+        raise ValueError(
+            f"Unknown t_set_nominal_aggregation {aggregation!r}. Use 'max', "
+            "'volume_weighted_average', or a callable taking (room_names, self)."
+        )
 
     def _compute_adjacent_to_unheated(self, room_names):
         """Re-derive the (room_name, ele_name) -> (unheated_room, unheated_ele_name)
@@ -1297,6 +1336,41 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             used_library=self.used_library_calc,
         )
 
+    def calc_building_parameter(
+            self,
+            number_of_elements=None,
+            merge_windows=None,
+            used_library=None,
+    ):
+        """Calculates all building parameters, then makes the room-wise
+        heat load (calc_room_heat_loads) the authoritative source for
+        each zone's heat_load/cool_load and the building's sum_heat_load,
+        instead of the zone-level value TwoElement/FourElement compute
+        from the zone's single, aggregated t_inside.
+
+        This keeps the two calculations from silently disagreeing once
+        rooms have different nominal temperatures (room_t_set_nominal):
+        the room-wise sum reflects that (e.g. the bathroom's own, higher
+        design temperature), the generic zone-level calculation cannot
+        (it only ever sees the zone's one, aggregated t_inside).
+
+        Parameters are the same as Building.calc_building_parameter.
+        """
+        super().calc_building_parameter(
+            number_of_elements=number_of_elements,
+            merge_windows=merge_windows,
+            used_library=used_library,
+        )
+        room_heat_loads = self.calc_room_heat_loads()
+        self.sum_heat_load = 0
+        for zone in self.thermal_zones:
+            zone_heat_load = sum(
+                room_heat_loads[room] for room in self.zoning[zone.name]
+            )
+            zone.model_attr.heat_load = zone_heat_load
+            zone.model_attr.cool_load = -zone_heat_load
+            self.sum_heat_load += zone_heat_load
+
     def calc_room_heat_loads(self):
         """Simplified, room-wise static heat load for each heated room.
 
@@ -1314,7 +1388,15 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         Simplified for now to only include transmission and infiltration
         to the outside/ground, not heat exchange with other rooms (which
         would need a more DIN 12831-like approach to apportion internal
-        room-to-room losses/gains - not implemented here yet).
+        room-to-room losses/gains - not implemented here yet). Each room
+        uses its own nominal temperature (room_t_set_nominal) rather than
+        the zone's single t_inside, so e.g. the bathroom's higher design
+        temperature is reflected. Since zone.t_inside is itself the
+        aggregate (see t_set_nominal_aggregation) of these per-room
+        values, the sum of this method's results will generally not equal
+        the zone-level heat_load computed from t_inside alone - see
+        calc_building_parameter, which uses this method's sum as the
+        zone's authoritative heat_load instead.
 
         Call this before and after retrofit_building to get the room heat
         loads for both states - element ua_values (and therefore the
@@ -1363,9 +1445,10 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 )
                 heat_load_ground_factor = ua_value_ground
 
+                t_set_nominal_room = self.room_t_set_nominal[room_name]
                 room_heat_loads[room_name] = (
-                    heat_load_outside_factor * (zone.t_inside - zone.t_outside)
-                    + heat_load_ground_factor * (zone.t_inside - t_ground)
+                    heat_load_outside_factor * (t_set_nominal_room - zone.t_outside)
+                    + heat_load_ground_factor * (t_set_nominal_room - t_ground)
                 )
 
         return room_heat_loads

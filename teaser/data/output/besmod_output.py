@@ -187,8 +187,17 @@ def export_besmod(
         t_set_zone_nominal = []
         for tz in bldg.thermal_zones:
             heating_profile = tz.use_conditions.heating_profile
-            t_set_nominal, start_time, hours_set_back, d_temp_set_back = _convert_heating_profile(heating_profile)
-            t_set_zone_nominal.append(t_set_nominal)
+            # _convert_heating_profile's own t_set_nominal (max of the
+            # simulated setpoint schedule) is intentionally not used here:
+            # the nominal/design temperature used for system sizing is a
+            # separate concept from the simulated setpoint schedule, and
+            # is tz.t_inside (settable independently, e.g. via a room-wise
+            # aggregation for the AixLib HOM archetype - see
+            # AixLibHighOrderSingleFamilyHouse.t_set_nominal_aggregation).
+            # Only the setback *shape* (start/duration/depth) still comes
+            # from the schedule itself.
+            _, start_time, hours_set_back, d_temp_set_back = _convert_heating_profile(heating_profile)
+            t_set_zone_nominal.append(tz.t_inside)
             d_temp_set_back_zones.append(d_temp_set_back)
             start_time_zones.append(start_time)
             hours_set_back_zones.append(hours_set_back)
