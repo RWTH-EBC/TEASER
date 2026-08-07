@@ -152,7 +152,6 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         # is designed for a higher temperature than the rest of the house.
         self.room_t_set_nominal = {room: 293.15 for room in self.room_name_nr}
         self.room_t_set_nominal["Bath"] = 297.15
-        print(self.room_t_set_nominal)
         # How room_t_set_nominal is reduced to the ROM's single
         # zone.t_inside. Built-in options: "max" (default - the heating
         # system must be able to reach the hottest-demand room, so this is
@@ -161,6 +160,13 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         # taking (room_names, self) and returning a temperature in K for
         # full custom control.
         self.t_set_nominal_aggregation = "max"
+        # Populated by calc_building_parameter (room_name -> heat_load [W]
+        # / list ordered by room_name_nr), cached here so exports can read
+        # them directly without recomputing - always in sync since
+        # calc_building_parameter is itself the prerequisite for
+        # zone.model_attr.heat_load to be current (e.g. after retrofit).
+        self.room_heat_loads = {}
+        self.room_heat_loads_list = []
         self.top_level_geo_params = {}
         self.detailed_geo = {}
         self.room_volumes = {}
@@ -1354,6 +1360,11 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         design temperature), the generic zone-level calculation cannot
         (it only ever sees the zone's one, aggregated t_inside).
 
+        Also caches the room-wise heat loads as room_heat_loads (dict) and
+        room_heat_loads_list (list, ordered by room_name_nr) attributes,
+        so exports can read them directly instead of calling
+        calc_room_heat_loads again.
+
         Parameters are the same as Building.calc_building_parameter.
         """
         super().calc_building_parameter(
@@ -1362,6 +1373,8 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             used_library=used_library,
         )
         room_heat_loads = self.calc_room_heat_loads()
+        self.room_heat_loads = room_heat_loads
+        self.room_heat_loads_list = self._order_by_room_nr(room_heat_loads)
         self.sum_heat_load = 0
         for zone in self.thermal_zones:
             zone_heat_load = sum(
@@ -1469,9 +1482,27 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             with room_name_nr 1, room_heat_loads[-1] the room with
             room_name_nr 10 (== len(room_name_nr)).
         """
-        room_heat_loads = self.calc_room_heat_loads()
+        return self._order_by_room_nr(self.calc_room_heat_loads())
+
+    def _order_by_room_nr(self, room_values):
+        """Reorders a dict keyed by room_name into a list ordered by
+        room_name_nr (1..10), e.g. for Modelica array parameters.
+        """
         rooms_by_nr = sorted(self.room_name_nr, key=self.room_name_nr.get)
-        return [room_heat_loads[room] for room in rooms_by_nr]
+        return [room_values[room] for room in rooms_by_nr]
+
+    @property
+    def room_t_set_nominal_list(self):
+        """room_t_set_nominal as a list ordered by room_name_nr (1..10),
+        e.g. for a Modelica array parameter - the room-wise counterpart to
+        the single, aggregated t_inside used at zone level.
+
+        Unlike room_heat_loads_list, this does not depend on the zone's
+        calculated elements and needs no prior calc_building_parameter
+        call: it is always a direct, live view of room_t_set_nominal, so
+        overriding individual rooms there is reflected immediately.
+        """
+        return self._order_by_room_nr(self.room_t_set_nominal)
 
     @property
     def construction_data(self):
