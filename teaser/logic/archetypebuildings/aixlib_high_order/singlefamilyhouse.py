@@ -1643,18 +1643,28 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         connection to the Attic via its ceiling), since those are named
         after the heated room they belong to.
 
-        Simplified for now to only include transmission and infiltration
-        to the outside/ground, not heat exchange with other rooms (which
-        would need a more DIN 12831-like approach to apportion internal
-        room-to-room losses/gains - not implemented here yet). Each room
-        uses its own nominal temperature (room_t_set_nominal) rather than
-        the zone's single t_inside, so e.g. the bathroom's higher design
-        temperature is reflected. Since zone.t_inside is itself the
-        aggregate (see t_set_nominal_aggregation) of these per-room
-        values, the sum of this method's results will generally not equal
-        the zone-level heat_load computed from t_inside alone - see
+        Includes transmission and infiltration to the outside/ground, plus
+        transmission exchange with other heated rooms in the same zone via
+        the room's own InnerWall/Ceiling/Floor elements (DIN 12831-style:
+        each such element's own ua_value times the difference between the
+        two rooms' nominal temperatures - positive if the neighbor is
+        colder, negative i.e. a net gain if it is warmer). Elements
+        adjacent to an unheated room (e.g. the Attic) are excluded here -
+        those are already covered via ua_value_outside, since the
+        unheated-room integration methods replace them with equivalent
+        elements facing outside directly. Each room uses its own nominal
+        temperature (room_t_set_nominal) rather than the zone's single
+        t_inside, so e.g. the bathroom's higher design temperature is
+        reflected. Since zone.t_inside is itself the aggregate (see
+        t_set_nominal_aggregation) of these per-room values, the sum of
+        this method's results will generally not equal the zone-level
+        heat_load computed from t_inside alone - see
         calc_building_parameter, which uses this method's sum as the
-        zone's authoritative heat_load instead.
+        zone's authoritative heat_load instead. Room-to-room exchange
+        terms cancel out of that zone-level sum (room i's gain from room j
+        is room j's equal and opposite loss to room i), so adding them
+        here does not change the zone/building total, only how it is
+        distributed between rooms.
 
         Call this before and after retrofit_building to get the room heat
         loads for both states - element ua_values (and therefore the
@@ -1676,6 +1686,11 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             t_ground = zone.t_ground - zone.t_ground_amplitude
         else:
             t_ground = zone.t_ground
+
+        inner_elements_by_name = {
+            ele.name: ele
+            for ele in zone.inner_walls + zone.floors + zone.ceilings
+        }
 
         room_heat_loads = {}
         for room_names in self.zoning.values():
@@ -1704,9 +1719,23 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 heat_load_ground_factor = ua_value_ground
 
                 t_set_nominal_room = self.room_t_set_nominal[room_name]
+
+                room_to_room_exchange = 0.0
+                for ele_name, ele_info in self.detailed_geo[room_name].items():
+                    adjacent_room, _ = ele_info.get("adjacent", (None, None))
+                    if adjacent_room is None or adjacent_room in self.integrate_unheated_rooms:
+                        continue
+                    ele = inner_elements_by_name.get(f"{prefix}{ele_name}")
+                    if ele is None:
+                        continue
+                    room_to_room_exchange += ele.ua_value * (
+                        t_set_nominal_room - self.room_t_set_nominal[adjacent_room]
+                    )
+
                 room_heat_loads[room_name] = (
                     heat_load_outside_factor * (t_set_nominal_room - zone.t_outside)
                     + heat_load_ground_factor * (t_set_nominal_room - t_ground)
+                    + room_to_room_exchange
                 )
 
         return room_heat_loads
