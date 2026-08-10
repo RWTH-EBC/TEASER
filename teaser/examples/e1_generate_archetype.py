@@ -118,6 +118,16 @@ def example_generate_archetype():
         height_of_floors=2.6
     )
 
+    prj.add_residential(
+        construction_data='tabula_de_standard',
+        geometry_data='aixlib_high_order_single_family_house',
+        name="ResidentialBuildingHighOrderAtticDIN",
+        year_of_construction=1980,
+        net_leased_area=170.0,
+        number_of_floors=2,
+        height_of_floors=2.6
+    )
+
     # The AixLib HOM archetype can also be built from its own reference wall
     # and window constructions (converted from AixLib's own shipped
     # Modelica records into TypeElements_AixLib.json), independent of

@@ -25,6 +25,8 @@ def example_export_besmod():
 
     prj = e1.example_generate_archetype()
 
+    prj.buildings[-2].integrate_unheated_rooms = {"Attic": "din12831_f1"}
+
     # Configure project settings to ensure compatibility with BESMod. The BESMod
     # library uses the AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone model
     # with 4 elements for the demand building model. Other numbers of elements are possible,
