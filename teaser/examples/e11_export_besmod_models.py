@@ -145,6 +145,13 @@ def example_export_besmod():
         }
         for bldg in prj.buildings
     }
+    # Room-wise equivalent of QBuiOld_flow_design, used by the HOM export
+    # instead (only meaningful for the AixLib HOM archetype).
+    QRoomOld_flow_design = {
+        bldg.name: bldg.room_heat_loads
+        for bldg in prj.buildings
+        if type(bldg).__name__ == "AixLibHighOrderSingleFamilyHouse"
+    }
 
     # Retrofit project buildings and recalculate parameters.
     prj.name = "ArchetypeExample_partial_retrofit"
@@ -164,6 +171,7 @@ def example_export_besmod():
     path = prj.export_besmod(
         THydSup_nominal=THydSup_nominal,
         QBuiOld_flow_design=QBuiOld_flow_design,
+        QRoomOld_flow_design=QRoomOld_flow_design,
         path=r"D:\03_TEASER_dev\test_hom_export",
         examples=examples,
         export_with_hom=True

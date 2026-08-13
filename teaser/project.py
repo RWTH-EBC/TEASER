@@ -894,6 +894,7 @@ class Project(object):
             path: Optional[str] = None,
             THydSup_nominal: Optional[Union[float, Dict[str, float]]] = None,
             QBuiOld_flow_design: Optional[Dict[str, Dict[str, float]]] = None,
+            QRoomOld_flow_design: Optional[Dict[str, Dict[str, float]]] = None,
             THydSupOld_design: Optional[Union[float, Dict[str, float]]] = None,
             custom_examples: Optional[Dict[str, str]] = None,
             custom_script: Optional[Dict[str, str]] = None,
@@ -925,6 +926,11 @@ class Project(object):
             of all zones in the Buildings in a nested dictionary with
             the building names and in a level below the zone names as keys.
             By default, only the radiator transfer system is not retrofitted in BESMod.
+        QRoomOld_flow_design : Optional[Dict[str, Dict[str, float]]]
+            Room-wise equivalent of QBuiOld_flow_design, used by the HOM export
+            instead: a nested dictionary with the building names and, one
+            level below, the room names as keys. Only needs entries for HOM
+            buildings you want a custom value for.
         THydSupOld_design : Optional[Union[float, Dict[str, float]]]
             Design supply temperatures for old, non-retrofitted hydraulic systems.
         custom_examples: Optional[Dict[str, str]]
@@ -954,7 +960,8 @@ class Project(object):
         if internal_id is None:
             besmod_output.export_besmod(
                 buildings=self.buildings, prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
-                QBuiOld_flow_design=QBuiOld_flow_design, THydSupOld_design=THydSupOld_design,
+                QBuiOld_flow_design=QBuiOld_flow_design, QRoomOld_flow_design=QRoomOld_flow_design,
+                THydSupOld_design=THydSupOld_design,
                 custom_examples=custom_examples, custom_script=custom_script, export_with_hom=export_with_hom
             )
         else:
@@ -962,7 +969,8 @@ class Project(object):
                 if bldg.internal_id == internal_id:
                     besmod_output.export_besmod(
                         buildings=[bldg], prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
-                        QBuiOld_flow_design=QBuiOld_flow_design, THydSupOld_design=THydSupOld_design,
+                        QBuiOld_flow_design=QBuiOld_flow_design, QRoomOld_flow_design=QRoomOld_flow_design,
+                        THydSupOld_design=THydSupOld_design,
                         custom_examples=custom_examples, custom_script=custom_script, export_with_hom=export_with_hom
                     )
 

@@ -1,0 +1,24 @@
+<%namespace file="/modelica_language/" import="get_list"/>
+within ${bldg.parent.name}.${bldg.name};
+model HeatPumpMonoenergetic${bldg.name}_HOM
+  extends BESMod.Systems.BaseClasses.TEASERExport.PartialHeatPumpMonoenergeticHOM(
+    redeclare ${bldg.name}_HOM building,
+    systemParameters(
+        nZones=10,
+        QBui_flow_nominal=${get_list(bldg.room_heat_loads_list)},
+        TSetZone_nominal=${get_list(bldg.room_t_set_nominal_list)},
+        TOda_nominal=${TOda_nominal},
+        THydSup_nominal=${THydSup_nominal},
+        QBuiOld_flow_design=${QRoomOld_flow_design},
+        THydSupOld_design=${THydSupOld_design},
+        filNamWea=Modelica.Utilities.Files.loadResource("modelica://${bldg.parent.name}/Resources/${bldg.parent.weather_file_name}")));
+
+  extends Modelica.Icons.Example;
+
+annotation(experiment(StopTime=172800,
+     Interval=600,
+     Tolerance=1e-06),
+   __Dymola_Commands(file=
+        "Resources/Scripts/Dymola/${bldg.name}/HeatPumpMonoenergetic${bldg.name}_HOM.mos"
+        "Simulate and plot"));
+end HeatPumpMonoenergetic${bldg.name}_HOM;

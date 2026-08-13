@@ -19,6 +19,7 @@ def export_besmod(
         examples: Optional[List[str]] = None,
         THydSup_nominal: Optional[Union[float, Dict[str, float]]] = None,
         QBuiOld_flow_design: Optional[Dict[str, Dict[str, float]]] = None,
+        QRoomOld_flow_design: Optional[Dict[str, Dict[str, float]]] = None,
         THydSupOld_design: Optional[Union[float, Dict[str, float]]] = None,
         custom_examples: Optional[Dict[str, str]] = None,
         custom_script: Optional[Dict[str, str]] = None,
@@ -53,6 +54,14 @@ def export_besmod(
         of all zones in the Buildings in a nested dictionary with
         the building names and in a level below the zone names as keys.
         By default, only the radiator transfer system is not retrofitted in BESMod.
+    QRoomOld_flow_design : Optional[Dict[str, Dict[str, float]]]
+        Room-wise equivalent of QBuiOld_flow_design, used by the HOM export
+        (AixLibHighOrderSingleFamilyHouse) instead of QBuiOld_flow_design:
+        a nested dictionary with the building names and, one level below,
+        the room names (bldg.room_name_nr) as keys. Only needs entries for
+        HOM buildings you want a custom value for - other buildings, and
+        HOM buildings without an entry here, fall back to the same default
+        as QBuiOld_flow_design.
     THydSupOld_design : Optional[Union[float, Dict[str, float]]]
         Design supply temperatures for old, non-retrofitted hydraulic systems.
     custom_examples: Optional[Dict[str, str]]
@@ -131,6 +140,20 @@ def export_besmod(
     else:
         QBuiOld_flow_design = {
             bldg.name: _convert_to_zone_array(bldg, QBuiOld_flow_design[bldg.name])
+            for bldg in buildings
+        }
+
+    if QRoomOld_flow_design is None:
+        QRoomOld_flow_design = {
+            bldg.name: "systemParameters.QBui_flow_nominal" for bldg in buildings
+        }
+    else:
+        QRoomOld_flow_design = {
+            bldg.name: (
+                _convert_to_room_array(bldg, QRoomOld_flow_design[bldg.name])
+                if bldg.name in QRoomOld_flow_design
+                else "systemParameters.QBui_flow_nominal"
+            )
             for bldg in buildings
         }
 
@@ -222,8 +245,8 @@ def export_besmod(
                 bldg=bldg))
             out_file.close()
 
-        def write_example_mo(example_template, example):
-            with open(os.path.join(bldg_path, example + bldg.name + ".mo"),
+        def write_example_mo(example_template, example, suffix=""):
+            with open(os.path.join(bldg_path, example + bldg.name + suffix + ".mo"),
                       'w') as model_file:
                 model_file.write(example_template.render_unicode(
                     bldg=bldg,
@@ -232,6 +255,7 @@ def export_besmod(
                     THydSup_nominal=t_hyd_sup_nominal_bldg[bldg.name],
                     TSetZone_nominal=t_set_zone_nominal,
                     QBuiOld_flow_design=QBuiOld_flow_design[bldg.name],
+                    QRoomOld_flow_design=QRoomOld_flow_design[bldg.name],
                     THydSupOld_design=t_hyd_sup_old_design_bldg[bldg.name],
                     dTSetBack=d_temp_set_back_zones,
                     startTimeSetBack=start_time_zones,
@@ -254,10 +278,33 @@ def export_besmod(
                     lookup=lookup)
             _help_example_script(bldg, dir_dymola, example_sim_plot_script, exp)
             write_example_mo(exp_template, exp)
+
+            if export_hom:
+                # Mirrors the ROM export above for the "*HOM" template
+                # variant (e.g. Example_TEASERHeatLoadCalculationHOM),
+                # writing "{exp}{bldg.name}_HOM.mo" alongside the ROM
+                # "{exp}{bldg.name}.mo" rather than replacing it.
+                exp_hom_key = exp + "HOM"
+                exp_hom_template = Template(
+                    filename=utilities.get_full_path(
+                        "data/output/modelicatemplate/BESMod/Example_" + exp_hom_key),
+                    lookup=lookup)
+                if exp_hom_key in custom_script.keys():
+                    example_hom_sim_plot_script = Template(
+                        filename=custom_script[exp_hom_key],
+                        lookup=lookup)
+                else:
+                    example_hom_sim_plot_script = Template(
+                        filename=utilities.get_full_path(
+                            "data/output/modelicatemplate/BESMod/Script_" + exp_hom_key),
+                        lookup=lookup)
+                _help_example_script(bldg, dir_dymola, example_hom_sim_plot_script, exp, suffix="_HOM")
+                write_example_mo(exp_hom_template, exp, suffix="_HOM")
         bldg_package = [exp + bldg.name for exp in examples]
 
         if export_hom:
             bldg_package.append(bldg.name + "_HOM")
+            bldg_package.extend(exp + bldg.name + "_HOM" for exp in examples)
 
         if custom_examples:
             for exp, c_path in custom_examples.items():
@@ -444,6 +491,38 @@ def _convert_to_zone_array(bldg, zone_dict):
         raise KeyError(f"{set(tz_names) - set(list(zone_dict.keys()))} thermal zones missing in given dictionary.")
 
 
+def _convert_to_room_array(bldg, room_dict):
+    """
+    Convert a dictionary of room values to a BESMod-compatible array string,
+    ordered by the building's room_name_nr (1..10) - the room-wise
+    counterpart to _convert_to_zone_array, used for the HOM export.
+
+    Parameters
+    ----------
+    bldg : AixLibHighOrderSingleFamilyHouse
+        TEASER Building instance with a room_name_nr attribute.
+    room_dict : dict
+        Dictionary with room names as keys and room parameter values as
+        values.
+
+    Returns
+    -------
+    str
+        Array string for BESMod parameter input.
+
+    Raises
+    ------
+    KeyError
+        If the dictionary is missing room names present in the building.
+    """
+    room_names = set(bldg.room_name_nr)
+    if room_names == set(room_dict.keys()):
+        ordered_values = bldg._order_by_room_nr(room_dict)
+        return "{" + ",".join(str(value) for value in ordered_values) + "}"
+    else:
+        raise KeyError(f"{room_names - set(room_dict.keys())} rooms missing in given dictionary.")
+
+
 def _convert_heating_profile(heating_profile):
     """
     Convert a 24-hour heating profile for BESMod export.
@@ -530,7 +609,7 @@ def _get_next_higher_year_value(years_dict, given_year):
     return years_dict[years[-1]]
 
 
-def _help_example_script(bldg, dir_dymola, test_script_template, example):
+def _help_example_script(bldg, dir_dymola, test_script_template, example, suffix=""):
     """
     Create a .mos script for simulating and plotting BESMod examples from a Mako template.
 
@@ -544,10 +623,12 @@ def _help_example_script(bldg, dir_dymola, test_script_template, example):
         Mako template for the simulation script.
     example : str
         Name of the BESMod example.
+    suffix : str
+        Appended to the output filename after bldg.name, e.g. "_HOM".
     """
 
     dir_building = utilities.create_path(os.path.join(dir_dymola, bldg.name))
-    with open(os.path.join(dir_building, example + bldg.name + ".mos"), 'w') as out_file:
+    with open(os.path.join(dir_building, example + bldg.name + suffix + ".mos"), 'w') as out_file:
         out_file.write(test_script_template.render_unicode(
             project=bldg.parent,
             bldg=bldg
