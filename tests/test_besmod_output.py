@@ -1,8 +1,20 @@
 import os
+import re
 import unittest
 from teaser.logic import utilities
 from teaser.project import Project
 from teaser.data.output.besmod_output import _convert_heating_profile
+
+
+def _read_wall_record(path):
+    """Return {'n': int, 'd': [float], 'rho': [...], ...} of a wall record."""
+    with open(path) as record_file:
+        content = record_file.read()
+    record = {"n": int(re.search(r"n=(\d+)", content).group(1))}
+    for name in ("d", "rho", "lambda", "c"):
+        values = re.search(name + r"=\{([^}]*)\}", content).group(1)
+        record[name] = [float(value) for value in values.split(",")]
+    return record
 
 
 class Test_besmod_output(unittest.TestCase):
@@ -113,6 +125,57 @@ class Test_besmod_output(unittest.TestCase):
                           custom_examples=custom_example_template,
                           custom_script=custom_script)
         prj.export_besmod(custom_examples=custom_example_template)
+
+    def test_export_besmod_hom_wall_records(self):
+        """test the HOM wall type records exported alongside the ROM"""
+
+        prj = Project()
+        prj.name = "BESModHOMWallRecords"
+
+        prj.add_residential(
+            construction_data='aixlib_S',
+            geometry_data='aixlib_high_order_single_family_house',
+            name="ResidentialBuildingHighOrderAixLib",
+            year_of_construction=1990,
+            net_leased_area=170.0,
+            number_of_floors=2,
+            height_of_floors=2.6)
+
+        prj.used_library_calc = "AixLib"
+        prj.number_of_elements_calc = 4
+        prj.calc_all_buildings()
+        path = prj.export_besmod(examples=["TEASERHeatLoadCalculation"],
+                                 THydSup_nominal=55 + 273.15,
+                                 export_with_hom=True)
+
+        bldg = prj.buildings[0]
+        wall_path = os.path.join(path, bldg.name, bldg.name + "_DataBase",
+                                 "Walls")
+        records = {}
+        for wall_type in ('OW', 'roof', 'roof_attic', 'IW_vert_half',
+                          'IW2_vert_half', 'IW_hori_upHalf', 'IW_hori_loHalf',
+                          'ground_floor_loHalf', 'ground_floor_upHalf',
+                          'IW_hori_att_upHalf', 'IW_hori_att_loHalf'):
+            record = _read_wall_record(os.path.join(
+                wall_path, bldg.name + "_" + wall_type + ".mo"))
+            # a record with n=0 does not translate in Modelica
+            self.assertGreater(record["n"], 0, wall_type)
+            for name in ("d", "rho", "lambda", "c"):
+                self.assertEqual(len(record[name]), record["n"], wall_type)
+            records[wall_type] = record
+
+        # The two halves of the construction between the topmost heated
+        # rooms and the (unheated) attic are pre-split in the aixlib_*
+        # construction data, so they have to be exported one-to-one -
+        # these are AixLib's own CEattic_WSchV1984_SML_loHalf and
+        # FLattic_WSchV1984_SML_upHalf, which the data was derived from.
+        self.assertEqual(records["IW_hori_att_loHalf"]["d"],
+                         [0.08, 0.0125, 0.015])
+        self.assertEqual(records["IW_hori_att_loHalf"]["lambda"],
+                         [0.09, 0.25, 0.51])
+        self.assertEqual(records["IW_hori_att_upHalf"]["d"], [0.08, 0.02])
+        self.assertEqual(records["IW_hori_att_upHalf"]["lambda"],
+                         [0.09, 0.18])
 
     def test_convert_heating_profile(self):
         """Test the conversion of heating profiles for BESMod"""

@@ -200,6 +200,12 @@ class InterzonalWall(Wall):
         type_element_key : str
             Element to load - specify the full json entry
 
+        Returns
+        -------
+        str or None
+            Key of the data class entry that was actually loaded, see
+            BuildingElement.load_type_element.
+
         """
         if element_type is None:
             if self.interzonal_type_material == 'inner':
@@ -236,7 +242,7 @@ class InterzonalWall(Wall):
             # there is no adv_retrofit / retrofit version of inner elements
             construction = 'tabula_standard'
 
-        BuildingElement.load_type_element(
+        return BuildingElement.load_type_element(
             self,
             year=year,
             construction=construction,

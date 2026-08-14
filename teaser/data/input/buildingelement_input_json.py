@@ -45,6 +45,15 @@ def load_type_element(element, year, construction, data_class,
         defines if layer list should be reversed - this is necessary for zone
         borders to maintain consistency
 
+    Returns
+    -------
+    str or None
+        Key of the data_class entry that was actually loaded, or None if
+        nothing matched. This is not necessarily an entry for element_type:
+        if no entry exists for it, the one for the element's own class is
+        loaded instead (see below), so callers that depend on getting the
+        requested type - rather than a generic stand-in - can check the key.
+
     """
     element_binding = data_class.element_bind
     object_element_type = type(element).__name__
@@ -73,7 +82,7 @@ def load_type_element(element, year, construction, data_class,
                 mat_input.load_material_id(
                     material, layer_in["material"]["material_id"], data_class
                 )
-            return
+            return key
     if element_type != object_element_type:
         for key, element_in in element_binding.items():
             if (
@@ -98,9 +107,10 @@ def load_type_element(element, year, construction, data_class,
                 logging.warning(f"No database entry found for construction={construction}, "
                                 f"year{year}, element={element_type}. "
                                 f"Loaded entry for element={object_element_type} instead.")
-                return
+                return key
     logging.warning(f"No database entry found for construction={construction}, "
                     f"year{year}, element={element_type} or {object_element_type}.")
+    return None
 
 
 def load_type_element_by_key(element, type_element_key, data_class,

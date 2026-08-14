@@ -323,6 +323,15 @@ class BuildingElement(object):
         type_element_key : str
             Element to load - specify the full json entry
 
+        Returns
+        -------
+        str or None
+            Key of the data class entry that was actually loaded, or None if
+            nothing matched. If no entry exists for the requested
+            element_type (or element_construction_type), the entry for this
+            element's own class is loaded instead, so callers that depend on
+            getting the requested type can check the returned key.
+
         """
 
         if type_element_key is None and (year is None or construction is None):
@@ -346,6 +355,7 @@ class BuildingElement(object):
                     element=self, type_element_key=type_element_key,
                     data_class=data_class, reverse_layers=reverse_layers
                 )
+                return type_element_key
             except KeyError:
                 warnings.warn(
                     ('Type element ' + type_element_key + ' was not found. '
@@ -355,7 +365,7 @@ class BuildingElement(object):
                 type_element_key = None
 
         if not type_element_key:
-            buildingelement_input.load_type_element(
+            return buildingelement_input.load_type_element(
                 element=self, year=year, construction=construction,
                 data_class=data_class, element_type=element_type,
                 reverse_layers=reverse_layers

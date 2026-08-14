@@ -741,34 +741,49 @@ def write_wall_record(wall_path, wall_type, single_wall_template, bldg):
         n = len(layers)
         teaser_id_aixlib_inside_layer = 0
         teaser_id_aixlib_outside_layer = n - 1
-    elif wall_type == 'IW_hori_att_loHalf':
+    elif wall_type in ('IW_hori_att_loHalf', 'IW_hori_att_upHalf'):
         # See the roof_attic comment above: not tracked as a real,
         # retrofittable zone element.
-        element = Ceiling(parent=None)
+        #
+        # Unlike the generic Ceiling/Floor pair used for IW_hori_*Half -
+        # which are two mirrored views of the *whole* construction between
+        # two heated rooms, so that one of them has to be cut in two here -
+        # the Attic-tagged pair already *is* the split: CeilingAttic holds
+        # the heated room's half (up to the middle of the insulation) and
+        # FloorAttic the attic's half (from that middle up), matching
+        # AixLib's own CEattic_*_loHalf / FLattic_*_upHalf records the
+        # TypeElements_AixLib.json entries were converted from. So each
+        # half is exported with all of its layers, just reversed into
+        # AixLib's outside-to-inside order (as for OW/roof above).
+        if wall_type == 'IW_hori_att_loHalf':
+            element = Ceiling(parent=None)
+        else:
+            element = Floor(parent=None)
         element.element_construction_type = "Attic"
-        element.load_type_element(
+        type_element_key = element.load_type_element(
             year=bldg.year_of_construction,
             construction=bldg.construction_data.value,
             data_class=bldg.data_class,
         )
         layers = element.layer
         n = len(layers)
-        teaser_id_aixlib_inside_layer = 0
-        teaser_id_aixlib_outside_layer = 1
-    elif wall_type == 'IW_hori_att_upHalf':
-        # See the roof_attic comment above: not tracked as a real,
-        # retrofittable zone element.
-        element = Floor(parent=None)
-        element.element_construction_type = "Attic"
-        element.load_type_element(
-            year=bldg.year_of_construction,
-            construction=bldg.construction_data.value,
-            data_class=bldg.data_class,
-        )
-        layers = element.layer
-        n = len(layers)
-        teaser_id_aixlib_inside_layer = 1
-        teaser_id_aixlib_outside_layer = n - 1
+        # Only construction data with its own Attic-tagged entries (i.e.
+        # aixlib_*) provides the pre-split halves described above. Anything
+        # else falls back to the plain Ceiling/Floor entry, which is the
+        # whole construction - taking all of its layers for both halves
+        # would then count it twice, so cut it in two exactly as for the
+        # generic IW_hori_*Half above.
+        attic_specific = type_element_key is not None and type_element_key.startswith(
+            type(element).__name__ + "Attic")
+        if attic_specific:
+            teaser_id_aixlib_inside_layer = 0
+            teaser_id_aixlib_outside_layer = n
+        elif wall_type == 'IW_hori_att_loHalf':
+            teaser_id_aixlib_inside_layer = 0
+            teaser_id_aixlib_outside_layer = 1
+        else:
+            teaser_id_aixlib_inside_layer = 0
+            teaser_id_aixlib_outside_layer = n - 1
     else:
         raise NotImplementedError("This wall type does not exit")
     d = []
@@ -786,6 +801,17 @@ def write_wall_record(wall_path, wall_type, single_wall_template, bldg):
         rho.append(layers[teaser_layer_id].material.density)
         conductivity.append(layers[teaser_layer_id].material.thermal_conduc)
         c.append(layers[teaser_layer_id].material.heat_capac * 1000)  # kJ/kgK to J/kgK
+    if not d:
+        # Guard against silently writing a record with n=0 (which does not
+        # translate in Modelica): the selected layer range is empty, e.g.
+        # because the type element has fewer layers than the wall type's
+        # index arithmetic assumes.
+        raise ValueError(
+            f"No layers selected for wall type {wall_type!r} of building "
+            f"{bldg.name!r}: the underlying type element has {len(layers)} "
+            f"layer(s), which the layer selection for this wall type cannot "
+            f"split as expected."
+        )
     with open(os.path.join(
             wall_path,
             bldg.name + '_' + wall_type + '.mo'), 'w') as out_file:
