@@ -177,6 +177,31 @@ class Test_besmod_output(unittest.TestCase):
         self.assertEqual(records["IW_hori_att_upHalf"]["lambda"],
                          [0.09, 0.18])
 
+        # Every exported record has to be picked up by the wall type
+        # collection - AixLib's own OFD collections assign each of the
+        # BaseDataMultiInnerWalls slots its matching record, e.g. the load
+        # bearing inner wall (IW2_vert_half) to IW2_vert_half_a/b.
+        with open(os.path.join(
+                wall_path, bldg.name + "_wallTypes.mo")) as wall_types_file:
+            wall_types = wall_types_file.read()
+        for slot, wall_type in (("OW", "OW"),
+                                ("IW_vert_half_a", "IW_vert_half"),
+                                ("IW_vert_half_b", "IW_vert_half"),
+                                ("IW2_vert_half_a", "IW2_vert_half"),
+                                ("IW2_vert_half_b", "IW2_vert_half"),
+                                ("IW_hori_upp_half", "IW_hori_upHalf"),
+                                ("IW_hori_low_half", "IW_hori_loHalf"),
+                                ("IW_hori_att_upp_half", "IW_hori_att_upHalf"),
+                                ("IW_hori_att_low_half", "IW_hori_att_loHalf"),
+                                ("groundPlate_upp_half", "ground_floor_upHalf"),
+                                ("groundPlate_low_half", "ground_floor_loHalf"),
+                                ("roof", "roof_attic"),
+                                ("roofRoomUpFloor", "roof")):
+            self.assertRegex(
+                wall_types,
+                r"\b" + slot + r"=[\w.]*\." + bldg.name + "_" + wall_type
+                + r"\(\)")
+
     def test_convert_heating_profile(self):
         """Test the conversion of heating profiles for BESMod"""
         with self.assertRaises(ValueError):

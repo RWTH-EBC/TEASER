@@ -12,8 +12,8 @@ record ${bldg.name}_wallTypes
         IW_hori_att_low_half=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_IW_hori_att_loHalf(),
         groundPlate_upp_half=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_ground_floor_upHalf(),
         groundPlate_low_half=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_ground_floor_loHalf(),
-        IW2_vert_half_a=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_IW_vert_half(),
-        IW2_vert_half_b=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_IW_vert_half(),
+        IW2_vert_half_a=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_IW2_vert_half(),
+        IW2_vert_half_b=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_IW2_vert_half(),
         roof=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_roof_attic(),
         roofRoomUpFloor=${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_roof());
 end ${bldg.name}_wallTypes;
