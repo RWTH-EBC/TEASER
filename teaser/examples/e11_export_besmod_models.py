@@ -127,6 +127,17 @@ def example_export_besmod():
     # To make sure the parameters are calculated correctly we recommend to
     # run prj.calc_all_buildings() function which is here already done in the set_location_parameters function.
 
+    # When the AixLib HOM archetype is exported with `export_with_hom`, its
+    # ROM is driven by the same room-wise user profiles as the HOM
+    # (BESMod's TEASERHOMtoROM), reduced to the single merged zone by a
+    # weighted average per room. Both weightings default to the room
+    # volumes, which for the natural ventilation air exchange rate is the
+    # aggregation that conserves the zone's total ventilation air flow.
+    # They can be changed independently - to the rooms' heat loads, to
+    # equal weights, or to a dict/callable of custom per-room weights (the
+    # weights are normalized, so only their ratio matters):
+    prj.buildings[-1].fac_room_t_set_weighting = "heat_load"
+
     # Export all buildings to BESMod and include them in predefined example systems.
     path = prj.export_besmod(
         THydSup_nominal=THydSup_nominal,

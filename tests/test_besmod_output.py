@@ -202,6 +202,84 @@ class Test_besmod_output(unittest.TestCase):
                 r"\b" + slot + r"=[\w.]*\." + bldg.name + "_" + wall_type
                 + r"\(\)")
 
+    def test_hom_to_rom_user_profile_weights(self):
+        """test fac_room_t_set / fac_room_nat_vent of the HOM archetype"""
+
+        prj = Project()
+        prj.name = "BESModHOMtoROMWeights"
+
+        prj.add_residential(
+            construction_data='aixlib_S',
+            geometry_data='aixlib_high_order_single_family_house',
+            name="ResidentialBuildingHighOrderAixLib",
+            year_of_construction=1990,
+            net_leased_area=170.0,
+            number_of_floors=2,
+            height_of_floors=2.6)
+
+        prj.used_library_calc = "AixLib"
+        prj.number_of_elements_calc = 4
+        prj.calc_all_buildings()
+        bldg = prj.buildings[0]
+        rooms = sorted(bldg.room_name_nr, key=bldg.room_name_nr.get)
+
+        # both default to the room volumes, normalized to a weighted average
+        total_volume = sum(bldg.room_volumes[room] for room in rooms)
+        by_volume = [bldg.room_volumes[room] / total_volume for room in rooms]
+        for weights in (bldg.fac_room_t_set, bldg.fac_room_nat_vent):
+            self.assertEqual(len(weights), len(bldg.room_name_nr))
+            self.assertAlmostEqual(sum(weights), 1.0)
+            for weight, expected in zip(weights, by_volume):
+                self.assertAlmostEqual(weight, expected)
+
+        # weighting the room setpoints by volume has to give the same value
+        # as aggregating them with t_set_nominal_aggregation does, i.e. the
+        # weights really form a weighted average of the profiles
+        weighted = sum(fac * t_set for fac, t_set
+                       in zip(bldg.fac_room_t_set, bldg.room_t_set_nominal_list))
+        bldg.t_set_nominal_aggregation = "volume_weighted_average"
+        self.assertAlmostEqual(weighted, bldg.thermal_zones[0].t_inside)
+        bldg.t_set_nominal_aggregation = "max"
+
+        # the two weightings are independent of each other
+        bldg.fac_room_t_set_weighting = "heat_load"
+        total_heat_load = sum(bldg.room_heat_loads[room] for room in rooms)
+        for weight, room in zip(bldg.fac_room_t_set, rooms):
+            self.assertAlmostEqual(
+                weight, bldg.room_heat_loads[room] / total_heat_load)
+        for weight, expected in zip(bldg.fac_room_nat_vent, by_volume):
+            self.assertAlmostEqual(weight, expected)
+
+        bldg.fac_room_t_set_weighting = "equal"
+        for weight in bldg.fac_room_t_set:
+            self.assertAlmostEqual(weight, 1 / len(bldg.room_name_nr))
+
+        # a dict and a callable give full control, and are normalized too
+        bldg.fac_room_t_set_weighting = {
+            room: (2.0 if room == "Bath" else 1.0) for room in rooms}
+        self.assertAlmostEqual(sum(bldg.fac_room_t_set), 1.0)
+        self.assertAlmostEqual(
+            bldg.fac_room_t_set[bldg.room_name_nr["Bath"] - 1], 2 / 11)
+        bldg.fac_room_nat_vent_weighting = lambda b: b.room_volumes
+        for weight, expected in zip(bldg.fac_room_nat_vent, by_volume):
+            self.assertAlmostEqual(weight, expected)
+
+        for bad in ("nonsense",
+                    {"Bath": 1.0},
+                    {room: 0.0 for room in rooms},
+                    dict({room: 1.0 for room in rooms}, Bath=-1.0)):
+            bldg.fac_room_t_set_weighting = bad
+            with self.assertRaises(ValueError):
+                bldg.fac_room_t_set
+
+        # 'heat_load' needs the room heat loads, which are only populated
+        # once the building parameters have been calculated - it has to say
+        # so rather than fail somewhere further down
+        bldg.fac_room_t_set_weighting = "heat_load"
+        bldg.room_heat_loads = {}
+        with self.assertRaises(ValueError):
+            bldg.fac_room_t_set
+
     def test_convert_heating_profile(self):
         """Test the conversion of heating profiles for BESMod"""
         with self.assertRaises(ValueError):

@@ -2,14 +2,22 @@
 within ${bldg.parent.name}.${bldg.name};
 model HeatPumpMonoenergetic${bldg.name}
   extends BESMod.Systems.BaseClasses.TEASERExport.PartialHeatPumpMonoenergetic(
+% if export_hom:
     redeclare ${bldg.name} building(
-      use_verboseEnergyBalance=false,
-      energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial),
-    userProfiles(fileNameIntGains=Modelica.Utilities.Files.loadResource(
-      "modelica://${bldg.parent.name}/${bldg.name}/InternalGains_${bldg.name}.txt"),
-      dTSetBack=${get_list(dTSetBack)},
-      hoursSetBack=${get_list(hoursSetBack)},
-      startTimeSetBack=${get_list(startTimeSetBack)}),
+        use_absIntGai=true,
+        useUserProfileNatVent=true),
+    redeclare BESMod.Systems.UserProfiles.TEASERHOMtoROM userProfiles(
+        facRoomTSet=${get_list(bldg.fac_room_t_set)},
+        facRoomNatVent=${get_list(bldg.fac_room_nat_vent)}),
+% else:
+    redeclare ${bldg.name} building,
+    userProfiles(
+        fileNameIntGains=Modelica.Utilities.Files.loadResource(
+        "modelica://${bldg.parent.name}/${bldg.name}/InternalGains_${bldg.name}.txt"),
+        dTSetBack=${get_list(dTSetBack)},
+        hoursSetBack=${get_list(hoursSetBack)},
+        startTimeSetBack=${get_list(startTimeSetBack)}),
+% endif
     systemParameters(
         nZones=${len(bldg.thermal_zones)},
         TSetZone_nominal=${get_list(TSetZone_nominal)},

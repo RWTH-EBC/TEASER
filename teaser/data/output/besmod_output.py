@@ -242,7 +242,8 @@ def export_besmod(
 
         with open(os.path.join(bldg_path, bldg.name + ".mo"), 'w') as out_file:
             out_file.write(building_template.render_unicode(
-                bldg=bldg))
+                bldg=bldg,
+                export_hom=export_hom))
             out_file.close()
 
         def write_example_mo(example_template, example, suffix=""):
@@ -251,6 +252,13 @@ def export_besmod(
                 model_file.write(example_template.render_unicode(
                     bldg=bldg,
                     project=prj,
+                    # The ROM example templates branch on this to drive the
+                    # single merged zone with the HOM's room-wise user
+                    # profiles (BESMod's TEASERHOMtoROM, weighted by
+                    # bldg.fac_room_t_set / fac_room_nat_vent) instead of
+                    # the zone-wise ones, so the ROM and the HOM exported
+                    # next to it see the same user behaviour.
+                    export_hom=export_hom,
                     TOda_nominal=bldg.thermal_zones[0].t_outside,
                     THydSup_nominal=t_hyd_sup_nominal_bldg[bldg.name],
                     TSetZone_nominal=t_set_zone_nominal,

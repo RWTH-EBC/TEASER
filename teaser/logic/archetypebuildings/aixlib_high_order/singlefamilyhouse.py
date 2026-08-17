@@ -217,6 +217,28 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         # full custom control. Reassigning this regenerates the archetype
         # automatically.
         self.t_set_nominal_aggregation = "max"
+        # Weights that reduce the HOM's room-wise user profiles to the
+        # single value the ROM's one merged zone takes - facRoomTSet and
+        # facRoomNatVent of BESMod's TEASERHOMtoROM user profile, which
+        # multiply the room-wise set temperature [K] / natural ventilation
+        # air exchange rate [1/h] profiles and sum them up. Both are
+        # therefore weighted averages, and each weighting is normalized to
+        # sum to 1 (see _room_weights) - what matters is the ratio between
+        # rooms, not the absolute values.
+        #
+        # Built-in options: "volume" (default - room_volumes, the physically
+        # correct aggregation for an air exchange rate, since it conserves
+        # the total ventilation air flow of the merged zone), "heat_load"
+        # (room_heat_loads, i.e. weighted towards the rooms that drive the
+        # design of the heating system) and "equal". Alternatively assign a
+        # dict {room_name: weight} covering every heated room, or a callable
+        # taking (self) and returning such a dict, for full custom control.
+        # These are plain attributes: unlike t_set_nominal_aggregation,
+        # reassigning them does not regenerate the archetype (nothing about
+        # the archetype itself depends on them - they are only read when
+        # exporting), so they can be changed right up to the export.
+        self.fac_room_t_set_weighting = "volume"
+        self.fac_room_nat_vent_weighting = "volume"
         # Populated by calc_building_parameter (room_name -> heat_load [W]
         # / list ordered by room_name_nr), cached here so exports can read
         # them directly without recomputing - always in sync since
@@ -1777,6 +1799,106 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         overriding individual rooms there is reflected immediately.
         """
         return self._order_by_room_nr(self.room_t_set_nominal)
+
+    def _room_weights(self, weighting, attribute_name):
+        """Resolves one of the fac_room_* weightings (see
+        fac_room_t_set_weighting) into a list of weights ordered by
+        room_name_nr (1..10) and normalized to sum to 1.
+
+        Parameters
+        ----------
+        weighting : str or dict or callable
+            The weighting to resolve - "volume", "heat_load", "equal", a
+            {room_name: weight} dict, or a callable taking (self) and
+            returning such a dict.
+
+        attribute_name : str
+            Name of the attribute the weighting came from, only used to
+            point at it in error messages.
+
+        Returns
+        -------
+        weights : list of float
+            Weight of each room, summing to 1. weights[0] is the room with
+            room_name_nr 1, weights[-1] the room with room_name_nr 10.
+        """
+        if callable(weighting):
+            weights = weighting(self)
+        elif isinstance(weighting, dict):
+            weights = weighting
+        elif weighting == "volume":
+            # room_volumes also holds the unheated rooms (e.g. the Attic),
+            # which have no room_name_nr and no profile column - taking the
+            # heated rooms by name here drops them.
+            weights = {room: self.room_volumes[room] for room in self.room_name_nr}
+        elif weighting == "heat_load":
+            if not self.room_heat_loads:
+                raise ValueError(
+                    f"{attribute_name}='heat_load' needs the room-wise heat "
+                    f"loads of building {self.name!r}, which are only "
+                    f"available once its parameters have been calculated. "
+                    f"Call calc_building_parameter() (or the project's "
+                    f"calc_all_buildings()) first."
+                )
+            weights = self.room_heat_loads
+        elif weighting == "equal":
+            weights = {room: 1.0 for room in self.room_name_nr}
+        else:
+            raise ValueError(
+                f"Unknown {attribute_name} {weighting!r}. Use 'volume', "
+                f"'heat_load', 'equal', a dict of per-room weights or a "
+                f"callable."
+            )
+
+        missing = set(self.room_name_nr) - set(weights)
+        if missing:
+            raise ValueError(
+                f"{attribute_name} is missing a weight for "
+                f"{sorted(missing)}. Every heated room needs one."
+            )
+        weights = self._order_by_room_nr(weights)
+        # A negative weight has no meaning in a weighted average of
+        # temperatures or air exchange rates, and would silently distort
+        # the result rather than fail, so reject it here.
+        if any(weight < 0 for weight in weights):
+            raise ValueError(
+                f"{attribute_name} contains a negative weight: {weights}."
+            )
+        total = sum(weights)
+        if total == 0:
+            raise ValueError(
+                f"{attribute_name} weights sum to zero, so they cannot be "
+                f"normalized to a weighted average."
+            )
+        return [weight / total for weight in weights]
+
+    @property
+    def fac_room_t_set(self):
+        """Weights reducing the room-wise set temperature profiles to the
+        single ROM zone's setpoint, ordered by room_name_nr (1..10) and
+        normalized to sum to 1 - facRoomTSet of BESMod's TEASERHOMtoROM.
+
+        Controlled by fac_room_t_set_weighting ("volume" by default, see
+        there for the other options, e.g. "heat_load").
+        """
+        return self._room_weights(
+            self.fac_room_t_set_weighting, "fac_room_t_set_weighting")
+
+    @property
+    def fac_room_nat_vent(self):
+        """Weights reducing the room-wise natural ventilation profiles to
+        the single ROM zone's air exchange rate, ordered by room_name_nr
+        (1..10) and normalized to sum to 1 - facRoomNatVent of BESMod's
+        TEASERHOMtoROM.
+
+        Controlled by fac_room_nat_vent_weighting, which defaults to
+        "volume": an air exchange rate is per unit of room volume, so
+        volume weights are the aggregation that conserves the merged zone's
+        total ventilation air flow. Changing this is possible (same options
+        as fac_room_t_set_weighting) but will not conserve it.
+        """
+        return self._room_weights(
+            self.fac_room_nat_vent_weighting, "fac_room_nat_vent_weighting")
 
     @property
     def construction_data(self):
