@@ -1,9 +1,11 @@
+import math
 import os
 import re
 import unittest
 from teaser.logic import utilities
 from teaser.project import Project
-from teaser.data.output.besmod_output import _convert_heating_profile
+from teaser.data.output.besmod_output import (_convert_heating_profile,
+                                               _to_aixlib_azimuth)
 
 
 def _read_wall_record(path):
@@ -12,6 +14,19 @@ def _read_wall_record(path):
         content = record_file.read()
     record = {"n": int(re.search(r"n=(\d+)", content).group(1))}
     for name in ("d", "rho", "lambda", "c"):
+        values = re.search(name + r"=\{([^}]*)\}", content).group(1)
+        record[name] = [float(value) for value in values.split(",")]
+    return record
+
+
+def _read_surface_orientation_record(path):
+    """Return {'nSurfaces': int, 'name': [str], 'Azimut': [float], 'Tilt': [float]}"""
+    with open(path) as record_file:
+        content = record_file.read()
+    record = {"nSurfaces": int(re.search(r"nSurfaces=(\d+)", content).group(1))}
+    record["name"] = re.findall(
+        r'"([^"]*)"', re.search(r"name=\{([^}]*)\}", content).group(1))
+    for name in ("Azimut", "Tilt"):
         values = re.search(name + r"=\{([^}]*)\}", content).group(1)
         record[name] = [float(value) for value in values.split(",")]
     return record
@@ -426,3 +441,156 @@ class Test_besmod_output(unittest.TestCase):
         self.assertAlmostEqual(start_time, 23 * 3600)
         self.assertAlmostEqual(width, 2)
         self.assertEqual(amplitude, 3)
+
+    def test_to_aixlib_azimuth(self):
+        """test the TEASER orientation to AixLib azimuth conversion"""
+
+        # AixLib counts from South, East negative, West positive, while
+        # TEASER counts clockwise from North
+        for orientation, azimuth in ((0.0, 180.0), (90.0, -90.0),
+                                     (180.0, 0.0), (270.0, 90.0),
+                                     (45.0, -135.0), (359.0, 179.0)):
+            self.assertAlmostEqual(_to_aixlib_azimuth(orientation), azimuth)
+
+    def test_rotate_hom(self):
+        """test rotating the HOM archetype and its exported surface record"""
+
+        prj = Project()
+        prj.name = "BESModHOMRotation"
+
+        prj.add_residential(
+            construction_data='aixlib_S',
+            geometry_data='aixlib_high_order_single_family_house',
+            name="ResidentialBuildingHighOrderAixLib",
+            year_of_construction=1990,
+            net_leased_area=170.0,
+            number_of_floors=2,
+            height_of_floors=2.6)
+
+        bldg = prj.buildings[0]
+        zone = bldg.thermal_zones[0]
+        self.assertEqual(bldg.rotation, 0.0)
+
+        # the six radiation surfaces have to describe the very elements the
+        # archetype generates, otherwise the exported record would rotate
+        # the HOM's radiation away from its walls and roof halves
+        wall_orientations = {orientation for name, orientation, tilt
+                             in bldg.surface_orientations if tilt == 90.0}
+        roof_surfaces = {(orientation, tilt) for name, orientation, tilt
+                         in bldg.surface_orientations if tilt != 90.0}
+        self.assertEqual(wall_orientations, {0.0, 90.0, 180.0, 270.0})
+        self.assertEqual(
+            {wall.orientation for wall in zone.outer_walls}, wall_orientations)
+        self.assertEqual(
+            {(roof.orientation, roof.tilt) for roof in zone.rooftops},
+            roof_surfaces)
+
+        bldg.rotate_building(30)
+        self.assertEqual(bldg.rotation, 30.0)
+        # every oriented element follows, including the two groups the base
+        # Building.rotate_building does not know about: the inner walls and
+        # the unheated Attic's own envelope, which belongs to no zone
+        for elements in (zone.outer_walls, zone.rooftops, zone.windows,
+                         zone.inner_walls):
+            self.assertTrue(elements)
+            for element in elements:
+                self.assertIn(element.orientation, (30.0, 120.0, 210.0, 300.0))
+        attic = bldg.unheated_room_envelope_elements["Attic"]
+        self.assertTrue(attic)
+        for element in attic.values():
+            self.assertIn(element.orientation, (30.0, 120.0, 210.0, 300.0))
+
+        # rotating twice accumulates and wraps around
+        bldg.rotate_building(340)
+        self.assertEqual(bldg.rotation, 10.0)
+        bldg.rotate_building(350)
+        self.assertEqual(bldg.rotation, 0.0)
+        self.assertEqual({wall.orientation for wall in zone.outer_walls},
+                         {0.0, 90.0, 180.0, 270.0})
+
+        bldg.rotate_building(30)
+        # regenerating the archetype must not snap the building back to the
+        # archetype's own orientation
+        bldg.integrate_unheated_rooms = {"Attic": "din12831_f1"}
+        zone = bldg.thermal_zones[0]
+        self.assertEqual(bldg.rotation, 30.0)
+        self.assertEqual({wall.orientation for wall in zone.outer_walls},
+                         {30.0, 120.0, 210.0, 300.0})
+
+        prj.used_library_calc = "AixLib"
+        prj.number_of_elements_calc = 4
+        prj.calc_all_buildings()
+        path = prj.export_besmod(examples=["TEASERHeatLoadCalculation"],
+                                 THydSup_nominal=55 + 273.15,
+                                 export_with_hom=True)
+
+        data_base_path = os.path.join(path, bldg.name, bldg.name + "_DataBase")
+        record = _read_surface_orientation_record(os.path.join(
+            data_base_path, bldg.name + "_SurfaceOrientation.mo"))
+        self.assertEqual(record["nSurfaces"], 6)
+        # the names stay AixLib's own, they name the radiation port of
+        # AixLibHighOrderOFD rather than the compass direction
+        self.assertEqual(record["name"],
+                         ["N", "O", "S", "W", "Roof_N", "Roof_S"])
+        # AixLib's own SurfaceOrientationData_N_E_S_W_RoofN_Roof_S holds
+        # {180, -90, 0, 90, 180, 0}, all rotated by the same 30 deg here
+        self.assertEqual(record["Azimut"],
+                         [-150.0, -60.0, 30.0, 120.0, -150.0, 30.0])
+        # the roof halves take the archetype's own roof_tilt, not AixLib's
+        # fixed 45 deg - which for the default alfa_grad happens to be 45
+        roof_tilt = bldg.top_level_geo_params["roof_tilt"]
+        self.assertEqual(record["Tilt"],
+                         [90.0, 90.0, 90.0, 90.0, roof_tilt, roof_tilt])
+
+        # the record has to be part of its package and be picked up by the
+        # exported HOM model, which is the only way the rotation reaches it
+        with open(os.path.join(data_base_path, "package.order")) as order_file:
+            self.assertIn(bldg.name + "_SurfaceOrientation",
+                          order_file.read().split())
+        with open(os.path.join(
+                path, bldg.name, bldg.name + "_HOM.mo")) as hom_file:
+            self.assertRegex(
+                hom_file.read(),
+                r"redeclare replaceable parameter\s+[\w.]*\." + bldg.name
+                + r"_SurfaceOrientation SOD")
+
+        # the ROM exported next to the HOM is rotated by the very same
+        # angle - it follows from rotate_building touching the zone's own
+        # elements, which calc_all_buildings then turns into the zone record
+        with open(os.path.join(
+                data_base_path,
+                bldg.name + "_" + zone.name + ".mo")) as zone_file:
+            zone_record = zone_file.read()
+        azi_roof = [float(value) for value in re.search(
+            r"aziRoof = \{([^}]*)\}", zone_record).group(1).split(",")]
+        # the ROM's azimuths follow the same convention, in radians. Both
+        # roof halves are rotated by the same 30 deg; the third entry is
+        # the direction-less equivalent element the din12831_f1 attic
+        # integration adds for the Attic above them.
+        azi_roof = [round(math.degrees(azimuth), 6) for azimuth in azi_roof]
+        self.assertIn(30.0, azi_roof)
+        self.assertIn(-150.0, azi_roof)
+
+        # rotating without recalculating afterwards would write a rotated
+        # HOM next to a ROM that still holds the old orientations
+        self.assertFalse(bldg.rotation_pending_recalculation)
+        bldg.rotate_building(15)
+        self.assertTrue(bldg.rotation_pending_recalculation)
+        with self.assertWarns(UserWarning):
+            prj.export_besmod(examples=["TEASERHeatLoadCalculation"],
+                              THydSup_nominal=55 + 273.15,
+                              export_with_hom=True)
+        prj.calc_all_buildings()
+        self.assertFalse(bldg.rotation_pending_recalculation)
+        bldg.rotate_building(315)
+        prj.calc_all_buildings()
+
+        # an unrotated building reproduces AixLib's own record one to one
+        self.assertEqual(bldg.rotation, 0.0)
+        path = prj.export_besmod(examples=["TEASERHeatLoadCalculation"],
+                                 THydSup_nominal=55 + 273.15,
+                                 export_with_hom=True)
+        record = _read_surface_orientation_record(os.path.join(
+            path, bldg.name, bldg.name + "_DataBase",
+            bldg.name + "_SurfaceOrientation.mo"))
+        self.assertEqual(record["Azimut"], [180.0, -90.0, 0.0, 90.0, 180.0, 0.0])

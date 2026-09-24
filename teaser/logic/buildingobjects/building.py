@@ -14,6 +14,25 @@ from teaser.logic.buildingobjects.calculation.ibpsa import IBPSA
 from teaser.logic.buildingobjects.buildingsystems.buildingahu import BuildingAHU
 
 
+def rotate_orientation(orientation, angle):
+    """Rotates one orientation clockwise by angle and normalizes the result
+
+    Parameters
+    ----------
+    orientation : float
+        orientation of a building element in TEASER's convention, i.e. in
+        degrees clockwise from North
+    angle : float
+        rotation of the building clockwise in degrees
+
+    Returns
+    -------
+    float
+        the rotated orientation, wrapped into [0, 360)
+    """
+    return (orientation + angle) % 360.0
+
+
 class Building(object):
     """Building Class
 
@@ -548,28 +567,17 @@ class Building(object):
         """
 
         for zone_count in self.thermal_zones:
-            new_angle = None
             for wall_count in zone_count.outer_walls:
-                new_angle = wall_count.orientation + angle
-                if new_angle > 360.0:
-                    wall_count.orientation = new_angle - 360.0
-                else:
-                    wall_count.orientation = new_angle
+                wall_count.orientation = rotate_orientation(
+                    wall_count.orientation, angle)
             for roof_count in zone_count.rooftops:
+                # -1 is TEASER's sentinel for a flat roof, not an angle
                 if roof_count.orientation != -1:
-                    new_angle = roof_count.orientation + angle
-                    if new_angle > 360.0:
-                        roof_count.orientation = new_angle - 360.0
-                    else:
-                        roof_count.orientation = new_angle
-                else:
-                    pass
+                    roof_count.orientation = rotate_orientation(
+                        roof_count.orientation, angle)
             for win_count in zone_count.windows:
-                new_angle = win_count.orientation + angle
-                if new_angle > 360.0:
-                    win_count.orientation = new_angle - 360.0
-                else:
-                    win_count.orientation = new_angle
+                win_count.orientation = rotate_orientation(
+                    win_count.orientation, angle)
 
     def add_zone(self, thermal_zone):
         """Adds a thermal zone to the corresponding list

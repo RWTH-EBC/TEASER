@@ -8,6 +8,8 @@ model ${bldg.name}_HOM
     TIR=${tir},
     redeclare replaceable parameter
       ${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_wallTypes wallTypes,
+    redeclare replaceable parameter
+      ${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_SurfaceOrientation SOD,
     redeclare model WindowModel =
        AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple,
     redeclare replaceable parameter ${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_windowSimple Type_Win,

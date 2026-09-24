@@ -17,6 +17,7 @@ from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.buildingphysics.door import Door
+from teaser.logic.buildingobjects.building import rotate_orientation
 from math import sin, cos, tan, pi, sqrt
 
 
@@ -42,6 +43,26 @@ def _nearest_bucket(value, options):
 # "dicht" (n = 0.5 h-1) has rows for Uue below 2.5 W/(m2K); this archetype
 # only ever produces Uue in {5.0, 2.5} (see RooftopAttic), so those extra
 # "dicht" rows are included for completeness but not currently reachable.
+# The six oriented surfaces the AixLib HOM's building envelope receives
+# solar radiation on, in the order BESMod's AixLibHighOrder connects them to
+# its RadOnTiltedSurfaceAdaptor array: the four facades and the two halves
+# of the pitched roof. The names are AixLib's own (from its
+# SurfaceOrientationData_N_E_S_W_RoofN_Roof_S record, "O" for East), and
+# stay with the port rather than the compass direction once the building is
+# rotated. The orientations are TEASER's (0 = North, clockwise) for the
+# unrotated archetype and therefore repeat the "ori" entries generate_archetype
+# gives the matching elements - test_hom_surface_orientations keeps the two
+# in sync. "roof" tilt is not AixLib's fixed 45 deg but the archetype's own
+# roof_tilt, which follows alfa_grad.
+_HOM_RADIATION_SURFACES = (
+    ("N", 0.0, "wall"),
+    ("O", 90.0, "wall"),
+    ("S", 180.0, "wall"),
+    ("W", 270.0, "wall"),
+    ("Roof_N", 0.0, "roof"),
+    ("Roof_S", 180.0, "roof"),
+)
+
 _DIN_EN_12831_TABLE_5_F1 = {
     ("undicht", 5.0, 1.25): 0.85,
     ("undicht", 5.0, 0.60): 0.90,
@@ -239,6 +260,19 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         # exporting), so they can be changed right up to the export.
         self.fac_room_t_set_weighting = "volume"
         self.fac_room_nat_vent_weighting = "volume"
+        # Rotation of the whole building clockwise against the archetype's
+        # own orientation [deg], i.e. 0 keeps the Livingroom facade facing
+        # South as the original AixLib HOM has it. Set it through
+        # rotate_building (which also rotates the already generated
+        # elements); it is kept here so that a later generate_archetype()
+        # rebuilds the elements rotated instead of snapping them back to
+        # the archetype's own orientation, and so the HOM export can write
+        # the rotated surfaces into its SurfaceOrientation record.
+        self.rotation = 0.0
+        # The rotation the zones' ROM parameters were last calculated for,
+        # so the HOM export can tell whether the two halves it writes still
+        # agree - see rotation_pending_recalculation.
+        self._rotation_at_last_calc = 0.0
         # Populated by calc_building_parameter (room_name -> heat_load [W]
         # / list ordered by room_name_nr), cached here so exports can read
         # them directly without recomputing - always in sync since
@@ -1111,6 +1145,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 }
             }
         }
+        self._apply_rotation_to_detailed_geo()
         self.room_volumes = {
             "Livingroom": self.top_level_geo_params["room1_length"] *
                           self.top_level_geo_params["room_width"] *
@@ -1226,6 +1261,99 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                         window.orientation = ele_info["ori"]
                         window.area = ele_info["windowarea"]
             self._integrate_unheated_rooms(zone, adj_ele_heated_to_unheated)
+
+    def _apply_rotation_to_detailed_geo(self):
+        """Rotates the just-built detailed_geo by self.rotation
+
+        detailed_geo is written out from scratch on every
+        generate_archetype call and holds the archetype's own, unrotated
+        orientations, so without this a building rotated earlier would snap
+        back to the original AixLib HOM's orientation on every
+        regeneration - e.g. when reassigning integrate_unheated_rooms.
+        Rotating detailed_geo rather than the finished elements covers all
+        three places that read "ori" from it at once: the heated zone's
+        elements, their windows and the unheated rooms' own envelope.
+        """
+        if not self.rotation:
+            return
+        for room_geo in self.detailed_geo.values():
+            for ele_info in room_geo.values():
+                # -1 (roof/ceiling) and -2 (floor) are TEASER sentinels,
+                # not angles, and stay as they are
+                if ele_info["ori"] >= 0:
+                    ele_info["ori"] = rotate_orientation(
+                        ele_info["ori"], self.rotation)
+
+    def rotate_building(self, angle):
+        """Rotates the building to a given angle
+
+        Extends Building.rotate_building, which covers the oriented
+        elements a ROM archetype has (each zone's OuterWalls, Rooftops and
+        Windows), by the two groups this archetype adds: the inner walls,
+        whose orientation is the direction of the room's outside, and the
+        unheated rooms' own envelope elements, which belong to no
+        ThermalZone and are therefore invisible to the base implementation.
+
+        The angle is also accumulated in self.rotation, both so a later
+        generate_archetype() rebuilds the elements rotated (see
+        _apply_rotation_to_detailed_geo) and so the HOM export can write
+        the rotated surfaces into its SurfaceOrientation record: the HOM's
+        Modelica geometry is fixed, so rotating the HOM means rotating the
+        directions the solar radiation reaches it from.
+
+        Parameters
+        ----------
+
+        angle: float
+            rotation of the building clockwise, between 0 and 360 degrees
+        """
+        super(AixLibHighOrderSingleFamilyHouse, self).rotate_building(angle)
+        elements = [wall for zone in self.thermal_zones
+                    for wall in zone.inner_walls]
+        elements.extend(element
+                        for room_elements
+                        in self.unheated_room_envelope_elements.values()
+                        for element in room_elements.values())
+        for element in elements:
+            if element.orientation >= 0:
+                element.orientation = rotate_orientation(
+                    element.orientation, angle)
+        self.rotation = rotate_orientation(self.rotation, angle)
+
+    @property
+    def rotation_pending_recalculation(self):
+        """Whether the building was rotated after its last parameter calculation
+
+        The ROM half of the export reads the zones' calculated model_attr,
+        which keeps the orientations of the last
+        calc_building_parameter call, while the HOM half reads
+        surface_orientations, which follows rotate_building immediately.
+        Rotating between the calculation and the export would therefore
+        write a rotated HOM next to an unrotated ROM without this.
+        """
+        return self.rotation != self._rotation_at_last_calc
+
+    @property
+    def surface_orientations(self):
+        """Orientation and tilt of the six surfaces the HOM is irradiated on
+
+        Returns
+        -------
+        list of (str, float, float)
+            (name, orientation, tilt) per surface, in the order BESMod's
+            AixLibHighOrder connects them to its RadOnTiltedSurfaceAdaptor
+            array - see _HOM_RADIATION_SURFACES. Orientation is in TEASER's
+            convention (degrees clockwise from North) and already includes
+            self.rotation; tilt is 90 deg for the four facades and the
+            archetype's own roof_tilt for the two roof halves.
+        """
+        roof_tilt = self.top_level_geo_params["roof_tilt"]
+        return [
+            (name,
+             rotate_orientation(orientation, self.rotation),
+             90.0 if kind == "wall" else roof_tilt)
+            for name, orientation, kind in _HOM_RADIATION_SURFACES
+        ]
 
     def _aggregate_t_set_nominal(self, room_names):
         """Reduce room_t_set_nominal to a single nominal temperature [K]
@@ -1650,6 +1778,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             zone.model_attr.heat_load = zone_heat_load
             zone.model_attr.cool_load = -zone_heat_load
             self.sum_heat_load += zone_heat_load
+        self._rotation_at_last_calc = self.rotation
 
     def calc_room_heat_loads(self):
         """Simplified, room-wise static heat load for each heated room.

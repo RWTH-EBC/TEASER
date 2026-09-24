@@ -185,6 +185,9 @@ def export_besmod(
     window_simple_template = Template(
         filename=os.path.join(template_path, "BESMod/window_simple_record"),
         lookup=lookup)
+    surface_orientation_template = Template(
+        filename=os.path.join(template_path, "BESMod/surface_orientation_record"),
+        lookup=lookup)
     wall_types = ['OW', 'roof', 'roof_attic', 'IW_vert_half', 'IW2_vert_half',
                   'IW_hori_upHalf', 'IW_hori_loHalf', 'ground_floor_loHalf',
                   'ground_floor_upHalf', 'IW_hori_att_upHalf', 'IW_hori_att_loHalf']
@@ -381,7 +384,37 @@ def export_besmod(
                 path=wall_path,
                 package_list=[],
                 extra=[bldg.name + "_" + w for w in ['windowSimple', 'wallTypes'] + wall_types])
-            extra_data_base_package = ["Walls"]
+
+            # The HOM's Modelica geometry is fixed - its rooms always face
+            # the North/East/South/West radiation ports of
+            # AixLibHighOrderOFD - so the building's orientation (and any
+            # rotate_building applied to it) reaches the HOM solely through
+            # this record, which redirects those ports. It also carries the
+            # archetype's own roof_tilt, which follows alfa_grad and is
+            # therefore not necessarily the 45 deg of AixLib's own
+            # SurfaceOrientationData_N_E_S_W_RoofN_Roof_S.
+            if bldg.rotation_pending_recalculation:
+                warnings.warn(
+                    f"{bldg.name} was rotated after its parameters were last "
+                    "calculated, so the exported ROM zone record still holds "
+                    "the orientations from before the rotation while the HOM's "
+                    "SurfaceOrientation record holds the rotated ones. Call "
+                    "calc_all_buildings() after rotate_building() to export "
+                    "the two consistently.")
+            surfaces = bldg.surface_orientations
+            with open(os.path.join(
+                    zone_path,
+                    bldg.name + '_SurfaceOrientation.mo'), 'w') as out_file:
+                out_file.write(surface_orientation_template.render_unicode(
+                    bldg=bldg,
+                    rotation=bldg.rotation,
+                    names=[name for name, _, _ in surfaces],
+                    azimut=[_to_aixlib_azimuth(orientation)
+                            for _, orientation, _ in surfaces],
+                    tilt=[tilt for _, _, tilt in surfaces]))
+                out_file.close()
+            extra_data_base_package = ["Walls",
+                                       bldg.name + "_SurfaceOrientation"]
         else:
             extra_data_base_package = None
 
@@ -397,6 +430,31 @@ def export_besmod(
 
     print("Exports can be found here:")
     print(path)
+
+
+def _to_aixlib_azimuth(orientation):
+    """Convert a TEASER orientation into an AixLib surface azimuth
+
+    Parameters
+    ----------
+    orientation : float
+        orientation in TEASER's convention, i.e. degrees clockwise from
+        North
+
+    Returns
+    -------
+    float
+        the same direction as the azimuth AixLib's SurfaceOrientation
+        records are written in - 0 is South, East is negative, West is
+        positive - normalized to (-180, 180]
+
+    This is the degree-valued counterpart of the azmiut_conv Mako def the
+    ROM templates use (conversion/azmiut_conv), which returns radians:
+    SurfaceOrientationBaseDataDefinition declares both Azimut and Tilt in
+    Modelica.Units.NonSI.Angle_deg.
+    """
+    azimuth = (orientation - 180.0) % 360.0
+    return azimuth - 360.0 if azimuth > 180.0 else azimuth
 
 
 def convert_input(building_zones_input: Union[float, Dict[Union[int, str], Union[float, Dict[str, float]]]],
