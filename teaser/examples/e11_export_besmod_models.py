@@ -25,7 +25,10 @@ def example_export_besmod():
 
     prj = e1.example_generate_archetype()
 
-    prj.buildings[-2].integrate_unheated_rooms = {"Attic": "din12831_f1"}
+    hom_attic_din = [
+        bldg for bldg in prj.buildings
+        if bldg.name == "ResidentialBuildingHighOrderAtticDIN"][0]
+    hom_attic_din.integrate_unheated_rooms = {"Attic": "din12831_f1"}
 
     # Configure project settings to ensure compatibility with BESMod. The BESMod
     # library uses the AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone model
@@ -136,7 +139,10 @@ def example_export_besmod():
     # They can be changed independently - to the rooms' heat loads, to
     # equal weights, or to a dict/callable of custom per-room weights (the
     # weights are normalized, so only their ratio matters):
-    prj.buildings[-1].fac_room_t_set_weighting = "heat_load"
+    hom_aixlib = [
+        bldg for bldg in prj.buildings
+        if bldg.name == "ResidentialBuildingHighOrderAixLib"][0]
+    hom_aixlib.fac_room_t_set_weighting = "heat_load"
 
     # Export all buildings to BESMod and include them in predefined example systems.
     path = prj.export_besmod(
