@@ -71,6 +71,19 @@ class Test_examples(object):
 
         prj = e11.example_export_besmod()
 
+    def test_e14_example_compare_hom_and_rom(self):
+        """Tests the executability of example 14"""
+        from teaser.examples.e14_compare_hom_and_rom import (
+            example_compare_hom_and_rom)
+        try:
+            comparison = example_compare_hom_and_rom(stop_time=86400)
+        except FileNotFoundError as err:
+            # no Dymola (as in CI), or a BESMod without the single-zone model
+            pytest.skip(f"Cannot simulate the comparison here: {err}")
+        # the ROM merges the HOM's ten rooms into one zone, so it can not
+        # reproduce it exactly - but it has to stay in the same ballpark
+        assert abs(comparison["energy_deviation"]) < 0.5
+
     def test_e13_example_simulation_ebcpy(self):
         """Tests the executability of example 11"""
         from teaser.examples.e13_automated_simulation_ebcpy import perform_simulations
