@@ -54,6 +54,14 @@ def _nearest_bucket(value, options):
 # gives the matching elements - test_hom_surface_orientations keeps the two
 # in sync. "roof" tilt is not AixLib's fixed 45 deg but the archetype's own
 # roof_tilt, which follows alfa_grad.
+# The five groups of interior surfaces the single-zone ROM distributes the
+# solar radiation entering through the windows over, in the order BESMod's
+# TEASERBuildingSingleZone.FourElements lists them in AArraySol:
+# {ATotExt, ATotWin, AInt, AFloor, ARoof}. splitFactorSolRad has one row per
+# group - see calc_split_factor_sol_rad.
+_ROM_SOLAR_SURFACE_GROUPS = ("OuterWall", "Window", "InnerWall",
+                             "GroundFloor", "Roof")
+
 _HOM_RADIATION_SURFACES = (
     ("N", 0.0, "wall"),
     ("O", 90.0, "wall"),
@@ -1355,6 +1363,258 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             for name, orientation, kind in _HOM_RADIATION_SURFACES
         ]
 
+    def _room_of_element(self, element):
+        """The heated room an element of the zone belongs to, or None
+
+        Every element generate_archetype creates is named
+        "{room_name}_..." (the equivalent elements integrating an unheated
+        room into the zone are "{room_name}_{unheated_room}_...", so they
+        belong to the heated room they connect to as well).
+        """
+        for room in self.room_name_nr:
+            if element.name.startswith(room + "_"):
+                return room
+        return None
+
+    def _unheated_room_of_element(self, element):
+        """The unheated room an equivalent element of the zone represents
+
+        Returns None for an element that is a heated room's own envelope.
+        """
+        room = self._room_of_element(element)
+        if room is None:
+            return None
+        rest = element.name[len(room) + 1:]
+        for unheated_room in self.integrate_unheated_rooms:
+            if rest.startswith(unheated_room + "_"):
+                return unheated_room
+        return None
+
+    def _indoor_area(self, element):
+        """The area of an element's surface facing the heated zone [m2]
+
+        Equal to element.area for a heated room's own envelope, but not for
+        the equivalent elements that integrate an unheated room: with the
+        'const_volumes' method those carry the unheated room's *outer*
+        area, while the surface the zone actually sees is the element
+        between the two rooms (e.g. the ceiling below the Attic). Their
+        ratio is the same for every piece, since
+        _integrate_unheated_rooms_const_volumes distributes both areas with
+        the same weights. The 'din12831_f1' method instead builds its
+        elements on that in-between element itself, so there is nothing to
+        correct.
+        """
+        unheated_room = self._unheated_room_of_element(element)
+        if unheated_room is None:
+            return element.area
+        if self.integrate_unheated_rooms[unheated_room] != "const_volumes":
+            return element.area
+        geo = self.detailed_geo[unheated_room].values()
+        outer_area = sum(info["area"] for info in geo
+                         if info["type"] in ("OuterWall", "Roof", "GroundFloor"))
+        inner_area = sum(info["area"] for info in geo
+                         if info["type"] in ("InnerWall", "Ceiling", "Floor"))
+        return element.area * inner_area / outer_area
+
+    def _areas_by_room(self, elements, indoor=False):
+        """{room_name: total area [m2]} of elements, grouped by heated room"""
+        areas = {room: 0.0 for room in self.room_name_nr}
+        for element in elements:
+            room = self._room_of_element(element)
+            if room is None:
+                continue
+            areas[room] += self._indoor_area(element) if indoor else element.area
+        return areas
+
+    def _floor_share(self, areas, floor):
+        """Share of areas ({room: area}) that sits on one floor ("gf"/"upp")"""
+        total = sum(areas.values())
+        if total == 0:
+            return 0.0
+        return sum(area for room, area in areas.items()
+                   if self.room_floor[room] == floor) / total
+
+    def calc_rom_inner_heat_transfer_parameters(self):
+        """Parameterizes the single-zone ROM's interior heat transfer from
+        the HOM's room-wise geometry.
+
+        BESMod's single-zone building model
+        (Systems.Demand.Building.TEASERThermalSingleZone) refines AixLib's
+        reduced order model with parameters this archetype can fill from
+        the detailed room geometry it already has, instead of leaving them
+        at the whole-zone defaults:
+
+        - the shares of the exterior wall, interior wall and window areas
+          that sit on the top and on the bottom floor, which size the long
+          wave radiation exchange of the roof and of the ground floor plate
+          with the other interior surfaces (each only sees its own floor),
+        - RoofAreaAtticFactor, the part of the roof element group whose
+          surface actually faces the heated zone - with an unheated Attic
+          integrated, that group also carries the Attic's own envelope,
+        - splitFactorSolRad, which distributes the solar radiation entering
+          through the windows of each orientation over the five interior
+          surface groups. In the HOM that radiation only ever reaches the
+          surfaces of the room it enters, so deriving it room-wise is
+          exactly what the single merged zone cannot do on its own.
+
+        Also fills nRooms, roomVolumes and FacATransparentPerRoom, which
+        carry the room resolution itself into the record.
+
+        Called at the end of calc_building_parameter, since the per
+        orientation parameters have to follow the very orientation order
+        the zone's model_attr ended up with.
+        """
+        if len(self.thermal_zones) != 1:
+            raise AttributeError(
+                "The single-zone ROM parameters are only defined for the "
+                "archetype's single heated zone.")
+        zone = self.thermal_zones[0]
+        rooms = sorted(self.room_name_nr, key=self.room_name_nr.get)
+
+        zone.number_of_rooms = len(rooms)
+        zone.room_volumes = [self.room_volumes[room] for room in rooms]
+
+        outer_wall_areas = self._areas_by_room(zone.outer_walls)
+        roof_areas = self._areas_by_room(zone.rooftops, indoor=True)
+        inner_areas = self._areas_by_room(
+            zone.inner_walls + zone.floors + zone.ceilings)
+        ground_floor_areas = self._areas_by_room(zone.ground_floors)
+        window_areas = self._areas_by_room(zone.windows)
+
+        zone.ratio_ow_area_top_floor = self._floor_share(outer_wall_areas, "upp")
+        zone.ratio_ow_area_bottom_floor = self._floor_share(outer_wall_areas, "gf")
+        zone.ratio_iw_area_top_floor = self._floor_share(inner_areas, "upp")
+        zone.ratio_iw_area_bottom_floor = self._floor_share(inner_areas, "gf")
+
+        # AixLib's WindowSimple, which the HOM export uses, exchanges no
+        # long wave radiation with the other interior surfaces at all, so
+        # the ROM must not either - every one of its window couplings is
+        # switched off by a ratio of zero.
+        zone.ratio_win_area_top_floor = 0.0
+        zone.ratio_win_area_bottom_floor = 0.0
+        zone.ratio_win_area_ow = 0.0
+        zone.ratio_win_area_iw = 0.0
+
+        total_roof_area = sum(element.area for element in zone.rooftops)
+        zone.roof_area_attic_factor = (
+            sum(roof_areas.values()) / total_roof_area
+            if total_roof_area else 1.0)
+
+        # The solar radiation entering through a window reaches the room's
+        # floor and its walls, but not the ceiling above it - so the
+        # ceilings are part of AInt above, and of the interior area the
+        # long wave exchange is sized on, but not of the area the radiation
+        # is split over. The upper rooms' floors stay in: they are the
+        # ground floor rooms' ceilings seen from above, and it is the upper
+        # side of that construction the sun reaches.
+        solar_inner_areas = self._areas_by_room(
+            zone.inner_walls + zone.floors)
+        self.calc_split_factor_sol_rad(
+            zone, rooms, outer_wall_areas, roof_areas, solar_inner_areas,
+            ground_floor_areas, window_areas)
+
+    def calc_split_factor_sol_rad(self, zone, rooms, outer_wall_areas,
+                                  roof_areas, inner_areas,
+                                  ground_floor_areas, window_areas):
+        """Derives splitFactorSolRad (and FacATransparentPerRoom) room-wise
+
+        The radiation entering through the windows of one orientation is
+        distributed over the five interior surface groups
+        (_ROM_SOLAR_SURFACE_GROUPS) in the ratio of their areas - but in
+        the HOM it only ever reaches the room it enters, so doing that per
+        room and weighting the rooms by their share of the orientation's
+        transparent area gives the merged zone a distribution it could not
+        derive from its own aggregated areas.
+
+        Within a room, the surfaces the radiation cannot reach are left
+        out: the windows it came through and the wall or roof they sit in.
+        The room's ceiling is not among the areas passed in at all, for the
+        same reason (see calc_rom_inner_heat_transfer_parameters). Every
+        column therefore still sums to 1.
+
+        An orientation without any window keeps the whole-zone area split,
+        there being no radiation to distribute room-wise.
+        """
+        groups = list(zip(zone.model_attr.orientation_facade,
+                          zone.model_attr.tilt_facade))
+        window_by_group = {room: {group: 0.0 for group in groups}
+                           for room in rooms}
+        host_wall_by_group = {room: {group: 0.0 for group in groups}
+                              for room in rooms}
+        host_roof_by_group = {room: {group: 0.0 for group in groups}
+                              for room in rooms}
+        hosts = {element.name: element
+                 for element in zone.outer_walls + zone.rooftops}
+        for window in zone.windows:
+            room = self._room_of_element(window)
+            group = (window.orientation, window.tilt)
+            if room is None or group not in window_by_group[room]:
+                continue
+            window_by_group[room][group] += window.area
+            # the window's own wall or roof, which it was cut out of - see
+            # generate_archetype, where a window is named "{element}_win"
+            host = hosts.get(window.name[:-len("_win")])
+            if isinstance(host, Rooftop):
+                host_roof_by_group[room][group] += self._indoor_area(host)
+            elif host is not None:
+                host_wall_by_group[room][group] += host.area
+
+        room_totals = {
+            room: (outer_wall_areas[room] + roof_areas[room]
+                   + inner_areas[room] + ground_floor_areas[room]
+                   + window_areas[room])
+            for room in rooms
+        }
+        zone_areas = {
+            "OuterWall": sum(outer_wall_areas.values()),
+            "Window": sum(window_areas.values()),
+            "InnerWall": sum(inner_areas.values()),
+            "GroundFloor": sum(ground_floor_areas.values()),
+            "Roof": sum(roof_areas.values()),
+        }
+
+        transparent_factors = []
+        split_factors = [[] for _ in _ROM_SOLAR_SURFACE_GROUPS]
+        for group in groups:
+            transparent = {room: window_by_group[room][group] for room in rooms}
+            total_transparent = sum(transparent.values())
+            if total_transparent == 0:
+                transparent_factors.append([0.0 for _ in rooms])
+                total_area = sum(zone_areas.values())
+                for index, name in enumerate(_ROM_SOLAR_SURFACE_GROUPS):
+                    split_factors[index].append(
+                        zone_areas[name] / total_area if total_area else 0.0)
+                continue
+            transparent_factors.append(
+                [transparent[room] / total_transparent for room in rooms])
+            for index, name in enumerate(_ROM_SOLAR_SURFACE_GROUPS):
+                factor = 0.0
+                for room in rooms:
+                    if not transparent[room]:
+                        continue
+                    reachable = (room_totals[room]
+                                 - window_by_group[room][group]
+                                 - host_wall_by_group[room][group]
+                                 - host_roof_by_group[room][group])
+                    if reachable <= 0:
+                        continue
+                    if name == "OuterWall":
+                        area = outer_wall_areas[room] - host_wall_by_group[room][group]
+                    elif name == "Window":
+                        area = window_areas[room] - window_by_group[room][group]
+                    elif name == "Roof":
+                        area = roof_areas[room] - host_roof_by_group[room][group]
+                    elif name == "InnerWall":
+                        area = inner_areas[room]
+                    else:
+                        area = ground_floor_areas[room]
+                    factor += (area / reachable
+                               * transparent[room] / total_transparent)
+                split_factors[index].append(factor)
+
+        zone.win_area_room_factors = transparent_factors
+        zone.split_factor_sol_rad = split_factors
+
     def _aggregate_t_set_nominal(self, room_names):
         """Reduce room_t_set_nominal to a single nominal temperature [K]
         for a zone containing room_names, using self.t_set_nominal_aggregation
@@ -1779,6 +2039,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             zone.model_attr.cool_load = -zone_heat_load
             self.sum_heat_load += zone_heat_load
         self._rotation_at_last_calc = self.rotation
+        self.calc_rom_inner_heat_transfer_parameters()
 
     def calc_room_heat_loads(self):
         """Simplified, room-wise static heat load for each heated room.

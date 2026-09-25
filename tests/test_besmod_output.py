@@ -32,6 +32,13 @@ def _read_surface_orientation_record(path):
     return record
 
 
+def _read_record_matrix(content, name):
+    """Return a {{...},{...}} Modelica matrix of a record as [[float]]"""
+    line = re.search(name + r"\s*=\s*(.+)\n", content).group(1)
+    return [[float(value) for value in row.split(",")]
+            for row in re.findall(r"\{([^{}]*)\}", line)]
+
+
 class Test_besmod_output(unittest.TestCase):
 
     def test_export_besmod(self):
@@ -594,3 +601,173 @@ class Test_besmod_output(unittest.TestCase):
             path, bldg.name, bldg.name + "_DataBase",
             bldg.name + "_SurfaceOrientation.mo"))
         self.assertEqual(record["Azimut"], [180.0, -90.0, 0.0, 90.0, 180.0, 0.0])
+
+    def test_hom_rom_inner_heat_transfer_parameters(self):
+        """test the room-derived parameters of the single-zone ROM record"""
+
+        prj = Project()
+        prj.name = "BESModHOMROMParameters"
+
+        prj.add_residential(
+            construction_data='aixlib_S',
+            geometry_data='aixlib_high_order_single_family_house',
+            name="ResidentialBuildingHighOrderAixLib",
+            year_of_construction=1990,
+            net_leased_area=170.0,
+            number_of_floors=2,
+            height_of_floors=2.6)
+
+        bldg = prj.buildings[0]
+        prj.used_library_calc = "AixLib"
+        prj.number_of_elements_calc = 4
+        prj.calc_all_buildings()
+        zone = bldg.thermal_zones[0]
+        rooms = sorted(bldg.room_name_nr, key=bldg.room_name_nr.get)
+
+        self.assertEqual(zone.number_of_rooms, len(rooms))
+        self.assertEqual(zone.room_volumes,
+                         [bldg.room_volumes[room] for room in rooms])
+
+        # every oriented element of the zone sits on one of the two floors,
+        # so the two shares split the whole area between them
+        self.assertAlmostEqual(zone.ratio_ow_area_top_floor
+                               + zone.ratio_ow_area_bottom_floor, 1.0)
+        self.assertAlmostEqual(zone.ratio_iw_area_top_floor
+                               + zone.ratio_iw_area_bottom_floor, 1.0)
+
+        # AixLib's WindowSimple exchanges no long wave radiation indoors,
+        # so every window coupling of the ROM has to be switched off
+        for ratio in (zone.ratio_win_area_top_floor,
+                      zone.ratio_win_area_bottom_floor,
+                      zone.ratio_win_area_ow, zone.ratio_win_area_iw):
+            self.assertEqual(ratio, 0.0)
+
+        orientations = zone.model_attr.n_outer
+        self.assertEqual(len(zone.split_factor_sol_rad), 5)
+        for row in zone.split_factor_sol_rad:
+            self.assertEqual(len(row), orientations)
+            for factor in row:
+                self.assertGreaterEqual(factor, 0.0)
+        # the radiation entering through one orientation is distributed
+        # completely over the five interior surface groups
+        for index in range(orientations):
+            self.assertAlmostEqual(
+                sum(row[index] for row in zone.split_factor_sol_rad), 1.0)
+
+        self.assertEqual(len(zone.win_area_room_factors), orientations)
+        for row in zone.win_area_room_factors:
+            self.assertEqual(len(row), len(rooms))
+            self.assertAlmostEqual(sum(row), 1.0)
+
+        # the elements of the 'din12831_f1' attic are built on the ceiling
+        # between the rooms and the Attic, which is the surface the zone
+        # sees, so there is nothing left to correct
+        bldg.integrate_unheated_rooms = {"Attic": "din12831_f1"}
+        prj.calc_all_buildings()
+        zone = bldg.thermal_zones[0]
+        self.assertAlmostEqual(zone.roof_area_attic_factor, 1.0)
+
+        # 'const_volumes' instead spreads the Attic's own outer area over
+        # the zone, so only the part of it standing for the ceiling faces
+        # the zone
+        bldg.integrate_unheated_rooms = {"Attic": "const_volumes"}
+        prj.calc_all_buildings()
+        zone = bldg.thermal_zones[0]
+        attic = bldg.detailed_geo["Attic"].values()
+        attic_outer = sum(info["area"] for info in attic
+                          if info["type"] in ("OuterWall", "Roof",
+                                              "GroundFloor"))
+        attic_inner = sum(info["area"] for info in attic
+                          if info["type"] in ("InnerWall", "Ceiling", "Floor"))
+        room_roofs = sum(
+            element.area for element in zone.rooftops
+            if bldg._unheated_room_of_element(element) is None)
+        attic_roofs = sum(
+            element.area for element in zone.rooftops
+            if bldg._unheated_room_of_element(element) is not None)
+        expected = ((room_roofs + attic_roofs * attic_inner / attic_outer)
+                    / (room_roofs + attic_roofs))
+        self.assertAlmostEqual(zone.roof_area_attic_factor, expected)
+        self.assertLess(zone.roof_area_attic_factor, 1.0)
+
+        path = prj.export_besmod(examples=["TEASERHeatLoadCalculation"],
+                                 THydSup_nominal=55 + 273.15)
+
+        with open(os.path.join(path, bldg.name, bldg.name + ".mo")) as model:
+            self.assertIn(
+                "BESMod.Systems.Demand.Building.TEASERThermalSingleZone",
+                model.read())
+        record_path = os.path.join(path, bldg.name, bldg.name + "_DataBase",
+                                   bldg.name + "_" + zone.name + ".mo")
+        with open(record_path) as record_file:
+            record = record_file.read()
+        self.assertIn(
+            "BESMod.Systems.Demand.Building.RecordsCollection."
+            "BuildingSingleZoneBaseRecord", record)
+        # nFloorLevels and nRooms are Modelica Integers, and a numpy scalar
+        # would render as "np.float64(0.5)" instead of a plain number
+        self.assertRegex(record, r"nFloorLevels = 2,")
+        self.assertRegex(record, r"nRooms = " + str(len(rooms)) + ",")
+        self.assertNotIn("np.float", record)
+        split_factors = _read_record_matrix(record, "splitFactorSolRad")
+        self.assertEqual(len(split_factors), 5)
+        for row, expected_row in zip(split_factors, zone.split_factor_sol_rad):
+            for factor, expected_factor in zip(row, expected_row):
+                self.assertAlmostEqual(factor, expected_factor)
+        transparent = _read_record_matrix(record, "FacATransparentPerRoom")
+        self.assertEqual(len(transparent), zone.model_attr.n_outer)
+        self.assertEqual(len(transparent[0]), len(rooms))
+
+        # use_old falls back to the model and the record the export used
+        # before, which have none of these parameters
+        bldg.use_old = True
+        path = prj.export_besmod(examples=["TEASERHeatLoadCalculation"],
+                                 THydSup_nominal=55 + 273.15)
+        with open(os.path.join(path, bldg.name, bldg.name + ".mo")) as model:
+            self.assertIn("BESMod.Systems.Demand.Building.TEASERThermalZone(",
+                          model.read())
+        with open(record_path) as record_file:
+            record = record_file.read()
+        self.assertIn("AixLib.DataBase.ThermalZones.ZoneBaseRecord", record)
+        self.assertNotIn("splitFactorSolRad", record)
+
+    def test_single_zone_record_without_room_resolution(self):
+        """test the single-zone ROM record of a plain ROM archetype"""
+
+        prj = Project()
+        prj.name = "BESModSingleZoneDefaults"
+
+        prj.add_residential(
+            construction_data='iwu_heavy',
+            geometry_data='iwu_single_family_dwelling',
+            name="ResidentialBuilding",
+            year_of_construction=1988,
+            number_of_floors=2,
+            height_of_floors=3.2,
+            net_leased_area=200.0)
+
+        prj.used_library_calc = "AixLib"
+        prj.number_of_elements_calc = 4
+        prj.calc_all_buildings()
+        bldg = prj.buildings[0]
+        zone = bldg.thermal_zones[0]
+
+        # a zone without a room resolution is its own single room
+        self.assertEqual(zone.number_of_rooms, 1)
+        self.assertEqual(zone.room_volumes, [zone.volume])
+        self.assertEqual(zone.win_area_room_factors,
+                         [[1.0]] * zone.model_attr.n_outer)
+        self.assertIsNone(zone.split_factor_sol_rad)
+
+        path = prj.export_besmod(examples=["TEASERHeatLoadCalculation"],
+                                 THydSup_nominal=55 + 273.15)
+        with open(os.path.join(path, bldg.name, bldg.name + "_DataBase",
+                               bldg.name + "_" + zone.name + ".mo")) as record_file:
+            record = record_file.read()
+        self.assertIn("nRooms = 1,", record)
+        transparent = _read_record_matrix(record, "FacATransparentPerRoom")
+        # FacATransparentPerRoom is declared [nOrientations, nRooms]
+        self.assertEqual(len(transparent), zone.model_attr.n_outer)
+        self.assertEqual(len(transparent[0]), 1)
+        # left out, so the record keeps AixLib's own whole-zone area split
+        self.assertNotIn("splitFactorSolRad", record)

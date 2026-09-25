@@ -29,7 +29,8 @@
 <%def name="get_list_2(list, no_entries=1)", filter="trim">
   <%
   if list:
-    return str(list).replace('[', '{').replace(']', '}')
+    rows = [[float(i) if not isinstance(i, (str, int)) else i for i in row] for row in list]
+    return str(rows).replace('[', '{').replace(']', '}')
   else:
     return ("{{" + "0,"*no_entries)[:-1] + "}}"
   %>

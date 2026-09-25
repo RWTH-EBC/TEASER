@@ -207,6 +207,14 @@ class Building(object):
         self.latitude = 50.79
 
         self._thermal_zones = []
+        # Exports the building against BESMod's older
+        # Systems.Demand.Building.TEASERThermalZone even when it has a
+        # single thermal zone, instead of TEASERThermalSingleZone and its
+        # room-resolved interior heat transfer parameters (see
+        # BuildingSingleZoneBaseRecord). A building with more than one
+        # thermal zone always uses the older model, there being no room
+        # resolution to hand it.
+        self.use_old = False
         self._combined_thermal_zones = []
         self._outer_area = {}
         self._window_area = {}
