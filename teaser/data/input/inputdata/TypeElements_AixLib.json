@@ -86,24 +86,10 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.018,
+                "thickness": 0.18,
                 "material": {
-                    "name": "softwood",
-                    "material_id": "614ef1ac-3a43-11e7-89e1-2cd444b2e704"
-                }
-            },
-            "1": {
-                "thickness": 0.0005,
-                "material": {
-                    "name": "underlayment_membrane",
-                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
-                }
-            },
-            "2": {
-                "thickness": 0.00731,
-                "material": {
-                    "name": "roof_tiles_including_battens",
-                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
+                    "name": "aixlib_wood_insulation_composite_lambda084_160",
+                    "material_id": "4408064b-9230-11f1-a514-40c73c88cbfa"
                 }
             }
         }
@@ -290,8 +276,8 @@
             "2": {
                 "thickness": 0.08,
                 "material": {
-                    "name": "aixlib_wood_insulation_composite_lambda090_156",
-                    "material_id": "44081c77-9230-11f1-8958-40c73c88cbfa"
+                    "name": "aixlib_wood_insulation_composite_lambda090_155",
+                    "material_id": "613a01e8-bb48-11f1-93a0-40c73c88cbfa"
                 }
             }
         }
@@ -472,24 +458,10 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.018,
+                "thickness": 0.18,
                 "material": {
-                    "name": "softwood",
-                    "material_id": "614ef1ac-3a43-11e7-89e1-2cd444b2e704"
-                }
-            },
-            "1": {
-                "thickness": 0.0005,
-                "material": {
-                    "name": "underlayment_membrane",
-                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
-                }
-            },
-            "2": {
-                "thickness": 0.00731,
-                "material": {
-                    "name": "roof_tiles_including_battens",
-                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
+                    "name": "aixlib_wood_insulation_composite_lambda084_160",
+                    "material_id": "4408064b-9230-11f1-a514-40c73c88cbfa"
                 }
             }
         }
@@ -676,8 +648,8 @@
             "2": {
                 "thickness": 0.08,
                 "material": {
-                    "name": "aixlib_wood_insulation_composite_lambda090_156",
-                    "material_id": "44081c77-9230-11f1-8958-40c73c88cbfa"
+                    "name": "aixlib_wood_insulation_composite_lambda090_155",
+                    "material_id": "613a01e8-bb48-11f1-93a0-40c73c88cbfa"
                 }
             }
         }
@@ -858,17 +830,10 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.0005,
+                "thickness": 0.18,
                 "material": {
-                    "name": "underlayment_membrane",
-                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
-                }
-            },
-            "1": {
-                "thickness": 0.00731,
-                "material": {
-                    "name": "roof_tiles_including_battens",
-                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
+                    "name": "aixlib_wood_insulation_composite_lambda084_160",
+                    "material_id": "4408064b-9230-11f1-a514-40c73c88cbfa"
                 }
             }
         }
@@ -1083,8 +1048,8 @@
             "2": {
                 "thickness": 0.08,
                 "material": {
-                    "name": "aixlib_wood_insulation_composite_lambda090_156",
-                    "material_id": "44081c77-9230-11f1-8958-40c73c88cbfa"
+                    "name": "aixlib_wood_insulation_composite_lambda090_155",
+                    "material_id": "613a01e8-bb48-11f1-93a0-40c73c88cbfa"
                 }
             }
         }
@@ -1293,24 +1258,10 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.018,
+                "thickness": 0.18,
                 "material": {
-                    "name": "softwood",
-                    "material_id": "614ef1ac-3a43-11e7-89e1-2cd444b2e704"
-                }
-            },
-            "1": {
-                "thickness": 0.0005,
-                "material": {
-                    "name": "underlayment_membrane",
-                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
-                }
-            },
-            "2": {
-                "thickness": 0.00731,
-                "material": {
-                    "name": "roof_tiles_including_battens",
-                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
+                    "name": "aixlib_wood_insulation_composite_lambda058_194",
+                    "material_id": "4408f7ce-9230-11f1-bff4-40c73c88cbfa"
                 }
             }
         }
@@ -1679,24 +1630,10 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.018,
+                "thickness": 0.18,
                 "material": {
-                    "name": "softwood",
-                    "material_id": "614ef1ac-3a43-11e7-89e1-2cd444b2e704"
-                }
-            },
-            "1": {
-                "thickness": 0.0005,
-                "material": {
-                    "name": "underlayment_membrane",
-                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
-                }
-            },
-            "2": {
-                "thickness": 0.00731,
-                "material": {
-                    "name": "roof_tiles_including_battens",
-                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
+                    "name": "aixlib_wood_insulation_composite_lambda058_194",
+                    "material_id": "4408f7ce-9230-11f1-bff4-40c73c88cbfa"
                 }
             }
         }
@@ -2065,17 +2002,10 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.0005,
+                "thickness": 0.18,
                 "material": {
-                    "name": "underlayment_membrane",
-                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
-                }
-            },
-            "1": {
-                "thickness": 0.00731,
-                "material": {
-                    "name": "roof_tiles_including_battens",
-                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
+                    "name": "aixlib_wood_insulation_composite_lambda058_194",
+                    "material_id": "4408f7ce-9230-11f1-bff4-40c73c88cbfa"
                 }
             }
         }
@@ -2500,24 +2430,10 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.018,
+                "thickness": 0.18,
                 "material": {
-                    "name": "softwood",
-                    "material_id": "614ef1ac-3a43-11e7-89e1-2cd444b2e704"
-                }
-            },
-            "1": {
-                "thickness": 0.0005,
-                "material": {
-                    "name": "underlayment_membrane",
-                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
-                }
-            },
-            "2": {
-                "thickness": 0.00731,
-                "material": {
-                    "name": "roof_tiles_including_battens",
-                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
+                    "name": "aixlib_wood_insulation_composite_lambda054_181",
+                    "material_id": "4409b47f-9230-11f1-833b-40c73c88cbfa"
                 }
             }
         }
@@ -2886,24 +2802,10 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.018,
+                "thickness": 0.18,
                 "material": {
-                    "name": "softwood",
-                    "material_id": "614ef1ac-3a43-11e7-89e1-2cd444b2e704"
-                }
-            },
-            "1": {
-                "thickness": 0.0005,
-                "material": {
-                    "name": "underlayment_membrane",
-                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
-                }
-            },
-            "2": {
-                "thickness": 0.00731,
-                "material": {
-                    "name": "roof_tiles_including_battens",
-                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
+                    "name": "aixlib_wood_insulation_composite_lambda054_181",
+                    "material_id": "4409b47f-9230-11f1-833b-40c73c88cbfa"
                 }
             }
         }
@@ -3272,17 +3174,10 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.0005,
+                "thickness": 0.18,
                 "material": {
-                    "name": "underlayment_membrane",
-                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
-                }
-            },
-            "1": {
-                "thickness": 0.00731,
-                "material": {
-                    "name": "roof_tiles_including_battens",
-                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
+                    "name": "aixlib_wood_insulation_composite_lambda054_181",
+                    "material_id": "4409b47f-9230-11f1-833b-40c73c88cbfa"
                 }
             }
         }
@@ -3707,24 +3602,10 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.018,
+                "thickness": 0.22,
                 "material": {
-                    "name": "softwood",
-                    "material_id": "614ef1ac-3a43-11e7-89e1-2cd444b2e704"
-                }
-            },
-            "1": {
-                "thickness": 0.0005,
-                "material": {
-                    "name": "underlayment_membrane",
-                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
-                }
-            },
-            "2": {
-                "thickness": 0.00731,
-                "material": {
-                    "name": "roof_tiles_including_battens",
-                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
+                    "name": "aixlib_wood_insulation_composite_lambda045_194",
+                    "material_id": "440a5d78-9230-11f1-b44b-40c73c88cbfa"
                 }
             }
         }
@@ -4093,24 +3974,10 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.018,
+                "thickness": 0.22,
                 "material": {
-                    "name": "softwood",
-                    "material_id": "614ef1ac-3a43-11e7-89e1-2cd444b2e704"
-                }
-            },
-            "1": {
-                "thickness": 0.0005,
-                "material": {
-                    "name": "underlayment_membrane",
-                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
-                }
-            },
-            "2": {
-                "thickness": 0.00731,
-                "material": {
-                    "name": "roof_tiles_including_battens",
-                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
+                    "name": "aixlib_wood_insulation_composite_lambda045_194",
+                    "material_id": "440a5d78-9230-11f1-b44b-40c73c88cbfa"
                 }
             }
         }
@@ -4479,17 +4346,10 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.0005,
+                "thickness": 0.22,
                 "material": {
-                    "name": "underlayment_membrane",
-                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
-                }
-            },
-            "1": {
-                "thickness": 0.00731,
-                "material": {
-                    "name": "roof_tiles_including_battens",
-                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
+                    "name": "aixlib_wood_insulation_composite_lambda045_194",
+                    "material_id": "440a5d78-9230-11f1-b44b-40c73c88cbfa"
                 }
             }
         }
@@ -5111,6 +4971,690 @@
                 "material": {
                     "name": "glas_generic",
                     "material_id": "0abbb19a-83ff-11e6-bacd-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "CeilingHalf_[1984, 1994]_aixlib_S": {
+        "building_age_group": [
+            1984,
+            1994
+        ],
+        "construction_data": "aixlib_S",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "gypsum_plaster",
+                    "material_id": "4407c6be-9230-11f1-8e4e-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "reinforced_concrete",
+                    "material_id": "440812f0-9230-11f1-bae3-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "mineral_wool_120_lambda055",
+                    "material_id": "44080ed8-9230-11f1-83d9-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "FloorHalf_[1984, 1994]_aixlib_S": {
+        "building_age_group": [
+            1984,
+            1994
+        ],
+        "construction_data": "aixlib_S",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "cement_screed",
+                    "material_id": "c21ad9c1-8859-11ee-ae80-e8b1fc95108b"
+                }
+            },
+            "1": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "mineral_wool_120_lambda055",
+                    "material_id": "44080ed8-9230-11f1-83d9-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "CeilingHalf_[1984, 1994]_aixlib_M": {
+        "building_age_group": [
+            1984,
+            1994
+        ],
+        "construction_data": "aixlib_M",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "gypsum_plaster",
+                    "material_id": "4407c6be-9230-11f1-8e4e-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "reinforced_concrete",
+                    "material_id": "440812f0-9230-11f1-bae3-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "mineral_wool_120_lambda055",
+                    "material_id": "44080ed8-9230-11f1-83d9-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "FloorHalf_[1984, 1994]_aixlib_M": {
+        "building_age_group": [
+            1984,
+            1994
+        ],
+        "construction_data": "aixlib_M",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "cement_screed",
+                    "material_id": "c21ad9c1-8859-11ee-ae80-e8b1fc95108b"
+                }
+            },
+            "1": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "mineral_wool_120_lambda055",
+                    "material_id": "44080ed8-9230-11f1-83d9-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "CeilingHalf_[1984, 1994]_aixlib_L": {
+        "building_age_group": [
+            1984,
+            1994
+        ],
+        "construction_data": "aixlib_L",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.0275,
+                "material": {
+                    "name": "aixlib_gipskartonplatte_gipsputz_merged_1018",
+                    "material_id": "4408890a-9230-11f1-b434-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "aixlib_wood_insulation_composite_lambda730_93",
+                    "material_id": "44089848-9230-11f1-a34c-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "chipboard_510",
+                    "material_id": "4408940f-9230-11f1-8394-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "FloorHalf_[1984, 1994]_aixlib_L": {
+        "building_age_group": [
+            1984,
+            1994
+        ],
+        "construction_data": "aixlib_L",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "cement_screed",
+                    "material_id": "c21ad9c1-8859-11ee-ae80-e8b1fc95108b"
+                }
+            },
+            "1": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "mineral_wool_120_lambda055",
+                    "material_id": "44080ed8-9230-11f1-83d9-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "CeilingHalf_[1995, 2001]_aixlib_S": {
+        "building_age_group": [
+            1995,
+            2001
+        ],
+        "construction_data": "aixlib_S",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "gypsum_plaster",
+                    "material_id": "4407c6be-9230-11f1-8e4e-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "reinforced_concrete",
+                    "material_id": "440812f0-9230-11f1-bae3-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "mineral_wool_120_lambda045",
+                    "material_id": "4408fc3c-9230-11f1-96ef-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "FloorHalf_[1995, 2001]_aixlib_S": {
+        "building_age_group": [
+            1995,
+            2001
+        ],
+        "construction_data": "aixlib_S",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "cement_screed",
+                    "material_id": "c21ad9c1-8859-11ee-ae80-e8b1fc95108b"
+                }
+            },
+            "1": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "mineral_wool_120_lambda045",
+                    "material_id": "4408fc3c-9230-11f1-96ef-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "CeilingHalf_[1995, 2001]_aixlib_M": {
+        "building_age_group": [
+            1995,
+            2001
+        ],
+        "construction_data": "aixlib_M",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "gypsum_plaster",
+                    "material_id": "4407c6be-9230-11f1-8e4e-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "reinforced_concrete",
+                    "material_id": "440812f0-9230-11f1-bae3-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "mineral_wool_120_lambda045",
+                    "material_id": "4408fc3c-9230-11f1-96ef-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "FloorHalf_[1995, 2001]_aixlib_M": {
+        "building_age_group": [
+            1995,
+            2001
+        ],
+        "construction_data": "aixlib_M",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "cement_screed",
+                    "material_id": "c21ad9c1-8859-11ee-ae80-e8b1fc95108b"
+                }
+            },
+            "1": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "mineral_wool_120_lambda045",
+                    "material_id": "4408fc3c-9230-11f1-96ef-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "CeilingHalf_[1995, 2001]_aixlib_L": {
+        "building_age_group": [
+            1995,
+            2001
+        ],
+        "construction_data": "aixlib_L",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.0275,
+                "material": {
+                    "name": "aixlib_gipskartonplatte_gipsputz_merged_1018",
+                    "material_id": "4408890a-9230-11f1-b434-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "aixlib_wood_insulation_composite_lambda530_93",
+                    "material_id": "44097ebf-9230-11f1-9586-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "chipboard_360",
+                    "material_id": "440979dc-9230-11f1-af1c-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "FloorHalf_[1995, 2001]_aixlib_L": {
+        "building_age_group": [
+            1995,
+            2001
+        ],
+        "construction_data": "aixlib_L",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "cement_screed",
+                    "material_id": "c21ad9c1-8859-11ee-ae80-e8b1fc95108b"
+                }
+            },
+            "1": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "mineral_wool_120_lambda045",
+                    "material_id": "4408fc3c-9230-11f1-96ef-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "CeilingHalf_[2002, 2008]_aixlib_S": {
+        "building_age_group": [
+            2002,
+            2008
+        ],
+        "construction_data": "aixlib_S",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "gypsum_plaster",
+                    "material_id": "4407c6be-9230-11f1-8e4e-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "reinforced_concrete",
+                    "material_id": "440812f0-9230-11f1-bae3-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "mineral_wool_120_lambda045",
+                    "material_id": "4408fc3c-9230-11f1-96ef-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "FloorHalf_[2002, 2008]_aixlib_S": {
+        "building_age_group": [
+            2002,
+            2008
+        ],
+        "construction_data": "aixlib_S",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "cement_screed",
+                    "material_id": "c21ad9c1-8859-11ee-ae80-e8b1fc95108b"
+                }
+            },
+            "1": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "mineral_wool_120_lambda045",
+                    "material_id": "4408fc3c-9230-11f1-96ef-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "CeilingHalf_[2002, 2008]_aixlib_M": {
+        "building_age_group": [
+            2002,
+            2008
+        ],
+        "construction_data": "aixlib_M",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "gypsum_plaster",
+                    "material_id": "4407c6be-9230-11f1-8e4e-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "reinforced_concrete",
+                    "material_id": "440812f0-9230-11f1-bae3-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "mineral_wool_120_lambda045",
+                    "material_id": "4408fc3c-9230-11f1-96ef-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "FloorHalf_[2002, 2008]_aixlib_M": {
+        "building_age_group": [
+            2002,
+            2008
+        ],
+        "construction_data": "aixlib_M",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "cement_screed",
+                    "material_id": "c21ad9c1-8859-11ee-ae80-e8b1fc95108b"
+                }
+            },
+            "1": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "mineral_wool_120_lambda045",
+                    "material_id": "4408fc3c-9230-11f1-96ef-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "CeilingHalf_[2002, 2008]_aixlib_L": {
+        "building_age_group": [
+            2002,
+            2008
+        ],
+        "construction_data": "aixlib_L",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.0275,
+                "material": {
+                    "name": "aixlib_gipskartonplatte_gipsputz_merged_1018",
+                    "material_id": "4408890a-9230-11f1-b434-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "aixlib_wood_insulation_composite_lambda710_93",
+                    "material_id": "440a2a6b-9230-11f1-b542-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "chipboard_210",
+                    "material_id": "440a264d-9230-11f1-b74e-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "FloorHalf_[2002, 2008]_aixlib_L": {
+        "building_age_group": [
+            2002,
+            2008
+        ],
+        "construction_data": "aixlib_L",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "cement_screed",
+                    "material_id": "c21ad9c1-8859-11ee-ae80-e8b1fc95108b"
+                }
+            },
+            "1": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "mineral_wool_120_lambda045",
+                    "material_id": "4408fc3c-9230-11f1-96ef-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "CeilingHalf_[2009, 2013]_aixlib_S": {
+        "building_age_group": [
+            2009,
+            2013
+        ],
+        "construction_data": "aixlib_S",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "gypsum_plaster",
+                    "material_id": "4407c6be-9230-11f1-8e4e-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "reinforced_concrete",
+                    "material_id": "440812f0-9230-11f1-bae3-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "mineral_wool_120_lambda045",
+                    "material_id": "4408fc3c-9230-11f1-96ef-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "FloorHalf_[2009, 2013]_aixlib_S": {
+        "building_age_group": [
+            2009,
+            2013
+        ],
+        "construction_data": "aixlib_S",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "cement_screed",
+                    "material_id": "c21ad9c1-8859-11ee-ae80-e8b1fc95108b"
+                }
+            },
+            "1": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "mineral_wool_120_lambda045",
+                    "material_id": "4408fc3c-9230-11f1-96ef-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "CeilingHalf_[2009, 2013]_aixlib_M": {
+        "building_age_group": [
+            2009,
+            2013
+        ],
+        "construction_data": "aixlib_M",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "gypsum_plaster",
+                    "material_id": "4407c6be-9230-11f1-8e4e-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "reinforced_concrete",
+                    "material_id": "440812f0-9230-11f1-bae3-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "mineral_wool_120_lambda045",
+                    "material_id": "4408fc3c-9230-11f1-96ef-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "FloorHalf_[2009, 2013]_aixlib_M": {
+        "building_age_group": [
+            2009,
+            2013
+        ],
+        "construction_data": "aixlib_M",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "cement_screed",
+                    "material_id": "c21ad9c1-8859-11ee-ae80-e8b1fc95108b"
+                }
+            },
+            "1": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "mineral_wool_120_lambda045",
+                    "material_id": "4408fc3c-9230-11f1-96ef-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "CeilingHalf_[2009, 2013]_aixlib_L": {
+        "building_age_group": [
+            2009,
+            2013
+        ],
+        "construction_data": "aixlib_L",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.0275,
+                "material": {
+                    "name": "aixlib_gipskartonplatte_gipsputz_merged_1018",
+                    "material_id": "4408890a-9230-11f1-b434-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "aixlib_wood_insulation_composite_lambda710_93",
+                    "material_id": "440a2a6b-9230-11f1-b542-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "chipboard_210",
+                    "material_id": "440a264d-9230-11f1-b74e-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "FloorHalf_[2009, 2013]_aixlib_L": {
+        "building_age_group": [
+            2009,
+            2013
+        ],
+        "construction_data": "aixlib_L",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "cement_screed",
+                    "material_id": "c21ad9c1-8859-11ee-ae80-e8b1fc95108b"
+                }
+            },
+            "1": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "mineral_wool_120_lambda045",
+                    "material_id": "4408fc3c-9230-11f1-96ef-40c73c88cbfa"
                 }
             }
         }

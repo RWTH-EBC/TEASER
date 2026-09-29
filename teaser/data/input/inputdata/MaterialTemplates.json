@@ -7855,9 +7855,9 @@
     },
     "44081c77-9230-11f1-8958-40c73c88cbfa": {
         "name": "aixlib_wood_insulation_composite_lambda090_156",
-        "density": 155.5,
+        "density": 156.0,
         "thermal_conduc": 0.09,
-        "heat_capac": 1.3665,
+        "heat_capac": 1.366,
         "thickness_default": 0.1,
         "thickness_list": [],
         "solar_absorp": 0.5
@@ -8164,6 +8164,15 @@
         "density": 172.0,
         "thermal_conduc": 0.056,
         "heat_capac": 1.337,
+        "thickness_default": 0.1,
+        "thickness_list": [],
+        "solar_absorp": 0.5
+    },
+    "613a01e8-bb48-11f1-93a0-40c73c88cbfa": {
+        "name": "aixlib_wood_insulation_composite_lambda090_155",
+        "density": 155.0,
+        "thermal_conduc": 0.09,
+        "heat_capac": 1.367,
         "thickness_default": 0.1,
         "thickness_list": [],
         "solar_absorp": 0.5

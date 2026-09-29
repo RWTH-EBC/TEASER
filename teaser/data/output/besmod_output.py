@@ -11,6 +11,15 @@ from teaser.logic.buildingobjects.building import Building
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
 
+# Emissivity of every wall record in AixLib's own OFD collections. TEASER's
+# materials carry no emissivity of their own and would default to 0.9.
+AIXLIB_WALL_EPS = 0.95
+
+# AixLib's FLground_*_loHalf / _upHalf records cut the 0.25 m concrete slab of
+# the ground plate into 0.15 m on the screed side and 0.10 m on the side of
+# the outer insulation.
+GROUND_PLATE_INNER_SLAB_FRACTION = 0.6
+
 
 def export_besmod(
         buildings: Union[List[Building], Building],
@@ -737,22 +746,89 @@ def _find_wall_type_element(elements, element_construction_type=None):
     )
 
 
+def _merge_equal_layers(layers):
+    """Merge neighbouring (thickness, material) layers of the same material
+
+    AixLib's records hold e.g. the gypsum plaster and gypsum board of the
+    light inner walls as one 0.0275 m layer, which TEASER's elements keep
+    as two layers of the same material.
+    """
+    merged = []
+    for thickness, material in layers:
+        if merged and all(
+                getattr(merged[-1][1], attr) == getattr(material, attr)
+                for attr in ("density", "thermal_conduc", "heat_capac")):
+            merged[-1] = (merged[-1][0] + thickness, merged[-1][1])
+        else:
+            merged.append((thickness, material))
+    return merged
+
+
+def _vertical_half(layers):
+    """Room side half of a symmetric inner wall, cut in its middle layer"""
+    quotient, remainder = divmod(len(layers), 2)
+    half = [(layer.thickness, layer.material) for layer in layers[:quotient]]
+    if remainder:
+        middle = layers[quotient]
+        half.append((middle.thickness / 2, middle.material))
+    return _merge_equal_layers(list(reversed(half)))
+
+
+def _horizontal_half(bldg, element_class, construction_type):
+    """Heated room's half of a horizontal inner element in AixLib's order
+
+    For aixlib_* construction data, TypeElements_AixLib.json holds the halves
+    themselves (CeilingHalf/FloorHalf between two heated rooms,
+    CeilingAttic/FloorAttic towards the Attic), converted from AixLib's own
+    CE*_loHalf / FL*_upHalf records, so each is exported with all of its
+    layers. Other construction data only has the whole construction under
+    Ceiling/Floor, which is cut in two instead: the ceiling's half keeps its
+    innermost layer, the floor's all but its outermost.
+    """
+    element = element_class(parent=None)
+    element.element_construction_type = construction_type
+    type_element_key = element.load_type_element(
+        year=bldg.year_of_construction,
+        construction=bldg.construction_data.value,
+        data_class=bldg.data_class,
+    )
+    layers = element.layer
+    pre_split = type_element_key is not None and type_element_key.startswith(
+        element_class.__name__ + construction_type)
+    if not pre_split:
+        layers = layers[:1] if element_class is Ceiling else layers[:-1]
+    return [(layer.thickness, layer.material) for layer in reversed(layers)]
+
+
+def _ground_plate_half(layers, upper):
+    """One half of the ground plate, cut in its heaviest layer
+
+    groundPlate_low_half runs from that cut to the room side (screed last),
+    groundPlate_upp_half from the cut to the outside, as in AixLib's
+    FLground_*_loHalf / _upHalf records.
+    """
+    slab = max(range(len(layers)),
+               key=lambda i: layers[i].thickness * layers[i].material.density)
+    inner = GROUND_PLATE_INNER_SLAB_FRACTION * layers[slab].thickness
+    if upper:
+        return [(layers[slab].thickness - inner, layers[slab].material)] + [
+            (layer.thickness, layer.material) for layer in layers[slab + 1:]]
+    return [(inner, layers[slab].material)] + [
+        (layer.thickness, layer.material) for layer in reversed(layers[:slab])]
+
+
 def write_wall_record(wall_path, wall_type, single_wall_template, bldg):
-    half = False
-    layer_direction = -1
+    """Writes the AixLib wall record of one HOM wall type
+
+    The layers are taken from the building's (possibly retrofitted) zone
+    elements where the HOM has an equivalent, and are written in AixLib's
+    order, i.e. with wall[1] as the outside layer.
+    """
     zone = bldg.thermal_zones[0]
     if wall_type == 'OW':
         element = _find_wall_type_element(zone.outer_walls)
-        layers = element.layer
-        n = len(layers)
-        teaser_id_aixlib_inside_layer = 0
-        teaser_id_aixlib_outside_layer = n
     elif wall_type == 'roof':
         element = _find_wall_type_element(zone.rooftops)
-        layers = element.layer
-        n = len(layers)
-        teaser_id_aixlib_inside_layer = 0
-        teaser_id_aixlib_outside_layer = n
     elif wall_type == 'roof_attic':
         # The attic's own envelope is not part of the (merged) zone - only
         # its equivalent-resistance stand-ins are (see
@@ -760,137 +836,45 @@ def write_wall_record(wall_path, wall_type, single_wall_template, bldg):
         # as a persistent, retrofittable element on the building itself
         # (unheated_room_envelope_elements), so this reflects retrofit too.
         element = bldg.unheated_room_envelope_elements["Attic"]["roof1"]
-        layers = element.layer
-        n = len(layers)
-        teaser_id_aixlib_inside_layer = 0
-        teaser_id_aixlib_outside_layer = n
+    if wall_type in ('OW', 'roof', 'roof_attic'):
+        layers = [(layer.thickness, layer.material) for layer in reversed(element.layer)]
     elif wall_type == 'IW_vert_half':
-        element = _find_wall_type_element(zone.inner_walls)
-        layers = element.layer
-        n = len(layers)
-        quotient, remainder = divmod(n, 2)
-        if remainder > 0:
-            half = True
-            quotient += 1
-        teaser_id_aixlib_inside_layer = 0
-        teaser_id_aixlib_outside_layer = quotient
+        layers = _vertical_half(_find_wall_type_element(zone.inner_walls).layer)
     elif wall_type == 'IW2_vert_half':
-        element = _find_wall_type_element(zone.inner_walls, "LoadBearing")
-        layers = element.layer
-        n = len(layers)
-        quotient, remainder = divmod(n, 2)
-        if remainder > 0:
-            half = True
-            quotient += 1
-        teaser_id_aixlib_inside_layer = 0
-        teaser_id_aixlib_outside_layer = quotient
-    elif wall_type == 'ground_floor_upHalf':
-        element = _find_wall_type_element(zone.ground_floors)
-        layers = element.layer
-        n = len(layers)
-        if n == 1:
-            half = True
-        teaser_id_aixlib_inside_layer = 0
-        teaser_id_aixlib_outside_layer = 1
-    elif wall_type == 'ground_floor_loHalf':
-        # in aixlib different order than ow and rf aixlib last layer is connected to the ground
-        element = _find_wall_type_element(zone.ground_floors)
-        layers = element.layer
-        n = len(layers)
-        if n == 1:
-            half = True
-            teaser_id_aixlib_outside_layer = 0 + 1
-        else:
-            teaser_id_aixlib_outside_layer = 1 + 1
-        teaser_id_aixlib_inside_layer = n + 1
-        layer_direction = 1
+        layers = _vertical_half(
+            _find_wall_type_element(zone.inner_walls, "LoadBearing").layer)
+    elif wall_type in ('ground_floor_upHalf', 'ground_floor_loHalf'):
+        layers = _ground_plate_half(
+            _find_wall_type_element(zone.ground_floors).layer,
+            upper=wall_type == 'ground_floor_upHalf')
     elif wall_type == 'IW_hori_loHalf':
-        element = _find_wall_type_element(zone.ceilings)
-        layers = element.layer
-        n = len(layers)
-        teaser_id_aixlib_inside_layer = 0
-        teaser_id_aixlib_outside_layer = 1
+        layers = _horizontal_half(bldg, Ceiling, "Half")
     elif wall_type == 'IW_hori_upHalf':
-        element = _find_wall_type_element(zone.floors)
-        layers = element.layer
-        n = len(layers)
-        teaser_id_aixlib_inside_layer = 0
-        teaser_id_aixlib_outside_layer = n - 1
-    elif wall_type in ('IW_hori_att_loHalf', 'IW_hori_att_upHalf'):
-        # See the roof_attic comment above: not tracked as a real,
-        # retrofittable zone element.
-        #
-        # Unlike the generic Ceiling/Floor pair used for IW_hori_*Half -
-        # which are two mirrored views of the *whole* construction between
-        # two heated rooms, so that one of them has to be cut in two here -
-        # the Attic-tagged pair already *is* the split: CeilingAttic holds
-        # the heated room's half (up to the middle of the insulation) and
-        # FloorAttic the attic's half (from that middle up), matching
-        # AixLib's own CEattic_*_loHalf / FLattic_*_upHalf records the
-        # TypeElements_AixLib.json entries were converted from. So each
-        # half is exported with all of its layers, just reversed into
-        # AixLib's outside-to-inside order (as for OW/roof above).
-        if wall_type == 'IW_hori_att_loHalf':
-            element = Ceiling(parent=None)
-        else:
-            element = Floor(parent=None)
-        element.element_construction_type = "Attic"
-        type_element_key = element.load_type_element(
-            year=bldg.year_of_construction,
-            construction=bldg.construction_data.value,
-            data_class=bldg.data_class,
-        )
-        layers = element.layer
-        n = len(layers)
-        # Only construction data with its own Attic-tagged entries (i.e.
-        # aixlib_*) provides the pre-split halves described above. Anything
-        # else falls back to the plain Ceiling/Floor entry, which is the
-        # whole construction - taking all of its layers for both halves
-        # would then count it twice, so cut it in two exactly as for the
-        # generic IW_hori_*Half above.
-        attic_specific = type_element_key is not None and type_element_key.startswith(
-            type(element).__name__ + "Attic")
-        if attic_specific:
-            teaser_id_aixlib_inside_layer = 0
-            teaser_id_aixlib_outside_layer = n
-        elif wall_type == 'IW_hori_att_loHalf':
-            teaser_id_aixlib_inside_layer = 0
-            teaser_id_aixlib_outside_layer = 1
-        else:
-            teaser_id_aixlib_inside_layer = 0
-            teaser_id_aixlib_outside_layer = n - 1
+        layers = _horizontal_half(bldg, Floor, "Half")
+    elif wall_type == 'IW_hori_att_loHalf':
+        layers = _horizontal_half(bldg, Ceiling, "Attic")
+    elif wall_type == 'IW_hori_att_upHalf':
+        layers = _horizontal_half(bldg, Floor, "Attic")
     else:
         raise NotImplementedError("This wall type does not exit")
-    d = []
-    rho = []
-    conductivity = []
-    c = []
-    eps = layers[0].material.ir_emissivity
-    # AixLib wall[1] is the outside layer
-    for idx, teaser_layer_id in enumerate(
-            range(teaser_id_aixlib_outside_layer - 1, teaser_id_aixlib_inside_layer - 1, layer_direction)):
-        if half and idx == 0:
-            d.append(layers[teaser_layer_id].thickness / 2)
-        else:
-            d.append(layers[teaser_layer_id].thickness)
-        rho.append(layers[teaser_layer_id].material.density)
-        conductivity.append(layers[teaser_layer_id].material.thermal_conduc)
-        c.append(layers[teaser_layer_id].material.heat_capac * 1000)  # kJ/kgK to J/kgK
-    if not d:
+    if not layers:
         # Guard against silently writing a record with n=0 (which does not
-        # translate in Modelica): the selected layer range is empty, e.g.
-        # because the type element has fewer layers than the wall type's
-        # index arithmetic assumes.
+        # translate in Modelica)
         raise ValueError(
             f"No layers selected for wall type {wall_type!r} of building "
-            f"{bldg.name!r}: the underlying type element has {len(layers)} "
-            f"layer(s), which the layer selection for this wall type cannot "
-            f"split as expected."
-        )
+            f"{bldg.name!r}.")
+    if bldg.construction_data.value.startswith("aixlib"):
+        eps = AIXLIB_WALL_EPS
+    else:
+        eps = layers[-1][1].ir_emissivity
     with open(os.path.join(
             wall_path,
             bldg.name + '_' + wall_type + '.mo'), 'w') as out_file:
-        out_file.write(single_wall_template.render_unicode(bldg=bldg, wall_type=wall_type, d=d, rho=rho,
-                                                           conductivity=conductivity, c=c, eps=eps,
-                                                           n=len(d)))
-        out_file.close()
+        out_file.write(single_wall_template.render_unicode(
+            bldg=bldg, wall_type=wall_type,
+            d=[thickness for thickness, _ in layers],
+            rho=[material.density for _, material in layers],
+            conductivity=[material.thermal_conduc for _, material in layers],
+            c=[material.heat_capac * 1000 for _, material in layers],  # kJ/kgK to J/kgK
+            eps=eps,
+            n=len(layers)))
