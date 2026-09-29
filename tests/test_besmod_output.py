@@ -731,6 +731,60 @@ class Test_besmod_output(unittest.TestCase):
         self.assertIn("AixLib.DataBase.ThermalZones.ZoneBaseRecord", record)
         self.assertNotIn("splitFactorSolRad", record)
 
+    def test_hom_surface_coefficients(self):
+        """test the ROM's outer surface coefficients set up like the HOM's"""
+
+        def calculated_building(**attributes):
+            prj = Project()
+            prj.name = "BESModHOMSurfaceCoefficients"
+            prj.add_residential(
+                construction_data='aixlib_S',
+                geometry_data='aixlib_high_order_single_family_house',
+                name="ResidentialBuildingHighOrderAixLib",
+                year_of_construction=2005,
+                net_leased_area=170.0,
+                number_of_floors=2,
+                height_of_floors=2.6)
+            bldg = prj.buildings[0]
+            # set after add_residential, which already calculates the
+            # building once, as users of the archetype do
+            for name, value in attributes.items():
+                setattr(bldg, name, value)
+            prj.used_library_calc = "AixLib"
+            prj.number_of_elements_calc = 4
+            prj.calc_all_buildings()
+            return bldg
+
+        default = calculated_building()
+        zone = default.thermal_zones[0]
+        for window in zone.windows:
+            self.assertEqual(window.inner_convection, 1e5)
+            self.assertEqual(window.outer_convection, 1e5)
+            self.assertEqual(window.outer_radiation, 1e-9)
+            self.assertEqual(window.a_conv, 0.0)
+        for element in zone.outer_walls + zone.rooftops:
+            self.assertEqual(element.outer_radiation, 1e-9)
+        self.assertAlmostEqual(zone.model_attr.alpha_conv_inner_win, 1e5)
+
+        # the ROM's own coefficients for use_old, or when switched off
+        for attributes in ({"use_old": True},
+                           {"hom_surface_coefficients": False}):
+            bldg = calculated_building(**attributes)
+            for window in bldg.thermal_zones[0].windows:
+                self.assertEqual(window.inner_convection, 2.7)
+                self.assertEqual(window.outer_radiation, 5.0)
+            for element in (bldg.thermal_zones[0].outer_walls
+                            + bldg.thermal_zones[0].rooftops):
+                self.assertEqual(element.outer_radiation, 5.0)
+            # the windows keep their U-value, and so the Uw of the HOM
+            for window, window_hom_like in zip(bldg.thermal_zones[0].windows,
+                                               zone.windows):
+                self.assertAlmostEqual(window.u_value, window_hom_like.u_value)
+
+        # and forced on for use_old
+        bldg = calculated_building(use_old=True, hom_surface_coefficients=True)
+        self.assertEqual(bldg.thermal_zones[0].windows[0].inner_convection, 1e5)
+
     def test_single_zone_record_without_room_resolution(self):
         """test the single-zone ROM record of a plain ROM archetype"""
 

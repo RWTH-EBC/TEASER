@@ -62,6 +62,13 @@ def _nearest_bucket(value, options):
 _ROM_SOLAR_SURFACE_GROUPS = ("OuterWall", "Window", "InnerWall",
                              "GroundFloor", "Roof")
 
+# Surface coefficients of AixLibHighOrderSingleFamilyHouse's
+# hom_surface_coefficients, in W/(m2K): high enough for a window's
+# convection to drop out of its U-value, and close enough to zero for the
+# outer radiation to drop out.
+HOM_WINDOW_CONVECTION = 1e5
+HOM_OUTER_RADIATION = 1e-9
+
 _HOM_RADIATION_SURFACES = (
     ("N", 0.0, "wall"),
     ("O", 90.0, "wall"),
@@ -151,6 +158,12 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         # you know the roof's actual airtightness. Reassigning this also
         # regenerates the archetype automatically.
         self.attic_infiltration_class = "undicht"
+        # Sets the ROM's outer surface coefficients up the way the HOM
+        # handles them (see _set_hom_surface_coefficients). None applies
+        # them exactly when the building is exported against
+        # TEASERThermalSingleZone, i.e. with a single thermal zone and
+        # use_old False; True or False forces them on or off.
+        self.hom_surface_coefficients = None
 
         self.zoning = {"single_zone_heated": [
             "Livingroom",
@@ -2023,6 +2036,10 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
 
         Parameters are the same as Building.calc_building_parameter.
         """
+        self._set_hom_surface_coefficients(
+            self.hom_surface_coefficients or (
+                self.hom_surface_coefficients is None
+                and len(self.thermal_zones) == 1 and not self.use_old))
         super().calc_building_parameter(
             number_of_elements=number_of_elements,
             merge_windows=merge_windows,
@@ -2041,6 +2058,74 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             self.sum_heat_load += zone_heat_load
         self._rotation_at_last_calc = self.rotation
         self.calc_rom_inner_heat_transfer_parameters()
+
+    def _set_hom_surface_coefficients(self, hom_like):
+        """Sets the zones' outer surface coefficients up the way the HOM
+        handles them, or back to those of the type elements
+
+        AixLib's WindowSimple passes heat through a window by Uw alone,
+        straight between outside and room air. The ROM puts a convective
+        and a radiative resistance on either side of the glazing instead,
+        so its windows lose their heat through the inner surface node. Each
+        window therefore gets inner and outer convection so high that they
+        drop out, no outer radiation and no convective share of the solar
+        gains (a_conv), with its layers scaled so that its total U-value -
+        and with it the Uw the HOM is exported with - stays the same.
+
+        The HOM's outer convection coefficients (ASHRAE Fundamentals)
+        already cover the long-wave exchange outside, and its walls see no
+        sky, so all other outer elements get no outer radiation either,
+        which also drops the sky correction from the ROM's equivalent air
+        temperature.
+
+        Each element keeps what it had before, so calc_building_parameter
+        can switch this on or off on every call - generate_archetype
+        calculates the building before use_old or hom_surface_coefficients
+        can be changed - and a window a retrofit put in is set up anew.
+
+        Parameters
+        ----------
+        hom_like : bool
+            True sets the coefficients up like the HOM's, False restores
+            the elements' own.
+        """
+        for zone in self.thermal_zones:
+            for window in zone.windows:
+                original = getattr(window, "_before_hom_surface_coefficients", None)
+                if hom_like and original is None:
+                    window._before_hom_surface_coefficients = (
+                        window.inner_convection, window.outer_convection,
+                        window.outer_radiation, window.a_conv,
+                        [layer.thickness for layer in window.layer])
+                    r_total = sum(layer.thickness / layer.material.thermal_conduc
+                                  for layer in window.layer)
+                    r_total += 1 / (window.inner_convection + window.inner_radiation)
+                    r_total += 1 / (window.outer_convection + window.outer_radiation)
+                    window.inner_convection = HOM_WINDOW_CONVECTION
+                    window.outer_convection = HOM_WINDOW_CONVECTION
+                    window.outer_radiation = HOM_OUTER_RADIATION
+                    window.a_conv = 0.0
+                    r_layers = (r_total
+                                - 1 / (window.inner_convection + window.inner_radiation)
+                                - 1 / (window.outer_convection + window.outer_radiation))
+                    scale = r_layers / sum(layer.thickness / layer.material.thermal_conduc
+                                           for layer in window.layer)
+                    for layer in window.layer:
+                        layer.thickness *= scale
+                elif not hom_like and original is not None:
+                    (window.inner_convection, window.outer_convection,
+                     window.outer_radiation, window.a_conv, thicknesses) = original
+                    for layer, thickness in zip(window.layer, thicknesses):
+                        layer.thickness = thickness
+                    window._before_hom_surface_coefficients = None
+            for element in zone.outer_walls + zone.rooftops + zone.doors:
+                original = getattr(element, "_before_hom_surface_coefficients", None)
+                if hom_like and original is None:
+                    element._before_hom_surface_coefficients = element.outer_radiation
+                    element.outer_radiation = HOM_OUTER_RADIATION
+                elif not hom_like and original is not None:
+                    element.outer_radiation = original
+                    element._before_hom_surface_coefficients = None
 
     def calc_room_heat_loads(self):
         """Simplified, room-wise static heat load for each heated room.
