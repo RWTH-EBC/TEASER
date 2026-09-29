@@ -313,7 +313,8 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                                                                   def_params["l3"] + def_params["l4"])
         self._original_hom_dim_parameters["room1_length"] = (def_params["l1"] + def_params["l2"] +
                                                              def_params["thickness_iw_simple"])
-        self._original_hom_dim_parameters["room3_length"] = def_params["l2"] + def_params["l3"]
+        self._original_hom_dim_parameters["room3_length"] = (def_params["l2"] + def_params["l3"] +
+                                                             def_params["thickness_iw_simple"])
         self._original_hom_dim_parameters["room5_length"] = (def_params["l3"] + def_params["l4"] +
                                                              def_params["thickness_iw_simple"])
 
@@ -351,7 +352,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         thickness_iw_simple = og_dim["thickness_iw_simple"]
         self.top_level_geo_params["thickness_iw_simple"] = thickness_iw_simple
         room1_length = l1 + l2 + thickness_iw_simple
-        room3_length = l2 + l3
+        room3_length = l2 + l3 + thickness_iw_simple
         room5_length = l3 + l4 + thickness_iw_simple
 
         self.top_level_geo_params["room1_length"] = room1_length
@@ -649,7 +650,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 "inside_wall2a": {
                     "ori": 90,
                     "tilt": 90,
-                    "area": (self.top_level_geo_params["room3_length"] - self.top_level_geo_params["l4"]) *
+                    "area": (self.top_level_geo_params["room3_length"] - self.top_level_geo_params["l3"]) *
                             self.top_level_geo_params["height_of_floors"],
                     "type": "InnerWall",
                     "element_construction_type": "LoadBearing",
@@ -658,7 +659,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 "inside_wall2b": {
                     "ori": 90,
                     "tilt": 90,
-                    "area": self.top_level_geo_params["l4"] * self.top_level_geo_params["height_of_floors"],
+                    "area": self.top_level_geo_params["l3"] * self.top_level_geo_params["height_of_floors"],
                     "type": "InnerWall",
                     "element_construction_type": "LoadBearing",
                     "adjacent": ("Kitchen", "inside_wall1b")
@@ -991,7 +992,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 "inside_wall2a": {
                     "ori": 90,
                     "tilt": 90,
-                    "area": (self.top_level_geo_params["room3_length"] - self.top_level_geo_params["l4"]) *
+                    "area": (self.top_level_geo_params["room3_length"] - self.top_level_geo_params["l3"]) *
                             self.top_level_geo_params["height_of_floors"],
                     "type": "InnerWall",
                     "element_construction_type": "LoadBearing",
@@ -1000,7 +1001,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 "inside_wall2b": {
                     "ori": 90,
                     "tilt": 90,
-                    "area": self.top_level_geo_params["l4"] * self.top_level_geo_params["height_of_floors"],
+                    "area": self.top_level_geo_params["l3"] * self.top_level_geo_params["height_of_floors"],
                     "type": "InnerWall",
                     "element_construction_type": "LoadBearing",
                     "adjacent": ("Children2", "inside_wall1b")
