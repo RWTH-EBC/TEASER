@@ -853,6 +853,59 @@ class Test_besmod_output(unittest.TestCase):
         for layer, ceiling_layer in zip(stand_in.layer, layers):
             self.assertEqual(layer.material.name, ceiling_layer.material.name)
 
+    def test_const_volumes_ua_attic_heat_balance(self):
+        """test that const_volumes_ua keeps const_volumes' heat capacities
+        and carries the Attic's steady-state heat balance"""
+
+        def attic_stand_ins(method):
+            prj = Project()
+            prj.name = "BESModConstVolumesUA"
+            prj.add_residential(
+                construction_data='aixlib_S',
+                geometry_data='aixlib_high_order_single_family_house',
+                name="ResidentialBuildingHighOrderAixLib",
+                year_of_construction=1990,
+                net_leased_area=170.0,
+                number_of_floors=2,
+                height_of_floors=2.6)
+            bldg = prj.buildings[0]
+            bldg.hom_surface_coefficients = False
+            bldg.integrate_unheated_rooms = {"Attic": method}
+            prj.used_library_calc = "AixLib"
+            prj.number_of_elements_calc = 4
+            prj.calc_all_buildings()
+            zone = bldg.thermal_zones[0]
+            return bldg, [element for element in zone.outer_walls + zone.rooftops
+                          if "_Attic_" in element.name]
+
+        def heat_capacity(elements):
+            return sum(layer.thickness * element.area * layer.material.density
+                       * layer.material.heat_capac
+                       for element in elements for layer in element.layer)
+
+        _, plain = attic_stand_ins("const_volumes")
+        bldg, fitted = attic_stand_ins("const_volumes_ua")
+        self.assertEqual(len(fitted), len(plain))
+        self.assertAlmostEqual(heat_capacity(fitted), heat_capacity(plain))
+
+        # the whole ceiling to the Attic in series with its envelope and
+        # its air change of attic_infiltration_class "undicht", 2.5 1/h
+        ceiling, layers, r_attic = bldg._ceiling_to_unheated_room(
+            bldg.detailed_geo["Bedroom"]["ceiling"])
+        u_iu = 1 / (1 / (ceiling.inner_convection + ceiling.inner_radiation)
+                    + sum(layer.thickness / layer.material.thermal_conduc
+                          for layer in layers)
+                    + r_attic)
+        ceiling_area = sum(info["area"] for info in bldg.detailed_geo["Attic"].values()
+                           if info["type"] == "Floor")
+        h_ue = 0.0
+        for element in bldg.unheated_room_envelope_elements["Attic"].values():
+            element.calc_ua_value()
+            h_ue += element.ua_value
+        h_ve = 0.34 * 2.5 * bldg.room_volumes["Attic"]
+        ua = 1 / (1 / (u_iu * ceiling_area) + 1 / (h_ue + h_ve))
+        self.assertAlmostEqual(sum(element.ua_value for element in fitted), ua)
+
     def test_window_frame_fraction(self):
         """test that the window frame lets no solar radiation into ROM or HOM"""
 

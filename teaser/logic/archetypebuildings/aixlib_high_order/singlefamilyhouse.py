@@ -121,6 +121,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         # only single zone roms
         self.integrate_unheated_rooms_integration_methods = [
             "const_volumes",
+            "const_volumes_ua",
             "din12831_f1",
         ]
         # Reassigning this (whole-dict, e.g. integrate_unheated_rooms =
@@ -1385,7 +1386,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
 
         Equal to element.area for a heated room's own envelope, but not for
         the equivalent elements that integrate an unheated room: with the
-        'const_volumes' method those carry the unheated room's *outer*
+        'const_volumes' methods those carry the unheated room's *outer*
         area, while the surface the zone actually sees is the element
         between the two rooms (e.g. the ceiling below the Attic). Their
         ratio is the same for every piece, since
@@ -1397,7 +1398,8 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         unheated_room = self._unheated_room_of_element(element)
         if unheated_room is None:
             return element.area
-        if self.integrate_unheated_rooms[unheated_room] != "const_volumes":
+        if self.integrate_unheated_rooms[unheated_room] not in (
+                "const_volumes", "const_volumes_ua"):
             return element.area
         geo = self.detailed_geo[unheated_room].values()
         outer_area = sum(info["area"] for info in geo
@@ -1684,7 +1686,9 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         (e.g. the Attic) into the single heated zone, dispatching to the
         method selected per unheated room in integrate_unheated_rooms:
         'const_volumes' (equivalent-resistance network, see
-        _integrate_unheated_rooms_const_volumes) or 'din12831_f1' (DIN
+        _integrate_unheated_rooms_const_volumes), 'const_volumes_ua' (the
+        same network, fitted to the unheated room's steady-state heat
+        balance) or 'din12831_f1' (DIN
         EN 12831-1 temperature adjustment factor from the unheated room's
         heat balance, see _integrate_unheated_rooms_din12831_f1).
 
@@ -1694,9 +1698,10 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         by name and rebuild them in place, rather than duplicating them.
         """
         for room, method in self.integrate_unheated_rooms.items():
-            if method == "const_volumes":
+            if method in ("const_volumes", "const_volumes_ua"):
                 self._integrate_unheated_rooms_const_volumes(
                     zone, room, adj_ele_heated_to_unheated,
+                    fit_ua=method == "const_volumes_ua",
                 )
             elif method == "din12831_f1":
                 self._integrate_unheated_rooms_din12831_f1(
@@ -1709,10 +1714,30 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     f"{self.integrate_unheated_rooms_integration_methods}."
                 )
 
-    def _integrate_unheated_rooms_const_volumes(self, zone, room, adj_ele_heated_to_unheated):
+    def _integrate_unheated_rooms_const_volumes(self, zone, room, adj_ele_heated_to_unheated,
+                                                fit_ua=False):
         """(Re)builds the zone's equivalent-resistance elements that
         integrate one unheated room (e.g. the Attic) into the single
         heated zone, following the 'const_volumes' method.
+
+        Each element the heated rooms share with the unheated room (e.g.
+        a ceiling) is replaced by one stand-in per outer element of the
+        unheated room (e.g. each roof half and gable wall), with that outer
+        element's orientation and a share of its area. A stand-in's layers
+        are the shared element's, thinned by inner/outer area of the
+        unheated room, a layer of the unheated room's air, thick enough to
+        hold its whole volume over all stand-ins, and the outer element's.
+        This keeps the heat capacities of all three, not their thermal
+        resistances.
+
+        With fit_ua ('const_volumes_ua'), the air layer's conductivity is
+        set instead so that every stand-in carries its share of the
+        unheated room's steady-state heat balance: the shared elements
+        (H_iu) in series with the outer elements and the air change
+        (H_ue + H_ve, see _unheated_room_ventilation), split over the
+        stand-ins as the heat divides at one common temperature of the
+        unheated room - over the shared elements by their H_iu, over the
+        outer elements by their UA plus their area's share of H_ve.
 
         Safe to call more than once for the same zone (e.g. after
         retrofitting the unheated rooms' own envelope elements via
@@ -1731,13 +1756,24 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         unheated_tot_outer_area = sum([ele["area"] for ele in outer_elements.values()])
         unheated_tot_inner_area = sum([ele["area"] for ele in inner_elements.values()])
 
+        h_ve = self._unheated_room_ventilation(room)
+        h_outer = {}
+        for outer_ele_name, outer_ele_info in outer_elements.items():
+            outer_element = self._get_or_create_unheated_envelope_element(
+                room, outer_ele_name, outer_ele_info,
+            )
+            outer_element.calc_ua_value()
+            h_outer[outer_ele_name] = (outer_element.ua_value + h_ve
+                                       * outer_ele_info["area"] / unheated_tot_outer_area)
+        h_inner = {}
+
         for heated, unheated in adj_ele_heated_to_unheated.items():
             if unheated[0] != room:
                 continue
             ele_info = self.detailed_geo[heated[0]][heated[1]]
             if ele_info["type"] == "Ceiling":
                 # the whole ceiling, not just the heated room's half of it
-                inner_dummy_element, inner_layers, _ = \
+                inner_dummy_element, inner_layers, r_unheated = \
                     self._ceiling_to_unheated_room(ele_info)
             else:
                 if ele_info["type"] == "InnerWall":
@@ -1753,6 +1789,13 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     data_class=self.data_class,
                 )
                 inner_layers = inner_dummy_element.layer
+                r_unheated = 1 / (inner_dummy_element.inner_convection
+                                  + inner_dummy_element.inner_radiation)
+            h_inner[heated] = ele_info["area"] / (
+                1 / (inner_dummy_element.inner_convection + inner_dummy_element.inner_radiation)
+                + sum(layer.thickness / layer.material.thermal_conduc
+                      for layer in inner_layers)
+                + r_unheated)
             for outer_ele_name, outer_ele_info in outer_elements.items():
                 outer_element = self._get_or_create_unheated_envelope_element(
                     room, outer_ele_name, outer_ele_info,
@@ -1804,6 +1847,41 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 for layer in outer_layers:
                     layer = copy.deepcopy(layer)
                     layer.parent = outer_equivalent_part_element
+                outer_equivalent_part_element._fit_ua_share = (heated, outer_ele_name)
+
+        if fit_ua:
+            self._fit_const_volumes_ua(zone, room, h_inner, h_outer)
+
+    def _fit_const_volumes_ua(self, zone, room, h_inner, h_outer):
+        """Sets the air layers of const_volumes' stand-ins for one
+        unheated room so they carry its steady-state heat balance
+
+        See _integrate_unheated_rooms_const_volumes. h_inner holds H_iu of
+        each shared element, h_outer UA plus air change of each outer
+        element, both in W/K.
+        """
+        h_iu = sum(h_inner.values())
+        h_out = sum(h_outer.values())
+        ua_total = 1 / (1 / h_iu + 1 / h_out)
+        for element in zone.outer_walls + zone.rooftops + zone.ground_floors:
+            share = getattr(element, "_fit_ua_share", None)
+            if share is None or share[0] not in h_inner:
+                continue
+            heated, outer_ele_name = share
+            ua_target = ua_total * h_inner[heated] / h_iu * h_outer[outer_ele_name] / h_out
+            air_layer = next(layer for layer in element.layer
+                             if layer.material.name == "air_layer")
+            r_rest = (1 / (element.inner_convection + element.inner_radiation)
+                      + 1 / (element.outer_convection + element.outer_radiation)
+                      + sum(layer.thickness / layer.material.thermal_conduc
+                            for layer in element.layer if layer is not air_layer))
+            r_air = element.area / ua_target - r_rest
+            if r_air <= 0:
+                raise ValueError(
+                    f"const_volumes_ua can not fit {element.name}: its layers "
+                    f"other than {room}'s air already conduct less than its "
+                    f"share of the steady-state heat balance.")
+            air_layer.material.thermal_conduc = air_layer.thickness / r_air
 
     def _unheated_room_heat_transfer_outside(self, room):
         """Heat transfer coefficient [W/K] of an unheated room to outside
@@ -1824,11 +1902,18 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             )
             element.calc_ua_value()
             h_ue += element.ua_value
+        return h_ue + self._unheated_room_ventilation(room)
+
+    def _unheated_room_ventilation(self, room):
+        """Heat transfer coefficient [W/K] of an unheated room's air change
+        with outside air - DIN EN 12831-1's H_ve
+
+        Takes attic_air_change_rate, or the rate of attic_infiltration_class.
+        """
         air_change_rate = self.attic_air_change_rate
         if air_change_rate is None:
             air_change_rate = _ATTIC_AIR_CHANGE_RATES[self.attic_infiltration_class]
-        h_ve = _RHO_C_AIR * air_change_rate * self.room_volumes[room]
-        return h_ue + h_ve
+        return _RHO_C_AIR * air_change_rate * self.room_volumes[room]
 
     def _ceiling_to_unheated_room(self, ele_info):
         """The whole ceiling between a heated room below and an unheated
