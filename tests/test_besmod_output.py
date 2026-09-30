@@ -785,6 +785,49 @@ class Test_besmod_output(unittest.TestCase):
         bldg = calculated_building(use_old=True, hom_surface_coefficients=True)
         self.assertEqual(bldg.thermal_zones[0].windows[0].inner_convection, 1e5)
 
+    def test_din12831_f1_from_attic_heat_balance(self):
+        """test the Attic's f1 of the din12831_f1 method"""
+
+        prj = Project()
+        prj.name = "BESModDIN12831Attic"
+        prj.add_residential(
+            construction_data='aixlib_S',
+            geometry_data='aixlib_high_order_single_family_house',
+            name="ResidentialBuildingHighOrderAixLib",
+            year_of_construction=1990,
+            net_leased_area=170.0,
+            number_of_floors=2,
+            height_of_floors=2.6)
+        bldg = prj.buildings[0]
+        bldg.hom_surface_coefficients = False
+        bldg.integrate_unheated_rooms = {"Attic": "din12831_f1"}
+        bldg.attic_air_change_rate = 1.0
+        prj.used_library_calc = "AixLib"
+        prj.number_of_elements_calc = 4
+        prj.calc_all_buildings()
+
+        # the whole ceiling to the Attic, both of its halves
+        ceiling, layers, r_attic = bldg._ceiling_to_unheated_room(
+            bldg.detailed_geo["Bedroom"]["ceiling"])
+        self.assertEqual(len(layers), 5)
+        u_iu = 1 / (1 / (ceiling.inner_convection + ceiling.inner_radiation)
+                    + sum(layer.thickness / layer.material.thermal_conduc
+                          for layer in layers)
+                    + r_attic)
+
+        stand_ins = [element for element in bldg.thermal_zones[0].rooftops
+                     if "_Attic_" in element.name]
+        self.assertEqual(len(stand_ins), 5)
+        h_iu = sum(element.area for element in stand_ins) * u_iu
+        h_ue = 0.0
+        for element in bldg.unheated_room_envelope_elements["Attic"].values():
+            element.calc_ua_value()
+            h_ue += element.ua_value
+        h_ve = 0.34 * 1.0 * bldg.room_volumes["Attic"]
+        f1 = (h_ue + h_ve) / (h_iu + h_ue + h_ve)
+        for element in stand_ins:
+            self.assertAlmostEqual(element.u_value, f1 * u_iu)
+
     def test_window_frame_fraction(self):
         """test that the window frame lets no solar radiation into ROM or HOM"""
 

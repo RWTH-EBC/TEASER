@@ -86,10 +86,24 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.18,
+                "thickness": 0.018,
                 "material": {
-                    "name": "aixlib_wood_insulation_composite_lambda084_160",
-                    "material_id": "4408064b-9230-11f1-a514-40c73c88cbfa"
+                    "name": "softwood",
+                    "material_id": "614ef1ac-3a43-11e7-89e1-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.0005,
+                "material": {
+                    "name": "underlayment_membrane",
+                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
+                }
+            },
+            "2": {
+                "thickness": 0.00731,
+                "material": {
+                    "name": "roof_tiles_including_battens",
+                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
                 }
             }
         }
@@ -458,10 +472,24 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.18,
+                "thickness": 0.018,
                 "material": {
-                    "name": "aixlib_wood_insulation_composite_lambda084_160",
-                    "material_id": "4408064b-9230-11f1-a514-40c73c88cbfa"
+                    "name": "softwood",
+                    "material_id": "614ef1ac-3a43-11e7-89e1-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.0005,
+                "material": {
+                    "name": "underlayment_membrane",
+                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
+                }
+            },
+            "2": {
+                "thickness": 0.00731,
+                "material": {
+                    "name": "roof_tiles_including_battens",
+                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
                 }
             }
         }
@@ -830,10 +858,17 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.18,
+                "thickness": 0.0005,
                 "material": {
-                    "name": "aixlib_wood_insulation_composite_lambda084_160",
-                    "material_id": "4408064b-9230-11f1-a514-40c73c88cbfa"
+                    "name": "underlayment_membrane",
+                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
+                }
+            },
+            "1": {
+                "thickness": 0.00731,
+                "material": {
+                    "name": "roof_tiles_including_battens",
+                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
                 }
             }
         }
@@ -1258,10 +1293,24 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.18,
+                "thickness": 0.018,
                 "material": {
-                    "name": "aixlib_wood_insulation_composite_lambda058_194",
-                    "material_id": "4408f7ce-9230-11f1-bff4-40c73c88cbfa"
+                    "name": "softwood",
+                    "material_id": "614ef1ac-3a43-11e7-89e1-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.0005,
+                "material": {
+                    "name": "underlayment_membrane",
+                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
+                }
+            },
+            "2": {
+                "thickness": 0.00731,
+                "material": {
+                    "name": "roof_tiles_including_battens",
+                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
                 }
             }
         }
@@ -1630,10 +1679,24 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.18,
+                "thickness": 0.018,
                 "material": {
-                    "name": "aixlib_wood_insulation_composite_lambda058_194",
-                    "material_id": "4408f7ce-9230-11f1-bff4-40c73c88cbfa"
+                    "name": "softwood",
+                    "material_id": "614ef1ac-3a43-11e7-89e1-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.0005,
+                "material": {
+                    "name": "underlayment_membrane",
+                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
+                }
+            },
+            "2": {
+                "thickness": 0.00731,
+                "material": {
+                    "name": "roof_tiles_including_battens",
+                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
                 }
             }
         }
@@ -2002,10 +2065,17 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.18,
+                "thickness": 0.0005,
                 "material": {
-                    "name": "aixlib_wood_insulation_composite_lambda058_194",
-                    "material_id": "4408f7ce-9230-11f1-bff4-40c73c88cbfa"
+                    "name": "underlayment_membrane",
+                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
+                }
+            },
+            "1": {
+                "thickness": 0.00731,
+                "material": {
+                    "name": "roof_tiles_including_battens",
+                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
                 }
             }
         }
@@ -2430,10 +2500,24 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.18,
+                "thickness": 0.018,
                 "material": {
-                    "name": "aixlib_wood_insulation_composite_lambda054_181",
-                    "material_id": "4409b47f-9230-11f1-833b-40c73c88cbfa"
+                    "name": "softwood",
+                    "material_id": "614ef1ac-3a43-11e7-89e1-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.0005,
+                "material": {
+                    "name": "underlayment_membrane",
+                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
+                }
+            },
+            "2": {
+                "thickness": 0.00731,
+                "material": {
+                    "name": "roof_tiles_including_battens",
+                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
                 }
             }
         }
@@ -2802,10 +2886,24 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.18,
+                "thickness": 0.018,
                 "material": {
-                    "name": "aixlib_wood_insulation_composite_lambda054_181",
-                    "material_id": "4409b47f-9230-11f1-833b-40c73c88cbfa"
+                    "name": "softwood",
+                    "material_id": "614ef1ac-3a43-11e7-89e1-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.0005,
+                "material": {
+                    "name": "underlayment_membrane",
+                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
+                }
+            },
+            "2": {
+                "thickness": 0.00731,
+                "material": {
+                    "name": "roof_tiles_including_battens",
+                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
                 }
             }
         }
@@ -3174,10 +3272,17 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.18,
+                "thickness": 0.0005,
                 "material": {
-                    "name": "aixlib_wood_insulation_composite_lambda054_181",
-                    "material_id": "4409b47f-9230-11f1-833b-40c73c88cbfa"
+                    "name": "underlayment_membrane",
+                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
+                }
+            },
+            "1": {
+                "thickness": 0.00731,
+                "material": {
+                    "name": "roof_tiles_including_battens",
+                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
                 }
             }
         }
@@ -3602,10 +3707,24 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.22,
+                "thickness": 0.018,
                 "material": {
-                    "name": "aixlib_wood_insulation_composite_lambda045_194",
-                    "material_id": "440a5d78-9230-11f1-b44b-40c73c88cbfa"
+                    "name": "softwood",
+                    "material_id": "614ef1ac-3a43-11e7-89e1-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.0005,
+                "material": {
+                    "name": "underlayment_membrane",
+                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
+                }
+            },
+            "2": {
+                "thickness": 0.00731,
+                "material": {
+                    "name": "roof_tiles_including_battens",
+                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
                 }
             }
         }
@@ -3974,10 +4093,24 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.22,
+                "thickness": 0.018,
                 "material": {
-                    "name": "aixlib_wood_insulation_composite_lambda045_194",
-                    "material_id": "440a5d78-9230-11f1-b44b-40c73c88cbfa"
+                    "name": "softwood",
+                    "material_id": "614ef1ac-3a43-11e7-89e1-2cd444b2e704"
+                }
+            },
+            "1": {
+                "thickness": 0.0005,
+                "material": {
+                    "name": "underlayment_membrane",
+                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
+                }
+            },
+            "2": {
+                "thickness": 0.00731,
+                "material": {
+                    "name": "roof_tiles_including_battens",
+                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
                 }
             }
         }
@@ -4346,10 +4479,17 @@
         "outer_convection": 20.0,
         "layer": {
             "0": {
-                "thickness": 0.22,
+                "thickness": 0.0005,
                 "material": {
-                    "name": "aixlib_wood_insulation_composite_lambda045_194",
-                    "material_id": "440a5d78-9230-11f1-b44b-40c73c88cbfa"
+                    "name": "underlayment_membrane",
+                    "material_id": "c21ad9db-8859-11ee-b410-e8b1fc95108b"
+                }
+            },
+            "1": {
+                "thickness": 0.00731,
+                "material": {
+                    "name": "roof_tiles_including_battens",
+                    "material_id": "c21ad9d6-8859-11ee-afed-e8b1fc95108b"
                 }
             }
         }

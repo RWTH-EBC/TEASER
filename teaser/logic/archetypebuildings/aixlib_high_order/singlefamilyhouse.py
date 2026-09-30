@@ -28,21 +28,6 @@ def _check_number_of_floors(room_names: list, room_floor: dict):
     return len(set(floor_names))
 
 
-def _nearest_bucket(value, options):
-    """Nearest of options to value, used to map a real, computed U-value
-    onto one of DIN EN 12831-1 Table 5's discrete Uue/Uiu categories.
-    """
-    return min(options, key=lambda option: abs(option - value))
-
-
-# DIN EN 12831-1:2020-04, Tabelle 5, "Daecher, Abseiten" / "geschlossene
-# Daecher": f1 by (attic_infiltration_class, Uue, Uiu). Uue is the U-value
-# of the unheated room's own envelope facing outside air (e.g. its roof,
-# "Dachhaut"), Uiu the U-value of the element between the heated room and
-# the unheated room (e.g. its ceiling, "oberste Geschossdecke"). Only
-# "dicht" (n = 0.5 h-1) has rows for Uue below 2.5 W/(m2K); this archetype
-# only ever produces Uue in {5.0, 2.5} (see RooftopAttic), so those extra
-# "dicht" rows are included for completeness but not currently reachable.
 # The six oriented surfaces the AixLib HOM's building envelope receives
 # solar radiation on, in the order BESMod's AixLibHighOrder connects them to
 # its RadOnTiltedSurfaceAdaptor array: the four facades and the two halves
@@ -78,22 +63,13 @@ _HOM_RADIATION_SURFACES = (
     ("Roof_S", 180.0, "roof"),
 )
 
-_DIN_EN_12831_TABLE_5_F1 = {
-    ("undicht", 5.0, 1.25): 0.85,
-    ("undicht", 5.0, 0.60): 0.90,
-    ("undicht", 2.5, 1.25): 0.80,
-    ("undicht", 2.5, 0.60): 0.90,
-    ("dicht", 5.0, 1.25): 0.85,
-    ("dicht", 5.0, 0.60): 0.90,
-    ("dicht", 2.5, 1.25): 0.75,
-    ("dicht", 2.5, 0.60): 0.85,
-    ("dicht", 1.0, 1.25): 0.55,
-    ("dicht", 1.0, 0.60): 0.70,
-    ("dicht", 0.5, 1.25): 0.50,
-    ("dicht", 0.5, 0.60): 0.65,
-    ("dicht", 0.25, 1.25): 0.40,
-    ("dicht", 0.25, 0.60): 0.60,
-}
+# Air change rates [1/h] of an unheated room's own air by
+# attic_infiltration_class, as DIN EN 12831-1 Table 5 heads its "dicht" and
+# "undicht" columns - used where attic_air_change_rate is not set.
+_ATTIC_AIR_CHANGE_RATES = {"dicht": 0.5, "undicht": 2.5}
+
+# Volumetric heat capacity of air DIN EN 12831-1 uses, in Wh/(m3K)
+_RHO_C_AIR = 0.34
 
 
 class AixLibHighOrderSingleFamilyHouse(Residential):
@@ -151,13 +127,13 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         # {"Attic": "din12831_f1"}) regenerates the archetype automatically
         # - see the property setter below.
         self.integrate_unheated_rooms = {"Attic": "const_volumes"}
-        # Only used by the "din12831_f1" method: selects which row of DIN
-        # EN 12831-1 Table 5 ("geschlossene Daecher") to use for the
-        # unheated room, "dicht" (n = 0.5 h-1) or "undicht" (n = 2.5 h-1).
-        # Not derived from anything else in the archetype - override if
-        # you know the roof's actual airtightness. Reassigning this also
-        # regenerates the archetype automatically.
+        # Only used by the "din12831_f1" method: the air change rate of the
+        # unheated room's own air in its heat balance, "dicht" (0.5 1/h) or
+        # "undicht" (2.5 1/h) as in DIN EN 12831-1 Table 5, unless
+        # attic_air_change_rate gives it directly in 1/h. Reassigning
+        # either regenerates the archetype automatically.
         self.attic_infiltration_class = "undicht"
+        self.attic_air_change_rate = None
         # Sets the ROM's outer surface coefficients up the way the HOM
         # handles them (see _set_hom_surface_coefficients). None applies
         # them exactly when the building is exported against
@@ -1709,8 +1685,8 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         method selected per unheated room in integrate_unheated_rooms:
         'const_volumes' (equivalent-resistance network, see
         _integrate_unheated_rooms_const_volumes) or 'din12831_f1' (DIN
-        EN 12831-1 Table 5 temperature-adjustment factor, see
-        _integrate_unheated_rooms_din12831_f1).
+        EN 12831-1 temperature adjustment factor from the unheated room's
+        heat balance, see _integrate_unheated_rooms_din12831_f1).
 
         Safe to call more than once for the same zone (e.g. after
         retrofitting the unheated rooms' own envelope elements via
@@ -1826,46 +1802,93 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     layer = copy.deepcopy(layer)
                     layer.parent = outer_equivalent_part_element
 
-    def _unheated_room_roof_u_value(self, room):
-        """Area-weighted average U-value [W/(m2K)] of an unheated room's
-        own Roof envelope pieces - DIN EN 12831-1's Uue ("Dachhaut") for
-        that room.
+    def _unheated_room_heat_transfer_outside(self, room):
+        """Heat transfer coefficient [W/K] of an unheated room to outside
+        air - DIN EN 12831-1's H_ue plus its air change H_ve
 
-        Uses the persistent, retrofittable unheated-room envelope
-        elements (same as _integrate_unheated_rooms_const_volumes' outer
-        elements), so this reflects any retrofit already applied via
-        retrofit_building.
+        H_ue sums the UA-values of the room's own envelope (roof, gable
+        walls, ...), taken from the persistent, retrofittable unheated-room
+        envelope elements, so this reflects any retrofit already applied
+        via retrofit_building. H_ve takes attic_air_change_rate, or the
+        rate of attic_infiltration_class.
         """
-        roof_elements = {
-            _n: _i for _n, _i in self.detailed_geo[room].items()
-            if _i["type"] == "Roof"
-        }
-        total_area = sum(info["area"] for info in roof_elements.values())
-        total_ua = 0.0
-        for ele_name, ele_info in roof_elements.items():
+        h_ue = 0.0
+        for ele_name, ele_info in self.detailed_geo[room].items():
+            if ele_info["type"] not in ("OuterWall", "Roof", "GroundFloor"):
+                continue
             element = self._get_or_create_unheated_envelope_element(
                 room, ele_name, ele_info,
             )
             element.calc_ua_value()
-            total_ua += element.ua_value
-        return total_ua / total_area
+            h_ue += element.ua_value
+        air_change_rate = self.attic_air_change_rate
+        if air_change_rate is None:
+            air_change_rate = _ATTIC_AIR_CHANGE_RATES[self.attic_infiltration_class]
+        h_ve = _RHO_C_AIR * air_change_rate * self.room_volumes[room]
+        return h_ue + h_ve
+
+    def _ceiling_to_unheated_room(self, ele_info):
+        """The whole ceiling between a heated room below and an unheated
+        room above
+
+        For aixlib_* construction data, TypeElements_AixLib.json holds the
+        ceiling towards the Attic as its two halves, CeilingAttic (the
+        heated room's) and FloorAttic (the Attic's), so the whole ceiling
+        is both, the second turned round. Other construction data only has
+        the whole construction under Ceiling.
+
+        Returns
+        -------
+        ceiling : Ceiling
+            the heated room's side, for its surface coefficients
+        layers : list of Layer
+            from the heated room's side to the unheated room's
+        r_unheated : float [m2K/W]
+            combined surface resistance on the unheated room's side
+        """
+        ceiling = Ceiling(parent=None)
+        ceiling.element_construction_type = ele_info["element_construction_type"]
+        ceiling_key = ceiling.load_type_element(
+            year=self.year_of_construction,
+            construction=self._construction_data.value,
+            data_class=self.data_class,
+        )
+        layers = list(ceiling.layer)
+        r_unheated = 1 / (ceiling.inner_convection + ceiling.inner_radiation)
+        if (ceiling.element_construction_type is not None and ceiling_key is not None
+                and ceiling_key.startswith("Ceiling" + ceiling.element_construction_type)):
+            floor = Floor(parent=None)
+            floor.element_construction_type = ceiling.element_construction_type
+            floor.load_type_element(
+                year=self.year_of_construction,
+                construction=self._construction_data.value,
+                data_class=self.data_class,
+            )
+            layers += list(reversed(floor.layer))
+            r_unheated = 1 / (floor.inner_convection + floor.inner_radiation)
+        return ceiling, layers, r_unheated
 
     def _integrate_unheated_rooms_din12831_f1(self, zone, room, adj_ele_heated_to_unheated):
-        """Integrates one unheated room (e.g. the Attic) into the zone
-        using DIN EN 12831-1's simplified f1 approach (Tabelle 5,
-        "Daecher, Abseiten" / geschlossene Daecher) instead of
+        """Integrates one unheated room (e.g. the Attic) into the zone by
+        DIN EN 12831-1's temperature adjustment factor f1 instead of
         const_volumes' equivalent-resistance network.
 
+        f1 = (H_ue + H_ve) / (H_iu + H_ue + H_ve) comes from the unheated
+        room's own steady-state heat balance: H_iu is the ceilings from
+        the heated rooms, H_ue its own envelope to outside and H_ve its air
+        change (see _unheated_room_heat_transfer_outside). DIN EN 12831-1
+        tabulates f1 for a few classes of Uue, Uiu and airtightness
+        (Table 5), which leave out e.g. a leaky attic under an insulated
+        roof; the heat balance holds for any construction and retrofit.
+
         Each heated room's real ceiling to the unheated room is replaced
-        by a Rooftop element that reuses the ceiling's own layers plus
+        by a Rooftop element that reuses the whole ceiling's layers plus
         one added resistive layer, sized so the element's U-value equals
-        the ceiling's own U-value (Uiu) times the DIN 12831 f1 factor
-        looked up from Uiu, the unheated room's own roof U-value (Uue,
-        see _unheated_room_roof_u_value) and attic_infiltration_class.
-        t_outside is then applied directly across this element - unlike
-        const_volumes, the unheated room's own air temperature is never
-        modelled, matching how DIN EN 12831 itself does not treat the
-        unheated space as its own thermal zone.
+        the ceiling's own U-value (Uiu) times f1. t_outside is then applied
+        directly across this element - unlike const_volumes, the unheated
+        room's own air temperature is never modelled, matching how DIN EN
+        12831 itself does not treat the unheated space as its own thermal
+        zone.
 
         Only "Ceiling" adjacency to the unheated room is supported (the
         only kind this archetype's rooms actually have towards the
@@ -1873,18 +1896,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         _integrate_unheated_rooms_const_volumes.
         """
         existing_by_name = {element.name: element for element in zone.rooftops}
-        u_ue = self._unheated_room_roof_u_value(room)
-        # Only bucket against Uue values DIN EN 12831-1 actually tabulates
-        # for the chosen infiltration class ("undicht" has no rows below
-        # Uue=2.5) - falls back to the nearest one it does have rather
-        # than raising, e.g. if a retrofitted roof ends up better
-        # insulated than any "undicht" row anticipates.
-        available_u_ue = sorted({
-            table_u_ue for (cls, table_u_ue, _) in _DIN_EN_12831_TABLE_5_F1
-            if cls == self.attic_infiltration_class
-        })
-        u_ue_bucket = _nearest_bucket(u_ue, available_u_ue)
-
+        ceilings = {}
         for heated, unheated in adj_ele_heated_to_unheated.items():
             if unheated[0] != room:
                 continue
@@ -1896,24 +1908,20 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     f"unheated room, got {ele_info['type']!r} for "
                     f"{room_name}.{ele_name}."
                 )
+            ceiling, layers, r_unheated = self._ceiling_to_unheated_room(ele_info)
+            r_heated = 1 / (ceiling.inner_convection + ceiling.inner_radiation)
+            r_conduc = sum(layer.thickness / layer.material.thermal_conduc
+                           for layer in layers)
+            u_iu = 1 / (r_heated + r_conduc + r_unheated)
+            ceilings[heated] = (ele_info, ceiling, layers, r_conduc, u_iu)
 
-            ceiling_dummy = Ceiling(parent=None)
-            ceiling_dummy.element_construction_type = ele_info["element_construction_type"]
-            ceiling_dummy.load_type_element(
-                year=self.year_of_construction,
-                construction=self._construction_data.value,
-                data_class=self.data_class,
-            )
-            ceiling_dummy.area = ele_info["area"]
-            ceiling_dummy.calc_ua_value()
-            u_iu = ceiling_dummy.u_value
+        h_iu = sum(ele_info["area"] * u_iu
+                   for ele_info, _, _, _, u_iu in ceilings.values())
+        h_outside = self._unheated_room_heat_transfer_outside(room)
+        f1 = h_outside / (h_iu + h_outside)
 
-            u_iu_bucket = _nearest_bucket(u_iu, [1.25, 0.60])
-            f1 = _DIN_EN_12831_TABLE_5_F1[
-                (self.attic_infiltration_class, u_ue_bucket, u_iu_bucket)
-            ]
-            u_target = u_iu * f1
-
+        for (room_name, ele_name), (ele_info, ceiling, layers, r_conduc, u_iu) \
+                in ceilings.items():
             eq_name = f"{room_name}_{room}_{ele_name}"
             element = existing_by_name.get(eq_name)
             if element is None:
@@ -1926,30 +1934,18 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             element.area = ele_info["area"]
             element.orientation = ele_info["ori"]
             element.tilt = ele_info["tilt"]
-            element.inner_convection = ceiling_dummy.inner_convection
-            element.inner_radiation = ceiling_dummy.inner_radiation
+            element.inner_convection = ceiling.inner_convection
+            element.inner_radiation = ceiling.inner_radiation
             element.outer_convection = 20.0
             element.outer_radiation = 5.0
-
-            r_conduc = 0.0
-            for layer in ceiling_dummy.layer:
-                r_conduc += layer.thickness / layer.material.thermal_conduc
+            for layer in layers:
                 new_layer = copy.deepcopy(layer)
                 new_layer.parent = element
 
+            # f1 < 1, so the added resistance is always positive
             r_inner_comb = 1 / (element.inner_convection + element.inner_radiation)
             r_outer_comb = 1 / (element.outer_convection + element.outer_radiation)
-            r_extra = 1 / u_target - r_inner_comb - r_conduc - r_outer_comb
-            if r_extra <= 0:
-                raise ValueError(
-                    f"DIN 12831 f1 de-rating for {eq_name} would require "
-                    f"removing resistance (r_extra={r_extra:.4f}), not "
-                    f"adding it: the real ceiling (U={u_iu:.3f} W/m2K) is "
-                    f"already better insulated than DIN Table 5's Uiu "
-                    f"categories assume for this Uue/infiltration "
-                    f"combination. Use const_volumes instead, or adjust "
-                    f"attic_infiltration_class."
-                )
+            r_extra = 1 / (u_iu * f1) - r_inner_comb - r_conduc - r_outer_comb
             extra_layer = Layer(parent=element)
             extra_material = Material(parent=extra_layer)
             extra_material.load_material_template(
@@ -2425,6 +2421,16 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
     @t_set_nominal_aggregation.setter
     def t_set_nominal_aggregation(self, value):
         self._t_set_nominal_aggregation = value
+        if getattr(self, "_initialized", False):
+            self.generate_archetype()
+
+    @property
+    def attic_air_change_rate(self):
+        return self._attic_air_change_rate
+
+    @attic_air_change_rate.setter
+    def attic_air_change_rate(self, value):
+        self._attic_air_change_rate = value
         if getattr(self, "_initialized", False):
             self.generate_archetype()
 
