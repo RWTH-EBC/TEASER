@@ -828,6 +828,31 @@ class Test_besmod_output(unittest.TestCase):
         for element in stand_ins:
             self.assertAlmostEqual(element.u_value, f1 * u_iu)
 
+    def test_const_volumes_whole_attic_ceiling(self):
+        """test that const_volumes takes the whole ceiling to the Attic"""
+
+        prj = Project()
+        prj.name = "BESModConstVolumesAttic"
+        prj.add_residential(
+            construction_data='aixlib_S',
+            geometry_data='aixlib_high_order_single_family_house',
+            name="ResidentialBuildingHighOrderAixLib",
+            year_of_construction=1990,
+            net_leased_area=170.0,
+            number_of_floors=2,
+            height_of_floors=2.6)
+        bldg = prj.buildings[0]
+        _, layers, _ = bldg._ceiling_to_unheated_room(
+            bldg.detailed_geo["Bedroom"]["ceiling"])
+        roof = bldg.unheated_room_envelope_elements["Attic"]["roof1"]
+        stand_in = next(element for element in bldg.thermal_zones[0].rooftops
+                        if element.name == "Bedroom_Attic_roof1")
+        # both halves of the ceiling, the Attic's air, then its roof
+        self.assertEqual(len(stand_in.layer),
+                         len(layers) + 1 + len(roof.layer))
+        for layer, ceiling_layer in zip(stand_in.layer, layers):
+            self.assertEqual(layer.material.name, ceiling_layer.material.name)
+
     def test_window_frame_fraction(self):
         """test that the window frame lets no solar radiation into ROM or HOM"""
 

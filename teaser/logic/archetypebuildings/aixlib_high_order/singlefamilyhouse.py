@@ -1735,20 +1735,24 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             if unheated[0] != room:
                 continue
             ele_info = self.detailed_geo[heated[0]][heated[1]]
-            if ele_info["type"] == "InnerWall":
-                inner_dummy_element = InnerWall(parent=None)
-            elif ele_info["type"] == "Floor":
-                inner_dummy_element = Floor(parent=None)
-            elif ele_info["type"] == "Ceiling":
-                inner_dummy_element = Ceiling(parent=None)
+            if ele_info["type"] == "Ceiling":
+                # the whole ceiling, not just the heated room's half of it
+                inner_dummy_element, inner_layers, _ = \
+                    self._ceiling_to_unheated_room(ele_info)
             else:
-                raise ValueError("Element type not recognized")
-            inner_dummy_element.element_construction_type = ele_info["element_construction_type"]
-            inner_dummy_element.load_type_element(
-                year=self.year_of_construction,
-                construction=self._construction_data.value,
-                data_class=self.data_class,
-            )
+                if ele_info["type"] == "InnerWall":
+                    inner_dummy_element = InnerWall(parent=None)
+                elif ele_info["type"] == "Floor":
+                    inner_dummy_element = Floor(parent=None)
+                else:
+                    raise ValueError("Element type not recognized")
+                inner_dummy_element.element_construction_type = ele_info["element_construction_type"]
+                inner_dummy_element.load_type_element(
+                    year=self.year_of_construction,
+                    construction=self._construction_data.value,
+                    data_class=self.data_class,
+                )
+                inner_layers = inner_dummy_element.layer
             for outer_ele_name, outer_ele_info in outer_elements.items():
                 outer_element = self._get_or_create_unheated_envelope_element(
                     room, outer_ele_name, outer_ele_info,
@@ -1785,7 +1789,6 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 outer_equivalent_part_element.inner_radiation = inner_dummy_element.inner_radiation * \
                                                                 unheated_tot_inner_area/unheated_tot_outer_area
                 outer_equivalent_part_element.outer_radiation = outer_element.outer_radiation
-                inner_layers = inner_dummy_element.layer
                 for layer in inner_layers:
                     layer = copy.deepcopy(layer)
                     layer.parent = outer_equivalent_part_element
