@@ -12,7 +12,15 @@
 # You also need Dymola installed on your system to run the simulations.
 
 
-def perform_simulations():
+def perform_simulations(show_plot=True):
+    """Simulates the archetypes of e2 with ebcpy and plots each of them
+
+    Parameters
+    ----------
+    show_plot : bool
+        shows the plots after the simulations. Either way, each plot is
+        saved next to its results.
+    """
     # First, we export the same archetypes as in `e2_export_aixlib_models`
     from teaser.examples.e2_export_aixlib_models import example_export_aixlib
     path_export = example_export_aixlib()
@@ -121,6 +129,8 @@ def perform_simulations():
         "weaDat.weaBus.TDryBul"
     ]
 
+    import matplotlib.pyplot as plt
+    figures = []
     for mat_result_file in simulation_result_files:
         df = TimeSeriesData(mat_result_file, variable_names=variable_names_to_store).to_df()
         df_path = Path(mat_result_file).with_suffix(".parquet")
@@ -133,8 +143,8 @@ def perform_simulations():
         import os
         os.remove(mat_result_file)
 
-        import matplotlib.pyplot as plt
         fig, ax = plt.subplots(3, 1, sharex=True)
+        figures.append(fig)
 
         df.index /= 86400  # Convert seconds to days for better readability
 
@@ -156,7 +166,11 @@ def perform_simulations():
         ax[2].set_xlabel("Time in d")
         fig.suptitle(df_path.stem)
         fig.savefig(df_path.with_suffix(".png"))
-    plt.show()
+    if show_plot:
+        plt.show()
+    else:
+        for fig in figures:
+            plt.close(fig)
 
 
 if __name__ == '__main__':

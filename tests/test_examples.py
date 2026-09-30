@@ -88,6 +88,6 @@ class Test_examples(object):
         """Tests the executability of example 11"""
         from teaser.examples.e13_automated_simulation_ebcpy import perform_simulations
         try:
-            perform_simulations()
+            perform_simulations(show_plot=False)
         except FileNotFoundError as err:
             pytest.skip(f"Dymola is not installed in CI: {err}")
