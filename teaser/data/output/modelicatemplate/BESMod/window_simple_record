@@ -4,6 +4,6 @@ within ${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls;
 record ${bldg.name}_windowSimple
     extends AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(
         Uw=${Uw},
-        frameFraction=0,
+        frameFraction=${frame_fraction},
         g=${g});
 end ${bldg.name}_windowSimple;

@@ -392,7 +392,8 @@ def export_besmod(
                     bldg.name + '_windowSimple.mo'), 'w') as out_file:
                 out_file.write(window_simple_template.render_unicode(bldg=bldg,
                                                                      Uw=window.u_value,
-                                                                     g=window.g_value))
+                                                                     g=window.g_value,
+                                                                     frame_fraction=window.frame_fraction))
                 out_file.close()
             modelica_output.create_package(
                 path=wall_path,

@@ -383,6 +383,7 @@ def set_basic_data_teaser(wall_in, element):
         element.a_conv = wall_in["a_conv"]
         element.shading_g_total = wall_in["shading_g_total"]
         element.shading_max_irr = wall_in["shading_max_irr"]
+        element.frame_fraction = wall_in.get("frame_fraction", 0.0)
 
 
 def set_layer_data_teaser(wall_in, element):

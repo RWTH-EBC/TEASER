@@ -349,6 +349,7 @@ def set_basic_data(wall_out, element):
         wall_out["a_conv"] = element.a_conv
         wall_out["shading_g_total"] = element.shading_g_total
         wall_out["shading_max_irr"] = element.shading_max_irr
+        wall_out["frame_fraction"] = element.frame_fraction
 
     if (
         type(element).__name__ == "InterzonalWall"

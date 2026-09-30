@@ -119,6 +119,7 @@ def _set_basic_data_json(element, wall_out):
         wall_out["a_conv"] = element.a_conv
         wall_out["shading_g_total"] = element.shading_g_total
         wall_out["shading_max_irr"] = element.shading_max_irr
+        wall_out["frame_fraction"] = element.frame_fraction
 
     elif (
         type(element).__name__ == "OuterWall"

@@ -4701,6 +4701,7 @@
         "a_conv": 0.02,
         "shading_g_total": 1.0,
         "shading_max_irr": 100.0,
+        "frame_fraction": 0.2,
         "layer": {
             "0": {
                 "thickness": 0.174899,
@@ -4725,6 +4726,7 @@
         "a_conv": 0.02,
         "shading_g_total": 1.0,
         "shading_max_irr": 100.0,
+        "frame_fraction": 0.2,
         "layer": {
             "0": {
                 "thickness": 0.174899,
@@ -4749,6 +4751,7 @@
         "a_conv": 0.02,
         "shading_g_total": 1.0,
         "shading_max_irr": 100.0,
+        "frame_fraction": 0.2,
         "layer": {
             "0": {
                 "thickness": 0.174899,
@@ -4773,6 +4776,7 @@
         "a_conv": 0.02,
         "shading_g_total": 1.0,
         "shading_max_irr": 100.0,
+        "frame_fraction": 0.2,
         "layer": {
             "0": {
                 "thickness": 0.293121,
@@ -4797,6 +4801,7 @@
         "a_conv": 0.02,
         "shading_g_total": 1.0,
         "shading_max_irr": 100.0,
+        "frame_fraction": 0.2,
         "layer": {
             "0": {
                 "thickness": 0.293121,
@@ -4821,6 +4826,7 @@
         "a_conv": 0.02,
         "shading_g_total": 1.0,
         "shading_max_irr": 100.0,
+        "frame_fraction": 0.2,
         "layer": {
             "0": {
                 "thickness": 0.293121,
@@ -4845,6 +4851,7 @@
         "a_conv": 0.02,
         "shading_g_total": 1.0,
         "shading_max_irr": 100.0,
+        "frame_fraction": 0.2,
         "layer": {
             "0": {
                 "thickness": 0.317958,
@@ -4869,6 +4876,7 @@
         "a_conv": 0.02,
         "shading_g_total": 1.0,
         "shading_max_irr": 100.0,
+        "frame_fraction": 0.2,
         "layer": {
             "0": {
                 "thickness": 0.317958,
@@ -4893,6 +4901,7 @@
         "a_conv": 0.02,
         "shading_g_total": 1.0,
         "shading_max_irr": 100.0,
+        "frame_fraction": 0.2,
         "layer": {
             "0": {
                 "thickness": 0.317958,
@@ -4917,6 +4926,7 @@
         "a_conv": 0.02,
         "shading_g_total": 1.0,
         "shading_max_irr": 100.0,
+        "frame_fraction": 0.2,
         "layer": {
             "0": {
                 "thickness": 0.455514,
@@ -4941,6 +4951,7 @@
         "a_conv": 0.02,
         "shading_g_total": 1.0,
         "shading_max_irr": 100.0,
+        "frame_fraction": 0.2,
         "layer": {
             "0": {
                 "thickness": 0.455514,
@@ -4965,6 +4976,7 @@
         "a_conv": 0.02,
         "shading_g_total": 1.0,
         "shading_max_irr": 100.0,
+        "frame_fraction": 0.2,
         "layer": {
             "0": {
                 "thickness": 0.455514,

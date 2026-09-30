@@ -785,6 +785,53 @@ class Test_besmod_output(unittest.TestCase):
         bldg = calculated_building(use_old=True, hom_surface_coefficients=True)
         self.assertEqual(bldg.thermal_zones[0].windows[0].inner_convection, 1e5)
 
+    def test_window_frame_fraction(self):
+        """test that the window frame lets no solar radiation into ROM or HOM"""
+
+        for use_old in (False, True):
+            prj = Project()
+            prj.name = "BESModWindowFrame"
+            prj.add_residential(
+                construction_data='aixlib_S',
+                geometry_data='aixlib_high_order_single_family_house',
+                name="ResidentialBuildingHighOrderAixLib",
+                year_of_construction=1990,
+                net_leased_area=170.0,
+                number_of_floors=2,
+                height_of_floors=2.6)
+            bldg = prj.buildings[0]
+            bldg.use_old = use_old
+            prj.used_library_calc = "AixLib"
+            prj.number_of_elements_calc = 4
+            prj.calc_all_buildings()
+            zone = bldg.thermal_zones[0]
+
+            # AixLib's own window records have a frame share of 0.2
+            for window in zone.windows:
+                self.assertEqual(window.frame_fraction, 0.2)
+            # the frame conducts heat, so it stays in AWin, but lets no
+            # solar radiation through, so it is left out of ATransparent
+            for window_area, transparent_area in zip(
+                    zone.model_attr.window_areas,
+                    zone.model_attr.transparent_areas):
+                self.assertAlmostEqual(transparent_area, 0.8 * window_area)
+
+            path = prj.export_besmod(examples=["TEASERHeatLoadCalculation"],
+                                     THydSup_nominal=55 + 273.15,
+                                     export_with_hom=True)
+            database = os.path.join(path, bldg.name, bldg.name + "_DataBase")
+            with open(os.path.join(database,
+                                   bldg.name + "_" + zone.name + ".mo")) as record_file:
+                record = record_file.read()
+            for name, areas in (("AWin", zone.model_attr.window_areas),
+                                ("ATransparent", zone.model_attr.transparent_areas)):
+                values = re.search(r"\b" + name + r"\s*=\s*\{([^}]*)\}", record).group(1)
+                for value, area in zip(values.split(","), areas):
+                    self.assertAlmostEqual(float(value), area)
+            with open(os.path.join(database, "Walls",
+                                   bldg.name + "_windowSimple.mo")) as record_file:
+                self.assertIn("frameFraction=0.2,", record_file.read())
+
     def test_single_zone_record_without_room_resolution(self):
         """test the single-zone ROM record of a plain ROM archetype"""
 

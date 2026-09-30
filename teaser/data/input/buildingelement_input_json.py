@@ -191,6 +191,7 @@ def _set_basic_data(element, element_in):
         element.a_conv = element_in["a_conv"]
         element.shading_g_total = element_in["shading_g_total"]
         element.shading_max_irr = element_in["shading_max_irr"]
+        element.frame_fraction = element_in.get("frame_fraction", 0.0)
 
     if type(element).__name__.startswith("Interzonal"):
         element.outer_radiation = element_in["inner_radiation"]
