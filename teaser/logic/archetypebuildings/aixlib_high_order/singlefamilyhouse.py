@@ -71,6 +71,10 @@ _ATTIC_AIR_CHANGE_RATES = {"dicht": 0.5, "undicht": 2.5}
 # Volumetric heat capacity of air DIN EN 12831-1 uses, in Wh/(m3K)
 _RHO_C_AIR = 0.34
 
+# Name of the virtual outer element const_volumes_ua gives an unheated
+# room's air change, see _integrate_unheated_rooms_const_volumes
+_AIR_CHANGE = "air_change"
+
 
 class AixLibHighOrderSingleFamilyHouse(Residential):
     def __init__(
@@ -127,8 +131,8 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         # Reassigning this (whole-dict, e.g. integrate_unheated_rooms =
         # {"Attic": "din12831_f1"}) regenerates the archetype automatically
         # - see the property setter below.
-        self.integrate_unheated_rooms = {"Attic": "const_volumes"}
-        # Only used by the "din12831_f1" method: the air change rate of the
+        self.integrate_unheated_rooms = {"Attic": "const_volumes_ua"}
+        # Used by the "const_volumes_ua" and "din12831_f1" methods: the air change rate of the
         # unheated room's own air in its heat balance, "dicht" (0.5 1/h) or
         # "undicht" (2.5 1/h) as in DIN EN 12831-1 Table 5, unless
         # attic_air_change_rate gives it directly in 1/h. Reassigning
@@ -1406,6 +1410,9 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                          if info["type"] in ("OuterWall", "Roof", "GroundFloor"))
         inner_area = sum(info["area"] for info in geo
                          if info["type"] in ("InnerWall", "Ceiling", "Floor"))
+        if self.integrate_unheated_rooms[unheated_room] == "const_volumes_ua":
+            # its virtual outer element for the air change
+            outer_area += inner_area
         return element.area * inner_area / outer_area
 
     def _areas_by_room(self, elements, indoor=False):
@@ -1737,7 +1744,11 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         (H_ue + H_ve, see _unheated_room_ventilation), split over the
         stand-ins as the heat divides at one common temperature of the
         unheated room - over the shared elements by their H_iu, over the
-        outer elements by their UA plus their area's share of H_ve.
+        outer elements by their UA and H_ve. The air change leaves the
+        unheated room without passing its envelope, so it gets stand-ins
+        of its own: a virtual outer element as large as the shared
+        elements, horizontal and without layers, which the heat
+        capacities are spread over as well.
 
         Safe to call more than once for the same zone (e.g. after
         retrofitting the unheated rooms' own envelope elements via
@@ -1756,15 +1767,26 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         unheated_tot_outer_area = sum([ele["area"] for ele in outer_elements.values()])
         unheated_tot_inner_area = sum([ele["area"] for ele in inner_elements.values()])
 
-        h_ve = self._unheated_room_ventilation(room)
         h_outer = {}
         for outer_ele_name, outer_ele_info in outer_elements.items():
             outer_element = self._get_or_create_unheated_envelope_element(
                 room, outer_ele_name, outer_ele_info,
             )
             outer_element.calc_ua_value()
-            h_outer[outer_ele_name] = (outer_element.ua_value + h_ve
-                                       * outer_ele_info["area"] / unheated_tot_outer_area)
+            h_outer[outer_ele_name] = outer_element.ua_value
+        if fit_ua:
+            # The air change bypasses the unheated room's envelope, so it
+            # gets a path of its own: a virtual outer element without
+            # layers, as large as the shared elements and, like
+            # din12831_f1's stand-ins, horizontal.
+            outer_elements[_AIR_CHANGE] = {
+                "type": "Roof",
+                "area": unheated_tot_inner_area,
+                "ori": -1,
+                "tilt": 0.0,
+            }
+            h_outer[_AIR_CHANGE] = self._unheated_room_ventilation(room)
+            unheated_tot_outer_area += unheated_tot_inner_area
         h_inner = {}
 
         for heated, unheated in adj_ele_heated_to_unheated.items():
@@ -1797,9 +1819,12 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                       for layer in inner_layers)
                 + r_unheated)
             for outer_ele_name, outer_ele_info in outer_elements.items():
-                outer_element = self._get_or_create_unheated_envelope_element(
-                    room, outer_ele_name, outer_ele_info,
-                )
+                if outer_ele_name == _AIR_CHANGE:
+                    outer_element = None
+                else:
+                    outer_element = self._get_or_create_unheated_envelope_element(
+                        room, outer_ele_name, outer_ele_info,
+                    )
 
                 # room ("Attic") is included so this can never collide
                 # with a heated room's own real element names (e.g.
@@ -1828,10 +1853,14 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 outer_equivalent_part_element.orientation = outer_ele_info["ori"]
                 outer_equivalent_part_element.tilt = outer_ele_info["tilt"]
                 outer_equivalent_part_element.inner_convection = inner_dummy_element.inner_convection
-                outer_equivalent_part_element.outer_convection = outer_element.outer_convection
                 outer_equivalent_part_element.inner_radiation = inner_dummy_element.inner_radiation * \
                                                                 unheated_tot_inner_area/unheated_tot_outer_area
-                outer_equivalent_part_element.outer_radiation = outer_element.outer_radiation
+                if outer_element is None:
+                    outer_equivalent_part_element.outer_convection = 20.0
+                    outer_equivalent_part_element.outer_radiation = 5.0
+                else:
+                    outer_equivalent_part_element.outer_convection = outer_element.outer_convection
+                    outer_equivalent_part_element.outer_radiation = outer_element.outer_radiation
                 for layer in inner_layers:
                     layer = copy.deepcopy(layer)
                     layer.parent = outer_equivalent_part_element
@@ -1843,7 +1872,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     mat_name="air_layer",
                     data_class=self.data_class,
                 )
-                outer_layers = outer_element.layer
+                outer_layers = [] if outer_element is None else outer_element.layer
                 for layer in outer_layers:
                     layer = copy.deepcopy(layer)
                     layer.parent = outer_equivalent_part_element
@@ -1857,8 +1886,8 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         unheated room so they carry its steady-state heat balance
 
         See _integrate_unheated_rooms_const_volumes. h_inner holds H_iu of
-        each shared element, h_outer UA plus air change of each outer
-        element, both in W/K.
+        each shared element, h_outer the UA of each outer element and H_ve
+        of the air change, all in W/K.
         """
         h_iu = sum(h_inner.values())
         h_out = sum(h_outer.values())
