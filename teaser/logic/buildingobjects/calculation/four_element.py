@@ -615,7 +615,7 @@ class FourElement(object):
                 + self.thermal_zone.ceilings
                 + self.nzbs_for_iw
         ):
-            inner_wall.calc_equivalent_res()
+            inner_wall.calc_equivalent_res(t_bt=self.t_bt_layer)
             inner_wall.calc_ua_value()
 
         self.set_calc_default()
@@ -1347,7 +1347,7 @@ class FourElement(object):
         )
 
         for in_wall in inner_walls:
-            in_wall.calc_equivalent_res()
+            in_wall.calc_equivalent_res(t_bt=self.t_bt_layer)
             in_wall.calc_ua_value()
 
         if 0 < len(inner_walls) <= 1:

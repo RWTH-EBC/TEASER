@@ -210,7 +210,8 @@ class ThermalZone(object):
             self.model_attr = FiveElement(
                 thermal_zone=self,
                 merge_windows=merge_windows,
-                t_bt=t_bt)
+                t_bt=t_bt,
+                t_bt_layer=t_bt_layer)
             self.model_attr.calc_attributes()
 
     def find_walls(self, orientation, tilt):
