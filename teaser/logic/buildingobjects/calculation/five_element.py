@@ -30,6 +30,8 @@ class FiveElement(object):
         supported for IBPSA)
     t_bt : float [d]
         Time constant according to VDI 6007 (default t_bt = 5)
+    t_bt_layer : float [d]
+        Time constant according to VDI 6007 for aggragation of layers (default t_bt = 7)
 
     Attributes
     ----------
@@ -364,7 +366,7 @@ class FiveElement(object):
 
     """
 
-    def __init__(self, thermal_zone, merge_windows, t_bt):
+    def __init__(self, thermal_zone, merge_windows, t_bt, t_bt_layer=7):
         """Constructor for FourElement"""
 
         self.internal_id = random.random()
@@ -372,6 +374,7 @@ class FiveElement(object):
         self.thermal_zone = thermal_zone
         self.merge_windows = merge_windows
         self.t_bt = t_bt
+        self.t_bt_layer = t_bt_layer
 
         # Attributes of inner walls
         self.area_iw = 0.0
@@ -629,16 +632,16 @@ class FiveElement(object):
         """Calls all necessary function to calculate model attributes"""
 
         for out_wall in self.thermal_zone.outer_walls:
-            out_wall.calc_equivalent_res()
+            out_wall.calc_equivalent_res(t_bt=self.t_bt_layer)
             out_wall.calc_ua_value()
         for rt in self.thermal_zone.rooftops:
-            rt.calc_equivalent_res()
+            rt.calc_equivalent_res(t_bt=self.t_bt_layer)
             rt.calc_ua_value()
         for gf in self.thermal_zone.ground_floors:
-            gf.calc_equivalent_res()
+            gf.calc_equivalent_res(t_bt=self.t_bt_layer)
             gf.calc_ua_value()
         for nzb in self.thermal_zone.interzonal_elements:
-            nzb.calc_equivalent_res()
+            nzb.calc_equivalent_res(t_bt=self.t_bt_layer)
             nzb.calc_ua_value()
         for win in self.thermal_zone.windows:
             win.calc_equivalent_res()
@@ -648,7 +651,7 @@ class FiveElement(object):
             + self.thermal_zone.floors
             + self.thermal_zone.ceilings
         ):
-            inner_wall.calc_equivalent_res()
+            inner_wall.calc_equivalent_res(t_bt=self.t_bt_layer)
             inner_wall.calc_ua_value()
 
         self.set_calc_default()
@@ -1473,7 +1476,7 @@ class FiveElement(object):
         )
 
         for in_wall in inner_walls:
-            in_wall.calc_equivalent_res()
+            in_wall.calc_equivalent_res(t_bt=self.t_bt_layer)
             in_wall.calc_ua_value()
 
         if 0 < len(inner_walls) <= 1:

@@ -2930,6 +2930,35 @@ class Test_teaser(object):
         assert round(zone_attr.c1_rt, 5) == 1557320.98487
         assert round(zone_attr.r_rest_rt, 13) == 0.0137109637229
 
+    def test_calc_t_bt_layer(self):
+        """test that t_bt_layer is used for all walls in all calculators"""
+        for number_of_elements in range(1, 6):
+            prj.set_default()
+            helptest.building_test2(prj)
+
+            therm_zone = prj.buildings[-1].thermal_zones[-1]
+            therm_zone.calc_zone_parameters(
+                number_of_elements=number_of_elements,
+                merge_windows=False,
+                t_bt_layer=1,
+            )
+
+            walls = (
+                therm_zone.outer_walls
+                + therm_zone.rooftops
+                + therm_zone.ground_floors
+                + therm_zone.inner_walls
+                + therm_zone.floors
+                + therm_zone.ceilings
+            )
+            assert len(therm_zone.inner_walls) > 0
+            for wall in walls:
+                r1, c1, c1_korr = wall.r1, wall.c1, wall.c1_korr
+                wall.calc_equivalent_res(t_bt=1)
+                assert r1 == approx(wall.r1)
+                assert c1 == approx(wall.c1)
+                assert c1_korr == approx(wall.c1_korr)
+
     def test_volume_zone(self):
         """test of volume_zone"""
 
