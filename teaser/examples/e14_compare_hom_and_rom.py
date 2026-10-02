@@ -17,6 +17,12 @@
 # see the difference: the building is then exported against BESMod's older
 # `TEASERThermalZone`, which has none of them.
 #
+# By default both models are driven the way the archetype is meant to be used:
+# with the internal gains of its use conditions and each room at its own set
+# temperature (`room_t_set_nominal`). `validation=True` leaves the internal
+# gains out and sets every room to 20 degC, so that the two models differ in
+# nothing but their buildings.
+#
 # ## Prerequisites
 # You can not run this example using the online
 # [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks),
@@ -65,7 +71,7 @@ def _library_package(name, path, clone_directory):
 
 
 def example_compare_hom_and_rom(
-        stop_time=86400 * 30,
+        stop_time=86400 * 365,
         output_interval=900,
         use_old=False,
         plot=True,
@@ -73,6 +79,7 @@ def example_compare_hom_and_rom(
         path_aixlib=None,
         path_besmod=None,
         export_path=None,
+        validation=False,
 ):
     """Simulates the HOM and the ROM of one archetype and compares them
 
@@ -93,6 +100,9 @@ def example_compare_hom_and_rom(
         paths to the package.mo of each library. Cloned from GitHub if None.
     export_path : str
         where the Modelica project is exported to. TEASER's default if None.
+    validation : bool
+        compares the buildings alone: no internal gains, and every room at a
+        constant 20 degC
 
     Returns
     -------
@@ -113,20 +123,39 @@ def example_compare_hom_and_rom(
     # Both come out of one and the same archetype building, so every difference
     # between them is the merge of the ten rooms into a single zone.
     prj = Project()
-    prj.name = "CompareHOMandROM"
+    prj.name = "CompareHOMandROM1984_170"
     prj.add_residential(
         construction_data='aixlib_S',
         geometry_data='aixlib_high_order_single_family_house',
         name="SingleFamilyHouse",
-        year_of_construction=1990,
+        year_of_construction=1984,
         net_leased_area=170.0,
         number_of_floors=2,
         height_of_floors=2.6)
 
     bldg = prj.buildings[0]
+    if validation:
+        # Every room at 20 degC, without a set back. room_t_set_nominal only
+        # takes effect once the archetype is generated again, which also
+        # loads its use conditions anew - so those come after.
+        bldg.room_t_set_nominal = {room: 293.15 for room in bldg.room_name_nr}
+        bldg.generate_archetype()
+        use_conditions = bldg.thermal_zones[0].use_conditions
+        use_conditions.heating_profile = [293.15] * 24
+        use_conditions.persons = 0.0
+        use_conditions.machines = 0.0
+        use_conditions.use_maintained_illuminance = False
+        use_conditions.lighting_power = 0.0
     bldg.use_old = use_old
+    # bldg.integrate_unheated_rooms = {"Attic": "din12831_f1"}
     prj.used_library_calc = 'AixLib'
     prj.number_of_elements_calc = 4
+
+    prj.set_location_parameters(t_outside=273.15 - 12.6,
+                                t_ground=273.15 + 13,
+                                weather_file_path=r"D:\01_git\BESMod\BESMod\Resources\WeatherData\TRY2015_522361130393_Jahr_City_Potsdam.mos",
+                                calc_all_buildings=False)
+
     prj.calc_all_buildings()
 
     path_export = Path(prj.export_besmod(
@@ -194,7 +223,8 @@ def example_compare_hom_and_rom(
 
     comparison = _compare_results(results["rom"], results["hom"], room_volumes)
     print(f"\nROM against HOM over {stop_time / 86400:.0f} days"
-          f"{' (use_old)' if use_old else ''}:")
+          f"{' (use_old)' if use_old else ''}"
+          f"{' (validation)' if validation else ''}:")
     print(f"  heating energy HOM   {comparison['energy_hom']:9.1f} kWh")
     print(f"  heating energy ROM   {comparison['energy_rom']:9.1f} kWh"
           f"   ({comparison['energy_deviation'] * 100:+.2f} %)")
@@ -203,7 +233,8 @@ def example_compare_hom_and_rom(
 
     if plot:
         figure_path = save_path.joinpath(
-            "comparison_hom_rom" + ("_use_old" if use_old else "") + ".png")
+            "comparison_hom_rom" + ("_use_old" if use_old else "")
+            + ("_validation" if validation else "") + ".png")
         plot_comparison(results["rom"], results["hom"], room_volumes,
                         comparison, figure_path)
         print(f"  plot                 {figure_path}")
@@ -342,6 +373,24 @@ def plot_comparison(rom, hom, room_volumes, comparison, figure_path=None):
 
 
 if __name__ == '__main__':
-    example_compare_hom_and_rom(export_path=r"D:\03_TEASER_dev\test_hom_export")
+    comparisons = {}
+    for validation in (True, False):
+        comparisons[validation] = example_compare_hom_and_rom(
+            export_path=r"D:\03_TEASER_dev\test_hom_export"
+                        + ("_validation" if validation else "_default"),
+            path_besmod=r"D:\01_git\BESMod\BESMod\package.mo",
+            path_ibpsa=r"D:\01_git\BESMod\installed_dependencies\IBPSA\IBPSA\package.mo",
+            path_aixlib=r"D:\01_git\BESMod\installed_dependencies\AixLib\AixLib\package.mo",
+            validation=validation)
+
+    print(f"\n{'':26s}{'validation':>12s}{'default':>12s}")
+    for key, label, factor, unit in (
+            ("energy_hom", "heating energy HOM", 1, "kWh"),
+            ("energy_rom", "heating energy ROM", 1, "kWh"),
+            ("energy_deviation", "deviation", 100, "%"),
+            ("rmse_power", "RMSE heating power", 1, "W"),
+            ("rmse_temperature", "RMSE zone temperature", 1, "K")):
+        print(f"{label + ' [' + unit + ']':26s}"
+              + "".join(f"{comparisons[v][key] * factor:12.2f}" for v in (True, False)))
 
     print("Example 14: That's it! :)")
