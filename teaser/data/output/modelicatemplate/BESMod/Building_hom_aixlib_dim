@@ -6,6 +6,7 @@ model ${bldg.name}_HOM
     calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals,
     calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Bernd_Glueck,
     TIR=${tir},
+    fraRadIntGai=${fra_rad_int_gai},
     redeclare replaceable parameter
       ${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase.Walls.${bldg.name}_wallTypes wallTypes,
     redeclare replaceable parameter

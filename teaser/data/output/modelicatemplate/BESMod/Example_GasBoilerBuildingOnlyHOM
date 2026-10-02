@@ -3,6 +3,11 @@ within ${bldg.parent.name}.${bldg.name};
 model GasBoilerBuildingOnly${bldg.name}_HOM
   extends BESMod.Systems.BaseClasses.TEASERExport.PartialGasBoilerBuildingOnlyHOM(
     redeclare ${bldg.name}_HOM building,
+    userProfiles(
+        fileNameIntGains=Modelica.Utilities.Files.loadResource(
+        "modelica://${bldg.parent.name}/${bldg.name}/${hom_profiles['file_internal_gains']}"),
+        gain=1,
+        redeclare ${hom_profiles['t_set_profile']} TSetProfile),
     systemParameters(nZones=10,
                      QBui_flow_nominal=${get_list(bldg.room_heat_loads_list)},
                      TSetZone_nominal=${get_list(bldg.room_t_set_nominal_list)},

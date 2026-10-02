@@ -2,6 +2,7 @@
 
 import os
 import warnings
+import numpy as np
 from typing import Optional, Union, List, Dict
 from mako.template import Template
 from mako.lookup import TemplateLookup
@@ -33,6 +34,7 @@ def export_besmod(
         custom_examples: Optional[Dict[str, str]] = None,
         custom_script: Optional[Dict[str, str]] = None,
         export_with_hom: bool = True,
+        heater_radiative_fraction: float = 0.35,
 ) -> None:
     """
     Export building models for BESMod simulations.
@@ -79,6 +81,13 @@ def export_besmod(
     custom_script: Optional[Dict[str, str]]
         Specify custom .mos scripts for the existing and custom examples with a dictionary
         containing the example name as the key and the path to the corresponding custom mako template as the value.
+    export_with_hom: bool
+        Also exports the AixLib HOM of AixLibHighOrderSingleFamilyHouse
+        buildings, next to their ROM.
+    heater_radiative_fraction: float
+        Radiative fraction of the ideal heater's heat flow in the
+        TEASERHeatLoadCalculation example (BESMod's IdealHeaterFraRad), the
+        rest is convective. Default is 0.35.
 
     Raises
     ------
@@ -182,6 +191,9 @@ def export_besmod(
     building_hom_aixlib_template = Template(
         filename=os.path.join(template_path, "BESMod/Building_hom_aixlib_dim"),
         lookup=lookup)
+    room_wise_profile_template = Template(
+        filename=os.path.join(template_path, "BESMod/room_wise_profile_record"),
+        lookup=lookup)
     single_wall_template = Template(
         filename=os.path.join(template_path, "BESMod/single_wall_record"),
         lookup=lookup)
@@ -252,12 +264,18 @@ def export_besmod(
         bldg.library_attr.modelica_gains_boundary(path=bldg_path)
 
         export_hom = export_with_hom and type(bldg).__name__ == "AixLibHighOrderSingleFamilyHouse"
+        hom_profiles = None
         if export_hom:
+            hom_profiles = _write_hom_user_profiles(
+                bldg=bldg,
+                bldg_path=bldg_path,
+                profile_template=room_wise_profile_template)
             hom_template_kwargs = bldg.top_level_geo_params
             with open(os.path.join(bldg_path, bldg.name + "_HOM.mo"), 'w') as out_file:
                 out_file.write(building_hom_aixlib_template.render_unicode(
                     bldg=bldg,
                     zone=bldg.thermal_zones[0],
+                    fra_rad_int_gai=1 - hom_profiles["fac_conv"],
                     **hom_template_kwargs))
                 out_file.close()
 
@@ -280,6 +298,8 @@ def export_besmod(
                     # the zone-wise ones, so the ROM and the HOM exported
                     # next to it see the same user behaviour.
                     export_hom=export_hom,
+                    hom_profiles=hom_profiles,
+                    heater_radiative_fraction=heater_radiative_fraction,
                     TOda_nominal=bldg.thermal_zones[0].t_outside,
                     THydSup_nominal=t_hyd_sup_nominal_bldg[bldg.name],
                     TSetZone_nominal=t_set_zone_nominal,
@@ -433,7 +453,8 @@ def export_besmod(
                     tilt=[tilt for _, _, tilt in surfaces]))
                 out_file.close()
             extra_data_base_package = ["Walls",
-                                       bldg.name + "_SurfaceOrientation"]
+                                       bldg.name + "_SurfaceOrientation",
+                                       bldg.name + "_TSetProfile"]
         else:
             extra_data_base_package = None
 
@@ -719,6 +740,106 @@ def _help_example_script(bldg, dir_dymola, test_script_template, example, suffix
             bldg=bldg
         ))
         out_file.close()
+
+
+def _write_hom_user_profiles(bldg, bldg_path, profile_template):
+    """Writes the room-wise user profiles the HOM and the ROM exported next
+    to it are both driven with
+
+    The internal gains are the zone's use conditions, the same the ROM
+    exported on its own takes - persons, machines and lighting per m2 times
+    the rooms' floor area - spread over the rooms and the hours as
+    room_internal_gains_profiles are: each day, those daily courses are
+    scaled so that together they give the building that day's energy of the
+    use conditions' schedules. The table has the time stamps TEASER's own
+    internal gains file uses, one column per room, ordered by room_name_nr,
+    and a last, empty one for the Attic, like BESMod's InternalGainsHOM.
+    Persons, machines and lighting each have their own convective share;
+    the HOM and the ROM take their gains as one signal, so they get the
+    share of the three over the year.
+
+    The set temperatures are room_t_set_nominal, following the zone's
+    heating profile: each room is set back by as much as the profile is
+    below its maximum.
+
+    Parameters
+    ----------
+    bldg : AixLibHighOrderSingleFamilyHouse
+        the building, with its parameters calculated
+    bldg_path : str
+        the building's package, which the gains file is written to; the
+        set temperature record goes to its _DataBase package
+    profile_template : Template
+        BESMod/room_wise_profile_record
+
+    Returns
+    -------
+    dict
+        file_internal_gains (name of the gains file in the building's
+        package), fac_conv (convective share of the gains) and t_set_profile
+        (the set temperature record, as a Modelica class path)
+    """
+    zone = bldg.thermal_zones[0]
+    use_cond = zone.use_conditions
+    rooms = sorted(bldg.room_name_nr, key=bldg.room_name_nr.get)
+    floor_areas = np.array([bldg.detailed_geo[room]["floor"]["area"] for room in rooms])
+
+    # W/m2 and convective share of each gain, by its schedule
+    gains = {
+        "persons_profile": (use_cond.persons * use_cond.fixed_heat_flow_rate_persons
+                            * use_cond.activity_degree_persons,
+                            use_cond.ratio_conv_rad_persons),
+        "machines_profile": (use_cond.machines, use_cond.ratio_conv_rad_machines),
+        "lighting_profile": (use_cond.lighting_power, use_cond.ratio_conv_rad_lighting),
+    }
+    specific = sum(np.asarray(use_cond.schedules[profile], dtype=float) * value
+                   for profile, (value, _) in gains.items())
+    energy = {profile: np.asarray(use_cond.schedules[profile], dtype=float).sum() * value
+              for profile, (value, _) in gains.items()}
+    total = sum(energy.values())
+    fac_conv = (sum(energy[profile] * ratio for profile, (_, ratio) in gains.items()) / total
+                if total > 0 else 1.0)
+
+    # the rooms' daily courses, scaled to each day's energy of the building
+    shape = np.array([bldg.room_internal_gains_profiles[room] for room in rooms],
+                     dtype=float)
+    if shape.shape != (len(rooms), 24) or shape.sum() <= 0:
+        raise ValueError(
+            f"room_internal_gains_profiles of {bldg.name} need 24 hourly values "
+            f"for each of its rooms, and some gains.")
+    daily_energy = (specific.reshape(-1, 24) * floor_areas.sum()).sum(axis=1)
+    room_gains = np.concatenate(
+        [shape * energy / shape.sum() for energy in daily_energy], axis=1)
+
+    file_internal_gains = "InternalGains_" + bldg.name + "_HOM.txt"
+    with open(os.path.join(bldg_path, file_internal_gains), "w") as out_file:
+        out_file.write("#1\n")
+        out_file.write(f"double Internals({room_gains.shape[1]}, {len(rooms) + 2})\n")
+        for hour in range(room_gains.shape[1]):
+            row = [(hour + 1) * 3600] + list(room_gains[:, hour]) + [0.0]
+            out_file.write("\t".join(str(float(x)) for x in row) + "\n")
+
+    heating_profile = np.asarray(use_cond.heating_profile, dtype=float)
+    set_back = heating_profile - heating_profile.max()
+    t_set_nominal = np.array([bldg.room_t_set_nominal[room] for room in rooms])
+    rows = [[hour * 3600] + list(t_set_nominal + set_back[hour])
+            for hour in range(len(heating_profile))]
+    rows.append([len(heating_profile) * 3600] + rows[-1][1:])
+    database_path = os.path.join(bldg_path, bldg.name + "_DataBase")
+    with open(os.path.join(database_path, bldg.name + "_TSetProfile.mo"), "w") as out_file:
+        out_file.write(profile_template.render_unicode(
+            bldg=bldg,
+            name="TSetProfile",
+            description="Room-wise set temperatures, room_t_set_nominal "
+                        "following the heating profile of the zone",
+            rows=[[float(value) for value in row] for row in rows]))
+
+    return {
+        "file_internal_gains": file_internal_gains,
+        "fac_conv": float(fac_conv),
+        "t_set_profile": f"{bldg.parent.name}.{bldg.name}.{bldg.name}_DataBase."
+                         f"{bldg.name}_TSetProfile",
+    }
 
 
 def _find_wall_type_element(elements, element_construction_type=None):

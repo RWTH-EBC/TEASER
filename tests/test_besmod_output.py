@@ -245,27 +245,40 @@ class Test_besmod_output(unittest.TestCase):
         bldg = prj.buildings[0]
         rooms = sorted(bldg.room_name_nr, key=bldg.room_name_nr.get)
 
-        # both default to the room volumes, normalized to a weighted average
+        # the set temperatures default to the room heat loads, the natural
+        # ventilation to the room volumes, both normalized to a weighted
+        # average
         total_volume = sum(bldg.room_volumes[room] for room in rooms)
         by_volume = [bldg.room_volumes[room] / total_volume for room in rooms]
-        for weights in (bldg.fac_room_t_set, bldg.fac_room_nat_vent):
+        total_heat_load = sum(bldg.room_heat_loads[room] for room in rooms)
+        by_heat_load = [bldg.room_heat_loads[room] / total_heat_load for room in rooms]
+        for weights, expected_weights in ((bldg.fac_room_t_set, by_heat_load),
+                                          (bldg.fac_room_nat_vent, by_volume)):
             self.assertEqual(len(weights), len(bldg.room_name_nr))
             self.assertAlmostEqual(sum(weights), 1.0)
-            for weight, expected in zip(weights, by_volume):
+            for weight, expected in zip(weights, expected_weights):
                 self.assertAlmostEqual(weight, expected)
 
-        # weighting the room setpoints by volume has to give the same value
-        # as aggregating them with t_set_nominal_aggregation does, i.e. the
-        # weights really form a weighted average of the profiles
+        # weighting the room setpoints has to give the same value as
+        # aggregating them with t_set_nominal_aggregation does, i.e. the
+        # weights really form a weighted average of the profiles, and the
+        # ROM is designed for the temperature it is operated at
+        weighted = sum(fac * t_set for fac, t_set
+                       in zip(bldg.fac_room_t_set, bldg.room_t_set_nominal_list))
+        self.assertEqual(bldg.t_set_nominal_aggregation, "heat_load_weighted_average")
+        self.assertAlmostEqual(weighted, bldg.thermal_zones[0].t_inside)
+        self.assertLess(weighted, max(bldg.room_t_set_nominal_list))
+        bldg.fac_room_t_set_weighting = "volume"
         weighted = sum(fac * t_set for fac, t_set
                        in zip(bldg.fac_room_t_set, bldg.room_t_set_nominal_list))
         bldg.t_set_nominal_aggregation = "volume_weighted_average"
         self.assertAlmostEqual(weighted, bldg.thermal_zones[0].t_inside)
         bldg.t_set_nominal_aggregation = "max"
+        self.assertAlmostEqual(bldg.thermal_zones[0].t_inside,
+                               max(bldg.room_t_set_nominal_list))
 
         # the two weightings are independent of each other
         bldg.fac_room_t_set_weighting = "heat_load"
-        total_heat_load = sum(bldg.room_heat_loads[room] for room in rooms)
         for weight, room in zip(bldg.fac_room_t_set, rooms):
             self.assertAlmostEqual(
                 weight, bldg.room_heat_loads[room] / total_heat_load)
@@ -301,6 +314,86 @@ class Test_besmod_output(unittest.TestCase):
         bldg.room_heat_loads = {}
         with self.assertRaises(ValueError):
             bldg.fac_room_t_set
+
+    def test_hom_user_profiles(self):
+        """test the room-wise internal gains and set temperatures the HOM and
+        the ROM exported next to it are driven with"""
+
+        prj = Project()
+        prj.name = "BESModHOMUserProfiles"
+        prj.add_residential(
+            construction_data='aixlib_S',
+            geometry_data='aixlib_high_order_single_family_house',
+            name="ResidentialBuildingHighOrderAixLib",
+            year_of_construction=1990,
+            net_leased_area=170.0,
+            number_of_floors=2,
+            height_of_floors=2.6)
+        prj.used_library_calc = "AixLib"
+        prj.number_of_elements_calc = 4
+        prj.calc_all_buildings()
+        bldg = prj.buildings[0]
+        rooms = sorted(bldg.room_name_nr, key=bldg.room_name_nr.get)
+        path = prj.export_besmod(examples=["TEASERHeatLoadCalculation"],
+                                 THydSup_nominal=55 + 273.15,
+                                 export_with_hom=True)
+        bldg_path = os.path.join(path, bldg.name)
+
+        # the zone's use conditions, per room by its floor area
+        use_cond = bldg.thermal_zones[0].use_conditions
+        gains = {
+            "persons_profile": (use_cond.persons * use_cond.fixed_heat_flow_rate_persons
+                                * use_cond.activity_degree_persons,
+                                use_cond.ratio_conv_rad_persons),
+            "machines_profile": (use_cond.machines, use_cond.ratio_conv_rad_machines),
+            "lighting_profile": (use_cond.lighting_power, use_cond.ratio_conv_rad_lighting)}
+        floor_area = sum(bldg.detailed_geo[room]["floor"]["area"] for room in rooms)
+        energy = {profile: sum(use_cond.schedules[profile]) * value
+                  for profile, (value, _) in gains.items()}
+        with open(os.path.join(bldg_path, "InternalGains_" + bldg.name + "_HOM.txt")) as gains_file:
+            table = [[float(value) for value in line.split()]
+                     for line in gains_file.readlines()[2:]]
+        self.assertEqual(len(table), 8760)
+        self.assertEqual(len(table[0]), len(rooms) + 2)
+        self.assertAlmostEqual(sum(sum(row[1:]) for row in table),
+                               sum(energy.values()) * floor_area, places=3)
+        self.assertEqual(max(row[-1] for row in table), 0.0)
+        # spread over the rooms and the hours as their daily courses are
+        shape_total = sum(sum(bldg.room_internal_gains_profiles[room]) for room in rooms)
+        day = table[:24]
+        day_total = sum(sum(row[1:-1]) for row in day)
+        for column, room in enumerate(rooms, start=1):
+            for row, value in zip(day, bldg.room_internal_gains_profiles[room]):
+                self.assertAlmostEqual(row[column], value / shape_total * day_total)
+
+        fac_conv = (sum(energy[profile] * ratio for profile, (_, ratio) in gains.items())
+                    / sum(energy.values()))
+        with open(os.path.join(bldg_path, "TEASERHeatLoadCalculation" + bldg.name + ".mo")) as rom_file:
+            rom = rom_file.read()
+        self.assertAlmostEqual(float(re.search(r"fac_conv=([0-9.eE+-]+)", rom).group(1)), fac_conv)
+        self.assertIn("gain=1", rom)
+        self.assertIn(bldg.name + "_TSetProfile TSetProfile", rom)
+        self.assertIn("electrical(transfer(fraHeaRad=0.35))", rom)
+        # the ROM is sized for the HOM's room-wise heat loads
+        self.assertAlmostEqual(
+            float(re.search(r"QBui_flow_nominal=\{([0-9.eE+-]+)\}", rom).group(1)),
+            sum(bldg.room_heat_loads.values()))
+        with open(os.path.join(bldg_path, bldg.name + "_HOM.mo")) as hom_file:
+            self.assertAlmostEqual(
+                float(re.search(r"fraRadIntGai=([0-9.eE+-]+)", hom_file.read()).group(1)),
+                1 - fac_conv)
+
+        # room_t_set_nominal, set back as the zone's heating profile is
+        with open(os.path.join(bldg_path, bldg.name + "_DataBase",
+                               bldg.name + "_TSetProfile.mo")) as record_file:
+            matrix = re.search(r"Profile=\[(.*)\]", record_file.read(), re.S).group(1)
+        profile = [[float(value) for value in row.split(",")]
+                   for row in matrix.split(";")]
+        set_back = max(use_cond.heating_profile)
+        self.assertEqual(len(profile), len(use_cond.heating_profile) + 1)
+        for row, heating in zip(profile, use_cond.heating_profile):
+            for value, room in zip(row[1:], rooms):
+                self.assertAlmostEqual(value, bldg.room_t_set_nominal[room] + heating - set_back)
 
     def test_convert_heating_profile(self):
         """Test the conversion of heating profiles for BESMod"""

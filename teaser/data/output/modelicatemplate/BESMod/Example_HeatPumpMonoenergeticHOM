@@ -3,6 +3,11 @@ within ${bldg.parent.name}.${bldg.name};
 model HeatPumpMonoenergetic${bldg.name}_HOM
   extends BESMod.Systems.BaseClasses.TEASERExport.PartialHeatPumpMonoenergeticHOM(
     redeclare ${bldg.name}_HOM building,
+    userProfiles(
+        fileNameIntGains=Modelica.Utilities.Files.loadResource(
+        "modelica://${bldg.parent.name}/${bldg.name}/${hom_profiles['file_internal_gains']}"),
+        gain=1,
+        redeclare ${hom_profiles['t_set_profile']} TSetProfile),
     systemParameters(
         nZones=10,
         QBui_flow_nominal=${get_list(bldg.room_heat_loads_list)},

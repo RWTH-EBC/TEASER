@@ -899,7 +899,8 @@ class Project(object):
             custom_examples: Optional[Dict[str, str]] = None,
             custom_script: Optional[Dict[str, str]] = None,
             report: bool = False,
-            export_with_hom = False
+            export_with_hom = False,
+            heater_radiative_fraction: float = 0.35,
     ) -> str:
         """Exports buildings for BESMod simulation
 
@@ -941,6 +942,13 @@ class Project(object):
             containing the example name as the key and the path to the corresponding custom mako template as the value.
         report : bool
             If True, generates a model report in HTML and CSV format for the exported project. Default is False.
+        export_with_hom : bool
+            Also exports the AixLib HOM of AixLibHighOrderSingleFamilyHouse
+            buildings, next to their ROM. Default is False.
+        heater_radiative_fraction : float
+            Radiative fraction of the ideal heater's heat flow in the
+            TEASERHeatLoadCalculation example, the rest is convective.
+            Default is 0.35.
 
         Returns
         -------
@@ -962,7 +970,8 @@ class Project(object):
                 buildings=self.buildings, prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
                 QBuiOld_flow_design=QBuiOld_flow_design, QRoomOld_flow_design=QRoomOld_flow_design,
                 THydSupOld_design=THydSupOld_design,
-                custom_examples=custom_examples, custom_script=custom_script, export_with_hom=export_with_hom
+                custom_examples=custom_examples, custom_script=custom_script, export_with_hom=export_with_hom,
+                heater_radiative_fraction=heater_radiative_fraction
             )
         else:
             for bldg in self.buildings:
@@ -971,7 +980,8 @@ class Project(object):
                         buildings=[bldg], prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
                         QBuiOld_flow_design=QBuiOld_flow_design, QRoomOld_flow_design=QRoomOld_flow_design,
                         THydSupOld_design=THydSupOld_design,
-                        custom_examples=custom_examples, custom_script=custom_script, export_with_hom=export_with_hom
+                        custom_examples=custom_examples, custom_script=custom_script, export_with_hom=export_with_hom,
+                        heater_radiative_fraction=heater_radiative_fraction
                     )
 
         if report:

@@ -71,6 +71,24 @@ _ATTIC_AIR_CHANGE_RATES = {"dicht": 0.5, "undicht": 2.5}
 # Volumetric heat capacity of air DIN EN 12831-1 uses, in Wh/(m3K)
 _RHO_C_AIR = 0.34
 
+# Daily course of the internal gains of each heated room [W], hour by hour
+# from midnight: the hourly means of BESMod's Resources/InternalGainsHOM.txt,
+# which the AixLib HOM's OFD house was driven with. Only their shape across
+# the rooms and the day is used; the export scales them to the zone's use
+# conditions (see AixLibHighOrderSingleFamilyHouse.room_internal_gains_profiles).
+_ROOM_INTERNAL_GAINS_PROFILES = {
+    "Livingroom": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 301, 301, 504, 504, 454, 0, 0],
+    "Hobby": [0, 0, 0, 0, 0, 0, 0, 426, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 652, 427, 0, 0, 0, 0],
+    "Corridor_gf": [50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50],
+    "WC_Storage": [0, 0, 0, 0, 0, 0, 0, 163, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 163, 0, 0, 0, 0, 0],
+    "Kitchen": [0, 0, 0, 0, 0, 0, 0, 355, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 680, 329, 0, 0, 0, 0],
+    "Bedroom": [166, 166, 166, 166, 166, 166, 165, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 165, 166],
+    "Children1": [83, 83, 83, 83, 83, 83, 83, 0, 0, 0, 0, 0, 0, 0, 126, 126, 0, 300, 0, 0, 213, 83, 83, 83],
+    "Corridor_upp": [50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50],
+    "Bath": [0, 0, 0, 0, 0, 0, 0, 447, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 221, 271, 0, 0],
+    "Children2": [83, 83, 83, 83, 83, 83, 83, 0, 0, 0, 0, 0, 0, 0, 126, 126, 0, 300, 0, 0, 213, 83, 83, 83],
+}
+
 # Name of the virtual outer element const_volumes_ua gives an unheated
 # room's air change, see _integrate_unheated_rooms_const_volumes
 _AIR_CHANGE = "air_change"
@@ -232,14 +250,20 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         self.room_t_set_nominal = {room: 293.15 for room in self.room_name_nr}
         self.room_t_set_nominal["Bath"] = 297.15
         # How room_t_set_nominal is reduced to the ROM's single
-        # zone.t_inside. Built-in options: "max" (default - the heating
-        # system must be able to reach the hottest-demand room, so this is
-        # the safe choice for a value that feeds system sizing) and
-        # "volume_weighted_average". Alternatively, assign a callable
+        # zone.t_inside, which BESMod takes as TSetZone_nominal both for
+        # the zone's nominal heat flow and for the design of its heating
+        # system (e.g. the heating curve). Built-in options:
+        # "heat_load_weighted_average" (default - the rooms weighted by
+        # their heat load, the same as the default fac_room_t_set the zone
+        # is operated with, since the zone's heat loss is the sum of the
+        # rooms' heat transfer coefficients times their temperature
+        # differences), "volume_weighted_average" and "max" (designs the
+        # whole zone for its warmest room; the room-wise heat loads already
+        # size the heating for that room). Alternatively, assign a callable
         # taking (room_names, self) and returning a temperature in K for
         # full custom control. Reassigning this regenerates the archetype
         # automatically.
-        self.t_set_nominal_aggregation = "max"
+        self.t_set_nominal_aggregation = "heat_load_weighted_average"
         # Weights that reduce the HOM's room-wise user profiles to the
         # single value the ROM's one merged zone takes - facRoomTSet and
         # facRoomNatVent of BESMod's TEASERHOMtoROM user profile, which
@@ -249,18 +273,29 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         # sum to 1 (see _room_weights) - what matters is the ratio between
         # rooms, not the absolute values.
         #
-        # Built-in options: "volume" (default - room_volumes, the physically
-        # correct aggregation for an air exchange rate, since it conserves
-        # the total ventilation air flow of the merged zone), "heat_load"
-        # (room_heat_loads, i.e. weighted towards the rooms that drive the
-        # design of the heating system) and "equal". Alternatively assign a
+        # Built-in options: "volume" (room_volumes, the physically correct
+        # aggregation for an air exchange rate, since it conserves the total
+        # ventilation air flow of the merged zone - the default for
+        # fac_room_nat_vent), "heat_load" (room_heat_loads, close to
+        # weighting the rooms by their heat transfer coefficients, which is
+        # what a set temperature acts through - the default for
+        # fac_room_t_set) and "equal". Alternatively assign a
         # dict {room_name: weight} covering every heated room, or a callable
         # taking (self) and returning such a dict, for full custom control.
         # These are plain attributes: unlike t_set_nominal_aggregation,
         # reassigning them does not regenerate the archetype (nothing about
         # the archetype itself depends on them - they are only read when
         # exporting), so they can be changed right up to the export.
-        self.fac_room_t_set_weighting = "volume"
+        self.fac_room_t_set_weighting = "heat_load"
+        # Daily course of each heated room's internal gains [W], 24 hourly
+        # values from midnight, by default those of AixLib's OFD house. The
+        # HOM export only takes their shape across the rooms and the day:
+        # it scales them, day by day, to the energy the zone's use
+        # conditions give the building (see
+        # besmod_output._write_hom_user_profiles), so the HOM and the ROM
+        # exported next to it get the internal gains of the use conditions,
+        # spread over the rooms and the hours as in the OFD house.
+        self.room_internal_gains_profiles = copy.deepcopy(_ROOM_INTERNAL_GAINS_PROFILES)
         self.fac_room_nat_vent_weighting = "volume"
         # Rotation of the whole building clockwise against the archetype's
         # own orientation [deg], i.e. 0 keeps the Livingroom facade facing
@@ -1625,14 +1660,25 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             return aggregation(room_names, self)
         if aggregation == "max":
             return max(self.room_t_set_nominal[r] for r in room_names)
-        if aggregation == "volume_weighted_average":
+        if aggregation == "heat_load_weighted_average" and all(
+                r in self.room_heat_loads for r in room_names):
+            total_heat_load = sum(self.room_heat_loads[r] for r in room_names)
+            return sum(
+                self.room_t_set_nominal[r] * self.room_heat_loads[r] for r in room_names
+            ) / total_heat_load
+        if aggregation in ("volume_weighted_average", "heat_load_weighted_average"):
+            # before the room-wise heat loads exist, e.g. while
+            # generate_archetype builds the zone, heat_load_weighted_average
+            # starts out from the room volumes - calc_building_parameter
+            # replaces it once they are known
             total_volume = sum(self.room_volumes[r] for r in room_names)
             return sum(
                 self.room_t_set_nominal[r] * self.room_volumes[r] for r in room_names
             ) / total_volume
         raise ValueError(
-            f"Unknown t_set_nominal_aggregation {aggregation!r}. Use 'max', "
-            "'volume_weighted_average', or a callable taking (room_names, self)."
+            f"Unknown t_set_nominal_aggregation {aggregation!r}. Use "
+            "'heat_load_weighted_average', 'volume_weighted_average', 'max', "
+            "or a callable taking (room_names, self)."
         )
 
     def _compute_adjacent_to_unheated(self, room_names):
@@ -2163,6 +2209,8 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         self.room_heat_loads_list = self._order_by_room_nr(room_heat_loads)
         self.sum_heat_load = 0
         for zone in self.thermal_zones:
+            # now that the room-wise heat loads are known
+            zone.t_inside = self._aggregate_t_set_nominal(self.zoning[zone.name])
             zone_heat_load = sum(
                 room_heat_loads[room] for room in self.zoning[zone.name]
             )
