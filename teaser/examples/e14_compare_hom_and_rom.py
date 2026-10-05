@@ -147,7 +147,6 @@ def example_compare_hom_and_rom(
         use_conditions.use_maintained_illuminance = False
         use_conditions.lighting_power = 0.0
     bldg.use_old = use_old
-    # bldg.integrate_unheated_rooms = {"Attic": "din12831_f1"}
     prj.used_library_calc = 'AixLib'
     prj.number_of_elements_calc = 4
 

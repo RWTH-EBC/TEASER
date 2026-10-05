@@ -1812,6 +1812,16 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                           _i["type"] in ["InnerWall", "Ceiling", "Floor"]}
         unheated_tot_outer_area = sum([ele["area"] for ele in outer_elements.values()])
         unheated_tot_inner_area = sum([ele["area"] for ele in inner_elements.values()])
+        # The stand-ins share out the unheated room's outer area and volume
+        # by its inner elements, which only adds up if each of them is
+        # shared with a heated room - as the Attic's floors are.
+        shared = {unheated[1] for unheated in adj_ele_heated_to_unheated.values()
+                  if unheated[0] == room}
+        if set(inner_elements) - shared:
+            raise NotImplementedError(
+                f"const_volumes needs every inner element of {room} to adjoin "
+                f"a heated room, which "
+                f"{sorted(set(inner_elements) - shared)} do not.")
 
         h_outer = {}
         for outer_ele_name, outer_ele_info in outer_elements.items():
@@ -1894,7 +1904,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
 
                 eq_area = outer_ele_info["area"] * \
                           ele_info["area"] / \
-                          unheated_tot_inner_area  # maybe unheated_to_heated_tot_inner_area
+                          unheated_tot_inner_area
                 outer_equivalent_part_element.area = eq_area
                 outer_equivalent_part_element.orientation = outer_ele_info["ori"]
                 outer_equivalent_part_element.tilt = outer_ele_info["tilt"]
