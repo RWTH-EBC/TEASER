@@ -395,6 +395,47 @@ class Test_besmod_output(unittest.TestCase):
             for value, room in zip(row[1:], rooms):
                 self.assertAlmostEqual(value, bldg.room_t_set_nominal[room] + heating - set_back)
 
+    def test_rom_heating_curve_max_room(self):
+        """test that the ROM exported next to the HOM evaluates its heating
+        curve at the warmest room's set temperature, as the HOM does"""
+
+        prj = Project()
+        prj.name = "BESModHeatingCurve"
+        prj.add_residential(
+            construction_data='aixlib_S',
+            geometry_data='aixlib_high_order_single_family_house',
+            name="ResidentialBuildingHighOrderAixLib",
+            year_of_construction=1990,
+            net_leased_area=170.0,
+            number_of_floors=2,
+            height_of_floors=2.6)
+        prj.add_residential(
+            construction_data='iwu_heavy',
+            geometry_data='iwu_single_family_dwelling',
+            name="ResidentialBuilding",
+            year_of_construction=1988,
+            number_of_floors=2,
+            height_of_floors=3.2,
+            net_leased_area=200.0)
+        prj.used_library_calc = "AixLib"
+        prj.number_of_elements_calc = 4
+        prj.calc_all_buildings()
+        examples = ["HeatPumpMonoenergetic", "GasBoilerBuildingOnly"]
+
+        for max_room, expected in ((True, "true"), (False, "false")):
+            path = prj.export_besmod(examples=examples, THydSup_nominal=328.15,
+                                     export_with_hom=True,
+                                     rom_heating_curve_max_room=max_room)
+            for example in examples:
+                with open(os.path.join(path, "ResidentialBuildingHighOrderAixLib",
+                                       example + "ResidentialBuildingHighOrderAixLib.mo")) as rom_file:
+                    self.assertIn(
+                        f"hydraulic(control(use_TZoneSetHeaCur={expected}))", rom_file.read())
+                # nothing changes for a ROM without a HOM next to it
+                with open(os.path.join(path, "ResidentialBuilding",
+                                       example + "ResidentialBuilding.mo")) as rom_file:
+                    self.assertNotIn("use_TZoneSetHeaCur", rom_file.read())
+
     def test_convert_heating_profile(self):
         """Test the conversion of heating profiles for BESMod"""
         with self.assertRaises(ValueError):

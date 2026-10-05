@@ -14,6 +14,7 @@ model HeatPumpMonoenergetic${bldg.name}
         "modelica://${bldg.parent.name}/${bldg.name}/${hom_profiles['file_internal_gains']}"),
         gain=1,
         redeclare ${hom_profiles['t_set_profile']} TSetProfile),
+    hydraulic(control(use_TZoneSetHeaCur=${"true" if rom_heating_curve_max_room else "false"})),
 % else:
     redeclare ${bldg.name} building,
     userProfiles(

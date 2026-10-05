@@ -35,6 +35,7 @@ def export_besmod(
         custom_script: Optional[Dict[str, str]] = None,
         export_with_hom: bool = True,
         heater_radiative_fraction: float = 0.35,
+        rom_heating_curve_max_room: bool = True,
 ) -> None:
     """
     Export building models for BESMod simulations.
@@ -88,6 +89,13 @@ def export_besmod(
         Radiative fraction of the ideal heater's heat flow in the
         TEASERHeatLoadCalculation example (BESMod's IdealHeaterFraRad), the
         rest is convective. Default is 0.35.
+    rom_heating_curve_max_room: bool
+        Evaluates the heating curve of the ROM exported next to the HOM at
+        the set temperature of its warmest room, as the HOM's heating curve
+        is, instead of at the zone's own set temperature (the rooms' set
+        temperatures weighted by fac_room_t_set). Only the HeatPumpMonoenergetic
+        and GasBoilerBuildingOnly examples have a heating curve. Default is
+        True.
 
     Raises
     ------
@@ -300,6 +308,7 @@ def export_besmod(
                     export_hom=export_hom,
                     hom_profiles=hom_profiles,
                     heater_radiative_fraction=heater_radiative_fraction,
+                    rom_heating_curve_max_room=rom_heating_curve_max_room,
                     TOda_nominal=bldg.thermal_zones[0].t_outside,
                     THydSup_nominal=t_hyd_sup_nominal_bldg[bldg.name],
                     TSetZone_nominal=t_set_zone_nominal,

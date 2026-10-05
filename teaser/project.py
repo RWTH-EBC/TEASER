@@ -901,6 +901,7 @@ class Project(object):
             report: bool = False,
             export_with_hom = False,
             heater_radiative_fraction: float = 0.35,
+            rom_heating_curve_max_room: bool = True,
     ) -> str:
         """Exports buildings for BESMod simulation
 
@@ -949,6 +950,10 @@ class Project(object):
             Radiative fraction of the ideal heater's heat flow in the
             TEASERHeatLoadCalculation example, the rest is convective.
             Default is 0.35.
+        rom_heating_curve_max_room : bool
+            Evaluates the heating curve of the ROM exported next to the HOM
+            at the set temperature of its warmest room, as the HOM's
+            heating curve is. Default is True.
 
         Returns
         -------
@@ -971,7 +976,8 @@ class Project(object):
                 QBuiOld_flow_design=QBuiOld_flow_design, QRoomOld_flow_design=QRoomOld_flow_design,
                 THydSupOld_design=THydSupOld_design,
                 custom_examples=custom_examples, custom_script=custom_script, export_with_hom=export_with_hom,
-                heater_radiative_fraction=heater_radiative_fraction
+                heater_radiative_fraction=heater_radiative_fraction,
+                rom_heating_curve_max_room=rom_heating_curve_max_room
             )
         else:
             for bldg in self.buildings:
@@ -981,7 +987,8 @@ class Project(object):
                         QBuiOld_flow_design=QBuiOld_flow_design, QRoomOld_flow_design=QRoomOld_flow_design,
                         THydSupOld_design=THydSupOld_design,
                         custom_examples=custom_examples, custom_script=custom_script, export_with_hom=export_with_hom,
-                        heater_radiative_fraction=heater_radiative_fraction
+                        heater_radiative_fraction=heater_radiative_fraction,
+                        rom_heating_curve_max_room=rom_heating_curve_max_room
                     )
 
         if report:
