@@ -683,7 +683,7 @@ class Test_besmod_output(unittest.TestCase):
         self.assertEqual(record["Azimut"],
                          [-150.0, -60.0, 30.0, 120.0, -150.0, 30.0])
         # the roof halves take the archetype's own roof_tilt, not AixLib's
-        # fixed 45 deg - which for the default alfa_grad happens to be 45
+        # fixed 45 deg - which for the default roof_tilt happens to be 45
         roof_tilt = bldg.top_level_geo_params["roof_tilt"]
         self.assertEqual(record["Tilt"],
                          [90.0, 90.0, 90.0, 90.0, roof_tilt, roof_tilt])
@@ -992,6 +992,67 @@ class Test_besmod_output(unittest.TestCase):
                          len(layers) + 1 + len(roof.layer))
         for layer, ceiling_layer in zip(stand_in.layer, layers):
             self.assertEqual(layer.material.name, ceiling_layer.material.name)
+
+    def test_hom_roof_tilt(self):
+        """test that roof_tilt shapes the HOM archetype and its export"""
+
+        prj = Project()
+        prj.name = "BESModHOMRoofTilt"
+        prj.add_residential(
+            construction_data='aixlib_S',
+            geometry_data='aixlib_high_order_single_family_house',
+            name="ResidentialBuildingHighOrderAixLib",
+            year_of_construction=1990,
+            net_leased_area=170.0,
+            number_of_floors=2,
+            height_of_floors=2.6)
+        bldg = prj.buildings[0]
+        self.assertEqual(bldg.roof_tilt, 45.0)
+        floor_area = bldg.thermal_zones[0].area
+        volume_45 = bldg.room_volumes["Bedroom"]
+
+        # reassigning it regenerates the archetype: the roof halves, the
+        # rooms below them and the Attic follow, the floor areas do not
+        bldg.roof_tilt = 30
+        zone = bldg.thermal_zones[0]
+        self.assertEqual(bldg.top_level_geo_params["alfa_grad"], 120.0)
+        self.assertEqual(
+            {roof.tilt for roof in zone.rooftops if roof.orientation != -1},
+            {30.0})
+        self.assertEqual(
+            {element.tilt for element in
+             bldg.unheated_room_envelope_elements["Attic"].values()
+             if element.orientation in (0.0, 180.0)
+             and element.tilt != 90.0},
+            {30.0})
+        self.assertEqual([tilt for _, _, tilt in bldg.surface_orientations],
+                         [90.0, 90.0, 90.0, 90.0, 30.0, 30.0])
+        self.assertAlmostEqual(zone.area, floor_area)
+        self.assertLess(bldg.room_volumes["Bedroom"], volume_45)
+
+        prj.used_library_calc = "AixLib"
+        prj.number_of_elements_calc = 4
+        prj.calc_all_buildings()
+        path = prj.export_besmod(examples=["TEASERHeatLoadCalculation"],
+                                 THydSup_nominal=55 + 273.15,
+                                 export_with_hom=True)
+        data_base_path = os.path.join(path, bldg.name, bldg.name + "_DataBase")
+        record = _read_surface_orientation_record(os.path.join(
+            data_base_path, bldg.name + "_SurfaceOrientation.mo"))
+        self.assertEqual(record["Tilt"], [90.0, 90.0, 90.0, 90.0, 30.0, 30.0])
+        exported = ""
+        for root, _, files in os.walk(os.path.join(path, bldg.name)):
+            for file in files:
+                with open(os.path.join(root, file)) as model_file:
+                    exported += model_file.read()
+        # AixLib's attic takes the angle at the ridge, 120 deg here
+        self.assertRegex(exported, r"alfa=2\.094395")
+
+        # too flat for the upper floor's rooms, or no roof at all
+        with self.assertRaises(ValueError):
+            bldg.roof_tilt = 15
+        with self.assertRaises(ValueError):
+            bldg.roof_tilt = 90
 
     def test_const_volumes_ua_attic_heat_balance(self):
         """test that const_volumes_ua keeps const_volumes' heat capacities

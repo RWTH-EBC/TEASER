@@ -438,7 +438,7 @@ def export_besmod(
             # AixLibHighOrderOFD - so the building's orientation (and any
             # rotate_building applied to it) reaches the HOM solely through
             # this record, which redirects those ports. It also carries the
-            # archetype's own roof_tilt, which follows alfa_grad and is
+            # archetype's own roof_tilt, which is
             # therefore not necessarily the 45 deg of AixLib's own
             # SurfaceOrientationData_N_E_S_W_RoofN_Roof_S.
             if bldg.rotation_pending_recalculation:

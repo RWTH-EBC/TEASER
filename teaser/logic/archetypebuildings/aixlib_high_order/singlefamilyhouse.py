@@ -18,7 +18,7 @@ from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.buildingphysics.door import Door
 from teaser.logic.buildingobjects.building import rotate_orientation
-from math import sin, cos, tan, pi, sqrt
+from math import sin, cos, tan, atan, pi, sqrt
 
 
 def _check_number_of_floors(room_names: list, room_floor: dict):
@@ -38,7 +38,7 @@ def _check_number_of_floors(room_names: list, room_floor: dict):
 # unrotated archetype and therefore repeat the "ori" entries generate_archetype
 # gives the matching elements - test_hom_surface_orientations keeps the two
 # in sync. "roof" tilt is not AixLib's fixed 45 deg but the archetype's own
-# roof_tilt, which follows alfa_grad.
+# roof_tilt.
 # The five groups of interior surfaces the single-zone ROM distributes the
 # solar radiation entering through the windows over, in the order BESMod's
 # TEASERBuildingSingleZone.FourElements lists them in AArraySol:
@@ -157,6 +157,11 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         # either regenerates the archetype automatically.
         self.attic_infiltration_class = "undicht"
         self.attic_air_change_rate = None
+        # Tilt of the two roof halves against the horizontal [deg], 45 as in
+        # AixLib's OFD house. It shapes the upper floor's rooms below the
+        # roof, the Attic and the roof areas, e.g. for photovoltaics on them.
+        # Reassigning it regenerates the archetype automatically.
+        self.roof_tilt = 45.0
         # Sets the ROM's outer surface coefficients up the way the HOM
         # handles them (see _set_hom_surface_coefficients). None applies
         # them exactly when the building is exported against
@@ -209,7 +214,6 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             "windowarea_92": 1.73,
             "windowarea_102": 1.73,
             "windowarea_103": 1.73,
-            "alfa_grad": 90,  # ToDo: maybe test 110 for 35 roof_tilt make changeable
         }
         self.update_calc_original_hom_dim_parameters()
 
@@ -391,14 +395,22 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         roof_length = bldg_length + 2 * thickness_iw_simple  # inner wall thicknesses load simpled?
         self.top_level_geo_params["roof_length"] = roof_length
 
-        alfa_grad = og_dim["alfa_grad"]
-        roof_tilt = (180 - alfa_grad) / 2
+        roof_tilt = self.roof_tilt
+        # the angle at the ridge, which AixLib's attic takes
+        alfa_grad = 180 - 2 * roof_tilt
         self.top_level_geo_params["roof_tilt"] = roof_tilt
         self.top_level_geo_params["alfa_grad"] = alfa_grad
         height_of_floors = self.height_of_floors
         self.top_level_geo_params["height_of_floors"] = height_of_floors
         room_height_short = og_dim["height_dwarf_wall"]
         room_width_short = room_width - (height_of_floors - room_height_short) / tan(roof_tilt * pi / 180)
+        if room_width_short <= 0:
+            raise ValueError(
+                f"A roof_tilt of {roof_tilt} deg is too flat for {self.name}: "
+                f"the roof would meet the upper floor's ceiling outside its "
+                f"rooms. It needs at least "
+                f"{atan((height_of_floors - room_height_short) / room_width) * 180 / pi:.1f} deg "
+                f"for rooms {room_width:.2f} m wide.")
         self.top_level_geo_params["room_width_short"] = room_width_short
         self.top_level_geo_params["room_height_short"] = room_height_short
         wRO = (height_of_floors - room_height_short) / sin(roof_tilt * pi / 180)
@@ -2606,6 +2618,19 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
     @attic_air_change_rate.setter
     def attic_air_change_rate(self, value):
         self._attic_air_change_rate = value
+        if getattr(self, "_initialized", False):
+            self.generate_archetype()
+
+    @property
+    def roof_tilt(self):
+        return self._roof_tilt
+
+    @roof_tilt.setter
+    def roof_tilt(self, value):
+        value = float(value)
+        if not 0 < value < 90:
+            raise ValueError(f"roof_tilt has to be between 0 and 90 deg, got {value}.")
+        self._roof_tilt = value
         if getattr(self, "_initialized", False):
             self.generate_archetype()
 
