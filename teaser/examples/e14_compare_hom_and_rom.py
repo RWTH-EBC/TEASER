@@ -218,10 +218,8 @@ def example_compare_hom_and_rom(
     # have to be summed up before they can be compared to the ROM's single one.
     results = {name: TimeSeriesData(file).to_df()
                for name, file in zip(("rom", "hom"), result_files)}
-    rooms = sorted(bldg.room_name_nr, key=bldg.room_name_nr.get)
-    room_volumes = [bldg.room_volumes[room] for room in rooms]
 
-    comparison = _compare_results(results["rom"], results["hom"], room_volumes)
+    comparison = _compare_results(results["rom"], results["hom"])
     print(f"\nROM against HOM over {stop_time / 86400:.0f} days"
           f"{' (use_old)' if use_old else ''}"
           f"{' (validation)' if validation else ''}:")
@@ -235,8 +233,8 @@ def example_compare_hom_and_rom(
         figure_path = save_path.joinpath(
             "comparison_hom_rom" + ("_use_old" if use_old else "")
             + ("_validation" if validation else "") + ".png")
-        plot_comparison(results["rom"], results["hom"], room_volumes,
-                        comparison, figure_path)
+        plot_comparison(results["rom"], results["hom"], comparison,
+                        figure_path)
         print(f"  plot                 {figure_path}")
     return comparison
 
@@ -246,6 +244,9 @@ def example_compare_hom_and_rom(
 POWER = "electrical.outBusElect.tra.PHea[1].value"
 ENERGY = "electrical.outBusElect.tra.PHea[1].integral"
 TEMPERATURE = "building.buiMeaBus.TZoneMea[1]"
+# The HOM's room temperatures averaged by room volume, the way the archetype
+# aggregates them for the merged zone
+TEMPERATURE_HOM = "outputs.building.TBuiVolAve"
 
 
 def _zone_columns(df, template):
@@ -264,18 +265,15 @@ def _sum_over_zones(df, template):
     return _zone_columns(df, template).sum(axis=1)
 
 
-def _compare_results(rom, hom, room_volumes):
+def _compare_results(rom, hom):
     """Compares the ROM's single zone against the HOM's ten rooms"""
     power_rom = _sum_over_zones(rom, POWER)
     power_hom = _sum_over_zones(hom, POWER)
     energy_rom = _sum_over_zones(rom, ENERGY)[-1] / 3.6e6
     energy_hom = _sum_over_zones(hom, ENERGY)[-1] / 3.6e6
 
-    # the HOM's room temperatures are averaged the same way the archetype
-    # aggregates them for the merged zone, by room volume
     temperature_rom = _sum_over_zones(rom, TEMPERATURE)
-    weights = np.asarray(room_volumes) / sum(room_volumes)
-    temperature_hom = _zone_columns(hom, TEMPERATURE) @ weights
+    temperature_hom = hom[TEMPERATURE_HOM].to_numpy()
 
     return {
         "energy_rom": energy_rom,
@@ -288,7 +286,7 @@ def _compare_results(rom, hom, room_volumes):
     }
 
 
-def plot_comparison(rom, hom, room_volumes, comparison, figure_path=None):
+def plot_comparison(rom, hom, comparison, figure_path=None):
     """Plots the ROM against the HOM over the simulated period
 
     Three panels over one shared time axis rather than one panel with two
@@ -321,8 +319,7 @@ def plot_comparison(rom, hom, room_volumes, comparison, figure_path=None):
     energy_rom = _sum_over_zones(rom, ENERGY)[plotted] / 3.6e6
     energy_hom = _sum_over_zones(hom, ENERGY)[plotted] / 3.6e6
     temperature_rom = _sum_over_zones(rom, TEMPERATURE)[plotted] - 273.15
-    room_temperatures = _zone_columns(hom, TEMPERATURE)[plotted] - 273.15
-    weights = np.asarray(room_volumes) / sum(room_volumes)
+    temperature_hom = hom[TEMPERATURE_HOM].to_numpy()[plotted] - 273.15
 
     figure, axes = plt.subplots(3, 1, sharex=True, figsize=(9.0, 8.0),
                                 facecolor=surface)
@@ -353,7 +350,7 @@ def plot_comparison(rom, hom, room_volumes, comparison, figure_path=None):
                      xytext=(-6, 6), textcoords="offset points",
                      ha="right", color=ink, fontsize=9)
 
-    axes[2].plot(days, room_temperatures @ weights, color=color_hom,
+    axes[2].plot(days, temperature_hom, color=color_hom,
                  linewidth=2.0)
     axes[2].plot(days, temperature_rom, color=color_rom, linewidth=2.0)
     axes[2].set_ylabel("zone temperature in °C", color=ink, fontsize=10)
