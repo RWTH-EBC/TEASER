@@ -65,7 +65,7 @@ class AixLib(object):
         self.file_ahu = "AHU_" + self.parent.name + ".txt"
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".txt"
         self.version = "3.0.1"
-        self.besmod_version = "0.8.0"
+        self.besmod_version = "0.9.0"
         self.total_surface_area = None
         self.consider_heat_capacity = True
         self.use_set_back = True
