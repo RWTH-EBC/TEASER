@@ -170,16 +170,19 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
     t_set_nominal_aggregation : str or callable
         How room_t_set_nominal is reduced to the zone's t_inside, which
         BESMod takes as TSetZone_nominal for the zone's nominal heat flow and
-        the design of its heating system: "heat_load_weighted_average"
-        (default), "volume_weighted_average", "max", or a callable taking
-        (room_names, building) and returning a temperature in K.
-        Regenerating.
+        the design of its heating system: "volume_weighted_average"
+        (default, as fac_room_t_set_weighting, so the zone is designed for
+        the temperature it is operated at), "heat_load_weighted_average",
+        "max", or a callable taking (room_names, building) and returning a
+        temperature in K. Regenerating.
     fac_room_t_set_weighting : str, dict or callable
         Weights by which the ROM's set temperature is averaged from the
         HOM's room-wise profiles (facRoomTSet of BESMod's TEASERHOMtoROM):
-        "heat_load" (default), "volume", a dict {room: weight} or a
-        callable taking the building and returning one. Normalized to sum to
-        1. Read at the export.
+        "volume" (default), "heat_load", a dict {room: weight} or a callable
+        taking the building and returning one. Normalized to sum to 1. Read
+        at the export. Against the HOM, "volume" matches the heat pump's
+        electricity and SCOP better, "heat_load" overweights the warm
+        bathroom, whose heat load includes what it gives to its neighbours.
     fac_room_nat_vent_weighting : str, dict or callable
         The same for the natural ventilation (facRoomNatVent), "volume" by
         default, which conserves the zone's total ventilation air flow. Read
@@ -316,8 +319,8 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         }
         self.room_t_set_nominal = {room: 293.15 for room in self.room_name_nr}
         self.room_t_set_nominal["Bath"] = 297.15
-        self.t_set_nominal_aggregation = "heat_load_weighted_average"
-        self.fac_room_t_set_weighting = "heat_load"
+        self.t_set_nominal_aggregation = "volume_weighted_average"
+        self.fac_room_t_set_weighting = "volume"
         # scaled at the export, see besmod_output._write_hom_user_profiles
         self.room_internal_gains_profiles = copy.deepcopy(_ROOM_INTERNAL_GAINS_PROFILES)
         self.fac_room_nat_vent_weighting = "volume"

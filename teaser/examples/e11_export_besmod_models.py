@@ -129,8 +129,7 @@ def example_export_besmod():
     # With `export_with_hom=True`, the AixLib HOM archetypes are additionally
     # exported as HOM, in the same examples with the suffix `_HOM`. Their ROM
     # then gets the HOM's room-wise user profiles (BESMod's TEASERHOMtoROM),
-    # averaged over the rooms, by default by heat load for the set temperature
-    # and by volume for the natural ventilation. The archetype's
+    # averaged over the rooms, by default by their volume. The archetype's
     # fac_room_t_set_weighting and fac_room_nat_vent_weighting change that
     # ("heat_load", "volume" or own weights per room).
     # export_besmod's heater_radiative_fraction and rom_heating_curve_max_room

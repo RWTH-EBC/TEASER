@@ -245,14 +245,12 @@ class Test_besmod_output(unittest.TestCase):
         bldg = prj.buildings[0]
         rooms = sorted(bldg.room_name_nr, key=bldg.room_name_nr.get)
 
-        # the set temperatures default to the room heat loads, the natural
-        # ventilation to the room volumes, both normalized to a weighted
-        # average
+        # the set temperatures and the natural ventilation both default to
+        # the room volumes, normalized to a weighted average
         total_volume = sum(bldg.room_volumes[room] for room in rooms)
         by_volume = [bldg.room_volumes[room] / total_volume for room in rooms]
         total_heat_load = sum(bldg.room_heat_loads[room] for room in rooms)
-        by_heat_load = [bldg.room_heat_loads[room] / total_heat_load for room in rooms]
-        for weights, expected_weights in ((bldg.fac_room_t_set, by_heat_load),
+        for weights, expected_weights in ((bldg.fac_room_t_set, by_volume),
                                           (bldg.fac_room_nat_vent, by_volume)):
             self.assertEqual(len(weights), len(bldg.room_name_nr))
             self.assertAlmostEqual(sum(weights), 1.0)
@@ -265,13 +263,13 @@ class Test_besmod_output(unittest.TestCase):
         # ROM is designed for the temperature it is operated at
         weighted = sum(fac * t_set for fac, t_set
                        in zip(bldg.fac_room_t_set, bldg.room_t_set_nominal_list))
-        self.assertEqual(bldg.t_set_nominal_aggregation, "heat_load_weighted_average")
+        self.assertEqual(bldg.t_set_nominal_aggregation, "volume_weighted_average")
         self.assertAlmostEqual(weighted, bldg.thermal_zones[0].t_inside)
         self.assertLess(weighted, max(bldg.room_t_set_nominal_list))
-        bldg.fac_room_t_set_weighting = "volume"
+        bldg.fac_room_t_set_weighting = "heat_load"
         weighted = sum(fac * t_set for fac, t_set
                        in zip(bldg.fac_room_t_set, bldg.room_t_set_nominal_list))
-        bldg.t_set_nominal_aggregation = "volume_weighted_average"
+        bldg.t_set_nominal_aggregation = "heat_load_weighted_average"
         self.assertAlmostEqual(weighted, bldg.thermal_zones[0].t_inside)
         bldg.t_set_nominal_aggregation = "max"
         self.assertAlmostEqual(bldg.thermal_zones[0].t_inside,
