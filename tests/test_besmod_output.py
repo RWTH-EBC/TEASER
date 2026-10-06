@@ -1054,6 +1054,71 @@ class Test_besmod_output(unittest.TestCase):
         with self.assertRaises(ValueError):
             bldg.roof_tilt = 90
 
+    def test_update_besmod_hom_example(self):
+        """test the script that regenerates BESMod's HOM export example"""
+        import importlib.util
+        import tempfile
+        from pathlib import Path
+
+        script = Path(__file__).parents[1].joinpath(
+            "scripts", "update_besmod_hom_example.py")
+        spec = importlib.util.spec_from_file_location(
+            "update_besmod_hom_example", script)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+
+        with tempfile.TemporaryDirectory() as directory:
+            besmod = Path(directory, "BESMod")
+            order = besmod.joinpath("Examples", "TEASERExport", "package.order")
+            order.parent.mkdir(parents=True)
+            order.write_text("ArchetypeExample\n")
+            # BESMod's Potsdam weather is not part of TEASER, any other
+            # weather file does for converting the export
+            weather = utilities.get_full_path(
+                "data/input/inputdata/weatherdata/"
+                "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos")
+            for _ in range(2):
+                module.update_besmod_hom_example(
+                    besmod.joinpath("package.mo"), weather_file=weather)
+
+            # once in the package order, however often it runs
+            self.assertEqual(order.read_text().split(),
+                             ["ArchetypeExample", module.PACKAGE])
+            example = order.parent.joinpath(module.PACKAGE, module.BUILDING)
+            models = {model.stem: model.read_text()
+                      for model in example.rglob("*.mo")}
+            for kind in module.EXAMPLES:
+                for suffix in ("", "_HOM"):
+                    name = kind + module.BUILDING + suffix
+                    self.assertIn(name, models)
+                    self.assertIn(
+                        f'"modelica://BESMod/Resources/Scripts/Dymola/'
+                        f'Examples/TEASERExport/{module.PACKAGE}/'
+                        f'{module.BUILDING}/{name}.mos"', models[name])
+                    self.assertIn(
+                        f'"modelica://BESMod/Resources/{module.GAINS}"',
+                        models[name])
+                    script = besmod.joinpath(
+                        "Resources", "Scripts", "Dymola", "Examples",
+                        "TEASERExport", module.PACKAGE, module.BUILDING,
+                        name + ".mos").read_text()
+                    self.assertIn(
+                        f'simulateModel("{module.FULL_NAME}.'
+                        f'{module.BUILDING}.{name}"', script)
+            for name, text in models.items():
+                self.assertNotIn("filNamWea", text, name)
+                self.assertNotRegex(
+                    text, r"(?<![\w.])" + module.PACKAGE + r"\.", name)
+            self.assertFalse(list(example.rglob("*.txt")))
+
+            # one day of gains, from 0 to 24 h, for the ten rooms
+            gains = besmod.joinpath("Resources", module.GAINS).read_text()
+            rows = gains.splitlines()
+            self.assertEqual(rows[1], "double Internals(25, 12)")
+            self.assertEqual(rows[2].split("\t")[0], "0")
+            self.assertEqual(rows[-1].split("\t")[0], "86400")
+            self.assertEqual(rows[2].split("\t")[1:], rows[-1].split("\t")[1:])
+
     def test_const_volumes_ua_attic_heat_balance(self):
         """test that const_volumes_ua keeps const_volumes' heat capacities
         and carries the Attic's steady-state heat balance, also after a
