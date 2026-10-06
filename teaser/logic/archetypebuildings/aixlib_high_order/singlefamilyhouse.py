@@ -1503,9 +1503,6 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
           surfaces of the room it enters, so deriving it room-wise is
           exactly what the single merged zone cannot do on its own.
 
-        Also fills nRooms, roomVolumes and FacATransparentPerRoom, which
-        carry the room resolution itself into the record.
-
         Called at the end of calc_building_parameter, since the per
         orientation parameters have to follow the very orientation order
         the zone's model_attr ended up with.
@@ -1516,9 +1513,6 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                 "archetype's single heated zone.")
         zone = self.thermal_zones[0]
         rooms = sorted(self.room_name_nr, key=self.room_name_nr.get)
-
-        zone.number_of_rooms = len(rooms)
-        zone.room_volumes = [self.room_volumes[room] for room in rooms]
 
         outer_wall_areas = self._areas_by_room(zone.outer_walls)
         roof_areas = self._areas_by_room(zone.rooftops, indoor=True)
@@ -1562,7 +1556,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
     def calc_split_factor_sol_rad(self, zone, rooms, outer_wall_areas,
                                   roof_areas, inner_areas,
                                   ground_floor_areas, window_areas):
-        """Derives splitFactorSolRad (and FacATransparentPerRoom) room-wise
+        """Derives splitFactorSolRad room-wise
 
         The radiation entering through the windows of one orientation is
         distributed over the five interior surface groups
@@ -1619,20 +1613,16 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             "Roof": sum(roof_areas.values()),
         }
 
-        transparent_factors = []
         split_factors = [[] for _ in _ROM_SOLAR_SURFACE_GROUPS]
         for group in groups:
             transparent = {room: window_by_group[room][group] for room in rooms}
             total_transparent = sum(transparent.values())
             if total_transparent == 0:
-                transparent_factors.append([0.0 for _ in rooms])
                 total_area = sum(zone_areas.values())
                 for index, name in enumerate(_ROM_SOLAR_SURFACE_GROUPS):
                     split_factors[index].append(
                         zone_areas[name] / total_area if total_area else 0.0)
                 continue
-            transparent_factors.append(
-                [transparent[room] / total_transparent for room in rooms])
             for index, name in enumerate(_ROM_SOLAR_SURFACE_GROUPS):
                 factor = 0.0
                 for room in rooms:
@@ -1658,7 +1648,6 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                                * transparent[room] / total_transparent)
                 split_factors[index].append(factor)
 
-        zone.win_area_room_factors = transparent_factors
         zone.split_factor_sol_rad = split_factors
 
     def _aggregate_t_set_nominal(self, room_names):

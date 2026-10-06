@@ -761,11 +761,6 @@ class Test_besmod_output(unittest.TestCase):
         prj.number_of_elements_calc = 4
         prj.calc_all_buildings()
         zone = bldg.thermal_zones[0]
-        rooms = sorted(bldg.room_name_nr, key=bldg.room_name_nr.get)
-
-        self.assertEqual(zone.number_of_rooms, len(rooms))
-        self.assertEqual(zone.room_volumes,
-                         [bldg.room_volumes[room] for room in rooms])
 
         # every oriented element of the zone sits on one of the two floors,
         # so the two shares split the whole area between them
@@ -792,11 +787,6 @@ class Test_besmod_output(unittest.TestCase):
         for index in range(orientations):
             self.assertAlmostEqual(
                 sum(row[index] for row in zone.split_factor_sol_rad), 1.0)
-
-        self.assertEqual(len(zone.win_area_room_factors), orientations)
-        for row in zone.win_area_room_factors:
-            self.assertEqual(len(row), len(rooms))
-            self.assertAlmostEqual(sum(row), 1.0)
 
         # the elements of the 'din12831_f1' attic are built on the ceiling
         # between the rooms and the Attic, which is the surface the zone
@@ -843,19 +833,15 @@ class Test_besmod_output(unittest.TestCase):
         self.assertIn(
             "BESMod.Systems.Demand.Building.RecordsCollection."
             "BuildingSingleZoneBaseRecord", record)
-        # nFloorLevels and nRooms are Modelica Integers, and a numpy scalar
-        # would render as "np.float64(0.5)" instead of a plain number
+        # nFloorLevels is a Modelica Integer, and a numpy scalar would
+        # render as "np.float64(0.5)" instead of a plain number
         self.assertRegex(record, r"nFloorLevels = 2,")
-        self.assertRegex(record, r"nRooms = " + str(len(rooms)) + ",")
         self.assertNotIn("np.float", record)
         split_factors = _read_record_matrix(record, "splitFactorSolRad")
         self.assertEqual(len(split_factors), 5)
         for row, expected_row in zip(split_factors, zone.split_factor_sol_rad):
             for factor, expected_factor in zip(row, expected_row):
                 self.assertAlmostEqual(factor, expected_factor)
-        transparent = _read_record_matrix(record, "FacATransparentPerRoom")
-        self.assertEqual(len(transparent), zone.model_attr.n_outer)
-        self.assertEqual(len(transparent[0]), len(rooms))
 
         # use_old falls back to the model and the record the export used
         # before, which have none of these parameters
@@ -1253,11 +1239,6 @@ class Test_besmod_output(unittest.TestCase):
         bldg = prj.buildings[0]
         zone = bldg.thermal_zones[0]
 
-        # a zone without a room resolution is its own single room
-        self.assertEqual(zone.number_of_rooms, 1)
-        self.assertEqual(zone.room_volumes, [zone.volume])
-        self.assertEqual(zone.win_area_room_factors,
-                         [[1.0]] * zone.model_attr.n_outer)
         self.assertIsNone(zone.split_factor_sol_rad)
 
         path = prj.export_besmod(examples=["TEASERHeatLoadCalculation"],
@@ -1265,10 +1246,6 @@ class Test_besmod_output(unittest.TestCase):
         with open(os.path.join(path, bldg.name, bldg.name + "_DataBase",
                                bldg.name + "_" + zone.name + ".mo")) as record_file:
             record = record_file.read()
-        self.assertIn("nRooms = 1,", record)
-        transparent = _read_record_matrix(record, "FacATransparentPerRoom")
-        # FacATransparentPerRoom is declared [nOrientations, nRooms]
-        self.assertEqual(len(transparent), zone.model_attr.n_outer)
-        self.assertEqual(len(transparent[0]), 1)
+        self.assertIn("BuildingSingleZoneBaseRecord", record)
         # left out, so the record keeps AixLib's own whole-zone area split
         self.assertNotIn("splitFactorSolRad", record)

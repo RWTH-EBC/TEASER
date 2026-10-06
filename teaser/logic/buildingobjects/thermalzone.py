@@ -134,9 +134,6 @@ class ThermalZone(object):
 
         self._number_of_floors = None
         self._height_of_floors = None
-        self._number_of_rooms = None
-        self._room_volumes = None
-        self._win_area_room_factors = None
         self._split_factor_sol_rad = None
 
         self._roof_area_attic_factor = 1
@@ -1148,81 +1145,6 @@ class ThermalZone(object):
                 self._ratio_win_area_iw = value
             except:
                 raise ValueError("Can't convert ratio window area inner wall to float")
-
-    @property
-    def number_of_rooms(self):
-        """Returns the number of rooms the thermal zone is made up of.
-
-        A zone without a room resolution is its own single room.
-        """
-        if self._number_of_rooms is None:
-            return 1
-        return self._number_of_rooms
-
-    @number_of_rooms.setter
-    def number_of_rooms(self, value):
-        """Sets the number of rooms in the thermal zone."""
-        if isinstance(value, int):
-            self._number_of_rooms = value
-        elif value is None:
-            self._number_of_rooms = 1  # Default to 1 if not set
-        else:
-            try:
-                value = int(value)
-                self._number_of_rooms = value
-            except ValueError:
-                raise ValueError("Can't convert number of rooms to integer")
-
-    @property
-    def win_area_room_factors(self):
-        """Returns the window area room factors for the thermal zone.
-
-        One row per orientation and one column per room, holding that
-        room's share of the orientation's transparent area - so every row
-        sums to 1. Without a room resolution the zone is its own single
-        room, which owns all of it, and the rows are split evenly.
-        """
-        if self._win_area_room_factors is None:
-            if self.model_attr is None:
-                return None
-            rooms = self.number_of_rooms
-            return [[1.0 / rooms] * rooms
-                    for _ in range(max(self.model_attr.n_outer, 1))]
-        return self._win_area_room_factors
-
-    @win_area_room_factors.setter
-    def win_area_room_factors(self, value):
-        """Sets the window area room factors for the thermal zone."""
-        if isinstance(value, list) and all(isinstance(i, list) and all(isinstance(j, float) for j in i) for i in value):
-            self._win_area_room_factors = value
-        elif value is None:
-            # derived on read, where the number of orientations is known
-            self._win_area_room_factors = None
-        else:
-            raise ValueError("Window area room factors must be a list of lists with float entries")
-
-    @property
-    def room_volumes(self):
-        """Returns the room volumes for the thermal zone.
-
-        Without a room resolution the zone's volume is split evenly over
-        its rooms.
-        """
-        if self._room_volumes is None:
-            return [self.volume / self.number_of_rooms] * self.number_of_rooms
-        return self._room_volumes
-
-    @room_volumes.setter
-    def room_volumes(self, value):
-        """Sets the room volumes for the thermal zone."""
-        if isinstance(value, list):
-            self._room_volumes = value
-        elif value is None:
-            # derived on read, so a later change of volume still shows
-            self._room_volumes = None
-        else:
-            raise ValueError(
-                f"Room volumes must be a list of floats. But it is {type(value)} and {[type(i) for i in value]}.")
 
     @property
     def split_factor_sol_rad(self):
