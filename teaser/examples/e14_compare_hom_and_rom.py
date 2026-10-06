@@ -89,6 +89,7 @@ def example_compare_hom_and_rom(
         output_interval=900,
         use_old=False,
         plot=True,
+        show_plot=True,
         path_ibpsa=None,
         path_aixlib=None,
         path_besmod=None,
@@ -108,8 +109,10 @@ def example_compare_hom_and_rom(
         the room-wise parameters the archetype derives for the single-zone
         model - useful to see what those parameters are worth
     plot : bool
-        plots the two models against each other and saves the figure next to
-        the simulation results
+        plots the two models against each other
+    show_plot : bool
+        opens the plot in a window, which blocks until it is closed. Without
+        it, the plot is left to the caller to show
     path_ibpsa, path_aixlib, path_besmod : str
         paths to the package.mo of each library. Cloned from GitHub if None.
     export_path : str
@@ -244,12 +247,15 @@ def example_compare_hom_and_rom(
     print(f"  RMSE zone temperature{comparison['rmse_temperature']:9.4f} K")
 
     if plot:
-        figure_path = save_path.joinpath(
-            "comparison_hom_rom" + ("_use_old" if use_old else "")
-            + ("_validation" if validation else "") + ".png")
-        plot_comparison(results["rom"], results["hom"], comparison,
-                        figure_path)
-        print(f"  plot                 {figure_path}")
+        figure = plot_comparison(results["rom"], results["hom"], comparison)
+        # names the window after the case, as two of them can be open
+        if figure.canvas.manager is not None:
+            figure.canvas.manager.set_window_title(
+                "Example 14" + (" use_old" if use_old else "")
+                + (" validation" if validation else ""))
+        if show_plot:
+            import matplotlib.pyplot as plt
+            plt.show()
     return comparison
 
 
@@ -261,6 +267,9 @@ TEMPERATURE = "building.buiMeaBus.TZoneMea[1]"
 # The HOM's room temperatures averaged by room volume, the way the archetype
 # aggregates them for the merged zone
 TEMPERATURE_HOM = "outputs.building.TBuiVolAve"
+# and the lowest and highest of them
+TEMPERATURE_HOM_MIN = "outputs.building.TBuiMin"
+TEMPERATURE_HOM_MAX = "outputs.building.TBuiMax"
 
 
 def _zone_columns(df, template):
@@ -300,19 +309,20 @@ def _compare_results(rom, hom):
     }
 
 
-def plot_comparison(rom, hom, comparison, figure_path=None):
+def plot_comparison(rom, hom, comparison):
     """Plots the ROM against the HOM over the simulated period
 
     Three panels over one shared time axis rather than one panel with two
     scales: the heating power the two models call for, the heating energy that
     adds up to, and the zone temperature they hold. The HOM's ten room
     temperatures are reduced to the one the merged zone would have, by room
-    volume - the rooms themselves spread much wider than that (the bathroom
-    alone is designed for 24 instead of 20 degrees), and that spread is
-    precisely what the ROM cannot have.
+    volume, and shown with the band from their lowest to their highest - the
+    rooms spread much wider than their average (the bathroom alone is designed
+    for 24 instead of 20 degrees), and that spread is precisely what the ROM
+    cannot have.
 
     The same two colours mean the same two models in all three panels, so only
-    the first one carries a legend.
+    the first one carries a legend, and the third one for the band.
     """
     import matplotlib.pyplot as plt
 
@@ -334,6 +344,8 @@ def plot_comparison(rom, hom, comparison, figure_path=None):
     energy_hom = _sum_over_zones(hom, ENERGY)[plotted] / 3.6e6
     temperature_rom = _sum_over_zones(rom, TEMPERATURE)[plotted] - 273.15
     temperature_hom = hom[TEMPERATURE_HOM].to_numpy()[plotted] - 273.15
+    temperature_hom_min = hom[TEMPERATURE_HOM_MIN].to_numpy()[plotted] - 273.15
+    temperature_hom_max = hom[TEMPERATURE_HOM_MAX].to_numpy()[plotted] - 273.15
 
     figure, axes = plt.subplots(3, 1, sharex=True, figsize=(9.0, 8.0),
                                 facecolor=surface)
@@ -364,10 +376,15 @@ def plot_comparison(rom, hom, comparison, figure_path=None):
                      xytext=(-6, 6), textcoords="offset points",
                      ha="right", color=ink, fontsize=9)
 
+    axes[2].fill_between(days, temperature_hom_min, temperature_hom_max,
+                         color=color_hom, alpha=0.18, linewidth=0,
+                         label="HOM rooms, lowest to highest")
     axes[2].plot(days, temperature_hom, color=color_hom,
                  linewidth=2.0)
     axes[2].plot(days, temperature_rom, color=color_rom, linewidth=2.0)
     axes[2].set_ylabel("zone temperature in °C", color=ink, fontsize=10)
+    axes[2].legend(frameon=False, labelcolor=ink, fontsize=9,
+                   loc="lower right")
     axes[2].set_xlabel("time in days", color=ink, fontsize=10)
     axes[2].annotate(f"RMSE {comparison['rmse_temperature']:.3f} K",
                      xy=(1.0, 1.0), xycoords="axes fraction",
@@ -378,8 +395,6 @@ def plot_comparison(rom, hom, comparison, figure_path=None):
                     "it was merged from", color=ink, fontsize=12, x=0.125,
                     ha="left")
     figure.tight_layout()
-    if figure_path is not None:
-        figure.savefig(figure_path, dpi=150, facecolor=surface)
     return figure
 
 
@@ -392,7 +407,9 @@ if __name__ == '__main__':
             path_besmod=r"D:\01_git\BESMod\BESMod\package.mo",
             path_ibpsa=r"D:\01_git\BESMod\installed_dependencies\IBPSA\IBPSA\package.mo",
             path_aixlib=r"D:\01_git\BESMod\installed_dependencies\AixLib\AixLib\package.mo",
-            validation=validation)
+            validation=validation,
+            # both plots open together at the end instead
+            show_plot=True)
 
     print(f"\n{'':26s}{'validation':>12s}{'default':>12s}")
     for key, label, factor, unit in (
@@ -403,5 +420,8 @@ if __name__ == '__main__':
             ("rmse_temperature", "RMSE zone temperature", 1, "K")):
         print(f"{label + ' [' + unit + ']':26s}"
               + "".join(f"{comparisons[v][key] * factor:12.2f}" for v in (True, False)))
+
+    import matplotlib.pyplot as plt
+    plt.show()
 
     print("Example 14: That's it! :)")

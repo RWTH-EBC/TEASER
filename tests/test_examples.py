@@ -76,7 +76,8 @@ class Test_examples(object):
         from teaser.examples.e14_compare_hom_and_rom import (
             example_compare_hom_and_rom)
         try:
-            comparison = example_compare_hom_and_rom(stop_time=86400)
+            comparison = example_compare_hom_and_rom(stop_time=86400,
+                                                     show_plot=False)
         except FileNotFoundError as err:
             # no Dymola (as in CI), or a BESMod without the single-zone model
             pytest.skip(f"Cannot simulate the comparison here: {err}")
