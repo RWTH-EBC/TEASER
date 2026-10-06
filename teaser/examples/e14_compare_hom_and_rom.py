@@ -10,12 +10,26 @@
 #
 # This example runs that comparison: it exports the two models, simulates both in
 # Dymola and reports how far the ROM is from the HOM in heating energy, heating
-# power and zone temperature. It is the measure of how much of the HOM's
-# behaviour survives the merge into one zone - and therefore of what the
-# room-wise parameters the archetype derives for the ROM
-# (`calc_rom_inner_heat_transfer_parameters`) are worth. Pass `use_old=True` to
-# see the difference: the building is then exported against BESMod's older
-# `TEASERThermalZone`, which has none of them.
+# power and zone temperature, i.e. how much of the HOM's behaviour survives the
+# merge into one zone.
+#
+# ## The single-zone ROM
+# The ROM is BESMod's `TEASERThermalSingleZone`: AixLib's four element model,
+# like `TEASERThermalZone` for every other TEASER building, but for a building
+# that is one merged zone and still uses its inner geometry. From the rooms,
+# the archetype derives what the aggregated areas alone cannot tell
+# (`calc_rom_inner_heat_transfer_parameters`):
+# - the roof and the ground floor only exchange long wave radiation with the
+#   surfaces of their own floor
+# - the solar radiation through a window only reaches the room it enters
+# - the windows exchange no long wave radiation inside, as in the HOM
+# - only the part of the roof group facing the zone counts, the rest is the
+#   integrated attic's envelope
+#
+# The outer surfaces are treated as in the HOM (`hom_surface_coefficients`),
+# and the natural ventilation comes from the user profile alone instead of
+# being added to AixLib's ventilation controller. Pass `use_old=True` to export
+# the building against `TEASERThermalZone` instead, without all of this.
 #
 # By default both models are driven the way the archetype is meant to be used:
 # with the internal gains of its use conditions and each room at its own set
@@ -29,9 +43,9 @@
 # as you need Dymola installed on your device. You also need:
 # 1. ebcpy - for Dymola API interaction (`pip install ebcpy`)
 # 2. IBPSA, AixLib and BESMod. If their paths are not provided, this example
-#    tries to clone them using git. BESMod has to contain
-#    `Systems.Demand.Building.TEASERThermalSingleZone`, which the single-zone
-#    ROM export is built on.
+#    tries to clone them using git. BESMod has to support the HOM export, i.e.
+#    contain `Systems.Demand.Building.TEASERThermalSingleZone` - BESMod's
+#    `Examples.TEASERExport.HighOrderArchetypeExample` is this export.
 # 3. matplotlib, for the plot of the comparison (`plot=False` skips it)
 
 import os
@@ -150,6 +164,7 @@ def example_compare_hom_and_rom(
     prj.used_library_calc = 'AixLib'
     prj.number_of_elements_calc = 4
 
+    # BESMod's default weather, TRY2015 Potsdam, and its design temperature
     prj.set_location_parameters(t_outside=273.15 - 12.6,
                                 t_ground=273.15 + 13,
                                 weather_file_path=r"D:\01_git\BESMod\BESMod\Resources\WeatherData\TRY2015_522361130393_Jahr_City_Potsdam.mos",
