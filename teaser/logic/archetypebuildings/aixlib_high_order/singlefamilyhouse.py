@@ -177,7 +177,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
     fac_room_t_set_weighting : str, dict or callable
         Weights by which the ROM's set temperature is averaged from the
         HOM's room-wise profiles (facRoomTSet of BESMod's TEASERHOMtoROM):
-        "heat_load" (default), "volume", "equal", a dict {room: weight} or a
+        "heat_load" (default), "volume", a dict {room: weight} or a
         callable taking the building and returning one. Normalized to sum to
         1. Read at the export.
     fac_room_nat_vent_weighting : str, dict or callable
@@ -2459,7 +2459,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         Parameters
         ----------
         weighting : str or dict or callable
-            The weighting to resolve - "volume", "heat_load", "equal", a
+            The weighting to resolve - "volume", "heat_load", a
             {room_name: weight} dict, or a callable taking (self) and
             returning such a dict.
 
@@ -2492,13 +2492,10 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     f"calc_all_buildings()) first."
                 )
             weights = self.room_heat_loads
-        elif weighting == "equal":
-            weights = {room: 1.0 for room in self.room_name_nr}
         else:
             raise ValueError(
                 f"Unknown {attribute_name} {weighting!r}. Use 'volume', "
-                f"'heat_load', 'equal', a dict of per-room weights or a "
-                f"callable."
+                f"'heat_load', a dict of per-room weights or a callable."
             )
 
         missing = set(self.room_name_nr) - set(weights)

@@ -132,7 +132,7 @@ def example_export_besmod():
     # averaged over the rooms, by default by heat load for the set temperature
     # and by volume for the natural ventilation. The archetype's
     # fac_room_t_set_weighting and fac_room_nat_vent_weighting change that
-    # ("heat_load", "volume", "equal" or own weights per room).
+    # ("heat_load", "volume" or own weights per room).
     # export_besmod's heater_radiative_fraction and rom_heating_curve_max_room
     # set the ideal heater and the ROM's heating curve; see its docstring.
 

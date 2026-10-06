@@ -285,9 +285,11 @@ class Test_besmod_output(unittest.TestCase):
         for weight, expected in zip(bldg.fac_room_nat_vent, by_volume):
             self.assertAlmostEqual(weight, expected)
 
+        # equal weights match neither physical aggregation, so they are no
+        # built-in option (a dict can still give them)
         bldg.fac_room_t_set_weighting = "equal"
-        for weight in bldg.fac_room_t_set:
-            self.assertAlmostEqual(weight, 1 / len(bldg.room_name_nr))
+        with self.assertRaises(ValueError):
+            bldg.fac_room_t_set
 
         # a dict and a callable give full control, and are normalized too
         bldg.fac_room_t_set_weighting = {
