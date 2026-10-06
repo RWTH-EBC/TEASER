@@ -95,6 +95,114 @@ _AIR_CHANGE = "air_change"
 
 
 class AixLibHighOrderSingleFamilyHouse(Residential):
+    """Archetype of the single family house of AixLib's high order model.
+
+    This archetype rebuilds the one family dwelling (OFD) of AixLib's high
+    order model (HOM) room by room: ten heated rooms on a ground and an upper
+    floor, below an unheated attic with a gable roof. Its geometry is scaled
+    to net_leased_area, keeping the house's proportions, and the walls and
+    windows are loaded from construction_data for year_of_construction.
+
+    TEASER merges the ten rooms into one heated thermal zone, the reduced
+    order model (ROM), and derives room-wise what that zone cannot tell from
+    its aggregated areas (calc_rom_inner_heat_transfer_parameters). The
+    unheated attic is integrated into that zone by stand-in elements (see
+    integrate_unheated_rooms). Project.export_besmod with export_with_hom=True
+    exports the HOM itself next to the ROM, with the same constructions and
+    the same room-wise user profiles.
+
+    The settings marked as regenerating rebuild the archetype as soon as they
+    are reassigned. The others are read when calculating or exporting, or
+    need an explicit generate_archetype() afterwards, as noted.
+
+    Parameters
+    ----------
+
+    parent: Project()
+        The parent class of this object, the Project the Building belongs to.
+        Allows for better control of hierarchical structures. If not None it
+        adds this Building instance to Project.buildings.
+        (default: None)
+    name : str
+        Individual name
+    year_of_construction : int
+        Year of first construction
+    height_of_floors : float [m]
+        Height of the ground and the upper floor. (default: 2.6, as in AixLib)
+    net_leased_area : float [m2]
+        Total net leased area of the ten heated rooms, to which the geometry
+        is scaled. (default: 170, as in AixLib; similar TABULA buildings span
+        from 111 to 216)
+    construction_data : str
+        Construction data of the walls and windows, e.g. tabula_de_standard
+        or AixLib's own aixlib_S, aixlib_M and aixlib_L. The number of floors
+        is fixed to 2.
+
+    Attributes
+    ----------
+
+    integrate_unheated_rooms : dict
+        Method by which each unheated room enters the heated zone,
+        {"Attic": "const_volumes_ua"} by default. One of
+        integrate_unheated_rooms_integration_methods: "const_volumes_ua",
+        "const_volumes" or "din12831_f1" (the reduction factor f1 of
+        DIN EN 12831-1, derived from the attic's heat balance). Regenerating.
+    attic_infiltration_class : str
+        Air change of the attic's own air in its heat balance for
+        "const_volumes_ua" and "din12831_f1", "dicht" (0.5 1/h) or "undicht"
+        (2.5 1/h, default) as in DIN EN 12831-1 Table 5. Regenerating.
+    attic_air_change_rate : float [1/h]
+        Gives that air change directly instead, if not None (default).
+        Regenerating.
+    roof_tilt : float [deg]
+        Tilt of the two roof halves, 45 as in AixLib by default. It shapes
+        the upper floor's rooms below the roof, the attic and the roof areas,
+        e.g. for photovoltaics. Regenerating.
+    hom_surface_coefficients : bool or None
+        Sets the ROM's outer surface coefficients up the way the HOM handles
+        them. None (default) does so exactly when the building is exported
+        against TEASERThermalSingleZone, i.e. with a single thermal zone and
+        use_old False; True or False forces it on or off.
+    room_t_set_nominal : dict [K]
+        Design indoor temperature per room for the room-wise heat loads, 20
+        degC and 24 degC for the bathroom by default. Editing it in place
+        needs an explicit generate_archetype() afterwards.
+    t_set_nominal_aggregation : str or callable
+        How room_t_set_nominal is reduced to the zone's t_inside, which
+        BESMod takes as TSetZone_nominal for the zone's nominal heat flow and
+        the design of its heating system: "heat_load_weighted_average"
+        (default), "volume_weighted_average", "max", or a callable taking
+        (room_names, building) and returning a temperature in K.
+        Regenerating.
+    fac_room_t_set_weighting : str, dict or callable
+        Weights by which the ROM's set temperature is averaged from the
+        HOM's room-wise profiles (facRoomTSet of BESMod's TEASERHOMtoROM):
+        "heat_load" (default), "volume", "equal", a dict {room: weight} or a
+        callable taking the building and returning one. Normalized to sum to
+        1. Read at the export.
+    fac_room_nat_vent_weighting : str, dict or callable
+        The same for the natural ventilation (facRoomNatVent), "volume" by
+        default, which conserves the zone's total ventilation air flow. Read
+        at the export.
+    room_internal_gains_profiles : dict
+        Daily course of each heated room's internal gains [W], 24 hourly
+        values from midnight, by default those of AixLib's OFD. The export
+        only takes their shape over the rooms and the day, scaled to the
+        energy of the zone's use conditions.
+    rotation : float [deg]
+        Rotation of the whole building clockwise against the archetype's own
+        orientation, 0 keeping the living room's facade facing south as in
+        AixLib. Set it with rotate_building.
+    room_heat_loads : dict [W]
+        Heat load per heated room, calculated by calc_building_parameter.
+    room_volumes : dict [m3]
+        Air volume per room.
+    unheated_room_envelope_elements : dict
+        The unheated rooms' own envelope elements, {room: {name: element}},
+        which belong to no thermal zone but are retrofitted with the
+        building.
+    """
+
     def __init__(
             self,
             parent=None,
@@ -104,33 +212,16 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             net_leased_area=170,
             construction_data=None,
     ):
-        """
-
-        Parameters
-        ----------
-        parent
-        name
-        year_of_construction
-        height_of_floors
-        net_leased_area
-            Default is original AixLib HOM dim. similar TABULA buildings span
-            from 111 to 216
-        construction_data
-        """
         super(AixLibHighOrderSingleFamilyHouse, self).__init__(
             parent,
             name,
             year_of_construction,
             net_leased_area,
         )
-        # scale_building_geometry's own scaling target, captured once here
-        # rather than read back from self.net_leased_area on every
-        # generate_archetype call: ThermalZone.area's setter incrementally
-        # adjusts self.net_leased_area towards the actually-achieved zone
-        # floor area (which is only ever approximately equal to the
-        # requested value), so re-reading self.net_leased_area as the
-        # scaling input on each call would compound that small mismatch
-        # into unbounded drift over repeated calls.
+        # The area the geometry is scaled to, kept apart from
+        # net_leased_area, which ThermalZone.area's setter moves towards the
+        # achieved zone area - scaling to that on every generate_archetype()
+        # would let the building drift.
         self._net_leased_area_target = self.net_leased_area
         self.construction_data = construction_data
         self.height_of_floors = height_of_floors
@@ -140,33 +231,15 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         else:
             self.construction_data_1 = self.construction_data.value
 
-        # only single zone roms
         self.integrate_unheated_rooms_integration_methods = [
             "const_volumes",
             "const_volumes_ua",
             "din12831_f1",
         ]
-        # Reassigning this (whole-dict, e.g. integrate_unheated_rooms =
-        # {"Attic": "din12831_f1"}) regenerates the archetype automatically
-        # - see the property setter below.
         self.integrate_unheated_rooms = {"Attic": "const_volumes_ua"}
-        # Used by the "const_volumes_ua" and "din12831_f1" methods: the air change rate of the
-        # unheated room's own air in its heat balance, "dicht" (0.5 1/h) or
-        # "undicht" (2.5 1/h) as in DIN EN 12831-1 Table 5, unless
-        # attic_air_change_rate gives it directly in 1/h. Reassigning
-        # either regenerates the archetype automatically.
         self.attic_infiltration_class = "undicht"
         self.attic_air_change_rate = None
-        # Tilt of the two roof halves against the horizontal [deg], 45 as in
-        # AixLib's OFD house. It shapes the upper floor's rooms below the
-        # roof, the Attic and the roof areas, e.g. for photovoltaics on them.
-        # Reassigning it regenerates the archetype automatically.
         self.roof_tilt = 45.0
-        # Sets the ROM's outer surface coefficients up the way the HOM
-        # handles them (see _set_hom_surface_coefficients). None applies
-        # them exactly when the building is exported against
-        # TEASERThermalSingleZone, i.e. with a single thermal zone and
-        # use_old False; True or False forces them on or off.
         self.hom_surface_coefficients = None
 
         self.zoning = {"single_zone_heated": [
@@ -241,102 +314,32 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
             "Bath": "upp",
             "Children2": "upp",
         }
-        # Nominal/design indoor temperature per room [K], used for the
-        # room-wise heat load (calc_room_heat_loads) and, aggregated via
-        # t_set_nominal_aggregation, for the single-zone ROM's own
-        # zone.t_inside. Override individual rooms as needed, e.g. to tune
-        # the default DIN-EN-12831-style assumption that only the bathroom
-        # is designed for a higher temperature than the rest of the house.
-        # Unlike integrate_unheated_rooms/t_set_nominal_aggregation/
-        # attic_infiltration_class below, editing this dict in place
-        # (room_t_set_nominal["Bath"] = ...) does NOT auto-regenerate -
-        # call generate_archetype() explicitly afterwards.
         self.room_t_set_nominal = {room: 293.15 for room in self.room_name_nr}
         self.room_t_set_nominal["Bath"] = 297.15
-        # How room_t_set_nominal is reduced to the ROM's single
-        # zone.t_inside, which BESMod takes as TSetZone_nominal both for
-        # the zone's nominal heat flow and for the design of its heating
-        # system (e.g. the heating curve). Built-in options:
-        # "heat_load_weighted_average" (default - the rooms weighted by
-        # their heat load, the same as the default fac_room_t_set the zone
-        # is operated with, since the zone's heat loss is the sum of the
-        # rooms' heat transfer coefficients times their temperature
-        # differences), "volume_weighted_average" and "max" (designs the
-        # whole zone for its warmest room; the room-wise heat loads already
-        # size the heating for that room). Alternatively, assign a callable
-        # taking (room_names, self) and returning a temperature in K for
-        # full custom control. Reassigning this regenerates the archetype
-        # automatically.
         self.t_set_nominal_aggregation = "heat_load_weighted_average"
-        # Weights that reduce the HOM's room-wise user profiles to the
-        # single value the ROM's one merged zone takes - facRoomTSet and
-        # facRoomNatVent of BESMod's TEASERHOMtoROM user profile, which
-        # multiply the room-wise set temperature [K] / natural ventilation
-        # air exchange rate [1/h] profiles and sum them up. Both are
-        # therefore weighted averages, and each weighting is normalized to
-        # sum to 1 (see _room_weights) - what matters is the ratio between
-        # rooms, not the absolute values.
-        #
-        # Built-in options: "volume" (room_volumes, the physically correct
-        # aggregation for an air exchange rate, since it conserves the total
-        # ventilation air flow of the merged zone - the default for
-        # fac_room_nat_vent), "heat_load" (room_heat_loads, close to
-        # weighting the rooms by their heat transfer coefficients, which is
-        # what a set temperature acts through - the default for
-        # fac_room_t_set) and "equal". Alternatively assign a
-        # dict {room_name: weight} covering every heated room, or a callable
-        # taking (self) and returning such a dict, for full custom control.
-        # These are plain attributes: unlike t_set_nominal_aggregation,
-        # reassigning them does not regenerate the archetype (nothing about
-        # the archetype itself depends on them - they are only read when
-        # exporting), so they can be changed right up to the export.
         self.fac_room_t_set_weighting = "heat_load"
-        # Daily course of each heated room's internal gains [W], 24 hourly
-        # values from midnight, by default those of AixLib's OFD house. The
-        # HOM export only takes their shape across the rooms and the day:
-        # it scales them, day by day, to the energy the zone's use
-        # conditions give the building (see
-        # besmod_output._write_hom_user_profiles), so the HOM and the ROM
-        # exported next to it get the internal gains of the use conditions,
-        # spread over the rooms and the hours as in the OFD house.
+        # scaled at the export, see besmod_output._write_hom_user_profiles
         self.room_internal_gains_profiles = copy.deepcopy(_ROOM_INTERNAL_GAINS_PROFILES)
         self.fac_room_nat_vent_weighting = "volume"
-        # Rotation of the whole building clockwise against the archetype's
-        # own orientation [deg], i.e. 0 keeps the Livingroom facade facing
-        # South as the original AixLib HOM has it. Set it through
-        # rotate_building (which also rotates the already generated
-        # elements); it is kept here so that a later generate_archetype()
-        # rebuilds the elements rotated instead of snapping them back to
-        # the archetype's own orientation, and so the HOM export can write
-        # the rotated surfaces into its SurfaceOrientation record.
+        # kept so that generate_archetype() rebuilds the elements rotated, and
+        # the HOM export can write the rotated surfaces into its record
         self.rotation = 0.0
         # The rotation the zones' ROM parameters were last calculated for,
         # so the HOM export can tell whether the two halves it writes still
         # agree - see rotation_pending_recalculation.
         self._rotation_at_last_calc = 0.0
-        # Populated by calc_building_parameter (room_name -> heat_load [W]
-        # / list ordered by room_name_nr), cached here so exports can read
-        # them directly without recomputing - always in sync since
-        # calc_building_parameter is itself the prerequisite for
-        # zone.model_attr.heat_load to be current (e.g. after retrofit).
+        # filled by calc_building_parameter, which also keeps the zone's heat
+        # load current, so the two stay in sync
         self.room_heat_loads = {}
         self.room_heat_loads_list = []
         self.top_level_geo_params = {}
         self.detailed_geo = {}
         self.room_volumes = {}
-        # Persistent, retrofittable elements for unheated rooms' own
-        # envelope (e.g. the Attic's roof/gable walls). These are not part
-        # of any ThermalZone (the ROM only has the single heated zone), so
-        # they would never be touched by retrofit otherwise. Structure:
-        # {unheated_room_name: {element_name: BuildingElement}}
         self.unheated_room_envelope_elements = {}
 
-        # From here on, reassigning integrate_unheated_rooms,
-        # t_set_nominal_aggregation or attic_infiltration_class
-        # regenerates the archetype automatically (see their setters
-        # below) - guarded by this flag so the initial assignments above,
-        # made before the rest of __init__'s state exists, don't trigger
-        # a premature generate_archetype() call.
+        # From here on, the regenerating settings rebuild the archetype when
+        # reassigned - not yet for their first assignments above, made before
+        # the rest of the state exists.
         self._initialized = True
 
     def update_calc_original_hom_dim_parameters(self):
