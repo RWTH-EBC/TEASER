@@ -54,6 +54,7 @@ from pathlib import Path
 
 import numpy as np
 
+from teaser.logic import utilities
 from teaser.project import Project
 
 # Where each library is cloned from if neither a path nor its environment
@@ -136,6 +137,27 @@ def example_compare_hom_and_rom(
             "No Dymola installation found - this example can not be run "
             "without it.")
 
+    # ## Finding the libraries
+    # BESMod also provides the weather both models run with.
+    clone_directory = Path(export_path or utilities.get_default_path())
+    packages = [
+        _library_package("IBPSA", path_ibpsa, clone_directory),
+        _library_package("AixLib", path_aixlib, clone_directory),
+        _library_package("BESMod", path_besmod, clone_directory),
+    ]
+    besmod = packages[2].parent
+
+    # The single-zone ROM extends a BESMod model that older releases of the
+    # library do not have yet, so say so before Dymola does
+    besmod_model = besmod.joinpath(
+        "Systems", "Demand", "Building", "TEASERThermalSingleZone.mo")
+    if not use_old and not besmod_model.exists():
+        raise FileNotFoundError(
+            f"{besmod_model} is missing - the BESMod at {packages[2]} does not "
+            "have the single-zone building model the ROM export needs. Point "
+            "path_besmod (or BESMOD_PATH) at a BESMod that has it, or pass "
+            "use_old=True to compare against the older TEASERThermalZone.")
+
     # ## Exporting the HOM and the ROM
     # Both come out of one and the same archetype building, so every difference
     # between them is the merge of the ten rooms into a single zone.
@@ -170,7 +192,9 @@ def example_compare_hom_and_rom(
     # BESMod's default weather, TRY2015 Potsdam, and its design temperature
     prj.set_location_parameters(t_outside=273.15 - 12.6,
                                 t_ground=273.15 + 13,
-                                weather_file_path=r"D:\01_git\BESMod\BESMod\Resources\WeatherData\TRY2015_522361130393_Jahr_City_Potsdam.mos",
+                                weather_file_path=str(besmod.joinpath(
+                                    "Resources", "WeatherData",
+                                    "TRY2015_522361130393_Jahr_City_Potsdam.mos")),
                                 calc_all_buildings=False)
 
     prj.calc_all_buildings()
@@ -187,23 +211,7 @@ def example_compare_hom_and_rom(
 
     # ## Simulating both
     save_path = path_export.parent.joinpath(path_export.name + "_SimulationResults")
-    packages = [
-        _library_package("IBPSA", path_ibpsa, save_path.parent),
-        _library_package("AixLib", path_aixlib, save_path.parent),
-        _library_package("BESMod", path_besmod, save_path.parent),
-        path_export.joinpath("package.mo"),
-    ]
-
-    # The single-zone ROM extends a BESMod model that older releases of the
-    # library do not have yet, so say so before Dymola does
-    besmod_model = packages[2].parent.joinpath(
-        "Systems", "Demand", "Building", "TEASERThermalSingleZone.mo")
-    if not use_old and not besmod_model.exists():
-        raise FileNotFoundError(
-            f"{besmod_model} is missing - the BESMod at {packages[2]} does not "
-            "have the single-zone building model the ROM export needs. Point "
-            "path_besmod (or BESMOD_PATH) at a BESMod that has it, or pass "
-            "use_old=True to compare against the older TEASERThermalZone.")
+    packages.append(path_export.joinpath("package.mo"))
 
     dym_api = DymolaAPI(
         working_directory=save_path.joinpath("DymolaWorkingDirectory"),
@@ -402,14 +410,7 @@ if __name__ == '__main__':
     comparisons = {}
     for validation in (True, False):
         comparisons[validation] = example_compare_hom_and_rom(
-            export_path=r"D:\03_TEASER_dev\test_hom_export"
-                        + ("_validation" if validation else "_default"),
-            path_besmod=r"D:\01_git\BESMod\BESMod\package.mo",
-            path_ibpsa=r"D:\01_git\BESMod\installed_dependencies\IBPSA\IBPSA\package.mo",
-            path_aixlib=r"D:\01_git\BESMod\installed_dependencies\AixLib\AixLib\package.mo",
-            validation=validation,
-            # both plots open together at the end instead
-            show_plot=True)
+            validation=validation)
 
     print(f"\n{'':26s}{'validation':>12s}{'default':>12s}")
     for key, label, factor, unit in (
@@ -420,8 +421,5 @@ if __name__ == '__main__':
             ("rmse_temperature", "RMSE zone temperature", 1, "K")):
         print(f"{label + ' [' + unit + ']':26s}"
               + "".join(f"{comparisons[v][key] * factor:12.2f}" for v in (True, False)))
-
-    import matplotlib.pyplot as plt
-    plt.show()
 
     print("Example 14: That's it! :)")
