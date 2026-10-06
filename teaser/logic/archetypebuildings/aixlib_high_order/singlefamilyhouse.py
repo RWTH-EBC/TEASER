@@ -1143,12 +1143,14 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     "element_construction_type": "Attic",
                     "with_window": False,
                 },
+                # the gable walls are the heated rooms' outer wall, as
+                # AixLib's attic builds them from wallTypes.OW
                 "outside_wall1": {
                     "ori": 90,
                     "tilt": 90,
                     "area": self.top_level_geo_params["attic_vert_wall_area"],
                     "type": "OuterWall",
-                    "element_construction_type": "Attic",
+                    "element_construction_type": None,
                     "with_window": False,
                 },
                 "outside_wall2": {
@@ -1156,7 +1158,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     "tilt": 90,
                     "area": self.top_level_geo_params["attic_vert_wall_area"],
                     "type": "OuterWall",
-                    "element_construction_type": "Attic",
+                    "element_construction_type": None,
                     "with_window": False,
                 },
                 "floorRoom1": {
