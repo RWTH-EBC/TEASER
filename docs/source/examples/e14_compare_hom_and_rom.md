@@ -11,12 +11,32 @@ each other directly.
 
 This example runs that comparison: it exports the two models, simulates both in
 Dymola and reports how far the ROM is from the HOM in heating energy, heating
-power and zone temperature. It is the measure of how much of the HOM's
-behaviour survives the merge into one zone - and therefore of what the
-room-wise parameters the archetype derives for the ROM
-(`calc_rom_inner_heat_transfer_parameters`) are worth. Pass `use_old=True` to
-see the difference: the building is then exported against BESMod's older
-`TEASERThermalZone`, which has none of them.
+power and zone temperature, i.e. how much of the HOM's behaviour survives the
+merge into one zone.
+
+## The single-zone ROM
+The ROM is BESMod's `TEASERThermalSingleZone`: AixLib's four element model,
+like `TEASERThermalZone` for every other TEASER building, but for a building
+that is one merged zone and still uses its inner geometry. From the rooms,
+the archetype derives what the aggregated areas alone cannot tell
+(`calc_rom_inner_heat_transfer_parameters`):
+- the roof and the ground floor only exchange long wave radiation with the
+  surfaces of their own floor
+- the solar radiation through a window only reaches the room it enters
+- the windows exchange no long wave radiation inside, as in the HOM
+- only the part of the roof group facing the zone counts, the rest is the
+  integrated attic's envelope
+
+The outer surfaces are treated as in the HOM (`hom_surface_coefficients`),
+and the natural ventilation comes from the user profile alone instead of
+being added to AixLib's ventilation controller. Pass `use_old=True` to export
+the building against `TEASERThermalZone` instead, without all of this.
+
+By default both models are driven the way the archetype is meant to be used:
+with the internal gains of its use conditions and each room at its own set
+temperature (`room_t_set_nominal`). `validation=True` leaves the internal
+gains out and sets every room to 20 degC, so that the two models differ in
+nothing but their buildings.
 
 ## Prerequisites
 You can not run this example using the online
@@ -24,9 +44,9 @@ You can not run this example using the online
 as you need Dymola installed on your device. You also need:
 1. ebcpy - for Dymola API interaction (`pip install ebcpy`)
 2. IBPSA, AixLib and BESMod. If their paths are not provided, this example
-   tries to clone them using git. BESMod has to contain
-   `Systems.Demand.Building.TEASERThermalSingleZone`, which the single-zone
-   ROM export is built on.
+   tries to clone them using git. BESMod has to support the HOM export, i.e.
+   contain `Systems.Demand.Building.TEASERThermalSingleZone` - BESMod's
+   `Examples.TEASERExport.HighOrderArchetypeExample` is this export.
 3. matplotlib, for the plot of the comparison (`plot=False` skips it)
 
 ```python
@@ -36,6 +56,7 @@ from pathlib import Path
 
 import numpy as np
 
+from teaser.logic import utilities
 from teaser.project import Project
 ```
 
@@ -82,26 +103,77 @@ if not DymolaAPI.get_dymola_install_paths():
         "without it.")
 ```
 
+## Finding the libraries
+BESMod also provides the weather both models run with.
+
+```python
+clone_directory = Path(export_path or utilities.get_default_path())
+packages = [
+    _library_package("IBPSA", path_ibpsa, clone_directory),
+    _library_package("AixLib", path_aixlib, clone_directory),
+    _library_package("BESMod", path_besmod, clone_directory),
+]
+besmod = packages[2].parent
+```
+
+The single-zone ROM extends a BESMod model that older releases of the
+library do not have yet, so say so before Dymola does
+
+```python
+besmod_model = besmod.joinpath(
+    "Systems", "Demand", "Building", "TEASERThermalSingleZone.mo")
+if not use_old and not besmod_model.exists():
+    raise FileNotFoundError(
+        f"{besmod_model} is missing - the BESMod at {packages[2]} does not "
+        "have the single-zone building model the ROM export needs. Point "
+        "path_besmod (or BESMOD_PATH) at a BESMod that has it, or pass "
+        "use_old=True to compare against the older TEASERThermalZone.")
+```
+
 ## Exporting the HOM and the ROM
 Both come out of one and the same archetype building, so every difference
 between them is the merge of the ten rooms into a single zone.
 
 ```python
 prj = Project()
-prj.name = "CompareHOMandROM"
+prj.name = "CompareHOMandROM1984_170"
 prj.add_residential(
     construction_data='aixlib_S',
     geometry_data='aixlib_high_order_single_family_house',
     name="SingleFamilyHouse",
-    year_of_construction=1990,
+    year_of_construction=1984,
     net_leased_area=170.0,
     number_of_floors=2,
     height_of_floors=2.6)
 
 bldg = prj.buildings[0]
+if validation:
+    # Every room at 20 degC, without a set back. room_t_set_nominal only
+    # takes effect once the archetype is generated again, which also
+    # loads its use conditions anew - so those come after.
+    bldg.room_t_set_nominal = {room: 293.15 for room in bldg.room_name_nr}
+    bldg.generate_archetype()
+    use_conditions = bldg.thermal_zones[0].use_conditions
+    use_conditions.heating_profile = [293.15] * 24
+    use_conditions.persons = 0.0
+    use_conditions.machines = 0.0
+    use_conditions.use_maintained_illuminance = False
+    use_conditions.lighting_power = 0.0
 bldg.use_old = use_old
 prj.used_library_calc = 'AixLib'
 prj.number_of_elements_calc = 4
+```
+
+BESMod's default weather, TRY2015 Potsdam, and its design temperature
+
+```python
+prj.set_location_parameters(t_outside=273.15 - 12.6,
+                            t_ground=273.15 + 13,
+                            weather_file_path=str(besmod.joinpath(
+                                "Resources", "WeatherData",
+                                "TRY2015_522361130393_Jahr_City_Potsdam.mos")),
+                            calc_all_buildings=False)
+
 prj.calc_all_buildings()
 
 path_export = Path(prj.export_besmod(
@@ -122,26 +194,7 @@ hom_model = rom_model + "_HOM"
 
 ```python
 save_path = path_export.parent.joinpath(path_export.name + "_SimulationResults")
-packages = [
-    _library_package("IBPSA", path_ibpsa, save_path.parent),
-    _library_package("AixLib", path_aixlib, save_path.parent),
-    _library_package("BESMod", path_besmod, save_path.parent),
-    path_export.joinpath("package.mo"),
-]
-```
-
-The single-zone ROM extends a BESMod model that older releases of the
-library do not have yet, so say so before Dymola does
-
-```python
-besmod_model = packages[2].parent.joinpath(
-    "Systems", "Demand", "Building", "TEASERThermalSingleZone.mo")
-if not use_old and not besmod_model.exists():
-    raise FileNotFoundError(
-        f"{besmod_model} is missing - the BESMod at {packages[2]} does not "
-        "have the single-zone building model the ROM export needs. Point "
-        "path_besmod (or BESMOD_PATH) at a BESMod that has it, or pass "
-        "use_old=True to compare against the older TEASERThermalZone.")
+packages.append(path_export.joinpath("package.mo"))
 
 dym_api = DymolaAPI(
     working_directory=save_path.joinpath("DymolaWorkingDirectory"),
@@ -176,12 +229,11 @@ have to be summed up before they can be compared to the ROM's single one.
 ```python
 results = {name: TimeSeriesData(file).to_df()
            for name, file in zip(("rom", "hom"), result_files)}
-rooms = sorted(bldg.room_name_nr, key=bldg.room_name_nr.get)
-room_volumes = [bldg.room_volumes[room] for room in rooms]
 
-comparison = _compare_results(results["rom"], results["hom"], room_volumes)
+comparison = _compare_results(results["rom"], results["hom"])
 print(f"\nROM against HOM over {stop_time / 86400:.0f} days"
-      f"{' (use_old)' if use_old else ''}:")
+      f"{' (use_old)' if use_old else ''}"
+      f"{' (validation)' if validation else ''}:")
 print(f"  heating energy HOM   {comparison['energy_hom']:9.1f} kWh")
 print(f"  heating energy ROM   {comparison['energy_rom']:9.1f} kWh"
       f"   ({comparison['energy_deviation'] * 100:+.2f} %)")
@@ -189,11 +241,15 @@ print(f"  RMSE heating power   {comparison['rmse_power']:9.1f} W")
 print(f"  RMSE zone temperature{comparison['rmse_temperature']:9.4f} K")
 
 if plot:
-    figure_path = save_path.joinpath(
-        "comparison_hom_rom" + ("_use_old" if use_old else "") + ".png")
-    plot_comparison(results["rom"], results["hom"], room_volumes,
-                    comparison, figure_path)
-    print(f"  plot                 {figure_path}")
+    figure = plot_comparison(results["rom"], results["hom"], comparison)
+    # names the window after the case, as two of them can be open
+    if figure.canvas.manager is not None:
+        figure.canvas.manager.set_window_title(
+            "Example 14" + (" use_old" if use_old else "")
+            + (" validation" if validation else ""))
+    if show_plot:
+        import matplotlib.pyplot as plt
+        plt.show()
 
 
 e quantities the comparison is made of, named for one zone - the HOM has
@@ -201,6 +257,12 @@ n of each, the ROM one
 R = "electrical.outBusElect.tra.PHea[1].value"
 GY = "electrical.outBusElect.tra.PHea[1].integral"
 ERATURE = "building.buiMeaBus.TZoneMea[1]"
+e HOM's room temperatures averaged by room volume, the way the archetype
+gregates them for the merged zone
+ERATURE_HOM = "outputs.building.TBuiVolAve"
+d the lowest and highest of them
+ERATURE_HOM_MIN = "outputs.building.TBuiMin"
+ERATURE_HOM_MAX = "outputs.building.TBuiMax"
 
 
 _zone_columns(df, template):
@@ -217,21 +279,15 @@ _sum_over_zones(df, template):
 the ROM) into a single time series"""
 
 
-_compare_results(rom, hom, room_volumes):
+_compare_results(rom, hom):
 """Compares the ROM's single zone against the HOM's ten rooms"""
 power_rom = _sum_over_zones(rom, POWER)
 power_hom = _sum_over_zones(hom, POWER)
 energy_rom = _sum_over_zones(rom, ENERGY)[-1] / 3.6e6
 energy_hom = _sum_over_zones(hom, ENERGY)[-1] / 3.6e6
-```
 
-the HOM's room temperatures are averaged the same way the archetype
-aggregates them for the merged zone, by room volume
-
-```python
 temperature_rom = _sum_over_zones(rom, TEMPERATURE)
-weights = np.asarray(room_volumes) / sum(room_volumes)
-temperature_hom = _zone_columns(hom, TEMPERATURE) @ weights
+temperature_hom = hom[TEMPERATURE_HOM].to_numpy()
 
     "energy_rom": energy_rom,
     "energy_hom": energy_hom,
@@ -243,19 +299,20 @@ temperature_hom = _zone_columns(hom, TEMPERATURE) @ weights
 }
 
 
-plot_comparison(rom, hom, room_volumes, comparison, figure_path=None):
+plot_comparison(rom, hom, comparison):
 """Plots the ROM against the HOM over the simulated period
 
 Three panels over one shared time axis rather than one panel with two
 scales: the heating power the two models call for, the heating energy that
 adds up to, and the zone temperature they hold. The HOM's ten room
 temperatures are reduced to the one the merged zone would have, by room
-volume - the rooms themselves spread much wider than that (the bathroom
-alone is designed for 24 instead of 20 degrees), and that spread is
-precisely what the ROM cannot have.
+volume, and shown with the band from their lowest to their highest - the
+rooms spread much wider than their average (the bathroom alone is designed
+for 24 instead of 20 degrees), and that spread is precisely what the ROM
+cannot have.
 
 The same two colours mean the same two models in all three panels, so only
-the first one carries a legend.
+the first one carries a legend, and the third one for the band.
 """
 import matplotlib.pyplot as plt
 ```
@@ -282,8 +339,9 @@ power_hom = _sum_over_zones(hom, POWER)[plotted] / 1000.0
 energy_rom = _sum_over_zones(rom, ENERGY)[plotted] / 3.6e6
 energy_hom = _sum_over_zones(hom, ENERGY)[plotted] / 3.6e6
 temperature_rom = _sum_over_zones(rom, TEMPERATURE)[plotted] - 273.15
-room_temperatures = _zone_columns(hom, TEMPERATURE)[plotted] - 273.15
-weights = np.asarray(room_volumes) / sum(room_volumes)
+temperature_hom = hom[TEMPERATURE_HOM].to_numpy()[plotted] - 273.15
+temperature_hom_min = hom[TEMPERATURE_HOM_MIN].to_numpy()[plotted] - 273.15
+temperature_hom_max = hom[TEMPERATURE_HOM_MAX].to_numpy()[plotted] - 273.15
 
 figure, axes = plt.subplots(3, 1, sharex=True, figsize=(9.0, 8.0),
                             facecolor=surface)
@@ -318,10 +376,15 @@ axes[1].annotate(f"{comparison['energy_deviation'] * 100:+.1f} %",
                  xytext=(-6, 6), textcoords="offset points",
                  ha="right", color=ink, fontsize=9)
 
-axes[2].plot(days, room_temperatures @ weights, color=color_hom,
+axes[2].fill_between(days, temperature_hom_min, temperature_hom_max,
+                     color=color_hom, alpha=0.18, linewidth=0,
+                     label="HOM rooms, lowest to highest")
+axes[2].plot(days, temperature_hom, color=color_hom,
              linewidth=2.0)
 axes[2].plot(days, temperature_rom, color=color_rom, linewidth=2.0)
 axes[2].set_ylabel("zone temperature in °C", color=ink, fontsize=10)
+axes[2].legend(frameon=False, labelcolor=ink, fontsize=9,
+               loc="lower right")
 axes[2].set_xlabel("time in days", color=ink, fontsize=10)
 axes[2].annotate(f"RMSE {comparison['rmse_temperature']:.3f} K",
                  xy=(1.0, 1.0), xycoords="axes fraction",
@@ -332,6 +395,4 @@ figure.suptitle("The reduced order model against the high order model "
                 "it was merged from", color=ink, fontsize=12, x=0.125,
                 ha="left")
 figure.tight_layout()
-if figure_path is not None:
-    figure.savefig(figure_path, dpi=150, facecolor=surface)
 ```

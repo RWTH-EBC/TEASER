@@ -147,6 +147,8 @@ variable_names_to_store = [
     "weaDat.weaBus.TDryBul"
 ]
 
+import matplotlib.pyplot as plt
+figures = []
 for mat_result_file in simulation_result_files:
     df = TimeSeriesData(mat_result_file, variable_names=variable_names_to_store).to_df()
     df_path = Path(mat_result_file).with_suffix(".parquet")
@@ -159,8 +161,8 @@ for mat_result_file in simulation_result_files:
     import os
     os.remove(mat_result_file)
 
-    import matplotlib.pyplot as plt
     fig, ax = plt.subplots(3, 1, sharex=True)
+    figures.append(fig)
 
     df.index /= 86400  # Convert seconds to days for better readability
 
@@ -182,5 +184,9 @@ for mat_result_file in simulation_result_files:
     ax[2].set_xlabel("Time in d")
     fig.suptitle(df_path.stem)
     fig.savefig(df_path.with_suffix(".png"))
-plt.show()
+if show_plot:
+    plt.show()
+else:
+    for fig in figures:
+        plt.close(fig)
 ```

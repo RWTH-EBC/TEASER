@@ -45,7 +45,7 @@ prj.add_residential(
 
 To generate non-residential archetype buildings (in this case an
 office and a laboratory (a.k.a. institute)) the function
-Project.add_residential() is used. The meaning of compulsory parameters
+Project.add_non_residential() is used. The meaning of compulsory parameters
 does not differ from the residential archetype building.
 
 ```python
@@ -81,17 +81,17 @@ prj.add_non_residential(
 Besides `iwu` and `bmvbs` there is a third option for archetype
 generation. We integrated the typology of TABULA Germany
 (http://webtool.building-typology.eu/#bm) and other countries are about to
-follow. To use TABULA archetype simple choose the default `tabula_de_standard` as the construction_data
+follow. To use TABULA archetype simply choose the default `tabula_de_standard` as the construction_data
 and `tabula_de_single_family_house`, `tabula_de_multi_family_house`, `tabula_de_terraced_house` or
 `tabula_de_apartment_block` as the geometry_data. In addition you can specify the
 construction type of TABULA, chose between `tabula_de_standard` (default),
 `tabula_de_retrofit` or `tabula_de_adv_retrofit`. In this case we generate one
 single and one multi family house with TABULA typology.
 
-Please not: as we need to load the construction information which are
+Please note: as we need to load the construction information which are
 rather big for TABULA, switching from one typology to another in the same
 Project takes some seconds. If you know from beginning you will only use
-TABULA typology you should instantiate you Project class without loading
+TABULA typology you should instantiate your Project class without loading
 data. Project(load_data=False).
 
 ```python
@@ -112,7 +112,14 @@ prj.add_residential(
     number_of_floors=4,
     height_of_floors=3.2,
     net_leased_area=600.0)
+```
 
+`aixlib_high_order_single_family_house` is the single family house of
+AixLib's high order model (HOM), scaled to net_leased_area, with its ten
+rooms merged into one thermal zone. BESMod's export can add the HOM
+itself (see e11 and e14).
+
+```python
 prj.add_residential(
     construction_data='tabula_de_standard',
     geometry_data='aixlib_high_order_single_family_house',
@@ -122,23 +129,13 @@ prj.add_residential(
     number_of_floors=2,
     height_of_floors=2.6
 )
-
-prj.add_residential(
-    construction_data='tabula_de_standard',
-    geometry_data='aixlib_high_order_single_family_house',
-    name="ResidentialBuildingHighOrderAtticDIN",
-    year_of_construction=1980,
-    net_leased_area=170.0,
-    number_of_floors=2,
-    height_of_floors=2.6
-)
 ```
 
-The AixLib HOM archetype can also be built from its own reference wall
-and window constructions (converted from AixLib's own shipped
-Modelica records into TypeElements_AixLib.json), independent of
-TABULA. Choose between `aixlib_S` (masonry), `aixlib_M` (aerated
-concrete) or `aixlib_L` (timber frame) as construction_data.
+It can also be built from AixLib's own wall and window records:
+`aixlib_S`, `aixlib_M` or `aixlib_L` as construction_data, AixLib's
+heavy, medium and light constructions. They follow the German
+regulations WSchV 1984 and 1995 and EnEV 2002 and 2009, for buildings
+from 1984 to 2013.
 
 ```python
 prj.add_residential(
