@@ -1219,7 +1219,7 @@ class Test_besmod_output(unittest.TestCase):
                 self.assertIn("frameFraction=0.2,", record_file.read())
 
     def test_single_zone_record_without_room_resolution(self):
-        """test the single-zone ROM record of a plain ROM archetype"""
+        """test that a plain single-zone archetype keeps TEASERThermalZone"""
 
         prj = Project()
         prj.name = "BESModSingleZoneDefaults"
@@ -1240,12 +1240,17 @@ class Test_besmod_output(unittest.TestCase):
         zone = bldg.thermal_zones[0]
 
         self.assertIsNone(zone.split_factor_sol_rad)
+        # the room-wise parameters of TEASERThermalSingleZone are only
+        # derived for the HOM archetype
+        self.assertFalse(bldg.exports_single_zone_rom)
 
         path = prj.export_besmod(examples=["TEASERHeatLoadCalculation"],
                                  THydSup_nominal=55 + 273.15)
+        with open(os.path.join(path, bldg.name, bldg.name + ".mo")) as model:
+            self.assertIn("BESMod.Systems.Demand.Building.TEASERThermalZone(",
+                          model.read())
         with open(os.path.join(path, bldg.name, bldg.name + "_DataBase",
                                bldg.name + "_" + zone.name + ".mo")) as record_file:
             record = record_file.read()
-        self.assertIn("BuildingSingleZoneBaseRecord", record)
-        # left out, so the record keeps AixLib's own whole-zone area split
+        self.assertIn("AixLib.DataBase.ThermalZones.ZoneBaseRecord", record)
         self.assertNotIn("splitFactorSolRad", record)

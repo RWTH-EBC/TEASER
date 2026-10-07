@@ -207,13 +207,9 @@ class Building(object):
         self.latitude = 50.79
 
         self._thermal_zones = []
-        # Exports the building against BESMod's older
-        # Systems.Demand.Building.TEASERThermalZone even when it has a
-        # single thermal zone, instead of TEASERThermalSingleZone and its
-        # room-resolved interior heat transfer parameters (see
-        # BuildingSingleZoneBaseRecord). A building with more than one
-        # thermal zone always uses the older model, there being no room
-        # resolution to hand it.
+        # Exports a building that would use BESMod's TEASERThermalSingleZone
+        # (see exports_single_zone_rom) against the older TEASERThermalZone
+        # instead.
         self.use_old = False
         self._combined_thermal_zones = []
         self._outer_area = {}
@@ -235,6 +231,18 @@ class Building(object):
         self.t_bt_layer = 7
 
         self._data_class = None
+
+    @property
+    def exports_single_zone_rom(self):
+        """Whether the BESMod export uses TEASERThermalSingleZone
+
+        TEASERThermalSingleZone and its BuildingSingleZoneBaseRecord take
+        interior heat transfer parameters derived room by room, which only
+        archetypes with a room resolution provide, i.e.
+        AixLibHighOrderSingleFamilyHouse. All other buildings are exported
+        against TEASERThermalZone.
+        """
+        return False
 
     @property
     def data_class(self):

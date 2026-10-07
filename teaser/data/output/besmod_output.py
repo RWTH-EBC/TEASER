@@ -232,17 +232,16 @@ def export_besmod(
     modelica_output.copy_weather_data(prj.weather_file_path, dir_resources)
 
     for i, bldg in enumerate(buildings):
-        # Has to follow the very same condition the BESMod/Building
-        # template picks the building model by: TEASERThermalSingleZone
-        # takes BuildingSingleZoneBaseRecord, TEASERThermalZone AixLib's
-        # own ZoneBaseRecord.
-        if len(bldg.thermal_zones) > 1 or bldg.use_old:
+        # TEASERThermalSingleZone takes BuildingSingleZoneBaseRecord,
+        # TEASERThermalZone AixLib's own ZoneBaseRecord (the BESMod/Building
+        # template picks the model by the same property)
+        if bldg.exports_single_zone_rom:
             zone_template_4 = Template(
-                filename=os.path.join(template_path, "AixLib/AixLib_ThermalZoneRecord_FourElement"),
+                filename=os.path.join(template_path, "BESMod/BuildingSingleThermalZoneRecord_FourElement"),
                 lookup=lookup)
         else:
             zone_template_4 = Template(
-                filename=os.path.join(template_path, "BESMod/BuildingSingleThermalZoneRecord_FourElement"),
+                filename=os.path.join(template_path, "AixLib/AixLib_ThermalZoneRecord_FourElement"),
                 lookup=lookup)
         bldg.bldg_height = bldg.number_of_floors * bldg.height_of_floors
         start_time_zones = []

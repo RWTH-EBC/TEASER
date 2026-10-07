@@ -1379,6 +1379,12 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         self.rotation = rotate_orientation(self.rotation, angle)
 
     @property
+    def exports_single_zone_rom(self):
+        """The single heated zone is exported against TEASERThermalSingleZone,
+        unless use_old asks for TEASERThermalZone"""
+        return len(self.thermal_zones) == 1 and not self.use_old
+
+    @property
     def rotation_pending_recalculation(self):
         """Whether the building was rotated after its last parameter calculation
 
@@ -2217,7 +2223,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
         self._set_hom_surface_coefficients(
             self.hom_surface_coefficients or (
                 self.hom_surface_coefficients is None
-                and len(self.thermal_zones) == 1 and not self.use_old))
+                and self.exports_single_zone_rom))
         super().calc_building_parameter(
             number_of_elements=number_of_elements,
             merge_windows=merge_windows,
