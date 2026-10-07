@@ -71,6 +71,13 @@ def export_building(path, weather_file):
                                   export_with_hom=True))
 
 
+def _write(path, text):
+    """Writes text with Unix line endings, as BESMod's files have them
+    (Path.write_text only takes newline from Python 3.10)"""
+    with open(path, "w", encoding="utf-8", newline="\n") as file:
+        file.write(text)
+
+
 def _one_day_of_gains(year_file, day_file):
     """Writes the first day of TEASER's room-wise internal gains, which
     repeat every day, as a table running from 0 to 24 h"""
@@ -213,22 +220,17 @@ def update_besmod_hom_example(besmod_path=None, weather_file=None):
             export.joinpath(BUILDING, f"InternalGains_{BUILDING}_HOM.txt"),
             besmod.joinpath("Resources", GAINS))
         for model in destination.joinpath(BUILDING).rglob("*.mo"):
-            model.write_text(
-                _convert_model(model.read_text(encoding="utf-8")),
-                encoding="utf-8", newline="\n")
+            _write(model, _convert_model(model.read_text(encoding="utf-8")))
 
         scripts.mkdir(parents=True)
         for script in export.joinpath(
                 "Resources", "Scripts", "Dymola", BUILDING).glob("*.mos"):
-            scripts.joinpath(script.name).write_text(
-                _convert_script(script.read_text(encoding="utf-8"),
-                                hom=script.stem.endswith("_HOM")),
-                encoding="utf-8", newline="\n")
+            _write(scripts.joinpath(script.name),
+                   _convert_script(script.read_text(encoding="utf-8"),
+                                   hom=script.stem.endswith("_HOM")))
 
-    destination.joinpath("package.mo").write_text(
-        _package_mo(), encoding="utf-8", newline="\n")
-    destination.joinpath("package.order").write_text(
-        BUILDING + "\n", encoding="utf-8", newline="\n")
+    _write(destination.joinpath("package.mo"), _package_mo())
+    _write(destination.joinpath("package.order"), BUILDING + "\n")
 
     order = besmod.joinpath("Examples", "TEASERExport", "package.order")
     if order.exists():
