@@ -18,16 +18,11 @@ import os
 ```
 
 ## Standard export
-In e1_generate_archetype we created a Project with three archetype
-buildings to get this Project we rerun this example
+In e1_generate_archetype we created a Project with several archetype
+buildings, to get this Project we rerun this example
 
 ```python
 prj = e1.example_generate_archetype()
-
-hom_attic_din = [
-    bldg for bldg in prj.buildings
-    if bldg.name == "ResidentialBuildingHighOrderAtticDIN"][0]
-hom_attic_din.integrate_unheated_rooms = {"Attic": "din12831_f1"}
 ```
 
 Configure project settings to ensure compatibility with BESMod. The BESMod
@@ -76,7 +71,8 @@ THydSup_nominal = {"ResidentialBuilding": 328.15,
                    "InstituteBuildingMoisture": 343.15,
                    "ResidentialBuildingTabula": 328.15,
                    "ResidentialBuildingTabulaMulti": 328.15,
-                   "ResidentialBuildingHighOrder": 328.15}
+                   "ResidentialBuildingHighOrder": 328.15,
+                   "ResidentialBuildingHighOrderAixLib": 328.15}
 ```
 
 Option 3: Specify values based on construction year.
@@ -151,29 +147,21 @@ prj.set_location_parameters(t_outside=262.65,
 To make sure the parameters are calculated correctly we recommend to
 run prj.calc_all_buildings() function which is here already done in the set_location_parameters function.
 
-When the AixLib HOM archetype is exported with `export_with_hom`, its
-ROM is driven by the same room-wise user profiles as the HOM
-(BESMod's TEASERHOMtoROM), reduced to the single merged zone by a
-weighted average per room. Both weightings default to the room
-volumes, which for the natural ventilation air exchange rate is the
-aggregation that conserves the zone's total ventilation air flow.
-They can be changed independently - to the rooms' heat loads, to
-equal weights, or to a dict/callable of custom per-room weights (the
-weights are normalized, so only their ratio matters):
-
-```python
-hom_aixlib = [
-    bldg for bldg in prj.buildings
-    if bldg.name == "ResidentialBuildingHighOrderAixLib"][0]
-hom_aixlib.fac_room_t_set_weighting = "heat_load"
-```
+With `export_with_hom=True`, the AixLib HOM archetypes are additionally
+exported as HOM, in the same examples with the suffix `_HOM`. Their ROM
+then gets the HOM's room-wise user profiles (BESMod's TEASERHOMtoROM),
+averaged over the rooms, by default by their volume. The archetype's
+fac_room_t_set_weighting and fac_room_nat_vent_weighting change that
+("heat_load", "volume" or own weights per room).
+export_besmod's heater_radiative_fraction and rom_heating_curve_max_room
+set the ideal heater and the ROM's heating curve; see its docstring.
 
 Export all buildings to BESMod and include them in predefined example systems.
 
 ```python
 path = prj.export_besmod(
     THydSup_nominal=THydSup_nominal,
-    path=r"D:\03_TEASER_dev\test_hom_export",
+    path=None,
     examples=examples,
     export_with_hom=True
 )
@@ -227,7 +215,7 @@ path = prj.export_besmod(
     THydSup_nominal=THydSup_nominal,
     QBuiOld_flow_design=QBuiOld_flow_design,
     QRoomOld_flow_design=QRoomOld_flow_design,
-    path=r"D:\03_TEASER_dev\test_hom_export",
+    path=None,
     examples=examples,
     export_with_hom=True
 )
@@ -294,7 +282,7 @@ custom_script = {"HeatPumpMonoenergetic": os.path.join(custom_template_path, "cu
 
 path = prj.export_besmod(
     THydSup_nominal=THydSup_nominal,
-    path=r"D:\03_TEASER_dev\test_hom_export",
+    path=None,
     examples=examples,
     custom_examples=custom_example_template,
     custom_script=custom_script
