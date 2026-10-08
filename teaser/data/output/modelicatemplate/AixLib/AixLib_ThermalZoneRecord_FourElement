@@ -11,7 +11,7 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     lat = ${deg_to_rad(zone.parent.latitude)},
     nOrientations = ${min_orientations(zone.model_attr.n_outer)},
     AWin = ${get_list(zone.model_attr.window_areas)},
-    ATransparent = ${get_list(zone.model_attr.window_areas)},
+    ATransparent = ${get_list(zone.model_attr.transparent_areas)},
     hConWin = ${zone.model_attr.alpha_conv_inner_win},
     RWin = ${zone.model_attr.r1_win},
     gWin = ${zone.model_attr.weighted_g_value},

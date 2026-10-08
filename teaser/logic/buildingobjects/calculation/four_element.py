@@ -1505,11 +1505,11 @@ class FourElement(object):
 
                 if self.merge_windows is False:
                     self.window_areas.append(sum([win.area for win in wins]))
-                    self.transparent_areas.append(sum([win.area for win in wins]))
+                    self.transparent_areas.append(sum([win.transparent_area for win in wins]))
 
                 else:
                     self.window_areas.append(0)
-                    self.transparent_areas.append(sum([win.area for win in wins]))
+                    self.transparent_areas.append(sum([win.transparent_area for win in wins]))
                 self.shading_g_total.append(
                     sum(
                         [

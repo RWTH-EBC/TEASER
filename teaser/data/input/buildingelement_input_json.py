@@ -45,11 +45,22 @@ def load_type_element(element, year, construction, data_class,
         defines if layer list should be reversed - this is necessary for zone
         borders to maintain consistency
 
+    Returns
+    -------
+    str or None
+        Key of the data_class entry that was actually loaded, or None if
+        nothing matched. This is not necessarily an entry for element_type:
+        if no entry exists for it, the one for the element's own class is
+        loaded instead (see below), so callers that depend on getting the
+        requested type - rather than a generic stand-in - can check the key.
+
     """
     element_binding = data_class.element_bind
-
-    if element_type is None:
-        element_type = type(element).__name__
+    object_element_type = type(element).__name__
+    if element.element_construction_type is not None and element_type is None:
+        element_type = object_element_type + element.element_construction_type
+    elif element_type is None and element.element_construction_type is None:
+        element_type = object_element_type
 
     for key, element_in in element_binding.items():
         if (
@@ -71,9 +82,35 @@ def load_type_element(element, year, construction, data_class,
                 mat_input.load_material_id(
                     material, layer_in["material"]["material_id"], data_class
                 )
-            return
+            return key
+    if element_type != object_element_type:
+        for key, element_in in element_binding.items():
+            if (
+                    element_in["building_age_group"][0]
+                    <= year
+                    <= element_in["building_age_group"][1]
+                    and element_in["construction_data"] == construction
+                    and key.startswith(object_element_type)
+            ):
+                _set_basic_data(element=element, element_in=element_in)
+                for id, layer_in in (
+                        element_in["layer"].items().__reversed__()
+                        if reverse_layers else element_in["layer"].items()
+                ):
+                    layer = Layer(element)
+                    layer.id = id
+                    layer.thickness = layer_in["thickness"]
+                    material = Material(layer)
+                    mat_input.load_material_id(
+                        material, layer_in["material"]["material_id"], data_class
+                    )
+                logging.warning(f"No database entry found for construction={construction}, "
+                                f"year{year}, element={element_type}. "
+                                f"Loaded entry for element={object_element_type} instead.")
+                return key
     logging.warning(f"No database entry found for construction={construction}, "
-                    f"year{year}, element={type(element).__name__}")
+                    f"year{year}, element={element_type} or {object_element_type}.")
+    return None
 
 
 def load_type_element_by_key(element, type_element_key, data_class,
@@ -154,6 +191,7 @@ def _set_basic_data(element, element_in):
         element.a_conv = element_in["a_conv"]
         element.shading_g_total = element_in["shading_g_total"]
         element.shading_max_irr = element_in["shading_max_irr"]
+        element.frame_fraction = element_in.get("frame_fraction", 0.0)
 
     if type(element).__name__.startswith("Interzonal"):
         element.outer_radiation = element_in["inner_radiation"]

@@ -14,6 +14,7 @@ from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import (
 from teaser.logic.archetypebuildings.bmvbs.custom.institute import Institute
 from teaser.logic.archetypebuildings.bmvbs.custom.institute4 import Institute4
 from teaser.logic.archetypebuildings.bmvbs.custom.institute8 import Institute8
+from teaser.logic.archetypebuildings.aixlib_high_order.singlefamilyhouse import AixLibHighOrderSingleFamilyHouse
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
 from teaser.logic.buildingobjects.buildingsystems.buildingahu import BuildingAHU
 from teaser.logic.buildingobjects.useconditions import UseConditions
@@ -68,6 +69,7 @@ def load_teaser_json(path, project):
         "TerracedHouse": {"construction_data": "tabula_de_standard", "teaser_class": TerracedHouse},
         "MultiFamilyHouse": {"construction_data": "tabula_de_standard", "teaser_class": MultiFamilyHouse},
         "ApartmentBlock": {"construction_data": "tabula_de_standard", "teaser_class": ApartmentBlock},
+        "AixLibHighOrderSingleFamilyHouse": {"construction_data": "tabula_de_standard", "teaser_class": AixLibHighOrderSingleFamilyHouse}
     }
     with open(path, "r+") as f:
         prj_in = json.load(f, object_pairs_hook=collections.OrderedDict)
@@ -381,6 +383,7 @@ def set_basic_data_teaser(wall_in, element):
         element.a_conv = wall_in["a_conv"]
         element.shading_g_total = wall_in["shading_g_total"]
         element.shading_max_irr = wall_in["shading_max_irr"]
+        element.frame_fraction = wall_in.get("frame_fraction", 0.0)
 
 
 def set_layer_data_teaser(wall_in, element):

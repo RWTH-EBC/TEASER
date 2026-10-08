@@ -18,8 +18,8 @@ import os
 ```
 
 ## Standard export
-In e1_generate_archetype we created a Project with three archetype
-buildings to get this Project we rerun this example
+In e1_generate_archetype we created a Project with several archetype
+buildings, to get this Project we rerun this example
 
 ```python
 prj = e1.example_generate_archetype()
@@ -70,7 +70,9 @@ THydSup_nominal = {"ResidentialBuilding": 328.15,
                                          "Laboratory": 328.15},
                    "InstituteBuildingMoisture": 343.15,
                    "ResidentialBuildingTabula": 328.15,
-                   "ResidentialBuildingTabulaMulti": 328.15}
+                   "ResidentialBuildingTabulaMulti": 328.15,
+                   "ResidentialBuildingHighOrder": 328.15,
+                   "ResidentialBuildingHighOrderAixLib": 328.15}
 ```
 
 Option 3: Specify values based on construction year.
@@ -145,13 +147,23 @@ prj.set_location_parameters(t_outside=262.65,
 To make sure the parameters are calculated correctly we recommend to
 run prj.calc_all_buildings() function which is here already done in the set_location_parameters function.
 
+With `export_with_hom=True`, the AixLib HOM archetypes are additionally
+exported as HOM, in the same examples with the suffix `_HOM`. Their ROM
+then gets the HOM's room-wise user profiles (BESMod's TEASERHOMtoROM),
+averaged over the rooms, by default by their volume. The archetype's
+fac_room_t_set_weighting and fac_room_nat_vent_weighting change that
+("heat_load", "volume" or own weights per room).
+export_besmod's heater_radiative_fraction and rom_heating_curve_max_room
+set the ideal heater and the ROM's heating curve; see its docstring.
+
 Export all buildings to BESMod and include them in predefined example systems.
 
 ```python
 path = prj.export_besmod(
     THydSup_nominal=THydSup_nominal,
     path=None,
-    examples=examples
+    examples=examples,
+    export_with_hom=True
 )
 ```
 
@@ -166,6 +178,17 @@ QBuiOld_flow_design = {
         tz.name: tz.model_attr.heat_load for tz in bldg.thermal_zones
     }
     for bldg in prj.buildings
+}
+```
+
+Room-wise equivalent of QBuiOld_flow_design, used by the HOM export
+instead (only meaningful for the AixLib HOM archetype).
+
+```python
+QRoomOld_flow_design = {
+    bldg.name: bldg.room_heat_loads
+    for bldg in prj.buildings
+    if type(bldg).__name__ == "AixLibHighOrderSingleFamilyHouse"
 }
 ```
 
@@ -191,8 +214,10 @@ THydSupOld_design values, which are used for radiator sizing but not for control
 path = prj.export_besmod(
     THydSup_nominal=THydSup_nominal,
     QBuiOld_flow_design=QBuiOld_flow_design,
+    QRoomOld_flow_design=QRoomOld_flow_design,
     path=None,
-    examples=examples
+    examples=examples,
+    export_with_hom=True
 )
 ```
 

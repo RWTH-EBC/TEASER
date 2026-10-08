@@ -2,12 +2,24 @@
 
 import os
 import warnings
+import numpy as np
 from typing import Optional, Union, List, Dict
 from mako.template import Template
 from mako.lookup import TemplateLookup
 import teaser.logic.utilities as utilities
 import teaser.data.output.modelica_output as modelica_output
 from teaser.logic.buildingobjects.building import Building
+from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
+from teaser.logic.buildingobjects.buildingphysics.floor import Floor
+
+# Emissivity of every wall record in AixLib's own OFD collections. TEASER's
+# materials carry no emissivity of their own and would default to 0.9.
+AIXLIB_WALL_EPS = 0.95
+
+# AixLib's FLground_*_loHalf / _upHalf records cut the 0.25 m concrete slab of
+# the ground plate into 0.15 m on the screed side and 0.10 m on the side of
+# the outer insulation.
+GROUND_PLATE_INNER_SLAB_FRACTION = 0.6
 
 
 def export_besmod(
@@ -17,9 +29,13 @@ def export_besmod(
         examples: Optional[List[str]] = None,
         THydSup_nominal: Optional[Union[float, Dict[str, float]]] = None,
         QBuiOld_flow_design: Optional[Dict[str, Dict[str, float]]] = None,
+        QRoomOld_flow_design: Optional[Dict[str, Dict[str, float]]] = None,
         THydSupOld_design: Optional[Union[float, Dict[str, float]]] = None,
         custom_examples: Optional[Dict[str, str]] = None,
-        custom_script: Optional[Dict[str, str]] = None
+        custom_script: Optional[Dict[str, str]] = None,
+        export_with_hom: bool = True,
+        heater_radiative_fraction: float = 0.35,
+        rom_heating_curve_max_room: bool = True,
 ) -> None:
     """
     Export building models for BESMod simulations.
@@ -50,6 +66,14 @@ def export_besmod(
         of all zones in the Buildings in a nested dictionary with
         the building names and in a level below the zone names as keys.
         By default, only the radiator transfer system is not retrofitted in BESMod.
+    QRoomOld_flow_design : Optional[Dict[str, Dict[str, float]]]
+        Room-wise equivalent of QBuiOld_flow_design, used by the HOM export
+        (AixLibHighOrderSingleFamilyHouse) instead of QBuiOld_flow_design:
+        a nested dictionary with the building names and, one level below,
+        the room names (bldg.room_name_nr) as keys. Only needs entries for
+        HOM buildings you want a custom value for - other buildings, and
+        HOM buildings without an entry here, fall back to the same default
+        as QBuiOld_flow_design.
     THydSupOld_design : Optional[Union[float, Dict[str, float]]]
         Design supply temperatures for old, non-retrofitted hydraulic systems.
     custom_examples: Optional[Dict[str, str]]
@@ -58,6 +82,20 @@ def export_besmod(
     custom_script: Optional[Dict[str, str]]
         Specify custom .mos scripts for the existing and custom examples with a dictionary
         containing the example name as the key and the path to the corresponding custom mako template as the value.
+    export_with_hom: bool
+        Also exports the AixLib HOM of AixLibHighOrderSingleFamilyHouse
+        buildings, next to their ROM.
+    heater_radiative_fraction: float
+        Radiative fraction of the ideal heater's heat flow in the
+        TEASERHeatLoadCalculation example (BESMod's IdealHeaterFraRad), the
+        rest is convective. Default is 0.35.
+    rom_heating_curve_max_room: bool
+        Evaluates the heating curve of the ROM exported next to the HOM at
+        the set temperature of its warmest room, as the HOM's heating curve
+        is, instead of at the zone's own set temperature (the rooms' set
+        temperatures weighted by fac_room_t_set). Only the HeatPumpMonoenergetic
+        and GasBoilerBuildingOnly examples have a heating curve. Default is
+        True.
 
     Raises
     ------
@@ -131,6 +169,20 @@ def export_besmod(
             for bldg in buildings
         }
 
+    if QRoomOld_flow_design is None:
+        QRoomOld_flow_design = {
+            bldg.name: "systemParameters.QBui_flow_nominal" for bldg in buildings
+        }
+    else:
+        QRoomOld_flow_design = {
+            bldg.name: (
+                _convert_to_room_array(bldg, QRoomOld_flow_design[bldg.name])
+                if bldg.name in QRoomOld_flow_design
+                else "systemParameters.QBui_flow_nominal"
+            )
+            for bldg in buildings
+        }
+
     if custom_script is None:
         custom_script = {}
 
@@ -140,12 +192,31 @@ def export_besmod(
     template_path = utilities.get_full_path("data/output/modelicatemplate")
     lookup = TemplateLookup(directories=[template_path])
 
-    zone_template_4 = Template(
-        filename=os.path.join(template_path, "AixLib/AixLib_ThermalZoneRecord_FourElement"),
-        lookup=lookup)
     building_template = Template(
         filename=os.path.join(template_path, "BESMod/Building"),
         lookup=lookup)
+
+    building_hom_aixlib_template = Template(
+        filename=os.path.join(template_path, "BESMod/Building_hom_aixlib_dim"),
+        lookup=lookup)
+    room_wise_profile_template = Template(
+        filename=os.path.join(template_path, "BESMod/room_wise_profile_record"),
+        lookup=lookup)
+    single_wall_template = Template(
+        filename=os.path.join(template_path, "BESMod/single_wall_record"),
+        lookup=lookup)
+    multi_inner_wall_template = Template(
+        filename=os.path.join(template_path, "BESMod/multi_inner_wall_record"),
+        lookup=lookup)
+    window_simple_template = Template(
+        filename=os.path.join(template_path, "BESMod/window_simple_record"),
+        lookup=lookup)
+    surface_orientation_template = Template(
+        filename=os.path.join(template_path, "BESMod/surface_orientation_record"),
+        lookup=lookup)
+    wall_types = ['OW', 'roof', 'roof_attic', 'IW_vert_half', 'IW2_vert_half',
+                  'IW_hori_upHalf', 'IW_hori_loHalf', 'ground_floor_loHalf',
+                  'ground_floor_upHalf', 'IW_hori_att_upHalf', 'IW_hori_att_loHalf']
 
     uses = [
         'Modelica(version="' + prj.modelica_info.version + '")',
@@ -161,6 +232,17 @@ def export_besmod(
     modelica_output.copy_weather_data(prj.weather_file_path, dir_resources)
 
     for i, bldg in enumerate(buildings):
+        # TEASERThermalSingleZone takes BuildingSingleZoneBaseRecord,
+        # TEASERThermalZone AixLib's own ZoneBaseRecord (the BESMod/Building
+        # template picks the model by the same property)
+        if bldg.exports_single_zone_rom:
+            zone_template_4 = Template(
+                filename=os.path.join(template_path, "BESMod/BuildingSingleThermalZoneRecord_FourElement"),
+                lookup=lookup)
+        else:
+            zone_template_4 = Template(
+                filename=os.path.join(template_path, "AixLib/AixLib_ThermalZoneRecord_FourElement"),
+                lookup=lookup)
         bldg.bldg_height = bldg.number_of_floors * bldg.height_of_floors
         start_time_zones = []
         hours_set_back_zones = []
@@ -168,8 +250,17 @@ def export_besmod(
         t_set_zone_nominal = []
         for tz in bldg.thermal_zones:
             heating_profile = tz.use_conditions.heating_profile
-            t_set_nominal, start_time, hours_set_back, d_temp_set_back = _convert_heating_profile(heating_profile)
-            t_set_zone_nominal.append(t_set_nominal)
+            # _convert_heating_profile's own t_set_nominal (max of the
+            # simulated setpoint schedule) is intentionally not used here:
+            # the nominal/design temperature used for system sizing is a
+            # separate concept from the simulated setpoint schedule, and
+            # is tz.t_inside (settable independently, e.g. via a room-wise
+            # aggregation for the AixLib HOM archetype - see
+            # AixLibHighOrderSingleFamilyHouse.t_set_nominal_aggregation).
+            # Only the setback *shape* (start/duration/depth) still comes
+            # from the schedule itself.
+            _, start_time, hours_set_back, d_temp_set_back = _convert_heating_profile(heating_profile)
+            t_set_zone_nominal.append(tz.t_inside)
             d_temp_set_back_zones.append(d_temp_set_back)
             start_time_zones.append(start_time)
             hours_set_back_zones.append(hours_set_back)
@@ -179,21 +270,49 @@ def export_besmod(
         utilities.create_path(os.path.join(bldg_path, bldg.name + "_DataBase"))
         bldg.library_attr.modelica_gains_boundary(path=bldg_path)
 
+        export_hom = export_with_hom and type(bldg).__name__ == "AixLibHighOrderSingleFamilyHouse"
+        hom_profiles = None
+        if export_hom:
+            hom_profiles = _write_hom_user_profiles(
+                bldg=bldg,
+                bldg_path=bldg_path,
+                profile_template=room_wise_profile_template)
+            hom_template_kwargs = bldg.top_level_geo_params
+            with open(os.path.join(bldg_path, bldg.name + "_HOM.mo"), 'w') as out_file:
+                out_file.write(building_hom_aixlib_template.render_unicode(
+                    bldg=bldg,
+                    zone=bldg.thermal_zones[0],
+                    fra_rad_int_gai=1 - hom_profiles["fac_conv"],
+                    **hom_template_kwargs))
+                out_file.close()
+
         with open(os.path.join(bldg_path, bldg.name + ".mo"), 'w') as out_file:
             out_file.write(building_template.render_unicode(
-                bldg=bldg))
+                bldg=bldg,
+                export_hom=export_hom))
             out_file.close()
 
-        def write_example_mo(example_template, example):
-            with open(os.path.join(bldg_path, example + bldg.name + ".mo"),
+        def write_example_mo(example_template, example, suffix=""):
+            with open(os.path.join(bldg_path, example + bldg.name + suffix + ".mo"),
                       'w') as model_file:
                 model_file.write(example_template.render_unicode(
                     bldg=bldg,
                     project=prj,
+                    # The ROM example templates branch on this to drive the
+                    # single merged zone with the HOM's room-wise user
+                    # profiles (BESMod's TEASERHOMtoROM, weighted by
+                    # bldg.fac_room_t_set / fac_room_nat_vent) instead of
+                    # the zone-wise ones, so the ROM and the HOM exported
+                    # next to it see the same user behaviour.
+                    export_hom=export_hom,
+                    hom_profiles=hom_profiles,
+                    heater_radiative_fraction=heater_radiative_fraction,
+                    rom_heating_curve_max_room=rom_heating_curve_max_room,
                     TOda_nominal=bldg.thermal_zones[0].t_outside,
                     THydSup_nominal=t_hyd_sup_nominal_bldg[bldg.name],
                     TSetZone_nominal=t_set_zone_nominal,
                     QBuiOld_flow_design=QBuiOld_flow_design[bldg.name],
+                    QRoomOld_flow_design=QRoomOld_flow_design[bldg.name],
                     THydSupOld_design=t_hyd_sup_old_design_bldg[bldg.name],
                     dTSetBack=d_temp_set_back_zones,
                     startTimeSetBack=start_time_zones,
@@ -216,7 +335,34 @@ def export_besmod(
                     lookup=lookup)
             _help_example_script(bldg, dir_dymola, example_sim_plot_script, exp)
             write_example_mo(exp_template, exp)
+
+            if export_hom:
+                # Mirrors the ROM export above for the "*HOM" template
+                # variant (e.g. Example_TEASERHeatLoadCalculationHOM),
+                # writing "{exp}{bldg.name}_HOM.mo" alongside the ROM
+                # "{exp}{bldg.name}.mo" rather than replacing it.
+                exp_hom_key = exp + "HOM"
+                exp_hom_template = Template(
+                    filename=utilities.get_full_path(
+                        "data/output/modelicatemplate/BESMod/Example_" + exp_hom_key),
+                    lookup=lookup)
+                if exp_hom_key in custom_script.keys():
+                    example_hom_sim_plot_script = Template(
+                        filename=custom_script[exp_hom_key],
+                        lookup=lookup)
+                else:
+                    example_hom_sim_plot_script = Template(
+                        filename=utilities.get_full_path(
+                            "data/output/modelicatemplate/BESMod/Script_" + exp_hom_key),
+                        lookup=lookup)
+                _help_example_script(bldg, dir_dymola, example_hom_sim_plot_script, exp, suffix="_HOM")
+                write_example_mo(exp_hom_template, exp, suffix="_HOM")
         bldg_package = [exp + bldg.name for exp in examples]
+
+        if export_hom:
+            bldg_package.append(bldg.name + "_HOM")
+            bldg_package.extend(exp + bldg.name + "_HOM" for exp in examples)
+
         if custom_examples:
             for exp, c_path in custom_examples.items():
                 bldg_package.append(exp + bldg.name)
@@ -238,7 +384,6 @@ def export_besmod(
             extra=bldg_package)
 
         zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
-
         for zone in bldg.thermal_zones:
             zone.use_conditions.with_heating = False
             with open(os.path.join(
@@ -250,6 +395,77 @@ def export_besmod(
                     raise NotImplementedError("BESMod export is only implemented for four elements.")
                 out_file.close()
 
+        if export_hom:
+            wall_path = os.path.join(zone_path, "Walls")
+            utilities.create_path(wall_path)
+            for wall_type in wall_types:
+                write_wall_record(wall_path=wall_path,
+                                  wall_type=wall_type,
+                                  single_wall_template=single_wall_template,
+                                  bldg=bldg)
+
+            with open(os.path.join(
+                    wall_path,
+                    bldg.name + '_wallTypes.mo'), 'w') as out_file:
+                out_file.write(multi_inner_wall_template.render_unicode(bldg=bldg))
+                out_file.close()
+            # Sourced from an actual (and, if applicable, retrofitted) zone
+            # window rather than re-derived fresh from year_of_construction,
+            # so retrofit is reflected here too. u_value is area-independent
+            # (ua_value / area), so any window works regardless of its area.
+            window = bldg.thermal_zones[0].windows[0]
+            window.calc_ua_value()
+            with open(os.path.join(
+                    wall_path,
+                    bldg.name + '_windowSimple.mo'), 'w') as out_file:
+                out_file.write(window_simple_template.render_unicode(bldg=bldg,
+                                                                     Uw=window.u_value,
+                                                                     g=window.g_value,
+                                                                     frame_fraction=window.frame_fraction))
+                out_file.close()
+            modelica_output.create_package(
+                path=wall_path,
+                name='Walls',
+                within=prj.name + '.' + bldg.name + '.' + bldg.name + '_DataBase')
+            modelica_output.create_package_order(
+                path=wall_path,
+                package_list=[],
+                extra=[bldg.name + "_" + w for w in ['windowSimple', 'wallTypes'] + wall_types])
+
+            # The HOM's Modelica geometry is fixed - its rooms always face
+            # the North/East/South/West radiation ports of
+            # AixLibHighOrderOFD - so the building's orientation (and any
+            # rotate_building applied to it) reaches the HOM solely through
+            # this record, which redirects those ports. It also carries the
+            # archetype's own roof_tilt, which is
+            # therefore not necessarily the 45 deg of AixLib's own
+            # SurfaceOrientationData_N_E_S_W_RoofN_Roof_S.
+            if bldg.rotation_pending_recalculation:
+                warnings.warn(
+                    f"{bldg.name} was rotated after its parameters were last "
+                    "calculated, so the exported ROM zone record still holds "
+                    "the orientations from before the rotation while the HOM's "
+                    "SurfaceOrientation record holds the rotated ones. Call "
+                    "calc_all_buildings() after rotate_building() to export "
+                    "the two consistently.")
+            surfaces = bldg.surface_orientations
+            with open(os.path.join(
+                    zone_path,
+                    bldg.name + '_SurfaceOrientation.mo'), 'w') as out_file:
+                out_file.write(surface_orientation_template.render_unicode(
+                    bldg=bldg,
+                    rotation=bldg.rotation,
+                    names=[name for name, _, _ in surfaces],
+                    azimut=[_to_aixlib_azimuth(orientation)
+                            for _, orientation, _ in surfaces],
+                    tilt=[tilt for _, _, tilt in surfaces]))
+                out_file.close()
+            extra_data_base_package = ["Walls",
+                                       bldg.name + "_SurfaceOrientation",
+                                       bldg.name + "_TSetProfile"]
+        else:
+            extra_data_base_package = None
+
         modelica_output.create_package(
             path=zone_path,
             name=bldg.name + '_DataBase',
@@ -257,10 +473,36 @@ def export_besmod(
         modelica_output.create_package_order(
             path=zone_path,
             package_list=bldg.thermal_zones,
-            addition=bldg.name + "_")
+            addition=bldg.name + "_",
+            extra=extra_data_base_package)
 
     print("Exports can be found here:")
     print(path)
+
+
+def _to_aixlib_azimuth(orientation):
+    """Convert a TEASER orientation into an AixLib surface azimuth
+
+    Parameters
+    ----------
+    orientation : float
+        orientation in TEASER's convention, i.e. degrees clockwise from
+        North
+
+    Returns
+    -------
+    float
+        the same direction as the azimuth AixLib's SurfaceOrientation
+        records are written in - 0 is South, East is negative, West is
+        positive - normalized to (-180, 180]
+
+    This is the degree-valued counterpart of the azmiut_conv Mako def the
+    ROM templates use (conversion/azmiut_conv), which returns radians:
+    SurfaceOrientationBaseDataDefinition declares both Azimut and Tilt in
+    Modelica.Units.NonSI.Angle_deg.
+    """
+    azimuth = (orientation - 180.0) % 360.0
+    return azimuth - 360.0 if azimuth > 180.0 else azimuth
 
 
 def convert_input(building_zones_input: Union[float, Dict[Union[int, str], Union[float, Dict[str, float]]]],
@@ -363,6 +605,38 @@ def _convert_to_zone_array(bldg, zone_dict):
         raise KeyError(f"{set(tz_names) - set(list(zone_dict.keys()))} thermal zones missing in given dictionary.")
 
 
+def _convert_to_room_array(bldg, room_dict):
+    """
+    Convert a dictionary of room values to a BESMod-compatible array string,
+    ordered by the building's room_name_nr (1..10) - the room-wise
+    counterpart to _convert_to_zone_array, used for the HOM export.
+
+    Parameters
+    ----------
+    bldg : AixLibHighOrderSingleFamilyHouse
+        TEASER Building instance with a room_name_nr attribute.
+    room_dict : dict
+        Dictionary with room names as keys and room parameter values as
+        values.
+
+    Returns
+    -------
+    str
+        Array string for BESMod parameter input.
+
+    Raises
+    ------
+    KeyError
+        If the dictionary is missing room names present in the building.
+    """
+    room_names = set(bldg.room_name_nr)
+    if room_names == set(room_dict.keys()):
+        ordered_values = bldg._order_by_room_nr(room_dict)
+        return "{" + ",".join(str(value) for value in ordered_values) + "}"
+    else:
+        raise KeyError(f"{room_names - set(room_dict.keys())} rooms missing in given dictionary.")
+
+
 def _convert_heating_profile(heating_profile):
     """
     Convert a 24-hour heating profile for BESMod export.
@@ -449,7 +723,7 @@ def _get_next_higher_year_value(years_dict, given_year):
     return years_dict[years[-1]]
 
 
-def _help_example_script(bldg, dir_dymola, test_script_template, example):
+def _help_example_script(bldg, dir_dymola, test_script_template, example, suffix=""):
     """
     Create a .mos script for simulating and plotting BESMod examples from a Mako template.
 
@@ -463,12 +737,274 @@ def _help_example_script(bldg, dir_dymola, test_script_template, example):
         Mako template for the simulation script.
     example : str
         Name of the BESMod example.
+    suffix : str
+        Appended to the output filename after bldg.name, e.g. "_HOM".
     """
 
     dir_building = utilities.create_path(os.path.join(dir_dymola, bldg.name))
-    with open(os.path.join(dir_building, example + bldg.name + ".mos"), 'w') as out_file:
+    with open(os.path.join(dir_building, example + bldg.name + suffix + ".mos"), 'w') as out_file:
         out_file.write(test_script_template.render_unicode(
             project=bldg.parent,
             bldg=bldg
         ))
         out_file.close()
+
+
+def _write_hom_user_profiles(bldg, bldg_path, profile_template):
+    """Writes the room-wise user profiles the HOM and the ROM exported next
+    to it are both driven with
+
+    The internal gains are the zone's use conditions, the same the ROM
+    exported on its own takes - persons, machines and lighting per m2 times
+    the rooms' floor area - spread over the rooms and the hours as
+    room_internal_gains_profiles are: each day, those daily courses are
+    scaled so that together they give the building that day's energy of the
+    use conditions' schedules. The table has the time stamps TEASER's own
+    internal gains file uses, one column per room, ordered by room_name_nr,
+    and a last, empty one for the Attic, like BESMod's InternalGainsHOM.
+    Persons, machines and lighting each have their own convective share;
+    the HOM and the ROM take their gains as one signal, so they get the
+    share of the three over the year.
+
+    The set temperatures are room_t_set_nominal, following the zone's
+    heating profile: each room is set back by as much as the profile is
+    below its maximum.
+
+    Parameters
+    ----------
+    bldg : AixLibHighOrderSingleFamilyHouse
+        the building, with its parameters calculated
+    bldg_path : str
+        the building's package, which the gains file is written to; the
+        set temperature record goes to its _DataBase package
+    profile_template : Template
+        BESMod/room_wise_profile_record
+
+    Returns
+    -------
+    dict
+        file_internal_gains (name of the gains file in the building's
+        package), fac_conv (convective share of the gains) and t_set_profile
+        (the set temperature record, as a Modelica class path)
+    """
+    zone = bldg.thermal_zones[0]
+    use_cond = zone.use_conditions
+    rooms = sorted(bldg.room_name_nr, key=bldg.room_name_nr.get)
+    floor_areas = np.array([bldg.detailed_geo[room]["floor"]["area"] for room in rooms])
+
+    # W/m2 and convective share of each gain, by its schedule
+    gains = {
+        "persons_profile": (use_cond.persons * use_cond.fixed_heat_flow_rate_persons
+                            * use_cond.activity_degree_persons,
+                            use_cond.ratio_conv_rad_persons),
+        "machines_profile": (use_cond.machines, use_cond.ratio_conv_rad_machines),
+        "lighting_profile": (use_cond.lighting_power, use_cond.ratio_conv_rad_lighting),
+    }
+    specific = sum(np.asarray(use_cond.schedules[profile], dtype=float) * value
+                   for profile, (value, _) in gains.items())
+    energy = {profile: np.asarray(use_cond.schedules[profile], dtype=float).sum() * value
+              for profile, (value, _) in gains.items()}
+    total = sum(energy.values())
+    fac_conv = (sum(energy[profile] * ratio for profile, (_, ratio) in gains.items()) / total
+                if total > 0 else 1.0)
+
+    # the rooms' daily courses, scaled to each day's energy of the building
+    shape = np.array([bldg.room_internal_gains_profiles[room] for room in rooms],
+                     dtype=float)
+    if shape.shape != (len(rooms), 24) or shape.sum() <= 0:
+        raise ValueError(
+            f"room_internal_gains_profiles of {bldg.name} need 24 hourly values "
+            f"for each of its rooms, and some gains.")
+    daily_energy = (specific.reshape(-1, 24) * floor_areas.sum()).sum(axis=1)
+    room_gains = np.concatenate(
+        [shape * energy / shape.sum() for energy in daily_energy], axis=1)
+
+    file_internal_gains = "InternalGains_" + bldg.name + "_HOM.txt"
+    with open(os.path.join(bldg_path, file_internal_gains), "w") as out_file:
+        out_file.write("#1\n")
+        out_file.write(f"double Internals({room_gains.shape[1]}, {len(rooms) + 2})\n")
+        for hour in range(room_gains.shape[1]):
+            row = [(hour + 1) * 3600] + list(room_gains[:, hour]) + [0.0]
+            out_file.write("\t".join(str(float(x)) for x in row) + "\n")
+
+    heating_profile = np.asarray(use_cond.heating_profile, dtype=float)
+    set_back = heating_profile - heating_profile.max()
+    t_set_nominal = np.array([bldg.room_t_set_nominal[room] for room in rooms])
+    rows = [[hour * 3600] + list(t_set_nominal + set_back[hour])
+            for hour in range(len(heating_profile))]
+    rows.append([len(heating_profile) * 3600] + rows[-1][1:])
+    database_path = os.path.join(bldg_path, bldg.name + "_DataBase")
+    with open(os.path.join(database_path, bldg.name + "_TSetProfile.mo"), "w") as out_file:
+        out_file.write(profile_template.render_unicode(
+            bldg=bldg,
+            name="TSetProfile",
+            description="Room-wise set temperatures, room_t_set_nominal "
+                        "following the heating profile of the zone",
+            rows=[[float(value) for value in row] for row in rows]))
+
+    return {
+        "file_internal_gains": file_internal_gains,
+        "fac_conv": float(fac_conv),
+        "t_set_profile": f"{bldg.parent.name}.{bldg.name}.{bldg.name}_DataBase."
+                         f"{bldg.name}_TSetProfile",
+    }
+
+
+def _find_wall_type_element(elements, element_construction_type=None):
+    """Find the first element matching element_construction_type.
+
+    Used by write_wall_record to source the generic material/layer stack
+    for a HOM wall-type record from an actual (already generated and, if
+    applicable, retrofitted) zone element, instead of re-deriving a fresh
+    element straight from year/construction. This keeps the exported HOM
+    wall types consistent with whatever retrofit was actually applied to
+    the zone, rather than always reflecting the original construction.
+
+    Relies on the genuine per-room elements (element_construction_type is
+    None or "LoadBearing") being added to the zone before the unheated-room
+    equivalent-resistance elements in
+    AixLibHighOrderSingleFamilyHouse.generate_archetype, so the first match
+    (in insertion order) is always a genuine element and never one of the
+    equivalent ones (which are currently left untagged, also None).
+    """
+    for element in elements:
+        if element.element_construction_type == element_construction_type:
+            return element
+    raise ValueError(
+        "No element with element_construction_type="
+        f"{element_construction_type!r} found for HOM wall-type export."
+    )
+
+
+def _merge_equal_layers(layers):
+    """Merge neighbouring (thickness, material) layers of the same material
+
+    AixLib's records hold e.g. the gypsum plaster and gypsum board of the
+    light inner walls as one 0.0275 m layer, which TEASER's elements keep
+    as two layers of the same material.
+    """
+    merged = []
+    for thickness, material in layers:
+        if merged and all(
+                getattr(merged[-1][1], attr) == getattr(material, attr)
+                for attr in ("density", "thermal_conduc", "heat_capac")):
+            merged[-1] = (merged[-1][0] + thickness, merged[-1][1])
+        else:
+            merged.append((thickness, material))
+    return merged
+
+
+def _vertical_half(layers):
+    """Room side half of a symmetric inner wall, cut in its middle layer"""
+    quotient, remainder = divmod(len(layers), 2)
+    half = [(layer.thickness, layer.material) for layer in layers[:quotient]]
+    if remainder:
+        middle = layers[quotient]
+        half.append((middle.thickness / 2, middle.material))
+    return _merge_equal_layers(list(reversed(half)))
+
+
+def _horizontal_half(bldg, element_class, construction_type):
+    """Heated room's half of a horizontal inner element in AixLib's order
+
+    For aixlib_* construction data, TypeElements_AixLib.json holds the halves
+    themselves (CeilingHalf/FloorHalf between two heated rooms,
+    CeilingAttic/FloorAttic towards the Attic), converted from AixLib's own
+    CE*_loHalf / FL*_upHalf records, so each is exported with all of its
+    layers. Other construction data only has the whole construction under
+    Ceiling/Floor, which is cut in two instead: the ceiling's half keeps its
+    innermost layer, the floor's all but its outermost.
+    """
+    element = element_class(parent=None)
+    element.element_construction_type = construction_type
+    type_element_key = element.load_type_element(
+        year=bldg.year_of_construction,
+        construction=bldg.construction_data.value,
+        data_class=bldg.data_class,
+    )
+    layers = element.layer
+    pre_split = type_element_key is not None and type_element_key.startswith(
+        element_class.__name__ + construction_type)
+    if not pre_split:
+        layers = layers[:1] if element_class is Ceiling else layers[:-1]
+    return [(layer.thickness, layer.material) for layer in reversed(layers)]
+
+
+def _ground_plate_half(layers, upper):
+    """One half of the ground plate, cut in its heaviest layer
+
+    groundPlate_low_half runs from that cut to the room side (screed last),
+    groundPlate_upp_half from the cut to the outside, as in AixLib's
+    FLground_*_loHalf / _upHalf records.
+    """
+    slab = max(range(len(layers)),
+               key=lambda i: layers[i].thickness * layers[i].material.density)
+    inner = GROUND_PLATE_INNER_SLAB_FRACTION * layers[slab].thickness
+    if upper:
+        return [(layers[slab].thickness - inner, layers[slab].material)] + [
+            (layer.thickness, layer.material) for layer in layers[slab + 1:]]
+    return [(inner, layers[slab].material)] + [
+        (layer.thickness, layer.material) for layer in reversed(layers[:slab])]
+
+
+def write_wall_record(wall_path, wall_type, single_wall_template, bldg):
+    """Writes the AixLib wall record of one HOM wall type
+
+    The layers are taken from the building's (possibly retrofitted) zone
+    elements where the HOM has an equivalent, and are written in AixLib's
+    order, i.e. with wall[1] as the outside layer.
+    """
+    zone = bldg.thermal_zones[0]
+    if wall_type == 'OW':
+        element = _find_wall_type_element(zone.outer_walls)
+    elif wall_type == 'roof':
+        element = _find_wall_type_element(zone.rooftops)
+    elif wall_type == 'roof_attic':
+        # The attic's own envelope is not part of the (merged) zone - only
+        # its equivalent-resistance stand-ins are (see
+        # AixLibHighOrderSingleFamilyHouse.generate_archetype) - but is kept
+        # as a persistent, retrofittable element on the building itself
+        # (unheated_room_envelope_elements), so this reflects retrofit too.
+        element = bldg.unheated_room_envelope_elements["Attic"]["roof1"]
+    if wall_type in ('OW', 'roof', 'roof_attic'):
+        layers = [(layer.thickness, layer.material) for layer in reversed(element.layer)]
+    elif wall_type == 'IW_vert_half':
+        layers = _vertical_half(_find_wall_type_element(zone.inner_walls).layer)
+    elif wall_type == 'IW2_vert_half':
+        layers = _vertical_half(
+            _find_wall_type_element(zone.inner_walls, "LoadBearing").layer)
+    elif wall_type in ('ground_floor_upHalf', 'ground_floor_loHalf'):
+        layers = _ground_plate_half(
+            _find_wall_type_element(zone.ground_floors).layer,
+            upper=wall_type == 'ground_floor_upHalf')
+    elif wall_type == 'IW_hori_loHalf':
+        layers = _horizontal_half(bldg, Ceiling, "Half")
+    elif wall_type == 'IW_hori_upHalf':
+        layers = _horizontal_half(bldg, Floor, "Half")
+    elif wall_type == 'IW_hori_att_loHalf':
+        layers = _horizontal_half(bldg, Ceiling, "Attic")
+    elif wall_type == 'IW_hori_att_upHalf':
+        layers = _horizontal_half(bldg, Floor, "Attic")
+    else:
+        raise NotImplementedError("This wall type does not exit")
+    if not layers:
+        # Guard against silently writing a record with n=0 (which does not
+        # translate in Modelica)
+        raise ValueError(
+            f"No layers selected for wall type {wall_type!r} of building "
+            f"{bldg.name!r}.")
+    if bldg.construction_data.value.startswith("aixlib"):
+        eps = AIXLIB_WALL_EPS
+    else:
+        eps = layers[-1][1].ir_emissivity
+    with open(os.path.join(
+            wall_path,
+            bldg.name + '_' + wall_type + '.mo'), 'w') as out_file:
+        out_file.write(single_wall_template.render_unicode(
+            bldg=bldg, wall_type=wall_type,
+            d=[thickness for thickness, _ in layers],
+            rho=[material.density for _, material in layers],
+            conductivity=[material.thermal_conduc for _, material in layers],
+            c=[material.heat_capac * 1000 for _, material in layers],  # kJ/kgK to J/kgK
+            eps=eps,
+            n=len(layers)))

@@ -61,6 +61,7 @@ def save_teaser_json(path, project):
         "TerracedHouse": {"construction_data": "tabula_de_standard", "geometry_data": "tabula_de_terraced_house"},
         "MultiFamilyHouse": {"construction_data": "tabula_de_standard", "geometry_data": "tabula_de_multi_family_house"},
         "ApartmentBlock": {"construction_data": "tabula_de_standard", "geometry_data": "tabula_de_apartment_block"},
+        "AixLibHighOrderSingleFamilyHouse": {"construction_data": "tabula_de_standard", "geometry_data": "aixlib_high_order_single_family_house"}
     }
 
     for bldg in project.buildings:
@@ -348,6 +349,7 @@ def set_basic_data(wall_out, element):
         wall_out["a_conv"] = element.a_conv
         wall_out["shading_g_total"] = element.shading_g_total
         wall_out["shading_max_irr"] = element.shading_max_irr
+        wall_out["frame_fraction"] = element.frame_fraction
 
     if (
         type(element).__name__ == "InterzonalWall"

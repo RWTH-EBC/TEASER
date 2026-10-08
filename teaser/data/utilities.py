@@ -37,6 +37,9 @@ from teaser.logic.archetypebuildings.tabula.dk.apartmentblock import (
 from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import (
     SingleFamilyDwelling,
 )
+from teaser.logic.archetypebuildings.aixlib_high_order.singlefamilyhouse import (
+    AixLibHighOrderSingleFamilyHouse,
+)
 
 
 class GeometryData(Enum):
@@ -72,6 +75,8 @@ class GeometryData(Enum):
     UrbanrenetEst8a = "urbanrenet_est8a"
     UrbanrenetEst8b = "urbanrenet_est8b"
 
+    AixLibHighOrderSingleFamilyHouse = "aixlib_high_order_single_family_house"
+
 class ConstructionData(Enum):
     """
     The ConstructionData enumeration combines the former parameters “method” and “construction_type”.
@@ -93,6 +98,10 @@ class ConstructionData(Enum):
     kfw_70 = "kfw_70"
     kfw_85 = "kfw_85"
     kfw_100 = "kfw_100"
+    aixlib_S = "aixlib_S"
+    aixlib_M = "aixlib_M"
+    aixlib_L = "aixlib_L"
+    aixlib_M_retrofit = "aixlib_M_retrofit"
     custom = "custom"
 
     def get_prefix(self):
@@ -114,6 +123,13 @@ class ConstructionData(Enum):
 
     def is_kfw(self):
         return self.get_prefix() == "kfw"
+
+    def is_aixlib(self):
+        # not using get_prefix() here: aixlib_M_retrofit has an extra
+        # "_retrofit" segment that would otherwise change the computed
+        # prefix (get_prefix mirrors tabula_de/tabula_dk's fixed 2-segment
+        # convention, which doesn't fit aixlib's S/M/L + retrofit suffix).
+        return self.value.startswith("aixlib")
 
     def is_custom(self):
         return self.value == "custom"
@@ -151,6 +167,8 @@ geometries = {
     GeometryData.UrbanrenetEst7: EST7,
     GeometryData.UrbanrenetEst8a: EST8a,
     GeometryData.UrbanrenetEst8b: EST8b,
+    #AixLib HOM
+    GeometryData.AixLibHighOrderSingleFamilyHouse: AixLibHighOrderSingleFamilyHouse,
 }
 
 # Dictionary that defines which building geometries are allowed for each construction data type.
@@ -162,7 +180,8 @@ allowed_geometries = {
                                  GeometryData.UrbanrenetEst3, GeometryData.UrbanrenetEst4a,
                                  GeometryData.UrbanrenetEst4b, GeometryData.UrbanrenetEst5,
                                  GeometryData.UrbanrenetEst6, GeometryData.UrbanrenetEst7,
-                                 GeometryData.UrbanrenetEst8a, GeometryData.UrbanrenetEst8b],
+                                 GeometryData.UrbanrenetEst8a, GeometryData.UrbanrenetEst8b,
+                                 GeometryData.AixLibHighOrderSingleFamilyHouse],
     ConstructionData.iwu_light: [GeometryData.IwuSingleFamilyDwelling, GeometryData.BmvbsOffice,
                                  GeometryData.BmvbsInstitute, GeometryData.BmvbsInstitute4,
                                  GeometryData.BmvbsInstitute8, GeometryData.UrbanrenetEst1a,
@@ -170,14 +189,18 @@ allowed_geometries = {
                                  GeometryData.UrbanrenetEst3, GeometryData.UrbanrenetEst4a,
                                  GeometryData.UrbanrenetEst4b, GeometryData.UrbanrenetEst5,
                                  GeometryData.UrbanrenetEst6, GeometryData.UrbanrenetEst7,
-                                 GeometryData.UrbanrenetEst8a, GeometryData.UrbanrenetEst8b],
+                                 GeometryData.UrbanrenetEst8a, GeometryData.UrbanrenetEst8b,
+                                 GeometryData.AixLibHighOrderSingleFamilyHouse],
 
     ConstructionData.tabula_de_standard: [GeometryData.TabulaDeSingleFamilyHouse, GeometryData.TabulaDeTerracedHouse,
-                                          GeometryData.TabulaDeMultiFamilyHouse, GeometryData.TabulaDeApartmentBlock],
+                                          GeometryData.TabulaDeMultiFamilyHouse, GeometryData.TabulaDeApartmentBlock,
+                                          GeometryData.AixLibHighOrderSingleFamilyHouse],
     ConstructionData.tabula_de_retrofit: [GeometryData.TabulaDeSingleFamilyHouse, GeometryData.TabulaDeTerracedHouse,
-                                          GeometryData.TabulaDeMultiFamilyHouse, GeometryData.TabulaDeApartmentBlock],
+                                          GeometryData.TabulaDeMultiFamilyHouse, GeometryData.TabulaDeApartmentBlock,
+                                          GeometryData.AixLibHighOrderSingleFamilyHouse],
     ConstructionData.tabula_de_adv_retrofit: [GeometryData.TabulaDeSingleFamilyHouse, GeometryData.TabulaDeTerracedHouse,
-                                              GeometryData.TabulaDeMultiFamilyHouse, GeometryData.TabulaDeApartmentBlock],
+                                              GeometryData.TabulaDeMultiFamilyHouse, GeometryData.TabulaDeApartmentBlock,
+                                              GeometryData.AixLibHighOrderSingleFamilyHouse],
 
     ConstructionData.tabula_dk_standard: [GeometryData.TabulaDkSingleFamilyHouse, GeometryData.TabulaDkTerracedHouse,
                                           GeometryData.TabulaDkApartmentBlock],
@@ -186,11 +209,25 @@ allowed_geometries = {
     ConstructionData.tabula_dk_adv_retrofit: [GeometryData.TabulaDkSingleFamilyHouse, GeometryData.TabulaDkTerracedHouse,
                                               GeometryData.TabulaDkApartmentBlock],
 
-    ConstructionData.kfw_40: [GeometryData.IwuSingleFamilyDwelling, GeometryData.TabulaDeSingleFamilyHouse],
-    ConstructionData.kfw_55: [GeometryData.IwuSingleFamilyDwelling, GeometryData.TabulaDeSingleFamilyHouse],
-    ConstructionData.kfw_70: [GeometryData.IwuSingleFamilyDwelling, GeometryData.TabulaDeSingleFamilyHouse],
-    ConstructionData.kfw_85: [GeometryData.IwuSingleFamilyDwelling, GeometryData.TabulaDeSingleFamilyHouse],
-    ConstructionData.kfw_100: [GeometryData.IwuSingleFamilyDwelling, GeometryData.TabulaDeSingleFamilyHouse],
+    ConstructionData.kfw_40: [GeometryData.IwuSingleFamilyDwelling, GeometryData.TabulaDeSingleFamilyHouse,
+                              GeometryData.AixLibHighOrderSingleFamilyHouse],
+    ConstructionData.kfw_55: [GeometryData.IwuSingleFamilyDwelling, GeometryData.TabulaDeSingleFamilyHouse,
+                              GeometryData.AixLibHighOrderSingleFamilyHouse],
+    ConstructionData.kfw_70: [GeometryData.IwuSingleFamilyDwelling, GeometryData.TabulaDeSingleFamilyHouse,
+                              GeometryData.AixLibHighOrderSingleFamilyHouse],
+    ConstructionData.kfw_85: [GeometryData.IwuSingleFamilyDwelling, GeometryData.TabulaDeSingleFamilyHouse,
+                              GeometryData.AixLibHighOrderSingleFamilyHouse],
+    ConstructionData.kfw_100: [GeometryData.IwuSingleFamilyDwelling, GeometryData.TabulaDeSingleFamilyHouse,
+                               GeometryData.AixLibHighOrderSingleFamilyHouse],
+
+    # aixlib_S/M/L (+ aixlib_M_retrofit) are specific to the AixLib HOM
+    # archetype's own wall-type conventions (InnerWallLoadBearing, Attic/
+    # Cellar-tagged elements, S/M/L construction classes) and not meant
+    # for the other geometries.
+    ConstructionData.aixlib_S: [GeometryData.AixLibHighOrderSingleFamilyHouse],
+    ConstructionData.aixlib_M: [GeometryData.AixLibHighOrderSingleFamilyHouse],
+    ConstructionData.aixlib_L: [GeometryData.AixLibHighOrderSingleFamilyHouse],
+    ConstructionData.aixlib_M_retrofit: [GeometryData.AixLibHighOrderSingleFamilyHouse],
 }
 
 

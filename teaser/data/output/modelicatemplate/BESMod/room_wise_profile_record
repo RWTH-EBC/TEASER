@@ -1,0 +1,6 @@
+within ${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase;
+record ${bldg.name}_${name}
+  "${description}"
+  extends BESMod.Systems.UserProfiles.RecordsCollectionHOM.RoomWiseProfileBaseDataDefinition(
+    Profile=[${";\n      ".join(", ".join(str(value) for value in row) for row in rows)}]);
+end ${bldg.name}_${name};

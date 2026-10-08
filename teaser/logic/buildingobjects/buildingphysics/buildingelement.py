@@ -67,6 +67,11 @@ class BuildingElement(object):
         List of all layers of a building element (to be filled with Layer
         objects). Use element.layer = None to delete all layers of the building
         element
+    element_construction_type : str
+        If multiple construction types exist for a element in the construction data you
+        can specify which one to use here.
+        e.g. for InnerWall define LoadBearing then it is tried to use InnerWallLoadBearing
+        from the json instead of InnerWall
 
     Calculated Attributes
 
@@ -116,6 +121,7 @@ class BuildingElement(object):
         """Constructor for BuildingElement
         """
 
+        self.u_value = None
         self.parent = parent
 
         self.internal_id = random.random()
@@ -125,6 +131,7 @@ class BuildingElement(object):
         self._year_of_retrofit = None
         self._year_of_construction = None
         self.building_age_group = [None, None]
+        self._element_construction_type = None
 
         self._area = None
         self._tilt = None
@@ -316,6 +323,15 @@ class BuildingElement(object):
         type_element_key : str
             Element to load - specify the full json entry
 
+        Returns
+        -------
+        str or None
+            Key of the data class entry that was actually loaded, or None if
+            nothing matched. If no entry exists for the requested
+            element_type (or element_construction_type), the entry for this
+            element's own class is loaded instead, so callers that depend on
+            getting the requested type can check the returned key.
+
         """
 
         if type_element_key is None and (year is None or construction is None):
@@ -339,6 +355,7 @@ class BuildingElement(object):
                     element=self, type_element_key=type_element_key,
                     data_class=data_class, reverse_layers=reverse_layers
                 )
+                return type_element_key
             except KeyError:
                 warnings.warn(
                     ('Type element ' + type_element_key + ' was not found. '
@@ -348,7 +365,7 @@ class BuildingElement(object):
                 type_element_key = None
 
         if not type_element_key:
-            buildingelement_input.load_type_element(
+            return buildingelement_input.load_type_element(
                 element=self, year=year, construction=construction,
                 data_class=data_class, element_type=element_type,
                 reverse_layers=reverse_layers
@@ -692,3 +709,12 @@ class BuildingElement(object):
     def construction_data(self, value):
 
         self._construction_data = value
+
+    @property
+    def element_construction_type(self):
+        return self._element_construction_type
+
+    @element_construction_type.setter
+    def element_construction_type(self, value):
+
+        self._element_construction_type = value

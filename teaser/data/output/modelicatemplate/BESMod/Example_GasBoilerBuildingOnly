@@ -2,14 +2,33 @@
 within ${bldg.parent.name}.${bldg.name};
 model GasBoilerBuildingOnly${bldg.name}
   extends BESMod.Systems.BaseClasses.TEASERExport.PartialGasBoilerBuildingOnly(
+% if export_hom:
+    redeclare ${bldg.name} building(
+        use_absIntGai=true,
+        useUserProfileNatVent=true),
+    redeclare BESMod.Systems.UserProfiles.TEASERHOMtoROM userProfiles(
+        facRoomTSet=${get_list(bldg.fac_room_t_set)},
+        facRoomNatVent=${get_list(bldg.fac_room_nat_vent)},
+        fac_conv=${hom_profiles['fac_conv']},
+        fileNameIntGains=Modelica.Utilities.Files.loadResource(
+        "modelica://${bldg.parent.name}/${bldg.name}/${hom_profiles['file_internal_gains']}"),
+        gain=1,
+        redeclare ${hom_profiles['t_set_profile']} TSetProfile),
+    hydraulic(control(use_TZoneSetHeaCur=${"true" if rom_heating_curve_max_room else "false"})),
+% else:
     redeclare ${bldg.name} building,
-    userProfiles(fileNameIntGains=Modelica.Utilities.Files.loadResource(
+    userProfiles(
+        fileNameIntGains=Modelica.Utilities.Files.loadResource(
         "modelica://${bldg.parent.name}/${bldg.name}/InternalGains_${bldg.name}.txt"),
         dTSetBack=${get_list(dTSetBack)},
         hoursSetBack=${get_list(hoursSetBack)},
         startTimeSetBack=${get_list(startTimeSetBack)}),
+% endif
     systemParameters(nZones=${len(bldg.thermal_zones)},
                      TSetZone_nominal=${get_list(TSetZone_nominal)},
+% if type(bldg).__name__ == "AixLibHighOrderSingleFamilyHouse":
+                     QBui_flow_nominal=${get_list([zone.model_attr.heat_load for zone in bldg.thermal_zones])},
+% endif
                      TOda_nominal=${TOda_nominal},
                      THydSup_nominal=${THydSup_nominal},
                      QBuiOld_flow_design=${QBuiOld_flow_design},

@@ -134,6 +134,17 @@ class ThermalZone(object):
 
         self._number_of_floors = None
         self._height_of_floors = None
+        self._split_factor_sol_rad = None
+
+        self._roof_area_attic_factor = 1
+        self._ratio_ow_area_top_floor = None
+        self._ratio_ow_area_bottom_floor = None
+        self._ratio_iw_area_top_floor = None
+        self._ratio_iw_area_bottom_floor = None
+        self._ratio_win_area_top_floor = None
+        self._ratio_win_area_bottom_floor = None
+        self._ratio_win_area_ow = 1
+        self._ratio_win_area_iw = 1
 
     def calc_zone_parameters(
             self,
@@ -470,7 +481,8 @@ class ThermalZone(object):
             self,
             type_of_retrofit=None,
             window_type=None,
-            material=None):
+            material=None,
+            data_class=None):
         """Retrofits all walls and windows in the zone.
 
         Function call for all elements facing the ambient or ground.
@@ -489,6 +501,16 @@ class ThermalZone(object):
             Default: EnEv 2014
         material : str
             Default: EPS035
+        data_class : DataClass(), optional
+            DataClass to load the TABULA type elements from (only used for
+            the TABULA-style retrofit branch, i.e. SingleFamilyHouse,
+            TerracedHouse, MultiFamilyHouse and ApartmentBlock). If None,
+            defaults to self.parent.data_class (the DataClass this
+            building was generated with). The generic 'iwu'-style retrofit
+            branch (insulation + window replacement) always uses its own
+            iwu_heavy catalog, since its material/window_type vocabulary
+            (e.g. 'EPS035', 'EnEv') is defined there, independent of the
+            construction_data the building itself was generated with.
         """
 
         if type_of_retrofit is None:
@@ -497,6 +519,8 @@ class ThermalZone(object):
         if type(self.parent).__name__ in [
             "SingleFamilyHouse", "TerracedHouse", "MultiFamilyHouse",
                 "ApartmentBlock"]:
+            if data_class is None:
+                data_class = self.parent.data_class
             for wall_count in self.outer_walls \
                     + self.rooftops + self.ground_floors + self.doors + \
                     self.windows:
@@ -508,13 +532,23 @@ class ThermalZone(object):
                     wall_count.load_type_element(
                         year=self.parent.year_of_construction,
                         construction=wall_count.construction_data.replace(
-                            "standard", type_of_retrofit))
+                            "standard", type_of_retrofit),
+                        data_class=data_class)
                 else:
                     wall_count.load_type_element(
                         year=self.parent.year_of_construction,
                         construction=wall_count.construction_data.replace(
-                            "retrofit", type_of_retrofit))
+                            "retrofit", type_of_retrofit),
+                        data_class=data_class)
         else:
+            if data_class is None:
+                # Deferred import to avoid a circular import at module load
+                # time (teaser.data.utilities imports archetype classes
+                # that in turn import ThermalZone).
+                from teaser.data.dataclass import DataClass
+                from teaser.data.utilities import ConstructionData
+                data_class = DataClass(
+                    construction_data=ConstructionData.iwu_heavy)
 
             for element_count in (
                     self.outer_walls
@@ -524,11 +558,13 @@ class ThermalZone(object):
             ):
                 element_count.retrofit_wall(
                     self.parent.year_of_retrofit,
-                    material)
+                    material,
+                    data_class=data_class)
             for win_count in self.windows:
                 win_count.replace_window(
                     self.parent.year_of_retrofit,
-                    window_type)
+                    window_type,
+                    data_class=data_class)
 
     def delete(self):
         """Deletes the actual thermal zone safely.
@@ -932,3 +968,189 @@ class ThermalZone(object):
                 self._t_ground_amplitude = value
             except:
                 raise ValueError("Can't convert temperature to float")
+
+    @property
+    def roof_area_attic_factor(self):
+        return self._roof_area_attic_factor
+
+    @roof_area_attic_factor.setter
+    def roof_area_attic_factor(self, value):
+        if isinstance(value, float):
+            self._roof_area_attic_factor = value
+        elif value is None:
+            self._roof_area_attic_factor = value
+        else:
+            try:
+                value = float(value)
+                self._roof_area_attic_factor = value
+            except:
+                raise ValueError("Can't convert roof area attic factor to float")
+
+    @property
+    def ratio_ow_area_top_floor(self):
+        if (self._ratio_ow_area_top_floor is None
+                and self.parent is not None
+                and len(self.parent.thermal_zones) == 1):
+            self._ratio_ow_area_top_floor = 1 / self.number_of_floors
+        return self._ratio_ow_area_top_floor
+
+    @ratio_ow_area_top_floor.setter
+    def ratio_ow_area_top_floor(self, value):
+        if isinstance(value, float):
+            self._ratio_ow_area_top_floor = value
+        elif value is None:
+            self._ratio_ow_area_top_floor = value
+        else:
+            try:
+                value = float(value)
+                self._ratio_ow_area_top_floor = value
+            except:
+                raise ValueError("Can't convert ratio outer wall area top floor to float")
+
+    @property
+    def ratio_ow_area_bottom_floor(self):
+        if (self._ratio_ow_area_bottom_floor is None
+                and self.parent is not None
+                and len(self.parent.thermal_zones) == 1):
+            self._ratio_ow_area_bottom_floor = 1 / self.number_of_floors
+        return self._ratio_ow_area_bottom_floor
+
+    @ratio_ow_area_bottom_floor.setter
+    def ratio_ow_area_bottom_floor(self, value):
+        if isinstance(value, float):
+            self._ratio_ow_area_bottom_floor = value
+        elif value is None:
+            self._ratio_ow_area_bottom_floor = value
+        else:
+            try:
+                value = float(value)
+                self._ratio_ow_area_bottom_floor = value
+            except:
+                raise ValueError("Can't convert ratio outer wall area bottom floor to float")
+
+    @property
+    def ratio_iw_area_top_floor(self):
+        if (self._ratio_iw_area_top_floor is None
+                and self.parent is not None
+                and len(self.parent.thermal_zones) == 1):
+            self._ratio_iw_area_top_floor = 1 / self.number_of_floors
+        return self._ratio_iw_area_top_floor
+
+    @ratio_iw_area_top_floor.setter
+    def ratio_iw_area_top_floor(self, value):
+        if isinstance(value, float):
+            self._ratio_iw_area_top_floor = value
+        elif value is None:
+            self._ratio_iw_area_top_floor = value
+        else:
+            try:
+                value = float(value)
+                self._ratio_iw_area_top_floor = value
+            except:
+                raise ValueError("Can't convert ratio inner wall area top floor to float")
+
+    @property
+    def ratio_iw_area_bottom_floor(self):
+        if (self._ratio_iw_area_bottom_floor is None
+                and self.parent is not None
+                and len(self.parent.thermal_zones) == 1):
+            self._ratio_iw_area_bottom_floor = 1 / self.number_of_floors
+        return self._ratio_iw_area_bottom_floor
+
+    @ratio_iw_area_bottom_floor.setter
+    def ratio_iw_area_bottom_floor(self, value):
+        if isinstance(value, float):
+            self._ratio_iw_area_bottom_floor = value
+        elif value is None:
+            self._ratio_iw_area_bottom_floor = value
+        else:
+            try:
+                value = float(value)
+                self._ratio_iw_area_bottom_floor = value
+            except:
+                raise ValueError("Can't convert ratio inner wall area bottom floor to float")
+
+    @property
+    def ratio_win_area_top_floor(self):
+        if (self._ratio_win_area_top_floor is None
+                and self.parent is not None
+                and len(self.parent.thermal_zones) == 1):
+            self._ratio_win_area_top_floor = 1 / self.number_of_floors
+        return self._ratio_win_area_top_floor
+
+    @ratio_win_area_top_floor.setter
+    def ratio_win_area_top_floor(self, value):
+        if isinstance(value, float):
+            self._ratio_win_area_top_floor = value
+        elif value is None:
+            self._ratio_win_area_top_floor = value
+        else:
+            try:
+                value = float(value)
+                self._ratio_win_area_top_floor = value
+            except:
+                raise ValueError("Can't convert ratio window area top floor to float")
+
+    @property
+    def ratio_win_area_bottom_floor(self):
+        if (self._ratio_win_area_bottom_floor is None
+                and self.parent is not None
+                and len(self.parent.thermal_zones) == 1):
+            self._ratio_win_area_bottom_floor = 1 / self.number_of_floors
+        return self._ratio_win_area_bottom_floor
+
+    @ratio_win_area_bottom_floor.setter
+    def ratio_win_area_bottom_floor(self, value):
+        if isinstance(value, float):
+            self._ratio_win_area_bottom_floor = value
+        elif value is None:
+            self._ratio_win_area_bottom_floor = value
+        else:
+            try:
+                value = float(value)
+                self._ratio_win_area_bottom_floor = value
+            except:
+                raise ValueError("Can't convert ratio window area bottom floor to float")
+
+    @property
+    def ratio_win_area_ow(self):
+        return self._ratio_win_area_ow
+
+    @ratio_win_area_ow.setter
+    def ratio_win_area_ow(self, value):
+        if isinstance(value, float):
+            self._ratio_win_area_ow = value
+        elif value is None:
+            self._ratio_win_area_ow = value
+        else:
+            try:
+                value = float(value)
+                self._ratio_win_area_ow = value
+            except:
+                raise ValueError("Can't convert ratio window area outer wall to float")
+
+    @property
+    def ratio_win_area_iw(self):
+        return self._ratio_win_area_iw
+
+    @ratio_win_area_iw.setter
+    def ratio_win_area_iw(self, value):
+        if isinstance(value, float):
+            self._ratio_win_area_iw = value
+        elif value is None:
+            self._ratio_win_area_iw = value
+        else:
+            try:
+                value = float(value)
+                self._ratio_win_area_iw = value
+            except:
+                raise ValueError("Can't convert ratio window area inner wall to float")
+
+    @property
+    def split_factor_sol_rad(self):
+        """Returns the split factors for the solar radiation thru windows on the inner surfaces"""
+        return self._split_factor_sol_rad
+
+    @split_factor_sol_rad.setter
+    def split_factor_sol_rad(self, value):
+        self._split_factor_sol_rad = value

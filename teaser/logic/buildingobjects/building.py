@@ -14,6 +14,25 @@ from teaser.logic.buildingobjects.calculation.ibpsa import IBPSA
 from teaser.logic.buildingobjects.buildingsystems.buildingahu import BuildingAHU
 
 
+def rotate_orientation(orientation, angle):
+    """Rotates one orientation clockwise by angle and normalizes the result
+
+    Parameters
+    ----------
+    orientation : float
+        orientation of a building element in TEASER's convention, i.e. in
+        degrees clockwise from North
+    angle : float
+        rotation of the building clockwise in degrees
+
+    Returns
+    -------
+    float
+        the rotated orientation, wrapped into [0, 360)
+    """
+    return (orientation + angle) % 360.0
+
+
 class Building(object):
     """Building Class
 
@@ -188,6 +207,11 @@ class Building(object):
         self.latitude = 50.79
 
         self._thermal_zones = []
+        # Exports a building that would use BESMod's TEASERThermalSingleZone
+        # (see exports_single_zone_rom) against the older TEASERThermalZone
+        # instead.
+        self.use_old = False
+        self._combined_thermal_zones = []
         self._outer_area = {}
         self._window_area = {}
 
@@ -205,6 +229,42 @@ class Building(object):
 
         self.t_bt = 5
         self.t_bt_layer = 7
+
+        self._data_class = None
+
+    @property
+    def exports_single_zone_rom(self):
+        """Whether the BESMod export uses TEASERThermalSingleZone
+
+        TEASERThermalSingleZone and its BuildingSingleZoneBaseRecord take
+        interior heat transfer parameters derived room by room, which only
+        archetypes with a room resolution provide, i.e.
+        AixLibHighOrderSingleFamilyHouse. All other buildings are exported
+        against TEASERThermalZone.
+        """
+        return False
+
+    @property
+    def data_class(self):
+        """DataClass() instance this building was generated from.
+
+        Used as the default `data_class` for calculation/retrofit of this
+        building's elements, so it stays correct even if the parent
+        Project's `data` attribute is later reassigned (e.g. by adding
+        another building with different construction_data, or by
+        Project.retrofit_all_buildings). Falls back to `self.parent.data`
+        if never explicitly set (e.g. for buildings created without going
+        through Project.add_residential/add_non_residential).
+        """
+        if self._data_class is not None:
+            return self._data_class
+        if self.parent is not None:
+            return self.parent.data
+        return None
+
+    @data_class.setter
+    def data_class(self, value):
+        self._data_class = value
 
     def set_outer_wall_area(self, new_area, orientation):
         """Outer area wall setter
@@ -498,6 +558,10 @@ class Building(object):
             self.year_of_retrofit = year_of_retrofit
 
         for zone in self.thermal_zones:
+            # data_class is intentionally not passed here: retrofit_zone
+            # resolves the correct default itself per retrofit branch (the
+            # building's own data_class for the TABULA-style branch, a
+            # fixed iwu_heavy catalog for the generic 'iwu'-style branch).
             zone.retrofit_zone(type_of_retrofit, window_type, material)
 
         self.calc_building_parameter(
@@ -519,28 +583,17 @@ class Building(object):
         """
 
         for zone_count in self.thermal_zones:
-            new_angle = None
             for wall_count in zone_count.outer_walls:
-                new_angle = wall_count.orientation + angle
-                if new_angle > 360.0:
-                    wall_count.orientation = new_angle - 360.0
-                else:
-                    wall_count.orientation = new_angle
+                wall_count.orientation = rotate_orientation(
+                    wall_count.orientation, angle)
             for roof_count in zone_count.rooftops:
+                # -1 is TEASER's sentinel for a flat roof, not an angle
                 if roof_count.orientation != -1:
-                    new_angle = roof_count.orientation + angle
-                    if new_angle > 360.0:
-                        roof_count.orientation = new_angle - 360.0
-                    else:
-                        roof_count.orientation = new_angle
-                else:
-                    pass
+                    roof_count.orientation = rotate_orientation(
+                        roof_count.orientation, angle)
             for win_count in zone_count.windows:
-                new_angle = win_count.orientation + angle
-                if new_angle > 360.0:
-                    win_count.orientation = new_angle - 360.0
-                else:
-                    win_count.orientation = new_angle
+                win_count.orientation = rotate_orientation(
+                    win_count.orientation, angle)
 
     def add_zone(self, thermal_zone):
         """Adds a thermal zone to the corresponding list

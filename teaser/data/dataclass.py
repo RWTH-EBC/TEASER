@@ -94,6 +94,12 @@ class DataClass(object):
                     "data", "input", "inputdata", "TypeElements_KFW.json"
                 )
             )
+        elif construction_data.is_aixlib():
+            self.path_tb = utils.get_full_path(
+                os.path.join(
+                    "data", "input", "inputdata", "TypeElements_AixLib.json"
+                )
+            )
         elif construction_data is None:
             pass
 

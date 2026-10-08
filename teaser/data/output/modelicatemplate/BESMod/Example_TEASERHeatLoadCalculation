@@ -2,6 +2,19 @@
 within ${bldg.parent.name}.${bldg.name};
 model TEASERHeatLoadCalculation${bldg.name}
   extends BESMod.Systems.BaseClasses.TEASERExport.PartialTEASERHeatLoadCalculation(
+% if export_hom:
+    redeclare ${bldg.name} building(
+        use_absIntGai=true,
+        useUserProfileNatVent=true),
+    redeclare BESMod.Systems.UserProfiles.TEASERHOMtoROM userProfiles(
+        facRoomTSet=${get_list(bldg.fac_room_t_set)},
+        facRoomNatVent=${get_list(bldg.fac_room_nat_vent)},
+        fac_conv=${hom_profiles['fac_conv']},
+        fileNameIntGains=Modelica.Utilities.Files.loadResource(
+        "modelica://${bldg.parent.name}/${bldg.name}/${hom_profiles['file_internal_gains']}"),
+        gain=1,
+        redeclare ${hom_profiles['t_set_profile']} TSetProfile),
+% else:
     redeclare ${bldg.name} building,
     userProfiles(
         fileNameIntGains=Modelica.Utilities.Files.loadResource(
@@ -9,8 +22,13 @@ model TEASERHeatLoadCalculation${bldg.name}
         dTSetBack=${get_list(dTSetBack)},
         hoursSetBack=${get_list(hoursSetBack)},
         startTimeSetBack=${get_list(startTimeSetBack)}),
+% endif
+    electrical(transfer(fraHeaRad=${heater_radiative_fraction})),
     systemParameters(nZones=${len(bldg.thermal_zones)},
                      TSetZone_nominal=${get_list(TSetZone_nominal)},
+% if type(bldg).__name__ == "AixLibHighOrderSingleFamilyHouse":
+                     QBui_flow_nominal=${get_list([zone.model_attr.heat_load for zone in bldg.thermal_zones])},
+% endif
                      TOda_nominal=${TOda_nominal},
                      filNamWea=Modelica.Utilities.Files.loadResource("modelica://${bldg.parent.name}/Resources/${bldg.parent.weather_file_name}")));
 

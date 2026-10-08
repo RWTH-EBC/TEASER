@@ -200,6 +200,12 @@ class InterzonalWall(Wall):
         type_element_key : str
             Element to load - specify the full json entry
 
+        Returns
+        -------
+        str or None
+            Key of the data class entry that was actually loaded, see
+            BuildingElement.load_type_element.
+
         """
         if element_type is None:
             if self.interzonal_type_material == 'inner':
@@ -236,7 +242,7 @@ class InterzonalWall(Wall):
             # there is no adv_retrofit / retrofit version of inner elements
             construction = 'tabula_standard'
 
-        BuildingElement.load_type_element(
+        return BuildingElement.load_type_element(
             self,
             year=year,
             construction=construction,
@@ -249,7 +255,8 @@ class InterzonalWall(Wall):
     def retrofit_wall(self,
                       year_of_retrofit,
                       material=None,
-                      add_at_position=None):
+                      add_at_position=None,
+                      data_class=None):
         """Retrofits wall to German refurbishment standards.
 
         This function adds an additional layer of insulation and sets the
@@ -301,7 +308,7 @@ class InterzonalWall(Wall):
             calc_u = 0.24
 
         self.set_insulation(material, calc_u, year_of_retrofit,
-                            ins_layer_index=ins_layer)
+                            ins_layer_index=ins_layer, data_class=data_class)
 
 
     @property

@@ -158,7 +158,8 @@ class InterzonalCeiling(InterzonalWall):
     def retrofit_wall(self,
                       year_of_retrofit,
                       material=None,
-                      add_at_position=None):
+                      add_at_position=None,
+                      data_class=None):
         """Retrofits wall to German refurbishment standards.
 
         This function adds an additional layer of insulation and sets the
@@ -210,4 +211,4 @@ class InterzonalCeiling(InterzonalWall):
             calc_u = 0.2
 
         self.set_insulation(material, calc_u, year_of_retrofit,
-                            ins_layer_index=ins_layer)
+                            ins_layer_index=ins_layer, data_class=data_class)

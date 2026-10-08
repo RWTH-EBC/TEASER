@@ -445,6 +445,7 @@ class Project(object):
             construction_data=construction_data,
         )
 
+        type_bldg.data_class = self.data
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
             number_of_elements=self._number_of_elements_calc,
@@ -505,6 +506,7 @@ class Project(object):
             'tabula_de_multi_family_house', 'tabula_de_apartment_block',
             'tabula_dk_single_family_house', 'tabula_dk_terraced_house',
             'tabula_dk_multi_family_house', 'tabula_dk_apartment_block'
+            'aixlib_high_order_single_family_house'
 
         name : str
             Individual name
@@ -641,6 +643,14 @@ class Project(object):
             'inner_wall_approximation_approach': inner_wall_approximation_approach,
         }
 
+        aixlib_hom_arg = {
+            'name': name,
+            'year_of_construction': year_of_construction,
+            'height_of_floors': height_of_floors,
+            'net_leased_area': net_leased_area,
+            'construction_data': construction_data,
+        }
+
         urbanrenet_arg = common_arg.copy()
         urbanrenet_arg.update({
             'neighbour_buildings': neighbour_buildings,
@@ -673,9 +683,13 @@ class Project(object):
             urbanrenet_arg['number_of_apartments'] = number_of_apartments
             type_bldg = datahandling.geometries[geometry_data](
                 self, **urbanrenet_arg)
+        elif geometry_data == datahandling.GeometryData.AixLibHighOrderSingleFamilyHouse:
+            type_bldg = datahandling.geometries[geometry_data](
+                self, **aixlib_hom_arg)
         else:
             type_bldg = datahandling.geometries[geometry_data](
                 self, **common_arg)
+        type_bldg.data_class = self.data
         type_bldg.generate_archetype()
         if (not construction_data.is_tabula_de() and not
                 construction_data.is_tabula_dk()):
@@ -880,10 +894,14 @@ class Project(object):
             path: Optional[str] = None,
             THydSup_nominal: Optional[Union[float, Dict[str, float]]] = None,
             QBuiOld_flow_design: Optional[Dict[str, Dict[str, float]]] = None,
+            QRoomOld_flow_design: Optional[Dict[str, Dict[str, float]]] = None,
             THydSupOld_design: Optional[Union[float, Dict[str, float]]] = None,
             custom_examples: Optional[Dict[str, str]] = None,
             custom_script: Optional[Dict[str, str]] = None,
-            report: bool = False
+            report: bool = False,
+            export_with_hom = False,
+            heater_radiative_fraction: float = 0.35,
+            rom_heating_curve_max_room: bool = True,
     ) -> str:
         """Exports buildings for BESMod simulation
 
@@ -910,6 +928,11 @@ class Project(object):
             of all zones in the Buildings in a nested dictionary with
             the building names and in a level below the zone names as keys.
             By default, only the radiator transfer system is not retrofitted in BESMod.
+        QRoomOld_flow_design : Optional[Dict[str, Dict[str, float]]]
+            Room-wise equivalent of QBuiOld_flow_design, used by the HOM export
+            instead: a nested dictionary with the building names and, one
+            level below, the room names as keys. Only needs entries for HOM
+            buildings you want a custom value for.
         THydSupOld_design : Optional[Union[float, Dict[str, float]]]
             Design supply temperatures for old, non-retrofitted hydraulic systems.
         custom_examples: Optional[Dict[str, str]]
@@ -920,6 +943,17 @@ class Project(object):
             containing the example name as the key and the path to the corresponding custom mako template as the value.
         report : bool
             If True, generates a model report in HTML and CSV format for the exported project. Default is False.
+        export_with_hom : bool
+            Also exports the AixLib HOM of AixLibHighOrderSingleFamilyHouse
+            buildings, next to their ROM. Default is False.
+        heater_radiative_fraction : float
+            Radiative fraction of the ideal heater's heat flow in the
+            TEASERHeatLoadCalculation example, the rest is convective.
+            Default is 0.35.
+        rom_heating_curve_max_room : bool
+            Evaluates the heating curve of the ROM exported next to the HOM
+            at the set temperature of its warmest room, as the HOM's
+            heating curve is. Default is True.
 
         Returns
         -------
@@ -939,16 +973,22 @@ class Project(object):
         if internal_id is None:
             besmod_output.export_besmod(
                 buildings=self.buildings, prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
-                QBuiOld_flow_design=QBuiOld_flow_design, THydSupOld_design=THydSupOld_design,
-                custom_examples=custom_examples, custom_script=custom_script
+                QBuiOld_flow_design=QBuiOld_flow_design, QRoomOld_flow_design=QRoomOld_flow_design,
+                THydSupOld_design=THydSupOld_design,
+                custom_examples=custom_examples, custom_script=custom_script, export_with_hom=export_with_hom,
+                heater_radiative_fraction=heater_radiative_fraction,
+                rom_heating_curve_max_room=rom_heating_curve_max_room
             )
         else:
             for bldg in self.buildings:
                 if bldg.internal_id == internal_id:
                     besmod_output.export_besmod(
                         buildings=[bldg], prj=self, path=path, examples=examples, THydSup_nominal=THydSup_nominal,
-                        QBuiOld_flow_design=QBuiOld_flow_design, THydSupOld_design=THydSupOld_design,
-                        custom_examples=custom_examples, custom_script=custom_script
+                        QBuiOld_flow_design=QBuiOld_flow_design, QRoomOld_flow_design=QRoomOld_flow_design,
+                        THydSupOld_design=THydSupOld_design,
+                        custom_examples=custom_examples, custom_script=custom_script, export_with_hom=export_with_hom,
+                        heater_radiative_fraction=heater_radiative_fraction,
+                        rom_heating_curve_max_room=rom_heating_curve_max_room
                     )
 
         if report:
@@ -1103,7 +1143,7 @@ class Project(object):
                 tz.t_outside = t_outside
                 tz.t_ground = t_ground
         if calc_all_buildings:
-            self.calc_all_buildings()
+            self.calc_all_buildings(raise_errors=True)
 
     @staticmethod
     def process_export_vars(export_vars):

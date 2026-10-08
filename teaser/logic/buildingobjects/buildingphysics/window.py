@@ -112,6 +112,10 @@ class Window(BuildingElement):
         shaded g value of the window
     shading_max_irr : float
         threshold for automatic shading
+    frame_fraction : float
+        share of the window area taken by the frame, which conducts heat
+        like the rest of the window but lets no solar radiation through.
+        Default is 0.0
 
     Calculated Attributes
 
@@ -163,6 +167,7 @@ class Window(BuildingElement):
         self._a_conv = 0.0
         self._shading_g_total = 1.0
         self._shading_max_irr = 0.0
+        self._frame_fraction = 0.0
         self._tilt = 90.0
         self._inner_convection = 2.7
         self._inner_radiation = 5.0
@@ -193,7 +198,7 @@ class Window(BuildingElement):
         for layer_count in c_layer:
             self.c1 += layer_count
 
-    def replace_window(self, year_of_retrofit, window_type=None):
+    def replace_window(self, year_of_retrofit, window_type=None, data_class=None):
         """Replace a window, with a newer one.
 
         Replaces all attributes from the window and replaces it with a high
@@ -203,12 +208,19 @@ class Window(BuildingElement):
         ----------
         year_of_retrofit: int
             The year, the building was refurbished
+        data_class : DataClass(), optional
+            DataClass to load the window type element from. If None,
+            defaults to self.parent.parent.parent.data (data_class in
+            current project).
         """
 
         if window_type is None:
             window_type = "EnEv"
         else:
             pass
+
+        if data_class is None:
+            data_class = self.parent.parent.parent.data
 
         if year_of_retrofit < 1995:
             year_of_retrofit = 1995
@@ -220,7 +232,7 @@ class Window(BuildingElement):
         self.layer = None
         self.load_type_element(year_of_retrofit,
                                window_type,
-                               self.parent.parent.parent.data)
+                               data_class)
 
     @property
     def parent(self):
@@ -285,6 +297,25 @@ class Window(BuildingElement):
                 self._a_conv = value
             except:
                 raise ValueError("Can't convert a conv to float")
+
+    @property
+    def frame_fraction(self):
+        return self._frame_fraction
+
+    @frame_fraction.setter
+    def frame_fraction(self, value):
+        try:
+            value = float(value)
+        except (TypeError, ValueError):
+            raise ValueError("Can't convert frame fraction to float")
+        if not 0.0 <= value < 1.0:
+            raise ValueError("frame_fraction has to be at least 0 and below 1")
+        self._frame_fraction = value
+
+    @property
+    def transparent_area(self):
+        """Area the solar radiation passes through, i.e. without the frame"""
+        return self.area * (1 - self.frame_fraction)
 
     @property
     def shading_g_total(self):

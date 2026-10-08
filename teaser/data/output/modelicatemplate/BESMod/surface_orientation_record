@@ -1,0 +1,10 @@
+<%namespace file="/modelica_language/" import="get_list"/>
+within ${bldg.parent.name}.${bldg.name}.${bldg.name}_DataBase;
+record ${bldg.name}_SurfaceOrientation
+    "Surfaces the building envelope is irradiated on, rotated by ${rotation} deg against the AixLib HOM's own orientation"
+    extends AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationBaseDataDefinition(
+        nSurfaces=${len(names)},
+        name={${",".join('"' + name + '"' for name in names)}},
+        Azimut=${get_list(azimut)},
+        Tilt=${get_list(tilt)});
+end ${bldg.name}_SurfaceOrientation;

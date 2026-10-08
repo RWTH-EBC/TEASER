@@ -285,7 +285,8 @@ class Wall(BuildingElement):
             thickness=None,
             add_at_position=None,
             add_plaster_material=None,
-            add_plaster_thickness=None):
+            add_plaster_thickness=None,
+            data_class=None):
         """Retrofit the walls with an additional insulation layer
 
         Adds an additional layer on the wall
@@ -305,6 +306,10 @@ class Wall(BuildingElement):
             can only be applied if add_at_position is 0 or None
         add_plaster_thickness : float
             thickness of the plaster layer, default = None
+        data_class : DataClass(), optional
+            DataClass to load the material templates from. If None,
+            defaults to self.parent.parent.parent.data (data_class in
+            current project).
 
         Returns
         -------
@@ -317,6 +322,9 @@ class Wall(BuildingElement):
         else:
             pass
 
+        if data_class is None:
+            data_class = self.parent.parent.parent.data
+
         if add_at_position == -1:
             add_at_position = None
 
@@ -324,7 +332,7 @@ class Wall(BuildingElement):
         new_material = Material(ext_layer)
         new_material.load_material_template(
             material,
-            data_class=self.parent.parent.parent.data)
+            data_class=data_class)
 
         if thickness is None:
             pass
@@ -347,7 +355,7 @@ class Wall(BuildingElement):
             plaster_material = Material(plaster_layer)
             plaster_material.load_material_template(
                 add_plaster_material,
-                data_class=self.parent.parent.parent.data)
+                data_class=data_class)
             plaster_layer.thickness = add_plaster_thickness
             if add_at_position == 0:
                 insulation_index = 1
@@ -357,7 +365,8 @@ class Wall(BuildingElement):
     def retrofit_wall(self,
                       year_of_retrofit,
                       material=None,
-                      add_at_position=None):
+                      add_at_position=None,
+                      data_class=None):
         """Retrofits wall to German refurbishment standards.
 
         This function adds an additional layer of insulation and sets the
@@ -420,7 +429,8 @@ class Wall(BuildingElement):
                        material,
                        calc_u,
                        year_of_retrofit,
-                       ins_layer_index=-1):
+                       ins_layer_index=-1,
+                       data_class=None):
         """Sets the correct insulation thickness based on the given u-value"""
         if calc_u:
             if self.u_value <= calc_u:
@@ -430,7 +440,8 @@ class Wall(BuildingElement):
             else:
                 ins_layer_index = self.insulate_wall(
                     material,
-                    add_at_position=ins_layer_index
+                    add_at_position=ins_layer_index,
+                    data_class=data_class
                 )
                 d_ins = self.calc_ins_layer_thickness(
                     calc_u,
