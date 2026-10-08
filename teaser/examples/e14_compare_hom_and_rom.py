@@ -43,6 +43,31 @@
 # gains out and sets every room to 20 degC, so that the two models differ in
 # nothing but their buildings.
 #
+# ## Why the Spawn model differs
+# The Spawn model has the HOM's geometry, constructions, user profiles, attic
+# and corridor air exchange, but EnergyPlus' physics, which is kept as it is.
+# Over a year (TRY2015 Potsdam, 1984, 170 m2, first 4 days left out) it needs
+# 1.9 % (validation) to 2.8 % (default) less heating energy than the HOM, from
+# these differences:
+# - EnergyPlus places the beam solar radiation where it hits, mostly on the
+#   floor, which stores it and gives it off later. The HOM puts it into its
+#   rooms' radiation star, which spreads it over all surfaces at once,
+#   including the windows it partly leaves through. So in the heating season
+#   the Spawn model heats about 100 W more around midday and about 270 W less
+#   at night, and uses the solar gains a little better over the year.
+# - EnergyPlus takes a window's U-value with standard surface films and
+#   computes with its own, which lose less heat than the HOM's fixed U-value,
+#   and its interior convection (TARP) gives smaller coefficients than
+#   AixLib's. The two partly cancel: in ten January days, the windows alone
+#   account for about 7.5 and the convection for about 4.7 percentage points.
+# - EnergyPlus solves the conduction through the walls exactly, the HOM with
+#   one node per layer. This has little effect: three nodes per layer change
+#   the HOM's heating energy by 0.08 % and its day-night difference to the
+#   Spawn model by 10 %.
+# - EnergyPlus warms the walls up before the start, the HOM starts them at a
+#   fixed 16 degC, which makes the first days differ by up to 50 % - hence
+#   `init_days`.
+#
 # ## Prerequisites
 # You can not run this example using the online
 # [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks),

@@ -9,6 +9,10 @@ Spawn does from Modelica. Only the attic gets its air change, for when
 EnergyPlus simulates it on its own; Spawn drops it for a zone that is
 modelled in Modelica, as BESMod's attic is.
 
+EnergyPlus' own physics is kept: its solar distribution, window films,
+convection and conduction make the model differ from AixLib's high order
+model by a few percent, see example 14 for how and why.
+
 The constructions are TEASER's layers, turned to EnergyPlus' order from
 outside to inside. The windows are simple glazing systems with the
 window's U-value and, as the frame lets no solar radiation through, a
