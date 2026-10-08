@@ -695,7 +695,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     "adjacent": ("Hobby", "inside_wall2")
                 },
                 "inside_wall2a": {
-                    "ori": 90,
+                    "ori": 180,
                     "tilt": 90,
                     "area": (self.top_level_geo_params["room3_length"] - self.top_level_geo_params["l3"]) *
                             self.top_level_geo_params["height_of_floors"],
@@ -704,7 +704,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     "adjacent": ("Livingroom", "inside_wall1b")
                 },
                 "inside_wall2b": {
-                    "ori": 90,
+                    "ori": 180,
                     "tilt": 90,
                     "area": self.top_level_geo_params["l3"] * self.top_level_geo_params["height_of_floors"],
                     "type": "InnerWall",
@@ -1037,7 +1037,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     "adjacent": ("Children1", "inside_wall2")
                 },
                 "inside_wall2a": {
-                    "ori": 90,
+                    "ori": 180,
                     "tilt": 90,
                     "area": (self.top_level_geo_params["room3_length"] - self.top_level_geo_params["l3"]) *
                             self.top_level_geo_params["height_of_floors"],
@@ -1046,7 +1046,7 @@ class AixLibHighOrderSingleFamilyHouse(Residential):
                     "adjacent": ("Bedroom", "inside_wall1b")
                 },
                 "inside_wall2b": {
-                    "ori": 90,
+                    "ori": 180,
                     "tilt": 90,
                     "area": self.top_level_geo_params["l3"] * self.top_level_geo_params["height_of_floors"],
                     "type": "InnerWall",
