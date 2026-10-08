@@ -14,7 +14,8 @@ model ${bldg.name}_Spawn
     hZone=${get_list(heights)},
     ABui=${a_bui},
     hBui=${h_bui},
-    ARoo=${a_roo});
+    ARoo=${a_roo},
+    ventRateAttic=${vent_rate_attic});
 
   annotation (Documentation(info="<html>
 <p>

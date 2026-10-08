@@ -19,8 +19,6 @@ import os
 
 from teaser.logic.archetypebuildings.aixlib_high_order.geometry import (
     building_geometry)
-from teaser.logic.archetypebuildings.aixlib_high_order.singlefamilyhouse \
-    import _ATTIC_AIR_CHANGE_RATES
 
 IDF_VERSION = "24.2"
 
@@ -195,9 +193,8 @@ def export_idf(bldg, path, run_period_days=None, slab_thickness=0.3,
                     len(window.vertices), *_vertices(window.vertices))
     text += constructions.objects() + surfaces_text
 
-    attic_air_change = bldg.attic_air_change_rate
-    if attic_air_change is None:
-        attic_air_change = _ATTIC_AIR_CHANGE_RATES[bldg.attic_infiltration_class]
+    from teaser.data.output.besmod_output import _attic_air_change_rate
+    attic_air_change = _attic_air_change_rate(bldg)
     text += _object("ScheduleTypeLimits", "Fraction", 0.0, 1.0, "Continuous")
     text += _object("Schedule:Constant", "AlwaysOn", "Fraction", 1.0)
     for room in bldg.unheated_room_envelope_elements:

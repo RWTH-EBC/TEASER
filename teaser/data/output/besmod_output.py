@@ -770,6 +770,14 @@ def _get_next_higher_year_value(years_dict, given_year):
 SPAWN_EXAMPLES = ("TEASERHeatLoadCalculation", "GasBoilerBuildingOnly")
 
 
+def _attic_air_change_rate(bldg):
+    """The attic's air change rate [1/h] the archetype takes"""
+    from teaser.logic.archetypebuildings.aixlib_high_order.singlefamilyhouse         import _ATTIC_AIR_CHANGE_RATES
+    if bldg.attic_air_change_rate is not None:
+        return float(bldg.attic_air_change_rate)
+    return _ATTIC_AIR_CHANGE_RATES[bldg.attic_infiltration_class]
+
+
 def _write_spawn_building(bldg, bldg_path, dir_resources, template,
                           spawn_epw_path=None):
     """Writes the IDF and the SpawnHighOrder building of a HOM archetype
@@ -816,7 +824,8 @@ def _write_spawn_building(bldg, bldg_path, dir_resources, template,
             a_bui=sum(areas),
             h_bui=2 * bldg.top_level_geo_params["height_of_floors"]
             + zones[attic].volume / zones[attic].floor_area,
-            a_roo=roofs))
+            a_roo=roofs,
+            vent_rate_attic=_attic_air_change_rate(bldg)))
 
 
 def _help_example_script(bldg, dir_dymola, test_script_template, example, suffix=""):
