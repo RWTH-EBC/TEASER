@@ -1,8 +1,8 @@
 <%namespace file="/modelica_language/" import="get_list"/>
 within ${bldg.parent.name}.${bldg.name};
-model HeatPumpMonoenergetic${bldg.name}_HOM
+model HeatPumpMonoenergetic${bldg.name}${suffix}
   extends BESMod.Systems.BaseClasses.TEASERExport.PartialHeatPumpMonoenergeticHOM(
-    redeclare ${bldg.name}_HOM building,
+    redeclare ${bldg.name}${suffix} building,
     userProfiles(
         fileNameIntGains=Modelica.Utilities.Files.loadResource(
         "modelica://${bldg.parent.name}/${bldg.name}/${hom_profiles['file_internal_gains']}"),
@@ -24,6 +24,6 @@ annotation(experiment(StopTime=172800,
      Interval=600,
      Tolerance=1e-06),
    __Dymola_Commands(file=
-        "Resources/Scripts/Dymola/${bldg.name}/HeatPumpMonoenergetic${bldg.name}_HOM.mos"
+        "Resources/Scripts/Dymola/${bldg.name}/HeatPumpMonoenergetic${bldg.name}${suffix}.mos"
         "Simulate and plot"));
-end HeatPumpMonoenergetic${bldg.name}_HOM;
+end HeatPumpMonoenergetic${bldg.name}${suffix};

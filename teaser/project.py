@@ -902,6 +902,8 @@ class Project(object):
             export_with_hom = False,
             heater_radiative_fraction: float = 0.35,
             rom_heating_curve_max_room: bool = True,
+            export_with_spawn: bool = False,
+            spawn_epw_path: Optional[str] = None,
     ) -> str:
         """Exports buildings for BESMod simulation
 
@@ -954,6 +956,15 @@ class Project(object):
             Evaluates the heating curve of the ROM exported next to the HOM
             at the set temperature of its warmest room, as the HOM's
             heating curve is. Default is True.
+        export_with_spawn : bool
+            Also exports AixLibHighOrderSingleFamilyHouse buildings as
+            BESMod's SpawnHighOrder with the EnergyPlus model TEASER writes
+            for them, in the TEASERHeatLoadCalculation and
+            GasBoilerBuildingOnly examples (suffix "_Spawn"). Default is
+            False.
+        spawn_epw_path : str
+            EnergyPlus weather file for the Spawn models, by default the
+            project's weather file with the suffix .epw.
 
         Returns
         -------
@@ -977,7 +988,8 @@ class Project(object):
                 THydSupOld_design=THydSupOld_design,
                 custom_examples=custom_examples, custom_script=custom_script, export_with_hom=export_with_hom,
                 heater_radiative_fraction=heater_radiative_fraction,
-                rom_heating_curve_max_room=rom_heating_curve_max_room
+                rom_heating_curve_max_room=rom_heating_curve_max_room,
+                export_with_spawn=export_with_spawn, spawn_epw_path=spawn_epw_path
             )
         else:
             for bldg in self.buildings:
@@ -988,7 +1000,8 @@ class Project(object):
                         THydSupOld_design=THydSupOld_design,
                         custom_examples=custom_examples, custom_script=custom_script, export_with_hom=export_with_hom,
                         heater_radiative_fraction=heater_radiative_fraction,
-                        rom_heating_curve_max_room=rom_heating_curve_max_room
+                        rom_heating_curve_max_room=rom_heating_curve_max_room,
+                export_with_spawn=export_with_spawn, spawn_epw_path=spawn_epw_path
                     )
 
         if report:

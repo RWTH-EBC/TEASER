@@ -90,6 +90,7 @@ setup(
             "Building",
             "BuildingSingleThermalZoneRecord_FourElement",
             "Building_hom_aixlib_dim",
+            "Building_spawn",
             "Example_GasBoilerBuildingOnly",
             "Example_GasBoilerBuildingOnlyHOM",
             "Example_HeatPumpMonoenergetic",

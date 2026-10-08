@@ -1,0 +1,25 @@
+<%namespace file="/modelica_language/" import="get_list"/>
+within ${bldg.parent.name}.${bldg.name};
+model ${bldg.name}_Spawn
+  extends BESMod.Systems.Demand.Building.SpawnHighOrder(
+    idf_name=Modelica.Utilities.Files.loadResource(
+      "modelica://${bldg.parent.name}/${bldg.name}/${idf_file}"),
+    epw_name=Modelica.Utilities.Files.loadResource(
+      "modelica://${bldg.parent.name}/Resources/${epw_file}"),
+    wea_name=Modelica.Utilities.Files.loadResource(
+      "modelica://${bldg.parent.name}/Resources/${bldg.parent.weather_file_name}"),
+    zoneNames=${zone_names},
+    VZone=${get_list(volumes)},
+    AZone=${get_list(areas)},
+    hZone=${get_list(heights)},
+    ABui=${a_bui},
+    hBui=${h_bui},
+    ARoo=${a_roo});
+
+  annotation (Documentation(info="<html>
+<p>
+  The AixLib high order archetype ${bldg.name} as Spawn of EnergyPlus model,
+  with the envelope TEASER wrote into ${idf_file}.
+</p>
+</html>"));
+end ${bldg.name}_Spawn;

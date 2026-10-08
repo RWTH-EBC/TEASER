@@ -1,6 +1,7 @@
 """This module contains function for BESMod model generation"""
 
 import os
+import shutil
 import warnings
 import numpy as np
 from typing import Optional, Union, List, Dict
@@ -36,6 +37,8 @@ def export_besmod(
         export_with_hom: bool = True,
         heater_radiative_fraction: float = 0.35,
         rom_heating_curve_max_room: bool = True,
+        export_with_spawn: bool = False,
+        spawn_epw_path: Optional[str] = None,
 ) -> None:
     """
     Export building models for BESMod simulations.
@@ -96,6 +99,17 @@ def export_besmod(
         temperatures weighted by fac_room_t_set). Only the HeatPumpMonoenergetic
         and GasBoilerBuildingOnly examples have a heating curve. Default is
         True.
+    export_with_spawn: bool
+        Also exports AixLibHighOrderSingleFamilyHouse buildings as BESMod's
+        SpawnHighOrder with the EnergyPlus model TEASER writes for them
+        (energyplus_output.export_idf), in the TEASERHeatLoadCalculation and
+        GasBoilerBuildingOnly examples with the suffix "_Spawn". The
+        HeatPumpMonoenergetic example needs mechanical ventilation, which
+        SpawnHighOrder does not have. Default is False.
+    spawn_epw_path: str
+        EnergyPlus weather file for the Spawn models, the same weather as
+        the project's weather file. By default the project's weather file
+        with the suffix .epw.
 
     Raises
     ------
@@ -199,6 +213,9 @@ def export_besmod(
     building_hom_aixlib_template = Template(
         filename=os.path.join(template_path, "BESMod/Building_hom_aixlib_dim"),
         lookup=lookup)
+    building_spawn_template = Template(
+        filename=os.path.join(template_path, "BESMod/Building_spawn"),
+        lookup=lookup)
     room_wise_profile_template = Template(
         filename=os.path.join(template_path, "BESMod/room_wise_profile_record"),
         lookup=lookup)
@@ -270,13 +287,25 @@ def export_besmod(
         utilities.create_path(os.path.join(bldg_path, bldg.name + "_DataBase"))
         bldg.library_attr.modelica_gains_boundary(path=bldg_path)
 
-        export_hom = export_with_hom and type(bldg).__name__ == "AixLibHighOrderSingleFamilyHouse"
+        is_hom_archetype = type(bldg).__name__ == "AixLibHighOrderSingleFamilyHouse"
+        export_hom = export_with_hom and is_hom_archetype
+        export_spawn = export_with_spawn and is_hom_archetype
         hom_profiles = None
-        if export_hom:
+        if export_hom or export_spawn:
             hom_profiles = _write_hom_user_profiles(
                 bldg=bldg,
                 bldg_path=bldg_path,
                 profile_template=room_wise_profile_template)
+        if export_spawn:
+            _write_spawn_building(bldg, bldg_path, dir_resources,
+                                  building_spawn_template, spawn_epw_path)
+            skipped = [exp for exp in examples if exp not in SPAWN_EXAMPLES]
+            if skipped:
+                warnings.warn(
+                    f"{bldg.name} is exported as Spawn model only in "
+                    f"{', '.join(SPAWN_EXAMPLES)}, not in {', '.join(skipped)}: "
+                    f"SpawnHighOrder has no mechanical ventilation.")
+        if export_hom:
             hom_template_kwargs = bldg.top_level_geo_params
             with open(os.path.join(bldg_path, bldg.name + "_HOM.mo"), 'w') as out_file:
                 out_file.write(building_hom_aixlib_template.render_unicode(
@@ -292,7 +321,15 @@ def export_besmod(
                 export_hom=export_hom))
             out_file.close()
 
+        def room_resolved_suffixes(example):
+            suffixes = ["_HOM"] if export_hom else []
+            if export_spawn and example in SPAWN_EXAMPLES:
+                suffixes.append("_Spawn")
+            return suffixes
+
         def write_example_mo(example_template, example, suffix=""):
+            # the room resolved examples' templates name their building and
+            # themselves with the suffix, "_HOM" or "_Spawn"
             with open(os.path.join(bldg_path, example + bldg.name + suffix + ".mo"),
                       'w') as model_file:
                 model_file.write(example_template.render_unicode(
@@ -316,7 +353,8 @@ def export_besmod(
                     THydSupOld_design=t_hyd_sup_old_design_bldg[bldg.name],
                     dTSetBack=d_temp_set_back_zones,
                     startTimeSetBack=start_time_zones,
-                    hoursSetBack=hours_set_back_zones))
+                    hoursSetBack=hours_set_back_zones,
+                    suffix=suffix))
                 model_file.close()
 
         for exp in examples:
@@ -336,11 +374,11 @@ def export_besmod(
             _help_example_script(bldg, dir_dymola, example_sim_plot_script, exp)
             write_example_mo(exp_template, exp)
 
-            if export_hom:
-                # Mirrors the ROM export above for the "*HOM" template
-                # variant (e.g. Example_TEASERHeatLoadCalculationHOM),
-                # writing "{exp}{bldg.name}_HOM.mo" alongside the ROM
-                # "{exp}{bldg.name}.mo" rather than replacing it.
+            # The room resolved buildings take the "*HOM" template variant
+            # (e.g. Example_TEASERHeatLoadCalculationHOM), written as
+            # "{exp}{bldg.name}_HOM.mo" and "{exp}{bldg.name}_Spawn.mo"
+            # alongside the ROM's "{exp}{bldg.name}.mo".
+            for suffix in room_resolved_suffixes(exp):
                 exp_hom_key = exp + "HOM"
                 exp_hom_template = Template(
                     filename=utilities.get_full_path(
@@ -355,13 +393,17 @@ def export_besmod(
                         filename=utilities.get_full_path(
                             "data/output/modelicatemplate/BESMod/Script_" + exp_hom_key),
                         lookup=lookup)
-                _help_example_script(bldg, dir_dymola, example_hom_sim_plot_script, exp, suffix="_HOM")
-                write_example_mo(exp_hom_template, exp, suffix="_HOM")
+                _help_example_script(bldg, dir_dymola, example_hom_sim_plot_script, exp, suffix=suffix)
+                write_example_mo(exp_hom_template, exp, suffix=suffix)
         bldg_package = [exp + bldg.name for exp in examples]
 
         if export_hom:
             bldg_package.append(bldg.name + "_HOM")
             bldg_package.extend(exp + bldg.name + "_HOM" for exp in examples)
+        if export_spawn:
+            bldg_package.append(bldg.name + "_Spawn")
+            bldg_package.extend(exp + bldg.name + "_Spawn" for exp in examples
+                                if exp in SPAWN_EXAMPLES)
 
         if custom_examples:
             for exp, c_path in custom_examples.items():
@@ -723,6 +765,60 @@ def _get_next_higher_year_value(years_dict, given_year):
     return years_dict[years[-1]]
 
 
+# The examples with a Spawn variant: SpawnHighOrder has no mechanical
+# ventilation, which the HeatPumpMonoenergetic example uses
+SPAWN_EXAMPLES = ("TEASERHeatLoadCalculation", "GasBoilerBuildingOnly")
+
+
+def _write_spawn_building(bldg, bldg_path, dir_resources, template,
+                          spawn_epw_path=None):
+    """Writes the IDF and the SpawnHighOrder building of a HOM archetype
+
+    The IDF goes next to the building model, the EnergyPlus weather file
+    into the package's Resources, next to the project's weather file.
+    """
+    from teaser.data.output.energyplus_output import export_idf
+    from teaser.logic.archetypebuildings.aixlib_high_order.geometry import (
+        building_geometry)
+
+    prj = bldg.parent
+    if spawn_epw_path is None:
+        spawn_epw_path = os.path.splitext(prj.weather_file_path)[0] + ".epw"
+    if not os.path.isfile(spawn_epw_path):
+        raise FileNotFoundError(
+            f"The Spawn export needs an EnergyPlus weather file of the same "
+            f"weather as {prj.weather_file_path}; give it as spawn_epw_path "
+            f"(not found: {spawn_epw_path}).")
+    shutil.copy(spawn_epw_path, dir_resources)
+
+    idf_file = bldg.name + "_Spawn.idf"
+    export_idf(bldg, os.path.join(bldg_path, idf_file))
+    zones = building_geometry(bldg)
+    rooms = sorted(bldg.room_name_nr, key=bldg.room_name_nr.get)
+    unheated = list(bldg.unheated_room_envelope_elements)
+    names = rooms + unheated
+    volumes = [zones[name].volume for name in names]
+    areas = [zones[name].floor_area for name in names]
+    attic = unheated[0]
+    roofs = sum(s.area for zone in zones.values() for s in zone.surfaces
+                if s.kind == "Roof")
+    with open(os.path.join(bldg_path, bldg.name + "_Spawn.mo"), "w") as out_file:
+        out_file.write(template.render_unicode(
+            bldg=bldg,
+            idf_file=idf_file,
+            epw_file=os.path.basename(spawn_epw_path),
+            zone_names="{" + ", ".join(f'"{name}"' for name in names) + "}",
+            volumes=volumes[:len(rooms)] + [volumes[-1]],
+            areas=areas[:len(rooms)],
+            heights=[v / a for v, a in zip(volumes, areas)][:len(rooms)],
+            # as AixLibHighOrder takes them: all floor areas, both floors and
+            # the attic's mean height, all roof areas
+            a_bui=sum(areas),
+            h_bui=2 * bldg.top_level_geo_params["height_of_floors"]
+            + zones[attic].volume / zones[attic].floor_area,
+            a_roo=roofs))
+
+
 def _help_example_script(bldg, dir_dymola, test_script_template, example, suffix=""):
     """
     Create a .mos script for simulating and plotting BESMod examples from a Mako template.
@@ -745,7 +841,8 @@ def _help_example_script(bldg, dir_dymola, test_script_template, example, suffix
     with open(os.path.join(dir_building, example + bldg.name + suffix + ".mos"), 'w') as out_file:
         out_file.write(test_script_template.render_unicode(
             project=bldg.parent,
-            bldg=bldg
+            bldg=bldg,
+            suffix=suffix
         ))
         out_file.close()
 
