@@ -212,8 +212,8 @@ def _element(bldg, room, kind, orientation=None, neighbour=None):
         if kind == "Wall":
             if info["type"] not in ("OuterWall", "InnerWall"):
                 continue
-            # inner walls are found by their neighbour, as the archetype's
-            # orientation of some of them is not the direction they face
+            # inner walls are found by their neighbour, outer walls by
+            # their orientation
             if neighbour is None and abs(info["ori"] - orientation) > 1e-6:
                 continue
         if kind == "Roof" and orientation is not None and \
