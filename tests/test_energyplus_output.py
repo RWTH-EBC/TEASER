@@ -108,7 +108,8 @@ class Test_energyplus_output(unittest.TestCase):
             with self.assertWarns(UserWarning):
                 path = prj.export_besmod(
                     examples=["TEASERHeatLoadCalculation",
-                              "GasBoilerBuildingOnly", "HeatPumpMonoenergetic"],
+                              "GasBoilerBuildingOnly", "HeatPumpMonoenergetic",
+                              "HeatPumpSimple"],
                     THydSup_nominal=328.15, path=os.path.join(directory, "out"),
                     export_with_hom=True, export_with_spawn=True,
                     spawn_epw_path=epw)
@@ -118,6 +119,8 @@ class Test_energyplus_output(unittest.TestCase):
             for name in (bldg.name + "_Spawn", bldg.name + "_HOM",
                          "TEASERHeatLoadCalculation" + bldg.name + "_Spawn",
                          "GasBoilerBuildingOnly" + bldg.name + "_Spawn",
+                         "HeatPumpSimple" + bldg.name + "_Spawn",
+                         "HeatPumpSimple" + bldg.name,
                          "HeatPumpMonoenergetic" + bldg.name + "_HOM"):
                 self.assertIn(name, order)
                 self.assertTrue(os.path.isfile(

@@ -57,7 +57,9 @@ def export_besmod(
         versions and weather file paths.
     examples : Optional[List[str]]
         Names of BESMod examples to export alongside the building models.
-        Supported Examples: "TEASERHeatLoadCalculation", "HeatPumpMonoenergetic", and "GasBoilerBuildingOnly".
+        Supported Examples: "TEASERHeatLoadCalculation", "HeatPumpMonoenergetic",
+        "HeatPumpSimple" (the heat pump system without mechanical
+        ventilation and PV) and "GasBoilerBuildingOnly".
     path : Optional[str]
         Alternative output path for storing the exported files. If None, the default TEASER output path is used.
     THydSup_nominal : Optional[Union[float, Dict[str, float]]]
@@ -102,10 +104,10 @@ def export_besmod(
     export_with_spawn: bool
         Also exports AixLibHighOrderSingleFamilyHouse buildings as BESMod's
         SpawnHighOrder with the EnergyPlus model TEASER writes for them
-        (energyplus_output.export_idf), in the TEASERHeatLoadCalculation and
-        GasBoilerBuildingOnly examples with the suffix "_Spawn". The
-        HeatPumpMonoenergetic example needs mechanical ventilation, which
-        SpawnHighOrder does not have. Default is False.
+        (energyplus_output.export_idf), in the TEASERHeatLoadCalculation,
+        HeatPumpSimple and GasBoilerBuildingOnly examples with the
+        suffix "_Spawn". The HeatPumpMonoenergetic example needs mechanical
+        ventilation, which SpawnHighOrder does not have. Default is False.
     spawn_epw_path: str
         EnergyPlus weather file for the Spawn models, the same weather as
         the project's weather file. By default the project's weather file
@@ -142,6 +144,7 @@ def export_besmod(
     supported_examples = [
         "TEASERHeatLoadCalculation",
         "HeatPumpMonoenergetic",
+        "HeatPumpSimple",
         "GasBoilerBuildingOnly",
     ]
 
@@ -153,11 +156,12 @@ def export_besmod(
             )
 
     if THydSup_nominal is None and any(
-            example in examples for example in ["HeatPumpMonoenergetic", "GasBoilerBuildingOnly"]
+            example in examples for example in ["HeatPumpMonoenergetic", "HeatPumpSimple",
+                                                "GasBoilerBuildingOnly"]
     ):
         raise ValueError(
-            "Examples 'HeatPumpMonoenergetic' and 'GasBoilerBuildingOnly' "
-            "require the `THydSup_nominal` parameter."
+            "Examples 'HeatPumpMonoenergetic', 'HeatPumpSimple' and "
+            "'GasBoilerBuildingOnly' require the `THydSup_nominal` parameter."
         )
     elif THydSup_nominal is None:
         THydSup_nominal = 328.15
@@ -766,8 +770,10 @@ def _get_next_higher_year_value(years_dict, given_year):
 
 
 # The examples with a Spawn variant: SpawnHighOrder has no mechanical
-# ventilation, which the HeatPumpMonoenergetic example uses
-SPAWN_EXAMPLES = ("TEASERHeatLoadCalculation", "GasBoilerBuildingOnly")
+# ventilation, which the HeatPumpMonoenergetic example uses -
+# HeatPumpSimple is its heat pump system without it
+SPAWN_EXAMPLES = ("TEASERHeatLoadCalculation", "HeatPumpSimple",
+                  "GasBoilerBuildingOnly")
 
 
 def _attic_air_change_rate(bldg):

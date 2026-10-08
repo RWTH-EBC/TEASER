@@ -2,7 +2,7 @@
 
 BESMod.Examples.TEASERExport.HighOrderArchetypeExample is TEASER's archetype of
 AixLib's high order single family house, exported with export_with_hom=True:
-the building as single zone ROM and as HOM, each in TEASER's three example
+the building as single zone ROM and as HOM, each in TEASER's four example
 energy systems. Whenever the archetype or the BESMod export changes in a way
 that shows in the exported models, run this script against a BESMod checkout
 to bring the example in line, and let BESMod's regression tests update their
@@ -39,7 +39,7 @@ from teaser.project import Project
 PACKAGE = "HighOrderArchetypeExample"
 BUILDING = "SingleFamilyHouse"
 FULL_NAME = f"BESMod.Examples.TEASERExport.{PACKAGE}"
-EXAMPLES = ["TEASERHeatLoadCalculation", "HeatPumpMonoenergetic",
+EXAMPLES = ["TEASERHeatLoadCalculation", "HeatPumpMonoenergetic", "HeatPumpSimple",
             "GasBoilerBuildingOnly"]
 WEATHER = "TRY2015_522361130393_Jahr_City_Potsdam.mos"
 GAINS = f"InternalGains{PACKAGE}.txt"

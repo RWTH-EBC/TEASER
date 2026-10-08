@@ -918,7 +918,9 @@ class Project(object):
             Specifies a specific building to export by its internal ID. If None, all buildings are exported.
         examples : Optional[List[str]]
             Names of BESMod examples to export alongside the building models.
-            Supported Examples: "TEASERHeatLoadCalculation", "HeatPumpMonoenergetic", and "GasBoilerBuildingOnly".
+            Supported Examples: "TEASERHeatLoadCalculation", "HeatPumpMonoenergetic",
+            "HeatPumpSimple" (without mechanical ventilation and PV)
+            and "GasBoilerBuildingOnly".
         path : Optional[str]
             Alternative output path for storing the exported files. If None, the default TEASER output path is used.
         THydSup_nominal : Optional[Union[float, Dict[str, float]]]
@@ -959,8 +961,8 @@ class Project(object):
         export_with_spawn : bool
             Also exports AixLibHighOrderSingleFamilyHouse buildings as
             BESMod's SpawnHighOrder with the EnergyPlus model TEASER writes
-            for them, in the TEASERHeatLoadCalculation and
-            GasBoilerBuildingOnly examples (suffix "_Spawn"). Default is
+            for them, in the TEASERHeatLoadCalculation, HeatPumpSimple
+            and GasBoilerBuildingOnly examples (suffix "_Spawn"). Default is
             False.
         spawn_epw_path : str
             EnergyPlus weather file for the Spawn models, by default the
