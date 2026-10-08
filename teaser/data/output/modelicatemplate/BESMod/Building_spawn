@@ -15,7 +15,10 @@ model ${bldg.name}_Spawn
     ABui=${a_bui},
     hBui=${h_bui},
     ARoo=${a_roo},
-    ventRateAttic=${vent_rate_attic});
+    ventRateAttic=${vent_rate_attic},
+## the corridors' air exchange of AixLib's high order model, which keeps
+## its default of 2/h there
+    AirExchangeCorridor=2);
 
   annotation (Documentation(info="<html>
 <p>
