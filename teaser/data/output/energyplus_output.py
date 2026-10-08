@@ -5,8 +5,9 @@ EnergyPlus model, e.g. for BESMod's Spawn of EnergyPlus building: the
 eleven zones of its 3D geometry (see aixlib_high_order.geometry) with the
 archetype's own constructions and windows. Heating, internal gains and the
 ventilation of the heated rooms are left to the tool driving the model, as
-Spawn does from Modelica; only the attic, which EnergyPlus simulates on its
-own there, gets its air change.
+Spawn does from Modelica. Only the attic gets its air change, for when
+EnergyPlus simulates it on its own; Spawn drops it for a zone that is
+modelled in Modelica, as BESMod's attic is.
 
 The constructions are TEASER's layers, turned to EnergyPlus' order from
 outside to inside. The windows are simple glazing systems with the
@@ -114,7 +115,7 @@ def _vertices(vertices):
 
 
 def export_idf(bldg, path, run_period_days=None, slab_thickness=0.3,
-               attic_slab_thickness=0.3, timesteps_per_hour=6):
+               attic_slab_thickness=0.3, timesteps_per_hour=12):
     """Writes the envelope of an AixLibHighOrderSingleFamilyHouse as IDF
 
     Parameters
@@ -130,7 +131,10 @@ def export_idf(bldg, path, run_period_days=None, slab_thickness=0.3,
     slab_thickness, attic_slab_thickness : float [m]
         Gaps between the floors, see geometry.building_geometry.
     timesteps_per_hour : int
-        EnergyPlus' zone time step.
+        EnergyPlus' zone time steps per hour, at which Spawn also couples
+        it with Modelica. 12, as in BESMod's own Spawn model: with 6, the
+        attic's air in Modelica, small next to its light uninsulated roof,
+        became unstable.
 
     Returns
     -------
