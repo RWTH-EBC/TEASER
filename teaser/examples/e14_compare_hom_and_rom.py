@@ -1,4 +1,4 @@
-# # Example 14: Compare the AixLib HOM with the ROM exported next to it
+# # Example 14: Compare the AixLib HOM with the ROM and Spawn model exported next to it
 # The `aixlib_high_order_single_family_house` archetype describes one building
 # twice: as a high order model (HOM), which keeps all ten rooms and their walls,
 # and as the reduced order model (ROM) TEASER exports for every archetype, whose
@@ -37,10 +37,10 @@
 # being added to AixLib's ventilation controller. Pass `use_old=True` to export
 # the building against `TEASERThermalZone` instead, without all of this.
 #
-# By default both models are driven the way the archetype is meant to be used:
+# By default all models are driven the way the archetype is meant to be used:
 # with the internal gains of its use conditions and each room at its own set
 # temperature (`room_t_set_nominal`). `validation=True` leaves the internal
-# gains out and sets every room to 20 degC, so that the two models differ in
+# gains out and sets every room to 20 degC, so that the models differ in
 # nothing but their buildings.
 #
 # ## Why the Spawn model differs
@@ -102,8 +102,11 @@
 #    contain `Systems.Demand.Building.TEASERThermalSingleZone` - BESMod's
 #    `Examples.TEASERExport.HighOrderArchetypeExample` is this export.
 # 3. matplotlib, for the plot of the comparison (`plot=False` skips it)
-# 4. for `with_spawn`: the Buildings library with its Spawn binaries installed
-#    (see Buildings.ThermalZones.EnergyPlus_24_2_0.UsersGuide.Installation)
+# 4. for `with_spawn`, which the example runs with: the Buildings library in
+#    the version BESMod names in its `dependencies.json`, with its Spawn
+#    binaries installed (see
+#    Buildings.ThermalZones.EnergyPlus_24_2_0.UsersGuide.Installation). A
+#    clone of Buildings from GitHub has neither.
 
 import os
 import subprocess
@@ -160,7 +163,8 @@ def example_compare_hom_and_rom(
         path_buildings=None,
         init_days=4,
 ):
-    """Simulates the HOM and the ROM of one archetype and compares them
+    """Simulates the HOM, the ROM and the Spawn model of one archetype and
+    compares them
 
     Parameters
     ----------
@@ -173,7 +177,7 @@ def example_compare_hom_and_rom(
         the room-wise parameters the archetype derives for the single-zone
         model - useful to see what those parameters are worth
     plot : bool
-        plots the two models against each other
+        plots the models against each other
     show_plot : bool
         opens the plot in a window, which blocks until it is closed. Without
         it, the plot is left to the caller to show
@@ -198,10 +202,11 @@ def example_compare_hom_and_rom(
     Returns
     -------
     dict
-        the comparison of the ROM against the HOM
+        the comparison of the ROM, and of the Spawn model (keys with the
+        suffix "_spawn"), against the HOM
     """
     # ## Checking for Dymola first
-    # Cloning the three libraries takes a while, so find out whether there is
+    # Cloning the libraries takes a while, so find out whether there is
     # anything to simulate with before starting.
     from ebcpy import DymolaAPI, TimeSeriesData
 
@@ -211,7 +216,7 @@ def example_compare_hom_and_rom(
             "without it.")
 
     # ## Finding the libraries
-    # BESMod also provides the weather both models run with.
+    # BESMod also provides the weather all models run with.
     clone_directory = Path(export_path or utilities.get_default_path())
     packages = [
         _library_package("IBPSA", path_ibpsa, clone_directory),
@@ -234,9 +239,10 @@ def example_compare_hom_and_rom(
             "path_besmod (or BESMOD_PATH) at a BESMod that has it, or pass "
             "use_old=True to compare against the older TEASERThermalZone.")
 
-    # ## Exporting the HOM and the ROM
-    # Both come out of one and the same archetype building, so every difference
-    # between them is the merge of the ten rooms into a single zone.
+    # ## Exporting the models
+    # All come out of one and the same archetype building, so every difference
+    # between the HOM and the ROM is the merge of the ten rooms into a single
+    # zone, and between the HOM and the Spawn model EnergyPlus' physics.
     prj = Project()
     prj.name = "CompareHOMandROM1984_170"
     prj.add_residential(

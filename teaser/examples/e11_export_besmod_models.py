@@ -37,6 +37,7 @@ def example_export_besmod():
     examples = [
         "TEASERHeatLoadCalculation",  # Ideal electric heater for heat load calculations
         "HeatPumpMonoenergetic",  # Heat pump with radiators, buffer and DHW storage, and PV
+        "HeatPumpSimple",  # Heat pump with radiators and DHW storage, without ventilation and PV
         "GasBoilerBuildingOnly"  # Gas boiler with radiators
     ]
 
@@ -134,6 +135,13 @@ def example_export_besmod():
     # ("heat_load", "volume" or own weights per room).
     # export_besmod's heater_radiative_fraction and rom_heating_curve_max_room
     # set the ideal heater and the ROM's heating curve; see its docstring.
+    # With `export_with_spawn=True`, they are also exported as Spawn of
+    # EnergyPlus model (BESMod's SpawnHighOrder with the EnergyPlus model TEASER
+    # writes for them), with the suffix `_Spawn`, in the examples without
+    # mechanical ventilation: TEASERHeatLoadCalculation, HeatPumpSimple and
+    # GasBoilerBuildingOnly. EnergyPlus needs the project's weather as .epw
+    # file too (spawn_epw_path), which TEASER does not have for Mannheim, so
+    # this example leaves it out; e14 uses it.
 
     # Export all buildings to BESMod and include them in predefined example systems.
     path = prj.export_besmod(
