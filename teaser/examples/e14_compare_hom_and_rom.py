@@ -68,6 +68,30 @@
 #   fixed 16 degC, which makes the first days differ by up to 50 % - hence
 #   `init_days`.
 #
+# ## Other buildings
+# The same comparison for eight buildings - `aixlib_S` of 1984, 1995, 2002 and
+# 2009 and `tabula_de_standard` of 1950, 1960, 1980 and 2000, all 170 m2 - in
+# the TEASERHeatLoadCalculation and the HeatPumpSimple example, over a year
+# (TRY2015 Potsdam, default case, days 5 to 365), against the HOM:
+#
+# | | ROM | Spawn |
+# |---|---|---|
+# | heating energy (heat load example) | -1.7 to -0.1 % | -4.2 to +2.7 % (TABULA 1980: -11 %) |
+# | heat pump electricity | -1.1 to +1.1 % | -4.0 to +1.0 % (TABULA 1980: -11 %) |
+# | SCOP | -0.03 to 0.00 | +0.03 to +0.05 |
+# | CV(RMSE) of the hourly heat | 10 to 20 % | 10 to 20 % |
+# | CV(RMSE) of the room temperature | 1.2 to 2.5 % | 0.9 to 3.7 % |
+# | simulation time, heat pump example | about 3 % of the HOM's | about 11 % of the HOM's |
+#
+# The ROM stays close to the HOM in every building. The Spawn model needs
+# less heat in the older buildings and a little more in the newer ones, as its
+# windows lose less the higher their U-value is: TABULA's windows of 1980,
+# with a U-value of 4.3 W/(m2K), make it the outlier. Its SCOP is higher, as
+# it stores the solar gains and so heats more around midday, when it is
+# warmer outside, and less at night. In the
+# HeatPumpSimple example, the HOM takes 2.3 to 3 hours for a year, the Spawn
+# model about 20 minutes and the ROM about 5.
+#
 # ## Prerequisites
 # You can not run this example using the online
 # [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks),
