@@ -22,7 +22,7 @@ model HeatPumpMonoenergetic${bldg.name}${suffix}
 
 annotation(experiment(StopTime=172800,
      Interval=600,
-     Tolerance=1e-06),
+     Tolerance=1e-06${', __Dymola_Algorithm="Cvode"' if suffix == '_Spawn' else ''}),
    __Dymola_Commands(file=
         "Resources/Scripts/Dymola/${bldg.name}/HeatPumpMonoenergetic${bldg.name}${suffix}.mos"
         "Simulate and plot"));

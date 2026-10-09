@@ -1,9 +1,10 @@
 """Regenerates BESMod's example of TEASER's HOM export
 
 BESMod.Examples.TEASERExport.HighOrderArchetypeExample is TEASER's archetype of
-AixLib's high order single family house, exported with export_with_hom=True:
-the building as single zone ROM and as HOM, each in TEASER's four example
-energy systems. Whenever the archetype or the BESMod export changes in a way
+AixLib's high order single family house, exported with export_with_hom=True
+and export_with_spawn=True: the building as single zone ROM, as HOM and as
+Spawn of EnergyPlus model, in TEASER's four example energy systems (the Spawn
+model in the three without mechanical ventilation). Whenever the archetype or the BESMod export changes in a way
 that shows in the exported models, run this script against a BESMod checkout
 to bring the example in line, and let BESMod's regression tests update their
 reference results:
@@ -16,8 +17,9 @@ BESMOD_PATH. The script exports the building and changes the export only
 where BESMod's examples differ from what TEASER writes for a user:
 
 - the package is BESMod.Examples.TEASERExport.HighOrderArchetypeExample
-- the weather is BESMod's default (TRY2015 Potsdam), which TEASER is given
-  for the heat loads, instead of an own copy of it
+- the weather is BESMod's pair of weather files for Spawn (TRY2015 Potsdam,
+  .mos and .epw), which TEASER is given for the heat loads, instead of an own
+  copy of it, and the IDF of the Spawn model goes next to it
 - the room-wise internal gains repeat every day, and the user profiles read
   them periodically, so only one day of them goes to BESMod's Resources
 - the .mos scripts go to BESMod's Resources/Scripts/Dymola and, for the HOM,
@@ -30,6 +32,7 @@ import os
 import re
 import shutil
 import tempfile
+import warnings
 from pathlib import Path
 
 import numpy as np
@@ -41,11 +44,13 @@ BUILDING = "SingleFamilyHouse"
 FULL_NAME = f"BESMod.Examples.TEASERExport.{PACKAGE}"
 EXAMPLES = ["TEASERHeatLoadCalculation", "HeatPumpMonoenergetic", "HeatPumpSimple",
             "GasBoilerBuildingOnly"]
-WEATHER = "TRY2015_522361130393_Jahr_City_Potsdam.mos"
+# BESMod's weather files for Spawn, the same weather as .mos and .epw
+WEATHER = ("Resources", "Spawn", "Potsdam_TRY2015_normal")
+IDF = f"{PACKAGE}_{BUILDING}.idf"
 GAINS = f"InternalGains{PACKAGE}.txt"
 
 
-def export_building(path, weather_file):
+def export_building(path, weather_file, epw_file):
     """Exports the archetype the BESMod example is made of, to path"""
     prj = Project()
     prj.name = PACKAGE
@@ -65,10 +70,15 @@ def export_building(path, weather_file):
                                 weather_file_path=str(weather_file),
                                 calc_all_buildings=False)
     prj.calc_all_buildings()
-    return Path(prj.export_besmod(examples=EXAMPLES,
-                                  THydSup_nominal=55 + 273.15,
-                                  path=str(path),
-                                  export_with_hom=True))
+    with warnings.catch_warnings():
+        # that HeatPumpMonoenergetic has no Spawn variant
+        warnings.simplefilter("ignore", UserWarning)
+        return Path(prj.export_besmod(examples=EXAMPLES,
+                                      THydSup_nominal=55 + 273.15,
+                                      path=str(path),
+                                      export_with_hom=True,
+                                      export_with_spawn=True,
+                                      spawn_epw_path=str(epw_file)))
 
 
 def _write(path, text):
@@ -103,15 +113,17 @@ def _convert_model(text):
         r'"modelica://' + PACKAGE + r'/' + BUILDING
         + r'/InternalGains_\w+\.txt"',
         f'"modelica://BESMod/Resources/{GAINS}"', text)
-    text = re.sub(
-        r",\s*\n\s*filNamWea=Modelica\.Utilities\.Files\.loadResource\([^)]*\)",
-        "", text)
+    text = text.replace(f'"modelica://{PACKAGE}/{BUILDING}/{BUILDING}_Spawn.idf"',
+                        f'"modelica://BESMod/Resources/Spawn/{IDF}"')
+    # and the documentation naming it
+    text = text.replace(f" {BUILDING}_Spawn.idf.", f" Resources/Spawn/{IDF}.")
+    text = text.replace(f'"modelica://{PACKAGE}/Resources/',
+                        f'"modelica://BESMod/{"/".join(WEATHER[:-1])}/')
     text = re.sub(
         r'"Resources/Scripts/Dymola/' + BUILDING + r'/(\w+\.mos)"',
         rf'"modelica://BESMod/Resources/Scripts/Dymola/Examples/TEASERExport/'
         rf'{PACKAGE}/{BUILDING}/\1"', text)
-    for leftover in ('"modelica://' + PACKAGE, "filNamWea",
-                     '"Resources/Scripts'):
+    for leftover in ('"modelica://' + PACKAGE, '"Resources/Scripts'):
         if leftover in text:
             raise ValueError(
                 f"The export changed: {leftover} is left in a model after its "
@@ -140,15 +152,16 @@ def _convert_script(text, hom):
 
 def _package_mo():
     return f'''within BESMod.Examples.TEASERExport;
-package {PACKAGE} "TEASER's AixLib high order single family house, as reduced order and as high order model"
+package {PACKAGE} "TEASER's AixLib high order single family house, as reduced order, high order and Spawn model"
   extends Modelica.Icons.Package;
 
   annotation (Documentation(info="<html>
 <p>
   The single family house of AixLib's high order model (HOM), generated by
   TEASER's archetype <code>AixLibHighOrderSingleFamilyHouse</code> for a building
-  of 1984 with 170 m&sup2; and exported with <code>export_with_hom=True</code>.
-  Every example therefore comes twice, with the same energy system:
+  of 1984 with 170 m&sup2; and exported with <code>export_with_hom=True</code> and
+  <code>export_with_spawn=True</code>. Every example therefore comes as up to three models,
+  with the same energy system:
 </p>
 <ul>
   <li>without suffix, the building as TEASER's single zone reduced order model
@@ -159,17 +172,23 @@ package {PACKAGE} "TEASER's AixLib high order single family house, as reduced or
   (<a href=\\"modelica://BESMod.Systems.Demand.Building.AixLibHighOrder\\">AixLibHighOrder</a>)
   with its ten heated rooms and the user profiles room by room
   (<a href=\\"modelica://BESMod.Systems.UserProfiles.AixLibHighOrderProfiles\\">AixLibHighOrderProfiles</a>)</li>
+  <li>with the suffix <code>_Spawn</code>, the same rooms, constructions and user profiles as
+  Spawn of EnergyPlus model
+  (<a href=\\"modelica://BESMod.Systems.Demand.Building.SpawnHighOrder\\">SpawnHighOrder</a>)
+  with the IDF TEASER writes (<code>modelica://BESMod/Resources/Spawn/{IDF}</code>), in the
+  examples without mechanical ventilation, which SpawnHighOrder does not have. It needs the
+  Buildings library with its Spawn binaries.</li>
 </ul>
 <p>
   The walls, windows and surface orientations of the HOM are TEASER's own records in
   <code>{BUILDING}_DataBase</code>, so both models are built from the same construction data,
-  and both are sized from the same room-wise heat loads. Compared to the export, the weather is
-  BESMod's default (TRY2015 Potsdam, which TEASER was given for the heat loads) and the internal
-  gains are reduced to the one day they repeat
+  and all are sized from the same room-wise heat loads. Compared to the export, the weather is
+  BESMod's pair of weather files for Spawn (TRY2015 Potsdam as .mos and .epw, which TEASER was
+  given for the heat loads) and the internal gains are reduced to the one day they repeat
   (<code>modelica://BESMod/Resources/{GAINS}</code>).
 </p>
 <p>
-  TEASER's example <code>e14_compare_hom_and_rom.py</code> compares the two models, and
+  TEASER's example <code>e14_compare_hom_and_rom.py</code> compares the three models, and
   TEASER's script <code>scripts/update_besmod_hom_example.py</code> regenerates this package.
 </p>
 </html>"));
@@ -177,7 +196,8 @@ end {PACKAGE};
 '''
 
 
-def update_besmod_hom_example(besmod_path=None, weather_file=None):
+def update_besmod_hom_example(besmod_path=None, weather_file=None,
+                              epw_file=None):
     """Regenerates BESMod.Examples.TEASERExport.HighOrderArchetypeExample
 
     Parameters
@@ -187,7 +207,9 @@ def update_besmod_hom_example(besmod_path=None, weather_file=None):
         environment variable BESMOD_PATH.
     weather_file : str
         Weather file TEASER calculates the heat loads with, by default
-        BESMod's own TRY2015 Potsdam, which its examples run with.
+        BESMod's TRY2015 Potsdam for Spawn, which the examples run with.
+    epw_file : str
+        The same weather for EnergyPlus, by default BESMod's.
 
     Returns
     -------
@@ -202,20 +224,26 @@ def update_besmod_hom_example(besmod_path=None, weather_file=None):
     if besmod.name == "package.mo":
         besmod = besmod.parent
     if weather_file is None:
-        weather_file = besmod.joinpath("Resources", "WeatherData", WEATHER)
+        weather_file = besmod.joinpath(*WEATHER).with_suffix(".mos")
+    if epw_file is None:
+        epw_file = besmod.joinpath(*WEATHER).with_suffix(".epw")
     destination = besmod.joinpath("Examples", "TEASERExport", PACKAGE)
     scripts = besmod.joinpath("Resources", "Scripts", "Dymola", "Examples",
                               "TEASERExport", PACKAGE, BUILDING)
 
     with tempfile.TemporaryDirectory() as export_directory:
-        export = export_building(export_directory, weather_file)
+        export = export_building(export_directory, weather_file, epw_file)
 
         for directory in (destination, scripts):
             if directory.exists():
                 shutil.rmtree(directory)
         shutil.copytree(export.joinpath(BUILDING),
                         destination.joinpath(BUILDING),
-                        ignore=shutil.ignore_patterns("*.txt"))
+                        ignore=shutil.ignore_patterns("*.txt", "*.idf"))
+        spawn = besmod.joinpath(*WEATHER[:-1])
+        spawn.mkdir(parents=True, exist_ok=True)
+        shutil.copy(export.joinpath(BUILDING, f"{BUILDING}_Spawn.idf"),
+                    spawn.joinpath(IDF))
         _one_day_of_gains(
             export.joinpath(BUILDING, f"InternalGains_{BUILDING}_HOM.txt"),
             besmod.joinpath("Resources", GAINS))

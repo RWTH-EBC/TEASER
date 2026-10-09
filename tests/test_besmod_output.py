@@ -1063,9 +1063,13 @@ class Test_besmod_output(unittest.TestCase):
             weather = utilities.get_full_path(
                 "data/input/inputdata/weatherdata/"
                 "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos")
+            # the EnergyPlus weather file is only copied
+            epw = Path(directory, "weather.epw")
+            epw.write_text("LOCATION")
             for _ in range(2):
                 module.update_besmod_hom_example(
-                    besmod.joinpath("package.mo"), weather_file=weather)
+                    besmod.joinpath("package.mo"), weather_file=weather,
+                    epw_file=epw)
 
             # once in the package order, however often it runs
             self.assertEqual(order.read_text().split(),
@@ -1073,9 +1077,14 @@ class Test_besmod_output(unittest.TestCase):
             example = order.parent.joinpath(module.PACKAGE, module.BUILDING)
             models = {model.stem: model.read_text()
                       for model in example.rglob("*.mo")}
+            spawn_examples = {"TEASERHeatLoadCalculation", "HeatPumpSimple",
+                              "GasBoilerBuildingOnly"}
             for kind in module.EXAMPLES:
-                for suffix in ("", "_HOM"):
+                for suffix in ("", "_HOM", "_Spawn"):
                     name = kind + module.BUILDING + suffix
+                    if suffix == "_Spawn" and kind not in spawn_examples:
+                        self.assertNotIn(name, models)
+                        continue
                     self.assertIn(name, models)
                     self.assertIn(
                         f'"modelica://BESMod/Resources/Scripts/Dymola/'
@@ -1091,8 +1100,26 @@ class Test_besmod_output(unittest.TestCase):
                     self.assertIn(
                         f'simulateModel("{module.FULL_NAME}.'
                         f'{module.BUILDING}.{name}"', script)
+                    # Spawn of EnergyPlus runs with CVODE only
+                    self.assertEqual('method="cvode"' in script,
+                                     suffix == "_Spawn")
+                    self.assertEqual('__Dymola_Algorithm="Cvode"' in models[name],
+                                     suffix == "_Spawn")
+            # all models run with the same weather, BESMod's pair for Spawn,
+            # and the Spawn model with the IDF next to it
             for name, text in models.items():
-                self.assertNotIn("filNamWea", text, name)
+                for weather_file in __import__("re").findall(
+                        r'"modelica://BESMod/([^"]+\.(?:mos|epw|idf))"', text):
+                    if weather_file.startswith("Resources/Scripts/"):
+                        continue
+                    self.assertTrue(weather_file.startswith("Resources/Spawn/"),
+                                    (name, weather_file))
+            self.assertIn(f'"modelica://BESMod/Resources/Spawn/{module.IDF}"',
+                          models[module.BUILDING + "_Spawn"])
+            self.assertTrue(besmod.joinpath(
+                "Resources", "Spawn", module.IDF).is_file())
+            self.assertFalse(list(example.rglob("*.idf")))
+            for name, text in models.items():
                 self.assertNotRegex(
                     text, r"(?<![\w.])" + module.PACKAGE + r"\.", name)
             self.assertFalse(list(example.rglob("*.txt")))
