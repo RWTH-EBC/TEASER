@@ -81,16 +81,19 @@
 # | SCOP | -0.03 to 0.00 | +0.03 to +0.05 |
 # | CV(RMSE) of the hourly heat | 10 to 20 % | 10 to 20 % |
 # | CV(RMSE) of the room temperature | 1.2 to 2.5 % | 0.9 to 3.7 % |
-# | simulation time, heat pump example | about 3 % of the HOM's | about 11 % of the HOM's |
+# | simulation time, heat pump example (1984) | about 9 % of the HOM's | about 57 % of the HOM's |
 #
 # The ROM stays close to the HOM in every building. The Spawn model needs
 # less heat in the older buildings and a little more in the newer ones, as its
 # windows lose less the higher their U-value is: TABULA's windows of 1980,
 # with a U-value of 4.3 W/(m2K), make it the outlier. Its SCOP is higher, as
 # it stores the solar gains and so heats more around midday, when it is
-# warmer outside, and less at night. In the
-# HeatPumpSimple example, the HOM takes 2.3 to 3 hours for a year, the Spawn
-# model about 20 minutes and the ROM about 5.
+# warmer outside, and less at night. With CVODE, which all three models
+# run with, a year of the HeatPumpSimple example takes about 35 minutes for
+# the HOM, 20 for the Spawn model and 3 for the ROM. DASSL gives the HOM's
+# and the ROM's results within 0.01 %, but evaluates the Jacobian far more
+# often after the heat pump's many switching events and so takes the HOM
+# three hours.
 #
 # ## Prerequisites
 # You can not run this example using the online
@@ -300,36 +303,34 @@ def example_compare_hom_and_rom(
     save_path = path_export.parent.joinpath(path_export.name + "_SimulationResults")
     packages.append(path_export.joinpath("package.mo"))
 
-    result_files = {}
-    # Spawn runs with CVODE, as BESMod's own Spawn examples do
-    for names, solver in ((("rom", "hom"), "Dassl"), (("spawn",), "Cvode")):
-        names = [name for name in names if name in models]
-        if not names:
-            continue
-        dym_api = DymolaAPI(
-            working_directory=save_path.joinpath("DymolaWorkingDirectory"),
-            model_name=models[names[0]],
-            packages=[str(package) for package in packages],
-            show_window=False,
-            equidistant_output=True,
-            n_cpu=1,
+    # All of them with CVODE: Spawn of EnergyPlus needs it, and it gives the
+    # HOM's and the ROM's results of DASSL, the HOM's heat pump example five
+    # times as fast, as it evaluates the Jacobian far less often
+    names = list(models)
+    dym_api = DymolaAPI(
+        working_directory=save_path.joinpath("DymolaWorkingDirectory"),
+        model_name=models[names[0]],
+        packages=[str(package) for package in packages],
+        show_window=False,
+        equidistant_output=True,
+        n_cpu=1,
+    )
+    dym_api.set_sim_setup(sim_setup={
+        "start_time": 0,
+        "stop_time": stop_time,
+        "output_interval": output_interval,
+        "solver": "Cvode",
+    })
+    try:
+        files = dym_api.simulate(
+            return_option="savepath",
+            model_names=[models[name] for name in names],
+            savepath=str(save_path),
+            result_file_name=names,
         )
-        dym_api.set_sim_setup(sim_setup={
-            "start_time": 0,
-            "stop_time": stop_time,
-            "output_interval": output_interval,
-            "solver": solver,
-        })
-        try:
-            files = dym_api.simulate(
-                return_option="savepath",
-                model_names=[models[name] for name in names],
-                savepath=str(save_path),
-                result_file_name=names,
-            )
-        finally:
-            dym_api.close()
-        result_files.update(zip(names, files if isinstance(files, list) else [files]))
+    finally:
+        dym_api.close()
+    result_files = dict(zip(names, files if isinstance(files, list) else [files]))
 
     # ## Comparing the results
     # The ideal heater of the TEASERHeatLoadCalculation example holds every

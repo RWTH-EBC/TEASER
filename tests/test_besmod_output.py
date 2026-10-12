@@ -1100,11 +1100,9 @@ class Test_besmod_output(unittest.TestCase):
                     self.assertIn(
                         f'simulateModel("{module.FULL_NAME}.'
                         f'{module.BUILDING}.{name}"', script)
-                    # Spawn of EnergyPlus runs with CVODE only
-                    self.assertEqual('method="cvode"' in script,
-                                     suffix == "_Spawn")
-                    self.assertEqual('__Dymola_Algorithm="Cvode"' in models[name],
-                                     suffix == "_Spawn")
+                    # all run with CVODE, which Spawn of EnergyPlus needs
+                    self.assertIn('method="cvode"', script)
+                    self.assertIn('__Dymola_Algorithm="Cvode"', models[name])
             # all models run with the same weather, BESMod's pair for Spawn,
             # and the Spawn model with the IDF next to it
             for name, text in models.items():

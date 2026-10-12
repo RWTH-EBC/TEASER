@@ -225,7 +225,8 @@ def example_export_besmod():
     #
     #     annotation(experiment(StopTime=172800,
     #                           Interval=600,
-    #                           Tolerance=1e-06),
+    #                           Tolerance=1e-06,
+    #                           __Dymola_Algorithm="Cvode"),
     #                __Dymola_Commands(file=
     #                                  "Resources/Scripts/Dymola/${bldg.name}/ModelicaConferencePaper${bldg.name}.mos"
     #                                  "Simulate and plot"));
