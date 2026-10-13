@@ -117,7 +117,7 @@ prj.add_residential(
 `aixlib_high_order_single_family_house` is the single family house of
 AixLib's high order model (HOM), scaled to net_leased_area, with its ten
 rooms merged into one thermal zone. BESMod's export can add the HOM
-itself (see e11 and e14).
+itself and a Spawn of EnergyPlus model of it (see e11 and e14).
 
 ```python
 prj.add_residential(

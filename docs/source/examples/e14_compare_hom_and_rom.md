@@ -1,5 +1,5 @@
 
-# Example 14: Compare the AixLib HOM with the ROM exported next to it
+# Example 14: Compare the AixLib HOM with the ROM and Spawn model exported next to it
 The `aixlib_high_order_single_family_house` archetype describes one building
 twice: as a high order model (HOM), which keeps all ten rooms and their walls,
 and as the reduced order model (ROM) TEASER exports for every archetype, whose
@@ -38,10 +38,10 @@ and the natural ventilation comes from the user profile alone instead of
 being added to AixLib's ventilation controller. Pass `use_old=True` to export
 the building against `TEASERThermalZone` instead, without all of this.
 
-By default both models are driven the way the archetype is meant to be used:
+By default all models are driven the way the archetype is meant to be used:
 with the internal gains of its use conditions and each room at its own set
 temperature (`room_t_set_nominal`). `validation=True` leaves the internal
-gains out and sets every room to 20 degC, so that the two models differ in
+gains out and sets every room to 20 degC, so that the models differ in
 nothing but their buildings.
 
 ## Why the Spawn model differs
@@ -69,6 +69,33 @@ these differences:
   fixed 16 degC, which makes the first days differ by up to 50 % - hence
   `init_days`.
 
+## Other buildings
+The same comparison for eight buildings - `aixlib_S` of 1984, 1995, 2002 and
+2009 and `tabula_de_standard` of 1950, 1960, 1980 and 2000, all 170 m2 - in
+the TEASERHeatLoadCalculation and the HeatPumpSimple example, over a year
+(TRY2015 Potsdam, default case, days 5 to 365), against the HOM:
+
+| | ROM | Spawn |
+|---|---|---|
+| heating energy (heat load example) | -1.7 to -0.1 % | -4.2 to +2.7 % (TABULA 1980: -11 %) |
+| heat pump electricity | -1.1 to +1.1 % | -4.0 to +1.0 % (TABULA 1980: -11 %) |
+| SCOP | -0.03 to 0.00 | +0.03 to +0.05 |
+| CV(RMSE) of the hourly heat | 10 to 20 % | 10 to 20 % |
+| CV(RMSE) of the room temperature | 1.2 to 2.5 % | 0.9 to 3.7 % |
+| simulation time, heat pump example (1984) | about 9 % of the HOM's | about 57 % of the HOM's |
+
+The ROM stays close to the HOM in every building. The Spawn model needs
+less heat in the older buildings and a little more in the newer ones, as its
+windows lose less the higher their U-value is: TABULA's windows of 1980,
+with a U-value of 4.3 W/(m2K), make it the outlier. Its SCOP is higher, as
+it stores the solar gains and so heats more around midday, when it is
+warmer outside, and less at night. With CVODE, which all three models
+run with, a year of the HeatPumpSimple example takes about 35 minutes for
+the HOM, 20 for the Spawn model and 3 for the ROM. DASSL gives the HOM's
+and the ROM's results within 0.01 %, but evaluates the Jacobian far more
+often after the heat pump's many switching events and so takes the HOM
+three hours.
+
 ## Prerequisites
 You can not run this example using the online
 [jupyter-notebook](https://mybinder.org/v2/gh/RWTH-EBC/TEASER/main?labpath=docs%2Fjupyter_notebooks),
@@ -79,8 +106,11 @@ as you need Dymola installed on your device. You also need:
    contain `Systems.Demand.Building.TEASERThermalSingleZone` - BESMod's
    `Examples.TEASERExport.HighOrderArchetypeExample` is this export.
 3. matplotlib, for the plot of the comparison (`plot=False` skips it)
-4. for `with_spawn`: the Buildings library with its Spawn binaries installed
-   (see Buildings.ThermalZones.EnergyPlus_24_2_0.UsersGuide.Installation)
+4. for `with_spawn`, which the example runs with: the Buildings library in
+   the version BESMod names in its `dependencies.json`, with its Spawn
+   binaries installed (see
+   Buildings.ThermalZones.EnergyPlus_24_2_0.UsersGuide.Installation). A
+   clone of Buildings from GitHub has neither.
 
 ```python
 import os
@@ -127,7 +157,7 @@ def _library_package(name, path, clone_directory):
 ```
 
 ## Checking for Dymola first
-Cloning the three libraries takes a while, so find out whether there is
+Cloning the libraries takes a while, so find out whether there is
 anything to simulate with before starting.
 
 ```python
@@ -140,7 +170,7 @@ if not DymolaAPI.get_dymola_install_paths():
 ```
 
 ## Finding the libraries
-BESMod also provides the weather both models run with.
+BESMod also provides the weather all models run with.
 
 ```python
 clone_directory = Path(export_path or utilities.get_default_path())
@@ -169,9 +199,10 @@ if not use_old and not besmod_model.exists():
         "use_old=True to compare against the older TEASERThermalZone.")
 ```
 
-## Exporting the HOM and the ROM
-Both come out of one and the same archetype building, so every difference
-between them is the merge of the ten rooms into a single zone.
+## Exporting the models
+All come out of one and the same archetype building, so every difference
+between the HOM and the ROM is the merge of the ten rooms into a single
+zone, and between the HOM and the Spawn model EnergyPlus' physics.
 
 ```python
 prj = Project()
@@ -239,41 +270,38 @@ if with_spawn:
 ```python
 save_path = path_export.parent.joinpath(path_export.name + "_SimulationResults")
 packages.append(path_export.joinpath("package.mo"))
-
-result_files = {}
 ```
 
-Spawn runs with CVODE, as BESMod's own Spawn examples do
+All of them with CVODE: Spawn of EnergyPlus needs it, and it gives the
+HOM's and the ROM's results of DASSL, the HOM's heat pump example five
+times as fast, as it evaluates the Jacobian far less often
 
 ```python
-for names, solver in ((("rom", "hom"), "Dassl"), (("spawn",), "Cvode")):
-    names = [name for name in names if name in models]
-    if not names:
-        continue
-    dym_api = DymolaAPI(
-        working_directory=save_path.joinpath("DymolaWorkingDirectory"),
-        model_name=models[names[0]],
-        packages=[str(package) for package in packages],
-        show_window=False,
-        equidistant_output=True,
-        n_cpu=1,
+names = list(models)
+dym_api = DymolaAPI(
+    working_directory=save_path.joinpath("DymolaWorkingDirectory"),
+    model_name=models[names[0]],
+    packages=[str(package) for package in packages],
+    show_window=False,
+    equidistant_output=True,
+    n_cpu=1,
+)
+dym_api.set_sim_setup(sim_setup={
+    "start_time": 0,
+    "stop_time": stop_time,
+    "output_interval": output_interval,
+    "solver": "Cvode",
+})
+try:
+    files = dym_api.simulate(
+        return_option="savepath",
+        model_names=[models[name] for name in names],
+        savepath=str(save_path),
+        result_file_name=names,
     )
-    dym_api.set_sim_setup(sim_setup={
-        "start_time": 0,
-        "stop_time": stop_time,
-        "output_interval": output_interval,
-        "solver": solver,
-    })
-    try:
-        files = dym_api.simulate(
-            return_option="savepath",
-            model_names=[models[name] for name in names],
-            savepath=str(save_path),
-            result_file_name=names,
-        )
-    finally:
-        dym_api.close()
-    result_files.update(zip(names, files if isinstance(files, list) else [files]))
+finally:
+    dym_api.close()
+result_files = dict(zip(names, files if isinstance(files, list) else [files]))
 ```
 
 ## Comparing the results
