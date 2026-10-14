@@ -1,0 +1,29 @@
+<%namespace file="/modelica_language/" import="get_list"/>
+within ${bldg.parent.name}.${bldg.name};
+model ${bldg.name}_Spawn
+  extends BESMod.Systems.Demand.Building.SpawnMultiZone(
+    idf_name=Modelica.Utilities.Files.loadResource(
+      "modelica://${bldg.parent.name}/${bldg.name}/${idf_file}"),
+    epw_name=Modelica.Utilities.Files.loadResource(
+      "modelica://${bldg.parent.name}/Resources/${epw_file}"),
+    wea_name=Modelica.Utilities.Files.loadResource(
+      "modelica://${bldg.parent.name}/Resources/${bldg.parent.weather_file_name}"),
+    nZones=${len(volumes)},
+    zoneNames=${zone_names},
+    VZone=${get_list(volumes)},
+    AZone=${get_list(areas)},
+    hZone=${get_list(heights)},
+    ABui=${a_bui},
+    hBui=${h_bui},
+    ARoo=${a_roo},
+    fraRadIntGai=${fra_rad_int_gai});
+
+  annotation (Documentation(info="<html>
+<p>
+  The multi family house ${bldg.name} as Spawn of EnergyPlus model, with
+  the envelope TEASER wrote into ${idf_file}: a conditioned zone per heated
+  room, while EnergyPlus simulates the staircases, the basement and the
+  attic on its own.
+</p>
+</html>"));
+end ${bldg.name}_Spawn;

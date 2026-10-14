@@ -3,7 +3,7 @@ within ${bldg.parent.name}.${bldg.name};
 model HeatPumpMonoenergetic${bldg.name}${suffix}
   extends BESMod.Systems.BaseClasses.TEASERExport.PartialHeatPumpMonoenergeticHOM(
     redeclare ${bldg.name}${suffix} building,
-    userProfiles(
+    redeclare BESMod.Systems.UserProfiles.AixLibHighOrderProfiles userProfiles(
         fileNameIntGains=Modelica.Utilities.Files.loadResource(
         "modelica://${bldg.parent.name}/${bldg.name}/${hom_profiles['file_internal_gains']}"),
         gain=1,

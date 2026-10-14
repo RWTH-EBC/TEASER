@@ -220,6 +220,9 @@ def export_besmod(
     building_spawn_template = Template(
         filename=os.path.join(template_path, "BESMod/Building_spawn"),
         lookup=lookup)
+    building_spawn_multi_zone_template = Template(
+        filename=os.path.join(template_path, "BESMod/Building_spawn_multi_zone"),
+        lookup=lookup)
     room_wise_profile_template = Template(
         filename=os.path.join(template_path, "BESMod/room_wise_profile_record"),
         lookup=lookup)
@@ -292,23 +295,34 @@ def export_besmod(
         bldg.library_attr.modelica_gains_boundary(path=bldg_path)
 
         is_hom_archetype = type(bldg).__name__ == "AixLibHighOrderSingleFamilyHouse"
+        is_multi_family_house = type(bldg).__name__ == "DetailedMultiFamilyHouse"
         export_hom = export_with_hom and is_hom_archetype
-        export_spawn = export_with_spawn and is_hom_archetype
+        export_spawn = export_with_spawn and (is_hom_archetype
+                                              or is_multi_family_house)
         hom_profiles = None
-        if export_hom or export_spawn:
+        if export_hom or (export_spawn and is_hom_archetype):
             hom_profiles = _write_hom_user_profiles(
                 bldg=bldg,
                 bldg_path=bldg_path,
                 profile_template=room_wise_profile_template)
-        if export_spawn:
+        if export_spawn and is_multi_family_house:
+            # the room-wise examples' user profiles, see
+            # _write_room_wise_user_profiles
+            hom_profiles = _write_room_wise_user_profiles(bldg, bldg_path)
+            _write_spawn_multi_zone_building(
+                bldg, bldg_path, dir_resources,
+                building_spawn_multi_zone_template, spawn_epw_path,
+                fra_rad_int_gai=1 - hom_profiles["fac_conv"])
+        elif export_spawn:
             _write_spawn_building(bldg, bldg_path, dir_resources,
                                   building_spawn_template, spawn_epw_path)
+        if export_spawn:
             skipped = [exp for exp in examples if exp not in SPAWN_EXAMPLES]
             if skipped:
                 warnings.warn(
                     f"{bldg.name} is exported as Spawn model only in "
                     f"{', '.join(SPAWN_EXAMPLES)}, not in {', '.join(skipped)}: "
-                    f"SpawnHighOrder has no mechanical ventilation.")
+                    f"BESMod's Spawn buildings have no mechanical ventilation.")
         if export_hom:
             hom_template_kwargs = bldg.top_level_geo_params
             with open(os.path.join(bldg_path, bldg.name + "_HOM.mo"), 'w') as out_file:
@@ -832,6 +846,132 @@ def _write_spawn_building(bldg, bldg_path, dir_resources, template,
             + zones[attic].volume / zones[attic].floor_area,
             a_roo=roofs,
             vent_rate_attic=_attic_air_change_rate(bldg)))
+
+
+def _write_spawn_multi_zone_building(bldg, bldg_path, dir_resources, template,
+                                     spawn_epw_path=None, fra_rad_int_gai=0.4):
+    """Writes the IDF and the SpawnMultiZone building of a
+    DetailedMultiFamilyHouse, with a conditioned zone per heated room
+
+    The unheated staircases, basement and attic stay in the IDF only, where
+    EnergyPlus simulates them as free floating zones.
+    """
+    from teaser.data.output.energyplus_output import export_idf
+
+    prj = bldg.parent
+    if spawn_epw_path is None:
+        spawn_epw_path = os.path.splitext(prj.weather_file_path)[0] + ".epw"
+    if not os.path.isfile(spawn_epw_path):
+        raise FileNotFoundError(
+            f"The Spawn export needs an EnergyPlus weather file of the same "
+            f"weather as {prj.weather_file_path}; give it as spawn_epw_path "
+            f"(not found: {spawn_epw_path}).")
+    shutil.copy(spawn_epw_path, dir_resources)
+
+    idf_file = bldg.name + "_Spawn.idf"
+    export_idf(bldg, os.path.join(bldg_path, idf_file))
+    geometry = bldg.geometry
+    rooms = geometry.heated_rooms
+    volumes = [geometry.zones[room].volume for room in rooms]
+    areas = [geometry.zones[room].floor_area for room in rooms]
+    top = max(float(vertex[2]) for surface in geometry.zones["Attic"].surfaces
+              for vertex in surface.vertices)
+    with open(os.path.join(bldg_path, bldg.name + "_Spawn.mo"), "w") as out_file:
+        out_file.write(template.render_unicode(
+            bldg=bldg,
+            idf_file=idf_file,
+            epw_file=os.path.basename(spawn_epw_path),
+            zone_names="{" + ", ".join(f'"{name}"' for name in rooms) + "}",
+            volumes=volumes,
+            areas=areas,
+            heights=[v / a for v, a in zip(volumes, areas)],
+            a_bui=bldg.area_gf,
+            h_bui=top - geometry.plan.basement_height,
+            a_roo=bldg.area_rt,
+            fra_rad_int_gai=fra_rad_int_gai))
+
+
+def _write_room_wise_user_profiles(bldg, bldg_path):
+    """Writes the room-wise user profiles of a DetailedMultiFamilyHouse's
+    Spawn model, for BESMod's RoomWiseProfiles
+
+    Each room gets the use conditions of its thermal zone: their internal
+    gains per m2 of persons, machines and lighting, following their
+    schedules, times its floor area, which totals to the gains the ROM's
+    zones get. The convective share is that of the three over the year, as
+    in _write_hom_user_profiles. The set temperatures are
+    room_t_set_nominal, set back with the zone's heating profile by as much
+    as it is below its maximum, the natural ventilation is the zone's
+    normative infiltration. The tables go into the building's package, in
+    the order of geometry.heated_rooms.
+
+    Returns
+    -------
+    dict
+        file_internal_gains and file_t_set (the tables' file names),
+        fac_conv (convective share of the gains) and nat_vent (the rooms'
+        air change in 1/h)
+    """
+    geometry = bldg.geometry
+    rooms = geometry.heated_rooms
+    zones = {zone.name: zone for zone in bldg.thermal_zones}
+    gains = []
+    set_temperatures = []
+    nat_vent = []
+    energy = {"persons": 0.0, "machines": 0.0, "lighting": 0.0}
+    weighted = {"persons": 0.0, "machines": 0.0, "lighting": 0.0}
+    for room in rooms:
+        use_cond = zones[bldg.zone_of_room[room]].use_conditions
+        area = geometry.zones[room].floor_area
+        parts = {
+            "persons": (use_cond.persons * use_cond.fixed_heat_flow_rate_persons
+                        * use_cond.activity_degree_persons,
+                        "persons_profile", use_cond.ratio_conv_rad_persons),
+            "machines": (use_cond.machines, "machines_profile",
+                         use_cond.ratio_conv_rad_machines),
+            "lighting": (use_cond.lighting_power, "lighting_profile",
+                         use_cond.ratio_conv_rad_lighting),
+        }
+        room_gains = 0.0
+        for name, (specific, profile, ratio) in parts.items():
+            schedule = np.asarray(use_cond.schedules[profile], dtype=float)
+            room_gains = room_gains + schedule * specific * area
+            energy[name] += schedule.sum() * specific * area
+            weighted[name] += schedule.sum() * specific * area * ratio
+        gains.append(room_gains)
+        heating_profile = np.asarray(use_cond.heating_profile, dtype=float)
+        set_temperatures.append(
+            bldg.room_t_set_nominal[geometry.info[room].room_type]
+            + heating_profile - heating_profile.max())
+        nat_vent.append(float(use_cond.normative_infiltration))
+    total = sum(energy.values())
+    fac_conv = sum(weighted.values()) / total if total > 0 else 1.0
+
+    gains = np.array(gains)
+    file_internal_gains = "InternalGains_" + bldg.name + "_Rooms.txt"
+    with open(os.path.join(bldg_path, file_internal_gains), "w") as out_file:
+        out_file.write("#1\n")
+        out_file.write(f"double Internals({gains.shape[1]}, {len(rooms) + 1})\n")
+        for hour in range(gains.shape[1]):
+            row = [(hour + 1) * 3600] + list(gains[:, hour])
+            out_file.write("\t".join(str(float(x)) for x in row) + "\n")
+
+    set_temperatures = np.array(set_temperatures)
+    hours = set_temperatures.shape[1]
+    file_t_set = "TSet_" + bldg.name + "_Rooms.txt"
+    with open(os.path.join(bldg_path, file_t_set), "w") as out_file:
+        out_file.write("#1\n")
+        out_file.write(f"double TZoneSet({hours + 1}, {len(rooms) + 1})\n")
+        for hour in range(hours + 1):
+            row = [hour * 3600] + list(set_temperatures[:, min(hour, hours - 1)])
+            out_file.write("\t".join(str(float(x)) for x in row) + "\n")
+
+    return {
+        "file_internal_gains": file_internal_gains,
+        "file_t_set": file_t_set,
+        "fac_conv": float(fac_conv),
+        "nat_vent": nat_vent,
+    }
 
 
 def _help_example_script(bldg, dir_dymola, test_script_template, example, suffix=""):

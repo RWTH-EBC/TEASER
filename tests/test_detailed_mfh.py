@@ -235,6 +235,75 @@ class TestDetailedMFH(unittest.TestCase):
         self.assertEqual(infiltration, {"Staircase1", "Staircase2", "Basement",
                                         "Attic"})
 
+    def test_room_heat_loads(self):
+        """the rooms' heat loads add up to the zones'"""
+        bldg = _mfh(number_of_floors=2)
+        bldg.zoning = "flat"
+        bldg.generate_archetype()
+        bldg.calc_building_parameter()
+        self.assertAlmostEqual(sum(bldg.room_heat_loads_list),
+                               bldg.sum_heat_load)
+        self.assertEqual(len(bldg.room_heat_loads_list), 24)
+        # the bath gives to its colder neighbours
+        bath = bldg.room_heat_loads["F0_A1_Bath"]
+        bldg.room_t_set_nominal["Bath"] = 293.15
+        self.assertGreater(bath, bldg.calc_room_heat_loads()["F0_A1_Bath"])
+
+    def test_export_besmod_with_spawn(self):
+        """the ROM and the room-wise Spawn model of the BESMod export"""
+        prj = Project()
+        prj.name = "MFHExport"
+        bldg = _mfh(prj, number_of_floors=2)
+        bldg.zoning = "flat"
+        bldg.generate_archetype()
+        prj.used_library_calc = "AixLib"
+        prj.number_of_elements_calc = 4
+        prj.calc_all_buildings()
+        with tempfile.TemporaryDirectory() as directory:
+            epw = os.path.join(directory, "weather.epw")
+            with open(epw, "w") as file:
+                file.write("LOCATION")
+            path = prj.export_besmod(
+                examples=["TEASERHeatLoadCalculation", "HeatPumpSimple",
+                          "GasBoilerBuildingOnly"],
+                THydSup_nominal=328.15, path=os.path.join(directory, "out"),
+                export_with_spawn=True, spawn_epw_path=epw)
+            package = os.path.join(path, bldg.name)
+            with open(os.path.join(package, "package.order")) as file:
+                order = file.read().split()
+            for name in (bldg.name, bldg.name + "_Spawn",
+                         "TEASERHeatLoadCalculation" + bldg.name,
+                         "HeatPumpSimple" + bldg.name + "_Spawn",
+                         "GasBoilerBuildingOnly" + bldg.name + "_Spawn"):
+                self.assertIn(name, order)
+            files = {}
+            for name in (bldg.name + ".mo", bldg.name + "_Spawn.mo",
+                         "HeatPumpSimple" + bldg.name + "_Spawn.mo",
+                         "TSet_" + bldg.name + "_Rooms.txt",
+                         "InternalGains_" + bldg.name + "_Rooms.txt"):
+                with open(os.path.join(package, name)) as file:
+                    files[name] = file.read()
+            self.assertTrue(os.path.isfile(
+                os.path.join(package, bldg.name + "_Spawn.idf")))
+        rooms = bldg.geometry.heated_rooms
+        self.assertIn("nZones=4)", files[bldg.name + ".mo"])
+        spawn = files[bldg.name + "_Spawn.mo"]
+        self.assertIn("extends BESMod.Systems.Demand.Building.SpawnMultiZone(",
+                      spawn)
+        self.assertIn("zoneNames={" + ", ".join(f'"{room}"' for room in rooms)
+                      + "}", spawn)
+        example = files["HeatPumpSimple" + bldg.name + "_Spawn.mo"]
+        self.assertIn("redeclare BESMod.Systems.UserProfiles.RoomWiseProfiles "
+                      "userProfiles(", example)
+        self.assertIn(f"nZones={len(rooms)},", example)
+        t_set = files["TSet_" + bldg.name + "_Rooms.txt"].splitlines()
+        self.assertEqual(t_set[1], f"double TZoneSet(25, {len(rooms) + 1})")
+        self.assertEqual(len(t_set), 2 + 25)
+        bath = rooms.index("F0_A1_Bath")
+        self.assertEqual(float(t_set[2].split("\t")[1 + bath]), 297.15)
+        gains = files["InternalGains_" + bldg.name + "_Rooms.txt"].splitlines()
+        self.assertEqual(len(gains[2].split("\t")), len(rooms) + 1)
+
 
 if __name__ == "__main__":
     unittest.main()

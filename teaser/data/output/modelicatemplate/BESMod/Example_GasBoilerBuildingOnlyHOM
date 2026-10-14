@@ -3,12 +3,23 @@ within ${bldg.parent.name}.${bldg.name};
 model GasBoilerBuildingOnly${bldg.name}${suffix}
   extends BESMod.Systems.BaseClasses.TEASERExport.PartialGasBoilerBuildingOnlyHOM(
     redeclare ${bldg.name}${suffix} building,
-    userProfiles(
+## the multi family house's rooms take room-wise profiles from files,
+## the HOM's AixLibHighOrderProfiles their set temperatures from a record
+% if 'file_t_set' in hom_profiles:
+    redeclare BESMod.Systems.UserProfiles.RoomWiseProfiles userProfiles(
+        fileNameIntGains=Modelica.Utilities.Files.loadResource(
+        "modelica://${bldg.parent.name}/${bldg.name}/${hom_profiles['file_internal_gains']}"),
+        fileNameTSet=Modelica.Utilities.Files.loadResource(
+        "modelica://${bldg.parent.name}/${bldg.name}/${hom_profiles['file_t_set']}"),
+        natVent=${get_list(hom_profiles['nat_vent'])}),
+% else:
+    redeclare BESMod.Systems.UserProfiles.AixLibHighOrderProfiles userProfiles(
         fileNameIntGains=Modelica.Utilities.Files.loadResource(
         "modelica://${bldg.parent.name}/${bldg.name}/${hom_profiles['file_internal_gains']}"),
         gain=1,
         redeclare ${hom_profiles['t_set_profile']} TSetProfile),
-    systemParameters(nZones=10,
+% endif
+    systemParameters(nZones=${len(bldg.room_heat_loads_list)},
                      QBui_flow_nominal=${get_list(bldg.room_heat_loads_list)},
                      TSetZone_nominal=${get_list(bldg.room_t_set_nominal_list)},
                      TOda_nominal=${TOda_nominal},
