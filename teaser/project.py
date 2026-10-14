@@ -472,6 +472,8 @@ class Project(object):
         cellar=None,
         dormer=None,
         number_of_apartments=None,
+        number_of_staircases=None,
+        net_leased_area_per_flat=None,
     ):
         """Add a residential building to the TEASER project.
 
@@ -506,7 +508,8 @@ class Project(object):
             'tabula_de_multi_family_house', 'tabula_de_apartment_block',
             'tabula_dk_single_family_house', 'tabula_dk_terraced_house',
             'tabula_dk_multi_family_house', 'tabula_dk_apartment_block'
-            'aixlib_high_order_single_family_house'
+            'aixlib_high_order_single_family_house',
+            'detailed_multi_family_house'
 
         name : str
             Individual name
@@ -599,6 +602,14 @@ class Project(object):
             number of apartments inside Building (default = 1). CAUTION only
             used for urbanrenet
 
+        number_of_staircases : int
+            Staircases of 'detailed_multi_family_house', each with two flats
+            per storey (default = 1)
+
+        net_leased_area_per_flat : float [m2]
+            Net leased area of each flat of 'detailed_multi_family_house',
+            instead of net_leased_area for the whole building
+
         Returns
         -------
         type_bldg : Instance of Archetype Building
@@ -686,6 +697,19 @@ class Project(object):
         elif geometry_data == datahandling.GeometryData.AixLibHighOrderSingleFamilyHouse:
             type_bldg = datahandling.geometries[geometry_data](
                 self, **aixlib_hom_arg)
+        elif geometry_data == datahandling.GeometryData.DetailedMultiFamilyHouse:
+            type_bldg = datahandling.geometries[geometry_data](
+                self,
+                name=name,
+                year_of_construction=year_of_construction,
+                number_of_floors=number_of_floors,
+                height_of_floors=height_of_floors,
+                net_leased_area=net_leased_area,
+                net_leased_area_per_flat=net_leased_area_per_flat,
+                number_of_staircases=number_of_staircases or 1,
+                construction_data=construction_data,
+                neighbour_buildings=neighbour_buildings or 0,
+            )
         else:
             type_bldg = datahandling.geometries[geometry_data](
                 self, **common_arg)

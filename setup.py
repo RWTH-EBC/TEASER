@@ -40,6 +40,7 @@ setup(
         "teaser.logic",
         "teaser.logic.archetypebuildings",
         "teaser.logic.archetypebuildings.aixlib_high_order",
+        "teaser.logic.archetypebuildings.detailed_mfh",
         "teaser.logic.archetypebuildings.tabula",
         "teaser.logic.archetypebuildings.tabula.de",
         "teaser.logic.archetypebuildings.tabula.dk",

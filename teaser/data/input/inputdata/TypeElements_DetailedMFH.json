@@ -1,0 +1,992 @@
+{
+    "OuterWall_[0, 1978]_detailed_mfh_standard": {
+        "building_age_group": [
+            0,
+            1978
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "detailed_mfh_gypsum_plaster",
+                    "material_id": "8d557f4a-c7e4-11f1-89e6-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.36,
+                "material": {
+                    "name": "detailed_mfh_perforated_brick_1400",
+                    "material_id": "8d557f4e-c7e4-11f1-bddc-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "detailed_mfh_exterior_plaster",
+                    "material_id": "8d557f50-c7e4-11f1-9d83-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "OuterWallCellar_[0, 1978]_detailed_mfh_standard": {
+        "building_age_group": [
+            0,
+            1978
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.24,
+                "material": {
+                    "name": "detailed_mfh_reinforced_concrete",
+                    "material_id": "8d557f4b-c7e4-11f1-ab59-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "Rooftop_[0, 1978]_detailed_mfh_standard": {
+        "building_age_group": [
+            0,
+            1978
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.025,
+                "material": {
+                    "name": "detailed_mfh_clay_roof_tile",
+                    "material_id": "8d557f51-c7e4-11f1-8dc9-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "GroundFloor_[0, 1978]_detailed_mfh_standard": {
+        "building_age_group": [
+            0,
+            1978
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.24,
+                "material": {
+                    "name": "detailed_mfh_reinforced_concrete",
+                    "material_id": "8d557f4b-c7e4-11f1-ab59-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "InnerWall_[0, 1978]_detailed_mfh_standard": {
+        "building_age_group": [
+            0,
+            1978
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "layer": {
+            "0": {
+                "thickness": 0.08,
+                "material": {
+                    "name": "detailed_mfh_gypsum_wall_board",
+                    "material_id": "8d557f54-c7e4-11f1-ae5f-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "InnerWallApartment_[0, 1978]_detailed_mfh_standard": {
+        "building_age_group": [
+            0,
+            1978
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "detailed_mfh_lime_gypsum_plaster",
+                    "material_id": "8d557f52-c7e4-11f1-bc4f-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.115,
+                "material": {
+                    "name": "detailed_mfh_sand_lime_brick",
+                    "material_id": "8d557f53-c7e4-11f1-9701-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "detailed_mfh_lime_gypsum_plaster",
+                    "material_id": "8d557f52-c7e4-11f1-bc4f-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "Ceiling_[0, 1978]_detailed_mfh_standard": {
+        "building_age_group": [
+            0,
+            1978
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "detailed_mfh_gypsum_plaster",
+                    "material_id": "8d557f4a-c7e4-11f1-89e6-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "detailed_mfh_reinforced_concrete",
+                    "material_id": "8d557f4b-c7e4-11f1-ab59-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.025,
+                "material": {
+                    "name": "detailed_mfh_rock_wool",
+                    "material_id": "8d557f4c-c7e4-11f1-91b6-40c73c88cbfa"
+                }
+            },
+            "3": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "detailed_mfh_floating_screed",
+                    "material_id": "8d557f4d-c7e4-11f1-b128-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "CeilingAttic_[0, 1978]_detailed_mfh_standard": {
+        "building_age_group": [
+            0,
+            1978
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "detailed_mfh_gypsum_plaster",
+                    "material_id": "8d557f4a-c7e4-11f1-89e6-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "detailed_mfh_reinforced_concrete",
+                    "material_id": "8d557f4b-c7e4-11f1-ab59-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.025,
+                "material": {
+                    "name": "detailed_mfh_rock_wool",
+                    "material_id": "8d557f4c-c7e4-11f1-91b6-40c73c88cbfa"
+                }
+            },
+            "3": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "detailed_mfh_floating_screed",
+                    "material_id": "8d557f4d-c7e4-11f1-b128-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "Floor_[0, 1978]_detailed_mfh_standard": {
+        "building_age_group": [
+            0,
+            1978
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "detailed_mfh_floating_screed",
+                    "material_id": "8d557f4d-c7e4-11f1-b128-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.025,
+                "material": {
+                    "name": "detailed_mfh_rock_wool",
+                    "material_id": "8d557f4c-c7e4-11f1-91b6-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "detailed_mfh_reinforced_concrete",
+                    "material_id": "8d557f4b-c7e4-11f1-ab59-40c73c88cbfa"
+                }
+            },
+            "3": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "detailed_mfh_gypsum_plaster",
+                    "material_id": "8d557f4a-c7e4-11f1-89e6-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "FloorCellar_[0, 1978]_detailed_mfh_standard": {
+        "building_age_group": [
+            0,
+            1978
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "detailed_mfh_floating_screed",
+                    "material_id": "8d557f4d-c7e4-11f1-b128-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.02,
+                "material": {
+                    "name": "detailed_mfh_rock_wool",
+                    "material_id": "8d557f4c-c7e4-11f1-91b6-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "detailed_mfh_reinforced_concrete",
+                    "material_id": "8d557f4b-c7e4-11f1-ab59-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "Window_[0, 1978]_detailed_mfh_standard": {
+        "building_age_group": [
+            0,
+            1978
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "g_value": 0.594,
+        "a_conv": 0.02,
+        "shading_g_total": 1.0,
+        "shading_max_irr": 100.0,
+        "frame_fraction": 0.3,
+        "layer": {
+            "0": {
+                "thickness": 0.094955,
+                "material": {
+                    "name": "glas_generic",
+                    "material_id": "0abbb19a-83ff-11e6-bacd-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "OuterWall_[1979, 1994]_detailed_mfh_standard": {
+        "building_age_group": [
+            1979,
+            1994
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "detailed_mfh_gypsum_plaster",
+                    "material_id": "8d557f4a-c7e4-11f1-89e6-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.3,
+                "material": {
+                    "name": "detailed_mfh_perforated_brick_900",
+                    "material_id": "8d557f4f-c7e4-11f1-ab33-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "detailed_mfh_rock_wool",
+                    "material_id": "8d557f4c-c7e4-11f1-91b6-40c73c88cbfa"
+                }
+            },
+            "3": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "detailed_mfh_exterior_plaster",
+                    "material_id": "8d557f50-c7e4-11f1-9d83-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "OuterWallCellar_[1979, 1994]_detailed_mfh_standard": {
+        "building_age_group": [
+            1979,
+            1994
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.24,
+                "material": {
+                    "name": "detailed_mfh_reinforced_concrete",
+                    "material_id": "8d557f4b-c7e4-11f1-ab59-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "Rooftop_[1979, 1994]_detailed_mfh_standard": {
+        "building_age_group": [
+            1979,
+            1994
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.025,
+                "material": {
+                    "name": "detailed_mfh_clay_roof_tile",
+                    "material_id": "8d557f51-c7e4-11f1-8dc9-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "GroundFloor_[1979, 1994]_detailed_mfh_standard": {
+        "building_age_group": [
+            1979,
+            1994
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.24,
+                "material": {
+                    "name": "detailed_mfh_reinforced_concrete",
+                    "material_id": "8d557f4b-c7e4-11f1-ab59-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "InnerWall_[1979, 1994]_detailed_mfh_standard": {
+        "building_age_group": [
+            1979,
+            1994
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "layer": {
+            "0": {
+                "thickness": 0.0125,
+                "material": {
+                    "name": "detailed_mfh_plasterboard",
+                    "material_id": "8d557f55-c7e4-11f1-86ff-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.1,
+                "material": {
+                    "name": "detailed_mfh_glass_wool",
+                    "material_id": "8d557f56-c7e4-11f1-a283-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.0125,
+                "material": {
+                    "name": "detailed_mfh_plasterboard",
+                    "material_id": "8d557f55-c7e4-11f1-86ff-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "InnerWallApartment_[1979, 1994]_detailed_mfh_standard": {
+        "building_age_group": [
+            1979,
+            1994
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "detailed_mfh_lime_gypsum_plaster",
+                    "material_id": "8d557f52-c7e4-11f1-bc4f-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.115,
+                "material": {
+                    "name": "detailed_mfh_sand_lime_brick",
+                    "material_id": "8d557f53-c7e4-11f1-9701-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "detailed_mfh_lime_gypsum_plaster",
+                    "material_id": "8d557f52-c7e4-11f1-bc4f-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "Ceiling_[1979, 1994]_detailed_mfh_standard": {
+        "building_age_group": [
+            1979,
+            1994
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "detailed_mfh_gypsum_plaster",
+                    "material_id": "8d557f4a-c7e4-11f1-89e6-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "detailed_mfh_reinforced_concrete",
+                    "material_id": "8d557f4b-c7e4-11f1-ab59-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.025,
+                "material": {
+                    "name": "detailed_mfh_rock_wool",
+                    "material_id": "8d557f4c-c7e4-11f1-91b6-40c73c88cbfa"
+                }
+            },
+            "3": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "detailed_mfh_floating_screed",
+                    "material_id": "8d557f4d-c7e4-11f1-b128-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "CeilingAttic_[1979, 1994]_detailed_mfh_standard": {
+        "building_age_group": [
+            1979,
+            1994
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "detailed_mfh_gypsum_plaster",
+                    "material_id": "8d557f4a-c7e4-11f1-89e6-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "detailed_mfh_reinforced_concrete",
+                    "material_id": "8d557f4b-c7e4-11f1-ab59-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.06,
+                "material": {
+                    "name": "detailed_mfh_rock_wool",
+                    "material_id": "8d557f4c-c7e4-11f1-91b6-40c73c88cbfa"
+                }
+            },
+            "3": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "detailed_mfh_floating_screed",
+                    "material_id": "8d557f4d-c7e4-11f1-b128-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "Floor_[1979, 1994]_detailed_mfh_standard": {
+        "building_age_group": [
+            1979,
+            1994
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "detailed_mfh_floating_screed",
+                    "material_id": "8d557f4d-c7e4-11f1-b128-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.025,
+                "material": {
+                    "name": "detailed_mfh_rock_wool",
+                    "material_id": "8d557f4c-c7e4-11f1-91b6-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "detailed_mfh_reinforced_concrete",
+                    "material_id": "8d557f4b-c7e4-11f1-ab59-40c73c88cbfa"
+                }
+            },
+            "3": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "detailed_mfh_gypsum_plaster",
+                    "material_id": "8d557f4a-c7e4-11f1-89e6-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "FloorCellar_[1979, 1994]_detailed_mfh_standard": {
+        "building_age_group": [
+            1979,
+            1994
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "detailed_mfh_floating_screed",
+                    "material_id": "8d557f4d-c7e4-11f1-b128-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "detailed_mfh_rock_wool",
+                    "material_id": "8d557f4c-c7e4-11f1-91b6-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "detailed_mfh_reinforced_concrete",
+                    "material_id": "8d557f4b-c7e4-11f1-ab59-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "Window_[1979, 1994]_detailed_mfh_standard": {
+        "building_age_group": [
+            1979,
+            1994
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "g_value": 0.705,
+        "a_conv": 0.02,
+        "shading_g_total": 1.0,
+        "shading_max_irr": 100.0,
+        "frame_fraction": 0.3,
+        "layer": {
+            "0": {
+                "thickness": 0.137565,
+                "material": {
+                    "name": "glas_generic",
+                    "material_id": "0abbb19a-83ff-11e6-bacd-2cd444b2e704"
+                }
+            }
+        }
+    },
+    "OuterWall_[2021, 2100]_detailed_mfh_standard": {
+        "building_age_group": [
+            2021,
+            2100
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "detailed_mfh_gypsum_plaster",
+                    "material_id": "8d557f4a-c7e4-11f1-89e6-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.3,
+                "material": {
+                    "name": "detailed_mfh_perforated_brick_900",
+                    "material_id": "8d557f4f-c7e4-11f1-ab33-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.145,
+                "material": {
+                    "name": "detailed_mfh_rock_wool",
+                    "material_id": "8d557f4c-c7e4-11f1-91b6-40c73c88cbfa"
+                }
+            },
+            "3": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "detailed_mfh_exterior_plaster",
+                    "material_id": "8d557f50-c7e4-11f1-9d83-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "OuterWallCellar_[2021, 2100]_detailed_mfh_standard": {
+        "building_age_group": [
+            2021,
+            2100
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.24,
+                "material": {
+                    "name": "detailed_mfh_reinforced_concrete",
+                    "material_id": "8d557f4b-c7e4-11f1-ab59-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "Rooftop_[2021, 2100]_detailed_mfh_standard": {
+        "building_age_group": [
+            2021,
+            2100
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "layer": {
+            "0": {
+                "thickness": 0.025,
+                "material": {
+                    "name": "detailed_mfh_clay_roof_tile",
+                    "material_id": "8d557f51-c7e4-11f1-8dc9-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "GroundFloor_[2021, 2100]_detailed_mfh_standard": {
+        "building_age_group": [
+            2021,
+            2100
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.24,
+                "material": {
+                    "name": "detailed_mfh_reinforced_concrete",
+                    "material_id": "8d557f4b-c7e4-11f1-ab59-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "InnerWall_[2021, 2100]_detailed_mfh_standard": {
+        "building_age_group": [
+            2021,
+            2100
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "layer": {
+            "0": {
+                "thickness": 0.0125,
+                "material": {
+                    "name": "detailed_mfh_plasterboard",
+                    "material_id": "8d557f55-c7e4-11f1-86ff-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.1,
+                "material": {
+                    "name": "detailed_mfh_glass_wool",
+                    "material_id": "8d557f56-c7e4-11f1-a283-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.0125,
+                "material": {
+                    "name": "detailed_mfh_plasterboard",
+                    "material_id": "8d557f55-c7e4-11f1-86ff-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "InnerWallApartment_[2021, 2100]_detailed_mfh_standard": {
+        "building_age_group": [
+            2021,
+            2100
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "layer": {
+            "0": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "detailed_mfh_lime_gypsum_plaster",
+                    "material_id": "8d557f52-c7e4-11f1-bc4f-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.115,
+                "material": {
+                    "name": "detailed_mfh_sand_lime_brick",
+                    "material_id": "8d557f53-c7e4-11f1-9701-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.015,
+                "material": {
+                    "name": "detailed_mfh_lime_gypsum_plaster",
+                    "material_id": "8d557f52-c7e4-11f1-bc4f-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "Ceiling_[2021, 2100]_detailed_mfh_standard": {
+        "building_age_group": [
+            2021,
+            2100
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "detailed_mfh_gypsum_plaster",
+                    "material_id": "8d557f4a-c7e4-11f1-89e6-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "detailed_mfh_reinforced_concrete",
+                    "material_id": "8d557f4b-c7e4-11f1-ab59-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.025,
+                "material": {
+                    "name": "detailed_mfh_rock_wool",
+                    "material_id": "8d557f4c-c7e4-11f1-91b6-40c73c88cbfa"
+                }
+            },
+            "3": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "detailed_mfh_floating_screed",
+                    "material_id": "8d557f4d-c7e4-11f1-b128-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "CeilingAttic_[2021, 2100]_detailed_mfh_standard": {
+        "building_age_group": [
+            2021,
+            2100
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "detailed_mfh_gypsum_plaster",
+                    "material_id": "8d557f4a-c7e4-11f1-89e6-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "detailed_mfh_reinforced_concrete",
+                    "material_id": "8d557f4b-c7e4-11f1-ab59-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.19,
+                "material": {
+                    "name": "detailed_mfh_rock_wool",
+                    "material_id": "8d557f4c-c7e4-11f1-91b6-40c73c88cbfa"
+                }
+            },
+            "3": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "detailed_mfh_floating_screed",
+                    "material_id": "8d557f4d-c7e4-11f1-b128-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "Floor_[2021, 2100]_detailed_mfh_standard": {
+        "building_age_group": [
+            2021,
+            2100
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "detailed_mfh_floating_screed",
+                    "material_id": "8d557f4d-c7e4-11f1-b128-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.025,
+                "material": {
+                    "name": "detailed_mfh_rock_wool",
+                    "material_id": "8d557f4c-c7e4-11f1-91b6-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.15,
+                "material": {
+                    "name": "detailed_mfh_reinforced_concrete",
+                    "material_id": "8d557f4b-c7e4-11f1-ab59-40c73c88cbfa"
+                }
+            },
+            "3": {
+                "thickness": 0.01,
+                "material": {
+                    "name": "detailed_mfh_gypsum_plaster",
+                    "material_id": "8d557f4a-c7e4-11f1-89e6-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "FloorCellar_[2021, 2100]_detailed_mfh_standard": {
+        "building_age_group": [
+            2021,
+            2100
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 1.7,
+        "layer": {
+            "0": {
+                "thickness": 0.04,
+                "material": {
+                    "name": "detailed_mfh_floating_screed",
+                    "material_id": "8d557f4d-c7e4-11f1-b128-40c73c88cbfa"
+                }
+            },
+            "1": {
+                "thickness": 0.165,
+                "material": {
+                    "name": "detailed_mfh_rock_wool",
+                    "material_id": "8d557f4c-c7e4-11f1-91b6-40c73c88cbfa"
+                }
+            },
+            "2": {
+                "thickness": 0.16,
+                "material": {
+                    "name": "detailed_mfh_reinforced_concrete",
+                    "material_id": "8d557f4b-c7e4-11f1-ab59-40c73c88cbfa"
+                }
+            }
+        }
+    },
+    "Window_[2021, 2100]_detailed_mfh_standard": {
+        "building_age_group": [
+            2021,
+            2100
+        ],
+        "construction_data": "detailed_mfh_standard",
+        "inner_radiation": 5.0,
+        "inner_convection": 2.7,
+        "outer_radiation": 5.0,
+        "outer_convection": 20.0,
+        "g_value": 0.55,
+        "a_conv": 0.02,
+        "shading_g_total": 1.0,
+        "shading_max_irr": 100.0,
+        "frame_fraction": 0.3,
+        "layer": {
+            "0": {
+                "thickness": 0.670057,
+                "material": {
+                    "name": "glas_generic",
+                    "material_id": "0abbb19a-83ff-11e6-bacd-2cd444b2e704"
+                }
+            }
+        }
+    }
+}

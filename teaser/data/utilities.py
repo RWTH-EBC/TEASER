@@ -40,6 +40,9 @@ from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import (
 from teaser.logic.archetypebuildings.aixlib_high_order.singlefamilyhouse import (
     AixLibHighOrderSingleFamilyHouse,
 )
+from teaser.logic.archetypebuildings.detailed_mfh.multifamilyhouse import (
+    DetailedMultiFamilyHouse,
+)
 
 
 class GeometryData(Enum):
@@ -76,6 +79,7 @@ class GeometryData(Enum):
     UrbanrenetEst8b = "urbanrenet_est8b"
 
     AixLibHighOrderSingleFamilyHouse = "aixlib_high_order_single_family_house"
+    DetailedMultiFamilyHouse = "detailed_multi_family_house"
 
 class ConstructionData(Enum):
     """
@@ -102,6 +106,7 @@ class ConstructionData(Enum):
     aixlib_M = "aixlib_M"
     aixlib_L = "aixlib_L"
     aixlib_M_retrofit = "aixlib_M_retrofit"
+    detailed_mfh_standard = "detailed_mfh_standard"
     custom = "custom"
 
     def get_prefix(self):
@@ -130,6 +135,9 @@ class ConstructionData(Enum):
         # prefix (get_prefix mirrors tabula_de/tabula_dk's fixed 2-segment
         # convention, which doesn't fit aixlib's S/M/L + retrofit suffix).
         return self.value.startswith("aixlib")
+
+    def is_detailed_mfh(self):
+        return self.get_prefix() == "detailed_mfh"
 
     def is_custom(self):
         return self.value == "custom"
@@ -169,6 +177,8 @@ geometries = {
     GeometryData.UrbanrenetEst8b: EST8b,
     #AixLib HOM
     GeometryData.AixLibHighOrderSingleFamilyHouse: AixLibHighOrderSingleFamilyHouse,
+    #Detailed multi family house
+    GeometryData.DetailedMultiFamilyHouse: DetailedMultiFamilyHouse,
 }
 
 # Dictionary that defines which building geometries are allowed for each construction data type.
@@ -228,8 +238,25 @@ allowed_geometries = {
     ConstructionData.aixlib_M: [GeometryData.AixLibHighOrderSingleFamilyHouse],
     ConstructionData.aixlib_L: [GeometryData.AixLibHighOrderSingleFamilyHouse],
     ConstructionData.aixlib_M_retrofit: [GeometryData.AixLibHighOrderSingleFamilyHouse],
+
+    # the construction data of the detailed multi family house's three
+    # archetypes, made for its own element types
+    ConstructionData.detailed_mfh_standard: [GeometryData.DetailedMultiFamilyHouse],
 }
 
+
+def check_construction_data_setter_detailed_mfh(value):
+    """This function validates and sets the construction_data for the detailed multi family house."""
+    if value is None:
+        return ConstructionData.detailed_mfh_standard
+    if isinstance(value, str):
+        value = ConstructionData(value)
+    if isinstance(value, ConstructionData):
+        if not value.is_detailed_mfh():
+            raise ValueError(f"DetailedMultiFamilyHouse needs detailed_mfh construction data, not {value.value}.")
+        return value
+    raise ValueError(f"Invalid construction_data: {value}. "
+                     f"Must be either a string or a ConstructionData enum value.")
 
 def check_construction_data_setter_iwu(value):
     """This function validates and sets the construction_data for buildings using the iwu construction_data."""

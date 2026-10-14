@@ -8176,5 +8176,122 @@
         "thickness_default": 0.1,
         "thickness_list": [],
         "solar_absorp": 0.5
+    },
+    "8d557f4a-c7e4-11f1-89e6-40c73c88cbfa": {
+        "name": "detailed_mfh_gypsum_plaster",
+        "density": 1000.0,
+        "thermal_conduc": 0.4,
+        "heat_capac": 1.0,
+        "thickness_default": 0.01,
+        "thickness_list": [],
+        "solar_absorp": 0.7
+    },
+    "8d557f4b-c7e4-11f1-ab59-40c73c88cbfa": {
+        "name": "detailed_mfh_reinforced_concrete",
+        "density": 2300.0,
+        "thermal_conduc": 2.3,
+        "heat_capac": 1.0,
+        "thickness_default": 0.01,
+        "thickness_list": [],
+        "solar_absorp": 0.7
+    },
+    "8d557f4c-c7e4-11f1-91b6-40c73c88cbfa": {
+        "name": "detailed_mfh_rock_wool",
+        "density": 150.0,
+        "thermal_conduc": 0.04,
+        "heat_capac": 1.03,
+        "thickness_default": 0.01,
+        "thickness_list": [],
+        "solar_absorp": 0.7
+    },
+    "8d557f4d-c7e4-11f1-b128-40c73c88cbfa": {
+        "name": "detailed_mfh_floating_screed",
+        "density": 2200.0,
+        "thermal_conduc": 1.4,
+        "heat_capac": 1.05,
+        "thickness_default": 0.01,
+        "thickness_list": [],
+        "solar_absorp": 0.7
+    },
+    "8d557f4e-c7e4-11f1-bddc-40c73c88cbfa": {
+        "name": "detailed_mfh_perforated_brick_1400",
+        "density": 1400.0,
+        "thermal_conduc": 0.6,
+        "heat_capac": 1.0,
+        "thickness_default": 0.01,
+        "thickness_list": [],
+        "solar_absorp": 0.7
+    },
+    "8d557f4f-c7e4-11f1-ab33-40c73c88cbfa": {
+        "name": "detailed_mfh_perforated_brick_900",
+        "density": 900.0,
+        "thermal_conduc": 0.42,
+        "heat_capac": 1.0,
+        "thickness_default": 0.01,
+        "thickness_list": [],
+        "solar_absorp": 0.7
+    },
+    "8d557f50-c7e4-11f1-9d83-40c73c88cbfa": {
+        "name": "detailed_mfh_exterior_plaster",
+        "density": 1600.0,
+        "thermal_conduc": 0.87,
+        "heat_capac": 1.0,
+        "thickness_default": 0.01,
+        "thickness_list": [],
+        "solar_absorp": 0.7
+    },
+    "8d557f51-c7e4-11f1-8dc9-40c73c88cbfa": {
+        "name": "detailed_mfh_clay_roof_tile",
+        "density": 2000.0,
+        "thermal_conduc": 1.0,
+        "heat_capac": 1.0,
+        "thickness_default": 0.01,
+        "thickness_list": [],
+        "solar_absorp": 0.7
+    },
+    "8d557f52-c7e4-11f1-bc4f-40c73c88cbfa": {
+        "name": "detailed_mfh_lime_gypsum_plaster",
+        "density": 1400.0,
+        "thermal_conduc": 0.7,
+        "heat_capac": 1.1,
+        "thickness_default": 0.01,
+        "thickness_list": [],
+        "solar_absorp": 0.7
+    },
+    "8d557f53-c7e4-11f1-9701-40c73c88cbfa": {
+        "name": "detailed_mfh_sand_lime_brick",
+        "density": 1800.0,
+        "thermal_conduc": 0.99,
+        "heat_capac": 1.0,
+        "thickness_default": 0.01,
+        "thickness_list": [],
+        "solar_absorp": 0.7
+    },
+    "8d557f54-c7e4-11f1-ae5f-40c73c88cbfa": {
+        "name": "detailed_mfh_gypsum_wall_board",
+        "density": 850.0,
+        "thermal_conduc": 0.28,
+        "heat_capac": 1.0,
+        "thickness_default": 0.01,
+        "thickness_list": [],
+        "solar_absorp": 0.7
+    },
+    "8d557f55-c7e4-11f1-86ff-40c73c88cbfa": {
+        "name": "detailed_mfh_plasterboard",
+        "density": 680.0,
+        "thermal_conduc": 0.25,
+        "heat_capac": 0.96,
+        "thickness_default": 0.01,
+        "thickness_list": [],
+        "solar_absorp": 0.7
+    },
+    "8d557f56-c7e4-11f1-a283-40c73c88cbfa": {
+        "name": "detailed_mfh_glass_wool",
+        "density": 15.0,
+        "thermal_conduc": 0.04,
+        "heat_capac": 0.83,
+        "thickness_default": 0.01,
+        "thickness_list": [],
+        "solar_absorp": 0.7
     }
 }
