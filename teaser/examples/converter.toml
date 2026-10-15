@@ -57,3 +57,9 @@ filename = "teaser/examples/e14_compare_hom_and_rom.py"
 func_name = "example_compare_hom_and_rom"
 md_path = "docs/source/examples"
 ipynb_path = "docs/jupyter_notebooks"
+
+[[ExampleFile]]
+filename = "teaser/examples/e15_detailed_multi_family_house.py"
+func_name = "example_detailed_multi_family_house"
+md_path = "docs/source/examples"
+ipynb_path = "docs/jupyter_notebooks"

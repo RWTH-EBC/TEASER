@@ -71,6 +71,25 @@ class Test_examples(object):
 
         prj = e11.example_export_besmod()
 
+    def test_e15_example_detailed_multi_family_house(self):
+        """Tests the executability of example 15, with the Spawn export"""
+        import os
+        import tempfile
+        from teaser.examples.e15_detailed_multi_family_house import (
+            example_detailed_multi_family_house)
+
+        with tempfile.TemporaryDirectory() as directory:
+            # Spawn's weather, only to be copied to the export, next to the
+            # project's, which the example takes from the same directory
+            import shutil
+            epw = os.path.join(directory, "weather.epw")
+            with open(epw, "w") as file:
+                file.write("LOCATION")
+            shutil.copy(Project().weather_file_path,
+                        os.path.join(directory, "weather.mos"))
+            prj = example_detailed_multi_family_house(spawn_epw_path=epw)
+        assert len(prj.buildings) == 2
+
     def test_e14_example_compare_hom_and_rom(self):
         """Tests the executability of example 14"""
         from teaser.examples.e14_compare_hom_and_rom import (

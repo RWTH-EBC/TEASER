@@ -226,9 +226,8 @@ def _multi_family_house(bldg):
         partner = surface.element[1]
         if info[zone.name].heated:
             if surface.boundary == "Outdoors":
-                orientation, _ = bldg._orientation(surface)
                 layers = own[f"{zone.name}_OuterWall_full_"
-                             f"{int(round(orientation))}"].layer
+                             f"{int(round(surface.orientation))}"].layer
             elif partner in info and not info[partner].heated:
                 layers = interfaces[(zone.name, partner)].layer
         else:
@@ -247,8 +246,8 @@ def _multi_family_house(bldg):
         if info[zone_name].heated:
             surface = next(s for s in geometry.zones[zone_name].surfaces
                            if window in s.windows)
-            orientation, _ = bldg._orientation(surface)
-            return own[f"{zone_name}_Window_{int(round(orientation))}"]
+            return own[f"{zone_name}_Window_"
+                       f"{int(round(surface.orientation))}"]
         return own[f"{zone_name}_Window"]
 
     unconditioned = {name for name, i in info.items() if not i.heated}

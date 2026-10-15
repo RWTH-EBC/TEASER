@@ -282,7 +282,9 @@ class DetailedMultiFamilyHouse(Residential):
                     interfaces.append((room, surface.element[1], spec,
                                        surface.area))
                     continue
-                orientation, tilt = self._orientation(surface)
+                # elements and windows are named after the orientation of
+                # the unrotated geometry, which rotate_building keeps
+                orientation, tilt = surface.orientation, surface.tilt
                 key = (spec, part, orientation if spec[0] == "OuterWall"
                        else None)
                 elements[key] = elements.get(key, (0.0, tilt))
@@ -300,7 +302,7 @@ class DetailedMultiFamilyHouse(Residential):
                              if orientation is not None else ()))
                 element.area = area
                 element.tilt = tilt
-                element.orientation = 0.0 if orientation is None else orientation
+                element.orientation = 0.0 if orientation is None                     else self._rotated(orientation)
                 if part == "half":
                     _halve(element)
             for orientation, area in windows.items():
@@ -308,17 +310,16 @@ class DetailedMultiFamilyHouse(Residential):
                 window.name = f"{room}_Window_{int(round(orientation))}"
                 window.area = area
                 window.tilt = 90.0
-                window.orientation = orientation
+                window.orientation = self._rotated(orientation)
 
         self._unheated_envelopes()
         self._integrate_unheated_spaces(interfaces, zone_by_name)
 
-    def _orientation(self, surface):
-        """TEASER's orientation and tilt of a surface, rotated"""
-        orientation = surface.orientation
+    def _rotated(self, orientation):
+        """TEASER's orientation of a surface of the geometry, rotated"""
         if orientation >= 0:
             orientation = rotate_orientation(orientation, self.rotation)
-        return orientation, surface.tilt
+        return orientation
 
     def _room_surface(self, room, surface):
         """The construction of a heated room's surface

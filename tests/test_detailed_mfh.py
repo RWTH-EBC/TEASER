@@ -201,6 +201,17 @@ class TestDetailedMFH(unittest.TestCase):
         orientations = {w.orientation for w in bldg.thermal_zones[0].windows}
         self.assertEqual(orientations, {270.0, 90.0})
 
+    def test_export_idf_rotated(self):
+        """a building rotated after generating it is exported, turned by
+        EnergyPlus' north axis"""
+        bldg = _mfh(number_of_floors=1)
+        bldg.rotate_building(90)
+        with tempfile.TemporaryDirectory() as directory:
+            path = export_idf(bldg, os.path.join(directory, "mfh.idf"))
+            with open(path) as file:
+                text = file.read()
+        self.assertIn("Building,\n    MFH,\n    90,", text)
+
     def test_export_idf(self):
         """the IDF has every zone, paired surfaces and whole constructions"""
         bldg = _mfh(number_of_floors=2, number_of_staircases=2,
