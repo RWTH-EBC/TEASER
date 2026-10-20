@@ -271,40 +271,51 @@ class Pool(object):
             a = None
             n = None
             m = 2
-            N = self.area * m * k
+            N = self.volume * m * k
+        elif self.pool_type == 'Whirlpool':
+            a = None
+            n = None
+            m = 10/k
+            N = self.volume * m * k
         else:
             raise ValueError(f"Unknown pool type: {self.pool_type}. Only the following pool types are supported: " \
                         f"'Swimmer_pool', 'Nonswimmer_pool', 'Multipurpose_pool', 'Child_pool'," \
-                        f" 'Multipurpose_pool', 'Diving_pool', 'Freeform_pool'")
+                        f" 'Multipurpose_pool', 'Diving_pool', 'Freeform_pool', 'Whirlpool'")
 
         # V_H: hygienic minimum volume flow
-        # V_K: hygienic minimum volume flow for children pool
         # V_B: hydraulic minimum volume flow
-        V_H = N / k          # Ratio of nominal load divided by factor k
-        V_B = 1 * self.perimeter
-        if self.pool_type == 'Child_pool' and self.area < 20:
-            V_K = m * self.volume
+        if self.pool_type == 'Swimmer_pool' \
+                or self.pool_type == 'Diving_pool' \
+                or self.pool_type == 'Nonswimmer_pool' \
+                or self.pool_type == 'Freeform_pool' \
+                or self.pool_type == 'Multipurpose_pool':
+            V_H = N / k
+            V_B = 1 * self.perimeter
+        elif self.pool_type == 'Child_pool':
+            V_H = m * self.volume
+            if V_H < 0.6 * self.area:
+                V_H = 0.6 * self.area
+            V_B = 1 * self.perimeter
+        elif self.pool_type == 'Whirlpool':
+            V_H = V_B = m * self.volume
         else:
-            V_K = 0
+            raise ValueError(f"Unknown pool type: {self.pool_type}. Only the following pool types are supported: " \
+                        f"'Swimmer_pool', 'Nonswimmer_pool', 'Multipurpose_pool', 'Child_pool'," \
+                        f" 'Multipurpose_pool', 'Diving_pool', 'Freeform_pool', 'Whirlpool'")
 
-        # volume_flow in m3/h
-        if self.perimeter > 40:
-            self.volume_flow = max(V_B, V_H) / 3600
-        elif V_K > 0:
-            self.volume_flow = min(V_H, V_K, V_B) / 3600
-        else:
-            self.volume_flow = min(V_H, V_B) / 3600
+        self.volume_flow = max(V_H, V_B) / 3600
 
-        # volume_flow_night
         if self.night_set_back_volume_flow is None:
             self.night_set_back_volume_flow = True
 
         if self.night_set_back_volume_flow == True:
             if self.volume_flow_night is None:
-                if V_B > 30:
-                    self.volume_flow_night = V_B/3600
-                else:
-                    self.volume_flow_night = 30/3600
+                if self.volume_flow >= V_B/3600:
+                    if self.perimeter > 40:
+                        self.volume_flow_night = V_B/3600
+                    else:
+                        self.volume_flow_night = 0.5 * V_H/3600
+                        # TODO: Der Volumenstrom darf V_B aber niemals unterschreiten? Oder ist das hier zulässig?
         else:
             self.volume_flow_night = self.volume_flow
 
