@@ -203,10 +203,12 @@ class Pool(object):
                 self.depth = 3.8
             elif self.pool_type == 'Freeform_pool':
                 self.depth = 0.75
+            elif self.pool_type == 'Whirlpool':
+                self.depth = 0.8
             else:
                 raise ValueError(f"Unknown pool type: {self.pool_type}. Only the following pool types are supported: " \
                         f"'Swimmer_pool', 'Nonswimmer_pool', 'Multipurpose_pool', 'Child_pool'," \
-                        f" 'Multipurpose_pool', 'Diving_pool', 'Freeform_pool'")
+                        f" 'Multipurpose_pool', 'Diving_pool', 'Freeform_pool', 'Whirlpool'")
 
         # Typical temperature for pools according to DIN 19643 and VDI 2089
         if self.temperature is None:
@@ -222,10 +224,12 @@ class Pool(object):
                 self.temperature = 301.15
             elif self.pool_type == 'Freeform_pool':
                 self.temperature = 303.15
+            elif self.pool_type == 'Whirlpool':
+                self.temperature = 309.15
             else:
                 raise ValueError(f"Unknown pool type: {self.pool_type}. Only the following pool types are supported: " \
                         f"'Swimmer_pool', 'Nonswimmer_pool', 'Multipurpose_pool', 'Child_pool'," \
-                        f" 'Multipurpose_pool', 'Diving_pool', 'Freeform_pool'")
+                        f" 'Multipurpose_pool', 'Diving_pool', 'Freeform_pool', 'Whirlpool'")
 
 
         if self.volume is None:
