@@ -49,6 +49,8 @@ class Pool(object):
         Pool temperature in K.
     temperature_air : float
         Air temperature in K.
+    abs_humidity_air : float
+        Absolute humidity of the hall air in kg/kg (design value according to VDI 2089).
     filter_type : str
         Information on used filter type within the water treatment system.
         Possible input: '"Activated carbon filter with ozone', 'Two-layer filter with ozone',
@@ -57,6 +59,8 @@ class Pool(object):
     filter_combination : str
         Information on used filter combination within the water treatment system.
         Possible input: 'without_ozone', 'with_ozone', 'with_bromine', 'with_ultrafiltration'
+    filter_size : float
+        Size of the filter for the pool in m^2.
     water_type : str
         Information on water usage within the pool.
         Possible inputs: 'Fresh water" or any other
@@ -137,8 +141,10 @@ class Pool(object):
         self.depth = None
         self.temperature = None
         self.temperature_air = 303.15+2
+        self.abs_humidity_air = 0.0143
         self.filter_type = None
         self.filter_combination = None
+        self.filter_size = None
         self.water_type = None
         self.volume_flow = None
         self.night_set_back_volume_flow = None
@@ -203,10 +209,12 @@ class Pool(object):
                 self.depth = 3.8
             elif self.pool_type == 'Freeform_pool':
                 self.depth = 0.75
+            elif self.pool_type == 'Whirlpool':
+                self.depth = 0.8
             else:
                 raise ValueError(f"Unknown pool type: {self.pool_type}. Only the following pool types are supported: " \
                         f"'Swimmer_pool', 'Nonswimmer_pool', 'Multipurpose_pool', 'Child_pool'," \
-                        f" 'Multipurpose_pool', 'Diving_pool', 'Freeform_pool'")
+                        f" 'Multipurpose_pool', 'Diving_pool', 'Freeform_pool', 'Whirlpool'")
 
         # Typical temperature for pools according to DIN 19643 and VDI 2089
         if self.temperature is None:
@@ -222,10 +230,12 @@ class Pool(object):
                 self.temperature = 301.15
             elif self.pool_type == 'Freeform_pool':
                 self.temperature = 303.15
+            elif self.pool_type == 'Whirlpool':
+                self.temperature = 309.15
             else:
                 raise ValueError(f"Unknown pool type: {self.pool_type}. Only the following pool types are supported: " \
                         f"'Swimmer_pool', 'Nonswimmer_pool', 'Multipurpose_pool', 'Child_pool'," \
-                        f" 'Multipurpose_pool', 'Diving_pool', 'Freeform_pool'")
+                        f" 'Multipurpose_pool', 'Diving_pool', 'Freeform_pool', 'Whirlpool'")
 
 
         if self.volume is None:
@@ -267,40 +277,51 @@ class Pool(object):
             a = None
             n = None
             m = 2
-            N = self.area * m * k
+            N = self.volume * m * k
+        elif self.pool_type == 'Whirlpool':
+            a = None
+            n = None
+            m = 10/k
+            N = self.volume * m * k
         else:
             raise ValueError(f"Unknown pool type: {self.pool_type}. Only the following pool types are supported: " \
                         f"'Swimmer_pool', 'Nonswimmer_pool', 'Multipurpose_pool', 'Child_pool'," \
-                        f" 'Multipurpose_pool', 'Diving_pool', 'Freeform_pool'")
+                        f" 'Multipurpose_pool', 'Diving_pool', 'Freeform_pool', 'Whirlpool'")
 
         # V_H: hygienic minimum volume flow
-        # V_K: hygienic minimum volume flow for children pool
         # V_B: hydraulic minimum volume flow
-        V_H = N / k          # Ratio of nominal load divided by factor k
-        V_B = 1 * self.perimeter
-        if self.pool_type == 'Child_pool' and self.area < 20:
-            V_K = m * self.volume
+        if self.pool_type == 'Swimmer_pool' \
+                or self.pool_type == 'Diving_pool' \
+                or self.pool_type == 'Nonswimmer_pool' \
+                or self.pool_type == 'Freeform_pool' \
+                or self.pool_type == 'Multipurpose_pool':
+            V_H = N / k
+            V_B = 1 * self.perimeter
+        elif self.pool_type == 'Child_pool':
+            V_H = m * self.volume
+            if V_H < 0.6 * self.area:
+                V_H = 0.6 * self.area
+            V_B = 1 * self.perimeter
+        elif self.pool_type == 'Whirlpool':
+            V_H = V_B = m * self.volume
         else:
-            V_K = 0
+            raise ValueError(f"Unknown pool type: {self.pool_type}. Only the following pool types are supported: " \
+                        f"'Swimmer_pool', 'Nonswimmer_pool', 'Multipurpose_pool', 'Child_pool'," \
+                        f" 'Multipurpose_pool', 'Diving_pool', 'Freeform_pool', 'Whirlpool'")
 
-        # volume_flow in m3/h
-        if self.perimeter > 40:
-            self.volume_flow = max(V_B, V_H) / 3600
-        elif V_K > 0:
-            self.volume_flow = min(V_H, V_K, V_B) / 3600
-        else:
-            self.volume_flow = min(V_H, V_B) / 3600
+        self.volume_flow = max(V_H, V_B) / 3600
 
-        # volume_flow_night
         if self.night_set_back_volume_flow is None:
             self.night_set_back_volume_flow = True
 
         if self.night_set_back_volume_flow == True:
             if self.volume_flow_night is None:
-                if V_B > 30:
-                    self.volume_flow_night = V_B/3600
-                else:
-                    self.volume_flow_night = 30/3600
+                if self.volume_flow >= V_B/3600:
+                    if self.perimeter > 40:
+                        self.volume_flow_night = V_B/3600
+                    else:
+                        self.volume_flow_night = 0.5 * V_H/3600
+                        # TODO: Der Volumenstrom darf V_B aber niemals unterschreiten? Oder ist das hier zulässig?
         else:
             self.volume_flow_night = self.volume_flow
 
@@ -309,50 +330,53 @@ class Pool(object):
             self.filter_type = 'Open suction filter'
         if self.water_type is None:
             self.water_type = "Fresh water"
-        # help parameter v_f
-        if self.filter_type == 'Activated carbon filter with ozone' \
-            or self.filter_type == 'Two-layer filter with ozone':
-            v_f = 50
-        elif self.filter_type == 'Open quick filter':
-            v_f = 15
-        elif self.filter_type == 'Closed quick filter' \
-            or self.filter_type == 'Closed sorption filter' \
-            or self.filter_type == 'Open suction filter' \
-            or self.filter_type == 'Quantozone filter' \
-            or self.filter_type == 'Quartz gravel filter' \
-            or self.filter_type == 'Two-layer filter':
-            if self.water_type == 'Fresh water':
-                v_f = 30/3600
+        # help parameter V_fs
+        if self.filter_size is None:
+            if self.filter_type == 'Activated carbon filter with ozone' \
+                or self.filter_type == 'Two-layer filter with ozone':
+                v_f = 50/3600
+            elif self.filter_type == 'Open quick filter':
+                v_f = 15/3600
+            elif self.filter_type == 'Closed quick filter' \
+                or self.filter_type == 'Closed sorption filter' \
+                or self.filter_type == 'Open suction filter' \
+                or self.filter_type == 'Quantozone filter' \
+                or self.filter_type == 'Quartz gravel filter' \
+                or self.filter_type == 'Two-layer filter':
+                if self.water_type == 'Fresh water':
+                    v_f = 30/3600
+                else:
+                    v_f = 20/3600
             else:
-                v_f = 20/3600
-        else:
-            raise ValueError(f"Unknown filter type: {self.filter_type}. "
-                             f"Only the following filter types are supported: "
-                             f"'Activated carbon filter with ozone','Two-layer filter with ozone',"
-                             f"'Open quick filter','Closed quick filter','Closed sorption filter',"
-                             f"'Quantozone filter','Quartz gravel filter','Two-layer filter'")
+                raise ValueError(f"Unknown filter type: {self.filter_type}. "
+                                f"Only the following filter types are supported: "
+                                f"'Activated carbon filter with ozone','Two-layer filter with ozone',"
+                                f"'Open quick filter','Closed quick filter','Closed sorption filter',"
+                                f"'Quantozone filter','Quartz gravel filter','Two-layer filter'")
 
-        # help parameter a_filter
-        a_filter = self.volume_flow / v_f
+            # help parameter a_filter
+            self.filter_size = self.volume_flow / v_f
+        V_fs = self.filter_size * 5     # TODO laut DIN muss V_fs nur >= 4*Filtergröße sein
 
         # help parameter V_v
         if a is not None:
             V_v = 0.075 * self.area / a
         else:
-            V_v = None
+            V_v = 0
 
         # help parameter V_w
         V_w = 0.052 * self.area * 10**(-0.144 * self.volume_flow/self.perimeter)
 
-        # help parameter V_fs
-        V_fs = a_filter * 5
-
         # Calculation of volume_storage
         self.volume_storage = V_v + V_w + V_fs
+        if self.pool_type == 'Whirlpool':
+            self.volume_storage = max(self.volume_storage, 2 * self.volume)
 
         # Calculation of beta_in_use according to VDI 2089 in m/s
         if self.pool_type == 'Freeform_pool' or self.pool_type == 'Multipurpose_pool':
             self.beta_in_use = 40/3600
+        elif self.pool_type == 'Whirlpool':
+            self.beta_in_use = 50/3600       # Annahme: Whirlpool etnspricht Wellenbad
         else:
             if self.depth > 1.35:
                 self.beta_in_use = 28/3600
@@ -364,7 +388,7 @@ class Pool(object):
             self.num_filter_rinses = 2
             # avereage number of visitors KOK
         if self.num_visitors is None:
-            self.num_visitors = round(self.area ** 0.58, 0)
+            self.num_visitors = round(self.area ** 0.58, 0)     # TODO: ist das Repräsentativ für egal welchen Pool Type? Berechnet Besucher pro Stunde aber wir brauchen pro Tag (siehe auch Docstring)
         m_visitors = 0.03 * 995.65 * self.num_visitors * 1/(24*3600)
         m_filter = 995.65 * self.num_filter_rinses * V_fs * 1/(7*24*3600)
         self.m_flow_waste_water = max(m_visitors, m_filter)
@@ -372,13 +396,16 @@ class Pool(object):
         # Calculation of evaporation mass flow at maximal occupancy according to VDI 2089 in kg/h
         R_D = 461.52   # specific gas constant for steam
         aritmethic_temperature = (self.temperature + self.temperature_air) /2
-        # saturation pressure in Pa
-        p_sat_air_temp = self.calc_sat_pressure(self.temperature_air)
+        # saturation pressure at pool temperature in Pa
         p_sat_pool_temp = self.calc_sat_pressure(self.temperature)
+        # partial pressure of water vapour in the hall air in Pa
+        p_air = 101325
+        p_vap_air = self.abs_humidity_air * p_air / (0.622 + self.abs_humidity_air)
 
-
-        self.m_flow_evap_pool_used = -((self.beta_in_use*3600)/(R_D*aritmethic_temperature))* \
-                                     (p_sat_pool_temp-p_sat_air_temp)*self.area
+        # condensation on the pool surface is not modelled
+        self.m_flow_evap_pool_used = max(
+            ((self.beta_in_use*3600)/(R_D*aritmethic_temperature))
+            * (p_sat_pool_temp - p_vap_air) * self.area, 0)
         #print('self.m_flow_evap_pool_used', self.m_flow_evap_pool_used)
 
         # heat recovery rinsing wastewater
