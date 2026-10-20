@@ -57,6 +57,8 @@ class Pool(object):
     filter_combination : str
         Information on used filter combination within the water treatment system.
         Possible input: 'without_ozone', 'with_ozone', 'with_bromine', 'with_ultrafiltration'
+    filter_size : float
+        Size of the filter for the pool in m^2.
     water_type : str
         Information on water usage within the pool.
         Possible inputs: 'Fresh water" or any other
@@ -139,6 +141,7 @@ class Pool(object):
         self.temperature_air = 303.15+2
         self.filter_type = None
         self.filter_combination = None
+        self.filter_size = None
         self.water_type = None
         self.volume_flow = None
         self.night_set_back_volume_flow = None
@@ -324,46 +327,47 @@ class Pool(object):
             self.filter_type = 'Open suction filter'
         if self.water_type is None:
             self.water_type = "Fresh water"
-        # help parameter v_f
-        if self.filter_type == 'Activated carbon filter with ozone' \
-            or self.filter_type == 'Two-layer filter with ozone':
-            v_f = 50
-        elif self.filter_type == 'Open quick filter':
-            v_f = 15
-        elif self.filter_type == 'Closed quick filter' \
-            or self.filter_type == 'Closed sorption filter' \
-            or self.filter_type == 'Open suction filter' \
-            or self.filter_type == 'Quantozone filter' \
-            or self.filter_type == 'Quartz gravel filter' \
-            or self.filter_type == 'Two-layer filter':
-            if self.water_type == 'Fresh water':
-                v_f = 30/3600
+        # help parameter V_fs
+        if self.filter_size is None:
+            if self.filter_type == 'Activated carbon filter with ozone' \
+                or self.filter_type == 'Two-layer filter with ozone':
+                v_f = 50/3600
+            elif self.filter_type == 'Open quick filter':
+                v_f = 15/3600
+            elif self.filter_type == 'Closed quick filter' \
+                or self.filter_type == 'Closed sorption filter' \
+                or self.filter_type == 'Open suction filter' \
+                or self.filter_type == 'Quantozone filter' \
+                or self.filter_type == 'Quartz gravel filter' \
+                or self.filter_type == 'Two-layer filter':
+                if self.water_type == 'Fresh water':
+                    v_f = 30/3600
+                else:
+                    v_f = 20/3600
             else:
-                v_f = 20/3600
-        else:
-            raise ValueError(f"Unknown filter type: {self.filter_type}. "
-                             f"Only the following filter types are supported: "
-                             f"'Activated carbon filter with ozone','Two-layer filter with ozone',"
-                             f"'Open quick filter','Closed quick filter','Closed sorption filter',"
-                             f"'Quantozone filter','Quartz gravel filter','Two-layer filter'")
+                raise ValueError(f"Unknown filter type: {self.filter_type}. "
+                                f"Only the following filter types are supported: "
+                                f"'Activated carbon filter with ozone','Two-layer filter with ozone',"
+                                f"'Open quick filter','Closed quick filter','Closed sorption filter',"
+                                f"'Quantozone filter','Quartz gravel filter','Two-layer filter'")
 
-        # help parameter a_filter
-        a_filter = self.volume_flow / v_f
+            # help parameter a_filter
+            self.filter_size = self.volume_flow / v_f
+        V_fs = self.filter_size * 5     # TODO laut DIN muss V_fs nur >= 4*Filtergröße sein
 
         # help parameter V_v
         if a is not None:
             V_v = 0.075 * self.area / a
         else:
-            V_v = None
+            V_v = 0
 
         # help parameter V_w
         V_w = 0.052 * self.area * 10**(-0.144 * self.volume_flow/self.perimeter)
 
-        # help parameter V_fs
-        V_fs = a_filter * 5
-
         # Calculation of volume_storage
         self.volume_storage = V_v + V_w + V_fs
+        if self.pool_type == 'Whirlpool':
+            self.volume_storage = max(self.volume_storage, 2 * self.volume)
 
         # Calculation of beta_in_use according to VDI 2089 in m/s
         if self.pool_type == 'Freeform_pool' or self.pool_type == 'Multipurpose_pool':
