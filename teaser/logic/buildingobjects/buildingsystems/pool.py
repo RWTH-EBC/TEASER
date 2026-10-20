@@ -49,6 +49,8 @@ class Pool(object):
         Pool temperature in K.
     temperature_air : float
         Air temperature in K.
+    abs_humidity_air : float
+        Absolute humidity of the hall air in kg/kg (design value according to VDI 2089).
     filter_type : str
         Information on used filter type within the water treatment system.
         Possible input: '"Activated carbon filter with ozone', 'Two-layer filter with ozone',
@@ -139,6 +141,7 @@ class Pool(object):
         self.depth = None
         self.temperature = None
         self.temperature_air = 303.15+2
+        self.abs_humidity_air = 0.0143
         self.filter_type = None
         self.filter_combination = None
         self.filter_size = None
@@ -372,6 +375,8 @@ class Pool(object):
         # Calculation of beta_in_use according to VDI 2089 in m/s
         if self.pool_type == 'Freeform_pool' or self.pool_type == 'Multipurpose_pool':
             self.beta_in_use = 40/3600
+        elif self.pool_type == 'Whirlpool':
+            self.beta_in_use = 50/3600       # Annahme: Whirlpool etnspricht Wellenbad
         else:
             if self.depth > 1.35:
                 self.beta_in_use = 28/3600
@@ -383,7 +388,7 @@ class Pool(object):
             self.num_filter_rinses = 2
             # avereage number of visitors KOK
         if self.num_visitors is None:
-            self.num_visitors = round(self.area ** 0.58, 0)
+            self.num_visitors = round(self.area ** 0.58, 0)     # TODO: ist das Repräsentativ für egal welchen Pool Type? Berechnet Besucher pro Stunde aber wir brauchen pro Tag (siehe auch Docstring)
         m_visitors = 0.03 * 995.65 * self.num_visitors * 1/(24*3600)
         m_filter = 995.65 * self.num_filter_rinses * V_fs * 1/(7*24*3600)
         self.m_flow_waste_water = max(m_visitors, m_filter)
@@ -391,13 +396,16 @@ class Pool(object):
         # Calculation of evaporation mass flow at maximal occupancy according to VDI 2089 in kg/h
         R_D = 461.52   # specific gas constant for steam
         aritmethic_temperature = (self.temperature + self.temperature_air) /2
-        # saturation pressure in Pa
-        p_sat_air_temp = self.calc_sat_pressure(self.temperature_air)
+        # saturation pressure at pool temperature in Pa
         p_sat_pool_temp = self.calc_sat_pressure(self.temperature)
+        # partial pressure of water vapour in the hall air in Pa
+        p_air = 101325
+        p_vap_air = self.abs_humidity_air * p_air / (0.622 + self.abs_humidity_air)
 
-
-        self.m_flow_evap_pool_used = -((self.beta_in_use*3600)/(R_D*aritmethic_temperature))* \
-                                     (p_sat_pool_temp-p_sat_air_temp)*self.area
+        # condensation on the pool surface is not modelled
+        self.m_flow_evap_pool_used = max(
+            ((self.beta_in_use*3600)/(R_D*aritmethic_temperature))
+            * (p_sat_pool_temp - p_vap_air) * self.area, 0)
         #print('self.m_flow_evap_pool_used', self.m_flow_evap_pool_used)
 
         # heat recovery rinsing wastewater
