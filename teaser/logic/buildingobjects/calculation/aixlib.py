@@ -334,7 +334,7 @@ class AixLib(object):
         path = os.path.join(path, self.file_opening_hours)
 
         export = pd.DataFrame(
-            index=pd.date_range("2019-01-01 00:00:00", periods=25, freq="H")
+            index=pd.date_range("2019-01-01 00:00:00", periods=25, freq="h")
             .to_series()
             .dt.strftime("%m-%d %H:%M:%S")
         )
