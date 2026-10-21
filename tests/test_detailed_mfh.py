@@ -155,6 +155,60 @@ class TestDetailedMFH(unittest.TestCase):
         with self.assertRaises(ValueError):
             bldg.generate_archetype()
 
+    def test_single_zone_rom(self):
+        """zoning "building" exports against TEASERThermalSingleZone, the
+        windows and stand-ins radiate with about their own area"""
+        prj = Project()
+        prj.name = "MFHSingleZone"
+        bldg = _mfh(prj, number_of_floors=2)
+        prj.used_library_calc = "AixLib"
+        prj.number_of_elements_calc = 4
+        prj.calc_all_buildings()
+        self.assertTrue(bldg.exports_single_zone_rom)
+        zone = bldg.thermal_zones[0]
+        self.assertAlmostEqual(
+            zone.ratio_win_area_ow + zone.ratio_win_area_iw
+            + zone.ratio_win_area_top_floor + zone.ratio_win_area_bottom_floor,
+            1.0)
+        area_roof = sum(element.area for element in zone.rooftops)
+        coupled = (zone.ratio_ow_area_top_floor
+                   * sum(element.area for element in zone.outer_walls)
+                   + zone.ratio_iw_area_top_floor
+                   * sum(element.area for element in
+                         zone.inner_walls + zone.floors + zone.ceilings))
+        self.assertLess(coupled, area_roof)
+        self.assertGreater(coupled, 0.9 * area_roof)
+        # the basement's stand-ins are the ground floor group
+        area_floor = sum(element.area for element in zone.ground_floors)
+        self.assertGreater(area_floor, 0)
+        coupled = (zone.ratio_ow_area_bottom_floor
+                   * sum(element.area for element in zone.outer_walls)
+                   + zone.ratio_iw_area_bottom_floor
+                   * sum(element.area for element in
+                         zone.inner_walls + zone.floors + zone.ceilings))
+        self.assertLess(coupled, area_floor)
+        self.assertGreater(coupled, 0.8 * area_floor)
+        split = np.array(zone.split_factor_sol_rad)
+        self.assertEqual(split.shape, (5, len(zone.model_attr.orientation_facade)))
+        np.testing.assert_allclose(split.sum(axis=0), 1.0)
+        self.assertTrue((split[3] > 0).all())
+        with tempfile.TemporaryDirectory() as directory:
+            path = prj.export_besmod(
+                examples=["TEASERHeatLoadCalculation"],
+                THydSup_nominal=328.15, path=os.path.join(directory, "out"))
+            package = os.path.join(path, bldg.name)
+            with open(os.path.join(package, bldg.name + ".mo")) as file:
+                building = file.read()
+            with open(os.path.join(package, bldg.name + "_DataBase",
+                                   f"{bldg.name}_{zone.name}.mo")) as file:
+                record = file.read()
+        self.assertIn("extends BESMod.Systems.Demand.Building."
+                      "TEASERThermalSingleZone(", building)
+        self.assertIn("TotalRFloor = ", record)
+        bldg.zoning = "flat"
+        bldg.generate_archetype()
+        self.assertFalse(bldg.exports_single_zone_rom)
+
     def test_halves(self):
         """the walls and slabs between heated rooms are halved"""
         bldg = _mfh(number_of_floors=2)
@@ -167,19 +221,33 @@ class TestDetailedMFH(unittest.TestCase):
     def test_temperature_factors(self):
         """the stand-ins carry the heat balance of the unheated spaces"""
         bldg = _mfh()
-        for (room, space), factor in bldg.temperature_factors.items():
-            self.assertTrue(0 < factor < 1)
+        zone = bldg.thermal_zones[0]
         temperatures = bldg.unheated_temperatures
         self.assertTrue(temperatures["Attic"] < temperatures["Basement"]
                         < temperatures["Staircase1"] < 293.15)
-        zone = bldg.thermal_zones[0]
-        stand_ins = {e.name: e for e in zone.rooftops}
+        # the basement is colder than the ground: b towards it above 1
+        self.assertLess(temperatures["Basement"], zone.t_ground)
+        for (room, space), factor in bldg.temperature_factors.items():
+            self.assertTrue(0 < factor < (1.2 if space == "Basement" else 1))
+        rooftops = {e.name: e for e in zone.rooftops}
+        ground_floors = {e.name: e for e in zone.ground_floors}
         for (room, space, spec), element in bldg.interface_elements.items():
-            stand_in = stand_ins[element.name]
+            if space == "Basement":
+                stand_in, boundary = ground_floors[element.name], "Ground"
+                t_boundary = zone.t_ground
+            else:
+                stand_in, boundary = rooftops[element.name], "Outdoors"
+                t_boundary = zone.t_outside
             self.assertAlmostEqual(
-                _u_value(stand_in, "Outdoors"),
+                _u_value(stand_in, boundary),
                 bldg.temperature_factors[(room, space)]
                 * _u_value(element, "Inside"))
+            # the same heat flow as the element to the unheated space
+            t_room = bldg.room_t_set_nominal[bldg.geometry.info[room].room_type]
+            self.assertAlmostEqual(
+                _u_value(stand_in, boundary) * (t_room - t_boundary),
+                _u_value(element, "Inside")
+                * (t_room - temperatures[space]))
             self.assertEqual(stand_in.layer[-1].material.solar_absorp, 0.0)
 
     def test_years(self):

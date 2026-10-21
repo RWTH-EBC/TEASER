@@ -1,5 +1,7 @@
 """Detailed multi family house archetype"""
 
+import warnings
+
 import numpy as np
 
 import teaser.data.utilities as datahandling
@@ -30,6 +32,15 @@ _RHO_C_AIR = 0.34
 # exactly the outside air temperature, as the temperature factor assumes
 _STAND_IN_OUTER_CONVECTION = 20.0
 _STAND_IN_OUTER_RADIATION = 1e-9
+# Smallest extra resistance of a stand-in [m2K/W], i.e. of its layer
+_MIN_EXTRA_RESISTANCE = 1e-6
+
+# The five groups of interior surfaces of the single-zone ROM, in the order
+# BESMod's TEASERBuildingSingleZone.FourElements lists them in AArraySol:
+# {ATotExt, ATotWin, AInt, AFloor, ARoof}. splitFactorSolRad has one row per
+# group.
+_ROM_SURFACE_GROUPS = ("OuterWall", "Window", "InnerWall", "GroundFloor",
+                       "Roof")
 
 
 def _zone_per_building(info):
@@ -64,8 +75,10 @@ class DetailedMultiFamilyHouse(Residential):
     from the rooms' three-dimensional geometry: the outer walls and windows
     with their orientations, the walls and slabs between heated rooms as
     halves on either side and, where a heated room adjoins an unheated
-    space, a stand-in to the outside air. Its U-value is the element's,
-    times the temperature factor b = (t_room - t_u) / (t_room - t_outside)
+    space, a stand-in to the outside air (a Rooftop), or for the basement
+    to the ground (a GroundFloor). Its U-value is the element's, times the
+    temperature factor b = (t_room - t_u) / (t_room - t_outside), with
+    t_ground instead of t_outside for the basement,
     of the unheated space's steady-state heat balance at the design
     temperatures - with the heated rooms, the outside air (envelope and air
     change), the ground and the other unheated spaces. The geometry itself
@@ -126,7 +139,11 @@ class DetailedMultiFamilyHouse(Residential):
     geometry : Geometry
         The building's zones, built by generate_archetype.
     temperature_factors : dict
-        b of each heated room towards each unheated space it adjoins.
+        b of each heated room towards each unheated space it adjoins,
+        towards t_ground for the basement and t_outside for the others.
+    room_of_element : dict
+        The heated room of each element and window of the thermal zones,
+        by name.
     """
 
     def __init__(
@@ -171,6 +188,7 @@ class DetailedMultiFamilyHouse(Residential):
         self.unheated_room_envelope_elements = {}
         self.interface_elements = {}
         self.surface_constructions = {}
+        self.room_of_element = {}
 
     @property
     def construction_data(self):
@@ -188,6 +206,13 @@ class DetailedMultiFamilyHouse(Residential):
     @number_of_floors.setter
     def number_of_floors(self, value):
         self._number_of_floors = value
+
+    @property
+    def exports_single_zone_rom(self):
+        """A single zone is exported against BESMod's
+        TEASERThermalSingleZone, with the interior heat transfer parameters
+        of calc_rom_inner_heat_transfer_parameters"""
+        return self.thermal_zones is not None and len(self.thermal_zones) == 1
 
     @property
     def number_of_flats(self):
@@ -243,6 +268,7 @@ class DetailedMultiFamilyHouse(Residential):
         self.unheated_room_envelope_elements = {}
         self.interface_elements = {}
         self.surface_constructions = {}
+        self.room_of_element = {}
         self.room_volumes = {name: float(zone.volume)
                              for name, zone in geometry.zones.items()}
         self.zone_of_room = {room: self._zone_name(info[room])
@@ -302,6 +328,7 @@ class DetailedMultiFamilyHouse(Residential):
                              if orientation is not None else ()))
                 element.area = area
                 element.tilt = tilt
+                self.room_of_element[element.name] = room
                 element.orientation = 0.0 if orientation is None                     else self._rotated(orientation)
                 if part == "half":
                     _halve(element)
@@ -311,6 +338,7 @@ class DetailedMultiFamilyHouse(Residential):
                 window.area = area
                 window.tilt = 90.0
                 window.orientation = self._rotated(orientation)
+                self.room_of_element[window.name] = room
 
         self._unheated_envelopes()
         self._integrate_unheated_spaces(interfaces, zone_by_name)
@@ -486,11 +514,20 @@ class DetailedMultiFamilyHouse(Residential):
         self.temperature_factors = {}
         for (room, space, spec), element in self.interface_elements.items():
             t_room = self.room_t_set_nominal[info[room].room_type]
+            # the basement follows the ground more than the outside air, so
+            # its stand-ins are ground floors towards t_ground
+            ground = info[space].kind == "basement"
+            t_boundary = t_ground if ground else t_outside
+            if t_room <= t_boundary:
+                raise ValueError(
+                    f"The design temperature of {room} must be above the "
+                    f"{'ground' if ground else 'outside'} temperature.")
             factor = (t_room - self.unheated_temperatures[space]) / (
-                t_room - t_outside)
+                t_room - t_boundary)
             self.temperature_factors[(room, space)] = factor
             _stand_in(element, factor,
-                      zone_by_name[self.zone_of_room[room]])
+                      zone_by_name[self.zone_of_room[room]], ground=ground)
+            self.room_of_element[element.name] = room
 
     def calc_building_parameter(self, number_of_elements=None,
                                 merge_windows=None, used_library=None):
@@ -517,6 +554,165 @@ class DetailedMultiFamilyHouse(Residential):
         self.area_rt = sum(surface.area
                            for surface in self.geometry.zones["Attic"].surfaces
                            if surface.kind == "Roof")
+        if self.exports_single_zone_rom:
+            self.calc_rom_inner_heat_transfer_parameters()
+
+    def _areas_by_room(self, elements):
+        """{room: total area [m2]} of elements, by heated room"""
+        areas = {room: 0.0 for room in self.geometry.heated_rooms}
+        for element in elements:
+            areas[self.room_of_element[element.name]] += element.area
+        return areas
+
+    def calc_rom_inner_heat_transfer_parameters(self):
+        """Parameterizes the single-zone ROM's interior heat transfer from
+        the rooms
+
+        AixLib's reduced order model couples each pair of its surface
+        groups by long wave radiation with min(A_i, A_j) * hRad. A small
+        group such as the windows or the stand-ins (the roof group of the
+        staircases and the attic, the ground floor group of the basement)
+        is so coupled with its full area to each of the other groups, several
+        times as much as a surface radiates. BESMod's single-zone model
+        (Systems.Demand.Building.TEASERThermalSingleZone) scales the areas
+        of these couplings by ratios, which are set here so that each
+        window and stand-in exchanges radiation with the surfaces of its
+        own room in the ratio of their areas, and with hRad times its own
+        area in total, as in the room-wise EnergyPlus model.
+
+        - ratioWinArea*: the share of the other surfaces of the windows'
+          rooms that each group has, weighted by the window areas,
+        - ratio*AreaTopFloor and ratio*AreaBottomFloor: the same for the
+          roof group (the stand-ins) and the ground floor, as the coupled
+          area over the group's area,
+        - splitFactorSolRad: the solar radiation entering through the
+          windows of each orientation reaches the surfaces of the rooms it
+          enters, in the ratio of their areas, except the windows it came
+          through, the walls they sit in and the ceilings (incl. the
+          stand-ins of the attic).
+
+        The coupling of the outer walls with the inner walls,
+        min(ATotExt, AInt) * hRad, has no ratio and stays as it is.
+        """
+        if len(self.thermal_zones) != 1:
+            raise AttributeError(
+                "The single-zone ROM parameters are only defined for a "
+                "single thermal zone (zoning 'building').")
+        zone = self.thermal_zones[0]
+        rooms = self.geometry.heated_rooms
+        elements = {
+            "OuterWall": zone.outer_walls,
+            "Window": zone.windows,
+            "InnerWall": zone.inner_walls + zone.floors + zone.ceilings,
+            "GroundFloor": zone.ground_floors,
+            "Roof": zone.rooftops,
+        }
+        areas = {group: self._areas_by_room(group_elements)
+                 for group, group_elements in elements.items()}
+        totals = {group: sum(areas[group].values()) for group in areas}
+
+        def seen(source):
+            """{group: share of the other surfaces in the rooms of the
+            source group's surfaces}, weighted by the source's areas"""
+            shares = {group: 0.0 for group in areas}
+            for room in rooms:
+                area = areas[source][room]
+                others = sum(areas[group][room] for group in areas) - area
+                if not area or not others:
+                    continue
+                for group in areas:
+                    if group != source:
+                        shares[group] += (area / totals[source]
+                                          * areas[group][room] / others)
+            return shares
+
+        def coupled(source, group):
+            """The area of group the source group is coupled with, over
+            group's area"""
+            if not totals[group]:
+                return 0.0
+            return totals[source] * seen(source)[group] / totals[group]
+
+        window = seen("Window")
+        zone.ratio_win_area_ow = window["OuterWall"]
+        zone.ratio_win_area_iw = window["InnerWall"]
+        zone.ratio_win_area_top_floor = window["Roof"]
+        zone.ratio_win_area_bottom_floor = window["GroundFloor"]
+        zone.ratio_ow_area_top_floor = coupled("Roof", "OuterWall")
+        zone.ratio_iw_area_top_floor = coupled("Roof", "InnerWall")
+        zone.ratio_ow_area_bottom_floor = coupled("GroundFloor", "OuterWall")
+        zone.ratio_iw_area_bottom_floor = coupled("GroundFloor", "InnerWall")
+        # every stand-in faces the zone with its whole area
+        zone.roof_area_attic_factor = 1.0
+        self.calc_split_factor_sol_rad(zone, elements, areas)
+
+    def calc_split_factor_sol_rad(self, zone, elements, areas):
+        """Derives splitFactorSolRad room-wise, see
+        calc_rom_inner_heat_transfer_parameters
+
+        An orientation without any window keeps the whole-zone area split.
+        """
+        ceiling_stand_ins = {
+            element.name for (_, _, spec), element
+            in self.interface_elements.items() if spec[0] == "Ceiling"}
+        solar = {**areas,
+                 "InnerWall": self._areas_by_room(
+                     zone.inner_walls + zone.floors),
+                 "Roof": self._areas_by_room(
+                     [element for element in zone.rooftops
+                      if element.name not in ceiling_stand_ins])}
+        groups = list(zip(zone.model_attr.orientation_facade,
+                          zone.model_attr.tilt_facade))
+        rooms = self.geometry.heated_rooms
+
+        def by_room_and_group(group_elements):
+            result = {(room, group): 0.0 for room in rooms for group in groups}
+            for element in group_elements:
+                key = (self.room_of_element[element.name],
+                       (element.orientation, element.tilt))
+                if key in result:
+                    result[key] += element.area
+            return result
+
+        windows = by_room_and_group(elements["Window"])
+        host_walls = by_room_and_group(elements["OuterWall"])
+        zone_totals = {name: sum(areas[name].values())
+                       for name in _ROM_SURFACE_GROUPS}
+        split_factors = [[] for _ in _ROM_SURFACE_GROUPS]
+        for group in groups:
+            total_window = sum(windows[(room, group)] for room in rooms)
+            if not total_window:
+                total = sum(zone_totals.values())
+                for index, name in enumerate(_ROM_SURFACE_GROUPS):
+                    split_factors[index].append(
+                        zone_totals[name] / total if total else 0.0)
+                continue
+            factors = [0.0] * len(_ROM_SURFACE_GROUPS)
+            for room in rooms:
+                window, host = windows[(room, group)], host_walls[(room, group)]
+                if not window:
+                    continue
+                reached = {name: solar[name][room]
+                           for name in _ROM_SURFACE_GROUPS}
+                reached["OuterWall"] -= host
+                reached["Window"] -= window
+                reachable = sum(reached.values())
+                if reachable <= 0:
+                    continue
+                for index, name in enumerate(_ROM_SURFACE_GROUPS):
+                    factors[index] += (reached[name] / reachable
+                                       * window / total_window)
+            for index, factor in enumerate(factors):
+                split_factors[index].append(factor)
+        # as AixLib's splitFacVal, the rows of the groups with an area come
+        # first and the rest are zero, e.g. for the missing ground floor;
+        # BESMod's model takes one row per group with an area
+        present = [index for index, name in enumerate(_ROM_SURFACE_GROUPS)
+                   if zone_totals[name] > 0]
+        zone.split_factor_sol_rad = (
+            [split_factors[index] for index in present]
+            + [[0.0] * len(groups)
+               for _ in range(len(_ROM_SURFACE_GROUPS) - len(present))])
 
     def calc_room_heat_loads(self):
         """Static heat load of each heated room [W]
@@ -524,7 +720,7 @@ class DetailedMultiFamilyHouse(Residential):
         TEASER's zone heat load (TwoElement._calc_heat_load) per room, at
         the room's own design temperature: the UA-value of its outer walls,
         windows and stand-ins towards the unheated spaces times the
-        difference to t_outside, plus the normative infiltration of its
+        difference to t_outside (t_ground for the basement's), plus the normative infiltration of its
         volume, plus what it gives to heated neighbours designed for a
         lower temperature (e.g. the bath at 24 degC to its neighbours),
         through the whole wall or slab between them. calc_building_parameter
@@ -538,9 +734,12 @@ class DetailedMultiFamilyHouse(Residential):
             use_conditions = zone.use_conditions
             to_outside = {}
             for element in zone.outer_walls + zone.rooftops + zone.windows:
-                room = next(r for r in self.zone_of_room
-                            if element.name.startswith(r + "_"))
+                room = self.room_of_element[element.name]
                 to_outside[room] = to_outside.get(room, 0.0) + element.ua_value
+            to_ground = {}
+            for element in zone.ground_floors:
+                room = self.room_of_element[element.name]
+                to_ground[room] = to_ground.get(room, 0.0) + element.ua_value
             for room, name in self.zone_of_room.items():
                 if name != zone.name:
                     continue
@@ -549,7 +748,7 @@ class DetailedMultiFamilyHouse(Residential):
                         + self.room_volumes[room]
                         * use_conditions.normative_infiltration / 3600
                         * zone.heat_capac_air * zone.density_air
-                        ) * (t_room - zone.t_outside)
+                        ) * (t_room - zone.t_outside)                     + to_ground.get(room, 0.0) * (t_room - zone.t_ground)
                 for surface in self.geometry.zones[room].surfaces:
                     other = surface.element[1]
                     if surface.boundary != "Surface" or not info[other].heated:
@@ -647,21 +846,32 @@ def _halve(element):
         _new_layer(element, layer, thickness)
 
 
-def _stand_in(element, factor, zone):
-    """A Rooftop in zone that loses through element as much heat to the
-    outside air as element does to its unheated space at the temperature
-    factor b: the element's layers, plus a resistance so its U-value is
-    b times the element's. It is horizontal and absorbs no sunlight."""
+def _stand_in(element, factor, zone, ground=False):
+    """A stand-in in zone that loses through element as much heat as
+    element does to its unheated space at the temperature factor b: the
+    element's layers, plus a resistance so its U-value is b times the
+    element's. It absorbs no sunlight.
+
+    A Rooftop towards the outside air, horizontal, or with ground a
+    GroundFloor towards the ground temperature, without an outer surface
+    resistance as TEASER's ground floors.
+    """
     factor = max(factor, 1e-3)
-    stand_in = Rooftop(parent=zone)
+    if ground:
+        stand_in = GroundFloor(parent=zone)
+        stand_in.orientation = -2
+        r_outer = 0.0
+    else:
+        stand_in = Rooftop(parent=zone)
+        stand_in.orientation = -1
+        stand_in.outer_convection = _STAND_IN_OUTER_CONVECTION
+        stand_in.outer_radiation = _STAND_IN_OUTER_RADIATION
+        r_outer = 1 / (stand_in.outer_convection + stand_in.outer_radiation)
     stand_in.name = element.name
     stand_in.area = element.area
-    stand_in.orientation = -1
     stand_in.tilt = 0.0
     stand_in.inner_convection = element.inner_convection
     stand_in.inner_radiation = element.inner_radiation
-    stand_in.outer_convection = _STAND_IN_OUTER_CONVECTION
-    stand_in.outer_radiation = _STAND_IN_OUTER_RADIATION
     for layer in element.layer:
         _new_layer(stand_in, layer, layer.thickness)
     extra = Layer(parent=stand_in)
@@ -674,6 +884,17 @@ def _stand_in(element, factor, zone):
     r_extra = (1 / (factor * _u_value(element, "Inside"))
                - 1 / (stand_in.inner_convection + stand_in.inner_radiation)
                - _resistance_layers(element)
-               - 1 / (stand_in.outer_convection + stand_in.outer_radiation))
+               - r_outer)
+    if r_extra < _MIN_EXTRA_RESISTANCE:
+        # b above what the element's own layers allow, e.g. a basement
+        # colder than the ground below a ceiling of a low resistance
+        r_extra = _MIN_EXTRA_RESISTANCE
+        u_value = 1 / (1 / (stand_in.inner_convection
+                            + stand_in.inner_radiation)
+                       + _resistance_layers(element) + r_outer + r_extra)
+        warnings.warn(
+            f"The stand-in {element.name} reaches only a U-value of "
+            f"{u_value:.3f} instead of "
+            f"{factor * _u_value(element, 'Inside'):.3f} W/(m2K).")
     extra.thickness = r_extra
     return stand_in

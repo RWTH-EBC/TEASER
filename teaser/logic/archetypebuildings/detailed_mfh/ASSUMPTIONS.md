@@ -102,9 +102,18 @@ Excel sheets Bauphysik and Bauteile. New materials `detailed_mfh_*` in
 ## Unheated spaces in the ROM
 
 - Basement, staircases and attic are unheated and not TEASER thermal zones.
-- Each heated room's element towards them becomes a horizontal Rooftop
-  stand-in to the outside air with U' = b · U (extra resistance layer),
-  outer convection 20, outer radiation ≈ 0, no solar absorption.
+- Each heated room's element towards the staircase or the attic becomes a
+  horizontal Rooftop stand-in to the outside air with U' = b · U (extra
+  resistance layer), outer convection 20, outer radiation ≈ 0, no solar
+  absorption.
+- Towards the basement, which follows the ground more than the outside
+  air, it becomes a GroundFloor stand-in to TEASER's `t_ground` (BESMod
+  `TSoil`, 13 °C constant, the same as in the IDF), without an outer
+  surface resistance, U' = b · U with b = (t_room − t_u) / (t_room − t_ground).
+  The basement is colder than the ground at design conditions, so b > 1
+  (1990: 1.07–1.10). If the element's own layers don't allow b · U (2025:
+  12 stand-ins reach 0.229 instead of 0.257 W/m²K, heat load −26 W), the
+  extra layer is 1e-6 m²K/W and a warning names the stand-in.
 - b = (t_room − t_u) / (t_room − t_outside) from a steady-state heat balance
   of all unheated spaces together at the design conditions
   (t_outside 261.15 K, TEASER's t_ground), coupled to the heated rooms, the
@@ -115,6 +124,49 @@ Excel sheets Bauphysik and Bauteile. New materials `detailed_mfh_*` in
   attic −9.9 °C at design conditions.
 - Walls and slabs between heated rooms are halved (each side gets its half
   of the layers).
+
+## Single-zone ROM (zoning "building")
+
+- A single zone is exported against BESMod's `TEASERThermalSingleZone`
+  (`exports_single_zone_rom`), zoning "flat" against `TEASERThermalZone`.
+  The single-zone model has no outer long-wave (sky) radiation on the
+  outer walls and the roof (`withLongwave=false`).
+- `calc_rom_inner_heat_transfer_parameters` sets its ratios so that each
+  window and stand-in (the roof group) exchanges long-wave radiation with
+  the surfaces of its own room in the ratio of their areas and with
+  hRad · its own area in total. AixLib's `min(Ai, Aj) * hRad` would couple
+  them with their full area to each group. Unlike the single family house
+  (AixLib's `WindowSimple` in the HOM: window ratios 0), the windows stay
+  coupled, as in EnergyPlus. 1990, 5 storeys: window to outer walls 0.17,
+  inner walls 0.70, stand-ins 0.12.
+- The outer wall–inner wall coupling `min(ATotExt, AInt) * hRad` has no
+  ratio and stays.
+- `splitFactorSolRad` room-wise: the radiation through the windows of an
+  orientation reaches the surfaces of the rooms it enters in the ratio of
+  their areas, without the windows it came through, their walls and the
+  ceilings (incl. the attic stand-ins). The rows of the groups with an area
+  come first (as AixLib's `splitFacVal`), the missing ground floor's row is
+  zero; BESMod's model takes one row per group with an area (BESMod change
+  in `TEASERBuildingSingleZone.BuildingSingleThermalZone.BaseClasses`).
+- 14 days January, 1990, 5 storeys, days 5–14 (Spawn 3655 kWh):
+  `TEASERThermalZone` 4243 kWh (+16.1 %), `TEASERThermalSingleZone` with
+  the basement as Rooftop stand-ins 3839 kWh (+5.0 %), with the basement as
+  ground floor stand-ins 3907 kWh (+6.9 %). Zoning "flat" with ground floor
+  stand-ins: 4301 kWh (before 4230 kWh; only the two ground floor flats
+  change, 440 -> 475 kWh).
+- Loss to the unheated spaces, single zone vs. standalone EnergyPlus:
+  staircase + attic 2227 / 2280 W; basement as Rooftop stand-ins about
+  6 % too low in total, as ground floor stand-ins 723 / 536 W (+35 %). The
+  basement temperature now matches (ROM equivalent 12.3 °C, E+ 12.0 °C);
+  the difference is the ceiling's surface resistances: EnergyPlus with
+  downward heat flow (stable layering) about 0.57 (room) and 0.38 m²K/W
+  (basement), TEASER 0.15 each; layers 1.15 / 1.10 m²K/W; U 0.48 instead
+  of 0.72 W/m²K.
+- BESMod's `TEASERThermalZone` energy balance took the floor heat flow of
+  every zone if the first zone had a floor element; with the ground floor
+  stand-ins only the ground floor flats have one. It now reads it per zone
+  (0 without a floor element). Translates in Dymola, OpenModelica not
+  tested.
 
 ## Use conditions and set temperatures
 
@@ -174,10 +226,34 @@ Excel sheets Bauphysik and Bauteile. New materials `detailed_mfh_*` in
   rooms south vs. west), frame fraction 0.3, slab 0.21 m, inner doors.
 - Spawn needs 13.6 % less heat than the ROM (14 days January, 1990,
   5 storeys, zoning "flat", days 5–14: ROM 4229 kWh, Spawn 3655 kWh; the
-  single family house differs by about 4 %). Not investigated yet.
-  Suspects: ROM's dynamic natural ventilation vs. constant 0.5 1/h in Spawn,
-  temperature-factor stand-ins vs. free-floating unheated zones in
-  EnergyPlus, solar distribution and window films.
+  single family house differs by about 4 %). Investigated 2026-10-21 with a
+  standalone EnergyPlus run of the Spawn IDF (ideal loads, same set
+  temperatures, gains and 0.5 1/h; 3602 kWh, 1.5 % below Spawn) and ROM variants. The
+  gap is the same in every flat (about 57 kWh per flat), so the stand-ins
+  are not the cause. Mean per middle flat: ventilation ROM 505 / E+ 495 W,
+  staircase stand-in 111 / 115 W, internal gains 164 / 168 W, solar through
+  the windows 161 / 153 W all agree. The difference splits into:
+  1. Long-wave radiation between the inner surfaces of the ROM
+     (AixLib/IBPSA `RC.FourElements`): each pair of elements exchanges
+     through `min(Ai, Aj)*hRad`, so the window (10.7 m², the smallest
+     element) is coupled to outer walls, inner walls and the "roof" (the
+     staircase stand-ins) three times over, 160 W/K instead of about
+     53 W/K. Window loss 613 W instead of U·A·ΔT = 519 W. A patched AixLib
+     copy with `Ai*Aj/ATot*hRad` gives ROM 3985 kWh (−245 kWh).
+  2. Sky long-wave term on the outer walls: VDI 6007 in the ROM uses the
+     full sky for vertical walls (−2.06 K on the equivalent temperature);
+     the E+ walls lose 600 W against 672 W in the ROM. Outer radiation 0
+     (same outer resistance) on top of 1. gives ROM 3774 kWh (−211 kWh),
+     3.3 % above Spawn.
+  3. Window films: E+ computes them from the conditions (inner about 6.1,
+     outer about 16 W/m²K) and gets an effective U of 2.40 instead of
+     2.85 W/m²K, window loss without solar 436 W against 513 W in the ROM
+     after 1. Roughly the remaining 3 %.
+  1. and 2. are handled by the single-zone ROM for zoning "building"
+  (see above); zoning "flat" still uses `TEASERThermalZone`.
+  4. Basement ceiling films, see "Single-zone ROM": with the basement as
+     ground floor stand-ins the ROM loses about 35 % more to the basement
+     than EnergyPlus.
 - Run time 14 days: ROM 33 s, Spawn (60 zones) 159 s.
 - More zoning options (e.g. by orientation) and a construction data set for
   1995–2020.
@@ -188,5 +264,9 @@ Excel sheets Bauphysik and Bauteile. New materials `detailed_mfh_*` in
 - `export_mfh.py <path> [zoning] [floors] [staircases]`: ROM + Spawn export
 - `sim_mfh.py <package dir> <building> <days> <model> ...`: simulate with Dymola
 - `daily_mfh.py <mat> ...`: daily ideal heat
-- `run_idf.py <idf> [epw]`: run an IDF in EnergyPlus 26.1
+- `run_idf.py <idf> [epw]`: run an IDF in EnergyPlus 26.1 (with ExpandObjects)
+- `make_eplus_balance.py <spawn idf> <out idf> [days]`: standalone E+ variant of the Spawn IDF with ideal loads and balance outputs
+- `eplus_balance.py <idf> <eplusout.csv> [day0] [day1]`: per-flat energy balance of that run
+- `compare_mfh.py <rom.mat> <spawn.mat> [day0]`: heat per zone of a ROM and a Spawn run
+- `export_mfh_nosky.py`: as `export_mfh.py`, `NO_SKY=1` removes the outer radiation of the outer walls
 - `translate_check.py <model> ...`: translate models in Dymola
