@@ -204,6 +204,7 @@ class Geometry:
     number_of_staircases: int
     roof_tilt: float
     neighbours: tuple
+    with_basement: bool = True
 
     @property
     def heated_rooms(self):
@@ -313,7 +314,7 @@ def _leftover(rect, covered):
 
 
 def building_geometry(plan=None, number_of_floors=5, number_of_staircases=1,
-                      roof_tilt=30.0, neighbours=0):
+                      roof_tilt=30.0, neighbours=0, with_basement=True):
     """Builds the zones of the multi family house
 
     Parameters
@@ -331,6 +332,9 @@ def building_geometry(plan=None, number_of_floors=5, number_of_staircases=1,
     neighbours : int or tuple
         Buildings adjoining the gable walls, which are then adiabatic: 0, 1
         (on the west side), 2, or a tuple of "west" and/or "east".
+    with_basement : bool
+        False puts the ground floor's rooms and the staircases on a slab on
+        the ground instead of an unheated basement.
 
     Returns
     -------
@@ -355,7 +359,8 @@ def building_geometry(plan=None, number_of_floors=5, number_of_staircases=1,
     depth = plan.inner_depth + 2 * t_out
     x_env, y_env = (t_out, length - t_out), (t_out, depth - t_out)
 
-    z_floor = [plan.basement_height + plan.slab_thickness
+    z_base = plan.basement_height if with_basement else 0.0
+    z_floor = [z_base + plan.slab_thickness
                + storey * plan.storey_height
                for storey in range(number_of_floors)]
     z_attic = z_floor[-1] + plan.room_height + plan.slab_thickness
@@ -406,9 +411,10 @@ def building_geometry(plan=None, number_of_floors=5, number_of_staircases=1,
         for z0 in z_floor:
             windows.append((name, 1, 1, (centre - w / 2, centre + w / 2,
                                          z0 + sill, z0 + sill + h)))
-    boxes["Basement"] = (*x_env, *y_env, 0.0, plan.basement_height)
-    info["Basement"] = ZoneInfo("Basement", "basement", False,
-                                box=boxes["Basement"])
+    if with_basement:
+        boxes["Basement"] = (*x_env, *y_env, 0.0, plan.basement_height)
+        info["Basement"] = ZoneInfo("Basement", "basement", False,
+                                    box=boxes["Basement"])
     info["Attic"] = ZoneInfo("Attic", "attic", False)
 
     faces = [face for name, box in boxes.items()
@@ -455,7 +461,7 @@ def building_geometry(plan=None, number_of_floors=5, number_of_staircases=1,
 
     for face in faces:
         boundary, what = _envelope_boundary(face, x_env, y_env, neighbours,
-                                            info)
+                                            info, z_floor[0])
         for rect in _leftover(face.rect, face.pieces):
             surface = Surface(surface_name(face, None), _kind(face),
                               face.vertices(rect), boundary,
@@ -470,7 +476,8 @@ def building_geometry(plan=None, number_of_floors=5, number_of_staircases=1,
                       f"{zone}_win{sum(1 for w in windows[:index] if w[0] == zone)}")
 
     return Geometry(zones, info, plan, length, depth, number_of_floors,
-                    number_of_staircases, roof_tilt, neighbours)
+                    number_of_staircases, roof_tilt, neighbours,
+                    with_basement)
 
 
 def _kind(face):
@@ -479,7 +486,7 @@ def _kind(face):
     return "Floor" if face.sign < 0 else "Ceiling"
 
 
-def _envelope_boundary(face, x_env, y_env, neighbours, info):
+def _envelope_boundary(face, x_env, y_env, neighbours, info, z_ground_floor):
     """Boundary condition of what is left of a face after its neighbours
 
     Returns the boundary and what the surface faces: None for the outside
@@ -492,6 +499,10 @@ def _envelope_boundary(face, x_env, y_env, neighbours, info):
         or (face.axis == 1 and abs(face.coord - y_env[0 if face.sign < 0 else 1])
             < 1e-6)
         or (face.axis == 2 and face.sign < 0 and face.zone == "Basement"))
+    # without a basement, the lowest floors lie on the ground
+    if (face.axis == 2 and face.sign < 0 and "Basement" not in info
+            and abs(face.coord - z_ground_floor) < 1e-6):
+        return "Ground", None
     if not on_envelope:
         return "Adiabatic", "gap"
     if face.axis == 0 and ("west" if face.sign < 0 else "east") in neighbours:

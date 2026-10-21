@@ -209,6 +209,36 @@ class TestDetailedMFH(unittest.TestCase):
         bldg.generate_archetype()
         self.assertFalse(bldg.exports_single_zone_rom)
 
+    def test_without_basement(self):
+        """the ground floor's rooms and the staircase on a slab on the
+        ground, in the ROM and in the IDF"""
+        bldg = _mfh(number_of_floors=2, with_basement=False)
+        info = bldg.geometry.info
+        self.assertNotIn("Basement", info)
+        self.assertNotIn("Basement", bldg.unheated_temperatures)
+        zone = bldg.thermal_zones[0]
+        ground_rooms = {room for room in bldg.geometry.heated_rooms
+                        if info[room].storey == 0}
+        self.assertEqual(
+            {bldg.room_of_element[e.name] for e in zone.ground_floors},
+            ground_rooms)
+        for element in zone.ground_floors:
+            self.assertTrue(element.name.endswith("_FloorCellar_full"))
+            self.assertEqual((element.orientation, element.tilt), (-2.0, 0.0))
+        self.assertIn("Staircase1_GroundFloor",
+                      bldg.unheated_room_envelope_elements["Staircase1"])
+        # the slab has the basement ceiling's construction
+        with_basement = _mfh(number_of_floors=2)
+        self.assertAlmostEqual(bldg.sum_heat_load,
+                               with_basement.sum_heat_load, delta=50)
+        with tempfile.TemporaryDirectory() as directory:
+            path = os.path.join(directory, "mfh.idf")
+            export_idf(bldg, path)
+            with open(path) as file:
+                idf = file.read()
+        self.assertNotIn("Basement", idf)
+        self.assertEqual(idf.count("    Ground,\n"), len(ground_rooms) + 1)
+
     def test_halves(self):
         """the walls and slabs between heated rooms are halved"""
         bldg = _mfh(number_of_floors=2)

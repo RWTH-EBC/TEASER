@@ -474,6 +474,7 @@ class Project(object):
         number_of_apartments=None,
         number_of_staircases=None,
         net_leased_area_per_flat=None,
+        with_basement=None,
     ):
         """Add a residential building to the TEASER project.
 
@@ -610,6 +611,10 @@ class Project(object):
             Net leased area of each flat of 'detailed_multi_family_house',
             instead of net_leased_area for the whole building
 
+        with_basement : bool
+            Unheated basement of 'detailed_multi_family_house' (default =
+            True); False puts the ground floor on a slab on the ground
+
         Returns
         -------
         type_bldg : Instance of Archetype Building
@@ -709,6 +714,7 @@ class Project(object):
                 number_of_staircases=number_of_staircases or 1,
                 construction_data=construction_data,
                 neighbour_buildings=neighbour_buildings or 0,
+                with_basement=True if with_basement is None else with_basement,
             )
         else:
             type_bldg = datahandling.geometries[geometry_data](

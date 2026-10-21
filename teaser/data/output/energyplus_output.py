@@ -206,6 +206,10 @@ def _multi_family_house(bldg):
     for zone in bldg.thermal_zones:
         for element in zone.outer_walls + zone.windows:
             own[element.name] = element
+        # the rooms' slabs on the ground, without a basement
+        for element in zone.ground_floors:
+            if element.name.endswith("_FloorCellar_full"):
+                own[element.name] = element
     for elements in bldg.unheated_room_envelope_elements.values():
         own.update(elements)
     interfaces = {(room, space): element for (room, space, _), element
@@ -228,6 +232,8 @@ def _multi_family_house(bldg):
             if surface.boundary == "Outdoors":
                 layers = own[f"{zone.name}_OuterWall_full_"
                              f"{int(round(surface.orientation))}"].layer
+            elif surface.boundary == "Ground":
+                layers = own[f"{zone.name}_FloorCellar_full"].layer
             elif partner in info and not info[partner].heated:
                 layers = interfaces[(zone.name, partner)].layer
         else:

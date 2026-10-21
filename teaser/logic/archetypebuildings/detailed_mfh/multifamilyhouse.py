@@ -35,6 +35,11 @@ _STAND_IN_OUTER_RADIATION = 1e-9
 # Smallest extra resistance of a stand-in [m2K/W], i.e. of its layer
 _MIN_EXTRA_RESISTANCE = 1e-6
 
+# Construction of the slab on the ground without a basement: the basement
+# ceiling's (FloorCellar), as the construction data has a ground floor only
+# for the unheated basement (uninsulated concrete)
+_SLAB_ON_GROUND = "FloorCellar"
+
 # The five groups of interior surfaces of the single-zone ROM, in the order
 # BESMod's TEASERBuildingSingleZone.FourElements lists them in AArraySol:
 # {ATotExt, ATotWin, AInt, AFloor, ARoof}. splitFactorSolRad has one row per
@@ -113,6 +118,10 @@ class DetailedMultiFamilyHouse(Residential):
         "east".
     net_leased_area : float [m2]
         Total net leased area, an alternative to net_leased_area_per_flat.
+    with_basement : bool
+        True (default) for an unheated basement below the ground floor,
+        False for the ground floor's rooms and the staircases on a slab on
+        the ground (GroundFloor elements).
 
     Attributes
     ----------
@@ -158,6 +167,7 @@ class DetailedMultiFamilyHouse(Residential):
             construction_data=None,
             neighbour_buildings=0,
             net_leased_area=None,
+            with_basement=True,
     ):
         flats = 2 * number_of_staircases * number_of_floors
         if net_leased_area_per_flat is None and net_leased_area is not None:
@@ -172,6 +182,7 @@ class DetailedMultiFamilyHouse(Residential):
         self.net_leased_area_per_flat = net_leased_area_per_flat
         self.number_of_staircases = number_of_staircases
         self.neighbour_buildings = neighbour_buildings
+        self.with_basement = with_basement
         self.zoning = "building"
         self.scaling = "length"
         self.roof_tilt = 30.0
@@ -258,7 +269,7 @@ class DetailedMultiFamilyHouse(Residential):
                               self.scaling)
         self.geometry = building_geometry(
             plan, self.number_of_floors, self.number_of_staircases,
-            self.roof_tilt, self.neighbour_buildings)
+            self.roof_tilt, self.neighbour_buildings, self.with_basement)
         geometry = self.geometry
         info = geometry.info
 
@@ -330,6 +341,8 @@ class DetailedMultiFamilyHouse(Residential):
                 element.tilt = tilt
                 self.room_of_element[element.name] = room
                 element.orientation = 0.0 if orientation is None                     else self._rotated(orientation)
+                if cls_name == "GroundFloor":
+                    element.orientation, element.tilt = -2.0, 0.0
                 if part == "half":
                     _halve(element)
             for orientation, area in windows.items():
@@ -361,6 +374,8 @@ class DetailedMultiFamilyHouse(Residential):
         _, other = surface.element
         if surface.boundary == "Outdoors":
             return ("OuterWall", None, None), "full"
+        if surface.boundary == "Ground":
+            return ("GroundFloor", None, _SLAB_ON_GROUND), "full"
         if other == "neighbour":
             # the gable wall to the next building, heated as well
             return ("InnerWall", None, "OuterWall"), "full"
@@ -397,6 +412,9 @@ class DetailedMultiFamilyHouse(Residential):
                 if surface.kind == "Floor":
                     return "GroundFloor", None, None, False
                 return "OuterWall", "Cellar", None, False
+            if surface.boundary == "Ground":
+                # the floor of a staircase without a basement
+                return "GroundFloor", None, _SLAB_ON_GROUND, False
             if surface.kind == "Roof":
                 return "Rooftop", None, None, False
             return "OuterWall", None, None, False
@@ -439,7 +457,8 @@ class DetailedMultiFamilyHouse(Residential):
                     continue
                 key = (cls_name, construction_type, surface.boundary)
                 if key not in elements:
-                    element = self._load(cls_name, construction_type)
+                    element = self._load(cls_name, construction_type,
+                                         element_type)
                     element.name = f"{space}_{cls_name}{construction_type or ''}"
                     element.area = 0.0
                     element._boundary = surface.boundary

@@ -886,7 +886,8 @@ def _write_spawn_multi_zone_building(bldg, bldg_path, dir_resources, template,
             areas=areas,
             heights=[v / a for v, a in zip(volumes, areas)],
             a_bui=bldg.area_gf,
-            h_bui=top - geometry.plan.basement_height,
+            h_bui=top - (geometry.plan.basement_height
+                         if geometry.with_basement else 0.0),
             a_roo=bldg.area_rt,
             fra_rad_int_gai=fra_rad_int_gai))
 

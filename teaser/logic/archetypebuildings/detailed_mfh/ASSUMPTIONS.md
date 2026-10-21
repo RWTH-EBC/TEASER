@@ -168,6 +168,25 @@ Excel sheets Bauphysik and Bauteile. New materials `detailed_mfh_*` in
   (0 without a floor element). Translates in Dymola, OpenModelica not
   tested.
 
+## Without a basement (`with_basement=False`)
+
+- The ground floor's rooms and the staircases lie on a slab on the ground
+  (EnergyPlus boundary `Ground`, 13 °C), the storeys start at the slab
+  thickness instead of above the basement. Attic and staircases stay.
+- In the ROM the slabs are GroundFloor elements of the rooms (orientation
+  −2, tilt 0) towards `t_ground`, in the staircase's heat balance a
+  ground element.
+- Construction: the construction data has a ground floor only for the
+  unheated basement (0.24 m uninsulated concrete, U ≈ 3.9 W/m²K), so the
+  slab gets the basement ceiling's construction (`FloorCellar`, 1990:
+  U 0.80 W/m²K). Assumption, to confirm with the colleague.
+- 1990, 5 storeys: heat load 35.87 kW (with basement 35.86 kW).
+- 14 days January, days 5–14: Spawn 3659 kWh (with basement 3655),
+  single-zone ROM 3909 kWh (+6.8 %; with basement 3907, +6.9 %), zoning
+  "flat" 4303 kWh (with basement 4301). Ground loss of the two ground
+  floor flats: ROM 736 W, standalone EnergyPlus 588 W (+25 %, the surface
+  resistances of downward heat flow again, see the basement).
+
 ## Use conditions and set temperatures
 
 - All zones use TEASER's "Living" use conditions, without AHU.
